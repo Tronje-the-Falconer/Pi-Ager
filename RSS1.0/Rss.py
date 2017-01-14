@@ -15,10 +15,10 @@ from sht_sensor import Sht
 # Konstanten ############################################################################################################
 ########################################################################################################################
 
-PATH = '/var/www/';
+PATH = '/var/www/html/';
 SETTINGS_FILE = PATH+'settings.json';
 CURRENT_FILE = PATH+'current.json';
-PICPATH = '/var/www/pic/';
+PICPATH = '/var/www/html/pic/';
         
 
 
@@ -34,17 +34,17 @@ RELAY_ON = False;
 RELAY_OFF = (not RELAY_ON);
 
 DELAY = 4;              #Wartezeit in der Schleife
-count = 0;               #Zähler für die Verzögerung der Befeuchtung
+count = 0;               #ZÃ¤hler fÃ¼r die VerzÃ¶gerung der Befeuchtung
 evac = True
 # Pinbelegung
 BOARD_MODE = gpio.BCM;	# GPIO board mode
-PIN_DHT = 17;           # Pin für Temp/Hum Sensor
-PIN_HEATER = 27;	# Pin für Heizkabel
-PIN_COOL = 22;		# Pin für Kühlschrankkompressor
+PIN_DHT = 17;           # Pin fÃ¼r Temp/Hum Sensor
+PIN_HEATER = 27;	# Pin fÃ¼r Heizkabel
+PIN_COOL = 22;		# Pin fÃ¼r KÃ¼hlschrankkompressor
 
-PIN_FAN = 18;           # Pin für Umluftventilator
-PIN_FAN1 = 23;          # Pin für Austauschlüfter
-PIN_HUM = 24;           # Pin für Luftbefeuchter
+PIN_FAN = 18;           # Pin fÃ¼r Umluftventilator
+PIN_FAN1 = 23;          # Pin fÃ¼r AustauschlÃ¼fter
+PIN_HUM = 24;           # Pin fÃ¼r Luftbefeuchter
 sht = Sht(21, 20)
 VERBOSE = True;
 
@@ -66,7 +66,7 @@ def goodbye():
 	
 def cleanup():
 	writeVerbose('Running cleanup script...');
-	gpio.cleanup(); # GPIO zurücksetzen
+	gpio.cleanup(); # GPIO zurÃ¼cksetzen
 	writeVerbose('Cleanup complete.', True);
 
 
@@ -132,7 +132,7 @@ def plotten(a):#, b, c, d):
 # Funktion zum Plotten der Grafiken
 # a:   Wert, der geplottet werden soll
     
-    # Beschriftung für die Grafiken festlegen
+    # Beschriftung fÃ¼r die Grafiken festlegen
     if a == 'sensortemp':
             title = 'Temperatur'
             label = 'in C'
@@ -275,7 +275,7 @@ def doMainLoop():
                 
                 write_current(sensortemp, sensorhum);
 
-                #Timer für Luftumwelzung
+                #Timer fÃ¼r Luftumwelzung
                 if tempoff > 0: 
 
                         t = int(time.time())
@@ -290,7 +290,7 @@ def doMainLoop():
                                 tempstart = int(time.time())
                                 
 
-                #Timer für Luftaustausch
+                #Timer fÃ¼r Luftaustausch
                 if tempoff1 > 0:
 
                         #t = int(time.time())
@@ -309,7 +309,7 @@ def doMainLoop():
                         
                         
                 
-                if mod == 1: #Kühlmodus
+                if mod == 1: #KÃ¼hlmodus
                         evac=True
                         gpio.output(PIN_HEATER, RELAY_OFF);
                 
@@ -349,7 +349,7 @@ def doMainLoop():
                         
                 if mod == 3: #Automodus
                         evac=True
-                        if sensortemp >= temp + temphyston: #Kühlung ein                               
+                        if sensortemp >= temp + temphyston: #KÃ¼hlung ein                               
                                 gpio.output(PIN_COOL, RELAY_ON);
                                
                         if sensortemp <= temp + temphystoff:
@@ -382,10 +382,10 @@ def doMainLoop():
 
 
                         #Temperaturreglung
-                        if sensortemp >= temp + temphyston: #Kühlung ein                               
+                        if sensortemp >= temp + temphyston: #KÃ¼hlung ein                               
                                 gpio.output(PIN_COOL, RELAY_ON);
                                
-                        if sensortemp <= temp + temphystoff: #Kühlung aus
+                        if sensortemp <= temp + temphystoff: #KÃ¼hlung aus
                                 gpio.output(PIN_COOL, RELAY_OFF);
                                 
 
@@ -419,7 +419,7 @@ def doMainLoop():
                                 #gpio.output(PIN_FAN1, RELAY_OFF)
 
                         
-                #Einschaltung und Abschaltung der Be und Entlüftung
+                #Einschaltung und Abschaltung der Be und EntlÃ¼ftung
                 #Umluft
                 if gpio.input(PIN_HEATER) or gpio.input(PIN_COOL) or gpio.input(PIN_HUM) or vent == False:
                         gpio.output(PIN_FAN, RELAY_ON)
@@ -444,10 +444,10 @@ def doMainLoop():
                         heat = 0
 
                 if gpio.input(PIN_COOL) == False:
-                        writeVerbose('Kühlung ein');
+                        writeVerbose('KÃ¼hlung ein');
                         cool = 10
                 else:       
-                        writeVerbose('Kühlung aus');
+                        writeVerbose('KÃ¼hlung aus');
                         cool = 0
 
                 if gpio.input(PIN_HUM) == False:
@@ -477,7 +477,7 @@ def doMainLoop():
                # Messwerte in die RRD-Datei schreiben
                 from rrdtool import update as rrd_update
                 ret = rrd_update('%s' %(filename), 'N:%s:%s:%s:%s:%s:%s:%s' %(sensortemp, sensorhum, lat, uml, heat, cool, lbf));
-                #array für graph
+                #array fÃ¼r graph
              
                 # Grafiken erzeugen
                 if z >= 2:
@@ -506,7 +506,7 @@ def doMainLoop():
 # Hauptprogramm #################################################################################################################
 ########################################################################################################################
 
-os.system('clear'); # Bildschirm löschen
+os.system('clear'); # Bildschirm lÃ¶schen
 writeVerbose('************************************************************');
 setupGPIO(); # GPIO initialisieren
 
