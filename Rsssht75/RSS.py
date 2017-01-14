@@ -15,10 +15,10 @@ from sht_sensor import Sht
 # Konstanten ############################################################################################################
 ########################################################################################################################
 
-PATH = '/var/www/';
+PATH = '/var/www/html/';
 SETTINGS_FILE = PATH+'settings.json';
 CURRENT_FILE = PATH+'current.json';
-PICPATH = '/var/www/pic/';
+PICPATH = '/var/www/html/pic/';
         
 
 
