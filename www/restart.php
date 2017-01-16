@@ -11,7 +11,7 @@
 <p> 
 <?php
 echo date("d.m.Y H:i:s");
-system('sudo /sbin/shutdown -r now');
+shell_exec('sudo /var/sudowebscript.sh shut');
 ?></p>
 
 
@@ -19,6 +19,3 @@ system('sudo /sbin/shutdown -r now');
 
 </body>
 </html>
-
-
-
