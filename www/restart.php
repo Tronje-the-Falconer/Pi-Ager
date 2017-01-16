@@ -11,7 +11,7 @@
 <p> 
 <?php
 echo date("d.m.Y H:i:s");
-shell_exec('sudo /var/sudowebscript.sh shut');
+shell_exec('sudo /var/sudowebscript.sh reb');
 ?></p>
 
 
