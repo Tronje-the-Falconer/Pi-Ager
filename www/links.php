@@ -307,7 +307,7 @@
         $valtab = shell_exec("sudo /var/sudowebscript.sh grreifetab"); #Reifetab.py
 
         if($valrs == 0 and $valtab) {
-            exec('sudo /var/sudowebscript.sh stopreifetab');
+            shell_exec('sudo /var/sudowebscript.sh stopreifetab');
             $valtab = shell_exec("sudo /var/sudowebscript.sh grreifetab"); #Reifetab.py
         }
                if($valrs == 0 and $valtab==0) {
