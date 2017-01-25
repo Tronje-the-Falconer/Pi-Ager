@@ -225,6 +225,7 @@ def doMainLoop():
 	global count;
 	global humdelay;
 	global evac;
+	global sensortype;
         
         while True:
 
@@ -280,7 +281,8 @@ def doMainLoop():
                 print ('Aktuelle Temperatur :')+str (sensortemp);
                 print ('Eingestellter Luftfeuchtigwert in % :')+str (hum);
                 print ('Aktuelle Luftfeuchtigkeit :')+str (sensorhum);
-                print ('Aktuelle Taupunkt :')+str (dew_point);              
+                print ('Aktuelle Taupunkt :')+str (dew_point);
+		print ('Eingestellter Sensor:')+str (sensortype);
                 
                 write_current(sensortemp, sensorhum);
 
@@ -324,7 +326,7 @@ def doMainLoop():
                 
                         if sensortemp >= temp + temphyston:                                
                                 gpio.output(PIN_COOL, RELAY_ON);
-                               
+				
                         if sensortemp <= temp + temphystoff :    
                                 gpio.output(PIN_COOL, RELAY_OFF);
                                 
@@ -409,7 +411,7 @@ def doMainLoop():
 
 
                                 
-                        #Luftfeuctigkeitsreglung        
+                        #Luftfeuchtigkeitsreglung        
 
                         if sensorhum <= hum - humhyston: #Luftbefeuchter ein
                                 count = count+1
@@ -428,7 +430,7 @@ def doMainLoop():
                                 #gpio.output(PIN_FAN1, RELAY_OFF)
 
                         
-                #Einschaltung und Abschaltung der Be und Entlüftung
+                #Einschaltung und Abschaltung der Be- und Entlüftung
                 #Umluft
                 if gpio.input(PIN_HEATER) or gpio.input(PIN_COOL) or gpio.input(PIN_HUM) or vent == False:
                         gpio.output(PIN_FAN, RELAY_ON)
