@@ -25,8 +25,13 @@ PICPATH = '/var/www/html/pic/';
 
 # Sensor should be set to Adafruit_DHT.DHT11,
 # Adafruit_DHT22, or Adafruit_AM2302.
-sensor = Adafruit_DHT.AM2302
-
+#sensor = Adafruit_DHT.AM2302
+if sensortype == 1: #DHT11
+            sensor = Adafruit_DHT.DHT11
+elif sensortype == 2: #DHT22
+            sensor = Adafruit_DHT.DHT22
+elif sensortype == 3: #SHT75
+            sensor = Adafruit_DHT.AM2302
 
 
 # Sainsmart Relais vereinfachung 0 aktiv
@@ -223,12 +228,15 @@ def doMainLoop():
         
         while True:
 
-                sensortemp1 = sht.read_t()
-                sensorhum1 = sht.read_rh()
- 
-                dew_point = sht.read_dew_point(sensortemp1, sensorhum1)
-                dew_point = round (dew_point,1)
-               # sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
+                if sensortype == 1: #DHT11
+            		sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
+		elif sensortype == 2: #DHT22
+        		    sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
+		elif sensortype == 3: #SHT75
+          		sensortemp1 = sht.read_t()
+			sensorhum1 = sht.read_rh()
+			dew_point = sht.read_dew_point(sensortemp1, sensorhum1)
+			dew_point = round (dew_point,1)
                 
                 if sensorhum1 is not None and sensortemp1 is not None:
                         sensortemp = round (sensortemp1,2)
@@ -256,6 +264,7 @@ def doMainLoop():
                 humhyston = settings['humhyston'];
                 humhystoff = settings['humhystoff'];
                 humdelay = settings ['humdelay'];
+		sensortype = settings ['sensortype'];
                 humdelay = humdelay*10;
 		
 		# At this point, the settings have been read.
