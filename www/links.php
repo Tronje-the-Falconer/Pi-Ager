@@ -59,6 +59,7 @@
                 'humhyston' => (float)$_POST['humhyston'],
                 'humhystoff' => (float)$_POST['humhystoff'],
                 'humdelay' => (float)$_POST['humdelay'],
+                'sensortype' => (int)$_POST['sensortype'], # Sensortyp auswählbar machen
                 'date' => $timestamp);                
         $jsoninput = json_encode($array);
         file_put_contents('settings.json', $jsoninput);
@@ -77,6 +78,7 @@
         fwrite($f, "\n"."humhyston ".$array['humhyston']);
         fwrite($f, "\n"."humhystoff ".$array['humhystoff']);
         fwrite($f, "\n"."humdelay ".$array['humdelay']);
+        fwrite($f, "\n"."sensortype ".$array['sensortype']); # Sensortyp auswählbar machen
         fwrite($f, "\n"."***********************************************************************");
         fclose($f);
 
@@ -156,6 +158,15 @@
         $modus='Auto';
     }elseif ($mod==4) {
         $modus='Automatik mit Luftaustausch';
+    }
+    
+    # Sensortyp auswählbar machen
+    if ($sensortype==1) {
+        $sensortype='DHT11';
+    }elseif ($sensortype==2) {
+        $sensortype='DHT22';
+    }elseif ($sensortype==3) {
+        $sensortype='SHT75';
     }
 
     $tempsoll_float = $array1['temp'];
