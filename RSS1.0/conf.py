@@ -36,10 +36,10 @@ def writeVerbose(s, newLine=False):
 			print('');
 
 
-def write_settings(mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay):
+def write_settings(mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay, sensortype):
 	global SETTINGS_FILE;	
 
-	s = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff,"humdelay":humdelay, 'date':int(time.time())});
+	s = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff,"humdelay":humdelay, 'sensortype':sensortype, 'date':int(time.time())});
 	with open(SETTINGS_FILE, 'w') as file:
 		file.write(s);
 
@@ -76,8 +76,9 @@ tempon = tempon*60
 tempoff = tempoff*3600-tempon
 tempon1 = tempon1*60
 tempoff1 = tempoff1*3600-tempon1
+sensortype = int(raw_input('DHT11 (1) DHT22(2) SHT75 (3):'))
 
-write_settings (mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay,);
+write_settings (mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay, sensortype,);
 writeVerbose('************************************************************');
 writeVerbose('**************Die Änderungen wurden gespeichert*************');
 writeVerbose('************************************************************');
