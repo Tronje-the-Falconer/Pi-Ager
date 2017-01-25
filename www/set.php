@@ -40,6 +40,16 @@
         </fieldset>
 
 <br>                
+        <fieldset name="Group1">
+        <legend class="auto-style1">Sensortype</legend>
+        <p><select name="sensortype">
+        <option value="1">DHT11</option>
+        <option value="2">DHT22</option>
+        <option selected="" value="3">SHT75</option>
+        </select></p>    
+        </fieldset>
+
+<br>                
         <fieldset name="Group2">
         <legend class="auto-style1">Temperatur und Luftfeuchtigkeit</legend>
         <p>Temperatur:  <input name="temp" size="1" type="text" min="-2" max="22" value=<?=$tempsoll_float?>>°C&nbsp;&nbsp;    
