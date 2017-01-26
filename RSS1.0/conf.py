@@ -14,44 +14,35 @@ PATH = '/var/www/html';
 SETTINGS_FILE = PATH+'/settings.json';
 VERBOSE = True;
 
-
 #Standard Hysteresewerte
 temphyston = float(1.5);
 temphystoff = float(0.5)
 humhyston = float(5);
 humhystoff = float(2);
 
-
 #Funktionen##############################################################################################################
 #########################################################################################################################
 
-
-
 def writeVerbose(s, newLine=False):
-	global VERBOSE;
-	
-	if(VERBOSE):
-		print(s);
-		if(newLine is True):
-			print('');
-
+    global VERBOSE;
+    
+    if(VERBOSE):
+        print(s);
+        if(newLine is True):
+            print('');
 
 def write_settings(mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay, sensortype):
-	global SETTINGS_FILE;	
+    global SETTINGS_FILE;
 
-	s = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff,"humdelay":humdelay, 'sensortype':sensortype, 'date':int(time.time())});
-	with open(SETTINGS_FILE, 'w') as file:
-		file.write(s);
-
-
+    s = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff,"humdelay":humdelay, 'sensortype':sensortype, 'date':int(time.time())});
+    with open(SETTINGS_FILE, 'w') as file:
+        file.write(s);
 
 # Hauptprogramm #################################################################################################################
 ########################################################################################################################
 
 #os.system('clear'); # Bildschirm löschen
 writeVerbose('************************************************************');
-
-                                           
 
 #Vriablen Eingabe
 mod = int(raw_input('Kühlmodus (1) Heizmodus(2) Automodus (3) Erweiteter Automodus(4):'))
@@ -82,6 +73,3 @@ write_settings (mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, 
 writeVerbose('************************************************************');
 writeVerbose('**************Die Änderungen wurden gespeichert*************');
 writeVerbose('************************************************************');
-
-
-                 

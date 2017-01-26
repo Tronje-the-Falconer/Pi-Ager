@@ -15,20 +15,19 @@ TABELS_FILE=PATH+'/tabels.json';
 filename=PATH+'/logfile.txt' ;
 
 def readSettings():
-	global TABELS_FILE;
-	s = None;
-	with open(TABELS_FILE, 'r') as file:
-		s = file.read();
-	data = json.loads(s);
-	return data
-
+    global TABELS_FILE;
+    s = None;
+    with open(TABELS_FILE, 'r') as file:
+        s = file.read();
+    data = json.loads(s);
+    return data
 
 def write_settings(mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay, sensortype):
-	global SETTINGS_FILE;	
+    global SETTINGS_FILE;
 
-	s = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff, "humdelay":humdelay, "sensortype":sensortype 'date':int(time.time())});
-	with open(SETTINGS_FILE, 'w') as file:
-		file.write(s);
+    s = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff, "humdelay":humdelay, "sensortype":sensortype 'date':int(time.time())});
+    with open(SETTINGS_FILE, 'w') as file:
+        file.write(s);
 
 Reifetabs= readSettings();     
 tabelle=Reifetabs['Reifetab']
@@ -36,23 +35,22 @@ datei =tabelle +'.csv';
 target = open(filename, 'a')
 target.write ("\n" +time.strftime('%d.%m.%Y  %H:%M') + ': Kontrolle der Werte von '+tabelle +' uebernommen')
 target.close()
-        
+
 f=open('/opt/RSS1.0/'+datei,"rb")
 reader=csv.reader(f)
 rownum=0
 dauer=0
 
 for row in reader:
-        colnum=0
-        for col in row:
-                if rownum>0:     
-                        if colnum==12:                               
-                                dauer=dauer + int(col)
-                colnum+=1
-        rownum+=1
+    colnum=0
+    for col in row:
+        if rownum>0:
+            if colnum==12:
+                dauer=dauer + int(col)
+            colnum+=1
+    rownum+=1
 totper=rownum-1
 totdauer=dauer
-
 
 f=open('/opt/RSS1.0/' + datei,"rb")
 reader=csv.reader(f)
@@ -77,71 +75,71 @@ rownum=0
 for row  in reader:
     colnum=0  
     if rownum==0:
-        header=row      
+        header=row
     else:
-         if rownum==1 :           
-             print "****************************************************************************"                 
-             print time.strftime('%d.%m.%Y  %H:%M') + ": Initialwerte fur Periode 1/"+str(totper) + " vom Reifeprogramm " + tabelle +":"
-             print
-             target = open(filename, 'a')
-             target.write("\n"+ "****************************************************************************")                 
-             target.write("\n" + time.strftime('%d.%m.%Y  %H:%M') + ": Initialwerte fur Periode 1/"+str(totper) + " vom Reifeprogramm " + tabelle +":")
-             target.write("\n")
-             target.close()
-             finaltime=datetime.datetime.now()+timedelta(days=totdauer)
-         else:
-             print "*****************************************************************************"
-             print time.strftime('%d.%m.%Y  %H:%M') + ": Veraenderungen fur Periode " + str(rownum) + "/" + str(totper) + " vom Reifeprogramm " + tabelle +":"
-             print
-             target = open(filename, 'a')
-             target.write("\n"+ "****************************************************************************")                 
-             target.write("\n" + time.strftime('%d.%m.%Y  %H:%M')  +": Veraenderungen fur Periode " + str(rownum) + "/" + str(totper)+ " vom Reifeprogramm " + tabelle +":")
+        if rownum==1 :
+            print "****************************************************************************"
+            print time.strftime('%d.%m.%Y  %H:%M') + ": Initialwerte fur Periode 1/"+str(totper) + " vom Reifeprogramm " + tabelle +":"
+            print
+            target = open(filename, 'a')
+            target.write("\n"+ "****************************************************************************")                 
+            target.write("\n" + time.strftime('%d.%m.%Y  %H:%M') + ": Initialwerte fur Periode 1/"+str(totper) + " vom Reifeprogramm " + tabelle +":")
+            target.write("\n")
+            target.close()
+            finaltime=datetime.datetime.now()+timedelta(days=totdauer)
+        else:
+            print "*****************************************************************************"
+            print time.strftime('%d.%m.%Y  %H:%M') + ": Veraenderungen fur Periode " + str(rownum) + "/" + str(totper) + " vom Reifeprogramm " + tabelle +":"
+            print
+            target = open(filename, 'a')
+            target.write("\n"+ "****************************************************************************")                 
+            target.write("\n" + time.strftime('%d.%m.%Y  %H:%M')  +": Veraenderungen fur Periode " + str(rownum) + "/" + str(totper)+ " vom Reifeprogramm " + tabelle +":")
             
-             target.close()
-         colnum=0
-         wert=0
-         for col in row:
-           colnumname=header[colnum]      
-           if colnumname=="days":
-               dauer=int(col)*t             
-           if col<>"":
-                if colnumname=='temphystoff':
-                        temphystoff=float(col)
-                else:
-                       wert=float(col)          
-                       exec('%s=%d') % (colnumname,wert)            
-                       print '%-12s:%s' % (colnumname,wert)
-                       target = open(filename, 'a')
-                       target.write("\n" +colnumname + " \t" +col)
-                       target.close()
-           colnum+=1          
+            target.close()
+        colnum=0
+        wert=0
+        for col in row:
+        colnumname=header[colnum]
+        if colnumname=="days":
+            dauer=int(col)*t
+        if col<>"":
+            if colnumname=='temphystoff':
+                temphystoff=float(col)
+            else:
+                wert=float(col)          
+                exec('%s=%d') % (colnumname,wert)
+                print '%-12s:%s' % (colnumname,wert)
+                target = open(filename, 'a')
+                target.write("\n" +colnumname + " \t" +col)
+                target.close()
+            colnum+=1
     rownum+=1
-  
+
     write_settings (mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay, sensortype);
     if rownum>1 :
-      endtime=datetime.datetime.now()+timedelta(days=dauer/t)
-      print
-      if rownum<totper+1:
-       print "Naechste Aenderung der Werte: " + endtime.strftime('%d.%m.%Y  %H:%M')
-       target = open(filename, 'a')
-       target.write("\n" +"Naechste Aenderung der Werte: " + endtime.strftime('%d.%m.%Y  %H:%M'))
-       target.close()
-      print "Programmende: " +finaltime.strftime('%d.%m.%Y  %H:%M')
-      target = open(filename, 'a')
-      target.write("\n" + "Programmende: " +finaltime.strftime('%d.%m.%Y  %H:%M'))
-      target.close()      
-      if rownum==totper+1 :
-        print "Nach Programmende funktioniert der Reifeschrank weiter mit den letzten Werten"
+        endtime=datetime.datetime.now()+timedelta(days=dauer/t)
+        print
+        if rownum<totper+1:
+            print "Naechste Aenderung der Werte: " + endtime.strftime('%d.%m.%Y  %H:%M')
+            target = open(filename, 'a')
+            target.write("\n" +"Naechste Aenderung der Werte: " + endtime.strftime('%d.%m.%Y  %H:%M'))
+            target.close()
+            print "Programmende: " +finaltime.strftime('%d.%m.%Y  %H:%M')
+            target = open(filename, 'a')
+            target.write("\n" + "Programmende: " +finaltime.strftime('%d.%m.%Y  %H:%M'))
+            target.close()      
+        if rownum==totper+1 :
+            print "Nach Programmende funktioniert der Reifeschrank weiter mit den letzten Werten"
+            target = open(filename, 'a')
+            target.write("\n" + tabelle +" beendet die Kontrolle."+"\n"+"Der Reifeschrank funktioniert weiter mit den letzten Werten.")
+            target.close()     
+        print "*****************************************************************************"
         target = open(filename, 'a')
-        target.write("\n" + tabelle +" beendet die Kontrolle."+"\n"+"Der Reifeschrank funktioniert weiter mit den letzten Werten.")
-        target.close()     
-      print "*****************************************************************************"
-      target = open(filename, 'a')
-      target.write("\n" + "*****************************************************************************")
-      target.close()      
-      if rownum<=totper:
-       time.sleep(dauer)
-      
+        target.write("\n" + "*****************************************************************************")
+        target.close()      
+        if rownum<=totper:
+            time.sleep(dauer)
+
 f.close()
-    
+
 sys.exit(0)
