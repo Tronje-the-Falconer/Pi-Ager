@@ -1,137 +1,127 @@
 ﻿@import url(http://fonts.googleapis.com/css?family=Dosis:200,400,500,600);
 * {
-	margin: 0;
-	padding: 0;
-	outline: 0;
+    margin: 0;
+    padding: 0;
+    outline: 0;
 }
-
 body {
-	text-align: center;
-	background: #f2f2f2;
+    text-align: center;
+    background: #f2f2f2;
 }
-
 #header {
     background-color:black;
-     color:white;
-     text-align:center;
+    color:white;
+    text-align:center;
     padding:5px;
     margin: 0 auto;
 }
 #nav {
     line-height:30px;
-     background-color:#eeeeee;
-     height:1500px;
-     width:150px;
-     float:left;
-     padding:5px; 
+    background-color:#eeeeee;
+    height:1500px;
+    width:150px;
+    float:left;
+    padding:5px; 
 }
 #section {
-	margin: 0 auto;
-	margin-left: 150px;
+    margin: 0 auto;
+    margin-left: 150px;
     width:350px;
     float:center;
     padding:10px; 
 }
-
 #formular {
-	margin: 0 auto;
-	margin-left: 150px;
+    margin: 0 auto;
+    margin-left: 150px;
     float:center;
     text-align:right;
     padding:10px; 
     width: 500px;
 }
-
 #modus {
-	margin: 0 auto;
-	margin-left: 150px;
+    margin: 0 auto;
+    margin-left: 150px;
     float:center;
-	width:380px;
+    width:380px;
     text-align:center;
     padding:10px; 
 }
-
 #modus1 {
-	margin: 0 auto;
-	margin-left: 20px;
-    	float:center;
-	width:900px;
-    	text-align:center;
-    	padding:10px; 
+    margin: 0 auto;
+    margin-left: 20px;
+    float:center;
+    width:900px;
+    text-align:center;
+    padding:10px; 
 }
-
 #value {
-	margin: 0 auto;
-	margin-left: 150px;
+    margin: 0 auto;
+    margin-left: 150px;
     float:center;
     width:600px;
     text-align:right;
     padding:10px; 
 }
-
 #set {
-	text-align:left;
-	margin: 0 auto;
-	margin-left: 150px;
+    text-align:left;
+    margin: 0 auto;
+    margin-left: 150px;
     float:left;
     padding:10px; 
 }
-
 #footer {
     background-color:black;
-     color:white;
+    color:white;
     clear:both;
     text-align:center;
-     padding:5px; 
+    padding:5px; 
  }
-
 div.content {
-	position: relative;
-	margin: 0 auto;
-	margin-left: 50px;
-	text-align: center;
-	width: 1000px;
+    position: relative;
+    margin: 0 auto;
+    margin-left: 50px;
+    text-align: center;
+    width: 1000px;
 }
-
 div.thermometers {
-	margin: 20px auto;
-	width: 560px;
+    margin: 20px auto;
+    width: 560px;
 }
-
 div.thermometers .label {
-	position: relative;
-	float: left;
-	width: 280px;
-	text-align: center;
-	font-size: 24px;
-	font-family: 'Dosis';
-	font-weight: bold;
+    position: relative;
+    float: left;
+    width: 280px;
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Dosis';
+    font-weight: bold;
 }
-
 div.thermometers .details {
-	position: relative;
-	float: left;
-	width: 280px;
-	text-align: center;
-	font-size: 16px;
-	font-family: 'Dosis';
-	font-weight: bold;
+    position: relative;
+    float: left;
+    width: 280px;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Dosis';
+    font-weight: bold;
 }
-
 div.thermometers .last-update {
-	margin: 10px auto;
-	text-align: center;
-	width: 560px;
-	font-size: 12px;
-	font-family: 'Dosis';
-	font-weight: bold;
+    margin: 10px auto;
+    text-align: center;
+    width: 560px;
+    font-size: 12px;
+    font-family: 'Dosis';
+    font-weight: bold;
 }
-
-.de .den, .de .dene, .de .denem, .de .deneme { position: absolute;  left: 50%; top: 50%; }
+.de .den, .de .dene, .de .denem, .de .deneme {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
 .de {
     position: relative;
-	float: left;
-	margin: 20px;
+    float: left;
+    margin: 20px;
     width: 240px;
     height: 240px;
     border-radius: 100%;
@@ -174,7 +164,6 @@ div.thermometers .last-update {
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cbd5d6), color-stop(100%, #f2f6f5));
     background: -webkit-linear-gradient(top, #cbd5d6 0%, #f2f6f5 100%);
 }
-
 .deneme {
     padding: 3px 10px 0 10px;
     width: 120px;
