@@ -228,11 +228,20 @@ def doMainLoop():
 	global sensortype;
         
         while True:
-
                 if sensortype == 1: #DHT11
             		sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
+			aTp = 17.271; ermittelt aus dem Datenblatt 
+			bTp = 237.7; ermittelt aus dem Datenblatt
+			dew_point_temp = (aTp * sensortemp1) / (bTp + sensortemp1) + log(sensorhum1 / 100)
+			dew_point = (bTp * dew_point_temp) / (aTp - dew_point_temp)
+			dew_point = round (dew_point,1)
 		elif sensortype == 2: #DHT22
-        		    sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
+        		sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
+			aTp = 17.271; ermittelt aus dem Datenblatt 
+			bTp = 237.7; ermittelt aus dem Datenblatt
+			dew_point_temp = (aTp * sensortemp1) / (bTp + sensortemp1) + log(sensorhum1 / 100)
+			dew_point = (bTp * dew_point_temp) / (aTp - dew_point_temp)
+			dew_point = round (dew_point,1)
 		elif sensortype == 3: #SHT75
           		sensortemp1 = sht.read_t()
 			sensorhum1 = sht.read_rh()
