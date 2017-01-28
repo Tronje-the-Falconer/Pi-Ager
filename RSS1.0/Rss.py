@@ -2,52 +2,42 @@
 # -*- coding: iso-8859-1 -*-
 #Importieren der Module
 
-import os;
-import json;
-import glob;
-import time;
-import Adafruit_DHT;
-import time;
-import RPi.GPIO as gpio;
-import rrdtool;
+import os
+import json
+import glob
+import time
+import Adafruit_DHT
+import time
+import RPi.GPIO as gpio
+import rrdtool
 from sht_sensor import Sht
 
 # Konstanten ############################################################################################################
 ########################################################################################################################
 
-PATH = '/var/www/html/';
-SETTINGS_FILE = PATH+'settings.json';
-CURRENT_FILE = PATH+'current.json';
-PICPATH = '/var/www/html/pic/';
-
-# Sensor should be set to Adafruit_DHT.DHT11,
-# Adafruit_DHT22, or Adafruit_AM2302.
-#sensor = Adafruit_DHT.AM2302
-if sensortype == 1: #DHT11
-    sensor = Adafruit_DHT.DHT11
-elif sensortype == 2: #DHT22
-    sensor = Adafruit_DHT.DHT22
-elif sensortype == 3: #SHT75
-    sensor = Adafruit_DHT.AM2302
+PATH = '/var/www/html/'
+SETTINGS_FILE = PATH+'settings.json'
+CURRENT_FILE = PATH+'current.json'
+PICPATH = '/var/www/html/pic/'
 
 # Sainsmart Relais vereinfachung 0 aktiv
-RELAY_ON = False;
-RELAY_OFF = (not RELAY_ON);
+RELAY_ON = False
+RELAY_OFF = (not RELAY_ON)
 
-DELAY = 4;                  #Wartezeit in der Schleife
-count = 0;                  #Zähler für die Verzögerung der Befeuchtung
+DELAY = 4                  #Wartezeit in der Schleife
+count = 0                  #Zähler für die Verzögerung der Befeuchtung
 evac = True
 # Pinbelegung
-BOARD_MODE = gpio.BCM;      # GPIO board mode
-PIN_DHT = 17;               # Pin für Temp/Hum Sensor
-PIN_HEATER = 27;            # Pin für Heizkabel
-PIN_COOL = 22;              # Pin für Kühlschrankkompressor
+BOARD_MODE = gpio.BCM      # GPIO board mode
+PIN_DHT = 17               # Pin für Temp/Hum Sensor
+PIN_HEATER = 27            # Pin für Heizkabel
+PIN_COOL = 22              # Pin für Kühlschrankkompressor
 
-PIN_FAN = 18;               # Pin für Umluftventilator
-PIN_FAN1 = 23;              # Pin für Austauschlüfter
-PIN_HUM = 24;               # Pin für Luftbefeuchter
+PIN_FAN = 18               # Pin für Umluftventilator
+PIN_FAN1 = 23              # Pin für Austauschlüfter
+PIN_HUM = 24               # Pin für Luftbefeuchter
 sht = Sht(21, 20)
-VERBOSE = True;
+VERBOSE = True
 
 #RRD-Tool konfiguration
 dbname = 'dht22'            # Name fuer Grafiken etc
@@ -60,64 +50,64 @@ z = 0
 ########################################################################################################################
 
 def goodbye():
-    cleanup(); 
-    writeVerbose('Goodbye!');
+    cleanup() 
+    writeVerbose('Goodbye!')
     
 def cleanup():
-    writeVerbose('Running cleanup script...');
-    gpio.cleanup(); # GPIO zurücksetzen
-    writeVerbose('Cleanup complete.', True);
+    writeVerbose('Running cleanup script...')
+    gpio.cleanup() # GPIO zurücksetzen
+    writeVerbose('Cleanup complete.', True)
 
 def setupGPIO():
-    global BOARD_MODE;
-    global PIN_HEATER;
-    global PIN_COOL;
-    global PIN_FAN;
-    global PIN_HUM;
-    global PIN_FAN1;
+    global BOARD_MODE
+    global PIN_HEATER
+    global PIN_COOL
+    global PIN_FAN
+    global PIN_HUM
+    global PIN_FAN1
     
-    writeVerbose('Setting up GPIO...');
-    gpio.setwarnings(False);
+    writeVerbose('Setting up GPIO...')
+    gpio.setwarnings(False)
     
     # Board mode wird gesetzt
-    gpio.setmode(BOARD_MODE);
+    gpio.setmode(BOARD_MODE)
     
     # Einstellen der GPIO PINS
-    gpio.setup(PIN_HEATER, gpio.OUT);
-    gpio.setup(PIN_COOL, gpio.OUT);
-    gpio.setup(PIN_FAN, gpio.OUT);
-    gpio.setup(PIN_HUM, gpio.OUT);
-    gpio.setup(PIN_FAN1, gpio.OUT);
-    gpio.output(PIN_HEATER, RELAY_OFF);
-    gpio.output(PIN_COOL, RELAY_OFF);
-    gpio.output(PIN_FAN, RELAY_OFF);
-    gpio.output(PIN_HUM, RELAY_OFF);
-    gpio.output(PIN_FAN1, RELAY_OFF);
+    gpio.setup(PIN_HEATER, gpio.OUT)
+    gpio.setup(PIN_COOL, gpio.OUT)
+    gpio.setup(PIN_FAN, gpio.OUT)
+    gpio.setup(PIN_HUM, gpio.OUT)
+    gpio.setup(PIN_FAN1, gpio.OUT)
+    gpio.output(PIN_HEATER, RELAY_OFF)
+    gpio.output(PIN_COOL, RELAY_OFF)
+    gpio.output(PIN_FAN, RELAY_OFF)
+    gpio.output(PIN_HUM, RELAY_OFF)
+    gpio.output(PIN_FAN1, RELAY_OFF)
 
-    writeVerbose('GPIO setup complete.',True);
+    writeVerbose('GPIO setup complete.',True)
 
 def writeVerbose(s, newLine=False):
-    global VERBOSE;
+    global VERBOSE
     
     if(VERBOSE):
-        print(s);
+        print(s)
         if(newLine is True):
-            print('');
+            print('')
 
 def write_current(sensortemp, sensorhum):
-    global CURRENT_FILE;
+    global CURRENT_FILE
 
-    s = json.dumps({"temperatur":sensortemp, "heizung":gpio.input(PIN_HEATER), "luftaustausch":gpio.input(PIN_FAN1), "kuhlung":gpio.input(PIN_COOL), "umluft":gpio.input(PIN_FAN),"luftfeuchtigkeit":sensorhum, 'date':int(time.time())});
+    s = json.dumps({"sensorname":sensorvalue,"temperatur":sensortemp, "heizung":gpio.input(PIN_HEATER), "luftaustausch":gpio.input(PIN_FAN1), "kuhlung":gpio.input(PIN_COOL), "umluft":gpio.input(PIN_FAN),"luftfeuchtigkeit":sensorhum, 'date':int(time.time())})
     with open(CURRENT_FILE, 'w') as file:
-        file.write(s);
+        file.write(s)
 
 def readSettings():
-    global SETTINGS_FILE;
-    s = None;
+    global SETTINGS_FILE
+    s = None
     with open(SETTINGS_FILE, 'r') as file:
-        s = file.read();
-    data = json.loads(s);
-    return data;
+        s = file.read()
+    data = json.loads(s)
+    return data
 
 def plotten(a):#, b, c, d):
 
@@ -179,108 +169,130 @@ def plotten(a):#, b, c, d):
             #"LINE1:%s#FF0000:%s_%s" %(c, dbname, c),
             #"LINE1:%s#000000:%s_%s" %(d, dbname, d))
 
+def set_sensortype():
+    global sensor
+    global sensorname
+    global sensorvalue
+    settings = readSettings()
+    sensortype = settings ['sensortype']
+    # Sensor should be set to Adafruit_DHT.DHT11,
+    # Adafruit_DHT22, or Adafruit_AM2302.
+    #sensor = Adafruit_DHT.AM2302
+    if sensortype == 1: #DHT11
+        sensor = Adafruit_DHT.DHT11
+        sensorname = 'DHT11'
+        sensorvalue = 1
+    elif sensortype == 2: #DHT22
+        sensor = Adafruit_DHT.DHT22
+        sensorname = 'DHT22'
+        sensorvalue = 2
+    elif sensortype == 3: #SHT75 sensor=22
+        sensor = Adafruit_DHT.AM2302
+        sensorname = 'SHT75'
+        sensorvalue = 3
+
 def doMainLoop():
     global value
-    global tempon;
-    global tempoff;
-    global tempstart;
-    global tempon1;
-    global tempoff1;
-    global tempstart1;
-    global sensortemp;
-    global sensorhum;
-    global temphyston;
-    global temphystoff;
-    global humhyston;
-    global humhystoff;
+    global tempon
+    global tempoff
+    global tempstart
+    global tempon1
+    global tempoff1
+    global tempstart1
+    global sensortemp
+    global sensorhum
+    global temphyston
+    global temphystoff
+    global humhyston
+    global humhystoff
     global temperature
     global settings
-    global uml;
-    global lat;
-    global heat;
-    global cool;
-    global z;
-    global lbf;
-    global count;
-    global humdelay;
-    global evac;
-    global sensortype;
+    global uml
+    global lat
+    global heat
+    global cool
+    global z
+    global lbf
+    global count
+    global humdelay
+    global evac
 
     while True:
-        if sensortype == 1: #DHT11
+        set_sensortype()
+        if sensorname == 'DHT11': #DHT11
+            print sensorname
             sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
-        aTp = 17.271; ermittelt aus dem Datenblatt 
-        bTp = 237.7; ermittelt aus dem Datenblatt
-        dew_point_temp = (aTp * sensortemp1) / (bTp + sensortemp1) + log(sensorhum1 / 100)
-        dew_point = (bTp * dew_point_temp) / (aTp - dew_point_temp)
-        dew_point = round (dew_point,1)
-        elif sensortype == 2: #DHT22
-            sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
-            aTp = 17.271; ermittelt aus dem Datenblatt 
-            bTp = 237.7; ermittelt aus dem Datenblatt
-            dew_point_temp = (aTp * sensortemp1) / (bTp + sensortemp1) + log(sensorhum1 / 100)
-            dew_point = (bTp * dew_point_temp) / (aTp - dew_point_temp)
+            atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
+            btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
+            dew_point_temp = (atp * sensortemp1) / (btp + sensortemp1) + log(sensorhum1 / 100)
+            dew_point = (btp * dew_point_temp) / (atp - dew_point_temp)
             dew_point = round (dew_point,1)
-        elif sensortype == 3: #SHT75
+        elif sensorname == 'DHT22': #DHT22
+            print sensorname
+            sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
+            atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
+            btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
+            dew_point_temp = (atp * sensortemp1) / (btp + sensortemp1) + log(sensorhum1 / 100)
+            dew_point = (btp * dew_point_temp) / (atp - dew_point_temp)
+            dew_point = round (dew_point,1)
+        elif sensorname == 'SHT75': #SHT75
             sensortemp1 = sht.read_t()
             sensorhum1 = sht.read_rh()
             dew_point = sht.read_dew_point(sensortemp1, sensorhum1)
             dew_point = round (dew_point,1)
 
         if sensorhum1 is not None and sensortemp1 is not None:
-                sensortemp = round (sensortemp1,2)
-                sensorhum = round (sensorhum1,2)
-
+            sensortemp = round (sensortemp1,2)
+            sensorhum = round (sensorhum1,2)
         else:
             print 'Failed to get reading. Try again!'
         try:
-            settings = readSettings();
+            settings = readSettings()
         except:
             # An exception occurred and settings file cannot be reached.
-            writeVerbose('Unable to read settings file, checking if in the blind.');
-            
-            continue;
-        mod = settings['mod'];
-            temp = settings['temp'];
-            hum = settings['hum'];
-            tempoff = settings['tempoff'];
-            tempon = settings['tempon'];
-            tempoff1 = settings['tempoff1'];
-            tempon1 = settings['tempon1'];
-            temphyston = settings['temphyston'];
-            temphystoff = settings['temphystoff'];
-            humhyston = settings['humhyston'];
-            humhystoff = settings['humhystoff'];
-            humdelay = settings ['humdelay'];
-            sensortype = settings ['sensortype'];
-            humdelay = humdelay*10;
-        
+            writeVerbose('Unable to read settings file, checking if in the blind.')
+            continue
+        mod = settings['mod']
+        temp = settings['temp']
+        hum = settings['hum']
+        tempoff = settings['tempoff']
+        tempon = settings['tempon']
+        tempoff1 = settings['tempoff1']
+        tempon1 = settings['tempon1']
+        temphyston = settings['temphyston']
+        temphystoff = settings['temphystoff']
+        humhyston = settings['humhyston']
+        humhystoff = settings['humhystoff']
+        humdelay = settings ['humdelay']
+        sensortype = settings ['sensortype']
+        humdelay = humdelay*10
+
         # At this point, the settings have been read.
         # However we still need to ensure that the last update time isn't out of our emergency range.
-        lastSettingsUpdate = settings['date'];
-        os.system('clear'); # Clears the terminal
-        t = int(time.time());
-        writeVerbose(' ');
-        writeVerbose('************************************************************');
-        writeVerbose(' ');
-        writeVerbose('Main loop... ('+str(t)+')');
-        print ('Eingestellter Temperaturwert in Celcius :')+str (temp);
-        print ('Aktuelle Temperatur :')+str (sensortemp);
-        print ('Eingestellter Luftfeuchtigwert in % :')+str (hum);
-        print ('Aktuelle Luftfeuchtigkeit :')+str (sensorhum);
-        print ('Aktuelle Taupunkt :')+str (dew_point);
-        print ('Eingestellter Sensor:')+str (sensortype);
+        lastSettingsUpdate = settings['date']
+        os.system('clear') # Clears the terminal
+        t = int(time.time())
+        writeVerbose(' ')
+        writeVerbose('************************************************************')
+        writeVerbose(' ')
+        writeVerbose('Main loop... ('+str(t)+')')
+        print ('Eingestellter Temperaturwert in Celcius :')+str (temp)
+        print ('Aktuelle Temperatur :')+str (sensortemp)
+        print ('Eingestellter Luftfeuchtigwert in % :')+str (hum)
+        print ('Aktuelle Luftfeuchtigkeit :')+str (sensorhum)
+        print ('Aktuelle Taupunkt :')+str (dew_point)
+        print ('Eingestellter Sensor:')+str (sensorname)
 
-        write_current(sensortemp, sensorhum);
+        write_current(sensortemp, sensorhum)
 
         #Timer für Luftumwelzung
         if tempoff > 0: 
             t = int(time.time())
             if t < tempstart + tempoff:
-                #gpio.output(PIN_FAN, RELAY_OFF);
+                #gpio.output(PIN_FAN, RELAY_OFF)
                 vent=True
             if t >= tempstart + tempoff:
-                #gpio.output(PIN_FAN, RELAY_ON);
+                #gpio.output(PIN_FAN, RELAY_ON)
                 vent=False
             if t >= tempstart + tempoff + tempon:
                 tempstart = int(time.time())
@@ -289,11 +301,11 @@ def doMainLoop():
         if tempoff1 > 0:
             #t = int(time.time())
             if t < tempstart1 + tempoff1:
-                #gpio.output(PIN_FAN1, RELAY_OFF);
+                #gpio.output(PIN_FAN1, RELAY_OFF)
                 vent1=True
                 #print ('Timer umluft aus')
             if t >= tempstart1 + tempoff1:
-                #gpio.output(PIN_FAN1, RELAY_ON);
+                #gpio.output(PIN_FAN1, RELAY_ON)
                 vent1=False
                 #print ('Timer umluft ein')
             if t >= tempstart1 + tempoff1 + tempon1:
@@ -301,64 +313,64 @@ def doMainLoop():
 
             if mod == 1: #Kühlmodus
                 evac=True
-                gpio.output(PIN_HEATER, RELAY_OFF);
+                gpio.output(PIN_HEATER, RELAY_OFF)
                 if sensortemp >= temp + temphyston:
-                    gpio.output(PIN_COOL, RELAY_ON);
+                    gpio.output(PIN_COOL, RELAY_ON)
                 if sensortemp <= temp + temphystoff :
-                    gpio.output(PIN_COOL, RELAY_OFF);
+                    gpio.output(PIN_COOL, RELAY_OFF)
                 if sensorhum <= hum - humhyston:
-                    gpio.output(PIN_HUM, RELAY_ON);
+                    gpio.output(PIN_HUM, RELAY_ON)
                 if sensorhum >= hum - humhystoff:
-                    gpio.output(PIN_HUM, RELAY_OFF);
+                    gpio.output(PIN_HUM, RELAY_OFF)
 
             if mod == 2: #Heizmodus
                 evac=True
-                gpio.output(PIN_COOL, RELAY_OFF);
+                gpio.output(PIN_COOL, RELAY_OFF)
                 if sensortemp <= temp - temphyston:
-                    gpio.output(PIN_HEATER, RELAY_ON);
+                    gpio.output(PIN_HEATER, RELAY_ON)
                 if sensortemp >= temp - temphystoff:
-                    gpio.output(PIN_HEATER, RELAY_OFF);
+                    gpio.output(PIN_HEATER, RELAY_OFF)
                 if sensorhum <= hum - humhyston:
-                    gpio.output(PIN_HUM, RELAY_ON);
+                    gpio.output(PIN_HUM, RELAY_ON)
                 if sensorhum >= hum - humhystoff:
-                    gpio.output(PIN_HUM, RELAY_OFF);
+                    gpio.output(PIN_HUM, RELAY_OFF)
 
             if mod == 3: #Automodus
                 evac=True
                 if sensortemp >= temp + temphyston: #Kühlung ein
-                    gpio.output(PIN_COOL, RELAY_ON);
+                    gpio.output(PIN_COOL, RELAY_ON)
                 if sensortemp <= temp + temphystoff:
-                    gpio.output(PIN_COOL, RELAY_OFF);
+                    gpio.output(PIN_COOL, RELAY_OFF)
                 if sensortemp <= temp - temphyston: #Heizung ein
-                    gpio.output(PIN_HEATER, RELAY_ON);
+                    gpio.output(PIN_HEATER, RELAY_ON)
                 if sensortemp >= temp - temphystoff:#Heizung aus
-                    gpio.output(PIN_HEATER, RELAY_OFF);
+                    gpio.output(PIN_HEATER, RELAY_OFF)
                 if sensorhum <= hum - humhyston: #Luftbefeuchter ein
                     count = count+1
                     if count >= humdelay: 
-                        gpio.output(PIN_HUM, RELAY_ON);
+                        gpio.output(PIN_HUM, RELAY_ON)
                 if sensorhum >= hum - humhystoff: # Luftbefeuchter aus
-                    gpio.output(PIN_HUM, RELAY_OFF);
-                    count = 0;
+                    gpio.output(PIN_HUM, RELAY_OFF)
+                    count = 0
 
                 if mod == 4: #Automodus erweitert
                     #Temperaturreglung
                     if sensortemp >= temp + temphyston: #Kühlung ein
-                        gpio.output(PIN_COOL, RELAY_ON);
+                        gpio.output(PIN_COOL, RELAY_ON)
                     if sensortemp <= temp + temphystoff: #Kühlung aus
-                        gpio.output(PIN_COOL, RELAY_OFF);
+                        gpio.output(PIN_COOL, RELAY_OFF)
                     if sensortemp <= temp - temphyston: #Heizung ein
-                        gpio.output(PIN_HEATER, RELAY_ON);
+                        gpio.output(PIN_HEATER, RELAY_ON)
                     if sensortemp >= temp - temphystoff:#Heizung aus
-                            gpio.output(PIN_HEATER, RELAY_OFF);
+                            gpio.output(PIN_HEATER, RELAY_OFF)
                     #Luftfeuchtigkeitsreglung        
                     if sensorhum <= hum - humhyston: #Luftbefeuchter ein
                         count = count+1
                         if count >= humdelay: 
-                            gpio.output(PIN_HUM, RELAY_ON);
+                            gpio.output(PIN_HUM, RELAY_ON)
                     if sensorhum >= hum - humhystoff: # Luftbefeuchter aus
-                        gpio.output(PIN_HUM, RELAY_OFF);
-                        count = 0;
+                        gpio.output(PIN_HUM, RELAY_OFF)
+                        count = 0
                     if sensorhum >= hum + humhyston: #Luftaustausch ein
                         #gpio.output(PIN_FAN1, RELAY_ON)
                         evac = False
@@ -371,56 +383,56 @@ def doMainLoop():
                 if gpio.input(PIN_HEATER) or gpio.input(PIN_COOL) or gpio.input(PIN_HUM) or vent == False:
                     gpio.output(PIN_FAN, RELAY_ON)
                 if gpio.input(PIN_HEATER) and gpio.input(PIN_COOL) and gpio.input(PIN_HUM) and vent == True:
-                    gpio.output(PIN_FAN, RELAY_OFF);
+                    gpio.output(PIN_FAN, RELAY_OFF)
 
                 #Luftaustausch
                 if vent1 ==False or evac == False:
-                    gpio.output(PIN_FAN1, RELAY_ON);
+                    gpio.output(PIN_FAN1, RELAY_ON)
                     #print('umluft ein.........')
                 if evac and vent1 == True:
                     gpio.output(PIN_FAN1, RELAY_OFF)
                     #print('Umluft aus.........')
 
                 if gpio.input(PIN_HEATER) == False:
-                    writeVerbose('Heizung ein');
+                    writeVerbose('Heizung ein')
                     heat = 10
                 else:       
-                    writeVerbose('Heizung aus');
+                    writeVerbose('Heizung aus')
                     heat = 0
 
                 if gpio.input(PIN_COOL) == False:
-                    writeVerbose('Kühlung ein');
+                    writeVerbose('Kühlung ein')
                     cool = 10
                 else:       
-                    writeVerbose('Kühlung aus');
+                    writeVerbose('Kühlung aus')
                     cool = 0
 
                 if gpio.input(PIN_HUM) == False:
-                    writeVerbose('Luftbefeuchter ein');
+                    writeVerbose('Luftbefeuchter ein')
                     lbf = 10
                 else:       
-                    writeVerbose('Luftbefeuchter aus');
-                    lbf = 0;
+                    writeVerbose('Luftbefeuchter aus')
+                    lbf = 0
 
                 if gpio.input(PIN_FAN) == False:
-                    writeVerbose('Umluft ein');
+                    writeVerbose('Umluft ein')
                     uml = 10
                 else:       
-                    writeVerbose('Umluft aus');
+                    writeVerbose('Umluft aus')
                     uml = 0
 
                 if gpio.input(PIN_FAN1) == False:
-                    writeVerbose('Luftaustausch ein');
+                    writeVerbose('Luftaustausch ein')
                     lat = 10
                 else:       
-                    writeVerbose('Luftaustausch aus');
+                    writeVerbose('Luftaustausch aus')
                     lat = 0
-                #print ('evac')+str (evac);
-                #print ('vent1')+str (vent1);
+                #print ('evac')+str (evac)
+                #print ('vent1')+str (vent1)
 
                # Messwerte in die RRD-Datei schreiben
                 from rrdtool import update as rrd_update
-                ret = rrd_update('%s' %(filename), 'N:%s:%s:%s:%s:%s:%s:%s' %(sensortemp, sensorhum, lat, uml, heat, cool, lbf));
+                ret = rrd_update('%s' %(filename), 'N:%s:%s:%s:%s:%s:%s:%s' %(sensortemp, sensorhum, lat, uml, heat, cool, lbf))
                 #array für graph
                 # Grafiken erzeugen
                 if z >= 2:
@@ -434,21 +446,21 @@ def doMainLoop():
                     plotten('cool')
                     plotten('lbf')
                     
-                    z = 0;
+                    z = 0
                 else:
                     z = z+1
 
                 time.sleep(1)  
         # Mainloop fertig 
-        writeVerbose('Loop complete.');
-        time.sleep(3);
+        writeVerbose('Loop complete.')
+        time.sleep(3)
 
 # Hauptprogramm #################################################################################################################
 ########################################################################################################################
 
-os.system('clear'); # Bildschirm löschen
-writeVerbose('************************************************************');
-setupGPIO(); # GPIO initialisieren
+os.system('clear') # Bildschirm löschen
+writeVerbose('************************************************************')
+setupGPIO() # GPIO initialisieren
 
 # RRD-Datenbank anlegen, wenn nicht vorhanden
 try:
@@ -472,22 +484,22 @@ except IOError:
         "RRA:AVERAGE:0.5:15:2880",
         "RRA:AVERAGE:0.5:60:8760",)
     i=1                          
-writeVerbose('************************************************************');
+writeVerbose('************************************************************')
 
-settings = readSettings();
+settings = readSettings()
 tempstart = int(time.time())
 tempstart1 = tempstart
 
 try:
-    doMainLoop();
+    doMainLoop()
 
 except KeyboardInterrupt:
-    pass;
+    pass
 
 except Exception, e:
-    writeVerbose('Exception occurred!!!', True);
-    writeVerbose(str(e), True);
-    pass;
+    writeVerbose('Exception occurred!!!', True)
+    writeVerbose(str(e), True)
+    pass
 
-goodbye();
+goodbye()
 
