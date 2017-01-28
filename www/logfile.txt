@@ -1,73 +1,273 @@
 
-06.05.2016 21:16 Programm RSS.py aus Webinterface gestartet
+26.01.2017 20:25 Programm RSS.py aus Webinterface gestartet
 ***********************************************************************
-06.05.2016 21:16 Programm Reifetab.py aus Webinterface gestartet
+28.01.2017 21:48 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 3
 ***********************************************************************
-06.05.2016  21:16: Kontrolle der Werte von Dryaging2 uebernommen
-****************************************************************************
-06.05.2016  21:16: Initialwerte fur Periode 1/6 vom Reifeprogramm Dryaging2:
-
-mod 	4
-hum 	85
-humdelay 	5
-humhyston 	5
-humhystoff 	2
-temp 	2
-temphyston 	1
-temphystoff 	0.5
-tempon 	900
-tempoff 	2700
-tempon1 	2160
-tempoff1 	1440
-days 	12
-Naechste Aenderung der Werte: 18.05.2016  21:16
-Programmende: 01.07.2016  21:16
-*****************************************************************************
-****************************************************************************
-06.05.2016  21:16: Veraenderungen fur Periode 2/6 vom Reifeprogramm Dryaging2:
-hum 	30
-temp 	4
-tempon1 	1080
-tempoff1 	2520
-days 	8
-Naechste Aenderung der Werte: 14.05.2016  21:16
-Programmende: 01.07.2016  21:16
-*****************************************************************************
-****************************************************************************
-06.05.2016  21:16: Veraenderungen fur Periode 3/6 vom Reifeprogramm Dryaging2:
-hum 	70
-tempon1 	2520
-tempoff1 	1080
-days 	8
-Naechste Aenderung der Werte: 14.05.2016  21:16
-Programmende: 01.07.2016  21:16
-*****************************************************************************
-****************************************************************************
-06.05.2016  21:16: Veraenderungen fur Periode 4/6 vom Reifeprogramm Dryaging2:
-hum 	60
-tempon1 	2880
-tempoff1 	720
-days 	8
-Naechste Aenderung der Werte: 14.05.2016  21:16
-Programmende: 01.07.2016  21:16
-*****************************************************************************
-****************************************************************************
-06.05.2016  21:16: Veraenderungen fur Periode 5/6 vom Reifeprogramm Dryaging2:
-hum 	45
-temp 	7
-tempon1 	2952
-tempoff1 	648
-days 	12
-Naechste Aenderung der Werte: 18.05.2016  21:16
-Programmende: 01.07.2016  21:16
-*****************************************************************************
-****************************************************************************
-06.05.2016  21:17: Veraenderungen fur Periode 6/6 vom Reifeprogramm Dryaging2:
-hum 	33
-tempon1 	3060
-tempoff1 	540
-days 	8
-Programmende: 01.07.2016  21:16
-Dryaging2 beendet die Kontrolle.
-Der Reifeschrank funktioniert weiter mit den letzten Werten.
-*****************************************************************************
+28.01.2017 21:48 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 2
+***********************************************************************
+28.01.2017 21:48 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 3
+***********************************************************************
+28.01.2017 21:49 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 1
+***********************************************************************
+28.01.2017 21:49 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 3
+***********************************************************************
+28.01.2017 21:49 Werte wurden manuell aus Webinterface geändert:
+mod 2
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 3
+***********************************************************************
+28.01.2017 21:49 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 3
+***********************************************************************
+28.01.2017 22:06 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 2
+***********************************************************************
+28.01.2017 22:06 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 3
+***********************************************************************
+28.01.2017 22:07 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 3
+***********************************************************************
+28.01.2017 22:07 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 2
+***********************************************************************
+28.01.2017 22:11 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 2
+***********************************************************************
+28.01.2017 22:11 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 3
+***********************************************************************
+28.01.2017 22:16 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 2
+***********************************************************************
+28.01.2017 22:16 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 1
+***********************************************************************
+28.01.2017 22:34 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 3
+***********************************************************************
+28.01.2017 22:34 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 1
+***********************************************************************
+28.01.2017 22:37 Werte wurden manuell aus Webinterface geändert:
+mod 3
+temp 2
+hum 80
+tempon 600
+tempoff 3000
+tempon1 1800
+tempoff1 19800
+temphyston 1
+temphystoff 0.5
+humhyston 5
+humhystoff 2
+humdelay 2
+sensortype 3
+***********************************************************************

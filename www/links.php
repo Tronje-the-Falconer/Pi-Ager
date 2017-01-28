@@ -137,13 +137,13 @@
             }elseif ($mod==4) {
                 $modus='Automatik mit Luftaustausch';
             }
-            # Sensortyp auswählbar machen
-            if ($sensortype==1) {
-                $sensortype='DHT11';
-            }elseif ($sensortype==2) {
-                $sensortype='DHT22';
-            }elseif ($sensortype==3) {
-                $sensortype='SHT75';
+            $sensorvalue=$array1['sensortype'];
+            if ($sensorvalue==1) {
+                $sensor='DHT11';
+            }elseif ($sensorvalue==2) {
+                $sensor='DHT22';
+            }elseif ($sensorvalue==3) {
+                $sensor='SHT75';
             }
             $tempsoll_float = $array1['temp'];
             $humsoll_float = $array1['hum'];
@@ -220,6 +220,7 @@
                     }
                 ?>
                 <u>Modus:</u>  <?=$modus?><br>
+                <u>Sensor:</u> <?=$sensor?><br>
                 <u>Temperatur:</u> <?=$tempsoll_float?>°C<br>
                 Ein <?=$temphyston?> Aus <?=$temphystoff?> <br>
                 <u>Luftfeuchtigkeit:</u> <?=$humsoll_float?>%<br>
