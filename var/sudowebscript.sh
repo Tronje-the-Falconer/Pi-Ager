@@ -4,7 +4,7 @@
 
 case "$1" in
     startrss) #Starten von Rss.py
-        python /opt/RSS1.0/Rss.py > /dev/null 2>/dev/null &
+        python /opt/RSS/Rss.py > /dev/null 2>/dev/null &
     ;;
     stoprss) #Stoppen von Rss.py
         pkill -f Rss.py
@@ -12,17 +12,8 @@ case "$1" in
     grrss) #Überprüfen von Rss.py
         ps ax | grep -v grep | grep Rss.py
     ;;
-    startsalami) #Starten von salami.py
-        python /opt/RSS1.0/salami.py > /dev/null 2>/dev/null &
-    ;;
-    stopsalami) #Stoppen von salami.py
-        pkill -f salami.py
-    ;;
-    grsalami) #Überprüfen von salami.py
-        ps ax | grep -v grep | grep salami.py
-    ;;
     startreifetab) #Starten von Reifetab.py
-        sudo python /home/pi/RSS1.0/Reifetab.py > /dev/null 2>/dev/null &
+        sudo python /home/pi/RSS/Reifetab.py > /dev/null 2>/dev/null &
     ;;
     stopstopreifetab) #Stoppen von Reifetab.py
         pkill -f Reifetab.py
