@@ -17,7 +17,7 @@
                     </tr>
                 </table>
                 <div class="thermometers">
-                    <div class="label">Temperatur (C)</div><div class="label">Luftfeuchtigkeit (%)</div>
+                    <div class="label">Temperatur (°C)</div><div class="label">Luftfeuchtigkeit (%)</div>
                     <div class="de">
                         <div class="den">
                             <div class="dene">
@@ -43,10 +43,10 @@
                 </div>
                 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
                 <h2>Temperaturverlauf</h2>
-                <img src="/pic/dht22_sensortemp-hourly.png" alt="Tagesverlauf Temperatur" />
+                <img src="/pic/rss_sensortemp-hourly.png" alt="Tagesverlauf Temperatur" />
                 <br/><br/>
                 <h2>Luftfeuchtigkeitsverlauf</h2>
-                <img src="/pic/dht22_sensorhum-hourly.png" alt="Tagesverlauf Luftfeuchtigkeit" />
+                <img src="/pic/rss_sensorhum-hourly.png" alt="Tagesverlauf Luftfeuchtigkeit" />
             </div>        
         </div>
         <div id="footer"> by Tommy_J  </div>

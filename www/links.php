@@ -235,7 +235,7 @@
                 $valtab = shell_exec("sudo /var/sudowebscript.sh grreifetab"); #Reifetab.py
                 if ($valtab==0){
                 $x = 0;
-                    foreach (glob("../../opt/RSS1.0/*.csv") as $filename)
+                    foreach (glob("../../opt/RSS/*.csv") as $filename)
                     {
                         $pdf[$x] = end(explode('/',$filename));
                         $info = pathinfo($pdf[$x]);
