@@ -13,7 +13,7 @@ case "$1" in
         ps ax | grep -v grep | grep Rss.py
     ;;
     startreifetab) #Starten von Reifetab.py
-        sudo python /home/pi/RSS/Reifetab.py > /dev/null 2>/dev/null &
+        python /opt/RSS/Reifetab.py > /dev/null 2>/dev/null &
     ;;
     stopstopreifetab) #Stoppen von Reifetab.py
         pkill -f Reifetab.py
