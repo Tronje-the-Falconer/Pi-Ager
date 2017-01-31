@@ -14,22 +14,32 @@ SETTINGS_FILE = PATH+'/settings.json';
 TABELS_FILE=PATH+'/tabels.json';
 filename=PATH+'/logfile.txt' ;
 
-def readSettings():
+def readTabels():
     global TABELS_FILE;
     s = None;
     with open(TABELS_FILE, 'r') as file:
         s = file.read();
     data = json.loads(s);
     return data
-
+    
+def readSettings():
+    global SETTINGS_FILE
+    s = None
+    with open(SETTINGS_FILE, 'r') as file:
+        s = file.read()
+    data = json.loads(s)
+    return data
+    
 def write_settings(mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay, sensortype):
     global SETTINGS_FILE;
 
-    s = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff, "humdelay":humdelay, "sensortype":sensortype 'date':int(time.time())});
+    s = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff, "humdelay":humdelay, "sensortype":sensortype, 'date':int(time.time())})
     with open(SETTINGS_FILE, 'w') as file:
         file.write(s);
 
-Reifetabs= readSettings();     
+settings = readSettings()
+sensortype = settings ['sensortype']
+Reifetabs= readTabels();
 tabelle=Reifetabs['Reifetab']
 datei =tabelle +'.csv';
 target = open(filename, 'a')
@@ -47,7 +57,7 @@ for row in reader:
         if rownum>0:
             if colnum==12:
                 dauer=dauer + int(col)
-            colnum+=1
+        colnum+=1
     rownum+=1
 totper=rownum-1
 totdauer=dauer
@@ -99,19 +109,19 @@ for row  in reader:
         colnum=0
         wert=0
         for col in row:
-        colnumname=header[colnum]
-        if colnumname=="days":
-            dauer=int(col)*t
-        if col<>"":
-            if colnumname=='temphystoff':
-                temphystoff=float(col)
-            else:
-                wert=float(col)          
-                exec('%s=%d') % (colnumname,wert)
-                print '%-12s:%s' % (colnumname,wert)
-                target = open(filename, 'a')
-                target.write("\n" +colnumname + " \t" +col)
-                target.close()
+            colnumname=header[colnum]
+            if colnumname=="days":
+                dauer=int(col)*t
+            if col<>"":
+                if colnumname=='temphystoff':
+                    temphystoff=float(col)
+                else:
+                    wert=float(col)          
+                    exec('%s=%d') % (colnumname,wert)
+                    print '%-12s:%s' % (colnumname,wert)
+                    target = open(filename, 'a')
+                    target.write("\n" +colnumname + " \t" +col)
+                    target.close()
             colnum+=1
     rownum+=1
 
@@ -124,10 +134,10 @@ for row  in reader:
             target = open(filename, 'a')
             target.write("\n" +"Naechste Aenderung der Werte: " + endtime.strftime('%d.%m.%Y  %H:%M'))
             target.close()
-            print "Programmende: " +finaltime.strftime('%d.%m.%Y  %H:%M')
-            target = open(filename, 'a')
-            target.write("\n" + "Programmende: " +finaltime.strftime('%d.%m.%Y  %H:%M'))
-            target.close()      
+        print "Programmende: " +finaltime.strftime('%d.%m.%Y  %H:%M')
+        target = open(filename, 'a')
+        target.write("\n" + "Programmende: " +finaltime.strftime('%d.%m.%Y  %H:%M'))
+        target.close()      
         if rownum==totper+1 :
             print "Nach Programmende funktioniert der Reifeschrank weiter mit den letzten Werten"
             target = open(filename, 'a')
@@ -139,6 +149,7 @@ for row  in reader:
         target.close()      
         if rownum<=totper:
             time.sleep(dauer)
+
 
 f.close()
 
