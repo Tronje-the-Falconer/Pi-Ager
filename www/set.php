@@ -47,6 +47,13 @@
                                 </select>
                             </p>    
                         </fieldset>
+                        <fieldset name="Group1">
+                            <form action="upload.php" method="post" enctype="multipart/form-data">
+                                csv auswählen:
+                                <input type="file" name="fileToUpload" id="fileToUpload">
+                                <input type="submit" value="Upload Image" name="submit">
+                            </form>
+                        </fieldset>
                         <br>
                         <fieldset name="Group2">
                             <legend class="auto-style1">Temperatur und Luftfeuchtigkeit</legend>
