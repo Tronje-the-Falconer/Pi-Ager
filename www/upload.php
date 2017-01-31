@@ -1,4 +1,7 @@
 <?php
+//http://www.w3schools.com/php/php_file_upload.asp
+//
+//php.ini anpassen file_uploads = On
 $target_dir = "/opt/svg/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
