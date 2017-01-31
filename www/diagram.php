@@ -17,7 +17,6 @@
                     <td class="auto-style1"><a href="index.php">Startseite</a>&nbsp;&nbsp;&nbsp;</td>
                     <td class="auto-style1"><a href="set.php">Einstellungen</a>&nbsp;&nbsp;&nbsp;</td>
                     <td class="auto-style1"><a href="diagram.php"><b>Diagramme</b></a>&nbsp;&nbsp;&nbsp;</td>
-                    <td class="auto-style1"><a href="log.php">Loginfos</a>&nbsp;&nbsp;&nbsp;</td>
                 </tr>
                 <br/>
                 <div id="Modus1" >
@@ -67,19 +66,19 @@
                     ?>
                     <div class="section">
                         <h2>Temperaturverlauf </h2>
-                        <img src="/pic/dht22_sensortemp-<?= $mode ?>.png" alt="Tagesverlauf" />
+                        <img src="/pic/rss_sensortemp-<?= $mode ?>.png" alt="Tagesverlauf" />
                             <h2>Luftfeuchtigkeitsverlauf</h2>
-                        <img src="/pic/dht22_sensorhum-<?= $mode ?>.png" alt="Wochenverlauf" />
+                        <img src="/pic/rss_sensorhum-<?= $mode ?>.png" alt="Wochenverlauf" />
                             <h2>Kühlung</h2>
-                        <img src="/pic/dht22_cool-<?= $mode ?>.png" alt="Wochenverlauf" />
+                        <img src="/pic/rss_cool-<?= $mode ?>.png" alt="Wochenverlauf" />
                             <h2>Heizung</h2>
-                        <img src="/pic/dht22_heat-<?= $mode ?>.png" alt="Wochenverlauf" />
+                        <img src="/pic/rss_heat-<?= $mode ?>.png" alt="Wochenverlauf" />
                             <h2>Befeuchtung</h2>
-                        <img src="/pic/dht22_lbf-<?= $mode ?>.png" alt="Wochenverlauf" />
+                        <img src="/pic/rss_lbf-<?= $mode ?>.png" alt="Wochenverlauf" />
                             <h2>Luftaustausch</h2>
-                        <img src="/pic/dht22_lat-<?= $mode ?>.png" alt="Wochenverlauf" />
+                        <img src="/pic/rss_lat-<?= $mode ?>.png" alt="Wochenverlauf" />
                             <h2>Luftumwälzung</h2>
-                        <img src="/pic/dht22_uml-<?= $mode ?>.png" alt="Wochenverlauf" />
+                        <img src="/pic/rss_uml-<?= $mode ?>.png" alt="Wochenverlauf" />
                     </div>
                 </div>
             </div>

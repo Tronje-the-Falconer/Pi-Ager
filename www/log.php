@@ -18,7 +18,6 @@
                         <td class="auto-style1"><a href="index.php">Startseite</a>&nbsp;&nbsp;&nbsp;</td>
                         <td class="auto-style1"><a href="set.php">Einstellungen</a>&nbsp;&nbsp;&nbsp;</td>
                         <td class="auto-style1"><a href="diagram.php">Diagramme</a>&nbsp;&nbsp;&nbsp;</td>
-                        <td class="auto-style1"><a href="log.php"><b>Loginfos</b></a>&nbsp;&nbsp;&nbsp;</td>
                     </tr>
                     <?php
                         $f = file("logfile.txt");

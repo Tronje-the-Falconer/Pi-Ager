@@ -1,8 +1,8 @@
 <?php
 //http://www.w3schools.com/php/php_file_upload.asp
-//
 //php.ini anpassen file_uploads = On
-$target_dir = "/opt/svg/";
+//
+$target_dir = "csv/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $uploadOk = 1;
 $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -24,7 +24,7 @@ if (file_exists($target_file)) {
 }
 // Check file size
 if ($_FILES["fileToUpload"]["size"] > 500000) {
-    echo "Die Datei ist zu gro√ü";
+    echo "Die Datei ist zu groﬂ";
     $uploadOk = 0;
 }
 // Allow certain file formats

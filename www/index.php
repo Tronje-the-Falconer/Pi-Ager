@@ -13,7 +13,6 @@
                         <td ><a href="index.php"><b>Startseite</b></a>&nbsp;&nbsp;&nbsp;</td>
                         <td ><a href="set.php">Einstellungen</a>&nbsp;&nbsp;&nbsp;</td>
                         <td ><a href="diagram.php">Diagramme</a>&nbsp;&nbsp;&nbsp;</td>
-                        <td ><a href="log.php">Loginfos</a>&nbsp;&nbsp;&nbsp;</td>
                     </tr>
                 </table>
                 <div class="thermometers">

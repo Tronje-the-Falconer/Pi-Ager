@@ -271,3 +271,22 @@ humhystoff 2
 humdelay 2
 sensortype 3
 ***********************************************************************
+31.01.2017  20:28: Kontrolle der Werte von Dryaging2 uebernommen
+****************************************************************************
+31.01.2017  20:28: Initialwerte fur Periode 1/6 vom Reifeprogramm Dryaging2:
+
+mod 	4
+hum 	85
+humdelay 	5
+humhyston 	5
+humhystoff 	2
+temp 	2
+temphyston 	1
+tempon 	1440
+tempoff 	2160
+tempon1 	900
+tempoff1 	12960
+days 	12
+Naechste Aenderung der Werte: 12.02.2017  20:28
+Programmende: 28.03.2017  20:28
+*****************************************************************************

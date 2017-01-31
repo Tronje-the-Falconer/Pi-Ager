@@ -18,7 +18,8 @@
                         <td class="auto-style1"><a href="set.php"><b>Einstellungen</b></a>&nbsp;&nbsp;&nbsp;</td>
                         <td class="auto-style1"><a href="diagram.php">Diagramme</a>&nbsp;&nbsp;&nbsp;</td>
                         <td class="auto-style1"><a href="log.php">Loginfos</a>&nbsp;&nbsp;&nbsp;</td>
-
+                        <td ><a href="restart.php">Reboot</a>&nbsp;&nbsp;&nbsp;</td>
+                        <td ><a href="shutdown.php">Shutdown</a>&nbsp;&nbsp;&nbsp;</td>
                     </tr>
                 </table>
             </div>
@@ -45,14 +46,7 @@
                                     <option value="2">DHT22</option>
                                     <option selected="" value="3">SHT75</option>
                                 </select>
-                            </p>    
-                        </fieldset>
-                        <fieldset name="Group1">
-                            <form action="upload.php" method="post" enctype="multipart/form-data">
-                                csv auswählen:
-                                <input type="file" name="fileToUpload" id="fileToUpload">
-                                <input type="submit" value="Upload Image" name="submit">
-                            </form>
+                            </p>                            
                         </fieldset>
                         <br>
                         <fieldset name="Group2">
@@ -161,7 +155,7 @@
                         </fieldset>
                         <br>
                         <fieldset name="Group1">
-                            <legend>Hysterese</legend>
+                            <legend class="auto-style1">Hysterese</legend>
                             <p>Temperatur</p>
                             Einschaltwert<span lang="de-lu"><input name="temphyston" type="text" size="1" value=<?=$temphyston?> > </span>°C
                             &nbsp;&nbsp;Auschaltwert<input name="temphystoff" type="text" size="1" value= <?=$temphystoff?>> °C
@@ -175,6 +169,18 @@
                         </fieldset>
                         <p><input type="submit" value="absenden" /></p>
                     </form>
+                    <br>
+                    <br>
+                    <fieldset name="Group1">
+                        <legend class="auto-style1">CSV Upload</legend>
+                        <p>
+                            <form action="upload.php" method="post" enctype="multipart/form-data">
+                                csv auswählen:
+                                <input type="file" name="fileToUpload" id="fileToUpload">
+                                <input type="submit" value="Upload csv" name="submit">
+                            </form>
+                        </p>
+                    </fieldset>
                     <br>
                     <fieldset name="Group1">
                         <span class="auto-style2">Modus</span><br>
