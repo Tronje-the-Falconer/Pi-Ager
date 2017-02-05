@@ -4,42 +4,57 @@
 
 case "$1" in
     startrss) #Starten von Rss.py
-        python /opt/RSS/Rss.py > /dev/null 2>/dev/null &
+        python /var/www/RSS/Rss.py > /dev/null 2>/dev/null &
     ;;
-    stoprss) #Stoppen von Rss.py
+    pkillrss) #Stoppen von Rss.py
         pkill -f Rss.py
     ;;
-    grrss) #Überprüfen von Rss.py
+    greprss) #Überprüfen von Rss.py
         ps ax | grep -v grep | grep Rss.py
     ;;
     startreifetab) #Starten von Reifetab.py
-        python /opt/RSS/Reifetab.py > /dev/null 2>/dev/null &
+        python /var/www/RSS/Reifetab.py > /dev/null 2>/dev/null &
     ;;
-    stopstopreifetab) #Stoppen von Reifetab.py
+    pkillreifetab) #Stoppen von Reifetab.py
         pkill -f Reifetab.py
     ;;
-    grreifetab) #Überprüfen von Reifetab.py
+    grepreifetab) #Überprüfen von Reifetab.py
         ps ax | grep -v grep | grep Reifetab.py
     ;;
-    r22) #Ansteuern von GPIO22 Kühlschrankkompressor
-        /usr/local/bin/gpio -g read 22
-    ;;
-    r27)#Ansteuern von GPIO27 Heizkabel
-        /usr/local/bin/gpio -g read 27
-    ;;
-    r18)#Ansteuern von GPIO18 Umluftventilator
+    read18)#Ansteuern von GPIO18 Umluftventilator
         /usr/local/bin/gpio -g read 18
     ;;
-    r23)#Ansteuern von GPIO23 Austauschlüfter
+    read22) #Ansteuern von GPIO22 Kühlschrankkompressor
+        /usr/local/bin/gpio -g read 22
+    ;;
+    read23)#Ansteuern von GPIO23 Austauschlüfter
         /usr/local/bin/gpio -g read 23
     ;;
-    r24)#Ansteuern von GPIO24 Luftbefeuchter
+    read24)#Ansteuern von GPIO24 Luftbefeuchter
         /usr/local/bin/gpio -g read 24
     ;;
-    reb) # reboot
+    read27)#Ansteuern von GPIO27 Heizkabel
+        /usr/local/bin/gpio -g read 27
+    ;;
+    write18)#Ansteuern von GPIO18 Umluftventilator
+        /usr/local/bin/gpio -g write 18 1
+    ;;
+    write22) #Ansteuern von GPIO22 Kühlschrankkompressor
+        /usr/local/bin/gpio -g write 22 1
+    ;;
+    write23)#Ansteuern von GPIO23 Austauschlüfter
+        /usr/local/bin/gpio -g write 23 1
+    ;;
+    write24)#Ansteuern von GPIO24 Luftbefeuchter
+        /usr/local/bin/gpio -g write 24 1
+    ;;
+    write27)#Ansteuern von GPIO27 Heizkabel
+        /usr/local/bin/gpio -g write 27 1
+    ;;
+    reboot) # reboot
         reboot
     ;;
-    shut) #Shutdown 
+    shutdown) #Shutdown 
         shutdown -h now
     ;;
     *) echo "ERROR: invalid parameter: $1 (for $0)"; exit 1 #Fehlerbehandlung
