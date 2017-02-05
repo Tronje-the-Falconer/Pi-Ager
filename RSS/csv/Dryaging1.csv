@@ -1,5 +1,0 @@
-mod,temp,hum,tempoff1,tempon1,tempoff,tempon,temphyston,temphystoff,humhyston,humhystoff,humdelay,days
-4,4,75,15120,900,2520,1080,1,0.5,5,2,5,12
-,5,65,16200,,2700,900,,,,,,8
-,6,55,17280,,2880,720,,,,,,16
-,7,40,18360,,3060,540,,,,,,8
