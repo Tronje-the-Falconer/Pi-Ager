@@ -1,0 +1,257 @@
+﻿/* @import url('http://fonts.googleapis.com/css?family=Dosis'); */
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+}
+
+body {
+	text-align: center;
+
+}
+
+/* Div für Statusboard, Settings, etc. */
+.hg_container {
+    background-color: #F3F3F3;
+    border-bottom: 2px solid #9E9E9E;
+    border-right: 2px solid #9E9E9E;
+    border-top: 2px solid #CFCFCF;
+    border-left: 2px solid #CFCFCF;
+    margin: 0 auto;
+    padding: 10px;
+    width: 473px;
+    margin-bottom: 20px;
+
+}
+
+@media only screen and (max-device-width: 537px) {
+	.hg_container { width: 373px; }
+
+}
+
+@media only screen and (max-device-width: 432px) {
+	.hg_container { width: 273px;}
+
+}
+
+/* Tabelle Schaltzustände */
+.schaltzustaende {
+    text-align: center;
+    width: 100%;
+}
+
+@media only screen and (max-device-width: 432px) {
+	.schaltzustaende { font-size: 10px;}
+
+}
+
+/* Hilfe-Texte in den Einstellungen */
+
+.help_p {
+   display: none;
+   text-align: left;
+   font-size: 11px;
+   color:  #555555;
+   padding: 10px;
+}
+
+/* Tabelle show_agingtab */
+.show_agingtab {
+    width: 100%;
+    border: 1px solid #89939E;
+    text-align: center;
+    font-size: 10px;
+    color:  #555555;
+    padding: 0px;
+    margin-top: 20px;
+}
+
+.show_agingcell {
+    border-bottom: 1px solid #89939E;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+/* Zellen Schaltzustände */
+.text_left  {
+    text-align: left;
+}
+
+.text_left_top  {
+    vertical-align: top;
+    text-align: left;
+}
+
+.text_left  {
+    text-align: left;
+}
+
+
+.td_png_icon{
+    text-align: center;
+    width: 110px;
+}
+
+.td_submitbutton {
+    text-align: right;
+    padding-left: 20px;
+}
+
+/* Zellen Manuelle Werte */
+.text_left_padding  {
+    text-align: left;
+    padding-left: 20px;
+}
+
+
+hr {
+   margin-top: 25px;
+   margin-bottom: 25px;
+   border: 0; height: 1px; background: #89939E;
+   background-image: linear-gradient(to right, #F3F3F3, #89939E, #F3F3F3);
+}
+
+/* PNG Schaltzustände */
+.transpng {
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+}
+
+div.thermometers {
+    margin: 20px auto;
+    width: 580px;
+    text-align: center;
+
+
+
+}
+
+div.th-anzeige-div {
+
+    width: 290px;
+    margin: 0px auto;
+    box-sizing: border-box;
+    float: left;
+
+}
+
+@media only screen and (max-device-width: 621px) {
+	div.th-anzeige-div { float: none; }
+    div.thermometers { width: 290px; }
+
+}
+
+
+div.thermometers .label {
+	position: relative;
+	float: left;
+	width: 280px;
+	text-align: center;
+	font-size: 24px;
+	font-family: 'Arial';
+	font-weight: bold;
+}
+
+.de .den, .de .dene, .de .denem, .de .deneme { position: absolute;  left: 50%; top: 50%; }
+.de {
+    position: relative;
+	float: left;
+	margin: 20px;
+    width: 240px;
+    height: 240px;
+    border-radius: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    background-color: transparent;
+}
+.den {
+    position: relative;
+    width: 210px;
+    height: 210px;
+    margin: -105px 0 0 -105px;
+    border-radius: 100%;
+    box-shadow: inset 0 2px 10px rgba(0, 0, 0, .5), 0 2px 20px rgba(255, 255, 255, 1);
+    background: #df3341;
+    background: -moz-linear-gradient(left, #df3341 0%, #d4f355 50%, #61c0ec 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#df3341), color-stop(50%,#d4f355), color-stop(100%,#61c0ec));
+    background: -webkit-linear-gradient(left, #df3341 0%,#d4f355 50%,#61c0ec 100%);
+    background: linear-gradient(to right, #df3341 0%,#d4f355 50%,#61c0ec 100%);
+    position:relative;
+}
+.dene {
+    width: 180px;
+    height: 180px;
+    margin: -90px 0 0 -90px;
+    border-radius: 100%;
+    box-shadow: inset 0 2px 2px rgba(255, 255, 255, .4), 0 3px 13px rgba(0, 0, 0, .85);
+    background: #f2f6f5;
+    background: -moz-linear-gradient(top, #f2f6f5 0%, #cbd5d6 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f2f6f5), color-stop(100%, #cbd5d6));
+    background: -webkit-linear-gradient(top, #f2f6f5 0%, #cbd5d6 100%);
+    background: -o-linear-gradient(top, #f2f6f5 0%, #cbd5d6 100%);
+}
+.denem {
+    width: 160px;
+    height: 160px;
+    margin: -80px 0 0 -80px;
+    border-radius: 100%;
+    background: #cbd5d6;
+    background: -moz-linear-gradient(top, #cbd5d6 0%, #f2f6f5 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cbd5d6), color-stop(100%, #f2f6f5));
+    background: -webkit-linear-gradient(top, #cbd5d6 0%, #f2f6f5 100%);
+}
+
+.deneme {
+    padding: 3px 10px 0 10px;
+    width: 120px;
+    height: 137px;
+    display: inline-block;
+    margin: -48px 0 0 -75px;
+    color: #555;
+    text-shadow: 1px 1px 1px white;
+    font-family: 'Arial';
+    font-size: 70px;
+    font-weight: 400;
+    text-align: center;
+}
+.deneme span { font-size: 32px; font-weight: 200; }
+.deneme strong { position: absolute; right: 10px; top: 15px; font-size: 25px; }
+
+.log {text-align: left;
+margin-left: 20px;
+}
