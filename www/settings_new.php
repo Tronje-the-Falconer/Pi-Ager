@@ -14,29 +14,31 @@
                                 <h2 class="art-postheader">Betrieb</h2>
                                 <!----------------------------------------------------------------------------------------Programme starten/stoppen-->
                                 <div class="hg_container">
-                                    <table style="width: 100%"><tr>
-                                    <?php
-                                            print '<form  method="post">';
-                                            // Prüft, ob Prozess RSS läuft
-                                            $valrs = shell_exec('sudo /var/sudowebscript.sh greprss.py');
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <?php
+                                                    print '<form  method="post">';
+                                                    // Prüft, ob Prozess RSS läuft
+                                                    $valrs = shell_exec('sudo /var/sudowebscript.sh greprss.py');
 
-                                            // Prüft, ob Prozess Reifetab läuft
-                                            $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab.py');
+                                                    // Prüft, ob Prozess Reifetab läuft
+                                                    $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab.py');
 
-                                            if($valrs == 0 and $valtab) {
-                                                shell_exec('sudo /var/sudowebscript.sh pkillreifetab.py');
-                                                $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab.py');
-                                            }
+                                                    if($valrs == 0 and $valtab) {
+                                                        shell_exec('sudo /var/sudowebscript.sh pkillreifetab.py');
+                                                        $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab.py');
+                                                    }
 
-                                            if ($valrs == 0){
-                                                print '<td><img src="images/betriebsart.png" alt="" style="padding: 10px;"></td><td><img src="images/led-off-green-20x20.png" alt="" style="padding-top: 10px;"></td><td style=""><button class="art-button" name="rss_start">Start Reifeschrank</button></td>';
-                                            }
-                                            else {
-                                                print '<td><img src="images/betriebsart.png" alt="" style="padding: 10px;"></td><td><img src="images/led-on-green-20x20.png" alt="" style="padding-top: 10px;"></td><td><button class="art-button" name="rss_reifetab_stop" onclick="return confirm("Reifeschrank stoppen?");">Stop Reifeschrank</button></td>';
-                                            }
-                                            print ' </form>';
-                                    ?>
-                                    </tr></table>
+                                                    if ($valrs == 0){
+                                                        print '<td><img src="images/betriebsart.png" alt="" style="padding: 10px;"></td><td><img src="images/led-off-green-20x20.png" alt="" style="padding-top: 10px;"></td><td style=""><button class="art-button" name="rss_start">Start Reifeschrank</button></td>';
+                                                    }
+                                                    else {
+                                                        print '<td><img src="images/betriebsart.png" alt="" style="padding: 10px;"></td><td><img src="images/led-on-green-20x20.png" alt="" style="padding-top: 10px;"></td><td><button class="art-button" name="rss_reifetab_stop" onclick="return confirm("Reifeschrank stoppen?");">Stop Reifeschrank</button></td>';
+                                                    }
+                                                    print ' </form>';
+                                            ?>
+                                        </tr>
+                                    </table>
                                     <hr>
                                     <!----------------------------------------------------------------------------------------Reifetabelle auswählen-->
 
@@ -76,10 +78,10 @@
                                                 <?php
                                                     print '<form  method="post">';
                                                     if ($valtab == 0){
-                                                        print '<button class="art-button" name="rss_reifetab_start">Start Tabelle</button> ';
+                                                            print '<button class="art-button" name="rss_reifetab_start">Start Tabelle</button> ';
                                                     }
                                                     else {
-                                                        print '<button class="art-button" name="reifetab_stop" onclick="return confirm("Reifeprogramm stoppen?");">Stop Tabelle<button>';
+                                                        print '<button class="art-button" name="reifetab_stop" onclick="return confirm('Reifeprogramm stoppen?');">Stop Tabelle</button>';
                                                     }
                                                     print ' </form>';
                                                 ?>
@@ -103,9 +105,9 @@
                                         </tr>
                                         <?php
                                             // Gewählte CSV-Datei auslesen und als Array anlegen
-                                            $CSV_FILE='RSS/csv/'.$wunschreife.'.csv';
+                                            $CSV_FILE="RSS/csv/".$wunschreife.".csv";
                                             $row = 1;
-                                            if (($handle = fopen($CSV_FILE, "r")) !== FALSE) {
+                                            if (($handle = fopen($CSV_FILE, 'r')) !== FALSE) {
                                                 while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
                                                     $num = count($data);
                                                     echo '<tr>';
@@ -131,7 +133,6 @@
                                     </table>
                                 </div>
 
-
                                 <h2 class="art-postheader">Manuelle Werte</h2>
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <form method="post">
@@ -140,11 +141,11 @@
                                             <tr>
                                                 <td class="td_png_icon"><h3>Betriebsart</h3><img src="images/betriebsart.png" alt=""><button class="art-button" type="button" onclick="help_betriebsart_blockFunction()">Hilfe</button></td>
                                                 <td style=" text-align: left; padding-left: 20px;">
-                                                <input type="radio" name="mod" value="1" <?= $checked_1 ?>/><label> Kühlen mit Befeuchtung</label><br>
-                                                <input type="radio" name="mod" value="2" <?= $checked_2 ?>/><label> Heizen mit Befeuchtung</label><br>
-                                                <input type="radio" name="mod" value="3" <?= $checked_3 ?>/><label> Automatik mit Befeuchtung</label><br>
-                                                <input type="radio" name="mod" value="4" <?= $checked_4 ?>/><label> Automatik mit Be- und Entfeuchtung</label><br><br>
-                                                <b>Umluft- und Ablufttimer</b> können unabhängig vom gewählten Modus genutzt werden.
+                                                    <input type="radio" name="mod" value="1" <?= $checked_1 ?>/><label> Kühlen mit Befeuchtung</label><br>
+                                                    <input type="radio" name="mod" value="2" <?= $checked_2 ?>/><label> Heizen mit Befeuchtung</label><br>
+                                                    <input type="radio" name="mod" value="3" <?= $checked_3 ?>/><label> Automatik mit Befeuchtung</label><br>
+                                                    <input type="radio" name="mod" value="4" <?= $checked_4 ?>/><label> Automatik mit Be- und Entfeuchtung</label><br><br>
+                                                    <b>Umluft- und Ablufttimer</b> können unabhängig vom gewählten Modus genutzt werden.
                                                 </td>
                                             </tr>
                                         </table>
@@ -168,8 +169,7 @@
                                             <br><br>
                                             <button class="art-button" type="button" onclick="help_betriebsart_noneFunction()">Schließen</button>
                                         </p>
-                                        
-                                        <hr>
+                                        <hr><h2 class="art-postheader">Sensortyp</h2>
                                 <!----------------------------------------------------------------------------------------Sensortyp-->
                                         <table style="width: 100%;">
                                             <tr>
@@ -177,10 +177,10 @@
                                                     <button class="art-button" type="button" onclick="help_sensortyp_blockFunction()">Hilfe</button>
                                                 </td>
                                                 <td style=" text-align: left; padding-left: 20px;">
-                                                    <input type="radio" name="sensortype" value="1" <?= $checked_sens_1 ?>/><label> DHT11</label><br>
+                                                    <!--<input type="radio" name="sensortype" value="1" <?= $checked_sens_1 ?>/><label> DHT11</label><br>
                                                     <input type="radio" name="sensortype" value="2" <?= $checked_sens_2 ?>/><label> DHT22</label><br>
                                                     <input type="radio" name="sensortype" value="3" <?= $checked_sens_3 ?>/><label> SHT75</label><br>
-                                                    <br>
+                                                    <br>-->
                                                 </td>
                                             </tr>
                                         </table>

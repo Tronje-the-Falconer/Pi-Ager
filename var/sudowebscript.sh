@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # sudo web script allowing user www-data to run commands with root privilegs
+# shell_exec('sudo /var/sudowebscript.sh PARAMETER')
 
 case "$1" in
     startrss) #Starten von Rss.py

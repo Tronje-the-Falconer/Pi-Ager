@@ -5,22 +5,22 @@
     error_reporting( E_ALL );
 ?>
 <?php
-    $monitor_active = "";
-    $diagrams_active = "";
-    $settings_active = "";
-    $logs_active = "";
+    $monitor_active = '';
+    $diagrams_active = '';
+    $settings_active = '';
+    $logs_active = '';
 
-    if ($_SERVER['PHP_SELF'] == "/index.php") {
+    if ($_SERVER['PHP_SELF'] == '/index.php') {
         $monitor_active = "active";
     }
-    if ($_SERVER['PHP_SELF'] == "/diagrams.php") {
+    if ($_SERVER['PHP_SELF'] == '/diagrams.php') {
         $diagrams_active = "active";
     }
-    if ($_SERVER['PHP_SELF'] == "/settings.php") {
-        $settings_active = "active";
+    if ($_SERVER['PHP_SELF'] == '/settings.php') {
+        $settings_active = 'active';
     }
-    if ($_SERVER['PHP_SELF'] == "/logs.php") {
-        $logs_active = "active";
+    if ($_SERVER['PHP_SELF'] == '/logs.php') {
+        $logs_active = 'active';
     }
 ?>
 <!DOCTYPE HTML>

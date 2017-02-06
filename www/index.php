@@ -22,12 +22,12 @@
                                                                             $timestamp_unix = time();
                                                                             $time_diff = $timestamp_unix - $data_timestamp;
                                                                             if ($time_diff >= 120) {
-                                                                                $temp_ausgabe = "<div style=\"float: left; padding-left: 8px;\" id=\"\"></div>--<span>.<div style=\"float: right; padding-top: 50px;\" id=\"\">-</div></span><strong>&deg;</strong>";
-                                                                                $humy_ausgabe = "<div style=\"float: left; padding-left: 8px;\" id=\"\"></div>--<span>.<div style=\"float: right; padding-top: 50px;\" id=\"\">-</div></span><strong>&#37</strong> ";
+                                                                                $temp_ausgabe = '<div style="float: left; padding-left: 8px;" id=""></div>--<span>.<div style="float: right; padding-top: 50px;" id="">-</div></span><strong>&deg;</strong>';
+                                                                                $humy_ausgabe = '<div style="float: left; padding-left: 8px;" id=""></div>--<span>.<div style="float: right; padding-top: 50px;" id="">-</div></span><strong>&#37</strong> ';
                                                                             }
                                                                             else {
-                                                                                $temp_ausgabe = "<div style=\"float: left; padding-left: 8px;\" id=\"current_json_temperatur_0\"></div><span>.<div style=\"float: right; padding-top: 37px;\" id=\"current_json_temperatur_1\"></div></span><strong>&deg;</strong>";
-                                                                                $humy_ausgabe = "<div style=\"float: left; padding-left: 8px;\" id=\"current_json_luftfeuchtigkeit_0\"></div><span>.<div style=\"float: right; padding-top: 37px;\" id=\"current_json_luftfeuchtigkeit_1\"></div></span><strong>&#37</strong> ";
+                                                                                $temp_ausgabe = '<div style="float: left; padding-left: 8px;" id="current_json_temperatur_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_temperatur_1"></div></span><strong>&deg;</strong>';
+                                                                                $humy_ausgabe = '<div style="float: left; padding-left: 8px;" id="current_json_luftfeuchtigkeit_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_luftfeuchtigkeit_1"></div></span><strong>&#37</strong> ';
                                                                             }
                                                                         ?>
                                                                         <?=$temp_ausgabe?>
@@ -62,10 +62,10 @@
                                 </div>
                                 <!------------------------------ ----------------------------------------------------------T/rLF Diagramm-->
                                 <h2>Temperaturverlauf</h2>
-                                <img src="/pic/dht22_sensortemp-hourly.png" alt="Stundenverlauf Temperatur" />
+                                <img src="/pic/rss_sensortemp-hourly.png" alt="Stundenverlauf Temperatur" />
                                 <br/><br/>
                                 <h2>Luftfeuchtigkeitsverlauf</h2>
-                                <img src="/pic/dht22_sensorhum-hourly.png" alt="Stundenverlauf Luftfeuchtigkeit" />  <br><br>
+                                <img src="/pic/rss_sensorhum-hourly.png" alt="Stundenverlauf Luftfeuchtigkeit" />  <br><br>
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <h2>Statusboard</h2>
                                 <div class="hg_container">
@@ -76,10 +76,10 @@
                                                     // Prüft, ob Prozess RSS läuft
                                                     $valrs = shell_exec("ps ax | grep -v grep | grep Rss.py");
                                                     if ($valrs == 0){
-                                                        print "<img src=\"images/led-off-green-20x20.png\" alt=\"\" style=\"padding-top: 10px;\">";
+                                                        print '<img src="images/led-off-green-20x20.png" alt="" style="padding-top: 10px;">';
                                                     }
                                                     else {
-                                                        print "<img src=\"images/led-on-green-20x20.png\" alt=\"\" style=\"padding-top: 10px;\">";
+                                                        print '<img src="images/led-on-green-20x20.png" alt="" style="padding-top: 10px;">';
                                                     }
                                                 ?>
                                                 <br><img src="images/betriebsart.png" alt="" style="padding: 10px;">
@@ -90,10 +90,10 @@
                                                     // Prüft, ob Prozess Reifetab läuft
                                                     $valtab = shell_exec("ps ax | grep -v grep | grep Reifetab.py");
                                                     if ($valtab == 0){
-                                                        print "<img src=\"images/led-off-green-20x20.png\" alt=\"\" style=\"padding-top: 10px;\">";
+                                                        print '<img src="images/led-off-green-20x20.png" alt="" style="padding-top: 10px;">';
                                                     }
                                                     else {
-                                                        print "<img src=\"images/led-on-green-20x20.png\" alt=\"\" style=\"padding-top: 10px;\">";
+                                                        print '<img src="images/led-on-green-20x20.png" alt="" style="padding-top: 10px;">';
                                                     }
                                                 ?>
                                                 <br><img src="images/reifung.png" alt="" style="padding: 10px;">
@@ -115,38 +115,38 @@
                                         <tr>
                                             <?php
                                                 if ($mod==1){
-                                                    echo "   <td ><img src=\"images/kuehlung.png\" alt=\"\"></td>
-                                                        <td ><img src=\"".$cool."\" title=\"PIN_COOL 22[15] -> IN 1 (GPIO 3)\"></td>
-                                                        <td class=\"text_left\">KÜHLUNG</td>
-                                                        <td >".$temp_float." °C</td>
-                                                        <td >".$tempsoll_float." °C</td>
-                                                        <td >".($tempsoll_float+$temphyston)." °C</td>
-                                                        <td >".($tempsoll_float+$temphystoff)." °C</td>";
+                                                    echo '   <td ><img src="images/kuehlung.png" alt=""></td>
+                                                        <td ><img src="'.$cool.'" title="PIN_COOL 22[15] -> IN 1 (GPIO 3)"></td>
+                                                        <td class="text_left">KÜHLUNG</td>
+                                                        <td >'.$temp_float.' °C</td>
+                                                        <td >'.$tempsoll_float.' °C</td>
+                                                        <td >'.($tempsoll_float+$temphyston).' °C</td>
+                                                        <td >'.($tempsoll_float+$temphystoff).' °C</td>';
                                                 }
                                                 if ($mod==2){
-                                                    print "   <td ><img src=\"images/heizung.png\" alt=\"\"></td>
-                                                        <td ><img src=\"".$cool."\" title=\"PIN_HEATER 27[13] -> IN 2 (GPIO 2)\"></td>
-                                                        <td class=\"text_left\">HEIZUNG</td>
-                                                        <td >".$temp_float." °C</td>
-                                                        <td >".$tempsoll_float." °C</td>
-                                                        <td >".($tempsoll_float-$temphyston)." °C</td>
-                                                        <td >".($tempsoll_float-$temphystoff)." °C</td>";
+                                                    print '   <td ><img src="images/heizung.png" alt=""></td>
+                                                        <td ><img src="'.$cool.'" title="PIN_HEATER 27[13] -> IN 2 (GPIO 2)"></td>
+                                                        <td class="text_left">HEIZUNG</td>
+                                                        <td >'.$temp_float.' °C</td>
+                                                        <td >'.$tempsoll_float.' °C</td>
+                                                        <td >'.($tempsoll_float-$temphyston).' °C</td>
+                                                        <td >'.($tempsoll_float-$temphystoff).' °C</td>';
                                                 }
                                                 if ($mod==3 || $mod==4){
-                                                    print "   <td ><img src=\"images/heiz_kuehl.png\" alt=\"\"></td>
-                                                        <td ><img src=\"".$cool."\" title=\"PIN_HEATER 27[13] -> IN 2 (GPIO 2)\"></td>
-                                                        <td class=\"text_left\">HEIZ-/KÜHLUNG</td>
-                                                        <td >".$temp_float." °C</td>
-                                                        <td >".$tempsoll_float." °C</td>
-                                                        <td >".($tempsoll_float-$temphyston)." °C</td>
-                                                        <td >".($tempsoll_float-$temphystoff)." °C</td>";
+                                                    print '   <td ><img src="images/heiz_kuehl.png" alt=""></td>
+                                                        <td ><img src="'.$cool.'" title="PIN_HEATER 27[13] -> IN 2 (GPIO 2)"></td>
+                                                        <td class="text_left">HEIZ-/KÜHLUNG</td>
+                                                        <td >'.$temp_float.' °C</td>
+                                                        <td >'.$tempsoll_float.' °C</td>
+                                                        <td >'.($tempsoll_float-$temphyston).' °C</td>
+                                                        <td >'.($tempsoll_float-$temphystoff).' °C</td>';
                                                 }
                                             ?>
                                         </tr>
                                         <tr>
                                             <td ><img src="images/befeuchtung.png" alt=""></td>
                                             <td ><img src="<?= $lbf ?>" title="PIN_HUM 24[18] -> IN 3 (GPIO 5)"></td>
-                                            <td class="text_left"><? if($mod == 4) {echo "BE-/ENTFEUCHTUNG";} else {echo "BEFEUCHTUNG";}?></td>
+                                            <td class="text_left"><? if($mod == 4) {echo 'BE-/ENTFEUCHTUNG';} else {echo 'BEFEUCHTUNG';}?></td>
                                             <td ><?=$hum_float?>%</td>
                                             <td ><?=$humsoll_float?>%</td>
                                             <td ><?=($humsoll_float-$humhyston)?>%</td>
@@ -164,7 +164,7 @@
                                             <td ><b>Dauer</b></td>
                                         </tr>
                                         <tr>
-                                            <td ><img <? if ($tempoff == 0.00 || $tempon == 0) {echo "class=\"transpng\"";} ?> src="images/luftumwaelzung.png" alt=""></td>
+                                            <td ><img <? if ($tempoff == 0.00 || $tempon == 0) {echo 'class="transpng"';} ?> src="images/luftumwaelzung.png" alt=""></td>
                                             <td ><img src="<?= $uml ?>" title="PIN_FAN 18[12] -> IN 4 (GPIO 1)"></td>
                                             <td class="text_left">UMLUFT / TIMER</td>
                                             <td ><?=$tempoff?> Min</td>
@@ -172,7 +172,7 @@
                                             <td ><?=$tempon?> Min</td>
                                         </tr>
                                         <tr>
-                                            <td ><img <? if ($tempoff1 == 0.00 || $tempon1 == 0) {echo "class=\"transpng\"";} ?> src="images/luftaustausch.png" alt=""></td>
+                                            <td ><img <? if ($tempoff1 == 0.00 || $tempon1 == 0) {echo 'class="transpng"';} ?> src="images/luftaustausch.png" alt=""></td>
                                             <td ><img src="<?= $lat ?>" title="PIN_FAN1 23[16] -> IN 5 (GPIO 4)"></td>
                                             <td class="text_left">ABLUFT / TIMER</td>
                                             <td ><?=$tempoff1?> Min</td>

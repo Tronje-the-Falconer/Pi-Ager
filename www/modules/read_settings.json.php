@@ -1,41 +1,58 @@
 <?php
     # settings.json auslesen um sollwerte wieder zu geben
-    $SET = file_get_contents("settings.json");
+    $SET = file_get_contents('settings.json');
     $array1 = json_decode($SET, true);
     $mod=$array1['mod'];
-
     if ($mod==1) {
         $modus='- Kühlen<br>- Befeuchten';
-        $checked_1 = "checked=\"checked\"";
+        $checked_1 = 'checked="checked"';
     }
     else {
-        $checked_1 = "";
+        $checked_1 = '';
     }
-
     if ($mod==2) {
         $modus='- Heizen<br>- Befeuchten';
-        $checked_2 = "checked=\"checked\"";
+        $checked_2 = 'checked="checked"';
     }
     else {
-        $checked_2 = "";
+        $checked_2 = '';
     }
-
     if ($mod==3) {
         $modus='- Kühlen<br>- Heizen<br>- Befeuchten';
-        $checked_3 = "checked=\"checked\"";
+        $checked_3 = 'checked="checked"';
     }
     else {
-        $checked_3 = "";
+        $checked_3 = '';
     }
-
     if ($mod==4) {
         $modus='- Kühlen<br>- Heizen<br>- Befeuchten<br>- Umluft<br>- Abluft';
-        $checked_4 = "checked=\"checked\"";
+        $checked_4 = 'checked="checked"';
     }
     else {
-        $checked_4 = "";
+        $checked_4 = '';
     }
-
+    $sensortype=$array1['sensortype'];
+    if ($sensortype==1) {
+        $sensorname='DHT11';
+        $checked_sens_1 = 'checked="checked"';
+    }
+    else {
+        $checked_sens_1 = '';
+    }
+    if ($sensortype==2) {
+        $sensorname='DHT22';
+        $checked_sens_2 = 'checked="checked"';
+    }
+    else {
+        $checked_sens_2 = '';
+    }
+    if ($sensortype==3) {
+        $sensorname='SHT75';
+        $checked_sens_3 = 'checked="checked"';
+    }
+    else {
+        $checked_sens_3 = '';
+    }
     $tempsoll_float = $array1['temp'];
     $humsoll_float = $array1['hum'];
     $humdelay = $array1['humdelay'];

@@ -10,28 +10,28 @@
                                                 <td>
                                                     <?php
                                                         if (is_file($logfile)) {
-                                                            echo "Dateiprüfung: ".$logfile."<br />";
-                                                            echo "Dateigröße: ".filesize($logfile)." bytes<br />";
+                                                            echo 'Dateiprüfung: '.$logfile.'<br />';
+                                                            echo 'Dateigröße: '.filesize($logfile).' bytes<br />';
                                                             $mtime = filemtime($logfile);
-                                                            print "Zuletzt geändert am: ";
-                                                            print date("d M Y, H:i:s", $mtime);
-                                                            print " Uhr<br />";
-                                                            print "<img src=\"images/yes_small.png\"> Datei ist vorhanden<br />";
+                                                            print 'Zuletzt geändert am: ';
+                                                            print date('d M Y, H:i:s', $mtime);
+                                                            print ' Uhr<br />';
+                                                            print '<img src="images/yes_small.png"> Datei ist vorhanden<br />';
                                                         }
                                                         else {
-                                                            print "<img src=\"images/no_small.png\"> Datei ist nicht vorhanden<br />";
+                                                            print '<img src="images/no_small.png"> Datei ist nicht vorhanden<br />';
                                                         }
                                                         if (is_readable($logfile)) {
-                                                            print "<img src=\"images/yes_small.png\"> Datei ist lesbar<br />";
+                                                            print '<img src="images/yes_small.png"> Datei ist lesbar<br />';
                                                         }
                                                         else {
-                                                            print "<img src=\"images/no_small.png\"> Datei ist nicht lesbar<br />";
+                                                            print '<img src="images/no_small.png"> Datei ist nicht lesbar<br />';
                                                         }
                                                         if (is_writable($logfile)) {
-                                                            print "<img src=\"images/yes_small.png\"> Datei ist schreibbar<br />";
+                                                            print '<img src="images/yes_small.png"> Datei ist schreibbar<br />';
                                                         }
                                                         else {
-                                                            print "<img src=\"images/no_small.png\"> Datei ist nicht schreibbar<br />";
+                                                            print '<img src="images/no_small.png"> Datei ist nicht schreibbar<br />';
                                                         }
                                                     ?>
                                                 </td>
@@ -43,9 +43,9 @@
                                     <hr>
                                     <!----------------------------------------------------------------------------------------Logeinträge-->
                                     <?php
-                                        $f = file("logfile.txt");
+                                        $f = file('logfile.txt');
                                         foreach($f as $file) {
-                                            echo "<br />". $file;
+                                            echo '<br />'. $file;
                                         }
                                     ?>
                                 </div>

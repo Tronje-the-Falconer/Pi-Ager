@@ -44,7 +44,7 @@ sht = Sht(21, 20)
 VERBOSE = True          # Dokumentiert interne Vorgänge wortreich
 
 #-----------------------------------------------------------------------------------------RRD-Tool konfiguration
-dbname = 'dht22'            # Name fuer Grafiken etc
+dbname = 'rss'            # Name fuer Grafiken etc
 filename = dbname +'.rrd'   # Dateinamen mit Endung
 steps = 10                  # Zeitintervall fuer die Messung in Sekunden
 i = 0
@@ -167,8 +167,8 @@ def plotten(a):#, b, c, d):
             "--alt-autoscale",
             "--slope-mode",
             "DEF:%s=%s:%s_%s:AVERAGE" %(a, filename, dbname, a),
-            "DEF:durch=dht22.rrd:dht22_sensortemp:AVERAGE",
-            "DEF:durchhum=dht22.rrd:dht22_sensorhum:AVERAGE",
+            "DEF:durch=rss.rrd:rss_sensortemp:AVERAGE",
+            "DEF:durchhum=rss.rrd:rss_sensorhum:AVERAGE",
             #"DEF:%s=%s:%s_%s:AVERAGE" %(c, filename, dbname, c),
             #"DEF:%s=%s:%s_%s:AVERAGE" %(d, filename, dbname, d),
             "GPRINT:durch:AVERAGE:Temperatur\: %3.2lf C",
@@ -178,27 +178,27 @@ def plotten(a):#, b, c, d):
             #"LINE1:%s#FF0000:%s_%s" %(c, dbname, c),
             #"LINE1:%s#000000:%s_%s" %(d, dbname, d))
 
-# def set_sensortype():
-    # global sensor
-    # global sensorname
-    # global sensorvalue
-    # settings = readSettings()
-    # sensortype = settings ['sensortype']
-    ##Sensor should be set to Adafruit_DHT.DHT11,
-    ##Adafruit_DHT22, or Adafruit_AM2302.
-    ##sensor = Adafruit_DHT.AM2302
-    # if sensortype == 1: #DHT11
-        # sensor = Adafruit_DHT.DHT11
-        # sensorname = 'DHT11'
-        # sensorvalue = 1
-    # elif sensortype == 2: #DHT22
-        # sensor = Adafruit_DHT.DHT22
-        # sensorname = 'DHT22'
-        # sensorvalue = 2
-    # elif sensortype == 3: #SHT75 sensor=22
-        # sensor = Adafruit_DHT.AM2302
-        # sensorname = 'SHT75'
-        # sensorvalue = 3
+def set_sensortype():
+    global sensor
+    global sensorname
+    global sensorvalue
+    settings = readSettings()
+    sensortype = settings ['sensortype']
+    #Sensor should be set to Adafruit_DHT.DHT11,
+    #Adafruit_DHT22, or Adafruit_AM2302.
+    #sensor = Adafruit_DHT.AM2302
+    if sensortype == 1: #DHT11
+        sensor = Adafruit_DHT.DHT11
+        sensorname = 'DHT11'
+        sensorvalue = 1
+    elif sensortype == 2: #DHT22
+        sensor = Adafruit_DHT.DHT22
+        sensorname = 'DHT22'
+        sensorvalue = 2
+    elif sensortype == 3: #SHT75 sensor=22
+        sensor = Adafruit_DHT.AM2302
+        sensorname = 'SHT75'
+        sensorvalue = 3
 #-----------------------------------------------------------------------------------------Definition der Variablen
 def doMainLoop():
     global value
@@ -228,36 +228,35 @@ def doMainLoop():
 
 #-----------------------------------------------------------------------------------------Prüfen Sensor, dann Settings einlesen
     while True:
-        # set_sensortype()
-        # if sensorname == 'DHT11': #DHT11
-            # print sensorname
-            # sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
-            # atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
-            # btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
-            # dew_point_temp = (atp * sensortemp1) / (btp + sensortemp1) + log(sensorhum1 / 100)
-            # dew_point = (btp * dew_point_temp) / (atp - dew_point_temp)
-            # dew_point = round (dew_point,1)
-        # elif sensorname == 'DHT22': #DHT22
-            # print sensorname
-            # sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
-            # atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
-            # btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
-            # dew_point_temp = (atp * sensortemp1) / (btp + sensortemp1) + log(sensorhum1 / 100)
-            # dew_point = (btp * dew_point_temp) / (atp - dew_point_temp)
-            # dew_point = round (dew_point,1)
-        # elif sensorname == 'SHT75': #SHT75
-            # sensortemp1 = sht.read_t()
-            # sensorhum1 = sht.read_rh()
-            # dew_point = sht.read_dew_point(sensortemp1, sensorhum1)
-            # dew_point = round (dew_point,1)
-        sensortemp1 = sht.read_t()
-        sensorhum1 = sht.read_rh()
-        dew_point = sht.read_dew_point(sensortemp1, sensorhum1)
-        dew_point = round (dew_point,1)
+        set_sensortype()
+        if sensorname == 'DHT11': #DHT11
+            print sensorname
+            sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
+            atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
+            btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
+            dew_point_temp = (atp * sensortemp1) / (btp + sensortemp1) + log(sensorhum1 / 100)
+            dew_point = (btp * dew_point_temp) / (atp - dew_point_temp)
+            dew_point = round (dew_point,1)
+        elif sensorname == 'DHT22': #DHT22
+            print sensorname
+            sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
+            atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
+            btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
+            dew_point_temp = (atp * sensortemp1) / (btp + sensortemp1) + log(sensorhum1 / 100)
+            dew_point = (btp * dew_point_temp) / (atp - dew_point_temp)
+            dew_point = round (dew_point,1)
+        elif sensorname == 'SHT75': #SHT75
+            sensortemp1 = sht.read_t()
+            sensorhum1 = sht.read_rh()
+            dew_point = sht.read_dew_point(sensortemp1, sensorhum1)
+            dew_point = round (dew_point,1)
+        # sensortemp1 = sht.read_t()
+        # sensorhum1 = sht.read_rh()
+        # dew_point = sht.read_dew_point(sensortemp1, sensorhum1)
+        # dew_point = round (dew_point,1)
         if sensorhum1 is not None and sensortemp1 is not None:
             sensortemp = round (sensortemp1,2)
             sensorhum = round (sensorhum1,2)
-            print 'in if'
         else:
             print ('Failed to get reading. Try again!')
         try:
@@ -277,9 +276,8 @@ def doMainLoop():
         humhyston = settings['humhyston']
         humhystoff = settings['humhystoff']
         humdelay = settings ['humdelay']
-        # sensortype = settings ['sensortype']
+        sensortype = settings ['sensortype']
         humdelay = humdelay*10
-        print'variablen gefüllt'
         # An dieser Stelle sind alle settings eingelesen, Ausgabe auf Konsole
         lastSettingsUpdate = settings['date']
         os.system('clear') # Clears the terminal
@@ -295,7 +293,9 @@ def doMainLoop():
         print ('Eingestellte Soll-Luftfeuchtigkeit: ')+str (hum)+('%')
         print ('Gemessene Ist-Luftfeuchtigkeit :')+str (sensorhum)+('%')
         print ('-------------------------------------------------------')
-        #print ('Eingestellter Sensor:')+str (sensorname)
+        print ('Eingestellter Sensor: ')+str (sensorname)
+        print ('Wert in settings.json: ')+str (sensortype)
+        print ('-------------------------------------------------------')
         write_current(sensortemp, sensorhum)
 
         # Durch den folgenden Timer läuft der Ventilator in den vorgegebenen Intervallen zusätzlich zur generellen Umluft bei aktivem Heizen, Kühlen oder Befeuchten
@@ -480,13 +480,13 @@ except IOError:
     ret = rrdtool.create("%s" %(filename),
         "--step","%s" %(steps),
         "--start",'0',
-        "DS:dht22_sensortemp:GAUGE:2000:U:U",
-        "DS:dht22_sensorhum:GAUGE:2000:U:U",
-        "DS:dht22_lat:GAUGE:2000:U:U",
-        "DS:dht22_uml:GAUGE:2000:U:U",
-        "DS:dht22_heat:GAUGE:2000:U:U",
-        "DS:dht22_cool:GAUGE:2000:U:U",
-        "DS:dht22_lbf:GAUGE:2000:U:U",
+        "DS:rss_sensortemp:GAUGE:2000:U:U",
+        "DS:rss_sensorhum:GAUGE:2000:U:U",
+        "DS:rss_lat:GAUGE:2000:U:U",
+        "DS:rss_uml:GAUGE:2000:U:U",
+        "DS:rss_heat:GAUGE:2000:U:U",
+        "DS:rss_cool:GAUGE:2000:U:U",
+        "DS:rss_lbf:GAUGE:2000:U:U",
         "RRA:AVERAGE:0.5:1:2160",
         "RRA:AVERAGE:0.5:5:2016",
         "RRA:AVERAGE:0.5:15:2880",

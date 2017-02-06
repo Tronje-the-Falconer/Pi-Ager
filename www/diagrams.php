@@ -7,7 +7,7 @@
                                     if (isset ($_GET['mode'])) {
                                         $mode = $_GET['mode'];
                                     }else{
-                                        $mode = "hourly";
+                                        $mode = 'hourly';
                                     }
 
                                 ?>
@@ -30,19 +30,19 @@
                                 </div>
                                 <div>
                                     <h2>Temperaturverlauf </h2>
-                                    <img src="/pic/dht22_sensortemp-<?= $mode ?>.png" alt="<?= $mode ?>" />
+                                    <img src="/pic/rss_sensortemp-<?= $mode ?>.png" alt="<?= $mode ?>" />
                                     <h2>Luftfeuchtigkeitsverlauf</h2>
-                                    <img src="/pic/dht22_sensorhum-<?= $mode ?>.png" alt="<?= $mode ?>" />
+                                    <img src="/pic/rss_sensorhum-<?= $mode ?>.png" alt="<?= $mode ?>" />
                                     <h2>Kühlung</h2>
-                                    <img src="/pic/dht22_cool-<?= $mode ?>.png" alt="<?= $mode ?>" />
+                                    <img src="/pic/rss_cool-<?= $mode ?>.png" alt="<?= $mode ?>" />
                                     <h2>Heizung</h2>
-                                    <img src="/pic/dht22_heat-<?= $mode ?>.png" alt="<?= $mode ?>" />
+                                    <img src="/pic/rss_heat-<?= $mode ?>.png" alt="<?= $mode ?>" />
                                     <h2>Befeuchtung</h2>
-                                    <img src="/pic/dht22_lbf-<?= $mode ?>.png" alt="<?= $mode ?>" />
+                                    <img src="/pic/rss_lbf-<?= $mode ?>.png" alt="<?= $mode ?>" />
                                     <h2>Luftaustausch</h2>
-                                    <img src="/pic/dht22_lat-<?= $mode ?>.png" alt="<?= $mode ?>" />
+                                    <img src="/pic/rss_lat-<?= $mode ?>.png" alt="<?= $mode ?>" />
                                     <h2>Luftumwälzung</h2>
-                                    <img src="/pic/dht22_uml-<?= $mode ?>.png" alt="<?= $mode ?>" />
+                                    <img src="/pic/rss_uml-<?= $mode ?>.png" alt="<?= $mode ?>" />
                                 </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->
                             </div>
