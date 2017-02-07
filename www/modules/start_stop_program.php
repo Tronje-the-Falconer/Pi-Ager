@@ -5,7 +5,7 @@
         if($valrs == 0) {
             shell_exec('sudo /var/sudowebscript.sh startrss');
             $f=fopen('logfile.txt','w');
-            fwrite($f, '\n'.date('d.m.Y H:i').' Reifeschrank gestartet');
+            fwrite($f, "\n".date('d.m.Y H:i')." Reifeschrank gestartet");
             fclose($f);
         }
     }
@@ -14,14 +14,14 @@
         if($valrs == 0) {
             shell_exec('sudo /var/sudowebscript.sh startreifetab');
             $f=fopen('logfile.txt','w');
-            fwrite($f, '\n'.date('d.m.Y H:i').' Reifeschrank gestartet');
+            fwrite($f, "\n".date('d.m.Y H:i')." Reifeschrank gestartet");
             fclose($f);
         }
         $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab'); #Reifetab.py
         if($valtab == 0) {
             shell_exec('sudo /var/sudowebscript.sh startreifetab');
             $f=fopen('logfile.txt','a');
-            fwrite($f, '\n'.date('d.m.Y H:i').' Reifeprogramm gestartet');
+            fwrite($f, "\n".date('d.m.Y H:i')." Reifeprogramm gestartet");
             fclose($f);
         }
     }
@@ -34,13 +34,13 @@
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write18'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write23'));
         $f=fopen('logfile.txt','a');
-        fwrite($f, '\n'.date('d.m.Y H:i').' Reifeschrank gestoppt');
+        fwrite($f, "\n".date('d.m.Y H:i')." Reifeschrank gestoppt");
         fclose($f);
     }
     if (isset($_POST['reifetab_stop'])){
         shell_exec('sudo /var/sudowebscript.sh pkillreifetab');
         $f=fopen('logfile.txt','a');
-        fwrite($f,'\n'. date('d.m.Y H:i').' Reifeprogramm gestoppt');
+        fwrite($f,"\n". date('d.m.Y H:i')." Reifeprogramm gestoppt");
         fclose($f);
      }
 ?>
