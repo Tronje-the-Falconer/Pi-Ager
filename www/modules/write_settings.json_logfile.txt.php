@@ -71,12 +71,15 @@
                 }
                 # Sensor
                 if ($array['sensortype'] == 1) {
+                    $sensortype = 1;
                     $sensorname='DHT11';
                 }
                 if ($array['sensortype'] == 2) {
+                    $sensortype = 2;
                     $sensorname='DHT22';
                 }
                 if ($array['sensortype'] == 3) {
+                    $sensortype = 3;
                     $sensorname='SHT75';
                 }
                 
@@ -88,51 +91,51 @@
                 $ausschaltfeuchte = $array['hum'] - $array['humhystoff'];
 
                 $f=fopen('logfile.txt','a');
-                fwrite($f, '\n'.'***********************************************************************');
-                fwrite($f, '\n'.'Betriebsart: '.$betriebsart);
-                fwrite($f, '\n'.date('d.m.Y H:i').' Werte wurden manuell ge&auml;ndert.');
-                fwrite($f, '\n');
+                fwrite($f, "\n"."***********************************************************************");
+                fwrite($f, "\n"."Betriebsart: ".$betriebsart);
+                fwrite($f, "\n".date('d.m.Y H:i')." Werte wurden manuell ge&auml;ndert.");
+                fwrite($f, "\n");
 
                 if ($array['mod'] == 1 || $array['mod'] == 2)  {
-                    fwrite($f, '\n'.'Soll-Temperatur: '.$array['temp'].'&deg;C');
-                    fwrite($f, '\n'.'Ausschalt-Temperatur: '.$array['temphystoff'].'&deg;C (also bei '.$ausschalttemperatur.'&deg;C)');
-                    fwrite($f, '\n'.'Einschalt-Temperatur: '.$array['temphyston'].'&deg;C (also bei '.$einschalttemperatur.'&deg;C)');
+                    fwrite($f, "\n"."Soll-Temperatur: ".$array['temp']."&deg;C");
+                    fwrite($f, "\n"."Ausschalt-Temperatur: ".$array['temphystoff']."&deg;C (also bei ".$ausschalttemperatur."&deg;C)");
+                    fwrite($f, "\n"."Einschalt-Temperatur: ".$array['temphyston']."&deg;C (also bei ".$einschalttemperatur."&deg;C)");
                 }
 
                 if ($array['mod'] == 3 || $array['mod'] == 4)  {
-                    fwrite($f, '\n'.'Soll-Temperatur: '.$array['temp'].'&deg;C');
-                    fwrite($f, '\n'.'Einschaltwert Temperatur Heizung: '.$array['temphyston'].'&deg;C (also bei '.$einschalttemperatur_h.'&deg;C)');
-                    fwrite($f, '\n'.'Ausschaltwert Temperatur Heizung: '.$array['temphystoff'].'&deg;C (also bei '.$ausschalttemperatur_h.'&deg;C)');
-                    fwrite($f, '\n'.'Einschaltwert Temperatur Kühlung: '.$array['temphyston'].'&deg;C (also bei '.$einschalttemperatur_k.'&deg;C)');
-                    fwrite($f, '\n'.'Ausschaltwert Temperatur Kühlung: '.$array['temphystoff'].'&deg;C (also bei '.$ausschalttemperatur_k.'&deg;C)');
+                    fwrite($f, "\n"."Soll-Temperatur: ".$array['temp']."&deg;C");
+                    fwrite($f, "\n"."Einschaltwert Temperatur Heizung: ".$array['temphyston']."&deg;C (also bei ".$einschalttemperatur_h."&deg;C)");
+                    fwrite($f, "\n"."Ausschaltwert Temperatur Heizung: ".$array['temphystoff']."&deg;C (also bei ".$ausschalttemperatur_h."&deg;C)");
+                    fwrite($f, "\n"."Einschaltwert Temperatur Kühlung: ".$array['temphyston']."&deg;C (also bei ".$einschalttemperatur_k."&deg;C)");
+                    fwrite($f, "\n"."Ausschaltwert Temperatur Kühlung: ".$array['temphystoff']."&deg;C (also bei ".$ausschalttemperatur_k."&deg;C)");
                 }
 
-                fwrite($f, '\n');
+                fwrite($f, "\n");
 
-                fwrite($f, '\n'.'Soll-Feuchtigkeit: '.$array['hum'].'% rLF');
-                fwrite($f, '\n'.'Einschaltwert Feuchte: '.$array['humhyston'].'% rLF (also bei '.$einschaltfeuchte.'% rLF)');
-                fwrite($f, '\n'.'Ausschaltwert Feuchte: '.$array['humhystoff'].'% rLF (also bei '.$ausschaltfeuchte.'% rLF)');
-                fwrite($f, '\n'.'Befeuchter-Schaltverz&ouml;gerung '.$array['humdelay'].'min');
-
-
-                fwrite($f, '\n');
-                fwrite($f, '\n'.'Umluftperiode: '.$umluftperiode.'min');
-                fwrite($f, '\n'.'Umluftdauer: '.$umluftdauer.'min');
+                fwrite($f, "\n"."Soll-Feuchtigkeit: ".$array['hum']."% rLF");
+                fwrite($f, "\n"."Einschaltwert Feuchte: ".$array['humhyston']."% rLF (also bei ".$einschaltfeuchte."% rLF)");
+                fwrite($f, "\n"."Ausschaltwert Feuchte: ".$array['humhystoff']."% rLF (also bei ".$ausschaltfeuchte."% rLF)");
+                fwrite($f, "\n"."Befeuchter-Schaltverz&ouml;gerung ".$array['humdelay']."min");
 
 
-                fwrite($f, '\n');
-                fwrite($f, '\n'.'Abluftperiode '.$luftaustauschperiode.'min');
-                fwrite($f, '\n'.'Abluftdauer: '.$luftaustauschdauer.'min');
+                fwrite($f, "\n");
+                fwrite($f, "\n"."Umluftperiode: ".$umluftperiode."min");
+                fwrite($f, "\n"."Umluftdauer: ".$umluftdauer."min");
 
 
-                fwrite($f, '\n'.'***********************************************************************');
+                fwrite($f, "\n");
+                fwrite($f, "\n"."Abluftperiode ".$luftaustauschperiode."min");
+                fwrite($f, "\n"."Abluftdauer: ".$luftaustauschdauer."min");
+
+
+                fwrite($f, "\n"."***********************************************************************");
                 
-                fwrite($f, '\n');
-                fwrite($f, '\n'.'Sensortype '.$sensortype);
-                fwrite($f, '\n'.'Sensorname: '.$sensorname);
+                fwrite($f, "\n");
+                fwrite($f, "\n"."Sensortype ".$sensortype);
+                fwrite($f, "\n"."Sensorname: ".$sensorname);
 
 
-                fwrite($f, '\n'.'***********************************************************************');
+                fwrite($f, "\n"."***********************************************************************");
                 fclose($f);
 
 
