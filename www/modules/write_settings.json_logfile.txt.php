@@ -42,29 +42,44 @@
                 file_put_contents('settings.json', $jsoninput);
 
                 # Formatierung für die Lesbarkeit im Logfile:
-                if ($array['mod'] == 1) {$betriebsart='Kuehlen mit Befeuchtung';
+                # Modus
+                if ($array['mod'] == 1) {
+                    $betriebsart='Kuehlen mit Befeuchtung';
                     $einschalttemperatur = $array['temp'] + $array['temphyston'];
                     $ausschalttemperatur = $array['temp'] + $array['temphystoff'];
                 }
 
-                if ($array['mod'] == 2) {$betriebsart='Heizen mit Befeuchtung';
+                if ($array['mod'] == 2) {
+                    $betriebsart='Heizen mit Befeuchtung';
                     $einschalttemperatur = $array['temp'] - $array['temphyston'];
                     $ausschalttemperatur = $array['temp'] - $array['temphystoff'];
                 }
-                if ($array['mod'] == 3) {$betriebsart='Automatik mit Befeuchtung';
+                if ($array['mod'] == 3) {
+                    $betriebsart='Automatik mit Befeuchtung';
                     $einschalttemperatur_k = $array['temp'] + $array['temphyston'];
                     $ausschalttemperatur_k = $array['temp'] + $array['temphystoff'];
                     $einschalttemperatur_h = $array['temp'] - $array['temphyston'];
                     $ausschalttemperatur_h = $array['temp'] - $array['temphystoff'];
                 }
 
-                if ($array['mod'] == 4) {$betriebsart='Automatik mit Be- und Entfeuchtung';
+                if ($array['mod'] == 4) {
+                    $betriebsart='Automatik mit Be- und Entfeuchtung';
                     $einschalttemperatur_k = $array['temp'] + $array['temphyston'];
                     $ausschalttemperatur_k = $array['temp'] + $array['temphystoff'];
                     $einschalttemperatur_h = $array['temp'] - $array['temphyston'];
                     $ausschalttemperatur_h = $array['temp'] - $array['temphystoff'];
                 }
-
+                # Sensor
+                if ($array['sensortype'] == 1) {
+                    $sensorname='DHT11';
+                }
+                if ($array['sensortype'] == 2) {
+                    $sensorname='DHT22';
+                }
+                if ($array['sensortype'] == 3) {
+                    $sensorname='SHT75';
+                }
+                
                 $umluftdauer = $array['tempon']/60;
                 $umluftperiode = $array['tempoff']/60;
                 $luftaustauschdauer = $array['tempon1']/60;
