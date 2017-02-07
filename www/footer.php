@@ -8,7 +8,9 @@
                         <div class="art-layout-cell layout-item-0" style="width: 50%">
                             <?PHP
                               include   'modules/read_pirevision.php';  //liest die Raspberry Revision aus und generiert den Model Namen
-                              print '<p>Running Engine<br>' + str ($piversion)+ '</p>'
+                              print '<p>Running Engine <br>';
+                              print $piversion;
+                              print '</p>';
                             ?>
                         </div>
                         <div class="art-layout-cell layout-item-0" style="width: 50%">
