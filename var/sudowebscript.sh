@@ -59,7 +59,7 @@ case "$1" in
         shutdown -h now
     ;;
     getpirevision) # auslesen der Revision vom pi um auf Model zu kommen
-        cat /proc/cpuinfo | grep 'Revision' | awk '{print $3}' | sed 's/^1000//''
+        cat /proc/cpuinfo | grep 'Revision' | awk '{print $3}' | sed 's/^1000//'
     ;;
     *) echo "ERROR: invalid parameter: $1 (for $0)"; exit 1 #Fehlerbehandlung
     ;;
