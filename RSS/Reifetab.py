@@ -15,7 +15,7 @@ global Reifetab
 
 #-----------------------------------------------------------------------------------------Pfade zu den Dateien
 PATH = '/var/www'
-PATH_CSV = '/var/www/RSS/csv/'
+PATH_CSV = '/var/www/csv/'
 SETTINGS_FILE = PATH+'/settings.json'
 TABELS_FILE=PATH+'/tabels.json'
 filename=PATH+'/logfile.txt' 
