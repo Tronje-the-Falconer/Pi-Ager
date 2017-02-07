@@ -74,7 +74,7 @@
                                             <td>
                                                 <?php
                                                     // Prüft, ob Prozess RSS läuft
-                                                    $valrs = shell_exec("ps ax | grep -v grep | grep Rss.py");
+                                                    $valrs = shell_exec('sudo /var/sudowebscript.sh greprss');
                                                     if ($valrs == 0){
                                                         print '<img src="images/led-off-green-20x20.png" alt="" style="padding-top: 10px;">';
                                                     }
@@ -88,7 +88,7 @@
                                             <td>
                                                 <?php
                                                     // Prüft, ob Prozess Reifetab läuft
-                                                    $valtab = shell_exec("ps ax | grep -v grep | grep Reifetab.py");
+                                                    $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab');
                                                     if ($valtab == 0){
                                                         print '<img src="images/led-off-green-20x20.png" alt="" style="padding-top: 10px;">';
                                                     }

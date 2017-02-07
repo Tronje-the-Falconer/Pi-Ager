@@ -18,14 +18,14 @@
                                     <?php
                                             print '<form  method="post">';
                                             // Prüft, ob Prozess RSS läuft
-                                            $valrs = shell_exec('sudo /var/sudowebscript.sh greprss.py');
+                                            $valrs = shell_exec('sudo /var/sudowebscript.sh greprss');
 
                                             // Prüft, ob Prozess Reifetab läuft
-                                            $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab.py');
+                                            $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab');
 
                                             if($valrs == 0 and $valtab) {
-                                                shell_exec('sudo /var/sudowebscript.sh pkillreifetab.py');
-                                                $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab.py');
+                                                shell_exec('sudo /var/sudowebscript.sh pkillreifetab');
+                                                $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab');
                                             }
 
                                             if ($valrs == 0){
