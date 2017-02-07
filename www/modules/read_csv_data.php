@@ -5,7 +5,7 @@
     $tabname = $array_new['Reifetab'];
 
     // Gewählte CSV-Datei auslesen und als Array anlegen
-    //$CSV_FILE='/RSS/Dryaging2.csv';
+    //$CSV_FILE='/csv/Dryaging2.csv';
 
     echo $CSV_FILE;
 
