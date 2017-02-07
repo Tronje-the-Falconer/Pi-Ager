@@ -5,7 +5,7 @@
 
 case "$1" in
     startrss) #Starten von Rss.py
-        python /var/www/RSS/Rss.py > /dev/null 2>/dev/null &
+        python /opt/RSS/Rss.py > /dev/null 2>/dev/null &
     ;;
     pkillrss) #Stoppen von Rss.py
         pkill -f Rss.py
@@ -14,7 +14,7 @@ case "$1" in
         ps ax | grep -v grep | grep Rss.py
     ;;
     startreifetab) #Starten von Reifetab.py
-        python /var/www/RSS/Reifetab.py > /dev/null 2>/dev/null &
+        python /opt/RSS/Reifetab.py > /dev/null 2>/dev/null &
     ;;
     pkillreifetab) #Stoppen von Reifetab.py
         pkill -f Reifetab.py
