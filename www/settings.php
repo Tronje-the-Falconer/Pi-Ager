@@ -103,7 +103,7 @@
                                         </tr>
                                         <?php
                                             // Gewählte CSV-Datei auslesen und als Array anlegen
-                                            $CSV_FILE='RSS/csv/'.$wunschreife.'.csv';
+                                            $CSV_FILE='csv/'.$wunschreife.'.csv';
                                             $row = 1;
                                             if (($handle = fopen($CSV_FILE, "r")) !== FALSE) {
                                                 while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
