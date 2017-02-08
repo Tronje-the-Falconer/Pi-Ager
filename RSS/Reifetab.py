@@ -54,9 +54,10 @@ tabelle=Reifetabs['Reifetab']          # Variable tabelle = Name der Reifetabell
 datei =tabelle +'.csv'                 # Variable datei = kompletter Dateiname
 target = open(filename, 'a')           # Variable target = logfile.txt öffnen
 target.write("\n"+ "***********************************************************************")
-target.write ("\n"' Die Klima-Werte werden nun vom automatischen Programm "'+tabelle +'" gesteuert')   # Schreibt in die logfile.txt
+target.write ("\n"' Die Klima-Werte werden nun vom automatischen Programm "'+ tabelle +'" gesteuert')   # Schreibt in die logfile.txt
 target.close()
-
+print 'Die Klima-Werte werden nun vom automatischen Programm "'+ tabelle +'" gesteuert' # Schreibt in die Konsole
+print
 #-----------------------------------------------------------------------------------------Lesen der gesammten Programm-Dauer und der Anzahl Perioden in der gewaehlten CSV-Datei
 f=open(PATH_CSV+datei,"rb")               # Variable f = csv-Datei oeffnen
 reader=csv.reader(f)                      # reader-Objekt liest csv ein
@@ -143,7 +144,7 @@ for row  in reader:                                         # Durchlaeuft die ei
             if col !="":                                     # Wenn col nicht "" ist...
                 wert=float(col)                      # formatiere col zu "float" und setze es in "wert" ein
                 exec('%s=%d') % (colnumname,wert)
-                print '%-12s:%s' % (colnumname,wert) # Schreibt in die kONSOLE
+                print '%-12s:%s' % (colnumname,wert) # Schreibt in die Konsole
 
                 # Aufbereitung für die Lesbarkeit im Logfile
                 if colnumname=='mod':
