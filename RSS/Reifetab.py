@@ -33,21 +33,21 @@ def readTabels():
 def readSettings():
     global SETTINGS_FILE
     s = None
-    with open(TABELS_FILE, 'r') as file:
+    with open(SETTINGS_FILE, 'r') as file:
         s = file.read()
     data = json.loads(s)
     return data
 
 #-----------------------------------------------------------------------------------------Function Schreiben der settings.json
-def write_settings(mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay):
+def write_settings(mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay, sensortype):
     global SETTINGS_FILE    
 
-    s = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff, "humdelay":humdelay, 'date':int(time.time())})
+    s = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff, "humdelay":humdelay, 'date':int(time.time()), 'sensortype':sensortype})
     with open(SETTINGS_FILE, 'w') as file:
         file.write(s)
-
-#settings = readSettings()
-#sensortype = settings ['sensortype']
+        
+settings = readSettings()
+sensortype = settings ['sensortype']
 #-----------------------------------------------------------------------------------------Lesen der tabels.json, schreiben in logfile.txt
 Reifetabs= readTabels()                # Function-Aufruf
 tabelle=Reifetabs['Reifetab']          # Variable tabelle = Name der Reifetabelle
@@ -176,6 +176,16 @@ for row  in reader:                                         # Durchlaeuft die ei
                     timerabluftdauer="\n" 'Timer Abluftdauer:' " \t" + str(col_form) + "min"
                 if colnumname=='days':
                     tage="\n" 'Dauer:' " \t" +col + " Tage"
+                # Sensor
+                if sensortype == 1 :
+                    sensortype = 1
+                    sensorname='DHT11'
+                if sensortype == 2 :
+                    sensortype = 2
+                    sensorname='DHT22'
+                if sensortype == 3 :
+                    sensortype = 3
+                    sensorname='SHT75'
             colnum+=1                                     # Zaehler fuer die Anzahl der Spalten
         rownum+=1                                            # Zaehler fuer die Anzahl der Reihen
         if rownum>1:
@@ -197,10 +207,13 @@ for row  in reader:                                         # Durchlaeuft die ei
             target.write(timerabluftdauer)
             target.write("\n")
             target.write(tage)
+            target.write("\n")
+            target.write(sensortype)
+            target.write(sensorname)
             target.write("\n" '---------------------------------------')
             target.close()
 #-----------------------------------------------------------------------------------------Function write_settings() Schreiben der Werte in die settings.json
-    write_settings (mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay)
+    write_settings (mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay, sensortype)
 
     if rownum>1 :
         endtime=datetime.datetime.now()+timedelta(days=dauer/t)
