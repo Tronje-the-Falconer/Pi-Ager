@@ -13,17 +13,17 @@
     if ($_SERVER['PHP_SELF'] == '/index.php') {
         $monitor_active = "active";
     }
-    if ($_SERVER['PHP_SELF'] == '/diagrams.php') {
+    elseif ($_SERVER['PHP_SELF'] == '/diagrams.php') {
         $diagrams_active = "active";
     }
-    if ($_SERVER['PHP_SELF'] == '/settings.php') {
+    elseif ($_SERVER['PHP_SELF'] == '/settings.php') {
         $settings_active = 'active';
     }
-    if ($_SERVER['PHP_SELF'] == '/logs.php') {
+    elseif ($_SERVER['PHP_SELF'] == '/logs.php') {
         $logs_active = 'active';
     }
-    if ($_SERVER['PHP_SELF'] == '/changelog.php') {
-        $logs_active = 'active';
+    elseif ($_SERVER['PHP_SELF'] == '/changelog.php') {
+        $changelogs_active = 'active';
     }
     # Auslesen der Version aus dem Changelog
     # Lese 14 Zeichen, beginnend mit dem 21. Zeichen
@@ -66,10 +66,10 @@
                             <li><a href="logs.php" class="<?=$logs_active ?>">Logs</a></li>
                             <?php
                                 if ($_SERVER['PHP_SELF'] == '/changelog.php') {
-                                    print '<li><a href="logs.php" class="';
-                                    print <?=$logs_active ?>;
+                                    print '<li><a href="changelog.php" class="';
+                                    print $changelog_active;
                                     print '">Changelog</a></li>';
-                                } 
+                                }
                             ?>
                         </ul>
                     </div>
