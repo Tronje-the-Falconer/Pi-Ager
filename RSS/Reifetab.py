@@ -40,14 +40,24 @@ def readSettings():
 
 #-----------------------------------------------------------------------------------------Function Schreiben der settings.json
 def write_settings(mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay, sensortype):
-    global SETTINGS_FILE    
+    global SETTINGS_FILE
 
     s = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff, "humdelay":humdelay, 'date':int(time.time()), 'sensortype':sensortype})
     with open(SETTINGS_FILE, 'w') as file:
         file.write(s)
-        
+
+#----------------------- Sensor auslesen und variablen füllen
 settings = readSettings()
 sensortype = settings ['sensortype']
+if sensortype == 1 :
+    sensortype_txt = '1'
+    sensorname='DHT11'
+if sensortype == 2 :
+    sensortype_txt = '2'
+    sensorname='DHT22'
+if sensortype == 3 :
+    sensortype_txt = '3'
+    sensorname='SHT75'
 #-----------------------------------------------------------------------------------------Lesen der tabels.json, schreiben in logfile.txt
 Reifetabs= readTabels()                # Function-Aufruf
 tabelle=Reifetabs['Reifetab']          # Variable tabelle = Name der Reifetabelle
@@ -57,10 +67,11 @@ target.write("\n"+ "************************************************************
 target.write ("\n"' Die Klima-Werte werden nun vom automatischen Programm "'+ tabelle +'" gesteuert')   # Schreibt in die logfile.txt
 target.close()
 print 'Die Klima-Werte werden nun vom automatischen Programm "'+ tabelle +'" gesteuert' # Schreibt in die Konsole
-print
 #-----------------------------------------------------------------------------------------Lesen der gesammten Programm-Dauer und der Anzahl Perioden in der gewaehlten CSV-Datei
 f=open(PATH_CSV+datei,"rb")               # Variable f = csv-Datei oeffnen
-reader=csv.reader(f)                      # reader-Objekt liest csv ein
+
+reader=csv.reader(f)   
+# reader-Objekt liest csv ein
 rownum=0                                  # Setzt Variable rownum auf 0
 dauer=0                                   # Setzt Variable dauer auf 0
 
@@ -105,10 +116,9 @@ timerumluftdauer = ""
 timerabluftperiode = ""
 timerabluftdauer = ""
 tage = ""
-
 #-----------------------------------------------------------------------------------------Schreiben der Werte in die Konsole und das Logfile
-t=86400  #Anzahl der Sek. in einem Tag
-#t=1  #zum testen ein Tag vergeht in einer Sekunde
+# t=86400  #Anzahl der Sek. in einem Tag
+t=10  #zum testen ein Tag vergeht in einer Sekunde
 rownum=0                                                    # Setzt Variable rownum auf 0
 for row  in reader:                                         # Durchlaeuft die einzelnen Reihen
     colnum=0                                                # Setzt Variable colnum auf 0
@@ -177,42 +187,33 @@ for row  in reader:                                         # Durchlaeuft die ei
                     timerabluftdauer="\n" 'Timer Abluftdauer:' " \t" + str(col_form) + "min"
                 if colnumname=='days':
                     tage="\n" 'Dauer:' " \t" +col + " Tage"
-                # Sensor
-                if sensortype == 1 :
-                    sensortype = 1
-                    sensorname='DHT11'
-                if sensortype == 2 :
-                    sensortype = 2
-                    sensorname='DHT22'
-                if sensortype == 3 :
-                    sensortype = 3
-                    sensorname='SHT75'
-            colnum+=1                                     # Zaehler fuer die Anzahl der Spalten
-        rownum+=1                                            # Zaehler fuer die Anzahl der Reihen
-        if rownum>1:
-            target = open(filename, 'a')                     # Schreibt in die logfile.txt
-            target.write(betriebsart)
-            target.write(solltemperatur)
-            target.write(einschaltwerttemperatur)
-            target.write(ausschaltwerttemperatur)
-            target.write("\n")
-            target.write(sollfeuchtigkeit)
-            target.write(einschaltwertfeuchte)
-            target.write(ausschaltwertfeuchte)
-            target.write(befeuchtungsverzoegerung)
-            target.write("\n")
-            target.write(timerumluftperiode)
-            target.write(timerumluftdauer)
-            target.write("\n")
-            target.write(timerabluftperiode)
-            target.write(timerabluftdauer)
-            target.write("\n")
-            target.write(tage)
-            target.write("\n")
-            target.write(sensortype)
-            target.write(sensorname)
-            target.write("\n" '---------------------------------------')
-            target.close()
+    colnum+=1                                     # Zaehler fuer die Anzahl der Spalten
+    rownum+=1                                            # Zaehler fuer die Anzahl der Reihen
+    # Sensortyp für Log vorbereiten
+    sensorlog = 'Sensortyp: ' + sensorname + ' Value: ' + str(sensortype)
+    if rownum>1:
+        target = open(filename, 'a')                     # Schreibt in die logfile.txt
+        target.write(betriebsart)
+        target.write(solltemperatur)
+        target.write(einschaltwerttemperatur)
+        target.write(ausschaltwerttemperatur)
+        target.write("\n")
+        target.write(sollfeuchtigkeit)
+        target.write(einschaltwertfeuchte)
+        target.write(ausschaltwertfeuchte)
+        target.write(befeuchtungsverzoegerung)
+        target.write("\n")
+        target.write(timerumluftperiode)
+        target.write(timerumluftdauer)
+        target.write("\n")
+        target.write(timerabluftperiode)
+        target.write(timerabluftdauer)
+        target.write("\n")
+        target.write(tage)
+        target.write("\n")
+        target.write(sensorlog)
+        target.write("\n" '---------------------------------------')
+        target.close()
 #-----------------------------------------------------------------------------------------Function write_settings() Schreiben der Werte in die settings.json
     write_settings (mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay, sensortype)
 
