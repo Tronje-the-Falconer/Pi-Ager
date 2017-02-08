@@ -1,10 +1,25 @@
-Version 2.0
+Version 2.01
 
-- neues Frontend
-- Logfile
-- 
+- Frontend
+    - neues Frontend
+    - Logfile
+    - Changelog
+    - Sensor auswählbar
+    - wöchentliches Diagramm
+    - RaspberryPi Version in Footer
+    - Reboot und Shutdown des Raspberry's  über Settings-Seite
+    - Kühlung und Heizung sowie Be/Entfeuchtung im Statusboard visuell getrennt
+    - erlaubte Min-Max-Wertgrenzen werden bei den Einstellungen angezeigt
 
-------------------------------------------
+- Backend
+    - Umstellung von DHT22.rdd auf rss.rrd für den Plot
+    - Die Pythondateien liegen in /opt/RSS/
+    - csv-Dateien liegen in /var/www/csv/
+    - Verwendung von /var/sudowebscript.sh für Shell-Befehle
+    - Content-Reload alle 60 Sekunden bei Monitor und Diagramme
+    - Vorfilter für "Mülldaten" vom Sensor SHT11 & SHT22 in Rss.py
+
+--------------------------------------------------------------------------------
 
 Version 1.0
-- Übernahme des Stands aus dem Forum
+- Übernahme des Systems aus dem Forum
