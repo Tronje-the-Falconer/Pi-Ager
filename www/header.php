@@ -25,6 +25,10 @@
     if ($_SERVER['PHP_SELF'] == '/changelog.php') {
         $logs_active = 'active';
     }
+    # Auslesen der Version aus dem Changelog
+    # Lese 14 Zeichen, beginnend mit dem 21. Zeichen
+    $changelogfile = 'changelog.txt';
+    $rssversion = file_get_contents('$changelogfile', NULL, NULL, 0, 11);
 ?>
 <!DOCTYPE HTML>
 <html>
