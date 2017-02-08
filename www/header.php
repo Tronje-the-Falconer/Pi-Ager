@@ -28,7 +28,9 @@
     # Auslesen der Version aus dem Changelog
     # Lese 14 Zeichen, beginnend mit dem 21. Zeichen
     $changelogfile = 'changelog.txt';
-    $rssversion = file_get_contents('$changelogfile', NULL, NULL, 0, 11);
+    $erste_Zeile = fopen($changelogfile,"r"); # Oeffnet die Datei changelog.txt
+    $rssversion = fgets($erste_Zeile, 4096); # liest die erste Zeile bzw. bis Zeichen 4096 aus. je nachdem was zuerst eintritt
+    #$rssversion = file_get_contents('$changelogfile', NULL, NULL, 0, 12); # Alternative über Inhalt auslesen. Zeile 0 bis Zeichen 12
 ?>
 <!DOCTYPE HTML>
 <html>
