@@ -1,0 +1,10 @@
+Version 2.0
+
+- neues Frontend
+- Logfile
+- 
+
+------------------------------------------
+
+Version 1.0
+- Übernahme des Stands aus dem Forum
