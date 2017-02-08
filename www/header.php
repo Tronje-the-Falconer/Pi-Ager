@@ -22,6 +22,9 @@
     if ($_SERVER['PHP_SELF'] == '/logs.php') {
         $logs_active = 'active';
     }
+    if ($_SERVER['PHP_SELF'] == '/changelog.php') {
+        $logs_active = 'active';
+    }
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -55,6 +58,13 @@
                             <li><a href="diagrams.php" class="<?=$diagrams_active ?>">Diagamme</a></li>
                             <li><a href="settings.php" class="<?=$settings_active ?>">Einstellungen</a></li>
                             <li><a href="logs.php" class="<?=$logs_active ?>">Logs</a></li>
+                            <?php
+                                if ($_SERVER['PHP_SELF'] == '/changelog.php') {
+                                    print '<li><a href="logs.php" class="';
+                                    print <?=$logs_active ?>;
+                                    print '">Changelog</a></li>';
+                                } 
+                            ?>
                         </ul>
                     </div>
                 </nav>
