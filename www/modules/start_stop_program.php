@@ -12,7 +12,7 @@
     if (isset($_POST['rss_reifetab_start'])){
         $valrs = shell_exec('sudo /var/sudowebscript.sh greprss'); #Rss.py
         if($valrs == 0) {
-            shell_exec('sudo /var/sudowebscript.sh startreifetab');
+            shell_exec('sudo /var/sudowebscript.sh startrss');
             $f=fopen('logfile.txt','w');
             fwrite($f, "\n".date('d.m.Y H:i')." Reifeschrank gestartet");
             fclose($f);
