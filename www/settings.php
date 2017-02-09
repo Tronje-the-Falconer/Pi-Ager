@@ -17,7 +17,7 @@
                                     <table style="width: 100%"><tr>
                                     <?php
                                             print '<form  method="post">';
-                                            // Prüft, ob Prozess RSS läuft ( 0 = Rss.py läuft nicht als Prozess, )
+                                            // Prüft, ob Prozess RSS läuft ( NULL = Rss.py läuft nicht als Prozess, )
                                             $valrs = shell_exec('sudo /var/sudowebscript.sh greprss');
                                             print gettype($valrs);
                                             print $valrs;
@@ -26,12 +26,12 @@
                                             print gettype($valtab);
                                             print $valtab;
                                             
-                                            if($valrs == 0 and $valtab) { //wenn Prozess RSS läuft und Reifetab läuft nicht (korrekt)
+                                            if($valrs == NULL and $valtab != NULL) { //wenn Prozess RSS läuft und Reifetab läuft nicht (korrekt)
                                                 shell_exec('sudo /var/sudowebscript.sh pkillreifetab');
                                                 $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab');
                                             }
 
-                                            if ($valrs == 0){
+                                            if ($valrs == NULL){
                                                 print '<td><img src="images/betriebsart.png" alt="" style="padding: 10px;"></td><td><img src="images/led-off-green-20x20.png" alt="" style="padding-top: 10px;"></td><td style=""><button class="art-button" name="rss_start">Start Reifeschrank</button></td>';
                                             }
                                             else {
@@ -58,7 +58,7 @@
                                                         }
                                                     }
                                                     print '</td><td>';
-                                                    if ($valtab == 0){
+                                                    if ($valtab == NULL){
                                                         print '<img src="images/led-off-green-20x20.png" alt="" style="padding-right: 20px;">';
                                                     }
                                                     else {
@@ -78,7 +78,7 @@
                                             <td><br>
                                                 <?php
                                                     print '<form  method="post">';
-                                                    if ($valtab == 0){
+                                                    if ($valtab == NULL){
                                                         print '<button class="art-button" name="rss_reifetab_start">Start Tabelle</button> ';
                                                     }
                                                     else {
