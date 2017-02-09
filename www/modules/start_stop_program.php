@@ -2,11 +2,11 @@
     #programme Rss.py und/oder Reifetab.py starten/stoppen
     if (isset($_POST['rss_start'])){
         $valrs = shell_exec('sudo /var/sudowebscript.sh greprss');
-        if($valrs == 0) {
+        if($valrs == NULL) {
             shell_exec('sudo /var/sudowebscript.sh startrss');
             sleep (1); # 1 Sec auf start der Py-Datei warten
             $valrs = shell_exec('sudo /var/sudowebscript.sh greprss');
-            if($valrs != 0) {
+            if($valrs != NULL) {
                 $f=fopen('logfile.txt','w');
                 fwrite($f, "\n".date('d.m.Y H:i')." Reifeschrank gestartet");
                 fclose($f);
@@ -20,11 +20,11 @@
     }
     if (isset($_POST['rss_reifetab_start'])){
         $valrs = shell_exec('sudo /var/sudowebscript.sh greprss'); #Rss.py
-        if($valrs == 0) {
+        if($valrs == NULL) {
             shell_exec('sudo /var/sudowebscript.sh startrss');
             sleep (1); # 1 Sec auf start der Py-Datei warten
-            $valrs = shell_exec('sudo /var/sudowebscript.sh greprss') # RSS hat sich geändert daher neu setzen
-            if($valrs != 0) {
+            $valrs = shell_exec('sudo /var/sudowebscript.sh greprss'); # RSS hat sich geändert daher neu setzen
+            if($valrs != NULL) {
                 $f=fopen('logfile.txt','w');
                 fwrite($f, "\n".date('d.m.Y H:i')." Reifeschrank gestartet");
                 fclose($f);
