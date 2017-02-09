@@ -17,13 +17,16 @@
                                     <table style="width: 100%"><tr>
                                     <?php
                                             print '<form  method="post">';
-                                            // Prüft, ob Prozess RSS läuft
+                                            // Prüft, ob Prozess RSS läuft ( 0 = Rss.py läuft nicht als Prozess, )
                                             $valrs = shell_exec('sudo /var/sudowebscript.sh greprss');
-
-                                            // Prüft, ob Prozess Reifetab läuft
+                                            print gettype($valrs);
+                                            print $valrs;
+                                            // Prüft, ob Prozess Reifetab läuft ()
                                             $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab');
-
-                                            if($valrs == 0 and $valtab) {
+                                            print gettype($valtab);
+                                            print $valtab;
+                                            
+                                            if($valrs == 0 and $valtab) { //wenn Prozess RSS läuft und Reifetab läuft nicht (korrekt)
                                                 shell_exec('sudo /var/sudowebscript.sh pkillreifetab');
                                                 $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab');
                                             }
@@ -46,7 +49,7 @@
                                             <td style=" text-align: left; padding-left: 20px;">
                                                 <?php
                                                     print '<form  method="post">';
-                                                    foreach($pdf as $name) {
+                                                    foreach($csvfilename as $name) {
                                                         if ($name<>$wunschreife){
                                                             echo '<input type="radio" name="Reifetab" value="'.$name.'"><label> '.$name.'</label><br>';
                                                         }
