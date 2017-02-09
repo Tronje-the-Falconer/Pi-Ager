@@ -1,10 +1,10 @@
 <?php
     $x = 0;
     foreach (glob('csv/*.csv') as $filename){
-        $pdf[$x] = explode('/',$filename);
-        $pdf[$x] = end($pdf[$x]);
-        $info = pathinfo($pdf[$x]);
-        $pdf[$x] = $info['filename'];
+        $csvfilename[$x] = explode('/',$filename);
+        $csvfilename[$x] = end($csvfilename[$x]);
+        $info = pathinfo($csvfilename[$x]);
+        $csvfilename[$x] = $info['filename'];
         $x++;
     }
     // }
