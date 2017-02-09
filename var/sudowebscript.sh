@@ -10,7 +10,7 @@ case "$1" in
     pkillrss) #Stoppen von Rss.py
         pkill -f Rss.py
     ;;
-    greprss) #Überprüfen von Rss.py
+    greprss) #Überprüfen von Rss.py | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach RSS.py gesucht
         ps ax | grep -v grep | grep Rss.py
     ;;
     startreifetab) #Starten von Reifetab.py
@@ -19,7 +19,7 @@ case "$1" in
     pkillreifetab) #Stoppen von Reifetab.py
         pkill -f Reifetab.py
     ;;
-    grepreifetab) #Überprüfen von Reifetab.py
+    grepreifetab) #Überprüfen von Reifetab.py  | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach Reifetab.py gesucht
         ps ax | grep -v grep | grep Reifetab.py
     ;;
     read18)#Ansteuern von GPIO18 Umluftventilator
