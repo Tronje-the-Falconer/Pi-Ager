@@ -21,8 +21,6 @@
                                             $valrs = shell_exec('sudo /var/sudowebscript.sh greprss');
                                             // Prüft, ob Prozess Reifetab läuft ()
                                             $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab');
-                                            print gettype($valtab);
-                                            print $valtab;
                                             
                                             if($valrs == NULL and $valtab != NULL) { //wenn Prozess RSS läuft und Reifetab läuft nicht (korrekt)
                                                 shell_exec('sudo /var/sudowebscript.sh pkillreifetab');
