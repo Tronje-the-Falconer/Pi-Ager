@@ -19,8 +19,6 @@
                                             print '<form  method="post">';
                                             // Prüft, ob Prozess RSS läuft ( NULL = Rss.py läuft nicht als Prozess, )
                                             $valrs = shell_exec('sudo /var/sudowebscript.sh greprss');
-                                            print gettype($valrs);
-                                            print $valrs;
                                             // Prüft, ob Prozess Reifetab läuft ()
                                             $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab');
                                             print gettype($valtab);
