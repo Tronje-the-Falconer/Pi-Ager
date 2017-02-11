@@ -5,7 +5,7 @@
         if (is_file($logfile)) {
             $fp = fopen($logfile, 'w')
                 or die ('Konnte Datei $logfile nicht anlegen');
-            $input = 'Datei neu angelegt am '.$timestamp.' Uhr\n\n';
+            $input = "Datei neu angelegt am ".$timestamp." Uhr\n\n";
             fwrite($fp,$input);
             fclose ($fp);
         }
