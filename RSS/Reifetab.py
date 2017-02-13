@@ -187,35 +187,35 @@ for row  in reader:                                         # Durchlaeuft die ei
                     timerabluftdauer="\n" 'Timer Abluftdauer:' " \t" + str(col_form) + "min"
                 if colnumname=='days':
                     tage="\n" 'Dauer:' " \t" +col + " Tage"
-    colnum+=1                                     # Zaehler fuer die Anzahl der Spalten
-    rownum+=1                                            # Zaehler fuer die Anzahl der Reihen
-    # Sensortyp für Log vorbereiten
-    sensorlog = 'Sensortyp: ' + sensorname + ' Value: ' + str(sensortype)
-    if rownum>1:
-        target = open(filename, 'a')                     # Schreibt in die logfile.txt
-        target.write(betriebsart)
-        target.write(solltemperatur)
-        target.write(einschaltwerttemperatur)
-        target.write(ausschaltwerttemperatur)
-        target.write("\n")
-        target.write(sollfeuchtigkeit)
-        target.write(einschaltwertfeuchte)
-        target.write(ausschaltwertfeuchte)
-        target.write(befeuchtungsverzoegerung)
-        target.write("\n")
-        target.write(timerumluftperiode)
-        target.write(timerumluftdauer)
-        target.write("\n")
-        target.write(timerabluftperiode)
-        target.write(timerabluftdauer)
-        target.write("\n")
-        target.write(tage)
-        target.write("\n")
-        target.write(sensorlog)
-        target.write("\n" '---------------------------------------')
-        target.close()
+        colnum+=1                                     # Zaehler fuer die Anzahl der Spalten
+        rownum+=1                                            # Zaehler fuer die Anzahl der Reihen
+        # Sensortyp für Log vorbereiten
+        sensorlog = 'Sensortyp: ' + sensorname + ' Value: ' + str(sensortype)
+        if rownum>1:
+            target = open(filename, 'a')                     # Schreibt in die logfile.txt
+            target.write(betriebsart)
+            target.write(solltemperatur)
+            target.write(einschaltwerttemperatur)
+            target.write(ausschaltwerttemperatur)
+            target.write("\n")
+            target.write(sollfeuchtigkeit)
+            target.write(einschaltwertfeuchte)
+            target.write(ausschaltwertfeuchte)
+            target.write(befeuchtungsverzoegerung)
+            target.write("\n")
+            target.write(timerumluftperiode)
+            target.write(timerumluftdauer)
+            target.write("\n")
+            target.write(timerabluftperiode)
+            target.write(timerabluftdauer)
+            target.write("\n")
+            target.write(tage)
+            target.write("\n")
+            target.write(sensorlog)
+            target.write("\n" '---------------------------------------')
+            target.close()
 #-----------------------------------------------------------------------------------------Function write_settings() Schreiben der Werte in die settings.json
-    write_settings (mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay, sensortype)
+        write_settings (mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay, sensortype)
 
     if rownum>1 :
         endtime=datetime.datetime.now()+timedelta(days=dauer/t)
