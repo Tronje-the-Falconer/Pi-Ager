@@ -117,8 +117,8 @@ timerabluftperiode = ""
 timerabluftdauer = ""
 tage = ""
 #-----------------------------------------------------------------------------------------Schreiben der Werte in die Konsole und das Logfile
-# t=86400  #Anzahl der Sek. in einem Tag
-t=10  #zum testen ein Tag vergeht in einer Sekunde
+t=86400  #Anzahl der Sek. in einem Tag
+#t=1  #zum testen ein Tag vergeht in einer Sekunde
 rownum=0                                                    # Setzt Variable rownum auf 0
 for row  in reader:                                         # Durchlaeuft die einzelnen Reihen
     colnum=0                                                # Setzt Variable colnum auf 0
