@@ -93,7 +93,7 @@ if [ -e /boot/setup.txt ]; then
   if [ -n "$webguipw" ]; then         #wenn nicht ""
     # echo -en b0.txt=\"web Passwort setzen\""\xff\xff\xff" > /dev/ttyAMA0
     # sleep 1
-    htpasswd -b /etc/lighttpd/htpasswd wlanthermo $webguipw
+    htpasswd -b /var/htpasswd reifeschrank $webguipw
     echo "Passwort webgui gesetzt"
   fi
 
