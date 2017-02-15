@@ -234,22 +234,14 @@ def doMainLoop():
             sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
             atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
             btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
-            dew_point_temp = (atp * sensortemp1) / (btp + sensortemp1) + log(sensorhum1 / 100)
-            dew_point = (btp * dew_point_temp) / (atp - dew_point_temp)
-            dew_point = round (dew_point,1)
         elif sensorname == 'DHT22': #DHT22
             print sensorname
             sensorhum1, sensortemp1 = Adafruit_DHT.read_retry(sensor, PIN_DHT)
             atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
             btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
-            dew_point_temp = (atp * sensortemp1) / (btp + sensortemp1) + log(sensorhum1 / 100)
-            dew_point = (btp * dew_point_temp) / (atp - dew_point_temp)
-            dew_point = round (dew_point,1)
         elif sensorname == 'SHT75': #SHT75
             sensortemp1 = sht.read_t()
             sensorhum1 = sht.read_rh()
-            dew_point = sht.read_dew_point(sensortemp1, sensorhum1)
-            dew_point = round (dew_point,1)
         # sensortemp1 = sht.read_t()
         # sensorhum1 = sht.read_rh()
         # dew_point = sht.read_dew_point(sensortemp1, sensorhum1)
