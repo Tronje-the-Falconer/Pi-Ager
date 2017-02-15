@@ -1,3 +1,14 @@
+### BEGIN INIT INFO
+# Provides:          setup_reifeschrank
+# Required-Start:
+# Required-Stop:
+# Default-Start: 3
+# Default-Stop:
+# Short-Description: Initialise Reifeschrank
+# Description:
+### END INIT INFO
+
+
 ###########################################################################
 ##
 ## V4 SSH Host Key neu generieren
@@ -201,10 +212,10 @@ case "\$1" in
   start)
     log_daemon_msg "Starting resize2fs_once" &&
     resize2fs /dev/$ROOT_PART &&
-    update-rc.d resize2fs_once remove &&
+    update-rc.d resize2fs_once remove && # resize2fs_once-Script aus Startroutine entfernen
     /sbin/dphys-swapfile setup &&
-    rm /etc/init.d/resize2fs_once &&
-    rm /etc/rc.local/setup_reifeschrank.sh && # Setupscript löschen
+    rm /etc/init.d/resize2fs_once &&     # resize2fs_once-Script löschen
+    rm /etc/init.d/setup_reifeschrank && # Setupscript löschen
     log_end_msg \$?
     ;;
   *)
@@ -216,8 +227,9 @@ EOF
 # service WLANThermoNEXTION stop
 # echo -en b0.txt=\"Partition resize...\""\xff\xff\xff" > /dev/ttyAMA0
 
-  chmod +x /etc/init.d/resize2fs_once &&
-  update-rc.d resize2fs_once defaults &&
+  chmod +x /etc/init.d/resize2fs_once &&   # Resize2fs_once ausführbar machen
+  update-rc.d resize2fs_once defaults &&   # Resize2fs_once in Startroutine eintragen
+  update-rc.d -f setup_reifeschrank remove # Setupscript aus Startroutine entfernen
 
   echo
   echo "Done"
