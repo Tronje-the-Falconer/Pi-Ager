@@ -4,7 +4,7 @@
 # Required-Stop:
 # Default-Start: 3
 # Default-Stop:
-# Short-Description: Initialise Reifeschrank
+# Short-Description: Initialise Reifeschrank-Image
 # Description:
 ### END INIT INFO
 
