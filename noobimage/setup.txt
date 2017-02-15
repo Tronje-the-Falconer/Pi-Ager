@@ -1,0 +1,28 @@
+# Initial Konfiguration
+# Reifeschrank 2.0.1-0
+# Image vom 15.02.2017
+# Version 4
+# Std Hostname 	            rpi-Reifeschrank 
+# Std Passwoerter für alle  raspberry
+# 
+# Nur ausgefuellte Werte werden gesetzt
+# Die Variablennamen duerfen nicht veraendert werden!
+#
+# Logfile wird unter /boot/setup.log angelegt 
+#
+# Hostname:
+piname=
+# pi Passwort:
+pipass=
+# root Passwort:
+rootpass=
+# webgui Passwort:
+webguipw=
+# WLAN Netzwerkname:
+wlanssid=
+# WLAN Schluessel:
+wlankey=
+# setup.txt nach boot loeschen(leer lassen)? Oder 1 fuer behalten 
+keepconf=
+# Groesse der Partition in Prozent (nicht unter 2GB!, nur die Zahl kein % Zeichen!)
+partsize=
