@@ -1,0 +1,6 @@
+AuthName "Administration"
+AuthType Basic
+AuthUserFile /var/.htpasswd
+<Files settings.php>
+    require valid-user
+</Files&gt
