@@ -204,7 +204,7 @@ case "\$1" in
     update-rc.d resize2fs_once remove &&
     /sbin/dphys-swapfile setup &&
     rm /etc/init.d/resize2fs_once &&
-    rm /root/resize.sh &&
+    rm /etc/init.d/setup_reifeschrank.sh && # Setupscript löschen
     log_end_msg \$?
     ;;
   *)
