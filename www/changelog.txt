@@ -1,4 +1,4 @@
-Version 2.01.1
+Version 2.1.1-0
 
 - Frontend
     - neues Frontend
@@ -10,6 +10,7 @@ Version 2.01.1
     - Reboot und Shutdown des Raspberry's  über Settings-Seite
     - Kühlung und Heizung sowie Be/Entfeuchtung im Statusboard visuell getrennt
     - erlaubte Min-Max-Wertgrenzen werden bei den Einstellungen angezeigt
+    - settings wird über Passwort geschützt
 
 - Backend
     - Umstellung von DHT22.rdd auf rss.rrd für den Plot
@@ -21,5 +22,5 @@ Version 2.01.1
 
 --------------------------------------------------------------------------------
 
-Version 1.01.1
+Version 1.1.1-0
 - Übernahme des Systems aus dem Forum
