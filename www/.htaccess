@@ -3,4 +3,4 @@
   AuthName "Authentication required"
   AuthUserFile /var/.htpasswd
   require valid-user
- </FilesMatch>
+</FilesMatch>
