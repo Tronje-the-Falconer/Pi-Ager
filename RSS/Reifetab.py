@@ -84,8 +84,8 @@ for row in reader:                        # Durchlaeuft die einzelnen Reihen
 totalperiod=rownum-1                           # Variable totalperiod = Anzahl der Perioden, der Reifephasen (entspricht der Anzahl an Reihen)
 totaldauer=dauer                            # Variable totaldauer = Gesamtdauer aller Perioden
 #-----------------------------------------------------------------------------------------Lesen der Werte aus der CSV-Datei & Schreiben der Werte in die Konsole und das Logfile
-#t=86400  #Anzahl der Sek. in einem Tag
-t=1  #zum testen ein Tag vergeht in einer Sekunde
+t=86400  #Anzahl der Sek. in einem Tag
+#t=1  #zum testen ein Tag vergeht in einer Sekunde
 
 
 rownum=0                                     # Setzt Variable rownum auf 0
