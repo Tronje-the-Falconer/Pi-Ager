@@ -102,7 +102,7 @@ ul.art-vmenu a
 {
    font-family: Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
    text-decoration: none;
-   color: #FFB700;
+   color: #ADADAD;
 }
 
 .art-postcontent a:visited, .art-postcontent a.visited
@@ -1086,7 +1086,7 @@ input.art-button,
 button.art-button
 {
    text-decoration: none;
-   font-size: 14px;
+   font-size: 12px;
    font-family: 'Trebuchet MS', Arial, Helvetica, Sans-Serif;
    position:relative;
    display: inline-block;
@@ -1102,6 +1102,7 @@ button.art-button
    -webkit-box-sizing: content-box;
    -moz-box-sizing: content-box;
    box-sizing: content-box;
+   min-width: 50px;
 }
 
 .art-button img
@@ -1134,6 +1135,8 @@ input.art-button
    -webkit-appearance: none;
 }
 
+
+
 .art-button.active, .art-button.active:hover
 {
    background: #88B5D3;
@@ -1152,9 +1155,11 @@ input.art-button
    border:1px solid #639EC5;
    padding:0 20px;
    margin:0 auto;
+   min-width: 50px;
 }
 .art-button.active, .art-button.active:hover {
    color: #FFFFFF !important;
+   min-width: 50px;
 }
 
 .art-button.hover, .art-button:hover
@@ -1175,9 +1180,11 @@ input.art-button
    border:1px solid #636363;
    padding:0 20px;
    margin:0 auto;
+   min-width: 50px;
 }
 .art-button.hover, .art-button:hover {
    color: #FFFFFF !important;
+   min-width: 50px;
 }
 
 input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="number"], input[type="range"], input[type="tel"], input[type="time"], input[type="week"], textarea
@@ -2087,21 +2094,21 @@ blockquote p,
 .art-footer a,
 .art-footer a:link
 {
-   color: #DB9D00;
+   color: #ADADAD;
    font-family: Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
    text-decoration: none;
 }
 
 .art-footer a:visited
 {
-   color: #FFBF1F;
+   color: #ADADAD;
    font-family: Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
    text-decoration: none;
 }
 
 .art-footer a:hover
 {
-   color: #3C78A0;
+   color: #ADADAD;
    font-family: Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
    text-decoration: underline;
 }

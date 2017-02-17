@@ -542,3 +542,14 @@
    padding: 2% !important;
 }
 
+
+.responsive .art-button
+{
+    padding: 0 2px;
+}
+
+.responsive .art-button.active
+{
+    padding: 0 2px;
+}
+

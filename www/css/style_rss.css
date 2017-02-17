@@ -20,20 +20,12 @@ body {
     border-left: 2px solid #CFCFCF;
     margin: 0 auto;
     padding: 10px;
-    width: 473px;
     margin-bottom: 20px;
+    max-width: 473px;
 
 }
 
-@media only screen and (max-device-width: 537px) {
-	.hg_container { width: 373px; }
 
-}
-
-@media only screen and (max-device-width: 432px) {
-	.hg_container { width: 273px;}
-
-}
 
 /* Tabelle Schaltzustände */
 .schaltzustaende {
@@ -42,9 +34,9 @@ body {
 }
 
 @media only screen and (max-device-width: 432px) {
-	.schaltzustaende { font-size: 10px;}
+    .schaltzustaende { font-size: 10px;}
+    }
 
-}
 
 /* Hilfe-Texte in den Einstellungen */
 
@@ -131,6 +123,7 @@ body {
 .td_submitbutton {
     text-align: right;
     padding-left: 20px;
+    vertical-align: bottom;
 }
 
 /* Zellen Manuelle Werte */

@@ -18,8 +18,8 @@
                 $_POST['humdelay']<60 && $_POST['humdelay']>-1 &&                                                             // Prüfung Verzögerung Feuchte
                 $_POST['tempoff']<1441 && $_POST['tempoff']>-1 && ($_POST['tempoff'] > $_POST['tempon']) &&                   // Prüfung Intervall Umluft
                 $_POST['tempon']<1441 && $_POST['tempon']>-1  &&                                                                // Prüfung Dauer Umluft
-                $_POST['tempoff1']<1440 && $_POST['tempoff1']>-1 && ($_POST['tempoff1'] > $_POST['tempon1']) &&               // Prüfung Intervall Abluft
-                $_POST['tempon1']<1440 && $_POST['tempon1']>-1                                                                  // Prüfung Dauer Abluft
+                $_POST['tempoff1']<1441 && $_POST['tempoff1']>-1 && ($_POST['tempoff1'] > $_POST['tempon1']) &&               // Prüfung Intervall Abluft
+                $_POST['tempon1']<1441 && $_POST['tempon1']>-1                                                                  // Prüfung Dauer Abluft
             )
             {
                 # Eingestellte Werte in settings.json und logfile.txt speichern
@@ -68,6 +68,11 @@
                     $ausschalttemperatur_k = $array['temp'] + $array['temphystoff'];
                     $einschalttemperatur_h = $array['temp'] - $array['temphyston'];
                     $ausschalttemperatur_h = $array['temp'] - $array['temphystoff'];
+
+                    $einschaltfeuchte_bef = $array['hum'] - $array['humhyston'];
+                    $ausschaltfeuchte_bef = $array['hum'] - $array['humhystoff'];
+                    $einschaltfeuchte_entf = $array['hum'] + $array['humhyston'];
+                    $ausschaltfeuchte_entf = $array['hum'] + $array['humhystoff'];
                 }
                 # Sensor
                 if ($array['sensortype'] == 1) {
@@ -91,7 +96,8 @@
                 $ausschaltfeuchte = $array['hum'] - $array['humhystoff'];
 
                 $f=fopen('logfile.txt','a');
-                fwrite($f, "\n"."***********************************************************************");
+                fwrite($f, "\n"."***********************************************");
+                fwrite($f, "\n"."Sensor: ".$sensorname);
                 fwrite($f, "\n"."Betriebsart: ".$betriebsart);
                 fwrite($f, "\n".date('d.m.Y H:i')." Werte wurden manuell ge&auml;ndert.");
                 fwrite($f, "\n");
@@ -112,11 +118,20 @@
 
                 fwrite($f, "\n");
 
+                if ($array['mod'] == 4) {
+                fwrite($f, "\n"."Soll-Feuchtigkeit: ".$array['hum']."% rLF");
+                fwrite($f, "\n"."Einschaltwert Befeuchtung: ".$array['humhyston']."% rLF (also bei ".$einschaltfeuchte_bef."% rLF)");
+                fwrite($f, "\n"."Ausschaltwert Befeuchtung: ".$array['humhystoff']."% rLF (also bei ".$ausschaltfeuchte_bef."% rLF)");
+                fwrite($f, "\n"."Einschaltwert Entfeuchtung: ".$array['humhyston']."% rLF (also bei ".$einschaltfeuchte_entf."% rLF)");
+                fwrite($f, "\n"."Ausschaltwert Entfeuchtung: ".$array['humhystoff']."% rLF (also bei ".$ausschaltfeuchte_entf."% rLF)");
+                fwrite($f, "\n"."Befeuchter-Schaltverz&ouml;gerung ".$array['humdelay']."min");
+                }
+                else {
                 fwrite($f, "\n"."Soll-Feuchtigkeit: ".$array['hum']."% rLF");
                 fwrite($f, "\n"."Einschaltwert Feuchte: ".$array['humhyston']."% rLF (also bei ".$einschaltfeuchte."% rLF)");
                 fwrite($f, "\n"."Ausschaltwert Feuchte: ".$array['humhystoff']."% rLF (also bei ".$ausschaltfeuchte."% rLF)");
                 fwrite($f, "\n"."Befeuchter-Schaltverz&ouml;gerung ".$array['humdelay']."min");
-
+                }
 
                 fwrite($f, "\n");
                 fwrite($f, "\n"."Umluftperiode: ".$umluftperiode."min");
@@ -128,14 +143,7 @@
                 fwrite($f, "\n"."Abluftdauer: ".$luftaustauschdauer."min");
 
 
-                fwrite($f, "\n"."***********************************************************************");
-                
-                fwrite($f, "\n");
-                fwrite($f, "\n"."Sensortype ".$sensortype);
-                fwrite($f, "\n"."Sensorname: ".$sensorname);
-
-
-                fwrite($f, "\n"."***********************************************************************");
+                fwrite($f, "\n"."***********************************************");
                 fclose($f);
 
 

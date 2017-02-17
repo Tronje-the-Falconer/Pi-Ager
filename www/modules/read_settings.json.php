@@ -25,7 +25,7 @@
         $checked_3 = '';
     }
     if ($mod==4) {
-        $modus='- Kühlen<br>- Heizen<br>- Befeuchten<br>- Umluft<br>- Abluft';
+        $modus='- Kühlen<br>- Heizen<br>- Befeuchten<br>- Entfeuchten<br>- Umluft<br>- Abluft';
         $checked_4 = 'checked="checked"';
     }
     else {

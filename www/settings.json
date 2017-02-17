@@ -1,1 +1,1 @@
-{"hum": 75, "tempoff1": 82800, "sensortype": 3, "temphystoff": 0.5, "tempoff": 3000, "temphyston": 1, "date": 1486834180, "mod": 1, "humdelay": 5, "temp": 5, "tempon1": 3600, "humhystoff": 2, "humhyston": 5, "tempon": 600}
+{"temp":2,"mod":4,"hum":85,"tempon":1440,"tempoff":2160,"tempon1":900,"tempoff1":12960,"temphyston":1,"temphystoff":0,"humhyston":5,"humhystoff":2,"humdelay":5,"date":1487326201,"sensortype":2}

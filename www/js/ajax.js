@@ -29,11 +29,15 @@ function handleContent() {
 
         var str_temp = myObj.temperatur.toFixed(1);
         var split_temperatur = str_temp.split(".");
+        if (split_temperatur[0] < 10)
+        split_temperatur[0] = "0"+split_temperatur[0];
         document.getElementById('current_json_temperatur_0').innerHTML = split_temperatur[0];
         document.getElementById('current_json_temperatur_1').innerHTML = split_temperatur[1];
 
         var str_hum = myObj.luftfeuchtigkeit.toFixed(1);
         var split_luftfeuchtigkeit = str_hum.split(".");
+        if (split_luftfeuchtigkeit[0] < 10)
+        split_luftfeuchtigkeit[0] = "0"+split_luftfeuchtigkeit[0];
         document.getElementById('current_json_luftfeuchtigkeit_0').innerHTML = split_luftfeuchtigkeit[0];
         document.getElementById('current_json_luftfeuchtigkeit_1').innerHTML = split_luftfeuchtigkeit[1];
         }

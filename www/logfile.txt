@@ -1,18 +1,1 @@
-
-11.02.2017 18:29 Reifeschrank gestartet
-***********************************************************************
- Die Klima-Werte werden nun vom automatischen Programm "Salami" gesteuert
-11.02.2017 - 18:29 Uhr: Startwerte Periode 1 von 12
-
-Betriebsart: Automatik mit Be- und Entfeuchtung
-
-
-
-
-Sensortyp: SHT75 Value: 3
----------------------------------------
-Nächste Änderung der Werte: 08.10.2040  18:29
-Programmende: 11.03.2017  18:29
-***********************************************************************
-11.02.2017 18:29 Reifeprogramm gestartet
-11.02.2017 18:29 Reifeschrank gestoppt
+﻿

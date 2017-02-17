@@ -84,7 +84,7 @@
                                                 ?>
                                                 <br><img src="images/betriebsart.png" alt="" style="padding: 10px;">
                                             </td>
-                                            <td class="text_left_top"><b>BETRIEBSART:</b><br><? if ($valrs == 0){print "AUS";} else {print $modus;}?></td>
+                                            <td class="text_left_top"><b>BETRIEBSART:</b><br><?php if ($valrs == 0){print "AUS";} else {print $modus;}?></td>
                                             <td>
                                                 <?php
                                                     // Prüft, ob Prozess Reifetab läuft
@@ -115,7 +115,7 @@
                                         <tr>
                                             <?php
                                                 if ($mod==1){
-                                                    echo '   <td ><img src="images/kuehlung.png" alt=""></td>
+                                                    print '   <td ><img src="images/kuehlung.png" alt=""></td>
                                                         <td ><img src="'.$cool.'" title="PIN_COOL 22[15] -> IN 1 (GPIO 3)"></td>
                                                         <td class="text_left">KÜHLUNG</td>
                                                         <td >'.$temp_float.' °C</td>
@@ -125,7 +125,7 @@
                                                 }
                                                 if ($mod==2){
                                                     print '   <td ><img src="images/heizung.png" alt=""></td>
-                                                        <td ><img src="'.$cool.'" title="PIN_HEATER 27[13] -> IN 2 (GPIO 2)"></td>
+                                                        <td ><img src="'.$heat.'" title="PIN_HEATER 27[13] -> IN 2 (GPIO 2)"></td>
                                                         <td class="text_left">HEIZUNG</td>
                                                         <td >'.$temp_float.' °C</td>
                                                         <td >'.$tempsoll_float.' °C</td>
@@ -133,9 +133,16 @@
                                                         <td >'.($tempsoll_float-$temphystoff).' °C</td>';
                                                 }
                                                 if ($mod==3 || $mod==4){
-                                                    print '   <td ><img src="images/heiz_kuehl.png" alt=""></td>
-                                                        <td ><img src="'.$cool.'" title="PIN_HEATER 27[13] -> IN 2 (GPIO 2)"></td>
-                                                        <td class="text_left">HEIZ-/KÜHLUNG</td>
+                                                    print '   <td ><img src="images/kuehlung.png" alt=""></td>
+                                                        <td ><img src="'.$cool.'" title="PIN_COOL 22[15] -> IN 1 (GPIO 3)"></td>
+                                                        <td class="text_left">KÜHLUNG</td>
+                                                        <td >'.$temp_float.' °C</td>
+                                                        <td >'.$tempsoll_float.' °C</td>
+                                                        <td >'.($tempsoll_float+$temphyston).' °C</td>
+                                                        <td >'.($tempsoll_float+$temphystoff).' °C</td></tr>';
+                                                    print '<tr> <td ><img src="images/heizung.png" alt=""></td>
+                                                        <td ><img src="'.$heat.'" title="PIN_HEATER 27[13] -> IN 2 (GPIO 2)"></td>
+                                                        <td class="text_left">HEIZUNG</td>
                                                         <td >'.$temp_float.' °C</td>
                                                         <td >'.$tempsoll_float.' °C</td>
                                                         <td >'.($tempsoll_float-$temphyston).' °C</td>
@@ -144,14 +151,36 @@
                                             ?>
                                         </tr>
                                         <tr>
-                                            <td ><img src="images/befeuchtung.png" alt=""></td>
-                                            <td ><img src="<?= $lbf ?>" title="PIN_HUM 24[18] -> IN 3 (GPIO 5)"></td>
-                                            <td class="text_left"><? if($mod == 4) {echo 'BE-/ENTFEUCHTUNG';} else {echo 'BEFEUCHTUNG';}?></td>
-                                            <td ><?=$hum_float?>%</td>
-                                            <td ><?=$humsoll_float?>%</td>
-                                            <td ><?=($humsoll_float-$humhyston)?>%</td>
-                                            <td ><?=($humsoll_float-$humhystoff)?>%</td>
-                                          </tr>
+                                           <?php
+                                                if ($mod==1 || $mod==2 || $mod==3){
+                                                    print '   <td ><img src="images/befeuchtung.png" alt=""></td>
+                                                        <td ><img src='.$lbf.' title="PIN_HUM 24[18] -> IN 3 (GPIO 5)"></td>
+                                                        <td class="text_left">BEFEUCHTUNG</td>
+                                                        <td >'.$hum_float.'%</td>
+                                                        <td >'.$humsoll_float.'%</td>
+                                                        <td >'.($humsoll_float-$humhyston).'%</td>
+                                                        <td >'.($humsoll_float-$humhystoff).'%</td>';
+                                                }
+
+                                                if ($mod==4){
+                                                    print '   <td ><img src="images/befeuchtung.png" alt=""></td>
+                                                        <td ><img src='.$lbf.' title="PIN_HUM 24[18] -> IN 3 (GPIO 5)"></td>
+                                                        <td class="text_left">BEFEUCHTUNG</td>
+                                                        <td >'.$hum_float.'%</td>
+                                                        <td >'.$humsoll_float.'%</td>
+                                                        <td >'.($humsoll_float-$humhyston).'%</td>
+                                                        <td >'.($humsoll_float-$humhystoff).'%</td></tr>';
+                                                    print '<tr> <td ><img src="images/entfeuchtung.png" alt=""></td>
+                                                        <td ><img src='.$lat.' title="PIN_FAN1 23[16] -> IN 5 (GPIO 4)"></td>
+                                                        <td class="text_left">ENTFEUCHTUNG</td>
+                                                        <td >'.$hum_float.'%</td>
+                                                        <td >'.$humsoll_float.'%</td>
+                                                        <td >'.($humsoll_float+$humhyston).'%</td>
+                                                        <td >'.($humsoll_float+$humhystoff).'%</td></tr>';
+                                                }
+
+                                          ?>
+                                       </tr>
                                     </table>
                                     <hr>
                                     <table class="schaltzustaende">
@@ -164,7 +193,7 @@
                                             <td ><b>Dauer</b></td>
                                         </tr>
                                         <tr>
-                                            <td ><img <? if ($tempoff == 0.00 || $tempon == 0) {echo 'class="transpng"';} ?> src="images/luftumwaelzung.png" alt=""></td>
+                                            <td ><img <?php if ($tempoff == 0.00 || $tempon == 0) {echo 'class="transpng"';} ?> src="images/luftumwaelzung.png" alt=""></td>
                                             <td ><img src="<?= $uml ?>" title="PIN_FAN 18[12] -> IN 4 (GPIO 1)"></td>
                                             <td class="text_left">UMLUFT / TIMER</td>
                                             <td ><?=$tempoff?> Min</td>
@@ -172,7 +201,7 @@
                                             <td ><?=$tempon?> Min</td>
                                         </tr>
                                         <tr>
-                                            <td ><img <? if ($tempoff1 == 0.00 || $tempon1 == 0) {echo 'class="transpng"';} ?> src="images/luftaustausch.png" alt=""></td>
+                                            <td ><img <?php if ($tempoff1 == 0.00 || $tempon1 == 0) {echo 'class="transpng"';} ?> src="images/luftaustausch.png" alt=""></td>
                                             <td ><img src="<?= $lat ?>" title="PIN_FAN1 23[16] -> IN 5 (GPIO 4)"></td>
                                             <td class="text_left">ABLUFT / TIMER</td>
                                             <td ><?=$tempoff1?> Min</td>

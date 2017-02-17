@@ -35,7 +35,11 @@
 <!DOCTYPE HTML>
 <html>
     <meta http-equiv="content-type" content="text/html;  charset=utf-8">
-    <!--<meta http-equiv="refresh" content="10" />-->
+    <?php
+    if ($_SERVER['PHP_SELF'] != '/settings.php') {
+    echo "<meta http-equiv=\"refresh\" content=\"120\" />";
+    }
+    ?>
     <head>
     <title>Reifeschranksteuerung</title>
     <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
