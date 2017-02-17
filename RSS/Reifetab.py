@@ -84,8 +84,8 @@ for row in reader:                        # Durchlaeuft die einzelnen Reihen
 totalperiod=rownum-1                           # Variable totalperiod = Anzahl der Perioden, der Reifephasen (entspricht der Anzahl an Reihen)
 totaldauer=dauer                            # Variable totaldauer = Gesamtdauer aller Perioden
 #-----------------------------------------------------------------------------------------Lesen der Werte aus der CSV-Datei & Schreiben der Werte in die Konsole und das Logfile
-t=86400  #Anzahl der Sek. in einem Tag
-#t=1  #zum testen ein Tag vergeht in einer Sekunde
+#t=86400  #Anzahl der Sek. in einem Tag
+t=1  #zum testen ein Tag vergeht in einer Sekunde
 
 
 rownum=0                                     # Setzt Variable rownum auf 0
@@ -95,12 +95,12 @@ for row  in reader:                          # Durchlaeuft die einzelnen Reihen
     colnum = 0                               # Setzt Variable colnum (zurück) auf 0
     if rownum == 0:                          # Ermittelt die Kopfspalte [0]
         header=row                           # ... und speichert die Werte in der Variable header
-        print 'DEBUG Header ausgelesen'
+        # print 'DEBUG Header ausgelesen'
     else:
-        print 'DEBUG beginne Zeilen auszulesen'
+        # print 'DEBUG beginne Zeilen auszulesen'
         if rownum == 1 :                     # Ermittelt die erste Periode/den Beginn des Programms
             # Schreibt in die Konsole
-            print 'DEBUG Bin in der ersten Zeile mit Werten'
+            # print 'DEBUG Bin in der ersten Zeile mit Werten'
             print time.strftime('%d.%m.%Y - %H:%M Uhr') + ": Startwerte Periode 1 von "+str(totalperiod)
             print
             # Schreibt in die logfile.txt
@@ -111,7 +111,7 @@ for row  in reader:                          # Durchlaeuft die einzelnen Reihen
             # ...
             finaltime=datetime.datetime.now()+timedelta(days=totaldauer)
         else:                                              # Ermittelt alle anderen Perioden
-            print 'DEBUG bin nach der ersten Zeile mit Werten'
+            # print 'DEBUG bin nach der ersten Zeile mit Werten'
             # Schreibt in die Konsole
             print time.strftime('%d.%m.%Y - %H:%M Uhr') + ": Neue Werte für Periode " + str(rownum) + " von " + str(totalperiod)
             print
@@ -123,14 +123,21 @@ for row  in reader:                          # Durchlaeuft die einzelnen Reihen
         #colnum = 0                                        # Setzt Variable colnum (zurück) auf 0
         wert = 0                                           # Setzt Variable wert auf 0
         for col in row:                                    # Durchlaeuft die einzelnen Spalten
-            print 'DEBUG in for col in row:'
+            # print 'DEBUG in for col in row:'
             colnumname = header[colnum]                    # colnumname bekommt den Wert aus dem header-Array von der Position, wie der Wert von colnum gerade ist
             if colnumname == "days":                       # ... oder auch: wenn colnum == 12 ist ...
-                print 'DEBUG Colnum = Days'
+                # print 'DEBUG Colnum = Days'
                 dauer = int(col)*t                         # Anzahl der Tage von "col" mit 86400 (Sekunden) multipliziert
             if colnumname != "":                           # Wenn col nicht "" ist...
-                wert=float(col)                            # formatiere col zu "float" und setze es in "wert" ein
-                exec('%s = %d') % (colnumname,wert)        # füllt die jeweilige Variable (columname = wert)
+                if col == "":
+                    setting = readSettings()
+                    col=settings[''+ colnumname + '']
+                    wert = float(col)
+                    col= str(col)
+                    exec('%s = %d') % (colnumname,wert)    # füllt die jeweilige Variable mit altem Wert (wert = columname) 
+                else:
+                    wert=float(col)                        # formatiere col zu "float" und setze es in "wert" ein
+                    exec('%s = %d') % (colnumname,wert)    # füllt die jeweilige Variable (columname = wert)
                 print '%-12s:%s' % (colnumname,wert)       # Schreibt in die Konsole
 
                 # Aufbereitung für die Lesbarkeit im Logfile und Füllen der Variablen
@@ -177,7 +184,7 @@ for row  in reader:                          # Durchlaeuft die einzelnen Reihen
             colnum+=1                                     # Zaehler fuer die Anzahl der Spalten
         # Sensortyp für Log vorbereiten
         sensorlog = 'Sensortyp: ' + sensorname + ' Value: ' + str(sensortype)
-        print 'DEBUG schreibe in Logfile'
+        # print 'DEBUG schreibe in Logfile'
         target = open(logfilename, 'a')                     # Schreibt in die logfile.txt
         target.write(betriebsart)
         target.write(solltemperatur)
@@ -201,7 +208,7 @@ for row  in reader:                          # Durchlaeuft die einzelnen Reihen
         target.write("\n" '---------------------------------------')
         target.close()
 #-----------------------------------------------------------------------------------------Function write_settings() Schreiben der Werte in die settings.json
-        print 'DEBUG schreibe settings.json'
+        # print 'DEBUG schreibe settings.json'
         write_settings (mod, temp, hum, tempoff, tempon, tempoff1, tempon1, temphyston, temphystoff, humhyston, humhystoff, humdelay, sensortype)
 
     #if rownum>1 :
