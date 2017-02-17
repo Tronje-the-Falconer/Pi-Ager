@@ -1,6 +1,6 @@
-AuthName "Administration"
-AuthType Basic
-AuthUserFile /var/.htpasswd
-<Files settings.php>
-    require valid-user
-</Files&gt
+<FilesMatch "settings.php">
+  AuthType Basic
+  AuthName "Authentication required"
+  AuthUserFile /var/.htpasswd
+  require valid-user
+ </FilesMatch>
