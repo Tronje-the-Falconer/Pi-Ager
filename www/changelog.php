@@ -50,17 +50,18 @@
                                                           <img src="images/tronje.gif" alt="">
                                                 </td>
                                                 <td>
-                                                          <img src="images/hama.gif" alt="">
+                                                          <img src="images/steini.gif" alt="">
                                                 </td>
                                                 <td>
-                                                            <img src="images/steini.gif" alt="">
+                                                            <img src="images/hama.gif" alt="">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: center"><a class="art-postcontent" href="https://www.grillsportverein.de/forum/members/tronje-the-falconer.73106/" target="_blank"><b>Tronje the Falconer</b></a><br>Backend & Linux</td>
-                                                <td style="text-align: center"><a href="https://www.grillsportverein.de/forum/members/ha-ma.74075/" target="_blank"><b>Ha-Ma</b></a><br>Hardware & Testing</td>
                                                 <td style="text-align: center"><a href="https://www.grillsportverein.de/forum/members/steinbacher.79220/" target="_blank"><b>Steinbacher</b></a><br>Frontend & Design</td>
+                                                <td style="text-align: center"><a href="https://www.grillsportverein.de/forum/members/ha-ma.74075/" target="_blank"><b>Ha-Ma</b></a><br>Hardware & Testing</td>
                                             </tr>
+                                            <tr><td style="text-align: center" colspan="3"><br><br>Nach einer Idee und Vorlage von <a href="https://www.grillsportverein.de/forum/members/tommy_j.54659/" target="_blank" title="Tommy_J">Tommy_J</a></td></tr>
 
                                        </table>
                                 </div>

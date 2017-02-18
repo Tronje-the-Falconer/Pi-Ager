@@ -78,7 +78,7 @@
                                                         print "<button class=\"art-button\" name=\"rss_reifetab_start\" onclick=\"return confirm('Reifeprogramm starten?\\nManuelle Werte werden überschrieben!');\">Start Tabelle</button>";
                                                     }
                                                     else {
-                                                        print "<button class=\"art-button\" name=\"reifetab_stop\" onclick=\"return confirm('Reifeprogramm stoppen?');\">Stop Tabelle</button>";
+                                                        print "<button class=\"art-button\" name=\"reifetab_stop\" onclick=\"return confirm('Reifeprogramm stoppen?\\nDer Schrank arbeitet mit den letzten Werten der Reifetabelle weiter!');\">Stop Tabelle</button>";
                                                     }
                                                     print '</form>';
                                                 ?>
