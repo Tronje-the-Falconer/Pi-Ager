@@ -275,7 +275,7 @@ def doMainLoop():
         os.system('clear') # Clears the terminal
         t = int(time.time())
         writeVerbose(' ')
-        writeVerbose('************************************************************')
+        writeVerbose('***********************************************')
         writeVerbose(' ')
         writeVerbose('Main loop/Unix-Timestamp: ('+str(t)+')')
         print ('-------------------------------------------------------')
@@ -459,7 +459,7 @@ def doMainLoop():
 ########################################################################################################################
 
 os.system('clear') # Bildschirm löschen
-writeVerbose('************************************************************')
+writeVerbose('***********************************************')
 setupGPIO() # GPIO initialisieren
 
 # RRD-Datenbank anlegen, wenn nicht vorhanden
@@ -484,7 +484,7 @@ except IOError:
         "RRA:AVERAGE:0.5:15:2880",
         "RRA:AVERAGE:0.5:60:8760",)
     i=1
-writeVerbose('************************************************************')
+writeVerbose('***********************************************')
 settings = readSettings()       
 tempstart = int(time.time())
 tempstart1 = tempstart

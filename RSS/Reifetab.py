@@ -63,7 +63,7 @@ Reifetabs= readTabels()                # Function-Aufruf
 tabelle=Reifetabs['Reifetab']          # Variable tabelle = Name der Reifetabelle
 datei =tabelle +'.csv'                 # Variable datei = kompletter Dateiname
 target = open(logfilename, 'a')           # Variable target = logfile.txt öffnen
-target.write("\n"+ "***********************************************************************")
+target.write("\n"+ "***********************************************")
 target.write ("\n"' Die Klima-Werte werden nun vom automatischen Programm "'+ tabelle +'" gesteuert')   # Schreibt in die logfile.txt
 target.close()
 print 'Die Klima-Werte werden nun vom automatischen Programm "'+ tabelle +'" gesteuert' # Schreibt in die Konsole
@@ -233,10 +233,10 @@ for row  in reader:                          # Durchlaeuft die einzelnen Reihen
             target = open(logfilename, 'a')
             target.write("\n" + tabelle +" beendet die Kontrolle."+"\n"+"Der Reifeschrank funktioniert weiter mit den letzten Werten.")
             target.close()
-        print "***********************************************************************"
+        print "***********************************************"
         # Schreibt in die logfile.txt
         target = open(logfilename, 'a')
-        target.write("\n" + "***********************************************************************")
+        target.write("\n" + "***********************************************")
         target.close()
         if rownum<=totalperiod:
             time.sleep(dauer)       # Wartezeit bis zur nächsten Periode
