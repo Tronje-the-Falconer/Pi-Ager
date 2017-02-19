@@ -114,6 +114,15 @@
                                         </tr>
                                         <tr>
                                             <?php
+                                                if ($mod==0){
+                                                    print '   <td ><img src="images/kuehlung.png" alt=""></td>
+                                                        <td ><img src="'.$cool.'" title="PIN_COOL 22[15] -> IN 1 (GPIO 3)"></td>
+                                                        <td class="text_left">KÜHLUNG</td>
+                                                        <td >'.$temp_float.' °C</td>
+                                                        <td >'.$tempsoll_float.' °C</td>
+                                                        <td >'.($tempsoll_float+$temphyston).' °C</td>
+                                                        <td >'.($tempsoll_float+$temphystoff).' °C</td>';
+                                                }
                                                 if ($mod==1){
                                                     print '   <td ><img src="images/kuehlung.png" alt=""></td>
                                                         <td ><img src="'.$cool.'" title="PIN_COOL 22[15] -> IN 1 (GPIO 3)"></td>

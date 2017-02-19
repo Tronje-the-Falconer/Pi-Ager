@@ -1,6 +1,6 @@
 <?PHP
     # Prüfung der eingegebenen Werte
-    if(isset ($_POST['mod']) && $_POST['mod'] <>0) {                       // ist das $_POST-Array gesetzt
+    if(isset ($_POST['mod']) && $_POST['mod'] <>NULL) {                       // ist das $_POST-Array gesetzt
         $InputValid = '';
         foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
             if (!is_numeric($CheckInput)) {
@@ -43,6 +43,12 @@
 
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus
+                if ($array['mod'] == 0) {
+                    $betriebsart='Kuehlen';
+                    $einschalttemperatur = $array['temp'] + $array['temphyston'];
+                    $ausschalttemperatur = $array['temp'] + $array['temphystoff'];
+                }
+
                 if ($array['mod'] == 1) {
                     $betriebsart='Kuehlen mit Befeuchtung';
                     $einschalttemperatur = $array['temp'] + $array['temphyston'];
@@ -102,7 +108,7 @@
                 fwrite($f, "\n".date('d.m.Y H:i')." Werte wurden manuell ge&auml;ndert.");
                 fwrite($f, "\n");
 
-                if ($array['mod'] == 1 || $array['mod'] == 2)  {
+                if ($array['mod'] == 0 || $array['mod'] == 1 || $array['mod'] == 2)  {
                     fwrite($f, "\n"."Soll-Temperatur: ".$array['temp']."&deg;C");
                     fwrite($f, "\n"."Ausschalt-Temperatur: ".$array['temphystoff']."&deg;C (also bei ".$ausschalttemperatur."&deg;C)");
                     fwrite($f, "\n"."Einschalt-Temperatur: ".$array['temphyston']."&deg;C (also bei ".$einschalttemperatur."&deg;C)");
@@ -110,27 +116,28 @@
 
                 if ($array['mod'] == 3 || $array['mod'] == 4)  {
                     fwrite($f, "\n"."Soll-Temperatur: ".$array['temp']."&deg;C");
-                    fwrite($f, "\n"."Einschaltwert Temperatur Heizung: ".$array['temphyston']."&deg;C (also bei ".$einschalttemperatur_h."&deg;C)");
-                    fwrite($f, "\n"."Ausschaltwert Temperatur Heizung: ".$array['temphystoff']."&deg;C (also bei ".$ausschalttemperatur_h."&deg;C)");
-                    fwrite($f, "\n"."Einschaltwert Temperatur Kühlung: ".$array['temphyston']."&deg;C (also bei ".$einschalttemperatur_k."&deg;C)");
-                    fwrite($f, "\n"."Ausschaltwert Temperatur Kühlung: ".$array['temphystoff']."&deg;C (also bei ".$ausschalttemperatur_k."&deg;C)");
+                    fwrite($f, "\n"."Einschaltwert Heizung: ".$array['temphyston']."&deg;C (also bei ".$einschalttemperatur_h."&deg;C)");
+                    fwrite($f, "\n"."Ausschaltwert Heizung: ".$array['temphystoff']."&deg;C (also bei ".$ausschalttemperatur_h."&deg;C)");
+                    fwrite($f, "\n"."Einschaltwert Kühlung: ".$array['temphyston']."&deg;C (also bei ".$einschalttemperatur_k."&deg;C)");
+                    fwrite($f, "\n"."Ausschaltwert Kühlung: ".$array['temphystoff']."&deg;C (also bei ".$ausschalttemperatur_k."&deg;C)");
                 }
 
                 fwrite($f, "\n");
 
-                if ($array['mod'] == 4) {
-                fwrite($f, "\n"."Soll-Feuchtigkeit: ".$array['hum']."% rLF");
-                fwrite($f, "\n"."Einschaltwert Befeuchtung: ".$array['humhyston']."% rLF (also bei ".$einschaltfeuchte_bef."% rLF)");
-                fwrite($f, "\n"."Ausschaltwert Befeuchtung: ".$array['humhystoff']."% rLF (also bei ".$ausschaltfeuchte_bef."% rLF)");
-                fwrite($f, "\n"."Einschaltwert Entfeuchtung: ".$array['humhyston']."% rLF (also bei ".$einschaltfeuchte_entf."% rLF)");
-                fwrite($f, "\n"."Ausschaltwert Entfeuchtung: ".$array['humhystoff']."% rLF (also bei ".$ausschaltfeuchte_entf."% rLF)");
-                fwrite($f, "\n"."Befeuchter-Schaltverz&ouml;gerung ".$array['humdelay']."min");
+                if ($array['mod'] == 1 || $array['mod'] == 2 || $array['mod'] == 3) {
+                    fwrite($f, "\n"."Soll-Feuchtigkeit: ".$array['hum']."% rLF");
+                    fwrite($f, "\n"."Einschaltwert Befeuchtung: ".$array['humhyston']."% rLF (also bei ".$einschaltfeuchte."% rLF)");
+                    fwrite($f, "\n"."Ausschaltwert Befeuchtung: ".$array['humhystoff']."% rLF (also bei ".$ausschaltfeuchte."% rLF)");
+                    fwrite($f, "\n"."Befeuchter-Schaltverz&ouml;gerung ".$array['humdelay']."min");
                 }
-                else {
-                fwrite($f, "\n"."Soll-Feuchtigkeit: ".$array['hum']."% rLF");
-                fwrite($f, "\n"."Einschaltwert Feuchte: ".$array['humhyston']."% rLF (also bei ".$einschaltfeuchte."% rLF)");
-                fwrite($f, "\n"."Ausschaltwert Feuchte: ".$array['humhystoff']."% rLF (also bei ".$ausschaltfeuchte."% rLF)");
-                fwrite($f, "\n"."Befeuchter-Schaltverz&ouml;gerung ".$array['humdelay']."min");
+
+                if ($array['mod'] == 4) {
+                    fwrite($f, "\n"."Soll-Feuchtigkeit: ".$array['hum']."% rLF");
+                    fwrite($f, "\n"."Einschaltwert Befeuchtung: ".$array['humhyston']."% rLF (also bei ".$einschaltfeuchte_bef."% rLF)");
+                    fwrite($f, "\n"."Ausschaltwert Befeuchtung: ".$array['humhystoff']."% rLF (also bei ".$ausschaltfeuchte_bef."% rLF)");
+                    fwrite($f, "\n"."Einschaltwert Entfeuchtung: ".$array['humhyston']."% rLF (also bei ".$einschaltfeuchte_entf."% rLF)");
+                    fwrite($f, "\n"."Ausschaltwert Entfeuchtung: ".$array['humhystoff']."% rLF (also bei ".$ausschaltfeuchte_entf."% rLF)");
+                    fwrite($f, "\n"."Befeuchter-Schaltverz&ouml;gerung ".$array['humdelay']."min");
                 }
 
                 fwrite($f, "\n");

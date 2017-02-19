@@ -1,5 +1,5 @@
-﻿                                <!-- Diese Einstellungen werden nur im manuellen Modus eingeblendet -->
-                                <h2 class="art-postheader">Manuelle Werte</h2>
+﻿<!-- Diese Einstellungen werden nur im manuellen Modus eingeblendet -->
+<h2 class="art-postheader">Manuelle Werte</h2>
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <form method="post">
                                     <div class="hg_container">
@@ -7,6 +7,7 @@
                                             <tr>
                                                 <td class="td_png_icon"><h3>Betriebsart</h3><img src="images/betriebsart.png" alt=""><button class="art-button" type="button" onclick="help_betriebsart_blockFunction()">Hilfe</button></td>
                                                 <td style=" text-align: left; padding-left: 20px;">
+                                                <input type="radio" name="mod" value="0" <?= $checked_0 ?>/><label> Kühlen</label><br>
                                                 <input type="radio" name="mod" value="1" <?= $checked_1 ?>/><label> Kühlen mit Befeuchtung</label><br>
                                                 <input type="radio" name="mod" value="2" <?= $checked_2 ?>/><label> Heizen mit Befeuchtung</label><br>
                                                 <input type="radio" name="mod" value="3" <?= $checked_3 ?>/><label> Automatik mit Befeuchtung</label><br>
@@ -24,6 +25,7 @@
                                             }
                                         </script>
                                         <p id="help_betriebsart" class="help_p">
+                                            <b>Kühlen:</b>  Es wird auf die eingestellte Temperatur mit Umluft gekühlt.<br><br>
                                             <b>Kühlen mit Befeuchtung:</b>  Es wird auf die eingestellte Temperatur mit Umluft gekühlt und es wird befeuchtet,
                                             die Heizung wird nie angesteuert.<br><br>
                                             <b>Heizen mit Befeuchtung:</b> Es wird auf die eingestellte Temperatur mit Umluft geheizt und und es wird befeuchtet,
@@ -140,6 +142,7 @@
                                         </p>
                                         <hr>
                                         <!----------------------------------------------------------------------------------------Luftfeuchte-->
+                                        <div style="<?php if ($mod == 0){print "display: none;";}?>">
                                         <table style="width: 100%;">
                                             <tr>
                                                 <td rowspan="4" class="td_png_icon"><h3>Luftfeuchte</h3><img src="images/befeuchtung.png" alt=""><button class="art-button" type="button" onclick="help_befeuchtung_blockFunction()">Hilfe</button></td>
@@ -211,6 +214,7 @@
                                             <button class="art-button" type="button" onclick="help_befeuchtung_noneFunction()">Schließen</button>
                                         </p>
                                         <hr>
+                                        </div>
                                         <!----------------------------------------------------------------------------------------Umluft-->
                                         <table style="width: 100%;">
                                             <tr>

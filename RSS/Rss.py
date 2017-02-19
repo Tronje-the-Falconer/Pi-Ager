@@ -321,6 +321,15 @@ def doMainLoop():
             vent1=True
             # print('Abluft-Timer augeschaltet')
 
+        #-------------------------------------------------------------------------Kühlen
+        if mod == 0:
+            evac=True                                  # Feuchtereduzierung Abluft aus
+            gpio.output(PIN_HEATER, RELAY_OFF)        # Heizung aus
+            if sensortemp >= temp + temphyston:
+                gpio.output(PIN_COOL, RELAY_ON)   # Kühlung ein
+            if sensortemp <= temp + temphystoff :
+                gpio.output(PIN_COOL, RELAY_OFF)  # Kühlung aus
+
         #-------------------------------------------------------------------------Kühlen mit Befeuchtung
         if mod == 1:
             evac=True                                  # Feuchtereduzierung Abluft aus

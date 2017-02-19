@@ -3,6 +3,13 @@
     $SET = file_get_contents('settings.json');
     $array1 = json_decode($SET, true);
     $mod=$array1['mod'];
+    if ($mod==0) {
+        $modus='- Kühlen';
+        $checked_0 = 'checked="checked"';
+    }
+    else {
+        $checked_0 = '';
+    }
     if ($mod==1) {
         $modus='- Kühlen<br>- Befeuchten';
         $checked_1 = 'checked="checked"';
