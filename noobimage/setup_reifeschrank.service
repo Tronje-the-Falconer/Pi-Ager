@@ -1,0 +1,21 @@
+[Unit]
+Description=Automatsches Installationsscript für reifeschrank. Expand Filesystem & automatisches Setzen von Passwörter und WIFI-zugang, abhaengig von setup.txt in /boot
+
+[Service]
+Type=oneshot
+ExecStart=/etc/systemd/setup_reifeschrank.sh
+
+[Install]
+Alias=setup_reifeschrank
+WantedBy=multi-user.target
+
+
+# Script ablegen /etc/systemd/system/setup_reifeschrank.service
+# in /etc/system.d/setup_reifeschrank.sh
+
+
+#AKTIVIEREN sudo systemctl enable setup_reifeschrank
+#DEAKTIVIEREN sudo systemctl disable setup_reifeschrank 
+
+
+# https://wiki.ubuntuusers.de/Howto/systemd_Service_Unit_Beispiel/
