@@ -17,7 +17,7 @@ global Reifetab
 PATH = '/var/www'
 PATH_CSV = '/var/www/csv/'
 SETTINGS_FILE = PATH+'/settings.json'
-TABELS_FILE=PATH+'/tabels.json'
+TABELS_FILE=PATH+'/tables.json'
 logfilename=PATH+'/logfile.txt' 
 
 #-----------------------------------------------------------------------------------------Function Lesen der tabels.json
