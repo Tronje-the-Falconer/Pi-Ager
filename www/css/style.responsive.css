@@ -19,7 +19,7 @@
 
 .responsive.responsive-phone .art-content-layout img 
 {
-   margin: 1%;
+   margin: 0%;
 }
 
 .responsive.responsive-phone .art-collage,
@@ -485,22 +485,22 @@
 {
     #art-resp-phone-portrait { display: block; }
 }
-.responsive .art-content-layout, 
-.responsive .art-content-layout-row, 
-.responsive .art-layout-cell 
+.responsive .art-content-layout,
+.responsive .art-content-layout-row,
+.responsive .art-layout-cell
 {
    display: block;
 }
 
-.responsive .art-layout-cell 
+.responsive .art-layout-cell
 {
    width: auto !important;
    height: auto !important;
 }
 
-.responsive .art-content-layout:after, 
-.responsive .art-content-layout-row:after, 
-.responsive .art-layout-cell:after 
+.responsive .art-content-layout:after,
+.responsive .art-content-layout-row:after,
+.responsive .art-layout-cell:after
 {
    content: ".";
    display: block;
@@ -552,4 +552,3 @@
 {
     padding: 0 2px;
 }
-

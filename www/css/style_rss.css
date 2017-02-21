@@ -33,8 +33,9 @@ body {
     width: 100%;
 }
 
-@media only screen and (max-device-width: 432px) {
-    .schaltzustaende { font-size: 10px;}
+@media only screen and (max-device-width: 400px) {
+    .minischrift { font-size: 10px;}
+    .display_none { display: none;}
     }
 
 
