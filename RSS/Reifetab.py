@@ -17,14 +17,14 @@ global Reifetab
 PATH = '/var/www'
 PATH_CSV = '/var/www/csv/'
 SETTINGS_FILE = PATH+'/settings.json'
-TABELS_FILE=PATH+'/tables.json'
+TABLES_FILE=PATH+'/tables.json'
 logfilename=PATH+'/logfile.txt' 
 
-#-----------------------------------------------------------------------------------------Function Lesen der tabels.json
-def readTabels():
-    global TABELS_FILE;
+#-----------------------------------------------------------------------------------------Function Lesen der tables.json
+def readTables():
+    global TABLES_FILE;
     s = None;
-    with open(TABELS_FILE, 'r') as file:
+    with open(TABLES_FILE, 'r') as file:
         s = file.read();
     data = json.loads(s);
     return data
@@ -58,8 +58,8 @@ if sensortype == 2 :
 if sensortype == 3 :
     sensortype_txt = '3'
     sensorname='SHT75'
-#-----------------------------------------------------------------------------------------Lesen der tabels.json, schreiben in logfile.txt
-Reifetabs= readTabels()                # Function-Aufruf
+#-----------------------------------------------------------------------------------------Lesen der tables.json, schreiben in logfile.txt
+Reifetabs= readTables()                # Function-Aufruf
 tabelle=Reifetabs['Reifetab']          # Variable tabelle = Name der Reifetabelle
 datei =tabelle +'.csv'                 # Variable datei = kompletter Dateiname
 target = open(logfilename, 'a')           # Variable target = logfile.txt öffnen
