@@ -7,6 +7,7 @@ Version 2.1.1
     - Sensor auswählbar
     - wöchentliches Diagramm
     - RaspberryPi Version in Footer
+    - Programmversion in Footer
     - Reboot und Shutdown des Raspberry's  über Settings-Seite
     - Kühlung und Heizung sowie Be/Entfeuchtung im Statusboard visuell getrennt
     - erlaubte Min-Max-Wertgrenzen werden bei den Einstellungen angezeigt
