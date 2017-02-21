@@ -28,7 +28,8 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <div>
+
+                                    <div style="">
                                     <h2>Temperaturverlauf </h2>
                                     <img src="/pic/rss_sensortemp-<?= $mode ?>.png" alt="<?= $mode ?>" />
                                     <h2>Luftfeuchtigkeitsverlauf</h2>
@@ -43,7 +44,7 @@
                                     <img src="/pic/rss_lat-<?= $mode ?>.png" alt="<?= $mode ?>" />
                                     <h2>Luftumwälzung</h2>
                                     <img src="/pic/rss_uml-<?= $mode ?>.png" alt="<?= $mode ?>" />
-                                </div>
+                                    </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->
                             </div>
                         </div>

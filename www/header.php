@@ -3,8 +3,7 @@
     # Entwicklermodus
     ini_set( 'display_errors', true );
     error_reporting( E_ALL );
-?>
-<?php
+
     $monitor_active = '';
     $diagrams_active = '';
     $settings_active = '';

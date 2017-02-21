@@ -39,7 +39,7 @@
                                     <hr>
                                     <!----------------------------------------------------------------------------------------Reifetabelle auswählen-->
 
-                                    <table style="width: 100%">
+                                    <table style="width: 100%" class="schaltzustaende minischrift">
                                         <tr>
                                             <td><img src="images/reifung.png" alt="" style="padding-left: 10px;"></td>
                                             <td style=" text-align: left; padding-left: 20px;">
@@ -85,7 +85,7 @@
                                             </td>
                                         </tr>
                                     </table>
-                                    <table id="show_agingtab" class="show_agingtab">
+                                    <table id="show_agingtab" class="show_agingtab display_none">
                                         <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
                                             <td class="show_agingcell"><div class="tooltip">S%<span class="tooltiptext">Soll-Feuchtigkeit in %</span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">D%<span class="tooltiptext">Verzögerung der Befeuchtung in Minuten</span></div></td>

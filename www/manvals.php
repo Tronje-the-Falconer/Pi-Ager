@@ -2,10 +2,10 @@
 <h2 class="art-postheader">Manuelle Werte</h2>
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <form method="post">
-                                    <div class="hg_container">
-                                        <table style="width: 100%;">
+                                    <div class="hg_container" >
+                                        <table style="width: 100%;" class="minischrift">
                                             <tr>
-                                                <td class="td_png_icon"><h3>Betriebsart</h3><img src="images/betriebsart.png" alt=""><button class="art-button" type="button" onclick="help_betriebsart_blockFunction()">Hilfe</button></td>
+                                                <td class="td_png_icon"><h3>Betriebsart</h3><img src="images/betriebsart.png" alt=""><br><button class="art-button" type="button" onclick="help_betriebsart_blockFunction()">Hilfe</button></td>
                                                 <td style=" text-align: left; padding-left: 20px;">
                                                 <input type="radio" name="mod" value="0" <?= $checked_0 ?>/><label> Kühlen</label><br>
                                                 <input type="radio" name="mod" value="1" <?= $checked_1 ?>/><label> Kühlen mit Befeuchtung</label><br>
@@ -40,16 +40,16 @@
 
                                         <hr>
                                         <!----------------------------------------------------------------------------------------Temperatur-->
-                                        <table style="width: 100%;">
+                                        <table style="width: 100%;" class="minischrift">
                                             <tr>
-                                                <td rowspan="4" class="td_png_icon"><h3>Temperatur</h3><img src="images/heiz_kuehl.png" alt=""><button class="art-button" type="button" onclick="help_temperatur_blockFunction()">Hilfe</button></td>
+                                                <td rowspan="4" class="td_png_icon"><h3>Temperatur</h3><img src="images/heiz_kuehl.png" alt=""><br><button class="art-button" type="button" onclick="help_temperatur_blockFunction()">Hilfe</button></td>
                                                 <td class="text_left_padding">Soll-Temperatur:</td>
-                                                <td class="text_left_padding"><input name="temp" maxlength="4" size="2" type="text" value=<?=$tempsoll_float?>>°C <span style="font-size: xx-small">(-2 bis 22)</span></td>
+                                                <td class="text_left_padding"><input name="temp" maxlength="4" size="2" type="text" value=<?=$tempsoll_float?>>°C<span class="display_none" style="font-size: xx-small"> (-2 bis 22)</span></td>
                                             </tr>
                                             <tr>
                                                 <td class="text_left_padding">Einschaltwert:</td>
                                                 <td class="text_left_padding"><input name="temphyston" type="text" maxlength="4" size="2" value=<?=$temphyston?>>°C
-                                                    <span style="font-size: xx-small">
+                                                    <span class="display_none" style="font-size: xx-small">
                                                         <?PHP
                                                             if($mod == 0 || $mod == 1){
                                                                 echo "(Ein bei ".($tempsoll_float+$temphyston)."°C)";
@@ -67,7 +67,7 @@
                                             <tr>
                                                 <td class="text_left_padding">Ausschaltwert:</td>
                                                 <td class="text_left_padding"><input name="temphystoff" type="text" maxlength="4" size="2" value= <?=$temphystoff?>>°C
-                                                    <span style="font-size: xx-small">
+                                                    <span class="display_none" style="font-size: xx-small">
                                                         <?PHP
                                                             if($mod == 0 || $mod == 1){
                                                                 echo "(Aus bei ".($tempsoll_float+$temphystoff)."°C)";
@@ -143,15 +143,15 @@
                                         <hr>
                                         <!----------------------------------------------------------------------------------------Luftfeuchte-->
                                         <div style="<?php if ($mod == 0){print "display: none;";}?>">
-                                        <table style="width: 100%;">
+                                        <table style="width: 100%;" class="minischrift">
                                             <tr>
-                                                <td rowspan="4" class="td_png_icon"><h3>Luftfeuchte</h3><img src="images/befeuchtung.png" alt=""><button class="art-button" type="button" onclick="help_befeuchtung_blockFunction()">Hilfe</button></td>
+                                                <td rowspan="4" class="td_png_icon"><h3>Luftfeuchte</h3><img src="images/befeuchtung.png" alt=""><br><button class="art-button" type="button" onclick="help_befeuchtung_blockFunction()">Hilfe</button></td>
                                                 <td class="text_left_padding">Soll-Feuchtigkeit</td>
-                                                <td class="text_left_padding"><input name="hum" maxlength="4" size="2" type="text" value=<?=$humsoll_float?>>% <span style="font-size: xx-small">(0 bis 99)</span></td>
+                                                <td class="text_left_padding"><input name="hum" maxlength="4" size="2" type="text" value=<?=$humsoll_float?>>%<span class="display_none" style="font-size: xx-small"> (0 bis 99)</span></td>
                                             </tr>
                                             <tr>
                                                 <td class="text_left_padding">Einschaltwert:</td>
-                                                <td class="text_left_padding"><input name="humhyston" maxlength="3" size="2" type="text" value=<?=$humhyston?>>%  <span style="font-size: xx-small">
+                                                <td class="text_left_padding"><input name="humhyston" maxlength="3" size="2" type="text" value=<?=$humhyston?>>%<span class="display_none" style="font-size: xx-small">
                                                 <?PHP
                                                             if($mod == 0 || $mod == 1 || $mod == 2){
                                                                 echo "(Ein bei ".($humsoll_float-$humhyston)."%)";
@@ -164,7 +164,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text_left_padding">Ausschaltwert:</td>
-                                                <td class="text_left_padding"><input name="humhystoff" maxlength="3" size="2" type="text" value=<?=$humhystoff?>>% <span style="font-size: xx-small">
+                                                <td class="text_left_padding"><input name="humhystoff" maxlength="3" size="2" type="text" value=<?=$humhystoff?>>%<span class="display_none" style="font-size: xx-small">
                                                 <?PHP
                                                             if($mod == 0 || $mod == 1 || $mod == 2){
                                                                 echo "(Aus bei ".($humsoll_float-$humhystoff)."%)";
@@ -176,7 +176,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text_left_padding">Verzögerung:</td>
-                                                <td class="text_left_padding"><input name="humdelay" maxlength="2" size="2" type="text" value=<?=$humdelay?>> Minuten</td>
+                                                <td class="text_left_padding"><input name="humdelay" maxlength="2" size="2" type="text" value=<?=$humdelay?>>Min</td>
                                             </tr>
                                         </table>
                                         <script>
@@ -216,15 +216,15 @@
                                         <hr>
                                         </div>
                                         <!----------------------------------------------------------------------------------------Umluft-->
-                                        <table style="width: 100%;">
+                                        <table style="width: 100%;" class="minischrift">
                                             <tr>
-                                                <td rowspan="4" class="td_png_icon"><h3>Timer Umluft</h3><img src="images/luftumwaelzung.png" alt=""><button class="art-button" type="button" onclick="help_umluft_blockFunction()">Hilfe</button></td>
+                                                <td rowspan="4" class="td_png_icon"><h3>Timer Umluft</h3><img src="images/luftumwaelzung.png" alt=""><br><button class="art-button" type="button" onclick="help_umluft_blockFunction()">Hilfe</button></td>
                                                 <td class="text_left_padding">Periode alle </td>
-                                                <td class="text_left_padding"><input type="text" size="4" maxlength="4" name="tempoff" value=<?=round($tempoff)?>>Minuten <span style="font-size: xx-small">(0 bis 1440)</span></td>
+                                                <td class="text_left_padding"><input type="text" size="3" maxlength="4" name="tempoff" value=<?=round($tempoff)?>>Min<span class="display_none" style="font-size: xx-small"> (0 bis 1440)</span></td>
                                             </tr>
                                             <tr>
                                                 <td class="text_left_padding">für die Dauer von</td>
-                                                <td class="text_left_padding"><input type="text" maxlength="4" size="4" name="tempon" value=<?=$tempon?>>Minuten <span style="font-size: xx-small">(0=aus)</span></td>
+                                                <td class="text_left_padding"><input type="text" maxlength="4" size="3" name="tempon" value=<?=$tempon?>>Min<span class="display_none" style="font-size: xx-small"> (0=aus)</span></td>
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;</td>
@@ -258,13 +258,24 @@
                                         </p>
                                         <hr>
                                         <!----------------------------------------------------------------------------------------Abluft-->
-                                        <table style="width: 100%;">
-                                            <tr><td rowspan="31" class="td_png_icon"><h3>Timer Abluft</h3><img src="images/luftaustausch.png" alt=""><button class="art-button" type="button" onclick="help_abluft_blockFunction()">Hilfe</button></td>
+                                        <table style="width: 100%;" class="minischrift">
+                                            <tr>
+                                                <td rowspan="4" class="td_png_icon"><h3>Timer Abluft</h3><img src="images/luftaustausch.png" alt=""><br><button class="art-button" type="button" onclick="help_abluft_blockFunction()">Hilfe</button></td>
                                                 <td class="text_left_padding">Periode alle </td>
-                                                <td class="text_left_padding"><input type="text" size="4" maxlength="4" name="tempoff1" value=<?=round($tempoff1)?>>Minuten <span style="font-size: xx-small">(0 bis 1440)</span></td>
+                                                <td class="text_left_padding"><input type="text" size="3" maxlength="4" name="tempoff1" value=<?=round($tempoff1)?>>Min<span class="display_none" style="font-size: xx-small"> (0 bis 1440)</span></td>
                                             </tr>
                                             <tr><td class="text_left_padding">für die Dauer von</td>
-                                                <td class="text_left_padding"><input type="text" maxlength="4" size="4" name="tempon1" value=<?=$tempon1?>>Minuten <span style="font-size: xx-small">(0=aus)</span></td>
+                                                <td class="text_left_padding"><input type="text" maxlength="4" size="3" name="tempon1" value=<?=$tempon1?>>Min<span class="display_none" style="font-size: xx-small"> (0=aus)</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
                                             </tr>
                                         </table>
                                         <script>
@@ -288,10 +299,9 @@
                                         </p>
                                         <hr>
                                         <!----------------------------------------------------------------------------------------Sensortyp-->
-                                        <table style="width: 100%;">
+                                        <table style="width: 100%;" class="minischrift">
                                             <tr>
-                                                <td class="td_png_icon"><h3>Sensortyp</h3><img src="images/sensortype.png" alt="">
-                                                    <button class="art-button" type="button" onclick="help_sensortyp_blockFunction()">Hilfe</button>
+                                                <td class="td_png_icon"><h3>Sensortyp</h3><img src="images/sensortype.png" alt=""><br><button class="art-button" type="button" onclick="help_sensortyp_blockFunction()">Hilfe</button>
                                                 </td>
                                                 <td style=" text-align: left; padding-left: 20px;">
                                                     <input type="radio" name="sensortype" value="1" <?= $checked_sens_1 ?>/><label> DHT11</label><br>

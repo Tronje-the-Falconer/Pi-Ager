@@ -65,11 +65,11 @@
                                 <img src="/pic/rss_sensortemp-hourly.png" alt="Stundenverlauf Temperatur" />
                                 <br/><br/>
                                 <h2>Luftfeuchtigkeitsverlauf</h2>
-                                <img src="/pic/rss_sensorhum-hourly.png" alt="Stundenverlauf Luftfeuchtigkeit" />  <br><br>
+                                <img src="/pic/rss_sensorhum-hourly.png" alt="Stundenverlauf Luftfeuchtigkeit" /><br><br>
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <h2>Statusboard</h2>
                                 <div class="hg_container">
-                                    <table class="schaltzustaende">
+                                    <table class="schaltzustaende minischrift">
                                         <tr>
                                             <td>
                                                 <?php
@@ -98,11 +98,11 @@
                                                 ?>
                                                 <br><img src="images/reifung.png" alt="" style="padding: 10px;">
                                             </td>
-                                            <td class="text_left_top"><b>REIFEMODUS/TABELLE:</b><br><?=$reifeart;?></td>
+                                            <td class="text_left_top"><b>REIFETABELLE:</b><br><?=$reifeart;?></td>
                                         </tr>
                                     </table>
                                     <hr>
-                                    <table class="schaltzustaende">
+                                    <table class="schaltzustaende minischrift">
                                         <tr>
                                             <td><b>TYP</b></td>
                                             <td ><b>STATUS</b></td>
@@ -192,7 +192,7 @@
                                        </tr>
                                     </table>
                                     <hr>
-                                    <table class="schaltzustaende">
+                                    <table class="schaltzustaende minischrift">
                                         <tr>
                                             <td><b>TYP</b></td>
                                             <td ><b>STATUS</b></td>

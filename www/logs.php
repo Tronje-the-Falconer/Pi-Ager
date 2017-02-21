@@ -5,7 +5,7 @@
                                 <h2 class="art-postheader">Logeinträge</h2>
                                 <div class="hg_container" style="text-align: left;">
                                     <form  method="post">
-                                        <table style="width: 100%">
+                                        <table style="width: 100%" class="minischrift">
                                             <tr>
                                                 <td>
                                                     <?php
@@ -42,12 +42,14 @@
                                     </form>
                                     <hr>
                                     <!----------------------------------------------------------------------------------------Logeinträge-->
+                                    <table class="minischrift"><tr><td>
                                     <?php
                                         $f = file('logfile.txt');
                                         foreach($f as $file) {
                                             echo '<br />'. $file;
                                         }
                                     ?>
+                                    </td></tr></table>
                                 </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->
                             </div>

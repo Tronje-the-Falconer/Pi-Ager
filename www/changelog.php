@@ -4,7 +4,7 @@
                                 <h2 class="art-postheader">Changelog</h2>
                                 <div class="hg_container" style="text-align: left;">
                                     <form  method="post">
-                                        <table style="width: 100%">
+                                        <table style="width: 100%" class=" minischrift">
                                             <tr>
                                                 <td>
                                                     <?php
@@ -33,18 +33,20 @@
                                     </form>
                                     <hr>
                                     <!----------------------------------------------------------------------------------------Logeinträge-->
+                                    <table class="minischrift"><tr><td>
                                     <?php
                                         $f = file('changelog.txt');
                                         foreach($f as $file) {
                                             echo '<br />'. $file;
                                         }
                                     ?>
+                                  </td></tr></table>
                                 </div>
 
                                  <!----------------------------------------------------------------------------------------Hall-of-Fame-->
-                                <h2 class="art-postheader">Das Entwickler-Team</h2>
+                                <h2 class="art-postheader" >Das Entwickler-Team</h2>
                                 <div class="hg_container" style="text-align: left;">
-                                        <table style="width: 100%">
+                                        <table style="width: 100%" class="minischrift">
                                             <tr>
                                                 <td>
                                                           <img src="images/tronje.gif" alt="">
