@@ -1,8 +1,8 @@
 # Initial Konfiguration
-# Reifeschrank 2.0.1-0
+# Reifeschrank 2.0.1
 # Image vom 15.02.2017
-# Version 4
-# Std Hostname 	            rpi-Reifeschrank 
+# Version 1
+# Std Hostname              rpi-Reifeschrank 
 # Std Passwoerter für alle  raspberry
 # 
 # Nur ausgefuellte Werte werden gesetzt
