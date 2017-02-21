@@ -20,6 +20,7 @@ Version 2.1.1
     - Verwendung von /var/sudowebscript.sh für Shell-Befehle
     - Content-Reload alle 60 Sekunden bei Monitor und Diagramme
     - Vorfilter für "Mülldaten" vom Sensor SHT11 & SHT22 in Rss.py
+    - Noob-Image (Textdatei für automatisches Setzen von Passwörtern, WiFi-Verbindung und extend Filesystem)
 
 --------------------------------------------------------------------------------
 
