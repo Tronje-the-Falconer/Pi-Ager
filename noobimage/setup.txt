@@ -24,5 +24,3 @@ wlanssid=
 wlankey=
 # setup.txt nach boot loeschen(leer lassen)? Oder 1 fuer behalten 
 keepconf=
-# Groesse der Partition in Prozent (nicht unter 2GB!, nur die Zahl kein % Zeichen!)
-partsize=
