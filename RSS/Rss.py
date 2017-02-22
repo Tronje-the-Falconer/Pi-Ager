@@ -294,7 +294,9 @@ def doMainLoop():
         #-------------------------------------------------------------------------Timer für Luftumwälzung-Ventilator
         if tempoff == 0:                       # gleich 0 ist an,  Dauer-Timer
             vent=False
-        if tempon > 0:                         # gleich 0 ist aus, kein Timer
+        if tempon == 0:                        # gleich 0 ist aus, kein Timer
+            vent=True
+        if tempon > 0:
             if t < tempstart + tempoff:
                 vent=True                       # Umluft - Ventilator aus
                 print ('Umluft-Timer laeuft (inaktiv)')
@@ -303,12 +305,12 @@ def doMainLoop():
                 print ('Umluft-Timer laeuft (aktiv)')
             if t >= tempstart + tempoff + tempon:
                 tempstart = int(time.time())    # Timer-Timestamp aktualisiert
-        else:
-            vent=True
 
         #-------------------------------------------------------------------------Timer für (Abluft-)Luftaustausch-Ventilator
         if tempoff1 == 0:                      # gleich 0 ist an,  Dauer-Timer
             vent1=False
+        if tempon1 == 0:                        # gleich 0 ist aus, kein Timer
+            vent1=True
         if tempon1 > 0:                        # gleich 0 ist aus, kein Timer
             if t < tempstart1 + tempoff1:
                 vent1=True                      # (Abluft-)Luftaustausch-Ventilator aus
@@ -318,8 +320,6 @@ def doMainLoop():
                 print ('Abluft-Timer laeuft (aktiv)')
             if t >= tempstart1 + tempoff1 + tempon1:
                 tempstart1 = int(time.time())   # Timer-Timestamp aktualisiert
-        else:
-            vent1=True
 
         #-------------------------------------------------------------------------Kühlen
         if mod == 0:
