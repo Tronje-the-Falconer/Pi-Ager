@@ -34,7 +34,7 @@ body {
 }
 
 @media only screen and (max-device-width: 400px) {
-    .minischrift { font-size: 10px;}
+    .minischrift { font-size: 9px;}
     .display_none { display: none;}
     }
 
