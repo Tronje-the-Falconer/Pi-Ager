@@ -206,7 +206,7 @@
                                             <td ><img src="<?= $uml ?>" title="PIN_FAN 18[12] -> IN 4 (GPIO 1)"></td>
                                             <td class="text_left">UMLUFT
                                             <?php
-                                                if ($tempon > 0 && $tempoff >0) {echo '/ TIMER';}
+                                                if ($tempon > 0 && $tempoff >0) {echo ', TIMER AN';}
                                                 elseif ($tempoff == 0) {echo ' IMMER AN';}
                                                 elseif ($tempon == 0) {echo ', TIMER AUS';}
 
@@ -221,7 +221,7 @@
                                             <td ><img src="<?= $lat ?>" title="PIN_FAN1 23[16] -> IN 5 (GPIO 4)"></td>
                                             <td class="text_left">ABLUFT
                                             <?php
-                                                if ($tempon1 > 0 && $tempoff1 >0) {echo '/ TIMER';}
+                                                if ($tempon1 > 0 && $tempoff1 >0) {echo ', TIMER AN';}
                                                 elseif ($tempoff1 == 0) {echo ' IMMER AN';}
                                                 elseif ($tempon1 == 0) {echo ', TIMER AUS';}
 
