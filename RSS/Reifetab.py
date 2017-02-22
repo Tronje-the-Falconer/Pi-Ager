@@ -84,8 +84,8 @@ for row in reader:                        # Durchlaeuft die einzelnen Reihen
 totalperiod=rownum-1                           # Variable totalperiod = Anzahl der Perioden, der Reifephasen (entspricht der Anzahl an Reihen)
 totaldauer=dauer                            # Variable totaldauer = Gesamtdauer aller Perioden
 #-----------------------------------------------------------------------------------------Lesen der Werte aus der CSV-Datei & Schreiben der Werte in die Konsole und das Logfile
-t=86400  #Anzahl der Sek. in einem Tag
-#t=1  #zum testen ein Tag vergeht in einer Sekunde
+#t=86400  #Anzahl der Sek. in einem Tag
+t=1  #zum testen ein Tag vergeht in einer Sekunde
 
 
 rownum=0                                     # Setzt Variable rownum auf 0
@@ -221,17 +221,17 @@ for row  in reader:                          # Durchlaeuft die einzelnen Reihen
             target = open(logfilename, 'a')
             target.write("\n" +"Nächste Änderung der Werte: " + endtime.strftime('%d.%m.%Y  %H:%M'))
             target.close()
-        # Schreibt in die Konsole
-        print "Programmende: " +finaltime.strftime('%d.%m.%Y  %H:%M')
-        # Schreibt in die logfile.txt
-        target = open(logfilename, 'a')
-        target.write("\n" + "Programmende: " +finaltime.strftime('%d.%m.%Y  %H:%M'))
-        target.close()
-        if rownum==totalperiod+1 :
+            # Schreibt in die Konsole
+            print "Programmende: " +finaltime.strftime('%d.%m.%Y  %H:%M')
+            # Schreibt in die logfile.txt
+            target = open(logfilename, 'a')
+            target.write("\n" + "Programmende: " +finaltime.strftime('%d.%m.%Y  %H:%M'))
+            target.close()
+        if rownum==totalperiod:
             print "Nach Programmende funktioniert der Reifeschrank weiter mit den letzten Werten"
             # Schreibt in die logfile.txt
             target = open(logfilename, 'a')
-            target.write("\n" + tabelle +" beendet die Kontrolle."+"\n"+"Der Reifeschrank funktioniert weiter mit den letzten Werten.")
+            target.write('\n Programm "' + tabelle +'" beendet die Kontrolle.'+'\n Der Reifeschrank funktioniert weiter mit den letzten Werten.')
             target.close()
         print "***********************************************"
         # Schreibt in die logfile.txt
