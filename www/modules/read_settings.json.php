@@ -71,8 +71,8 @@
     $temphystoff = $array1['temphystoff'];
     $humhyston = $array1['humhyston'];
     $humhystoff = $array1['humhystoff'];
-    $tempoff = $tempoff/60+$tempon/60;
+    $tempoff = $tempoff/60;
     $tempon = $tempon/60;
-    $tempoff1 = $tempoff1/60+$tempon1/60;
+    $tempoff1 = $tempoff1/60;
     $tempon1 = $tempon1/60;
 ?>

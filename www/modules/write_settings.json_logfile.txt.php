@@ -1,24 +1,27 @@
 <?PHP
+#var_dump($_POST);
     # Prüfung der eingegebenen Werte
     if(isset ($_POST['mod']) && $_POST['mod'] <>NULL) {                       // ist das $_POST-Array gesetzt
         $InputValid = '';
         foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
-            if (!is_numeric($CheckInput)) {
-            $InputValid = 'Bitte Eingaben überprüfen - nicht erlaubtes Zeichen!';
+            if (preg_match('/[.\D]/', $CheckInput)) {
+            $InputValid = 'Nicht erlaubtes Zeichen - Bitte nur positive ganze Zahlen verwenden!';
             }
         }
 
         if ($InputValid == ''){
-            if ( $_POST['temp']<23 &&  $_POST['temp']>-3 &&                                                                    // Prüfung Soll-Temperatur
-                $_POST['temphyston']<6 && $_POST['temphyston']>-6 && ($_POST['temphyston'] != $_POST['temphystoff']) &&       // Prüfung Einschaltwert Temp.
-                $_POST['temphystoff']<6 && $_POST['temphystoff']>-6 &&                                                        // Prüfung Ausschaltwert Temp.
+            if ( $_POST['temp']<23 &&  $_POST['temp']>-1 &&                                                                    // Prüfung Soll-Temperatur
+                $_POST['temphyston']<11 && $_POST['temphyston']>-1 && ($_POST['temphyston'] != $_POST['temphystoff']) &&       // Prüfung Einschaltwert Temp.
+                ($_POST['temphyston'] > $_POST['temphystoff']) &&                                                              // Prüfung Einschaltwert Temp.
+                $_POST['temphystoff']<11 && $_POST['temphystoff']>-1 &&                                                        // Prüfung Ausschaltwert Temp.
                 $_POST['hum']<100 && $_POST['hum']>-1 &&                                                                      // Prüfung Soll-Feuchtigkeit
-                $_POST['humhyston']<6 && $_POST['humhyston']>-6 && ($_POST['humhyston'] != $_POST['humhystoff']) &&          // Prüfung Einschaltwert Feuchte
-                $_POST['humhystoff']<6 && $_POST['humhystoff']>-6 &&                                                          // Prüfung Ausschaltwert Feuchte
-                $_POST['humdelay']<60 && $_POST['humdelay']>-1 &&                                                             // Prüfung Verzögerung Feuchte
-                $_POST['tempoff']<1441 && $_POST['tempoff']>-1 && ($_POST['tempoff'] > $_POST['tempon']) &&                   // Prüfung Intervall Umluft
+                $_POST['humhyston']<11 && $_POST['humhyston']>-1 && ($_POST['humhyston'] != $_POST['humhystoff']) &&          // Prüfung Einschaltwert Feuchte
+                ($_POST['humhyston'] > $_POST['humhystoff']) &&                                                               // Prüfung Einschaltwert Feuchte
+                $_POST['humhystoff']<11 && $_POST['humhystoff']>-1 &&                                                          // Prüfung Ausschaltwert Feuchte
+                $_POST['humdelay']<61 && $_POST['humdelay']>-1 &&                                                             // Prüfung Verzögerung Feuchte
+                $_POST['tempoff']<1441 && $_POST['tempoff']>-1 &&  (($_POST['tempoff']+$_POST['tempon'])>0) &&                 // Prüfung Intervall Umluft
                 $_POST['tempon']<1441 && $_POST['tempon']>-1  &&                                                                // Prüfung Dauer Umluft
-                $_POST['tempoff1']<1441 && $_POST['tempoff1']>-1 && ($_POST['tempoff1'] > $_POST['tempon1']) &&               // Prüfung Intervall Abluft
+                $_POST['tempoff1']<1441 && $_POST['tempoff1']>-1 && (($_POST['tempoff1']+$_POST['tempon1'])>0) &&             // Prüfung Intervall Abluft
                 $_POST['tempon1']<1441 && $_POST['tempon1']>-1                                                                  // Prüfung Dauer Abluft
             )
             {
@@ -28,9 +31,9 @@
                     'mod' => (int)$_POST['mod'],
                     'hum' => (float)$_POST['hum'],
                     'tempon' => (int)$_POST['tempon']*60,
-                    'tempoff' => (int)$_POST['tempoff']*60-$_POST['tempon']*60,
+                    'tempoff' => (int)$_POST['tempoff']*60,
                     'tempon1' => (int)$_POST['tempon1']*60,
-                    'tempoff1' => (int)$_POST['tempoff1']*60-$_POST['tempon1']*60,
+                    'tempoff1' => (int)$_POST['tempoff1']*60,
                     'temphyston' => (float)$_POST['temphyston'],
                     'temphystoff' => (float)$_POST['temphystoff'],
                     'humhyston' => (float)$_POST['humhyston'],
