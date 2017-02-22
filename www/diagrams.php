@@ -40,10 +40,10 @@
                                     <img src="/pic/rss_heat-<?= $mode ?>.png" alt="<?= $mode ?>" />
                                     <h2>Befeuchtung</h2>
                                     <img src="/pic/rss_lbf-<?= $mode ?>.png" alt="<?= $mode ?>" />
-                                    <h2>Luftaustausch</h2>
-                                    <img src="/pic/rss_lat-<?= $mode ?>.png" alt="<?= $mode ?>" />
                                     <h2>Luftumwälzung</h2>
                                     <img src="/pic/rss_uml-<?= $mode ?>.png" alt="<?= $mode ?>" />
+                                    <h2>Luftaustausch</h2>
+                                    <img src="/pic/rss_lat-<?= $mode ?>.png" alt="<?= $mode ?>" />
                                     </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->
                             </div>
