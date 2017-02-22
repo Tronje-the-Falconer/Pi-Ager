@@ -197,22 +197,35 @@
                                             <td><b>TYP</b></td>
                                             <td ><b>STATUS</b></td>
                                             <td class="text_left">&nbsp;</td>
-                                            <td ><b>Intervall</b></td>
+                                            <td ><b>Periode</b></td>
                                             <td >&nbsp;</td>
                                             <td ><b>Dauer</b></td>
                                         </tr>
                                         <tr>
-                                            <td ><img <?php if ($tempoff == 0.00 || $tempon == 0) {echo 'class="transpng"';} ?> src="images/luftumwaelzung.png" alt=""></td>
+                                            <td ><img <?php if ($tempon == 0) {echo 'class="transpng"';} ?> src="images/luftumwaelzung.png" alt=""></td>
                                             <td ><img src="<?= $uml ?>" title="PIN_FAN 18[12] -> IN 4 (GPIO 1)"></td>
-                                            <td class="text_left">UMLUFT / TIMER</td>
+                                            <td class="text_left">UMLUFT
+                                            <?php
+                                                if ($tempon > 0 && $tempoff >0) {echo '/ TIMER';}
+                                                elseif ($tempoff == 0) {echo ', IMMER AN';}
+                                                elseif ($tempon == 0) {echo ', TIMER AUS';}
+
+
+                                            ?></td>
                                             <td ><?=$tempoff?> Min</td>
                                             <td ></td>
                                             <td ><?=$tempon?> Min</td>
                                         </tr>
                                         <tr>
-                                            <td ><img <?php if ($tempoff1 == 0.00 || $tempon1 == 0) {echo 'class="transpng"';} ?> src="images/luftaustausch.png" alt=""></td>
+                                            <td ><img <?php if ($tempon1 == 0) {echo 'class="transpng"';} ?> src="images/luftaustausch.png" alt=""></td>
                                             <td ><img src="<?= $lat ?>" title="PIN_FAN1 23[16] -> IN 5 (GPIO 4)"></td>
-                                            <td class="text_left">ABLUFT / TIMER</td>
+                                            <td class="text_left">ABLUFT
+                                            <?php
+                                                if ($tempon1 > 0 && $tempoff1 >0) {echo '/ TIMER';}
+                                                elseif ($tempoff1 == 0) {echo ', IMMER AN';}
+                                                elseif ($tempon1 == 0) {echo ', TIMER AUS';}
+
+                                            ?></td>
                                             <td ><?=$tempoff1?> Min</td>
                                             <td ></td>
                                             <td ><?=$tempon1?> Min</td>

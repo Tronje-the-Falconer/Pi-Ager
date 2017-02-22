@@ -44,7 +44,7 @@
                                             <tr>
                                                 <td rowspan="4" class="td_png_icon"><h3>Temperatur</h3><img src="images/heiz_kuehl.png" alt=""><br><button class="art-button" type="button" onclick="help_temperatur_blockFunction()">Hilfe</button></td>
                                                 <td class="text_left_padding">Soll-Temperatur:</td>
-                                                <td class="text_left_padding"><input name="temp" maxlength="4" size="2" type="text" value=<?=$tempsoll_float?>>°C<span class="display_none" style="font-size: xx-small"> (-2 bis 22)</span></td>
+                                                <td class="text_left_padding"><input name="temp" maxlength="4" size="2" type="text" value=<?=$tempsoll_float?>>°C<span class="display_none" style="font-size: xx-small"> (0 bis 22)</span></td>
                                             </tr>
                                             <tr>
                                                 <td class="text_left_padding">Einschaltwert:</td>
@@ -97,30 +97,24 @@
                                             }
                                         </script>
                                         <p id="help_temperatur" class="help_p">
-                                            <b>Solltemperatur:</b> Hier wird die gewünschte Temperatur eingestellt. Der minimale Wert beträgt -2°C, der maximale +22°C.
+                                            <b>Solltemperatur:</b> Hier wird die gewünschte Temperatur eingestellt. Der minimale Wert beträgt 0°C, der maximale +22°C.
                                             Technisch bedingt können nicht alle Werte in jeder Betriebsart angefahren werden. Die Umluft ist während der Kühl-oder Heizphasen immer aktiv.<br><br>
                                             <b><u>Schalthysterese</u></b><br>
-                                            <b>Einschaltwert:</b> ist der Wert, bei dem die Regelung aktiv wird (Wertgrenze: +/- 5°C)<br>
-                                            <b>Ausschaltwert:</b> ist der Wert, bei dem die Regelung inaktiv wird (Wertgrenze: +/- 5°C)<br>
-                                            Das ergibt eine Gesamthysterese von 10°C. Um ein wildes Ein- und Ausschalten zu vermeiden, dürfen die Werte nicht gleich sein.
+                                            <b>Einschaltwert:</b> ist der Wert, bei dem die Regelung aktiv wird (Wertgrenze:  0-10°C). Dieser Wert muss immer größer sein, als der Ausschaltwert.<br>
+                                            <b>Ausschaltwert:</b> ist der Wert, bei dem die Regelung inaktiv wird (Wertgrenze: 0-10°C)<br>
+                                            Um ein wildes Ein- und Ausschalten zu vermeiden, dürfen die Werte nicht gleich sein.
                                             <br><br>
-                                            <b>Beispiel für Kühlung:</b> <i>Solltemperatur: 12°C; Einschaltwert: 2°C; Ausschaltwert 0.5°C</i><br>
-                                            Einschalttemperatur = Solltemperatur + Einschaltwert --> 12°C + 2°C = 14°C<br>
-                                            Ausschalttemperatur = Solltemperatur + Ausschaltwert --> 12°C + 0.5°C = 12.5°C<br>
-                                            Wenn also 14 Grad überschritten werden, kühlt der Schrank auf bis 12.5°C runter und schaltet dann ab, um ein zu starkes nachkühlen zu vermeiden.
+                                            <b>Beispiel für Kühlung:</b> <i>Solltemperatur: 12°C; Einschaltwert: 3°C; Ausschaltwert 1°C</i><br>
+                                            Einschalttemperatur = Solltemperatur + Einschaltwert --> 12°C + 3°C = 15°C<br>
+                                            Ausschalttemperatur = Solltemperatur + Ausschaltwert --> 12°C + 1°C = 13°C<br>
+                                            Wenn also 15 Grad überschritten werden, kühlt der Schrank auf bis 13°C runter und schaltet dann ab, um ein zu starkes nachkühlen zu vermeiden.
                                             Das gesamte Verhalten ist von Schrank zu Schrank unterschiedlich und daher individuell zu ermitteln.
                                             <br><br>
-                                            <b>Beispiel für Heizung:</b> <i>Solltemperatur: 22°C; Einschaltwert: 2°C; Ausschaltwert 0.5°C</i><br>
-                                            Einschalttemperatur = Solltemperatur - Einschaltwert --> 22°C - 2°C = 20°C<br>
-                                            Ausschalttemperatur = Solltemperatur - Ausschaltwert --> 22°C - 0.5°C = 21.5°C<br>
-                                            Wenn also 20 Grad unterschritten werden, heizt der Schrank auf bis 21.5°C auf und schaltet dann ab, um ein zu starkes nachheizen zu vermeiden.
+                                            <b>Beispiel für Heizung:</b> <i>Solltemperatur: 22°C; Einschaltwert: 3°C; Ausschaltwert 1°C</i><br>
+                                            Einschalttemperatur = Solltemperatur - Einschaltwert --> 22°C - 3°C = 19°C<br>
+                                            Ausschalttemperatur = Solltemperatur - Ausschaltwert --> 22°C - 1°C = 21°C<br>
+                                            Wenn also 19 Grad unterschritten werden, heizt der Schrank auf bis 21°C auf und schaltet dann ab, um ein zu starkes nachheizen zu vermeiden.
                                             Das gesamte Verhalten ist von Schrank zu Schrank unterschiedlich und daher individuell zu ermitteln.
-                                            <br><br>
-                                            <b>Um die Schalthysterese zu vergrößern</b>, kann auch das Vorzeichen umgekehrt werden:
-                                            <b>Beispiel für Kühlung:</b> <i>Solltemperatur: 12°C; Einschaltwert: 2°C; Ausschaltwert -0.5°C</i><br>
-                                            Einschalttemperatur = Solltemperatur + Einschaltwert --> 12°C + 2°C = 14°C<br>
-                                            Ausschalttemperatur = Solltemperatur + Ausschaltwert --> 12°C + (-0.5°C) = 11.5°C<br>
-                                            Wenn also 14 Grad überschritten werden, kühlt der Schrank auf bis 11.5°C runter und schaltet dann ab.
                                             <br><br>
                                             <b>Automatikmodus:</b> In jedem Automatikmodus wird die Temperatur vollständig automatisch geregelt.
                                             Zunächst wird die aktuelle Temperatur ermittelt. Dann entscheidet sich, welches Verfahren (Kühlen oder Heizen) geeignet ist,
@@ -136,8 +130,7 @@
                                             <br><br>
                                             <b>EMPFEHLUNG:</b> Kontrolle der gespeicherten Werte im Logfile!
                                             <br><br>
-                                            <b>ACHTUNG: KEINE KOMMAS VERWENDEN!</b><br>
-                                            Als dezimale Stelle bitte nur den Punkt "." verwenden.<br><br>
+                                            <b>ACHTUNG:</b> Nur positive ganze Zahlen verwenden!<br><br>
                                             <button class="art-button" type="button" onclick="help_temperatur_noneFunction()">Schließen</button>
                                         </p>
                                         <hr>
@@ -176,7 +169,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text_left_padding">Verzögerung:</td>
-                                                <td class="text_left_padding"><input name="humdelay" maxlength="2" size="2" type="text" value=<?=$humdelay?>>Min</td>
+                                                <td class="text_left_padding"><input name="humdelay" maxlength="2" size="2" type="text" value=<?=$humdelay?>>Min<span class="display_none" style="font-size: xx-small"> (0 bis 60)</span></td>
                                             </tr>
                                         </table>
                                         <script>
@@ -191,12 +184,12 @@
                                             <b>Sollfeuchtigkeit:</b> Hier wird die gewünschte Luftfeuchte eingestellt. Der minimale Wert beträgt theoretisch 0% und maximal 99%.
                                             Diese Werte werden aber in der Regel nie erreicht werden. Die Umluft ist während der Befeuchtung immer aktiv. Die Wirksamkeit der Entfeuchtung (Automatikmodus mit mit Be- und Entfeuchtung) ist abhängig von der Umgebungsluftfeuchte, da nur eine passive Entfeuchtung durch Abluft stattfindet.<br><br>
                                             <b><u>Schalthysterese</u></b><br>
-                                            <b>Einschaltwert:</b> ist der Wert, bei dem die Regelung aktiv wird (Wertgrenze: +/- 5%)<br>
-                                            <b>Ausschaltwert:</b> ist der Wert, bei dem die Regelung inaktiv wird (Wertgrenze: +/- 5%)<br>
-                                            Das ergibt eine Gesamthysterese von 10%. Um ein wildes Ein- und Ausschalten zu vermeiden, dürfen die Werte nicht gleich sein.
+                                            <b>Einschaltwert:</b> ist der Wert, bei dem die Regelung aktiv wird (Wertgrenze: 0-10%)<br>
+                                            <b>Ausschaltwert:</b> ist der Wert, bei dem die Regelung inaktiv wird (Wertgrenze:0-10%)<br>
+                                            Um ein wildes Ein- und Ausschalten zu vermeiden, dürfen die Werte nicht gleich sein.
                                             <br><br>
                                             <b>Verzögerung:</b> hier wird die Verzögerungszeit eingestellt, bis der Befeuchter bei zu niedriger Luftfeuchtigkeit einschaltet.
-                                            Damit kann die kurzeitig fallende Luftfeuchtigkeit beim "Kühlen", beim "Timer-Abluft" oder "Entfeuchten" ausgeblendet werden.
+                                            Damit kann die kurzeitig fallende Luftfeuchtigkeit beim "Kühlen", beim "Timer-Abluft" oder "Entfeuchten" ausgeblendet werden. Der minimale Wert beträgt 0 Minuten, der maximale 60 Minuten.
                                             <br><br>
                                             <b>Beispiel:</b> <i>Sollfeuchtigkeit: 75%; Einschaltwert: 5%; Ausschaltwert 1%</i><br>
                                             Einschaltfeuchtigkeit = Sollfeuchtigkeit - Einschaltwert --> 75% - 5% = 70%<br>
@@ -209,8 +202,9 @@
                                             die eingestellte Soll-Feuchtigkeit zu erreichen. Das bedeutet aber auch, dass die Schaltwerte der Hysterese nicht zu eng beieinander
                                             liegen dürfen. Anderenfalls könnten Befeuchtung und Entfeuchtung immer im Wechsel an und ausgeschaltet werden.
                                             <br><br>
-                                            <b>ACHTUNG: KEINE KOMMAS VERWENDEN!</b><br>
-                                            Als dezimale Stelle bitte nur den Punkt "." verwenden.<br><br>
+                                            <b>EMPFEHLUNG:</b> Kontrolle der gespeicherten Werte im Logfile!
+                                            <br><br>
+                                            <b>ACHTUNG:</b> Nur positive ganze Zahlen verwenden!<br><br>
                                             <button class="art-button" type="button" onclick="help_befeuchtung_noneFunction()">Schließen</button>
                                         </p>
                                         <hr>
@@ -246,14 +240,14 @@
                                             }
                                         </script>
                                         <p id="help_umluft" class="help_p">
-                                            <b>Periode:</b> Hier wird die Pausenzeit eingestellt, die bis zum erneuten Einschalten der Umluft abgewartet wird (genau genommen Periode - Dauer). Bei Wert 0 ist die Umluft-Timerfunktion ausgeschaltet. Der maximale Wert liegt bei 1440min.
+                                            <b>Periode:</b> Hier wird die Pausenzeit eingestellt, die bis zum erneuten Einschalten der Umluft abgewartet wird. Bei Wert 0 (= keine Pause) ist die Umluft dauerhaft eingeschaltet. Der maximale Wert liegt bei 1440min.
                                             <br><br>
-                                            <b>Dauer:</b> Hier wird die Umluftdauer eingestellt, in während der der Lüfter läuft. Bei Wert 0 ist die Umluft-Timerfunktion ausgeschaltet. Der maximale Wert beträgt 1439min und muss immer kleiner als die Periode sein.
+                                            <b>Dauer:</b> Hier wird die Umluftzeit eingestellt, während der der Lüfter läuft. Bei Wert 0 ist die Umluft-Timerfunktion ausgeschaltet. Der maximale Wert beträgt 1440min.
                                             <br><br>
-                                            <b>Hinweis:</b> Der Umluft-Lüfter läuft unabhängig von den Timereinstellungen außerdem auch während der Kühlung, Heizung und Befeuchtung.
+                                            <b>Hinweis:</b> Der Umluft-Lüfter läuft -unabhängig von den Timereinstellungen- außerdem auch während der Kühlung, Heizung und Befeuchtung.
                                             <br><br>
-                                            <b>ACHTUNG: KEINE KOMMAS VERWENDEN!</b><br>
-                                            Als dezimale Stelle bitte nur den Punkt "." verwenden.<br><br>
+                                            <b>ACHTUNG:</b><br>
+                                            Periode=0 und Dauer=0 ist nicht sinnvoll und nicht erlaubt.<br><br>
                                             <button class="art-button" type="button" onclick="help_umluft_noneFunction()">Schließen</button>
                                         </p>
                                         <hr>
@@ -287,14 +281,14 @@
                                             }
                                         </script>
                                         <p id="help_abluft" class="help_p">
-                                            <b>Periode:</b> Hier wird die Pausenzeit eingestellt, die bis zum erneuten Einschalten der Abluft abgewartet wird (genau genommen Periode - Dauer). Bei Wert 0 ist die Abluft-Timerfunktion ausgeschaltet. Der maximale Wert liegt bei 1440min.
+                                            <b>Periode:</b> Hier wird die Pausenzeit eingestellt, die bis zum erneuten Einschalten der Abluft abgewartet wird. Bei Wert 0 (= keine Pause) ist die Abluft dauerhaft eingeschaltet. Der maximale Wert liegt bei 1440min.
                                             <br><br>
-                                            <b>Dauer:</b> Hier wird die Abluftdauer eingestellt, in während der der Lüfter läuft. Bei Wert 0 ist die Abluft-Timerfunktion ausgeschaltet. Der maximale Wert beträgt 1439min und muss immer kleiner als die Periode sein.
+                                            <b>Dauer:</b> Hier wird die Abluftzeit eingestellt, während der der Lüfter läuft. Bei Wert 0 ist die Abluft-Timerfunktion ausgeschaltet. Der maximale Wert beträgt 1440min.
                                             <br><br>
-                                            <b>Hinweis:</b> Der Abluft-Lüfter läuft unabhängig von den Timereinstellungen außerdem auch während der Entfeuchtung im Modus "Automatik mit Be- und Entfeuchtung".
+                                            <b>Hinweis:</b> Der Abluft-Lüfter läuft -unabhängig von den Timereinstellungen- außerdem auch während der Entfeuchtung im Modus "Automatik mit Be- und Entfeuchtung".
                                             <br><br>
-                                            <b>ACHTUNG: KEINE KOMMAS VERWENDEN!</b><br>
-                                            Als dezimale Stelle bitte nur den Punkt "." verwenden.<br><br>
+                                            <b>ACHTUNG:</b><br>
+                                            Periode=0 und Dauer=0 ist nicht sinnvoll und nicht erlaubt.<br><br>
                                             <button class="art-button" type="button" onclick="help_abluft_noneFunction()">Schließen</button>
                                         </p>
                                         <hr>
