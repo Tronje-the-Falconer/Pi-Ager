@@ -10,17 +10,17 @@
 #
 # Logfile wird unter /boot/setup.log angelegt 
 #
-# Hostname:
+# Hostname, wie soll der Raspberry Pi im Netzwerk heissen:
 piname=
-# pi Passwort:
+# Passwort fuer Benutzer pi:
 pipass=
-# root Passwort:
+# Passwort fuer Benutzer root:
 rootpass=
-# webgui Passwort:
+# Passwort fuer Benutzer reifeschrank auf der Webiste Settings:
 webguipw=
 # WLAN Netzwerkname:
 wlanssid=
 # WLAN Schluessel:
 wlankey=
-# setup.txt nach boot loeschen(leer lassen)? Oder 1 fuer behalten 
+# setup.txt nach boot loeschen? leer lassen fuer loeschen oder 1 fuer behalten 
 keepconf=
