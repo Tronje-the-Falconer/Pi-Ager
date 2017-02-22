@@ -292,9 +292,9 @@ def doMainLoop():
 
         # Durch den folgenden Timer läuft der Ventilator in den vorgegebenen Intervallen zusätzlich zur generellen Umluft bei aktivem Heizen, Kühlen oder Befeuchten
         #-------------------------------------------------------------------------Timer für Luftumwälzung-Ventilator
-        if tempoff > 0:                         # gleich 0 ist aus, kein Timer
-            #Unix Timestamp
-            t = int(time.time())
+        if tempoff == 0:                       # gleich 0 ist an,  Dauer-Timer
+            vent=False
+        if tempon > 0:                         # gleich 0 ist aus, kein Timer
             if t < tempstart + tempoff:
                 vent=True                       # Umluft - Ventilator aus
                 print ('Umluft-Timer laeuft (inaktiv)')
@@ -305,10 +305,11 @@ def doMainLoop():
                 tempstart = int(time.time())    # Timer-Timestamp aktualisiert
         else:
             vent=True
-            #  print ('Abluft-Timer augeschaltet')
 
         #-------------------------------------------------------------------------Timer für (Abluft-)Luftaustausch-Ventilator
-        if tempoff1 > 0:                        # gleich 0 ist aus, kein Timer
+        if tempoff1 == 0:                      # gleich 0 ist an,  Dauer-Timer
+            vent1=False
+        if tempon1 > 0:                        # gleich 0 ist aus, kein Timer
             if t < tempstart1 + tempoff1:
                 vent1=True                      # (Abluft-)Luftaustausch-Ventilator aus
                 print ('Abluft-Timer laeuft (inaktiv)')
@@ -319,34 +320,34 @@ def doMainLoop():
                 tempstart1 = int(time.time())   # Timer-Timestamp aktualisiert
         else:
             vent1=True
-            # print('Abluft-Timer augeschaltet')
 
         #-------------------------------------------------------------------------Kühlen
         if mod == 0:
-            evac=True                                  # Feuchtereduzierung Abluft aus
-            gpio.output(PIN_HEATER, RELAY_OFF)        # Heizung aus
+            evac=True                               # Feuchtereduzierung Abluft aus
+            gpio.output(PIN_HEATER, RELAY_OFF)      # Heizung aus
+            gpio.output(PIN_HUM, RELAY_OFF)         # Befeuchtung aus
             if sensortemp >= temp + temphyston:
-                gpio.output(PIN_COOL, RELAY_ON)   # Kühlung ein
+                gpio.output(PIN_COOL, RELAY_ON)     # Kühlung ein
             if sensortemp <= temp + temphystoff :
-                gpio.output(PIN_COOL, RELAY_OFF)  # Kühlung aus
+                gpio.output(PIN_COOL, RELAY_OFF)    # Kühlung aus
 
         #-------------------------------------------------------------------------Kühlen mit Befeuchtung
         if mod == 1:
-            evac=True                                  # Feuchtereduzierung Abluft aus
-            gpio.output(PIN_HEATER, RELAY_OFF)        # Heizung aus
+            evac=True                               # Feuchtereduzierung Abluft aus
+            gpio.output(PIN_HEATER, RELAY_OFF)      # Heizung aus
             if sensortemp >= temp + temphyston:
-                gpio.output(PIN_COOL, RELAY_ON)   # Kühlung ein
+                gpio.output(PIN_COOL, RELAY_ON)     # Kühlung ein
             if sensortemp <= temp + temphystoff :
-                gpio.output(PIN_COOL, RELAY_OFF)  # Kühlung aus
+                gpio.output(PIN_COOL, RELAY_OFF)    # Kühlung aus
             if sensorhum <= hum - humhyston:
-                gpio.output(PIN_HUM, RELAY_ON)    # Befeuchtung ein
+                gpio.output(PIN_HUM, RELAY_ON)      # Befeuchtung ein
             if sensorhum >= hum - humhystoff:
-                gpio.output(PIN_HUM, RELAY_OFF)   # Befeuchtung aus
+                gpio.output(PIN_HUM, RELAY_OFF)     # Befeuchtung aus
 
         #-------------------------------------------------------------------------Heizen mit Befeuchtung
         if mod == 2:
-            evac=True                                    # Feuchtereduzierung Abluft aus
-            gpio.output(PIN_COOL, RELAY_OFF)            # Kühlung aus
+            evac=True                               # Feuchtereduzierung Abluft aus
+            gpio.output(PIN_COOL, RELAY_OFF)        # Kühlung aus
             if sensortemp <= temp - temphyston:
                 gpio.output(PIN_HEATER, RELAY_ON)   # Heizung ein
             if sensortemp >= temp - temphystoff:
@@ -358,7 +359,7 @@ def doMainLoop():
 
         #-------------------------------------------------------------------------Automatiktemperatur mit Befeuchtung
         if mod == 3:
-            evac=True                                    # Feuchtereduzierung Abluft aus
+            evac=True                               # Feuchtereduzierung Abluft aus
             if sensortemp >= temp + temphyston:
                 gpio.output(PIN_COOL, RELAY_ON)     # Kühlung ein
             if sensortemp <= temp + temphystoff:
@@ -384,15 +385,15 @@ def doMainLoop():
                 gpio.output(PIN_HEATER, RELAY_OFF)  # Heizung aus
             if sensorhum <= hum - humhyston:
                 count = count+1
-                if count >= humdelay:                # Verzögerung der Luftbefeuchtung
+                if count >= humdelay:               # Verzögerung der Luftbefeuchtung
                     gpio.output(PIN_HUM, RELAY_ON)  # Luftbefeuchter ein
             if sensorhum >= hum - humhystoff:
                 gpio.output(PIN_HUM, RELAY_OFF)     # Luftbefeuchter aus
                 count = 0
             if sensorhum >= hum + humhyston:
-                evac = False                         # Feuchtereduzierung Abluft-Ventilator ein
+                evac = False                        # Feuchtereduzierung Abluft-Ventilator ein
             if sensorhum <= hum + humhystoff:
-                evac = True                          # Feuchtereduzierung Abluft-Ventilator aus
+                evac = True                         # Feuchtereduzierung Abluft-Ventilator aus
 
         #-------------------------------------------------------------------------Schalten des Umluft - Ventilators
         if gpio.input(PIN_HEATER) or gpio.input(PIN_COOL) or gpio.input(PIN_HUM) or vent == False:
