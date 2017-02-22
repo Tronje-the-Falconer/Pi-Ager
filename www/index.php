@@ -207,7 +207,7 @@
                                             <td class="text_left">UMLUFT
                                             <?php
                                                 if ($tempon > 0 && $tempoff >0) {echo '/ TIMER';}
-                                                elseif ($tempoff == 0) {echo ', IMMER AN';}
+                                                elseif ($tempoff == 0) {echo ' IMMER AN';}
                                                 elseif ($tempon == 0) {echo ', TIMER AUS';}
 
 
@@ -222,7 +222,7 @@
                                             <td class="text_left">ABLUFT
                                             <?php
                                                 if ($tempon1 > 0 && $tempoff1 >0) {echo '/ TIMER';}
-                                                elseif ($tempoff1 == 0) {echo ', IMMER AN';}
+                                                elseif ($tempoff1 == 0) {echo ' IMMER AN';}
                                                 elseif ($tempon1 == 0) {echo ', TIMER AUS';}
 
                                             ?></td>
