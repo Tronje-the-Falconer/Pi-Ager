@@ -4,53 +4,53 @@
 # shell_exec('sudo /var/sudowebscript.sh PARAMETER')
 
 case "$1" in
-    startrss) #Starten von Rss.py
-        python /opt/RSS/Rss.py > /dev/null 2>/dev/null &
+    startmain) #Starten von main.py
+        python /opt/pi-ager/main.py > /dev/null 2>/dev/null &
     ;;
-    pkillrss) #Stoppen von Rss.py
-        pkill -f Rss.py
+    pkillmain) #Stoppen von Rss.py
+        pkill -f main.py
     ;;
-    greprss) #Überprüfen von Rss.py | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach RSS.py gesucht
-        ps ax | grep -v grep | grep Rss.py
+    grepmain) #Überprüfen von Rss.py | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach RSS.py gesucht
+        ps ax | grep -v grep | grep main.py
     ;;
-    startreifetab) #Starten von Reifetab.py
-        python /opt/RSS/Reifetab.py > /dev/null 2>/dev/null &
+    starthangingtable) #Starten von hangingtable.py
+        python /opt/pi-ager/hangingtable.py > /dev/null 2>/dev/null &
     ;;
-    pkillreifetab) #Stoppen von Reifetab.py
-        pkill -f Reifetab.py
+    pkillhangingtable) #Stoppen von hangingtable.py
+        pkill -f hangingtable.py
     ;;
-    grepreifetab) #Überprüfen von Reifetab.py  | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach Reifetab.py gesucht
-        ps ax | grep -v grep | grep Reifetab.py
+    grephangingtable) #Überprüfen von hangingtable.py  | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach Reifetab.py gesucht
+        ps ax | grep -v grep | grep hangingtable.py
     ;;
     read18)#Ansteuern von GPIO18 Umluftventilator
-        /usr/local/bin/gpio -g read 18
-    ;;
-    read22) #Ansteuern von GPIO22 Kühlschrankkompressor
-        /usr/local/bin/gpio -g read 22
-    ;;
-    read23)#Ansteuern von GPIO23 Austauschlüfter
-        /usr/local/bin/gpio -g read 23
-    ;;
-    read24)#Ansteuern von GPIO24 Luftbefeuchter
-        /usr/local/bin/gpio -g read 24
-    ;;
-    read27)#Ansteuern von GPIO27 Heizkabel
         /usr/local/bin/gpio -g read 27
     ;;
+    read22) #Ansteuern von GPIO22 Kühlschrankkompressor
+        /usr/local/bin/gpio -g read 24
+    ;;
+    read23)#Ansteuern von GPIO23 Austauschlüfter
+        /usr/local/bin/gpio -g read 17
+    ;;
+    read24)#Ansteuern von GPIO24 Luftbefeuchter
+        /usr/local/bin/gpio -g read 23
+    ;;
+    read27)#Ansteuern von GPIO27 Heizkabel
+        /usr/local/bin/gpio -g read 22
+    ;;
     write18)#Ansteuern von GPIO18 Umluftventilator
-        /usr/local/bin/gpio -g write 18 1
+        /usr/local/bin/gpio -g write 27 1
     ;;
     write22) #Ansteuern von GPIO22 Kühlschrankkompressor
-        /usr/local/bin/gpio -g write 22 1
-    ;;
-    write23)#Ansteuern von GPIO23 Austauschlüfter
-        /usr/local/bin/gpio -g write 23 1
-    ;;
-    write24)#Ansteuern von GPIO24 Luftbefeuchter
         /usr/local/bin/gpio -g write 24 1
     ;;
+    write23)#Ansteuern von GPIO23 Austauschlüfter
+        /usr/local/bin/gpio -g write 17 1
+    ;;
+    write24)#Ansteuern von GPIO24 Luftbefeuchter
+        /usr/local/bin/gpio -g write 23 1
+    ;;
     write27)#Ansteuern von GPIO27 Heizkabel
-        /usr/local/bin/gpio -g write 27 1
+        /usr/local/bin/gpio -g write 22 1
     ;;
     reboot) # reboot
         reboot
