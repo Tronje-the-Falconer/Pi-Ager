@@ -1,0 +1,46 @@
+tempon       -> circulation_air_duration       #  Umluftdauer
+tempoff      -> circulation_air_period         #  Umluftperiode
+tempstart    -> circulation_air_start          #  Unix-Zeitstempel für den Zählstart des Timers Umluft
+tempon1      -> exhaust_air_duration           #  (Abluft-)luftaustauschdauer
+tempoff1     -> exhaust_air_period             #  (Abluft-)luftaustauschperiode
+tempstart1   -> exhaust_air_start              #  Unix-Zeitstempel für den Zählstart des Timers (Abluft-)Luftaustausch
+sensortemp   -> sensor_temperature             #  Gemessene Temperatur am Sensor
+sensorhum    -> sensor_humidity                #  Gemessene Feuchtigkeit am Sensor
+temphyston   -> switch_on_cooling_compressor   #  Einschalttemperatur
+temphystoff  -> switch_off_cooling_compressor  #  Ausschalttemperatur
+humhyston    -> switch_on_humidifier           #  Einschaltfeuchte
+humhystoff   -> switch_off_humidifier          #  Ausschaltfeuchte
+settings
+uml          -> status_circulating_air         #  Umluft
+lat          -> status_exhaust_air             #  (Abluft-)Luftaustausch
+heat         -> status_heater                  #  Heizung
+cool         -> status_cooling_compressor      #  Kühlung
+z
+lbf          -> status_humidifier              #  Luftbefeuchtung
+count        -> counter_humidify               #  Zähler Verzögerung der Luftbefeuchtung
+humdelay     -> delay_humidify                 #  Luftbefeuchtungsverzögerung
+evac         -> status_exhaust_fan             #  Variable für die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
+
+
+current.json = json.dumps({"temperature":sensor_temperature, "heizung":gpio.input(pin_heater), "luftaustausch":gpio.input(pin_exhaust_fan), "kuhlung":gpio.input(pin_cooling_compressor), "umluft":gpio.input(pin_recirculation_fan),"luftfeuchtigkeit":sensor_humidity, 'date':int(time.time())})
+               json.dumps({"sensor_temperature":sensor_temperature, "status_heater":gpio.input(pin_heater), "status_exhaust_air":gpio.input(pin_exhaust_fan), "status_cooling_compressor":gpio.input(pin_cooling_compressor), "status_circulating_air":gpio.input(pin_recirculation_fan),"sensor_humidity":sensor_humidity, 'date':int(time.time())})
+    
+setting.json = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff, "humdelay":humdelay, 'date':int(time.time()), 'sensortype':sensortype})
+               json.dumps({"modus":modus, "setpoint_temperature":setpoint_temperature, "setpoint_humidity":setpoint_humidity, "circulation_air_period":circulation_air_period, "circulation_air_duration":circulation_air_duration, "exhaust_air_period":exhaust_air_period, "exhaust_air_duration":exhaust_air_duration,'date':int(time.time())})
+    
+tables.json Reifetab -> hangingtable
+
+config.json
+sensortype, (1,2) # DHT/SHT
+language, (de, en) #Sprache der Ausgaben
+switch_on_cooling_compressor   #  Einschalttemperatur
+switch_off_cooling_compressor  #  Ausschalttemperatur
+switch_on_humidifier           #  Einschaltfeuchte
+switch_off_humidifier          #  Ausschaltfeuchte
+delay_humidify                 #  Luftbefeuchtungsverzögerung
+    
+csv Header
+    mod,hum,humdelay,humhyston,humhystoff,temp,temphyston,temphystoff,tempon,tempoff,tempon1,tempoff1,days
+    modus,setpoint_humidity,delay_humidify,switch_on_humidifier,switch_off_humidifier,setpoint_temperature,switch_on_cooling_compressor,switch_off_cooling_compressor,circulation_air_duration,circulation_air_period,exhaust_air_duration,exhaust_air_period,days
+
+betriebsart -> operating_mode
