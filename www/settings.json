@@ -1,1 +1,1 @@
-{"temp":2,"mod":4,"hum":85,"tempon":1440,"tempoff":2160,"tempon1":900,"tempoff1":12960,"temphyston":1,"temphystoff":0,"humhyston":5,"humhystoff":2,"humdelay":5,"date":1487326201,"sensortype":2}
+{"modus":4, "setpoint_temperature":2, "setpoint_humidity":85, "circulation_air_period":2160, "circulation_air_duration":1440, "exhaust_air_period":12960, "exhaust_air_duration":900,'date':1487326201}
