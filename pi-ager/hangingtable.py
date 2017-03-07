@@ -36,7 +36,7 @@ def read_config_json():
         config_data = configjsonfile.read()
     data_configjsonfile = json.loads(config_data)
     return data_configjsonfile
-#----------------------------------------------------------------------------------Function Schreiben der settings.json
+#---------------------------------------------------------------------------------- Function Schreiben der settings.json
 def write_settings_json(modus, setpoint_temperature, setpoint_humidity, circulation_air_period, circulation_air_duration, exhaust_air_period, exhaust_air_duration):
     global settings_json_file
 
@@ -53,14 +53,7 @@ def write_logfile(logtext):
     logfile_txt.close
     print logtext
 
-def get_last_value(key):
-    read_settings_json()
-    key = data_settings_json['' + key + '']
-    value = float(key)
-    log_txt = str(key)
-    exec('%s = %d') % (key,value)    # füllt die jeweilige Variable mit altem Wert (value = columname)
-    
-    
+#---------------------------------------------------------------------------------- Funktion zum Lesen des Dictionarys und setzen der Werte
 def read_dictionary(dictionary):
     # print 'DEBUG read_dictionary()'
     # Variablen aus Dictionary setzen
@@ -173,6 +166,7 @@ day_in_seconds = 1  #zum testen ein Tag vergeht in einer Sekunde
 logspacer = "\n"+ "***********************************************"
 
 ######################################################### Hauptprogramm
+########################################################################################################################
 write_logfile(logspacer)
 logtext = "\n" + N_('Die Klima-Werte werden nun vom automatischen Programm "%s" gesteuert') % (hangingtable_name)
 write_logfile(logtext)
