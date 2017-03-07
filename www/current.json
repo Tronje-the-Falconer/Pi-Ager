@@ -1,1 +1,1 @@
-{"kuhlung": 0, "heizung": 1, "luftfeuchtigkeit": 34.3, "temperatur": 25.5, "umluft": 0, "date": 1487326195, "luftaustausch": 1}
+{"status_cooling_compressor": 0, "status_humidifier": 1, "humidity": 34.3, "temperature": 25.5, "status_circulating_air": 0, "last_change": 1487326195, "status_exhaust_air": 1}
