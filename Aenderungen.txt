@@ -23,21 +23,40 @@ evac         -> status_exhaust_fan             #  Variable für die "Evakuierung
 
 
 current.json = json.dumps({"temperature":sensor_temperature, "heizung":gpio.input(pin_heater), "luftaustausch":gpio.input(pin_exhaust_fan), "kuhlung":gpio.input(pin_cooling_compressor), "umluft":gpio.input(pin_recirculation_fan),"luftfeuchtigkeit":sensor_humidity, 'date':int(time.time())})
-               json.dumps({"sensor_temperature":sensor_temperature, "status_heater":gpio.input(pin_heater), "status_exhaust_air":gpio.input(pin_exhaust_fan), "status_cooling_compressor":gpio.input(pin_cooling_compressor), "status_circulating_air":gpio.input(pin_recirculation_fan),"sensor_humidity":sensor_humidity, 'date':int(time.time())})
+               json.dumps({"sensor_temperature":sensor_temperature, "status_heater":gpio.input(pin_heater), "status_exhaust_air":gpio.input(pin_exhaust_fan), "status_cooling_compressor":gpio.input(pin_cooling_compressor), "status_circulating_air":gpio.input(pin_recirculation_fan),"sensor_humidity":sensor_humidity, 'last-change':int(time.time())})
+    temperature         ->  sensor_temperature
+    heizung             ->  status_heater
+    luftaustausch       ->  status_exhaust_air
+    kuhlung             ->  status_cooling_compressor
+    umluft              ->  status_circulating_air
+    luftfeuchtigkeit    ->  sensor_humidity
+                        ->  hanging_table
+    date                ->  last_change
     
 setting.json = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff, "humdelay":humdelay, 'date':int(time.time()), 'sensortype':sensortype})
-               json.dumps({"modus":modus, "setpoint_temperature":setpoint_temperature, "setpoint_humidity":setpoint_humidity, "circulation_air_period":circulation_air_period, "circulation_air_duration":circulation_air_duration, "exhaust_air_period":exhaust_air_period, "exhaust_air_duration":exhaust_air_duration,'date':int(time.time())})
-    
-tables.json Reifetab -> hangingtable
+               json.dumps({"modus":modus, "setpoint_temperature":setpoint_temperature, "setpoint_humidity":setpoint_humidity, "circulation_air_period":circulation_air_period, "circulation_air_duration":circulation_air_duration, "exhaust_air_period":exhaust_air_period, "exhaust_air_duration":exhaust_air_duration,'last_change':int(time.time())})
+    mod         -> modus
+    temp        -> setpoint_temperature
+    hum         -> setpoint_humidity
+    tempoff     -> circulation_air_period
+    tempon      -> circulation_air_duration
+    tempoff1    -> exhaust_air_period
+    tempon1     -> exhaust_air_duration
+    day         -> last_change
+
+xxx tables.json
+xxx     Reifetab -> hangingtable
 
 config.json
-sensortype, (1,2) # DHT/SHT
-language, (de, en) #Sprache der Ausgaben
-switch_on_cooling_compressor   #  Einschalttemperatur
-switch_off_cooling_compressor  #  Ausschalttemperatur
-switch_on_humidifier           #  Einschaltfeuchte
-switch_off_humidifier          #  Ausschaltfeuchte
-delay_humidify                 #  Luftbefeuchtungsverzögerung
+    sensortype, (1,2)                                       # DHT/SHT
+    language, (de, en)                                      #Sprache der Ausgaben
+    temphyston          -> switch_on_cooling_compressor     #  Einschalttemperatur
+    temphystoff         -> switch_off_cooling_compressor    #  Ausschalttemperatur
+    humhyston           -> switch_on_humidifier             #  Einschaltfeuchte
+    humhystoff          -> switch_off_humidifier            #  Ausschaltfeuchte
+    humdelay            -> delay_humidify                   #  Luftbefeuchtungsverzögerung
+                        -> control_type                     # Schaltungssteuerung: Relais, Wlan, Funk
+    date                -> last_change                      # Datum letzte änderung
     
 csv Header
     mod,hum,humdelay,humhyston,humhystoff,temp,temphyston,temphystoff,tempon,tempoff,tempon1,tempoff1,days
