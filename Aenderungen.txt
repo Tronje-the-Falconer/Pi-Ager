@@ -30,7 +30,6 @@ current.json = json.dumps({"temperature":sensor_temperature, "heizung":gpio.inpu
     kuhlung             ->  status_cooling_compressor
     umluft              ->  status_circulating_air
     luftfeuchtigkeit    ->  sensor_humidity
-                        ->  hanging_table
     date                ->  last_change
     
 setting.json = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff, "humdelay":humdelay, 'date':int(time.time()), 'sensortype':sensortype})
@@ -44,8 +43,8 @@ setting.json = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff,
     tempon1     -> exhaust_air_duration
     day         -> last_change
 
-xxx tables.json
-xxx     Reifetab -> hangingtable
+ tables.json
+     Reifetab -> hangingtable
 
 config.json
     sensortype, (1,2)                                       # DHT/SHT
