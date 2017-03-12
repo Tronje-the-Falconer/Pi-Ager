@@ -133,12 +133,13 @@ def ploting(plotting_value):
             "-w 400",
             "--alt-autoscale",
             "--slope-mode",
-            "DEF:%s=%s:%s_%s:AVERAGE" %(plotting_value, rrd_filename, rrd_dbname, plotting_value),
-            "DEF:durch=rss.rrd:rss_sensor_temperature:AVERAGE",
-            "DEF:durchhum=rss.rrd:rss_sensor_humidity:AVERAGE",
-            "GPRINT:durch:AVERAGE:Temperatur\: %3.2lf C",
-            "GPRINT:durchhum:AVERAGE:Luftfeuchtigkeit\: %3.2lf", 
+            "DEF:%s=%s:%s_%s:AVERAGE" % (plotting_value, rrd_filename, rrd_dbname, plotting_value),
+            "DEF:%s=%s:sensor_temperature:AVERAGE" % (_(durch), rrd_filename),
+            "DEF:s%=%s:sensor_humidity:AVERAGE" % (_(durchhum), rrd_filename),
+            "GPRINT:s%:AVERAGE:%s\: %3.2lf C" % (_(durch), _(Temperatur)),
+            "GPRINT:s%:AVERAGE:%s\: %3.2lf" % (_(durchhum), _(Luftfeuchtigkeit)), 
             "LINE1:%s#0000FF:%s_%s" %(plotting_value, rrd_dbname, plotting_value))
+
 #---------------------------------------------------------------------------------- Function zum Setzen des Sensors
 def set_sensortype():
     global sensor
@@ -162,7 +163,7 @@ def set_sensortype():
 def doMainLoop():
     #global value
     global circulation_air_duration       #  Umluftdauer
-    global circulation_air_period         #  Umluftperiode
+    global $circulation_air_period         #  Umluftperiode
     global circulation_air_start          #  Unix-Zeitstempel für den Zählstart des Timers Umluft
     global exhaust_air_duration           #  (Abluft-)luftaustauschdauer
     global exhaust_air_period             #  (Abluft-)luftaustauschperiode
@@ -216,7 +217,7 @@ def doMainLoop():
         modus = settings['modus']
         setpoint_temperature = settings['setpoint_temperature']
         setpoint_humidity = settings['setpoint_humidity']
-        circulation_air_period = settings['circulation_air_period']
+        $circulation_air_period = settings['$circulation_air_period']
         circulation_air_duration = settings['circulation_air_duration']
         exhaust_air_period = settings['exhaust_air_period']
         exhaust_air_duration = settings['exhaust_air_duration']
@@ -258,20 +259,20 @@ def doMainLoop():
         write_current_json(sensor_temperature, sensor_humidity)
         # Durch den folgenden Timer läuft der Ventilator in den vorgegebenen Intervallen zusätzlich zur generellen Umluft bei aktivem Heizen, Kühlen oder Befeuchten
 #---------------------------------------------------------------------------------------------------------------- Timer für Luftumwälzung-Ventilator
-        if circulation_air_period == 0:                          # gleich 0 ist an,  Dauer-Timer
+        if $circulation_air_period == 0:                          # gleich 0 ist an,  Dauer-Timer
             status_circulation_air = False
         if circulation_air_duration == 0:                        # gleich 0 ist aus, kein Timer
             status_circulation_air = True
         if circulation_air_duration > 0:
-            if current_time < circulation_air_start + circulation_air_period:
+            if current_time < circulation_air_start + $circulation_air_period:
                 status_circulation_air = True                       # Umluft - Ventilator aus
                 logstring = _('Umluft-Timer laeuft (inaktiv)')
                 write_verbose(logstring, False, False)
-            if current_time >= circulation_air_start + circulation_air_period:
+            if current_time >= circulation_air_start + $circulation_air_period:
                 status_circulation_air = False                      # Umluft - Ventilator an
                 logstring = _('Umluft-Timer laeuft (aktiv)')
                 write_verbose(logstring, False, False)
-            if current_time >= circulation_air_start + circulation_air_period + circulation_air_duration:
+            if current_time >= circulation_air_start + $circulation_air_period + circulation_air_duration:
                 circulation_air_start = int(time.time())    # Timer-Timestamp aktualisiert
 #---------------------------------------------------------------------------------------------------------------- Timer für (Abluft-)Luftaustausch-Ventilator
         if exhaust_air_period == 0:                      # gleich 0 ist an,  Dauer-Timer
@@ -454,7 +455,7 @@ status_exhaust_fan = False     # Variable für die "Evakuierung" zur Feuchteredu
 relay_on = False               # negative Logik!!! des Relay's, Schaltet bei 0 | GPIO.LOW  | False  ein
 relay_off = (not relay_on)     # negative Logik!!! des Relay's, Schaltet bei 1 | GPIO.High | True aus
 #---------------------------------------------------------------------------------- RRD-Tool
-rrd_dbname = 'rss'                   # Name fuer Grafiken etc
+rrd_dbname = 'pi-ager'                   # Name fuer Grafiken etc
 rrd_filename = rrd_dbname + '.rrd'   # Dateinamen mit Endung
 measurement_time_interval = 10       # Zeitintervall fuer die Messung in Sekunden
 # i = 0
@@ -492,17 +493,18 @@ except IOError:
     ret = rrdtool.create("%s" %(rrd_filename),
         "--step","%s" %(measurement_time_interval),
         "--start",'0',
-        "DS:rss_sensor_temperature:GAUGE:2000:U:U",
-        "DS:rss_sensor_humidity:GAUGE:2000:U:U",
-        "DS:rss_status_exhaust_air:GAUGE:2000:U:U",
-        "DS:rss_status_circulating_air:GAUGE:2000:U:U",
-        "DS:rss_status_heater:GAUGE:2000:U:U",
-        "DS:rss_status_cooling_compressor:GAUGE:2000:U:U",
-        "DS:rss_status_humidifier:GAUGE:2000:U:U",
+        "DS:sensor_temperature:GAUGE:2000:U:U",
+        "DS:sensor_humidity:GAUGE:2000:U:U",
+        "DS:stat_exhaust_air:GAUGE:2000:U:U",
+        "DS:stat_circulate_air:GAUGE:2000:U:U",
+        "DS:stat_heater:GAUGE:2000:U:U",
+        "DS:stat_coolcompressor:GAUGE:2000:U:U",
+        "DS:status_humidifier:GAUGE:2000:U:U",
         "RRA:AVERAGE:0.5:1:2160",
         "RRA:AVERAGE:0.5:5:2016",
         "RRA:AVERAGE:0.5:15:2880",
         "RRA:AVERAGE:0.5:60:8760",)
+
 #    i = 1
 write_verbose(logspacer, False, False)
 settings = read_settings_json()

@@ -1,5 +1,5 @@
 tempon       -> circulation_air_duration       #  Umluftdauer
-tempoff      -> circulation_air_period         #  Umluftperiode
+tempoff      -> $circulation_air_period         #  Umluftperiode
 tempstart    -> circulation_air_start          #  Unix-Zeitstempel für den Zählstart des Timers Umluft
 tempon1      -> exhaust_air_duration           #  (Abluft-)luftaustauschdauer
 tempoff1     -> exhaust_air_period             #  (Abluft-)luftaustauschperiode
@@ -33,11 +33,11 @@ current.json = json.dumps({"temperature":sensor_temperature, "heizung":gpio.inpu
     date                ->  last_change
     
 settings.json = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff, "tempon":tempon, "tempoff1":tempoff1, "tempon1":tempon1, "temphyston":temphyston, "temphystoff":temphystoff, "humhyston":humhyston, "humhystoff":humhystoff, "humdelay":humdelay, 'date':int(time.time()), 'sensortype':sensortype})
-               json.dumps({"modus":modus, "setpoint_temperature":setpoint_temperature, "setpoint_humidity":setpoint_humidity, "circulation_air_period":circulation_air_period, "circulation_air_duration":circulation_air_duration, "exhaust_air_period":exhaust_air_period, "exhaust_air_duration":exhaust_air_duration,'last_change':int(time.time())})
+               json.dumps({"modus":modus, "setpoint_temperature":setpoint_temperature, "setpoint_humidity":setpoint_humidity, "$circulation_air_period":$circulation_air_period, "circulation_air_duration":circulation_air_duration, "exhaust_air_period":exhaust_air_period, "exhaust_air_duration":exhaust_air_duration,'last_change':int(time.time())})
     mod         -> modus
     temp        -> setpoint_temperature
     hum         -> setpoint_humidity
-    tempoff     -> circulation_air_period
+    tempoff     -> $circulation_air_period
     tempon      -> circulation_air_duration
     tempoff1    -> exhaust_air_period
     tempon1     -> exhaust_air_duration
@@ -59,6 +59,6 @@ config.json
     
 csv Header
     mod,hum,humdelay,humhyston,humhystoff,temp,temphyston,temphystoff,tempon,tempoff,tempon1,tempoff1,days
-    modus,setpoint_humidity,delay_humidify,switch_on_humidifier,switch_off_humidifier,setpoint_temperature,switch_on_cooling_compressor,switch_off_cooling_compressor,circulation_air_duration,circulation_air_period,exhaust_air_duration,exhaust_air_period,days
+    modus,setpoint_humidity,delay_humidify,switch_on_humidifier,switch_off_humidifier,setpoint_temperature,switch_on_cooling_compressor,switch_off_cooling_compressor,circulation_air_duration,$circulation_air_period,exhaust_air_duration,exhaust_air_period,days
 
 betriebsart -> operating_mode

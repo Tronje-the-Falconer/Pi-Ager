@@ -1,18 +1,18 @@
-<?php
+<?php 
     // zuletzt gespeicherte Reifeart in der tables.json
-    $read_tables_json = file_get_contents('tables.json');
-    $array_new = json_decode($read_tables_json, true);
-    $wunschreife = $array_new['Reifetab'];
+    $data_tables_json = file_get_contents('tables.json');
+    $array_tables_json = json_decode($data_tables_json, true);
+    $desired_maturity = $array_tables_json['hangingtable'];
 
     // Derzeitige Reife-Art, manuell oder nach Tabelle...
-    $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab');
-    if ($valtab){
-        $API = file_get_contents('tables.json');
-        $array1 = json_decode($API, true);
-        $reifeart = $array1['Reifetab'];
+    $grephangingtable = shell_exec('sudo /var/sudowebscript.sh grephangingtable');
+    if ($grephangingtable){
+        $data_tables_json = file_get_contents('tables.json');
+        $array_tables_json1 = json_decode($data_tables_json, true);
+        $maturity_type = $array_tables_json1['hangingtable'];
 
     }
     else {
-        $reifeart = 'keine';
+        $maturity_type = _('keine');
     }
 ?>

@@ -1,17 +1,17 @@
-                                <?php
+                                <?php 
                                     include 'header.php';                                       // Template-Kopf und Navigation
                                 ?>
                                 <!----------------------------------------------------------------------------------------Was eben hier hin kommt ...-->
-                                <?php
+                                <?php 
                                     // wenn nichts anderes ausgewählt wurde, ist Stündlich ausgewählt
-                                    if (isset ($_GET['mode'])) {
-                                        $mode = $_GET['mode'];
+                                    if (isset ($_GET['diagram_mode'])) {
+                                        $diagram_mode = $_GET['diagram_mode'];
                                     }else{
-                                        $mode = 'hourly';
+                                        $diagram_mode = 'hourly';
                                     }
 
                                 ?>
-                                <h2 class="art-postheader">Diagramme</h2>
+                                <h2 class="art-postheader"><?php echo _('Diagramme'); ?></h2>
                                 <div class="hg_container" style="margin-bottom: 20px; margin-top: 20px;">
                                     <table style="width: 100%;">
                                         <tr>
@@ -21,29 +21,29 @@
                                             <td><img src="images/monthly_30x30.png" alt=""></td>
                                         </tr>
                                         <tr>
-                                            <td><a href="diagrams.php?mode=hourly" class="art-button">Stunde</a></td>
-                                            <td><a href="diagrams.php?mode=daily" class="art-button">Tag</a></td>
-                                            <td><a href="diagrams.php?mode=weekly" class="art-button">Woche</a></td>
-                                            <td><a href="diagrams.php?mode=monthly" class="art-button">Monat</a></td>
+                                            <td><a href="diagrams.php?diagram_mode=hourly" class="art-button"><?php echo _('Stunde'); ?></a></td>
+                                            <td><a href="diagrams.php?diagram_mode=daily" class="art-button"><?php echo _('Tag'); ?></a></td>
+                                            <td><a href="diagrams.php?diagram_mode=weekly" class="art-button"><?php echo _('Woche'); ?></a></td>
+                                            <td><a href="diagrams.php?diagram_mode=monthly" class="art-button"><?php echo _('Monat'); ?></a></td>
                                         </tr>
                                     </table>
                                 </div>
 
                                     <div style="">
-                                    <h2>Temperaturverlauf </h2>
-                                    <img src="/pic/rss_sensortemp-<?= $mode ?>.png" alt="<?= $mode ?>" />
-                                    <h2>Luftfeuchtigkeitsverlauf</h2>
-                                    <img src="/pic/rss_sensorhum-<?= $mode ?>.png" alt="<?= $mode ?>" />
-                                    <h2>Kühlung</h2>
-                                    <img src="/pic/rss_cool-<?= $mode ?>.png" alt="<?= $mode ?>" />
-                                    <h2>Heizung</h2>
-                                    <img src="/pic/rss_heat-<?= $mode ?>.png" alt="<?= $mode ?>" />
-                                    <h2>Befeuchtung</h2>
-                                    <img src="/pic/rss_lbf-<?= $mode ?>.png" alt="<?= $mode ?>" />
-                                    <h2>Luftumwälzung</h2>
-                                    <img src="/pic/rss_uml-<?= $mode ?>.png" alt="<?= $mode ?>" />
-                                    <h2>Luftaustausch</h2>
-                                    <img src="/pic/rss_lat-<?= $mode ?>.png" alt="<?= $mode ?>" />
+                                    <h2><?php echo _('Temperaturverlauf'); ?> </h2>
+                                    <img src="/pic/pi-ager_sensortemp-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <h2><?php echo _('Luftfeuchtigkeitsverlauf'); ?></h2>
+                                    <img src="/pic/pi-ager_sensorhum-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <h2><?php echo _('Kuehlung'); ?></h2>
+                                    <img src="/pic/pi-ager_cool-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <h2><?php echo _('Heizung'); ?></h2>
+                                    <img src="/pic/pi-ager_heat-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <h2><?php echo _('Befeuchtung'); ?></h2>
+                                    <img src="/pic/pi-ager_lbf-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <h2><?php echo _('Luftumwaelzung'); ?></h2>
+                                    <img src="/pic/pi-ager_uml-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <h2><?php echo _('Luftaustausch'); ?></h2>
+                                    <img src="/pic/pi-ager_lat-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->
                             </div>
@@ -52,6 +52,6 @@
                 </div>
             </div>
         </div>
-        <?php
+        <?php 
             include 'footer.php';
         ?>

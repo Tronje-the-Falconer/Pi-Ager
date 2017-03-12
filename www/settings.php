@@ -1,10 +1,10 @@
-                                <?php
+                                <?php 
                                     include 'header.php';                                       // Template-Kopf und Navigation
                                     include 'modules/write_table.json.php';                     // Speichert die Auswahl der Reifetabelle
                                     include 'modules/write_settings.json_logfile.txt.php';      // Speichert die eingestelleten Werte (Temperaturregelung, Feuchte, Lüftung und deren Hysteresen)
                                     include 'modules/start_stop_program.php';                   // Startet / Stoppt das Reifeprogramm bzw. den ganzen Schrank
-                                    include 'modules/read_settings.json.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lüftung und deren Hysteresen) und Betriebsart des RSS
-                                    include 'modules/read_current.json.php';                    // Liest die gemessenen Werte T/H und den aktuellen Zustand der Aktoren
+                                    include 'modules/read_settings_json.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lüftung und deren Hysteresen) und Betriebsart des RSS
+                                    include 'modules/read_current_json.php';                    // Liest die gemessenen Werte T/H und den aktuellen Zustand der Aktoren
                                     include 'modules/read_operating_mode.php';                  // Liest die Art der Reifesteuerung
                                     include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
                                     include 'modules/read_csv_dir.php';                         // Liest das Verezichnis mit den Reifeprogrammtabellen ein
@@ -15,23 +15,23 @@
                                 <!----------------------------------------------------------------------------------------Programme starten/stoppen-->
                                 <div class="hg_container">
                                     <table style="width: 100%"><tr>
-                                    <?php
+                                    <?php 
                                             print '<form  method="post">';
                                             // Prüft, ob Prozess RSS läuft ( NULL = Rss.py läuft nicht als Prozess, )
-                                            $valrs = shell_exec('sudo /var/sudowebscript.sh greprss');
+                                            $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
                                             // Prüft, ob Prozess Reifetab läuft ()
-                                            $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab');
+                                            $grephangingtable = shell_exec('sudo /var/sudowebscript.sh grephangingtable');
                                             
-                                            if($valrs == NULL and $valtab != NULL) { //wenn Prozess RSS läuft und Reifetab läuft nicht (korrekt)
+                                            if($grepmain == NULL and $grephangingtable != NULL) { //wenn Prozess RSS läuft und Reifetab läuft nicht (korrekt)
                                                 shell_exec('sudo /var/sudowebscript.sh pkillreifetab');
-                                                $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab');
+                                                $grephangingtable = shell_exec('sudo /var/sudowebscript.sh grephangingtable');
                                             }
 
-                                            if ($valrs == NULL){
-                                                print '<td><img src="images/betriebsart.png" alt="" style="padding: 10px;"></td><td><img src="images/led-off-green-20x20.png" alt="" style="padding-top: 10px;"></td><td style=""><button class="art-button" name="rss_start">Start Reifeschrank</button></td>';
+                                            if ($grepmain == NULL){
+                                                print '<td><img src="images/operating_mode.png" alt="" style="padding: 10px;"></td><td><img src="images/led-off-green-20x20.png" alt="" style="padding-top: 10px;"></td><td style=""><button class="art-button" name="rss_start">Start Reifeschrank</button></td>';
                                             }
                                             else {
-                                                print '<td><img src="images/betriebsart.png" alt="" style="padding: 10px;"></td><td><img src="images/led-on-green-20x20.png" alt="" style="padding-top: 10px;"></td><td><button class="art-button" name="rss_reifetab_stop" onclick="return confirm("Reifeschrank stoppen?");">Stop Reifeschrank</button></td>';
+                                                print '<td><img src="images/operating_mode.png" alt="" style="padding: 10px;"></td><td><img src="images/led-on-green-20x20.png" alt="" style="padding-top: 10px;"></td><td><button class="art-button" name="rss_reifetab_stop" onclick="return confirm("Reifeschrank stoppen?");">Stop Reifeschrank</button></td>';
                                             }
                                             print ' </form>';
                                     ?>
@@ -41,40 +41,40 @@
 
                                     <table style="width: 100%" class="schaltzustaende minischrift">
                                         <tr>
-                                            <td><img src="images/reifung.png" alt="" style="padding-left: 10px;"></td>
+                                            <td><img src="images/hangingtable.png" alt="" style="padding-left: 10px;"></td>
                                             <td style=" text-align: left; padding-left: 20px;">
-                                                <?php
+                                                <?php 
                                                     print '<form  method="post">';
                                                     foreach($csvfilename as $name) {
-                                                        if ($name<>$wunschreife){
+                                                        if ($name<>$desired_maturity){
                                                             echo '<input type="radio" name="Reifetab" value="'.$name.'"><label> '.$name.'</label><br>';
                                                         }
-                                                        if ($name==$wunschreife){
+                                                        if ($name==$desired_maturity){
                                                             echo '<input type="radio" name="Reifetab" value="'.$name.'" checked="checked"><label> '.$name.'</label><br>';
                                                         }
                                                     }
                                                     print '</td><td>';
-                                                    if ($valtab == NULL){
+                                                    if ($grephangingtable == NULL){
                                                         print '<img src="images/led-off-green-20x20.png" alt="" style="padding-right: 20px;">';
                                                     }
                                                     else {
                                                         print '<img src="images/led-on-green-20x20.png" alt="" style="padding-right: 20px;">';
                                                     }
                                                 ?>
-                                            <img src="images/reifung.png" alt=""></td>
+                                            <img src="images/hangingtable.png" alt=""></td>
                                         </tr>
                                         <tr>
                                             <td>&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><br>
-                                                <?php
+                                                <?php 
                                                     print '<input class="art-button" type="submit" value="Speichern" />';
                                                     print '</form>';
                                                 ?>
                                             </td>
                                             <td><br>
-                                                <?php
+                                                <?php 
                                                     print '<form  method="post">';
-                                                    if ($valtab == NULL){
+                                                    if ($grephangingtable == NULL){
                                                         print "<button class=\"art-button\" name=\"rss_reifetab_start\" onclick=\"return confirm('Reifeprogramm starten?\\nManuelle Werte werden überschrieben!');\">Start Tabelle</button>";
                                                     }
                                                     else {
@@ -100,11 +100,11 @@
                                             <td class="show_agingcell"><div class="tooltip">TAP<span class="tooltiptext">Timer der Abluftperiode in Minuten</span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">TAG<span class="tooltiptext">Dauer der Reifephase in Tagen</span></div></td>
                                         </tr>
-                                        <?php
+                                        <?php 
                                             // Gewählte CSV-Datei auslesen und als Array anlegen
-                                            $CSV_FILE='csv/'.$wunschreife.'.csv';
+                                            $chosen_hangingtable='csv/'.$desired_maturity.'.csv';
                                             $row = 1;
-                                            if (($handle = fopen($CSV_FILE, "r")) !== FALSE) {
+                                            if (($handle = fopen($chosen_hangingtable, "r")) !== FALSE) {
                                                 while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
                                                     $num = count($data);
                                                     echo '<tr>';
@@ -129,8 +129,8 @@
                                         ?>
                                     </table>
                                 </div>
-                                <?php
-                                    if ($valtab == NULL){
+                                <?php 
+                                    if ($grephangingtable == NULL){
                                         include ('manvals.php');
                                                     }
                                                     else {
@@ -158,6 +158,6 @@
                 </div>
             </div>
         </div>
-        <?php
+        <?php 
             include 'footer.php';
         ?>

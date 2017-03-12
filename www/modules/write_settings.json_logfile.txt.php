@@ -1,4 +1,4 @@
-<?PHP
+<?php 
 #var_dump($_POST);
     # Prüfung der eingegebenen Werte
     if(isset ($_POST['mod']) && $_POST['mod'] <>NULL) {                       // ist das $_POST-Array gesetzt

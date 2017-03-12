@@ -1,4 +1,4 @@
-<?PHP
+<?php 
     # Auslesen der Raspberry Revision und zuordnung zur Raspberry Pi Version nach Tabelle (http://elinux.org/RPi_HardwareHistory#Board_Revision_History)
     global $piversion;
     $getpirevision = shell_exec('sudo /var/sudowebscript.sh getpirevision');
@@ -94,6 +94,6 @@
     elseif ($pirevision == 'a32082'){
         $piversion = 'Raspberry Pi 3 Model B';
     }
-    else{$piversion = 'Modell unbekannt!';
+    else{$piversion = _('Modell unbekannt!');
     }
 ?>

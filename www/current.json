@@ -1,1 +1,1 @@
-{"status_cooling_compressor": 0, "status_humidifier": 1, "humidity": 34.3, "temperature": 25.5, "status_circulating_air": 0, "last_change": 1487326195, "status_exhaust_air": 1}
+{"status_exhaust_air": 1, "sensor_temperature": 22.5, "status_circulating_air": 0, "sensor_humidity": 36.3, "status_heater": 1, "last_change": 1488661269, "status_cooling_compressor": 0}

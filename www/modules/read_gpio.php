@@ -1,4 +1,4 @@
-<?php
+<?php 
     # Status auslesen
     $val22 = shell_exec('sudo /var/sudowebscript.sh read22'); #Kühlung
     $val27 = shell_exec('sudo /var/sudowebscript.sh read27'); #Heizung
@@ -7,8 +7,8 @@
     $val23 = shell_exec('sudo /var/sudowebscript.sh read23'); #Abluft
 
     #Prüfen ob Programme laufen
-    $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab'); #Reifetab.py
-    $valrss = shell_exec('sudo /var/sudowebscript.sh greprss'); #Rss.py
+    $grephangingtable = shell_exec('sudo /var/sudowebscript.sh grephangingtable'); #Reifetab.py
+    $grepmains = shell_exec('sudo /var/sudowebscript.sh grepmain'); #Rss.py
 
     #Schaltzustände setzen
     if($val22 == 0) {
@@ -41,13 +41,13 @@
     if($val24 == 1) {
         $lbf = 'images/led-off-green-20x20.png';
         }
-    if($valtab == 0) {
+    if($grephangingtable == 0) {
         $tabelle = 'images/led-off-green-20x20.png';
     }
     else {
         $tabelle = 'images/led-on-green-20x20.png';
     }
-    if($valrss == 0) {
+    if($grepmains == 0) {
         $rss = 'images/led-off-green-20x20.png';
     }
     else {

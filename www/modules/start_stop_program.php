@@ -1,12 +1,12 @@
-<?php
+<?php 
     #programme Rss.py und/oder Reifetab.py starten/stoppen
     if (isset($_POST['rss_start'])){
-        $valrs = shell_exec('sudo /var/sudowebscript.sh greprss');
-        if($valrs == 0) {
+        $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
+        if($grepmain == 0) {
             shell_exec('sudo /var/sudowebscript.sh startrss');
             sleep (1); # 1 Sec auf start der Py-Datei warten
-            $valrs = shell_exec('sudo /var/sudowebscript.sh greprss');
-            if($valrs != 0) {
+            $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
+            if($grepmain != 0) {
                 $f=fopen('logfile.txt','w');
                 fwrite($f, "\n".date('d.m.Y H:i')." Reifeschrank gestartet");
                 fclose($f);
@@ -19,12 +19,12 @@
         }
     }
     if (isset($_POST['rss_reifetab_start'])){
-        $valrs = shell_exec('sudo /var/sudowebscript.sh greprss'); #Rss.py
-        if($valrs == 0) {
+        $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain'); #Rss.py
+        if($grepmain == 0) {
             shell_exec('sudo /var/sudowebscript.sh startrss');
             sleep (1); # 1 Sec auf start der Py-Datei warten
-            $valrs = shell_exec('sudo /var/sudowebscript.sh greprss'); # RSS hat sich geändert daher neu setzen
-            if($valrs != 0) {
+            $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain'); # RSS hat sich geändert daher neu setzen
+            if($grepmain != 0) {
                 $f=fopen('logfile.txt','w');
                 fwrite($f, "\n".date('d.m.Y H:i')." Reifeschrank gestartet");
                 fclose($f);
@@ -33,7 +33,7 @@
                 $f=fopen('logfile.txt','a');
                 fwrite($f, "\n".date('d.m.Y H:i')." Reifeprogramm gestartet");
                 fclose($f);
-                $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab'); # Reifetab hat sich geaändert also neu setzen
+                $grephangingtable = shell_exec('sudo /var/sudowebscript.sh grephangingtable'); # Reifetab hat sich geaändert also neu setzen
             }
             else{
                 $f=fopen('logfile.txt','w');
@@ -41,7 +41,7 @@
                 fclose($f);
             }
         }
-        elseif($valrs != 0) {
+        elseif($grepmain != 0) {
                 $f=fopen('logfile.txt','w');
                 fwrite($f, "\n".date('d.m.Y H:i')." Reifeschrank gestartet");
                 fclose($f);
@@ -50,7 +50,7 @@
                 $f=fopen('logfile.txt','a');
                 fwrite($f, "\n".date('d.m.Y H:i')." Reifeprogramm gestartet");
                 fclose($f);
-                $valtab = shell_exec('sudo /var/sudowebscript.sh grepreifetab');
+                $grephangingtable = shell_exec('sudo /var/sudowebscript.sh grephangingtable');
         }
     }
     if (isset($_POST['rss_reifetab_stop'])){

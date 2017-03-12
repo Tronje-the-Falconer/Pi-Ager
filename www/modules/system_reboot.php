@@ -1,4 +1,4 @@
-<?PHP
+<?php 
     #System neustarten
     if (isset ($_POST['Reboot'])){
         $date = date('d.m.Y H:i:s');

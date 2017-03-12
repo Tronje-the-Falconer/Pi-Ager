@@ -1,4 +1,4 @@
-<?PHP
+<?php 
     #Namen der Reifetabelle in tables.json speichern
     if (isset ($_POST['Reifetab'])){
         $timestamp = time();

@@ -1,4 +1,4 @@
-<?PHP
+<?php 
     #System herunterfahren
     if (isset ($_POST['Shutdown'])){
         $date = date('d.m.Y H:i:s');

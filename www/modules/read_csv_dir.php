@@ -1,4 +1,4 @@
-<?php
+<?php 
     $x = 0;
     foreach (glob('csv/*.csv') as $filename){
         $csvfilename[$x] = explode('/',$filename);
