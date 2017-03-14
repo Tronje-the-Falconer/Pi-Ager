@@ -14,7 +14,7 @@
         while (($tables_data = fgetcsv($handle, 1000, ',')) !== FALSE) {
             $num = count($tables_data);
             echo '<p> '
-            echo sprintf(_('%d Felder in Zeile %d: '), $num, $row)
+            echo sprintf(_('%d fields in row %d: '), $num, $row)
             echo '<br /></p>\n';
             $row++;
             for ($c=0; $c < $num; $c++) {

@@ -69,20 +69,20 @@
                     <div class="art-object0"></div>
                 </div>
                 <h1 class="art-headline">Pi-Ager</h1>
-                <h2 class="art-slogan">Nach Grillsportverein</h2>
+                <h2 class="art-slogan"><?php sprintf(_('by'),'( Grillsportverein'); ?></h2>
                 <nav class="art-nav">
                     <div class="art-nav-inner">
                         <ul class="art-hmenu">
-                            <li><a href="index.php" class="<?php echo $monitor_active; ?>"><?php echo _('Monitor'); ?></a></li>
-                            <li><a href="diagrams.php" class="<?php echo $diagrams_active; ?>"><?php echo _('Diagamme'); ?></a></li>
-                            <li><a href="settings.php" class="<?php echo $settings_active; ?>"><?php echo _('Einstellungen'); ?></a></li>
-                            <li><a href="logs.php" class="<?php echo $logs_active; ?>"><?php echo _('Logs'); ?></a></li>
+                            <li><a href="index.php" class="<?php echo $monitor_active; ?>"><?php echo _('monitor'); ?></a></li>
+                            <li><a href="diagrams.php" class="<?php echo $diagrams_active; ?>"><?php echo _('graphs'); ?></a></li>
+                            <li><a href="settings.php" class="<?php echo $settings_active; ?>"><?php echo _('settings'); ?></a></li>
+                            <li><a href="logs.php" class="<?php echo $logs_active; ?>"><?php echo _('logs'); ?></a></li>
                             <?php 
                                 if ($_SERVER['PHP_SELF'] == '/changelog.php') {
                                     echo '<li><a href="changelog.php" class="';
                                     echo $changelog_active;
                                     echo '">';
-                                    echo _('Changelog');
+                                    echo _('changelog');
                                     echo '</a></li>';
                                 }
                             ?>

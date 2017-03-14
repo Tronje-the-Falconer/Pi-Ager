@@ -13,6 +13,6 @@
 
     }
     else {
-        $maturity_type = _('keine');
+        $maturity_type = _('none');
     }
 ?>

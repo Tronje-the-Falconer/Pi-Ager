@@ -94,6 +94,6 @@
     elseif ($pirevision == 'a32082'){
         $piversion = 'Raspberry Pi 3 Model B';
     }
-    else{$piversion = _('Modell unbekannt!');
+    else{$piversion = _('model unknown!');
     }
 ?>

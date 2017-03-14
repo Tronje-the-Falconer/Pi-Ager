@@ -2,47 +2,47 @@
                                     include 'header.php';      // Template-Kopf und Navigation
                                     include 'modules/clear_logfile.php';
                                 ?>
-                                <h2 class="art-postheader"><?php echo _('Logeintraege'); ?></h2>
+                                <h2 class="art-postheader"><?php echo _('log entries'); ?></h2>
                                 <div class="hg_container" style="text-align: left;">
                                     <form  method="post">
-                                        <table style="width: 100%" class="minischrift">
+                                        <table style="width: 100%" class="miniature_writing">
                                             <tr>
                                                 <td>
                                                     <?php 
                                                         if (is_file($logfile)) {
-                                                            echo _('Dateipruefung').': '.$logfile.'<br />';
-                                                            echo _('Dateigroesse').': '.filesize($logfile).' bytes<br />';
+                                                            echo _('file verification').': '.$logfile.'<br />';
+                                                            echo _('file size').': '.filesize($logfile).' bytes<br />';
                                                             $mtime = filemtime($logfile);
-                                                            echo _('Zuletzt geaendert am').': ';
+                                                            echo _('last changed at').': ';
                                                             echo date('d M Y, H:i:s', $mtime);
-                                                            echo ' '._('Uhr').'<br />';
-                                                            echo '<img src="images/yes_small.png"> '._('Datei ist vorhanden').'<br />';
+                                                            echo ' '._('oclock').'<br />';
+                                                            echo '<img src="images/yes_small.png"> '._('file exists').'<br />';
                                                         }
                                                         else {
-                                                            echo '<img src="images/no_small.png"> '._('Datei ist nicht vorhanden').'<br />';
+                                                            echo '<img src="images/no_small.png"> '._('file does not exist').'<br />';
                                                         }
                                                         if (is_readable($logfile)) {
-                                                            echo '<img src="images/yes_small.png"> '._('Datei ist lesbar').'<br />';
+                                                            echo '<img src="images/yes_small.png"> '._('file is readable').'<br />';
                                                         }
                                                         else {
-                                                            echo '<img src="images/no_small.png"> '._('Datei ist nicht lesbar').'<br />';
+                                                            echo '<img src="images/no_small.png"> '._('file is not readable').'<br />';
                                                         }
                                                         if (is_writable($logfile)) {
-                                                            echo '<img src="images/yes_small.png"> '._('Datei ist schreibbar').'<br />';
+                                                            echo '<img src="images/yes_small.png"> '._('file is writable').'<br />';
                                                         }
                                                         else {
-                                                            echo '<img src="images/no_small.png"> '._('Datei ist nicht schreibbar').'<br />';
+                                                            echo '<img src="images/no_small.png"> '._('file is not writable').'<br />';
                                                         }
                                                     ?>
                                                 </td>
                                                 <td>&nbsp;</td>
-                                                <td><button class="art-button" name="clear_logfile" onclick="return confirm(<?php echo _('Alle Logfiledaten loeschen?'); ?>);"><?php echo _('Daten loeschen'); ?></button></td>
+                                                <td><button class="art-button" name="clear_logfile" onclick="return confirm(<?php echo _('clear all logfile data?'); ?>);"><?php echo _('delete data'); ?></button></td>
                                             </tr>
                                         </table>
                                     </form>
                                     <hr>
                                     <!----------------------------------------------------------------------------------------Logeinträge-->
-                                    <table class="minischrift">
+                                    <table class="miniature_writing">
                                         <tr>
                                             <td>
                                                 <?php 

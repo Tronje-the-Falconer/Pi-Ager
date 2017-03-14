@@ -1,87 +1,87 @@
 <?php 
 #var_dump($_POST);
     # Prüfung der eingegebenen Werte
-    if(isset ($_POST['mod']) && $_POST['mod'] <>NULL) {                       // ist das $_POST-Array gesetzt
+    if(isset ($_POST['modus']) && $_POST['modus'] <>NULL) {                       // ist das $_POST-Array gesetzt
         $InputValid = '';
         foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
             if (preg_match('/[.\D]/', $CheckInput)) {
-            $InputValid = 'Nicht erlaubtes Zeichen - Bitte nur positive ganze Zahlen verwenden!';
+            $InputValid = echo _('unauthorized character - please use only positive integers!');
             }
         }
 
         if ($InputValid == ''){
-            if ( $_POST['temp']<23 &&  $_POST['temp']>-1 &&                                                                    // Prüfung Soll-Temperatur
-                $_POST['temphyston']<11 && $_POST['temphyston']>-1 && ($_POST['temphyston'] != $_POST['temphystoff']) &&       // Prüfung Einschaltwert Temp.
-                ($_POST['temphyston'] > $_POST['temphystoff']) &&                                                              // Prüfung Einschaltwert Temp.
-                $_POST['temphystoff']<11 && $_POST['temphystoff']>-1 &&                                                        // Prüfung Ausschaltwert Temp.
-                $_POST['hum']<100 && $_POST['hum']>-1 &&                                                                      // Prüfung Soll-Feuchtigkeit
-                $_POST['humhyston']<11 && $_POST['humhyston']>-1 && ($_POST['humhyston'] != $_POST['humhystoff']) &&          // Prüfung Einschaltwert Feuchte
-                ($_POST['humhyston'] > $_POST['humhystoff']) &&                                                               // Prüfung Einschaltwert Feuchte
-                $_POST['humhystoff']<11 && $_POST['humhystoff']>-1 &&                                                          // Prüfung Ausschaltwert Feuchte
-                $_POST['humdelay']<61 && $_POST['humdelay']>-1 &&                                                             // Prüfung Verzögerung Feuchte
-                $_POST['tempoff']<1441 && $_POST['tempoff']>-1 &&  (($_POST['tempoff']+$_POST['tempon'])>0) &&                 // Prüfung Intervall Umluft
-                $_POST['tempon']<1441 && $_POST['tempon']>-1  &&                                                                // Prüfung Dauer Umluft
-                $_POST['tempoff1']<1441 && $_POST['tempoff1']>-1 && (($_POST['tempoff1']+$_POST['tempon1'])>0) &&             // Prüfung Intervall Abluft
-                $_POST['tempon1']<1441 && $_POST['tempon1']>-1                                                                  // Prüfung Dauer Abluft
+            if ( $_POST['setpoint_temperature']<23 &&  $_POST['setpoint_temperature']>-1 &&                                                                    // Prüfung Soll-Temperatur
+                $_POST['switch_on_cooling_compressor']<11 && $_POST['switch_on_cooling_compressor']>-1 && ($_POST['switch_on_cooling_compressor'] != $_POST['switch_off_cooling_compressor']) &&       // Prüfung Einschaltwert setpoint_temperature.
+                ($_POST['switch_on_cooling_compressor'] > $_POST['switch_off_cooling_compressor']) &&                                                              // Prüfung Einschaltwert setpoint_temperature.
+                $_POST['switch_off_cooling_compressor']<11 && $_POST['switch_off_cooling_compressor']>-1 &&                                                        // Prüfung Ausschaltwert setpoint_temperature.
+                $_POST['setpoint_humidity']<100 && $_POST['setpoint_humidity']>-1 &&                                                                      // Prüfung Soll-Feuchtigkeit
+                $_POST['switch_on_humidifier']<11 && $_POST['switch_on_humidifier']>-1 && ($_POST['switch_on_humidifier'] != $_POST['switch_off_humidifier']) &&          // Prüfung Einschaltwert Feuchte
+                ($_POST['switch_on_humidifier'] > $_POST['switch_off_humidifier']) &&                                                               // Prüfung Einschaltwert Feuchte
+                $_POST['switch_off_humidifier']<11 && $_POST['switch_off_humidifier']>-1 &&                                                          // Prüfung Ausschaltwert Feuchte
+                $_POST['delay_humidify']<61 && $_POST['delay_humidify']>-1 &&                                                             // Prüfung Verzögerung Feuchte
+                $_POST['circulation_air_period']<1441 && $_POST['circulation_air_period']>-1 &&  (($_POST['circulation_air_period']+$_POST['circulation_air_duration'])>0) &&                 // Prüfung Intervall Umluft
+                $_POST['circulation_air_duration']<1441 && $_POST['circulation_air_duration']>-1  &&                                                                // Prüfung Dauer Umluft
+                $_POST['exhaust_air_period']<1441 && $_POST['exhaust_air_period']>-1 && (($_POST['exhaust_air_period']+$_POST['exhaust_air_duration'])>0) &&             // Prüfung Intervall Abluft
+                $_POST['exhaust_air_duration']<1441 && $_POST['exhaust_air_duration']>-1                                                                  // Prüfung Dauer Abluft
             )
             {
                 # Eingestellte Werte in settings.json und logfile.txt speichern
                 $timestamp = time();
-                $array = array( 'temp' => (float)$_POST['temp'],
-                    'mod' => (int)$_POST['mod'],
-                    'hum' => (float)$_POST['hum'],
-                    'tempon' => (int)$_POST['tempon']*60,
-                    'tempoff' => (int)$_POST['tempoff']*60,
-                    'tempon1' => (int)$_POST['tempon1']*60,
-                    'tempoff1' => (int)$_POST['tempoff1']*60,
-                    'temphyston' => (float)$_POST['temphyston'],
-                    'temphystoff' => (float)$_POST['temphystoff'],
-                    'humhyston' => (float)$_POST['humhyston'],
-                    'humhystoff' => (float)$_POST['humhystoff'],
-                    'humdelay' => (float)$_POST['humdelay'],
-                    'date' => $timestamp,
+                $array = array( 'setpoint_temperature' => (float)$_POST['setpoint_temperature'],
+                    'modus' => (int)$_POST['modus'],
+                    'setpoint_humidity' => (float)$_POST['setpoint_humidity'],
+                    'circulation_air_duration' => (int)$_POST['circulation_air_duration']*60,
+                    'circulation_air_period' => (int)$_POST['circulation_air_period']*60,
+                    'exhaust_air_duration' => (int)$_POST['exhaust_air_duration']*60,
+                    'exhaust_air_period' => (int)$_POST['exhaust_air_period']*60,
+                    'switch_on_cooling_compressor' => (float)$_POST['switch_on_cooling_compressor'],
+                    'switch_off_cooling_compressor' => (float)$_POST['switch_off_cooling_compressor'],
+                    'switch_on_humidifier' => (float)$_POST['switch_on_humidifier'],
+                    'switch_off_humidifier' => (float)$_POST['switch_off_humidifier'],
+                    'delay_humidify' => (float)$_POST['delay_humidify'],
+                    'last_change' => $timestamp,
                     'sensortype' => (int)$_POST['sensortype']);
                 $jsoninput = json_encode($array);
                 file_put_contents('settings.json', $jsoninput);
 
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus
-                if ($array['mod'] == 0) {
-                    $betriebsart='Kuehlen';
-                    $einschalttemperatur = $array['temp'] + $array['temphyston'];
-                    $ausschalttemperatur = $array['temp'] + $array['temphystoff'];
+                if ($array['modus'] == 0) {
+                    $operating_mode = echo _('cooling');
+                    $einschalttemperatur = $array['setpoint_temperature'] + $array['switch_on_cooling_compressor'];
+                    $switch_off_temperature = $array['setpoint_temperature'] + $array['switch_off_cooling_compressor'];
                 }
 
-                if ($array['mod'] == 1) {
-                    $betriebsart='Kuehlen mit Befeuchtung';
-                    $einschalttemperatur = $array['temp'] + $array['temphyston'];
-                    $ausschalttemperatur = $array['temp'] + $array['temphystoff'];
+                if ($array['modus'] == 1) {
+                    $operating_mode = echo _('cooling with humidification');
+                    $einschalttemperatur = $array['setpoint_temperature'] + $array['switch_on_cooling_compressor'];
+                    $switch_off_temperature = $array['setpoint_temperature'] + $array['switch_off_cooling_compressor'];
                 }
 
-                if ($array['mod'] == 2) {
-                    $betriebsart='Heizen mit Befeuchtung';
-                    $einschalttemperatur = $array['temp'] - $array['temphyston'];
-                    $ausschalttemperatur = $array['temp'] - $array['temphystoff'];
+                if ($array['modus'] == 2) {
+                    $operating_mode = echo _('heating with humidification';
+                    $einschalttemperatur = $array['setpoint_temperature'] - $array['switch_on_cooling_compressor'];
+                    $switch_off_temperature = $array['setpoint_temperature'] - $array['switch_off_cooling_compressor'];
                 }
-                if ($array['mod'] == 3) {
-                    $betriebsart='Automatik mit Befeuchtung';
-                    $einschalttemperatur_k = $array['temp'] + $array['temphyston'];
-                    $ausschalttemperatur_k = $array['temp'] + $array['temphystoff'];
-                    $einschalttemperatur_h = $array['temp'] - $array['temphyston'];
-                    $ausschalttemperatur_h = $array['temp'] - $array['temphystoff'];
+                if ($array['modus'] == 3) {
+                    $operating_mode = echo _('automatic with humidification';
+                    $switch_on_temperature_cooling = $array['setpoint_temperature'] + $array['switch_on_cooling_compressor'];
+                    $switch_off_temperature_cooling = $array['setpoint_temperature'] + $array['switch_off_cooling_compressor'];
+                    $switch_on_temperature_heating = $array['setpoint_temperature'] - $array['switch_on_cooling_compressor'];
+                    $switch_off_temperature_heating = $array['setpoint_temperature'] - $array['switch_off_cooling_compressor'];
                 }
 
-                if ($array['mod'] == 4) {
-                    $betriebsart='Automatik mit Be- und Entfeuchtung';
-                    $einschalttemperatur_k = $array['temp'] + $array['temphyston'];
-                    $ausschalttemperatur_k = $array['temp'] + $array['temphystoff'];
-                    $einschalttemperatur_h = $array['temp'] - $array['temphyston'];
-                    $ausschalttemperatur_h = $array['temp'] - $array['temphystoff'];
+                if ($array['modus'] == 4) {
+                    $operating_mode = echo _('automatic with dehumidification and humidification';
+                    $switch_on_temperature_cooling = $array['setpoint_temperature'] + $array['switch_on_cooling_compressor'];
+                    $switch_off_temperature_cooling = $array['setpoint_temperature'] + $array['switch_off_cooling_compressor'];
+                    $switch_on_temperature_heating = $array['setpoint_temperature'] - $array['switch_on_cooling_compressor'];
+                    $switch_off_temperature_heating = $array['setpoint_temperature'] - $array['switch_off_cooling_compressor'];
 
-                    $einschaltfeuchte_bef = $array['hum'] - $array['humhyston'];
-                    $ausschaltfeuchte_bef = $array['hum'] - $array['humhystoff'];
-                    $einschaltfeuchte_entf = $array['hum'] + $array['humhyston'];
-                    $ausschaltfeuchte_entf = $array['hum'] + $array['humhystoff'];
+                    $switch_on_humidify = $array['setpoint_humidity'] - $array['switch_on_humidifier'];
+                    $switch_off_humidify = $array['setpoint_humidity'] - $array['switch_off_humidifier'];
+                    $switch_on_dehumidify = $array['setpoint_humidity'] + $array['switch_on_humidifier'];
+                    $switch_off_dehumidify = $array['setpoint_humidity'] + $array['switch_off_humidifier'];
                 }
                 # Sensor
                 if ($array['sensortype'] == 1) {
@@ -97,60 +97,60 @@
                     $sensorname='SHT75';
                 }
                 
-                $umluftdauer = $array['tempon']/60;
-                $umluftperiode = $array['tempoff']/60;
-                $luftaustauschdauer = $array['tempon1']/60;
-                $luftaustauschperiode = $array['tempoff1']/60;
-                $einschaltfeuchte = $array['hum'] - $array['humhyston'];
-                $ausschaltfeuchte = $array['hum'] - $array['humhystoff'];
+                $circulation_air_duration = $array['circulation_air_duration']/60;
+                $circulation_air_period = $array['circulation_air_period']/60;
+                $exhausting_air_duration = $array['exhaust_air_duration']/60;
+                $exhausting_air_period = $array['exhaust_air_period']/60;
+                $switch_on_humidity = $array['setpoint_humidity'] - $array['switch_on_humidifier'];
+                $switch_off_humidity = $array['setpoint_humidity'] - $array['switch_off_humidifier'];
 
                 $f=fopen('logfile.txt','a');
                 fwrite($f, "\n"."***********************************************");
-                fwrite($f, "\n"."Sensor: ".$sensorname);
-                fwrite($f, "\n"."Betriebsart: ".$betriebsart);
-                fwrite($f, "\n".date('d.m.Y H:i')." Werte wurden manuell ge&auml;ndert.");
+                fwrite($f, "\n".echo _('sensor').": ".$sensorname);
+                fwrite($f, "\n".echo _('operating mode').": ".$operating_mode);
+                fwrite($f, "\n".date('d.m.Y H:i').' '.echo _('values have been manually changed.');
                 fwrite($f, "\n");
 
-                if ($array['mod'] == 0 || $array['mod'] == 1 || $array['mod'] == 2)  {
-                    fwrite($f, "\n"."Soll-Temperatur: ".$array['temp']."&deg;C");
-                    fwrite($f, "\n"."Ausschalt-Temperatur: ".$array['temphystoff']."&deg;C (also bei ".$ausschalttemperatur."&deg;C)");
-                    fwrite($f, "\n"."Einschalt-Temperatur: ".$array['temphyston']."&deg;C (also bei ".$einschalttemperatur."&deg;C)");
+                if ($array['modus'] == 0 || $array['modus'] == 1 || $array['modus'] == 2)  {
+                    fwrite($f, "\n".echo _('setpoint temperature').": ".$array['setpoint_temperature']."&deg;C");
+                    fwrite($f, "\n".echo _('switch-off temperature').": ".$array['switch_off_cooling_compressor']."&deg;C (".echo _('so at')." ".$switch_off_temperature."&deg;C)");
+                    fwrite($f, "\n".echo _('switch-on temperature').": ".$array['switch_on_cooling_compressor']."&deg;C (".echo _('so at')." ".$switch_on_temperature."&deg;C)");
                 }
 
-                if ($array['mod'] == 3 || $array['mod'] == 4)  {
-                    fwrite($f, "\n"."Soll-Temperatur: ".$array['temp']."&deg;C");
-                    fwrite($f, "\n"."Einschaltwert Heizung: ".$array['temphyston']."&deg;C (also bei ".$einschalttemperatur_h."&deg;C)");
-                    fwrite($f, "\n"."Ausschaltwert Heizung: ".$array['temphystoff']."&deg;C (also bei ".$ausschalttemperatur_h."&deg;C)");
-                    fwrite($f, "\n"."Einschaltwert Kühlung: ".$array['temphyston']."&deg;C (also bei ".$einschalttemperatur_k."&deg;C)");
-                    fwrite($f, "\n"."Ausschaltwert Kühlung: ".$array['temphystoff']."&deg;C (also bei ".$ausschalttemperatur_k."&deg;C)");
-                }
-
-                fwrite($f, "\n");
-
-                if ($array['mod'] == 1 || $array['mod'] == 2 || $array['mod'] == 3) {
-                    fwrite($f, "\n"."Soll-Feuchtigkeit: ".$array['hum']."% rLF");
-                    fwrite($f, "\n"."Einschaltwert Befeuchtung: ".$array['humhyston']."% rLF (also bei ".$einschaltfeuchte."% rLF)");
-                    fwrite($f, "\n"."Ausschaltwert Befeuchtung: ".$array['humhystoff']."% rLF (also bei ".$ausschaltfeuchte."% rLF)");
-                    fwrite($f, "\n"."Befeuchter-Schaltverz&ouml;gerung ".$array['humdelay']."min");
-                }
-
-                if ($array['mod'] == 4) {
-                    fwrite($f, "\n"."Soll-Feuchtigkeit: ".$array['hum']."% rLF");
-                    fwrite($f, "\n"."Einschaltwert Befeuchtung: ".$array['humhyston']."% rLF (also bei ".$einschaltfeuchte_bef."% rLF)");
-                    fwrite($f, "\n"."Ausschaltwert Befeuchtung: ".$array['humhystoff']."% rLF (also bei ".$ausschaltfeuchte_bef."% rLF)");
-                    fwrite($f, "\n"."Einschaltwert Entfeuchtung: ".$array['humhyston']."% rLF (also bei ".$einschaltfeuchte_entf."% rLF)");
-                    fwrite($f, "\n"."Ausschaltwert Entfeuchtung: ".$array['humhystoff']."% rLF (also bei ".$ausschaltfeuchte_entf."% rLF)");
-                    fwrite($f, "\n"."Befeuchter-Schaltverz&ouml;gerung ".$array['humdelay']."min");
+                if ($array['modus'] == 3 || $array['modus'] == 4)  {
+                    fwrite($f, "\n".echo _('setpoint temperature').": ".$array['setpoint_temperature']."&deg;C");
+                    fwrite($f, "\n".echo _('switch-on heater');": ".$array['switch_on_cooling_compressor']."&deg;C (".echo _('so at')." ".$switch_on_temperature_heating."&deg;C)");
+                    fwrite($f, "\n".echo _('switch-off heater').": ".$array['switch_off_cooling_compressor']."&deg;C (".echo _('so at')." ".$switch_off_temperature_heating."&deg;C)");
+                    fwrite($f, "\n".echo _('switch-on cooler').": ".$array['switch_on_cooling_compressor']."&deg;C (".echo _('so at')." ".$switch_on_temperature_cooling."&deg;C)");
+                    fwrite($f, "\n".echo _('switch-off cooler').": ".$array['switch_off_cooling_compressor']."&deg;C (".echo _('so at')." ".$switch_off_temperature_cooling."&deg;C)");
                 }
 
                 fwrite($f, "\n");
-                fwrite($f, "\n"."Umluftperiode: ".$umluftperiode."min");
-                fwrite($f, "\n"."Umluftdauer: ".$umluftdauer."min");
+
+                if ($array['modus'] == 1 || $array['modus'] == 2 || $array['modus'] == 3) {
+                    fwrite($f, "\n".echo _('setpoint humidity').": ".$array['setpoint_humidity']."% "."&phi;");
+                    fwrite($f, "\n".echo _('switch-on humidifier').": ".$array['switch_on_humidifier']."% &phi; (".echo _('so at')." ".$switch_on_humidity."% &phi;)");
+                    fwrite($f, "\n".echo _('switch-off humidifier').": ".$array['switch_off_humidifier']."% &phi; (".echo _('so at')." ".$switch_off_humidity."% &phi;)");
+                    fwrite($f, "\n".echo _('delay humidifier')." ".$array['delay_humidify'].echo _('minutes'));
+                }
+
+                if ($array['modus'] == 4) {
+                    fwrite($f, "\n".echo _('setpoint humidity').": ".$array['setpoint_humidity']."% &phi;");
+                    fwrite($f, "\n".echo _('switch-on humidifier').": ".$array['switch_on_humidifier']."% &phi; (".echo _('so at')." ".$switch_on_humidify."% &phi;)");
+                    fwrite($f, "\n".echo _('switch-off humidifier').": ".$array['switch_off_humidifier']."% &phi; (".echo _('so at')." ".$switch_off_humidify."% &phi;)");
+                    fwrite($f, "\n".echo _('switch-on exhausting').": ".$array['switch_on_humidifier']."% &phi; (".echo _('so at')." ".$switch_on_dehumidify."% &phi;)");
+                    fwrite($f, "\n".echo _('switch-off exhausting').": ".$array['switch_off_humidifier']."% &phi; (".echo _('so at')." ".$switch_off_dehumidify."% &phi;)");
+                    fwrite($f, "\n".echo _('delay exhausting')." ".$array['delay_humidify'].echo _('minutes'));
+                }
+
+                fwrite($f, "\n");
+                fwrite($f, "\n".echo _('circulation air period').": ".$circulation_air_period.echo _('minutes'));
+                fwrite($f, "\n".echo _('circulation air duration').": ".$circulation_air_duration.echo _('minutes'));
 
 
                 fwrite($f, "\n");
-                fwrite($f, "\n"."Abluftperiode ".$luftaustauschperiode."min");
-                fwrite($f, "\n"."Abluftdauer: ".$luftaustauschdauer."min");
+                fwrite($f, "\n".echo _('exhausting air period')." ".$exhausting_air_period.echo _('minutes'));
+                fwrite($f, "\n".echo _('exhausting air duration').": ".$exhausting_air_duration.echo _('minutes'));
 
 
                 fwrite($f, "\n"."***********************************************");
@@ -158,14 +158,14 @@
 
 
                 # 3Sekunden Anzeige dass die Werte gespeichert wurden
-                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b>Werte gespeichert</b></p>
+                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b><?php echo _("values saved"); ?></b></p>
                     <script language="javascript">
                         setTimeout(function(){document.getElementById("info-message").style.display="none"}, 3000)
                     </script>';
             }
         # 3Sekunden Anzeige dass die Werte nicht gespeichert wurden
             else {
-                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b>Eingaben nicht in den vorgegebenen Wertgrenzen!</b></p>
+                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b><?php echo _("values not in the specified limits!"); ?></b></p>
                     <script language="javascript">
                         setTimeout(function(){document.getElementById("info-message").style.display="none"}, 3000)
                     </script>';

@@ -2,37 +2,37 @@
     # settings.json auslesen um sollwerte wieder zu geben
     $SET = file_get_contents('settings.json');
     $array1 = json_decode($SET, true);
-    $mod=$array1['mod'];
-    if ($mod==0) {
-        $modus='- Kühlen';
+    $modus=$array1['modus'];
+    if ($modus==0) {
+        $modus_name= '- '._('cooling');
         $checked_0 = 'checked="checked"';
     }
     else {
         $checked_0 = '';
     }
-    if ($mod==1) {
-        $modus='- Kühlen<br>- Befeuchten';
+    if ($modus==1) {
+        $modus_name='- '._('cooling').'<br>- '._('Befeuchten');
         $checked_1 = 'checked="checked"';
     }
     else {
         $checked_1 = '';
     }
-    if ($mod==2) {
-        $modus='- Heizen<br>- Befeuchten';
+    if ($modus==2) {
+        $modus_name = '- '._('heating').'<br>- '._('humidify');
         $checked_2 = 'checked="checked"';
     }
     else {
         $checked_2 = '';
     }
-    if ($mod==3) {
-        $modus='- Kühlen<br>- Heizen<br>- Befeuchten';
+    if ($modus==3) {
+        $modus_name='- '._('cooling').'<br>- '._('heating').'<br>- '._('humidify');
         $checked_3 = 'checked="checked"';
     }
     else {
         $checked_3 = '';
     }
-    if ($mod==4) {
-        $modus='- Kühlen<br>- Heizen<br>- Befeuchten<br>- Entfeuchten<br>- Umluft<br>- Abluft';
+    if ($modus==4) {
+        $modus_name='- '._('cooling').'<br>- '._('heating').'<br>- '._('humidify').'<br>- '._('dehumidify').'<br>- '._('circulating air').'<br>- '._('exhausting air');
         $checked_4 = 'checked="checked"';
     }
     else {
@@ -60,19 +60,19 @@
     else {
         $checked_sens_3 = '';
     }
-    $tempsoll_float = $array1['temp'];
-    $humsoll_float = $array1['hum'];
-    $humdelay = $array1['humdelay'];
-    $tempon = $array1['tempon'];
-    $tempoff = $array1['tempoff'];
-    $tempon1 = $array1['tempon1'];
-    $tempoff1 = $array1['tempoff1'];
-    $temphyston = $array1['temphyston'];
-    $temphystoff = $array1['temphystoff'];
-    $humhyston = $array1['humhyston'];
-    $humhystoff = $array1['humhystoff'];
-    $tempoff = $tempoff/60;
-    $tempon = $tempon/60;
-    $tempoff1 = $tempoff1/60;
-    $tempon1 = $tempon1/60;
+    $setpoint_temperature = $array1['setpoint_temperature'];
+    $setpoint_humdity = $array1['setpoint_humdity'];
+    $delay_humidify = $array1['delay_humidify'];
+    $circulation_air_duration = $array1['circulation_air_duration'];
+    $circulation_air_period = $array1['circulation_air_period'];
+    $exhaust_air_duration = $array1['exhaust_air_duration'];
+    $exhaust_air_period = $array1['exhaust_air_period'];
+    $switch_on_cooling_compressor = $array1['switch_on_cooling_compressor'];
+    $switch_off_cooling_compressor = $array1['switch_off_cooling_compressor'];
+    $switch_on_humidifier = $array1['switch_on_humidifier'];
+    $switch_off_humidifier = $array1['switch_off_humidifier'];
+    $circulation_air_period = $circulation_air_period/60;
+    $circulation_air_duration = $circulation_air_duration/60;
+    $exhaust_air_period = $exhaust_air_period/60;
+    $exhaust_air_duration = $exhaust_air_duration/60;
 ?>

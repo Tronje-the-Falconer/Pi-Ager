@@ -418,7 +418,7 @@ def doMainLoop():
         #array für graph     
         # Grafiken erzeugen
         if loopcounter % 3 == 0:
-            logstring = _("Erzeuge Grafiken")
+            logstring = _("creating graphs")
             write_verbose(logstring, False, False)
             ploting('sensor_temperature')#', 'status_heater', 'status_cooling_compressor', 'status_circulating_air')
             ploting('sensor_humidity')#, 'status_humidifier', 'status_circulating_air', 'status_exhaust_air')
@@ -431,7 +431,7 @@ def doMainLoop():
 
         time.sleep(1)  
         # Mainloop fertig
-        logstring = _('Loop complete.')
+        logstring = _('loop complete.')
         write_verbose(logstring, False, False)
         time.sleep(3)
         loopcounter += 1
@@ -469,9 +469,12 @@ gpio_cooling_compressor = 24  # GPIO für Kühlschrankkompressor
 gpio_circulation_fan = 27     # GPIO für Umluftventilator
 gpio_exhaust_fan = 17         # GPIO für Austauschlüfter
 gpio_humidifier = 23          # GPIO für Luftbefeuchter
-gpio_scale1 =                 # GPIO für Waage Ader 1
-gpio_scale2 =                 # GPIO für Waage Ader 2
-gpio_uv_light =               # GPIO für UV-Licht
+#gpio_scale1_wire1 =           # GPIO für Waage1 Ader 1
+#gpio_scale1_wire2 =           # GPIO für Waage1 Ader 2
+#gpio_scale2_wire1 =           # GPIO für Waage2 Ader 1
+#gpio_scale2_wire2 =           # GPIO für Waage2 Ader 2
+#gpio_uv_light =               # GPIO für UV-Licht
+#gpio_light =                  # GPIO für Licht
 verbose = True                # Dokumentiert interne Vorgänge wortreich
 
 ######################################################### Hauptprogramm
@@ -524,4 +527,3 @@ except Exception, e:
     pass
 
 goodbye()
-

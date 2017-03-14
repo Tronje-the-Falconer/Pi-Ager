@@ -28,13 +28,13 @@ body {
 
 
 /* Tabelle Schaltzustände */
-.schaltzustaende {
+.switching_state {
     text-align: center;
     width: 100%;
 }
 
 @media only screen and (max-device-width: 400px) {
-    .minischrift { font-size: 9px;}
+    .miniature_writing { font-size: 9px;}
     .display_none { display: none;}
     }
 
@@ -49,8 +49,8 @@ body {
    padding: 10px;
 }
 
-/* Tabelle show_agingtab */
-.show_agingtab {
+/* Tabelle show_hangingtable */
+.show_hangingtable {
     width: 100%;
     border: 1px solid #89939E;
     text-align: center;
@@ -156,7 +156,7 @@ div.thermometers {
 
 }
 
-div.th-anzeige-div {
+div.th-display-div {
 
     width: 290px;
     margin: 0px auto;
@@ -166,7 +166,7 @@ div.th-anzeige-div {
 }
 
 @media only screen and (max-device-width: 621px) {
-	div.th-anzeige-div { float: none; }
+	div.th-display-div { float: none; }
     div.thermometers { width: 290px; }
 
 }

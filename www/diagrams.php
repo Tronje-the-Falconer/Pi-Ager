@@ -11,7 +11,7 @@
                                     }
 
                                 ?>
-                                <h2 class="art-postheader"><?php echo _('Diagramme'); ?></h2>
+                                <h2 class="art-postheader"><?php echo _('graphs'); ?></h2>
                                 <div class="hg_container" style="margin-bottom: 20px; margin-top: 20px;">
                                     <table style="width: 100%;">
                                         <tr>
@@ -21,28 +21,28 @@
                                             <td><img src="images/monthly_30x30.png" alt=""></td>
                                         </tr>
                                         <tr>
-                                            <td><a href="diagrams.php?diagram_mode=hourly" class="art-button"><?php echo _('Stunde'); ?></a></td>
-                                            <td><a href="diagrams.php?diagram_mode=daily" class="art-button"><?php echo _('Tag'); ?></a></td>
-                                            <td><a href="diagrams.php?diagram_mode=weekly" class="art-button"><?php echo _('Woche'); ?></a></td>
-                                            <td><a href="diagrams.php?diagram_mode=monthly" class="art-button"><?php echo _('Monat'); ?></a></td>
+                                            <td><a href="diagrams.php?diagram_mode=hourly" class="art-button"><?php echo _('hour'); ?></a></td>
+                                            <td><a href="diagrams.php?diagram_mode=daily" class="art-button"><?php echo _('day'); ?></a></td>
+                                            <td><a href="diagrams.php?diagram_mode=weekly" class="art-button"><?php echo _('week'); ?></a></td>
+                                            <td><a href="diagrams.php?diagram_mode=monthly" class="art-button"><?php echo _('month'); ?></a></td>
                                         </tr>
                                     </table>
                                 </div>
 
                                     <div style="">
-                                    <h2><?php echo _('Temperaturverlauf'); ?> </h2>
+                                    <h2><?php echo _('temperature profile'); ?> </h2>
                                     <img src="/pic/pi-ager_sensortemp-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
-                                    <h2><?php echo _('Luftfeuchtigkeitsverlauf'); ?></h2>
+                                    <h2><?php echo _('humidity profile'); ?></h2>
                                     <img src="/pic/pi-ager_sensorhum-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
-                                    <h2><?php echo _('Kuehlung'); ?></h2>
+                                    <h2><?php echo _('cooler'); ?></h2>
                                     <img src="/pic/pi-ager_cool-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
-                                    <h2><?php echo _('Heizung'); ?></h2>
+                                    <h2><?php echo _('heater'); ?></h2>
                                     <img src="/pic/pi-ager_heat-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
-                                    <h2><?php echo _('Befeuchtung'); ?></h2>
+                                    <h2><?php echo _('humidifier'); ?></h2>
                                     <img src="/pic/pi-ager_lbf-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
-                                    <h2><?php echo _('Luftumwaelzung'); ?></h2>
+                                    <h2><?php echo _('air circulatory system'); ?></h2>
                                     <img src="/pic/pi-ager_uml-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
-                                    <h2><?php echo _('Luftaustausch'); ?></h2>
+                                    <h2><?php echo _('air exchanger'); ?></h2>
                                     <img src="/pic/pi-ager_lat-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->

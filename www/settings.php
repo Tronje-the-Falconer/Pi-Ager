@@ -11,7 +11,7 @@
                                     include 'modules/system_reboot.php';                        // Startet das System neu
                                     include 'modules/system_shutdown.php';                      // Fährt das System herunter
                                 ?>
-                                <h2 class="art-postheader">Betrieb</h2>
+                                <h2 class="art-postheader"><?php echo _('operating values'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Programme starten/stoppen-->
                                 <div class="hg_container">
                                     <table style="width: 100%"><tr>
@@ -28,10 +28,10 @@
                                             }
 
                                             if ($grepmain == NULL){
-                                                print '<td><img src="images/operating_mode.png" alt="" style="padding: 10px;"></td><td><img src="images/led-off-green-20x20.png" alt="" style="padding-top: 10px;"></td><td style=""><button class="art-button" name="rss_start">Start Reifeschrank</button></td>';
+                                                echo '<td><img src="images/operating_mode.png" alt="" style="padding: 10px;"></td><td><img src="images/led-off-green-20x20.png" alt="" style="padding-top: 10px;"></td><td style=""><button class="art-button" name="pi-ager_start">'._('start pi-ager').'</button></td>';
                                             }
                                             else {
-                                                print '<td><img src="images/operating_mode.png" alt="" style="padding: 10px;"></td><td><img src="images/led-on-green-20x20.png" alt="" style="padding-top: 10px;"></td><td><button class="art-button" name="rss_reifetab_stop" onclick="return confirm("Reifeschrank stoppen?");">Stop Reifeschrank</button></td>';
+                                                echo '<td><img src="images/operating_mode.png" alt="" style="padding: 10px;"></td><td><img src="images/led-on-green-20x20.png" alt="" style="padding-top: 10px;"></td><td><button class="art-button" name="pi-ager_hangingtable_stop" onclick="return confirm("'._("stop pi-ager?").'");">'._("stop pi-ager?").'</button></td>';
                                             }
                                             print ' </form>';
                                     ?>
@@ -39,7 +39,7 @@
                                     <hr>
                                     <!----------------------------------------------------------------------------------------Reifetabelle auswählen-->
 
-                                    <table style="width: 100%" class="schaltzustaende minischrift">
+                                    <table style="width: 100%" class="switching_state miniature_writing">
                                         <tr>
                                             <td><img src="images/hangingtable.png" alt="" style="padding-left: 10px;"></td>
                                             <td style=" text-align: left; padding-left: 20px;">
@@ -47,18 +47,18 @@
                                                     print '<form  method="post">';
                                                     foreach($csvfilename as $name) {
                                                         if ($name<>$desired_maturity){
-                                                            echo '<input type="radio" name="Reifetab" value="'.$name.'"><label> '.$name.'</label><br>';
+                                                            echo '<input type="radio" name="hanging_table" value="'.$name.'"><label> '.$name.'</label><br>';
                                                         }
                                                         if ($name==$desired_maturity){
-                                                            echo '<input type="radio" name="Reifetab" value="'.$name.'" checked="checked"><label> '.$name.'</label><br>';
+                                                            echo '<input type="radio" name="hanging_table" value="'.$name.'" checked="checked"><label> '.$name.'</label><br>';
                                                         }
                                                     }
-                                                    print '</td><td>';
+                                                    echo '</td><td>';
                                                     if ($grephangingtable == NULL){
-                                                        print '<img src="images/led-off-green-20x20.png" alt="" style="padding-right: 20px;">';
+                                                        echo '<img src="images/led-off-green-20x20.png" alt="" style="padding-right: 20px;">';
                                                     }
                                                     else {
-                                                        print '<img src="images/led-on-green-20x20.png" alt="" style="padding-right: 20px;">';
+                                                        echo '<img src="images/led-on-green-20x20.png" alt="" style="padding-right: 20px;">';
                                                     }
                                                 ?>
                                             <img src="images/hangingtable.png" alt=""></td>
@@ -67,38 +67,38 @@
                                             <td>&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><br>
                                                 <?php 
-                                                    print '<input class="art-button" type="submit" value="Speichern" />';
-                                                    print '</form>';
+                                                    echo '<input class="art-button" type="submit" value="'._("save").'" />';
+                                                    echo '</form>';
                                                 ?>
                                             </td>
                                             <td><br>
                                                 <?php 
-                                                    print '<form  method="post">';
+                                                    echo '<form  method="post">';
                                                     if ($grephangingtable == NULL){
-                                                        print "<button class=\"art-button\" name=\"rss_reifetab_start\" onclick=\"return confirm('Reifeprogramm starten?\\nManuelle Werte werden überschrieben!');\">Start Tabelle</button>";
+                                                        echo "<button class=\"art-button\" name=\"pi-ager_hangingtable_start\" onclick=\"return confirm('"._('start hangingtable?')."\\n"._('manual values are overwritten!')."');\">"._('start hangingtable')."</button>";
                                                     }
                                                     else {
-                                                        print "<button class=\"art-button\" name=\"reifetab_stop\" onclick=\"return confirm('Reifeprogramm stoppen?\\nDer Schrank arbeitet mit den letzten Werten der Reifetabelle weiter!');\">Stop Tabelle</button>";
+                                                        echo "<button class=\"art-button\" name=\"pi-ager_hangingtable_stop\" onclick=\"return confirm('"._('stop hangingtable?').'\\n'._('pi-ager continues with the last values of the hangingtable!')."');\">"._('stop hangingtable')."</button>";
                                                     }
-                                                    print '</form>';
+                                                    echo '</form>';
                                                 ?>
                                             </td>
                                         </tr>
                                     </table>
-                                    <table id="show_agingtab" class="show_agingtab">
+                                    <table id="show_hangingtable" class="show_hangingtable">
                                         <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
-                                            <td class="show_agingcell"><div class="tooltip">S%<span class="tooltiptext">Soll-Feuchtigkeit in %</span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">D%<span class="tooltiptext">Verzögerung der Befeuchtung in Minuten</span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">ON%<span class="tooltiptext">Einschaltwert der Befeuchtung in %</span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">OFF%<span class="tooltiptext">Ausschaltwert der Befeuchtung in %</span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">S°C<span class="tooltiptext">Soll-Temperatur in °C</span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">ON°C<span class="tooltiptext">Einschaltwert der Temperatur in °C</span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">OFF°C<span class="tooltiptext">Ausschaltwert der Temperatur in °C</span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">TUD<span class="tooltiptext">Timer der Umluftdauer in Minuten</span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">TUP<span class="tooltiptext">Timer der Umluftperiode in Minuten</span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">TAD<span class="tooltiptext">Timer der Abluftdauer in Minuten</span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">TAP<span class="tooltiptext">Timer der Abluftperiode in Minuten</span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">TAG<span class="tooltiptext">Dauer der Reifephase in Tagen</span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">S%<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">D%<span class="tooltiptext"><?php echo _('delay of humidification in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">ON%<span class="tooltiptext"><?php echo _('switch-on value of humidification in %'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">OFF%<span class="tooltiptext"><?php echo _('Switch-off value of humidification in %'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">S°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">ON°C<span class="tooltiptext"><?php echo _('switch-on value of the temperature in °C'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">OFF°C<span class="tooltiptext"><?php echo _('switch-off value of the temperature in °C'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">TUD<span class="tooltiptext"><?php echo _('timer of the recirculation duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">TUP<span class="tooltiptext"><?php echo _('timer of the recirculation period in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">TAD<span class="tooltiptext"><?php echo _('timer of the exhausting air duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">TAP<span class="tooltiptext"><?php echo _('timer of the exhausting air period in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">TAG<span class="tooltiptext"><?php echo _('duration of hanging phase in days'); ?></span></div></td>
                                         </tr>
                                         <?php 
                                             // Gewählte CSV-Datei auslesen und als Array anlegen
@@ -134,19 +134,18 @@
                                         include ('manvals.php');
                                                     }
                                                     else {
-                                                        print "<h2 class=\"art-postheader\">Manuelle Werte</h2>
-                                                                <div class=\"hg_container\"><b>Während des vollautomatischen Reifebetriebes</b><br>sind manuelle Einstellungen nicht möglich.
-                                                                </div>";
+                                                        echo '<h2 class=\"art-postheader\">'._('manual values'); '</h2>
+                                                                <div class=\"hg_container\"><b>'._('manual adjustments are not possible').'</b><br>'._('during fully automatic aging.').'</div>';
                                                          }
                                                 ?>
-                                <h2 class="art-postheader">System</h2>
+                                <h2 class="art-postheader"><?php echo _('system'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Reboot/Shutdown-->
                                 <div class="hg_container">
                                     <form  method="post">
                                         <table style="width: 100%;">
                                             <tr>
-                                                <td><button class="art-button" name="Reboot" onclick="return confirm('ACHTUNG: System neustarten?');">Neustarten</button></td>
-                                                <td><button class="art-button" name="Shutdown" onclick="return confirm('ACHTUNG: System herunterfahren?');">Herunterfahren</button></td>
+                                                <td><button class="art-button" name="reboot" onclick="return confirm('<?php echo _('ATTENTION: reboot system?');?>');"><?php echo _('reboot'); ?></button></td>
+                                                <td><button class="art-button" name="shutdown" onclick="return confirm('<?php echo _('ATTENTION: shutdown system?');?>');"><?php echo _('shutdown'); ?></button></td>
                                             </tr>
                                         </table>
                                     </form>
