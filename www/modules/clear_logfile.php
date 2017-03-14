@@ -5,7 +5,7 @@
         if (is_file($logfile)) {
             $fp = fopen($logfile, 'w')
                 or die (sprintf(_('could not create %s'), $logfile));
-            $input = sprintf (_('New file created on %s oclock'), $timestamp).'\n\n';
+            $input = sprintf (_('New file created on %s oclock'), $timestamp); echo ' \n\n';
             fwrite($fp,$input);
             fclose ($fp);
         }

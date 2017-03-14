@@ -5,7 +5,7 @@
         $InputValid = '';
         foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
             if (preg_match('/[.\D]/', $CheckInput)) {
-            $InputValid = echo _('unauthorized character - please use only positive integers!');
+                $InputValid = _('unauthorized character - please use only positive integers!');
             }
         }
 
@@ -47,24 +47,24 @@
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus
                 if ($array['modus'] == 0) {
-                    $operating_mode = echo _('cooling');
+                    $operating_mode = _('cooling');
                     $einschalttemperatur = $array['setpoint_temperature'] + $array['switch_on_cooling_compressor'];
                     $switch_off_temperature = $array['setpoint_temperature'] + $array['switch_off_cooling_compressor'];
                 }
 
                 if ($array['modus'] == 1) {
-                    $operating_mode = echo _('cooling with humidification');
+                    $operating_mode = _('cooling with humidification');
                     $einschalttemperatur = $array['setpoint_temperature'] + $array['switch_on_cooling_compressor'];
                     $switch_off_temperature = $array['setpoint_temperature'] + $array['switch_off_cooling_compressor'];
                 }
 
                 if ($array['modus'] == 2) {
-                    $operating_mode = echo _('heating with humidification';
+                    $operating_mode = _('heating with humidification');
                     $einschalttemperatur = $array['setpoint_temperature'] - $array['switch_on_cooling_compressor'];
                     $switch_off_temperature = $array['setpoint_temperature'] - $array['switch_off_cooling_compressor'];
                 }
                 if ($array['modus'] == 3) {
-                    $operating_mode = echo _('automatic with humidification';
+                    $operating_mode = _('automatic with humidification');
                     $switch_on_temperature_cooling = $array['setpoint_temperature'] + $array['switch_on_cooling_compressor'];
                     $switch_off_temperature_cooling = $array['setpoint_temperature'] + $array['switch_off_cooling_compressor'];
                     $switch_on_temperature_heating = $array['setpoint_temperature'] - $array['switch_on_cooling_compressor'];
@@ -72,7 +72,7 @@
                 }
 
                 if ($array['modus'] == 4) {
-                    $operating_mode = echo _('automatic with dehumidification and humidification';
+                    $operating_mode = _('automatic with dehumidification and humidification');
                     $switch_on_temperature_cooling = $array['setpoint_temperature'] + $array['switch_on_cooling_compressor'];
                     $switch_off_temperature_cooling = $array['setpoint_temperature'] + $array['switch_off_cooling_compressor'];
                     $switch_on_temperature_heating = $array['setpoint_temperature'] - $array['switch_on_cooling_compressor'];
@@ -106,51 +106,51 @@
 
                 $f=fopen('logfile.txt','a');
                 fwrite($f, "\n"."***********************************************");
-                fwrite($f, "\n".echo _('sensor').": ".$sensorname);
-                fwrite($f, "\n".echo _('operating mode').": ".$operating_mode);
-                fwrite($f, "\n".date('d.m.Y H:i').' '.echo _('values have been manually changed.');
+                fwrite($f, "\n"._('sensor').": ".$sensorname);
+                fwrite($f, "\n". _('operating mode').": ".$operating_mode);
+                fwrite($f, "\n".date('d.m.Y H:i').' '._('values have been manually changed.'));
                 fwrite($f, "\n");
 
                 if ($array['modus'] == 0 || $array['modus'] == 1 || $array['modus'] == 2)  {
-                    fwrite($f, "\n".echo _('setpoint temperature').": ".$array['setpoint_temperature']."&deg;C");
-                    fwrite($f, "\n".echo _('switch-off temperature').": ".$array['switch_off_cooling_compressor']."&deg;C (".echo _('so at')." ".$switch_off_temperature."&deg;C)");
-                    fwrite($f, "\n".echo _('switch-on temperature').": ".$array['switch_on_cooling_compressor']."&deg;C (".echo _('so at')." ".$switch_on_temperature."&deg;C)");
+                    fwrite($f, "\n"._('setpoint temperature').": ".$array['setpoint_temperature']."&deg;C");
+                    fwrite($f, "\n"._('switch-off temperature').": ".$array['switch_off_cooling_compressor']."&deg;C ("._('so at')." ".$switch_off_temperature."&deg;C)");
+                    fwrite($f, "\n"._('switch-on temperature').": ".$array['switch_on_cooling_compressor']."&deg;C ("._('so at')." ".$switch_on_temperature."&deg;C)");
                 }
 
                 if ($array['modus'] == 3 || $array['modus'] == 4)  {
-                    fwrite($f, "\n".echo _('setpoint temperature').": ".$array['setpoint_temperature']."&deg;C");
-                    fwrite($f, "\n".echo _('switch-on heater');": ".$array['switch_on_cooling_compressor']."&deg;C (".echo _('so at')." ".$switch_on_temperature_heating."&deg;C)");
-                    fwrite($f, "\n".echo _('switch-off heater').": ".$array['switch_off_cooling_compressor']."&deg;C (".echo _('so at')." ".$switch_off_temperature_heating."&deg;C)");
-                    fwrite($f, "\n".echo _('switch-on cooler').": ".$array['switch_on_cooling_compressor']."&deg;C (".echo _('so at')." ".$switch_on_temperature_cooling."&deg;C)");
-                    fwrite($f, "\n".echo _('switch-off cooler').": ".$array['switch_off_cooling_compressor']."&deg;C (".echo _('so at')." ".$switch_off_temperature_cooling."&deg;C)");
+                    fwrite($f, "\n"._('setpoint temperature').": ".$array['setpoint_temperature']."&deg;C");
+                    fwrite($f, "\n"._('switch-on heater').": ".$array['switch_on_cooling_compressor'].'&deg;C ('._('so at')." ".$switch_on_temperature_heating.'&deg;C)');
+                    fwrite($f, "\n"._('switch-off heater').": ".$array['switch_off_cooling_compressor']."&deg;C ("._('so at')." ".$switch_off_temperature_heating."&deg;C)");
+                    fwrite($f, "\n"._('switch-on cooler').": ".$array['switch_on_cooling_compressor']."&deg;C ("._('so at')." ".$switch_on_temperature_cooling."&deg;C)");
+                    fwrite($f, "\n"._('switch-off cooler').": ".$array['switch_off_cooling_compressor']."&deg;C ("._('so at')." ".$switch_off_temperature_cooling."&deg;C)");
                 }
 
                 fwrite($f, "\n");
 
                 if ($array['modus'] == 1 || $array['modus'] == 2 || $array['modus'] == 3) {
-                    fwrite($f, "\n".echo _('setpoint humidity').": ".$array['setpoint_humidity']."% "."&phi;");
-                    fwrite($f, "\n".echo _('switch-on humidifier').": ".$array['switch_on_humidifier']."% &phi; (".echo _('so at')." ".$switch_on_humidity."% &phi;)");
-                    fwrite($f, "\n".echo _('switch-off humidifier').": ".$array['switch_off_humidifier']."% &phi; (".echo _('so at')." ".$switch_off_humidity."% &phi;)");
-                    fwrite($f, "\n".echo _('delay humidifier')." ".$array['delay_humidify'].echo _('minutes'));
+                    fwrite($f, "\n"._('setpoint humidity').": ".$array['setpoint_humidity']."% "."&phi;");
+                    fwrite($f, "\n"._('switch-on humidifier').": ".$array['switch_on_humidifier']."% &phi; ("._('so at')." ".$switch_on_humidity."% &phi;)");
+                    fwrite($f, "\n"._('switch-off humidifier').": ".$array['switch_off_humidifier']."% &phi; ("._('so at')." ".$switch_off_humidity."% &phi;)");
+                    fwrite($f, "\n"._('delay humidifier')." ".$array['delay_humidify']._('minutes'));
                 }
 
                 if ($array['modus'] == 4) {
-                    fwrite($f, "\n".echo _('setpoint humidity').": ".$array['setpoint_humidity']."% &phi;");
-                    fwrite($f, "\n".echo _('switch-on humidifier').": ".$array['switch_on_humidifier']."% &phi; (".echo _('so at')." ".$switch_on_humidify."% &phi;)");
-                    fwrite($f, "\n".echo _('switch-off humidifier').": ".$array['switch_off_humidifier']."% &phi; (".echo _('so at')." ".$switch_off_humidify."% &phi;)");
-                    fwrite($f, "\n".echo _('switch-on exhausting').": ".$array['switch_on_humidifier']."% &phi; (".echo _('so at')." ".$switch_on_dehumidify."% &phi;)");
-                    fwrite($f, "\n".echo _('switch-off exhausting').": ".$array['switch_off_humidifier']."% &phi; (".echo _('so at')." ".$switch_off_dehumidify."% &phi;)");
-                    fwrite($f, "\n".echo _('delay exhausting')." ".$array['delay_humidify'].echo _('minutes'));
+                    fwrite($f, "\n"._('setpoint humidity').": ".$array['setpoint_humidity']."% &phi;");
+                    fwrite($f, "\n"._('switch-on humidifier').": ".$array['switch_on_humidifier']."% &phi; ("._('so at')." ".$switch_on_humidify."% &phi;)");
+                    fwrite($f, "\n"._('switch-off humidifier').": ".$array['switch_off_humidifier']."% &phi; ("._('so at')." ".$switch_off_humidify."% &phi;)");
+                    fwrite($f, "\n"._('switch-on exhausting').": ".$array['switch_on_humidifier']."% &phi; ("._('so at')." ".$switch_on_dehumidify."% &phi;)");
+                    fwrite($f, "\n"._('switch-off exhausting').": ".$array['switch_off_humidifier']."% &phi; ("._('so at')." ".$switch_off_dehumidify."% &phi;)");
+                    fwrite($f, "\n"._('delay exhausting')." ".$array['delay_humidify']._('minutes'));
                 }
 
                 fwrite($f, "\n");
-                fwrite($f, "\n".echo _('circulation air period').": ".$circulation_air_period.echo _('minutes'));
-                fwrite($f, "\n".echo _('circulation air duration').": ".$circulation_air_duration.echo _('minutes'));
+                fwrite($f, "\n"._('circulation air period').": ".$circulation_air_period._('minutes'));
+                fwrite($f, "\n"._('circulation air duration').": ".$circulation_air_duration._('minutes'));
 
 
                 fwrite($f, "\n");
-                fwrite($f, "\n".echo _('exhausting air period')." ".$exhausting_air_period.echo _('minutes'));
-                fwrite($f, "\n".echo _('exhausting air duration').": ".$exhausting_air_duration.echo _('minutes'));
+                fwrite($f, "\n"._('exhausting air period')." ".$exhausting_air_period._('minutes'));
+                fwrite($f, "\n"._('exhausting air duration').": ".$exhausting_air_duration._('minutes'));
 
 
                 fwrite($f, "\n"."***********************************************");

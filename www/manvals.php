@@ -116,7 +116,7 @@
                                             _('so, if the temperature drops below 19 degrees, the pi-ager heats up to 21 ° C and then switches off to avoid excessive heating.
                                              the entire behavior is different from pi-ager to pi-ager and therefore to be determined individually.').
                                             '<br><br>
-                                            <b>'._('automatic mode').':</b> '_('in every automatic mode, the temperature is fully automatically controlled.
+                                            <b>'._('automatic mode').':</b> '._('in every automatic mode, the temperature is fully automatically controlled.
                                              first, the current temperature is determined. Then decide which method (cooling or heating) is suitable to reach the setpoint temperature set.
                                              this also means that the switching values of the hysteresis must not be too close together. Otherwise, cooling and heating could be switched on and off alternately.').
                                             '<br><br>
@@ -188,8 +188,7 @@
                                             <b>'._('switch-on value').':</b>'._('is the value at which the control becomes active (value: 0-10%)').'<br>
                                             <b>'._('switch-off value').':</b>'._('is the value at which the control becomes inactive (value: 0-10%)').'<br>'.
                                             _('the values may not be the same in order to avoid a wild switching on and off.').'<br><br>
-                                            <b>'._('delay').':</b>'._('here the delay time is set until the humidifier turns on if the humidity is too low.
-                                             this can be used to blast out the rapidly falling air humidity during "cooling", "timer exhaust" or "dehumidification". The minimum value is 0 minutes, the maximum 60 minutes.').'<br><br>
+                                            <b>'._('delay').':</b>'._('here the delay time is set until the humidifier turns on if the humidity is too low. this can be used to blast out the rapidly falling air humidity during "cooling", "timer exhaust" or "dehumidification". The minimum value is 0 minutes, the maximum 60 minutes.').'<br><br>
                                             <b>'._('example').'</b> <i>'._('target humidity').': 75%'._('switch-on value').': 5%'._('switch-off value').': 1%</i><br>'.
                                             _('switch-on humidity').' = '._('target humidity').' - '._('switch-on value').' --> 75% - 5% = 70%<br>'.
                                             _('switch-off humidity').' = '._('target humidity').' - '._('switch-off value').'--> 75% - 1% = 74%<br>'.
@@ -198,8 +197,8 @@
                                             <b>'._('example automatic mode with with humidification and dehumidification').':</b>'._('in this automatic mode, the humidity is completely automatically controlled.
                                              the current humidity is determined first. it is then decided which method (humidification and dehumidification) is suitable for achieving the desired set-point humidity.
                                              this also means that the switching values of the hysteresis must not be too close together. otherwise, humidification and dehumidification could always be switched on and off alternately.').'<br><br>
-                                             <b>'._('recommendation').':</b>'._('check the stored values in the logfile!').'<br><br>
-                                             <b>'._('attention').'</b>'._('use only positive integers!').'<br><br>';?>
+                                             <b>'._('recommendation').':</b> '._('check the stored values in the logfile!').'<br><br>
+                                             <b>'._('attention').'</b> '._('use only positive integers!').'<br><br>';?>
                                             <button class="art-button" type="button" onclick="help_humidify_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
                                         <hr>
@@ -276,7 +275,7 @@
                                             }
                                         </script>
                                         <p id="help_circulation_air" class="help_p">
-                                            <?php  echo '<b>'._('period').':</b> '._('this is used to set the pause time, which waits until the exhausting is switched on again. if the .lue is 0 (= no pause), the exhausting air is permanently switched on. the maximum value is 1440min.');
+                                            <?php  echo '<b>'._('period').':</b> '._('this is used to set the pause time, which waits until the exhausting is switched on again. if the .lue is 0 (= no pause), the exhausting air is permanently switched on. the maximum value is 1440min.').
                                              '<br><br>
                                             <b>'._('duration').':</b> '._('this sets the exhausting time during which the fan is running. at 0, the exhausting air timer function is switched off. the maximum value is 1440min.').
                                              '<br><br>
@@ -299,7 +298,7 @@
                                                     <br>
                                                 </td>
                                                 <td class="td_submitbutton">
-                                                    <input class="art-button" type="submit" value="Speichern" />
+                                                    <input class="art-button" type="submit" value="<?php echo _('save'); ?>" />
                                                 </td>
                                             </tr>
                                         </table>
