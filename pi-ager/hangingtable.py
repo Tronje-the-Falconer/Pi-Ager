@@ -13,13 +13,13 @@ import gettext
 from datetime import timedelta
 ######################################################### Definieren von Funktionen
 #---------------------------------------------------------------------------------- Function Lesen der tables.json
-def read_table_json():
-    global table_json_file
+def read_tables_json():
+    global tables_json_file
     current_data = None
-    with open(table_json_file, 'r') as tablejsonfile:
-        table_data = tablejsonfile.read();
-    data_tablejsonfile = json.loads(table_data);
-    return data_tablejsonfile
+    with open(tables_json_file, 'r') as tablesjsonfile:
+        table_data = tablesjsonfile.read();
+    data_tablesjsonfile = json.loads(table_data);
+    return data_tablesjsonfile
 #---------------------------------------------------------------------------------- Function Lesen der settings.json
 def read_settings_json():
     global settings_json_file
@@ -37,10 +37,10 @@ def read_config_json():
     data_configjsonfile = json.loads(config_data)
     return data_configjsonfile
 #---------------------------------------------------------------------------------- Function Schreiben der settings.json
-def write_settings_json(modus, setpoint_temperature, setpoint_humidity, $circulation_air_period, circulation_air_duration, exhaust_air_period, exhaust_air_duration):
+def write_settings_json(modus, setpoint_temperature, setpoint_humidity, circulation_air_period, circulation_air_duration, exhaust_air_period, exhaust_air_duration):
     global settings_json_file
 
-    setting_data = json.dumps({"modus":modus, "setpoint_temperature":setpoint_temperature, "setpoint_humidity":setpoint_humidity, "$circulation_air_period":$circulation_air_period, "circulation_air_duration":circulation_air_duration, "exhaust_air_period":exhaust_air_period, "exhaust_air_duration":exhaust_air_duration, "switch_on_cooling_compressor":switch_on_cooling_compressor, "switch_off_cooling_compressor":switch_off_cooling_compressor, "switch_on_humidifier":switch_on_humidifier, "switch_off_humidifier":switch_off_humidifier, "delay_humidify":delay_humidify, 'date':int(time.time()), 'sensortype':sensortype})
+    setting_data = json.dumps({"modus":modus, "setpoint_temperature":setpoint_temperature, "setpoint_humidity":setpoint_humidity, "circulation_air_period":circulation_air_period, "circulation_air_duration":circulation_air_duration, "exhaust_air_period":exhaust_air_period, "exhaust_air_duration":exhaust_air_duration, "switch_on_cooling_compressor":switch_on_cooling_compressor, "switch_off_cooling_compressor":switch_off_cooling_compressor, "switch_on_humidifier":switch_on_humidifier, "switch_off_humidifier":switch_off_humidifier, "delay_humidify":delay_humidify, 'date':int(time.time()), 'sensortype':sensortype})
     with open(settings_json_file, 'w') as settingsjsonfile:
         settingsjsonfile.write(setting_data)
 #---------------------------------------------------------------------------------- Function Schreiben der current.json
@@ -108,8 +108,8 @@ def read_dictionary(dictionary):
     switch_on_humidifier_logstring = "\n" + _('Einschaltwert Feuchte:') + " \t \t" + str(switch_on_humidifier) + "%"
     switch_off_humidifier_logstring = "\n" + _('Ausschaltwert Feuchte:') + " \t \t" + str(switch_off_humidifier) + "%"
     delay_humidify_logstring = "\n" + _('Befeuchtungsverzögerung:') + " \t" + str(delay_humidify) + "min"
-    $circulation_air_period_format = int($circulation_air_period)/60
-    $circulation_air_period_logstring = "\n" + _('Timer Umluftperiode alle:') + " \t" + str($circulation_air_period_format) + "min"
+    circulation_air_period_format = int(circulation_air_period)/60
+    circulation_air_period_logstring = "\n" + _('Timer Umluftperiode alle:') + " \t" + str(circulation_air_period_format) + "min"
     circulation_air_duration_format = int(circulation_air_duration)/60
     circulation_air_duration_logstring = "\n" + _('Timer Umluftdauer:') + " \t  \t" + str(circulation_air_duration_format) + "min"
     exhaust_air_period_format = int(exhaust_air_period)/60
@@ -121,10 +121,10 @@ def read_dictionary(dictionary):
     
     
     # print 'DEBUG schreibe settings.json in if'
-    write_settings_json (modus, setpoint_temperature, setpoint_humidity, $circulation_air_period, circulation_air_duration, exhaust_air_period, exhaust_air_duration)
+    write_settings_json (modus, setpoint_temperature, setpoint_humidity, circulation_air_period, circulation_air_duration, exhaust_air_period, exhaust_air_duration)
     global period_endtime
     period_endtime = datetime.datetime.now() + timedelta(days = duration) # days = parameter von timedelta
-    logstring = operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + "\n" + sollfeuchtigkeit_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + $circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n" '---------------------------------------'
+    logstring = operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + "\n" + sollfeuchtigkeit_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n" '---------------------------------------'
     write_verbose(logstring, False, True)
     
     
@@ -137,6 +137,7 @@ tables_json_file = website_path + '/tables.json'
 config_json_file = website_path + '/config.json'
 current_json_file = website_path + '/current.json'
 logfile_txt_file = website_path + '/logfile.txt'
+verbose = True                # Dokumentiert interne Vorgänge wortreich
 #---------------------------------------------------------------------------------- Allgemeingültige Werte aus config.json
 data_config_json = read_config_json()
 sensortype = data_config_json ['sensortype']                                        # Sensortyp
@@ -148,8 +149,8 @@ switch_off_humidifier = data_config_json ['switch_off_humidifier']              
 delay_humidify = data_config_json ['delay_humidify']                                # Luftbefeuchtungsverzögerung
 
 #---------------------------------------------------------------------------------- Tabelle aus tables.json
-data_table_json = read_table_json()                   # Function-Aufruf
-hangingtable = data_table_json['hangingtable']    # Variable reifetablename = Name der Reifetabelle
+data_tables_json = read_tables_json()                   # Function-Aufruf
+hangingtable = data_tables_json['hangingtable']    # Variable reifetablename = Name der Reifetabelle
 
 #---------------------------------------------------------------------------------- bedingte Werte aus Variablen
 #---------------------------------------------------------------------------------------------------------------- csv-datei

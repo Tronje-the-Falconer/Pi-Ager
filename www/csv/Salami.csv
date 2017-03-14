@@ -1,5 +1,6 @@
 mod,hum,humdelay,humhyston,humhystoff,temp,temphyston,temphystoff,tempon,tempoff,tempon1,tempoff1,days
-4,93,5,0.5,2,21,5,2,900,3600,900,21600,1
+modus,setpoint_humidity,delay_humidify,switch_on_humidifier,switch_off_humidifier,setpoint_temperature,switch_on_cooling_compressor,switch_off_cooling_compressor,circulation_air_duration,$circulation_air_period,exhaust_air_duration,exhaust_air_period,days
+4,93,0.5,1,2,21,5,2,900,3600,900,21600,1
 ,,,,,20,,,,,,,1
 ,92,,,,19,,,,,,,2
 ,91,,,,18,,,,,,,2
