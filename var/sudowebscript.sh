@@ -4,14 +4,14 @@
 # shell_exec('sudo /var/sudowebscript.sh PARAMETER')
 jq '.employees[0].name'
 
-# gpio_cooling_compressor = jq '.gpio_cooling_compressor'
-# gpio_heater = jq '.gpio_heater'
-# gpio_humidifier = jq '.gpio_humidifier'
-# gpio_circulating_air = jq '.gpio_circulating_air'
-# gpio_exhausting_air = jq '.gpio_exhausting_air'
-# gpio_uv_light = jq '.gpio_uv_light'
-# gpio_reserved1 = jq '.gpio_reserved1'
-# gpio_reserved2 = jq '.gpio_reserved2'
+# gpio_cooling_compressor = cat /var/www/config.json | jq '.gpio_cooling_compressor'
+# gpio_heater = cat /var/www/config.json | jq '.gpio_heater'
+# gpio_humidifier = cat /var/www/config.json | jq '.gpio_humidifier'
+# gpio_circulating_air = cat /var/www/config.json | jq '.gpio_circulating_air'
+# gpio_exhausting_air = cat /var/www/config.json | jq '.gpio_exhausting_air'
+# gpio_uv_light = cat /var/www/config.json | jq '.gpio_uv_light'
+# gpio_reserved1 = cat /var/www/config.json | jq '.gpio_reserved1'
+# gpio_reserved2 = cat /var/www/config.json | jq '.gpio_reserved2'
 
 gpio_cooling_compressor = 23
 gpio_heater = 22

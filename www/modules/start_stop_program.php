@@ -56,11 +56,14 @@
     if (isset($_POST['pi-ager_hangingtable_stop'])){
         shell_exec('sudo /var/sudowebscript.sh pkillmain');
         shell_exec('sudo /var/sudowebscript.sh pkillautomatic');
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write22'));
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write27'));
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write24'));
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write18'));
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write23'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_cooling_compressor'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_heater'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_humidifier'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_circulating_air'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_exhausting_air'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_uv_light'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_reserved1'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_reserved2'));
         $f=fopen('logfile.txt','a');
         fwrite($f, "\n".date('d.m.Y H:i')." "._('hangingtable stopped'));
         fclose($f);
