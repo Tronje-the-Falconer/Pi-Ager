@@ -2,6 +2,25 @@
 #
 # sudo web script allowing user www-data to run commands with root privilegs
 # shell_exec('sudo /var/sudowebscript.sh PARAMETER')
+jq '.employees[0].name'
+
+# gpio_cooling_compressor = jq '.gpio_cooling_compressor'
+# gpio_heater = jq '.gpio_heater'
+# gpio_humidifier = jq '.gpio_humidifier'
+# gpio_circulating_air = jq '.gpio_circulating_air'
+# gpio_exhausting_air = jq '.gpio_exhausting_air'
+# gpio_uv_light = jq '.gpio_uv_light'
+# gpio_reserved1 = jq '.gpio_reserved1'
+# gpio_reserved2 = jq '.gpio_reserved2'
+
+gpio_cooling_compressor = 23
+gpio_heater = 22
+gpio_humidifier = 27
+gpio_circulating_air = 18
+gpio_exhausting_air = 17
+gpio_uv_light = 4
+gpio_reserved1 = 3
+gpio_reserved2 = 2
 
 case "$1" in
     startmain) #Starten von main.py
@@ -22,35 +41,53 @@ case "$1" in
     grephangingtable) #Überprüfen von hangingtable.py  | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach Reifetab.py gesucht
         ps ax | grep -v grep | grep hangingtable.py
     ;;
-    read18)#Ansteuern von GPIO18 Umluftventilator
-        /usr/local/bin/gpio -g read 27
+    read_gpio_cooling_compressor) # Ansteuern von GPIO Kühlschrankkompressor
+        /usr/local/bin/gpio -g read $gpio_cooling_compressor
     ;;
-    read22) #Ansteuern von GPIO22 Kühlschrankkompressor
-        /usr/local/bin/gpio -g read 24
+    write_gpio_cooling_compressor) # Ansteuern von GPIO Kühlschrankkompressor
+        /usr/local/bin/gpio -g write $gpio_cooling_compressor 1
     ;;
-    read23)#Ansteuern von GPIO23 Austauschlüfter
-        /usr/local/bin/gpio -g read 17
+    read_gpio_heater)# Ansteuern von GPIO Heizkabel
+        /usr/local/bin/gpio -g read $gpio_heater
     ;;
-    read24)#Ansteuern von GPIO24 Luftbefeuchter
-        /usr/local/bin/gpio -g read 23
+    write_gpio_heater)# Ansteuern von GPIO Heizkabel
+        /usr/local/bin/gpio -g write $gpio_heater 1
     ;;
-    read27)#Ansteuern von GPIO27 Heizkabel
-        /usr/local/bin/gpio -g read 22
+    read_gpio_humidifier)# Ansteuern von GPIO Luftbefeuchter
+        /usr/local/bin/gpio -g read $gpio_humidifier
     ;;
-    write18)#Ansteuern von GPIO18 Umluftventilator
-        /usr/local/bin/gpio -g write 27 1
+    write_gpio_humidifier)# Ansteuern von GPIO Luftbefeuchter
+        /usr/local/bin/gpio -g write $gpio_humidifier 1
     ;;
-    write22) #Ansteuern von GPIO22 Kühlschrankkompressor
-        /usr/local/bin/gpio -g write 24 1
+    read_gpio_circulating_air)# Ansteuern von GPIO Umluftventilator
+        /usr/local/bin/gpio -g read $gpio_circulating_air
     ;;
-    write23)#Ansteuern von GPIO23 Austauschlüfter
-        /usr/local/bin/gpio -g write 17 1
+    write_gpio_circulating_air)# Ansteuern von GPIO Umluftventilator
+        /usr/local/bin/gpio -g write $gpio_circulating_air 1
     ;;
-    write24)#Ansteuern von GPIO24 Luftbefeuchter
-        /usr/local/bin/gpio -g write 23 1
+    read_gpio_exhausting_air)# Ansteuern von GPIO Austauschlüfter
+        /usr/local/bin/gpio -g read $gpio_exhausting_air
     ;;
-    write27)#Ansteuern von GPIO27 Heizkabel
-        /usr/local/bin/gpio -g write 22 1
+    write_gpio_exhausting_air)# Ansteuern von GPIO Austauschlüfter
+        /usr/local/bin/gpio -g write $gpio_exhausting_air 1
+    ;;
+    read_gpio_uv_light)# Ansteuern von GPIO UV-Licht
+        /usr/local/bin/gpio -g read $gpio_uv_light
+    ;;
+    write_gpio_uv_light)# Ansteuern von GPIO UV-Licht
+        /usr/local/bin/gpio -g write $gpio_uv_light 1
+    ;;
+    read_gpio_reserved1)# Ansteuern von GPIO reserved1
+        /usr/local/bin/gpio -g read $gpio_reserved1
+    ;;
+    write_gpio_reserved1)# Ansteuern von GPIO reserved1
+        /usr/local/bin/gpio -g write $gpio_reserved1 1
+    ;;
+    read_gpio_reserved2)# Ansteuern von GPIO reserved2
+        /usr/local/bin/gpio -g read $gpio_reserved2
+    ;;
+    write_gpio_reserved2)# Ansteuern von GPIO reserved1
+        /usr/local/bin/gpio -g write $gpio_reserved2 1
     ;;
     reboot) # reboot
         reboot
