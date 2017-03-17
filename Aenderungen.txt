@@ -62,3 +62,9 @@ csv Header
     modus,setpoint_humidity,delay_humidify,switch_on_humidifier,switch_off_humidifier,setpoint_temperature,switch_on_cooling_compressor,switch_off_cooling_compressor,circulation_air_duration,circulation_air_period,exhaust_air_duration,exhaust_air_period,days
 
 betriebsart -> operating_mode
+
+
+Aus csv ausgelagert in config.json:
+humhyston, humhystoff, temphyston, temphystoff, humdelay
+switch_on_humidifier, switch_off_humidifier, switch_on_cooling_compressor, switch_off_cooling_compressor, delay_humidify
+

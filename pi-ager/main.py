@@ -17,15 +17,15 @@ from sht_sensor import Sht
 #---------------------------------------------------------------------------------- Function goodbye
 def goodbye():
     cleanup()
-    logstring = _('Goodbye!')
+    logstring = _('goodbye!')
     write_verbose(logstring, False, False)
 
 #---------------------------------------------------------------------------------- Function cleanup
 def cleanup():
-    logstring = _('Running cleanup script...')
+    logstring = _('running cleanup script...')
     write_verbose(logstring, False, False)
     gpio.cleanup() # GPIO zurücksetzen
-    logstring = _('Cleanup complete.')
+    logstring = _('cleanup complete.')
     write_verbose(logstring, True, False)
 
 #---------------------------------------------------------------------------------- Function Setup GPIO
@@ -33,10 +33,10 @@ def setupGPIO():
     global board_mode
     global gpio_heater
     global gpio_cooling_compressor
-    global gpio_circulation_fan
+    global gpio_circulating_air
     global gpio_humidifier
-    global gpio_exhaust_fan
-    logstring = _('Setting up GPIO...')
+    global gpio_exhausting_air
+    logstring = _('setting up GPIO...')
     write_verbose(logstring, False, False)
     gpio.setwarnings(False)
 #---------------------------------------------------------------------------------------------------------------- Board mode wird gesetzt
@@ -44,14 +44,14 @@ def setupGPIO():
 #---------------------------------------------------------------------------------------------------------------- Einstellen der GPIO PINS
     gpio.setup(gpio_heater, gpio.OUT)
     gpio.setup(gpio_cooling_compressor, gpio.OUT)
-    gpio.setup(gpio_circulation_fan, gpio.OUT)
+    gpio.setup(gpio_circulating_air, gpio.OUT)
     gpio.setup(gpio_humidifier, gpio.OUT)
-    gpio.setup(gpio_exhaust_fan, gpio.OUT)
+    gpio.setup(gpio_exhausting_air, gpio.OUT)
     gpio.output(gpio_heater, relay_off)
     gpio.output(gpio_cooling_compressor, relay_off)
-    gpio.output(gpio_circulation_fan, relay_off)
+    gpio.output(gpio_circulating_air, relay_off)
     gpio.output(gpio_humidifier, relay_off)
-    gpio.output(gpio_exhaust_fan, relay_off)
+    gpio.output(gpio_exhausting_air, relay_off)
     logstring = _('GPIO setup complete.')
     write_verbose(logstring, True, False)
 #---------------------------------------------------------------------------------- Function write verbose
@@ -70,7 +70,7 @@ def write_verbose(logstring, newLine=False, print_in_logfile=False):
 def write_current_json(sensor_temperature, sensor_humidity):
     global current_json_file
 
-    current_data = json.dumps({"sensor_temperature":sensor_temperature, "status_heater":gpio.input(gpio_heater), "status_exhaust_air":gpio.input(gpio_exhaust_fan), "status_cooling_compressor":gpio.input(gpio_cooling_compressor), "status_circulating_air":gpio.input(gpio_circulation_fan),"sensor_humidity":sensor_humidity, 'last_change':int(time.time())})
+    current_data = json.dumps({"sensor_temperature":sensor_temperature, "status_heater":gpio.input(gpio_heater), "status_exhaust_air":gpio.input(gpio_exhausting_air), "status_cooling_compressor":gpio.input(gpio_cooling_compressor), "status_circulating_air":gpio.input(gpio_circulating_air),"sensor_humidity":sensor_humidity, 'last_change':int(time.time())})
     with open(current_json_file, 'w') as currentjsonfile:
         currentjsonfile.write(current_data)
 #---------------------------------------------------------------------------------- Function Lesen der settings.json
@@ -189,12 +189,12 @@ def doMainLoop():
     while True:
         if sensorname == 'DHT11': #DHT11
             # print 'DEBUG Sesnorname:' + sensorname
-            sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, gpio_circulation_fan)
+            sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, gpio_sensor_data)
             atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
             btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
         elif sensorname == 'DHT22': #DHT22
             # print 'DEBUG Sesnorname:' + sensorname
-            sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, gpio_circulation_fan)
+            sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, gpio_sensor_data)
             atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
             btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
         elif sensorname == 'SHT': #SHT
@@ -361,14 +361,14 @@ def doMainLoop():
                 status_exhaust_fan = False                         # Feuchtereduzierung Abluft-Ventilator aus
 #---------------------------------------------------------------------------------------------------------------- Schalten des Umluft - Ventilators
         if gpio.input(gpio_heater) or gpio.input(gpio_cooling_compressor) or gpio.input(gpio_humidifier) or status_circulation_air == False:
-            gpio.output(gpio_circulation_fan, relay_on)               # Umluft - Ventilator an
+            gpio.output(gpio_circulating_air, relay_on)               # Umluft - Ventilator an
         if gpio.input(gpio_heater) and gpio.input(gpio_cooling_compressor) and gpio.input(gpio_humidifier) and status_circulation_air == True:
-            gpio.output(gpio_circulation_fan, relay_off)             # Umluft - Ventilator aus
+            gpio.output(gpio_circulating_air, relay_off)             # Umluft - Ventilator aus
 #---------------------------------------------------------------------------------------------------------------- Schalten des (Abluft-)Luftaustausch-Ventilator
         if status_exhaust_air == False or status_exhaust_fan == True:
-            gpio.output(gpio_exhaust_fan, relay_on)
+            gpio.output(gpio_exhausting_air, relay_on)
         if status_exhaust_fan = False and status_exhaust_air == True:
-            gpio.output(gpio_exhaust_fan, relay_off)
+            gpio.output(gpio_exhausting_air, relay_off)
 #---------------------------------------------------------------------------------------------------------------- Ausgabe der Werte auf der Konsole
         write_verbose(logspacer2, False, False)
         if gpio.input(gpio_heater) == False:
@@ -395,7 +395,7 @@ def doMainLoop():
             logstring = _('Luftbefeuchter aus')
             write_verbose(logstring, False, False)
             status_humidifier = 0
-        if gpio.input(gpio_circulation_fan) == False:
+        if gpio.input(gpio_circulating_air) == False:
             logstring = _('Umluft ein')
             write_verbose(logstring, False, False)
             status_circulating_air = 10
@@ -403,7 +403,7 @@ def doMainLoop():
             logstring = _('Umluft aus')
             write_verbose(logstring, False, False)
             status_circulating_air = 0
-        if gpio.input(gpio_exhaust_fan) == False:
+        if gpio.input(gpio_exhausting_air) == False:
             logstring = _('Abluft ein')
             write_verbose(logstring, False, False)
             status_exhaust_air = 10
@@ -462,19 +462,25 @@ measurement_time_interval = 10       # Zeitintervall fuer die Messung in Sekunde
 loopcounter = 0                      #  Zählt die Durchläufe des Mainloops
 #-----------------------------------------------------------------------------------------Pinbelegung
 board_mode = gpio.BCM         # GPIO board mode (BCM = Broadcom SOC channel number - numbers after GPIO [GPIO.BOARD = Pin by number])
-gpio_circulation_fan = 10     # GPIO für Data Temperatur/Humidity Sensor DHT
-gpio_sensor_sht = Sht(9, 10)  # GPIO's für Temperatur/Humidity Sensor SHT Sht(Synchronisierung, DATA)
-gpio_heater = 22              # GPIO für Heizkabel
-gpio_cooling_compressor = 24  # GPIO für Kühlschrankkompressor
-gpio_circulation_fan = 27     # GPIO für Umluftventilator
-gpio_exhaust_fan = 17         # GPIO für Austauschlüfter
-gpio_humidifier = 23          # GPIO für Luftbefeuchter
-#gpio_scale1_wire1 =           # GPIO für Waage1 Ader 1
-#gpio_scale1_wire2 =           # GPIO für Waage1 Ader 2
-#gpio_scale2_wire1 =           # GPIO für Waage2 Ader 1
-#gpio_scale2_wire2 =           # GPIO für Waage2 Ader 2
-#gpio_uv_light =               # GPIO für UV-Licht
-#gpio_light =                  # GPIO für Licht
+config = read_config_json()
+gpio_cooling_compressor = config ['gpio_cooling_compressor']    # GPIO für Kühlschrankkompressor
+gpio_heater = config ['gpio_heater']                            # GPIO für Heizkabel
+gpio_humidifier = config ['gpio_humidifier']                    # GPIO für Luftbefeuchter
+gpio_circulating_air = config ['gpio_circulating_air']          # GPIO für Umluftventilator
+gpio_exhausting_air = config ['gpio_exhausting_air']            # GPIO für Austauschlüfter
+gpio_uv_light = config ['gpio_uv_light']                        # GPIO für UV Licht
+gpio_light = config ['gpio_light']                              # GPIO für Licht
+gpio_reserved1 = config ['gpio_reserved1']                      # 
+gpio_sensor_data = config ['gpio_sensor_data']                  # GPIO für Data Temperatur/Humidity Sensor
+gpio_sensor_sync = config ['gpio_sensor_sync']                  # GPIO für Sync Temperatur/Humidity Sensor
+gpio_sensor_sht = Sht(gpio_sensor_sync, gpio_sensor_data)       # GPIO's für Temperatur/Humidity Sensor SHT Sht(Synchronisierung, DATA)
+gpio_scale1_wire1 = config ['gpio_scale1_wire1']                # GPIO für Waage1 Ader 1
+gpio_scale1_wire2 = config ['gpio_scale1_wire2']                # GPIO für Waage1 Ader 2
+gpio_scale2_wire1 = config ['gpio_scale2_wire1']                # GPIO für Waage2 Ader 1
+gpio_scale2_wire2 = config ['gpio_scale2_wire2']                # GPIO für Waage2 Ader 2
+
+       
+
 verbose = True                # Dokumentiert interne Vorgänge wortreich
 
 ######################################################### Hauptprogramm

@@ -1,5 +1,5 @@
-mod,hum,humdelay,humhyston,humhystoff,temp,temphyston,temphystoff,tempon,tempoff,tempon1,tempoff1,days
-4,75,5,5,2,4,1,0.5,1080,2520,900,15120,12
-,65,,,,5,,,900,2700,,16200,8
-,55,,,,6,,,720,2880,,17280,16
-,40,,,,7,,,540,3060,,18360,8
+modus,setpoint_humidity,setpoint_temperature,circulation_air_duration,circulation_air_period,exhaust_air_duration,exhaust_air_period,days
+4,75,4,1080,2520,900,15120,12
+,65,5,900,2700,,16200,8
+,55,6,720,2880,,17280,16
+,40,7,540,3060,,18360,8

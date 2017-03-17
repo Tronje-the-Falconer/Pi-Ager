@@ -90,32 +90,32 @@ def read_dictionary(dictionary):
 #---------------------------------------------------------------------------------- Aufbereitung für die Lesbarkeit im Logfile und Füllen der Variablen
     modus = int(modus + 0.5)                # Rundet auf Ganzzahl, Integer da der Modus immer Integer sein sollte 
     if modus == 0:
-        operating_mode = "\n" + _('Betriebsart: Kühlen')
+        operating_mode = "\n" + _('operation mode: cooling')
     elif modus == 1:
-        operating_mode = "\n" + _('Betriebsart: Kühlen mit Befeuchtung')
+        operating_mode = "\n" + _('operation mode: cooling with humidify')
     elif modus == 2:
-        operating_mode = "\n" + _('Betriebsart: Heizen mit Befeuchtung')
+        operating_mode = "\n" + _('operation mode: heating with humidify')
     elif modus == 3:
-        operating_mode = "\n" + _('Betriebsart: Automatik mit Befeuchtung')
+        operating_mode = "\n" + _('operation mode: automatic with humidify')
     elif modus == 4:
-        operating_mode = "\n" + _('Betriebsart: Automatik mit Be- und Entfeuchtung')
+        operating_mode = "\n" + _('operation mode: automatic with dehumidify and humidify')
     else:
-        operating_mode = "\n" + _('Betriebsart falsch oder nicht gesetzt')
-    setpoint_temperature_logstring = "\n" + _('Soll-Temperatur:') + " \t \t" + str(setpoint_temperature) + "°C"
-    switch_on_cooling_compressor_logstring = "\n" + _('Einschaltwert Temperatur:') + " \t" + str(switch_on_cooling_compressor) + "°C"
-    switch_off_cooling_compressor_logstring = "\n" + _('Ausschaltwert Temperatur:') + " \t" + str(switch_off_cooling_compressor) + "°C"
-    sollfeuchtigkeit_logstring = "\n" + _('Soll-Feuchtigkeit:') + " \t \t" + str(setpoint_humidity) + "%"
-    switch_on_humidifier_logstring = "\n" + _('Einschaltwert Feuchte:') + " \t \t" + str(switch_on_humidifier) + "%"
-    switch_off_humidifier_logstring = "\n" + _('Ausschaltwert Feuchte:') + " \t \t" + str(switch_off_humidifier) + "%"
-    delay_humidify_logstring = "\n" + _('Befeuchtungsverzögerung:') + " \t" + str(delay_humidify) + "min"
+        operating_mode = "\n" + _('operation mode wrong or set incorrectly')
+    setpoint_temperature_logstring = "\n" + _('setpoint temperature:') + " \t \t" + str(setpoint_temperature) + "°C"
+    switch_on_cooling_compressor_logstring = "\n" + _('switch-on value temperature:') + " \t" + str(switch_on_cooling_compressor) + "°C"
+    switch_off_cooling_compressor_logstring = "\n" + _('switch-off value temperature:') + " \t" + str(switch_off_cooling_compressor) + "°C"
+    sollfeuchtigkeit_logstring = "\n" + _('setpoint humidity:') + " \t \t" + str(setpoint_humidity) + "%"
+    switch_on_humidifier_logstring = "\n" + _('switch-on value humidity:') + " \t \t" + str(switch_on_humidifier) + "%"
+    switch_off_humidifier_logstring = "\n" + _('switch-off value humidity:') + " \t \t" + str(switch_off_humidifier) + "%"
+    delay_humidify_logstring = "\n" + _('humidification delay:') + " \t" + str(delay_humidify) + "min"
     circulation_air_period_format = int(circulation_air_period)/60
-    circulation_air_period_logstring = "\n" + _('Timer Umluftperiode alle:') + " \t" + str(circulation_air_period_format) + "min"
+    circulation_air_period_logstring = "\n" + _('Timer Umluftperiode alle:') + " \t" + str(circulation_air_period_format) + _("minutes")
     circulation_air_duration_format = int(circulation_air_duration)/60
-    circulation_air_duration_logstring = "\n" + _('Timer Umluftdauer:') + " \t  \t" + str(circulation_air_duration_format) + "min"
+    circulation_air_duration_logstring = "\n" + _('Timer Umluftdauer:') + " \t  \t" + str(circulation_air_duration_format) + _("minutes")
     exhaust_air_period_format = int(exhaust_air_period)/60
-    exhaust_air_period_logstring = "\n" + _('Timer Abluftperiode alle:') + " \t" + str(exhaust_air_period_format) + "min"
+    exhaust_air_period_logstring = "\n" + _('Timer Abluftperiode alle:') + " \t" + str(exhaust_air_period_format) + _("minutes")
     exhaust_air_duration_format = int(exhaust_air_duration)/60
-    exhaust_air_duration_logstring = "\n" + _('Timer Abluftdauer:') + " \t \t" + str(exhaust_air_duration_format) + "min"
+    exhaust_air_duration_logstring = "\n" + _('Timer Abluftdauer:') + " \t \t" + str(exhaust_air_duration_format) + _("minutes")
     period_days_logstring="\n" + _('Dauer:') + " \t \t \t \t" + str(days) + _(' Tage')
     sensor_logstring = _('Sensortyp: ') + " \t \t \t" + sensorname + ' Value: ' + str(sensortype)
     
@@ -192,7 +192,7 @@ logspacer = "\n"+ "***********************************************"
 ######################################################### Hauptprogramm
 ########################################################################################################################
 write_verbose(logspacer, False, True)
-logstring = "\n" + _('Die Klima-Werte werden nun vom automatischen Programm "%s" gesteuert') % (hangingtable)
+logstring = "\n" + _('the climate values are now controlled by the automatic program % s') % (hangingtable)
 write_verbose(logstring, False, True)
 
 #---------------------------------------------------------------------------------- Auslesen der gesammten csv-Datei
@@ -223,29 +223,29 @@ while period <= total_periods:
     exec('%s = %s') % ("actual_dictionary", "dictionary" + str(period))
     # print 'DEBUG actual_dictionary : ' + str(actual_dictionary)
     if period == 0:
-        logstring = time.strftime('%d.%m.%Y - %H:%M Uhr') + _(': Startwerte Periode 1 von %s') % (str(total_periods + 1)) + '\n'  
+        logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('start values period 1 of %s') % (str(total_periods + 1)) + '\n'  
         write_verbose(logstring, False, True)
         finaltime = datetime.datetime.now() + timedelta(days = total_duration)  # days = parameter von timedelta
         read_dictionary(actual_dictionary)
-        logstring = _("Nächste Änderung der Werte: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M'))
+        logstring = _("next change of values: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M'))
         write_verbose(logstring, False, True)
-        logstring = _("Programmende: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M'))
+        logstring = _("end of program: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M'))
         write_verbose(logstring, False, True)
         
     elif period == total_periods:
-        logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' Uhr: Neue Werte für Periode %s von %s') % (str(period + 1), str(total_periods + 1))
+        logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('new values for period %s of %s') % (str(period + 1), str(total_periods + 1))
         write_verbose(logstring, False, True)
         read_dictionary(actual_dictionary)
-        logstring = '\n' + _('Programm "%s " beendet die Kontrolle.') % (hangingtable) + '\n' + _('Der Reifeschrank funktioniert weiter mit den letzten Werten.')
+        logstring = '\n' + _('Program "%s" ends the control.') % (hangingtable) + '\n' + _('pi-ager continues to work with the last values.')
         write_verbose(logstring, False, True)
         
     else:
-        logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' Uhr: Neue Werte für Periode %s von %s') % (str(period + 1), str(total_periods + 1))
+        logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('new values for period %s of %s') % (str(period + 1), str(total_periods + 1))
         write_verbose(logstring, False, True)
         read_dictionary(actual_dictionary)
-        logstring = _("Nächste Änderung der Werte: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M'))
+        logstring = _("next change of values: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M'))
         write_verbose(logstring, False, True)
-        logstring = _("Programmende: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M'))
+        logstring = _("end of program: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M'))
         write_verbose(logstring, False, True)
     period += 1
     write_verbose(logspacer, False, True)
