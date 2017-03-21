@@ -11,6 +11,7 @@ import time
 import RPi.GPIO as gpio
 import rrdtool
 import math
+import gettext
 from sht_sensor import Sht
 
 ######################################################### Definieren von Funktionen
@@ -92,6 +93,8 @@ def read_config_json():
 #---------------------------------------------------------------------------------- Function zum Plotten der Grafiken
 def ploting(plotting_value):
 #---------------------------------------------------------------------------------------------------------------- Beschriftung für die Grafiken festlegen
+    global rrd_dbname
+    print "DEBUG: in plotingfunction"
     if plotting_value == 'sensor_temperature':
         title = _('Temperatur')
         label = 'in C'
@@ -115,6 +118,7 @@ def ploting(plotting_value):
         label = 'ein oder aus'
 #---------------------------------------------------------------------------------------------------------------- Aufteilung in drei Plots
     for plot in ['daily' , 'weekly', 'monthly', 'hourly']:
+        # print "DEBUG: in for schleife"
         if plot == 'weekly':
             period = 'w'
         elif plot == 'daily':
@@ -134,11 +138,11 @@ def ploting(plotting_value):
             "--alt-autoscale",
             "--slope-mode",
             "DEF:%s=%s:%s_%s:AVERAGE" % (plotting_value, rrd_filename, rrd_dbname, plotting_value),
-            "DEF:%s=%s:sensor_temperature:AVERAGE" % (_(durch), rrd_filename),
-            "DEF:s%=%s:sensor_humidity:AVERAGE" % (_(durchhum), rrd_filename),
-            "GPRINT:s%:AVERAGE:%s\: %3.2lf C" % (_(durch), _(Temperatur)),
-            "GPRINT:s%:AVERAGE:%s\: %3.2lf" % (_(durchhum), _(Luftfeuchtigkeit)), 
-            "LINE1:%s#0000FF:%s_%s" %(plotting_value, rrd_dbname, plotting_value))
+            "DEF:durch=%s:sensor_temperature:AVERAGE" % (rrd_filename),
+            "DEF:durchhum=%s:sensor_humidity:AVERAGE" % (rrd_filename),
+            "GPRINT:durch:AVERAGE:Temperatur\: %3.2lf C",
+            "GPRINT:durchhum:AVERAGE:Luftfeuchtigkeit\: %3.2lf", 
+            "LINE1:%s#0000FF:%s_%s" % (plotting_value, rrd_dbname, plotting_value))
 
 #---------------------------------------------------------------------------------- Function zum Setzen des Sensors
 def set_sensortype():
@@ -163,7 +167,7 @@ def set_sensortype():
 def doMainLoop():
     #global value
     global circulation_air_duration       #  Umluftdauer
-    global $circulation_air_period         #  Umluftperiode
+    global circulation_air_period         #  Umluftperiode
     global circulation_air_start          #  Unix-Zeitstempel für den Zählstart des Timers Umluft
     global exhaust_air_duration           #  (Abluft-)luftaustauschdauer
     global exhaust_air_period             #  (Abluft-)luftaustauschperiode
@@ -187,9 +191,15 @@ def doMainLoop():
     global status_exhaust_fan             #  Variable für die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
 #---------------------------------------------------------------------------------------------------------------- Prüfen Sensor, dann Settings einlesen
     while True:
+        # print "DEBUG: in While True"
+        # print 'DEBUG: ' + str(sensorname)
         if sensorname == 'DHT11': #DHT11
-            # print 'DEBUG Sesnorname:' + sensorname
-            sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, gpio_sensor_data)
+            print 'DEBUG Sesnorname:' + sensorname
+            #sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, gpio_sensor_data)
+            sensor_humidity_big = 50
+            sensor_temperature_big = 20
+            print "DEBUG: " + str(sensor_temperature_big)
+            print "DEBUG: " + str(sensor_humidity_big)
             atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
             btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
         elif sensorname == 'DHT22': #DHT22
@@ -202,12 +212,15 @@ def doMainLoop():
             sensor_temperature_big = gpio_sensor_sht.read_t()
             sensor_humidity_big = gpio_sensor_sht.read_rh()
         if sensor_humidity_big is not None and sensor_temperature_big is not None:
+            print "DEBUG: in if"
             sensor_temperature = round (sensor_temperature_big,2)
             sensor_humidity = round (sensor_humidity_big,2)
         else:
+            print "DEBUG: in else"
             logstring = _('Failed to get reading. Try again!')
             write_verbose (logstring, False, False)
         try:
+            print "DEBUG: in try"
             settings = read_settings_json()
             config = read_config_json()
         except:
@@ -217,7 +230,7 @@ def doMainLoop():
         modus = settings['modus']
         setpoint_temperature = settings['setpoint_temperature']
         setpoint_humidity = settings['setpoint_humidity']
-        $circulation_air_period = settings['$circulation_air_period']
+        circulation_air_period = settings['circulation_air_period']
         circulation_air_duration = settings['circulation_air_duration']
         exhaust_air_period = settings['exhaust_air_period']
         exhaust_air_duration = settings['exhaust_air_duration']
@@ -259,20 +272,20 @@ def doMainLoop():
         write_current_json(sensor_temperature, sensor_humidity)
         # Durch den folgenden Timer läuft der Ventilator in den vorgegebenen Intervallen zusätzlich zur generellen Umluft bei aktivem Heizen, Kühlen oder Befeuchten
 #---------------------------------------------------------------------------------------------------------------- Timer für Luftumwälzung-Ventilator
-        if $circulation_air_period == 0:                          # gleich 0 ist an,  Dauer-Timer
+        if circulation_air_period == 0:                          # gleich 0 ist an,  Dauer-Timer
             status_circulation_air = False
         if circulation_air_duration == 0:                        # gleich 0 ist aus, kein Timer
             status_circulation_air = True
         if circulation_air_duration > 0:
-            if current_time < circulation_air_start + $circulation_air_period:
+            if current_time < circulation_air_start + circulation_air_period:
                 status_circulation_air = True                       # Umluft - Ventilator aus
                 logstring = _('Umluft-Timer laeuft (inaktiv)')
                 write_verbose(logstring, False, False)
-            if current_time >= circulation_air_start + $circulation_air_period:
+            if current_time >= circulation_air_start + circulation_air_period:
                 status_circulation_air = False                      # Umluft - Ventilator an
                 logstring = _('Umluft-Timer laeuft (aktiv)')
                 write_verbose(logstring, False, False)
-            if current_time >= circulation_air_start + $circulation_air_period + circulation_air_duration:
+            if current_time >= circulation_air_start + circulation_air_period + circulation_air_duration:
                 circulation_air_start = int(time.time())    # Timer-Timestamp aktualisiert
 #---------------------------------------------------------------------------------------------------------------- Timer für (Abluft-)Luftaustausch-Ventilator
         if exhaust_air_period == 0:                      # gleich 0 ist an,  Dauer-Timer
@@ -367,7 +380,7 @@ def doMainLoop():
 #---------------------------------------------------------------------------------------------------------------- Schalten des (Abluft-)Luftaustausch-Ventilator
         if status_exhaust_air == False or status_exhaust_fan == True:
             gpio.output(gpio_exhausting_air, relay_on)
-        if status_exhaust_fan = False and status_exhaust_air == True:
+        if status_exhaust_fan == False and status_exhaust_air == True:
             gpio.output(gpio_exhausting_air, relay_off)
 #---------------------------------------------------------------------------------------------------------------- Ausgabe der Werte auf der Konsole
         write_verbose(logspacer2, False, False)
@@ -420,12 +433,19 @@ def doMainLoop():
         if loopcounter % 3 == 0:
             logstring = _("creating graphs")
             write_verbose(logstring, False, False)
+            print "DEBUG: ploting sensor_temperature"
             ploting('sensor_temperature')#', 'status_heater', 'status_cooling_compressor', 'status_circulating_air')
+            print "DEBUG: ploting sensor_humidity"
             ploting('sensor_humidity')#, 'status_humidifier', 'status_circulating_air', 'status_exhaust_air')
+            print "DEBUG: ploting status_circulating_air"
             ploting('status_circulating_air')#, 'status_exhaust_air')
+            print "DEBUG: ploting status_exhaust_air"
             ploting('status_exhaust_air')
+            print "DEBUG: ploting status_heater"
             ploting('status_heater')
+            print "DEBUG: ploting status_cooling_compressor"
             ploting('status_cooling_compressor')
+            print "DEBUG: ploting status_humidifier"
             ploting('status_humidifier')
             # print 'DEBUG Loopnumber: ' + loopcounter
 
@@ -451,6 +471,16 @@ logspacer2 = "\n" + '-------------------------------------------------------'
 delay = 4                      # Wartezeit in der Schleife
 counter_humidify = 0           # Zähler für die Verzögerung der Befeuchtung
 status_exhaust_fan = False     # Variable für die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
+verbose = True                # Dokumentiert interne Vorgänge wortreich
+#---------------------------------------------------------------------------------- Allgemeingültige Werte aus config.json
+data_config_json = read_config_json()
+sensortype = data_config_json ['sensortype']                                        # Sensortyp
+language = data_config_json ['language']                                            # Sprache der Textausgabe
+switch_on_cooling_compressor = data_config_json ['switch_on_cooling_compressor']    # Einschalttemperatur
+switch_off_cooling_compressor = data_config_json ['switch_off_cooling_compressor']  # Ausschalttemperatur
+switch_on_humidifier = data_config_json ['switch_on_humidifier']                    # Einschaltfeuchte
+switch_off_humidifier = data_config_json ['switch_off_humidifier']                  # Ausschaltfeuchte
+delay_humidify = data_config_json ['delay_humidify']                                # Luftbefeuchtungsverzögerung
 #---------------------------------------------------------------------------------- Sainsmart Relais Vereinfachung 0 aktiv
 relay_on = False               # negative Logik!!! des Relay's, Schaltet bei 0 | GPIO.LOW  | False  ein
 relay_off = (not relay_on)     # negative Logik!!! des Relay's, Schaltet bei 1 | GPIO.High | True aus
@@ -479,9 +509,17 @@ gpio_scale1_wire2 = config ['gpio_scale1_wire2']                # GPIO für Waag
 gpio_scale2_wire1 = config ['gpio_scale2_wire1']                # GPIO für Waage2 Ader 1
 gpio_scale2_wire2 = config ['gpio_scale2_wire2']                # GPIO für Waage2 Ader 2
 
-       
-
-verbose = True                # Dokumentiert interne Vorgänge wortreich
+#---------------------------------------------------------------------------------------------------------------- Sprache
+####   Set up message catalog access
+# translation = gettext.translation('pi_ager', '/var/www/locale', fallback=True)
+# _ = translation.ugettext
+if language == 'de':
+    translation = gettext.translation('pi_ager', '/var/www/locale', languages=['en'], fallback=True)
+elif language == 'en':
+    translation = gettext.translation('pi_ager', '/var/www/locale', languages=['de'], fallback=True)
+# else:
+    
+translation.install()
 
 ######################################################### Hauptprogramm
 ########################################################################################################################
