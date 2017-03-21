@@ -94,23 +94,23 @@ def read_config_json():
 def ploting(plotting_value):
 #---------------------------------------------------------------------------------------------------------------- Beschriftung für die Grafiken festlegen
     global rrd_dbname
-    print "DEBUG: in plotingfunction"
+    # print "DEBUG: in plotingfunction"
     if plotting_value == 'sensor_temperature':
         title = _('temperature')
         label = 'in C'
     elif plotting_value == 'sensor_humidity':
         title = _('humidity')
         label = 'in %'
-    elif plotting_value == "status_exhaust_air":
+    elif plotting_value == "stat_exhaust_air":
         title = _('exhaust air')
         label = 'ein oder aus'
-    elif plotting_value == "status_circulating_air":
+    elif plotting_value == "stat_circulate_air":
         title = _('circulatioon air')
         label = 'ein oder aus'
-    elif plotting_value == "status_heater":
+    elif plotting_value == "stat_heater":
         title = _('heater')
         label = 'ein oder aus'
-    elif plotting_value == "status_cooling_compressor":
+    elif plotting_value == "stat_coolcompressor":
         title = _('cooling compressor')
         label = 'ein oder aus'
     elif plotting_value == "status_humidifier":
@@ -130,18 +130,18 @@ def ploting(plotting_value):
 #---------------------------------------------------------------------------------------------------------------- Grafiken erzeugen
         ret = rrdtool.graph("%s%s_%s-%s.png" %(picture_website_path,rrd_dbname,plotting_value,plot),
             "--start",
-            "-1%s" %(period),
-            "--title=%s (%s)" %(title,plot),
-            "--vertical-label=%s" %(label),
+            "-1%s" % (period),
+            "--title=%s (%s)" % (title, plot),
+            "--vertical-label=%s" % (label),
             '--watermark=Grillsportverein',
             "-w 400",
             "--alt-autoscale",
             "--slope-mode",
-            "DEF:%s=%s:%s_%s:AVERAGE" % (plotting_value, rrd_filename, rrd_dbname, plotting_value),
+            "DEF:%s=%s:%s:AVERAGE" % (plotting_value, rrd_filename, plotting_value),
             "DEF:%s=%s:sensor_temperature:AVERAGE" % (_('durch'), rrd_filename),
-            "DEF:%s=%s:sensor_humidity:AVERAGE" % (_('durchhum'),rrd_filename),
-            "GPRINT:%s:AVERAGE:%s\: %3.2lf C" % (_('durch'), _('Temperatur')),
-            "GPRINT:%s:AVERAGE:%s\: %3.2lf" % (_('durchhum'), _('Luftfeuchtigkeit')), 
+            "DEF:%s=%s:sensor_humidity:AVERAGE" % (_('durchhum'), rrd_filename),
+            "GPRINT:%s:AVERAGE:%s\: %%3.2lf C" % (_('durch'), _('Temperatur')),
+            "GPRINT:%s:AVERAGE:%s\: %%3.2lf" % (_('durchhum'), _('Luftfeuchtigkeit')), 
             "LINE1:%s#0000FF:%s_%s" % (plotting_value, rrd_dbname, plotting_value))
 
 #---------------------------------------------------------------------------------- Function zum Setzen des Sensors
@@ -194,12 +194,12 @@ def doMainLoop():
         # print "DEBUG: in While True"
         # print 'DEBUG: ' + str(sensorname)
         if sensorname == 'DHT11': #DHT11
-            print 'DEBUG Sesnorname:' + sensorname
+            # print 'DEBUG Sesnorname:' + sensorname
             #sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, gpio_sensor_data)
             sensor_humidity_big = 50
             sensor_temperature_big = 20
-            print "DEBUG: " + str(sensor_temperature_big)
-            print "DEBUG: " + str(sensor_humidity_big)
+            # print "DEBUG: " + str(sensor_temperature_big)
+            # print "DEBUG: " + str(sensor_humidity_big)
             atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
             btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
         elif sensorname == 'DHT22': #DHT22
@@ -212,15 +212,15 @@ def doMainLoop():
             sensor_temperature_big = gpio_sensor_sht.read_t()
             sensor_humidity_big = gpio_sensor_sht.read_rh()
         if sensor_humidity_big is not None and sensor_temperature_big is not None:
-            print "DEBUG: in if"
+            # print "DEBUG: in if"
             sensor_temperature = round (sensor_temperature_big,2)
             sensor_humidity = round (sensor_humidity_big,2)
         else:
-            print "DEBUG: in else"
+            # print "DEBUG: in else"
             logstring = _('Failed to get reading. Try again!')
             write_verbose (logstring, False, False)
         try:
-            print "DEBUG: in try"
+            # print "DEBUG: in try"
             settings = read_settings_json()
             config = read_config_json()
         except:
@@ -258,7 +258,7 @@ def doMainLoop():
         logstring = _('actual temperature') + ': ' + str(sensor_temperature) + '°C'
         write_verbose(logstring, False, False)
         write_verbose(logspacer2, False, False)
-        logstring = _('target humidity') + ': ' str(setpoint_humidity) + '%'
+        logstring = _('target humidity') + ': ' + str(setpoint_humidity) + '%'
         write_verbose(logstring, False, False)
         logstring = _('actual humidity') + ': ' + str(sensor_humidity) + '%'
         write_verbose(logstring, False, False)
@@ -433,19 +433,19 @@ def doMainLoop():
         if loopcounter % 3 == 0:
             logstring = _("creating graphs")
             write_verbose(logstring, False, False)
-            print "DEBUG: ploting sensor_temperature"
+            # print "DEBUG: ploting sensor_temperature"
             ploting('sensor_temperature')#', 'status_heater', 'status_cooling_compressor', 'status_circulating_air')
-            print "DEBUG: ploting sensor_humidity"
+            # print "DEBUG: ploting sensor_humidity"
             ploting('sensor_humidity')#, 'status_humidifier', 'status_circulating_air', 'status_exhaust_air')
-            print "DEBUG: ploting status_circulating_air"
-            ploting('status_circulating_air')#, 'status_exhaust_air')
-            print "DEBUG: ploting status_exhaust_air"
-            ploting('status_exhaust_air')
-            print "DEBUG: ploting status_heater"
-            ploting('status_heater')
-            print "DEBUG: ploting status_cooling_compressor"
-            ploting('status_cooling_compressor')
-            print "DEBUG: ploting status_humidifier"
+            # print "DEBUG: ploting status_circulating_air"
+            ploting('stat_circulate_air')#, 'status_exhaust_air')
+            # print "DEBUG: ploting status_exhaust_air"
+            ploting('stat_exhaust_air')
+            # print "DEBUG: ploting status_heater"
+            ploting('stat_heater')
+            # print "DEBUG: ploting status_cooling_compressor"
+            ploting('stat_coolcompressor')
+            # print "DEBUG: ploting status_humidifier"
             ploting('status_humidifier')
             # print 'DEBUG Loopnumber: ' + loopcounter
 

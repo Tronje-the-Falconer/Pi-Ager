@@ -90,34 +90,34 @@ def read_dictionary(dictionary):
 #---------------------------------------------------------------------------------- Aufbereitung für die Lesbarkeit im Logfile und Füllen der Variablen
     modus = int(modus + 0.5)                # Rundet auf Ganzzahl, Integer da der Modus immer Integer sein sollte 
     if modus == 0:
-        operating_mode = "\n" + _('operation mode: cooling')
+        operating_mode = "\n" + _('operation mode') + ': ' + _('cooling')
     elif modus == 1:
-        operating_mode = "\n" + _('operation mode: cooling with humidify')
+        operating_mode = "\n" + _('operation mode') + ': ' + _('cooling with humidify')
     elif modus == 2:
-        operating_mode = "\n" + _('operation mode: heating with humidify')
+        operating_mode = "\n" + _('operation mode') + ': ' + _('heating with humidify')
     elif modus == 3:
-        operating_mode = "\n" + _('operation mode: automatic with humidify')
+        operating_mode = "\n" + _('operation mode') + ': ' + _('automatic with humidify')
     elif modus == 4:
-        operating_mode = "\n" + _('operation mode: automatic with dehumidify and humidify')
+        operating_mode = "\n" + _('operation mode') + ': ' + _('automatic with dehumidify and humidify')
     else:
         operating_mode = "\n" + _('operation mode wrong or set incorrectly')
-    setpoint_temperature_logstring = "\n" + _('setpoint temperature:') + " \t \t" + str(setpoint_temperature) + "°C"
-    switch_on_cooling_compressor_logstring = "\n" + _('switch-on value temperature:') + " \t" + str(switch_on_cooling_compressor) + "°C"
-    switch_off_cooling_compressor_logstring = "\n" + _('switch-off value temperature:') + " \t" + str(switch_off_cooling_compressor) + "°C"
-    sollfeuchtigkeit_logstring = "\n" + _('setpoint humidity:') + " \t \t" + str(setpoint_humidity) + "%"
-    switch_on_humidifier_logstring = "\n" + _('switch-on value humidity:') + " \t \t" + str(switch_on_humidifier) + "%"
-    switch_off_humidifier_logstring = "\n" + _('switch-off value humidity:') + " \t \t" + str(switch_off_humidifier) + "%"
-    delay_humidify_logstring = "\n" + _('humidification delay:') + " \t" + str(delay_humidify) + "min"
+    setpoint_temperature_logstring = "\n" + _('setpoint temperature') + ": \t \t" + str(setpoint_temperature) + "°C"
+    switch_on_cooling_compressor_logstring = "\n" + _('switch-on value temperature') + ": \t" + str(switch_on_cooling_compressor) + "°C"
+    switch_off_cooling_compressor_logstring = "\n" + _('switch-off value temperature') + ": \t" + str(switch_off_cooling_compressor) + "°C"
+    sollfeuchtigkeit_logstring = "\n" + _('setpoint humidity') + ": \t \t" + str(setpoint_humidity) + "%"
+    switch_on_humidifier_logstring = "\n" + _('switch-on value humidity') + ": \t \t" + str(switch_on_humidifier) + "%"
+    switch_off_humidifier_logstring = "\n" + _('switch-off value humidity') + ": \t \t" + str(switch_off_humidifier) + "%"
+    delay_humidify_logstring = "\n" + _('humidification delay') + ": \t" + str(delay_humidify) + ' ' + _("minutes")
     circulation_air_period_format = int(circulation_air_period)/60
-    circulation_air_period_logstring = "\n" + _('Timer Umluftperiode alle:') + " \t" + str(circulation_air_period_format) + _("minutes")
+    circulation_air_period_logstring = "\n" + _('timer circulation air period every') + ": \t" + str(circulation_air_period_format) + ' ' + _("minutes")
     circulation_air_duration_format = int(circulation_air_duration)/60
-    circulation_air_duration_logstring = "\n" + _('Timer Umluftdauer:') + " \t  \t" + str(circulation_air_duration_format) + _("minutes")
+    circulation_air_duration_logstring = "\n" + _('timer circulation air') + ": \t  \t" + str(circulation_air_duration_format) + ' ' + _("minutes")
     exhaust_air_period_format = int(exhaust_air_period)/60
-    exhaust_air_period_logstring = "\n" + _('Timer Abluftperiode alle:') + " \t" + str(exhaust_air_period_format) + _("minutes")
+    exhaust_air_period_logstring = "\n" + _('timer exhaust air period every') + ": \t" + str(exhaust_air_period_format) + ' ' + _("minutes")
     exhaust_air_duration_format = int(exhaust_air_duration)/60
-    exhaust_air_duration_logstring = "\n" + _('Timer Abluftdauer:') + " \t \t" + str(exhaust_air_duration_format) + _("minutes")
-    period_days_logstring="\n" + _('Dauer:') + " \t \t \t \t" + str(days) + _(' Tage')
-    sensor_logstring = _('Sensortyp: ') + " \t \t \t" + sensorname + ' Value: ' + str(sensortype)
+    exhaust_air_duration_logstring = "\n" + _('timer exhausting air') + ": \t \t" + str(exhaust_air_duration_format) + ' ' + _("minutes")
+    period_days_logstring="\n" + _('duration') + ": \t \t \t \t" + str(days) + ' ' + _('days')
+    sensor_logstring = _('sensortype') + ": \t \t \t" + sensorname + ' ' + _('value') + ': ' + str(sensortype)
     
     
     # print 'DEBUG schreibe settings.json in if'
