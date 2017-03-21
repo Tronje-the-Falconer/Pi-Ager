@@ -18,15 +18,15 @@ from sht_sensor import Sht
 #---------------------------------------------------------------------------------- Function goodbye
 def goodbye():
     cleanup()
-    logstring = _('goodbye!')
+    logstring = _('goodbye') + '!'
     write_verbose(logstring, False, False)
 
 #---------------------------------------------------------------------------------- Function cleanup
 def cleanup():
-    logstring = _('running cleanup script...')
+    logstring = _('running cleanup script') + '...'
     write_verbose(logstring, False, False)
     gpio.cleanup() # GPIO zurücksetzen
-    logstring = _('cleanup complete.')
+    logstring = _('cleanup complete') + '.'
     write_verbose(logstring, True, False)
 
 #---------------------------------------------------------------------------------- Function Setup GPIO
@@ -37,7 +37,7 @@ def setupGPIO():
     global gpio_circulating_air
     global gpio_humidifier
     global gpio_exhausting_air
-    logstring = _('setting up GPIO...')
+    logstring = _('setting up GPIO') + '...'
     write_verbose(logstring, False, False)
     gpio.setwarnings(False)
 #---------------------------------------------------------------------------------------------------------------- Board mode wird gesetzt
@@ -53,7 +53,7 @@ def setupGPIO():
     gpio.output(gpio_circulating_air, relay_off)
     gpio.output(gpio_humidifier, relay_off)
     gpio.output(gpio_exhausting_air, relay_off)
-    logstring = _('GPIO setup complete.')
+    logstring = _('GPIO setup complete') + '.'
     write_verbose(logstring, True, False)
 #---------------------------------------------------------------------------------- Function write verbose
 def write_verbose(logstring, newLine=False, print_in_logfile=False):
@@ -96,25 +96,25 @@ def ploting(plotting_value):
     global rrd_dbname
     print "DEBUG: in plotingfunction"
     if plotting_value == 'sensor_temperature':
-        title = _('Temperatur')
+        title = _('temperature')
         label = 'in C'
     elif plotting_value == 'sensor_humidity':
-        title = _('Luftfeuchtigkeit')
+        title = _('humidity')
         label = 'in %'
     elif plotting_value == "status_exhaust_air":
-        title = _('Luftaustausch')
+        title = _('exhaust air')
         label = 'ein oder aus'
     elif plotting_value == "status_circulating_air":
-        title = _('Luftumwaelzung')
+        title = _('circulatioon air')
         label = 'ein oder aus'
     elif plotting_value == "status_heater":
-        title = _('Heizung')
+        title = _('heater')
         label = 'ein oder aus'
     elif plotting_value == "status_cooling_compressor":
-        title = _('Kuehlung')
+        title = _('cooling compressor')
         label = 'ein oder aus'
     elif plotting_value == "status_humidifier":
-        title = _('Luftbefeuchter')
+        title = _('humidifier')
         label = 'ein oder aus'
 #---------------------------------------------------------------------------------------------------------------- Aufteilung in drei Plots
     for plot in ['daily' , 'weekly', 'monthly', 'hourly']:
@@ -138,10 +138,10 @@ def ploting(plotting_value):
             "--alt-autoscale",
             "--slope-mode",
             "DEF:%s=%s:%s_%s:AVERAGE" % (plotting_value, rrd_filename, rrd_dbname, plotting_value),
-            "DEF:durch=%s:sensor_temperature:AVERAGE" % (rrd_filename),
-            "DEF:durchhum=%s:sensor_humidity:AVERAGE" % (rrd_filename),
-            "GPRINT:durch:AVERAGE:Temperatur\: %3.2lf C",
-            "GPRINT:durchhum:AVERAGE:Luftfeuchtigkeit\: %3.2lf", 
+            "DEF:%s=%s:sensor_temperature:AVERAGE" % (_('durch'), rrd_filename),
+            "DEF:%s=%s:sensor_humidity:AVERAGE" % (_('durchhum'),rrd_filename),
+            "GPRINT:%s:AVERAGE:%s\: %3.2lf C" % (_('durch'), _('Temperatur')),
+            "GPRINT:%s:AVERAGE:%s\: %3.2lf" % (_('durchhum'), _('Luftfeuchtigkeit')), 
             "LINE1:%s#0000FF:%s_%s" % (plotting_value, rrd_dbname, plotting_value))
 
 #---------------------------------------------------------------------------------- Function zum Setzen des Sensors
@@ -224,7 +224,7 @@ def doMainLoop():
             settings = read_settings_json()
             config = read_config_json()
         except:
-            logstring = _('Unable to read settings file, checking if in the blind.')
+            logstring = _('unable to read settings file, checking if in the blind.')
             write_verbose(logstring, False, False)
             continue
         modus = settings['modus']
@@ -253,19 +253,19 @@ def doMainLoop():
         logstring = _('Main loop/Unix-Timestamp: (') + str(current_time)+ ')'
         write_verbose(logstring, False, False)
         write_verbose(logspacer2, False, False)
-        logstring = _('Eingestellte Soll-Temperatur: ') + str(setpoint_temperature) + '°C'
+        logstring = _('target temperature') + ': ' + str(setpoint_temperature) + '°C'
         write_verbose(logstring, False, False)
-        logstring = _('Gemessene Ist-Temperatur : ') + str(sensor_temperature) + '°C'
-        write_verbose(logstring, False, False)
-        write_verbose(logspacer2, False, False)
-        logstring = _('Eingestellte Soll-Luftfeuchtigkeit: ') + str(setpoint_humidity) + '%'
-        write_verbose(logstring, False, False)
-        logstring = _('Gemessene Ist-Luftfeuchtigkeit :') + str(sensor_humidity) + '%'
+        logstring = _('actual temperature') + ': ' + str(sensor_temperature) + '°C'
         write_verbose(logstring, False, False)
         write_verbose(logspacer2, False, False)
-        logstring = _('Eingestellter Sensor: ') + str(sensorname)
+        logstring = _('target humidity') + ': ' str(setpoint_humidity) + '%'
         write_verbose(logstring, False, False)
-        logstring = _('Wert in settings.json: ') + str(sensortype)
+        logstring = _('actual humidity') + ': ' + str(sensor_humidity) + '%'
+        write_verbose(logstring, False, False)
+        write_verbose(logspacer2, False, False)
+        logstring = _('selected sensor') + ': ' + str(sensorname)
+        write_verbose(logstring, False, False)
+        logstring = _('value in config.json') + ': ' + str(sensortype)
         write_verbose(logstring, False, False)
         write_verbose(logspacer2, False, False)
         
@@ -279,11 +279,11 @@ def doMainLoop():
         if circulation_air_duration > 0:
             if current_time < circulation_air_start + circulation_air_period:
                 status_circulation_air = True                       # Umluft - Ventilator aus
-                logstring = _('Umluft-Timer laeuft (inaktiv)')
+                logstring = _('circulation air timer on (deactive)')
                 write_verbose(logstring, False, False)
             if current_time >= circulation_air_start + circulation_air_period:
                 status_circulation_air = False                      # Umluft - Ventilator an
-                logstring = _('Umluft-Timer laeuft (aktiv)')
+                logstring = _('circulation air timer on (active)')
                 write_verbose(logstring, False, False)
             if current_time >= circulation_air_start + circulation_air_period + circulation_air_duration:
                 circulation_air_start = int(time.time())    # Timer-Timestamp aktualisiert
@@ -295,11 +295,11 @@ def doMainLoop():
         if exhaust_air_duration > 0:                        # gleich 0 ist aus, kein Timer
             if current_time < exhaust_air_start + exhaust_air_period:
                 status_exhaust_air = True                      # (Abluft-)Luftaustausch-Ventilator aus
-                logstring = _('Abluft-Timer laeuft (inaktiv)')
+                logstring = _('exhaust air timer on (deactive)')
                 write_verbose(logstring, False, False)
             if current_time >= exhaust_air_start + exhaust_air_period:
                 status_exhaust_air = False                     # (Abluft-)Luftaustausch-Ventilator an
-                logstring = _('Abluft-Timer laeuft (aktiv)')
+                logstring = _('exhaust air timer on (active)')
                 write_verbose(logstring, False, False)
             if current_time >= exhaust_air_start + exhaust_air_period + exhaust_air_duration:
                 exhaust_air_start = int(time.time())   # Timer-Timestamp aktualisiert
@@ -385,43 +385,43 @@ def doMainLoop():
 #---------------------------------------------------------------------------------------------------------------- Ausgabe der Werte auf der Konsole
         write_verbose(logspacer2, False, False)
         if gpio.input(gpio_heater) == False:
-            logstring = _('Heizung ein')
+            logstring = _('heater on')
             write_verbose(logstring, False, False)
             status_heater = 10
         else:
-            logstring = _('Heizung aus')
+            logstring = _('heater off')
             write_verbose(logstring, False, False)
             status_heater = 0
         if gpio.input(gpio_cooling_compressor) == False:
-            logstring = _('Kuehlung ein')
+            logstring = _('cooling compressor on')
             write_verbose(logstring, False, False)
             status_cooling_compressor = 10
         else:
-            logstring = _('Kuehlung aus')
+            logstring = _('cooling compressor off')
             write_verbose(logstring, False, False)
             status_cooling_compressor = 0
         if gpio.input(gpio_humidifier) == False:
-            logstring = _('Luftbefeuchter ein')
+            logstring = _('humidifier on')
             write_verbose(logstring, False, False)
             status_humidifier = 10
         else:
-            logstring = _('Luftbefeuchter aus')
+            logstring = _('humidifier off')
             write_verbose(logstring, False, False)
             status_humidifier = 0
         if gpio.input(gpio_circulating_air) == False:
-            logstring = _('Umluft ein')
+            logstring = _('circulation air on')
             write_verbose(logstring, False, False)
             status_circulating_air = 10
         else:
-            logstring = _('Umluft aus')
+            logstring = _('circulation air off')
             write_verbose(logstring, False, False)
             status_circulating_air = 0
         if gpio.input(gpio_exhausting_air) == False:
-            logstring = _('Abluft ein')
+            logstring = _('exhaust air on')
             write_verbose(logstring, False, False)
             status_exhaust_air = 10
         else:
-            logstring = _('Abluft aus')
+            logstring = _('exhaust air off')
             write_verbose(logstring, False, False)
             status_exhaust_air = 0
         write_verbose(logspacer2, False, False)
@@ -531,11 +531,11 @@ setupGPIO() # GPIO initialisieren
 #---------------------------------------------------------------------------------- RRD-Datenbank anlegen, wenn nicht vorhanden
 try:
     with open(rrd_filename): pass
-    logstring = _("Datenbankdatei gefunden: ") + rrd_filename
+    logstring = _("database file found") + ": " + rrd_filename
     write_verbose(logstring, False, False)
 #    i = 1
 except IOError:
-    logstring = _("Ich erzeuge eine neue Datenbank: ") + rrd_filename
+    logstring = _("creating a new database") + ": " + rrd_filename
     write_verbose(logstring, False, False)
     ret = rrdtool.create("%s" %(rrd_filename),
         "--step","%s" %(measurement_time_interval),
@@ -565,7 +565,7 @@ except KeyboardInterrupt:
     pass
 
 except Exception, e:
-    logstring = _('Exception occurred!!!')
+    logstring = _('exception occurred') + '!!!'
     write_verbose(logstring, True, False)
     write_verbose(str(e), True, False)
     pass
