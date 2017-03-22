@@ -77,8 +77,8 @@ def read_dictionary(dictionary):
     # Variablen aus Dictionary setzen
     for key, value in dictionary.iteritems():
         if value == '':                      # wenn ein Wert leer ist muss er aus der letzten settings.json ausgelesen  werden
-            data_settings_json = read_settings_json()
-            value = data_settings_json['' + key + '']
+            data_settingsjsonfile = read_settings_json()
+            value = data_settingsjsonfile['' + key + '']
             exec('%s = %d') % (key,value)    # füllt die jeweilige Variable mit altem Wert (value = columname)
         else:
             value = int(value)
@@ -139,18 +139,18 @@ current_json_file = website_path + '/current.json'
 logfile_txt_file = website_path + '/logfile.txt'
 verbose = True                # Dokumentiert interne Vorgänge wortreich
 #---------------------------------------------------------------------------------- Allgemeingültige Werte aus config.json
-data_config_json = read_config_json()
-sensortype = data_config_json ['sensortype']                                        # Sensortyp
-language = data_config_json ['language']                                            # Sprache der Textausgabe
-switch_on_cooling_compressor = data_config_json ['switch_on_cooling_compressor']    # Einschalttemperatur
-switch_off_cooling_compressor = data_config_json ['switch_off_cooling_compressor']  # Ausschalttemperatur
-switch_on_humidifier = data_config_json ['switch_on_humidifier']                    # Einschaltfeuchte
-switch_off_humidifier = data_config_json ['switch_off_humidifier']                  # Ausschaltfeuchte
-delay_humidify = data_config_json ['delay_humidify']                                # Luftbefeuchtungsverzögerung
+data_configjsonfile = read_config_json()
+sensortype = data_configjsonfile ['sensortype']                                        # Sensortyp
+language = data_configjsonfile ['language']                                            # Sprache der Textausgabe
+switch_on_cooling_compressor = data_configjsonfile ['switch_on_cooling_compressor']    # Einschalttemperatur
+switch_off_cooling_compressor = data_configjsonfile ['switch_off_cooling_compressor']  # Ausschalttemperatur
+switch_on_humidifier = data_configjsonfile ['switch_on_humidifier']                    # Einschaltfeuchte
+switch_off_humidifier = data_configjsonfile ['switch_off_humidifier']                  # Ausschaltfeuchte
+delay_humidify = data_configjsonfile ['delay_humidify']                                # Luftbefeuchtungsverzögerung
 
 #---------------------------------------------------------------------------------- Tabelle aus tables.json
-data_tables_json = read_tables_json()                   # Function-Aufruf
-hangingtable = data_tables_json['hangingtable']    # Variable reifetablename = Name der Reifetabelle
+data_tablesjsonfile = read_tables_json()                   # Function-Aufruf
+hangingtable = data_tablesjsonfile['hangingtable']    # Variable reifetablename = Name der Reifetabelle
 
 #---------------------------------------------------------------------------------- bedingte Werte aus Variablen
 #---------------------------------------------------------------------------------------------------------------- csv-datei
