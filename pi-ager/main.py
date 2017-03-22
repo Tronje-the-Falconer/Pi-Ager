@@ -149,8 +149,8 @@ def set_sensortype():
     global sensor
     global sensorname
     global sensorvalue
-    settings = read_config_json()
-    sensortype = settings ['sensortype']
+    data_configjsonfile = read_config_json()
+    sensortype = data_configjsonfile ['sensortype']
     if sensortype == 1: #DHT
         sensor = Adafruit_DHT.DHT11
         sensorname = 'DHT11'
@@ -221,26 +221,26 @@ def doMainLoop():
             write_verbose (logstring, False, False)
         try:
             # print "DEBUG: in try"
-            settings = read_settings_json()
-            config = read_config_json()
+            data_settingsjsonfile = read_settings_json()
+            data_configjsonfile = read_config_json()
         except:
             logstring = _('unable to read settings file, checking if in the blind.')
             write_verbose(logstring, False, False)
             continue
-        modus = settings['modus']
-        setpoint_temperature = settings['setpoint_temperature']
-        setpoint_humidity = settings['setpoint_humidity']
-        circulation_air_period = settings['circulation_air_period']
-        circulation_air_duration = settings['circulation_air_duration']
-        exhaust_air_period = settings['exhaust_air_period']
-        exhaust_air_duration = settings['exhaust_air_duration']
-        switch_on_cooling_compressor = config['switch_on_cooling_compressor']
-        switch_off_cooling_compressor = config['switch_off_cooling_compressor']
-        switch_on_humidifier = config['switch_on_humidifier']
-        switch_off_humidifier = config['switch_off_humidifier']
-        delay_humidify = config ['delay_humidify']
+        modus = data_settingsjsonfile['modus']
+        setpoint_temperature = data_settingsjsonfile['setpoint_temperature']
+        setpoint_humidity = data_settingsjsonfile['setpoint_humidity']
+        circulation_air_period = data_settingsjsonfile['circulation_air_period']
+        circulation_air_duration = data_settingsjsonfile['circulation_air_duration']
+        exhaust_air_period = data_settingsjsonfile['exhaust_air_period']
+        exhaust_air_duration = data_settingsjsonfile['exhaust_air_duration']
+        switch_on_cooling_compressor = data_configjsonfile['switch_on_cooling_compressor']
+        switch_off_cooling_compressor = data_configjsonfile['switch_off_cooling_compressor']
+        switch_on_humidifier = data_configjsonfile['switch_on_humidifier']
+        switch_off_humidifier = data_configjsonfile['switch_off_humidifier']
+        delay_humidify = data_configjsonfile ['delay_humidify']
         delay_humidify = delay_humidify * 10
-        sensortype = config ['sensortype']
+        sensortype = data_configjsonfile ['sensortype']
         # An dieser Stelle sind alle settings eingelesen, Ausgabe auf Konsole
         # lastSettingsUpdate = settings['last_change']
         # lastConfigUpdate = config['last_change']
@@ -473,14 +473,14 @@ counter_humidify = 0           # Zähler für die Verzögerung der Befeuchtung
 status_exhaust_fan = False     # Variable für die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
 verbose = True                # Dokumentiert interne Vorgänge wortreich
 #---------------------------------------------------------------------------------- Allgemeingültige Werte aus config.json
-data_config_json = read_config_json()
-sensortype = data_config_json ['sensortype']                                        # Sensortyp
-language = data_config_json ['language']                                            # Sprache der Textausgabe
-switch_on_cooling_compressor = data_config_json ['switch_on_cooling_compressor']    # Einschalttemperatur
-switch_off_cooling_compressor = data_config_json ['switch_off_cooling_compressor']  # Ausschalttemperatur
-switch_on_humidifier = data_config_json ['switch_on_humidifier']                    # Einschaltfeuchte
-switch_off_humidifier = data_config_json ['switch_off_humidifier']                  # Ausschaltfeuchte
-delay_humidify = data_config_json ['delay_humidify']                                # Luftbefeuchtungsverzögerung
+data_configjsonfile = read_config_json()
+sensortype = data_configjsonfile ['sensortype']                                        # Sensortyp
+language = data_configjsonfile ['language']                                            # Sprache der Textausgabe
+switch_on_cooling_compressor = data_configjsonfile ['switch_on_cooling_compressor']    # Einschalttemperatur
+switch_off_cooling_compressor = data_configjsonfile ['switch_off_cooling_compressor']  # Ausschalttemperatur
+switch_on_humidifier = data_configjsonfile ['switch_on_humidifier']                    # Einschaltfeuchte
+switch_off_humidifier = data_configjsonfile ['switch_off_humidifier']                  # Ausschaltfeuchte
+delay_humidify = data_configjsonfile ['delay_humidify']                                # Luftbefeuchtungsverzögerung
 #---------------------------------------------------------------------------------- Sainsmart Relais Vereinfachung 0 aktiv
 relay_on = False               # negative Logik!!! des Relay's, Schaltet bei 0 | GPIO.LOW  | False  ein
 relay_off = (not relay_on)     # negative Logik!!! des Relay's, Schaltet bei 1 | GPIO.High | True aus
@@ -492,22 +492,22 @@ measurement_time_interval = 10       # Zeitintervall fuer die Messung in Sekunde
 loopcounter = 0                      #  Zählt die Durchläufe des Mainloops
 #-----------------------------------------------------------------------------------------Pinbelegung
 board_mode = gpio.BCM         # GPIO board mode (BCM = Broadcom SOC channel number - numbers after GPIO [GPIO.BOARD = Pin by number])
-config = read_config_json()
-gpio_cooling_compressor = config ['gpio_cooling_compressor']    # GPIO für Kühlschrankkompressor
-gpio_heater = config ['gpio_heater']                            # GPIO für Heizkabel
-gpio_humidifier = config ['gpio_humidifier']                    # GPIO für Luftbefeuchter
-gpio_circulating_air = config ['gpio_circulating_air']          # GPIO für Umluftventilator
-gpio_exhausting_air = config ['gpio_exhausting_air']            # GPIO für Austauschlüfter
-gpio_uv_light = config ['gpio_uv_light']                        # GPIO für UV Licht
-gpio_light = config ['gpio_light']                              # GPIO für Licht
-gpio_reserved1 = config ['gpio_reserved1']                      # 
-gpio_sensor_data = config ['gpio_sensor_data']                  # GPIO für Data Temperatur/Humidity Sensor
-gpio_sensor_sync = config ['gpio_sensor_sync']                  # GPIO für Sync Temperatur/Humidity Sensor
+data_configjsonfile = read_config_json()
+gpio_cooling_compressor = data_configjsonfile ['gpio_cooling_compressor']    # GPIO für Kühlschrankkompressor
+gpio_heater = data_configjsonfile ['gpio_heater']                            # GPIO für Heizkabel
+gpio_humidifier = data_configjsonfile ['gpio_humidifier']                    # GPIO für Luftbefeuchter
+gpio_circulating_air = data_configjsonfile ['gpio_circulating_air']          # GPIO für Umluftventilator
+gpio_exhausting_air = data_configjsonfile ['gpio_exhausting_air']            # GPIO für Austauschlüfter
+gpio_uv_light = data_configjsonfile ['gpio_uv_light']                        # GPIO für UV Licht
+gpio_light = data_configjsonfile ['gpio_light']                              # GPIO für Licht
+gpio_reserved1 = data_configjsonfile ['gpio_reserved1']                      # 
+gpio_sensor_data = data_configjsonfile ['gpio_sensor_data']                  # GPIO für Data Temperatur/Humidity Sensor
+gpio_sensor_sync = data_configjsonfile ['gpio_sensor_sync']                  # GPIO für Sync Temperatur/Humidity Sensor
 gpio_sensor_sht = Sht(gpio_sensor_sync, gpio_sensor_data)       # GPIO's für Temperatur/Humidity Sensor SHT Sht(Synchronisierung, DATA)
-gpio_scale1_wire1 = config ['gpio_scale1_wire1']                # GPIO für Waage1 Ader 1
-gpio_scale1_wire2 = config ['gpio_scale1_wire2']                # GPIO für Waage1 Ader 2
-gpio_scale2_wire1 = config ['gpio_scale2_wire1']                # GPIO für Waage2 Ader 1
-gpio_scale2_wire2 = config ['gpio_scale2_wire2']                # GPIO für Waage2 Ader 2
+gpio_scale1_wire1 = data_configjsonfile ['gpio_scale1_wire1']                # GPIO für Waage1 Ader 1
+gpio_scale1_wire2 = data_configjsonfile ['gpio_scale1_wire2']                # GPIO für Waage1 Ader 2
+gpio_scale2_wire1 = data_configjsonfile ['gpio_scale2_wire1']                # GPIO für Waage2 Ader 1
+gpio_scale2_wire2 = data_configjsonfile ['gpio_scale2_wire2']                # GPIO für Waage2 Ader 2
 
 #---------------------------------------------------------------------------------------------------------------- Sprache
 ####   Set up message catalog access
