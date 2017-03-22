@@ -4,6 +4,7 @@
                                     include 'modules/write_settings.json_logfile.txt.php';      // Speichert die eingestelleten Werte (Temperaturregelung, Feuchte, Lüftung und deren Hysteresen)
                                     include 'modules/start_stop_program.php';                   // Startet / Stoppt das Reifeprogramm bzw. den ganzen Schrank
                                     include 'modules/read_settings_json.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lüftung und deren Hysteresen) und Betriebsart des RSS
+                                    include 'modules/read_config_json.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                     include 'modules/read_current_json.php';                    // Liest die gemessenen Werte T/H und den aktuellen Zustand der Aktoren
                                     include 'modules/read_operating_mode.php';                  // Liest die Art der Reifesteuerung
                                     include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
@@ -88,12 +89,7 @@
                                     <table id="show_hangingtable" class="show_hangingtable">
                                         <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
                                             <td class="show_agingcell"><div class="tooltip">S%<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">D%<span class="tooltiptext"><?php echo _('delay of humidification in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">ON%<span class="tooltiptext"><?php echo _('switch-on value of humidification in %'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">OFF%<span class="tooltiptext"><?php echo _('Switch-off value of humidification in %'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">S°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">ON°C<span class="tooltiptext"><?php echo _('switch-on value of the temperature in °C'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">OFF°C<span class="tooltiptext"><?php echo _('switch-off value of the temperature in °C'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">TUD<span class="tooltiptext"><?php echo _('timer of the recirculation duration in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">TUP<span class="tooltiptext"><?php echo _('timer of the recirculation period in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">TAD<span class="tooltiptext"><?php echo _('timer of the exhausting air duration in minutes'); ?></span></div></td>
@@ -138,6 +134,9 @@
                                                                 <div class=\"hg_container\"><b>'._('manual adjustments are not possible').'</b><br>'._('during fully automatic aging.').'</div>';
                                                          }
                                                 ?>
+                                <h2 class="art-postheader"><?php echo _('general configuration'); ?></h2>
+                                <?php include ('config.php'); ?>
+                                <hr>
                                 <h2 class="art-postheader"><?php echo _('system'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Reboot/Shutdown-->
                                 <div class="hg_container">

@@ -39,7 +39,7 @@
         $checked_4 = '';
     }
     $setpoint_temperature = $data_settingsjsonfile['setpoint_temperature'];
-    $setpoint_humdity = $data_settingsjsonfile['setpoint_humdity'];
+    $setpoint_humidity = $data_settingsjsonfile['setpoint_humidity'];
     $circulation_air_duration = $data_settingsjsonfile['circulation_air_duration'];
     $circulation_air_period = $data_settingsjsonfile['circulation_air_period'];
     $exhaust_air_duration = $data_settingsjsonfile['exhaust_air_duration'];

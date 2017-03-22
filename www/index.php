@@ -1,6 +1,7 @@
                                 <?php 
                                     include 'header.php';                                       // Template-Kopf und Navigation
-                                    include 'modules/read_settings_json.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lueftung und deren Hysteresen) und Betriebsart des RSS
+                                    include 'modules/read_settings_json.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lueftung) und Betriebsart des RSS
+                                    include 'modules/read_config_json.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                     include 'modules/read_operating_mode.php';                  // Liest die Art der Reifesteuerung
                                     include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
                                     include 'modules/read_current_json.php';                    // Liest die gemessenen Werte Temp, Humy, Timestamp
@@ -122,8 +123,8 @@
                                                     echo '</td>
                                                         <td>'.$sensor_temperature.' °C</td>
                                                         <td>'.$setpoint_temperature.' °C</td>
-                                                        <td>'.($setpoint_temperature+$switch_on_cooling_compressor).' °C</td>
-                                                        <td>'.($setpoint_temperature+$switch_off_cooling_compressor).' °C</td>';
+                                                        <td>'.($setpoint_temperature + $switch_on_cooling_compressor).' °C</td>
+                                                        <td>'.($setpoint_temperature + $switch_off_cooling_compressor).' °C</td>';
                                                 }
                                                 if ($modus==1){
                                                     echo '   <td ><img src="images/cooling.png" alt=""></td>
@@ -132,8 +133,8 @@
                                                     echo strtoupper(_('cooler'));
                                                     echo '<td>'.$sensor_temperature.' °C</td>
                                                         <td>'.$setpoint_temperature.' °C</td>
-                                                        <td>'.($setpoint_temperature+$switch_on_cooling_compressor).' °C</td>
-                                                        <td>'.($setpoint_temperature+$switch_off_cooling_compressor).' °C</td>';
+                                                        <td>'.($setpoint_temperature + $switch_on_cooling_compressor).' °C</td>
+                                                        <td>'.($setpoint_temperature + $switch_off_cooling_compressor).' °C</td>';
                                                 }
                                                 if ($modus==2){
                                                     echo '   <td ><img src="images/heating.png" alt=""></td>
@@ -143,8 +144,8 @@
                                                     echo '</td>
                                                         <td>'.$sensor_temperature.' °C</td>
                                                         <td>'.$setpoint_temperature.' °C</td>
-                                                        <td>'.($setpoint_temperature-$switch_on_cooling_compressor).' °C</td>
-                                                        <td>'.($setpoint_temperature-$switch_off_cooling_compressor).' °C</td>';
+                                                        <td>'.($setpoint_temperature - $switch_on_cooling_compressor).' °C</td>
+                                                        <td>'.($setpoint_temperature - $switch_off_cooling_compressor).' °C</td>';
                                                 }
                                                 if ($modus==3 || $modus==4){
                                                     echo '   <td ><img src="images/cooling.png" alt=""></td>
@@ -153,16 +154,16 @@
                                                     echo strtoupper(_('cooler'));
                                                     echo '<td>'.$sensor_temperature.' °C</td>
                                                         <td>'.$setpoint_temperature.' °C</td>
-                                                        <td>'.($setpoint_temperature+$switch_on_cooling_compressor).' °C</td>
-                                                        <td>'.($setpoint_temperature+$switch_off_cooling_compressor).' °C</td></tr>';
+                                                        <td>'.($setpoint_temperature + $switch_on_cooling_compressor).' °C</td>
+                                                        <td>'.($setpoint_temperature + $switch_off_cooling_compressor).' °C</td></tr>';
                                                     echo '<tr> <td ><img src="images/heating.png" alt=""></td>
                                                         <td><img src="'.$heater_on_off_png.'" title="PIN_HEATER 27[13] -> IN 2 (GPIO 2)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('heater'));
                                                     echo '<td>'.$sensor_temperature.' °C</td>
                                                         <td>'.$setpoint_temperature.' °C</td>
-                                                        <td>'.($setpoint_temperature-$switch_on_cooling_compressor).' °C</td>
-                                                        <td>'.($setpoint_temperature-$switch_off_cooling_compressor).' °C</td>';
+                                                        <td>'.($setpoint_temperature - $switch_on_cooling_compressor).' °C</td>
+                                                        <td>'.($setpoint_temperature - $switch_off_cooling_compressor).' °C</td>';
                                                 }
                                             ?>
                                         </tr>
@@ -176,8 +177,8 @@
                                                     echo '</td>
                                                         <td>'.$sensor_humidity.'%</td>
                                                         <td>'.$setpoint_humidity.'%</td>
-                                                        <td>'.($setpoint_humidity-$switch_on_humidifier).'%</td>
-                                                        <td>'.($setpoint_humidity-$switch_off_humidifier).'%</td>';
+                                                        <td>'.($setpoint_humidity - $switch_on_humidifier).'%</td>
+                                                        <td>'.($setpoint_humidity - $switch_off_humidifier).'%</td>';
                                                 }
 
                                                 if ($modus==4){
@@ -187,8 +188,8 @@
                                                     echo strtoupper(_('humidification'));
                                                     echo '<td>'.$sensor_humidity.'%</td>
                                                         <td>'.$setpoint_humidity.'%</td>
-                                                        <td>'.($setpoint_humidity-$switch_on_humidifier).'%</td>
-                                                        <td>'.($setpoint_humidity-$switch_off_humidifier).'%</td></tr>';
+                                                        <td>'.($setpoint_humidity - $switch_on_humidifier).'%</td>
+                                                        <td>'.($setpoint_humidity - $switch_off_humidifier).'%</td></tr>';
                                                     echo '<tr> <td ><img src="images/dehumidification.png" alt=""></td>
                                                         <td><img src='.$exhausting_on_off_png.' title="PIN_FAN1 23[16] -> IN 5 (GPIO 4)"></td>
                                                         <td class="text_left">';
@@ -196,8 +197,8 @@
                                                     echo '</td>
                                                         <td>'.$sensor_humidity.'%</td>
                                                         <td>'.$setpoint_humidity.'%</td>
-                                                        <td>'.($setpoint_humidity+$switch_on_humidifier).'%</td>
-                                                        <td>'.($setpoint_humidity+$switch_off_humidifier).'%</td></tr>';
+                                                        <td>'.($setpoint_humidity + $switch_on_humidifier).'%</td>
+                                                        <td>'.($setpoint_humidity + $switch_off_humidifier).'%</td></tr>';
                                                 }
                                           ?>
                                        </tr>
