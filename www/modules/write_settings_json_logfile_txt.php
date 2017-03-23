@@ -1,7 +1,7 @@
 <?php 
 #var_dump($_POST);
     # Prüfung der eingegebenen Werte
-    if(isset ($_POST['modus']) && $_POST['modus'] <>NULL) {                       // ist das $_POST-Array gesetzt
+    if(isset ($_POST['modus_settings']) && $_POST['modus_settings'] <>NULL) {                       // ist das $_POST-Array gesetzt
         $InputValid = '';
         foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
             if (preg_match('/[.\D]/', $CheckInput)) {
@@ -10,26 +10,26 @@
         }
 
         if ($InputValid == ''){
-            if ( $_POST['setpoint_temperature']<23 &&  $_POST['setpoint_temperature']>-1 &&                                                                    // Prüfung Soll-Temperatur
-                $_POST['setpoint_humidity']<100 && $_POST['setpoint_humidity']>-1 &&                                                                      // Prüfung Soll-Feuchtigkeit
-                $_POST['circulation_air_period']<1441 && $_POST['circulation_air_period']>-1 &&  (($_POST['circulation_air_period']+$_POST['circulation_air_duration'])>0) &&                 // Prüfung Intervall Umluft
-                $_POST['circulation_air_duration']<1441 && $_POST['circulation_air_duration']>-1  &&                                                                // Prüfung Dauer Umluft
-                $_POST['exhaust_air_period']<1441 && $_POST['exhaust_air_period']>-1 && (($_POST['exhaust_air_period']+$_POST['exhaust_air_duration'])>0) &&             // Prüfung Intervall Abluft
-                $_POST['exhaust_air_duration']<1441 && $_POST['exhaust_air_duration']>-1                                                                  // Prüfung Dauer Abluft
+            if ( $_POST['setpoint_temperature_settings']<23 &&  $_POST['setpoint_temperature_settings']>-1 &&                                                                    // Prüfung Soll-Temperatur
+                $_POST['setpoint_humidity_settings']<100 && $_POST['setpoint_humidity_settings']>-1 &&                                                                      // Prüfung Soll-Feuchtigkeit
+                $_POST['circulation_air_period_settings']<1441 && $_POST['circulation_air_period_settings']>-1 &&  (($_POST['circulation_air_period_settings']+$_POST['circulation_air_duration_settings'])>0) &&                 // Prüfung Intervall Umluft
+                $_POST['circulation_air_duration_settings']<1441 && $_POST['circulation_air_duration_settings']>-1  &&                                                                // Prüfung Dauer Umluft
+                $_POST['exhaust_air_period_settings']<1441 && $_POST['exhaust_air_period_settings']>-1 && (($_POST['exhaust_air_period_settings']+$_POST['exhaust_air_duration_settings'])>0) &&             // Prüfung Intervall Abluft
+                $_POST['exhaust_air_duration_settings']<1441 && $_POST['exhaust_air_duration_settings']>-1                                                                  // Prüfung Dauer Abluft
             )
             {
                 # Eingestellte Werte in settings.json und logfile.txt speichern
                 $timestamp = time();
-                $array_settings_json = array( 'setpoint_temperature' => (float)$_POST['setpoint_temperature'],
-                    'modus' => (int)$_POST['modus'],
-                    'setpoint_humidity' => (float)$_POST['setpoint_humidity'],
-                    'circulation_air_duration' => (int)$_POST['circulation_air_duration']*60,
-                    'circulation_air_period' => (int)$_POST['circulation_air_period']*60,
-                    'exhaust_air_duration' => (int)$_POST['exhaust_air_duration']*60,
-                    'exhaust_air_period' => (int)$_POST['exhaust_air_period']*60,
+                $array_settings_json = array( 'setpoint_temperature' => (float)$_POST['setpoint_temperature_settings'],
+                    'modus' => (int)$_POST['modus_settings'],
+                    'setpoint_humidity' => (float)$_POST['setpoint_humidity_settings'],
+                    'circulation_air_duration' => (int)$_POST['circulation_air_duration_settings']*60,
+                    'circulation_air_period' => (int)$_POST['circulation_air_period_settings']*60,
+                    'exhaust_air_duration' => (int)$_POST['exhaust_air_duration_settings']*60,
+                    'exhaust_air_period' => (int)$_POST['exhaust_air_period_settings']*60,
                     'last_change' => $timestamp);
-                $settingsjsoninput = json_encode($array_settings_json);
-                file_put_contents('settings.json', $settingsjsoninput);
+                $jsoninput = json_encode($array_settings_json);
+                file_put_contents('settings.json', $jsoninput);
 
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus
@@ -145,7 +145,7 @@
 
 
                 # 3Sekunden Anzeige dass die Werte gespeichert wurden
-                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b><?php echo sprintf(_("values saved in file %s"),"settings.json"); ?></b></p>
+                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b><?php echo sprintf(_("values savedin file %s"), "settings.json)" ; ?></b></p>
                     <script language="javascript">
                         setTimeout(function(){document.getElementById("info-message").style.display="none"}, 3000)
                     </script>';
