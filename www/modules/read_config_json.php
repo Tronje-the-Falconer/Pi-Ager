@@ -24,12 +24,24 @@
     else {
         $checked_sens_3 = '';
     }
+	$language = $data_configjsonfile['language'];
+    if ($language == 'de_DE') {
+        $checked_language_1 = 'checked="checked"';
+    }
+    else {
+        $checked_language_1 = '';
+    }
+    if ($language == 'en_EN') {
+        $checked_language_2 = 'checked="checked"';
+    }
+    else {
+        $checked_language_2 = '';
+    }
 	$delay_humidify = $data_configjsonfile['delay_humidify'];
 	$switch_on_cooling_compressor = $data_configjsonfile['switch_on_cooling_compressor'];
 	$switch_off_cooling_compressor = $data_configjsonfile['switch_off_cooling_compressor'];
 	$switch_on_humidifier = $data_configjsonfile['switch_on_humidifier'];
 	$switch_off_humidifier = $data_configjsonfile['switch_off_humidifier'];
-	$language = $data_configjsonfile['language'];
 	$gpio_cooling_compressor = $data_configjsonfile['gpio_cooling_compressor'];
 	$gpio_heater = $data_configjsonfile['gpio_heater'];
 	$gpio_humidifier = $data_configjsonfile['gpio_humidifier'];
