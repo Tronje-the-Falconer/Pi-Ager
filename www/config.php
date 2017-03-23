@@ -2,7 +2,7 @@
                                 <div id="set_config">
                                     <form method="post">
                                         <div class="hg_container" >
-                                            <b><?php echo _('attention! be carful what you do!'); ?></b>
+                                            <b><?php echo strtoupper(_('attention! be carful what you do!')); ?></b>
                                             <hr>
                                             <!----------------------------------------------------------------------------------------Temperatur-->
                                             <table style="width: 100%;" class="miniature_writing">
