@@ -1,12 +1,4 @@
                                 <button class="art-button" type="button" onclick="setconfig_blockFunction()"><?php echo _('set general configuration values'); ?></button>
-                                <script>
-                                    function setconfig_blockFunction() {
-                                        document.getElementById('set_config').style.display = 'block';
-                                    }
-                                    function setconfig_noneFunction() {
-                                        document.getElementById('set_config').style.display = 'none';
-                                    }
-                                </script>
                                 <div id="set_config">
                                     <form method="post">
                                         <div class="hg_container" >
@@ -228,11 +220,11 @@
                                                 <?php  echo '<b>'._('gpio').':</b> '._('Connect all devices to the correct relays.').'<br>'.
                                                     _('If a relay fails, the device can be connected from the faulty relay to another and the control can be changed here.').'<br>';
                                                 ?>
-                                                <table>
+                                                <table style="width: 100%; border: 1px solid black; border-collapse: collapse; padding: 10px;" class="miniature_writing">
                                                     <tr>
-                                                        <td><?php echo _('gpio') ?></td>
-                                                        <td><?php echo _('relay nr') ?></td>
-                                                        <td><?php echo _('standard device') ?></td>
+                                                        <th><?php echo _('gpio') ?></th>
+                                                        <th><?php echo _('relay nr') ?></th>
+                                                        <th><?php echo _('standard device') ?></th>
                                                     </tr>
                                                     <tr>
                                                         <td>23</td>
@@ -281,4 +273,12 @@
                                             <button class="art-button" type="button" onclick="setconfig_noneFunction()"><?php echo _('hide'); ?></button>
                                         </div>
                                     </form>
-								</div>
+                                </div>
+                                <script>
+                                    function setconfig_blockFunction() {
+                                        document.getElementById('set_config').style.display = 'block';
+                                    }
+                                    function setconfig_noneFunction() {
+                                        document.getElementById('set_config').style.display = 'none';
+                                    }
+                                </script>
