@@ -9,7 +9,7 @@
                                                 <tr>
                                                     <td rowspan="4" class="td_png_icon"><h3><?php echo _('temperature'); ?></h3><img src="images/heating_cooling.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td class="text_left_padding"><?php echo _('switch-on value'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="temphyston" type="text" maxlength="4" size="2" value=<?php echo $switch_on_cooling_compressor; ?>>°C
+                                                    <td class="text_left_padding"><input name="switch_on_cooling_compressor_config" type="text" maxlength="4" size="2" value=<?php echo $switch_on_cooling_compressor; ?>>°C
                                                         <span class="display_none" style="font-size: xx-small">
                                                             <?php 
                                                                 if($modus == 0 || $modus == 1){
@@ -27,7 +27,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('switch-off value').':'; ?></td>
-                                                    <td class="text_left_padding"><input name="temphystoff" type="text" maxlength="4" size="2" value= <?php echo $switch_off_cooling_compressor; ?>>°C
+                                                    <td class="text_left_padding"><input name="switch_off_cooling_compressor_config" type="text" maxlength="4" size="2" value= <?php echo $switch_off_cooling_compressor; ?>>°C
                                                         <span class="display_none" style="font-size: xx-small">
                                                             <?php 
                                                                 if($modus == 0 || $modus == 1){
@@ -73,7 +73,7 @@
                                                 <tr>
                                                     <td rowspan="4" class="td_png_icon"><h3><?php echo _('humidity'); ?></h3><img src="images/humidification.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td class="text_left_padding"><?php echo _('switch-on value').':'; ?></td>
-                                                    <td class="text_left_padding"><input name="humhyston" maxlength="3" size="2" type="text" value=<?php echo $switch_on_humidifier; ?>>%<span class="display_none" style="font-size: xx-small">
+                                                    <td class="text_left_padding"><input name="switch_on_humidifier_config" maxlength="3" size="2" type="text" value=<?php echo $switch_on_humidifier; ?>>%<span class="display_none" style="font-size: xx-small">
                                                     <?php 
                                                                 if($modus == 0 || $modus == 1 || $modus == 2){
                                                                     echo '('._('on at'). ' '.($setpoint_humidity-$switch_on_humidifier)."%)";
@@ -86,7 +86,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('switch-off value').':'; ?></td>
-                                                    <td class="text_left_padding"><input name="humhystoff" maxlength="3" size="2" type="text" value=<?php echo $switch_off_humidifier; ?>>%<span class="display_none" style="font-size: xx-small">
+                                                    <td class="text_left_padding"><input name="switch_off_humidifier_config" maxlength="3" size="2" type="text" value=<?php echo $switch_off_humidifier; ?>>%<span class="display_none" style="font-size: xx-small">
                                                     <?php 
                                                                 if($modus == 0 || $modus == 1 || $modus == 2){
                                                                     echo '('._('off at'). ' '.($setpoint_humidity-$switch_off_humidifier)."%)";
@@ -98,7 +98,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('delay'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="humdelay" maxlength="2" size="2" type="text" value=<?php echo $delay_humidify; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 60)</span></td>
+                                                    <td class="text_left_padding"><input name="delay_humidify_config" maxlength="2" size="2" type="text" value=<?php echo $delay_humidify; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 60)</span></td>
                                                 </tr>
                                             </table>
                                             <script>
@@ -134,9 +134,9 @@
                                                     <td class="td_png_icon"><h3><?php echo _('sensortype'); ?></h3><img src="images/sensortype.png" alt=""><br><button class="art-button" type="button" onclick="help_sensortype_blockFunction()"><?php echo _('help'); ?></button>
                                                     </td>
                                                     <td style=" text-align: left; padding-left: 20px;">
-                                                        <input type="radio" name="sensortype" value="1" <?php echo $checked_sens_1; ?>/><label> DHT11</label><br>
-                                                        <input type="radio" name="sensortype" value="2" <?php echo $checked_sens_2; ?>/><label> DHT22</label><br>
-                                                        <input type="radio" name="sensortype" value="3" <?php echo $checked_sens_3; ?>/><label> SHT</label><br>
+                                                        <input type="radio" name="sensortype_config" value="1" <?php echo $checked_sens_1; ?>/><label> DHT11</label><br>
+                                                        <input type="radio" name="sensortype_config" value="2" <?php echo $checked_sens_2; ?>/><label> DHT22</label><br>
+                                                        <input type="radio" name="sensortype_config" value="3" <?php echo $checked_sens_3; ?>/><label> SHT</label><br>
                                                         <br>
                                                     </td>
                                                     
@@ -156,55 +156,82 @@
                                                 <button class="art-button" type="button" onclick="help_sensortype_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
                                             <hr>
+                                            <!----------------------------------------------------------------------------------------Language-->
+                                            <table style="width: 100%;" class="miniature_writing">
+                                                <tr>
+                                                    <td class="td_png_icon"><h3><?php echo _('language'); ?></h3><img src="images/language.png" alt=""><br><button class="art-button" type="button" onclick="help_language_blockFunction()"><?php echo _('help'); ?></button>
+                                                    </td>
+                                                    <td style=" text-align: left; padding-left: 20px;">
+                                                        <input type="radio" name="language_config" value="de_DE" <?php echo $checked_language_1; ?>/><label> <?php echo _('german') ?></label><br>
+                                                        <input type="radio" name="language_config" value="en_EN" <?php echo $checked_language_2; ?>/><label> <?php echo _('english') ?></label><br>
+                                                        <br>
+                                                    </td>
+                                                    
+                                                </tr>
+                                            </table>
+                                            <script>
+                                                function help_language_blockFunction() {
+                                                    document.getElementById('help_language').style.display = 'block';
+                                                }
+                                                function help_language_noneFunction() {
+                                                    document.getElementById('help_language').style.display = 'none';
+                                                }
+                                            </script>
+                                            <p id="help_language" class="help_p">
+                                                <?php  echo '<b>'._('language').':</b> '._('set the language.');
+                                                 echo '<br><br>'; ?>
+                                                <button class="art-button" type="button" onclick="help_language_noneFunction()"><?php echo _('close'); ?></button>
+                                            </p>
+                                            <hr>
                                             <!----------------------------------------------------------------------------------------GPIO-->
                                             <table style="width: 100%;" class="miniature_writing">
                                                 <tr>
                                                     <td class="td_png_icon"><h3><?php echo _("GPIO's"); ?></h3><img src="images/gpio.png" alt=""><br><button class="art-button" type="button" onclick="help_gpio_blockFunction()"><?php echo _('help'); ?></button>
                                                     </td>
                                                     <td class="text_left_padding"><?php echo _('cooling compressor'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="gpio_cooling_compressor" type="text" maxlength="4" size="2" value=<?php echo $gpio_cooling_compressor; ?>>
+                                                    <td class="text_left_padding"><input name="gpio_cooling_compressor_config" type="text" maxlength="4" size="2" value=<?php echo $gpio_cooling_compressor; ?>>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td class="text_left_padding"><?php echo _('heater'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="gpio_heater" type="text" maxlength="4" size="2" value=<?php echo $gpio_heater; ?>>
+                                                    <td class="text_left_padding"><input name="gpio_heater_config" type="text" maxlength="4" size="2" value=<?php echo $gpio_heater; ?>>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td class="text_left_padding"><?php echo _('humidifier'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="gpio_humidifier" type="text" maxlength="4" size="2" value=<?php echo $gpio_humidifier; ?>>
+                                                    <td class="text_left_padding"><input name="gpio_humidifier_config" type="text" maxlength="4" size="2" value=<?php echo $gpio_humidifier; ?>>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td class="text_left_padding"><?php echo _('circulating air'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="gpio_circulating_air" type="text" maxlength="4" size="2" value=<?php echo $gpio_circulating_air; ?>>
+                                                    <td class="text_left_padding"><input name="gpio_circulating_air_config" type="text" maxlength="4" size="2" value=<?php echo $gpio_circulating_air; ?>>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td class="text_left_padding"><?php echo _('exhausting air'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="gpio_exhausting_air" type="text" maxlength="4" size="2" value=<?php echo $gpio_exhausting_air; ?>>
+                                                    <td class="text_left_padding"><input name="gpio_exhausting_air_config" type="text" maxlength="4" size="2" value=<?php echo $gpio_exhausting_air; ?>>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td class="text_left_padding"><?php echo _('uv light'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="gpio_uv_light" type="text" maxlength="4" size="2" value=<?php echo $gpio_uv_light; ?>>
+                                                    <td class="text_left_padding"><input name="gpio_uv_light_config" type="text" maxlength="4" size="2" value=<?php echo $gpio_uv_light; ?>>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td class="text_left_padding"><?php echo _('light'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="gpio_light" type="text" maxlength="4" size="2" value=<?php echo $gpio_light; ?>>
+                                                    <td class="text_left_padding"><input name="gpio_light_config" type="text" maxlength="4" size="2" value=<?php echo $gpio_light; ?>>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td>&nbsp;</td>
                                                     <td class="text_left_padding"><?php echo _('reserved1'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="gpio_reserved1" type="text" maxlength="4" size="2" value=<?php echo $gpio_reserved1; ?>>
+                                                    <td class="text_left_padding"><input name="gpio_reserved1_config" type="text" maxlength="4" size="2" value=<?php echo $gpio_reserved1; ?>>
                                                     </td>
                                                 </tr>
                                             </table>
