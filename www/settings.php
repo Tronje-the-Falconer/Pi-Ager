@@ -1,7 +1,8 @@
                                 <?php 
                                     include 'header.php';                                       // Template-Kopf und Navigation
-                                    include 'modules/write_table.json.php';                     // Speichert die Auswahl der Reifetabelle
-                                    include 'modules/write_settings.json_logfile.txt.php';      // Speichert die eingestelleten Werte (Temperaturregelung, Feuchte, Lüftung und deren Hysteresen)
+                                    include 'modules/write_table_json.php';                     // Speichert die Auswahl der Reifetabelle
+                                    include 'modules/write_settings_json_logfile_txt.php';      // Speichert die eingestelleten Werte (Temperaturregelung, Feuchte, Lüftung)
+                                    include 'modules/write_settings_json_logfile_txt.php';      // Speichert die eingestelle Configuration (Hysteresen, Sensortyp, GPIO's)
                                     include 'modules/start_stop_program.php';                   // Startet / Stoppt das Reifeprogramm bzw. den ganzen Schrank
                                     include 'modules/read_settings_json.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lüftung und deren Hysteresen) und Betriebsart des RSS
                                     include 'modules/read_config_json.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
