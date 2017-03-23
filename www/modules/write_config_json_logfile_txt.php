@@ -1,7 +1,7 @@
 <?php 
 #var_dump($_POST);
     # Prüfung der eingegebenen Werte
-    if(isset ($_POST['modus']) && $_POST['modus'] <>NULL) {                       // ist das $_POST-Array gesetzt
+    if(isset $modus && $modus <>NULL) {                       // ist das $_POST-Array gesetzt
         $InputValid = '';
         foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
             if (preg_match('/[.\D]/', $CheckInput)) {
@@ -10,32 +10,32 @@
         }
 
         if ($InputValid == ''){
-            if ( $_POST['switch_on_cooling_compressor']<11 && $_POST['switch_on_cooling_compressor']>-1 && ($_POST['switch_on_cooling_compressor'] != $_POST['switch_off_cooling_compressor']) &&       // Prüfung Einschaltwert setpoint_temperature.
-                ($_POST['switch_on_cooling_compressor'] > $_POST['switch_off_cooling_compressor']) &&                                                              // Prüfung Einschaltwert setpoint_temperature.
-                $_POST['switch_off_cooling_compressor']<11 && $_POST['switch_off_cooling_compressor']>-1 &&                                                        // Prüfung Ausschaltwert setpoint_temperature.
-                $_POST['switch_on_humidifier']<11 && $_POST['switch_on_humidifier']>-1 && ($_POST['switch_on_humidifier'] != $_POST['switch_off_humidifier']) &&          // Prüfung Einschaltwert Feuchte
-                ($_POST['switch_on_humidifier'] > $_POST['switch_off_humidifier']) &&                                                               // Prüfung Einschaltwert Feuchte
-                $_POST['switch_off_humidifier']<11 && $_POST['switch_off_humidifier']>-1 &&                                                          // Prüfung Ausschaltwert Feuchte
-                $_POST['delay_humidify']<61 && $_POST['delay_humidify']>-1                                                             // Prüfung Verzögerung Feuchte
+            if ( $_POST['switch_on_cooling_compressor_config']<11 && $_POST['switch_on_cooling_compressor_config']>-1 && ($_POST['switch_on_cooling_compressor_config'] != $_POST['switch_off_cooling_compressor_config']) &&       // Prüfung Einschaltwert setpoint_temperature.
+                ($_POST['switch_on_cooling_compressor_config'] > $_POST['switch_off_cooling_compressor_config']) &&                                                              // Prüfung Einschaltwert setpoint_temperature.
+                $_POST['switch_off_cooling_compressor_config']<11 && $_POST['switch_off_cooling_compressor_config']>-1 &&                                                        // Prüfung Ausschaltwert setpoint_temperature.
+                $_POST['switch_on_humidifier_config']<11 && $_POST['switch_on_humidifier_config']>-1 && ($_POST['switch_on_humidifier_config'] != $_POST['switch_off_humidifier_config']) &&          // Prüfung Einschaltwert Feuchte
+                ($_POST['switch_on_humidifier_config'] > $_POST['switch_off_humidifier_config']) &&                                                               // Prüfung Einschaltwert Feuchte
+                $_POST['switch_off_humidifier_config']<11 && $_POST['switch_off_humidifier_config']>-1 &&                                                          // Prüfung Ausschaltwert Feuchte
+                $_POST['delay_humidify_config']<61 && $_POST['delay_humidify_config']>-1                                                             // Prüfung Verzögerung Feuchte
             )
             {
                 # Eingestellte Werte in settings.json und logfile.txt speichern
                 $timestamp = time();
-                $array_config_json = array( 'switch_on_cooling_compressor' => (float)$_POST['switch_on_cooling_compressor'],
-                    'switch_off_cooling_compressor' => (float)$_POST['switch_off_cooling_compressor'],
-                    'switch_on_humidifier' => (float)$_POST['switch_on_humidifier'],
-                    'switch_off_humidifier' => (float)$_POST['switch_off_humidifier'],
-                    'delay_humidify' => (float)$_POST['delay_humidify'],
-                    'sensortype' => (int)$_POST['sensortype'],
-                    'language' => $_POST['language'],
-                    'gpio_cooling_compressor' => (int)$_POST['gpio_cooling_compressor'],
-                    'gpio_heater' => (int)$_POST['gpio_heater'],
-                    'gpio_humidifier' => (int)$_POST['gpio_humidifier'],
-                    'gpio_circulating_air' => (int)$_POST['gpio_circulating_air'],
-                    'gpio_exhausting_air' => (int)$_POST['gpio_exhausting_air'],
-                    'gpio_uv_light' => (int)$_POST['gpio_uv_light'],
-                    'gpio_light' => (int)$_POST['gpio_light'],
-                    'gpio_reserved1' => (int)$_POST['gpio_reserved1'],
+                $array_config_json = array( 'switch_on_cooling_compressor' => (float)$_POST['switch_on_cooling_compressor_config'],
+                    'switch_off_cooling_compressor' => (float)$_POST['switch_off_cooling_compressor_config'],
+                    'switch_on_humidifier' => (float)$_POST['switch_on_humidifier_config'],
+                    'switch_off_humidifier' => (float)$_POST['switch_off_humidifier_config'],
+                    'delay_humidify' => (float)$_POST['delay_humidify_config'],
+                    'sensortype' => (int)$_POST['sensortype_config'],
+                    'language' => $_POST['language_config'],
+                    'gpio_cooling_compressor' => (int)$_POST['gpio_cooling_compressor_config'],
+                    'gpio_heater' => (int)$_POST['gpio_heater_config'],
+                    'gpio_humidifier' => (int)$_POST['gpio_humidifier_config'],
+                    'gpio_circulating_air' => (int)$_POST['gpio_circulating_air_config'],
+                    'gpio_exhausting_air' => (int)$_POST['gpio_exhausting_air_config'],
+                    'gpio_uv_light' => (int)$_POST['gpio_uv_light_config'],
+                    'gpio_light' => (int)$_POST['gpio_light_config'],
+                    'gpio_reserved1' => (int)$_POST['gpio_reserved1_config'],
                     'last_change' => $timestamp);
                 $configjsoninput = json_encode($array_config_json);
                 file_put_contents('config.json', $configjsoninput);
@@ -99,6 +99,7 @@
                 $exhausting_air_period = $exhaust_air_period/60;
                 $switch_on_humidity = $setpoint_humidity - $array_config_json['switch_on_humidifier'];
                 $switch_off_humidity = $setpoint_humidity - $array_config_json['switch_off_humidifier'];
+                
 
                 $f=fopen('logfile.txt','a');
                 fwrite($f, "\n"."***********************************************");
@@ -148,6 +149,19 @@
                 fwrite($f, "\n"._('exhausting air period')." ".$exhausting_air_period._('minutes'));
                 fwrite($f, "\n"._('exhausting air duration').": ".$exhausting_air_duration._('minutes'));
 
+
+                fwrite($f, "\n");
+                fwrite($f, "\n"._('language').": ".$array_config_json['language']);
+                fwrite($f, "\n");
+                fwrite($f, "\n GIO "._('settings');
+                fwrite($f, "\n GIO "._('cooling compressor').": ".$array_config_json['gpio_cooling_compressor']);
+                fwrite($f, "\n GIO "._('heater').": ".$array_config_json['gpio_heater']);
+                fwrite($f, "\n GIO "._('humidifier').": ".$array_config_json['gpio_humidifier']);
+                fwrite($f, "\n GIO "._('circulating air').": ".$array_config_json['gpio_circulating_air']);
+                fwrite($f, "\n GIO "._('exhausting air').": ".$array_config_json['gpio_exhausting_air']);
+                fwrite($f, "\n GIO "._('uv light').": ".$array_config_json['gpio_uv_light']);
+                fwrite($f, "\n GIO "._('light').": ".$array_config_json['gpio_light']);
+                fwrite($f, "\n GIO "._('reserved1').": ".$array_config_json['gpio_reserved1']);
 
                 fwrite($f, "\n"."***********************************************");
                 fclose($f);
