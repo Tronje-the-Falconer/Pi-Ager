@@ -178,7 +178,7 @@
                                                 }
                                             </script>
                                             <p id="help_language" class="help_p">
-                                                <?php  echo '<b>'._('language').':</b> '._('set the language.');
+                                                <?php  echo '<b>'._('language').':</b> '._('set the language. if you are missing your prefered language, please contact us');
                                                  echo '<br><br>'; ?>
                                                 <button class="art-button" type="button" onclick="help_language_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
