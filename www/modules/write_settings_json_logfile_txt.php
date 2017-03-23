@@ -145,7 +145,7 @@
 
 
                 # 3Sekunden Anzeige dass die Werte gespeichert wurden
-                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b><?php echo _("values saved"); ?></b></p>
+                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b><?php echo sprintf(_("values saved in file %s"),"settings.json"); ?></b></p>
                     <script language="javascript">
                         setTimeout(function(){document.getElementById("info-message").style.display="none"}, 3000)
                     </script>';
