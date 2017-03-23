@@ -31,19 +31,19 @@
 
                                     <div style="">
                                     <h2><?php echo _('temperature profile'); ?> </h2>
-                                    <img src="/pic/pi-ager_sensortemp-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <img src="/pic/pi-ager_sensor_temperature-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('humidity profile'); ?></h2>
-                                    <img src="/pic/pi-ager_sensorhum-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <img src="/pic/pi-ager_sensor_humidity-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('cooler'); ?></h2>
-                                    <img src="/pic/pi-ager_cool-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <img src="/pic/pi-ager_stat_coolcompressor-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('heater'); ?></h2>
-                                    <img src="/pic/pi-ager_heat-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <img src="/pic/pi-ager_stat_heater-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('humidifier'); ?></h2>
-                                    <img src="/pic/pi-ager_lbf-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <img src="/pic/pi-ager_status_humidifier-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('air circulatory system'); ?></h2>
-                                    <img src="/pic/pi-ager_uml-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <img src="/pic/pi-ager_stat_circulate_air-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('air exchanger'); ?></h2>
-                                    <img src="/pic/pi-ager_lat-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <img src="/pic/pi-ager_stat_exhaust_air-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->
                             </div>

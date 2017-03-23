@@ -1,5 +1,5 @@
                                 <button class="art-button" type="button" onclick="setconfig_blockFunction()"><?php echo _('set general configuration values'); ?></button>
-                                <div id="set_config">
+                                <div id="set_config" class="help_p">
                                     <form method="post">
                                         <div class="hg_container" >
                                             <b><?php echo strtoupper(_('attention! be carful what you do!')); ?></b>
@@ -188,6 +188,11 @@
                                                 <tr>
                                                     <td class="td_png_icon"><h3><?php echo _("GPIO's"); ?></h3><img src="images/gpio.png" alt=""><br><button class="art-button" type="button" onclick="help_gpio_blockFunction()"><?php echo _('help'); ?></button>
                                                     </td>
+                                                    <td><?php echo _("Attention! Please use only the GIO's that are in the help section. Otherwise, other devices or something else can be destroyed!") ?></td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>&nbsp;</td>
                                                     <td class="text_left_padding"><?php echo _('cooling compressor'); ?>:</td>
                                                     <td class="text_left_padding"><input name="gpio_cooling_compressor_config" type="text" maxlength="4" size="2" value=<?php echo $gpio_cooling_compressor; ?>>
                                                     </td>
@@ -247,7 +252,7 @@
                                                 <?php  echo '<b>'._('gpio').':</b> '._('Connect all devices to the correct relays.').'<br>'.
                                                     _('If a relay fails, the device can be connected from the faulty relay to another and the control can be changed here.').'<br>';
                                                 ?>
-                                                <table style="width: 100%; border: 1px solid black; border-collapse: collapse; padding: 10px;" class="miniature_writing">
+                                                <table style="width: 100%; padding: 10px;" class="miniature_writing">
                                                     <tr>
                                                         <th><?php echo _('gpio') ?></th>
                                                         <th><?php echo _('relay nr') ?></th>

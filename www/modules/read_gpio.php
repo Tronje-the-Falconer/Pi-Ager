@@ -6,13 +6,13 @@
     $read_gpio_circulating_air = shell_exec('sudo /var/sudowebscript.sh read_gpio_circulating_air'); #Umluft
     $read_gpio_exhausting_air = shell_exec('sudo /var/sudowebscript.sh read_gpio_exhausting_air'); #Abluft
     $read_gpio_uv_light = shell_exec('sudo /var/sudowebscript.sh read_gpio_uv_light'); #UV-Licht
+    $read_gpio_light = shell_exec('sudo /var/sudowebscript.sh read_gpio_light'); # Licht
     $read_gpio_reserved1 = shell_exec('sudo /var/sudowebscript.sh read_gpio_reserved1'); # Reserviert 1
-    $read_gpio_reserved2 = shell_exec('sudo /var/sudowebscript.sh read_gpio_reserved2'); # Reserviert 2
     
 
     #Prüfen ob Programme laufen
     $grephangingtable = shell_exec('sudo /var/sudowebscript.sh grephangingtable'); #Reifetab.py
-    $grepmains = shell_exec('sudo /var/sudowebscript.sh grepmain'); #Rss.py
+    $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain'); #Rss.py
 
     #Schaltzustände setzen
     if($read_gpio_cooling_compressor == 0) {
@@ -51,10 +51,10 @@
     else {
         $hangingtable_on_off_png = 'images/led-on-green-20x20.png';
     }
-    if($grepmains == 0) {
-        $rss = 'images/led-off-green-20x20.png';
+    if($grepmain == 0) {
+        $pi_ager_on_off_png = 'images/led-off-green-20x20.png';
     }
     else {
-        $rss = 'images/led-on-green-20x20.png';
+        $pi_ager_on_off_png = 'images/led-on-green-20x20.png';
     }
 ?>

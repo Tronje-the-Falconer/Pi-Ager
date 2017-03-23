@@ -63,10 +63,10 @@
                                 </div>
                                 <!------------------------------ ----------------------------------------------------------T/rLF Diagramm-->
                                 <h2><?php echo _('temperature profile'); ?></h2>
-                                <img src="/pic/pi-ager_sensortemp-hourly.png" alt="<?php echo _('hours history temperature'); ?>" />
+                                <img src="/pic/pi-ager_sensor_temperature-hourly.png" alt="<?php echo _('hours history temperature'); ?>" />
                                 <br/><br/>
                                 <h2><?php echo _('humidity profile'); ?></h2>
-                                <img src="/pic/pi-ager_sensorhum-hourly.png" alt="<?php echo _('hours history humidity'); ?>" /><br><br>
+                                <img src="/pic/pi-ager_sensor_humidity-hourly.png" alt="<?php echo _('hours history humidity'); ?>" /><br><br>
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <h2><?php echo _('statusboard'); ?></h2>
                                 <div class="hg_container">
@@ -85,7 +85,7 @@
                                                 ?>
                                                 <br><img src="images/operating_mode.png" alt="" style="padding: 10px;">
                                             </td>
-                                            <td class="text_left_top"><b><?php echo strtoupper(_('operating mode')).':</b><br>'; if ($grepmain == 0){echo strtoupper(("off"));} else {echo $modus_text;} ?></td>
+                                            <td class="text_left_top"><b><?php echo strtoupper(_('operating mode')).':</b><br>'; if ($grepmain == 0){echo strtoupper(("off"));} else {echo $modus_name;} ?></td>
                                             <td>
                                                 <?php 
                                                     // PrUEft, ob Prozess Reifetab läuft

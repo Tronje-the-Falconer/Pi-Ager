@@ -2,25 +2,24 @@
 #
 # sudo web script allowing user www-data to run commands with root privilegs
 # shell_exec('sudo /var/sudowebscript.sh PARAMETER')
-jq '.employees[0].name'
 
-# gpio_cooling_compressor = cat /var/www/config.json | jq '.gpio_cooling_compressor'
-# gpio_heater = cat /var/www/config.json | jq '.gpio_heater'
-# gpio_humidifier = cat /var/www/config.json | jq '.gpio_humidifier'
-# gpio_circulating_air = cat /var/www/config.json | jq '.gpio_circulating_air'
-# gpio_exhausting_air = cat /var/www/config.json | jq '.gpio_exhausting_air'
-# gpio_uv_light = cat /var/www/config.json | jq '.gpio_uv_light'
-# gpio_reserved1 = cat /var/www/config.json | jq '.gpio_reserved1'
-# gpio_reserved2 = cat /var/www/config.json | jq '.gpio_reserved2'
+gpio_cooling_compressor= cat /var/www/config.json | jq '.gpio_cooling_compressor'
+gpio_heater= cat /var/www/config.json | jq '.gpio_heater'
+gpio_humidifier= cat /var/www/config.json | jq '.gpio_humidifier'
+gpio_circulating_air= cat /var/www/config.json | jq '.gpio_circulating_air'
+gpio_exhausting_air= cat /var/www/config.json | jq '.gpio_exhausting_air'
+gpio_uv_light= cat /var/www/config.json | jq '.gpio_uv_light'
+gpio_light= cat /var/www/config.json | jq '.gpio_light'
+gpio_reserved1= cat /var/www/config.json | jq '.gpio_reserved1'
 
-gpio_cooling_compressor = 23
-gpio_heater = 22
-gpio_humidifier = 27
-gpio_circulating_air = 18
-gpio_exhausting_air = 17
-gpio_uv_light = 4
-gpio_reserved1 = 3
-gpio_reserved2 = 2
+#gpio_cooling_compressor=23
+#gpio_heater=22
+#gpio_humidifier=27
+#gpio_circulating_air=18
+#gpio_exhausting_air=17
+#gpio_uv_light=4
+#gpio_light=3
+#gpio_reserved1=2
 
 case "$1" in
     startmain) #Starten von main.py
@@ -77,17 +76,17 @@ case "$1" in
     write_gpio_uv_light)# Ansteuern von GPIO UV-Licht
         /usr/local/bin/gpio -g write $gpio_uv_light 1
     ;;
-    read_gpio_reserved1)# Ansteuern von GPIO reserved1
+    read_gpio_light)# Ansteuern von GPIO reserved1
+        /usr/local/bin/gpio -g read $gpio_light
+    ;;
+    write_gpio_light)# Ansteuern von GPIO reserved1
+        /usr/local/bin/gpio -g write $gpio_light 1
+    ;;
+    read_gpio_reserved1)# Ansteuern von GPIO reserved2
         /usr/local/bin/gpio -g read $gpio_reserved1
     ;;
     write_gpio_reserved1)# Ansteuern von GPIO reserved1
         /usr/local/bin/gpio -g write $gpio_reserved1 1
-    ;;
-    read_gpio_reserved2)# Ansteuern von GPIO reserved2
-        /usr/local/bin/gpio -g read $gpio_reserved2
-    ;;
-    write_gpio_reserved2)# Ansteuern von GPIO reserved1
-        /usr/local/bin/gpio -g write $gpio_reserved2 1
     ;;
     reboot) # reboot
         reboot

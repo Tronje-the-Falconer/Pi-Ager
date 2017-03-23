@@ -68,3 +68,10 @@ Aus csv ausgelagert in config.json:
 humhyston, humhystoff, temphyston, temphystoff, humdelay
 switch_on_humidifier, switch_off_humidifier, switch_on_cooling_compressor, switch_off_cooling_compressor, delay_humidify
 
+
+Installation:
+cd /tmp
+wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-1.5.tar.gz
+tar xfvz jq-1.5.tar.gz
+cd jq-1.5
+./configure && make && sudo make install

@@ -97,7 +97,7 @@ def ploting(plotting_value):
     # print "DEBUG: in plotingfunction"
     if plotting_value == 'sensor_temperature':
         title = _('temperature')
-        label = 'in C'
+        label = 'in °C'
     elif plotting_value == 'sensor_humidity':
         title = _('humidity')
         label = 'in %'
@@ -501,13 +501,11 @@ gpio_exhausting_air = data_configjsonfile ['gpio_exhausting_air']            # G
 gpio_uv_light = data_configjsonfile ['gpio_uv_light']                        # GPIO für UV Licht
 gpio_light = data_configjsonfile ['gpio_light']                              # GPIO für Licht
 gpio_reserved1 = data_configjsonfile ['gpio_reserved1']                      # 
-gpio_sensor_data = data_configjsonfile ['gpio_sensor_data']                  # GPIO für Data Temperatur/Humidity Sensor
-gpio_sensor_sync = data_configjsonfile ['gpio_sensor_sync']                  # GPIO für Sync Temperatur/Humidity Sensor
+gpio_sensor_data = 10                  # GPIO für Data Temperatur/Humidity Sensor
+gpio_sensor_sync = 9                  # GPIO für Sync Temperatur/Humidity Sensor
 gpio_sensor_sht = Sht(gpio_sensor_sync, gpio_sensor_data)       # GPIO's für Temperatur/Humidity Sensor SHT Sht(Synchronisierung, DATA)
-gpio_scale1_wire1 = data_configjsonfile ['gpio_scale1_wire1']                # GPIO für Waage1 Ader 1
-gpio_scale1_wire2 = data_configjsonfile ['gpio_scale1_wire2']                # GPIO für Waage1 Ader 2
-gpio_scale2_wire1 = data_configjsonfile ['gpio_scale2_wire1']                # GPIO für Waage2 Ader 1
-gpio_scale2_wire2 = data_configjsonfile ['gpio_scale2_wire2']                # GPIO für Waage2 Ader 2
+gpio_scale_wire1 = 24                # GPIO für Waage1 Ader 1
+gpio_scale_wire2 = 25                # GPIO für Waage1 Ader 2
 
 #---------------------------------------------------------------------------------------------------------------- Sprache
 ####   Set up message catalog access
