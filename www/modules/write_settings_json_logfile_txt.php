@@ -28,8 +28,8 @@
                     'exhaust_air_duration' => (int)$_POST['exhaust_air_duration']*60,
                     'exhaust_air_period' => (int)$_POST['exhaust_air_period']*60,
                     'last_change' => $timestamp);
-                $jsoninput = json_encode($array_settings_json);
-                file_put_contents('settings.json', $jsoninput);
+                $settingsjsoninput = json_encode($array_settings_json);
+                file_put_contents('settings.json', $settingsjsoninput);
 
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus
