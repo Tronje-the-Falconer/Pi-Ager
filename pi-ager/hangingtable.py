@@ -167,22 +167,14 @@ elif sensortype == 3 :
     sensorname = 'SHT'
 #---------------------------------------------------------------------------------------------------------------- Sprache
 ####   Set up message catalog access
-# translation = gettext.translation('pi_ager', '/var/www/locale', fallback=True)
+# translation = gettext.translation('pi-ager', '/var/www/locale', fallback=True)
 # _ = translation.ugettext
-if language == 'de':
-    translation = gettext.translation('pi_ager', '/var/www/locale', languages=['en'], fallback=True)
+if language == 'de_DE':
+    translation = gettext.translation('pi-ager', '/var/www/locale', languages=['de_DE'], fallback=True)
 elif language == 'en':
-    translation = gettext.translation('pi_ager', '/var/www/locale', languages=['de'], fallback=True)
+    translation = gettext.translation('pi-ager', '/var/www/locale', languages=['en'], fallback=True)
 # else:
-    
 translation.install()
-
-f= [N_('mollusk'), N_('albatross'), N_('rat'), N_('undefined')]
-print _('mollusk') +  ' normal print'
-e = _('albatross') +  ' Variable e'
-print e
-for a in f:
-    print _(a) + str(' for a in f')
 
 #---------------------------------------------------------------------------------- Variablen
 day_in_seconds = 86400  #Anzahl der Sek. in einem Tag

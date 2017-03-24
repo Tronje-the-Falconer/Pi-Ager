@@ -1,0 +1,155 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: pi-ager\n"
+"POT-Creation-Date: 2017-03-24 20:45+0100\n"
+"PO-Revision-Date: 2017-03-24 20:48+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"X-Poedit-Basepath: ../../../../../../reifeschrank/branches/tronje/pi-ager\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: hangingtable.py\n"
+
+#: hangingtable.py:93 hangingtable.py:95 hangingtable.py:97 hangingtable.py:99
+#: hangingtable.py:101
+msgid "operation mode"
+msgstr ""
+
+#: hangingtable.py:93
+msgid "cooling"
+msgstr ""
+
+#: hangingtable.py:95
+msgid "cooling with humidify"
+msgstr ""
+
+#: hangingtable.py:97
+msgid "heating with humidify"
+msgstr ""
+
+#: hangingtable.py:99
+msgid "automatic with humidify"
+msgstr ""
+
+#: hangingtable.py:101
+msgid "automatic with dehumidify and humidify"
+msgstr ""
+
+#: hangingtable.py:103
+msgid "operation mode wrong or set incorrectly"
+msgstr ""
+
+#: hangingtable.py:104
+msgid "setpoint temperature"
+msgstr ""
+
+#: hangingtable.py:105
+msgid "switch-on value temperature"
+msgstr ""
+
+#: hangingtable.py:106
+msgid "switch-off value temperature"
+msgstr ""
+
+#: hangingtable.py:107
+msgid "setpoint humidity"
+msgstr ""
+
+#: hangingtable.py:108
+msgid "switch-on value humidity"
+msgstr ""
+
+#: hangingtable.py:109
+msgid "switch-off value humidity"
+msgstr ""
+
+#: hangingtable.py:110
+msgid "humidification delay"
+msgstr ""
+
+#: hangingtable.py:110 hangingtable.py:112 hangingtable.py:114
+#: hangingtable.py:116 hangingtable.py:118
+msgid "minutes"
+msgstr ""
+
+#: hangingtable.py:112
+msgid "timer circulation air period every"
+msgstr ""
+
+#: hangingtable.py:114
+msgid "timer circulation air"
+msgstr ""
+
+#: hangingtable.py:116
+msgid "timer exhaust air period every"
+msgstr ""
+
+#: hangingtable.py:118
+msgid "timer exhausting air"
+msgstr ""
+
+#: hangingtable.py:119
+msgid "duration"
+msgstr ""
+
+#: hangingtable.py:119
+msgid "days"
+msgstr ""
+
+#: hangingtable.py:120
+msgid "sensortype"
+msgstr ""
+
+#: hangingtable.py:120
+msgid "value"
+msgstr ""
+
+#: hangingtable.py:181
+msgid "mollusk"
+msgstr "dies ist ein mollusk"
+
+#: hangingtable.py:182
+msgid "albatross"
+msgstr "dies ist ein albatross"
+
+#: hangingtable.py:195
+#, python-format
+msgid "the climate values are now controlled by the automatic program % s"
+msgstr ""
+
+#: hangingtable.py:226 hangingtable.py:236 hangingtable.py:243
+msgid " oclock: "
+msgstr ""
+
+#: hangingtable.py:226
+#, python-format
+msgid "start values period 1 of %s"
+msgstr ""
+
+#: hangingtable.py:230 hangingtable.py:246
+#, python-format
+msgid "next change of values: %s"
+msgstr ""
+
+#: hangingtable.py:232 hangingtable.py:248
+#, python-format
+msgid "end of program: %s"
+msgstr ""
+
+#: hangingtable.py:236 hangingtable.py:243
+#, python-format
+msgid "new values for period %s of %s"
+msgstr ""
+
+#: hangingtable.py:239
+#, python-format
+msgid "Program \"%s\" ends the control."
+msgstr ""
+
+#: hangingtable.py:239
+msgid "pi-ager continues to work with the last values."
+msgstr ""
