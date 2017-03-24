@@ -195,9 +195,7 @@ def doMainLoop():
         # print 'DEBUG: ' + str(sensorname)
         if sensorname == 'DHT11': #DHT11
             # print 'DEBUG Sesnorname:' + sensorname
-            #sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, gpio_sensor_data)
-            sensor_humidity_big = 50
-            sensor_temperature_big = 20
+            sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, gpio_sensor_data)
             # print "DEBUG: " + str(sensor_temperature_big)
             # print "DEBUG: " + str(sensor_humidity_big)
             atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22

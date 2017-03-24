@@ -3,6 +3,7 @@
 # sudo web script allowing user www-data to run commands with root privilegs
 # shell_exec('sudo /var/sudowebscript.sh PARAMETER')
 
+# GPIO's aus config.json auslesen
 gpio_cooling_compressor=$(cat /var/www/config.json | jq '.gpio_cooling_compressor')
 gpio_heater=$(cat /var/www/config.json | jq '.gpio_heater')
 gpio_humidifier=$(cat /var/www/config.json | jq '.gpio_humidifier')
@@ -11,15 +12,6 @@ gpio_exhausting_air=$(cat /var/www/config.json | jq '.gpio_exhausting_air')
 gpio_uv_light=$(cat /var/www/config.json | jq '.gpio_uv_light')
 gpio_light=$(cat /var/www/config.json | jq '.gpio_light')
 gpio_reserved1=$(cat /var/www/config.json | jq '.gpio_reserved1')
-
-#gpio_cooling_compressor=23
-#gpio_heater=22
-#gpio_humidifier=27
-#gpio_circulating_air=18
-#gpio_exhausting_air=17
-#gpio_uv_light=4
-#gpio_light=3
-#gpio_reserved1=2
 
 case "$1" in
     startmain) #Starten von main.py

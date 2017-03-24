@@ -185,8 +185,8 @@ for a in f:
     print _(a) + str(' for a in f')
 
 #---------------------------------------------------------------------------------- Variablen
-#day_in_seconds = 86400  #Anzahl der Sek. in einem Tag
-day_in_seconds = 1  #zum testen ein Tag vergeht in einer Sekunde
+day_in_seconds = 86400  #Anzahl der Sek. in einem Tag
+#day_in_seconds = 1  #zum testen ein Tag vergeht in einer Sekunde
 logspacer = "\n"+ "***********************************************"
 
 ######################################################### Hauptprogramm
