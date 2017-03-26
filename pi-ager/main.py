@@ -37,22 +37,42 @@ def setupGPIO():
     global gpio_circulating_air
     global gpio_humidifier
     global gpio_exhausting_air
+    global gpio_light
+    global gpio_uv_light
+    global gpio_scale_wire1
+    global gpio_scale_wire2
+    global gpio_sensor_data
+    global gpio_sensor_sync
+    global gpio_reserved1
+    
     logstring = _('setting up GPIO') + '...'
     write_verbose(logstring, False, False)
     gpio.setwarnings(False)
 #---------------------------------------------------------------------------------------------------------------- Board mode wird gesetzt
     gpio.setmode(board_mode)
 #---------------------------------------------------------------------------------------------------------------- Einstellen der GPIO PINS
-    gpio.setup(gpio_heater, gpio.OUT)
-    gpio.setup(gpio_cooling_compressor, gpio.OUT)
-    gpio.setup(gpio_circulating_air, gpio.OUT)
-    gpio.setup(gpio_humidifier, gpio.OUT)
-    gpio.setup(gpio_exhausting_air, gpio.OUT)
-    gpio.output(gpio_heater, relay_off)
-    gpio.output(gpio_cooling_compressor, relay_off)
-    gpio.output(gpio_circulating_air, relay_off)
-    gpio.output(gpio_humidifier, relay_off)
-    gpio.output(gpio_exhausting_air, relay_off)
+#------------------------------------------------------------------------------------------------------------------------------------------ Sensoren etc
+    gpio.setup(gpio_sensor_data, gpio.IN)           # Feuchtesensor Data setzen als Eingang
+    gpio.setup(gpio_sensor_sync, gpio.IN)           # Feuchtesensor Snc setzen als Eingang
+    gpio.setup(gpio_scale_wire1, gpio.IN)           # Kabel Data ()
+    gpio.setup(gpio_scale_wire2, gpio.IN)           # Kabel Sync ()
+#------------------------------------------------------------------------------------------------------------------------------------------ Relayboard
+    gpio.setup(gpio_heater, gpio.OUT)                # Heizung setzen (config.json)
+    gpio.output(gpio_heater, relay_off)              # Heizung Relais standartmäßig aus
+    gpio.setup(gpio_cooling_compressor, gpio.OUT)    # Kühlung setzen (config.json)
+    gpio.output(gpio_cooling_compressor, relay_off)  # Kühlung Relais standartmäßig aus
+    gpio.setup(gpio_circulating_air, gpio.OUT)       # Umluft setzen (config.json)
+    gpio.output(gpio_circulating_air, relay_off)     # Umluft Relais standartmäßig aus
+    gpio.setup(gpio_humidifier, gpio.OUT)            # Befeuchter setzen (config.json)
+    gpio.output(gpio_humidifier, relay_off)          # Befeuchter Relais standartmäßig aus
+    gpio.setup(gpio_exhausting_air, gpio.OUT)        # Abluft setzen (config.json)
+    gpio.output(gpio_exhausting_air, relay_off)      # Abluft Relais standartmäßig aus
+    gpio.setup(gpio_light, gpio.OUT)                  # Licht setzen (json.conf)
+    gpio.output(gpio_light, relay_off)               # Licht Relais standartmäßig aus
+    gpio.setup(gpio_uv_light, gpio.OUT)               # UV-Licht setzen (json.conf)
+    gpio.output(gpio_uv_light, relay_off)            # UV-Licht Relais standartmäßig aus
+    gpio.setup(gpio_reserved1, gpio.OUT)              # Reserve setzen (json.conf)
+    gpio.output(gpio_reserved1, relay_off)           # Reserve Relais standartmäßig aus
     logstring = _('GPIO setup complete') + '.'
     write_verbose(logstring, True, False)
 #---------------------------------------------------------------------------------- Function write verbose
@@ -489,7 +509,7 @@ measurement_time_interval = 10       # Zeitintervall fuer die Messung in Sekunde
 # i = 0
 loopcounter = 0                      #  Zählt die Durchläufe des Mainloops
 #-----------------------------------------------------------------------------------------Pinbelegung
-board_mode = gpio.BCM         # GPIO board mode (BCM = Broadcom SOC channel number - numbers after GPIO [GPIO.BOARD = Pin by number])
+board_mode = gpio.BCM         # GPIO board mode (BCM = Broadcom SOC channel number - numbers after GPIO Bsp. GPIO12=12 [GPIO.BOARD = Pin by number Bsp: GPIO12=32])
 data_configjsonfile = read_config_json()
 gpio_cooling_compressor = data_configjsonfile ['gpio_cooling_compressor']    # GPIO für Kühlschrankkompressor
 gpio_heater = data_configjsonfile ['gpio_heater']                            # GPIO für Heizkabel
