@@ -53,9 +53,9 @@ def setupGPIO():
 #---------------------------------------------------------------------------------------------------------------- Einstellen der GPIO PINS
 #------------------------------------------------------------------------------------------------------------------------------------------ Sensoren etc
     gpio.setup(gpio_sensor_data, gpio.IN)           # Feuchtesensor Data setzen als Eingang
-    gpio.setup(gpio_sensor_sync, gpio.IN)           # Feuchtesensor Snc setzen als Eingang
+    gpio.setup(gpio_sensor_sync, gpio.OUT)           # Feuchtesensor Sync setzen als Ausgang
     gpio.setup(gpio_scale_wire1, gpio.IN)           # Kabel Data ()
-    gpio.setup(gpio_scale_wire2, gpio.IN)           # Kabel Sync ()
+    gpio.setup(gpio_scale_wire2, gpio.OUT)           # Kabel Sync ()
 #------------------------------------------------------------------------------------------------------------------------------------------ Relayboard
     gpio.setup(gpio_heater, gpio.OUT)                # Heizung setzen (config.json)
     gpio.output(gpio_heater, relay_off)              # Heizung Relais standartmäßig aus
