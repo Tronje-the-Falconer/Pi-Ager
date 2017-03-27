@@ -130,6 +130,7 @@ def read_dictionary(dictionary):
     
     
 ######################################################### Definition von Variablen
+debugging = ''      # Debugmodus 'on'
 #---------------------------------------------------------------------------------- Pfade zu den Dateien
 website_path = '/var/www'
 csv_path = website_path + '/csv/'
@@ -148,9 +149,6 @@ switch_off_cooling_compressor = data_configjsonfile ['switch_off_cooling_compres
 switch_on_humidifier = data_configjsonfile ['switch_on_humidifier']                    # Einschaltfeuchte
 switch_off_humidifier = data_configjsonfile ['switch_off_humidifier']                  # Ausschaltfeuchte
 delay_humidify = data_configjsonfile ['delay_humidify']                                # Luftbefeuchtungsverzögerung
-
-debugging = ''      # Debugmodus 'on'
-
 #---------------------------------------------------------------------------------- Tabelle aus tables.json
 data_tablesjsonfile = read_tables_json()                   # Function-Aufruf
 hangingtable = data_tablesjsonfile['hangingtable']    # Variable reifetablename = Name der Reifetabelle
