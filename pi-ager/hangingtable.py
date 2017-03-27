@@ -49,12 +49,12 @@ def write_current_json(sensor_temperature, sensor_humidity):
     current_data = json.dumps({"sensor_temperature":sensor_temperature, "status_heater":gpio.input(gpio_heater), "status_exhaust_air":gpio.input(gpio_exhaust_fan), "status_cooling_compressor":gpio.input(gpio_cooling_compressor), "status_circulating_air":gpio.input(gpio_circulation_fan),"sensor_humidity":sensor_humidity, 'last_change':int(time.time())})
     with open(current_json_file, 'w') as currentjsonfile:
         currentjsonfile.write(current_data)
-#---------------------------------------------------------------------------------- Funktion zur Übersetzung von z.B. Listenobjekten z.B. animals = [N_('mollusk'), N_('albatross'), N_('rat')]
+#---------------------------------------------------------------------------------- Funktion zur uebersetzung von z.B. Listenobjekten z.B. animals = [N_('mollusk'), N_('albatross'), N_('rat')]
 def N_(message):
     return message
 #---------------------------------------------------------------------------------- Funktion zur schreiben in das Logfile
 def write_verbose(logstring):
-    logfile_txt = open(logfile_txt_file, 'a')           # Variable target = logfile.txt öffnen
+    logfile_txt = open(logfile_txt_file, 'a')           # Variable target = logfile.txt oeffnen
     logfile_txt.write(logstring)
     logfile_txt.close
     print (logstring)
@@ -67,7 +67,7 @@ def write_verbose(logstring, newLine=False, print_in_logfile=False):
         if(newLine is True):
             print('')
     if (print_in_logfile is True):
-        logfile_txt = open(logfile_txt_file, 'a')           # Variable target = logfile.txt öffnen
+        logfile_txt = open(logfile_txt_file, 'a')           # Variable target = logfile.txt oeffnen
         logfile_txt.write(logstring)
         logfile_txt.close
 #---------------------------------------------------------------------------------- Funktion zum Lesen des Dictionarys und setzen der Werte
@@ -79,15 +79,15 @@ def read_dictionary(dictionary):
         if value == '':                      # wenn ein Wert leer ist muss er aus der letzten settings.json ausgelesen  werden
             data_settingsjsonfile = read_settings_json()
             value = data_settingsjsonfile['' + key + '']
-            exec('%s = %d') % (key,value)    # füllt die jeweilige Variable mit altem Wert (value = columname)
+            exec('%s = %d') % (key,value)    # fuellt die jeweilige Variable mit altem Wert (value = columname)
         else:
             value = int(value)
             exec('%s = %d') % (key,value)
         
     duration = int (days)
     global duration_sleep
-    duration_sleep = int(duration) * day_in_seconds    # Anzahl der Tage von "column" mit 86400 (Sekunden) multipliziert für wartezeit bis zur nächsten Periode
-#---------------------------------------------------------------------------------- Aufbereitung für die Lesbarkeit im Logfile und Füllen der Variablen
+    duration_sleep = int(duration) * day_in_seconds    # Anzahl der Tage von "column" mit 86400 (Sekunden) multipliziert fuer wartezeit bis zur naechsten Periode
+#---------------------------------------------------------------------------------- Aufbereitung fuer die Lesbarkeit im Logfile und Fuellen der Variablen
     modus = int(modus + 0.5)                # Rundet auf Ganzzahl, Integer da der Modus immer Integer sein sollte 
     if modus == 0:
         operating_mode = "\n" + _('operation mode') + ': ' + _('cooling')
@@ -101,9 +101,9 @@ def read_dictionary(dictionary):
         operating_mode = "\n" + _('operation mode') + ': ' + _('automatic with dehumidify and humidify')
     else:
         operating_mode = "\n" + _('operation mode wrong or set incorrectly')
-    setpoint_temperature_logstring = "\n" + _('setpoint temperature') + ": \t \t" + str(setpoint_temperature) + "°C"
-    switch_on_cooling_compressor_logstring = "\n" + _('switch-on value temperature') + ": \t" + str(switch_on_cooling_compressor) + "°C"
-    switch_off_cooling_compressor_logstring = "\n" + _('switch-off value temperature') + ": \t" + str(switch_off_cooling_compressor) + "°C"
+    setpoint_temperature_logstring = "\n" + _('setpoint temperature') + ": \t \t" + str(setpoint_temperature) + " C"
+    switch_on_cooling_compressor_logstring = "\n" + _('switch-on value temperature') + ": \t" + str(switch_on_cooling_compressor) + " C"
+    switch_off_cooling_compressor_logstring = "\n" + _('switch-off value temperature') + ": \t" + str(switch_off_cooling_compressor) + " C"
     sollfeuchtigkeit_logstring = "\n" + _('setpoint humidity') + ": \t \t" + str(setpoint_humidity) + "%"
     switch_on_humidifier_logstring = "\n" + _('switch-on value humidity') + ": \t \t" + str(switch_on_humidifier) + "%"
     switch_off_humidifier_logstring = "\n" + _('switch-off value humidity') + ": \t \t" + str(switch_off_humidifier) + "%"
@@ -139,8 +139,8 @@ tables_json_file = website_path + '/tables.json'
 config_json_file = website_path + '/config.json'
 current_json_file = website_path + '/current.json'
 logfile_txt_file = website_path + '/logfile.txt'
-verbose = True                # Dokumentiert interne Vorgänge wortreich
-#---------------------------------------------------------------------------------- Allgemeingültige Werte aus config.json
+verbose = True                # Dokumentiert interne Vorgaenge wortreich
+#---------------------------------------------------------------------------------- Allgemeingueltige Werte aus config.json
 data_configjsonfile = read_config_json()
 sensortype = data_configjsonfile ['sensortype']                                        # Sensortyp
 language = data_configjsonfile ['language']                                            # Sprache der Textausgabe
@@ -148,7 +148,7 @@ switch_on_cooling_compressor = data_configjsonfile ['switch_on_cooling_compresso
 switch_off_cooling_compressor = data_configjsonfile ['switch_off_cooling_compressor']  # Ausschalttemperatur
 switch_on_humidifier = data_configjsonfile ['switch_on_humidifier']                    # Einschaltfeuchte
 switch_off_humidifier = data_configjsonfile ['switch_off_humidifier']                  # Ausschaltfeuchte
-delay_humidify = data_configjsonfile ['delay_humidify']                                # Luftbefeuchtungsverzögerung
+delay_humidify = data_configjsonfile ['delay_humidify']                                # Luftbefeuchtungsverzoegerung
 #---------------------------------------------------------------------------------- Tabelle aus tables.json
 data_tablesjsonfile = read_tables_json()                   # Function-Aufruf
 hangingtable = data_tablesjsonfile['hangingtable']    # Variable reifetablename = Name der Reifetabelle
@@ -199,12 +199,12 @@ total_duration = 0                          # Setzt Variable duration auf 0
 
 for row in csv_file_reader:
     if debugging == 'on':
-        (print 'DEBUG' + str(row))
+        print ('DEBUG' + str(row))
     total_duration += int(row["days"])                           # errechnet die Gesamtdauer
     build_dictionary = "dictionary%d = %s"%  (row_number,row)   # baut pro Zeile ein Dictionary
     exec(build_dictionary)                                      # baut pro Zeile das jeweilige Dictionary
     
-    row_number += 1                                             # Zeilenanzahl wird hochgezählt (für Dictionary Nummer und total_periods)
+    row_number += 1                                             # Zeilenanzahl wird hochgezaehlt (fuer Dictionary Nummer und total_periods)
     if debugging == 'on':
         print ('DEBUG ' + str(total_duration))
 
@@ -213,8 +213,8 @@ if debugging == 'on':
     print ('DEBUG ' + str(total_periods))
 csv_file.close()
 #---------------------------------------------------------------------------------- Lesen der Werte aus der CSV-Datei & Schreiben der Werte in die Konsole und das Logfile
-period = 0              # setzt periodenzähler zurück
-actual_dictionary = ""  # setzt aktuelles Dictionary zurück
+period = 0              # setzt periodenzaehler zurueck
+actual_dictionary = ""  # setzt aktuelles Dictionary zurueck
 
 while period <= total_periods:
     if debugging == 'on':
@@ -251,5 +251,5 @@ while period <= total_periods:
     period += 1
     write_verbose(logspacer, False, True)
     if period <= total_periods:
-        time.sleep(duration_sleep)       # Wartezeit bis zur nächsten Periode
+        time.sleep(duration_sleep)       # Wartezeit bis zur naechsten Periode
 sys.exit(0)

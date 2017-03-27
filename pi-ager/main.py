@@ -24,7 +24,7 @@ def goodbye():
 def cleanup():
     logstring = _('running cleanup script') + '...'
     write_verbose(logstring, False, False)
-    gpio.cleanup() # GPIO zurücksetzen
+    gpio.cleanup() # GPIO zuruecksetzen
     logstring = _('cleanup complete') + '.'
     write_verbose(logstring, True, False)
 
@@ -57,21 +57,21 @@ def setupGPIO():
     gpio.setup(gpio_scale_wire2, gpio.OUT)           # Kabel Sync ()
 #------------------------------------------------------------------------------------------------------------------------------------------ Relayboard
     gpio.setup(gpio_heater, gpio.OUT)                # Heizung setzen (config.json)
-    gpio.output(gpio_heater, relay_off)              # Heizung Relais standartmäßig aus
-    gpio.setup(gpio_cooling_compressor, gpio.OUT)    # Kühlung setzen (config.json)
-    gpio.output(gpio_cooling_compressor, relay_off)  # Kühlung Relais standartmäßig aus
+    gpio.output(gpio_heater, relay_off)              # Heizung Relais standartmaessig aus
+    gpio.setup(gpio_cooling_compressor, gpio.OUT)    # Kuehlung setzen (config.json)
+    gpio.output(gpio_cooling_compressor, relay_off)  # Kuehlung Relais standartmaessig aus
     gpio.setup(gpio_circulating_air, gpio.OUT)       # Umluft setzen (config.json)
-    gpio.output(gpio_circulating_air, relay_off)     # Umluft Relais standartmäßig aus
+    gpio.output(gpio_circulating_air, relay_off)     # Umluft Relais standartmaessig aus
     gpio.setup(gpio_humidifier, gpio.OUT)            # Befeuchter setzen (config.json)
-    gpio.output(gpio_humidifier, relay_off)          # Befeuchter Relais standartmäßig aus
+    gpio.output(gpio_humidifier, relay_off)          # Befeuchter Relais standartmaessig aus
     gpio.setup(gpio_exhausting_air, gpio.OUT)        # Abluft setzen (config.json)
-    gpio.output(gpio_exhausting_air, relay_off)      # Abluft Relais standartmäßig aus
+    gpio.output(gpio_exhausting_air, relay_off)      # Abluft Relais standartmaessig aus
     gpio.setup(gpio_light, gpio.OUT)                  # Licht setzen (json.conf)
-    gpio.output(gpio_light, relay_off)               # Licht Relais standartmäßig aus
+    gpio.output(gpio_light, relay_off)               # Licht Relais standartmaessig aus
     gpio.setup(gpio_uv_light, gpio.OUT)               # UV-Licht setzen (json.conf)
-    gpio.output(gpio_uv_light, relay_off)            # UV-Licht Relais standartmäßig aus
+    gpio.output(gpio_uv_light, relay_off)            # UV-Licht Relais standartmaessig aus
     gpio.setup(gpio_reserved1, gpio.OUT)              # Reserve setzen (json.conf)
-    gpio.output(gpio_reserved1, relay_off)           # Reserve Relais standartmäßig aus
+    gpio.output(gpio_reserved1, relay_off)           # Reserve Relais standartmaessig aus
     logstring = _('GPIO setup complete') + '.'
     write_verbose(logstring, True, False)
 #---------------------------------------------------------------------------------- Function write verbose
@@ -83,7 +83,7 @@ def write_verbose(logstring, newLine=False, print_in_logfile=False):
         if(newLine is True):
             print('')
     if (print_in_logfile is True):
-        logfile_txt = open(logfile_txt_file, 'a')           # Variable target = logfile.txt öffnen
+        logfile_txt = open(logfile_txt_file, 'a')           # Variable target = logfile.txt oeffnen
         logfile_txt.write(logstring)
         logfile_txt.close
 #---------------------------------------------------------------------------------- Function Schreiben der current.json
@@ -111,13 +111,13 @@ def read_config_json():
     return data_configjsonfile
 #---------------------------------------------------------------------------------- Function zum Plotten der Grafiken
 def ploting(plotting_value):
-#---------------------------------------------------------------------------------------------------------------- Beschriftung für die Grafiken festlegen
+#---------------------------------------------------------------------------------------------------------------- Beschriftung fuer die Grafiken festlegen
     global rrd_dbname
     if debugging == 'on':
         print("DEBUG: in plotingfunction")
     if plotting_value == 'sensor_temperature':
         title = _('temperature')
-        label = 'in °C'
+        label = 'in  C'
     elif plotting_value == 'sensor_humidity':
         title = _('humidity')
         label = 'in %'
@@ -189,10 +189,10 @@ def doMainLoop():
     #global value
     global circulation_air_duration       #  Umluftdauer
     global circulation_air_period         #  Umluftperiode
-    global circulation_air_start          #  Unix-Zeitstempel für den Zählstart des Timers Umluft
+    global circulation_air_start          #  Unix-Zeitstempel fuer den Zaehlstart des Timers Umluft
     global exhaust_air_duration           #  (Abluft-)luftaustauschdauer
     global exhaust_air_period             #  (Abluft-)luftaustauschperiode
-    global exhaust_air_start              #  Unix-Zeitstempel für den Zählstart des Timers (Abluft-)Luftaustausch
+    global exhaust_air_start              #  Unix-Zeitstempel fuer den Zaehlstart des Timers (Abluft-)Luftaustausch
     global sensor_temperature             #  Gemessene Temperatur am Sensor
     global sensor_humidity                #  Gemessene Feuchtigkeit am Sensor
     global switch_on_cooling_compressor   #  Einschalttemperatur
@@ -204,13 +204,13 @@ def doMainLoop():
     global status_circulating_air         #  Umluft
     global status_exhaust_air             #  (Abluft-)Luftaustausch
     global status_heater                  #  Heizung
-    global status_cooling_compressor      #  Kühlung
-    global loopcounter                    #  Zählt die Durchläufe des Mainloops
+    global status_cooling_compressor      #  Kuehlung
+    global loopcounter                    #  Zaehlt die Durchlaeufe des Mainloops
     global status_humidifier              #  Luftbefeuchtung
-    global counter_humidify               #  Zähler Verzögerung der Luftbefeuchtung
-    global delay_humidify                 #  Luftbefeuchtungsverzögerung
-    global status_exhaust_fan             #  Variable für die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
-#---------------------------------------------------------------------------------------------------------------- Prüfen Sensor, dann Settings einlesen
+    global counter_humidify               #  Zaehler Verzoegerung der Luftbefeuchtung
+    global delay_humidify                 #  Luftbefeuchtungsverzoegerung
+    global status_exhaust_fan             #  Variable fuer die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
+#---------------------------------------------------------------------------------------------------------------- Pruefen Sensor, dann Settings einlesen
     while True:
         if debugging == 'on':
             print ("DEBUG: in While True")
@@ -280,9 +280,9 @@ def doMainLoop():
         logstring = _('Main loop/Unix-Timestamp: (') + str(current_time)+ ')'
         write_verbose(logstring, False, False)
         write_verbose(logspacer2, False, False)
-        logstring = _('target temperature') + ': ' + str(setpoint_temperature) + '°C'
+        logstring = _('target temperature') + ': ' + str(setpoint_temperature) + ' C'
         write_verbose(logstring, False, False)
-        logstring = _('actual temperature') + ': ' + str(sensor_temperature) + '°C'
+        logstring = _('actual temperature') + ': ' + str(sensor_temperature) + ' C'
         write_verbose(logstring, False, False)
         write_verbose(logspacer2, False, False)
         logstring = _('target humidity') + ': ' + str(setpoint_humidity) + '%'
@@ -297,8 +297,8 @@ def doMainLoop():
         write_verbose(logspacer2, False, False)
         
         write_current_json(sensor_temperature, sensor_humidity)
-        # Durch den folgenden Timer läuft der Ventilator in den vorgegebenen Intervallen zusätzlich zur generellen Umluft bei aktivem Heizen, Kühlen oder Befeuchten
-#---------------------------------------------------------------------------------------------------------------- Timer für Luftumwälzung-Ventilator
+        # Durch den folgenden Timer laeuft der Ventilator in den vorgegebenen Intervallen zusaetzlich zur generellen Umluft bei aktivem Heizen, Kuehlen oder Befeuchten
+#---------------------------------------------------------------------------------------------------------------- Timer fuer Luftumwaelzung-Ventilator
         if circulation_air_period == 0:                          # gleich 0 ist an,  Dauer-Timer
             status_circulation_air = False
         if circulation_air_duration == 0:                        # gleich 0 ist aus, kein Timer
@@ -314,7 +314,7 @@ def doMainLoop():
                 write_verbose(logstring, False, False)
             if current_time >= circulation_air_start + circulation_air_period + circulation_air_duration:
                 circulation_air_start = int(time.time())    # Timer-Timestamp aktualisiert
-#---------------------------------------------------------------------------------------------------------------- Timer für (Abluft-)Luftaustausch-Ventilator
+#---------------------------------------------------------------------------------------------------------------- Timer fuer (Abluft-)Luftaustausch-Ventilator
         if exhaust_air_period == 0:                      # gleich 0 ist an,  Dauer-Timer
             status_exhaust_air = False
         if exhaust_air_duration == 0:                        # gleich 0 ist aus, kein Timer
@@ -330,23 +330,23 @@ def doMainLoop():
                 write_verbose(logstring, False, False)
             if current_time >= exhaust_air_start + exhaust_air_period + exhaust_air_duration:
                 exhaust_air_start = int(time.time())   # Timer-Timestamp aktualisiert
-#---------------------------------------------------------------------------------------------------------------- Kühlen
+#---------------------------------------------------------------------------------------------------------------- Kuehlen
         if modus == 0:
             status_exhaust_fan = False                              # Feuchtereduzierung Abluft aus
             gpio.output(gpio_heater, relay_off)                     # Heizung aus
             gpio.output(gpio_humidifier, relay_off)                 # Befeuchtung aus
             if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
-                gpio.output(gpio_cooling_compressor, relay_on)      # Kühlung ein
+                gpio.output(gpio_cooling_compressor, relay_on)      # Kuehlung ein
             if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor :
-                gpio.output(gpio_cooling_compressor, relay_off)     # Kühlung aus
-#---------------------------------------------------------------------------------------------------------------- Kühlen mit Befeuchtung
+                gpio.output(gpio_cooling_compressor, relay_off)     # Kuehlung aus
+#---------------------------------------------------------------------------------------------------------------- Kuehlen mit Befeuchtung
         if modus == 1:
             status_exhaust_fan = False                     # Feuchtereduzierung Abluft aus
             gpio.output(gpio_heater, relay_off)      # Heizung aus
             if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
-                gpio.output(gpio_cooling_compressor, relay_on)     # Kühlung ein
+                gpio.output(gpio_cooling_compressor, relay_on)     # Kuehlung ein
             if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor :
-                gpio.output(gpio_cooling_compressor, relay_off)    # Kühlung aus
+                gpio.output(gpio_cooling_compressor, relay_off)    # Kuehlung aus
             if sensor_humidity <= setpoint_humidity - switch_on_humidifier:
                 gpio.output(gpio_humidifier, relay_on)      # Befeuchtung ein
             if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
@@ -354,7 +354,7 @@ def doMainLoop():
 #---------------------------------------------------------------------------------------------------------------- Heizen mit Befeuchtung
         if modus == 2:
             status_exhaust_fan = False                     # Feuchtereduzierung Abluft aus
-            gpio.output(gpio_cooling_compressor, relay_off)        # Kühlung aus
+            gpio.output(gpio_cooling_compressor, relay_off)        # Kuehlung aus
             if sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor:
                 gpio.output(gpio_heater, relay_on)   # Heizung ein
             if sensor_temperature >= setpoint_temperature - switch_off_cooling_compressor:
@@ -367,9 +367,9 @@ def doMainLoop():
         if modus == 3:
             status_exhaust_fan = False                     # Feuchtereduzierung Abluft aus
             if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
-                gpio.output(gpio_cooling_compressor, relay_on)     # Kühlung ein
+                gpio.output(gpio_cooling_compressor, relay_on)     # Kuehlung ein
             if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor:
-                gpio.output(gpio_cooling_compressor, relay_off)    # Kühlung aus
+                gpio.output(gpio_cooling_compressor, relay_off)    # Kuehlung aus
             if sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor:
                 gpio.output(gpio_heater, relay_on)   # Heizung ein
             if sensor_temperature >= setpoint_temperature - switch_off_cooling_compressor:
@@ -381,16 +381,16 @@ def doMainLoop():
 #---------------------------------------------------------------------------------------------------------------- Automatik mit Befeuchtung und Entfeuchtung durch (Abluft-)Luftaustausch
         if modus == 4:
             if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
-                gpio.output(gpio_cooling_compressor, relay_on)     # Kühlung ein
+                gpio.output(gpio_cooling_compressor, relay_on)     # Kuehlung ein
             if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor:
-                gpio.output(gpio_cooling_compressor, relay_off)    # Kühlung aus
+                gpio.output(gpio_cooling_compressor, relay_off)    # Kuehlung aus
             if sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor:
                 gpio.output(gpio_heater, relay_on)   # Heizung ein
             if sensor_temperature >= setpoint_temperature - switch_off_cooling_compressor:
                 gpio.output(gpio_heater, relay_off)  # Heizung aus
             if sensor_humidity <= setpoint_humidity - switch_on_humidifier:
                 counter_humidify = counter_humidify + 1
-                if counter_humidify >= delay_humidify:               # Verzögerung der Luftbefeuchtung
+                if counter_humidify >= delay_humidify:               # Verzoegerung der Luftbefeuchtung
                     gpio.output(gpio_humidifier, relay_on)  # Luftbefeuchter ein
             if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
                 gpio.output(gpio_humidifier, relay_off)     # Luftbefeuchter aus
@@ -455,7 +455,7 @@ def doMainLoop():
 #---------------------------------------------------------------------------------------------------------------- Messwerte in die RRD-Datei schreiben
         from rrdtool import update as rrd_update
         ret = rrd_update('%s' %(rrd_filename), 'N:%s:%s:%s:%s:%s:%s:%s' %(sensor_temperature, sensor_humidity, status_exhaust_air, status_circulating_air, status_heater, status_cooling_compressor, status_humidifier))
-        #array für graph     
+        #array fuer graph     
         # Grafiken erzeugen
         if loopcounter % 3 == 0:
             logstring = _("creating graphs")
@@ -505,10 +505,10 @@ logfile_txt_file = website_path + '/logfile.txt'
 logspacer = "\n" + "***********************************************"
 logspacer2 = "\n" + '-------------------------------------------------------'
 delay = 4                      # Wartezeit in der Schleife
-counter_humidify = 0           # Zähler für die Verzögerung der Befeuchtung
-status_exhaust_fan = False     # Variable für die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
-verbose = True                # Dokumentiert interne Vorgänge wortreich
-#---------------------------------------------------------------------------------- Allgemeingültige Werte aus config.json
+counter_humidify = 0           # Zaehler fuer die Verzoegerung der Befeuchtung
+status_exhaust_fan = False     # Variable fuer die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
+verbose = True                # Dokumentiert interne Vorgaenge wortreich
+#---------------------------------------------------------------------------------- Allgemeingueltige Werte aus config.json
 data_configjsonfile = read_config_json()
 sensortype = data_configjsonfile ['sensortype']                                        # Sensortyp
 language = data_configjsonfile ['language']                                            # Sprache der Textausgabe
@@ -516,7 +516,7 @@ switch_on_cooling_compressor = data_configjsonfile ['switch_on_cooling_compresso
 switch_off_cooling_compressor = data_configjsonfile ['switch_off_cooling_compressor']  # Ausschalttemperatur
 switch_on_humidifier = data_configjsonfile ['switch_on_humidifier']                    # Einschaltfeuchte
 switch_off_humidifier = data_configjsonfile ['switch_off_humidifier']                  # Ausschaltfeuchte
-delay_humidify = data_configjsonfile ['delay_humidify']                                # Luftbefeuchtungsverzögerung
+delay_humidify = data_configjsonfile ['delay_humidify']                                # Luftbefeuchtungsverzoegerung
 #---------------------------------------------------------------------------------- Sainsmart Relais Vereinfachung 0 aktiv
 relay_on = False               # negative Logik!!! des Relay's, Schaltet bei 0 | GPIO.LOW  | False  ein
 relay_off = (not relay_on)     # negative Logik!!! des Relay's, Schaltet bei 1 | GPIO.High | True aus
@@ -525,31 +525,31 @@ rrd_dbname = 'pi-ager'                   # Name fuer Grafiken etc
 rrd_filename = rrd_dbname + '.rrd'   # Dateinamen mit Endung
 measurement_time_interval = 10       # Zeitintervall fuer die Messung in Sekunden
 # i = 0
-loopcounter = 0                      #  Zählt die Durchläufe des Mainloops
+loopcounter = 0                      #  Zaehlt die Durchlaeufe des Mainloops
 #-----------------------------------------------------------------------------------------Pinbelegung
 board_mode = gpio.BCM         # GPIO board mode (BCM = Broadcom SOC channel number - numbers after GPIO Bsp. GPIO12=12 [GPIO.BOARD = Pin by number Bsp: GPIO12=32])
 data_configjsonfile = read_config_json()
-gpio_cooling_compressor = data_configjsonfile ['gpio_cooling_compressor']    # GPIO für Kühlschrankkompressor
-gpio_heater = data_configjsonfile ['gpio_heater']                            # GPIO für Heizkabel
-gpio_humidifier = data_configjsonfile ['gpio_humidifier']                    # GPIO für Luftbefeuchter
-gpio_circulating_air = data_configjsonfile ['gpio_circulating_air']          # GPIO für Umluftventilator
-gpio_exhausting_air = data_configjsonfile ['gpio_exhausting_air']            # GPIO für Austauschlüfter
-gpio_uv_light = data_configjsonfile ['gpio_uv_light']                        # GPIO für UV Licht
-gpio_light = data_configjsonfile ['gpio_light']                              # GPIO für Licht
+gpio_cooling_compressor = data_configjsonfile ['gpio_cooling_compressor']    # GPIO fuer Kuehlschrankkompressor
+gpio_heater = data_configjsonfile ['gpio_heater']                            # GPIO fuer Heizkabel
+gpio_humidifier = data_configjsonfile ['gpio_humidifier']                    # GPIO fuer Luftbefeuchter
+gpio_circulating_air = data_configjsonfile ['gpio_circulating_air']          # GPIO fuer Umluftventilator
+gpio_exhausting_air = data_configjsonfile ['gpio_exhausting_air']            # GPIO fuer Austauschluefter
+gpio_uv_light = data_configjsonfile ['gpio_uv_light']                        # GPIO fuer UV Licht
+gpio_light = data_configjsonfile ['gpio_light']                              # GPIO fuer Licht
 gpio_reserved1 = data_configjsonfile ['gpio_reserved1']                      # 
-gpio_sensor_data = 10                  # GPIO für Data Temperatur/Humidity Sensor
-gpio_sensor_sync = 9                  # GPIO für Sync Temperatur/Humidity Sensor
-gpio_sensor_sht = Sht(gpio_sensor_sync, gpio_sensor_data)       # GPIO's für Temperatur/Humidity Sensor SHT Sht(Synchronisierung, DATA)
-gpio_scale_wire1 = 24                # GPIO für Waage1 Ader 1
-gpio_scale_wire2 = 25                # GPIO für Waage1 Ader 2
+gpio_sensor_data = 10                  # GPIO fuer Data Temperatur/Humidity Sensor
+gpio_sensor_sync = 9                  # GPIO fuer Sync Temperatur/Humidity Sensor
+gpio_sensor_sht = Sht(gpio_sensor_sync, gpio_sensor_data)       # GPIO's fuer Temperatur/Humidity Sensor SHT Sht(Synchronisierung, DATA)
+gpio_scale_wire1 = 24                # GPIO fuer Waage1 Ader 1
+gpio_scale_wire2 = 25                # GPIO fuer Waage1 Ader 2
 
 #---------------------------------------------------------------------------------------------------------------- Sprache
 ####   Set up message catalog access
 # translation = gettext.translation('pi_ager', '/var/www/locale', fallback=True)
 # _ = translation.ugettext
-if language == 'de':
+if language == 'de_DE':
     translation = gettext.translation('pi_ager', '/var/www/locale', languages=['en'], fallback=True)
-elif language == 'en':
+elif language == 'en_EN':
     translation = gettext.translation('pi_ager', '/var/www/locale', languages=['de'], fallback=True)
 # else:
     
@@ -558,7 +558,7 @@ translation.install()
 ######################################################### Hauptprogramm
 ########################################################################################################################
 
-os.system('clear') # Bildschirm löschen
+os.system('clear') # Bildschirm loeschen
 write_verbose(logspacer, False, False)
 setupGPIO() # GPIO initialisieren
 

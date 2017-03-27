@@ -5,7 +5,7 @@ from scale import Scale
 
 scale = Scale()
 
-scale.setReferenceUnit(21)
+scale.setReferenceUnit(162)
 
 scale.reset()
 scale.tare()

@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 
 
 class HX711:
-    def __init__(self, dout=5, pd_sck=6, gain=128, bitsToRead=24):
+    def __init__(self, dout=24, pd_sck=25, gain=128, bitsToRead=24):
         self.PD_SCK = pd_sck
         self.DOUT = dout
 

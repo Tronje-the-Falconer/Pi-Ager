@@ -83,6 +83,37 @@ Install Python 3
 http://wyre-it.co.uk/blog/latestpython/ oder:
 sudo apt-get install python3
 https://liudr.wordpress.com/2016/02/04/install-python-on-raspberry-pi-or-debian/
+
+pip für python3
+sudo apt-get install python3-pip
+ja
+
+rrd-tool
+sudo pip3 install rrdtool
+
+simple json python3
+sudo pip3 install simplejson
+
+sht python3
+sudo pip3 install sht-sensor
+
+git clone https://github.com/JoBergs/Adafruit_Python_DHT
+sudo apt-get install build-essential python3-dev
+cd Adafruit_Python_DHT
+sudo python3 setup.py install
+
+DHT Adafruit
+cd /home/pi
+sudo git clone https://github.com/adafruit/Adafruit_Python_DHT.git
+cd Adafruit_Python_DHT
+sudo python3 setup.py install
+
+wiringpi
+sudo apt-get install python3-rpi.gpio
+
+
+
+
 ---
 Waage mit Python3 testen
 https://github.com/dcrystalj/hx711py3
