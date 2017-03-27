@@ -492,7 +492,7 @@ def doMainLoop():
         loopcounter += 1
     
 ######################################################### Definition von Variablen
-debugging = '' # 'on' stellt das Debugging ein
+debugging = ''      # Debugmodus 'on'
 #---------------------------------------------------------------------------------- Pfade zu den Dateien
 website_path = '/var/www/'
 settings_json_file = website_path + 'settings.json'
