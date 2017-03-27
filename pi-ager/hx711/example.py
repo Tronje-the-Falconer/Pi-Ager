@@ -5,7 +5,7 @@ import RPi.GPIO as GPIO
 from hx711 import HX711
 
 # choose pins on rpi (BCM5 and BCM6)
-hx = HX711(dout=5, pd_sck=6)
+hx = HX711(dout=24, pd_sck=25)
 
 # HOW TO CALCULATE THE REFFERENCE UNIT
 #########################################
