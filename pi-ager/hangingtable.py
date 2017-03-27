@@ -58,7 +58,7 @@ def write_verbose(logstring):
     logfile_txt = open(logfile_txt_file, 'a')           # Variable target = logfile.txt öffnen
     logfile_txt.write(logstring)
     logfile_txt.close
-    print logstring
+    print (logstring)
 #---------------------------------------------------------------------------------- Function write verbose
 def write_verbose(logstring, newLine=False, print_in_logfile=False):
     global verbose
@@ -73,7 +73,7 @@ def write_verbose(logstring, newLine=False, print_in_logfile=False):
         logfile_txt.close
 #---------------------------------------------------------------------------------- Funktion zum Lesen des Dictionarys und setzen der Werte
 def read_dictionary(dictionary):
-    # print 'DEBUG read_dictionary()'
+    # print ('DEBUG read_dictionary()')
     # Variablen aus Dictionary setzen
     for key, value in dictionary.iteritems():
         if value == '':                      # wenn ein Wert leer ist muss er aus der letzten settings.json ausgelesen  werden
@@ -120,7 +120,7 @@ def read_dictionary(dictionary):
     sensor_logstring = _('sensortype') + ": \t \t \t" + sensorname + ' ' + _('value') + ': ' + str(sensortype)
     
     
-    # print 'DEBUG schreibe settings.json in if'
+    # print ('DEBUG schreibe settings.json in if')
     write_settings_json (modus, setpoint_temperature, setpoint_humidity, circulation_air_period, circulation_air_duration, exhaust_air_period, exhaust_air_duration)
     global period_endtime
     period_endtime = datetime.datetime.now() + timedelta(days = duration) # days = parameter von timedelta
@@ -194,26 +194,26 @@ row_number = 0                              # Setzt Variable row_number auf 0
 total_duration = 0                          # Setzt Variable duration auf 0
 
 for row in csv_file_reader:
-    # print 'DEBUG' + str(row)
+    # (print 'DEBUG' + str(row))
     total_duration += int(row["days"])                           # errechnet die Gesamtdauer
     build_dictionary = "dictionary%d = %s"%  (row_number,row)   # baut pro Zeile ein Dictionary
     exec(build_dictionary)                                      # baut pro Zeile das jeweilige Dictionary
     
     row_number += 1                                             # Zeilenanzahl wird hochgezählt (für Dictionary Nummer und total_periods)
-    # print 'DEBUG ' + str(total_duration)
+    # print ('DEBUG ' + str(total_duration))
 
 total_periods = row_number - 1                                    # Variable total_periods = Anzahl der Perioden (0 basiert!), der Reifephasen (entspricht der Anzahl an Reihen)
-# print 'DEBUG ' + str(total_periods)
+# print ('DEBUG ' + str(total_periods))
 csv_file.close()
 #---------------------------------------------------------------------------------- Lesen der Werte aus der CSV-Datei & Schreiben der Werte in die Konsole und das Logfile
 period = 0              # setzt periodenzähler zurück
 actual_dictionary = ""  # setzt aktuelles Dictionary zurück
 
 while period <= total_periods:
-    # print 'DEBUG period : ' + str(period)
-    # print 'DEBUG total_periods : ' + str(total_periods)
+    # print ('DEBUG period : ' + str(period))
+    # print ('DEBUG total_periods : ' + str(total_periods))
     exec('%s = %s') % ("actual_dictionary", "dictionary" + str(period))
-    # print 'DEBUG actual_dictionary : ' + str(actual_dictionary)
+    # print ('DEBUG actual_dictionary : ' + str(actual_dictionary))
     if period == 0:
         logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('start values period 1 of %s') % (str(total_periods + 1)) + '\n'  
         write_verbose(logstring, False, True)
