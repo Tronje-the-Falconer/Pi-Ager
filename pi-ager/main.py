@@ -580,7 +580,7 @@ try:
 except KeyboardInterrupt:
     pass
 
-except Exception, e:
+except Exception as e:
     logstring = _('exception occurred') + '!!!'
     write_verbose(logstring, True, False)
     write_verbose(str(e), True, False)
