@@ -75,3 +75,19 @@ wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-1.5.tar.gz
 tar xfvz jq-1.5.tar.gz
 cd jq-1.5
 ./configure && make && sudo make install
+
+
+TODO
+---
+Install Python 3
+http://wyre-it.co.uk/blog/latestpython/ oder:
+sudo apt-get install python3
+https://liudr.wordpress.com/2016/02/04/install-python-on-raspberry-pi-or-debian/
+---
+Waage mit Python3 testen
+https://github.com/dcrystalj/hx711py3
+--- 
+Portierung vom pi-ager nach Python3
+https://docs.python.org/3/howto/pyporting.html
+http://sebastianraschka.com/Articles/2014_python_2_3_key_diff.html#sections
+
