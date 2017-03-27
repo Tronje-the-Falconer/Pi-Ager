@@ -114,7 +114,7 @@ def read_config_json():
 def ploting(plotting_value):
 #---------------------------------------------------------------------------------------------------------------- Beschriftung für die Grafiken festlegen
     global rrd_dbname
-    # print "DEBUG: in plotingfunction"
+    # print ("DEBUG: in plotingfunction")
     if plotting_value == 'sensor_temperature':
         title = _('temperature')
         label = 'in °C'
@@ -138,7 +138,7 @@ def ploting(plotting_value):
         label = 'ein oder aus'
 #---------------------------------------------------------------------------------------------------------------- Aufteilung in drei Plots
     for plot in ['daily' , 'weekly', 'monthly', 'hourly']:
-        # print "DEBUG: in for schleife"
+        # print ("DEBUG: in for schleife")
         if plot == 'weekly':
             period = 'w'
         elif plot == 'daily':
@@ -211,34 +211,34 @@ def doMainLoop():
     global status_exhaust_fan             #  Variable für die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
 #---------------------------------------------------------------------------------------------------------------- Prüfen Sensor, dann Settings einlesen
     while True:
-        # print "DEBUG: in While True"
-        # print 'DEBUG: ' + str(sensorname)
+        # print ("DEBUG: in While True")
+        # print ('DEBUG: ' + str(sensorname))
         if sensorname == 'DHT11': #DHT11
-            # print 'DEBUG Sesnorname:' + sensorname
+            # print ('DEBUG Sesnorname:' + sensorname)
             sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, gpio_sensor_data)
-            # print "DEBUG: " + str(sensor_temperature_big)
-            # print "DEBUG: " + str(sensor_humidity_big)
+            # print ("DEBUG: " + str(sensor_temperature_big))
+            # print ("DEBUG: " + str(sensor_humidity_big))
             atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
             btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
         elif sensorname == 'DHT22': #DHT22
-            # print 'DEBUG Sesnorname:' + sensorname
+            # print ('DEBUG Sesnorname:' + sensorname)
             sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, gpio_sensor_data)
             atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
             btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
         elif sensorname == 'SHT': #SHT
-            # print 'DEBUG Sesnorname:' + sensorname
+            # print ('DEBUG Sesnorname:' + sensorname)
             sensor_temperature_big = gpio_sensor_sht.read_t()
             sensor_humidity_big = gpio_sensor_sht.read_rh()
         if sensor_humidity_big is not None and sensor_temperature_big is not None:
-            # print "DEBUG: in if"
+            # print ("DEBUG: in if")
             sensor_temperature = round (sensor_temperature_big,2)
             sensor_humidity = round (sensor_humidity_big,2)
         else:
-            # print "DEBUG: in else"
+            # print ("DEBUG: in else")
             logstring = _('Failed to get reading. Try again!')
             write_verbose (logstring, False, False)
         try:
-            # print "DEBUG: in try"
+            # print ("DEBUG: in try")
             data_settingsjsonfile = read_settings_json()
             data_configjsonfile = read_config_json()
         except:
@@ -451,21 +451,21 @@ def doMainLoop():
         if loopcounter % 3 == 0:
             logstring = _("creating graphs")
             write_verbose(logstring, False, False)
-            # print "DEBUG: ploting sensor_temperature"
+            # print ("DEBUG: ploting sensor_temperature")
             ploting('sensor_temperature')#', 'status_heater', 'status_cooling_compressor', 'status_circulating_air')
-            # print "DEBUG: ploting sensor_humidity"
+            # print ("DEBUG: ploting sensor_humidity")
             ploting('sensor_humidity')#, 'status_humidifier', 'status_circulating_air', 'status_exhaust_air')
-            # print "DEBUG: ploting status_circulating_air"
+            # print ("DEBUG: ploting status_circulating_air")
             ploting('stat_circulate_air')#, 'status_exhaust_air')
-            # print "DEBUG: ploting status_exhaust_air"
+            # print ("DEBUG: ploting status_exhaust_air")
             ploting('stat_exhaust_air')
-            # print "DEBUG: ploting status_heater"
+            # print ("DEBUG: ploting status_heater")
             ploting('stat_heater')
-            # print "DEBUG: ploting status_cooling_compressor"
+            # print ("DEBUG: ploting status_cooling_compressor")
             ploting('stat_coolcompressor')
-            # print "DEBUG: ploting status_humidifier"
+            # print ("DEBUG: ploting status_humidifier")
             ploting('status_humidifier')
-            # print 'DEBUG Loopnumber: ' + loopcounter
+            # print ('DEBUG Loopnumber: ' + loopcounter)
 
         time.sleep(1)  
         # Mainloop fertig
