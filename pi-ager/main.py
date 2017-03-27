@@ -1,5 +1,5 @@
-#!/usr/bin/python
-# -*- coding: iso-8859-1 -*-
+#!/usr/bin/python3
+# -*- coding: iso-10646 -*-
 
 ######################################################### Importieren der Module
 import os
