@@ -3,8 +3,10 @@ import sys
 from scale import Scale
 
 scale = Scale()
-
+scale.setReferenceUnit(1)
 scale.reset()
+scale.tare()
+
 first_measure = scale.getMeasure()
 print ('first mesaured value:')
 print (first_measure)
