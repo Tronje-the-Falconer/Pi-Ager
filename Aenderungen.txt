@@ -69,6 +69,9 @@ humhyston, humhystoff, temphyston, temphystoff, humdelay
 switch_on_humidifier, switch_off_humidifier, switch_on_cooling_compressor, switch_off_cooling_compressor, delay_humidify
 
 
+
+----------------------------------------------
+
 Installation:
 cd /tmp
 wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-1.5.tar.gz
@@ -149,3 +152,112 @@ Python 3.4.1
 3 // 2.0 = 1.0
 ----
 ---
+
+-------------------------------
+Diverse Notizen Ole
+YZC-133 10Kg Weighing Sensor Load Cell Weight Electronic Scale
+
+Note: The color of the item may vary slightly due to photography and your own computer
+Electronic Scale Weighing Sensor 
+Rated Load: 10Kg
+Rated Output: 1.0 ±0.15mV/V 
+Zero Output: ±0.1mV/V
+Cree: 0.03%F.S./30min
+Input End: Red+, Black-
+Output End: Green+, White-
+Input Impedance: 1115±10% Ω 
+Output Impedance: 1000±10% Ω
+Maximum working voltage: 15V DC
+Operating temperature range: -20~60°C
+Total Size: 80 x 13 x 13mm/3.14 x 0.51 x 0.51""(L X W X H)
+Material: Aluminum Alloy
+Weight: 30g
+
+Package included:
+1 x 10Kg Electronic Scale Weighing Sensor
+
+
+
+Nennausgangs: 1,0 +/- 10% mV / V
+Nicht-Linearitaet: 0,02% F. S.                  # 2gr
+Hysterese: 0,02% F. S.                          # 2gr
+Wiederholbarkeit: 0,02% F. S.                   # 2gr
+Zero-Balance: +/- 2% F. S.                      # 200gr
+Temp-Effekt auf Null: 0,025% F.S./10C           # 2,5gr bei 10° Änderung 0,025/10=0,0025 -> 0,25gr / 1°
+Temp-Effekt auf Null Ausgang: 0,025% F.S./10C   # 2,5gr bei 10° Änderung 0,025/10=0,0025 -> 0,25gr / 1°
+Schleich (30min): 0,03% F. S.                   # 3gr bei 30min 0,03/30=0,001 -> 0,1gr/min
+Eingangsimpedanz: 410 +/- 30 Ohm
+Ausgangsimpedanz: 350 Ohm +/- 3
+Isolierung: Groesser als 2000 Megohm / 50V DC
+Kompensierten Temperaturbereich: -10 Grad Celsius ~ 40 Grad Celsius
+Betriebstemperaturbereich: -20 Grad Celsius ~ 60 Grad Celsius
+ueberlastschutz : 150% F. S.                    # 15000gr 15KG
+Ultimative ueberlastung: 300% F. S.             # 30000gr 30KG
+Waegezelle Groesse: 80 x 12,7 x 12,7 mm / 3,1 "x 0,5" x 0,3 "(L * B * T)
+Gewindebohrung Durchmesser: 3 mm / 0,11 "
+Mitte Lochgroesse: 17 x 10 mm / 0,67 "x 0,4" (L * Max.W)
+Kabellaenge: 18 cm / 7 "
+
+
+
+Nichtlinearität der Kennlinie bei auf- und absteigender Belastung sowie die Hysterese des Nullpunktes gemacht oder kombiniert und als Summenfehler (zusammengesetzter Fehler) angegeben. 
+Abweichungen, die durch Temperaturschwankungen hervorgerufen werden, werden jedoch separat spezifiziert.
+
+
+F.S bedeutet: Full scale, d.h. Genauigkeitsangabe in Bezug auf die Nennwert. 
+Z.B wenn eine Wägezelle für ein Nennlast von 1000kg ausgelegt ist, und die Genauigkeit von 0.05% f.s hat, beträgt die maximale Abweichung dieser Zelle 5 kg.
+
+
+def
+    actual_data = {"actual_temperature": sensor_temperature, "actual_humidity": sensor_humidity, "actual_weight_load_cell_1":weight_load_cell_1, "actual_weight_load_cell_2":weight_load_cell_2}
+    return json.dumps(actual_data)
+    
+setInterval(
+  function()
+  {
+    $.getJSON('/show_actualdata',function(actual_data) {         ##show_actualdata ist die Function in python (Flask)                                         
+      $("#actual_weight_load_cell_1").text(actual_data.actual_weight_load_cell_1);
+        if( actual_data.actual_weight_load_cell_1 > 300 ) {
+           $("#alert").show();
+        }
+        else {
+           $("#alert").hide();
+        }
+     });     
+  },
+5000); (alle 5 sec.)
+
+
+
+-------------------------------
+WLANThermo Bibliotheken
+install build-essential sudo 
+vim                 # Editor
+htop                # Prozess-viewer
+iftop               # Überwachen des Netzwerkverkehrs
+iotop               # zeigt die aktuellen I/O Transferraten
+gnuplot-nox         # kommandozeilengesteuerter Funktionsplotter
+lighttpd            # light web server  event-driven architecture
+apache2-utils       # Hilfsprogramme für Webserver (u.a. htpasswd )
+php5-cgi            # CGI-Version
+php5-gd             # Modul für die Handhabung von Grafiken aus PHP-Skripten heraus
+php5-intl           # Internationalisierungsmodul für PHP5
+php5-curl           # CURL-Bibliothek können Dateien von FTP-, Gopher- und HTTP-Servern kopiert werden.
+fswebcam            # Webcam https://www.raspberrypi.org/documentation/usage/webcams/
+imagemagick         # Webcam  
+pigpio              # GPIO-Steuerung
+python              # py2 -> py3
+python-dev          # py2 -> py3
+python-serial       # py2 -> py3
+python-psutil       # py2
+python-pyinotify    # py2
+python-urllib3      # py2
+python3             # Interaktive objektorientierte Hochsprache (Python3-Standardversion)
+python3-dev         # Header-Dateien und eine statische Bibliothek für Python (Standard)
+python3-serial      # Modul zur Kapselung des Zugriffs auf die serielle Schnittstelle
+python3-psutil      ## selber gefunden / Modul mit komfortablen Funktionen für die Prozessverwaltung
+python3-pyinotify   ## selber gefunden / Einfache Python-Anbindung an Linux' inotify
+python3-urllib3     ## selber gefunden / Python-3-HTTP-Bibliothek mit thread-sicherer Wiederverwendung von Verbindungen
+ntpstat             # Zeitsyncronisierung
+python-pip          # py2
+python3-pip         # alternative Python package installer - Python 3 version of the package
