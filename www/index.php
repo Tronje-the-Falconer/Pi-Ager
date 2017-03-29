@@ -21,7 +21,7 @@
                                                                         <?php 
                                                                             // Die Aktualität der Werte pruefen, geichzeitige RSS-Funktionspruefung
                                                                             $timestamp_unix = time();
-                                                                            $time_difference = $timestamp_unix - $current_json_timestamp_last_change;
+                                                                            $time_difference = $timestamp_unix - $current_json_timestamp_last_change ;
                                                                             if ($time_difference >= 120) {
                                                                                 $temperature_linestring = '<div style="float: left; padding-left: 8px;" id=""></div>--<span>.<div style="float: right; padding-top: 50px;" id="">-</div></span><strong>&deg;</strong>';
                                                                                 $humidity_linestring = '<div style="float: left; padding-left: 8px;" id=""></div>--<span>.<div style="float: right; padding-top: 50px;" id="">-</div></span><strong>&#37</strong> ';
