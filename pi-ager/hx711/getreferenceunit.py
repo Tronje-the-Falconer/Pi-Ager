@@ -10,10 +10,12 @@ scale.tare()
 first_measure = scale.getMeasure()
 print ('first mesaured value:')
 print (first_measure)
-input('Bitte Gewicht anhängen')
+input('Bitte Gewicht anhaengen')
 second_measure = scale.getMeasure()
 print ('second mesaured value: ')
 print (second_measure)
 referenceUnit = second_measure - first_measure
+weight = int(input('angehaengtes Gewicht? '))
+referenceUnit = referenceUnit // weight
 print ('Reference Unit: ')
 print (referenceUnit)

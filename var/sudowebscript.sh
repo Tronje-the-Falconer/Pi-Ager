@@ -15,7 +15,7 @@ gpio_reserved1=$(cat /var/www/config.json | jq '.gpio_reserved1')
 
 case "$1" in
     startmain) #Starten von main.py
-        python /opt/pi-ager/main.py > /dev/null 2>/dev/null &
+        python3 /opt/pi-ager/main.py > /dev/null 2>/dev/null &
     ;;
     pkillmain) #Stoppen von Rss.py
         pkill -f main.py
@@ -24,7 +24,7 @@ case "$1" in
         ps ax | grep -v grep | grep main.py
     ;;
     starthangingtable) #Starten von hangingtable.py
-        python /opt/pi-ager/hangingtable.py > /dev/null 2>/dev/null &
+        python3 /opt/pi-ager/hangingtable.py > /dev/null 2>/dev/null &
     ;;
     pkillhangingtable) #Stoppen von hangingtable.py
         pkill -f hangingtable.py
