@@ -28,14 +28,6 @@
                     'delay_humidify' => (float)$_POST['delay_humidify_config'],
                     'sensortype' => (int)$_POST['sensortype_config'],
                     'language' => $_POST['language_config'],
-                    'gpio_cooling_compressor' => (int)$_POST['gpio_cooling_compressor_config'],
-                    'gpio_heater' => (int)$_POST['gpio_heater_config'],
-                    'gpio_humidifier' => (int)$_POST['gpio_humidifier_config'],
-                    'gpio_circulating_air' => (int)$_POST['gpio_circulating_air_config'],
-                    'gpio_exhausting_air' => (int)$_POST['gpio_exhausting_air_config'],
-                    'gpio_uv_light' => (int)$_POST['gpio_uv_light_config'],
-                    'gpio_light' => (int)$_POST['gpio_light_config'],
-                    'gpio_reserved1' => (int)$_POST['gpio_reserved1_config'],
                     'last_change' => $timestamp);
                 $configjsoninput = json_encode($array_config_json);
                 file_put_contents('config.json', $configjsoninput);
@@ -152,16 +144,6 @@
 
                 fwrite($f, "\n");
                 fwrite($f, "\n"._('language').": ".$array_config_json['language']);
-                fwrite($f, "\n");
-                fwrite($f, "\n GIO "._('settings');
-                fwrite($f, "\n GIO "._('cooling compressor').": ".$array_config_json['gpio_cooling_compressor']);
-                fwrite($f, "\n GIO "._('heater').": ".$array_config_json['gpio_heater']);
-                fwrite($f, "\n GIO "._('humidifier').": ".$array_config_json['gpio_humidifier']);
-                fwrite($f, "\n GIO "._('circulating air').": ".$array_config_json['gpio_circulating_air']);
-                fwrite($f, "\n GIO "._('exhausting air').": ".$array_config_json['gpio_exhausting_air']);
-                fwrite($f, "\n GIO "._('uv light').": ".$array_config_json['gpio_uv_light']);
-                fwrite($f, "\n GIO "._('light').": ".$array_config_json['gpio_light']);
-                fwrite($f, "\n GIO "._('reserved1').": ".$array_config_json['gpio_reserved1']);
 
                 fwrite($f, "\n"."***********************************************");
                 fclose($f);
