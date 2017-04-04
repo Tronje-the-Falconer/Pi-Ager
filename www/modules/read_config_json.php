@@ -42,12 +42,4 @@
 	$switch_off_cooling_compressor = $data_configjsonfile['switch_off_cooling_compressor'];
 	$switch_on_humidifier = $data_configjsonfile['switch_on_humidifier'];
 	$switch_off_humidifier = $data_configjsonfile['switch_off_humidifier'];
-	$gpio_cooling_compressor = $data_configjsonfile['gpio_cooling_compressor'];
-	$gpio_heater = $data_configjsonfile['gpio_heater'];
-	$gpio_humidifier = $data_configjsonfile['gpio_humidifier'];
-	$gpio_circulating_air = $data_configjsonfile['gpio_circulating_air'];
-	$gpio_exhausting_air = $data_configjsonfile['gpio_exhausting_air'];
-	$gpio_uv_light = $data_configjsonfile['gpio_uv_light'];
-	$gpio_light = $data_configjsonfile['gpio_light'];
-	$gpio_reserved1 = $data_configjsonfile['gpio_reserved1'];
 ?>
