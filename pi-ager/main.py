@@ -38,11 +38,11 @@ def setupGPIO():
     global gpio_exhausting_air
     global gpio_light
     global gpio_uv_light
-    global gpio_scale_wire1
-    global gpio_scale_wire2
+    global gpio_scale_data
+    global gpio_scale_sync
     global gpio_sensor_data
     global gpio_sensor_sync
-    global gpio_reserved1
+    global gpio_relais_in8
     
     logstring = _('setting up GPIO') + '...'
     write_verbose(logstring, False, False)
@@ -53,8 +53,8 @@ def setupGPIO():
 #------------------------------------------------------------------------------------------------------------------------------------------ Sensoren etc
     gpio.setup(gpio_sensor_data, gpio.IN)           # Feuchtesensor Data setzen als Eingang
     gpio.setup(gpio_sensor_sync, gpio.OUT)           # Feuchtesensor Sync setzen als Ausgang
-    gpio.setup(gpio_scale_wire1, gpio.IN)           # Kabel Data ()
-    gpio.setup(gpio_scale_wire2, gpio.OUT)           # Kabel Sync ()
+    gpio.setup(gpio_scale_data, gpio.IN)           # Kabel Data ()
+    gpio.setup(gpio_scale_sync, gpio.OUT)           # Kabel Sync ()
 #------------------------------------------------------------------------------------------------------------------------------------------ Relayboard
     gpio.setup(gpio_heater, gpio.OUT)                # Heizung setzen (config.json)
     gpio.output(gpio_heater, relay_off)              # Heizung Relais standartmaessig aus
@@ -70,8 +70,8 @@ def setupGPIO():
     gpio.output(gpio_light, relay_off)               # Licht Relais standartmaessig aus
     gpio.setup(gpio_uv_light, gpio.OUT)               # UV-Licht setzen (json.conf)
     gpio.output(gpio_uv_light, relay_off)            # UV-Licht Relais standartmaessig aus
-    gpio.setup(gpio_reserved1, gpio.OUT)              # Reserve setzen (json.conf)
-    gpio.output(gpio_reserved1, relay_off)           # Reserve Relais standartmaessig aus
+    gpio.setup(gpio_relais_in8, gpio.OUT)              # Reserve setzen (json.conf)
+    gpio.output(gpio_relais_in8, relay_off)           # Reserve Relais standartmaessig aus
     logstring = _('GPIO setup complete') + '.'
     write_verbose(logstring, True, False)
 #---------------------------------------------------------------------------------- Function write verbose
@@ -527,21 +527,22 @@ measurement_time_interval = 10       # Zeitintervall fuer die Messung in Sekunde
 # i = 0
 loopcounter = 0                      #  Zaehlt die Durchlaeufe des Mainloops
 #-----------------------------------------------------------------------------------------Pinbelegung
-board_mode = gpio.BCM         # GPIO board mode (BCM = Broadcom SOC channel number - numbers after GPIO Bsp. GPIO12=12 [GPIO.BOARD = Pin by number Bsp: GPIO12=32])
-data_configjsonfile = read_config_json()
-gpio_cooling_compressor = data_configjsonfile ['gpio_cooling_compressor']    # GPIO fuer Kuehlschrankkompressor
-gpio_heater = data_configjsonfile ['gpio_heater']                            # GPIO fuer Heizkabel
-gpio_humidifier = data_configjsonfile ['gpio_humidifier']                    # GPIO fuer Luftbefeuchter
-gpio_circulating_air = data_configjsonfile ['gpio_circulating_air']          # GPIO fuer Umluftventilator
-gpio_exhausting_air = data_configjsonfile ['gpio_exhausting_air']            # GPIO fuer Austauschluefter
-gpio_uv_light = data_configjsonfile ['gpio_uv_light']                        # GPIO fuer UV Licht
-gpio_light = data_configjsonfile ['gpio_light']                              # GPIO fuer Licht
-gpio_reserved1 = data_configjsonfile ['gpio_reserved1']                      # 
-gpio_sensor_data = 10                  # GPIO fuer Data Temperatur/Humidity Sensor
-gpio_sensor_sync = 9                  # GPIO fuer Sync Temperatur/Humidity Sensor
-gpio_sensor_sht = Sht(gpio_sensor_sync, gpio_sensor_data)       # GPIO's fuer Temperatur/Humidity Sensor SHT Sht(Synchronisierung, DATA)
-gpio_scale_wire1 = 24                # GPIO fuer Waage1 Ader 1
-gpio_scale_wire2 = 25                # GPIO fuer Waage1 Ader 2
+board_mode = gpio.BCM              # GPIO board mode (BCM = Broadcom SOC channel number - numbers after GPIO Bsp. GPIO12=12 [GPIO.BOARD = Pin by number Bsp: GPIO12=32])
+gpio_cooling_compressor = 3        # GPIO fuer Kuehlschrankkompressor
+gpio_heater = 4                    # GPIO fuer Heizkabel
+gpio_humidifier = 18               # GPIO fuer Luftbefeuchter
+gpio_circulating_air = 24          # GPIO fuer Umluftventilator
+gpio_exhausting_air = 23           # GPIO fuer Austauschluefter
+gpio_uv_light = 25                 # GPIO fuer UV Licht
+gpio_light = 8                     # GPIO fuer Licht
+gpio_relais_in8 = 7                # GPIO fuer Relais 8 Reserve
+gpio_sensor_data = 17              # GPIO fuer Data Temperatur/Humidity Sensor
+gpio_sensor_sync = 27              # GPIO fuer Sync Temperatur/Humidity Sensor
+gpio_sensor_sht = Sht(gpio_sensor_sync, gpio_sensor_data) # GPIO's fuer Temperatur/Humidity Sensor SHT Sht(Synchronisierung, DATA)
+gpio_scale_data = 10               # GPIO fuer Waage Data
+gpio_scale_sync = 9                # GPIO fuer Waage Sync
+gpio_recerved1 = 2                 # GPIO Reserve 1
+gpio_recerved2 = 11                # GPIO Reserve 2
 
 #---------------------------------------------------------------------------------------------------------------- Sprache
 ####   Set up message catalog access
