@@ -1,5 +1,5 @@
-#!/usr/bin/python3
-
+#!/usr/bin/python
+# -*- coding: iso-8859-1 -*-
 ######################################################### Importieren der Module
 import os
 import json
@@ -176,12 +176,13 @@ def set_sensortype():
         sensor = Adafruit_DHT.DHT11
         sensorname = 'DHT11'
         sensorvalue = 1
-    elif sensortype == 2: #SHT
-        sensor = Adafruit_DHT.AM2302
+    elif sensortype == 2: #DHT22
+        sensor = Adafruit_DHT.DHT22
         sensorname = 'DHT22'
         sensorvalue = 2
     elif sensortype == 3: #SHT
-        sensor = Adafruit_DHT.AM2302
+        #sensor = Adafruit_DHT.AM2302
+        sensor = 'SHT'
         sensorname = 'SHT'
         sensorvalue = 3
 #---------------------------------------------------------------------------------- Function Mainloop
@@ -217,7 +218,7 @@ def doMainLoop():
             print ('DEBUG: ' + str(sensorname))
         if sensorname == 'DHT11': #DHT11
             if debugging == 'on':
-                print ('DEBUG Sesnorname:' + sensorname)
+                print ('DEBUG Sensorname:' + sensorname)
             sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, gpio_sensor_data)
             if debugging == 'on':
                 print ("DEBUG: " + str(sensor_temperature_big))
@@ -226,15 +227,17 @@ def doMainLoop():
             btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
         elif sensorname == 'DHT22': #DHT22
             if debugging == 'on':
-                print ('DEBUG Sesnorname:' + sensorname)
+                print ('DEBUG Sensorname:' + sensorname)
             sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, gpio_sensor_data)
             atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
             btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
         elif sensorname == 'SHT': #SHT
             if debugging == 'on':
-                print ('DEBUG Sesnorname:' + sensorname)
+                print ('DEBUG Sensorname:' + sensorname)
             sensor_temperature_big = gpio_sensor_sht.read_t()
             sensor_humidity_big = gpio_sensor_sht.read_rh()
+            if debugging == 'on':
+                print ('DEBUG temperature:' + sensor_temperature_big)
         if sensor_humidity_big is not None and sensor_temperature_big is not None:
             if debugging == 'on':
                 print ("DEBUG: in if")
@@ -492,7 +495,7 @@ def doMainLoop():
         loopcounter += 1
     
 ######################################################### Definition von Variablen
-debugging = ''      # Debugmodus 'on'
+debugging = 'on'      # Debugmodus 'on'
 #---------------------------------------------------------------------------------- Pfade zu den Dateien
 website_path = '/var/www/'
 settings_json_file = website_path + 'settings.json'
@@ -538,7 +541,7 @@ gpio_light = 8                     # GPIO fuer Licht
 gpio_relais_in8 = 7                # GPIO fuer Relais 8 Reserve
 gpio_sensor_data = 17              # GPIO fuer Data Temperatur/Humidity Sensor
 gpio_sensor_sync = 27              # GPIO fuer Sync Temperatur/Humidity Sensor
-gpio_sensor_sht = Sht(gpio_sensor_sync, gpio_sensor_data) # GPIO's fuer Temperatur/Humidity Sensor SHT Sht(Synchronisierung, DATA)
+gpio_sensor_sht = Sht(27, 17) # GPIO's fuer Temperatur/Humidity Sensor SHT Sht(Synchronisierung, DATA)
 gpio_scale_data = 10               # GPIO fuer Waage Data
 gpio_scale_sync = 9                # GPIO fuer Waage Sync
 gpio_recerved1 = 2                 # GPIO Reserve 1
