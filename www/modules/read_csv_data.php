@@ -2,15 +2,15 @@
     // Gewählte CSV-Datei ermitteln
    // $read_tables_json = file_get_contents('tables.json');
    // $array_tables_json = json_decode($read_tables_json, true);
-   // $hangingtablename = $array_tables_json['hangingtable'];
+   // $agingtablename = $array_tables_json['agingtable'];
 
     // Gewählte CSV-Datei auslesen und als Array anlegen
-    //$chosen_hangingtable='/csv/Dryaging2.csv';
+    //$chosen_agingtable='/csv/Dryaging2.csv';
 
-    echo $chosen_hangingtable;
+    echo $chosen_agingtable;
 
     $row = 1;
-    if (($handle = fopen($chosen_hangingtable, 'r')) !== FALSE) {
+    if (($handle = fopen($chosen_agingtable, 'r')) !== FALSE) {
         while (($tables_data = fgetcsv($handle, 1000, ',')) !== FALSE) {
             $num = count($tables_data);
             echo '<p> '

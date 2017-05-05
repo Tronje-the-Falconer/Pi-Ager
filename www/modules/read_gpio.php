@@ -11,7 +11,7 @@
     
 
     #Prüfen ob Programme laufen
-    $grephangingtable = shell_exec('sudo /var/sudowebscript.sh grephangingtable'); #Reifetab.py
+    $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable'); #Reifetab.py
     $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain'); #Rss.py
 
     #Schaltzustände setzen
@@ -45,11 +45,11 @@
     if($read_gpio_humidifier == 1) {
         $humidifier_on_off_png = 'images/led-off-green-20x20.png';
         }
-    if($grephangingtable == 0) {
-        $hangingtable_on_off_png = 'images/led-off-green-20x20.png';
+    if($grepagingtable == 0) {
+        $agingtable_on_off_png = 'images/led-off-green-20x20.png';
     }
     else {
-        $hangingtable_on_off_png = 'images/led-on-green-20x20.png';
+        $agingtable_on_off_png = 'images/led-on-green-20x20.png';
     }
     if($grepmain == 0) {
         $pi_ager_on_off_png = 'images/led-off-green-20x20.png';
