@@ -22,18 +22,18 @@
                                             // Prüft, ob Prozess RSS läuft ( NULL = Rss.py läuft nicht als Prozess, )
                                             $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
                                             // Prüft, ob Prozess Reifetab läuft ()
-                                            $grephangingtable = shell_exec('sudo /var/sudowebscript.sh grephangingtable');
+                                            $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
                                             
-                                            if($grepmain == NULL and $grephangingtable != NULL) { //wenn Prozess RSS läuft und Reifetab läuft nicht (korrekt)
+                                            if($grepmain == NULL and $grepagingtable != NULL) { //wenn Prozess RSS läuft und Reifetab läuft nicht (korrekt)
                                                 shell_exec('sudo /var/sudowebscript.sh pkillreifetab');
-                                                $grephangingtable = shell_exec('sudo /var/sudowebscript.sh grephangingtable');
+                                                $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
                                             }
 
                                             if ($grepmain == NULL){
                                                 echo '<td><img src="images/operating_mode.png" alt="" style="padding: 10px;"></td><td><img src="images/led-off-green-20x20.png" alt="" style="padding-top: 10px;"></td><td style=""><button class="art-button" name="pi-ager_start">'._('start pi-ager').'</button></td>';
                                             }
                                             else {
-                                                echo '<td><img src="images/operating_mode.png" alt="" style="padding: 10px;"></td><td><img src="images/led-on-green-20x20.png" alt="" style="padding-top: 10px;"></td><td><button class="art-button" name="pi-ager_hangingtable_stop" onclick="return confirm("'._("stop pi-ager?").'");">'._("stop pi-ager?").'</button></td>';
+                                                echo '<td><img src="images/operating_mode.png" alt="" style="padding: 10px;"></td><td><img src="images/led-on-green-20x20.png" alt="" style="padding-top: 10px;"></td><td><button class="art-button" name="pi-ager_agingtable_stop" onclick="return confirm("'._("stop pi-ager?").'");">'._("stop pi-ager?").'</button></td>';
                                             }
                                             print ' </form>';
                                     ?>
@@ -43,7 +43,7 @@
 
                                     <table style="width: 100%" class="switching_state miniature_writing">
                                         <tr>
-                                            <td><img src="images/hangingtable.png" alt="" style="padding-left: 10px;"></td>
+                                            <td><img src="images/agingtable.png" alt="" style="padding-left: 10px;"></td>
                                             <td style=" text-align: left; padding-left: 20px;">
                                                 <?php 
                                                     print '<form  method="post">';
@@ -56,14 +56,14 @@
                                                         }
                                                     }
                                                     echo '</td><td>';
-                                                    if ($grephangingtable == NULL){
+                                                    if ($grepagingtable == NULL){
                                                         echo '<img src="images/led-off-green-20x20.png" alt="" style="padding-right: 20px;">';
                                                     }
                                                     else {
                                                         echo '<img src="images/led-on-green-20x20.png" alt="" style="padding-right: 20px;">';
                                                     }
                                                 ?>
-                                            <img src="images/hangingtable.png" alt=""></td>
+                                            <img src="images/agingtable.png" alt=""></td>
                                         </tr>
                                         <tr>
                                             <td>&nbsp;</td>
@@ -76,18 +76,18 @@
                                             <td><br>
                                                 <?php 
                                                     echo '<form  method="post">';
-                                                    if ($grephangingtable == NULL){
-                                                        echo "<button class=\"art-button\" name=\"pi-ager_hangingtable_start\" onclick=\"return confirm('"._('start hangingtable?')."\\n"._('manual values are overwritten!')."');\">"._('start hangingtable')."</button>";
+                                                    if ($grepagingtable == NULL){
+                                                        echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')."\\n"._('manual values are overwritten!')."');\">"._('start agingtable')."</button>";
                                                     }
                                                     else {
-                                                        echo "<button class=\"art-button\" name=\"pi-ager_hangingtable_stop\" onclick=\"return confirm('"._('stop hangingtable?').'\\n'._('pi-ager continues with the last values of the hangingtable!')."');\">"._('stop hangingtable')."</button>";
+                                                        echo "<button class=\"art-button\" name=\"pi-ager_agingtable_stop\" onclick=\"return confirm('"._('stop agingtable?').'\\n'._('pi-ager continues with the last values of the agingtable!')."');\">"._('stop agingtable')."</button>";
                                                     }
                                                     echo '</form>';
                                                 ?>
                                             </td>
                                         </tr>
                                     </table>
-                                    <table id="show_hangingtable" class="show_hangingtable">
+                                    <table id="show_agingtable" class="show_agingtable">
                                         <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
                                             <td class="show_agingcell"><div class="tooltip">S%<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">S°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
@@ -99,9 +99,9 @@
                                         </tr>
                                         <?php 
                                             // Gewählte CSV-Datei auslesen und als Array anlegen
-                                            $chosen_hangingtable='csv/'.$desired_maturity.'.csv';
+                                            $chosen_agingtable='csv/'.$desired_maturity.'.csv';
                                             $row = 1;
-                                            if (($handle = fopen($chosen_hangingtable, "r")) !== FALSE) {
+                                            if (($handle = fopen($chosen_agingtable, "r")) !== FALSE) {
                                                 while (($data = fgetcsv($handle, 1000, ',')) !== FALSE) {
                                                     $num = count($data);
                                                     echo '<tr>';
@@ -127,7 +127,7 @@
                                     </table>
                                 </div>
                                 <?php 
-                                    if ($grephangingtable == NULL){
+                                    if ($grepagingtable == NULL){
                                         include ('manvals.php');
                                                     }
                                                     else {
