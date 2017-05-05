@@ -89,17 +89,17 @@
                                             <td>
                                                 <?php 
                                                     // PrUEft, ob Prozess Reifetab läuft
-                                                    $grephangingtable = shell_exec('sudo /var/sudowebscript.sh grephangingtable');
-                                                    if ($grephangingtable == 0){
+                                                    $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
+                                                    if ($grepagingtable == 0){
                                                         echo '<img src="images/led-off-green-20x20.png" alt="" style="padding-top: 10px;">';
                                                     }
                                                     else {
                                                         echo '<img src="images/led-on-green-20x20.png" alt="" style="padding-top: 10px;">';
                                                     }
                                                 ?>
-                                                <br><img src="images/hangingtable.png" alt="" style="padding: 10px;">
+                                                <br><img src="images/agingtable.png" alt="" style="padding: 10px;">
                                             </td>
-                                            <td class="text_left_top"><b><?php echo strtoupper(_('hangingtable')).':</b><br>'.$maturity_type;?></td>
+                                            <td class="text_left_top"><b><?php echo strtoupper(_('agingtable')).':</b><br>'.$maturity_type;?></td>
                                         </tr>
                                     </table>
                                     <hr>
