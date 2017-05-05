@@ -44,7 +44,7 @@ settings.json = json.dumps({"mod":mod, "temp":temp, "hum":hum, "tempoff":tempoff
     day         -> last_change
 
  tables.json
-     Reifetab -> hangingtable
+     Reifetab -> agingtable
 
 config.json
     sensortype, (1,2)                                       # DHT/SHT
