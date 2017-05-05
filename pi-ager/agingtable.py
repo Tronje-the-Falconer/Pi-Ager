@@ -151,11 +151,11 @@ switch_off_humidifier = data_configjsonfile ['switch_off_humidifier']           
 delay_humidify = data_configjsonfile ['delay_humidify']                                # Luftbefeuchtungsverzoegerung
 #---------------------------------------------------------------------------------- Tabelle aus tables.json
 data_tablesjsonfile = read_tables_json()                   # Function-Aufruf
-hangingtable = data_tablesjsonfile['hangingtable']    # Variable reifetablename = Name der Reifetabelle
+agingtable = data_tablesjsonfile['agingtable']    # Variable reifetablename = Name der Reifetabelle
 
 #---------------------------------------------------------------------------------- bedingte Werte aus Variablen
 #---------------------------------------------------------------------------------------------------------------- csv-datei
-csv_file = hangingtable + '.csv'                       # Variable csv_file = kompletter Dateiname
+csv_file = agingtable + '.csv'                       # Variable csv_file = kompletter Dateiname
 #---------------------------------------------------------------------------------------------------------------- Sensor
 if sensortype == 1 :
     sensortype_txt = '1'
@@ -188,7 +188,7 @@ logspacer = "\n"+ "***********************************************"
 ######################################################### Hauptprogramm
 ########################################################################################################################
 write_verbose(logspacer, False, True)
-logstring = "\n" + _('the climate values are now controlled by the automatic program % s') % (hangingtable)
+logstring = "\n" + _('the climate values are now controlled by the automatic program % s') % (agingtable)
 write_verbose(logstring, False, True)
 
 #---------------------------------------------------------------------------------- Auslesen der gesammten csv-Datei
@@ -237,7 +237,7 @@ while period <= total_periods:
         logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('new values for period %s of %s') % (str(period + 1), str(total_periods + 1))
         write_verbose(logstring, False, True)
         read_dictionary(actual_dictionary)
-        logstring = '\n' + _('Program "%s" ends the control.') % (hangingtable) + '\n' + _('pi-ager continues to work with the last values.')
+        logstring = '\n' + _('Program "%s" ends the control.') % (agingtable) + '\n' + _('pi-ager continues to work with the last values.')
         write_verbose(logstring, False, True)
         
     else:
