@@ -51,11 +51,9 @@ def setupGPIO():
     gpio.setmode(board_mode)
 #---------------------------------------------------------------------------------------------------------------- Einstellen der GPIO PINS
 #------------------------------------------------------------------------------------------------------------------------------------------ Sensoren etc
-    gpio.setup(gpio_sensor_data, gpio.IN)           # Feuchtesensor Data setzen als Eingang
-    gpio.setup(gpio_sensor_sync, gpio.OUT)           # Feuchtesensor Sync setzen als Ausgang
     gpio.setup(gpio_scale_data, gpio.IN)           # Kabel Data ()
     gpio.setup(gpio_scale_sync, gpio.OUT)           # Kabel Sync ()
-#------------------------------------------------------------------------------------------------------------------------------------------ Relayboard
+#------------------------------------------------------------------------------------------------------------------------------------------ Relaisboard
     gpio.setup(gpio_heater, gpio.OUT)                # Heizung setzen (config.json)
     gpio.output(gpio_heater, relay_off)              # Heizung Relais standartmaessig aus
     gpio.setup(gpio_cooling_compressor, gpio.OUT)    # Kuehlung setzen (config.json)
@@ -237,12 +235,14 @@ def doMainLoop():
             sensor_temperature_big = gpio_sensor_sht.read_t()
             sensor_humidity_big = gpio_sensor_sht.read_rh()
             if debugging == 'on':
-                print ('DEBUG temperature:' + sensor_temperature_big)
+                print ('DEBUG sensor_temperature_big: ' + str(sensor_temperature_big) + ' sensor_humidity_big: ' + str(sensor_humidity_big))
         if sensor_humidity_big is not None and sensor_temperature_big is not None:
             if debugging == 'on':
                 print ("DEBUG: in if")
             sensor_temperature = round (sensor_temperature_big,2)
             sensor_humidity = round (sensor_humidity_big,2)
+            if debugging == 'on':
+                print ('DEBUG sensor_temperature: ' + str(sensor_temperature) + ' sensor_humidity_big: ' + str(sensor_humidity))
         else:
             if debugging == 'on':
                 print ("DEBUG: in else")
@@ -258,6 +258,8 @@ def doMainLoop():
             write_verbose(logstring, False, False)
             continue
         modus = data_settingsjsonfile['modus']
+        if debugging == 'on':
+                print ("DEBUG: nach Modus")
         setpoint_temperature = data_settingsjsonfile['setpoint_temperature']
         setpoint_humidity = data_settingsjsonfile['setpoint_humidity']
         circulation_air_period = data_settingsjsonfile['circulation_air_period']
@@ -402,6 +404,7 @@ def doMainLoop():
                 status_exhaust_fan = True                        # Feuchtereduzierung Abluft-Ventilator ein
             if sensor_humidity <= setpoint_humidity + switch_off_humidifier:
                 status_exhaust_fan = False                         # Feuchtereduzierung Abluft-Ventilator aus
+                
 #---------------------------------------------------------------------------------------------------------------- Schalten des Umluft - Ventilators
         if gpio.input(gpio_heater) or gpio.input(gpio_cooling_compressor) or gpio.input(gpio_humidifier) or status_circulation_air == False:
             gpio.output(gpio_circulating_air, relay_on)               # Umluft - Ventilator an
@@ -484,8 +487,8 @@ def doMainLoop():
             if debugging == 'on':
                 print ("DEBUG: ploting status_humidifier")
             ploting('status_humidifier')
-            if debugging == 'on':
-                print ('DEBUG Loopnumber: ' + loopcounter)
+        if debugging == 'on':
+            print ('DEBUG Loopnumber: ' + str(loopcounter))
 
         time.sleep(1)  
         # Mainloop fertig
@@ -495,7 +498,7 @@ def doMainLoop():
         loopcounter += 1
     
 ######################################################### Definition von Variablen
-debugging = 'on'      # Debugmodus 'on'
+debugging = ''      # Debugmodus 'on'
 #---------------------------------------------------------------------------------- Pfade zu den Dateien
 website_path = '/var/www/'
 settings_json_file = website_path + 'settings.json'
@@ -597,6 +600,7 @@ config = read_config_json()
 set_sensortype()
 circulation_air_start = int(time.time())
 exhaust_air_start = circulation_air_start
+
 try:
     doMainLoop()
 except KeyboardInterrupt:
