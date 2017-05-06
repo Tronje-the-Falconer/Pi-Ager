@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: iso-8859-1 -*-
 ######################################################### Importieren der Module
 import os
@@ -12,6 +12,7 @@ import rrdtool
 import math
 import gettext
 from sht_sensor import Sht
+from pi_sht1x import SHT1x
 
 ######################################################### Definieren von Funktionen
 #---------------------------------------------------------------------------------- Function goodbye
@@ -55,22 +56,34 @@ def setupGPIO():
     gpio.setup(gpio_scale_sync, gpio.OUT)           # Kabel Sync ()
 #------------------------------------------------------------------------------------------------------------------------------------------ Relaisboard
     gpio.setup(gpio_heater, gpio.OUT)                # Heizung setzen (config.json)
-    gpio.output(gpio_heater, relay_off)              # Heizung Relais standartmaessig aus
+    #gpio.output(gpio_heater, relay_off)              # Heizung Relais standartmaessig aus
     gpio.setup(gpio_cooling_compressor, gpio.OUT)    # Kuehlung setzen (config.json)
-    gpio.output(gpio_cooling_compressor, relay_off)  # Kuehlung Relais standartmaessig aus
+    #gpio.output(gpio_cooling_compressor, relay_off)  # Kuehlung Relais standartmaessig aus
     gpio.setup(gpio_circulating_air, gpio.OUT)       # Umluft setzen (config.json)
-    gpio.output(gpio_circulating_air, relay_off)     # Umluft Relais standartmaessig aus
+    #gpio.output(gpio_circulating_air, relay_off)     # Umluft Relais standartmaessig aus
     gpio.setup(gpio_humidifier, gpio.OUT)            # Befeuchter setzen (config.json)
-    gpio.output(gpio_humidifier, relay_off)          # Befeuchter Relais standartmaessig aus
+    #gpio.output(gpio_humidifier, relay_off)          # Befeuchter Relais standartmaessig aus
     gpio.setup(gpio_exhausting_air, gpio.OUT)        # Abluft setzen (config.json)
-    gpio.output(gpio_exhausting_air, relay_off)      # Abluft Relais standartmaessig aus
+    #gpio.output(gpio_exhausting_air, relay_off)      # Abluft Relais standartmaessig aus
     gpio.setup(gpio_light, gpio.OUT)                  # Licht setzen (json.conf)
-    gpio.output(gpio_light, relay_off)               # Licht Relais standartmaessig aus
+    #gpio.output(gpio_light, relay_off)               # Licht Relais standartmaessig aus
     gpio.setup(gpio_uv_light, gpio.OUT)               # UV-Licht setzen (json.conf)
-    gpio.output(gpio_uv_light, relay_off)            # UV-Licht Relais standartmaessig aus
+    #gpio.output(gpio_uv_light, relay_off)            # UV-Licht Relais standartmaessig aus
     gpio.setup(gpio_relais_in8, gpio.OUT)              # Reserve setzen (json.conf)
-    gpio.output(gpio_relais_in8, relay_off)           # Reserve Relais standartmaessig aus
+    #gpio.output(gpio_relais_in8, relay_off)           # Reserve Relais standartmaessig aus
     logstring = _('GPIO setup complete') + '.'
+    write_verbose(logstring, False, False)
+    
+def defaultGPIO():
+    gpio.output(gpio_heater, relay_off)              # Heizung Relais standartmaessig aus
+    gpio.output(gpio_cooling_compressor, relay_off)  # Kuehlung Relais standartmaessig aus
+    gpio.output(gpio_circulating_air, relay_off)     # Umluft Relais standartmaessig aus
+    gpio.output(gpio_humidifier, relay_off)          # Befeuchter Relais standartmaessig aus
+    gpio.output(gpio_exhausting_air, relay_off)      # Abluft Relais standartmaessig aus
+    gpio.output(gpio_light, relay_off)               # Licht Relais standartmaessig aus
+    gpio.output(gpio_uv_light, relay_off)            # UV-Licht Relais standartmaessig aus
+    gpio.output(gpio_relais_in8, relay_off)          # Reserve Relais standartmaessig aus
+    logstring = _('default GPIO setup complete') + '.'
     write_verbose(logstring, True, False)
 #---------------------------------------------------------------------------------- Function write verbose
 def write_verbose(logstring, newLine=False, print_in_logfile=False):
@@ -87,7 +100,6 @@ def write_verbose(logstring, newLine=False, print_in_logfile=False):
 #---------------------------------------------------------------------------------- Function Schreiben der current.json
 def write_current_json(sensor_temperature, sensor_humidity):
     global current_json_file
-
     current_data = json.dumps({"sensor_temperature":sensor_temperature, "status_heater":gpio.input(gpio_heater), "status_exhaust_air":gpio.input(gpio_exhausting_air), "status_cooling_compressor":gpio.input(gpio_cooling_compressor), "status_circulating_air":gpio.input(gpio_circulating_air),"sensor_humidity":sensor_humidity, 'last_change':int(time.time())})
     with open(current_json_file, 'w') as currentjsonfile:
         currentjsonfile.write(current_data)
@@ -232,8 +244,11 @@ def doMainLoop():
         elif sensorname == 'SHT': #SHT
             if debugging == 'on':
                 print ('DEBUG Sensorname:' + sensorname)
-            sensor_temperature_big = gpio_sensor_sht.read_t()
-            sensor_humidity_big = gpio_sensor_sht.read_rh()
+            sensor_sht = SHT1x(gpio_sensor_data, gpio_sensor_sync, gpio_mode=gpio.BCM)
+            sensor_sht.read_temperature()
+            sensor_sht.read_humidity()
+            sensor_temperature_big = sensor_sht.temperature_celsius
+            sensor_humidity_big = sensor_sht.humidity
             if debugging == 'on':
                 print ('DEBUG sensor_temperature_big: ' + str(sensor_temperature_big) + ' sensor_humidity_big: ' + str(sensor_humidity_big))
         if sensor_humidity_big is not None and sensor_temperature_big is not None:
@@ -301,6 +316,10 @@ def doMainLoop():
         write_verbose(logstring, False, False)
         write_verbose(logspacer2, False, False)
         
+        gpio.setmode(board_mode)
+        if debugging == 'on':
+            print ("DEBUG: writing current.json")
+        #setupGPIO()
         write_current_json(sensor_temperature, sensor_humidity)
         # Durch den folgenden Timer laeuft der Ventilator in den vorgegebenen Intervallen zusaetzlich zur generellen Umluft bei aktivem Heizen, Kuehlen oder Befeuchten
 #---------------------------------------------------------------------------------------------------------------- Timer fuer Luftumwaelzung-Ventilator
@@ -498,7 +517,7 @@ def doMainLoop():
         loopcounter += 1
     
 ######################################################### Definition von Variablen
-debugging = ''      # Debugmodus 'on'
+debugging = 'off'      # Debugmodus 'on'
 #---------------------------------------------------------------------------------- Pfade zu den Dateien
 website_path = '/var/www/'
 settings_json_file = website_path + 'settings.json'
@@ -544,12 +563,10 @@ gpio_light = 8                     # GPIO fuer Licht
 gpio_relais_in8 = 7                # GPIO fuer Relais 8 Reserve
 gpio_sensor_data = 17              # GPIO fuer Data Temperatur/Humidity Sensor
 gpio_sensor_sync = 27              # GPIO fuer Sync Temperatur/Humidity Sensor
-gpio_sensor_sht = Sht(27, 17) # GPIO's fuer Temperatur/Humidity Sensor SHT Sht(Synchronisierung, DATA)
 gpio_scale_data = 10               # GPIO fuer Waage Data
 gpio_scale_sync = 9                # GPIO fuer Waage Sync
 gpio_recerved1 = 2                 # GPIO Reserve 1
 gpio_recerved2 = 11                # GPIO Reserve 2
-
 #---------------------------------------------------------------------------------------------------------------- Sprache
 ####   Set up message catalog access
 # translation = gettext.translation('pi_ager', '/var/www/locale', fallback=True)
@@ -568,6 +585,7 @@ translation.install()
 os.system('clear') # Bildschirm loeschen
 write_verbose(logspacer, False, False)
 setupGPIO() # GPIO initialisieren
+defaultGPIO() 
 
 #---------------------------------------------------------------------------------- RRD-Datenbank anlegen, wenn nicht vorhanden
 try:
