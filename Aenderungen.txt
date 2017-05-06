@@ -91,6 +91,9 @@ pip für python3
 sudo apt-get install python3-pip
 ja
 
+sudo apt-get install librrd-dev libpython3-dev
+ja
+
 rrd-tool
 sudo pip3 install rrdtool
 
@@ -100,10 +103,16 @@ sudo pip3 install simplejson
 sht python3
 sudo pip3 install sht-sensor
 
+neues sht Lib
+sudo pip3 install pi-sht1x
+
+
+sudo apt-get install git
+
 git clone https://github.com/JoBergs/Adafruit_Python_DHT
 sudo apt-get install build-essential python3-dev
 cd Adafruit_Python_DHT
-sudo python3 setup.py install
+sudo python3 setup.py install --force-pi
 
 DHT Adafruit
 cd /home/pi
