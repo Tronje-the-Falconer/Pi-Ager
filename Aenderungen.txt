@@ -101,9 +101,6 @@ simple json python3
 sudo pip3 install simplejson
 
 sht python3
-sudo pip3 install sht-sensor
-
-neues sht Lib
 sudo pip3 install pi-sht1x
 
 
