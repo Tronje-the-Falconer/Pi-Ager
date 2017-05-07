@@ -3,7 +3,7 @@ import sys
 import RPi.GPIO as GPIO
 from hx711 import Scale
 
-scale = Scale(gain=128) #32, 64, 128
+scale = Scale(gain=128) #32[Channel B], 64 [Channel A], 128 [Channel A]
 
 scale.setReferenceUnit(60)
 # 10KG China Zelle:
