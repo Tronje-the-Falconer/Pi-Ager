@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 
 
 class HX711:
-    def __init__(self, dout=5, pd_sck=6, gain=128, bitsToRead=24):
+    def __init__(self, dout=10, pd_sck=9, gain=128, bitsToRead=24):
         self.PD_SCK = pd_sck
         self.DOUT = dout
 
@@ -117,9 +117,10 @@ class HX711:
         self.powerUp()
 
 class Scale:
-    def __init__(self, source=None, samples=20, spikes=4, sleep=0.1):
+    def __init__(self, source=None, samples=20, spikes=4, sleep=0.1, gain=32):
 
-        self.source = source or HX711()
+        self.gain = gain
+        self.source = source or HX711(gain=self.gain)
         self.samples = samples
         self.spikes = spikes
         self.sleep = sleep
