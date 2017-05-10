@@ -117,10 +117,12 @@ class HX711:
         self.powerUp()
 
 class Scale:
-    def __init__(self, source=None, samples=20, spikes=4, sleep=0.1, gain=32):
-
+    def __init__(self, source=None, samples=20, spikes=4, sleep=0.1, dout=10, pd_sck=9, gain=128, bitsToRead=24):
         self.gain = gain
-        self.source = source or HX711(gain=self.gain)
+        self.dout = dout
+        self.pd_sck = pd_sck
+        self.bitsToRead = bitsToRead
+        self.source = source or HX711(dout=self.dout, pd_sck=self.pd_sck, gain=self.gain, bitsToRead=self.bitsToRead)
         self.samples = samples
         self.spikes = spikes
         self.sleep = sleep
