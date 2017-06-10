@@ -44,7 +44,7 @@ def setupGPIO():
     global gpio_scale_sync
     global gpio_sensor_data
     global gpio_sensor_sync
-    global gpio_relais_in8
+    global gpio_dehumidifier
     
     logstring = _('setting up GPIO') + '...'
     write_verbose(logstring, False, False)
@@ -70,8 +70,8 @@ def setupGPIO():
     #gpio.output(gpio_light, relay_off)               # Licht Relais standartmaessig aus
     gpio.setup(gpio_uv, gpio.OUT)               # UV-Licht setzen (json.conf)
     #gpio.output(gpio_uv, relay_off)            # UV-Licht Relais standartmaessig aus
-    gpio.setup(gpio_relais_in8, gpio.OUT)              # Reserve setzen (json.conf)
-    #gpio.output(gpio_relais_in8, relay_off)           # Reserve Relais standartmaessig aus
+    gpio.setup(gpio_dehumidifier, gpio.OUT)              # Reserve setzen (json.conf)
+    #gpio.output(gpio_dehumidifier, relay_off)           # Reserve Relais standartmaessig aus
     logstring = _('GPIO setup complete') + '.'
     write_verbose(logstring, False, False)
     
@@ -83,7 +83,7 @@ def defaultGPIO():
     gpio.output(gpio_exhausting_air, relay_off)      # Abluft Relais standartmaessig aus
     gpio.output(gpio_light, relay_off)               # Licht Relais standartmaessig aus
     gpio.output(gpio_uv, relay_off)            # UV-Licht Relais standartmaessig aus
-    gpio.output(gpio_relais_in8, relay_off)          # Reserve Relais standartmaessig aus
+    gpio.output(gpio_dehumidifier, relay_off)          # Reserve Relais standartmaessig aus
     logstring = _('default GPIO setup complete') + '.'
     write_verbose(logstring, True, False)
 #---------------------------------------------------------------------------------- Function write verbose
@@ -128,29 +128,38 @@ def ploting(plotting_value):
         print("DEBUG: in plotingfunction")
     if plotting_value == 'sensor_temperature':
         title = _('temperature')
-        label = 'in  C'
+        label = 'in C'
     elif plotting_value == 'sensor_humidity':
         title = _('humidity')
         label = 'in %'
     elif plotting_value == "stat_exhaust_air":
         title = _('exhaust air')
-        label = 'ein oder aus'
+        label = _('on or off')
     elif plotting_value == "stat_circulate_air":
         title = _('circulatioon air')
-        label = 'ein oder aus'
+        label = _('on or off')
     elif plotting_value == "stat_heater":
         title = _('heater')
-        label = 'ein oder aus'
+        label = _('on or off')
     elif plotting_value == "stat_coolcompressor":
         title = _('cooling compressor')
-        label = 'ein oder aus'
+        label = _('on or off')
     elif plotting_value == "status_humidifier":
         title = _('humidifier')
-        label = 'ein oder aus'
+        label = _('on or off')
+    elif plotting_value == "status_dehumidifier":
+        title = _('dehumidifier')
+        label = _('on or off')
+    elif plotting_value == "status_light":
+        title = _('light')
+        label = _('on or off')
+    elif plotting_value == "status_uv":
+        title = _('uv-light')
+        label = _('on or off')
 #---------------------------------------------------------------------------------------------------------------- Aufteilung in drei Plots
     for plot in ['daily' , 'weekly', 'monthly', 'hourly']:
         if debugging == 'on':
-            print ("DEBUG: in for schleife")
+            print ("DEBUG: in for schleife daily, weekly, monthly, hourly")
         if plot == 'weekly':
             period = 'w'
         elif plot == 'daily':
@@ -224,23 +233,22 @@ def doMainLoop():
     global status_exhaust_fan             #  Variable fuer die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
     global uv_modus                       #  Modus UV-Licht  (1 = Periode/Dauer; 2= Zeitstempel/Dauer)
     global status_uv                      #  UV-Licht
-    global switch_on_uv_time              #  Zeitstempel wann das UV Licht angeschaltet werden soll
-    global switch_off_uv_time             #  Zeitstempel wann das UV Licht ausgeschaltet werden soll
+    global switch_on_uv_hour              #  Stunde wann das UV Licht angeschaltet werden soll
+    global switch_on_uv_minute            #  Minute wann das UV Licht ausgeschaltet werden soll
     global uv_duration                    #  Dauer der UV_Belichtung
     global uv_period                      #  Periode für UV_Licht
     global uv_starttime                   #  Unix-Zeitstempel fuer den Zaehlstart des Timers UV-Light
     global uv_stoptime                    #  Unix-Zeitstempel fuer den Stop des UV-Light
     global light_modus                    #  ModusLicht  (1 = Periode/Dauer; 2= Zeitstempel/Dauer)
     global status_light                   #  Licht
-    global switch_on_light_time           #  Zeitstempel wann Licht angeschaltet werden soll
-    global switch_off_light_time          #  Zeitstempel wann das Licht ausgeschaltet werden soll
+    global switch_on_light_hour           #  Stunde wann Licht angeschaltet werden soll
+    global switch_on_light_minute         #  Minute wann das Licht ausgeschaltet werden soll
     global light_duration                 #  Dauer für Licht
     global light_period                   #  Periode für Licht
-    global light_start                    #  Unix-Zeitstempel fuer den Zaehlstart des Timers licht
-    global switch_on_dehumidifier         #  Einschaltfeuchte
-    global switch_off_dehumidifier        #  Ausschaltfeuchte
-
-    global status_                        #  Relais8
+    global light_starttime                #  Unix-Zeitstempel fuer den Zaehlstart des Timers licht
+    global light_stoptime                 #  Unix-Zeitstempel fuer den Stop des UV-Light
+    global dehumidifier_modus             #  Modus Entfeuchter  (1 = über Abluft, 2 = mit Abluft zusammen [unterstützend]; 3 = anstelle von Abluft)
+    global status_dehumidifier            #  Entfeuchter
 #---------------------------------------------------------------------------------------------------------------- Pruefen Sensor, dann Settings einlesen
     while True:
         if debugging == 'on':
@@ -276,19 +284,19 @@ def doMainLoop():
                 print ('DEBUG sensor_temperature_big: ' + str(sensor_temperature_big) + ' sensor_humidity_big: ' + str(sensor_humidity_big))
         if sensor_humidity_big is not None and sensor_temperature_big is not None:
             if debugging == 'on':
-                print ("DEBUG: in if")
+                print ("DEBUG: in if sensor_humidity und sensor_temperature_big not None")
             sensor_temperature = round (sensor_temperature_big,2)
             sensor_humidity = round (sensor_humidity_big,2)
             if debugging == 'on':
                 print ('DEBUG sensor_temperature: ' + str(sensor_temperature) + ' sensor_humidity_big: ' + str(sensor_humidity))
         else:
             if debugging == 'on':
-                print ("DEBUG: in else")
+                print ("DEBUG: in else Sensordaten leer")
             logstring = _('Failed to get reading. Try again!')
             write_verbose (logstring, False, False)
         try:
             if debugging == 'on':
-                print ("DEBUG: in try")
+                print ("DEBUG: in try read settings und config")
             data_settingsjsonfile = read_settings_json()
             data_configjsonfile = read_config_json()
         except:
@@ -310,15 +318,16 @@ def doMainLoop():
         delay_humidify = delay_humidify * 10
         sensortype = data_configjsonfile ['sensortype']
         uv_modus = data_configjsonfile ['uv_modus']
-        switch_on_uv_time = data_configjsonfile ['switch_on_uv_time']
+        switch_on_uv_hour = data_configjsonfile ['switch_on_uv_hour']
+        switch_on_uv_minute = data_configjsonfile ['switch_on_uv_minute']
         uv_duration = data_configjsonfile ['uv_duration']
         uv_period = data_configjsonfile ['uv_period']
         light_modus = data_configjsonfile ['light_modus']
-        switch_on_light_time = data_configjsonfile ['switch_on_light_time']
+        switch_on_light_hour = data_configjsonfile ['switch_on_light_hour']
+        switch_on_light_minute = data_configjsonfile ['switch_on_light_minute']
         light_duration = data_configjsonfile ['light_duration']
         light_period = data_configjsonfile ['light_period']
-        switch_on_dehumidifier = data_configjsonfile ['switch_on_dehumidifier']
-        switch_off_dehumidifier = data_configjsonfile ['switch_off_dehumidifier']
+        dehumidifier_modus = data_configjsonfile ['dehumidifier_modus']
         
         
         # An dieser Stelle sind alle settings eingelesen, Ausgabe auf Konsole
@@ -393,19 +402,14 @@ def doMainLoop():
                 status_uv = False
             if uv_duration == 0:                        # gleich 0 ist aus, kein Timer
                 status_uv = True
-            if uv_duration > 0:                        # gleich 0 ist aus, kein Timer
-                # if current_time < uv_start + uv_period:
-                    # status_uv = True                      # UV-Licht aus
-                    # logstring = _('uv-light timer on (deactive)')
-                    # write_verbose(logstring, False, False)
-                    
+            if uv_duration > 0:                        # gleich 0 ist aus, kein Timer                
                 if current_time >= uv_starttime and current_time <= uv_stoptime:
                     status_uv = False                     # UV-Licht an
-                    logstring = _('uv-light timer on (activated)')
+                    logstring = _('uv-light timer on (active)')
                     write_verbose(logstring, False, False)
                 else: 
                     status_uv = True                      # UV-Licht aus
-                    logstring = _('uv-light timer on (deactivated)')
+                    logstring = _('uv-light timer on (deactive)')
                     write_verbose(logstring, False, False)
                     
                 if current_time > uv_stoptime:
@@ -414,34 +418,67 @@ def doMainLoop():
 
                     
         if uv_modus == 2:                         # Modus 2 Zeitstempel/Dauer
-            # 1 Stunde (h) = 3600 Sekunden
+            now = datetime.datetime.now()
+            year_now = now.year
+            month_now = now.month
+            day_now = now.day
             
-            uv_stoptime = switch_on_uv_time + uv_duration
-            if current_datetime >= switch_on_uv_time:
-                status_uv = False
-                logstring = _('uv-light timestamp on (active)')
-                write_verbose(logstring, False, False)
-            if current_time < switch_on_uv_time or current_time > switch_off_uv_time:
+            
+            uv_starttime = datetime.datetime(year_now, month_now, day_now, switch_on_uv_hour, switch_on_uv_minute, 0, 0)
+            uv_stoptime = uv_starttime + datetime.timedelta(0, uv_duration)
+            
+            print (uv_starttime)
+            print (uv_stoptime)
+            
+            if now >= uv_starttime and now <= uv_stoptime:
+                    status_uv = False                     # UV-Licht an
+                    logstring = _('uv-light timestamp on (active)')
+                    write_verbose(logstring, False, False)
+            else: 
                 status_uv = True                      # UV-Licht aus
-                logstring = _('uv-light timer on (deactive)')
+                logstring = _('uv-light timestamp on (deactive)')
                 write_verbose(logstring, False, False)
             
 #---------------------------------------------------------------------------------------------------------------- Timer fuer Licht
-        # if light_period == 0:                      # gleich 0 ist an,  Dauer-Timer
-            # status_light = False
-        # if light_duration == 0:                        # gleich 0 ist aus, kein Timer
-        status_light = True
-        # if light_duration > 0:                        # gleich 0 ist aus, kein Timer
-            # if current_time < light_start + light_period:
-                # status_light = True                      # Licht aus
-                # logstring = _('light timer on (deactive)')
-                # write_verbose(logstring, False, False)
-            # if current_time >= light_start + light_period:
-                # status_light = False                     # Licht an
-                # logstring = _('light timer on (active)')
-                # write_verbose(logstring, False, False)
-            # if current_time >= light_start + light_period + light_duration:
-                # light_start = int(time.time())   # Timer-Timestamp aktualisiert
+        if light_modus == 1:                            # Modus 1 = Periode/Dauer
+            if light_period == 0:                      # gleich 0 ist an,  Dauer-Timer
+                status_light = False
+            if light_duration == 0:                        # gleich 0 ist aus, kein Timer
+                status_light = True
+            if light_duration > 0:                        # gleich 0 ist aus, kein Timer                
+                if current_time >= light_starttime and current_time <= light_stoptime:
+                    status_light = False                     # Licht an
+                    logstring = _('light timer on (active)')
+                    write_verbose(logstring, False, False)
+                else: 
+                    status_light = True                      # Licht aus
+                    logstring = _('light timer on (deactive)')
+                    write_verbose(logstring, False, False)
+                    
+                if current_time > light_stoptime:
+                    light_starttime = int(time.time()) + light_period  # Timer-Timestamp aktualisiert
+                    light_stoptime = light_starttime + light_duration
+
+                    
+        if light_modus == 2:                         # Modus 2 Zeitstempel/Dauer
+            now = datetime.datetime.now()
+            year_now = now.year
+            month_now = now.month
+            day_now = now.day
+            
+            
+            light_starttime = datetime.datetime(year_now, month_now, day_now, switch_on_light_hour, switch_on_light_minute, 0, 0)
+            light_stoptime = light_starttime + datetime.timedelta(0, light_duration)
+            
+            if now >= light_starttime and now <= light_stoptime:
+                    status_light = False                     # Licht an
+                    logstring = _('light timestamp on (active)')
+                    write_verbose(logstring, False, False)
+            else: 
+                status_light = True                      # Licht aus
+                logstring = _('light timestamp on (deactive)')
+                write_verbose(logstring, False, False)
+            
 #---------------------------------------------------------------------------------------------------------------- Kuehlen
         if modus == 0:
             status_exhaust_fan = False                              # Feuchtereduzierung Abluft aus
@@ -508,15 +545,31 @@ def doMainLoop():
                 gpio.output(gpio_humidifier, relay_off)     # Luftbefeuchter aus
                 counter_humidify = 0
             if sensor_humidity >= setpoint_humidity + switch_on_humidifier:
-                status_exhaust_fan = True                        # Feuchtereduzierung Abluft-Ventilator ein
+                if dehumidifier_modus == 1 or dehumidifier_modus == 2:  # entweder nur über Abluft oder mit unterstützung von Entfeuchter
+                    status_exhaust_fan = True                           # Feuchtereduzierung Abluft-Ventilator ein
+                    if dehumidifier_modus == 2:                         # Entfeuchter zur Unterstützung
+                        status_dehumidifier = True                      # Entfeuchter unterstützend ein
+                    else:
+                        status_dehumidifier = False                     # Entfeuchter aus
+                if dehumidifier_modus == 3:                             # rein über entfeuchtung
+                    status_exhaust_fan = False                          # Abluft aus
+                    status_dehumidifier = True                          # Entfeuchter ein
             if sensor_humidity <= setpoint_humidity + switch_off_humidifier:
-                status_exhaust_fan = False                         # Feuchtereduzierung Abluft-Ventilator aus
-                
+                if dehumidifier_modus == 1 or dehumidifier_modus == 2:
+                    status_exhaust_fan = False         # Feuchtereduzierung Abluft-Ventilator aus
+                    status_dehumidifier = False        # Entfeuchter aus
+                else:
+                    status_dehumidifier = False        # Entfeuchter aus
 #---------------------------------------------------------------------------------------------------------------- Schalten des Umluft - Ventilators
         if gpio.input(gpio_heater) or gpio.input(gpio_cooling_compressor) or gpio.input(gpio_humidifier) or status_circulation_air == False:
             gpio.output(gpio_circulating_air, relay_on)               # Umluft - Ventilator an
         if gpio.input(gpio_heater) and gpio.input(gpio_cooling_compressor) and gpio.input(gpio_humidifier) and status_circulation_air == True:
             gpio.output(gpio_circulating_air, relay_off)             # Umluft - Ventilator aus
+#---------------------------------------------------------------------------------------------------------------- Schalten des Entfeuchters
+        if status_dehumidifier == True:
+            gpio.output(gpio_dehumidifier, relay_on)
+        if status_dehumidifier == False:
+            gpio.output(gpio_dehumidifier, relay_off)
 #---------------------------------------------------------------------------------------------------------------- Schalten des (Abluft-)Luftaustausch-Ventilator
         if status_exhaust_air == False or status_exhaust_fan == True:
             gpio.output(gpio_exhausting_air, relay_on)
@@ -574,10 +627,34 @@ def doMainLoop():
             logstring = _('exhaust air off')
             write_verbose(logstring, False, False)
             status_exhaust_air = 0
+        if gpio.input(gpio_dehumidifier) == False:
+            logstring = _('dehumidifier on')
+            write_verbose(logstring, False, False)
+            status_dehumidifier = 10
+        else:
+            logstring = _('dehumidifier off')
+            write_verbose(logstring, False, False)
+            status_dehumidifier = 0
+        if gpio.input(gpio_light) == False:
+            logstring = _('light on')
+            write_verbose(logstring, False, False)
+            status_light = 10
+        else:
+            logstring = _('light off')
+            write_verbose(logstring, False, False)
+            status_light = 0
+        if gpio.input(gpio_uv) == False:
+            logstring = _('uv-light on')
+            write_verbose(logstring, False, False)
+            status_uv= 10
+        else:
+            logstring = _('uv-light off')
+            write_verbose(logstring, False, False)
+            status_uv = 0
         write_verbose(logspacer2, False, False)
 #---------------------------------------------------------------------------------------------------------------- Messwerte in die RRD-Datei schreiben
         from rrdtool import update as rrd_update
-        ret = rrd_update('%s' %(rrd_filename), 'N:%s:%s:%s:%s:%s:%s:%s' %(sensor_temperature, sensor_humidity, status_exhaust_air, status_circulating_air, status_heater, status_cooling_compressor, status_humidifier))
+        ret = rrd_update('%s' %(rrd_filename), 'N:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s' %(sensor_temperature, sensor_humidity, status_exhaust_air, status_circulating_air, status_heater, status_cooling_compressor, status_humidifier, status_dehumidifier, status_light, status_uv))
         #array fuer graph     
         # Grafiken erzeugen
         if loopcounter % 3 == 0:
@@ -604,6 +681,15 @@ def doMainLoop():
             if debugging == 'on':
                 print ("DEBUG: ploting status_humidifier")
             ploting('status_humidifier')
+            if debugging == 'on':
+                print ("DEBUG: ploting status_dehumidifier")
+            ploting('status_dehumidifier')
+            if debugging == 'on':
+                print ("DEBUG: ploting status_light")
+            ploting('status_light')
+            if debugging == 'on':
+                print ("DEBUG: ploting status_uv")
+            ploting('status_uv')
         if debugging == 'on':
             print ('DEBUG Loopnumber: ' + str(loopcounter))
 
@@ -656,9 +742,9 @@ gpio_heater = 4                    # GPIO fuer Heizkabel
 gpio_humidifier = 18               # GPIO fuer Luftbefeuchter
 gpio_circulating_air = 24          # GPIO fuer Umluftventilator
 gpio_exhausting_air = 23           # GPIO fuer Austauschluefter
-gpio_uv = 25                 # GPIO fuer UV Licht
+gpio_uv = 25                       # GPIO fuer UV Licht
 gpio_light = 8                     # GPIO fuer Licht
-gpio_relais_in8 = 7                # GPIO fuer Relais 8 Reserve
+gpio_dehumidifier = 7              # GPIO fuer Entfeuchter
 gpio_sensor_data = 17              # GPIO fuer Data Temperatur/Humidity Sensor
 gpio_sensor_sync = 27              # GPIO fuer Sync Temperatur/Humidity Sensor
 gpio_scale_data = 10               # GPIO fuer Waage Data
@@ -704,6 +790,9 @@ except IOError:
         "DS:stat_heater:GAUGE:2000:U:U",
         "DS:stat_coolcompressor:GAUGE:2000:U:U",
         "DS:status_humidifier:GAUGE:2000:U:U",
+        "DS:status_dehumidifier:GAUGE:2000:U:U",
+        "DS:status_light:GAUGE:2000:U:U",
+        "DS:status_uv:GAUGE:2000:U:U",
         "RRA:AVERAGE:0.5:1:2160",
         "RRA:AVERAGE:0.5:5:2016",
         "RRA:AVERAGE:0.5:15:2880",
@@ -720,7 +809,8 @@ exhaust_air_start = system_starttime
 uv_starttime = system_starttime
 #uv_duration=0    #Initial-Füllung der Variablen
 uv_stoptime = uv_starttime
-light_start = system_starttime
+light_starttime = system_starttime
+light_stoptime = light_starttime
 
 try:
     doMainLoop()
