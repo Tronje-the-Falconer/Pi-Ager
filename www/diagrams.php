@@ -15,10 +15,10 @@
                                 <div class="hg_container" style="margin-bottom: 20px; margin-top: 20px;">
                                     <table style="width: 100%;">
                                         <tr>
-                                            <td><img src="images/hourly_30x30.png" alt=""></td>
-                                            <td><img src="images/daily_30x30.png" alt=""></td>
-                                            <td><img src="images/weekly_30x30.png" alt=""></td>
-                                            <td><img src="images/monthly_30x30.png" alt=""></td>
+                                            <td><img src="images/hour_42x42.png" alt=""></td>
+                                            <td><img src="images/daily_42x42.png" alt=""></td>
+                                            <td><img src="images/week_42x42.png" alt=""></td>
+                                            <td><img src="images/month_42x42.png" alt=""></td>
                                         </tr>
                                         <tr>
                                             <td><a href="diagrams.php?diagram_mode=hourly" class="art-button"><?php echo _('hour'); ?></a></td>

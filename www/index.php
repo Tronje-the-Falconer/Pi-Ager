@@ -77,13 +77,13 @@
                                                     // PrUEft, ob Prozess RSS läuft
                                                     $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
                                                     if ($grepmain == 0){
-                                                        echo '<img src="images/led-off-green-20x20.png" alt="" style="padding-top: 10px;">';
+                                                        echo '<img src="images/status_off_20x20.png" alt="" style="padding-top: 10px;">';
                                                     }
                                                     else {
-                                                        echo '<img src="images/led-on-green-20x20.png" alt="" style="padding-top: 10px;">';
+                                                        echo '<img src="images/status_on_20x20" alt="" style="padding-top: 10px;">';
                                                     }
                                                 ?>
-                                                <br><img src="images/operating_mode.png" alt="" style="padding: 10px;">
+                                                <br><img src="images/operatingmode_42x42.png" alt="" style="padding: 10px;">
                                             </td>
                                             <td class="text_left_top"><b><?php echo strtoupper(_('operating mode')).':</b><br>'; if ($grepmain == 0){echo strtoupper(("off"));} else {echo $modus_name;} ?></td>
                                             <td>
