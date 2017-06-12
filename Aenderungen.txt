@@ -68,7 +68,9 @@ Aus csv ausgelagert in config.json:
 humhyston, humhystoff, temphyston, temphystoff, humdelay
 switch_on_humidifier, switch_off_humidifier, switch_on_cooling_compressor, switch_off_cooling_compressor, delay_humidify
 
-
+----------------------------------------------
+Iconbibliothek:
+https://icons8.com/icon/set/cloud/all
 
 ----------------------------------------------
 
