@@ -16,16 +16,16 @@
                                                             echo date('d M Y, H:i:s', $mtime);
                                                             echo ' ';
                                                             echo _('oclock').'<br />';
-                                                            echo '<img src="images/yes_small.png"> '._('file exists').'<br />';
+                                                            echo '<img src="images/check_true_42x42.png"> '._('file exists').'<br />';
                                                         }
                                                         else {
-                                                            echo '<img src="images/no_small.png"> '._('file does not exist').'<br />';
+                                                            echo '<img src="images/check_false_42x42"> '._('file does not exist').'<br />';
                                                         }
                                                         if (is_readable($changelogfile)) {
-                                                            echo '<img src="images/yes_small.png"> '._('file is readable').'<br />';
+                                                            echo '<img src="images/check_true_42x42.png"> '._('file is readable').'<br />';
                                                         }
                                                         else {
-                                                            echo '<img src="images/no_small.png"> '._('file is not readable').'<br />';
+                                                            echo '<img src="images/check_false_42x42.png"> '._('file is not readable').'<br />';
                                                         }
                                                     ?>
                                                 </td>

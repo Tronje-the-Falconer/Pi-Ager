@@ -5,7 +5,7 @@
                                     <div class="hg_container" >
                                         <table style="width: 100%;" class="miniature_writing">
                                             <tr>
-                                                <td class="td_png_icon"><h3><?php echo _('operating mode'); ?></h3><img src="images/operating_mode.png" alt=""><br><button class="art-button" type="button" onclick="help_operation_mode_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                <td class="td_png_icon"><h3><?php echo _('operating mode'); ?></h3><img src="images/operatingmode_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_operation_mode_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td style=" text-align: left; padding-left: 20px;">
                                                 <input type="radio" name="modus_settings" value="0" <?php echo $checked_0; ?>/><label> <?php echo _('cooling'); ?></label><br>
                                                 <input type="radio" name="modus_settings" value="1" <?php echo $checked_1; ?>/><label> <?php echo _('cooling with humidification'); ?></label><br>
@@ -42,7 +42,7 @@
                                         <!----------------------------------------------------------------------------------------Temperatur-->
                                         <table style="width: 100%;" class="miniature_writing">
                                             <tr>
-                                                <td rowspan="4" class="td_png_icon"><h3><?php echo _('temperature'); ?></h3><img src="images/heating_cooling.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                <td rowspan="4" class="td_png_icon"><h3><?php echo _('temperature'); ?></h3><img src="images/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td class="text_left_padding"><?php echo _('setpoint temperature'); ?>:</td>
                                                 <td class="text_left_padding"><input name="setpoint_temperature_settings" maxlength="4" size="2" type="text" value=<?php echo $setpoint_temperature; ?>>°C<span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 22)</span></td>
                                             </tr>
@@ -97,7 +97,7 @@
                                         <div style="<?php if ($modus == 0){print "display: none;";}?>">
                                         <table style="width: 100%;" class="miniature_writing">
                                             <tr>
-                                                <td rowspan="4" class="td_png_icon"><h3><?php echo _('humidity'); ?></h3><img src="images/humidification.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                <td rowspan="4" class="td_png_icon"><h3><?php echo _('humidity'); ?></h3><img src="images/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td class="text_left_padding"><?php echo _('setpoint humidity'); ?></td>
                                                 <td class="text_left_padding"><input name="setpoint_humidity_settings" maxlength="4" size="2" type="text" value=<?php echo $setpoint_humidity; ?>>%<span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 99)</span></td>
                                             </tr>
@@ -123,7 +123,7 @@
                                         <!----------------------------------------------------------------------------------------Umluft-->
                                         <table style="width: 100%;" class="miniature_writing">
                                             <tr>
-                                                <td rowspan="4" class="td_png_icon"><h3><?php echo _('timer circulatng'); ?></h3><img src="images/circulating.png" alt=""><br><button class="art-button" type="button" onclick="help_exhausting_air_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                <td rowspan="4" class="td_png_icon"><h3><?php echo _('timer circulatng'); ?></h3><img src="images/circulate_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_exhausting_air_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td class="text_left_padding"><?php echo _('period every'); ?> </td>
                                                 <td class="text_left_padding"><input type="text" size="3" maxlength="4" name="circulation_air_period_settings" value=<?php echo round($circulation_air_period); ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span></td>
                                             </tr>
@@ -165,7 +165,7 @@
                                         <!----------------------------------------------------------------------------------------Abluft-->
                                         <table style="width: 100%;" class="miniature_writing">
                                             <tr>
-                                                <td rowspan="4" class="td_png_icon"><h3><?php echo _('timer exhausting air'); ?></h3><img src="images/exhausting.png" alt=""><br><button class="art-button" type="button" onclick="help_circulation_air_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                <td rowspan="4" class="td_png_icon"><h3><?php echo _('timer exhausting air'); ?></h3><img src="images/exhausting_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_circulation_air_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td class="text_left_padding"><?php echo _('period every'); ?> </td>
                                                 <td class="text_left_padding"><input type="text" size="3" maxlength="4" name="exhaust_air_period_settings" value=<?php echo round($exhaust_air_period); ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span></td>
                                             </tr>
