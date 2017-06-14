@@ -134,11 +134,11 @@ debugging = ''      # Debugmodus 'on'
 #---------------------------------------------------------------------------------- Pfade zu den Dateien
 website_path = '/var/www'
 csv_path = website_path + '/csv/'
-settings_json_file = website_path+'/settings.json'
-tables_json_file = website_path + '/tables.json'
-config_json_file = website_path + '/config.json'
-current_json_file = website_path + '/current.json'
-logfile_txt_file = website_path + '/logfile.txt'
+settings_json_file = website_path+'/config/settings.json'
+tables_json_file = website_path + '/config/tables.json'
+config_json_file = website_path + '/config/config.json'
+current_json_file = website_path + '/config/current.json'
+logfile_txt_file = website_path + '/logs/logfile.txt'
 verbose = True                # Dokumentiert interne Vorgaenge wortreich
 #---------------------------------------------------------------------------------- Allgemeingueltige Werte aus config.json
 data_configjsonfile = read_config_json()
