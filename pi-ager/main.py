@@ -706,7 +706,7 @@ debugging = 'on'      # Debugmodus 'on'
 website_path = '/var/www/'
 settings_json_file = website_path + 'settings.json'
 current_json_file = website_path + 'current.json'
-picture_website_path = website_path + 'pic/'
+picture_website_path = website_path + 'images/graphs/'
 config_json_file = website_path + '/config.json'
 logfile_txt_file = website_path + '/logfile.txt'
 #---------------------------------------------------------------------------------- allgemeine Variablen
