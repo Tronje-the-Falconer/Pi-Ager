@@ -1,3 +1,22 @@
+- Frontend
+    - überarbeitung der Icons
+    - Hinzufügen von Steuerungsfelder für UV; Licht und Entfeuchter
+    - 
+
+- Backend
+    - Umstellung auf Python 3
+    - neue Bibliothek für SHT und DHT Sensoren
+    - Umstellung von Apache auf Lighttpd
+    - Variablen Umbenennungen
+    - Übersetzungsunterstützung (Deutsch, Englisch
+    - UV Lichtsteuerung
+    - Lichtsteuerung
+    - Entfeuchter-Steuerung
+    - Auslagern der Standardwerte in eine config.json#
+    - Entfernen der Werte für Entfeuchtung ein/aus, Entfeuchtungsverzögerung, Kühlen an/aus, aus den csv-Dateien und auslagern in die         config.json
+    - Verzeichnis strukturierung (config, logs, images/icons, images/graphs)
+--------------------------------------------------------------------------------
+
 Version 2.1.1
 
 - Frontend
