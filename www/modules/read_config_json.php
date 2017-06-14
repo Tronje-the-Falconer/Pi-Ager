@@ -1,6 +1,6 @@
 <?php
-    # config.json auslesen um allgemeine Configurationswerte dsetzen
-    $SET = file_get_contents('config.json');
+    # /config/config.json auslesen um allgemeine Configurationswerte dsetzen
+    $SET = file_get_contents('/config/config.json');
     $data_configjsonfile = json_decode($SET, true);    
     $sensortype = $data_configjsonfile['sensortype'];
     if ($sensortype == 1) {

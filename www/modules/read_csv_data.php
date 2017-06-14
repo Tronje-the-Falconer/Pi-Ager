@@ -1,6 +1,6 @@
 <?php 
     // Gewählte CSV-Datei ermitteln
-   // $read_tables_json = file_get_contents('tables.json');
+   // $read_tables_json = file_get_contents('/config/tables.json');
    // $array_tables_json = json_decode($read_tables_json, true);
    // $agingtablename = $array_tables_json['agingtable'];
 

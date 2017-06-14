@@ -1,6 +1,6 @@
 <?php
-    # settings.json auslesen um sollwerte wieder zu geben
-    $SET = file_get_contents('settings.json');
+    # /config/settings.json auslesen um sollwerte wieder zu geben
+    $SET = file_get_contents('/config/settings.json');
     $data_settingsjsonfile = json_decode($SET, true);
     $modus = $data_settingsjsonfile['modus'];
     if ($modus  ==  0) {

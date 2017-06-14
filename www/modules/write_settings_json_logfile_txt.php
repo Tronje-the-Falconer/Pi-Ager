@@ -18,7 +18,7 @@
                 $_POST['exhaust_air_duration_settings']<1441 && $_POST['exhaust_air_duration_settings']>-1                                                                  // Prüfung Dauer Abluft
             )
             {
-                # Eingestellte Werte in settings.json und logfile.txt speichern
+                # Eingestellte Werte in /config/settings.json und /logs/logfile.txt speichern
                 $timestamp = time();
                 $array_settings_json = array( 'setpoint_temperature' => (float)$_POST['setpoint_temperature_settings'],
                     'modus' => (int)$_POST['modus_settings'],
@@ -29,7 +29,7 @@
                     'exhaust_air_period' => (int)$_POST['exhaust_air_period_settings']*60,
                     'last_change' => $timestamp);
                 $jsoninput = json_encode($array_settings_json);
-                file_put_contents('settings.json', $jsoninput);
+                file_put_contents('/config/settings.json', $jsoninput);
 
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus
@@ -91,7 +91,7 @@
                 $switch_on_humidity = $array_settings_json['setpoint_humidity'] - $switch_on_humidifier;
                 $switch_off_humidity = $array_settings_json['setpoint_humidity'] - $switch_off_humidifier;
 
-                $f=fopen('logfile.txt','a');
+                $f=fopen('/logs/logfile.txt','a');
                 fwrite($f, "\n"."***********************************************");
                 fwrite($f, "\n"._('sensor').": ".$sensorname);
                 fwrite($f, "\n". _('operating mode').": ".$operating_mode);
@@ -145,7 +145,7 @@
 
 
                 # 3Sekunden Anzeige dass die Werte gespeichert wurden
-                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b><?php echo sprintf(_("values savedin file %s"), "settings.json)" ; ?></b></p>
+                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b><?php echo sprintf(_("values savedin file %s"), "/config/settings.json)" ; ?></b></p>
                     <script language="javascript">
                         setTimeout(function(){document.getElementById("info-message").style.display="none"}, 3000)
                     </script>';

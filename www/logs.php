@@ -46,7 +46,7 @@
                                         <tr>
                                             <td>
                                                 <?php 
-                                                    $f = file('logfile.txt');
+                                                    $f = file('/logs/logfile.txt');
                                                     foreach($f as $file) {
                                                         echo '<br />'. $file;
                                                     }
