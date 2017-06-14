@@ -169,7 +169,7 @@ def ploting(plotting_value):
         elif plot == 'hourly':
             period = 'h'
 #---------------------------------------------------------------------------------------------------------------- Grafiken erzeugen
-        ret = rrdtool.graph("%s%s_%s-%s.png" %(picture_website_path,rrd_dbname,plotting_value,plot),
+        ret = rrdtool.graph("%s%s_%s-%s.png" %(graphs_website_path,rrd_dbname,plotting_value,plot),
             "--start",
             "-1%s" % (period),
             "--title=%s (%s)" % (title, plot),
@@ -704,11 +704,11 @@ def doMainLoop():
 debugging = 'on'      # Debugmodus 'on'
 #---------------------------------------------------------------------------------- Pfade zu den Dateien
 website_path = '/var/www/'
-settings_json_file = website_path + 'settings.json'
-current_json_file = website_path + 'current.json'
-picture_website_path = website_path + 'images/graphs/'
-config_json_file = website_path + '/config.json'
-logfile_txt_file = website_path + '/logfile.txt'
+settings_json_file = website_path + '/config/settings.json'
+current_json_file = website_path + '/config/current.json'
+graphs_website_path = website_path + '/images/graphs/'
+config_json_file = website_path + '/config/config.json'
+logfile_txt_file = website_path + '/logs/logfile.txt'
 #---------------------------------------------------------------------------------- allgemeine Variablen
 # sensor = Adafruit_DHT.AM2302
 logspacer = "\n" + "***********************************************"
