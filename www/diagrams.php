@@ -15,10 +15,10 @@
                                 <div class="hg_container" style="margin-bottom: 20px; margin-top: 20px;">
                                     <table style="width: 100%;">
                                         <tr>
-                                            <td><img src="images/hour_42x42.png" alt=""></td>
-                                            <td><img src="images/daily_42x42.png" alt=""></td>
-                                            <td><img src="images/week_42x42.png" alt=""></td>
-                                            <td><img src="images/month_42x42.png" alt=""></td>
+                                            <td><img src="images/icons/hour_42x42.png" alt=""></td>
+                                            <td><img src="images/icons/daily_42x42.png" alt=""></td>
+                                            <td><img src="images/icons/week_42x42.png" alt=""></td>
+                                            <td><img src="images/icons/month_42x42.png" alt=""></td>
                                         </tr>
                                         <tr>
                                             <td><a href="diagrams.php?diagram_mode=hourly" class="art-button"><?php echo _('hour'); ?></a></td>
@@ -31,19 +31,19 @@
 
                                     <div style="">
                                     <h2><?php echo _('temperature profile'); ?> </h2>
-                                    <img src="/pic/pi-ager_sensor_temperature-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <img src="/images/graphs/pi-ager_sensor_temperature-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('humidity profile'); ?></h2>
-                                    <img src="/pic/pi-ager_sensor_humidity-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <img src="/images/graphs/pi-ager_sensor_humidity-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('cooler'); ?></h2>
-                                    <img src="/pic/pi-ager_stat_coolcompressor-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <img src="/images/graphs/pi-ager_stat_coolcompressor-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('heater'); ?></h2>
-                                    <img src="/pic/pi-ager_stat_heater-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <img src="/images/graphs/pi-ager_stat_heater-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('humidifier'); ?></h2>
-                                    <img src="/pic/pi-ager_status_humidifier-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <img src="/images/graphs/pi-ager_status_humidifier-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('air circulatory system'); ?></h2>
-                                    <img src="/pic/pi-ager_stat_circulate_air-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <img src="/images/graphs/pi-ager_stat_circulate_air-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('air exchanger'); ?></h2>
-                                    <img src="/pic/pi-ager_stat_exhaust_air-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <img src="/images/graphs/pi-ager_stat_exhaust_air-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->
                             </div>

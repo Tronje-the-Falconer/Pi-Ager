@@ -7,7 +7,7 @@
                                             <!----------------------------------------------------------------------------------------Temperatur-->
                                             <table style="width: 100%;" class="miniature_writing">
                                                 <tr>
-                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('temperature'); ?></h3><img src="images/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('temperature'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td class="text_left_padding"><?php echo _('switch-on value'); ?>:</td>
                                                     <td class="text_left_padding"><input name="switch_on_cooling_compressor_config" type="text" maxlength="4" size="2" value=<?php echo $switch_on_cooling_compressor; ?>>°C
                                                         <span class="display_none" style="font-size: xx-small">
@@ -71,7 +71,7 @@
                                             <!----------------------------------------------------------------------------------------Luftfeuchte-->
                                             <table style="width: 100%;" class="miniature_writing">
                                                 <tr>
-                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('humidity'); ?></h3><img src="images/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('humidity'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td class="text_left_padding"><?php echo _('switch-on value').':'; ?></td>
                                                     <td class="text_left_padding"><input name="switch_on_humidifier_config" maxlength="3" size="2" type="text" value=<?php echo $switch_on_humidifier; ?>>%<span class="display_none" style="font-size: xx-small">
                                                     <?php 
@@ -131,7 +131,7 @@
                                             <!----------------------------------------------------------------------------------------Sensortype-->
                                             <table style="width: 100%;" class="miniature_writing">
                                                 <tr>
-                                                    <td class="td_png_icon"><h3><?php echo _('sensortype'); ?></h3><img src="images/sensortype_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_sensortype_blockFunction()"><?php echo _('help'); ?></button>
+                                                    <td class="td_png_icon"><h3><?php echo _('sensortype'); ?></h3><img src="images/icons/sensortype_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_sensortype_blockFunction()"><?php echo _('help'); ?></button>
                                                     </td>
                                                     <td style=" text-align: left; padding-left: 20px;">
                                                         <input type="radio" name="sensortype_config" value="1" <?php echo $checked_sens_1; ?>/><label> DHT11</label><br>
@@ -159,7 +159,7 @@
                                             <!----------------------------------------------------------------------------------------Language-->
                                             <table style="width: 100%;" class="miniature_writing">
                                                 <tr>
-                                                    <td class="td_png_icon"><h3><?php echo _('language'); ?></h3><img src="images/language_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_language_blockFunction()"><?php echo _('help'); ?></button>
+                                                    <td class="td_png_icon"><h3><?php echo _('language'); ?></h3><img src="images/icons/language_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_language_blockFunction()"><?php echo _('help'); ?></button>
                                                     </td>
                                                     <td style=" text-align: left; padding-left: 20px;">
                                                         <input type="radio" name="language_config" value="de_DE" <?php echo $checked_language_1; ?>/><label> <?php echo _('german') ?></label><br>

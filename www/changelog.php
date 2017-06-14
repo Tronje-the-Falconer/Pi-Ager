@@ -53,13 +53,13 @@
                                     <table style="width: 100%" class="miniature_writing">
                                         <tr>
                                             <td>
-                                                <img src="images/tronje.gif" alt="">
+                                                <img src="images/icons/tronje.gif" alt="">
                                             </td>
                                             <td>
-                                                <img src="images/steini.gif" alt="">
+                                                <img src="images/icons/steini.gif" alt="">
                                             </td>
                                             <td>
-                                                <img src="images/hama.gif" alt="">
+                                                <img src="images/icons/hama.gif" alt="">
                                             </td>
                                         </tr>
                                         <tr>

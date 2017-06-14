@@ -30,10 +30,10 @@
                                             }
 
                                             if ($grepmain == NULL){
-                                                echo '<td><img src="images/operatingmode_42x42.png" alt="" style="padding: 10px;"></td><td><img src="images/status_off_20x20.png" alt="" style="padding-top: 10px;"></td><td style=""><button class="art-button" name="pi-ager_start">'._('start pi-ager').'</button></td>';
+                                                echo '<td><img src="images/icons/operatingmode_42x42.png" alt="" style="padding: 10px;"></td><td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td><td style=""><button class="art-button" name="pi-ager_start">'._('start pi-ager').'</button></td>';
                                             }
                                             else {
-                                                echo '<td><img src="images/operating_42x42.gif" alt="" style="padding: 10px;"></td><td><img src="images/status_on_20x20.png" alt="" style="padding-top: 10px;"></td><td><button class="art-button" name="pi-ager_agingtable_stop" onclick="return confirm("'._("stop pi-ager?").'");">'._("stop pi-ager?").'</button></td>';
+                                                echo '<td><img src="images/icons/operating_42x42.gif" alt="" style="padding: 10px;"></td><td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td><td><button class="art-button" name="pi-ager_agingtable_stop" onclick="return confirm("'._("stop pi-ager?").'");">'._("stop pi-ager?").'</button></td>';
                                             }
                                             print ' </form>';
                                     ?>
@@ -43,7 +43,7 @@
 
                                     <table style="width: 100%" class="switching_state miniature_writing">
                                         <tr>
-                                            <td><img src="images/agingtable_42x42.png" alt="" style="padding-left: 10px;"></td>
+                                            <td><img src="images/icons/agingtable_42x42.png" alt="" style="padding-left: 10px;"></td>
                                             <td style=" text-align: left; padding-left: 20px;">
                                                 <?php 
                                                     print '<form  method="post">';
@@ -57,13 +57,13 @@
                                                     }
                                                     echo '</td><td>';
                                                     if ($grepagingtable == NULL){
-                                                        echo '<img src="images/status_off_20x20.png" alt="" style="padding-right: 20px;">';
+                                                        echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-right: 20px;">';
                                                     }
                                                     else {
-                                                        echo '<img src="images/status_on_20x20.png" alt="" style="padding-right: 20px;">';
+                                                        echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding-right: 20px;">';
                                                     }
                                                 ?>
-                                            <img src="images/agingtable_42x42.png" alt=""></td>
+                                            <img src="images/icons/agingtable_42x42.png" alt=""></td>
                                         </tr>
                                         <tr>
                                             <td>&nbsp;</td>
