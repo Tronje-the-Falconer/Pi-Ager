@@ -12,7 +12,6 @@ import RPi.GPIO as gpio
 import rrdtool
 import math
 import gettext
-from sht_sensor import Sht
 from pi_sht1x import SHT1x
 
 ######################################################### Definieren von Funktionen
@@ -737,8 +736,8 @@ measurement_time_interval = 10       # Zeitintervall fuer die Messung in Sekunde
 loopcounter = 0                      #  Zaehlt die Durchlaeufe des Mainloops
 #-----------------------------------------------------------------------------------------Pinbelegung
 board_mode = gpio.BCM              # GPIO board mode (BCM = Broadcom SOC channel number - numbers after GPIO Bsp. GPIO12=12 [GPIO.BOARD = Pin by number Bsp: GPIO12=32])
-gpio_cooling_compressor = 3        # GPIO fuer Kuehlschrankkompressor
-gpio_heater = 4                    # GPIO fuer Heizkabel
+gpio_cooling_compressor = 4        # GPIO fuer Kuehlschrankkompressor
+gpio_heater = 3                    # GPIO fuer Heizkabel
 gpio_humidifier = 18               # GPIO fuer Luftbefeuchter
 gpio_circulating_air = 24          # GPIO fuer Umluftventilator
 gpio_exhausting_air = 23           # GPIO fuer Austauschluefter

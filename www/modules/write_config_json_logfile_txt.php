@@ -19,7 +19,7 @@
                 $_POST['delay_humidify_config']<61 && $_POST['delay_humidify_config']>-1                                                             // Prüfung Verzögerung Feuchte
             )
             {
-                # Eingestellte Werte in /config/config.json und /logs/logfile.txt speichern
+                # Eingestellte Werte in config/config.json und logs/logfile.txt speichern
                 $timestamp = time();
                 $array_config_json = array( 'switch_on_cooling_compressor' => (float)$_POST['switch_on_cooling_compressor_config'],
                     'switch_off_cooling_compressor' => (float)$_POST['switch_off_cooling_compressor_config'],
@@ -30,7 +30,7 @@
                     'language' => $_POST['language_config'],
                     'last_change' => $timestamp);
                 $configjsoninput = json_encode($array_config_json);
-                file_put_contents('/config/config.json', $configjsoninput);
+                file_put_contents('config/config.json', $configjsoninput);
 
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus
@@ -93,7 +93,7 @@
                 $switch_off_humidity = $setpoint_humidity - $array_config_json['switch_off_humidifier'];
                 
 
-                $f=fopen('/logs/logfile.txt','a');
+                $f=fopen('logs/logfile.txt','a');
                 fwrite($f, "\n"."***********************************************");
                 fwrite($f, "\n"._('sensor').": ".$sensorname);
                 fwrite($f, "\n". _('operating mode').": ".$operating_mode);
@@ -150,7 +150,7 @@
 
 
                 # 3Sekunden Anzeige dass die Werte gespeichert wurden
-                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b><?php echo sprintf(_("values saved in file %s"), "/config/config.json"); ?></b></p>
+                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b><?php echo sprintf(_("values saved in file %s"), "config/config.json"); ?></b></p>
                     <script language="javascript">
                         setTimeout(function(){document.getElementById("info-message").style.display="none"}, 3000)
                     </script>';

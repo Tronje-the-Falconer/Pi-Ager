@@ -44,6 +44,12 @@
                                     <img src="/images/graphs/pi-ager_stat_circulate_air-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('air exchanger'); ?></h2>
                                     <img src="/images/graphs/pi-ager_stat_exhaust_air-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <h2><?php echo _('uv'); ?></h2>
+                                    <img src="/images/graphs/pi-ager_status_uv-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <h2><?php echo _('light'); ?></h2>
+                                    <img src="/images/graphs/pi-ager_status_light-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <h2><?php echo _('dehumidifier'); ?></h2>
+                                    <img src="/images/graphs/pi-ager_status_dehumidifier-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->
                             </div>

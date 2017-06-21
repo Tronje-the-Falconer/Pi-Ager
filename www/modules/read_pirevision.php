@@ -1,5 +1,6 @@
 <?php 
     # Auslesen der Raspberry Revision und zuordnung zur Raspberry Pi Version nach Tabelle (http://elinux.org/RPi_HardwareHistory#Board_Revision_History)
+    # Stand 21.06.2017
     global $piversion;
     $getpirevision = shell_exec('sudo /var/sudowebscript.sh getpirevision');
     $pirevision = trim($getpirevision);
@@ -64,7 +65,6 @@
         $piversion = 'Raspberry Pi 2 Model B';
     }
     elseif ($pirevision == 'a21041'){
-    #elseif (strcmp($pirevision, $test) == 0){
         $piversion = 'Raspberry Pi 2 Model B';
     }
     elseif ($pirevision == 'a22042'){
@@ -72,6 +72,9 @@
     }
     elseif ($pirevision == '900021'){
         $piversion = 'Raspberry Pi A+';
+    }
+        elseif ($pirevision == '900032'){
+        $piversion = 'Raspberry Pi B+';
     }
     elseif ($pirevision == '900092'){
         $piversion = 'Raspberry Pi Zero';
@@ -81,6 +84,9 @@
     }
     elseif ($pirevision == '920093'){
         $piversion = 'Raspberry Pi Zero';
+    }
+        elseif ($pirevision == '9000c1'){
+        $piversion = 'Raspberry Pi Zero W';
     }
     elseif ($pirevision == 'a02082'){
         $piversion = 'Raspberry Pi 3 Model B';

@@ -1,6 +1,6 @@
 <?php 
     $timestamp = date('d.m.Y / H:i:s');
-    $logfile = '/logs/logfile.txt';
+    $logfile = 'logs/logfile.txt';
     if (isset ($_POST['clear_logfile'])) {
         if (is_file($logfile)) {
             $fp = fopen($logfile, 'w')

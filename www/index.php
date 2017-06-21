@@ -10,7 +10,7 @@
                                 <!----------------------------------------------------------------------------------------Anzeige T/rLF-->
                                 <div class="thermometers">
                                     <div class="th-display-div">
-                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/temperature.png" alt="" style="padding-top: 10px;">'._('temperature').'( &deg;C)'; ?></div></td></tr>
+                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/temperature.png" alt="" style="padding-top: 10px;">'.'( &deg;C)'; ?></div></td></tr>
                                             <tr>
                                                 <td>
                                                     <div class="de">
@@ -31,7 +31,7 @@
                                                                                 $humidity_linestring = '<div style="float: left; padding-left: 8px;" id="current_json_humidity_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_humidity_1"></div></span><strong>&#37</strong> ';
                                                                             }
                                                                         ?>
-                                                                        <?php echo $temperature_linestring .'( &deg;C)'; ?>
+                                                                        <?php echo $temperature_linestring; ?>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -42,7 +42,7 @@
                                         </table>
                                     </div>
                                     <div class="th-display-div">
-                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/humidity.png" alt="" style="padding-top: 10px;">'._('humidity').'( %)'; ?></div></td></tr>
+                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/humidity.png" alt="" style="padding-top: 10px;">'.'( %)'; ?></div></td></tr>
                                             <tr>
                                                 <td>
                                                     <div class="de">
@@ -50,7 +50,7 @@
                                                             <div class="dene">
                                                                 <div class="denem">
                                                                     <div class="deneme">
-                                                                        <?php echo $humidity_linestring.'( %)'; ?>
+                                                                        <?php echo $humidity_linestring; ?>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -118,7 +118,7 @@
                                             <?php 
                                                 if ($modus==0){
                                                     echo '   <td ><img src="images/icons/cooling_42x42.png" alt=""></td>
-                                                        <td><img src="'.$cooler_on_off_png.'" title="PIN_COOL 22[15] -> IN 1 (GPIO 3)"></td>
+                                                        <td><img src="'.$cooler_on_off_png.'" title="PIN_COOL 4[7] -> IN 1 (PIN2)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('cooler'));
                                                     echo '</td>
@@ -129,7 +129,7 @@
                                                 }
                                                 if ($modus==1){
                                                     echo '   <td ><img src="images/icons/cooling_42x42.png" alt=""></td>
-                                                        <td><img src="'.$cooler_on_off_png.'" title="PIN_COOL 22[15] -> IN 1 (GPIO 3)"></td>
+                                                        <td><img src="'.$cooler_on_off_png.'" title="PIN_COOL 4[7] -> IN 1 (PIN2)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('cooler'));
                                                     echo '<td>'.$sensor_temperature.' °C</td>
@@ -139,7 +139,7 @@
                                                 }
                                                 if ($modus==2){
                                                     echo '   <td ><img src="images/icons/heating_42x42.png" alt=""></td>
-                                                        <td><img src="'.$heater_on_off_png.'" title="PIN_HEATER 27[13] -> IN 2 (GPIO 2)"></td>
+                                                        <td><img src="'.$heater_on_off_png.'" title="PIN_HEATER 3[5] -> IN 2 (PIN 3)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('heater'));
                                                     echo '</td>
@@ -150,7 +150,7 @@
                                                 }
                                                 if ($modus==3 || $modus==4){
                                                     echo '   <td ><img src="images/icons/cooling_42x42.png" alt=""></td>
-                                                        <td><img src="'.$cooler_on_off_png.'" title="PIN_COOL 22[15] -> IN 1 (GPIO 3)"></td>
+                                                        <td><img src="'.$cooler_on_off_png.'" title="PIN_COOL 4[7] -> IN 1 (PIN2)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('cooler'));
                                                     echo '<td>'.$sensor_temperature.' °C</td>
@@ -158,7 +158,7 @@
                                                         <td>'.($setpoint_temperature + $switch_on_cooling_compressor).' °C</td>
                                                         <td>'.($setpoint_temperature + $switch_off_cooling_compressor).' °C</td></tr>';
                                                     echo '<tr> <td ><img src="images/icons/heating_42x42.png" alt=""></td>
-                                                        <td><img src="'.$heater_on_off_png.'" title="PIN_HEATER 27[13] -> IN 2 (GPIO 2)"></td>
+                                                        <td><img src="'.$heater_on_off_png.'" title="PIN_HEATER 3[5] -> IN 2 (PIN 3)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('heater'));
                                                     echo '<td>'.$sensor_temperature.' °C</td>
@@ -172,7 +172,7 @@
                                            <?php 
                                                 if ($modus==1 || $modus==2 || $modus==3){
                                                     echo '   <td ><img src="images/icons/humidification_42x42.png" alt=""></td>
-                                                        <td><img src='.$humidifier_on_off_png.' title="PIN_HUM 24[18] -> IN 3 (GPIO 5)"></td>
+                                                        <td><img src='.$humidifier_on_off_png.' title="PIN_HUM 18[12] -> IN 3 (PIN 4)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('humidification'));
                                                     echo '</td>
@@ -184,15 +184,24 @@
 
                                                 if ($modus==4){
                                                     echo '   <td ><img src="images/icons/humidification_42x42.png" alt=""></td>
-                                                        <td><img src='.$humidifier_on_off_png.' title="PIN_HUM 24[18] -> IN 3 (GPIO 5)"></td>
+                                                        <td><img src='.$humidifier_on_off_png.' title="PIN_HUM 18[12] -> IN 3 (PIN 4)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('humidification'));
                                                     echo '<td>'.$sensor_humidity.'%</td>
                                                         <td>'.$setpoint_humidity.'%</td>
                                                         <td>'.($setpoint_humidity - $switch_on_humidifier).'%</td>
                                                         <td>'.($setpoint_humidity - $switch_off_humidifier).'%</td></tr>';
+                                                    echo '<tr> <td ><img src="images/icons/exhausting_42x42.png" alt=""></td>
+                                                        <td><img src='.$exhausting_on_off_png.' title="PIN_EXH 23[16] -> IN 5 (PIN 5)"></td>
+                                                        <td class="text_left">';
+                                                    echo strtoupper(_('exhausting'));
+                                                    echo '</td>
+                                                        <td>'.$sensor_humidity.'%</td>
+                                                        <td>'.$setpoint_humidity.'%</td>
+                                                        <td>'.($setpoint_humidity + $switch_on_humidifier).'%</td>
+                                                        <td>'.($setpoint_humidity + $switch_off_humidifier).'%</td></tr>';
                                                     echo '<tr> <td ><img src="images/icons/dehumidification_42x42.png" alt=""></td>
-                                                        <td><img src='.$exhausting_on_off_png.' title="PIN_FAN1 23[16] -> IN 5 (GPIO 4)"></td>
+                                                        <td><img src='.$dehumidifier_on_off_png.' title="PIN_DEH 7[26] -> IN 8 (PIN 9)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('dehumidification'));
                                                     echo '</td>
@@ -219,7 +228,7 @@
                                             <td><img src="<?php echo $circulating_on_off_png ;?>" title="PIN_FAN 18[12] -> IN 4 (GPIO 1)"></td>
                                             <td class="text_left">
                                             <?php 
-                                                echo _('circulating air');
+                                                echo strtoupper(_('circulating air'));
                                                 if ($circulation_air_duration > 0 && $circulation_air_period >0) {echo ', '.strtoupper(_('timer on'));}
                                                 elseif ($circulation_air_period == 0) {echo  ' '. strtoupper(_('always on'));}
                                                 elseif ($circulation_air_duration == 0) {echo ', '. strtoupper(_('timer off'));}
@@ -229,19 +238,32 @@
                                             <td><?php echo $circulation_air_duration.' '._('minutes'); ?></td>
                                         </tr>
                                         <tr>
-                                            <td><img <?php if ($exhaust_air_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/exhausting_42x42.png" alt=""></td>
-                                            <td><img src="<?php echo $exhausting_on_off_png; ?>" title="PIN_FAN1 23[16] -> IN 5 (GPIO 4)"></td>
+                                            <td><img <?php if ($uv_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/uv-light_42x42.png" alt=""></td>
+                                            <td><img src="<?php echo $uv_on_off_png; ?>" title="PIN_FAN1 23[16] -> IN 5 (GPIO 4)"></td>
                                             <td class="text_left">
                                             <?php 
-                                                echo _('exhausting air');
-                                                if ($exhaust_air_duration > 0 && $exhaust_air_period >0) {echo ', '.strtoupper(_('timer on'));}
-                                                elseif ($exhaust_air_period == 0) {echo ' '.strtoupper(_('always on'));}
-                                                elseif ($exhaust_air_duration == 0) {echo ', '.strtoupper(_('timer off'));}
-
+                                                echo strtoupper(_('uv-light'));
+                                                if ($uv_duration > 0 && $uv_period >0) {echo ', '.strtoupper(_('timer on'));}
+                                                elseif ($uv_period == 0) {echo ' '.strtoupper(_('always on'));}
+                                                elseif ($uv_duration == 0) {echo ', '.strtoupper(_('timer off'));}
                                             ?></td>
-                                            <td><?php echo $exhaust_air_period.' '._('minutes'); ?></td>
+                                            <td><?php echo $uv_period.' '._('minutes'); ?></td>
                                             <td></td>
-                                            <td><?php echo $exhaust_air_duration.' '._('minutes'); ?></td>
+                                            <td><?php echo $uv_duration.' '._('minutes'); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img <?php if ($light_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/light_42x42.png" alt=""></td>
+                                            <td><img src="<?php echo $light_on_off_png; ?>" title="PIN_Light 23[16] -> IN 7 (GPIO 4)"></td>
+                                            <td class="text_left">
+                                            <?php 
+                                                echo strtoupper(_('light'));
+                                                if ($light_duration > 0 && $light_period >0) {echo ', '.strtoupper(_('timer on'));}
+                                                elseif ($light_period == 0) {echo ' '.strtoupper(_('always on'));}
+                                                elseif ($light_duration == 0) {echo ', '.strtoupper(_('timer off'));}
+                                            ?></td>
+                                            <td><?php echo $light_period.' '._('minutes'); ?></td>
+                                            <td></td>
+                                            <td><?php echo $light_duration.' '._('minutes'); ?></td>
                                         </tr>
                                     </table>
                                 </div>
