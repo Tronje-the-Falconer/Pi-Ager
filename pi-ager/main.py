@@ -702,7 +702,7 @@ def doMainLoop():
 ######################################################### Definition von Variablen
 debugging = 'on'      # Debugmodus 'on'
 #---------------------------------------------------------------------------------- Pfade zu den Dateien
-website_path = '/var/www/'
+website_path = '/var/www'
 settings_json_file = website_path + '/config/settings.json'
 current_json_file = website_path + '/config/current.json'
 graphs_website_path = website_path + '/images/graphs/'
