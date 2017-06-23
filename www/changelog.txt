@@ -1,3 +1,5 @@
+Version 2.2.1
+
 - Frontend
     - überarbeitung der Icons
     - Hinzufügen von Steuerungsfelder für UV; Licht und Entfeuchter

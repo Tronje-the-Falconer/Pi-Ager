@@ -399,22 +399,22 @@ li p, .art-postcontent li p, .art-blockcontent li p
    margin-right: 0 !important;
 }
 
-.art-object0
+.art-logo
 {
     display: block;
-    left: 2.62%;
+    left: 10.62%;
     margin-left: -1px;
     position: absolute;
-    top: 43px;
-    width: 64px;
-    height: 64px;
-    background-image: url('../images/object0.png');
+    top: 23px;
+    width: 45px;
+    height: 100px;
+    background-image: url('../images/logo.png');
     background-position: 0 0;
     background-repeat: no-repeat;
     z-index: 0;
 }
 
-.default-responsive .art-object0
+.default-responsive .art-logo
 {
   display: none;
 }.art-headline
@@ -1273,7 +1273,7 @@ form.art-search input[type="submit"], input.art-search-button, a.art-search-butt
    border: 0;
    top: 1px;
    bottom: 1px;
-   right: 	1px;
+   right:     1px;
    padding:0 6px;
    color: #274E68 !important;
    font-size: 13px;

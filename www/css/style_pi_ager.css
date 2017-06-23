@@ -1,13 +1,13 @@
 ﻿/* @import url('http://fonts.googleapis.com/css?family=Dosis'); */
 
 * {
-	margin: 0;
-	padding: 0;
-	outline: 0;
+    margin: 0;
+    padding: 0;
+    outline: 0;
 }
 
 body {
-	text-align: center;
+    text-align: center;
 
 }
 
@@ -166,27 +166,27 @@ div.th-display-div {
 }
 
 @media only screen and (max-device-width: 621px) {
-	div.th-display-div { float: none; }
+    div.th-display-div { float: none; }
     div.thermometers { width: 290px; }
 
 }
 
 
 div.thermometers .label {
-	position: relative;
-	float: left;
-	width: 280px;
-	text-align: center;
-	font-size: 24px;
-	font-family: 'Arial';
-	font-weight: bold;
+    position: relative;
+    float: left;
+    width: 280px;
+    text-align: center;
+    font-size: 24px;
+    font-family: 'Arial';
+    font-weight: bold;
 }
 
 .de .den, .de .dene, .de .denem, .de .deneme { position: absolute;  left: 50%; top: 50%; }
 .de {
     position: relative;
-	float: left;
-	margin: 20px;
+    float: left;
+    margin: 20px;
     width: 240px;
     height: 240px;
     border-radius: 100%;

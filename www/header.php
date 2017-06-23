@@ -27,8 +27,8 @@
     # Auslesen der Version aus dem Changelog
     # Lese 14 Zeichen, beginnend mit dem 21. Zeichen
     $changelogfile = 'changelog.txt';
-    $erste_Zeile = fopen($changelogfile,"r"); # Oeffnet die Datei changelog.txt
-    $piager_version = fgets($erste_Zeile, 4096); # liest die erste Zeile bzw. bis Zeichen 4096 aus. je nachdem was zuerst eintritt
+    $first_row_changelog = fopen($changelogfile,"r"); # Oeffnet die Datei changelog.txt
+    $piager_version = fgets($first_row_changelog, 4096); # liest die erste Zeile bzw. bis Zeichen 4096 aus. je nachdem was zuerst eintritt
     #$rssversion = file_get_contents('$changelogfile', NULL, NULL, 0, 12); # Alternative über Inhalt auslesen. Zeile 0 bis Zeichen 12
     
     # Language festlegen
@@ -52,7 +52,7 @@
     <head>
         <title>Pi-Ager</title>
         <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
-        <link href="css/style_rss.css" rel="stylesheet" type="text/css" />
+        <link href="css/style_pi_ager.css" rel="stylesheet" type="text/css" />
         <!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
         <link rel="stylesheet" href="css/style.css" media="screen">
         <!--[if lte IE 7]><link rel="stylesheet" href="css/style.ie7.css" media="screen" /><![endif]-->
@@ -66,7 +66,7 @@
         <div id="art-main">
             <header class="art-header">
                 <div class="art-shapes">
-                    <div class="art-object0"></div>
+                    <div class="art-logo"></div>
                 </div>
                 <h1 class="art-headline">Pi-Ager</h1>
                 <h2 class="art-slogan"><?php sprintf(_('by'),'( Grillsportverein'); ?></h2>

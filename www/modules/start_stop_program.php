@@ -61,9 +61,9 @@
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_humidifier'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_circulating_air'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_exhausting_air'));
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_uv_light'));
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_reserved1'));
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_reserved2'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_uv'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_light'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_dehumidifier'));
         $f=fopen('logs/logfile.txt','a');
         fwrite($f, "\n".date('d.m.Y H:i')." "._('agingtable stopped'));
         fclose($f);
