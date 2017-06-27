@@ -48,18 +48,27 @@
                                     </table>
                                 </div>
                                  <!----------------------------------------------------------------------------------------Hall-of-Fame-->
-                                <<h2 class="art-postheader" ><?php echo _('the developer team'); ?></h2>
+                                <h2 class="art-postheader" ><?php echo _('the developer team'); ?></h2>
                                 <div class="hg_container" style="text-align: left;">
                                     <table style="width: 100%" class="miniature_writing">
                                         <tr>
                                             <td>
-                                                <img src="images/tronje.gif" alt="">
+                                                <div class="img__wrap">
+                                                    <img class="img__img" src="images/tronje.gif" alt="">
+                                                    <p class="img__description">Backend & Linux</p>
+                                                </div>
                                             </td>
                                             <td>
-                                                <img src="images/steini.gif" alt="">
+                                                <div class="img__wrap">
+                                                    <img class="img__img" src="images/steini.gif" alt="">
+                                                    <p class="img__description">Frontend & Design</p>
+                                                </div>
                                             </td>
                                             <td>
-                                                <img src="images/hama.gif" alt="">
+                                                <div class="img__wrap">
+                                                    <img class="img__img" src="images/hama.gif" alt="">
+                                                    <p class="img__description">Hardware & Testing</p>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
