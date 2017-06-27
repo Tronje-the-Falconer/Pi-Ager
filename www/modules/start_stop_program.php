@@ -28,7 +28,7 @@
                 $f=fopen('logs/logfile.txt','w');
                 fwrite($f, "\n".date('d.m.Y H:i')." "._('pi-ager started'));
                 fclose($f);
-                shell_exec('sudo /var/sudowebscript.sh startautomatic');
+                shell_exec('sudo /var/sudowebscript.sh startagingtable');
                 sleep (1); # 1 Sec auf start der Py-Datei warten
                 $f=fopen('logs/logfile.txt','a');
                 fwrite($f, "\n".date('d.m.Y H:i')." "._('agingtable started'));
@@ -45,17 +45,23 @@
                 $f=fopen('logs/logfile.txt','w');
                 fwrite($f, "\n".date('d.m.Y H:i')." "._('pi-ager started'));
                 fclose($f);
-                shell_exec('sudo /var/sudowebscript.sh startautomatic');
+                shell_exec('sudo /var/sudowebscript.sh startagingtable');
                 sleep (1); # 1 Sec auf start der Py-Datei warten
                 $f=fopen('logs/logfile.txt','a');
                 fwrite($f, "\n".date('d.m.Y H:i')." "._('agingtable started'));
                 fclose($f);
-                $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepautomatic');
+                $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
         }
     }
     if (isset($_POST['pi-ager_agingtable_stop'])){
+        $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
+        if ($grepagingtable !=0){
+            shell_exec('sudo /var/sudowebscript.sh pkillagingtable');
+            $f=fopen('logs/logfile.txt','a');
+            fwrite($f, "\n".date('d.m.Y H:i')." "._('agingtable stopped'));
+            fclose($f);
+        }
         shell_exec('sudo /var/sudowebscript.sh pkillmain');
-        shell_exec('sudo /var/sudowebscript.sh pkillautomatic');
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_cooling_compressor'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_heater'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_humidifier'));
@@ -65,11 +71,11 @@
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_light'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_dehumidifier'));
         $f=fopen('logs/logfile.txt','a');
-        fwrite($f, "\n".date('d.m.Y H:i')." "._('agingtable stopped'));
+        fwrite($f, "\n".date('d.m.Y H:i')." "._('pi-ager stopped'));
         fclose($f);
     }
     if (isset($_POST['agingtable_stop'])){
-        shell_exec('sudo /var/sudowebscript.sh pkillautomatic');
+        shell_exec('sudo /var/sudowebscript.sh pkillagingtable');
         $f=fopen('logs/logfile.txt','a');
         fwrite($f,"\n". date('d.m.Y H:i')." "._('agingtable stopped'));
         fclose($f);

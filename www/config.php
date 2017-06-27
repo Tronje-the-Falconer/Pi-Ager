@@ -1,6 +1,6 @@
                                 <button class="art-button" type="button" onclick="setconfig_blockFunction()"><?php echo _('set general configuration values'); ?></button>
                                 <div id="set_config" class="help_p">
-                                    <form method="post">
+                                    <form method="post" name="config">
                                         <div class="hg_container" >
                                             <b><?php echo strtoupper(_('attention! be carful what you do!')); ?></b>
                                             <hr>
@@ -128,6 +128,114 @@
                                                 <button class="art-button" type="button" onclick="help_humidify_config_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
                                             <hr>
+                                            <!----------------------------------------------------------------------------------------dehumidify-->
+                                            <table style="width: 100%;" class="miniature_writing">
+                                                <tr>
+                                                    <td class="td_png_icon"><h3><?php echo _('dehumidify'); ?></h3><img src="images/icons/dehumidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_dehumidifier_blockFunction()"><?php echo _('help'); ?></button>
+                                                    </td>
+                                                    <td style=" text-align: left; padding-left: 20px;">
+                                                        <input type="radio" name="dehumidifier_modus_config" value="1" <?php echo $checked_dehumidify_1; ?>/><label> <?php echo _('only exhaust'); ?></label><br>
+                                                        <input type="radio" name="dehumidifier_modus_config" value="2" <?php echo $checked_dehumidify_2; ?>/><label> <?php echo _('exhaust & dehumidifier'); ?></label><br>
+                                                        <input type="radio" name="dehumidifier_modus_config" value="3" <?php echo $checked_dehumidify_3; ?>/><label> <?php echo _('only dehumidifier'); ?></label><br>
+                                                        <br>
+                                                    </td>
+                                                    
+                                                </tr>
+                                            </table>
+                                            <script>
+                                                function help_dehumidifier_blockFunction() {
+                                                    document.getElementById('help_dehumidifier').style.display = 'block';
+                                                }
+                                                function help_dehumidifier_noneFunction() {
+                                                    document.getElementById('help_dehumidifier').style.display = 'none';
+                                                }
+                                            </script>
+                                            <p id="help_dehumidifier" class="help_p">
+                                                <?php  echo '<b>'._('dehumidifier').':</b> '._('text for dehumidifier help');
+                                                 echo '<br><br>'; ?>
+                                                <button class="art-button" type="button" onclick="help_dehumidifier_noneFunction()"><?php echo _('close'); ?></button>
+                                            </p>
+                                            <hr>
+                                            <!----------------------------------------------------------------------------------------uv-->
+                                            <table style="width: 100%;" class="miniature_writing">
+                                                <tr>
+                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('uv'); ?></h3><img src="images/icons/uv-light_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_uv_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td class="text_left_padding">
+                                                        <input type="radio" name="uv_modus_config" value="1" <?php echo $checked_uv_1; ?>/><label> <?php echo _('duration & period'); ?></label><br>
+                                                        <input type="radio" name="uv_modus_config" value="2" <?php echo $checked_uv_2; ?>/><label> <?php echo _('duration & timestamp'); ?></label><br>
+                                                        <input type="radio" name="uv_modus_config" value="0" <?php echo $checked_uv_3; ?>/><label> <?php echo _('off'); ?></label><br>
+                                                        <br>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('period every').':'; ?></td>
+                                                    <td class="text_left_padding"><input name="uv_period_config" maxlength="4" size="3" type="text" value=<?php echo $uv_period; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span>
+                                                    </span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('duration'); ?>:</td>
+                                                    <td class="text_left_padding"><input name="uv_duration_config" maxlength="4" size="3" type="text" value=<?php echo $uv_duration; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0=<?php echo _('off'); ?>)</span></td>
+                                                </tr>
+                                                                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('timestamp'); ?>:</td>
+                                                    <td class="text_left_padding"><input name="switch_on_uv_hour" maxlength="2" size="1" type="text" value=<?php echo $switch_on_uv_hour; ?>> : <input name="switch_on_uv_minute" maxlength="2" size="1" type="text" value=<?php echo $switch_on_uv_minute; ?>><?php echo _("o'clock"); ?></td>
+                                                </tr>
+                                            </table>
+                                            <script>
+                                                function help_uv_blockFunction() {
+                                                    document.getElementById('help_uv').style.display = 'block';
+                                                }
+                                                function help_uv_noneFunction() {
+                                                    document.getElementById('help_uv').style.display = 'none';
+                                                }
+                                            </script>
+                                            <p id="help_uv" class="help_p">
+                                                <?php  echo '<b>'._('uv').':</b> '._('text for uv help');
+                                                 echo '<br><br>'; ?>
+                                                <button class="art-button" type="button" onclick="help_uv_noneFunction()"><?php echo _('close'); ?></button>
+                                            </p>
+                                            <hr>
+                                            <!----------------------------------------------------------------------------------------light-->
+                                            <table style="width: 100%;" class="miniature_writing">
+                                                <tr>
+                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('light'); ?></h3><img src="images/icons/light_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_light_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td class="text_left_padding">
+                                                        <input type="radio" name="light_modus_config" value="1" <?php echo $checked_light_1; ?>/><label> <?php echo _('duration & period'); ?></label><br>
+                                                        <input type="radio" name="light_modus_config" value="2" <?php echo $checked_light_2; ?>/><label> <?php echo _('duration & timestamp'); ?></label><br>
+                                                        <input type="radio" name="light_modus_config" value="0" <?php echo $checked_light_3; ?>/><label> <?php echo _('off'); ?></label><br>
+                                                        <br>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('period every').':'; ?></td>
+                                                    <td class="text_left_padding"><input name="light_period_config" maxlength="4" size="3" type="text" value=<?php echo $light_period; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span>
+                                                    </span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('duration'); ?>:</td>
+                                                    <td class="text_left_padding"><input name="light_duration_config" maxlength="4" size="3" type="text" value=<?php echo $light_duration; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0=<?php echo _('off'); ?>)</span></td>
+                                                </tr>
+                                                                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('timestamp'); ?>:</td>
+                                                    <td class="text_left_padding"><input name="switch_on_light_hour" maxlength="2" size="1" type="text" value=<?php echo $switch_on_light_hour; ?>> : <input name="switch_on_light_minute" maxlength="2" size="1" type="text" value=<?php echo $switch_on_light_minute; ?>><?php echo _("o'clock"); ?></td>
+                                                </tr>
+                                            </table>
+                                            <script>
+                                                function help_light_blockFunction() {
+                                                    document.getElementById('help_light').style.display = 'block';
+                                                }
+                                                function help_light_noneFunction() {
+                                                    document.getElementById('help_light').style.display = 'none';
+                                                }
+                                            </script>
+                                            <p id="help_light" class="help_p">
+                                                <?php  echo '<b>'._('light').':</b> '._('text for light help');
+                                                 echo '<br><br>'; ?>
+                                                <button class="art-button" type="button" onclick="help_light_noneFunction()"><?php echo _('close'); ?></button>
+                                            </p>
+                                            <hr>
                                             <!----------------------------------------------------------------------------------------Sensortype-->
                                             <table style="width: 100%;" class="miniature_writing">
                                                 <tr>
@@ -162,8 +270,8 @@
                                                     <td class="td_png_icon"><h3><?php echo _('language'); ?></h3><img src="images/icons/language_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_language_blockFunction()"><?php echo _('help'); ?></button>
                                                     </td>
                                                     <td style=" text-align: left; padding-left: 20px;">
-                                                        <input type="radio" name="language_config" value="de_DE" <?php echo $checked_language_1; ?>/><label> <?php echo _('german') ?></label><br>
-                                                        <input type="radio" name="language_config" value="en_EN" <?php echo $checked_language_2; ?>/><label> <?php echo _('english') ?></label><br>
+                                                        <input type="radio" name="language_config" value="1" <?php echo $checked_language_1; ?>/><label> de_DE</label><br>
+                                                        <input type="radio" name="language_config" value="2" <?php echo $checked_language_2; ?>/><label> en_EN</label><br>
                                                         <br>
                                                     </td>
                                                     
@@ -182,8 +290,18 @@
                                                  echo '<br><br>'; ?>
                                                 <button class="art-button" type="button" onclick="help_language_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
-                                            <input class="art-button" type="submit" value="<?php echo _('save'); ?>" />
-                                            <button class="art-button" type="button" onclick="setconfig_noneFunction()"><?php echo _('hide'); ?></button>
+                                            <br>
+                                            <br>
+                                            <table style="width: 100%; align: center;">
+                                                <tr>
+                                                    <td style="width: 50%;">&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td><button class="art-button" name="config" type="submit" value=""><?php echo _('save'); ?></button></td>
+                                                    <td>
+                                                        <button class="art-button" type="button" onclick="setconfig_noneFunction()"><?php echo _('hide'); ?></button>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </div>
                                     </form>
                                 </div>

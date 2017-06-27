@@ -754,9 +754,9 @@ gpio_recerved2 = 11                # GPIO Reserve 2
 ####   Set up message catalog access
 # translation = gettext.translation('pi_ager', '/var/www/locale', fallback=True)
 # _ = translation.ugettext
-if language == 'de_DE':
+if language == 1:
     translation = gettext.translation('pi_ager', '/var/www/locale', languages=['en'], fallback=True)
-elif language == 'en_EN':
+elif language == 2:
     translation = gettext.translation('pi_ager', '/var/www/locale', languages=['de'], fallback=True)
 # else:
     

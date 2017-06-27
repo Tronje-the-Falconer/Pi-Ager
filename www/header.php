@@ -10,10 +10,10 @@
     $logs_active = '';
 
     if ($_SERVER['PHP_SELF'] == '/index.php') {
-        $monitor_active = "active";
+        $monitor_active = 'active';
     }
     elseif ($_SERVER['PHP_SELF'] == '/diagrams.php') {
-        $diagrams_active = "active";
+        $diagrams_active = 'active';
     }
     elseif ($_SERVER['PHP_SELF'] == '/settings.php') {
         $settings_active = 'active';
@@ -57,10 +57,19 @@
         <link rel="stylesheet" href="css/style.css" media="screen">
         <!--[if lte IE 7]><link rel="stylesheet" href="css/style.ie7.css" media="screen" /><![endif]-->
         <link rel="stylesheet" href="css/style.responsive.css" media="all">
-        <script src="js/jquery.js"></script>
+        <?php
+            if ($monitor_active == 'active'){
+                echo "<script src='js/jquery.js'></script>";
+                echo "<script src='js/ajax.js'></script>";
+                echo "<script src='js/script.js'></script>";
+                echo "<script src='js/script.responsive.js'></script>";
+            }
+        ?>
+    <!--    <script src="js/jquery.js"></script>
         <script src="js/ajax.js"></script>
         <script src="js/script.js"></script>
         <script src="js/script.responsive.js"></script>
+    -->
     </head>
     <body>
         <div id="art-main">

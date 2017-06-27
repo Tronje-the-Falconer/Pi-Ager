@@ -5,8 +5,10 @@
         if (is_file($logfile)) {
             $fp = fopen($logfile, 'w')
                 or die (sprintf(_('could not create %s'), $logfile));
-            $input = sprintf (_('New file created on %s oclock'), $timestamp); echo ' \n\n';
+            $input = sprintf (_("New file created on %s o'clock"), $timestamp);
             fwrite($fp,$input);
+            fwrite($fp, "\n");
+            fwrite($fp, "\n");
             fclose ($fp);
         }
         # 3Sekunden Anzeige dass die Werte nicht gespeichert wurden

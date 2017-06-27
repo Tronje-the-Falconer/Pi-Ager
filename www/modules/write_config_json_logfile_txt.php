@@ -1,7 +1,8 @@
 <?php 
-#var_dump($_POST);
+    include 'modules/read_settings_json.php';                     // Liest die manuellen Werte aus
+    #var_dump($_POST);
     # Prüfung der eingegebenen Werte
-    if(isset $modus && $modus <>NULL) {                       // ist das $_POST-Array gesetzt
+    if(isset ($_POST['switch_on_cooling_compressor_config']) && $_POST['switch_on_cooling_compressor_config'] <>NULL) {                       // ist das $_POST-Array gesetzt
         $InputValid = '';
         foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
             if (preg_match('/[.\D]/', $CheckInput)) {
@@ -16,7 +17,13 @@
                 $_POST['switch_on_humidifier_config']<11 && $_POST['switch_on_humidifier_config']>-1 && ($_POST['switch_on_humidifier_config'] != $_POST['switch_off_humidifier_config']) &&          // Prüfung Einschaltwert Feuchte
                 ($_POST['switch_on_humidifier_config'] > $_POST['switch_off_humidifier_config']) &&                                                               // Prüfung Einschaltwert Feuchte
                 $_POST['switch_off_humidifier_config']<11 && $_POST['switch_off_humidifier_config']>-1 &&                                                          // Prüfung Ausschaltwert Feuchte
-                $_POST['delay_humidify_config']<61 && $_POST['delay_humidify_config']>-1                                                             // Prüfung Verzögerung Feuchte
+                $_POST['delay_humidify_config']<61 && $_POST['delay_humidify_config']>-1 &&                                                            // Prüfung Verzögerung Feuchte
+                $_POST['uv_period_config']<1441 && $_POST['uv_period_config']>-1 &&  (($_POST['uv_period_config']+$_POST['uv_duration_config'])>0) &&                 // Prüfung Intervall UV
+                $_POST['uv_duration_config']<1441 && $_POST['uv_duration_config']>-1  &&                              // Prüfung Dauer UV
+                $_POST['switch_on_uv_hour']>0 && $_POST['switch_on_uv_hour']<24 && $_POST['switch_on_uv_minute']>0 && $_POST['switch_on_uv_minute']<60 && // UV Uhrzeit
+                $_POST['light_period_config']<1441 && $_POST['light_period_config']>-1 &&  (($_POST['light_period_config']+$_POST['light_duration_config'])>0) &&                 // Prüfung Intervall Licht
+                $_POST['light_duration_config']<1441 && $_POST['light_duration_config']>-1  &&                              // Prüfung Dauer Licht
+                $_POST['switch_on_light_hour']>0 && $_POST['switch_on_light_hour']<24 && $_POST['switch_on_light_minute']>0 && $_POST['switch_on_light_minute']<60 // Licht Uhrzeit
             )
             {
                 # Eingestellte Werte in config/config.json und logs/logfile.txt speichern
@@ -27,7 +34,18 @@
                     'switch_off_humidifier' => (float)$_POST['switch_off_humidifier_config'],
                     'delay_humidify' => (float)$_POST['delay_humidify_config'],
                     'sensortype' => (int)$_POST['sensortype_config'],
-                    'language' => $_POST['language_config'],
+                    'language' => (int)$_POST['language_config'],
+                    'switch_on_light_hour' => (int)$_POST['switch_on_light_hour'],
+                    'switch_on_light_minute' => (int)$_POST['switch_on_light_minute'],
+                    'light_duration' => (int)$_POST['light_duration_config']*60,
+                    'light_period' => (int)$_POST['light_period_config']*60,
+                    'light_modus' => (int)$_POST['light_modus_config'],
+                    'switch_on_uv_hour' => (int)$_POST['switch_on_uv_hour'],
+                    'switch_on_uv_minute' => (int)$_POST['switch_on_uv_minute'],
+                    'uv_duration' => (int)$_POST['uv_duration_config']*60,
+                    'uv_period' => (int)$_POST['uv_period_config']*60,
+                    'uv_modus' => (int)$_POST['uv_modus_config'],
+                    'dehumidifier_modus' => (int)$_POST['dehumidifier_modus_config'],
                     'last_change' => $timestamp);
                 $configjsoninput = json_encode($array_config_json);
                 file_put_contents('config/config.json', $configjsoninput);
@@ -84,6 +102,57 @@
                     $sensortype = 3;
                     $sensorname='SHT75';
                 }
+                # Dehumidify-Modus
+                if ($array_config_json['dehumidifier_modus'] == 1) {
+                    $dehumidifier_modus_name = _('only exhaust');
+                }
+                if ($array_config_json['dehumidifier_modus'] == 2) {
+                    $dehumidifier_modus_name = _('exhaust & dehumidifier');
+                }
+                if ($array_config_json['dehumidifier_modus'] == 3) {
+                    $dehumidifier_modus_name = _('only dehumidifier');
+                }
+                # Uv licht
+                if ($array_config_json['uv_modus'] == 0) {
+                    $uv_modus_name = _('off');
+                    $logtext_uv = " ";
+                    $logtext_uv_duration = " ";
+                }
+                if ($array_config_json['uv_modus'] == 1) {
+                    $uv_modus_name = _('duration & period');
+                    $logtext_uv = _('uv period').": ".$array_config_json['uv_period']/60 ." "._('minutes');
+                    $logtext_uv_duration = _('uv duration').": ".$array_config_json['uv_duration']/60 ." "._('minutes');
+                }
+                if ($array_config_json['uv_modus'] == 2) {
+                    $uv_modus_name = _('duration & timestamp');
+                    $logtext_uv = _('uv timestamp').": ".$array_config_json['switch_on_uv_hour'].":".$array_config_json['switch_on_uv_minute'];
+                    $logtext_uv_duration = _('uv duration').": ".$array_config_json['uv_duration']/60 ." "._('minutes');
+                    
+                }
+                # Licht
+                if ($array_config_json['light_modus'] == 0) {
+                    $light_modus_name = _('off');
+                    $logtext_light = " ";
+                    $logtext_light_duration = " ";
+                }
+                if ($array_config_json['light_modus'] == 1) {
+                    $light_modus_name = _('duration & period');
+                    $logtext_light = _('light period').": ".$array_config_json['light_period']/60 ." "._('minutes');
+                    $logtext_light_duration = _('light duration').": ".$array_config_json['light_duration']/60 ." "._('minutes');
+                }
+                if ($array_config_json['light_modus'] == 2) {
+                    $light_modus_name = _('duration & timestamp');
+                    $logtext_light = _('light timestamp').": ".$array_config_json['switch_on_light_hour'].":".$array_config_json['switch_on_light_minute'];
+                    $logtext_light_duration = _('light duration').": ".$array_config_json['light_duration']/60 ." "._('minutes');
+                    
+                }
+                #Language
+                if ($array_config_json['language'] == 1) {
+                    $language_name = _('de_DE');
+                }
+                if ($array_config_json['language'] == 2) {
+                    $language_name = _('en_EN');
+                }
                 
                 $circulation_air_duration = $circulation_air_duration/60;
                 $circulation_air_period = $circulation_air_period/60;
@@ -92,12 +161,13 @@
                 $switch_on_humidity = $setpoint_humidity - $array_config_json['switch_on_humidifier'];
                 $switch_off_humidity = $setpoint_humidity - $array_config_json['switch_off_humidifier'];
                 
+                
 
                 $f=fopen('logs/logfile.txt','a');
                 fwrite($f, "\n"."***********************************************");
                 fwrite($f, "\n"._('sensor').": ".$sensorname);
                 fwrite($f, "\n". _('operating mode').": ".$operating_mode);
-                fwrite($f, "\n".date('d.m.Y H:i').' '._('values have been manually changed.'));
+                fwrite($f, "\n".date('d.m.Y H:i').' '._('configuration has been changed.'));
                 fwrite($f, "\n");
 
                 if ($modus == 0 || $modus == 1 || $modus == 2)  {
@@ -133,31 +203,47 @@
                 }
 
                 fwrite($f, "\n");
-                fwrite($f, "\n"._('circulation air period').": ".$circulation_air_period._('minutes'));
+                fwrite($f, "\n"._('circulation air period').": ".$circulation_air_period." "._('minutes'));
                 fwrite($f, "\n"._('circulation air duration').": ".$circulation_air_duration._('minutes'));
 
 
                 fwrite($f, "\n");
-                fwrite($f, "\n"._('exhausting air period')." ".$exhausting_air_period._('minutes'));
-                fwrite($f, "\n"._('exhausting air duration').": ".$exhausting_air_duration._('minutes'));
+                fwrite($f, "\n"._('exhausting air period')." ".$exhausting_air_period." "._('minutes'));
+                fwrite($f, "\n"._('exhausting air duration').": ".$exhausting_air_duration." "._('minutes'));
 
 
                 fwrite($f, "\n");
-                fwrite($f, "\n"._('language').": ".$array_config_json['language']);
+                fwrite($f, "\n"._('dehumidify modus').": ".$dehumidifier_modus_name);
+
+
+                fwrite($f, "\n");
+                fwrite($f, "\n"._('uv modus').": ".$uv_modus_name);
+                fwrite($f, "\n".$logtext_uv);
+                fwrite($f, "\n".$logtext_uv_duration);
+
+
+                fwrite($f, "\n");
+                fwrite($f, "\n"._('light modus').": ".$light_modus_name);
+                fwrite($f, "\n".$logtext_light);
+                fwrite($f, "\n".$logtext_light_duration);
+
+
+                fwrite($f, "\n");
+                fwrite($f, "\n"._('language').": ".$language_name);
 
                 fwrite($f, "\n"."***********************************************");
                 fclose($f);
 
 
                 # 3Sekunden Anzeige dass die Werte gespeichert wurden
-                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b><?php echo sprintf(_("values saved in file %s"), "config/config.json"); ?></b></p>
+                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b>'. (sprintf(_("values saved in file %s"), "config/config.json")) .'</b></p>
                     <script language="javascript">
                         setTimeout(function(){document.getElementById("info-message").style.display="none"}, 3000)
                     </script>';
             }
-        # 3Sekunden Anzeige dass die Werte nicht gespeichert wurden
+            # 3Sekunden Anzeige dass die Werte nicht gespeichert wurden
             else {
-                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b><?php echo _("values not in the specified limits!"); ?></b></p>
+                print '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b>'. (_("values not in the specified limits!")) .'</b></p>
                     <script language="javascript">
                         setTimeout(function(){document.getElementById("info-message").style.display="none"}, 3000)
                     </script>';

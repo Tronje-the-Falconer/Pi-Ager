@@ -7,6 +7,11 @@
                                     include 'modules/read_current_json.php';                    // Liest die gemessenen Werte Temp, Humy, Timestamp
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('current values'); ?></h2>
+                                <div style="float: center; padding-left: 8px;" id="values_older_25_sec"></div>
+                        <!--        <div style="float: left; padding-left: 8px;" id="timestamp"></div>
+                                <div style="float: left; padding-left: 8px;" id="json_timestamp"></div>
+                                <div style="float: left; padding-left: 8px;" id="time_difference"></div>
+                        -->
                                 <!----------------------------------------------------------------------------------------Anzeige T/rLF-->
                                 <div class="thermometers">
                                     <div class="th-display-div">
@@ -20,16 +25,16 @@
                                                                     <div class="deneme">
                                                                         <?php 
                                                                             // Die Aktualität der Werte pruefen, geichzeitige RSS-Funktionspruefung
-                                                                            $timestamp_unix = time();
-                                                                            $time_difference = $timestamp_unix - $current_json_timestamp_last_change ;
-                                                                            if ($time_difference >= 120) {
-                                                                                $temperature_linestring = '<div style="float: left; padding-left: 8px;" id=""></div>--<span>.<div style="float: right; padding-top: 50px;" id="">-</div></span><strong>&deg;</strong>';
-                                                                                $humidity_linestring = '<div style="float: left; padding-left: 8px;" id=""></div>--<span>.<div style="float: right; padding-top: 50px;" id="">-</div></span><strong>&#37</strong> ';
-                                                                            }
-                                                                            else {
-                                                                                $temperature_linestring = '<div style="float: left; padding-left: 8px;" id="current_json_temperature_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_temperature_1"></div></span><strong>&deg;</strong>';
-                                                                                $humidity_linestring = '<div style="float: left; padding-left: 8px;" id="current_json_humidity_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_humidity_1"></div></span><strong>&#37</strong> ';
-                                                                            }
+                                       //                                     $timestamp_unix = time();
+                                       //                                     $time_difference = $timestamp_unix - $current_json_timestamp_last_change ;
+                                       //                                     if ($time_difference >= 120) {
+                                       //                                         $temperature_linestring = '<div style="float: left; padding-left: 8px;" id=""></div>--<span>.<div style="float: right; padding-top: 50px;" id="">-</div></span><strong>&deg;</strong>';
+                                       //                                         $humidity_linestring = '<div style="float: left; padding-left: 8px;" id=""></div>--<span>.<div style="float: right; padding-top: 50px;" id="">-</div></span><strong>&#37</strong> ';
+                                       //                                     }
+                                       //                                     else {
+                                                                            $temperature_linestring = '<div style="float: left; padding-left: 8px;" id="current_json_temperature_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_temperature_1"></div></span><strong>&deg;</strong>';
+                                                                            $humidity_linestring = '<div style="float: left; padding-left: 8px;" id="current_json_humidity_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_humidity_1"></div></span><strong>&#37</strong> ';
+                                       //                                     }
                                                                         ?>
                                                                         <?php echo $temperature_linestring; ?>
                                                                     </div>
@@ -62,10 +67,8 @@
                                     </div>
                                 </div>
                                 <!------------------------------ ----------------------------------------------------------T/rLF Diagramm-->
-                                <h2><?php echo _('temperature profile'); ?></h2>
                                 <img src="/images/graphs/pi-ager_sensor_temperature-hourly.png" alt="<?php echo _('hours history temperature'); ?>" />
                                 <br/><br/>
-                                <h2><?php echo _('humidity profile'); ?></h2>
                                 <img src="/images/graphs/pi-ager_sensor_humidity-hourly.png" alt="<?php echo _('hours history humidity'); ?>" /><br><br>
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <h2><?php echo _('statusboard'); ?></h2>

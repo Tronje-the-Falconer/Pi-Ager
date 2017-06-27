@@ -15,7 +15,7 @@
                                                             $mtime = filemtime($logfile);
                                                             echo _('last changed at').': ';
                                                             echo date('d M Y, H:i:s', $mtime);
-                                                            echo ' '._('oclock').'<br />';
+                                                            echo ' '._("o'clock").'<br />';
                                                             echo '<img src="images/icons/check_true_42x42.png"> '._('file exists').'<br />';
                                                         }
                                                         else {

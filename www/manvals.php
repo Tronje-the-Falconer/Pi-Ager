@@ -1,7 +1,7 @@
 ﻿<!-- Diese Einstellungen werden nur im manuellen Modus eingeblendet -->
-<h2 class="art-postheader"><?php echo _('manual values'); ?></h2>
+                                <h2 class="art-postheader"><?php echo _('manual values'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
-                                <form method="post">
+                                <form method="post" name="manvals">
                                     <div class="hg_container" >
                                         <table style="width: 100%;" class="miniature_writing">
                                             <tr>
@@ -186,7 +186,7 @@
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
                                                 <td class="td_submitbutton">
-                                                    <input class="art-button" type="submit" value="<?php echo _('save'); ?>" />
+                                                    <button class="art-button" name="manvals_form_submit" type="submit" value=""><?php echo _('save'); ?> </button>
                                                 </td>
                                             </tr>
                                         </table>
