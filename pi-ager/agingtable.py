@@ -115,7 +115,7 @@ def read_dictionary(dictionary):
     write_settings_json (modus, exec_scope['setpoint_temperature'], exec_scope['setpoint_humidity'], exec_scope['circulation_air_period'], exec_scope['circulation_air_duration'], exec_scope['exhaust_air_period'], exec_scope['exhaust_air_duration'])
     global period_endtime
     period_endtime = datetime.datetime.now() + timedelta(days = duration) # days = parameter von timedelta
-    logstring = operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + "\n" + sollfeuchtigkeit_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n" '---------------------------------------'
+    logstring = operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + "\n" + sollfeuchtigkeit_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n" '---------------------------------------' + "\n"
     write_verbose(logstring, False, True)
     
 ######################################################### Definition von Variablen
@@ -187,7 +187,7 @@ logspacer = "\n"+ "***********************************************"
 ######################################################### Hauptprogramm
 ########################################################################################################################
 write_verbose(logspacer, False, True)
-logstring = "\n" + _('the climate values are now controlled by the automatic program % s') % (agingtable)
+logstring = "\n" + _('the climate values are now controlled by the automatic program % s') % (agingtable) + "\n" + "\n"
 write_verbose(logstring, False, True)
 
 #---------------------------------------------------------------------------------- Auslesen der gesammten csv-Datei
@@ -227,9 +227,9 @@ while period <= total_periods:
         write_verbose(logstring, False, True)
         finaltime = datetime.datetime.now() + timedelta(days = total_duration)  # days = parameter von timedelta
         read_dictionary(actual_dictionary)
-        logstring = _("next change of values: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M'))
+        logstring = _("next change of values: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M')) + '\n'
         write_verbose(logstring, False, True)
-        logstring = _("end of program: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M'))
+        logstring = _("end of program: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M')) + '\n'
         write_verbose(logstring, False, True)
         
     elif period == total_periods:
