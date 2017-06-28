@@ -13,7 +13,6 @@ from datetime import timedelta
 ######################################################### Definieren von Funktionen
 #---------------------------------------------------------------------------------- Function Lesen der tables.json
 def read_tables_json():
-    global tables_json_file
     current_data = None
     with open(tables_json_file, 'r') as tablesjsonfile:
         table_data = tablesjsonfile.read();
@@ -21,7 +20,6 @@ def read_tables_json():
     return data_tablesjsonfile
 #---------------------------------------------------------------------------------- Function Lesen der settings.json
 def read_settings_json():
-    global settings_json_file
     settings_data = None
     with open(settings_json_file, 'r') as settingsjsonfile:
         settings_data = settingsjsonfile.read()
@@ -29,7 +27,6 @@ def read_settings_json():
     return data_settingsjsonfile
 #---------------------------------------------------------------------------------- Function Lesen der config.json
 def read_config_json():
-    global config_json_file
     config_data = None
     with open(config_json_file, 'r') as configjsonfile:
         config_data = configjsonfile.read()
@@ -37,15 +34,11 @@ def read_config_json():
     return data_configjsonfile
 #---------------------------------------------------------------------------------- Function Schreiben der settings.json
 def write_settings_json(modus, setpoint_temperature, setpoint_humidity, circulation_air_period, circulation_air_duration, exhaust_air_period, exhaust_air_duration):
-    global settings_json_file
-
     setting_data = json.dumps({"modus":modus, "setpoint_temperature":setpoint_temperature, "setpoint_humidity":setpoint_humidity, "circulation_air_period":circulation_air_period, "circulation_air_duration":circulation_air_duration, "exhaust_air_period":exhaust_air_period, "exhaust_air_duration":exhaust_air_duration, "switch_on_cooling_compressor":switch_on_cooling_compressor, "switch_off_cooling_compressor":switch_off_cooling_compressor, "switch_on_humidifier":switch_on_humidifier, "switch_off_humidifier":switch_off_humidifier, "delay_humidify":delay_humidify, 'date':int(time.time()), 'sensortype':sensortype})
     with open(settings_json_file, 'w') as settingsjsonfile:
         settingsjsonfile.write(setting_data)
 #---------------------------------------------------------------------------------- Function Schreiben der current.json
 def write_current_json(sensor_temperature, sensor_humidity):
-    global current_json_file
-
     current_data = json.dumps({"sensor_temperature":sensor_temperature, "status_heater":gpio.input(gpio_heater), "status_exhaust_air":gpio.input(gpio_exhaust_fan), "status_cooling_compressor":gpio.input(gpio_cooling_compressor), "status_circulating_air":gpio.input(gpio_circulation_fan),"sensor_humidity":sensor_humidity, 'last_change':int(time.time())})
     with open(current_json_file, 'w') as currentjsonfile:
         currentjsonfile.write(current_data)
@@ -60,8 +53,6 @@ def write_verbose(logstring):
     print (logstring)
 #---------------------------------------------------------------------------------- Function write verbose
 def write_verbose(logstring, newLine=False, print_in_logfile=False):
-    global verbose
-    
     if(verbose):
         print(logstring)
         if(newLine is True):
@@ -75,20 +66,19 @@ def read_dictionary(dictionary):
     if debugging == 'on':
         print ('DEBUG read_dictionary()')
     # Variablen aus Dictionary setzen
-    for key, value in dictionary.iteritems():
-        if value == '':                      # wenn ein Wert leer ist muss er aus der letzten settings.json ausgelesen  werden
+    for key, value in iter(dictionary.items()):
+        if value == None or value == '':                      # wenn ein Wert leer ist muss er aus der letzten settings.json ausgelesen  werden
             data_settingsjsonfile = read_settings_json()
             value = data_settingsjsonfile['' + key + '']
-            exec('%s = %d') % (key,value)    # fuellt die jeweilige Variable mit altem Wert (value = columname)
+            exec('{} = {}'.format(key,value), exec_scope)   # fuellt die jeweilige Variable mit altem Wert (value = columname)
         else:
             value = int(value)
-            exec('%s = %d') % (key,value)
-        
-    duration = int (days)
+            exec('{} = {}'.format(key,value), exec_scope)
+    duration = int (exec_scope['days'])
     global duration_sleep
     duration_sleep = int(duration) * day_in_seconds    # Anzahl der Tage von "column" mit 86400 (Sekunden) multipliziert fuer wartezeit bis zur naechsten Periode
 #---------------------------------------------------------------------------------- Aufbereitung fuer die Lesbarkeit im Logfile und Fuellen der Variablen
-    modus = int(modus + 0.5)                # Rundet auf Ganzzahl, Integer da der Modus immer Integer sein sollte 
+    modus = int(exec_scope['modus'] + 0.5)                # Rundet auf Ganzzahl, Integer da der Modus immer Integer sein sollte 
     if modus == 0:
         operating_mode = "\n" + _('operation mode') + ': ' + _('cooling')
     elif modus == 1:
@@ -101,36 +91,45 @@ def read_dictionary(dictionary):
         operating_mode = "\n" + _('operation mode') + ': ' + _('automatic with dehumidify and humidify')
     else:
         operating_mode = "\n" + _('operation mode wrong or set incorrectly')
-    setpoint_temperature_logstring = "\n" + _('setpoint temperature') + ": \t \t" + str(setpoint_temperature) + " C"
+    setpoint_temperature_logstring = "\n" + _('setpoint temperature') + ": \t \t" + str(exec_scope['setpoint_temperature']) + " C"
     switch_on_cooling_compressor_logstring = "\n" + _('switch-on value temperature') + ": \t" + str(switch_on_cooling_compressor) + " C"
     switch_off_cooling_compressor_logstring = "\n" + _('switch-off value temperature') + ": \t" + str(switch_off_cooling_compressor) + " C"
-    sollfeuchtigkeit_logstring = "\n" + _('setpoint humidity') + ": \t \t" + str(setpoint_humidity) + "%"
+    sollfeuchtigkeit_logstring = "\n" + _('setpoint humidity') + ": \t \t" + str(exec_scope['setpoint_humidity']) + "%"
     switch_on_humidifier_logstring = "\n" + _('switch-on value humidity') + ": \t \t" + str(switch_on_humidifier) + "%"
     switch_off_humidifier_logstring = "\n" + _('switch-off value humidity') + ": \t \t" + str(switch_off_humidifier) + "%"
     delay_humidify_logstring = "\n" + _('humidification delay') + ": \t" + str(delay_humidify) + ' ' + _("minutes")
-    circulation_air_period_format = int(circulation_air_period)/60
+    circulation_air_period_format = int(exec_scope['circulation_air_period'])/60
     circulation_air_period_logstring = "\n" + _('timer circulation air period every') + ": \t" + str(circulation_air_period_format) + ' ' + _("minutes")
-    circulation_air_duration_format = int(circulation_air_duration)/60
+    circulation_air_duration_format = int(exec_scope['circulation_air_duration'])/60
     circulation_air_duration_logstring = "\n" + _('timer circulation air') + ": \t  \t" + str(circulation_air_duration_format) + ' ' + _("minutes")
-    exhaust_air_period_format = int(exhaust_air_period)/60
+    exhaust_air_period_format = int(exec_scope['exhaust_air_period'])/60
     exhaust_air_period_logstring = "\n" + _('timer exhaust air period every') + ": \t" + str(exhaust_air_period_format) + ' ' + _("minutes")
-    exhaust_air_duration_format = int(exhaust_air_duration)/60
+    exhaust_air_duration_format = int(exec_scope['exhaust_air_duration'])/60
     exhaust_air_duration_logstring = "\n" + _('timer exhausting air') + ": \t \t" + str(exhaust_air_duration_format) + ' ' + _("minutes")
-    period_days_logstring="\n" + _('duration') + ": \t \t \t \t" + str(days) + ' ' + _('days')
+    period_days_logstring="\n" + _('duration') + ": \t \t \t \t" + str(exec_scope['days']) + ' ' + _('days')
     sensor_logstring = _('sensortype') + ": \t \t \t" + sensorname + ' ' + _('value') + ': ' + str(sensortype)
     
     
     if debugging == 'on':
         print ('DEBUG schreibe settings.json in if')
-    write_settings_json (modus, setpoint_temperature, setpoint_humidity, circulation_air_period, circulation_air_duration, exhaust_air_period, exhaust_air_duration)
+    write_settings_json (modus, exec_scope['setpoint_temperature'], exec_scope['setpoint_humidity'], exec_scope['circulation_air_period'], exec_scope['circulation_air_duration'], exec_scope['exhaust_air_period'], exec_scope['exhaust_air_duration'])
     global period_endtime
     period_endtime = datetime.datetime.now() + timedelta(days = duration) # days = parameter von timedelta
     logstring = operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + "\n" + sollfeuchtigkeit_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n" '---------------------------------------'
     write_verbose(logstring, False, True)
     
-    
 ######################################################### Definition von Variablen
-debugging = ''      # Debugmodus 'on'
+global exec_scope
+global period_endtime
+global duration_sleep
+global verbose
+global current_json_file
+global settings_json_file
+global tables_json_file
+global settings_json_file
+global config_json_file
+debugging = 'off'      # Debugmodus 'on'
+exec_scope = {}
 #---------------------------------------------------------------------------------- Pfade zu den Dateien
 website_path = '/var/www'
 csv_path = website_path + '/csv/'
@@ -170,9 +169,9 @@ elif sensortype == 3 :
 ####   Set up message catalog access
 # translation = gettext.translation('pi-ager', '/var/www/locale', fallback=True)
 # _ = translation.ugettext
-if language == 'de_DE':
+if language == 1:
     translation = gettext.translation('pi-ager', '/var/www/locale', languages=['de_DE'], fallback=True)
-elif language == 'en':
+elif language == 2:
     translation = gettext.translation('pi-ager', '/var/www/locale', languages=['en'], fallback=True)
 # else:
 translation.install()
@@ -192,7 +191,7 @@ logstring = "\n" + _('the climate values are now controlled by the automatic pro
 write_verbose(logstring, False, True)
 
 #---------------------------------------------------------------------------------- Auslesen der gesammten csv-Datei
-csv_file = open(csv_path + csv_file,"rb")   # Variable csv_file = csv-Datei oeffnen
+csv_file = open(csv_path + csv_file,"r")   # Variable csv_file = csv-Datei oeffnen
 csv_file_reader = csv.DictReader(csv_file)  # reader-Objekt liest csv in Dictionary ein
 row_number = 0                              # Setzt Variable row_number auf 0
 total_duration = 0                          # Setzt Variable duration auf 0
@@ -214,13 +213,13 @@ if debugging == 'on':
 csv_file.close()
 #---------------------------------------------------------------------------------- Lesen der Werte aus der CSV-Datei & Schreiben der Werte in die Konsole und das Logfile
 period = 0              # setzt periodenzaehler zurueck
-actual_dictionary = ""  # setzt aktuelles Dictionary zurueck
+actual_dictionary = None  # setzt aktuelles Dictionary zurueck
 
 while period <= total_periods:
     if debugging == 'on':
         print ('DEBUG period : ' + str(period))
         print ('DEBUG total_periods : ' + str(total_periods))
-    exec('%s = %s') % ("actual_dictionary", "dictionary" + str(period))
+    exec('{} = {}'.format("actual_dictionary", "dictionary" + str(period))) # Bsp: actual_dictionary =  {t:1, t:2, t:3}
     if debugging == 'on':
         print ('DEBUG actual_dictionary : ' + str(actual_dictionary))
     if period == 0:

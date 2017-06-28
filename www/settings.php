@@ -43,7 +43,9 @@
 
                                     <table style="width: 100%" class="switching_state miniature_writing">
                                         <tr>
-                                            <td><img src="images/icons/agingtable_42x42.png" alt="" style="padding-left: 10px;"></td>
+                                            <td>
+                                                <img src="images/icons/agingtable_42x42.png" alt="">
+                                            </td>
                                             <td style=" text-align: left; padding-left: 20px;">
                                                 <?php 
                                                     print '<form  method="post">';
@@ -63,7 +65,14 @@
                                                         echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding-right: 20px;">';
                                                     }
                                                 ?>
-                                            <img src="images/icons/agingtable_42x42.png" alt=""></td>
+                                            <?php
+                                                    if ($grepagingtable == NULL){
+                                                            echo '<img src="images/icons/agingtable_42x42.png" alt="" style="padding-left: 10px;">';
+                                                        }
+                                                        else {
+                                                            echo '<img src="images/icons/agingtable_42x42.gif" alt="" style="padding-left: 10px;">';
+                                                        }
+                                                ?></td>
                                         </tr>
                                         <tr>
                                             <td>&nbsp;</td>
