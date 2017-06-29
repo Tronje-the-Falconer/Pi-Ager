@@ -76,12 +76,12 @@
                                 <img src="/images/graphs/pi-ager_sensor_humidity-hourly.png" alt="<?php echo _('hours history humidity'); ?>" />
                                 <br><br>
                                 <?php if ($grepscale1 !=0){
-                                    echo "<img src=\"/images/graphs/pi-ager_sensor_scale1-hourly.png\" alt=\"<?php echo _('hours history scale1'); ?>\" />";
+                                    echo "<img src=\"/images/graphs/pi-ager_scale1_data-hourly.png\" alt=\""; echo _('hours history scale1'); echo"\" />";
                                     echo '<br/><br/>';
                                 }
                                 ?>
                                 <?php if ($grepscale2 != 0){
-                                    echo "<img src=\"/images/graphs/pi-ager_sensor_scale2-hourly.png\" alt=\"<?php echo _('hours history scale2'); ?>\" />";
+                                    echo "<img src=\"/images/graphs/pi-ager_scale2_data-hourly.png\" alt=\""; echo _('hours history scale2'); echo "\" />";
                                     echo '<br/><br/>';
                                 }
                                 ?>

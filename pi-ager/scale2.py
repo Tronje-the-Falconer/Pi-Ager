@@ -48,7 +48,8 @@ while True:
 
     try:
         value = scale.getMeasure()
-        formated_value = ("{0: 4.4f}".format(value))
+        #formated_value = ("{0: 4.4f}".format(value))
+        formated_value = round(value, 3)
         timestamp = time.time()
         current_minute = datetime.datetime.fromtimestamp(timestamp).strftime('%M')
         

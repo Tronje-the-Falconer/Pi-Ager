@@ -48,14 +48,15 @@ while True:
 
     try:
         value = scale.getMeasure()
-        formated_value = ("{0: 4.4f}".format(value))
+        #formated_value = ("{0: 4.4f}".format(value))
+        formated_value =round(value, 3)
         timestamp = time.time()
         current_minute = datetime.datetime.fromtimestamp(timestamp).strftime('%M')
         
         if current_minute != last_minute:
             with open('/var/www/config/scales.json', 'r+') as scalesjsonfile:
                 scales_json_data = json.load(scalesjsonfile)
-                scales_json_data['scale1_data'] = formated_value
+                scales_json_data['scale1_data'] = value
                 scales_json_data['scale1_date'] = int(time.time())
                 scalesjsonfile.seek(0)
                 scalesjsonfile.write(json.dumps(scales_json_data))

@@ -45,7 +45,7 @@ function handleContentScales() {
         if (time_difference_scale1 >= 120 && time_difference_scale1 <= 300 || time_difference_scale2 >= 25 && time_difference_scale2 <= 119){
             document.getElementById('values_older_25_sec').innerHTML = "<img src='images/icons/attention_42x42.png'>";
         }
-        if (time_difference_scale1<=300){
+        if (time_difference_scale1<=120){
             document.getElementById('scale_json_scale1_0').innerHTML = split_scale1[0];
             document.getElementById('scale_json_scale1_1').innerHTML = split_scale1[1];
         }
@@ -53,7 +53,7 @@ function handleContentScales() {
             document.getElementById('scale_json_scale1_0').innerHTML = '-';
             document.getElementById('scale_json_scale1_1').innerHTML = '-';
         }
-        if (time_difference_scale2<=300){
+        if (time_difference_scale2<=120){
             document.getElementById('scale_json_scale2_0').innerHTML = split_scale2[0];
             document.getElementById('scale_json_scale2_1').innerHTML = split_scale2[1];
         }

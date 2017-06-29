@@ -14,7 +14,7 @@ import math
 import gettext
 from pi_sht1x import SHT1x
 import json_interfaces
-import sh
+#import sh
 
 ######################################################### Definieren von Funktionen
 #---------------------------------------------------------------------------------- Function goodbye
@@ -157,6 +157,12 @@ def ploting(plotting_value):
     elif plotting_value == "status_uv":
         title = _('uv-light')
         label = _('on or off')
+    elif plotting_value == "scale1_data":
+        title = _('scale1')
+        label = _('gr')
+    elif plotting_value == "scale2_data":
+        title = _('scale2')
+        label = _('gr')
 #---------------------------------------------------------------------------------------------------------------- Aufteilung in drei Plots
     for plot in ['daily' , 'weekly', 'monthly', 'hourly']:
         if debugging == 'on':
@@ -588,17 +594,26 @@ def doMainLoop():
             gpio.output(gpio_light, relay_off)
 #---------------------------------------------------------------------------------------------------------------- Lesen der Scales Json, sofern Scale 1 oder 2 läuft
         # ps ax | grep -v grep | grep scale1.py
-        status_scale1 = sh.grep(sh.grep (sh.ps("ax"), '-v', 'grep'), 'scale1.py')
-        #if status_scale1 != 0:
-            # try:
-                # if debugging == 'on':
-                    # print ("DEBUG: in try read settings und config")
-                # data_settingsjsonfile = read_settings_json()
-                # data_configjsonfile = read_config_json()
-            # except:
-                # logstring = _('unable to read settings file, checking if in the blind.')
-                # write_verbose(logstring, False, False)
-                # continue
+        # status_scale2 = sh.grep(sh.grep (sh.ps("ax"), '-v', 'grep'), 'scale2.py')
+        try:
+            if debugging == 'on':
+                print ("DEBUG: in try read scale")
+            data_scalesjsonfile = json_interfaces.read_scales_json(scales_json_file)
+        except:
+            logstring = _('unable to read scales-json file, checking if in the blind.')
+            write_verbose(logstring, False, False)
+            continue
+        
+        timediff_scale1 = int(time.time()) - data_scalesjsonfile['scale1_date']
+        timediff_scale2 = int(time.time()) - data_scalesjsonfile['scale1_date']
+        if timediff_scale1 < 120:
+            scale1_data = data_scalesjsonfile['scale1_data']
+        else:
+            scale1_data = 0
+        if timediff_scale2 < 120:
+            scale2_data = data_scalesjsonfile['scale2_data']
+        else:
+            scale2_data = 0
 #---------------------------------------------------------------------------------------------------------------- Ausgabe der Werte auf der Konsole
         write_verbose(logspacer2, False, False)
         if gpio.input(gpio_heater) == False:
@@ -665,10 +680,18 @@ def doMainLoop():
             logstring = _('uv-light off')
             write_verbose(logstring, False, False)
             status_uv = 0
+        if scale1_data != 0:
+            logstring = _('weight scale 1: ') + str(scale1_data)
+            write_verbose(logstring, False, False)
+        if scale2_data != 0:
+            logstring = _('weight scale 2: ') + str(scale2_data)
+            write_verbose(logstring, False, False)
+            
         write_verbose(logspacer2, False, False)
 #---------------------------------------------------------------------------------------------------------------- Messwerte in die RRD-Datei schreiben
         from rrdtool import update as rrd_update
-        ret = rrd_update('%s' %(rrd_filename), 'N:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s' %(sensor_temperature, sensor_humidity, status_exhaust_air, status_circulating_air, status_heater, status_cooling_compressor, status_humidifier, status_dehumidifier, status_light, status_uv))
+        ret = rrd_update('%s' %(rrd_filename), 'N:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s' %(sensor_temperature, sensor_humidity, status_exhaust_air, status_circulating_air, status_heater, status_cooling_compressor, status_humidifier, status_dehumidifier, status_light, status_uv, scale1_data, scale2_data))
+        
         #array fuer graph     
         # Grafiken erzeugen
         if loopcounter % 3 == 0:
@@ -704,6 +727,14 @@ def doMainLoop():
             if debugging == 'on':
                 print ("DEBUG: ploting status_uv")
             ploting('status_uv')
+            if scale1_data > 0:
+                if debugging == 'on':
+                    print ("DEBUG: ploting scale1")
+                ploting('scale1_data')
+            if scale2_data > 0:
+                if debugging == 'on':
+                    print ("DEBUG: ploting scale2")
+                ploting('scale2_data')
         if debugging == 'on':
             print ('DEBUG Loopnumber: ' + str(loopcounter))
 
@@ -722,6 +753,7 @@ settings_json_file = website_path + '/config/settings.json'
 current_json_file = website_path + '/config/current.json'
 graphs_website_path = website_path + '/images/graphs/'
 config_json_file = website_path + '/config/config.json'
+scales_json_file = website_path + '/config/scales.json'
 logfile_txt_file = website_path + '/logs/logfile.txt'
 #---------------------------------------------------------------------------------- allgemeine Variablen
 # sensor = Adafruit_DHT.AM2302
@@ -807,6 +839,8 @@ except IOError:
         "DS:status_dehumidifier:GAUGE:2000:U:U",
         "DS:status_light:GAUGE:2000:U:U",
         "DS:status_uv:GAUGE:2000:U:U",
+        "DS:scale1_data:GAUGE:2000:U:U",
+        "DS:scale2_data:GAUGE:2000:U:U",
         "RRA:AVERAGE:0.5:1:2160",
         "RRA:AVERAGE:0.5:5:2016",
         "RRA:AVERAGE:0.5:15:2880",
