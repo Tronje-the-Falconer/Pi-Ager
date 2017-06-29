@@ -1,6 +1,0 @@
-<FilesMatch "settings.php">
-  AuthType Basic
-  AuthName "Authentication required"
-  AuthUserFile /var/.htpasswd
-  require valid-user
-</FilesMatch>
