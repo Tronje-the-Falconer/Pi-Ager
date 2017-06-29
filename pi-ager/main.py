@@ -13,6 +13,8 @@ import rrdtool
 import math
 import gettext
 from pi_sht1x import SHT1x
+import json_interfaces
+import sh
 
 ######################################################### Definieren von Funktionen
 #---------------------------------------------------------------------------------- Function goodbye
@@ -584,6 +586,19 @@ def doMainLoop():
             gpio.output(gpio_light, relay_on)
         if status_light == True:
             gpio.output(gpio_light, relay_off)
+#---------------------------------------------------------------------------------------------------------------- Lesen der Scales Json, sofern Scale 1 oder 2 läuft
+        # ps ax | grep -v grep | grep scale1.py
+        status_scale1 = sh.grep(sh.grep (sh.ps("ax"), '-v', 'grep'), 'scale1.py')
+        #if status_scale1 != 0:
+            # try:
+                # if debugging == 'on':
+                    # print ("DEBUG: in try read settings und config")
+                # data_settingsjsonfile = read_settings_json()
+                # data_configjsonfile = read_config_json()
+            # except:
+                # logstring = _('unable to read settings file, checking if in the blind.')
+                # write_verbose(logstring, False, False)
+                # continue
 #---------------------------------------------------------------------------------------------------------------- Ausgabe der Werte auf der Konsole
         write_verbose(logspacer2, False, False)
         if gpio.input(gpio_heater) == False:

@@ -6,6 +6,13 @@ def read_config_json(config_json_file):
         config_data = configjsonfile.read()
     data_configjsonfile = json.loads(config_data)
     return data_configjsonfile
+#---------------------------------------------------------------------------------- Function Lesen der scales.json
+def read_scales_json(scales_json_file):
+    scales_data = None
+    with open(scales_json_file, 'r') as scalesjsonfile:
+        scales_data = scalesjsonfile.read()
+    data_scalesjsonfile = json.loads(scales_data)
+    return data_scalesjsonfile
 #---------------------------------------------------------------------------------- Function Schreiben der current.json
 # def write_current_json(sensor_temperature, sensor_humidity):
     # global current_json_file
