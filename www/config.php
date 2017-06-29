@@ -264,6 +264,31 @@
                                                 <button class="art-button" type="button" onclick="help_sensortype_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
                                             <hr>
+                                            <!----------------------------------------------------------------------------------------Waagen-->
+                                        <table style="width: 100%;" class="miniature_writing">
+                                            <tr>
+                                                <td rowspan="4" class="td_png_icon"><h3><?php echo _('scales'); ?></h3><img src="images/icons/scale_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_scales_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                <td class="text_left_padding"><?php echo _('reference unit scale1'); ?>:</td>
+                                                <td class="text_left_padding"><input name="referenceunit_scale1_config" maxlength="4" size="2" type="text" value=<?php echo $referenceunit_scale1; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('reference unit scale2'); ?>:</td>
+                                                <td class="text_left_padding"><input name="referenceunit_scale2_config" maxlength="4" size="2" type="text" value=<?php echo $referenceunit_scale2; ?>></td>
+                                            </tr>
+                                        </table>
+                                        <script>
+                                            function help_scales_blockFunction() {
+                                                document.getElementById('help_scales').style.display = 'block';
+                                            }
+                                            function help_scales_noneFunction() {
+                                                document.getElementById('help_scales').style.display = 'none';
+                                            }
+                                        </script>
+                                        <p id="help_scales" class="help_p">
+                                            <?php echo _('10KG China Zelle: 205<br>20kg China Zelle: 102<br>50kg Edelstahl Zelle: 74<br>20kg Edelstahl Zelle: 186<br>'); ?>
+                                            <button class="art-button" type="button" onclick="help_scales_noneFunction()"><?php echo _('close'); ?></button>
+                                        </p>
+                                        <hr>
                                             <!----------------------------------------------------------------------------------------Language-->
                                             <table style="width: 100%;" class="miniature_writing">
                                                 <tr>

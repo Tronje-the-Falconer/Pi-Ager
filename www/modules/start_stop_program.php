@@ -80,4 +80,29 @@
         fwrite($f,"\n". date('d.m.Y H:i')." "._('agingtable stopped'));
         fclose($f);
      }
+     # Scales
+     if (isset($_POST['scale1_start'])){
+        shell_exec('sudo /var/sudowebscript.sh startscale1');
+        $f=fopen('logs/logfile.txt','a');
+        fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring scale1 started'));
+        fclose($f);
+     }
+     if (isset($_POST['scale2_start'])){
+        shell_exec('sudo /var/sudowebscript.sh startscale2');
+        $f=fopen('logs/logfile.txt','a');
+        fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring scale2 started'));
+        fclose($f);
+     }
+     if (isset($_POST['scale1_stop'])){
+        shell_exec('sudo /var/sudowebscript.sh pkillscale1');
+        $f=fopen('logs/logfile.txt','a');
+        fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring scale1 stopped'));
+        fclose($f);
+     }
+     if (isset($_POST['scale2_stop'])){
+        shell_exec('sudo /var/sudowebscript.sh pkillscale2');
+        $f=fopen('logs/logfile.txt','a');
+        fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring scale2 stopped'));
+        fclose($f);
+     }
 ?>

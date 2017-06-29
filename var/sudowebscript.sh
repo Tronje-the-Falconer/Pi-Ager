@@ -32,6 +32,24 @@ case "$1" in
     grepagingtable) #Überprüfen von agintable.py  | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach Reifetab.py gesucht
         ps ax | grep -v grep | grep agingtable.py
     ;;
+    startscale1) #Starten von scale1.py
+        python3 /opt/pi-ager/scale1.py > /dev/null 2>/dev/null &
+    ;;
+    pkillscale1) #Stoppen von scale1.py
+        pkill -f scale1.py
+    ;;
+    grepscale1) #Überprüfen von scale1.py | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach RSS.py gesucht
+        ps ax | grep -v grep | grep scale1.py
+    ;;
+    startscale2) #Starten von scale2.py
+        python3 /opt/pi-ager/scale2.py > /dev/null 2>/dev/null &
+    ;;
+    pkillscale2) #Stoppen von scale2.py
+        pkill -f scale2.py
+    ;;
+    grepscale2) #Überprüfen von scale2.py | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach RSS.py gesucht
+        ps ax | grep -v grep | grep scale2.py
+    ;;
     read_gpio_cooling_compressor) # Ansteuern von GPIO Kühlschrankkompressor
         /usr/local/bin/gpio -g read $gpio_cooling_compressor
     ;;

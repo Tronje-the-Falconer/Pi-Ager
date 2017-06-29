@@ -18,26 +18,79 @@
                                 <div class="hg_container">
                                     <table style="width: 100%"><tr>
                                     <?php 
-                                            print '<form  method="post">';
-                                            // Prüft, ob Prozess RSS läuft ( NULL = Rss.py läuft nicht als Prozess, )
-                                            $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
-                                            // Prüft, ob Prozess Reifetab läuft ()
+                                        print '<form  method="post">';
+                                        // Prüft, ob Prozess RSS läuft ( NULL = Rss.py läuft nicht als Prozess, )
+                                        $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
+                                        // Prüft, ob Prozess Reifetab läuft ()
+                                        $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
+                                        
+                                        if($grepmain == NULL and $grepagingtable != NULL) { //wenn Prozess RSS läuft und Reifetab läuft nicht (korrekt)
+                                            shell_exec('sudo /var/sudowebscript.sh pkillreifetab');
                                             $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
-                                            
-                                            if($grepmain == NULL and $grepagingtable != NULL) { //wenn Prozess RSS läuft und Reifetab läuft nicht (korrekt)
-                                                shell_exec('sudo /var/sudowebscript.sh pkillreifetab');
-                                                $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
-                                            }
+                                        }
 
-                                            if ($grepmain == NULL){
-                                                echo '<td><img src="images/icons/operatingmode_42x42.png" alt="" style="padding: 10px;"></td><td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td><td style=""><button class="art-button" name="pi-ager_start">'._('start pi-ager').'</button></td>';
-                                            }
-                                            else {
-                                                echo '<td><img src="images/icons/operating_42x42.gif" alt="" style="padding: 10px;"></td><td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td><td><button class="art-button" name="pi-ager_agingtable_stop" onclick="return confirm("'._("stop pi-ager?").'");">'._("stop pi-ager?").'</button></td>';
-                                            }
-                                            print ' </form>';
+                                        if ($grepmain == NULL){
+                                            echo '<td><img src="images/icons/operatingmode_42x42.png" style="padding: 10px;"></td>
+                                            <td><img src="images/icons/status_off_20x20.png" style="padding-top: 10px;"></td>
+                                            <td>';
+                                            echo "<button class=\"art-button\" name=\"pi-ager_start\" onclick=\"return confirm('"._('start pi-ager?')."');\">"._('start pi-ager')."</button>";
+                                            echo '</td>';
+                                        }
+                                        else {
+                                            echo '<td><img src="images/icons/operating_42x42.gif" alt="" style="padding: 10px;"></td><td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td><td>';
+                                            echo "<button class=\"art-button\" name=\"pi-ager_agingtable_stop\" onclick=\"return confirm('"._('stop pi-ager?').'\\n'._('if agingtable is running, it will be stopped also!')."');\">"._('stop pi-ager')."</button>";
+                                            echo '</td>';
+                                        }
+                                        print ' </form>';
                                     ?>
                                     </tr></table>
+                                    <hr>
+                                    <h2><?php echo _('scales') ?></h2>
+                                    <table style="width: 100%">
+                                        <tr>
+                                            <?php 
+                                                    print '<form  method="post">';
+                                                    // Prüft, ob Prozess scale1 läuft ( NULL = scale1.py läuft nicht als Prozess, )
+                                                    $grepscale1 = shell_exec('sudo /var/sudowebscript.sh grepscale1');
+                                                    if ($grepscale1 == NULL){
+                                                        echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
+                                                        <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
+                                                        <td>';
+                                                        echo "<button class=\"art-button\" name=\"scale1_start\" value=\"scale1_start\"onclick=\"return confirm('"._('start measurement on scale1?').'\\n'._('please attach the weight to the load cell after the start of the measurement !')."');\">"._('start scale1')."</button>";
+                                                        echo '</td>';
+                                                    }
+                                                    else {
+                                                        echo '<td><img src="images/icons/scale_42x42.gif" alt="" style="padding: 10px;"></td>
+                                                        <td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>
+                                                        <td>';
+                                                        echo "<button class=\"art-button\" name=\"scale1_stop\" value=\"scale1_stop\" onclick=\"return confirm('"._('stop measurement on scale1?')."');\">"._('stop scale1')."</button>";
+                                                        echo '</td>';
+                                                    }
+                                                    print ' </form>';
+                                            ?>
+                                        </tr>
+                                            <?php 
+                                                    print '<form  method="post">';
+                                                    // Prüft, ob Prozess scale2 läuft ( NULL = scale2.py läuft nicht als Prozess, )
+                                                    $grepscale1 = shell_exec('sudo /var/sudowebscript.sh grepscale2');
+                                                    if ($grepscale1 == NULL){
+                                                        echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
+                                                        <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
+                                                        <td>';
+                                                        echo "<button class=\"art-button\" name=\"scale2_start\" value=\"scale2_start\" onclick=\"return confirm('"._('start measurement on scale2?').'\\n'._('please attach the weight to the load cell after the start of the measurement !')."');\">"._('start scale2')."</button>";
+                                                        echo '</td>';
+                                                    }
+                                                    else {
+                                                        echo '<td><img src="images/icons/scale_42x42.gif" alt="" style="padding: 10px;"></td>
+                                                        <td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>
+                                                        <td>';
+                                                        echo "<button class=\"art-button\" name=\"scale2_stop\" value=\"scale2_stop\"onclick=\"return confirm('"._('stop measurement on scale2?')."');\">"._('stop scale2')."</button>";
+                                                        echo '</td>';
+                                                    }
+                                                    print ' </form>';
+                                            ?>
+                                        </tr>
+                                    </table>
                                     <hr>
                                     <!----------------------------------------------------------------------------------------Reifetabelle auswählen-->
 
@@ -51,10 +104,10 @@
                                                     print '<form  method="post">';
                                                     foreach($csvfilename as $name) {
                                                         if ($name<>$desired_maturity){
-                                                            echo '<input type="radio" name="hanging_table" value="'.$name.'"><label> '.$name.'</label><br>';
+                                                            echo '<input type="radio" name="agingtable" value="'.$name.'"><label> '.$name.'</label><br>';
                                                         }
                                                         if ($name==$desired_maturity){
-                                                            echo '<input type="radio" name="hanging_table" value="'.$name.'" checked="checked"><label> '.$name.'</label><br>';
+                                                            echo '<input type="radio" name="agingtable" value="'.$name.'" checked="checked"><label> '.$name.'</label><br>';
                                                         }
                                                     }
                                                     echo '</td><td>';
@@ -78,7 +131,7 @@
                                             <td>&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><br>
                                                 <?php 
-                                                    echo '<input class="art-button" type="submit" value="'._("save").'" />';
+                                                    echo "<button class=\"art-button\" name=\"save_agingtable\" value=\"save_agingtable\"onclick=\"return confirm('"._('save new agingtable?')."');\">"._('save')."</button>";
                                                     echo '</form>';
                                                 ?>
                                             </td>
@@ -86,10 +139,10 @@
                                                 <?php 
                                                     echo '<form  method="post">';
                                                     if ($grepagingtable == NULL){
-                                                        echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')."\\n"._('manual values are overwritten!')."');\">"._('start agingtable')."</button>";
+                                                        echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')."\\n"._('manual values will be overwritten!')."');\">"._('start agingtable')."</button>";
                                                     }
                                                     else {
-                                                        echo "<button class=\"art-button\" name=\"pi-ager_agingtable_stop\" onclick=\"return confirm('"._('stop agingtable?').'\\n'._('pi-ager continues with the last values of the agingtable!')."');\">"._('stop agingtable')."</button>";
+                                                        echo "<button class=\"art-button\" name=\"agingtable_stop\" onclick=\"return confirm('"._('stop agingtable?').'\\n'._('pi-ager continues with the last values of the agingtable!')."');\">"._('stop agingtable')."</button>";
                                                     }
                                                     echo '</form>';
                                                 ?>

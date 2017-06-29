@@ -46,6 +46,8 @@
                     'uv_period' => (int)$_POST['uv_period_config']*60,
                     'uv_modus' => (int)$_POST['uv_modus_config'],
                     'dehumidifier_modus' => (int)$_POST['dehumidifier_modus_config'],
+                    'referenceunit_scale1' => (int)$_POST['referenceunit_scale1_config'],
+                    'referenceunit_scale2' => (int)$_POST['referenceunit_scale2_config'],
                     'last_change' => $timestamp);
                 $configjsoninput = json_encode($array_config_json);
                 file_put_contents('config/config.json', $configjsoninput);
@@ -227,6 +229,9 @@
                 fwrite($f, "\n".$logtext_light);
                 fwrite($f, "\n".$logtext_light_duration);
 
+                fwrite($f, "\n");
+                fwrite($f, "\n"._('reference unit scale1').": ".$array_config_json['referenceunit_scale1']);
+                fwrite($f, "\n"._('reference unit scale2').": ".$array_config_json['referenceunit_scale2']);
 
                 fwrite($f, "\n");
                 fwrite($f, "\n"._('language').": ".$language_name);

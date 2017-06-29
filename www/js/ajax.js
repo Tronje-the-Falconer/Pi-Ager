@@ -20,7 +20,48 @@ function loadContent() {
     xmlHttpObject.open('get','config/current.json');
     xmlHttpObject.onreadystatechange = handleContent;
     xmlHttpObject.send(null);
+    xmlHttpObject.open('get','config/scales.json');
+    xmlHttpObject.onreadystatechange = handleContentScales;
+    xmlHttpObject.send(null);
     return false;
+}
+function handleContentScales() {
+    if (xmlHttpObject.readyState==4 && xmlHttpObject.status==200) {
+        myObj = JSON.parse(this.responseText);
+
+        var json_timestamp_scale1 = myObj.scale1_date;
+        var json_timestamp_scale2 = myObj.scale2_date;
+        var timestamp = new Date();
+        var timestamp_unix_milliseconds = timestamp.getTime();
+        var timestamp_unix = Math.round(timestamp_unix_milliseconds / 1000);
+        var time_difference_scale1 = timestamp_unix - json_timestamp_scale1;
+        var time_difference_scale2 = timestamp_unix - json_timestamp_scale2;
+        var str_scale1 = myObj.scale1_data.toFixed(1);
+        var split_scale1 = str_scale1.split(".");
+        var str_scale2 = myObj.scale2_data.toFixed(1);
+        var split_scale2 = str_scale2.split(".");
+//        document.getElementById('json_timestamp').innerHTML = json_timestamp;
+//        document.getElementById('timestamp').innerHTML = timestamp_unix;
+        if (time_difference_scale1 >= 120 && time_difference_scale1 <= 300 || time_difference_scale2 >= 25 && time_difference_scale2 <= 119){
+            document.getElementById('values_older_25_sec').innerHTML = "<img src='images/icons/attention_42x42.png'>";
+        }
+        if (time_difference_scale1<=300){
+            document.getElementById('scale_json_scale1_0').innerHTML = split_scale1[0];
+            document.getElementById('scale_json_scale1_1').innerHTML = split_scale1[1];
+        }
+        else {
+            document.getElementById('scale_json_scale1_0').innerHTML = '-';
+            document.getElementById('scale_json_scale1_1').innerHTML = '-';
+        }
+        if (time_difference_scale2<=300){
+            document.getElementById('scale_json_scale2_0').innerHTML = split_scale2[0];
+            document.getElementById('scale_json_scale2_1').innerHTML = split_scale2[1];
+        }
+        else {
+            document.getElementById('scale_json_scale2_0').innerHTML = '-';
+            document.getElementById('scale_json_scale2_1').innerHTML = '-';
+        }
+    }
 }
 
 function handleContent() {

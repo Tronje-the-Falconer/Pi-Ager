@@ -107,4 +107,6 @@
     else {
         $checked_dehumidify_3 = '';
     }
+    $referenceunit_scale1 = $data_configjsonfile['referenceunit_scale1'];
+    $referenceunit_scale2 = $data_configjsonfile['referenceunit_scale2'];
 ?>

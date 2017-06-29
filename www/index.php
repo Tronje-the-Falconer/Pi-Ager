@@ -34,6 +34,8 @@
                                        //                                     else {
                                                                             $temperature_linestring = '<div style="float: left; padding-left: 8px;" id="current_json_temperature_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_temperature_1"></div></span><strong>&deg;</strong>';
                                                                             $humidity_linestring = '<div style="float: left; padding-left: 8px;" id="current_json_humidity_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_humidity_1"></div></span><strong>&#37</strong> ';
+                                                                            $scale1_linestring = '<div style="float: left; padding-left: 8px;" id="scale_json_scale1_0"></div><span>.<div style="float: right; padding-top: 37px;" id="scale_json_scale1_1"></div></span><strong>gr</strong> ';
+                                                                            $scale2_linestring = '<div style="float: left; padding-left: 8px;" id="scale_json_scale2_0"></div><span>.<div style="float: right; padding-top: 37px;" id="scale_json_scale2_1"></div></span><strong>gr</strong> ';
                                        //                                     }
                                                                         ?>
                                                                         <?php echo $temperature_linestring; ?>
@@ -66,10 +68,23 @@
                                         </table>
                                     </div>
                                 </div>
+                                <p><?php echo $scale1_linestring; ?></p>
+                                <p><?php echo $scale2_linestring; ?></p>
                                 <!------------------------------ ----------------------------------------------------------T/rLF Diagramm-->
                                 <img src="/images/graphs/pi-ager_sensor_temperature-hourly.png" alt="<?php echo _('hours history temperature'); ?>" />
                                 <br/><br/>
-                                <img src="/images/graphs/pi-ager_sensor_humidity-hourly.png" alt="<?php echo _('hours history humidity'); ?>" /><br><br>
+                                <img src="/images/graphs/pi-ager_sensor_humidity-hourly.png" alt="<?php echo _('hours history humidity'); ?>" />
+                                <br><br>
+                                <?php if ($grepscale1 !=0){
+                                    echo "<img src=\"/images/graphs/pi-ager_sensor_scale1-hourly.png\" alt=\"<?php echo _('hours history scale1'); ?>\" />";
+                                    echo '<br/><br/>';
+                                }
+                                ?>
+                                <?php if ($grepscale2 != 0){
+                                    echo "<img src=\"/images/graphs/pi-ager_sensor_scale2-hourly.png\" alt=\"<?php echo _('hours history scale2'); ?>\" />";
+                                    echo '<br/><br/>';
+                                }
+                                ?>
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <h2><?php echo _('statusboard'); ?></h2>
                                 <div class="hg_container">
@@ -268,6 +283,33 @@
                                             <td><?php echo $light_period.' '._('minutes'); ?></td>
                                             <td></td>
                                             <td><?php echo $light_duration.' '._('minutes'); ?></td>
+                                        </tr>
+                                    </table>
+                                    <hr>
+                                    <table class="switching_state miniature_writing">
+                                        <tr>
+                                            <td><b><?php echo strtoupper(_('type')); ?></b></td>
+                                            <td><b><?php echo strtoupper(_('status')); ?></b></td>
+                                            <td class="text_left">&nbsp;</td>
+                                            <td class="text_left">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="text_left">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="images/icons/scale_42x42.png" alt=""></td>
+                                            <td><img src="<?php echo $scale1_on_off_png ;?>" title=></td>
+                                            <td><?php echo strtoupper(_('scale1')) ; ?></td>
+                                            <td class="text_left">&nbsp;</td>
+                                            <td class="text_left">&nbsp;</td>
+                                            <td class="text_left">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="images/icons/scale_42x42.png" alt=""></td>
+                                            <td><img src="<?php echo $scale2_on_off_png ;?>" title=></td>
+                                            <td><?php echo strtoupper(_('scale2')) ; ?></td>
+                                            <td class="text_left">&nbsp;</td>
+                                            <td class="text_left">&nbsp;</td>
+                                            <td class="text_left">&nbsp;</td>
                                         </tr>
                                     </table>
                                 </div>

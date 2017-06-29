@@ -34,6 +34,10 @@
                                     <img src="/images/graphs/pi-ager_sensor_temperature-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('humidity profile'); ?></h2>
                                     <img src="/images/graphs/pi-ager_sensor_humidity-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <h2><?php echo _('scale1 profile'); ?></h2>
+                                    <img src="/images/graphs/pi-ager_sensor_scale1-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
+                                    <h2><?php echo _('scale2 profile'); ?></h2>
+                                    <img src="/images/graphs/pi-ager_sensor_scale2-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('cooler'); ?></h2>
                                     <img src="/images/graphs/pi-ager_stat_coolcompressor-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     <h2><?php echo _('heater'); ?></h2>

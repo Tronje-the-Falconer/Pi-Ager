@@ -13,6 +13,8 @@
     #Prüfen ob Programme laufen
     $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable'); #Reifetab.py
     $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain'); #Rss.py
+    $grepscale1 = shell_exec('sudo /var/sudowebscript.sh grepscale1');
+    $grepscale2 = shell_exec('sudo /var/sudowebscript.sh grepscale2');
 
     #Schaltzustände setzen
     if($read_gpio_cooling_compressor == 0) {
@@ -74,5 +76,17 @@
     }
     else {
         $pi_ager_on_off_png = 'images/icons/status_on_20x20.png';
+    }
+    if($grepscale1 == 0) {
+        $scale1_on_off_png = 'images/icons/status_off_20x20.png';
+    }
+    else {
+        $scale1_on_off_png = 'images/icons/status_on_20x20.png';
+    }
+        if($grepscale2== 0) {
+        $scale2_on_off_png = 'images/icons/status_off_20x20.png';
+    }
+    else {
+        $scale2_on_off_png = 'images/icons/status_on_20x20.png';
     }
 ?>

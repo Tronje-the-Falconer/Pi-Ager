@@ -1,6 +1,6 @@
 <?php 
     #Namen der Reifetabelle in config/tables.json speichern
-    if (isset ($_POST['agingtable'])){
+    if (isset ($_POST['save_agingtable'])){
         $timestamp = time();
         $array = array( 'agingtable' => $_POST['agingtable'],'date' => $timestamp);
         $jsoninput = json_encode($array);
