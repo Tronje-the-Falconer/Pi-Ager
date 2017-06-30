@@ -680,10 +680,10 @@ def doMainLoop():
             logstring = _('uv-light off')
             write_verbose(logstring, False, False)
             status_uv = 0
-        if scale1_data != 0:
+        if scale1_data > 0:
             logstring = _('weight scale 1: ') + str(scale1_data)
             write_verbose(logstring, False, False)
-        if scale2_data != 0:
+        if scale2_data > 0:
             logstring = _('weight scale 2: ') + str(scale2_data)
             write_verbose(logstring, False, False)
             
@@ -727,14 +727,12 @@ def doMainLoop():
             if debugging == 'on':
                 print ("DEBUG: ploting status_uv")
             ploting('status_uv')
-            if scale1_data > 0:
-                if debugging == 'on':
-                    print ("DEBUG: ploting scale1")
-                ploting('scale1_data')
-            if scale2_data > 0:
-                if debugging == 'on':
-                    print ("DEBUG: ploting scale2")
-                ploting('scale2_data')
+            if debugging == 'on':
+                print ("DEBUG: ploting scale1")
+            ploting('scale1_data')
+            if debugging == 'on':
+                print ("DEBUG: ploting scale2")
+            ploting('scale2_data')
         if debugging == 'on':
             print ('DEBUG Loopnumber: ' + str(loopcounter))
 
@@ -746,7 +744,7 @@ def doMainLoop():
         loopcounter += 1
     
 ######################################################### Definition von Variablen
-debugging = 'on'      # Debugmodus 'on'
+debugging = 'off'      # Debugmodus 'on'
 #---------------------------------------------------------------------------------- Pfade zu den Dateien
 website_path = '/var/www'
 settings_json_file = website_path + '/config/settings.json'
