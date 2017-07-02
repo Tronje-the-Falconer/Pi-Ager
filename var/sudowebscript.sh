@@ -13,6 +13,9 @@ gpio_uv_light=25
 gpio_light=8
 gpio_dehumidifier=7
 
+# Zeitstempel
+DATE=$(date +"%Y-%m-%d_%H%M")
+
 case "$1" in
     startmain) #Starten von main.py
         python3 /opt/pi-ager/main.py > /dev/null 2>/dev/null &
@@ -106,6 +109,12 @@ case "$1" in
     ;;
     getpirevision) # auslesen der Revision vom pi um auf Model zu kommen
         cat /proc/cpuinfo | grep 'Revision' | awk '{print $3}' | sed 's/^1000//'
+    ;;
+    takewebcampicture) # macht ein Bild mit der Webcam
+        fswebcam -r 640X480 --no-banner /var/www/images/webcam/$DATE.jpg
+    ;;
+    streamwebcampicture) # streambild von der Webcam
+        fswebcam -r 640X480 --no-banner /var/www/images/webcam/current.jpg
     ;;
     *) echo "ERROR: invalid parameter: $1 (for $0)"; exit 1 #Fehlerbehandlung
     ;;

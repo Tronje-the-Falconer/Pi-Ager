@@ -694,7 +694,7 @@ def doMainLoop():
         
         #array fuer graph     
         # Grafiken erzeugen
-        if loopcounter % 3 == 0:
+        if loopcounter % 3 == 0 and loopcounter != 0:
             logstring = _("creating graphs")
             write_verbose(logstring, False, False)
             if debugging == 'on':
