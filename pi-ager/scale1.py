@@ -62,6 +62,7 @@ while True:
                 scalesjsonfile.write(json.dumps(scales_json_data))
                 scalesjsonfile.truncate()
             last_minute = current_minute
+            time.sleep(10800)
 
     except (KeyboardInterrupt, SystemExit):
         GPIO.cleanup()
