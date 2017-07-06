@@ -1,4 +1,4 @@
-                                <?php 
+<?php 
                                     include 'header.php';                                       // Template-Kopf und Navigation
                                     include 'modules/read_settings_json.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lueftung) und Betriebsart des RSS
                                     include 'modules/read_config_json.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)

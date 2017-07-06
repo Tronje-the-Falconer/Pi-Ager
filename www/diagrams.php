@@ -1,4 +1,4 @@
-                                <?php 
+<?php 
                                     include 'header.php';                                       // Template-Kopf und Navigation
                                 ?>
                                 <!----------------------------------------------------------------------------------------Was eben hier hin kommt ...-->

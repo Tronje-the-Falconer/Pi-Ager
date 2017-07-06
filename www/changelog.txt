@@ -1,22 +1,35 @@
 Version 2.2.1
 
 - Frontend
-    - überarbeitung der Icons
-    - Hinzufügen von Steuerungsfelder für UV; Licht und Entfeuchter
-    - 
+    - Überarbeitung der Icons
+    - UV, Licht und Entfeuchter
+        - Steuerungsfeldern
+        - Graphen
+    - Webcam
+    - Wägezellen
+        - Steuerungsfeld für Offset
+        - Graphen
+    - Steuerungsmöglichkeit für Entfeuchtung
+        - Ohne
+        - Abluft
+        - Abluft mit Entfeuchter
+        - Entfeuchter
 
 - Backend
     - Umstellung auf Python 3
     - neue Bibliothek für SHT und DHT Sensoren
     - Umstellung von Apache auf Lighttpd
     - Variablen Umbenennungen
-    - Übersetzungsunterstützung (Deutsch, Englisch
-    - UV Lichtsteuerung
-    - Lichtsteuerung
-    - Entfeuchter-Steuerung
-    - Auslagern der Standardwerte in eine config.json#
-    - Entfernen der Werte für Entfeuchtung ein/aus, Entfeuchtungsverzögerung, Kühlen an/aus, aus den csv-Dateien und auslagern in die         config.json
-    - Verzeichnis strukturierung (config, logs, images/icons, images/graphs)
+    - Übersetzungsunterstützung (Deutsch, Englisch)
+    - Logik
+        - UV Lichtsteuerung
+        - Lichtsteuerung
+        - Entfeuchter-Steuerung
+        - Wägezellen
+        - Webcamsteuerung
+    - Auslagern der Standardwerte in eine config.json
+    - Entfernen der Werte für Entfeuchtung ein/aus, Entfeuchtungsverzögerung, Kühlen an/aus, aus den csv-Dateien und auslagern in die config.json
+    - Verzeichnis-Strukturierung (config, logs, images/icons, images/graphs, images/webcam)
 --------------------------------------------------------------------------------
 
 Version 2.1.1

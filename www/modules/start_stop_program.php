@@ -105,4 +105,28 @@
         fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring scale2 stopped'));
         fclose($f);
      }
+     if (isset($_POST['webcam_start'])){
+        $grepwebcam = shell_exec('sudo /var/sudowebscript.sh grepwebcam');
+        if($grepwebcam == 0) {
+            shell_exec('sudo /var/sudowebscript.sh startwebcam');
+            sleep (1); # 1 Sec auf start der Py-Datei warten
+            $grepwebcam = shell_exec('sudo /var/sudowebscript.sh grepwebcam');
+            if($grepwebcam != 0) {
+                $f=fopen('logs/logfile.txt','w');
+                fwrite($f, "\n".date('d.m.Y H:i')." "._('webcam started'));
+                fclose($f);
+            }
+            else{
+                $f=fopen('logs/logfile.txt','w');
+                fwrite($f, "\n".date('d.m.Y H:i')." "._('webcam could not be started'));
+                fclose($f);
+            }
+        }
+    }
+    if (isset($_POST['webcam_stop'])){
+        shell_exec('sudo /var/sudowebscript.sh pkillwebcam');
+        $f=fopen('logs/logfile.txt','a');
+        fwrite($f,"\n". date('d.m.Y H:i')." "._('webcam stopped'));
+        fclose($f);
+     }
 ?>

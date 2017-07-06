@@ -13,8 +13,11 @@ gpio_uv_light=25
 gpio_light=8
 gpio_dehumidifier=7
 
+# IP-Adresse
+MYIP=$(hostname -I | cut -d' ' -f1)
+
 # Zeitstempel
-DATE=$(date +"%Y-%m-%d_%H%M")
+DATE=$(date +"%Y-%m-%d_%H%M%S")
 
 case "$1" in
     startmain) #Starten von main.py
@@ -52,6 +55,15 @@ case "$1" in
     ;;
     grepscale2) #Überprüfen von scale2.py | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach RSS.py gesucht
         ps ax | grep -v grep | grep scale2.py
+    ;;
+    startwebcam)
+        /opt/mjpg-streamer/webcam.sh > /dev/null 2>/dev/null
+    ;;
+    grepwebcam)
+        ps ax | grep -v grep | grep mjpg-streamer
+    ;;
+    pkillwebcam)
+        pkill -f mjpg-streamer
     ;;
     read_gpio_cooling_compressor) # Ansteuern von GPIO Kühlschrankkompressor
         /usr/local/bin/gpio -g read $gpio_cooling_compressor
@@ -110,11 +122,9 @@ case "$1" in
     getpirevision) # auslesen der Revision vom pi um auf Model zu kommen
         cat /proc/cpuinfo | grep 'Revision' | awk '{print $3}' | sed 's/^1000//'
     ;;
-    takewebcampicture) # macht ein Bild mit der Webcam
-        fswebcam -r 640X480 --no-banner /var/www/images/webcam/$DATE.jpg
-    ;;
-    streamwebcampicture) # streambild von der Webcam
-        fswebcam -r 640X480 --no-banner /var/www/images/webcam/current.jpg
+    savewebcampicture) # macht ein Bild mit der Webcam
+        curl -s -m 5 -o /var/www/images/webcam/snap_$DATE.jpg http://$MYIP:8080/?action=snapshot
+        #fswebcam -r 640X480 --no-banner /var/www/images/webcam/$DATE.jpg
     ;;
     *) echo "ERROR: invalid parameter: $1 (for $0)"; exit 1 #Fehlerbehandlung
     ;;

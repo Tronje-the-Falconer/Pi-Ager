@@ -24,13 +24,16 @@
     elseif ($_SERVER['PHP_SELF'] == '/changelog.php') {
         $changelogs_active = 'active';
     }
+    elseif ($_SERVER['PHP_SELF'] == '/webcam.php') {
+        $webcam_active = 'active';
+    }
     # Auslesen der Version aus dem Changelog
     # Lese 14 Zeichen, beginnend mit dem 21. Zeichen
     $changelogfile = 'changelog.txt';
     $first_row_changelog = fopen($changelogfile,"r"); # Oeffnet die Datei changelog.txt
     $piager_version = fgets($first_row_changelog, 4096); # liest die erste Zeile bzw. bis Zeichen 4096 aus. je nachdem was zuerst eintritt
     #$rssversion = file_get_contents('$changelogfile', NULL, NULL, 0, 12); # Alternative über Inhalt auslesen. Zeile 0 bis Zeichen 12
-    
+
     # Language festlegen
     $language = 'de_DE.utf8';
     putenv("LANG=$language"); 
@@ -45,8 +48,11 @@
 <html>
     <meta http-equiv="content-type" content="text/html;  charset=utf-8">
     <?php 
-        if ($_SERVER['PHP_SELF'] != '/settings.php') {
-        echo "<meta http-equiv=\"refresh\" content=\"120\" />";
+        if ($_SERVER['PHP_SELF'] == '/webcam.php') {
+            echo "<meta http-equiv=\"refresh\" content=\"5\" />";
+        }
+        elseif ($_SERVER['PHP_SELF'] != '/settings.php') {
+            echo "<meta http-equiv=\"refresh\" content=\"120\" />";
         }
     ?>
     <head>
@@ -86,6 +92,7 @@
                             <li><a href="diagrams.php" class="<?php echo $diagrams_active; ?>"><?php echo _('graphs'); ?></a></li>
                             <li><a href="settings.php" class="<?php echo $settings_active; ?>"><?php echo _('settings'); ?></a></li>
                             <li><a href="logs.php" class="<?php echo $logs_active; ?>"><?php echo _('logs'); ?></a></li>
+                            <li><a href="webcam.php" class="<?php echo $webcam_active; ?>"><?php echo _('webcam'); ?></a></li>
                             <?php 
                                 if ($_SERVER['PHP_SELF'] == '/changelog.php') {
                                     echo '<li><a href="changelog.php" class="';

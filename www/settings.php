@@ -1,4 +1,4 @@
-                                <?php 
+<?php 
                                     include 'header.php';                                       // Template-Kopf und Navigation
                                     include 'modules/write_table_json.php';                     // Speichert die Auswahl der Reifetabelle
                                     include 'modules/write_settings_json_logfile_txt.php';      // Speichert die eingestelleten Werte (Temperaturregelung, Feuchte, Lüftung)
