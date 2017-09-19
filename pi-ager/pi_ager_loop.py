@@ -122,6 +122,7 @@ def doMainLoop():
         switch_on_uv_hour = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_hour_key)
         switch_on_uv_minute = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_minute_key)
         uv_duration = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_duration_key)
+        print('TEST: Typ uv_duration = '+ str(type(uv_duration)))
         uv_period = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_period_key)
         light_modus = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_modus_key)
         switch_on_light_hour = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_light_hour_key)
@@ -160,12 +161,6 @@ def doMainLoop():
         pi_ager_organization.write_verbose(pi_ager_init.logspacer2, False, False)
         
         gpio.setmode(pi_ager_init.board_mode)
-        if pi_ager_debug.debugging == 'on':
-            print ("DEBUG: writing current.json start")
-        #setupGPIO()
-        pi_ager_database.write_current(sensor_temperature, pi_ager_init.gpio_heater, pi_ager_init.gpio_exhausting_air, pi_ager_init.gpio_cooling_compressor, pi_ager_init.gpio_circulating_air, sensor_humidity)
-        if pi_ager_debug.debugging == 'on':
-            print ("DEBUG: writing current.json stop")
         # Durch den folgenden Timer laeuft der Ventilator in den vorgegebenen Intervallen zusaetzlich zur generellen Umluft bei aktivem Heizen, Kuehlen oder Befeuchten
 #---------------------------------------------------------------------------------------------------------------- Timer fuer Luftumwaelzung-Ventilator
         if circulation_air_period == 0:                          # gleich 0 ist an,  Dauer-Timer
@@ -402,11 +397,11 @@ def doMainLoop():
             # pi_ager_organization.write_verbose(logstring, False, False)
             # continue
         scale1_row = pi_ager_database.get_scale_table_row(pi_ager_names.scale1_table)
-        scale1_value = scale1_row['value']
-        scale1_last_change = scale1_row['last_change']
+        scale1_value = scale1_row[pi_ager_names.value_field]
+        scale1_last_change = scale1_row[pi_ager_names.last_change_field]
         scale2_row = pi_ager_database.get_scale_table_row(pi_ager_names.scale2_table)
-        scale2_value = scale2_row['value']
-        scale2_last_change = scale2_row['last_change']
+        scale2_value = scale2_row[pi_ager_names.value_field]
+        scale2_last_change = scale2_row[pi_ager_names.last_change_field]
         timediff_scale1 = int(time.time()) - scale1_last_change
         timediff_scale2 = int(time.time()) - scale2_last_change
         if timediff_scale1 < 120:
@@ -422,7 +417,7 @@ def doMainLoop():
         if gpio.input(pi_ager_init.gpio_heater) == False:
             logstring = _('heater on')
             pi_ager_organization.write_verbose(logstring, False, False)
-            status_heater = 10
+            status_heater = 1
         else:
             logstring = _('heater off')
             pi_ager_organization.write_verbose(logstring, False, False)
@@ -430,7 +425,7 @@ def doMainLoop():
         if gpio.input(pi_ager_init.gpio_cooling_compressor) == False:
             logstring = _('cooling compressor on')
             pi_ager_organization.write_verbose(logstring, False, False)
-            status_cooling_compressor = 10
+            status_cooling_compressor = 1
         else:
             logstring = _('cooling compressor off')
             pi_ager_organization.write_verbose(logstring, False, False)
@@ -438,7 +433,7 @@ def doMainLoop():
         if gpio.input(pi_ager_init.gpio_humidifier) == False:
             logstring = _('humidifier on')
             pi_ager_organization.write_verbose(logstring, False, False)
-            status_humidifier = 10
+            status_humidifier = 1
         else:
             logstring = _('humidifier off')
             pi_ager_organization.write_verbose(logstring, False, False)
@@ -446,7 +441,7 @@ def doMainLoop():
         if gpio.input(pi_ager_init.gpio_circulating_air) == False:
             logstring = _('circulation air on')
             pi_ager_organization.write_verbose(logstring, False, False)
-            status_circulating_air = 10
+            status_circulating_air = 1
         else:
             logstring = _('circulation air off')
             pi_ager_organization.write_verbose(logstring, False, False)
@@ -454,7 +449,7 @@ def doMainLoop():
         if gpio.input(pi_ager_init.gpio_exhausting_air) == False:
             logstring = _('exhaust air on')
             pi_ager_organization.write_verbose(logstring, False, False)
-            status_exhaust_air = 10
+            status_exhaust_air = 1
         else:
             logstring = _('exhaust air off')
             pi_ager_organization.write_verbose(logstring, False, False)
@@ -462,7 +457,7 @@ def doMainLoop():
         if gpio.input(pi_ager_init.gpio_dehumidifier) == False:
             logstring = _('dehumidifier on')
             pi_ager_organization.write_verbose(logstring, False, False)
-            status_dehumidifier = 10
+            status_dehumidifier = 1
         else:
             logstring = _('dehumidifier off')
             pi_ager_organization.write_verbose(logstring, False, False)
@@ -470,7 +465,7 @@ def doMainLoop():
         if gpio.input(pi_ager_init.gpio_light) == False:
             logstring = _('light on')
             pi_ager_organization.write_verbose(logstring, False, False)
-            status_light = 10
+            status_light = 1
         else:
             logstring = _('light off')
             pi_ager_organization.write_verbose(logstring, False, False)
@@ -478,7 +473,7 @@ def doMainLoop():
         if gpio.input(pi_ager_init.gpio_uv) == False:
             logstring = _('uv-light on')
             pi_ager_organization.write_verbose(logstring, False, False)
-            status_uv= 10
+            status_uv= 1
         else:
             logstring = _('uv-light off')
             pi_ager_organization.write_verbose(logstring, False, False)
@@ -492,6 +487,15 @@ def doMainLoop():
             
         pi_ager_organization.write_verbose(pi_ager_init.logspacer2, False, False)
 #---------------------------------------------------------------------------------------------------------------- Messwerte in die RRD-Datei schreiben
+#------------------ Schreiben der aktuellen Status-Werte
+        if pi_ager_debug.debugging == 'on':
+            print ("DEBUG: writing current.json start")
+        #setupGPIO()
+        pi_ager_database.write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light)
+        if pi_ager_debug.debugging == 'on':
+            print ("DEBUG: writing current.json stop")
+
+#------------------ Graphen erzeugen
         from rrdtool import update as rrd_update
         ret = rrd_update('%s' %(pi_ager_init.rrd_filename), 'N:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s' %(sensor_temperature, sensor_humidity, status_exhaust_air, status_circulating_air, status_heater, status_cooling_compressor, status_humidifier, status_dehumidifier, status_light, status_uv, scale1_data, scale2_data))
         

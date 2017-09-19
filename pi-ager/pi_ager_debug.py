@@ -1,1 +1,1 @@
-debugging = 'on'      # Debugmodus 'on'
+debugging = 'off'      # Debugmodus 'on'

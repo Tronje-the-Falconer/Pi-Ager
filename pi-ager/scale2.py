@@ -1,14 +1,11 @@
 #!/usr/bin/python3
 import sys
 import RPi.GPIO as GPIO
-import json
 import time
 import datetime
 from hx711 import Scale
-import json_interfaces
-
-config_json_file = '/var/www/config/config.json'
-data_configjsonfile = json_interfaces.read_config_json(config_json_file)
+import pi_ager_database
+import pi_ager_names
 
 samples_scale2 = 20
 spikes_scale2 = 4
@@ -17,7 +14,7 @@ gpio_scale2_data = 10
 gpio_scale_sync = 9
 gain_scale2 = 128  #32[Channel B], 64 [Channel A], 128 [Channel A]
 bitsToRead_scale2 = 24
-referenceunit_scale2 = data_configjsonfile ['referenceunit_scale2']
+referenceunit_scale2 = pi_ager_database.get_table_value(pi_ager_names.config_settings_table,pi_ager_names.referenceunit_scale2_key)
 # 10KG China Zelle:
 #   Gain 32 -> 60
 #   Gain 128 -> 205
@@ -54,13 +51,7 @@ while True:
         current_minute = datetime.datetime.fromtimestamp(timestamp).strftime('%M')
         
         if current_minute != last_minute:
-            with open('/var/www/config/scales.json', 'r+') as scalesjsonfile:
-                scales_json_data = json.load(scalesjsonfile)
-                scales_json_data['scale2_data'] = formated_value
-                scales_json_data['scale2_date'] = int(time.time())
-                scalesjsonfile.seek(0)
-                scalesjsonfile.write(json.dumps(scales_json_data))
-                scalesjsonfile.truncate()
+            pi_ager_database.write_scale(pi_ager_names.scale2_table,value)
             last_minute = current_minute
             time.sleep(10800)
 

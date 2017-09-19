@@ -3,73 +3,31 @@
 ######################################################### Importieren der Module
 import sys
 import os
-import json
 import glob
 import time
 import datetime
 import csv
 import gettext
 from datetime import timedelta
+import pi_ager_debug
+import pi_ager_database
+import pi_ager_organization
+import pi_ager_init
+
 ######################################################### Definieren von Funktionen
-#---------------------------------------------------------------------------------- Function Lesen der tables.json
-def read_tables_json():
-    current_data = None
-    with open(tables_json_file, 'r') as tablesjsonfile:
-        table_data = tablesjsonfile.read();
-    data_tablesjsonfile = json.loads(table_data);
-    return data_tablesjsonfile
-#---------------------------------------------------------------------------------- Function Lesen der settings.json
-def read_settings_json():
-    settings_data = None
-    with open(settings_json_file, 'r') as settingsjsonfile:
-        settings_data = settingsjsonfile.read()
-    data_settingsjsonfile = json.loads(settings_data)
-    return data_settingsjsonfile
-#---------------------------------------------------------------------------------- Function Lesen der config.json
-def read_config_json():
-    config_data = None
-    with open(config_json_file, 'r') as configjsonfile:
-        config_data = configjsonfile.read()
-    data_configjsonfile = json.loads(config_data)
-    return data_configjsonfile
-#---------------------------------------------------------------------------------- Function Schreiben der settings.json
-def write_settings_json(modus, setpoint_temperature, setpoint_humidity, circulation_air_period, circulation_air_duration, exhaust_air_period, exhaust_air_duration):
-    setting_data = json.dumps({"modus":modus, "setpoint_temperature":setpoint_temperature, "setpoint_humidity":setpoint_humidity, "circulation_air_period":circulation_air_period, "circulation_air_duration":circulation_air_duration, "exhaust_air_period":exhaust_air_period, "exhaust_air_duration":exhaust_air_duration, "switch_on_cooling_compressor":switch_on_cooling_compressor, "switch_off_cooling_compressor":switch_off_cooling_compressor, "switch_on_humidifier":switch_on_humidifier, "switch_off_humidifier":switch_off_humidifier, "delay_humidify":delay_humidify, 'date':int(time.time()), 'sensortype':sensortype})
-    with open(settings_json_file, 'w') as settingsjsonfile:
-        settingsjsonfile.write(setting_data)
-#---------------------------------------------------------------------------------- Function Schreiben der current.json
-def write_current_json(sensor_temperature, sensor_humidity):
-    current_data = json.dumps({"sensor_temperature":sensor_temperature, "status_heater":gpio.input(gpio_heater), "status_exhaust_air":gpio.input(gpio_exhaust_fan), "status_cooling_compressor":gpio.input(gpio_cooling_compressor), "status_circulating_air":gpio.input(gpio_circulation_fan),"sensor_humidity":sensor_humidity, 'last_change':int(time.time())})
-    with open(current_json_file, 'w') as currentjsonfile:
-        currentjsonfile.write(current_data)
-#---------------------------------------------------------------------------------- Funktion zur uebersetzung von z.B. Listenobjekten z.B. animals = [N_('mollusk'), N_('albatross'), N_('rat')]
-def N_(message):
-    return message
-#---------------------------------------------------------------------------------- Funktion zur schreiben in das Logfile
-def write_verbose(logstring):
-    logfile_txt = open(logfile_txt_file, 'a')           # Variable target = logfile.txt oeffnen
-    logfile_txt.write(logstring)
-    logfile_txt.close
-    print (logstring)
-#---------------------------------------------------------------------------------- Function write verbose
-def write_verbose(logstring, newLine=False, print_in_logfile=False):
-    if(verbose):
-        print(logstring)
-        if(newLine is True):
-            print('')
-    if (print_in_logfile is True):
-        logfile_txt = open(logfile_txt_file, 'a')           # Variable target = logfile.txt oeffnen
-        logfile_txt.write(logstring)
-        logfile_txt.close
+# #---------------------------------------------------------------------------------- Funktion zur uebersetzung von z.B. Listenobjekten z.B. animals = [N_('mollusk'), N_('albatross'), N_('rat')]
+# def N_(message):
+    # return message
 #---------------------------------------------------------------------------------- Funktion zum Lesen des Dictionarys und setzen der Werte
 def read_dictionary(dictionary):
-    if debugging == 'on':
+    global period_endtime
+
+    if pi_ager_debug.debugging == 'on':
         print ('DEBUG read_dictionary()')
     # Variablen aus Dictionary setzen
     for key, value in iter(dictionary.items()):
         if value == None or value == '':                      # wenn ein Wert leer ist muss er aus der letzten settings.json ausgelesen  werden
-            data_settingsjsonfile = read_settings_json()
-            value = data_settingsjsonfile['' + key + '']
+            value = pi_ager_database.get_table_value(pi_ager_names.config_settings_table,key)
             exec('{} = {}'.format(key,value), exec_scope)   # fuellt die jeweilige Variable mit altem Wert (value = columname)
         else:
             value = int(value)
@@ -110,47 +68,37 @@ def read_dictionary(dictionary):
     sensor_logstring = _('sensortype') + ": \t \t \t" + sensorname + ' ' + _('value') + ': ' + str(sensortype)
     
     
-    if debugging == 'on':
+    if pi_ager_debug.debugging == 'on':
         print ('DEBUG schreibe settings.json in if')
-    write_settings_json (modus, exec_scope['setpoint_temperature'], exec_scope['setpoint_humidity'], exec_scope['circulation_air_period'], exec_scope['circulation_air_duration'], exec_scope['exhaust_air_period'], exec_scope['exhaust_air_duration'])
-    global period_endtime
+    pi_ager_database.write_settings(modus, exec_scope['setpoint_temperature'], exec_scope['setpoint_humidity'], exec_scope['circulation_air_period'], exec_scope['circulation_air_duration'], exec_scope['exhaust_air_period'], exec_scope['exhaust_air_duration'])
     period_endtime = datetime.datetime.now() + timedelta(days = duration) # days = parameter von timedelta
     logstring = operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + "\n" + sollfeuchtigkeit_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n" '---------------------------------------' + "\n"
-    write_verbose(logstring, False, True)
+    pi_ager_organization.write_verbose(logstring, False, True)
     
 ######################################################### Definition von Variablen
 global exec_scope
 global period_endtime
 global duration_sleep
-global verbose
 global current_json_file
 global settings_json_file
 global tables_json_file
 global settings_json_file
 global config_json_file
-debugging = 'off'      # Debugmodus 'on'
 exec_scope = {}
 #---------------------------------------------------------------------------------- Pfade zu den Dateien
-website_path = '/var/www'
-csv_path = website_path + '/csv/'
-settings_json_file = website_path+'/config/settings.json'
-tables_json_file = website_path + '/config/tables.json'
-config_json_file = website_path + '/config/config.json'
-current_json_file = website_path + '/config/current.json'
-logfile_txt_file = website_path + '/logs/logfile.txt'
-verbose = True                # Dokumentiert interne Vorgaenge wortreich
+website_path = pi_ager_paths.get_website_path()
+csv_path = pi_ager_paths.get_csv_path()
+logfile_txt_file = pi_ager_paths.get_path_logfile_txt_file()
 #---------------------------------------------------------------------------------- Allgemeingueltige Werte aus config.json
-data_configjsonfile = read_config_json()
-sensortype = data_configjsonfile ['sensortype']                                        # Sensortyp
-language = data_configjsonfile ['language']                                            # Sprache der Textausgabe
-switch_on_cooling_compressor = data_configjsonfile ['switch_on_cooling_compressor']    # Einschalttemperatur
-switch_off_cooling_compressor = data_configjsonfile ['switch_off_cooling_compressor']  # Ausschalttemperatur
-switch_on_humidifier = data_configjsonfile ['switch_on_humidifier']                    # Einschaltfeuchte
-switch_off_humidifier = data_configjsonfile ['switch_off_humidifier']                  # Ausschaltfeuchte
-delay_humidify = data_configjsonfile ['delay_humidify']                                # Luftbefeuchtungsverzoegerung
+sensortype = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key)
+language = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.language_key)                                            # Sprache der Textausgabe
+switch_on_cooling_compressor = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_cooling_compressor_key)
+switch_off_cooling_compressor = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_cooling_compressor_key)
+switch_on_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_humidifier_key)
+switch_off_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_humidifier_key)
+delay_humidify = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key)
 #---------------------------------------------------------------------------------- Tabelle aus tables.json
-data_tablesjsonfile = read_tables_json()                   # Function-Aufruf
-agingtable = data_tablesjsonfile['agingtable']    # Variable reifetablename = Name der Reifetabelle
+agingtable = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.agingtable_key)    # Variable reifetablename = Name der Reifetabelle
 
 #---------------------------------------------------------------------------------- bedingte Werte aus Variablen
 #---------------------------------------------------------------------------------------------------------------- csv-datei
@@ -166,29 +114,28 @@ elif sensortype == 3 :
     sensortype_txt = '3'
     sensorname = 'SHT'
 #---------------------------------------------------------------------------------------------------------------- Sprache
-####   Set up message catalog access
-# translation = gettext.translation('pi-ager', '/var/www/locale', fallback=True)
-# _ = translation.ugettext
-if language == 1:
-    translation = gettext.translation('pi-ager', '/var/www/locale', languages=['de_DE'], fallback=True)
-elif language == 2:
-    translation = gettext.translation('pi-ager', '/var/www/locale', languages=['en'], fallback=True)
-# else:
-translation.install()
-
+# ####   Set up message catalog access
+# # translation = gettext.translation('pi-ager', '/var/www/locale', fallback=True)
+# # _ = translation.ugettext
+# if language == 1:
+    # translation = gettext.translation('pi-ager', '/var/www/locale', languages=['de_DE'], fallback=True)
+# elif language == 2:
+    # translation = gettext.translation('pi-ager', '/var/www/locale', languages=['en'], fallback=True)
+# # else:
+# translation.install()
+pi_ager_init.set_language()
 #---------------------------------------------------------------------------------- Variablen
-if debugging == 'on':
+if pi_ager_debug.debugging == 'on':
     day_in_seconds = 1  #zum testen ein Tag vergeht in einer Sekunde
 else:
     day_in_seconds = 86400  #Anzahl der Sek. in einem Tag
     
-logspacer = "\n"+ "***********************************************"
 
 ######################################################### Hauptprogramm
 ########################################################################################################################
-write_verbose(logspacer, False, True)
+pi_ager_organization.write_verbose(pi_ager_init.logspacer, False, True)
 logstring = "\n" + _('the climate values are now controlled by the automatic program % s') % (agingtable) + "\n" + "\n"
-write_verbose(logstring, False, True)
+pi_ager_organization.write_verbose(logstring, False, True)
 
 #---------------------------------------------------------------------------------- Auslesen der gesammten csv-Datei
 csv_file = open(csv_path + csv_file,"r")   # Variable csv_file = csv-Datei oeffnen
@@ -197,18 +144,18 @@ row_number = 0                              # Setzt Variable row_number auf 0
 total_duration = 0                          # Setzt Variable duration auf 0
 
 for row in csv_file_reader:
-    if debugging == 'on':
+    if pi_ager_debug.debugging == 'on':
         print ('DEBUG' + str(row))
     total_duration += int(row["days"])                           # errechnet die Gesamtdauer
     build_dictionary = "dictionary%d = %s"%  (row_number,row)   # baut pro Zeile ein Dictionary
     exec(build_dictionary)                                      # baut pro Zeile das jeweilige Dictionary
     
     row_number += 1                                             # Zeilenanzahl wird hochgezaehlt (fuer Dictionary Nummer und total_periods)
-    if debugging == 'on':
+    if pi_ager_debug.debugging == 'on':
         print ('DEBUG ' + str(total_duration))
 
 total_periods = row_number - 1                                    # Variable total_periods = Anzahl der Perioden (0 basiert!), der Reifephasen (entspricht der Anzahl an Reihen)
-if debugging == 'on':
+if pi_ager_debug.debugging == 'on':
     print ('DEBUG ' + str(total_periods))
 csv_file.close()
 #---------------------------------------------------------------------------------- Lesen der Werte aus der CSV-Datei & Schreiben der Werte in die Konsole und das Logfile
@@ -216,39 +163,39 @@ period = 0              # setzt periodenzaehler zurueck
 actual_dictionary = None  # setzt aktuelles Dictionary zurueck
 
 while period <= total_periods:
-    if debugging == 'on':
+    if pi_ager_debug.debugging == 'on':
         print ('DEBUG period : ' + str(period))
         print ('DEBUG total_periods : ' + str(total_periods))
     exec('{} = {}'.format("actual_dictionary", "dictionary" + str(period))) # Bsp: actual_dictionary =  {t:1, t:2, t:3}
-    if debugging == 'on':
+    if pi_ager_debug.debugging == 'on':
         print ('DEBUG actual_dictionary : ' + str(actual_dictionary))
     if period == 0:
         logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('start values period 1 of %s') % (str(total_periods + 1)) + '\n'  
-        write_verbose(logstring, False, True)
+        pi_ager_organization.write_verbose(logstring, False, True)
         finaltime = datetime.datetime.now() + timedelta(days = total_duration)  # days = parameter von timedelta
         read_dictionary(actual_dictionary)
         logstring = _("next change of values: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M')) + '\n'
-        write_verbose(logstring, False, True)
+        pi_ager_organization.write_verbose(logstring, False, True)
         logstring = _("end of program: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M')) + '\n'
-        write_verbose(logstring, False, True)
+        pi_ager_organization.write_verbose(logstring, False, True)
         
     elif period == total_periods:
         logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('new values for period %s of %s') % (str(period + 1), str(total_periods + 1))
-        write_verbose(logstring, False, True)
+        pi_ager_organization.write_verbose(logstring, False, True)
         read_dictionary(actual_dictionary)
         logstring = '\n' + _('Program "%s" ends the control.') % (agingtable) + '\n' + _('pi-ager continues to work with the last values.')
-        write_verbose(logstring, False, True)
+        pi_ager_organization.write_verbose(logstring, False, True)
         
     else:
         logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('new values for period %s of %s') % (str(period + 1), str(total_periods + 1))
-        write_verbose(logstring, False, True)
+        pi_ager_organization.write_verbose(logstring, False, True)
         read_dictionary(actual_dictionary)
         logstring = _("next change of values: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M'))
-        write_verbose(logstring, False, True)
+        pi_ager_organization.write_verbose(logstring, False, True)
         logstring = _("end of program: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M'))
-        write_verbose(logstring, False, True)
+        pi_ager_organization.write_verbose(logstring, False, True)
     period += 1
-    write_verbose(logspacer, False, True)
+    pi_ager_organization.write_verbose(pi_ager_init.logspacer, False, True)
     if period <= total_periods:
         time.sleep(duration_sleep)       # Wartezeit bis zur naechsten Periode
 sys.exit(0)

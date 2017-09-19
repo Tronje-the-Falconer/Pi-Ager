@@ -7,7 +7,6 @@ import rrdtool
 
 import pi_ager_loop
 import pi_ager_gpio_config
-import pi_ager_json_handling
 import pi_ager_init
 import pi_ager_organization
 import pi_ager_plotting
@@ -55,8 +54,6 @@ except IOError:
 
 #    i = 1
 pi_ager_organization.write_verbose(pi_ager_init.logspacer, False, False)
-settings = pi_ager_json_handling.read_settings_json()
-config = pi_ager_json_handling.read_config_json()
 pi_ager_init.set_sensortype()
 pi_ager_init.set_system_starttime()
 #uv_duration=0    #Initial-Füllung der Variablen

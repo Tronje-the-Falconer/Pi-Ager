@@ -54,6 +54,17 @@ def set_system_starttime():
     light_starttime = system_starttime
     light_stoptime = light_starttime
 
+def set_language():
+    ####   Set up message catalog access
+    # translation = gettext.translation('pi_ager', '/var/www/locale', fallback=True)
+    # _ = translation.ugettext
+    if language == 1:
+        translation = gettext.translation('pi_ager', '/var/www/locale', languages=['en'], fallback=True)
+    elif language == 2:
+        translation = gettext.translation('pi_ager', '/var/www/locale', languages=['de'], fallback=True)
+    # else:
+        
+    translation.install()
 
 ######################################################### Setzen von Variablen
 #---------------------------------------------------------------------------------- System-Startzeit setzen
@@ -108,13 +119,4 @@ gpio_scale_sync = 9                # GPIO fuer Waage Sync
 gpio_recerved1 = 2                 # GPIO Reserve 1
 gpio_recerved2 = 11                # GPIO Reserve 2
 #---------------------------------------------------------------------------------------------------------------- Sprache
-####   Set up message catalog access
-# translation = gettext.translation('pi_ager', '/var/www/locale', fallback=True)
-# _ = translation.ugettext
-if language == 1:
-    translation = gettext.translation('pi_ager', '/var/www/locale', languages=['en'], fallback=True)
-elif language == 2:
-    translation = gettext.translation('pi_ager', '/var/www/locale', languages=['de'], fallback=True)
-# else:
-    
-translation.install()
+set_language()

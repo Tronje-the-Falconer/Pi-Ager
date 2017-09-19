@@ -19,10 +19,10 @@ def connect_database(command):
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
     cursor.execute(command)
+    connection.commit()
     
 def close_database():
     global connection
-    connection.commit()
     connection.close()
     
 
@@ -45,7 +45,7 @@ def get_table_value(table, key):
 
 def get_scale_table_row(table):
     global cursor
-    sql='SELECT value,last_change FROM ' + table + ' WHERE id = (SELECT MAX(id) from ' + table + ')'
+    sql='SELECT ' + pi_ager_names.value_field + ',' + pi_ager_names.last_change_field + ' FROM ' + table + ' WHERE id = (SELECT MAX(id) from ' + table + ')'
     if pi_ager_debug.debugging == 'on':
         print(sql)
     connect_database(sql)
@@ -98,7 +98,7 @@ def get_current(table, all_rows):
     close_database()
     return rows
 
-def write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity):
+def write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light):
     if pi_ager_debug.debugging=='on':
         print('DEBUG: in write_current')
         print('INSERT INTO ' + pi_ager_names.sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
@@ -108,11 +108,12 @@ def write_current(sensor_temperature, status_heater, status_exhaust_air, status_
     connect_database('INSERT INTO ' + pi_ager_names.status_cooling_compressor_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_cooling_compressor) + ',' + str(get_current_time()) + ')')
     connect_database('INSERT INTO ' + pi_ager_names.status_circulating_air_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_circulating_air) + ',' + str(get_current_time()) + ')')
     connect_database('INSERT INTO ' + pi_ager_names.sensor_humidity_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_humidity) + ',' + str(get_current_time()) + ')')
+    connect_database('INSERT INTO ' + pi_ager_names.status_uv_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_uv) + ',' + str(get_current_time()) + ')')
+    connect_database('INSERT INTO ' + pi_ager_names.status_light_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_light) + ',' + str(get_current_time()) + ')')
     close_database()
 
-def write_scales(value_scale1, value_scale2):
-    connect_database('INSERT INTO ' + pi_ager_names.scale1_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES (' + str(value_scale1) + ',' + str(get_current_time()) + ')')
-    connect_database('INSERT INTO ' + pi_ager_names.scale2_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES (' + str(value_scale2) + ',' + str(get_current_time()) + ')')
+def write_scale(scale_table,value_scale):
+    connect_database('INSERT INTO ' + scale_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES (' + str(value_scale) + ',' + str(get_current_time()) + ')')
     close_database()
 
 def write_tables(agingtable):
