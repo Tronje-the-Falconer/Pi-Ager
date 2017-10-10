@@ -20,7 +20,7 @@
                                     ?>
                                 </a>
                                 <br>
-                                <a href="https://www.grillsportverein.de/forum/threads/reifeschranksteuerung-per-raspberry-pi-tutorial.231649/" target="_blank">www.grillsportverein.de</a>
+                                <a href="https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/" target="_blank">www.grillsportverein.de</a>
                             </p>
                         </div>
                     </div>
