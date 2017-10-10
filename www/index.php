@@ -96,7 +96,7 @@
                                 }
                                 ?>
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
-                                <h2><?php echo _('statusboard'); ?></h2>
+                                <h2 class="art-postheader"><?php echo _('statusboard'); ?></h2>
                                 <div class="hg_container">
                                     <table class="switching_state miniature_writing">
                                         <tr>
