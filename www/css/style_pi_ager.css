@@ -182,7 +182,7 @@ div.thermometers .label {
     font-weight: bold;
 }
 
-.de .den, .de .dene, .de .denem, .de .deneme { position: absolute;  left: 50%; top: 50%; }
+.de .den, .de .dene, .de .denem, .de .deneme, .de .denemescale { position: absolute;  left: 50%; top: 50%; }
 .de {
     position: relative;
     float: left;
@@ -243,8 +243,25 @@ div.thermometers .label {
     font-weight: 400;
     text-align: center;
 }
+
 .deneme span { font-size: 32px; font-weight: 200; }
 .deneme strong { position: absolute; right: 10px; top: 15px; font-size: 25px; }
+
+.denemescale {
+    /*padding: 3px 10px 0 10px; */
+    width: 180px;
+    height: 90px;
+    display: inline-block;
+    /*margin: -48px 0 0 -75px;*/
+    color: #555;
+    text-shadow: 1px 1px 1px white;
+    font-family: 'Arial';
+    font-size: 32px;
+    font-weight: 400;
+    text-align: center;
+}
+.denemescale span { font-size: 32px; font-weight: 200; }
+.denemescale strong { position: absolute; right: 10px; top: 15px; font-size: 25px; }
 
 .log {text-align: left;
 margin-left: 20px;

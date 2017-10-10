@@ -1,4 +1,14 @@
 ﻿<!-- Diese Einstellungen werden nur im manuellen Modus eingeblendet -->
+                                <?php
+                                include 'modules/write_settings_db_logfile_txt.php';        // Speichert die eingestelleten Werte (Temperaturregelung, Feuchte, Lüftung)
+                                include 'modules/read_settings_db.php';                     // Liest die Einstellungen (Temperaturregelung, Feuchte, Lüftung und deren Hysteresen) und Betriebsart des RSS
+    // echo ('<br>');
+    // echo ('MANVALS_read DB circulate: ' . $circulation_air_period);
+    // echo ('<br>');
+    // echo ('MANVALS_read DB exhaust: ' . $exhaust_air_period);
+    // echo ('<br>');
+    // echo date('d M Y, H:i:s');
+                                ?>
                                 <h2 class="art-postheader"><?php echo _('manual values'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <form method="post" name="manvals">
@@ -123,7 +133,7 @@
                                         <!----------------------------------------------------------------------------------------Umluft-->
                                         <table style="width: 100%;" class="miniature_writing">
                                             <tr>
-                                                <td rowspan="4" class="td_png_icon"><h3><?php echo _('timer circulatng'); ?></h3><img src="images/icons/circulate_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_exhausting_air_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                <td rowspan="4" class="td_png_icon"><h3><?php echo _('timer circulating'); ?></h3><img src="images/icons/circulate_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_exhausting_air_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td class="text_left_padding"><?php echo _('period every'); ?> </td>
                                                 <td class="text_left_padding"><input type="text" size="3" maxlength="4" name="circulation_air_period_settings" value=<?php echo round($circulation_air_period); ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span></td>
                                             </tr>

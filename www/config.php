@@ -1,3 +1,7 @@
+                                <?php
+                                include 'modules/write_config_db_logfile_txt.php';          // Speichert die eingestelle Configuration (Hysteresen, Sensortyp, GPIO's)
+                                include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
+                                ?>
                                 <button class="art-button" type="button" onclick="setconfig_blockFunction()"><?php echo _('set general configuration values'); ?></button>
                                 <div id="set_config" class="help_p">
                                     <form method="post" name="config">
@@ -179,7 +183,7 @@
                                                 </tr>
                                                                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('timestamp'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="switch_on_uv_hour" maxlength="2" size="1" type="text" value=<?php echo $switch_on_uv_hour; ?>> : <input name="switch_on_uv_minute" maxlength="2" size="1" type="text" value=<?php echo $switch_on_uv_minute; ?>><?php echo _("o'clock"); ?></td>
+                                                    <td class="text_left_padding"><input name="switch_on_uv_hour_config" maxlength="2" size="1" type="text" value=<?php echo $switch_on_uv_hour; ?>> : <input name="switch_on_uv_minute_config" maxlength="2" size="1" type="text" value=<?php echo $switch_on_uv_minute; ?>><?php echo _("o'clock"); ?></td>
                                                 </tr>
                                             </table>
                                             <script>
@@ -219,7 +223,7 @@
                                                 </tr>
                                                                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('timestamp'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="switch_on_light_hour" maxlength="2" size="1" type="text" value=<?php echo $switch_on_light_hour; ?>> : <input name="switch_on_light_minute" maxlength="2" size="1" type="text" value=<?php echo $switch_on_light_minute; ?>><?php echo _("o'clock"); ?></td>
+                                                    <td class="text_left_padding"><input name="switch_on_light_hour_config" maxlength="2" size="1" type="text" value=<?php echo $switch_on_light_hour; ?>> : <input name="switch_on_light_minute_config" maxlength="2" size="1" type="text" value=<?php echo $switch_on_light_minute; ?>><?php echo _("o'clock"); ?></td>
                                                 </tr>
                                             </table>
                                             <script>
@@ -321,7 +325,7 @@
                                                 <tr>
                                                     <td style="width: 50%;">&nbsp;</td>
                                                     <td>&nbsp;</td>
-                                                    <td><button class="art-button" name="config" type="submit" value=""><?php echo _('save'); ?></button></td>
+                                                    <td><button class="art-button" name="config_form_submit" type="submit" value=""><?php echo _('save'); ?></button></td>
                                                     <td>
                                                         <button class="art-button" type="button" onclick="setconfig_noneFunction()"><?php echo _('hide'); ?></button>
                                                     </td>

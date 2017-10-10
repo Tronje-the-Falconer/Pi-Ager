@@ -1,17 +1,24 @@
 <?php 
                                     include 'header.php';                                       // Template-Kopf und Navigation
-                                    include 'modules/write_table_json.php';                     // Speichert die Auswahl der Reifetabelle
-                                    include 'modules/write_settings_json_logfile_txt.php';      // Speichert die eingestelleten Werte (Temperaturregelung, Feuchte, Lüftung)
-                                    include 'modules/write_config_json_logfile_txt.php';      // Speichert die eingestelle Configuration (Hysteresen, Sensortyp, GPIO's)
+                                    include 'modules/names.php';
+                                    include 'modules/database.php';
                                     include 'modules/start_stop_program.php';                   // Startet / Stoppt das Reifeprogramm bzw. den ganzen Schrank
-                                    include 'modules/read_settings_json.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lüftung und deren Hysteresen) und Betriebsart des RSS
-                                    include 'modules/read_config_json.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
-                                    include 'modules/read_current_json.php';                    // Liest die gemessenen Werte T/H und den aktuellen Zustand der Aktoren
-                                    include 'modules/read_operating_mode.php';                  // Liest die Art der Reifesteuerung
+                                    
+                                    include 'modules/write_table_db.php';                       // Speichert die Auswahl der Reifetabelle
+                                    //include 'modules/write_settings_db_logfile_txt.php';        // Speichert die eingestelleten Werte (Temperaturregelung, Feuchte, Lüftung)
+                                    //include 'modules/write_config_db_logfile_txt.php';          // Speichert die eingestelle Configuration (Hysteresen, Sensortyp, GPIO's)
+                                    
+                                    include 'modules/read_settings_db.php';                     // Liest die Einstellungen (Temperaturregelung, Feuchte, Lüftung und deren Hysteresen) und Betriebsart des RSS
+                                    include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
+                                    include 'modules/read_current_db.php';                      // Liest die gemessenen Werte T/H und den aktuellen Zustand der Aktoren
+                                    include 'modules/read_operating_mode_db.php';               // Liest die Art der Reifesteuerung
                                     include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
                                     include 'modules/read_csv_dir.php';                         // Liest das Verezichnis mit den Reifeprogrammtabellen ein
+                                    
                                     include 'modules/system_reboot.php';                        // Startet das System neu
                                     include 'modules/system_shutdown.php';                      // Fährt das System herunter
+                                    
+
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('operating values'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Programme starten/stoppen-->
@@ -191,14 +198,16 @@
                                 <?php 
                                     if ($grepagingtable == NULL){
                                         include ('manvals.php');
-                                                    }
-                                                    else {
-                                                        echo '<h2 class=\"art-postheader\">'._('manual values'); '</h2>
-                                                                <div class=\"hg_container\"><b>'._('manual adjustments are not possible').'</b><br>'._('during fully automatic aging.').'</div>';
-                                                         }
-                                                ?>
+                                        }
+                                    else {
+                                        echo '<h2 class=\"art-postheader\">'._('manual values'); '</h2>
+                                                <div class=\"hg_container\"><b>'._('manual adjustments are not possible').'</b><br>'._('during fully automatic aging.').'</div>';
+                                         }
+                                ?>
                                 <h2 class="art-postheader"><?php echo _('general configuration'); ?></h2>
-                                <?php include ('config.php'); ?>
+                                <?php 
+                                    include ('config.php'); 
+                                ?>
                                 <hr>
                                 <h2 class="art-postheader"><?php echo _('system'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Reboot/Shutdown-->
@@ -211,6 +220,17 @@
                                             </tr>
                                         </table>
                                     </form>
+                                </div>
+                                <hr>
+                                <h2 class="art-postheader"><?php echo _('database'); ?></h2>
+                                <!----------------------------------------------------------------------------------------Database-->
+                                <div class="hg_container" >
+                                    <table style="width: 100%;">
+                                        <tr>
+                                            <td><button class="art-button" name="empty_statistic_tables" onclick="return confirm('<?php echo _('ATTENTION: empty statistic tables?');?>');"><?php echo _('empty statistic tables'); ?></button></td>
+                                            <td><button class="art-button" name="database_administration" onclick="window.location.href='/phpliteadmin.php'"><?php echo _('database administration'); ?></button></td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 <!----------------------------------------------------------------------------------------Content Ende-->
                             </div>

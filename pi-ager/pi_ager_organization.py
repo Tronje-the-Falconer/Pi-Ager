@@ -1,4 +1,5 @@
 import RPi.GPIO as gpio
+import pi_ager_paths
 
 #---------------------------------------------------------------------------------- Function goodbye
 def goodbye():
@@ -22,6 +23,6 @@ def write_verbose(logstring, newLine=False, print_in_logfile=False):
     if(newLine is True):
         print('')
     if (print_in_logfile is True):
-        logfile_txt = open(logfile_txt_file, 'a')           # Variable target = logfile.txt oeffnen
+        logfile_txt = open(pi_ager_paths.logfile_txt_file, 'a')           # Variable target = logfile.txt oeffnen
         logfile_txt.write(logstring)
         logfile_txt.close

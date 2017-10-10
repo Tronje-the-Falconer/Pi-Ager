@@ -77,6 +77,9 @@
                                             <td style="text-align: center"><a href="https://www.grillsportverein.de/forum/members/ha-ma.74075/" target="_blank"><b>Ha-Ma</b></a><br><?php _('hardware & testing'); ?></td>
                                         </tr>
                                         <tr>
+                                            <td style="text-align: center" colspan="3"><br><br><?php echo _('code co-development by'); echo ' ';?><a href="https://www.geocaching.com/p/default.aspx?guid=7cfcd566-abc7-4dd4-a969-eccaf3c9c5ab&wid=ee3b586f-cf45-4519-be54-41ab194baf35&ds=2" target="_blank" title="Flatmike">Flatmike</a></td>
+                                        </tr>
+                                        <tr>
                                             <td style="text-align: center" colspan="3"><br><br><?php echo _('based on an idea and submission of'); echo ' ';?><a href="https://www.grillsportverein.de/forum/members/tommy_j.54659/" target="_blank" title="Tommy_J">Tommy_J</a></td>
                                         </tr>
                                     </table>

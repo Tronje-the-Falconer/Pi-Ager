@@ -13,6 +13,8 @@ import pi_ager_debug
 import pi_ager_database
 import pi_ager_organization
 import pi_ager_init
+import pi_ager_paths
+import pi_ager_names
 
 ######################################################### Definieren von Funktionen
 # #---------------------------------------------------------------------------------- Funktion zur uebersetzung von z.B. Listenobjekten z.B. animals = [N_('mollusk'), N_('albatross'), N_('rat')]
@@ -98,7 +100,7 @@ switch_on_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_set
 switch_off_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_humidifier_key)
 delay_humidify = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key)
 #---------------------------------------------------------------------------------- Tabelle aus tables.json
-agingtable = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.agingtable_key)    # Variable reifetablename = Name der Reifetabelle
+agingtable = pi_ager_database.read_agingtable_name_from_config()    # Variable reifetablename = Name der Reifetabelle
 
 #---------------------------------------------------------------------------------- bedingte Werte aus Variablen
 #---------------------------------------------------------------------------------------------------------------- csv-datei

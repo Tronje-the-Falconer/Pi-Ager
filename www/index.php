@@ -1,21 +1,25 @@
 <?php 
                                     include 'header.php';                                       // Template-Kopf und Navigation
-                                    include 'modules/read_settings_json.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lueftung) und Betriebsart des RSS
-                                    include 'modules/read_config_json.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
-                                    include 'modules/read_operating_mode.php';                  // Liest die Art der Reifesteuerung
+                                    include 'modules/database.php';                             // Schnittstelle zur Datenbank
+                                    include 'modules/names.php';                                // Variablen mit Strings
+                                    include 'modules/read_settings_db.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lueftung) und Betriebsart des RSS
+                                    include 'modules/read_config_db.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
+                                    include 'modules/read_operating_mode_db.php';                  // Liest die Art der Reifesteuerung
                                     include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
-                                    include 'modules/read_current_json.php';                    // Liest die gemessenen Werte Temp, Humy, Timestamp
+                                    include 'modules/read_current_db.php';                    // Liest die gemessenen Werte Temp, Humy, Timestamp
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('current values'); ?></h2>
-                                <div style="float: center; padding-left: 8px;" id="values_older_25_sec"></div>
                         <!--        <div style="float: left; padding-left: 8px;" id="timestamp"></div>
                                 <div style="float: left; padding-left: 8px;" id="json_timestamp"></div>
                                 <div style="float: left; padding-left: 8px;" id="time_difference"></div>
                         -->
                                 <!----------------------------------------------------------------------------------------Anzeige T/rLF-->
+<?php
+// include 'modules/monitor_query.php';
+?>
                                 <div class="thermometers">
                                     <div class="th-display-div">
-                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/temperature.png" alt="" style="padding-top: 10px;">'.'( &deg;C)'; ?></div></td></tr>
+                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/temperature.png" alt="" style="padding-top: 10px;">'; ?></div><div style="float: center; padding-left: 8px;" id="temperature_values_old"></div></td></tr>
                                             <tr>
                                                 <td>
                                                     <div class="de">
@@ -23,22 +27,7 @@
                                                             <div class="dene">
                                                                 <div class="denem">
                                                                     <div class="deneme">
-                                                                        <?php 
-                                                                            // Die Aktualität der Werte pruefen, geichzeitige RSS-Funktionspruefung
-                                       //                                     $timestamp_unix = time();
-                                       //                                     $time_difference = $timestamp_unix - $current_json_timestamp_last_change ;
-                                       //                                     if ($time_difference >= 120) {
-                                       //                                         $temperature_linestring = '<div style="float: left; padding-left: 8px;" id=""></div>--<span>.<div style="float: right; padding-top: 50px;" id="">-</div></span><strong>&deg;</strong>';
-                                       //                                         $humidity_linestring = '<div style="float: left; padding-left: 8px;" id=""></div>--<span>.<div style="float: right; padding-top: 50px;" id="">-</div></span><strong>&#37</strong> ';
-                                       //                                     }
-                                       //                                     else {
-                                                                            $temperature_linestring = '<div style="float: left; padding-left: 8px;" id="current_json_temperature_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_temperature_1"></div></span><strong>&deg;</strong>';
-                                                                            $humidity_linestring = '<div style="float: left; padding-left: 8px;" id="current_json_humidity_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_humidity_1"></div></span><strong>&#37</strong> ';
-                                                                            $scale1_linestring = '<div style="float: left; padding-left: 8px;" id="scale_json_scale1_0"></div><span>.<div style="float: right; padding-top: 37px;" id="scale_json_scale1_1"></div></span><strong>gr</strong> ';
-                                                                            $scale2_linestring = '<div style="float: left; padding-left: 8px;" id="scale_json_scale2_0"></div><span>.<div style="float: right; padding-top: 37px;" id="scale_json_scale2_1"></div></span><strong>gr</strong> ';
-                                       //                                     }
-                                                                        ?>
-                                                                        <?php echo $temperature_linestring; ?>
+                                                                        <div style="float: left; padding-left: 8px;" id="current_json_temperature_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_temperature_1"></div></span><strong>&deg;C</strong>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -49,7 +38,7 @@
                                         </table>
                                     </div>
                                     <div class="th-display-div">
-                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/humidity.png" alt="" style="padding-top: 10px;">'.'( %)'; ?></div></td></tr>
+                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/humidity.png" alt="" style="padding-top: 10px;">'; ?></div><div style="float: center; padding-left: 8px;" id="humidity_values_old"></div></td></tr>
                                             <tr>
                                                 <td>
                                                     <div class="de">
@@ -57,19 +46,40 @@
                                                             <div class="dene">
                                                                 <div class="denem">
                                                                     <div class="deneme">
-                                                                        <?php echo $humidity_linestring; ?>
+                                                                        <div style="float: left; padding-left: 8px;" id="current_json_humidity_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_humidity_1"></div></span><strong>&#37 </strong>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <!------------------------------ ----------------------------------------------------------Anzeige Scales-->
+                                    <div class="th-display-div">
+                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/scale.png" alt="" style="padding-top: 10px;">'.'1'; ?></div><div style="float: center; padding-left: 8px;" id="scale1_values_old"></div></td></tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="denemescale">
+                                                        <div style="float: left; padding-left: 8px;" id="scale_json_scale1"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="th-display-div">
+                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/scale.png" alt="" style="padding-top: 10px;">'.'2'; ?></div><div style="float: center; padding-left: 8px;" id="scale2_values_old"></div></td></tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="denemescale">
+                                                        <div style="float: left; padding-left: 8px;" id="scale_json_scale2"></div>
                                                     </div>
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
                                 </div>
-                                <p><?php echo $scale1_linestring; ?></p>
-                                <p><?php echo $scale2_linestring; ?></p>
                                 <!------------------------------ ----------------------------------------------------------T/rLF Diagramm-->
                                 <img src="/images/graphs/pi-ager_sensor_temperature-hourly.png" alt="<?php echo _('hours history temperature'); ?>" />
                                 <br/><br/>

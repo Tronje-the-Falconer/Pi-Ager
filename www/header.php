@@ -1,10 +1,13 @@
 <?php
+// include 'names.php';
+// include 'database.php';
+
     session_start();
     # Entwicklermodus
     ini_set( 'display_errors', true );
     error_reporting( E_ALL );
 
-    $monitor_active = '';
+    $monitor_active = '$monitor_active ist leer';
     $diagrams_active = '';
     $settings_active = '';
     $logs_active = '';
@@ -54,6 +57,7 @@
         elseif ($_SERVER['PHP_SELF'] != '/settings.php') {
             echo "<meta http-equiv=\"refresh\" content=\"120\" />";
         }
+        
     ?>
     <head>
         <title>Pi-Ager</title>
@@ -69,7 +73,7 @@
                 echo "<script src='js/ajax.js'></script>";
                 echo "<script src='js/script.js'></script>";
                 echo "<script src='js/script.responsive.js'></script>";
-            }
+            }            
         ?>
     <!--    <script src="js/jquery.js"></script>
         <script src="js/ajax.js"></script>

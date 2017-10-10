@@ -57,8 +57,8 @@ def doMainLoop():
             print ('DEBUG: ' + str(pi_ager_init.sensorname))
         if pi_ager_init.sensorname == 'DHT11': #DHT11
             if pi_ager_debug.debugging == 'on':
-                print ('DEBUG pi_ager_init.sensorname:' + pi_ager_init.sensorname)
-            sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, pi_ager_init.gpio_sensor_data)
+                print ('DEBUG pi_ager_init.sensorname: ' + pi_ager_init.sensorname)
+            sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_init.gpio_sensor_data)
             if pi_ager_debug.debugging == 'on':
                 print ("DEBUG: sensor_temperature: " + str(sensor_temperature_big))
                 print ("DEBUG: sensor_humidity_big: " + str(sensor_humidity_big))
@@ -67,7 +67,7 @@ def doMainLoop():
         elif pi_ager_init.sensorname == 'DHT22': #DHT22
             if pi_ager_debug.debugging == 'on':
                 print ('DEBUG pi_ager_init.sensorname:' + pi_ager_init.sensorname)
-            sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(sensor, pi_ager_init.gpio_sensor_data)
+            sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_init.gpio_sensor_data)
             if pi_ager_debug.debugging == 'on':
                 print ("DEBUG: sensor_temperature: " + str(sensor_temperature_big))
                 print ("DEBUG: sensor_humidity_big: " + str(sensor_humidity_big))
@@ -105,31 +105,34 @@ def doMainLoop():
             # pi_ager_organization.write_verbose(logstring, False, False)
             # continue
         modus = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.modus_key)
-        setpoint_temperature = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key)
-        setpoint_humidity = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key)
-        circulation_air_period = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.circulation_air_period_key)
-        circulation_air_duration = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.circulation_air_duration_key)
-        exhaust_air_period = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.exhaust_air_period_key)
-        exhaust_air_duration = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.exhaust_air_duration_key)
-        switch_on_cooling_compressor = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_cooling_compressor_key)
-        switch_off_cooling_compressor = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_cooling_compressor_key)
-        switch_on_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_humidifier_key)
-        switch_off_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_humidifier_key)
-        delay_humidify = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key)
+        setpoint_temperature = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key))
+        setpoint_humidity = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key))
+        circulation_air_period = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.circulation_air_period_key))
+        if pi_ager_debug.debugging == 'on':
+            print ("DEBUG: circulation_air_period = " + str(circulation_air_period))
+        circulation_air_duration = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.circulation_air_duration_key))
+        if pi_ager_debug.debugging == 'on':
+            print ("DEBUG: circulation_air_duration = "+ str(circulation_air_duration))
+        exhaust_air_period = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.exhaust_air_period_key))
+        exhaust_air_duration = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.exhaust_air_duration_key))
+        switch_on_cooling_compressor = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_cooling_compressor_key))
+        switch_off_cooling_compressor = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_cooling_compressor_key))
+        switch_on_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_humidifier_key))
+        switch_off_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_humidifier_key))
+        delay_humidify = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key))
         delay_humidify = delay_humidify * 10
-        sensortype = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key)
-        uv_modus = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_modus_key)
-        switch_on_uv_hour = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_hour_key)
-        switch_on_uv_minute = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_minute_key)
-        uv_duration = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_duration_key)
-        print('TEST: Typ uv_duration = '+ str(type(uv_duration)))
-        uv_period = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_period_key)
-        light_modus = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_modus_key)
-        switch_on_light_hour = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_light_hour_key)
-        switch_on_light_minute = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_light_minute_key)
-        light_duration = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_duration_key)
-        light_period = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_period_key)
-        dehumidifier_modus = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.dehumidifier_modus_key)
+        sensortype = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key))
+        uv_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_modus_key))
+        switch_on_uv_hour = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_hour_key))
+        switch_on_uv_minute = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_minute_key))
+        uv_duration = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_duration_key))
+        uv_period = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_period_key))
+        light_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_modus_key))
+        switch_on_light_hour = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_light_hour_key))
+        switch_on_light_minute = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_light_minute_key))
+        light_duration = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_duration_key))
+        light_period = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_period_key))
+        dehumidifier_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.dehumidifier_modus_key))
         
         
         # An dieser Stelle sind alle settings eingelesen, Ausgabe auf Konsole
@@ -156,7 +159,7 @@ def doMainLoop():
         pi_ager_organization.write_verbose(pi_ager_init.logspacer2, False, False)
         logstring = _('selected sensor') + ': ' + str(pi_ager_init.sensorname)
         pi_ager_organization.write_verbose(logstring, False, False)
-        logstring = _('value in config.json') + ': ' + str(sensortype)
+        logstring = _('value in database') + ': ' + str(sensortype)
         pi_ager_organization.write_verbose(logstring, False, False)
         pi_ager_organization.write_verbose(pi_ager_init.logspacer2, False, False)
         
@@ -164,16 +167,16 @@ def doMainLoop():
         # Durch den folgenden Timer laeuft der Ventilator in den vorgegebenen Intervallen zusaetzlich zur generellen Umluft bei aktivem Heizen, Kuehlen oder Befeuchten
 #---------------------------------------------------------------------------------------------------------------- Timer fuer Luftumwaelzung-Ventilator
         if circulation_air_period == 0:                          # gleich 0 ist an,  Dauer-Timer
-            status_circulation_air = False
-        if circulation_air_duration == 0:                        # gleich 0 ist aus, kein Timer
             status_circulation_air = True
+        if circulation_air_duration == 0:                        # gleich 0 ist aus, kein Timer
+            status_circulation_air = False
         if circulation_air_duration > 0:
             if current_time < pi_ager_init.circulation_air_start + circulation_air_period:
-                status_circulation_air = True                       # Umluft - Ventilator aus
+                status_circulation_air = False                       # Umluft - Ventilator aus
                 logstring = _('circulation air timer on (deactive)')
                 pi_ager_organization.write_verbose(logstring, False, False)
             if current_time >= pi_ager_init.circulation_air_start + circulation_air_period:
-                status_circulation_air = False                      # Umluft - Ventilator an
+                status_circulation_air = True                      # Umluft - Ventilator an
                 logstring = _('circulation air timer on (active)')
                 pi_ager_organization.write_verbose(logstring, False, False)
             if current_time >= pi_ager_init.circulation_air_start + circulation_air_period + circulation_air_duration:
@@ -361,9 +364,9 @@ def doMainLoop():
                 else:
                     status_dehumidifier = False        # Entfeuchter aus
 #---------------------------------------------------------------------------------------------------------------- Schalten des Umluft - Ventilators
-        if gpio.input(pi_ager_init.gpio_heater) or gpio.input(pi_ager_init.gpio_cooling_compressor) or gpio.input(pi_ager_init.gpio_humidifier) or status_circulation_air == False:
+        if gpio.input(pi_ager_init.gpio_heater) or gpio.input(pi_ager_init.gpio_cooling_compressor) or gpio.input(pi_ager_init.gpio_humidifier) or status_circulation_air == True:
             gpio.output(pi_ager_init.gpio_circulating_air, pi_ager_init.relay_on)               # Umluft - Ventilator an
-        if gpio.input(pi_ager_init.gpio_heater) and gpio.input(pi_ager_init.gpio_cooling_compressor) and gpio.input(pi_ager_init.gpio_humidifier) and status_circulation_air == True:
+        if gpio.input(pi_ager_init.gpio_heater) and gpio.input(pi_ager_init.gpio_cooling_compressor) and gpio.input(pi_ager_init.gpio_humidifier) and status_circulation_air == False:
             gpio.output(pi_ager_init.gpio_circulating_air, pi_ager_init.relay_off)             # Umluft - Ventilator aus
 #---------------------------------------------------------------------------------------------------------------- Schalten des Entfeuchters
         if status_dehumidifier == True:
@@ -491,7 +494,7 @@ def doMainLoop():
         if pi_ager_debug.debugging == 'on':
             print ("DEBUG: writing current.json start")
         #setupGPIO()
-        pi_ager_database.write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light)
+        pi_ager_database.write_current(pi_ager_init.loopcounter, sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier)
         if pi_ager_debug.debugging == 'on':
             print ("DEBUG: writing current.json stop")
 
