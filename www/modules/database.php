@@ -230,7 +230,7 @@
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($referenceunit_scale2) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' = "' . $referenceunit_scale2_key . '"');
 
         close_database();
-        echo('FINISHED WRITING IN DATABASE');
+        //echo('FINISHED WRITING IN DATABASE');
         }
     
     function write_start_in_database($module_key)
