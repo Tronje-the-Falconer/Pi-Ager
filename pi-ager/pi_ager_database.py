@@ -61,6 +61,21 @@ def get_scale_table_row(table):
         print ("DEBUG: " + str(row[0]))
         print ("DEBUG: " + str(row.keys()))
     return row
+    
+def get_agingtable_as_rows(agingtable):
+    global cursor
+    # agingtablename = read_agingtable_name_from_config()
+    sql='SELECT * from agingtable_' + agingtable
+    
+    open_database()
+    execute_query(sql)
+    rows = cursor.fetchall()
+
+    if pi_ager_debug.debugging == 'on':
+        print(sql)
+        
+    close_database()
+    return rows
 
 def read_config():
     global cursor

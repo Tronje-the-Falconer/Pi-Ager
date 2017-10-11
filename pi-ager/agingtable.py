@@ -21,6 +21,19 @@ import pi_ager_names
 # def N_(message):
     # return message
 #---------------------------------------------------------------------------------- Funktion zum Lesen des Dictionarys und setzen der Werte
+def get_dictionary_out_of_sqliterow(row):
+    dictionary = {}
+    dictionary[pi_ager_names.agingtable_modus_field] = row[pi_ager_names.agingtable_modus_field]
+    dictionary[pi_ager_names.agingtable_setpoint_temperature_field] = row[pi_ager_names.agingtable_setpoint_temperature_field]
+    dictionary[pi_ager_names.agingtable_setpoint_humidity_field] = row[pi_ager_names.agingtable_setpoint_humidity_field]
+    dictionary[pi_ager_names.agingtable_circulation_air_duration_field] = row[pi_ager_names.agingtable_circulation_air_duration_field]
+    dictionary[pi_ager_names.agingtable_circulation_air_period_field] = row[pi_ager_names.agingtable_circulation_air_period_field]
+    dictionary[pi_ager_names.agingtable_exhaust_air_duration_field] = row[pi_ager_names.agingtable_exhaust_air_duration_field]
+    dictionary[pi_ager_names.agingtable_exhaust_air_period_field] = row[pi_ager_names.agingtable_exhaust_air_period_field]
+    dictionary[pi_ager_names.agingtable_days_field] = row[pi_ager_names.agingtable_days_field]
+    
+    return dictionary
+
 def read_dictionary(dictionary):
     global period_endtime
 
@@ -37,6 +50,7 @@ def read_dictionary(dictionary):
     duration = int (exec_scope['days'])
     global duration_sleep
     duration_sleep = int(duration) * day_in_seconds    # Anzahl der Tage von "column" mit 86400 (Sekunden) multipliziert fuer wartezeit bis zur naechsten Periode
+    
 #---------------------------------------------------------------------------------- Aufbereitung fuer die Lesbarkeit im Logfile und Fuellen der Variablen
     modus = int(exec_scope['modus'] + 0.5)                # Rundet auf Ganzzahl, Integer da der Modus immer Integer sein sollte 
     if modus == 0:
@@ -101,10 +115,11 @@ switch_off_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_se
 delay_humidify = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key)
 #---------------------------------------------------------------------------------- Tabelle aus tables.json
 agingtable = pi_ager_database.read_agingtable_name_from_config()    # Variable reifetablename = Name der Reifetabelle
+agingtable = agingtable.lower()
 
 #---------------------------------------------------------------------------------- bedingte Werte aus Variablen
 #---------------------------------------------------------------------------------------------------------------- csv-datei
-csv_file = agingtable + '.csv'                       # Variable csv_file = kompletter Dateiname
+# csv_file = agingtable + '.csv'                       # Variable csv_file = kompletter Dateiname
 #---------------------------------------------------------------------------------------------------------------- Sensor
 if sensortype == 1 :
     sensortype_txt = '1'
@@ -140,16 +155,17 @@ logstring = "\n" + _('the climate values are now controlled by the automatic pro
 pi_ager_organization.write_verbose(logstring, False, True)
 
 #---------------------------------------------------------------------------------- Auslesen der gesammten csv-Datei
-csv_file = open(csv_path + csv_file,"r")   # Variable csv_file = csv-Datei oeffnen
-csv_file_reader = csv.DictReader(csv_file)  # reader-Objekt liest csv in Dictionary ein
+# csv_file = open(csv_path + csv_file,"r")   # Variable csv_file = csv-Datei oeffnen
+# csv_file_reader = csv.DictReader(csv_file)  # reader-Objekt liest csv in Dictionary ein
+rows = pi_ager_database.get_agingtable_as_rows(agingtable)
 row_number = 0                              # Setzt Variable row_number auf 0
 total_duration = 0                          # Setzt Variable duration auf 0
 
-for row in csv_file_reader:
+for row in rows:
     if pi_ager_debug.debugging == 'on':
         print ('DEBUG' + str(row))
     total_duration += int(row["days"])                           # errechnet die Gesamtdauer
-    build_dictionary = "dictionary%d = %s"%  (row_number,row)   # baut pro Zeile ein Dictionary
+    build_dictionary = "dictionary%d = %s"%  (row_number, get_dictionary_out_of_sqliterow(row))   # baut pro Zeile ein Dictionary
     exec(build_dictionary)                                      # baut pro Zeile das jeweilige Dictionary
     
     row_number += 1                                             # Zeilenanzahl wird hochgezaehlt (fuer Dictionary Nummer und total_periods)
@@ -159,7 +175,7 @@ for row in csv_file_reader:
 total_periods = row_number - 1                                    # Variable total_periods = Anzahl der Perioden (0 basiert!), der Reifephasen (entspricht der Anzahl an Reihen)
 if pi_ager_debug.debugging == 'on':
     print ('DEBUG ' + str(total_periods))
-csv_file.close()
+#csv_file.close()
 #---------------------------------------------------------------------------------- Lesen der Werte aus der CSV-Datei & Schreiben der Werte in die Konsole und das Logfile
 period = 0              # setzt periodenzaehler zurueck
 actual_dictionary = None  # setzt aktuelles Dictionary zurueck
