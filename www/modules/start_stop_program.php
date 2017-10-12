@@ -1,6 +1,6 @@
 <?php 
 
-include 'names.php';
+    include 'names.php';
 // include 'database.php';
 
     #programme Rss.py und/oder Reifetab.py starten/stoppen
@@ -90,37 +90,50 @@ include 'names.php';
         fwrite($f,"\n". date('d.m.Y H:i')." "._('agingtable stopped'));
         fclose($f);
         write_stop_in_database($status_agingtable_key);
-     }
-     # Scales
-     if (isset($_POST['scale1_start'])){
-        shell_exec('sudo /var/sudowebscript.sh startscale1');
+    }
+    # Scales
+    if (isset($_POST['scale1_start'])){
+        #shell_exec('sudo /var/sudowebscript.sh startscale1');
+        write_start_in_database($status_scale1_key);
         $f=fopen('logs/logfile.txt','a');
         fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring scale1 started'));
         fclose($f);
-        write_start_in_database($status_scale1_key);
-     }
-     if (isset($_POST['scale2_start'])){
-        shell_exec('sudo /var/sudowebscript.sh startscale2');
+    }
+    if (isset($_POST['scale2_start'])){
+        #shell_exec('sudo /var/sudowebscript.sh startscale2');
+        write_start_in_database($status_scale2_key);
         $f=fopen('logs/logfile.txt','a');
         fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring scale2 started'));
         fclose($f);
-        write_start_in_database($status_scale2_key);
-     }
-     if (isset($_POST['scale1_stop'])){
-        shell_exec('sudo /var/sudowebscript.sh pkillscale1');
+    }
+    if (isset($_POST['scale1_stop'])){
+        #shell_exec('sudo /var/sudowebscript.sh pkillscale1');
+        write_stop_in_database($status_scale1_key);
         $f=fopen('logs/logfile.txt','a');
         fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring scale1 stopped'));
         fclose($f);
-        write_stop_in_database($status_scale1_key);
-     }
-     if (isset($_POST['scale2_stop'])){
-        shell_exec('sudo /var/sudowebscript.sh pkillscale2');
+    }
+    if (isset($_POST['scale2_stop'])){
+        #shell_exec('sudo /var/sudowebscript.sh pkillscale2');
+        write_stop_in_database($status_scale2_key);
         $f=fopen('logs/logfile.txt','a');
         fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring scale2 stopped'));
         fclose($f);
-        write_stop_in_database($status_scale2_key);
-     }
-     if (isset($_POST['webcam_start'])){
+
+    }
+    if (isset($_POST['scale1_tara'])){
+         write_start_in_database($status_scale1_tara_key);
+        $f=fopen('logs/logfile.txt','a');
+        fwrite($f,"\n". date('d.m.Y H:i')." "._('tara scale1'));
+        fclose($f);
+    }
+    if (isset($_POST['scale2_tara'])){
+         write_start_in_database($status_scale2_tara_key);
+        $f=fopen('logs/logfile.txt','a');
+        fwrite($f,"\n". date('d.m.Y H:i')." "._('tara scale2'));
+        fclose($f);
+    }
+    if (isset($_POST['webcam_start'])){
         $grepwebcam = shell_exec('sudo /var/sudowebscript.sh grepwebcam');
         if($grepwebcam == 0) {
             shell_exec('sudo /var/sudowebscript.sh startwebcam');

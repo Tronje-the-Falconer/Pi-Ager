@@ -58,8 +58,8 @@
                                             <?php 
                                                     print '<form  method="post">';
                                                     // Prüft, ob Prozess scale1 läuft ( NULL = scale1.py läuft nicht als Prozess, )
-                                                    $grepscale1 = shell_exec('sudo /var/sudowebscript.sh grepscale1');
-                                                    if ($grepscale1 == NULL){
+                                                    //$grepscale1 = shell_exec('sudo /var/sudowebscript.sh grepscale1');
+                                                    if (intval(get_table_value($current_values_table,$status_scale1_key)) == 0){
                                                         echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
                                                         <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                         <td>';
@@ -81,8 +81,8 @@
                                             <?php 
                                                     print '<form  method="post">';
                                                     // Prüft, ob Prozess scale2 läuft ( NULL = scale2.py läuft nicht als Prozess, )
-                                                    $grepscale1 = shell_exec('sudo /var/sudowebscript.sh grepscale2');
-                                                    if ($grepscale1 == NULL){
+                                                    //$grepscale1 = shell_exec('sudo /var/sudowebscript.sh grepscale2');
+                                                    if (intval(get_table_value($current_values_table,$status_scale2_key)) == 0){
                                                         echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
                                                         <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                         <td>';
@@ -165,7 +165,7 @@
                                     </table>
                                     <table id="show_agingtable" class="show_agingtable">
                                         <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
-                                            <td class="show_agingcell"><div class="tooltip">Modus<span class="tooltiptext"><?php echo _('Aging-Modus'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">Modus<span class="tooltiptext"><?php echo _('aging-modus'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">S%<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">S°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">TUD<span class="tooltiptext"><?php echo _('timer of the recirculation duration in minutes'); ?></span></div></td>

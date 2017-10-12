@@ -14,6 +14,8 @@ scale1_table = 'scale1'
 scale2_table = 'scale2'
 current_values_table = 'current_values'
 agingtables_table = 'agingtables'
+scale1_settings_table = 'scale1_settings'
+scale2_settings_table = 'scale2_settings'
 
 #----------------------------table keys
 switch_on_cooling_compressor_key = 'switch_on_cooling_compressor'
@@ -56,6 +58,13 @@ status_dehumidifier_key = 'status_dehumidifier'
 status_humidifier_key = 'status_humidifier'
 scale1_key = 'scale1'
 scale2_key = 'scale2'
+samples_key = 'samples'
+spikes_key = 'spikes'
+sleep_key = 'sleep'
+gpio_data_key = 'gpio_data'
+gpio_sync_key = 'gpio_sync'
+gain_key = 'gain'
+bits_to_read_key = 'bits_to_read'
 
 #-----------------------------table fields
 key_field = 'key'

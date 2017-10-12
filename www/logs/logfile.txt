@@ -325,3 +325,13 @@ language: 1
 12.10.2017 11:19 measuring scale2 stopped
 12.10.2017 11:21 measuring scale1 started
 12.10.2017 11:21 measuring scale1 stopped
+12.10.2017 13:13 measuring scale1 started
+12.10.2017 13:14 measuring scale1 started
+12.10.2017 13:14 tara scale1
+12.10.2017 13:15 measuring scale1 stopped
+12.10.2017 13:49 measuring scale1 started
+12.10.2017 13:49 tara scale1
+12.10.2017 13:50 measuring scale1 stopped
+12.10.2017 13:51 measuring scale1 started
+12.10.2017 13:51 tara scale1
+12.10.2017 13:55 measuring scale1 stopped

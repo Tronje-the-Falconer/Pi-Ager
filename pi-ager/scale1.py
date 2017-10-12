@@ -7,13 +7,13 @@ from hx711 import Scale
 import pi_ager_database
 import pi_ager_names
 
-samples_scale1 = 20
-spikes_scale1 = 4
-sleep_scale1 = 0.1
-gpio_scale1_data = 10
-gpio_scale_sync = 9
-gain_scale1 = 128  #32[Channel B], 64 [Channel A], 128 [Channel A]
-bitsToRead_scale1 = 24
+samples_scale1 = int(pi_ager_database.get_table_value(pi_ager_names.scale1_settings_table,pi_ager_names.sample_key))
+spikes_scale1 = int(pi_ager_database.get_table_value(pi_ager_names.scale1_settings_table,pi_ager_names.spikes_key))
+sleep_scale1 = pi_ager_database.get_table_value(pi_ager_names.scale1_settings_table,pi_ager_names.sleep_key)
+gpio_scale1_data = int(pi_ager_database.get_table_value(pi_ager_names.scale1_settings_table,pi_ager_names.gpio_data_key))
+gpio_scale_sync = int(pi_ager_database.get_table_value(pi_ager_names.scale1_settings_table,pi_ager_names.gpio_sync))
+gain_scale1 = int(pi_ager_database.get_table_value(pi_ager_names.scale1_settings_table,pi_ager_names.gain_key))  #32[Channel B], 64 [Channel A], 128 [Channel A]
+bitsToRead_scale1 = int(pi_ager_database.get_table_value(pi_ager_names.scale1_settings_table,pi_ager_names.bits_to_read_key))
 referenceunit_scale1 = pi_ager_database.get_table_value(pi_ager_names.config_settings_table,pi_ager_names.referenceunit_scale1_key)
 # 10KG China Zelle:
 #   Gain 32 -> 60
