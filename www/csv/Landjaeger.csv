@@ -1,7 +1,0 @@
-modus,setpoint_humidity,setpoint_temperature,circulation_air_duration,circulation_air_period,exhaust_air_duration,exhaust_air_period,days
-4,85,2,1440,2160,900,12960,12
-,30,4,2520,1080,,6480,8
-,70,,1080,2520,,15120,8
-,60,,720,2880,,17280,8
-,45,7,648,2952,,17712,12
-,33,,540,3060,,18360,8

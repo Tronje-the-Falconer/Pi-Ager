@@ -63,6 +63,16 @@ $value_field = 'value';
 $last_change_field = 'last_change';
 $agingtable_name_field = 'name';
 $id_field = 'id';
+$agingtable_modus_field = 'modus';
+$agingtable_setpoint_humidity_field = 'setpoint_humidity';
+$agingtable_setpoint_temperature_field = 'setpoint_temperature';
+$agingtable_circulation_air_duration_field = 'circulation_air_duration';
+$agingtable_circulation_air_period_field = 'circulation_air_period';
+$agingtable_exhaust_air_duration_field = 'exhaust_air_duration';
+$agingtable_exhaust_air_period_field = 'exhaust_air_period';
+$agingtable_days_field = 'days';
+
+
 #-----------------------------JSON Keys
 $last_change_temperature_json_key = 'last_change_temperature';
 $last_change_humidity_json_key = 'last_change_humidity';

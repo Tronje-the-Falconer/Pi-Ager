@@ -34,37 +34,25 @@
         return $current_time;
     }
     
-    function get_query_result($command){
+    function get_query_result($sql_statement){
         global $connection;
         
         // open_connection();
         // $connection->exec('BEGIN;');
-        $result = $connection->query($command);
-        //echo('DB Input: ' . $command);
+        $result = $connection->query($sql_statement);
+        //echo('DB Input: ' . $sql_statement);
         return $result;
     }
     
-    function get_result_from_table($sql_statement)
-    {
-        // if (debugging == 'on') {
-            // print(sql);
-            // }
-        $result = get_query_result($sql_statement);
-
-        return $result;
-    }
-
     function get_table_value($table, $key)
     {
         global $value_field,$id_field;
         
         open_connection();
 		if ($key == NULL){
-            #$sql = 'SELECT ' . $value_field . ' FROM ' . $table . ' o WHERE o.id = (SELECT MAX(i.id) from ' . $table . ')';
             $sql = 'SELECT ' . $value_field . ' FROM ' . $table . ' WHERE ' . $id_field . ' = (SELECT MAX(' . $id_field . ') from ' . $table . ')';
         }
         else {
-            #$sql = 'SELECT ' . $value_field . ' FROM ' . $table . ' o WHERE o.key = "' . $key . '" AND o.id = (SELECT MAX(i.id) from ' . $table . ' i WHERE i.key = "' . $key . '")';
             $sql = 'SELECT ' . $value_field . ' FROM ' . $table . ' WHERE key = "' . $key . '" AND ' . $id_field . ' = (SELECT MAX(' . $id_field . ') from ' . $table . ' WHERE key = "' . $key . '")';
         }
         $result = get_query_result($sql);
@@ -112,7 +100,7 @@
         
         open_connection();
         $sql = 'SELECT ' . $value_field . ', ' . $last_change_field . ' FROM ' . $table . ' WHERE ' . $id_field . ' = (SELECT MAX(' . $id_field . ') from ' . $table . ')';
-        $result = get_result_from_table($sql);
+        $result = get_query_result($sql);
         while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
             {
             $value = $dataset[$value_field];
@@ -166,7 +154,7 @@
 		open_connection();
 		$sql = 'SELECT "' . $agingtable_name_field . '" FROM ' . $agingtables_table . ' WHERE ' . $id_field . ' = ' . intval($id_agingtable) . ';';
 		// echo($sql);
-        $table_result = get_result_from_table($sql);
+        $table_result = get_query_result($sql);
 		if (!$table_result) {
 			echo('$table_result = ' . strval($table_result));
 		}
@@ -178,6 +166,67 @@
         
         return $agingtable_name;
     }
+    
+    function get_agingtable_names()
+    {
+        global $agingtable_name_field, $agingtables_table;
+        
+        open_connection();
+        $sql = 'SELECT ' . $agingtable_name_field . ' FROM ' . $agingtables_table;
+        $result = get_query_result($sql);
+        $index = 0;
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+            {
+            $agingtable_names[$index] = $dataset[$agingtable_name_field];
+            $index++;
+            }
+        close_database();
+        return $agingtable_names;
+    }
+
+    function get_agingtable_id_by_name($agingtable_name)
+    {
+        global $id_field, $agingtables_table, $agingtable_name_field;
+        
+        open_connection();
+        $sql = 'SELECT ' . $id_field . ' FROM ' . $agingtables_table . ' WHERE ' . $agingtable_name_field . ' = "' . $agingtable_name . '"';
+        $result = get_query_result($sql);
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+            {
+            $id_agingtable = $dataset[$id_field];
+            }
+        close_database();
+        return $id_agingtable;
+    }
+    
+    function get_agingtable_dataset($agingtable_name)
+    {
+        open_connection();
+        $sql = 'SELECT * FROM agingtable_' . $agingtable_name;
+        $result = get_query_result($sql);
+        $index = 0;
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+            {
+            $agingtable_rows[$index] = $dataset;
+            // Beispiel für späteren Aufruf: $agingtable_rows[0]['setpoint_temperature']
+            $index++;
+            }
+        close_database();
+        return $agingtable_rows;
+    }
+    
+    function write_agingtable($agingtable){
+        global $value_field, $last_change_field, $key_field, $config_settings_table, $agingtable_key;
+        
+        $id_agingtable = get_agingtable_id_by_name($agingtable);
+        
+        open_connection();
+        $sql = 'UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = "' . $id_agingtable . '" , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' = "' . $agingtable_key . '"';
+        execute_query($sql);
+        
+        close_database();
+    }
+
     function write_settings($modus, $setpoint_temperature, $setpoint_humidity, $circulation_air_period, $circulation_air_duration, $exhaust_air_period,
                             $exhaust_air_duration)
         {
@@ -273,12 +322,6 @@
         // get_query_result('INSERT INTO ' . scale1_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES (' + strval(value_scale1) + ',' + strval(get_current_time()) + ')')
         // get_query_result('INSERT INTO ' . scale2_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES (' + strval(value_scale2) + ',' + strval(get_current_time()) + ')')
         // close_database()
-    // }
-
-    // function write_agingtable(agingtable){
-        // open_connection();
-        // get_query_result('UPDATE ' . config_settings_table . ' SET ' . value_field . '" = "' . agingtable . '" , "' . last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . key_field . ' = ' . $agingtable_key);
-        // close_database();
     // }
 
     // function read_config(){

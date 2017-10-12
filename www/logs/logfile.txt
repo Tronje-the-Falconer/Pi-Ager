@@ -1,13 +1,246 @@
 
-10.10.2017 07:43 pi-ager started
+12.10.2017 10:58 pi-ager started
 ***********************************************
-the climate values are now controlled by the automatic program Dryaging1
+the climate values are now controlled by the automatic program salami
 
-10.10.2017 - 07:43 oclock: start values period 1 of 4
+12.10.2017 - 10:58 oclock: start values period 1 of 12
 
-10.10.2017 07:43 agingtable started
+12.10.2017 10:58 agingtable started
 operation mode: automatic with dehumidify and humidify
-setpoint temperature: 	 	4 C
+setpoint temperature: 	 	21 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	93%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	60.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	1 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 13.10.2017  10:58
+end of program: 09.11.2017  10:58
+
+***********************************************12.10.2017 - 10:58 oclock: new values for period 2 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	20 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	93.0%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	60.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	1 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 13.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 3 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	19 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	92%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	60.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	2 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 14.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 4 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	18 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	91%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	60.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	2 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 14.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 5 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	17 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	90%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	90.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	2 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 14.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 6 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	16 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	89%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	90.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	2 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 14.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 7 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	15 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	88%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	90.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	1 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 13.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 8 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	15.0 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	87%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	90.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	1 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 13.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 9 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	14 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	86%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	90.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	1 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 13.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 10 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	13 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	85%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	90.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	1 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 13.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 11 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	12 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	80%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	120.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	7 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 19.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 12 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	12.0 C
 switch-on value temperature: 	1.0 C
 switch-off value temperature: 	0.0 C
 
@@ -16,60 +249,79 @@ switch-on value humidity: 	 	5.0%
 switch-off value humidity: 	 	4.0%
 humidification delay: 	5.0 minutes
 
-timer circulation air period every: 	42.0 minutes
-timer circulation air: 	  	18.0 minutes
-
-timer exhaust air period every: 	252.0 minutes
-timer exhausting air: 	 	15.0 minutes
-
-duration: 	 	 	 	12 days
-sensortype: 	 	 	SHT value: 3.0
----------------------------------------
-next change of values: 22.10.2017  07:43
-end of program: 23.11.2017  07:43
-
-***********************************************10.10.2017 - 07:43 oclock: new values for period 2 of 4
-operation mode: automatic with dehumidify and humidify
-setpoint temperature: 	 	5 C
-switch-on value temperature: 	1.0 C
-switch-off value temperature: 	0.0 C
-
-setpoint humidity: 	 	65%
-switch-on value humidity: 	 	5.0%
-switch-off value humidity: 	 	4.0%
-humidification delay: 	5.0 minutes
-
-timer circulation air period every: 	45.0 minutes
+timer circulation air period every: 	180.0 minutes
 timer circulation air: 	  	15.0 minutes
 
-timer exhaust air period every: 	270.0 minutes
+timer exhaust air period every: 	360.0 minutes
 timer exhausting air: 	 	15.0 minutes
 
-duration: 	 	 	 	8 days
+duration: 	 	 	 	7 days
 sensortype: 	 	 	SHT value: 3.0
 ---------------------------------------
-next change of values: 18.10.2017  07:43end of program: 23.11.2017  07:43
-***********************************************10.10.2017 - 07:44 oclock: new values for period 3 of 4
-operation mode: automatic with dehumidify and humidify
-setpoint temperature: 	 	6 C
-switch-on value temperature: 	1.0 C
-switch-off value temperature: 	0.0 C
 
-setpoint humidity: 	 	55%
-switch-on value humidity: 	 	5.0%
-switch-off value humidity: 	 	4.0%
-humidification delay: 	5.0 minutes
-
-timer circulation air period every: 	48.0 minutes
-timer circulation air: 	  	12.0 minutes
-
-timer exhaust air period every: 	288.0 minutes
-timer exhausting air: 	 	15.0 minutes
-
-duration: 	 	 	 	16 days
-sensortype: 	 	 	SHT value: 3.0
----------------------------------------
-next change of values: 26.10.2017  07:44end of program: 23.11.2017  07:43
+Program "salami" ends the control.
+pi-ager continues to work with the last values.
 ***********************************************
-10.10.2017 07:44 agingtable stopped
-10.10.2017 07:44 pi-ager stopped
+12.10.2017 11:01 agingtable stopped
+***********************************************
+sensor: SHT75
+operating mode: cooling
+12.10.2017 11:02:00 values have been manually changed.
+
+setpoint temperature: 12&deg;C
+switch-off temperature: 0&deg;C (so at 12&deg;C)
+switch-on temperature: 1&deg;C (so at 13&deg;C)
+
+
+circulation air period: 180 minutes
+circulation air duration: 15 minutes
+
+exhausting air period 360 minutes
+exhausting air duration: 15 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+language: 1
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: cooling
+12.10.2017 11:18:32 values have been manually changed.
+
+setpoint temperature: 12&deg;C
+switch-off temperature: 0&deg;C (so at 12&deg;C)
+switch-on temperature: 1&deg;C (so at 13&deg;C)
+
+
+circulation air period: 180 minutes
+circulation air duration: 15 minutes
+
+exhausting air period 360 minutes
+exhausting air duration: 15 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+language: 1
+***********************************************
+12.10.2017 11:18 measuring scale1 started
+12.10.2017 11:18 measuring scale1 stopped
+12.10.2017 11:19 measuring scale2 started
+12.10.2017 11:19 measuring scale2 stopped
+12.10.2017 11:21 measuring scale1 started
+12.10.2017 11:21 measuring scale1 stopped

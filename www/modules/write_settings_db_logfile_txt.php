@@ -4,7 +4,7 @@
     
     $message_settings='';
     # Prüfung der eingegebenen Werte
-    if(!empty($_POST['modus_settings']))
+    if(!empty($_POST['manvals_form_submit']))
         {
             $modus_setting = $_POST['modus_settings'];
             $setpoint_temperature_setting = $_POST['setpoint_temperature_settings'];
@@ -18,9 +18,11 @@
         if($modus_setting != NULL) {             // ist das $_POST-Array gesetzt
             $SettingsInputIsValid = TRUE;
             foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
-                if (preg_match('/[.\D]/', $CheckInput)) {
-                    $message_settings = _('unauthorized character - please use only positive integers!');
-                    $SettingsInputIsValid = FALSE;
+                if ($CheckInput != 'manvals_form_submit') {
+                    if (preg_match('/[.\D]/', $CheckInput)) {
+                        $message_settings = _('unauthorized character - please use only positive integers!');
+                        $SettingsInputIsValid = FALSE;
+                    }
                 }
             }
             

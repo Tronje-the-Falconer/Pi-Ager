@@ -1,4 +1,4 @@
-Version 3.0.1
+Version 2.2.1
 
 - Frontend
     - Überarbeitung der Icons
@@ -7,7 +7,6 @@ Version 3.0.1
         - Graphen
     - Webcam
     - Wägezellen
-        - Start und Stop
         - Steuerungsfeld für Offset
         - Graphen
     - Steuerungsmöglichkeit für Entfeuchtung
@@ -15,12 +14,9 @@ Version 3.0.1
         - Abluft
         - Abluft mit Entfeuchter
         - Entfeuchter
-    - Datenbank administration und leeren
-    - Anzeige der Werte nur bei eingeschaltetem Objekt (pi-ager, agingtable, scale1, scale2)
 
 - Backend
     - Umstellung auf Python 3
-    - Umstellung auf sqlite
     - neue Bibliothek für SHT und DHT Sensoren
     - Umstellung von Apache auf Lighttpd
     - Variablen Umbenennungen
@@ -31,13 +27,9 @@ Version 3.0.1
         - Entfeuchter-Steuerung
         - Wägezellen
         - Webcamsteuerung
-    - Auslagern der Standardwerte in eigenständige Tabelle
-    - Entfernen der Werte für Entfeuchtung ein/aus, Entfeuchtungsverzögerung, Kühlen an/aus, aus den csv-Dateien und auslagern in die Tabele für Standardwerte
+    - Auslagern der Standardwerte in eine config.json
+    - Entfernen der Werte für Entfeuchtung ein/aus, Entfeuchtungsverzögerung, Kühlen an/aus, aus den csv-Dateien und auslagern in die config.json
     - Verzeichnis-Strukturierung (config, logs, images/icons, images/graphs, images/webcam)
-    - Programmaufteilung auf verschiedene Dateien (php und python)
-    - Ajax für php zugriffe auf sqlite angepasst
-    - Abfrage und Status der main.py, agingtable.py, scale1.py und scale2.py
-    
 --------------------------------------------------------------------------------
 
 Version 2.1.1
