@@ -77,6 +77,18 @@ def get_agingtable_as_rows(agingtable):
     close_database()
     return rows
 
+def get_scale_settings_from_table(scale_settings_table):
+
+    global cursor
+
+    open_database()
+    sql = 'SELECT * FROM ' + scale_settings_table
+    execute_query(sql)
+    rows = cursor.fetchall()
+    
+    close_database()
+    return rows
+
 def read_config():
     global cursor
     open_database()
@@ -134,13 +146,13 @@ def write_current(loopnumber, sensor_temperature, status_heater, status_exhaust_
     if loopnumber % 150 == 0:
         if pi_ager_debug.debugging=='on':
             print('DEBUG: in write_current')
-            print('INSERT INTO ' + pi_ager_names.sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
-        execute_query('INSERT INTO ' + pi_ager_names.sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
+            print('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
+        execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
         execute_query('INSERT INTO ' + pi_ager_names.status_heater_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_heater) + ',' + str(get_current_time()) + ')')
         execute_query('INSERT INTO ' + pi_ager_names.status_exhaust_air_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_exhaust_air) + ',' + str(get_current_time()) + ')')
         execute_query('INSERT INTO ' + pi_ager_names.status_cooling_compressor_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_cooling_compressor) + ',' + str(get_current_time()) + ')')
         execute_query('INSERT INTO ' + pi_ager_names.status_circulating_air_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_circulating_air) + ',' + str(get_current_time()) + ')')
-        execute_query('INSERT INTO ' + pi_ager_names.sensor_humidity_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_humidity) + ',' + str(get_current_time()) + ')')
+        execute_query('INSERT INTO ' + pi_ager_names.data_sensor_humidity_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_humidity) + ',' + str(get_current_time()) + ')')
         execute_query('INSERT INTO ' + pi_ager_names.status_uv_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_uv) + ',' + str(get_current_time()) + ')')
         execute_query('INSERT INTO ' + pi_ager_names.status_light_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_light) + ',' + str(get_current_time()) + ')')
         execute_query('INSERT INTO ' + pi_ager_names.status_humidifier_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_humidifier) + ',' + str(get_current_time()) + ')')
@@ -162,9 +174,9 @@ def write_current(loopnumber, sensor_temperature, status_heater, status_exhaust_
 
 def write_scale(scale_table,value_scale):
 
-    if scale_table == pi_ager_names.scale1_table:
+    if scale_table == pi_ager_names.data_scale1_table:
         scale_key = pi_ager_names.scale1_key
-    elif scale_table == pi_ager_names.scale2_table:
+    elif scale_table == pi_ager_names.data_scale2_table:
         scale_key = pi_ager_names.scale2_key
     
     open_database()

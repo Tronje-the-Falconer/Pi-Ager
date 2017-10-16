@@ -21,8 +21,8 @@
     $current_temperature_timestamp_last_change = get_last_change($current_values_table,$sensor_temperature_key);
     $current_humidity_timestamp_last_change = get_last_change($current_values_table,$sensor_temperature_key);
     
-    $current_scale1_timestamp_last_change_dataset = get_scale_table_row($scale1_table);
+    $current_scale1_timestamp_last_change_dataset = get_scale_table_row($data_scale1_table);
     $current_scale1_timestamp_last_change = $current_scale1_timestamp_last_change_dataset[$last_change_field];
-    $current_scale2_timestamp_last_change_dataset = get_scale_table_row($scale2_table);
+    $current_scale2_timestamp_last_change_dataset = get_scale_table_row($data_scale2_table);
     $current_scale2_timestamp_last_change = $current_scale2_timestamp_last_change_dataset[$last_change_field];
 ?>

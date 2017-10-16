@@ -196,7 +196,7 @@
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
                                                 <td class="td_submitbutton">
-                                                    <button class="art-button" name="manvals_form_submit" type="submit" value="manvals_form_submit"><?php echo _('save'); ?> </button>
+                                                    <button class="art-button" name="manvals_form_submit" type="submit" value="manvals_form_submit" onclick="return confirm('<?php echo _('save'); echo ' '; echo _('manual values'); ?>?')"><?php echo _('save'); ?> </button>
                                                 </td>
                                             </tr>
                                         </table>

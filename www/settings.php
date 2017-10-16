@@ -166,13 +166,13 @@
                                     <table id="show_agingtable" class="show_agingtable">
                                         <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
                                             <td class="show_agingcell"><div class="tooltip">Modus<span class="tooltiptext"><?php echo _('aging-modus'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">S%<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">S°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">TUD<span class="tooltiptext"><?php echo _('timer of the recirculation duration in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">TUP<span class="tooltiptext"><?php echo _('timer of the recirculation period in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">TAD<span class="tooltiptext"><?php echo _('timer of the exhausting air duration in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">TAP<span class="tooltiptext"><?php echo _('timer of the exhausting air period in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">TAG<span class="tooltiptext"><?php echo _('duration of hanging phase in days'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">&phi;<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate d') ?><span class="tooltiptext"><?php echo _('timer of the circulation air duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate p') ?><span class="tooltiptext"><?php echo _('timer of the circulation air period in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust d') ?><span class="tooltiptext"><?php echo _('timer of the exhausting air duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust p') ?><span class="tooltiptext"><?php echo _('timer of the exhausting air period in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('days') ?><span class="tooltiptext"><?php echo _('duration of hanging phase in days'); ?></span></div></td>
                                         </tr>
                                         <?php 
                                             // Gewählte Agingtable aus DB auslesen und als Tabelle beschreiben

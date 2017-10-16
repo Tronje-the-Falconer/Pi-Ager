@@ -1,20 +1,26 @@
 <?php 
 #------------------------ tables names
 $config_settings_table = 'config';
-$sensor_temperature_table = 'sensor_temperature';
-$sensor_humidity_table = 'sensor_humidity';
-$status_heater_table = 'status_heater';
-$status_exhaust_air_table = 'status_exhaust_air';
-$status_cooling_compressor_table = 'status_cooling_compressor';
-$status_circulating_air_table = 'status_circulating_air';
-$status_uv_table = 'status_uv';
-$status_light_table = 'status_light';
-$status_humidifier_table = 'status_humidifier';
-$status_dehumidifier_table = 'status_dehumidifier';
-$scale1_table = 'scale1';
-$scale2_table = 'scale2';
+$data_sensor_temperature_table = 'sensor_temperature_data';
+$data_sensor_humidity_table = 'sensor_humidity_data';
+$status_heater_table = 'heater_status';
+$status_exhaust_air_table = 'exhaust_air_status';
+$status_cooling_compressor_table = 'cooling_compressor_status';
+$status_circulating_air_table = 'circulating_air_status';
+$status_uv_table = 'uv_status';
+$status_light_table = 'light_status';
+$status_humidifier_table = 'humidifier_status';
+$status_dehumidifier_table = 'dehumidifier_status';
+$data_scale1_table = 'scale1_data';
+$data_scale2_table = 'scale2_data';
 $current_values_table = 'current_values';
 $agingtables_table = 'agingtables';
+$settings_scale1_table = 'scale1_settings';
+$settings_scale2_table = 'scale2_settings';
+$data_sensor_temperature_meat1_table = 'sensor_temperature_meat1_data';
+$data_sensor_temperature_meat2_table = 'sensor_temperature_meat2_data';
+$data_sensor_temperature_meat3_table = 'sensor_temperature_meat3_data';
+$data_sensor_temperature_meat4_table = 'sensor_temperature_meat4_data';
 
 #----------------------------table keys;
 $switch_on_cooling_compressor_key = 'switch_on_cooling_compressor';

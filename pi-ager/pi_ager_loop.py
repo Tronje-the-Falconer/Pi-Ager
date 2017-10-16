@@ -399,10 +399,10 @@ def doMainLoop():
             # logstring = _('unable to read scales-json file, checking if in the blind.')
             # pi_ager_organization.write_verbose(logstring, False, False)
             # continue
-        scale1_row = pi_ager_database.get_scale_table_row(pi_ager_names.scale1_table)
+        scale1_row = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale1_table)
         scale1_value = scale1_row[pi_ager_names.value_field]
         scale1_last_change = scale1_row[pi_ager_names.last_change_field]
-        scale2_row = pi_ager_database.get_scale_table_row(pi_ager_names.scale2_table)
+        scale2_row = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale2_table)
         scale2_value = scale2_row[pi_ager_names.value_field]
         scale2_last_change = scale2_row[pi_ager_names.last_change_field]
         timediff_scale1 = int(time.time()) - scale1_last_change

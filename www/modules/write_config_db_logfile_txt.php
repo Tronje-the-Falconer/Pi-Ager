@@ -4,7 +4,7 @@
     
     $message_config='';
     # Prüfung der eingegebenen Werte
-    if(!empty($_POST['switch_on_cooling_compressor_config']))
+    if(!empty($_POST['config_form_submit']))
         {                       // ist das $_POST-Array gesetzt
         $switch_on_cooling_compressor_config = $_POST['switch_on_cooling_compressor_config'];
         $switch_off_cooling_compressor_config = $_POST['switch_off_cooling_compressor_config'];
@@ -29,9 +29,11 @@
 
         $ConfigInputIsValid = TRUE;
         foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
-            if (preg_match('/[.\D]/', $CheckInput)) {
-                $message_config = _('unauthorized character - please use only positive integers!');
-                $ConfigInputIsValid = FALSE;
+            if ($CheckInput != 'config_form_submit') {
+                if (preg_match('/[.\D]/', $CheckInput)) {
+                    $message_config = _('unauthorized character - please use only positive integers!');
+                    $ConfigInputIsValid = FALSE;
+                }
             }
         }
 
@@ -246,18 +248,12 @@
                 fwrite($f, "\n"."***********************************************");
                 fclose($f);
                 
-                $message_config = (_("configuration values saved in file Database"));
+                $message_config = (_("values saved in file Database"));
             }
             else {
             $message_config = (_("values not in the specified limits!"));
             }
         }
+        print '<script language="javascript"> alert("'. (_("general configuration")) . " : " .$message_config.'"); </script>';
     }
-
-            # 3Sekunden Anzeige der message_config
-    print '<p id="info-message_config" style="color: #ff0000; font-size: 20px;"><b>'.$message_config.'</b></p>
-            <script language="javascript">
-                setTimeout(function(){document.getElementById("info-message_config").style.display="none"}, 3000)
-            </script>';
-    // usleep (500000);
 ?>

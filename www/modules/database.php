@@ -291,6 +291,40 @@
     {
         write_startstop_status_in_database($module_key, 0);
     }
+    
+     function delete_data($table_name)
+    {
+        open_connection();
+        $sql = 'DELETE FROM' . $table_name;
+        get_query_result($sql)
+        $sql = 'VACUUM';
+        
+    }
+    
+    function delete_statistic_tables()
+    {
+        global $data_sensor_temperature_table, $data_sensor_humidity_table, $status_heater_table, $status_exhaust_air_table, $status_cooling_compressor_table, $status_circulating_air_table, $status_uv_table, $status_light_table, $status_humidifier_table, $status_dehumidifier_table, $data_scale1_table, $data_scale2_table, $data_sensor_temperature_meat1_table, $data_sensor_temperature_meat2_table, $data_sensor_temperature_meat3_table, $data_sensor_temperature_meat4_table
+
+        delete_data($data_sensor_temperature_table);
+        delete_data($data_sensor_humidity_table);
+        delete_data($status_heater_table);
+        delete_data($status_exhaust_air_table);
+        delete_data($status_cooling_compressor_table);
+        delete_data($status_circulating_air_table);
+        delete_data($status_circulating_air_table);
+        delete_data($status_uv_table);
+        delete_data($status_light_table);
+        delete_data($status_humidifier_table);
+        delete_data($status_dehumidifier_table);
+        delete_data($data_scale1_table);
+        delete_data($data_scale2_table);
+        delete_data($data_sensor_temperature_meat1_table);
+        delete_data($data_sensor_temperature_meat2_table);
+        delete_data($data_sensor_temperature_meat3_table);
+        delete_data($data_sensor_temperature_meat4_table);
+        //delete_data($);
+
+    }
 
     function write_startstop_status_in_database($module_key, $status)
     {
@@ -307,20 +341,20 @@
         // open_connection();
         // if pi_ager_debug.debugging=='on':
             // print('DEBUG: in write_current')
-            // print('INSERT INTO ' . sensor_temperature_table + '(' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(sensor_temperature) + ', ' . strval(get_current_time()) + ')')
-        // get_query_result('INSERT INTO ' . sensor_temperature_table + '(' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(sensor_temperature) + ', ' . strval(get_current_time()) + ')')
+            // print('INSERT INTO ' . data_sensor_temperature_table + '(' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(sensor_temperature) + ', ' . strval(get_current_time()) + ')')
+        // get_query_result('INSERT INTO ' . data_sensor_temperature_table + '(' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(sensor_temperature) + ', ' . strval(get_current_time()) + ')')
         // get_query_result('INSERT INTO ' . status_heater_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(status_heater) + ',' + strval(get_current_time()) + ')')
         // get_query_result('INSERT INTO ' . status_exhaust_air_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(status_exhaust_air) + ',' + strval(get_current_time()) + ')')
         // get_query_result('INSERT INTO ' . status_cooling_compressor_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(status_cooling_compressor) + ',' + strval(get_current_time()) + ')')
         // get_query_result('INSERT INTO ' . status_circulating_air_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(status_circulating_air) + ',' + strval(get_current_time()) + ')')
-        // get_query_result('INSERT INTO ' . sensor_humidity_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(sensor_humidity) + ',' + strval(get_current_time()) + ')')
+        // get_query_result('INSERT INTO ' . data_sensor_humidity_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(sensor_humidity) + ',' + strval(get_current_time()) + ')')
         // close_database()
     // }
 
     // function write_scales(value_scale1, value_scale2){
         // open_connection();
-        // get_query_result('INSERT INTO ' . scale1_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES (' + strval(value_scale1) + ',' + strval(get_current_time()) + ')')
-        // get_query_result('INSERT INTO ' . scale2_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES (' + strval(value_scale2) + ',' + strval(get_current_time()) + ')')
+        // get_query_result('INSERT INTO ' . data_scale1_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES (' + strval(value_scale1) + ',' + strval(get_current_time()) + ')')
+        // get_query_result('INSERT INTO ' . data_scale2_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES (' + strval(value_scale2) + ',' + strval(get_current_time()) + ')')
         // close_database()
     // }
 

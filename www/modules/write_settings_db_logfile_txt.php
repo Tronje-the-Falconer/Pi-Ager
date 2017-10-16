@@ -223,12 +223,6 @@
                         }
                 }
         }
+        print '<script language="javascript"> alert("'. (_("manual values")) . " : " .$message_settings.'"); </script>';
     }
-    # 3Sekunden Anzeige der message_settings
-    print '<p id="info-message_settings" style="color: #ff0000; font-size: 20px;"><b>'.$message_settings.'</b></p>
-                <script language="javascript">
-                    setTimeout(function(){document.getElementById("info-message_settings").style.display="none"}, 3000)
-                </script>';
-    // usleep (500000);
-
 ?>

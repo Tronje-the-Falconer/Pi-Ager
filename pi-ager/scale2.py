@@ -52,7 +52,7 @@ while True:
         current_hour = datetime.datetime.fromtimestamp(timestamp).strftime('%H')
         
         if current_hour != last_hour:
-            pi_ager_database.write_scale(pi_ager_names.scale2_table,value)
+            pi_ager_database.write_scale(pi_ager_names.data_scale2_table,value)
             last_hour = current_hour
             time.sleep(10800)
 
