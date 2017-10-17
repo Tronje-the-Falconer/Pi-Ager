@@ -55,11 +55,14 @@ def get_scale_table_row(table):
         print(sql)
     open_database()
     execute_query(sql)
-    row = cursor.fetchone()
+    row = cursor.fetchone()        
     close_database()
     if pi_ager_debug.debugging == 'on':
-        print ("DEBUG: " + str(row[0]))
-        print ("DEBUG: " + str(row.keys()))
+        if row != None:
+            print ("DEBUG: " + str(row[0]))
+            print ("DEBUG: " + str(row.keys()))
+        else:
+            print ("DEBUG: row is None")
     return row
     
 def get_agingtable_as_rows(agingtable):
