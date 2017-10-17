@@ -7,22 +7,18 @@ from hx711 import Scale
 import pi_ager_database
 import pi_ager_names
 
-scale = sys.argv[1] # siehe https://www.mikrocontroller.net/topic/406385
-
-if scale == pi_ager_names.scale1_key:
-    scale_settings_table = pi_ager_names.settings_scale1_table
-    status_scale_key = pi_ager_names.status_scale1_key
-    scale_table = pi_ager_names.data_scale1_table
-else:
-    scale_settings_table = pi_ager_names.settings_scale2_table
-    status_scale_key = pi_ager_names.status_scale2_key
-    scale_table = pi_ager_names.data_scale2_table
+scale1_settings_table = pi_ager_names.settings_scale1_table
+status_scale1_key = pi_ager_names.status_scale1_key
+scale1_table = pi_ager_names.data_scale1_table
+scale2_settings_table = pi_ager_names.settings_scale2_table
+status_scale2_key = pi_ager_names.status_scale2_key
+scale2_table = pi_ager_names.data_scale2_table
     
-scale_setting_rows = pi_ager_database.get_scale_settings_from_table(scale_settings_table)
+scale1_setting_rows = pi_ager_database.get_scale_settings_from_table(scale1_settings_table)
+scale2_setting_rows = pi_ager_database.get_scale_settings_from_table(scale2_settings_table)
 
-for scale_setting_row in scale_setting_rows:
-    scale_settings[scale_setting_row[pi_ager_names.key-field]] = scale_setting_row[pi_ager_names.value_field]
-    
+scale1_settings = get_scale_settings(scale1_setting_rows)
+scale2_settings = get_scale_settings(scale2_setting_rows)
 
 # 10KG China Zelle:
 #   Gain 32 -> 60
@@ -39,27 +35,45 @@ for scale_setting_row in scale_setting_rows:
 
 
 # Standard Aufruf Parameter Scale (self, source=None, samples=20, spikes=4, sleep=0.1, dout=10, pd_sck=9, gain=128, bitsToRead=24)
-scale = Scale(source=None, samples=scale_settings[pi_ager_names.sample_key], spikes=scale_settings[pi_ager_names.spikes_key], sleep=scale_settings[pi_ager_names.sleep_key], dout=scale_settings[pi_ager_names.gpio_data_key], pd_sck=scale_settings[pi_ager_names.gpio_sync_key], gain=scale_settings[pi_ager_names.gain_key], bitsToRead=scale_settings[pi_ager_names.bits_to_read_key])
+scale1 = Scale(source=None, samples=scale1_settings[pi_ager_names.sample_key], spikes=scale1_settings[pi_ager_names.spikes_key], sleep=scale1_settings[pi_ager_names.sleep_key], dout=scale1_settings[pi_ager_names.gpio_data_key], pd_sck=scale1_settings[pi_ager_names.gpio_sync_key], gain=scale1_settings[pi_ager_names.gain_key], bitsToRead=scale1_settings[pi_ager_names.bits_to_read_key])
+scale1.setReferenceUnit(scale1_settings[pi_ager_names.referenceunit_key])
 
-scale.setReferenceUnit(scale_settings[pi_ager_names.referenceunit_key])
+scale2 = Scale(source=None, samples=scale2_settings[pi_ager_names.sample_key], spikes=scale2_settings[pi_ager_names.spikes_key], sleep=scale2_settings[pi_ager_names.sleep_key], dout=scale2_settings[pi_ager_names.gpio_data_key], pd_sck=scale2_settings[pi_ager_names.gpio_sync_key], gain=scale2_settings[pi_ager_names.gain_key], bitsToRead=scale2_settings[pi_ager_names.bits_to_read_key])
+scale2.setReferenceUnit(scale2_settings[pi_ager_names.referenceunit_key])
 
 while True:
 
     try:
-        status_tara_scale = pi_ager_database.get_table_value(pi_ager_names.current_values_table, status_tara_scale_key)
-        status_scale = pi_ager_database.get_table_value(pi_ager_names.current_values_table, status_scale_key)
-        last_measure = pi_ager_database.get_scale_table_row(scale_table)[pi_ager_names.last_change_field]
-        measuring_interval = pi_ager_database.get_scale_table_row(scale_table)[pi_ager_names.agingtable_measuring_interval_field]
-        time_difference = pi_ager_database.get_current_time() - last_measure
+        status_tara_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, status_tara_scale1_key)
+        status_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, status_scale1_key)
+        last_measure_scale1 = pi_ager_database.get_scale_table_row(scale1_table)[pi_ager_names.last_change_field]
+        measuring_interval_scale1 = pi_ager_database.get_scale_table_row(scale1_table)[pi_ager_names.scale_measuring_interval_field]
+        time_difference_scale1 = pi_ager_database.get_current_time() - last_measure_scale1
         
+        status_tara_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, status_tara_scale2_key)
+        status_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, status_scale2_key)
+        last_measure_scale2 = pi_ager_database.get_scale_table_row(scale2_table)[pi_ager_names.last_change_field]
+        measuring_interval_scale2 = pi_ager_database.get_scale_table_row(scale2_table)[pi_ager_names.scale_measuring_interval_field]
+        time_difference_scale2 = pi_ager_database.get_current_time() - last_measure_scale2
         
-        if status_tara_scale == 1:
-            scale.tare()
-        if status_scale == 1 and time_difference > measuring_interval:
-            value = scale.getMeasure()
-            formated_value = round(value, 3)
-            pi_ager_database.write_scale(pi_ager_names.data_scale1_table,value)
+        scale_measures(scale1, status_tara_scale1, status_scale1, measuring_interval_scale1, time_difference_scale1)
+        scale_measures(scale2, status_tara_scale2, status_scale2, measuring_interval_scale2, time_difference_scale2)
 
     except (KeyboardInterrupt, SystemExit):
         GPIO.cleanup()
         sys.exit()
+
+def get_scale_settings(scale_setting_rows):
+    for scale_setting_row in scale_setting_rows:
+        scale_settings[scale_setting_row[pi_ager_names.key-field]] = scale_setting_row[pi_ager_names.value_field]
+    return scale_settings
+
+def scale_measures(scale, status_tara_scale, status_scale, measuring_interval, time_difference)
+    
+    if status_tara_scale == 1:
+        scale.reset()
+        scale.tare()
+    if status_scale == 1 and time_difference > measuring_interval:
+        value = scale.getMeasure()
+        formated_value = round(value, 3)
+        pi_ager_database.write_scale(pi_ager_names.data_scale1_table,value)

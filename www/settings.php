@@ -18,6 +18,8 @@
                                     include 'modules/system_reboot.php';                        // Startet das System neu
                                     include 'modules/system_shutdown.php';                      // Fährt das System herunter
                                     
+                                    include 'modules/database_empty_statistic_tables.php';      // leert die Statistik-Tabellen (Status, data)
+                                    
 
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('operating values'); ?></h2>
@@ -165,7 +167,7 @@
                                     </table>
                                     <table id="show_agingtable" class="show_agingtable">
                                         <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
-                                            <td class="show_agingcell"><div class="tooltip">Modus<span class="tooltiptext"><?php echo _('aging-modus'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('modus') ?><span class="tooltiptext"><?php echo _('aging-modus'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">&phi;<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate d') ?><span class="tooltiptext"><?php echo _('timer of the circulation air duration in minutes'); ?></span></div></td>
@@ -255,12 +257,14 @@
                                 <h2 class="art-postheader"><?php echo _('database'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Database-->
                                 <div class="hg_container" >
-                                    <table style="width: 100%;">
-                                        <tr>
-                                            <td><button class="art-button" name="empty_statistic_tables" onclick="return confirm('<?php echo _('ATTENTION: empty statistic tables?');?>');"><?php echo _('empty statistic tables'); ?></button></td>
-                                            <td><button class="art-button" name="database_administration" onclick="window.location.href='/phpliteadmin.php'"><?php echo _('database administration'); ?></button></td>
-                                        </tr>
-                                    </table>
+                                    <form method="post" name="database">
+                                        <table style="width: 100%;">
+                                            <tr>
+                                                <td><button class="art-button" name="empty_statistic_tables" value="empty_statistic_tables" onclick="return confirm('<?php echo _('ATTENTION: empty statistic tables?');?>');"><?php echo _('empty statistic tables'); ?></button></td>
+                                                <td><button class="art-button" name="database_administration" onclick="window.location.href='/phpliteadmin.php'"><?php echo _('database administration'); ?></button></td>
+                                            </tr>
+                                        </table>
+                                    </form>
                                 </div>
                                 <!----------------------------------------------------------------------------------------Content Ende-->
                             </div>
