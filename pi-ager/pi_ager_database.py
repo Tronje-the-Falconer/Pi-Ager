@@ -50,7 +50,7 @@ def get_table_value(table, key):
 
 def get_scale_table_row(table):
     global cursor
-    sql='SELECT ' + pi_ager_names.value_field + ',' + pi_ager_names.last_change_field + ' FROM ' + table + ' WHERE id = (SELECT MAX(id) from ' + table + ')'
+    sql='SELECT ' + pi_ager_names.value_field + ', ' + pi_ager_names.last_change_field + ' FROM ' + table + ' WHERE id = (SELECT MAX(id) from ' + table + ')'
     if pi_ager_debug.debugging == 'on':
         print(sql)
     open_database()

@@ -1,4 +1,1044 @@
 
-09.10.2017 13:49 pi-ager started
-09.10.2017 13:50 pi-ager stopped
-09.10.2017 13:58 measuring scale1 started
+12.10.2017 10:58 pi-ager started
+***********************************************
+the climate values are now controlled by the automatic program salami
+
+12.10.2017 - 10:58 oclock: start values period 1 of 12
+
+12.10.2017 10:58 agingtable started
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	21 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	93%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	60.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	1 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 13.10.2017  10:58
+end of program: 09.11.2017  10:58
+
+***********************************************12.10.2017 - 10:58 oclock: new values for period 2 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	20 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	93.0%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	60.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	1 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 13.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 3 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	19 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	92%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	60.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	2 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 14.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 4 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	18 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	91%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	60.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	2 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 14.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 5 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	17 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	90%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	90.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	2 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 14.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 6 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	16 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	89%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	90.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	2 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 14.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 7 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	15 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	88%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	90.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	1 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 13.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 8 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	15.0 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	87%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	90.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	1 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 13.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 9 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	14 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	86%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	90.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	1 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 13.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 10 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	13 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	85%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	90.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	1 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 13.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 11 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	12 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	80%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	120.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	7 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+next change of values: 19.10.2017  10:58end of program: 09.11.2017  10:58
+***********************************************12.10.2017 - 10:58 oclock: new values for period 12 of 12
+operation mode: automatic with dehumidify and humidify
+setpoint temperature: 	 	12.0 C
+switch-on value temperature: 	1.0 C
+switch-off value temperature: 	0.0 C
+
+setpoint humidity: 	 	75%
+switch-on value humidity: 	 	5.0%
+switch-off value humidity: 	 	4.0%
+humidification delay: 	5.0 minutes
+
+timer circulation air period every: 	180.0 minutes
+timer circulation air: 	  	15.0 minutes
+
+timer exhaust air period every: 	360.0 minutes
+timer exhausting air: 	 	15.0 minutes
+
+duration: 	 	 	 	7 days
+sensortype: 	 	 	SHT value: 3.0
+---------------------------------------
+
+Program "salami" ends the control.
+pi-ager continues to work with the last values.
+***********************************************
+12.10.2017 11:01 agingtable stopped
+***********************************************
+sensor: SHT75
+operating mode: cooling
+12.10.2017 11:02:00 values have been manually changed.
+
+setpoint temperature: 12&deg;C
+switch-off temperature: 0&deg;C (so at 12&deg;C)
+switch-on temperature: 1&deg;C (so at 13&deg;C)
+
+
+circulation air period: 180 minutes
+circulation air duration: 15 minutes
+
+exhausting air period 360 minutes
+exhausting air duration: 15 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+language: 1
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: cooling
+12.10.2017 11:18:32 values have been manually changed.
+
+setpoint temperature: 12&deg;C
+switch-off temperature: 0&deg;C (so at 12&deg;C)
+switch-on temperature: 1&deg;C (so at 13&deg;C)
+
+
+circulation air period: 180 minutes
+circulation air duration: 15 minutes
+
+exhausting air period 360 minutes
+exhausting air duration: 15 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+language: 1
+***********************************************
+12.10.2017 11:18 measuring scale1 started
+12.10.2017 11:18 measuring scale1 stopped
+12.10.2017 11:19 measuring scale2 started
+12.10.2017 11:19 measuring scale2 stopped
+12.10.2017 11:21 measuring scale1 started
+12.10.2017 11:21 measuring scale1 stopped
+12.10.2017 13:13 measuring scale1 started
+12.10.2017 13:14 measuring scale1 started
+12.10.2017 13:14 tara scale1
+12.10.2017 13:15 measuring scale1 stopped
+12.10.2017 13:49 measuring scale1 started
+12.10.2017 13:49 tara scale1
+12.10.2017 13:50 measuring scale1 stopped
+12.10.2017 13:51 measuring scale1 started
+12.10.2017 13:51 tara scale1
+12.10.2017 13:55 measuring scale1 stopped
+***********************************************
+sensor: SHT75
+operating mode: cooling
+13.10.2017 08:15:12 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-off temperature: 0&deg;C (so at 12&deg;C)
+switch-on temperature: 1&deg;C (so at &deg;C)
+
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,25 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: en_EN
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: cooling
+13.10.2017 08:19:22 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-off temperature: 0&deg;C (so at 12&deg;C)
+switch-on temperature: 1&deg;C (so at &deg;C)
+
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,25 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: de_DE
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: cooling
+13.10.2017 08:25:26 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-off temperature: 0&deg;C (so at 12&deg;C)
+switch-on temperature: 1&deg;C (so at &deg;C)
+
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,25 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: en_EN
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: cooling
+13.10.2017 08:33:36 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-off temperature: 0&deg;C (so at 12&deg;C)
+switch-on temperature: 1&deg;C (so at &deg;C)
+
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,25 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: de_DE
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: cooling
+13.10.2017 08:35:28 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-off temperature: 0&deg;C (so at 12&deg;C)
+switch-on temperature: 1&deg;C (so at &deg;C)
+
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,25 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: de_DE
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: cooling
+13.10.2017 08:36:45 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-off temperature: 0&deg;C (so at 12&deg;C)
+switch-on temperature: 1&deg;C (so at &deg;C)
+
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,25 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: de_DE
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: cooling
+13.10.2017 08:37:22 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-off temperature: 0&deg;C (so at 12&deg;C)
+switch-on temperature: 1&deg;C (so at &deg;C)
+
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,25 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: de_DE
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: cooling
+13.10.2017 08:40:14 values have been manually changed.
+
+setpoint temperature: 12&deg;C
+switch-off temperature: 0&deg;C (so at 12&deg;C)
+switch-on temperature: 1&deg;C (so at 13&deg;C)
+
+
+circulation air period: 180 minutes
+circulation air duration: 15 minutes
+
+exhausting air period 360 minutes
+exhausting air duration: 10 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+language: 1
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: cooling
+13.10.2017 08:40:29 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-off temperature: 0&deg;C (so at 12&deg;C)
+switch-on temperature: 1&deg;C (so at &deg;C)
+
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,16666666666667 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: en_EN
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: automatic with dehumidification and humidification
+13.10.2017 08:42:22 values have been manually changed.
+
+setpoint temperature: 12&deg;C
+switch-on heater: 1&deg;C (so at 11&deg;C)
+switch-off heater: 0&deg;C (so at 12&deg;C)
+switch-on cooler: 1&deg;C (so at 13&deg;C)
+switch-off cooler: 0&deg;C (so at 12&deg;C)
+
+setpoint humidity: 75% &phi;
+switch-on humidifier: 5% &phi; (so at 70% &phi;)
+switch-off humidifier: 4% &phi; (so at 71% &phi;)
+switch-on exhausting: 5% &phi; (so at 80% &phi;)
+switch-off exhausting: 4% &phi; (so at 79% &phi;)
+delay exhausting 5minutes
+
+circulation air period: 180 minutes
+circulation air duration: 15 minutes
+
+exhausting air period 360 minutes
+exhausting air duration: 10 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+language: 2
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: automatic with humidification
+13.10.2017 08:45:16 values have been manually changed.
+
+setpoint temperature: 12&deg;C
+switch-on heater: 1&deg;C (so at 11&deg;C)
+switch-off heater: 0&deg;C (so at 12&deg;C)
+switch-on cooler: 1&deg;C (so at 13&deg;C)
+switch-off cooler: 0&deg;C (so at 12&deg;C)
+
+setpoint humidity: 75% &phi;
+switch-on humidifier: 5% &phi; (so at 70% &phi;)
+switch-off humidifier: 4% &phi; (so at 71% &phi;)
+delay humidifier 5minutes
+
+circulation air period: 180 minutes
+circulation air duration: 15 minutes
+
+exhausting air period 360 minutes
+exhausting air duration: 10 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+language: 2
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: automatic with humidification
+13.10.2017 08:45:31 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-on heater: 1&deg;C (so at 11&deg;C)
+switch-off heater: 0&deg;C (so at 12&deg;C)
+switch-on cooler: 1&deg;C (so at 13&deg;C)
+switch-off cooler: 0&deg;C (so at 12&deg;C)
+
+setpoint humidity: 75% &phi;
+switch-on humidifier: 5% &phi; (so at 70% &phi;)
+switch-off humidifier: 4% &phi; (so at 71% &phi;)
+delay humidifier 5minutes
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,16666666666667 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: en_EN
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: automatic with humidification
+13.10.2017 08:46:07 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-on heater: 1&deg;C (so at 11&deg;C)
+switch-off heater: 0&deg;C (so at 12&deg;C)
+switch-on cooler: 1&deg;C (so at 13&deg;C)
+switch-off cooler: 0&deg;C (so at 12&deg;C)
+
+setpoint humidity: 75% &phi;
+switch-on humidifier: 5% &phi; (so at 70% &phi;)
+switch-off humidifier: 4% &phi; (so at 71% &phi;)
+delay humidifier 5minutes
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,16666666666667 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: de_DE
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: automatic with humidification
+13.10.2017 08:47:48 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-on heater: 1&deg;C (so at 11&deg;C)
+switch-off heater: 0&deg;C (so at 12&deg;C)
+switch-on cooler: 1&deg;C (so at 13&deg;C)
+switch-off cooler: 0&deg;C (so at 12&deg;C)
+
+setpoint humidity: 75% &phi;
+switch-on humidifier: 5% &phi; (so at 70% &phi;)
+switch-off humidifier: 4% &phi; (so at 71% &phi;)
+delay humidifier 5minutes
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,16666666666667 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: en_EN
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: automatic with humidification
+13.10.2017 08:48:52 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-on heater: 1&deg;C (so at 11&deg;C)
+switch-off heater: 0&deg;C (so at 12&deg;C)
+switch-on cooler: 1&deg;C (so at 13&deg;C)
+switch-off cooler: 0&deg;C (so at 12&deg;C)
+
+setpoint humidity: 75% &phi;
+switch-on humidifier: 5% &phi; (so at 70% &phi;)
+switch-off humidifier: 4% &phi; (so at 71% &phi;)
+delay humidifier 5minutes
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,16666666666667 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: de_DE
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: automatic with humidification
+13.10.2017 08:49:16 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-on heater: 1&deg;C (so at 11&deg;C)
+switch-off heater: 0&deg;C (so at 12&deg;C)
+switch-on cooler: 1&deg;C (so at 13&deg;C)
+switch-off cooler: 0&deg;C (so at 12&deg;C)
+
+setpoint humidity: 75% &phi;
+switch-on humidifier: 5% &phi; (so at 70% &phi;)
+switch-off humidifier: 4% &phi; (so at 71% &phi;)
+delay humidifier 5minutes
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,16666666666667 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: de_DE
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: automatic with humidification
+13.10.2017 08:57:44 values have been manually changed.
+
+setpoint temperature: 12&deg;C
+switch-on heater: 1&deg;C (so at 11&deg;C)
+switch-off heater: 0&deg;C (so at 12&deg;C)
+switch-on cooler: 1&deg;C (so at 13&deg;C)
+switch-off cooler: 0&deg;C (so at 12&deg;C)
+
+setpoint humidity: 75% &phi;
+switch-on humidifier: 5% &phi; (so at 70% &phi;)
+switch-off humidifier: 4% &phi; (so at 71% &phi;)
+delay humidifier 5minutes
+
+circulation air period: 180 minutes
+circulation air duration: 15 minutes
+
+exhausting air period 360 minutes
+exhausting air duration: 15 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+language: 1
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: automatic with humidification
+13.10.2017 08:59:48 values have been manually changed.
+
+setpoint temperature: 12&deg;C
+switch-on heater: 1&deg;C (so at 11&deg;C)
+switch-off heater: 0&deg;C (so at 12&deg;C)
+switch-on cooler: 1&deg;C (so at 13&deg;C)
+switch-off cooler: 0&deg;C (so at 12&deg;C)
+
+setpoint humidity: 75% &phi;
+switch-on humidifier: 5% &phi; (so at 70% &phi;)
+switch-off humidifier: 4% &phi; (so at 71% &phi;)
+delay humidifier 5minutes
+
+circulation air period: 180 minutes
+circulation air duration: 15 minutes
+
+exhausting air period 360 minutes
+exhausting air duration: 10 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+language: 1
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: automatic with humidification
+13.10.2017 09:00:53 values have been manually changed.
+
+setpoint temperature: 12&deg;C
+switch-on heater: 1&deg;C (so at 11&deg;C)
+switch-off heater: 0&deg;C (so at 12&deg;C)
+switch-on cooler: 1&deg;C (so at 13&deg;C)
+switch-off cooler: 0&deg;C (so at 12&deg;C)
+
+setpoint humidity: 75% &phi;
+switch-on humidifier: 5% &phi; (so at 70% &phi;)
+switch-off humidifier: 4% &phi; (so at 71% &phi;)
+delay humidifier 5minutes
+
+circulation air period: 180 minutes
+circulation air duration: 15 minutes
+
+exhausting air period 360 minutes
+exhausting air duration: 15 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+language: 1
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: automatic with humidification
+13.10.2017 09:27:12 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-on heater: 1&deg;C (so at 11&deg;C)
+switch-off heater: 0&deg;C (so at 12&deg;C)
+switch-on cooler: 1&deg;C (so at 13&deg;C)
+switch-off cooler: 0&deg;C (so at 12&deg;C)
+
+setpoint humidity: 75% &phi;
+switch-on humidifier: 5% &phi; (so at 70% &phi;)
+switch-off humidifier: 4% &phi; (so at 71% &phi;)
+delay humidifier 5minutes
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,25 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: en_EN
+***********************************************
+***********************************************
+sensor: SHT75
+operating mode: automatic with humidification
+13.10.2017 09:27:27 configuration has been changed.
+
+setpoint temperature: 12&deg;C
+switch-on heater: 1&deg;C (so at 11&deg;C)
+switch-off heater: 0&deg;C (so at 12&deg;C)
+switch-on cooler: 1&deg;C (so at 13&deg;C)
+switch-off cooler: 0&deg;C (so at 12&deg;C)
+
+setpoint humidity: 75% &phi;
+switch-on humidifier: 5% &phi; (so at 70% &phi;)
+switch-off humidifier: 4% &phi; (so at 71% &phi;)
+delay humidifier 5minutes
+
+circulation air period: 3 minutes
+circulation air duration: 0,25minutes
+
+exhausting air period 6 minutes
+exhausting air duration: 0,25 minutes
+
+dehumidify modus: exhaust & dehumidifier
+
+uv modus: duration & period
+uv period: 1 minutes
+uv duration: 1 minutes
+
+light modus: duration & period
+light period: 1 minutes
+light duration: 1 minutes
+
+reference unit scale1: 125
+reference unit scale2: 124
+
+language: de_DE
+***********************************************

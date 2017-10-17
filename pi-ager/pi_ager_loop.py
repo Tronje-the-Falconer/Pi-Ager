@@ -282,9 +282,10 @@ def doMainLoop():
             
 #---------------------------------------------------------------------------------------------------------------- Kuehlen
         if pi_ager_debug.debugging == 'on':
-            print ("DEBUG: pi_ager_loop_Modi")
+            print ("DEBUG: pi_ager_loop_modi")
         if modus == 0:
             status_exhaust_fan = False                              # Feuchtereduzierung Abluft aus
+            status_dehumidifier = False        # Entfeuchter aus
             gpio.output(pi_ager_init.gpio_heater, pi_ager_init.relay_off)                     # Heizung aus
             gpio.output(pi_ager_init.gpio_humidifier, pi_ager_init.relay_off)                 # Befeuchtung aus
             if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
@@ -294,6 +295,7 @@ def doMainLoop():
 #---------------------------------------------------------------------------------------------------------------- Kuehlen mit Befeuchtung
         if modus == 1:
             status_exhaust_fan = False                     # Feuchtereduzierung Abluft aus
+            status_dehumidifier = False        # Entfeuchter aus
             gpio.output(pi_ager_init.gpio_heater, pi_ager_init.relay_off)      # Heizung aus
             if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
                 gpio.output(pi_ager_init.gpio_cooling_compressor, pi_ager_init.relay_on)     # Kuehlung ein
@@ -306,6 +308,7 @@ def doMainLoop():
 #---------------------------------------------------------------------------------------------------------------- Heizen mit Befeuchtung
         if modus == 2:
             status_exhaust_fan = False                     # Feuchtereduzierung Abluft aus
+            status_dehumidifier = False        # Entfeuchter aus
             gpio.output(pi_ager_init.gpio_cooling_compressor, pi_ager_init.relay_off)        # Kuehlung aus
             if sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor:
                 gpio.output(pi_ager_init.gpio_heater, pi_ager_init.relay_on)   # Heizung ein
@@ -318,6 +321,7 @@ def doMainLoop():
 #---------------------------------------------------------------------------------------------------------------- Automatiktemperatur mit Befeuchtung
         if modus == 3:
             status_exhaust_fan = False                     # Feuchtereduzierung Abluft aus
+            status_dehumidifier = False        # Entfeuchter aus
             if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
                 gpio.output(pi_ager_init.gpio_cooling_compressor, pi_ager_init.relay_on)     # Kuehlung ein
             if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor:
@@ -330,6 +334,12 @@ def doMainLoop():
                 gpio.output(pi_ager_init.gpio_humidifier, pi_ager_init.relay_on)      # Befeuchtung ein
             if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
                 gpio.output(pi_ager_init.gpio_humidifier, pi_ager_init.relay_off)     # Befeuchtung aus
+            if pi_ager_debug.debugging == 'on':
+                print ('DEBUG: dehumidifier_modus: ' + str(dehumidifier_modus))
+                print ('DEBUG: sensor_humidity: ' + str(sensor_humidity))
+                print ('DEBUG: setpoint_humidity: ' + str(setpoint_humidity))
+                print ('DEBUG: switch_on_humidifier: ' + str(switch_on_humidifier))
+                print ('DEBUG: status_dehumidifier: ' + str(status_dehumidifier))
 #---------------------------------------------------------------------------------------------------------------- Automatik mit Befeuchtung und Entfeuchtung durch (Abluft-)Luftaustausch
         if modus == 4:
             if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
@@ -347,7 +357,7 @@ def doMainLoop():
             if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
                 gpio.output(pi_ager_init.gpio_humidifier, pi_ager_init.relay_off)     # Luftbefeuchter aus
                 counter_humidify = 0
-            if sensor_humidity >= setpoint_humidity + switch_on_humidifier:
+            if sensor_humidity > setpoint_humidity + switch_on_humidifier:
                 if dehumidifier_modus == 1 or dehumidifier_modus == 2:  # entweder nur über Abluft oder mit unterstützung von Entfeuchter
                     status_exhaust_fan = True                           # Feuchtereduzierung Abluft-Ventilator ein
                     if dehumidifier_modus == 2:                         # Entfeuchter zur Unterstützung
@@ -400,21 +410,26 @@ def doMainLoop():
             # pi_ager_organization.write_verbose(logstring, False, False)
             # continue
         scale1_row = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale1_table)
-        scale1_value = scale1_row[pi_ager_names.value_field]
-        scale1_last_change = scale1_row[pi_ager_names.last_change_field]
-        scale2_row = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale2_table)
-        scale2_value = scale2_row[pi_ager_names.value_field]
-        scale2_last_change = scale2_row[pi_ager_names.last_change_field]
-        timediff_scale1 = int(time.time()) - scale1_last_change
-        timediff_scale2 = int(time.time()) - scale2_last_change
-        if timediff_scale1 < 120:
-            scale1_data = scale1_value
-        else:
+        if scale1_row == None:
             scale1_data = 0
-        if timediff_scale2 < 120:
-            scale2_data = scale2_value
         else:
+            scale1_value = scale1_row[pi_ager_names.value_field]
+            scale1_last_change = scale1_row[pi_ager_names.last_change_field]
+            if timediff_scale1 < 120:
+                scale1_data = scale1_value
+            else:
+                scale1_data = 0
+        
+        scale2_row = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale2_table)
+        if scale2_row == None:
             scale2_data = 0
+        else:
+            scale2_value = scale2_row[pi_ager_names.value_field]
+            scale2_last_change = scale2_row[pi_ager_names.last_change_field]
+            if timediff_scale2 < 120:
+                scale2_data = scale2_value
+            else:
+                scale2_data = 0
 #---------------------------------------------------------------------------------------------------------------- Ausgabe der Werte auf der Konsole
         pi_ager_organization.write_verbose(pi_ager_init.logspacer2, False, False)
         if gpio.input(pi_ager_init.gpio_heater) == False:
