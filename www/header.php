@@ -30,6 +30,9 @@
     elseif ($_SERVER['PHP_SELF'] == '/webcam.php') {
         $webcam_active = 'active';
     }
+    elseif ($_SERVER['PHP_SELF'] == '/scale_wizzard.php') {
+        $scale_wizzard_active = 'active';
+    }
     # Auslesen der Version aus dem Changelog
     # Lese 14 Zeichen, beginnend mit dem 21. Zeichen
     $changelogfile = 'changelog.txt';
@@ -105,6 +108,14 @@
                                     echo _('changelog');
                                     echo '</a></li>';
                                 }
+                                if ($_SERVER['PHP_SELF'] == '/scale_wizzard.php') {
+                                    echo '<li><a href="scale_wizzard.php" class="';
+                                    echo $scale_wizzard_active;
+                                    echo '">';
+                                    echo _('scale wizzard');
+                                    echo '</a></li>';
+                                }
+                                
                             ?>
                         </ul>
                     </div>

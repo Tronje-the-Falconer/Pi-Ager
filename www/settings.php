@@ -82,7 +82,7 @@
                                                             <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                             <td>';
                                                             echo "<button class=\"art-button\" name=\"scale1_start\" value=\"scale1_start\"onclick=\"return confirm('"._('start measurement on scale').' 1? \\n '._('please tara scale after first start !')."');\">"._('start scale')." 1</button>";
-                                                            echo '</td>';
+                                                            echo '</td><td></td>';
                                                         }
                                                         else {
                                                             echo '<td><img src="images/icons/scale_42x42.gif" alt="" style="padding: 10px;"></td>
@@ -100,7 +100,7 @@
                                                             <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                             <td>';
                                                             echo "<button class=\"art-button\" name=\"scale1_start\" value=\"scale1_start\"onclick=\"return confirm('"._('scaleprocess is not running!'). " \\n " . _('start measurement on scale').' 1? \\n '._('please tara scale after first start !')."');\">"._('start scale')." 1</button>";
-                                                            echo '</td>';
+                                                            echo '</td><td></td>';
                                                         }
                                                     }
                                                     print ' </form>';
@@ -116,7 +116,7 @@
                                                             <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                             <td>';
                                                             echo "<button class=\"art-button\" name=\"scale2_start\" value=\"scale2_start\"onclick=\"return confirm('"._('start measurement on scale').' 2? \\n '._('please tara scale after first start !')."');\">"._('start scale')." 2</button>";
-                                                            echo '</td>';
+                                                            echo '</td><td></td>';
                                                         }
                                                         else {
                                                             echo '<td><img src="images/icons/scale_42x42.gif" alt="" style="padding: 10px;"></td>
@@ -134,11 +134,16 @@
                                                             <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                             <td>';
                                                             echo "<button class=\"art-button\" name=\"scale2_start\" value=\"scale2_start\"onclick=\"return confirm('"._('scaleprocess is not running!'). " \\n " . _('start measurement on scale').' 2? \\n '._('please tara scale after first start !')."');\">"._('start scale')." 2</button>";
-                                                            echo '</td>';
+                                                            echo '</td><td></td>';
                                                         }
                                                     }
                                                     print ' </form>';
                                             ?>
+                                        </tr>
+                                         <tr>
+                                            <td></td><td></td>
+                                            <td><button class="art-button" name="scale_wizzard" value="scale_wizzard" onclick="window.location.href='/scale_wizzard.php'"><?php echo _('scale wizzard'); ?></button></td>
+                                            <td></td>
                                         </tr>
                                     </table>
                                     <hr>
