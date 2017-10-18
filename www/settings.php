@@ -257,14 +257,17 @@
                                 <h2 class="art-postheader"><?php echo _('database'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Database-->
                                 <div class="hg_container" >
-                                    <form method="post" name="database">
+                                    
                                         <table style="width: 100%;">
                                             <tr>
-                                                <td><button class="art-button" name="empty_statistic_tables" value="empty_statistic_tables" onclick="return confirm('<?php echo _('ATTENTION: empty statistic tables?');?>');"><?php echo _('empty statistic tables'); ?></button></td>
+                                                <form method="post" name="database">
+                                                    <td><button class="art-button" name="empty_statistic_tables" value="empty_statistic_tables" onclick="return confirm('<?php echo _('ATTENTION: empty statistic tables?');?>');"><?php echo _('empty statistic tables'); ?></button></td>
+                                                </form>
                                                 <td><button class="art-button" name="database_administration" onclick="window.location.href='/phpliteadmin.php'"><?php echo _('database administration'); ?></button></td>
                                             </tr>
                                         </table>
-                                    </form>
+                                    
+                                    
                                 </div>
                                 <!----------------------------------------------------------------------------------------Content Ende-->
                             </div>

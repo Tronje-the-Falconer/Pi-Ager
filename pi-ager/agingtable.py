@@ -36,6 +36,15 @@ def get_dictionary_out_of_sqliterow(row):
 
 def read_dictionary(dictionary):
     global period_endtime
+    global day_in_seconds
+    global switch_on_cooling_compressor
+    global switch_off_cooling_compressor
+    global switch_on_humidifier
+    global switch_off_humidifier
+    global delay_humidify
+    global sensorname
+    global sensortype
+    from datetime import timedelta
 
     if pi_ager_debug.debugging == 'on':
         print ('DEBUG read_dictionary()')
@@ -95,11 +104,15 @@ def read_dictionary(dictionary):
 global exec_scope
 global period_endtime
 global duration_sleep
-global current_json_file
-global settings_json_file
-global tables_json_file
-global settings_json_file
-global config_json_file
+global day_in_seconds
+global switch_on_cooling_compressor
+global switch_off_cooling_compressor
+global switch_on_humidifier
+global switch_off_humidifier
+global delay_humidify
+global sensorname
+global sensortype
+
 exec_scope = {}
 #---------------------------------------------------------------------------------- Pfade zu den Dateien
 website_path = pi_ager_paths.get_website_path()

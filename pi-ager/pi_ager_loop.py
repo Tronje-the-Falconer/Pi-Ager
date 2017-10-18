@@ -11,6 +11,27 @@ import pi_ager_names
 import pi_ager_init
 import pi_ager_organization
 import pi_ager_plotting
+
+def autostart_loop():
+
+    while True:
+        status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
+        status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
+        
+        if status_agingtable == 1:
+            os.system('sudo /var/sudowebscript.sh startagingtable &')
+            # exec(compile(open('agingtable.py').read(), 'agingtable.py', 'exec'))
+            # execfile('agingtable.py')
+            if pi_ager_debug.debugging == 'on':
+                print ("exec agingtable done")
+            doMainLoop()
+        elif status_pi_ager == 1:
+            doMainLoop()
+            
+        time.sleep(15)
+            
+
+
 #---------------------------------------------------------------------------------- Function Mainloop
 def doMainLoop():
     #global value
@@ -33,6 +54,7 @@ def doMainLoop():
     global loopcounter                    #  Zaehlt die Durchlaeufe des Mainloops
     global status_humidifier              #  Luftbefeuchtung
     global counter_humidify               #  Zaehler Verzoegerung der Luftbefeuchtung
+    counter_humidify = 0
     global delay_humidify                 #  Luftbefeuchtungsverzoegerung
     global status_exhaust_fan             #  Variable fuer die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
     global uv_modus                       #  Modus UV-Licht  (1 = Periode/Dauer; 2= Zeitstempel/Dauer)
@@ -344,10 +366,10 @@ def doMainLoop():
         if modus == 4:
             if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
                 gpio.output(pi_ager_init.gpio_cooling_compressor, pi_ager_init.relay_on)     # Kuehlung ein
-            if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor:
-                gpio.output(pi_ager_init.gpio_cooling_compressor, pi_ager_init.relay_off)    # Kuehlung aus
             if sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor:
                 gpio.output(pi_ager_init.gpio_heater, pi_ager_init.relay_on)   # Heizung ein
+            if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor:
+                gpio.output(pi_ager_init.gpio_cooling_compressor, pi_ager_init.relay_off)    # Kuehlung aus
             if sensor_temperature >= setpoint_temperature - switch_off_cooling_compressor:
                 gpio.output(pi_ager_init.gpio_heater, pi_ager_init.relay_off)  # Heizung aus
             if sensor_humidity <= setpoint_humidity - switch_on_humidifier:
@@ -357,7 +379,7 @@ def doMainLoop():
             if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
                 gpio.output(pi_ager_init.gpio_humidifier, pi_ager_init.relay_off)     # Luftbefeuchter aus
                 counter_humidify = 0
-            if sensor_humidity > setpoint_humidity + switch_on_humidifier:
+            if sensor_humidity >= setpoint_humidity + switch_on_humidifier:
                 if dehumidifier_modus == 1 or dehumidifier_modus == 2:  # entweder nur über Abluft oder mit unterstützung von Entfeuchter
                     status_exhaust_fan = True                           # Feuchtereduzierung Abluft-Ventilator ein
                     if dehumidifier_modus == 2:                         # Entfeuchter zur Unterstützung

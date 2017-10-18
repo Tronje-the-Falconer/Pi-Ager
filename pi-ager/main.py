@@ -59,7 +59,7 @@ pi_ager_init.set_system_starttime()
 #uv_duration=0    #Initial-Füllung der Variablen
 
 try:
-    pi_ager_loop.doMainLoop()
+    pi_ager_loop.autostart_loop()
 except KeyboardInterrupt:
     pass
 
