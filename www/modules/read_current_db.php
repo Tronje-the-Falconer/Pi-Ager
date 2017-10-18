@@ -20,6 +20,10 @@
     $status_cooling_compressor = get_table_value($current_values_table,$status_cooling_compressor_key);
     $current_temperature_timestamp_last_change = get_last_change($current_values_table,$sensor_temperature_key);
     $current_humidity_timestamp_last_change = get_last_change($current_values_table,$sensor_temperature_key);
+    $status_piager = get_table_value($current_values_table,$status_piager_key);
+    $status_agingtable = get_table_value($current_values_table,$status_agingtable_key);
+    $status_scale1 = get_table_value($current_values_table,$status_scale1_key);
+    $status_scale2 =get_table_value($current_values_table,$status_scale2_key);
     
     $current_scale1_timestamp_last_change_dataset = get_scale_table_row($data_scale1_table);
     $current_scale1_timestamp_last_change = $current_scale1_timestamp_last_change_dataset[$last_change_field];
