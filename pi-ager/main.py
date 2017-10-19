@@ -4,7 +4,7 @@
 import os
 import time
 import rrdtool
-
+import pi_ager_debug
 import pi_ager_loop
 import pi_ager_gpio_config
 import pi_ager_init
@@ -59,6 +59,9 @@ pi_ager_init.set_system_starttime()
 #uv_duration=0    #Initial-Füllung der Variablen
 
 try:
+    os.system('sudo /var/sudowebscript.sh startscale &')
+    if pi_ager_debug.debugging == 'on':
+        print ("exec scale.py done")
     pi_ager_loop.autostart_loop()
 except KeyboardInterrupt:
     pass

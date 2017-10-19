@@ -25,6 +25,7 @@
                                 <h2 class="art-postheader"><?php echo _('operating values'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Programme starten/stoppen-->
                                 <div class="hg_container">
+                                    <h2>Pi-Ager</h2>
                                     <table style="width: 100%"><tr>
                                     <?php 
                                         print '<form  method="post">';
@@ -33,18 +34,14 @@
                                         // Prüft, ob Prozess Reifetab läuft ()
                                         $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
                                         
-                                        if($grepmain == NULL and $grepagingtable != NULL) { //wenn main.py nicht läuft und agingtable.py läuft
-                                            shell_exec('sudo /var/sudowebscript.sh pkillagingtable'); // Reifetabelle beenden
-                                            // Status auf 0 setzen??!!
-                                            $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable'); // überprüfen ob reifetabelle wirklich nicht läuft
-                                        }
-
-                                        if ($grepmain == NULL and $status_piager == 0){ // wenn main.py nicht läuft und der Status in DB aus ist
-                                            echo '<td><img src="images/icons/operatingmode_42x42.png" style="padding: 10px;"></td>
-                                            <td><img src="images/icons/status_off_20x20.png" style="padding-top: 10px;"></td>
+                                        if ($grepmain == NULL){ // wenn main.py nicht läuft und der Status in DB aus ist
+                                            echo '<td><img src="images/icons/operatingmode_fail_42x42.png" style="padding: 10px;"></td>
+                                            <td></td>
                                             <td>';
-                                            echo "<button class=\"art-button\" name=\"main_start\" onclick=\"return confirm('"._('main.py is not running!'). "\\n". _('start mainprocess and pi-ager?')."');\">"._('start pi-ager')."</button>";
-                                            echo '</td>';
+                                            echo "now you have proof that developers are not perfect! ";
+                                            echo " please go to: ";
+                                            echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a>';
+                                            echo '</td><td></td>';
                                         }
                                         elseif ($grepmain != NULL and $status_piager == 1){ // wenn main.py läuft und Status in DB eingeschaltet
                                             echo '<td><img src="images/icons/operating_42x42.gif" alt="" style="padding: 10px;"></td><td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td><td>';
@@ -58,95 +55,71 @@
                                             echo "<button class=\"art-button\" name=\"main_start\" onclick=\"return confirm('"._('start pi-ager?')."');\">"._('start pi-ager')."</button>";
                                             echo '</td>';
                                         }
-                                        else{ // wenn main.py nicht läuft, aber in DB eingeschaltet ist
-                                            echo '<td><img src="images/icons/operatingmode_42x42.png" style="padding: 10px;"></td>
-                                            <td><img src="images/icons/status_off_20x20.png" style="padding-top: 10px;"></td>
-                                            <td>';
-                                            echo "<button class=\"art-button\" name=\"main_start\" onclick=\"return confirm('"._('main.py is not running!'). " \\n ". _('start mainprocess and pi-ager?')."');\">"._('start pi-ager')."</button>";
-                                            echo '</td>';
-                                        }
                                         print ' </form>';
                                     ?>
                                     </tr></table>
                                     <hr>
                                     <h2><?php echo _('scales') ?></h2>
                                     <table style="width: 100%">
-                                        <tr>
-                                            <?php 
-                                                    print '<form  method="post">';
-                                                    // Prüft, ob Prozess scale läuft ( NULL = scale.py läuft nicht als Prozess)
-                                                    $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
-                                                    if ($grepscale != NULL){
-                                                        if (intval(get_table_value($current_values_table,$status_scale1_key)) == 0){
-                                                            echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
-                                                            <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
-                                                            <td>';
-                                                            echo "<button class=\"art-button\" name=\"scale1_start\" value=\"scale1_start\"onclick=\"return confirm('"._('start measurement on scale').' 1? \\n '._('please tara scale after first start !')."');\">"._('start scale')." 1</button>";
-                                                            echo '</td><td></td>';
-                                                        }
-                                                        else {
-                                                            echo '<td><img src="images/icons/scale_42x42.gif" alt="" style="padding: 10px;"></td>
-                                                            <td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>
-                                                            <td>';
-                                                            echo "<button class=\"art-button\" name=\"scale1_tara\" value=\"scale1_tara\"onclick=\"return confirm('"._('tara scale').' 1? \\n '._('please attach the weight to the load cell after a few seconds !')."');\">"._('tara scale')." 1</button>";
-                                                            echo '</td><td>';
-                                                            echo "<button class=\"art-button\" name=\"scale1_stop\" value=\"scale1_stop\" onclick=\"return confirm('"._('stop measurement on scale')." 1?');\">"._('stop scale')." 1</button>";
-                                                            echo '</td>';
-                                                        }
+                                        <?php
+                                            print '<tr>';
+                                            // Prüft, ob Prozess scale läuft ( NULL = scale.py läuft nicht als Prozess)
+                                            $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
+                                            if ($grepscale == NULL){
+                                                echo '<td><img src="images/icons/scale_fail_42x42.png" alt="" style="padding: 10px;"></td>
+                                                <td></td>
+                                                <td>';
+                                                echo "now you have proof that developers are not perfect! ";
+                                                echo " please go to: ";
+                                                echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a>';
+                                                echo '</td><td></td>';
+                                                echo '</tr>';
+                                            }
+                                            elseif ($grepscale != NULL){
+                                                print '<form  method="post">';
+                                                if (intval(get_table_value($current_values_table,$status_scale1_key)) == 0){
+                                                        echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
+                                                        <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
+                                                        <td>';
+                                                        echo "<button class=\"art-button\" name=\"scale1_start\" value=\"scale1_start\"onclick=\"return confirm('"._('start measurement on scale').' 1? \\n '._('please tara scale after first start !')."');\">"._('start scale')." 1</button>";
+                                                        echo '</td><td></td></tr><tr>';
                                                     }
-                                                    elseif ($grepscale == NULL){
-                                                        if (intval(get_table_value($current_values_table,$status_scale1_key)) == 0){
-                                                            echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
-                                                            <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
-                                                            <td>';
-                                                            echo "<button class=\"art-button\" name=\"scale1_start\" value=\"scale1_start\"onclick=\"return confirm('"._('scaleprocess is not running!'). " \\n " . _('start measurement on scale').' 1? \\n '._('please tara scale after first start !')."');\">"._('start scale')." 1</button>";
-                                                            echo '</td><td></td>';
-                                                        }
+                                                    elseif (intval(get_table_value($current_values_table,$status_scale1_key)) == 1) {
+                                                        echo '<td><img src="images/icons/scale_42x42.gif" alt="" style="padding: 10px;"></td>
+                                                        <td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>
+                                                        <td>';
+                                                        echo "<button class=\"art-button\" name=\"scale1_tara\" value=\"scale1_tara\"onclick=\"return confirm('"._('tara on scale').' 1? \\n '._('please attach the weight to the load cell after a few seconds !')."');\">"._('tara scale')." 1</button>";
+                                                        echo '</td><td>';
+                                                        echo "<button class=\"art-button\" name=\"scale1_stop\" value=\"scale1_stop\" onclick=\"return confirm('"._('stop measurement on scale')." 1?');\">"._('stop scale')." 1</button>";
+                                                        echo '</td></tr><tr>';
                                                     }
-                                                    print ' </form>';
-                                            ?>
-                                        </tr>
-                                            <?php 
-                                                    print '<form  method="post">';
-                                                    // Prüft, ob Prozess scale läuft ( NULL = scale.py läuft nicht als Prozess)
-                                                    $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
-                                                    if ($grepscale != NULL){
-                                                        if (intval(get_table_value($current_values_table,$status_scale2_key)) == 0){
-                                                            echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
-                                                            <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
-                                                            <td>';
-                                                            echo "<button class=\"art-button\" name=\"scale2_start\" value=\"scale2_start\"onclick=\"return confirm('"._('start measurement on scale').' 2? \\n '._('please tara scale after first start !')."');\">"._('start scale')." 2</button>";
-                                                            echo '</td><td></td>';
-                                                        }
-                                                        else {
-                                                            echo '<td><img src="images/icons/scale_42x42.gif" alt="" style="padding: 10px;"></td>
-                                                            <td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>
-                                                            <td>';
-                                                            echo "<button class=\"art-button\" name=\"scale2_tara\" value=\"scale1_tara\"onclick=\"return confirm('"._('tara scale').' 2? \\n '._('please attach the weight to the load cell after a few seconds !')."');\">"._('tara scale')." 2</button>";
-                                                            echo '</td><td>';
-                                                            echo "<button class=\"art-button\" name=\"scale2_stop\" value=\"scale1_stop\" onclick=\"return confirm('"._('stop measurement on scale')." 2?');\">"._('stop scale')." 2</button>";
-                                                            echo '</td>';
-                                                        }
+                                                    if (intval(get_table_value($current_values_table,$status_scale2_key)) == 0){
+                                                        echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
+                                                        <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
+                                                        <td>';
+                                                        echo "<button class=\"art-button\" name=\"scale2_start\" value=\"scale2_start\"onclick=\"return confirm('"._('start measurement on scale').' 2? \\n '._('please tara scale after first start !')."');\">"._('start scale')." 2</button>";
+                                                        echo '</td><td></td>';
                                                     }
-                                                    elseif ($grepscale == NULL){
-                                                        if (intval(get_table_value($current_values_table,$status_scale2_key)) == 0){
-                                                            echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
-                                                            <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
-                                                            <td>';
-                                                            echo "<button class=\"art-button\" name=\"scale2_start\" value=\"scale2_start\"onclick=\"return confirm('"._('scaleprocess is not running!'). " \\n " . _('start measurement on scale').' 2? \\n '._('please tara scale after first start !')."');\">"._('start scale')." 2</button>";
-                                                            echo '</td><td></td>';
-                                                        }
+                                                    elseif (intval(get_table_value($current_values_table,$status_scale2_key)) == 1){
+                                                        echo '<td><img src="images/icons/scale_42x42.gif" alt="" style="padding: 10px;"></td>
+                                                        <td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>
+                                                        <td>';
+                                                        echo "<button class=\"art-button\" name=\"scale2_tara\" value=\"scale1_tara\"onclick=\"return confirm('"._('tara scale').' 2? \\n '._('please attach the weight to the load cell after a few seconds !')."');\">"._('tara scale')." 2</button>";
+                                                        echo '</td><td>';
+                                                        echo "<button class=\"art-button\" name=\"scale2_stop\" value=\"scale1_stop\" onclick=\"return confirm('"._('stop measurement on scale')." 2?');\">"._('stop scale')." 2</button>";
+                                                        echo '</td>';
                                                     }
                                                     print ' </form>';
-                                            ?>
-                                        </tr>
-                                         <tr>
-                                            <td></td><td></td>
-                                            <td><button class="art-button" name="scale_wizzard" value="scale_wizzard" onclick="window.location.href='/scale_wizzard.php'"><?php echo _('scale wizzard'); ?></button></td>
-                                            <td></td>
-                                        </tr>
+                                                    print '</tr>';
+                                                    print '<tr><td></td><td></td><td>';
+                                                    echo "<button class=\"art-button\" name=\"scale_wizzard\" value=\"scale_wizzard\"onclick=\"window.location.href='"._('/scale_wizzard.php')."'\">"._('scale wizzard')."</button>";
+                                                    print '<td></td></tr>';
+                                            } 
+                                        ?>
+                                        
                                     </table>
                                     <hr>
+                                    <h2><?php echo _('agingtable') ?></h2>
                                     <!----------------------------------------------------------------------------------------Reifetabelle auswählen-->
 
                                     <table style="width: 100%" class="switching_state miniature_writing">
@@ -171,19 +144,14 @@
                                                     echo '</td><td>';
                                                     if ($grepagingtable == NULL){
                                                         echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-right: 20px;">';
+                                                        echo '<img src="images/icons/agingtable_42x42.png" alt="" style="padding-left: 10px;">';
                                                     }
                                                     else {
                                                         echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding-right: 20px;">';
+                                                        echo '<img src="images/icons/agingtable_42x42.gif" alt="" style="padding-left: 10px;">';
                                                     }
+                                                    echo '</td>';
                                                 ?>
-                                            <?php
-                                                    if ($grepagingtable == NULL){
-                                                            echo '<img src="images/icons/agingtable_42x42.png" alt="" style="padding-left: 10px;">';
-                                                        }
-                                                        else {
-                                                            echo '<img src="images/icons/agingtable_42x42.gif" alt="" style="padding-left: 10px;">';
-                                                        }
-                                                ?></td>
                                         </tr>
                                         <tr>
                                             <td>&nbsp;</td>
@@ -197,7 +165,7 @@
                                                 <?php 
                                                     echo '<form  method="post">';
                                                     if ($grepagingtable == NULL){
-                                                        echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')." \\n "._('manual values will be overwritten!')."');\">"._('start agingtable')."</button>";
+                                                        echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')." \\n "._('manual values will be overwritten in database!')."');\">"._('start agingtable')."</button>";
                                                     }
                                                     else {
                                                         echo "<button class=\"art-button\" name=\"agingtable_stop\" onclick=\"return confirm('"._('stop agingtable?').' \\n '._('pi-ager continues with the last values of the agingtable!')."');\">"._('stop agingtable')."</button>";

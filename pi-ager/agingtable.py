@@ -193,7 +193,7 @@ if pi_ager_debug.debugging == 'on':
 period = 0              # setzt periodenzaehler zurueck
 actual_dictionary = None  # setzt aktuelles Dictionary zurueck
 
-while period <= total_periods:
+while period <= total_periods or status_agingtable == 1:
     if pi_ager_debug.debugging == 'on':
         print ('DEBUG period : ' + str(period))
         print ('DEBUG total_periods : ' + str(total_periods))
@@ -229,4 +229,5 @@ while period <= total_periods:
     pi_ager_organization.write_verbose(pi_ager_init.logspacer, False, True)
     if period <= total_periods:
         time.sleep(duration_sleep)       # Wartezeit bis zur naechsten Periode
+pi_ager_database.write_stop_in_database(status_agingtable_key)
 sys.exit(0)

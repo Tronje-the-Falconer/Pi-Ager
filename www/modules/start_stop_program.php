@@ -14,7 +14,7 @@
             if($grepmain != 0) {
                 write_start_in_database($status_piager_key);
                 $f=fopen('logs/logfile.txt','w');
-                fwrite($f, "\n".date('d.m.Y H:i')." main.py "._('manualy started'));
+                fwrite($f, "\n".date('d.m.Y H:i')." main.py "._('manually started'));
                 fwrite($f, "\n".date('d.m.Y H:i')." Pi-Ager "._('started'));
                 fclose($f);
             }
@@ -33,7 +33,7 @@
         }
         else{
             $f=fopen('logs/logfile.txt','w');
-            fwrite($f, "\n".date('d.m.Y H:i')." main.py "._('could not be found in process list'));
+            fwrite($f, "\n".date('d.m.Y H:i')." main.py "._('no idea what is happening'));
             fclose($f);
         }
     }
@@ -44,18 +44,15 @@
             sleep (1); # 1 Sec auf start der Py-Datei warten
             $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain'); # RSS hat sich geändert daher neu setzen
             if($grepmain != 0) {                
-                write_start_in_database($status_piager_key);
+                write_start_in_database($status_agingtable_key);
+                sleep(2); //warten auf annahme der Startsequenz
+                // prüfen ob main immer noch läuft und ob main im messloop
+                // prüfen ob agingtable läuft
                 $f=fopen('logs/logfile.txt','w');
-                fwrite($f, "\n".date('d.m.Y H:i')." main.py "._('manualy started'));
-                fwrite($f, "\n".date('d.m.Y H:i')." Pi-Ager"._('started due to agingtable'));
-                fclose($f);
-                
-                shell_exec('sudo /var/sudowebscript.sh startagingtable');
-                sleep (1); # 1 Sec auf start der Py-Datei warten
-                $f=fopen('logs/logfile.txt','a');
+                fwrite($f, "\n".date('d.m.Y H:i')." main.py "._('manually started'));
+                fwrite($f, "\n".date('d.m.Y H:i')." Pi-Ager"._('started due to agingtable start'));
                 fwrite($f, "\n".date('d.m.Y H:i')." "._('agingtable started'));
                 fclose($f);
-                write_start_in_database($status_agingtable_key);
                 $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable'); # Reifetab hat sich geaändert also neu setzen
             }
             else{
@@ -64,30 +61,34 @@
                 fclose($f);
             }
         }
-        elseif($grepmain != 0 and $status_piager == 1) {
+        elseif($grepmain != 0) {
+                write_start_in_database($status_agingtable_key);
+                sleep(1);
+                $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
+                //wenn agingtable läuft dann Log schreiben
                 $f=fopen('logs/logfile.txt','w');
-                fwrite($f, "\n".date('d.m.Y H:i')." main.py "._('is running'));
-                fwrite($f, "\n".date('d.m.Y H:i')." Pi-Ager "._('is running'));
-                fclose($f);
-                shell_exec('sudo /var/sudowebscript.sh startagingtable');
-                sleep (1); # 1 Sec auf start der Py-Datei warten
-                $f=fopen('logs/logfile.txt','a');
+                fwrite($f, "\n".date('d.m.Y H:i')." main.py "._('is already running'));
+                fwrite($f, "\n".date('d.m.Y H:i')." Pi-Ager "._('is already running or started due to agingtable start'));
                 fwrite($f, "\n".date('d.m.Y H:i')." "._('agingtable started'));
                 fclose($f);
-                write_start_in_database($status_agingtable_key);
-                $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
+                // wenn agingtable nicht läuft dann Log das Fehler
+        }
+        else{
+            $f=fopen('logs/logfile.txt','w');
+            fwrite($f, "\n".date('d.m.Y H:i')." agingtable.py "._('no idea what is happening'));
+            fclose($f);
         }
     }
     if (isset($_POST['pi-ager_agingtable_stop'])){ //Pi Ager wird gestoppt während agingtable noch läuft
         $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
         if ($grepagingtable !=0){
-            shell_exec('sudo /var/sudowebscript.sh pkillagingtable');
+            write_stop_in_database($status_agingtable_key);
             $f=fopen('logs/logfile.txt','a');
             fwrite($f, "\n".date('d.m.Y H:i')." "._('agingtable stopped due to stopping') . " Pi-Ager");
             fclose($f);
-            write_stop_in_database($status_agingtable_key);
         }
-        shell_exec('sudo /var/sudowebscript.sh pkillmain');
+        write_stop_in_database($status_piager_key);
+        sleep(1);
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_cooling_compressor'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_heater'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_humidifier'));
@@ -99,26 +100,25 @@
         $f=fopen('logs/logfile.txt','a');
         fwrite($f, "\n".date('d.m.Y H:i')." Pi-Ager "._('stopped'));
         fclose($f);
-        write_stop_in_database($status_piager_key);
+
     }
     if (isset($_POST['agingtable_stop'])){
-        shell_exec('sudo /var/sudowebscript.sh pkillagingtable');
+        write_stop_in_database($status_agingtable_key);
         $f=fopen('logs/logfile.txt','a');
         fwrite($f,"\n". date('d.m.Y H:i')." "._('agingtable stopped'));
         fclose($f);
-        write_stop_in_database($status_agingtable_key);
+
     }
     # Scales
     if (isset($_POST['scale1_start']) OR isset($_POST['scale2_start']) OR isset($_POST['scale1_tara']) OR isset($_POST['scale2_tara'])){
-        $grepscale = shell_exec('sudo /var/sudowebscript.sh startscale');
+        $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
         if (grepscale == 0){
             shell_exec('sudo /var/sudowebscript.sh startscale');
             sleep (1); # 1 Sec auf start der Py-Datei warten
-            $grepscale = shell_exec('sudo /var/sudowebscript.sh startscale');
-            
+            $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
             if ($grepscale != 0){
                 $f=fopen('logs/logfile.txt','a');
-                fwrite($f,"\n". date('d.m.Y H:i')." scale.py "._('manualy started'));
+                fwrite($f,"\n". date('d.m.Y H:i')." scale.py "._('manually started'));
                 fclose($f);
                 if (isset($_POST['scale1_start'])){
                     #shell_exec('sudo /var/sudowebscript.sh startscale1');
@@ -135,12 +135,15 @@
                     fclose($f);
                 }
                 if (isset($_POST['scale1_tara'])){
+                    write_start_in_database($status_scale1_tara_key);
                     $f=fopen('logs/logfile.txt','a');
-                    fwrite($f,"\n". date('d.m.Y H:i')." "._('no tara possible because no measuring on scale') . " 1");
+                    fwrite($f,"\n". date('d.m.Y H:i')." "._('performing tara on scale') . " 1");
                     fclose($f);
+                }
                 if (isset($_POST['scale2_tara'])){
+                    write_start_in_database($status_scale2_tara_key);
                     $f=fopen('logs/logfile.txt','a');
-                    fwrite($f,"\n". date('d.m.Y H:i')." "._('no tara possible because no measuring on scale') . " 2");
+                    fwrite($f,"\n". date('d.m.Y H:i')." "._('performing tara on scale') . " 2");
                     fclose($f);
                 }
             }
@@ -152,64 +155,50 @@
         }
         elseif (grepscale != 0){
             $f=fopen('logs/logfile.txt','a');
-            fwrite($f,"\n". date('d.m.Y H:i')." scale.py "._('is running'));
+            fwrite($f,"\n". date('d.m.Y H:i')." scale.py "._('is already running'));
             fclose($f);
             if (isset($_POST['scale1_start'])){
-                #shell_exec('sudo /var/sudowebscript.sh startscale1');
                 write_start_in_database($status_scale1_key);
                 $f=fopen('logs/logfile.txt','a');
                 fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring on scale started.'). " ". _('scale') ." 1");
                 fclose($f);
             }
             if (isset($_POST['scale2_start'])){
-                #shell_exec('sudo /var/sudowebscript.sh startscale2');
                 write_start_in_database($status_scale2_key);
                 $f=fopen('logs/logfile.txt','a');
                 fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring on scale started.'). " ". _('scale') ." 2");
                 fclose($f);
             }
-            if (isset($_POST['scale1_tara']) AND $status_scale1 == 1){
+            if (isset($_POST['scale1_tara'])){
                 write_start_in_database($status_scale1_tara_key);
                 $f=fopen('logs/logfile.txt','a');
-                fwrite($f,"\n". date('d.m.Y H:i')." "._('tara scale') ." 1");
+                fwrite($f,"\n". date('d.m.Y H:i')." "._('performing tara on scale') ." 1");
                 fclose($f);
             }
-            else{
-                $f=fopen('logs/logfile.txt','a');
-                fwrite($f,"\n". date('d.m.Y H:i')." "._('no tara on scale possible because no measuring'). " ". _('scale') ." 1";
-                fclose($f);
-            }
-            if (isset($_POST['scale2_tara']) AND $status_scale2 == 1){
+            if (isset($_POST['scale2_tara'])){
                 write_start_in_database($status_scale2_tara_key);
                 $f=fopen('logs/logfile.txt','a');
-                fwrite($f,"\n". date('d.m.Y H:i')." "._('tara scale') ." 2");
-                fclose($f);
-            }
-            else{
-                $f=fopen('logs/logfile.txt','a');
-                fwrite($f,"\n". date('d.m.Y H:i')." "._('no tara on scale possible because no measuring'). " ". _('scale') ." 2";
+                fwrite($f,"\n". date('d.m.Y H:i')." "._('performing tara on scale') ." 2");
                 fclose($f);
             }
         }
         else{
             $f=fopen('logs/logfile.txt','w');
-            fwrite($f, "\n".date('d.m.Y H:i')." scale.py "._('could not be found in process list'));
+            fwrite($f, "\n".date('d.m.Y H:i')." scale.py "._('no idea what is happening'));
             fclose($f);
         }
     }
     
     if (isset($_POST['scale1_stop'])){
-        #shell_exec('sudo /var/sudowebscript.sh pkillscale1');
         write_stop_in_database($status_scale1_key);
         $f=fopen('logs/logfile.txt','a');
-        fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring scalen stopped'). " " . _('scale'). " 1");
+        fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring scale stopped'). " " . _('scale'). " 1");
         fclose($f);
     }
     if (isset($_POST['scale2_stop'])){
-        #shell_exec('sudo /var/sudowebscript.sh pkillscale2');
         write_stop_in_database($status_scale2_key);
         $f=fopen('logs/logfile.txt','a');
-        fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring scalen stopped'). " " . _('scale'). " 2");
+        fwrite($f,"\n". date('d.m.Y H:i')." "._('measuring scale stopped'). " " . _('scale'). " 2");
         fclose($f);
     }
  

@@ -13,17 +13,19 @@ import pi_ager_organization
 import pi_ager_plotting
 
 def autostart_loop():
-
+    global status_pi_ager
     while True:
         status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
         status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
         
         if status_agingtable == 1:
+            if pi_ager_debug.debugging == 'on':
+                print ("exec agingtable.py start")
             os.system('sudo /var/sudowebscript.sh startagingtable &')
             # exec(compile(open('agingtable.py').read(), 'agingtable.py', 'exec'))
             # execfile('agingtable.py')
             if pi_ager_debug.debugging == 'on':
-                print ("exec agingtable done")
+                print ("exec agingtable.py done")
             doMainLoop()
         elif status_pi_ager == 1:
             doMainLoop()
@@ -72,8 +74,11 @@ def doMainLoop():
     global light_stoptime                 #  Unix-Zeitstempel fuer den Stop des UV-Light
     global dehumidifier_modus             #  Modus Entfeuchter  (1 = über Abluft, 2 = mit Abluft zusammen [unterstützend]; 3 = anstelle von Abluft)
     global status_dehumidifier            #  Entfeuchter
+    global status_pi_ager
 #---------------------------------------------------------------------------------------------------------------- Pruefen Sensor, dann Settings einlesen
-    while True:
+    
+    while status_pi_ager == 1:
+        status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
         if pi_ager_debug.debugging == 'on':
             print ("DEBUG: in While True")
             print ('DEBUG: ' + str(pi_ager_init.sensorname))

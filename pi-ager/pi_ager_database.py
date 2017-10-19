@@ -209,6 +209,22 @@ def write_settings(modus, setpoint_temperature, setpoint_humidity, circulation_a
 
     close_database()
 
+def write_startstop_status_in_database(module_key, status):
+    global current_values_table, value_field, last_change_field, key_field
+    
+    open_database()
+    
+    sql = 'UPDATE ' + current_values_table + ' SET "' + value_field + '" = "' + str(status) + '" , "' + last_change_field + '" = ' + str(get_current_time()) + ' WHERE ' + key_field + ' = "' + module_key + '"'
+    execute_query(sql)
+    
+    close_database()
+
+def write_start_in_database(module_key):
+    write_startstop_status_in_database(module_key, 1)
+
+def write_stop_in_database(module_key):
+        write_startstop_status_in_database(module_key, 0)
+
 def write_config(sensortype, language, switch_on_cooling_compressor, switch_off_cooling_compressor, switch_on_humidifier, switch_off_humidifier, delay_humidify, uv_modus, uv_duration, uv_period, switch_on_uv_hour, switch_on_uv_minute, light_modus, light_duration, light_period, switch_on_light_hour, switch_on_light_minute, dehumidifier_modus, referenceunit_scale1, referenceunit_scale2):
 
     open_database()

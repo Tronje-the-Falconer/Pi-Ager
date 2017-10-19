@@ -80,7 +80,9 @@ $agingtable_exhaust_air_duration_field = 'exhaust_air_duration';
 $agingtable_exhaust_air_period_field = 'exhaust_air_period';
 $agingtable_days_field = 'days';
 
-
+#
+$thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/';
+$error_reporting_url = 'https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/Error-reporting';
 #-----------------------------JSON Keys
 $last_change_temperature_json_key = 'last_change_temperature';
 $last_change_humidity_json_key = 'last_change_humidity';
