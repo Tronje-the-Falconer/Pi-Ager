@@ -117,8 +117,9 @@ global sensorname
 global sensortype
 
 try:
-    pi_ager_database.write_start_in_database(status_agingtable_key)
-    
+    pi_ager_database.write_start_in_database(pi_ager_names.status_agingtable_key)
+    status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
+
     period_settings = {}
     #---------------------------------------------------------------------------------- Pfade zu den Dateien
     website_path = pi_ager_paths.get_website_path()
@@ -177,6 +178,8 @@ try:
     rows = pi_ager_database.get_agingtable_as_rows(agingtable)
     row_number = 0                              # Setzt Variable row_number auf 0
     total_duration = 0                          # Setzt Variable duration auf 0
+    period_starttime_seconds = 0
+    duration_sleep = 0
 
     for row in rows:
         if pi_ager_debug.debugging == 'on':
@@ -197,10 +200,10 @@ try:
     period = 0              # setzt periodenzaehler zurueck
     actual_dictionary = None  # setzt aktuelles Dictionary zurueck
 
-    while period <= total_periods or status_agingtable == 1:
-        status_agingtable = pi_ager_database.get_table_value(pi_ager_names.status_agingtable_key)
+    while period <= total_periods and status_agingtable == 1:
+        status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
         current_time = pi_ager_database.get_current_time()
-        if current_time >= period_starttime_seconds + duration_sleep:
+        if (period_starttime_seconds == 0 and duration_sleep == 0 and period == 0) or current_time >= period_starttime_seconds + duration_sleep:
             if pi_ager_debug.debugging == 'on':
                 print ('DEBUG period : ' + str(period))
                 print ('DEBUG total_periods : ' + str(total_periods))
@@ -237,9 +240,11 @@ try:
             # if period <= total_periods:
                 # time.sleep(duration_sleep)       # Wartezeit bis zur naechsten Periode
                 
-    pi_ager_database.write_stop_in_database(status_agingtable_key)
+    pi_ager_database.write_stop_in_database(pi_ager_names.status_agingtable_key)
     sys.exit(0)
 
-    except KeyboardInterrupt:
-        pi_ager_database.write_stop_in_database(status_agingtable_key)
-        sys.exit(0)
+except Exception:
+    pi_ager_database.write_stop_in_database(pi_ager_names.status_agingtable_key)
+
+except KeyboardInterrupt:
+    sys.exit(0)

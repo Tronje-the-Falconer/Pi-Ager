@@ -62,14 +62,19 @@
             }
         }
         elseif($grepmain != 0) {
-                write_start_in_database($status_agingtable_key);
-                sleep(1);
+                // write_start_in_database($status_agingtable_key);
+                sleep(5);
                 $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
                 //wenn agingtable läuft dann Log schreiben
                 $f=fopen('logs/logfile.txt','w');
                 fwrite($f, "\n".date('d.m.Y H:i')." main.py "._('is already running'));
                 fwrite($f, "\n".date('d.m.Y H:i')." Pi-Ager "._('is already running or started due to agingtable start'));
-                fwrite($f, "\n".date('d.m.Y H:i')." "._('agingtable started'));
+                if ($grepagingtable != 0) {
+                    fwrite($f, "\n".date('d.m.Y H:i')." "._('agingtable started'));
+                }
+                else {
+                    fwrite($f, "\n".date('d.m.Y H:i')." "._('agingtable could not be started'));
+                }
                 fclose($f);
                 // wenn agingtable nicht läuft dann Log das Fehler
         }

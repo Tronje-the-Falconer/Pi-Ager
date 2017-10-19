@@ -210,11 +210,10 @@ def write_settings(modus, setpoint_temperature, setpoint_humidity, circulation_a
     close_database()
 
 def write_startstop_status_in_database(module_key, status):
-    global current_values_table, value_field, last_change_field, key_field
     
     open_database()
     
-    sql = 'UPDATE ' + current_values_table + ' SET "' + value_field + '" = "' + str(status) + '" , "' + last_change_field + '" = ' + str(get_current_time()) + ' WHERE ' + key_field + ' = "' + module_key + '"'
+    sql = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status) + '" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) + ' WHERE ' + pi_ager_names.key_field + ' = "' + module_key + '"'
     execute_query(sql)
     
     close_database()

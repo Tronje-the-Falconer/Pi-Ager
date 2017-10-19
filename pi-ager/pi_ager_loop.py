@@ -78,7 +78,7 @@ def doMainLoop():
 
     try:
 
-        pi_ager_database.write_start_in_database(status_agingtable_key)
+        pi_ager_database.write_start_in_database(pi_ager_names.status_pi_ager_key)
 
         while status_pi_ager == 1:
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
@@ -588,5 +588,9 @@ def doMainLoop():
             # time.sleep(3)
             pi_ager_init.loopcounter += 1
             
-    except KeyboardInterrupt:
-        pi_ager_database.write_stop_in_database(status_pi_ager_key)
+    # Ende While-Schleife
+    
+        pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
+    
+    except Exception:
+        pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
