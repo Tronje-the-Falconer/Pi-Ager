@@ -79,7 +79,8 @@ def doMainLoop():
     try:
 
         pi_ager_database.write_start_in_database(pi_ager_names.status_pi_ager_key)
-
+        status_pi_ager = 1
+        
         while status_pi_ager == 1:
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
             if pi_ager_debug.debugging == 'on':

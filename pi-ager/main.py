@@ -2,6 +2,7 @@
 # -*- coding: iso-8859-1 -*-
 ######################################################### Importieren der Module
 import os
+import subprocess
 import time
 import rrdtool
 import pi_ager_debug
@@ -28,6 +29,15 @@ try:
     with open(pi_ager_init.rrd_filename): pass
     logstring = _("database file found") + ": " + pi_ager_init.rrd_filename
     pi_ager_organization.write_verbose(logstring, False, False)
+    os.system('sudo /var/sudowebscript.sh pkillscale &')
+    print ('pkillscale done')
+    time.sleep(2)
+    #subprocess.call(['sudo', '/var/sudowebscript.sh', 'startscale'])
+    #subprocess.call(['/var/sudowebscript.sh', 'startscale'])
+    #subprocess.call(['sudo', 'python3', '/opt/pi-ager/scale.py'])
+    os.system('sudo /var/sudowebscript.sh startscale &')
+    # os.system('sudo python3 /opt/pi-ager/scale.py &')
+    print ('startscale done')
 #    i = 1
 except IOError:
     logstring = _("creating a new database") + ": " + pi_ager_init.rrd_filename
@@ -59,9 +69,6 @@ pi_ager_init.set_system_starttime()
 #uv_duration=0    #Initial-Füllung der Variablen
 
 try:
-    os.system('sudo /var/sudowebscript.sh startscale &')
-    if pi_ager_debug.debugging == 'on':
-        print ("exec scale.py done")
     pi_ager_loop.autostart_loop()
 except KeyboardInterrupt:
     pass
