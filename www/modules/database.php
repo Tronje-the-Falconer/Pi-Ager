@@ -335,6 +335,7 @@
         open_connection();
         
         $sql = 'UPDATE ' . $current_values_table . ' SET "' . $value_field . '" = "' . strval($status) . '" , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' = "' . $module_key . '"';
+        //echo $sql;
         execute_query($sql);
         
         close_database();

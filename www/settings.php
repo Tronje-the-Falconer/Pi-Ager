@@ -45,14 +45,14 @@
                                         }
                                         elseif ($grepmain != NULL and $status_piager == 1){ // wenn main.py läuft und Status in DB eingeschaltet
                                             echo '<td><img src="images/icons/operating_42x42.gif" alt="" style="padding: 10px;"></td><td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td><td>';
-                                            echo "<button class=\"art-button\" name=\"pi-ager_agingtable_stop\" onclick=\"return confirm('"._('stop pi-ager?').' \\n '._('if agingtable is running, it will be stopped also!')."');\">"._('stop pi-ager')."</button>";
+                                            echo "<button class=\"art-button\" name=\"pi-ager_agingtable_stop\" value=\"pi-ager_agingtable_stop\" onclick=\"return confirm('"._('stop pi-ager?').' \\n '._('if agingtable is running, it will be stopped also!')."');\">"._('stop pi-ager')."</button>";
                                             echo '</td>';
                                         }
                                         elseif ($grepmain != NULL and $status_piager == 0){ //Wenn main.py  läuft und der Status in DB aus ist
                                             echo '<td><img src="images/icons/operatingmode_42x42.png" style="padding: 10px;"></td>
                                             <td><img src="images/icons/status_off_20x20.png" style="padding-top: 10px;"></td>
                                             <td>';
-                                            echo "<button class=\"art-button\" name=\"main_start\" onclick=\"return confirm('"._('start pi-ager?')."');\">"._('start pi-ager')."</button>";
+                                            echo "<button class=\"art-button\" name=\"main_start\" value=\"main_start\" onclick=\"return confirm('"._('start pi-ager?')."');\">"._('start pi-ager')."</button>";
                                             echo '</td>';
                                         }
                                         print ' </form>';
@@ -81,7 +81,7 @@
                                                         echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
                                                         <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                         <td>';
-                                                        echo "<button class=\"art-button\" name=\"scale1_start\" value=\"scale1_start\"onclick=\"return confirm('"._('start measurement on scale').' 1? \\n '._('please tara scale after first start !')."');\">"._('start scale')." 1</button>";
+                                                        echo "<button class=\"art-button\" name=\"scale1_start\" value=\"scale1_start\" onclick=\"return confirm('"._('start measurement on scale').' 1? \\n '._('please tara scale after first start !')."');\">"._('start scale')." 1</button>";
                                                         echo '</td><td></td></tr><tr>';
                                                     }
                                                     elseif (intval(get_table_value($current_values_table,$status_scale1_key)) == 1) {
@@ -165,10 +165,10 @@
                                                 <?php 
                                                     echo '<form  method="post">';
                                                     if ($grepagingtable == NULL){
-                                                        echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')." \\n "._('manual values will be overwritten in database!')."');\">"._('start agingtable')."</button>";
+                                                        echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" value=\"ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')." \\n "._('manual values will be overwritten in database!')."');\">"._('start agingtable')."</button>";
                                                     }
                                                     else {
-                                                        echo "<button class=\"art-button\" name=\"agingtable_stop\" onclick=\"return confirm('"._('stop agingtable?').' \\n '._('pi-ager continues with the last values of the agingtable!')."');\">"._('stop agingtable')."</button>";
+                                                        echo "<button class=\"art-button\" name=\"agingtable_stop\" value=\"agingtable_stop\" onclick=\"return confirm('"._('stop agingtable?').' \\n '._('pi-ager continues with the last values of the agingtable!')."');\">"._('stop agingtable')."</button>";
                                                     }
                                                     echo '</form>';
                                                 ?>

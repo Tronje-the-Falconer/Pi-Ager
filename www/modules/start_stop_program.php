@@ -62,7 +62,7 @@
             }
         }
         elseif($grepmain != 0) {
-                // write_start_in_database($status_agingtable_key);
+                write_start_in_database($status_agingtable_key);
                 sleep(5);
                 $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
                 //wenn agingtable läuft dann Log schreiben
@@ -72,11 +72,10 @@
                 if ($grepagingtable != 0) {
                     fwrite($f, "\n".date('d.m.Y H:i')." "._('agingtable started'));
                 }
-                else {
+                else {   // wenn agingtable nicht läuft dann Fehler loggen
                     fwrite($f, "\n".date('d.m.Y H:i')." "._('agingtable could not be started'));
                 }
                 fclose($f);
-                // wenn agingtable nicht läuft dann Log das Fehler
         }
         else{
             $f=fopen('logs/logfile.txt','w');
