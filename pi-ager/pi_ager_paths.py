@@ -16,6 +16,8 @@ def set_paths():
     csv_path = '/var/www/csv/'
     graphs_website_path = '/var/www/images/graphs/'
     logfile_txt_file = '/var/www/logs/logfile.txt'
+    pi_ager_log_file = '/opt/pi-ager/pi-ager.log'
+    
     sqlite3_file = '/var/www/config/pi-ager.sqlite3'
     
 def get_path_graphs_website():

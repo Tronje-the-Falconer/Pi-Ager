@@ -1,3 +1,14 @@
+#------------------------ logging
+loglevel_file = 'DEBUG'
+loglevel_console = 'INFO'
+
+# CRITICAL	50
+# ERROR	40
+# WARNING	30
+# INFO	20
+# DEBUG	10
+# NOTSET
+
 #------------------------ tables names
 config_settings_table = 'config'
 data_sensor_temperature_table = 'sensor_temperature_data'

@@ -5,6 +5,7 @@ import gettext
 import pi_ager_paths
 import pi_ager_database
 import pi_ager_names
+import pi_ager_logging
 
 global logspacer
 global board_mode
@@ -77,7 +78,7 @@ pi_ager_paths.set_paths()
 # uv_stoptime = uv_starttime
 # light_starttime = system_starttime
 # light_stoptime = light_starttime
-
+pi_ager_logging.create_logger()
 # sensor = Adafruit_DHT.AM2302
 logspacer = "\n" + "***********************************************"
 logspacer2 = "\n" + '-------------------------------------------------------'
