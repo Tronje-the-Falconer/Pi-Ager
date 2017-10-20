@@ -93,14 +93,14 @@
         }
         write_stop_in_database($status_piager_key);
         sleep(1);
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_cooling_compressor'));
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_heater'));
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_humidifier'));
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_circulating_air'));
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_exhausting_air'));
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_uv'));
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_light'));
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_dehumidifier'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_cooling_compressor_value_to_1'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_heater_value_to_1'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_humidifier_value_to_1'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_circulating_air_value_to_1'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_exhausting_air_value_to_1'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_uv_value_to_1'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_light_value_to_1'));
+        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_dehumidifier_value_to_1'));
         $f=fopen('logs/logfile.txt','a');
         fwrite($f, "\n".date('d.m.Y H:i')." Pi-Ager "._('stopped'));
         fclose($f);

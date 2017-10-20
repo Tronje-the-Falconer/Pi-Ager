@@ -59,49 +59,49 @@ case "$1" in
     read_gpio_cooling_compressor) # Ansteuern von GPIO Kühlschrankkompressor
         /usr/local/bin/gpio -g read $gpio_cooling_compressor
     ;;
-    write_gpio_cooling_compressor) # Ansteuern von GPIO Kühlschrankkompressor
+    write_gpio_cooling_compressor_value_to_1) # Ansteuern von GPIO Kühlschrankkompressor
         /usr/local/bin/gpio -g write $gpio_cooling_compressor 1
     ;;
     read_gpio_heater)# Ansteuern von GPIO Heizkabel
         /usr/local/bin/gpio -g read $gpio_heater
     ;;
-    write_gpio_heater)# Ansteuern von GPIO Heizkabel
+    write_gpio_heater_value_to_1)# Ansteuern von GPIO Heizkabel
         /usr/local/bin/gpio -g write $gpio_heater 1
     ;;
     read_gpio_humidifier)# Ansteuern von GPIO Luftbefeuchter
         /usr/local/bin/gpio -g read $gpio_humidifier
     ;;
-    write_gpio_humidifier)# Ansteuern von GPIO Luftbefeuchter
+    write_gpio_humidifier_value_to_1)# Ansteuern von GPIO Luftbefeuchter
         /usr/local/bin/gpio -g write $gpio_humidifier 1
     ;;
     read_gpio_circulating_air)# Ansteuern von GPIO Umluftventilator
         /usr/local/bin/gpio -g read $gpio_circulating_air
     ;;
-    write_gpio_circulating_air)# Ansteuern von GPIO Umluftventilator
+    write_gpio_circulating_air_value_to_1)# Ansteuern von GPIO Umluftventilator
         /usr/local/bin/gpio -g write $gpio_circulating_air 1
     ;;
     read_gpio_exhausting_air)# Ansteuern von GPIO Austauschlüfter
         /usr/local/bin/gpio -g read $gpio_exhausting_air
     ;;
-    write_gpio_exhausting_air)# Ansteuern von GPIO Austauschlüfter
+    write_gpio_exhausting_air_value_to_1)# Ansteuern von GPIO Austauschlüfter
         /usr/local/bin/gpio -g write $gpio_exhausting_air 1
     ;;
     read_gpio_uv)# Ansteuern von GPIO UV-Licht
         /usr/local/bin/gpio -g read $gpio_uv_light
     ;;
-    write_gpio_uv)# Ansteuern von GPIO UV-Licht
+    write_gpio_uv_value_to_1)# Ansteuern von GPIO UV-Licht
         /usr/local/bin/gpio -g write $gpio_uv_light 1
     ;;
     read_gpio_light)# Ansteuern von GPIO Licht
         /usr/local/bin/gpio -g read $gpio_light
     ;;
-    write_gpio_light)# Ansteuern von GPIO Licht
+    write_gpio_light_value_to_1)# Ansteuern von GPIO Licht
         /usr/local/bin/gpio -g write $gpio_light 1
     ;;
     read_gpio_dehumidifier)# Ansteuern von GPIO Entfeuchter
         /usr/local/bin/gpio -g read $gpio_dehumidifier
     ;;
-    write_gpio_dehumidifier)# Ansteuern von GPIO Entfeuchter
+    write_gpio_dehumidifier_value_to_1)# Ansteuern von GPIO Entfeuchter
         /usr/local/bin/gpio -g write $gpio_dehumidifier 1
     ;;
     reboot) # reboot
