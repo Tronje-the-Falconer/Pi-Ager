@@ -1,21 +1,21 @@
 1) Website
-    a Upload CSV und eintragen als agingtable_[CSV-Filename] in Datenbank ACHTUNG richtige Reihenfolge in Tabelle schreiben!
-    b editieren und löschen der agingtables
-    c Alarm
-    d Temperatur Statistiken und aktuelle werte
-    e reifetabelle zeile einfärben welche phase gerade aktiv
-    f php logging nutzen
-    g translation aktivieren
+    1 Upload CSV und eintragen als agingtable_[CSV-Filename] in Datenbank ACHTUNG richtige Reihenfolge in Tabelle schreiben!
+    2 editieren und löschen der agingtables
+    3 Wägezellen Calibrate Wizzard (dauerhafte wertmessung die man sieht, definiertes Gewicht anhängen)
+    3 Alarm
+    4 Temperatur Statistiken und aktuelle werte
+    5 reifetabelle zeile einfärben welche phase gerade aktiv
+    6 php logging nutzen
+    7 translation aktivieren
+    8 Update über Website ermöglichen
+    9 Displayupdate über Website
 
 2) Python
-    a Stromausfall
-    b Wägezellen optimieren Dauerlauf für Stromausfall (tarabutton auf Website)
-    c Wägezellen Zeit wann geschrieben werden soll in DB auslagern
-    d Wägezellen Calibrate Wizzard (dauerhafte wertmessung die man sieht, definiertes Gewicht anhängen)
-    e Display
-    f 4 Temperaturfühler mit AD Wandler (Statistiken und aktuelle werte)
-    g Alarm
-    h python logging nutzen
+    1 Stromausfall
+    2 Display
+    3 4 Temperaturfühler mit AD Wandler (Statistiken und aktuelle werte)
+    4 Alarm
+    5 python logging nutzen
         Debug von on/off nach True/false bzw. piager_debug.write
-    i translation aktivieren
+    6 translation aktivieren
         
