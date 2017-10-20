@@ -21,13 +21,16 @@ def create_logger():
     loglevel_console = pi_ager_names.loglevel_console
     
     
-    # set up logging to file - see previous section for more details
+    # Logger fuer pi-ager debugging
     logging.basicConfig(level=get_logginglevel(loglevel_file),
                         format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                         datefmt='%m-%d %H:%M',
                         filename=pi_ager_paths.pi_ager_log_file,
                         filemode='w')
-    # define a Handler which writes INFO messages or higher to the sys.stderr
+    
+    
+    
+    # Logger fuer die Console
     console = logging.StreamHandler()
     console.setLevel(get_logginglevel(loglevel_console))
     # set a format which is simpler for console use
@@ -37,6 +40,7 @@ def create_logger():
     # add the handler to the root logger
     logging.getLogger('').addHandler(console)
     
+    #Logger fuer Logfile auf der Website
     website_logfile = logging.FileHandler(pi_ager_paths.logfile_txt_file, mode='a', encoding=None, delay=False)
     website_logfile.setLevel(logging.INFO)
     website_formatter = logging.Formatter('%(asctime)s -8s %(message)s')
