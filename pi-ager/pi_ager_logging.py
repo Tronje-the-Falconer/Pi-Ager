@@ -28,6 +28,7 @@ def create_logger():
                         filename=pi_ager_paths.pi_ager_log_file,
                         filemode='w')
     
+    # logging.handlers.RotatingFileHandler(pi_ager_paths.pi_ager_log_file, mode='a', maxBytes=5242880, backupCount=4, encoding=None, delay=False)
     
     
     # Logger fuer die Console
