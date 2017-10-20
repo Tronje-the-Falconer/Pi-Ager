@@ -592,6 +592,7 @@ def doMainLoop():
     # Ende While-Schleife
     
         pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
-    
+        pi_ager_organization.cleanup()
     except Exception:
         pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
+        pi_ager_organization.cleanup()
