@@ -2,13 +2,15 @@ import pi_ager_init
 import pi_ager_paths
 import pi_ager_debug
 import rrdtool
+import pi_ager_logging
 
 #---------------------------------------------------------------------------------- Function zum Plotten der Grafiken
 def plotting(plotting_value):
 #---------------------------------------------------------------------------------------------------------------- Beschriftung fuer die Grafiken festlegen
     global rrd_dbname
-    if pi_ager_debug.debugging == 'on':
-        print("DEBUG: in plotingfunction")
+    pi_ager_logging.logger_pi_ager_plotting.debug('in plotingfunction')
+    # if pi_ager_debug.debugging == 'on':
+        # print("DEBUG: in plotingfunction")
     if plotting_value == 'sensor_temperature':
         title = _('temperature')
         label = 'in C'
@@ -47,8 +49,9 @@ def plotting(plotting_value):
         label = _('gr')
 #---------------------------------------------------------------------------------------------------------------- Aufteilung in drei Plots
     for plot in ['daily' , 'weekly', 'monthly', 'hourly']:
-        if pi_ager_debug.debugging == 'on':
-            print ("DEBUG: in for schleife daily, weekly, monthly, hourly")
+        pi_ager_logging.logger_pi_ager_plotting.debug('in for schleife daily, weekly, monthly, hourly')
+        # if pi_ager_debug.debugging == 'on':
+            # print ("DEBUG: in for schleife daily, weekly, monthly, hourly")
         if plot == 'weekly':
             period = 'w'
         elif plot == 'daily':

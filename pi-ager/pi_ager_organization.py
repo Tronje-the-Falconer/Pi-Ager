@@ -1,19 +1,23 @@
 import RPi.GPIO as gpio
 import pi_ager_paths
+import pi_ager_logging
 
 #---------------------------------------------------------------------------------- Function goodbye
 def goodbye():
     cleanup()
     logstring = _('goodbye') + '!'
-    write_verbose(logstring, False, False)
+    pi_ager_logging.logger_pi_ager_organisation.debug(logstring)
+    #write_verbose(logstring, False, False)
 
 #---------------------------------------------------------------------------------- Function cleanup
 def cleanup():
     logstring = _('running cleanup script') + '...'
-    write_verbose(logstring, False, False)
+    pi_ager_logging.logger_pi_ager_organisation.debug(logstring)
+    #write_verbose(logstring, False, False)
     gpio.cleanup() # GPIO zuruecksetzen
     logstring = _('cleanup complete') + '.'
-    write_verbose(logstring, True, False)
+    pi_ager_logging.logger_pi_ager_organisation.debug(logstring)
+    #write_verbose(logstring, True, False)
 
 #---------------------------------------------------------------------------------- Function write verbose
 def write_verbose(logstring, newLine=False, print_in_logfile=False):
