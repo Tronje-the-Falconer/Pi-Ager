@@ -1,14 +1,3 @@
-#------------------------ logging
-loglevel_file = 'DEBUG'
-loglevel_console = 'INFO'
-
-# CRITICAL	50
-# ERROR	40
-# WARNING	30
-# INFO	20
-# DEBUG	10
-# NOTSET
-
 #------------------------ tables names
 config_settings_table = 'config'
 data_sensor_temperature_table = 'sensor_temperature_data'
@@ -88,6 +77,8 @@ gain_key = 'gain'
 bits_to_read_key = 'bits_to_read'
 referenceunit_key = 'referenceunit'
 scale_measuring_interval_key = 'measuring_interval'
+loglevel_file_key = 'loglevel_file'
+loglevel_console_key = 'loglevel_console'
 
 #-----------------------------table fields
 key_field = 'key'

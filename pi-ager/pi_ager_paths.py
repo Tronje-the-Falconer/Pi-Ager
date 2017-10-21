@@ -2,6 +2,7 @@ global website_path
 global csv_path
 global graphs_website_path
 global logfile_txt_file
+global pi_ager_log_file
 global sqlite3_file
 
 
@@ -10,13 +11,14 @@ def set_paths():
     global csv_path
     global graphs_website_path
     global logfile_txt_file
+    global pi_ager_log_file
     global sqlite3_file
 
     website_path = '/var/www'
     csv_path = '/var/www/csv/'
     graphs_website_path = '/var/www/images/graphs/'
     logfile_txt_file = '/var/www/logs/logfile.txt'
-    pi_ager_log_file = '/opt/pi-ager/pi-ager.log'
+    pi_ager_log_file = '/var/www/logs/pi-ager.log'
     
     sqlite3_file = '/var/www/config/pi-ager.sqlite3'
     

@@ -1,6 +1,7 @@
 import RPi.GPIO as gpio
 import pi_ager_organization
 import pi_ager_init
+import pi_ager_logging
 #---------------------------------------------------------------------------------- Function Setup GPIO
 def setupGPIO():
     # global board_mode
@@ -18,7 +19,8 @@ def setupGPIO():
     # global gpio_dehumidifier
     
     logstring = _('setting up GPIO') + '...'
-    pi_ager_organization.write_verbose(logstring, False, False)
+    pi_ager_logging.logger_pi_ager_gpio_config.debug(logstring)
+    #pi_ager_organization.write_verbose(logstring, False, False)
     gpio.setwarnings(False)
 #---------------------------------------------------------------------------------------------------------------- Board mode wird gesetzt
     gpio.setmode(pi_ager_init.board_mode)
@@ -44,7 +46,8 @@ def setupGPIO():
     gpio.setup(pi_ager_init.gpio_dehumidifier, gpio.OUT)              # Reserve setzen (json.conf)
     #gpio.output(gpio_dehumidifier, relay_off)           # Reserve Relais standartmaessig aus
     logstring = _('GPIO setup complete') + '.'
-    pi_ager_organization.write_verbose(logstring, False, False)
+    pi_ager_logging.logger_pi_ager_gpio_config.debug(logstring)
+    #pi_ager_organization.write_verbose(logstring, False, False)
     
 def defaultGPIO():
     gpio.output(pi_ager_init.gpio_heater, pi_ager_init.relay_off)              # Heizung Relais standartmaessig aus
@@ -56,4 +59,5 @@ def defaultGPIO():
     gpio.output(pi_ager_init.gpio_uv, pi_ager_init.relay_off)            # UV-Licht Relais standartmaessig aus
     gpio.output(pi_ager_init.gpio_dehumidifier, pi_ager_init.relay_off)          # Reserve Relais standartmaessig aus
     logstring = _('default GPIO setup complete') + '.'
-    pi_ager_organization.write_verbose(logstring, True, False)
+    pi_ager_logging.logger_pi_ager_gpio_config.debug(logstring)
+    #pi_ager_organization.write_verbose(logstring, True, False)

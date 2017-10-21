@@ -18,11 +18,16 @@ global uv_stoptime
 global light_starttime
 global light_stoptime
 
+
+pi_ager_logging.create_logger()
 #---------------------------------------------------------------------------------- Function zum Setzen des Sensors
 def set_sensortype():
     global sensor
     global sensorname
     global sensorvalue
+    
+    pi_ager_logging.logger_pi_ager_init.debug('begin set_sensortype')
+    
     # data_configjsonfile = pi_ager_json_handling.read_config_json()
     # sensortype = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key)
     if sensortype == 1: #DHT
@@ -38,6 +43,8 @@ def set_sensortype():
         sensor = 'SHT'
         sensorname = 'SHT'
         sensorvalue = 3
+        
+    pi_ager_logging.logger_pi_ager_init.debug('end set_sensortype')
 
 def set_system_starttime():
     global system_starttime
@@ -47,6 +54,9 @@ def set_system_starttime():
     global uv_stoptime
     global light_starttime
     global light_stoptime
+    
+    pi_ager_logging.logger_pi_ager_init.debug('begin set_system_starttime')
+    
     system_starttime=int(time.time())
     circulation_air_start = system_starttime
     exhaust_air_start = system_starttime
@@ -54,11 +64,15 @@ def set_system_starttime():
     uv_stoptime = uv_starttime
     light_starttime = system_starttime
     light_stoptime = light_starttime
+    
+    pi_ager_logging.logger_pi_ager_init.debug('end set_system_starttime')
 
 def set_language():
     ####   Set up message catalog access
     # translation = gettext.translation('pi_ager', '/var/www/locale', fallback=True)
     # _ = translation.ugettext
+    pi_ager_logging.logger_pi_ager_init.debug('begin set_language')
+    
     if language == 1:
         translation = gettext.translation('pi_ager', '/var/www/locale', languages=['en'], fallback=True)
     elif language == 2:
@@ -66,6 +80,8 @@ def set_language():
     # else:
         
     translation.install()
+    
+    pi_ager_logging.logger_pi_ager_init.debug('end set_language')
 
 ######################################################### Setzen von Variablen
 #---------------------------------------------------------------------------------- System-Startzeit setzen
@@ -78,10 +94,9 @@ pi_ager_paths.set_paths()
 # uv_stoptime = uv_starttime
 # light_starttime = system_starttime
 # light_stoptime = light_starttime
-pi_ager_logging.create_logger()
 # sensor = Adafruit_DHT.AM2302
-logspacer = "\n" + "***********************************************"
-logspacer2 = "\n" + '-------------------------------------------------------'
+logspacer = "***********************************************"
+logspacer2 = '-------------------------------------------------------'
 delay = 4                      # Wartezeit in der Schleife
 counter_humidify = 0           # Zaehler fuer die Verzoegerung der Befeuchtung
 status_exhaust_fan = False     # Variable fuer die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch

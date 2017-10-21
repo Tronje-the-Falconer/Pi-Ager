@@ -1,54 +1,78 @@
 import logging
+from logging.handlers import RotatingFileHandler
 import pi_ager_names
 import pi_ager_paths
+import pi_ager_database
+
 
 def get_logginglevel(loglevelstring):
-    if loglevelstring == 'DEBUG':
+    # CRITICAL	50
+    # ERROR	40
+    # WARNING	30
+    # INFO	20
+    # DEBUG	10
+    # NOTSET
+    if loglevelstring == 10:
         loglevel = logging.DEBUG
-    elif loglevelstring == 'INFO':
+    elif loglevelstring == 20:
         loglevel = logging.INFO
-    elif loglevelstring == 'WARNING':
+    elif loglevelstring == 30:
         loglevel = logging.WARNING
-    elif loglevelstring == 'ERROR':
+    elif loglevelstring == 40:
         loglevel = logging.ERROR
-    elif loglevelstring == 'CRITICAL':
+    elif loglevelstring == 50:
         loglevel = logging.CRITICAL
     
     return loglevel
 
 def create_logger():
-    loglevel_file = pi_ager_names.loglevel_file
-    loglevel_console = pi_ager_names.loglevel_console
+    loglevel_file = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.loglevel_file_key)
+    loglevel_console = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.loglevel_console_key)
     
     
-    # Logger fuer pi-ager debugging
-    logging.basicConfig(level=get_logginglevel(loglevel_file),
-                        format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+    # Logger fuer logfile auf website
+    logging.basicConfig(level=logging.DEBUG,
+                        format='%(asctime)s -8s %(message)s',
                         datefmt='%m-%d %H:%M',
-                        filename=pi_ager_paths.pi_ager_log_file,
-                        filemode='w')
+                        filename=pi_ager_paths.logfile_txt_file,
+                        filemode='a')
     
-    # logging.handlers.RotatingFileHandler(pi_ager_paths.pi_ager_log_file, mode='a', maxBytes=5242880, backupCount=4, encoding=None, delay=False)
-    
-    
+
     # Logger fuer die Console
     console = logging.StreamHandler()
     console.setLevel(get_logginglevel(loglevel_console))
     # set a format which is simpler for console use
-    console_formatter = logging.Formatter('%(name)-12s: %(levelname)-8s %(message)s')
+    console_formatter = logging.Formatter(' %(levelname)-12s: %(name)-8s %(message)s')
     # tell the handler to use this format
     console.setFormatter(console_formatter)
     # add the handler to the root logger
     logging.getLogger('').addHandler(console)
     
-    #Logger fuer Logfile auf der Website
-    website_logfile = logging.FileHandler(pi_ager_paths.logfile_txt_file, mode='a', encoding=None, delay=False)
-    website_logfile.setLevel(logging.INFO)
-    website_formatter = logging.Formatter('%(asctime)s -8s %(message)s')
-    website_logfile.setFormatter(website_formatter)
-    logging.getLogger('').addHandler(website_logfile)
+    #Logger fuer pi-ager debugging
+    # pi_ager_logger = logging.FileHandler(pi_ager_paths.pi_ager_log_file, mode='a', encoding=None, delay=False)
+    pi_ager_logger = RotatingFileHandler(pi_ager_paths.pi_ager_log_file, mode='a', maxBytes=5242880, backupCount=4, encoding=None, delay=False)
+    pi_ager_logger.setLevel(get_logginglevel(loglevel_file))
+    pi_ager_logger_formatter = logging.Formatter('%(asctime)s %(name)-12s %(levelname)-8s %(message)s', '%m-%d %H:%M')
+    pi_ager_logger.setFormatter(pi_ager_logger_formatter)
+    logging.getLogger('').addHandler(pi_ager_logger)
+    
     
     # Verschiedene Logger um Einzelebenen zu erkennen
+    global logger_agingtable
+    global logger_hx711
+    global logger_main
+    global logger_pi_ager_database
+    global logger_pi_ager_gpio_config
+    global logger_pi_ager_init
+    global logger_pi_ager_loop
+    global logger_pi_ager_names
+    global logger_pi_ager_organisation
+    global logger_pi_ager_paths
+    global logger_pi_ager_plotting
+    global logger_pi_ager_logging
+    global logger_scale
+    global logger_scale_loop
+    
     logger_agingtable = logging.getLogger('agingtable.py')
     logger_hx711 = logging.getLogger('hx711.py')
     logger_main = logging.getLogger('main.py')
@@ -60,10 +84,12 @@ def create_logger():
     logger_pi_ager_organisation = logging.getLogger('pi_ager_organisation.py')
     logger_pi_ager_paths = logging.getLogger('pi_ager_paths.py')
     logger_pi_ager_plotting = logging.getLogger('pi_ager_plotting.py')
+    logger_pi_ager_logging = logging.getLogger('pi_ager_logging.py')
     logger_scale = logging.getLogger('scale.py')
     logger_scale_loop = logging.getLogger('scale_loop.py')
     
-
+    
+    logger_pi_ager_logging.debug('logging initialisiert')
 # Beispiele
     # logging.info('Dies landet auf der Konsole. und im File')
     # logger1.debug('landet nur im file')

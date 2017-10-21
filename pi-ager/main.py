@@ -11,6 +11,7 @@ import pi_ager_gpio_config
 import pi_ager_init
 import pi_ager_organization
 import pi_ager_plotting
+import pi_ager_logging
 
 #import sh
 
@@ -20,28 +21,35 @@ import pi_ager_plotting
 ########################################################################################################################
 
 os.system('clear') # Bildschirm loeschen
-pi_ager_organization.write_verbose(pi_ager_init.logspacer, False, False)
+pi_ager_logging.logger_main.info(pi_ager_init.logspacer)
+# pi_ager_organization.write_verbose(pi_ager_init.logspacer, False, False)
 pi_ager_gpio_config.setupGPIO() # GPIO initialisieren
 pi_ager_gpio_config.defaultGPIO() 
 
 #---------------------------------------------------------------------------------- RRD-Datenbank anlegen, wenn nicht vorhanden
 try:
+    pi_ager_logging.logger_main.debug('begin try')
+    
     with open(pi_ager_init.rrd_filename): pass
     logstring = _("database file found") + ": " + pi_ager_init.rrd_filename
-    pi_ager_organization.write_verbose(logstring, False, False)
+    pi_ager_logging.logger_main.debug(logstring)
+    # pi_ager_organization.write_verbose(logstring, False, False)
     os.system('sudo /var/sudowebscript.sh pkillscale &')
-    print ('pkillscale done')
+    pi_ager_logging.logger_main.debug('pkillscale done')
+    #print ('pkillscale done')
     time.sleep(2)
     #subprocess.call(['sudo', '/var/sudowebscript.sh', 'startscale'])
     #subprocess.call(['/var/sudowebscript.sh', 'startscale'])
     #subprocess.call(['sudo', 'python3', '/opt/pi-ager/scale.py'])
     os.system('sudo /var/sudowebscript.sh startscale &')
     # os.system('sudo python3 /opt/pi-ager/scale.py &')
-    print ('startscale done')
+    pi_ager_logging.logger_main.debug('startscale done')
+    #print ('startscale done')
 #    i = 1
 except IOError:
     logstring = _("creating a new database") + ": " + pi_ager_init.rrd_filename
-    pi_ager_organization.write_verbose(logstring, False, False)
+    pi_ager_logging.logger_main.debug(logstring)
+    #pi_ager_organization.write_verbose(logstring, False, False)
     ret = rrdtool.create("%s" %(pi_ager_init.rrd_filename),
         "--step","%s" %(pi_ager_init.measurement_time_interval),
         "--start",'0',
@@ -63,7 +71,8 @@ except IOError:
         "RRA:AVERAGE:0.5:60:8760",)
 
 #    i = 1
-pi_ager_organization.write_verbose(pi_ager_init.logspacer, False, False)
+#pi_ager_organization.write_verbose(pi_ager_init.logspacer, False, False)
+pi_ager_logging.logger_main.info(pi_ager_init.logspacer)
 pi_ager_init.set_sensortype()
 pi_ager_init.set_system_starttime()
 #uv_duration=0    #Initial-Füllung der Variablen
@@ -75,8 +84,10 @@ except KeyboardInterrupt:
 
 except Exception as e:
     logstring = _('exception occurred') + '!!!'
-    pi_ager_organization.write_verbose(logstring, True, False)
-    pi_ager_organization.write_verbose(str(e), True, False)
+    pi_ager_logging.logger_main.critical(logstring)
+    #pi_ager_organization.write_verbose(logstring, True, False)
+    pi_ager_logging.logger_main.critical(str(e))
+    #pi_ager_organization.write_verbose(str(e), True, False)
     pass
 
 pi_ager_organization.goodbye()

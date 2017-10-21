@@ -15,6 +15,7 @@ import pi_ager_organization
 import pi_ager_init
 import pi_ager_paths
 import pi_ager_names
+import pi_ager_logging
 
 ######################################################### Definieren von Funktionen
 # #---------------------------------------------------------------------------------- Funktion zur uebersetzung von z.B. Listenobjekten z.B. animals = [N_('mollusk'), N_('albatross'), N_('rat')]
@@ -93,14 +94,15 @@ def read_dictionary_write_settings(dictionary):
     period_days_logstring="\n" + _('duration') + ": \t \t \t \t" + str(period_settings['days']) + ' ' + _('days')
     sensor_logstring = _('sensortype') + ": \t \t \t" + sensorname + ' ' + _('value') + ': ' + str(sensortype)
     
-    
-    if pi_ager_debug.debugging == 'on':
-        print ('DEBUG schreibe settings in if')
+    pi_ager_logging.logger_agingtable.debug('schreibe settings in if')
+    # if pi_ager_debug.debugging == 'on':
+        # print ('DEBUG schreibe settings in if')
     pi_ager_database.write_settings(modus, period_settings['setpoint_temperature'], period_settings['setpoint_humidity'], period_settings['circulation_air_period'], period_settings['circulation_air_duration'], period_settings['exhaust_air_period'], period_settings['exhaust_air_duration'])
     period_starttime_seconds = pi_ager_database.get_current_time()
     period_endtime = datetime.datetime.now() + timedelta(days = duration) # days = parameter von timedelta
     logstring = operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + "\n" + sollfeuchtigkeit_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n" '---------------------------------------' + "\n"
-    pi_ager_organization.write_verbose(logstring, False, True)
+    # pi_ager_organization.write_verbose(logstring, False, True)
+    pi_ager_logging.logger_agingtable.debug(logstring)
     
 ######################################################### Definition von Variablen
 global period_settings
@@ -170,9 +172,11 @@ try:
 
     ######################################################### Hauptprogramm
     ########################################################################################################################
-    pi_ager_organization.write_verbose(pi_ager_init.logspacer, False, True)
-    logstring = "\n" + _('the climate values are now controlled by the automatic program % s') % (agingtable) + "\n" + "\n"
-    pi_ager_organization.write_verbose(logstring, False, True)
+    #pi_ager_organization.write_verbose(pi_ager_init.logspacer, False, True)
+    pi_ager_logging.logger_agingtable.info(logspacer)
+    logstring = "\n" + _('the climate values are now controlled by the automatic program % s') % (agingtable) + "\n"
+    pi_ager_logging.logger_agingtable.info(logstring)
+    # pi_ager_organization.write_verbose(logstring, False, True)
 
     #---------------------------------------------------------------------------------- Auslesen der gesammten csv-Datei
     rows = pi_ager_database.get_agingtable_as_rows(agingtable)
@@ -189,12 +193,14 @@ try:
         exec(build_dictionary)                                      # baut pro Zeile das jeweilige Dictionary
         
         row_number += 1                                             # Zeilenanzahl wird hochgezaehlt (fuer Dictionary Nummer und total_periods)
-        if pi_ager_debug.debugging == 'on':
-            print ('DEBUG ' + str(total_duration))
+        pi_ager_logging.logger_agingtable.debug(str(total_duration)
+        # if pi_ager_debug.debugging == 'on':
+            # print ('DEBUG ' + str(total_duration))
 
     total_periods = row_number - 1                                    # Variable total_periods = Anzahl der Perioden (0 basiert!), der Reifephasen (entspricht der Anzahl an Reihen)
-    if pi_ager_debug.debugging == 'on':
-        print ('DEBUG total periods: ' + str(total_periods))
+    pi_ager_logging.logger_agingtable.debug(str(total_periods))
+    # if pi_ager_debug.debugging == 'on':
+        # print ('DEBUG total periods: ' + str(total_periods))
     #csv_file.close()
     #---------------------------------------------------------------------------------- Lesen der Werte aus der CSV-Datei & Schreiben der Werte in die Konsole und das Logfile
     period = 0              # setzt periodenzaehler zurueck
@@ -204,39 +210,51 @@ try:
         status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
         current_time = pi_ager_database.get_current_time()
         if (period_starttime_seconds == 0 and duration_sleep == 0 and period == 0) or current_time >= period_starttime_seconds + duration_sleep:
-            if pi_ager_debug.debugging == 'on':
-                print ('DEBUG period : ' + str(period))
-                print ('DEBUG total_periods : ' + str(total_periods))
+            pi_ager_logging.logger_agingtable.debug('period: ' + str(period))
+            pi_ager_logging.logger_agingtable.debug('total periods: ' + str(total_periods))
+            # if pi_ager_debug.debugging == 'on':
+                # print ('DEBUG period : ' + str(period))
+                # print ('DEBUG total_periods : ' + str(total_periods))
             exec('{} = {}'.format("actual_dictionary", "dictionary" + str(period))) # Bsp: actual_dictionary =  {t:1, t:2, t:3}
-            if pi_ager_debug.debugging == 'on':
-                print ('DEBUG actual_dictionary : ' + str(actual_dictionary))
+            pi_ager_logging.logger_agingtable.debug('actual_dictionary: ' + str(actual_dictionary))
+            # if pi_ager_debug.debugging == 'on':
+                # print ('DEBUG actual_dictionary : ' + str(actual_dictionary))
             if period == 0:
-                logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('start values period 1 of %s') % (str(total_periods + 1)) + '\n'  
-                pi_ager_organization.write_verbose(logstring, False, True)
+                logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('start values period 1 of %s') % (str(total_periods + 1))
+                pi_ager_logging.logger_agingtable.info(logstring)
+                #pi_ager_organization.write_verbose(logstring, False, True)
                 finaltime = datetime.datetime.now() + timedelta(days = total_duration)  # days = parameter von timedelta
                 read_dictionary_write_settings(actual_dictionary)
-                logstring = _("next change of values: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M')) + '\n'
-                pi_ager_organization.write_verbose(logstring, False, True)
-                logstring = _("end of program: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M')) + '\n'
-                pi_ager_organization.write_verbose(logstring, False, True)
+                logstring = _("next change of values: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M'))
+                pi_ager_logging.logger_agingtable.info(logstring)
+                #pi_ager_organization.write_verbose(logstring, False, True)
+                logstring = _("end of program: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M'))
+                pi_ager_logging.logger_agingtable.info(logstring)
+                #pi_ager_organization.write_verbose(logstring, False, True)
                 
             elif period == total_periods:
                 logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('new values for period %s of %s') % (str(period + 1), str(total_periods + 1))
-                pi_ager_organization.write_verbose(logstring, False, True)
+                pi_ager_logging.logger_agingtable.info(logstring)
+                #pi_ager_organization.write_verbose(logstring, False, True)
                 read_dictionary_write_settings(actual_dictionary)
                 logstring = '\n' + _('Program "%s" ends the control.') % (agingtable) + '\n' + _('pi-ager continues to work with the last values.')
-                pi_ager_organization.write_verbose(logstring, False, True)
+                pi_ager_logging.logger_agingtable.info(logstring)
+                #pi_ager_organization.write_verbose(logstring, False, True)
                 
             else:
                 logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('new values for period %s of %s') % (str(period + 1), str(total_periods + 1))
-                pi_ager_organization.write_verbose(logstring, False, True)
+                pi_ager_logging.logger_agingtable.info(logstring)
+                #pi_ager_organization.write_verbose(logstring, False, True)
                 read_dictionary_write_settings(actual_dictionary)
                 logstring = _("next change of values: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M'))
-                pi_ager_organization.write_verbose(logstring, False, True)
+                pi_ager_logging.logger_agingtable.info(logstring)
+                #pi_ager_organization.write_verbose(logstring, False, True)
                 logstring = _("end of program: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M'))
-                pi_ager_organization.write_verbose(logstring, False, True)
+                pi_ager_logging.logger_agingtable.info(logstring)
+                #pi_ager_organization.write_verbose(logstring, False, True)
             period += 1
-            pi_ager_organization.write_verbose(pi_ager_init.logspacer, False, True)
+            pi_ager_logging.logger_agingtable.info(logspacer)
+            #pi_ager_organization.write_verbose(pi_ager_init.logspacer, False, True)
             # if period <= total_periods:
                 # time.sleep(duration_sleep)       # Wartezeit bis zur naechsten Periode
                 
