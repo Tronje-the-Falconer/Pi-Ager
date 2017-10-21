@@ -17,5 +17,6 @@
     4 Alarm
     5 python logging nutzen
         Debug von on/off nach True/false bzw. piager_debug.write
+        logrotate für pi-ager-logfile
     6 translation aktivieren
         
