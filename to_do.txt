@@ -15,8 +15,6 @@
     2 Display
     3 4 Temperaturfühler mit AD Wandler (Statistiken und aktuelle werte)
     4 Alarm
-    5 python logging nutzen
-        Debug von on/off nach True/false bzw. piager_debug.write
-        logrotate für pi-ager-logfile
+    5 logrotate für pi-ager-logfile prüfen; Datei und consolenaufteilung verbessern
     6 translation aktivieren
         
