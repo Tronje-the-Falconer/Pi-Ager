@@ -55,8 +55,9 @@ def get_table_value(table, key):
 def get_scale_table_row(table):
     global cursor
     sql='SELECT ' + pi_ager_names.value_field + ', ' + pi_ager_names.last_change_field + ' FROM ' + table + ' WHERE id = (SELECT MAX(id) from ' + table + ')'
-    if pi_ager_debug.debugging == 'on':
-        print(sql)
+    pi_ager_logging.logger_pi_ager_database.debug(sql)
+    # if pi_ager_debug.debugging == 'on':
+        # print(sql)
     open_database()
     execute_query(sql)
     row = cursor.fetchone()        
@@ -120,6 +121,15 @@ def read_config():
     # close_database()
     # return rows
 
+def get_logging_value(destination):
+    open_database()
+    execute_query('SELECT ' + pi_ager_names.value_field + ' FROM ' + pi_ager_names.config_settings_table + ' WHERE ' + pi_ager_names.key_field + ' = "' + destination + '"')
+    row = cursor.fetchone()
+    close_database()
+    logging_value = row[pi_ager_names.value_field]
+    
+    return logging_value
+    
 def read_settings():
     global cursor
     open_database()

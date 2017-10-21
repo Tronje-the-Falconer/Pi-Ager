@@ -26,23 +26,32 @@ def get_logginglevel(loglevelstring):
     return loglevel
 
 def create_logger():
-    loglevel_file = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.loglevel_file_key)
-    loglevel_console = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.loglevel_console_key)
-    
+    #loglevel_file = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.loglevel_file_key)
+    #loglevel_console = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.loglevel_console_key)
+    loglevel_file_value = pi_ager_database.get_logging_value('loglevel_file')
+    loglevel_console_value = pi_ager_database.get_logging_value('loglevel_console')
     
     # Logger fuer logfile auf website
-    logging.basicConfig(level=logging.DEBUG,
-                        format='%(asctime)s -8s %(message)s',
-                        datefmt='%m-%d %H:%M',
-                        filename=pi_ager_paths.logfile_txt_file,
-                        filemode='a')
+    logging.basicConfig(level=logging.DEBUG)
+                        #format='%(asctime)s -8s %(message)s',
+                        #datefmt='%m-%d %H:%M',
+                        #filename=pi_ager_paths.logfile_txt_file,
+                        #filemode='a')
     
 
+    #Logger fuer website
+    website_log = logging.FileHandler(pi_ager_paths.logfile_txt_file, mode='a', encoding=None, delay=False)
+    # website_log = RotatingFileHandler(pi_ager_paths.logfile_txt_file, mode='a', maxBytes=5242880, backupCount=4, encoding=None, delay=False)
+    website_log.setLevel(get_logginglevel(loglevel_file_value))
+    website_log_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M')
+    website_log.setFormatter(website_log_formatter)
+    logging.getLogger('').addHandler(website_log)
+    
     # Logger fuer die Console
     console = logging.StreamHandler()
-    console.setLevel(get_logginglevel(loglevel_console))
+    console.setLevel(get_logginglevel(loglevel_console_value))
     # set a format which is simpler for console use
-    console_formatter = logging.Formatter(' %(levelname)-12s: %(name)-8s %(message)s')
+    console_formatter = logging.Formatter(' %(levelname)-10s: %(name)-8s %(message)s')
     # tell the handler to use this format
     console.setFormatter(console_formatter)
     # add the handler to the root logger
@@ -51,8 +60,8 @@ def create_logger():
     #Logger fuer pi-ager debugging
     # pi_ager_logger = logging.FileHandler(pi_ager_paths.pi_ager_log_file, mode='a', encoding=None, delay=False)
     pi_ager_logger = RotatingFileHandler(pi_ager_paths.pi_ager_log_file, mode='a', maxBytes=5242880, backupCount=4, encoding=None, delay=False)
-    pi_ager_logger.setLevel(get_logginglevel(loglevel_file))
-    pi_ager_logger_formatter = logging.Formatter('%(asctime)s %(name)-12s %(levelname)-8s %(message)s', '%m-%d %H:%M')
+    pi_ager_logger.setLevel(get_logginglevel(loglevel_file_value))
+    pi_ager_logger_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M')
     pi_ager_logger.setFormatter(pi_ager_logger_formatter)
     logging.getLogger('').addHandler(pi_ager_logger)
     
