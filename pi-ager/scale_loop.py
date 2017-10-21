@@ -2,6 +2,7 @@ import time
 from hx711 import Scale
 import pi_ager_database
 import pi_ager_names
+import pi_ager_logging
 
 def scale_measures(scale, status_tara_scale, status_scale):
     

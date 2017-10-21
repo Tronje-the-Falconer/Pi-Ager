@@ -2,6 +2,7 @@
 import sys
 import RPi.GPIO as GPIO
 import scale_loop
+import pi_ager_logging
 
 
 
