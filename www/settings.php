@@ -15,12 +15,6 @@
                                     include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
                                     // include 'modules/read_csv_dir.php';                         // Liest das Verezichnis mit den Reifeprogrammtabellen ein
                                     
-                                    include 'modules/system_reboot.php';                        // Startet das System neu
-                                    include 'modules/system_shutdown.php';                      // Fährt das System herunter
-                                    
-                                    include 'modules/database_empty_statistic_tables.php';      // leert die Statistik-Tabellen (Status, data)
-                                    
-
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('operating values'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Programme starten/stoppen-->
@@ -250,35 +244,7 @@
                                 <?php 
                                     include ('config.php'); 
                                 ?>
-                                <hr>
-                                <h2 class="art-postheader"><?php echo _('system'); ?></h2>
-                                <!----------------------------------------------------------------------------------------Reboot/Shutdown-->
-                                <div class="hg_container">
-                                    <form  method="post" name="boot">
-                                        <table style="width: 100%;">
-                                            <tr>
-                                                <td><button class="art-button" name="reboot" onclick="return confirm('<?php echo _('ATTENTION: reboot system?');?>');"><?php echo _('reboot'); ?></button></td>
-                                                <td><button class="art-button" name="shutdown" onclick="return confirm('<?php echo _('ATTENTION: shutdown system?');?>');"><?php echo _('shutdown'); ?></button></td>
-                                            </tr>
-                                        </table>
-                                    </form>
-                                </div>
-                                <hr>
-                                <h2 class="art-postheader"><?php echo _('database'); ?></h2>
-                                <!----------------------------------------------------------------------------------------Database-->
-                                <div class="hg_container" >
-                                    
-                                        <table style="width: 100%;">
-                                            <tr>
-                                                <form method="post" name="database">
-                                                    <td><button class="art-button" name="empty_statistic_tables" value="empty_statistic_tables" onclick="return confirm('<?php echo _('ATTENTION: empty statistic tables?');?>');"><?php echo _('empty statistic tables'); ?></button></td>
-                                                </form>
-                                                <td><button class="art-button" name="database_administration" onclick="window.location.href='/phpliteadmin.php'"><?php echo _('database administration'); ?></button></td>
-                                            </tr>
-                                        </table>
-                                    
-                                    
-                                </div>
+                                
                                 <!----------------------------------------------------------------------------------------Content Ende-->
                             </div>
                         </div>

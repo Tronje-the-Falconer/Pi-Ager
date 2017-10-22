@@ -33,6 +33,9 @@
     elseif ($_SERVER['PHP_SELF'] == '/scale_wizzard.php') {
         $scale_wizzard_active = 'active';
     }
+    elseif ($_SERVER['PHP_SELF'] == '/admin.php') {
+        $admin_active = 'active';
+    }
     # Auslesen der Version aus dem Changelog
     # Lese 14 Zeichen, beginnend mit dem 21. Zeichen
     $changelogfile = 'changelog.txt';
@@ -98,6 +101,15 @@
                             <li><a href="index.php" class="<?php echo $monitor_active; ?>"><?php echo _('monitor'); ?></a></li>
                             <li><a href="diagrams.php" class="<?php echo $diagrams_active; ?>"><?php echo _('graphs'); ?></a></li>
                             <li><a href="settings.php" class="<?php echo $settings_active; ?>"><?php echo _('settings'); ?></a></li>
+                            <?php
+                                if ($_SERVER['PHP_SELF'] == '/settings.php' OR $_SERVER['PHP_SELF'] == '/admin.php') {
+                                    echo '<li><a href="admin.php" class="';
+                                    echo $admin_active;
+                                    echo '">';
+                                    echo _('administration');
+                                    echo '</a></li>';
+                                }
+                            ?>
                             <li><a href="logs.php" class="<?php echo $logs_active; ?>"><?php echo _('logs'); ?></a></li>
                             <li><a href="webcam.php" class="<?php echo $webcam_active; ?>"><?php echo _('webcam'); ?></a></li>
                             <?php 

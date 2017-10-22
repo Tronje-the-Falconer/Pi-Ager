@@ -65,6 +65,9 @@ $status_scale1_key = 'status_scale1';
 $status_scale2_key = 'status_scale2';
 $status_scale1_tara_key = 'status_tara_scale1';
 $status_scale2_tara_key = 'status_tara_scale2';
+$loglevel_file_key = 'loglevel_file';
+$loglevel_console_key = 'loglevel_console';
+
 #-----------------------------table fields;
 $key_field = 'key';
 $value_field = 'value';

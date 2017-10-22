@@ -226,6 +226,18 @@
         
         close_database();
     }
+    
+    function write_loglevel($chosen_loglevel_file, $chosen_loglevel_console){
+        global $value_field, $last_change_field, $key_field, $config_settings_table, $loglevel_console_key, $loglevel_file_key;
+        
+        open_connection();
+        $sql = 'UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = "' . $chosen_loglevel_file . '" , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' = "' . $loglevel_file_key . '";';
+        $sql = $sql . ' UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = "' . $chosen_loglevel_console . '" , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' = "' . $loglevel_console_key . '";';
+        execute_query($sql);
+        
+        close_database();
+    }
+    
 
     function write_settings($modus, $setpoint_temperature, $setpoint_humidity, $circulation_air_period, $circulation_air_duration, $exhaust_air_period,
                             $exhaust_air_duration)
@@ -292,7 +304,7 @@
         write_startstop_status_in_database($module_key, 0);
     }
     
-     function delete_data($table_name)
+    function delete_data($table_name)
     {
         open_connection();
         $sql = 'DELETE FROM ' . $table_name;
