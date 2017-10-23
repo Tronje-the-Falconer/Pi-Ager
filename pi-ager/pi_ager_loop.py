@@ -12,6 +12,7 @@ import pi_ager_init
 import pi_ager_organization
 import pi_ager_plotting
 import pi_ager_logging
+import pi_ager_gpio_config
 
 def autostart_loop():
     global status_pi_ager
@@ -83,6 +84,8 @@ def doMainLoop():
 
         pi_ager_database.write_start_in_database(pi_ager_names.status_pi_ager_key)
         status_pi_ager = 1
+        pi_ager_gpio_config.setupGPIO() # GPIO initialisieren
+        pi_ager_gpio_config.defaultGPIO()
         
         while status_pi_ager == 1:
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
@@ -679,9 +682,11 @@ def doMainLoop():
             pi_ager_init.loopcounter += 1
             
     # Ende While-Schleife
-    
-        pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
-        pi_ager_organization.cleanup()
-    except Exception:
+        pi_ager_logging.logger_pi_ager_loop.debug('status!= 1')
+    except Exception as e:
+        pi_ager_logging.logger_pi_ager_loop.debug(str(e))
+        
+    finally:
+        pi_ager_init.loopcounter = 0
         pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
         pi_ager_organization.cleanup()

@@ -33,45 +33,36 @@ def close_database():
 
 def get_table_value(table, key):
     global cursor
+
     if key == None:
         sql='SELECT ' + pi_ager_names.value_field + ' FROM ' + table + ' o WHERE o.id = (SELECT MAX(i.id) from ' + table + ')'
     else:
         sql='SELECT ' + pi_ager_names.value_field + ' FROM ' + table + ' o WHERE o.key = "' + key + '" AND o.id = (SELECT MAX(i.id) from ' + table + ' i WHERE i.key = "' + key + '")'
-    pi_ager_logging.logger_pi_ager_database.debug(sql)
-    # if pi_ager_debug.debugging == 'on':
-        # print(sql)
+    # pi_ager_logging.logger_pi_ager_database.debug(sql)
     open_database()
     execute_query(sql)
     row = cursor.fetchone()
     close_database()
-    pi_ager_logging.logger_pi_ager_database.debug('gelesener Wert: ' + str(row[pi_ager_names.value_field]))
-    pi_ager_logging.logger_pi_ager_database.debug('Keys in result: ' + str(row.keys()))
-    # if pi_ager_debug.debugging == 'on':
-        # print ("DEBUG: gelesener Wert: " + str(row[pi_ager_names.value_field]))
-        # print ("DEBUG: Keys in result: " + str(row.keys()))
+    logstring = 'get table value Tabelle: ' + table + ' gelesener Wert: ' + str(row[pi_ager_names.value_field])
+    pi_ager_logging.logger_pi_ager_database.debug(logstring)
+    #pi_ager_logging.logger_pi_ager_database.debug('Keys in result: ' + str(row.keys()))
     value = row[pi_ager_names.value_field]
     return value
 
 def get_scale_table_row(table):
     global cursor
     sql='SELECT ' + pi_ager_names.value_field + ', ' + pi_ager_names.last_change_field + ' FROM ' + table + ' WHERE id = (SELECT MAX(id) from ' + table + ')'
-    pi_ager_logging.logger_pi_ager_database.debug(sql)
-    # if pi_ager_debug.debugging == 'on':
-        # print(sql)
+    #pi_ager_logging.logger_pi_ager_database.debug(sql)
     open_database()
     execute_query(sql)
     row = cursor.fetchone()        
     close_database()
     
-    #if pi_ager_debug.debugging == 'on':
-    if row != None:
-        pi_ager_logging.logger_pi_ager_database.debug(str(row[0]))
-        pi_ager_logging.logger_pi_ager_database.debug(str(row.keys()))
-        # print ("DEBUG: " + str(row[0]))
-        # print ("DEBUG: " + str(row.keys()))
-    else:
-        pi_ager_logging.logger_pi_ager_database.debug('row is None')
-        # print ("DEBUG: row is None")
+    #if row != None:
+        #pi_ager_logging.logger_pi_ager_database.debug(str(row[0]))
+        #pi_ager_logging.logger_pi_ager_database.debug(str(row.keys()))
+    #else:
+        #pi_ager_logging.logger_pi_ager_database.debug('row is None')
     return row
     
 def get_agingtable_as_rows(agingtable):
@@ -83,9 +74,7 @@ def get_agingtable_as_rows(agingtable):
     execute_query(sql)
     rows = cursor.fetchall()
     
-    pi_ager_logging.logger_pi_ager_database.debug(sql)
-    # if pi_ager_debug.debugging == 'on':
-        # print(sql)
+    # pi_ager_logging.logger_pi_ager_database.debug(sql)
         
     close_database()
     return rows
@@ -115,9 +104,6 @@ def read_config():
     # open_database()
     # execute_query('SELECT * FROM current WHERE ' + pi_ager_names.key_field + ' = "scale1" OR "key" = "scale2"')
     # rows = cursor.fetchall()
-    # if pi_ager_debug.debugging == 'on':
-        # print ("DEBUG: " + rows)
-        # print ("DEBUG: " + rows.keys())
     # close_database()
     # return rows
 
@@ -166,11 +152,9 @@ def write_current(loopnumber, sensor_temperature, status_heater, status_exhaust_
 
     open_database()
     if loopnumber % 150 == 0:
-        pi_ager_logging.logger_pi_ager_database.debug('in write_current')
-        pi_ager_logging.logger_pi_ager_database.debug('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
-        # if pi_ager_debug.debugging=='on':
-            # print('DEBUG: in write_current')
-            # print('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
+        #pi_ager_logging.logger_pi_ager_database.debug('in write_current')
+        #pi_ager_logging.logger_pi_ager_database.debug('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
+
         execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
         execute_query('INSERT INTO ' + pi_ager_names.status_heater_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_heater) + ',' + str(get_current_time()) + ')')
         execute_query('INSERT INTO ' + pi_ager_names.status_exhaust_air_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_exhaust_air) + ',' + str(get_current_time()) + ')')
@@ -191,9 +175,8 @@ def write_current(loopnumber, sensor_temperature, status_heater, status_exhaust_
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_light) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_light_key + '"')
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_humidifier) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_humidifier_key + '"')
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_dehumidifier) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_dehumidifier_key + '"')
-    pi_ager_logging.logger_pi_ager_database.debug('Ende write_current')
-    # if pi_ager_debug.debugging=='on':
-        # print('DEBUG: Ende write_current')
+    #pi_ager_logging.logger_pi_ager_database.debug('Ende write_current')
+
 
     close_database()
 
