@@ -21,8 +21,8 @@ import pi_ager_logging
 
 # Standard Aufruf Parameter Scale (self, source=None, samples=20, spikes=4, sleep=0.1, dout=10, pd_sck=9, gain=128, bitsToRead=24)
 try:
+    pi_ager_logging.create_logger('scale.py')
     scale_loop.doScaleLoop()
 
 except (KeyboardInterrupt, SystemExit):
-    GPIO.cleanup()
     sys.exit()

@@ -43,8 +43,8 @@ def get_table_value(table, key):
     execute_query(sql)
     row = cursor.fetchone()
     close_database()
-    logstring = 'get table value Tabelle: ' + table + ' gelesener Wert: ' + str(row[pi_ager_names.value_field])
-    pi_ager_logging.logger_pi_ager_database.debug(logstring)
+    #logstring = 'get table value Key: ' + key + ' gelesener Wert: ' + str(row[pi_ager_names.value_field])
+    #pi_ager_logging.logger_pi_ager_database.debug(logstring)
     #pi_ager_logging.logger_pi_ager_database.debug('Keys in result: ' + str(row.keys()))
     value = row[pi_ager_names.value_field]
     return value

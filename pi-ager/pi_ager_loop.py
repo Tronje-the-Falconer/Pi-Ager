@@ -19,6 +19,7 @@ def autostart_loop():
     while True:
         status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
         status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
+        pi_ager_logging.logger_pi_ager_loop.debug('autostart_loop')
         
         if status_agingtable == 1:
             pi_ager_logging.logger_pi_ager_loop.debug('exec agingtable.py start')

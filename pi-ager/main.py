@@ -5,12 +5,14 @@ import os
 import subprocess
 import time
 import rrdtool
+import pi_ager_logging
+pi_ager_logging.create_logger('main.py')
 import pi_ager_debug
 import pi_ager_loop
 import pi_ager_init
 import pi_ager_organization
 import pi_ager_plotting
-import pi_ager_logging
+
 
 #import sh
 
@@ -19,6 +21,7 @@ import pi_ager_logging
 ######################################################### Hauptprogramm
 
 os.system('clear') # Bildschirm loeschen
+#pi_ager_init.create_logger()
 pi_ager_logging.logger_main.info(pi_ager_init.logspacer)
 # pi_ager_organization.write_verbose(pi_ager_init.logspacer, False, False)
 

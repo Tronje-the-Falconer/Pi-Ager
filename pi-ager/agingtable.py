@@ -118,6 +118,8 @@ global delay_humidify
 global sensorname
 global sensortype
 
+pi_ager_logging.create_logger('agingtable.py')
+
 try:
     pi_ager_database.write_start_in_database(pi_ager_names.status_agingtable_key)
     status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)

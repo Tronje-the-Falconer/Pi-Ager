@@ -18,7 +18,8 @@ global uv_stoptime
 global light_starttime
 global light_stoptime
 
-pi_ager_logging.create_logger()
+
+
 #---------------------------------------------------------------------------------- Function zum Setzen des Sensors
 def set_sensortype():
     global sensor

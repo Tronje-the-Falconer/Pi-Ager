@@ -45,9 +45,13 @@ def doScaleLoop():
 
             status_tara_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_tara_scale1_key)
             status_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_scale1_key)
+            logstring = 'Status Scale 1: ' + str(status_scale1) + ' Status Tara Scale 1: ' + str(status_tara_scale1 )
+            pi_ager_logging.logger_scale_loop.debug(logstring)
             
             status_tara_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_tara_scale2_key)
             status_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_scale2_key)
+            logstring = 'Status Scale 2: ' + str(status_scale2) + ' Status Tara Scale 2: ' + str(status_tara_scale2)
+            pi_ager_logging.logger_scale_loop.debug(logstring)
             
             if status_scale1 == 1:
                 measuring_interval_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.scale_measuring_interval_key)

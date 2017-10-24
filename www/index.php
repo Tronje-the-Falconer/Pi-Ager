@@ -106,15 +106,29 @@
                                                     $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
                                                     if ($grepmain == 0){
                                                         echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;">';
+                                                        echo '<br><img src="images/icons/operatingmode_fail_42x42.png" alt="" style="padding: 10px;">';
+                                                    }
+                                                    elseif ($grepmain != 0 and $status_piager == 0){
+                                                        echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;">';
                                                         echo '<br><img src="images/icons/operatingmode_42x42.png" alt="" style="padding: 10px;">';
                                                     }
-                                                    else {
+                                                    elseif ($grepmain != 0 and $status_piager == 1) {
                                                         echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;">';
                                                         echo '<br><img src="images/icons/operating_42x42.gif" alt="" style="padding: 10px;">';
                                                     }
                                                 ?>
                                             </td>
-                                            <td class="text_left_top"><b><?php echo strtoupper(_('operating mode')).':</b><br>'; if ($grepmain == 0){echo strtoupper(("off"));} else {echo $modus_name;} ?></td>
+                                            <td class="text_left_top"><b><?php echo strtoupper(_('operating mode')).':</b><br>';
+                                                if ($grepmain == 0){
+                                                    echo strtoupper(("see settings"));
+                                                }
+                                                elseif ($grepmain != 0 and $status_piager == 0){
+                                                    echo strtoupper(("off"));
+                                                }
+                                                elseif($grepmain != 0 and $status_piager == 1){
+                                                    echo $modus_name;
+                                                }
+                                                ?></td>
                                             <td>
                                                 <?php 
                                                     // PrUEft, ob Prozess Reifetab läuft
@@ -306,17 +320,67 @@
                                             <td class="text_left">&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td><img src="images/icons/scale_42x42.png" alt=""></td>
-                                            <td><img src="<?php echo $scale1_on_off_png ;?>" title=></td>
-                                            <td><?php echo strtoupper(_('scale1')) ; ?></td>
+                                            <?php
+                                                $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
+                                                if ($grepscale == 0){
+                                                    echo '<td><img src="images/icons/scale_fail_42x42.png" alt=""></td>
+                                                            <td><img src="';
+                                                    echo $scale1_on_off_png ;
+                                                    echo '" title=></td>
+                                                            <td>';
+                                                    echo strtoupper(_('see settings'));
+                                                    echo '</td>';
+                                                }
+                                                elseif ($grepscale != 0 and $status_scale1 == 0){
+                                                    echo '<td><img src="images/icons/scale_42x42.png" alt=""></td>
+                                                            <td><img src="';
+                                                    echo $scale1_on_off_png ;
+                                                    echo '" title=></td>
+                                                            <td>';
+                                                    echo strtoupper(_('scale1'));
+                                                    echo '</td>';
+                                                }
+                                                elseif ($grepscale != 0 and $status_scale1 == 1) {
+                                                    echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
+                                                            <td><img src="';
+                                                    echo $scale1_on_off_png ;
+                                                    echo '" title=></td>
+                                                            <td>';
+                                                    echo strtoupper(_('scale1'));
+                                                    echo '</td>';
+                                                }
+                                            ?>
                                             <td class="text_left">&nbsp;</td>
                                             <td class="text_left">&nbsp;</td>
                                             <td class="text_left">&nbsp;</td>
                                         </tr>
                                         <tr>
-                                            <td><img src="images/icons/scale_42x42.png" alt=""></td>
-                                            <td><img src="<?php echo $scale2_on_off_png ;?>" title=></td>
-                                            <td><?php echo strtoupper(_('scale2')) ; ?></td>
+                                            <?php
+                                                $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
+                                                if ($grepscale == 0){
+                                                    echo '<td></td>
+                                                            <td></td>
+                                                            <td></td>';
+                                                }
+                                                elseif ($grepscale != 0 and $status_scale2 == 0){
+                                                    echo '<td><img src="images/icons/scale_42x42.png" alt=""></td>
+                                                            <td><img src="';
+                                                    echo $scale2_on_off_png ;
+                                                    echo '" title=></td>
+                                                            <td>';
+                                                    echo strtoupper(_('scale2'));
+                                                    echo '</td>';
+                                                }
+                                                elseif ($grepscale != 0 and $status_scale2 == 1) {
+                                                    echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
+                                                            <td><img src="';
+                                                    echo $scale2_on_off_png ;
+                                                    echo '" title=></td>
+                                                            <td>';
+                                                    echo strtoupper(_('scale2'));
+                                                    echo '</td>';
+                                                }
+                                            ?>
                                             <td class="text_left">&nbsp;</td>
                                             <td class="text_left">&nbsp;</td>
                                             <td class="text_left">&nbsp;</td>
