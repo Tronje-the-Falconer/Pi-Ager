@@ -116,7 +116,7 @@
     # Scales
     if (isset($_POST['scale1_start']) OR isset($_POST['scale2_start']) OR isset($_POST['scale1_tara']) OR isset($_POST['scale2_tara'])){
         $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
-        if (grepscale == 0){
+        if ($grepscale == 0){
             shell_exec('sudo /var/sudowebscript.sh startscale');
             sleep (1); # 1 Sec auf start der Py-Datei warten
             $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
@@ -157,7 +157,7 @@
                 fclose($f);
             }
         }
-        elseif (grepscale != 0){
+        elseif ($grepscale != 0){
             $f=fopen('logs/logfile.txt','a');
             fwrite($f,"\n". date('d.m.Y H:i')." scale.py "._('is already running'));
             fclose($f);
