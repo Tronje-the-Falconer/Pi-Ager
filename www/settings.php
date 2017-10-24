@@ -214,7 +214,8 @@
                                                     if (!empty($dataset[$agingtable_days_field])){
                                                         $data_days = $dataset[$agingtable_days_field];
                                                     } else {$data_days = '..';}
-                                                    if ($current_period == $index_row){
+                                                    $current_period_0 = $current_period - 1;
+                                                    if ($current_period_0 == $index_row){
                                                         echo '<tr bgcolor=#D19600 >';
                                                     }
                                                     else{
