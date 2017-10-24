@@ -49,6 +49,20 @@ def get_table_value(table, key):
     value = row[pi_ager_names.value_field]
     return value
 
+def write_current_value(key, value):
+    global cursor
+
+    if key == None:
+        logstring = 'key ist None: ' + key + ' zu schreibender Wert: ' + str(value))
+        pi_ager_logging.logger_pi_ager_database.debug(logstring)
+        return
+    sql='UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(value) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) + ' WHERE ' + pi_ager_names.key_field + ' = "' + key + '"'
+    open_database()
+    execute_query(sql)
+    close_database()
+    logstring = 'write_current_value Tabelle: ' + pi_ager_names.current_values_table + ' geschriebener Key/Value: ' + key + '/' + str(value)
+    pi_ager_logging.logger_pi_ager_database.debug(logstring)
+
 def get_scale_table_row(table):
     global cursor
     sql='SELECT ' + pi_ager_names.value_field + ', ' + pi_ager_names.last_change_field + ' FROM ' + table + ' WHERE id = (SELECT MAX(id) from ' + table + ')'

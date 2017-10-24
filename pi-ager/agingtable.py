@@ -99,6 +99,7 @@ def read_dictionary_write_settings(dictionary):
         # print ('DEBUG schreibe settings in if')
     pi_ager_database.write_settings(modus, period_settings['setpoint_temperature'], period_settings['setpoint_humidity'], period_settings['circulation_air_period'], period_settings['circulation_air_duration'], period_settings['exhaust_air_period'], period_settings['exhaust_air_duration'])
     period_starttime_seconds = pi_ager_database.get_current_time()
+    pi_ager_database.write_current_value(pi_ager_names.agintable_period_starttime_key, period_starttime_seconds)
     period_endtime = datetime.datetime.now() + timedelta(days = duration) # days = parameter von timedelta
     logstring = operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + "\n" + sollfeuchtigkeit_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n" '---------------------------------------' + "\n"
     # pi_ager_organization.write_verbose(logstring, False, True)
@@ -212,6 +213,7 @@ try:
         status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
         current_time = pi_ager_database.get_current_time()
         if (period_starttime_seconds == 0 and duration_sleep == 0 and period == 0) or current_time >= period_starttime_seconds + duration_sleep:
+            pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, period)
             pi_ager_logging.logger_agingtable.debug('period: ' + str(period))
             pi_ager_logging.logger_agingtable.debug('total periods: ' + str(total_periods))
             # if pi_ager_debug.debugging == 'on':
@@ -261,10 +263,14 @@ try:
                 # time.sleep(duration_sleep)       # Wartezeit bis zur naechsten Periode
                 
     pi_ager_database.write_stop_in_database(pi_ager_names.status_agingtable_key)
+    pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, 0)
     sys.exit(0)
 
-except Exception:
+except Exception as e:
     pi_ager_database.write_stop_in_database(pi_ager_names.status_agingtable_key)
+    pi_ager_logging.logger_agingtable.critical(e)
 
 except KeyboardInterrupt:
+    pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, 0)
+    pi_ager_logging.logger_agingtable.critical('File stopped by user')
     sys.exit(0)

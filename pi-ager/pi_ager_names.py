@@ -79,6 +79,8 @@ referenceunit_key = 'referenceunit'
 scale_measuring_interval_key = 'measuring_interval'
 loglevel_file_key = 'loglevel_file'
 loglevel_console_key = 'loglevel_console'
+agingtable_period_key = 'agingtable_period'
+agingtable_period_starttime_key = 'agingtable_period_starttime'
 
 #-----------------------------table fields
 key_field = 'key'
