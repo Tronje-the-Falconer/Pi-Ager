@@ -1,4 +1,5 @@
-#------------------------ tables names
+#!/usr/bin/python3
+# tables names
 config_settings_table = 'config'
 data_sensor_temperature_table = 'sensor_temperature_data'
 status_heater_table = 'heater_status'
@@ -21,7 +22,7 @@ data_sensor_temperature_meat2_table = 'sensor_temperature_meat2_data'
 data_sensor_temperature_meat3_table = 'sensor_temperature_meat3_data'
 data_sensor_temperature_meat4_table = 'sensor_temperature_meat4_data'
 
-#----------------------------table keys
+# table keys
 switch_on_cooling_compressor_key = 'switch_on_cooling_compressor'
 switch_off_cooling_compressor_key = 'switch_off_cooling_compressor'
 switch_on_humidifier_key = 'switch_on_humidifier'
@@ -82,7 +83,7 @@ loglevel_console_key = 'loglevel_console'
 agingtable_period_key = 'agingtable_period'
 agingtable_period_starttime_key = 'agingtable_period_starttime'
 
-#-----------------------------table fields
+# table fields
 key_field = 'key'
 value_field = 'value'
 last_change_field = 'last_change'

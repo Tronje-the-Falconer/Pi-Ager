@@ -1,17 +1,11 @@
+#!/usr/bin/python3
 import logging
 from logging.handlers import RotatingFileHandler
 import pi_ager_names
 import pi_ager_paths
 import pi_ager_database
 
-
 def get_logginglevel(loglevelstring):
-    # CRITICAL	50
-    # ERROR	40
-    # WARNING	30
-    # INFO	20
-    # DEBUG	10
-    # NOTSET
     if loglevelstring == 10:
         loglevel = logging.DEBUG
     elif loglevelstring == 20:
@@ -26,18 +20,15 @@ def get_logginglevel(loglevelstring):
     return loglevel
 
 def create_logger(pythonfile):
-    #loglevel_file = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.loglevel_file_key)
-    #loglevel_console = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.loglevel_console_key)
     loglevel_file_value = pi_ager_database.get_logging_value('loglevel_file')
     loglevel_console_value = pi_ager_database.get_logging_value('loglevel_console')
-    
+
     # Logger fuer logfile auf website
     logging.basicConfig(level=logging.DEBUG)
                         #format='%(asctime)s -8s %(message)s',
                         #datefmt='%m-%d %H:%M',
                         #filename=pi_ager_paths.logfile_txt_file,
                         #filemode='a')
-    
 
     #Logger fuer website
     website_log = logging.FileHandler(pi_ager_paths.logfile_txt_file, mode='a', encoding=None, delay=False)
@@ -46,7 +37,6 @@ def create_logger(pythonfile):
     website_log_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M')
     website_log.setFormatter(website_log_formatter)
     logging.getLogger('').addHandler(website_log)
-    
     # Logger fuer die Console
     console = logging.StreamHandler()
     console.setLevel(get_logginglevel(loglevel_console_value))
@@ -56,15 +46,14 @@ def create_logger(pythonfile):
     console.setFormatter(console_formatter)
     # add the handler to the root logger
     logging.getLogger('').addHandler(console)
-    
+
     #Logger fuer pi-ager debugging
-    # pi_ager_logger = logging.FileHandler(pi_ager_paths.pi_ager_log_file, mode='a', encoding=None, delay=False)
     pi_ager_logger = RotatingFileHandler(pi_ager_paths.pi_ager_log_file, mode='a', maxBytes=5242880, backupCount=4, encoding=None, delay=False)
     pi_ager_logger.setLevel(get_logginglevel(loglevel_file_value))
     pi_ager_logger_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M')
     pi_ager_logger.setFormatter(pi_ager_logger_formatter)
     logging.getLogger('').addHandler(pi_ager_logger)
-    
+
     # Verschiedene Logger um Einzelebenen zu erkennen
     if pythonfile == 'main.py':
         global logger_main
@@ -76,7 +65,7 @@ def create_logger(pythonfile):
         global logger_pi_ager_organisation
         global logger_pi_ager_paths
         global logger_pi_ager_plotting
-        
+
         logger_main = logging.getLogger('main.py')
         logger_pi_ager_database = logging.getLogger('pi_ager_database.py')
         logger_pi_ager_gpio_config = logging.getLogger('pi_ager_gpio_config.py')
@@ -86,29 +75,21 @@ def create_logger(pythonfile):
         logger_pi_ager_organisation = logging.getLogger('pi_ager_organisation.py')
         logger_pi_ager_paths = logging.getLogger('pi_ager_paths.py')
         logger_pi_ager_plotting = logging.getLogger('pi_ager_plotting.py')
-        
+
     elif pythonfile == 'scale.py':
         global logger_scale
         global logger_scale_loop
         global logger_hx711
-        
+
         logger_scale = logging.getLogger('scale.py')
         logger_scale_loop = logging.getLogger('scale_loop.py')
         logger_hx711 = logging.getLogger('hx711.py')
     elif pythonfile == 'agingtable.py':
         global logger_agingtable
-        
+
         logger_agingtable = logging.getLogger('agingtable.py')
 
     global logger_pi_ager_logging
     logger_pi_ager_logging = logging.getLogger('pi_ager_logging.py')
-    
-    
-    
+
     logger_pi_ager_logging.debug('logging initialisiert')
-# Beispiele
-    # logging.info('Dies landet auf der Konsole. und im File')
-    # logger1.debug('landet nur im file')
-    # logger1.info('landet auf Konsole und im File mit Info zu logger1 ')
-    # logger2.warning('landet auf Konsole unf im File mit Info zu logger2')
-    # logger2.error('landet auf Konsole unf im File mit Info zu logger2')

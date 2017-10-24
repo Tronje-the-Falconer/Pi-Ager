@@ -1,16 +1,15 @@
+#!/usr/bin/python3
 import pi_ager_init
 import pi_ager_paths
 import pi_ager_debug
 import rrdtool
 import pi_ager_logging
 
-#---------------------------------------------------------------------------------- Function zum Plotten der Grafiken
+# Function zum Plotten der Grafiken
 def plotting(plotting_value):
-#---------------------------------------------------------------------------------------------------------------- Beschriftung fuer die Grafiken festlegen
+# Beschriftung fuer die Grafiken festlegen
     global rrd_dbname
-    pi_ager_logging.logger_pi_ager_plotting.debug('in plotingfunction')
-    # if pi_ager_debug.debugging == 'on':
-        # print("DEBUG: in plotingfunction")
+    pi_ager_logging.logger_pi_ager_plotting.debug('Begin plotting-function')
     if plotting_value == 'sensor_temperature':
         title = _('temperature')
         label = 'in C'
@@ -47,11 +46,10 @@ def plotting(plotting_value):
     elif plotting_value == "scale2_data":
         title = _('scale2')
         label = _('gr')
-#---------------------------------------------------------------------------------------------------------------- Aufteilung in drei Plots
+# Aufteilung in drei Plots
     for plot in ['daily' , 'weekly', 'monthly', 'hourly']:
         pi_ager_logging.logger_pi_ager_plotting.debug('in for schleife daily, weekly, monthly, hourly')
-        # if pi_ager_debug.debugging == 'on':
-            # print ("DEBUG: in for schleife daily, weekly, monthly, hourly")
+
         if plot == 'weekly':
             period = 'w'
         elif plot == 'daily':
@@ -60,7 +58,7 @@ def plotting(plotting_value):
             period = 'm'
         elif plot == 'hourly':
             period = 'h'
-#---------------------------------------------------------------------------------------------------------------- Grafiken erzeugen
+# Grafiken erzeugen
         ret = rrdtool.graph("%s%s_%s-%s.png" %(pi_ager_paths.get_path_graphs_website(),pi_ager_init.rrd_dbname,plotting_value,plot),
             "--start",
             "-1%s" % (period),
@@ -77,3 +75,4 @@ def plotting(plotting_value):
             "GPRINT:%s:AVERAGE:%s\: %%3.2lf" % (_('durchhum'), _('Luftfeuchtigkeit')), 
             "LINE1:%s#0000FF:%s_%s" % (plotting_value, pi_ager_init.rrd_dbname, plotting_value))
 
+    pi_ager_logging.logger_pi_ager_plotting.debug('End plotting-function')

@@ -185,6 +185,7 @@
                                             $index_row = 0;
                                             $agingtable_rows = get_agingtable_dataset($desired_maturity);
                                             $current_period = get_table_value($current_values_table, $agingtable_period_key);
+                                            $current_period_0 = $current_period - 1;
                                             try {
                                                 $number_rows = count($agingtable_rows);
                                                 while ($index_row < $number_rows) {
@@ -214,7 +215,7 @@
                                                     if (!empty($dataset[$agingtable_days_field])){
                                                         $data_days = $dataset[$agingtable_days_field];
                                                     } else {$data_days = '..';}
-                                                    $current_period_0 = $current_period - 1;
+
                                                     if ($current_period_0 == $index_row){
                                                         echo '<tr bgcolor=#D19600 >';
                                                     }

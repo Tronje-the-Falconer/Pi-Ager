@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import sqlite3
 import time
 import pi_ager_debug
@@ -19,17 +20,16 @@ def open_database():
     connection = sqlite3.connect(pi_ager_paths.sqlite3_file)
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
-    
+
 def execute_query(command):
     global cursor
     global connection
     cursor.execute(command)
     connection.commit()
-    
+
 def close_database():
     global connection
     connection.close()
-    
 
 def get_table_value(table, key):
     global cursor
@@ -38,14 +38,10 @@ def get_table_value(table, key):
         sql='SELECT ' + pi_ager_names.value_field + ' FROM ' + table + ' o WHERE o.id = (SELECT MAX(i.id) from ' + table + ')'
     else:
         sql='SELECT ' + pi_ager_names.value_field + ' FROM ' + table + ' o WHERE o.key = "' + key + '" AND o.id = (SELECT MAX(i.id) from ' + table + ' i WHERE i.key = "' + key + '")'
-    # pi_ager_logging.logger_pi_ager_database.debug(sql)
     open_database()
     execute_query(sql)
     row = cursor.fetchone()
     close_database()
-    #logstring = 'get table value Key: ' + key + ' gelesener Wert: ' + str(row[pi_ager_names.value_field])
-    #pi_ager_logging.logger_pi_ager_database.debug(logstring)
-    #pi_ager_logging.logger_pi_ager_database.debug('Keys in result: ' + str(row.keys()))
     value = row[pi_ager_names.value_field]
     return value
 
@@ -66,42 +62,30 @@ def write_current_value(key, value):
 def get_scale_table_row(table):
     global cursor
     sql='SELECT ' + pi_ager_names.value_field + ', ' + pi_ager_names.last_change_field + ' FROM ' + table + ' WHERE id = (SELECT MAX(id) from ' + table + ')'
-    #pi_ager_logging.logger_pi_ager_database.debug(sql)
     open_database()
     execute_query(sql)
     row = cursor.fetchone()        
     close_database()
-    
-    #if row != None:
-        #pi_ager_logging.logger_pi_ager_database.debug(str(row[0]))
-        #pi_ager_logging.logger_pi_ager_database.debug(str(row.keys()))
-    #else:
-        #pi_ager_logging.logger_pi_ager_database.debug('row is None')
     return row
-    
+
 def get_agingtable_as_rows(agingtable):
     global cursor
-    # agingtablename = read_agingtable_name_from_config()
     sql='SELECT * from agingtable_' + agingtable
     
     open_database()
     execute_query(sql)
     rows = cursor.fetchall()
-    
-    # pi_ager_logging.logger_pi_ager_database.debug(sql)
-        
     close_database()
     return rows
 
 def get_scale_settings_from_table(scale_settings_table):
-
     global cursor
 
     open_database()
     sql = 'SELECT * FROM ' + scale_settings_table
     execute_query(sql)
     rows = cursor.fetchall()
-    
+
     close_database()
     return rows
 
@@ -112,14 +96,6 @@ def read_config():
     rows = cursor.fetchall()
     close_database()
     return rows
-
-# def read_scales():
-    # global cursor
-    # open_database()
-    # execute_query('SELECT * FROM current WHERE ' + pi_ager_names.key_field + ' = "scale1" OR "key" = "scale2"')
-    # rows = cursor.fetchall()
-    # close_database()
-    # return rows
 
 def get_logging_value(destination):
     open_database()
@@ -166,9 +142,6 @@ def write_current(loopnumber, sensor_temperature, status_heater, status_exhaust_
 
     open_database()
     if loopnumber % 150 == 0:
-        #pi_ager_logging.logger_pi_ager_database.debug('in write_current')
-        #pi_ager_logging.logger_pi_ager_database.debug('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
-
         execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
         execute_query('INSERT INTO ' + pi_ager_names.status_heater_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_heater) + ',' + str(get_current_time()) + ')')
         execute_query('INSERT INTO ' + pi_ager_names.status_exhaust_air_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_exhaust_air) + ',' + str(get_current_time()) + ')')
@@ -189,24 +162,17 @@ def write_current(loopnumber, sensor_temperature, status_heater, status_exhaust_
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_light) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_light_key + '"')
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_humidifier) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_humidifier_key + '"')
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_dehumidifier) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_dehumidifier_key + '"')
-    #pi_ager_logging.logger_pi_ager_database.debug('Ende write_current')
-
-
     close_database()
 
 def write_scale(scale_table,value_scale):
-
     if scale_table == pi_ager_names.data_scale1_table:
         scale_key = pi_ager_names.scale1_key
     elif scale_table == pi_ager_names.data_scale2_table:
         scale_key = pi_ager_names.scale2_key
-    
     open_database()
 
     execute_query('INSERT INTO ' + scale_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES (' + str(value_scale) + ',' + str(get_current_time()) + ')')
-    
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(value_scale) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + scale_key + '"')
-    
     close_database()
 
 def write_tables(agingtable):
@@ -215,7 +181,6 @@ def write_tables(agingtable):
     close_database()
 
 def write_settings(modus, setpoint_temperature, setpoint_humidity, circulation_air_period, circulation_air_duration, exhaust_air_period, exhaust_air_duration):
-
     open_database()
 
     execute_query('UPDATE ' + pi_ager_names.config_settings_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(modus) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' ="modus"')

@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 global website_path
 global csv_path
 global graphs_website_path
@@ -6,7 +7,7 @@ global pi_ager_log_file
 global sqlite3_file
 
 
-def set_paths():    
+def set_paths():
     global website_path
     global csv_path
     global graphs_website_path
