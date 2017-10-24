@@ -13,6 +13,7 @@
     11 Datenbank/-schema per Button erzeugen
     12 Datnebank auf vollständigkeit überprüfen, warnung ausgeben wenn Dinge fehlen und ergänzen
     13 Code aufräumen
+    14 Logfile erzeugen wenn nicht vorhanden
 
 2) Python
     01 Stromausfall
@@ -24,4 +25,4 @@
     07 Kommentare entfernen
     08 logeinträge kategorisieren (debug, info, warning, error, critical)
     09 Code aufräumen (nur funktionen in importierten py's, um doppelte ausführungen zu vermeiden)
-    
+    10 Logfile erzeugen wenn nicht vorhanden
