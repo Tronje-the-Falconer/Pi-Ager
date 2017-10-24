@@ -184,6 +184,7 @@
                                             // Gewählte Agingtable aus DB auslesen und als Tabelle beschreiben
                                             $index_row = 0;
                                             $agingtable_rows = get_agingtable_dataset($desired_maturity);
+                                            $current_period = get_table_value($current_values_table, $agingtable_period_key);
                                             try {
                                                 $number_rows = count($agingtable_rows);
                                                 while ($index_row < $number_rows) {
@@ -213,7 +214,12 @@
                                                     if (!empty($dataset[$agingtable_days_field])){
                                                         $data_days = $dataset[$agingtable_days_field];
                                                     } else {$data_days = '..';}
-                                                    echo '<tr>';
+                                                    if ($current_period == $index_row){
+                                                        echo '<tr bgcolor=#D19600 >';
+                                                    }
+                                                    else{
+                                                        echo '<tr>';
+                                                    }
                                                         echo '<td>'. $data_modus .'</td>';
                                                         echo '<td>'. $data_setpoint_humidity .'</td>';
                                                         echo '<td>'. $data_setpoint_temperature .'</td>';

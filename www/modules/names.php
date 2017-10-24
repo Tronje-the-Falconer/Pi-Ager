@@ -67,6 +67,8 @@ $status_scale1_tara_key = 'status_tara_scale1';
 $status_scale2_tara_key = 'status_tara_scale2';
 $loglevel_file_key = 'loglevel_file';
 $loglevel_console_key = 'loglevel_console';
+$agingtable_period_key = 'agingtable_period';
+$agintable_period_starttime_key = 'agintable_period_starttime';
 
 #-----------------------------table fields;
 $key_field = 'key';
