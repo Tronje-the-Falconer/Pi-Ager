@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 import sys
-import RPi.GPIO as GPIO
 import scale_loop
 import pi_ager_logging
 
@@ -27,5 +26,3 @@ try:
 except (KeyboardInterrupt, SystemExit):
     GPIO.cleanup()
     sys.exit()
-
-        
