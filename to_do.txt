@@ -1,20 +1,27 @@
 1) Website
-    1 Upload CSV und eintragen als agingtable_[CSV-Filename] in Datenbank ACHTUNG richtige Reihenfolge in Tabelle schreiben!
-    2 editieren und löschen der agingtables
-    3 Wägezellen Calibrate Wizzard (dauerhafte wertmessung die man sieht, definiertes Gewicht anhängen)
-    3 Alarm
-    4 Temperatur Statistiken und aktuelle werte
-    5 reifetabelle zeile einfärben welche phase gerade aktiv
-    6 php logging nutzen
-    7 translation aktivieren
-    8 Update über Website ermöglichen
-    9 Displayupdate über Website
+    01 Upload CSV und eintragen als agingtable_[CSV-Filename] in Datenbank ACHTUNG richtige Reihenfolge in Tabelle schreiben!
+    02 editieren und löschen der agingtables
+    03 Wägezellen Calibrate Wizzard (dauerhafte wertmessung die man sieht, definiertes Gewicht anhängen)
+    03 Alarm
+    04 Temperatur Statistiken und aktuelle werte
+####05 reifetabelle zeile einfärben welche phase gerade aktiv
+    06 php logging nutzen
+    07 translation aktivieren
+    08 Update über Website ermöglichen
+    09 Displayupdate über Website
+    10 Kommentare entfernen
+    11 Datenbank/-schema per Button erzeugen
+    12 Datnebank auf vollständigkeit überprüfen, warnung ausgeben wenn Dinge fehlen und ergänzen
+    13 Code aufräumen
 
 2) Python
-    1 Stromausfall
-    2 Display
-    3 4 Temperaturfühler mit AD Wandler (Statistiken und aktuelle werte)
-    4 Alarm
-    5 logrotate für pi-ager-logfile prüfen; Datei und consolenaufteilung verbessern
-    6 translation aktivieren
-        
+    01 Stromausfall
+    02 Display
+    03 4 Temperaturfühler mit AD Wandler (Statistiken und aktuelle werte)
+    04 Alarm
+    05 logrotate für pi-ager-logfile prüfen; Datei und consolenaufteilung verbessern
+    06 translation aktivieren
+    07 Kommentare entfernen
+    08 logeinträge kategorisieren (debug, info, warning, error, critical)
+    09 Code aufräumen (nur funktionen in importierten py's, um doppelte ausführungen zu vermeiden)
+    
