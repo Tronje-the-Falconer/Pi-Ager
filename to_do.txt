@@ -22,7 +22,7 @@
     04 Alarm
     05 logrotate für pi-ager-logfile prüfen; Datei und consolenaufteilung verbessern
     06 translation aktivieren
-    07 Kommentare entfernen
+####07 Kommentare entfernen
     08 logeinträge kategorisieren (debug, info, warning, error, critical)
     09 Code aufräumen (nur funktionen in importierten py's, um doppelte ausführungen zu vermeiden)
     10 Logfile erzeugen wenn nicht vorhanden
