@@ -167,10 +167,14 @@ try:
     # translation.install()
     pi_ager_init.set_language()
     #---------------------------------------------------------------------------------- Variablen
-    if pi_ager_debug.debugging == 'on':
-        day_in_seconds = 1  #zum testen ein Tag vergeht in einer Sekunde
+    if pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.loglevel_console_key) == 10:
+        day_in_seconds = pi_ager_database.get_table_value(pi_ager_names.debug_table, agingtable_days_in_seconds_debug_key)
     else:
         day_in_seconds = 86400  #Anzahl der Sek. in einem Tag
+    # if pi_ager_debug.debugging == 'on':
+        # day_in_seconds = 1  #zum testen ein Tag vergeht in einer Sekunde
+    # else:
+        # day_in_seconds = 86400  #Anzahl der Sek. in einem Tag
         
 
     ######################################################### Hauptprogramm

@@ -21,6 +21,7 @@ data_sensor_temperature_meat1_table = 'sensor_temperature_meat1_data'
 data_sensor_temperature_meat2_table = 'sensor_temperature_meat2_data'
 data_sensor_temperature_meat3_table = 'sensor_temperature_meat3_data'
 data_sensor_temperature_meat4_table = 'sensor_temperature_meat4_data'
+debug_table = 'debug'
 
 # table keys
 switch_on_cooling_compressor_key = 'switch_on_cooling_compressor'
@@ -82,6 +83,8 @@ loglevel_file_key = 'loglevel_file'
 loglevel_console_key = 'loglevel_console'
 agingtable_period_key = 'agingtable_period'
 agingtable_period_starttime_key = 'agingtable_period_starttime'
+measuring_interval_debug_key = 'measuring_interval_debug'
+agingtable_days_in_seconds_debug_key = 'agingtable_days_in_seconds_debug'
 
 # table fields
 key_field = 'key'
