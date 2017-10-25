@@ -4,6 +4,7 @@ from logging.handlers import RotatingFileHandler
 import pi_ager_names
 import pi_ager_paths
 import pi_ager_database
+import sys
 
 def get_logginglevel(loglevelstring):
     if loglevelstring == 10:
@@ -23,36 +24,29 @@ def create_logger(pythonfile):
     loglevel_file_value = pi_ager_database.get_logging_value('loglevel_file')
     loglevel_console_value = pi_ager_database.get_logging_value('loglevel_console')
 
-    # Logger fuer logfile auf website
-    logging.basicConfig(level=logging.DEBUG)
-                        #format='%(asctime)s -8s %(message)s',
-                        #datefmt='%m-%d %H:%M',
-                        #filename=pi_ager_paths.logfile_txt_file,
-                        #filemode='a')
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
 
     #Logger fuer website
     website_log = logging.FileHandler(pi_ager_paths.logfile_txt_file, mode='a', encoding=None, delay=False)
-    # website_log = RotatingFileHandler(pi_ager_paths.logfile_txt_file, mode='a', maxBytes=5242880, backupCount=4, encoding=None, delay=False)
     website_log.setLevel(logging.INFO)
     website_log_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M')
     website_log.setFormatter(website_log_formatter)
-    logging.getLogger('').addHandler(website_log)
-    # Logger fuer die Console
-    console = logging.StreamHandler()
-    console.setLevel(get_logginglevel(loglevel_console_value))
-    # set a format which is simpler for console use
-    console_formatter = logging.Formatter(' %(levelname)-10s: %(name)-8s %(message)s')
-    # tell the handler to use this format
-    console.setFormatter(console_formatter)
-    # add the handler to the root logger
-    logging.getLogger('').addHandler(console)
+    logger.addHandler(website_log)
 
     #Logger fuer pi-ager debugging
     pi_ager_logger = RotatingFileHandler(pi_ager_paths.pi_ager_log_file, mode='a', maxBytes=5242880, backupCount=4, encoding=None, delay=False)
     pi_ager_logger.setLevel(get_logginglevel(loglevel_file_value))
     pi_ager_logger_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M')
     pi_ager_logger.setFormatter(pi_ager_logger_formatter)
-    logging.getLogger('').addHandler(pi_ager_logger)
+    logger.addHandler(pi_ager_logger)
+
+    # Logger fuer die Console
+    console = logging.StreamHandler()
+    console.setLevel(get_logginglevel(loglevel_console_value))
+    console_formatter = logging.Formatter(' %(levelname)-10s: %(name)-8s %(message)s')
+    console.setFormatter(console_formatter)
+    logger.addHandler(console)
 
     # Verschiedene Logger um Einzelebenen zu erkennen
     if pythonfile == 'main.py':
