@@ -4,7 +4,6 @@ from logging.handlers import RotatingFileHandler
 import pi_ager_names
 import pi_ager_paths
 import pi_ager_database
-import sys
 
 def get_logginglevel(loglevelstring):
     if loglevelstring == 10:
