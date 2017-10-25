@@ -60,7 +60,7 @@ def doScaleLoop():
                     last_measure_scale1 = pi_ager_database.get_scale_table_row(scale1_table)[pi_ager_names.last_change_field]
                     time_difference_scale1 = pi_ager_database.get_current_time() - last_measure_scale1
                 else:
-                    time_difference_scale1 = 0
+                    time_difference_scale1 = measuring_interval_scale1 + 1
                 if time_difference_scale1 >= measuring_interval_scale1:
                     scale_measures(scale1, status_tara_scale1, status_scale1, measuring_interval_scale1, time_difference_scale1)
 
@@ -70,7 +70,7 @@ def doScaleLoop():
                     last_measure_scale2 = pi_ager_database.get_scale_table_row(scale2_table)[pi_ager_names.last_change_field]
                     time_difference_scale2 = pi_ager_database.get_current_time() - last_measure_scale2
                 else:
-                    time_difference_scale2 = 0
+                    time_difference_scale2 = measuring_interval_scale2 + 1
                 if time_difference_scale2 >= measuring_interval_scale2:
                     scale_measures(scale2, status_tara_scale2, status_scale2, measuring_interval_scale2, time_difference_scale2)
 
