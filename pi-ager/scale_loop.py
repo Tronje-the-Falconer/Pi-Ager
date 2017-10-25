@@ -54,7 +54,7 @@ def doScaleLoop():
             logstring = 'Status Scale 2: ' + str(status_scale2) + ' Status Tara Scale 2: ' + str(status_tara_scale2)
             pi_ager_logging.logger_scale_loop.debug(logstring)
             
-            if pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.loglevel_console_key) == 10:
+            if pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.loglevel_console_key) == 10:
                 measuring_interval_scale1 = pi_ager_database.get_table_value(pi_ager_names.debug_table, measuring_interval_debug_key)
                 measuring_interval_scale2 = measuring_interval_scale1
             else:

@@ -99,7 +99,7 @@ def read_config():
 
 def get_logging_value(destination):
     open_database()
-    execute_query('SELECT ' + pi_ager_names.value_field + ' FROM ' + pi_ager_names.config_settings_table + ' WHERE ' + pi_ager_names.key_field + ' = "' + destination + '"')
+    execute_query('SELECT ' + pi_ager_names.value_field + ' FROM ' + pi_ager_names.debug_table + ' WHERE ' + pi_ager_names.key_field + ' = "' + destination + '"')
     row = cursor.fetchone()
     close_database()
     logging_value = row[pi_ager_names.value_field]
