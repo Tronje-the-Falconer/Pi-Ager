@@ -50,7 +50,7 @@ def get_sensordata():
         sensor_humidity_big = sensor_sht.humidity
         pi_ager_logging.logger_pi_ager_loop.debug('sensor_temperature_big: ' + str(sensor_temperature_big) + ' sensor_humidity_big: ' + str(sensor_humidity_big))
 
-        if sensor_humidity_big is not None and sensor_temperature_big is not None:
+    if sensor_humidity_big is not None and sensor_temperature_big is not None:
         pi_ager_logging.logger_pi_ager_loop.debug("in if sensor_humidity und sensor_temperature_big not None")
         sensor_temperature = round (sensor_temperature_big,2)
         sensor_humidity = round (sensor_humidity_big,2)
@@ -117,7 +117,7 @@ def doMainLoop():
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
             pi_ager_logging.logger_pi_ager_loop.debug('in While True')
             pi_ager_logging.logger_pi_ager_loop.debug(str(pi_ager_init.sensorname))
-            sensordata = get_sensordata
+            sensordata = get_sensordata()
             sensor_temperature = sensordata['sensor_temperature']
             sensor_humidity = sensordata['sensor_humidity']
             modus = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.modus_key)
@@ -410,7 +410,8 @@ def doMainLoop():
             else:
                 scale1_value = scale1_row[pi_ager_names.value_field]
                 scale1_last_change = scale1_row[pi_ager_names.last_change_field]
-                if timediff_scale1 < 120:
+                timediff_scale1 = pi_ager_database.get_current_time() - scale1_last_change
+                if timediff_scale1 < pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table,pi_ager_names.scale_measuring_interval_key):
                     scale1_data = scale1_value
                 else:
                     scale1_data = 0
@@ -421,7 +422,8 @@ def doMainLoop():
             else:
                 scale2_value = scale2_row[pi_ager_names.value_field]
                 scale2_last_change = scale2_row[pi_ager_names.last_change_field]
-                if timediff_scale2 < 120:
+                timediff_scale2 = pi_ager_database.get_current_time() - scale2_last_change
+                if timediff_scale2 < pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table,pi_ager_names.scale_measuring_interval_key):
                     scale2_data = scale2_value
                 else:
                     scale2_data = 0

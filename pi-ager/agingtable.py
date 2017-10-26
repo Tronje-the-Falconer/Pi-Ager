@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 import sys
-import agingtable_loop
 import pi_ager_logging
+pi_ager_logging.create_logger('agingtable.py')
+import agingtable_loop
 
 try:
-    pi_ager_logging.create_logger('agingtable.py')
     agingtable_loop.doAgingtableLoop()
 
 except (KeyboardInterrupt, SystemExit):
-    pi_ager_logging.logger_scale.critical('KeyboardInterrupt or System Exit')
+    pi_ager_logging.logger_agingtable.critical('KeyboardInterrupt or System Exit')
     sys.exit()

@@ -48,6 +48,7 @@
     {
         global $value_field,$id_field;
         
+        $value = NULL;
         open_connection();
 		if ($key == NULL){
             $sql = 'SELECT ' . $value_field . ' FROM ' . $table . ' WHERE ' . $id_field . ' = (SELECT MAX(' . $id_field . ') from ' . $table . ')';

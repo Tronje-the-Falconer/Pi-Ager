@@ -13,6 +13,8 @@ def scale_measures(scale, status_tara_scale, status_scale):
     value = scale.getMeasure()
     formated_value = round(value, 3)
     pi_ager_database.write_scale(pi_ager_names.data_scale1_table,value)
+    logstring = ('In scale_measures: Messung ' + str(formated_value) + ' gr.')
+    pi_ager_logging.logger_scale_loop.debug(logstring)
 
 def get_scale_settings(scale_setting_rows):
     scale_settings = {}

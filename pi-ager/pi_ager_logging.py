@@ -47,6 +47,9 @@ def create_logger(pythonfile):
     console.setFormatter(console_formatter)
     logger.addHandler(console)
 
+    global logger_pi_ager_logging
+    logger_pi_ager_logging = logging.getLogger('pi_ager_logging.py')
+
     # Verschiedene Logger um Einzelebenen zu erkennen
     if pythonfile == 'main.py':
         global logger_main
@@ -68,7 +71,8 @@ def create_logger(pythonfile):
         logger_pi_ager_organisation = logging.getLogger('pi_ager_organisation.py')
         logger_pi_ager_paths = logging.getLogger('pi_ager_paths.py')
         logger_pi_ager_plotting = logging.getLogger('pi_ager_plotting.py')
-
+        logger_pi_ager_logging.debug('logging für main initialisiert')
+        
     elif pythonfile == 'scale.py':
         global logger_scale
         global logger_scale_loop
@@ -77,12 +81,19 @@ def create_logger(pythonfile):
         logger_scale = logging.getLogger('scale.py')
         logger_scale_loop = logging.getLogger('scale_loop.py')
         logger_hx711 = logging.getLogger('hx711.py')
+        logger_pi_ager_logging.debug('logging für scale initialisiert')
+        
     elif pythonfile == 'agingtable.py':
         global logger_agingtable
+        global logger_agingtable_loop
+        global logger_pi_ager_init
+        global logger_pi_ager_database
 
         logger_agingtable = logging.getLogger('agingtable.py')
-
-    global logger_pi_ager_logging
-    logger_pi_ager_logging = logging.getLogger('pi_ager_logging.py')
+        logger_agingtable_loop = logging.getLogger('agingtable_loop.py')
+        logger_pi_ager_init = logging.getLogger('pi_ager_init.py')
+        logger_pi_ager_database = logging.getLogger('pi_ager_database.py')
+        logger_pi_ager_logging.debug('logging für agingtable initialisiert')
+        
 
     logger_pi_ager_logging.debug('logging initialisiert')
