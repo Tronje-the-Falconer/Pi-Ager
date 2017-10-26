@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import pi_ager_init
 import pi_ager_paths
-import pi_ager_debug
 import rrdtool
 import pi_ager_logging
 

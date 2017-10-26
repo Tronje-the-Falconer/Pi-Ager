@@ -7,7 +7,6 @@ import time
 import rrdtool
 import pi_ager_logging
 pi_ager_logging.create_logger('main.py')
-import pi_ager_debug
 import pi_ager_loop
 import pi_ager_init
 import pi_ager_organization

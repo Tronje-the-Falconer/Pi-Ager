@@ -6,7 +6,6 @@ import Adafruit_DHT
 import RPi.GPIO as gpio
 import rrdtool
 from pi_sht1x import SHT1x
-import pi_ager_debug
 import pi_ager_database
 import pi_ager_names
 import pi_ager_init

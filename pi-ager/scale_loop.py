@@ -6,7 +6,6 @@ import pi_ager_names
 import pi_ager_logging
 
 def scale_measures(scale, status_tara_scale, status_scale):
-
     if status_tara_scale == 1:
         scale.reset()
         scale.tare()
@@ -55,7 +54,7 @@ def doScaleLoop():
             pi_ager_logging.logger_scale_loop.debug(logstring)
             
             if pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.loglevel_console_key) == 10:
-                measuring_interval_scale1 = pi_ager_database.get_table_value(pi_ager_names.debug_table, measuring_interval_debug_key)
+                measuring_interval_scale1 = pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.measuring_interval_debug_key)
                 measuring_interval_scale2 = measuring_interval_scale1
             else:
                 measuring_interval_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.scale_measuring_interval_key)

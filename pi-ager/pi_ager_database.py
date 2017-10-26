@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import sqlite3
 import time
-import pi_ager_debug
 import pi_ager_names
 import pi_ager_paths
 import pi_ager_logging
