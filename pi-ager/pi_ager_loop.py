@@ -33,6 +33,40 @@ def autostart_loop():
             doMainLoop()
         time.sleep(5)
 
+def get_sensordata():
+
+    if pi_ager_init.sensorname == 'DHT11' or pi_ager_init.sensorname == 'DHT22': #DHT11 oder DHT22
+        pi_ager_logging.logger_pi_ager_loop.debug('pi_ager_init.sensorname: ' + pi_ager_init.sensorname)
+        sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_init.gpio_sensor_data)
+        pi_ager_logging.logger_pi_ager_loop.debug("sensor_temperature: " + str(sensor_temperature_big))
+        pi_ager_logging.logger_pi_ager_loop.debug("sensor_humidity_big: " + str(sensor_humidity_big))
+        # atp = 17.271  ermittelt aus dem Datenblatt DHT11 und DHT22
+        # btp = 237.7   ermittelt aus dem Datenblatt DHT11 und DHT22
+    elif pi_ager_init.sensorname == 'SHT': #SHT
+        pi_ager_logging.logger_pi_ager_loop.debug('pi_ager_init.sensorname:' + pi_ager_init.sensorname)
+        sensor_sht = SHT1x(pi_ager_init.gpio_sensor_data, pi_ager_init.gpio_sensor_sync, gpio_mode=pi_ager_init.board_mode)
+        sensor_sht.read_temperature()
+        sensor_sht.read_humidity()
+        sensor_temperature_big = sensor_sht.temperature_celsius
+        sensor_humidity_big = sensor_sht.humidity
+        pi_ager_logging.logger_pi_ager_loop.debug('sensor_temperature_big: ' + str(sensor_temperature_big) + ' sensor_humidity_big: ' + str(sensor_humidity_big))
+
+        if sensor_humidity_big is not None and sensor_temperature_big is not None:
+        pi_ager_logging.logger_pi_ager_loop.debug("in if sensor_humidity und sensor_temperature_big not None")
+        sensor_temperature = round (sensor_temperature_big,2)
+        sensor_humidity = round (sensor_humidity_big,2)
+        pi_ager_logging.logger_pi_ager_loop.debug('sensor_temperature: ' + str(sensor_temperature) + ' sensor_humidity_big: ' + str(sensor_humidity))
+    else:
+        pi_ager_logging.logger_pi_ager_loop.debug("in else Sensordaten leer")
+        logstring = _('Failed to get reading. Try again!')
+        pi_ager_logging.logger_pi_ager_loop.warning(logstring)
+        
+    sensordata={}
+    sensordata['sensor_temperature'] = sensor_temperature
+    sensordata['sensor_humidity'] = sensor_humidity
+    
+    return sensordata
+
 # Function Mainloop
 def doMainLoop():
     global circulation_air_duration       #  Umluftdauer
@@ -84,37 +118,9 @@ def doMainLoop():
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
             pi_ager_logging.logger_pi_ager_loop.debug('in While True')
             pi_ager_logging.logger_pi_ager_loop.debug(str(pi_ager_init.sensorname))
-            if pi_ager_init.sensorname == 'DHT11': #DHT11
-                pi_ager_logging.logger_pi_ager_loop.debug('pi_ager_init.sensorname: ' + pi_ager_init.sensorname)
-                sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_init.gpio_sensor_data)
-                pi_ager_logging.logger_pi_ager_loop.debug("sensor_temperature: " + str(sensor_temperature_big))
-                pi_ager_logging.logger_pi_ager_loop.debug("sensor_humidity_big: " + str(sensor_humidity_big))
-                atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
-                btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
-            elif pi_ager_init.sensorname == 'DHT22': #DHT22
-                pi_ager_logging.logger_pi_ager_loop.debug('pi_ager_init.sensorname:' + pi_ager_init.sensorname)
-                sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_init.gpio_sensor_data)
-                pi_ager_logging.logger_pi_ager_loop.debug("sensor_temperature: " + str(sensor_temperature_big))
-                pi_ager_logging.logger_pi_ager_loop.debug("sensor_humidity_big: " + str(sensor_humidity_big))
-                atp = 17.271 # ermittelt aus dem Datenblatt DHT11 und DHT22
-                btp = 237.7  # ermittelt aus dem Datenblatt DHT11 und DHT22
-            elif pi_ager_init.sensorname == 'SHT': #SHT
-                pi_ager_logging.logger_pi_ager_loop.debug('pi_ager_init.sensorname:' + pi_ager_init.sensorname)
-                sensor_sht = SHT1x(pi_ager_init.gpio_sensor_data, pi_ager_init.gpio_sensor_sync, gpio_mode=pi_ager_init.board_mode)
-                sensor_sht.read_temperature()
-                sensor_sht.read_humidity()
-                sensor_temperature_big = sensor_sht.temperature_celsius
-                sensor_humidity_big = sensor_sht.humidity
-                pi_ager_logging.logger_pi_ager_loop.debug('sensor_temperature_big: ' + str(sensor_temperature_big) + ' sensor_humidity_big: ' + str(sensor_humidity_big))
-            if sensor_humidity_big is not None and sensor_temperature_big is not None:
-                pi_ager_logging.logger_pi_ager_loop.debug("in if sensor_humidity und sensor_temperature_big not None")
-                sensor_temperature = round (sensor_temperature_big,2)
-                sensor_humidity = round (sensor_humidity_big,2)
-                pi_ager_logging.logger_pi_ager_loop.debug('sensor_temperature: ' + str(sensor_temperature) + ' sensor_humidity_big: ' + str(sensor_humidity))
-            else:
-                pi_ager_logging.logger_pi_ager_loop.debug("in else Sensordaten leer")
-                logstring = _('Failed to get reading. Try again!')
-                pi_ager_logging.logger_pi_ager_loop.warning(logstring)
+            sensordata = get_sensordata
+            sensor_temperature = sensordata['sensor_temperature']
+            sensor_humidity = sensordata['sensor_humidity']
             modus = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.modus_key)
             setpoint_temperature = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key))
             setpoint_humidity = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key))
