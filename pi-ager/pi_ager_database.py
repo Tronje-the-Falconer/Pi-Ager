@@ -169,7 +169,6 @@ def write_scale(scale_table,value_scale):
     elif scale_table == pi_ager_names.data_scale2_table:
         scale_key = pi_ager_names.scale2_key
     open_database()
-
     execute_query('INSERT INTO ' + scale_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES (' + str(value_scale) + ',' + str(get_current_time()) + ')')
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(value_scale) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + scale_key + '"')
     close_database()
