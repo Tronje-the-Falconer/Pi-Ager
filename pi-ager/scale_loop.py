@@ -5,21 +5,21 @@ import pi_ager_database
 import pi_ager_names
 import pi_ager_logging
 
-def scale_measures(scale, tara_key, status_tara_scale, status_scale, scale_measuring_endtime, data_table):
-    print (str(scale))
-    print (str(tara_key))
-    print (status_tara_scale)
-    print (scale_measuring_endtime)
-    print (data_table)
-    if status_tara_scale == 1:
-        scale.reset()
-        scale.tare()
-        pi_ager_database.write_stop_in_database(tara_key)
+def tara_scale(scale, tara_key):
+    pi_ager_logging.logger_scale_loop.debug('tara')
+    scale.reset()
+    scale.tare()
+    pi_ager_database.write_stop_in_database(tara_key)
+
+def scale_measures(scale, scale_measuring_endtime, data_table):
+
     current_time = pi_ager_database.get_current_time()
-    while current_time <= scale_measuring_endtime:
+    while current_time <= int(scale_measuring_endtime):
+        pi_ager_logging.logger_scale_loop.debug('measuring')
         value = scale.getMeasure()
         formated_value = round(value, 3)
         pi_ager_database.write_scale(data_table,value)
+        current_time = pi_ager_database.get_current_time()
     
 
 def get_scale_settings(scale_setting_rows):
@@ -72,6 +72,13 @@ def doScaleLoop():
                 measuring_interval_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.scale_measuring_interval_key)
                 measuring_interval_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.scale_measuring_interval_key)
 
+            if status_tara_scale1 == 1:
+                tara_scale(scale1, pi_ager_names.status_tara_scale1_key)
+            
+            if status_tara_scale2 == 1:
+                tara_scale(scale2, pi_ager_names.status_tara_scale2_key)
+                
+            
             if status_scale1 == 1:
                 if pi_ager_database.get_scale_table_row(scale1_table) != None:
                     last_measure_scale1 = pi_ager_database.get_scale_table_row(scale1_table)[pi_ager_names.last_change_field]
@@ -80,7 +87,7 @@ def doScaleLoop():
                     time_difference_scale1 = measuring_interval_scale1 + 1
                 if time_difference_scale1 >= measuring_interval_scale1:
                     scale1_measuring_endtime =  pi_ager_database.get_current_time() + scale1_measuring_duration
-                    scale_measures(scale1, pi_ager_names.status_tara_scale1_key, status_tara_scale1, status_scale1, scale1_measuring_endtime, pi_ager_names.data_scale1_table)
+                    scale_measures(scale1, scale1_measuring_endtime, pi_ager_names.data_scale1_table)
 
             if status_scale2 == 1:
                 if pi_ager_database.get_scale_table_row(scale2_table) != None:
@@ -90,7 +97,7 @@ def doScaleLoop():
                     time_difference_scale2 = measuring_interval_scale2 + 1
                 if time_difference_scale2 >= measuring_interval_scale2:
                     scale2_measuring_endtime = pi_ager_database.get_current_time() + scale2_measuring_duration
-                    scale_measures(scale2, pi_ager_names.status_tara_scale2_key, status_tara_scale2, status_scale2, scale2_measuring_endtime, pi_ager_names.data_scale2_table)
+                    scale_measures(scale2, scale2_measuring_endtime, pi_ager_names.data_scale2_table)
 
             time.sleep(2)
 
