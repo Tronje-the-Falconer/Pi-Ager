@@ -44,6 +44,20 @@ def get_table_value(table, key):
     value = row[pi_ager_names.value_field]
     return value
 
+def get_last_change(table, key):
+    global cursor
+
+    if key == None:
+        return None
+    else:
+        sql='SELECT ' + pi_ager_names.last_change_field + ' FROM ' + table + ' o WHERE o.key = "' + key + '" AND o.id = (SELECT MAX(i.id) from ' + table + ' i WHERE i.key = "' + key + '")'
+    open_database()
+    execute_query(sql)
+    row = cursor.fetchone()
+    close_database()
+    last_change = row[pi_ager_names.last_change_field]
+    return last_change
+
 def write_current_value(key, value):
     global cursor
 

@@ -29,14 +29,14 @@ def create_logger(pythonfile):
     #Logger fuer website
     website_log = logging.FileHandler(pi_ager_paths.logfile_txt_file, mode='a', encoding=None, delay=False)
     website_log.setLevel(logging.INFO)
-    website_log_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M')
+    website_log_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M:%S')
     website_log.setFormatter(website_log_formatter)
     logger.addHandler(website_log)
 
     #Logger fuer pi-ager debugging
     pi_ager_logger = RotatingFileHandler(pi_ager_paths.pi_ager_log_file, mode='a', maxBytes=5242880, backupCount=4, encoding=None, delay=False)
     pi_ager_logger.setLevel(get_logginglevel(loglevel_file_value))
-    pi_ager_logger_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M')
+    pi_ager_logger_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M:%S')
     pi_ager_logger.setFormatter(pi_ager_logger_formatter)
     logger.addHandler(pi_ager_logger)
 
