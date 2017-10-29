@@ -13,14 +13,18 @@ def tara_scale(scale, tara_key):
 
 def scale_measures(scale, scale_measuring_endtime, data_table):
 
-    current_time = pi_ager_database.get_current_time()
+    measure_start_time = pi_ager_database.get_current_time()
+    save_time = 0
+    current_time = measure_start_time
     while current_time <= int(scale_measuring_endtime):
-        pi_ager_logging.logger_scale_loop.debug('measuring')
         value = scale.getMeasure()
         formated_value = round(value, 3)
-        pi_ager_database.write_scale(data_table,value)
+        if (current_time - measure_start_time) % 5 == 0 and current_time != save_time:       # alle 5 Sekunden wird einmal gespeichert
+            save_time = current_time
+            pi_ager_database.write_scale(data_table,value)
+            pi_ager_logging.logger_scale_loop.debug(str(current_time) + ' saved in DB')
+        pi_ager_logging.logger_scale_loop.debug('In scale_measures loop...' + str(current_time - measure_start_time))
         current_time = pi_ager_database.get_current_time()
-    
 
 def get_scale_settings(scale_setting_rows):
     scale_settings = {}
