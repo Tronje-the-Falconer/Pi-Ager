@@ -34,7 +34,7 @@ def create_logger(pythonfile):
     logger.addHandler(website_log)
 
     #Logger fuer pi-ager debugging
-    pi_ager_logger = RotatingFileHandler(pi_ager_paths.pi_ager_log_file, mode='a', maxBytes=5242880, backupCount=4, encoding=None, delay=False)
+    pi_ager_logger = RotatingFileHandler(pi_ager_paths.pi_ager_log_file, mode='a', maxBytes=2097152, backupCount=20, encoding=None, delay=False)
     pi_ager_logger.setLevel(get_logginglevel(loglevel_file_value))
     pi_ager_logger_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M:%S')
     pi_ager_logger.setFormatter(pi_ager_logger_formatter)
