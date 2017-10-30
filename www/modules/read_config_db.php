@@ -76,8 +76,8 @@
     else {
         $checked_uv_2 = '';
     }
-    if ($uv_modus == 3) {
-        $checked_uv_3 = 'checked="checked"';
+    if ($uv_modus == 0) {
+        $checked_uv_0 = 'checked="checked"';
     }
     else {
         $checked_uv_3 = '';
@@ -94,8 +94,8 @@
     else {
         $checked_light_2 = '';
     }
-    if ($light_modus == 3) {
-        $checked_light_3 = 'checked="checked"';
+    if ($light_modus == 0) {
+        $checked_light_0 = 'checked="checked"';
     }
     else {
         $checked_light_3 = '';

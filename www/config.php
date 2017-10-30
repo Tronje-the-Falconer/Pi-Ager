@@ -167,7 +167,7 @@
                                                     <td class="text_left_padding">
                                                         <input type="radio" name="uv_modus_config" value="1" <?php echo $checked_uv_1; ?>/><label> <?php echo _('duration & period'); ?></label><br>
                                                         <input type="radio" name="uv_modus_config" value="2" <?php echo $checked_uv_2; ?>/><label> <?php echo _('duration & timestamp'); ?></label><br>
-                                                        <input type="radio" name="uv_modus_config" value="0" <?php echo $checked_uv_3; ?>/><label> <?php echo _('off'); ?></label><br>
+                                                        <input type="radio" name="uv_modus_config" value="0" <?php echo $checked_uv_0; ?>/><label> <?php echo _('off'); ?></label><br>
                                                         <br>
                                                     </td>
                                                     <td></td>
@@ -207,7 +207,7 @@
                                                     <td class="text_left_padding">
                                                         <input type="radio" name="light_modus_config" value="1" <?php echo $checked_light_1; ?>/><label> <?php echo _('duration & period'); ?></label><br>
                                                         <input type="radio" name="light_modus_config" value="2" <?php echo $checked_light_2; ?>/><label> <?php echo _('duration & timestamp'); ?></label><br>
-                                                        <input type="radio" name="light_modus_config" value="0" <?php echo $checked_light_3; ?>/><label> <?php echo _('off'); ?></label><br>
+                                                        <input type="radio" name="light_modus_config" value="0" <?php echo $checked_light_0; ?>/><label> <?php echo _('off'); ?></label><br>
                                                         <br>
                                                     </td>
                                                     <td></td>
