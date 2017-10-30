@@ -5,11 +5,14 @@ import pi_ager_database
 import pi_ager_names
 import pi_ager_logging
 
-def tara_scale(scale, tara_key):
+def tara_scale(scale, tara_key, data_table):
     pi_ager_logging.logger_scale_loop.debug('tara')
     scale.reset()
     scale.tare()
     pi_ager_database.write_stop_in_database(tara_key)
+    
+    tara_measuring_endtime = scale_measuring_endtime + 1
+    scale_measures(scale, tara_measuring_endtime, data_table, 1)
 
 def scale_measures(scale, scale_measuring_endtime, data_table, saving_period):
 
@@ -79,10 +82,10 @@ def doScaleLoop():
                 measuring_interval_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.scale_measuring_interval_key)
 
             if status_tara_scale1 == 1:
-                tara_scale(scale1, pi_ager_names.status_tara_scale1_key)
+                tara_scale(scale1, pi_ager_names.status_tara_scale1_key, pi_ager_names.data_scale1_table)
             
             if status_tara_scale2 == 1:
-                tara_scale(scale2, pi_ager_names.status_tara_scale2_key)
+                tara_scale(scale2, pi_ager_names.status_tara_scale2_key, pi_ager_names.data_scale2_table)
                 
             
             if status_scale1 == 1:
