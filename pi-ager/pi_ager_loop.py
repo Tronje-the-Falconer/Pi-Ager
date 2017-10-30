@@ -209,6 +209,11 @@ def doMainLoop():
                 if current_time >= pi_ager_init.exhaust_air_start + exhaust_air_period + exhaust_air_duration:
                     pi_ager_init.exhaust_air_start = int(time.time())   # Timer-Timestamp aktualisiert
             # Timer fuer UV-Licht
+            if uv_modus == 0:                         # Modus 0 UV-Licht aus
+                status_uv = True                      # UV-Licht aus
+                logstring = _('uv-light off')
+                pi_ager_logging.logger_pi_ager_loop.info(logstring)
+            
             if uv_modus == 1:                            # Modus 1 = Periode/Dauer
                 if uv_period == 0:                      # gleich 0 ist an,  Dauer-Timer
                     status_uv = False
@@ -249,6 +254,11 @@ def doMainLoop():
                     pi_ager_logging.logger_pi_ager_loop.info(logstring)
 
             # Timer fuer Licht
+            if light_modus == 0:                         # Modus 0 Licht aus
+                status_light = True                      # Licht aus
+                logstring = _('light off')
+                pi_ager_logging.logger_pi_ager_loop.info(logstring)
+            
             if light_modus == 1:                            # Modus 1 = Periode/Dauer
                 if light_period == 0:                      # gleich 0 ist an,  Dauer-Timer
                     status_light = False
