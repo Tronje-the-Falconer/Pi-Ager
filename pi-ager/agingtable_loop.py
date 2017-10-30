@@ -53,8 +53,9 @@ def get_duration_sleep(period_days):
     return sleep_time
 
 def continue_after_power_failure(current_dictionary):
-    failure_temperature_delta = 3     # Maximaler Temperatur-Unterschied
-    failure_humidity_delta = 10     # Maximaler Feuchte-Unterschied
+    failure_temperature_delta = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.failure_temperature_delta_key)     # Maximaler Temperatur-Unterschied
+    failure_humidity_delta = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.failure_humidity_delta_key)     # Maximaler Feuchte-Unterschied
+    
     temperature_last_change = 0
     current_time = pi_ager_database.get_current_time()
     

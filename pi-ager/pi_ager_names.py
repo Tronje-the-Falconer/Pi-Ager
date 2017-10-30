@@ -87,6 +87,8 @@ measuring_interval_debug_key = 'measuring_interval_debug'
 agingtable_days_in_seconds_debug_key = 'agingtable_days_in_seconds_debug'
 measuring_duration_key = 'measuring_duration'
 saving_period_key = 'saving_period'
+failure_temperature_delta_key = 'failure_temperature_delta'
+failure_humidity_delta_key = 'failure_humidity_delta'
 
 # table fields
 key_field = 'key'
