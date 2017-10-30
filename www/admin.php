@@ -30,8 +30,8 @@
                                 <!----------------------------------------------------------------------------------------Database-->
                                 <div class="hg_container" >
                                     <?php
-                                        $loglevel_console = get_table_value($config_settings_table, $loglevel_console_key);
-                                        $loglevel_file = get_table_value($config_settings_table, $loglevel_file_key);
+                                        $loglevel_console = get_table_value($debug_table, $loglevel_console_key);
+                                        $loglevel_file = get_table_value($debug_table, $loglevel_file_key);
                                         
                                         if ($loglevel_console == 10){
                                             $loglevel_console_selected_10 = 'selected="selected"';

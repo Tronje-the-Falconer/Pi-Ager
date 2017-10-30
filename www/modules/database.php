@@ -229,11 +229,11 @@
     }
     
     function write_loglevel($chosen_loglevel_file, $chosen_loglevel_console){
-        global $value_field, $last_change_field, $key_field, $config_settings_table, $loglevel_console_key, $loglevel_file_key;
+        global $value_field, $last_change_field, $key_field, $config_settings_table, $loglevel_console_key, $loglevel_file_key, $debug_table;
         
         open_connection();
-        $sql = 'UPDATE ' . $debug_table . ' SET "' . $value_field . '" = "' . $chosen_loglevel_file . ' WHERE ' . $key_field . ' = "' . $loglevel_file_key . '";';
-        $sql = $sql . ' UPDATE ' . $debug_table . ' SET "' . $value_field . '" = "' . $chosen_loglevel_console . ' WHERE ' . $key_field . ' = "' . $loglevel_console_key . '";';
+        $sql = 'UPDATE ' . $debug_table . ' SET "' . $value_field . '" = ' . $chosen_loglevel_file . ' WHERE ' . $key_field . ' = "' . $loglevel_file_key . '";';
+        $sql = $sql . ' UPDATE ' . $debug_table . ' SET "' . $value_field . '" = ' . $chosen_loglevel_console . ' WHERE ' . $key_field . ' = "' . $loglevel_console_key . '";';
         execute_query($sql);
         
         close_database();
