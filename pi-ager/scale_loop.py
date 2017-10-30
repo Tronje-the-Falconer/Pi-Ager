@@ -11,7 +11,7 @@ def tara_scale(scale, tara_key, data_table):
     scale.tare()
     pi_ager_database.write_stop_in_database(tara_key)
     
-    tara_measuring_endtime = scale_measuring_endtime + 1
+    tara_measuring_endtime = pi_ager_database.get_current_time() + 1
     scale_measures(scale, tara_measuring_endtime, data_table, 1)
 
 def scale_measures(scale, scale_measuring_endtime, data_table, saving_period):
@@ -26,7 +26,7 @@ def scale_measures(scale, scale_measuring_endtime, data_table, saving_period):
             save_time = current_time
             pi_ager_database.write_scale(data_table,value)
             pi_ager_logging.logger_scale_loop.debug(str(current_time) + ' saved in DB')
-        pi_ager_logging.logger_scale_loop.debug('In scale_measures loop...' + str(current_time - measure_start_time))
+        pi_ager_logging.logger_scale_loop.debug('in scale_measures loop...' + str(current_time - measure_start_time))
         current_time = pi_ager_database.get_current_time()
 
 def get_scale_settings(scale_setting_rows):
