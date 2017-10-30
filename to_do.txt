@@ -13,16 +13,21 @@
     11 Datenbank/-schema per Button erzeugen
     12 Datenbank auf Vollständigkeit überprüfen. Warnung ausgeben, wenn Dinge fehlen und ergänzen
     13 Code aufräumen
-    14 Logfile erzeugen wenn nicht vorhanden
+    14 Logfile erzeugen, wenn nicht vorhanden
+    15 admin.php        unter debug fehlen: measuring_interval_debug, agingtable_days_in_seconds_debug
+    16 settings.php     scale-werte fehlen: measuring_interval, measuring_duration, saving_period, samples, spikes
+    17 settings.php     Agingtable-Werte fehlen: failure_humidity_delta, failure_temperature_delta
+    18 on the fly werte auslesen (phase der reifetabelle, status, temperatur, Feuchte, Waage1 und 2)
 
 2) Python
-    01 Stromausfall
+####01 Stromausfall
     02 Display
     03 4 Temperaturfühler mit AD Wandler (Statistiken und aktuelle Werte)
     04 Alarm
-####05 Logrotate für pi-ager-logfile prüfen; Datei- und Consolenaufteilung verbessern
+####05 Logrotate für pi-ager-logfile prüfen
     06 Translation aktivieren
 ####07 Kommentare entfernen
     08 Logeinträge kategorisieren (debug, info, warning, error, critical)
-    09 Code aufräumen (nur funktionen in importierten py's, um doppelte Ausführungen zu vermeiden)
+    09 Code aufräumen (nur Funktionen in importierten py's, um doppelte Ausführungen zu vermeiden)
     10 Logfile erzeugen, wenn nicht vorhanden
+    11 Logging: Datei- und Consolenaufteilung verbessern
