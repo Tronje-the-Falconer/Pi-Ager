@@ -86,6 +86,7 @@ agingtable_period_starttime_key = 'agingtable_period_starttime'
 measuring_interval_debug_key = 'measuring_interval_debug'
 agingtable_days_in_seconds_debug_key = 'agingtable_days_in_seconds_debug'
 measuring_duration_key = 'measuring_duration'
+saving_period_key = 'saving_period'
 
 # table fields
 key_field = 'key'
