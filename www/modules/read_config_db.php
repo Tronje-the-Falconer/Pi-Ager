@@ -80,7 +80,7 @@
         $checked_uv_0 = 'checked="checked"';
     }
     else {
-        $checked_uv_3 = '';
+        $checked_uv_0 = '';
     }
     if ($light_modus == 1) {
         $checked_light_1 = 'checked="checked"';
@@ -98,7 +98,7 @@
         $checked_light_0 = 'checked="checked"';
     }
     else {
-        $checked_light_3 = '';
+        $checked_light_0 = '';
     }
     if ($dehumidifier_modus == 1) {
         $checked_dehumidify_1 = 'checked="checked"';
