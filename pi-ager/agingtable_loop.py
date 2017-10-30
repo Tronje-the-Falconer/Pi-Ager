@@ -72,14 +72,14 @@ def continue_after_power_failure(current_dictionary):
     agingtable_humidity = current_dictionary[pi_ager_names.agingtable_setpoint_humidity_field]
     
     pi_ager_logging.logger_agingtable_loop.debug('continue_after_power_failure: ')
+        
+    pi_ager_logging.logger_agingtable_loop.debug('continue_after_power_failure: ')
     pi_ager_logging.logger_agingtable_loop.debug('current_temperature - agingtable_temperature: ' + str(abs(current_temperature - agingtable_temperature)))
     pi_ager_logging.logger_agingtable_loop.debug('current_humidity - agingtable_humidity: ' + str(abs(current_humidity - agingtable_humidity)))
-
     if abs(current_temperature - agingtable_temperature) > failure_temperature_delta or abs(current_humidity - agingtable_humidity) > failure_humidity_delta:
         return False
     else:
         return True
-    
 def read_dictionary_write_settings(period_dictionary):
     global period_endtime
     global period_starttime_seconds
