@@ -6,6 +6,7 @@
                                     
                                     include 'modules/system_reboot.php';                        // Startet das System neu
                                     include 'modules/system_shutdown.php';                      // Fährt das System herunter
+                                    include 'modules/start_stop_program.php';                   // 
                                     
                                     include 'modules/database_empty_statistic_tables.php';      // leert die Statistik-Tabellen (Status, data)
                                     include 'modules/write_loglevel_db.php';                    // schreibt das Loglevel in Datenbank
@@ -132,6 +133,24 @@
                                                 <td><button class="art-button" name="database_administration" onclick="window.location.href='/phpliteadmin.php'"><?php echo _('database administration'); ?></button></td>
                                             </tr>
                                         </table>
+                                </div>
+                                <h2 class="art-postheader"><?php echo _('python'); ?></h2>
+                                <!----------------------------------------------------------------------------------------Reboot/Shutdown-->
+                                <div class="hg_container">
+                                    <form  method="post" name="boot">
+                                        <table style="width: 100%;">
+                                            <tr>
+                                                <td><button class="art-button" name="admin_stop_main" value="admin_stop_main" onclick="return confirm('<?php echo _('ATTENTION: kill');?> main.py?');"><?php echo _('stop'); ?> main.py</button></td>
+                                                <td><button class="art-button" name="admin_start_main" value="admin_start_main" onclick="return confirm('<?php echo _('start');?> main.py?');"><?php echo _('start'); ?> main.py</button></td>
+                                            </tr></tr>
+                                                <td><button class="art-button" name="admin_stop_agingtable"  value="admin_stop_agingtable" onclick="return confirm('<?php echo _('ATTENTION:');?> kill agingtable.py?');"><?php echo _('stop'); ?> agingtable.py</button></td>
+                                                <td><button class="art-button" name="admin_start_agingtable"  value="admin_start_agingtable" onclick="return confirm('<?php echo _('start');?> agingtable.py?');"><?php echo _('start'); ?> agingtable.py</button></td>
+                                            </tr></tr>
+                                                <td><button class="art-button" name="admin_stop_scale"  value="admin_stop_scale" onclick="return confirm('<?php echo _('ATTENTION: kill');?> scale.py?');"><?php echo _('stop'); ?> scale.py</button></td>
+                                                <td><button class="art-button" name="admin_start_scale"  value="admin_start_scale" onclick="return confirm('<?php echo _('start');?> scale.py?');"><?php echo _('start'); ?> scale.py</button></td>
+                                            </tr>
+                                        </table>
+                                    </form>
                                 </div>
                                 <!----------------------------------------------------------------------------------------Content Ende-->
                             </div>

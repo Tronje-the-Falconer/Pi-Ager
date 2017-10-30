@@ -230,4 +230,95 @@
         fwrite($f,"\n". date('d.m.Y H:i')." "._('webcam stopped'));
         fclose($f);
      }
+     
+    if (isset($_POST['admin_start_main'])){
+        $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
+        if($grepmain == 0) {
+            shell_exec('sudo /var/sudowebscript.sh startmain');
+            sleep (1); # 1 Sec auf start der Py-Datei warten
+            $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
+            if($grepmain != 0) {
+                $f=fopen('logs/logfile.txt','w');
+                fwrite($f, "\n".date('d.m.Y H:i')." ADMIN main.py "._('manually started'));
+                fclose($f);
+            }
+            else{
+                $f=fopen('logs/logfile.txt','w');
+                fwrite($f, "\n".date('d.m.Y H:i')." ADMIN main.py "._('could not be started'));
+                fclose($f);
+            }
+        }
+        else{
+            $f=fopen('logs/logfile.txt','w');
+            fwrite($f, "\n".date('d.m.Y H:i')." ADMIN main.py "._('already running'));
+            fclose($f);
+        }
+    }
+    if (isset($_POST['admin_stop_main'])){
+        shell_exec('sudo /var/sudowebscript.sh pkillmain');
+        sleep (1); # 1 Sec auf start der Py-Datei warten
+        $f=fopen('logs/logfile.txt','w');
+        fwrite($f, "\n".date('d.m.Y H:i')." ADMIN main.py "._('killed'));
+        fclose($f);
+    }
+    if (isset($_POST['admin_start_agingtable'])){
+        $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
+        if($grepagingtable == 0) {
+            shell_exec('sudo /var/sudowebscript.sh startagingtable');
+            sleep (1); # 1 Sec auf start der Py-Datei warten
+            $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
+            if($grepagingtable != 0) {
+                $f=fopen('logs/logfile.txt','w');
+                fwrite($f, "\n".date('d.m.Y H:i')." ADMIN agingtable.py "._('manually started'));
+                fclose($f);
+            }
+            else{
+                $f=fopen('logs/logfile.txt','w');
+                fwrite($f, "\n".date('d.m.Y H:i')." ADMIN agingtable.py "._('could not be started'));
+                fclose($f);
+            }
+        }
+        else{
+            $f=fopen('logs/logfile.txt','w');
+            fwrite($f, "\n".date('d.m.Y H:i')." ADMIN agingtable.py "._('already running'));
+            fclose($f);
+        }
+    }
+    if (isset($_POST['admin_stop_agingtable'])){
+        shell_exec('sudo /var/sudowebscript.sh pkillagingtable');
+        sleep (1); # 1 Sec auf start der Py-Datei warten
+        $f=fopen('logs/logfile.txt','w');
+        fwrite($f, "\n".date('d.m.Y H:i')." ADMIN agingtable.py "._('killed'));
+        fclose($f);
+    }
+    if (isset($_POST['admin_start_scale'])){
+        $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
+        if($grepscale == 0) {
+            shell_exec('sudo /var/sudowebscript.sh startscale');
+            sleep (1); # 1 Sec auf start der Py-Datei warten
+            $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
+            if($grepscale != 0) {
+                $f=fopen('logs/logfile.txt','w');
+                fwrite($f, "\n".date('d.m.Y H:i')." ADMIN scale.py "._('manually started'));
+                fclose($f);
+            }
+            else{
+                $f=fopen('logs/logfile.txt','w');
+                fwrite($f, "\n".date('d.m.Y H:i')." ADMIN scale.py "._('could not be started'));
+                fclose($f);
+            }
+        }
+        else{
+            $f=fopen('logs/logfile.txt','w');
+            fwrite($f, "\n".date('d.m.Y H:i')." ADMIN scale.py "._('already running'));
+            fclose($f);
+        }
+    }
+    if (isset($_POST['admin_stop_scale'])){
+        shell_exec('sudo /var/sudowebscript.sh pkillscale');
+        sleep (1); # 1 Sec auf start der Py-Datei warten
+        $f=fopen('logs/logfile.txt','w');
+        fwrite($f, "\n".date('d.m.Y H:i')." ADMIN scale.py "._('killed'));
+        fclose($f);
+    }
 ?>
