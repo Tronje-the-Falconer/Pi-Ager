@@ -4,6 +4,8 @@ from logging.handlers import RotatingFileHandler
 import pi_ager_names
 import pi_ager_paths
 import pi_ager_database
+from pathlib import Path
+import os, stat
 
 def get_logginglevel(loglevelstring):
     if loglevelstring == 10:
@@ -18,8 +20,21 @@ def get_logginglevel(loglevelstring):
         loglevel = logging.CRITICAL
     
     return loglevel
-
+    
+def check_website_logfile():
+    filepath = pi_ager_paths.get_path_logfile_txt_file()
+    website_logfile = Path(filepath)
+    if website_logfile.is_file():
+        print ('file exists')
+    else:
+        new_website_logfile = open(pi_ager_paths.get_path_logfile_txt_file(), "wb")
+        new_website_logfile.close()
+        os.chmod(pi_ager_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
+        print ('Logfile created')
+        #logger_pi_ager_logging.info('new logfile created')
+        
 def create_logger(pythonfile):
+    check_website_logfile()
     loglevel_file_value = pi_ager_database.get_logging_value('loglevel_file')
     loglevel_console_value = pi_ager_database.get_logging_value('loglevel_console')
 
@@ -29,7 +44,7 @@ def create_logger(pythonfile):
     #Logger fuer website
     website_log = logging.FileHandler(pi_ager_paths.logfile_txt_file, mode='a', encoding=None, delay=False)
     website_log.setLevel(logging.INFO)
-    website_log_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M:%S')
+    website_log_formatter = logging.Formatter('%(asctime)s %(message)s', '%y-%m-%d %H:%M:%S')
     website_log.setFormatter(website_log_formatter)
     logger.addHandler(website_log)
 
@@ -49,7 +64,9 @@ def create_logger(pythonfile):
 
     global logger_pi_ager_logging
     logger_pi_ager_logging = logging.getLogger('pi_ager_logging.py')
-
+    
+    
+    
     # Verschiedene Logger um Einzelebenen zu erkennen
     if pythonfile == 'main.py':
         global logger_main

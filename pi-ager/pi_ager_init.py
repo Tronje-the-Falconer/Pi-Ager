@@ -8,6 +8,7 @@ import pi_ager_database
 import pi_ager_names
 import pi_ager_logging
 
+
 global logspacer
 global board_mode
 global system_starttime
@@ -78,8 +79,6 @@ def set_language():
     translation.install()
 
     pi_ager_logging.logger_pi_ager_init.debug('end set_language')
-
-pi_ager_paths.set_paths()
 
 logspacer = "***********************************************"
 logspacer2 = '-------------------------------------------------------'
