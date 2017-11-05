@@ -12,7 +12,9 @@ import pi_ager_init
 import pi_ager_organization
 import pi_ager_plotting
 
-os.system('clear') # Bildschirm loeschen
+# Bildschirm loeschen
+os.system('clear')
+
 pi_ager_logging.logger_main.info(pi_ager_init.logspacer)
 
 # RRD-Datenbank anlegen, wenn nicht vorhanden
@@ -22,11 +24,6 @@ try:
     with open(pi_ager_init.rrd_filename): pass
     logstring = _("database file found") + ": " + pi_ager_init.rrd_filename
     pi_ager_logging.logger_main.debug(logstring)
-    os.system('sudo /var/sudowebscript.sh pkillscale &')
-    pi_ager_logging.logger_main.debug('pkillscale done')
-    time.sleep(2)
-    os.system('sudo /var/sudowebscript.sh startscale &')
-    pi_ager_logging.logger_main.debug('startscale done')
 
 except IOError:
     logstring = _("creating a new database") + ": " + pi_ager_init.rrd_filename
@@ -55,6 +52,11 @@ pi_ager_logging.logger_main.info(pi_ager_init.logspacer)
 pi_ager_init.set_sensortype()
 pi_ager_init.set_system_starttime()
 
+os.system('sudo /var/sudowebscript.sh pkillscale &')
+pi_ager_logging.logger_main.debug('pkillscale done')
+time.sleep(2)
+os.system('sudo /var/sudowebscript.sh startscale &')
+pi_ager_logging.logger_main.debug('startscale done')
 
 try:
     pi_ager_loop.autostart_loop()
@@ -67,4 +69,5 @@ except Exception as e:
     pi_ager_logging.logger_main.critical(logstring)
     pi_ager_logging.logger_main.critical(str(e))
     pass
+    
 pi_ager_organization.goodbye()

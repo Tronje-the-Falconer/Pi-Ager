@@ -20,7 +20,6 @@ def set_paths():
     graphs_website_path = '/var/www/images/graphs/'
     logfile_txt_file = '/var/www/logs/logfile.txt'
     pi_ager_log_file = '/var/www/logs/pi-ager.log'
-    
     sqlite3_file = '/var/www/config/pi-ager.sqlite3'
     
 def get_path_graphs_website():

@@ -91,6 +91,7 @@ def read_dictionary_write_settings(period_dictionary):
     from datetime import timedelta
 
     pi_ager_logging.logger_agingtable_loop.debug('start read_dictionary_write_settings()')
+    
     # Variablen aus Dictionary setzen
     for key, value in iter(period_dictionary.items()):
         if value == None or value == '':                      # wenn ein Wert leer ist muss er aus der letzten settings.json ausgelesen  werden
@@ -299,11 +300,15 @@ def doAgingtableLoop():
         pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, 0)
         sys.exit(0)
 
-    except Exception as e:
-        pi_ager_database.write_stop_in_database(pi_ager_names.status_agingtable_key)
-        pi_ager_logging.logger_agingtable_loop.critical(e)
-
     except KeyboardInterrupt:
         pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, 0)
-        pi_ager_logging.logger_agingtable_loop.critical('file stopped by user')
+        pi_ager_logging.logger_agingtable_loop.critical('File stopped by user')
         sys.exit(0)
+        
+    except Exception as e:
+        logstring = _('exception occurred') + '!!!'
+        pi_ager_logging.logger_main.critical(logstring)
+        pi_ager_database.write_stop_in_database(pi_ager_names.status_agingtable_key)
+        pi_ager_logging.logger_agingtable_loop.critical(e)
+        pass
+

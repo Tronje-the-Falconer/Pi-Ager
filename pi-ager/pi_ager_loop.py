@@ -20,7 +20,6 @@ def autostart_loop():
         status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
         status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
         current_agingtable_period = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.agingtable_period_key)
-    # Hier prüfen, ob period = 0 ist. Falls nicht, wurde die Agingtable abnormal unterbrochen
         
         pi_ager_logging.logger_pi_ager_loop.debug('autostart_loop')
         if status_agingtable == 1:
@@ -34,13 +33,14 @@ def autostart_loop():
 
 def get_sensordata():
 
-    if pi_ager_init.sensorname == 'DHT11' or pi_ager_init.sensorname == 'DHT22': #DHT11 oder DHT22
+    if pi_ager_init.sensorname == 'DHT11' or pi_ager_init.sensorname == 'DHT22': 
         pi_ager_logging.logger_pi_ager_loop.debug('pi_ager_init.sensorname: ' + pi_ager_init.sensorname)
         sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_init.gpio_sensor_data)
         pi_ager_logging.logger_pi_ager_loop.debug("sensor_temperature: " + str(sensor_temperature_big))
         pi_ager_logging.logger_pi_ager_loop.debug("sensor_humidity_big: " + str(sensor_humidity_big))
         # atp = 17.271  ermittelt aus dem Datenblatt DHT11 und DHT22
         # btp = 237.7   ermittelt aus dem Datenblatt DHT11 und DHT22
+    
     elif pi_ager_init.sensorname == 'SHT': #SHT
         pi_ager_logging.logger_pi_ager_loop.debug('pi_ager_init.sensorname:' + pi_ager_init.sensorname)
         sensor_sht = SHT1x(pi_ager_init.gpio_sensor_data, pi_ager_init.gpio_sensor_sync, gpio_mode=pi_ager_init.board_mode)
@@ -66,7 +66,6 @@ def get_sensordata():
     
     return sensordata
 
-# Function Mainloop
 def doMainLoop():
     global circulation_air_duration       #  Umluftdauer
     global circulation_air_period         #  Umluftperiode
@@ -105,7 +104,8 @@ def doMainLoop():
     global dehumidifier_modus             #  Modus Entfeuchter  (1 = über Abluft, 2 = mit Abluft zusammen [unterstützend]; 3 = anstelle von Abluft)
     global status_dehumidifier            #  Entfeuchter
     global status_pi_ager
-# Pruefen Sensor, dann Settings einlesen
+
+    # Pruefen Sensor, dann Settings einlesen
 
     try:
         pi_ager_database.write_start_in_database(pi_ager_names.status_pi_ager_key)
@@ -114,12 +114,19 @@ def doMainLoop():
         pi_ager_gpio_config.defaultGPIO()
 
         while status_pi_ager == 1:
+        
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
             pi_ager_logging.logger_pi_ager_loop.debug('in While True')
-            pi_ager_logging.logger_pi_ager_loop.debug(str(pi_ager_init.sensorname))
+
+#Settings
+            #Sensor
+            sensortype = int(pi_ager_init.sensortype)
             sensordata = get_sensordata()
+            pi_ager_logging.logger_pi_ager_loop.debug(str(pi_ager_init.sensorname))
             sensor_temperature = sensordata['sensor_temperature']
             sensor_humidity = sensordata['sensor_humidity']
+
+            # weitere Settings
             modus = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.modus_key)
             setpoint_temperature = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key))
             setpoint_humidity = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key))
@@ -135,7 +142,6 @@ def doMainLoop():
             switch_off_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_humidifier_key))
             delay_humidify = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key))
             delay_humidify = delay_humidify * 10
-            sensortype = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key))
             uv_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_modus_key))
             switch_on_uv_hour = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_hour_key))
             switch_on_uv_minute = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_minute_key))
@@ -175,6 +181,7 @@ def doMainLoop():
             pi_ager_logging.logger_pi_ager_loop.info(pi_ager_init.logspacer2)
 
             gpio.setmode(pi_ager_init.board_mode)
+            
             # Durch den folgenden Timer laeuft der Ventilator in den vorgegebenen Intervallen zusaetzlich zur generellen Umluft bei aktivem Heizen, Kuehlen oder Befeuchten
             # Timer fuer Luftumwaelzung-Ventilator
             if circulation_air_period == 0:                          # gleich 0 ist an,  Dauer-Timer
@@ -296,7 +303,7 @@ def doMainLoop():
                     logstring = _('light timestamp on (deactive)')
                     pi_ager_logging.logger_pi_ager_loop.info(logstring)
 
-                # Kuehlen
+            # Kuehlen
             pi_ager_logging.logger_pi_ager_loop.debug("pi_ager_loop_modi")
             if modus == 0:
                 status_exhaust_fan = False                              # Feuchtereduzierung Abluft aus
@@ -307,6 +314,7 @@ def doMainLoop():
                     gpio.output(pi_ager_init.gpio_cooling_compressor, pi_ager_init.relay_on)      # Kuehlung ein
                 if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor :
                     gpio.output(pi_ager_init.gpio_cooling_compressor, pi_ager_init.relay_off)     # Kuehlung aus
+            
             # Kuehlen mit Befeuchtung
             if modus == 1:
                 status_exhaust_fan = False                     # Feuchtereduzierung Abluft aus
@@ -320,6 +328,7 @@ def doMainLoop():
                     gpio.output(pi_ager_init.gpio_humidifier, pi_ager_init.relay_on)      # Befeuchtung ein
                 if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
                     gpio.output(pi_ager_init.gpio_humidifier, pi_ager_init.relay_off)     # Befeuchtung aus
+            
             # Heizen mit Befeuchtung
             if modus == 2:
                 status_exhaust_fan = False                     # Feuchtereduzierung Abluft aus
@@ -333,6 +342,7 @@ def doMainLoop():
                     gpio.output(pi_ager_init.gpio_humidifier, pi_ager_init.relay_on)      # Befeuchtung ein
                 if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
                     gpio.output(pi_ager_init.gpio_humidifier, pi_ager_init.relay_off)     # Befeuchtung aus
+            
             # Automatiktemperatur mit Befeuchtung
             if modus == 3:
                 status_exhaust_fan = False                     # Feuchtereduzierung Abluft aus
@@ -388,31 +398,37 @@ def doMainLoop():
                         status_dehumidifier = False        # Entfeuchter aus
                     else:
                         status_dehumidifier = False        # Entfeuchter aus
+            
             # Schalten des Umluft - Ventilators
             if gpio.input(pi_ager_init.gpio_heater) or gpio.input(pi_ager_init.gpio_cooling_compressor) or gpio.input(pi_ager_init.gpio_humidifier) or status_circulation_air == True:
                 gpio.output(pi_ager_init.gpio_circulating_air, pi_ager_init.relay_on)               # Umluft - Ventilator an
             if gpio.input(pi_ager_init.gpio_heater) and gpio.input(pi_ager_init.gpio_cooling_compressor) and gpio.input(pi_ager_init.gpio_humidifier) and status_circulation_air == False:
                 gpio.output(pi_ager_init.gpio_circulating_air, pi_ager_init.relay_off)             # Umluft - Ventilator aus
+            
             # Schalten des Entfeuchters
             if status_dehumidifier == True:
                 gpio.output(pi_ager_init.gpio_dehumidifier, pi_ager_init.relay_on)
             if status_dehumidifier == False:
                 gpio.output(pi_ager_init.gpio_dehumidifier, pi_ager_init.relay_off)
+            
             # Schalten des (Abluft-)Luftaustausch-Ventilator
             if status_exhaust_air == False or status_exhaust_fan == True:
                 gpio.output(pi_ager_init.gpio_exhausting_air, pi_ager_init.relay_on)
             if status_exhaust_fan == False and status_exhaust_air == True:
                 gpio.output(pi_ager_init.gpio_exhausting_air, pi_ager_init.relay_off)
+            
             # Schalten des UV_Licht
             if status_uv == False:
                 gpio.output(pi_ager_init.gpio_uv, pi_ager_init.relay_on)
             if status_uv == True:
                 gpio.output(pi_ager_init.gpio_uv, pi_ager_init.relay_off)
+            
             # Schalten des Licht
             if status_light == False:
                 gpio.output(pi_ager_init.gpio_light, pi_ager_init.relay_on)
             if status_light == True:
                 gpio.output(pi_ager_init.gpio_light, pi_ager_init.relay_off)
+            
             # Lesen der Scales Daten
             scale1_row = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale1_table)
             if scale1_row == None:
@@ -437,6 +453,7 @@ def doMainLoop():
                     scale2_data = scale2_value
                 else:
                     scale2_data = 0
+            
             # Ausgabe der Werte auf der Konsole
             pi_ager_organization.write_verbose(pi_ager_init.logspacer2, False, False)
             if gpio.input(pi_ager_init.gpio_heater) == False:
@@ -511,6 +528,7 @@ def doMainLoop():
                 pi_ager_logging.logger_pi_ager_loop.info(logstring)
 
             pi_ager_logging.logger_pi_ager_loop.info(pi_ager_init.logspacer2)
+            
             # Messwerte in die RRD-Datei schreiben
             # Schreiben der aktuellen Status-Werte
             pi_ager_logging.logger_pi_ager_loop.debug('writing current.json start')
@@ -520,6 +538,7 @@ def doMainLoop():
             # Graphen erzeugen
             from rrdtool import update as rrd_update
             ret = rrd_update('%s' %(pi_ager_init.rrd_filename), 'N:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s' %(sensor_temperature, sensor_humidity, status_exhaust_air, status_circulating_air, status_heater, status_cooling_compressor, status_humidifier, status_dehumidifier, status_light, status_uv, scale1_data, scale2_data))
+            
             # array fuer graph     
             # Grafiken erzeugen
             if pi_ager_init.loopcounter % 3 == 0 and pi_ager_init.loopcounter != 0:
@@ -552,15 +571,18 @@ def doMainLoop():
             pi_ager_logging.logger_pi_ager_loop.debug('Loopnumber: ' + str(pi_ager_init.loopcounter))
 
             time.sleep(1)  
+            
             # Mainloop fertig
             pi_ager_logging.logger_pi_ager_loop.info('loop complete.')
             pi_ager_init.loopcounter += 1
             
     # Ende While-Schleife
         pi_ager_logging.logger_pi_ager_loop.debug('status!= 1')
+
     except Exception as e:
         pi_ager_logging.logger_pi_ager_loop.debug(str(e))
         
+
     finally:
         pi_ager_init.loopcounter = 0
         pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
