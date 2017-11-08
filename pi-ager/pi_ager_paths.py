@@ -24,23 +24,30 @@ def set_paths():
     
 def get_path_graphs_website():
     global graphs_website_path
+    set_paths()
     return graphs_website_path
     
 def get_path_logfile_txt_file():
     global logfile_txt_file
+    set_paths()
     return logfile_txt_file
     
 def get_path_sqlite3_file():
     global sqlite3_file
+    set_paths()
     return sqlite3_file
 
 def get_website_path():
     global website_path
+    set_paths()
     return website_path
+    
+def get_pi_ager_log_file_path():
+    global pi_ager_log_file
+    set_paths()
+    return pi_ager_log_file
 
 def get_csv_path():
     global csv_path
+    set_paths()
     return csv_path
-
-
-set_paths()

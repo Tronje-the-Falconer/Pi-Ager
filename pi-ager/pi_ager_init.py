@@ -3,7 +3,6 @@ import Adafruit_DHT
 import RPi.GPIO as gpio
 import time
 import gettext
-import pi_ager_paths
 import pi_ager_database
 import pi_ager_names
 import pi_ager_logging
