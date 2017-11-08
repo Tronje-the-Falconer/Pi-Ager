@@ -16,10 +16,15 @@ import pi_ager_gpio_config
 
 def autostart_loop():
     global status_pi_ager
+    
+    pi_ager_gpio_config.setupGPIO() # GPIO initialisieren
+    pi_ager_gpio_config.defaultGPIO()
+
     while True:
         status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
         status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
         current_agingtable_period = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.agingtable_period_key)
+        check_and_set_light()
         
         pi_ager_logging.logger_pi_ager_loop.debug('autostart_loop')
         if status_agingtable == 1:
@@ -65,6 +70,31 @@ def get_sensordata():
     sensordata['sensor_humidity'] = sensor_humidity
     
     return sensordata
+    
+def set_gpio_value(gpio_number, value):
+    gpio.output(gpio_number, value)
+    
+def get_gpio_value(gpio_number):
+    value = gpio.input(gpio_number)
+    return value
+    
+def switch_light(relay_state):
+    set_gpio_value(pi_ager_init.gpio_light, relay_state)
+
+def check_and_set_light():
+    #   Manueller "Lichtschalter"
+    gpio.setmode(pi_ager_init.board_mode)
+    gpio.setup(pi_ager_init.gpio_scale_sync, gpio.OUT)
+    if pi_ager_database.get_status_light_manual() == 1:
+        duration_light_on = pi_ager_database.get_current_time() - pi_ager_database.get_last_change(pi_ager_names.current_values_table, pi_ager_names.status_light_manual_key)
+        if duration_light_on <= 600:    #   manuelles Licht ist keine 10 Minuten an
+            switch_light(pi_ager_init.relay_on)
+        else:
+            switch_light(pi_ager_init.relay_off)
+    else:
+        switch_light(pi_ager_init.relay_off)
+        
+
 
 def doMainLoop():
     global circulation_air_duration       #  Umluftdauer
@@ -110,11 +140,10 @@ def doMainLoop():
     try:
         pi_ager_database.write_start_in_database(pi_ager_names.status_pi_ager_key)
         status_pi_ager = 1
-        pi_ager_gpio_config.setupGPIO() # GPIO initialisieren
-        pi_ager_gpio_config.defaultGPIO()
 
         while status_pi_ager == 1:
         
+            check_and_set_light()
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
             pi_ager_logging.logger_pi_ager_loop.debug('in While True')
 
@@ -180,7 +209,7 @@ def doMainLoop():
             pi_ager_logging.logger_pi_ager_loop.info(logstring)
             pi_ager_logging.logger_pi_ager_loop.info(pi_ager_init.logspacer2)
 
-            gpio.setmode(pi_ager_init.board_mode)
+            # gpio.setmode(pi_ager_init.board_mode)
             
             # Durch den folgenden Timer laeuft der Ventilator in den vorgegebenen Intervallen zusaetzlich zur generellen Umluft bei aktivem Heizen, Kuehlen oder Befeuchten
             # Timer fuer Luftumwaelzung-Ventilator
@@ -425,9 +454,11 @@ def doMainLoop():
             
             # Schalten des Licht
             if status_light == False:
-                gpio.output(pi_ager_init.gpio_light, pi_ager_init.relay_on)
+                switch_light(pi_ager_init.relay_on)
+                # gpio.output(pi_ager_init.gpio_light, pi_ager_init.relay_on)
             if status_light == True:
-                gpio.output(pi_ager_init.gpio_light, pi_ager_init.relay_off)
+                switch_light(pi_ager_init.relay_off)
+                # gpio.output(pi_ager_init.gpio_light, pi_ager_init.relay_off)
             
             # Lesen der Scales Daten
             scale1_row = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale1_table)
@@ -504,7 +535,7 @@ def doMainLoop():
                 logstring = _('dehumidifier off')
                 pi_ager_logging.logger_pi_ager_loop.info(logstring)
                 status_dehumidifier = 0
-            if gpio.input(pi_ager_init.gpio_light) == False:
+            if get_gpio_value(pi_ager_init.gpio_light) == False:
                 logstring = _('light on')
                 pi_ager_logging.logger_pi_ager_loop.info(logstring)
                 status_light = 1
