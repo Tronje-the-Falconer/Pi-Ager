@@ -31,3 +31,4 @@
     09 Code aufräumen (nur Funktionen in importierten py's, um doppelte Ausführungen zu vermeiden)
 ####10 Logfile (website) erzeugen, wenn nicht vorhanden
 ####11 Logging: Datei- und Consolenaufteilung verbessern
+    12 Licht für Webcam automatisch anschalten (Stellschalter in DB? Wenn der auf 1 dann lichtmodus ignorieren, Zeit abschaltung oder Webcam seite verlassen schaltet Licht wieder aus?)
