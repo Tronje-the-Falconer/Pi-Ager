@@ -71,6 +71,7 @@ $agingtable_period_key = 'agingtable_period';
 $agingtable_period_starttime_key = 'agintable_period_starttime';
 $measuring_interval_debug_key = 'measuring_interval_debug';
 $agingtable_days_in_seconds_debug_key = 'agingtable_days_in_seconds_debug';
+$status_light_manual_key = 'status_light_manual';
 
 #-----------------------------table fields;
 $key_field = 'key';
