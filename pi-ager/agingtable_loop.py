@@ -126,18 +126,18 @@ def read_dictionary_write_settings(period_dictionary):
     setpoint_temperature_logstring = "\n" + _('setpoint temperature') + ": \t \t" + str(period_dictionary['setpoint_temperature']) + " C"
     switch_on_cooling_compressor_logstring = "\n" + _('switch-on value temperature') + ": \t" + str(switch_on_cooling_compressor) + " C"
     switch_off_cooling_compressor_logstring = "\n" + _('switch-off value temperature') + ": \t" + str(switch_off_cooling_compressor) + " C"
-    sollfeuchtigkeit_logstring = "\n" + _('setpoint humidity') + ": \t \t" + str(period_dictionary['setpoint_humidity']) + "%"
+    setpoint_humidity_logstring = "\n" + _('setpoint humidity') + ": \t \t" + str(period_dictionary['setpoint_humidity']) + "%"
     switch_on_humidifier_logstring = "\n" + _('switch-on value humidity') + ": \t \t" + str(switch_on_humidifier) + "%"
     switch_off_humidifier_logstring = "\n" + _('switch-off value humidity') + ": \t \t" + str(switch_off_humidifier) + "%"
     delay_humidify_logstring = "\n" + _('humidification delay') + ": \t" + str(delay_humidify) + ' ' + _("minutes")
     circulation_air_period_format = int(period_dictionary['circulation_air_period'])/60
-    circulation_air_period_logstring = "\n" + _('timer circulation air period every') + ": \t" + str(circulation_air_period_format) + ' ' + _(" minutes")
+    circulation_air_period_logstring = "\n" + _('timer circulation air period every') + ": \t" + str(circulation_air_period_format) + ' ' + _("minutes")
     circulation_air_duration_format = int(period_dictionary['circulation_air_duration'])/60
-    circulation_air_duration_logstring = "\n" + _('timer circulation air') + ": \t  \t" + str(circulation_air_duration_format) + ' ' + _(" minutes")
+    circulation_air_duration_logstring = "\n" + _('timer circulation air') + ": \t  \t" + str(circulation_air_duration_format) + ' ' + _("minutes")
     exhaust_air_period_format = int(period_dictionary['exhaust_air_period'])/60
-    exhaust_air_period_logstring = "\n" + _('timer exhaust air period every') + ": \t" + str(exhaust_air_period_format) + ' ' + _(" minutes")
+    exhaust_air_period_logstring = "\n" + _('timer exhaust air period every') + ": \t" + str(exhaust_air_period_format) + ' ' + _("minutes")
     exhaust_air_duration_format = int(period_dictionary['exhaust_air_duration'])/60
-    exhaust_air_duration_logstring = "\n" + _('timer exhausting air') + ": \t \t" + str(exhaust_air_duration_format) + ' ' + _(" minutes")
+    exhaust_air_duration_logstring = "\n" + _('timer exhausting air') + ": \t \t" + str(exhaust_air_duration_format) + ' ' + _("minutes")
     period_days_logstring="\n" + _('duration') + ": \t \t \t \t" + str(period_dictionary['days']) + ' ' + _('days')
     sensor_logstring = _('sensortype') + ": \t \t \t" + sensorname + ' ' + _('value') + ': ' + str(sensortype)
     
@@ -147,7 +147,7 @@ def read_dictionary_write_settings(period_dictionary):
     pi_ager_database.write_current_value(pi_ager_names.agingtable_period_starttime_key, period_starttime_seconds)
     period_endtime = datetime.datetime.now() + timedelta(days = period_dictionary['days']) # days = parameter von timedelta
 
-    logstring = operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + "\n" + sollfeuchtigkeit_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n" '---------------------------------------' + "\n"
+    logstring = operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + "\n" + setpoint_humidity_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n" '---------------------------------------' + "\n"
     logger.info(logstring)
     
 def doAgingtableLoop():
@@ -198,7 +198,7 @@ def doAgingtableLoop():
  
         # Hauptprogramm
         logger.info(pi_ager_init.logspacer)
-        logstring = "\n" + _('the climate values are now controlled by the automatic program % s') % (agingtable) + "\n"
+        logstring = "\n" + _('the climate values are now controlled by the automatic program') + ' ' + agingtable + '\n'
         logger.info(logstring)
         rows = pi_ager_database.get_agingtable_as_rows(agingtable)
 
@@ -236,7 +236,7 @@ def doAgingtableLoop():
         elif not continue_after_power_failure(dict_agingtable[period]):
             
             # To Do: ALARM (Piezo) einfügen
-            logstring = 'Unterbrechung Reifetabelle "' + agingtable + '" in Periode ' + str(period) + '!!!'
+            logstring = 'interruption agingtable' + ' "' + agingtable + '" ' + 'in period ' + str(period) + '!!!'
             logger.critical(logstring)
             pi_ager_database.write_stop_in_database(pi_ager_names.status_agingtable_key)
             status_agingtable = 0
@@ -253,43 +253,43 @@ def doAgingtableLoop():
             current_time = pi_ager_database.get_current_time()
             if (period_starttime_seconds == 0 and duration_sleep == 0 and period == 0) or current_time >= period_starttime_seconds + duration_sleep:
                 pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, period)
-                logger.debug('period: ' + str(period))
+                logger.debug('period' + ': ' + str(period))
                 actual_dictionary = dict_agingtable[period]
                 if period == 0:
-                    logstring = _('start values period 1 of %s') % (str(total_periods + 1))
+                    logstring = _('start values period 1 of') + ' ' +str(total_periods + 1)
                     logger.info(logstring)
                     finaltime = datetime.datetime.now() + timedelta(days = total_duration)  # days = parameter von timedelta
                     read_dictionary_write_settings(actual_dictionary)
-                    logstring = _("next change of values: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M'))
+                    logstring = _("next change of values') + ': ' + period_endtime.strftime('%d.%m.%Y  %H:%M')
                     logger.info(logstring)
-                    logstring = _("end of program: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M'))
+                    logstring = _("end of program') + ': ' + finaltime.strftime('%d.%m.%Y  %H:%M')
                     logger.info(logstring)
                     
                 elif period == total_periods:
-                    logstring = _('new values for period %s of %s') % (str(period + 1), str(total_periods + 1))
+                    logstring = _('new values for period') + ' ' + str(period + 1) + ' ' +  _('of') + ' ' + str(total_periods + 1))
                     logger.info(logstring)
                     read_dictionary_write_settings(actual_dictionary)
-                    logstring = '\n' + _('Program "%s" ends the control.') % (agingtable) + '\n' + _('pi-ager continues to work with the last values.')
+                    logstring = '\n' + _('Program') + ' "' + agingtable + '"' + _('ends the control.') + '\n Pi Ager ' + _('continues to work with the last values.')
                     logger.info(logstring)
                     # Piezo piepen lassen
                     
                 else:
-                    logstring = _('new values for period %s of %s') % (str(period + 1), str(total_periods + 1))
+                    logstring = _('new values for period') + ' ' + str(period + 1) + ' ' + 'of') + ' ' + str(total_periods + 1)
                     logger.info(logstring)
                     read_dictionary_write_settings(actual_dictionary)
-                    logstring = _("next change of values: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M'))
+                    logstring = _('next change of values') + ': ' + (period_endtime.strftime('%d.%m.%Y  %H:%M'))
                     logger.info(logstring)
                     
                     if finaltime == None:
                         period_starttime = datetime.datetime.fromtimestamp(period_starttime_seconds)
                         finaltime = period_starttime + timedelta(days = total_duration)
-                    logstring = _("end of program: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M'))
+                    logstring = _('end of program') + ': ' + finaltime.strftime('%d.%m.%Y  %H:%M')
                     logger.info(logstring)
                 period += 1
                 logger.info(pi_ager_init.logspacer)
                     
             elif (period_starttime_seconds + duration_sleep - current_time) % 3600 == 0:
-                logger.info('in agingtable duration_sleep-loop. duration_sleep left: ' + str(period_starttime_seconds + duration_sleep - current_time) + ' sec.')
+                logger.info(_('in agingtable duration_sleep-loop. duration_sleep left') + ': ' + str(period_starttime_seconds + duration_sleep - current_time) + ' ' + 'seconds')
             else:
                 logger.debug('in agingtable duration_sleep-loop. duration_sleep left: ' + str(period_starttime_seconds + duration_sleep - current_time) + ' sec.')
                 
