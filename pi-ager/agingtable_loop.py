@@ -12,12 +12,17 @@ import pi_ager_paths
 import pi_ager_names
 import pi_ager_logging
 
+global logger
+logger = pi_ager_logging.create_logger(__name__)
+logger.debug('logging initialised')
+
 # Definieren von Funktionen
 # Funktion zur uebersetzung von z.B. Listenobjekten z.B. animals = [N_('mollusk'), N_('albatross'), N_('rat')]
 # def N_(message):
     # return message
 # Funktion zum Lesen des Dictionarys und setzen der Werte
 def get_dictionary_out_of_sqliterow(row):
+    global logger
     
     period_dictionary = {}
     period_dictionary[pi_ager_names.agingtable_modus_field] = row[pi_ager_names.agingtable_modus_field]
@@ -33,6 +38,7 @@ def get_dictionary_out_of_sqliterow(row):
 
 def get_sensortype():
     global sensortype
+    global logger
     
     if sensortype == 1 :
         sensorname = 'DHT11'
@@ -45,38 +51,33 @@ def get_sensortype():
 
 def get_duration_sleep(period_days):
     global day_in_seconds
+    global logger
     sleep_time = period_days * day_in_seconds    # Anzahl der Tage von "column" mit 86400 (Sekunden) multipliziert fuer wartezeit bis zur naechsten Periode
     return sleep_time
 
 def continue_after_power_failure(current_dictionary):
+    global logger
     failure_temperature_delta = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.failure_temperature_delta_key)     # Maximaler Temperatur-Unterschied
     failure_humidity_delta = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.failure_humidity_delta_key)     # Maximaler Feuchte-Unterschied
     
     temperature_last_change = 0
     current_time = pi_ager_database.get_current_time()
     
-    # Solange keine aktuelle Temperatur da ist, soll er in der Schleife warten
-    # while current_time - temperature_last_change > 60:
-        # temperature_last_change = pi_ager_database.get_last_change(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
-        # current_time = pi_ager_database.get_current_time()
-    
-    #Zum Testen
-    # current_temperature = 18
-    # current_humidity = 55
     current_temperature = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
     current_humidity = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)
     agingtable_temperature = current_dictionary[pi_ager_names.agingtable_setpoint_temperature_field]
     agingtable_humidity = current_dictionary[pi_ager_names.agingtable_setpoint_humidity_field]
     
-    pi_ager_logging.logger_agingtable_loop.debug('continue_after_power_failure: ')
-        
-    pi_ager_logging.logger_agingtable_loop.debug('continue_after_power_failure: ')
-    pi_ager_logging.logger_agingtable_loop.debug('current_temperature - agingtable_temperature: ' + str(abs(current_temperature - agingtable_temperature)))
-    pi_ager_logging.logger_agingtable_loop.debug('current_humidity - agingtable_humidity: ' + str(abs(current_humidity - agingtable_humidity)))
+    logger.info('agingtable continues after power failure')
+    logger.debug('current_temperature - agingtable_temperature: ' + str(abs(current_temperature - agingtable_temperature)))
+    logger.debug('failure_temperature_delta: ' + str(failure_temperature_delta))
+    logger.debug('current_humidity - agingtable_humidity: ' + str(abs(current_humidity - agingtable_humidity)))
+    logger.debug('failure_humidity_delta: ' + str(failure_humidity_delta))
     if abs(current_temperature - agingtable_temperature) > failure_temperature_delta or abs(current_humidity - agingtable_humidity) > failure_humidity_delta:
         return False
     else:
         return True
+
 def read_dictionary_write_settings(period_dictionary):
     global period_endtime
     global period_starttime_seconds
@@ -88,21 +89,20 @@ def read_dictionary_write_settings(period_dictionary):
     global delay_humidify
     global sensorname
     global sensortype
+    global logger
     from datetime import timedelta
 
-    pi_ager_logging.logger_agingtable_loop.debug('start read_dictionary_write_settings()')
+    logger.debug('read_dictionary_write_settings()')
     
     # Variablen aus Dictionary setzen
     for key, value in iter(period_dictionary.items()):
         if value == None or value == '':                      # wenn ein Wert leer ist muss er aus der letzten settings.json ausgelesen  werden
             value = pi_ager_database.get_table_value(pi_ager_names.config_settings_table,key)
             period_dictionary[key] = value
- #           exec('{} = {}'.format(key,value), period_settings)   # fuellt die jeweilige Variable mit altem Wert (value = columname)
         else:
             value = int(value)
             period_dictionary[key] = value
-#            exec('{} = {}'.format(key,value), period_settings)
-    pi_ager_logging.logger_agingtable_loop.debug(str(period_dictionary))
+
     global duration_sleep
     duration_sleep = get_duration_sleep(int (period_dictionary['days'])) # Anzahl der Tage von "column" mit 86400 (Sekunden) multipliziert fuer wartezeit bis zur naechsten Periode
     
@@ -122,7 +122,7 @@ def read_dictionary_write_settings(period_dictionary):
         operating_mode = "\n" + _('operation mode') + ': ' + _('automatic with dehumidify and humidify')
     else:
         operating_mode = "\n" + _('operation mode wrong or set incorrectly')
-    pi_ager_logging.logger_agingtable_loop.debug('erzeuge logstring...')
+
     setpoint_temperature_logstring = "\n" + _('setpoint temperature') + ": \t \t" + str(period_dictionary['setpoint_temperature']) + " C"
     switch_on_cooling_compressor_logstring = "\n" + _('switch-on value temperature') + ": \t" + str(switch_on_cooling_compressor) + " C"
     switch_off_cooling_compressor_logstring = "\n" + _('switch-off value temperature') + ": \t" + str(switch_off_cooling_compressor) + " C"
@@ -141,9 +141,6 @@ def read_dictionary_write_settings(period_dictionary):
     period_days_logstring="\n" + _('duration') + ": \t \t \t \t" + str(period_dictionary['days']) + ' ' + _('days')
     sensor_logstring = _('sensortype') + ": \t \t \t" + sensorname + ' ' + _('value') + ': ' + str(sensortype)
     
-    pi_ager_logging.logger_agingtable_loop.debug('schreibe settings in if')
-
-    
     pi_ager_database.write_settings(modus, period_dictionary['setpoint_temperature'], period_dictionary['setpoint_humidity'], period_dictionary['circulation_air_period'], period_dictionary['circulation_air_duration'], period_dictionary['exhaust_air_period'], period_dictionary['exhaust_air_duration'])
 
     period_starttime_seconds = pi_ager_database.get_current_time()
@@ -151,9 +148,8 @@ def read_dictionary_write_settings(period_dictionary):
     period_endtime = datetime.datetime.now() + timedelta(days = period_dictionary['days']) # days = parameter von timedelta
 
     logstring = operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + "\n" + sollfeuchtigkeit_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n" '---------------------------------------' + "\n"
-    pi_ager_logging.logger_agingtable_loop.debug(logstring)
+    logger.info(logstring)
     
-# Definition von Variablen
 def doAgingtableLoop():
 
     global period_settings
@@ -168,8 +164,7 @@ def doAgingtableLoop():
     global delay_humidify
     global sensorname
     global sensortype
-
-    # pi_ager_logging.create_logger('agingtable_loop.py')
+    global logger
 
     try:
         pi_ager_database.write_start_in_database(pi_ager_names.status_agingtable_key)
@@ -202,9 +197,9 @@ def doAgingtableLoop():
             
  
         # Hauptprogramm
-        pi_ager_logging.logger_agingtable_loop.info(pi_ager_init.logspacer)
+        logger.info(pi_ager_init.logspacer)
         logstring = "\n" + _('the climate values are now controlled by the automatic program % s') % (agingtable) + "\n"
-        pi_ager_logging.logger_agingtable_loop.info(logstring)
+        logger.info(logstring)
         rows = pi_ager_database.get_agingtable_as_rows(agingtable)
 
         row_number = 0                              # Setzt Variable row_number auf 0
@@ -218,8 +213,8 @@ def doAgingtableLoop():
             row_number += 1                                             # Zeilenanzahl wird hochgezaehlt (fuer Dictionary Nummer und total_periods)
        
         total_periods = row_number - 1
-        pi_ager_logging.logger_agingtable_loop.debug('total duration (days): ' + str(total_duration))
-        pi_ager_logging.logger_agingtable_loop.debug('total periods: ' + str(total_periods))
+        logger.debug('total duration (days): ' + str(total_duration))
+        logger.debug('total periods: ' + str(total_periods))
 
         # Wenn period = 0 wird die Reifetabelle neu gestartet, ansonsten an der aktuellen period fortgesetzt
         if period == 0:
@@ -242,7 +237,7 @@ def doAgingtableLoop():
             
             # To Do: ALARM (Piezo) einfügen
             logstring = 'Unterbrechung Reifetabelle "' + agingtable + '" in Periode ' + str(period) + '!!!'
-            pi_ager_logging.logger_agingtable_loop.critical(logstring)
+            logger.critical(logstring)
             pi_ager_database.write_stop_in_database(pi_ager_names.status_agingtable_key)
             status_agingtable = 0
             pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, status_agingtable)
@@ -258,57 +253,46 @@ def doAgingtableLoop():
             current_time = pi_ager_database.get_current_time()
             if (period_starttime_seconds == 0 and duration_sleep == 0 and period == 0) or current_time >= period_starttime_seconds + duration_sleep:
                 pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, period)
-                pi_ager_logging.logger_agingtable_loop.debug('period: ' + str(period))
-                pi_ager_logging.logger_agingtable_loop.debug('total periods: ' + str(total_periods))
+                logger.debug('period: ' + str(period))
                 actual_dictionary = dict_agingtable[period]
-                pi_ager_logging.logger_agingtable_loop.debug('actual_dictionary: ' + str(actual_dictionary))
                 if period == 0:
-                    logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('start values period 1 of %s') % (str(total_periods + 1))
-                    pi_ager_logging.logger_agingtable_loop.info(logstring)
+                    logstring = _('start values period 1 of %s') % (str(total_periods + 1))
+                    logger.info(logstring)
                     finaltime = datetime.datetime.now() + timedelta(days = total_duration)  # days = parameter von timedelta
                     read_dictionary_write_settings(actual_dictionary)
                     logstring = _("next change of values: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M'))
-                    pi_ager_logging.logger_agingtable_loop.info(logstring)
+                    logger.info(logstring)
                     logstring = _("end of program: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M'))
-                    pi_ager_logging.logger_agingtable_loop.info(logstring)
+                    logger.info(logstring)
                     
                 elif period == total_periods:
-                    logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('new values for period %s of %s') % (str(period + 1), str(total_periods + 1))
-                    pi_ager_logging.logger_agingtable_loop.info(logstring)
+                    logstring = _('new values for period %s of %s') % (str(period + 1), str(total_periods + 1))
+                    logger.info(logstring)
                     read_dictionary_write_settings(actual_dictionary)
                     logstring = '\n' + _('Program "%s" ends the control.') % (agingtable) + '\n' + _('pi-ager continues to work with the last values.')
-                    pi_ager_logging.logger_agingtable_loop.info(logstring)
+                    logger.info(logstring)
+                    # Piezo piepen lassen
                     
                 else:
-                    logstring = time.strftime('%d.%m.%Y - %H:%M') + _(' oclock: ') + _('new values for period %s of %s') % (str(period + 1), str(total_periods + 1))
-                    pi_ager_logging.logger_agingtable_loop.info(logstring)
+                    logstring = _('new values for period %s of %s') % (str(period + 1), str(total_periods + 1))
+                    logger.info(logstring)
                     read_dictionary_write_settings(actual_dictionary)
                     logstring = _("next change of values: %s") % (period_endtime.strftime('%d.%m.%Y  %H:%M'))
-                    pi_ager_logging.logger_agingtable_loop.info(logstring)
-                    # finaltime für diesen Fall neu berechnen
-                    #logstring = _("end of program: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M'))
-                    pi_ager_logging.logger_agingtable_loop.info(logstring)
-                period += 1
-                pi_ager_logging.logger_agingtable_loop.info(pi_ager_init.logspacer)
-                # if period <= total_periods:
-                    # time.sleep(duration_sleep)       # Wartezeit bis zur naechsten Periode
+                    logger.info(logstring)
                     
+                    if finaltime == None:
+                        period_starttime = datetime.datetime.fromtimestamp(period_starttime_seconds)
+                        finaltime = period_starttime + timedelta(days = total_duration)
+                    logstring = _("end of program: %s") % (finaltime.strftime('%d.%m.%Y  %H:%M'))
+                    logger.info(logstring)
+                period += 1
+                logger.info(pi_ager_init.logspacer)
+                    
+            elif (period_starttime_seconds + duration_sleep - current_time) % 3600 == 0:
+                logger.info('in agingtable duration_sleep-loop. duration_sleep left: ' + str(period_starttime_seconds + duration_sleep - current_time) + ' sec.')
             else:
-                pi_ager_logging.logger_agingtable_loop.info('in agingtable duration_sleep-loop. duration_sleep: ' + str(duration_sleep) + ' sec.')
+                logger.debug('in agingtable duration_sleep-loop. duration_sleep left: ' + str(period_starttime_seconds + duration_sleep - current_time) + ' sec.')
                 
         pi_ager_database.write_stop_in_database(pi_ager_names.status_agingtable_key)
         pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, 0)
         sys.exit(0)
-
-    except KeyboardInterrupt:
-        pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, 0)
-        pi_ager_logging.logger_agingtable_loop.critical('File stopped by user')
-        sys.exit(0)
-        
-    except Exception as e:
-        logstring = _('exception occurred') + '!!!'
-        pi_ager_logging.logger_main.critical(logstring)
-        pi_ager_database.write_stop_in_database(pi_ager_names.status_agingtable_key)
-        pi_ager_logging.logger_agingtable_loop.critical(e)
-        pass
-

@@ -6,7 +6,6 @@ global logfile_txt_file
 global pi_ager_log_file
 global sqlite3_file
 
-
 def set_paths():
     global website_path
     global csv_path

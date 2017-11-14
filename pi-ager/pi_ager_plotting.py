@@ -4,11 +4,16 @@ import pi_ager_paths
 import rrdtool
 import pi_ager_logging
 
+global logger
+logger = pi_ager_logging.create_logger(__name__)
+logger.debug('logging initialised')
+
 # Function zum Plotten der Grafiken
 def plotting(plotting_value):
+    global logger
 # Beschriftung fuer die Grafiken festlegen
     global rrd_dbname
-    pi_ager_logging.logger_pi_ager_plotting.debug('Begin plotting-function')
+    logger.debug('plotting()')
     if plotting_value == 'sensor_temperature':
         title = _('temperature')
         label = 'in C'
@@ -47,8 +52,6 @@ def plotting(plotting_value):
         label = _('gr')
 # Aufteilung in drei Plots
     for plot in ['daily' , 'weekly', 'monthly', 'hourly']:
-        pi_ager_logging.logger_pi_ager_plotting.debug('in for schleife daily, weekly, monthly, hourly')
-
         if plot == 'weekly':
             period = 'w'
         elif plot == 'daily':
@@ -73,5 +76,3 @@ def plotting(plotting_value):
             "GPRINT:%s:AVERAGE:%s\: %%3.2lf C" % (_('durch'), _('Temperatur')),
             "GPRINT:%s:AVERAGE:%s\: %%3.2lf" % (_('durchhum'), _('Luftfeuchtigkeit')), 
             "LINE1:%s#0000FF:%s_%s" % (plotting_value, pi_ager_init.rrd_dbname, plotting_value))
-
-    pi_ager_logging.logger_pi_ager_plotting.debug('End plotting-function')

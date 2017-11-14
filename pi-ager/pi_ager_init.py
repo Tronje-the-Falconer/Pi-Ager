@@ -5,7 +5,7 @@ import time
 import gettext
 import pi_ager_database
 import pi_ager_names
-import pi_ager_logging
+from pi_ager_logging import create_logger
 
 
 global logspacer
@@ -19,13 +19,19 @@ global uv_stoptime
 global light_starttime
 global light_stoptime
 
+
+global logger
+logger = create_logger(__name__)
+logger.debug('logging initialised')
+
 # Function zum Setzen des Sensors
 def set_sensortype():
     global sensor
     global sensorname
     global sensorvalue
+    global logger
 
-    pi_ager_logging.logger_pi_ager_init.debug('begin set_sensortype')
+    logger.debug('set_sensortype()')
 
     if sensortype == 1: #DHT
         sensor = Adafruit_DHT.DHT11
@@ -41,8 +47,6 @@ def set_sensortype():
         sensorname = 'SHT'
         sensorvalue = 3
 
-    pi_ager_logging.logger_pi_ager_init.debug('end set_sensortype')
-
 def set_system_starttime():
     global system_starttime
     global circulation_air_start
@@ -51,9 +55,10 @@ def set_system_starttime():
     global uv_stoptime
     global light_starttime
     global light_stoptime
+    global logger
 
-    pi_ager_logging.logger_pi_ager_init.debug('begin set_system_starttime')
-
+    logger.debug('set_system_starttime()')
+    
     system_starttime=int(time.time())
     circulation_air_start = system_starttime
     exhaust_air_start = system_starttime
@@ -62,15 +67,14 @@ def set_system_starttime():
     light_starttime = system_starttime
     light_stoptime = light_starttime
 
-    pi_ager_logging.logger_pi_ager_init.debug('end set_system_starttime')
-
 def set_language():
-
+    global logger
+    
+    logger.debug('set_language()')
+    
     ####   Set up message catalog access
     # translation = gettext.translation('pi_ager', '/var/www/locale', fallback=True)
     # _ = translation.ugettext
-
-    pi_ager_logging.logger_pi_ager_init.debug('begin set_language')
     
     if language == 1:
         translation = gettext.translation('pi_ager', '/var/www/locale', languages=['en'], fallback=True)
@@ -78,8 +82,6 @@ def set_language():
         translation = gettext.translation('pi_ager', '/var/www/locale', languages=['de'], fallback=True)
 
     translation.install()
-
-    pi_ager_logging.logger_pi_ager_init.debug('end set_language')
 
 logspacer = "***********************************************"
 logspacer2 = '-------------------------------------------------------'
@@ -130,8 +132,12 @@ gpio_sensor_data = 17              # GPIO fuer Data Temperatur/Humidity Sensor
 gpio_sensor_sync = 27              # GPIO fuer Sync Temperatur/Humidity Sensor
 gpio_scale_data = 10               # GPIO fuer Waage Data
 gpio_scale_sync = 9                # GPIO fuer Waage Sync
-gpio_recerved1 = 2                 # GPIO Reserve 1
-gpio_recerved2 = 11                # GPIO Reserve 2
+gpio_alarm = 33                    
+gpio_meat_temperature_SCLK = 21    
+gpio_meat_temperature_MISO = 19
+gpio_meat_temperature_MOSI = 20
+gpio_meat_temperature_CSO = 16
 
 # Sprache
 set_language()
+

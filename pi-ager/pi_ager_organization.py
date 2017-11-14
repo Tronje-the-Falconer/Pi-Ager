@@ -3,28 +3,23 @@ import RPi.GPIO as gpio
 import pi_ager_paths
 import pi_ager_logging
 
+global logger
+logger = pi_ager_logging.create_logger(__name__)
+logger.debug('logging initialised')
+
 # Function goodbye
 def goodbye():
+    global logger
     cleanup()
     logstring = _('goodbye') + '!'
-    pi_ager_logging.logger_pi_ager_organisation.debug(logstring)
+    logger.info(logstring)
 
 # Function cleanup
 def cleanup():
+    global logger
     logstring = _('running cleanup script') + '...'
-    pi_ager_logging.logger_pi_ager_organisation.debug(logstring)
+    logger.info(logstring)
     gpio.cleanup() # GPIO zuruecksetzen
     logstring = _('cleanup complete') + '.'
-    pi_ager_logging.logger_pi_ager_organisation.debug(logstring)
-
-# Function write verbose
-def write_verbose(logstring, newLine=False, print_in_logfile=False):
-    global verbose
-
-    print(logstring)
-    if(newLine is True):
-        print('')
-    if (print_in_logfile is True):
-        logfile_txt = open(pi_ager_paths.get_path_logfile_txt_file(), 'a')           # Variable target = logfile.txt oeffnen
-        logfile_txt.write(logstring)
-        logfile_txt.close
+    logger.info(logstring)
+    logger.info(pi_ager_init.logspacer)

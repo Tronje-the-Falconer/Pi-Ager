@@ -1,12 +1,21 @@
 #!/usr/bin/python3
 import sys
-import pi_ager_logging
-pi_ager_logging.create_logger('agingtable.py')
+from pi_ager_logging import create_logger
 import agingtable_loop
+
+global logger
+logger = create_logger('agingtable')
+logger.debug('logging initialised')
 
 try:
     agingtable_loop.doAgingtableLoop()
+    
+except KeyboardInterrupt:
+    logger.warning('KeyboardInterrupt')
+    pass
 
-except (KeyboardInterrupt, SystemExit):
-    pi_ager_logging.logger_agingtable.critical('KeyboardInterrupt or System Exit')
-    sys.exit()
+except Exception as e:
+    pi_ager_database.write_stop_in_database(pi_ager_names.status_agingtable_key)
+    logstring = _('exception occurred') + '!!!'
+    logger.exception(logstring, exc_info = True)
+    pass

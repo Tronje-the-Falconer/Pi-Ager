@@ -1,12 +1,19 @@
 #!/usr/bin/python3
 import sys
 import scale_loop
-import pi_ager_logging
+from pi_ager_logging import create_logger
 
 try:
-    pi_ager_logging.create_logger('scale.py')
+    global logger
+    logger = create_logger('scale')
+    logger.debug('logging initialised')
     scale_loop.doScaleLoop()
 
-except (KeyboardInterrupt, SystemExit):
-    pi_ager_logging.logger_scale.critical('KeyboardInterrupt or System Exit')
-    sys.exit()
+except KeyboardInterrupt:
+    logger.warning('KeyboardInterrupt')
+    pass
+
+except Exception as e:
+    logstring = _('exception occurred') + '!!!'
+    logger.exception(logstring, exc_info = True)
+    pass

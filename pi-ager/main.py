@@ -12,22 +12,19 @@ import pi_ager_init
 import pi_ager_organization
 import pi_ager_plotting
 
-# Bildschirm loeschen
-os.system('clear')
+global logger
+logger = pi_ager_logging.create_logger('main')
+logger.debug('logging initialised')
 
-pi_ager_logging.logger_main.info(pi_ager_init.logspacer)
+logger.info(pi_ager_init.logspacer)
 
 # RRD-Datenbank anlegen, wenn nicht vorhanden
 try:
-    pi_ager_logging.logger_main.debug('begin try')
-
     with open(pi_ager_init.rrd_filename): pass
-    logstring = _("database file found") + ": " + pi_ager_init.rrd_filename
-    pi_ager_logging.logger_main.debug(logstring)
 
 except IOError:
     logstring = _("creating a new database") + ": " + pi_ager_init.rrd_filename
-    pi_ager_logging.logger_main.debug(logstring)
+    logger.debug(logstring)
     ret = rrdtool.create("%s" %(pi_ager_init.rrd_filename),
         "--step","%s" %(pi_ager_init.measurement_time_interval),
         "--start",'0',
@@ -48,26 +45,23 @@ except IOError:
         "RRA:AVERAGE:0.5:15:2880",
         "RRA:AVERAGE:0.5:60:8760",)
 
-pi_ager_logging.logger_main.info(pi_ager_init.logspacer)
 pi_ager_init.set_sensortype()
 pi_ager_init.set_system_starttime()
 
 os.system('sudo /var/sudowebscript.sh pkillscale &')
-pi_ager_logging.logger_main.debug('pkillscale done')
 time.sleep(2)
 os.system('sudo /var/sudowebscript.sh startscale &')
-pi_ager_logging.logger_main.debug('startscale done')
+logger.debug('scale restart done')
 
 try:
     pi_ager_loop.autostart_loop()
 except KeyboardInterrupt:
-    pi_ager_logging.logger_main.critical('KeyboardInterrupt')
+    logger.warning('KeyboardInterrupt')
     pass
 
 except Exception as e:
     logstring = _('exception occurred') + '!!!'
-    pi_ager_logging.logger_main.critical(logstring)
-    pi_ager_logging.logger_main.critical(str(e))
+    logger.exception(logstring, exc_info = True)
     pass
     
 pi_ager_organization.goodbye()
