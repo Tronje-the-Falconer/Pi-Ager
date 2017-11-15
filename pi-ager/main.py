@@ -55,6 +55,7 @@ logger.debug('scale restart done')
 
 try:
     pi_ager_loop.autostart_loop()
+
 except KeyboardInterrupt:
     logger.warning('KeyboardInterrupt')
     pass

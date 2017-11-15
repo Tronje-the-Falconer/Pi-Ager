@@ -12,6 +12,7 @@ import pi_ager_init
 import pi_ager_plotting
 from pi_ager_logging import create_logger
 import pi_ager_gpio_config
+import pi_ager_organization
 
 global logger
 logger = create_logger(__name__)
@@ -20,6 +21,7 @@ logger.debug('logging initialised')
 def autostart_loop():
     global status_pi_ager
     global logger
+    
     pi_ager_gpio_config.setupGPIO() # GPIO initialisieren
     pi_ager_gpio_config.defaultGPIO()
     while True:
@@ -588,3 +590,11 @@ def doMainLoop():
         
 # Ende While-Schleife
     logger.debug('status!= 1')
+    gpio.output(pi_ager_names.gpio_exhausting_air, pi_ager_names.relay_off)
+    gpio.output(pi_ager_names.gpio_circulating_air, pi_ager_names.relay_off)
+    gpio.output(pi_ager_names.gpio_cooling_compressor, pi_ager_names.relay_off)
+    gpio.output(pi_ager_names.gpio_dehumidifier, pi_ager_names.relay_off)
+    gpio.output(pi_ager_names.gpio_heater, pi_ager_names.relay_off)
+    gpio.output(pi_ager_names.gpio_humidifier, pi_ager_names.relay_off)
+    gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_off)
+    gpio.output(pi_ager_names.gpio_uv, pi_ager_names.relay_off)

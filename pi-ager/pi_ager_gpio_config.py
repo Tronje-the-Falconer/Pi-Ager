@@ -19,19 +19,18 @@ def setupGPIO():
     
     # Einstellen der GPIO PINS
     # Sensoren etc
-    gpio.setup(pi_ager_names.gpio_scale_data, gpio.IN)           # Kabel Data ()
-    gpio.setup(pi_ager_names.gpio_scale_sync, gpio.OUT)           # Kabel Sync ()
+    gpio.setup(pi_ager_names.gpio_scale_data, gpio.IN)             # Scale Data ()
+    gpio.setup(pi_ager_names.gpio_scale_sync, gpio.OUT)            # Scale Sync ()
     
     # Relaisboard
-    gpio.setup(pi_ager_names.gpio_heater, gpio.OUT)                # Heizung setzen (config.json)
-    gpio.setup(pi_ager_names.gpio_cooling_compressor, gpio.OUT)    # Kuehlung setzen (config.json)
-    gpio.setup(pi_ager_names.gpio_circulating_air, gpio.OUT)       # Umluft setzen (config.json)
-    gpio.setup(pi_ager_names.gpio_humidifier, gpio.OUT)            # Befeuchter setzen (config.json)
-    gpio.setup(pi_ager_names.gpio_exhausting_air, gpio.OUT)        # Abluft setzen (config.json)
-    gpio.setup(pi_ager_names.gpio_light, gpio.OUT)                  # Licht setzen (json.conf)
-    gpio.setup(pi_ager_names.gpio_uv, gpio.OUT)               # UV-Licht setzen (json.conf)
-    gpio.setup(pi_ager_names.gpio_dehumidifier, gpio.OUT)              # Reserve setzen (json.conf)
-
+    gpio.setup(pi_ager_names.gpio_heater, gpio.OUT)                # Heizung setzen
+    gpio.setup(pi_ager_names.gpio_cooling_compressor, gpio.OUT)    # Kuehlung setzen
+    gpio.setup(pi_ager_names.gpio_circulating_air, gpio.OUT)       # Umluft setzen
+    gpio.setup(pi_ager_names.gpio_humidifier, gpio.OUT)            # Befeuchter setzen
+    gpio.setup(pi_ager_names.gpio_exhausting_air, gpio.OUT)        # Abluft setzen
+    gpio.setup(pi_ager_names.gpio_light, gpio.OUT)                 # Licht setzen
+    gpio.setup(pi_ager_names.gpio_uv, gpio.OUT)                    # UV-Licht setzen
+    gpio.setup(pi_ager_names.gpio_dehumidifier, gpio.OUT)          # Dehumidifier setzen
 
 def defaultGPIO():
     global logger
