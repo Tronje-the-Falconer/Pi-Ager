@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import sys
 from pi_ager_logging import create_logger
 import agingtable_loop
 import pi_ager_database

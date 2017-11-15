@@ -3,12 +3,9 @@
 import sys
 import time
 import datetime
-from datetime import timedelta
 import pi_ager_debug
 import pi_ager_database
-import pi_ager_organization
 import pi_ager_init
-import pi_ager_paths
 import pi_ager_names
 import pi_ager_logging
 
@@ -92,7 +89,6 @@ def read_dictionary_write_settings(period_dictionary):
     global sensorname
     global sensortype
     global logger
-    from datetime import timedelta
 
     logger.debug('read_dictionary_write_settings()')
     
@@ -147,7 +143,7 @@ def read_dictionary_write_settings(period_dictionary):
 
     period_starttime_seconds = pi_ager_database.get_current_time()
     pi_ager_database.write_current_value(pi_ager_names.agingtable_period_starttime_key, period_starttime_seconds)
-    period_endtime = datetime.datetime.now() + timedelta(days = period_dictionary['days']) # days = parameter von timedelta
+    period_endtime = datetime.datetime.now() + datetime.timedelta(days = period_dictionary['days']) # days = parameter von datetime.timedelta
 
     logstring = _('values') + ': ' + operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + "\n" + setpoint_humidity_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n"
     logger.info(logstring)
@@ -198,7 +194,7 @@ def doAgingtableLoop():
         
 
     # Hauptprogramm
-    logger.info(pi_ager_init.logspacer)
+    logger.info(pi_ager_names.logspacer)
     logstring = "\n" + _('the climate values are now controlled by the automatic program') + ' ' + agingtable + '\n'
     logger.info(logstring)
     rows = pi_ager_database.get_agingtable_as_rows(agingtable)
@@ -259,7 +255,7 @@ def doAgingtableLoop():
             if period == 0:
                 logstring = _('start values period 1 of') + ' ' +str(total_periods + 1)
                 logger.info(logstring)
-                finaltime = datetime.datetime.now() + timedelta(days = total_duration)  # days = parameter von timedelta
+                finaltime = datetime.datetime.now() + datetime.timedelta(days = total_duration)  # days = parameter von datetime.timedelta
                 read_dictionary_write_settings(actual_dictionary)
                 logstring = _('next change of values') + ': ' + period_endtime.strftime('%d.%m.%Y  %H:%M')
                 logger.info(logstring)
@@ -283,11 +279,11 @@ def doAgingtableLoop():
                 
                 if finaltime == None:
                     period_starttime = datetime.datetime.fromtimestamp(period_starttime_seconds)
-                    finaltime = period_starttime + timedelta(days = total_duration)
+                    finaltime = period_starttime + datetime.timedelta(days = total_duration)
                 logstring = _('end of program') + ': ' + finaltime.strftime('%d.%m.%Y  %H:%M')
                 logger.info(logstring)
             period += 1
-            logger.info(pi_ager_init.logspacer)
+            logger.info(pi_ager_names.logspacer)
                 
         elif (period_starttime_seconds + duration_sleep - current_time) % 3600 == 0:
             logger.info(_('in agingtable duration_sleep-loop. duration_sleep left') + ': ' + str(period_starttime_seconds + duration_sleep - current_time) + ' ' + 'seconds')

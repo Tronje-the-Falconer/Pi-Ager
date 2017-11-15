@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import RPi.GPIO as gpio
-import pi_ager_paths
 import pi_ager_logging
+import pi_ager_names
 
 global logger
 logger = pi_ager_logging.create_logger(__name__)
@@ -22,4 +22,4 @@ def cleanup():
     gpio.cleanup() # GPIO zuruecksetzen
     logstring = _('cleanup complete') + '.'
     logger.info(logstring)
-    logger.info(pi_ager_init.logspacer)
+    logger.info(pi_ager_names.logspacer)

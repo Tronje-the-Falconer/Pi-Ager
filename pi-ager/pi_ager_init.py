@@ -1,16 +1,11 @@
 #!/usr/bin/python3
 import Adafruit_DHT
-import RPi.GPIO as gpio
 import time
 import gettext
 import pi_ager_database
 import pi_ager_names
 from pi_ager_logging import create_logger
 
-
-global logspacer
-global board_mode
-global system_starttime
 global system_starttime
 global circulation_air_start
 global exhaust_air_start
@@ -18,9 +13,8 @@ global uv_starttime
 global uv_stoptime
 global light_starttime
 global light_stoptime
-
-
 global logger
+
 logger = create_logger(__name__)
 logger.debug('logging initialised')
 
@@ -83,16 +77,8 @@ def set_language():
 
     translation.install()
 
-logspacer = "***********************************************"
-logspacer2 = '-------------------------------------------------------'
-
-# delay = 4                      # Wartezeit in der Schleife
-# counter_humidify = 0           # Zaehler fuer die Verzoegerung der Befeuchtung
-
-# status_exhaust_fan = False     # Variable fuer die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
-# verbose = True                 # Dokumentiert interne Vorgaenge wortreich
-
-# Allgemeingueltige Werte aus config.json
+loopcounter = 0                      #  Zaehlt die Durchlaeufe des Mainloops
+    
 # Sensortyp
 sensortype = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key)
 # Sprache der Textausgabe
@@ -108,39 +94,6 @@ switch_off_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_se
 # Luftbefeuchtungsverzoegerung
 delay_humidify = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key)
 
-# Sainsmart Relais Vereinfachung 0 aktiv
-relay_on = False               # negative Logik!!! des Relay's, Schaltet bei 0 | GPIO.LOW  | False  ein
-relay_off = (not relay_on)     # negative Logik!!! des Relay's, Schaltet bei 1 | GPIO.High | True aus
-
-# RRD-Tool
-rrd_dbname = 'pi-ager'                   # Name fuer Grafiken etc
-rrd_filename = rrd_dbname + '.rrd'   # Dateinamen mit Endung
-measurement_time_interval = 10       # Zeitintervall fuer die Messung in Sekunden
-loopcounter = 0                      #  Zaehlt die Durchlaeufe des Mainloops
-
-# Pinbelegung
-board_mode = gpio.BCM              # GPIO board mode (BCM = Broadcom SOC channel number - numbers after GPIO Bsp. GPIO12=12 [GPIO.BOARD = Pin by number Bsp: GPIO12=32])
-gpio_cooling_compressor = 4        # GPIO fuer Kuehlschrankkompressor
-gpio_heater = 3                    # GPIO fuer Heizkabel
-gpio_humidifier = 18               # GPIO fuer Luftbefeuchter
-gpio_circulating_air = 24          # GPIO fuer Umluftventilator
-gpio_exhausting_air = 23           # GPIO fuer Austauschluefter
-gpio_uv = 25                       # GPIO fuer UV Licht
-gpio_light = 8                     # GPIO fuer Licht
-gpio_dehumidifier = 7              # GPIO fuer Entfeuchter
-gpio_sensor_data = 17              # GPIO fuer Data Temperatur/Humidity Sensor
-gpio_sensor_sync = 27              # GPIO fuer Sync Temperatur/Humidity Sensor
-gpio_scale_data = 10               # GPIO fuer Waage Data
-gpio_scale_sync = 9                # GPIO fuer Waage Sync
-gpio_alarm = 33                    
-gpio_temperature_meat_SCLK = 21    
-gpio_temperature_meat_MISO = 19
-gpio_temperature_meat_MOSI = 20
-gpio_temperature_meat_CSO = 16
-gpio_switch = 22
-#gpio_scale1_data = 5
-#gpio_scale1_sync = 6
 
 # Sprache
 set_language()
-

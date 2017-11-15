@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import logging
 from logging.handlers import RotatingFileHandler
-import pi_ager_names
 import pi_ager_paths
 from pi_ager_database import get_logging_value
 from pathlib import Path

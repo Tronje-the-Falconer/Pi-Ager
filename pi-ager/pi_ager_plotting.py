@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import pi_ager_init
+import pi_ager_names
 import pi_ager_paths
 import rrdtool
 import pi_ager_logging
@@ -61,7 +61,7 @@ def plotting(plotting_value):
         elif plot == 'hourly':
             period = 'h'
 # Grafiken erzeugen
-        ret = rrdtool.graph("%s%s_%s-%s.png" %(pi_ager_paths.get_path_graphs_website(),pi_ager_init.rrd_dbname,plotting_value,plot),
+        ret = rrdtool.graph("%s%s_%s-%s.png" %(pi_ager_paths.get_path_graphs_website(),pi_ager_names.rrd_dbname,plotting_value,plot),
             "--start",
             "-1%s" % (period),
             "--title=%s (%s)" % (title, plot),
@@ -70,9 +70,9 @@ def plotting(plotting_value):
             "-w 400",
             "--alt-autoscale",
             "--slope-mode",
-            "DEF:%s=%s:%s:AVERAGE" % (plotting_value, pi_ager_init.rrd_filename, plotting_value),
-            "DEF:%s=%s:sensor_temperature:AVERAGE" % (_('durch'), pi_ager_init.rrd_filename),
-            "DEF:%s=%s:sensor_humidity:AVERAGE" % (_('durchhum'), pi_ager_init.rrd_filename),
+            "DEF:%s=%s:%s:AVERAGE" % (plotting_value, pi_ager_names.rrd_filename, plotting_value),
+            "DEF:%s=%s:sensor_temperature:AVERAGE" % (_('durch'), pi_ager_names.rrd_filename),
+            "DEF:%s=%s:sensor_humidity:AVERAGE" % (_('durchhum'), pi_ager_names.rrd_filename),
             "GPRINT:%s:AVERAGE:%s\: %%3.2lf C" % (_('durch'), _('Temperatur')),
             "GPRINT:%s:AVERAGE:%s\: %%3.2lf" % (_('durchhum'), _('Luftfeuchtigkeit')), 
-            "LINE1:%s#0000FF:%s_%s" % (plotting_value, pi_ager_init.rrd_dbname, plotting_value))
+            "LINE1:%s#0000FF:%s_%s" % (plotting_value, pi_ager_names.rrd_dbname, plotting_value))

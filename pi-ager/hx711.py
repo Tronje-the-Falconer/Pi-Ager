@@ -4,11 +4,6 @@
 import statistics
 import time
 import RPi.GPIO as GPIO
-from pi_ager_logging import create_logger
-
-global logger
-logger = create_logger(__name__)
-logger.debug('logging initialised')
 
 class HX711:
     def __init__(self, dout=10, pd_sck=9, gain=128, bitsToRead=24):

@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-import sys
 import scale_loop
 from pi_ager_logging import create_logger
 

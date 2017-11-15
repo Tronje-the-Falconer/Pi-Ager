@@ -2,7 +2,6 @@
 # -*- coding: iso-8859-1 -*-
 # Importieren der Module
 import os
-import subprocess
 import time
 import rrdtool
 import pi_ager_logging
@@ -10,23 +9,24 @@ pi_ager_logging.create_logger('main.py')
 import pi_ager_loop
 import pi_ager_init
 import pi_ager_organization
-import pi_ager_plotting
+import pi_ager_names
+import pi_ager_database
 
 global logger
 logger = pi_ager_logging.create_logger('main')
 logger.debug('logging initialised')
 
-logger.info(pi_ager_init.logspacer)
+logger.info(pi_ager_names.logspacer)
 
 # RRD-Datenbank anlegen, wenn nicht vorhanden
 try:
-    with open(pi_ager_init.rrd_filename): pass
+    with open(pi_ager_names.rrd_filename): pass
 
 except IOError:
-    logstring = _("creating a new database") + ": " + pi_ager_init.rrd_filename
+    logstring = _("creating a new database") + ": " + pi_ager_names.rrd_filename
     logger.debug(logstring)
-    ret = rrdtool.create("%s" %(pi_ager_init.rrd_filename),
-        "--step","%s" %(pi_ager_init.measurement_time_interval),
+    ret = rrdtool.create("%s" %(pi_ager_names.rrd_filename),
+        "--step","%s" %(pi_ager_names.measurement_time_interval),
         "--start",'0',
         "DS:sensor_temperature:GAUGE:2000:U:U",
         "DS:sensor_humidity:GAUGE:2000:U:U",

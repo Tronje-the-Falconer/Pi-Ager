@@ -30,10 +30,12 @@ def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, ta
             tara_scale(scale, tara_key, data_table)
         value = scale.getMeasure()
         formated_value = round(value, 3)
-        if (current_time - measure_start_time) % saving_period == 0 and current_time != save_time:       # alle 5 Sekunden wird einmal gespeichert
+        if (current_time - measure_start_time) % saving_period == 0 and current_time != save_time:      # speichern je nach datenbankeintrag fuer saving_period
             save_time = current_time
             pi_ager_database.write_scale(data_table,value)
+            logger.debug('scale-value saved in database ' + time.strftime('%H:%M:%S', time.localtime()))
         current_time = pi_ager_database.get_current_time()
+    logger.debug('measurement performed')
 
 def get_scale_settings(scale_setting_rows):
     global logger
