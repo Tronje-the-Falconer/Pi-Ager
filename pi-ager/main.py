@@ -63,5 +63,8 @@ except Exception as e:
     logstring = _('exception occurred') + '!!!'
     logger.exception(logstring, exc_info = True)
     pass
-    
-pi_ager_organization.goodbye()
+
+finally:
+    pi_ager_init.loopcounter = 0
+    pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
+    pi_ager_organization.goodbye()

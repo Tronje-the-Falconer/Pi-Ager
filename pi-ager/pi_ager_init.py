@@ -133,10 +133,13 @@ gpio_sensor_sync = 27              # GPIO fuer Sync Temperatur/Humidity Sensor
 gpio_scale_data = 10               # GPIO fuer Waage Data
 gpio_scale_sync = 9                # GPIO fuer Waage Sync
 gpio_alarm = 33                    
-gpio_meat_temperature_SCLK = 21    
-gpio_meat_temperature_MISO = 19
-gpio_meat_temperature_MOSI = 20
-gpio_meat_temperature_CSO = 16
+gpio_temperature_meat_SCLK = 21    
+gpio_temperature_meat_MISO = 19
+gpio_temperature_meat_MOSI = 20
+gpio_temperature_meat_CSO = 16
+gpio_switch = 22
+#gpio_scale1_data = 5
+#gpio_scale1_sync = 6
 
 # Sprache
 set_language()
