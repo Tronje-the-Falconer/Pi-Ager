@@ -31,8 +31,11 @@
 ####09 Code aufräumen (nur Funktionen in importierten py's, um doppelte Ausführungen zu vermeiden)
 ####10 Logfile (website) erzeugen, wenn nicht vorhanden
 ####11 Logging: Datei- und Consolenaufteilung verbessern
-    12 Licht für Webcam automatisch anschalten (Stellschalter in DB? Wenn der auf 1 dann lichtmodus ignorieren, Zeit abschaltung oder Webcam seite verlassen schaltet Licht wieder aus?)
-    13 pi_ager_init.py: Variablen, deren Werte hardcoded gesetzt werden, sollten in die pi_ager_names.py überführt werden
-
+####12 Licht für Webcam automatisch anschalten
+    13 pi_ager_init.py: Variablen, deren Werte hardcoded gesetzt werden, sollten in die pi_ager_names.py überführt werden#
+    14 cleanup bei nicht definierten GPIO's abfangen (gpio == Not Null)
+    15 database import in logging.py
+    16 agingtable korrektur Prüfen der Werte
+    
 3) Linux
     01 phpliteadmin.php passwort bei erstinstallation auf allgemeinses PW oder eigenes setzen
