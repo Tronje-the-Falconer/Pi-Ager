@@ -110,26 +110,35 @@ agingtable_days_field = 'days'
 # hardcoded values
 # Pinbelegung
 board_mode = gpio.BCM              # GPIO board mode (BCM = Broadcom SOC channel number - numbers after GPIO Bsp. GPIO12=12 [GPIO.BOARD = Pin by number Bsp: GPIO12=32])
-gpio_cooling_compressor = 4        # GPIO fuer Kuehlschrankkompressor
+#gpio_notinuse_0 = 2
 gpio_heater = 3                    # GPIO fuer Heizkabel
+gpio_cooling_compressor = 4        # GPIO fuer Kuehlschrankkompressor
+gpio_sensor_data = 17              # GPIO fuer Data Temperatur/Humidity Sensor
+gpio_sensor_sync = 27              # GPIO fuer Sync Temperatur/Humidity Sensor
+gpio_switch = 22
+gpio_scale2_data = 10               # GPIO fuer Waage Data
+gpio_scale2_sync = 9                # GPIO fuer Waage Sync
+#gpio_notinuse_1 = 11
+#gpio_notinuse_2 =  0
+gpio_scale1_data = 5
+gpio_scale1_sync = 6
+gpio_alarm = 13
+gpio_temperature_meat_MISO = 19
+notinuse_3 = 26
+
+#gpio_display_txd = 14
+#gpio_display_rxd = 15
 gpio_humidifier = 18               # GPIO fuer Luftbefeuchter
-gpio_circulating_air = 24          # GPIO fuer Umluftventilator
 gpio_exhausting_air = 23           # GPIO fuer Austauschluefter
+gpio_circulating_air = 24          # GPIO fuer Umluftventilator
 gpio_uv = 25                       # GPIO fuer UV Licht
 gpio_light = 8                     # GPIO fuer Licht
 gpio_dehumidifier = 7              # GPIO fuer Entfeuchter
-gpio_sensor_data = 17              # GPIO fuer Data Temperatur/Humidity Sensor
-gpio_sensor_sync = 27              # GPIO fuer Sync Temperatur/Humidity Sensor
-gpio_scale2_data = 10               # GPIO fuer Waage Data
-gpio_scale2_sync = 9                # GPIO fuer Waage Sync
-gpio_alarm = 33                    
-gpio_temperature_meat_SCLK = 21    
-gpio_temperature_meat_MISO = 19
-gpio_temperature_meat_MOSI = 20
+#gpio_notinuse_4 = 1
+#gpio_notinuse_5 = 12
 gpio_temperature_meat_CSO = 16
-gpio_switch = 22
-gpio_scale1_data = 5
-gpio_scale1_sync = 6
+gpio_temperature_meat_MOSI = 20                    
+gpio_temperature_meat_SCLK = 21    
 
 # RRD-Tool
 rrd_dbname = 'pi-ager'               # Name fuer Grafiken etc
