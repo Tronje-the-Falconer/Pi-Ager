@@ -63,11 +63,18 @@ def continue_after_power_failure(current_dictionary):
     
     current_temperature = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
     current_humidity = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)
+    
     agingtable_temperature = current_dictionary[pi_ager_names.agingtable_setpoint_temperature_field]
+    if agingtable_temperature == None:
+        agingtable_temperature = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key)
+    
     agingtable_humidity = current_dictionary[pi_ager_names.agingtable_setpoint_humidity_field]
+    if agingtable_humidity == None:
+        agingtable_humidity = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key)
     
     logger.info('agingtable continues after power failure')
-    logger.info(_('current period')) + ': ' + str(int(period))
+    logger.info(_('current period') + ': ' + str(int(period)))
+    logger.debug(current_dictionary)
     logger.debug('current_temperature - agingtable_temperature: ' + str(abs(current_temperature - agingtable_temperature)))
     logger.debug('failure_temperature_delta: ' + str(failure_temperature_delta))
     logger.debug('current_humidity - agingtable_humidity: ' + str(abs(current_humidity - agingtable_humidity)))

@@ -82,8 +82,6 @@ def switch_light(relay_state):
 
 def check_and_set_light():
     #   Manueller "Lichtschalter"
-    gpio.setmode(pi_ager_names.board_mode)
-    gpio.setup(pi_ager_names.gpio_scale_sync, gpio.OUT)
     if pi_ager_database.get_status_light_manual() == 1:
         duration_light_on = pi_ager_database.get_current_time() - pi_ager_database.get_last_change(pi_ager_names.current_values_table, pi_ager_names.status_light_manual_key)
         if duration_light_on <= 600:    #   manuelles Licht ist keine 10 Minuten an
