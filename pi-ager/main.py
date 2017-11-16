@@ -68,4 +68,5 @@ except Exception as e:
 finally:
     pi_ager_init.loopcounter = 0
     pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
+    os.system('sudo /var/sudowebscript.sh pkillscale &')
     pi_ager_organization.goodbye()

@@ -120,16 +120,16 @@ gpio_light = 8                     # GPIO fuer Licht
 gpio_dehumidifier = 7              # GPIO fuer Entfeuchter
 gpio_sensor_data = 17              # GPIO fuer Data Temperatur/Humidity Sensor
 gpio_sensor_sync = 27              # GPIO fuer Sync Temperatur/Humidity Sensor
-gpio_scale_data = 10               # GPIO fuer Waage Data
-gpio_scale_sync = 9                # GPIO fuer Waage Sync
+gpio_scale2_data = 10               # GPIO fuer Waage Data
+gpio_scale2_sync = 9                # GPIO fuer Waage Sync
 gpio_alarm = 33                    
 gpio_temperature_meat_SCLK = 21    
 gpio_temperature_meat_MISO = 19
 gpio_temperature_meat_MOSI = 20
 gpio_temperature_meat_CSO = 16
 gpio_switch = 22
-#gpio_scale1_data = 5
-#gpio_scale1_sync = 6
+gpio_scale1_data = 5
+gpio_scale1_sync = 6
 
 # RRD-Tool
 rrd_dbname = 'pi-ager'               # Name fuer Grafiken etc

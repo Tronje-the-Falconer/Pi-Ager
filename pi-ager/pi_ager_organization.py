@@ -19,9 +19,7 @@ def goodbye():
 def cleanup():
     global logger
     
-    
-    gpio_usage = pi_ager_gpio_config.checkGPIO()
-    if (gpio_usage == True):
+    if pi_ager_gpio_config.gpio_is_in_use:
         logstring = _('running cleanup script') + '...'
         logger.info(logstring)
         gpio.cleanup() # gpio zuruecksetzen
