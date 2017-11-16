@@ -45,3 +45,17 @@ def defaultGPIO():
     gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_off)               # Licht Relais standardmaessig aus
     gpio.output(pi_ager_names.gpio_uv, pi_ager_names.relay_off)                  # UV-Licht Relais standardmaessig aus
     gpio.output(pi_ager_names.gpio_dehumidifier, pi_ager_names.relay_off)        # Reserve Relais standardmaessig aus
+    
+def checkGPIO():
+    gpio_exhausting_air_usage = gpio.gpio_function(pi_ager_names.gpio_exhausting_air)
+    print (gpio_exhausting_air_function)
+    gpio_circulating_air_usage = gpio.gpio_function(pi_ager_names.gpio_circulating_air)
+    gpio_cooling_compressor_usage = gpio.gpio_function(pi_ager_names.gpio_cooling_compressor)
+    gpio_dehumidifier_usage = gpio.gpio_function(pi_ager_names.gpio_dehumidifier)
+    gpio_heater_usage = gpio.gpio_function(pi_ager_names.gpio_heater)
+    gpio_humidifier_usage = gpio.gpio_function(pi_ager_names.gpio_humidifier)
+    gpio_light_usage = gpio.gpio_function(pi_ager_names.gpio_light)
+    gpio_uv_usage = gpio.gpio_function(pi_ager_names.gpio_uv)
+    
+    if (gpio_uv_usage != -1 or gpio_light_usage != -1 or gpio_humidifier_usage != -1 or gpio_heater_usage != -1 or gpio_dehumidifier_usage != -1 or gpio_cooling_compressor_usage != -1 or gpio_circulating_air_usage != -1 or gpio_exhausting_air_function != -1):
+        return True

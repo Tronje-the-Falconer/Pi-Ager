@@ -590,11 +590,4 @@ def doMainLoop():
         
 # Ende While-Schleife
     logger.debug('status!= 1')
-    gpio.output(pi_ager_names.gpio_exhausting_air, pi_ager_names.relay_off)
-    gpio.output(pi_ager_names.gpio_circulating_air, pi_ager_names.relay_off)
-    gpio.output(pi_ager_names.gpio_cooling_compressor, pi_ager_names.relay_off)
-    gpio.output(pi_ager_names.gpio_dehumidifier, pi_ager_names.relay_off)
-    gpio.output(pi_ager_names.gpio_heater, pi_ager_names.relay_off)
-    gpio.output(pi_ager_names.gpio_humidifier, pi_ager_names.relay_off)
-    gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_off)
-    gpio.output(pi_ager_names.gpio_uv, pi_ager_names.relay_off)
+    pi_ager_gpio_config.defaultGPIO()
