@@ -104,7 +104,7 @@ def gpios_are_in_use():
     gpio_notinuse_4_used = gpio_is_in_use(pi_ager_names.gpio_notinuse_4)
     gpio_notinuse_5_used = gpio_is_in_use(pi_ager_names.gpio_notinuse_5)
 
-    if gpio_heater_used or gpio_cooling_compressor_used or gpio_circulating_air_used or gpio_humidifier_used or gpio_exhausting_air_used or gpio_light_used or gpio_uv_used or  or gpio_dehumidifier_used or gpio_alarm_used or gpio_switch_used or gpio_notinuse_0_used or gpio_notinuse_1_used or gpio_notinuse_2_used or gpio_notinuse_3_used or gpio_notinuse_4_used or gpio_notinuse_5_used:
+    if gpio_heater_used or gpio_cooling_compressor_used or gpio_circulating_air_used or gpio_humidifier_used or gpio_exhausting_air_used or gpio_light_used or gpio_uv_used or gpio_dehumidifier_used or gpio_alarm_used or gpio_switch_used or gpio_notinuse_0_used or gpio_notinuse_1_used or gpio_notinuse_2_used or gpio_notinuse_3_used or gpio_notinuse_4_used or gpio_notinuse_5_used:
         return True
     else:
         return False
