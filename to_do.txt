@@ -46,11 +46,11 @@
         43 = GPIO.HARD_PWM
         -1 = GPIO.UNKNOWN
     15 database import in logging.py
-    16 agingtable korrektur Prüfen der Werte Dictionary Null werte Restart 
+####16 agingtable korrektur Prüfen der Werte Dictionary Null werte Restart 
     17 Logik/schaltung auf True und False prüfen
 ####18 GPIO Scales prüfen (names.py und hardcoded in scale.py/scaleloop.py)
 ####19 cleanup gpio scales?
 ####20 Data und sync aus Datenbank bei Scale entfernen
-    
+
 3) Linux
     01 phpliteadmin.php passwort bei erstinstallation auf allgemeinses PW oder eigenes setzen
