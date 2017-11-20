@@ -223,38 +223,38 @@ def doMainLoop():
                 pi_ager_init.circulation_air_start = int(time.time())    # Timer-Timestamp aktualisiert
         # Timer fuer (Abluft-)Luftaustausch-Ventilator
         if exhaust_air_period == 0:                      # gleich 0 ist an,  Dauer-Timer
-            status_exhaust_air = False
-        if exhaust_air_duration == 0:                        # gleich 0 ist aus, kein Timer
             status_exhaust_air = True
+        if exhaust_air_duration == 0:                        # gleich 0 ist aus, kein Timer
+            status_exhaust_air = False
         if exhaust_air_duration > 0:                        # gleich 0 ist aus, kein Timer
             if current_time < pi_ager_init.exhaust_air_start + exhaust_air_period:
-                status_exhaust_air = True                      # (Abluft-)Luftaustausch-Ventilator aus
+                status_exhaust_air = False                      # (Abluft-)Luftaustausch-Ventilator aus
                 logstring = _('exhaust air timer active') + ' (' + _('fan off') +')'
                 logger.info(logstring)
             if current_time >= pi_ager_init.exhaust_air_start + exhaust_air_period:
-                status_exhaust_air = False                     # (Abluft-)Luftaustausch-Ventilator an
+                status_exhaust_air = True                     # (Abluft-)Luftaustausch-Ventilator an
                 logstring = _('exhaust air timer active') + ' (' + _('fan on') +')'
                 logger.info(logstring)
             if current_time >= pi_ager_init.exhaust_air_start + exhaust_air_period + exhaust_air_duration:
                 pi_ager_init.exhaust_air_start = int(time.time())   # Timer-Timestamp aktualisiert
         # Timer fuer UV-Licht
         if uv_modus == 0:                         # Modus 0 UV-Licht aus
-            status_uv = True                      # UV-Licht aus
+            status_uv = False                      # UV-Licht aus
             logstring = _('modus uv-light') + ': ' + _('off')
             logger.info(logstring)
         
         if uv_modus == 1:                            # Modus 1 = Periode/Dauer
             if uv_period == 0:                      # gleich 0 ist an,  Dauer-Timer
-                status_uv = False
-            if uv_duration == 0:                        # gleich 0 ist aus, kein Timer
                 status_uv = True
+            if uv_duration == 0:                        # gleich 0 ist aus, kein Timer
+                status_uv = False
             if uv_duration > 0:                        # gleich 0 ist aus, kein Timer                
                 if current_time >= pi_ager_init.uv_starttime and current_time <= pi_ager_init.uv_stoptime:
-                    status_uv = False                     # UV-Licht an
+                    status_uv = True                     # UV-Licht an
                     logstring = _('uv-light timer active') + ' (' + _('uv-light on') +')'
                     logger.info(logstring)
                 else: 
-                    status_uv = True                      # UV-Licht aus
+                    status_uv = False                      # UV-Licht aus
                     logstring = _('uv-light timer active') + ' (' + _('uv-light off') +')'
                     logger.info(logstring)
 
@@ -274,32 +274,32 @@ def doMainLoop():
             logger.debug(pi_ager_init.uv_stoptime)
 
             if now >= pi_ager_init.uv_starttime and now <= pi_ager_init.uv_stoptime:
-                status_uv = False                     # UV-Licht an
+                status_uv = True                     # UV-Licht an
                 logstring = _('uv-light timestamp active') + ' (' + _('uv-light on') +')'
                 logger.info(logstring)
             else: 
-                status_uv = True                      # UV-Licht aus
+                status_uv = False                      # UV-Licht aus
                 logstring = _('uv-light timestamp active') + ' (' + _('uv-light off') +')'
                 logger.info(logstring)
 
         # Timer fuer Licht
         if light_modus == 0:                         # Modus 0 Licht aus
-            status_light = True                      # Licht aus
+            status_light = False                      # Licht aus
             logstring = _('modus light') + ': ' + _('off')
             logger.info(logstring)
         
         if light_modus == 1:                            # Modus 1 = Periode/Dauer
             if light_period == 0:                      # gleich 0 ist an,  Dauer-Timer
-                status_light = False
-            if light_duration == 0:                        # gleich 0 ist aus, kein Timer
                 status_light = True
+            if light_duration == 0:                        # gleich 0 ist aus, kein Timer
+                status_light = False
             if light_duration > 0:                        # gleich 0 ist aus, kein Timer                
                 if current_time >= pi_ager_init.light_starttime and current_time <= pi_ager_init.light_stoptime:
-                    status_light = False                     # Licht an
+                    status_light = True                     # Licht an
                     logstring = _('light timer active') + ' (' + _('light on') +')'
                     logger.info(logstring)
                 else: 
-                    status_light = True                      # Licht aus
+                    status_light = False                      # Licht aus
                     logstring = _('light timer active') + ' (' + _('light off') +')'
                     logger.info(logstring)
 
@@ -317,11 +317,11 @@ def doMainLoop():
             pi_ager_init.light_stoptime = pi_ager_init.light_starttime + datetime.timedelta(0, light_duration)
 
             if now >= pi_ager_init.light_starttime and now <= pi_ager_init.light_stoptime:
-                    status_light = False                     # Licht an
+                    status_light = True                     # Licht an
                     logstring = _('light timestamp active') + ' (' + _('light on') +')'
                     logger.info(logstring)
             else: 
-                status_light = True                      # Licht aus
+                status_light = False                      # Licht aus
                 logstring = _('light timestamp active') + ' (' + _('light off') +')'
                 logger.info(logstring)
 
@@ -433,22 +433,22 @@ def doMainLoop():
             gpio.output(pi_ager_names.gpio_dehumidifier, pi_ager_names.relay_off)
         
         # Schalten des (Abluft-)Luftaustausch-Ventilator
-        if status_exhaust_air == False or status_exhaust_fan == True:
+        if status_exhaust_air == True or status_exhaust_fan == True:
             gpio.output(pi_ager_names.gpio_exhausting_air, pi_ager_names.relay_on)
-        if status_exhaust_fan == False and status_exhaust_air == True:
+        if status_exhaust_air == False and status_exhaust_fan == False:
             gpio.output(pi_ager_names.gpio_exhausting_air, pi_ager_names.relay_off)
         
         # Schalten des UV_Licht
-        if status_uv == False:
-            gpio.output(pi_ager_names.gpio_uv, pi_ager_names.relay_on)
         if status_uv == True:
+            gpio.output(pi_ager_names.gpio_uv, pi_ager_names.relay_on)
+        if status_uv == False:
             gpio.output(pi_ager_names.gpio_uv, pi_ager_names.relay_off)
         
         # Schalten des Licht
-        if status_light == False:
+        if status_light == True:
             switch_light(pi_ager_names.relay_on)
             # gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_on)
-        if status_light == True:
+        if status_light == False:
             switch_light(pi_ager_names.relay_off)
             # gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_off)
         
