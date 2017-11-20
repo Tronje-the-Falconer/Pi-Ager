@@ -10,6 +10,7 @@
                                     
                                     include 'modules/database_empty_statistic_tables.php';      // leert die Statistik-Tabellen (Status, data)
                                     include 'modules/write_loglevel_db.php';                    // schreibt das Loglevel in Datenbank
+                                    include 'modules/write_debug_values.php';                   // schreibt die Debug-Werte
                                     
 
                                 ?>
@@ -121,18 +122,40 @@
                                     </form>
                                 </div>
                                 <hr>
+                                <h2 class="art-postheader"><?php echo _('debug values'); ?></h2>
+                                <!----------------------------------------------------------------------------------------Debugging-->
+                                <div class="hg_container" >
+                                    <form method="post" name="debug">
+                                        <table style="width: 100%;">
+                                            <?php
+                                                $measuring_interval_debug = get_table_value($debug_table, $measuring_interval_debug_key);
+                                                $agingtable_days_in_seconds_debug = get_table_value($debug_table, $agingtable_days_in_seconds_debug_key);
+                                            ?>
+                                            <tr>
+                                                <td><?php echo _('measuring interval'); ?>:</td>
+                                                <td><input name="measuring_interval_debug" maxlength="4" size="2" type="text" value=<?php echo $measuring_interval_debug; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td><?php echo _('agingtable days in seconds'); ?>:</td>
+                                                <td><input name="agingtable_days_in_seconds_debug" maxlength="4" size="2" type="text" value=<?php echo $agingtable_days_in_seconds_debug; ?>></td>
+                                            </tr>
+
+                                        </table>
+                                        <button class="art-button" name="save_debug_values" value="save_debug_values" onclick="return confirm('<?php echo _('ATTENTION: save debug values?');?>');"><?php echo _('save'); ?></button>
+                                    </form>
+                                </div>
+                                <hr>
                                 <h2 class="art-postheader"><?php echo _('database'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Database-->
-                                <div class="hg_container" >
-                                    
-                                        <table style="width: 100%;">
-                                            <tr>
-                                                <form method="post" name="database">
-                                                    <td><button class="art-button" name="empty_statistic_tables" value="empty_statistic_tables" onclick="return confirm('<?php echo _('ATTENTION: empty statistic tables?');?>');"><?php echo _('empty statistic tables'); ?></button></td>
-                                                </form>
-                                                <td><button class="art-button" name="database_administration" onclick="window.location.href='/phpliteadmin.php'"><?php echo _('database administration'); ?></button></td>
-                                            </tr>
-                                        </table>
+                                <div class="hg_container" >                                    
+                                    <table style="width: 100%;">
+                                        <tr>
+                                            <form method="post" name="database">
+                                                <td><button class="art-button" name="empty_statistic_tables" value="empty_statistic_tables" onclick="return confirm('<?php echo _('ATTENTION: empty statistic tables?');?>');"><?php echo _('empty statistic tables'); ?></button></td>
+                                            </form>
+                                            <td><button class="art-button" name="database_administration" onclick="window.location.href='/phpliteadmin.php'"><?php echo _('database administration'); ?></button></td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 <h2 class="art-postheader"><?php echo _('python'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Reboot/Shutdown-->

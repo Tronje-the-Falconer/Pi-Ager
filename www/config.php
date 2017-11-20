@@ -240,6 +240,35 @@
                                                 <button class="art-button" type="button" onclick="help_light_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
                                             <hr>
+                                            <!----------------------------------------------------------------------------------------agingtable-->
+                                            <table style="width: 100%;" class="miniature_writing">
+                                                <tr>
+                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('agingtable'); ?></h3><img src="images/icons/agingtable_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_agingtable_blockFunction()"><?php echo _('help'); ?></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('failure humidity delta').':'; ?></td>
+                                                    <td class="text_left_padding"><input name="failure_humidity_delta_config" maxlength="4" size="3" type="text" value=<?php echo $failure_humidity_delta; ?>></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('failure temperature delta').':'; ?></td>
+                                                    <td class="text_left_padding"><input name="failure_temperature_delta_config" maxlength="4" size="3" type="text" value=<?php echo $failure_temperature_delta; ?>></td>
+                                                </tr>
+                                            </table>
+                                            <script>
+                                                function help_agingtable_blockFunction() {
+                                                    document.getElementById('help_agingtable').style.display = 'block';
+                                                }
+                                                function help_agingtable_noneFunction() {
+                                                    document.getElementById('help_agingtable').style.display = 'none';
+                                                }
+                                            </script>
+                                            <p id="help_agingtable" class="help_p">
+                                                <?php  echo '<b>'._('agingtable').':</b> '._('text for agingtable help');
+                                                 echo '<br><br>'; ?>
+                                                <button class="art-button" type="button" onclick="help_agingtable_noneFunction()"><?php echo _('close'); ?></button>
+                                            </p>
+                                            <hr>
                                             <!----------------------------------------------------------------------------------------Sensortype-->
                                             <table style="width: 100%;" class="miniature_writing">
                                                 <tr>

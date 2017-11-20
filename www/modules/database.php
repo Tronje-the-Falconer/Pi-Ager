@@ -229,7 +229,7 @@
     }
     
     function write_loglevel($chosen_loglevel_file, $chosen_loglevel_console){
-        global $value_field, $last_change_field, $key_field, $config_settings_table, $loglevel_console_key, $loglevel_file_key, $debug_table;
+        global $value_field, $last_change_field, $key_field, $loglevel_console_key, $loglevel_file_key, $debug_table;
         
         open_connection();
         $sql = 'UPDATE ' . $debug_table . ' SET "' . $value_field . '" = ' . $chosen_loglevel_file . ' WHERE ' . $key_field . ' = "' . $loglevel_file_key . '";';
@@ -239,6 +239,16 @@
         close_database();
     }
     
+    function write_debug_values($chosen_measuring_interval_debug, $chosen_agingtable_days_in_seconds_debug){
+        global $value_field, $last_change_field, $key_field, $agingtable_days_in_seconds_debug_key, $measuring_interval_debug_key, $debug_table;
+        
+        open_connection();
+        $sql = 'UPDATE ' . $debug_table . ' SET "' . $value_field . '" = ' . $chosen_measuring_interval_debug . ' WHERE ' . $key_field . ' = "' . $measuring_interval_debug_key . '";';
+        $sql = $sql . ' UPDATE ' . $debug_table . ' SET "' . $value_field . '" = ' . $chosen_agingtable_days_in_seconds_debug . ' WHERE ' . $key_field . ' = "' . $agingtable_days_in_seconds_debug_key . '";';
+        execute_query($sql);
+        
+        close_database();
+    }
 
     function write_settings($modus, $setpoint_temperature, $setpoint_humidity, $circulation_air_period, $circulation_air_duration, $exhaust_air_period,
                             $exhaust_air_duration)
@@ -262,12 +272,12 @@
                             $switch_on_humidifier, $switch_off_humidifier, $delay_humidify, $uv_modus, $uv_duration, 
                             $uv_period, $switch_on_uv_hour, $switch_on_uv_minute, $light_modus, $light_duration, 
                             $light_period, $switch_on_light_hour, $switch_on_light_minute, $dehumidifier_modus, 
-                            $referenceunit_scale1, $referenceunit_scale2)
+                            $referenceunit_scale1, $referenceunit_scale2, $failure_temperature_delta, $failure_humidity_delta)
         {
         global $value_field, $last_change_field, $key_field, $config_settings_table, $settings_scale1_table, $settings_scale2_table, $sensortype_key, $language_key, $switch_on_cooling_compressor_key,
                 $switch_off_cooling_compressor_key, $switch_on_humidifier_key, $switch_off_humidifier_key, $delay_humidify_key, $uv_modus_key,
                 $uv_duration_key, $uv_period_key, $switch_on_uv_hour_key, $switch_on_uv_minute_key, $light_modus_key, $light_duration_key, $light_period_key,
-                $switch_on_light_hour_key, $switch_on_light_minute_key, $dehumidifier_modus_key, $referenceunit_key;
+                $switch_on_light_hour_key, $switch_on_light_minute_key, $dehumidifier_modus_key, $referenceunit_key, $failure_temperature_delta_key, $failure_humidity_delta_key;
         open_connection();
 
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($sensortype) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $sensortype_key . '"');
@@ -288,9 +298,12 @@
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($switch_on_light_hour) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' = "' . $switch_on_light_hour_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($switch_on_light_minute) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' = "' . $switch_on_light_minute_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($dehumidifier_modus) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' = "' . $dehumidifier_modus_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($failure_temperature_delta) . ' WHERE ' . $key_field . ' = "' . $failure_temperature_delta_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($failure_humidity_delta) . ' WHERE ' . $key_field . ' = "' . $failure_humidity_delta_key . '"');
+        
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($referenceunit_scale1) . ' WHERE ' . $key_field . ' = "' . $referenceunit_key . '"');
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($referenceunit_scale2) . ' WHERE ' . $key_field . ' = "' . $referenceunit_key . '"');
-
+        
         close_database();
         //echo('FINISHED WRITING IN DATABASE');
         }

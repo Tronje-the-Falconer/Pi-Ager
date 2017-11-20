@@ -1,6 +1,6 @@
 <?php 
 // include 'database.php';
-    #Namen der Reifetabelle in config/tables.json speichern
+    #loglevel in DB speichern
     if (isset ($_POST['save_loglevel'])){
         $chosen_loglevel_file = $_POST['loglevel_file'];
         $chosen_loglevel_console = $_POST['loglevel_console'];
