@@ -57,7 +57,7 @@ try:
     pi_ager_loop.autostart_loop()
 
 except KeyboardInterrupt:
-    logger.warning('KeyboardInterrupt')
+    logger.warning(_('KeyboardInterrupt'))
     pass
 
 except Exception as e:
