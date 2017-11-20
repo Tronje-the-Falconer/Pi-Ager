@@ -25,6 +25,6 @@ def cleanup():
         gpio.cleanup() # gpio zuruecksetzen
         logstring = _('cleanup complete') + '.'
     else:
-        logstring = _('nothing to cleanup') + '.'
+        logstring = _('nothing to cleanup') + '!'
     logger.info(logstring)
     logger.info(pi_ager_names.logspacer)

@@ -9,7 +9,7 @@ try:
     scale_loop.doScaleLoop()
 
 except KeyboardInterrupt:
-    logger.warning('KeyboardInterrupt')
+    logger.warning(_('KeyboardInterrupt'))
     pass
 
 except Exception as e:

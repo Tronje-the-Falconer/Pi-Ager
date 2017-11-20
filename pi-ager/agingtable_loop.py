@@ -202,7 +202,7 @@ def doAgingtableLoop():
 
     # Hauptprogramm
     logger.info(pi_ager_names.logspacer)
-    logstring = "\n" + _('the climate values are now controlled by the automatic program') + ' ' + agingtable + '\n'
+    logstring = _('the climate values are now controlled by the automatic program') + ' ' + agingtable
     logger.info(logstring)
     rows = pi_ager_database.get_agingtable_as_rows(agingtable)
 

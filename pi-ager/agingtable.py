@@ -13,7 +13,7 @@ try:
     
 except KeyboardInterrupt:
     pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, 0)
-    logger.warning('KeyboardInterrupt')
+    logger.warning(_('KeyboardInterrupt'))
     pass
 
 except Exception as e:
