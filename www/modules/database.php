@@ -359,7 +359,6 @@
         delete_data($data_sensor_temperature_meat2_table);
         delete_data($data_sensor_temperature_meat3_table);
         delete_data($data_sensor_temperature_meat4_table);
-        //delete_data($);
 
     }
 
@@ -370,65 +369,10 @@
         open_connection();
         
         $sql = 'UPDATE ' . $current_values_table . ' SET "' . $value_field . '" = "' . strval($status) . '" , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' = "' . $module_key . '"';
-        //echo $sql;
         execute_query($sql);
         
         close_database();
     }
-    // function write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity){
-        // open_connection();
-        // if pi_ager_debug.debugging=='on':
-            // print('DEBUG: in write_current')
-            // print('INSERT INTO ' . data_sensor_temperature_table + '(' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(sensor_temperature) + ', ' . strval(get_current_time()) + ')')
-        // get_query_result('INSERT INTO ' . data_sensor_temperature_table + '(' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(sensor_temperature) + ', ' . strval(get_current_time()) + ')')
-        // get_query_result('INSERT INTO ' . status_heater_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(status_heater) + ',' + strval(get_current_time()) + ')')
-        // get_query_result('INSERT INTO ' . status_exhaust_air_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(status_exhaust_air) + ',' + strval(get_current_time()) + ')')
-        // get_query_result('INSERT INTO ' . status_cooling_compressor_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(status_cooling_compressor) + ',' + strval(get_current_time()) + ')')
-        // get_query_result('INSERT INTO ' . status_circulating_air_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(status_circulating_air) + ',' + strval(get_current_time()) + ')')
-        // get_query_result('INSERT INTO ' . data_sensor_humidity_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES ('+ strval(sensor_humidity) + ',' + strval(get_current_time()) + ')')
-        // close_database()
-    // }
-
-    // function write_scales(value_scale1, value_scale2){
-        // open_connection();
-        // get_query_result('INSERT INTO ' . data_scale1_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES (' + strval(value_scale1) + ',' + strval(get_current_time()) + ')')
-        // get_query_result('INSERT INTO ' . data_scale2_table . ' (' + strval(value_field) + ',' + strval(last_change_field) +') VALUES (' + strval(value_scale2) + ',' + strval(get_current_time()) + ')')
-        // close_database()
-    // }
-
-    // function read_config(){
-        // open_connection();
-        // get_query_result('SELECT * FROM ' . config_settings_table . ' WHERE ' . key_field . ' = "sensortype" OR ' . key_field . ' = "language" OR ' . key_field . ' = "switch_on_cooling_compressor" OR ' . key_field . ' = "switch_off_cooling_compressor" OR ' . key_field . ' = "switch_on_humidifier" OR ' . key_field . ' = "switch_off_humidifier" OR ' . key_field . ' = "delay_humidify" OR ' . key_field . ' = "uv_modus" OR ' . key_field . ' = "uv_duration" OR ' . key_field . ' = "uv_period" OR ' . key_field . ' = "switch_on_uv_hour" OR ' . key_field . ' = "switch_on_uv_minute" OR ' . key_field . ' = "light_modus" OR ' . key_field . ' = "light_duration" OR ' . key_field . ' = "light_period" OR ' . key_field . ' = "switch_on_light_hour" OR ' . key_field . ' = "switch_on_light_minute" OR ' . key_field . ' = "dehumidifier_modus" OR ' . key_field . ' = "referenceunit_scale1" OR ' . key_field . ' = "referenceunit_scale2"');
-        // rows = cursor.fetchall()
-        // close_database()
-        // return rows
-    // }
-
-    // function read_settings(){
-        // open_connection();
-        // get_query_result('SELECT * FROM ' . config_settings_table . ' WHERE ' . key_field . ' ="modus" OR "key"="setpoint_temperature" OR "key"="setpoint_humidity" OR "key"="circulation_air_period" OR "key"="circulation_air_duration" OR "key"="exhaust_air_period" OR "key"="exhaust_air_duration"')
-        // rows = cursor.fetchall()
-        // close_database()
-        // return rows
-    // }
-
     
-    
-    
-    
-    // $items_current = array();
-    // while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
-        // {
-        // $items_current[$dataset['key']] = $dataset['value'];
-        // }
-    
-    // $sensor_temperature = round($items_current['sensor_temperature'], 1);
-    // $sensor_humidity = round($items_current['sensor_humidity'], 1);
-    // $status_exhaust_air = $items_current["status_exhaust_air"];
-    // $sensor_temperature = $items_current["sensor_temperature"];
-    // $status_circulating_air = $items_current["status_circulating_air"];
-    // $sensor_humidity = $items_current["sensor_humidity"];
-    // $status_heater = $items_current["status_heater"];
-    // $status_cooling_compressor = $items_current["status_cooling_compressor"];
-    // $current_json_timestamp_last_change = $dataset['last_change'];
+    include 'database_scheme.php'; 
 ?>
