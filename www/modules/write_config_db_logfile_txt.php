@@ -24,10 +24,20 @@
         $uv_modus_config = $_POST['uv_modus_config'];
         $light_modus_config = $_POST['light_modus_config'];
         $dehumidifier_modus_config = $_POST['dehumidifier_modus_config'];
-        $referenceunit_scale1_config = $_POST['referenceunit_scale1_config'];
-        $referenceunit_scale2_config = $_POST['referenceunit_scale2_config'];
         $failure_temperature_delta_config = $_POST['failure_temperature_delta_config'];
         $failure_humidity_delta_config = $_POST['failure_humidity_delta_config'];
+        $referenceunit_scale1_config = $_POST['referenceunit_scale1_config'];
+        $measuring_interval_scale1_config = $_POST['measuring_interval_scale1_config'];
+        $measuring_duration_scale1_config = $_POST['measuring_duration_scale1_config'];
+        $saving_period_scale1_config = $_POST['saving_period_scale1_config'];
+        $samples_scale1_config = $_POST['samples_scale1_config'];
+        $spikes_scale1_config = $_POST['spikes_scale1_config'];
+        $referenceunit_scale2_config = $_POST['referenceunit_scale2_config'];
+        $measuring_interval_scale2_config = $_POST['measuring_interval_scale2_config'];
+        $measuring_duration_scale2_config = $_POST['measuring_duration_scale2_config'];
+        $saving_period_scale2_config = $_POST['saving_period_scale2_config'];
+        $samples_scale2_config = $_POST['samples_scale2_config'];
+        $spikes_scale2_config = $_POST['spikes_scale2_config'];
 
         $ConfigInputIsValid = TRUE;
         foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
@@ -61,7 +71,9 @@
                             $switch_on_humidifier_config, $switch_off_humidifier_config, $delay_humidify_config, $uv_modus_config, $uv_duration_config,
                             $uv_period_config, $switch_on_uv_hour_config, $switch_on_uv_minute_config, $light_modus_config, $light_duration_config,
                             $light_period_config, $switch_on_light_hour_config, $switch_on_light_minute_config, $dehumidifier_modus_config,
-                            $referenceunit_scale1_config, $referenceunit_scale2_config, $failure_temperature_delta_config, $failure_humidity_delta_config);
+                            $failure_temperature_delta_config, $failure_humidity_delta_config,
+                            $referenceunit_scale1_config, $measuring_interval_scale1_config, $measuring_duration_scale1_config, $saving_period_scale1_config, $samples_scale1_config, $spikes_scale1_config,
+                            $referenceunit_scale2_config, $measuring_interval_scale2_config, $measuring_duration_scale2_config, $saving_period_scale2_config, $samples_scale2_config, $spikes_scale2_config);
 
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus

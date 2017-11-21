@@ -18,10 +18,12 @@
     13 Code aufräumen
 ####14 Logfile (website) erzeugen, wenn nicht vorhanden // über python erledigt
 ####15 admin.php        unter debug fehlen: measuring_interval_debug, agingtable_days_in_seconds_debug
-    16 settings.php     scale-werte fehlen: measuring_interval, measuring_duration, saving_period, samples, spikes
+####16 settings.php     scale-werte fehlen: measuring_interval, measuring_duration, saving_period, samples, spikes
 ####17 settings.php     Agingtable-Werte fehlen: failure_humidity_delta, failure_temperature_delta
     18 on the fly werte auslesen (phase der reifetabelle, status, temperatur, feuchte, Waage1 und 2, Lichtstatus für Schalter on/off)
-    19 Werte prüfen: failure_humidity_delta, failure_temperature_delta
+    19 Werte prüfen: failure_humidity_delta, failure_temperature_delta, Scale1 & 2 measuring_interval, measuring_duration, saving_period, samples, spikes
+    20 Helptexte schreiben
+    21 Changelog Bild von Flatmike
 
 2) Python
 ####01 Stromausfall

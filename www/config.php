@@ -300,13 +300,59 @@
                                             <!----------------------------------------------------------------------------------------Waagen-->
                                         <table style="width: 100%;" class="miniature_writing">
                                             <tr>
-                                                <td rowspan="4" class="td_png_icon"><h3><?php echo _('scales'); ?></h3><img src="images/icons/scale_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_scales_blockFunction()"><?php echo _('help'); ?></button></td>
-                                                <td class="text_left_padding"><?php echo _('reference unit scale1'); ?>:</td>
+                                                <td rowspan="14" class="td_png_icon"><h3><?php echo _('scales'); ?></h3><img src="images/icons/scale_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_scales_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                <td colspan="3"><h3><?php echo _('scale'); ?> 1</h3></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('reference unit'); ?>:</td>
                                                 <td class="text_left_padding"><input name="referenceunit_scale1_config" maxlength="4" size="2" type="text" value=<?php echo $referenceunit_scale1; ?>></td>
                                             </tr>
                                             <tr>
-                                                <td class="text_left_padding"><?php echo _('reference unit scale2'); ?>:</td>
+                                                <td class="text_left_padding"><?php echo _('measuring interval'); ?>:</td>
+                                                <td class="text_left_padding"><input name="measuring_interval_scale1_config" maxlength="4" size="2" type="text" value=<?php echo $measuring_interval_scale1; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('measuring duration'); ?>:</td>
+                                                <td class="text_left_padding"><input name="measuring_duration_scale1_config" maxlength="4" size="2" type="text" value=<?php echo $measuring_duration_scale1; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
+                                                <td class="text_left_padding"><input name="saving_period_scale1_config" maxlength="4" size="2" type="text" value=<?php echo $saving_period_scale1; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('samples'); ?>:</td>
+                                                <td class="text_left_padding"><input name="samples_scale1_config" maxlength="4" size="2" type="text" value=<?php echo $samples_scale1; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('spikes'); ?>:</td>
+                                                <td class="text_left_padding"><input name="spikes_scale1_config" maxlength="4" size="2" type="text" value=<?php echo $spikes_scale1; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2"><h3><?php echo _('scale'); ?> 2</h3></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('reference unit'); ?>:</td>
                                                 <td class="text_left_padding"><input name="referenceunit_scale2_config" maxlength="4" size="2" type="text" value=<?php echo $referenceunit_scale2; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('measuring interval'); ?>:</td>
+                                                <td class="text_left_padding"><input name="measuring_interval_scale2_config" maxlength="4" size="2" type="text" value=<?php echo $measuring_interval_scale2; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('measuring duration'); ?>:</td>
+                                                <td class="text_left_padding"><input name="measuring_duration_scale2_config" maxlength="4" size="2" type="text" value=<?php echo $measuring_duration_scale2; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
+                                                <td class="text_left_padding"><input name="saving_period_scale2_config" maxlength="4" size="2" type="text" value=<?php echo $saving_period_scale2; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('samples'); ?>:</td>
+                                                <td class="text_left_padding"><input name="samples_scale2_config" maxlength="4" size="2" type="text" value=<?php echo $samples_scale2; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('spikes'); ?>:</td>
+                                                <td class="text_left_padding"><input name="spikes_scale2_config" maxlength="4" size="2" type="text" value=<?php echo $spikes_scale2; ?>></td>
                                             </tr>
                                         </table>
                                         <script>

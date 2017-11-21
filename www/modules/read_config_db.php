@@ -29,10 +29,23 @@
     $switch_on_light_hour = get_table_value($config_settings_table,$switch_on_light_hour_key);
     $switch_on_light_minute = get_table_value($config_settings_table,$switch_on_light_minute_key);
     $dehumidifier_modus = get_table_value($config_settings_table,$dehumidifier_modus_key);
-    $referenceunit_scale1 = get_table_value($settings_scale1_table,$referenceunit_key);
-    $referenceunit_scale2 = get_table_value($settings_scale2_table,$referenceunit_key);
     $failure_humidity_delta = get_table_value($config_settings_table, $failure_humidity_delta_key);
     $failure_temperature_delta = get_table_value($config_settings_table, $failure_temperature_delta_key);
+    
+    $referenceunit_scale1 = get_table_value($settings_scale1_table,$referenceunit_key);
+    $measuring_interval_scale1 = get_table_value($settings_scale1_table,$scale_measuring_interval_key);
+    $measuring_duration_scale1 = get_table_value($settings_scale1_table,$measuring_duration_key);
+    $saving_period_scale1 = get_table_value($settings_scale1_table,$saving_period_key);
+    $samples_scale1 = get_table_value($settings_scale1_table,$samples_key);
+    $spikes_scale1 = get_table_value($settings_scale1_table,$spikes_key);
+    
+    $referenceunit_scale2 = get_table_value($settings_scale2_table,$referenceunit_key);
+    $measuring_interval_scale2 = get_table_value($settings_scale1_table,$scale_measuring_interval_key);
+    $measuring_duration_scale2 = get_table_value($settings_scale1_table,$measuring_duration_key);
+    $saving_period_scale2 = get_table_value($settings_scale1_table,$saving_period_key);
+    $samples_scale2 = get_table_value($settings_scale1_table,$samples_key);
+    $spikes_scale2 = get_table_value($settings_scale1_table,$spikes_key);
+
     if ($sensortype == 1) {
         $sensorname = 'DHT11';
         $checked_sens_1 = 'checked="checked"';

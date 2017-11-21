@@ -74,6 +74,14 @@ $agingtable_days_in_seconds_debug_key = 'agingtable_days_in_seconds_debug';
 $status_light_manual_key = 'status_light_manual';
 $failure_humidity_delta_key = 'failure_humidity_delta';
 $failure_temperature_delta_key = 'failure_temperature_delta';
+$samples_key = 'samples';
+$spikes_key = 'spikes';
+$sleep_key = 'sleep';
+$gain_key = 'gain';
+$bits_to_read_key = 'bits_to_read';
+$scale_measuring_interval_key = 'measuring_interval';
+$measuring_duration_key = 'measuring_duration';
+$saving_period_key = 'saving_period';
 
 #-----------------------------table fields;
 $key_field = 'key';
