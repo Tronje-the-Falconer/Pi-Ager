@@ -249,14 +249,23 @@ def doMainLoop():
             if uv_duration == 0:                        # gleich 0 ist aus, kein Timer
                 status_uv = False
             if uv_duration > 0:                        # gleich 0 ist aus, kein Timer                
+                if pi_ager_init.uv_stoptime == pi_ager_init.system_starttime:
+                    pi_ager_init.uv_stoptime = pi_ager_init.uv_starttime + uv_duration
+                    status_uv = True
                 if current_time >= pi_ager_init.uv_starttime and current_time <= pi_ager_init.uv_stoptime:
                     status_uv = True                     # UV-Licht an
                     logstring = _('uv-light timer active') + ' (' + _('uv-light on') +')'
                     logger.info(logstring)
+                    logger.debug('UV-Licht Startzeit: ' + str(pi_ager_init.uv_starttime))
+                    logger.debug('UV-Licht Stoppzeit: ' + str(pi_ager_init.uv_stoptime))
+                    logger.debug('UV-Licht duration: ' + str(uv_duration))
                 else: 
                     status_uv = False                      # UV-Licht aus
                     logstring = _('uv-light timer active') + ' (' + _('uv-light off') +')'
                     logger.info(logstring)
+                    logger.debug('UV-Licht Stoppzeit: ' + str(pi_ager_init.uv_stoptime))
+                    logger.debug('UV-Licht Startzeit: ' + str(pi_ager_init.uv_starttime))
+                    logger.debug('UV-Licht period: ' + str(uv_period))
 
                 if current_time > pi_ager_init.uv_stoptime:
                     pi_ager_init.uv_starttime = int(time.time()) + uv_period  # Timer-Timestamp aktualisiert
@@ -293,15 +302,25 @@ def doMainLoop():
                 status_light = True
             if light_duration == 0:                        # gleich 0 ist aus, kein Timer
                 status_light = False
-            if light_duration > 0:                        # gleich 0 ist aus, kein Timer                
+            if light_duration > 0:                        # es ist eine Dauer eingetragen                
+                if pi_ager_init.light_stoptime == pi_ager_init.system_starttime:
+                    pi_ager_init.light_stoptime = pi_ager_init.light_starttime + light_duration
+                    status_light = True
                 if current_time >= pi_ager_init.light_starttime and current_time <= pi_ager_init.light_stoptime:
-                    status_light = True                     # Licht an
+                    if not status_light == True:
+                        status_light = True                     # Licht an
                     logstring = _('light timer active') + ' (' + _('light on') +')'
                     logger.info(logstring)
+                    logger.debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
+                    logger.debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
+                    logger.debug('Licht duration: ' + str(light_duration))
                 else: 
                     status_light = False                      # Licht aus
                     logstring = _('light timer active') + ' (' + _('light off') +')'
                     logger.info(logstring)
+                    logger.debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
+                    logger.debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
+                    logger.debug('Licht period: ' + str(light_period))
 
                 if current_time > pi_ager_init.light_stoptime:
                     pi_ager_init.light_starttime = int(time.time()) + light_period  # Timer-Timestamp aktualisiert
