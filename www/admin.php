@@ -2,7 +2,6 @@
                                     include 'header.php';                                       // Template-Kopf und Navigation
                                     include 'modules/names.php';
                                     include 'modules/database.php';
-                                    include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                     
                                     include 'modules/system_reboot.php';                        // Startet das System neu
                                     include 'modules/system_shutdown.php';                      // Fährt das System herunter
@@ -12,6 +11,9 @@
                                     include 'modules/database_create_new_database.php';         // erzeugt neue DB
                                     include 'modules/write_loglevel_db.php';                    // schreibt das Loglevel in Datenbank
                                     include 'modules/write_debug_values.php';                   // schreibt die Debug-Werte
+                                    include 'modules/write_admin_db.php';                        // schreibt die admin-Werte
+                                    
+                                    include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                     
 
                                 ?>
@@ -24,9 +26,9 @@
                                                 <td class="td_png_icon"><h3><?php echo _('sensortype'); ?></h3><img src="images/icons/sensortype_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_sensortype_blockFunction()"><?php echo _('help'); ?></button>
                                                 </td>
                                                 <td style=" text-align: left; padding-left: 20px;">
-                                                    <input type="radio" name="sensortype_config" value="1" <?php echo $checked_sens_1; ?>/><label> DHT11</label><br>
-                                                    <input type="radio" name="sensortype_config" value="2" <?php echo $checked_sens_2; ?>/><label> DHT22</label><br>
-                                                    <input type="radio" name="sensortype_config" value="3" <?php echo $checked_sens_3; ?>/><label> SHT</label><br>
+                                                    <input type="radio" name="sensortype_admin" value="1" <?php echo $checked_sens_1; ?>/><label> DHT11</label><br>
+                                                    <input type="radio" name="sensortype_admin" value="2" <?php echo $checked_sens_2; ?>/><label> DHT22</label><br>
+                                                    <input type="radio" name="sensortype_admin" value="3" <?php echo $checked_sens_3; ?>/><label> SHT</label><br>
                                                     <br>
                                                 </td>
                                                 
@@ -54,54 +56,54 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('reference unit'); ?>:</td>
-                                            <td class="text_left_padding"><input name="referenceunit_scale1_config" maxlength="4" size="2" type="text" value=<?php echo $referenceunit_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="referenceunit_scale1_admin" maxlength="4" size="2" type="text" value=<?php echo $referenceunit_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring interval'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_interval_scale1_config" maxlength="4" size="2" type="text" value=<?php echo $measuring_interval_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="measuring_interval_scale1_admin" maxlength="4" size="2" type="text" value=<?php echo $measuring_interval_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring duration'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_duration_scale1_config" maxlength="4" size="2" type="text" value=<?php echo $measuring_duration_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="measuring_duration_scale1_admin" maxlength="4" size="2" type="text" value=<?php echo $measuring_duration_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
-                                            <td class="text_left_padding"><input name="saving_period_scale1_config" maxlength="4" size="2" type="text" value=<?php echo $saving_period_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="saving_period_scale1_admin" maxlength="4" size="2" type="text" value=<?php echo $saving_period_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('samples'); ?>:</td>
-                                            <td class="text_left_padding"><input name="samples_scale1_config" maxlength="4" size="2" type="text" value=<?php echo $samples_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="samples_scale1_admin" maxlength="4" size="2" type="text" value=<?php echo $samples_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('spikes'); ?>:</td>
-                                            <td class="text_left_padding"><input name="spikes_scale1_config" maxlength="4" size="2" type="text" value=<?php echo $spikes_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="spikes_scale1_admin" maxlength="4" size="2" type="text" value=<?php echo $spikes_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2"><h3><?php echo _('scale'); ?> 2</h3></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('reference unit'); ?>:</td>
-                                            <td class="text_left_padding"><input name="referenceunit_scale2_config" maxlength="4" size="2" type="text" value=<?php echo $referenceunit_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="referenceunit_scale2_admin" maxlength="4" size="2" type="text" value=<?php echo $referenceunit_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring interval'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_interval_scale2_config" maxlength="4" size="2" type="text" value=<?php echo $measuring_interval_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="measuring_interval_scale2_admin" maxlength="4" size="2" type="text" value=<?php echo $measuring_interval_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring duration'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_duration_scale2_config" maxlength="4" size="2" type="text" value=<?php echo $measuring_duration_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="measuring_duration_scale2_admin" maxlength="4" size="2" type="text" value=<?php echo $measuring_duration_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
-                                            <td class="text_left_padding"><input name="saving_period_scale2_config" maxlength="4" size="2" type="text" value=<?php echo $saving_period_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="saving_period_scale2_admin" maxlength="4" size="2" type="text" value=<?php echo $saving_period_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('samples'); ?>:</td>
-                                            <td class="text_left_padding"><input name="samples_scale2_config" maxlength="4" size="2" type="text" value=<?php echo $samples_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="samples_scale2_admin" maxlength="4" size="2" type="text" value=<?php echo $samples_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('spikes'); ?>:</td>
-                                            <td class="text_left_padding"><input name="spikes_scale2_config" maxlength="4" size="2" type="text" value=<?php echo $spikes_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="spikes_scale2_admin" maxlength="4" size="2" type="text" value=<?php echo $spikes_scale2; ?>></td>
                                         </tr>
                                     </table>
                                     <script>
@@ -123,8 +125,8 @@
                                                 <td class="td_png_icon"><h3><?php echo _('language'); ?></h3><img src="images/icons/language_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_language_blockFunction()"><?php echo _('help'); ?></button>
                                                 </td>
                                                 <td style=" text-align: left; padding-left: 20px;">
-                                                    <input type="radio" name="language_config" value="1" <?php echo $checked_language_1; ?>/><label> de_DE</label><br>
-                                                    <input type="radio" name="language_config" value="2" <?php echo $checked_language_2; ?>/><label> en_EN</label><br>
+                                                    <input type="radio" name="language_admin" value="1" <?php echo $checked_language_1; ?>/><label> de_DE</label><br>
+                                                    <input type="radio" name="language_admin" value="2" <?php echo $checked_language_2; ?>/><label> en_EN</label><br>
                                                     <br>
                                                 </td>
                                                 

@@ -19,25 +19,12 @@
         $light_duration_config = $_POST['light_duration_config'];
         $switch_on_light_hour_config = $_POST['switch_on_light_hour_config'];
         $switch_on_light_minute_config = $_POST['switch_on_light_minute_config'];
-        $sensortype_config = $_POST['sensortype_config'];
-        $language_config = $_POST['language_config'];
         $uv_modus_config = $_POST['uv_modus_config'];
         $light_modus_config = $_POST['light_modus_config'];
         $dehumidifier_modus_config = $_POST['dehumidifier_modus_config'];
         $failure_temperature_delta_config = $_POST['failure_temperature_delta_config'];
         $failure_humidity_delta_config = $_POST['failure_humidity_delta_config'];
-        $referenceunit_scale1_config = $_POST['referenceunit_scale1_config'];
-        $measuring_interval_scale1_config = $_POST['measuring_interval_scale1_config'];
-        $measuring_duration_scale1_config = $_POST['measuring_duration_scale1_config'];
-        $saving_period_scale1_config = $_POST['saving_period_scale1_config'];
-        $samples_scale1_config = $_POST['samples_scale1_config'];
-        $spikes_scale1_config = $_POST['spikes_scale1_config'];
-        $referenceunit_scale2_config = $_POST['referenceunit_scale2_config'];
-        $measuring_interval_scale2_config = $_POST['measuring_interval_scale2_config'];
-        $measuring_duration_scale2_config = $_POST['measuring_duration_scale2_config'];
-        $saving_period_scale2_config = $_POST['saving_period_scale2_config'];
-        $samples_scale2_config = $_POST['samples_scale2_config'];
-        $spikes_scale2_config = $_POST['spikes_scale2_config'];
+        
 
         $ConfigInputIsValid = TRUE;
         foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
@@ -67,13 +54,11 @@
             )
             {
                 # Eingestellte Werte in config/config.json und logs/logfile.txt speichern
-                write_config($sensortype_config, $language_config, $switch_on_cooling_compressor_config, $switch_off_cooling_compressor_config,
+                write_config($switch_on_cooling_compressor_config, $switch_off_cooling_compressor_config,
                             $switch_on_humidifier_config, $switch_off_humidifier_config, $delay_humidify_config, $uv_modus_config, $uv_duration_config,
                             $uv_period_config, $switch_on_uv_hour_config, $switch_on_uv_minute_config, $light_modus_config, $light_duration_config,
                             $light_period_config, $switch_on_light_hour_config, $switch_on_light_minute_config, $dehumidifier_modus_config,
-                            $failure_temperature_delta_config, $failure_humidity_delta_config,
-                            $referenceunit_scale1_config, $measuring_interval_scale1_config, $measuring_duration_scale1_config, $saving_period_scale1_config, $samples_scale1_config, $spikes_scale1_config,
-                            $referenceunit_scale2_config, $measuring_interval_scale2_config, $measuring_duration_scale2_config, $saving_period_scale2_config, $samples_scale2_config, $spikes_scale2_config);
+                            $failure_temperature_delta_config, $failure_humidity_delta_config);
 
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus
@@ -114,19 +99,7 @@
                     $switch_on_dehumidify = $setpoint_humidity + $switch_on_humidifier_config;
                     $switch_off_dehumidify = $setpoint_humidity + $switch_off_humidifier_config;
                 }
-                # Sensor
-                if ($sensortype_config == 1) {
-                    $sensortype = 1;
-                    $sensorname='DHT11';
-                }
-                if ($sensortype_config == 2) {
-                    $sensortype = 2;
-                    $sensorname='DHT22';
-                }
-                if ($sensortype_config == 3) {
-                    $sensortype = 3;
-                    $sensorname='SHT75';
-                }
+                
                 # Dehumidify-Modus
                 if ($dehumidifier_modus_config == 1) {
                     $dehumidifier_modus_name = _('only exhaust');
@@ -171,13 +144,6 @@
                     $logtext_light_duration = _('light duration').": ".$light_duration_config/60 ." "._('minutes');
                     
                 }
-                #Language
-                if ($language_config == 1) {
-                    $language_name = _('de_DE');
-                }
-                if ($language_config == 2) {
-                    $language_name = _('en_EN');
-                }
                 
                 $circulation_air_duration = $circulation_air_duration/60;
                 $circulation_air_period = $circulation_air_period/60;
@@ -190,7 +156,6 @@
 
                 $f=fopen('logs/logfile.txt','a');
                 fwrite($f, "\n"."***********************************************");
-                fwrite($f, "\n"._('sensor').": ".$sensorname);
                 fwrite($f, "\n". _('operating mode').": ".$operating_mode);
                 fwrite($f, "\n".date('d.m.Y H:i:s').' '._('configuration has been changed.'));
                 fwrite($f, "\n");
@@ -252,12 +217,6 @@
                 fwrite($f, "\n".$logtext_light);
                 fwrite($f, "\n".$logtext_light_duration);
 
-                fwrite($f, "\n");
-                fwrite($f, "\n"._('reference unit scale1').": ".$referenceunit_scale1_config);
-                fwrite($f, "\n"._('reference unit scale2').": ".$referenceunit_scale2_config);
-
-                fwrite($f, "\n");
-                fwrite($f, "\n"._('language').": ".$language_name);
 
                 fwrite($f, "\n"."***********************************************");
                 fclose($f);

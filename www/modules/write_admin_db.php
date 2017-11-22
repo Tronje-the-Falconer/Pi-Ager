@@ -1,0 +1,25 @@
+<?php 
+
+    if (isset ($_POST['admin_form_submit'])){
+        $sensortype_admin = $_POST['sensortype_admin'];
+        $language_admin = $_POST['language_admin'];
+        $referenceunit_scale1_admin = $_POST['referenceunit_scale1_admin'];
+        $measuring_interval_scale1_admin = $_POST['measuring_interval_scale1_admin'];
+        $measuring_duration_scale1_admin = $_POST['measuring_duration_scale1_admin'];
+        $saving_period_scale1_admin = $_POST['saving_period_scale1_admin'];
+        $samples_scale1_admin = $_POST['samples_scale1_admin'];
+        $spikes_scale1_admin = $_POST['spikes_scale1_admin'];
+        $referenceunit_scale2_admin = $_POST['referenceunit_scale2_admin'];
+        $measuring_interval_scale2_admin = $_POST['measuring_interval_scale2_admin'];
+        $measuring_duration_scale2_admin = $_POST['measuring_duration_scale2_admin'];
+        $saving_period_scale2_admin = $_POST['saving_period_scale2_admin'];
+        $samples_scale2_admin = $_POST['samples_scale2_admin'];
+        $spikes_scale2_admin = $_POST['spikes_scale2_admin'];
+
+        write_admin($sensortype_admin, $language_admin, $referenceunit_scale1_admin, $measuring_interval_scale1_admin, $measuring_duration_scale1_admin, $saving_period_scale1_admin, $samples_scale1_admin, $spikes_scale1_admin,
+                                    $referenceunit_scale2_admin, $measuring_interval_scale2_admin, $measuring_duration_scale2_admin, $saving_period_scale2_admin, $samples_scale2_admin, $spikes_scale2_admin);
+
+        print '<script language="javascript"> alert("'. (_("administration values")) . " : " . (_("values saved")) .'"); </script>';                            
+
+    }
+?>

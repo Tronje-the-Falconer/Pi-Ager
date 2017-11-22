@@ -25,7 +25,8 @@
     19 Werte prüfen: failure_humidity_delta, failure_temperature_delta, Scale1 & 2 measuring_interval, measuring_duration, saving_period, samples, spikes
     20 Helptexte schreiben
     21 Changelog Bild von Flatmike
-....22 scale, language, sensortyp von settings.php auf admin.php umziehen
+####22 scale, language, sensortyp von settings.php auf admin.php umziehen
+    23 Lizenz überdenken!
 
 2) Python
 ####01 Stromausfall
