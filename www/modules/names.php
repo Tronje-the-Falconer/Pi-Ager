@@ -22,6 +22,9 @@ $data_sensor_temperature_meat2_table = 'sensor_temperature_meat2_data';
 $data_sensor_temperature_meat3_table = 'sensor_temperature_meat3_data';
 $data_sensor_temperature_meat4_table = 'sensor_temperature_meat4_data';
 $debug_table = 'debug';
+$agingtable_salami_table = 'agingtable_salami';
+$agingtable_dryaging1_table = 'agingtable_dryaging1';
+$agingtable_dryaging2_table = 'agingtable_dryaging1';
 
 #----------------------------table keys;
 $switch_on_cooling_compressor_key = 'switch_on_cooling_compressor';
