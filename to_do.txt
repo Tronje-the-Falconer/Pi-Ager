@@ -1,17 +1,18 @@
 #### = Erledigt
-.... = verschoben auf nächstes Release
+---- = verschoben auf nächstes Release
+.... = Begonnen
 
 1) Website
     01 Upload CSV und eintragen als Agingtable_[CSV-Filename] in Datenbank ACHTUNG! richtige Reihenfolge in Tabelle schreiben!
     02 Editieren und Löschen der Agingtables
     03 Wägezellen Calibrate Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
-....03 Alarm
+----03 Alarm
     04 Temperatur Statistiken und aktuelle Werte
 ####05 Reifetabellenzeile einfärben, welche Phase gerade aktiv
     06 php logging nutzen
     07 Translation Aktivieren
-....08 Update über Website ermöglichen
-....09 Displayupdate über Website
+----08 Update über Website ermöglichen
+----09 Displayupdate über Website
     10 Kommentare entfernen
 ####11 Datenbank/-schema per Button erzeugen
     12 Datenbank auf Vollständigkeit überprüfen. Warnung ausgeben, wenn Dinge fehlen und ergänzen
@@ -24,13 +25,13 @@
     19 Werte prüfen: failure_humidity_delta, failure_temperature_delta, Scale1 & 2 measuring_interval, measuring_duration, saving_period, samples, spikes
     20 Helptexte schreiben
     21 Changelog Bild von Flatmike
-    22 scale, language, sensortyp von settings.php auf admin.php umziehen
+....22 scale, language, sensortyp von settings.php auf admin.php umziehen
 
 2) Python
 ####01 Stromausfall
-....02 Display 
-....03 4 Temperaturfühler mit AD Wandler (Statistiken und aktuelle Werte)
-....04 Alarm
+----02 Display 
+----03 4 Temperaturfühler mit AD Wandler (Statistiken und aktuelle Werte)
+----04 Alarm
 ####05 Logrotate für pi-ager-logfile prüfen
     06 Translation aktivieren
 ####07 Kommentare entfernen
