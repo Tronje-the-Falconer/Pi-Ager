@@ -3,6 +3,10 @@
     
     function create_database_scheme()
     {
+        global $data_scale1_table, $data_scale2_table, $status_cooling_compressor_table, $status_heater_table, $data_sensor_humidity_table, $status_circulating_air_table,
+        $data_sensor_temperature_table, $status_exhaust_air_table, $data_sensor_temperature_meat1_table, $data_sensor_temperature_meat2_table, $data_sensor_temperature_meat3_table, $data_sensor_temperature_meat4_table,
+        $status_light_table, $status_uv_table, $status_humidifier_table, $status_dehumidifier_table, $current_values_table, $settings_scale1_table, $settings_scale2_table,
+        $config_settings_table, $debug_table, $agingtables_table;
         drop_and_create_id_value_table($data_scale1_table);
         drop_and_create_id_value_table($data_scale2_table);
         drop_and_create_id_value_table($status_cooling_compressor_table);
@@ -33,6 +37,7 @@
     // Drop And Create
     function drop_and_create_id_value_table($table)
     {
+        global $id_field, $value_field, $last_change_field;
         open_connection();
         
         $sql = 'DROP TABLE IF EXISTS "'$table'";';
@@ -45,6 +50,8 @@
     
     function drop_and_create_key_value_table($table)
     {
+        global $id_field, $key_field, $value_field, $last_change_field;
+        
         open_connection();
         
         $sql = 'DROP TABLE IF EXISTS "'$table'";';
@@ -56,7 +63,7 @@
         
         switch ($table) {
             case $current_values_table:
-                insert_current_values();
+                insert_current_values($current_values_table);
                 break;
             case $settings_scale1_table:
                 insert_scale_settings_values($settings_scale1_table);
@@ -65,10 +72,10 @@
                 insert_scale_settings_values($settings_scale2_table);
                 break;
              case $config_settings_table:
-                insert_config_settings_values();
+                insert_config_settings_values($config_settings_table);
                 break;
              case $debug_table:
-                insert_debug_values();
+                insert_debug_values($debug_table);
                 break;
         }
         
@@ -76,6 +83,8 @@
     
     function drop_and_create_agingtable_list($table)
     {
+        global $id_field, $agingtable_name_field;
+        
         open_connection();
         
         $sql = 'DROP TABLE IF EXISTS "'$table'";';
@@ -90,6 +99,7 @@
      
     function drop_and_create_agingtable($table)
      {
+         global $id_field, $agingtable_modus_field, $agingtable_setpoint_humidity_field, $agingtable_setpoint_temperature_field, $agingtable_circulation_air_duration_field, $agingtable_circulation_air_period_field, $agingtable_exhaust_air_duration_field, $agingtable_exhaust_air_period_field, $agingtable_days_field;
          open_connection();
          
          $sql = 'DROP TABLE IF EXISTS "'$table'";';
@@ -116,165 +126,169 @@
     ///Inserts
         
         
-    function insert_current_values()
+    function insert_current_values($table)
     {
+        global $id_field, $key_field, $value_field, $last_change_field;
         open_connection();
         
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("1","sensor_temperature","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("1","sensor_temperature","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("2","sensor_humidity","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("2","sensor_humidity","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("3","status_circulating_air","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("3","status_circulating_air","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("4","status_cooling_compressor","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("4","status_cooling_compressor","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("5","status_exhaust_air","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("5","status_exhaust_air","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("6","status_heater","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("6","status_heater","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("7","status_light","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("7","status_light","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("8","status_uv","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("8","status_uv","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("9","status_humidifier","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("9","status_humidifier","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("10","status_dehumidifier","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("10","status_dehumidifier","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("11","scale1","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("11","scale1","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("12","scale2","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("12","scale2","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("13","status_piager","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("13","status_piager","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("14","status_agingtable","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("14","status_agingtable","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("15","status_scale1","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("15","status_scale1","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("16","status_scale2","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("16","status_scale2","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("17","status_tara_scale1","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("17","status_tara_scale1","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("18","status_tara_scale2","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("18","status_tara_scale2","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("19","sensor_temperature_meat1","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("19","sensor_temperature_meat1","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("20","sensor_temperature_meat2","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("20","sensor_temperature_meat2","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("21","sensor_temperature_meat3","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("21","sensor_temperature_meat3","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("22","sensor_temperature_meat4","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("22","sensor_temperature_meat4","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("23","agingtable_period","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("23","agingtable_period","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("24","agingtable_period_starttime","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("24","agingtable_period_starttime","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$current_values_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("25","status_light_manual","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("25","status_light_manual","0.0","0");';
         execute_query($sql);
         
         close_database();
     }    
      
-     function insert_scale_settings_values($settings_scale_table)
+     function insert_scale_settings_values($$table)
      {
+         global $id_field, $key_field, $value_field, $last_change_field;
         open_connection();
          
-        $sql = 'INSERT INTO "'$settings_scale_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("1","samples","300.0", "0");';
+        $sql = 'INSERT INTO "'$$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("1","samples","300.0", "0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$settings_scale_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("2","spikes","60.0", "0");';
+        $sql = 'INSERT INTO "'$$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("2","spikes","60.0", "0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$settings_scale_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("3","sleep","0.1", "0");';
+        $sql = 'INSERT INTO "'$$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("3","sleep","0.1", "0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$settings_scale_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("6","gain","128.0", "0");';
+        $sql = 'INSERT INTO "'$$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("6","gain","128.0", "0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$settings_scale_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("7","bits_to_read","24.0", "0");';
+        $sql = 'INSERT INTO "'$$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("7","bits_to_read","24.0", "0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$settings_scale_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("8","referenceunit","125.0", "0");';
+        $sql = 'INSERT INTO "'$$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("8","referenceunit","125.0", "0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$settings_scale_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("9","measuring_interval","120.0", "0");';
+        $sql = 'INSERT INTO "'$$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("9","measuring_interval","120.0", "0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$settings_scale_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("11","measuring_duration","60.0", "0");';
+        $sql = 'INSERT INTO "'$$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("11","measuring_duration","60.0", "0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$settings_scale_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("12","saving_period","1.0", "0");';
+        $sql = 'INSERT INTO "'$$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("12","saving_period","1.0", "0");';
         execute_query($sql);
         
         close_database();
      }
         
-     function insert_debug_values()
+     function insert_debug_values($$table)
      {
+         global $id_field, $key_field, $value_field, $last_change_field;
         open_connection();
           
-        $sql = 'INSERT INTO "'$debug_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("1","measuring_interval_debug","30","0");';
+        $sql = 'INSERT INTO "'$$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("1","measuring_interval_debug","30","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$debug_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("2","agingtable_days_in_seconds_debug","1","0");';
+        $sql = 'INSERT INTO "'$$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("2","agingtable_days_in_seconds_debug","1","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$debug_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("3","loglevel_file","10","0");';
+        $sql = 'INSERT INTO "'$$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("3","loglevel_file","10","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$debug_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("4","loglevel_console","10","0");';
+        $sql = 'INSERT INTO "'$$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("4","loglevel_console","10","0");';
         execute_query($sql);
         
         close_database();
      }     
      
-     function insert_config_values()
+     function insert_config_values($table)
      {
+         global $id_field, $key_field, $value_field, $last_change_field;
         open_connection();
         
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("1","switch_on_cooling_compressor","1.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("1","switch_on_cooling_compressor","1.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("2","switch_off_cooling_compressor","0.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("2","switch_off_cooling_compressor","0.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("3","switch_on_humidifier","5.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("3","switch_on_humidifier","5.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("4","switch_off_humidifier","4.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("4","switch_off_humidifier","4.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("5","delay_humidify","5.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("5","delay_humidify","5.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("8","sensortype","3.0","1511267856");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("8","sensortype","3.0","1511267856");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("9","language","1.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("9","language","1.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("10","switch_on_light_hour","14.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("10","switch_on_light_hour","14.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("11","switch_on_light_minute","13.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("11","switch_on_light_minute","13.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("12","light_duration","60.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("12","light_duration","60.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("13","light_period","180.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("13","light_period","180.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("14","light_modus","1.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("14","light_modus","1.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("15","switch_on_uv_hour","15.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("15","switch_on_uv_hour","15.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("16","switch_on_uv_minute","13.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("16","switch_on_uv_minute","13.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("17","uv_duration","60.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("17","uv_duration","60.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("18","uv_period","120.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("18","uv_period","120.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("19","uv_modus","1.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("19","uv_modus","1.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("20","dehumidifier_modus","2.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("20","dehumidifier_modus","2.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("21","circulation_air_period","5400.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("21","circulation_air_period","5400.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("22","setpoint_temperature","2.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("22","setpoint_temperature","2.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("23","exhaust_air_duration","900.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("23","exhaust_air_duration","900.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("24","modus","4.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("24","modus","4.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("25","setpoint_humidity","100.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("25","setpoint_humidity","100.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("26","exhaust_air_period","21600.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("26","exhaust_air_period","21600.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("27","circulation_air_duration","900.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("27","circulation_air_duration","900.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("28","agingtable","1.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("28","agingtable","1.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("31","failure_humidity_delta","10.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("31","failure_humidity_delta","10.0","0");';
         execute_query($sql);
-        $sql = 'INSERT INTO "'$config_settings_table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("32","failure_temperature_delta","3.0","0");';
+        $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$key_field'","'$value_field'","'$last_change_field'") VALUES ("32","failure_temperature_delta","3.0","0");';
         execute_query($sql);
         
         close_database();
@@ -282,6 +296,7 @@
 
      function insert_agingtable_list($table)
      {
+         global $id_field, $agingtable_name_field
         open_connection();
         
         $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$agingtable_name_field'") VALUES ("1","salami");';
@@ -295,6 +310,7 @@
      }
      function insert_salami_values($table)
      {
+         global $id_field, $agingtable_modus_field, $agingtable_setpoint_humidity_field, $agingtable_setpoint_temperature_field, $agingtable_circulation_air_duration_field, $agingtable_circulation_air_period_field, $agingtable_exhaust_air_duration_field, $agingtable_exhaust_air_period_field, $agingtable_days_field;
          open_connection();
         
          $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$agingtable_modus_field'","'$agingtable_setpoint_humidity_field'","'$agingtable_setpoint_temperature_field'","'$agingtable_circulation_air_duration_field'","'$agingtable_circulation_air_period_field'","'$agingtable_exhaust_air_duration_field'","'$agingtable_exhaust_air_period_field'","'$agingtable_days_field'") VALUES ("1","4","93","21","900","3600","900","21600","1");';
@@ -327,6 +343,8 @@
      
      function insert_dryaging1_values($table)
      {
+         global $id_field, $agingtable_modus_field, $agingtable_setpoint_humidity_field, $agingtable_setpoint_temperature_field, $agingtable_circulation_air_duration_field, $agingtable_circulation_air_period_field, $agingtable_exhaust_air_duration_field, $agingtable_exhaust_air_period_field, $agingtable_days_field;
+         
          open_connection();
          
          $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$agingtable_modus_field'","'$agingtable_setpoint_humidity_field'","'$agingtable_setpoint_temperature_field'","'$agingtable_circulation_air_duration_field'","'$agingtable_circulation_air_period_field'","'$agingtable_exhaust_air_duration_field'","'$agingtable_exhaust_air_period_field'","'$agingtable_days_field'") VALUES ("1","4","75","4","1080","2520","900","15120","12");';
@@ -343,6 +361,8 @@
      
      function insert_dryaging2_values($table)
      {
+         global $id_field, $agingtable_modus_field, $agingtable_setpoint_humidity_field, $agingtable_setpoint_temperature_field, $agingtable_circulation_air_duration_field, $agingtable_circulation_air_period_field, $agingtable_exhaust_air_duration_field, $agingtable_exhaust_air_period_field, $agingtable_days_field;
+         
          open_connection();
          
          $sql = 'INSERT INTO "'$table'" ("'$id_field'","'$agingtable_modus_field'","'$agingtable_setpoint_humidity_field'","'$agingtable_setpoint_temperature_field'","'$agingtable_circulation_air_duration_field'","'$agingtable_circulation_air_period_field'","'$agingtable_exhaust_air_duration_field'","'$agingtable_exhaust_air_period_field'","'$agingtable_days_field'") VALUES ("1","4","85","2","1440","2160","900","12960","12");';
