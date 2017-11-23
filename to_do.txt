@@ -2,12 +2,15 @@
 ---- = verschoben auf nächstes Release
 .... = Begonnen
 
-1) Website
+1) Allgemein
+    01 Lizenz überdenken!
+
+2) Website
     01 Upload CSV und eintragen als Agingtable_[CSV-Filename] in Datenbank ACHTUNG! richtige Reihenfolge in Tabelle schreiben!
     02 Editieren und Löschen der Agingtables
     03 Wägezellen Calibrate Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
 ----03 Alarm
-    04 Temperatur Statistiken und aktuelle Werte
+    04 Temperatur Statistiken und aktuelle Werte (Volksmeter-technik)
 ####05 Reifetabellenzeile einfärben, welche Phase gerade aktiv
     06 php logging nutzen
     07 Translation Aktivieren
@@ -21,14 +24,13 @@
 ####15 admin.php        unter debug fehlen: measuring_interval_debug, agingtable_days_in_seconds_debug
 ####16 settings.php     scale-werte fehlen: measuring_interval, measuring_duration, saving_period, samples, spikes
 ####17 settings.php     Agingtable-Werte fehlen: failure_humidity_delta, failure_temperature_delta
-    18 on the fly werte auslesen (phase der reifetabelle, status, temperatur, feuchte, Waage1 und 2, Lichtstatus für Schalter on/off)
-    19 Werte prüfen: failure_humidity_delta, failure_temperature_delta, Scale1 & 2 measuring_interval, measuring_duration, saving_period, samples, spikes
+    18 on the fly (Ajax) Werte auslesen (phase der reifetabelle, status, temperatur, feuchte, Waage1 und 2, Lichtstatus für Schalter on/off)
+    19 Werte beim schreiben in die db prüfen: failure_humidity_delta, failure_temperature_delta, Scale1 & 2 measuring_interval, measuring_duration, saving_period, samples, spikes
     20 Helptexte schreiben
     21 Changelog Bild von Flatmike
 ####22 scale, language, sensortyp von settings.php auf admin.php umziehen
-    23 Lizenz überdenken!
 
-2) Python
+3) Python
 ####01 Stromausfall
 ----02 Display 
 ----03 4 Temperaturfühler mit AD Wandler (Statistiken und aktuelle Werte)
@@ -59,5 +61,5 @@
 ####20 Data und sync aus Datenbank bei Scale entfernen
 ####21 Schaltungen von Licht und UV auf Zeiten laut Settings prüfen
 
-3) Linux
-    01 phpliteadmin.php passwort bei erstinstallation auf allgemeinses PW oder eigenes setzen
+4) Linux
+    01 phpliteadmin.php passwort bei Erstinstallation auf allgemeinses PW oder eigenes setzen
