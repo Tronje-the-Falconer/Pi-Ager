@@ -60,6 +60,7 @@
 ####19 cleanup gpio scales?
 ####20 Data und sync aus Datenbank bei Scale entfernen
 ####21 Schaltungen von Licht und UV auf Zeiten laut Settings prüfen
+    22 Raspberry pi Verion bei Systemstart lesen und in sqlite schreiben. Danach übergabe zur Website
 
 4) Linux
     01 phpliteadmin.php passwort bei Erstinstallation auf allgemeinses PW oder eigenes setzen
