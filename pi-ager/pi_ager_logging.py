@@ -2,7 +2,7 @@
 import logging
 from logging.handlers import RotatingFileHandler
 import pi_ager_paths
-from pi_ager_database import get_logging_value
+from pi_ager_get_logging_value import get_logging_value
 from pathlib import Path
 import os, stat
 
