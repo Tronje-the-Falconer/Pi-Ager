@@ -10,7 +10,7 @@
     02 Editieren und Löschen der Agingtables
     03 Wägezellen Calibrate Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
 ----03 Alarm
-    04 Temperatur Statistiken und aktuelle Werte (Volksmeter-technik)
+    04 Temperatur Statistiken und aktuelle Werte (http://www.chartjs.org)
 ####05 Reifetabellenzeile einfärben, welche Phase gerade aktiv
     06 php logging nutzen
     07 Translation Aktivieren
