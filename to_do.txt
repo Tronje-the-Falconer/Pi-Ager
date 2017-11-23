@@ -53,7 +53,7 @@
         42 = GPIO.I2C
         43 = GPIO.HARD_PWM
         -1 = GPIO.UNKNOWN
-    15 database import in logging.py
+####15 database import in logging.py
 ####16 agingtable korrektur Prüfen der Werte Dictionary Null werte Restart 
 ####17 Logik/schaltung auf True und False prüfen
 ####18 GPIO Scales prüfen (names.py und hardcoded in scale.py/scaleloop.py)
