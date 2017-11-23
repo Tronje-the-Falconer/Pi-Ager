@@ -4,17 +4,18 @@
 
 1) Allgemein
     01 Lizenz überdenken!
+    02 Website erstellen (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/27)
 
 2) Website
-    01 Upload CSV und eintragen als Agingtable_[CSV-Filename] in Datenbank ACHTUNG! richtige Reihenfolge in Tabelle schreiben!
-    02 Editieren und Löschen der Agingtables
+    01 Upload CSV und eintragen als Agingtable_[CSV-Filename] in Datenbank ACHTUNG! richtige Reihenfolge in Tabelle schreiben! (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/11)
+    02 Editieren und Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
     03 Wägezellen Calibrate Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
 ----03 Alarm
-    04 Temperatur Statistiken und aktuelle Werte (http://www.chartjs.org)
+    04 Temperatur Statistiken und aktuelle Werte (http://www.chartjs.org) (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/33)
 ####05 Reifetabellenzeile einfärben, welche Phase gerade aktiv
     06 php logging nutzen
     07 Translation Aktivieren
-----08 Update über Website ermöglichen
+----08 Update über Website ermöglichen (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/20)
 ----09 Displayupdate über Website
     10 Kommentare entfernen
 ####11 Datenbank/-schema per Button erzeugen
@@ -32,7 +33,7 @@
 
 3) Python
 ####01 Stromausfall
-----02 Display 
+----02 Display (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/26)
 ----03 4 Temperaturfühler mit AD Wandler (Statistiken und aktuelle Werte)
 ----04 Alarm
 ####05 Logrotate für pi-ager-logfile prüfen
@@ -64,3 +65,4 @@
 
 4) Linux
     01 phpliteadmin.php passwort bei Erstinstallation auf allgemeinses PW oder eigenes setzen
+    02 Zeitsynchronisation mit Atomuhr (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/22)
