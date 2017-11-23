@@ -3,7 +3,7 @@ import sqlite3
 import time
 import pi_ager_names
 import pi_ager_paths
-# from pi_ager_logging import create_logger
+from pi_ager_logging import create_logger
 
 global cursor
 global connection
@@ -68,14 +68,14 @@ def write_current_value(key, value):
 
     if key == None:
         logstring = 'key ist None: ' + key + ' zu schreibender Wert: ' + str(value)
-        #logger.debug(logstring)
+        logger.debug(logstring)
         return
     sql='UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(value) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) + ' WHERE ' + pi_ager_names.key_field + ' = "' + key + '"'
     open_database()
     execute_query(sql)
     close_database()
     logstring = 'write_current_value Tabelle: ' + pi_ager_names.current_values_table + ' geschriebener Key/Value: ' + key + '/' + str(value)
-    # logger.debug(logstring)
+    logger.debug(logstring)
 
 def get_scale_table_row(table):
     global cursor
