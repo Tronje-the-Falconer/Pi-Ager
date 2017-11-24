@@ -41,33 +41,79 @@
                                             labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
                                             datasets: [{
                                                 label: 'temperature',
+                                                yAxisID: 'temperature',
                                                 data: [12, 19, 3, 5, 2, 3],
                                                 backgroundColor: [
-                                                    'rgba(255, 99, 132, 0.2)',
-                                                    'rgba(54, 162, 235, 0.2)',
-                                                    'rgba(255, 206, 86, 0.2)',
-                                                    'rgba(75, 192, 192, 0.2)',
-                                                    'rgba(153, 102, 255, 0.2)',
-                                                    'rgba(255, 159, 64, 0.2)'
+                                                    '#FF0000'
                                                 ],
                                                 borderColor: [
-                                                    'rgba(255,99,132,1)',
-                                                    'rgba(54, 162, 235, 1)',
-                                                    'rgba(255, 206, 86, 1)',
-                                                    'rgba(75, 192, 192, 1)',
-                                                    'rgba(153, 102, 255, 1)',
-                                                    'rgba(255, 159, 64, 1)'
+                                                    '#FF0000'
                                                 ],
-                                                borderWidth: 1,
-                                                cubicInterpolationMode: 'monotone'
+                                                borderWidth: 2,
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
+                                            },
+                                            {
+                                                label: 'humidity',
+                                                yAxisID: 'humidity',
+                                                data: [50, 41, 60, 80, 100, 96],
+                                                backgroundColor: [
+                                                    '#2E2EFE'
+                                                ],
+                                                borderColor: [
+                                                    '#2E2EFE'
+                                                ],
+                                                borderWidth: 2,
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
                                             }]
                                         },
                                         options: {
-
+                                            title: {
+                                                display: true,
+                                                text: '<?php echo _("temperature") ?> & <?php echo _("humidity") ?>',
+                                                fontSize: 24
+                                            },
                                             scales: {
-                                                yAxes: [{
+                                                xAxes: [{
+                                                    time: {
+                                                        unit: 'month'
+                                                    },
                                                     ticks: {
-                                                        beginAtZero:true
+                                                        fontSize: 20
+                                                    }
+                                                }],
+                                                yAxes: [{
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        labelString: '<?php echo _("temperature") ?>',
+                                                        fontSize: 20
+                                                    },
+                                                    id: 'temperature',
+                                                    type: 'linear',
+                                                    position: 'left',
+                                                    ticks: {
+                                                        fontColor: '#FF0000',
+                                                        fontSize: 20,
+                                                        max: 30,
+                                                        min: -4
+                                                    }
+                                                }, {
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        labelString: '<?php echo _("humidity") ?>',
+                                                        fontSize: 20
+                                                    },
+                                                    id: 'humidity',
+                                                    type: 'linear',
+                                                    display: true,
+                                                    position: 'right',
+                                                    labelString: 'humidity',
+                                                    ticks: {
+                                                        fontColor: '#2E2EFE',
+                                                        fontSize: 20,
+                                                        max: 110,
+                                                        min: 40
                                                     }
                                                 }]
                                             }
