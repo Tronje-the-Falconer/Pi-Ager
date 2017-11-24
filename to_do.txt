@@ -11,7 +11,7 @@
     02 Editieren und Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
     03 Wägezellen Calibrate Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
 ----03 Alarm
-    04 Temperatur Statistiken und aktuelle Werte (http://www.chartjs.org) (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/33)
+....04 Temperatur Statistiken und aktuelle Werte (http://www.chartjs.org) (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/33)
 ####05 Reifetabellenzeile einfärben, welche Phase gerade aktiv
     06 php logging nutzen
     07 Translation Aktivieren

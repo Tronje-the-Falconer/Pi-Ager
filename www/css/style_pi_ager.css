@@ -307,3 +307,8 @@ margin-left: 20px;
   visibility: visible;
   opacity: 1;
 }
+.chart{
+    display: inline !important;
+    width: 450px !important;
+    height: 225px !important;
+}
