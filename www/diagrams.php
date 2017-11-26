@@ -34,15 +34,39 @@
                                     <h2><?php echo _('test'); ?> </h2>
                                     <canvas class="chart"; id="temperature_humidity_chart"></canvas>
                                     <script>
+                                    // Time is in miliseconds time.time (python ist in secunden)!!!!
                                     var ctx = document.getElementById("temperature_humidity_chart");
                                     var temperature_humidity_chart = new Chart(ctx, {
                                         type: 'line',
                                         data: {
-                                            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                                            labels: [
+                                                new Date(1508245175000));,
+                                                new Date(1508264866000),
+                                                new Date(1508412821000),
+                                                new Date(1508416968000),
+                                                new Date(1508416968000),
+                                                new Date(1508494250000)
+                                            ],
                                             datasets: [{
                                                 label: 'temperature',
                                                 yAxisID: 'temperature',
-                                                data: [12, 19, 3, 5, 2, 3],
+                                                data: [{
+                                                        x: new Date(1508245175000),
+                                                        y: 5
+                                                    }, {
+                                                        x: new Date(1508264866000),
+                                                        y: 3
+                                                    }, {
+                                                        x: new Date(1508412821000),
+                                                        y: 2
+                                                    }, {
+                                                        x: new Date(1508416968000),
+                                                        y: 1
+                                                    }, {
+                                                        x: new Date(1508494250000),
+                                                        y: -1
+                                                    }
+                                                ],
                                                 backgroundColor: [
                                                     '#FF0000'
                                                 ],
@@ -56,7 +80,23 @@
                                             {
                                                 label: 'humidity',
                                                 yAxisID: 'humidity',
-                                                data: [50, 41, 60, 80, 100, 96],
+                                                data: [{
+                                                        x: new Date(1508245175000),
+                                                        y: 70
+                                                    }, {
+                                                        x: new Date(1508264866000),
+                                                        y: 75
+                                                    }, {
+                                                        x: new Date(1508412821000),
+                                                        y: 80
+                                                    }, {
+                                                        x: new Date(1508416968000),
+                                                        y: 90
+                                                    }, {
+                                                        x: new Date(1508494250000),
+                                                        y: 100
+                                                    }
+                                                ],
                                                 backgroundColor: [
                                                     '#2E2EFE'
                                                 ],
@@ -87,22 +127,28 @@
                                                     scaleLabel: {
                                                         display: true,
                                                         labelString: '<?php echo _("temperature") ?>',
-                                                        fontSize: 20
+                                                        fontSize: 20,
+                                                        fontColor: '#FF0000'
                                                     },
                                                     id: 'temperature',
                                                     type: 'linear',
                                                     position: 'left',
                                                     ticks: {
+                                                        callback: function(value, index, values) {
+                                                            return value + ' °C';
+                                                        },
                                                         fontColor: '#FF0000',
                                                         fontSize: 20,
                                                         max: 30,
                                                         min: -4
                                                     }
+                                                    
                                                 }, {
                                                     scaleLabel: {
                                                         display: true,
                                                         labelString: '<?php echo _("humidity") ?>',
-                                                        fontSize: 20
+                                                        fontSize: 20,
+                                                        fontColor: '#2E2EFE'
                                                     },
                                                     id: 'humidity',
                                                     type: 'linear',
@@ -110,6 +156,9 @@
                                                     position: 'right',
                                                     labelString: 'humidity',
                                                     ticks: {
+                                                        callback: function(value, index, values) {
+                                                            return 'φ ' + value + ' %';
+                                                        },
                                                         fontColor: '#2E2EFE',
                                                         fontSize: 20,
                                                         max: 110,
