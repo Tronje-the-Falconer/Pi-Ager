@@ -73,6 +73,29 @@
         return $value;
     }
 
+    function get_diagram_values($table)
+    {
+        global $value_field;
+        
+        open_connection();
+        $sql = 'SELECT ' . $value_field . ' FROM ' . $table;
+        $result = get_query_result($sql);
+        // if ($result == FALSE)
+            // {
+                // echo($sql . '<br>');
+                // }
+        // else
+            // {
+            while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+                {
+                $values[] = $dataset[$value_field];
+                }
+            // }
+        close_database();
+        
+        return $values;
+    }
+
     function get_last_change($table, $key)
     {
         global $last_change_field,$id_field;

@@ -1,5 +1,6 @@
 <?php 
                                     include 'header.php';                                       // Template-Kopf und Navigation
+                                    include 'modules/database.php';
                                 ?>
                                 <!----------------------------------------------------------------------------------------Was eben hier hin kommt ...-->
                                 <?php 
@@ -33,6 +34,7 @@
                                     
                                     <h2><?php echo _('test'); ?> </h2>
                                     <canvas class="chart"; id="temperature_humidity_chart"></canvas>
+                                    
                                     <script>
                                     // Time is in miliseconds time.time (python ist in secunden)!!!!
                                     var ctx = document.getElementById("temperature_humidity_chart");
@@ -50,6 +52,8 @@
                                             datasets: [{
                                                 label: 'temperature',
                                                 yAxisID: 'temperature',
+                                                data: <?php echo json_encode(get_diagram_values($data_sensor_temperature_table))?>,
+                                                // data: [12, 19, 3, 5, 2, 3],
                                                 data: [{
                                                         x: new Date(1508245175000),
                                                         y: 5
@@ -80,6 +84,8 @@
                                             {
                                                 label: 'humidity',
                                                 yAxisID: 'humidity',
+                                                data: <?php echo json_encode(get_diagram_values($data_sensor_humidity_table)) ?>,
+                                                // data: [50, 41, 60, 80, 100, 96],
                                                 data: [{
                                                         x: new Date(1508245175000),
                                                         y: 70
