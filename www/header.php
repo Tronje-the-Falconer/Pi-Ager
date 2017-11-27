@@ -83,6 +83,7 @@
             }
             if ($diagrams_active == 'active'){
                 echo "<script src='js/Chart.js'></script>";
+                echo "<script src='js/moment.min.js'></script>";
             }
         ?>
         <!-- <script src="./node_modules/chart.js/dist/Chart.min.js"></script> -->

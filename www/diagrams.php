@@ -22,10 +22,10 @@
                                             <td><img src="images/icons/month_42x42.png" alt=""></td>
                                         </tr>
                                         <tr>
-                                            <td><a href="diagrams.php?diagram_mode=hourly" class="art-button"><?php echo _('hour'); ?></a></td>
-                                            <td><a href="diagrams.php?diagram_mode=daily" class="art-button"><?php echo _('day'); ?></a></td>
-                                            <td><a href="diagrams.php?diagram_mode=weekly" class="art-button"><?php echo _('week'); ?></a></td>
-                                            <td><a href="diagrams.php?diagram_mode=monthly" class="art-button"><?php echo _('month'); ?></a></td>
+                                            <td><button class="art-button" type="button" id="hour">hour</button></td>
+                                            <td><button class="art-button" type="button" id="day">day</button></td>
+                                            <td><button class="art-button" type="button" id="week">week</button></td>
+                                            <td><button class="art-button" type="button" id="month">month</button></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -42,35 +42,43 @@
                                         type: 'line',
                                         data: {
                                             labels: [
-                                                new Date(1508245175000));,
-                                                new Date(1508264866000),
-                                                new Date(1508412821000),
-                                                new Date(1508416968000),
-                                                new Date(1508416968000),
-                                                new Date(1508494250000)
+                                                'Jan',
+                                                'Feb',
+                                                'März',
+                                                'April',
+                                                'Mai',
+                                                'Juni'
                                             ],
+                                            // labels: [
+                                                // new Date(1508245175000),
+                                                // new Date(1508264866000),
+                                                // new Date(1508412821000),
+                                                // new Date(1508416968000),
+                                                // new Date(1508416968000),
+                                                // new Date(1508494250000)
+                                            // ],
                                             datasets: [{
                                                 label: 'temperature',
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode(get_diagram_values($data_sensor_temperature_table))?>,
                                                 // data: [12, 19, 3, 5, 2, 3],
-                                                data: [{
-                                                        x: new Date(1508245175000),
-                                                        y: 5
-                                                    }, {
-                                                        x: new Date(1508264866000),
-                                                        y: 3
-                                                    }, {
-                                                        x: new Date(1508412821000),
-                                                        y: 2
-                                                    }, {
-                                                        x: new Date(1508416968000),
-                                                        y: 1
-                                                    }, {
-                                                        x: new Date(1508494250000),
-                                                        y: -1
-                                                    }
-                                                ],
+                                                // data: [{
+                                                        // x: new Date(1508245175000),
+                                                        // y: 5
+                                                    // }, {
+                                                        // x: new Date(1508264866000),
+                                                        // y: 3
+                                                    // }, {
+                                                        // x: new Date(1508412821000),
+                                                        // y: 2
+                                                    // }, {
+                                                        // x: new Date(1508416968000),
+                                                        // y: 1
+                                                    // }, {
+                                                        // x: new Date(1508494250000),
+                                                        // y: -1
+                                                    // }
+                                                // ],
                                                 backgroundColor: [
                                                     '#FF0000'
                                                 ],
@@ -86,23 +94,23 @@
                                                 yAxisID: 'humidity',
                                                 data: <?php echo json_encode(get_diagram_values($data_sensor_humidity_table)) ?>,
                                                 // data: [50, 41, 60, 80, 100, 96],
-                                                data: [{
-                                                        x: new Date(1508245175000),
-                                                        y: 70
-                                                    }, {
-                                                        x: new Date(1508264866000),
-                                                        y: 75
-                                                    }, {
-                                                        x: new Date(1508412821000),
-                                                        y: 80
-                                                    }, {
-                                                        x: new Date(1508416968000),
-                                                        y: 90
-                                                    }, {
-                                                        x: new Date(1508494250000),
-                                                        y: 100
-                                                    }
-                                                ],
+                                                // data: [{
+                                                        // x: new Date(1508245175000),
+                                                        // y: 70
+                                                    // }, {
+                                                        // x: new Date(1508264866000),
+                                                        // y: 75
+                                                    // }, {
+                                                        // x: new Date(1508412821000),
+                                                        // y: 80
+                                                    // }, {
+                                                        // x: new Date(1508416968000),
+                                                        // y: 90
+                                                    // }, {
+                                                        // x: new Date(1508494250000),
+                                                        // y: 100
+                                                    // }
+                                                // ],
                                                 backgroundColor: [
                                                     '#2E2EFE'
                                                 ],
@@ -173,6 +181,79 @@
                                                 }]
                                             }
                                         }
+                                    });
+                                    
+                                    document.getElementById('hour').addEventListener('click', function() {
+                                        // if (config.data.datasets.length > 0) {
+                                            // config.data.labels.push(newDate(config.data.labels.length));
+
+                                            // for (var index = 0; index < config.data.datasets.length; ++index) {
+                                                // if (typeof config.data.datasets[index].data[0] === "object") {
+                                                    // config.data.datasets[index].data.push({
+                                                        // x: newDate(config.data.datasets[index].data.length),
+                                                        // y: randomScalingFactor(),
+                                                    // });
+                                                // } else {
+                                                    // config.data.datasets[index].data.push(randomScalingFactor());
+                                                // }
+                                            // }
+
+                                            // window.myLine.update();
+                                        // }
+                                    });
+                                    document.getElementById('day').addEventListener('click', function() {
+                                        // if (config.data.datasets.length > 0) {
+                                            // config.data.labels.push(newDate(config.data.labels.length));
+
+                                            // for (var index = 0; index < config.data.datasets.length; ++index) {
+                                                // if (typeof config.data.datasets[index].data[0] === "object") {
+                                                    // config.data.datasets[index].data.push({
+                                                        // x: newDate(config.data.datasets[index].data.length),
+                                                        // y: randomScalingFactor(),
+                                                    // });
+                                                // } else {
+                                                    // config.data.datasets[index].data.push(randomScalingFactor());
+                                                // }
+                                            // }
+
+                                            // window.myLine.update();
+                                        // }
+                                    });
+                                    document.getElementById('week').addEventListener('click', function() {
+                                        // if (config.data.datasets.length > 0) {
+                                            // config.data.labels.push(newDate(config.data.labels.length));
+
+                                            // for (var index = 0; index < config.data.datasets.length; ++index) {
+                                                // if (typeof config.data.datasets[index].data[0] === "object") {
+                                                    // config.data.datasets[index].data.push({
+                                                        // x: newDate(config.data.datasets[index].data.length),
+                                                        // y: randomScalingFactor(),
+                                                    // });
+                                                // } else {
+                                                    // config.data.datasets[index].data.push(randomScalingFactor());
+                                                // }
+                                            // }
+
+                                            // window.myLine.update();
+                                        // }
+                                    });
+                                    document.getElementById('month').addEventListener('click', function() {
+                                        // if (config.data.datasets.length > 0) {
+                                            // config.data.labels.push(newDate(config.data.labels.length));
+
+                                            // for (var index = 0; index < config.data.datasets.length; ++index) {
+                                                // if (typeof config.data.datasets[index].data[0] === "object") {
+                                                    // config.data.datasets[index].data.push({
+                                                        // x: newDate(config.data.datasets[index].data.length),
+                                                        // y: randomScalingFactor(),
+                                                    // });
+                                                // } else {
+                                                    // config.data.datasets[index].data.push(randomScalingFactor());
+                                                // }
+                                            // }
+
+                                            // window.myLine.update();
+                                        // }
                                     });
                                     </script>
                                     
