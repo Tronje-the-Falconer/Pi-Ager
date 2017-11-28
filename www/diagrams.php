@@ -33,34 +33,76 @@
                                     <div style="">
                                     
                                     <h2><?php echo _('test'); ?> </h2>
+                                    <h4><?php echo _('every ~ x minutes a new value is written!'); ?></h4>
                                     <canvas class="chart"; id="temperature_humidity_chart"></canvas>
                                     
                                     <script>
                                     // Time is in miliseconds time.time (python ist in secunden)!!!!
+                                    // bei Labels letzten timestamp auslesen und Stunde/Tag/Woche/monat abziehen und als ersten Wert nutzen
+                                    var timeFormat = 'MM/DD/YYYY HH:mm';
+                                    
+                                    function newDate(days) {
+                                        return moment().add(days, 'd').toDate();
+                                    }
+
+                                    function newDateString(days) {
+                                        return moment().add(days, 'd').format(timeFormat);
+                                    }
+
+                                    function newTimestamp(days) {
+                                        return moment().add(days, 'd').unix();
+                                    }
+
+                                    <?php 
+                                        function get_defined_last_timestamp_from_array($array, $delta){
+                                            sort($array);
+                                            $last_timestamp_in_array = end($array);
+                                            Switch ($delta){
+                                                case 'hour':
+                                                    $timestamp_delta = $last_timestamp_in_array - 3600;
+                                                case 'day':
+                                                    $timestamp_delta = $last_timestamp_in_array - 86400;
+                                                case 'week':
+                                                    $timestamp_delta = $last_timestamp_in_array - 604800;
+                                                case 'month':
+                                                    $timestamp_delta = $last_timestamp_in_array - 2629700;
+                                            }
+                                        }
+                                        
+                                        list ($temperature_dataset, $temperature_timestamps) = get_diagram_values($data_sensor_temperature_table);
+                                        list ($humidity_dataset, $humidity_timestamps) = get_diagram_values($data_sensor_humidity_table);
+                                        
+                                        $last_timestamp_temperature = end($temperature_timestamps);
+                                        
+                                                    
+                                        $timestamp_temperature_last_hour = get_defined_last_timestamp_from_array($temperature_timestamps, 'hour');
+                                        $timestamp_temperature_last_day = get_defined_last_timestamp_from_array($temperature_timestamps, 'day');
+                                        $timestamp_temperature_last_week = get_defined_last_timestamp_from_array($temperature_timestamps, 'week');
+                                        $timestamp_temperature_last_month = get_defined_last_timestamp_from_array($temperature_timestamps, 'month');
+                                    ?>
+                                    
                                     var ctx = document.getElementById("temperature_humidity_chart");
                                     var temperature_humidity_chart = new Chart(ctx, {
                                         type: 'line',
                                         data: {
+                                            ////Siehe Anmerkung oben!
                                             labels: [
-                                                'Jan',
-                                                'Feb',
-                                                'März',
-                                                'April',
-                                                'Mai',
-                                                'Juni'
+                                                <?php
+                                                    foreach ($temperature_timestamps as $timestamp){
+                                                        if ($timestamp >= $timestamp_temperature_last_hour){
+                                                            print 'new Date(' . $timestamp . '000),';
+                                                        }
+                                                        
+                                                    }
+                                                ?>
+                                                // new Date(<?php print $timestamp_temperature_last_hour . '000'?>),
+                                                // new Date(1511868589000),
+                                                // new Date(<?php print $last_timestamp_temperature . '000' ?>)
                                             ],
-                                            // labels: [
-                                                // new Date(1508245175000),
-                                                // new Date(1508264866000),
-                                                // new Date(1508412821000),
-                                                // new Date(1508416968000),
-                                                // new Date(1508416968000),
-                                                // new Date(1508494250000)
-                                            // ],
                                             datasets: [{
                                                 label: 'temperature',
                                                 yAxisID: 'temperature',
-                                                data: <?php echo json_encode(get_diagram_values($data_sensor_temperature_table))?>,
+                                                data: <?php echo json_encode($temperature_dataset);?>,
                                                 // data: [12, 19, 3, 5, 2, 3],
                                                 // data: [{
                                                         // x: new Date(1508245175000),
@@ -92,7 +134,7 @@
                                             {
                                                 label: 'humidity',
                                                 yAxisID: 'humidity',
-                                                data: <?php echo json_encode(get_diagram_values($data_sensor_humidity_table)) ?>,
+                                                data: <?php echo json_encode($humidity_dataset); ?>,
                                                 // data: [50, 41, 60, 80, 100, 96],
                                                 // data: [{
                                                         // x: new Date(1508245175000),
@@ -129,14 +171,22 @@
                                                 fontSize: 24
                                             },
                                             scales: {
+                                                // xAxes: [{
+                                                    // time: {
+                                                        // unit: 'month'
+                                                    // },
+                                                    // ticks: {
+                                                        // fontSize: 20
+                                                    // }
+                                                // }],
                                                 xAxes: [{
+                                                    type: "time",
                                                     time: {
-                                                        unit: 'month'
+                                                        format: timeFormat,
+                                                        // round: 'day'
+                                                        tooltipFormat: 'll HH:mm'
                                                     },
-                                                    ticks: {
-                                                        fontSize: 20
-                                                    }
-                                                }],
+                                                }, ],
                                                 yAxes: [{
                                                     scaleLabel: {
                                                         display: true,

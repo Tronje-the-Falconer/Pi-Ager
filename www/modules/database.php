@@ -75,10 +75,10 @@
 
     function get_diagram_values($table)
     {
-        global $value_field;
+        global $value_field, $last_change_field;
         
         open_connection();
-        $sql = 'SELECT ' . $value_field . ' FROM ' . $table;
+        $sql = 'SELECT ' . $value_field . ', ' .$last_change_field . ' FROM ' . $table;
         $result = get_query_result($sql);
         // if ($result == FALSE)
             // {
@@ -89,11 +89,12 @@
             while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
                 {
                 $values[] = $dataset[$value_field];
+                $last_changes [] = $dataset[$last_change_field];
                 }
             // }
         close_database();
         
-        return $values;
+        return array ($values, $last_changes);
     }
 
     function get_last_change($table, $key)
