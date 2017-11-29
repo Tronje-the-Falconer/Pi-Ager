@@ -55,6 +55,10 @@
                                         ?>
                                         <canvas class="chart"; id="temperature_humidity_chart"></canvas>
                                         <canvas class="chart"; id="scales_chart"></canvas>
+                                        <canvas class="chart"; id="light_uv_chart"></canvas>
+                                        <canvas class="chart"; id="heater_cooler_chart"></canvas>
+                                        <canvas class="chart"; id="humidifier_dehumidifier_chart"></canvas>
+                                        <canvas class="chart"; id="air_exchange_air_circulation_chart"></canvas>
                                         <script>
                                         var timeFormat = 'MM/DD/YYYY HH:mm';
                                         
@@ -227,7 +231,7 @@
                                                     yAxes: [{
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php echo _("gram") ?>',
+                                                            labelString: '<?php echo _("gram"); ?>',
                                                             fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -240,7 +244,7 @@
                                                             },
                                                             fontColor: '#000000',
                                                             fontSize: 20,
-                                                            max: 100,
+                                                            max: 25000,
                                                             min: -0.5
                                                         }
                                                         
@@ -249,9 +253,351 @@
                                             }
                                         };
                                         
+                                        
+                                        // uv und licht
+                                        var light_uv_chart = document.getElementById("light_uv_chart");
+                                        var config_light_uv_chart = {
+                                            type: 'line',
+                                            data: {
+                                                labels: 
+                                                    <?php
+                                                    print '[';
+                                                        foreach ($temperature_timestamps_axis as $timestamp){
+                                                                print 'new Date(' . $timestamp . '000),';
+                                                            }
+                                                    print ']';
+                                                    ?>,
+                                                datasets: [{
+                                                    label: '<?php echo _("uv-light"); ?>',
+                                                    yAxisID: 'status',
+                                                    data: [0,0,1,1,0,1,0],
+                                                    //data: <?php echo json_encode($temperature_dataset);?>,
+                                                    backgroundColor: '#DDB929',
+                                                    borderColor: '#DDB929',
+                                                    borderWidth: 5,
+                                                    steppedLine: true,
+                                                    fill: true
+                                                },
+                                                {
+                                                    label: '<?php echo _("light"); ?>',
+                                                    yAxisID: 'status',
+                                                    data: [0,1,0,1,0,1,0],
+                                                    //data: <?php echo json_encode($humidity_dataset); ?>,
+                                                    backgroundColor: '#1EB623',
+                                                    borderColor: '#1EB623',
+                                                    borderWidth: 5,
+                                                    steppedLine: true,
+                                                    fill: true
+                                                }]
+                                            },
+                                            options: {
+                                                title: {
+                                                    display: true,
+                                                    text: '<?php echo _("uv light") . ' & ' . _("light"); ?>',
+                                                    fontSize: 24
+                                                },
+                                                scales: {
+                                                    xAxes: [{
+                                                        type: "time",
+                                                        time: {
+                                                            displayFormats: {
+                                                                second: 'HH:mm:ss',
+                                                                minute: 'HH:mm',
+                                                                hour: 'MMM D, H[h]'
+                                                            },
+                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                                        },
+                                                    }, ],
+                                                    yAxes: [{
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php echo _("status"); ?>',
+                                                            fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'status',
+                                                        type: 'linear',
+                                                        position: 'left',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                return value;
+                                                            },
+                                                            fontColor: '#000000',
+                                                            fontSize: 20,
+                                                            max: 1,
+                                                            min: 0,
+                                                            stepSize: 1
+                                                        }
+                                                        
+                                                    }]
+                                                }
+                                            }
+                                        };
+                                        
+                                        // heater und cooler
+                                        var heater_cooler_chart = document.getElementById("heater_cooler_chart");
+                                        var config_heater_cooler_chart = {
+                                            type: 'line',
+                                            data: {
+                                                labels: 
+                                                    <?php
+                                                    print '[';
+                                                        foreach ($temperature_timestamps_axis as $timestamp){
+                                                                print 'new Date(' . $timestamp . '000),';
+                                                            }
+                                                    print ']';
+                                                    ?>,
+                                                datasets: [{
+                                                    label: '<?php echo _("heater"); ?>',
+                                                    yAxisID: 'status',
+                                                    //data: <?php echo json_encode($temperature_dataset);?>,
+                                                    data: [0,0,1,1,0,1,0],
+                                                    backgroundColor: [
+                                                        '#DDB929'
+                                                    ],
+                                                    borderColor: [
+                                                        '#DDB929'
+                                                    ],
+                                                    borderWidth: 5,
+                                                    steppedLine: true,
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("cooler"); ?>',
+                                                    yAxisID: 'status',
+                                                    data: [0,1,0,1,0,1,0],
+                                                    //data: <?php echo json_encode($humidity_dataset); ?>,
+                                                    backgroundColor:  '#1EB623',
+                                                    borderColor: '#1EB623',
+                                                    borderWidth: 5,
+                                                    steppedLine: true,
+                                                    fill: false
+                                                }]
+                                            },
+                                            options: {
+                                                title: {
+                                                    display: true,
+                                                    text: '<?php echo _("heater") . ' & ' . _("cooler"); ?>',
+                                                    fontSize: 24
+                                                },
+                                                scales: {
+                                                    xAxes: [{
+                                                        type: "time",
+                                                        time: {
+                                                            displayFormats: {
+                                                                second: 'HH:mm:ss',
+                                                                minute: 'HH:mm',
+                                                                hour: 'MMM D, H[h]'
+                                                            },
+                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                                        },
+                                                    }, ],
+                                                    yAxes: [{
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php echo _("status"); ?>',
+                                                            fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'status',
+                                                        type: 'linear',
+                                                        position: 'left',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                return value;
+                                                            },
+                                                            fontColor: '#000000',
+                                                            fontSize: 20,
+                                                            max: 1,
+                                                            min: 0,
+                                                            stepSize: 1
+                                                        }
+                                                        
+                                                    }]
+                                                }
+                                            }
+                                        };
+                                        
+                                        // humidifier und dehumidifier
+                                        var humidifier_dehumidifier_chart = document.getElementById("humidifier_dehumidifier_chart");
+                                        var config_humidifier_dehumidifier_chart = {
+                                            type: 'line',
+                                            data: {
+                                                labels: 
+                                                    <?php
+                                                    print '[';
+                                                        foreach ($temperature_timestamps_axis as $timestamp){
+                                                                print 'new Date(' . $timestamp . '000),';
+                                                            }
+                                                    print ']';
+                                                    ?>,
+                                                datasets: [{
+                                                    label: '<?php echo _("humidifier"); ?>',
+                                                    yAxisID: 'status',
+                                                    data: <?php echo json_encode($temperature_dataset);?>,
+                                                    backgroundColor: [
+                                                        '#DDB929'
+                                                    ],
+                                                    borderColor: [
+                                                        '#DDB929'
+                                                    ],
+                                                    borderWidth: 5,
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("dehumidifier"); ?>',
+                                                    yAxisID: 'status',
+                                                    data: <?php echo json_encode($humidity_dataset); ?>,
+                                                    backgroundColor: [
+                                                        '#1EB623'
+                                                    ],
+                                                    borderColor: [
+                                                        '#1EB623'
+                                                    ],
+                                                    borderWidth: 5,
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                }]
+                                            },
+                                            options: {
+                                                title: {
+                                                    display: true,
+                                                    text: '<?php echo _("humidifier") . ' & ' . _("dehumidifier"); ?>',
+                                                    fontSize: 24
+                                                },
+                                                scales: {
+                                                    xAxes: [{
+                                                        type: "time",
+                                                        time: {
+                                                            displayFormats: {
+                                                                second: 'HH:mm:ss',
+                                                                minute: 'HH:mm',
+                                                                hour: 'MMM D, H[h]'
+                                                            },
+                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                                        },
+                                                    }, ],
+                                                    yAxes: [{
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php echo _("status"); ?>',
+                                                            fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'status',
+                                                        type: 'linear',
+                                                        position: 'left',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                return value;
+                                                            },
+                                                            fontColor: '#000000',
+                                                            fontSize: 20,
+                                                            max: 1,
+                                                            min: 0,
+                                                            stepSize: 1
+                                                        }
+                                                        
+                                                    }]
+                                                }
+                                            }
+                                        };
+                                        
+                                        // air exchange und air circulation
+                                        var air_exchange_air_circulation_chart = document.getElementById("air_exchange_air_circulation_chart");
+                                        var config_air_exchange_air_circulation_chart = {
+                                            type: 'line',
+                                            data: {
+                                                labels: 
+                                                    <?php
+                                                    print '[';
+                                                        foreach ($temperature_timestamps_axis as $timestamp){
+                                                                print 'new Date(' . $timestamp . '000),';
+                                                            }
+                                                    print ']';
+                                                    ?>,
+                                                datasets: [{
+                                                    label: '<?php echo _("air exchange"); ?>',
+                                                    yAxisID: 'status',
+                                                    data: <?php echo json_encode($temperature_dataset);?>,
+                                                    backgroundColor: [
+                                                        '#DDB929'
+                                                    ],
+                                                    borderColor: [
+                                                        '#DDB929'
+                                                    ],
+                                                    borderWidth: 5,
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("air circulation"); ?>',
+                                                    yAxisID: 'status',
+                                                    data: <?php echo json_encode($humidity_dataset); ?>,
+                                                    backgroundColor: [
+                                                        '#1EB623'
+                                                    ],
+                                                    borderColor: [
+                                                        '#1EB623'
+                                                    ],
+                                                    borderWidth: 5,
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                }]
+                                            },
+                                            options: {
+                                                title: {
+                                                    display: true,
+                                                    text: '<?php echo _("air exchange") . ' & ' . _("air circulation"); ?>',
+                                                    fontSize: 24
+                                                },
+                                                scales: {
+                                                    xAxes: [{
+                                                        type: "time",
+                                                        time: {
+                                                            displayFormats: {
+                                                                second: 'HH:mm:ss',
+                                                                minute: 'HH:mm',
+                                                                hour: 'MMM D, H[h]'
+                                                            },
+                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                                        },
+                                                    }, ],
+                                                    yAxes: [{
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php echo _("status"); ?>',
+                                                            fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'status',
+                                                        type: 'linear',
+                                                        position: 'left',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                return value;
+                                                            },
+                                                            fontColor: '#000000',
+                                                            fontSize: 20,
+                                                            max: 1,
+                                                            min: 0,
+                                                            stepSize: 1
+                                                        }
+                                                        
+                                                    }]
+                                                }
+                                            }
+                                        };
+                                        
+                                        
                                         window.onload = function() {
                                             window.temperature_humidity_chart = new Chart(temperature_humidity_chart, config_temperature_humidity_chart);
                                             window.scales_chart = new Chart(scales_chart, config_scales_chart);
+                                            window.light_uv_chart = new Chart(light_uv_chart, config_light_uv_chart);
+                                            window.heater_cooler_chart = new Chart(heater_cooler_chart, config_heater_cooler_chart);
+                                            window.humidifier_dehumidifier_chart = new Chart(humidifier_dehumidifier_chart, config_humidifier_dehumidifier_chart);
+                                            window.air_exchange_air_circulation_chart =  new Chart(air_exchange_air_circulation_chart, config_air_exchange_air_circulation_chart);
                                         };
                                         // document.getElementById('hour').addEventListener('click', function() {
                                             // diagram_mode = 'hour';
@@ -270,23 +616,6 @@
                                              // window.temperature_humidity_chart.update();
                                         // });
                                         </script>
-                                        
-                                        <h2><?php echo _('cooler'); ?></h2>
-                                        <img src="/images/graphs/pi-ager_stat_coolcompressor-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
-                                        <h2><?php echo _('heater'); ?></h2>
-                                        <img src="/images/graphs/pi-ager_stat_heater-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
-                                        <h2><?php echo _('humidifier'); ?></h2>
-                                        <img src="/images/graphs/pi-ager_status_humidifier-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
-                                        <h2><?php echo _('air circulatory system'); ?></h2>
-                                        <img src="/images/graphs/pi-ager_stat_circulate_air-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
-                                        <h2><?php echo _('air exchanger'); ?></h2>
-                                        <img src="/images/graphs/pi-ager_stat_exhaust_air-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
-                                        <h2><?php echo _('uv'); ?></h2>
-                                        <img src="/images/graphs/pi-ager_status_uv-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
-                                        <h2><?php echo _('light'); ?></h2>
-                                        <img src="/images/graphs/pi-ager_status_light-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
-                                        <h2><?php echo _('dehumidifier'); ?></h2>
-                                        <img src="/images/graphs/pi-ager_status_dehumidifier-<?php echo $diagram_mode; ?>.png" alt="<?php echo $diagram_mode; ?>" />
                                     </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->
                             </div>
