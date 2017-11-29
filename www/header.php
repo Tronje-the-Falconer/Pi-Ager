@@ -11,6 +11,10 @@
     $diagrams_active = '';
     $settings_active = '';
     $logs_active = '';
+    $changelogs_active = '';
+    $webcam_active = '';
+    $scale_wizzard_active = '';
+    $admin_active = '';
 
     if ($_SERVER['PHP_SELF'] == '/index.php') {
         $monitor_active = 'active';
