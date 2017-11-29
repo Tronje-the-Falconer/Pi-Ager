@@ -46,33 +46,9 @@
     $first_timestamp_scale1 = get_defined_last_timestamp_from_array($scale1_timestamps, $diagram_mode);
     
     $temperature_timestamps_axis = get_timestamps_for_time_axis($temperature_timestamps, $first_timestamp_temperature);
-    // foreach ($temperature_timestamps as $current_temperature_timestamp){
-        // if ($current_temperature_timestamp >= $first_timestamp_temperature){
-            // $temperature_timestamps_axis[] = $current_temperature_timestamp;
-        // }
-    // }
     $temperature_dataset = get_dataset_of_values($temperature_values, $temperature_timestamps_axis);
-    // foreach ($temperature_timestamps_axis as $current_temperature_timestamp_axis){
-        // $temperature_dataset[] = $temperature_values[$current_temperature_timestamp_axis];
-    // }
     
     $humidity_timestamps_axis = get_timestamps_for_time_axis($humidity_timestamps, $first_timestamp_temperature);
-    // foreach ($humidity_timestamps as $current_humidity_timestamp){
-        // if ($current_humidity_timestamp >= $first_timestamp_temperature){
-            // $humidity_timestamps_axis[] = $current_humidity_timestamp;
-        // }
-    // }
-    
     $humidity_dataset = get_dataset_of_values($humidity_values, $humidity_timestamps_axis);
     
-    // foreach ($humidity_timestamps_axis as $current_humidity_timestamp_axis){
-        // $humidity_dataset[] = $humidity_values[$current_humidity_timestamp_axis];
-    // }
-    // $timestamp_temperature_last_day = get_defined_last_timestamp_from_array($temperature_timestamps, 'day');
-    // $timestamp_temperature_last_week = get_defined_last_timestamp_from_array($temperature_timestamps, 'week');
-    // $timestamp_temperature_last_month = get_defined_last_timestamp_from_array($temperature_timestamps, 'month');
-         // print '  timestamp_temperature_last_hour: ' . $timestamp_temperature_last_hour;
-        // print '  timestamp_temperature_last_day: ' . $timestamp_temperature_last_day;
-        // print '  timestamp_temperature_last_week: ' . $timestamp_temperature_last_week;
-        // print '  timestamp_temperature_last_month: ' . $timestamp_temperature_last_month;
 ?>
