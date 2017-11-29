@@ -88,13 +88,17 @@
             // {
             while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
                 {
-                $values[] = $dataset[$value_field];
-                $last_changes [] = $dataset[$last_change_field];
+                $values[$dataset[$last_change_field]] = $dataset[$value_field];
                 }
             // }
         close_database();
         
-        return array ($values, $last_changes);
+        if (!isset ($values)){
+            $values = array();
+            $values['1'] = 0;
+        }
+        
+        return $values;
     }
 
     function get_last_change($table, $key)
