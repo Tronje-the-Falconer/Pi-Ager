@@ -22,6 +22,16 @@
         }
         return $timestamps_axis;
     }
+    
+    function get_text_array_for_time_axis($timestamps_axis){
+        $axis_text = '[';
+        foreach ($timestamps_axis as $timestamp){
+            $axis_text = $axis_text . 'new Date(' .$timestamp . '000),';
+        }
+        $axis_text = substr($axis_text, 0, -1);
+        $axis_text = $axis_text . ']';
+        return $axis_text;
+    }
 
     function get_dataset_of_values($datavalues, $timestamps_axis){
         foreach ($timestamps_axis as $current_timestamp_axis){
@@ -46,6 +56,7 @@
     $first_timestamp_scale1 = get_defined_last_timestamp_from_array($scale1_timestamps, $diagram_mode);
     
     $temperature_timestamps_axis = get_timestamps_for_time_axis($temperature_timestamps, $first_timestamp_temperature);
+    $temperature_timestamps_axis_text = get_text_array_for_time_axis($temperature_timestamps_axis);
     $temperature_dataset = get_dataset_of_values($temperature_values, $temperature_timestamps_axis);
     
     $humidity_timestamps_axis = get_timestamps_for_time_axis($humidity_timestamps, $first_timestamp_temperature);

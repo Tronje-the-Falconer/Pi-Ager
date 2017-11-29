@@ -69,11 +69,12 @@
                                             data: {
                                                 labels: 
                                                     <?php
-                                                    print '[';
-                                                        foreach ($temperature_timestamps_axis as $timestamp){
-                                                                print 'new Date(' . $timestamp . '000),';
-                                                            }
-                                                    print ']';
+                                                    echo $temperature_timestamps_axis_text;
+                                                    // print '[';
+                                                        // foreach ($temperature_timestamps_axis as $timestamp){
+                                                                // print 'new Date(' . $timestamp . '000),';
+                                                            // }
+                                                    // print ']';
                                                     ?>,
                                                 datasets: [{
                                                     label: '<?php echo _("temperature") ?>',
