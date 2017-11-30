@@ -77,13 +77,11 @@
                                                     label: '<?php echo _("temperature") ?>',
                                                     yAxisID: 'temperature',
                                                     data: <?php echo json_encode($temperature_dataset);?>,
-                                                    backgroundColor: [
-                                                        '#FF0000'
-                                                    ],
-                                                    borderColor: [
-                                                        '#FF0000'
-                                                    ],
+                                                    backgroundColor: '#FF0000',
+                                                    borderColor: '#FF0000',
                                                     borderWidth: 2,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 },
@@ -91,13 +89,11 @@
                                                     label: '<?php echo _("humidity") ?>',
                                                     yAxisID: 'humidity',
                                                     data: <?php echo json_encode($humidity_dataset); ?>,
-                                                    backgroundColor: [
-                                                        '#0AA6F4'
-                                                    ],
-                                                    borderColor: [
-                                                        '#0AA6F4'
-                                                    ],
+                                                    backgroundColor: '#0AA6F4',
+                                                    borderColor: '#0AA6F4',
                                                     borderWidth: 2,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 }]
@@ -125,7 +121,7 @@
                                                             display: true,
                                                             labelString: '<?php echo _("temperature") ?>',
                                                             fontSize: 20,
-                                                            fontColor: '#FF0000'
+                                                            fontColor: '#000000'
                                                         },
                                                         id: 'temperature',
                                                         type: 'linear',
@@ -134,7 +130,7 @@
                                                             callback: function(value, index, values) {
                                                                 return value + ' °C';
                                                             },
-                                                            fontColor: '#FF0000',
+                                                            fontColor: '#000000',
                                                             fontSize: 20,
                                                             max: 30,
                                                             min: -4
@@ -145,7 +141,7 @@
                                                             display: true,
                                                             labelString: '<?php echo _("humidity") ?>',
                                                             fontSize: 20,
-                                                            fontColor: '#0AA6F4'
+                                                            fontColor: '#000000'
                                                         },
                                                         id: 'humidity',
                                                         type: 'linear',
@@ -156,7 +152,7 @@
                                                             callback: function(value, index, values) {
                                                                 return 'φ ' + value + ' %';
                                                             },
-                                                            fontColor: '#0AA6F4',
+                                                            fontColor: '#000000',
                                                             fontSize: 20,
                                                             max: 110,
                                                             min: 40
@@ -184,6 +180,8 @@
                                                         '#DDB929'
                                                     ],
                                                     borderWidth: 2,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 },
@@ -198,6 +196,8 @@
                                                         '#1EB623'
                                                     ],
                                                     borderWidth: 2,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 }]
@@ -261,6 +261,8 @@
                                                     backgroundColor: '#FFF702',
                                                     borderColor: '#FFF702',
                                                     borderWidth: 5,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -324,6 +326,8 @@
                                                     backgroundColor: '#A801FB',
                                                     borderColor: '#A801FB',
                                                     borderWidth: 5,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -386,6 +390,8 @@
                                                     backgroundColor: '#FA0206',
                                                     borderColor: '#FA0206',
                                                     borderWidth: 5,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -448,6 +454,8 @@
                                                     backgroundColor: '#0C00FE',
                                                     borderColor: '#0C00FE',
                                                     borderWidth: 5,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -510,6 +518,8 @@
                                                     backgroundColor: '#99D2EF',
                                                     borderColor: '#99D2EF',
                                                     borderWidth: 5,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -572,6 +582,8 @@
                                                     backgroundColor: '#D0B612',
                                                     borderColor: '#D0B612',
                                                     borderWidth: 5,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -634,6 +646,8 @@
                                                     backgroundColor: '#3ADF00',
                                                     borderColor: '#3ADF00',
                                                     borderWidth: 5,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -696,6 +710,8 @@
                                                     backgroundColor: '#BFFF00',
                                                     borderColor: '#BFFF00',
                                                     borderWidth: 5,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
