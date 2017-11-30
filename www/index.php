@@ -92,183 +92,205 @@
                                     var timeFormat = 'MM/DD/YYYY HH:mm';
                                     
                                     // Temperatur und Feuchte
-                                    var temperature_humidity_chart = document.getElementById("temperature_humidity_chart");
-                                    var config_temperature_humidity_chart = {
-                                        type: 'line',
-                                        data: {
-                                            labels: 
-                                                <?php echo $temperature_timestamps_axis_text; ?>,
-                                            datasets: [{
-                                                label: '<?php echo _("temperature") ?>',
-                                                yAxisID: 'temperature',
-                                                data: <?php echo json_encode($temperature_dataset);?>,
-                                                backgroundColor: [
-                                                    '#FF0000'
-                                                ],
-                                                borderColor: [
-                                                    '#FF0000'
-                                                ],
-                                                borderWidth: 2,
-                                                cubicInterpolationMode: 'monotone',
-                                                fill: false
+                                        var temperature_humidity_chart = document.getElementById("temperature_humidity_chart");
+                                        var config_temperature_humidity_chart = {
+                                            type: 'line',
+                                            data: {
+                                                labels: 
+                                                    <?php echo $temperature_timestamps_axis_text; ?>,
+                                                datasets: [{
+                                                    label: '<?php echo _("temperature") ?>',
+                                                    yAxisID: 'temperature',
+                                                    data: <?php echo json_encode($temperature_dataset);?>,
+                                                    backgroundColor: '#C03738',
+                                                    borderColor: '#C03738',
+                                                    borderWidth: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("humidity") ?>',
+                                                    yAxisID: 'humidity',
+                                                    data: <?php echo json_encode($humidity_dataset); ?>,
+                                                    backgroundColor: '#59A9C4',
+                                                    borderColor: '#59A9C4',
+                                                    borderWidth: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                }]
                                             },
-                                            {
-                                                label: '<?php echo _("humidity") ?>',
-                                                yAxisID: 'humidity',
-                                                data: <?php echo json_encode($humidity_dataset); ?>,
-                                                backgroundColor: [
-                                                    '#0AA6F4'
-                                                ],
-                                                borderColor: [
-                                                    '#0AA6F4'
-                                                ],
-                                                borderWidth: 2,
-                                                cubicInterpolationMode: 'monotone',
-                                                fill: false
-                                            }]
-                                        },
-                                        options: {
-                                            title: {
-                                                display: true,
-                                                text: '<?php echo _("temperature") ?> & <?php echo _("humidity") ?>',
-                                                fontSize: 24
-                                            },
-                                            scales: {
-                                                xAxes: [{
-                                                    type: "time",
-                                                    time: {
-                                                        displayFormats: {
-                                                            second: 'HH:mm:ss',
-                                                            minute: 'HH:mm',
-                                                            hour: 'MMM D, H[h]'
-                                                        },
-                                                        tooltipFormat: 'DD. MMM. YYYY HH:mm'
-                                                    },
-                                                }, ],
-                                                yAxes: [{
-                                                    scaleLabel: {
-                                                        display: true,
-                                                        labelString: '<?php echo _("temperature") ?>',
-                                                        fontSize: 20,
-                                                        fontColor: '#FF0000'
-                                                    },
-                                                    id: 'temperature',
-                                                    type: 'linear',
-                                                    position: 'left',
-                                                    ticks: {
-                                                        callback: function(value, index, values) {
-                                                            return value + ' °C';
-                                                        },
-                                                        fontColor: '#FF0000',
-                                                        fontSize: 20,
-                                                        max: 30,
-                                                        min: -4
-                                                    }
-                                                    
-                                                }, {
-                                                    scaleLabel: {
-                                                        display: true,
-                                                        labelString: '<?php echo _("humidity") ?>',
-                                                        fontSize: 20,
-                                                        fontColor: '#0AA6F4'
-                                                    },
-                                                    id: 'humidity',
-                                                    type: 'linear',
+                                            options: {
+                                                title: {
                                                     display: true,
-                                                    position: 'right',
-                                                    labelString: '<?php echo _("humidity") ?>',
-                                                    ticks: {
-                                                        callback: function(value, index, values) {
-                                                            return 'φ ' + value + ' %';
+                                                    text: '<?php echo _("temperature") ?> & <?php echo _("humidity") ?>',
+                                                    fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                },
+                                                scales: {
+                                                    xAxes: [{
+                                                        type: "time",
+                                                        time: {
+                                                            displayFormats: {
+                                                                second: 'HH:mm:ss',
+                                                                minute: 'HH:mm',
+                                                                hour: 'MMM D, H[h]'
+                                                            },
+                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
-                                                        fontColor: '#0AA6F4',
-                                                        fontSize: 20,
-                                                        max: 110,
-                                                        min: 40
-                                                    }
-                                                }]
-                                            }
-                                        }
-                                    };
-                                    
-                                    // Waagen
-                                    var scales_chart = document.getElementById("scales_chart");
-                                    var config_scales_chart = {
-                                        type: 'line',
-                                        data: {
-                                            labels: 
-                                                <?php echo $scale1_timestamps_axis_text; ?>,
-                                            datasets: [{
-                                                label: '<?php echo _("scale") ?> 1',
-                                                yAxisID: 'gram',
-                                                data: <?php echo json_encode($scale1_dataset);?>,
-                                                backgroundColor: [
-                                                    '#DDB929'
-                                                ],
-                                                borderColor: [
-                                                    '#DDB929'
-                                                ],
-                                                borderWidth: 2,
-                                                cubicInterpolationMode: 'monotone',
-                                                fill: false
-                                            },
-                                            {
-                                                label: '<?php echo _("scale") ?> 2',
-                                                yAxisID: 'gram',
-                                                data: <?php echo json_encode($scale2_dataset); ?>,
-                                                backgroundColor: [
-                                                    '#1EB623'
-                                                ],
-                                                borderColor: [
-                                                    '#1EB623'
-                                                ],
-                                                borderWidth: 2,
-                                                cubicInterpolationMode: 'monotone',
-                                                fill: false
-                                            }]
-                                        },
-                                        options: {
-                                            title: {
-                                                display: true,
-                                                text: '<?php echo _("scale") ?> 1 & 2',
-                                                fontSize: 24
-                                            },
-                                            scales: {
-                                                xAxes: [{
-                                                    type: "time",
-                                                    time: {
-                                                        displayFormats: {
-                                                            second: 'HH:mm:ss',
-                                                            minute: 'HH:mm',
-                                                            hour: 'MMM D, H[h]'
+                                                    }, ],
+                                                    yAxes: [{
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php echo _("temperature") ?>',
+                                                            fontSize: 20,
+                                                            fontColor: '#000000'
                                                         },
-                                                        tooltipFormat: 'DD. MMM. YYYY HH:mm'
-                                                    },
-                                                }, ],
-                                                yAxes: [{
-                                                    scaleLabel: {
+                                                        id: 'temperature',
+                                                        type: 'linear',
+                                                        position: 'left',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                return value + ' °C';
+                                                            },
+                                                            fontColor: '#000000',
+                                                            fontSize: 20,
+                                                            max: 30,
+                                                            min: -4
+                                                        }
+                                                        
+                                                    }, {
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php echo _("humidity") ?>',
+                                                            fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'humidity',
+                                                        type: 'linear',
                                                         display: true,
-                                                        labelString: '<?php echo _("gram"); ?>',
-                                                        fontSize: 20,
-                                                        fontColor: '#000000'
-                                                    },
-                                                    id: 'gram',
-                                                    type: 'linear',
-                                                    position: 'left',
-                                                    ticks: {
-                                                        callback: function(value, index, values) {
-                                                            return value + ' gr';
-                                                        },
-                                                        fontColor: '#000000',
-                                                        fontSize: 20,
-                                                        //max: 25000,
-                                                        min: -0
-                                                    }
-                                                    
-                                                }]
+                                                        position: 'right',
+                                                        labelString: '<?php echo _("humidity") ?>',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                return 'φ ' + value + ' %';
+                                                            },
+                                                            fontColor: '#000000',
+                                                            fontSize: 20,
+                                                            max: 110,
+                                                            min: 40
+                                                        }
+                                                    }]
+                                                }
                                             }
-                                        }
-                                    };
+                                        };
+                                        
+                                        // Waagen
+                                        var scales_chart = document.getElementById("scales_chart");
+                                        var config_scales_chart = {
+                                            type: 'line',
+                                            data: {
+                                                labels: 
+                                                    <?php echo $scale1_timestamps_axis_text; ?>,
+                                                datasets: [{
+                                                    label: '<?php echo _("scale") ?> 1',
+                                                    yAxisID: 'gram',
+                                                    data: <?php echo json_encode($scale1_dataset);?>,
+                                                    backgroundColor: [
+                                                        '#AEC645'
+                                                    ],
+                                                    borderColor: [
+                                                        '#AEC645'
+                                                    ],
+                                                    borderWidth: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("scale") ?> 2',
+                                                    yAxisID: 'gram',
+                                                    data: <?php echo json_encode($scale2_dataset); ?>,
+                                                    backgroundColor: [
+                                                        '#BF9543'
+                                                    ],
+                                                    borderColor: [
+                                                        '#BF9543'
+                                                    ],
+                                                    borderWidth: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                }]
+                                            },
+                                            options: {
+                                                title: {
+                                                    display: true,
+                                                    text: '<?php echo _("scale") ?> 1 & 2',
+                                                    fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                },
+                                                scales: {
+                                                    xAxes: [{
+                                                        type: "time",
+                                                        time: {
+                                                            displayFormats: {
+                                                                second: 'HH:mm:ss',
+                                                                minute: 'HH:mm',
+                                                                hour: 'MMM D, H[h]'
+                                                            },
+                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                                        },
+                                                    }, ],
+                                                    yAxes: [{
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php echo _("gram"); ?>',
+                                                            fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'gram',
+                                                        type: 'linear',
+                                                        position: 'left',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                return value + ' gr';
+                                                            },
+                                                            fontColor: '#000000',
+                                                            fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: <?php 
+                                                            $max_value_scale1 = (max($scale1_dataset) / 100 * 5) + max($scale1_dataset);
+                                                            $max_value_scale2 = (max($scale2_dataset) / 100 * 5) + max($scale2_dataset);
+                                                            
+                                                            if ($max_value_scale1 >= $max_value_scale2){print $max_value_scale1;}
+                                                            else{print $max_value_scale2;}
+                                                            
+                                                            ?>,
+                                                            stepSize: 1
+                                                        }
+                                                        
+                                                    }]
+                                                }
+                                            }
+                                        };
                                     
                                     window.onload = function() {
                                         window.temperature_humidity_chart = new Chart(temperature_humidity_chart, config_temperature_humidity_chart);

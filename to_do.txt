@@ -62,7 +62,7 @@
 ####20 Data und sync aus Datenbank bei Scale entfernen
 ####21 Schaltungen von Licht und UV auf Zeiten laut Settings prüfen
 ####22 Raspberry pi Version bei Systemstart lesen und in sqlite schreiben. Danach übergabe zur Website (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/32)
-    23 nur alle x loops in das websitelog schreiben
+    23 nur alle x loops in das websitelog schreiben?
 
 4) Linux
     01 phpliteadmin.php passwort bei Erstinstallation auf allgemeinses PW oder eigenes setzen
