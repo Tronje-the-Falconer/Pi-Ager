@@ -76,8 +76,8 @@ def defaultGPIO():
     gpio.output(pi_ager_names.gpio_exhausting_air, pi_ager_names.relay_off)      # Abluft Relais standardmaessig aus
     gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_off)               # Licht Relais standardmaessig aus
     gpio.output(pi_ager_names.gpio_uv, pi_ager_names.relay_off)                  # UV-Licht Relais standardmaessig aus
-    gpio.output(pi_ager_names.gpio_dehumidifier, pi_ager_names.relay_off)        # Reserve Relais standardmaessig aus
-    gpio.output(pi_ager_names.gpio_alarm, pi_ager_names.relay_off)
+    gpio.output(pi_ager_names.gpio_dehumidifier, pi_ager_names.relay_off)        # Entfeuchter Relais standardmaessig aus
+    gpio.output(pi_ager_names.gpio_alarm, pi_ager_names.relay_on)                # Piezzo Relais standardmaessig ein da negative Ansteuerung
     gpio.output(pi_ager_names.gpio_switch, pi_ager_names.relay_off)
     # gpio.output(pi_ager_names.gpio_notinuse_0, pi_ager_names.relay_off)
     # gpio.output(pi_ager_names.gpio_notinuse_1, pi_ager_names.relay_off)
