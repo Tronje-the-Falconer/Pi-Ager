@@ -83,10 +83,11 @@ def check_and_set_light():
     if pi_ager_database.get_status_light_manual() == 1:
         duration_light_on = pi_ager_database.get_current_time() - pi_ager_database.get_last_change(pi_ager_names.current_values_table, pi_ager_names.status_light_manual_key)
         if duration_light_on <= 600:    #   manuelles Licht ist keine 10 Minuten an
-            switch_light(pi_ager_names.relay_on)
+            if get_gpio_value(pi_ager_names.gpio_light) == pi_ager_names.relay_off:
+                switch_light(pi_ager_names.relay_on)
         else:
-            switch_light(pi_ager_names.relay_off)
-    else:
+            pi_ager_database.write_stop_in_database(pi_ager_names.status_light_manual_key)
+    elif get_gpio_value(pi_ager_names.gpio_light) == pi_ager_names.relay_on:
         switch_light(pi_ager_names.relay_off)
         
 
@@ -465,7 +466,7 @@ def doMainLoop():
         if status_light == True:
             switch_light(pi_ager_names.relay_on)
             # gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_on)
-        if status_light == False:
+        if status_light == False and pi_ager_database.get_status_light_manual() == 0:
             switch_light(pi_ager_names.relay_off)
             # gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_off)
         
