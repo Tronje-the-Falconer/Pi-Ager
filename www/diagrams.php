@@ -49,7 +49,7 @@
                                 </div>
 
                                     <div style="">
-                                        <h4><?php echo _('every ~ x minutes a new value is written!'); ?></h4>
+                                        <h4><?php echo _('every ~ 5 minutes a new value is written!'); ?></h4>
                                         <?php
                                             include 'modules/read_values_for_diagrams.php';
                                         ?>
@@ -77,11 +77,12 @@
                                                     label: '<?php echo _("temperature") ?>',
                                                     yAxisID: 'temperature',
                                                     data: <?php echo json_encode($temperature_dataset);?>,
-                                                    backgroundColor: '#FF0000',
-                                                    borderColor: '#FF0000',
+                                                    backgroundColor: '#C03738',
+                                                    borderColor: '#C03738',
                                                     borderWidth: 2,
-                                                    pointRadius: 1,
-                                                    pointHitRadius: 5,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 },
@@ -89,11 +90,12 @@
                                                     label: '<?php echo _("humidity") ?>',
                                                     yAxisID: 'humidity',
                                                     data: <?php echo json_encode($humidity_dataset); ?>,
-                                                    backgroundColor: '#0AA6F4',
-                                                    borderColor: '#0AA6F4',
+                                                    backgroundColor: '#59A9C4',
+                                                    borderColor: '#59A9C4',
                                                     borderWidth: 2,
-                                                    pointRadius: 1,
-                                                    pointHitRadius: 5,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 }]
@@ -103,6 +105,10 @@
                                                     display: true,
                                                     text: '<?php echo _("temperature") ?> & <?php echo _("humidity") ?>',
                                                     fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    mode: 'index',
+                                                    intersect: false,
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -174,14 +180,15 @@
                                                     yAxisID: 'gram',
                                                     data: <?php echo json_encode($scale1_dataset);?>,
                                                     backgroundColor: [
-                                                        '#DDB929'
+                                                        '#AEC645'
                                                     ],
                                                     borderColor: [
-                                                        '#DDB929'
+                                                        '#AEC645'
                                                     ],
                                                     borderWidth: 2,
-                                                    pointRadius: 1,
-                                                    pointHitRadius: 5,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 },
@@ -190,14 +197,15 @@
                                                     yAxisID: 'gram',
                                                     data: <?php echo json_encode($scale2_dataset); ?>,
                                                     backgroundColor: [
-                                                        '#1EB623'
+                                                        '#BF9543'
                                                     ],
                                                     borderColor: [
-                                                        '#1EB623'
+                                                        '#BF9543'
                                                     ],
                                                     borderWidth: 2,
-                                                    pointRadius: 1,
-                                                    pointHitRadius: 5,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 }]
@@ -207,6 +215,10 @@
                                                     display: true,
                                                     text: '<?php echo _("scale") ?> 1 & 2',
                                                     fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    mode: 'index',
+                                                    intersect: false,
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -238,6 +250,15 @@
                                                             fontSize: 20,
                                                             //max: 25000,
                                                             min: -0,
+                                                            max: <?php 
+                                                            $max_value_scale1 = (max($scale1_dataset) / 100 * 5) + max($scale1_dataset);
+                                                            $max_value_scale2 = (max($scale2_dataset) / 100 * 5) + max($scale2_dataset);
+                                                            
+                                                            
+                                                            if ($max_value_scale1 >= $max_value_scale2){print $max_value_scale1;}
+                                                            else{print $max_value_scale2;}
+                                                            
+                                                            ?>,
                                                             stepSize: 1
                                                         }
                                                         
@@ -258,11 +279,12 @@
                                                     label: '<?php echo _("light"); ?>',
                                                     yAxisID: 'status',
                                                     data: <?php echo json_encode($light_dataset);?>,
-                                                    backgroundColor: '#FFF702',
-                                                    borderColor: '#FFF702',
+                                                    backgroundColor: '#ffff99',
+                                                    borderColor: '#ffff99',
                                                     borderWidth: 5,
-                                                    pointRadius: 1,
-                                                    pointHitRadius: 5,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 8,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -326,8 +348,9 @@
                                                     backgroundColor: '#A801FB',
                                                     borderColor: '#A801FB',
                                                     borderWidth: 5,
-                                                    pointRadius: 1,
-                                                    pointHitRadius: 5,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -387,11 +410,12 @@
                                                     label: '<?php echo _("heater"); ?>',
                                                     yAxisID: 'status',
                                                     data: <?php echo json_encode($heater_dataset);?>,
-                                                    backgroundColor: '#FA0206',
-                                                    borderColor: '#FA0206',
+                                                    backgroundColor: '#C03738',
+                                                    borderColor: '#C03738',
                                                     borderWidth: 5,
-                                                    pointRadius: 1,
-                                                    pointHitRadius: 5,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -451,11 +475,12 @@
                                                     label: '<?php echo _("cooler"); ?>',
                                                     yAxisID: 'status',
                                                     data: <?php echo json_encode($cooler_dataset);?>,
-                                                    backgroundColor: '#0C00FE',
-                                                    borderColor: '#0C00FE',
+                                                    backgroundColor: '#59A9C4',
+                                                    borderColor: '#59A9C4',
                                                     borderWidth: 5,
-                                                    pointRadius: 1,
-                                                    pointHitRadius: 5,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -515,11 +540,12 @@
                                                     label: '<?php echo _("humidifier"); ?>',
                                                     yAxisID: 'status',
                                                     data: <?php echo json_encode($humidifier_dataset);?>,
-                                                    backgroundColor: '#99D2EF',
-                                                    borderColor: '#99D2EF',
+                                                    backgroundColor: '#CF9248',
+                                                    borderColor: '#CF9248',
                                                     borderWidth: 5,
-                                                    pointRadius: 1,
-                                                    pointHitRadius: 5,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -579,11 +605,12 @@
                                                     label: '<?php echo _("dehumidifier"); ?>',
                                                     yAxisID: 'status',
                                                     data: <?php echo json_encode($dehumidifier_dataset);?>,
-                                                    backgroundColor: '#D0B612',
-                                                    borderColor: '#D0B612',
+                                                    backgroundColor: '#CFED53',
+                                                    borderColor: '#CFED53',
                                                     borderWidth: 5,
-                                                    pointRadius: 1,
-                                                    pointHitRadius: 5,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -643,11 +670,12 @@
                                                     label: '<?php echo _("exhaust air"); ?>',
                                                     yAxisID: 'status',
                                                     data: <?php echo json_encode($exhaust_air_dataset);?>,
-                                                    backgroundColor: '#3ADF00',
-                                                    borderColor: '#3ADF00',
+                                                    backgroundColor: '#99D498',
+                                                    borderColor: '#99D498',
                                                     borderWidth: 5,
-                                                    pointRadius: 1,
-                                                    pointHitRadius: 5,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -707,11 +735,12 @@
                                                     label: '<?php echo _("circulate air"); ?>',
                                                     yAxisID: 'status',
                                                     data: <?php echo json_encode($circulate_air_dataset);?>,
-                                                    backgroundColor: '#BFFF00',
-                                                    borderColor: '#BFFF00',
+                                                    backgroundColor: '86CBB0',
+                                                    borderColor: '#86CBB0',
                                                     borderWidth: 5,
-                                                    pointRadius: 1,
-                                                    pointHitRadius: 5,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
