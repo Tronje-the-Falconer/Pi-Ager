@@ -175,11 +175,19 @@
         return $values;
     }
 
+    function get_pirevision(){
+        global $system_table, $key_field, $value_field, $pi_revision_key;
+        
+        $pirevision = get_table_value($system_table, $pi_revision_key);
+        
+        return $pirevision;
+    }
+    
     function read_agingtable_name_from_config()
         {
         global $id_field,$agingtable_name_field,$config_settings_table,$agingtable_key,$agingtables_table;
         
-        $id_agingtable = get_table_value($config_settings_table,$agingtable_key);
+        $id_agingtable = get_table_value($config_settings_table, $agingtable_key);
 		open_connection();
 		$sql = 'SELECT "' . $agingtable_name_field . '" FROM ' . $agingtables_table . ' WHERE ' . $id_field . ' = ' . intval($id_agingtable) . ';';
 		// echo($sql);

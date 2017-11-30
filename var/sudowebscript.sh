@@ -110,9 +110,6 @@ case "$1" in
     shutdown) #Shutdown 
         shutdown -h now
     ;;
-    getpirevision) # auslesen der Revision vom pi um auf Model zu kommen
-        cat /proc/cpuinfo | grep 'Revision' | awk '{print $3}' | sed 's/^1000//'
-    ;;
     savewebcampicture) # macht ein Bild mit der Webcam
         curl -s -m 5 -o /var/www/images/webcam/snap_$DATE.jpg http://$MYIP:8080/?action=snapshot
         #fswebcam -r 640X480 --no-banner /var/www/images/webcam/$DATE.jpg

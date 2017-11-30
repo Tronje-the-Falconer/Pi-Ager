@@ -25,6 +25,7 @@ $debug_table = 'debug';
 $agingtable_salami_table = 'agingtable_salami';
 $agingtable_dryaging1_table = 'agingtable_dryaging1';
 $agingtable_dryaging2_table = 'agingtable_dryaging1';
+$system_table = 'system';
 
 #----------------------------table keys;
 $switch_on_cooling_compressor_key = 'switch_on_cooling_compressor';
@@ -85,6 +86,7 @@ $bits_to_read_key = 'bits_to_read';
 $scale_measuring_interval_key = 'measuring_interval';
 $measuring_duration_key = 'measuring_duration';
 $saving_period_key = 'saving_period';
+$pi_revision_key = 'pi_revision';
 
 #-----------------------------table fields;
 $key_field = 'key';
@@ -105,8 +107,8 @@ $agingtable_days_field = 'days';
 $thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/';
 $error_reporting_url = 'https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/Error-reporting';
 $sqlite_path = '/var/www/config/pi-ager.sqlite3';
-$logfile_txt_file = '/var/www/logs/logfile.txt'
-$pi_ager_log_file = '/var/www/logs/pi-ager.log'
+$logfile_txt_file = '/var/www/logs/logfile.txt';
+$pi_ager_log_file = '/var/www/logs/pi-ager.log';
 #-----------------------------JSON Keys
 $last_change_temperature_json_key = 'last_change_temperature';
 $last_change_humidity_json_key = 'last_change_humidity';

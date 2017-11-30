@@ -23,6 +23,7 @@ data_sensor_temperature_meat2_table = 'sensor_temperature_meat2_data'
 data_sensor_temperature_meat3_table = 'sensor_temperature_meat3_data'
 data_sensor_temperature_meat4_table = 'sensor_temperature_meat4_data'
 debug_table = 'debug'
+system_table = 'system'
 
 # table keys
 switch_on_cooling_compressor_key = 'switch_on_cooling_compressor'
@@ -91,6 +92,7 @@ measuring_duration_key = 'measuring_duration'
 saving_period_key = 'saving_period'
 failure_temperature_delta_key = 'failure_temperature_delta'
 failure_humidity_delta_key = 'failure_humidity_delta'
+pi_revision_key = 'pi_revision'
 
 # table fields
 key_field = 'key'

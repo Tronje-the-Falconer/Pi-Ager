@@ -8,9 +8,9 @@ from pi_ager_logging import create_logger
 global cursor
 global connection
 
-#global logger
-#logger = create_logger(__name__)
-#logger.debug('logging initialised')
+global logger
+logger = create_logger(__name__)
+logger.debug('logging initialised')
 
 
 def get_current_time():
@@ -180,6 +180,14 @@ def write_current(loopnumber, sensor_temperature, status_heater, status_exhaust_
     
     close_database()
 
+def update_value_in_table(table, key, value):
+    open_database()
+    
+    sql = 'UPDATE ' + table + ' SET "' + pi_ager_names.value_field + '" = "' + str(value) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + key + '"'
+    execute_query(sql)
+    
+    close_database()
+    
 def write_scale(scale_table,value_scale):
 
     if scale_table == pi_ager_names.data_scale1_table:
