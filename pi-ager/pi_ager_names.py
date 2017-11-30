@@ -156,10 +156,6 @@ gpio_temperature_meat_CSO = 16     # GPIO fuer A/D Wandler Fleischtemperatursens
 gpio_temperature_meat_MOSI = 20    # GPIO fuer A/D Wandler Fleischtemperatursensoren
 gpio_temperature_meat_SCLK = 21    # GPIO fuer A/D Wandler Fleischtemperatursensoren Sync
 
-# RRD-Tool
-rrd_dbname = 'pi-ager'               # Name fuer Grafiken etc
-rrd_filename = rrd_dbname + '.rrd'   # Dateinamen mit Endung
-measurement_time_interval = 10       # Zeitintervall fuer die Messung (RRD-TOOL) in Sekunden
 
 # Sainsmart Relais Vereinfachung 0 aktiv
 relay_on = False               # negative Logik!!! des Relay's, Schaltet bei 0 | GPIO.LOW  | False  ein

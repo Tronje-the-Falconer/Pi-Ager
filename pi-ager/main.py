@@ -3,7 +3,6 @@
 # Importieren der Module
 import os
 import time
-import rrdtool
 import pi_ager_logging
 pi_ager_logging.create_logger('main.py')
 import pi_ager_loop
@@ -18,32 +17,6 @@ logger.debug('logging initialised')
 
 logger.info(pi_ager_names.logspacer)
 
-# RRD-Datenbank anlegen, wenn nicht vorhanden
-try:
-    with open(pi_ager_names.rrd_filename): pass
-
-except IOError:
-    logstring = _("creating a new database") + ": " + pi_ager_names.rrd_filename
-    logger.debug(logstring)
-    ret = rrdtool.create("%s" %(pi_ager_names.rrd_filename),
-        "--step","%s" %(pi_ager_names.measurement_time_interval),
-        "--start",'0',
-        "DS:sensor_temperature:GAUGE:2000:U:U",
-        "DS:sensor_humidity:GAUGE:2000:U:U",
-        "DS:stat_exhaust_air:GAUGE:2000:U:U",
-        "DS:stat_circulate_air:GAUGE:2000:U:U",
-        "DS:stat_heater:GAUGE:2000:U:U",
-        "DS:stat_coolcompressor:GAUGE:2000:U:U",
-        "DS:status_humidifier:GAUGE:2000:U:U",
-        "DS:status_dehumidifier:GAUGE:2000:U:U",
-        "DS:status_light:GAUGE:2000:U:U",
-        "DS:status_uv:GAUGE:2000:U:U",
-        "DS:scale1_data:GAUGE:2000:U:U",
-        "DS:scale2_data:GAUGE:2000:U:U",
-        "RRA:AVERAGE:0.5:1:2160",
-        "RRA:AVERAGE:0.5:5:2016",
-        "RRA:AVERAGE:0.5:15:2880",
-        "RRA:AVERAGE:0.5:60:8760",)
 
 pi_ager_init.set_sensortype()
 pi_ager_init.set_system_starttime()

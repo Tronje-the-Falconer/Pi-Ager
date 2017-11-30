@@ -237,7 +237,8 @@
                                                             fontColor: '#000000',
                                                             fontSize: 20,
                                                             //max: 25000,
-                                                            min: -0
+                                                            min: -0,
+                                                            stepSize: 1
                                                         }
                                                         
                                                     }]
@@ -630,8 +631,8 @@
                                                     label: '<?php echo _("exhaust air"); ?>',
                                                     yAxisID: 'status',
                                                     data: <?php echo json_encode($exhaust_air_dataset);?>,
-                                                    backgroundColor: '#DDB929',
-                                                    borderColor: '#DDB929',
+                                                    backgroundColor: '#3ADF00',
+                                                    borderColor: '#3ADF00',
                                                     borderWidth: 5,
                                                     steppedLine: true,
                                                     fill: true
@@ -692,8 +693,8 @@
                                                     label: '<?php echo _("circulate air"); ?>',
                                                     yAxisID: 'status',
                                                     data: <?php echo json_encode($circulate_air_dataset);?>,
-                                                    backgroundColor: '#DDB929',
-                                                    borderColor: '#DDB929',
+                                                    backgroundColor: '#BFFF00',
+                                                    borderColor: '#BFFF00',
                                                     borderWidth: 5,
                                                     steppedLine: true,
                                                     fill: true

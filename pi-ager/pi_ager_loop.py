@@ -4,12 +4,10 @@ import time
 import datetime
 import Adafruit_DHT
 import RPi.GPIO as gpio
-import rrdtool
 from pi_sht1x import SHT1x
 import pi_ager_database
 import pi_ager_names
 import pi_ager_init
-import pi_ager_plotting
 from pi_ager_logging import create_logger
 import pi_ager_gpio_config
 import pi_ager_organization
@@ -576,27 +574,6 @@ def doMainLoop():
         pi_ager_database.write_current(pi_ager_init.loopcounter, sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier)
         logger.debug('writing current values in database performed')
 
-        # Graphen erzeugen
-        from rrdtool import update as rrd_update
-        ret = rrd_update('%s' %(pi_ager_names.rrd_filename), 'N:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s:%s' %(sensor_temperature, sensor_humidity, status_exhaust_air, status_circulating_air, status_heater, status_cooling_compressor, status_humidifier, status_dehumidifier, status_light, status_uv, scale1_data, scale2_data))
-        
-        # array fuer graph     
-        # Grafiken erzeugen
-        if pi_ager_init.loopcounter % 3 == 0 and pi_ager_init.loopcounter != 0:
-            logstring = _("creating graphs")
-            logger.info(logstring)
-            pi_ager_plotting.plotting('sensor_temperature')#', 'status_heater', 'status_cooling_compressor', 'status_circulating_air')
-            pi_ager_plotting.plotting('sensor_humidity')#, 'status_humidifier', 'status_circulating_air', 'status_exhaust_air')
-            pi_ager_plotting.plotting('stat_circulate_air')#, 'status_exhaust_air')
-            pi_ager_plotting.plotting('stat_exhaust_air')
-            pi_ager_plotting.plotting('stat_heater')
-            pi_ager_plotting.plotting('stat_coolcompressor')
-            pi_ager_plotting.plotting('status_humidifier')
-            pi_ager_plotting.plotting('status_dehumidifier')
-            pi_ager_plotting.plotting('status_light')
-            pi_ager_plotting.plotting('status_uv')
-            pi_ager_plotting.plotting('scale1_data')
-            pi_ager_plotting.plotting('scale2_data')
         logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter))
 
         time.sleep(1)  
