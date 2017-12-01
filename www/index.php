@@ -277,14 +277,14 @@
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
                                                             max: <?php 
-                                                            $max_value_scale1 = (max($scale1_dataset) / 100 * 5) + max($scale1_dataset);
-                                                            $max_value_scale2 = (max($scale2_dataset) / 100 * 5) + max($scale2_dataset);
+                                                            $max_value_scale1 = intval((max($scale1_dataset) / 100 * 5) + max($scale1_dataset))+1;
+                                                            $max_value_scale2 = intval((max($scale2_dataset) / 100 * 5) + max($scale2_dataset))+1;
                                                             
                                                             if ($max_value_scale1 >= $max_value_scale2){print $max_value_scale1;}
                                                             else{print $max_value_scale2;}
                                                             
                                                             ?>,
-                                                            stepSize: 1
+                                                            //stepSize: 1
                                                         }
                                                         
                                                     }]
