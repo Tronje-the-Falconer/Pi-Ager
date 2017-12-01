@@ -174,14 +174,6 @@
         close_database();
         return $values;
     }
-
-    function get_pirevision(){
-        global $system_table, $key_field, $value_field, $pi_revision_key;
-        
-        $pirevision = get_table_value($system_table, $pi_revision_key);
-        
-        return $pirevision;
-    }
     
     function read_agingtable_name_from_config()
         {

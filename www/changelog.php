@@ -1,5 +1,6 @@
 <?php 
                                     include 'header.php';      // Template-Kopf und Navigation
+                                    include 'modules/database.php';
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('changelog'); ?></h2>
                                 <div class="hg_container" style="text-align: left;">

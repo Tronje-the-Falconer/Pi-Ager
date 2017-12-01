@@ -47,7 +47,7 @@
         global $data_scale1_table, $data_scale2_table, $status_cooling_compressor_table, $status_heater_table, $data_sensor_humidity_table, $status_circulating_air_table,
         $data_sensor_temperature_table, $status_exhaust_air_table, $data_sensor_temperature_meat1_table, $data_sensor_temperature_meat2_table, $data_sensor_temperature_meat3_table, $data_sensor_temperature_meat4_table,
         $status_light_table, $status_uv_table, $status_humidifier_table, $status_dehumidifier_table, $current_values_table, $settings_scale1_table, $settings_scale2_table,
-        $config_settings_table, $debug_table, $agingtables_table, $agingtable_salami_table, $agingtable_dryaging1_table, $agingtable_dryaging2_table;
+        $config_settings_table, $debug_table, $agingtables_table, $agingtable_salami_table, $agingtable_dryaging1_table, $agingtable_dryaging2_table, $system_table;
         
 
         drop_and_create_id_value_table($data_scale1_table);
@@ -71,6 +71,7 @@
         drop_and_create_key_value_table($settings_scale2_table);
         drop_and_create_key_value_table($config_settings_table);
         drop_and_create_key_value_table($debug_table);
+        drop_and_create_key_value_table($system_table);
         drop_and_create_agingtable_list($agingtables_table);
         drop_and_create_agingtable($agingtable_salami_table);
         drop_and_create_agingtable($agingtable_dryaging1_table);
@@ -93,7 +94,7 @@
     
     function drop_and_create_key_value_table($table)
     {
-        global $id_field, $key_field, $value_field, $last_change_field, $current_values_table, $settings_scale1_table, $settings_scale2_table, $config_settings_table, $debug_table;
+        global $id_field, $key_field, $value_field, $last_change_field, $current_values_table, $settings_scale1_table, $settings_scale2_table, $config_settings_table, $debug_table, $system_table;
         
         open_connection();
         
@@ -120,6 +121,8 @@
              case $debug_table:
                 insert_debug_values($debug_table);
                 break;
+            case $system_table:
+                insert_system_values($system_table);
         }
         
     }
@@ -205,7 +208,19 @@
     
     
     ///Inserts
+    function insert_system_values($table)
+    {
+        global $id_field, $key_field, $value_field, $last_change_field, $pi_revision_key;
         
+        open_connection();
+        
+        $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $key_field . '","' . $value_field . '","' . $last_change_field . '") VALUES ("1","' . $pi_revision_key . '","0000","0");';
+        execute_query($sql);
+        $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $key_field . '","' . $value_field . '","' . $last_change_field . '") VALUES ("2","' . $$pi_ager_version . '","2.2.1","0");';
+        execute_query($sql);
+        
+        close_database();
+    }
         
     function insert_current_values($table)
     {

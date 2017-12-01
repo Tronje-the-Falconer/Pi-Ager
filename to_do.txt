@@ -30,6 +30,9 @@
     20 Helptexte schreiben
     21 Changelog Bild von Flatmike
 ####22 scale, language, sensortyp von settings.php auf admin.php umziehen
+####23 Diagramme von 1/0 auf on/off
+    24 Favicon
+    25 schalter um durch logfiles zu wechseln
 
 3) Python
 ####01 Stromausfall

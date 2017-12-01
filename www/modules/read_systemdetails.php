@@ -4,8 +4,10 @@
     # https://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
     # https://www.raspberrypi.org/documentation/hardware/raspberrypi/revision-codes/README.md
     # Stand 21.06.2017
-    global $piversion;
-    $pirevision = get_pirevision();
+    global $piversion, $piager_version;
+    $pirevision = get_table_value($system_table, $pi_revision_key);
+    $piager_version = get_table_value($system_table, $pi_ager_version_key);
+    
     
     switch ($pirevision){
         ### old revision codes  

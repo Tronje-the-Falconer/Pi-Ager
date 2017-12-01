@@ -37,10 +37,10 @@ def create_logger(pythonfile):
     loglevel_console_value = get_logging_value('loglevel_console')
     
     # Logger fuer website
-    website_log_filehandler = logging.FileHandler(pi_ager_paths.get_path_logfile_txt_file(), mode='a', encoding=None, delay=False)
-    website_log_filehandler.setLevel(logging.INFO)
-    website_log_filehandler_formatter = logging.Formatter('%(asctime)s %(message)s', '%y-%m-%d %H:%M:%S')
-    website_log_filehandler.setFormatter(website_log_filehandler_formatter)
+    website_log_rotatingfilehandler = RotatingFileHandler(pi_ager_paths.get_path_logfile_txt_file(), mode='a', maxBytes=1048576, backupCount=36, encoding=None, delay=False)
+    website_log_rotatingfilehandler.setLevel(logging.INFO)
+    website_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(message)s', '%y-%m-%d %H:%M:%S')
+    website_log_rotatingfilehandler.setFormatter(website_log_rotatingfilehandler_formatter)
 
     # Logger fuer pi-ager debugging
     pi_ager_log_rotatingfilehandler = RotatingFileHandler(pi_ager_paths.get_pi_ager_log_file_path(), mode='a', maxBytes=2097152, backupCount=20, encoding=None, delay=False)
@@ -56,7 +56,7 @@ def create_logger(pythonfile):
     
     logger = logging.getLogger(pythonfile)
     logger.setLevel(logging.DEBUG)
-    logger.addHandler(website_log_filehandler)
+    logger.addHandler(website_log_rotatingfilehandler)
     logger.addHandler(pi_ager_log_rotatingfilehandler)
     logger.addHandler(console_streamhandler)
     

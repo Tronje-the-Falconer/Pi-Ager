@@ -87,6 +87,7 @@ $scale_measuring_interval_key = 'measuring_interval';
 $measuring_duration_key = 'measuring_duration';
 $saving_period_key = 'saving_period';
 $pi_revision_key = 'pi_revision';
+$pi_ager_version_key = 'pi_ager_version';
 
 #-----------------------------table fields;
 $key_field = 'key';
@@ -109,6 +110,7 @@ $error_reporting_url = 'https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/Erro
 $sqlite_path = '/var/www/config/pi-ager.sqlite3';
 $logfile_txt_file = '/var/www/logs/logfile.txt';
 $pi_ager_log_file = '/var/www/logs/pi-ager.log';
+$changelogfile = '/var/www/changelog.txt';
 #-----------------------------JSON Keys
 $last_change_temperature_json_key = 'last_change_temperature';
 $last_change_humidity_json_key = 'last_change_humidity';

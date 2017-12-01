@@ -4,7 +4,7 @@
                     <div class="art-content-layout-row">
                         <div class="miniature_writing" style="width: 50%; float: left;">
                             <?php 
-                              include   'modules/read_pirevision.php';  //liest die Raspberry Revision aus und generiert den Model Namen
+                              include   'modules/read_systemdetails.php';  //liest die Raspberry Revision aus und generiert den Model Namen
                               echo '<p>';
                               echo _('running engine: ');
                               echo '<br>';

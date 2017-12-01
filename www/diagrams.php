@@ -279,12 +279,14 @@
                                                     label: '<?php echo _("light"); ?>',
                                                     yAxisID: 'status',
                                                     data: <?php echo json_encode($light_dataset);?>,
-                                                    backgroundColor: '#FCF751',
-                                                    borderColor: '#FCF751',
-                                                    borderWidth: 5,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 8,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    backgroundColor: '#FFBF00',
+                                                    borderColor: '#FFBF00',
+                                                    borderWidth: 0,
+                                                    radius: 0,
+                                                    pointRadius: 0,
+                                                    pointHitRadius: 0,
+                                                    hoverRadius: 0,
+                                                    hoverBorderWidth: 0,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -294,6 +296,9 @@
                                                     display: true,
                                                     text: '<?php echo _("light"); ?>',
                                                     fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    enabled: false
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -319,7 +324,14 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return value;
+                                                                switch (value) {
+                                                                    case 1: return '<?php echo _('on'); ?>';
+                                                                            break;
+                                                                    case 0: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                    default: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                }
                                                             },
                                                             fontColor: '#000000',
                                                             fontSize: 20,
@@ -348,9 +360,11 @@
                                                     backgroundColor: '#A801FB',
                                                     borderColor: '#A801FB',
                                                     borderWidth: 5,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    radius: 0,
+                                                    pointRadius: 0,
+                                                    pointHitRadius: 0,
+                                                    hoverRadius: 0,
+                                                    hoverBorderWidth: 0,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -360,6 +374,9 @@
                                                     display: true,
                                                     text: '<?php echo _("uv-light"); ?>',
                                                     fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    enabled: false
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -385,7 +402,14 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return value;
+                                                                switch (value) {
+                                                                    case 1: return '<?php echo _('on'); ?>';
+                                                                            break;
+                                                                    case 0: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                    default: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                }
                                                             },
                                                             fontColor: '#000000',
                                                             fontSize: 20,
@@ -413,9 +437,11 @@
                                                     backgroundColor: '#C03738',
                                                     borderColor: '#C03738',
                                                     borderWidth: 5,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    radius: 0,
+                                                    pointRadius: 0,
+                                                    pointHitRadius: 0,
+                                                    hoverRadius: 0,
+                                                    hoverBorderWidth: 0,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -425,6 +451,9 @@
                                                     display: true,
                                                     text: '<?php echo _("heater"); ?>',
                                                     fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    enabled: false
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -450,7 +479,14 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return value;
+                                                                switch (value) {
+                                                                    case 1: return '<?php echo _('on'); ?>';
+                                                                            break;
+                                                                    case 0: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                    default: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                }
                                                             },
                                                             fontColor: '#000000',
                                                             fontSize: 20,
@@ -478,9 +514,11 @@
                                                     backgroundColor: '#59A9C4',
                                                     borderColor: '#59A9C4',
                                                     borderWidth: 5,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    radius: 0,
+                                                    pointRadius: 0,
+                                                    pointHitRadius: 0,
+                                                    hoverRadius: 0,
+                                                    hoverBorderWidth: 0,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -490,6 +528,9 @@
                                                     display: true,
                                                     text: '<?php echo _("cooler"); ?>',
                                                     fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    enabled: false
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -515,7 +556,14 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return value;
+                                                                switch (value) {
+                                                                    case 1: return '<?php echo _('on'); ?>';
+                                                                            break;
+                                                                    case 0: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                    default: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                }
                                                             },
                                                             fontColor: '#000000',
                                                             fontSize: 20,
@@ -543,9 +591,11 @@
                                                     backgroundColor: '#CF9248',
                                                     borderColor: '#CF9248',
                                                     borderWidth: 5,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    radius: 0,
+                                                    pointRadius: 0,
+                                                    pointHitRadius: 0,
+                                                    hoverRadius: 0,
+                                                    hoverBorderWidth: 0,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -555,6 +605,9 @@
                                                     display: true,
                                                     text: '<?php echo _("humidifier"); ?>',
                                                     fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    enabled: false
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -580,7 +633,14 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return value;
+                                                                switch (value) {
+                                                                    case 1: return '<?php echo _('on'); ?>';
+                                                                            break;
+                                                                    case 0: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                    default: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                }
                                                             },
                                                             fontColor: '#000000',
                                                             fontSize: 20,
@@ -608,9 +668,11 @@
                                                     backgroundColor: '#CFED53',
                                                     borderColor: '#CFED53',
                                                     borderWidth: 5,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    radius: 0,
+                                                    pointRadius: 0,
+                                                    pointHitRadius: 0,
+                                                    hoverRadius: 0,
+                                                    hoverBorderWidth: 0,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -620,6 +682,9 @@
                                                     display: true,
                                                     text: '<?php echo _("dehumidifier"); ?>',
                                                     fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    enabled: false
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -645,7 +710,14 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return value;
+                                                                switch (value) {
+                                                                    case 1: return '<?php echo _('on'); ?>';
+                                                                            break;
+                                                                    case 0: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                    default: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                }
                                                             },
                                                             fontColor: '#000000',
                                                             fontSize: 20,
@@ -672,10 +744,11 @@
                                                     data: <?php echo json_encode($exhaust_air_dataset);?>,
                                                     backgroundColor: '#99D498',
                                                     borderColor: '#99D498',
-                                                    borderWidth: 5,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    radius: 0,
+                                                    pointRadius: 0,
+                                                    pointHitRadius: 0,
+                                                    hoverRadius: 0,
+                                                    hoverBorderWidth: 0,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -685,6 +758,9 @@
                                                     display: true,
                                                     text: '<?php echo _("exhaust air"); ?>',
                                                     fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    enabled: false
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -710,7 +786,14 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return value;
+                                                                switch (value) {
+                                                                    case 1: return '<?php echo _('on'); ?>';
+                                                                            break;
+                                                                    case 0: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                    default: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                }
                                                             },
                                                             fontColor: '#000000',
                                                             fontSize: 20,
@@ -735,12 +818,14 @@
                                                     label: '<?php echo _("circulate air"); ?>',
                                                     yAxisID: 'status',
                                                     data: <?php echo json_encode($circulate_air_dataset);?>,
-                                                    backgroundColor: '86CBB0',
+                                                    backgroundColor: '#86CBB0',
                                                     borderColor: '#86CBB0',
                                                     borderWidth: 5,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    radius: 0,
+                                                    pointRadius: 0,
+                                                    pointHitRadius: 0,
+                                                    hoverRadius: 0,
+                                                    hoverBorderWidth: 0,
                                                     steppedLine: true,
                                                     fill: true
                                                 }]
@@ -750,6 +835,9 @@
                                                     display: true,
                                                     text: '<?php echo _("circulate air"); ?>',
                                                     fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    enabled: false
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -775,7 +863,14 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return value;
+                                                                switch (value) {
+                                                                    case 1: return '<?php echo _('on'); ?>';
+                                                                            break;
+                                                                    case 0: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                    default: return '<?php echo _('off'); ?>';
+                                                                            break;
+                                                                }
                                                             },
                                                             fontColor: '#000000',
                                                             fontSize: 20,

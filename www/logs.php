@@ -1,6 +1,7 @@
 <?php 
                                     include 'header.php';      // Template-Kopf und Navigation
                                     include 'modules/clear_logfile.php';
+                                    include 'modules/database.php';
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('log entries'); ?></h2>
                                 <div class="hg_container" style="text-align: left;">
@@ -42,15 +43,23 @@
                                     </form>
                                     <hr>
                                     <!----------------------------------------------------------------------------------------Logeinträge-->
-                                    <table class="miniature_writing">
+                                    <table style="width: 100%" class="miniature_writing">
                                         <tr>
                                             <td>
+                                                <p id="begin" align="right">
+                                                    <a  href="#end"><?php echo _('to bottom') ?></a>
+                                                </p>
                                                 <?php 
-                                                    $f = file('logs/logfile.txt');
+                                                    $f = file($logfile_txt_file);
                                                     foreach($f as $file) {
                                                         echo '<br />'. $file;
                                                     }
                                                 ?>
+                                                </br></br>
+                                                <p align="right" id="end">
+                                                    <a align="right" href="#begin"><?php echo _('to top') ?></a>
+                                                    
+                                                </p>
                                             </td>
                                         </tr>
                                     </table>
