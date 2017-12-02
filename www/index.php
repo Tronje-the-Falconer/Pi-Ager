@@ -19,7 +19,7 @@
 ?>
                                 <div class="thermometers">
                                     <div class="th-display-div">
-                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/temperature.png" alt="" style="padding-top: 10px;">'; ?></div><div style="float: center; padding-left: 8px;" id="temperature_values_old"></div></td></tr>
+                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'; ?></div><div style="float: center; padding-left: 8px;" id="temperature_values_old"></div></td></tr>
                                             <tr>
                                                 <td>
                                                     <div class="de">
@@ -38,7 +38,7 @@
                                         </table>
                                     </div>
                                     <div class="th-display-div">
-                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/humidity.png" alt="" style="padding-top: 10px;">'; ?></div><div style="float: center; padding-left: 8px;" id="humidity_values_old"></div></td></tr>
+                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/humidity_42x42.png" alt="" style="padding-top: 10px;">'; ?></div><div style="float: center; padding-left: 8px;" id="humidity_values_old"></div></td></tr>
                                             <tr>
                                                 <td>
                                                     <div class="de">
@@ -58,7 +58,7 @@
                                     </div>
                                     <!------------------------------ ----------------------------------------------------------Anzeige Scales-->
                                     <div class="th-display-div">
-                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/scale.png" alt="" style="padding-top: 10px;">'.'1'; ?></div><div style="float: center; padding-left: 8px;" id="scale1_values_old"></div></td></tr>
+                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/scale_42x42.png" alt="" style="padding-top: 10px;">'.'1'; ?></div><div style="float: center; padding-left: 8px;" id="scale1_values_old"></div></td></tr>
                                             <tr>
                                                 <td>
                                                     <div class="denemescale">
@@ -69,7 +69,7 @@
                                         </table>
                                     </div>
                                     <div class="th-display-div">
-                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/scale.png" alt="" style="padding-top: 10px;">'.'2'; ?></div><div style="float: center; padding-left: 8px;" id="scale2_values_old"></div></td></tr>
+                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/scale_42x42.png" alt="" style="padding-top: 10px;">'.'2'; ?></div><div style="float: center; padding-left: 8px;" id="scale2_values_old"></div></td></tr>
                                             <tr>
                                                 <td>
                                                     <div class="denemescale">
@@ -202,7 +202,7 @@
                                                     <?php echo $scale1_timestamps_axis_text; ?>,
                                                 datasets: [{
                                                     label: '<?php echo _("scale") ?> 1',
-                                                    yAxisID: 'gram',
+                                                    yAxisID: 'scale1',
                                                     data: <?php echo json_encode($scale1_dataset);?>,
                                                     backgroundColor: [
                                                         '#AEC645'
@@ -219,7 +219,7 @@
                                                 },
                                                 {
                                                     label: '<?php echo _("scale") ?> 2',
-                                                    yAxisID: 'gram',
+                                                    yAxisID: 'scale2',
                                                     data: <?php echo json_encode($scale2_dataset); ?>,
                                                     backgroundColor: [
                                                         '#BF9543'
@@ -260,11 +260,11 @@
                                                     yAxes: [{
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php echo _("gram"); ?>',
+                                                            labelString: '<?php echo _("scale") . ' 1'; ?>',
                                                             fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
-                                                        id: 'gram',
+                                                        id: 'scale1',
                                                         type: 'linear',
                                                         position: 'left',
                                                         ticks: {
@@ -277,12 +277,47 @@
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
                                                             max: <?php 
-                                                            $max_value_scale1 = intval((max($scale1_dataset) / 100 * 5) + max($scale1_dataset))+1;
-                                                            $max_value_scale2 = intval((max($scale2_dataset) / 100 * 5) + max($scale2_dataset))+1;
+                                                            $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
                                                             
-                                                            if ($max_value_scale1 >= $max_value_scale2){print $max_value_scale1;}
-                                                            else{print $max_value_scale2;}
+                                                            print $max_value_scale1;
+                                                            ?>,
+                                                            min: <?php 
+                                                            $min_value_scale1 = intval(min($scale1_dataset) - (max($scale1_dataset) / 100 * 5))-1;
                                                             
+                                                            print $min_value_scale1;
+                                                            ?>,
+                                                            //stepSize: 1
+                                                        }
+                                                        
+                                                    },
+                                                    {
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php echo _("scale") . ' 2'; ?>',
+                                                            fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'scale2',
+                                                        type: 'linear',
+                                                        position: 'right',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                return value + ' gr';
+                                                            },
+                                                            fontColor: '#000000',
+                                                            fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: <?php 
+                                                            $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
+                                                            
+                                                            print $max_value_scale2;
+                                                            ?>,
+                                                            min: <?php 
+                                                            $min_value_scale2 = intval(min($scale2_dataset) - (max($scale2_dataset) / 100 * 5))-1;
+                                                            
+                                                            print $min_value_scale2;
                                                             ?>,
                                                             //stepSize: 1
                                                         }

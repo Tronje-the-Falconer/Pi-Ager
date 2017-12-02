@@ -177,7 +177,7 @@
                                                     <?php echo $scale1_timestamps_axis_text; ?>,
                                                 datasets: [{
                                                     label: '<?php echo _("scale") ?> 1',
-                                                    yAxisID: 'gram',
+                                                    yAxisID: 'scale1',
                                                     data: <?php echo json_encode($scale1_dataset);?>,
                                                     backgroundColor: [
                                                         '#AEC645'
@@ -194,7 +194,7 @@
                                                 },
                                                 {
                                                     label: '<?php echo _("scale") ?> 2',
-                                                    yAxisID: 'gram',
+                                                    yAxisID: 'scale2',
                                                     data: <?php echo json_encode($scale2_dataset); ?>,
                                                     backgroundColor: [
                                                         '#BF9543'
@@ -235,11 +235,11 @@
                                                     yAxes: [{
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php echo _("gram"); ?>',
+                                                            labelString: '<?php echo _("scale") . ' 1'; ?>',
                                                             fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
-                                                        id: 'gram',
+                                                        id: 'scale1',
                                                         type: 'linear',
                                                         position: 'left',
                                                         ticks: {
@@ -252,12 +252,47 @@
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
                                                             max: <?php 
-                                                            $max_value_scale1 = intval((max($scale1_dataset) / 100 * 5) + max($scale1_dataset))+1;
-                                                            $max_value_scale2 = intval((max($scale2_dataset) / 100 * 5) + max($scale2_dataset))+1;
+                                                            $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
                                                             
-                                                            if ($max_value_scale1 >= $max_value_scale2){print $max_value_scale1;}
-                                                            else{print $max_value_scale2;}
+                                                            print $max_value_scale1;
+                                                            ?>,
+                                                            min: <?php 
+                                                            $min_value_scale1 = intval(min($scale1_dataset) - (max($scale1_dataset) / 100 * 5))-1;
                                                             
+                                                            print $min_value_scale1;
+                                                            ?>,
+                                                            //stepSize: 1
+                                                        }
+                                                        
+                                                    },
+                                                    {
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php echo _("scale") . ' 2'; ?>',
+                                                            fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'scale2',
+                                                        type: 'linear',
+                                                        position: 'right',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                return value + ' gr';
+                                                            },
+                                                            fontColor: '#000000',
+                                                            fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: <?php 
+                                                            $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
+                                                            
+                                                            print $max_value_scale2;
+                                                            ?>,
+                                                            min: <?php 
+                                                            $min_value_scale2 = intval(min($scale2_dataset) - (max($scale2_dataset) / 100 * 5))-1;
+                                                            
+                                                            print $min_value_scale2;
                                                             ?>,
                                                             //stepSize: 1
                                                         }
