@@ -87,9 +87,9 @@
         // else
             // {
             while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
-                {
+            {
                 $values[$dataset[$last_change_field]] = $dataset[$value_field];
-                }
+            }
             // }
         close_database();
         

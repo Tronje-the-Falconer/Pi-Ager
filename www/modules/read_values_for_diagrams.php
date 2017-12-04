@@ -17,9 +17,10 @@
     function get_timestamps_for_time_axis($timestamps, $first_timestamp){
         foreach ($timestamps as $current_timestamp){
             if ($current_timestamp >= $first_timestamp){
-            $timestamps_axis[] = $current_timestamp;
+                $timestamps_axis[] = $current_timestamp;
             }
         }
+        
         return $timestamps_axis;
     }
     
@@ -40,6 +41,21 @@
         return $dataset;
     }
 
+    function duplicate_last_value_in_array($array, $added_timestamp){
+        $last_value = end($array);
+        $array[$added_timestamp] = $last_value;
+        
+        return $array;
+    }
+    
+    function add_current_time_in_array($array){
+        
+        $new_time = get_current_time();
+        $array[] = $new_time;
+        
+        return $array;
+    }
+    
     $temperature_values = get_diagram_values($data_sensor_temperature_table);
     $temperature_timestamps = array_keys($temperature_values);
     $last_timestamp_temperature = $temperature_timestamps[count($temperature_timestamps)-1];
@@ -76,17 +92,23 @@
     $uv_light_timestamps = array_keys($uv_light_values);
     $last_timestamp_uv_light = $uv_light_timestamps[count($uv_light_timestamps)-1];
     $first_timestamp_uv_light = get_defined_last_timestamp_from_array($uv_light_timestamps, $diagram_mode);
-    $uv_light_timestamps_axis = get_timestamps_for_time_axis($uv_light_timestamps, $first_timestamp_uv_light);
+    
+    $uv_light_timestamps_with_duplicated_last = add_current_time_in_array($uv_light_timestamps);
+    $uv_light_values_with_duplicated_last = duplicate_last_value_in_array($uv_light_values, end($uv_light_timestamps_with_duplicated_last));
+    
+    $uv_light_timestamps_axis = get_timestamps_for_time_axis($uv_light_timestamps_with_duplicated_last, $first_timestamp_uv_light);
     $uv_light_timestamps_axis_text = get_text_array_for_time_axis($uv_light_timestamps_axis);
-    $uv_light_dataset = get_dataset_of_values($uv_light_values, $uv_light_timestamps_axis);
+    $uv_light_dataset = get_dataset_of_values($uv_light_values_with_duplicated_last, $uv_light_timestamps_axis);
   
     $light_values = get_diagram_values($status_light_table);
     $light_timestamps = array_keys($light_values);
     $last_timestamp_light = $light_timestamps[count($light_timestamps)-1];
     $first_timestamp_light = get_defined_last_timestamp_from_array($light_timestamps, $diagram_mode);
-    $light_timestamps_axis = get_timestamps_for_time_axis($light_timestamps, $first_timestamp_light);
+    $light_timestamps_with_duplicated_last = add_current_time_in_array($light_timestamps);
+    $light_values_with_duplicated_last = duplicate_last_value_in_array($light_values, end($light_timestamps_with_duplicated_last));
+    $light_timestamps_axis = get_timestamps_for_time_axis($light_timestamps_with_duplicated_last, $first_timestamp_light);
     $light_timestamps_axis_text = get_text_array_for_time_axis($light_timestamps_axis);
-    $light_dataset = get_dataset_of_values($light_values, $light_timestamps_axis);
+    $light_dataset = get_dataset_of_values($light_values_with_duplicated_last, $light_timestamps_axis);
     
     $heater_values = get_diagram_values($status_heater_table);
     $heater_timestamps = array_keys($heater_values);

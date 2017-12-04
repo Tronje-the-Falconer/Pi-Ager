@@ -43,10 +43,10 @@ Prioritätenliste
     18 on the fly (Ajax) Werte auslesen (phase der reifetabelle, status, temperatur, feuchte, Waage1 und 2, Lichtstatus für Schalter on/off)
     19 Werte beim schreiben in die db prüfen: failure_humidity_delta, failure_temperature_delta, Scale1 & 2 measuring_interval, measuring_duration, saving_period, samples, spikes
     20 Helptexte schreiben
-    21 Changelog Bild von Flatmike
+####21 Changelog Bild von Flatmike
 ####22 scale, language, sensortyp von settings.php auf admin.php umziehen
 ####23 Diagramme von 1/0 auf on/off
-    24 Favicon
+####24 Favicon
     25 schalter um durch logfiles zu wechseln
     26 Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
 ----27 letzte Änderung des Status auslesen und anzeigen lassen

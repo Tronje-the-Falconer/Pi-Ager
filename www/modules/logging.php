@@ -12,7 +12,7 @@
                 $loglevelstring = 30;
             case 'ERROR':
                 $loglevelstring = 40;
-            case 'Critical':
+            case 'CRITICAL':
                 $loglevelstring = 50;
         }
         

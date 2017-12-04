@@ -93,12 +93,14 @@
             }
             
         ?>
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
         <!-- <script src="./node_modules/chart.js/dist/Chart.min.js"></script> -->
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> -->
     <!--    <script src="js/jquery.js"></script>
         <script src="js/ajax.js"></script>
         <script src="js/script.js"></script>
         <script src="js/script.responsive.js"></script>
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
     -->
     </head>
     <body>
