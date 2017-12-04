@@ -272,12 +272,14 @@
         
         open_connection();
         
-        $sql = 'SELECT ' . $value_field . ' FROM ' . $debug_table . ' WHERE ' . $key_field . ' = ' . $destination;
+        $sql = 'SELECT ' . $value_field . ' FROM ' . $debug_table . ' WHERE ' . $key_field . ' = "' . $destination . '"';
         $result = get_query_result($sql);
+        
+        $row = $result->fetchArray();
         
         close_database();
         
-        return $result;
+        return $row;
     }
     
     function write_debug_values($chosen_measuring_interval_debug, $chosen_agingtable_days_in_seconds_debug){

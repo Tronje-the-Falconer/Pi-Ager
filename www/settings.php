@@ -2,6 +2,7 @@
                                     include 'header.php';                                       // Template-Kopf und Navigation
                                     include 'modules/names.php';
                                     include 'modules/database.php';
+                                    include 'modules/logging.php';                            //liest die Datei fuer das logging ein
                                     include 'modules/start_stop_program.php';                   // Startet / Stoppt das Reifeprogramm bzw. den ganzen Schrank
                                     
                                     include 'modules/write_table_db.php';                       // Speichert die Auswahl der Reifetabelle
@@ -14,6 +15,8 @@
                                     include 'modules/read_operating_mode_db.php';               // Liest die Art der Reifesteuerung
                                     include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
                                     // include 'modules/read_csv_dir.php';                         // Liest das Verezichnis mit den Reifeprogrammtabellen ein
+                                    
+                                    
                                     
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('operating values'); ?></h2>
