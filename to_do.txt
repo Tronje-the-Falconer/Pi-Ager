@@ -2,25 +2,40 @@
 ---- = verschoben auf nächstes Release
 .... = Begonnen
 
+Prioritätenliste
+01 Python 23
+02 Website 06
+03 Website 03
+04 Website 26
+05 Website 01
+06 Website 02
+07 Website 12
+08 Webiste 20
+09 Webiste 10
+11 Website 07
+12 Allgemein 03
+
+
 1) Allgemein
     01 Lizenz überdenken!
     02 Website erstellen (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/27)
+    03 Release vorbereiten (Statustabellen leeren, Agingtables überprüfen)
 
 2) Website
     01 Upload CSV und eintragen als Agingtable_[CSV-Filename] in Datenbank ACHTUNG! richtige Reihenfolge in Tabelle schreiben! (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/11)
-    02 Editieren und Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
-    03 Wägezellen Calibrate Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
+    02 Editieren der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
+....03 Wägezellen Calibrate Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
 ----03 Alarm
 ####04 Temperatur Statistiken und aktuelle Werte (http://www.chartjs.org) (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/33)
 ####05 Reifetabellenzeile einfärben, welche Phase gerade aktiv
-    06 php logging nutzen
+....06 php logging nutzen
     07 Translation Aktivieren
 ----08 Update über Website ermöglichen (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/20)
 ----09 Displayupdate über Website
-    10 Kommentare entfernen
+    10 Kommentare aussortieren / ergänzen
 ####11 Datenbank/-schema per Button erzeugen
     12 Datenbank auf Vollständigkeit überprüfen. Warnung ausgeben, wenn Dinge fehlen und ergänzen
-    13 Code aufräumen
+####13 Code aufräumen (duplicate Webiste 10)
 ####14 Logfile (website) erzeugen, wenn nicht vorhanden // über python erledigt
 ####15 admin.php        unter debug fehlen: measuring_interval_debug, agingtable_days_in_seconds_debug
 ####16 settings.php     scale-werte fehlen: measuring_interval, measuring_duration, saving_period, samples, spikes
@@ -33,6 +48,8 @@
 ####23 Diagramme von 1/0 auf on/off
     24 Favicon
     25 schalter um durch logfiles zu wechseln
+    26 Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
+----27 letzte Änderung des Status auslesen und anzeigen lassen
 
 3) Python
 ####01 Stromausfall
@@ -65,7 +82,7 @@
 ####20 Data und sync aus Datenbank bei Scale entfernen
 ####21 Schaltungen von Licht und UV auf Zeiten laut Settings prüfen
 ####22 Raspberry pi Version bei Systemstart lesen und in sqlite schreiben. Danach übergabe zur Website (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/32)
-    23 nur alle x loops in das websitelog schreiben?
+    23 nur Status-Werte schreiben, wenn geändert
 
 4) Linux
     01 phpliteadmin.php passwort bei Erstinstallation auf allgemeinses PW oder eigenes setzen
