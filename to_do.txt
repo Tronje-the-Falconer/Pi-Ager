@@ -92,3 +92,4 @@ ________________________________________________________________________________
 zur Diskussion ob sinnvoll ( Wenn ok wird es oben übernommen)
 
 a) Sollwerte für Temperatur und Feuchtigkeit im Diagram darstellen 
+b) Tara Wert speicherbar machen damit beim Stromausfall die Waagen sauber weiter laufen.
