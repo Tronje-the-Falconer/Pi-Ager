@@ -256,6 +256,30 @@
         close_database();
     }
     
+    function delete_agingtable($agingtable){
+        global  $config_settings_table, $id_field, $agingtables_table, $agingtable_key;
+        
+        $id_agingtable_to_delete = get_agingtable_id_by_name($agingtable);
+        $id_chosen_agingtable = get_table_value($config_settings_table, $agingtable_key);;
+
+        if ($id_chosen_agingtable == $id_agingtable_to_delete){
+            return FALSE;
+        }
+        else {
+            open_connection();
+            
+            $sql = 'DROP TABLE agingtable_' . $agingtable;
+            execute_query($sql);
+            
+            $sql = 'DELETE FROM ' . $agingtables_table . ' WHERE "' . $id_field . '" = "' . $id_agingtable_to_delete . '"';
+            execute_query($sql);
+            
+            close_database();
+            
+            return TRUE;
+        }    
+    }
+    
     function write_loglevel($chosen_loglevel_file, $chosen_loglevel_console){
         global $value_field, $last_change_field, $key_field, $loglevel_console_key, $loglevel_file_key, $debug_table;
         

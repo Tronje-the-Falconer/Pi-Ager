@@ -185,8 +185,18 @@
                                                             },
                                                             fontColor: '#000000',
                                                             fontSize: 20,
+                                                            // max: <?php 
+                                                            // $max_value_humidiy = intval(max($humidity_dataset) + (max($humidity_dataset) / 100 * 5))+1;
+                                                            
+                                                            // print $max_value_humidiy;
+                                                            // ?>,
+                                                            // min: <?php 
+                                                            // $min_value_humidiy = intval(min($humidity_dataset) - (max($humidity_dataset) / 100 * 5))-1;
+                                                            
+                                                            // print $min_value_humidiy;
+                                                            // ?>
                                                             max: 110,
-                                                            min: 40
+                                                            min: 30
                                                         }
                                                     }]
                                                 }

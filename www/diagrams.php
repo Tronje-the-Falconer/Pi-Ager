@@ -160,8 +160,18 @@
                                                             },
                                                             fontColor: '#000000',
                                                             fontSize: 20,
+                                                            // max: <?php 
+                                                            // $max_value_humidiy = intval(max($humidity_dataset) + (max($humidity_dataset) / 100 * 5))+1;
+                                                            
+                                                            // print $max_value_humidiy;
+                                                            // ?>,
+                                                            // min: <?php 
+                                                            // $min_value_humidiy = intval(min($humidity_dataset) - (max($humidity_dataset) / 100 * 5))-1;
+                                                            
+                                                            // print $min_value_humidiy;
+                                                            // ?>
                                                             max: 110,
-                                                            min: 40
+                                                            min: 30
                                                         }
                                                     }]
                                                 }
@@ -179,12 +189,8 @@
                                                     label: '<?php echo _("scale") ?> 1',
                                                     yAxisID: 'scale1',
                                                     data: <?php echo json_encode($scale1_dataset);?>,
-                                                    backgroundColor: [
-                                                        '#AEC645'
-                                                    ],
-                                                    borderColor: [
-                                                        '#AEC645'
-                                                    ],
+                                                    backgroundColor: '#AEC645',
+                                                    borderColor: '#AEC645',
                                                     borderWidth: 2,
                                                     <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
                                                     pointHitRadius: 5,';} else {print 'pointRadius: 0,
@@ -196,12 +202,8 @@
                                                     label: '<?php echo _("scale") ?> 2',
                                                     yAxisID: 'scale2',
                                                     data: <?php echo json_encode($scale2_dataset); ?>,
-                                                    backgroundColor: [
-                                                        '#BF9543'
-                                                    ],
-                                                    borderColor: [
-                                                        '#BF9543'
-                                                    ],
+                                                    backgroundColor: '#BF9543',
+                                                    borderColor: '#BF9543',
                                                     borderWidth: 2,
                                                     <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
                                                     pointHitRadius: 5,';} else {print 'pointRadius: 0,
