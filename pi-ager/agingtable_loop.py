@@ -3,7 +3,6 @@
 import sys
 import time
 import datetime
-import pi_ager_debug
 import pi_ager_database
 import pi_ager_init
 import pi_ager_names
