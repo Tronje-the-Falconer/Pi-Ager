@@ -87,3 +87,8 @@ Prioritätenliste
 4) Linux
     01 phpliteadmin.php passwort bei Erstinstallation auf allgemeinses PW oder eigenes setzen
     02 Zeitsynchronisation mit Atomuhr (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/22)
+____________________________________________________________________________________________________________________
+
+zur Diskussion ob sinnvoll ( Wenn ok wird es oben übernommen)
+
+a) Sollwerte für Temperatur und Feuchtigkeit im Diagram darstellen 
