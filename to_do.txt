@@ -48,7 +48,7 @@ Prioritätenliste
 ####23 Diagramme von 1/0 auf on/off
 ####24 Favicon
     25 schalter um durch logfiles zu wechseln
-    26 Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
+####26 Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
 ----27 letzte Änderung des Status auslesen und anzeigen lassen
 
 3) Python
