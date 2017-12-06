@@ -26,9 +26,12 @@ def check_website_logfile():
     global logger
     filepath = pi_ager_paths.get_path_logfile_txt_file()
     website_logfile = Path(filepath)
+    filepermission = oct(os.stat(pi_ager_paths.logfile_txt_file)[stat.ST_MODE])[-3:]
     if not website_logfile.is_file():
         new_website_logfile = open(pi_ager_paths.get_path_logfile_txt_file(), "wb")
         new_website_logfile.close()
+        #os.chmod(pi_ager_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
+    if (filepermission != '666'):
         os.chmod(pi_ager_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
 
 def create_logger(pythonfile):

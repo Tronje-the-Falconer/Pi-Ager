@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import os
+import stat
 import time
 import datetime
 import Adafruit_DHT
@@ -7,8 +8,10 @@ import RPi.GPIO as gpio
 from pi_sht1x import SHT1x
 import pi_ager_database
 import pi_ager_names
+import pi_ager_paths
 import pi_ager_init
 from pi_ager_logging import create_logger
+from pi_ager_logging import check_website_logfile
 import pi_ager_gpio_config
 import pi_ager_organization
 
@@ -34,6 +37,7 @@ def autostart_loop():
             doMainLoop()
         elif status_pi_ager == 1:
             doMainLoop()
+        check_website_logfile()
         time.sleep(5)
 
 def get_sensordata():
@@ -579,9 +583,18 @@ def doMainLoop():
 
         time.sleep(1)  
         
+        # Logfile auf Rechte prüfen und evtl. neu setzen
+        
+        # filepermission = oct(os.stat(pi_ager_paths.logfile_txt_file)[stat.ST_MODE])[-3:]
+        # if (filepermission != '666'):
+            # os.chmod(pi_ager_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
+        check_website_logfile()
+        
         # Mainloop fertig
         logger.debug('loop complete')
         pi_ager_init.loopcounter += 1
+        
+        
         
 # Ende While-Schleife
     logger.debug('status!= 1')
