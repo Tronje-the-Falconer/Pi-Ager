@@ -2,6 +2,7 @@
                                     include 'header.php';                                       // Template-Kopf und Navigation
                                     include 'modules/names.php';
                                     include 'modules/database.php';
+                                    include 'modules/logging.php';                            //liest die Datei fuer das logging ein
                                     
                                     include 'modules/system_reboot.php';                        // Startet das System neu
                                     include 'modules/system_shutdown.php';                      // Fährt das System herunter
