@@ -171,7 +171,7 @@
                                                             // print $min_value_humidiy;
                                                             // ?>
                                                             max: 110,
-                                                            min: 30
+                                                            min: 20
                                                         }
                                                     }]
                                                 }
