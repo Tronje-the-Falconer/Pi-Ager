@@ -149,7 +149,7 @@
                 $switch_on_humidity = $setpoint_humidity - $switch_on_humidifier_config;
                 $switch_off_humidity = $setpoint_humidity - $switch_off_humidifier_config;
                 
-                $logstring = '***********************************************';
+                $logstring = " \n ***********************************************";
                 $logstring = $logstring . " \n " . _('configuration has been changed.') . " \n ";
                 $logstring = $logstring . " \n " . _('operating mode') . ": " . $operating_mode;
 
