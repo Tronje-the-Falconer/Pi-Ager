@@ -105,34 +105,34 @@
                         # Uv licht
                         if ($uv_modus == 0) {
                             $uv_modus_name = _('off');
-                            $logtext_uv = " ";
-                            $logtext_uv_duration = " ";
+                            $logtext_uv = "";
+                            $logtext_uv_duration = "";
                         }
                         if ($uv_modus == 1) {
                             $uv_modus_name = _('duration & period');
-                            $logtext_uv = _('uv period').": ".$uv_period ." "._('minutes');
+                            $logtext_uv = _('uv period').": ".$uv_period ." "._('minutes') . " \n ";
                             $logtext_uv_duration = _('uv duration').": ".$uv_duration ." "._('minutes');
                         }
                         if ($uv_modus == 2) {
                             $uv_modus_name = _('duration & timestamp');
-                            $logtext_uv = _('uv timestamp').": ".switch_on_uv_hour.":".$switch_on_uv_minute;
+                            $logtext_uv = _('uv timestamp').": ".switch_on_uv_hour.":".$switch_on_uv_minute . " \n ";
                             $logtext_uv_duration = _('uv duration').": ".$uv_duration ." "._('minutes');
                             
                         }
                         # Licht
                         if ($light_modus == 0) {
                             $light_modus_name = _('off');
-                            $logtext_light = " ";
-                            $logtext_light_duration = " ";
+                            $logtext_light = "";
+                            $logtext_light_duration = "";
                         }
                         if ($light_modus == 1) {
                             $light_modus_name = _('duration & period');
-                            $logtext_light = _('light period').": ".$light_period ." "._('minutes');
+                            $logtext_light = _('light period').": ".$light_period ." "._('minutes') . " \n ";
                             $logtext_light_duration = _('light duration').": ".$light_duration ." "._('minutes');
                         }
                         if ($light_modus == 2) {
                             $light_modus_name = _('duration & timestamp');
-                            $logtext_light = _('light timestamp').": ".$switch_on_light_hour.":".$switch_on_light_minute;
+                            $logtext_light = _('light timestamp').": ".$switch_on_light_hour.":".$switch_on_light_minute . " \n ";
                             $logtext_light_duration = _('light duration').": ".$light_duration ." "._('minutes');
                             
                         }
@@ -187,10 +187,8 @@
                         $logstring = $logstring . " \n " . $logtext_uv;
                         $logstring = $logstring . " \n " . $logtext_uv_duration;
                         $logstring = $logstring . " \n " . _('light modus').": ".$light_modus_name;
-                        $logstring = $logstring . " \n " . $logtext_light;
-                        $logstring = $logstring . " \n " . $logtext_light_duration;
-
-                        $logstring = $logstring . " \n " . _('language').": ".$language;
+                        $logstring = $logstring . $logtext_light;
+                        $logstring = $logstring . $logtext_light_duration;
                         $logstring = $logstring . " \n " . "***********************************************";
                         logger('INFO', $logstring);
 
