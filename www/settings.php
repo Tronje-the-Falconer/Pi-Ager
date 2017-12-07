@@ -151,29 +151,49 @@
                                                 ?>
                                         </tr>
                                         <tr>
-                                            <td>&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td><?php 
+                                            <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
+                                            <td style=" text-align: left; padding-left: 20px;"><?php
+                                                    echo "<button class=\"art-button\" name=\"choose_agingtable\" value=\"choose_agingtable\"onclick=\"return confirm('"._('choose new agingtable?')."');\">"._('choose')."</button>";
+                                                ?>
+                                            </td>
+
+                                            <td style=" text-align: left; padding-left: 20px;"><?php 
                                                     if ($grepagingtable == NULL){
                                                         echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" value=\"ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')." \\n "._('manual values will be overwritten in database!')."');\">"._('start agingtable')."</button>";
                                                     }
                                                     else {
                                                         echo "<button class=\"art-button\" name=\"agingtable_stop\" value=\"agingtable_stop\" onclick=\"return confirm('"._('stop agingtable?').' \\n '._('pi-ager continues with the last values of the agingtable!')."');\">"._('stop agingtable')."</button>";
                                                     }
+                                                    echo '</form>';
                                                 ?>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>&nbsp;</td>
+                                            <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
+                                            <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
+                                            <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><br>
                                                 <?php 
-                                                    echo "<button class=\"art-button\" name=\"choose_agingtable\" value=\"choose_agingtable\"onclick=\"return confirm('"._('choose new agingtable?')."');\">"._('choose')."</button>";
+                                                    print '<form  method="post">';
+                                                    echo '<select name="agingtable_edit">';
+                                                    foreach($agingtable_names as $name) {
+                                                        if ($name!=$desired_maturity){
+                                                            echo '<option value="'.$name.'">'.$name.'<br>';
+                                                        }
+                                                        else
+                                                        {
+                                                            echo '<option value="'.$name.'" selected>'.$name.'<br>';
+                                                        }
+                                                    }
+                                                    echo '</select>';
+                                                    
                                                 ?>
                                             </td>
                                             <td style=" text-align: left; padding-left: 20px;">
-                                                <?php 
-                                                    echo "<button class=\"art-button\" name=\"upload_new_agingtable\" value=\"upload_new_agingtable\"onclick=\"return confirm('"._('upload new agingtable?')."');\">"._('upload new')."</button>";
-                                                ?>
+                                                &nbsp;
                                             </td>
                                         </tr>
                                         <tr>
@@ -181,9 +201,10 @@
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
                                                     echo "<button class=\"art-button\" name=\"edit_agingtable\" value=\"edit_agingtable\"onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
                                                 ?></td>
-                                            <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    echo "<button class=\"art-button\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
-                                                ?></td>
+                                            <td style=" text-align: left; padding-left: 20px;">
+                                                <?php 
+                                                    echo "<button class=\"art-button\" name=\"upload_new_agingtable\" value=\"upload_new_agingtable\"onclick=\"return confirm('"._('upload new agingtable?')."');\">"._('upload new')."</button>";
+                                                ?>
                                         </tr>
                                         <tr>
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
@@ -191,8 +212,9 @@
                                                     echo "<button class=\"art-button\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
                                                     echo '</form>';
                                                 ?></td>
-                                            <td style="padding-left: 20px;"><br>
-                                                &nbsp;</td>
+                                            <td style=" text-align: left; padding-left: 20px;"><?php 
+                                                    echo "<button class=\"art-button\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
+                                                ?></td></td>
                                         </tr>
                                     </table>
                                     <table id="show_agingtable" class="show_agingtable">

@@ -2,14 +2,11 @@
     $timestamp = date('d.m.Y / H:i:s');
     $logfile = 'logs/logfile.txt';
     if (isset ($_POST['clear_logfile'])) {
+        $newfile = fopen($logfile, 'w');
+        fclose($newfile);
         if (is_file($logfile)) {
-            $fp = fopen($logfile, 'w')
-                or die (sprintf(_('could not create %s'), $logfile));
-            $input = sprintf (_("New file created on %s o'clock"), $timestamp);
-            fwrite($fp,$input);
-            fwrite($fp, "\n");
-            fwrite($fp, "\n");
-            fclose ($fp);
+            $logstring = _("new logfile created");
+            logger('INFO', $logstring);
         }
         # 3Sekunden Anzeige dass die Werte nicht gespeichert wurden
         else {

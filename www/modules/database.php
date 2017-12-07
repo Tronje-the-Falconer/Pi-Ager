@@ -185,7 +185,7 @@
 		// echo($sql);
         $table_result = get_query_result($sql);
 		if (!$table_result) {
-			echo('$table_result = ' . strval($table_result));
+			// echo('$table_result = ' . strval($table_result));
 		}
         while ($dataset = $table_result->fetchArray(SQLITE3_ASSOC))
             {

@@ -6,14 +6,14 @@ Prioritätenliste
 #### 01 Python 23
 02 Website 06
 03 Website 03
-04 Website 26
-05 Website 01
-06 Website 02
-07 Website 12
-08 Webiste 20
-09 Webiste 10
-11 Website 07
-12 Allgemein 03
+04 Website 01
+05 Website 02
+06 Website 12
+07 Webiste 20
+08 Webiste 10
+09 Website 07
+10 Linux 01
+11 Allgemein 03
 
 
 1) Allgemein

@@ -1,7 +1,9 @@
 <?php 
                                     include 'header.php';      // Template-Kopf und Navigation
-                                    include 'modules/clear_logfile.php';
+                                    include 'modules/logging.php';                            //liest die Datei fuer das logging ein
+                                    
                                     include 'modules/database.php';
+                                    include 'modules/clear_logfile.php';
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('log entries'); ?></h2>
                                 <div class="hg_container" style="text-align: left;">

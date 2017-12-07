@@ -125,7 +125,6 @@
                     $uv_modus_name = _('duration & timestamp');
                     $logtext_uv = _('uv timestamp') . ": ". $switch_on_uv_hour_config . ":" . $switch_on_uv_minute_config;
                     $logtext_uv_duration = _('uv duration') . ": ". $uv_duration_config . " " . _('minutes');
-                    
                 }
                 # Licht
                 if ($light_modus_config == 0) {
@@ -142,9 +141,7 @@
                     $light_modus_name = _('duration & timestamp');
                     $logtext_light = _('light timestamp').": ".$switch_on_light_hour_config.":".$switch_on_light_minute_config;
                     $logtext_light_duration = _('light duration').": ".$light_duration_config/60 ." "._('minutes');
-                    
                 }
-                
                 $circulation_air_duration = $circulation_air_duration/60;
                 $circulation_air_period = $circulation_air_period/60;
                 $exhausting_air_duration = $exhaust_air_duration/60;
@@ -152,75 +149,53 @@
                 $switch_on_humidity = $setpoint_humidity - $switch_on_humidifier_config;
                 $switch_off_humidity = $setpoint_humidity - $switch_off_humidifier_config;
                 
-                
-
-                $f=fopen('logs/logfile.txt','a');
-                fwrite($f, "\n"."***********************************************");
-                fwrite($f, "\n". _('operating mode').": ".$operating_mode);
-                fwrite($f, "\n".date('d.m.Y H:i:s').' '._('configuration has been changed.'));
-                fwrite($f, "\n");
+                $logstring = '***********************************************';
+                $logstring = $logstring . " \n " . _('configuration has been changed.') . " \n ";
+                $logstring = $logstring . " \n " . _('operating mode') . ": " . $operating_mode;
 
                 if ($modus == 0 || $modus == 1 || $modus == 2)  {
-                    fwrite($f, "\n"._('setpoint temperature').": ".$setpoint_temperature."&deg;C");
-                    fwrite($f, "\n"._('switch-off temperature').": ".$switch_off_cooling_compressor_config."&deg;C ("._('so at')." ".$switch_off_temperature_cooling."&deg;C)");
-                    fwrite($f, "\n"._('switch-on temperature').": ".$switch_on_cooling_compressor_config."&deg;C ("._('so at')." ".$switch_on_temperature."&deg;C)");
+                    $logstring = $logstring . " \n " . _('setpoint temperature').": ".$setpoint_temperature." &deg;C";
+                    $logstring = $logstring . " \n " . _('switch-off temperature').": ".$switch_off_cooling_compressor_config." &deg;C ("._('so at')." ".$switch_off_temperature_cooling." &deg;C)";
+                    $logstring = _('switch-on temperature').": ".$switch_on_cooling_compressor_config." &deg;C ("._('so at')." ".$switch_on_temperature." &deg;C)";
                 }
-
+                
                 if ($modus == 3 || $modus == 4)  {
-                    fwrite($f, "\n"._('setpoint temperature').": ".$setpoint_temperature."&deg;C");
-                    fwrite($f, "\n"._('switch-on heater').": ".$switch_on_cooling_compressor_config.'&deg;C ('._('so at')." ".$switch_on_temperature_heating.'&deg;C)');
-                    fwrite($f, "\n"._('switch-off heater').": ".$switch_off_cooling_compressor_config."&deg;C ("._('so at')." ".$switch_off_temperature_cooling_heating."&deg;C)");
-                    fwrite($f, "\n"._('switch-on cooler').": ".$switch_on_cooling_compressor_config."&deg;C ("._('so at')." ".$switch_on_temperature_cooling."&deg;C)");
-                    fwrite($f, "\n"._('switch-off cooler').": ".$switch_off_cooling_compressor_config."&deg;C ("._('so at')." ".$switch_off_temperature_cooling_cooling."&deg;C)");
+                    $logstring = $logstring . " \n " . _('setpoint temperature').": ".$setpoint_temperature." &deg;C";
+                    $logstring = $logstring . " \n " . _('switch-on heater').": ".$switch_on_cooling_compressor_config.' &deg;C ('._('so at')." ".$switch_on_temperature_heating.' &deg;C)';
+                    $logstring = $logstring . " \n " . _('switch-off heater').": ".$switch_off_cooling_compressor_config." &deg;C ("._('so at')." ".$switch_off_temperature_cooling_heating." &deg;C)";
+                    $logstring = $logstring . " \n " . _('switch-on cooler').": ".$switch_on_cooling_compressor_config." &deg;C ("._('so at')." ".$switch_on_temperature_cooling." &deg;C)";
+                    $logstring = $logstring . " \n " . _('switch-off cooler').": ".$switch_off_cooling_compressor_config." &deg;C ("._('so at')." ".$switch_off_temperature_cooling_cooling." &deg;C)";
                 }
-
-                fwrite($f, "\n");
 
                 if ($modus == 1 || $modus == 2 || $modus == 3) {
-                    fwrite($f, "\n"._('setpoint humidity').": ".$setpoint_humidity."% "."&phi;");
-                    fwrite($f, "\n"._('switch-on humidifier').": ".$switch_on_humidifier_config."% &phi; ("._('so at')." ".$switch_on_humidity."% &phi;)");
-                    fwrite($f, "\n"._('switch-off humidifier').": ".$switch_off_humidifier_config."% &phi; ("._('so at')." ".$switch_off_humidity."% &phi;)");
-                    fwrite($f, "\n"._('delay humidifier')." ".$delay_humidify_config._('minutes'));
+                    $logstring = $logstring . " \n " . _('setpoint humidity').": ".$setpoint_humidity."% "."&phi;";
+                    $logstring = $logstring . " \n " . _('switch-on humidifier').": ".$switch_on_humidifier_config." % &phi; ("._('so at')." ".$switch_on_humidity." % &phi;)";
+                    $logstring = $logstring . " \n " . _('switch-off humidifier').": ".$switch_off_humidifier_config." % &phi; ("._('so at')." ".$switch_off_humidity." % &phi;)";
+                    $logstring = $logstring . " \n " . _('delay humidifier')." ".$delay_humidify_config." "._('minutes');
                 }
 
                 if ($modus == 4) {
-                    fwrite($f, "\n"._('setpoint humidity').": ".$setpoint_humidity."% &phi;");
-                    fwrite($f, "\n"._('switch-on humidifier').": ".$switch_on_humidifier_config."% &phi; ("._('so at')." ".$switch_on_humidify."% &phi;)");
-                    fwrite($f, "\n"._('switch-off humidifier').": ".$switch_off_humidifier_config."% &phi; ("._('so at')." ".$switch_off_humidify."% &phi;)");
-                    fwrite($f, "\n"._('switch-on exhausting').": ".$switch_on_humidifier_config."% &phi; ("._('so at')." ".$switch_on_dehumidify."% &phi;)");
-                    fwrite($f, "\n"._('switch-off exhausting').": ".$switch_off_humidifier_config."% &phi; ("._('so at')." ".$switch_off_dehumidify."% &phi;)");
-                    fwrite($f, "\n"._('delay exhausting')." ".$delay_humidify_config._('minutes'));
+                    $logstring = $logstring . " \n " . _('setpoint humidity').": ".$setpoint_humidity."% &phi;";
+                    $logstring = $logstring . " \n " . _('switch-on humidifier').": ".$switch_on_humidifier_config."% &phi; ("._('so at')." ".$switch_on_humidify."% &phi;)";
+                    $logstring = $logstring . " \n " . _('switch-off humidifier').": ".$switch_off_humidifier_config."% &phi; ("._('so at')." ".$switch_off_humidify."% &phi;)";
+                    $logstring = $logstring . " \n " . _('switch-on exhausting').": ".$switch_on_humidifier_config."% &phi; ("._('so at')." ".$switch_on_dehumidify."% &phi;)";
+                    $logstring = $logstring . " \n " . _('switch-off exhausting').": ".$switch_off_humidifier_config."% &phi; ("._('so at')." ".$switch_off_dehumidify."% &phi;)";
+                    $logstring = $logstring . " \n " . _('delay exhausting')." ".$delay_humidify_config ." ". _('minutes');
                 }
+                $logstring = $logstring . " \n " . _('circulation air period').": ".$circulation_air_period." "._('minutes');
+                $logstring = $logstring . " \n " . _('circulation air duration').": ".$circulation_air_duration." "._('minutes');
+                $logstring = $logstring . " \n " . _('exhausting air period')." ".$exhausting_air_period." "._('minutes');
+                $logstring = $logstring . " \n " . _('exhausting air duration').": ".$exhausting_air_duration." "._('minutes');
+                $logstring = $logstring . " \n " . _('dehumidify modus').": ".$dehumidifier_modus_name;
+                $logstring = $logstring . " \n " . _('uv modus').": ".$uv_modus_name;
+                $logstring = $logstring . " \n " . $logtext_uv;
+                $logstring = $logstring . " \n " . $logtext_uv_duration;
+                $logstring = $logstring . " \n " . _('light modus').": ".$light_modus_name;
+                $logstring = $logstring . " \n " . $logtext_light;
+                $logstring = $logstring . " \n " . $logtext_light_duration;
+                $logstring = $logstring . " \n " . "***********************************************";
+                logger('INFO', $logstring);
 
-                fwrite($f, "\n");
-                fwrite($f, "\n"._('circulation air period').": ".$circulation_air_period." "._('minutes'));
-                fwrite($f, "\n"._('circulation air duration').": ".$circulation_air_duration._('minutes'));
-
-
-                fwrite($f, "\n");
-                fwrite($f, "\n"._('exhausting air period')." ".$exhausting_air_period." "._('minutes'));
-                fwrite($f, "\n"._('exhausting air duration').": ".$exhausting_air_duration." "._('minutes'));
-
-
-                fwrite($f, "\n");
-                fwrite($f, "\n"._('dehumidify modus').": ".$dehumidifier_modus_name);
-
-
-                fwrite($f, "\n");
-                fwrite($f, "\n"._('uv modus').": ".$uv_modus_name);
-                fwrite($f, "\n".$logtext_uv);
-                fwrite($f, "\n".$logtext_uv_duration);
-
-
-                fwrite($f, "\n");
-                fwrite($f, "\n"._('light modus').": ".$light_modus_name);
-                fwrite($f, "\n".$logtext_light);
-                fwrite($f, "\n".$logtext_light_duration);
-
-
-                fwrite($f, "\n"."***********************************************");
-                fclose($f);
-                
                 $message_config = (_("values saved in file Database"));
             }
             else {
