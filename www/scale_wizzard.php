@@ -23,3 +23,6 @@
                                 <!-----------------------------------Anzeige des Gemessenen Wertes-->
                                 <!-----------------------------------scale.py neu starten-->
                                 
+<?php
+      include 'footer.php';
+?>

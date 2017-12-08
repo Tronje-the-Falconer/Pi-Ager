@@ -153,7 +153,7 @@
                                         <tr>
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php
-                                                    echo "<button class=\"art-button\" name=\"choose_agingtable\" value=\"choose_agingtable\"onclick=\"return confirm('"._('choose new agingtable?')."');\">"._('choose')."</button>";
+                                                    echo "<button class=\"art-button\" name=\"select_agingtable\" value=\"select_agingtable\"onclick=\"return confirm('"._('choose new agingtable?')."');\">"._('choose')."</button>";
                                                 ?>
                                             </td>
 
@@ -199,7 +199,7 @@
                                         <tr>
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    echo "<button class=\"art-button\" name=\"edit_agingtable\" value=\"edit_agingtable\"onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
+                                                    echo "<button class=\"art-button\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\"onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;">
                                                 <?php 

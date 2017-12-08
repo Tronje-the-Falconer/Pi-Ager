@@ -40,6 +40,9 @@
     elseif ($_SERVER['PHP_SELF'] == '/admin.php') {
         $admin_active = 'active';
     }
+    elseif ($_SERVER['PHP_SELF'] == '/edit_agingtable.php') {
+        $edit_agingtable_active = 'active';
+    }
     # Auslesen der Version aus dem Changelog
     # Lese 14 Zeichen, beginnend mit dem 21. Zeichen
     #$changelogfile = 'changelog.txt';
@@ -143,7 +146,13 @@
                                     echo _('scale wizzard');
                                     echo '</a></li>';
                                 }
-                                
+                                if ($_SERVER['PHP_SELF'] == '/edit_agingtable.php') {
+                                    echo '<li><a href="edit_agingtable.php" class="';
+                                    echo $edit_agingtable_active;
+                                    echo '">';
+                                    echo _('edit agingtable');
+                                    echo '</a></li>';
+                                }
                             ?>
                         </ul>
                     </div>
