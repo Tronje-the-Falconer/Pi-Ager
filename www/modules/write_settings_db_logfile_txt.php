@@ -6,6 +6,7 @@
     # Prüfung der eingegebenen Werte
     if(!empty($_POST['manvals_form_submit']))
         {
+            logger('DEBUG', 'button save manvals pressed');
             $modus_setting = $_POST['modus_settings'];
             $setpoint_temperature_setting = $_POST['setpoint_temperature_settings'];
             $setpoint_humidity_setting = $_POST['setpoint_humidity_settings'];
@@ -200,6 +201,7 @@
                         }
                 }
         }
+        logger('DEBUG', 'manual values: ' . $message_settings);
         print '<script language="javascript"> alert("'. (_("manual values")) . " : " .$message_settings.'"); </script>';
     }
 ?>

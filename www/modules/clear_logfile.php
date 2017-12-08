@@ -10,6 +10,7 @@
         }
         # 3Sekunden Anzeige dass die Werte nicht gespeichert wurden
         else {
+            logger('DEBUG', 'could not find logfile');
             echo '<p id="info-message" style="color: #ff0000; font-size: 20px;"><b>';
             echo sprintf(_('could not find %s!'), $logfile);
             echo'</b></p>

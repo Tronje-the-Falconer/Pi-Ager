@@ -1,9 +1,14 @@
 <?php
-                                    include 'modules/save_webcam_picture.php';
+                                    
                                     include 'header.php';                                       // Template-Kopf und Navigation
+                                    include 'modules/names.php';
+                                    include 'modules/database.php';
+                                    include 'modules/logging.php';                            //liest die Datei fuer das logging ein
+                                    include 'modules/save_webcam_picture.php';
                                     include 'modules/start_stop_program.php';
                                     include 'modules/start_stop_light.php';
                                     include 'modules/read_current_db.php';
+                                    
                                 ?>
                                 <?PHP
                                     if (isset($_SERVER['HTTPS']) &&

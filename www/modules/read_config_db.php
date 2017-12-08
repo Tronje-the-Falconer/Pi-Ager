@@ -1,15 +1,4 @@
 <?php
-// include 'database.php';
-
-    // $database = new SQLite3("/var/www/config/pi-ager.sqlite3");
-    // $result = $database->query('SELECT key, value FROM config WHERE "key"="sensortype" OR "key"="language" OR "key"="switch_on_cooling_compressor" OR "key" = "switch_off_cooling_compressor"OR "key"="switch_on_humidifier" OR "key" = "switch_off_humidifier" OR "key" = "delay_humidify" OR "key" = "uv_modus" OR "key" = "uv_duration" OR "key" = "uv_period" OR "key" = "switch_on_uv_hour" OR "key" = "switch_on_uv_minute" OR "key" = "light_modus" OR "key" = "light_duration" OR "key" = "light_period" OR "key" = "switch_on_light_hour" OR "key" = "switch_on_light_minute" OR "key" = "dehumidifier_modus" OR "key" = "referenceunit_scale1" OR "key" = "referenceunit_scale2"');
-    // $items_config = array();
-    // while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
-        // {
-        // $items_config[$dataset['key']] = $dataset['value'];
-        // }
-    // $database->close();
-
     $sensor_temperature = round(get_table_value($current_values_table,$sensor_temperature_key), 1);
     $sensortype = get_table_value($config_settings_table,$sensortype_key);
     $language = get_table_value($config_settings_table,$language_key);
@@ -133,4 +122,5 @@
     else {
         $checked_dehumidify_3 = '';
     }
+    logger('DEBUG', 'read_config_db performed');
 ?>

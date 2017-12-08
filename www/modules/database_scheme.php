@@ -8,6 +8,7 @@
         $backupfilename = $sqlite_path . $now;
         
         copy( $sqlite_path, $backupfilename);
+        logger('DEBUG', 'backup_database performed');
     }
     
     function rename_database()
@@ -18,6 +19,7 @@
         $renamedfilename = $sqlite_path . $now;
         
         rename( $sqlite_path, $renamedfilename);
+        logger('DEBUG', 'rename_database performed');
     }
     
     function create_new_database()
@@ -27,10 +29,12 @@
         if ($db = sqlite_open($sqlite_path, 0666, $sqliteerror))
         {
             create_database_scheme();
+            logger('DEBUG', 'create_new_database performed');
         }
         else
         {
-          die ($sqliteerror);
+            logger('DEBUG', 'backup_database not performed ' . $sqliteerror);
+            die ($sqliteerror);
         }
     }
     
@@ -39,6 +43,7 @@
         global $sqlite_path;
         
         unlink($sqlite_path);
+        logger('DEBUG', 'delete_database performed');
     }
     
     //Standard Datenbank
@@ -76,6 +81,7 @@
         drop_and_create_agingtable($agingtable_salami_table);
         drop_and_create_agingtable($agingtable_dryaging1_table);
         drop_and_create_agingtable($agingtable_dryaging2_table);
+        logger('DEBUG', 'create_database_scheme performed');
     }
     
     // Drop And Create
@@ -90,6 +96,7 @@
         execute_query($sql);
         
         close_database();
+        logger('DEBUG', 'drop_and_create_id_value_table performed');
     }
     
     function drop_and_create_key_value_table($table)
@@ -124,6 +131,7 @@
             case $system_table:
                 insert_system_values($system_table);
         }
+        logger('DEBUG', 'drop_and_create_key_value_table performed');
         
     }
     
@@ -140,6 +148,7 @@
         
         close_database();
         insert_agingtable_list($table);
+        logger('DEBUG', 'drop_and_create_agingtable_list performed');
 
      }
      
@@ -168,6 +177,7 @@
                 insert_dryaging2_values($agingtable_dryaging2_table);
                 break;
          }
+         logger('DEBUG', 'drop_and_create_agingtable performed');
      }
     
     //Statistik Tabellen leeren
@@ -192,7 +202,7 @@
         delete_data($data_sensor_temperature_meat2_table);
         delete_data($data_sensor_temperature_meat3_table);
         delete_data($data_sensor_temperature_meat4_table);
-
+        logger('DEBUG', 'delete_statistic_tables performed');
     }
     
     function delete_data($table_name)
@@ -203,7 +213,7 @@
         $sql = 'VACUUM';
         get_query_result($sql);
         close_database();
-        
+        logger('DEBUG', 'delete_data performed');
     }
     
     
@@ -220,6 +230,7 @@
         execute_query($sql);
         
         close_database();
+        logger('DEBUG', 'insert_system_values performed');
     }
         
     function insert_current_values($table)
@@ -283,6 +294,7 @@
         execute_query($sql);
         
         close_database();
+        logger('DEBUG', 'insert_current_values performed');
     }    
      
      function insert_scale_settings_values($table)
@@ -311,6 +323,7 @@
         execute_query($sql);
         
         close_database();
+        logger('DEBUG', 'insert_scale_settings_values performed');
      }
         
      function insert_debug_values($table)
@@ -328,6 +341,7 @@
         execute_query($sql);
         
         close_database();
+        logger('DEBUG', 'insert_debug_values performed');
      }     
      
      function insert_config_values($table)
@@ -396,6 +410,7 @@
         execute_query($sql);
         
         close_database();
+        logger('DEBUG', 'insert_config_values performed');
      }
 
      function insert_agingtable_list($table)
@@ -411,6 +426,7 @@
         execute_query($sql);
         
         close_database();
+        logger('DEBUG', 'insert_agingtable_list performed');
      }
      function insert_salami_values($table)
      {
@@ -443,6 +459,7 @@
          execute_query($sql);
          
          close_database();
+         logger('DEBUG', 'insert_salami_values performed');
      }
      
      function insert_dryaging1_values($table)
@@ -461,6 +478,7 @@
          execute_query($sql);
          
          close_database();
+         logger('DEBUG', 'insert_dryaging1_values performed');
      }
      
      function insert_dryaging2_values($table)
@@ -483,5 +501,6 @@
          execute_query($sql);
          
          close_database();
+         logger('DEBUG', 'insert_dryaging2_values performed');
      }
  ?>

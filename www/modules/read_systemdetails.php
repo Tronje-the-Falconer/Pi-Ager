@@ -81,4 +81,5 @@
         default:
             return $piversion = _('model unknown! Please contact us.');
     }
+    logger('DEBUG', 'read_systemdetails performed');
 ?>

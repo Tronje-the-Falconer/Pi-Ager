@@ -1,6 +1,5 @@
 <?php 
     include 'names.php';
-// include 'debug.php';
 
     function open_connection()
     {
@@ -8,24 +7,17 @@
     
         $connection = new SQLite3("/var/www/config/pi-ager.sqlite3");
         $connection->busyTimeout(10000);
-        // so müsste es sein... ;-)
-        // $connection->exec('PRAGMA journal_mode = wal;');
-        // $connection->exec('BEGIN TRANSACTION;');
     }
 
     function execute_query($command){
         global $connection;
         
-        // open_connection();
-        // $connection->exec('BEGIN;');
         $connection->exec($command);
-        //echo('DB Input: ' . $command);
     }
     
     function close_database(){
         global $connection;
 
-        // $connection->exec('COMMIT;');
         $connection->close();
     }
     
@@ -36,11 +28,8 @@
     
     function get_query_result($sql_statement){
         global $connection;
-        
-        // open_connection();
-        // $connection->exec('BEGIN;');
+
         $result = $connection->query($sql_statement);
-        //echo('DB Input: ' . $sql_statement);
         return $result;
     }
     
@@ -57,17 +46,10 @@
             $sql = 'SELECT ' . $value_field . ' FROM ' . $table . ' WHERE key = "' . $key . '" AND ' . $id_field . ' = (SELECT MAX(' . $id_field . ') from ' . $table . ' WHERE key = "' . $key . '")';
         }
         $result = get_query_result($sql);
-        // if ($result == FALSE)
-            // {
-                // echo($sql . '<br>');
-                // }
-        // else
-            // {
             while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
                 {
                 $value = $dataset[$value_field];
                 }
-            // }
         close_database();
         
         return $value;
@@ -80,17 +62,10 @@
         open_connection();
         $sql = 'SELECT ' . $value_field . ', ' .$last_change_field . ' FROM ' . $table;
         $result = get_query_result($sql);
-        // if ($result == FALSE)
-            // {
-                // echo($sql . '<br>');
-                // }
-        // else
-            // {
-            while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
-            {
-                $values[$dataset[$last_change_field]] = $dataset[$value_field];
-            }
-            // }
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+        {
+            $values[$dataset[$last_change_field]] = $dataset[$value_field];
+        }
         close_database();
         
         if (!isset ($values)){
@@ -135,9 +110,6 @@
             $value = $dataset[$value_field];
             $last_change = $dataset[$last_change_field];
             }
-        // if (debugging == 'on') {
-            // print ("DEBUG: " + strval(row[0]))
-            // print ("DEBUG: " + strval(row.keys()))
         close_database();
         
         return $dataset;

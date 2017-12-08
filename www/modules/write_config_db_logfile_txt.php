@@ -1,11 +1,9 @@
 <?php 
-    // include 'modules/read_settings_db.php';                     // Liest die manuellen Werte aus
-    #var_dump($_POST);
-    
     $message_config='';
     # Prüfung der eingegebenen Werte
     if(!empty($_POST['config_form_submit']))
         {                       // ist das $_POST-Array gesetzt
+        logger('DEBUG', 'button save configvalues pressed');
         $switch_on_cooling_compressor_config = $_POST['switch_on_cooling_compressor_config'];
         $switch_off_cooling_compressor_config = $_POST['switch_off_cooling_compressor_config'];
         $switch_on_humidifier_config = $_POST['switch_on_humidifier_config'];
@@ -59,7 +57,7 @@
                             $uv_period_config, $switch_on_uv_hour_config, $switch_on_uv_minute_config, $light_modus_config, $light_duration_config,
                             $light_period_config, $switch_on_light_hour_config, $switch_on_light_minute_config, $dehumidifier_modus_config,
                             $failure_temperature_delta_config, $failure_humidity_delta_config);
-
+                logger('DEBUG', 'configvalues saved');
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus
                 if ($modus == 0) {
@@ -199,6 +197,7 @@
                 $message_config = (_("values saved in file Database"));
             }
             else {
+            logger('DEBUG', 'configvalues not in specified limits');
             $message_config = (_("values not in the specified limits!"));
             }
         }

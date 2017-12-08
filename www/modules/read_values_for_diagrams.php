@@ -1,6 +1,5 @@
 <?php 
     function get_defined_last_timestamp_from_array($array, $delta){
-        // sort($array);
         $last_timestamp_in_array = end($array);
         Switch ($delta){
             case 'hour':
@@ -12,6 +11,7 @@
             case 'month':
                 return $last_timestamp_in_array - 2629700;
         }
+        logger('DEBUG', 'get_defined_last_timestamp_from_array performed');
     }
     
     function get_timestamps_for_time_axis($timestamps, $first_timestamp){
@@ -20,7 +20,7 @@
                 $timestamps_axis[] = $current_timestamp;
             }
         }
-        
+        logger('DEBUG', 'get_timestamp_for_time_axis performed');
         return $timestamps_axis;
     }
     
@@ -31,6 +31,7 @@
         }
         $axis_text = substr($axis_text, 0, -1);
         $axis_text = $axis_text . ']';
+        logger('DEBUG', 'get_text_array_for_time_axis performed');
         return $axis_text;
     }
 
@@ -38,13 +39,14 @@
         foreach ($timestamps_axis as $current_timestamp_axis){
             $dataset[] = $datavalues[$current_timestamp_axis];
         }
+        logger('DEBUG', 'get_dataset_of_values performed');
         return $dataset;
     }
 
     function duplicate_last_value_in_array($array, $added_timestamp){
         $last_value = end($array);
         $array[$added_timestamp] = $last_value;
-        
+        logger('DEBUG', 'duplicate_last_value_in_array performed');
         return $array;
     }
     
@@ -52,7 +54,7 @@
         
         $new_time = get_current_time();
         $array[] = $new_time;
-        
+        logger('DEBUG', 'add_current_time_in_array performed');
         return $array;
     }
     
@@ -157,4 +159,5 @@
     $circulate_air_timestamps_axis = get_timestamps_for_time_axis($circulate_air_timestamps, $first_timestamp_circulate_air);
     $circulate_air_timestamps_axis_text = get_text_array_for_time_axis($circulate_air_timestamps_axis);
     $circulate_air_dataset = get_dataset_of_values($circulate_air_values, $circulate_air_timestamps_axis);
+    logger('DEBUG', 'read_values_for_diagrams performed');
 ?>

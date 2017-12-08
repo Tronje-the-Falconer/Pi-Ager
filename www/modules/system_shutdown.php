@@ -1,6 +1,7 @@
 <?php 
     #System herunterfahren
     if (isset ($_POST['shutdown'])){
+        logger('DEBUG', 'button shutdown pressed');
         $date = date('d.m.Y H:i:s');
         shell_exec('sudo /var/sudowebscript.sh shutdown');
 #3 Sekunden anzeigen, dass System heruntergefahren wird

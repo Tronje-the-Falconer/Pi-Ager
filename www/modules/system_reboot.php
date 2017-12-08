@@ -1,6 +1,7 @@
 <?php 
     #System neustarten
     if (isset ($_POST['reboot'])){
+        logger('DEBUG', 'button reboot pressed');
         $date = date('d.m.Y H:i:s');
         shell_exec('sudo /var/sudowebscript.sh reboot');
 #3 Sekunden anzeigen, dass System neugestartet wird

@@ -9,4 +9,5 @@
     else {
         $maturity_type = _('none');
     }
+    logger('DEBUG', 'read_operating_mode_db performed');
 ?>

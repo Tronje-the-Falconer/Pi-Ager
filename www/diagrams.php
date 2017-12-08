@@ -1,6 +1,7 @@
 <?php 
                                     include 'header.php';                                       // Template-Kopf und Navigation
                                     include 'modules/database.php';
+                                    include 'modules/logging.php';                            //liest die Datei fuer das logging ein
                                 ?>
                                 <!----------------------------------------------------------------------------------------Was eben hier hin kommt ...-->
                                 <?php 
@@ -161,17 +162,17 @@
                                                             fontColor: '#000000',
                                                             fontSize: 20,
                                                             // max: <?php 
-                                                            // $max_value_humidiy = intval(max($humidity_dataset) + (max($humidity_dataset) / 100 * 5))+1;
+                                                            // $max_value_humidiy = intval(max($humidity_dataset) + (max($humidity_dataset) / 100 * 1))+1;
                                                             
                                                             // print $max_value_humidiy;
                                                             // ?>,
                                                             // min: <?php 
-                                                            // $min_value_humidiy = intval(min($humidity_dataset) - (max($humidity_dataset) / 100 * 5))-1;
+                                                            // $min_value_humidiy = intval(min($humidity_dataset) - (max($humidity_dataset) / 100 * 1))-1;
                                                             
                                                             // print $min_value_humidiy;
                                                             // ?>
-                                                            max: 110,
-                                                            min: 20
+                                                            max: 100,
+                                                            min: 0
                                                         }
                                                     }]
                                                 }

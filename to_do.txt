@@ -4,11 +4,11 @@
 
 Prioritätenliste
 #### 01 Python 23
-02 Website 06
-03 Website 03
-04 Website 01
-05 Website 02
-06 Website 12
+####02 Website 06 
+03 Website 01
+04 Website 02
+05 Website 12
+06 Website 03
 07 Webiste 20
 08 Webiste 10
 09 Website 07
@@ -28,7 +28,7 @@ Prioritätenliste
 ----03 Alarm
 ####04 Temperatur Statistiken und aktuelle Werte (http://www.chartjs.org) (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/33)
 ####05 Reifetabellenzeile einfärben, welche Phase gerade aktiv
-....06 php logging nutzen
+####06 php logging nutzen
     07 Translation Aktivieren
 ----08 Update über Website ermöglichen (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/20)
 ----09 Displayupdate über Website
@@ -50,6 +50,7 @@ Prioritätenliste
     25 schalter um durch logfiles zu wechseln
 ####26 Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
 ----27 letzte Änderung des Status auslesen und anzeigen lassen
+----28 Autoload anstelle von include nutzen (http://php.net/manual/en/language.oop5.autoload.php)
 
 3) Python
 ####01 Stromausfall

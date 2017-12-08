@@ -89,4 +89,5 @@
     else {
         $scale2_on_off_png = 'images/icons/status_on_20x20.png';
     }
+    logger('DEBUG', 'read_gpio performed');
 ?>

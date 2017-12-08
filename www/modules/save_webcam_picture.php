@@ -1,5 +1,6 @@
 <?php
     if (isset ($_POST['save_webcam_picture'])){
+        logger('DEBUG', 'button save webcampicture pressed');
         $date = date('d.m.Y H:i:s');
         shell_exec('sudo /var/sudowebscript.sh savewebcampicture');
         $webcam_path = "/var/www/images/webcam";
@@ -23,6 +24,7 @@
         header('Content-Transfer-Encoding: binary');
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         readfile($downloadfile);
+        //logger('DEBUG', 'webcampicture saved');
         exit;
     }
 ?>

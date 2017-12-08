@@ -2,6 +2,7 @@
 // include 'database.php';
     #Namen der Reifetabelle in db speichern
     if (isset ($_POST['choose_agingtable'])){
+        logger('DEBUG', 'button select agingtable pressed');
         $chosen_agingtable = $_POST['agingtable'];
         write_agingtable($chosen_agingtable);
         $logstring = 'selected agingtable "' . $chosen_agingtable . '"';

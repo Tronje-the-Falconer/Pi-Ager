@@ -1,13 +1,4 @@
 <?php
-    // $database = new SQLite3("/var/www/config/pi-ager.sqlite3");
-    // $result = $database->query('SELECT key, value FROM config WHERE "key"="modus" OR "key"="setpoint_temperature" OR "key"="setpoint_humidity" OR "key"="circulation_air_period" OR "key"="circulation_air_duration" OR "key"="exhaust_air_period" OR "key"="exhaust_air_duration"');
-    // $items_settings = array();
-    // while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
-        // {
-        // $items_settings[$dataset['key']] = $dataset['value'];
-        // }
-        
-    
     $modus = round(get_table_value($config_settings_table,$modus_key), 1);
     $setpoint_temperature = round(get_table_value($config_settings_table,$setpoint_temperature_key), 1);
     $setpoint_humidity = round(get_table_value($config_settings_table,$setpoint_humidity_key), 1);
@@ -52,5 +43,5 @@
     else {
         $checked_4 = '';
     }
-
+    logger('DEBUG', 'read_settings_db performed');
 ?>
