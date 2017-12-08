@@ -4,16 +4,16 @@
 
 Prioritätenliste
 #### 01 Python 23
-####02 Website 06 
-03 Website 01
-04 Website 02
-05 Website 12
-06 Website 03
-07 Webiste 20
-08 Webiste 10
-09 Website 07
-10 Linux 01
-11 Allgemein 03
+#### 02 Website 06 
+     03 Website 01
+.... 04 Website 02
+     05 Website 12
+     06 Website 03
+     07 Webiste 20
+     08 Webiste 10
+     09 Website 07
+     10 Linux 01
+     11 Allgemein 03
 
 
 1) Allgemein
@@ -23,7 +23,7 @@ Prioritätenliste
 
 2) Website
     01 Upload CSV und eintragen als Agingtable_[CSV-Filename] in Datenbank ACHTUNG! richtige Reihenfolge in Tabelle schreiben! (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/11)
-    02 Editieren der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
+....02 Editieren der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
 ....03 Wägezellen Calibrate Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
 ----03 Alarm
 ####04 Temperatur Statistiken und aktuelle Werte (http://www.chartjs.org) (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/33)
