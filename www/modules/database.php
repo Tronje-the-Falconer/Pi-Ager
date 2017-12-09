@@ -391,5 +391,12 @@
         close_database();
     }
     
+    function set_null_if_empty($value){
+        if ($value == '' OR $value == NULL){
+            $value = 'NULL';
+        }
+        return $value;
+    }
+    
     include 'database_scheme.php'; 
 ?>
