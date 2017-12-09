@@ -70,6 +70,8 @@
         }
     }
     if (isset ($_POST['upload_new_agingtable'])){
+        $logstring = 'button upload agingtable pressed';
+        logger('DEBUG', $logstring );
         $edit_agingtable = $_POST['agingtable_edit'];
         // write_agingtable($edit_agingtable);
         $logstring = 'button upload new agingtable pressed';
@@ -77,6 +79,8 @@
         print '<script language="javascript"> alert("'. (_("button")) . " : " . (_("no buttonfunction")) .'"); </script>';
     }
     if (isset ($_POST['export_agingtable'])){
+        $logstring = 'button export agingtable pressed';
+        logger('DEBUG', $logstring );
         $edit_agingtable = $_POST['agingtable_edit'];
         // write_agingtable($edit_agingtable);
         $logstring = 'button export  pressed';
