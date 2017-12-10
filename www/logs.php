@@ -4,6 +4,7 @@
                                     
                                     include 'modules/database.php';
                                     include 'modules/clear_logfile.php';
+                                    include 'modules/save_logfiles.php';
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('log entries'); ?></h2>
                                 <div class="hg_container" style="text-align: left;">
@@ -38,7 +39,7 @@
                                                         }
                                                     ?>
                                                 </td>
-                                                <td>&nbsp;</td>
+                                                <td><button class="art-button" name="save_logfiles" onclick="return confirm(<?php echo _('save all logfiles?'); ?>);"><?php echo _('save logfiles'); ?></button></td>
                                                 <td><button class="art-button" name="clear_logfile" onclick="return confirm(<?php echo _('clear all logfile data?'); ?>);"><?php echo _('delete data'); ?></button></td>
                                             </tr>
                                         </table>

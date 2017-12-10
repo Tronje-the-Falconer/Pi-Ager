@@ -114,6 +114,9 @@ case "$1" in
         curl -s -m 5 -o /var/www/images/webcam/snap_$DATE.jpg http://$MYIP:8080/?action=snapshot
         #fswebcam -r 640X480 --no-banner /var/www/images/webcam/$DATE.jpg
     ;;
+    ziplogfiles) # Zippt alle logfiles
+        zip -r /var/www/logs/pi-ager_logfiles.zip /var/www/logs/
+    ;;
     *) echo "ERROR: invalid parameter: $1 (for $0)"; exit 1 #Fehlerbehandlung
     ;;
 esac
