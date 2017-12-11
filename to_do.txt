@@ -23,6 +23,7 @@ Prioritätenliste
     04 Bauanleitung im Wiki verbessern
     05 Bedienungsanleitung schreiben
     06 FAQ im Wiki
+    07 Format der CSV festlegen/veröffentlichen
 
 2) Website
     01 Upload CSV und eintragen als Agingtable_[CSV-Filename] in Datenbank ACHTUNG! richtige Reihenfolge in Tabelle schreiben! (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/11)
