@@ -153,7 +153,7 @@
                                         <tr>
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php
-                                                    echo "<button class=\"art-button\" name=\"select_agingtable\" value=\"select_agingtable\"onclick=\"return confirm('"._('choose new agingtable?')."');\">"._('choose')."</button>";
+                                                    echo "<button class=\"art-button\" name=\"select_agingtable\" value=\"select_agingtable\"onclick=\"return confirm('"._('select new agingtable?')."');\">"._('select')."</button>";
                                                 ?>
                                             </td>
 
@@ -232,6 +232,8 @@
                                             // Gewählte Agingtable aus DB auslesen und als Tabelle beschreiben
                                             $index_row = 0;
                                             $agingtable_rows = get_agingtable_dataset($desired_maturity);
+                                            $firstrow = $agingtable_rows[0];
+                                            $agingtable_comment = $firstrow[$agingtable_comment_field];
                                             $current_period = get_table_value($current_values_table, $agingtable_period_key);
                                             $current_period_0 = $current_period - 1;
                                             try {
@@ -285,6 +287,14 @@
                                              catch (Exception $e) {
                                                 }
                                         ?>
+                                    </table>
+                                    <table style="width: 100%" class="switching_state miniature_writing">
+                                        <tr>
+                                        <?php 
+                                            $agingtable_comment_with_carriage_return = nl2br($agingtable_comment);
+                                            echo  '<td>' . _('comment:') . '</td><td>' . $agingtable_comment_with_carriage_return . '</td>';
+                                        ?>
+                                        </tr>
                                     </table>
                                 </div>
                                 <?php 

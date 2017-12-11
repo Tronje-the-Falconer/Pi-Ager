@@ -45,6 +45,8 @@
                                             // Gewählte Agingtable aus DB auslesen und als Tabelle beschreiben
                                             $index_row = 0;
                                             $agingtable_rows = get_agingtable_dataset($agingtable_to_edit);
+                                            $firstrow = $agingtable_rows[0];
+                                            $agingtable_comment = $firstrow[$agingtable_comment_field];
                                             try {
                                                 $number_rows = count($agingtable_rows);
                                                 while ($index_row < $number_rows) {
@@ -90,6 +92,12 @@
                                                 }
                                         ?>
                                     </table>
+                                    <h4>
+                                        <?php 
+                                            
+                                            echo  _('comment:'). ' <textarea name="comment_edit_agingtable" cols="100" rows="3" maxlength="10000" wrap="soft" >'. $agingtable_comment . '</textarea>';
+                                        ?>
+                                    </h4>
                                     <input type="hidden" name="max_row" type="text" value="<?php echo $index_row ?>">
                                     <input type="hidden" name="agingtable_edit" type="text" value="<?php echo $agingtable_to_edit ?>">
                                     <button class="art-button" name="edit_agingtable_form_submit" type="submit" value="edit_agingtable_form_submit" onclick="return confirm('<?php echo _('save'); echo ' '; echo _('edit agingtable'); ?>?')"><?php echo _('save'); ?></button>

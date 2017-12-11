@@ -103,6 +103,7 @@ $agingtable_circulation_air_period_field = 'circulation_air_period';
 $agingtable_exhaust_air_duration_field = 'exhaust_air_duration';
 $agingtable_exhaust_air_period_field = 'exhaust_air_period';
 $agingtable_days_field = 'days';
+$agingtable_comment_field = 'comment';
 
 #-----------------------------Paths and urls
 $thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/';

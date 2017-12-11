@@ -15,6 +15,7 @@
         
         $agingtable_to_edit = $_POST['agingtable_edit'];
         $maxrow = $_POST['max_row'];
+        $comment = $_POST['comment_edit_agingtable'];
         $index_row = 0;
         $row_id = 1;
         while ($index_row < $maxrow) {
@@ -39,9 +40,13 @@
                 $data_exhaust_air_period_edit_agingtable = $data_exhaust_air_period_edit_agingtable * 60;
             }
             $data_days_edit_agingtable = set_null_if_empty($_POST['data_days_edit_agingtable_'.$index_row]);
-
-            $sql = 'UPDATE agingtable_' . $agingtable_to_edit . ' SET "' . $agingtable_modus_field . '" = ' . $data_modus_edit_agingtable . ', "' . $agingtable_setpoint_humidity_field . '" = ' . $data_setpoint_humidity_edit_agingtable . ', "' . $agingtable_setpoint_temperature_field . '" = ' . $data_setpoint_temperature_edit_agingtable . ', "' . $agingtable_circulation_air_duration_field . '" = ' . $data_circulation_air_duration_edit_agingtable . ', "' . $agingtable_circulation_air_period_field . '" = ' . $data_circulation_air_period_edit_agingtable . ', "' . $agingtable_exhaust_air_duration_field . '" = ' . $data_exhaust_air_duration_edit_agingtable . ', "' . $agingtable_exhaust_air_period_field . '" = ' . $data_exhaust_air_period_edit_agingtable . ', "' . $agingtable_days_field . '" = ' . $data_days_edit_agingtable . ' WHERE "' . $id_field . '" =' . $row_id .  ';';
-            print $sql;
+            
+            if ($index_row == 0){
+                $sql = 'UPDATE agingtable_' . $agingtable_to_edit . ' SET "' . $agingtable_modus_field . '" = ' . $data_modus_edit_agingtable . ', "' . $agingtable_setpoint_humidity_field . '" = ' . $data_setpoint_humidity_edit_agingtable . ', "' . $agingtable_setpoint_temperature_field . '" = ' . $data_setpoint_temperature_edit_agingtable . ', "' . $agingtable_circulation_air_duration_field . '" = ' . $data_circulation_air_duration_edit_agingtable . ', "' . $agingtable_circulation_air_period_field . '" = ' . $data_circulation_air_period_edit_agingtable . ', "' . $agingtable_exhaust_air_duration_field . '" = ' . $data_exhaust_air_duration_edit_agingtable . ', "' . $agingtable_exhaust_air_period_field . '" = ' . $data_exhaust_air_period_edit_agingtable . ', "' . $agingtable_days_field . '" = ' . $data_days_edit_agingtable . ', "' . $agingtable_comment_field . '" = "'  . $comment . '" WHERE "' . $id_field . '" =' . $row_id .  ';';
+            }
+            else{
+                $sql = 'UPDATE agingtable_' . $agingtable_to_edit . ' SET "' . $agingtable_modus_field . '" = ' . $data_modus_edit_agingtable . ', "' . $agingtable_setpoint_humidity_field . '" = ' . $data_setpoint_humidity_edit_agingtable . ', "' . $agingtable_setpoint_temperature_field . '" = ' . $data_setpoint_temperature_edit_agingtable . ', "' . $agingtable_circulation_air_duration_field . '" = ' . $data_circulation_air_duration_edit_agingtable . ', "' . $agingtable_circulation_air_period_field . '" = ' . $data_circulation_air_period_edit_agingtable . ', "' . $agingtable_exhaust_air_duration_field . '" = ' . $data_exhaust_air_duration_edit_agingtable . ', "' . $agingtable_exhaust_air_period_field . '" = ' . $data_exhaust_air_period_edit_agingtable . ', "' . $agingtable_days_field . '" = ' . $data_days_edit_agingtable . ' WHERE "' . $id_field . '" =' . $row_id .  ';';
+            }
             open_connection();
             execute_query($sql);
             close_database();

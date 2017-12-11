@@ -71,7 +71,9 @@
         elseif ($_SERVER['PHP_SELF'] != '/settings.php') {
             echo "<meta http-equiv=\"refresh\" content=\"120\" />";
         }
-        
+        elseif ($_SERVER['PHP_SELF'] != '/edit_agintable.php') {
+            echo "<meta http-equiv=\"refresh\" content=\"480\" />";
+        }
     ?>
     <head>
         <title>Pi-Ager</title>
