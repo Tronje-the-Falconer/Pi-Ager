@@ -16,15 +16,18 @@
           }
         }
         $filename = $latest_filename;
-        $downloadfile = "images/webcam/".$filename;
+        $downloadfile = "/var/www/images/webcam/".$filename;
         $filesize = filesize($downloadfile);
-        header("Content-Type: image/jpg"); 
-        header("Content-Disposition: attachment; filename='".$filename);
-        header("Content-Length:". $filesize);
-        header('Content-Transfer-Encoding: binary');
-        header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-        readfile($downloadfile);
-        //logger('DEBUG', 'webcampicture saved');
+        header( "Content-Disposition: attachment; filename=\"" . $filename . '"' );
+        header( "X-LIGHTTPD-send-file: " . $downloadfile);
+        
+        // header("Content-Type: image/jpg"); 
+        // header("Content-Disposition: attachment; filename='".$filename);
+        // header("Content-Length:". $filesize);
+        // header('Content-Transfer-Encoding: binary');
+        // header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
+        // readfile($downloadfile);
+        logger('DEBUG', 'webcampicture saved');
         exit;
     }
 ?>
