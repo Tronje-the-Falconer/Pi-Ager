@@ -177,7 +177,7 @@
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><br>
                                                 <?php 
-                                                    print '<form  method="post">';
+                                                    print '<form  id="agingtable_edit" method="post">';
                                                     echo '<select name="agingtable_edit">';
                                                     foreach($agingtable_names as $name) {
                                                         if ($name!=$desired_maturity){
@@ -189,36 +189,37 @@
                                                         }
                                                     }
                                                     echo '</select>';
+                                                    print '</form>';
                                                     
                                                 ?>
                                             </td>
                                             <td style=" text-align: left; padding-left: 20px;">
-                                                &nbsp;
+                                                <?php
+                                                    print '<form method="post" id="upload_new_agingtable" enctype="multipart/form-data">';
+                                                    print '<input type="file" name="file"  accept=".csv">';
+                                                    echo '</form>';
+                                                ?>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    echo "<button class=\"art-button\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\"onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
-                                                    echo '</form>';
+                                                    echo "<button class=\"art-button\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\"onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;">
                                                 <?php 
-                                                    print '<form method="post" enctype="multipart/form-data">';
-                                                    print '<input type="file" name="datei">';
-                                                    echo "<button class=\"art-button\" name=\"upload_new_agingtable\" value=\"upload_new_agingtable\"onclick=\"return confirm('"._('upload new agingtable?')."');\">"._('upload new')."</button>";
-                                                    echo '</form>';
+                                                    echo "<button class=\"art-button\" form=\"upload_new_agingtable\" name=\"upload_new_agingtable\" value=\"upload_new_agingtable\"onclick=\"return confirm('"._('upload new agingtable?')."');\">"._('upload new')."</button>";
                                                 ?>
                                         </tr>
                                         <tr>
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    print '<form  method="post">';
-                                                    echo "<button class=\"art-button\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
+                                                    echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    echo "<button class=\"art-button\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
+                                                    print '<form  id="agingtable_export" method="post">';
                                                     echo '</form>';
+                                                    echo "<button class=\"art-button\" form=\"agingtable_export\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
                                                 ?></td></td>
                                         </tr>
                                     </table>

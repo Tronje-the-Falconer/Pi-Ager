@@ -252,6 +252,69 @@
         }    
     }
     
+    function import_csv_to_sqlite($csv_path)
+    {
+        global $connection, $agingtables_table, $agingtable_name_field;
+        if (($csv_handle = fopen($csv_path, "r")) === FALSE)
+            throw new Exception('Cannot open CSV file');
+            
+        $delimiter = ',';
+        $tablename = preg_replace("/[^A-Z0-9]/i", '', basename($csv_path, '.csv'));
+        $table = 'agingtable_' . $tablename;
+        
+        $fields = array_map(
+            function ($field){
+                return strtolower(preg_replace("/[^A-Z0-9_]/i", '', $field));
+            }, fgetcsv($csv_handle, 0, $delimiter));
+        
+        $create_fields_str = join(', ', array_map(function ($field){
+            return "$field TEXT NULL";
+        }, $fields));
+        
+        open_connection();
+        
+        $create_table_sql = 'CREATE TABLE IF NOT EXISTS ' .$table . ' (' . $create_fields_str . ');';
+        execute_query($create_table_sql);
+        
+        
+        $insert_fields_str = join(', ', $fields);
+        // $insert_values_str = join(', ', array_fill(0, count($fields),  '?'));
+        // $insert_sql = "INSERT INTO $table ($insert_fields_str) VALUES ($insert_values_str)";
+        // $insert_sth = $connection->prepare($insert_sql);
+        
+        // $inserted_rows = 0;
+        // while (($data = fgetcsv($csv_handle, 0, $delimiter)) !== FALSE) {
+            // $insert_sth->execute($data);
+            // $inserted_rows++;
+        // }
+        
+        while (($data = fgetcsv($csv_handle, 0, $delimiter)) !== FALSE) {
+            $num = count($data);
+            
+            $valuestring = '';
+            for ($c=0; $c < $num; $c++) {
+                $datafield = $data[$c];
+                if ($datafield == NULL){
+                    $datafield = 'NULL';
+                }
+                if ($c == 0){
+                    $valuestring = $datafield;
+                }
+                else{
+                    $valuestring = $valuestring . ', ' . $datafield;
+                }
+            }
+            $sql = 'INSERT INTO ' . $table . ' (' . $insert_fields_str . ' ) VALUES (' . $valuestring . ')';
+            execute_query($sql);
+        }
+        $sql = 'INSERT INTO "' . $agingtables_table . '" ("' . $agingtable_name_field . '") VALUES ("'. $tablename . '")';
+        execute_query($sql);
+        
+        close_database();
+        fclose($csv_handle);
+    }
+    
+    
     function write_loglevel($chosen_loglevel_file, $chosen_loglevel_console){
         global $value_field, $last_change_field, $key_field, $loglevel_console_key, $loglevel_file_key, $debug_table;
         

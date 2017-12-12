@@ -5,15 +5,16 @@
 Prioritätenliste
 #### 01 Python 23
 #### 02 Website 06 
-     03 Website 01
+#### 03 Website 01
 #### 04 Website 02
-     05 Website 12
-     06 Website 03
-     07 Webiste 20
-     08 Webiste 10
-     09 Website 07
-     10 Linux 01
-     11 Allgemein 03
+     05 Website 32
+     06 Website 12
+     07 Website 03
+     08 Webiste 20
+     09 Webiste 10
+     10 Website 07
+     11 Linux 01
+     12 Allgemein 03
 
 
 1) Allgemein
@@ -26,7 +27,7 @@ Prioritätenliste
     07 Format der CSV festlegen/veröffentlichen
 
 2) Website
-    01 Upload CSV und eintragen als Agingtable_[CSV-Filename] in Datenbank ACHTUNG! richtige Reihenfolge in Tabelle schreiben! (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/11)
+####01 Upload CSV und eintragen als Agingtable_[CSV-Filename] in Datenbank ACHTUNG! richtige Reihenfolge in Tabelle schreiben! (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/11)
 ####02 Editieren der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
 ....03 Wägezellen Calibrate Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
 ----03 Alarm
@@ -58,6 +59,8 @@ Prioritätenliste
 ####29 downloadbutton für logfiles als zip
     30 Supportlink
 ####31 Kommentarfeld für Reifetabellen ergänzen (editierbar und unter Reifetabelle anzeigen)
+    32 Export Reifetabelle als csv
+    33 Beim Upload der csv Struktur überprüfen
     
     
 3) Python
