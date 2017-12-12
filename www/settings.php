@@ -200,20 +200,25 @@
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
                                                     echo "<button class=\"art-button\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\"onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
+                                                    echo '</form>';
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;">
                                                 <?php 
+                                                    print '<form method="post" enctype="multipart/form-data">';
+                                                    print '<input type="file" name="datei">';
                                                     echo "<button class=\"art-button\" name=\"upload_new_agingtable\" value=\"upload_new_agingtable\"onclick=\"return confirm('"._('upload new agingtable?')."');\">"._('upload new')."</button>";
+                                                    echo '</form>';
                                                 ?>
                                         </tr>
                                         <tr>
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
+                                                    print '<form  method="post">';
                                                     echo "<button class=\"art-button\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
-                                                    echo '</form>';
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
                                                     echo "<button class=\"art-button\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
+                                                    echo '</form>';
                                                 ?></td></td>
                                         </tr>
                                     </table>
@@ -234,6 +239,7 @@
                                             $agingtable_rows = get_agingtable_dataset($desired_maturity);
                                             $firstrow = $agingtable_rows[0];
                                             $agingtable_comment = $firstrow[$agingtable_comment_field];
+                                            
                                             $current_period = get_table_value($current_values_table, $agingtable_period_key);
                                             $current_period_0 = $current_period - 1;
                                             try {
