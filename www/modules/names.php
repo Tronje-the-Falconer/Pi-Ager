@@ -108,6 +108,7 @@ $agingtable_comment_field = 'comment';
 #-----------------------------Paths and urls
 $thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/';
 $error_reporting_url = 'https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/Error-reporting';
+$faq_url =  'https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/FAQ';
 $sqlite_path = '/var/www/config/pi-ager.sqlite3';
 $logfile_txt_file = '/var/www/logs/logfile.txt';
 $pi_ager_log_file = '/var/www/logs/pi-ager.log';

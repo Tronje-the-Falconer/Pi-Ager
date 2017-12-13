@@ -21,6 +21,8 @@
                                 </a>
                                 <br>
                                 <a href="<?php echo $thread_url;?>" target="_blank">www.grillsportverein.de</a>
+                                <br>
+                                <a href="<?php echo $faq_url;?>" target="_blank">FAQ</a>
                             </p>
                         </div>
                     </div>
