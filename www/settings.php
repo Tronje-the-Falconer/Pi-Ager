@@ -217,9 +217,7 @@
                                                     echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    print '<form  id="agingtable_export" method="post">';
-                                                    echo '</form>';
-                                                    echo "<button class=\"art-button\" form=\"agingtable_export\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
+                                                    echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
                                                 ?></td></td>
                                         </tr>
                                     </table>

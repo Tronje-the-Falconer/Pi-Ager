@@ -120,20 +120,8 @@
         $logstring = 'new csv-file uploaded to ' . $new_path;
         logger('DEBUG', $logstring );
         
-        
         import_csv_to_sqlite($new_path);
         
-       
-
-    
-    
-    
-    
-    
-    
-    
-        
-        // write_agingtable($edit_agingtable);
         $logstring = ' agingtable saved in db';
         logger('DEBUG', $logstring );
         print '<script language="javascript"> alert("'. (_("upload agingtable")) . " : csv-" . (_("file saved in database")) .'"); </script>';
@@ -142,9 +130,70 @@
         $logstring = 'button export agingtable pressed';
         logger('DEBUG', $logstring );
         $edit_agingtable = $_POST['agingtable_edit'];
-        // write_agingtable($edit_agingtable);
+        $agingtable_rows = get_agingtable_dataset($edit_agingtable);
+        
+        
+        $filename = $edit_agingtable . '.csv';
+        $filepath = '/var/www/csv/' . $filename;
+        $file = fopen($filepath,"w");
+        $number_rows = count($agingtable_rows);
+        $index_row = -1;
+        while ($index_row < $number_rows) {
+            $dataset = $agingtable_rows[$index_row];
+            if ($index_row == -1){
+                $data_modus = $agingtable_modus_field;
+                $data_setpoint_humidity = $agingtable_setpoint_humidity_field;
+                $data_setpoint_temperature = $agingtable_setpoint_temperature_field;
+                $data_circulation_air_duration = $agingtable_circulation_air_duration_field;
+                $data_circulation_air_period =$agingtable_circulation_air_period_field;
+                $data_exhaust_air_duration = $agingtable_exhaust_air_duration_field;
+                $data_exhaust_air_period = $agingtable_exhaust_air_period_field;
+                $data_days = $agingtable_days_field;
+                $data_comment = $agingtable_comment_field;
+            }
+            else{
+                if (!empty($dataset[$agingtable_modus_field])){
+                    $data_modus = intval($dataset[$agingtable_modus_field]);
+                } else {$data_modus = NULL;}
+                if (!empty($dataset[$agingtable_setpoint_humidity_field])){
+                    $data_setpoint_humidity = intval($dataset[$agingtable_setpoint_humidity_field]);
+                } else {$data_setpoint_humidity = NULL;}
+                if (!empty($dataset[$agingtable_setpoint_temperature_field])){
+                    $data_setpoint_temperature = intval($dataset[$agingtable_setpoint_temperature_field]);
+                } else {$data_setpoint_temperature = NULL;}
+                if (!empty($dataset[$agingtable_circulation_air_duration_field])){
+                    $data_circulation_air_duration = intval($dataset[$agingtable_circulation_air_duration_field]);
+                } else {$data_circulation_air_duration = NULL;}
+                if (!empty($dataset[$agingtable_circulation_air_period_field])){
+                    $data_circulation_air_period = intval($dataset[$agingtable_circulation_air_period_field]);
+                } else {$data_circulation_air_period = NULL;}
+                if (!empty($dataset[$agingtable_exhaust_air_duration_field])){
+                    $data_exhaust_air_duration = intval($dataset[$agingtable_exhaust_air_duration_field]);
+                } else {$data_exhaust_air_duration = NULL;}
+                if (!empty($dataset[$agingtable_exhaust_air_period_field])){
+                    $data_exhaust_air_period = intval($dataset[$agingtable_exhaust_air_period_field]);
+                } else {$data_exhaust_air_period = NULL;}
+                if (!empty($dataset[$agingtable_days_field])){
+                    $data_days = intval($dataset[$agingtable_days_field]);
+                } else {$data_days = NULL;}
+                if (!empty($dataset[$agingtable_comment_field])){
+                    $data_comment = "'" . $dataset[$agingtable_comment_field] . "'";
+                } else {$data_comment = NULL;}
+            }
+
+
+            $line = $data_modus . ',' . $data_setpoint_humidity . ',' . $data_setpoint_temperature .',' . $data_circulation_air_duration .',' . $data_circulation_air_period .',' . $data_exhaust_air_duration .',' . $data_exhaust_air_period .',' . $data_days .',' . $data_comment;
+            fputcsv($file, explode(',', $line));
+            $index_row++;
+        }
+        
+        fclose($file);
+        header( "Content-Disposition: attachment; filename=\"" . $filename . '"' );
+        header( "X-LIGHTTPD-send-file: " . $filepath);
+        
+        
         $logstring = 'button export  pressed';
         logger('DEBUG', $logstring );
-        print '<script language="javascript"> alert("'. (_("button")) . " : " . (_("no buttonfunction")) .'"); </script>';
+        print '<script language="javascript"> alert("'. (_("export agintable")) . " : " . (_("done")) .'"); </script>';
     }
 ?>
