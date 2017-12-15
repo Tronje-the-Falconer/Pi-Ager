@@ -19,24 +19,24 @@ Prioritätenliste
 
 1) Allgemein
     01 Lizenz überdenken!
-    02 Website erstellen (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/27)
+
     03 Release vorbereiten (Statustabellen leeren, Agingtables überprüfen)
     04 Bauanleitung im Wiki verbessern
-    05 Bedienungsanleitung schreiben
-    06 FAQ im Wiki
+    05 Bedienungsanleitung schreiben (https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/_Bedienungsanleitung)
+    06 FAQ im Wiki mit Leben füllen (https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/_FAQ)
     07 Format der CSV festlegen/veröffentlichen
 
 2) Website
 ####01 Upload CSV und eintragen als Agingtable_[CSV-Filename] in Datenbank ACHTUNG! richtige Reihenfolge in Tabelle schreiben! (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/11)
 ####02 Editieren der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
 ....03 Wägezellen Calibrate Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
-----03 Alarm
+
 ####04 Temperatur Statistiken und aktuelle Werte (http://www.chartjs.org) (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/33)
 ####05 Reifetabellenzeile einfärben, welche Phase gerade aktiv
 ####06 php logging nutzen
     07 Translation Aktivieren
-----08 Update über Website ermöglichen (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/20)
-----09 Displayupdate über Website
+
+    
     10 Kommentare aussortieren / ergänzen
 ####11 Datenbank/-schema per Button erzeugen
     12 Datenbank auf Vollständigkeit überprüfen. Warnung ausgeben, wenn Dinge fehlen und ergänzen
@@ -52,22 +52,21 @@ Prioritätenliste
 ####22 scale, language, sensortyp von settings.php auf admin.php umziehen
 ####23 Diagramme von 1/0 auf on/off
 ####24 Favicon
-    25 schalter um durch logfiles zu wechseln
+####25 schalter um durch logfiles zu wechseln
 ####26 Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
-----27 letzte Änderung des Status auslesen und anzeigen lassen
-----28 Autoload anstelle von include nutzen (http://php.net/manual/en/language.oop5.autoload.php)
+
+
 ####29 downloadbutton für logfiles als zip
 ####30 Supportlink
 ####31 Kommentarfeld für Reifetabellen ergänzen (editierbar und unter Reifetabelle anzeigen)
 ####32 Export Reifetabelle als csv
     33 Beim Upload der csv Struktur überprüfen
+    34 Uploadbutton deaktivieren solange keine Datei gewählt
     
     
 3) Python
 ####01 Stromausfall
-----02 Display (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/26)
-----03 4 Temperaturfühler mit AD Wandler (Statistiken und aktuelle Werte)
-----04 Alarm
+
 ####05 Logrotate für pi-ager-logfile prüfen
     06 Translation aktivieren
 ####07 Kommentare entfernen
@@ -95,15 +94,8 @@ Prioritätenliste
 ####21 Schaltungen von Licht und UV auf Zeiten laut Settings prüfen
 ####22 Raspberry pi Version bei Systemstart lesen und in sqlite schreiben. Danach übergabe zur Website (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/32)
 ####23 nur Status-Werte schreiben, wenn geändert
-----24 Luftzirkulation geschwindigkeit regelbar machen 
-----25 reifetabellen mit Intervallreifung (über den Tag zwischen zwei einstellungen wechseln)
+
 
 4) Linux
     01 phpliteadmin.php passwort bei Erstinstallation auf allgemeinses PW oder eigenes setzen
-    02 Zeitsynchronisation mit Atomuhr (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/22)
-____________________________________________________________________________________________________________________
 
-zur Diskussion ob sinnvoll ( Wenn ok wird es oben übernommen)
-
-a) Sollwerte für Temperatur und Feuchtigkeit im Diagram darstellen 
-b) Tara Wert speicherbar machen damit beim Stromausfall oder Neustart von scale.py oder des Raspberrys die Waagen sauber weiter laufen.

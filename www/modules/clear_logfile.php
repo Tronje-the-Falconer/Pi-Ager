@@ -5,7 +5,7 @@
         $newfile = fopen($logfile, 'w');
         fclose($newfile);
         if (is_file($logfile)) {
-            $logstring = _("new logfile created");
+            $logstring = _("new logfile manually created");
             logger('INFO', $logstring);
         }
         # 3Sekunden Anzeige dass die Werte nicht gespeichert wurden

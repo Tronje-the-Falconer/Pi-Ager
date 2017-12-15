@@ -84,47 +84,52 @@
         
         $upload_folder = '/var/www/csv/'; //Das Upload-Verzeichnis
         $filename = pathinfo($_FILES['file']['name'], PATHINFO_FILENAME);
-        $extension = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
-         
-         
-        //Überprüfung der Dateiendung
-        $allowed_extensions = array('csv');
-        if(!in_array($extension, $allowed_extensions)) {
-            $logstring = _('error on upload new agingtable: only csv-files allowed');
-            logger('WARNING', $logstring );
-            die;
+        if ($filename != ''){
+            $extension = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
+             
+             
+            //Überprüfung der Dateiendung
+            $allowed_extensions = array('csv');
+            if(!in_array($extension, $allowed_extensions)) {
+                $logstring = _('error on upload new agingtable: only csv-files allowed');
+                logger('WARNING', $logstring );
+                die;
+            }
+             
+            //Überprüfung der Dateigröße
+            $max_size = 500*1024; //500 KB
+            if($_FILES['file']['size'] > $max_size) {
+                $logstring = _('error on upload new agingtable: only 500kb allowed');
+                logger('WARNING', $logstring );
+                die;
+            }
+             
+            //Pfad zum Upload
+            $new_path = $upload_folder.$filename.'.'.$extension;
+             
+            //Neuer Dateiname falls die Datei bereits existiert
+            if(file_exists($new_path)) { //Falls Datei existiert, hänge eine Zahl an den Dateinamen
+                 $id = 1;
+                 do {
+                     $new_path = $upload_folder.$filename.'_'.$id.'.'.$extension;
+                     $id++;
+                 } while(file_exists($new_path));
+            }
+             
+            //Alles okay, verschiebe Datei an neuen Pfad
+            move_uploaded_file($_FILES['file']['tmp_name'], $new_path);
+            $logstring = 'new csv-file uploaded to ' . $new_path;
+            logger('DEBUG', $logstring );
+            
+            import_csv_to_sqlite($new_path);
+            
+            $logstring = ' agingtable saved in db';
+            logger('DEBUG', $logstring );
+            print '<script language="javascript"> alert("'. (_("upload agingtable")) . " : csv-" . (_("file saved in database")) .'"); </script>';
         }
-         
-        //Überprüfung der Dateigröße
-        $max_size = 500*1024; //500 KB
-        if($_FILES['file']['size'] > $max_size) {
-            $logstring = _('error on upload new agingtable: only 500kb allowed');
-            logger('WARNING', $logstring );
-            die;
+        else{
+            print '<script language="javascript"> alert("'. (_("upload agingtable")) . " : " . (_("please select an file to upload")) .'"); window.location.href = "settings.php";</script>';
         }
-         
-        //Pfad zum Upload
-        $new_path = $upload_folder.$filename.'.'.$extension;
-         
-        //Neuer Dateiname falls die Datei bereits existiert
-        if(file_exists($new_path)) { //Falls Datei existiert, hänge eine Zahl an den Dateinamen
-             $id = 1;
-             do {
-                 $new_path = $upload_folder.$filename.'_'.$id.'.'.$extension;
-                 $id++;
-             } while(file_exists($new_path));
-        }
-         
-        //Alles okay, verschiebe Datei an neuen Pfad
-        move_uploaded_file($_FILES['file']['tmp_name'], $new_path);
-        $logstring = 'new csv-file uploaded to ' . $new_path;
-        logger('DEBUG', $logstring );
-        
-        import_csv_to_sqlite($new_path);
-        
-        $logstring = ' agingtable saved in db';
-        logger('DEBUG', $logstring );
-        print '<script language="javascript"> alert("'. (_("upload agingtable")) . " : csv-" . (_("file saved in database")) .'"); </script>';
     }
     if (isset ($_POST['export_agingtable'])){
         $logstring = 'button export agingtable pressed';

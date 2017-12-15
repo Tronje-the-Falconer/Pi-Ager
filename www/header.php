@@ -96,8 +96,13 @@
                 echo "<script src='js/moment.min.js'></script>";
                 echo "<script src='js/Chart.js'></script>";
             }
+            if ($logs_active == 'active'){
+                echo "<script src='js/jquery.js'></script>";
+                echo "<script src='js/script.js'></script>";
+            }
             
         ?>
+        
         <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
         <!-- <script src="./node_modules/chart.js/dist/Chart.min.js"></script> -->
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> -->

@@ -194,9 +194,10 @@
                                                 ?>
                                             </td>
                                             <td style=" text-align: left; padding-left: 20px;">
+
                                                 <?php
                                                     print '<form method="post" id="upload_new_agingtable" enctype="multipart/form-data">';
-                                                    print '<input type="file" name="file"  accept=".csv">';
+                                                    print '<input type="file" name="file" id="csv-file"  accept=".csv">';
                                                     echo '</form>';
                                                 ?>
                                             </td>
@@ -204,11 +205,11 @@
                                         <tr>
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    echo "<button class=\"art-button\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\"onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
+                                                    echo "<button class=\"art-button\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\" onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;">
                                                 <?php 
-                                                    echo "<button class=\"art-button\" form=\"upload_new_agingtable\" name=\"upload_new_agingtable\" value=\"upload_new_agingtable\"onclick=\"return confirm('"._('upload new agingtable?')."');\">"._('upload new')."</button>";
+                                                    echo "<button class=\"art-button\" id=\"upload_new_agingtable_button\" form=\"upload_new_agingtable\" name=\"upload_new_agingtable\" value=\"upload_new_agingtable\" onclick=\"return confirm('"._('upload new agingtable?')."');\">"._('upload')."</button>";
                                                 ?>
                                         </tr>
                                         <tr>
