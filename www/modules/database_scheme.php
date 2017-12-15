@@ -78,9 +78,6 @@
         drop_and_create_key_value_table($debug_table);
         drop_and_create_key_value_table($system_table);
         drop_and_create_agingtable_list($agingtables_table);
-        drop_and_create_agingtable($agingtable_salami_table);
-        drop_and_create_agingtable($agingtable_dryaging1_table);
-        drop_and_create_agingtable($agingtable_dryaging2_table);
         logger('DEBUG', 'create_database_scheme performed');
     }
     
@@ -147,37 +144,8 @@
         execute_query($sql);
         
         close_database();
-        insert_agingtable_list($table);
         logger('DEBUG', 'drop_and_create_agingtable_list performed');
 
-     }
-     
-    function drop_and_create_agingtable($table)
-     {
-         global $id_field, $agingtable_modus_field, $agingtable_setpoint_humidity_field, $agingtable_setpoint_temperature_field, $agingtable_circulation_air_duration_field, $agingtable_circulation_air_period_field, $agingtable_exhaust_air_duration_field, $agingtable_exhaust_air_period_field, $agingtable_days_field,
-         $agingtable_salami_table, $agingtable_dryaging1_table, $agingtable_dryaging2_table;
-         
-         open_connection();
-         
-         $sql = 'DROP TABLE IF EXISTS "' . $table . '";';
-         execute_query($sql);
-         $sql = 'CREATE TABLE "' . $table . '" ("' . $id_field . '" INTEGER PRIMARY KEY NOT NULL , "' . $agingtable_modus_field . '" INTEGER, "' . $agingtable_setpoint_humidity_field . '" INTEGER, "' . $agingtable_setpoint_temperature_field . '" INTEGER, "' . $agingtable_circulation_air_duration_field . '" INTEGER,"' . $agingtable_circulation_air_period_field . '" INTEGER, "' . $agingtable_exhaust_air_duration_field . '" INTEGER, "' . $agingtable_exhaust_air_period_field . '" INTEGER, "' . $agingtable_days_field . '" INTEGER NOT NULL);';
-         execute_query($sql);
-         
-         close_database();
-         
-         switch ($table) {
-            case 'salami':
-                insert_salami_values($agingtable_salami_table);
-                break;
-            case 'dryaging1':
-                insert_dryaging1_values($agingtable_dryaging1_table);
-                break;
-            case 'dryaging2':
-                insert_dryaging2_values($agingtable_dryaging2_table);
-                break;
-         }
-         logger('DEBUG', 'drop_and_create_agingtable performed');
      }
     
     //Statistik Tabellen leeren
@@ -411,96 +379,5 @@
         
         close_database();
         logger('DEBUG', 'insert_config_values performed');
-     }
-
-     function insert_agingtable_list($table)
-     {
-         global $id_field, $agingtable_name_field;
-        open_connection();
-        
-        $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_name_field . '") VALUES ("1","salami");';
-        execute_query($sql);
-        $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_name_field . '") VALUES ("2","dryaging1");';
-        execute_query($sql);
-        $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_name_field . '") VALUES ("3","dryaging2");';
-        execute_query($sql);
-        
-        close_database();
-        logger('DEBUG', 'insert_agingtable_list performed');
-     }
-     function insert_salami_values($table)
-     {
-         global $id_field, $agingtable_modus_field, $agingtable_setpoint_humidity_field, $agingtable_setpoint_temperature_field, $agingtable_circulation_air_duration_field, $agingtable_circulation_air_period_field, $agingtable_exhaust_air_duration_field, $agingtable_exhaust_air_period_field, $agingtable_days_field;
-         open_connection();
-        
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("1","4","93","21","900","3600","900","21600","1");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("2",NULL,NULL,"20",NULL,NULL,NULL,NULL,"1");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("3",NULL,"92","19",NULL,NULL,NULL,NULL,"2");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("4",NULL,"91","18",NULL,NULL,NULL,NULL,"2");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("5",NULL,"90","17",NULL,"5400",NULL,NULL,"2");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("6",NULL,"89","16",NULL,NULL,NULL,NULL,"2");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("7",NULL,"88","15",NULL,NULL,NULL,NULL,"1");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("8",NULL,"87",NULL,NULL,NULL,NULL,NULL,"1");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("9",NULL,"86","14",NULL,NULL,NULL,NULL,"1");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("10",NULL,"85","13",NULL,NULL,NULL,NULL,"1");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("11",NULL,"80","12",NULL,"7200",NULL,NULL,"7");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("12",NULL,"75",NULL,NULL,"10800",NULL,NULL,"7");';
-         execute_query($sql);
-         
-         close_database();
-         logger('DEBUG', 'insert_salami_values performed');
-     }
-     
-     function insert_dryaging1_values($table)
-     {
-         global $id_field, $agingtable_modus_field, $agingtable_setpoint_humidity_field, $agingtable_setpoint_temperature_field, $agingtable_circulation_air_duration_field, $agingtable_circulation_air_period_field, $agingtable_exhaust_air_duration_field, $agingtable_exhaust_air_period_field, $agingtable_days_field;
-         
-         open_connection();
-         
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("1","4","75","4","1080","2520","900","15120","12");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("2",NULL,"65","5","900","2700",NULL,"16200","8");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("3",NULL,"55","6","720","2880",NULL,"17280","16");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("4",NULL,"40","7","540","3060",NULL,"18360","8");';
-         execute_query($sql);
-         
-         close_database();
-         logger('DEBUG', 'insert_dryaging1_values performed');
-     }
-     
-     function insert_dryaging2_values($table)
-     {
-         global $id_field, $agingtable_modus_field, $agingtable_setpoint_humidity_field, $agingtable_setpoint_temperature_field, $agingtable_circulation_air_duration_field, $agingtable_circulation_air_period_field, $agingtable_exhaust_air_duration_field, $agingtable_exhaust_air_period_field, $agingtable_days_field;
-         
-         open_connection();
-         
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("1","4","85","2","1440","2160","900","12960","12");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("2",NULL,"30","4","2520","1080",NULL,"6480","8");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("3",NULL,"70",NULL,"1080","2520",NULL,"15120","8");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("4",NULL,"60",NULL,"720","2880",NULL,"17280","8");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("5",NULL,"45","7","648","2952",NULL,"17712","12");';
-         execute_query($sql);
-         $sql = 'INSERT INTO "' . $table . '" ("' . $id_field . '","' . $agingtable_modus_field . '","' . $agingtable_setpoint_humidity_field . '","' . $agingtable_setpoint_temperature_field . '","' . $agingtable_circulation_air_duration_field . '","' . $agingtable_circulation_air_period_field . '","' . $agingtable_exhaust_air_duration_field . '","' . $agingtable_exhaust_air_period_field . '","' . $agingtable_days_field . '") VALUES ("6",NULL,"33",NULL,"540","3060",NULL,"18360","8");';
-         execute_query($sql);
-         
-         close_database();
-         logger('DEBUG', 'insert_dryaging2_values performed');
      }
  ?>
