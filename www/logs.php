@@ -53,8 +53,6 @@
                                             ${'filecontent'.$filecounter} = file($file);
                                             $filecounter++;
                                         }
-                                        $logfilepath = '/var/www/logs/';
-                                        $selected_file = 1;
                                     ?>
                                     <script>
                                         var mainlogfile = "logfile.txt";
@@ -167,12 +165,6 @@
                                                     <a  href="#end"><?php echo _('to bottom') ?></a>
                                                 </p>
                                                 <div id="filecontent"></div>
-                                                 <?php 
-                                                    // $f = file($logfilepath.${'filename'.$selected_file});
-                                                    // foreach($f as $file) {
-                                                        // echo '<br />'. $file;
-                                                    // }
-                                                 ?>
                                                 </div>
                                                 </br></br>
                                                 <p align="right" id="end">

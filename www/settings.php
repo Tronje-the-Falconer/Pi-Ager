@@ -197,7 +197,7 @@
 
                                                 <?php
                                                     print '<form method="post" id="upload_new_agingtable" enctype="multipart/form-data">';
-                                                    print '<input type="file" name="file" id="csv-file"  accept=".csv">';
+                                                    print '<input type="file" name="file" id="csv-file"  accept=".csv" onchange="enableButton()">';
                                                     echo '</form>';
                                                 ?>
                                             </td>
@@ -208,8 +208,13 @@
                                                     echo "<button class=\"art-button\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\" onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;">
+                                           <script>
+                                                function enableButton() {
+                                                    document.getElementById("upload_new_agingtable_button").disabled = false;
+                                                }
+                                            </script>
                                                 <?php 
-                                                    echo "<button class=\"art-button\" id=\"upload_new_agingtable_button\" form=\"upload_new_agingtable\" name=\"upload_new_agingtable\" value=\"upload_new_agingtable\" onclick=\"return confirm('"._('upload new agingtable?')."');\">"._('upload')."</button>";
+                                                    echo "<button class=\"art-button\" disabled=\"true\" id=\"upload_new_agingtable_button\" form=\"upload_new_agingtable\" name=\"upload_new_agingtable\" value=\"upload_new_agingtable\" onclick=\"return confirm('"._('upload new agingtable?')."');\">"._('upload')."</button>";
                                                 ?>
                                         </tr>
                                         <tr>

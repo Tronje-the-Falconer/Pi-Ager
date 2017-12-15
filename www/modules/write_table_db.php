@@ -121,11 +121,20 @@
             $logstring = 'new csv-file uploaded to ' . $new_path;
             logger('DEBUG', $logstring );
             
-            import_csv_to_sqlite($new_path);
+            $csv_imported_in_database = import_csv_to_sqlite($new_path);
             
-            $logstring = ' agingtable saved in db';
-            logger('DEBUG', $logstring );
-            print '<script language="javascript"> alert("'. (_("upload agingtable")) . " : csv-" . (_("file saved in database")) .'"); </script>';
+            if($csv_imported_in_database == true){
+                $logstring = ' agingtable saved in db';
+                logger('DEBUG', $logstring );
+                print '<script language="javascript"> alert("'. (_("upload agingtable")) . " : csv-" . (_("file saved in database")) .'"); </script>';
+            }
+            else{
+                unlink($new_path);
+                $logstring = _('csv-file has not the right structure. please use a default-template');
+                logger('WARNING', $logstring );
+                print '<script language="javascript"> alert("'. (_("upload agingtable")) . " : csv-" . (_("csv-file has not the right structure. please use a default-template")) .'"); </script>';
+            }
+            
         }
         else{
             print '<script language="javascript"> alert("'. (_("upload agingtable")) . " : " . (_("please select an file to upload")) .'"); window.location.href = "settings.php";</script>';

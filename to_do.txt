@@ -60,8 +60,8 @@ Prioritätenliste
 ####30 Supportlink
 ####31 Kommentarfeld für Reifetabellen ergänzen (editierbar und unter Reifetabelle anzeigen)
 ####32 Export Reifetabelle als csv
-    33 Beim Upload der csv Struktur überprüfen
-    34 Uploadbutton deaktivieren solange keine Datei gewählt
+####33 Beim Upload der csv Struktur überprüfen
+####34 Uploadbutton deaktivieren solange keine Datei gewählt
     
     
 3) Python

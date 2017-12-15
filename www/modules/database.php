@@ -267,51 +267,64 @@
                 return strtolower(preg_replace("/[^A-Z0-9_]/i", '', $field));
             }, fgetcsv($csv_handle, 0, $delimiter));
         
-        $create_fields_str = join(', ', array_map(function ($field){
-            return "$field TEXT NULL";
-        }, $fields));
-        
-        open_connection();
-        
-        $create_table_sql = 'CREATE TABLE IF NOT EXISTS ' .$table . ' (' . $create_fields_str . ');';
-        execute_query($create_table_sql);
-        
-        
-        $insert_fields_str = join(', ', $fields);
-        // $insert_values_str = join(', ', array_fill(0, count($fields),  '?'));
-        // $insert_sql = "INSERT INTO $table ($insert_fields_str) VALUES ($insert_values_str)";
-        // $insert_sth = $connection->prepare($insert_sql);
-        
-        // $inserted_rows = 0;
-        // while (($data = fgetcsv($csv_handle, 0, $delimiter)) !== FALSE) {
-            // $insert_sth->execute($data);
-            // $inserted_rows++;
-        // }
-        
-        while (($data = fgetcsv($csv_handle, 0, $delimiter)) !== FALSE) {
-            $num = count($data);
-            
-            $valuestring = '';
-            for ($c=0; $c < $num; $c++) {
-                $datafield = $data[$c];
-                if ($datafield == NULL){
-                    $datafield = 'NULL';
+        $fieldcount = count($fields);
+        if ($fieldcount == 9){
+            if ($fields[0] == 'modus' AND $fields[1]== 'setpoint_humidity' AND $fields[2]== 'setpoint_temperature' AND $fields[3]== 'circulation_air_duration' AND $fields[4]== 'circulation_air_period' AND $fields[5]== 'exhaust_air_duration' AND $fields[6]== 'exhaust_air_period' AND $fields[7]== 'days' AND $fields[8]== 'comment'){
+
+                $create_fields_str = join(', ', array_map(function ($field){
+                    return "$field TEXT NULL";
+                }, $fields));
+
+                open_connection();
+                
+                $create_table_sql = 'CREATE TABLE IF NOT EXISTS ' .$table . ' (' . $create_fields_str . ');';
+                execute_query($create_table_sql);
+                
+                
+                $insert_fields_str = join(', ', $fields);
+                // $insert_values_str = join(', ', array_fill(0, count($fields),  '?'));
+                // $insert_sql = "INSERT INTO $table ($insert_fields_str) VALUES ($insert_values_str)";
+                // $insert_sth = $connection->prepare($insert_sql);
+                
+                // $inserted_rows = 0;
+                // while (($data = fgetcsv($csv_handle, 0, $delimiter)) !== FALSE) {
+                    // $insert_sth->execute($data);
+                    // $inserted_rows++;
+                // }
+                
+                while (($data = fgetcsv($csv_handle, 0, $delimiter)) !== FALSE) {
+                    $num = count($data);
+                    
+                    $valuestring = '';
+                    for ($c=0; $c < $num; $c++) {
+                        $datafield = $data[$c];
+                        if ($datafield == NULL){
+                            $datafield = 'NULL';
+                        }
+                        if ($c == 0){
+                            $valuestring = $datafield;
+                        }
+                        else{
+                            $valuestring = $valuestring . ', ' . $datafield;
+                        }
+                    }
+                    $sql = 'INSERT INTO ' . $table . ' (' . $insert_fields_str . ' ) VALUES (' . $valuestring . ')';
+                    execute_query($sql);
                 }
-                if ($c == 0){
-                    $valuestring = $datafield;
-                }
-                else{
-                    $valuestring = $valuestring . ', ' . $datafield;
-                }
+                $sql = 'INSERT INTO "' . $agingtables_table . '" ("' . $agingtable_name_field . '") VALUES ("'. $tablename . '")';
+                execute_query($sql);
+                
+                close_database();
+                fclose($csv_handle);
+                return true;
             }
-            $sql = 'INSERT INTO ' . $table . ' (' . $insert_fields_str . ' ) VALUES (' . $valuestring . ')';
-            execute_query($sql);
+            else{
+                return false;
+            }
         }
-        $sql = 'INSERT INTO "' . $agingtables_table . '" ("' . $agingtable_name_field . '") VALUES ("'. $tablename . '")';
-        execute_query($sql);
-        
-        close_database();
-        fclose($csv_handle);
+        else{
+            return false;
+        }
     }
     
     
