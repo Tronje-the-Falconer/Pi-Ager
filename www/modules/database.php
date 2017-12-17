@@ -52,8 +52,8 @@
         while ($dataset = $result->fetchArray(SQLITE3_ASSOC)){
             $column_array = $dataset['table_info'];
         }
-        return $column_array
-        }
+        return $column_array;
+    }
     
     function get_current_time(){
         $current_time = time();
