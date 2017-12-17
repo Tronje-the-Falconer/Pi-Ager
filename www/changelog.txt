@@ -23,6 +23,7 @@ Version 2.2.1
     - Logfiles können heruntergeladen werden
     - Einstellmöglichkeit für Loglevel
     - Logfiles durchblätterbar
+    - 
 
 - Backend
     - Umstellung auf Python 3
