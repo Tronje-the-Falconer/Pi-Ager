@@ -54,6 +54,7 @@ Prioritätenliste
 ####24 Favicon
 ####25 schalter um durch logfiles zu wechseln
 ####26 Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
+    27 Input felder auf stellen überprüfen, min und max innerhalb des input-tags, tooltip, wenn nicht in wertbereich
 
 
 ####29 downloadbutton für logfiles als zip
