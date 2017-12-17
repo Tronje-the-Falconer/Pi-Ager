@@ -11,7 +11,6 @@
         while ($file_exists == FALSE){
             if(file_exists($_SERVER['DOCUMENT_ROOT']."/logs/".$zipname)) {
                 $file_exists = TRUE;
-                
                 $filesize = filesize($downloadfile);
                 
                 header( "Content-Disposition: attachment; filename=\"" . $zipname . '"' );
