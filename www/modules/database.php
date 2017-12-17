@@ -21,6 +21,40 @@
         $connection->close();
     }
     
+    function check_if_table_exists($table){
+        
+        open_connection();
+        
+        $result = get_query_result('SELECT count(*) FROM sqlite_master WHERE type="table" AND name="' . $table . '";');
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+            {
+            $count = $dataset['count(*)'];
+            }
+            
+        if ($count == 0 ){
+            return false;
+        }
+        else{
+            return true;
+        }
+        
+        
+        close_database();
+        
+        return $result;
+    }
+    
+    function check_columns($table){
+        
+        open_connection();
+        
+        $result = get_query_result('PRAGMA table_info('. $table . ')');
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC)){
+            $column_array = $dataset['table_info'];
+        }
+        return $column_array
+        }
+    
     function get_current_time(){
         $current_time = time();
         return $current_time;
