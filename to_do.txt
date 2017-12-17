@@ -39,7 +39,13 @@ Prioritätenliste
     
     10 Kommentare aussortieren / ergänzen
 ####11 Datenbank/-schema per Button erzeugen
-    12 Datenbank auf Vollständigkeit überprüfen. Warnung ausgeben, wenn Dinge fehlen und ergänzen
+....12 Datenbank auf Vollständigkeit überprüfen. Warnung ausgeben, wenn Dinge fehlen und ergänzen
+        Idee: Beim main start, wird die DB überprüft, bei Fehler wird ein status in der db auf 1 gesetzt. Dieser wird in der Website ausgewertet und angezeigt, dass die DB unvollständig ist.
+        Auf der adminsetie gibt es einen Migrationsbereich Knopf database maintenance mit Checkboxen: Neue Datenbank, Sicherung, und defaultwerte
+        sofern neue Datenbank wird eine neue angelegt und die vorher eingestelklten werte ausgelesen und verwendet.
+        sofern Sicherung wird die aktuelle DB vorher mit zeitstempel gesichert.
+        sofern default werte werden die Standardwerte von uns verwendet
+        Es wird jeweils ein Log bei einer Datenbankoperation geschrieben. Bsp.: Tabelle xy angelegt, oder Spalte xy hinzugefügt oder Wert xy eingefügt.
 ####13 Code aufräumen (duplicate Webiste 10)
 ####14 Logfile (website) erzeugen, wenn nicht vorhanden // über python erledigt
 ####15 admin.php        unter debug fehlen: measuring_interval_debug, agingtable_days_in_seconds_debug
