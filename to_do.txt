@@ -31,6 +31,21 @@ Prioritätenliste
 ####02 Editieren der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
 ....03 Wägezellen Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
 
+        -Tara
+        - def gewicht
+        - messen mit aktueller Ref unit (0??)
+        - berechnen
+        - wert eintragen- scale neustarten
+        - tara
+        - definiertes Gewicht
+        - Gewicht prüfen
+        
+        - evtl. ref unit anpassen
+        - scale neu starten
+        - tara
+        - def. gewicht anhängen
+        - prüfen
+
 ####04 Temperatur Statistiken und aktuelle Werte (http://www.chartjs.org) (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/33)
 ####05 Reifetabellenzeile einfärben, welche Phase gerade aktiv
 ####06 php logging nutzen

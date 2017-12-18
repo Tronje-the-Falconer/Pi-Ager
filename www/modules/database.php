@@ -388,6 +388,21 @@
         return $row;
     }
     
+    function get_calibrate_status($calibrate_scale){
+        global $value_field, $current_values_table, $key_field;
+        
+        open_connection();
+        
+        $sql = 'SELECT ' . $value_field . ' FROM ' . $current_values_table . ' WHERE ' . $key_field . ' = "' . $calibrate_scale . '"';
+        $result = get_query_result($sql);
+        
+        $row = $result->fetchArray();
+        
+        close_database();
+
+        return $row[0];
+    }
+    
     function write_debug_values($chosen_measuring_interval_debug, $chosen_agingtable_days_in_seconds_debug){
         global $value_field, $last_change_field, $key_field, $agingtable_days_in_seconds_debug_key, $measuring_interval_debug_key, $debug_table;
         
