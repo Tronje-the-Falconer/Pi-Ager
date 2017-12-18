@@ -29,7 +29,7 @@ Prioritätenliste
 2) Website
 ####01 Upload CSV und eintragen als Agingtable_[CSV-Filename] in Datenbank ACHTUNG! richtige Reihenfolge in Tabelle schreiben! (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/11)
 ####02 Editieren der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
-....03 Wägezellen Calibrate Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
+....03 Wägezellen Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
 
 ####04 Temperatur Statistiken und aktuelle Werte (http://www.chartjs.org) (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/33)
 ####05 Reifetabellenzeile einfärben, welche Phase gerade aktiv
@@ -60,7 +60,7 @@ Prioritätenliste
 ####24 Favicon
 ####25 schalter um durch logfiles zu wechseln
 ####26 Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
-    27 Input felder auf stellen überprüfen, min und max innerhalb des input-tags, tooltip, wenn nicht in wertbereich
+    27 Input felder auf Stellen überprüfen, min und max innerhalb des input-tags (fehlend Wägezellen)
 
 
 ####29 downloadbutton für logfiles als zip
@@ -101,6 +101,7 @@ Prioritätenliste
 ####21 Schaltungen von Licht und UV auf Zeiten laut Settings prüfen
 ####22 Raspberry pi Version bei Systemstart lesen und in sqlite schreiben. Danach übergabe zur Website (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/32)
 ####23 nur Status-Werte schreiben, wenn geändert
+    24 beim start der main.py auf vollständige DB prüfen
 
 
 4) Linux

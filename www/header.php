@@ -61,7 +61,7 @@
     bindtextdomain($domain, "/var/www/locale"); 
     textdomain($domain);
 ?>
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
     <meta http-equiv="content-type" content="text/html;  charset=utf-8">
     <?php 

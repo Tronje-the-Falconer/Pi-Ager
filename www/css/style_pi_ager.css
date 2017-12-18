@@ -312,3 +312,14 @@ margin-left: 20px;
     width: 500px !important;
     height: 250px !important;
 }
+input[type=number]{
+    text-align: right;
+}
+input:invalid {
+    background: url(/images/icons/check_false_20x20.png) !important;
+    background-repeat: no-repeat  !important;
+}
+input:valid {
+    background: url(/images/icons/check_true_20x20.png) !important;
+    background-repeat: no-repeat !important;
+}

@@ -13,7 +13,7 @@
                                                 <tr>
                                                     <td rowspan="4" class="td_png_icon"><h3><?php echo _('temperature'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td class="text_left_padding"><?php echo _('switch-on value'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="switch_on_cooling_compressor_config" type="number" min="0" max="10" value=<?php echo $switch_on_cooling_compressor; ?>>°C
+                                                    <td class="text_left_padding"><input name="switch_on_cooling_compressor_config" type="number" min="0" max="10" required value=<?php echo $switch_on_cooling_compressor; ?>>°C
                                                         <span class="display_none" style="font-size: xx-small">
                                                             <?php 
                                                                 if($modus == 0 || $modus == 1){
@@ -31,7 +31,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('switch-off value').':'; ?></td>
-                                                    <td class="text_left_padding"><input name="switch_off_cooling_compressor_config" type="number" min="0" max="10" value= <?php echo $switch_off_cooling_compressor; ?>>°C
+                                                    <td class="text_left_padding"><input name="switch_off_cooling_compressor_config" type="number" min="0" max="10" required value= <?php echo $switch_off_cooling_compressor; ?>>°C
                                                         <span class="display_none" style="font-size: xx-small">
                                                             <?php 
                                                                 if($modus == 0 || $modus == 1){
@@ -77,7 +77,7 @@
                                                 <tr>
                                                     <td rowspan="4" class="td_png_icon"><h3><?php echo _('humidity'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td class="text_left_padding"><?php echo _('switch-on value').':'; ?></td>
-                                                    <td class="text_left_padding"><input name="switch_on_humidifier_config" type="number" min="0" max="10" value=<?php echo $switch_on_humidifier; ?>>%<span class="display_none" style="font-size: xx-small">
+                                                    <td class="text_left_padding"><input name="switch_on_humidifier_config" type="number" min="0" max="10" required value=<?php echo $switch_on_humidifier; ?>>%<span class="display_none" style="font-size: xx-small">
                                                     <?php 
                                                                 if($modus == 0 || $modus == 1 || $modus == 2){
                                                                     echo '('._('on at'). ' '.($setpoint_humidity-$switch_on_humidifier)."%)";
@@ -90,7 +90,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('switch-off value').':'; ?></td>
-                                                    <td class="text_left_padding"><input name="switch_off_humidifier_config" type="number" min="0" max="10" value=<?php echo $switch_off_humidifier; ?>>%<span class="display_none" style="font-size: xx-small">
+                                                    <td class="text_left_padding"><input name="switch_off_humidifier_config" type="number" min="0" max="10" required value=<?php echo $switch_off_humidifier; ?>>%<span class="display_none" style="font-size: xx-small">
                                                     <?php 
                                                                 if($modus == 0 || $modus == 1 || $modus == 2){
                                                                     echo '('._('off at'). ' '.($setpoint_humidity-$switch_off_humidifier)."%)";
@@ -102,7 +102,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('delay'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="delay_humidify_config" type="number" min="0" max="60" value=<?php echo $delay_humidify; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 60)</span></td>
+                                                    <td class="text_left_padding"><input name="delay_humidify_config" type="number" min="0" max="60" required value=<?php echo $delay_humidify; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 60)</span></td>
                                                 </tr>
                                             </table>
                                             <script>
@@ -174,16 +174,16 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('period every').':'; ?></td>
-                                                    <td class="text_left_padding"><input name="uv_period_config" type="number" min="0" max="1440" value=<?php echo $uv_period; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span>
+                                                    <td class="text_left_padding"><input name="uv_period_config" type="number" min="0" max="1440" required value=<?php echo $uv_period; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span>
                                                     </span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('duration'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="uv_duration_config" type="number" min="0" max="1440" value=<?php echo $uv_duration; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0=<?php echo _('off'); ?>)</span></td>
+                                                    <td class="text_left_padding"><input name="uv_duration_config" type="number" min="0" max="1440" required value=<?php echo $uv_duration; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0=<?php echo _('off'); ?>)</span></td>
                                                 </tr>
                                                                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('timestamp'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="switch_on_uv_hour_config" type="number" min="0" max="23" value=<?php echo $switch_on_uv_hour; ?>> : <input name="switch_on_uv_minute_config" type="number" min="0" max="59" value=<?php echo $switch_on_uv_minute; ?>><?php echo _("o'clock"); ?></td>
+                                                    <td class="text_left_padding"><input name="switch_on_uv_hour_config" type="number" min="0" max="23" required value=<?php echo $switch_on_uv_hour; ?>> : <input name="switch_on_uv_minute_config" type="number" min="0" max="59" value=<?php echo $switch_on_uv_minute; ?>><?php echo _("o'clock"); ?></td>
                                                 </tr>
                                             </table>
                                             <script>
@@ -214,16 +214,16 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('period every').':'; ?></td>
-                                                    <td class="text_left_padding"><input name="light_period_config" type="number" min="0" max="1440" value=<?php echo $light_period; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span>
+                                                    <td class="text_left_padding"><input name="light_period_config" type="number" min="0" max="1440" required value=<?php echo $light_period; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span>
                                                     </span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('duration'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="light_duration_config" type="number" min="0" max="1440" value=<?php echo $light_duration; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0=<?php echo _('off'); ?>)</span></td>
+                                                    <td class="text_left_padding"><input name="light_duration_config" type="number" min="0" max="1440" required value=<?php echo $light_duration; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0=<?php echo _('off'); ?>)</span></td>
                                                 </tr>
                                                                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('timestamp'); ?>:</td>
-                                                    <td class="text_left_padding"><input name="switch_on_light_hour_config" type="number" min="0" max="23" value=<?php echo $switch_on_light_hour; ?>> : <input name="switch_on_light_minute_config" type="number" min="0" max="59" value=<?php echo $switch_on_light_minute; ?>><?php echo _("o'clock"); ?></td>
+                                                    <td class="text_left_padding"><input name="switch_on_light_hour_config" type="number" min="0" max="23" required value=<?php echo $switch_on_light_hour; ?>> : <input name="switch_on_light_minute_config" type="number" min="0" max="59" value=<?php echo $switch_on_light_minute; ?>><?php echo _("o'clock"); ?></td>
                                                 </tr>
                                             </table>
                                             <script>
@@ -248,11 +248,11 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('failure humidity delta').':'; ?></td>
-                                                    <td class="text_left_padding"><input name="failure_humidity_delta_config" type="number" min="0" max="10" value=<?php echo $failure_humidity_delta; ?>></td>
+                                                    <td class="text_left_padding"><input name="failure_humidity_delta_config" type="number" min="0" max="10" required value=<?php echo $failure_humidity_delta; ?>></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('failure temperature delta').':'; ?></td>
-                                                    <td class="text_left_padding"><input name="failure_temperature_delta_config" type="number" min="0" max="5" value=<?php echo $failure_temperature_delta; ?>></td>
+                                                    <td class="text_left_padding"><input name="failure_temperature_delta_config" type="number" min="0" max="5" required value=<?php echo $failure_temperature_delta; ?>></td>
                                                 </tr>
                                             </table>
                                             <script>
