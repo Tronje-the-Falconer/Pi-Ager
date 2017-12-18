@@ -5,7 +5,7 @@
         if ($table_exists == true){ // Tabelle vorhanden
             $column_array = check_columns($agingtables_table);
             switch (false){
-                case in_array($id_field, $column_array):{
+                case !in_array($id_field, $column_array):{
                     echo 'id_field drin';
                 }
                 case !in_array('lala', $column_array):{

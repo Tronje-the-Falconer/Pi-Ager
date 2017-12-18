@@ -93,6 +93,9 @@ saving_period_key = 'saving_period'
 failure_temperature_delta_key = 'failure_temperature_delta'
 failure_humidity_delta_key = 'failure_humidity_delta'
 pi_revision_key = 'pi_revision'
+calibrate_scale1_key = 'calibrate_scale1'
+calibrate_scale2_key = 'calibrate_scale2'
+calibrate_weight_key = 'calibrate_weight'
 
 # table fields
 key_field = 'key'

@@ -391,16 +391,17 @@
     function get_calibrate_status($calibrate_scale){
         global $value_field, $current_values_table, $key_field;
         
-        open_connection();
+        $calibrate_status = get_table_value($current_values_table, $calibrate_scale)
+        // open_connection();
         
-        $sql = 'SELECT ' . $value_field . ' FROM ' . $current_values_table . ' WHERE ' . $key_field . ' = "' . $calibrate_scale . '"';
-        $result = get_query_result($sql);
+        // $sql = 'SELECT ' . $value_field . ' FROM ' . $current_values_table . ' WHERE ' . $key_field . ' = "' . $calibrate_scale . '"';
+        // $result = get_query_result($sql);
         
-        $row = $result->fetchArray();
+        // $row = $result->fetchArray();
         
-        close_database();
+        // close_database();
 
-        return $row[0];
+        return $calibrate_status;
     }
     
     function write_debug_values($chosen_measuring_interval_debug, $chosen_agingtable_days_in_seconds_debug){
