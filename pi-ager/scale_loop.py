@@ -6,7 +6,6 @@ import pi_ager_names
 from pi_ager_logging import create_logger
 
 global logger
-global calibrate_value_before_weight
 
 logger = create_logger(__name__)
 logger.debug('logging initialised')
@@ -50,18 +49,17 @@ def get_scale_settings(scale_setting_rows):
     return scale_settings
     
 def get_first_calibrate_measure(scale, calibrate_scale_key):
-    global calibrate_value_before_weight
     scale.setReferenceUnit = 1
     scale.reset()
     scale.tare()
     calibrate_value_before_weight = scale.getMeasure()
     pi_ager_database.write_current_value(calibrate_scale_key,2)
+    return calibrate_value_before_weight
     
-def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table):
-    global calibrate_value_before_weight
+def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table, calibrate_value_first_measure):
     calibrate_weight = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_weight_key)
     calibrate_value_after_weight = scale.getMeasure()
-    reference_unit = (calibrate_value_after_weight - calibrate_value_before_weight)/calibrate_weight
+    reference_unit = (calibrate_value_after_weight - calibrate_value_first_measure)/calibrate_weight
     pi_ager_database.update_value_in_table(scale_settings_table, pi_ager_names.referenceunit_key, reference_unit)
     scale.setReferenceUnit = reference_unit
     pi_ager_database.write_current_value(calibrate_scale_key,4)
@@ -110,16 +108,16 @@ def doScaleLoop():
             measuring_interval_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.scale_measuring_interval_key)
 
         if calibrate_scale1 == 1:
-            get_first_calibrate_measure(scale1, pi_ager_names.calibrate_scale1_key)
+            first_calibrate_value = get_first_calibrate_measure(scale1, pi_ager_names.calibrate_scale1_key)
             
         if calibrate_scale2 == 1:
-            get_first_calibrate_measure(scale2, pi_ager_names.calibrate_scale2_key)
+            first_calibrate_value = get_first_calibrate_measure(scale2, pi_ager_names.calibrate_scale2_key)
             
         if calibrate_scale1 == 3:
-            calculate_reference_unit(scale1, pi_ager_names.calibrate_scale1_key, pi_ager_names.scale1_settings_table)
+            calculate_reference_unit(scale1, pi_ager_names.calibrate_scale1_key, pi_ager_names.scale1_settings_table, first_calibrate_value)
             
         if calibrate_scale2 == 3:
-            calculate_reference_unit(scale2, pi_ager_names.calibrate_scale2_key, pi_ager_names.scale2_settings_table)
+            calculate_reference_unit(scale2, pi_ager_names.calibrate_scale2_key, pi_ager_names.scale2_settings_table, first_calibrate_value)
             
         if status_tara_scale1 == 1:
             tara_scale(scale1, pi_ager_names.status_tara_scale1_key, pi_ager_names.data_scale1_table)
