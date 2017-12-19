@@ -74,7 +74,7 @@ def write_current_value(key, value):
     open_database()
     execute_query(sql)
     close_database()
-    logstring = 'write_current_value Tabelle: ' + pi_ager_names.current_values_table + ' geschriebener Key/Value: ' + key + '/' + str(value)
+    logstring = 'write_current_value Tabelle: ' + pi_ager_names.current_values_table + ' geschriebener Key/Value: ' + key + ' / ' + str(value)
     logger.debug(logstring)
 
 def get_scale_table_row(table):
@@ -187,7 +187,7 @@ def write_current(loopnumber, sensor_temperature, status_heater, status_exhaust_
 def update_value_in_table(table, key, value):
     open_database()
     
-    sql = 'UPDATE ' + table + ' SET "' + pi_ager_names.value_field + '" = "' + str(value) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + key + '"'
+    sql = 'UPDATE ' + table + ' SET "' + pi_ager_names.value_field + '" = "' + str(value) +'" , "' + str(pi_ager_names.last_change_field) + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + key + '"'
     execute_query(sql)
     
     close_database()
