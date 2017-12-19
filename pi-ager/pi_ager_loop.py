@@ -493,9 +493,10 @@ def doMainLoop():
             gpio.output(pi_ager_names.gpio_exhausting_air, pi_ager_names.relay_off)
         
         # Schalten des UV_Licht
-        if status_uv == True:
+        if status_uv == True and pi_ager_database.get_status_uv_manual() == 1:
             gpio.output(pi_ager_names.gpio_uv, pi_ager_names.relay_on)
-        if status_uv == False:
+
+        if status_uv == False or pi_ager_database.get_status_uv_manual() == 0:
             gpio.output(pi_ager_names.gpio_uv, pi_ager_names.relay_off)
         
         # Schalten des Licht

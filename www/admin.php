@@ -15,9 +15,30 @@
                                     include 'modules/write_admin_db.php';                        // schreibt die admin-Werte
                                     
                                     include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
+                                    include 'modules/read_current_db.php';
+                                    include 'modules/start_stop_uv.php';
                                     
 
                                 ?>
+                                <h2 class="art-postheader"><?php echo _('uv-light switch'); ?></h2>
+                                <div class="hg_container">
+                                    <form  method="post" name="uv-light">
+                                        <table style="width: 100%;">
+                                            <tr>
+                                                <?php 
+                                                    if($status_uv_manual == 0) {
+                                                        echo '<td><img src="/images/icons/status_off_20x20.png" title="uv off"></td>';
+                                                        echo "<td><button class='art-button' name='turn_on_uv' onclick='return confirm('". _('end pause uv-light!') ."');>" . _('on'). "</button></td>";
+                                                    }
+                                                    else{
+                                                        echo '<td><img src="/images/icons/status_on_20x20.png" title="uv on"></td>';
+                                                        echo "<td><button class='art-button' name='turn_off_uv' onclick='return confirm('". _('pause uv-light!') ."');>" . _('off'). "</button></td>";
+                                                    }
+                                                ?>
+                                            </tr>
+                                        </table>
+                                    </form>
+                                </div>
                                 <h2 class="art-postheader"><?php echo _('administration'); ?></h2>
                                 <form method="post" name="admin">
                                     <div class="hg_container">
@@ -304,7 +325,7 @@
                                 </div>
                                 <hr>
                                 <h2 class="art-postheader"><?php echo _('python'); ?></h2>
-                                <!----------------------------------------------------------------------------------------Reboot/Shutdown-->
+                                <!----------------------------------------------------------------------------------------stop start pythonfiles-->
                                 <div class="hg_container">
                                     <form  method="post" name="boot">
                                         <table style="width: 100%;">

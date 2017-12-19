@@ -76,7 +76,8 @@ Prioritätenliste
 ####25 schalter um durch logfiles zu wechseln
 ####26 Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
     27 Input felder auf Stellen überprüfen, min und max innerhalb des input-tags (fehlend Wägezellen)
-    28 Button für UV-Licht aus
+####28 Button für UV-Licht aus
+    29 icon on /off manually M
 
 
 ####29 downloadbutton für logfiles als zip
@@ -119,7 +120,7 @@ Prioritätenliste
 ####23 nur Status-Werte schreiben, wenn geändert
     24 beim start der main.py auf vollständige DB prüfen
     25 exception handler der auf 0 setzt
-    26 UV_licht über Button ausschalten
+####26 UV_licht über Button ausschalten
 
 
 4) Linux

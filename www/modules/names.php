@@ -91,6 +91,7 @@ $measuring_duration_key = 'measuring_duration';
 $saving_period_key = 'saving_period';
 $pi_revision_key = 'pi_revision';
 $pi_ager_version_key = 'pi_ager_version';
+$status_uv_manual_key = 'status_uv_manual';
 
 #-----------------------------table fields;
 $key_field = 'key';
