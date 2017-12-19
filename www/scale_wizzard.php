@@ -8,14 +8,12 @@
         if ($scale == $scale1_key){
             $scale_number = 1;
             $scale_status = $status_scale1_key;
-            $scale_calibrate = $calibrate_scale1_key;
-            $current_scale_status = get_table_value($current_values_table, $status_scale1_key);
+            $scale_calibrate = $calibrate_scale1_key;   
         }
         else{
             $scale_number = 2;
             $scale_status = $status_scale2_key;
             $scale_calibrate = $calibrate_scale2_key;
-            $current_scale_status = get_table_value($current_values_table, $status_scale2_key);
         }
         write_stop_in_database($scale_status);
         $logstring = _('measuring scale stopped'). ' ' . _('scale'). ' ' . $scale_number . ' ' . 'due to calibrating scale';
@@ -27,7 +25,7 @@
         while ($scale_calibrate_status != 2) {
             $scale_calibrate_status = get_calibrate_status($scale_calibrate);
             sleep(1);
-            //write_startstop_status_in_database($scale_calibrate, 2);
+            write_startstop_status_in_database($scale_calibrate, 2);
             // Python misst jetzt den Wert mit der Refunit = 1
         }
         if ($scale_calibrate_status == 2){
@@ -39,7 +37,6 @@
             echo '<form action="/modules/calibrate_scale.php" method="post">';
             echo _('weight') . '<input type="number" name="scale_wizzard_weight" required> ' . _('gram') . '<br><br>';
             echo '<input type="hidden" name="scale_number" type="text" value="'. $scale_number . '">';
-            echo '<input type="hidden" name="current_scale_status" type="text" value="'. $current_scale_status . '">';
             echo '<button class="art-button" name="scale_wizzard2" value="scale_wizzard2"  onclick="return confirm("' ._('weight attatched'). '?");">'._('weight attatched'). '</button>';
             echo '<button class="art-button" name="scale_wizzard_cancel"  formnovalidate formaction="settings.php" onclick="return confirm("' ._('cancel scale wizzard?'). '?");">'._('cancel'). '</button>';
             echo '</form>';
@@ -49,8 +46,6 @@
         }
     }
     else{
-        $logstring = 'scale_wizzard has no selected scale';
-        logger('DEBUG', $logstring);
         print '<script language="javascript"> alert("'. (_("scale wizzard")) . " : " . (_("no scale selected")) .'"); window.location.href = "settings.php";</script>';
     }
 ?>

@@ -9,7 +9,7 @@ Prioritätenliste
 #### 04 Website 02
 #### 05 Website 32
      06 Website 12
-     07 Website 03
+#### 07 Website 03
      08 Webiste 20
      09 Webiste 10
      10 Website 07
@@ -29,7 +29,7 @@ Prioritätenliste
 2) Website
 ####01 Upload CSV und eintragen als Agingtable_[CSV-Filename] in Datenbank ACHTUNG! richtige Reihenfolge in Tabelle schreiben! (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/11)
 ####02 Editieren der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
-....03 Wägezellen Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
+####03 Wägezellen Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
 
         -Tara
         - def gewicht
@@ -76,6 +76,7 @@ Prioritätenliste
 ####25 schalter um durch logfiles zu wechseln
 ####26 Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
     27 Input felder auf Stellen überprüfen, min und max innerhalb des input-tags (fehlend Wägezellen)
+    28 Button für UV-Licht aus
 
 
 ####29 downloadbutton für logfiles als zip
@@ -117,6 +118,8 @@ Prioritätenliste
 ####22 Raspberry pi Version bei Systemstart lesen und in sqlite schreiben. Danach übergabe zur Website (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/32)
 ####23 nur Status-Werte schreiben, wenn geändert
     24 beim start der main.py auf vollständige DB prüfen
+    25 exception handler der auf 0 setzt
+    26 UV_licht über Button ausschalten
 
 
 4) Linux

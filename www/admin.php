@@ -57,7 +57,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('reference unit'); ?>:</td>
-                                            <td class="text_left_padding"><input name="referenceunit_scale1_admin" type="number" step="0.1" min="0" max="999.9" required value=<?php echo $referenceunit_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="referenceunit_scale1_admin" type="number" step="0.1" min="0.1" max="999.9" required value=<?php echo $referenceunit_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring interval'); ?>:</td>
@@ -84,7 +84,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('reference unit'); ?>:</td>
-                                            <td class="text_left_padding"><input name="referenceunit_scale2_admin" type="number" step="0.1" min="0" max="999.9" required value=<?php echo $referenceunit_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="referenceunit_scale2_admin" type="number" step="0.1" min="0.1" max="999.9" required value=<?php echo $referenceunit_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring interval'); ?>:</td>
@@ -157,6 +157,7 @@
                                         </table>
                                     </div>
                                 </form>
+                                <hr>
                                 <h2 class="art-postheader"><?php echo _('reboot & shutdown'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Reboot/Shutdown-->
                                 <div class="hg_container">
@@ -301,6 +302,7 @@
                                         </tr>
                                     </table>
                                 </div>
+                                <hr>
                                 <h2 class="art-postheader"><?php echo _('python'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Reboot/Shutdown-->
                                 <div class="hg_container">

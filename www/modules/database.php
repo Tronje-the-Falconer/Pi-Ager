@@ -391,7 +391,7 @@
     function get_calibrate_status($calibrate_scale){
         global $value_field, $current_values_table, $key_field;
         
-        $calibrate_status = get_table_value($current_values_table, $calibrate_scale)
+        $calibrate_status = get_table_value($current_values_table, $calibrate_scale);
         // open_connection();
         
         // $sql = 'SELECT ' . $value_field . ' FROM ' . $current_values_table . ' WHERE ' . $key_field . ' = "' . $calibrate_scale . '"';
