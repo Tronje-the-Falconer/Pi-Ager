@@ -57,14 +57,16 @@ def get_first_calibrate_measure(scale, calibrate_scale_key):
     return calibrate_value_before_weight
     
 def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table, calibrate_value_first_measure):
+    scale.setReferenceUnit(1)
     calibrate_weight = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_weight_key)
     calibrate_value_after_weight = scale.getMeasure()
     reference_unit = (calibrate_value_after_weight - calibrate_value_first_measure)/calibrate_weight
     if reference_unit == 0:
-        reference_unit = 0.1
-    pi_ager_database.update_value_in_table(scale_settings_table, pi_ager_names.referenceunit_key, reference_unit)
-    scale.setReferenceUnit(reference_unit)
-    pi_ager_database.write_current_value(calibrate_scale_key,4)
+        pi_ager_database.write_current_value(calibrate_scale_key,5)
+    else:
+        pi_ager_database.update_value_in_table(scale_settings_table, pi_ager_names.referenceunit_key, reference_unit)
+        scale.setReferenceUnit(reference_unit)
+        pi_ager_database.write_current_value(calibrate_scale_key,4)
 
 def doScaleLoop():
     global logger

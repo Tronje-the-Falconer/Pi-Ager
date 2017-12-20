@@ -11,32 +11,45 @@
         logger('INFO', $logstring);
         
         if ($scale_number == 1){
-            $scale_status = $status_scale1_key;
-            $scale_calibrate = $calibrate_scale1_key;
+            $scale_status_key = $status_scale1_key;
+            $scale_calibrate_key = $calibrate_scale1_key;
         }
         else{
-            $scale_status = $status_scale2_key;
-            $scale_calibrate = $calibrate_scale2_key;
+            $scale_status_key = $status_scale2_key;
+            $scale_calibrate_key = $calibrate_scale2_key;
         }
         
         // Gewicht wird in DB geschrieben
         // Button schreibt Wert 3 in Kalibrierung
         write_startstop_status_in_database($calibrate_weight_key, $known_weight);
-        write_startstop_status_in_database($scale_calibrate, 3);
+        write_startstop_status_in_database($scale_calibrate_key, 3);
         $scale_calibrate_status = 3;
-        while ($scale_calibrate_status != 4) {
-            $scale_calibrate_status = get_calibrate_status($scale_calibrate);
+        while ($done != 'done') {
+            $scale_calibrate_status = get_calibrate_status($scale_calibrate_key);
+            if ($scale_calibrate_status == 4){
+                $done = 'done';
+            }
+            if ($scale_calibrate_status == 5){
+                $done = 'done';
+            }
             sleep(1);
-            //write_startstop_status_in_database($scale_calibrate, 4);
             // Python misst nun den zweiten Wert mit Refunit = 1
         }
         if ($scale_calibrate_status == 4){
             write_startstop_status_in_database($calibrate_weight_key, 0);
-            write_startstop_status_in_database($scale_calibrate, 0);
+            write_startstop_status_in_database($scale_calibrate_key, 0);
             write_startstop_status_in_database($current_scale_status);
             $logstring = _('calibration done');
             logger('INFO', $logstring);
             print '<script language="javascript"> alert("'. (_("scale wizzard")) . " : " . (_("calibration done")) .'"); window.location.href = "../settings.php";</script>';
+        }
+        elseif ($scale_calibrate_status == 5){
+            write_startstop_status_in_database($calibrate_weight_key, 0);
+            write_startstop_status_in_database($scale_calibrate_key, 0);
+            write_startstop_status_in_database($current_scale_status);
+            $logstring = _('calibration failed') . '! ' . _('calculated reference unit is 0') . ' ' . _('referenceunit is set to old value') . '!' . _('please try again');
+            logger('WARNING', $logstring);
+            print '<script language="javascript"> alert("'. (_("scale wizzard")) . " : " . (_("calibration failed")) . "! <br> " . (_("calculated reference unit is 0")) . ". <br> " . (_("referenceunit is set to old value")) . "! <br> " . (_("please try again")) . '"); window.location.href = "../settings.php";</script>';
         }
         else{
             $logstring = 'error on calibrating';
