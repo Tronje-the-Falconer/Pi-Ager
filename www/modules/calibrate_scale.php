@@ -49,7 +49,7 @@
             write_startstop_status_in_database($current_scale_status);
             $logstring = _('calibration failed') . '! ' . _('calculated reference unit is 0') . ' ' . _('referenceunit is set to old value') . '!' . _('please try again');
             logger('WARNING', $logstring);
-            print '<script language="javascript"> alert("'. (_("scale wizzard")) . " : " . (_("calibration failed")) . "! <br> " . (_("calculated reference unit is 0")) . ". <br> " . (_("referenceunit is set to old value")) . "! <br> " . (_("please try again")) . '"); window.location.href = "../settings.php";</script>';
+            print '<script language="javascript"> alert("'. (_("scale wizzard")) . " : " . (_("calibration failed")) . "! \\n " . (_("calculated reference unit is 0")) . ". \\n " . (_("referenceunit is set to old value")) . "! \\n " . (_("please try again")) . '"); window.location.href = "../settings.php";</script>';
         }
         else{
             $logstring = 'error on calibrating';
