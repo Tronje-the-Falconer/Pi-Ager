@@ -523,4 +523,39 @@
         }
         return $value;
     }
+    //Statistik Tabellen leeren
+    function delete_statistic_tables()
+    {
+        global $data_sensor_temperature_table, $data_sensor_humidity_table, $status_heater_table, $status_exhaust_air_table, $status_cooling_compressor_table, $status_circulating_air_table, $status_uv_table, $status_light_table, $status_humidifier_table, $status_dehumidifier_table, $data_scale1_table, $data_scale2_table, $data_sensor_temperature_meat1_table, $data_sensor_temperature_meat2_table, $data_sensor_temperature_meat3_table, $data_sensor_temperature_meat4_table;
+
+        delete_data($data_sensor_temperature_table);
+        delete_data($data_sensor_humidity_table);
+        delete_data($status_heater_table);
+        delete_data($status_exhaust_air_table);
+        delete_data($status_cooling_compressor_table);
+        delete_data($status_circulating_air_table);
+        delete_data($status_circulating_air_table);
+        delete_data($status_uv_table);
+        delete_data($status_light_table);
+        delete_data($status_humidifier_table);
+        delete_data($status_dehumidifier_table);
+        delete_data($data_scale1_table);
+        delete_data($data_scale2_table);
+        delete_data($data_sensor_temperature_meat1_table);
+        delete_data($data_sensor_temperature_meat2_table);
+        delete_data($data_sensor_temperature_meat3_table);
+        delete_data($data_sensor_temperature_meat4_table);
+        logger('DEBUG', 'delete_statistic_tables performed');
+    }
+     
+     function delete_data($table_name)
+    {
+        open_connection();
+        $sql = 'DELETE FROM ' . $table_name;
+        get_query_result($sql);
+        $sql = 'VACUUM';
+        get_query_result($sql);
+        close_database();
+        logger('DEBUG', 'delete_data performed');
+    }
 ?>
