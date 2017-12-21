@@ -9,7 +9,6 @@
                                     include 'modules/start_stop_program.php';                   // 
                                     
                                     include 'modules/database_empty_statistic_tables.php';      // leert die Statistik-Tabellen (Status, data)
-                                    include 'modules/database_create_new_database.php';         // erzeugt neue DB
                                     include 'modules/write_loglevel_db.php';                    // schreibt das Loglevel in Datenbank
                                     include 'modules/write_debug_values.php';                   // schreibt die Debug-Werte
                                     include 'modules/write_admin_db.php';                        // schreibt die admin-Werte
@@ -317,7 +316,6 @@
                                         <tr>
                                             <form method="post" name="database">
                                                 <td><button class="art-button" name="empty_statistic_tables" value="empty_statistic_tables" onclick="return confirm('<?php echo _('ATTENTION: empty statistic tables?');?>');"><?php echo _('empty statistic tables'); ?></button></td>
-                                                <td><button class="art-button" name="create_new_database" value="create_new_database" onclick="return confirm('<?php echo _('ATTENTION: create new database?');?>');"><?php echo _('create new database'); ?></button></td>
                                             </form>
                                             <td><button class="art-button" name="database_administration" onclick="window.location.href='/phpliteadmin.php'"><?php echo _('database administration'); ?></button></td>
                                         </tr>

@@ -31,7 +31,7 @@ def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, ta
             scale_measuring_endtime = current_time
         status_tara_scale = pi_ager_database.get_table_value(pi_ager_names.current_values_table, tara_key)
         if status_tara_scale == 1:
-            tara_scale(scale, tara_key, data_table)
+            tara_scale(scale, tara_key, data_table, calibrate_scale_key)
         value = scale.getMeasure()
         formated_value = round(value, 3)
         if (current_time - measure_start_time) % saving_period == 0 and current_time != save_time:      # speichern je nach datenbankeintrag fuer saving_period

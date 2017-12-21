@@ -119,7 +119,7 @@ Prioritätenliste
 ####22 Raspberry pi Version bei Systemstart lesen und in sqlite schreiben. Danach übergabe zur Website (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/32)
 ####23 nur Status-Werte schreiben, wenn geändert
     24 beim start der main.py auf vollständige DB prüfen
-    25 exception handler der auf 0 setzt
+####25 exception handler der auf 0 setzt
 ####26 UV_licht über Button ausschalten
 
 

@@ -523,6 +523,4 @@
         }
         return $value;
     }
-    
-    include 'database_scheme.php'; 
 ?>
