@@ -23,8 +23,6 @@ def autostart_loop():
     global status_pi_ager
     global logger
     
-    pi_ager_gpio_config.setupGPIO() # GPIO initialisieren
-    pi_ager_gpio_config.defaultGPIO()
     while True:
         status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
         status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
@@ -39,11 +37,11 @@ def autostart_loop():
             doMainLoop()
         check_website_logfile()
         time.sleep(5)
-
+        
 def get_sensordata():
     global logger
     
-    if pi_ager_init.sensorname == 'DHT11' or pi_ager_init.sensorname == 'DHT22': 
+    if pi_ager_init.sensorname == 'DHT11' or pi_ager_init.sensorname == 'DHT22':
         sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_names.gpio_sensor_data)
         logger.debug("sensor_temperature: " + str(sensor_temperature_big))
         logger.debug("sensor_humidity_big: " + str(sensor_humidity_big))

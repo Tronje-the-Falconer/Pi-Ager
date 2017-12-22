@@ -4,7 +4,9 @@ import time
 import gettext
 import pi_ager_database
 import pi_ager_names
+import pi_ager_gpio_config
 from pi_ager_logging import create_logger
+from pi_sht1x import SHT1x
 
 global system_starttime
 global circulation_air_start
@@ -14,6 +16,7 @@ global uv_stoptime
 global light_starttime
 global light_stoptime
 global logger
+global sensortype
 
 logger = create_logger(__name__)
 logger.debug('logging initialised')
@@ -21,6 +24,7 @@ logger.debug('logging initialised')
 # Function zum Setzen des Sensors
 def set_sensortype():
     global sensor
+    global sensortype
     global sensorname
     global sensorvalue
     global logger
@@ -40,6 +44,36 @@ def set_sensortype():
         sensor = 'SHT'
         sensorname = 'SHT'
         sensorvalue = 3
+    check_sensor(sensorname, sensor)
+        
+def check_sensor(sensorname, sensor):
+    global sensortype
+    logger.debug('check_sensor()')
+    try:
+        if sensorname == 'SHT':
+            sensor_sht = SHT1x(pi_ager_names.gpio_sensor_data, pi_ager_names.gpio_sensor_sync, gpio_mode=pi_ager_names.board_mode)
+            sensor_sht.read_temperature()
+            sensor_sht.read_humidity()
+            value_sht_temperature = sensor_sht.temperature_celsius
+            value_sht_humidity = sensor_sht.humidity
+            print (value_sht_humidity)
+        else:
+            value_dht_humidity, value_temperature = Adafruit_DHT.read_retry(sensor, pi_ager_names.gpio_sensor_data)
+            print (value_dht_humidity)
+    except:
+        if sensorname == 'SHT':
+            sensortype = 2
+        elif sensorname == 'DHT22':
+            sensortype = 1
+        else:
+            sensortype = 3
+        pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key, sensortype)
+        logger.info(_('wrong sensortype in settings'))
+        set_sensortype()
+
+    finally:
+        logger.info(_('sensortype set to') + ' ' + sensorname)
+        
 
 def set_system_starttime():
     global system_starttime
@@ -68,7 +102,7 @@ def set_language():
     
     ####   Set up message catalog access
     # translation = gettext.translation('pi_ager', '/var/www/locale', fallback=True)
-    # _ = translation.ugettext
+     # _ = translation.ugettext
     
     if language == 1:
         translation = gettext.translation('pi_ager', '/var/www/locale', languages=['en'], fallback=True)
@@ -76,6 +110,10 @@ def set_language():
         translation = gettext.translation('pi_ager', '/var/www/locale', languages=['de'], fallback=True)
 
     translation.install()
+
+def setup_GPIO():
+    pi_ager_gpio_config.setupGPIO() # GPIO initialisieren
+    pi_ager_gpio_config.defaultGPIO()   
 
 loopcounter = 0                      #  Zaehlt die Durchlaeufe des Mainloops
     
@@ -95,5 +133,3 @@ switch_off_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_se
 delay_humidify = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key)
 
 
-# Sprache
-set_language()
