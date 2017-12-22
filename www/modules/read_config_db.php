@@ -29,11 +29,11 @@
     $spikes_scale1 = get_table_value($settings_scale1_table,$spikes_key);
     
     $referenceunit_scale2 = number_format(floatval(get_table_value($settings_scale2_table,$referenceunit_key)), 1, '.', '');
-    $measuring_interval_scale2 = get_table_value($settings_scale1_table,$scale_measuring_interval_key);
-    $measuring_duration_scale2 = get_table_value($settings_scale1_table,$measuring_duration_key);
-    $saving_period_scale2 = get_table_value($settings_scale1_table,$saving_period_key);
-    $samples_scale2 = get_table_value($settings_scale1_table,$samples_key);
-    $spikes_scale2 = get_table_value($settings_scale1_table,$spikes_key);
+    $measuring_interval_scale2 = get_table_value($settings_scale2_table,$scale_measuring_interval_key);
+    $measuring_duration_scale2 = get_table_value($settings_scale2_table,$measuring_duration_key);
+    $saving_period_scale2 = get_table_value($settings_scale2_table,$saving_period_key);
+    $samples_scale2 = get_table_value($settings_scale2_table,$samples_key);
+    $spikes_scale2 = get_table_value($settings_scale2_table,$spikes_key);
 
     if ($sensortype == 1) {
         $sensorname = 'DHT11';
