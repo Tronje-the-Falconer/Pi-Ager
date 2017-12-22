@@ -27,7 +27,6 @@
         while ($scale_calibrate_status != 2) {
             $scale_calibrate_status = get_calibrate_status($scale_calibrate_key);
             sleep(1);
-            write_startstop_status_in_database($scale_calibrate_key, 2);
             // Python misst jetzt den Wert mit der Refunit = 1
         }
         if ($scale_calibrate_status == 2){
