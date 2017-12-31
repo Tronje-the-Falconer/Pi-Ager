@@ -1,6 +1,18 @@
-﻿#### = Erledigt
+﻿keine reifetabellen -> PHP darf keine selection etc darstellen. nur Uploadbutton
+
+button disablen, wenn tara läuft
+
+
+hama -> standardwerte und wertebereiche scales
+
+Scales berechnung prüfen
+
+
+
+#### = Erledigt
 ---- = verschoben auf nächstes Release
 .... = Begonnen
+//// = verworfen
 
 Prioritätenliste
 #### 01 Python 23
@@ -8,7 +20,7 @@ Prioritätenliste
 #### 03 Website 01
 #### 04 Website 02
 #### 05 Website 32
-     06 Website 12
+     06 Website 24
 #### 07 Website 03
      08 Webiste 20
      09 Webiste 10
@@ -54,7 +66,7 @@ Prioritätenliste
     
     10 Kommentare aussortieren / ergänzen
 ####11 Datenbank/-schema per Button erzeugen
-....12 Datenbank auf Vollständigkeit überprüfen. Warnung ausgeben, wenn Dinge fehlen und ergänzen
+////12 Datenbank auf Vollständigkeit überprüfen. Warnung ausgeben, wenn Dinge fehlen und ergänzen
         Idee: Beim main start, wird die DB überprüft, bei Fehler wird ein status in der db auf 1 gesetzt. Dieser wird in der Website ausgewertet und angezeigt, dass die DB unvollständig ist.
         Auf der adminsetie gibt es einen Migrationsbereich Knopf database maintenance mit Checkboxen: Neue Datenbank, Sicherung, und defaultwerte
         sofern neue Datenbank wird eine neue angelegt und die vorher eingestelklten werte ausgelesen und verwendet.
@@ -121,7 +133,7 @@ Prioritätenliste
     24 beim start der main.py auf vollständige DB prüfen
 ####25 exception handler der auf 0 setzt
 ####26 UV_licht über Button ausschalten
-
+    27 Samples bei Calibrate fest in den Code schreiben
 
 4) Linux
     01 phpliteadmin.php passwort bei Erstinstallation auf allgemeinses PW oder eigenes setzen

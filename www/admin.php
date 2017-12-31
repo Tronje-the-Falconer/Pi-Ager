@@ -26,7 +26,7 @@
                                             <tr>
                                                 <?php 
                                                     if($status_uv_manual == 0) {
-                                                        echo '<td><img src="/images/icons/status_off_20x20.png" title="uv off"></td>';
+                                                        echo '<td><img src="/images/icons/status_off_manual_20x20.png" title="uv off"></td>';
                                                         echo "<td><button class='art-button' name='turn_on_uv' onclick='return confirm('". _('end pause uv-light!') ."');>" . _('on'). "</button></td>";
                                                     }
                                                     else{
@@ -38,6 +38,7 @@
                                         </table>
                                     </form>
                                 </div>
+                                <hr>
                                 <h2 class="art-postheader"><?php echo _('administration'); ?></h2>
                                 <form method="post" name="admin">
                                     <div class="hg_container">

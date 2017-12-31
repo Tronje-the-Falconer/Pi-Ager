@@ -99,6 +99,9 @@
             if ($logs_active == 'active'){
                 echo "<script src='js/jquery.js'></script>";
                 echo "<script src='js/script.js'></script>";
+                echo '<meta http-equiv="cache-control" content="no-cache"> <!-- tells browser not to cache -->';
+                echo '<meta http-equiv="expires" content="0"> <!-- says that the cache expires now -->';
+                echo '<meta http-equiv="pragma" content="no-cache"> <!-- says not to use cached stuff, if there is any -->';
             }
             
         ?>

@@ -7,6 +7,7 @@
     
         $connection = new SQLite3("/var/www/config/pi-ager.sqlite3");
         $connection->busyTimeout(10000);
+        //$connection->enableExceptions(true);
     }
 
     function execute_query($command){
@@ -216,6 +217,7 @@
             $index++;
             }
         close_database();
+        
         return $agingtable_names;
     }
 
@@ -238,7 +240,9 @@
     {
         open_connection();
         $sql = 'SELECT * FROM agingtable_' . $agingtable_name;
+        
         $result = get_query_result($sql);
+    
         $index = 0;
         while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
             {

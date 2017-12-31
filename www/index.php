@@ -93,250 +93,252 @@
                                     var timeFormat = 'MM/DD/YYYY HH:mm';
                                     
                                     // Temperatur und Feuchte
-                                        var temperature_humidity_chart = document.getElementById("temperature_humidity_chart");
-                                        var config_temperature_humidity_chart = {
-                                            type: 'line',
-                                            data: {
-                                                labels: 
-                                                    <?php echo $temperature_timestamps_axis_text; ?>,
-                                                datasets: [{
-                                                    label: '<?php echo _("temperature") ?>',
-                                                    yAxisID: 'temperature',
-                                                    data: <?php echo json_encode($temperature_dataset);?>,
-                                                    backgroundColor: '#C03738',
-                                                    borderColor: '#C03738',
-                                                    borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
-                                                    cubicInterpolationMode: 'monotone',
-                                                    fill: false
-                                                },
-                                                {
-                                                    label: '<?php echo _("humidity") ?>',
-                                                    yAxisID: 'humidity',
-                                                    data: <?php echo json_encode($humidity_dataset); ?>,
-                                                    backgroundColor: '#59A9C4',
-                                                    borderColor: '#59A9C4',
-                                                    borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
-                                                    cubicInterpolationMode: 'monotone',
-                                                    fill: false
-                                                }]
+                                    var temperature_humidity_chart = document.getElementById("temperature_humidity_chart");
+                                    var config_temperature_humidity_chart = {
+                                        type: 'line',
+                                        data: {
+                                            labels: 
+                                                <?php echo $temperature_timestamps_axis_text; ?>,
+                                            datasets: [{
+                                                label: '<?php echo _("temperature") ?>',
+                                                yAxisID: 'temperature',
+                                                data: <?php echo json_encode($temperature_dataset);?>,
+                                                backgroundColor: '#C03738',
+                                                borderColor: '#C03738',
+                                                borderWidth: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                pointHitRadius: 5,';} ?>
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
                                             },
-                                            options: {
-                                                title: {
-                                                    display: true,
-                                                    text: '<?php echo _("temperature") ?> & <?php echo _("humidity") ?>',
-                                                    fontSize: 24
-                                                },
-                                                tooltips: {
-                                                    mode: 'index',
-                                                    intersect: false,
-                                                },
-                                                scales: {
-                                                    xAxes: [{
-                                                        type: "time",
-                                                        time: {
-                                                            displayFormats: {
-                                                                second: 'HH:mm:ss',
-                                                                minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
-                                                            },
-                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
-                                                        },
-                                                    }, ],
-                                                    yAxes: [{
-                                                        scaleLabel: {
-                                                            display: true,
-                                                            labelString: '<?php echo _("temperature") ?>',
-                                                            fontSize: 20,
-                                                            fontColor: '#000000'
-                                                        },
-                                                        id: 'temperature',
-                                                        type: 'linear',
-                                                        position: 'left',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                return value + ' °C';
-                                                            },
-                                                            fontColor: '#000000',
-                                                            fontSize: 20,
-                                                            max: 30,
-                                                            min: -4
-                                                        }
-                                                        
-                                                    }, {
-                                                        scaleLabel: {
-                                                            display: true,
-                                                            labelString: '<?php echo _("humidity") ?>',
-                                                            fontSize: 20,
-                                                            fontColor: '#000000'
-                                                        },
-                                                        id: 'humidity',
-                                                        type: 'linear',
-                                                        display: true,
-                                                        position: 'right',
-                                                        labelString: '<?php echo _("humidity") ?>',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                return 'φ ' + value + ' %';
-                                                            },
-                                                            fontColor: '#000000',
-                                                            fontSize: 20,
-                                                            // max: <?php 
-                                                            // $max_value_humidiy = intval(max($humidity_dataset) + (max($humidity_dataset) / 100 * 5))+1;
-                                                            
-                                                            // print $max_value_humidiy;
-                                                            // ?>,
-                                                            // min: <?php 
-                                                            // $min_value_humidiy = intval(min($humidity_dataset) - (max($humidity_dataset) / 100 * 5))-1;
-                                                            
-                                                            // print $min_value_humidiy;
-                                                            // ?>
-                                                            max: 100,
-                                                            min: 0
-                                                        }
-                                                    }]
+                                            {
+                                                label: '<?php echo _("humidity") ?>',
+                                                yAxisID: 'humidity',
+                                                data: <?php echo json_encode($humidity_dataset); ?>,
+                                                backgroundColor: '#59A9C4',
+                                                borderColor: '#59A9C4',
+                                                borderWidth: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                pointHitRadius: 5,';} ?>
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
+                                            }]
+                                        },
+                                        options: {
+                                            title: {
+                                                display: true,
+                                                text: '<?php echo _("temperature") ?> & <?php echo _("humidity") ?>',
+                                                fontSize: 24
+                                            },
+                                            tooltips: {
+                                                mode: 'index',
+                                                intersect: false,
+                                                callbacks: {
+                                                    label: function(tooltipItem, data) {
+                                                        return Number(tooltipItem.yLabel).toFixed(1);
+                                                    }
                                                 }
-                                            }
-                                        };
-                                        
-                                        // Waagen
-                                        var scales_chart = document.getElementById("scales_chart");
-                                        var config_scales_chart = {
-                                            type: 'line',
-                                            data: {
-                                                labels: 
-                                                    <?php echo $scale1_timestamps_axis_text; ?>,
-                                                datasets: [{
-                                                    label: '<?php echo _("scale") ?> 1',
-                                                    yAxisID: 'scale1',
-                                                    data: <?php echo json_encode($scale1_dataset);?>,
-                                                    backgroundColor: [
-                                                        '#AEC645'
-                                                    ],
-                                                    borderColor: [
-                                                        '#AEC645'
-                                                    ],
-                                                    borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
-                                                    cubicInterpolationMode: 'monotone',
-                                                    fill: false
-                                                },
-                                                {
-                                                    label: '<?php echo _("scale") ?> 2',
-                                                    yAxisID: 'scale2',
-                                                    data: <?php echo json_encode($scale2_dataset); ?>,
-                                                    backgroundColor: [
-                                                        '#BF9543'
-                                                    ],
-                                                    borderColor: [
-                                                        '#BF9543'
-                                                    ],
-                                                    borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
-                                                    cubicInterpolationMode: 'monotone',
-                                                    fill: false
-                                                }]
                                             },
-                                            options: {
-                                                title: {
-                                                    display: true,
-                                                    text: '<?php echo _("scale") ?> 1 & 2',
-                                                    fontSize: 24
-                                                },
-                                                tooltips: {
-                                                    mode: 'index',
-                                                    intersect: false,
-                                                },
-                                                scales: {
-                                                    xAxes: [{
-                                                        type: "time",
-                                                        time: {
-                                                            displayFormats: {
-                                                                second: 'HH:mm:ss',
-                                                                minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
-                                                            },
-                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                            scales: {
+                                                xAxes: [{
+                                                    type: "time",
+                                                    time: {
+                                                        displayFormats: {
+                                                            second: 'HH:mm:ss',
+                                                            minute: 'HH:mm',
+                                                            hour: 'MMM D, H[h]'
                                                         },
-                                                    }, ],
-                                                    yAxes: [{
-                                                        scaleLabel: {
-                                                            display: true,
-                                                            labelString: '<?php echo _("scale") . ' 1'; ?>',
-                                                            fontSize: 20,
-                                                            fontColor: '#000000'
-                                                        },
-                                                        id: 'scale1',
-                                                        type: 'linear',
-                                                        position: 'left',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                return value + ' gr';
-                                                            },
-                                                            fontColor: '#000000',
-                                                            fontSize: 20,
-                                                            //max: 25000,
-                                                            beginAtZero: true,
-                                                            maxTicksLimit: 10,
-                                                            max: <?php 
-                                                            $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
-                                                            
-                                                            print $max_value_scale1;
-                                                            ?>,
-                                                            min: <?php 
-                                                            $min_value_scale1 = intval(min($scale1_dataset) - (max($scale1_dataset) / 100 * 5))-1;
-                                                            
-                                                            print $min_value_scale1;
-                                                            ?>,
-                                                            //stepSize: 1
-                                                        }
-                                                        
+                                                        tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                     },
-                                                    {
-                                                        scaleLabel: {
-                                                            display: true,
-                                                            labelString: '<?php echo _("scale") . ' 2'; ?>',
-                                                            fontSize: 20,
-                                                            fontColor: '#000000'
+                                                }, ],
+                                                yAxes: [{
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        labelString: '<?php echo _("temperature") ?>',
+                                                        fontSize: 20,
+                                                        fontColor: '#000000'
+                                                    },
+                                                    id: 'temperature',
+                                                    type: 'linear',
+                                                    position: 'left',
+                                                    ticks: {
+                                                        callback: function(value, index, values) {
+                                                            return value + ' °C';
                                                         },
-                                                        id: 'scale2',
-                                                        type: 'linear',
-                                                        position: 'right',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                return value + ' gr';
-                                                            },
-                                                            fontColor: '#000000',
-                                                            fontSize: 20,
-                                                            //max: 25000,
-                                                            beginAtZero: true,
-                                                            maxTicksLimit: 10,
-                                                            max: <?php 
-                                                            $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
-                                                            
-                                                            print $max_value_scale2;
-                                                            ?>,
-                                                            min: <?php 
-                                                            $min_value_scale2 = intval(min($scale2_dataset) - (max($scale2_dataset) / 100 * 5))-1;
-                                                            
-                                                            print $min_value_scale2;
-                                                            ?>,
-                                                            //stepSize: 1
-                                                        }
+                                                        fontColor: '#000000',
+                                                        fontSize: 20,
+                                                        max: 30,
+                                                        min: -4
+                                                    }
+                                                    
+                                                }, {
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        labelString: '<?php echo _("humidity") ?>',
+                                                        fontSize: 20,
+                                                        fontColor: '#000000'
+                                                    },
+                                                    id: 'humidity',
+                                                    type: 'linear',
+                                                    display: true,
+                                                    position: 'right',
+                                                    labelString: '<?php echo _("humidity") ?>',
+                                                    ticks: {
+                                                        callback: function(value, index, values) {
+                                                            return 'φ ' + value + ' %';
+                                                        },
+                                                        fontColor: '#000000',
+                                                        fontSize: 20,
+                                                        // max: <?php 
+                                                        // $max_value_humidiy = intval(max($humidity_dataset) + (max($humidity_dataset) / 100 * 1))+1;
                                                         
-                                                    }]
-                                                }
+                                                        // print $max_value_humidiy;
+                                                        // ?>,
+                                                        // min: <?php 
+                                                        // $min_value_humidiy = intval(min($humidity_dataset) - (max($humidity_dataset) / 100 * 1))-1;
+                                                        
+                                                        // print $min_value_humidiy;
+                                                        // ?>
+                                                        max: 100,
+                                                        min: 0
+                                                    }
+                                                }]
                                             }
-                                        };
+                                        }
+                                    };
+                                    
+                                    // Waagen
+                                    var scales_chart = document.getElementById("scales_chart");
+                                    var config_scales_chart = {
+                                        type: 'line',
+                                        data: {
+                                            labels: 
+                                                <?php echo $scale1_timestamps_axis_text; ?>,
+                                            datasets: [{
+                                                label: '<?php echo _("scale") ?> 1',
+                                                yAxisID: 'scale1',
+                                                data: <?php echo json_encode($scale1_dataset);?>,
+                                                backgroundColor: '#AEC645',
+                                                borderColor: '#AEC645',
+                                                borderWidth: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                pointHitRadius: 5,';} ?>
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
+                                            },
+                                            {
+                                                label: '<?php echo _("scale") ?> 2',
+                                                yAxisID: 'scale2',
+                                                data: <?php echo json_encode($scale2_dataset); ?>,
+                                                backgroundColor: '#BF9543',
+                                                borderColor: '#BF9543',
+                                                borderWidth: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                pointHitRadius: 5,';} ?>
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
+                                            }]
+                                        },
+                                        options: {
+                                            title: {
+                                                display: true,
+                                                text: '<?php echo _("scale") ?> 1 & 2',
+                                                fontSize: 24
+                                            },
+                                            tooltips: {
+                                                mode: 'index',
+                                                intersect: false,
+                                                callbacks: {
+                                                    label: function(tooltipItem, data) {
+                                                        return Number(tooltipItem.yLabel).toFixed(1);
+                                                    }
+                                                }
+                                            },
+                                            scales: {
+                                                xAxes: [{
+                                                    type: "time",
+                                                    time: {
+                                                        displayFormats: {
+                                                            second: 'HH:mm:ss',
+                                                            minute: 'HH:mm',
+                                                            hour: 'MMM D, H[h]'
+                                                        },
+                                                        tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                                    },
+                                                }, ],
+                                                yAxes: [{
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        labelString: '<?php echo _("scale") . ' 1'; ?>',
+                                                        fontSize: 20,
+                                                        fontColor: '#000000'
+                                                    },
+                                                    id: 'scale1',
+                                                    type: 'linear',
+                                                    position: 'left',
+                                                    ticks: {
+                                                        callback: function(value, index, values) {
+                                                            return value + ' gr';
+                                                        },
+                                                        fontColor: '#000000',
+                                                        fontSize: 20,
+                                                        //max: 25000,
+                                                        beginAtZero: true,
+                                                        maxTicksLimit: 10,
+                                                        max: <?php 
+                                                        $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
+                                                        
+                                                        print $max_value_scale1;
+                                                        ?>,
+                                                        min: <?php 
+                                                        $min_value_scale1 = intval(min($scale1_dataset) - (max($scale1_dataset) / 100 * 5))-1;
+                                                        
+                                                        print $min_value_scale1;
+                                                        ?>,
+                                                        //stepSize: 1
+                                                    }
+                                                    
+                                                },
+                                                {
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        labelString: '<?php echo _("scale") . ' 2'; ?>',
+                                                        fontSize: 20,
+                                                        fontColor: '#000000'
+                                                    },
+                                                    id: 'scale2',
+                                                    type: 'linear',
+                                                    position: 'right',
+                                                    ticks: {
+                                                        callback: function(value, index, values) {
+                                                            return value + ' gr';
+                                                        },
+                                                        fontColor: '#000000',
+                                                        fontSize: 20,
+                                                        //max: 25000,
+                                                        beginAtZero: true,
+                                                        maxTicksLimit: 10,
+                                                        max: <?php 
+                                                        $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
+                                                        
+                                                        print $max_value_scale2;
+                                                        ?>,
+                                                        min: <?php 
+                                                        $min_value_scale2 = intval(min($scale2_dataset) - (max($scale2_dataset) / 100 * 5))-1;
+                                                        
+                                                        print $min_value_scale2;
+                                                        ?>,
+                                                        //stepSize: 1
+                                                    }
+                                                    
+                                                }]
+                                            }
+                                        }
+                                    };
                                     
                                     window.onload = function() {
                                         window.temperature_humidity_chart = new Chart(temperature_humidity_chart, config_temperature_humidity_chart);
@@ -530,7 +532,15 @@
                                         </tr>
                                         <tr>
                                             <td><img <?php if ($uv_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/uv-light_42x42.png" alt=""></td>
-                                            <td><img src="<?php echo $uv_on_off_png; ?>" title="PIN_FAN1 23[16] -> IN 5 (GPIO 4)"></td>
+                                            <td><?php
+                                                if($status_uv_manual == 0) {
+                                                    echo '<img src="/images/icons/status_off_manual_20x20.png" title="uv off">';
+                                                }
+                                                else{
+                                                    echo '<img src="'.$uv_on_off_png.'">';
+                                                }
+                                            ?>
+                                            </td>
                                             <td class="text_left">
                                             <?php 
                                                 echo strtoupper(_('uv-light'));
@@ -544,7 +554,16 @@
                                         </tr>
                                         <tr>
                                             <td><img <?php if ($light_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/light_42x42.png" alt=""></td>
-                                            <td><img src="<?php echo $light_on_off_png; ?>" title="PIN_Light 23[16] -> IN 7 (GPIO 4)"></td>
+                                            <td>
+                                                <?php
+                                                if($status_light_manual == 1) {
+                                                    echo '<img src="/images/icons/status_on_manual_20x20.png" title="light on">';
+                                                }
+                                                else{
+                                                    echo '<img src="'.$uv_on_off_png.'">';
+                                                }
+                                                ?>
+                                            </td>
                                             <td class="text_left">
                                             <?php 
                                                 echo strtoupper(_('light'));

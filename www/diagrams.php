@@ -110,6 +110,11 @@
                                                 tooltips: {
                                                     mode: 'index',
                                                     intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1);
+                                                        }
+                                                    }
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -222,6 +227,11 @@
                                                 tooltips: {
                                                     mode: 'index',
                                                     intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1);
+                                                        }
+                                                    }
                                                 },
                                                 scales: {
                                                     xAxes: [{

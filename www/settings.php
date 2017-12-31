@@ -129,24 +129,29 @@
                                                 <?php 
                                                     print '<form  method="post">';
                                                     $agingtable_names = get_agingtable_names();
-                                                    foreach($agingtable_names as $name) {
-                                                        if ($name==$desired_maturity){
-                                                            echo '<input type="radio" name="agingtable" value="'.$name.'" checked="checked"><label> '.$name.'</label><br>';
-                                                        }
-                                                        else
-                                                        {
-                                                            echo '<input type="radio" name="agingtable" value="'.$name.'"><label> '.$name.'</label><br>';
+                                                    if (isset ($agingtable_names)){
+                                                        foreach($agingtable_names as $name) {
+                                                            if ($name==$desired_maturity){
+                                                                echo '<input type="radio" name="agingtable" value="'.$name.'" checked="checked"><label> '.$name.'</label><br>';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<input type="radio" name="agingtable" value="'.$name.'"><label> '.$name.'</label><br>';
 
+                                                            }
+                                                        }
+                                                        echo '</td><td>';
+                                                        if ($grepagingtable == NULL){
+                                                            echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-right: 20px;">';
+                                                            echo '<img src="images/icons/agingtable_42x42.png" alt="" style="padding-left: 10px;">';
+                                                        }
+                                                        else {
+                                                            echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding-right: 20px;">';
+                                                            echo '<img src="images/icons/agingtable_42x42.gif" alt="" style="padding-left: 10px;">';
                                                         }
                                                     }
-                                                    echo '</td><td>';
-                                                    if ($grepagingtable == NULL){
-                                                        echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-right: 20px;">';
-                                                        echo '<img src="images/icons/agingtable_42x42.png" alt="" style="padding-left: 10px;">';
-                                                    }
-                                                    else {
-                                                        echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding-right: 20px;">';
-                                                        echo '<img src="images/icons/agingtable_42x42.gif" alt="" style="padding-left: 10px;">';
+                                                    else{
+                                                        echo '</td><td>';
                                                     }
                                                     echo '</td>';
                                                 ?>
@@ -154,16 +159,20 @@
                                         <tr>
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php
-                                                    echo "<button class=\"art-button\" name=\"select_agingtable\" value=\"select_agingtable\"onclick=\"return confirm('"._('select new agingtable?')."');\">"._('select')."</button>";
+                                                    if (isset ($agingtable_names)){
+                                                        echo "<button class=\"art-button\" name=\"select_agingtable\" value=\"select_agingtable\"onclick=\"return confirm('"._('select new agingtable?')."');\">"._('select')."</button>";
+                                                    }
                                                 ?>
                                             </td>
 
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    if ($grepagingtable == NULL){
-                                                        echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" value=\"ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')." \\n "._('manual values will be overwritten in database!')."');\">"._('start agingtable')."</button>";
-                                                    }
-                                                    else {
-                                                        echo "<button class=\"art-button\" name=\"agingtable_stop\" value=\"agingtable_stop\" onclick=\"return confirm('"._('stop agingtable?').' \\n '._('pi-ager continues with the last values of the agingtable!')."');\">"._('stop agingtable')."</button>";
+                                                    if (isset ($agingtable_names)){
+                                                        if ($grepagingtable == NULL){
+                                                            echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" value=\"ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')." \\n "._('manual values will be overwritten in database!')."');\">"._('start agingtable')."</button>";
+                                                        }
+                                                        else {
+                                                            echo "<button class=\"art-button\" name=\"agingtable_stop\" value=\"agingtable_stop\" onclick=\"return confirm('"._('stop agingtable?').' \\n '._('pi-ager continues with the last values of the agingtable!')."');\">"._('stop agingtable')."</button>";
+                                                        }
                                                     }
                                                     echo '</form>';
                                                 ?>
@@ -179,17 +188,19 @@
                                             <td style=" text-align: left; padding-left: 20px;"><br>
                                                 <?php 
                                                     print '<form  id="agingtable_edit" method="post">';
-                                                    echo '<select name="agingtable_edit">';
-                                                    foreach($agingtable_names as $name) {
-                                                        if ($name!=$desired_maturity){
-                                                            echo '<option value="'.$name.'">'.$name.'<br>';
+                                                    if (isset ($agingtable_names)){
+                                                        echo '<select name="agingtable_edit">';
+                                                        foreach($agingtable_names as $name) {
+                                                            if ($name!=$desired_maturity){
+                                                                echo '<option value="'.$name.'">'.$name.'<br>';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<option value="'.$name.'" selected>'.$name.'<br>';
+                                                            }
                                                         }
-                                                        else
-                                                        {
-                                                            echo '<option value="'.$name.'" selected>'.$name.'<br>';
-                                                        }
+                                                        echo '</select>';
                                                     }
-                                                    echo '</select>';
                                                     print '</form>';
                                                     
                                                 ?>
@@ -206,7 +217,9 @@
                                         <tr>
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    echo "<button class=\"art-button\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\" onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
+                                                    if (isset ($agingtable_names)){
+                                                        echo "<button class=\"art-button\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\" onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
+                                                    }
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;">
                                            <script>
@@ -221,10 +234,14 @@
                                         <tr>
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
+                                                    if (isset ($agingtable_names)){
+                                                        echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
+                                                    }
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
+                                                    if (isset ($agingtable_names)){
+                                                        echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
+                                                    }
                                                 ?></td></td>
                                         </tr>
                                     </table>
@@ -243,61 +260,66 @@
                                             // Gewählte Agingtable aus DB auslesen und als Tabelle beschreiben
                                             $index_row = 0;
                                             $agingtable_rows = get_agingtable_dataset($desired_maturity);
-                                            $firstrow = $agingtable_rows[0];
-                                            $agingtable_comment = $firstrow[$agingtable_comment_field];
-                                            
-                                            $current_period = get_table_value($current_values_table, $agingtable_period_key);
-                                            $current_period_0 = $current_period - 1;
-                                            try {
-                                                $number_rows = count($agingtable_rows);
-                                                while ($index_row < $number_rows) {
-                                                    $dataset = $agingtable_rows[$index_row];
-                                                    // $num = count($dataset);
-                                                    if (!empty($dataset[$agingtable_modus_field])){
-                                                        $data_modus = $dataset[$agingtable_modus_field];
-                                                    } else {$data_modus = '..';}
-                                                    if (!empty($dataset[$agingtable_setpoint_humidity_field])){
-                                                        $data_setpoint_humidity = $dataset[$agingtable_setpoint_humidity_field];
-                                                    } else {$data_setpoint_humidity = '..';}
-                                                    if (!empty($dataset[$agingtable_setpoint_temperature_field])){
-                                                        $data_setpoint_temperature = $dataset[$agingtable_setpoint_temperature_field];
-                                                    } else {$data_setpoint_temperature = '..';}
-                                                    if (!empty($dataset[$agingtable_circulation_air_duration_field])){
-                                                        $data_circulation_air_duration = $dataset[$agingtable_circulation_air_duration_field]/60;
-                                                    } else {$data_circulation_air_duration = '..';}
-                                                    if (!empty($dataset[$agingtable_circulation_air_period_field])){
-                                                        $data_circulation_air_period = $dataset[$agingtable_circulation_air_period_field]/60;
-                                                    } else {$data_circulation_air_period = '..';}
-                                                    if (!empty($dataset[$agingtable_exhaust_air_duration_field])){
-                                                        $data_exhaust_air_duration = $dataset[$agingtable_exhaust_air_duration_field]/60;
-                                                    } else {$data_exhaust_air_duration = '..';}
-                                                    if (!empty($dataset[$agingtable_exhaust_air_period_field])){
-                                                        $data_exhaust_air_period = $dataset[$agingtable_exhaust_air_period_field]/60;
-                                                    } else {$data_exhaust_air_period = '..';}
-                                                    if (!empty($dataset[$agingtable_days_field])){
-                                                        $data_days = $dataset[$agingtable_days_field];
-                                                    } else {$data_days = '..';}
-
-                                                    if ($current_period_0 == $index_row){
-                                                        echo '<tr bgcolor=#D19600 >';
-                                                    }
-                                                    else{
-                                                        echo '<tr>';
-                                                    }
-                                                        echo '<td>'. $data_modus .'</td>';
-                                                        echo '<td>'. $data_setpoint_humidity .'</td>';
-                                                        echo '<td>'. $data_setpoint_temperature .'</td>';
-                                                        echo '<td>'. $data_circulation_air_duration .'</td>';
-                                                        echo '<td>'. $data_circulation_air_period .'</td>';
-                                                        echo '<td>'. $data_exhaust_air_duration .'</td>';
-                                                        echo '<td>'. $data_exhaust_air_period .'</td>';
-                                                        echo '<td>'. $data_days .'</td>';
-                                                    echo '</tr>';
-                                                    $index_row++;
-                                                } 
-                                             }
-                                             catch (Exception $e) {
+                                            if ($agingtable_rows != false){
+                                                $firstrow = $agingtable_rows[0];
+                                                $agingtable_comment = $firstrow[$agingtable_comment_field];
+                                                if (!isset($agingtable_comment)){
+                                                    $agingtable_comment = _('no comment');
                                                 }
+                                                
+                                                $current_period = get_table_value($current_values_table, $agingtable_period_key);
+                                                $current_period_0 = $current_period - 1;
+                                                try {
+                                                    $number_rows = count($agingtable_rows);
+                                                    while ($index_row < $number_rows) {
+                                                        $dataset = $agingtable_rows[$index_row];
+                                                        // $num = count($dataset);
+                                                        if (!empty($dataset[$agingtable_modus_field])){
+                                                            $data_modus = $dataset[$agingtable_modus_field];
+                                                        } else {$data_modus = '..';}
+                                                        if (!empty($dataset[$agingtable_setpoint_humidity_field])){
+                                                            $data_setpoint_humidity = $dataset[$agingtable_setpoint_humidity_field];
+                                                        } else {$data_setpoint_humidity = '..';}
+                                                        if (!empty($dataset[$agingtable_setpoint_temperature_field])){
+                                                            $data_setpoint_temperature = $dataset[$agingtable_setpoint_temperature_field];
+                                                        } else {$data_setpoint_temperature = '..';}
+                                                        if (!empty($dataset[$agingtable_circulation_air_duration_field])){
+                                                            $data_circulation_air_duration = $dataset[$agingtable_circulation_air_duration_field]/60;
+                                                        } else {$data_circulation_air_duration = '..';}
+                                                        if (!empty($dataset[$agingtable_circulation_air_period_field])){
+                                                            $data_circulation_air_period = $dataset[$agingtable_circulation_air_period_field]/60;
+                                                        } else {$data_circulation_air_period = '..';}
+                                                        if (!empty($dataset[$agingtable_exhaust_air_duration_field])){
+                                                            $data_exhaust_air_duration = $dataset[$agingtable_exhaust_air_duration_field]/60;
+                                                        } else {$data_exhaust_air_duration = '..';}
+                                                        if (!empty($dataset[$agingtable_exhaust_air_period_field])){
+                                                            $data_exhaust_air_period = $dataset[$agingtable_exhaust_air_period_field]/60;
+                                                        } else {$data_exhaust_air_period = '..';}
+                                                        if (!empty($dataset[$agingtable_days_field])){
+                                                            $data_days = $dataset[$agingtable_days_field];
+                                                        } else {$data_days = '..';}
+
+                                                        if ($current_period_0 == $index_row){
+                                                            echo '<tr bgcolor=#D19600 >';
+                                                        }
+                                                        else{
+                                                            echo '<tr>';
+                                                        }
+                                                            echo '<td>'. $data_modus .'</td>';
+                                                            echo '<td>'. $data_setpoint_humidity .'</td>';
+                                                            echo '<td>'. $data_setpoint_temperature .'</td>';
+                                                            echo '<td>'. $data_circulation_air_duration .'</td>';
+                                                            echo '<td>'. $data_circulation_air_period .'</td>';
+                                                            echo '<td>'. $data_exhaust_air_duration .'</td>';
+                                                            echo '<td>'. $data_exhaust_air_period .'</td>';
+                                                            echo '<td>'. $data_days .'</td>';
+                                                        echo '</tr>';
+                                                        $index_row++;
+                                                    } 
+                                                 }
+                                                 catch (Exception $e) {
+                                                    }
+                                            }
                                         ?>
                                     </table>
                                     <table style="width: 100%" class="switching_state miniature_writing">
