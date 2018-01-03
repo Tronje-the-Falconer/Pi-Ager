@@ -10,4 +10,8 @@ Describe the actual behavior
 
 Describe steps to repoduce the Proplem
 
+### Possible Solution
+
+If you have an idea to solve it, please describe.
+
 ### Specifications like the version of the project, operating system, or hardware
