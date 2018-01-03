@@ -1,4 +1,4 @@
-# Project name: Pi-Ager
+# Pi-Ager
 With a fridge, accessories and the Pi-Ager software you can build a maturity cabinet for meat yourself. The software takes over the control for exhaust air, circulating air, humidification, dehumidification, UV light, light etc.
 
 The project is a purely private project, by meat lovers for meat lovers.
