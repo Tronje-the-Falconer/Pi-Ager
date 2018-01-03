@@ -3,13 +3,13 @@
 When contributing to this repository, please first discuss the change you wish to make via issue,
 email, or any other method with the owners of this repository before making a change.
 
-Please note we have a [code of conduct](https://github.com/Tronje-the-Falconer/Pi-Ager/CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
+Please note we have a [code of conduct](https://github.com/Tronje-the-Falconer/Pi-Ager/.github/CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
 
 #### **Did you find a bug?**
 
 * **Ensure the bug was not already reported** by searching on GitHub under [Issues](https://github.com/Tronje-the-Falconer/Pi-Ager/issues).
 
-* If you're unable to find an open issue addressing the problem, [open a new one](https://github.com/Tronje-the-Falconer/Pi-Ager/issues/new). Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample** or an **executable test case** demonstrating the expected behavior that is not occurring.
+* If you're unable to find an open issue addressing the problem, [new issue (Bug)](https://github.com/Tronje-the-Falconer/Pi-Ager/issues/new?labels=Bug). Be sure to include a **title and clear description**, as much relevant information as possible, and a **code sample** or an **executable test case** demonstrating the expected behavior that is not occurring.
 
 #### **Did you write a patch that fixes a bug?**
 
@@ -19,11 +19,11 @@ Please note we have a [code of conduct](https://github.com/Tronje-the-Falconer/P
 
 #### **Do you intend to add a new feature or change an existing one?**
 
-* Suggest your change as issue with flag discussion [new issue](https://github.com/Tronje-the-Falconer/Pi-Ager/issues/new).
+* Suggest your change as issue with flag discussion [new issue (Discussion)](https://github.com/Tronje-the-Falconer/Pi-Ager/issues/new?labels=Discussion).
 
 #### **Do you have questions about the source code?**
 
-* Ask any question about how to use Pi-Ager. Use a new issue with flag question [new issue](https://github.com/Tronje-the-Falconer/Pi-Ager/issues/new).
+* Ask any question about how to use Pi-Ager. Use a new issue with flag question [new issue (Question)](https://github.com/Tronje-the-Falconer/Pi-Ager/issues/new?labels=Question).
 
 #### **Do you want to contribute to the Rails documentation?**
 
