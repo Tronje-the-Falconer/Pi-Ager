@@ -14,13 +14,13 @@ See in [wiki](https://github.com/Tronje-the-Falconer/pi-ager/wiki) Point "Inbetr
 See in [softwarepakages in wiki](https://github.com/Tronje-the-Falconer/pi-ager/wiki/eigenst%C3%A4ndige-Installation#softwarepakete) Point "Softwarepakete"
 
 ## Installation:
-See in [softwarepakages in wiki](https://github.com/Tronje-the-Falconer/pi-ager/wiki/eigenst%C3%A4ndige-Installation#programm-reifeschranksteuerung) Point "Programm reifeschranksteuerung"
+See in [Programm Reifesteuerung in wiki](https://github.com/Tronje-the-Falconer/pi-ager/wiki/eigenst%C3%A4ndige-Installation#programm-reifeschranksteuerung) Point "Programm reifeschranksteuerung"
 
 ## Usage:
-https://github.com/Tronje-the-Falconer/pi-ager/wiki/eigenst%C3%A4ndige-Installation#programm-reifeschranksteuerung
+See in [wiki](https://github.com/Tronje-the-Falconer/pi-ager/wiki/eigenst%C3%A4ndige-Installation#programm-reifeschranksteuerung)
 
 ## Contributing:
-Please read [CONTRIBUTING.md](https://github.com/Tronje-the-Falconer/Pi-Ager/.github/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/Tronje-the-Falconer/Pi-Ager/tags). 
@@ -46,8 +46,8 @@ See also the list of [contributors](https://github.com/Tronje-the-Falconer/Pi-Ag
 
 This project is licensed under the GPL v3.0 License - see the [LICENSE.md](LICENSE.md) file for details
 
-**!!Special note!: It is not allowed to use the software, e.g. in ready-made refrigerators, for sale and commercial use.**
+**!!Special note!!: It is not allowed to use the software, e.g. in ready-made refrigerators, for sale and commercial use.**
 
 ## Acknowledgments
 
-* The foundation stone of the project comes from the forum of the Grillsportverein (https://www.grillsportverein.de/forum/threads/reifeschranksteuerung-per-raspberry-pi-tutorial.231649/) and from the pen of Tommy_J. (Thank you very much for the idea, the work you've done and the permission to post and develop it on GitHub.)
+* The foundation stone of the project comes from the [forum of the Grillsportverein](https://www.grillsportverein.de/forum/threads/reifeschranksteuerung-per-raspberry-pi-tutorial.231649/) and from the pen of Tommy_J. (Thank you very much for the idea, the work you've done and the permission to post and develop it on GitHub.)
