@@ -1,15 +1,4 @@
-﻿keine reifetabellen -> PHP darf keine selection etc darstellen. nur Uploadbutton
-
-button disablen, wenn tara läuft
-
-
-hama -> standardwerte und wertebereiche scales
-
-Scales berechnung prüfen
-
-
-
-#### = Erledigt
+﻿#### = Erledigt
 ---- = verschoben auf nächstes Release
 .... = Begonnen
 //// = verworfen
@@ -89,7 +78,7 @@ Prioritätenliste
 ####26 Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
     27 Input felder auf Stellen überprüfen, min und max innerhalb des input-tags (fehlend Wägezellen)
 ####28 Button für UV-Licht aus
-    29 icon on /off manually M
+####29 icon on /off manually M
 
 
 ####29 downloadbutton für logfiles als zip
