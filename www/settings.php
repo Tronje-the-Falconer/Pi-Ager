@@ -110,7 +110,7 @@
                                                     print '</tr>';
                                                     print '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
                                                     print '<tr><td></td><td style="text-align: right;"><form action="scale_wizzard.php" method="post"> <input type="radio" name="scale_wizzard_radiobutton" value="' . $scale1_key . '" checked="checked"><label> '._('scale').' 1</label><br><input type="radio" name="scale_wizzard_radiobutton" value="' . $scale2_key . '"><label> '._('scale').' 2</label> </td><td style="text-align: left;">';
-                                                    echo "<button class=\"art-button\" name=\"scale_wizzard\" value=\"scale_wizzard\"  onclick=\"return confirm('"._('attention').' ! \\n '._('measurement on scale is stopped'). ' \\n ' . _('please relieve the load cell completely') . "!');\">"._('scale wizzard')."</button>";
+                                                    echo "<button class=\"art-button\" name=\"scale_wizzard\" value=\"scale_wizzard\"  onclick=\"return confirm('"._('attention').' ! \\n '._('measurement on scales are stopped'). ' \\n ' . _('please relieve the load cell completely') . "!');\">"._('scale wizzard')."</button>";
                                                     print '</form></td></tr>';
                                             } 
                                         ?>

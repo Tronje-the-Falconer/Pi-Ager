@@ -6,7 +6,8 @@
     if(isset ($_POST['scale_wizzard2'])) {
         $scale_number = $_POST['scale_number'];
         $known_weight = $_POST['scale_wizzard_weight'];
-        $current_scale_status = $_POST['current_scale_status'];
+        $current_scale1_status = $_POST['current_scale1_status'];
+        $current_scale2_status = $_POST['current_scale2_status'];
         $logstring = _('scale_wizzard'). ' ' . _('attached weight'). ': ' . $known_weight;
         logger('INFO', $logstring);
         
@@ -38,7 +39,8 @@
         if ($scale_calibrate_status == 4){
             write_startstop_status_in_database($calibrate_weight_key, 0);
             write_startstop_status_in_database($scale_calibrate_key, 0);
-            write_startstop_status_in_database($current_scale_status);
+            write_startstop_status_in_database($status_scale1_key, $current_scale1_status);
+            write_startstop_status_in_database($status_scale2_key, $current_scale2_status);
             $logstring = _('calibration done');
             logger('INFO', $logstring);
             print '<script language="javascript"> alert("'. (_("scale wizzard")) . " : " . (_("calibration done")) .'"); window.location.href = "../settings.php";</script>';
@@ -46,7 +48,8 @@
         elseif ($scale_calibrate_status == 5){
             write_startstop_status_in_database($calibrate_weight_key, 0);
             write_startstop_status_in_database($scale_calibrate_key, 0);
-            write_startstop_status_in_database($current_scale_status);
+            write_startstop_status_in_database($status_scale1_key, $current_scale1_status);
+            write_startstop_status_in_database($status_scale2_key, $current_scale2_status);
             $logstring = _('calibration failed') . '! ' . _('calculated reference unit is 0') . ' ' . _('referenceunit is set to old value') . '!' . _('please try again');
             logger('WARNING', $logstring);
             print '<script language="javascript"> alert("'. (_("scale wizzard")) . " : " . (_("calibration failed")) . "! \\n " . (_("calculated reference unit is 0")) . ". \\n " . (_("referenceunit is set to old value")) . "! \\n " . (_("please try again")) . '"); window.location.href = "../settings.php";</script>';
