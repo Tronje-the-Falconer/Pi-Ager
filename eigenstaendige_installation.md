@@ -1,4 +1,6 @@
-#Inhalt
+# eigenständige Installation
+
+# Inhalt
 
 * [Betriebssystem RASPBIAN JESSIE LITE](#betriebssystem-raspian-jessie-lite)
 * [WiFi-Verbindung](#wifi-verbindung)
