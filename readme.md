@@ -8,11 +8,11 @@ Willkommen zum Pi-Ager!
 1. [Hardware](Hardware.md)
     1. [Bau und Anschluss des Feuchtigkeits- und Temperatursensors](Bau_und_Anschluss_des_Feuchtigkeits_und_Temperatursensors.md)
     1. [Anschluss des Relayboards](Anschluss_des_Relaisboards.md)
-    1. [Kühlschrankumbau](Kühlschrankumbau.md)
+    1. [Kühlschrankumbau](Kuehlschrankumbau.md)
     1. Anschluss der Komponenten
 1. Inbetriebnahme der Steuerung
     1. Installation des Betriebssystems und des Programms
         1. [Image (Beginner)](Image.md)
-        2. [eigenständige Installation (Erfahren)](eigenständige_Installation.md)
+        2. [eigenständige Installation (Erfahren)](eigenstaendige_Installation.md)
 1. [Bedienung](Bedienung.md)
 1. [Error Reporting](Error_reporting.md)
