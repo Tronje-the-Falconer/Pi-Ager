@@ -15,4 +15,4 @@ Willkommen zum Pi-Ager!
         1. [Image (Beginner)](Image.md)
         2. [eigenständige Installation (Erfahren)](eigenstaendige_Installation.md)
 1. [Bedienung](Bedienung.md)
-1. [Fehler und Anregungen melden | Fragen stellen](https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/Error-reporting)
+1. [Fehler und Anregungen melden , Fragen stellen](https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/Error-reporting)
