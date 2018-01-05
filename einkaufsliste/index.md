@@ -164,7 +164,6 @@ Sollte man ein 12V oder ein 24V Schütz für die Steuerung des Klimakompressor n
 * Display [2.8" Nextion TFT HMI Display ENHANCED](http://www.komputer.de/zen/index.php?main_page=product_info&cPath=30&products_id=384) 
 
 #### Diverses
-
 * Stromkabel
 * [Steckdosen](https://www.voelkner.de/products/8066/Schutzsteckdose-IP44-Feuchtraum-LED-2-fach-16-A-230-V.html#tech-data) (Voelkner)
 * [Kabelabzweigkasten für Raspberry Pi und Relaisboard](https://www.amazon.de/gp/product/B001JMOOXW/ref=oh_aui_detailpage_o04_s00?ie=UTF8&psc=1)
@@ -174,7 +173,6 @@ Sollte man ein 12V oder ein 24V Schütz für die Steuerung des Klimakompressor n
 * [Lochsäge 100mm](https://www.voelkner.de/products/432935/Wolfcraft-Lochsaege-100-mm-5493000-1-St..html) (Voelkner)
 
 #### Alternative Bezugsquellen
-
 * [2 Micro USB-Kabel](https://www.voelkner.de/products/545808/USB-2.0-Anschlusskabel-1x-USB-2.0-Stecker-A-1x-USB-2.0-Stecker-Micro-B-1-m-Schwarz-UL-zertifizi.html) (Voelkner)
 * [Adapter von USB micro B auf USB A Buchse](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1) (sofern Pi Zero oder Pi Zero W gewählt wurde) (Amazon)
   * [USB WLAN-Stick](https://www.voelkner.de/products/213356/EDIMAX-WLAN-Stick-N150-Nano-Ew-7811un.html?frm=ffs__EDIMAX%20EW-7811UN) (Voelkner)
