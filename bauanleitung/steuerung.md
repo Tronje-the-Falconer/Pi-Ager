@@ -1,3 +1,7 @@
+---
+layout: bauanleitung
+title: "steuerung"
+---
 # Inhalt
 
 1. [Stromversorgung](#stromversorgung)

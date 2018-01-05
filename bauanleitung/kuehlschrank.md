@@ -1,1 +1,4 @@
-
+---
+layout: bauanleitung
+title: "Kühlschrank"
+---
