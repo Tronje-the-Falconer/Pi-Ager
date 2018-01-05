@@ -1,5 +1,5 @@
 ---
-layout: einkaufsliste
+layout: default
 title: Einkaufsliste
 ---
 
