@@ -8,16 +8,14 @@ Es handelt sich hier nur um Vorschläge und können durch eigene ähnliche Posit
 
 Wenn jemand Fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möchte, bitte im Forum [GSV Pi-Ager](https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/) melden. 
 
-# Steuerung
+## Steuerung
 
 ### Raspberry Pi
 
 * [Pi zero W](http://www.whereismypizero.com/) Dieses ist die empfohlene Variante da die Platine dafür ausgelegt ist und man meistens auch das integrierte Wlan Modul nutzen kann.
-
 * Alternative 1:
   * [Pi zero](http://www.whereismypizero.com/) Kann auch genutzt werden, dann braucht man aber ein entsprechendes [Wlan  Modul](https://www.reichelt.de/WLAN-Adapter/EDIMAX-EW-7811UN/3/index.html?&ARTICLE=99944) mit [Adapterkabel](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1) (siehe auch unten)
-  * weitere Alternativen:  
-
+* weitere Alternativen:  
 'Sollte man eines der folgenden Raspberry Pi Modelle einsetzen, so muss man ein entsprechende [Jumperkabel](https://www.reichelt.de/Weiteres-Zubehoer/DEBO-KABELSET2/3/index.html?ACTION=3&GROUPID=6671&ARTICLE=176618&OFFSET=16&SID=92WGXOUawQATIAAEvA6EI49c1a6b34c1caf234fea075f5de4093c&LANGUAGE=EN) nutzen je nach dem auch ein [Wlan  Modul](https://www.reichelt.de/WLAN-Adapter/EDIMAX-EW-7811UN/3/index.html?&ARTICLE=99944) mit [Adapterkabel](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1)
 
   * [Raspberry Pi 2 ](https://www.voelkner.de/products/776427/Raspberry-Pi-2-Model-B-1-GB-ohne-Betriebssystem.html?frm=ffs__Raspberry)
