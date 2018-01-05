@@ -1,3 +1,4 @@
 theme: jekyll-theme-tactile
 name: Pi-Ager
 markdown: kramdown
+permalink: /blog/:year/:month/:day/:title
