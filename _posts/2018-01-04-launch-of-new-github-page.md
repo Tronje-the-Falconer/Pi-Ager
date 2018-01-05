@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Pi-Ager"
+title: "launch of Pi-Ager Github Pages"
 date: 2018-01-04
 ---
 
