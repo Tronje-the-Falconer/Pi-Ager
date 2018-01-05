@@ -171,7 +171,6 @@ Sollte man ein 12V oder ein 24V Schütz für die Steuerung des Klimakompressor n
 * geschirmtes CAT-Kabel
 
 #### Spezialwerkzeug
-
 * [Lochsäge 100mm](https://www.voelkner.de/products/432935/Wolfcraft-Lochsaege-100-mm-5493000-1-St..html) (Voelkner)
 
 #### Alternative Bezugsquellen
