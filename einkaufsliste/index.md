@@ -36,39 +36,34 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
 
 * Bauteile Pi-Ager Platine [Reichelt Einkaufsliste](https://www.reichelt.de/my/1395533) (Reichelt EKL) 
 => hier sind alle Bauteile für die Platine die bei Reichelt erhältlich sind zusammengefasst.
- * Allgemeine Komponennten für die Pi-Ager Platine
-   * 2 x Buchsenleisten 2,54 mm, 1X03, gerade - [MPE 094-1-003](https://www.reichelt.de/Buchsenleisten/MPE-094-1-003/3/index.html?ACTION=3&LA=5&ARTICLE=119912&GROUPID=7435&artnr=MPE+094-1-003) (Reichelt EKL)
-   * 2 x Buchsenleisten 2,54 mm, 1X04, gerade - [MPE 094-1-004](https://www.reichelt.de/Buchsenleisten/MPE-094-1-004/3/index.html?ACTION=3&LA=5&ARTICLE=119913&GROUPID=7435&artnr=MPE+094-1-004) (Reichelt EKL)
-   * 2 x Buchsenleisten 2,54 mm, 1X06, gerade - [MPE 094-1-006](https://www.reichelt.de/Buchsenleisten/MPE-094-1-006/3/index.html?ACTION=3&LA=5&ARTICLE=119915&GROUPID=7435&artnr=MPE+094-1-006) (Reichelt EKL)    
-   * 1 x JUMPER RM2,54 schwarz - [JUMPER 2,54 SW ](https://www.reichelt.de/Stiftleisten/JUMPER-2-54-SW/3/index.html?ACTION=3&LA=5&ARTICLE=9017&GROUPID=7434&artnr=JUMPER+2%2C54+SW) (Reichelt EKL)
-   * 2 x Stiftleisten 2,54 mm, 1X36, gerade- [MPE 087-1-036](https://www.reichelt.de/Stiftleisten/MPE-087-1-036/3/index.html?ACTION=3&LA=5&ARTICLE=119890&GROUPID=7434&artnr=MPE+087-1-036) (Reichelt EKL)
-   * 1 x Stiftleisten 2,54 mm, 2X20, gerade- [MPE 087-2-040](https://www.reichelt.de/Stiftleisten/MPE-087-2-040/3/index.html?ACTION=3&LA=5&ARTICLE=119900&GROUPID=7434&artnr=MPE+087-2-040) (Reichelt EKL)
-   * 2 x Buchsenl. 1x20 gerade für Raspberry Zero [BL 1X20G8 2,54](https://www.reichelt.de/Buchsenleisten/BL-1X20G8-2-54/3/index.html?ACTION=3&LA=20&GROUP=C142&GROUPID=7435&ARTICLE=51827&START=0&SORT=artnr&OFFSET=16)  (Reichelt EKL)
-   * 2 x Buchsenl. 20pol gewinkelt für Verbindung mit Relais Platine [BL 1X20W8 2,54 ](https://www.reichelt.de/Buchsenleisten/BL-1X20W8-2-54/3/index.html?ACTION=3&LA=10030&ARTICLE=51847&GROUPID=7435&artnr=BL+1X20W8+2%2C54) (Reichelt EKL)
-
- * Anschluss Komponenten für die Pi-Ager Platine (empfohlene Variante) Alternative siehe untere Auflistung Steckerklemmen (*1) 
-   * 8 x Lötbare Schraubklemme - 2-pol, RM 5,08 mm, 90° - [RND 205-00232](https://www.reichelt.de/RND-connect/RND-205-00232/3/index.html?ACTION=3&LA=5&ARTICLE=170277&GROUPID=7552&artnr=RND+205-00232) (Reichelt EKL)
-   * 3 x Lötbare Schraubklemme - 3-pol, RM 5,08 mm, 90° - [RND 205-00233](https://www.reichelt.de/RND-connect/RND-205-00233/3/index.html?ACTION=3&LA=5&ARTICLE=170278&GROUPID=7552&artnr=RND+205-00233) (Reichelt EKL)
-
-     
- * SMD Bauteile für den Hardware Alarm
-   * 1 x BC 848A Transistor SMD NPN -  [BC 848B SMD](https://www.reichelt.de/BC-Transistoren/BC-848B-SMD/3/index.html?ACTION=3&LA=5&ARTICLE=18565&GROUPID=7206&artnr=BC+848B+SMD) (Reichelt EKL)
-   * 1 x SMD-Widerstand 0805 3,3kOhm 1,0% - [RND 0805 1 3,3K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/RND-0805-1-3-3K/3/index.html?ACTION=3&LA=5&ARTICLE=183240&GROUPID=7971&artnr=RND+0805+1+3%2C3K) (Reichelt EKL)
-   * 1 x Summer -  [SUMMER TDB 05](https://www.reichelt.de/Signalakustik/SUMMER-TDB-05/3/index.html?ACTION=3&LA=5&ARTICLE=35918&GROUPID=6560&artnr=SUMMER+TDB+05) (Reichelt EKL)
-
- * SMD Bauteile für zusätzliche Temperaturmessung
-  * 1 x Spannungsregler 3.3V -  [LP 2985 IM5-3,3 ](https://www.reichelt.de/ICs-LMC-LS-/LP-2985-IM5-3-3/3/index.html?ACTION=3&LA=5&ARTICLE=109425&GROUPID=5467&artnr=LP+2985+IM5-3%2C3) (Reichelt EKL)
-  * 1 x 12-bit A/D Converter -  [MCP 3204-CI/SL](https://www.reichelt.de/ICs-MCP-3-5-/MCP-3204-CI-SL/3/index.html?ACTION=3&LA=5&ARTICLE=90078&GROUPID=5472&artnr=MCP+3204-CI%2FSL) (Reichelt EKL) 
-  * 4 x SMD-Widerstand 0805 47kOhm 0,1% - [SPR-0805 47,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/SPR-0805-47-0K/3/index.html?ACTION=3&LA=5&ARTICLE=123351&GROUPID=7971&artnr=SPR-0805+47%2C0K) (Reichelt EKL)
-  * 4 x SMD-Widerstand 0805 1kOhm 1,0% - [RND 0805 1,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/RND-0805-1-1-0K/3/index.html?ACTION=3&LA=5&ARTICLE=183228&GROUPID=7971&artnr=RND+0805+1+1%2C0K) (Reichelt EKL)
-  * 2 x SMD-Kerko 0805 10nF - [X7R 0805 BF 10N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805-BF-10N/3/index.html?ACTION=3&LA=5&ARTICLE=194259&GROUPID=8048&artnr=X7R+0805+BF+10N) (Reichelt EKL)
-  * 6 x SMD-Kerko 0805 100nF - [X7R 0805 CF 100N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805-CF-100N/3/index.html?ACTION=3&LA=5&ARTICLE=194282&GROUPID=8048&artnr=X7R+0805+CF+100N) (Reichelt EKL)
-  * 2 x SMD-Kerko 0805 10µF - [KEM X5R0805 10U ](https://www.reichelt.de/Vielschicht-SMD-G0805/KEM-X5R0805-10U/3/index.html?ACTION=3&LA=5&ARTICLE=207089&GROUPID=8048&artnr=KEM+X5R0805+10U) (Reichelt EKL)  
-  * (*2) Die Klinkenbuchsen: siehe Punkt "Komponenten die bei Reichelt nicht erhältlich sind"
- 
- * Bauteile für den Digitaleingang
-  * 1 x widerstand 1,00K-  [METALL 1,00K](https://www.reichelt.de/0-6W-1-1-00-k-Ohm-9-76-k-Ohm/METALL-1-00K/3/index.html?ACTION=3&LA=5&ARTICLE=11403&GROUPID=3078&artnr=METALL+1%2C00K) (Reichelt EKL)
-  * 1 x widerstand 10,0K-  [METALL 10,0K](https://www.reichelt.de/0-6W-1-10-0-k-Ohm-95-3-k-Ohm/METALL-10-0K/3/index.html?ACTION=3&LA=5&ARTICLE=11449&GROUPID=3079&artnr=METALL+10%2C0K) (Reichelt EKL)
+  * Allgemeine Komponennten für die Pi-Ager Platine
+    * 2 x Buchsenleisten 2,54 mm, 1X03, gerade - [MPE 094-1-003](https://www.reichelt.de/Buchsenleisten/MPE-094-1-003/3/index.html?ACTION=3&LA=5&ARTICLE=119912&GROUPID=7435&artnr=MPE+094-1-003) (Reichelt EKL)
+    * 2 x Buchsenleisten 2,54 mm, 1X04, gerade - [MPE 094-1-004](https://www.reichelt.de/Buchsenleisten/MPE-094-1-004/3/index.html?ACTION=3&LA=5&ARTICLE=119913&GROUPID=7435&artnr=MPE+094-1-004) (Reichelt EKL)
+    * 2 x Buchsenleisten 2,54 mm, 1X06, gerade - [MPE 094-1-006](https://www.reichelt.de/Buchsenleisten/MPE-094-1-006/3/index.html?ACTION=3&LA=5&ARTICLE=119915&GROUPID=7435&artnr=MPE+094-1-006) (Reichelt EKL)    
+    * 1 x JUMPER RM2,54 schwarz - [JUMPER 2,54 SW ](https://www.reichelt.de/Stiftleisten/JUMPER-2-54-SW/3/index.html?ACTION=3&LA=5&ARTICLE=9017&GROUPID=7434&artnr=JUMPER+2%2C54+SW) (Reichelt EKL)
+    * 2 x Stiftleisten 2,54 mm, 1X36, gerade- [MPE 087-1-036](https://www.reichelt.de/Stiftleisten/MPE-087-1-036/3/index.html?ACTION=3&LA=5&ARTICLE=119890&GROUPID=7434&artnr=MPE+087-1-036) (Reichelt EKL)
+    * 1 x Stiftleisten 2,54 mm, 2X20, gerade- [MPE 087-2-040](https://www.reichelt.de/Stiftleisten/MPE-087-2-040/3/index.html?ACTION=3&LA=5&ARTICLE=119900&GROUPID=7434&artnr=MPE+087-2-040) (Reichelt EKL)
+    * 2 x Buchsenl. 1x20 gerade für Raspberry Zero [BL 1X20G8 2,54](https://www.reichelt.de/Buchsenleisten/BL-1X20G8-2-54/3/index.html?ACTION=3&LA=20&GROUP=C142&GROUPID=7435&ARTICLE=51827&START=0&SORT=artnr&OFFSET=16)  (Reichelt EKL)
+    * 2 x Buchsenl. 20pol gewinkelt für Verbindung mit Relais Platine [BL 1X20W8 2,54 ](https://www.reichelt.de/Buchsenleisten/BL-1X20W8-2-54/3/index.html?ACTION=3&LA=10030&ARTICLE=51847&GROUPID=7435&artnr=BL+1X20W8+2%2C54) (Reichelt EKL)
+  * Anschluss Komponenten für die Pi-Ager Platine (empfohlene Variante) Alternative siehe untere Auflistung Steckerklemmen (*1) 
+    * 8 x Lötbare Schraubklemme - 2-pol, RM 5,08 mm, 90° - [RND 205-00232](https://www.reichelt.de/RND-connect/RND-205-00232/3/index.html?ACTION=3&LA=5&ARTICLE=170277&GROUPID=7552&artnr=RND+205-00232) (Reichelt EKL)
+    * 3 x Lötbare Schraubklemme - 3-pol, RM 5,08 mm, 90° - [RND 205-00233](https://www.reichelt.de/RND-connect/RND-205-00233/3/index.html?ACTION=3&LA=5&ARTICLE=170278&GROUPID=7552&artnr=RND+205-00233) (Reichelt EKL)
+  * SMD Bauteile für den Hardware Alarm
+    * 1 x BC 848A Transistor SMD NPN -  [BC 848B SMD](https://www.reichelt.de/BC-Transistoren/BC-848B-SMD/3/index.html?ACTION=3&LA=5&ARTICLE=18565&GROUPID=7206&artnr=BC+848B+SMD) (Reichelt EKL)
+    * 1 x SMD-Widerstand 0805 3,3kOhm 1,0% - [RND 0805 1 3,3K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/RND-0805-1-3-3K/3/index.html?ACTION=3&LA=5&ARTICLE=183240&GROUPID=7971&artnr=RND+0805+1+3%2C3K) (Reichelt EKL)
+    * 1 x Summer -  [SUMMER TDB 05](https://www.reichelt.de/Signalakustik/SUMMER-TDB-05/3/index.html?ACTION=3&LA=5&ARTICLE=35918&GROUPID=6560&artnr=SUMMER+TDB+05) (Reichelt EKL)
+  * SMD Bauteile für zusätzliche Temperaturmessung
+    * 1 x Spannungsregler 3.3V -  [LP 2985 IM5-3,3 ](https://www.reichelt.de/ICs-LMC-LS-/LP-2985-IM5-3-3/3/index.html?ACTION=3&LA=5&ARTICLE=109425&GROUPID=5467&artnr=LP+2985+IM5-3%2C3) (Reichelt EKL)
+    * 1 x 12-bit A/D Converter -  [MCP 3204-CI/SL](https://www.reichelt.de/ICs-MCP-3-5-/MCP-3204-CI-SL/3/index.html?ACTION=3&LA=5&ARTICLE=90078&GROUPID=5472&artnr=MCP+3204-CI%2FSL) (Reichelt EKL) 
+    * 4 x SMD-Widerstand 0805 47kOhm 0,1% - [SPR-0805 47,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/SPR-0805-47-0K/3/index.html?ACTION=3&LA=5&ARTICLE=123351&GROUPID=7971&artnr=SPR-0805+47%2C0K) (Reichelt EKL)
+    * 4 x SMD-Widerstand 0805 1kOhm 1,0% - [RND 0805 1,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/RND-0805-1-1-0K/3/index.html?ACTION=3&LA=5&ARTICLE=183228&GROUPID=7971&artnr=RND+0805+1+1%2C0K) (Reichelt EKL)
+    * 2 x SMD-Kerko 0805 10nF - [X7R 0805 BF 10N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805-BF-10N/3/index.html?ACTION=3&LA=5&ARTICLE=194259&GROUPID=8048&artnr=X7R+0805+BF+10N) (Reichelt EKL)
+    * 6 x SMD-Kerko 0805 100nF - [X7R 0805 CF 100N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805-CF-100N/3/index.html?ACTION=3&LA=5&ARTICLE=194282&GROUPID=8048&artnr=X7R+0805+CF+100N) (Reichelt EKL)
+    * 2 x SMD-Kerko 0805 10µF - [KEM X5R0805 10U ](https://www.reichelt.de/Vielschicht-SMD-G0805/KEM-X5R0805-10U/3/index.html?ACTION=3&LA=5&ARTICLE=207089&GROUPID=8048&artnr=KEM+X5R0805+10U) (Reichelt EKL)  
+    * (*2) Die Klinkenbuchsen: siehe Punkt "Komponenten die bei Reichelt nicht erhältlich sind"
+  * Bauteile für den Digitaleingang
+    * 1 x widerstand 1,00K-  [METALL 1,00K](https://www.reichelt.de/0-6W-1-1-00-k-Ohm-9-76-k-Ohm/METALL-1-00K/3/index.html?ACTION=3&LA=5&ARTICLE=11403&GROUPID=3078&artnr=METALL+1%2C00K) (Reichelt EKL)
+    * 1 x widerstand 10,0K-  [METALL 10,0K](https://www.reichelt.de/0-6W-1-10-0-k-Ohm-95-3-k-Ohm/METALL-10-0K/3/index.html?ACTION=3&LA=5&ARTICLE=11449&GROUPID=3079&artnr=METALL+10%2C0K) (Reichelt EKL)
 
 
 (*2) Komponenten die bei Reichelt nicht erhältlich sind:
@@ -78,12 +73,9 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
     * 4 x 2,5 mm Klinkenbuchse (Alternative)  - [PJ-208B](https://de.aliexpress.com/item/4pcs-Jack-2-5mm-Headphone-Connector-Four-Feet-Pin-90-Degrees-Horizontal-PJ-208B-Plug-in/32824757753.html?spm=a2g0x.search0104.3.23.P5CoqJ&ws_ab_test=searchweb0_0,searchweb201602_4_10152_10065_10151_10068_10344_10345_10547_10342_10343_10340_10341_10548_10193_10194_10541_10304_10307_5640015_10060_10302_10155_10154_10056_10055_10539_10538_5370015_10537_10536_10059_10534_10533_100031_10103_10102_10107_10142_10320_10321_10322_10084_10083_10177_5590015_10180_10312_10313_10184_10314_10319_10073_10186-10177,searchweb201603_25,ppcSwitch_2&btsid=afbf842f-30b3-4e04-8c5d-bac28ed8b314&algo_expid=2f4931fc-1f23-44bc-8b62-97f103c81388-3&algo_pvid=2f4931fc-1f23-44bc-8b62-97f103c81388) (Ali)
 (Achtung: diese Buchsen müssen noch getestet werden) 
 
-
-
 (*1) Alternativ zu den Schraubklemmen kann man Steckerklemmen nutzen:
 
- * INFO: Wenn man öfters z.B. sie Sensoren abklemmen möchte kann man Steckerklemmen einsetzen. Um aber mögliche Kontaktprobleme zu vermeiden ist es sinnvoller doch die Schraubklemmen aus dem Warenkorb zu nutzen.
-
+  * INFO: Wenn man öfters z.B. sie Sensoren abklemmen möchte kann man Steckerklemmen einsetzen. Um aber mögliche Kontaktprobleme zu vermeiden ist es sinnvoller doch die Schraubklemmen aus dem Warenkorb zu nutzen.
     * 3 x Wannenstecker für AKL 249 2-pol RM5,08 - [AKL 220-02](https://www.reichelt.de/Wannenstecker/AKL-220-02/3/index.html?ACTION=3&LA=517&ARTICLE=36693&GROUPID=7544&trstct=lsbght_sldr::36696) (Reichelt - nicht im Warenkorb enthalten)
     * 1 x Wannenstecker für AKL 249 4-pol RM5,08 - [AKL 220-04](https://www.reichelt.de/Wannenstecker/AKL-230-04/3/index.html?ACTION=3&LA=2&ARTICLE=36703&GROUPID=7544&artnr=AKL+230-04&SEARCH=%252A) (Reichelt - nicht im Warenkorb enthalten)
       * 3 x Wannenstecker für AKL 249 5-pol RM5,08 - [AKL 220-05](https://www.reichelt.de/Wannenstecker/AKL-220-05/3/index.html?ACTION=3&LA=2&ARTICLE=36696&GROUPID=7544&artnr=AKL+220-05&SEARCH=%252A) (Reichelt - nicht im Warenkorb enthalten) 
@@ -93,22 +85,21 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
 
 ### Waagen Module:
  
- * [HX711 Modul für Wägezellenunterstützung](https://www.amazon.de/dp/B01I37IWYM/ref=cm_sw_r_wa_api_8ol5zb1ZZFX0R)
- * 2 x Keramikkondensator 47µF [X5R-G0603 47/6,3](https://www.reichelt.de/Vielschicht-SMD-G0603/X5R-G0603-47-6-3/3/index.html?ACTION=3&LA=5700&ARTICLE=190489&GROUPID=3166&artnr=X5R-G0603+47%2F6%2C3) (Reichelt EKL) 
- * 2 x Keramikkondensator 220µF [X5R-G1206 220/6](https://www.reichelt.de/Vielschicht-SMD-G1206/X5R-G1206-220-6/3/index.html?ACTION=3&LA=5700&ARTICLE=190504&GROUPID=8049&artnr=X5R-G1206+220%2F6) (Reichelt EKL) 
-
+* [HX711 Modul für Wägezellenunterstützung](https://www.amazon.de/dp/B01I37IWYM/ref=cm_sw_r_wa_api_8ol5zb1ZZFX0R)
+* 2 x Keramikkondensator 47µF [X5R-G0603 47/6,3](https://www.reichelt.de/Vielschicht-SMD-G0603/X5R-G0603-47-6-3/3/index.html?ACTION=3&LA=5700&ARTICLE=190489&GROUPID=3166&artnr=X5R-G0603+47%2F6%2C3) (Reichelt EKL) 
+* 2 x Keramikkondensator 220µF [X5R-G1206 220/6](https://www.reichelt.de/Vielschicht-SMD-G1206/X5R-G1206-220-6/3/index.html?ACTION=3&LA=5700&ARTICLE=190504&GROUPID=8049&artnr=X5R-G1206+220%2F6) (Reichelt EKL) 
 
 ### Stepup Wandler
 
-   * Sollte man ein 12V oder ein 24V Schütz für die Steuerung des Klimakompressor nutzen wollen kann man sich mit Hilfe eines Stepup Moduls die benötigte Hilfsspannung erzeugen.
-     * [StepUp Wandler](https://www.amazon.de/gp/product/B01L1UUMQY/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1)
+Sollte man ein 12V oder ein 24V Schütz für die Steuerung des Klimakompressor nutzen wollen kann man sich mit Hilfe eines Stepup Moduls die benötigte Hilfsspannung erzeugen.
+
+* [StepUp Wandler](https://www.amazon.de/gp/product/B01L1UUMQY/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1)
 
   
 ### Relaisboard
 
 * 1 x 8-Kanal Relais Modul Optokoppler 5VDC 230V  [Relaisboard](https://www.amazon.de/gp/product/B01LR87AOC/ref=oh_aui_detailpage_o01_s00?ie=UTF8&psc=1) (Amazon)
  Dieses Board das hier angeboten wird, passte bisher (speziell was die Printstiftleisten angeht) immer perfekt zur Steuerplatine und wird innerhalb 1-3 Tage geliefert. 
-
 * Da die originalen Relais von dem verlinktem Relaisboard in der Vergangenheit einigen Usern Probleme verursacht haben, haben wir mal gesucht und folgendes gefunden. Diese Relais sind laut Datenblatt primärseitig gleich und können auch von den Maßen her die originalen Relais auf der Platine ersetzen. Betrachtet man die Kontakte sind diese viel besser und können also einen höheren Strom schalten, daher hoffen wir die Probleme zumindest bei den kleine Kompressoren zu minimieren. Bei größeren Leistungen muss man z.B. ein entsprechendes Schütz einsetzen.
 * 8 x Printrelais 5V Spule - 20A Schaltstrom [8 Printrelais](https://www.voelkner.de/products/937098/AFE-Printrelais-5-V-DC-20-A-1-Schliesser-BRF-SS-105DM-1-St..html) (Voelkner)
 
@@ -131,10 +122,9 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
 ### Sensor
 
 * Temperatur-Feuchtigkeitssensor (Empfohlen: Sensirion SHT75) [Sensirion SHT75](https://www.voelkner.de/products/70227/Feuchte-und-Temperaturesensor-Sht75.html?frm=ffs__SHT%2075) (Voelkner)
-
   * Unterstützt (aber nicht empfohlen):
-  * [DHT22](https://www.amazon.de/gp/product/B01M9H3GID/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1) (Amazon)
-  * [DHT11](https://www.amazon.de/gp/product/B01M7VQLWD/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1) (Amazon)
+    * [DHT22](https://www.amazon.de/gp/product/B01M9H3GID/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1) (Amazon)
+    * [DHT11](https://www.amazon.de/gp/product/B01M7VQLWD/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1) (Amazon)
 * Sensorgehäuse für SHT75 [Gehäuse SHT75](https://www.voelkner.de/products/25666/Sensorgehaeuse-Schwarz.html) (Voelkner)
 * abgeschirmtes Kabel passend für das Sensorgehäuse [ Sensorkabel](https://www.voelkner.de/products/36610/Kabel-6-Polig-Geschirmt-3m.html) (Voelkner)
 * Buchse für SHT75 um den Sensor steckbar zu machen [Buschse RM 1,27](https://www.voelkner.de/products/297503/Fischer-Elektronik-Buchsenleiste-RM-1-27-mm-Inhalt-1-St..html?ref=43&products_model=D23000&gclid=EAIaIQobChMIm4_MyemC2AIVxTLTCh3AEA3UEAQYASABEgIIw_D_BwE) (Voelkner)
