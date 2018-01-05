@@ -67,7 +67,6 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
     * 1 x widerstand 1,00K-  [METALL 1,00K](https://www.reichelt.de/0-6W-1-1-00-k-Ohm-9-76-k-Ohm/METALL-1-00K/3/index.html?ACTION=3&LA=5&ARTICLE=11403&GROUPID=3078&artnr=METALL+1%2C00K) (Reichelt EKL)
     * 1 x widerstand 10,0K-  [METALL 10,0K](https://www.reichelt.de/0-6W-1-10-0-k-Ohm-95-3-k-Ohm/METALL-10-0K/3/index.html?ACTION=3&LA=5&ARTICLE=11449&GROUPID=3079&artnr=METALL+10%2C0K) (Reichelt EKL)
 
-
 (*2) Komponenten die bei Reichelt nicht erhältlich sind:
 
   * Die 2,5mm SMD Klinkenbuchsen sind bei Reichelt leider nicht lieferbar, hier zwei Bezugsquellen:
@@ -91,13 +90,10 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
 * 2 x Keramikkondensator 47µF [X5R-G0603 47/6,3](https://www.reichelt.de/Vielschicht-SMD-G0603/X5R-G0603-47-6-3/3/index.html?ACTION=3&LA=5700&ARTICLE=190489&GROUPID=3166&artnr=X5R-G0603+47%2F6%2C3) (Reichelt EKL) 
 * 2 x Keramikkondensator 220µF [X5R-G1206 220/6](https://www.reichelt.de/Vielschicht-SMD-G1206/X5R-G1206-220-6/3/index.html?ACTION=3&LA=5700&ARTICLE=190504&GROUPID=8049&artnr=X5R-G1206+220%2F6) (Reichelt EKL) 
 
-### Stepup Wandler
-
+#### Stepup Wandler
 Sollte man ein 12V oder ein 24V Schütz für die Steuerung des Klimakompressor nutzen wollen kann man sich mit Hilfe eines Stepup Moduls die benötigte Hilfsspannung erzeugen.
-
 * [StepUp Wandler](https://www.amazon.de/gp/product/B01L1UUMQY/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1)
 
-  
 #### Relaisboard
 
 * 1 x 8-Kanal Relais Modul Optokoppler 5VDC 230V  [Relaisboard](https://www.amazon.de/gp/product/B01LR87AOC/ref=oh_aui_detailpage_o01_s00?ie=UTF8&psc=1) (Amazon)
