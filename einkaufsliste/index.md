@@ -3,12 +3,26 @@ layout: default
 title: Einkaufsliste
 ---
 
+# Einkaufsliste
+
 Es handelt sich hier nur um Vorschläge und können durch eigene ähnliche Positionen ausgetauscht werden. 
 (Die meisten Links sind bei Reichelt.de, Voelkner.de und Amazon.de um Versandkosten zu minimieren)
 
 Wenn jemand Fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möchte, bitte im Forum [GSV Pi-Ager](https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/) melden. 
 
-## Steuerung
+# 1
+
+## 2
+
+### 3
+
+#### 4
+
+##### 5
+
+###### 6
+
+##### Steuerung
 
 ### Raspberry Pi
 
