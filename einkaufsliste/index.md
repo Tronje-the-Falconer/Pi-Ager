@@ -10,21 +10,9 @@ Es handelt sich hier nur um Vorschläge und können durch eigene ähnliche Posit
 
 Wenn jemand Fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möchte, bitte im Forum [GSV Pi-Ager](https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/) melden. 
 
-# 1
+### Steuerung
 
-## 2
-
-### 3
-
-#### 4
-
-##### 5
-
-###### 6
-
-##### Steuerung
-
-### Raspberry Pi
+#### Raspberry Pi
 
 * [Pi zero W](http://www.whereismypizero.com/) Dieses ist die empfohlene Variante da die Platine dafür ausgelegt ist und man meistens auch das integrierte Wlan Modul nutzen kann.
 * Alternative 1:
@@ -37,7 +25,7 @@ Wenn jemand Fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möc
 * [microSDHC Karte](https://www.voelkner.de/products/825742/SanDisk-microSDHC-Karte-16-GB-Ultra-Android-mit-80-MB-s-und-Memory-Zone-Android-App-Class.html?frm=ffs__sandisk%2016) (min. 8GB)
 * [USB Netzteil 5V / mind. 4A z.B.](https://www.reichelt.de/Netzteile-Festspannung/MW-GST40A05/3/index.html?ACTION=3&LA=2&ARTICLE=171043&GROUPID=4950&artnr=MW+GST40A05&SEARCH=%252A) (Reichelt)
 
-### Pi-Ager Platine
+#### Pi-Ager Platine
 
 Die Steuerplatine für den Reifeschrank kann man über das GSV Forum beziehen.
 Die Platine ist in 2 Versionen erhältlich: 1. als bestücke und 2. als unbestückt Platine.
@@ -97,7 +85,7 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
       * 1 x Anschlussklemmensystem 4-pol RM5,08 - [AKL 249-04](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-04/3/index.html?ACTION=3&LA=517&ARTICLE=36688&GROUPID=7543&trstct=lsbght_sldr::36703) (Reichelt - nicht im Warenkorb enthalten)
       * 3 x Anschlussklemmensystem 5-pol RM5,08 - [AKL 249-05](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-05/3/index.html?ACTION=3&LA=517&ARTICLE=36689&GROUPID=7543&trstct=lsbght_sldr::36696) (Reichelt - nicht im Warenkorb enthalten) 
 
-### Waagen Module:
+#### Waagen Module:
  
 * [HX711 Modul für Wägezellenunterstützung](https://www.amazon.de/dp/B01I37IWYM/ref=cm_sw_r_wa_api_8ol5zb1ZZFX0R)
 * 2 x Keramikkondensator 47µF [X5R-G0603 47/6,3](https://www.reichelt.de/Vielschicht-SMD-G0603/X5R-G0603-47-6-3/3/index.html?ACTION=3&LA=5700&ARTICLE=190489&GROUPID=3166&artnr=X5R-G0603+47%2F6%2C3) (Reichelt EKL) 
@@ -110,30 +98,30 @@ Sollte man ein 12V oder ein 24V Schütz für die Steuerung des Klimakompressor n
 * [StepUp Wandler](https://www.amazon.de/gp/product/B01L1UUMQY/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1)
 
   
-### Relaisboard
+#### Relaisboard
 
 * 1 x 8-Kanal Relais Modul Optokoppler 5VDC 230V  [Relaisboard](https://www.amazon.de/gp/product/B01LR87AOC/ref=oh_aui_detailpage_o01_s00?ie=UTF8&psc=1) (Amazon)
  Dieses Board das hier angeboten wird, passte bisher (speziell was die Printstiftleisten angeht) immer perfekt zur Steuerplatine und wird innerhalb 1-3 Tage geliefert. 
 * Da die originalen Relais von dem verlinktem Relaisboard in der Vergangenheit einigen Usern Probleme verursacht haben, haben wir mal gesucht und folgendes gefunden. Diese Relais sind laut Datenblatt primärseitig gleich und können auch von den Maßen her die originalen Relais auf der Platine ersetzen. Betrachtet man die Kontakte sind diese viel besser und können also einen höheren Strom schalten, daher hoffen wir die Probleme zumindest bei den kleine Kompressoren zu minimieren. Bei größeren Leistungen muss man z.B. ein entsprechendes Schütz einsetzen.
 * 8 x Printrelais 5V Spule - 20A Schaltstrom [8 Printrelais](https://www.voelkner.de/products/937098/AFE-Printrelais-5-V-DC-20-A-1-Schliesser-BRF-SS-105DM-1-St..html) (Voelkner)
 
-# Hardware
+### Hardware
 
 * Kühlschrank (am schönsten natürlich mit Glasscheibentür)
 
-### Webcam
+#### Webcam
 
 * Webcam [Webcam](https://www.amazon.de/gp/product/B00LLWASXK/ref=oh_aui_detailpage_o03_s00?ie=UTF8&psc=1) (Amazon)
   * oder eine von Raspberry Pi unterstützte: https://elinux.org/RPi_USB_Webcams
 
-### Wägezellen
+#### Wägezellen
 
 * Wägezelle 20kg [Wägezelle 20KG China](https://www.amazon.de/gp/product/B00IHUJQ4Q/ref=oh_aui_detailpage_o09_s00?ie=UTF8&psc=1) (Amazon)
 * Wägezelle 10kg [Wägezelle 10KG China](https://www.amazon.de/dp/B00J4FW7YO/ref=cm_sw_r_wa_api_fnl5zb1ZZFX0R) (Amazon)
 * Wägezelle 50kg Edelstahl S-Form [Wägezelle Edelstahl 50KG China](https://www.amazon.de/gp/product/B073NFB644/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1) (Amazon)
   * Diese Wägezelle ist zwar für max 50 kg ausgelegt, sie liefert aber auch im unteren Bereich sehr gute Ergebnisse (1-5 kg). Bisher haben wir noch keine Wägezelle in dieser Ausführung, für einen akzeptablen Preis und den Bereichen 5kg/10kg/20kg gefunden. Sobald dieses der Fall ist , werden sie auch in dieser Liste aufgenommen.
 
-### Sensor
+#### Sensor
 
 * Temperatur-Feuchtigkeitssensor (Empfohlen: Sensirion SHT75) [Sensirion SHT75](https://www.voelkner.de/products/70227/Feuchte-und-Temperaturesensor-Sht75.html?frm=ffs__SHT%2075) (Voelkner)
   * Unterstützt (aber nicht empfohlen):
@@ -143,14 +131,14 @@ Sollte man ein 12V oder ein 24V Schütz für die Steuerung des Klimakompressor n
 * abgeschirmtes Kabel passend für das Sensorgehäuse [ Sensorkabel](https://www.voelkner.de/products/36610/Kabel-6-Polig-Geschirmt-3m.html) (Voelkner)
 * Buchse für SHT75 um den Sensor steckbar zu machen [Buschse RM 1,27](https://www.voelkner.de/products/297503/Fischer-Elektronik-Buchsenleiste-RM-1-27-mm-Inhalt-1-St..html?ref=43&products_model=D23000&gclid=EAIaIQobChMIm4_MyemC2AIVxTLTCh3AEA3UEAQYASABEgIIw_D_BwE) (Voelkner)
 
-### Temperatursensoren Fleisch 
+#### Temperatursensoren Fleisch 
 
 (Achtung: Funktion ist z.Zt. noch nicht implementiert)
 
 * Für diese Funktion ist die Unterstützung von 1000 K NTC Sensoren geplant. 
   * 1000K NTC Sensor [1000K NTC](https://www.wlanthermostuff.de/store/) (Wlanthermostuff)
 
-### Be- und Entlüftung
+#### Be- und Entlüftung
 
 *  Lüfter mit Jalousie  [Wand- und Deckenlüfter 100mm](https://www.voelkner.de/products/98640/Wand-und-Deckenluefter-Eco-Matic-100mm.html) (Voelkner)
 * Aussengitter [Aussengitter 100mm mit Fliegennetz](https://www.voelkner.de/products/162455/Aussengitter-100-M-Fliegennetz-Ws.html) (Voelkner)
@@ -159,34 +147,34 @@ Sollte man ein 12V oder ein 24V Schütz für die Steuerung des Klimakompressor n
 * Optional:
   * [Umluftunterstützung](https://www.amazon.de/gp/product/B01I6H5HHO/ref=oh_aui_detailpage_o07_s00?ie=UTF8&psc=1) (Amazon)
 
-### Befeuchtung
+#### Befeuchtung
 
 * Luftbefeuchter Beispiel: [Luftbefeuchter](https://www.amazon.de/gp/product/B0047O0LKE/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1) (Amazon)
 
-### Heizung
+#### Heizung
 
 * Heizkabel Beispiel: [Heizkabel](https://www.amazon.de/Trixie-76082-Heizkabel-50-00/dp/B003087SHC/ref=sr_1_3?ie=UTF8&qid=1487192650&sr=8-3&keywords=heizkabel) (Amazon)
 
-### Entfeuchtung
+#### Entfeuchtung
 
 * Entfeuchter Beispiel: [Entfeuchter](https://www.voelkner.de/products/822590/Renkforce-Luftentfeuchter-20-m-0.011-l-h-Weiss-Blau-HD-68W.html) (Voelkner)
 
-### Display
+#### Display
 
 * Display [2.8" Nextion TFT HMI Display ENHANCED](http://www.komputer.de/zen/index.php?main_page=product_info&cPath=30&products_id=384) 
 
-### Diverses
+#### Diverses
 
 * Stromkabel
 * [Steckdosen](https://www.voelkner.de/products/8066/Schutzsteckdose-IP44-Feuchtraum-LED-2-fach-16-A-230-V.html#tech-data) (Voelkner)
 * [Kabelabzweigkasten für Raspberry Pi und Relaisboard](https://www.amazon.de/gp/product/B001JMOOXW/ref=oh_aui_detailpage_o04_s00?ie=UTF8&psc=1)
 * geschirmtes CAT-Kabel
 
-### Spezialwerkzeug
+#### Spezialwerkzeug
 
 * [Lochsäge 100mm](https://www.voelkner.de/products/432935/Wolfcraft-Lochsaege-100-mm-5493000-1-St..html) (Voelkner)
 
-### Alternative Bezugsquellen
+#### Alternative Bezugsquellen
 
 * [2 Micro USB-Kabel](https://www.voelkner.de/products/545808/USB-2.0-Anschlusskabel-1x-USB-2.0-Stecker-A-1x-USB-2.0-Stecker-Micro-B-1-m-Schwarz-UL-zertifizi.html) (Voelkner)
 * [Adapter von USB micro B auf USB A Buchse](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1) (sofern Pi Zero oder Pi Zero W gewählt wurde) (Amazon)
