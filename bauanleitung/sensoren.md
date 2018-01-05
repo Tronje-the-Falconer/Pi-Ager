@@ -1,6 +1,6 @@
 ---
 layout: bauanleitung
-title: "sensoren"
+title: "Sensoren"
 ---
 # Inhalt 
 

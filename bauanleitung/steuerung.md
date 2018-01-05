@@ -1,7 +1,8 @@
 ---
 layout: bauanleitung
-title: "steuerung"
+title: "Steuerung"
 ---
+
 # Inhalt
 
 1. [Stromversorgung](#stromversorgung)
