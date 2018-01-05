@@ -3,8 +3,6 @@ layout: default
 title: Einkaufsliste
 ---
 
-# **Einkaufsliste Pi-Ager Reifeschrank**
-
 Es handelt sich hier nur um Vorschläge und können durch eigene ähnliche Positionen ausgetauscht werden. 
 (Die meisten Links sind bei Reichelt.de, Voelkner.de und Amazon.de um Versandkosten zu minimieren)
 
@@ -17,14 +15,14 @@ Wenn jemand Fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möc
 * [Pi zero W](http://www.whereismypizero.com/) Dieses ist die empfohlene Variante da die Platine dafür ausgelegt ist und man meistens auch das integrierte Wlan Modul nutzen kann.
 
 * Alternative 1:
-    * [Pi zero](http://www.whereismypizero.com/) Kann auch genutzt werden, dann braucht man aber ein entsprechendes [Wlan  Modul](https://www.reichelt.de/WLAN-Adapter/EDIMAX-EW-7811UN/3/index.html?&ARTICLE=99944) mit [Adapterkabel](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1) (siehe auch unten)
-    * weitere Alternativen:  
+  * [Pi zero](http://www.whereismypizero.com/) Kann auch genutzt werden, dann braucht man aber ein entsprechendes [Wlan  Modul](https://www.reichelt.de/WLAN-Adapter/EDIMAX-EW-7811UN/3/index.html?&ARTICLE=99944) mit [Adapterkabel](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1) (siehe auch unten)
+  * weitere Alternativen:  
 
 'Sollte man eines der folgenden Raspberry Pi Modelle einsetzen, so muss man ein entsprechende [Jumperkabel](https://www.reichelt.de/Weiteres-Zubehoer/DEBO-KABELSET2/3/index.html?ACTION=3&GROUPID=6671&ARTICLE=176618&OFFSET=16&SID=92WGXOUawQATIAAEvA6EI49c1a6b34c1caf234fea075f5de4093c&LANGUAGE=EN) nutzen je nach dem auch ein [Wlan  Modul](https://www.reichelt.de/WLAN-Adapter/EDIMAX-EW-7811UN/3/index.html?&ARTICLE=99944) mit [Adapterkabel](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1)
 
-    * [Raspberry Pi 2 ](https://www.voelkner.de/products/776427/Raspberry-Pi-2-Model-B-1-GB-ohne-Betriebssystem.html?frm=ffs__Raspberry)
-    * [Pi 3B](https://www.voelkner.de/products/882046/Raspberry-Pi-3-Model-B-1-GB-ohne-Betriebssystem.html)
-    * [Pi B+](https://www.amazon.de/Raspberry-Model-Mainboard-MicroSD-Speicherkartenslot/dp/B00LPESRUK)
+  * [Raspberry Pi 2 ](https://www.voelkner.de/products/776427/Raspberry-Pi-2-Model-B-1-GB-ohne-Betriebssystem.html?frm=ffs__Raspberry)
+  * [Pi 3B](https://www.voelkner.de/products/882046/Raspberry-Pi-3-Model-B-1-GB-ohne-Betriebssystem.html)
+  * [Pi B+](https://www.amazon.de/Raspberry-Model-Mainboard-MicroSD-Speicherkartenslot/dp/B00LPESRUK)
     
 * [microSDHC Karte](https://www.voelkner.de/products/825742/SanDisk-microSDHC-Karte-16-GB-Ultra-Android-mit-80-MB-s-und-Memory-Zone-Android-App-Class.html?frm=ffs__sandisk%2016) (min. 8GB)
 * [USB Netzteil 5V / mind. 4A z.B.](https://www.reichelt.de/Netzteile-Festspannung/MW-GST40A05/3/index.html?ACTION=3&LA=2&ARTICLE=171043&GROUPID=4950&artnr=MW+GST40A05&SEARCH=%252A) (Reichelt)
@@ -63,25 +61,25 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
    * 1 x Summer -  [SUMMER TDB 05](https://www.reichelt.de/Signalakustik/SUMMER-TDB-05/3/index.html?ACTION=3&LA=5&ARTICLE=35918&GROUPID=6560&artnr=SUMMER+TDB+05) (Reichelt EKL)
 
  * SMD Bauteile für zusätzliche Temperaturmessung
-    * 1 x Spannungsregler 3.3V -  [LP 2985 IM5-3,3 ](https://www.reichelt.de/ICs-LMC-LS-/LP-2985-IM5-3-3/3/index.html?ACTION=3&LA=5&ARTICLE=109425&GROUPID=5467&artnr=LP+2985+IM5-3%2C3) (Reichelt EKL)
-    * 1 x 12-bit A/D Converter -  [MCP 3204-CI/SL](https://www.reichelt.de/ICs-MCP-3-5-/MCP-3204-CI-SL/3/index.html?ACTION=3&LA=5&ARTICLE=90078&GROUPID=5472&artnr=MCP+3204-CI%2FSL) (Reichelt EKL) 
-    * 4 x SMD-Widerstand 0805 47kOhm 0,1% - [SPR-0805 47,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/SPR-0805-47-0K/3/index.html?ACTION=3&LA=5&ARTICLE=123351&GROUPID=7971&artnr=SPR-0805+47%2C0K) (Reichelt EKL)
-    * 4 x SMD-Widerstand 0805 1kOhm 1,0% - [RND 0805 1,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/RND-0805-1-1-0K/3/index.html?ACTION=3&LA=5&ARTICLE=183228&GROUPID=7971&artnr=RND+0805+1+1%2C0K) (Reichelt EKL)
-    * 2 x SMD-Kerko 0805 10nF - [X7R 0805 BF 10N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805-BF-10N/3/index.html?ACTION=3&LA=5&ARTICLE=194259&GROUPID=8048&artnr=X7R+0805+BF+10N) (Reichelt EKL)
-    * 6 x SMD-Kerko 0805 100nF - [X7R 0805 CF 100N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805-CF-100N/3/index.html?ACTION=3&LA=5&ARTICLE=194282&GROUPID=8048&artnr=X7R+0805+CF+100N) (Reichelt EKL)
-    * 2 x SMD-Kerko 0805 10µF - [KEM X5R0805 10U ](https://www.reichelt.de/Vielschicht-SMD-G0805/KEM-X5R0805-10U/3/index.html?ACTION=3&LA=5&ARTICLE=207089&GROUPID=8048&artnr=KEM+X5R0805+10U) (Reichelt EKL)  
-    * (*2) Die Klinkenbuchsen: siehe Punkt "Komponenten die bei Reichelt nicht erhältlich sind"
+  * 1 x Spannungsregler 3.3V -  [LP 2985 IM5-3,3 ](https://www.reichelt.de/ICs-LMC-LS-/LP-2985-IM5-3-3/3/index.html?ACTION=3&LA=5&ARTICLE=109425&GROUPID=5467&artnr=LP+2985+IM5-3%2C3) (Reichelt EKL)
+  * 1 x 12-bit A/D Converter -  [MCP 3204-CI/SL](https://www.reichelt.de/ICs-MCP-3-5-/MCP-3204-CI-SL/3/index.html?ACTION=3&LA=5&ARTICLE=90078&GROUPID=5472&artnr=MCP+3204-CI%2FSL) (Reichelt EKL) 
+  * 4 x SMD-Widerstand 0805 47kOhm 0,1% - [SPR-0805 47,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/SPR-0805-47-0K/3/index.html?ACTION=3&LA=5&ARTICLE=123351&GROUPID=7971&artnr=SPR-0805+47%2C0K) (Reichelt EKL)
+  * 4 x SMD-Widerstand 0805 1kOhm 1,0% - [RND 0805 1,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/RND-0805-1-1-0K/3/index.html?ACTION=3&LA=5&ARTICLE=183228&GROUPID=7971&artnr=RND+0805+1+1%2C0K) (Reichelt EKL)
+  * 2 x SMD-Kerko 0805 10nF - [X7R 0805 BF 10N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805-BF-10N/3/index.html?ACTION=3&LA=5&ARTICLE=194259&GROUPID=8048&artnr=X7R+0805+BF+10N) (Reichelt EKL)
+  * 6 x SMD-Kerko 0805 100nF - [X7R 0805 CF 100N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805-CF-100N/3/index.html?ACTION=3&LA=5&ARTICLE=194282&GROUPID=8048&artnr=X7R+0805+CF+100N) (Reichelt EKL)
+  * 2 x SMD-Kerko 0805 10µF - [KEM X5R0805 10U ](https://www.reichelt.de/Vielschicht-SMD-G0805/KEM-X5R0805-10U/3/index.html?ACTION=3&LA=5&ARTICLE=207089&GROUPID=8048&artnr=KEM+X5R0805+10U) (Reichelt EKL)  
+  * (*2) Die Klinkenbuchsen: siehe Punkt "Komponenten die bei Reichelt nicht erhältlich sind"
  
  * Bauteile für den Digitaleingang
-    * 1 x widerstand 1,00K-  [METALL 1,00K](https://www.reichelt.de/0-6W-1-1-00-k-Ohm-9-76-k-Ohm/METALL-1-00K/3/index.html?ACTION=3&LA=5&ARTICLE=11403&GROUPID=3078&artnr=METALL+1%2C00K) (Reichelt EKL)
-    * 1 x widerstand 10,0K-  [METALL 10,0K](https://www.reichelt.de/0-6W-1-10-0-k-Ohm-95-3-k-Ohm/METALL-10-0K/3/index.html?ACTION=3&LA=5&ARTICLE=11449&GROUPID=3079&artnr=METALL+10%2C0K) (Reichelt EKL)
+  * 1 x widerstand 1,00K-  [METALL 1,00K](https://www.reichelt.de/0-6W-1-1-00-k-Ohm-9-76-k-Ohm/METALL-1-00K/3/index.html?ACTION=3&LA=5&ARTICLE=11403&GROUPID=3078&artnr=METALL+1%2C00K) (Reichelt EKL)
+  * 1 x widerstand 10,0K-  [METALL 10,0K](https://www.reichelt.de/0-6W-1-10-0-k-Ohm-95-3-k-Ohm/METALL-10-0K/3/index.html?ACTION=3&LA=5&ARTICLE=11449&GROUPID=3079&artnr=METALL+10%2C0K) (Reichelt EKL)
 
 
 (*2) Komponenten die bei Reichelt nicht erhältlich sind:
 
   * Die 2,5mm SMD Klinkenbuchsen sind bei Reichelt leider nicht lieferbar, hier zwei Bezugsquellen:
-     * 4 x 2,5 mm Klinkenbuchse (bevorzugte Variante) - [SJ 2523](https://www.mouser.de/ProductDetail/CUI/SJ-2523-SMT-TR/?qs=WyjlAZoYn50TRxpi%2fhdHvw==) (Mouser)
-     * 4 x 2,5 mm Klinkenbuchse (Alternative)  - [PJ-208B](https://de.aliexpress.com/item/4pcs-Jack-2-5mm-Headphone-Connector-Four-Feet-Pin-90-Degrees-Horizontal-PJ-208B-Plug-in/32824757753.html?spm=a2g0x.search0104.3.23.P5CoqJ&ws_ab_test=searchweb0_0,searchweb201602_4_10152_10065_10151_10068_10344_10345_10547_10342_10343_10340_10341_10548_10193_10194_10541_10304_10307_5640015_10060_10302_10155_10154_10056_10055_10539_10538_5370015_10537_10536_10059_10534_10533_100031_10103_10102_10107_10142_10320_10321_10322_10084_10083_10177_5590015_10180_10312_10313_10184_10314_10319_10073_10186-10177,searchweb201603_25,ppcSwitch_2&btsid=afbf842f-30b3-4e04-8c5d-bac28ed8b314&algo_expid=2f4931fc-1f23-44bc-8b62-97f103c81388-3&algo_pvid=2f4931fc-1f23-44bc-8b62-97f103c81388) (Ali)
+    * 4 x 2,5 mm Klinkenbuchse (bevorzugte Variante) - [SJ 2523](https://www.mouser.de/ProductDetail/CUI/SJ-2523-SMT-TR/?qs=WyjlAZoYn50TRxpi%2fhdHvw==) (Mouser)
+    * 4 x 2,5 mm Klinkenbuchse (Alternative)  - [PJ-208B](https://de.aliexpress.com/item/4pcs-Jack-2-5mm-Headphone-Connector-Four-Feet-Pin-90-Degrees-Horizontal-PJ-208B-Plug-in/32824757753.html?spm=a2g0x.search0104.3.23.P5CoqJ&ws_ab_test=searchweb0_0,searchweb201602_4_10152_10065_10151_10068_10344_10345_10547_10342_10343_10340_10341_10548_10193_10194_10541_10304_10307_5640015_10060_10302_10155_10154_10056_10055_10539_10538_5370015_10537_10536_10059_10534_10533_100031_10103_10102_10107_10142_10320_10321_10322_10084_10083_10177_5590015_10180_10312_10313_10184_10314_10319_10073_10186-10177,searchweb201603_25,ppcSwitch_2&btsid=afbf842f-30b3-4e04-8c5d-bac28ed8b314&algo_expid=2f4931fc-1f23-44bc-8b62-97f103c81388-3&algo_pvid=2f4931fc-1f23-44bc-8b62-97f103c81388) (Ali)
 (Achtung: diese Buchsen müssen noch getestet werden) 
 
 
@@ -92,10 +90,10 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
 
     * 3 x Wannenstecker für AKL 249 2-pol RM5,08 - [AKL 220-02](https://www.reichelt.de/Wannenstecker/AKL-220-02/3/index.html?ACTION=3&LA=517&ARTICLE=36693&GROUPID=7544&trstct=lsbght_sldr::36696) (Reichelt - nicht im Warenkorb enthalten)
     * 1 x Wannenstecker für AKL 249 4-pol RM5,08 - [AKL 220-04](https://www.reichelt.de/Wannenstecker/AKL-230-04/3/index.html?ACTION=3&LA=2&ARTICLE=36703&GROUPID=7544&artnr=AKL+230-04&SEARCH=%252A) (Reichelt - nicht im Warenkorb enthalten)
-        * 3 x Wannenstecker für AKL 249 5-pol RM5,08 - [AKL 220-05](https://www.reichelt.de/Wannenstecker/AKL-220-05/3/index.html?ACTION=3&LA=2&ARTICLE=36696&GROUPID=7544&artnr=AKL+220-05&SEARCH=%252A) (Reichelt - nicht im Warenkorb enthalten) 
-        * 3 x Anschlussklemmensystem 2-pol RM5,08 - [AKL 249-02](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-02/3/index.html?ACTION=3&LA=517&ARTICLE=36686&GROUPID=7543&trstct=lsbght_sldr::36693) (Reichelt - nicht im Warenkorb enthalten)
-        * 1 x Anschlussklemmensystem 4-pol RM5,08 - [AKL 249-04](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-04/3/index.html?ACTION=3&LA=517&ARTICLE=36688&GROUPID=7543&trstct=lsbght_sldr::36703) (Reichelt - nicht im Warenkorb enthalten)
-        * 3 x Anschlussklemmensystem 5-pol RM5,08 - [AKL 249-05](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-05/3/index.html?ACTION=3&LA=517&ARTICLE=36689&GROUPID=7543&trstct=lsbght_sldr::36696) (Reichelt - nicht im Warenkorb enthalten) 
+      * 3 x Wannenstecker für AKL 249 5-pol RM5,08 - [AKL 220-05](https://www.reichelt.de/Wannenstecker/AKL-220-05/3/index.html?ACTION=3&LA=2&ARTICLE=36696&GROUPID=7544&artnr=AKL+220-05&SEARCH=%252A) (Reichelt - nicht im Warenkorb enthalten) 
+      * 3 x Anschlussklemmensystem 2-pol RM5,08 - [AKL 249-02](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-02/3/index.html?ACTION=3&LA=517&ARTICLE=36686&GROUPID=7543&trstct=lsbght_sldr::36693) (Reichelt - nicht im Warenkorb enthalten)
+      * 1 x Anschlussklemmensystem 4-pol RM5,08 - [AKL 249-04](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-04/3/index.html?ACTION=3&LA=517&ARTICLE=36688&GROUPID=7543&trstct=lsbght_sldr::36703) (Reichelt - nicht im Warenkorb enthalten)
+      * 3 x Anschlussklemmensystem 5-pol RM5,08 - [AKL 249-05](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-05/3/index.html?ACTION=3&LA=517&ARTICLE=36689&GROUPID=7543&trstct=lsbght_sldr::36696) (Reichelt - nicht im Warenkorb enthalten) 
 
 ### Waagen Module:
  
@@ -107,7 +105,7 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
 ### Stepup Wandler
 
    * Sollte man ein 12V oder ein 24V Schütz für die Steuerung des Klimakompressor nutzen wollen kann man sich mit Hilfe eines Stepup Moduls die benötigte Hilfsspannung erzeugen.
-       * [StepUp Wandler](https://www.amazon.de/gp/product/B01L1UUMQY/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1)
+     * [StepUp Wandler](https://www.amazon.de/gp/product/B01L1UUMQY/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1)
 
   
 ### Relaisboard
@@ -203,8 +201,8 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
   * 1x [Stecker 4 polig](https://www.voelkner.de/products/46516/Steckerteil-Mstb-2-5-4-St-5-08.html)
   * 3x [Stecker 5 polig](https://www.voelkner.de/products/46523/Steckerteil-Mstb-2-5-5-St-5-08.html)
   * Anstelle der Buchsen-Stecker-Lösung können auch alternativ entsprechende Schraubklemmblöcke verwendet werden:
-      * 3x [Schraubklemmblock 3 polig](https://www.voelkner.de/products/813542/Degson-Schraubklemmblock-2.08-mm-Polzahl-3-DG127-5.08-03P-14-00AH-Gruen-1-St..html)
-      * 8x [Schraubklemmblock 2 polig](https://www.voelkner.de/products/813540/Degson-Schraubklemmblock-2.08-mm-Polzahl-2-DG127-5.08-02P-14-00AH-Gruen-1-St..html)
+    * 3x [Schraubklemmblock 3 polig](https://www.voelkner.de/products/813542/Degson-Schraubklemmblock-2.08-mm-Polzahl-3-DG127-5.08-03P-14-00AH-Gruen-1-St..html)
+    * 8x [Schraubklemmblock 2 polig](https://www.voelkner.de/products/813540/Degson-Schraubklemmblock-2.08-mm-Polzahl-2-DG127-5.08-02P-14-00AH-Gruen-1-St..html)
   * [Stiftleiste 2 reihig](https://www.voelkner.de/products/187967/Stiftleiste-2x36-polig-Gerade-Rm-2-54.html)
   * [Stiftleiste 1 reihig](https://www.voelkner.de/products/215043/Stiftleiste-Gerade-Rm-2-54-1-X-40-Pol.html)
   * 2x [90° Buchsenleiste 10 fach](https://www.voelkner.de/products/955090/Connfly-Buchsenleiste-Standard-Anzahl-Reihen-1-Polzahl-je-Reihe-10-1498286-1-St..html)
