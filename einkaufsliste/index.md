@@ -32,7 +32,7 @@ Die Platine ist in 2 Versionen erhältlich: 1. als bestücke und 2. als unbestü
 
 * [Verkaufsportal Pi-Ager Platine](https://www.grillsportverein.de/forum/threads/verkaufsportal-pi-ager-reifeschrank-platine.288119/) 
 
-Zusätzlich zur Steuerplatine benötigt man noch ein [Relaisboard](https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/_new-Einkaufsliste/_edit#relaisboard) => Details sind auf diese Seite weiter unten zu finden.
+Zusätzlich zur Steuerplatine benötigt man noch ein [Relaisboard](#relaisboard) => Details sind auf diese Seite weiter unten zu finden.
 
 Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine entscheidet, baucht noch folgende Komponenten:
 
@@ -84,7 +84,7 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
       * 1 x Anschlussklemmensystem 4-pol RM5,08 - [AKL 249-04](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-04/3/index.html?ACTION=3&LA=517&ARTICLE=36688&GROUPID=7543&trstct=lsbght_sldr::36703) (Reichelt - nicht im Warenkorb enthalten)
       * 3 x Anschlussklemmensystem 5-pol RM5,08 - [AKL 249-05](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-05/3/index.html?ACTION=3&LA=517&ARTICLE=36689&GROUPID=7543&trstct=lsbght_sldr::36696) (Reichelt - nicht im Warenkorb enthalten) 
 
-#### Waagen Module:
+#### Waagen Module
  
 * [HX711 Modul für Wägezellenunterstützung](https://www.amazon.de/dp/B01I37IWYM/ref=cm_sw_r_wa_api_8ol5zb1ZZFX0R)
 * 2 x Keramikkondensator 47µF [X5R-G0603 47/6,3](https://www.reichelt.de/Vielschicht-SMD-G0603/X5R-G0603-47-6-3/3/index.html?ACTION=3&LA=5700&ARTICLE=190489&GROUPID=3166&artnr=X5R-G0603+47%2F6%2C3) (Reichelt EKL) 
