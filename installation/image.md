@@ -1,6 +1,6 @@
 ---
 layout: installation
-title: "Update"
+title: "Installation per Image"
 ---
 
 Das Image müssen wir unter [Releases](https://github.com/Tronje-the-Falconer/Reifeschrank/releases) downloaden und auf die SD-Karte schreiben. Dafür laden wir uns das Programm [Win 32 Disk Imager von Sourceforge](http://sourceforge.net/projects/win32diskimager/) herunter und installieren dieses.
