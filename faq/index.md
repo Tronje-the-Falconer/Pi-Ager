@@ -1,6 +1,6 @@
 ---
 layout: default
-title: faq
+title: FAQ
 ---
 # FAQ
 

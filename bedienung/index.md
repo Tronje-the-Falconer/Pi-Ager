@@ -1,7 +1,8 @@
 ---
 layout: default
-title: bedienung
+title: Bedienung
 ---
+
 # Bedienung
 
 ### STARTSEITE

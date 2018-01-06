@@ -2,6 +2,7 @@
 layout: bauanleitung
 title: "Sensoren"
 ---
+# Sensoren
 ### Inhalt 
 
 Je nachdem welcher Sensor zum Einsatz kommen soll, muss ein Widerstand verbaut werden. Dazu gibt es hier eine Anleitung
