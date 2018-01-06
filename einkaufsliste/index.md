@@ -10,6 +10,8 @@ Es handelt sich hier nur um Vorschläge und können durch eigene ähnliche Posit
 
 Wenn jemand Fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möchte, bitte im Forum [GSV Pi-Ager](https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/) melden. 
 
+***
+
 ### Steuerung
 
 #### Raspberry Pi
@@ -100,6 +102,8 @@ Sollte man ein 12V oder ein 24V Schütz für die Steuerung des Klimakompressor n
  Dieses Board das hier angeboten wird, passte bisher (speziell was die Printstiftleisten angeht) immer perfekt zur Steuerplatine und wird innerhalb 1-3 Tage geliefert. 
 * Da die originalen Relais von dem verlinktem Relaisboard in der Vergangenheit einigen Usern Probleme verursacht haben, haben wir mal gesucht und folgendes gefunden. Diese Relais sind laut Datenblatt primärseitig gleich und können auch von den Maßen her die originalen Relais auf der Platine ersetzen. Betrachtet man die Kontakte sind diese viel besser und können also einen höheren Strom schalten, daher hoffen wir die Probleme zumindest bei den kleine Kompressoren zu minimieren. Bei größeren Leistungen muss man z.B. ein entsprechendes Schütz einsetzen.
 * 8 x Printrelais 5V Spule - 20A Schaltstrom [8 Printrelais](https://www.voelkner.de/products/937098/AFE-Printrelais-5-V-DC-20-A-1-Schliesser-BRF-SS-105DM-1-St..html) (Voelkner)
+
+***
 
 ### Hardware
 
