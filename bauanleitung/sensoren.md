@@ -6,6 +6,8 @@ title: "Sensoren"
 
 Je nachdem welcher Sensor zum Einsatz kommen soll, muss ein Widerstand verbaut werden. Dazu gibt es hier eine Anleitung
 
+Empfohlen ist der SHT75, da dieser Stabiler funktioniert und nicht so schnell Feuchtigkeitsgesättigt ist.
+
 1. [Bau des Sensorkabels](#bau-des-sensorkabels)
 1. [AOSONG DHT22](#aosong-dht22)
     1. [Pinbelegung](#pinbelegung-dht22)
