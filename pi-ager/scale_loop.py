@@ -111,8 +111,8 @@ def doScaleLoop():
         saving_period_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.saving_period_key)
         calibrate_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale1_key)
         calibrate_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale2_key)
-        offset_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, offset_scale_key)
-        offset_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, offset_scale_key)
+        offset_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table,  pi_ager_names.offset_scale_key)
+        offset_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table,  pi_ager_names.offset_scale_key)
         
         
         if pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.loglevel_console_key) == 10:
