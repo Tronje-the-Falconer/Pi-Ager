@@ -97,7 +97,7 @@ pi_revision_key = 'pi_revision'
 calibrate_scale1_key = 'calibrate_scale1'
 calibrate_scale2_key = 'calibrate_scale2'
 calibrate_weight_key = 'calibrate_weight'
-offset_scale_key = 'offset_scale'
+offset_scale_key = 'offset'
 
 # table fields
 key_field = 'key'
