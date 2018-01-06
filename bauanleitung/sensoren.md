@@ -27,30 +27,30 @@ Um das ganze sauber an den Raspberry anzuschliessen einfach paar Stecker von den
 
 Zwischen den Sensor und dem LAN-Kabel bietet es sich an ein kleine Platine zu basteln, auf der auch der Widerstand verbaut ist. Dadurch haben wir die Möglichkeit einen evtl. defekten Sensor oder Widerstand leicht mal auszutauschen.
 
-<img src="https://github.com/Tronje-the-Falconer/Reifeschrank/blob/resources/wiki/sensor_board_rueckseite.jpg" alt="Board Rückseite" width="100">
-<img src="https://github.com/Tronje-the-Falconer/Reifeschrank/blob/resources/wiki/sht75_auf_board.jpg" alt="SHT75 auf  Board gesteckt" width="100">
-<img src="https://github.com/Tronje-the-Falconer/Reifeschrank/blob/resources/wiki/sht75_board_front.jpg" alt="SHT75 mit abgestecktem Board" width="100">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/sensor_board_rueckseite.jpg" alt="Board Rückseite" width="100">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/sht75_auf_board.jpg" alt="SHT75 auf  Board gesteckt" width="100">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/sht75_board_front.jpg" alt="SHT75 mit abgestecktem Board" width="100">
 
 Des Weiteren kann bzw. sollte man den Empfindlichen SHT75 durch eine Kappe schützen. Dafür gibt es bereits eine fertige Lösung:
 
-<img src="https://github.com/Tronje-the-Falconer/Reifeschrank/blob/resources/wiki/sht75-kappe-offen.jpg" alt="SHT75 offene Kappe" width="100">
-<img src="https://github.com/Tronje-the-Falconer/Reifeschrank/blob/resources/wiki/sht75-kappe-offen2.jpg" alt="SHT75 offene Kappe 2" width="100">
-<img src="https://github.com/Tronje-the-Falconer/Reifeschrank/blob/resources/wiki/sht75-geschlossene-kappe.jpg" alt="SHT75 geschlossene Kappe" width="100">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/sht75-kappe-offen.jpg" alt="SHT75 offene Kappe" width="100">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/sht75-kappe-offen2.jpg" alt="SHT75 offene Kappe 2" width="100">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/sht75-geschlossene-kappe.jpg" alt="SHT75 geschlossene Kappe" width="100">
 
 Oder man baut sich dies selber:
 
-<img src="https://github.com/Tronje-the-Falconer/Reifeschrank/blob/resources/wiki/sht75-eigenbau1.jpg" alt="SHT75 Eigenbau 1" width="100">
-<img src="https://github.com/Tronje-the-Falconer/Reifeschrank/blob/resources/wiki/sht75-eigenbau2.jpg" alt="SHT75 Eigenbau 2" width="100">
-<img src="https://github.com/Tronje-the-Falconer/Reifeschrank/blob/resources/wiki/sht75-eigenbau3.jpg" alt="SHT75 Eigenbau 3" width="100">
-<img src="https://github.com/Tronje-the-Falconer/Reifeschrank/blob/resources/wiki/sht75-eigenbau4.jpg" alt="SHT75 Eigenbau 4" width="100">
-<img src="https://github.com/Tronje-the-Falconer/Reifeschrank/blob/resources/wiki/sht75-eigenbau5.jpg" alt="SHT75 Eigenbau 5" width="100">
-<img src="https://github.com/Tronje-the-Falconer/Reifeschrank/blob/resources/wiki/sht75-eigenbau6.jpg" alt="SHT75 Eigenbau 6" width="100">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/sht75-eigenbau1.jpg" alt="SHT75 Eigenbau 1" width="100">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/sht75-eigenbau2.jpg" alt="SHT75 Eigenbau 2" width="100">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/sht75-eigenbau3.jpg" alt="SHT75 Eigenbau 3" width="100">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/sht75-eigenbau4.jpg" alt="SHT75 Eigenbau 4" width="100">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/sht75-eigenbau5.jpg" alt="SHT75 Eigenbau 5" width="100">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/sht75-eigenbau6.jpg" alt="SHT75 Eigenbau 6" width="100">
 
 [nach oben](#inhalt)
 
 Größenvergleich der Sensoren SHT75 und DHT22:
 
-<img src="https://github.com/Tronje-the-Falconer/Reifeschrank/blob/resources/wiki/vergleich-sht75-dht22.jpg" alt="Größenvergleich SHT75 vs DHT22" width="100">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/vergleich-sht75-dht22.jpg" alt="Größenvergleich SHT75 vs DHT22" width="100">
 
 
 #### AOSONG DHT22
