@@ -2,6 +2,8 @@
 layout: default
 title: bedienung
 ---
+# Bedienung
+
 ### STARTSEITE
 Das Layout funktionert auf kleinen und großen Displays (Responsive Design).
 
