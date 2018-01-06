@@ -2,7 +2,7 @@
 layout: installation
 title: "Installation per Image"
 ---
-# Installation per Image
+# Imageinstallation
 
 Das Image muss unter [Releases](https://github.com/Tronje-the-Falconer/Pi-Ager/releases) downloaden und auf die SD-Karte schreiben.
 
