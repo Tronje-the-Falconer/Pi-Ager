@@ -9,7 +9,7 @@ Jetzt legen wir eine mind. 2GB große SD-Karte in einen Kartenleser ein und wart
  
 Danach starten wir den »Win32DiskImager.exe« und wählen das Image [Image File] und den Laufwerksbuchstaben [Device] der Speicherkarte aus.
  
-![Win32DiskManager GUI](https://camo.githubusercontent.com/f8720a4f5c9b32cb374ec2a64200d1cf07cf0d5b/68747470733a2f2f736f75726365666f7267652e6e65742f702f77696e33326469736b696d616765722f73637265656e73686f742f77696e33322d696d6167657772697465722e706e67)
+![Win32DiskManager GUI](https://elinux.org/images/4/41/Win_sel.png)
  
 Den Schreibvorgang starten wir mit einem Klick auf [Write] --> ACHTUNG nicht das falsche Laufwerk!
 
