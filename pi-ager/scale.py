@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import scale_loop
 import pi_ager_database
+import pi_ager_names
 from pi_ager_logging import create_logger
 
 try:
