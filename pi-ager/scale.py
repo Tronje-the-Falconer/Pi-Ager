@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import scale_loop
+import pi_ager_database
 from pi_ager_logging import create_logger
 
 try:
@@ -16,6 +17,8 @@ except Exception as e:
     pi_ager_database.write_current_value(pi_ager_names.calibrate_scale1_key,0)
     pi_ager_database.write_current_value(pi_ager_names.calibrate_scale2_key,0)
     pi_ager_database.write_current_value(pi_ager_names.calibrate_weight_key,0)
+    pi_ager_database.write_current_value(pi_ager_names.status_tara_scale1_key,0)
+    pi_ager_database.write_current_value(pi_ager_names.status_tara_scale2_key,0)
     logstring = _('exception occurred') + '!!!'
     logger.exception(logstring, exc_info = True)
     pass
