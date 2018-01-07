@@ -21,7 +21,7 @@ def tara_scale(scale, tara_key, data_table, calibrate_key, offset, settings_tabl
     scale.setSpikes(int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.spikes_refunit_tara_key)))
     
     tara_measuring_endtime = pi_ager_database.get_current_time() + 1
-    pi_ager_database.update_value_in_table(settings_table, tara_key, 2)
+    pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, tara_key, 2)
     
     newoffset = scale_measures(scale, tara_measuring_endtime, data_table, 1, tara_key, calibrate_key, offset, settings_table)
     pi_ager_database.update_value_in_table(settings_table, pi_ager_names.offset_scale_key, newoffset)
