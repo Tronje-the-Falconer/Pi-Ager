@@ -16,6 +16,9 @@ def get_logging_value(destination):
     row = cursor.fetchone()
     
     connection.close()
-    
-    logging_value = row[pi_ager_names.value_field]
-    return logging_value
+    try:
+        logging_value = row[pi_ager_names.value_field]
+    except:
+        logging_value = 10
+    finally:
+        return logging_value

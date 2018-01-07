@@ -3,6 +3,11 @@
 # Importieren der Module
 import os
 import time
+
+#Zuerst Datenbank prüfen
+import pi_ager_database_check
+pi_ager_database_check.check_and_update_database()
+
 import pi_ager_logging
 pi_ager_logging.create_logger('main.py')
 import pi_ager_loop
@@ -10,10 +15,12 @@ import pi_ager_init
 import pi_ager_organization
 import pi_ager_names
 import pi_ager_database
+import pi_ager_database_check
 import pi_revision
 
 global logger
 
+pi_ager_database_check.check_and_update_database()
 pi_ager_init.set_language()
 logger = pi_ager_logging.create_logger('main')
 logger.debug('logging initialised')

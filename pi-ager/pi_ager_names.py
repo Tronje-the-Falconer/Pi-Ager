@@ -25,6 +25,11 @@ data_sensor_temperature_meat4_table = 'sensor_temperature_meat4_data'
 debug_table = 'debug'
 system_table = 'system'
 
+id_value_tables = [data_sensor_temperature_table,data_sensor_humidity_table,status_heater_table,status_exhaust_air_table,status_cooling_compressor_table,status_circulating_air_table, status_uv_table, status_light_table, status_humidifier_table, status_dehumidifier_table, data_scale1_table, data_scale2_table, data_sensor_temperature_meat1_table, data_sensor_temperature_meat2_table, data_sensor_temperature_meat3_table, data_sensor_temperature_meat4_table]
+
+key_value_tables = [current_values_table, settings_scale1_table, settings_scale2_table, config_settings_table, debug_table, system_table]
+
+
 # table keys
 switch_on_cooling_compressor_key = 'switch_on_cooling_compressor'
 switch_off_cooling_compressor_key = 'switch_off_cooling_compressor'
@@ -70,6 +75,10 @@ status_scale1_key = 'status_scale1'
 status_scale2_key = 'status_scale2'
 status_tara_scale1_key = 'status_tara_scale1'
 status_tara_scale2_key = 'status_tara_scale2'
+status_temperature_meat1_key = 'status_temperature_meat1'
+status_temperature_meat2_key = 'status_temperature_meat2'
+status_temperature_meat3_key = 'status_temperature_meat3'
+status_temperature_meat4_key = 'status_temperature_meat4'
 status_light_manual_key = 'status_light_manual'
 status_uv_manual_key = 'status_uv_manual'
 scale1_key = 'scale1'
@@ -96,10 +105,61 @@ saving_period_key = 'saving_period'
 failure_temperature_delta_key = 'failure_temperature_delta'
 failure_humidity_delta_key = 'failure_humidity_delta'
 pi_revision_key = 'pi_revision'
+pi_ager_version_key = 'pi_ager_version'
 calibrate_scale1_key = 'calibrate_scale1'
 calibrate_scale2_key = 'calibrate_scale2'
 calibrate_weight_key = 'calibrate_weight'
 offset_scale_key = 'offset'
+
+# Arrays with defined keys in key-value-tables and default values
+table_keys = {}
+
+table_keys[config_settings_table] = (switch_on_cooling_compressor_key,switch_off_cooling_compressor_key,switch_on_humidifier_key,switch_off_humidifier_key,delay_humidify_key,sensortype_key,language_key,switch_on_light_hour_key,switch_on_light_minute_key,light_duration_key,light_period_key,light_modus_key,switch_on_uv_hour_key,switch_on_uv_minute_key,uv_duration_key,uv_period_key,uv_modus_key,dehumidifier_modus_key,circulation_air_period_key,setpoint_temperature_key,exhaust_air_duration_key,modus_key,setpoint_humidity_key,exhaust_air_period_key,circulation_air_duration_key,agingtable_key,failure_humidity_delta_key,failure_temperature_delta_key,samples_refunit_tara_key,spikes_refunit_tara_key)
+
+table_keys[current_values_table] = (sensor_temperature_key,sensor_humidity_key,status_circulating_air_key,status_cooling_compressor_key,status_exhaust_air_key,status_heater_key,status_light_key,status_uv_key,status_humidifier_key,status_dehumidifier_key,scale1_key,scale2_key,status_pi_ager_key,status_agingtable_key,status_scale1_key,status_scale2_key,status_tara_scale1_key,status_tara_scale2_key,status_temperature_meat1_key,status_temperature_meat2_key,status_temperature_meat3_key,status_temperature_meat4_key,agingtable_period_key,agingtable_period_starttime_key,status_light_manual_key,calibrate_scale1_key,calibrate_scale2_key,calibrate_weight_key,status_uv_manual_key)
+
+table_keys[settings_scale1_table] = (samples_key,spikes_key,sleep_key,gain_key,bits_to_read_key,referenceunit_key,scale_measuring_interval_key,measuring_duration_key,saving_period_key,offset_scale_key)
+table_keys[settings_scale2_table] = (samples_key,spikes_key,sleep_key,gain_key,bits_to_read_key,referenceunit_key,scale_measuring_interval_key,measuring_duration_key,saving_period_key,offset_scale_key)
+
+table_keys[debug_table] = (measuring_interval_debug_key,agingtable_days_in_seconds_debug_key,loglevel_file_key,loglevel_console_key)
+
+table_keys[system_table] = (pi_revision_key,pi_ager_version_key)
+
+default_values = {}
+#default values config table
+default_values[config_settings_table + '_' + sensortype_key] = 3 #SHT
+default_values[config_settings_table + '_' + language_key] = 1 #Deutsch de-DE
+
+#default values scale1_settings table
+default_values[settings_scale1_table + '_' + samples_key] = 300
+default_values[settings_scale1_table + '_' + spikes_key] = 60
+default_values[settings_scale1_table + '_' + sleep_key] = 0.1
+default_values[settings_scale1_table + '_' + gain_key] = 128
+default_values[settings_scale1_table + '_' + bits_to_read_key] = 24
+default_values[settings_scale1_table + '_' + referenceunit_key] = 221.2
+default_values[settings_scale1_table + '_' + scale_measuring_interval_key] = 120
+default_values[settings_scale1_table + '_' + measuring_duration_key] = 100
+default_values[settings_scale1_table + '_' + saving_period_key] = 240
+
+#default values scale2_settings table
+default_values[settings_scale2_table + '_' + samples_key] = 300
+default_values[settings_scale2_table + '_' + spikes_key] = 60
+default_values[settings_scale2_table + '_' + sleep_key] = 0.1
+default_values[settings_scale2_table + '_' + gain_key] = 128
+default_values[settings_scale2_table + '_' + bits_to_read_key] = 24
+default_values[settings_scale2_table + '_' + referenceunit_key] = 221.2
+default_values[settings_scale2_table + '_' + scale_measuring_interval_key] = 120
+default_values[settings_scale2_table + '_' + measuring_duration_key] = 100
+default_values[settings_scale2_table + '_' + saving_period_key] = 240
+
+#default values debug table
+default_values[debug_table + '_' + measuring_interval_debug_key] = 30
+default_values[debug_table + '_' + agingtable_days_in_seconds_debug_key] = 1
+default_values[debug_table + '_' + loglevel_file_key] = 10
+default_values[debug_table + '_' + loglevel_console_key] = 20
+
+#default values system table
+default_values[system_table + '_' + pi_ager_version_key] = '2.1.1'
 
 
 # table fields
@@ -116,6 +176,14 @@ agingtable_circulation_air_period_field = 'circulation_air_period'
 agingtable_exhaust_air_duration_field = 'exhaust_air_duration'
 agingtable_exhaust_air_period_field = 'exhaust_air_period'
 agingtable_days_field = 'days'
+
+# field types
+field_type = {}
+field_type[key_field] = 'TEXT'
+field_type[value_field] = 'REAL'
+field_type[last_change_field] = 'INTEGER'
+field_type[id_field] = 'INTEGER'
+
 
 # hardcoded values
 # Pinbelegung

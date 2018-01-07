@@ -35,6 +35,68 @@ def close_database():
     global connection
     connection.close()
 
+def table_exists(table):
+    global cursor
+    sql = 'SELECT count(*) FROM sqlite_master WHERE type="table" AND name="' + table + '";'
+    
+    open_database()
+    execute_query(sql)
+    row = cursor.fetchone()
+    close_database()
+    count = row['count(*)']
+    
+    if count >= 1:
+        return True
+    else:
+        return False
+        
+def column_exists_in_table(column,table):
+    try:
+        sql = 'SELECT ' + column + ' FROM ' + table
+        open_database()
+        execute_query(sql)
+        close_database()
+        return True
+    except:
+        close_database()
+        return False
+        
+def key_exists_in_table(key, table):
+    global cursor
+    sql = 'SELECT EXISTS(SELECT 1 FROM ' + table + ' WHERE ' + pi_ager_names.key_field + ' = "' + key + '" LIMIT 1) as result;'
+    print(sql)
+    open_database()
+    execute_query(sql)
+    row = cursor.fetchone()
+    close_database()
+    result = row['result']
+    print('Result: ' + str(result))
+    if result == 1:
+        return True
+    else:
+        return False
+    
+def get_column_infos(table):
+    global cursor
+    sql = 'PRAGMA table_info(' + table + ')'
+    open_database()
+    execute_query(sql)
+    rows = cursor.fetchall()
+    close_database()
+    return rows
+    
+def add_key_value_table(table):
+    sql = 'CREATE TABLE "' + table + '" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "key" TEXT NOT NULL, "value" REAL NOT NULL, "last_change" INTEGER NOT NULL)'
+    open_database()
+    execute_query(sql)
+    close_database()
+    
+def add_id_value_table(table):
+    sql = 'CREATE TABLE "' + table + '" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "value" REAL NOT NULL, "last_change" INTEGER NOT NULL)'
+    open_database()
+    execute_query(sql)
+    close_database()
+    
 def get_table_value(table, key):
     global cursor
 
@@ -196,6 +258,20 @@ def update_value_in_table(table, key, value):
     
     close_database()
     
+def insert_key_value_row_in_table(table, key, value):
+    open_database()
+    if key == None:
+        sql = 'INSERT INTO ' + table + ' (' + pi_ager_names.value_field + ',' + str(pi_ager_names.last_change_field) + ') VALUES (' + str(value) + ',0)'
+    elif not column_exists_in_table(pi_ager_names.last_change_field,table):
+        sql = 'INSERT INTO ' + table + ' ("' + pi_ager_names.key_field + '","' + pi_ager_names.value_field + '") VALUES ("' + key + '",' + str(value) + ')'
+    else:
+        sql = 'INSERT INTO ' + table + ' ("' + pi_ager_names.key_field + '","' + pi_ager_names.value_field + '","' + str(pi_ager_names.last_change_field) + '") VALUES ("' + key + '",' + str(value) + ',0)'
+    print (sql)
+    open_database()
+    execute_query(sql)
+    
+    close_database()
+    
 def write_scale(scale_table,value_scale):
 
     if scale_table == pi_ager_names.data_scale1_table:
@@ -305,3 +381,19 @@ def write_changed_values(sensor_temperature, status_heater, status_exhaust_air, 
         execute_query('INSERT INTO ' + pi_ager_names.status_dehumidifier_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_dehumidifier) + ',' + str(get_current_time()) + ')')
 
     close_database()
+
+def add_column(table, fieldname):
+    sql = 'ALTER TABLE ' + table +' ADD ' + fieldname + ' ' + pi_ager_names.field_type[fieldname]
+    if fieldname == pi_ager_names.id_field:
+        sql = sql + ' PRIMARY KEY AUTOINCREMENT NOT NULL'
+    else:
+        sql = sql + ' DEFAULT 0 NOT NULL'
+    
+    open_database()
+    execute_query(sql)
+    close_database()
+    
+def repair_column_type(table, fieldname):
+    # Wird später implementiert
+    logstring = 'Wrong fieldtype in field ' + fieldname + ' of table ' + table + '!'
+    logger.debug(logstring)
