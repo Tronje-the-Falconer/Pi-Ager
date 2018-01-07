@@ -17,11 +17,10 @@ def tara_scale(scale, tara_key, data_table, calibrate_key, offset, settings_tabl
     #scale.tare()
     pi_ager_database.update_value_in_table(settings_table, pi_ager_names.offset_scale_key, 0) # set offset to zero to get right offset value
     
-    scale.setSamples(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_offset_tara))
-    scale.setSpikes(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.spikes_offset_tara))
+    scale.setSamples(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_refunit_tara_key))
+    scale.setSpikes(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.spikes_refunit_tara_key))
     
     tara_measuring_endtime = pi_ager_database.get_current_time() + 1
-    tara_measuring_endtime = pi_ager_database.get_current_time() + measuring_duration_offset_tara
     pi_ager_database.update_value_in_table(settings_table, tara_key, 2)
     
     newoffset = scale_measures(scale, tara_measuring_endtime, data_table, 1, tara_key, calibrate_key, offset, settings_table)
@@ -48,7 +47,7 @@ def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, ta
             scale_measuring_endtime = current_time
         status_tara_scale = pi_ager_database.get_table_value(pi_ager_names.current_values_table, tara_key)
         if status_tara_scale == 1:
-            tara_scale(scale, tara_key, data_table, calibrate_scale_key, offset)
+            tara_scale(scale, tara_key, data_table, calibrate_scale_key, offset, settings_table)
         value = scale.getMeasure()
         value = value - offset
         if status_tara_scale == 2:
@@ -72,8 +71,8 @@ def get_scale_settings(scale_setting_rows):
 def get_first_calibrate_measure(scale, scale_settings_table, calibrate_scale_key):
     # scale.setReferenceUnit(1)
     scale.setReferenceUnit(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.referenceunit_key))
-    scale.setSamples(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_offset_tara))
-    scale.setSpikes(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.spikes_offset_tara))
+    scale.setSamples(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_refunit_tara_key))
+    scale.setSpikes(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.spikes_refunit_tara_key))
     # scale.reset()
     # scale.tare()
     clear_history = scale.getWeight()
@@ -87,8 +86,8 @@ def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table, c
     # scale.setReferenceUnit(1)
     old_ref_unit = pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.referenceunit_key)
     scale.setReferenceUnit(old_ref_unit)
-    scale.setSamples(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_offset_tara))
-    scale.setSpikes(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.spikes_offset_tara))
+    scale.setSamples(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_refunit_tara_key))
+    scale.setSpikes(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.spikes_refunit_tara_key))
     
     calibrate_weight = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_weight_key)
     clear_history = scale.getWeight()
