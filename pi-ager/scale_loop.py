@@ -10,16 +10,32 @@ global logger
 logger = create_logger(__name__)
 logger.debug('logging initialised')
 
-def tara_scale(scale, tara_key, data_table, calibrate_key, offset):
+def tara_scale(scale, tara_key, data_table, calibrate_key, offset, settings_table):
     global logger
-    scale.reset()
-    scale.tare()
-    pi_ager_database.write_stop_in_database(tara_key)
-    logger.debug('tara performed')
+    logger.debug('performing tara')
+    #scale.reset()
+    #scale.tare()
+    pi_ager_database.update_value_in_table(settings_table, pi_ager_names.offset_scale_key, 0) # set offset to zero to get right offset value
+    
+    scale.setSamples(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_offset_tara))
+    scale.setSpikes(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.spikes_offset_tara))
+    
     tara_measuring_endtime = pi_ager_database.get_current_time() + 1
-    scale_measures(scale, tara_measuring_endtime, data_table, 1, tara_key, calibrate_key, offset)
+    tara_measuring_endtime = pi_ager_database.get_current_time() + measuring_duration_offset_tara
+    pi_ager_database.update_value_in_table(settings_table, tara_key, 2)
+    
+    newoffset = scale_measures(scale, tara_measuring_endtime, data_table, 1, tara_key, calibrate_key, offset, settings_table)
+    pi_ager_database.update_value_in_table(settings_table, pi_ager_names.offset_scale_key, newoffset)
+    pi_ager_database.write_stop_in_database(tara_key)
+    
+    scale.setSamples(pi_ager_database.get_table_value(settings_table, pi_ager_names.samples_key))
+    scale.setSpikes(pi_ager_database.get_table_value(settings_table, pi_ager_names.spikes_key))
+    
+    logger.debug('tara performed - runnig control-measurement')
+    # im Anschluss eine Kontrollmessung machen
+    scale_measures(scale, tara_measuring_endtime, data_table, 1, tara_key, calibrate_key, newoffset, settings_table)
 
-def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, tara_key, calibrate_scale_key, offset):
+def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, tara_key, calibrate_scale_key, offset, settings_table):
     global logger
     logger.debug('scale_measures()')
     measure_start_time = pi_ager_database.get_current_time()
@@ -34,7 +50,10 @@ def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, ta
         if status_tara_scale == 1:
             tara_scale(scale, tara_key, data_table, calibrate_scale_key, offset)
         value = scale.getMeasure()
-        value = value + offset
+        value = value - offset
+        if status_tara_scale == 2:
+            logger.debug('tara measurement performed')
+            return value
         formated_value = round(value, 3)
         if (current_time - measure_start_time) % saving_period == 0 and current_time != save_time:      # speichern je nach datenbankeintrag fuer saving_period
             save_time = current_time
@@ -53,18 +72,23 @@ def get_scale_settings(scale_setting_rows):
 def get_first_calibrate_measure(scale, scale_settings_table, calibrate_scale_key):
     # scale.setReferenceUnit(1)
     scale.setReferenceUnit(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.referenceunit_key))
-    
+    scale.setSamples(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_offset_tara))
+    scale.setSpikes(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.spikes_offset_tara))
     # scale.reset()
     # scale.tare()
     clear_history = scale.getWeight()
     calibrate_value_before_weight = scale.getMeasure()
     pi_ager_database.write_current_value(calibrate_scale_key,2)
+    scale.setSamples(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.samples_key))
+    scale.setSpikes(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.spikes_key))
     return calibrate_value_before_weight
     
 def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table, calibrate_value_first_measure):
     # scale.setReferenceUnit(1)
     old_ref_unit = pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.referenceunit_key)
     scale.setReferenceUnit(old_ref_unit)
+    scale.setSamples(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_offset_tara))
+    scale.setSpikes(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.spikes_offset_tara))
     
     calibrate_weight = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_weight_key)
     clear_history = scale.getWeight()
@@ -76,6 +100,8 @@ def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table, c
         pi_ager_database.update_value_in_table(scale_settings_table, pi_ager_names.referenceunit_key, reference_unit)
         scale.setReferenceUnit(reference_unit)
         pi_ager_database.write_current_value(calibrate_scale_key,4)
+    scale.setSamples(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.samples_key))
+    scale.setSpikes(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.spikes_key))
 
 def doScaleLoop():
     global logger
@@ -111,8 +137,13 @@ def doScaleLoop():
         saving_period_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.saving_period_key)
         calibrate_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale1_key)
         calibrate_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale2_key)
-        offset_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table,  pi_ager_names.offset_scale_key)
-        offset_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table,  pi_ager_names.offset_scale_key)
+        offset_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.offset_scale_key)
+        offset_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.offset_scale_key)
+        
+        samples_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.samples_key)
+        samples_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.samples_key)
+        spikes_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.spikes_key)
+        spikes_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.spikes_key)
         
         
         if pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.loglevel_console_key) == 10:
@@ -124,7 +155,6 @@ def doScaleLoop():
 
         if calibrate_scale1 == 1:
             first_calibrate_value = get_first_calibrate_measure(scale1, scale1_settings_table, pi_ager_names.calibrate_scale1_key)
-            print (first_calibrate_value)
             
         if calibrate_scale2 == 1:
             first_calibrate_value = get_first_calibrate_measure(scale2, scale2_settings_table, pi_ager_names.calibrate_scale2_key)
@@ -136,10 +166,10 @@ def doScaleLoop():
             calculate_reference_unit(scale2, pi_ager_names.calibrate_scale2_key, pi_ager_names.settings_scale2_table, first_calibrate_value)
             
         if status_tara_scale1 == 1:
-            tara_scale(scale1, pi_ager_names.status_tara_scale1_key, pi_ager_names.data_scale1_table, pi_ager_names.calibrate_scale1_key, offset_scale1)
+            tara_scale(scale1, pi_ager_names.status_tara_scale1_key, pi_ager_names.data_scale1_table, pi_ager_names.calibrate_scale1_key, offset_scale1, pi_ager_names.settings_scale1_table)
         
         if status_tara_scale2 == 1:
-            tara_scale(scale2, pi_ager_names.status_tara_scale2_key, pi_ager_names.data_scale2_table, pi_ager_names.calibrate_scale2_key, offset_scale2)
+            tara_scale(scale2, pi_ager_names.status_tara_scale2_key, pi_ager_names.data_scale2_table, pi_ager_names.calibrate_scale2_key, offset_scale2, pi_ager_names.settings_scale2_table)
             
         
         if status_scale1 == 1:
@@ -150,7 +180,7 @@ def doScaleLoop():
                 time_difference_scale1 = measuring_interval_scale1 + 1
             if time_difference_scale1 >= measuring_interval_scale1:
                 scale1_measuring_endtime =  pi_ager_database.get_current_time() + scale1_measuring_duration
-                scale_measures(scale1, scale1_measuring_endtime, pi_ager_names.data_scale1_table, saving_period_scale1, pi_ager_names.status_tara_scale1_key,pi_ager_names.calibrate_scale1_key, offset_scale1)
+                scale_measures(scale1, scale1_measuring_endtime, pi_ager_names.data_scale1_table, saving_period_scale1, pi_ager_names.status_tara_scale1_key,pi_ager_names.calibrate_scale1_key, offset_scale1, pi_ager_names.settings_scale1_table)
 
         if status_scale2 == 1:
             if pi_ager_database.get_scale_table_row(scale2_table) != None:
@@ -160,7 +190,7 @@ def doScaleLoop():
                 time_difference_scale2 = measuring_interval_scale2 + 1
             if time_difference_scale2 >= measuring_interval_scale2:
                 scale2_measuring_endtime = pi_ager_database.get_current_time() + scale2_measuring_duration
-                scale_measures(scale2, scale2_measuring_endtime, pi_ager_names.data_scale2_table, saving_period_scale2, pi_ager_names.status_tara_scale2_key, pi_ager_names.calibrate_scale2_key, offset_scale2)
+                scale_measures(scale2, scale2_measuring_endtime, pi_ager_names.data_scale2_table, saving_period_scale2, pi_ager_names.status_tara_scale2_key, pi_ager_names.calibrate_scale2_key, offset_scale2, pi_ager_names.settings_scale2_table)
 
         
         time.sleep(2)

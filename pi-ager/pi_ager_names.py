@@ -90,6 +90,8 @@ agingtable_period_starttime_key = 'agingtable_period_starttime'
 measuring_interval_debug_key = 'measuring_interval_debug'
 agingtable_days_in_seconds_debug_key = 'agingtable_days_in_seconds_debug'
 measuring_duration_key = 'measuring_duration'
+samples_refunit_tara_key = 'samples_refunit_tara'
+spikes_refunit_tara_key = 'spikes_refunit_tara'
 saving_period_key = 'saving_period'
 failure_temperature_delta_key = 'failure_temperature_delta'
 failure_humidity_delta_key = 'failure_humidity_delta'
@@ -98,6 +100,7 @@ calibrate_scale1_key = 'calibrate_scale1'
 calibrate_scale2_key = 'calibrate_scale2'
 calibrate_weight_key = 'calibrate_weight'
 offset_scale_key = 'offset'
+
 
 # table fields
 key_field = 'key'

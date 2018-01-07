@@ -164,6 +164,12 @@ class Scale:
     def tare(self, times=25):
         self.source.tare(times)
 
+    def setSamples(self, samples):
+        self.samples = samples
+
+    def setSpikes(self, spikes):
+        self.spikes = spikes
+
     def setOffset(self, offset):
         self.source.setOffset(offset)
 
