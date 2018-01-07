@@ -16,6 +16,7 @@ def tara_scale(scale, tara_key, data_table, calibrate_key, offset, settings_tabl
     #scale.reset()
     #scale.tare()
     pi_ager_database.update_value_in_table(settings_table, pi_ager_names.offset_scale_key, 0) # set offset to zero to get right offset value
+    offset = 0
     
     scale.setSamples(int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_refunit_tara_key)))
     scale.setSpikes(int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.spikes_refunit_tara_key)))
