@@ -64,13 +64,11 @@ def column_exists_in_table(column,table):
 def key_exists_in_table(key, table):
     global cursor
     sql = 'SELECT EXISTS(SELECT 1 FROM ' + table + ' WHERE ' + pi_ager_names.key_field + ' = "' + key + '" LIMIT 1) as result;'
-    print(sql)
     open_database()
     execute_query(sql)
     row = cursor.fetchone()
     close_database()
     result = row['result']
-    print('Result: ' + str(result))
     if result == 1:
         return True
     else:
@@ -266,7 +264,6 @@ def insert_key_value_row_in_table(table, key, value):
         sql = 'INSERT INTO ' + table + ' ("' + pi_ager_names.key_field + '","' + pi_ager_names.value_field + '") VALUES ("' + key + '",' + str(value) + ')'
     else:
         sql = 'INSERT INTO ' + table + ' ("' + pi_ager_names.key_field + '","' + pi_ager_names.value_field + '","' + str(pi_ager_names.last_change_field) + '") VALUES ("' + key + '",' + str(value) + ',0)'
-    print (sql)
     open_database()
     execute_query(sql)
     
