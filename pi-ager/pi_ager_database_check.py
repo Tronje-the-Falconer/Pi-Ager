@@ -21,15 +21,15 @@ def add_tables(tables, tables_are_key_value):
             pi_ager_database.add_id_value_table(table)
 
 def check_and_repair_key_value_table_columns(tables):
-    id_column_type_okay = False
-    key_column_type_okay = False
-    value_column_type_okay = False
-    last_change_column_type_okay = False
-    id_column_exists = False
-    key_column_exists = False
-    value_column_exists = False
-    last_change_column_exists = False
     for table in tables:
+        id_column_type_okay = False
+        key_column_type_okay = False
+        value_column_type_okay = False
+        last_change_column_type_okay = False
+        id_column_exists = False
+        key_column_exists = False
+        value_column_exists = False
+        last_change_column_exists = False
         column_info_rows = pi_ager_database.get_column_infos(table)
         for row in column_info_rows:
             if row['name'] == pi_ager_names.id_field:
@@ -42,7 +42,10 @@ def check_and_repair_key_value_table_columns(tables):
                     key_column_type_okay = True
             elif row['name'] == pi_ager_names.value_field:
                 value_column_exists = True
-                if row['type'] == pi_ager_names.field_type[pi_ager_names.value_field]:
+                if table == pi_ager_names.system_table:
+                    if row['type'] == pi_ager_names.field_type[pi_ager_names.system_table + '_' + pi_ager_names.value_field]:
+                        value_column_type_okay = True
+                elif row['type'] == pi_ager_names.field_type[pi_ager_names.value_field]:
                     value_column_type_okay = True
             elif row['name'] == pi_ager_names.last_change_field:
                 last_change_column_exists = True
@@ -67,15 +70,15 @@ def check_and_repair_key_value_table_columns(tables):
         
 
 def check_and_repair_id_value_table_columns(tables):
-    id_column_type_okay = False
-    key_column_type_okay = False
-    value_column_type_okay = False
-    last_change_column_type_okay = False
-    id_column_exists = False
-    key_column_exists = False
-    value_column_exists = False
-    last_change_column_exists = False
     for table in tables:
+        id_column_type_okay = False
+        key_column_type_okay = False
+        value_column_type_okay = False
+        last_change_column_type_okay = False
+        id_column_exists = False
+        key_column_exists = False
+        value_column_exists = False
+        last_change_column_exists = False
         column_info_rows = pi_ager_database.get_column_infos(table)
         for row in column_info_rows:
             if row['name'] == pi_ager_names.id_field:

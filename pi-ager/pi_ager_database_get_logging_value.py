@@ -9,14 +9,14 @@ def get_logging_value(destination):
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
     
-    command = 'SELECT ' + pi_ager_names.value_field + ' FROM ' + pi_ager_names.debug_table + ' WHERE ' + pi_ager_names.key_field + ' = "' + destination + '"'
-    cursor.execute(command)
-    connection.commit()
-    
-    row = cursor.fetchone()
-    
-    connection.close()
     try:
+        command = 'SELECT ' + pi_ager_names.value_field + ' FROM ' + pi_ager_names.debug_table + ' WHERE ' + pi_ager_names.key_field + ' = "' + destination + '"'
+        cursor.execute(command)
+        connection.commit()
+        
+        row = cursor.fetchone()
+        
+        connection.close()
         logging_value = row[pi_ager_names.value_field]
     except:
         logging_value = 10

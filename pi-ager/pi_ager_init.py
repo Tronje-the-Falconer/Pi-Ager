@@ -31,6 +31,8 @@ def set_sensortype():
 
     logger.debug('set_sensortype()')
 
+    # Sensortyp
+    sensortype = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key)
     if sensortype == 1: #DHT
         sensor = Adafruit_DHT.DHT11
         sensorname = 'DHT11'
@@ -45,6 +47,7 @@ def set_sensortype():
         sensorname = 'SHT'
         sensorvalue = 3
     check_sensor(sensorname, sensor)
+    print('Ende Set Sensortype')
         
 def check_sensor(sensorname, sensor):
     global sensortype
@@ -99,6 +102,8 @@ def set_language():
     global logger
     
     logger.debug('set_language()')
+    # Sprache der Textausgabe
+    language = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.language_key)
     
     ####   Set up message catalog access
     # translation = gettext.translation('pi_ager', '/var/www/locale', fallback=True)
@@ -117,10 +122,6 @@ def setup_GPIO():
 
 loopcounter = 0                      #  Zaehlt die Durchlaeufe des Mainloops
     
-# Sensortyp
-sensortype = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key)
-# Sprache der Textausgabe
-language = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.language_key)
 # Einschalttemperatur
 switch_on_cooling_compressor = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_cooling_compressor_key)
 # Ausschalttemperatur

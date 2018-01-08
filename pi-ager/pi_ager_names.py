@@ -159,7 +159,7 @@ default_values[debug_table + '_' + loglevel_file_key] = 10
 default_values[debug_table + '_' + loglevel_console_key] = 20
 
 #default values system table
-default_values[system_table + '_' + pi_ager_version_key] = '2.1.1'
+default_values[system_table + '_' + pi_ager_version_key] = '"2.1.1"'
 
 
 # table fields
@@ -181,6 +181,7 @@ agingtable_days_field = 'days'
 field_type = {}
 field_type[key_field] = 'TEXT'
 field_type[value_field] = 'REAL'
+field_type[system_table + '_' + value_field] = 'TEXT'
 field_type[last_change_field] = 'INTEGER'
 field_type[id_field] = 'INTEGER'
 
