@@ -25,7 +25,7 @@
                                     }
                                     $diagram_mode_translated = get_translated_diagram_mode($diagram_mode);
                                 ?>
-                                <h2 class="art-postheader"><?php echo _('graphs') . ' ' . $diagram_mode_translated; ?></h2>
+                                <h2 class="art-postheader"><?php echo _('diagrams') . ' ' . $diagram_mode_translated; ?></h2>
                                 <div class="hg_container" style="margin-bottom: 20px; margin-top: 20px;">
                                     <table style="width: 100%;">
                                         <tr>
@@ -959,7 +959,9 @@
                                         // document.getElementById('month').addEventListener('click', function() {
                                             // <?php $diagram_mode = 'month'; ?>
                                              // window.temperature_humidity_chart.update();
-                                        // });
+                                        // });                                </br>
+                                </br>
+
                                         </script>
                                     </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->
