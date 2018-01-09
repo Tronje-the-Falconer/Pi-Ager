@@ -39,7 +39,7 @@
             echo '<div class="hg_container">';
             echo _('please attach a known weight to the loadcell'). ' ' . $scale_number . ' ' . _('now and enter the weight into the form below:'). '<br><br>';
             echo '<form action="calibrate_scale.php" method="post">';
-            echo _('weight') . '<input type="number" name="scale_wizzard_weight" required> ' . _('gram') . '<br><br>';
+            echo _('weight') . '<input type="number" name="scale_wizzard_weight" min="1" required> ' . _('gram') . '<br><br>';
             echo '<input type="hidden" name="scale_number" type="text" value="'. $scale_number . '">';
             echo '<input type="hidden" name="current_scale1_status" type="text" value="'. $current_scale1_status . '">';
             echo '<input type="hidden" name="current_scale2_status" type="text" value="'. $current_scale2_status . '">';
