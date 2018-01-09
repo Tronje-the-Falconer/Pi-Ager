@@ -37,8 +37,8 @@
             include 'header.php';                                     // Template-Kopf und Navigation
             echo '<h2 class="art-postheader">' . strtoupper(_('scale wizzard')) . '</h2>';
             echo '<div class="hg_container">';
-            echo _('Please attach a known weight to the loadcell'). ' ' . $scale_number . ' ' . _('now and enter the weight into the form below:'). '<br><br>';
-            echo '<form action="/modules/calibrate_scale.php" method="post">';
+            echo _('please attach a known weight to the loadcell'). ' ' . $scale_number . ' ' . _('now and enter the weight into the form below:'). '<br><br>';
+            echo '<form action="calibrate_scale.php" method="post">';
             echo _('weight') . '<input type="number" name="scale_wizzard_weight" required> ' . _('gram') . '<br><br>';
             echo '<input type="hidden" name="scale_number" type="text" value="'. $scale_number . '">';
             echo '<input type="hidden" name="current_scale1_status" type="text" value="'. $current_scale1_status . '">';

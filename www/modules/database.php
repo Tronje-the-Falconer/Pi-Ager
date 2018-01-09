@@ -393,19 +393,19 @@
     }
     
     function get_calibrate_status($calibrate_scale){
-        global $value_field, $current_values_table, $key_field;
+        global $current_values_table;
         
         $calibrate_status = get_table_value($current_values_table, $calibrate_scale);
-        // open_connection();
-        
-        // $sql = 'SELECT ' . $value_field . ' FROM ' . $current_values_table . ' WHERE ' . $key_field . ' = "' . $calibrate_scale . '"';
-        // $result = get_query_result($sql);
-        
-        // $row = $result->fetchArray();
-        
-        // close_database();
 
         return $calibrate_status;
+    }
+    
+    function get_tara_status($tara_scale_key){
+        global $current_values_table;
+        
+        $tara_status = get_table_value($current_values_table, $tara_scale_key);
+
+        return $tara_status;
     }
     
     function write_debug_values($chosen_measuring_interval_debug, $chosen_agingtable_days_in_seconds_debug){
