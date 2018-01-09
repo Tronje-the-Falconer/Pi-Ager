@@ -34,7 +34,7 @@
     elseif ($_SERVER['PHP_SELF'] == '/webcam.php') {
         $webcam_active = 'active';
     }
-    elseif ($_SERVER['PHP_SELF'] == '/scale_wizzard.php') {
+    elseif ($_SERVER['PHP_SELF'] == '/scale_wizzard.php' OR $_SERVER['PHP_SELF'] == '/calibrate_scale.php' OR $_SERVER['PHP_SELF'] == '/modules/tara_scale.php') {
         $scale_wizzard_active = 'active';
     }
     elseif ($_SERVER['PHP_SELF'] == '/admin.php') {
@@ -149,7 +149,7 @@
                                     echo _('changelog');
                                     echo '</a></li>';
                                 }
-                                if ($_SERVER['PHP_SELF'] == '/scale_wizzard.php') {
+                                if ($_SERVER['PHP_SELF'] == '/scale_wizzard.php' OR $_SERVER['PHP_SELF'] == '/calibrate_scale.php' OR $_SERVER['PHP_SELF'] == '/modules/tara_scale.php') {
                                     echo '<li><a href="scale_wizzard.php" class="';
                                     echo $scale_wizzard_active;
                                     echo '">';
