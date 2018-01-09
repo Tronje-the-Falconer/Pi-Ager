@@ -3,6 +3,8 @@
                                 include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                 ?>
                                 <button class="art-button" type="button" onclick="setconfig_blockFunction()"><?php echo _('set general configuration values'); ?></button>
+                                </br>
+                                </br>
                                 <div id="set_config" class="help_p">
                                     <form method="post" name="config">
                                         <div class="hg_container" >
