@@ -76,14 +76,14 @@
                                                         $data_days = $dataset[$agingtable_days_field];
                                                     } else {$data_days = '';}
                                                     echo '<tr>';
-                                                    echo '<td><input name="data_modus_edit_agingtable_' . $index_row .'" maxlength="4" size="1" type="text" value=' . $data_modus . '></td>';
-                                                    echo '<td><input name="data_setpoint_humidity_edit_agingtable_' . $index_row .'" maxlength="4" size="1" type="text" value=' . $data_setpoint_humidity . '></td>';
-                                                    echo '<td><input name="data_setpoint_temperature_edit_agingtable_' . $index_row .'" maxlength="4" size="1" type="text" value=' . $data_setpoint_temperature . '></td>';
-                                                    echo '<td><input name="data_circulation_air_duration_edit_agingtable_' . $index_row .'" maxlength="4" size="1" type="text" value=' . $data_circulation_air_duration . '></td>';
-                                                    echo '<td><input name="data_circulation_air_period_edit_agingtable_' . $index_row .'" maxlength="4" size="1" type="text" value=' . $data_circulation_air_period . '></td>';
-                                                    echo '<td><input name="data_exhaust_air_duration_edit_agingtable_' . $index_row .'" maxlength="4" size="1" type="text" value=' . $data_exhaust_air_duration . '></td>';
-                                                    echo '<td><input name="data_exhaust_air_period_edit_agingtable_' . $index_row .'" maxlength="4" size="1" type="text" value=' . $data_exhaust_air_period . '></td>';
-                                                    echo '<td><input name="data_days_edit_agingtable_' . $index_row .'" maxlength="4" size="1" type="text" value=' . $data_days . '></td>';
+                                                    echo '<td><input name="data_modus_edit_agingtable_' . $index_row .'" maxlength="4" size="1" min="1" max="4" type = "number" value=' . $data_modus . '></td>';
+                                                    echo '<td><input name="data_setpoint_humidity_edit_agingtable_' . $index_row .'" maxlength="4" size="1" min="-1" max="100" type = "number" value=' . $data_setpoint_humidity . '></td>';
+                                                    echo '<td><input name="data_setpoint_temperature_edit_agingtable_' . $index_row .'" maxlength="4" size="1" min="-1" max="23" type = "number" value=' . $data_setpoint_temperature . '></td>';
+                                                    echo '<td><input name="data_circulation_air_duration_edit_agingtable_' . $index_row .'" maxlength="4" size="1" min="-1" max="1441" type = "number" value=' . $data_circulation_air_duration . '></td>';
+                                                    echo '<td><input name="data_circulation_air_period_edit_agingtable_' . $index_row .'" maxlength="4" size="1" min="-1" max="1441" type = "number" value=' . $data_circulation_air_period . '></td>';
+                                                    echo '<td><input name="data_exhaust_air_duration_edit_agingtable_' . $index_row .'" maxlength="4" size="1" min="-1" max="1441" type = "number" value=' . $data_exhaust_air_duration . '></td>';
+                                                    echo '<td><input name="data_exhaust_air_period_edit_agingtable_' . $index_row .'" maxlength="4" size="1" min="-1" max="1441" type = "number" value=' . $data_exhaust_air_period . '></td>';
+                                                    echo '<td><input name="data_days_edit_agingtable_' . $index_row .'" maxlength="4" size="1" type = "number" value=' . $data_days . '></td>';
                                                     echo '</tr>';
                                                     $index_row++;
                                                 } 
