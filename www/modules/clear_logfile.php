@@ -7,6 +7,7 @@
         if (is_file($logfile)) {
             $logstring = _("new logfile manually created");
             logger('INFO', $logstring);
+            print '<script language="javascript"> alert("'. (_("clear logfile")) . " : " . (_("new logfile created")) .'"); window.location.href = "../logs.php";</script>';
         }
         # 3Sekunden Anzeige dass die Werte nicht gespeichert wurden
         else {
