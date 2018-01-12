@@ -49,7 +49,7 @@ Oder im passenden Versions-Thread auf Grillsportverein: [siehe](https://github.c
 
 ### Wie bedient man den Pi-Ager
 
-Eine Bedienungsanleitung gibt es hier: [Link](https://tronje-the-falconer.github.io/Pi-Ager/bedienung/)
+Eine Bedienungsanleitung gibt es hier: [Link](http://www.pi-ager.org/bedienung/)
 
 [nach oben](#inhalt)
 
