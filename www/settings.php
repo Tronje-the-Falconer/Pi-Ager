@@ -168,7 +168,7 @@
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
                                                     if (isset ($agingtable_names)){
                                                         if ($grepagingtable == NULL){
-                                                            echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" value=\"ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')." \\n "._('manual values will be overwritten in database!')."');\">"._('start agingtable')."</button>";
+                                                            echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" value=\"pi-ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')." \\n "._('manual values will be overwritten in database!')."');\">"._('start agingtable')."</button>";
                                                         }
                                                         else {
                                                             echo "<button class=\"art-button\" name=\"agingtable_stop\" value=\"agingtable_stop\" onclick=\"return confirm('"._('stop agingtable?').' \\n '._('pi-ager continues with the last values of the agingtable!')."');\">"._('stop agingtable')."</button>";
@@ -200,6 +200,9 @@
                                                             }
                                                         }
                                                         echo '</select>';
+                                                        echo "<button class=\"art-button-hidden\" id=\"edit_agingtable\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\" onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
+                                                        echo "<button class=\"art-button-hidden\" id=\"delete_agingtable\" form=\"agingtable_edit\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
+                                                        echo "<button class=\"art-button-hidden\" id=\"export_agingtable\" form=\"agingtable_edit\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
                                                     }
                                                     print '</form>';
                                                     
@@ -218,7 +221,8 @@
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
                                                     if (isset ($agingtable_names)){
-                                                        echo "<button class=\"art-button\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\" onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
+                                                        //echo "<button class=\"art-button\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\" onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
+                                                        echo '<label class=\"art-button-hidden\" for="edit_agingtable" tabindex="0">' . _('edit') . '</label>';
                                                     }
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;">
@@ -235,12 +239,14 @@
                                             <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
                                                     if (isset ($agingtable_names)){
-                                                        echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
+                                                        // echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
+                                                        echo '<label class=\"art-button\" for="delete_agingtable" tabindex="0">' . _('delete') . '</label>';
                                                     }
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
                                                     if (isset ($agingtable_names)){
-                                                        echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
+                                                        // echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
+                                                        echo '<label class=\"art-button\" for="export_agingtable" tabindex="0">' . _('export') . '</label>';
                                                     }
                                                 ?></td></td>
                                         </tr>
