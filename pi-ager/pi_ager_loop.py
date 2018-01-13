@@ -80,6 +80,12 @@ def get_gpio_value(gpio_number):
 def switch_light(relay_state):
     set_gpio_value(pi_ager_names.gpio_light, relay_state)
 
+def check_status_agingtable()
+    status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
+    if status_agingtable == 1:
+        os.system('sudo /var/sudowebscript.sh startagingtable &')
+    
+
 def check_and_set_light():
     #   Manueller "Lichtschalter"
     if pi_ager_database.get_status_light_manual() == 1:
@@ -170,6 +176,7 @@ def doMainLoop():
 
     while status_pi_ager == 1:
         check_and_set_light()
+        check_status_agingtable()
         status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
 
 #Settings
