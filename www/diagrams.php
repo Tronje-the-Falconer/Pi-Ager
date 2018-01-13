@@ -959,10 +959,10 @@
                                         // document.getElementById('month').addEventListener('click', function() {
                                             // <?php $diagram_mode = 'month'; ?>
                                              // window.temperature_humidity_chart.update();
-                                        // });                                </br>
-                                </br>
-
+                                        // });                                
                                         </script>
+                                        </br>
+                                        </br>
                                     </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->
                             </div>
