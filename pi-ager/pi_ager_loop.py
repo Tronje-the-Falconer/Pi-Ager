@@ -176,7 +176,7 @@ def doMainLoop():
 
     while status_pi_ager == 1:
         check_and_set_light()
-        check_status_agingtable()
+        # check_status_agingtable()
         status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
 
 #Settings
