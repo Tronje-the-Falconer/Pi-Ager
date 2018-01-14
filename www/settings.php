@@ -274,7 +274,7 @@
                                                 }
                                                 
                                                 $current_period = get_table_value($current_values_table, $agingtable_period_key);
-                                                $current_period_0 = $current_period - 1;
+                                                //$current_period_0 = $current_period - 1;
                                                 try {
                                                     $number_rows = count($agingtable_rows);
                                                     while ($index_row < $number_rows) {
@@ -305,7 +305,7 @@
                                                             $data_days = $dataset[$agingtable_days_field];
                                                         } else {$data_days = '..';}
 
-                                                        if ($current_period_0 == $index_row){
+                                                        if ($current_period == $index_row AND $grepagingtable != NULL){
                                                             echo '<tr bgcolor=#D19600 >';
                                                         }
                                                         else{
