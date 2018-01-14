@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import os
+import subprocess
 import stat
 import time
 import datetime
@@ -82,7 +83,18 @@ def switch_light(relay_state):
 
 def check_status_agingtable():
     status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
-    if status_agingtable == 1:
+    process_agingtable = subprocess.getstatusoutput('ps ax | grep -v grep | grep agingtable.py')
+    # (0, '16114 pts/0    R+     0:01 python3 /opt/pi-ager/agingtable.py\n16238 pts/1    S+     0:00 sudo python3 agingtable.py\n16256 pts/1    R+     0:00 python3 agingtable.py')
+    # läuft Exitcode 0
+    # (1, '')
+    # läuft nicht Exitcode 1
+    print ('process_agingtable: ' + str(process_agingtable))
+    if process_agingtable[0] == 0:
+        process_agingtable_running = True
+    else:
+        process_agingtable_running = False
+    print (process_agingtable_running)
+    if status_agingtable == 1 and process_agingtable_running == False:
         os.system('sudo /var/sudowebscript.sh startagingtable &')
     
 
@@ -176,7 +188,7 @@ def doMainLoop():
 
     while status_pi_ager == 1:
         check_and_set_light()
-        # check_status_agingtable()
+        check_status_agingtable()
         status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
 
 #Settings
