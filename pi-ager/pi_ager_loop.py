@@ -88,12 +88,11 @@ def check_status_agingtable():
     # läuft Exitcode 0
     # (1, '')
     # läuft nicht Exitcode 1
-    # print ('process_agingtable: ' + str(process_agingtable))
+    
     if process_agingtable[0] == 0:
         process_agingtable_running = True
     else:
         process_agingtable_running = False
-    print (process_agingtable_running)
     if status_agingtable == 1 and process_agingtable_running == False:
         os.system('sudo /var/sudowebscript.sh startagingtable &')
 
