@@ -47,7 +47,6 @@ def set_sensortype():
         sensorname = 'SHT'
         sensorvalue = 3
     check_sensor(sensorname, sensor)
-    print('Ende Set Sensortype')
         
 def check_sensor(sensorname, sensor):
     global sensortype
@@ -59,10 +58,8 @@ def check_sensor(sensorname, sensor):
             sensor_sht.read_humidity()
             value_sht_temperature = sensor_sht.temperature_celsius
             value_sht_humidity = sensor_sht.humidity
-            print (value_sht_humidity)
         else:
             value_dht_humidity, value_temperature = Adafruit_DHT.read_retry(sensor, pi_ager_names.gpio_sensor_data)
-            print (value_dht_humidity)
     except:
         if sensorname == 'SHT':
             sensortype = 2
