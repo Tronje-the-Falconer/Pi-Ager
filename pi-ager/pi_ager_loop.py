@@ -83,7 +83,7 @@ def switch_light(relay_state):
 
 def check_status_agingtable():
     status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
-    process_agingtable = subprocess.getstatusoutput('ps ax | grep -v grep | grep agingtable.py')
+    process_agingtable = subprocess.getstatusoutput('ps ax | grep -v grep | grep agingtable.py &')
     # (0, '16114 pts/0    R+     0:01 python3 /opt/pi-ager/agingtable.py\n16238 pts/1    S+     0:00 sudo python3 agingtable.py\n16256 pts/1    R+     0:00 python3 agingtable.py')
     # läuft Exitcode 0
     # (1, '')
