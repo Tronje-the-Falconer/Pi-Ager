@@ -115,7 +115,8 @@ case "$1" in
         #fswebcam -r 640X480 --no-banner /var/www/images/webcam/$DATE.jpg
     ;;
     ziplogfiles) # Zippt alle logfiles
-        zip -r /var/www/logs/pi-ager_logfiles.zip /var/www/logs/
+        pushd /var/www/ && zip -r /var/www/logs/pi-ager_logfiles.zip ./logs/ && popd
+        #zip -r -j /var/www/logs/pi-ager_logfiles.zip /var/www/logs/
     ;;
     *) echo "ERROR: invalid parameter: $1 (for $0)"; exit 1 #Fehlerbehandlung
     ;;
