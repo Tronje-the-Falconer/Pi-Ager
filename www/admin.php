@@ -82,7 +82,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring interval'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_interval_scale1_admin" type="number" min="10" max="240" required value=<?php echo $measuring_interval_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="measuring_interval_scale1_admin" type="number" min="10" max="3600" required value=<?php echo $measuring_interval_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring duration'); ?>:</td>
@@ -109,7 +109,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring interval'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_interval_scale2_admin" type="number" min="10" max="240" required value=<?php echo $measuring_interval_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="measuring_interval_scale2_admin" type="number" min="10" max="3600" required value=<?php echo $measuring_interval_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring duration'); ?>:</td>
