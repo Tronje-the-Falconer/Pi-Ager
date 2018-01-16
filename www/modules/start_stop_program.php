@@ -84,8 +84,8 @@
     }
     if (isset($_POST['pi-ager_agingtable_stop'])){ //Pi Ager wird gestoppt während agingtable noch läuft
         $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
+        write_stop_in_database($status_agingtable_key);
         if ($grepagingtable !=0){
-            write_stop_in_database($status_agingtable_key);
             $logstring = _('agingtable stopped due to stopping') . " Pi-Ager";
             logger('INFO', $logstring);
         }
