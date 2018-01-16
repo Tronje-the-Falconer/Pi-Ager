@@ -322,25 +322,30 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <hr>
-                                <h2 class="art-postheader"><?php echo _('python'); ?></h2>
-                                <!----------------------------------------------------------------------------------------stop start pythonfiles-->
-                                <div class="hg_container">
-                                    <form  method="post" name="boot">
-                                        <table style="width: 100%;">
-                                            <tr>
-                                                <td><button class="art-button" name="admin_stop_main" value="admin_stop_main" onclick="return confirm('<?php echo _('ATTENTION: kill');?> main.py?');"><?php echo _('stop'); ?> main.py</button></td>
-                                                <td><button class="art-button" name="admin_start_main" value="admin_start_main" onclick="return confirm('<?php echo _('start');?> main.py?');"><?php echo _('start'); ?> main.py</button></td>
-                                            </tr></tr>
-                                                <td><button class="art-button" name="admin_stop_agingtable"  value="admin_stop_agingtable" onclick="return confirm('<?php echo _('ATTENTION:');?> kill agingtable.py?');"><?php echo _('stop'); ?> agingtable.py</button></td>
-                                                <td><button class="art-button" name="admin_start_agingtable"  value="admin_start_agingtable" onclick="return confirm('<?php echo _('start');?> agingtable.py?');"><?php echo _('start'); ?> agingtable.py</button></td>
-                                            </tr></tr>
-                                                <td><button class="art-button" name="admin_stop_scale"  value="admin_stop_scale" onclick="return confirm('<?php echo _('ATTENTION: kill');?> scale.py?');"><?php echo _('stop'); ?> scale.py</button></td>
-                                                <td><button class="art-button" name="admin_start_scale"  value="admin_start_scale" onclick="return confirm('<?php echo _('start');?> scale.py?');"><?php echo _('start'); ?> scale.py</button></td>
-                                            </tr>
-                                        </table>
-                                    </form>
-                                </div>
+                                <?php
+                                    if ($loglevel_console == 10 and $loglevel_file == 10){
+                                        echo '<hr>';
+                                        echo '<h2 class="art-postheader">' . _('python') . '</h2>';
+                                        /*<!----------------------------------------------------------------------------------------stop start pythonfiles--> */
+                                        echo '<div class="hg_container">';
+                                            echo '<form  method="post" name="boot">';
+                                                echo '<table style="width: 100%;">';
+                                                    echo '<tr>';
+                                                        echo '<td><button class="art-button" name="admin_stop_main" value="admin_stop_main" onclick="return confirm("' . _('ATTENTION: kill') . 'main.py?");">' . _('stop') . ' main.py</button></td>';
+                                                        echo '<td><button class="art-button" name="admin_start_main" value="admin_start_main" onclick="return confirm("' .  _('start') . 'main.py?");">' . _('start') . ' main.py</button></td>';
+                                                    echo '</tr></tr>';
+                                                        echo '<td><button class="art-button" name="admin_stop_agingtable"  value="admin_stop_agingtable" onclick="return confirm("' . _('ATTENTION:') . 'kill agingtable.py?");">' . _('stop') . ' agingtable.py</button></td>';
+                                                        echo '<td><button class="art-button" name="admin_start_agingtable"  value="admin_start_agingtable" onclick="return confirm("' . _('start') . 'agingtable.py?");">' . _('start') . '  agingtable.py</button></td>';
+                                                    echo '</tr></tr>';
+                                                        echo '<td><button class="art-button" name="admin_stop_scale"  value="admin_stop_scale" onclick="return confirm("' . _('ATTENTION: kill') . 'scale.py?");">' . _('stop') . '  scale.py</button></td>';
+                                                        echo '<td><button class="art-button" name="admin_start_scale"  value="admin_start_scale" onclick="return confirm("' . _('start') . ' scale.py?");">' . _('start') . '  scale.py</button></td>';
+                                                    echo '</tr>';
+                                                echo '</table>';
+                                            echo '</form>';
+                                        echo '</div>';
+                                    }
+                                ?>
+                                
                                 <!----------------------------------------------------------------------------------------Content Ende-->
                             </div>
                         </div>
