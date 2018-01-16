@@ -89,8 +89,6 @@ def check_status_agingtable():
     # (1, '')
     # läuft nicht Exitcode 1
     
-    print (str(process_agingtable))
-    
     if process_agingtable[1] == '':
         process_agingtable_running = False
     else:
