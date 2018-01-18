@@ -2,7 +2,7 @@
 layout: installation
 title: "Eigenständige Installation"
 ---
-# eigenständige Installation (für erfahrener User)
+# eigenständige Installation (für erfahrene User)
 # Inhalt
 
 * [Betriebssystem RASPBIAN LITE](#betriebssystem-raspian-lite)
