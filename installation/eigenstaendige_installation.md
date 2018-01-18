@@ -83,7 +83,11 @@ Einloggen mit (Achtung! Tastatur noch falsch konfiguriert [z=y]):
 
 Danach führen wir den Assistenten aus
 
-    sudo raspi-config (Achtung! Tastatur noch falsch konfiguriert [-=ß])
+{% highlight shell %}
+sudo raspi-config
+{% endhighlight %}
+
+(Achtung! Tastatur noch falsch konfiguriert [-=ß])
 
 und richten folgende Einstellungen ein (die einzelnen Punkt können ggf. unter anderen Nummern stehen):
 
@@ -120,25 +124,25 @@ Ab jetzt ist es möglich auch mittels PC und Zusatzprogramm wie z.B. [Putty](htt
 
 Sobald wir uns wieder eingeloggt haben, machen wir ein Update (Sofern kein LAN-Kabel angeschlossen ist, oder kann (Bsp. Rapberry PI Zero zuerst die Anleitung [WiFi-Verbindung](#wifi-verbindung) weiter unten befolgen!)
 
-{% highlight powershell %}
+{% highlight shell %}
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade
 {% endhighlight %}
 
 Jetzt aktivieren wir den "root" User, indem wir für den Benutzer ein Passwort vergeben:
 
-{% highlight powershell %}
+{% highlight shell %}
 sudo passwd
 {% endhighlight %}
 
 Und falls wir uns mittels SSH als root einloggen wollen, müssen wir die config noch anpassen:
 
-```shell
+{% highlight shell %}
 sudo nano /etc/ssh/sshd_config
-```
+{% endhighlight %}
 
 Hier suchen wir nach folgender Zeile:
 
-{% highlight powershell %}
+{% highlight shell %}
 #Authentication:
 #LoginGraceTime 2m
 #PermitRootLogin prohibit-password
@@ -149,21 +153,23 @@ Hier suchen wir nach folgender Zeile:
 
 und ändert diese wie folgt ab
 
-{% highlight powershell %}
-    # Authentication:
-    LoginGraceTime 2m
-    PermitRootLogin yes
-    StrictModes yes
-    MaxAuthTries 6
-    MaxSessions 10
+{% highlight shell %}
+#Authentication:
+LoginGraceTime 2m
+PermitRootLogin yes
+StrictModes yes
+MaxAuthTries 6
+MaxSessions 10
 {% endhighlight %}
 
 Jetzt Speichern wir mit "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_"
 
 Einmal noch neu starten
 
-    sudo sync
-    sudo reboot
+{% highlight shell %}
+sudo sync
+sudo reboot
+{% endhighlight %}
 
 [nach oben](#inhalt)
 
@@ -173,7 +179,9 @@ Den USB-WIFI-Stick nur anstecken, wenn der PI ausgeschaltet ist oder wir einen a
 
 Wenn der USB-WIFI-Stick angesteckt und der PI hochgefahren ist oder es sich um einen Raspberry PI Zero W handelt, geben wir folgendes ein um zu sehen, ob er als USB-Device  erkannt wurde:
 
-    lsusb
+{% highlight shell %}
+lsusb
+{% endhighlight %}
 
 Es sollte dann in etwa dieses angezeigt werden:
 
@@ -185,7 +193,9 @@ Es sollte dann in etwa dieses angezeigt werden:
 
 Danach testen wir ob der Stick auch als USB-WIFI-Stick erkannt wurde:
 
-    iwconfig wlan0
+{% highlight shell %}
+iwconfig wlan0
+{% endhighlight %}
 
 Es sollte in etwa so aussehen:
 
