@@ -124,7 +124,7 @@ Sobald wir uns wieder eingeloggt haben, machen wir ein Update (Sofern kein LAN-K
 
 Jetzt aktivieren wir den "root" User, indem wir für den Benutzer ein Passwort vergeben:
 
-```Shell
+```shell
 sudo passwd
 ```
 
