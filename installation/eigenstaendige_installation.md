@@ -142,7 +142,7 @@ sudo nano /etc/ssh/sshd_config
 
 Hier suchen wir nach folgender Zeile:
 
-{% highlight shell %}
+{% highlight plaintext %}
 #Authentication:
 #LoginGraceTime 2m
 #PermitRootLogin prohibit-password
@@ -153,7 +153,7 @@ Hier suchen wir nach folgender Zeile:
 
 und ändert diese wie folgt ab
 
-{% highlight shell %}
+{% highlight plaintext %}
 #Authentication:
 LoginGraceTime 2m
 PermitRootLogin yes
