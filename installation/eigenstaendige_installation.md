@@ -120,7 +120,9 @@ Ab jetzt ist es möglich auch mittels PC und Zusatzprogramm wie z.B. [Putty](htt
 
 Sobald wir uns wieder eingeloggt haben, machen wir ein Update (Sofern kein LAN-Kabel angeschlossen ist, oder kann (Bsp. Rapberry PI Zero zuerst die Anleitung [WiFi-Verbindung](#wifi-verbindung) weiter unten befolgen!)
 
-    sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade
+{% highlight powershell %}
+sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade
+{% endhighlight %}
 
 Jetzt aktivieren wir den "root" User, indem wir für den Benutzer ein Passwort vergeben:
 
@@ -147,12 +149,14 @@ Hier suchen wir nach folgender Zeile:
 
 und ändert diese wie folgt ab
 
+{% highlight powershell %}
     #Authentication:
     LoginGraceTime 2m
     PermitRootLogin yes
     StrictModes yes
     MaxAuthTries 6
     MaxSessions 10
+{% endhighlight %}
 
 Jetzt Speichern wir mit "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_"
 
