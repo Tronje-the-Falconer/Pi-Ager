@@ -136,7 +136,7 @@ sudo nano /etc/ssh/sshd_config
 
 Hier suchen wir nach folgender Zeile:
 
-{% highlight shell %}
+{% highlight shell_session %}
 #Authentication:
 #LoginGraceTime 2m
 #PermitRootLogin prohibit-password
