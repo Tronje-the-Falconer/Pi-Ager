@@ -109,10 +109,10 @@ Danach sollten wir gefragt werden, ob wir neu starten wollen. Dies beantworten w
 
 Sollte die Frage nicht gestellt werden müssen wir den Raspberry manuell starten.
 
-```bash
+{% highlight powershell %}
 sudo sync
 sudo reboot
-```
+{% endhighlight %}
 
 Sofern kein Ethernetanschluss gegeben ist, aber ein WLAN-Stick zur Verfügung steht sollte jetzt Punkt [WiFi-Verbindung](#wifi-verbindung) vorgezogen werden.
 
@@ -124,13 +124,13 @@ Sobald wir uns wieder eingeloggt haben, machen wir ein Update (Sofern kein LAN-K
 
 Jetzt aktivieren wir den "root" User, indem wir für den Benutzer ein Passwort vergeben:
 
-```shell
+{% highlight powershell %}
 sudo passwd
-```
+{% endhighlight %}
 
 Und falls wir uns mittels SSH als root einloggen wollen, müssen wir die config noch anpassen:
 
-{% highlight shell %}
+{% highlight powershell %}
 sudo nano /etc/ssh/sshd_config
 {% endhighlight %}
 
