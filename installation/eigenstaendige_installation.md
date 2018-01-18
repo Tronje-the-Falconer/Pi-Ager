@@ -150,7 +150,7 @@ Hier suchen wir nach folgender Zeile:
 und ändert diese wie folgt ab
 
 {% highlight powershell %}
-    #Authentication:
+    # Authentication:
     LoginGraceTime 2m
     PermitRootLogin yes
     StrictModes yes
