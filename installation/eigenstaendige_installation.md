@@ -138,14 +138,14 @@ sudo nano /etc/ssh/sshd_config
 
 Hier suchen wir nach folgender Zeile:
 
-{% highlight raw %}
+{% highlight powershell %}
 #Authentication:
 #LoginGraceTime 2m
 #PermitRootLogin prohibit-password
 #StrictModes yes
 #MaxAuthTries 6
 #MaxSessions 10
-{% endraw %}
+{% endhighlight %}
 
 und ändert diese wie folgt ab
 
