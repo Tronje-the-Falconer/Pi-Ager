@@ -40,7 +40,7 @@ Jetzt legen wir mind. 8GB SD Karte in einen Kartenleser ein und warten bis Windo
 
 Danach starten wir den »Win32DiskImager.exe«, wählen das Image [_Image File_] und den Laufwerksbuchstaben [_Device_] der Speicherkarte aus
 
-[Win32DiskManager GUI](https://sourceforge.net/p/win32diskimager/screenshot/win32-imagewriter.png)
+![Win32DiskManager GUI](https://a.fsdn.com/con/app/proj/win32diskimager/screenshots/Win32DiskImager-1.0.png/1)
 
 und starten den Schreibvorgang mit einem Klick auf [_Write_] --> ACHTUNG nicht das falsche Laufwerk!
 
