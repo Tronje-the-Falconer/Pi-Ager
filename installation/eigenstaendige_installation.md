@@ -1,7 +1,8 @@
 ---
 layout: installation
-title: "Installation per Image"
+title: "Eigenständige Installation"
 ---
+# eigenständige Installation
 # Inhalt
 
 * [Betriebssystem RASPBIAN LITE](#betriebssystem-raspian-lite)
