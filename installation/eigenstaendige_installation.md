@@ -627,6 +627,7 @@ sudo apt-get install zip
 ## Webcam
 
 nun installieren wir noch mjpegstreamer zum streamen des Webcambildes.
+
 {% highlight shell %}
 sudo apt-get install subversion libjpeg8-dev imagemagick -y
 sudo svn co https://svn.code.sf.net/p/mjpg-streamer/code/mjpg-streamer/ mjpg-streamer
@@ -648,7 +649,7 @@ sudo nano /opt/mjpg-streamer/webcam.sh
 
 mit dem Inhalt (ohne Zeilenumbruch)
 
-{% highlight shell %}
+{% highlight plaintext %}
 #!/bin/bash
 /opt/mjpg-streamer/mjpg_streamer -i "/opt/mjpg-streamer/input_uvc.so -d /dev/video0 -y -n -f 2" -o "/opt/mjpg-streamer/output_http.so -n -w /opt/mjpg-streamer/www" &
 {% endhighlight %}
