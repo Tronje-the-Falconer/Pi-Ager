@@ -109,8 +109,10 @@ Danach sollten wir gefragt werden, ob wir neu starten wollen. Dies beantworten w
 
 Sollte die Frage nicht gestellt werden müssen wir den Raspberry manuell starten.
 
+```sh
     sudo sync
     sudo reboot
+```
 
 Sofern kein Ethernetanschluss gegeben ist, aber ein WLAN-Stick zur Verfügung steht sollte jetzt Punkt [WiFi-Verbindung](#wifi-verbindung) vorgezogen werden.
 
