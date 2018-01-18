@@ -136,12 +136,14 @@ sudo nano /etc/ssh/sshd_config
 
 Hier suchen wir nach folgender Zeile:
 
+```zsh
     #Authentication:
     #LoginGraceTime 2m
     #PermitRootLogin prohibit-password
     #StrictModes yes
     #MaxAuthTries 6
     #MaxSessions 10
+```
 
 und ändert diese wie folgt ab
 
