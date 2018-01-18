@@ -130,20 +130,20 @@ sudo passwd
 
 Und falls wir uns mittels SSH als root einloggen wollen, müssen wir die config noch anpassen:
 
-{% highlight shell_session %}
+{% highlight shell %}
 sudo nano /etc/ssh/sshd_config
 {% endhighlight %}
 
 Hier suchen wir nach folgender Zeile:
 
-```zsh
-    #Authentication:
-    #LoginGraceTime 2m
-    #PermitRootLogin prohibit-password
-    #StrictModes yes
-    #MaxAuthTries 6
-    #MaxSessions 10
-```
+{% highlight shell %}
+#Authentication:
+#LoginGraceTime 2m
+#PermitRootLogin prohibit-password
+#StrictModes yes
+#MaxAuthTries 6
+#MaxSessions 10
+{% endhighlight %}
 
 und ändert diese wie folgt ab
 
