@@ -110,8 +110,8 @@ Danach sollten wir gefragt werden, ob wir neu starten wollen. Dies beantworten w
 Sollte die Frage nicht gestellt werden müssen wir den Raspberry manuell starten.
 
 ```sh
-    sudo sync
-    sudo reboot
+sudo sync
+sudo reboot
 ```
 
 Sofern kein Ethernetanschluss gegeben ist, aber ein WLAN-Stick zur Verfügung steht sollte jetzt Punkt [WiFi-Verbindung](#wifi-verbindung) vorgezogen werden.
@@ -124,7 +124,9 @@ Sobald wir uns wieder eingeloggt haben, machen wir ein Update (Sofern kein LAN-K
 
 Jetzt aktivieren wir den "root" User, indem wir für den Benutzer ein Passwort vergeben:
 
-    sudo passwd
+```sh
+sudo passwd
+```
 
 Und falls wir uns mittels SSH als root einloggen wollen, müssen wir die config noch anpassen:
 
