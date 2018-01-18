@@ -109,7 +109,7 @@ Danach sollten wir gefragt werden, ob wir neu starten wollen. Dies beantworten w
 
 Sollte die Frage nicht gestellt werden müssen wir den Raspberry manuell starten.
 
-```sh
+```Shell
 sudo sync
 sudo reboot
 ```
@@ -124,7 +124,7 @@ Sobald wir uns wieder eingeloggt haben, machen wir ein Update (Sofern kein LAN-K
 
 Jetzt aktivieren wir den "root" User, indem wir für den Benutzer ein Passwort vergeben:
 
-```sh
+```Shell
 sudo passwd
 ```
 
