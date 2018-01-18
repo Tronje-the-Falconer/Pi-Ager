@@ -394,7 +394,7 @@ Jetzt erzeugen wir zum Test eine phpinfo.php im Webverzeichnis
 
 Inhalt:
 {% highlight php %}
-    <?php phpinfo(); ?>
+<?php phpinfo(); ?>
 {% endhighlight %}
 
 speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_" und testen jetzt die Installation.
