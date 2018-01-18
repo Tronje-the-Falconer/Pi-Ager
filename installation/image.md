@@ -4,6 +4,10 @@ title: "Installation per Image"
 ---
 # Imageinstallation
 
+Diese Anleitung basiert auf Windows. Im Falle eines anderen Betriebssystems bedarf es z.B. beim Schreiben des Images anderer Programme und evtl. andere Vorgehensweise.
+
+Im Falle eines andseren Betriebssystems, reicht es nicht aus, Windows als virtuelle Maschine zu benutzen. Hierbei haben wir die Erfahrung gemacht, dass die fertige SD-Karte nicht sauber im raspberry Pi startet.
+
 Das Image muss unter [Releases](https://github.com/Tronje-the-Falconer/Pi-Ager/releases) downloaden und auf die SD-Karte schreiben.
 
 Dafür läd man sich das Programm [Win 32 Disk Imager von Sourceforge](http://sourceforge.net/projects/win32diskimager/) herunter und installiert dieses.
