@@ -53,15 +53,17 @@ Eine leere Datei mit dem Namen ssh ohne jegliche Dateiendung und
 
 eine Datei mit dem Namen wpa_supplicant.conf mit dem Inhalt (ESSID und die PASSPHRASE sind durch die Zuangsdaten für unser WLAN zu ersetzen):
 
-    # Datei wpa_supplicant.conf in der Boot-Partition (Raspbian Stretch)
-    country=DE  #omit if US
-    ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-    update_config=1
-    network={
-           ssid="ESSID "
-           psk="PASSPHRASE"
-           key_mgmt=WPA-PSK
-    }
+{% highlight plaintext %}
+# Datei wpa_supplicant.conf in der Boot-Partition (Raspbian Stretch)
+country=DE  #omit if US
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+network={
+       ssid="ESSID "
+       psk="PASSPHRASE"
+       key_mgmt=WPA-PSK
+}
+{% endhighlight %}
 
 Sofern dies geschehen ist können wir auch die Speicherkarte in Windows auswerfen.
 
@@ -91,23 +93,25 @@ sudo raspi-config
 
 und richten folgende Einstellungen ein (die einzelnen Punkt können ggf. unter anderen Nummern stehen):
 
-    2 Network Options (bei raspberry pi zero)
-        N2 Wi-fi
-    8 Update (sofern wir keinen Ethernetanschluss und kein WLAN zur Verfügung haben, fällt dieser Punkt weg bzw. kann zu einem späteren Zeitpunkt nachgeholt werden)
-    7 Advanced Options
-        A1 Expand Filesystem
-        A3 Memory Split auf »8« damit mehr RAM für die Ausführung der Dienste zur Verfügung steht
-    1 Change User Password for User pi
-    2 Hostname ändern auf z.B. »rpi-Pi-Ager«
-    4 Internationalisation Options
-        I1 Standard Locale »de_DE.UTF-8 UTF-8« hinzufügen und als Standard auswählen
-        I2 Als Zeitzone »Europe / Berlin« auswählen
-        I3 Als Tastatur "Generic 105-key (Intel) PC" bestätigen und als Sprache "other" / "German" auswählen, alle anderen Optionen auf Standardwerten belassen   
-        I4 DE als WiFi auswählen 
-    5 Interface Options
-        P2 SSH »enable«
-        P6 Serial »disable« (Also 2mal auf NEIN klicken!!)
-    Finish
+{% highlight plaintext %}
+2 Network Options (bei raspberry pi zero)
+    N2 Wi-fi
+8 Update (sofern wir keinen Ethernetanschluss und kein WLAN zur Verfügung haben, fällt dieser Punkt weg bzw. kann zu einem späteren Zeitpunkt nachgeholt werden)
+7 Advanced Options
+    A1 Expand Filesystem
+    A3 Memory Split auf »8« damit mehr RAM für die Ausführung der Dienste zur Verfügung steht
+1 Change User Password for User pi
+2 Hostname ändern auf z.B. »rpi-Pi-Ager«
+4 Internationalisation Options
+    I1 Standard Locale »de_DE.UTF-8 UTF-8« hinzufügen und als Standard auswählen
+    I2 Als Zeitzone »Europe / Berlin« auswählen
+    I3 Als Tastatur "Generic 105-key (Intel) PC" bestätigen und als Sprache "other" / "German" auswählen, alle anderen Optionen auf Standardwerten belassen   
+    I4 DE als WiFi auswählen 
+5 Interface Options
+    P2 SSH »enable«
+    P6 Serial »disable« (Also 2mal auf NEIN klicken!!)
+Finish
+{% endhighlight %}
 
 Danach sollten wir gefragt werden, ob wir neu starten wollen. Dies beantworten wir mit Ja.
 
