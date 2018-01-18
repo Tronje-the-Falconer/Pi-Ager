@@ -132,9 +132,9 @@ sudo passwd
 
 Und falls wir uns mittels SSH als root einloggen wollen, müssen wir die config noch anpassen:
 
-{% highlight powershell %}
+```shell
 sudo nano /etc/ssh/sshd_config
-{% endhighlight %}
+```
 
 Hier suchen wir nach folgender Zeile:
 
