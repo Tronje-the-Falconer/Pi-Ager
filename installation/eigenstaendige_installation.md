@@ -185,11 +185,13 @@ lsusb
 
 Es sollte dann in etwa dieses angezeigt werden:
 
-    Bus 001 Device 002: ID 0424:9512 Standard Microsystems Corp.
-    Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-    Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp.
-    Bus 001 Device 004: ID 046a:0023 Cherry GmbH CyMotion Master Linux Keyboard
-    Bus 001 Device 005: ID 0bda:8176 Realtek Semiconductor Corp. RTL8188CUS 802.11n WLAN Adapter (o.ä.)
+{% highlight plaintext %}
+Bus 001 Device 002: ID 0424:9512 Standard Microsystems Corp.
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp.
+Bus 001 Device 004: ID 046a:0023 Cherry GmbH CyMotion Master Linux Keyboard
+Bus 001 Device 005: ID 0bda:8176 Realtek Semiconductor Corp. RTL8188CUS 802.11n WLAN Adapter (o.ä.)
+{% endhighlight %}
 
 Danach testen wir ob der Stick auch als USB-WIFI-Stick erkannt wurde:
 
@@ -199,85 +201,111 @@ iwconfig wlan0
 
 Es sollte in etwa so aussehen:
 
-    wlan0     unassociated  Nickname:"<WIFI@REALTEK>"
-              Mode:Managed  Frequency=2.412 GHz  Access Point: Not-Associated
-              Sensitivity:0/0
-              Retry:off   RTS thr:off   Fragment thr:off
-              Power Management:on
-              Link Quality:0  Signal level:0  Noise level:0
-              Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
-              Tx excessive retries:0  Invalid misc:0   Missed beacon:0
-
+{% highlight plaintext %}
+wlan0     unassociated  Nickname:"<WIFI@REALTEK>"
+          Mode:Managed  Frequency=2.412 GHz  Access Point: Not-Associated
+          Sensitivity:0/0
+          Retry:off   RTS thr:off   Fragment thr:off
+          Power Management:on
+          Link Quality:0  Signal level:0  Noise level:0
+          Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
+          Tx excessive retries:0  Invalid misc:0   Missed beacon:0
+{% endhighlight %}
+          
 Eine Anmerkung zum Power Management: Sofern dies auf on steht, sollte dies auf off gesetzt werden und danach kontrolliert werden:
 
-    sudo iw wlan0 set power_save off
-    iw wlan0 get power_save
+{% highlight shell %}
+sudo iw wlan0 set power_save off
+iw wlan0 get power_save
+{% endhighlight %}
 
 Mit folgendem Befehl können wir die verfügbaren Netzwerke auflisten:
 
-    iwlist wlan0 scanning
+{% highlight shell %}
+iwlist wlan0 scanning
+{% endhighlight %}
 
 Zum Schreiben des WLAN Keys sind höhere Rechte notwendig (root)
 
-    sudo su -
+{% highlight shell %}
+sudo su -
+{% endhighlight %}
 
 Nun geben wir folgendes ein und passen die ESSID und die PASSPHRASE für unser WLAN an. Damit auch Leerzeichen in der ESSID oder Passwort erkannt werden, müssen diese mit " maskiert werden. ( Das Passwort und die ESSID muss in Gänsefüßchen gesetzt werden bsp. "MEINE ESSID MIT LEERZEICHEN" "MEINE PASSPHRASE MIT LEERZEICHEN")
 
-    wpa_passphrase "ESSID" "PASSPHRASE" >> /etc/wpa_supplicant/wpa_supplicant.conf
+{% highlight shell %}
+wpa_passphrase "ESSID" "PASSPHRASE" >> /etc/wpa_supplicant/wpa_supplicant.conf
+{% endhighlight %}
 
 mit [_STRG_] + [_D_] kehren wir wieder zum Benutzer PI zurück. Nun können wir uns ansehen, ob das WLan auch eingetragen wurde :
 
-    sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+{% highlight shell %}
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+{% endhighlight %}
 
 Ergebnis in etwa so:
 
-    ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-    update_config=1
-    network={
-            ssid="DEIN_WLAN_NAME"
-            #psk="BlaBla-Echter Key"
-            psk=lksdfj09o4pokpofdgkpß0jppkspdfkpsß09i4popok
-    }
+{% highlight plaintext %}
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+network={
+        ssid="DEIN_WLAN_NAME"
+        #psk="BlaBla-Echter Key"
+        psk=lksdfj09o4pokpofdgkpß0jppkspdfkpsß09i4popok
+}
+{% endhighlight %}
 
 Sofern in der Datei Konfigurationen stehen, die sicher nicht benötigt werden, können wir diese herauslöschen und mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_"
 
 Nun aktivieren wir die WLAN-Konfiguration und sehen, ob es geklappt hat:
 
-    sudo ifdown wlan0
-    sudo ifup wlan0
+{% highlight shell %}
+sudo ifdown wlan0
+sudo ifup wlan0
+{% endhighlight %}
 
 Evtl. kann auch ein reboot helfen:
 
-    sudo reboot
+{% highlight shell %}
+sudo reboot
+{% endhighlight %}
 
 Eingabe
 
-    iwconfig wlan0
+{% highlight shell %}
+iwconfig wlan0
+{% endhighlight %}
 
 Ergebnis in etwa:
 
-    wlan0     IEEE 802.11bgn  ESSID:"PK-NEW"  Nickname:"<WIFI@REALTEK>"
-              Mode:Managed  Frequency:2.412 GHz  Access Point: DC:9F:DB:FD:E7:A0
-              Bit Rate:150 Mb/s   Sensitivity:0/0
-              Retry:off   RTS thr:off   Fragment thr:off
-              Power Management: on
-              Link Quality=83/100  Signal level=50/100  Noise level=0/100
-              Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
-              Tx excessive retries:0  Invalid misc:0   Missed beacon:0
-
+{% highlight shell %}
+wlan0     IEEE 802.11bgn  ESSID:"PK-NEW"  Nickname:"<WIFI@REALTEK>"
+          Mode:Managed  Frequency:2.412 GHz  Access Point: DC:9F:DB:FD:E7:A0
+          Bit Rate:150 Mb/s   Sensitivity:0/0
+          Retry:off   RTS thr:off   Fragment thr:off
+          Power Management: on
+          Link Quality=83/100  Signal level=50/100  Noise level=0/100
+          Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
+          Tx excessive retries:0  Invalid misc:0   Missed beacon:0
+{% endhighlight %}
+          
 Eingabe:
 
-    ifconfig wlan0
+{% highlight shell %}
+ifconfig wlan0
+{% endhighlight %}
 
 Ergebnis in etwa:
 
-    wlan0     Link encap:Ethernet  Hardware Adresse 64:70:02:23:ef:11
-              inet Adresse:192.168.0.52  Bcast:192.168.200.255  Maske:255.255.255.0
-              UP BROADCAST RUNNING MULTICAST  MTU:1500  Metrik:1
-              RX packets:10 errors:0 dropped:17 overruns:0 frame:0
-              TX packets:4 errors:0 dropped:0 overruns:0 carrier:0
-              Kollisionen:0 SendewarteschlangenlÃ¤nge:1000
-              RX bytes:2001 (1.9 KiB)  TX bytes:1036 (1.0 KiB)
+{% highlight plaintext %}
+wlan0     Link encap:Ethernet  Hardware Adresse 64:70:02:23:ef:11
+          inet Adresse:192.168.0.52  Bcast:192.168.200.255  Maske:255.255.255.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metrik:1
+          RX packets:10 errors:0 dropped:17 overruns:0 frame:0
+          TX packets:4 errors:0 dropped:0 overruns:0 carrier:0
+          Kollisionen:0 SendewarteschlangenlÃ¤nge:1000
+          RX bytes:2001 (1.9 KiB)  TX bytes:1036 (1.0 KiB)
+{% endhighlight %}
 
 Wenn wir eine IP aus eurem DHCP Bereich seht, haben wir es geschafft und können uns ab sofort auch über WLAN verbinden.
 
@@ -288,98 +316,126 @@ Wenn wir eine IP aus eurem DHCP Bereich seht, haben wir es geschafft und können
 ## lighttpd
 Zuerst aktualisieren wir die Pakete:
 
-    sudo apt-get update
-    sudo apt-get upgrade
+{% highlight shell %}
+sudo apt-get update
+sudo apt-get upgrade
+{% endhighlight %}
     
 Jetzt installieren wir den webserver lighttpd
 
-    sudo apt-get install lighttpd
+{% highlight shell %}
+sudo apt-get install lighttpd
+{% endhighlight %}
 
 Die Frage ob wir das wirklich wollen, beantworten wir mit "Ja".
 
 Nach der Installation wird der Dienst automatisch gestartet. Dies können wir überprüfen:
 
-    sudo systemctl status lighttpd
+{% highlight shell %}
+sudo systemctl status lighttpd
+{% endhighlight %}
 
 Damit auch bei anderen Betriebsversionen die Funktionalität gegeben ist, müssen wir das DocumentRoot-Verzeichnis für den Webserver umstellen. Standardmäßig ist der neue Pfad /var/www/html/, dies ändern wir auf /var/www/ (Früher war das so). Dazu editieren wir die Konfigurationsdatei  000-default.conf in /etc/apache2/sites-available/
 
-    sudo nano /etc/lighttpd/lighttpd.conf
+{% highlight shell %}
+sudo nano /etc/lighttpd/lighttpd.conf
+{% endhighlight %}
 
 und ändern den Parameter
 
-    server.document-root = "/var/www/html"
+{% highlight plaintext %}
+server.document-root = "/var/www/html"
+{% endhighlight %}
 
 nach 
 
-    server.document-root = "/var/www"
+{% highlight plaintext %}
+server.document-root = "/var/www"
+{% endhighlight %}
 
 und speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_"
 
 Damit wir Dateien im Webserververzeichnis ablegen kann, müssen wir noch einige Rechte setzen.
 
-    sudo groupadd www-data
-    sudo usermod -G www-data -a pi
-    sudo chown -R www-data:www-data /var/www
-    sudo chmod -R 775 /var/www
+{% highlight shell %}
+sudo groupadd www-data
+sudo usermod -G www-data -a pi
+sudo chown -R www-data:www-data /var/www
+sudo chmod -R 775 /var/www
+{% endhighlight %}
 
 Zum Test erzeugen wir eine html-Seite im Webverzeichnis:
 
-    sudo nano /var/www/test.html
+{% highlight shell %}
+sudo nano /var/www/test.html
+{% endhighlight %}
 
 mit dem Inhalt
 
-    <html>
-    <head><title>Test-Seite</title></head>
-    <body>
-    <h1>Das ist eine Test-Seite.</h1>
-    </body>
-    </html>
+{% highlight plaintext %}
+<html>
+<head><title>Test-Seite</title></head>
+<body>
+<h1>Das ist eine Test-Seite.</h1>
+</body>
+</html>
+{% endhighlight %}
 
 speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_" und testen jetzt die Installation.
 
 Evtl. kann auch ein reboot helfen:
 
+{% highlight shell %}
     sudo reboot
+{% endhighlight %}
 
 Dazu geben wir in unserem Browser die IP Adresse unseres Raspberry PI gefolgt vom /test.html (http://{IP-Adresse_des_Raspberry_Pi}/test.html) ein und sollten die Website sehen.
 
 Nun müssen wir noch die Passwortauthentifizierung für die Settingsseite einrichten. Dazu aktivieren wir das nötige Modul
 
-    sudo lighty-enable-mod auth
+{% highlight shell %}
+sudo lighty-enable-mod auth
+{% endhighlight %}
 
 Dieses müssen wir noch konfigurieren und öffnen es dazu im Editor
 
-    sudo nano /etc/lighttpd/conf-enabled/05-auth.conf
+{% highlight shell %}
+sudo nano /etc/lighttpd/conf-enabled/05-auth.conf
+{% endhighlight %}
 
 Folgende Zeilen werden unter server.modules += („mod_auth“) hinzugefügt:
 
-    auth.backend                    = "htdigest"
-    auth.backend.htdigest.userfile     = "/var/.htcredentials"
-    
-    auth.require                    = ( "/settings.php" =>
-                                       (
-                                        "method" => "digest",
-                                        "realm" => "Pi-Ager",
-                                        "require" => "user=pi-ager"
-                                       ),
-                                        "/admin.php" =>
-                                       (
-                                        "method"  => "digest",
-                                        "realm"   => "Pi-Ager",
-                                        "require" => "valid-user" 
-                                        ),
-                                        "/webcam.php" =>
-                                       (
-                                        "method"  => "digest",
-                                        "realm"   => "Pi-Ager",
-                                        "require" => "valid-user" 
-                                        )
-                                      )
+{% highlight plaintext %}
+auth.backend                    = "htdigest"
+auth.backend.htdigest.userfile     = "/var/.htcredentials"
+
+auth.require                    = ( "/settings.php" =>
+                                   (
+                                    "method" => "digest",
+                                    "realm" => "Pi-Ager",
+                                    "require" => "user=pi-ager"
+                                   ),
+                                    "/admin.php" =>
+                                   (
+                                    "method"  => "digest",
+                                    "realm"   => "Pi-Ager",
+                                    "require" => "valid-user" 
+                                    ),
+                                    "/webcam.php" =>
+                                   (
+                                    "method"  => "digest",
+                                    "realm"   => "Pi-Ager",
+                                    "require" => "valid-user" 
+                                    )
+                                  )
+{% endhighlight %}
 
 speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_"
 und starten den Webserver neu
 
-    sudo service lighttpd force-reload
+{% highlight shell %}
+sudo service lighttpd force-reload
+{% endhighlight %}
 
 [nach oben](#inhalt)
 
@@ -387,22 +443,29 @@ und starten den Webserver neu
 
 Jetzt installieren wir PHP7 unterstützung für lighttpd
 
-    sudo apt-get update
-    sudo apt-get install php7.0-common php7.0-cgi php7.0 php7.0-sqlite3
+{% highlight shell %}
+sudo apt-get update
+sudo apt-get install php7.0-common php7.0-cgi php7.0 php7.0-sqlite3
+{% endhighlight %}
 
 Die Frage ob wir das wirklich wollen beantworten wir mit "Ja".
 
 Nach der Installation von PHP7 müssen wir das FastCGI-Modul für PHP aktivieren und die ighttpd-Konfiguration neu laden.
 
-    sudo lighty-enable-mod fastcgi
-    sudo lighty-enable-mod fastcgi-php
-    sudo service lighttpd force-reload
+{% highlight shell %}
+sudo lighty-enable-mod fastcgi
+sudo lighty-enable-mod fastcgi-php
+sudo service lighttpd force-reload
+{% endhighlight %}
 
 Jetzt erzeugen wir zum Test eine phpinfo.php im Webverzeichnis
 
-    sudo nano /var/www/phpinfo.php
+{% highlight shell %}
+sudo nano /var/www/phpinfo.php
+{% endhighlight %}
 
 Inhalt:
+
 {% highlight php %}
 <?php phpinfo(); ?>
 {% endhighlight %}
@@ -413,48 +476,63 @@ Dazu geben wir in unserem Browser die IP Adresse unseres Raspberry PI gefolgt vo
 
 Jetzt beschleunigen wir das ganze System noch ein wenig, in dem wir das Caching aktivieren.
 
-    sudo apt-get update
-    sudo apt-get install php7.0-apcu
+{% highlight shell %}
+sudo apt-get update
+sudo apt-get install php7.0-apcu
+{% endhighlight %}
 
 Die Frage ob wir das wirklich wollen beantworten wir mit "Ja".
 
 Dann müssen wir noch einige Einstellungen am APC Cache vornehmen. Dazu öffnet man die APC-Konfigurationsdatei
 
-    sudo nano /etc/php/7.0/mods-available/apcu_bc.ini
+{% highlight shell %}
+sudo nano /etc/php/7.0/mods-available/apcu_bc.ini
+{% endhighlight %}
 
 und nehmen folgende Änderungen vor:
 
-    extension=apc.so
-    apc.enabled=1
-    apc.file_update_protection=2
-    apc.optimization=0
-    apc.shm_size=32M
-    apc.include_once_override=0
-    apc.shm_segments=1
-    apc.gc_ttl=7200
-    apc.ttl=7200
-    apc.num_files_hint=1024
-    apc.enable_cli=0
+{% highlight plaintext %}
+extension=apc.so
+apc.enabled=1
+apc.file_update_protection=2
+apc.optimization=0
+apc.shm_size=32M
+apc.include_once_override=0
+apc.shm_segments=1
+apc.gc_ttl=7200
+apc.ttl=7200
+apc.num_files_hint=1024
+apc.enable_cli=0
+{% endhighlight %}
 
 speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_".
 
 Des Weiteren berechtigen wir Dateien über die Website mittels x-send-file zu downloaden. Dazu editieren wir die fcgi-configuration:
 
-    sudo nano /etc/lighttpd/conf-enabled/15-fastcgi-php.conf
+{% highlight shell %}
+sudo nano /etc/lighttpd/conf-enabled/15-fastcgi-php.conf
+{% endhighlight %}
 
 und ergänzen am Ende der Zeile
 
-    "broken-scriptfilename" => "enable"
+{% highlight plaintext %}
+"broken-scriptfilename" => "enable"
+{% endhighlight %}
 
 ein "," und in einer neuen Zeile
 
-                   "allow-x-send-file" => "enable"
+{% highlight plaintext %}
+"allow-x-send-file" => "enable"
+{% endhighlight %}
+
 
 speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_" und testen jetzt die Installation.
 
 Zur Übernahme der Änderungen müssen wir die Konfiguration des Webservers neu laden.
 
-    sudo service lighttpd force-reload
+{% highlight shell %}
+sudo service lighttpd force-reload
+{% endhighlight %}
 
 [nach oben](#inhalt)
 
@@ -462,7 +540,9 @@ Zur Übernahme der Änderungen müssen wir die Konfiguration des Webservers neu 
 
 Danach folgt pip, mit dem Python-Module installiert werden können
 
-    sudo apt-get install python3-pip
+{% highlight shell %}
+sudo apt-get install python3-pip
+{% endhighlight %}
 
 Die Frage ob wir das wirklich wollen, beantworten wir mit "Ja".
 
@@ -472,7 +552,9 @@ Die Frage ob wir das wirklich wollen, beantworten wir mit "Ja".
 
 Wir benötigen GIT um auf das Repository zugreifen zu können.
 
-    sudo apt-get install git
+{% highlight shell %}
+sudo apt-get install git
+{% endhighlight %}
 
 Die Frage ob wir das wirklich wollen, beantworten wir mit ja.
 
@@ -482,7 +564,9 @@ Die Frage ob wir das wirklich wollen, beantworten wir mit ja.
 
 Jetzt installieren wir sqlite3 unterstützung
 
-    sudo apt install sqlite3
+{% highlight shell %}
+sudo apt install sqlite3
+{% endhighlight %}
 
 [nach oben](#inhalt)
 
@@ -490,7 +574,9 @@ Jetzt installieren wir sqlite3 unterstützung
 
 Unterstützung für SHT-Sensor
 
-    sudo pip3 install pi-sht1x
+{% highlight shell %}
+sudo pip3 install pi-sht1x
+{% endhighlight %}
 
 [nach oben](#inhalt)
 
@@ -498,14 +584,18 @@ Unterstützung für SHT-Sensor
 
 Jetzt installieren wir noch die Unterstützung für die DHT-Sensoren
 
-    git clone https://github.com/bob60/DHT-sensors-python3
-    sudo apt-get install build-essential python3-dev
-    cd DHT-sensors-python3
-    sudo python3 setup.py install
+{% highlight shell %}
+git clone https://github.com/bob60/DHT-sensors-python3
+sudo apt-get install build-essential python3-dev
+cd DHT-sensors-python3
+sudo python3 setup.py install
+{% endhighlight %}
 
 und wechseln zurück in das home-Verzeichnis
 
-    cd 
+{% highlight shell %}
+cd
+{% endhighlight %}
 
 [nach oben](#inhalt)
 
@@ -515,10 +605,12 @@ Nun installieren wir noch Wiring Pi. Dies ist ein nützliches Framework, um die 
 
 Dazu klonen wir wiringPi
 
-    sudo git clone git://git.drogon.net/wiringPi
-    cd wiringPi
-    sudo ./build
-    cd ..
+{% highlight shell %}
+sudo git clone git://git.drogon.net/wiringPi
+cd wiringPi
+sudo ./build
+cd
+{% endhighlight %}
 
 [nach oben](#inhalt)
 
@@ -526,38 +618,48 @@ Dazu klonen wir wiringPi
 
 Damit wir z.B. Logfiles zippen können, installieren wir jetzt die ZIP-Unterstützung
 
-    sudo apt-get install zip
+{% highlight shell %}
+sudo apt-get install zip
+{% endhighlight %}
 
 [nach oben](#inhalt)
 
 ## Webcam
 
 nun installieren wir noch mjpegstreamer zum streamen des Webcambildes.
-
-    sudo apt-get install subversion libjpeg8-dev imagemagick -y
-    sudo svn co https://svn.code.sf.net/p/mjpg-streamer/code/mjpg-streamer/ mjpg-streamer
-    cd mjpg-streamer
-    sudo make
+{% highlight shell %}
+sudo apt-get install subversion libjpeg8-dev imagemagick -y
+sudo svn co https://svn.code.sf.net/p/mjpg-streamer/code/mjpg-streamer/ mjpg-streamer
+cd mjpg-streamer
+sudo make
+{% endhighlight %}
 
 verschieben das Programm nach /opt
 
-    cd
-    sudo mv mjpg-streamer/ /opt/
+{% highlight shell %}
+cd
+sudo mv mjpg-streamer/ /opt/
+{% endhighlight %}
 
 erstellen ein Startscript
-
-    sudo nano /opt/mjpg-streamer/webcam.sh
+{% highlight shell %}
+sudo nano /opt/mjpg-streamer/webcam.sh
+{% endhighlight %}
 
 mit dem Inhalt (ohne Zeilenumbruch)
 
-    #!/bin/bash
-    /opt/mjpg-streamer/mjpg_streamer -i "/opt/mjpg-streamer/input_uvc.so -d /dev/video0 -y -n -f 2" -o "/opt/mjpg-streamer/output_http.so -n -w /opt/mjpg-streamer/www" &
+{% highlight shell %}
+#!/bin/bash
+/opt/mjpg-streamer/mjpg_streamer -i "/opt/mjpg-streamer/input_uvc.so -d /dev/video0 -y -n -f 2" -o "/opt/mjpg-streamer/output_http.so -n -w /opt/mjpg-streamer/www" &
+{% endhighlight %}
 
 speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_"
 
 Dann erlauben wir die Ausführung des Scripts
 
-    sudo chmod +x /opt/mjpg-streamer/webcam.sh
+{% highlight shell %}
+sudo chmod +x /opt/mjpg-streamer/webcam.sh
+{% endhighlight %}
 
 [nach oben](#inhalt)
 
@@ -565,7 +667,9 @@ Dann erlauben wir die Ausführung des Scripts
 
 Um ab und an auch mal ein Bild von der Webcam zu speichern installieren wir noch fswebcam
 
-    sudo apt-get install fswebcam
+{% highlight shell %}
+sudo apt-get install fswebcam
+{% endhighlight %}
 
 Die Frage, ob wir das wirklich wollen, beantworten wir mit "Ja".
 
@@ -577,7 +681,9 @@ Damit sind unsere Installationsvorbereitungen abgeschlossen und wir können uns 
 
 Jetzt erstellen einen Ordner (pi-ager) im Verzeichniss /opt:
 
-    sudo mkdir /opt/pi-ager
+{% highlight shell %}
+sudo mkdir /opt/pi-ager
+{% endhighlight %}
 
 Wir laden nun die im GitHub zur Verfügung gestellten Dateien aus dem Branch master herunter und entpacken diese.
 
@@ -595,82 +701,104 @@ Wir starten nun putty und loggen uns mit dem User pi und dem vergebenen Passwort
 
 Über putty müssen wir nun dieses Shellscript in /etc/sudoers eintragen, damit der www-data User (User der Website) dies ausführen darf. Da ich nano einfacher zum bearbeiten finde, setzen wir diesen zuerst als Standard-Editor
 
-    export EDITOR=nano
+{% highlight shell %}
+export EDITOR=nano
+{% endhighlight %}
 
 öffnen dann etc/sudoers mit
 
-    EDITOR=nano sudo -E visudo
+{% highlight shell %}
+EDITOR=nano sudo -E visudo
+{% endhighlight %}
     
 und tragen dann in sudoers folgendes nach 
 
-    ...
-    #User privilege specification
-    root    ALL=(ALL:ALL) ALL
-    ...
+{% highlight plaintext %}
+...
+#User privilege specification
+root    ALL=(ALL:ALL) ALL
+...
+{% endhighlight %}
 
 ein:
 
-    www-data ALL=NOPASSWD:/var/sudowebscript.sh
+{% highlight plaintext %}
+www-data ALL=NOPASSWD:/var/sudowebscript.sh
+{% endhighlight %}
 
 Und speichern mittels _STRG+O_ und beenden mit _STRG+X_
 
 Als nächstes kümmern wir uns um den Autostart des Schranks. Hiermit wird z.B. ermöglicht, das der Schrank nach einem Stromausfall automatisch wieder anläuft. Dazu legen wir eine Datei an:
 
-    sudo nano /etc/init.d/pi-ager-main.sh
+{% highlight shell %}
+sudo nano /etc/init.d/pi-ager-main.sh
+{% endhighlight %}
 
 Hinweis: Der nachfolgende Inhalt kann hier kopiert und dann in putty eingefügt werden.
 
-    #! /bin/sh
-    ### BEGIN INIT INFO
-    # Provides: pi-ager-main.sh
-    # Required-Start: $syslog
-    # Required-Stop: $syslog
-    # Default-Start: 2 3 4 5
-    # Default-Stop: 0 1 6
-    # Short-Description: pi-ager main.py
-    # Description:
-    ### END INIT INFO
-    
-    case "$1" in
-        start)
-            echo "pi-ager main.py wird gestartet"
-            # Starte Programm
-            /usr/bin/python3 /opt/pi-ager/main.py > /dev/null 2>/dev/null &
-            echo "startvorgang abgeschlossen"
-            ;;
-        stop)
-            echo "pi-ager main.py wird beendet"
-            # Beende Programm
-            pkill -f main.py
-            ;;
-        *)
-            echo "Benutzt: /etc/init.d/pi-ager-main.sh {start|stop}"
-            exit 1
-            ;;
-    esac
- 
-    exit 0
+{% highlight plaintext %}
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides: pi-ager-main.sh
+# Required-Start: $syslog
+# Required-Stop: $syslog
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: pi-ager main.py
+# Description:
+### END INIT INFO
+
+case "$1" in
+    start)
+        echo "pi-ager main.py wird gestartet"
+        # Starte Programm
+        /usr/bin/python3 /opt/pi-ager/main.py > /dev/null 2>/dev/null &
+        echo "startvorgang abgeschlossen"
+        ;;
+    stop)
+        echo "pi-ager main.py wird beendet"
+        # Beende Programm
+        pkill -f main.py
+        ;;
+    *)
+        echo "Benutzt: /etc/init.d/pi-ager-main.sh {start|stop}"
+        exit 1
+        ;;
+esac
+
+exit 0
+{% endhighlight %}
 
 speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_" und vergeben der Datei dann das Recht ausführbar zu sein
 
-    sudo chmod 755 /etc/init.d/pi-ager-main.sh
+{% highlight shell %}
+sudo chmod 755 /etc/init.d/pi-ager-main.sh
+{% endhighlight %}
 
 das ganze testen wir auf Funktion indem wir folgenden Befehl auf der Konsole eingeben:
 
-    sudo /etc/init.d/pi-ager-main.sh start
+{% highlight shell %}
+sudo /etc/init.d/pi-ager-main.sh start
+{% endhighlight %}
 
 es sollte folgende ausgabe erscheinen:
 
-    pi-ager main.py wird gestartet
-    startvorgang abgeschlossen
+{% highlight plaintext %}
+pi-ager main.py wird gestartet
+startvorgang abgeschlossen
+{% endhighlight %}
 
 danach landen wir wieder im sogenannten Prompt und können einen weiteren Befehl absetzen, der den Dienst wieder stoppt:
 
-    sudo /etc/init.d/pi-ager-main.sh stop
+{% highlight shell %}
+sudo /etc/init.d/pi-ager-main.sh stop
+{% endhighlight %}
 
 Wenn dies alles erfolgreich war tragen diese Datei als Startroutine ein
 
-    sudo update-rc.d pi-ager-main.sh defaults
+{% highlight shell %}
+sudo update-rc.d pi-ager-main.sh defaults
+{% endhighlight %}
 
 Nun benötigen wir noch eine .htcredentials Datei für die Settingsseite, die unseren User und sein Passwort enthält.
 Dazu Benutzen wir das Online-Tool [https://websistent.com/tools/htdigest-generator-tool/](https://websistent.com/tools/htdigest-generator-tool/)
@@ -685,7 +813,9 @@ Achtung! Groß-/Kleinschreibung beachten!
 
 Die Datei öffnen wir mit
 
-    sudo nano /var/.htcredentials
+{% highlight shell %}
+sudo nano /var/.htcredentials
+{% endhighlight %}
 
 und fügen den erzeugten String (am besten per kopieren/einfügen) in die Datei ein.
 
@@ -697,22 +827,27 @@ Jetzt müssen wir noch ein paar Schreibrechte über Putty oder über FileZilla a
 
 Hier die Befehle für Putty:
 
-    sudo chmod 666 /var/www/logs/logfile.txt
-    sudo chmod 775 /var/www/logs/
-    sudo chmod 664 /var/www/config/pi-ager.sqlite3
-    sudo chown -R www-data:www-data /var/www/config/
-    sudo chmod 555 /var/sudowebscript.sh
-    sudo chmod 777 /var/www/csv/
-    
+{% highlight shell %}
+sudo chmod 666 /var/www/logs/logfile.txt
+sudo chmod 775 /var/www/logs/
+sudo chmod 664 /var/www/config/pi-ager.sqlite3
+sudo chown -R www-data:www-data /var/www/config/
+sudo chmod 555 /var/sudowebscript.sh
+sudo chmod 777 /var/www/csv/
+{% endhighlight %}
 
 Der Benutzer 'pi' ist standardmäßig Mitglied in der Gruppe 'gpio' und hat daher Zugriff auf die virtuellen Dateien /sys/class/gpio/ ... Der Webserver läuft aber als Benutzer 'www-data' und ist nicht Mitglied in dieser speziellen Gruppe. Um das zu ändern muss man also den 'www-data' Benutzer der Gruppe 'gpio' hinzufügen und den Webserver neu starten:
 
-    sudo usermod -G gpio -a www-data
-    sudo service lighttpd force-reload
+{% highlight shell %}
+sudo usermod -G gpio -a www-data
+sudo service lighttpd force-reload
+{% endhighlight %}
 
 jetzt fahren wir den Raspberry Pi mittels
 
-    sudo halt
+{% highlight shell %}
+sudo halt
+{% endhighlight %}
 
 herunter und ziehen den Stecker vom Netzteil.
 
