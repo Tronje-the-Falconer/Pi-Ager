@@ -130,7 +130,9 @@ sudo passwd
 
 Und falls wir uns mittels SSH als root einloggen wollen, müssen wir die config noch anpassen:
 
-    sudo nano /etc/ssh/sshd_config
+```sh
+sudo nano /etc/ssh/sshd_config
+```
 
 Hier suchen wir nach folgender Zeile:
 
