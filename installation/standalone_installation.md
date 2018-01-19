@@ -8,17 +8,17 @@ title: "Standalone installation"
 * [RASPBIAN LITE operating system](#operating-system-raspian-lite)
 * [WiFi connection](#wifi-connection)
 * [Software packages](#software-packages)
-  * [lighttpd](#lighttpd)
-  * [PHP 7](#php-7)
-  * [pip](#pip)
-  * [git](# git)
-  * [sqlite3](#sqlite3)
-  * [Sht sensor](#sht-sensors)
-  * [DHT sensor](#dht-sensors)
-  * [Wiring Pi](#wiringpi)
-  * [ZIP](#zip)
-  * [webcam](#webcam)
-  * [fswebcam](# fswebcam)
+    * [lighttpd](#lighttpd)
+    * [PHP 7](#php-7)
+    * [pip](#pip)
+    * [git](# git)
+    * [sqlite3](#sqlite3)
+    * [Sht sensor](#sht-sensors)
+    * [DHT sensor](#dht-sensors)
+    * [Wiring Pi](#wiringpi)
+    * [ZIP](#zip)
+    * [webcam](#webcam)
+    * [fswebcam](# fswebcam)
 * [Program maturity control](# program-racks control)
 
 
@@ -59,9 +59,9 @@ country = DE # with if US
 ctrl_interface = DIR = / var / run / wpa_supplicant GROUP = netdev
 update_config = 1
 network = {
-       ssid = "ESSID"
-       psk = "PASSPHRASE"
-       key_mgmt = WPA-PSK
+       ssid = "ESSID"
+       psk = "PASSPHRASE"
+       key_mgmt = WPA-PSK
 }
 {% endhighlight%}
 
@@ -96,21 +96,21 @@ and set the following settings (the individual points may be under different num
 
 {% highlight plaintext%}
 2 Network Options (with raspberry pi zero)
-    N2 Wi-fi
+    N2 Wi-fi
 8 Update (if we have no Ethernet connection and no WLAN available, this point will be omitted or can be made up later)
 7 Advanced Options
-    A1 Expand file system
-    A3 Memory Split to 8 for more RAM to run services
+    A1 Expand file system
+    A3 Memory Split to 8 for more RAM to run services
 1 Change User Password for User pi
 2 change hostname to e.g. "Rpi-Pi-Ager"
 4 Internationalization Options
-    Add I1 Standard Locale »de_DE.UTF-8 UTF-8« and select as default
-    I2 Select the time zone »Europe / Berlin«
-    I3 Confirm the "Generic 105-key (Intel) PC" keyboard and select "other" / "German" as the language, leaving all other options at their default values
-    Select I4 DE as WiFi
+    Add I1 Standard Locale »de_DE.UTF-8 UTF-8« and select as default
+    I2 Select the time zone »Europe / Berlin«
+    I3 Confirm the "Generic 105-key (Intel) PC" keyboard and select "other" / "German" as the language, leaving all other options at their default values
+    Select I4 DE as WiFi
 5 interface options
-    P2 SSH »enable«
-    P6 Serial »disable« (So click on NO two times !!)
+    P2 SSH »enable«
+    P6 Serial »disable« (So click on NO two times !!)
 finish
 {% endhighlight%}
 
@@ -178,7 +178,9 @@ sudo reboot
 
 [to the top](# content)
 
-# WiFi connection (if not already set up via raspi-config)
+# WiFi connection
+
+(if not already set up via raspi-config)
 
 Only plug in the USB WIFI stick if the PI is switched off or if we use an active USB HUB -> otherwise the Raspberry PI will start by itself because of the voltage dip ...
 
@@ -208,15 +210,15 @@ It should look something like this:
 
 {% highlight plaintext%}
 wlan0 unassociated nickname: "<WIFI @ REALTEK>"
-          Mode: Managed Frequency = 2.412 GHz Access Point: Not-Associated
-          Sensitivity: 0/0
-          Retry: off RTS thr: off Fragment thr: off
-          Power Management: on
-          Link Quality: 0 Signal level: 0 Noise level: 0
-          Rx invalid: 0 Rx invalid: 0 Rx invalid: 0
-          Tx excessive retries: 0 Invalid misc: 0 Missed beacon: 0
+          Mode: Managed Frequency = 2.412 GHz Access Point: Not-Associated
+          Sensitivity: 0/0
+          Retry: off RTS thr: off Fragment thr: off
+          Power Management: on
+          Link Quality: 0 Signal level: 0 Noise level: 0
+          Rx invalid: 0 Rx invalid: 0 Rx invalid: 0
+          Tx excessive retries: 0 Invalid misc: 0 Missed beacon: 0
 {% endhighlight%}
-          
+          
 A Note on Power Management: If on, this should be set to off and then checked:
 
 {% highlight shell%}
@@ -254,9 +256,9 @@ Result in something like this:
 ctrl_interface = DIR = / var / run / wpa_supplicant GROUP = netdev
 update_config = 1
 network = {
-        ssid = "DEIN_WLAN_NAME"
-        # psk = "BlaBla-Real Key"
-        psk = lksdfj09o4pokpofdgkpß0jppkspdfkpsß09i4popok
+        ssid = "DEIN_WLAN_NAME"
+        # psk = "BlaBla-Real Key"
+        psk = lksdfj09o4pokpofdgkpß0jppkspdfkpsß09i4popok
 }
 {% endhighlight%}
 
@@ -285,15 +287,15 @@ Result in about:
 
 {% highlight shell%}
 wlan0 IEEE 802.11bgn ESSID: "PK-NEW" nickname: "<WIFI @ REALTEK>"
-          Mode: Managed Frequency: 2.412GHz Access Point: DC: 9F: DB: FD: E7: A0
-          Bit Rate: 150 Mbps Sensitivity: 0/0
-          Retry: off RTS thr: off Fragment thr: off
-          Power Management: on
-          Link Quality = 83/100 Signal level = 50/100 Noise level = 0/100
-          Rx invalid: 0 Rx invalid: 0 Rx invalid: 0
-          Tx excessive retries: 0 Invalid misc: 0 Missed beacon: 0
+          Mode: Managed Frequency: 2.412GHz Access Point: DC: 9F: DB: FD: E7: A0
+          Bit Rate: 150 Mbps Sensitivity: 0/0
+          Retry: off RTS thr: off Fragment thr: off
+          Power Management: on
+          Link Quality = 83/100 Signal level = 50/100 Noise level = 0/100
+          Rx invalid: 0 Rx invalid: 0 Rx invalid: 0
+          Tx excessive retries: 0 Invalid misc: 0 Missed beacon: 0
 {% endhighlight%}
-          
+          
 Input:
 
 {% highlight shell%}
@@ -304,12 +306,12 @@ Result in about:
 
 {% highlight plaintext%}
 wlan0 Link encap: Ethernet Hardware Address 64: 70: 02: 23: ef: 11
-          inet Address: 192.168.0.52 Bcast: 192.168.200.255 Mask: 255.255.255.0
-          UP BROADCAST RUNNING MULTICAST MTU: 1500 Metric: 1
-          RX packet: 10 errors: 0 dropped: 17 overruns: 0 frame: 0
-          TX packets: 4 errors: 0 dropped: 0 overruns: 0 carrier: 0
-          Collisions: 0 Send Queue Length: 1000
-          RX bytes: 2001 (1.9 KiB) TX bytes: 1036 (1.0 KiB)
+          inet Address: 192.168.0.52 Bcast: 192.168.200.255 Mask: 255.255.255.0
+          UP BROADCAST RUNNING MULTICAST MTU: 1500 Metric: 1
+          RX packet: 10 errors: 0 dropped: 17 overruns: 0 frame: 0
+          TX packets: 4 errors: 0 dropped: 0 overruns: 0 carrier: 0
+          Collisions: 0 Send Queue Length: 1000
+          RX bytes: 2001 (1.9 KiB) TX bytes: 1036 (1.0 KiB)
 {% endhighlight%}
 
 If we see an IP from your DHCP area, we have made it and can now connect via Wi-Fi.
@@ -325,7 +327,7 @@ First we update the packages:
 sudo apt-get update
 sudo apt-get upgrade
 {% endhighlight%}
-    
+    
 Now we install the webserver lighttpd
 
 {% highlight shell%}
@@ -391,7 +393,7 @@ save this with "_STRG + o_", "_RETURN_" and close with "_STRG + x_" and test the
 Possibly. can also help a reboot:
 
 {% highlight shell%}
-    sudo reboot
+    sudo reboot
 {% endhighlight%}
 
 For this we give in our browser to the IP address of our Raspberry PI followed by /test.html (http: // {IP} Adresse_des_Raspberry_Pi /test.html) and should see the website.
@@ -415,24 +417,24 @@ auth.backend = "htdigest"
 auth.backend.htdigest.userfile = "/var/.htcredentials"
 
 auth.require = ("/settings.php" =>
-                                   (
-                                    "method" => "digest",
-                                    "realm" => "Pi-Ager",
-                                    "require" => "user = pi-ager"
-                                   )
-                                    "/admin.php" =>
-                                   (
-                                    "method" => "digest",
-                                    "realm" => "Pi-Ager",
-                                    "require" => "valid-user"
-                                    )
-                                    "/webcam.php" =>
-                                   (
-                                    "method" => "digest",
-                                    "realm" => "Pi-Ager",
-                                    "require" => "valid-user"
-                                    )
-                                  )
+                                   (
+                                    "method" => "digest",
+                                    "realm" => "Pi-Ager",
+                                    "require" => "user = pi-ager"
+                                   )
+                                    "/admin.php" =>
+                                   (
+                                    "method" => "digest",
+                                    "realm" => "Pi-Ager",
+                                    "require" => "valid-user"
+                                    )
+                                    "/webcam.php" =>
+                                   (
+                                    "method" => "digest",
+                                    "realm" => "Pi-Ager",
+                                    "require" => "valid-user"
+                                    )
+                                  )
 {% endhighlight%}
 
 save this with "_STRG + o_", "_RETURN_" and close with "_STRG + x_"
@@ -716,7 +718,7 @@ then open etc / sudoers with
 {% highlight shell%}
 EDITOR = nano sudo -E visudo
 {% endhighlight%}
-    
+    
 and then follow up in sudoers following
 
 {% highlight plaintext%}
@@ -755,21 +757,21 @@ Note: The following content can be copied here and then inserted into putty.
 ### END INIT INFO
 
 case "$ 1" in
-    begin)
-        echo "pi-ager main.py will start"
-        # Start program
-        / usr / bin / python3 /opt/pi-ager/main.py> / dev / null 2> / dev / null &
-        echo "start process completed"
-        ;;
-    Stop)
-        echo "pi-ager main.py is closing"
-        # Exit program
-        pkill -f main.py
-        ;;
-    *)
-        echo "Uses: /etc/init.d/pi-ager-main.sh {start | stop}"
-        exit 1
-        ;;
+    begin)
+        echo "pi-ager main.py will start"
+        # Start program
+        / usr / bin / python3 /opt/pi-ager/main.py> / dev / null 2> / dev / null &
+        echo "start process completed"
+        ;;
+    Stop)
+        echo "pi-ager main.py is closing"
+        # Exit program
+        pkill -f main.py
+        ;;
+    *)
+        echo "Uses: /etc/init.d/pi-ager-main.sh {start | stop}"
+        exit 1
+        ;;
 esac
 
 exit 0

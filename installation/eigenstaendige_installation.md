@@ -178,7 +178,9 @@ sudo reboot
 
 [nach oben](#inhalt)
 
-# WiFi-Verbindung (sofern nicht schon über raspi-config eingerichtet)
+# WiFi-Verbindung
+
+(sofern nicht schon über raspi-config eingerichtet)
 
 Den USB-WIFI-Stick nur anstecken, wenn der PI ausgeschaltet ist oder wir einen aktiven USB HUB verwenden --> sonst startet der Raspberry PI durch den Spannungseinbruch unschön von selbst...
 
