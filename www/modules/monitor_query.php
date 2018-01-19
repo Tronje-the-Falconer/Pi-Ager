@@ -4,5 +4,5 @@
 
     $current_values = get_current_values_for_monitoring();
     echo json_encode($current_values);
-    logger('DEBUG', 'monitor_query performed');
+//    logger('DEBUG', 'monitor_query performed');
 ?>
