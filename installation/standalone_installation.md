@@ -5,34 +5,34 @@ title: "Standalone installation"
 # standalone installation (for experienced users)
 # Content
 
-* [RASPBIAN LITE operating system] (#operating-system-raspian-lite)
-* [WiFi connection] (#wifi-connection)
-* [Software packages] (#software-packages)
-    * [lighttpd] (#lighttpd)
-    * [PHP 7] (#php-7)
-    * [pip] (#pip)
-    * [git] (# git)
-    * [sqlite3] (#sqlite3)
-    * [Sht sensor] (#sht-sensors)
-    * [DHT sensor] (#dht-sensors)
-    * [Wiring Pi] (#wiringpi)
-    * [ZIP] (#zip)
-    * [webcam] (#webcam)
-    * [fswebcam] (# fswebcam)
-* [Program maturity control] (# program-racks control)
+* [RASPBIAN LITE operating system](#operating-system-raspian-lite)
+* [WiFi connection](#wifi-connection)
+* [Software packages](#software-packages)
+    * [lighttpd](#lighttpd)
+    * [PHP 7](#php-7)
+    * [pip](#pip)
+    * [git](# git)
+    * [sqlite3](#sqlite3)
+    * [Sht sensor](#sht-sensors)
+    * [DHT sensor](#dht-sensors)
+    * [Wiring Pi](#wiringpi)
+    * [ZIP](#zip)
+    * [webcam](#webcam)
+    * [fswebcam](# fswebcam)
+* [Program maturity control](# program-racks control)
 
 
 This guide is based on Windows. For other operating systems, you may need to choose a different approach (for example, describe the SD card.
 
 # Operating system RASPBIAN LITE
 
-Download [RASPBIAN LITE] (https://www.raspberrypi.org/downloads/raspbian/)
+Download [RASPBIAN LITE](https://www.raspberrypi.org/downloads/raspbian/)
 
 We unzip this and have to write it on the SD card.
 
-For this we download the program [Win 32 Disk Imager from Sourceforge] (http://sourceforge.net/projects/win32diskimager/) and unpack it. (On a Mac, for example, another program called "Etcher" must be used instead of Win 32 Disk Imager)
+For this we download the program [Win 32 Disk Imager from Sourceforge](http://sourceforge.net/projects/win32diskimager/) and unpack it. (On a Mac, for example, another program called "Etcher" must be used instead of Win 32 Disk Imager)
 
-In order to access the console of the Raspberry Pi later on we need another program, e.g. Putty. We can download this here: [putty] (https://putty.de.softonic.com/) (In case of Mac we need the console)
+In order to access the console of the Raspberry Pi later on we need another program, e.g. Putty. We can download this here: [putty](https://putty.de.softonic.com/) (In case of Mac we need the console)
 
 Also this we unpack after the download.
 
@@ -40,7 +40,7 @@ Now we put at least 8GB SD card in a card reader and wait until Windows has reco
 
 Then we start the »Win32DiskImager.exe«, select the image [_Image File_] and the drive letter [_Device_] of the memory card
 
-! [Win32DiskManager GUI] (https://a.fsdn.com/con/app/proj/win32diskimager/screenshots/Win32DiskImager-1.0.png/1)
+! [Win32DiskManager GUI](https://a.fsdn.com/con/app/proj/win32diskimager/screenshots/Win32DiskImager-1.0.png/1)
 
 and start the writing process by clicking on [_Write_] -> ATTENTION not the wrong drive!
 
@@ -123,11 +123,11 @@ sudo sync
 sudo reboot
 {% endhighlight%}
 
-If there is no Ethernet connection, but a WLAN stick is available, point [WiFi connection] (# wifi connection) should now be preferred.
+If there is no Ethernet connection, but a WLAN stick is available, point [WiFi connection](# wifi connection) should now be preferred.
 
-From now it is also possible by means of PC and additional program such. [Putty] (http://www.putty.org/) to access the Raspberry PI. For this we have to look in our router, which IP was assigned. By means of this we can then connect via Putty. The port is 22
+From now it is also possible by means of PC and additional program such. [Putty](http://www.putty.org/) to access the Raspberry PI. For this we have to look in our router, which IP was assigned. By means of this we can then connect via Putty. The port is 22
 
-Once we have logged in again, we will make an update (if no LAN cable is connected, or can (eg Rapberry PI Zero first follow the instructions [WiFi connection] (# wifi connection) below!)
+Once we have logged in again, we will make an update (if no LAN cable is connected, or can (eg Rapberry PI Zero first follow the instructions [WiFi connection](# wifi connection) below!)
 
 {% highlight shell%}
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade
@@ -176,7 +176,7 @@ sudo sync
 sudo reboot
 {% endhighlight%}
 
-[to the top] (# content)
+[to the top](# content)
 
 # WiFi connection (if not already set up via raspi-config)
 
@@ -314,7 +314,7 @@ wlan0 Link encap: Ethernet Hardware Address 64: 70: 02: 23: ef: 11
 
 If we see an IP from your DHCP area, we have made it and can now connect via Wi-Fi.
 
-[to the top] (# content)
+[to the top](# content)
 
 # Software packages
 
@@ -442,7 +442,7 @@ and restart the web server
 sudo service lighttpd force-reload
 {% endhighlight%}
 
-[to the top] (# content)
+[to the top](# content)
 
 ## PHP 7
 
@@ -539,7 +539,7 @@ To apply the changes, we need to reload the configuration of the web server.
 sudo service lighttpd force-reload
 {% endhighlight%}
 
-[to the top] (# content)
+[to the top](# content)
 
 ## pip
 
@@ -551,7 +551,7 @@ sudo apt-get install python3-pip
 
 The question of whether we really want that, we answer with "yes".
 
-[to the top] (# content)
+[to the top](# content)
 
 ## git
 
@@ -563,7 +563,7 @@ sudo apt-get install git
 
 The question of whether we really want that, we answer yes.
 
-[to the top] (# content)
+[to the top](# content)
 
 ## sqlite3
 
@@ -573,7 +573,7 @@ Now we install sqlite3 support
 sudo apt install sqlite3
 {% endhighlight%}
 
-[to the top] (# content)
+[to the top](# content)
 
 ## sht sensors
 
@@ -583,7 +583,7 @@ Support for SHT sensor
 sudo pip3 install pi-sht1x
 {% endhighlight%}
 
-[to the top] (# content)
+[to the top](# content)
 
 ## DHT sensors
 
@@ -602,7 +602,7 @@ and go back to the home directory
 CD
 {% endhighlight%}
 
-[to the top] (# content)
+[to the top](# content)
 
 ## wiringpi
 
@@ -617,7 +617,7 @@ sudo ./build
 CD
 {% endhighlight%}
 
-[to the top] (# content)
+[to the top](# content)
 
 ## ZIP
 
@@ -627,7 +627,7 @@ So that we e.g. Zipping logfiles, we now install ZIP support
 sudo apt-get install zip
 {% endhighlight%}
 
-[to the top] (# content)
+[to the top](# content)
 
 ## webcam
 
@@ -667,7 +667,7 @@ Then we allow the execution of the script
 sudo chmod + x /opt/mjpg-streamer/webcam.sh
 {% endhighlight%}
 
-[to the top] (# content)
+[to the top](# content)
 
 ## fswebcam
 
@@ -681,7 +681,7 @@ The question of whether we really want that, we answer with "yes".
 
 This completes our installation preparations and allows us to focus on the maturity cabinet control
 
-[to the top] (# content)
+[to the top](# content)
 
 # Program maturity cabinet control
 
@@ -693,9 +693,9 @@ sudo mkdir / opt / pi-ager
 
 We now download the files provided in the GitHub from the branch master and unzip them.
 
-[Download] (https://github.com/Tronje-the-Falconer/Pi-Ager/archive/master.zip)
+[Download](https://github.com/Tronje-the-Falconer/Pi-Ager/archive/master.zip)
 
-On our PC we install an FTP software (for example [FileZilla] (https://filezilla-project.org/)), with which we establish a connection to our Raspberry Pi.
+On our PC we install an FTP software (for example [FileZilla](https://filezilla-project.org/)), with which we establish a connection to our Raspberry Pi.
 
 We connect with sftp: // IP-DES_RASPBERRY-PI and the user root with the associated password
 
@@ -858,10 +858,10 @@ sudo stop
 
 down and unplug the power supply.
 
-Now the sensor is connected to the Raspberry Pi. See the [Construction and Connection Manual] (https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/3.i-Building-and-connection- of the Humidity and Temperature Sensor)
+Now the sensor is connected to the Raspberry Pi. See the [Construction and Connection Manual](https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/3.i-Building-and-connection- of the Humidity and Temperature Sensor)
 
 Once this is done, we can restart the Raspberry by reconnecting the power plug.
 
 If we now call the webiste http: //IPADRESSE/index.php everything should work fine.
 
-[to the top] (# content)
+[to the top](# content)
