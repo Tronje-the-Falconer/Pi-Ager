@@ -79,7 +79,7 @@ Sofern die beiden Dateien im Root Verzeichnis angelegt wurden, können wir über
 
 Einloggen mit (Achtung! Tastatur noch falsch konfiguriert [z=y]):
 
-{% highlight plaintext linenos %}
+{% highlight plaintext %}
 Benutzername: pi
 Passwort: raspberry
 {% endhighlight %}
@@ -94,7 +94,7 @@ sudo raspi-config
 
 und richten folgende Einstellungen ein (die einzelnen Punkt können ggf. unter anderen Nummern stehen):
 
-{% highlight plaintext linenos %}
+{% highlight plaintext %}
 2 Network Options (bei raspberry pi zero)
     N2 Wi-fi
 8 Update (sofern wir keinen Ethernetanschluss und kein WLAN zur Verfügung haben, fällt dieser Punkt weg bzw. kann zu einem späteren Zeitpunkt nachgeholt werden)
@@ -812,7 +812,7 @@ Nun benötigen wir noch eine .htcredentials Datei für die Settingsseite, die un
 
 Dazu Benutzen wir das Online-Tool [https://websistent.com/tools/htdigest-generator-tool/](https://websistent.com/tools/htdigest-generator-tool/)
 
-{% highlight plaintext linenos %}
+{% highlight plaintext %}
 Username: pi-ager
 REALM: Pi-Ager
 Password: Euer Passwort

@@ -79,7 +79,7 @@ If the two files were created in the root directory, we can access via Putty. Se
 
 Log in with (Attention! Keyboard still wrongly configured [z = y]):
 
-{% highlight plaintext linenos %}
+{% highlight plaintext %}
 Username: pi
 Password: raspberry
 {% endhighlight%}
@@ -94,7 +94,7 @@ sudo raspi-config
 
 and set the following settings (the individual points may be under different numbers):
 
-{% highlight plaintext linenos %}
+{% highlight plaintext %}
 2 Network Options (with raspberry pi zero)
     N2 Wi-fi
 8 Update (if we have no Ethernet connection and no WLAN available, this point will be omitted or can be made up later)
@@ -812,7 +812,7 @@ Now we need a .htcredentials file for the settings page that contains our user a
 
 For this we use the online tool [https://websistent.com/tools/htdigest-generator-tool/](https://websistent.com/tools/htdigest-generator-tool/)
 
-{% highlight plaintext linenos %}
+{% highlight plaintext %}
 Username: pi-ager
 REALM: Pi-Ager
 Password: your password
