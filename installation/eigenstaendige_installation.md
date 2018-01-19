@@ -79,9 +79,10 @@ Sofern die beiden Dateien im Root Verzeichnis angelegt wurden, können wir über
 
 Einloggen mit (Achtung! Tastatur noch falsch konfiguriert [z=y]):
 
-> Benutzername: pi
-
-> Passwort: raspberry
+{% highlight plaintext %}
+Benutzername: pi
+Passwort: raspberry
+{% endhighlight %}
 
 Danach führen wir den Assistenten aus
 
@@ -809,11 +810,11 @@ Nun benötigen wir noch eine .htcredentials Datei für die Settingsseite, die un
 
 Dazu Benutzen wir das Online-Tool [https://websistent.com/tools/htdigest-generator-tool/](https://websistent.com/tools/htdigest-generator-tool/)
 
-> Username ist pi-ager
-
-> REALM ist Pi-Ager
-
-> Password ist Euer Passwort
+{% highlight plaintext %}
+Username ist pi-ager
+REALM ist Pi-Ager
+Password ist Euer Passwort
+{% endhighlight %}
 
 Achtung! Groß-/Kleinschreibung beachten!
 
