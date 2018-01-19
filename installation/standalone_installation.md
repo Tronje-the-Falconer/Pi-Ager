@@ -601,7 +601,7 @@ sudo python3 setup.py install
 and go back to the home directory
 
 {% highlight shell linenos %}
-CD
+cd
 {% endhighlight%}
 
 [to the top](# content)
@@ -616,7 +616,7 @@ For this we clone wiringPi
 sudo git clone git: //git.drogon.net/wiringPi
 cd wiringPi
 sudo ./build
-CD
+cd
 {% endhighlight%}
 
 [to the top](# content)
@@ -645,7 +645,7 @@ sudo make
 move the program to / opt
 
 {% highlight shell linenos %}
-CD
+cd
 sudo mv mjpg streamer / / opt /
 {% endhighlight%}
 
