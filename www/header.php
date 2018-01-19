@@ -1,6 +1,4 @@
 <?php
-// include 'names.php';
-// include 'database.php';
 
     session_start();
     # Entwicklermodus
@@ -84,9 +82,10 @@
         <!--[if lte IE 7]><link rel="stylesheet" href="css/style.ie7.css" media="screen" /><![endif]-->
         <link rel="stylesheet" href="css/style.responsive.css" media="all">
         <?php
+
             if ($monitor_active == 'active'){
                 echo "<script src='js/jquery.js'></script>";
-                echo "<script src='js/ajax.js'></script>";
+            //    echo "<script src='js/ajax.js'></script>";
                 echo "<script src='js/script.js'></script>";
                 echo "<script src='js/script.responsive.js'></script>";
                 echo "<script src='js/moment.min.js'></script>";

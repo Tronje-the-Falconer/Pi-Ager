@@ -1,13 +1,13 @@
-<?php 
-                                    include 'header.php';                                       // Template-Kopf und Navigation
-                                    include 'modules/database.php';                             // Schnittstelle zur Datenbank
-                                    include 'modules/logging.php';                            //liest die Datei fuer das logging ein
-                                    include 'modules/names.php';                                // Variablen mit Strings
-                                    include 'modules/read_settings_db.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lueftung) und Betriebsart des RSS
-                                    include 'modules/read_config_db.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
-                                    include 'modules/read_operating_mode_db.php';                  // Liest die Art der Reifesteuerung
-                                    include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
-                                    include 'modules/read_current_db.php';                    // Liest die gemessenen Werte Temp, Humy, Timestamp
+<?php
+                                      include 'header.php';                                       // Template-Kopf und Navigation
+                                      include 'modules/database.php';                             // Schnittstelle zur Datenbank
+                                      include 'modules/logging.php';                            //liest die Datei fuer das logging ein
+                                      include 'modules/names.php';                                // Variablen mit Strings
+                                      include 'modules/read_settings_db.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lueftung) und Betriebsart des RSS
+                                      include 'modules/read_config_db.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
+                                      include 'modules/read_operating_mode_db.php';                  // Liest die Art der Reifesteuerung
+                                      include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
+                                      include 'modules/read_current_db.php';                    // Liest die gemessenen Werte Temp, Humy, Timestamp
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('current values'); ?></h2>
                         <!--        <div style="float: left; padding-left: 8px;" id="timestamp"></div>
@@ -16,7 +16,8 @@
                         -->
                                 <!----------------------------------------------------------------------------------------Anzeige T/rLF-->
 <?php
-// include 'modules/monitor_query.php';
+ // include 'modules/monitor_query.php';
+ echo "<script src='js/ajax.js'></script>";
 ?>
                                 <div class="thermometers">
                                     <div class="th-display-div">
