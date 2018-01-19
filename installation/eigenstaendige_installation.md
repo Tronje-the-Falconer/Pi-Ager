@@ -53,7 +53,7 @@ Eine leere Datei mit dem Namen ssh ohne jegliche Dateiendung und
 
 eine Datei mit dem Namen wpa_supplicant.conf mit dem Inhalt (ESSID und die PASSPHRASE sind durch die Zuangsdaten für unser WLAN zu ersetzen):
 
-{% highlight plaintext linenos=5 %}
+{% highlight plaintext linenos %}
 # Datei wpa_supplicant.conf in der Boot-Partition (Raspbian Stretch)
 country=DE  #omit if US
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
@@ -79,14 +79,14 @@ Sofern die beiden Dateien im Root Verzeichnis angelegt wurden, können wir über
 
 Einloggen mit (Achtung! Tastatur noch falsch konfiguriert [z=y]):
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 Benutzername: pi
 Passwort: raspberry
 {% endhighlight %}
 
 Danach führen wir den Assistenten aus
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo raspi-config
 {% endhighlight %}
 
@@ -94,7 +94,7 @@ sudo raspi-config
 
 und richten folgende Einstellungen ein (die einzelnen Punkt können ggf. unter anderen Nummern stehen):
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 2 Network Options (bei raspberry pi zero)
     N2 Wi-fi
 8 Update (sofern wir keinen Ethernetanschluss und kein WLAN zur Verfügung haben, fällt dieser Punkt weg bzw. kann zu einem späteren Zeitpunkt nachgeholt werden)
@@ -118,7 +118,7 @@ Danach sollten wir gefragt werden, ob wir neu starten wollen. Dies beantworten w
 
 Sollte die Frage nicht gestellt werden müssen wir den Raspberry manuell starten.
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo sync
 sudo reboot
 {% endhighlight %}
@@ -129,25 +129,25 @@ Ab jetzt ist es möglich auch mittels PC und Zusatzprogramm wie z.B. [Putty](htt
 
 Sobald wir uns wieder eingeloggt haben, machen wir ein Update (Sofern kein LAN-Kabel angeschlossen ist, oder kann (Bsp. Rapberry PI Zero zuerst die Anleitung [WiFi-Verbindung](#wifi-verbindung) weiter unten befolgen!)
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade
 {% endhighlight %}
 
 Jetzt aktivieren wir den "root" User, indem wir für den Benutzer ein Passwort vergeben:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo passwd
 {% endhighlight %}
 
 Und falls wir uns mittels SSH als root einloggen wollen, müssen wir die config noch anpassen:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo nano /etc/ssh/sshd_config
 {% endhighlight %}
 
 Hier suchen wir nach folgender Zeile:
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 #Authentication:
 #LoginGraceTime 2m
 #PermitRootLogin prohibit-password
@@ -158,7 +158,7 @@ Hier suchen wir nach folgender Zeile:
 
 und ändert diese wie folgt ab
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 #Authentication:
 LoginGraceTime 2m
 PermitRootLogin yes
@@ -171,7 +171,7 @@ Jetzt Speichern wir mit "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_"
 
 Einmal noch neu starten
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo sync
 sudo reboot
 {% endhighlight %}
@@ -186,13 +186,13 @@ Den USB-WIFI-Stick nur anstecken, wenn der PI ausgeschaltet ist oder wir einen a
 
 Wenn der USB-WIFI-Stick angesteckt und der PI hochgefahren ist oder es sich um einen Raspberry PI Zero W handelt, geben wir folgendes ein um zu sehen, ob er als USB-Device  erkannt wurde:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 lsusb
 {% endhighlight %}
 
 Es sollte dann in etwa dieses angezeigt werden:
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 Bus 001 Device 002: ID 0424:9512 Standard Microsystems Corp.
 Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp.
@@ -202,13 +202,13 @@ Bus 001 Device 005: ID 0bda:8176 Realtek Semiconductor Corp. RTL8188CUS 802.11n 
 
 Danach testen wir ob der Stick auch als USB-WIFI-Stick erkannt wurde:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 iwconfig wlan0
 {% endhighlight %}
 
 Es sollte in etwa so aussehen:
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 wlan0     unassociated  Nickname:"<WIFI@REALTEK>"
           Mode:Managed  Frequency=2.412 GHz  Access Point: Not-Associated
           Sensitivity:0/0
@@ -221,38 +221,38 @@ wlan0     unassociated  Nickname:"<WIFI@REALTEK>"
           
 Eine Anmerkung zum Power Management: Sofern dies auf on steht, sollte dies auf off gesetzt werden und danach kontrolliert werden:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo iw wlan0 set power_save off
 iw wlan0 get power_save
 {% endhighlight %}
 
 Mit folgendem Befehl können wir die verfügbaren Netzwerke auflisten:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 iwlist wlan0 scanning
 {% endhighlight %}
 
 Zum Schreiben des WLAN Keys sind höhere Rechte notwendig (root)
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo su -
 {% endhighlight %}
 
 Nun geben wir folgendes ein und passen die ESSID und die PASSPHRASE für unser WLAN an. Damit auch Leerzeichen in der ESSID oder Passwort erkannt werden, müssen diese mit " maskiert werden. ( Das Passwort und die ESSID muss in Gänsefüßchen gesetzt werden bsp. "MEINE ESSID MIT LEERZEICHEN" "MEINE PASSPHRASE MIT LEERZEICHEN")
 
-{% highlight shell %}
+{% highlight shell linenos %}
 wpa_passphrase "ESSID" "PASSPHRASE" >> /etc/wpa_supplicant/wpa_supplicant.conf
 {% endhighlight %}
 
 mit [_STRG_] + [_D_] kehren wir wieder zum Benutzer PI zurück. Nun können wir uns ansehen, ob das WLan auch eingetragen wurde :
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
 {% endhighlight %}
 
 Ergebnis in etwa so:
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
 network={
@@ -266,26 +266,26 @@ Sofern in der Datei Konfigurationen stehen, die sicher nicht benötigt werden, k
 
 Nun aktivieren wir die WLAN-Konfiguration und sehen, ob es geklappt hat:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo ifdown wlan0
 sudo ifup wlan0
 {% endhighlight %}
 
 Evtl. kann auch ein reboot helfen:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo reboot
 {% endhighlight %}
 
 Eingabe
 
-{% highlight shell %}
+{% highlight shell linenos %}
 iwconfig wlan0
 {% endhighlight %}
 
 Ergebnis in etwa:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 wlan0     IEEE 802.11bgn  ESSID:"PK-NEW"  Nickname:"<WIFI@REALTEK>"
           Mode:Managed  Frequency:2.412 GHz  Access Point: DC:9F:DB:FD:E7:A0
           Bit Rate:150 Mb/s   Sensitivity:0/0
@@ -298,13 +298,13 @@ wlan0     IEEE 802.11bgn  ESSID:"PK-NEW"  Nickname:"<WIFI@REALTEK>"
           
 Eingabe:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 ifconfig wlan0
 {% endhighlight %}
 
 Ergebnis in etwa:
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 wlan0     Link encap:Ethernet  Hardware Adresse 64:70:02:23:ef:11
           inet Adresse:192.168.0.52  Bcast:192.168.200.255  Maske:255.255.255.0
           UP BROADCAST RUNNING MULTICAST  MTU:1500  Metrik:1
@@ -323,14 +323,14 @@ Wenn wir eine IP aus eurem DHCP Bereich seht, haben wir es geschafft und können
 ## lighttpd
 Zuerst aktualisieren wir die Pakete:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo apt-get update
 sudo apt-get upgrade
 {% endhighlight %}
     
 Jetzt installieren wir den webserver lighttpd
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo apt-get install lighttpd
 {% endhighlight %}
 
@@ -338,25 +338,25 @@ Die Frage ob wir das wirklich wollen, beantworten wir mit "Ja".
 
 Nach der Installation wird der Dienst automatisch gestartet. Dies können wir überprüfen:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo systemctl status lighttpd
 {% endhighlight %}
 
 Damit auch bei anderen Betriebsversionen die Funktionalität gegeben ist, müssen wir das DocumentRoot-Verzeichnis für den Webserver umstellen. Standardmäßig ist der neue Pfad /var/www/html/, dies ändern wir auf /var/www/ (Früher war das so). Dazu editieren wir die Konfigurationsdatei  000-default.conf in /etc/apache2/sites-available/
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo nano /etc/lighttpd/lighttpd.conf
 {% endhighlight %}
 
 und ändern den Parameter
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 server.document-root = "/var/www/html"
 {% endhighlight %}
 
 nach 
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 server.document-root = "/var/www"
 {% endhighlight %}
 
@@ -364,7 +364,7 @@ und speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_"
 
 Damit wir Dateien im Webserververzeichnis ablegen kann, müssen wir noch einige Rechte setzen.
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo groupadd www-data
 sudo usermod -G www-data -a pi
 sudo chown -R www-data:www-data /var/www
@@ -373,13 +373,13 @@ sudo chmod -R 775 /var/www
 
 Zum Test erzeugen wir eine html-Seite im Webverzeichnis:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo nano /var/www/test.html
 {% endhighlight %}
 
 mit dem Inhalt
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 <html>
 <head><title>Test-Seite</title></head>
 <body>
@@ -392,7 +392,7 @@ speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_" und 
 
 Evtl. kann auch ein reboot helfen:
 
-{% highlight shell %}
+{% highlight shell linenos %}
     sudo reboot
 {% endhighlight %}
 
@@ -400,19 +400,19 @@ Dazu geben wir in unserem Browser die IP Adresse unseres Raspberry PI gefolgt vo
 
 Nun müssen wir noch die Passwortauthentifizierung für die Settingsseite einrichten. Dazu aktivieren wir das nötige Modul
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo lighty-enable-mod auth
 {% endhighlight %}
 
 Dieses müssen wir noch konfigurieren und öffnen es dazu im Editor
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo nano /etc/lighttpd/conf-enabled/05-auth.conf
 {% endhighlight %}
 
 Folgende Zeilen werden unter server.modules += („mod_auth“) hinzugefügt:
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 auth.backend                    = "htdigest"
 auth.backend.htdigest.userfile     = "/var/.htcredentials"
 
@@ -440,7 +440,7 @@ auth.require                    = ( "/settings.php" =>
 speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_"
 und starten den Webserver neu
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo service lighttpd force-reload
 {% endhighlight %}
 
@@ -450,7 +450,7 @@ sudo service lighttpd force-reload
 
 Jetzt installieren wir PHP7 unterstützung für lighttpd
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo apt-get update
 sudo apt-get install php7.0-common php7.0-cgi php7.0 php7.0-sqlite3
 {% endhighlight %}
@@ -459,7 +459,7 @@ Die Frage ob wir das wirklich wollen beantworten wir mit "Ja".
 
 Nach der Installation von PHP7 müssen wir das FastCGI-Modul für PHP aktivieren und die ighttpd-Konfiguration neu laden.
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo lighty-enable-mod fastcgi
 sudo lighty-enable-mod fastcgi-php
 sudo service lighttpd force-reload
@@ -467,7 +467,7 @@ sudo service lighttpd force-reload
 
 Jetzt erzeugen wir zum Test eine phpinfo.php im Webverzeichnis
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo nano /var/www/phpinfo.php
 {% endhighlight %}
 
@@ -483,7 +483,7 @@ Dazu geben wir in unserem Browser die IP Adresse unseres Raspberry PI gefolgt vo
 
 Jetzt beschleunigen wir das ganze System noch ein wenig, in dem wir das Caching aktivieren.
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo apt-get update
 sudo apt-get install php7.0-apcu
 {% endhighlight %}
@@ -492,7 +492,7 @@ Die Frage ob wir das wirklich wollen beantworten wir mit "Ja".
 
 Dann müssen wir noch einige Einstellungen am APC Cache vornehmen. Dazu öffnet man die APC-Konfigurationsdatei
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo nano /etc/php/7.0/mods-available/apcu_bc.ini
 {% endhighlight %}
 
@@ -516,7 +516,7 @@ speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_".
 
 Des Weiteren berechtigen wir Dateien über die Website mittels x-send-file zu downloaden. Dazu editieren wir die fcgi-configuration:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo nano /etc/lighttpd/conf-enabled/15-fastcgi-php.conf
 {% endhighlight %}
 
@@ -537,7 +537,7 @@ speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_" und 
 
 Zur Übernahme der Änderungen müssen wir die Konfiguration des Webservers neu laden.
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo service lighttpd force-reload
 {% endhighlight %}
 
@@ -547,7 +547,7 @@ sudo service lighttpd force-reload
 
 Danach folgt pip, mit dem Python-Module installiert werden können
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo apt-get install python3-pip
 {% endhighlight %}
 
@@ -559,7 +559,7 @@ Die Frage ob wir das wirklich wollen, beantworten wir mit "Ja".
 
 Wir benötigen GIT um auf das Repository zugreifen zu können.
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo apt-get install git
 {% endhighlight %}
 
@@ -571,7 +571,7 @@ Die Frage ob wir das wirklich wollen, beantworten wir mit ja.
 
 Jetzt installieren wir sqlite3 unterstützung
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo apt install sqlite3
 {% endhighlight %}
 
@@ -581,7 +581,7 @@ sudo apt install sqlite3
 
 Unterstützung für SHT-Sensor
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo pip3 install pi-sht1x
 {% endhighlight %}
 
@@ -591,7 +591,7 @@ sudo pip3 install pi-sht1x
 
 Jetzt installieren wir noch die Unterstützung für die DHT-Sensoren
 
-{% highlight shell %}
+{% highlight shell linenos %}
 git clone https://github.com/bob60/DHT-sensors-python3
 sudo apt-get install build-essential python3-dev
 cd DHT-sensors-python3
@@ -600,7 +600,7 @@ sudo python3 setup.py install
 
 und wechseln zurück in das home-Verzeichnis
 
-{% highlight shell %}
+{% highlight shell linenos %}
 cd
 {% endhighlight %}
 
@@ -612,7 +612,7 @@ Nun installieren wir noch Wiring Pi. Dies ist ein nützliches Framework, um die 
 
 Dazu klonen wir wiringPi
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo git clone git://git.drogon.net/wiringPi
 cd wiringPi
 sudo ./build
@@ -625,7 +625,7 @@ cd
 
 Damit wir z.B. Logfiles zippen können, installieren wir jetzt die ZIP-Unterstützung
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo apt-get install zip
 {% endhighlight %}
 
@@ -635,7 +635,7 @@ sudo apt-get install zip
 
 nun installieren wir noch mjpegstreamer zum streamen des Webcambildes.
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo apt-get install subversion libjpeg8-dev imagemagick -y
 sudo svn co https://svn.code.sf.net/p/mjpg-streamer/code/mjpg-streamer/ mjpg-streamer
 cd mjpg-streamer
@@ -644,19 +644,19 @@ sudo make
 
 verschieben das Programm nach /opt
 
-{% highlight shell %}
+{% highlight shell linenos %}
 cd
 sudo mv mjpg-streamer/ /opt/
 {% endhighlight %}
 
 erstellen ein Startscript
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo nano /opt/mjpg-streamer/webcam.sh
 {% endhighlight %}
 
 mit dem Inhalt (ohne Zeilenumbruch)
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 #!/bin/bash
 /opt/mjpg-streamer/mjpg_streamer -i "/opt/mjpg-streamer/input_uvc.so -d /dev/video0 -y -n -f 2" -o "/opt/mjpg-streamer/output_http.so -n -w /opt/mjpg-streamer/www" &
 {% endhighlight %}
@@ -665,7 +665,7 @@ speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_"
 
 Dann erlauben wir die Ausführung des Scripts
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo chmod +x /opt/mjpg-streamer/webcam.sh
 {% endhighlight %}
 
@@ -675,7 +675,7 @@ sudo chmod +x /opt/mjpg-streamer/webcam.sh
 
 Um ab und an auch mal ein Bild von der Webcam zu speichern installieren wir noch fswebcam
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo apt-get install fswebcam
 {% endhighlight %}
 
@@ -689,7 +689,7 @@ Damit sind unsere Installationsvorbereitungen abgeschlossen und wir können uns 
 
 Jetzt erstellen einen Ordner (pi-ager) im Verzeichniss /opt:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo mkdir /opt/pi-ager
 {% endhighlight %}
 
@@ -709,19 +709,19 @@ Wir starten nun putty und loggen uns mit dem User pi und dem vergebenen Passwort
 
 Über putty müssen wir nun dieses Shellscript in /etc/sudoers eintragen, damit der www-data User (User der Website) dies ausführen darf. Da ich nano einfacher zum bearbeiten finde, setzen wir diesen zuerst als Standard-Editor
 
-{% highlight shell %}
+{% highlight shell linenos %}
 export EDITOR=nano
 {% endhighlight %}
 
 öffnen dann etc/sudoers mit
 
-{% highlight shell %}
+{% highlight shell linenos %}
 EDITOR=nano sudo -E visudo
 {% endhighlight %}
     
 und tragen dann in sudoers folgendes nach 
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 ...
 #User privilege specification
 root    ALL=(ALL:ALL) ALL
@@ -730,7 +730,7 @@ root    ALL=(ALL:ALL) ALL
 
 ein:
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 www-data ALL=NOPASSWD:/var/sudowebscript.sh
 {% endhighlight %}
 
@@ -738,13 +738,13 @@ Und speichern mittels _STRG+O_ und beenden mit _STRG+X_
 
 Als nächstes kümmern wir uns um den Autostart des Schranks. Hiermit wird z.B. ermöglicht, das der Schrank nach einem Stromausfall automatisch wieder anläuft. Dazu legen wir eine Datei an:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo nano /etc/init.d/pi-ager-main.sh
 {% endhighlight %}
 
 Hinweis: Der nachfolgende Inhalt kann hier kopiert und dann in putty eingefügt werden.
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 #! /bin/sh
 ### BEGIN INIT INFO
 # Provides: pi-ager-main.sh
@@ -779,32 +779,32 @@ exit 0
 
 speichern dies mittels "_STRG+o_", "_RETURN_" und schließen mit "_STRG+x_" und vergeben der Datei dann das Recht ausführbar zu sein
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo chmod 755 /etc/init.d/pi-ager-main.sh
 {% endhighlight %}
 
 das ganze testen wir auf Funktion indem wir folgenden Befehl auf der Konsole eingeben:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo /etc/init.d/pi-ager-main.sh start
 {% endhighlight %}
 
 es sollte folgende ausgabe erscheinen:
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 pi-ager main.py wird gestartet
 startvorgang abgeschlossen
 {% endhighlight %}
 
 danach landen wir wieder im sogenannten Prompt und können einen weiteren Befehl absetzen, der den Dienst wieder stoppt:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo /etc/init.d/pi-ager-main.sh stop
 {% endhighlight %}
 
 Wenn dies alles erfolgreich war tragen diese Datei als Startroutine ein
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo update-rc.d pi-ager-main.sh defaults
 {% endhighlight %}
 
@@ -812,7 +812,7 @@ Nun benötigen wir noch eine .htcredentials Datei für die Settingsseite, die un
 
 Dazu Benutzen wir das Online-Tool [https://websistent.com/tools/htdigest-generator-tool/](https://websistent.com/tools/htdigest-generator-tool/)
 
-{% highlight plaintext %}
+{% highlight plaintext linenos %}
 Username: pi-ager
 REALM: Pi-Ager
 Password: Euer Passwort
@@ -822,7 +822,7 @@ Achtung! Groß-/Kleinschreibung beachten!
 
 Die Datei öffnen wir mit
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo nano /var/.htcredentials
 {% endhighlight %}
 
@@ -836,7 +836,7 @@ Jetzt müssen wir noch ein paar Schreibrechte über Putty oder über FileZilla a
 
 Hier die Befehle für Putty:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo chmod 666 /var/www/logs/logfile.txt
 sudo chmod 775 /var/www/logs/
 sudo chmod 664 /var/www/config/pi-ager.sqlite3
@@ -847,14 +847,14 @@ sudo chmod 777 /var/www/csv/
 
 Der Benutzer 'pi' ist standardmäßig Mitglied in der Gruppe 'gpio' und hat daher Zugriff auf die virtuellen Dateien /sys/class/gpio/ ... Der Webserver läuft aber als Benutzer 'www-data' und ist nicht Mitglied in dieser speziellen Gruppe. Um das zu ändern muss man also den 'www-data' Benutzer der Gruppe 'gpio' hinzufügen und den Webserver neu starten:
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo usermod -G gpio -a www-data
 sudo service lighttpd force-reload
 {% endhighlight %}
 
 jetzt fahren wir den Raspberry Pi mittels
 
-{% highlight shell %}
+{% highlight shell linenos %}
 sudo halt
 {% endhighlight %}
 
