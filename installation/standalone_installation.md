@@ -8,17 +8,17 @@ title: "Standalone installation"
 * [RASPBIAN LITE operating system](#operating-system-raspian-lite)
 * [WiFi connection](#wifi-connection)
 * [Software packages](#software-packages)
-    * [lighttpd](#lighttpd)
-    * [PHP 7](#php-7)
-    * [pip](#pip)
-    * [git](# git)
-    * [sqlite3](#sqlite3)
-    * [Sht sensor](#sht-sensors)
-    * [DHT sensor](#dht-sensors)
-    * [Wiring Pi](#wiringpi)
-    * [ZIP](#zip)
-    * [webcam](#webcam)
-    * [fswebcam](# fswebcam)
+  * [lighttpd](#lighttpd)
+  * [PHP 7](#php-7)
+  * [pip](#pip)
+  * [git](# git)
+  * [sqlite3](#sqlite3)
+  * [Sht sensor](#sht-sensors)
+  * [DHT sensor](#dht-sensors)
+  * [Wiring Pi](#wiringpi)
+  * [ZIP](#zip)
+  * [webcam](#webcam)
+  * [fswebcam](# fswebcam)
 * [Program maturity control](# program-racks control)
 
 
@@ -40,7 +40,7 @@ Now we put at least 8GB SD card in a card reader and wait until Windows has reco
 
 Then we start the »Win32DiskImager.exe«, select the image [_Image File_] and the drive letter [_Device_] of the memory card
 
-! [Win32DiskManager GUI](https://a.fsdn.com/con/app/proj/win32diskimager/screenshots/Win32DiskImager-1.0.png/1)
+![Win32DiskManager GUI](https://a.fsdn.com/con/app/proj/win32diskimager/screenshots/Win32DiskImager-1.0.png/1)
 
 and start the writing process by clicking on [_Write_] -> ATTENTION not the wrong drive!
 
