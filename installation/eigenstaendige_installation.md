@@ -53,7 +53,7 @@ Eine leere Datei mit dem Namen ssh ohne jegliche Dateiendung und
 
 eine Datei mit dem Namen wpa_supplicant.conf mit dem Inhalt (ESSID und die PASSPHRASE sind durch die Zuangsdaten für unser WLAN zu ersetzen):
 
-{% highlight plaintext linenos linenostart=5 %}
+{% highlight plaintext "linenos=table, linenostart=5" %}
 # Datei wpa_supplicant.conf in der Boot-Partition (Raspbian Stretch)
 country=DE  #omit if US
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
