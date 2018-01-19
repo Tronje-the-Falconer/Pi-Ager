@@ -80,7 +80,6 @@ Sofern die beiden Dateien im Root Verzeichnis angelegt wurden, können wir über
 Einloggen mit (Achtung! Tastatur noch falsch konfiguriert [z=y]):
 
 > Benutzername: pi
-
 > Passwort: raspberry
 
 Danach führen wir den Assistenten aus
@@ -806,13 +805,12 @@ sudo update-rc.d pi-ager-main.sh defaults
 {% endhighlight %}
 
 Nun benötigen wir noch eine .htcredentials Datei für die Settingsseite, die unseren User und sein Passwort enthält.
+
 Dazu Benutzen wir das Online-Tool [https://websistent.com/tools/htdigest-generator-tool/](https://websistent.com/tools/htdigest-generator-tool/)
 
-Username ist pi-ager
-
-REALM ist Pi-Ager
-
-Password ist Euer Passwort
+> Username ist pi-ager
+> REALM ist Pi-Ager
+> Password ist Euer Passwort
 
 Achtung! Groß-/Kleinschreibung beachten!
 
