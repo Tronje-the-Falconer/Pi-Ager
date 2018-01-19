@@ -219,10 +219,12 @@ def write_current(loopnumber, sensor_temperature, status_heater, status_exhaust_
 
     
     write_changed_values(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier)
-
+    
+    save_loop = int(get_table_value(pi_ager_names.config_settings_table, pi_ager_names.save_temperature_humidity_loops_key))
+    
     open_database()
 
-    if loopnumber % 150 == 0:   # schreibt alle 150 Loops die Werte in die DB
+    if loopnumber % save_loop == 0:   # schreibt alle 150 Loops die Werte in die DB
         execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
         execute_query('INSERT INTO ' + pi_ager_names.data_sensor_humidity_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_humidity) + ',' + str(get_current_time()) + ')')
         # execute_query('INSERT INTO ' + pi_ager_names.status_heater_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_heater) + ',' + str(get_current_time()) + ')')

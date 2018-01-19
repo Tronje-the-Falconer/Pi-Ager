@@ -92,6 +92,7 @@ gain_key = 'gain'
 bits_to_read_key = 'bits_to_read'
 referenceunit_key = 'referenceunit'
 scale_measuring_interval_key = 'measuring_interval'
+save_temperature_humidity_loops_key = 'save_temperature_humidity_loops'
 loglevel_file_key = 'loglevel_file'
 loglevel_console_key = 'loglevel_console'
 agingtable_period_key = 'agingtable_period'
@@ -114,7 +115,7 @@ offset_scale_key = 'offset'
 # Arrays with defined keys in key-value-tables and default values
 table_keys = {}
 
-table_keys[config_settings_table] = (switch_on_cooling_compressor_key,switch_off_cooling_compressor_key,switch_on_humidifier_key,switch_off_humidifier_key,delay_humidify_key,sensortype_key,language_key,switch_on_light_hour_key,switch_on_light_minute_key,light_duration_key,light_period_key,light_modus_key,switch_on_uv_hour_key,switch_on_uv_minute_key,uv_duration_key,uv_period_key,uv_modus_key,dehumidifier_modus_key,circulation_air_period_key,setpoint_temperature_key,exhaust_air_duration_key,modus_key,setpoint_humidity_key,exhaust_air_period_key,circulation_air_duration_key,agingtable_key,failure_humidity_delta_key,failure_temperature_delta_key,samples_refunit_tara_key,spikes_refunit_tara_key)
+table_keys[config_settings_table] = (switch_on_cooling_compressor_key,switch_off_cooling_compressor_key,switch_on_humidifier_key,switch_off_humidifier_key,delay_humidify_key,sensortype_key,language_key,switch_on_light_hour_key,switch_on_light_minute_key,light_duration_key,light_period_key,light_modus_key,switch_on_uv_hour_key,switch_on_uv_minute_key,uv_duration_key,uv_period_key,uv_modus_key,dehumidifier_modus_key,circulation_air_period_key,setpoint_temperature_key,exhaust_air_duration_key,modus_key,setpoint_humidity_key,exhaust_air_period_key,circulation_air_duration_key,agingtable_key, failure_humidity_delta_key, failure_temperature_delta_key, samples_refunit_tara_key, spikes_refunit_tara_key, save_temperature_humidity_loops_key)
 
 table_keys[current_values_table] = (sensor_temperature_key,sensor_humidity_key,status_circulating_air_key,status_cooling_compressor_key,status_exhaust_air_key,status_heater_key,status_light_key,status_uv_key,status_humidifier_key,status_dehumidifier_key,scale1_key,scale2_key,status_pi_ager_key,status_agingtable_key,status_scale1_key,status_scale2_key,status_tara_scale1_key,status_tara_scale2_key,status_temperature_meat1_key,status_temperature_meat2_key,status_temperature_meat3_key,status_temperature_meat4_key,agingtable_period_key,agingtable_period_starttime_key,status_light_manual_key,calibrate_scale1_key,calibrate_scale2_key,calibrate_weight_key,status_uv_manual_key)
 
@@ -129,6 +130,7 @@ default_values = {}
 #default values config table
 default_values[config_settings_table + '_' + sensortype_key] = 3 #SHT
 default_values[config_settings_table + '_' + language_key] = 1 #Deutsch de-DE
+default_values[config_settings_table + '_' + save_temperature_humidity_loops_key] = 150
 
 #default values scale1_settings table
 default_values[settings_scale1_table + '_' + samples_key] = 300

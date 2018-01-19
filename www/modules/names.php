@@ -87,6 +87,7 @@ $sleep_key = 'sleep';
 $gain_key = 'gain';
 $bits_to_read_key = 'bits_to_read';
 $scale_measuring_interval_key = 'measuring_interval';
+$save_temperature_humidity_loops_key = 'save_temperature_humidity_loops';
 $measuring_duration_key = 'measuring_duration';
 $saving_period_key = 'saving_period';
 $pi_revision_key = 'pi_revision';
