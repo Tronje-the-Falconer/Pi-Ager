@@ -496,7 +496,7 @@ sudo nano /etc/php/7.0/mods-available/apcu_bc.ini
 
 und nehmen folgende Änderungen vor:
 
-{% highlight plaintext %}
+{% highlight lighttpd %}
 extension=apc.so
 apc.enabled=1
 apc.file_update_protection=2
@@ -520,13 +520,13 @@ sudo nano /etc/lighttpd/conf-enabled/15-fastcgi-php.conf
 
 und ergänzen am Ende der Zeile
 
-{% highlight plaintext %}
+{% highlight lighttpd %}
 "broken-scriptfilename" => "enable"
 {% endhighlight %}
 
 ein "," und in einer neuen Zeile
 
-{% highlight plaintext %}
+{% highlight lighttpd %}
 "allow-x-send-file" => "enable"
 {% endhighlight %}
 
@@ -811,9 +811,9 @@ Nun benötigen wir noch eine .htcredentials Datei für die Settingsseite, die un
 Dazu Benutzen wir das Online-Tool [https://websistent.com/tools/htdigest-generator-tool/](https://websistent.com/tools/htdigest-generator-tool/)
 
 {% highlight plaintext %}
-Username ist pi-ager
-REALM ist Pi-Ager
-Password ist Euer Passwort
+Username: pi-ager
+REALM: Pi-Ager
+Password: Euer Passwort
 {% endhighlight %}
 
 Achtung! Groß-/Kleinschreibung beachten!
