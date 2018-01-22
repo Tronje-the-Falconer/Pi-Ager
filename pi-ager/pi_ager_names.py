@@ -2,6 +2,7 @@
 import RPi.GPIO as gpio
 
 ########################### Definition of variables
+version_number = '"2.1.1"'
 # tables names
 config_settings_table = 'config'
 data_sensor_temperature_table = 'sensor_temperature_data'
@@ -261,7 +262,7 @@ default_values[debug_table + '_' + loglevel_file_key] = 10
 default_values[debug_table + '_' + loglevel_console_key] = 20
 
 #default values system table
-default_values[system_table + '_' + pi_ager_version_key] = '"2.1.1"'
+default_values[system_table + '_' + pi_ager_version_key] = version_number
 
 ################################# JSON Creation
 
