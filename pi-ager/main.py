@@ -20,6 +20,7 @@ import pi_revision
 
 global logger
 
+pi_ager_names.create_json_file()
 pi_ager_database_check.check_and_update_database()
 pi_ager_init.set_language()
 logger = pi_ager_logging.create_logger('main')
