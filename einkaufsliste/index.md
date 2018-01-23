@@ -119,12 +119,12 @@ Sollte man ein 12V oder ein 24V Schütz für die Steuerung des Klimakompressor n
 * Wägezelle 20kg [Wägezelle 20KG China](https://www.amazon.de/gp/product/B00IHUJQ4Q/ref=oh_aui_detailpage_o09_s00?ie=UTF8&psc=1) (Amazon)
 * Wägezelle 10kg [Wägezelle 10KG China](https://www.amazon.de/dp/B00J4FW7YO/ref=cm_sw_r_wa_api_fnl5zb1ZZFX0R) (Amazon)
 * Wägezelle 50kg Edelstahl S-Form [Wägezelle Edelstahl 50KG China](https://www.amazon.de/gp/product/B073NFB644/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1) (Amazon)
-  * Diese Wägezelle ist zwar für max 50 kg ausgelegt, sie liefert aber auch im unteren Bereich sehr gute Ergebnisse (1-5 kg). Bisher haben wir noch keine Wägezelle in dieser Ausführung, für einen akzeptablen Preis und den Bereichen 5kg/10kg/20kg gefunden. Sobald dieses der Fall ist , werden sie auch in dieser Liste aufgenommen.
+  * Diese Wägezelle ist zwar für max 50 kg ausgelegt, sie liefert aber auch im unteren Bereich sehr gute Ergebnisse (1-5 kg) hat aber rel grpße peaks... Nach Rücksprachen mit dem Verkäufer, kann man bei Amazon die 50kg Zelle bestellen und eine Nachricht hinterlassen dass sie die 20kg Version liefern !!! das hat bei meiner Bestellung des Testsensors gut geklappt ich übernehme aber keine Gewähr ;-) !!! Am besten den Verkäufer vorher kontaktieren! Sobald ein Link zur verfügung steht, wird auc diese Version in dieser Liste aufgenommen.
 
 #### Sensor
 
 * Temperatur-Feuchtigkeitssensor (Empfohlen: Sensirion SHT75) [Sensirion SHT75](https://www.voelkner.de/products/70227/Feuchte-und-Temperaturesensor-Sht75.html?frm=ffs__SHT%2075) (Voelkner)
-  * Unterstützt (aber nicht empfohlen):
+  * Unterstützt:
     * [DHT22](https://www.amazon.de/gp/product/B01M9H3GID/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1) (Amazon)
     * [DHT11](https://www.amazon.de/gp/product/B01M7VQLWD/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1) (Amazon)
 * Sensorgehäuse für SHT75 [Gehäuse SHT75](https://www.voelkner.de/products/25666/Sensorgehaeuse-Schwarz.html) (Voelkner)
