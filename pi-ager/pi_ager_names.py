@@ -408,7 +408,7 @@ json_keys_dict['last_change_scale1_json_key'] = last_change_scale1_json_key
 json_keys_dict['last_change_scale2_json_key'] = last_change_scale2_json_key
 
 hardcoded_values_dict = {}
-hardcoded_values_dict['version_number'] = version_number
+hardcoded_values_dict['pi_ager_version'] = version_number
 
 global dict_for_json_creation
 dict_for_json_creation = {}
