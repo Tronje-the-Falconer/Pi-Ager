@@ -116,10 +116,10 @@ Sollte man ein 12V oder ein 24V Schütz für die Steuerung des Klimakompressor n
 
 #### Wägezellen
 
-* Wägezelle 20kg [Wägezelle 20KG China](https://www.amazon.de/gp/product/B00IHUJQ4Q/ref=oh_aui_detailpage_o09_s00?ie=UTF8&psc=1) (Amazon)
-* Wägezelle 10kg [Wägezelle 10KG China](https://www.amazon.de/dp/B00J4FW7YO/ref=cm_sw_r_wa_api_fnl5zb1ZZFX0R) (Amazon)
-* Wägezelle 50kg Edelstahl S-Form [Wägezelle Edelstahl 50KG China](https://www.amazon.de/gp/product/B073NFB644/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1) (Amazon)
-  * Diese Wägezelle ist zwar für max 50 kg ausgelegt, sie liefert aber auch im unteren Bereich sehr gute Ergebnisse (1-5 kg) hat aber rel grpße peaks... Nach Rücksprachen mit dem Verkäufer, kann man bei Amazon die 50kg Zelle bestellen und eine Nachricht hinterlassen dass sie die 20kg Version liefern !!! das hat bei meiner Bestellung des Testsensors gut geklappt ich übernehme aber keine Gewähr ;-) !!! Am besten den Verkäufer vorher kontaktieren! Sobald ein Link zur verfügung steht, wird auc diese Version in dieser Liste aufgenommen.
+* Wägezelle 20kg (sind nicht so stabil aber sehr preiswert...)[Wägezelle 20KG China](https://www.amazon.de/gp/product/B00IHUJQ4Q/ref=oh_aui_detailpage_o09_s00?ie=UTF8&psc=1) (Amazon)
+* Wägezelle 10kg (sind nicht so stabil aber sehr preiswert...)[Wägezelle 10KG China](https://www.amazon.de/dp/B00J4FW7YO/ref=cm_sw_r_wa_api_fnl5zb1ZZFX0R) (Amazon)
+* Wägezelle 50kg (20 kg)Edelstahl, stabil und laut Hersteller wasserdicht, S-Form [Wägezelle Edelstahl 50KG China](https://www.amazon.de/gp/product/B073NFB644/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1) (Amazon)
+  * Diese Wägezelle ist zwar für max 50 kg ausgelegt, sie liefert aber auch im unteren Bereich gute Ergebnisse (1-5 kg) hat aber rel große Peaks... Nach Rücksprachen mit dem Verkäufer, kann man bei Amazon die 50kg Zelle bestellen und eine Nachricht hinterlassen dass sie die 20kg Version liefern !!! das hat bei der Bestellung des Testsensors gut geklappt wir übernehmen aber keine Gewähr ;-) !!! Am besten den Verkäufer vorher kontaktieren! Sobald ein Link zur Verfügung steht, wird auch diese Version in dieser Liste aufgenommen.
 
 #### Sensor
 
