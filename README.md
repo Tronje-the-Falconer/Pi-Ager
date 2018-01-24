@@ -5,19 +5,19 @@ The project is a purely private project, by meat lovers for meat lovers.
 
 It is not allowed to use the software, e.g. in ready-made refrigerators, for sale and commercial use.
 
-The main documentation takes place in the [wiki](https://github.com/Tronje-the-Falconer/pi-ager/wiki)
+As this project currently has mainly German users, the main documentation is available on the website [pi-ager.org](pi-aher.org) in German.
 
 ## Getting Started
-See in [wiki](https://github.com/Tronje-the-Falconer/pi-ager/wiki) Point "Inbetriebnahme der Steuerung"
+To get startet from Beginning use this tutorial on pi-ager.org see in [standalone installation](http://pi-ager.org/installation/standalone_installation)
 
 ## Prerequisites
-See in [softwarepakages in wiki](https://github.com/Tronje-the-Falconer/pi-ager/wiki/eigenst%C3%A4ndige-Installation#softwarepakete) Point "Softwarepakete"
+See on pi-ager.org [softwarepakages](http://pi-ager.org/installation/standalone_installation#software-packages)
 
 ## Installation:
-See in [Programm Reifesteuerung in wiki](https://github.com/Tronje-the-Falconer/pi-ager/wiki/eigenst%C3%A4ndige-Installation#programm-reifeschranksteuerung) Point "Programm reifeschranksteuerung"
+See on pi-ager.org [program installation](http://pi-ager.org/installation/standalone_installation#program-maturity-cabinet-control)
 
 ## Usage:
-See in [wiki](https://github.com/Tronje-the-Falconer/pi-ager/wiki/eigenst%C3%A4ndige-Installation#programm-reifeschranksteuerung)
+See on [pi-ager.org/bedienung](http://pi-ager.org/bedienung/)
 
 ## Contributing:
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
