@@ -310,7 +310,12 @@
             if ($fields[0] == 'modus' AND $fields[1]== 'setpoint_humidity' AND $fields[2]== 'setpoint_temperature' AND $fields[3]== 'circulation_air_duration' AND $fields[4]== 'circulation_air_period' AND $fields[5]== 'exhaust_air_duration' AND $fields[6]== 'exhaust_air_period' AND $fields[7]== 'days' AND $fields[8]== 'comment'){
 
                 $create_fields_str = join(', ', array_map(function ($field){
-                    return "$field TEXT NULL";
+                    if ($field == 'comment'){
+                        return "$field TEXT NULL";
+                    }
+                    else{
+                        return "$field INTEGER NULL";
+                    }
                 }, $fields));
 
                 open_connection();
