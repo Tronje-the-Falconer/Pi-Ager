@@ -1,4 +1,4 @@
-Version 3.1.1
+Version 2.2.1
 
 - Frontend
     - Überarbeitung der Icons
@@ -14,16 +14,6 @@ Version 3.1.1
         - Abluft
         - Abluft mit Entfeuchter
         - Entfeuchter
-    - Editieren und Löschen von Reifetabellen
-    - Im- und Export von Reifetabellen
-    - kommentarfeld in Reifetabellen
-    - Umstellung von backendseitig erstellten auf clientseitigen Diagrammen
-    - Einfärben der jeweiligen Reifetabellenphase
-    - vernünftiges logging
-    - Logfiles können heruntergeladen werden
-    - Einstellmöglichkeit für Loglevel
-    - Logfiles durchblätterbar
-    - 
 
 - Backend
     - Umstellung auf Python 3
@@ -38,10 +28,8 @@ Version 3.1.1
         - Wägezellen
         - Webcamsteuerung
     - Auslagern der Standardwerte in eine config.json
-    - Entfernen der Werte für Entfeuchtung ein/aus, Entfeuchtungsverzögerung, Kühlen an/aus, aus den Reifetabellen
+    - Entfernen der Werte für Entfeuchtung ein/aus, Entfeuchtungsverzögerung, Kühlen an/aus, aus den csv-Dateien und auslagern in die config.json
     - Verzeichnis-Strukturierung (config, logs, images/icons, images/graphs, images/webcam)
-    - logging
-    - Unterstützung von Raspbian Stretch lite
 --------------------------------------------------------------------------------
 
 Version 2.1.1

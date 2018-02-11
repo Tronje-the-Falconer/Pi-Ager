@@ -1,4 +1,4 @@
-<?php 
+<?php
                                     include 'header.php';                                       // Template-Kopf und Navigation
                                     include 'modules/database.php';
                                     include 'modules/logging.php';                            //liest die Datei fuer das logging ein
@@ -132,7 +132,7 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("temperature") ?>',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'temperature',
@@ -143,7 +143,7 @@
                                                                 return value + ' °C';
                                                             },
                                                             fontColor: '#000000',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             max: 30,
                                                             min: -4
                                                         }
@@ -152,7 +152,7 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("humidity") ?>',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'humidity',
@@ -165,7 +165,7 @@
                                                                 return 'φ ' + value + ' %';
                                                             },
                                                             fontColor: '#000000',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             // max: <?php 
                                                             // $max_value_humidiy = intval(max($humidity_dataset) + (max($humidity_dataset) / 100 * 1))+1;
                                                             
@@ -249,7 +249,7 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("scale") . ' 1'; ?>',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'scale1',
@@ -260,7 +260,7 @@
                                                                 return value + ' gr';
                                                             },
                                                             fontColor: '#000000',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             //max: 25000,
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
@@ -282,7 +282,7 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("scale") . ' 2'; ?>',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'scale2',
@@ -293,7 +293,7 @@
                                                                 return value + ' gr';
                                                             },
                                                             fontColor: '#000000',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             //max: 25000,
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
@@ -364,7 +364,7 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("status"); ?>',
-                                                            fontSize: 20,
+                                                        //   fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'status',
@@ -382,7 +382,7 @@
                                                                 }
                                                             },
                                                             fontColor: '#000000',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             max: 1,
                                                             min: 0,
                                                             stepSize: 1
@@ -442,7 +442,7 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("status"); ?>',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'status',
@@ -460,7 +460,7 @@
                                                                 }
                                                             },
                                                             fontColor: '#000000',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             max: 1,
                                                             min: 0,
                                                             stepSize: 1
@@ -519,7 +519,7 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("status"); ?>',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'status',
@@ -537,7 +537,7 @@
                                                                 }
                                                             },
                                                             fontColor: '#000000',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             max: 1,
                                                             min: 0,
                                                             stepSize: 1
@@ -596,7 +596,7 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("status"); ?>',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'status',
@@ -614,7 +614,7 @@
                                                                 }
                                                             },
                                                             fontColor: '#000000',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             max: 1,
                                                             min: 0,
                                                             stepSize: 1
@@ -673,7 +673,7 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("status"); ?>',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'status',
@@ -691,7 +691,7 @@
                                                                 }
                                                             },
                                                             fontColor: '#000000',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             max: 1,
                                                             min: 0,
                                                             stepSize: 1
@@ -750,7 +750,7 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("status"); ?>',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'status',
@@ -768,7 +768,7 @@
                                                                 }
                                                             },
                                                             fontColor: '#000000',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             max: 1,
                                                             min: 0,
                                                             stepSize: 1
@@ -826,7 +826,7 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("status"); ?>',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'status',
@@ -844,7 +844,7 @@
                                                                 }
                                                             },
                                                             fontColor: '#000000',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             max: 1,
                                                             min: 0,
                                                             stepSize: 1
@@ -903,7 +903,7 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("status"); ?>',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'status',
@@ -921,7 +921,7 @@
                                                                 }
                                                             },
                                                             fontColor: '#000000',
-                                                            fontSize: 20,
+                                                        //    fontSize: 20,
                                                             max: 1,
                                                             min: 0,
                                                             stepSize: 1

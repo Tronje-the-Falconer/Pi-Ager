@@ -41,13 +41,6 @@
     elseif ($_SERVER['PHP_SELF'] == '/edit_agingtable.php') {
         $edit_agingtable_active = 'active';
     }
-    # Auslesen der Version aus dem Changelog
-    # Lese 14 Zeichen, beginnend mit dem 21. Zeichen
-    #$changelogfile = 'changelog.txt';
-    #$first_row_changelog = fopen($changelogfile,"r"); # Oeffnet die Datei changelog.txt
-    #$piager_version = fgets($first_row_changelog, 4096); # liest die erste Zeile bzw. bis Zeichen 4096 aus. je nachdem was zuerst eintritt
-    #$rssversion = file_get_contents('$changelogfile', NULL, NULL, 0, 12); # Alternative über Inhalt auslesen. Zeile 0 bis Zeichen 12
-    
     
     # Language festlegen
     $language = 'de_DE.utf8';
@@ -62,7 +55,7 @@
 <!DOCTYPE html>
 <html>
     <meta http-equiv="content-type" content="text/html;  charset=utf-8">
-    <?php 
+    <?php
         if ($_SERVER['PHP_SELF'] == '/webcam.php') {
             echo "<meta http-equiv=\"refresh\" content=\"5\" />";
         }
@@ -81,13 +74,19 @@
         <link rel="stylesheet" href="css/style.css" media="screen">
         <!--[if lte IE 7]><link rel="stylesheet" href="css/style.ie7.css" media="screen" /><![endif]-->
         <link rel="stylesheet" href="css/style.responsive.css" media="all">
-        <?php
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+
+<!-- <script src="./node_modules/chart.js/dist/Chart.min.js"></script> -->
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> -->
+        <script src="js/jquery.js"></script>
+        <script src="js/ajax.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/script.responsive.js"></script>
+
+
+       <?php
 
             if ($monitor_active == 'active'){
-                echo "<script src='js/jquery.js'></script>";
-            //    echo "<script src='js/ajax.js'></script>";
-                echo "<script src='js/script.js'></script>";
-                echo "<script src='js/script.responsive.js'></script>";
                 echo "<script src='js/moment.min.js'></script>";
                 echo "<script src='js/Chart.js'></script>";
             }
@@ -96,24 +95,13 @@
                 echo "<script src='js/Chart.js'></script>";
             }
             if ($logs_active == 'active'){
-                echo "<script src='js/jquery.js'></script>";
-                echo "<script src='js/script.js'></script>";
                 echo '<meta http-equiv="cache-control" content="no-cache"> <!-- tells browser not to cache -->';
                 echo '<meta http-equiv="expires" content="0"> <!-- says that the cache expires now -->';
                 echo '<meta http-equiv="pragma" content="no-cache"> <!-- says not to use cached stuff, if there is any -->';
             }
             
         ?>
-        
-        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
-        <!-- <script src="./node_modules/chart.js/dist/Chart.min.js"></script> -->
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> -->
-    <!--    <script src="js/jquery.js"></script>
-        <script src="js/ajax.js"></script>
-        <script src="js/script.js"></script>
-        <script src="js/script.responsive.js"></script>
-        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
-    -->
+
     </head>
     <body>
         <div id="art-main">

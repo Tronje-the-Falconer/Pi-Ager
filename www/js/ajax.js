@@ -108,7 +108,7 @@ function handleContent() {
     }
 }
 
-    var myVar = setInterval(myTimer, 10000);
+    var myVar = setInterval(myTimer, 3000);
 
     function myTimer() {
         var d = new Date();

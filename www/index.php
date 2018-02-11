@@ -16,7 +16,6 @@
                         -->
                                 <!----------------------------------------------------------------------------------------Anzeige T/rLF-->
 <?php
- // include 'modules/monitor_query.php';
  echo "<script src='js/ajax.js'></script>";
 ?>
                                 <div class="thermometers">
@@ -60,22 +59,26 @@
                                     </div>
                                     <!------------------------------ ----------------------------------------------------------Anzeige Scales-->
                                     <div class="th-display-div">
-                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/scale_42x42.png" alt="" style="padding-top: 10px;">'.'1'; ?></div><div style="float: center; padding-left: 8px;" id="scale1_values_old"></div></td></tr>
+                                        <table><tr><td><div class="label">
+                                            <?php echo '<img src="images/icons/scale_42x42.png" alt="" style="padding-top: 10px;">'.'1'; ?></div>
+                                            <div style="float: center; padding-left: 8px;" id="scale1_values_old"></div></td></tr>
                                             <tr>
                                                 <td>
                                                     <div class="denemescale">
-                                                        <div style="float: left; padding-left: 8px;" id="scale_json_scale1"></div>
+                                                        <div style="padding-left: 8px;" id="scale_json_scale1"></div>
                                                     </div>
                                                 </td>
                                             </tr>
                                         </table>
                                     </div>
                                     <div class="th-display-div">
-                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/scale_42x42.png" alt="" style="padding-top: 10px;">'.'2'; ?></div><div style="float: center; padding-left: 8px;" id="scale2_values_old"></div></td></tr>
+                                        <table><tr><td><div class="label">
+                                            <?php echo '<img src="images/icons/scale_42x42.png" alt="" style="padding-top: 10px;">'.'2'; ?></div>
+                                            <div style="float: center; padding-left: 8px;" id="scale2_values_old"></div></td></tr>
                                             <tr>
                                                 <td>
                                                     <div class="denemescale">
-                                                        <div style="float: left; padding-left: 8px;" id="scale_json_scale2"></div>
+                                                        <div style="padding-left: 8px;" id="scale_json_scale2"></div>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -92,13 +95,13 @@
                                 
                                 <script>
                                     var timeFormat = 'MM/DD/YYYY HH:mm';
-                                    
+
                                     // Temperatur und Feuchte
                                     var temperature_humidity_chart = document.getElementById("temperature_humidity_chart");
                                     var config_temperature_humidity_chart = {
                                         type: 'line',
                                         data: {
-                                            labels: 
+                                            labels:
                                                 <?php echo $temperature_timestamps_axis_text; ?>,
                                             datasets: [{
                                                 label: '<?php echo _("temperature") ?>',
@@ -129,9 +132,9 @@
                                         },
                                         options: {
                                             title: {
-                                                display: true,
-                                                text: '<?php echo _("temperature") ?> & <?php echo _("humidity") ?>',
-                                                fontSize: 24
+                                                display: false,
+                                                text: '',
+                                                // fontSize: 24
                                             },
                                             tooltips: {
                                                 mode: 'index',
@@ -158,7 +161,7 @@
                                                     scaleLabel: {
                                                         display: true,
                                                         labelString: '<?php echo _("temperature") ?>',
-                                                        fontSize: 20,
+                                                    //    fontSize: 20,
                                                         fontColor: '#000000'
                                                     },
                                                     id: 'temperature',
@@ -169,7 +172,7 @@
                                                             return value + ' °C';
                                                         },
                                                         fontColor: '#000000',
-                                                        fontSize: 20,
+                                                        // fontSize: 20,
                                                         max: 30,
                                                         min: -4
                                                     }
@@ -178,7 +181,7 @@
                                                     scaleLabel: {
                                                         display: true,
                                                         labelString: '<?php echo _("humidity") ?>',
-                                                        fontSize: 20,
+                                                        // fontSize: 20,
                                                         fontColor: '#000000'
                                                     },
                                                     id: 'humidity',
@@ -191,10 +194,10 @@
                                                             return 'φ ' + value + ' %';
                                                         },
                                                         fontColor: '#000000',
-                                                        fontSize: 20,
+                                                        // fontSize: 20,
                                                         // max: <?php 
                                                         // $max_value_humidiy = intval(max($humidity_dataset) + (max($humidity_dataset) / 100 * 1))+1;
-                                                        
+
                                                         // print $max_value_humidiy;
                                                         // ?>,
                                                         // min: <?php 
@@ -209,7 +212,7 @@
                                             }
                                         }
                                     };
-                                    
+
                                     // Waagen
                                     var scales_chart = document.getElementById("scales_chart");
                                     var config_scales_chart = {
@@ -246,9 +249,9 @@
                                         },
                                         options: {
                                             title: {
-                                                display: true,
+                                                display: false,
                                                 text: '<?php echo _("scale") ?> 1 & 2',
-                                                fontSize: 24
+                                                // fontSize: 24
                                             },
                                             tooltips: {
                                                 mode: 'index',
@@ -275,7 +278,7 @@
                                                     scaleLabel: {
                                                         display: true,
                                                         labelString: '<?php echo _("scale") . ' 1'; ?>',
-                                                        fontSize: 20,
+                                                        // fontSize: 20,
                                                         fontColor: '#000000'
                                                     },
                                                     id: 'scale1',
@@ -286,7 +289,7 @@
                                                             return value + ' gr';
                                                         },
                                                         fontColor: '#000000',
-                                                        fontSize: 20,
+                                                        // fontSize: 20,
                                                         //max: 25000,
                                                         beginAtZero: true,
                                                         maxTicksLimit: 10,
@@ -308,7 +311,7 @@
                                                     scaleLabel: {
                                                         display: true,
                                                         labelString: '<?php echo _("scale") . ' 2'; ?>',
-                                                        fontSize: 20,
+                                                        // fontSize: 20,
                                                         fontColor: '#000000'
                                                     },
                                                     id: 'scale2',
@@ -319,7 +322,7 @@
                                                             return value + ' gr';
                                                         },
                                                         fontColor: '#000000',
-                                                        fontSize: 20,
+                                                        // fontSize: 20,
                                                         //max: 25000,
                                                         beginAtZero: true,
                                                         maxTicksLimit: 10,
@@ -353,7 +356,7 @@
                                         <tr>
                                             <td>
                                                 <?php 
-                                                    // PrUEft, ob Prozess RSS läuft
+                                                    // Prüft, ob Prozess RSS läuft
                                                     $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
                                                     if ($grepmain == 0){
                                                         echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;">';
@@ -369,7 +372,7 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <td class="text_left_top"><b><?php echo strtoupper(_('operating mode')).':</b><br>';
+                                            <td class="text_left_top"><?php echo '<b>'.strtoupper(_('operating mode')).':</b><br>';
                                                 if ($grepmain == 0){
                                                     echo strtoupper(("see settings"));
                                                 }
@@ -382,7 +385,7 @@
                                                 ?></td>
                                             <td>
                                                 <?php 
-                                                    // PrUEft, ob Prozess Reifetab läuft
+                                                    // Prüft, ob Prozess Reifetab läuft
                                                     $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
                                                     if ($grepagingtable == 0){
                                                         echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;">';
@@ -394,7 +397,7 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <td class="text_left_top"><b><?php echo strtoupper(_('agingtable')).':</b><br>'.$maturity_type;?></td>
+                                            <td class="text_left_top"><?php echo '<b>'.strtoupper(_('agingtable')).':</b><br>'.$maturity_type;?></td>
                                         </tr>
                                     </table>
                                     <hr>
@@ -411,7 +414,7 @@
                                         <tr>
                                             <?php 
                                                 if ($modus==0){
-                                                    echo '   <td ><img src="images/icons/cooling_42x42.png" alt=""></td>
+                                                    echo '<td ><img src="images/icons/cooling_42x42.png" alt=""></td>
                                                         <td><img src="'.$cooler_on_off_png.'" title="PIN_COOL 4[7] -> IN 1 (PIN2)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('cooler'));
@@ -422,7 +425,7 @@
                                                         <td>'.($setpoint_temperature + $switch_off_cooling_compressor).' °C</td>';
                                                 }
                                                 if ($modus==1){
-                                                    echo '   <td ><img src="images/icons/cooling_42x42.png" alt=""></td>
+                                                    echo '<td ><img src="images/icons/cooling_42x42.png" alt=""></td>
                                                         <td><img src="'.$cooler_on_off_png.'" title="PIN_COOL 4[7] -> IN 1 (PIN2)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('cooler'));
@@ -432,7 +435,7 @@
                                                         <td>'.($setpoint_temperature + $switch_off_cooling_compressor).' °C</td>';
                                                 }
                                                 if ($modus==2){
-                                                    echo '   <td ><img src="images/icons/heating_42x42.png" alt=""></td>
+                                                    echo '<td ><img src="images/icons/heating_42x42.png" alt=""></td>
                                                         <td><img src="'.$heater_on_off_png.'" title="PIN_HEATER 3[5] -> IN 2 (PIN 3)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('heater'));
@@ -443,7 +446,7 @@
                                                         <td>'.($setpoint_temperature - $switch_off_cooling_compressor).' °C</td>';
                                                 }
                                                 if ($modus==3 || $modus==4){
-                                                    echo '   <td ><img src="images/icons/cooling_42x42.png" alt=""></td>
+                                                    echo '<td ><img src="images/icons/cooling_42x42.png" alt=""></td>
                                                         <td><img src="'.$cooler_on_off_png.'" title="PIN_COOL 4[7] -> IN 1 (PIN2)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('cooler'));

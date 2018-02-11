@@ -461,10 +461,10 @@ li p, .art-postcontent li p, .art-blockcontent li p
   z-index: 101;
 }
 
-.art-headline, 
-.art-headline a, 
-.art-headline a:link, 
-.art-headline a:visited, 
+.art-headline,
+.art-headline a,
+.art-headline a:link,
+.art-headline a:visited,
 .art-headline a:hover
 {
 font-size: 35px;

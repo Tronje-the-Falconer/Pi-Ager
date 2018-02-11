@@ -22,6 +22,9 @@ $data_sensor_temperature_meat2_table = 'sensor_temperature_meat2_data';
 $data_sensor_temperature_meat3_table = 'sensor_temperature_meat3_data';
 $data_sensor_temperature_meat4_table = 'sensor_temperature_meat4_data';
 $debug_table = 'debug';
+$agingtable_salami_table = 'agingtable_salami';
+$agingtable_dryaging1_table = 'agingtable_dryaging1';
+$agingtable_dryaging2_table = 'agingtable_dryaging1';
 $system_table = 'system';
 
 #----------------------------table keys;
@@ -84,7 +87,6 @@ $sleep_key = 'sleep';
 $gain_key = 'gain';
 $bits_to_read_key = 'bits_to_read';
 $scale_measuring_interval_key = 'measuring_interval';
-$save_temperature_humidity_loops_key = 'save_temperature_humidity_loops';
 $measuring_duration_key = 'measuring_duration';
 $saving_period_key = 'saving_period';
 $pi_revision_key = 'pi_revision';
