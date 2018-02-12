@@ -110,7 +110,7 @@
                     <div class="art-logo"></div>
                 </div>
                 <h1 class="art-headline">Pi-Ager</h1>
-                <h2 class="art-slogan"><?php sprintf(_('by'),'( Grillsportverein'); ?></h2>
+                <h2 class="art-slogan"><?php echo _('by') . ' ' . ('Grillsportverein'); ?></h2>
                 <nav class="art-nav">
                     <div class="art-nav-inner">
                         <ul class="art-hmenu">
