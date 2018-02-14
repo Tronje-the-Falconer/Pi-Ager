@@ -54,16 +54,16 @@
                                         <?php
                                             include 'modules/read_values_for_diagrams.php';
                                         ?>
-                                        <canvas class="chart"; id="temperature_humidity_chart"></canvas>
-                                        <canvas class="chart"; id="scales_chart"></canvas>
-                                        <canvas class="chart"; id="light_chart"></canvas>
-										<canvas class="chart"; id="uv_chart"></canvas>
-                                        <canvas class="chart"; id="heater_chart"></canvas>
-										<canvas class="chart"; id="cooler_chart"></canvas>
-										<canvas class="chart"; id="humidifier_chart"></canvas>
-                                        <canvas class="chart"; id="dehumidifier_chart"></canvas>
-										<canvas class="chart"; id="exhaust_air_chart"></canvas>
-                                        <canvas class="chart"; id="circulation_air_chart"></canvas>
+                                        <canvas id="temperature_humidity_chart"></canvas>
+                                        <canvas id="scales_chart"></canvas>
+                                        <div class="on_off_chart"><canvas id="cooler_chart"></canvas></div>
+                                        <div class="on_off_chart"><canvas id="heater_chart"></canvas></div>
+                                        <div class="on_off_chart"><canvas id="humidifier_chart"></canvas></div>
+                                        <div class="on_off_chart"><canvas id="dehumidifier_chart"></canvas></div>
+                                        <div class="on_off_chart"><canvas id="circulation_air_chart"></canvas></div>
+                                        <div class="on_off_chart"><canvas id="exhaust_air_chart"></canvas></div>
+                                        <div class="on_off_chart"><canvas id="uv_chart"></canvas></div>
+                                        <div class="on_off_chart"><canvas id="light_chart"></canvas></div>
                                         <script>
                                         var timeFormat = 'MM/DD/YYYY HH:mm';
                                         
@@ -340,6 +340,8 @@
                                                 }]
                                             },
                                             options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
                                                 title: {
                                                     display: true,
                                                     text: '<?php echo _("light"); ?>',
@@ -418,6 +420,8 @@
                                                 }]
                                             },
                                             options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
                                                 title: {
                                                     display: true,
                                                     text: '<?php echo _("uv-light"); ?>',
@@ -495,6 +499,8 @@
                                                 }]
                                             },
                                             options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
                                                 title: {
                                                     display: true,
                                                     text: '<?php echo _("heater"); ?>',
@@ -572,6 +578,8 @@
                                                 }]
                                             },
                                             options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
                                                 title: {
                                                     display: true,
                                                     text: '<?php echo _("cooler"); ?>',
@@ -649,6 +657,8 @@
                                                 }]
                                             },
                                             options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
                                                 title: {
                                                     display: true,
                                                     text: '<?php echo _("humidifier"); ?>',
@@ -726,6 +736,8 @@
                                                 }]
                                             },
                                             options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
                                                 title: {
                                                     display: true,
                                                     text: '<?php echo _("dehumidifier"); ?>',
@@ -802,6 +814,8 @@
                                                 }]
                                             },
                                             options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
                                                 title: {
                                                     display: true,
                                                     text: '<?php echo _("exhaust air"); ?>',
@@ -879,6 +893,8 @@
                                                 }]
                                             },
                                             options: {
+                                                responsive: true,
+                                                maintainAspectRatio: false,
                                                 title: {
                                                     display: true,
                                                     text: '<?php echo _("circulate air"); ?>',

@@ -307,9 +307,10 @@ margin-left: 20px;
   visibility: visible;
   opacity: 1;
 }
-.chart{
-    display: inline !important;
+.on_off_chart {
+    height: 150px;
 }
+
 input[type=number]{
     text-align: right;
 }

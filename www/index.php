@@ -413,23 +413,13 @@
                                         </tr>
                                         <tr>
                                             <?php 
-                                                if ($modus==0){
+                                                if ($modus==0 || $modus==1){
                                                     echo '<td ><img src="images/icons/cooling_42x42.png" alt=""></td>
                                                         <td><img src="'.$cooler_on_off_png.'" title="PIN_COOL 4[7] -> IN 1 (PIN2)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('cooler'));
                                                     echo '</td>
                                                         <td>'.$sensor_temperature.' °C</td>
-                                                        <td>'.$setpoint_temperature.' °C</td>
-                                                        <td>'.($setpoint_temperature + $switch_on_cooling_compressor).' °C</td>
-                                                        <td>'.($setpoint_temperature + $switch_off_cooling_compressor).' °C</td>';
-                                                }
-                                                if ($modus==1){
-                                                    echo '<td ><img src="images/icons/cooling_42x42.png" alt=""></td>
-                                                        <td><img src="'.$cooler_on_off_png.'" title="PIN_COOL 4[7] -> IN 1 (PIN2)"></td>
-                                                        <td class="text_left">';
-                                                    echo strtoupper(_('cooler'));
-                                                    echo '<td>'.$sensor_temperature.' °C</td>
                                                         <td>'.$setpoint_temperature.' °C</td>
                                                         <td>'.($setpoint_temperature + $switch_on_cooling_compressor).' °C</td>
                                                         <td>'.($setpoint_temperature + $switch_off_cooling_compressor).' °C</td>';
@@ -524,7 +514,7 @@
                                             <td><img <?php if ($circulation_air_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/circulate_42x42.png" alt=""></td>
                                             <td><img src="<?php echo $circulating_on_off_png ;?>" title="PIN_FAN 18[12] -> IN 4 (GPIO 1)"></td>
                                             <td class="text_left">
-                                            <?php 
+                                            <?php
                                                 echo strtoupper(_('circulating air'));
                                                 if ($circulation_air_duration > 0 && $circulation_air_period >0) {echo ', '.strtoupper(_('timer on'));}
                                                 elseif ($circulation_air_period == 0) {echo  ' '. strtoupper(_('always on'));}
@@ -534,6 +524,26 @@
                                             <td></td>
                                             <td><?php echo $circulation_air_duration.' '._('minutes'); ?></td>
                                         </tr>
+
+
+
+                                        <tr>
+                                            <td><img <?php if ($exhaust_air_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/exhausting_42x42.png" alt=""></td>
+                                            <td><img src="<?php echo $circulating_on_off_png ;?>" title="PIN_FAN 18[12] -> IN 4 (GPIO 1)"></td>
+                                            <td class="text_left">
+                                            <?php
+                                                echo strtoupper(_('exhausting air'));
+                                                if ($exhaust_air_duration > 0 && $exhaust_air_period >0) {echo ', '.strtoupper(_('timer on'));}
+                                                elseif ($exhaust_air_period == 0) {echo  ' '. strtoupper(_('always on'));}
+                                                elseif ($exhaust_air_duration == 0) {echo ', '. strtoupper(_('timer off'));}
+                                            ?></td>
+                                            <td><?php echo $exhaust_air_period.' '._('minutes'); ?></td>
+                                            <td></td>
+                                            <td><?php echo $exhaust_air_duration.' '._('minutes'); ?></td>
+                                        </tr>
+
+
+
                                         <tr>
                                             <td><img <?php if ($uv_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/uv-light_42x42.png" alt=""></td>
                                             <td><?php
@@ -595,27 +605,21 @@
                                                 $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
                                                 if ($grepscale == 0){
                                                     echo '<td><img src="images/icons/scale_fail_42x42.png" alt=""></td>
-                                                            <td><img src="';
-                                                    echo $scale1_on_off_png ;
-                                                    echo '" title=></td>
+                                                            <td><img src="images/icons/status_off_20x20.png" title=""></td>
                                                             <td>';
                                                     echo strtoupper(_('see settings'));
                                                     echo '</td>';
                                                 }
                                                 elseif ($grepscale != 0 and $status_scale1 == 0){
-                                                    echo '<td><img src="images/icons/scale_42x42.png" alt=""></td>
-                                                            <td><img src="';
-                                                    echo $scale1_on_off_png ;
-                                                    echo '" title=></td>
+                                                    echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
+                                                            <td><img src="images/icons/status_off_20x20.png" title=""></td>
                                                             <td>';
                                                     echo strtoupper(_('scale1'));
                                                     echo '</td>';
                                                 }
                                                 elseif ($grepscale != 0 and $status_scale1 == 1) {
                                                     echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
-                                                            <td><img src="';
-                                                    echo $scale1_on_off_png ;
-                                                    echo '" title=></td>
+                                                            <td><img src="images/icons/status_on_20x20.png" title=""></td>
                                                             <td>';
                                                     echo strtoupper(_('scale1'));
                                                     echo '</td>';
@@ -634,19 +638,15 @@
                                                             <td></td>';
                                                 }
                                                 elseif ($grepscale != 0 and $status_scale2 == 0){
-                                                    echo '<td><img src="images/icons/scale_42x42.png" alt=""></td>
-                                                            <td><img src="';
-                                                    echo $scale2_on_off_png ;
-                                                    echo '" title=></td>
+                                                    echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
+                                                            <td><img src="images/icons/status_off_20x20.png" title=></td>
                                                             <td>';
                                                     echo strtoupper(_('scale2'));
                                                     echo '</td>';
                                                 }
                                                 elseif ($grepscale != 0 and $status_scale2 == 1) {
-                                                    echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
-                                                            <td><img src="';
-                                                    echo $scale2_on_off_png ;
-                                                    echo '" title=></td>
+                                                  echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
+                                                            <td><img src="images/icons/status_on_20x20.png" title=></td>
                                                             <td>';
                                                     echo strtoupper(_('scale2'));
                                                     echo '</td>';
