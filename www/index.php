@@ -286,7 +286,8 @@
                                                     position: 'left',
                                                     ticks: {
                                                         callback: function(value, index, values) {
-                                                            return value + ' gr';
+                                                        if (Math.round(value) === value)
+                                                        return value + ' gr';
                                                         },
                                                         fontColor: '#000000',
                                                         // fontSize: 20,
@@ -319,6 +320,7 @@
                                                     position: 'right',
                                                     ticks: {
                                                         callback: function(value, index, values) {
+                                                            if (Math.round(value) === value)
                                                             return value + ' gr';
                                                         },
                                                         fontColor: '#000000',
