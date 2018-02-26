@@ -62,7 +62,7 @@ def get_sensordata():
         sensor_temperature = round (sensor_temperature_big,2)
         sensor_humidity = round (sensor_humidity_big,2)
     else:
-        logstring = logstring + ' \n ' +  _('Failed to get reading sensordata. Try again!')
+        logstring = _('Failed to get reading sensordata. Try again!')
         logger.warning(logstring)
         
     sensordata={}
@@ -81,6 +81,17 @@ def get_gpio_value(gpio_number):
 def switch_light(relay_state):
     set_gpio_value(pi_ager_names.gpio_light, relay_state)
 
+def status_light_in_current_values_is_on():
+    current_value_rows = pi_ager_database.get_current(pi_ager_names.current_values_table, True)
+    current_values = {}
+    for current_row in current_value_rows:
+        current_values[current_row[pi_ager_names.key_field]] = current_row[pi_ager_names.value_field]
+    
+    if current_values[pi_ager_names.status_light_key] == 1:
+        return True
+    else:
+        return False
+    
 def check_status_agingtable():
     status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
     process_agingtable = subprocess.getstatusoutput('ps ax | grep -v grep | grep agingtable.py &')
@@ -105,7 +116,7 @@ def check_and_set_light():
                 switch_light(pi_ager_names.relay_on)
         else:
             pi_ager_database.write_stop_in_database(pi_ager_names.status_light_manual_key)
-    elif get_gpio_value(pi_ager_names.gpio_light) == pi_ager_names.relay_on:
+    elif get_gpio_value(pi_ager_names.gpio_light) == pi_ager_names.relay_on and not status_light_in_current_values_is_on():
         switch_light(pi_ager_names.relay_off)
         
 
