@@ -140,7 +140,7 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return ("  ") + value + (" °C") + ("  ");
+                                                                return value + ' °C';
                                                             },
                                                             fontColor: '#000000',
                                                         //    fontSize: 20,
@@ -162,18 +162,21 @@
                                                         labelString: '<?php echo _("humidity") ?>',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return (" ") + value + (" %") + ("    ");
+                                                                return 'φ ' + value + ' %';
                                                             },
                                                             fontColor: '#000000',
-                                                           //    fontSize: 20,
-                                                            max: <?php 
-                                                            $max_value_humidiy = intval(max($humidity_dataset) + (max($humidity_dataset) / 100 * 1))+10;
-                                                            print min (100,max (10,$max_value_humidiy));
-                                                            ?>,
-                                                            //min: <?php 
-                                                            //$min_value_humidiy = intval(min($humidity_dataset) - (min($humidity_dataset) / 100 * 1))-1;
-                                                            //?>
-                                                            //max: 100,
+                                                        //    fontSize: 20,
+                                                            // max: <?php 
+                                                            // $max_value_humidiy = intval(max($humidity_dataset) + (max($humidity_dataset) / 100 * 1))+1;
+                                                            
+                                                            // print $max_value_humidiy;
+                                                            // ?>,
+                                                            // min: <?php 
+                                                            // $min_value_humidiy = intval(min($humidity_dataset) - (max($humidity_dataset) / 100 * 1))-1;
+                                                            
+                                                            // print $min_value_humidiy;
+                                                            // ?>
+                                                            max: 100,
                                                             min: 0
                                                         }
                                                     }]
@@ -245,7 +248,7 @@
                                                     yAxes: [{
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php echo _("scale") . ' 1 '; ?>',
+                                                            labelString: '<?php echo _("scale") . ' 1'; ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -255,7 +258,7 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 if (Math.round(value) === value)
-                                                                return value + (" gr") + (" ");
+                                                                return value + ' gr';
                                                             },
                                                             fontColor: '#000000',
                                                         //    fontSize: 20,
@@ -263,11 +266,13 @@
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
                                                             max: <?php 
-                                                            $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 3))+1;
+                                                            $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
+                                                            
                                                             print $max_value_scale1;
                                                             ?>,
                                                             min: <?php 
                                                             $min_value_scale1 = intval(min($scale1_dataset) - (max($scale1_dataset) / 100 * 5))-1;
+                                                            
                                                             print $min_value_scale1;
                                                             ?>,
                                                             //stepSize: 1
@@ -277,7 +282,7 @@
                                                     {
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php echo _("scale") . ' 2 '; ?>',
+                                                            labelString: '<?php echo _("scale") . ' 2'; ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -286,25 +291,27 @@
                                                         position: 'right',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                if (Math.round(value) === value) {
-                                                                return (" ") + value + (" gr");
-                                                            }
+                                                                if (Math.round(value) === value)
+                                                                return value + ' gr';
                                                             },
                                                             fontColor: '#000000',
-                                                            //    fontSize: 20,
+                                                        //    fontSize: 20,
                                                             //max: 25000,
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
                                                             max: <?php 
                                                             $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
+                                                            
                                                             print $max_value_scale2;
                                                             ?>,
                                                             min: <?php 
                                                             $min_value_scale2 = intval(min($scale2_dataset) - (max($scale2_dataset) / 100 * 5))-1;
+                                                            
                                                             print $min_value_scale2;
                                                             ?>,
                                                             //stepSize: 1
                                                         }
+                                                        
                                                     }]
                                                 }
                                             }
@@ -370,11 +377,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '<?php echo _('on'); ?>';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '<?php echo _('off'); ?>';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '<?php echo _('off'); ?>';
                                                                             break;
                                                                 }
                                                             },
@@ -382,37 +389,15 @@
                                                         //    fontSize: 20,
                                                             max: 1,
                                                             min: 0,
-                                                            //stepSize: 1
+                                                            stepSize: 1
                                                         }
-                                                    }, {
-                                                        scaleLabel: {
-                                                           display: true,
-                                                           labelString: '<?php echo _(" ") ?>',
-                                                           fontColor: '#000000'
-                                                        }, 
-                                                        display: true,
-                                                        position: 'right',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
-                                                                            break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                }
-                                                            },
-                                                            fontColor: '#000000',
-                                                            max: 1,
-                                                            min: 0
-
-                                                        }
+                                                        
                                                     }]
                                                 }
                                             }
                                         };
                                         
+										
 										// uv
                                         var uv_chart = document.getElementById("uv_chart");
                                         var config_uv_chart = {
@@ -472,11 +457,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '<?php echo _('on'); ?>';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '<?php echo _('off'); ?>';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '<?php echo _('off'); ?>';
                                                                             break;
                                                                 }
                                                             },
@@ -486,29 +471,7 @@
                                                             min: 0,
                                                             stepSize: 1
                                                         }
-                                                    }, {
-                                                         scaleLabel: {
-                                                           display: true,
-                                                           labelString: '<?php echo _(" ") ?>',
-                                                           fontColor: '#000000'
-                                                        }, 
-                                                        display: true,
-                                                        position: 'right',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
-                                                                            break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                }
-                                                            },
-                                                            fontColor: '#000000',
-                                                            max: 1,
-                                                            min: 0
-                                                        }
+                                                        
                                                     }]
                                                 }
                                             }
@@ -573,11 +536,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '<?php echo _('on'); ?>';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '<?php echo _('off'); ?>';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '<?php echo _('off'); ?>';
                                                                             break;
                                                                 }
                                                             },
@@ -587,29 +550,7 @@
                                                             min: 0,
                                                             stepSize: 1
                                                         }
-                                                    }, {
-                                                         scaleLabel: {
-                                                           display: true,
-                                                           labelString: '<?php echo _(" ") ?>',
-                                                           fontColor: '#000000'
-                                                        }, 
-                                                        display: true,
-                                                        position: 'right',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
-                                                                            break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                }
-                                                            },
-                                                            fontColor: '#000000',
-                                                            max: 1,
-                                                            min: 0
-                                                        }
+                                                        
                                                     }]
                                                 }
                                             }
@@ -674,11 +615,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '<?php echo _('on'); ?>';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '<?php echo _('off'); ?>';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '<?php echo _('off'); ?>';
                                                                             break;
                                                                 }
                                                             },
@@ -688,29 +629,7 @@
                                                             min: 0,
                                                             stepSize: 1
                                                         }
-                                                    }, {
-                                                         scaleLabel: {
-                                                           display: true,
-                                                           labelString: '<?php echo _(" ") ?>',
-                                                           fontColor: '#000000'
-                                                        }, 
-                                                        display: true,
-                                                        position: 'right',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
-                                                                            break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                }
-                                                            },
-                                                            fontColor: '#000000',
-                                                            max: 1,
-                                                            min: 0
-                                                        }
+                                                        
                                                     }]
                                                 }
                                             }
@@ -775,11 +694,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '<?php echo _('on'); ?>';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '<?php echo _('off'); ?>';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '<?php echo _('off'); ?>';
                                                                             break;
                                                                 }
                                                             },
@@ -789,29 +708,7 @@
                                                             min: 0,
                                                             stepSize: 1
                                                         }
-                                                    }, {
-                                                         scaleLabel: {
-                                                           display: true,
-                                                           labelString: '<?php echo _(" ") ?>',
-                                                           fontColor: '#000000'
-                                                        }, 
-                                                        display: true,
-                                                        position: 'right',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
-                                                                            break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                }
-                                                            },
-                                                            fontColor: '#000000',
-                                                            max: 1,
-                                                            min: 0
-                                                        }
+                                                        
                                                     }]
                                                 }
                                             }
@@ -876,11 +773,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '<?php echo _('on'); ?>';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '<?php echo _('off'); ?>';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '<?php echo _('off'); ?>';
                                                                             break;
                                                                 }
                                                             },
@@ -890,29 +787,7 @@
                                                             min: 0,
                                                             stepSize: 1
                                                         }
-                                                    }, {
-                                                         scaleLabel: {
-                                                           display: true,
-                                                           labelString: '<?php echo _(" ") ?>',
-                                                           fontColor: '#000000'
-                                                        }, 
-                                                        display: true,
-                                                        position: 'right',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
-                                                                            break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                }
-                                                            },
-                                                            fontColor: '#000000',
-                                                            max: 1,
-                                                            min: 0
-                                                        }
+                                                        
                                                     }]
                                                 }
                                             }
@@ -976,11 +851,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '<?php echo _('on'); ?>';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '<?php echo _('off'); ?>';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '<?php echo _('off'); ?>';
                                                                             break;
                                                                 }
                                                             },
@@ -990,29 +865,7 @@
                                                             min: 0,
                                                             stepSize: 1
                                                         }
-                                                    }, {
-                                                         scaleLabel: {
-                                                           display: true,
-                                                           labelString: '<?php echo _(" ") ?>',
-                                                           fontColor: '#000000'
-                                                        }, 
-                                                        display: true,
-                                                        position: 'right',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
-                                                                            break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                }
-                                                            },
-                                                            fontColor: '#000000',
-                                                            max: 1,
-                                                            min: 0
-                                                        }
+                                                        
                                                     }]
                                                 }
                                             }
@@ -1077,11 +930,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '<?php echo _('on'); ?>';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '<?php echo _('off'); ?>';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '<?php echo _('off'); ?>';
                                                                             break;
                                                                 }
                                                             },
@@ -1091,29 +944,7 @@
                                                             min: 0,
                                                             stepSize: 1
                                                         }
-                                                    }, {
-                                                        scaleLabel: {
-                                                           display: true,
-                                                           labelString: '<?php echo _(" ") ?>',
-                                                           fontColor: '#000000'
-                                                        }, 
-                                                        display: true,
-                                                        position: 'right',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
-                                                                            break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
-                                                                            break;
-                                                                }
-                                                            },
-                                                            fontColor: '#000000',
-                                                            max: 1,
-                                                            min: 0
-                                                        }
+                                                        
                                                     }]
                                                 }
                                             }
