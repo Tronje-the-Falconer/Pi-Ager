@@ -121,13 +121,32 @@
         else {
             # Zwischenwert für First_Timestamp errechnen?
             $timestamps = array_keys($data_values);
+            $timestamp_value_dict[$first_timestamp_diagram] = Null;
             foreach ($timestamps as $timestamp){
                 if ($timestamp >= $first_timestamp_diagram){
                     $timestamp_value_dict[$timestamp] = $data_values[$timestamp];
                 }
+            }
+            if (count($data_values) > count($timestamp_value_dict)){
+                // print ("Rechnung 1: " . count($data_values) . "<br>");
+                // print ("Rechnung 2: " . count($timestamp_value_dict) . "<br>");
+                // print ("Rechnung 3: " . ((count($data_values) - count($timestamp_value_dict)) - 1) . "<br>");
+                $count_all_values = count($data_values);
+                $count_diagram_values = count($timestamp_value_dict);
+                $wanted_index = $count_all_values - $count_diagram_values - 1;
+                $wanted_timestamp = array_keys($data_values)[$wanted_index];
+                $timestamp_value_dict[$first_timestamp_diagram] = $data_values[$wanted_timestamp];
+                // $timestamp_value_dict[$first_timestamp_diagram] = get_intermediate_value($data_values[$wanted_timestamp], array_values($timestamp_value_dict)[0], $wanted_timestamp, array_keys($timestamp_value_dict)[0]);
+            }
+            else{
                 $timestamp_value_dict[$first_timestamp_diagram] = Null;
+            }
+            // $timestamp_value_dict[$first_timestamp_diagram] = Null;
+            if ($is_OnOff_value) {
+                $timestamp_value_dict[$last_timestamp_diagram] = $data_values[end($timestamps)];
+            }
+            else {
                 $timestamp_value_dict[$last_timestamp_diagram] = Null;
-                // $timestamp_value_dict[$last_timestamp_diagram] = $data_values[end($timestamps)];
             }
         }
         return $timestamp_value_dict;
