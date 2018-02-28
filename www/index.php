@@ -160,7 +160,7 @@
                                                 yAxes: [{
                                                     scaleLabel: {
                                                         display: true,
-                                                        labelString: '<?php echo _("temperature") ?>',
+                                                        labelString: '<?php echo _("temperature")?> <?php echo _(" - t") ?>',
                                                     //    fontSize: 20,
                                                         fontColor: '#000000'
                                                     },
@@ -169,7 +169,7 @@
                                                     position: 'left',
                                                     ticks: {
                                                         callback: function(value, index, values) {
-                                                            return value + ' °C';
+                                                            return '  ' + value + ' °C' + '  ';;
                                                         },
                                                         fontColor: '#000000',
                                                         // fontSize: 20,
@@ -180,7 +180,7 @@
                                                 }, {
                                                     scaleLabel: {
                                                         display: true,
-                                                        labelString: '<?php echo _("humidity") ?>',
+                                                        labelString: '<?php echo _("humidity") ?> <?php echo _(" - φ") ?>',
                                                         // fontSize: 20,
                                                         fontColor: '#000000'
                                                     },
@@ -188,21 +188,18 @@
                                                     type: 'linear',
                                                     display: true,
                                                     position: 'right',
-                                                    labelString: '<?php echo _("humidity") ?>',
                                                     ticks: {
                                                         callback: function(value, index, values) {
-                                                            return 'φ ' + value + ' %';
+                                                            return ' ' + value + ' %' + '    ';
                                                         },
                                                         fontColor: '#000000',
                                                         // fontSize: 20,
-                                                        // max: <?php 
-                                                        // $max_value_humidiy = intval(max($humidity_dataset) + (max($humidity_dataset) / 100 * 1))+1;
-
-                                                        // print $max_value_humidiy;
-                                                        // ?>,
+                                                        max: <?php 
+                                                            $max_value_humidiy = intval(max($humidity_dataset) + (max($humidity_dataset) / 100 * 1))+10;
+                                                            print min (100,max (10,$max_value_humidiy));
+                                                            ?>,
                                                         // min: <?php 
-                                                        // $min_value_humidiy = intval(min($humidity_dataset) - (max($humidity_dataset) / 100 * 1))-1;
-                                                        
+                                                        // $min_value_humidiy = intval(min($humidity_dataset) - (max($humidity_dataset) / 100 * 1))-1;                                                      
                                                         // print $min_value_humidiy;
                                                         // ?>
                                                         max: 100,
@@ -287,7 +284,7 @@
                                                     ticks: {
                                                         callback: function(value, index, values) {
                                                             if (Math.round(value) === value)
-                                                            return value + ' gr';
+                                                            return value + ' gr' + ' ';
                                                         },
                                                         fontColor: '#000000',
                                                         // fontSize: 20,
@@ -321,7 +318,7 @@
                                                     ticks: {
                                                         callback: function(value, index, values) {
                                                             if (Math.round(value) === value)
-                                                            return value + ' gr';
+                                                            return ' ' + value + ' gr';
                                                         },
                                                         fontColor: '#000000',
                                                         // fontSize: 20,
@@ -329,13 +326,11 @@
                                                         beginAtZero: true,
                                                         maxTicksLimit: 10,
                                                         max: <?php 
-                                                        $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
-                                                        
+                                                        $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;                                                       
                                                         print $max_value_scale2;
                                                         ?>,
                                                         min: <?php 
                                                         $min_value_scale2 = intval(min($scale2_dataset) - (max($scale2_dataset) / 100 * 5))-1;
-                                                        
                                                         print $min_value_scale2;
                                                         ?>,
                                                         //stepSize: 1

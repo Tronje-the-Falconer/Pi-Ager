@@ -131,7 +131,7 @@
                                                     yAxes: [{
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php echo _("temperature") ?>',
+                                                            labelString: '<?php echo _("temperature") ?> <?php echo _(" - t") ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -140,7 +140,7 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return ("  ") + value + (" °C") + ("  ");
+                                                                return '  ' + value + ' °C' + '  ';
                                                             },
                                                             fontColor: '#000000',
                                                         //    fontSize: 20,
@@ -151,7 +151,7 @@
                                                     }, {
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php echo _("humidity") ?>',
+                                                            labelString: '<?php echo _("humidity") ?> <?php echo _(" - φ") ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -162,7 +162,7 @@
                                                         labelString: '<?php echo _("humidity") ?>',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return (" ") + value + (" %") + ("    ");
+                                                                return ' ' + value + ' %' + '    ';
                                                             },
                                                             fontColor: '#000000',
                                                            //    fontSize: 20,
@@ -245,7 +245,7 @@
                                                     yAxes: [{
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php echo _("scale") . ' 1 '; ?>',
+                                                            labelString: '<?php echo _("scale") . ' 1'; ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -255,7 +255,7 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 if (Math.round(value) === value)
-                                                                return value + (" gr") + (" ");
+                                                                return value + ' gr' + ' ';
                                                             },
                                                             fontColor: '#000000',
                                                         //    fontSize: 20,
@@ -263,7 +263,7 @@
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
                                                             max: <?php 
-                                                            $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 3))+1;
+                                                            $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
                                                             print $max_value_scale1;
                                                             ?>,
                                                             min: <?php 
@@ -277,7 +277,7 @@
                                                     {
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php echo _("scale") . ' 2 '; ?>',
+                                                            labelString: '<?php echo _("scale") . ' 2'; ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -287,7 +287,7 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 if (Math.round(value) === value) {
-                                                                return (" ") + value + (" gr");
+                                                                return ' ' + value + ' gr';
                                                             }
                                                             },
                                                             fontColor: '#000000',
@@ -370,11 +370,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '        ' + '<?php echo _('on'); ?>' + '  ';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
                                                                 }
                                                             },
@@ -395,18 +395,17 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
+                                                                    case 1: return '  ' + '<?php echo _('on'); ?>' + '        ';
                                                                             break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    case 0: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    default: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
                                                                 }
                                                             },
                                                             fontColor: '#000000',
                                                             max: 1,
                                                             min: 0
-
                                                         }
                                                     }]
                                                 }
@@ -472,11 +471,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '        ' + '<?php echo _('on'); ?>' + '  ';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
                                                                 }
                                                             },
@@ -497,11 +496,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
+                                                                    case 1: return '  ' + '<?php echo _('on'); ?>' + '        ';
                                                                             break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    case 0: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    default: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
                                                                 }
                                                             },
@@ -573,11 +572,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '        ' + '<?php echo _('on'); ?>' + '  ';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
                                                                 }
                                                             },
@@ -598,11 +597,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
+                                                                    case 1: return '  ' + '<?php echo _('on'); ?>' + '        ';
                                                                             break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    case 0: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    default: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
                                                                 }
                                                             },
@@ -674,11 +673,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '        ' + '<?php echo _('on'); ?>' + '  ';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
                                                                 }
                                                             },
@@ -699,11 +698,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
+                                                                    case 1: return '  ' + '<?php echo _('on'); ?>' + '        ';
                                                                             break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    case 0: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    default: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
                                                                 }
                                                             },
@@ -775,11 +774,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '        ' + '<?php echo _('on'); ?>' + '  ';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
                                                                 }
                                                             },
@@ -800,11 +799,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
+                                                                    case 1: return '  ' + '<?php echo _('on'); ?>' + '        ';
                                                                             break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    case 0: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    default: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
                                                                 }
                                                             },
@@ -876,11 +875,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '        ' + '<?php echo _('on'); ?>' + '  ';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
                                                                 }
                                                             },
@@ -901,11 +900,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
+                                                                    case 1: return '  ' + '<?php echo _('on'); ?>' + '        ';
                                                                             break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    case 0: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    default: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
                                                                 }
                                                             },
@@ -976,11 +975,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '        ' + '<?php echo _('on'); ?>' + '  ';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
                                                                 }
                                                             },
@@ -1001,11 +1000,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
+                                                                    case 1: return '  ' + '<?php echo _('on'); ?>' + '        ';
                                                                             break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    case 0: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    default: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
                                                                 }
                                                             },
@@ -1077,11 +1076,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("        ") + '<?php echo _('on'); ?>' + ("  ");
+                                                                    case 1: return '        ' + '<?php echo _('on'); ?>' + '  ';
                                                                             break;
-                                                                    case 0: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    case 0: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
-                                                                    default: return ("        ") + '<?php echo _('off'); ?>' + ("  ");
+                                                                    default: return '        ' + '<?php echo _('off'); ?>' + '  ';
                                                                             break;
                                                                 }
                                                             },
@@ -1102,11 +1101,11 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 switch (value) {
-                                                                    case 1: return ("  ") + '<?php echo _('on'); ?>' + ("        ");
+                                                                    case 1: return '  ' + '<?php echo _('on'); ?>' + '        ';
                                                                             break;
-                                                                    case 0: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    case 0: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
-                                                                    default: return ("  ") + '<?php echo _('off'); ?>' + ("        ");
+                                                                    default: return '  ' + '<?php echo _('off'); ?>' + '        ';
                                                                             break;
                                                                 }
                                                             },
