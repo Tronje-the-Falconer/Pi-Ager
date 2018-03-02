@@ -297,9 +297,18 @@
                                                         print $max_value_scale1;
                                                         ?>,
                                                         min: <?php 
-                                                        $min_value_scale1 = intval(min($scale1_dataset) - (max($scale1_dataset) / 100 * 5))-1;
-                                                        
-                                                        print $min_value_scale1;
+                                                             $scale1_dataset_edited = array();
+                                                             foreach ($scale1_dataset as $scale1_value){
+                                                                if ($scale1_value != Null){
+                                                                    $scale1_dataset_edited[] = $scale1_value;
+                                                                }
+                                                             }
+                                                             if (empty($scale1_dataset_edited)) {
+                                                                    $scale1_dataset_edited[] = Null;
+                                                             }
+                                                             $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
+                                                                
+                                                              print $min_value_scale1;
                                                         ?>,
                                                         //stepSize: 1
                                                     }

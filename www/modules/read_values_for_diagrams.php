@@ -97,22 +97,22 @@
         elseif ($timestamp_count_in_diagram == 1) {
             $count_timestamps = count(array_keys($data_values));
             if ($is_OnOff_value) {
-                if ($count_timestamps == 1){
+                if ($count_timestamps <= 1){
                     $timestamp_value_dict[$first_timestamp_diagram] = Null;
-                    $timestamp_value_dict[$last_timestamp_diagram] = $data_values[0];
+                    $timestamp_value_dict[$last_timestamp_diagram] = $array_values($data_values)[0];
                 }
                 else {
-                    $timestamp_value_dict[$first_timestamp_diagram] = $data_values[$count_timestamps-2]; # vorletzter Wert in DB
+                    $timestamp_value_dict[$first_timestamp_diagram] = array_values($data_values)[$count_timestamps-2]; # vorletzter Wert in DB
                 }
                 $timestamp_value_dict[$last_timestamp_in_db] = $data_values[$last_timestamp_in_db];
                 $timestamp_value_dict[$last_timestamp_diagram] = $data_values[$last_timestamp_in_db];
             }
             else {
-                if ($count_timestamps == 1){
+                if ($count_timestamps <= 1){
                     $timestamp_value_dict[$first_timestamp_diagram] = Null;
                 }
                 else {
-                    $timestamp_value_dict[$first_timestamp_diagram] = get_intermediate_value($data_values[$count_timestamps-2], $data_values[$last_timestamp_in_db], array_keys($data_values)[$count_timestamps-2], $last_timestamp_in_db);
+                    $timestamp_value_dict[$first_timestamp_diagram] = get_intermediate_value(array_values($data_values)[$count_timestamps-2], $data_values[$last_timestamp_in_db], array_keys($data_values)[$count_timestamps-2], $last_timestamp_in_db);
                 }
                 $timestamp_value_dict[$last_timestamp_in_db] = $data_values[$last_timestamp_in_db];
                 $timestamp_value_dict[$last_timestamp_diagram] = Null;
@@ -127,21 +127,23 @@
                     $timestamp_value_dict[$timestamp] = $data_values[$timestamp];
                 }
             }
-            if (count($data_values) > count($timestamp_value_dict)){
-                // print ("Rechnung 1: " . count($data_values) . "<br>");
-                // print ("Rechnung 2: " . count($timestamp_value_dict) . "<br>");
-                // print ("Rechnung 3: " . ((count($data_values) - count($timestamp_value_dict)) - 1) . "<br>");
-                $count_all_values = count($data_values);
-                $count_diagram_values = count($timestamp_value_dict);
+            $count_all_values = count($data_values);
+            $count_diagram_values = count($timestamp_value_dict);
+            if ($count_all_values > $count_diagram_values){
                 $wanted_index = $count_all_values - $count_diagram_values - 1;
                 $wanted_timestamp = array_keys($data_values)[$wanted_index];
-                $timestamp_value_dict[$first_timestamp_diagram] = $data_values[$wanted_timestamp];
-                // $timestamp_value_dict[$first_timestamp_diagram] = get_intermediate_value($data_values[$wanted_timestamp], array_values($timestamp_value_dict)[0], $wanted_timestamp, array_keys($timestamp_value_dict)[0]);
+                // $timestamp_value_dict[$first_timestamp_diagram] = $data_values[$wanted_timestamp];
+                $timestamp_value_dict[$first_timestamp_diagram] = get_intermediate_value($data_values[$wanted_timestamp], array_values($timestamp_value_dict)[1], $wanted_timestamp, array_keys($timestamp_value_dict)[1]);
+                // reset($timestamp_value_dict);
+                // print ("current(timestamp_value_dict): " . strval(current($timestamp_value_dict)) . "<br>");
+                // print ("data_values[wanted_timestamp]: " . $data_values[$wanted_timestamp] . "<br>");
+                // print ("first_timestamp_diagram: " . $first_timestamp_diagram . "<br>");
             }
             else{
                 $timestamp_value_dict[$first_timestamp_diagram] = Null;
             }
             // $timestamp_value_dict[$first_timestamp_diagram] = Null;
+            // $timestamp_value_dict[$last_timestamp_diagram] = $data_values[end($timestamps)];
             if ($is_OnOff_value) {
                 $timestamp_value_dict[$last_timestamp_diagram] = $data_values[end($timestamps)];
             }
