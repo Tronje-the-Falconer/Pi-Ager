@@ -173,8 +173,6 @@
     $last_timestamp_diagram = get_current_time();
     $first_timestamp_diagram = get_defined_first_timestamp($last_timestamp_diagram, $diagram_mode);
     
-    print "first_timestamp_diagram: <br>" . $first_timestamp_diagram . "<br>";
-    print "last_timestamp_diagram: <br>" . $last_timestamp_diagram . "<br>";
     // echo "Temperatur<br>";
     $temperature_values = get_diagram_values($data_sensor_temperature_table);
     $is_OnOff_value = False;
@@ -209,8 +207,6 @@
     $scale1_data_diagram = get_data_for_diagram($scale1_values, $is_OnOff_value);
     $scale1_timestamps_axis_text = $scale1_data_diagram[0];
     $scale1_dataset = $scale1_data_diagram[1];
-    print "scale1_timestamps_axis_text: <br>" . $scale1_timestamps_axis_text . "<br>";
-    print "scale1_dataset: <br>" . json_encode($scale1_dataset) . "<br>";
     
     // $scale1_values = get_diagram_values($data_scale1_table);
     // $scale1_timestamps = array_keys($scale1_values);
@@ -226,8 +222,6 @@
     $scale2_data_diagram = get_data_for_diagram($scale2_values, $is_OnOff_value);
     $scale2_timestamps_axis_text = $scale2_data_diagram[0];
     $scale2_dataset = $scale2_data_diagram[1];
-    print "scale2_timestamps_axis_text: <br>" . $scale2_timestamps_axis_text . "<br>";
-    print "scale2_dataset: <br>" . json_encode($scale2_dataset) . "<br>";
     
     // $scale2_values = get_diagram_values($data_scale2_table);
     // $scale2_timestamps = array_keys($scale2_values);
