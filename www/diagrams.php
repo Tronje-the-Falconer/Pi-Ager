@@ -187,7 +187,14 @@
                                             type: 'line',
                                             data: {
                                                 labels: 
-                                                    <?php echo $scale1_timestamps_axis_text; ?>,
+                                                    <?php 
+                                                    if (strlen($scale1_timestamps_axis_text) > strlen($scale2_timestamps_axis_text)){
+                                                        echo $scale1_timestamps_axis_text;
+                                                    }
+                                                    else{
+                                                        echo $scale2_timestamps_axis_text;
+                                                    }
+                                                    ?>,
                                                 datasets: [{
                                                     label: '<?php echo _("scale") ?> 1',
                                                     yAxisID: 'scale1',
@@ -308,10 +315,20 @@
                                                             $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
                                                             print $max_value_scale2;
                                                             ?>,
-                                                            min: <?php 
-                                                            $min_value_scale2 = intval(min($scale2_dataset) - (max($scale2_dataset) / 100 * 5))-1;
-                                                            print $min_value_scale2;
-                                                            ?>,
+                                                        min: <?php 
+                                                             $scale2_dataset_edited = array();
+                                                             foreach ($scale2_dataset as $scale2_value){
+                                                                if ($scale2_value != Null){
+                                                                    $scale2_dataset_edited[] = $scale2_value;
+                                                                }
+                                                             }
+                                                             if (empty($scale2_dataset_edited)) {
+                                                                    $scale2_dataset_edited[] = Null;
+                                                             }
+                                                             $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
+                                                                
+                                                        print $min_value_scale2;
+                                                        ?>,
                                                             //stepSize: 1
                                                         }
                                                     }]

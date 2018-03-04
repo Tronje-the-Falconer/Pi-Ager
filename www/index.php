@@ -339,7 +339,17 @@
                                                         print $max_value_scale2;
                                                         ?>,
                                                         min: <?php 
-                                                        $min_value_scale2 = intval(min($scale2_dataset) - (max($scale2_dataset) / 100 * 5))-1;
+                                                             $scale2_dataset_edited = array();
+                                                             foreach ($scale2_dataset as $scale2_value){
+                                                                if ($scale2_value != Null){
+                                                                    $scale2_dataset_edited[] = $scale2_value;
+                                                                }
+                                                             }
+                                                             if (empty($scale2_dataset_edited)) {
+                                                                    $scale2_dataset_edited[] = Null;
+                                                             }
+                                                             $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
+                                                                
                                                         print $min_value_scale2;
                                                         ?>,
                                                         //stepSize: 1
