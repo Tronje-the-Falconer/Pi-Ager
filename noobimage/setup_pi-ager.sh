@@ -60,6 +60,13 @@ then
         echo "Passwort root gesetzt"
     fi
 
+    # phpadmin pass setzen
+    if [ -n "$dbpw" ]         #wenn nicht ""
+    then
+        htpasswd -b /var/.htpasswd reifeschrank $webguipw
+        echo "Passwort webgui gesetzt"
+    fi
+
     # settings pass setzen
     if [ -n "$webguipw" ]         #wenn nicht ""
     then

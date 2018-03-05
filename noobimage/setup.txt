@@ -16,8 +16,10 @@ piname=
 pipass=
 # Passwort fuer Benutzer root:
 rootpass=
-# Passwort fuer Benutzer reifeschrank auf der Webiste Settings:
+# Passwort fuer Benutzer pi-ager auf der Webiste settings, admin, webcam:
 webguipw=
+# Passwort fuer Benutzer auf Datenbankverwaltung phpadmin
+dbpw=
 # WLAN Netzwerkname:
 wlanssid=
 # WLAN Schluessel:
