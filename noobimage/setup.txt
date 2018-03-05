@@ -18,7 +18,7 @@ pipass=
 rootpass=
 # Passwort fuer Benutzer pi-ager auf der Webiste settings, admin, webcam:
 webguipw=
-# Passwort fuer Benutzer auf Datenbankverwaltung phpliteadmin
+# Passwort fuer Zugriff auf Datenbankverwaltung phpliteadmin
 dbpw=
 # WLAN Netzwerkname:
 wlanssid=
