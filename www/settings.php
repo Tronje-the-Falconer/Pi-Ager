@@ -74,30 +74,40 @@
                                             }
                                             elseif ($grepscale != NULL){
                                                 if (intval(get_table_value($settings_scale1_table, $referenceunit_key)) == 0){
-                                                    $tara_scale1_disabled = 'disabled';
+                                                    $tara_scale1_disabled = true;
                                                 }
                                                 else{
-                                                    $tara_scale1_disabled = '';
+                                                    $tara_scale1_disabled = false;
                                                 }
                                                 if (intval(get_table_value($settings_scale2_table, $referenceunit_key)) == 0){
-                                                    $tara_scale2_disabled = 'disabled';
+                                                    $tara_scale2_disabled = true;
                                                 }
                                                 else{
-                                                    $tara_scale2_disabled = '';
+                                                    $tara_scale2_disabled = false;
                                                 }
                                                 print '<form  method="post">';
                                                 if (intval(get_table_value($current_values_table,$status_scale1_key)) == 0){
                                                         echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
                                                         <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                         <td>';
-                                                        echo "<button class=\"art-button\" name=\"scale1_start\" " . $tara_scale1_disabled . " value=\"scale1_start\" onclick=\"return confirm('"._('start measurement on scale').' 1? \\n '._('please calibrate scale after first start !')."');\">"._('start scale')." 1</button>";
+														if ($tara_scale1_disabled){
+															echo "<button class=\"art-button\" onclick=\"alert('"._('Reference unit is 0 in Scale').' 1! \\n '._('Please calibrate scale first!')."');\">"._('start scale')." 1</button>";
+														}
+														else{
+															echo "<button class=\"art-button\" name=\"scale1_start\" value=\"scale1_start\" onclick=\"return confirm('"._('start measurement on scale').' 1? \\n '._('please calibrate scale after first start !')."');\">"._('start scale')." 1</button>";
+														}
                                                         echo '</td><td></td></tr><tr>';
                                                     }
                                                     elseif (intval(get_table_value($current_values_table,$status_scale1_key)) == 1) {
                                                         echo '<td><img src="images/icons/scale_42x42.gif" alt="" style="padding: 10px;"></td>
                                                         <td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                         <td>';
-                                                        echo "<button class=\"art-button\" name=\"scale1_tara\" " . $tara_scale1_disabled . " value=\"scale1_tara\"onclick=\"return confirm('"._('tara on scale').' 1? \\n '._('please relieve the load cell completely')."!');\">"._('tara scale')." 1</button>";
+														if ($tara_scale1_disabled){
+															echo "<button class=\"art-button\" onclick=\"alert('"._('Reference unit is 0 in Scale').' 1! \\n '._('Please calibrate scale first!')."');\">"._('tara scale')." 1</button>";
+														}
+														else{
+															echo "<button class=\"art-button\" name=\"scale1_tara\" value=\"scale1_tara\" onclick=\"return confirm('"._('tara on scale').' 1? \\n '._('please relieve the load cell completely')."!');\">"._('tara scale')." 1</button>";
+														}
                                                         echo '</td><td>';
                                                         echo "<button class=\"art-button\" name=\"scale1_stop\" value=\"scale1_stop\" onclick=\"return confirm('"._('stop measurement on scale')." 1?');\">"._('stop scale')." 1</button>";
                                                         echo '</td></tr><tr>';
@@ -106,14 +116,24 @@
                                                         echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
                                                         <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                         <td>';
-                                                        echo "<button class=\"art-button\" name=\"scale2_start\" " . $tara_scale2_disabled . " value=\"scale2_start\"onclick=\"return confirm('"._('start measurement on scale').' 2? \\n '._('please calibrate scale after first start !')."');\">"._('start scale')." 2</button>";
+														if ($tara_scale2_disabled){
+															echo "<button class=\"art-button\" onclick=\"alert('"._('Reference unit is 0 in Scale').' 2! \\n '._('Please calibrate scale first!')."');\">"._('start scale')." 2</button>";
+														}
+														else{
+															echo "<button class=\"art-button\" name=\"scale2_start\" value=\"scale2_start\" onclick=\"return confirm('"._('start measurement on scale').' 2? \\n '._('please calibrate scale after first start !')."');\">"._('start scale')." 2</button>";
+														}
                                                         echo '</td><td></td>';
                                                     }
                                                     elseif (intval(get_table_value($current_values_table,$status_scale2_key)) == 1){
                                                         echo '<td><img src="images/icons/scale_42x42.gif" alt="" style="padding: 10px;"></td>
                                                         <td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                         <td>';
-                                                        echo "<button class=\"art-button\" name=\"scale2_tara\" " . $tara_scale2_disabled . " value=\"scale2_tara\"onclick=\"return confirm('"._('tara scale').' 2? \\n '._('please relieve the load cell completely')."!');\">"._('tara scale')." 2</button>";
+														if ($tara_scale2_disabled){
+															echo "<button class=\"art-button\" onclick=\"alert('"._('Reference unit is 0 in Scale').' 2! \\n '._('Please calibrate scale first!')."');\">"._('tara scale')." 2</button>";
+														}
+														else{
+															echo "<button class=\"art-button\" name=\"scale2_tara\" value=\"scale2_tara\" onclick=\"return confirm('"._('tara on scale').' 2? \\n '._('please relieve the load cell completely')."!');\">"._('tara scale')." 2</button>";
+														}
                                                         echo '</td><td>';
                                                         echo "<button class=\"art-button\" name=\"scale2_stop\" value=\"scale2_stop\" onclick=\"return confirm('"._('stop measurement on scale')." 2?');\">"._('stop scale')." 2</button>";
                                                         echo '</td>';
