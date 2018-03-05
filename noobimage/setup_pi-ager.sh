@@ -14,6 +14,7 @@ then
     eval $(grep -i "^pipass=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^rootpass=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^webguipw=" /boot/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^dbpw=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^wlanssid=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^wlankey=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^keepconf=" /boot/setup.txt| tr -d "\n\r")
@@ -60,11 +61,11 @@ then
         echo "Passwort root gesetzt"
     fi
 
-    # phpadmin pass setzen
+    # phpliteadmin pass setzen
     if [ -n "$dbpw" ]         #wenn nicht ""
     then
-        htpasswd -b /var/.htpasswd reifeschrank $webguipw
-        echo "Passwort webgui gesetzt"
+        sed -i 's/raspberry/$dbpw' /var/www/phpliteadmin.php
+        echo "phpliteadmin gesetzt"
     fi
 
     # settings pass setzen
