@@ -701,7 +701,7 @@ Auf unserem PC installieren wir uns eine FTP Software (z.B. [FileZilla](https://
 
 Wir verbinden uns mit sftp://IP-DES_RASPBERRY-PI und dem Benutzer root mit dem dazugehörigen Passwort
 
-und kopieren dann die Dateien aus dem Download-Verzeichnis RSS in das gleichnamige Verzeichnis auf dem Raspberry Pi unter /opt/pi-ager.
+und kopieren dann die Dateien aus dem Download-Verzeichnis pi-ager in das gleichnamige Verzeichnis auf dem Raspberry Pi unter /opt/pi-ager.
 
 danach kopieren wir aus dem Download-Verzeichnis var die Dateien sudowebscript.sh und .htcredentials in das gleichnamige Verzeichnis auf dem Raspberry Pi unter /var.
 
