@@ -62,6 +62,8 @@ def get_sensordata():
         sensor_temperature = round (sensor_temperature_big,2)
         sensor_humidity = round (sensor_humidity_big,2)
     else:
+        sensor_temperature = None
+        sensor_humidity = None
         logstring = _('Failed to get reading sensordata. Try again!')
         logger.warning(logstring)
         
