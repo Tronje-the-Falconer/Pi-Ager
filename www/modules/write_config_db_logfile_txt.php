@@ -140,10 +140,10 @@
                     $logtext_light = _('light timestamp').": ".$switch_on_light_hour_config.":".$switch_on_light_minute_config;
                     $logtext_light_duration = _('light duration').": ".$light_duration_config/60 ." "._('minutes');
                 }
-                $circulation_air_duration = $circulation_air_duration/60;
-                $circulation_air_period = $circulation_air_period/60;
-                $exhausting_air_duration = $exhaust_air_duration/60;
-                $exhausting_air_period = $exhaust_air_period/60;
+                // $circulation_air_duration = $circulation_air_duration/60;
+                // $circulation_air_period = $circulation_air_period/60;
+                // $exhausting_air_duration = $exhaust_air_duration/60;
+                // $exhausting_air_period = $exhaust_air_period/60;
                 $switch_on_humidity = $setpoint_humidity - $switch_on_humidifier_config;
                 $switch_off_humidity = $setpoint_humidity - $switch_off_humidifier_config;
                 
