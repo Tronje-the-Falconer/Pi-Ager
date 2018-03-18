@@ -652,12 +652,12 @@ def doMainLoop():
         else:
             count_continuing_emergency_loops += 1
             logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter) + ' without sensordata!!')
+            logger.warning('loopnumber: ' + str(pi_ager_init.loopcounter) + ' is loop ' + str(count_continuing_emergency_loops) + ' without sensor response!')
             if count_continuing_emergency_loops == 10:
-                logger.info('Because of ' + count_continuing_emergency_loops + ' loops without sensordata the system will be rebooted now!')
+                logger.info('Because of ' + str(count_continuing_emergency_loops) + ' loops without sensordata the system will be rebooted now!')
                 os.system('sudo /var/sudowebscript.sh reboot')
         
         logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter))
-        logger.warning('loopnumber: ' + str(pi_ager_init.loopcounter) + ' is loop ' + count_continuing_emergency_loops + ' without sensor response!')
 
         # time.sleep(1)  
         

@@ -394,5 +394,6 @@ def add_column(table, fieldname):
     
 def repair_column_type(table, fieldname):
     # Wird später implementiert
-    logstring = 'Wrong fieldtype in field ' + fieldname + ' of table ' + table + '!'
-    logger.debug(logstring)
+    # logstring = 'Wrong fieldtype in field ' + fieldname + ' of table ' + table + '!'
+    # logger.debug(logstring)
+    pass

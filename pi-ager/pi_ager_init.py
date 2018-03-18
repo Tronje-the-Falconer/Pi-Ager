@@ -47,6 +47,7 @@ def set_sensortype():
         sensorname = 'SHT'
         sensorvalue = 3
     check_sensor(sensorname, sensor)
+    logger.info(_('sensortype set to') + ' ' + sensorname)
         
 def check_sensor(sensorname, sensor):
     global sensortype
@@ -58,8 +59,14 @@ def check_sensor(sensorname, sensor):
             sensor_sht.read_humidity()
             value_sht_temperature = sensor_sht.temperature_celsius
             value_sht_humidity = sensor_sht.humidity
+            
+            if value_sht_temperature > 100:
+                raise Exception
         else:
             value_dht_humidity, value_temperature = Adafruit_DHT.read_retry(sensor, pi_ager_names.gpio_sensor_data)
+            
+            if value_temperature > 100:
+                raise Exception
     except:
         if sensorname == 'SHT':
             sensortype = 2
@@ -70,10 +77,6 @@ def check_sensor(sensorname, sensor):
         pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key, sensortype)
         logger.info(_('wrong sensortype in settings'))
         set_sensortype()
-
-    finally:
-        logger.info(_('sensortype set to') + ' ' + sensorname)
-        
 
 def set_system_starttime():
     global system_starttime
