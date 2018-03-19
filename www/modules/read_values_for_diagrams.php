@@ -133,7 +133,12 @@
                 $wanted_index = $count_all_values - $count_diagram_values - 1;
                 $wanted_timestamp = array_keys($data_values)[$wanted_index];
                 // $timestamp_value_dict[$first_timestamp_diagram] = $data_values[$wanted_timestamp];
-                $timestamp_value_dict[$first_timestamp_diagram] = get_intermediate_value($data_values[$wanted_timestamp], array_values($timestamp_value_dict)[1], $wanted_timestamp, array_keys($timestamp_value_dict)[1]);
+                if ($is_OnOff_value){
+                    $timestamp_value_dict[$first_timestamp_diagram] = $data_values[$wanted_timestamp];
+                }
+                else {
+                    $timestamp_value_dict[$first_timestamp_diagram] = get_intermediate_value($data_values[$wanted_timestamp], array_values($timestamp_value_dict)[1], $wanted_timestamp, array_keys($timestamp_value_dict)[1]);
+                }
                 // reset($timestamp_value_dict);
                 // print ("current(timestamp_value_dict): " . strval(current($timestamp_value_dict)) . "<br>");
                 // print ("data_values[wanted_timestamp]: " . $data_values[$wanted_timestamp] . "<br>");
