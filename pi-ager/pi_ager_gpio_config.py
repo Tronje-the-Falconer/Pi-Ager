@@ -28,7 +28,7 @@ def setupGPIO():
     # Ground
     # gpio.setup(pi_ager_names.gpio_sensor_data, gpio. )
     # gpio.setup(pi_ager_names.gpio_sensor_sync, gpio. )
-    gpio.setup(pi_ager_names.gpio_switch, gpio.OUT )                # manueller Schalter setzen
+    gpio.setup(pi_ager_names.gpio_switch, gpio.IN )                # manueller Schalter setzen
     # 3,3 V
     gpio.setup(pi_ager_names.gpio_scale2_data, gpio.IN)             # Scale2 Data setzen
     gpio.setup(pi_ager_names.gpio_scale2_sync, gpio.OUT)            # Scale2 Sync setzen
@@ -78,7 +78,7 @@ def defaultGPIO():
     gpio.output(pi_ager_names.gpio_uv, pi_ager_names.relay_off)                  # UV-Licht Relais standardmaessig aus
     gpio.output(pi_ager_names.gpio_dehumidifier, pi_ager_names.relay_off)        # Entfeuchter Relais standardmaessig aus
     gpio.output(pi_ager_names.gpio_alarm, pi_ager_names.pin_without_voltage)
-    gpio.output(pi_ager_names.gpio_switch, pi_ager_names.pin_without_voltage)
+    # gpio.output(pi_ager_names.gpio_switch, pi_ager_names.pin_without_voltage)
     # gpio.output(pi_ager_names.gpio_notinuse_0, pi_ager_names.pin_without_voltage)
     # gpio.output(pi_ager_names.gpio_notinuse_1, pi_ager_names.pin_without_voltage)
     # gpio.output(pi_ager_names.gpio_notinuse_2, pi_ager_names.pin_without_voltage)
@@ -96,7 +96,7 @@ def gpios_are_in_use():
     gpio_uv_used = gpio_is_in_use(pi_ager_names.gpio_uv)
     gpio_dehumidifier_used = gpio_is_in_use(pi_ager_names.gpio_dehumidifier)
     gpio_alarm_used = gpio_is_in_use(pi_ager_names.gpio_alarm)
-    gpio_switch_used = gpio_is_in_use(pi_ager_names.gpio_switch)
+    # gpio_switch_used = gpio_is_in_use(pi_ager_names.gpio_switch)
     gpio_notinuse_0_used = gpio_is_in_use(pi_ager_names.gpio_notinuse_0)
     gpio_notinuse_1_used = gpio_is_in_use(pi_ager_names.gpio_notinuse_1)
     gpio_notinuse_2_used = gpio_is_in_use(pi_ager_names.gpio_notinuse_2)
