@@ -191,10 +191,11 @@ gpio_temperature_meat_CSO = 16     # GPIO fuer A/D Wandler Fleischtemperatursens
 gpio_temperature_meat_MOSI = 20    # GPIO fuer A/D Wandler Fleischtemperatursensoren
 gpio_temperature_meat_SCLK = 21    # GPIO fuer A/D Wandler Fleischtemperatursensoren Sync
 
-
+pin_with_voltage = True                      # 3,3V = 1 | GPIO.HIGH  | TRUE
+pin_without_voltage = (not pin_with_voltage) #   0V = 0 | GPIO.LOW   | FALSE
 # Sainsmart Relais Vereinfachung 0 aktiv
-relay_on = False               # negative Logik!!! des Relay's, Schaltet bei 0 | GPIO.LOW  | False  ein
-relay_off = (not relay_on)     # negative Logik!!! des Relay's, Schaltet bei 1 | GPIO.High | True aus
+relay_on = pin_without_voltage   # negative Logik!!! des Relay's, Schaltet bei 0 | GPIO.LOW  | False  ein
+relay_off = (not relay_on)       # negative Logik!!! des Relay's, Schaltet bei 1 | GPIO.High | True aus
 
 logspacer = "***********************************************"
 logspacer2 = '-------------------------------------------------------'
