@@ -77,14 +77,14 @@ def defaultGPIO():
     gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_off)               # Licht Relais standardmaessig aus
     gpio.output(pi_ager_names.gpio_uv, pi_ager_names.relay_off)                  # UV-Licht Relais standardmaessig aus
     gpio.output(pi_ager_names.gpio_dehumidifier, pi_ager_names.relay_off)        # Entfeuchter Relais standardmaessig aus
-    gpio.output(pi_ager_names.gpio_alarm, pi_ager_names.relay_on)                # Piezzo Relais standardmaessig ein da negative Ansteuerung
-    gpio.output(pi_ager_names.gpio_switch, pi_ager_names.relay_off)
-    # gpio.output(pi_ager_names.gpio_notinuse_0, pi_ager_names.relay_off)
-    # gpio.output(pi_ager_names.gpio_notinuse_1, pi_ager_names.relay_off)
-    # gpio.output(pi_ager_names.gpio_notinuse_2, pi_ager_names.relay_off)
-    # gpio.output(pi_ager_names.gpio_notinuse_3, pi_ager_names.relay_off)
-    # gpio.output(pi_ager_names.gpio_notinuse_4, pi_ager_names.relay_off)
-    # gpio.output(pi_ager_names.gpio_notinuse_5, pi_ager_names.relay_off)
+    gpio.output(pi_ager_names.gpio_alarm, pi_ager_names.pin_without_voltage)
+    gpio.output(pi_ager_names.gpio_switch, pi_ager_names.pin_without_voltage)
+    # gpio.output(pi_ager_names.gpio_notinuse_0, pi_ager_names.pin_without_voltage)
+    # gpio.output(pi_ager_names.gpio_notinuse_1, pi_ager_names.pin_without_voltage)
+    # gpio.output(pi_ager_names.gpio_notinuse_2, pi_ager_names.pin_without_voltage)
+    # gpio.output(pi_ager_names.gpio_notinuse_3, pi_ager_names.pin_without_voltage)
+    # gpio.output(pi_ager_names.gpio_notinuse_4, pi_ager_names.pin_without_voltage)
+    # gpio.output(pi_ager_names.gpio_notinuse_5, pi_ager_names.pin_without_voltage)
     
 def gpios_are_in_use():
     gpio_heater_used = gpio_is_in_use(pi_ager_names.gpio_heater)
