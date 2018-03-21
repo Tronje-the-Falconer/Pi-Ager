@@ -212,7 +212,8 @@ def doMainLoop():
 
         # Prüfen, ob Sensordaten empfangen wurden und falls nicht, auf Notfallmodus wechseln
         if sensor_temperature != None and sensor_humidity != None:
-            # weitere Settings
+            count_continuing_emergency_loops = 0
+            #weitere Settings
             modus = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.modus_key)
             setpoint_temperature = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key))
             setpoint_humidity = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key))
