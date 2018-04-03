@@ -89,7 +89,7 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
 #### Waagen Module
  
 * [HX711 Modul für Wägezellenunterstützung](https://www.amazon.de/dp/B01I37IWYM/ref=cm_sw_r_wa_api_8ol5zb1ZZFX0R)
-* 2 x Keramikkondensator 22µF [X5R-G0603 47/6,3](https://www.reichelt.de/Vielschicht-SMD-G0603/X5R-G0603-22-10/3/index.html?ACTION=3&LA=20&GROUP=B3516&GROUPID=3166&ARTICLE=190488&START=0&SORT=artnr&OFFSET=16) (Reichelt EKL) 
+* 2 x Keramikkondensator 22µF [X5R-G0603 22/10](https://www.reichelt.de/Vielschicht-SMD-G0603/X5R-G0603-22-10/3/index.html?ACTION=3&LA=20&GROUP=B3516&GROUPID=3166&ARTICLE=190488&START=0&SORT=artnr&OFFSET=16) (Reichelt EKL) 
 * 2 x Keramikkondensator 220µF [X5R-G1206 220/6](https://www.reichelt.de/Vielschicht-SMD-G1206/X5R-G1206-220-6/3/index.html?ACTION=3&LA=5700&ARTICLE=190504&GROUPID=8049&artnr=X5R-G1206+220%2F6) (Reichelt EKL) 
 
 #### Stepup Wandler
