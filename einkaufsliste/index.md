@@ -62,7 +62,7 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
     * 4 x SMD-Widerstand 0805 47kOhm 0,1% - [SPR-0805 47,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/SPR-0805-47-0K/3/index.html?ACTION=3&LA=5&ARTICLE=123351&GROUPID=7971&artnr=SPR-0805+47%2C0K) (Reichelt EKL)
     * 4 x SMD-Widerstand 0805 1kOhm 1,0% - [RND 0805 1,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/RND-0805-1-1-0K/3/index.html?ACTION=3&LA=5&ARTICLE=183228&GROUPID=7971&artnr=RND+0805+1+1%2C0K) (Reichelt EKL)
     * 2 x SMD-Kerko 0805 10nF - [X7R 0805 BF 10N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805-BF-10N/3/index.html?ACTION=3&LA=5&ARTICLE=194259&GROUPID=8048&artnr=X7R+0805+BF+10N) (Reichelt EKL)
-    * 6 x SMD-Kerko 0805 100nF - [X7R 0805 CF 100N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805-CF-100N/3/index.html?ACTION=3&LA=5&ARTICLE=194282&GROUPID=8048&artnr=X7R+0805+CF+100N) (Reichelt EKL)
+    * 6 x SMD-Kerko 0805 100nF - [X7R 0805 CF 100N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805FCE-100N/3/index.html?ACTION=3&LA=20&GROUP=B3517&GROUPID=8048&ARTICLE=193840&START=0&SORT=artnr&OFFSET=16) (Reichelt EKL)
     * 2 x SMD-Kerko 0805 10µF - [KEM X5R0805 10U ](https://www.reichelt.de/Vielschicht-SMD-G0805/KEM-X5R0805-10U/3/index.html?ACTION=3&LA=5&ARTICLE=207089&GROUPID=8048&artnr=KEM+X5R0805+10U) (Reichelt EKL)  
     * (*2) Die Klinkenbuchsen: siehe Punkt "Komponenten die bei Reichelt nicht erhältlich sind"
   * Bauteile für den Digitaleingang
@@ -89,7 +89,7 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
 #### Waagen Module
  
 * [HX711 Modul für Wägezellenunterstützung](https://www.amazon.de/dp/B01I37IWYM/ref=cm_sw_r_wa_api_8ol5zb1ZZFX0R)
-* 2 x Keramikkondensator 47µF [X5R-G0603 47/6,3](https://www.reichelt.de/Vielschicht-SMD-G0603/X5R-G0603-47-6-3/3/index.html?ACTION=3&LA=5700&ARTICLE=190489&GROUPID=3166&artnr=X5R-G0603+47%2F6%2C3) (Reichelt EKL) 
+* 2 x Keramikkondensator 22µF [X5R-G0603 47/6,3](https://www.reichelt.de/Vielschicht-SMD-G0603/X5R-G0603-22-10/3/index.html?ACTION=3&LA=20&GROUP=B3516&GROUPID=3166&ARTICLE=190488&START=0&SORT=artnr&OFFSET=16) (Reichelt EKL) 
 * 2 x Keramikkondensator 220µF [X5R-G1206 220/6](https://www.reichelt.de/Vielschicht-SMD-G1206/X5R-G1206-220-6/3/index.html?ACTION=3&LA=5700&ARTICLE=190504&GROUPID=8049&artnr=X5R-G1206+220%2F6) (Reichelt EKL) 
 
 #### Stepup Wandler
