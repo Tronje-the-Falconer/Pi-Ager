@@ -99,7 +99,7 @@
             if ($is_OnOff_value) {
                 if ($count_timestamps <= 1){
                     $timestamp_value_dict[$first_timestamp_diagram] = Null;
-                    $timestamp_value_dict[$last_timestamp_diagram] = $array_values($data_values)[0];
+                    $timestamp_value_dict[$last_timestamp_diagram] = array_values($data_values)[0];
                 }
                 else {
                     $timestamp_value_dict[$first_timestamp_diagram] = array_values($data_values)[$count_timestamps-2]; # vorletzter Wert in DB
