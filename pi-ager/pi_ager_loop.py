@@ -474,7 +474,11 @@ def doMainLoop():
 
             # Automatik mit Befeuchtung und Entfeuchtung durch (Abluft-)Luftaustausch
             if modus == 4:
-                status_exhaust_fan = False                                   # Abluft initial aus
+                database_value_status_exhaust_fan = int(pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_exhaust_air_key))
+                if database_value_status_exhaust_fan == 0:
+                    status_exhaust_fan = False                                   # Abluft ist aktuell aus
+                else:
+                    status_exhaust_fan = True                                   # Abluft ist aktuell an
                 if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
                     gpio.output(pi_ager_names.gpio_cooling_compressor, pi_ager_names.relay_on)     # Kuehlung ein
                 if sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor:
