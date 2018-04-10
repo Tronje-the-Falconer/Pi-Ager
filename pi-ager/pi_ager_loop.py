@@ -474,6 +474,7 @@ def doMainLoop():
 
             # Automatik mit Befeuchtung und Entfeuchtung durch (Abluft-)Luftaustausch
             if modus == 4:
+                status_exhaust_fan = False                                   # Abluft initial aus
                 if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
                     gpio.output(pi_ager_names.gpio_cooling_compressor, pi_ager_names.relay_on)     # Kuehlung ein
                 if sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor:
