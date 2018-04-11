@@ -528,7 +528,7 @@
                                         </tr>
                                         <tr>
                                             <td><img <?php if ($circulation_air_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/circulate_42x42.png" alt=""></td>
-                                            <td><img src="<?php echo $circulating_on_off_png ;?>" title="PIN_FAN 18[12] -> IN 4 (GPIO 1)"></td>
+                                            <td><img src="<?php echo $circulating_on_off_png ;?>" title="PIN_FAN 24[18] -> IN 5 (PIN 6)"></td>
                                             <td class="text_left">
                                             <?php
                                                 echo strtoupper(_('circulating air'));
@@ -545,7 +545,7 @@
 
                                         <tr>
                                             <td><img <?php if ($exhaust_air_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/exhausting_42x42.png" alt=""></td>
-                                            <td><img src="<?php echo $circulating_on_off_png ;?>" title="PIN_FAN 18[12] -> IN 4 (GPIO 1)"></td>
+                                            <td><img src="<?php echo $exhausting_on_off_png ;?>" title="PIN_FAN 23[16] -> IN 4 (PIN 5)"></td>
                                             <td class="text_left">
                                             <?php
                                                 echo strtoupper(_('exhausting air'));
