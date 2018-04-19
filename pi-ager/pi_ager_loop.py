@@ -6,18 +6,18 @@ import time
 import datetime
 import Adafruit_DHT
 import RPi.GPIO as gpio
-from pi_sht1x import SHT1x
+import pi_sht1x
 import pi_ager_database
 import pi_ager_names
 import pi_ager_paths
 import pi_ager_init
-from pi_ager_logging import create_logger
-from pi_ager_logging import check_website_logfile
+import pi_ager_logging
+import pi_ager_logging
 import pi_ager_gpio_config
 import pi_ager_organization
 
 global logger
-logger = create_logger(__name__)
+logger = pi_ager_logging.create_logger(__name__)
 logger.debug('logging initialised')
 
 def autostart_loop():
@@ -36,7 +36,7 @@ def autostart_loop():
             doMainLoop()
         elif status_pi_ager == 1:
             doMainLoop()
-        check_website_logfile()
+        pi_ager_logging.check_website_logfile()
         time.sleep(5)
         
 def get_sensordata():
@@ -50,7 +50,7 @@ def get_sensordata():
         # btp = 237.7   ermittelt aus dem Datenblatt DHT11 und DHT22
     
     elif pi_ager_init.sensorname == 'SHT': #SHT
-        sensor_sht = SHT1x(pi_ager_names.gpio_sensor_data, pi_ager_names.gpio_sensor_sync, gpio_mode=pi_ager_names.board_mode)
+        sensor_sht = pi_sht1x.SHT1x(pi_ager_names.gpio_sensor_data, pi_ager_names.gpio_sensor_sync, gpio_mode=pi_ager_names.board_mode)
         sensor_sht.read_temperature()
         sensor_sht.read_humidity()
         sensor_temperature_big = sensor_sht.temperature_celsius
@@ -678,7 +678,7 @@ def doMainLoop():
         # filepermission = oct(os.stat(pi_ager_paths.logfile_txt_file)[stat.ST_MODE])[-3:]
         # if (filepermission != '666'):
             # os.chmod(pi_ager_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
-        check_website_logfile()
+        pi_ager_logging.check_website_logfile()
         
         # Mainloop fertig
         logger.debug('loop complete')
