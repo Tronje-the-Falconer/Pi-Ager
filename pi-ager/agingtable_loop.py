@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 
+"""
+    Reifetabellen Loop
+    
+    Hauptschleife für das Setzen des automatisierten Reifeprozesses
+"""
+
 import sys
 import time
 import datetime
