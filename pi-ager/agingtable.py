@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-from pi_ager_logging import create_logger
+import pi_ager_logging
 import agingtable_loop
 import pi_ager_database
 import pi_ager_names
 
 global logger
-logger = create_logger('agingtable')
+logger = pi_ager_logging.create_logger('agingtable')
 logger.debug('logging initialised')
 
 try:
