@@ -1,5 +1,11 @@
 #!/usr/bin/python3
 # -*- coding: iso-8859-1 -*-
+"""
+pi-ager Reifeschranksteuerung
+
+Dies ist die Steuerung für einen Eigenbau Reifeschrank
+"""
+
 # Importieren der Module
 import os
 import time
