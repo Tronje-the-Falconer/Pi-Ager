@@ -1,4 +1,7 @@
 #!/usr/bin/python3
+"""
+Die Agingtable schreibt definierte Werte aus der DB in die Steuerungstabelle des reifeschranks. Dadurch wird ein zeitlich definierter Programmablauf ermoeglicht
+"""
 import pi_ager_logging
 import agingtable_loop
 import pi_ager_database
