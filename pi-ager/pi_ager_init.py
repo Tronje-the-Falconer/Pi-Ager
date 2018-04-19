@@ -5,8 +5,8 @@ import gettext
 import pi_ager_database
 import pi_ager_names
 import pi_ager_gpio_config
-from pi_ager_logging import create_logger
-from pi_sht1x import SHT1x
+import pi_ager_logging
+import pi_sht1x
 
 global system_starttime
 global circulation_air_start
@@ -18,7 +18,7 @@ global light_stoptime
 global logger
 global sensortype
 
-logger = create_logger(__name__)
+logger = pi_ager_logging.create_logger(__name__)
 logger.debug('logging initialised')
 
 # Function zum Setzen des Sensors
@@ -54,7 +54,7 @@ def check_sensor(sensorname, sensor):
     logger.debug('check_sensor()')
     try:
         if sensorname == 'SHT':
-            sensor_sht = SHT1x(pi_ager_names.gpio_sensor_data, pi_ager_names.gpio_sensor_sync, gpio_mode=pi_ager_names.board_mode)
+            sensor_sht = pi_sht1x.SHT1x(pi_ager_names.gpio_sensor_data, pi_ager_names.gpio_sensor_sync, gpio_mode=pi_ager_names.board_mode)
             sensor_sht.read_temperature()
             sensor_sht.read_humidity()
             value_sht_temperature = sensor_sht.temperature_celsius
