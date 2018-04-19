@@ -3,13 +3,13 @@ import sqlite3
 import time
 import pi_ager_names
 import pi_ager_paths
-from pi_ager_logging import create_logger
+import pi_ager_logging
 
 global cursor
 global connection
 
 global logger
-logger = create_logger(__name__)
+logger = pi_ager_logging.create_logger(__name__)
 logger.debug('logging initialised')
 
 
