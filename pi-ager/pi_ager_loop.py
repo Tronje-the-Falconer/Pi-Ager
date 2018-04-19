@@ -168,8 +168,8 @@ def doMainLoop():
     global status_heater                  #  Heizung
     global status_cooling_compressor      #  Kuehlung
     global status_humidifier              #  Luftbefeuchtung
-    global counter_humidify               #  Zaehler Verzoegerung der Luftbefeuchtung
-    counter_humidify = 0
+    #global counter_humidify               #  Zaehler Verzoegerung der Luftbefeuchtung
+    #counter_humidify = 0
     global delay_humidify                 #  Luftbefeuchtungsverzoegerung
     global status_exhaust_fan             #  Variable fuer die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
     global uv_modus                       #  Modus UV-Licht  (1 = Periode/Dauer; 2= Zeitstempel/Dauer)
@@ -195,6 +195,7 @@ def doMainLoop():
     pi_ager_database.write_start_in_database(pi_ager_names.status_pi_ager_key)
     status_pi_ager = 1
     count_continuing_emergency_loops = 0
+    humidify_delay_switch = False
     
     logger.debug('doMainLoop()')
 
@@ -228,7 +229,7 @@ def doMainLoop():
             switch_on_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_humidifier_key))
             switch_off_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_humidifier_key))
             delay_humidify = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key))
-            delay_humidify = delay_humidify * 10
+            delay_humidify = delay_humidify * 60
             uv_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_modus_key))
             switch_on_uv_hour = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_hour_key))
             switch_on_uv_minute = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_minute_key))
@@ -488,12 +489,17 @@ def doMainLoop():
                 if sensor_temperature >= setpoint_temperature - switch_off_cooling_compressor:
                     gpio.output(pi_ager_names.gpio_heater, pi_ager_names.relay_off)  # Heizung aus
                 if sensor_humidity <= setpoint_humidity - switch_on_humidifier:
-                    counter_humidify = counter_humidify + 1
-                    if counter_humidify >= delay_humidify:               # Verzoegerung der Luftbefeuchtung
+                    if not humidify_delay_switch:
+                        humidify_delay_switch = True
+                        humidify_delay_starttime = pi_ager_database.get_current_time()
+                    # counter_humidify = counter_humidify + 1
+                    if pi_ager_database.get_current_time() >= humidify_delay_starttime + delay_humidify:      # Verzoegerung der Luftbefeuchtung
+                    #if counter_humidify >= delay_humidify:               # Verzoegerung der Luftbefeuchtung
                         gpio.output(pi_ager_names.gpio_humidifier, pi_ager_names.relay_on)  # Luftbefeuchter ein
                 if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
                     gpio.output(pi_ager_names.gpio_humidifier, pi_ager_names.relay_off)     # Luftbefeuchter aus
-                    counter_humidify = 0
+                    # counter_humidify = 0
+                    humidify_delay_switch = False
                 if sensor_humidity >= setpoint_humidity + switch_on_humidifier:
                     if dehumidifier_modus == 1 or dehumidifier_modus == 2:  # entweder nur über Abluft oder mit unterstützung von Entfeuchter
                         status_exhaust_fan = True                           # Feuchtereduzierung Abluft-Ventilator ein
