@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 import logging
-from logging.handlers import RotatingFileHandler
 import pi_ager_paths
-from pi_ager_database_get_logging_value import get_logging_value
-from pathlib import Path
+import pi_ager_database_get_logging_value
+import pathlib
 import os, stat
 
 def get_logginglevel(loglevelstring):
@@ -25,7 +24,7 @@ def get_logginglevel(loglevelstring):
 def check_website_logfile():
     global logger
     filepath = pi_ager_paths.get_path_logfile_txt_file()
-    website_logfile = Path(filepath)
+    website_logfile = pathlib.Path(filepath)
     filepermission = oct(os.stat(pi_ager_paths.logfile_txt_file)[stat.ST_MODE])[-3:]
     if not website_logfile.is_file():
         new_website_logfile = open(pi_ager_paths.get_path_logfile_txt_file(), "wb")
@@ -36,17 +35,17 @@ def check_website_logfile():
 
 def create_logger(pythonfile):
     check_website_logfile()
-    loglevel_file_value = get_logging_value('loglevel_file')
-    loglevel_console_value = get_logging_value('loglevel_console')
+    loglevel_file_value = pi_ager_database_get_logging_value.get_logging_value('loglevel_file')
+    loglevel_console_value = pi_ager_database_get_logging_value.get_logging_value('loglevel_console')
     
     # Logger fuer website
-    website_log_rotatingfilehandler = RotatingFileHandler(pi_ager_paths.get_path_logfile_txt_file(), mode='a', maxBytes=1048576, backupCount=36, encoding=None, delay=False)
+    website_log_rotatingfilehandler = logging.handlers.RotatingFileHandler(pi_ager_paths.get_path_logfile_txt_file(), mode='a', maxBytes=1048576, backupCount=36, encoding=None, delay=False)
     website_log_rotatingfilehandler.setLevel(logging.INFO)
     website_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(message)s', '%y-%m-%d %H:%M:%S')
     website_log_rotatingfilehandler.setFormatter(website_log_rotatingfilehandler_formatter)
 
     # Logger fuer pi-ager debugging
-    pi_ager_log_rotatingfilehandler = RotatingFileHandler(pi_ager_paths.get_pi_ager_log_file_path(), mode='a', maxBytes=2097152, backupCount=20, encoding=None, delay=False)
+    pi_ager_log_rotatingfilehandler = logging.handlers.RotatingFileHandler(pi_ager_paths.get_pi_ager_log_file_path(), mode='a', maxBytes=2097152, backupCount=20, encoding=None, delay=False)
     pi_ager_log_rotatingfilehandler.setLevel(get_logginglevel(loglevel_file_value))
     pi_ager_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M:%S')
     pi_ager_log_rotatingfilehandler.setFormatter(pi_ager_log_rotatingfilehandler_formatter)
