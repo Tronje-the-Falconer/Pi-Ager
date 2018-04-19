@@ -2,11 +2,11 @@
 import scale_loop
 import pi_ager_database
 import pi_ager_names
-from pi_ager_logging import create_logger
+import pi_ager_logging 
 
 try:
     global logger
-    logger = create_logger('scale')
+    logger = pi_ager_logging .create_logger('scale')
     logger.debug('logging initialised')
     scale_loop.doScaleLoop()
 
