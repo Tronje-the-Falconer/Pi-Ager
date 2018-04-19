@@ -13,11 +13,15 @@ logger = pi_ager_logging.create_logger(__name__)
 logger.debug('logging initialised')
 
 # Definieren von Funktionen
-# Funktion zur uebersetzung von z.B. Listenobjekten z.B. animals = [N_('mollusk'), N_('albatross'), N_('rat')]
 # def N_(message):
-    # return message
-# Funktion zum Lesen des Dictionarys und setzen der Werte
+#    """
+#    Funktion zur uebersetzung von z.B. Listenobjekten z.B. animals = [N_('mollusk'), N_('albatross'), N_('rat')]
+#    """
+#     return message
 def get_dictionary_out_of_sqliterow(row):
+    """
+    Funktion zum Lesen des Dictionarys und setzen der Werte
+    """
     global logger
     
     period_dictionary = {}
@@ -33,6 +37,9 @@ def get_dictionary_out_of_sqliterow(row):
     return period_dictionary
 
 def get_sensortype():
+    """
+    Funktion zum Auslesen des Sensortyps
+    """
     global sensortype
     global logger
     
@@ -46,12 +53,18 @@ def get_sensortype():
     return sensorname
 
 def get_duration_sleep(period_days):
+    """
+    Funktion zum Auslesen der Pausen-Dauer bis ein neuer Wert geschrieben werden muss
+    """
     global day_in_seconds
     global logger
     sleep_time = period_days * day_in_seconds    # Anzahl der Tage von "column" mit 86400 (Sekunden) multipliziert fuer wartezeit bis zur naechsten Periode
     return sleep_time
 
 def continue_after_power_failure(current_dictionary):
+    """
+    Nach Stromausfall wird diese Funktion ausgeführt um zustände und Ausfallwerte zu analysieren
+    """
     global logger
     failure_temperature_delta = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.failure_temperature_delta_key)     # Maximaler Temperatur-Unterschied
     failure_humidity_delta = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.failure_humidity_delta_key)     # Maximaler Feuchte-Unterschied
@@ -84,6 +97,9 @@ def continue_after_power_failure(current_dictionary):
         return True
 
 def read_dictionary_write_settings(period_dictionary):
+    """
+    Funktion zum schreiben der Settings in die DB
+    """
     global period_endtime
     global period_starttime_seconds
     global day_in_seconds
@@ -155,7 +171,9 @@ def read_dictionary_write_settings(period_dictionary):
     logger.info(logstring)
     
 def doAgingtableLoop():
-
+    """
+    Haupt-Funktion fuer die Reifetabelle
+    """
     global period_settings
     global period_starttime_seconds
     global period_endtime
