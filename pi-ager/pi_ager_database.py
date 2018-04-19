@@ -1,4 +1,11 @@
 #!/usr/bin/python3
+
+"""
+    Datenbankkommunikation
+    
+    Funktionen für die Kommunikation mit der DB
+"""
+
 import sqlite3
 import time
 import pi_ager_names
@@ -14,10 +21,16 @@ logger.debug('logging initialised')
 
 
 def get_current_time():
+    """
+    Funktion zum Auslesen des aktuellen Zeitstempels
+    """
     current_time = int(time.time())
     return current_time
 
 def open_database():
+    """
+    Funktion zum Öffnen der Datenbankconnection
+    """
     global cursor
     global connection
     rows = None
@@ -26,16 +39,25 @@ def open_database():
     cursor = connection.cursor()
 
 def execute_query(command):
+    """
+    Funktion zum Ausfuehren eines SQL's
+    """
     global cursor
     global connection
     cursor.execute(command)
     connection.commit()
 
 def close_database():
+    """
+    Funktion zum Schliessen der DB-Connection
+    """
     global connection
     connection.close()
 
 def table_exists(table):
+    """
+    Funktion zum Pruefen ob eine Tabelle existiert
+    """
     global cursor
     sql = 'SELECT count(*) FROM sqlite_master WHERE type="table" AND name="' + table + '";'
     
@@ -51,6 +73,9 @@ def table_exists(table):
         return False
         
 def column_exists_in_table(column,table):
+    """
+    Funktion zum Pruefen ob eine Spalte existiert
+    """
     try:
         sql = 'SELECT ' + column + ' FROM ' + table
         open_database()
@@ -62,6 +87,9 @@ def column_exists_in_table(column,table):
         return False
         
 def key_exists_in_table(key, table):
+    """
+    Funktion zum Pruefen, ob eine Key-Spalte in der Tabelle existiert
+    """
     global cursor
     sql = 'SELECT EXISTS(SELECT 1 FROM ' + table + ' WHERE ' + pi_ager_names.key_field + ' = "' + key + '" LIMIT 1) as result;'
     open_database()
@@ -75,6 +103,9 @@ def key_exists_in_table(key, table):
         return False
     
 def get_column_infos(table):
+    """
+    Funktion zum erhalt der Spalteninformation
+    """
     global cursor
     sql = 'PRAGMA table_info(' + table + ')'
     open_database()
@@ -84,18 +115,27 @@ def get_column_infos(table):
     return rows
     
 def add_key_value_table(table):
+    """
+    Funktion zum Erzeugen einer Key-Value Tabelle
+    """
     sql = 'CREATE TABLE "' + table + '" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "key" TEXT NOT NULL, "value" REAL NOT NULL, "last_change" INTEGER NOT NULL)'
     open_database()
     execute_query(sql)
     close_database()
     
 def add_id_value_table(table):
+    """
+    Funktion zum Erzeugen eine ID-Value Tabelle
+    """
     sql = 'CREATE TABLE "' + table + '" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "value" REAL NOT NULL, "last_change" INTEGER NOT NULL)'
     open_database()
     execute_query(sql)
     close_database()
     
 def get_table_value(table, key):
+    """
+    Funktion zum Auslesen eines Wertes zu einem bekannten Key
+    """
     global cursor
 
     if key == None:
@@ -110,6 +150,9 @@ def get_table_value(table, key):
     return value
 
 def get_last_change(table, key):
+    """
+    Funktion zum Auslesen des letzten Zeitstempels der Veraenderung
+    """
     global cursor
 
     if key == None:
@@ -124,6 +167,9 @@ def get_last_change(table, key):
     return last_change
 
 def write_current_value(key, value):
+    """
+    Funktion zum Schreiben eines Wertes
+    """
     global cursor
 
     if key == None:
@@ -138,6 +184,9 @@ def write_current_value(key, value):
     logger.debug(logstring)
 
 def get_scale_table_row(table):
+    """
+    Funktion zum Auslesen des Werts und des letzten Zeitstempels der Aenderung
+    """
     global cursor
     sql='SELECT ' + pi_ager_names.value_field + ', ' + pi_ager_names.last_change_field + ' FROM ' + table + ' WHERE id = (SELECT MAX(id) from ' + table + ')'
     open_database()
@@ -147,6 +196,9 @@ def get_scale_table_row(table):
     return row
 
 def get_agingtable_as_rows(agingtable):
+    """
+    Funktion zum Auslesen der Reifetabelle
+    """
     global cursor
     sql='SELECT * from agingtable_' + agingtable
     
@@ -157,6 +209,9 @@ def get_agingtable_as_rows(agingtable):
     return rows
 
 def get_scale_settings_from_table(scale_settings_table):
+    """
+    Funktion zum Auslesen der scale_settings-tabelle
+    """
     global cursor
 
     open_database()
@@ -168,6 +223,9 @@ def get_scale_settings_from_table(scale_settings_table):
     return rows
 
 def read_config():
+    """
+    Funktion zum Auslesen der Config-Tabelle
+    """
     global cursor
     open_database()
     execute_query('SELECT * FROM ' + pi_ager_names.config_settings_table + ' WHERE ' + pi_ager_names.key_field + ' ="sensortype" OR "key"="language" OR "key"="switch_on_cooling_compressor" OR "key" = "switch_off_cooling_compressor"OR "key"="switch_on_humidifier" OR "key" = "switch_off_humidifier" OR "key" = "delay_humidify" OR "key" = "uv_modus" OR "key" = "uv_duration" OR "key" = "uv_period" OR "key" = "switch_on_uv_hour" OR "key" = "switch_on_uv_minute" OR "key" = "light_modus" OR "key" = "light_duration" OR "key" = "light_period" OR "key" = "switch_on_light_hour" OR "key" = "switch_on_light_minute" OR "key" = "dehumidifier_modus" OR "key" = "referenceunit_scale1" OR "key" = "referenceunit_scale2"')
@@ -176,6 +234,9 @@ def read_config():
     return rows
     
 def read_settings():
+    """
+    Funktion zum Auslesen der settings-Tabelle
+    """
     global cursor
     open_database()
     execute_query('SELECT * FROM ' + pi_ager_names.config_settings_table + ' WHERE ' + pi_ager_names.key_field + ' ="modus" OR "key"="setpoint_temperature" OR "key"="setpoint_humidity" OR "key"="circulation_air_period" OR "key"="circulation_air_duration" OR "key"="exhaust_air_period" OR "key"="exhaust_air_duration"')
@@ -184,6 +245,9 @@ def read_settings():
     return rows
 
 def read_agingtable_name_from_config():
+    """
+    Funktion zum Auslesen der aktuell Eingestellten Reifetabelle
+    """
     global cursor
     
     id_agingtable = get_table_value(pi_ager_names.config_settings_table, pi_ager_names.agingtable_key)
@@ -196,6 +260,9 @@ def read_agingtable_name_from_config():
     return name
 
 def get_current(table, all_rows):
+    """
+    Funktion zum Auslesen aller Werte einer Tabelle
+    """
     global cursor
     open_database()
     if all_rows:
@@ -208,15 +275,23 @@ def get_current(table, all_rows):
     return rows
 
 def get_status_light_manual():
+    """
+    Funktion zum Auslesen des Werts der manuellen Lichtsteuerung
+    """
     status_light_manual = get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_light_manual_key)
     return status_light_manual
     
 def get_status_uv_manual():
+    """
+    Funktion zum Auslesen des Werts der manuellen UV Lichtsteuerung
+    """
     status_uv_manual = get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_uv_manual_key)
     return status_uv_manual
     
 def write_current(loopnumber, sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier):
-
+    """
+    Funktion zum schreiben der aktuellen Werte
+    """
     
     write_changed_values(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier)
     
@@ -251,6 +326,9 @@ def write_current(loopnumber, sensor_temperature, status_heater, status_exhaust_
     close_database()
 
 def update_value_in_table(table, key, value):
+    """
+    Funktion zum aktualisieren eines Wertes in einer Tabelle
+    """
     open_database()
     
     sql = 'UPDATE ' + table + ' SET "' + pi_ager_names.value_field + '" = "' + str(value) +'" , "' + str(pi_ager_names.last_change_field) + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + key + '"'
@@ -259,6 +337,9 @@ def update_value_in_table(table, key, value):
     close_database()
     
 def insert_key_value_row_in_table(table, key, value):
+    """
+    Funktion zum Einfuegen eines Wertes in eine Tabelle
+    """
     open_database()
     if key == None:
         sql = 'INSERT INTO ' + table + ' (' + pi_ager_names.value_field + ',' + str(pi_ager_names.last_change_field) + ') VALUES (' + str(value) + ',0)'
@@ -272,6 +353,9 @@ def insert_key_value_row_in_table(table, key, value):
     close_database()
     
 def write_scale(scale_table,value_scale):
+    """
+    Funktion zum schreiben der Configurationswerte der Waagen
+    """
 
     if scale_table == pi_ager_names.data_scale1_table:
         scale_key = pi_ager_names.scale1_key
@@ -286,6 +370,9 @@ def write_scale(scale_table,value_scale):
     close_database()
 
 def write_tables(agingtable):
+    """
+    Funktion zum Hinzufügen einer Reifetabelle
+    """
 
     open_database()
     
@@ -294,6 +381,9 @@ def write_tables(agingtable):
     close_database()
 
 def write_settings(modus, setpoint_temperature, setpoint_humidity, circulation_air_period, circulation_air_duration, exhaust_air_period, exhaust_air_duration):
+    """
+    Funktion zum schreiben der Settingstabelle
+    """
     open_database()
 
     execute_query('UPDATE ' + pi_ager_names.config_settings_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(modus) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' ="modus"')
@@ -307,6 +397,9 @@ def write_settings(modus, setpoint_temperature, setpoint_humidity, circulation_a
     close_database()
 
 def write_startstop_status_in_database(module_key, status):
+    """
+    Funktion zum schreiben von start oder stop (0,1) in die Status
+    """
     
     open_database()
     
@@ -316,13 +409,21 @@ def write_startstop_status_in_database(module_key, status):
     close_database()
 
 def write_start_in_database(module_key):
+    """
+    Funktion zum schreiben eines Starts (1) bei einem Status
+    """
     write_startstop_status_in_database(module_key, 1)
 
 def write_stop_in_database(module_key):
+        """
+    Funktion zum schreiben eines Stops (2) bei einem Status
+    """
     write_startstop_status_in_database(module_key, 0)
 
 def write_config(sensortype, language, switch_on_cooling_compressor, switch_off_cooling_compressor, switch_on_humidifier, switch_off_humidifier, delay_humidify, uv_modus, uv_duration, uv_period, switch_on_uv_hour, switch_on_uv_minute, light_modus, light_duration, light_period, switch_on_light_hour, switch_on_light_minute, dehumidifier_modus, referenceunit_scale1, referenceunit_scale2):
-
+    """
+    Funktion zum schreiben der config-Werte
+    """
     open_database()
 
     execute_query('UPDATE ' + pi_ager_names.config_settings_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(sensortype) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' ="sensortype"')
@@ -349,7 +450,9 @@ def write_config(sensortype, language, switch_on_cooling_compressor, switch_off_
     close_database()
     
 def write_changed_values(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier):
-    
+    """
+    Funktion zum schreiben bei geaenderten Sensor- und Status-werten
+    """
     current_value_rows = get_current(pi_ager_names.current_values_table, True)
     
     open_database()
@@ -382,6 +485,9 @@ def write_changed_values(sensor_temperature, status_heater, status_exhaust_air, 
     close_database()
 
 def add_column(table, fieldname):
+    """
+    Funktion zum Hinzufuegen einer Spalte
+    """
     sql = 'ALTER TABLE ' + table +' ADD ' + fieldname + ' ' + pi_ager_names.field_type[fieldname]
     if fieldname == pi_ager_names.id_field:
         sql = sql + ' PRIMARY KEY AUTOINCREMENT NOT NULL'
@@ -393,6 +499,9 @@ def add_column(table, fieldname):
     close_database()
     
 def repair_column_type(table, fieldname):
+    """
+    Funktion zum reparieren einer Spalte
+    """
     # Wird später implementiert
     # logstring = 'Wrong fieldtype in field ' + fieldname + ' of table ' + table + '!'
     # logger.debug(logstring)
