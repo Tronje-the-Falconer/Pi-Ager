@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: iso-8859-1 -*-
 """
-pi-ager Reifeschranksteuerung
+pi-ager dry aging fridge control
 
-Dies ist die Steuerung für einen Eigenbau Reifeschrank
+this is the control for a self-made dry aging fridge
 """
 
 # Importieren der Module

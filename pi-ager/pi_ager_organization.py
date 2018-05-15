@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+    basic functions
+    
+    
+"""
 import RPi.GPIO as gpio
 import pi_ager_logging
 import pi_ager_names
@@ -10,6 +15,9 @@ logger.debug('logging initialised')
 
 # Function goodbye
 def goodbye():
+    """
+    last function for clean up system
+    """
     global logger
     cleanup()
     logstring = _('goodbye') + '!'
@@ -17,6 +25,9 @@ def goodbye():
 
 # Function cleanup
 def cleanup():
+    """
+    clean up gpio
+    """
     global logger
     
     if pi_ager_gpio_config.gpios_are_in_use:

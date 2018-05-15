@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+    inital settings for pi-ager
+    
+    setting up inital settings
+"""
 import Adafruit_DHT
 import time
 import gettext
@@ -23,6 +28,9 @@ logger.debug('logging initialised')
 
 # Function zum Setzen des Sensors
 def set_sensortype():
+    """
+    setting up sensortype
+    """
     global sensor
     global sensortype
     global sensorname
@@ -50,6 +58,9 @@ def set_sensortype():
     logger.info(_('sensortype set to') + ' ' + sensorname)
         
 def check_sensor(sensorname, sensor):
+    """
+    checking wired sensor
+    """
     global sensortype
     logger.debug('check_sensor()')
     try:
@@ -79,6 +90,9 @@ def check_sensor(sensorname, sensor):
         set_sensortype()
 
 def set_system_starttime():
+    """
+    setting starttimes
+    """
     global system_starttime
     global circulation_air_start
     global exhaust_air_start
@@ -99,6 +113,9 @@ def set_system_starttime():
     light_stoptime = light_starttime
 
 def set_language():
+    """
+    setting up language
+    """
     global logger
     
     logger.debug('set_language()')
@@ -117,6 +134,9 @@ def set_language():
     translation.install()
 
 def setup_GPIO():
+    """
+    initialise GPIO's and setting default GPIO's
+    """
     pi_ager_gpio_config.setupGPIO() # GPIO initialisieren
     pi_ager_gpio_config.defaultGPIO()   
 

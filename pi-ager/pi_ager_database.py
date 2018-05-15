@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-
 """
-    Datenbankkommunikation
-    
-    Funktionen für die Kommunikation mit der DB
+    database communication
+    
+    functions for communication with the database
 """
 
 import sqlite3
@@ -22,14 +21,14 @@ logger.debug('logging initialised')
 
 def get_current_time():
     """
-    Funktion zum Auslesen des aktuellen Zeitstempels
+    function for reading out the current time stamp
     """
     current_time = int(time.time())
     return current_time
 
 def open_database():
     """
-    Funktion zum Öffnen der Datenbankconnection
+    function to open the database connection
     """
     global cursor
     global connection
@@ -40,7 +39,7 @@ def open_database():
 
 def execute_query(command):
     """
-    Funktion zum Ausfuehren eines SQL's
+    function for executing a SQL
     """
     global cursor
     global connection
@@ -49,14 +48,14 @@ def execute_query(command):
 
 def close_database():
     """
-    Funktion zum Schliessen der DB-Connection
+    function for closing the database connection
     """
     global connection
     connection.close()
 
 def table_exists(table):
     """
-    Funktion zum Pruefen ob eine Tabelle existiert
+    function to check if a table exists
     """
     global cursor
     sql = 'SELECT count(*) FROM sqlite_master WHERE type="table" AND name="' + table + '";'
@@ -74,7 +73,7 @@ def table_exists(table):
         
 def column_exists_in_table(column,table):
     """
-    Funktion zum Pruefen ob eine Spalte existiert
+    function to check if a column exists
     """
     try:
         sql = 'SELECT ' + column + ' FROM ' + table
@@ -88,7 +87,7 @@ def column_exists_in_table(column,table):
         
 def key_exists_in_table(key, table):
     """
-    Funktion zum Pruefen, ob eine Key-Spalte in der Tabelle existiert
+    function to check if a key column exists in the table
     """
     global cursor
     sql = 'SELECT EXISTS(SELECT 1 FROM ' + table + ' WHERE ' + pi_ager_names.key_field + ' = "' + key + '" LIMIT 1) as result;'
@@ -104,7 +103,7 @@ def key_exists_in_table(key, table):
     
 def get_column_infos(table):
     """
-    Funktion zum erhalt der Spalteninformation
+    function for obtaining the column information
     """
     global cursor
     sql = 'PRAGMA table_info(' + table + ')'
@@ -116,7 +115,7 @@ def get_column_infos(table):
     
 def add_key_value_table(table):
     """
-    Funktion zum Erzeugen einer Key-Value Tabelle
+    function for generating a key value table
     """
     sql = 'CREATE TABLE "' + table + '" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "key" TEXT NOT NULL, "value" REAL NOT NULL, "last_change" INTEGER NOT NULL)'
     open_database()
@@ -125,7 +124,7 @@ def add_key_value_table(table):
     
 def add_id_value_table(table):
     """
-    Funktion zum Erzeugen eine ID-Value Tabelle
+    function for generating an id-value table
     """
     sql = 'CREATE TABLE "' + table + '" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "value" REAL NOT NULL, "last_change" INTEGER NOT NULL)'
     open_database()
@@ -134,7 +133,7 @@ def add_id_value_table(table):
     
 def get_table_value(table, key):
     """
-    Funktion zum Auslesen eines Wertes zu einem bekannten Key
+    function to read a value to a known key
     """
     global cursor
 
@@ -151,7 +150,7 @@ def get_table_value(table, key):
 
 def get_last_change(table, key):
     """
-    Funktion zum Auslesen des letzten Zeitstempels der Veraenderung
+    function for reading the last change time stamp
     """
     global cursor
 
@@ -168,7 +167,7 @@ def get_last_change(table, key):
 
 def write_current_value(key, value):
     """
-    Funktion zum Schreiben eines Wertes
+    function for writing a value
     """
     global cursor
 
@@ -185,7 +184,7 @@ def write_current_value(key, value):
 
 def get_scale_table_row(table):
     """
-    Funktion zum Auslesen des Werts und des letzten Zeitstempels der Aenderung
+    function for reading the latest value and timestamp
     """
     global cursor
     sql='SELECT ' + pi_ager_names.value_field + ', ' + pi_ager_names.last_change_field + ' FROM ' + table + ' WHERE id = (SELECT MAX(id) from ' + table + ')'
@@ -197,7 +196,7 @@ def get_scale_table_row(table):
 
 def get_agingtable_as_rows(agingtable):
     """
-    Funktion zum Auslesen der Reifetabelle
+    function for reading the agingtable
     """
     global cursor
     sql='SELECT * from agingtable_' + agingtable
@@ -210,7 +209,7 @@ def get_agingtable_as_rows(agingtable):
 
 def get_scale_settings_from_table(scale_settings_table):
     """
-    Funktion zum Auslesen der scale_settings-tabelle
+    function for reading the scale_settings-table
     """
     global cursor
 
@@ -224,7 +223,7 @@ def get_scale_settings_from_table(scale_settings_table):
 
 def read_config():
     """
-    Funktion zum Auslesen der Config-Tabelle
+    function for reading the config table
     """
     global cursor
     open_database()
@@ -235,7 +234,7 @@ def read_config():
     
 def read_settings():
     """
-    Funktion zum Auslesen der settings-Tabelle
+    function for reading the settings table
     """
     global cursor
     open_database()
@@ -246,7 +245,7 @@ def read_settings():
 
 def read_agingtable_name_from_config():
     """
-    Funktion zum Auslesen der aktuell Eingestellten Reifetabelle
+    function for reading the currently set agingtabletable
     """
     global cursor
     
@@ -261,7 +260,7 @@ def read_agingtable_name_from_config():
 
 def get_current(table, all_rows):
     """
-    Funktion zum Auslesen aller Werte einer Tabelle
+    function for reading all values of a table
     """
     global cursor
     open_database()
@@ -276,21 +275,21 @@ def get_current(table, all_rows):
 
 def get_status_light_manual():
     """
-    Funktion zum Auslesen des Werts der manuellen Lichtsteuerung
+    function for reading the value of the manual light control
     """
     status_light_manual = get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_light_manual_key)
     return status_light_manual
     
 def get_status_uv_manual():
     """
-    Funktion zum Auslesen des Werts der manuellen UV Lichtsteuerung
+    function for reading the value of the manual uv-light control
     """
     status_uv_manual = get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_uv_manual_key)
     return status_uv_manual
     
 def write_current(loopnumber, sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier):
     """
-    Funktion zum schreiben der aktuellen Werte
+    function for writing the current values
     """
     
     write_changed_values(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier)
@@ -327,7 +326,7 @@ def write_current(loopnumber, sensor_temperature, status_heater, status_exhaust_
 
 def update_value_in_table(table, key, value):
     """
-    Funktion zum aktualisieren eines Wertes in einer Tabelle
+    function to update a value in a table
     """
     open_database()
     
@@ -338,7 +337,7 @@ def update_value_in_table(table, key, value):
     
 def insert_key_value_row_in_table(table, key, value):
     """
-    Funktion zum Einfuegen eines Wertes in eine Tabelle
+    function to insert a value into a table
     """
     open_database()
     if key == None:
@@ -354,7 +353,7 @@ def insert_key_value_row_in_table(table, key, value):
     
 def write_scale(scale_table,value_scale):
     """
-    Funktion zum schreiben der Configurationswerte der Waagen
+    function for writing the configuration values of the scales
     """
 
     if scale_table == pi_ager_names.data_scale1_table:
@@ -371,7 +370,7 @@ def write_scale(scale_table,value_scale):
 
 def write_tables(agingtable):
     """
-    Funktion zum Hinzufügen einer Reifetabelle
+    function for adding a agingtable
     """
 
     open_database()
@@ -382,7 +381,7 @@ def write_tables(agingtable):
 
 def write_settings(modus, setpoint_temperature, setpoint_humidity, circulation_air_period, circulation_air_duration, exhaust_air_period, exhaust_air_duration):
     """
-    Funktion zum schreiben der Settingstabelle
+    function for writing the setting table
     """
     open_database()
 
@@ -398,7 +397,7 @@ def write_settings(modus, setpoint_temperature, setpoint_humidity, circulation_a
 
 def write_startstop_status_in_database(module_key, status):
     """
-    Funktion zum schreiben von start oder stop (0,1) in die Status
+    function for writing start or stop (0,1) in the status
     """
     
     open_database()
@@ -410,19 +409,19 @@ def write_startstop_status_in_database(module_key, status):
 
 def write_start_in_database(module_key):
     """
-    Funktion zum schreiben eines Starts (1) bei einem Status
+    function for writing a start (1) in a status
     """
     write_startstop_status_in_database(module_key, 1)
 
 def write_stop_in_database(module_key):
-        """
-    Funktion zum schreiben eines Stops (2) bei einem Status
+    """
+    function for writing a stop (2) in a status
     """
     write_startstop_status_in_database(module_key, 0)
 
 def write_config(sensortype, language, switch_on_cooling_compressor, switch_off_cooling_compressor, switch_on_humidifier, switch_off_humidifier, delay_humidify, uv_modus, uv_duration, uv_period, switch_on_uv_hour, switch_on_uv_minute, light_modus, light_duration, light_period, switch_on_light_hour, switch_on_light_minute, dehumidifier_modus, referenceunit_scale1, referenceunit_scale2):
     """
-    Funktion zum schreiben der config-Werte
+    function for writing the config values
     """
     open_database()
 
@@ -451,7 +450,7 @@ def write_config(sensortype, language, switch_on_cooling_compressor, switch_off_
     
 def write_changed_values(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier):
     """
-    Funktion zum schreiben bei geaenderten Sensor- und Status-werten
+    function for writing with modified sensor and status values
     """
     current_value_rows = get_current(pi_ager_names.current_values_table, True)
     
@@ -486,7 +485,7 @@ def write_changed_values(sensor_temperature, status_heater, status_exhaust_air, 
 
 def add_column(table, fieldname):
     """
-    Funktion zum Hinzufuegen einer Spalte
+    function for adding a column
     """
     sql = 'ALTER TABLE ' + table +' ADD ' + fieldname + ' ' + pi_ager_names.field_type[fieldname]
     if fieldname == pi_ager_names.id_field:
@@ -500,7 +499,7 @@ def add_column(table, fieldname):
     
 def repair_column_type(table, fieldname):
     """
-    Funktion zum reparieren einer Spalte
+    function to repair a column
     """
     # Wird später implementiert
     # logstring = 'Wrong fieldtype in field ' + fieldname + ' of table ' + table + '!'

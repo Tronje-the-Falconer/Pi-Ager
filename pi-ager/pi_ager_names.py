@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+    pi-ager variables
+    
+    setting up variables
+"""
 import RPi.GPIO as gpio
 
 ########################### Definition of variables
@@ -415,12 +420,18 @@ global dict_for_json_creation
 dict_for_json_creation = {}
 
 def add_to_dict_for_json_creation(dict):
+    """
+    adding dictionary for creating jsonfile (web)
+    """
     global dict_for_json_creation
     
     for key,value in dict.items():
         dict_for_json_creation[key] = value
 
 def create_json_file():
+    """
+    creating jsonfile for website
+    """
     import json
     global dict_for_json_creation
     

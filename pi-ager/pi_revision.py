@@ -1,3 +1,9 @@
+#!/usr/bin/python3
+"""
+    getting revision for pi-ager
+    
+    
+"""
 import pi_ager_names
 import pi_ager_database
 import pi_ager_logging
@@ -6,6 +12,9 @@ global logger
 logger = pi_ager_logging.create_logger(__name__)
 
 def get_and_write_revision_in_database():
+    """
+    read revision from database
+    """
     # Extract board revision from cpuinfo file
     # Overvolted 100 prefix bsp. 1000002
     myrevision = "0000"

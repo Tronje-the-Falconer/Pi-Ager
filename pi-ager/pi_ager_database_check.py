@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 # -*- coding: iso-8859-1 -*-
 """
-    Datenbankueberpruefung
-    
-    Ueberpruefen der Datenbank auf Korrekte Struktur
+    database check
+    
+     check the database for correct structure
 """
 # Importieren der Module
 import pi_ager_names
@@ -11,7 +11,7 @@ import pi_ager_database
 
 def get_missing_tables(tables):
     """
-    Analyse ob es fehlende Tabellen gibt
+    analysis if there are missing tables
     """
     i = 0
     missing_tables = {}
@@ -23,7 +23,7 @@ def get_missing_tables(tables):
     
 def add_tables(tables, tables_are_key_value):
     """
-    Hinzufügen von fehlenden Tabellen
+    add missing tables
     """
     for table in tables:
         if tables_are_key_value:
@@ -33,7 +33,7 @@ def add_tables(tables, tables_are_key_value):
 
 def check_and_repair_key_value_table_columns(tables):
     """
-    Ueberpruefen und reparieren von Spalten in Key-Value-Tabellen
+    check and repair columns in key-value tables
     """
     for table in tables:
         id_column_type_okay = False
@@ -85,7 +85,7 @@ def check_and_repair_key_value_table_columns(tables):
 
 def check_and_repair_id_value_table_columns(tables):
     """
-    Ueberpruefen und reparieren von Spalten in ID-Value-Tabellen
+    check and repair columns in id-value-tables
     """
     for table in tables:
         id_column_type_okay = False
@@ -133,7 +133,7 @@ def check_and_repair_id_value_table_columns(tables):
         
 def check_table_contents():
     """
-    Ueberpruefen von Tabellen Inhalten
+    Checking table contents
     """
     for table in pi_ager_names.key_value_tables:
         for key in pi_ager_names.table_keys[table]:
@@ -150,7 +150,7 @@ def check_table_contents():
 
 def check_and_update_database():
     """
-    Ueberpruefen der gesamten Datenbank, Hauptfunktion
+    checking the entire database, main function
     """
     #Tabellen prüfen und ergänzen
     missing_key_value_tables = get_missing_tables(pi_ager_names.key_value_tables)

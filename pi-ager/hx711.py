@@ -1,5 +1,9 @@
 #!/usr/bin/python3
-# originaly File from hx711py3 written by dcrystalj https://github.com/dcrystalj/hx711py3/blob/master/hx711.py
+"""
+   file for the hx711 modules written for python 3
+   
+   originaly file from hx711py3 written by dcrystalj https://github.com/dcrystalj/hx711py3/blob/master/hx711.py
+"""
 
 import statistics
 import time

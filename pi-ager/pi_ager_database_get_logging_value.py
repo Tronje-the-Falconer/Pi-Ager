@@ -1,9 +1,17 @@
 #!/usr/bin/python3
+"""
+    logger for database module
+    
+    special module for getting loglevel in databasemodule 
+"""
 import sqlite3
 import pi_ager_names
 import pi_ager_paths
 
 def get_logging_value(destination):
+    """
+    get loglevel
+    """
     rows = None
     connection = sqlite3.connect(pi_ager_paths.sqlite3_file)
     connection.row_factory = sqlite3.Row

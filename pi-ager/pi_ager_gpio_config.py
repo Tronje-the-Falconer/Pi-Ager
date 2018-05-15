@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+    GPIO handling
+    
+    handling GPIO's
+"""
 import RPi.GPIO as gpio
 import pi_ager_names
 import pi_ager_logging
@@ -9,6 +14,9 @@ logger.debug('logging initialised')
 
 # Function Setup GPIO
 def setupGPIO():
+    """
+    setting up GPIO's (boardmode, in/out)
+    """
     global logger
     logstring = 'setupGPIO()'
     logger.debug(logstring)
@@ -65,6 +73,9 @@ def setupGPIO():
     # gpio.setup(pi_ager_names.gpio_temperature_meat_SCLK, gpio. )
 
 def defaultGPIO():
+    """
+    setting up default gpio (1/0)
+    """
     global logger
     logstring = 'defaultGPIO()'
     logger.debug(logstring)
@@ -87,6 +98,9 @@ def defaultGPIO():
     # gpio.output(pi_ager_names.gpio_notinuse_5, pi_ager_names.pin_without_voltage)
     
 def gpios_are_in_use():
+    """
+    setting up gpio_xxx_used variables
+    """
     gpio_heater_used = gpio_is_in_use(pi_ager_names.gpio_heater)
     gpio_cooling_compressor_used = gpio_is_in_use(pi_ager_names.gpio_cooling_compressor)
     gpio_circulating_air_used = gpio_is_in_use(pi_ager_names.gpio_circulating_air)
@@ -110,6 +124,9 @@ def gpios_are_in_use():
         return False
 
 def gpio_is_in_use(gpio):
+    """
+    check if GPIO is in use
+    """
     gpio_used = gpio.gpio_function(gpio)
     
     if gpio_used == -1:

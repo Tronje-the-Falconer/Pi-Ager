@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-
 """
-    Reifetabellen Loop
+    mainloop for agingtable
     
-    Hauptschleife für das Setzen des automatisierten Reifeprozesses
+    main loop for setting the automated values
 """
 
 import sys
@@ -26,7 +25,7 @@ logger.debug('logging initialised')
 #     return message
 def get_dictionary_out_of_sqliterow(row):
     """
-    Funktion zum Lesen des Dictionarys und setzen der Werte
+    function for reading the dictionary and setting the values
     """
     global logger
     
@@ -44,7 +43,7 @@ def get_dictionary_out_of_sqliterow(row):
 
 def get_sensortype():
     """
-    Funktion zum Auslesen des Sensortyps
+    function for reading the sensor type
     """
     global sensortype
     global logger
@@ -60,7 +59,7 @@ def get_sensortype():
 
 def get_duration_sleep(period_days):
     """
-    Funktion zum Auslesen der Pausen-Dauer bis ein neuer Wert geschrieben werden muss
+    function for reading the pause duration until a new value has to be written
     """
     global day_in_seconds
     global logger
@@ -69,7 +68,7 @@ def get_duration_sleep(period_days):
 
 def continue_after_power_failure(current_dictionary):
     """
-    Nach Stromausfall wird diese Funktion ausgeführt um zustände und Ausfallwerte zu analysieren
+    after power failure, this function is performed to analyze states and failure values
     """
     global logger
     failure_temperature_delta = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.failure_temperature_delta_key)     # Maximaler Temperatur-Unterschied
@@ -104,7 +103,7 @@ def continue_after_power_failure(current_dictionary):
 
 def read_dictionary_write_settings(period_dictionary):
     """
-    Funktion zum schreiben der Settings in die DB
+    function for writing the settings into the DB
     """
     global period_endtime
     global period_starttime_seconds
@@ -178,7 +177,7 @@ def read_dictionary_write_settings(period_dictionary):
     
 def doAgingtableLoop():
     """
-    Haupt-Funktion fuer die Reifetabelle
+    main function for the agingtable
     """
     global period_settings
     global period_starttime_seconds

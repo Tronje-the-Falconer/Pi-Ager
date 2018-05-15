@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+    main loop for pi-ager
+    
+    main loop for pi-ager
+"""
 import os
 import subprocess
 import stat
@@ -21,6 +26,9 @@ logger = pi_ager_logging.create_logger(__name__)
 logger.debug('logging initialised')
 
 def autostart_loop():
+    """
+    starting loop. pi is startet. pi-ager is not startet. waiting for value 1 in database pi-ager-status
+    """
     global status_pi_ager
     global logger
     
@@ -40,6 +48,9 @@ def autostart_loop():
         time.sleep(5)
         
 def get_sensordata():
+    """
+    try to read sensordata
+    """
     global logger
     
     if pi_ager_init.sensorname == 'DHT11' or pi_ager_init.sensorname == 'DHT22':
@@ -74,16 +85,28 @@ def get_sensordata():
     return sensordata
     
 def set_gpio_value(gpio_number, value):
+    """
+    setting gpio value
+    """
     gpio.output(gpio_number, value)
     
 def get_gpio_value(gpio_number):
+    """
+    reading gpio value
+    """
     value = gpio.input(gpio_number)
     return value
     
 def switch_light(relay_state):
+    """
+    setting gpio for light
+    """
     set_gpio_value(pi_ager_names.gpio_light, relay_state)
 
 def status_light_in_current_values_is_on():
+    """
+    check for light current value
+    """
     current_value_rows = pi_ager_database.get_current(pi_ager_names.current_values_table, True)
     current_values = {}
     for current_row in current_value_rows:
@@ -95,6 +118,9 @@ def status_light_in_current_values_is_on():
         return False
     
 def check_status_agingtable():
+    """
+    check status of agingtable
+    """
     status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
     process_agingtable = subprocess.getstatusoutput('ps ax | grep -v grep | grep agingtable.py &')
     # (0, '16114 pts/0    R+     0:01 python3 /opt/pi-ager/agingtable.py\n16238 pts/1    S+     0:00 sudo python3 agingtable.py\n16256 pts/1    R+     0:00 python3 agingtable.py')
@@ -110,6 +136,9 @@ def check_status_agingtable():
         os.system('sudo /var/sudowebscript.sh startagingtable &')
 
 def check_and_set_light():
+    """
+    manual light switch
+    """
     #   Manueller "Lichtschalter"
     if pi_ager_database.get_status_light_manual() == 1:
         duration_light_on = pi_ager_database.get_current_time() - pi_ager_database.get_last_change(pi_ager_names.current_values_table, pi_ager_names.status_light_manual_key)
@@ -123,6 +152,9 @@ def check_and_set_light():
         
 
 def status_value_has_changed():
+    """
+    check if value has changed
+    """
     global status_circulating_air         #  Umluft
     global status_exhaust_air             #  (Abluft-)Luftaustausch
     global status_heater                  #  Heizung
@@ -152,6 +184,9 @@ def status_value_has_changed():
 
 
 def doMainLoop():
+    """
+    mainloop, pi-ager is running
+    """
     global circulation_air_duration       #  Umluftdauer
     global circulation_air_period         #  Umluftperiode
     global exhaust_air_duration           #  (Abluft-)luftaustauschdauer

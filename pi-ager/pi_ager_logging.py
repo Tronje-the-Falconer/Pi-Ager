@@ -1,11 +1,20 @@
 #!/usr/bin/python3
+"""
+    logging for pi-ager
+    
+    creating loggers for the pi-ager modules
+"""
 import logging
+from logging import handlers
 import pi_ager_paths
 import pi_ager_database_get_logging_value
 import pathlib
 import os, stat
 
 def get_logginglevel(loglevelstring):
+    """
+    setting loglevels
+    """
     global logger
     
     if loglevelstring == 10:
@@ -22,6 +31,9 @@ def get_logginglevel(loglevelstring):
     return loglevel
     
 def check_website_logfile():
+    """
+    checking and setting permission for the website logfile 
+    """
     global logger
     filepath = pi_ager_paths.get_path_logfile_txt_file()
     website_logfile = pathlib.Path(filepath)
@@ -34,6 +46,9 @@ def check_website_logfile():
         os.chmod(pi_ager_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
 
 def create_logger(pythonfile):
+    """
+    creating loggers
+    """
     check_website_logfile()
     loglevel_file_value = pi_ager_database_get_logging_value.get_logging_value('loglevel_file')
     loglevel_console_value = pi_ager_database_get_logging_value.get_logging_value('loglevel_console')
