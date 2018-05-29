@@ -154,7 +154,7 @@ board_mode = gpio.BCM              # GPIO board mode (BCM = Broadcom SOC channel
 
 # linke Pinleiste:
 # 3 V
-gpio_notinuse0 = 2                 
+gpio_notinuse_0 = 2                 
 gpio_heater = 3                    # GPIO fuer Heizkabel
 gpio_cooling_compressor = 4        # GPIO fuer Kuehlschrankkompressor
 # Ground
