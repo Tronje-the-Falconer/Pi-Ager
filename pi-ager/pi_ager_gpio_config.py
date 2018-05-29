@@ -30,7 +30,7 @@ def setupGPIO():
     
     # linke Pinleiste:
     # 3,3 V
-    gpio.setup(pi_ager_names.gpio_power_monitor, gpio.IN)          # Monitor Power auswertung
+    # gpio.setup(pi_ager_names.gpio_notinuse_0, gpio. )            
     gpio.setup(pi_ager_names.gpio_heater, gpio.OUT)                # Heizung setzen
     gpio.setup(pi_ager_names.gpio_cooling_compressor, gpio.OUT)    # Kuehlung setzen
     # Ground
@@ -47,7 +47,7 @@ def setupGPIO():
     gpio.setup(pi_ager_names.gpio_scale1_sync, gpio.OUT)            # Scale1 Sync setzen
     gpio.setup(pi_ager_names.gpio_alarm, gpio.OUT )                 # Piezzo setzen
     # gpio.setup(pi_ager_names.gpio_temperature_meat_MISO, gpio. )
-    # gpio.setup(pi_ager_names.gpio_notinuse_3, gpio. )
+    gpio.setup(pi_ager_names.gpio_power_monitor, gpio.IN)        # Monitor Power auswertung
     # Ground
 
     # rechte Pinleiste:
