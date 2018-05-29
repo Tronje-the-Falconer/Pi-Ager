@@ -154,7 +154,7 @@ board_mode = gpio.BCM              # GPIO board mode (BCM = Broadcom SOC channel
 
 # linke Pinleiste:
 # 3 V
-gpio_power_monitor = 2             # GPIO für Powersignal
+gpio_notinuse0 = 2                 
 gpio_heater = 3                    # GPIO fuer Heizkabel
 gpio_cooling_compressor = 4        # GPIO fuer Kuehlschrankkompressor
 # Ground
@@ -171,7 +171,7 @@ gpio_scale1_data = 5                # GPIO fuer Waage1 Data
 gpio_scale1_sync = 6                # GPIO fuer Waage1 Sync
 gpio_alarm = 13                     # GPIO fuer Piezzo
 gpio_temperature_meat_MISO = 19     # GPIO fuer A/D Wandler Fleischtemperatursensoren
-gpio_notinuse_3 = 26
+gpio_power_monitor = 26             # GPIO für Powersignal
 # Ground
 
 # rechte Pinleiste:#
