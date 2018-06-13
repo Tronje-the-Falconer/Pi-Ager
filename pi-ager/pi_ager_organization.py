@@ -30,6 +30,7 @@ def cleanup():
     """
     global logger
     
+    pi_ager_logging.check_website_logfile()
     if pi_ager_gpio_config.gpios_are_in_use:
         logstring = _('running cleanup script') + '...'
         logger.info(logstring)

@@ -53,6 +53,7 @@
         while ($dataset = $result->fetchArray(SQLITE3_ASSOC)){
             $column_array = $dataset['table_info'];
         }
+        close_database();
         return $column_array;
     }
     

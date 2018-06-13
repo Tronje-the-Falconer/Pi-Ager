@@ -339,7 +339,7 @@ def insert_key_value_row_in_table(table, key, value):
     """
     function to insert a value into a table
     """
-    open_database()
+    # open_database()
     if key == None:
         sql = 'INSERT INTO ' + table + ' (' + pi_ager_names.value_field + ',' + str(pi_ager_names.last_change_field) + ') VALUES (' + str(value) + ',0)'
     elif not column_exists_in_table(pi_ager_names.last_change_field,table):
