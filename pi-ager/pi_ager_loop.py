@@ -96,7 +96,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exc
             else:
                 pass
                 
-    elseif sensordata_exception_count < 10:
+    elif sensordata_exception_count < 10:
         sensor_temperature = None
         sensor_humidity = None
         countup('sensordata_exception', sensordata_exception_count)
@@ -124,9 +124,9 @@ def countup(countername, counter):
     counter += 1
     if countername = 'sht_exception'
         logstring = 'SHT1xError occured, trying again, current number of retries: '
-    elseif countername = 'humidity_exception'
+    elif countername = 'humidity_exception'
         logstring = 'no plausible humidity value [> 100], trying again, current number of retries: '
-    elseif countername = 'sensordata_exception'
+    elif countername = 'sensordata_exception'
         logstring = 'sensordata has NULL values, trying again, current number of retries: '
     else
         logstring = 'An Error occured'
