@@ -47,7 +47,7 @@ def autostart_loop():
         pi_ager_logging.check_website_logfile()
         time.sleep(5)
         
-def get_sensordata(sht_exception_count, humidity_exception_count):
+def get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count):
     """
     try to read sensordata
     """
@@ -71,10 +71,12 @@ def get_sensordata(sht_exception_count, humidity_exception_count):
             logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big))
         except SHT1xError:
             if sht_exception_count < 10:
-                sht_exception_count += 1
-                logger.debug("SHT1xError occured, trying again, current number of retries: " + str(sht_exception_count))
+                countup('sht_exception', sht_exception_count)
+                logstring = countup['logstring']
+                sht_exception_count = countup['counter']
+                logger.debug(logstring)
                 time.sleep(1)
-                sensordata = get_sensordata(sht_exception_count, humidity_exception_count)
+                sensordata = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
                 return sensordata
             else:
                 pass
@@ -84,18 +86,32 @@ def get_sensordata(sht_exception_count, humidity_exception_count):
         sensor_humidity = round (sensor_humidity_big,2)
         if sensor_humidity =< 100:
             if humidity_exception_count < 10:
-                humidity_exception_count += 1
-                logger.debug("no plausible humidity value [> 100], trying again, current number of retries: " + str(humidity_exception_count))
+                countup('humidity_exception', humidity_exception_count)
+                logstring = countup['logstring']
+                humidity_exception_count = countup['counter']
+                logger.debug(logstring)
                 time.sleep(1)
-                sensordata = get_sensordata(sht_exception_count, humidity_exception_count)
+                sensordata = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
                 return sensordata
             else:
                 pass
                 
+    elseif sensordata_exception_count < 10:
+        sensor_temperature = None
+        sensor_humidity = None
+        countup('sensordata_exception', sensordata_exception_count)
+        logstring = countup['logstring']
+        sensordata_exception_count = countup['counter']
+        
+        logger.debug(logstring)
+        time.sleep(1)
+        sensordata = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
+        return sensordata
+    
     else:
         sensor_temperature = None
         sensor_humidity = None
-        logstring = _('Failed to get reading sensordata. Try again!')
+        logstring = _('Failed to get sensordata.')
         logger.warning(logstring)
         
     sensordata={}
@@ -103,6 +119,23 @@ def get_sensordata(sht_exception_count, humidity_exception_count):
     sensordata['sensor_humidity'] = sensor_humidity
     
     return sensordata
+    
+def countup(countername, counter):
+    counter += 1
+    if countername = 'sht_exception'
+        logstring = 'SHT1xError occured, trying again, current number of retries: '
+    elseif countername = 'humidity_exception'
+        logstring = 'no plausible humidity value [> 100], trying again, current number of retries: '
+    elseif countername = 'sensordata_exception'
+        logstring = 'sensordata has NULL values, trying again, current number of retries: '
+    else
+        logstring = 'An Error occured'
+    logstring = logstring + str(counter)
+    
+    countresult = {}
+    countresult['counter'] = counter
+    countresult['logstring'] = logstring
+    return countresult
     
 def set_gpio_value(gpio_number, value):
     """
@@ -263,8 +296,9 @@ def doMainLoop():
         #Sensor
         sht_exception_count = 0
         humidity_exception_count = 0
+        sensordata_exception_count = 0
         sensortype = int(pi_ager_init.sensortype)
-        sensordata = get_sensordata(sht_exception_count, humidity_exception_count)
+        sensordata = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
         sensor_temperature = sensordata['sensor_temperature']
         sensor_humidity = sensordata['sensor_humidity']
 
