@@ -71,9 +71,9 @@ def get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exc
             logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big))
         except SHT1xError:
             if sht_exception_count < 10:
-                countup('sht_exception', sht_exception_count)
-                logstring = countup['logstring']
-                sht_exception_count = countup['counter']
+                countup_values = countup('sht_exception', sht_exception_count)
+                logstring = countup_values['logstring']
+                sht_exception_count = countup_values['counter']
                 logger.debug(logstring)
                 time.sleep(1)
                 sensordata = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
@@ -84,11 +84,11 @@ def get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exc
     if sensor_humidity_big is not None and sensor_temperature_big is not None:
         sensor_temperature = round (sensor_temperature_big,2)
         sensor_humidity = round (sensor_humidity_big,2)
-        if sensor_humidity =< 100:
+        if sensor_humidity <= 100:
             if humidity_exception_count < 10:
-                countup('humidity_exception', humidity_exception_count)
-                logstring = countup['logstring']
-                humidity_exception_count = countup['counter']
+                countup_values = countup('humidity_exception', humidity_exception_count)
+                logstring = countup_values['logstring']
+                humidity_exception_count = countup_values['counter']
                 logger.debug(logstring)
                 time.sleep(1)
                 sensordata = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
@@ -99,9 +99,9 @@ def get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exc
     elif sensordata_exception_count < 10:
         sensor_temperature = None
         sensor_humidity = None
-        countup('sensordata_exception', sensordata_exception_count)
-        logstring = countup['logstring']
-        sensordata_exception_count = countup['counter']
+        countup_values = countup('sensordata_exception', sensordata_exception_count)
+        logstring = countup_values['logstring']
+        sensordata_exception_count = countup_values['counter']
         
         logger.debug(logstring)
         time.sleep(1)
@@ -122,13 +122,13 @@ def get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exc
     
 def countup(countername, counter):
     counter += 1
-    if countername = 'sht_exception'
+    if countername == 'sht_exception':
         logstring = 'SHT1xError occured, trying again, current number of retries: '
-    elif countername = 'humidity_exception'
+    elif countername == 'humidity_exception':
         logstring = 'no plausible humidity value [> 100], trying again, current number of retries: '
-    elif countername = 'sensordata_exception'
+    elif countername == 'sensordata_exception':
         logstring = 'sensordata has NULL values, trying again, current number of retries: '
-    else
+    else:
         logstring = 'An Error occured'
     logstring = logstring + str(counter)
     
