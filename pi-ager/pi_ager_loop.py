@@ -47,7 +47,7 @@ def autostart_loop():
         pi_ager_logging.check_website_logfile()
         time.sleep(5)
         
-def get_sensordata(sht_exception_count):
+def get_sensordata(sht_exception_count, humidity_exception_count):
     """
     try to read sensordata
     """
@@ -74,13 +74,24 @@ def get_sensordata(sht_exception_count):
                 sht_exception_count += 1
                 logger.debug("SHT1xError occured, trying again, current number of retries: " + str(sht_exception_count))
                 time.sleep(1)
-                get_sensordata(sht_exception_count)
+                sensordata = get_sensordata(sht_exception_count, humidity_exception_count)
+                return sensordata
             else:
                 pass
 
     if sensor_humidity_big is not None and sensor_temperature_big is not None:
         sensor_temperature = round (sensor_temperature_big,2)
         sensor_humidity = round (sensor_humidity_big,2)
+        if sensor_humidity =< 100:
+            if humidity_exception_count < 10:
+                humidity_exception_count += 1
+                logger.debug("no plausible humidity value [> 100], trying again, current number of retries: " + str(humidity_exception_count))
+                time.sleep(1)
+                sensordata = get_sensordata(sht_exception_count, humidity_exception_count)
+                return sensordata
+            else:
+                pass
+                
     else:
         sensor_temperature = None
         sensor_humidity = None
@@ -251,8 +262,9 @@ def doMainLoop():
 #Settings
         #Sensor
         sht_exception_count = 0
+        humidity_exception_count = 0
         sensortype = int(pi_ager_init.sensortype)
-        sensordata = get_sensordata(sht_exception_count)
+        sensordata = get_sensordata(sht_exception_count, humidity_exception_count)
         sensor_temperature = sensordata['sensor_temperature']
         sensor_humidity = sensordata['sensor_humidity']
 
