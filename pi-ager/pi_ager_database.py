@@ -164,6 +164,7 @@ def get_last_change(table, key):
     close_database()
     last_change = row[pi_ager_names.last_change_field]
     return last_change
+    
 
 def write_current_value(key, value):
     """

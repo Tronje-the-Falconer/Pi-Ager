@@ -47,7 +47,7 @@ def autostart_loop():
         pi_ager_logging.check_website_logfile()
         time.sleep(5)
         
-def get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count):
+def get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count):
     """
     try to read sensordata
     """
@@ -76,7 +76,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exc
                 sht_exception_count = countup_values['counter']
                 logger.debug(logstring)
                 time.sleep(1)
-                recursion = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
+                recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
                 return recursion
             else:
                 pass
@@ -84,14 +84,30 @@ def get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exc
     if sensor_humidity_big is not None and sensor_temperature_big is not None:
         sensor_temperature = round (sensor_temperature_big,2)
         sensor_humidity = round (sensor_humidity_big,2)
-        if sensor_humidity > 100:
+        last_temperature = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
+        last_humidity = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)
+        deviation_temperature = abs((sensor_temperature/last_temperature * 100) - 100)
+        deviation_humidity = abs((sensor_humidity/last_humidity * 100) - 100)
+        
+        if sensor_humidity > 100 or deviation_humidity > 20:
             if humidity_exception_count < 10:
                 countup_values = countup('humidity_exception', humidity_exception_count)
                 logstring = countup_values['logstring']
                 humidity_exception_count = countup_values['counter']
                 logger.debug(logstring)
                 time.sleep(1)
-                recursion = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
+                recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
+                return recursion
+            else:
+                pass
+        if sensor_temperature > 60 or deviation_temperature > 20:
+            if temperature_exception_count < 10:
+                countup_values = countup('temperature_exception', temperature_exception_count)
+                logstring = countup_values['logstring']
+                temperature_exception_count = countup_values['counter']
+                logger.debug(logstring)
+                time.sleep(1)
+                recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
                 return recursion
             else:
                 pass
@@ -105,7 +121,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exc
         
         logger.debug(logstring)
         time.sleep(1)
-        recursion = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
+        recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
         return recursion
     
     else:
@@ -125,7 +141,9 @@ def countup(countername, counter):
     if countername == 'sht_exception':
         logstring = 'SHT1xError occured, trying again, current number of retries: '
     elif countername == 'humidity_exception':
-        logstring = 'no plausible humidity value [> 100], trying again, current number of retries: '
+        logstring = 'no plausible humidity value [> 100 or too much deviation], trying again, current number of retries: '
+    elif countername == 'temperature_exception':
+        logstring = 'no plausible temperature value [> 60 or too much deviation], trying again, current number of retries: '
     elif countername == 'sensordata_exception':
         logstring = 'sensordata has NULL values, trying again, current number of retries: '
     else:
@@ -297,8 +315,9 @@ def doMainLoop():
         sht_exception_count = 0
         humidity_exception_count = 0
         sensordata_exception_count = 0
+        temperature_exception_count = 0
         sensortype = int(pi_ager_init.sensortype)
-        sensordata = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
+        sensordata = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
         sensor_temperature = sensordata['sensor_temperature']
         sensor_humidity = sensordata['sensor_humidity']
 
