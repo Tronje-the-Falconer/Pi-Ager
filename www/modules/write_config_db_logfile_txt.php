@@ -182,8 +182,8 @@
                 }
                 $logstring = $logstring . " \n " . _('circulation air period').": ".$circulation_air_period." "._('minutes');
                 $logstring = $logstring . " \n " . _('circulation air duration').": ".$circulation_air_duration." "._('minutes');
-                $logstring = $logstring . " \n " . _('exhausting air period')." ".$exhausting_air_period." "._('minutes');
-                $logstring = $logstring . " \n " . _('exhausting air duration').": ".$exhausting_air_duration." "._('minutes');
+                $logstring = $logstring . " \n " . _('exhausting air period')." ".$exhaust_air_period." "._('minutes');
+                $logstring = $logstring . " \n " . _('exhausting air duration').": ".$exhaust_air_duration." "._('minutes');
                 $logstring = $logstring . " \n " . _('dehumidify modus').": ".$dehumidifier_modus_name;
                 $logstring = $logstring . " \n " . _('uv modus').": ".$uv_modus_name;
                 $logstring = $logstring . " \n " . $logtext_uv;
