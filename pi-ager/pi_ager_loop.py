@@ -76,23 +76,23 @@ def get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exc
                 sht_exception_count = countup_values['counter']
                 logger.debug(logstring)
                 time.sleep(1)
-                sensordata = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
-                return sensordata
+                recursion = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
+                return recursion
             else:
                 pass
 
     if sensor_humidity_big is not None and sensor_temperature_big is not None:
         sensor_temperature = round (sensor_temperature_big,2)
         sensor_humidity = round (sensor_humidity_big,2)
-        if sensor_humidity <= 100:
+        if sensor_humidity > 100:
             if humidity_exception_count < 10:
                 countup_values = countup('humidity_exception', humidity_exception_count)
                 logstring = countup_values['logstring']
                 humidity_exception_count = countup_values['counter']
                 logger.debug(logstring)
                 time.sleep(1)
-                sensordata = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
-                return sensordata
+                recursion = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
+                return recursion
             else:
                 pass
                 
@@ -105,8 +105,8 @@ def get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exc
         
         logger.debug(logstring)
         time.sleep(1)
-        sensordata = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
-        return sensordata
+        recursion = get_sensordata(sht_exception_count, humidity_exception_count, sensordata_exception_count)
+        return recursion
     
     else:
         sensor_temperature = None
