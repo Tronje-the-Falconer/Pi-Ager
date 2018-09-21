@@ -52,8 +52,6 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     try to read sensordata
     """
     global logger
-    global sensor_humidity_big
-    global sensor_temperature_big
     
     if pi_ager_init.sensorname == 'DHT11' or pi_ager_init.sensorname == 'DHT22':
         sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_names.gpio_sensor_data)
@@ -71,8 +69,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             sensor_humidity_big = sensor_sht.humidity
             logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
             logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big))
-        #except SHT1xError:
-        except pi_sht1x.sht1x.SHT1xError:
+        except SHT1xError:
             if sht_exception_count < 10:
                 countup_values = countup('sht_exception', sht_exception_count)
                 logstring = countup_values['logstring']
@@ -89,8 +86,8 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
         sensor_humidity = round (sensor_humidity_big,2)
         last_temperature = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
         last_humidity = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)
-        deviation_temperature = abs((sensor_temperature/(last_temperature + 0.1) * 100) - 100)
-        deviation_humidity = abs((sensor_humidity/(last_humidity + 0.1) * 100) - 100)
+        deviation_temperature = abs((sensor_temperature/last_temperature * 100) - 100)
+        deviation_humidity = abs((sensor_humidity/last_humidity * 100) - 100)
         
         if sensor_humidity > 100 or deviation_humidity > 20:
             if humidity_exception_count < 10:
@@ -784,7 +781,7 @@ def doMainLoop():
         
         logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter))
 
-        time.sleep(1)  
+        # time.sleep(1)  
         
         # Logfile auf Rechte prüfen und evtl. neu setzen
         
