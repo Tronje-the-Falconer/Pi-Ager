@@ -77,7 +77,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 countup_values = countup('sht_exception', sht_exception_count)
                 logstring = countup_values['logstring']
                 sht_exception_count = countup_values['counter']
-                logger.debug(logstring)
+                logger.warning(logstring)
                 time.sleep(1)
                 recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
                 return recursion
