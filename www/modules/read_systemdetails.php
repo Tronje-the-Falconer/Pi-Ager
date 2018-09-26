@@ -76,6 +76,10 @@
             return $piversion = 'Raspberry Pi 3 Model B v.1.2 </br> Embest, China) </br> 1GB RAM';
         case 'a32082':
             return $piversion = 'Raspberry Pi 3 Model B v.1.2 </br> (Sony, Japan) </br> 1GB RAM';
+        case 'a52082':
+            return $piversion = 'Raspberry Pi 3 Model B v.1.2 </br> (Stadium) </br> 1GB RAM';
+        case 'a020d3':
+            return $piversion = 'Raspberry Pi 3 Model B+ v.1.3 </br> (Sony, UK) </br> 1GB RAM';
         case '0000':
             return $piversion = _('model unknown! Please contact us.');
         default:
