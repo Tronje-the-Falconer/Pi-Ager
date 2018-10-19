@@ -131,13 +131,9 @@ def doScaleLoop():
     scale mainloop
     """
     global logger
-    scale1_settings_table = pi_ager_names.settings_scale1_table
-    scale1_table = pi_ager_names.data_scale1_table
-    scale2_settings_table = pi_ager_names.settings_scale2_table
-    scale2_table = pi_ager_names.data_scale2_table
 
-    scale1_setting_rows = pi_ager_database.get_scale_settings_from_table(scale1_settings_table)
-    scale2_setting_rows = pi_ager_database.get_scale_settings_from_table(scale2_settings_table)
+    scale1_setting_rows = pi_ager_database.get_scale_settings_from_table(pi_ager_names.settings_scale1_table)
+    scale2_setting_rows = pi_ager_database.get_scale_settings_from_table(pi_ager_names.settings_scale2_table)
 
     scale1_settings = get_scale_settings(scale1_setting_rows)
     scale2_settings = get_scale_settings(scale2_setting_rows)
@@ -145,60 +141,27 @@ def doScaleLoop():
     scale1 = hx711.Scale(source=None, samples=int(scale1_settings[pi_ager_names.samples_key]), spikes=int(scale1_settings[pi_ager_names.spikes_key]), sleep=scale1_settings[pi_ager_names.sleep_key], dout=pi_ager_names.gpio_scale1_data, pd_sck=pi_ager_names.gpio_scale1_sync, gain=int(scale1_settings[pi_ager_names.gain_key]), bitsToRead=int(scale1_settings[pi_ager_names.bits_to_read_key]))
     scale2 = hx711.Scale(source=None, samples=int(scale2_settings[pi_ager_names.samples_key]), spikes=int(scale2_settings[pi_ager_names.spikes_key]), sleep=scale2_settings[pi_ager_names.sleep_key], dout=pi_ager_names.gpio_scale2_data, pd_sck=pi_ager_names.gpio_scale2_sync, gain=int(scale2_settings[pi_ager_names.gain_key]), bitsToRead=int(scale2_settings[pi_ager_names.bits_to_read_key]))
 
+    status_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_scale1_key)
+    status_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_scale2_key)
+
     while True:
         logger.debug('doScaleLoop() ' + time.strftime('%H:%M:%S', time.localtime()))
-        scale1.setReferenceUnit(pi_ager_database.get_table_value(scale1_settings_table, pi_ager_names.referenceunit_key))
-        scale2.setReferenceUnit(pi_ager_database.get_table_value(scale2_settings_table, pi_ager_names.referenceunit_key))
-        
-        # scale1.setReferenceUnit(scale1_settings[pi_ager_names.referenceunit_key])
-        # scale2.setReferenceUnit(scale2_settings[pi_ager_names.referenceunit_key])
-        
-        status_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_scale1_key)
-        status_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_scale2_key)
-        calibrate_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale1_key)
-        calibrate_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale2_key)
-        #status_tara_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_tara_scale1_key)
-        #scale1_measuring_duration = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.measuring_duration_key)
-        #saving_period_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.saving_period_key)
-        #status_tara_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_tara_scale2_key)
-        #scale2_measuring_duration = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.measuring_duration_key)
-        #saving_period_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.saving_period_key)
-        #offset_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.offset_scale_key)
-        #offset_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.offset_scale_key)
-        
-        #samples_scale1 = int(pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.samples_key))
-        #samples_scale2 = int(pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.samples_key))
-        #spikes_scale1 = int(pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.spikes_key))
-        #spikes_scale2 = int(pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.spikes_key))
-        
-        
-        if pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.loglevel_console_key) == 10:
-            measuring_interval_scale1 = pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.measuring_interval_debug_key)
-            measuring_interval_scale2 = measuring_interval_scale1
-        else:
-            measuring_interval_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.scale_measuring_interval_key)
-            measuring_interval_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.scale_measuring_interval_key)
-
-        if calibrate_scale1 == 1:
-            first_calibrate_value = get_first_calibrate_measure(scale1, scale1_settings_table, pi_ager_names.calibrate_scale1_key)
-            
-        if calibrate_scale2 == 1:
-            first_calibrate_value = get_first_calibrate_measure(scale2, scale2_settings_table, pi_ager_names.calibrate_scale2_key)
-            
-        if calibrate_scale1 == 3:
-            calculate_reference_unit(scale1, pi_ager_names.calibrate_scale1_key, pi_ager_names.settings_scale1_table, first_calibrate_value)
-            
-        if calibrate_scale2 == 3:
-            calculate_reference_unit(scale2, pi_ager_names.calibrate_scale2_key, pi_ager_names.settings_scale2_table, first_calibrate_value)
-            
-        #if status_tara_scale1 == 1:
-        #    tara_scale(scale1, pi_ager_names.status_tara_scale1_key, pi_ager_names.data_scale1_table, pi_ager_names.calibrate_scale1_key, offset_scale1, pi_ager_names.settings_scale1_table)
-        
-        #if status_tara_scale2 == 1:
-        #    tara_scale(scale2, pi_ager_names.status_tara_scale2_key, pi_ager_names.data_scale2_table, pi_ager_names.calibrate_scale2_key, offset_scale2, pi_ager_names.settings_scale2_table)
-            
-        
         if status_scale1 == 1:
+            scale1.setReferenceUnit(pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.referenceunit_key))
+            calibrate_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale1_key)
+                
+            if pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.loglevel_console_key) == 10:
+                measuring_interval_scale1 = pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.measuring_interval_debug_key)
+            else:
+                measuring_interval_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.scale_measuring_interval_key)
+
+
+            if calibrate_scale1 == 1:
+                first_calibrate_value = get_first_calibrate_measure(scale1, scale1_settings_table, pi_ager_names.calibrate_scale1_key)
+            
+            if calibrate_scale1 == 3:
+                calculate_reference_unit(scale1, pi_ager_names.calibrate_scale1_key, pi_ager_names.settings_scale1_table, first_calibrate_value)
+            
             offset_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.offset_scale_key)
             status_tara_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_tara_scale1_key)
             scale1_measuring_duration = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.measuring_duration_key)
@@ -206,8 +169,8 @@ def doScaleLoop():
             if status_tara_scale1 == 1:
                 tara_scale(scale1, pi_ager_names.status_tara_scale1_key, pi_ager_names.data_scale1_table, pi_ager_names.calibrate_scale1_key, offset_scale1, pi_ager_names.settings_scale1_table)
         
-            if pi_ager_database.get_scale_table_row(scale1_table) != None:
-                last_measure_scale1 = pi_ager_database.get_scale_table_row(scale1_table)[pi_ager_names.last_change_field]
+            if pi_ager_database.get_scale_table_row(pi_ager_names.data_scale1_table) != None:
+                last_measure_scale1 = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale1_table)[pi_ager_names.last_change_field]
                 time_difference_scale1 = pi_ager_database.get_current_time() - last_measure_scale1
             else:
                 time_difference_scale1 = measuring_interval_scale1 + 1
@@ -215,7 +178,26 @@ def doScaleLoop():
                 scale1_measuring_endtime =  pi_ager_database.get_current_time() + scale1_measuring_duration
                 scale_measures(scale1, scale1_measuring_endtime, pi_ager_names.data_scale1_table, saving_period_scale1, pi_ager_names.status_tara_scale1_key,pi_ager_names.calibrate_scale1_key, offset_scale1, pi_ager_names.settings_scale1_table)
 
+ 
         if status_scale2 == 1:
+            #scale1.setReferenceUnit(pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.referenceunit_key))
+            scale2.setReferenceUnit(pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.referenceunit_key))
+    
+            #calibrate_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale1_key)
+            calibrate_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale2_key)
+                
+            if pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.loglevel_console_key) == 10:
+                measuring_interval_scale2 = pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.measuring_interval_debug_key)
+            else:
+                measuring_interval_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.scale_measuring_interval_key)
+
+            if calibrate_scale2 == 1:
+                first_calibrate_value = get_first_calibrate_measure(scale2, scale2_settings_table, pi_ager_names.calibrate_scale2_key)
+            
+            if calibrate_scale2 == 3:
+                calculate_reference_unit(scale2, pi_ager_names.calibrate_scale2_key, pi_ager_names.settings_scale2_table, first_calibrate_value)
+
+     
             offset_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.offset_scale_key)
             status_tara_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_tara_scale2_key)
             scale2_measuring_duration = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.measuring_duration_key)
@@ -223,8 +205,8 @@ def doScaleLoop():
             if status_tara_scale2 == 1:
                 tara_scale(scale2, pi_ager_names.status_tara_scale2_key, pi_ager_names.data_scale2_table, pi_ager_names.calibrate_scale2_key, offset_scale2, pi_ager_names.settings_scale2_table)
             
-            if pi_ager_database.get_scale_table_row(scale2_table) != None:
-                last_measure_scale2 = pi_ager_database.get_scale_table_row(scale2_table)[pi_ager_names.last_change_field]
+            if pi_ager_database.get_scale_table_row(pi_ager_names.data_scale2_table) != None:
+                last_measure_scale2 = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale2_table)[pi_ager_names.last_change_field]
                 time_difference_scale2 = pi_ager_database.get_current_time() - last_measure_scale2
             else:
                 time_difference_scale2 = measuring_interval_scale2 + 1
