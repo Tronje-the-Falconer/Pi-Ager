@@ -3,6 +3,7 @@
     loop scale
     
     loop for measuring on scales
+    2018-10-20 fixed scale problems without scale sensors
 """
 import time
 import hx711
