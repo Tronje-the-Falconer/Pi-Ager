@@ -17,7 +17,7 @@ try:
     scale_loop.doScaleLoop()
 
 except KeyboardInterrupt:
-    logger.warning(_('KeyboardInterrupt'))
+    logger.warning('KeyboardInterrupt')
     pass
 
 except Exception as e:

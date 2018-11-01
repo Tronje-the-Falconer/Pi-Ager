@@ -138,16 +138,19 @@ def doScaleLoop():
 
     scale1_settings = get_scale_settings(scale1_setting_rows)
     scale2_settings = get_scale_settings(scale2_setting_rows)
-    
-    scale1 = hx711.Scale(source=None, samples=int(scale1_settings[pi_ager_names.samples_key]), spikes=int(scale1_settings[pi_ager_names.spikes_key]), sleep=scale1_settings[pi_ager_names.sleep_key], dout=pi_ager_names.gpio_scale1_data, pd_sck=pi_ager_names.gpio_scale1_sync, gain=int(scale1_settings[pi_ager_names.gain_key]), bitsToRead=int(scale1_settings[pi_ager_names.bits_to_read_key]))
-    scale2 = hx711.Scale(source=None, samples=int(scale2_settings[pi_ager_names.samples_key]), spikes=int(scale2_settings[pi_ager_names.spikes_key]), sleep=scale2_settings[pi_ager_names.sleep_key], dout=pi_ager_names.gpio_scale2_data, pd_sck=pi_ager_names.gpio_scale2_sync, gain=int(scale2_settings[pi_ager_names.gain_key]), bitsToRead=int(scale2_settings[pi_ager_names.bits_to_read_key]))
 
     status_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_scale1_key)
     status_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_scale2_key)
+        
+    
+
+
+
 
     while True:
         logger.debug('doScaleLoop() ' + time.strftime('%H:%M:%S', time.localtime()))
         if status_scale1 == 1:
+            scale1 = hx711.Scale(source=None, samples=int(scale1_settings[pi_ager_names.samples_key]), spikes=int(scale1_settings[pi_ager_names.spikes_key]), sleep=scale1_settings[pi_ager_names.sleep_key], dout=pi_ager_names.gpio_scale1_data, pd_sck=pi_ager_names.gpio_scale1_sync, gain=int(scale1_settings[pi_ager_names.gain_key]), bitsToRead=int(scale1_settings[pi_ager_names.bits_to_read_key]))
             scale1.setReferenceUnit(pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.referenceunit_key))
             calibrate_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale1_key)
                 
@@ -181,6 +184,7 @@ def doScaleLoop():
 
  
         if status_scale2 == 1:
+            scale2 = hx711.Scale(source=None, samples=int(scale2_settings[pi_ager_names.samples_key]), spikes=int(scale2_settings[pi_ager_names.spikes_key]), sleep=scale2_settings[pi_ager_names.sleep_key], dout=pi_ager_names.gpio_scale2_data, pd_sck=pi_ager_names.gpio_scale2_sync, gain=int(scale2_settings[pi_ager_names.gain_key]), bitsToRead=int(scale2_settings[pi_ager_names.bits_to_read_key]))
             #scale1.setReferenceUnit(pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.referenceunit_key))
             scale2.setReferenceUnit(pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.referenceunit_key))
     

@@ -5,7 +5,7 @@
    originaly file from hx711py3 written by dcrystalj https://github.com/dcrystalj/hx711py3/blob/master/hx711.py
 """
 
-import statistics
+from statistics import mean as pi_mean
 import time
 import RPi.GPIO as GPIO
 
@@ -30,6 +30,8 @@ class HX711:
         self.twosComplementThreshold = 1 << (bitsToRead-1)
         self.twosComplementOffset = -(1 << (bitsToRead))
         self.setGain(gain)
+        self.reset()
+        self.waitForReady()
         self.read()
 
     def isReady(self):
@@ -57,7 +59,7 @@ class HX711:
             return unsignedValue
 
     def read(self):
-        self.waitForReady()
+        #self.waitForReady()
 
         unsignedValue = 0
         for i in range(0, self.bitsToRead):
@@ -89,7 +91,7 @@ class HX711:
         # remove spikes
         cut = times//5
         values = sorted([self.read() for i in range(times)])[cut:-cut]
-        offset = statistics.mean(values)
+        offset = pi_mean(values)
 
         self.setOffset(offset)
 
@@ -109,11 +111,11 @@ class HX711:
     def powerDown(self):
         GPIO.output(self.PD_SCK, False)
         GPIO.output(self.PD_SCK, True)
-        time.sleep(0.0001)
+        time.sleep(0.01)
 
     def powerUp(self):
         GPIO.output(self.PD_SCK, False)
-        time.sleep(0.0001)
+        time.sleep(0.01)
 
     def reset(self):
         self.powerDown()
@@ -141,7 +143,7 @@ class Scale:
         # cut to old values
         self.history = self.history[-self.samples:]
 
-        avg = statistics.mean(self.history)
+        avg = pi_mean(self.history)
         deltas = sorted([abs(i-avg) for i in self.history])
 
         if len(deltas) < self.spikes:
@@ -153,7 +155,7 @@ class Scale:
             lambda val: abs(val - avg) <= max_permitted_delta, self.history
         ))
 
-        avg = statistics.mean(valid_values)
+        avg = pi_mean(valid_values)
 
         return avg
 
