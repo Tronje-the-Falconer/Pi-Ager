@@ -4,6 +4,7 @@
     
     loop for measuring on scales
     2018-10-20 fixed scale problems without scale sensors
+    2018-11-02 Fixed wizard error 
 """
 import time
 import hx711
@@ -139,29 +140,33 @@ def doScaleLoop():
     scale1_settings = get_scale_settings(scale1_setting_rows)
     scale2_settings = get_scale_settings(scale2_setting_rows)
 
-    status_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_scale1_key)
-    status_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_scale2_key)
-        
+
+
+    
     
 
 
-
-
     while True:
+        status_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_scale1_key)
+        status_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_scale2_key)
+        
+        calibrate_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale1_key)
+        calibrate_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale2_key)
         logger.debug('doScaleLoop() ' + time.strftime('%H:%M:%S', time.localtime()))
-        if status_scale1 == 1:
+        logger.debug('calibrate_scale1 = ' + str(calibrate_scale1))
+        logger.debug('calibrate_scale2 = ' + str(calibrate_scale2))
+        if status_scale1 == 1 or calibrate_scale1 in [1.0, 2.0, 3.0]:
+            logger.debug('start scale 1 HX711')
             scale1 = hx711.Scale(source=None, samples=int(scale1_settings[pi_ager_names.samples_key]), spikes=int(scale1_settings[pi_ager_names.spikes_key]), sleep=scale1_settings[pi_ager_names.sleep_key], dout=pi_ager_names.gpio_scale1_data, pd_sck=pi_ager_names.gpio_scale1_sync, gain=int(scale1_settings[pi_ager_names.gain_key]), bitsToRead=int(scale1_settings[pi_ager_names.bits_to_read_key]))
             scale1.setReferenceUnit(pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.referenceunit_key))
-            calibrate_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale1_key)
-                
+            
             if pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.loglevel_console_key) == 10:
                 measuring_interval_scale1 = pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.measuring_interval_debug_key)
             else:
                 measuring_interval_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.scale_measuring_interval_key)
 
-
             if calibrate_scale1 == 1:
-                first_calibrate_value = get_first_calibrate_measure(scale1, scale1_settings_table, pi_ager_names.calibrate_scale1_key)
+                first_calibrate_value = get_first_calibrate_measure(scale1, pi_ager_names.settings_scale1_table, pi_ager_names.calibrate_scale1_key)
             
             if calibrate_scale1 == 3:
                 calculate_reference_unit(scale1, pi_ager_names.calibrate_scale1_key, pi_ager_names.settings_scale1_table, first_calibrate_value)
@@ -183,25 +188,22 @@ def doScaleLoop():
                 scale_measures(scale1, scale1_measuring_endtime, pi_ager_names.data_scale1_table, saving_period_scale1, pi_ager_names.status_tara_scale1_key,pi_ager_names.calibrate_scale1_key, offset_scale1, pi_ager_names.settings_scale1_table)
 
  
-        if status_scale2 == 1:
+        if status_scale2 == 1 or calibrate_scale2 in [1.0, 2.0, 3.0]:
+            logger.debug('start scale 2 HX711')
             scale2 = hx711.Scale(source=None, samples=int(scale2_settings[pi_ager_names.samples_key]), spikes=int(scale2_settings[pi_ager_names.spikes_key]), sleep=scale2_settings[pi_ager_names.sleep_key], dout=pi_ager_names.gpio_scale2_data, pd_sck=pi_ager_names.gpio_scale2_sync, gain=int(scale2_settings[pi_ager_names.gain_key]), bitsToRead=int(scale2_settings[pi_ager_names.bits_to_read_key]))
-            #scale1.setReferenceUnit(pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.referenceunit_key))
             scale2.setReferenceUnit(pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.referenceunit_key))
     
-            #calibrate_scale1 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale1_key)
-            calibrate_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_scale2_key)
-                
+            
             if pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.loglevel_console_key) == 10:
                 measuring_interval_scale2 = pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.measuring_interval_debug_key)
             else:
                 measuring_interval_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.scale_measuring_interval_key)
 
             if calibrate_scale2 == 1:
-                first_calibrate_value = get_first_calibrate_measure(scale2, scale2_settings_table, pi_ager_names.calibrate_scale2_key)
+                first_calibrate_value = get_first_calibrate_measure(scale2, pi_ager_names.settings_scale2_table, pi_ager_names.calibrate_scale2_key)
             
             if calibrate_scale2 == 3:
                 calculate_reference_unit(scale2, pi_ager_names.calibrate_scale2_key, pi_ager_names.settings_scale2_table, first_calibrate_value)
-
      
             offset_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.offset_scale_key)
             status_tara_scale2 = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_tara_scale2_key)
