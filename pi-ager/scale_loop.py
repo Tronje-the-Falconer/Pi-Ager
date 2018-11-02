@@ -4,7 +4,7 @@
     
     loop for measuring on scales
     2018-10-20 fixed scale problems without scale sensors
-    2018-11-02 Fixed wizard error 
+    2018-11-02 Fixed wizard error
 """
 import time
 import hx711
