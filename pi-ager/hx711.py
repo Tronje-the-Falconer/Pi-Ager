@@ -30,8 +30,6 @@ class HX711:
         self.twosComplementThreshold = 1 << (bitsToRead-1)
         self.twosComplementOffset = -(1 << (bitsToRead))
         self.setGain(gain)
-        self.reset()
-        self.waitForReady()
         self.read()
 
     def isReady(self):
@@ -59,7 +57,7 @@ class HX711:
             return unsignedValue
 
     def read(self):
-        #self.waitForReady()
+        self.waitForReady()
 
         unsignedValue = 0
         for i in range(0, self.bitsToRead):
@@ -111,11 +109,11 @@ class HX711:
     def powerDown(self):
         GPIO.output(self.PD_SCK, False)
         GPIO.output(self.PD_SCK, True)
-        time.sleep(0.01)
+        time.sleep(0.0001)
 
     def powerUp(self):
         GPIO.output(self.PD_SCK, False)
-        time.sleep(0.01)
+        time.sleep(0.0001)
 
     def reset(self):
         self.powerDown()

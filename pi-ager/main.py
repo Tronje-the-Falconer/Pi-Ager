@@ -52,13 +52,16 @@ except KeyboardInterrupt:
     logger.warning(_('KeyboardInterrupt'))
     pass
 
-except Exception as e:
-    logstring = _('exception occurred') + '!!!'
-    logger.exception(logstring, exc_info = True)
+except Exception as cx_error:
+    exception_known = cl_fact_messenger().get_instance(cx_error).send()
+    #logstring = _('exception occurred') + '!!!'
+    #logger.exception(logstring, exc_info = True)
     pass
 
 finally:
-    pi_ager_init.loopcounter = 0
-    pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
-    os.system('sudo /var/sudowebscript.sh pkillscale &')
-    pi_ager_organization.goodbye()
+    if exception_known == False:
+        pi_ager_init.loopcounter = 0
+        pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
+        os.system('sudo /var/sudowebscript.sh pkillscale &')
+        os.system('sudo /var/sudowebscript.sh pkillmain &')
+        pi_ager_organization.goodbye()
