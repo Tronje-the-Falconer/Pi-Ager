@@ -30,10 +30,12 @@ class cl_messenger:
         if str(self.cx_error.__class__.__name__ ) == 'cx_Sensor_not_defined':
             self.alarm.execute()
             self.exception_known = True
-        if str(self.cx_error.__class__.__name__ ) == 'OperationalError':
+        elif str(self.cx_error.__class__.__name__ ) == 'OperationalError':
             self.alarm.execute()
             self.exception_known = True
-        
+        else:
+            self.alarm.execute()
+            
         
         logger.info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
         logger.info('No Email implemented')
