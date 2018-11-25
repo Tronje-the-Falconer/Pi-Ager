@@ -215,7 +215,7 @@ def get_first_calibrate_measure(scale, scale_settings_table, calibrate_scale_key
     getting first values on calibrating scale
     """
     global logger          
-    logger.debug('get_fist_calibrate_measure()')   
+    logger.debug('get_first_calibrate_measure()')   
     # scale.setReferenceUnit(1)
     scale.setReferenceUnit(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.referenceunit_key))
     scale.setSamples(int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_refunit_tara_key)))
