@@ -94,7 +94,7 @@ def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, ta
 
         
     measure_start_time = pi_ager_database.get_current_time()
-    logger.info('Scale start')
+    logger.debug('Scale start')
     save_time = 0
     current_time = measure_start_time
    
@@ -136,26 +136,26 @@ def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, ta
                 error_count2        = error_count
                 old_median_value2   = old_median_value
                 scale_list2         = scale_list
-            logger.info(cell_name +'Error counter after       = ' + str(error_count))
+            logger.debug(cell_name +'Error counter after       = ' + str(error_count))
             median_value = pi_median_low(scale_list)
             scale_list_rounded = [ round(elem, ROUND_DECIMAL_VALUE) for elem in scale_list ]            
        
-            logger.info(cell_name +'(list) = ' + '( ' + str(len(scale_list)) + ' )' )
-            logger.info(cell_name +'       = ' + str(scale_list_rounded))
-            logger.info(cell_name +'Value                     = ' + str(round(value,ROUND_DECIMAL_VALUE)))
-            logger.info(cell_name +'Median low                = ' + str(round(median_value,ROUND_DECIMAL_VALUE)))
-            logger.info(cell_name +'Error counter             = ' + str(error_count))
+            logger.debug(cell_name +'(list) = ' + '( ' + str(len(scale_list)) + ' )' )
+            logger.debug(cell_name +'       = ' + str(scale_list_rounded))
+            logger.debug(cell_name +'Value                     = ' + str(round(value,ROUND_DECIMAL_VALUE)))
+            logger.debug(cell_name +'Median low                = ' + str(round(median_value,ROUND_DECIMAL_VALUE)))
+            logger.debug(cell_name +'Error counter             = ' + str(error_count))
                                 
             if ( db_write == True or calibrate_scale != 0 or status_tara_scale != 0 ):
                 pi_ager_database.write_scale(data_table,value)
-                logger.debug(cell_name +'scale-value saved in database ' + time.strftime('%H:%M:%S', time.localtime()))
-                logger.info(cell_name +'scale-value ' + str(round(value,ROUND_DECIMAL_VALUE)) + ' saved in database ' + time.strftime('%H:%M:%S', time.localtime()))
+                #logger.debug(cell_name +'scale-value saved in database ' + time.strftime('%H:%M:%S', time.localtime()))
+                logger.debug(cell_name +'scale-value ' + str(round(value,ROUND_DECIMAL_VALUE)) + ' saved in database ' + time.strftime('%H:%M:%S', time.localtime()))
             
             
 
             scale_list_rounded_string = [ round(elem, ROUND_DECIMAL_VALUE) for elem in scale_list ]
-            logger.info(cell_name +'       = ' + str(scale_list_rounded_string))
-            logger.info(cell_name +'-------------------------------------------------')
+            logger.debug(cell_name +'       = ' + str(scale_list_rounded_string))
+            logger.debug(cell_name +'-------------------------------------------------')
             if data_table == pi_ager_names.data_scale1_table:
                 old_median_value1 = median_value
             elif data_table == pi_ager_names.data_scale2_table:
@@ -173,19 +173,19 @@ def  execute_filter(value, old_median_value, error_count, scale_list, db_write, 
     #    db_write = True
     #else:
     #    db_write = False           
-    logger.info(cell_name +'Median old                = ' + str(round(old_median_value,ROUND_DECIMAL_VALUE)))
+    logger.debug(cell_name +'Median old                = ' + str(round(old_median_value,ROUND_DECIMAL_VALUE)))
     if old_median_value == 0 or error_count >= MAX_ERROR_COUNT: 
-        logger.info(cell_name +'old_median_value = ' + str(old_median_value) + ' error_count = ' + str(error_count) + ' MAX_ERROR_COUNT =' + str(MAX_ERROR_COUNT)) 
+        logger.debug(cell_name +'old_median_value = ' + str(old_median_value) + ' error_count = ' + str(error_count) + ' MAX_ERROR_COUNT =' + str(MAX_ERROR_COUNT)) 
         scale_list.append(value)
         error_count = 0
         db_write = True
     elif abs(old_median_value-value) < MAX_DEVIATION: 
-        logger.info(cell_name +'old_median_value-value < MAX_DEVIATION | ' + str(round(abs(old_median_value-value), ROUND_DECIMAL_VALUE)) + ' < ' + str(MAX_DEVIATION))
+        logger.debug(cell_name +'old_median_value-value < MAX_DEVIATION | ' + str(round(abs(old_median_value-value), ROUND_DECIMAL_VALUE)) + ' < ' + str(MAX_DEVIATION))
         scale_list.append(value)
         error_count = 0
         db_write = True
     elif old_median_value != value:
-        logger.info(cell_name +'old_median_value != value | ' + str(round(old_median_value-value,ROUND_DECIMAL_VALUE)) + ' != ' + str(round(value,ROUND_DECIMAL_VALUE)))
+        logger.debug(cell_name +'old_median_value != value | ' + str(round(old_median_value-value,ROUND_DECIMAL_VALUE)) + ' != ' + str(round(value,ROUND_DECIMAL_VALUE)))
         error_count = error_count + 1
         db_write = False
     scale_list1.sort()
@@ -195,7 +195,7 @@ def  execute_filter(value, old_median_value, error_count, scale_list, db_write, 
     if len(scale_list) >= LIST_LENGHT:
         middle_of_scale_list = round(len(scale_list)/2)-1
         scale_list.pop(middle_of_scale_list)
-        logger.info(cell_name +'Deleting index            = ' + str(middle_of_scale_list))
+        logger.debug(cell_name +'Deleting index            = ' + str(middle_of_scale_list))
     return old_median_value, error_count, scale_list, db_write
                 
 
@@ -215,7 +215,7 @@ def get_first_calibrate_measure(scale, scale_settings_table, calibrate_scale_key
     getting first values on calibrating scale
     """
     global logger          
-    logger.debug('get_first_calibrate_measure()')   
+    logger.debug('get_fist_calibrate_measure()')   
     # scale.setReferenceUnit(1)
     scale.setReferenceUnit(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.referenceunit_key))
     scale.setSamples(int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_refunit_tara_key)))

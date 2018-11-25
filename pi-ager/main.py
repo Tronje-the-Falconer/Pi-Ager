@@ -23,6 +23,8 @@ import pi_ager_names
 import pi_ager_database
 import pi_ager_database_check
 import pi_revision
+from pi_ager_cl_alarm import cl_fact_alarm
+from pi_ager_cl_messenger import cl_fact_messenger
 
 global logger
 
@@ -45,7 +47,10 @@ time.sleep(2)
 os.system('sudo /var/sudowebscript.sh startscale &')
 logger.debug('scale restart done')
 
+exception_known = True
+
 try:
+    
     pi_ager_loop.autostart_loop()
 
 except KeyboardInterrupt:
