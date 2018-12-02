@@ -10,6 +10,7 @@ import pi_ager_paths
 import pi_ager_database_get_logging_value
 import pathlib
 import os, stat
+import inspect
 
 def get_logginglevel(loglevelstring):
     """
@@ -78,6 +79,14 @@ def create_logger(pythonfile):
     logger.addHandler(console_streamhandler)
     
     return logger
-        
+def me():
+    prev_frame = inspect.currentframe().f_back
+    #current_frame = inspect.currentframe()
+    the_class  = prev_frame.f_locals["self"].__class__
+    the_method = prev_frame.f_code.co_name
+    the_line   = prev_frame.f_code.co_firstlineno
+    #logger.info("Line " + str(the_line) + str(the_class) + str(the_method))
+    return("Line " + str(the_line) + str(the_class) + str(the_method))    
+            
 logger = create_logger(__name__)
 logger.debug('logging initialised')

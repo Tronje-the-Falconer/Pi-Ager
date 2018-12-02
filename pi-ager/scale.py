@@ -13,7 +13,9 @@ import pi_ager_database
 import pi_ager_names
 import pi_ager_logging 
 from pi_ager_cl_alarm import cl_fact_alarm
+from pi_ager_cl_messenger import cl_fact_messenger
 
+exception_known = True
 
 try:
     global logger

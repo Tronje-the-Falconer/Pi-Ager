@@ -10,7 +10,7 @@ this is the control for a self-made dry aging fridge
 import os
 import time
 
-#Zuerst Datenbank prÃ¼fen
+#Zuerst Datenbank prüfen
 import pi_ager_database_check
 pi_ager_database_check.check_and_update_database()
 
@@ -59,8 +59,6 @@ except KeyboardInterrupt:
 
 except Exception as cx_error:
     exception_known = cl_fact_messenger().get_instance(cx_error).send()
-    #logstring = _('exception occurred') + '!!!'
-    #logger.exception(logstring, exc_info = True)
     pass
 
 finally:

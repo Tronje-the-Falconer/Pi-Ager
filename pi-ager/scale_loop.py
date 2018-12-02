@@ -263,7 +263,8 @@ def doScaleLoop():
     """
     global logger
     logger.debug('doScaleLoop()')   
-
+    logger.debug(__name__)
+    
     scale1_setting_rows = pi_ager_database.get_scale_settings_from_table(pi_ager_names.settings_scale1_table)
     scale2_setting_rows = pi_ager_database.get_scale_settings_from_table(pi_ager_names.settings_scale2_table)
 

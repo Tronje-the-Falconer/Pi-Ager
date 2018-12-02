@@ -14,7 +14,7 @@ logger.debug('logging initialised')
 class cl_messenger:
     
     def __init__(self, cx_error):
-        
+        logger.info(pi_ager_logging.me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
         
@@ -24,14 +24,15 @@ class cl_messenger:
         self.exception_known = False
         
     def send(self):
+        logger.info(pi_ager_logging.me())
         logger.exception(self.cx_error, exc_info = True)
         logger.info("Exception raised: " + type(self.cx_error).__name__  ) 
         logger.info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
         if str(self.cx_error.__class__.__name__ ) == 'cx_Sensor_not_defined':
-            self.alarm.execute()
+            self.alarm.execute_short(Duration = 3)
             self.exception_known = True
         elif str(self.cx_error.__class__.__name__ ) == 'OperationalError':
-            self.alarm.execute()
+            self.alarm.execute_long(Duration = 2)
             self.exception_known = True
         else:
             self.alarm.execute()
@@ -53,15 +54,18 @@ class cl_fact_messenger(ABC):
     
     @classmethod
     def set_instance(self, i_instance):
+        logger.info(pi_ager_logging.me())
         cl_fact_messenger.__o_instance = i_instance
         
     @classmethod        
     def get_instance(self, Exception):
+        logger.info(pi_ager_logging.me())
         if cl_fact_messenger.__o_instance is not None:
             return(cl_fact_messenger.__o_instance)
         cl_fact_messenger.__o_instance = cl_messenger(Exception)
         return(cl_fact_messenger.__o_instance)
 
     def __init__(self):
+        logger.info(pi_ager_logging.me())
         pass    
     
