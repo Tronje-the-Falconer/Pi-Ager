@@ -17,7 +17,7 @@ Wenn jemand Fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möc
 #### Raspberry Pi
 
 * [Pi zero W](https://shop.pimoroni.de/products/raspberry-pi-zero-w) Dieses ist die empfohlene Variante da die Platine dafür ausgelegt ist und man meistens auch das integrierte Wlan Modul nutzen kann.
-* !!! Achtung kein Zero WH kaufen da diese Variannte die Stiftleiste schon draufgelötet hat !!!
+* !!! Achtung keinen Zero WH kaufen da diese Variannte die Stiftleiste schon draufgelötet hat !!!
 * Alternative 1:
   * [Pi zero](http://www.whereismypizero.com/) Kann auch genutzt werden, dann braucht man aber ein entsprechendes [Wlan  Modul](https://www.reichelt.de/WLAN-Adapter/EDIMAX-EW-7811UN/3/index.html?&ARTICLE=99944) mit [Adapterkabel](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1) (siehe auch unten)
 * weitere Alternativen:  
