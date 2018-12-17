@@ -57,7 +57,7 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
     * 2 x Buchsenl. 1x20 gerade für Raspberry Zero [BL 1X20G8 2,54](https://www.reichelt.de/20pol-buchsenleiste-gerade-rm-2-54-h-8-5mm-bl-1x20g8-2-54-p51827.html?)  (Reichelt EKL)
     
     
-   * Anschluss Komponenten für die Pi-Ager Platine (empfohlene Variante) Alternative siehe untere Auflistung Steckerklemmen (*1) 
+  * Anschluss Komponenten für die Pi-Ager Platine (empfohlene Variante) Alternative siehe untere Auflistung Steckerklemmen (*1) 
     * 8 x Lötbare Schraubklemme - 2-pol, RM 5,08 mm, 90° - [RND 205-00232](https://www.reichelt.de/RND-connect/RND-205-00232/3/index.html?ACTION=3&LA=5&ARTICLE=170277&GROUPID=7552&artnr=RND+205-00232) (Reichelt EKL)
     * 3 x Lötbare Schraubklemme - 3-pol, RM 5,08 mm, 90° - [RND 205-00233](https://www.reichelt.de/RND-connect/RND-205-00233/3/index.html?ACTION=3&LA=5&ARTICLE=170278&GROUPID=7552&artnr=RND+205-00233) (Reichelt EKL)
     
@@ -89,15 +89,15 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
 (*2) Komponenten die bei Reichelt nicht erhältlich sind:
 
   * Die 2,5mm SMD Klinkenbuchsen sind bei Reichelt leider nicht lieferbar, hier zwei Bezugsquellen:
-    * 4 x 2,5 mm Klinkenbuchse (bevorzugte Variante) - [SJ 2523](https://www.mouser.de/ProductDetail/CUI/SJ-2523-SMT-TR/?qs=WyjlAZoYn50TRxpi%2fhdHvw==) (Mouser)
-    * 4 x 2,5 mm Klinkenbuchse (Alternative)  - [PJ-208B](https://de.aliexpress.com/item/4pcs-Jack-2-5mm-Headphone-Connector-Four-Feet-Pin-90-Degrees-Horizontal-PJ-208B-Plug-in/32824757753.html?spm=a2g0x.search0104.3.23.P5CoqJ&ws_ab_test=searchweb0_0,searchweb201602_4_10152_10065_10151_10068_10344_10345_10547_10342_10343_10340_10341_10548_10193_10194_10541_10304_10307_5640015_10060_10302_10155_10154_10056_10055_10539_10538_5370015_10537_10536_10059_10534_10533_100031_10103_10102_10107_10142_10320_10321_10322_10084_10083_10177_5590015_10180_10312_10313_10184_10314_10319_10073_10186-10177,searchweb201603_25,ppcSwitch_2&btsid=afbf842f-30b3-4e04-8c5d-bac28ed8b314&algo_expid=2f4931fc-1f23-44bc-8b62-97f103c81388-3&algo_pvid=2f4931fc-1f23-44bc-8b62-97f103c81388) (Ali)
+     * 4 x 2,5 mm Klinkenbuchse (bevorzugte Variante) - [SJ 2523](https://www.mouser.de/ProductDetail/CUI/SJ-2523-SMT-TR/?qs=WyjlAZoYn50TRxpi%2fhdHvw==) (Mouser)
+     * 4 x 2,5 mm Klinkenbuchse (Alternative)  - [PJ-208B](https://de.aliexpress.com/item/4pcs-Jack-2-5mm-Headphone-Connector-Four-Feet-Pin-90-Degrees-Horizontal-PJ-208B-Plug-in/32824757753.html?spm=a2g0x.search0104.3.23.P5CoqJ&ws_ab_test=searchweb0_0,searchweb201602_4_10152_10065_10151_10068_10344_10345_10547_10342_10343_10340_10341_10548_10193_10194_10541_10304_10307_5640015_10060_10302_10155_10154_10056_10055_10539_10538_5370015_10537_10536_10059_10534_10533_100031_10103_10102_10107_10142_10320_10321_10322_10084_10083_10177_5590015_10180_10312_10313_10184_10314_10319_10073_10186-10177,searchweb201603_25,ppcSwitch_2&btsid=afbf842f-30b3-4e04-8c5d-bac28ed8b314&algo_expid=2f4931fc-1f23-44bc-8b62-97f103c81388-3&algo_pvid=2f4931fc-1f23-44bc-8b62-97f103c81388) (Ali)
 (Achtung: diese Buchsen müssen noch getestet werden) 
 
 (*1) Alternativ zu den Schraubklemmen kann man Steckerklemmen nutzen:
 
   * INFO: Wenn man öfters z.B. sie Sensoren abklemmen möchte kann man Steckerklemmen einsetzen. Um aber mögliche Kontaktprobleme zu vermeiden ist es sinnvoller doch die Schraubklemmen aus dem Warenkorb zu nutzen.
-    * 3 x Wannenstecker für AKL 249 2-pol RM5,08 - [AKL 220-02](https://www.reichelt.de/Wannenstecker/AKL-220-02/3/index.html?ACTION=3&LA=517&ARTICLE=36693&GROUPID=7544&trstct=lsbght_sldr::36696) (Reichelt - nicht im Warenkorb enthalten)
-    * 1 x Wannenstecker für AKL 249 4-pol RM5,08 - [AKL 220-04](https://www.reichelt.de/Wannenstecker/AKL-230-04/3/index.html?ACTION=3&LA=2&ARTICLE=36703&GROUPID=7544&artnr=AKL+230-04&SEARCH=%252A) (Reichelt - nicht im Warenkorb enthalten)
+      * 3 x Wannenstecker für AKL 249 2-pol RM5,08 - [AKL 220-02](https://www.reichelt.de/Wannenstecker/AKL-220-02/3/index.html?ACTION=3&LA=517&ARTICLE=36693&GROUPID=7544&trstct=lsbght_sldr::36696) (Reichelt - nicht im Warenkorb enthalten)
+      * 1 x Wannenstecker für AKL 249 4-pol RM5,08 - [AKL 220-04](https://www.reichelt.de/Wannenstecker/AKL-230-04/3/index.html?ACTION=3&LA=2&ARTICLE=36703&GROUPID=7544&artnr=AKL+230-04&SEARCH=%252A) (Reichelt - nicht im Warenkorb enthalten)
       * 3 x Wannenstecker für AKL 249 5-pol RM5,08 - [AKL 220-05](https://www.reichelt.de/Wannenstecker/AKL-220-05/3/index.html?ACTION=3&LA=2&ARTICLE=36696&GROUPID=7544&artnr=AKL+220-05&SEARCH=%252A) (Reichelt - nicht im Warenkorb enthalten) 
       * 3 x Anschlussklemmensystem 2-pol RM5,08 - [AKL 249-02](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-02/3/index.html?ACTION=3&LA=517&ARTICLE=36686&GROUPID=7543&trstct=lsbght_sldr::36693) (Reichelt - nicht im Warenkorb enthalten)
       * 1 x Anschlussklemmensystem 4-pol RM5,08 - [AKL 249-04](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-04/3/index.html?ACTION=3&LA=517&ARTICLE=36688&GROUPID=7543&trstct=lsbght_sldr::36703) (Reichelt - nicht im Warenkorb enthalten)
