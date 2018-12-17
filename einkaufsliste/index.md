@@ -39,11 +39,8 @@ Die Steuerplatine für den Reifeschrank kann man über das GSV Forum beziehen.
 Die Platine ist in 2 Versionen erhältlich: 1. als bestücke und 2. als unbestückt Platine.
 
 * [Verkaufsportal Pi-Ager Platine](https://www.grillsportverein.de/forum/threads/verkaufsportal-pi-ager-reifeschrank-platine.288119/) 
-
 Zusätzlich zur Steuerplatine benötigt man noch ein [Relaisboard](#relaisboard) => Details sind auf diese Seite weiter unten zu finden.
-
 Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine entscheidet, baucht noch folgende Komponenten:
-
 * Bauteile Pi-Ager Platine [Reichelt Einkaufsliste](https://www.reichelt.de/my/1492971) (Reichelt EKL) 
 => hier sind alle Bauteile für die Platine die bei Reichelt erhältlich sind zusammengefasst.
   * Allgemeine Komponennten für die Pi-Ager Platine
