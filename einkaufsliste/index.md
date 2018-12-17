@@ -43,22 +43,26 @@ Zusätzlich zur Steuerplatine benötigt man noch ein [Relaisboard](#relaisboard)
 Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine entscheidet, baucht noch folgende Komponenten:
 * Bauteile Pi-Ager Platine [Reichelt Einkaufsliste](https://www.reichelt.de/my/1492971) (Reichelt EKL) 
 => hier sind alle Bauteile für die Platine die bei Reichelt erhältlich sind zusammengefasst.
-  * Allgemeine Komponennten für die Pi-Ager Platine
+
+  * Allgemeine Komponennten für die Pi-Ager Platine:
+  
     * 2 x JUMPER, schw. m. Grifflasche - [JUMPER 2,54 SW ](https://www.reichelt.de/kurzschlussbruecke-schw-m-grifflasche-jumper-2-54gl-sw-p9019.html?) (Reichelt EKL)
     * 2 x Stiftleisten 2,54 mm, 1X36, gerade- [MPE 087-1-036](https://www.reichelt.de/stiftleisten-2-54-mm-1x36-gerade-mpe-087-1-036-p119890.html?) (Reichelt EKL)
     * 1 x Stiftleisten 2,54 mm, 2X20, gerade- [MPE 087-2-040](https://www.reichelt.de/20pol-buchsenleiste-gerade-rm-2-54-h-8-5mm-bl-1x20g8-2-54-p51827.html?) (Reichelt EKL)
-    
     * 2 x Buchsenleisten 2,54 mm, 1X04, gerade - [MPE 094-1-004](https://www.reichelt.de/buchsenleisten-2-54-mm-1x04-gerade-mpe-094-1-004-p119913.html?) (Reichelt EKL)
     * 2 x Buchsenleisten 2,54 mm, 1X06, gerade - [MPE 094-1-006](https://www.reichelt.de/buchsenleisten-2-54-mm-1x06-gerade-mpe-094-1-006-p119915.html?) (Reichelt EKL)   
     * 2 x Buchsenleisten 2,54 mm, 1X10, gerade - [MPE 094-1-010](https://www.reichelt.de/buchsenleisten-2-54-mm-1x10-gerade-mpe-094-1-010-p119918.html?) (Reichelt EKL)
     * 2 x Buchsenl. 1x20 gerade für Raspberry Zero [BL 1X20G8 2,54](https://www.reichelt.de/20pol-buchsenleiste-gerade-rm-2-54-h-8-5mm-bl-1x20g8-2-54-p51827.html?)  (Reichelt EKL)
     
     
-  * Anschluss Komponenten für die Pi-Ager Platine (empfohlene Variante) Alternative siehe untere Auflistung Steckerklemmen (*1) 
+  * Anschluss Komponenten für die Pi-Ager Platine (empfohlene Variante) Alternative siehe untere Auflistung Steckerklemmen (1) 
+  
     * 8 x Lötbare Schraubklemme - 2-pol, RM 5,08 mm, 90° - [RND 205-00232](https://www.reichelt.de/RND-connect/RND-205-00232/3/index.html?ACTION=3&LA=5&ARTICLE=170277&GROUPID=7552&artnr=RND+205-00232) (Reichelt EKL)
     * 3 x Lötbare Schraubklemme - 3-pol, RM 5,08 mm, 90° - [RND 205-00233](https://www.reichelt.de/RND-connect/RND-205-00233/3/index.html?ACTION=3&LA=5&ARTICLE=170278&GROUPID=7552&artnr=RND+205-00233) (Reichelt EKL)
     
+    
   * SMD Bauteile für den Hardware Alarm
+  
     * 1 x BC 848A Transistor SMD NPN -  [BC 848B SMD](https://www.reichelt.de/BC-Transistoren/BC-848B-SMD/3/index.html?ACTION=3&LA=5&ARTICLE=18565&GROUPID=7206&artnr=BC+848B+SMD) (Reichelt EKL)
     * 1 x SMD-Widerstand 0805 3,3kOhm 1,0% - [RND 0805 1 3,3K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/RND-0805-1-3-3K/3/index.html?ACTION=3&LA=5&ARTICLE=183240&GROUPID=7971&artnr=RND+0805+1+3%2C3K) (Reichelt EKL)
     * 1 x Summer -  [SUMMER TDB 05](https://www.reichelt.de/Signalakustik/SUMMER-TDB-05/3/index.html?ACTION=3&LA=5&ARTICLE=35918&GROUPID=6560&artnr=SUMMER+TDB+05) (Reichelt EKL)
