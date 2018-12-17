@@ -97,9 +97,9 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
 (Achtung: diese Buchsen müssen noch getestet werden) 
 
  * (1) Anmerkung
-  * Alternativ zu den Schraubklemmen kann man Steckerklemmen nutzen:
-
-   * INFO: Wenn man öfters z.B. sie Sensoren abklemmen möchte kann man Steckerklemmen einsetzen. Um aber mögliche Kontaktprobleme zu vermeiden ist es sinnvoller doch die Schraubklemmen aus dem Warenkorb zu nutzen.
+ 
+   * Alternativ zu den Schraubklemmen kann man Steckerklemmen nutzen:
+    * INFO: Wenn man öfters z.B. sie Sensoren abklemmen möchte kann man Steckerklemmen einsetzen. Um aber mögliche Kontaktprobleme zu vermeiden ist es sinnvoller doch die Schraubklemmen aus dem Warenkorb zu nutzen.
       * 3 x Wannenstecker für AKL 249 2-pol RM5,08 - [AKL 220-02](https://www.reichelt.de/Wannenstecker/AKL-220-02/3/index.html?ACTION=3&LA=517&ARTICLE=36693&GROUPID=7544&trstct=lsbght_sldr::36696) (Reichelt - nicht im Warenkorb enthalten)
       * 1 x Wannenstecker für AKL 249 4-pol RM5,08 - [AKL 220-04](https://www.reichelt.de/Wannenstecker/AKL-230-04/3/index.html?ACTION=3&LA=2&ARTICLE=36703&GROUPID=7544&artnr=AKL+230-04&SEARCH=%252A) (Reichelt - nicht im Warenkorb enthalten)
        * 3 x Wannenstecker für AKL 249 5-pol RM5,08 - [AKL 220-05](https://www.reichelt.de/Wannenstecker/AKL-220-05/3/index.html?ACTION=3&LA=2&ARTICLE=36696&GROUPID=7544&artnr=AKL+220-05&SEARCH=%252A) (Reichelt - nicht im Warenkorb enthalten) 
