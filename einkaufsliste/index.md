@@ -3,6 +3,9 @@ layout: default
 title: Einkaufsliste
 ---
 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!! Achtung Liste ist aktuell in Bearbeitung !!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
 # Einkaufsliste
 
 Es handelt sich hier nur um Vorschläge und können durch eigene ähnliche Positionen ausgetauscht werden. 
@@ -18,14 +21,16 @@ Wenn jemand Fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möc
 
 * [Pi zero W](https://shop.pimoroni.de/products/raspberry-pi-zero-w) Dieses ist die empfohlene Variante da die Platine dafür ausgelegt ist und man meistens auch das integrierte Wlan Modul nutzen kann.
 * !!! Achtung keinen Zero WH kaufen da diese Variannte die Stiftleiste schon draufgelötet hat !!!
-* Alternative 1:
+* Alternative 1: 
   * [Pi zero](http://www.whereismypizero.com/) Kann auch genutzt werden, dann braucht man aber ein entsprechendes [Wlan  Modul](https://www.reichelt.de/WLAN-Adapter/EDIMAX-EW-7811UN/3/index.html?&ARTICLE=99944) mit [Adapterkabel](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1) (siehe auch unten)
 * weitere Alternativen:  
+!!!! Achtung !!!! Die Beta Version 3.1.0 ist bisher nur mit dem Pi Zero W ausfuerlich gestest. Mit den anderen Raspberrys kann es noch zu Problemen führen: z.B. die Bibliothken der Sensoren funktionieren nicht richtig mit den Modellen. Wir sind dran das Problem zu beheben.
 'Sollte man eines der folgenden Raspberry Pi Modelle einsetzen, so muss man ein entsprechende [Jumperkabel](https://www.reichelt.de/Weiteres-Zubehoer/DEBO-KABELSET2/3/index.html?ACTION=3&GROUPID=6671&ARTICLE=176618&OFFSET=16&SID=92WGXOUawQATIAAEvA6EI49c1a6b34c1caf234fea075f5de4093c&LANGUAGE=EN) nutzen je nach dem auch ein [Wlan  Modul](https://www.reichelt.de/WLAN-Adapter/EDIMAX-EW-7811UN/3/index.html?&ARTICLE=99944) mit [Adapterkabel](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1)
   * [Raspberry Pi 2 ](https://www.voelkner.de/products/776427/Raspberry-Pi-2-Model-B-1-GB-ohne-Betriebssystem.html?frm=ffs__Raspberry)
   * [Pi 3B](https://www.voelkner.de/products/882046/Raspberry-Pi-3-Model-B-1-GB-ohne-Betriebssystem.html)
-  * [Pi B+](https://www.amazon.de/Raspberry-Model-Mainboard-MicroSD-Speicherkartenslot/dp/B00LPESRUK)
-* [microSDHC Karte](https://www.voelkner.de/products/825742/SanDisk-microSDHC-Karte-16-GB-Ultra-Android-mit-80-MB-s-und-Memory-Zone-Android-App-Class.html?frm=ffs__sandisk%2016) (min. 8GB)
+  * [Pi 3B+](https://www.amazon.de/Raspberry-Model-Mainboard-MicroSD-Speicherkartenslot/dp/B00LPESRUK)
+  * [Pi 3A+](https://www.reichelt.de/raspberry-pi-3-a-4x-1-4-ghz-512-mb-ram-wlan-bt-raspberry-pi-3a-p243791.html?PROVID=2788&gclid=EAIaIQobChMI2f_aj_ym3wIVSZnVCh2OVgd8EAQYAiABEgIuw_D_BwE&&r=1)
+* [microSDHC Karte](https://www.reichelt.de/microsdhc-speicherkarte-16gb-sandisk-ultra-sdsquar016ggn6ma-p214843.html?r=1) (min. 8GB)
 * [USB Netzteil 5V / mind. 4A z.B.](https://www.reichelt.de/Netzteile-Festspannung/MW-GST40A05/3/index.html?ACTION=3&LA=2&ARTICLE=171043&GROUPID=4950&artnr=MW+GST40A05&SEARCH=%252A) (Reichelt)
 
 #### Pi-Ager Platine
@@ -39,16 +44,27 @@ Zusätzlich zur Steuerplatine benötigt man noch ein [Relaisboard](#relaisboard)
 
 Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine entscheidet, baucht noch folgende Komponenten:
 
-* Bauteile Pi-Ager Platine [Reichelt Einkaufsliste](https://www.reichelt.de/my/1395533) (Reichelt EKL) 
+* Bauteile Pi-Ager Platine [Reichelt Einkaufsliste](https://www.reichelt.de/my/1492971) (Reichelt EKL) 
 => hier sind alle Bauteile für die Platine die bei Reichelt erhältlich sind zusammengefasst.
   * Allgemeine Komponennten für die Pi-Ager Platine
-    * 2 x Buchsenleisten 2,54 mm, 1X03, gerade - [MPE 094-1-003](https://www.reichelt.de/Buchsenleisten/MPE-094-1-003/3/index.html?ACTION=3&LA=5&ARTICLE=119912&GROUPID=7435&artnr=MPE+094-1-003) (Reichelt EKL)
-    * 2 x Buchsenleisten 2,54 mm, 1X04, gerade - [MPE 094-1-004](https://www.reichelt.de/Buchsenleisten/MPE-094-1-004/3/index.html?ACTION=3&LA=5&ARTICLE=119913&GROUPID=7435&artnr=MPE+094-1-004) (Reichelt EKL)
-    * 2 x Buchsenleisten 2,54 mm, 1X06, gerade - [MPE 094-1-006](https://www.reichelt.de/Buchsenleisten/MPE-094-1-006/3/index.html?ACTION=3&LA=5&ARTICLE=119915&GROUPID=7435&artnr=MPE+094-1-006) (Reichelt EKL)    
-    * 1 x JUMPER RM2,54 schwarz - [JUMPER 2,54 SW ](https://www.reichelt.de/Stiftleisten/JUMPER-2-54-SW/3/index.html?ACTION=3&LA=5&ARTICLE=9017&GROUPID=7434&artnr=JUMPER+2%2C54+SW) (Reichelt EKL)
-    * 2 x Stiftleisten 2,54 mm, 1X36, gerade- [MPE 087-1-036](https://www.reichelt.de/Stiftleisten/MPE-087-1-036/3/index.html?ACTION=3&LA=5&ARTICLE=119890&GROUPID=7434&artnr=MPE+087-1-036) (Reichelt EKL)
-    * 1 x Stiftleisten 2,54 mm, 2X20, gerade- [MPE 087-2-040](https://www.reichelt.de/Stiftleisten/MPE-087-2-040/3/index.html?ACTION=3&LA=5&ARTICLE=119900&GROUPID=7434&artnr=MPE+087-2-040) (Reichelt EKL)
-    * 2 x Buchsenl. 1x20 gerade für Raspberry Zero [BL 1X20G8 2,54](https://www.reichelt.de/Buchsenleisten/BL-1X20G8-2-54/3/index.html?ACTION=3&LA=20&GROUP=C142&GROUPID=7435&ARTICLE=51827&START=0&SORT=artnr&OFFSET=16)  (Reichelt EKL)
+ 
+   * 1 x MOSFET, N-CH, 50V, 0,22A, 0,36W, SOT-23 - [BSS 138 SMD](https://www.reichelt.de/mosfet-n-ch-50v-0-22a-0-36w-sot-23-bss-138-smd-p41437.html?) (Reichelt EKL)
+   * 2 x SMD-Widerstand, 0805, 10 kOhm, 125 mW, 1%- [RND 0805 1 10K ](https://www.reichelt.de/smd-widerstand-0805-10-kohm-125-mw-1-rnd-0805-1-10k-p183251.html?) (Reichelt EKL)
+  
+   * 2 x JUMPER, schw. m. Grifflasche - [JUMPER 2,54 SW ](https://www.reichelt.de/kurzschlussbruecke-schw-m-grifflasche-jumper-2-54gl-sw-p9019.html?) (Reichelt EKL)
+  
+  
+   * 2 x Buchsenleisten 2,54 mm, 1X04, gerade - [MPE 094-1-004](https://www.reichelt.de/buchsenleisten-2-54-mm-1x04-gerade-mpe-094-1-004-p119913.html?) (Reichelt EKL)
+   * 2 x Buchsenleisten 2,54 mm, 1X06, gerade - [MPE 094-1-006](https://www.reichelt.de/buchsenleisten-2-54-mm-1x06-gerade-mpe-094-1-006-p119915.html?) (Reichelt EKL)   
+   * 2 x Buchsenleisten 2,54 mm, 1X10, gerade - [MPE 094-1-010](https://www.reichelt.de/buchsenleisten-2-54-mm-1x10-gerade-mpe-094-1-010-p119918.html?) (Reichelt EKL)
+   
+    
+   * 2 x Stiftleisten 2,54 mm, 1X36, gerade- [MPE 087-1-036](https://www.reichelt.de/stiftleisten-2-54-mm-1x36-gerade-mpe-087-1-036-p119890.html?) (Reichelt EKL)
+   * 1 x Stiftleisten 2,54 mm, 2X20, gerade- [MPE 087-2-040](https://www.reichelt.de/20pol-buchsenleiste-gerade-rm-2-54-h-8-5mm-bl-1x20g8-2-54-p51827.html?) (Reichelt EKL)
+   
+   * 2 x Buchsenl. 1x20 gerade für Raspberry Zero [BL 1X20G8 2,54](https://www.reichelt.de/20pol-buchsenleiste-gerade-rm-2-54-h-8-5mm-bl-1x20g8-2-54-p51827.html?)  (Reichelt EKL)
+   
+   
     * 2 x Buchsenl. 20pol gewinkelt für Verbindung mit Relais Platine [BL 1X20W8 2,54 ](https://www.reichelt.de/Buchsenleisten/BL-1X20W8-2-54/3/index.html?ACTION=3&LA=10030&ARTICLE=51847&GROUPID=7435&artnr=BL+1X20W8+2%2C54) (Reichelt EKL)
   * Anschluss Komponenten für die Pi-Ager Platine (empfohlene Variante) Alternative siehe untere Auflistung Steckerklemmen (*1) 
     * 8 x Lötbare Schraubklemme - 2-pol, RM 5,08 mm, 90° - [RND 205-00232](https://www.reichelt.de/RND-connect/RND-205-00232/3/index.html?ACTION=3&LA=5&ARTICLE=170277&GROUPID=7552&artnr=RND+205-00232) (Reichelt EKL)
