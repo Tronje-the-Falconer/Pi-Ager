@@ -10,11 +10,20 @@ title: "Steuerung"
 
 #### Platine
 
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/platine.jpg" alt="platine" width="600">
+Die aktuelle Version der Platine: 
 
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/platine_uebersicht.jpg" alt="latine_aufteilung" width="600">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/platine.jpg" alt="platine" width="800">
 
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/platine_aufteilung.jpg" alt="platine_aufteilung" width="600">
+
+Hier ist dargestellt wie die Platine in Grundsatz aufgebaut ist. 
+Jeder fabig martkierte Bereich kann weggelassen werden, die nicht markierten Komponennten sind für die Grundfunktion des Pi-Agers erforderlich.
+
+
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/platine_uebersicht.jpg" alt="latine_aufteilung" width="800">
+
+Die einzelene Anschlüsse bzw. jumpermöglichkeiten werden hier erklärt:
+
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/platine_aufteilung.jpg" alt="platine_aufteilung" width="800">
 
 #### Relaisboard
 
