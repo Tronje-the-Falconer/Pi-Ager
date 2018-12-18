@@ -3,7 +3,7 @@ layout: bauanleitung
 title: "Steuerung"
 ---
 
-## !!!! Achtung !!!! diese Seite ist im Aufbau !
+### !!!! Achtung !!!! diese Seite ist im Aufbau !
 
 # Steuerung
 ## Inhalt
