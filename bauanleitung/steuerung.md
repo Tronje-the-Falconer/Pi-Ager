@@ -24,23 +24,23 @@ Jeder fabig martkierte Bereich kann weggelassen werden, die nicht markierten Kom
 
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/platine_aufteilung.jpg" alt="platine_aufteilung" width="800">
 
-##### NTC Temperatursensoren:
+* NTC Temperatursensoren:
 Sollte man zusätzliche Temperaturmessungen (Fleischtemepratur, Umgebungstemperatur des Kühlschrenks, ...)benötigen, stehen hier 4 Messkanäle zur Verfügung. 
 
-##### Externer Hardwareschalter:
+* Externer Hardwareschalter:
 Hier kann z.B. der potentialfreie Türkontakt des Kühlschranks angeschlossen werden mit hilfe dessen man z.B. das Licht einschalten kann sobald man die tür öffent. 
 ... oder sobald die tür geöffnet wird , wird ein stiller Alarm ausgelößt ;-)
 Naja ... mal schauen welche Funktionen im Laufe der Zeit implementeirt werden
 
-##### USV Modul:
+* USV Modul:
 Esbesteht die Option ein USV (unterbrechungsfreie Spannungsversorgung) Modul einzusetzen, damit bei einem möglichen Spannungsausfall ein Alarm ausgelösst, oder  z.B. eine Nachricht verschickt werden kann.
 In Abhängigkeit des eingesetzen Akkus läuft der Raspberry , die Temperatur und Feuchtemessung und der Alarmsummer eine entsprechende Zeit weiter.
 
-#### Alarm Summer:
+* Alarm Summer:
 
-#### Waagen:
+* Waagen:
 
-#### Display:
+* Display:
 
 
 
@@ -50,7 +50,7 @@ Die einzelene Anschlüsse bzw. Jumpermöglichkeiten werden hier erklärt:
 
 
 
-### Relaisboard
+#### Relaisboard
 
 Zur Steuerung der Pi-Agers ist auch ein Relaisboard notwendig. Da in der Anfängen des Reifeschrankes von "kleben gebliebenen" Relaiskontakten berichtet wurde, wird empfohen, die Eignung der eingesetzten Relais zum Schalten des entsprechenden Gerätes (Kompressor, Heizung, ...) von einer entsprechenden Elektrofachkraft  zu prüfen. Sollten die originalen Relais vom gekauften Relaisboard für eure Aufgabe nicht geeigent sein kann man die Relais wie unten dragestellt austauschen oder z.B. ein entsprechendes Schütz dazwischen geschaltet werden.
 
