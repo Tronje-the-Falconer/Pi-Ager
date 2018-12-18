@@ -58,6 +58,7 @@ Die einzelene Anschlüsse bzw. Jumpermöglichkeiten werden hier erklärt:
 
 Zur Steuerung der Pi-Agers ist auch ein Relaisboard notwendig. Da in der Anfängen des Reifeschrankes von "kleben gebliebenen" Relaiskontakten berichtet wurde, wird empfohen, die Eignung der eingesetzten Relais zum Schalten des entsprechenden Gerätes (Kompressor, Heizung, ...) von einer entsprechenden Elektrofachkraft  zu prüfen. Sollten die originalen Relais vom gekauften Relaisboard für eure Aufgabe nicht geeigent sein kann man die Relais wie unten dragestellt austauschen oder z.B. ein entsprechendes Schütz dazwischen geschaltet werden.
 
+
 #### !!!!  Der 230V Bereich des Relaisboards kann hier nicht betrachtet werden, diesen Teil muss jeder in Eigenverantwortung zusammen mit einer Elektrofachkraft planen und verdrahten !!!!
 
 ##### Ursprungszustand:
