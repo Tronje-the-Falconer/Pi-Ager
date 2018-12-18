@@ -130,7 +130,7 @@ oder
 
 #### Relaisboard
 
-* 1 x 8-Kanal Relais Modul Optokoppler 5VDC 230V  [Relaisboard](https://www.amazon.de/gp/product/B01LR87AOC/ref=oh_aui_detailpage_o01_s00?ie=UTF8&psc=1) (Amazon)
+* 1 x 8-Kanal Relais Modul Optokoppler 5VDC 230V  [Relaisboard](https://www.amazon.de/dp/B07D8TMSKT/ref=cm_sw_r_cp_api_omxgCb87PNS06) (Amazon)
  Dieses Board das hier angeboten wird, passte bisher (speziell was die Printstiftleisten angeht) immer perfekt zur Steuerplatine und wird innerhalb 1-3 Tage geliefert. 
 * Da die originalen Relais von dem verlinktem Relaisboard in der Vergangenheit einigen Usern Probleme verursacht haben, haben wir mal gesucht und folgendes gefunden. Diese Relais sind laut Datenblatt primärseitig gleich und können auch von den Maßen her die originalen Relais auf der Platine ersetzen. Betrachtet man die Kontakte sind diese viel besser und können also einen höheren Strom schalten, daher hoffen wir die Probleme zumindest bei den kleine Kompressoren zu minimieren. Bei größeren Leistungen muss man z.B. ein entsprechendes Schütz einsetzen.
 * 8 x Printrelais 5V Spule - 17/20A Schaltstrom TYP: BRF-SS-105D oder BRF-SS-105D [8 Printrelais](https://www.voelkner.de/products/895637/AFE-Printrelais-5-V-DC-17-A-1-Wechsler-BRF-SS-105D-1-St..html) (Voelkner)
