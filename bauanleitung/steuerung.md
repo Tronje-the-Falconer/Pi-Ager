@@ -25,25 +25,30 @@ Jeder fabig martkierte Bereich kann weggelassen werden, die nicht markierten Kom
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/platine_aufteilung.jpg" alt="platine_aufteilung" width="800">
 
 ##### NTC Temperatursensoren:
+(Diese Funktion ist in der aktuellen Software Version 3.1.0 noch nicht implemetiert)
 Sollte man zusätzliche Temperaturmessungen ( z.B. Fleischtemperatur, Umgebungstemperatur des Kühlschrenks, ...)benötigen, stehen hier 4 Messkanäle zur Verfügung. 
 
 ##### Externer Hardwareschalter:
+(Diese Funktion ist in der aktuellen Software Version 3.1.0 noch nicht implemetiert)
 Hier kann z.B. der potentialfreie Türkontakt des Kühlschranks angeschlossen werden mit Hilfe dessen man z.B. das Licht einschalten kann sobald man die tür öffent. 
 ... oder sobald die Tür geöffnet wird , wird ein stiller Alarm ausgelößt ;-)
 Naja ... mal schauen welche Funktionen im Laufe der Zeit implementeirt werden
 
 ##### USV Modul:
+(Diese Funktion ist in der aktuellen Software Version 3.1.0 noch nicht implemetiert)
 Es besteht die Option ein USV (unterbrechungsfreie Spannungsversorgung) Modul einzusetzen, damit bei einem möglichen Spannungsausfall ein Alarm ausgelösst, oder  z.B. eine Nachricht verschickt werden kann.
 In Abhängigkeit des eingesetzen Akkus läuft der Raspberry, die Temperatur und Feuchtemessung und der Alarmsummer eine entsprechende Zeit weiter.
 Da das USV Modul nur einen begrenzten Strom liefern kann muss man entsprehend vorsichtig sein wen nman weitere Komponennten direkt an den Raspberry anschließt. Otipmal für den Einsatz eines USV Moduls ist die Verwendung des Raspberry Zero da dieser eine geringere Strohmaufnahme hat.
 
 ##### Alarm Summer:
+(Diese Funktion ist in der aktuellen Software Version 3.1.0 noch nicht implemetiert)
 Ab Version 1.7 wurde ein Alarmsummer integriert mit dessen Hilfe entsprechende Zustäden das Systems akustisch gemeldet werden können.
 
 ##### Waagen:
 Die Gewichtmessung ist auf der Basis des HX 711 Moduls aufgebaut. Wer das Gewicht des zu reifenden Fleisches über einen längeren Zeitraum beobachten möchte, kann bis zu 2 Wägezellen an dem System beteiben.
 
 ##### Display:
+(Diese Funktion ist in der aktuellen Software Version 3.1.0 noch nicht implemetiert)
 Mit Hilfe des Dispays kann man die wichtigsten Funktionen vor Ort direkt am Kühlschrank bediehnen und beobachten.
 
 
