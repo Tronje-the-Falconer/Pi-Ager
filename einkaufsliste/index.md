@@ -8,7 +8,7 @@ title: Einkaufsliste
 
 # Einkaufsliste
 
-Es handelt sich hier nur um Vorschläge, die Komponennten können durch eigene ähnliche Positionen ausgetauscht werden. 
+Es handelt sich hier nur um Vorschläge, die Komponennten können durch eigene, ähnliche Positionen ausgetauscht werden. 
 (Die meisten Links sind bei Reichelt.de, Voelkner.de und Amazon.de um Versandkosten zu minimieren)
 
 Wenn jemand fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möchte, bitte im Forum [GSV Pi-Ager](https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/) melden. 
@@ -36,11 +36,11 @@ Wenn jemand fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möc
 #### Pi-Ager Platine
 
 Die Steuerplatine für den Reifeschrank kann man über das GSV Forum beziehen.
-Die Platine ist in 2 Versionen erhältlich: 1. als bestücke und 2. als unbestückt Platine.
+Die Platine ist grundsätzlich als unbestückt Platine erhältlich. Für Leute die etwas Probleme mit dem Löten haben, ist es meistens möglich auch eine bestückte Version zu bekommen, da dieses Projekt ein Hobby ist und wir alle dieses Hobby in unserer Freizeit betreiben kann es bei der bestückten Version zu entsprechenden Wartezeiten kommen.
 
 * [Verkaufsportal Pi-Ager Platine](https://www.grillsportverein.de/forum/threads/verkaufsportal-pi-ager-reifeschrank-platine.288119/) 
-Zusätzlich zur Steuerplatine benötigt man noch ein [Relaisboard](#relaisboard) => Details sind auf diese Seite weiter unten zu finden.
-Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine entscheidet, baucht noch folgende Komponenten:
+Zusätzlich zur Steuerplatine benötigt man noch ein [Relaisboard](#relaisboard) => Details sind auf dieser Seite weiter unten zu finden.
+Wer also selbst löten kann, baucht folgende Komponenten:
 * Bauteile Pi-Ager Platine [Reichelt Einkaufsliste](https://www.reichelt.de/my/1492971) (Reichelt EKL) 
 => hier sind alle Bauteile für die Platine die bei Reichelt erhältlich sind zusammengefasst.
 
@@ -74,26 +74,32 @@ Wer also selbst Hand anlegen möchte und sich für die unbestückte Platine ents
      * 4 x SMD-Widerstand 0805 1kOhm 1,0% - [RND 0805 1,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/RND-0805-1-1-0K/3/index.html?ACTION=3&LA=5&ARTICLE=183228&GROUPID=7971&artnr=RND+0805+1+1%2C0K) (Reichelt EKL)
      * 2 x SMD-Kerko 0805 10nF - [X7R 0805 BF 10N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805-BF-10N/3/index.html?ACTION=3&LA=5&ARTICLE=194259&GROUPID=8048&artnr=X7R+0805+BF+10N) (Reichelt EKL)
      * 6 x SMD-Kerko 0805 100nF - [X7R 0805 CF 100N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805FCE-100N/3/index.html?ACTION=3&LA=20&GROUP=B3517&GROUPID=8048&ARTICLE=193840&START=0&SORT=artnr&OFFSET=16) (Reichelt EKL)
-     * 2 x SMD-Kerko 0805 10µF - [KEM X5R0805 10U ](https://www.reichelt.de/Vielschicht-SMD-G0805/KEM-X5R0805-10U/3/index.html?ACTION=3&LA=5&ARTICLE=207089&GROUPID=8048&artnr=KEM+X5R0805+10U) (Reichelt EKL)  
+     * 2 x SMD-Kerko 0805 10µF - [KEM X5R0805 10U ](https://www.reichelt.de/Vielschicht-SMD-G0805/KEM-X5R0805-10U/3/index.html?ACTION=3&LA=5&ARTICLE=207089&GROUPID=8048&artnr=KEM+X5R0805+10U) (Reichelt EKL)
+     * 1 x SMD-Widerstand 0805 0 Ohm 5% - [RND 0805 0](https://www.reichelt.de/smd-widerstand-0805-0-ohm-125-mw-5-rnd-0805-0-p183146.html?) (Reichelt EKL)     
      * (*2) Die Klinkenbuchsen: siehe Punkt "Komponenten die bei Reichelt nicht erhältlich sind"
+     
   * Bauteile für den Digitaleingang
-     * 1 x widerstand 1,00K-  [METALL 1,00K](https://www.reichelt.de/0-6W-1-1-00-k-Ohm-9-76-k-Ohm/METALL-1-00K/3/index.html?ACTION=3&LA=5&ARTICLE=11403&GROUPID=3078&artnr=METALL+1%2C00K) (Reichelt EKL)
-     * 1 x widerstand 10,0K-  [METALL 10,0K](https://www.reichelt.de/0-6W-1-10-0-k-Ohm-95-3-k-Ohm/METALL-10-0K/3/index.html?ACTION=3&LA=5&ARTICLE=11449&GROUPID=3079&artnr=METALL+10%2C0K) (Reichelt EKL)
+     * 1 x Widerstand 1,00K-  [METALL 1,00K](https://www.reichelt.de/0-6W-1-1-00-k-Ohm-9-76-k-Ohm/METALL-1-00K/3/index.html?ACTION=3&LA=5&ARTICLE=11403&GROUPID=3078&artnr=METALL+1%2C00K) (Reichelt EKL)
+     * 1 x Widerstand 10,0K-  [METALL 10,0K](https://www.reichelt.de/0-6W-1-10-0-k-Ohm-95-3-k-Ohm/METALL-10-0K/3/index.html?ACTION=3&LA=5&ARTICLE=11449&GROUPID=3079&artnr=METALL+10%2C0K) (Reichelt EKL)
    
-   * SMD Bauteile für zusätzliche Temperaturmessung
+   * SMD Bauteile für das USV Modul
      * 1 x MOSFET, N-CH, 50V, 0,22A, 0,36W, SOT-23 - [BSS 138 SMD](https://www.reichelt.de/mosfet-n-ch-50v-0-22a-0-36w-sot-23-bss-138-smd-p41437.html?) (Reichelt EKL)
      * 2 x SMD-Widerstand, 0805, 10 kOhm, 125 mW, 1%- [RND 0805 1 10K ](https://www.reichelt.de/smd-widerstand-0805-10-kohm-125-mw-1-rnd-0805-1-10k-p183251.html?) (Reichelt EKL)
+     * 1 x Widerstand 10,0K-  [METALL 10,0K](https://www.reichelt.de/widerstand-metallschicht-10-0-kohm-0207-0-6-w-1-metall-10-0k-p11449.html?) (Reichelt EKL)
+     * 1 x Widerstand 6,80K-  [METALL 6,80K](https://www.reichelt.de/widerstand-metallschicht-6-8-kohm-0207-0-6-w-0-1-mpr-6-80k-p13032.html?) (Reichelt EKL)
     
    * Bauteile für die Verbindung der Pi-Ager Platine und Relaisboard: 
-     * 2 x Buchsenl. 20pol gewinkelt für Verbindung mit Relais Platine [BL 1X20W8 2,54 ](https://www.reichelt.de/Buchsenleisten/BL-1X20W8-2-54/3/index.html?ACTION=3&LA=10030&ARTICLE=51847&GROUPID=7435&artnr=BL+1X20W8+2%2C54) (Reichelt EKL)
+     * 2 x Buchsenl. 20pol gewinkelt für Verbindung mit Relais Platine [BL 1X20W8 2,54 ](https://www.reichelt.de/20pol-buchsenl-gewinkelt-rm-2-54-h-8-5mm-bl-1x20w8-2-54-p51847.html?) (Reichelt EKL)
+     
+   * zusätzliche Bauteile für die Waagen: 
+     * SMD Kondenator G1206 - 100µF 6,3V [X5R-G1206 100/6](https://www.reichelt.de/smd-vielschichtkondensator-g1206-100-f-6-3v-x5r-g1206-100-6-p89744.html?) (Reichelt EKL)
  
 
-     
- * (2) Anmerkung
-   * Komponenten die bei Reichelt nicht erhältlich sind:
-     * Die 2,5mm SMD Klinkenbuchsen sind bei Reichelt leider nicht lieferbar, hier zwei Bezugsquellen:
-     * 4 x 2,5 mm Klinkenbuchse (bevorzugte Variante) - [SJ 2523](https://www.mouser.de/ProductDetail/CUI/SJ-2523-SMT-TR/?qs=WyjlAZoYn50TRxpi%2fhdHvw==) (Mouser)
-     * 4 x 2,5 mm Klinkenbuchse (Alternative)  - [PJ-208B](https://de.aliexpress.com/item/4pcs-Jack-2-5mm-Headphone-Connector-Four-Feet-Pin-90-Degrees-Horizontal-PJ-208B-Plug-in/32824757753.html?spm=a2g0x.search0104.3.23.P5CoqJ&ws_ab_test=searchweb0_0,searchweb201602_4_10152_10065_10151_10068_10344_10345_10547_10342_10343_10340_10341_10548_10193_10194_10541_10304_10307_5640015_10060_10302_10155_10154_10056_10055_10539_10538_5370015_10537_10536_10059_10534_10533_100031_10103_10102_10107_10142_10320_10321_10322_10084_10083_10177_5590015_10180_10312_10313_10184_10314_10319_10073_10186-10177,searchweb201603_25,ppcSwitch_2&btsid=afbf842f-30b3-4e04-8c5d-bac28ed8b314&algo_expid=2f4931fc-1f23-44bc-8b62-97f103c81388-3&algo_pvid=2f4931fc-1f23-44bc-8b62-97f103c81388) (Ali)
+   * (2) Anmerkung
+     * Komponenten die bei Reichelt nicht erhältlich sind:
+        * Die 2,5mm SMD Klinkenbuchsen sind bei Reichelt leider nicht lieferbar, hier zwei Bezugsquellen:
+        * 4 x 2,5 mm Klinkenbuchse (bevorzugte Variante) - [SJ 2523](https://www.mouser.de/ProductDetail/CUI/SJ-2523-SMT-TR/?qs=WyjlAZoYn50TRxpi%2fhdHvw==) (Mouser)
+      * 4 x 2,5 mm Klinkenbuchse (Alternative)  - [PJ-208B](https://de.aliexpress.com/item/4pcs-Jack-2-5mm-Headphone-Connector-Four-Feet-Pin-90-Degrees-Horizontal-PJ-208B-Plug-in/32824757753.html?spm=a2g0x.search0104.3.23.P5CoqJ&ws_ab_test=searchweb0_0,searchweb201602_4_10152_10065_10151_10068_10344_10345_10547_10342_10343_10340_10341_10548_10193_10194_10541_10304_10307_5640015_10060_10302_10155_10154_10056_10055_10539_10538_5370015_10537_10536_10059_10534_10533_100031_10103_10102_10107_10142_10320_10321_10322_10084_10083_10177_5590015_10180_10312_10313_10184_10314_10319_10073_10186-10177,searchweb201603_25,ppcSwitch_2&btsid=afbf842f-30b3-4e04-8c5d-bac28ed8b314&algo_expid=2f4931fc-1f23-44bc-8b62-97f103c81388-3&algo_pvid=2f4931fc-1f23-44bc-8b62-97f103c81388) (Ali)
 (Achtung: diese Buchsen müssen noch getestet werden) 
 
  * (1) Anmerkung
