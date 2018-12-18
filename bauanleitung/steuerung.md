@@ -75,13 +75,9 @@ Zur Steuerung der Pi-Agers ist auch ein Relaisboard notwendig. Da in der Anfäng
 
 ##### Relaisbeschriftung:
 
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/blob/resources/wiki/relaisbeschriftung.png" alt="relaisbeschriftung" width="800">
-
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/relaisbeschriftung.png" alt="relaisbeschriftung" width="800">
 
 https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/wiki/relaisbeschriftung.png
 
-Kann hier runtergeladen werden:
-
-[Relaisbeschriftung PI-Ager](https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/wiki/relaisbeschriftung.png) 
+Kann hier runtergeladen werden:[Relaisbeschriftung PI-Ager](https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/wiki/relaisbeschriftung.png) 
 
