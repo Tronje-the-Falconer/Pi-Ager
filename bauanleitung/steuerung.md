@@ -38,6 +38,9 @@ In Abhängigkeit des eingesetzen Akkus läuft der Raspberry , die Temperatur und
 
 #### Alarm Summer:
 
+#### Waagen:
+
+#### Display:
 
 
 
