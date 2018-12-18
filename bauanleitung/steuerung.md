@@ -33,17 +33,13 @@ Zur Steuerung der Pi-Agers ist auch ein Relaisboard notwendig. Da in der Anfäng
 
 Ursprungszustand:
 
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/relaisboard1.JPG" alt="platine_aufteilung" width="800">
-
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/relaisboard1.JPG" alt="latine_aufteilung" width="800">
-
-https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/relaisboard1.JPG
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/relaisboard1.JPG" alt="relaisboard1" width="800">
 
 Relais müssen ausgelötet werden:
 
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/relaisboard2.jpg" alt="latine_aufteilung" width="800">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/relaisboard2.JPG" alt="relaisboard2" width="800">
 
 die neuen, geeigneten Relais werden wieder eingelötet:
 
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/relaisboard3.jpg" alt="latine_aufteilung" width="800">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/relaisboard3.JPG" alt="relaisboard3" width="800">
 
