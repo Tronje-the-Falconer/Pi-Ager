@@ -95,10 +95,10 @@ Wer also selbst löten kann, baucht folgende Komponenten:
      * SMD Kondenator G1206 - 100µF 6,3V [X5R-G1206 100/6](https://www.reichelt.de/smd-vielschichtkondensator-g1206-100-f-6-3v-x5r-g1206-100-6-p89744.html?) (Reichelt EKL)
  
 
-   * (2) Anmerkung
-     * Komponenten die bei Reichelt nicht erhältlich sind:
-        * Die 2,5mm SMD Klinkenbuchsen sind bei Reichelt leider nicht lieferbar, hier zwei Bezugsquellen:
-        * 4 x 2,5 mm Klinkenbuchse (bevorzugte Variante) - [SJ 2523](https://www.mouser.de/ProductDetail/CUI/SJ-2523-SMT-TR/?qs=WyjlAZoYn50TRxpi%2fhdHvw==) (Mouser)
+ * (2) Anmerkung
+   * Komponenten die bei Reichelt nicht erhältlich sind:
+       * Die 2,5mm SMD Klinkenbuchsen sind bei Reichelt leider nicht lieferbar, hier zwei Bezugsquellen:
+       * 4 x 2,5 mm Klinkenbuchse (bevorzugte Variante) - [SJ 2523](https://www.mouser.de/ProductDetail/CUI/SJ-2523-SMT-TR/?qs=WyjlAZoYn50TRxpi%2fhdHvw==) (Mouser)
       * 4 x 2,5 mm Klinkenbuchse (Alternative)  - [PJ-208B](https://de.aliexpress.com/item/4pcs-Jack-2-5mm-Headphone-Connector-Four-Feet-Pin-90-Degrees-Horizontal-PJ-208B-Plug-in/32824757753.html?spm=a2g0x.search0104.3.23.P5CoqJ&ws_ab_test=searchweb0_0,searchweb201602_4_10152_10065_10151_10068_10344_10345_10547_10342_10343_10340_10341_10548_10193_10194_10541_10304_10307_5640015_10060_10302_10155_10154_10056_10055_10539_10538_5370015_10537_10536_10059_10534_10533_100031_10103_10102_10107_10142_10320_10321_10322_10084_10083_10177_5590015_10180_10312_10313_10184_10314_10319_10073_10186-10177,searchweb201603_25,ppcSwitch_2&btsid=afbf842f-30b3-4e04-8c5d-bac28ed8b314&algo_expid=2f4931fc-1f23-44bc-8b62-97f103c81388-3&algo_pvid=2f4931fc-1f23-44bc-8b62-97f103c81388) (Ali)
 (Achtung: diese Buchsen müssen noch getestet werden) 
 
@@ -116,19 +116,20 @@ Wer also selbst löten kann, baucht folgende Komponenten:
 #### Waagen Module
  
 * [HX711 Modul für Wägezellenunterstützung](https://www.amazon.de/dp/B01I37IWYM/ref=cm_sw_r_wa_api_8ol5zb1ZZFX0R)
-* 2 x Keramikkondensator 22µF [X5R-G0603 22/10](https://www.reichelt.de/Vielschicht-SMD-G0603/X5R-G0603-22-10/3/index.html?ACTION=3&LA=20&GROUP=B3516&GROUPID=3166&ARTICLE=190488&START=0&SORT=artnr&OFFSET=16) (Reichelt EKL) 
-* 2 x Keramikkondensator 220µF [X5R-G1206 220/6](https://www.reichelt.de/Vielschicht-SMD-G1206/X5R-G1206-220-6/3/index.html?ACTION=3&LA=5700&ARTICLE=190504&GROUPID=8049&artnr=X5R-G1206+220%2F6) (Reichelt EKL) 
 
-#### Stepup Wandler
-Sollte man ein 12V oder ein 24V Schütz für die Steuerung des Klimakompressor nutzen wollen kann man sich mit Hilfe eines Stepup Moduls die benötigte Hilfsspannung erzeugen.
-* [StepUp Wandler](https://www.amazon.de/gp/product/B01L1UUMQY/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1)
+#### USV Modul 
+Es besteht die Option ein USV (unterbrechungsfreie Spannungsversorgung) Modul einzusetzen, damit bei einem möglichen Spannungsausfall ein Alarm ausgelösst, oder z.B. eine Nachricht verschickt werden kann. 
+!!! Achtung !!! Da das USV Modul nur einen begrenzten Strom liefern kann muss man entsprehend vorsichtig sein wen nman weitere Komponennten direkt an den Raspberry anschließt. Otipmal für den Einsatz eines USV Moduls ist die Verwendung des Raspberry Zero da dieser eine geringere Strohmaufnahme hat.
+
+* [USV Modul](https://)
 
 #### Relaisboard
 
 * 1 x 8-Kanal Relais Modul Optokoppler 5VDC 230V  [Relaisboard](https://www.amazon.de/gp/product/B01LR87AOC/ref=oh_aui_detailpage_o01_s00?ie=UTF8&psc=1) (Amazon)
  Dieses Board das hier angeboten wird, passte bisher (speziell was die Printstiftleisten angeht) immer perfekt zur Steuerplatine und wird innerhalb 1-3 Tage geliefert. 
 * Da die originalen Relais von dem verlinktem Relaisboard in der Vergangenheit einigen Usern Probleme verursacht haben, haben wir mal gesucht und folgendes gefunden. Diese Relais sind laut Datenblatt primärseitig gleich und können auch von den Maßen her die originalen Relais auf der Platine ersetzen. Betrachtet man die Kontakte sind diese viel besser und können also einen höheren Strom schalten, daher hoffen wir die Probleme zumindest bei den kleine Kompressoren zu minimieren. Bei größeren Leistungen muss man z.B. ein entsprechendes Schütz einsetzen.
-* 8 x Printrelais 5V Spule - 17/20A Schaltstrom [8 Printrelais](https://www.voelkner.de/products/895637/AFE-Printrelais-5-V-DC-17-A-1-Wechsler-BRF-SS-105D-1-St..html) (Voelkner)
+* 8 x Printrelais 5V Spule - 17/20A Schaltstrom TYP: BRF-SS-105D oder BRF-SS-105D [8 Printrelais](https://www.voelkner.de/products/895637/AFE-Printrelais-5-V-DC-17-A-1-Wechsler-BRF-SS-105D-1-St..html) (Voelkner)
+Leider sind beide Typen bei Völkner und Conrad oft ausverkaut... vielicht kriegt man sie auch in China...einfach mal versuchen.
 
 ***
 
