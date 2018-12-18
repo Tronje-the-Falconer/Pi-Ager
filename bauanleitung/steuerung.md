@@ -13,12 +13,12 @@ title: "Steuerung"
 
 #### Platine
 
-Die aktuelle Version der Platine: 
+##### Aktuelle Version der Platine: 
 
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/platine.jpg" alt="platine" width="800">
 
 
-Hier ist dargestellt wie die Platine in Grundsatz aufgebaut ist. 
+#### Grundsätzlicher Aufbeu: 
 Jeder fabig martkierte Bereich kann weggelassen werden, die nicht markierten Komponennten sind für die Grundfunktion des Pi-Agers erforderlich.
 
 
@@ -33,14 +33,17 @@ Hier kann z.B. der potentialfreie Türkontakt des Kühlschranks angeschlossen we
 Naja ... mal schauen welche Funktionen im Laufe der Zeit implementeirt werden
 
 ##### USV Modul:
-Esbesteht die Option ein USV (unterbrechungsfreie Spannungsversorgung) Modul einzusetzen, damit bei einem möglichen Spannungsausfall ein Alarm ausgelösst, oder  z.B. eine Nachricht verschickt werden kann.
+Es besteht die Option ein USV (unterbrechungsfreie Spannungsversorgung) Modul einzusetzen, damit bei einem möglichen Spannungsausfall ein Alarm ausgelösst, oder  z.B. eine Nachricht verschickt werden kann.
 In Abhängigkeit des eingesetzen Akkus läuft der Raspberry , die Temperatur und Feuchtemessung und der Alarmsummer eine entsprechende Zeit weiter.
 
 ##### Alarm Summer:
+Ab Version 1.7 wurde ein Alarmsummer integriert mit dessen Hilfe entsprechende Zustäden das Systems akustisch gemeldet werden können.
 
 ##### Waagen:
+Die Gewichtmessung ist auf der Basis des HX 711 Moduls aufgebaut. Wer das Gewicht des zu reifenden Fleisches über einen längeren Zeitraum beobachten möchte kann bis zu 2 Wägezellen an dem System beteiben.
 
 ##### Display:
+Mit hilfe des Dispays kann man die wichtigsten Funktionen vor Ort direkt am Kühlschrank bediehnen und beobachten.
 
 
 
