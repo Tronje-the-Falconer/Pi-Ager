@@ -60,15 +60,15 @@ Zur Steuerung der Pi-Agers ist auch ein Relaisboard notwendig. Da in der Anfäng
 
 #### !!!!  Der 230V Bereich des Relaisboards kann hier nicht betrachtet werden, diesen Teil muss jeder in Eigenverantwortung zusammen mit einer Elektrofachkraft planen und verdrahten !!!!
 
-Ursprungszustand:
+##### Ursprungszustand:
 
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/relaisboard1.JPG" alt="relaisboard1" width="800">
 
-Relais müssen ausgelötet werden:
+##### Relais müssen ausgelötet werden:
 
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/relaisboard2.JPG" alt="relaisboard2" width="800">
 
-die neuen, geeigneten Relais werden wieder eingelötet:
+##### Neue, geeignete Relais werden wieder eingelötet:
 
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/relaisboard3.JPG" alt="relaisboard3" width="800">
 
