@@ -118,10 +118,15 @@ Wer also selbst löten kann, baucht folgende Komponenten:
 * [HX711 Modul für Wägezellenunterstützung](https://www.amazon.de/dp/B01I37IWYM/ref=cm_sw_r_wa_api_8ol5zb1ZZFX0R)
 
 #### USV Modul 
-Es besteht die Option ein USV (unterbrechungsfreie Spannungsversorgung) Modul einzusetzen, damit bei einem möglichen Spannungsausfall ein Alarm ausgelösst, oder z.B. eine Nachricht verschickt werden kann. 
-!!! Achtung !!! Da das USV Modul nur einen begrenzten Strom liefern kann muss man entsprehend vorsichtig sein wen nman weitere Komponennten direkt an den Raspberry anschließt. Otipmal für den Einsatz eines USV Moduls ist die Verwendung des Raspberry Zero da dieser eine geringere Strohmaufnahme hat.
+Es besteht die Option ein USV (unterbrechungsfreie Spannungsversorgung) Modul einzusetzen, damit bei einem möglichen Spannungsausfall ein Alarm ausgelöst, oder z.B. eine Nachricht verschickt werden kann. 
+!!! Achtung !!! Da das USV Modul nur einen begrenzten Strom liefern kann, muss man entsprehend vorsichtig sein, wenn man weitere Komponennten direkt an den Raspberry anschließt. Otipmal für den Einsatz eines USV Moduls ist die Verwendung des Raspberry Zero da dieser eine geringere Strohmaufnahme hat.
 
-* [USV Modul](https://)
+* USV Modul 
+[Adafruit PowerBoost 1000C](https://www.exp-tech.de/module/stromspannung/6462/adafruit-powerboost-1000-charger-rechargeable-5v-lipo-usb-boost-at-1a-1000c?gclid=EAIaIQobChMIlN7npKWq3wIVA6aaCh1jEAeYEAQYBSABEgKsaPD_BwE)
+oder
+[Adafruit PowerBoost 1000C](https://eckstein-shop.de/Adafruit-PowerBoost-1000-Charger-Rechargeable-5V-Lipo-USB-Boost-1A-1000C)
+ 
+ Hier findet man weitere Informationen die beim einsatzt des Moduls beachtet werden müssen: [ADAFRUIT](https://www.adafruit.com/product/2465)
 
 #### Relaisboard
 
