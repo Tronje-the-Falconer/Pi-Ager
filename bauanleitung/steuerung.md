@@ -21,6 +21,19 @@ Jeder fabig martkierte Bereich kann weggelassen werden, die nicht markierten Kom
 
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/platine_aufteilung.jpg" alt="platine_aufteilung" width="800">
 
+* NTC Temperatursensoren:
+Sollte man zusätzliche Temperaturmessungen (Fleischtemepratur, Umgebungstemperatur des Kühlschrenks, ...)benötigen, stehen hier 4 Messkanäle zur Verfügung. 
+
+* Externer Hardwareschalter:
+hier kann z.B. der potentialfreie Türkontakt des Kühlschranks angeschlossen werden mit hilfe dessen man z.B. das Licht einschalten kann sobald man die tür öffent. 
+... oder sobald die tür geöffnet wird , wird ein stiller Alarm ausgelößt ;-)
+Naja ... mal schauen welche Funktionen im Laufe der Zeit implementeirt werden
+
+* USV Modul:
+
+
+
+
 Die einzelene Anschlüsse bzw. Jumpermöglichkeiten werden hier erklärt:
 
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/platine_uebersicht.jpg" alt="latine_aufteilung" width="800">
