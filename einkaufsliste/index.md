@@ -126,7 +126,7 @@ Es besteht die Option ein USV (unterbrechungsfreie Spannungsversorgung) Modul ei
 oder
 [Adafruit PowerBoost 1000C](https://eckstein-shop.de/Adafruit-PowerBoost-1000-Charger-Rechargeable-5V-Lipo-USB-Boost-1A-1000C)
  
- Hier findet man weitere Informationen die beim einsatzt des Moduls beachtet werden müssen: [ADAFRUIT](https://www.adafruit.com/product/2465)
+ Hier findet man weitere Informationen, die beim Einsatzt des Moduls beachtet werden müssen: [ADAFRUIT](https://www.adafruit.com/product/2465)
 
 #### Relaisboard
 
