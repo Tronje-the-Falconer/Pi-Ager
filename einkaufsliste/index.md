@@ -135,7 +135,7 @@ oder
 * Da die originalen Relais von dem verlinktem Relaisboard in der Vergangenheit einigen Usern Probleme verursacht haben, haben wir mal gesucht und folgendes gefunden. Diese Relais sind laut Datenblatt primärseitig gleich und können auch von den Maßen her die originalen Relais auf der Platine ersetzen. Betrachtet man die Kontakte sind diese viel besser und können also einen höheren Strom schalten, daher hoffen wir die Probleme zumindest bei den kleine Kompressoren zu minimieren. Bei größeren Leistungen muss man z.B. ein entsprechendes Schütz einsetzen.
 * 8 x Printrelais 5V Spule - 17/20A Schaltstrom TYP: BRF-SS-105D oder BRF-SS-105D [8 Printrelais](https://www.voelkner.de/products/895637/AFE-Printrelais-5-V-DC-17-A-1-Wechsler-BRF-SS-105D-1-St..html) (Voelkner)
 Leider sind beide Typen bei Völkner und Conrad oft ausverkaut... vielicht kriegt man sie auch in China...einfach mal versuchen.
-
+* ACHTUNG es gibt unterschiedliche Boards, das richtige (bei dem genug Plaz ist um die Relais auszutauschen= hat die Maße: 138x55x17 mm. Die mit den Maßen 134x52x17 sind nicht fuer den Realaistausch geeigent.
 ***
 
 ### Hardware
