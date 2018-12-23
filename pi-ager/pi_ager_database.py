@@ -33,10 +33,38 @@ def open_database():
     global cursor
     global connection
     rows = None
-    connection = sqlite3.connect(pi_ager_paths.sqlite3_file)
+    """
+    Changed due to database locked errors
+        -removed: connection = sqlite3.connect(pi_ager_paths.sqlite3_file)
+        
+        -added timeout = 5 (five seconds)
+        -enabled shared cache
+        -set isolation level to None
+        -set journal mode WAL
+    
+    See also
+    https://docs.python.org/2/library/sqlite3.html#sqlite3.Connection.isolation_level
+    
+    http://charlesleifer.com/blog/going-fast-with-sqlite-and-python/
+    """
+    
+    #Enable shared chache
+    sqlite3.enable_shared_cache(True)
+    # Open database in autocommit mode by setting isolation_level to None.
+    connection = sqlite3.connect(pi_ager_paths.sqlite3_file, isolation_level=None, timeout = 10)
+    # Set journal mode to WAL (Write-Ahead Log)
+    connection.execute('pragma journal_mode=wal')
+    connection.execute('PRAGMA synchronous = OFF')
+    connection.execute('PRAGMA read_uncommitted = True')
+        
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
-
+    
+    """
+    cursor.execute('PRAGMA journal_mode = OFF')
+    cursor.execute('PRAGMA synchronous = OFF')
+    cursor.execute('PRAGMA read_uncommitted = True')
+    """
 def execute_query(command):
     """
     function for executing a SQL

@@ -24,7 +24,7 @@ import pi_ager_database
 import pi_ager_database_check
 import pi_revision
 from pi_ager_cl_alarm import cl_fact_alarm
-from pi_ager_cl_messenger import cl_fact_messenger
+from pi_ager_cl_messenger import cl_fact_logic_messenger
 
 global logger
 
@@ -58,7 +58,7 @@ except KeyboardInterrupt:
     pass
 
 except Exception as cx_error:
-    exception_known = cl_fact_messenger().get_instance(cx_error).send()
+    exception_known = cl_fact_logic_messenger().get_instance(cx_error).send()
     pass
 
 finally:

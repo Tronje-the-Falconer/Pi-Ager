@@ -21,7 +21,7 @@ import pi_ager_logging
 import pi_ager_gpio_config
 import pi_ager_organization
 from pi_ager_cl_alarm import cl_fact_alarm
-from pi_ager_cl_messenger import cl_fact_messenger
+from pi_ager_cl_messenger import cl_fact_logic_messenger
 
 global logger
 logger = pi_ager_logging.create_logger(__name__)
@@ -49,7 +49,7 @@ def autostart_loop():
             pi_ager_logging.check_website_logfile()
             time.sleep(5)
     except Exception as cx_error:
-        cl_fact_messenger().get_instance(cx_error).send()
+        cl_fact_logic_messenger().get_instance(cx_error).send()
             
 def get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count):
     """
@@ -57,8 +57,9 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     """
     global logger
     global sensor_humidity_big
-    global sensor_temperature_big
+    global sensor_temperature_big 
     
+       
     try:
         if pi_ager_init.sensorname == 'DHT11' or pi_ager_init.sensorname == 'DHT22':
             sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_names.gpio_sensor_data)
@@ -77,7 +78,9 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
                 logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big))
             #except SHT1xError:
-            except pi_sht1x.sht1x.SHT1xError:
+            except pi_sht1x.sht1x.SHT1xError as cx_error:
+                
+                
                 if sht_exception_count < 10:
                     countup_values = countup('sht_exception', sht_exception_count)
                     logstring = countup_values['logstring']
@@ -86,9 +89,9 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                     time.sleep(1)
                     recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
                     return recursion
-                else:
-                    pass
-    
+                #Create factory for messanger, get from factory the instance of the messenger, send messages in one line
+                exception_known = cl_fact_logic_messenger().get_instance(cx_error).send()
+                    
         if sensor_humidity_big is not None and sensor_temperature_big is not None:
             sensor_temperature = round (sensor_temperature_big,2)
             sensor_humidity = round (sensor_humidity_big,2)
@@ -142,7 +145,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
         sensordata['sensor_temperature'] = sensor_temperature
         sensordata['sensor_humidity'] = sensor_humidity
     except Exception as cx_error:
-        cl_fact_messenger().get_instance(cx_error).send()
+        cl_fact_logic_messenger().get_instance(cx_error).send()
         
 
     return sensordata
@@ -200,7 +203,7 @@ def status_light_in_current_values_is_on():
         else:
             return False
     except Exception as cx_error:
-        cl_fact_messenger().get_instance(cx_error).send()
+        cl_fact_logic_messenger().get_instance(cx_error).send()
         
 def check_status_agingtable():
     """
@@ -221,7 +224,7 @@ def check_status_agingtable():
         if status_agingtable == 1 and process_agingtable_running == False:
             os.system('sudo /var/sudowebscript.sh startagingtable &')
     except Exception as cx_error:
-        cl_fact_messenger().get_instance(cx_error).send()
+        cl_fact_logic_messenger().get_instance(cx_error).send()
 def check_and_set_light():
     """
     manual light switch
@@ -238,7 +241,7 @@ def check_and_set_light():
         elif get_gpio_value(pi_ager_names.gpio_light) == pi_ager_names.relay_on and not status_light_in_current_values_is_on():
             switch_light(pi_ager_names.relay_off)
     except Exception as cx_error:
-        cl_fact_messenger().get_instance(cx_error).send()
+        cl_fact_logic_messenger().get_instance(cx_error).send()
 
 def status_value_has_changed():
     """
@@ -819,4 +822,4 @@ def doMainLoop():
         pi_ager_gpio_config.defaultGPIO()
  
     except Exception as cx_error:
-        cl_fact_messenger().get_instance(cx_error).send()    
+        cl_fact_logic_messenger().get_instance(cx_error).send()    

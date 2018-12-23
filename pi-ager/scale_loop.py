@@ -13,7 +13,7 @@ import pi_ager_database
 import pi_ager_names
 import pi_ager_logging
 from pi_ager_cl_alarm import cl_fact_alarm
-from pi_ager_cl_messenger import cl_fact_messenger
+from pi_ager_cl_messenger import cl_fact_logic_messenger
 from statistics import mean as pi_mean, stdev as pi_stdev, pstdev as pi_pstdev, median_low as pi_median_low
 
 
@@ -355,7 +355,7 @@ def doScaleLoop():
                     scale_measures(scale2, scale2_measuring_endtime, pi_ager_names.data_scale2_table, saving_period_scale2, pi_ager_names.status_tara_scale2_key, pi_ager_names.calibrate_scale2_key, offset_scale2, pi_ager_names.settings_scale2_table)
                 
         except Exception as cx_error:
-            cl_fact_messenger().get_instance(cx_error).send()
+            cl_fact_logic_messenger().get_instance(cx_error).send()
             pass
 
         time.sleep(2)

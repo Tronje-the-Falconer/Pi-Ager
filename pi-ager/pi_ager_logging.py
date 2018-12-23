@@ -80,12 +80,14 @@ def create_logger(pythonfile):
     
     return logger
 def me():
+    """
+    Returns the logsting for logging in every method for the current code line (how i am)
+    """
     prev_frame = inspect.currentframe().f_back
-    #current_frame = inspect.currentframe()
     the_class  = prev_frame.f_locals["self"].__class__
     the_method = prev_frame.f_code.co_name
     the_line   = prev_frame.f_code.co_firstlineno
-    #logger.info("Line " + str(the_line) + str(the_class) + str(the_method))
+    
     return("Line " + str(the_line) + str(the_class) + str(the_method))    
             
 logger = create_logger(__name__)

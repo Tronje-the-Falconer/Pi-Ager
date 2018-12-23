@@ -13,7 +13,7 @@ import pi_ager_database
 import pi_ager_names
 import pi_ager_logging 
 from pi_ager_cl_alarm import cl_fact_alarm
-from pi_ager_cl_messenger import cl_fact_messenger
+from pi_ager_cl_messenger import cl_fact_logic_messenger
 
 exception_known = True
 
@@ -39,7 +39,7 @@ except Exception as cx_error:
     #cl_fact_alarm().get_instance().execute()
     
     #Create factory for messanger, get from factory the instance of the messenger, send messages in one line
-    exception_known = cl_fact_messenger().get_instance(cx_error).send()
+    exception_known = cl_fact_logic_messenger().get_instance(cx_error).send()
     pi_ager_database.write_current_value(pi_ager_names.calibrate_scale1_key,0)
     pi_ager_database.write_current_value(pi_ager_names.calibrate_scale2_key,0)
     pi_ager_database.write_current_value(pi_ager_names.calibrate_weight_key,0)
