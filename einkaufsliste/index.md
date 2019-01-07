@@ -99,8 +99,10 @@ Wer also selbst löten kann, baucht folgende Komponenten:
    * Komponenten die bei Reichelt nicht erhältlich sind:
        * Die 2,5mm SMD Klinkenbuchsen sind bei Reichelt leider nicht lieferbar, hier zwei Bezugsquellen:
        * 4 x 2,5 mm Klinkenbuchse (bevorzugte Variante) - [SJ 2523](https://www.mouser.de/ProductDetail/CUI/SJ-2523-SMT-TR/?qs=WyjlAZoYn50TRxpi%2fhdHvw==) (Mouser)
-      * 4 x 2,5 mm Klinkenbuchse (Alternative)  - [PJ-208B](https://de.aliexpress.com/item/4pcs-Jack-2-5mm-Headphone-Connector-Four-Feet-Pin-90-Degrees-Horizontal-PJ-208B-Plug-in/32824757753.html?spm=a2g0x.search0104.3.23.P5CoqJ&ws_ab_test=searchweb0_0,searchweb201602_4_10152_10065_10151_10068_10344_10345_10547_10342_10343_10340_10341_10548_10193_10194_10541_10304_10307_5640015_10060_10302_10155_10154_10056_10055_10539_10538_5370015_10537_10536_10059_10534_10533_100031_10103_10102_10107_10142_10320_10321_10322_10084_10083_10177_5590015_10180_10312_10313_10184_10314_10319_10073_10186-10177,searchweb201603_25,ppcSwitch_2&btsid=afbf842f-30b3-4e04-8c5d-bac28ed8b314&algo_expid=2f4931fc-1f23-44bc-8b62-97f103c81388-3&algo_pvid=2f4931fc-1f23-44bc-8b62-97f103c81388) (Ali)
-(Achtung: diese Buchsen müssen noch getestet werden) 
+       * 3 x 2A Sicherung [MINISMDC200F-2 ](https://www.mouser.de/ProductDetail/Littelfuse/MINISMDC200F-2?qs=sGAEpiMZZMsxR%252bBXi4wRUNXkmM90UIcXt9OjDxSw2bA%3d) (Mouser)
+       * 1 x 1,1A Sicherung [MINISMDC100F-2 ](https://www.mouser.de/ProductDetail/Littelfuse/MINISMDC100F-2?qs=sGAEpiMZZMsxR%252bBXi4wRUNXkmM90UIcXjShDHv3PYgE%3d) (Mouser)
+       Die Sicherungen findet man auch im China
+
 
  * (1) Anmerkung
  
