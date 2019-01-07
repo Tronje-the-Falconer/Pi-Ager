@@ -97,11 +97,11 @@ Wer also selbst löten kann, baucht folgende Komponenten:
 
  * (2) Anmerkung
    * Komponenten die bei Reichelt nicht erhältlich sind:
-       * Die 2,5mm SMD Klinkenbuchsen sind bei Reichelt leider nicht lieferbar, hier zwei Bezugsquellen:
+    * Die 2,5mm SMD Klinkenbuchsen sind bei Reichelt leider nicht lieferbar, hier zwei Bezugsquellen:
        * 4 x 2,5 mm Klinkenbuchse (bevorzugte Variante) - [SJ 2523](https://www.mouser.de/ProductDetail/CUI/SJ-2523-SMT-TR/?qs=WyjlAZoYn50TRxpi%2fhdHvw==) (Mouser)
        * 3 x 2A Sicherung [MINISMDC200F-2 ](https://www.mouser.de/ProductDetail/Littelfuse/MINISMDC200F-2?qs=sGAEpiMZZMsxR%252bBXi4wRUNXkmM90UIcXt9OjDxSw2bA%3d) (Mouser)
        * 1 x 1,1A Sicherung [MINISMDC100F-2 ](https://www.mouser.de/ProductDetail/Littelfuse/MINISMDC100F-2?qs=sGAEpiMZZMsxR%252bBXi4wRUNXkmM90UIcXjShDHv3PYgE%3d) (Mouser)
-       Die Sicherungen findet man auch im China
+       * Die Sicherungen findet man auch im China (ALiExpress)
 
 
  * (1) Anmerkung
