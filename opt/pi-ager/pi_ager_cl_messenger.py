@@ -23,7 +23,6 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
         
-        
         self.cx_error  = cx_error
         self.logic_alarm = cl_fact_logic_alarm().get_instance()
         self.logic_email = cl_fact_logic_email().get_instance()
