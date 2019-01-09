@@ -19,19 +19,7 @@ class cl_logic_email:
         logger.debug(pi_ager_logging.me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
-        """
-        Read email setting from the database
-        """
-        self.server = 'smtp.1und1.de'
-        self.user      = 'claus@fischnet.de'
-        self.password  = 's3vEIV1u'
-        self.STARTTLS  = True
-        self.from_mail = 'messenger@fischnet.de'
         
-        """
-        Read email reciepient's from the database
-        """
-        self.to_mail = "claus@fischnet.de"
         
     def execute(self, cx_error_mail, alarm_message, alarm_subject):
         logger.debug(pi_ager_logging.me())
