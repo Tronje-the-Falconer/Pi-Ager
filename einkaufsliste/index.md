@@ -54,6 +54,8 @@ Wer also selbst löten kann, baucht folgende Komponenten:
     * 2 x Buchsenleisten 2,54 mm, 1X10, gerade - [MPE 094-1-010](https://www.reichelt.de/buchsenleisten-2-54-mm-1x10-gerade-mpe-094-1-010-p119918.html?) (Reichelt EKL)
     * 2 x Buchsenl. 1x20 gerade für Raspberry Zero [BL 1X20G8 2,54](https://www.reichelt.de/20pol-buchsenleiste-gerade-rm-2-54-h-8-5mm-bl-1x20g8-2-54-p51827.html?)  (Reichelt EKL)
     
+    * Option - Pufferung Spannungversorgung Sensor (auf Hauptplatine):
+    * 1 x SMD Kondenator G1206 - 100µF 6,3V [X5R-G1206 100/6](https://www.reichelt.de/smd-vielschichtkondensator-g1206-100-f-6-3v-x5r-g1206-100-6-p89744.html?) (Reichelt EKL)
     
   * Anschluss Komponenten für die Pi-Ager Platine (empfohlene Variante) Alternative siehe untere Auflistung Steckerklemmen (siehe Anmerkung 1) 
   
@@ -114,6 +116,12 @@ Wer also selbst löten kann, baucht folgende Komponenten:
        * 3 x Anschlussklemmensystem 2-pol RM5,08 - [AKL 249-02](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-02/3/index.html?ACTION=3&LA=517&ARTICLE=36686&GROUPID=7543&trstct=lsbght_sldr::36693) (Reichelt - nicht im Warenkorb enthalten)
        * 1 x Anschlussklemmensystem 4-pol RM5,08 - [AKL 249-04](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-04/3/index.html?ACTION=3&LA=517&ARTICLE=36688&GROUPID=7543&trstct=lsbght_sldr::36703) (Reichelt - nicht im Warenkorb enthalten)
        * 3 x Anschlussklemmensystem 5-pol RM5,08 - [AKL 249-05](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-05/3/index.html?ACTION=3&LA=517&ARTICLE=36689&GROUPID=7543&trstct=lsbght_sldr::36696) (Reichelt - nicht im Warenkorb enthalten) 
+
+#### Sensor Platine
+
+      * 2 x Widerstand 10,0K-  [METALL 10,0K](https://www.reichelt.de/widerstand-metallschicht-10-0-kohm-0207-0-6-w-1-metall-10-0k-p11449.html?) (Reichelt EKL)
+      * Option - Pufferung Spannungsversorgung Sensor (auf Sensorplatine):
+      * 1 x SMD Kondenator G1206 - 100µF 6,3V [X5R-G1206 100/6](https://www.reichelt.de/smd-vielschichtkondensator-g1206-100-f-6-3v-x5r-g1206-100-6-p89744.html?) (Reichelt EKL)
 
 #### Waagen Module
  
