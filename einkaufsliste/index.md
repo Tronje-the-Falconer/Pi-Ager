@@ -120,7 +120,7 @@ Wer also selbst löten kann, baucht folgende Komponenten:
 #### Sensor Platine
 
 * Bauteile für die Sensorplatine:
-    * 2 x Widerstand 10,0K-[METALL 10,0K](https://www.reichelt.de/widerstand-metallschicht-10-0-kohm-0207-0-6-w-1-metall-10-0k-p11449.html?) (Reichelt EKL)
+    * 2 x Widerstand - 10,0K [METALL 10,0K](https://www.reichelt.de/widerstand-metallschicht-10-0-kohm-0207-0-6-w-1-metall-10-0k-p11449.html?) (Reichelt EKL)
     * Option - Pufferung Spannungsversorgung Sensor (auf Sensorplatine):
     * 1 x SMD Kondenator G1206 - 100µF 6,3V [X5R-G1206 100/6](https://www.reichelt.de/smd-vielschichtkondensator-g1206-100-f-6-3v-x5r-g1206-100-6-p89744.html?) (Reichelt EKL)
 
