@@ -141,7 +141,11 @@ oder
 
 #### Relaisboard
 
-* 1 x 8-Kanal Relais Modul Optokoppler 5VDC 230V  [Relaisboard](https://www.amazon.de/dp/B07D8TMSKT/ref=cm_sw_r_cp_api_omxgCb87PNS06) (Amazon)
+* 1 x 8-Kanal Relais Modul Optokoppler 5VDC 230V  [Relaisboard]() (Amazon)
+oder:  [Relaisboard](https://www.amazon.de/dp/B07D8TMSKT/ref=cm_sw_r_cp_api_omxgCb87PNS06) (Amazon)
+
+AptoFun 8 Kanaele Relais-Board-Modul für Arduino Raspberry Pi ARM AVR DSP PIC (8 Channels) https://www.amazon.de/dp/B01I41B8H0/ref=cm_sw_r_cp_api_i_fMhqCbT1K5E3Qhttps://www.amazon.de/dp/B01I41B8H0/ref=cm_sw_r_cp_api_i_fMhqCbT1K5E3Q
+
  Dieses Board das hier angeboten wird, passte bisher (speziell was die Printstiftleisten angeht) immer perfekt zur Steuerplatine und wird innerhalb 1-3 Tage geliefert. 
 * Da die originalen Relais von dem verlinktem Relaisboard in der Vergangenheit einigen Usern Probleme verursacht haben, haben wir mal gesucht und folgendes gefunden. Diese Relais sind laut Datenblatt primärseitig gleich und können auch von den Maßen her die originalen Relais auf der Platine ersetzen. Betrachtet man die Kontakte sind diese viel besser und können also einen höheren Strom schalten, daher hoffen wir die Probleme zumindest bei den kleine Kompressoren zu minimieren. Bei größeren Leistungen muss man z.B. ein entsprechendes Schütz einsetzen.
 * 8 x Printrelais 5V Spule - 17/20A Schaltstrom TYP: BRF-SS-105D oder BRF-SS-105D [8 Printrelais](https://www.voelkner.de/products/895637/AFE-Printrelais-5-V-DC-17-A-1-Wechsler-BRF-SS-105D-1-St..html) (Voelkner)
@@ -220,7 +224,7 @@ Leider sind beide Typen bei Völkner und Conrad oft ausverkaut... vielicht krieg
 * [Adapter von USB micro B auf USB A Buchse](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1) (sofern Pi Zero oder Pi Zero W gewählt wurde) (Amazon)
   * [USB WLAN-Stick](https://www.voelkner.de/products/213356/EDIMAX-WLAN-Stick-N150-Nano-Ew-7811un.html?frm=ffs__EDIMAX%20EW-7811UN) (Voelkner)
   * [pi Buchsenleiste](https://www.voelkner.de/products/770924/Econ-Connect-Buchsenleiste-Standard-Anzahl-Reihen-2-Polzahl-je-Reihe-20-BL20-2G8-1-St..html)
-  * [Metallschicht-Widerstand 10kOhm](https://www.voelkner.de/products/876301/Yageo-Metallschicht-Widerstand-10-k-axial-bedrahtet-0207-0.6-W-MF0207FTE52-10K-1-St..html)
+  * [Metallschicht-Widerstand 10kOhm](https://www.voelkner.de/products/876301/Yageo-Metallschicht-Widerstand-10-k-axioal-bedrahtet-0207-0.6-W-MF0207FTE52-10K-1-St..html)
   * [Metallschicht-Widerstand 1kOhm](https://www.voelkner.de/products/876338/Yageo-Metallschicht-Widerstand-1-k-axial-bedrahtet-0207-0.6-W-MF0207FTE52-1K-1-St..html)
   * 3x [Steckerbuchse 2 polig](https://www.voelkner.de/products/46498/Grundgehaeuse-Mstb-2-5-2-G-5-08.html)
   * 1x [Steckerbuchse 4 polig](https://www.voelkner.de/products/46510/Grundgehaeuse-Mstb-2-5-4-G-5-08.html)
