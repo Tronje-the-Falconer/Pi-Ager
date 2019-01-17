@@ -33,7 +33,7 @@ Wenn jemand fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möc
 * [microSDHC Karte](https://www.reichelt.de/microsdhc-speicherkarte-16gb-sandisk-ultra-sdsquar016ggn6ma-p214843.html?r=1) (min. 8GB)
 * [USB Netzteil 5V / mind. 4A z.B.](https://www.reichelt.de/Netzteile-Festspannung/MW-GST40A05/3/index.html?ACTION=3&LA=2&ARTICLE=171043&GROUPID=4950&artnr=MW+GST40A05&SEARCH=%252A) (Reichelt)
 
-#### Pi-Ager Platine
+#### Pi-Ager Platine (Hw. Version 2.2)
 
 Die Steuerplatine für den Reifeschrank kann man über das GSV Forum beziehen.
 Die Platine ist grundsätzlich als unbestückt Platine erhältlich. Für Leute die etwas Probleme mit dem Löten haben, ist es meistens möglich auch eine bestückte Version zu bekommen, da dieses Projekt ein Hobby ist und wir alle dieses Hobby in unserer Freizeit betreiben kann es bei der bestückten Version zu entsprechenden Wartezeiten kommen.
