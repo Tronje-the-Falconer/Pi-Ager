@@ -12,7 +12,7 @@ import hx711
 import pi_ager_database
 import pi_ager_names
 import pi_ager_logging
-from pi_ager_cl_alarm import cl_fact_alarm
+from pi_ager_cl_alarm import cl_fact_logic_alarm
 from pi_ager_cl_messenger import cl_fact_logic_messenger
 from statistics import mean as pi_mean, stdev as pi_stdev, pstdev as pi_pstdev, median_low as pi_median_low
 
@@ -262,7 +262,7 @@ def doScaleLoop():
     scale mainloop
     """
     global logger
-    logger.debug('doScaleLoop()')   
+       
     logger.debug(__name__)
     
     scale1_setting_rows = pi_ager_database.get_scale_settings_from_table(pi_ager_names.settings_scale1_table)
@@ -270,10 +270,6 @@ def doScaleLoop():
 
     scale1_settings = get_scale_settings(scale1_setting_rows)
     scale2_settings = get_scale_settings(scale2_setting_rows)
-
-
-    
-
 
     while True:
         try:
@@ -355,7 +351,7 @@ def doScaleLoop():
                     scale_measures(scale2, scale2_measuring_endtime, pi_ager_names.data_scale2_table, saving_period_scale2, pi_ager_names.status_tara_scale2_key, pi_ager_names.calibrate_scale2_key, offset_scale2, pi_ager_names.settings_scale2_table)
                 
         except Exception as cx_error:
-            cl_fact_logic_messenger().get_instance(cx_error).send()
+            cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
             pass
 
         time.sleep(2)

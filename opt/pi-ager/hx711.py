@@ -79,7 +79,10 @@ class HX711:
 
     def getWeight(self):
         value = self.getValue()
-        value /= self.REFERENCE_UNIT
+        try:
+            value /= self.REFERENCE_UNIT
+        except ZeroDivisionError:
+            pass
         return value
 
     def tare(self, times=25):

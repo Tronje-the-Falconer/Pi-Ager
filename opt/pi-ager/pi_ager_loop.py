@@ -20,7 +20,8 @@ import pi_ager_logging
 import pi_ager_logging
 import pi_ager_gpio_config
 import pi_ager_organization
-from pi_ager_cl_alarm import cl_fact_alarm
+from time import ctime as convert
+from pi_ager_cl_alarm import cl_fact_logic_alarm
 from pi_ager_cl_messenger import cl_fact_logic_messenger
 
 global logger
@@ -49,7 +50,7 @@ def autostart_loop():
             pi_ager_logging.check_website_logfile()
             time.sleep(5)
     except Exception as cx_error:
-        cl_fact_logic_messenger().get_instance(cx_error).send()
+        cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
             
 def get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count):
     """
@@ -59,7 +60,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     global sensor_humidity_big
     global sensor_temperature_big 
     
-       
+    logger.debug("sensorname: " + str(pi_ager_init.sensorname))
     try:
         if pi_ager_init.sensorname == 'DHT11' or pi_ager_init.sensorname == 'DHT22':
             sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_names.gpio_sensor_data)
@@ -90,7 +91,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                     recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
                     return recursion
                 #Create factory for messanger, get from factory the instance of the messenger, send messages in one line
-                exception_known = cl_fact_logic_messenger().get_instance(cx_error).send()
+                exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
                     
         if sensor_humidity_big is not None and sensor_temperature_big is not None:
             sensor_temperature = round (sensor_temperature_big,2)
@@ -145,8 +146,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
         sensordata['sensor_temperature'] = sensor_temperature
         sensordata['sensor_humidity'] = sensor_humidity
     except Exception as cx_error:
-        cl_fact_logic_messenger().get_instance(cx_error).send()
-        
+        cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
 
     return sensordata
     
@@ -224,7 +224,7 @@ def check_status_agingtable():
         if status_agingtable == 1 and process_agingtable_running == False:
             os.system('sudo /var/sudowebscript.sh startagingtable &')
     except Exception as cx_error:
-        cl_fact_logic_messenger().get_instance(cx_error).send()
+        cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
 def check_and_set_light():
     """
     manual light switch
@@ -241,7 +241,7 @@ def check_and_set_light():
         elif get_gpio_value(pi_ager_names.gpio_light) == pi_ager_names.relay_on and not status_light_in_current_values_is_on():
             switch_light(pi_ager_names.relay_off)
     except Exception as cx_error:
-        cl_fact_logic_messenger().get_instance(cx_error).send()
+        cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
 
 def status_value_has_changed():
     """
@@ -341,7 +341,8 @@ def doMainLoop():
             sensordata = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
             sensor_temperature = sensordata['sensor_temperature']
             sensor_humidity = sensordata['sensor_humidity']
-    
+            logger.debug("sensor_temperature = " + str(sensor_temperature))
+            logger.debug("sensor_humidity    = " + str(sensor_humidity))
             # Prüfen, ob Sensordaten empfangen wurden und falls nicht, auf Notfallmodus wechseln
             if sensor_temperature != None and sensor_humidity != None:
                 count_continuing_emergency_loops = 0
@@ -443,6 +444,7 @@ def doMainLoop():
                     # logger.info(logstring)
                 
                 if uv_modus == 1:                            # Modus 1 = Periode/Dauer
+                    logstring = logstring + ' \n ' +  _('modus uv-light') + ': ' + _('on')
                     if uv_period == 0:                      # gleich 0 ist an,  Dauer-Timer
                         status_uv = True
                     if uv_duration == 0:                        # gleich 0 ist aus, kein Timer
@@ -455,15 +457,17 @@ def doMainLoop():
                             status_uv = True                     # UV-Licht an
                             logstring = logstring + ' \n ' +  _('uv-light timer active') + ' (' + _('uv-light on') +')'
                             # logger.info(logstring)
-                            logger.debug('UV-Licht Startzeit: ' + str(pi_ager_init.uv_starttime))
-                            logger.debug('UV-Licht Stoppzeit: ' + str(pi_ager_init.uv_stoptime))
+                            logger.debug('UV-Licht Startzeit: ' + convert(pi_ager_init.uv_starttime))
+                            logger.debug('UV-Licht Stoppzeit: ' + convert(pi_ager_init.uv_stoptime))
+                            #logger.debug('UV-Licht Startzeit: ' + pi_ager_init.uv_starttime.strftime('%d %B %Y %H:%M:%S'))
+                            #logger.debug('UV-Licht Stoppzeit: ' + pi_ager_init.uv_stoptime.strftime('%Y-%m-%d %H:%M:%S'))
                             logger.debug('UV-Licht duration: ' + str(uv_duration))
                         else: 
                             status_uv = False                      # UV-Licht aus
                             logstring = logstring + ' \n ' +  _('uv-light timer active') + ' (' + _('uv-light off') +')'
                             # logger.info(logstring)
-                            logger.debug('UV-Licht Stoppzeit: ' + str(pi_ager_init.uv_stoptime))
-                            logger.debug('UV-Licht Startzeit: ' + str(pi_ager_init.uv_starttime))
+                            logger.debug('UV-Licht Stoppzeit: ' + convert(pi_ager_init.uv_stoptime))
+                            logger.debug('UV-Licht Startzeit: ' + convert(pi_ager_init.uv_starttime))
                             logger.debug('UV-Licht period: ' + str(uv_period))
     
                         if current_time > pi_ager_init.uv_stoptime:
@@ -822,4 +826,4 @@ def doMainLoop():
         pi_ager_gpio_config.defaultGPIO()
  
     except Exception as cx_error:
-        cl_fact_logic_messenger().get_instance(cx_error).send()    
+       cl_fact_logic_messenger().get_instance().handle_exception(cx_error)

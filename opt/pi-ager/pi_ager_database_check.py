@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-# -*- coding: iso-8859-1 -*-
+# -*- coding: utf-8 -*-
 """
     database check
-    
-     check the database for correct structure
+    check the database for correct structure
 """
 # Importieren der Module
 import pi_ager_names
@@ -137,7 +136,7 @@ def check_table_contents():
     """
     for table in pi_ager_names.key_value_tables:
         for key in pi_ager_names.table_keys[table]:
-            # Prüfen, ob key fehlt
+            # PrÃ¼fen, ob key fehlt
             if not pi_ager_database.key_exists_in_table(key, table):
                 default_value_key = table + '_' + key
                 if default_value_key in pi_ager_names.default_values.keys():
@@ -152,15 +151,15 @@ def check_and_update_database():
     """
     checking the entire database, main function
     """
-    #Tabellen prüfen und ergänzen
+    #Tabellen prÃ¼fen und ergÃ¤nzen
     missing_key_value_tables = get_missing_tables(pi_ager_names.key_value_tables)
     add_tables(missing_key_value_tables, True)
     missing_id_value_tables = get_missing_tables(pi_ager_names.id_value_tables)
     add_tables(missing_id_value_tables, False)
     
-    #Spalten prüfen und ergänzen
+    #Spalten prÃ¼fen und ergÃ¤nzen
     check_and_repair_key_value_table_columns(pi_ager_names.key_value_tables)
     check_and_repair_id_value_table_columns(pi_ager_names.id_value_tables)
     
-    #Tabelleninhalte prüfen und ergänzen
+    #Tabelleninhalte prÃ¼fen und ergÃ¤nzen
     check_table_contents()

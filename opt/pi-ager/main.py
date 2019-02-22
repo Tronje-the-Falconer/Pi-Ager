@@ -23,7 +23,7 @@ import pi_ager_names
 import pi_ager_database
 import pi_ager_database_check
 import pi_revision
-from pi_ager_cl_alarm import cl_fact_alarm
+from pi_ager_cl_alarm import cl_fact_logic_alarm
 from pi_ager_cl_messenger import cl_fact_logic_messenger
 
 global logger
@@ -48,7 +48,8 @@ os.system('sudo /var/sudowebscript.sh startscale &')
 logger.debug('scale restart done')
 
 exception_known = True
-
+# Send a start message
+cl_fact_logic_messenger().get_instance().send('Pi-Ager Start', 'Pi-Ager was started')
 try:
     
     pi_ager_loop.autostart_loop()
@@ -58,7 +59,7 @@ except KeyboardInterrupt:
     pass
 
 except Exception as cx_error:
-    exception_known = cl_fact_logic_messenger().get_instance(cx_error).send()
+    exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
     pass
 
 finally:

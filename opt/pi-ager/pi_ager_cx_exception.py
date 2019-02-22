@@ -16,3 +16,10 @@ class cx_direct_call(Error):
         # Now for your custom code...
         self.errors = errors
 
+class cx_no_email_server_config_found(Error):
+    pass
+
+class cx_no_email_recipient_config_found(Error):
+    pass
+
+    

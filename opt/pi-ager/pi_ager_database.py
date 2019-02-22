@@ -1,9 +1,10 @@
 #!/usr/bin/python3
+# -*- coding: utf-8 -*-
 """
     database communication
-    
-    functions for communication with the database
+    functions for communication with the database
 """
+
 
 import sqlite3
 import time
