@@ -48,10 +48,10 @@ Wer also selbst löten kann, baucht folgende Komponenten:
   
     * 2 x JUMPER, schw. m. Grifflasche - [JUMPER 2,54 SW ](https://www.reichelt.de/kurzschlussbruecke-schw-m-grifflasche-jumper-2-54gl-sw-p9019.html?) (Reichelt EKL)
     * 2 x Stiftleisten 2,54 mm, 1X36, gerade- [MPE 087-1-036](https://www.reichelt.de/stiftleisten-2-54-mm-1x36-gerade-mpe-087-1-036-p119890.html?) (Reichelt EKL)
-    * 1 x Stiftleisten 2,54 mm, 2X20, gerade- [MPE 087-2-040](https://www.reichelt.de/20pol-buchsenleiste-gerade-rm-2-54-h-8-5mm-bl-1x20g8-2-54-p51827.html?) (Reichelt EKL)
+    * 1 x Stiftleisten 2,54 mm, 2X20, gerade- [MPE 087-2-040](https://www.reichelt.de/stiftleisten-2-54-mm-2x20-gerade-mpe-087-2-040-p119900.html?&trstct=pos_1) (Reichelt EKL)
     * 2 x Buchsenleisten 2,54 mm, 1X04, gerade - [MPE 094-1-004](https://www.reichelt.de/buchsenleisten-2-54-mm-1x04-gerade-mpe-094-1-004-p119913.html?) (Reichelt EKL)
     * 2 x Buchsenleisten 2,54 mm, 1X06, gerade - [MPE 094-1-006](https://www.reichelt.de/buchsenleisten-2-54-mm-1x06-gerade-mpe-094-1-006-p119915.html?) (Reichelt EKL)   
-    * 2 x Buchsenleisten 2,54 mm, 1X10, gerade - [MPE 094-1-010](https://www.reichelt.de/buchsenleisten-2-54-mm-1x10-gerade-mpe-094-1-010-p119918.html?) (Reichelt EKL)
+    * 1 x Buchsenleisten 2,54 mm, 1X10, gerade - [MPE 097-1-008](https://www.reichelt.de/buchsenleisten-2-54-mm-1x08-gerade-mpe-094-1-008-p119917.html?r=1) (Reichelt EKL)
     * 2 x Buchsenl. 1x20 gerade für Raspberry Zero [BL 1X20G8 2,54](https://www.reichelt.de/20pol-buchsenleiste-gerade-rm-2-54-h-8-5mm-bl-1x20g8-2-54-p51827.html?)  (Reichelt EKL)
     
     * Option - Pufferung Spannungversorgung Sensor (auf Hauptplatine):
@@ -74,8 +74,8 @@ Wer also selbst löten kann, baucht folgende Komponenten:
      * 1 x 12-bit A/D Converter -  [MCP 3204-CI/SL](https://www.reichelt.de/ICs-MCP-3-5-/MCP-3204-CI-SL/3/index.html?ACTION=3&LA=5&ARTICLE=90078&GROUPID=5472&artnr=MCP+3204-CI%2FSL) (Reichelt EKL) 
      * 4 x SMD-Widerstand 0805 47kOhm 0,1% - [SPR-0805 47,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/SPR-0805-47-0K/3/index.html?ACTION=3&LA=5&ARTICLE=123351&GROUPID=7971&artnr=SPR-0805+47%2C0K) (Reichelt EKL)
      * 4 x SMD-Widerstand 0805 1kOhm 1,0% - [RND 0805 1,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/RND-0805-1-1-0K/3/index.html?ACTION=3&LA=5&ARTICLE=183228&GROUPID=7971&artnr=RND+0805+1+1%2C0K) (Reichelt EKL)
-     * 2 x SMD-Kerko 0805 10nF - [X7R 0805 BF 10N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805-BF-10N/3/index.html?ACTION=3&LA=5&ARTICLE=194259&GROUPID=8048&artnr=X7R+0805+BF+10N) (Reichelt EKL)
-     * 6 x SMD-Kerko 0805 100nF - [X7R 0805 CF 100N](https://www.reichelt.de/Vielschicht-SMD-G0805/X7R-0805FCE-100N/3/index.html?ACTION=3&LA=20&GROUP=B3517&GROUPID=8048&ARTICLE=193840&START=0&SORT=artnr&OFFSET=16) (Reichelt EKL)
+     * 1 x SMD-Kerko 0805 10nF - [KEM C0G0805 10N](https://www.reichelt.de/vielschicht-kerko-10nf-50v-125-c-kem-c0g0805-10n-p207052.html?&trstct=pos_1) (Reichelt EKL)
+     * 6 x SMD-Kerko 0805 100nF - [KEM X7R0805 100N](https://www.reichelt.de/vielschicht-kerko-100nf-50v-125-c-kem-x7r0805-100n-p207073.html?&GROUP=B3517&START=0&SORT=artnr&OFFSET=16) (Reichelt EKL)
      * 2 x SMD-Kerko 0805 10µF - [KEM X5R0805 10U ](https://www.reichelt.de/Vielschicht-SMD-G0805/KEM-X5R0805-10U/3/index.html?ACTION=3&LA=5&ARTICLE=207089&GROUPID=8048&artnr=KEM+X5R0805+10U) (Reichelt EKL)
      * 1 x SMD-Widerstand 0805 0 Ohm 5% - [RND 0805 0](https://www.reichelt.de/smd-widerstand-0805-0-ohm-125-mw-5-rnd-0805-0-p183146.html?) (Reichelt EKL)     
      * (*2) Die Klinkenbuchsen: siehe Punkt "Komponenten die bei Reichelt nicht erhältlich sind"
