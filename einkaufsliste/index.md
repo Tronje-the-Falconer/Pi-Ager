@@ -51,7 +51,7 @@ Wer also selbst löten kann, baucht folgende Komponenten:
     * 1 x Stiftleisten 2,54 mm, 2X20, gerade- [MPE 087-2-040](https://www.reichelt.de/stiftleisten-2-54-mm-2x20-gerade-mpe-087-2-040-p119900.html?&trstct=pos_1) (Reichelt EKL)
     * 2 x Buchsenleisten 2,54 mm, 1X04, gerade - [MPE 094-1-004](https://www.reichelt.de/buchsenleisten-2-54-mm-1x04-gerade-mpe-094-1-004-p119913.html?) (Reichelt EKL)
     * 2 x Buchsenleisten 2,54 mm, 1X06, gerade - [MPE 094-1-006](https://www.reichelt.de/buchsenleisten-2-54-mm-1x06-gerade-mpe-094-1-006-p119915.html?) (Reichelt EKL)   
-    * 1 x Buchsenleisten 2,54 mm, 1X10, gerade - [MPE 097-1-008](https://www.reichelt.de/buchsenleisten-2-54-mm-1x08-gerade-mpe-094-1-008-p119917.html?r=1) (Reichelt EKL)
+    * 1 x Buchsenleisten 2,54 mm, 1X10, gerade - [MPE 094-1-008](https://www.reichelt.de/buchsenleisten-2-54-mm-1x08-gerade-mpe-094-1-008-p119917.html?r=1) (Reichelt EKL)
     * 2 x Buchsenl. 1x20 gerade für Raspberry Zero [BL 1X20G8 2,54](https://www.reichelt.de/20pol-buchsenleiste-gerade-rm-2-54-h-8-5mm-bl-1x20g8-2-54-p51827.html?)  (Reichelt EKL)
     
     * Option - Pufferung Spannungversorgung Sensor (auf Hauptplatine):
