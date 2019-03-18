@@ -792,7 +792,8 @@ def doMainLoop():
                 
                 # Messwerte in die RRD-Datei schreiben
                 # Schreiben der aktuellen Status-Werte
-                pi_ager_database.write_current(pi_ager_init.loopcounter, sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier)
+                pi_ager_database.write_current_sensordata(pi_ager_init.loopcounter, sensor_temperature, sensor_humidity)
+                pi_ager_database.write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier)
     
                 logger.debug('writing current values in database performed')
             

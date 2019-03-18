@@ -317,29 +317,27 @@ def get_status_uv_manual():
     status_uv_manual = get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_uv_manual_key)
     return status_uv_manual
     
-def write_current(loopnumber, sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier):
+def write_current_sensordata(loopnumber, sensor_temperature, sensor_humidity):
+    """
+    function for writing diagram-relevant sensor data
+    """
+    
+        save_loop = int(get_table_value(pi_ager_names.config_settings_table, pi_ager_names.save_temperature_humidity_loops_key))
+    
+    if loopnumber % save_loop == 0:   # schreibt für HaMa's Diagramme alle 150 Loops die Werte in die DB
+        open_database()
+        execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
+        execute_query('INSERT INTO ' + pi_ager_names.data_sensor_humidity_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_humidity) + ',' + str(get_current_time()) + ')')
+        close_database()
+
+def write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier):
     """
     function for writing the current values
     """
     
-    write_changed_values(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier)
-    
-    save_loop = int(get_table_value(pi_ager_names.config_settings_table, pi_ager_names.save_temperature_humidity_loops_key))
+    write_changed_values(status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, status_uv, status_light, status_humidifier, status_dehumidifier)
     
     open_database()
-
-    if loopnumber % save_loop == 0:   # schreibt alle 150 Loops die Werte in die DB
-        execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
-        execute_query('INSERT INTO ' + pi_ager_names.data_sensor_humidity_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_humidity) + ',' + str(get_current_time()) + ')')
-        # execute_query('INSERT INTO ' + pi_ager_names.status_heater_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_heater) + ',' + str(get_current_time()) + ')')
-        # execute_query('INSERT INTO ' + pi_ager_names.status_exhaust_air_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_exhaust_air) + ',' + str(get_current_time()) + ')')
-        # execute_query('INSERT INTO ' + pi_ager_names.status_cooling_compressor_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_cooling_compressor) + ',' + str(get_current_time()) + ')')
-        # execute_query('INSERT INTO ' + pi_ager_names.status_circulating_air_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_circulating_air) + ',' + str(get_current_time()) + ')')
-        # execute_query('INSERT INTO ' + pi_ager_names.status_uv_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_uv) + ',' + str(get_current_time()) + ')')
-        # execute_query('INSERT INTO ' + pi_ager_names.status_light_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_light) + ',' + str(get_current_time()) + ')')
-        # execute_query('INSERT INTO ' + pi_ager_names.status_humidifier_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_humidifier) + ',' + str(get_current_time()) + ')')
-        # execute_query('INSERT INTO ' + pi_ager_names.status_dehumidifier_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_dehumidifier) + ',' + str(get_current_time()) + ')')
-        
 
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(sensor_temperature) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.sensor_temperature_key + '"')
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_heater) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_heater_key + '"')
@@ -478,7 +476,7 @@ def write_config(sensortype, language, switch_on_cooling_compressor, switch_off_
 
     close_database()
     
-def write_changed_values(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier):
+def write_changed_values(status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, status_uv, status_light, status_humidifier, status_dehumidifier):
     """
     function for writing with modified sensor and status values
     """
@@ -490,8 +488,6 @@ def write_changed_values(sensor_temperature, status_heater, status_exhaust_air, 
     for current_row in current_value_rows:
         current_values[current_row[pi_ager_names.key_field]] = current_row[pi_ager_names.value_field]
     
-    # if sensor_temperature != current_values[pi_ager_names.sensor_temperature_key]:
-        # execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
     if status_heater != current_values[pi_ager_names.status_heater_key]:
         execute_query('INSERT INTO ' + pi_ager_names.status_heater_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_heater) + ',' + str(get_current_time()) + ')')
     if status_exhaust_air != current_values[pi_ager_names.status_exhaust_air_key]:
@@ -500,8 +496,6 @@ def write_changed_values(sensor_temperature, status_heater, status_exhaust_air, 
         execute_query('INSERT INTO ' + pi_ager_names.status_cooling_compressor_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_cooling_compressor) + ',' + str(get_current_time()) + ')')
     if status_circulating_air != current_values[pi_ager_names.status_circulating_air_key]:
         execute_query('INSERT INTO ' + pi_ager_names.status_circulating_air_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_circulating_air) + ',' + str(get_current_time()) + ')')
-    # if sensor_humidity != current_values[pi_ager_names.sensor_humidity_key]:
-        # execute_query('INSERT INTO ' + pi_ager_names.data_sensor_humidity_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_humidity) + ',' + str(get_current_time()) + ')')
     if status_uv != current_values[pi_ager_names.status_uv_key]:
         execute_query('INSERT INTO ' + pi_ager_names.status_uv_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(status_uv) + ',' + str(get_current_time()) + ')')
     if status_light != current_values[pi_ager_names.status_light_key]:
