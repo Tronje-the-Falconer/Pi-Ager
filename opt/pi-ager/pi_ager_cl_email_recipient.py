@@ -32,7 +32,10 @@ class cl_logic_email_recipient:
         logger.debug(pi_ager_logging.me())
         
         return(self.it_email_recipient)
-             
+    def write_data(self, it_table):
+        logger.debug(pi_ager_logging.me())
+        self.db_email_recipient.write_data_to_db(it_table)
+        pass
 
 class cl_db_email_recipient:
     __o_dirty = True
@@ -47,7 +50,12 @@ class cl_db_email_recipient:
     
     def build_select_statement(self):
         return('SELECT * FROM email_recipient WHERE active = "1" ')
-    
+    def build_insert_statement(self):
+        qmarks = ', '.join('?' * len(self.data))
+        cols = ', '.join(self.data.keys())
+        
+        query = "INSERT INTO %s (%s) VALUES (%s)" % (tablename, cols, qmarks)
+        return(query)
     def read_data_from_db(self):
         """
         Read from db
@@ -57,7 +65,13 @@ class cl_db_email_recipient:
         cl_db_email_recipient.__o_dirty = False
         
         return it_table
-        
+    
+    def write_data_to_db(selfs, it_table):
+        values = tuple(self.data.values())
+        database_config = cl_fact_database_config().get_instance()
+        it_table = database_config.write_data_to_db(self.build_insert_statement(), values)
+        cl_db_email_recipient.__o_dirty = False
+      
     
     def is_dirty(self):
         return(cl_db_messenger.__o_dirty)

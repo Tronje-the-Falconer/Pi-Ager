@@ -92,7 +92,19 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                     return recursion
                 #Create factory for messanger, get from factory the instance of the messenger, send messages in one line
                 exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
-                    
+        elif pi_ager_init.sensorname == 'SHT3x': #SH3x
+            try:
+                #Create factory for main sensor
+                fact_main_sensor = cl_fact_main_sensor()
+                #Get from factory the instance of the main sensor
+                main_sensor = fact_main_sensor.get_instance()
+                #Read now temperature of the main sensor
+                main_sensor.read_temperature()
+                #main_sensor.get_sensor_type()
+                sensor_temperature_big = main_sensor.get_current_temperature()
+                sensor_humidity_big    = 0        
+            except cx_i2c_sht_temperature_crc_error as cx_error:
+                pass  
         if sensor_humidity_big is not None and sensor_temperature_big is not None:
             sensor_temperature = round (sensor_temperature_big,2)
             sensor_humidity = round (sensor_humidity_big,2)

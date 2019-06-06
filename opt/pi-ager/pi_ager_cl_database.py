@@ -20,7 +20,12 @@ class cl_db_database_mysql:
         return it_table
 
 class cl_db_database_sqlite:
-    
+    def __init__(self):
+        #conn = sqlite3.connect(self.garden_db_path)
+        connection = sqlite3.connect(pi_ager_paths.sqlite3_file, isolation_level=None, timeout = 10)
+        # Need to allow write permissions by others
+        connection.row_factory = sqlite3.Row
+        self.cursor = connection.cursor()
     def read_data_from_db(self, i_select_statement):
         """
         Read from db
@@ -29,13 +34,9 @@ class cl_db_database_sqlite:
         
         # Builds a dict of dicts it_table from sqlite db
         it_table = {}
-        #conn = sqlite3.connect(self.garden_db_path)
-        connection = sqlite3.connect(pi_ager_paths.sqlite3_file, isolation_level=None, timeout = 10)
-        # Need to allow write permissions by others
-        connection.row_factory = sqlite3.Row
-        cursor = connection.cursor()
+
         logger.debug('Select statement = ' + i_select_statement)
-        query = cursor.execute(i_select_statement)
+        query = self.cursor.execute(i_select_statement)
         logger.debug('Select query = ' + str(query))
         #db_table = cursor.fetchall()
         #logger.debug('DB table =' + str(db_table))
@@ -48,6 +49,9 @@ class cl_db_database_sqlite:
         logger.debug('it table =' + str(it_table))
         return it_table
  
+    def write_data_to_db(self, i_insert_statment, values):
+        cursor.execute(i_insert_statment, values)
+        pass  
 
 class cl_fact_database_config(ABC):
     __o_instance = None

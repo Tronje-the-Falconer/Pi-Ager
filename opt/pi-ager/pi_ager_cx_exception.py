@@ -22,4 +22,9 @@ class cx_no_email_server_config_found(Error):
 class cx_no_email_recipient_config_found(Error):
     pass
 
+class cx_i2c_sht_temperature_crc_error(Error):
+    pass
+
+class cx_i2c_sht_humitity_crc_error(Error):
+    pass
     
