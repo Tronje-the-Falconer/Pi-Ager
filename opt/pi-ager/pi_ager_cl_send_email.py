@@ -88,6 +88,7 @@ class cl_logic_send_email:
         except SMTPException as cx_error:
             sendefehler = 'Error: unable to send email: {err}'.format(err=cx_error)
             logger.error(sendefehler)
+            
         except Exception as cx_error:
             #TODO err undefined!
             sendefehler = 'Error: unable to send email: {err}'.format(err=cx_error)
