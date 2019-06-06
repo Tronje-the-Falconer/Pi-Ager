@@ -20,8 +20,7 @@ class cl_logic_send_email:
         logger.debug(pi_ager_logging.me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
-        
-        
+                
         """
         Get email-server settings from the server class
         """
