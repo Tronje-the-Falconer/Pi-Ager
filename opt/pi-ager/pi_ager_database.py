@@ -322,7 +322,7 @@ def write_current_sensordata(loopnumber, sensor_temperature, sensor_humidity):
     function for writing diagram-relevant sensor data
     """
     
-        save_loop = int(get_table_value(pi_ager_names.config_settings_table, pi_ager_names.save_temperature_humidity_loops_key))
+    save_loop = int(get_table_value(pi_ager_names.config_settings_table, pi_ager_names.save_temperature_humidity_loops_key))
     
     if loopnumber % save_loop == 0:   # schreibt für HaMa's Diagramme alle 150 Loops die Werte in die DB
         open_database()
