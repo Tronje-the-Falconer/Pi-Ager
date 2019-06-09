@@ -49,7 +49,12 @@ logger.debug('scale restart done')
 
 exception_known = True
 # Send a start message
-cl_fact_logic_messenger().get_instance().send('Pi-Ager Start', 'Pi-Ager was started')
+try:
+    cl_fact_logic_messenger().get_instance().send('Pi-Ager Start', 'Pi-Ager was started')
+except Exception as cx_error:
+    exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+    pass
+
 try:
     
     pi_ager_loop.autostart_loop()
