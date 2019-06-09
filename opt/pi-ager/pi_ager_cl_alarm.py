@@ -18,7 +18,7 @@ logger = pi_ager_logging.create_logger(__name__)
         
 class cl_logic_alarm:
     def __init__(self):
-        logger.info(pi_ager_logging.me())
+        logger.debug(pi_ager_logging.me())
    
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
@@ -34,14 +34,14 @@ class cl_logic_alarm:
         self.Low_time  = 1
         
     def set_alarm_type(self,DutyCycle, Frequency, replication, Sleep):
-        logger.info(pi_ager_logging.me())
+        logger.debig(pi_ager_logging.me())
         self.DutyCycle = DutyCycle
         self.Frequency = Frequency
         self.replication  = replication
         self.Sleep     = Sleep
 
     def execute_alarm(self):
-        logger.info(pi_ager_logging.me())
+        logger.debug(pi_ager_logging.me())
         for x in range(0, self.replication):
            gpio.output(self.alarm_gpio, True)
            sleep(self.High_time)
@@ -49,7 +49,7 @@ class cl_logic_alarm:
            sleep(self.Low_time)
 
     def execute_short(self, replication):
-        logger.info(pi_ager_logging.me())
+        logger.debug(pi_ager_logging.me())
         self.replication = replication
         self.Sleep    = 0.5
         self.High_time = 0.5
@@ -57,7 +57,7 @@ class cl_logic_alarm:
         self.execute_alarm()
            
     def execute_middle(self, replication):
-        logger.info(pi_ager_logging.me())
+        logger.debug(pi_ager_logging.me())
         self.replication = replication
         self.Sleep    = 0.5
         self.High_time = 1
@@ -65,7 +65,7 @@ class cl_logic_alarm:
         self.execute_alarm()
         
     def execute_long(self, replication):
-        logger.info(pi_ager_logging.me())
+        logger.debug(pi_ager_logging.me())
         self.replication = replication
         self.Sleep    = 0.5
         self.High_time = 2
