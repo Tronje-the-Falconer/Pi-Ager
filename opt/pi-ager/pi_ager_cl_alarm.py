@@ -9,8 +9,6 @@ from pi_ager_cx_exception import *
 
 import pi_ager_logging
 
-
-
 from pi_ager_cx_exception import *
 
 global logger
