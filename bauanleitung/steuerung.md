@@ -56,22 +56,12 @@ Mit Hilfe des Dispays kann man die wichtigsten Funktionen vor Ort direkt am Küh
 
 #### Relaisboard
 
-Zur Steuerung der Pi-Agers ist auch ein Relaisboard notwendig. Da in der Anfängen des Reifeschrankes von "kleben gebliebenen" Relaiskontakten berichtet wurde, wird empfohlen, die Eignung der eingesetzten Relais zum Schalten des entsprechenden Gerätes (Kompressor, Heizung, ...) von einer entsprechenden Elektrofachkraft zu prüfen. Sollten die originalen Relais vom gekauften Relaisboard für eure Aufgabe nicht geeigent sein kann man die Relais wie unten dragestellt austauschen oder z.B. ein entsprechendes Schütz dazwischen geschaltet werden.
+Zur Steuerung der Pi-Agers ist auch ein Relaisboard notwendig. Da in der Anfängen des Reifeschrankes von "kleben gebliebenen" Relaiskontakten berichtet wurde, wird empfohlen, die Eignung der eingesetzten Relais zum Schalten des entsprechenden Gerätes (Kompressor, Heizung, ...) von einer entsprechenden Elektrofachkraft zu prüfen. Sollten die originalen Relais vom gekauften Relaisboard für eure Aufgabe nicht geeigent sein, kann/muss man ein entsprechendes Schütz dazwischen geschaltet werden.
+
 
 
 #### !!!!  Der 230V Bereich des Relaisboards kann hier nicht betrachtet werden, diesen Teil muss jeder in Eigenverantwortung zusammen mit einer Elektrofachkraft planen und verdrahten !!!!
 
-##### Ursprungszustand:
-
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/relaisboard1.JPG" alt="relaisboard1" width="800">
-
-##### Relais müssen ausgelötet werden:
-
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/relaisboard2.JPG" alt="relaisboard2" width="800">
-
-##### Neue, geeignete Relais werden wieder eingelötet:
-
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/relaisboard3.JPG" alt="relaisboard3" width="800">
 
 ##### Relaisbeschriftung:
 
