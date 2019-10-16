@@ -15,6 +15,7 @@ import sys
  * I know we are slowing down the baurate from optimal, but it seems to be the most stable setting in my testing.
  * add another 0 to the above baudrate for max setting, ie dtparam=i2c1_baudrate=100000
 """
+
 import struct
 
 from pi_ager_cx_exception import *
