@@ -35,6 +35,7 @@
     $samples_scale2 = get_table_value($settings_scale2_table,$samples_key);
     $spikes_scale2 = get_table_value($settings_scale2_table,$spikes_key);
 
+    
     if ($sensortype == 1) {
         $sensorname = 'DHT11';
         $checked_sens_1 = 'checked="checked"';
