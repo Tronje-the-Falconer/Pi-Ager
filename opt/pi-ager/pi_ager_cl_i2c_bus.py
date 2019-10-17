@@ -11,7 +11,6 @@ import sys
  * sudo apt-get install i2c-tools
  *
  * on PI make sure below 2 commands are in /boot/config.txt
- *
  * dtparam=i2c_arm=on
  * dtparam=i2c1_baudrate=10000
  * I know we are slowing down the baurate from optimal, but it seems to be the most stable setting in my testing.
