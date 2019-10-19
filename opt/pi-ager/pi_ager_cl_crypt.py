@@ -1,10 +1,24 @@
+# -*- coding: utf-8 -*-
+
+"""This class is for encryt and decryt a string depending on the serial number of the Raspberry PI."""
+"""e.g. E-Mail password"""
+__author__ = "Claus Fischer"
+__copyright__ = "Copyright 2019, The Pi-Ager Project"
+__credits__ = ["Claus Fischer"]
+__license__ = "GPL"
+__version__ = "1.0.0"
+__maintainer__ = "Claus Fischer"
+__email__ = "DerBurgermeister@pi-ager.org"
+__status__ = "Production"
+
+import os
+import base64
+import keyring.backend
+
 from cryptography.fernet import Fernet
 from cryptography.hazmat.primitives.hashes import SHA256
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.backends import default_backend
-import base64
-import keyring.backend
-import os
 
 from abc import ABC
 import inspect

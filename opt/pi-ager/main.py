@@ -39,7 +39,8 @@ logger.info(pi_ager_names.logspacer)
 pi_revision.get_and_write_revision_in_database()
 
 pi_ager_init.setup_GPIO()
-pi_ager_init.set_sensortype()
+#pi_ager_init.set_sensortype()
+cl_fact_main_sensor_type().get_instance()._is_valid()
 pi_ager_init.set_system_starttime()
 
 os.system('sudo /var/sudowebscript.sh pkillscale &')

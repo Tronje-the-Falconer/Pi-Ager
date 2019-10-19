@@ -2,18 +2,28 @@ from abc import ABC
 import inspect
 
 from pi_ager_cx_exception import *
-        
+import pi_ager_logging
+
+global logger
+logger = pi_ager_logging.create_logger(__name__) 
+
+       
 class cl_main_sensor_type:
-    __SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "SHT85", "SHT3x", "DHT11", "DHT22"]
+    __SUPPORTED_MAIN_SENSOR_TYPES = {"DHT11": 1,
+                                     "DHT22": 2,
+                                     "SHT75": 3,
+                                     "SHT3x": 4,
+                                     "SHT85": 5}
     __NAME = 'Main_sensor'
 
     def __init__(self):
+        logger.debug(pi_ager_logging.me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
 #        if direct:
 #            raise cx_direct_call(self, "Please use factory class")
         try:
-            self._type = self._get_type_ui()
+            self.read_sensor_type()
         except Exception as original_error:
             raise original_error
 
@@ -22,30 +32,42 @@ class cl_main_sensor_type:
         
 
     def _get_type_ui(self):
-        self._type_ui = 'SHT75'
-        self._type = self._type_ui
+        logger.debug(pi_ager_logging.me())
         if self._is_valid() == False:
             raise cx_Sensor_not_defined(self.type_ui)
+        self._cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES.get(self._type, -1) 
+         
+    
         return(self._type)
     
     def _is_valid(self):
-        #print(self.get_supported_types())
-        #print(self._type)
-        if self._type in cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES:
+        logger.debug(pi_ager_logging.me())
+        if cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES.get(self._type, -1) != -1:
+#        if self._type in cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES:
             return(True)
         else:
             return(False)
             
         
-    def get_type(self):
+    def read_sensor_type(self):
+        logger.debug(pi_ager_logging.me())
         if self._is_valid() == False:
             raise cx_Sensor_not_defined(self._type_ui)        
+        self._type = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key)
+        self._type_ui = self._get_type_ui()
+        logger.debug("Sensor type is :", self._type_ui)    
+        return()
+    
+    def get_sensor_type(self):
+        logger.debug(pi_ager_logging.me())
         return(self._type)
     
     def get_name(self):
+        logger.debug(pi_ager_logging.me())
         return(cl_main_sensor_type.__NAME)
     
     def get_supported_types(self):
+        logger.debug(pi_ager_logging.me())
         print('[%s]' % ', '.join(map(str, cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES )))
    
 class th_main_sensor_type(cl_main_sensor_type):   

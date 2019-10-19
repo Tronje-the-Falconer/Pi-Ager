@@ -1,3 +1,16 @@
+# -*- coding: utf-8 -*-
+
+"""This class is for alarm notification."""
+
+__author__ = "Claus Fischer"
+__copyright__ = "Copyright 2019, The Pi-Ager Project"
+__credits__ = ["Claus Fischer"]
+__license__ = "GPL"
+__version__ = "1.0.0"
+__maintainer__ = "Claus Fischer"
+__email__ = "DerBurgermeister@pi-ager.org"
+__status__ = "Production"
+
 from abc import ABC
 import inspect
 import pi_ager_names
@@ -32,7 +45,7 @@ class cl_logic_alarm:
         self.Low_time  = 1
         
     def set_alarm_type(self,DutyCycle, Frequency, replication, Sleep):
-        logger.debig(pi_ager_logging.me())
+        logger.debug(pi_ager_logging.me())
         self.DutyCycle = DutyCycle
         self.Frequency = Frequency
         self.replication  = replication

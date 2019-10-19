@@ -1,9 +1,22 @@
-from abc import ABC, abstractmethod
+# -*- coding: utf-8 -*-
+
+"""This class is for the i2c bus"""
+
+__author__ = "Claus Fischer"
+__copyright__ = "Copyright 2019, The Pi-Ager Project"
+__credits__ = ["Claus Fischer"]
+__license__ = "GPL"
+__version__ = "1.0.0"
+__maintainer__ = "Claus Fischer"
+__email__ = "DerBurgermeister@pi-ager.org"
+__status__ = "Development"
+
 import inspect
 import time
-
 import smbus
 import sys
+
+from abc import ABC, abstractmethod
 
 """
 * Below is also a good one to have, but be careful i2cdump from the below cause the sht31 interface to become unstable for me

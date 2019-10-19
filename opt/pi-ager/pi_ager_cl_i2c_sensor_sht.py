@@ -1,7 +1,20 @@
-from abc import ABC, abstractmethod
+# -*- coding: utf-8 -*-
+
+"""This class is for the sensirion i2c sensors SHT3x and SHT85"""
+
+__author__ = "Claus Fischer"
+__copyright__ = "Copyright 2019, The Pi-Ager Project"
+__credits__ = ["Claus Fischer"]
+__license__ = "GPL"
+__version__ = "1.0.0"
+__maintainer__ = "Claus Fischer"
+__email__ = "DerBurgermeister@pi-ager.org"
+__status__ = "Development"
+
 import inspect
 import struct
 
+from abc import ABC, abstractmethod
 from pi_ager_cx_exception import *
 
 class cl_i2c_sensor_sht(ABC):
