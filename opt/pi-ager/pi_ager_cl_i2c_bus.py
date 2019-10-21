@@ -45,6 +45,7 @@ class cl_i2c_bus_logic():
         logger.debug(pi_ager_logging.me())
         #self.o_sensor_type = o_sensor_type
         bus1 = smbus.SMBus(1)
+        
     def get_i2c_bus(self):
         logger.debug(pi_ager_logging.me())
         return bus1
