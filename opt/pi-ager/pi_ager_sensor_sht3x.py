@@ -11,7 +11,7 @@ __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Production"
 
-from abc import ABC, abstractmethod
+#from abc import ABC, abstractmethod
 import inspect
 
 from pi_ager_cl_sensor_type import cl_fact_main_sensor_type
