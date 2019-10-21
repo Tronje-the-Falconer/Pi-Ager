@@ -38,7 +38,7 @@ class cl_main_sensor_type:
     def _get_type_ui(self):
         logger.debug(pi_ager_logging.me())
         if self._is_valid() == False:
-            raise cx_Sensor_not_defined(self.type_ui)
+            raise cx_Sensor_not_defined(self._type_ui)
         self._cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES.get(self._type, -1) 
          
     
