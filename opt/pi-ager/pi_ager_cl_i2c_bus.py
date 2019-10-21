@@ -15,9 +15,11 @@ import inspect
 import time
 import smbus
 import sys
+import struct
+import pi_ager_logging
 
 from abc import ABC, abstractmethod
-
+from pi_ager_cx_exception import *
 """
 * Below is also a good one to have, but be careful i2cdump from the below cause the sht31 interface to become unstable for me
  * and requires a hard-reset to recover correctly.
@@ -30,9 +32,8 @@ from abc import ABC, abstractmethod
  * add another 0 to the above baudrate for max setting, ie dtparam=i2c1_baudrate=100000
 """
 
-import struct
-
-from pi_ager_cx_exception import *
+global logger
+logger = pi_ager_logging.create_logger(__name__) 
 
 class cl_i2c_bus_logic():
     
@@ -41,9 +42,11 @@ class cl_i2c_bus_logic():
     
 
     def __init__(self, o_sensor_type):
+        logger.debug(pi_ager_logging.me())
         self.o_sensor_type = o_sensor_type
         bus1 = smbus.SMBus(1)
     def get_i2c_bus(self):
+        logger.debug(pi_ager_logging.me())
         return bus1
 
 class th_i2c_bus_logic():
@@ -81,4 +84,5 @@ class cl_fact_i2c_bus_logic(ABC):
         pass    
     
     def __init__(self):
+        logger.debug(pi_ager_logging.me())
         pass    

@@ -13,9 +13,13 @@ __status__ = "Development"
 
 import inspect
 import struct
+import pi_ager_logging
 
 from abc import ABC, abstractmethod
 from pi_ager_cx_exception import *
+
+global logger
+logger = pi_ager_logging.create_logger(__name__) 
 
 class cl_i2c_sensor_sht(ABC):
     
@@ -47,6 +51,7 @@ class cl_i2c_sensor_sht(ABC):
                     crc = (crc << 1)
         return crc
     def i2c_start_command(self):
+        logger.debug(pi_ager_logging.me())
         #Write the read sensor command
         address = 0x44
         msb_data = 0x24
@@ -60,6 +65,7 @@ class cl_i2c_sensor_sht(ABC):
         self.o_i2c_bus.write_byte_data(address, msb_data, lsb_data)
         time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
     def read_data(self):
+        logger.debug(pi_ager_logging.me())
         self.data0 = self.o_i2c_bus.read_i2c_block_data(address, 0x00, 8)
         t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
         t_crc_calc = _self._calculate_checksum(t_val)
@@ -84,6 +90,7 @@ class cl_i2c_sensor_sht(ABC):
         
              
     def get_temperature(self):
+        logger.debug(pi_ager_logging.me())
         t_val = (data0[0]<<8) + data0[1] #convert the data
         
         Temperature_Celsius    = ((175.72 * t_val) / 2**16 - 1 ) - 45 #do the maths from datasheet
@@ -94,7 +101,7 @@ class cl_i2c_sensor_sht(ABC):
         
         return(Temperature_Celsius, Temperature_Fahrenheit)
     def get_humitity(self):
-
+        logger.debug(pi_ager_logging.me())
         h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
         
         Humitity = ((100.0 * h_val) / 2**16 - 1 )
