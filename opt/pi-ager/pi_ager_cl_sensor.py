@@ -114,16 +114,19 @@ class cl_fact_main_sensor:
             return(cl_fact_main_sensor.__o_instance)
         try:
             if   cl_fact_main_sensor.__o_sensor_type._get_type_ui( ) == 'SHT75':
-                cl_fact_main_sensor.__o_instance = self.get_instance_sensor_sht75()
+#                cl_fact_main_sensor.__o_instance = self.get_instance_sensor_sht75()
+                pass
             elif cl_fact_main_sensor.__o_sensor_type._get_type_ui( ) == 'SHT3x':
-                cl_fact_main_sensor.__o_instance = self.get_instance_sensor_sht3x()
+                cl_fact_main_sensor.__o_instance = cl_fact_sensor_sht3x.get_instance()
             elif cl_fact_main_sensor.__o_sensor_type._get_type_ui( ) == 'SHT85':
-                cl_fact_main_sensor.__o_instance = self.get_instance_sensor_sht85()   
+#                cl_fact_main_sensor.__o_instance = self.get_instance_sensor_sht85()
+                pass   
             elif cl_fact_main_sensor.__o_sensor_type._get_type_ui( ) == 'DHT22':
-                cl_fact_main_sensor.__o_instance = self.get_instance_sensor_dht22()
+#                cl_fact_main_sensor.__o_instance = self.get_instance_sensor_dht22()
+                pass
             elif cl_fact_main_sensor.__o_sensor_type._get_type_ui( ) == 'DHT11':
-                cl_fact_main_sensor.__o_instance = self.get_instance_sensor_dht11()
-
+#                cl_fact_main_sensor.__o_instance = self.get_instance_sensor_dht11()
+                pass
         except Exception as original_error:
             raise original_error        
         return(cl_fact_main_sensor.__o_instance)
@@ -131,14 +134,7 @@ class cl_fact_main_sensor:
     @classmethod
     def set_instance(self, i_instance):
         cl_fact_main_sensor.__o_instance = i_instance
-            
-    @classmethod        
-    def get_instance_sensor_sht75(self):
-        return(cl_main_sensor_sht75(self.__o_sensor_type))
-    @classmethod        
-    def get_instance_sensor_sht3x(self):
-        return(cl_main_sensor_sht3x(self.__o_sensor_type))    
-    
+              
     
     def __init__(self):
         pass    
