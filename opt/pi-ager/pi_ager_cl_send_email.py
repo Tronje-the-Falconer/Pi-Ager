@@ -25,11 +25,12 @@ class cl_logic_send_email:
         Get email-server settings from the server class
         """
         self.logic_email_server = cl_fact_logic_email_server().get_instance()
-        
-        self.it_email_server = self.logic_email_server.get_data()
-        
         if not self.it_email_server:
             return
+                
+        self.it_email_server = self.logic_email_server.get_data()
+        
+
             #raise cx_no_email_server_config_found 
         """
         Read email recipient's from the database
