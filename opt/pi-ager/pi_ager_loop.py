@@ -61,7 +61,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     global sensor_humidity_big
     global sensor_temperature_big 
     sensorname = cl_fact_main_sensor_type.get_instance().get_sensor_type_ui()
-    logger.debug("sensorname: " + str(sensor_name))
+    logger.debug("sensorname: " + str(sensorname))
     try:
         if sensorname == 'DHT11' or sensorname == 'DHT22':
             sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_names.gpio_sensor_data)
