@@ -86,7 +86,7 @@ class cl_main_sensor(cl_ab_temp_sensor, cl_ab_humitity_sensor):
     
 
     
-class th_main_sensor(cl_main_sensor_sht75):
+class th_main_sensor(cl_ab_temp_sensor, cl_ab_humitity_sensor):
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
     NAME = 'Main_sensor'
     
@@ -94,7 +94,7 @@ class th_main_sensor(cl_main_sensor_sht75):
     def __init__(self):
     
         self.get_type_raise = False
-        self._type = "SHT"
+        self._type = "SHT75"
         
     def get_type(self):
         if self.get_type_raise == True:
