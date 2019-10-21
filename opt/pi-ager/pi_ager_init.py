@@ -41,6 +41,10 @@ def set_sensortype():
 
     # Sensortyp
     sensortype = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key)
+    sensorname = cl_fact_main_sensor_type.get_instance().get_sensor_type_ui()
+    logger.info(_('sensortype set to') + ' ' + sensorname)
+
+"""
     if sensortype == 1: #DHT
         sensor = Adafruit_DHT.DHT11
         sensorname = 'DHT11'
@@ -54,9 +58,10 @@ def set_sensortype():
         sensor = 'SHT'
         sensorname = 'SHT'
         sensorvalue = 3
-    check_sensor(sensorname, sensor)
-    logger.info(_('sensortype set to') + ' ' + sensorname)
-        
+"""
+#    check_sensor(sensorname, sensor)
+    
+            
 def check_sensor(sensorname, sensor):
     """
     checking wired sensor

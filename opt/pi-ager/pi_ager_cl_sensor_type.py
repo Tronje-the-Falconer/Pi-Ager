@@ -68,6 +68,10 @@ class cl_main_sensor_type:
         logger.debug(pi_ager_logging.me())
         return(self._type)
     
+    def get_sensor_type_ui(self):
+        logger.debug(pi_ager_logging.me())
+        return(self._type_ui)
+    
     def get_name(self):
         logger.debug(pi_ager_logging.me())
         return(cl_main_sensor_type.__NAME)
