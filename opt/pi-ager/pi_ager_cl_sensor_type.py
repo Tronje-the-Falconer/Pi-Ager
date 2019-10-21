@@ -11,11 +11,11 @@ logger = pi_ager_logging.create_logger(__name__)
 
        
 class cl_main_sensor_type:
-    __SUPPORTED_MAIN_SENSOR_TYPES = {"DHT11": 1,
-                                     "DHT22": 2,
-                                     "SHT75": 3,
-                                     "SHT3x": 4,
-                                     "SHT85": 5}
+    __SUPPORTED_MAIN_SENSOR_TYPES = {1: "DHT11",
+                                     2: "DHT22",
+                                     3: "SHT75",
+                                     4: "SHT3x",
+                                     5: "SHT85"}
     __NAME = 'Main_sensor'
     _type = 0
     _type_ui = ""
@@ -39,14 +39,14 @@ class cl_main_sensor_type:
         logger.debug(pi_ager_logging.me())
         if self._is_valid() == False:
             raise cx_Sensor_not_defined(self._type_ui)
-        self._cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES.get(self._type, -1) 
+        self._type_ui = cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES[self._type] 
          
     
         return(self._type)
     
     def _is_valid(self):
         logger.debug(pi_ager_logging.me())
-        if cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES.get(self._type, -1) != -1:
+        if cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES[self._type]:
 #        if self._type in cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES:
             return(True)
         else:
@@ -55,8 +55,8 @@ class cl_main_sensor_type:
         
     def _read_sensor_type(self):
         logger.debug(pi_ager_logging.me())
-        self._type = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key)
-        logger.info("Sensor number is: ", self._type)
+        self._type = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key))
+
         logger.info('Sensor number is: ' + str(self._type))
         if self._is_valid() == False:
             raise cx_Sensor_not_defined(self._type_ui)        
