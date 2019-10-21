@@ -3,6 +3,7 @@ import inspect
 
 from pi_ager_cx_exception import *
 import pi_ager_logging
+import pi_ager_database
 
 global logger
 logger = pi_ager_logging.create_logger(__name__) 
