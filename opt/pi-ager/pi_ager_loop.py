@@ -95,11 +95,13 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
         elif sensorname == 'SHT3x': #SH3x
             try:
+                logger.debug('SHT3x')
                 #Create factory for main sensor
                 fact_main_sensor = cl_fact_main_sensor()
                 #Get from factory the instance of the main sensor
                 main_sensor = fact_main_sensor.get_instance()
                 #Read now temperature of the main sensor
+                logger.debug('read data')
                 sensor_humidity_big    = main_sensor.get_current_humidity()
                 sensor_temperature_big = main_sensor.get_current_temperature()
                 
