@@ -20,46 +20,9 @@ from pi_ager_cx_exception import *
 from pi_ager_sensor_sht3x import cl_fact_sensor_sht3x
 #from pi_ager_sensor_sht75 import *
 
-class cl_ab_humitity_sensor(ABC):
-    __max_humitity_errors = 10
-    def __init__(self):
-        self.m_current_humitity = 0
-        self.m_old_humitity = 0
-        self.m_state = 0
-
-class cl_ab_temp_sensor(ABC):
-    __max_temp_errors = 10
-    __TEMP_SENSOR_STATES = ["Valid", "Invalid"]
-    def __init__(self):
-        self._current_temperature = 0
-        self._old_temperature = 0
-        self._state = 1
-        self._current_humitity = 0
-        self._old_humitity = 0
-    def get_current_temperature(self):
-        return(self._current_temperature)
-    
-    def get_old_temperature(self):
-        return(self._old_temperature)
-    def get_current_humitity(self):
-        return(self._current_humitity)
-    def get_old_humitity(self):
-        return(self._old_humitity)
-    @abstractmethod
-    def read_temperature(self):
-        pass
-    
-    def get_temperature_state(self):
-        return(cl_ab_temp_sensor.__TEMP_SENSOR_STATES[self.m_state])
-    
-    def _check_temperature(self):
-        if abs(self.m_current_temperature - self.m_old_temperature) > 10:
-            self.m_state = 1
-        else:
-            self.m_state = 0
         
     
-class cl_main_sensor(cl_ab_temp_sensor, cl_ab_humitity_sensor):
+class cl_main_sensor():
     
     __error_counter = 0
     __measuring_intervall = 300
