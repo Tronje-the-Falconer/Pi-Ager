@@ -50,7 +50,7 @@ class cl_main_sensor():
     
 
     
-class th_main_sensor(cl_ab_temp_sensor, cl_ab_humitity_sensor):
+class th_main_sensor():
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
     NAME = 'Main_sensor'
     
