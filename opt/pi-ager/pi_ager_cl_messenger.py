@@ -11,6 +11,7 @@ from pi_ager_cl_alarm import cl_fact_logic_alarm
 from pi_ager_cl_send_email import cl_fact_logic_send_email
                              
 from pi_ager_cx_exception import *
+from _ast import Pass
 
 global logger
 logger = pi_ager_logging.create_logger(__name__)
@@ -43,17 +44,21 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         
         self.exception_known = False
     def send(self, subject, message):
-        self.logic_send_email.execute( subject, message )
+        if isinstance(self.logic_send_email, cl_logic_send_email): 
+            self.logic_send_email.execute( subject, message )
         pass
     def alarm(self, replication, duration):
-        if duration == 'short':
-            self.logic_alarm.execute_short(replication = replication) 
-        elif duration == 'middle':
-            self.logic_alarm.execute_middle(replication = replication)
-        elif duration == 'long':
-            self.logic_alarm.execute_long(replication = replication)
-        else:
-            self.logic_alarm.execute_middle(replication = replication)  
+        if isinstance(self.logic_alarm, cl_logic_alarm): 
+           
+            if duration == 'short':
+                self.logic_alarm.execute_short(replication = replication) 
+            elif duration == 'middle':
+                self.logic_alarm.execute_middle(replication = replication)
+            elif duration == 'long':
+                self.logic_alarm.execute_long(replication = replication)
+            else:
+                self.logic_alarm.execute_middle(replication = replication)  
+        pass
     def handle_exception(self, cx_error):
         """
         Handle message to create alarm or email or telegram or pushover ... class
