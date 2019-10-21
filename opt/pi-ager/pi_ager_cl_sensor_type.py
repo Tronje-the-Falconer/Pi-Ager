@@ -27,7 +27,7 @@ class cl_main_sensor_type:
 #            raise cx_direct_call(self, "Please use factory class")
 
         try:
-            self.read_sensor_type()
+            self._read_sensor_type()
         except Exception as original_error:
             raise original_error
 
@@ -53,14 +53,14 @@ class cl_main_sensor_type:
             return(False)
             
         
-    def read_sensor_type(self):
+    def _read_sensor_type(self):
         logger.debug(pi_ager_logging.me())
         self._type = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key)
-        self._type_ui = self._get_type_ui()
+        logger.info("Sensor number is: ", self._type)
         if self._is_valid() == False:
             raise cx_Sensor_not_defined(self._type_ui)        
-        
-        logger.debug("Sensor type is :", self._type_ui)    
+        self._type_ui = self._get_type_ui()        
+        logger.debug("Sensor type is: ", self._type_ui)    
         return()
     
     def get_sensor_type(self):
