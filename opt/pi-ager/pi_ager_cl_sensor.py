@@ -130,15 +130,7 @@ class cl_fact_main_sensor:
     @classmethod
     def set_instance(self, i_instance):
         cl_fact_main_sensor.__o_instance = i_instance
-            
-    @classmethod        
-    def get_instance_sensor_sht75(self):
-        return(cl_main_sensor_sht75(self.__o_sensor_type))
-    @classmethod        
-    def get_instance_sensor_sht3x(self):
-        return(cl_main_sensor_sht3x(self.__o_sensor_type))    
-    
-    
+   
     def __init__(self):
         pass    
 
