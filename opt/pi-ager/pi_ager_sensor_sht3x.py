@@ -26,11 +26,11 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
             raise cx_direct_call(self,"Please use factory class" )
         #self.o_sensor_type = o_sensor_type
         pass
-    _old_temperature = 0
-    _current_temperature = 0
-    self.i2c_bus = cl_fact_i2c_bus_logic.get_instance()
-    self.sht3x = cl_fact_i2c_sensor.get_instance(i2c_bus)
-    self.sht3x.i2c_start_command()
+        _old_temperature = 0
+        _current_temperature = 0
+        self.i2c_bus = cl_fact_i2c_bus_logic.get_instance()
+        self.sht3x = cl_fact_i2c_sensor.get_instance(i2c_bus)
+        self.sht3x.i2c_start_command()
     
     def _read_data(self):
         self.sht3x.read_data()
