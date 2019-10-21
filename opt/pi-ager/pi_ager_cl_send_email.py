@@ -42,7 +42,7 @@ class cl_logic_send_email:
             raise cx_no_email_recipient_config_found 
         
     def execute(self, alarm_subject, alarm_message):
-        if not hasattr(cl_logic_send_email, self.it_email_recipient):
+        if not hasattr(cl_logic_send_email, it_email_recipient):
             logger.info("No email recipient defined!")
             return
         logger.debug(pi_ager_logging.me())
