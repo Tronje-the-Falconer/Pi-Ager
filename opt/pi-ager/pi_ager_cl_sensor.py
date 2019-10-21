@@ -74,7 +74,7 @@ class cl_main_sensor(cl_ab_temp_sensor, cl_ab_humitity_sensor):
     
     def get_sensor_type(self):
         logger.debug(pi_ager_logging.me())
-        return( self.o_sensor_type.get_sensor_type() )
+        return( self.o_sensor_type._get_type() )
     
     def get_dewpoint(self):
         logger.debug(pi_ager_logging.me())

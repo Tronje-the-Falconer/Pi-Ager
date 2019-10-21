@@ -99,9 +99,10 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             try:
                 logger.debug('SHT3x')
                 #Create factory for main sensor
-                fact_main_sensor = cl_fact_main_sensor()
+                
                 #Get from factory the instance of the main sensor
-                main_sensor = fact_main_sensor.get_instance()
+                main_sensor =  cl_fact_main_sensor().get_instance()
+                logger.debug('sensor is ' + main_sensor.get_sensor_type_ui() )
                 #Read now temperature of the main sensor
                 logger.debug('read data')
                 sensor_humidity_big    = main_sensor.get_current_humidity()
