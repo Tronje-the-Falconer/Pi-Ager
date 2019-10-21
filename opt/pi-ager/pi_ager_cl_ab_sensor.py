@@ -33,7 +33,7 @@ class cl_ab_humitity_sensor(ABC):
         return(self._old_humitity)
    
     @abstractmethod
-    def read_humitity(self):
+    def _read_data(self):
         pass
 
     def get_humitity_state(self):
@@ -60,7 +60,7 @@ class cl_ab_temp_sensor(ABC):
         return(self._old_temperature)
     
     @abstractmethod
-    def read_temperature(self):
+    def _read_data(self):
         pass
     
     def get_temperature_state(self):
