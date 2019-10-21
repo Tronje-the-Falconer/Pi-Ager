@@ -29,8 +29,8 @@ class cl_logic_send_email:
         self.it_email_server = self.logic_email_server.get_data()
         
         if not self.it_email_server:
-            exit
-            raise cx_no_email_server_config_found 
+            return
+            #raise cx_no_email_server_config_found 
         """
         Read email recipient's from the database
         """
