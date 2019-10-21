@@ -17,7 +17,7 @@ import inspect
 from pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 #from pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 from pi_ager_cx_exception import *
-from pi_ager_sensor_sht3x import *
+#from pi_ager_sensor_sht3x import *
 
 class cl_ab_humitity_sensor(ABC):
     __max_humitity_errors = 10
