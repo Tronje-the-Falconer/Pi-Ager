@@ -60,17 +60,17 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     global logger
     global sensor_humidity_big
     global sensor_temperature_big 
-    
-    logger.debug("sensorname: " + str(cl_fact_main_sensor_type.get_instance().get_sensor_type_ui()))
+    sensorname = cl_fact_main_sensor_type.get_instance().get_sensor_type_ui()
+    logger.debug("sensorname: " + str(sensor_name))
     try:
-        if pi_ager_init.sensorname == 'DHT11' or pi_ager_init.sensorname == 'DHT22':
+        if sensorname == 'DHT11' or sensorname == 'DHT22':
             sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_names.gpio_sensor_data)
             logger.debug("sensor_temperature_big: " + str(sensor_temperature_big))
             logger.debug("sensor_humidity_big: " + str(sensor_humidity_big))
             # atp = 17.271  ermittelt aus dem Datenblatt DHT11 und DHT22
             # btp = 237.7   ermittelt aus dem Datenblatt DHT11 und DHT22
         
-        elif pi_ager_init.sensorname == 'SHT75': #SHT
+        elif sensorname == 'SHT75': #SHT
             try:
                 sensor_sht = pi_sht1x.SHT1x(pi_ager_names.gpio_sensor_data, pi_ager_names.gpio_sensor_sync, gpio_mode=pi_ager_names.board_mode)
                 sensor_sht.read_temperature()
@@ -93,7 +93,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                     return recursion
                 #Create factory for messanger, get from factory the instance of the messenger, send messages in one line
                 exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
-        elif pi_ager_init.sensorname == 'SHT3x': #SH3x
+        elif sensorname == 'SHT3x': #SH3x
             try:
                 #Create factory for main sensor
                 fact_main_sensor = cl_fact_main_sensor()
