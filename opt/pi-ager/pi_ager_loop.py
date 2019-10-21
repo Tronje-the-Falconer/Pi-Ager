@@ -349,7 +349,8 @@ def doMainLoop():
             humidity_exception_count = 0
             sensordata_exception_count = 0
             temperature_exception_count = 0
-            sensortype = int(pi_ager_init.sensortype)
+            #sensortype = int(pi_ager_init.sensortype)
+            sensortype = cl_fact_main_sensor_type().get_instance().get_sensor_type()
             sensordata = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
             sensor_temperature = sensordata['sensor_temperature']
             sensor_humidity = sensordata['sensor_humidity']
