@@ -29,6 +29,7 @@ class cl_main_sensor_type:
         try:
             self._read_sensor_type()
         except Exception as original_error:
+            logger.debug('Sensor type not found!')
             raise original_error
 
 #        cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
