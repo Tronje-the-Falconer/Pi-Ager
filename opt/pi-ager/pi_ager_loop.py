@@ -103,7 +103,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 sensor_temperature_big = main_sensor.get_temperature()
                 #sensor_humidity_big    = main_sensor.get_
                 #main_sensor.get_sensor_type()
-                sensor_temperature_big = main_sensor.get_current_temperature()
+#                sensor_temperature_big = main_sensor.get_current_temperature()
                 sensor_humidity_big    = 11        
             except cx_i2c_sht_temperature_crc_error as cx_error:
                 pass  
