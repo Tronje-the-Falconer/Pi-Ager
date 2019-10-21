@@ -57,6 +57,7 @@ class cl_main_sensor_type:
         logger.debug(pi_ager_logging.me())
         self._type = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key)
         logger.info("Sensor number is: ", self._type)
+        logger.info('Sensor number is: ' + str(self._type))
         if self._is_valid() == False:
             raise cx_Sensor_not_defined(self._type_ui)        
         self._type_ui = self._get_type_ui()        
