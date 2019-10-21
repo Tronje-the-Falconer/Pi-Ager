@@ -14,8 +14,8 @@ class cl_main_sensor_type:
     __SUPPORTED_MAIN_SENSOR_TYPES = {1: "DHT11",
                                      2: "DHT22",
                                      3: "SHT75",
-                                     4: "SHT3x",
-                                     5: "SHT85"}
+                                     4: "SHT85",
+                                     5: "SHT3x"}
     __NAME = 'Main_sensor'
     _type = 0
     _type_ui = ""
