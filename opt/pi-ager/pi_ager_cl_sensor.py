@@ -1,9 +1,23 @@
+# -*- coding: utf-8 -*-
+
+"""This class is for handling the main sensor(s) for the Pi-Ager."""
+
+__author__ = "Claus Fischer"
+__copyright__ = "Copyright 2019, The Pi-Ager Project"
+__credits__ = ["Claus Fischer"]
+__license__ = "GPL"
+__version__ = "1.0.0"
+__maintainer__ = "Claus Fischer"
+__email__ = "DerBurgermeister@pi-ager.org"
+__status__ = "Production"
+
 from abc import ABC, abstractmethod
 import inspect
 
 from pi_ager_cl_sensor_type import cl_fact_main_sensor_type
-from pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
+#from pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 from pi_ager_cx_exception import *
+from pi_ager_sensor_sht3x import *
 
 class cl_ab_humitity_sensor(ABC):
     __max_humitity_errors = 10
@@ -16,16 +30,20 @@ class cl_ab_temp_sensor(ABC):
     __max_temp_errors = 10
     __TEMP_SENSOR_STATES = ["Valid", "Invalid"]
     def __init__(self):
-        self.m_current_temperature = 0
-        self.m_old_temperature = 0
-        self.m_state = 1
-    
+        self._current_temperature = 0
+        self._old_temperature = 0
+        self._state = 1
+        self._current_humitity = 0
+        self._old_humitity = 0
     def get_current_temperature(self):
-        return(self.m_current_temperature)
+        return(self._current_temperature)
     
     def get_old_temperature(self):
-        return(self.m_old_temperature)
-    
+        return(self._old_temperature)
+    def get_current_humitity(self):
+        return(self._current_humitity)
+    def get_old_humitity(self):
+        return(self._old_humitity)
     @abstractmethod
     def read_temperature(self):
         pass
@@ -60,61 +78,6 @@ class cl_main_sensor(cl_ab_temp_sensor, cl_ab_humitity_sensor):
     
 
     
-class cl_main_sensor_sht75(cl_main_sensor):
-    
-    def __init__(self, o_sensor_type):
-        if "get_instance" not in inspect.stack()[1][3]:
-            raise cx_direct_call(self,"Please use factory class" )
-        self.o_sensor_type = o_sensor_type
-        pass
-    m_old_temperature = 0
-    m_current_temperature = 0
-    
-    def read_temperature(self):
-        cl_main_sensor.read_temperature(self)
-   
-        if self.m_old_temperature is None:
-            self.m_old_temperature = 0
-        else:
-      
-            self.m_old_temperature = self.m_current_temperature
-            
-        self.m_current_temperature = 100.0
-     
-        self._check_temperature()
-
-class cl_main_sensor_sht3x(cl_main_sensor):
-    
-    def __init__(self, o_sensor_type):
-        if "get_instance" not in inspect.stack()[1][3]:
-            raise cx_direct_call(self,"Please use factory class" )
-        self.o_sensor_type = o_sensor_type
-        pass
-    m_old_temperature = 0
-    m_current_temperature = 0
-    self.i2c_bus = cl_fact_i2c_bus_logic.get_instance()
-    self.sht3x = cl_fact_i2c_sensor.get_instance(i2c_bus)
-    self.sht3x.i2c_start_command()
-    
-    def read_data(self):
-        self.sht3x.get_data()
-    
-    def get_temperature(self):
-        
-        self.read_temperature(self)
-        cl_main_sensor.read
-   
-        if self.m_old_temperature is None:
-            self.m_old_temperature = 0
-        else:
-      
-            self.m_old_temperature = self.m_current_temperature
-            
-        self.m_current_temperature = 100.0
-     
-        self._check_temperature()
-
-  
 class th_main_sensor(cl_main_sensor_sht75):
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
     NAME = 'Main_sensor'
@@ -141,14 +104,17 @@ class cl_fact_main_sensor:
         if cl_fact_main_sensor.__o_instance is not None :
             return(cl_fact_main_sensor.__o_instance)
         try:
-            if   cl_fact_main_sensor.__o_sensor_type.get_type( ) == 'SHT75':
+            if   cl_fact_main_sensor.__o_sensor_type._get_type_ui( ) == 'SHT75':
                 cl_fact_main_sensor.__o_instance = self.get_instance_sensor_sht75()
-            elif cl_fact_main_sensor.__o_sensor_type.get_type( ) == 'SHT3x':
+            elif cl_fact_main_sensor.__o_sensor_type._get_type_ui( ) == 'SHT3x':
                 cl_fact_main_sensor.__o_instance = self.get_instance_sensor_sht3x()
-            elif cl_fact_main_sensor.__o_sensor_type.get_type( ) == 'SHT85':
+            elif cl_fact_main_sensor.__o_sensor_type._get_type_ui( ) == 'SHT85':
                 cl_fact_main_sensor.__o_instance = self.get_instance_sensor_sht85()   
-            elif cl_fact_main_sensor.__o_sensor_type.get_type( ) == 'DHT22':
-                cl_fact_main_sensor.__o_instance = self.get_instance_sensor_sht75()
+            elif cl_fact_main_sensor.__o_sensor_type._get_type_ui( ) == 'DHT22':
+                cl_fact_main_sensor.__o_instance = self.get_instance_sensor_dht22()
+            elif cl_fact_main_sensor.__o_sensor_type._get_type_ui( ) == 'DHT11':
+                cl_fact_main_sensor.__o_instance = self.get_instance_sensor_dht11()
+
         except Exception as original_error:
             raise original_error        
         return(cl_fact_main_sensor.__o_instance)

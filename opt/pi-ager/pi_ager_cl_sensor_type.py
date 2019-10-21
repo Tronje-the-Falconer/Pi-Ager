@@ -80,10 +80,10 @@ class th_main_sensor_type(cl_main_sensor_type):
 
     
     def __init__(self):
-        self._type = ""
+        self._type = 3 #SHT75
+        self._type_ui = "SHT75"
         self.is_valid = True
         pass
-
   
     def _is_valid(self):
         if self.is_valid == True:
@@ -95,6 +95,8 @@ class th_main_sensor_type(cl_main_sensor_type):
         if self.is_valid == False:
             raise cx_Sensor_not_defined("This sensor is not defined")        
         return(self._type)
+    def _get_type_ui(self):
+        return(self._type_ui)
 
 class cl_fact_main_sensor_type(ABC):
     __o_instance = None

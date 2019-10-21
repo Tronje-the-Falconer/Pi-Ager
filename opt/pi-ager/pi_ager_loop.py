@@ -100,7 +100,8 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 #Get from factory the instance of the main sensor
                 main_sensor = fact_main_sensor.get_instance()
                 #Read now temperature of the main sensor
-                main_sensor.read_temperature()
+                sensor_temperature_big = main_sensor.get_temperature()
+                sensor_humidity_big    = main_sensor.get_
                 #main_sensor.get_sensor_type()
                 sensor_temperature_big = main_sensor.get_current_temperature()
                 sensor_humidity_big    = 0        

@@ -86,22 +86,22 @@ class cl_i2c_sensor_sht(ABC):
     def get_temperature(self):
         t_val = (data0[0]<<8) + data0[1] #convert the data
         
-        T_c = ((175.72 * t_val) / 2**16 - 1 ) - 45 #do the maths from datasheet
-        T_f = ((315.0  * t_val) / 2**16 - 1 ) - 49 #do the maths from datasheet
+        Temperature_Celsius    = ((175.72 * t_val) / 2**16 - 1 ) - 45 #do the maths from datasheet
+        Temperature_Fahrenheit = ((315.0  * t_val) / 2**16 - 1 ) - 49 #do the maths from datasheet
 
-        logger.debug("Temperature in Celsius is : %.2f C" %T_c)
-        logger.debug("Temperature in Fahrenheit is : %.2f F" %T_f)
+        logger.debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
+        logger.debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
         
-        pass
+        return(Temperature_Celsius, Temperature_Fahrenheit)
     def get_humitity(self):
 
         h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
         
-        H = ((100.0 * h_val) / 2**16 - 1 )
+        Humitity = ((100.0 * h_val) / 2**16 - 1 )
 
-        logger.debug("Relative Humidity is : %.2f %%RH" %H)
+        logger.debug("Relative Humidity is : %.2f %%RH" %Humitity)
         
-        pass
+        return(Humitity)
 class th_i2c_sensor_sht():
     
     def __init__(self):

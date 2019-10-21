@@ -1,11 +1,25 @@
-from abc import ABC 
+# -*- coding: utf-8 -*-
+
+"""This class is for sending an email notification."""
+
+__author__ = "Claus Fischer"
+__copyright__ = "Copyright 2019, The Pi-Ager Project"
+__credits__ = ["Claus Fischer"]
+__license__ = "GPL"
+__version__ = "1.0.0"
+__maintainer__ = "Claus Fischer"
+__email__ = "DerBurgermeister@pi-ager.org"
+__status__ = "Production"
+
+
 import inspect
 import pi_ager_names 
 import pi_ager_logging
+
+from abc import ABC 
 from pi_ager_cl_crypt import cl_fact_help_crypt
 from pi_ager_cl_email_server import cl_fact_logic_email_server
 from pi_ager_cl_email_recipient import cl_fact_logic_email_recipient
-
 from pi_ager_cx_exception import *
 
 global logger
