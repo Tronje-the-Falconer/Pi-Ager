@@ -23,6 +23,7 @@ import pi_ager_organization
 from time import ctime as convert
 from pi_ager_cl_alarm import cl_fact_logic_alarm
 from pi_ager_cl_messenger import cl_fact_logic_messenger
+from pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 
 global logger
 logger = pi_ager_logging.create_logger(__name__)
@@ -350,7 +351,7 @@ def doMainLoop():
             sensordata_exception_count = 0
             temperature_exception_count = 0
             #sensortype = int(pi_ager_init.sensortype)
-            sensortype = cl_fact_main_sensor_type().get_instance().get_sensor_type()
+            sensortype = cl_fact_main_sensor_type.get_instance().get_sensor_type()
             sensordata = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
             sensor_temperature = sensordata['sensor_temperature']
             sensor_humidity = sensordata['sensor_humidity']
