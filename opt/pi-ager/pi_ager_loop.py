@@ -110,6 +110,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
                 logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
             except cx_i2c_sht_temperature_crc_error as cx_error:
+                logger.debug('Exeption CRC Error')
                 pass  
         if sensor_humidity_big is not None and sensor_temperature_big is not None:
             sensor_temperature = round (sensor_temperature_big,2)
