@@ -61,7 +61,7 @@ class cl_main_sensor_type:
         if self._is_valid() == False:
             raise cx_Sensor_not_defined(self._type_ui)        
         self._type_ui = self._get_type_ui()        
-        logger.debug("Sensor type is: ", self._type_ui)    
+        logger.debug("Sensor type is: " + str(self._type_ui))    
         return()
     
     def get_sensor_type(self):
