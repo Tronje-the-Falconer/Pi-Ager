@@ -100,12 +100,13 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 #Get from factory the instance of the main sensor
                 main_sensor = fact_main_sensor.get_instance()
                 #Read now temperature of the main sensor
+                sensor_humidity_big    = 11 
                 sensor_temperature_big = main_sensor.get_temperature()
                 
                 #sensor_humidity_big    = main_sensor.get_
                 #main_sensor.get_sensor_type()
 #                sensor_temperature_big = main_sensor.get_current_temperature()
-                sensor_humidity_big    = 11       
+                      
                 logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
                 logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
             except cx_i2c_sht_temperature_crc_error as cx_error:
