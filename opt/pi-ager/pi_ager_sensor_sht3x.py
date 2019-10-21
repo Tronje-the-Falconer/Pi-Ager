@@ -21,10 +21,10 @@ from pi_ager_cl_ab_sensor import cl_ab_temp_sensor, cl_ab_humitity_sensor
 
 class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
     
-    def __init__(self, o_sensor_type):
+    def __init__(self):
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
-        self.o_sensor_type = o_sensor_type
+        #self.o_sensor_type = o_sensor_type
         pass
     _old_temperature = 0
     _current_temperature = 0
