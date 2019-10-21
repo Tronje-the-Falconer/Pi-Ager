@@ -25,6 +25,7 @@ import pi_ager_database_check
 import pi_revision
 from pi_ager_cl_alarm import cl_fact_logic_alarm
 from pi_ager_cl_messenger import cl_fact_logic_messenger
+from pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 
 global logger
 
