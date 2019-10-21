@@ -19,7 +19,7 @@ from pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 from pi_ager_cx_exception import *
 from pi_ager_cl_sensor import *
 
-class cl_main_sensor_sht3x(cl_main_sensor):
+class cl_main_sensor_sht3x(pi_ager_cl_sensor.cl_main_sensor):
     
     def __init__(self, o_sensor_type):
         if "get_instance" not in inspect.stack()[1][3]:
