@@ -43,7 +43,7 @@ class cl_main_sensor_type:
         self._type_ui = cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES[self._type] 
          
     
-        return(self._type)
+        return(self._type_ui)
     
     def _is_valid(self):
         logger.debug(pi_ager_logging.me())
