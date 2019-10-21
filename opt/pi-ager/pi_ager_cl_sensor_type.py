@@ -22,6 +22,8 @@ class cl_main_sensor_type:
             raise cx_direct_call("Please use factory class")
 #        if direct:
 #            raise cx_direct_call(self, "Please use factory class")
+        _type = 0
+        _type_ui = ""
         try:
             self.read_sensor_type()
         except Exception as original_error:
