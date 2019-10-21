@@ -66,7 +66,7 @@ class th_main_sensor_sht3x(cl_main_sensor_sht3x):
         return(self._type)
 
     
-class cl_fact_sensor_sht3x:
+class cl_fact_sensor_sht3x: 
     fact_main_sensor_type = cl_fact_main_sensor_type()
 #    Only a singleton instance for main_sensor
     __o_sensor_type = fact_main_sensor_type.get_instance()

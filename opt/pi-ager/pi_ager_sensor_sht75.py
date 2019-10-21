@@ -13,7 +13,7 @@ __status__ = "Production"
 
 from abc import ABC, abstractmethod
 import inspect
-
+ 
 from pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from pi_ager_cx_exception import *
 
