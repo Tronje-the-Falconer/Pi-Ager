@@ -65,15 +65,23 @@ class cl_main_sensor(cl_ab_temp_sensor, cl_ab_humitity_sensor):
     
 
     def __init__(self, o_sensor_type):
+        logger.debug(pi_ager_logging.me())
         self.o_sensor_type = o_sensor_type
         
     def get_sensor_type_ui(self):
+        logger.debug(pi_ager_logging.me())
         return( self.o_sensor_type.get_sensor_type_ui() )
     
+    def get_sensor_type(self):
+        logger.debug(pi_ager_logging.me())
+        return( self.o_sensor_type.get_sensor_type() )
+    
     def get_dewpoint(self):
+        logger.debug(pi_ager_logging.me())
         pass
         
     def execute_soft_reset(self):
+        logger.debug(pi_ager_logging.me())
         pass
     
 
