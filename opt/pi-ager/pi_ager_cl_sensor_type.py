@@ -15,15 +15,15 @@ class cl_main_sensor_type:
                                      "SHT3x": 4,
                                      "SHT85": 5}
     __NAME = 'Main_sensor'
-
+    _type = 0
+    _type_ui = ""
     def __init__(self):
         logger.debug(pi_ager_logging.me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
 #        if direct:
 #            raise cx_direct_call(self, "Please use factory class")
-        _type = 0
-        _type_ui = ""
+
         try:
             self.read_sensor_type()
         except Exception as original_error:
