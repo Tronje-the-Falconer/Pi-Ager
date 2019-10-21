@@ -104,7 +104,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 #sensor_humidity_big    = main_sensor.get_
                 #main_sensor.get_sensor_type()
                 sensor_temperature_big = main_sensor.get_current_temperature()
-                sensor_humidity_big    = 0        
+                sensor_humidity_big    = 11        
             except cx_i2c_sht_temperature_crc_error as cx_error:
                 pass  
         if sensor_humidity_big is not None and sensor_temperature_big is not None:
@@ -162,7 +162,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     except Exception as cx_error:
         cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
 
-    return sensordata
+    return(sensordata)
     
 def countup(countername, counter):
     counter += 1
