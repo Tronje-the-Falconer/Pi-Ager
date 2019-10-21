@@ -17,7 +17,7 @@ import inspect
 from pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 from pi_ager_cx_exception import *
-from pi_ager_cl_sensor import *
+import pi_ager_cl_sensor 
 
 class cl_main_sensor_sht3x(pi_ager_cl_sensor.cl_main_sensor):
     
