@@ -25,13 +25,22 @@ class cl_i2c_sensor_sht(ABC):
     
     __error_counter = 0
     __measuring_intervall = 300
-    
+    _RESET = 0x30A2
+    _HEATER_ON = 0x306D
+    _HEATER_OFF = 0x3066
+    _STATUS = 0xF32D
+    _TRIGGER = 0x2C06
+    _STATUS_BITS_MASK = 0xFFFC
 
     def __init__(self, o_i2c_bus):
         logger.debug(pi_ager_logging.me())
         self.o_sensor_type = o_sensor_type
         self.o_i2c_bus = o_i2c_bus
         
+    def solf_reset(self):
+        """Performs Soft Reset on SHT chip"""
+        logger.debug(pi_ager_logging.me())
+        self.i2c.write(self._RESET)
         
 
     def _calculate_checksum(value):

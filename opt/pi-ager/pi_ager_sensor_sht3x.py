@@ -23,6 +23,7 @@ from pi_ager_cl_ab_sensor import cl_ab_temp_sensor, cl_ab_humitity_sensor
 class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
     
     def __init__(self):
+        logger.debug(pi_ager_logging.me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
         #self.o_sensor_type = o_sensor_type
@@ -34,9 +35,11 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
         self.sht3x.i2c_start_command()
     
     def _read_data(self):
+        logger.debug(pi_ager_logging.me())
         self.sht3x.read_data()
     
     def get_temperature(self):
+        logger.debug(pi_ager_logging.me())
         self._read_data()
         self._current_temperature = self.sht3x_get_temperature(self)
         
