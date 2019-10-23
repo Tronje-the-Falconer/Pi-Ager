@@ -84,13 +84,15 @@ class cl_i2c_sensor_sht(ABC):
         address = 0x44
         self.data0 = self._i2c_bus.read_i2c_block_data(address, 0x00, 8)
         self.t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
-        t_crc_calc = self._calculate_checksum(t_val)
-        self.t_crc = self.data0[2]
-        
         self.h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
-        h_crc_calc = _self._calculate_checksum(h_val)
-        self.h_crc = self.data0[5]
         
+        "CRC Values"
+        t_crc_calc = self._calculate_checksum(self.t_val)
+        h_crc_calc = self._calculate_checksum(self.h_val)
+        
+        t_crc = self.data0[2]
+        h_crc = self.data0[5]
+
         localtime = time.asctime( time.localtime(time.time()) )
         if hex(t_crc_calc) != hex(t_crc):
         #if 1 != 1:
