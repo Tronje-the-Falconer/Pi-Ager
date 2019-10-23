@@ -55,6 +55,7 @@ class cl_i2c_bus_logic():
             raise cx_i2c_bus_error(self,"Can't get I2C Bus" )
     def get_i2c_bus(self):
         logger.debug(pi_ager_logging.me())
+        logger.debug(self.bus1)
         return(self.bus1)
 
 class th_i2c_bus_logic():
