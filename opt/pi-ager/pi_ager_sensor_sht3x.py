@@ -91,7 +91,7 @@ class cl_fact_sensor_sht3x:
         if cl_fact_sensor_sht3x.__o_instance is not None:
             return(cl_fact_sensor_sht3x.__o_instance)
         cl_fact_sensor_sht3x.__o_instance = cl_main_sensor_sht3x()
-        return(cl_fact_main_sensor_type.__o_instance)
+        return(cl_fact_sensor_sht3x.__o_instance)
 
     @classmethod
     def set_instance(self, i_instance):
