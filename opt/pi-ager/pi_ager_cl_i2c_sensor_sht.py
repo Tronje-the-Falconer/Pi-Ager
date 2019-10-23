@@ -109,7 +109,7 @@ class cl_i2c_sensor_sht(ABC):
              
     def get_temperature(self):
         logger.debug(pi_ager_logging.me())
-        t_val = (data0[0]<<8) + data0[1] #convert the data
+        t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
         
         Temperature_Celsius    = ((175.72 * self.t_val) / 2**16 - 1 ) - 45 #do the maths from datasheet
         Temperature_Fahrenheit = ((315.0  * self.t_val) / 2**16 - 1 ) - 49 #do the maths from datasheet
