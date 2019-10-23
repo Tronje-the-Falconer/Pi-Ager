@@ -117,7 +117,7 @@ class cl_i2c_sensor_sht(ABC):
         logger.debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
         logger.debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
         
-        return(Temperature_Celsius, Temperature_Fahrenheit)
+        return(Temperature_Celsius)
     def get_humidity(self):
         logger.debug(pi_ager_logging.me())
         h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
