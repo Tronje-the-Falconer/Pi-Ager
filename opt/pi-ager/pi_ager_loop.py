@@ -38,7 +38,7 @@ def autostart_loop():
     starting loop. pi is startet. pi-ager is not startet. waiting for value 1 in database pi-ager-status
     """
     global status_pi_ager
-    global logger
+    global logger 
     try:
         while True:
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
@@ -49,6 +49,7 @@ def autostart_loop():
             logger.debug('autostart_loop ' + time.strftime('%H:%M:%S', time.localtime()))
             if status_agingtable == 1:
                 os.system('sudo /var/sudowebscript.sh startagingtable &')
+                
                 doMainLoop()
             elif status_pi_ager == 1:
                 doMainLoop()
@@ -366,6 +367,7 @@ def doMainLoop():
             sensordata_exception_count = 0
             temperature_exception_count = 0
             #sensortype = int(pi_ager_init.sensortype)
+            
             sensortype = cl_fact_main_sensor_type.get_instance().get_sensor_type()
             sensordata = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
             sensor_temperature = sensordata['sensor_temperature']
