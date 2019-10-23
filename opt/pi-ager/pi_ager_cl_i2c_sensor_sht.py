@@ -13,6 +13,7 @@ __status__ = "Development"
 
 import inspect
 import struct
+import time
 import pi_ager_logging
 
 from abc import ABC, abstractmethod
