@@ -48,9 +48,15 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
             self._i2c_sensor.read_data()
         except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
-    def get_current_temperature(self):
+   
+    def get_current_data(self):
         logger.debug(pi_ager_logging.me())
         self._read_data()
+        return(self._get_current_temperature(), self._get_current_humitity())
+        
+    def _get_current_temperature(self):
+        logger.debug(pi_ager_logging.me())
+        #self._read_data()
         self._current_temperature = self._i2c_sensor.get_temperature()
         logger.debug(self._current_temperature)
         if self._old_temperature is None:
@@ -64,6 +70,21 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
         #self._check_temperature()
         return(self._current_temperature)
   
+    def _get_current_humitity(self):
+        logger.debug(pi_ager_logging.me())
+        #self._read_data()
+        self._current_humitity = self._i2c_sensor.get_humitity()
+        logger.debug(self._current_humitity)
+        if self._old_humitity is None:
+            self._old_humitity = 0
+        else:
+      
+            self._old_humitity = self._current_humitity
+            
+        #self.m_current_temperature = 100.0
+     
+        #self._check_temperature()
+        return(self._current_humitity)
 class th_main_sensor_sht3x(cl_main_sensor_sht3x):
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
     NAME = 'Main_sensor'
