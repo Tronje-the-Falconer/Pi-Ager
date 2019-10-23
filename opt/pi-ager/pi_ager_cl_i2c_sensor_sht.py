@@ -47,7 +47,6 @@ class cl_i2c_sensor_sht(ABC):
         logger.debug(pi_ager_logging.me())
         self.i2c.write(self._RESET)
         
-
     def _calculate_checksum(value):
         """4.12 Checksum Calculation from an unsigned short input"""
         logger.debug(pi_ager_logging.me())
