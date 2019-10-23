@@ -48,6 +48,7 @@ class cl_i2c_bus_logic():
             raise cx_direct_call(self,"Please use factory class" )
         try:
             self.bus1 = smbus.SMBus(3)
+            self._address = 0x44
             logger.debug(self.bus1)
         except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
@@ -58,7 +59,9 @@ class cl_i2c_bus_logic():
         logger.debug(self.bus1)
         return(self.bus1)
     
-    
+    def get_i2c_address(self):
+        logger.debug(pi_ager_logging.me())
+        return(self._address)
 
 class th_i2c_bus_logic():
     
