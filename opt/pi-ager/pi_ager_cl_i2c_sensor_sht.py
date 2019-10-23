@@ -56,7 +56,8 @@ class cl_i2c_sensor_sht(ABC):
         crc = 0xFF
 
         # calculates 8-Bit checksum with given polynomial
-        for byteCtr in [ord(x) for x in struct.pack(">H", value)]:
+        #for byteCtr in [ord(x) for x in struct.pack(">H", value)]:
+        for byteCtr in struct.pack(">H", value):
             crc ^= byteCtr
             for bit in range(8, 0, -1):
                 if crc & 0x80:
