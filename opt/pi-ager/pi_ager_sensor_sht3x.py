@@ -20,12 +20,12 @@ from pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 from pi_ager_cl_i2c_sensor_sht import cl_fact_i2c_sensor_sht
 from pi_ager_cx_exception import *
 from pi_ager_cl_messenger import cl_fact_logic_messenger
-from pi_ager_cl_ab_sensor import cl_ab_temp_sensor, cl_ab_humitity_sensor
+from pi_ager_cl_ab_sensor import cl_ab_temp_sensor, cl_ab_humidity_sensor
 
 global logger
 logger = pi_ager_logging.create_logger(__name__) 
 
-class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
+class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humidity_sensor):
     
     def __init__(self):
         logger.debug(pi_ager_logging.me())
@@ -35,6 +35,8 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
         
         self._old_temperature = 0
         self._current_temperature = 0
+        self._old_humidity = 0
+        self._current_humidity = 0
         try:
             self._i2c_bus = cl_fact_i2c_bus_logic.get_instance().get_i2c_bus()
             logger.debug(self._i2c_bus)
@@ -52,7 +54,7 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
     def get_current_data(self):
         logger.debug(pi_ager_logging.me())
         self._read_data()
-        return(self._get_current_temperature(), self._get_current_humitity())
+        return(self._get_current_temperature(), self._get_current_humidity())
         
     def _get_current_temperature(self):
         logger.debug(pi_ager_logging.me())
@@ -70,21 +72,21 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
         #self._check_temperature()
         return(self._current_temperature)
   
-    def _get_current_humitity(self):
+    def _get_current_humidity(self):
         logger.debug(pi_ager_logging.me())
         #self._read_data()
-        self._current_humitity = self._i2c_sensor.get_humitity()
-        logger.debug(self._current_humitity)
-        if self._old_humitity is None:
-            self._old_humitity = 0
+        self._current_humidity = self._i2c_sensor.get_humidity()
+        logger.debug(self._current_humidity)
+        if self._old_humidity is None:
+            self._old_humidity = 0
         else:
       
-            self._old_humitity = self._current_humitity
+            self._old_humidity = self._current_humidity
             
         #self.m_current_temperature = 100.0
      
         #self._check_temperature()
-        return(self._current_humitity)
+        return(self._current_humidity)
 class th_main_sensor_sht3x(cl_main_sensor_sht3x):
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
     NAME = 'Main_sensor'

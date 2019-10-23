@@ -104,7 +104,7 @@ class cl_i2c_sensor_sht(ABC):
             logger.debug("Local current time :", localtime)    
             logger.debug("Humitity CRC calc is : %x " %h_crc_calc)
             logger.debug("Humitity CRC real is : %x " %h_crc) 
-            raise cx_i2c_sht_humitity_crc_error
+            raise cx_i2c_sht_humidity_crc_error
         
              
     def get_temperature(self):
@@ -118,15 +118,15 @@ class cl_i2c_sensor_sht(ABC):
         logger.debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
         
         return(Temperature_Celsius, Temperature_Fahrenheit)
-    def get_humitity(self):
+    def get_humidity(self):
         logger.debug(pi_ager_logging.me())
         h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
         
         Humitity = ((100.0 * self.h_val) / 2**16 - 1 )
 
-        logger.debug("Relative Humidity is : %.2f %%RH" %Humitity)
+        logger.debug("Relative Humidity is : %.2f %%RH" %Humidity)
         
-        return(Humitity)
+        return(Humidity)
 class th_i2c_sensor_sht():
     
     def __init__(self):

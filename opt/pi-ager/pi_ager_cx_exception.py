@@ -25,6 +25,6 @@ class cx_no_email_recipient_config_found(Error):
 class cx_i2c_sht_temperature_crc_error(Error):
     pass
 
-class cx_i2c_sht_humitity_crc_error(Error):
+class cx_i2c_sht_humidity_crc_error(Error):
     pass
     
