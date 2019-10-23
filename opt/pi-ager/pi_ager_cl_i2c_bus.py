@@ -47,14 +47,14 @@ class cl_i2c_bus_logic():
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
         try:
-            bus1 = smbus.SMBus(1)
+            self.bus1 = smbus.SMBus(1)
         except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
-        if bus1 is None:
-            raise cx_i2c_bus_errer(self,"Can't get I2C Bus" )
+        if self.bus1 is None:
+            raise cx_i2c_bus_error(self,"Can't get I2C Bus" )
     def get_i2c_bus(self):
         logger.debug(pi_ager_logging.me())
-        return bus1
+        return(self.bus1)
 
 class th_i2c_bus_logic():
     
