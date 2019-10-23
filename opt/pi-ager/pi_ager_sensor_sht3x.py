@@ -32,11 +32,11 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
         #self.o_sensor_type = o_sensor_type
-        pass
+        
         _old_temperature = 0
         _current_temperature = 0
         try:
-            self.i2c_bus = cl_fact_i2c_bus_logic.get_instance()
+            self.i2c_bus = cl_fact_i2c_bus_logic.get_instance().get_i2c_bus()
             self.sht3x = cl_fact_i2c_sensor_sht.get_instance(i2c_bus)
             self.sht3x.i2c_start_command()
         except Exception as cx_error:
