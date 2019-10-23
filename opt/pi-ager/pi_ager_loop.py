@@ -121,8 +121,11 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 logger.debug('Exeption CRC Error')
                 pass  
         if sensor_humidity_big is not None and sensor_temperature_big is not None:
-            sensor_temperature = round(sensor_temperature_big[0],2)
-            sensor_humidity = round(sensor_humidity_big[0],2)
+            sensor_temperature = sensor_temperature_big
+            sensor_humidity = sensor_humidity_big
+            
+#            sensor_temperature = round(sensor_temperature_big,2)
+#            sensor_humidity = round(sensor_humidity_big,2)
             last_temperature = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
             last_humidity = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)
             deviation_temperature = abs((sensor_temperature/(last_temperature + 0.1) * 100) - 100)
