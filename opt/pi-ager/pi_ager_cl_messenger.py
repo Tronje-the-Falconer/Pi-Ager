@@ -98,7 +98,9 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         elif str(self.cx_error.__class__.__name__ ) == 'SHT1xError':
             self.logic_alarm.execute_middle(replication = 7)
             self.exception_known = True
-
+        elif str(self.cx_error.__class__.__name__ ) == 'cx_i2c_sht_temperature_crc_error':
+            self.logic_alarm.execute_middle(replication = 7)
+            self.exception_known = True
                 
         else:
             self.logic_alarm.execute_middle(replication = 12)
