@@ -84,7 +84,7 @@ class cl_i2c_sensor_sht(ABC):
         address = 0x44
         self.data0 = self._i2c_bus.read_i2c_block_data(address, 0x00, 8)
         t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
-        t_crc_calc = _self._calculate_checksum(t_val)
+        t_crc_calc = self._calculate_checksum(t_val)
         t_crc = self.data0[2]
         
         h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
