@@ -59,7 +59,7 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humidity_sensor):
     def _get_current_temperature(self):
         logger.debug(pi_ager_logging.me())
         #self._read_data()
-        self._current_temperature = self._i2c_sensor.get_temperature()
+        self._current_temperature = float(self._i2c_sensor.get_temperature())
         logger.debug(self._current_temperature)
         if self._old_temperature is None:
             self._old_temperature = 0
@@ -75,7 +75,7 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humidity_sensor):
     def _get_current_humidity(self):
         logger.debug(pi_ager_logging.me())
         #self._read_data()
-        self._current_humidity = self._i2c_sensor.get_humidity()
+        self._current_humidity = float(self._i2c_sensor.get_humidity())
         logger.debug(self._current_humidity)
         if self._old_humidity is None:
             self._old_humidity = 0
