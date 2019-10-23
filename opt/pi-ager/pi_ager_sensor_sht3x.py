@@ -36,23 +36,23 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
         _old_temperature = 0
         _current_temperature = 0
         try:
-            self.i2c_bus = cl_fact_i2c_bus_logic.get_instance().get_i2c_bus()
-            logger.debug(self.i2c_bus)
-            self.sht3x = cl_fact_i2c_sensor_sht.get_instance(self.i2c_bus)
-            self.sht3x.i2c_start_command()
+            self._i2c_bus = cl_fact_i2c_bus_logic.get_instance().get_i2c_bus()
+            logger.debug(self._i2c_bus)
+            self._i2c_sensor = cl_fact_i2c_sensor_sht.get_instance(self._i2c_bus)
+            self._i2c_sensor.i2c_start_command()
         except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
     def _read_data(self):
         logger.debug(pi_ager_logging.me())
         try:
-            self.sht3x.read_data()
+            self._i2c_sensor.read_data()
         except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
-    def get_temperature(self):
+    def get_current_temperature(self):
         logger.debug(pi_ager_logging.me())
         self._read_data()
-        self._current_temperature = self.sht3x_get_temperature(self)
-        
+        self._current_temperature = self._i2c_sensor.get_temperature()
+        logger.debug(self._current_temperature)
         if self._old_temperature is None:
             self._old_temperature = 0
         else:
