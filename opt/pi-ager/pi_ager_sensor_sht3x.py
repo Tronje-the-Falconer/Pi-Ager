@@ -38,7 +38,7 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
         try:
             self.i2c_bus = cl_fact_i2c_bus_logic.get_instance().get_i2c_bus()
             logger.debug(self.i2c_bus)
-            self.sht3x = cl_fact_i2c_sensor_sht.get_instance(i2c_bus)
+            self.sht3x = cl_fact_i2c_sensor_sht.get_instance(self.i2c_bus)
             self.sht3x.i2c_start_command()
         except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
