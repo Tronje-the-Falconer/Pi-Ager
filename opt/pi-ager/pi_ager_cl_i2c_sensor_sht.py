@@ -47,6 +47,7 @@ class cl_i2c_sensor_sht(ABC):
         logger.debug(pi_ager_logging.me())
         self.i2c.write(self._RESET)
         
+
     def _calculate_checksum(value):
         """4.12 Checksum Calculation from an unsigned short input"""
         logger.debug(pi_ager_logging.me())
@@ -66,21 +67,22 @@ class cl_i2c_sensor_sht(ABC):
     def i2c_start_command(self):
         logger.debug(pi_ager_logging.me())
         #Write the read sensor command
+        address = 0x44
         msb_data = 0x24
         lsb_data = 0x00
         
-        
-        self._i2c_bus.write_byte_data(self._i2c_bus.get_i2c_address(), msb_data, lsb_data)
+        self._i2c_bus.write_byte_data(address, msb_data, lsb_data)
         time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
         
         
         msb_data = 0x21
         lsb_data = 0x30
-        self._i2c_bus.write_byte_data(self._i2c_bus.get_i2c_address(), msb_data, lsb_data)
+        self._i2c_bus.write_byte_data(address, msb_data, lsb_data)
         time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
     def read_data(self):
         logger.debug(pi_ager_logging.me())
-        self.data0 = self._i2c_bus.read_i2c_block_data(self._i2c_bus.get_i2c_address(), 0x00, 8)
+        address = 0x44
+        self.data0 = self._i2c_bus.read_i2c_block_data(address, 0x00, 8)
         t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
         t_crc_calc = _self._calculate_checksum(t_val)
         t_crc = self.data0[2]
