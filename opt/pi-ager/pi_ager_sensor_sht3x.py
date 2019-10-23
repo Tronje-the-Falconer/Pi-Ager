@@ -33,8 +33,8 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
             raise cx_direct_call(self,"Please use factory class" )
         #self.o_sensor_type = o_sensor_type
         
-        _old_temperature = 0
-        _current_temperature = 0
+        self._old_temperature = 0
+        self._current_temperature = 0
         try:
             self._i2c_bus = cl_fact_i2c_bus_logic.get_instance().get_i2c_bus()
             logger.debug(self._i2c_bus)
@@ -61,8 +61,8 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humitity_sensor):
             
         #self.m_current_temperature = 100.0
      
-        self._check_temperature()
-
+        #self._check_temperature()
+        return(self._current_temperature)
   
 class th_main_sensor_sht3x(cl_main_sensor_sht3x):
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
