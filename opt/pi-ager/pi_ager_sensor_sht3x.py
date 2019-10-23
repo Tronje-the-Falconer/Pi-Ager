@@ -19,6 +19,7 @@ from pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 from pi_ager_cl_i2c_sensor_sht import cl_fact_i2c_sensor_sht
 from pi_ager_cx_exception import *
+from pi_ager_cl_messenger import cl_fact_logic_messenger
 from pi_ager_cl_ab_sensor import cl_ab_temp_sensor, cl_ab_humitity_sensor
 
 global logger

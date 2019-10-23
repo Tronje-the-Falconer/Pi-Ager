@@ -17,6 +17,7 @@ import pi_ager_logging
 
 from abc import ABC, abstractmethod
 from pi_ager_cx_exception import *
+from pi_ager_cl_messenger import cl_fact_logic_messenger
 
 global logger
 logger = pi_ager_logging.create_logger(__name__) 
