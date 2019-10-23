@@ -72,7 +72,7 @@ class th_main_sensor_sht3x(cl_main_sensor_sht3x):
     def __init__(self):
     
         self.get_type_raise = False
-        self._type = "SHT"
+        self._type = "SHT3x"
         
     def get_type(self):
         if self.get_type_raise == True:
