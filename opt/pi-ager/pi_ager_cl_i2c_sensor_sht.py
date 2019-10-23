@@ -77,7 +77,7 @@ class cl_i2c_sensor_sht(ABC):
         
         msb_data = 0x21
         lsb_data = 0x30
-        self.o_i2c_bus.write_byte_data(address, msb_data, lsb_data)
+        self._i2c_bus.write_byte_data(address, msb_data, lsb_data)
         time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
     def read_data(self):
         logger.debug(pi_ager_logging.me())
