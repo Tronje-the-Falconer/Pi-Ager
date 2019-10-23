@@ -68,7 +68,7 @@ class cl_i2c_sensor_sht(ABC):
         logger.debug(pi_ager_logging.me())
         #Write the read sensor command
         msb_data = 0x24
-        lsb_data = 0x00 
+        lsb_data = 0x00
         
         
         self._i2c_bus.write_byte_data(self._i2c_bus.get_i2c_address(), msb_data, lsb_data)
