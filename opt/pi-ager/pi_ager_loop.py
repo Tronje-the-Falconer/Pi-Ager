@@ -424,7 +424,7 @@ def doMainLoop():
                 # logger.info(logstring)
                 # logger.info(pi_ager_names.logspacer2)
                 logstring = logstring + ' \n ' + pi_ager_names.logspacer2
-                logstring = logstring + ' \n ' +  _('selected sensor') + ': ' + str(pi_ager_init.sensorname)
+                logstring = logstring + ' \n ' +  _('selected sensor') + ': ' + str(cl_fact_main_sensor_type.get_instance().get_sensor_type_ui())
                 # logger.info(logstring)
                 # logstring = _('value in database') + ': ' + str(sensortype)
                 logger.debug(_('value in database') + ': ' + str(sensortype))
