@@ -18,7 +18,7 @@ import inspect
 from pi_ager_cx_exception import *
 
 class cl_ab_humidity_sensor(ABC):
-    __max_humitity_errors = 10
+    __max_humidity_errors = 10
     __HUMIDITY_SENSOR_STATES = ["Valid", "Invalid"]
 
     def __init__(self):
@@ -36,7 +36,7 @@ class cl_ab_humidity_sensor(ABC):
     def _read_data(self):
         pass
 
-    def get_humitity_state(self):
+    def get_humidity_state(self):
         return(cl_ab_humidity_sensor.__HUMIDITY_SENSOR_STATES[self._state])
 
     def _check_humidity(self):
