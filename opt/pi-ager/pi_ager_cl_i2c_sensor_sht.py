@@ -33,12 +33,12 @@ class cl_i2c_sensor_sht(ABC):
     _TRIGGER = 0x2C06
     _STATUS_BITS_MASK = 0xFFFC
 
-    def __init__(self, o_i2c_bus):
+    def __init__(self, i_i2c_bus):
         logger.debug(pi_ager_logging.me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
-        self.o_sensor_type = o_sensor_type
-        self.o_i2c_bus = o_i2c_bus
+        #self._sensor_type = o_sensor_type
+        self._i2c_bus = i_i2c_bus
         
     def solf_reset(self):
         """Performs Soft Reset on SHT chip"""
@@ -78,7 +78,7 @@ class cl_i2c_sensor_sht(ABC):
         time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
     def read_data(self):
         logger.debug(pi_ager_logging.me())
-        self.data0 = self.o_i2c_bus.read_i2c_block_data(address, 0x00, 8)
+        self.data0 = self._i2c_bus.read_i2c_block_data(address, 0x00, 8)
         t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
         t_crc_calc = _self._calculate_checksum(t_val)
         t_crc = self.data0[2]
