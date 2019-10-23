@@ -68,6 +68,8 @@ class cl_i2c_sensor_sht(ABC):
         address = 0x44
         msb_data = 0x24
         lsb_data = 0x00
+        
+        
         self._i2c_bus.write_byte_data(address, msb_data, lsb_data)
         time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
         
