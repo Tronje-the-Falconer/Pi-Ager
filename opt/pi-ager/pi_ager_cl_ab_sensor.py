@@ -25,7 +25,7 @@ class cl_ab_humidity_sensor(ABC):
         self._current_humidity = 0
         self._old_humidity = 0
         self._state = 0
-    
+"""    
     def get_current_humidity(self):
         return(self._current_humidity)
     
@@ -44,6 +44,8 @@ class cl_ab_humidity_sensor(ABC):
             self._state = 1
         else:
             self._state = 0
+"""
+
 class cl_ab_temp_sensor(ABC):
     __max_temp_errors = 10
     __TEMP_SENSOR_STATES = ["Valid", "Invalid"]
@@ -52,7 +54,10 @@ class cl_ab_temp_sensor(ABC):
         self._current_temperature = 0
         self._old_temperature = 0
         self._state = 0
-    
+
+    def get_dewpoint(self):
+        pass    
+"""    
     def get_current_temperature(self):
         return(self._current_temperature)
     
@@ -72,4 +77,4 @@ class cl_ab_temp_sensor(ABC):
         else:
             self.m_state = 0
         
-    
+"""    
