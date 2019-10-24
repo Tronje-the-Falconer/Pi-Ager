@@ -12,7 +12,7 @@ __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Production"
 
 from abc import ABC, abstractmethod
-from math import log10
+import math
 import inspect
 import pi_ager_logging
 
