@@ -74,7 +74,7 @@ def setupGPIO():
     gpio.setwarnings(False)
     
     # Board mode wird gesetzt
-    gpio.setmode(pi_ager_names.board_mode)
+    gpio.setmode(board_mode)
     
     # Einstellen der GPIO PINS
     # Pinleiste vertikal Pin 1 oben links pin 2 oben rechts
