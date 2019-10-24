@@ -60,11 +60,11 @@ class cl_main_sensor(cl_ab_temp_sensor, cl_ab_humidity_sensor):
         R = 8314.3  #R* = 8314.3 J/(kmol*K) (universelle Gaskonstante)
         mw = 18.016 #mw = 18.016 "kg/kmol (Molekulargewicht des Wasserdampfes)
         temperature_kelvin = temperature + 273.15
-        SDD = 6.1078 * 10^((a*temperature)/(b+temperature))
+        SDD = 6.1078 * 10**((a*temperature)/(b+temperature))
         DD = humidity/100 * SDD
         v = log10(DD/6.1078)
         temperature_dewpoint = b*v/(a-v) 
-        humidity_absolute = 10^5 * mw/R * DD/temperature_kelvin
+        humidity_absolute = 10**5 * mw/R * DD/temperature_kelvin
         calculated_dewpoint = (temperature_dewpoint, humidity_absolute)
         return(calculated_dewpoint)
     
