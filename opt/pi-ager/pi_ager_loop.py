@@ -71,7 +71,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                  
     try:
         if sensorname == 'DHT11' or sensorname == 'DHT22':
-            sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_names.gpio_sensor_data)
+            sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_gpio_config.gpio_sensor_data)
             logger.debug("sensor_temperature_big: " + str(sensor_temperature_big))
             logger.debug("sensor_humidity_big: " + str(sensor_humidity_big))
             # atp = 17.271  ermittelt aus dem Datenblatt DHT11 und DHT22
@@ -79,7 +79,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
         
         elif sensorname == 'SHT75': #SHT
             try:
-                sensor_sht = pi_sht1x.SHT1x(pi_ager_names.gpio_sensor_data, pi_ager_names.gpio_sensor_sync, gpio_mode=pi_ager_names.board_mode)
+                sensor_sht = pi_sht1x.SHT1x(pi_ager_gpio_config.gpio_sensor_data, pi_ager_gpio_config.gpio_sensor_sync, gpio_mode=pi_ager_gpio_config.board_mode)
                 sensor_sht.read_temperature()
                 sensor_sht.read_humidity()
                 sensor_temperature_big = sensor_sht.temperature_celsius
@@ -215,7 +215,7 @@ def switch_light(relay_state):
     """
     setting gpio for light
     """
-    set_gpio_value(pi_ager_names.gpio_light, relay_state)
+    set_gpio_value(pi_ager_gpio_config.gpio_light, relay_state)
 
 def status_light_in_current_values_is_on():
     """
@@ -744,7 +744,7 @@ def doMainLoop():
                 # Ausgabe der Werte auf der Konsole
                 # logger.info(pi_ager_names.logspacer2)
                 logstring = logstring + ' \n ' + pi_ager_names.logspacer2
-                if gpio.input(pi_ager_names.gpio_heater) == False:
+                if gpio.input(pi_ager_gpio_config.gpio_heater) == False:
                     logstring = logstring + ' \n ' +  _('heater') + ' ' + _('on')
                     # logger.info(logstring)
                     status_heater = 1
