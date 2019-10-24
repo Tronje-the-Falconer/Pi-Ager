@@ -20,12 +20,13 @@ from pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 from pi_ager_cl_i2c_sensor_sht import cl_fact_i2c_sensor_sht
 from pi_ager_cx_exception import *
 from pi_ager_cl_messenger import cl_fact_logic_messenger
-from pi_ager_cl_ab_sensor import cl_ab_temp_sensor, cl_ab_humidity_sensor
+from pi_ager_cl_ab_sensor import cl_main_sensor
+#cl_ab_temp_sensor, cl_ab_humidity_sensor
 
 global logger
 logger = pi_ager_logging.create_logger(__name__) 
 
-class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humidity_sensor):
+class cl_main_sensor_sht3x(cl_main_sensor):
     
     def __init__(self):
         logger.debug(pi_ager_logging.me())
@@ -44,6 +45,7 @@ class cl_main_sensor_sht3x(cl_ab_temp_sensor, cl_ab_humidity_sensor):
             self._i2c_sensor.i2c_start_command()
         except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+            
     def _read_data(self):
         logger.debug(pi_ager_logging.me())
         try:

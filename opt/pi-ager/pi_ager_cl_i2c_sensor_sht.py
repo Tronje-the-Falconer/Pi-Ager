@@ -131,6 +131,19 @@ class cl_i2c_sensor_sht(ABC):
         logger.debug("Relative Humidity is : %.2f %%RH" %Humidity)
         
         return(Humidity)
+    def set_heading_on(self):
+        """Switch the heading on the sensor on"""
+        logger.debug(pi_ager_logging.me())
+        self.i2c.write(self._HEATER_ON)
+        pass
+    
+    def set_heading_off(self):
+        """Switch the heading on the sensor off"""
+        logger.debug(pi_ager_logging.me())
+        self.i2c.write(self._HEATER_OFF)
+        pass
+    
+    
 class th_i2c_sensor_sht():
     
     def __init__(self):
