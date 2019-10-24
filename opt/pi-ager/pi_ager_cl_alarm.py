@@ -36,7 +36,7 @@ class cl_logic_alarm:
       
         gpio.setmode(pi_ager_names.board_mode)
         gpio.setwarnings(False)
-        gpio.setup(pi_ager_names.gpio_alarm, gpio.OUT )
+        gpio.setup(pi_ager_gpio_config.gpio_alarm, gpio.OUT )
         self.alarm_gpio = pi_ager_names.gpio_alarm
         
         self.replication  = 3
