@@ -5,7 +5,7 @@
     
     setting up variables
 """
-import RPi.GPIO as gpio
+#import RPi.GPIO as gpio
 
 ########################### Definition of variables
 version_number = '3.1.0'
@@ -148,54 +148,6 @@ last_change_humidity_json_key = 'last_change_humidity'
 last_change_scale1_json_key = 'last_change_scale1'
 last_change_scale2_json_key = 'last_change_scale2'
 
-# hardcoded values
-# Pinbelegung
-# Pinleiste vertikal Pin 1 oben links pin 2 oben rechts
-board_mode = gpio.BCM              # GPIO board mode (BCM = Broadcom SOC channel number - numbers after GPIO Bsp. GPIO12=12 [GPIO.BOARD = Pin by number Bsp: GPIO12=32])
-
-# linke Pinleiste:
-# 3 V
-gpio_notinuse_0 = 2                 
-gpio_heater = 3                    # GPIO fuer Heizkabel
-gpio_cooling_compressor = 4        # GPIO fuer Kuehlschrankkompressor
-# Ground
-gpio_sensor_data = 17              # GPIO fuer Data Temperatur/Humidity Sensor
-gpio_sensor_sync = 27              # GPIO fuer Sync Temperatur/Humidity Sensor
-gpio_switch = 22                   # GPIO fuer manuellen Schalter
-# 3 V
-gpio_scale2_data = 10               # GPIO fuer Waage2 Data
-gpio_scale2_sync = 9                # GPIO fuer Waage2 Sync
-gpio_ups_bat_low = 11               # GPIO fuer UPS Batterie low signal
-# Ground
-gpio_notinuse_2 =  0
-gpio_scale1_data = 5                # GPIO fuer Waage1 Data
-gpio_scale1_sync = 6                # GPIO fuer Waage1 Sync
-gpio_alarm = 13                     # GPIO fuer Piezzo
-gpio_temperature_meat_MISO = 19     # GPIO fuer A/D Wandler Fleischtemperatursensoren
-gpio_power_monitor = 26             # GPIO für Powersignal
-# Ground
-
-# rechte Pinleiste:#
-# 5 V
-# 5 V
-# Ground
-gpio_display_txd = 14            # GPIO fuer Display
-gpio_display_rxd = 15            # GPIO fuer Diplay
-gpio_humidifier = 18               # GPIO fuer Luftbefeuchter
-# Ground
-gpio_exhausting_air = 23           # GPIO fuer Austauschluefter
-gpio_circulating_air = 24          # GPIO fuer Umluftventilator
-# Ground
-gpio_uv = 25                       # GPIO fuer UV Licht
-gpio_light = 8                     # GPIO fuer Licht
-gpio_dehumidifier = 7              # GPIO fuer Entfeuchter
-gpio_notinuse_4 = 1
-# Ground
-gpio_notinuse_5 = 12
-# Ground
-gpio_temperature_meat_CSO = 16     # GPIO fuer A/D Wandler Fleischtemperatursensoren
-gpio_temperature_meat_MOSI = 20    # GPIO fuer A/D Wandler Fleischtemperatursensoren
-gpio_temperature_meat_SCLK = 21    # GPIO fuer A/D Wandler Fleischtemperatursensoren Sync
 
 pin_with_voltage = True                      # 3,3V = 1 | GPIO.HIGH  | TRUE
 pin_without_voltage = (not pin_with_voltage) #   0V = 0 | GPIO.LOW   | FALSE
