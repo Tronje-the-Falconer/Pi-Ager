@@ -12,6 +12,7 @@ __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Production"
 
 from abc import ABC, abstractmethod
+from math import log10
 import inspect
 import pi_ager_logging
 
@@ -62,7 +63,7 @@ class cl_main_sensor(cl_ab_temp_sensor, cl_ab_humidity_sensor):
         temperature_kelvin = temperature + 273.15
         SDD = 6.1078 * 10**((a*temperature)/(b+temperature))
         DD = humidity/100 * SDD
-        v = log10(DD/6.1078)
+        v = math.log10(DD/6.1078)
         temperature_dewpoint = b*v/(a-v) 
         humidity_absolute = 10**5 * mw/R * DD/temperature_kelvin
         calculated_dewpoint = (temperature_dewpoint, humidity_absolute)
