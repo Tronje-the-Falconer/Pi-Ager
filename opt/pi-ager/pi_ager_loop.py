@@ -111,13 +111,15 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 #Read now temperature of the main sensor
                 logger.debug('read data')
                 measured_data = main_sensor.get_current_data()
-                (sensor_temperature_big, sensor_humidity_big) = measured_data
+                (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
                 #sensor_humidity_big    = main_sensor.get_
                 #main_sensor.get_sensor_type()
 #                sensor_temperature_big = main_sensor.get_current_temperature()
                       
                 logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
                 logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
+                logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big)) 
+                
             except cx_i2c_sht_temperature_crc_error as cx_error:
                 logger.debug('Exeption CRC Error')
                 pass  
