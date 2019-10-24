@@ -23,14 +23,14 @@ from pi_ager_cl_ab_sensor import cl_ab_temp_sensor, cl_ab_humidity_sensor
     
 class cl_main_sensor(cl_ab_temp_sensor, cl_ab_humidity_sensor):
             
-    self._error_counter = 0
-    self._max_errors = 1
-    self._measuring_intervall = 300
+
     
 
     def __init__(self, o_sensor_type):
         logger.debug(pi_ager_logging.me())
-
+        self._error_counter = 0
+        self._max_errors = 1
+        self._measuring_intervall = 300
         self.o_sensor_type = o_sensor_type
     def get_current_data(self):
         logger.debug(pi_ager_logging.me())
