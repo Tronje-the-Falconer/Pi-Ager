@@ -22,15 +22,21 @@ from pi_ager_cl_ab_sensor import cl_ab_temp_sensor, cl_ab_humidity_sensor
         
     
 class cl_main_sensor(cl_ab_temp_sensor, cl_ab_humidity_sensor):
-    
-    __error_counter = 0
-    __measuring_intervall = 300
+            
+    self._error_counter = 0
+    self._max_errors = 1
+    self._measuring_intervall = 300
     
 
     def __init__(self, o_sensor_type):
         logger.debug(pi_ager_logging.me())
+
         self.o_sensor_type = o_sensor_type
-        
+    def get_current_data(self):
+        logger.debug(pi_ager_logging.me())
+        if (self._error_counter >= self._max_errors):
+            self._execute_soft_reset()
+                 
     def get_sensor_type_ui(self):
         logger.debug(pi_ager_logging.me())
         return( self.o_sensor_type.get_sensor_type_ui() )
@@ -39,11 +45,30 @@ class cl_main_sensor(cl_ab_temp_sensor, cl_ab_humidity_sensor):
         logger.debug(pi_ager_logging.me())
         return( self.o_sensor_type._get_type() )
     
-    def get_dewpoint(self):
+    def get_dewpoint(self, temperature, humidity):
         logger.debug(pi_ager_logging.me())
-        pass
+        if (temperature >= 0):
+            a = 7.5
+            b = 237.3
+        elif (temperature < 0 and temperature > -4):
+            a = 7.6
+            b = 240.7
+        elif (temperature <= -4):
+            a = 9.5
+            b = 265.5
         
-    def execute_soft_reset(self):
+        R = 8314.3  #R* = 8314.3 J/(kmol*K) (universelle Gaskonstante)
+        mw = 18.016 #mw = 18.016 "kg/kmol (Molekulargewicht des Wasserdampfes)
+        temperature_kelvin = temperature + 273.15
+        SDD = 6.1078 * 10^((a*temperature)/(b+temperature))
+        DD = humidity/100 * SDD
+        v = log10(DD/6.1078)
+        temperature_dewpoint = b*v/(a-v) 
+        humidity_absolute = 10^5 * mw/R * DD/temperature_kelvin
+        calculated_dewpoint = (temperature_dewpoint, humidity_absolute)
+        return(calculated_dewpoint)
+    
+    def _execute_soft_reset(self):
         logger.debug(pi_ager_logging.me())
         pass
     

@@ -33,7 +33,8 @@ class cl_main_sensor_sht3x(cl_main_sensor):
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
         #self.o_sensor_type = o_sensor_type
-        
+        super.__init__()
+        self._max_errors = 1
         self._old_temperature = 0
         self._current_temperature = 0
         self._old_humidity = 0
@@ -51,12 +52,19 @@ class cl_main_sensor_sht3x(cl_main_sensor):
         try:
             self._i2c_sensor.read_data()
         except Exception as cx_error:
+            self._error_count = self._error_count + 1
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
    
     def get_current_data(self):
         logger.debug(pi_ager_logging.me())
         self._read_data()
-        measured_data = (self._get_current_temperature(), self._get_current_humidity())
+        self._current_temperature = self._get_current_temperature()
+        self._current_humidity    = self._get_current_humidity()
+        self._dewpoint            = self._get_dewpoint(self._current_temperature, self._current_humidity)
+    
+        (temperature_dewpoint, humidity_absolute) = self._dewpoint
+        
+        measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint)
         return(measured_data)
         
     def _get_current_temperature(self):
