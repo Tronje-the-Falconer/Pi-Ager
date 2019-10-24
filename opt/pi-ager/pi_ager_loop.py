@@ -840,7 +840,7 @@ def doMainLoop():
             
             logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter))
     
-            time.sleep(1)  
+            time.sleep(10)  
             
             # Logfile auf Rechte prüfen und evtl. neu setzen
             
