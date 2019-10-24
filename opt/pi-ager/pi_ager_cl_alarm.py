@@ -34,10 +34,10 @@ class cl_logic_alarm:
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
       
-        gpio.setmode(pi_ager_names.board_mode)
+        gpio.setmode(pi_ager_gpio_config.board_mode)
         gpio.setwarnings(False)
         gpio.setup(pi_ager_gpio_config.gpio_alarm, gpio.OUT )
-        self.alarm_gpio = pi_ager_names.gpio_alarm
+        self.alarm_gpio = pi_ager_gpio_config.gpio_alarm
         
         self.replication  = 3
         self.Sleep     = 0.5
