@@ -61,7 +61,7 @@ class cl_main_sensor_sht3x(cl_main_sensor):
         self._read_data()
         self._current_temperature = self._get_current_temperature()
         self._current_humidity    = self._get_current_humidity()
-        self._dewpoint            = super()._get_dewpoint(self._current_temperature, self._current_humidity)
+        self._dewpoint            = self.get_dewpoint(self._current_temperature, self._current_humidity)
     
         (temperature_dewpoint, humidity_absolute) = self._dewpoint
         
