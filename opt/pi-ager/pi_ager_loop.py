@@ -26,7 +26,7 @@ from pi_ager_cl_alarm import cl_fact_logic_alarm
 from pi_ager_cx_exception import *
 from pi_ager_cl_messenger import cl_fact_logic_messenger
 from pi_ager_cl_sensor_type import cl_fact_main_sensor_type
-from pi_ager_cl_sensor import cl_fact_main_sensor
+from pi_ager_cl_sensor_fact import cl_fact_main_sensor
 
 
 global logger
