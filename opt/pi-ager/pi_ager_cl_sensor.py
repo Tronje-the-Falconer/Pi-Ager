@@ -17,7 +17,7 @@ import inspect
 from pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 
 from pi_ager_cx_exception import *
-from pi_ager_cl_sensor_fact import *
+#from pi_ager_cl_sensor_fact import *
 from pi_ager_cl_ab_sensor import cl_ab_temp_sensor, cl_ab_humidity_sensor
         
     

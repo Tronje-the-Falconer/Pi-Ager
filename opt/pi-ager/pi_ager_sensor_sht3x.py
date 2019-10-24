@@ -26,7 +26,7 @@ from pi_ager_cl_messenger import cl_fact_logic_messenger
 global logger
 logger = pi_ager_logging.create_logger(__name__) 
 
-class cl_main_sensor_sht3x(cl_main_sensor):
+class cl_main_sensor_sht3x():
     
     def __init__(self):
         logger.debug(pi_ager_logging.me())
