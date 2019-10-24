@@ -13,6 +13,7 @@ __status__ = "Production"
 
 from abc import ABC, abstractmethod
 import inspect
+import pi_ager_logging
 
 from pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 
@@ -20,11 +21,10 @@ from pi_ager_cx_exception import *
 #from pi_ager_cl_sensor_fact import *
 from pi_ager_cl_ab_sensor import cl_ab_temp_sensor, cl_ab_humidity_sensor
         
+global logger
+logger = pi_ager_logging.create_logger(__name__) 
     
 class cl_main_sensor(cl_ab_temp_sensor, cl_ab_humidity_sensor):
-            
-
-    
 
     def __init__(self, o_sensor_type):
         logger.debug(pi_ager_logging.me())
