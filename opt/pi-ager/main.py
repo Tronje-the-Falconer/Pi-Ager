@@ -15,7 +15,7 @@ import pi_ager_database_check
 pi_ager_database_check.check_and_update_database()
 
 import pi_ager_logging
-from pi_ager_cl_logger import cl_fact_logger
+from main.pi_ager_cl_logger import cl_fact_logger
 pi_ager_logging.create_logger('main.py')
 import pi_ager_loop
 import pi_ager_init
