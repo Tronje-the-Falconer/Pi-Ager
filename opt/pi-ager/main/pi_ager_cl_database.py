@@ -1,3 +1,15 @@
+# -*- coding: utf-8 -*-
+ 
+"""This class is for handling the different databases."""
+
+__author__ = "Claus Fischer"
+__copyright__ = "Copyright 2019, The Pi-Ager Project"
+__credits__ = ["Claus Fischer"]
+__license__ = "GPL"
+__version__ = "1.0.0"
+__maintainer__ = "Claus Fischer"
+__email__ = "DerBurgermeister@pi-ager.org"
+__status__ = "Production"
 from abc import ABC
 import inspect
 import sqlite3

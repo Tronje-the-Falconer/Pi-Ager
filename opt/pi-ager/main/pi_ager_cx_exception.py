@@ -1,4 +1,15 @@
+# -*- coding: utf-8 -*-
  
+"""This exception class is for all Exceptions in this project ."""
+
+__author__ = "Claus Fischer"
+__copyright__ = "Copyright 2019, The Pi-Ager Project"
+__credits__ = ["Claus Fischer"]
+__license__ = "GPL"
+__version__ = "1.0.0"
+__maintainer__ = "Claus Fischer"
+__email__ = "DerBurgermeister@pi-ager.org"
+__status__ = "Production" 
 
 class Error(Exception):
     """Base class for other exceptions"""

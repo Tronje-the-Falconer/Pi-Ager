@@ -2,6 +2,7 @@
 
 """This class is for encryt and decryt a string depending on the serial number of the Raspberry PI."""
 """e.g. E-Mail password"""
+
 __author__ = "Claus Fischer"
 __copyright__ = "Copyright 2019, The Pi-Ager Project"
 __credits__ = ["Claus Fischer"]

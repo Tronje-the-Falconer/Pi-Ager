@@ -1,3 +1,16 @@
+# -*- coding: utf-8 -*-
+ 
+"""This unit-test class is for testing the sensor class."""
+
+__author__ = "Claus Fischer"
+__copyright__ = "Copyright 2019, The Pi-Ager Project"
+__credits__ = ["Claus Fischer"]
+__license__ = "GPL"
+__version__ = "1.0.0"
+__maintainer__ = "Claus Fischer"
+__email__ = "DerBurgermeister@pi-ager.org"
+__status__ = "Development"
+
 from unittest import TestCase
 from pi_ager_cl_sensor import cl_fact_main_sensor, th_main_sensor
 from pi_ager_cl_sensor_type import cl_fact_main_sensor_type, th_main_sensor_type
