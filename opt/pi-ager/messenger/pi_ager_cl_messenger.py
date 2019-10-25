@@ -19,11 +19,11 @@ import sqlite3 #Remove after test
 import pi_ager_paths #Remove after test
 import pi_ager_names
 import pi_ager_logging
-from pi_ager_cl_database import cl_fact_database_config
-from pi_ager_cl_alarm import cl_fact_logic_alarm
-from pi_ager_cl_send_email import cl_fact_logic_send_email, cl_logic_send_email
+from main.pi_ager_cl_database import cl_fact_database_config
+from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
+from messenger.pi_ager_cl_send_email import cl_fact_logic_send_email, cl_logic_send_email
                              
-from pi_ager_cx_exception import *
+from main.pi_ager_cx_exception import *
 from _ast import Pass
 
 global logger

@@ -27,7 +27,7 @@ import traceback
 #import pi_ager_names
 import pi_ager_logging
 #from pi_ager_cl_messenger import cl_fact_logic_messenger
-from pi_ager_cx_exception import *
+from main.pi_ager_cx_exception import *
 
 global logger
 logger = pi_ager_logging.create_logger(__name__)

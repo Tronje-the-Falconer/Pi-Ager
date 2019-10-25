@@ -15,10 +15,10 @@ from abc import ABC
 import inspect
 import pi_ager_names
 import pi_ager_logging
-from pi_ager_cl_crypt import cl_fact_help_crypt
-from pi_ager_cl_database import cl_fact_database_config
+from messenger.pi_ager_cl_crypt import cl_fact_help_crypt
+from main.pi_ager_cl_database import cl_fact_database_config
 
-from pi_ager_cx_exception import *
+from main.pi_ager_cx_exception import *
 
 global logger
 logger = pi_ager_logging.create_logger(__name__)

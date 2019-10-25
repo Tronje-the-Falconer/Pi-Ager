@@ -19,7 +19,7 @@ from pi_ager_cl_database import cl_fact_database_config
 
 
 
-from pi_ager_cx_exception import *
+from main.pi_ager_cx_exception import *
 
 global logger
 logger = pi_ager_logging.create_logger(__name__)
