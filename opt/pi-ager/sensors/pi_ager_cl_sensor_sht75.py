@@ -17,7 +17,6 @@ import inspect
 from pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from pi_ager_cx_exception import *
 
-
 class cl_main_sensor_sht75(cl_main_sensor):
     
     def __init__(self, o_sensor_type):
