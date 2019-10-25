@@ -119,11 +119,12 @@ class cl_fact_logger(ABC):
         """
         Factory method to get the database instance
         """
-        logger.debug(pi_ager_logging.me())
+        
         if cl_fact_logger.__o_instance is not None:
             return(cl_fact_logger.__o_instance)
-        cl_fact_dlogger.__o_instance = cl_logger()
-        return(cl_logger.__o_instance)
+        cl_fact_logger.__o_instance = cl_logger()
+        cl_fact_logger.__o_instance.debug(pi_ager_logging.me())
+        return(cl_fact_logger.__o_instance)
 
     def __init__(self):
         """
