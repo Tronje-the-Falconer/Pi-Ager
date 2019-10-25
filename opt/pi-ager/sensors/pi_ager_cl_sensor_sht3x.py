@@ -92,7 +92,6 @@ class cl_main_sensor_sht3x(cl_main_sensor):
         if self._old_humidity is None:
             self._old_humidity = 0
         else:
-      
             self._old_humidity = self._current_humidity
             
         #self.m_current_temperature = 100.0
