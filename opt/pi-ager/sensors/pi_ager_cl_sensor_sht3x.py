@@ -65,8 +65,8 @@ class cl_main_sensor_sht3x(cl_main_sensor):
     
         (temperature_dewpoint, humidity_absolute) = self._dewpoint
         
-        measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint)
-        return(measured_data)
+        self.measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint)
+        return(self.measured_data)
         
     def _get_current_temperature(self):
         logger.debug(pi_ager_logging.me())
@@ -99,6 +99,15 @@ class cl_main_sensor_sht3x(cl_main_sensor):
      
         #self._check_temperature()
         return(self._current_humidity)
+    def _write_to_db(self):
+        super()._write_to_db()
+        pass
+
+    def execute(self):
+        logger.debug(pi_ager_logging.me())
+        self.get_current_data()
+        self._write_to_db()
+        
 class th_main_sensor_sht3x(cl_main_sensor_sht3x):
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
     NAME = 'Main_sensor'

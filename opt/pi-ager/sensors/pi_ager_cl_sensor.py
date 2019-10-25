@@ -25,7 +25,7 @@ from pi_ager_cl_ab_sensor import cl_ab_temp_sensor, cl_ab_humidity_sensor
 global logger
 logger = pi_ager_logging.create_logger(__name__) 
     
-class cl_main_sensor(cl_ab_temp_sensor, cl_ab_humidity_sensor):
+class cl_main_sensor(cl_ab_sensor):
 
     def __init__(self, o_sensor_type):
         logger.debug(pi_ager_logging.me())
@@ -73,8 +73,13 @@ class cl_main_sensor(cl_ab_temp_sensor, cl_ab_humidity_sensor):
         logger.debug(pi_ager_logging.me())
         pass
     
+    def _write_to_db(self):
+        """ Write the sensor data to time series DB"""
+        logger.debug(pi_ager_logging.me())
+       
+        pass
 
-    
+       
 class th_main_sensor():
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
     NAME = 'Main_sensor'

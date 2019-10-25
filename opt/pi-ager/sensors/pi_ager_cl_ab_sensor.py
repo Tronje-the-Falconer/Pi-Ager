@@ -16,7 +16,19 @@ import inspect
 
 #from pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from pi_ager_cx_exception import *
-
+class cl_ab_sensor(cl_ab_temp_sensor, cl_ab_humidity_sensor):
+    def __init__(self):
+        pass
+    @abstractmethod
+    def get_dewpoint(self):
+        pass       
+    
+    @abstractmethod
+    def _write_to_db(self): #time_series db
+        pass
+    @abstractmethod
+    def execute(self): #execute measurement
+        pass
 class cl_ab_humidity_sensor(ABC):
     __max_humidity_errors = 10
     __HUMIDITY_SENSOR_STATES = ["Valid", "Invalid"]
@@ -55,8 +67,6 @@ class cl_ab_temp_sensor(ABC):
         self._old_temperature = 0
         self._state = 0
 
-    def get_dewpoint(self):
-        pass    
 """    
     def get_current_temperature(self):
         return(self._current_temperature)
