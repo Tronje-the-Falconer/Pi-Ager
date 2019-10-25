@@ -15,6 +15,7 @@ import pi_ager_database_check
 pi_ager_database_check.check_and_update_database()
 
 import pi_ager_logging
+from pi_ager_cl_logger import cl_fact_logger
 pi_ager_logging.create_logger('main.py')
 import pi_ager_loop
 import pi_ager_init
@@ -34,7 +35,7 @@ pi_ager_database_check.check_and_update_database()
 pi_ager_init.set_language()
 logger = pi_ager_logging.create_logger('main')
 logger.debug('logging initialised')
-
+cl_fact_logger.get_instance().debug(('logging initialised'))
 logger.info(pi_ager_names.logspacer)
 
 pi_revision.get_and_write_revision_in_database()
