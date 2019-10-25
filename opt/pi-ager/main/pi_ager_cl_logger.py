@@ -24,7 +24,7 @@ class cl_logger:
     def debug(self, logsting):
         self.logger.debug(logsting)
         
-    def get_logginglevel(loglevelstring):        # Builds a dict of dicts it_table from mysql db
+    def get_logginglevel(self,loglevelstring):        # Builds a dict of dicts it_table from mysql db
         """
     setting loglevels
     """
@@ -41,9 +41,9 @@ class cl_logger:
     elif loglevelstring == 50:
         loglevel = logging.CRITICAL
     
-    return loglevel
+    return(loglevel)
     
-def check_website_logfile():
+def check_website_logfile(self):
     """
     checking and setting permission for the website logfile 
     """
@@ -58,7 +58,7 @@ def check_website_logfile():
     if (filepermission != '666'):
         os.chmod(pi_ager_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
 
-def create_logger(pythonfile):
+def create_logger(self,pythonfile):
     """
     creating loggers
     """
@@ -91,7 +91,7 @@ def create_logger(pythonfile):
     logger.addHandler(console_streamhandler)
     
     return logger
-def me():
+def me(self):
     """
     Returns the logsting for logging in every method for the current code line (how i am)
     """
@@ -102,8 +102,6 @@ def me():
     
     return("Line " + str(the_line) + str(the_class) + str(the_method))    
             
-logger = create_logger(__name__)
-logger.debug('logging initialised')
 
 class cl_fact_logger(ABC):
     __o_instance = None
