@@ -76,9 +76,10 @@ class cl_main_sensor(cl_ab_sensor):
     def _write_to_db(self):
         """ Write the sensor data to time series DB"""
         logger.debug(pi_ager_logging.me())
-       
         pass
 
+    def execute(self):
+        pass
        
 class th_main_sensor():
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
