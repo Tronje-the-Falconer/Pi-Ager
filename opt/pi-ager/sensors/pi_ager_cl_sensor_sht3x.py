@@ -20,8 +20,8 @@ from pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 from pi_ager_cl_i2c_sensor_sht import cl_fact_i2c_sensor_sht
 from pi_ager_cx_exception import *
 from pi_ager_cl_messenger import cl_fact_logic_messenger
-from pi_ager_cl_sensor import cl_main_sensor
-#cl_ab_temp_sensor, cl_ab_humidity_sensor
+from pi_ager_cl_sensor import cl_main_sensor#
+from pi_ager_cl_ab_sensor import cl_ab_sensor
 
 global logger
 logger = pi_ager_logging.create_logger(__name__) 
