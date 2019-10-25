@@ -29,6 +29,8 @@ class cl_ab_sensor(cl_ab_temp_sensor, cl_ab_humidity_sensor):
     @abstractmethod
     def execute(self): #execute measurement
         pass
+    
+    
 class cl_ab_humidity_sensor(ABC):
     __max_humidity_errors = 10
     __HUMIDITY_SENSOR_STATES = ["Valid", "Invalid"]

@@ -92,10 +92,12 @@ class cl_main_sensor_sht3x(cl_main_sensor):
             self._old_humidity = self._current_humidity
 
         return(self._current_humidity)
+   
     def _write_to_db(self):
         super()._write_to_db()
         pass
 
+        
     def execute(self):
         logger.debug(pi_ager_logging.me())
         self.get_current_data()
