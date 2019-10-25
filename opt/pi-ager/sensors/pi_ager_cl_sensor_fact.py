@@ -14,10 +14,10 @@ __status__ = "Production"
 from abc import ABC, abstractmethod
 import inspect
 
-from sensor.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
+from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 #from pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 from main.pi_ager_cx_exception import *
-from sensor.pi_ager_cl_sensor_sht3x import cl_fact_sensor_sht3x
+from sensors.pi_ager_cl_sensor_sht3x import cl_fact_sensor_sht3x
 #from pi_ager_sensor_sht75 import *
     
 class cl_fact_main_sensor:

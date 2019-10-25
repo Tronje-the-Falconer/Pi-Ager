@@ -14,13 +14,13 @@ __status__ = "Production"
 from abc import ABC, abstractmethod
 import inspect
 
-from sensor.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
-from sensor.pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
-from sensor.pi_ager_cl_i2c_sensor_sht import cl_fact_i2c_sensor_sht
+from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
+from sensors.pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
+from sensors.pi_ager_cl_i2c_sensor_sht import cl_fact_i2c_sensor_sht
 from main.pi_ager_cx_exception import *
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
-from sensor.pi_ager_cl_sensor import cl_main_sensor#
-from sensor.pi_ager_cl_ab_sensor import cl_ab_sensor
+from sensors.pi_ager_cl_sensor import cl_main_sensor#
+from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 
 class cl_main_sensor_sht75(cl_main_sensor):
     

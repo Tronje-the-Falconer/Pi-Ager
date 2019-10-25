@@ -12,8 +12,8 @@ __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Development"
 
 from unittest import TestCase
-from sensor.pi_ager_cl_sensor import cl_fact_main_sensor, th_main_sensor
-from sensor.pi_ager_cl_sensor_type import cl_fact_main_sensor_type, th_main_sensor_type
+from sensors.pi_ager_cl_sensor import cl_fact_main_sensor, th_main_sensor
+from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type, th_main_sensor_type
 from main.pi_ager_cx_exception import cx_Sensor_not_defined
 
 
