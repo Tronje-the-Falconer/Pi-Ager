@@ -14,6 +14,7 @@ from abc import ABC
 import inspect
 
 from main.pi_ager_cx_exception import *
+from main.pi_ager_cl_logger import *
 import pi_ager_logging
 import pi_ager_database
 import pi_ager_names
