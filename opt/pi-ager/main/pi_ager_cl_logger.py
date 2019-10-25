@@ -62,7 +62,7 @@ class cl_logger:
         """
         creating loggers
         """
-        check_website_logfile()
+        self.check_website_logfile()
         loglevel_file_value = pi_ager_database_get_logging_value.get_logging_value('loglevel_file')
         loglevel_console_value = pi_ager_database_get_logging_value.get_logging_value('loglevel_console')
         
