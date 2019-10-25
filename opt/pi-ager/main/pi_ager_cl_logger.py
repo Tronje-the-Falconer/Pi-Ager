@@ -22,7 +22,7 @@ import pi_ager_paths
 import pi_ager_database_get_logging_value
 
 
-from pi_ager_cx_exception import *
+from main.pi_ager_cx_exception import *
 
 class cl_logger:
 
