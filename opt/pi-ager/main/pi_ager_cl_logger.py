@@ -17,7 +17,7 @@ class cl_logger:
         Constructor email logic factory
         """
         #logger.debug(pi_ager_logging.me())
-        self.logger = create_logger(__name__)
+        self.logger = self.create_logger(__name__)
         self.logger.debug('logging initialised')
         pass
         
