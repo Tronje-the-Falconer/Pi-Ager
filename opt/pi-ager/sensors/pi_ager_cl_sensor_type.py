@@ -13,7 +13,7 @@ __status__ = "Production"
 from abc import ABC
 import inspect
 
-from pi_ager_cx_exception import *
+from main.pi_ager_cx_exception import *
 import main.pi_ager_logging
 import main.pi_ager_database
 import pi_ager_names
