@@ -79,9 +79,6 @@ class cl_main_sensor_sht3x(cl_main_sensor):
       
             self._old_temperature = self._current_temperature
             
-        #self.m_current_temperature = 100.0
-     
-        #self._check_temperature()
         return(self._current_temperature)
   
     def _get_current_humidity(self):
@@ -93,10 +90,7 @@ class cl_main_sensor_sht3x(cl_main_sensor):
             self._old_humidity = 0
         else:
             self._old_humidity = self._current_humidity
-            
-        #self.m_current_temperature = 100.0
-     
-        #self._check_temperature()
+
         return(self._current_humidity)
     def _write_to_db(self):
         super()._write_to_db()
