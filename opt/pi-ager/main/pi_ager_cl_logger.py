@@ -24,7 +24,19 @@ class cl_logger:
         
     def debug(self, logsting):
         self.logger.debug(logsting)
-        
+
+    def info(self, logsting):
+        self.logger.info(logsting)
+    
+    def warning(self, logsting):
+        self.logger.warning(logsting)
+    
+    def error(self, logsting):
+        self.logger.error(logsting)
+    
+    def critical(self, logsting):
+        self.logger.critical(logsting)
+                                
     def get_logginglevel(self,loglevelstring):        # Builds a dict of dicts it_table from mysql db
         """
         setting loglevels
