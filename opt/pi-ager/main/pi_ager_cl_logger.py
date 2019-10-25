@@ -124,7 +124,7 @@ class cl_fact_logger(ABC):
         if cl_fact_logger.__o_instance is not None:
             return(cl_fact_logger.__o_instance)
         cl_fact_logger.__o_instance = cl_logger()
-        cl_fact_logger.__o_instance.debug(pi_ager_logging.me())
+        cl_fact_logger.__o_instance.debug('logger factory done')
         return(cl_fact_logger.__o_instance)
 
     def __init__(self):
