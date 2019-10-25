@@ -14,8 +14,8 @@ from abc import ABC
 import inspect
 
 from pi_ager_cx_exception import *
-import pi_ager_logging
-import pi_ager_database
+import main.pi_ager_logging
+import main.pi_ager_database
 import pi_ager_names
 
 global logger

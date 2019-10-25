@@ -19,8 +19,8 @@ import struct
 import pi_ager_logging
 
 from abc import ABC, abstractmethod
-from pi_ager_cx_exception import *
-from pi_ager_cl_messenger import cl_fact_logic_messenger
+from main.pi_ager_cx_exception import *
+from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 """
 * Below is also a good one to have, but be careful i2cdump from the below cause the sht31 interface to become unstable for me
  * and requires a hard-reset to recover correctly.

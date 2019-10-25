@@ -17,10 +17,10 @@ import pi_ager_names
 import pi_ager_logging
 
 from abc import ABC 
-from pi_ager_cl_crypt import cl_fact_help_crypt
-from pi_ager_cl_email_server import cl_fact_logic_email_server
-from pi_ager_cl_email_recipient import cl_fact_logic_email_recipient
-from pi_ager_cx_exception import *
+from messenger.pi_ager_cl_crypt import cl_fact_help_crypt
+from messenger.pi_ager_cl_email_server import cl_fact_logic_email_server
+from messenger.pi_ager_cl_email_recipient import cl_fact_logic_email_recipient
+from main.pi_ager_cx_exception import *
 
 global logger
 logger = pi_ager_logging.create_logger(__name__)
