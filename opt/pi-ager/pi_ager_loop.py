@@ -20,13 +20,12 @@ import pi_ager_logging
 import pi_ager_logging
 import pi_ager_gpio_config
 import pi_ager_organization
-import pi_ager_cx_exception
+import main.pi_ager_cx_exception
 from time import ctime as convert
-from pi_ager_cl_alarm import cl_fact_logic_alarm
-from pi_ager_cx_exception import *
-from pi_ager_cl_messenger import cl_fact_logic_messenger
-from pi_ager_cl_sensor_type import cl_fact_main_sensor_type
-from pi_ager_cl_sensor_fact import cl_fact_main_sensor
+from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
+from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
+from sensor.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
+from sensor.pi_ager_cl_sensor_fact import cl_fact_main_sensor
 
 
 global logger
