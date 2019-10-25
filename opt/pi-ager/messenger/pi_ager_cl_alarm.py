@@ -18,7 +18,7 @@ import pi_ager_gpio_config
 import RPi.GPIO as gpio
 from time import sleep
 
-from pi_ager_cx_exception import *
+from main.pi_ager_cx_exception import *
 
 import pi_ager_logging
 
