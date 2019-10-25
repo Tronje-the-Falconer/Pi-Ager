@@ -75,13 +75,13 @@ class cl_logger:
     
         # Logger fuer pi-ager debugging
         pi_ager_log_rotatingfilehandler = logging.handlers.RotatingFileHandler(pi_ager_paths.get_pi_ager_log_file_path(), mode='a', maxBytes=2097152, backupCount=20, encoding=None, delay=False)
-        pi_ager_log_rotatingfilehandler.setLevel(get_logginglevel(loglevel_file_value))
+        pi_ager_log_rotatingfilehandler.setLevel(self.get_logginglevel(loglevel_file_value))
         pi_ager_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(name)-27s %(levelname)-8s %(message)s', '%m-%d %H:%M:%S')
         pi_ager_log_rotatingfilehandler.setFormatter(pi_ager_log_rotatingfilehandler_formatter)
     
         # Logger fuer die Console
         console_streamhandler = logging.StreamHandler()
-        console_streamhandler.setLevel(get_logginglevel(loglevel_console_value))
+        console_streamhandler.setLevel(self.get_logginglevel(loglevel_console_value))
         console_streamhandler_formatter = logging.Formatter(' %(levelname)-10s: %(name)-8s %(message)s')
         console_streamhandler.setFormatter(console_streamhandler_formatter)
         
