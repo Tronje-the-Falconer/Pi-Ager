@@ -71,10 +71,8 @@ class cl_db_influxdb:
         logger.debug('it table =' + str(it_table))
         return it_table
  
-    def write_data_to_db(self, i_insert_statment, values):
-        cursor.execute(i_insert_statment, values)
-       
-#        self.client = InfluxDBClient('localhost', 8086, 'root', 'root', 'example')
+    def write_data_to_db(self, i_insert_statment):
+        
         
         self.client.write_points(i_insert_statment)
         
