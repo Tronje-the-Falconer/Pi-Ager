@@ -84,10 +84,10 @@ class cl_main_sensor(cl_ab_sensor):
         if (self._current_temperature != 0 ):
             json_body = [
                 {
-                    "measurement": "Temperature",
+                    "measurement": "Main_Sensor",
                     "tags": {
-                    "sensor": "Main Sensor",
-                    "sensor_type": "SHT3x"
+                    "sensor": "Temperature",
+                    "sensor_type": str(self.get_sensor_type_ui())
                     },
         #            "time": str(datetime.now()),
                     "fields": {
@@ -101,10 +101,10 @@ class cl_main_sensor(cl_ab_sensor):
         if (self._current_humidity != 0 ):
             json_body = [
                 {
-                    "measurement": "Humidity",
+                    "measurement": "Main_Sensor",
                     "tags": {
-                    "sensor": "Main Sensor",
-                    "sensor_type": "SHT3x"
+                    "sensor": "Humidity",
+                    "sensor_type": str(self.get_sensor_type_ui())
                     },
         #            "time": str(datetime.now()),
                     "fields": {
@@ -118,10 +118,10 @@ class cl_main_sensor(cl_ab_sensor):
         if (self._current_humidity != 0 ):        
             json_body = [
                 {
-                    "measurement": "DewPoint",
+                    "measurement": "Main_Sensor",
                     "tags": {
-                    "sensor": "Main Sensor",
-                    "sensor_type": "SHT3x"
+                    "sensor": "DewPoint",
+                    "sensor_type": str(self.get_sensor_type_ui())
                     },
         #            "time": str(datetime.now()),
                     "fields": {
