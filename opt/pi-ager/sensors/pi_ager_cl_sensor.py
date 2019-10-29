@@ -67,8 +67,8 @@ class cl_main_sensor(cl_ab_sensor):
         SDD = 6.1078 * 10**((a*temperature)/(b+temperature))
         DD = humidity/100 * SDD
         v = math.log10(DD/6.1078)
-        self.temperature_dewpoint = b*v/(a-v) 
-        self.humidity_absolute = 10**5 * mw/R * DD/temperature_kelvin
+        self._temperature_dewpoint = b*v/(a-v) 
+        self._humidity_absolute = 10**5 * mw/R * DD/temperature_kelvin
         calculated_dewpoint = (self.temperature_dewpoint, self.humidity_absolute)
         return(calculated_dewpoint)
     
@@ -124,7 +124,7 @@ class cl_main_sensor(cl_ab_sensor):
                 },
     #            "time": str(datetime.now()),
                 "fields": {
-                "value": float(self.temperature_dewpoint) 
+                "value": float(self._temperature_dewpoint) 
                 }
                 }
         ]
