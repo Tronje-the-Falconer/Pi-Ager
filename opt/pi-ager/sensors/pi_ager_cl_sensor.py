@@ -81,55 +81,56 @@ class cl_main_sensor(cl_ab_sensor):
         logger.debug(pi_ager_logging.me())
 
         influx_db = cl_fact_db_influxdb.get_instance()
-        json_body = [
-            {
-                "measurement": "Temperature",
-                "tags": {
-                "sensor": "Main Sensor",
-                "sensor_type": "SHT3x"
-                },
-    #            "time": str(datetime.now()),
-                "fields": {
-                "value": float(self._current_temperature) 
-                }
-                }
-        ]
-        logger.debug(json_body)
-        influx_db.write_data_to_db(json_body) 
+        if (self._current_temperature != 0 ):
+            json_body = [
+                {
+                    "measurement": "Temperature",
+                    "tags": {
+                    "sensor": "Main Sensor",
+                    "sensor_type": "SHT3x"
+                    },
+        #            "time": str(datetime.now()),
+                    "fields": {
+                    "value": float(self._current_temperature) 
+                    }
+                    }
+            ]
+            logger.debug(json_body)
+            influx_db.write_data_to_db(json_body) 
 
+        if (self._current_humidity != 0 ):
+            json_body = [
+                {
+                    "measurement": "Humidity",
+                    "tags": {
+                    "sensor": "Main Sensor",
+                    "sensor_type": "SHT3x"
+                    },
+        #            "time": str(datetime.now()),
+                    "fields": {
+                    "value": float(self._current_humidity) 
+                    }
+                    }
+            ]
+            logger.debug(json_body)
+            influx_db.write_data_to_db(json_body) 
 
-        json_body = [
-            {
-                "measurement": "Humidity",
-                "tags": {
-                "sensor": "Main Sensor",
-                "sensor_type": "SHT3x"
-                },
-    #            "time": str(datetime.now()),
-                "fields": {
-                "value": float(self._current_humidity) 
-                }
-                }
-        ]
-        logger.debug(json_body)
-        influx_db.write_data_to_db(json_body) 
-
-                
-        json_body = [
-            {
-                "measurement": "DewPoint",
-                "tags": {
-                "sensor": "Main Sensor",
-                "sensor_type": "SHT3x"
-                },
-    #            "time": str(datetime.now()),
-                "fields": {
-                "value": float(self._temperature_dewpoint) 
-                }
-                }
-        ]
-        logger.debug(json_body)
-        influx_db.write_data_to_db(json_body) 
+        if (self._current_humidity != 0 ):        
+            json_body = [
+                {
+                    "measurement": "DewPoint",
+                    "tags": {
+                    "sensor": "Main Sensor",
+                    "sensor_type": "SHT3x"
+                    },
+        #            "time": str(datetime.now()),
+                    "fields": {
+                    "value": float(self._temperature_dewpoint) 
+                    }
+                    }
+            ]
+            logger.debug(json_body)
+            influx_db.write_data_to_db(json_body) 
 
         pass
 
