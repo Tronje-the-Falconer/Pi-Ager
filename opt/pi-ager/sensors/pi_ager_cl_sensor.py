@@ -67,9 +67,9 @@ class cl_main_sensor(cl_ab_sensor):
         SDD = 6.1078 * 10**((a*temperature)/(b+temperature))
         DD = humidity/100 * SDD
         v = math.log10(DD/6.1078)
-        temperature_dewpoint = b*v/(a-v) 
-        humidity_absolute = 10**5 * mw/R * DD/temperature_kelvin
-        calculated_dewpoint = (temperature_dewpoint, humidity_absolute)
+        self.temperature_dewpoint = b*v/(a-v) 
+        self.humidity_absolute = 10**5 * mw/R * DD/temperature_kelvin
+        calculated_dewpoint = (self.temperature_dewpoint, self.humidity_absolute)
         return(calculated_dewpoint)
     
     def _execute_soft_reset(self):
@@ -96,6 +96,41 @@ class cl_main_sensor(cl_ab_sensor):
         ]
         logger.debug(json_body)
         influx_db.write_data_to_db(json_body) 
+
+
+        json_body = [
+            {
+                "measurement": "Humidity",
+                "tags": {
+                "sensor": "Main Sensor",
+                "sensor_type": "SHT3x"
+                },
+    #            "time": str(datetime.now()),
+                "fields": {
+                "value": float(self._current_humidity) 
+                }
+                }
+        ]
+        logger.debug(json_body)
+        influx_db.write_data_to_db(json_body) 
+
+                
+        json_body = [
+            {
+                "measurement": "DewPoint",
+                "tags": {
+                "sensor": "Main Sensor",
+                "sensor_type": "SHT3x"
+                },
+    #            "time": str(datetime.now()),
+                "fields": {
+                "value": float(self.temperature_dewpoint) 
+                }
+                }
+        ]
+        logger.debug(json_body)
+        influx_db.write_data_to_db(json_body) 
+
         pass
 
     def execute(self):
