@@ -88,7 +88,7 @@ class cl_main_sensor(cl_ab_sensor):
                 "sensor": "Main Sensor",
                 "sensor_type": "SHT3x"
                 },
-                "time": str(datetime.now()),
+    #            "time": str(datetime.now()),
                 "fields": {
                 "value": float(self._current_temperature) 
                 }
