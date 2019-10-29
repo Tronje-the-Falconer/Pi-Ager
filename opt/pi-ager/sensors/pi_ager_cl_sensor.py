@@ -79,7 +79,7 @@ class cl_main_sensor(cl_ab_sensor):
     def _write_to_db(self):
         """ Write the sensor data to time series DB"""
         logger.debug(pi_ager_logging.me())
-        
+        datetime = datetime.datetime.today()
         influx_db = cl_fact_db_influxdb.get_instance()
         json_body = [
             {
@@ -88,7 +88,7 @@ class cl_main_sensor(cl_ab_sensor):
                 "sensor": "Main Sensor",
                 "sensor_type": "SHT3x"
                 },
-                "time": datetime.datetime.today(),
+                "time": datetime,
                 "fields": {
                 "value": self._current_temperature 
                 }
