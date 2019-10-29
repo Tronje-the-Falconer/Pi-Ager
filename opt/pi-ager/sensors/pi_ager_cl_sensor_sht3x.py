@@ -38,8 +38,8 @@ class cl_main_sensor_sht3x(cl_main_sensor):
         self._max_errors = 1
         self._old_temperature = 0
         self._current_temperature = 0
-        self._temperature_dewpoint
-        self._humidity_absolute
+        self._temperature_dewpoint = 0
+        self._humidity_absolute = 0
         self._old_humidity = 0
         self._current_humidity = 0
         try:
