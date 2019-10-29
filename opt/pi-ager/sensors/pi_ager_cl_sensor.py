@@ -88,7 +88,7 @@ class cl_main_sensor(cl_ab_sensor):
                 },
                 "time": "2009-11-10T23:00:00Z",
                 "fields": {
-                "value": self.temperature
+                "value": self._current_temperature 
                 }
                 }
         ]
