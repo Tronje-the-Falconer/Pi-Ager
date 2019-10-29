@@ -15,6 +15,7 @@ from abc import ABC, abstractmethod
 import math
 import inspect
 import pi_ager_logging
+import datetime
 
 
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
@@ -86,7 +87,7 @@ class cl_main_sensor(cl_ab_sensor):
                 "sensor": "Main Sensor",
                 "sensor_type": "SHT3x"
                 },
-                "time": "2009-11-10T23:00:00Z",
+                "time": datetime.datetime.today(),
                 "fields": {
                 "value": self._current_temperature 
                 }
