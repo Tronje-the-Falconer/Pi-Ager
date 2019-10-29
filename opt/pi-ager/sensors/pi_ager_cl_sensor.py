@@ -16,11 +16,13 @@ import math
 import inspect
 import pi_ager_logging
 
+
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 
 from main.pi_ager_cx_exception import *
 #from pi_ager_cl_sensor_fact import *
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
+from main.pi_ager_cl_database import cl_fact_db_influxdb
         
 global logger
 logger = pi_ager_logging.create_logger(__name__) 
@@ -76,6 +78,21 @@ class cl_main_sensor(cl_ab_sensor):
     def _write_to_db(self):
         """ Write the sensor data to time series DB"""
         logger.debug(pi_ager_logging.me())
+        influx_db = cl_fact_db_influxdb.get_instance()
+        json_body = [
+            {
+                "measurement": "Temperature",
+                "tags": {
+                "sensor": "Main Sensor",
+                "sensor_type": "SHT3x"
+                },
+                "time": "2009-11-10T23:00:00Z",
+                "fields": {
+                "value": self.temperature
+                }
+                }
+        ]
+        influx_db.write_data_to_db(json_body) 
         pass
 
     def execute(self):
