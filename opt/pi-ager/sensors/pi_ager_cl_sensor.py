@@ -79,6 +79,7 @@ class cl_main_sensor(cl_ab_sensor):
     def _write_to_db(self):
         """ Write the sensor data to time series DB"""
         logger.debug(pi_ager_logging.me())
+        
         influx_db = cl_fact_db_influxdb.get_instance()
         json_body = [
             {
@@ -93,6 +94,7 @@ class cl_main_sensor(cl_ab_sensor):
                 }
                 }
         ]
+        logger.debug(json_body)
         influx_db.write_data_to_db(json_body) 
         pass
 
