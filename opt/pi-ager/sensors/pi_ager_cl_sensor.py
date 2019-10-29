@@ -90,7 +90,7 @@ class cl_main_sensor(cl_ab_sensor):
                 },
                 "time": str(datetime.now()),
                 "fields": {
-                "value": str(self._current_temperature) 
+                "value": self._current_temperature 
                 }
                 }
         ]
