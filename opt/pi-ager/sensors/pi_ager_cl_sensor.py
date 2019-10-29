@@ -15,7 +15,7 @@ from abc import ABC, abstractmethod
 import math
 import inspect
 import pi_ager_logging
-import datetime
+from datetime import datetime
 
 
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
@@ -79,7 +79,7 @@ class cl_main_sensor(cl_ab_sensor):
     def _write_to_db(self):
         """ Write the sensor data to time series DB"""
         logger.debug(pi_ager_logging.me())
-        datetime = datetime.datetime.today()
+        current_time = datetime.datetime.today()
         influx_db = cl_fact_db_influxdb.get_instance()
         json_body = [
             {
@@ -88,7 +88,7 @@ class cl_main_sensor(cl_ab_sensor):
                 "sensor": "Main Sensor",
                 "sensor_type": "SHT3x"
                 },
-                "time": datetime,
+                "time": current_time,
                 "fields": {
                 "value": self._current_temperature 
                 }
