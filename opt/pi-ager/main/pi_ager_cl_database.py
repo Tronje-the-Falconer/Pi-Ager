@@ -13,6 +13,7 @@ __status__ = "Production"
 from abc import ABC
 import inspect
 import sqlite3
+from influxdb import InfluxDBClient
 import pi_ager_names
 import pi_ager_paths
 import pi_ager_logging
@@ -41,8 +42,9 @@ class cl_db_influxdb:
         dbname = 'pi-ager'
         #protocol = 'line'
 
-        self.client = DataFrameClient(host, port, user, password, dbname)
-        logger.debut("Create database: " + dbname)
+        self.client =  InfluxDBClient(host, port, user, password, dbname)
+
+        logger.debug("Create database: " + dbname)
         self.client.create_database(dbname)
         
 
