@@ -132,6 +132,22 @@ class cl_main_sensor(cl_ab_sensor):
             logger.debug(json_body)
             influx_db.write_data_to_db(json_body) 
 
+        if (self._humidity_absolute != 0 ):        
+            json_body = [
+                {
+                    "measurement": "Main_Sensor",
+                    "tags": {
+                    "sensor": "absolute Humidity",
+                    "sensor_type": str(self.get_sensor_type_ui())
+                    },
+        #            "time": str(datetime.now()),
+                    "fields": {
+                    "value": float(self._humidity_absolute) 
+                    }
+                    }
+            ]
+            logger.debug(json_body)
+            influx_db.write_data_to_db(json_body) 
         pass
 
     def execute(self):
