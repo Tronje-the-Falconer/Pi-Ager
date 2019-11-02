@@ -27,25 +27,21 @@ class cl_i2c_sensor_sht(ABC):
     
     __error_counter = 0
     __measuring_intervall = 300
-    _RESET = 0x30A2
-    _HEATER_ON = 0x306D
-    _HEATER_OFF = 0x3066
-    _STATUS = 0xF32D
-    _TRIGGER = 0x2C06
-    _STATUS_BITS_MASK = 0xFFFC
 
-    def __init__(self, i_i2c_bus):
+
+    def __init__(self, i_i2c_bus, i_address):
         logger.debug(pi_ager_logging.me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
         #self._sensor_type = o_sensor_type
         self._i2c_bus = i_i2c_bus
+        self._address = i_address
         
         
-    def solf_reset(self):
+    def soft_reset(self,command):
         """Performs Soft Reset on SHT chip"""
         logger.debug(pi_ager_logging.me())
-        self.i2c.write(self._RESET)
+        self.i2c.write(command)
         
 
     def _calculate_checksum(self, value):
@@ -65,25 +61,17 @@ class cl_i2c_sensor_sht(ABC):
                 else:
                     crc = (crc << 1)
         return crc
-    def i2c_start_command(self):
+    def i2c_start_command(self, i_msb_data, i_lsb_data):
         logger.debug(pi_ager_logging.me())
-        #Write the read sensor command
-        address = 0x44
-        msb_data = 0x24
-        lsb_data = 0x00
-        
-        self._i2c_bus.write_byte_data(address, msb_data, lsb_data)
+        #Write the data sensor command
+
+        self._i2c_bus.write_byte_data(self._address, msb_data, lsb_data)
         time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
-        
-        
-        msb_data = 0x21
-        lsb_data = 0x30
-        self._i2c_bus.write_byte_data(address, msb_data, lsb_data)
-        time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
+
     def read_data(self):
         logger.debug(pi_ager_logging.me())
-        address = 0x44
-        self.data0 = self._i2c_bus.read_i2c_block_data(address, 0x00, 8)
+       
+        self.data0 = self._i2c_bus.read_i2c_block_data(self._address, 0x00, 8)
         self.t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
         self.h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
         
@@ -131,16 +119,16 @@ class cl_i2c_sensor_sht(ABC):
         logger.debug("Relative Humidity is : %.2f %%RH" %Humidity)
         
         return(Humidity)
-    def set_heading_on(self):
+    def set_heading_on(self,command):
         """Switch the heading on the sensor on"""
         logger.debug(pi_ager_logging.me())
-        self.i2c.write(self._HEATER_ON)
+        self.i2c.write(command)
         pass
     
-    def set_heading_off(self):
+    def set_heading_off(self,command):
         """Switch the heading on the sensor off"""
         logger.debug(pi_ager_logging.me())
-        self.i2c.write(self._HEATER_OFF)
+        self.i2c.write(command)
         pass
     
     

@@ -77,9 +77,15 @@ class cl_main_sensor(cl_ab_sensor):
         pass
     
     def _write_to_db(self):
+        """ Write the sensor data to DB"""
+        logger.debug(pi_ager_logging.me())
+        if 1 == 1:
+            self._write_to_influxdb()
+        pass
+    def _write_to_influxdb(self):
         """ Write the sensor data to time series DB"""
         logger.debug(pi_ager_logging.me())
-
+        
         influx_db = cl_fact_db_influxdb.get_instance()
         if (self._current_temperature != 0 ):
             json_body = [

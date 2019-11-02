@@ -90,3 +90,16 @@ class cl_ab_sensor(cl_ab_temp_sensor, cl_ab_humidity_sensor):
     @abstractmethod
     def execute(self): #execute measurement
         pass
+    
+    @abstractmethod
+    def set_heading_on(self): #execute measurement
+        pass
+
+    @abstractmethod
+    def set_heading_off(self): #execute measurement
+        pass
+    
+    @abstractmethod
+    def soft_reset(self): #execute measurement
+        pass
+
