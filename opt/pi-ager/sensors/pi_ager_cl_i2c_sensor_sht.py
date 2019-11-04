@@ -151,14 +151,14 @@ class cl_fact_i2c_sensor_sht(ABC):
         cl_fact_i2c_sensor_sht.__o_instance = i_instance
         
     @classmethod        
-    def get_instance(self, i_i2c_bus):
+    def get_instance(self, i_i2c_bus, i_address):
         """
         Factory method to get the i2c logic instance
         """
         logger.debug(pi_ager_logging.me())
         if cl_fact_i2c_sensor_sht.__o_instance is not None:
             return(cl_fact_i2c_sensor_sht.__o_instance)
-        cl_fact_i2c_sensor_sht.__o_instance = cl_i2c_sensor_sht(i_i2c_bus)
+        cl_fact_i2c_sensor_sht.__o_instance = cl_i2c_sensor_sht(i_i2c_bus, i_address)
         return(cl_fact_i2c_sensor_sht.__o_instance)
 
     def __init__(self):
