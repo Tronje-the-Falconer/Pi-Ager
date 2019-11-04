@@ -60,25 +60,33 @@ class cl_main_sensor_sht3x(cl_main_sensor):
         except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
  
+
+
+ 
     def _send_i2c_start_command(self):
-    
+        logger.debug(pi_ager_logging.me())
+        
         msb_data = 0x24
         lsb_data = 0x00
         
-        self._i2c_sensor.i2c_start_command(msb_data, lsb_data)
+        #Write the sensor data
+        self._i2c_bus.write_byte_data(self._address, msb_data, lsb_data)
+
         time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
         
         
         msb_data = 0x21
         lsb_data = 0x30
-        self._i2c_sensor.i2c_start_command(msb_data, lsb_data)
+        #Write the sensor data
+        self._i2c_bus.write_byte_data(self._address, msb_data, lsb_data)
+
         time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
    
     
     def _read_data(self):
         logger.debug(pi_ager_logging.me())
         try:
-            self.data0 = self._i2c_sensor.read_data()
+            self.data0 = self._i2c_bus.read_i2c_block_data(self._address, 0x00, 6)
         except Exception as cx_error:
             self._error_counter = self._error_counter + 1
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)

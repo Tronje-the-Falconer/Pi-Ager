@@ -37,13 +37,6 @@ class cl_i2c_sensor_sht(ABC):
         self._i2c_bus = i_i2c_bus
         self._address = i_address
         
-        
-    def soft_reset(self,command):
-        """Performs Soft Reset on SHT chip"""
-        logger.debug(pi_ager_logging.me())
-        self.i2c.write(command)
-        
-
     def calculate_checksum(self, value):
         """4.12 Checksum Calculation from an unsigned short input"""
         logger.debug(pi_ager_logging.me())
@@ -61,6 +54,8 @@ class cl_i2c_sensor_sht(ABC):
                 else:
                     crc = (crc << 1)
         return crc
+    
+    """
     def i2c_start_command(self, i_msb_data, i_lsb_data):
         logger.debug(pi_ager_logging.me())
         #Write the sensor data
@@ -72,19 +67,8 @@ class cl_i2c_sensor_sht(ABC):
         self.data0 = self._i2c_bus.read_i2c_block_data(self._address, 0x00, 6)
         
         return(self.data0)
-        
+       """ 
              
-    def set_heading_on(self,command):
-        """Switch the heading on the sensor on"""
-        logger.debug(pi_ager_logging.me())
-        self.i2c.write(command)
-        pass
-    
-    def set_heading_off(self,command):
-        """Switch the heading on the sensor off"""
-        logger.debug(pi_ager_logging.me())
-        self.i2c.write(command)
-        pass
     
     
 class th_i2c_sensor_sht():
