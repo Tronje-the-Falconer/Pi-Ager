@@ -81,7 +81,7 @@ class cl_ab_sensor(cl_ab_temp_sensor, cl_ab_humidity_sensor):
     def __init__(self):
         pass
     @abstractmethod
-    def get_dewpoint(self, temperature, humidity):
+    def get_dewpoint(self, int, int):
         pass       
     
     @abstractmethod
