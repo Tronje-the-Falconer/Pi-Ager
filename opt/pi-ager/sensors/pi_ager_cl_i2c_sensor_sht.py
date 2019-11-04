@@ -44,7 +44,7 @@ class cl_i2c_sensor_sht(ABC):
         self.i2c.write(command)
         
 
-    def _calculate_checksum(self, value):
+    def calculate_checksum(self, value):
         """4.12 Checksum Calculation from an unsigned short input"""
         logger.debug(pi_ager_logging.me())
         # CRC
@@ -63,39 +63,15 @@ class cl_i2c_sensor_sht(ABC):
         return crc
     def i2c_start_command(self, i_msb_data, i_lsb_data):
         logger.debug(pi_ager_logging.me())
-        #Write the data sensor command
-
+        #Write the sensor data
         self._i2c_bus.write_byte_data(self._address, i_msb_data, i_lsb_data)
 
     def read_data(self):
         logger.debug(pi_ager_logging.me())
-       
+        #Read the sensor data
         self.data0 = self._i2c_bus.read_i2c_block_data(self._address, 0x00, 8)
-        self.t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
-        self.h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
         
-        "CRC Values"
-        t_crc_calc = self._calculate_checksum(self.t_val)
-        h_crc_calc = self._calculate_checksum(self.h_val)
-        
-        t_crc = self.data0[2]
-        h_crc = self.data0[5]
-
-        localtime = time.asctime( time.localtime(time.time()) )
-        if hex(t_crc_calc) != hex(t_crc):
-        #if 1 != 1:
-            logger.debug("Local current time :", localtime)    
-            logger.debug("Temperature CRC calc is : %x " %t_crc_calc)
-            logger.debug("Temperature CRC real is : %x " %t_crc) 
-            logger.error("CRC ")
-            raise cx_i2c_sht_temperature_crc_error
-        
-        if hex(h_crc_calc) != hex(h_crc):
-        #if 1 != 1:
-            logger.debug("Local current time :", localtime)    
-            logger.debug("Humidity CRC calc is : %x " %h_crc_calc)
-            logger.debug("Humidity CRC real is : %x " %h_crc) 
-            raise cx_i2c_sht_humidity_crc_error
+        return(self.data0)
         
              
     def get_temperature(self):

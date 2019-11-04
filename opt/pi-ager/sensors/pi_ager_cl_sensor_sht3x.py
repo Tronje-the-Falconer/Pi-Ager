@@ -78,10 +78,36 @@ class cl_main_sensor_sht3x(cl_main_sensor):
     def _read_data(self):
         logger.debug(pi_ager_logging.me())
         try:
-            self._i2c_sensor.read_data()
+            data0 = self._i2c_sensor.read_data()
         except Exception as cx_error:
             self._error_counter = self._error_counter + 1
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+            
+        self.t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
+        self.h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
+        
+        "CRC Values"
+        t_crc_calc = self._i2c_sensor.calculate_checksum(self.t_val)
+        h_crc_calc = self._i2c_sensor.calculate_checksum(self.h_val)
+        
+        t_crc = self.data0[2]
+        h_crc = self.data0[5]
+
+        localtime = time.asctime( time.localtime(time.time()) )
+        if hex(t_crc_calc) != hex(t_crc):
+        #if 1 != 1:
+            logger.debug("Local current time :", localtime)    
+            logger.debug("Temperature CRC calc is : %x " %t_crc_calc)
+            logger.debug("Temperature CRC real is : %x " %t_crc) 
+            logger.error("CRC ")
+            raise cx_i2c_sht_temperature_crc_error
+        
+        if hex(h_crc_calc) != hex(h_crc):
+        #if 1 != 1:
+            logger.debug("Local current time :", localtime)    
+            logger.debug("Humidity CRC calc is : %x " %h_crc_calc)
+            logger.debug("Humidity CRC real is : %x " %h_crc) 
+            raise cx_i2c_sht_humidity_crc_error
    
     def get_current_data(self):
         logger.debug(pi_ager_logging.me())
