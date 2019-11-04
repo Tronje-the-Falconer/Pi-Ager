@@ -53,7 +53,7 @@ class cl_main_sensor(cl_ab_sensor):
         logger.debug(pi_ager_logging.me())
         logger.debug(temperature)
         logger.debug(humidity)
-        logger.debug("Calculating DewPoint for Temp %.2f C and Hum %.2f %" % (temperature,humidity))
+#        logger.debug("Calculating DewPoint for Temp %.2f C and Hum %.2f %" % (temperature,humidity))
         if (temperature >= 0):
             a = 7.5
             b = 237.3
