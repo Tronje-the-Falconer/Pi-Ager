@@ -28,6 +28,13 @@ logger = pi_ager_logging.create_logger(__name__)
 
 class cl_main_sensor_sht3x(cl_main_sensor):
     
+    _RESET = 0x30A2
+    _HEATER_ON = 0x306D
+    _HEATER_OFF = 0x3066
+    _STATUS = 0xF32D
+    _TRIGGER = 0x2C06
+    _STATUS_BITS_MASK = 0xFFFC
+    
     def __init__(self):
         logger.debug(pi_ager_logging.me())
         if "get_instance" not in inspect.stack()[1][3]:
@@ -42,14 +49,31 @@ class cl_main_sensor_sht3x(cl_main_sensor):
         self._humidity_absolute = 0
         self._old_humidity = 0
         self._current_humidity = 0
+        
+        self.address = 0x44
         try:
             self._i2c_bus = cl_fact_i2c_bus_logic.get_instance().get_i2c_bus()
             logger.debug(self._i2c_bus)
-            self._i2c_sensor = cl_fact_i2c_sensor_sht.get_instance(self._i2c_bus)
-            self._i2c_sensor.i2c_start_command()
+            self._i2c_sensor = cl_fact_i2c_sensor_sht.get_instance(self._i2c_bus, self.address)
+            self._send_i2c_start_command()
         except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
  
+    def _send_i2c_start_command(self):
+    
+        msb_data = 0x24
+        lsb_data = 0x00
+        
+        self._i2c_sensor.i2c_start_command(msb_data, lsb_data)
+        time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
+        
+        
+        msb_data = 0x21
+        lsb_data = 0x30
+        self._i2c_sensor.i2c_start_command(msb_data, lsb_data)
+        time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
+   
+    
     def _read_data(self):
         logger.debug(pi_ager_logging.me())
         try:
@@ -70,6 +94,7 @@ class cl_main_sensor_sht3x(cl_main_sensor):
         self.measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint)
         return(self.measured_data)
         
+    
     def _get_current_temperature(self):
         logger.debug(pi_ager_logging.me())
         #self._read_data()
@@ -99,7 +124,23 @@ class cl_main_sensor_sht3x(cl_main_sensor):
         super()._write_to_db()
         pass
 
+    def soft_reset(self):
+        """Performs Soft Reset on SHT chip"""
+        logger.debug(pi_ager_logging.me())
+        self.i2c.write(self._RESET)
         
+    def set_heading_on(self):
+        """Switch the heading on the sensor on"""
+        logger.debug(pi_ager_logging.me())
+        self._i2c_sensor.set_heading_on(self._HEATER_ON)
+        pass
+    
+    def set_heading_off(self):
+        """Switch the heading on the sensor off"""
+        logger.debug(pi_ager_logging.me())
+        self._i2c_sensor.set_heading_on(self._HEATER_OFF)
+        pass
+
     def execute(self):
         logger.debug(pi_ager_logging.me())
         #self.get_current_data()
