@@ -37,6 +37,9 @@ class cl_i2c_sensor_sht(ABC):
         self._i2c_bus = i_i2c_bus
         self._address = i_address
         
+    def get_address(self):
+        return(self._address)
+    
     def calculate_checksum(self, value):
         """4.12 Checksum Calculation from an unsigned short input"""
         logger.debug(pi_ager_logging.me())
