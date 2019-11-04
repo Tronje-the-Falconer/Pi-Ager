@@ -109,6 +109,14 @@ class cl_main_sensor_sht3x(cl_main_sensor):
             logger.debug("Humidity CRC real is : %x " %h_crc) 
             raise cx_i2c_sht_humidity_crc_error
    
+   
+    def get_temperature(self):
+        logger.debug(pi_ager_logging.me())
+
+    def get_humidity(self):
+        logger.debug(pi_ager_logging.me())
+
+   
     def get_current_data(self):
         logger.debug(pi_ager_logging.me())
         self._read_data()
@@ -125,8 +133,15 @@ class cl_main_sensor_sht3x(cl_main_sensor):
     def _get_current_temperature(self):
         logger.debug(pi_ager_logging.me())
         #self._read_data()
-        self._current_temperature = self._i2c_sensor.get_temperature()
-        logger.debug(self._current_temperature)
+#        self._current_temperature = self._i2c_sensor.get_temperature()
+        t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
+        
+        Temperature_Celsius    = ((175.72 * self.t_val) / 2**16 - 1 ) - 45 #do the maths from datasheet
+        Temperature_Fahrenheit = ((315.0  * self.t_val) / 2**16 - 1 ) - 49 #do the maths from datasheet
+
+        logger.debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
+        logger.debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
+        
         if self._old_temperature is None:
             self._old_temperature = 0
         else:
@@ -138,8 +153,13 @@ class cl_main_sensor_sht3x(cl_main_sensor):
     def _get_current_humidity(self):
         logger.debug(pi_ager_logging.me())
         #self._read_data()
-        self._current_humidity = self._i2c_sensor.get_humidity()
-        logger.debug(self._current_humidity)
+#        self._current_humidity = self._i2c_sensor.get_humidity()
+        h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
+        
+        Humidity = ((100.0 * self.h_val) / 2**16 - 1 )
+
+        logger.debug("Relative Humidity is : %.2f %%RH" %Humidity)
+        
         if self._old_humidity is None:
             self._old_humidity = 0
         else:
@@ -154,18 +174,18 @@ class cl_main_sensor_sht3x(cl_main_sensor):
     def soft_reset(self):
         """Performs Soft Reset on SHT chip"""
         logger.debug(pi_ager_logging.me())
-        self.i2c.write(self._RESET)
+        self._i2c_bus.write(self._RESET)
         
     def set_heading_on(self):
         """Switch the heading on the sensor on"""
         logger.debug(pi_ager_logging.me())
-        self._i2c_sensor.set_heading_on(self._HEATER_ON)
+        self._i2c_bus.write(self._HEATER_ON)
         pass
     
     def set_heading_off(self):
         """Switch the heading on the sensor off"""
         logger.debug(pi_ager_logging.me())
-        self._i2c_sensor.set_heading_on(self._HEATER_OFF)
+        self._i2c_bus.write(self._HEATER_OFF)
         pass
 
     def execute(self):

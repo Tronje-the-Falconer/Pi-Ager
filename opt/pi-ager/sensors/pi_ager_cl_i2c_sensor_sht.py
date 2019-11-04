@@ -74,26 +74,6 @@ class cl_i2c_sensor_sht(ABC):
         return(self.data0)
         
              
-    def get_temperature(self):
-        logger.debug(pi_ager_logging.me())
-        t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
-        
-        Temperature_Celsius    = ((175.72 * self.t_val) / 2**16 - 1 ) - 45 #do the maths from datasheet
-        Temperature_Fahrenheit = ((315.0  * self.t_val) / 2**16 - 1 ) - 49 #do the maths from datasheet
-
-        logger.debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
-        logger.debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
-        
-        return(Temperature_Celsius)
-    def get_humidity(self):
-        logger.debug(pi_ager_logging.me())
-        h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
-        
-        Humidity = ((100.0 * self.h_val) / 2**16 - 1 )
-
-        logger.debug("Relative Humidity is : %.2f %%RH" %Humidity)
-        
-        return(Humidity)
     def set_heading_on(self,command):
         """Switch the heading on the sensor on"""
         logger.debug(pi_ager_logging.me())
