@@ -69,7 +69,7 @@ class cl_i2c_sensor_sht(ABC):
     def read_data(self):
         logger.debug(pi_ager_logging.me())
         #Read the sensor data
-        self.data0 = self._i2c_bus.read_i2c_block_data(self._address, 0x00, 8)
+        self.data0 = self._i2c_bus.read_i2c_block_data(self._address, 0x00, 6)
         
         return(self.data0)
         

@@ -51,9 +51,6 @@ class cl_main_sensor(cl_ab_sensor):
     
     def get_dewpoint(self, temperature, humidity):
         logger.debug(pi_ager_logging.me())
-        logger.debug(temperature)
-        logger.debug(humidity)
-#        logger.debug("Calculating DewPoint for Temp %.2f C and Hum %.2f %" % (temperature,humidity))
         if (temperature >= 0):
             a = 7.5
             b = 237.3
@@ -72,6 +69,8 @@ class cl_main_sensor(cl_ab_sensor):
         v = math.log10(DD/6.1078)
         self._temperature_dewpoint = b*v/(a-v) 
         self._humidity_absolute = 10**5 * mw/R * DD/temperature_kelvin
+        logger.debug("Calculated DewPoint for Temp %.2f C and Hum %.2f is %.2f" % (temperature,humidity,self._temperature_dewpoint))
+
         calculated_dewpoint = (self._temperature_dewpoint, self._humidity_absolute)
         return(calculated_dewpoint)
     
