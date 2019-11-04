@@ -78,7 +78,7 @@ class cl_main_sensor_sht3x(cl_main_sensor):
     def _read_data(self):
         logger.debug(pi_ager_logging.me())
         try:
-            data0 = self._i2c_sensor.read_data()
+            self.data0 = self._i2c_sensor.read_data()
         except Exception as cx_error:
             self._error_counter = self._error_counter + 1
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
