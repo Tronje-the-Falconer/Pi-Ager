@@ -143,16 +143,8 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
 
         logger.debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
         logger.debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
-        
-        self._current_temperature = Temperature_Celsius
-        
-        if self._old_temperature is None:
-            self._old_temperature = 0
-        else:
-      
-            self._old_temperature = self._current_temperature
             
-        return(self._current_temperature)
+        return(Temperature_Celsius)
   
     def _get_current_humidity(self):
         logger.debug(pi_ager_logging.me())
@@ -163,15 +155,8 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
         Humidity = ((100.0 * self.h_val) / 2**16 - 1 )
 
         logger.debug("Relative Humidity is : %.2f %%RH" %Humidity)
-        
-        self._current_humidity = Humidity
-        
-        if self._old_humidity is None:
-            self._old_humidity = 0
-        else:
-            self._old_humidity = self._current_humidity
 
-        return(self._current_humidity)
+        return(Humidity)
    
     def _write_to_db(self):
         super()._write_to_db()
