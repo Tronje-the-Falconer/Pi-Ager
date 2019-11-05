@@ -23,7 +23,7 @@ from main.pi_ager_cx_exception import *
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor import cl_main_sensor#
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
-from sensors.pi_ager_cl_sensor_sht import cl_main_sensor_sth
+from sensors.pi_ager_cl_sensor_sht import cl_main_sensor_sht
 
 global logger
 logger = pi_ager_logging.create_logger(__name__) 
