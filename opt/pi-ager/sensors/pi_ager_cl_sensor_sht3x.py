@@ -39,7 +39,7 @@ class cl_main_sensor_sht3x(cl_main_sensor_sht):
         
         self.o_sensor_type = cl_fact_main_sensor_type.get_instance()
         super().__init__(self.o_sensor_type)
-        
+    """    
     def _send_i2c_start_command(self):
         logger.debug(pi_ager_logging.me())
         super()._send_i2c_start_command()
@@ -47,7 +47,7 @@ class cl_main_sensor_sht3x(cl_main_sensor_sht):
     def _read_data(self):
         logger.debug(pi_ager_logging.me())
         super()._read_data()
-           
+    """       
     def get_current_data(self):
         logger.debug(pi_ager_logging.me())
         self.measured_data = super().get_current_data()
@@ -61,27 +61,24 @@ class cl_main_sensor_sht3x(cl_main_sensor_sht):
         logger.debug(pi_ager_logging.me())
         super()._get_current_humidity()
     """   
-    
+    """
     def _write_to_db(self):
         logger.debug(pi_ager_logging.me())
         super()._write_to_db()
 
     def soft_reset(self):
-        """Performs Soft Reset on SHT chip"""
         logger.debug(pi_ager_logging.me())
         super().soft_reset()
         
     def set_heading_on(self):
-        """Switch the heading on the sensor on"""
         logger.debug(pi_ager_logging.me())
         super().set_heading_on()
         
     
     def set_heading_off(self):
-        """Switch the heading on the sensor off"""
         logger.debug(pi_ager_logging.me())
         super().set_heading_off()
-
+    """
     def execute(self):
         logger.debug(pi_ager_logging.me())
         #self.get_current_data()
