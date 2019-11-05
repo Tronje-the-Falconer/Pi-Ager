@@ -80,46 +80,36 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
         
         elif sensorname == 'SHT75': #SHT
             try:
-                sensor_sht = pi_sht1x.SHT1x(pi_ager_gpio_config.gpio_sensor_data, pi_ager_gpio_config.gpio_sensor_sync, gpio_mode=pi_ager_gpio_config.board_mode)
-                sensor_sht.read_temperature()
-                sensor_sht.read_humidity()
-                sensor_temperature_big = sensor_sht.temperature_celsius
-                sensor_humidity_big = sensor_sht.humidity
-                logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
-                logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big))
-            #except SHT1xError:
-            except pi_sht1x.sht1x.SHT1xError as cx_error:
-                
-                
-                if sht_exception_count < 10:
-                    countup_values = countup('sht_exception', sht_exception_count)
-                    logstring = countup_values['logstring']
-                    sht_exception_count = countup_values['counter']
-                    logger.warning(logstring)
-                    time.sleep(1)
-                    recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
-                    return recursion
-                #Create factory for messanger, get from factory the instance of the messenger, send messages in one line
-                exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
-        elif sensorname == 'SHT3x': #SH3x
-            try:
-                logger.debug('SHT3x')
-                #Create factory for main sensor
-                
-                #Get from factory the instance of the main sensor
                 main_sensor =  cl_fact_main_sensor().get_instance()
-                #######logger.debug('sensor is ' + main_sensor.get_sensor_type_ui() )
-                #Read now temperature of the main sensor
-                logger.debug('read data')
-                #
                 main_sensor.execute()
                 measured_data = main_sensor.get_current_data()
-                
                 (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
-                #sensor_humidity_big    = main_sensor.get_
-                #main_sensor.get_sensor_type()
-#                sensor_temperature_big = main_sensor.get_current_temperature()
-                      
+                logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
+                logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
+                logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))    
+            except pi_sht1x.sht1x.SHT1xError as cx_error:
+                logger.debug('Exception SHT1 Error')
+                pass  
+        elif sensorname == 'SHT3x': #SH3x
+            try:
+                main_sensor =  cl_fact_main_sensor().get_instance()
+                main_sensor.execute()
+                measured_data = main_sensor.get_current_data()
+                (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
+                logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
+                logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
+                logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big)) 
+                
+            except cx_i2c_sht_temperature_crc_error as cx_error:
+                logger.debug('Exception CRC Error')
+                pass  
+
+        elif sensorname == 'SHT85': #SH3x
+            try:
+                main_sensor =  cl_fact_main_sensor().get_instance()
+                main_sensor.execute()
+                measured_data = main_sensor.get_current_data()
+                (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
                 logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
                 logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
                 logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big)) 
