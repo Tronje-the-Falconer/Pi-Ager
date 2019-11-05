@@ -104,7 +104,7 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
             logger.debug("Local current time :", localtime)    
             logger.debug("Temperature CRC calc is : %x " %t_crc_calc)
             logger.debug("Temperature CRC real is : %x " %t_crc) 
-            logger.error("CRC ")
+            logger.error("CRC Error")
             raise cx_i2c_sht_temperature_crc_error
         
         if hex(h_crc_calc) != hex(h_crc):
@@ -122,6 +122,8 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
         self._read_data()
         self._current_temperature = self._get_current_temperature()
         self._current_humidity    = self._get_current_humidity()
+        logger.debug(self._current_temperature)
+        logger.debug(self._current_humidity)
         self._dewpoint            = super().get_dewpoint(self._current_temperature, self._current_humidity)
     
         (temperature_dewpoint, humidity_absolute) = self._dewpoint
