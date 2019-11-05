@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
  
-"""This class is for handling the SHT sensors SHT3x, SHT21, SHT85 with i2c bus interface from sensirion."""
+"""This class is for handling the SHT3x sensor from sensirion."""
 
 __author__ = "Claus Fischer"
 __copyright__ = "Copyright 2019, The Pi-Ager Project"
@@ -35,50 +35,15 @@ class cl_main_sensor_sht3x(cl_main_sensor_sht):
         logger.debug(pi_ager_logging.me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
-        #self.o_sensor_type = o_sensor_type
         
         self.o_sensor_type = cl_fact_main_sensor_type.get_instance()
         super().__init__(self.o_sensor_type)
-    """    
-    def _send_i2c_start_command(self):
-        logger.debug(pi_ager_logging.me())
-        super()._send_i2c_start_command()
-    
-    def _read_data(self):
-        logger.debug(pi_ager_logging.me())
-        super()._read_data()
-    """       
+
     def get_current_data(self):
         logger.debug(pi_ager_logging.me())
         self.measured_data = super().get_current_data()
         return(self.measured_data)
-    """    
-    def _get_current_temperature(self):
-        logger.debug(pi_ager_logging.me())
-        super()._get_current_temperature()
-  
-    def _get_current_humidity(self):
-        logger.debug(pi_ager_logging.me())
-        super()._get_current_humidity()
-    """   
-    """
-    def _write_to_db(self):
-        logger.debug(pi_ager_logging.me())
-        super()._write_to_db()
 
-    def soft_reset(self):
-        logger.debug(pi_ager_logging.me())
-        super().soft_reset()
-        
-    def set_heading_on(self):
-        logger.debug(pi_ager_logging.me())
-        super().set_heading_on()
-        
-    
-    def set_heading_off(self):
-        logger.debug(pi_ager_logging.me())
-        super().set_heading_off()
-    """
     def execute(self):
         logger.debug(pi_ager_logging.me())
         #self.get_current_data()

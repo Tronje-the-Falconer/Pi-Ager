@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
- 
-"""This class is for handling the SHT3x sensor from sensirion."""
+
+"""This class is for handling the SHT sensors SHT3x, SHT21, SHT85 with i2c bus interface from sensirion.""" 
 
 __author__ = "Claus Fischer"
 __copyright__ = "Copyright 2019, The Pi-Ager Project"
