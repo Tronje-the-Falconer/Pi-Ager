@@ -50,7 +50,7 @@ class cl_main_sensor_sht3x(cl_main_sensor_sht):
     def get_current_data(self):
         logger.debug(pi_ager_logging.me())
         super().get_current_data()
-    
+    """    
     def _get_current_temperature(self):
         logger.debug(pi_ager_logging.me())
         super()._get_current_temperature()
@@ -58,7 +58,8 @@ class cl_main_sensor_sht3x(cl_main_sensor_sht):
     def _get_current_humidity(self):
         logger.debug(pi_ager_logging.me())
         super()._get_current_humidity()
-   
+    """   
+    
     def _write_to_db(self):
         logger.debug(pi_ager_logging.me())
         super()._write_to_db()
