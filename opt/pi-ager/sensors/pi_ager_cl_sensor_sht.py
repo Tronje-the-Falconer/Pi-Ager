@@ -15,7 +15,7 @@ __status__ = "Production"
 import inspect
 import pi_ager_logging
 import time
-
+from abc import ABC, abstractmethod
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from sensors.pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 from sensors.pi_ager_cl_i2c_sensor_sht import cl_fact_i2c_sensor_sht
