@@ -37,7 +37,7 @@ class cl_main_sensor_sht3x(cl_main_sensor_sht):
             raise cx_direct_call(self,"Please use factory class" )
         #self.o_sensor_type = o_sensor_type
         
-        self.o_sensor_type = super().__init__(cl_fact_main_sensor_type.get_instance())
+        self.o_sensor_type = cl_fact_main_sensor_type.get_instance()
         super().__init__(self.o_sensor_type)
         
     def _send_i2c_start_command(self):
