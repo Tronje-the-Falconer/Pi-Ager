@@ -33,6 +33,10 @@ class cl_main_sensor_sht3x(cl_main_sensor_sht):
     
     def __init__(self):
         logger.debug(pi_ager_logging.me())
+        if "get_instance" not in inspect.stack()[1][3]:
+            raise cx_direct_call(self,"Please use factory class" )
+        #self.o_sensor_type = o_sensor_type
+#        super().__init__(cl_fact_main_sensor_type.get_instance())
         super().__init__()
  
     def _send_i2c_start_command(self):
