@@ -36,7 +36,7 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
     _TRIGGER = 0x2C06
     _STATUS_BITS_MASK = 0xFFFC
     
-    def __init__(self):
+    def __init__(self, i_sensor_type):
         logger.debug(pi_ager_logging.me())
 
                     
@@ -49,6 +49,9 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
         self._current_humidity = 0
         
         self.address = 0x44
+        
+        self.o_sensor_type = i_sensor_type
+        super().__init__(self.o_sensor_type)
         try:
             self._i2c_bus = cl_fact_i2c_bus_logic.get_instance().get_i2c_bus()
             logger.debug(self._i2c_bus)
