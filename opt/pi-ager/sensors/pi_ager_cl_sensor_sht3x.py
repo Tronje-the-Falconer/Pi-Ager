@@ -49,7 +49,8 @@ class cl_main_sensor_sht3x(cl_main_sensor_sht):
            
     def get_current_data(self):
         logger.debug(pi_ager_logging.me())
-        super().get_current_data()
+        self.measured_data = super().get_current_data()
+        return(self.measured_data)
     """    
     def _get_current_temperature(self):
         logger.debug(pi_ager_logging.me())
