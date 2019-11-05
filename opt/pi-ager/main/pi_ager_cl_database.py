@@ -97,10 +97,6 @@ class cl_db_database_sqlite:
         logger.debug('Select statement = ' + i_select_statement)
         query = self.cursor.execute(i_select_statement)
         logger.debug('Select query = ' + str(query))
-        #db_table = cursor.fetchall()
-        #logger.debug('DB table =' + str(db_table))
-        #connection.close()
-        # Building dict from table rows
          
         colname = [ d[0] for d in query.description ]
         it_table = [ dict(zip(colname, r)) for r in query.fetchall() ] 

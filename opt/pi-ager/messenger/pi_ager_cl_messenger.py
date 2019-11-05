@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """This class is the messenger for pi-ager notifications(e-mail, alarm, telegram, pushover). """
-
+ 
 __author__ = "Claus Fischer"
 __copyright__ = "Copyright 2019, The Pi-Ager Project"
 __credits__ = ["Claus Fischer"]
@@ -127,6 +127,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
     def build_alarm_subject(self):
         hostname = socket.gethostbyaddr(IP.rstrip())
         return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager ' + hostname + 'occured')
+
 class cl_db_messenger:
     __o_dirty = True
     def __init__(self):
