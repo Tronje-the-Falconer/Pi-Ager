@@ -118,8 +118,12 @@ case "$1" in
         pushd /var/www/ && zip -r /var/www/logs/pi-ager_logfiles.zip ./logs/ && popd
         #zip -r -j /var/www/logs/pi-ager_logfiles.zip /var/www/logs/
     ;;
-    sensorbus) #Sensorbus wurde geaendert
-####### hier muss alles hin was vor dem shutdown gemacht werden soll
+    sensorbusi2c) #Sensorbus wurde geaendert
+####### hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
+        shutdown -h now
+    ;;
+    sensorbus1wire) #Sensorbus wurde geaendert
+####### hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln
         shutdown -h now
     ;;
     *) echo "ERROR: invalid parameter: $1 (for $0)"; exit 1 #Fehlerbehandlung
