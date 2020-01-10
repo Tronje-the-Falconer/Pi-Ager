@@ -424,6 +424,16 @@
         
         close_database();
     }
+    
+    function write_busvalue($chosen_busvalue){
+        global $value_field, $key_field, $config_settings_table, $sensorbus_key;
+        
+        open_connection();
+        $sql = 'UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . $chosen_busvalue . ' WHERE ' . $key_field . ' = "' . $sensorbus_key . '";';
+        execute_query($sql);
+        
+        close_database();
+    }
 
     function write_settings($modus, $setpoint_temperature, $setpoint_humidity, $circulation_air_period, $circulation_air_duration, $exhaust_air_period,
                             $exhaust_air_duration)

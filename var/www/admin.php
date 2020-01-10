@@ -12,10 +12,12 @@
                                     include 'modules/write_loglevel_db.php';                    // schreibt das Loglevel in Datenbank
                                     include 'modules/write_debug_values.php';                   // schreibt die Debug-Werte
                                     include 'modules/write_admin_db.php';                        // schreibt die admin-Werte
+                                    include 'modules/write_bus.php';                            // schreibt den bus-value
                                     
                                     include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                     include 'modules/read_current_db.php';
                                     include 'modules/start_stop_uv.php';
+                                    include 'modules/read_bus.php';                             // liest den gesetzten bus-value
                                     
 
                                 ?>
@@ -40,6 +42,35 @@
                                 </div>
                                 <hr>
                                 <h2 class="art-postheader"><?php echo _('administration'); ?></h2>
+                                <form method="post" name="admin">
+                                    <div class="hg_container">
+                                        <!----------------------------------------------------------------------------------------Sensorbus-->
+                                        <table style="width: 100%;" class="miniature_writing">
+                                            <tr>
+                                                <td>
+                                                    <?php echo _('current bus: '); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $bus_name; ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <?php echo _('change bus to: '); ?>
+                                                </td>
+                                                <td>
+                                                    <?php echo $changebus_name; ?>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                <button class="art-button" name="change_sensorbus" value="change_sensorbus" onclick="return confirm('<?php echo _('ATTENTION: A restart is required!');?>');"><?php echo _('change sensor bus'); ?></button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </form>
+                                        
                                 <form method="post" name="admin">
                                     <div class="hg_container">
                                         <!----------------------------------------------------------------------------------------Sensortype-->
