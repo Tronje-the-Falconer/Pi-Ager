@@ -13,7 +13,8 @@ __status__ = "Production"
 
 #from abc import ABC, abstractmethod
 import inspect
-import pi_ager_logging
+# import pi_ager_logging
+from main.pi_ager_cl_logger import cl_fact_logger
 import time
 import pi_sht1x
 import pi_ager_gpio_config
@@ -24,13 +25,14 @@ from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor import cl_main_sensor#
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 
-global logger
-logger = pi_ager_logging.create_logger(__name__) 
+# global logger
+# logger = pi_ager_logging.create_logger(__name__) 
 
 class cl_main_sensor_sht75(cl_main_sensor):
     
     def __init__(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
         #self.o_sensor_type = o_sensor_type
@@ -50,7 +52,8 @@ class cl_main_sensor_sht75(cl_main_sensor):
 
    
     def get_current_data(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         try:
             self._read_data()
             
@@ -61,7 +64,8 @@ class cl_main_sensor_sht75(cl_main_sensor):
                 countup_values = countup('sht_exception', sht_exception_count)
                 logstring = countup_values['logstring']
                 sht_exception_count = countup_values['counter']
-                logger.warning(logstring)
+                # logger.warning(logstring)
+                cl_fact_logger.get_instance().warning(logstring)
                 time.sleep(1)
                 recursion = self.get_current_data()
                 return recursion
@@ -79,7 +83,8 @@ class cl_main_sensor_sht75(cl_main_sensor):
         
     
     def _get_current_temperature(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         #self._read_data()
 #        self._current_temperature = self._i2c_sensor.get_temperature()
         self._sensor_sht.read_temperature()
@@ -87,8 +92,10 @@ class cl_main_sensor_sht75(cl_main_sensor):
         Temperature_Celsius    = sensor_sht.temperature_celsius
         Temperature_Fahrenheit = sensor_sht.temperature_celsius * 9/5 + 32
 
-        logger.debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
-        logger.debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
+        # logger.debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
+        # logger.debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
+        cl_fact_logger.get_instance().debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
+        cl_fact_logger.get_instance().debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
         
         self._current_temperature = Temperature_Celsius
         
@@ -101,12 +108,14 @@ class cl_main_sensor_sht75(cl_main_sensor):
         return(self._current_temperature)
   
     def _get_current_humidity(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         #self._read_data()
 #        self._current_humidity = self._i2c_sensor.get_humidity()
         self._sensor_sht.read_humidity()
 
-        logger.debug("Relative Humidity is : %.2f %%RH" %sensor_sht.humidity)
+        # logger.debug("Relative Humidity is : %.2f %%RH" %sensor_sht.humidity)
+        cl_fact_logger.get_instance().debug("Relative Humidity is : %.2f %%RH" %sensor_sht.humidity)
         
         self._current_humidity = sensor_sht.humidity
         
@@ -123,21 +132,25 @@ class cl_main_sensor_sht75(cl_main_sensor):
 
     def soft_reset(self):
         """Performs Soft Reset on SHT chip"""
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         
     def set_heading_on(self):
         """Switch the heading on the sensor on"""
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
 
     
     def set_heading_off(self):
         """Switch the heading on the sensor off"""
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
 
 
     def execute(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         #self.get_current_data()
         self._write_to_db()
         

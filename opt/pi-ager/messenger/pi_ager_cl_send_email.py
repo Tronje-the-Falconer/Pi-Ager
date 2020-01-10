@@ -14,16 +14,17 @@ __status__ = "Production"
 
 import inspect
 import pi_ager_names 
-import pi_ager_logging
+# import pi_ager_logging
 
 from abc import ABC 
 from messenger.pi_ager_cl_crypt import cl_fact_help_crypt
 from messenger.pi_ager_cl_email_server import cl_fact_logic_email_server
 from messenger.pi_ager_cl_email_recipient import cl_fact_logic_email_recipient
 from main.pi_ager_cx_exception import *
+from main.pi_ager_cl_logger import cl_fact_logger
 
-global logger
-logger = pi_ager_logging.create_logger(__name__)
+# global logger
+# logger = pi_ager_logging.create_logger(__name__)
 
         
 class cl_logic_send_email:
@@ -31,7 +32,8 @@ class cl_logic_send_email:
         """
         Constructor for the send email class
         """ 
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
                 
@@ -57,12 +59,18 @@ class cl_logic_send_email:
         
     def execute(self, alarm_subject, alarm_message):
         if not hasattr(cl_logic_send_email, "it_email_recipient"):
-            logger.info("No email recipient defined!")
+            # logger.info("No email recipient defined!")
+            cl_fact_logger.get_instance().info("No email recipient defined!")
             return
-        logger.debug(pi_ager_logging.me())
-        logger.debug(self.it_email_server)
-        logger.debug(self.it_email_recipient)
-        logger.debug('server = ' + str(self.it_email_server[0]['server']))
+        # logger.debug(pi_ager_logging.me())
+        # logger.debug(self.it_email_server)
+        # logger.debug(self.it_email_recipient)
+        # logger.debug('server = ' + str(self.it_email_server[0]['server']))
+        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(self.it_email_server)
+        cl_fact_logger.get_instance().debug(self.it_email_recipient)
+        cl_fact_logger.get_instance().debug('server = ' + str(self.it_email_server[0]['server']))
+        
         for i in range(len(self.it_email_recipient)):
             
             self.send_email(
@@ -79,7 +87,8 @@ class cl_logic_send_email:
         """
         Send email
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
         
         from smtplib import SMTP 
         from smtplib import SMTPException 
@@ -105,15 +114,18 @@ class cl_logic_send_email:
     
             s.sendmail(FROM,TO, m.as_string())
             s.quit()
-            logger.debug('Alert Email has been sent!')
+            # logger.debug('Alert Email has been sent!')
+            cl_fact_logger.get_instance().debug('Alert Email has been sent!')
         except SMTPException as cx_error:
             sendefehler = 'Error: unable to send email: {err}'.format(err=cx_error)
-            logger.error(sendefehler)
+            # logger.error(sendefehler)
+            cl_fact_logger.get_instance().error(sendefehler)
             
         except Exception as cx_error:
             #TODO err undefined!
             sendefehler = 'Error: unable to send email: {err}'.format(err=cx_error)
-            logger.error(sendefehler)
+            # logger.error(sendefehler)
+            cl_fact_logger.get_instance().error(sendefehler)
         
 class th_logic_send_email(cl_logic_send_email):   
 
@@ -131,7 +143,8 @@ class cl_fact_logic_send_email(ABC):
         """
         Factory method to set the send email logic instance
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
         cl_fact_logic_send_email.__o_instance = i_instance
         
     @classmethod        
@@ -139,7 +152,8 @@ class cl_fact_logic_send_email(ABC):
         """
         Factory method to get the send email logic instance
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
         if cl_fact_logic_send_email.__o_instance is not None:
             return(cl_fact_logic_send_email.__o_instance)
         cl_fact_logic_send_email.__o_instance = cl_logic_send_email()
@@ -149,6 +163,7 @@ class cl_fact_logic_send_email(ABC):
         """
         Constructor send email logic factory
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
         pass    
     

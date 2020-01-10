@@ -14,14 +14,15 @@ __status__ = "Production"
 from abc import ABC
 import inspect
 import pi_ager_names
-import pi_ager_logging
+# import pi_ager_logging
 from messenger.pi_ager_cl_crypt import cl_fact_help_crypt
 from main.pi_ager_cl_database import cl_fact_database_config
 
 from main.pi_ager_cx_exception import *
+from main.pi_ager_cl_logger import cl_fact_logger
 
-global logger
-logger = pi_ager_logging.create_logger(__name__)
+# global logger
+# logger = pi_ager_logging.create_logger(__name__)
 
         
 class cl_logic_email_server:
@@ -29,7 +30,8 @@ class cl_logic_email_server:
         """
         Constructor for the email server class
         """ 
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
         
@@ -42,7 +44,8 @@ class cl_logic_email_server:
         
     
     def get_data(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         return(self.it_email_server)
 
@@ -93,7 +96,8 @@ class cl_fact_logic_email_server(ABC):
         """
         Factory method to set the email server logic instance
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logic_email_server.__o_instance = i_instance
         
     @classmethod        
@@ -101,7 +105,8 @@ class cl_fact_logic_email_server(ABC):
         """
         Factory method to get the email server logic instance
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_logic_email_server.__o_instance is not None:
             return(cl_fact_logic_email_server.__o_instance)
         cl_fact_logic_email_server.__o_instance = cl_logic_email_server()
@@ -111,7 +116,8 @@ class cl_fact_logic_email_server(ABC):
         """
         Constructor email server logic factory
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     
 class cl_fact_db_email_server(ABC):
@@ -122,7 +128,8 @@ class cl_fact_db_email_server(ABC):
         """
         Factory method to set the db email server instance
         """        
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_db_email_server.__o_instance = i_instance
         
     @classmethod        
@@ -130,7 +137,8 @@ class cl_fact_db_email_server(ABC):
         """
         Factory method to get the db messenger instance
         """        
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_db_email_server.__o_instance is not None:
             return(cl_fact_db_email_server.__o_instance)
         cl_fact_db_email_server.__o_instance = cl_db_email_server()
@@ -140,5 +148,6 @@ class cl_fact_db_email_server(ABC):
         """
         Constructor logic messenger factory
         """        
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    

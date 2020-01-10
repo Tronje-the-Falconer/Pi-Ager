@@ -16,7 +16,8 @@ import time
 import smbus
 import sys
 import struct
-import pi_ager_logging
+# import pi_ager_logging
+from main.pi_ager_cl_logger import cl_fact_logger
 
 from abc import ABC, abstractmethod
 from main.pi_ager_cx_exception import *
@@ -33,8 +34,8 @@ from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
  * add another 0 to the above baudrate for max setting, ie dtparam=i2c1_baudrate=100000
 """
 
-global logger
-logger = pi_ager_logging.create_logger(__name__) 
+# global logger
+# logger = pi_ager_logging.create_logger(__name__) 
 
 class cl_i2c_bus_logic():
     
@@ -43,25 +44,30 @@ class cl_i2c_bus_logic():
     
 
     def __init__(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
         try:
             self.bus1 = smbus.SMBus(3)
             #self._address = 0x44
             
-            logger.debug(self.bus1)
+            # logger.debug(self.bus1)
+            cl_fact_logger.get_instance().debug(self.bus1)
         except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
         if self.bus1 is None:
             raise cx_i2c_bus_error(self,"Can't get I2C Bus" )
     def get_i2c_bus(self):
-        logger.debug(pi_ager_logging.me())
-        logger.debug(self.bus1)
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # logger.debug(self.bus1)
+        cl_fact_logger.get_instance().debug(self.bus1)
         return(self.bus1)
     
     def get_i2c_address(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return(self._address)
 
 class th_i2c_bus_logic():
@@ -77,7 +83,8 @@ class cl_fact_i2c_bus_logic(ABC):
         """
         Factory method to set the i2c logic instance
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_i2c_bus_logic.__o_instance = i_instance
         
     @classmethod        
@@ -85,7 +92,8 @@ class cl_fact_i2c_bus_logic(ABC):
         """
         Factory method to get the i2c logic instance
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_i2c_bus_logic.__o_instance is not None:
             return(cl_fact_i2c_bus_logic.__o_instance)
         cl_fact_i2c_bus_logic.__o_instance = cl_i2c_bus_logic()
@@ -95,9 +103,11 @@ class cl_fact_i2c_bus_logic(ABC):
         """
         Constructor i2c logic factory
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     
     def __init__(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    

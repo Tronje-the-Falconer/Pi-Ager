@@ -6,7 +6,8 @@
 """
 import RPi.GPIO as gpio
 import pi_ager_names
-import pi_ager_logging
+# import pi_ager_logging
+from main.pi_ager_cl_logger import cl_fact_logger
 
 # hardcoded values
 # Pinbelegung
@@ -59,18 +60,19 @@ gpio_temperature_meat_SCLK = 21    # GPIO fuer A/D Wandler Fleischtemperatursens
 
 
 
-global logger
-logger = pi_ager_logging.create_logger(__name__)
-logger.debug('logging initialised')
+# global logger
+# logger = pi_ager_logging.create_logger(__name__)
+# logger.debug('logging initialised')
 
 # Function Setup GPIO
 def setupGPIO():
     """
     setting up GPIO's (boardmode, in/out)
     """
-    global logger
+    # global logger
     logstring = 'setupGPIO()'
-    logger.debug(logstring)
+    # logger.debug(logstring)
+    cl_fact_logger.get_instance().debug(logstring)
     gpio.setwarnings(False)
     
     # Board mode wird gesetzt
@@ -127,9 +129,10 @@ def defaultGPIO():
     """
     setting up default gpio (1/0)
     """
-    global logger
+    # global logger
     logstring = 'defaultGPIO()'
-    logger.debug(logstring)
+    # logger.debug(logstring)
+    cl_fact_logger.get_instance().debug(logstring)
     
     gpio.output(gpio_heater, pi_ager_names.relay_off)              # Heizung Relais standardmaessig aus
     gpio.output(gpio_cooling_compressor, pi_ager_names.relay_off)  # Kuehlung Relais standardmaessig aus

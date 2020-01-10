@@ -13,7 +13,8 @@ __status__ = "Production"
 
 #from abc import ABC, abstractmethod
 import inspect
-import pi_ager_logging
+# import pi_ager_logging
+from main.pi_ager_cl_logger import cl_fact_logger
 import time
 from abc import ABC, abstractmethod
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
@@ -24,8 +25,8 @@ from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor import cl_main_sensor#
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 
-global logger
-logger = pi_ager_logging.create_logger(__name__) 
+# global logger
+# logger = pi_ager_logging.create_logger(__name__) 
 
 class cl_main_sensor_sht(cl_main_sensor, ABC):
     
@@ -37,7 +38,8 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
     _STATUS_BITS_MASK = 0xFFFC
     
     def __init__(self, i_sensor_type):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
 
                     
         self._max_errors = 1
@@ -54,7 +56,8 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
         super().__init__(self.o_sensor_type)
         try:
             self._i2c_bus = cl_fact_i2c_bus_logic.get_instance().get_i2c_bus()
-            logger.debug(self._i2c_bus)
+            # logger.debug(self._i2c_bus)
+            cl_fact_logger.get_instance().debug(self._i2c_bus)
             self._i2c_sensor = cl_fact_i2c_sensor_sht.get_instance(self._i2c_bus, self.address)
             self._send_i2c_start_command()
         except Exception as cx_error:
@@ -64,7 +67,8 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
 
  
     def _send_i2c_start_command(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         msb_data = 0x24
         lsb_data = 0x00
@@ -84,7 +88,8 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
    
     
     def _read_data(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         try:
             self.data0 = self._i2c_bus.read_i2c_block_data(self._i2c_sensor.get_address(), 0x00, 6)
         except Exception as cx_error:
@@ -104,29 +109,39 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
         localtime = time.asctime( time.localtime(time.time()) )
         if hex(t_crc_calc) != hex(t_crc):
         #if 1 != 1:
-            logger.debug("Local current time :", localtime)    
-            logger.debug("Temperature CRC calc is : %x " %t_crc_calc)
-            logger.debug("Temperature CRC real is : %x " %t_crc) 
-            logger.error("CRC Error")
+            # logger.debug("Local current time :", localtime)    
+            # logger.debug("Temperature CRC calc is : %x " %t_crc_calc)
+            # logger.debug("Temperature CRC real is : %x " %t_crc) 
+            # logger.error("CRC Error")
+            cl_fact_logger.get_instance().debug("Local current time :", localtime)    
+            cl_fact_logger.get_instance().debug("Temperature CRC calc is : %x " %t_crc_calc)
+            cl_fact_logger.get_instance().debug("Temperature CRC real is : %x " %t_crc) 
+            cl_fact_logger.get_instance().error("CRC Error")
             raise cx_i2c_sht_temperature_crc_error
         
         if hex(h_crc_calc) != hex(h_crc):
         #if 1 != 1:
-            logger.debug("Local current time :", localtime)    
-            logger.debug("Humidity CRC calc is : %x " %h_crc_calc)
-            logger.debug("Humidity CRC real is : %x " %h_crc) 
+            # logger.debug("Local current time :", localtime)    
+            # logger.debug("Humidity CRC calc is : %x " %h_crc_calc)
+            # logger.debug("Humidity CRC real is : %x " %h_crc) 
+            cl_fact_logger.get_instance().debug("Local current time :", localtime)    
+            cl_fact_logger.get_instance().debug("Humidity CRC calc is : %x " %h_crc_calc)
+            cl_fact_logger.get_instance().debug("Humidity CRC real is : %x " %h_crc) 
             raise cx_i2c_sht_humidity_crc_error
    
    
 
    
     def get_current_data(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._read_data()
         self._current_temperature = self._get_current_temperature()
         self._current_humidity    = self._get_current_humidity()
-        logger.debug(self._current_temperature)
-        logger.debug(self._current_humidity)
+        # logger.debug(self._current_temperature)
+        # logger.debug(self._current_humidity)
+        cl_fact_logger.get_instance().debug(self._current_temperature)
+        cl_fact_logger.get_instance().debug(self._current_humidity)
         self._dewpoint            = super().get_dewpoint(self._current_temperature, self._current_humidity)
     
         (temperature_dewpoint, humidity_absolute) = self._dewpoint
@@ -136,7 +151,8 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
         
     
     def _get_current_temperature(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         #self._read_data()
 #        self._current_temperature = self._i2c_sensor.get_temperature()
         t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
@@ -144,20 +160,24 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
         Temperature_Celsius    = ((175.72 * self.t_val) / 2**16 - 1 ) - 45 #do the maths from datasheet
         Temperature_Fahrenheit = ((315.0  * self.t_val) / 2**16 - 1 ) - 49 #do the maths from datasheet
 
-        logger.debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
-        logger.debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
+        # logger.debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
+        # logger.debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
+        cl_fact_logger.get_instance().debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
+        cl_fact_logger.get_instance().debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
             
         return(Temperature_Celsius)
   
     def _get_current_humidity(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         #self._read_data()
 #        self._current_humidity = self._i2c_sensor.get_humidity()
         h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
         
         Humidity = ((100.0 * self.h_val) / 2**16 - 1 )
 
-        logger.debug("Relative Humidity is : %.2f %%RH" %Humidity)
+        # logger.debug("Relative Humidity is : %.2f %%RH" %Humidity)
+        cl_fact_logger.get_instance().debug("Relative Humidity is : %.2f %%RH" %Humidity)
 
         return(Humidity)
    
@@ -167,23 +187,27 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
 
     def soft_reset(self):
         """Performs Soft Reset on SHT chip"""
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._i2c_bus.write(self._RESET)
         
     def set_heading_on(self):
         """Switch the heading on the sensor on"""
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._i2c_bus.write(self._HEATER_ON)
         pass
     
     def set_heading_off(self):
         """Switch the heading on the sensor off"""
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._i2c_bus.write(self._HEATER_OFF)
         pass
 
     def execute(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         #self.get_current_data()
         self._write_to_db()
         

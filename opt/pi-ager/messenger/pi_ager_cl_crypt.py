@@ -25,13 +25,16 @@ from abc import ABC
 import inspect
 import traceback
 #import pi_ager_names
-import pi_ager_logging
+# import pi_ager_logging
 #from pi_ager_cl_messenger import cl_fact_logic_messenger
 from main.pi_ager_cx_exception import *
+from main.pi_ager_cl_logger import cl_fact_logger
 
-global logger
-logger = pi_ager_logging.create_logger(__name__)
-logger.debug('logging initialised')
+
+#global logger
+#logger = pi_ager_logging.create_logger(__name__)
+# logger.debug('logging initialised')
+cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
 
         
 
@@ -41,7 +44,8 @@ class cl_help_crypt:
         """
         Constructor for the help_crypt class
         """ 
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
         
@@ -120,7 +124,8 @@ class cl_fact_help_crypt(ABC):
         """
         Factory method to set the helper crypt instance
         """        
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_help_crypt.__o_instance = i_instance
         
     @classmethod        
@@ -128,7 +133,8 @@ class cl_fact_help_crypt(ABC):
         """
         Factory method to get the helper crypt instance
         """        
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_help_crypt.__o_instance is not None:
             return(cl_fact_help_crypt.__o_instance)
         cl_fact_help_crypt.__o_instance = cl_help_crypt(Exception)
@@ -138,6 +144,7 @@ class cl_fact_help_crypt(ABC):
         """
         Constructor logic messenger factory
         """        
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     

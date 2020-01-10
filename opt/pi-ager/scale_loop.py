@@ -11,16 +11,18 @@ import time
 import hx711
 import pi_ager_database
 import pi_ager_names
-import pi_ager_logging
+# import pi_ager_logging
 from pi_ager_cl_alarm import cl_fact_logic_alarm
 from pi_ager_cl_messenger import cl_fact_logic_messenger
 from statistics import mean as pi_mean, stdev as pi_stdev, pstdev as pi_pstdev, median_low as pi_median_low
+from main.pi_ager_cl_logger import cl_fact_logger
 
 
-global logger
+# global logger
 
-logger = pi_ager_logging.create_logger(__name__)
-logger.debug('scale logging initialised')
+# logger = pi_ager_logging.create_logger(__name__)
+# logger.debug('scale logging initialised')
+cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
 
      
 
@@ -53,8 +55,9 @@ def tara_scale(scale, tara_key, data_table, calibrate_key, offset, settings_tabl
     """
     tare scale
     """
-    global logger
-    logger.debug('performing tara')
+    # global logger
+    # logger.debug('performing tara')
+    cl_fact_logger.get_instance().debug('performing tara')
     #scale.reset()
     #scale.tare()
     
@@ -76,7 +79,8 @@ def tara_scale(scale, tara_key, data_table, calibrate_key, offset, settings_tabl
     scale.setSamples(int(pi_ager_database.get_table_value(settings_table, pi_ager_names.samples_key)))
     scale.setSpikes(int(pi_ager_database.get_table_value(settings_table, pi_ager_names.spikes_key)))
     
-    logger.debug('tara performed - runnig control-measurement')
+    # logger.debug('tara performed - runnig control-measurement')
+    cl_fact_logger.get_instance().debug('tara performed - runnig control-measurement')
     # im Anschluss eine Kontrollmessung machen
     scale_measures(scale, tara_measuring_endtime, data_table, 1, tara_key, calibrate_key, newoffset, settings_table)
 
@@ -84,8 +88,9 @@ def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, ta
     """
     measure on scale
     """
-    global logger
-    logger.debug('scale_measures()')
+    # global logger
+    # logger.debug('scale_measures()')
+    cl_fact_logger.get_instance().debug('scale_measures()')
     
     global old_median_value1, old_median_value2
     global error_count1, error_count2
@@ -94,7 +99,8 @@ def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, ta
 
         
     measure_start_time = pi_ager_database.get_current_time()
-    logger.debug('Scale start')
+    # logger.debug('Scale start')
+    cl_fact_logger.get_instance().debug('Scale start')
     save_time = 0
     current_time = measure_start_time
    
@@ -111,7 +117,8 @@ def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, ta
         value = value - offset
         
         if status_tara_scale == 2:
-            logger.debug('tara measurement performed')
+            # logger.debug('tara measurement performed')
+            cl_fact_logger.get_instance().debug('tara measurement performed')
             return value
         formated_value = round(value, ROUND_DECIMAL_VALUE)
         if (current_time - measure_start_time) % saving_period == 0 and current_time != save_time:      # speichern je nach datenbankeintrag fuer saving_period
@@ -136,26 +143,35 @@ def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, ta
                 error_count2        = error_count
                 old_median_value2   = old_median_value
                 scale_list2         = scale_list
-            logger.debug(cell_name +'Error counter after       = ' + str(error_count))
+            # logger.debug(cell_name +'Error counter after       = ' + str(error_count))
+            cl_fact_logger.get_instance().debug(cell_name +'Error counter after       = ' + str(error_count))
             median_value = pi_median_low(scale_list)
             scale_list_rounded = [ round(elem, ROUND_DECIMAL_VALUE) for elem in scale_list ]            
        
-            logger.debug(cell_name +'(list) = ' + '( ' + str(len(scale_list)) + ' )' )
-            logger.debug(cell_name +'       = ' + str(scale_list_rounded))
-            logger.debug(cell_name +'Value                     = ' + str(round(value,ROUND_DECIMAL_VALUE)))
-            logger.debug(cell_name +'Median low                = ' + str(round(median_value,ROUND_DECIMAL_VALUE)))
-            logger.debug(cell_name +'Error counter             = ' + str(error_count))
+            # logger.debug(cell_name +'(list) = ' + '( ' + str(len(scale_list)) + ' )' )
+            # logger.debug(cell_name +'       = ' + str(scale_list_rounded))
+            # logger.debug(cell_name +'Value                     = ' + str(round(value,ROUND_DECIMAL_VALUE)))
+            # logger.debug(cell_name +'Median low                = ' + str(round(median_value,ROUND_DECIMAL_VALUE)))
+            # logger.debug(cell_name +'Error counter             = ' + str(error_count))
+            cl_fact_logger.get_instance().debug(cell_name +'(list) = ' + '( ' + str(len(scale_list)) + ' )' )
+            cl_fact_logger.get_instance().debug(cell_name +'       = ' + str(scale_list_rounded))
+            cl_fact_logger.get_instance().debug(cell_name +'Value                     = ' + str(round(value,ROUND_DECIMAL_VALUE)))
+            cl_fact_logger.get_instance().debug(cell_name +'Median low                = ' + str(round(median_value,ROUND_DECIMAL_VALUE)))
+            cl_fact_logger.get_instance().debug(cell_name +'Error counter             = ' + str(error_count))
                                 
             if ( db_write == True or calibrate_scale != 0 or status_tara_scale != 0 ):
                 pi_ager_database.write_scale(data_table,value)
                 #logger.debug(cell_name +'scale-value saved in database ' + time.strftime('%H:%M:%S', time.localtime()))
-                logger.debug(cell_name +'scale-value ' + str(round(value,ROUND_DECIMAL_VALUE)) + ' saved in database ' + time.strftime('%H:%M:%S', time.localtime()))
+                # logger.debug(cell_name +'scale-value ' + str(round(value,ROUND_DECIMAL_VALUE)) + ' saved in database ' + time.strftime('%H:%M:%S', time.localtime()))
+                cl_fact_logger.get_instance().debug(cell_name +'scale-value ' + str(round(value,ROUND_DECIMAL_VALUE)) + ' saved in database ' + time.strftime('%H:%M:%S', time.localtime()))
             
             
 
             scale_list_rounded_string = [ round(elem, ROUND_DECIMAL_VALUE) for elem in scale_list ]
-            logger.debug(cell_name +'       = ' + str(scale_list_rounded_string))
-            logger.debug(cell_name +'-------------------------------------------------')
+            # logger.debug(cell_name +'       = ' + str(scale_list_rounded_string))
+            # logger.debug(cell_name +'-------------------------------------------------')
+            cl_fact_logger.get_instance().debug(cell_name +'       = ' + str(scale_list_rounded_string))
+            cl_fact_logger.get_instance().debug(cell_name +'-------------------------------------------------')
             if data_table == pi_ager_names.data_scale1_table:
                 old_median_value1 = median_value
             elif data_table == pi_ager_names.data_scale2_table:
@@ -163,29 +179,35 @@ def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, ta
             
             
         current_time = pi_ager_database.get_current_time()
-    logger.debug('measurement performed')                
+    # logger.debug('measurement performed')
+    cl_fact_logger.get_instance().debug('measurement performed')
 
 def  execute_filter(value, old_median_value, error_count, scale_list, db_write, cell_name):
-    global logger          
-    logger.debug('scale_filter()')  
+    # global logger          
+    # logger.debug('scale_filter()')  
+    cl_fact_logger.get_instance().debug('scale_filter()')
     #global error_count         
     #if len(scale_list) >= LIST_LENGHT:
     #    db_write = True
     #else:
     #    db_write = False           
-    logger.debug(cell_name +'Median old                = ' + str(round(old_median_value,ROUND_DECIMAL_VALUE)))
+    # logger.debug(cell_name +'Median old                = ' + str(round(old_median_value,ROUND_DECIMAL_VALUE)))
+    cl_fact_logger.get_instance().debug(cell_name +'Median old                = ' + str(round(old_median_value,ROUND_DECIMAL_VALUE)))
     if old_median_value == 0 or error_count >= MAX_ERROR_COUNT: 
-        logger.debug(cell_name +'old_median_value = ' + str(old_median_value) + ' error_count = ' + str(error_count) + ' MAX_ERROR_COUNT =' + str(MAX_ERROR_COUNT)) 
+        # logger.debug(cell_name +'old_median_value = ' + str(old_median_value) + ' error_count = ' + str(error_count) + ' MAX_ERROR_COUNT =' + str(MAX_ERROR_COUNT)) 
+        cl_fact_logger.get_instance().debug(cell_name +'old_median_value = ' + str(old_median_value) + ' error_count = ' + str(error_count) + ' MAX_ERROR_COUNT =' + str(MAX_ERROR_COUNT)) 
         scale_list.append(value)
         error_count = 0
         db_write = True
     elif abs(old_median_value-value) < MAX_DEVIATION: 
-        logger.debug(cell_name +'old_median_value-value < MAX_DEVIATION | ' + str(round(abs(old_median_value-value), ROUND_DECIMAL_VALUE)) + ' < ' + str(MAX_DEVIATION))
+        # logger.debug(cell_name +'old_median_value-value < MAX_DEVIATION | ' + str(round(abs(old_median_value-value), ROUND_DECIMAL_VALUE)) + ' < ' + str(MAX_DEVIATION))
+        cl_fact_logger.get_instance().debug(cell_name +'old_median_value-value < MAX_DEVIATION | ' + str(round(abs(old_median_value-value), ROUND_DECIMAL_VALUE)) + ' < ' + str(MAX_DEVIATION))
         scale_list.append(value)
         error_count = 0
         db_write = True
     elif old_median_value != value:
-        logger.debug(cell_name +'old_median_value != value | ' + str(round(old_median_value-value,ROUND_DECIMAL_VALUE)) + ' != ' + str(round(value,ROUND_DECIMAL_VALUE)))
+        # logger.debug(cell_name +'old_median_value != value | ' + str(round(old_median_value-value,ROUND_DECIMAL_VALUE)) + ' != ' + str(round(value,ROUND_DECIMAL_VALUE)))
+        cl_fact_logger.get_instance().debug(cell_name +'old_median_value != value | ' + str(round(old_median_value-value,ROUND_DECIMAL_VALUE)) + ' != ' + str(round(value,ROUND_DECIMAL_VALUE)))
         error_count = error_count + 1
         db_write = False
     scale_list1.sort()
@@ -195,7 +217,8 @@ def  execute_filter(value, old_median_value, error_count, scale_list, db_write, 
     if len(scale_list) >= LIST_LENGHT:
         middle_of_scale_list = round(len(scale_list)/2)-1
         scale_list.pop(middle_of_scale_list)
-        logger.debug(cell_name +'Deleting index            = ' + str(middle_of_scale_list))
+        # logger.debug(cell_name +'Deleting index            = ' + str(middle_of_scale_list))
+        cl_fact_logger.get_instance().debug(cell_name +'Deleting index            = ' + str(middle_of_scale_list))
     return old_median_value, error_count, scale_list, db_write
                 
 
@@ -203,8 +226,9 @@ def get_scale_settings(scale_setting_rows):
     """
     reading scale settings
     """
-    global logger
-    logger.debug('get_scale_settings()')   
+    # global logger
+    # logger.debug('get_scale_settings()')   
+    cl_fact_logger.get_instance().debug('get_scale_settings()')  
     scale_settings = {}
     for scale_setting_row in scale_setting_rows:
         scale_settings[scale_setting_row[pi_ager_names.key_field]] = scale_setting_row[pi_ager_names.value_field]
@@ -214,8 +238,9 @@ def get_first_calibrate_measure(scale, scale_settings_table, calibrate_scale_key
     """
     getting first values on calibrating scale
     """
-    global logger          
-    logger.debug('get_first_calibrate_measure()')   
+    # global logger          
+    # logger.debug('get_first_calibrate_measure()')   
+    cl_fact_logger.get_instance().debug('get_first_calibrate_measure()')
     # scale.setReferenceUnit(1)
     scale.setReferenceUnit(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.referenceunit_key))
     scale.setSamples(int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_refunit_tara_key)))
@@ -227,15 +252,17 @@ def get_first_calibrate_measure(scale, scale_settings_table, calibrate_scale_key
     pi_ager_database.write_current_value(calibrate_scale_key,2)
     scale.setSamples(int(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.samples_key)))
     scale.setSpikes(int(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.spikes_key)))
-    logger.info('calibrate_value_before_weight = ' + str(calibrate_value_before_weight))
+    # logger.info('calibrate_value_before_weight = ' + str(calibrate_value_before_weight))
+    cl_fact_logger.get_instance().info('calibrate_value_before_weight = ' + str(calibrate_value_before_weight))
     return calibrate_value_before_weight
     
 def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table, calibrate_value_first_measure):
     """
     calculate reference unit for scale
     """
-    global logger          
-    logger.debug('calculate_reference_unit()')   
+    # global logger          
+    # logger.debug('calculate_reference_unit()') 
+    cl_fact_logger.get_instance().debug('calculate_reference_unit()') 
     # scale.setReferenceUnit(1)
     old_ref_unit = pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.referenceunit_key)
     scale.setReferenceUnit(old_ref_unit)
@@ -245,9 +272,11 @@ def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table, c
     calibrate_weight = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_weight_key)
     clear_history = scale.getWeight()
     calibrate_value_after_weight = scale.getMeasure()
-    logger.info('calibrate_value_after_weight = ' + str(calibrate_value_after_weight))
+    # logger.info('calibrate_value_after_weight = ' + str(calibrate_value_after_weight))
+    cl_fact_logger.get_instance().info('calibrate_value_after_weight = ' + str(calibrate_value_after_weight)
     reference_unit = (calibrate_value_after_weight - calibrate_value_first_measure)/calibrate_weight * old_ref_unit
-    logger.info('reference_unit = ' + str(reference_unit))
+    # logger.info('reference_unit = ' + str(reference_unit))
+    cl_fact_logger.get_instance().info('reference_unit = ' + str(reference_unit))
     if reference_unit == 0:
         pi_ager_database.write_current_value(calibrate_scale_key,5)
     else:
@@ -261,9 +290,10 @@ def doScaleLoop():
     """
     scale mainloop
     """
-    global logger
+    # global logger
        
-    logger.debug(__name__)
+    # logger.debug(__name__)
+    cl_fact_logger.get_instance().debug(__name__)
     
     scale1_setting_rows = pi_ager_database.get_scale_settings_from_table(pi_ager_names.settings_scale1_table)
     scale2_setting_rows = pi_ager_database.get_scale_settings_from_table(pi_ager_names.settings_scale2_table)

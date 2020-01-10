@@ -13,7 +13,8 @@ __status__ = "Production"
 
 #from abc import ABC, abstractmethod
 import inspect
-import pi_ager_logging
+# import pi_ager_logging
+from main.pi_ager_cl_logger import cl_fact_logger
 import time
 
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
@@ -25,14 +26,15 @@ from sensors.pi_ager_cl_sensor import cl_main_sensor#
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 from sensors.pi_ager_cl_sensor_sht import cl_main_sensor_sht
 
-global logger
-logger = pi_ager_logging.create_logger(__name__) 
+# global logger
+# logger = pi_ager_logging.create_logger(__name__) 
 
 class cl_main_sensor_sht3x(cl_main_sensor_sht):
     
     
     def __init__(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
         
@@ -40,12 +42,14 @@ class cl_main_sensor_sht3x(cl_main_sensor_sht):
         super().__init__(self.o_sensor_type)
 
     def get_current_data(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.measured_data = super().get_current_data()
         return(self.measured_data)
 
     def execute(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         #self.get_current_data()
         self._write_to_db()
         

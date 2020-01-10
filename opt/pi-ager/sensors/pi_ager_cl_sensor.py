@@ -14,7 +14,8 @@ __status__ = "Production"
 from abc import ABC, abstractmethod
 import math
 import inspect
-import pi_ager_logging
+# import pi_ager_logging
+from main.pi_ager_cl_logger import cl_fact_logger
 from datetime import datetime
 
 
@@ -25,32 +26,37 @@ from main.pi_ager_cx_exception import *
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 from main.pi_ager_cl_database import cl_fact_db_influxdb
         
-global logger
-logger = pi_ager_logging.create_logger(__name__) 
+# global logger
+# logger = pi_ager_logging.create_logger(__name__) 
     
 class cl_main_sensor(cl_ab_sensor):
 
     def __init__(self, o_sensor_type):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._error_counter = 0
         self._max_errors = 1
         self._measuring_intervall = 300
         self.o_sensor_type = o_sensor_type
     def get_current_data(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if (self._error_counter >= self._max_errors):
             self._execute_soft_reset()
                  
     def get_sensor_type_ui(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return( self.o_sensor_type.get_sensor_type_ui() )
     
     def get_sensor_type(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return( self.o_sensor_type._get_type() )
     
     def get_dewpoint(self, temperature, humidity):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if (temperature >= 0):
             a = 7.5
             b = 237.3
@@ -69,24 +75,28 @@ class cl_main_sensor(cl_ab_sensor):
         v = math.log10(DD/6.1078)
         self._temperature_dewpoint = b*v/(a-v) 
         self._humidity_absolute = 10**5 * mw/R * DD/temperature_kelvin
-        logger.debug("Calculated DewPoint for Temp %.2f C and Hum %.2f is %.2f" % (temperature,humidity,self._temperature_dewpoint))
+        # logger.debug("Calculated DewPoint for Temp %.2f C and Hum %.2f is %.2f" % (temperature,humidity,self._temperature_dewpoint))
+        cl_fact_logger.get_instance().debug("Calculated DewPoint for Temp %.2f C and Hum %.2f is %.2f" % (temperature,humidity,self._temperature_dewpoint))
 
         calculated_dewpoint = (self._temperature_dewpoint, self._humidity_absolute)
         return(calculated_dewpoint)
     
     def _execute_soft_reset(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass
     
     def _write_to_db(self):
         """ Write the sensor data to DB"""
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if 1 == 1:
             self._write_to_influxdb()
         pass
     def _write_to_influxdb(self):
         """ Write the sensor data to time series DB"""
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         influx_db = cl_fact_db_influxdb.get_instance()
         if (self._current_temperature != 0 ):
@@ -103,7 +113,8 @@ class cl_main_sensor(cl_ab_sensor):
                     }
                     }
             ]
-            logger.debug(json_body)
+            # logger.debug(json_body)
+            cl_fact_logger.get_instance().debug(json_body)
             influx_db.write_data_to_db(json_body) 
 
         if (self._current_humidity != 0 ):
@@ -120,7 +131,8 @@ class cl_main_sensor(cl_ab_sensor):
                     }
                     }
             ]
-            logger.debug(json_body)
+            # logger.debug(json_body)
+            cl_fact_logger.get_instance().debug(json_body)
             influx_db.write_data_to_db(json_body) 
 
         if (self._current_humidity != 0 ):        
@@ -137,7 +149,8 @@ class cl_main_sensor(cl_ab_sensor):
                     }
                     }
             ]
-            logger.debug(json_body)
+            # logger.debug(json_body)
+            cl_fact_logger.get_instance().debug(json_body)
             influx_db.write_data_to_db(json_body) 
 
         if (self._humidity_absolute != 0 ):        
@@ -154,7 +167,8 @@ class cl_main_sensor(cl_ab_sensor):
                     }
                     }
             ]
-            logger.debug(json_body)
+            # logger.debug(json_body)
+            cl_fact_logger.get_instance().debug(json_body)
             influx_db.write_data_to_db(json_body) 
         pass
 

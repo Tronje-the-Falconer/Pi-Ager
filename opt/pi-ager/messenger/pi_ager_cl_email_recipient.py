@@ -14,15 +14,16 @@ __status__ = "Production"
 from abc import ABC
 import inspect
 import pi_ager_names
-import pi_ager_logging
+# import pi_ager_logging
+from main.pi_ager_cl_logger import cl_fact_logger
 from main.pi_ager_cl_database import cl_fact_database_config
 
 
 
 from main.pi_ager_cx_exception import *
 
-global logger
-logger = pi_ager_logging.create_logger(__name__)
+# global logger
+# logger = pi_ager_logging.create_logger(__name__)
 
         
 class cl_logic_email_recipient:
@@ -30,7 +31,8 @@ class cl_logic_email_recipient:
         """
         Constructor for the email recipient class
         """ 
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
         
@@ -42,11 +44,13 @@ class cl_logic_email_recipient:
         self.it_email_recipient = self.db_email_recipient.read_data_from_db()
         
     def get_data(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         return(self.it_email_recipient)
     def write_data(self, it_table):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.db_email_recipient.write_data_to_db(it_table)
         pass
 
@@ -107,7 +111,8 @@ class cl_fact_logic_email_recipient(ABC):
         """
         Factory method to set the email recipient logic instance
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logic_email_recipient.__o_instance = i_instance
         
     @classmethod        
@@ -115,7 +120,8 @@ class cl_fact_logic_email_recipient(ABC):
         """
         Factory method to get the email recipient logic instance
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_logic_email_recipient.__o_instance is not None:
             return(cl_fact_logic_email_recipient.__o_instance)
         cl_fact_logic_email_recipient.__o_instance = cl_logic_email_recipient()
@@ -125,7 +131,8 @@ class cl_fact_logic_email_recipient(ABC):
         """
         Constructor email logic factory
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     
 class cl_fact_db_email_recipient(ABC):
@@ -136,7 +143,8 @@ class cl_fact_db_email_recipient(ABC):
         """
         Factory method to set the db email recipient instance
         """        
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_db_email_recipient.__o_instance = i_instance
         
     @classmethod        
@@ -144,7 +152,8 @@ class cl_fact_db_email_recipient(ABC):
         """
         Factory method to get the db email recipient instance
         """        
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_db_email_recipient.__o_instance is not None:
             return(cl_fact_db_email_recipient.__o_instance)
         cl_fact_db_email_recipient.__o_instance = cl_db_email_recipient()

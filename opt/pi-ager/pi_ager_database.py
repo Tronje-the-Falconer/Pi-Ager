@@ -10,14 +10,17 @@ import sqlite3
 import time
 import pi_ager_names
 import pi_ager_paths
-import pi_ager_logging
+# import pi_ager_logging
+
+from main.pi_ager_cl_logger import cl_fact_logger
 
 global cursor
 global connection
 
-global logger
-logger = pi_ager_logging.create_logger(__name__)
-logger.debug('logging initialised')
+# global logger
+# logger = pi_ager_logging.create_logger(__name__)
+# logger.debug('logging initialised')
+cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
 
 
 def get_current_time():
@@ -203,14 +206,16 @@ def write_current_value(key, value):
 
     if key == None:
         logstring = 'key ist None: ' + key + ' zu schreibender Wert: ' + str(value)
-        logger.debug(logstring)
+        # logger.debug(logstring)
+        cl_fact_logger.get_instance().debug(logstring)
         return
     sql='UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(value) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) + ' WHERE ' + pi_ager_names.key_field + ' = "' + key + '"'
     open_database()
     execute_query(sql)
     close_database()
     logstring = 'write_current_value Tabelle: ' + pi_ager_names.current_values_table + ' geschriebener Key/Value: ' + key + ' / ' + str(value)
-    logger.debug(logstring)
+    # logger.debug(logstring)
+    cl_fact_logger.get_instance().debug(logstring)
 
 def get_scale_table_row(table):
     """
@@ -528,4 +533,5 @@ def repair_column_type(table, fieldname):
     # Wird später implementiert
     # logstring = 'Wrong fieldtype in field ' + fieldname + ' of table ' + table + '!'
     # logger.debug(logstring)
+    # cl_fact_logger.get_instance().debug(logstring)
     pass

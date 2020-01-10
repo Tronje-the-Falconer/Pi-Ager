@@ -6,10 +6,11 @@
 """
 import pi_ager_names
 import pi_ager_database
-import pi_ager_logging
+# import pi_ager_logging
+from main.pi_ager_cl_logger import cl_fact_logger
 
-global logger
-logger = pi_ager_logging.create_logger(__name__)
+# global logger
+# logger = pi_ager_logging.create_logger(__name__)
 
 def get_and_write_revision_in_database():
     """
@@ -28,7 +29,8 @@ def get_and_write_revision_in_database():
     except:
         myrevision = "0000"
     
-    logger.debug('pi revision: ' + myrevision)
+    # logger.debug('pi revision: ' + myrevision)
+    cl_fact_logger.get_instance().debug('pi revision: ' + myrevision)
     pi_ager_database.update_value_in_table(pi_ager_names.system_table, pi_ager_names.pi_revision_key, myrevision)
     
     return myrevision

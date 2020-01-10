@@ -16,8 +16,8 @@ import pi_ager_database
 import pi_ager_names
 import pi_ager_paths
 import pi_ager_init
-import pi_ager_logging
-import pi_ager_logging
+# import pi_ager_logging
+# import pi_ager_logging
 import pi_ager_gpio_config
 import pi_ager_organization
 from time import ctime as convert
@@ -28,18 +28,18 @@ from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from sensors.pi_ager_cl_sensor_fact import cl_fact_main_sensor
 
+from main.pi_ager_cl_logger import cl_fact_logger
 
-
-global logger
-logger = pi_ager_logging.create_logger(__name__)
-logger.debug('logging initialised')
+# global logger
+# logger = pi_ager_logging.create_logger(__name__)
+# logger.debug('logging initialised')
 
 def autostart_loop():
     """
     starting loop. pi is startet. pi-ager is not startet. waiting for value 1 in database pi-ager-status
     """
     global status_pi_ager
-    global logger 
+    # global logger 
     try:
         while True:
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
@@ -47,7 +47,8 @@ def autostart_loop():
             current_agingtable_period = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.agingtable_period_key)
             check_and_set_light()
             
-            logger.debug('autostart_loop ' + time.strftime('%H:%M:%S', time.localtime()))
+            # logger.debug('autostart_loop ' + time.strftime('%H:%M:%S', time.localtime()))
+            cl_fact_logger.get_instance().debug('autostart_loop ' + time.strftime('%H:%M:%S', time.localtime()))
             if status_agingtable == 1:
                 os.system('sudo /var/sudowebscript.sh startagingtable &')
                 
@@ -63,18 +64,23 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     """
     try to read sensordata
     """
-    global logger
+    # global logger
     global sensor_humidity_big
     global sensor_temperature_big 
     sensorname = cl_fact_main_sensor_type.get_instance().get_sensor_type_ui()
-    logger.debug("sensorname: " + str(sensorname))
-    logger.debug("sensortype: " + str(cl_fact_main_sensor_type.get_instance().get_sensor_type()))
-                 
+    # logger.debug("sensorname: " + str(sensorname))
+    # logger.debug("sensortype: " + str(cl_fact_main_sensor_type.get_instance().get_sensor_type()))
+    cl_fact_logger.get_instance().debug("sensorname: " + str(sensorname))
+    cl_fact_logger.get_instance().debug("sensortype: " + str(cl_fact_main_sensor_type.get_instance().get_sensor_type()))
+    
+    
     try:
         if sensorname == 'DHT11' or sensorname == 'DHT22':
             sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_gpio_config.gpio_sensor_data)
-            logger.debug("sensor_temperature_big: " + str(sensor_temperature_big))
-            logger.debug("sensor_humidity_big: " + str(sensor_humidity_big))
+            # logger.debug("sensor_temperature_big: " + str(sensor_temperature_big))
+            # logger.debug("sensor_humidity_big: " + str(sensor_humidity_big))
+            cl_fact_logger.get_instance().debug("sensor_temperature_big: " + str(sensor_temperature_big))
+            cl_fact_logger.get_instance().debug("sensor_humidity_big: " + str(sensor_humidity_big))
             # atp = 17.271  ermittelt aus dem Datenblatt DHT11 und DHT22
             # btp = 237.7   ermittelt aus dem Datenblatt DHT11 und DHT22
         
@@ -84,11 +90,15 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 main_sensor.execute()
                 measured_data = main_sensor.get_current_data()
                 (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
-                logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
-                logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
-                logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))    
+                # logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
+                # logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
+                # logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
+                cl_fact_logger.get_instance().debug('sensor_temperature_big: ' + str(sensor_temperature_big))
+                cl_fact_logger.get_instance().debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
+                cl_fact_logger.get_instance().debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
             except pi_sht1x.sht1x.SHT1xError as cx_error:
-                logger.debug('Exception SHT1 Error')
+                # logger.debug('Exception SHT1 Error')
+                cl_fact_logger.get_instance().debug('Exception SHT1 Error')
                 pass  
         elif sensorname == 'SHT3x': #SH3x
             try:
@@ -96,12 +106,16 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 main_sensor.execute()
                 measured_data = main_sensor.get_current_data()
                 (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
-                logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
-                logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
-                logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big)) 
+                # logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
+                # logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
+                # logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
+                cl_fact_logger.get_instance().debug('sensor_temperature_big: ' + str(sensor_temperature_big))
+                cl_fact_logger.get_instance().debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
+                cl_fact_logger.get_instance().debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
                 
             except cx_i2c_sht_temperature_crc_error as cx_error:
-                logger.debug('Exception CRC Error')
+                # logger.debug('Exception CRC Error')
+                cl_fact_logger.get_instance().debug('Exception CRC Error')
                 pass  
 
         elif sensorname == 'SHT85': #SH3x
@@ -110,12 +124,16 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 main_sensor.execute()
                 measured_data = main_sensor.get_current_data()
                 (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
-                logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
-                logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
-                logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big)) 
+                # logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
+                # logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
+                # logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
+                cl_fact_logger.get_instance().debug('sensor_temperature_big: ' + str(sensor_temperature_big))
+                cl_fact_logger.get_instance().debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
+                cl_fact_logger.get_instance().debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
                 
             except cx_i2c_sht_temperature_crc_error as cx_error:
-                logger.debug('Exeption CRC Error')
+                # logger.debug('Exeption CRC Error')
+                cl_fact_logger.get_instance().debug('Exeption CRC Error')
                 pass  
         if sensor_humidity_big is not None and sensor_temperature_big is not None:
             #sensor_temperature_big = float(sensor_temperature_big)
@@ -131,7 +149,8 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                     countup_values = countup('humidity_exception', humidity_exception_count)
                     logstring = countup_values['logstring']
                     humidity_exception_count = countup_values['counter']
-                    logger.debug(logstring)
+                    # logger.debug(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     time.sleep(1)
                     recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
                     return recursion
@@ -142,7 +161,8 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                     countup_values = countup('temperature_exception', temperature_exception_count)
                     logstring = countup_values['logstring']
                     temperature_exception_count = countup_values['counter']
-                    logger.debug(logstring)
+                    # logger.debug(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     time.sleep(1)
                     recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
                     return recursion
@@ -156,7 +176,8 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             logstring = countup_values['logstring']
             sensordata_exception_count = countup_values['counter']
             
-            logger.debug(logstring)
+            # logger.debug(logstring)
+            cl_fact_logger.get_instance().debug(logstring)
             time.sleep(1)
             recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
             return recursion
@@ -165,7 +186,8 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             sensor_temperature = None
             sensor_humidity = None
             logstring = _('Failed to get sensordata.')
-            logger.warning(logstring)
+            #logger.warning(logstring)
+            cl_fact_logger.get_instance().warning(logstring)
             
         sensordata={}
         sensordata['sensor_temperature'] = sensor_temperature
@@ -340,7 +362,7 @@ def doMainLoop():
     global dehumidifier_modus             #  Modus Entfeuchter  (1 = über Abluft, 2 = mit Abluft zusammen [unterstützend]; 3 = anstelle von Abluft)
     global status_dehumidifier            #  Entfeuchter
     global status_pi_ager
-    global logger
+    # global logger
 
     # Pruefen Sensor, dann Settings einlesen
 
@@ -349,7 +371,8 @@ def doMainLoop():
     count_continuing_emergency_loops = 0
     humidify_delay_switch = False
     
-    logger.debug('doMainLoop()')
+    # logger.debug('doMainLoop()')
+    cl_fact_logger.get_instance().debug('doMainLoop()')
     try:
         while status_pi_ager == 1:
             check_and_set_light()
@@ -368,8 +391,10 @@ def doMainLoop():
             sensordata = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
             sensor_temperature = sensordata['sensor_temperature']
             sensor_humidity = sensordata['sensor_humidity']
-            logger.debug("sensor_temperature = " + str(sensor_temperature))
-            logger.debug("sensor_humidity    = " + str(sensor_humidity))
+            # logger.debug("sensor_temperature = " + str(sensor_temperature))
+            # logger.debug("sensor_humidity    = " + str(sensor_humidity))
+            cl_fact_logger.get_instance().debug("sensor_temperature = " + str(sensor_temperature))
+            cl_fact_logger.get_instance().debug("sensor_humidity    = " + str(sensor_humidity))
             # Prüfen, ob Sensordaten empfangen wurden und falls nicht, auf Notfallmodus wechseln
             if sensor_temperature != None and sensor_humidity != None:
                 count_continuing_emergency_loops = 0
@@ -378,9 +403,11 @@ def doMainLoop():
                 setpoint_temperature = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key))
                 setpoint_humidity = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key))
                 circulation_air_period = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.circulation_air_period_key))
-                logger.debug("circulation_air_period = " + str(circulation_air_period))
+                # logger.debug("circulation_air_period = " + str(circulation_air_period))
+                cl_fact_logger.get_instance().debug("circulation_air_period = " + str(circulation_air_period))
                 circulation_air_duration = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.circulation_air_duration_key))
-                logger.debug("circulation_air_duration = "+ str(circulation_air_duration))
+                # logger.debug("circulation_air_duration = "+ str(circulation_air_duration))
+                cl_fact_logger.get_instance().debug("circulation_air_duration = "+ str(circulation_air_duration))
                 exhaust_air_period = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.exhaust_air_period_key))
                 exhaust_air_duration = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.exhaust_air_duration_key))
                 switch_on_cooling_compressor = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_cooling_compressor_key))
@@ -484,18 +511,24 @@ def doMainLoop():
                             status_uv = True                     # UV-Licht an
                             logstring = logstring + ' \n ' +  _('uv-light timer active') + ' (' + _('uv-light on') +')'
                             # logger.info(logstring)
-                            logger.debug('UV-Licht Startzeit: ' + convert(pi_ager_init.uv_starttime))
-                            logger.debug('UV-Licht Stoppzeit: ' + convert(pi_ager_init.uv_stoptime))
+                            # logger.debug('UV-Licht Startzeit: ' + convert(pi_ager_init.uv_starttime))
+                            # logger.debug('UV-Licht Stoppzeit: ' + convert(pi_ager_init.uv_stoptime))
+                            cl_fact_logger.get_instance().debug('UV-Licht Startzeit: ' + convert(pi_ager_init.uv_starttime))
+                            cl_fact_logger.get_instance().debug('UV-Licht Stoppzeit: ' + convert(pi_ager_init.uv_stoptime))
                             #logger.debug('UV-Licht Startzeit: ' + pi_ager_init.uv_starttime.strftime('%d %B %Y %H:%M:%S'))
                             #logger.debug('UV-Licht Stoppzeit: ' + pi_ager_init.uv_stoptime.strftime('%Y-%m-%d %H:%M:%S'))
-                            logger.debug('UV-Licht duration: ' + str(uv_duration))
+                            # logger.debug('UV-Licht duration: ' + str(uv_duration))
+                            cl_fact_logger.get_instance().debug('UV-Licht duration: ' + str(uv_duration))
                         else: 
                             status_uv = False                      # UV-Licht aus
                             logstring = logstring + ' \n ' +  _('uv-light timer active') + ' (' + _('uv-light off') +')'
                             # logger.info(logstring)
-                            logger.debug('UV-Licht Stoppzeit: ' + convert(pi_ager_init.uv_stoptime))
-                            logger.debug('UV-Licht Startzeit: ' + convert(pi_ager_init.uv_starttime))
-                            logger.debug('UV-Licht period: ' + str(uv_period))
+                            # logger.debug('UV-Licht Stoppzeit: ' + convert(pi_ager_init.uv_stoptime))
+                            # logger.debug('UV-Licht Startzeit: ' + convert(pi_ager_init.uv_starttime))
+                            # logger.debug('UV-Licht period: ' + str(uv_period))
+                            cl_fact_logger.get_instance().debug('UV-Licht Stoppzeit: ' + convert(pi_ager_init.uv_stoptime))
+                            cl_fact_logger.get_instance().debug('UV-Licht Startzeit: ' + convert(pi_ager_init.uv_starttime))
+                            cl_fact_logger.get_instance().debug('UV-Licht period: ' + str(uv_period))
     
                         if current_time > pi_ager_init.uv_stoptime:
                             pi_ager_init.uv_starttime = int(time.time()) + uv_period  # Timer-Timestamp aktualisiert
@@ -509,8 +542,10 @@ def doMainLoop():
     
                     pi_ager_init.uv_starttime = datetime.datetime(year_now, month_now, day_now, switch_on_uv_hour, switch_on_uv_minute, 0, 0)
                     pi_ager_init.uv_stoptime = pi_ager_init.uv_starttime + datetime.timedelta(0, uv_duration)
-                    logger.debug(pi_ager_init.uv_starttime)
-                    logger.debug(pi_ager_init.uv_stoptime)
+                    # logger.debug(pi_ager_init.uv_starttime)
+                    # logger.debug(pi_ager_init.uv_stoptime)
+                    cl_fact_logger.get_instance().debug(pi_ager_init.uv_starttime)
+                    cl_fact_logger.get_instance().debug(pi_ager_init.uv_stoptime)
     
                     if now >= pi_ager_init.uv_starttime and now <= pi_ager_init.uv_stoptime:
                         status_uv = True                     # UV-Licht an
@@ -541,16 +576,22 @@ def doMainLoop():
                                 status_light = True                     # Licht an
                             logstring = logstring + ' \n ' +  _('light timer active') + ' (' + _('light on') +')'
                             # logger.info(logstring)
-                            logger.debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
-                            logger.debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
-                            logger.debug('Licht duration: ' + str(light_duration))
+                            # logger.debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
+                            # logger.debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
+                            # logger.debug('Licht duration: ' + str(light_duration))
+                            cl_fact_logger.get_instance().debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
+                            cl_fact_logger.get_instance().debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
+                            cl_fact_logger.get_instance().debug('Licht duration: ' + str(light_duration))
                         else: 
                             status_light = False                      # Licht aus
                             logstring = logstring + ' \n ' +  _('light timer active') + ' (' + _('light off') +')'
                             # logger.info(logstring)
-                            logger.debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
-                            logger.debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
-                            logger.debug('Licht period: ' + str(light_period))
+                            # logger.debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
+                            # logger.debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
+                            # logger.debug('Licht period: ' + str(light_period))
+                            cl_fact_logger.get_instance.debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
+                            cl_fact_logger.get_instance.debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))()
+                            cl_fact_logger.get_instance.debug('Licht period: ' + str(light_period))()
     
                         if current_time > pi_ager_init.light_stoptime:
                             pi_ager_init.light_starttime = int(time.time()) + light_period  # Timer-Timestamp aktualisiert
@@ -815,24 +856,30 @@ def doMainLoop():
                 logstring = logstring + ' \n ' + pi_ager_names.logspacer2
     
                 if status_value_has_changed():
-                    logger.info(logstring)
+                    # logger.info(logstring)
+                    cl_fact_logger.get_instance.info(logstring)
                 
                 # Messwerte in die RRD-Datei schreiben
                 # Schreiben der aktuellen Status-Werte
                 pi_ager_database.write_current_sensordata(pi_ager_init.loopcounter, sensor_temperature, sensor_humidity)
                 pi_ager_database.write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier)
     
-                logger.debug('writing current values in database performed')
+                #logger.debug('writing current values in database performed')
+                cl_fact_logger.get_instance().debug('writing current values in database performed')
             
             else:
                 count_continuing_emergency_loops += 1
-                logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter) + ' without sensordata!!')
-                logger.warning('loopnumber: ' + str(pi_ager_init.loopcounter) + ' is loop ' + str(count_continuing_emergency_loops) + ' without sensor response!')
+                # logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter) + ' without sensordata!!')
+                # logger.warning('loopnumber: ' + str(pi_ager_init.loopcounter) + ' is loop ' + str(count_continuing_emergency_loops) + ' without sensor response!')
+                cl_fact_logger.get_instance().debug('loopnumber: ' + str(pi_ager_init.loopcounter) + ' without sensordata!!')
+                cl_fact_logger.get_instance().warning('loopnumber: ' + str(pi_ager_init.loopcounter) + ' is loop ' + str(count_continuing_emergency_loops) + ' without sensor response!')
                 if count_continuing_emergency_loops == 10:
-                    logger.info('Because of ' + str(count_continuing_emergency_loops) + ' loops without sensordata the system will be rebooted now!')
+                    # logger.info('Because of ' + str(count_continuing_emergency_loops) + ' loops without sensordata the system will be rebooted now!')
+                    cl_fact_logger.get_instance().info('Because of ' + str(count_continuing_emergency_loops) + ' loops without sensordata the system will be rebooted now!')
                     os.system('sudo /var/sudowebscript.sh reboot')
             
-            logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter))
+            # logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter))
+            cl_fact_logger.get_instance().debug('loopnumber: ' + str(pi_ager_init.loopcounter))
     
             time.sleep(10)  
             
@@ -844,13 +891,15 @@ def doMainLoop():
             pi_ager_logging.check_website_logfile()
             
             # Mainloop fertig
-            logger.debug('loop complete')
+            # logger.debug('loop complete')
+            cl_fact_logger.get_instance().debug('loop complete')
             pi_ager_init.loopcounter += 1
             
             
             
     # Ende While-Schleife
-        logger.debug('status!= 1')
+        # logger.debug('status!= 1')
+        cl_fact_logger.get_instance().debug('status!= 1')
         pi_ager_gpio_config.defaultGPIO()
  
     except Exception as cx_error:

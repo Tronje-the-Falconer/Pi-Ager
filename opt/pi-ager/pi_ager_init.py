@@ -10,8 +10,9 @@ import gettext
 import pi_ager_database
 import pi_ager_names
 import pi_ager_gpio_config
-import pi_ager_logging
+# import pi_ager_logging
 import pi_sht1x
+from main.pi_ager_cl_logger import cl_fact_logger
 
 global system_starttime
 global circulation_air_start
@@ -20,11 +21,12 @@ global uv_starttime
 global uv_stoptime
 global light_starttime
 global light_stoptime
-global logger
+# global logger
 global sensortype
 
-logger = pi_ager_logging.create_logger(__name__)
-logger.debug('logging initialised')
+# logger = pi_ager_logging.create_logger(__name__)
+# logger.debug('logging initialised')
+cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
 
 # Function zum Setzen des Sensors
 def set_sensortype():
@@ -35,14 +37,16 @@ def set_sensortype():
     global sensortype
     global sensorname
     global sensorvalue
-    global logger
+    # global logger
 
-    logger.debug('set_sensortype()')
+    # logger.debug('set_sensortype()')
+    cl_fact_logger.get_instance().debug('set_sensortype()')
 
     # Sensortyp
     sensortype = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key)
     sensorname = cl_fact_main_sensor_type.get_instance().get_sensor_type_ui()
-    logger.info(_('sensortype set to') + ' ' + sensorname)
+    # logger.info(_('sensortype set to') + ' ' + sensorname)
+    cl_fact_logger.get_instance().info(_('sensortype set to') + ' ' + sensorname)
 
 """
     if sensortype == 1: #DHT
@@ -67,7 +71,8 @@ def check_sensor(sensorname, sensor):
     checking wired sensor
     """
     global sensortype
-    logger.debug('check_sensor()')
+    # logger.debug('check_sensor()')
+    cl_fact_logger.get_instance().debug('check_sensor()')
     try:
         if sensorname == 'SHT':
             sensor_sht = pi_sht1x.SHT1x(pi_ager_names.gpio_sensor_data, pi_ager_names.gpio_sensor_sync, gpio_mode=pi_ager_names.board_mode)
@@ -91,7 +96,8 @@ def check_sensor(sensorname, sensor):
         else:
             sensortype = 3
         pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key, sensortype)
-        logger.info(_('wrong sensortype in settings'))
+        # logger.info(_('wrong sensortype in settings'))
+        cl_fact_logger.get_instance().info(_('wrong sensortype in settings'))
         set_sensortype()
 
 def set_system_starttime():
@@ -105,9 +111,10 @@ def set_system_starttime():
     global uv_stoptime
     global light_starttime
     global light_stoptime
-    global logger
+    # global logger
 
-    logger.debug('set_system_starttime()')
+    # logger.debug('set_system_starttime()')
+    cl_fact_logger.get_instance().debug('set_system_starttime()')
     
     system_starttime=int(time.time())
     circulation_air_start = system_starttime
@@ -121,9 +128,10 @@ def set_language():
     """
     setting up language
     """
-    global logger
+    # global logger
     
-    logger.debug('set_language()')
+    # logger.debug('set_language()')
+    cl_fact_logger.get_instance().debug('set_language()')
     # Sprache der Textausgabe
     language = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.language_key)
     

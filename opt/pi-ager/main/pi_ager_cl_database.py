@@ -17,24 +17,26 @@ from influxdb import InfluxDBClient
 import pi_ager_names
 import pi_ager_paths
 import pi_ager_logging
-
+from main.pi_ager_cl_logger import cl_fact_logger
 
 
 from main.pi_ager_cx_exception import *
 
-global logger
-logger = pi_ager_logging.create_logger(__name__)
+# global logger
+# logger = pi_ager_logging.create_logger(__name__)
 
 class cl_db_database_mysql:
     def read_data_from_db(self, i_select_statement):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().me()
         # Builds a dict of dicts it_table from mysql db
         it_table = {}
         
         return it_table
 class cl_db_influxdb:
     def __init__(self):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         host='localhost'
         port=8086
         user = 'admin'
@@ -57,9 +59,11 @@ class cl_db_influxdb:
         # Builds a dict of dicts it_table from sqlite db
         it_table = {}
 
-        logger.debug('Select statement = ' + i_select_statement)
+        # logger.debug('Select statement = ' + i_select_statement)
+        cl_fact_logger.get_instance().debug('Select statement = ' + i_select_statement)
         query = self.cursor.execute(i_select_statement)
-        logger.debug('Select query = ' + str(query))
+        # logger.debug('Select query = ' + str(query))
+        cl_fact_logger.get_instance().debug('Select query = ' + str(query))
         #db_table = cursor.fetchall()
         #logger.debug('DB table =' + str(db_table))
         #connection.close()
@@ -68,7 +72,8 @@ class cl_db_influxdb:
         colname = [ d[0] for d in query.description ]
         it_table = [ dict(zip(colname, r)) for r in query.fetchall() ] 
 
-        logger.debug('it table =' + str(it_table))
+        # logger.debug('it table =' + str(it_table))
+        cl_fact_logger.get_instance().debug('it table =' + str(it_table))
         return it_table
  
     def write_data_to_db(self, i_insert_statment):
@@ -94,14 +99,17 @@ class cl_db_database_sqlite:
         # Builds a dict of dicts it_table from sqlite db
         it_table = {}
 
-        logger.debug('Select statement = ' + i_select_statement)
+        # logger.debug('Select statement = ' + i_select_statement)
+        cl_fact_logger.get_instance().debug('Select statement = ' + i_select_statement)
         query = self.cursor.execute(i_select_statement)
-        logger.debug('Select query = ' + str(query))
-         
+        # logger.debug('Select query = ' + str(query))
+        cl_fact_logger.get_instance().debug('Select query = ' + str(query))
+        
         colname = [ d[0] for d in query.description ]
         it_table = [ dict(zip(colname, r)) for r in query.fetchall() ] 
 
-        logger.debug('it table =' + str(it_table))
+        # logger.debug('it table =' + str(it_table))
+        cl_fact_logger.get_instance().debug('it table =' + str(it_table))
         return it_table
  
     def write_data_to_db(self, i_insert_statment, values):
@@ -115,7 +123,8 @@ class cl_fact_db_influxdb(ABC):
         """
         Factory method to set the database instance
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_db_influxdb.__o_instance = i_instance
         
     @classmethod        
@@ -123,7 +132,8 @@ class cl_fact_db_influxdb(ABC):
         """
         Factory method to get the database instance
         """
-        logger.debug(pi_ager_logging.me())
+        #logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_db_influxdb.__o_instance is not None:
             return(cl_fact_db_influxdb.__o_instance)
         cl_fact_db_influxdb.__o_instance = cl_db_influxdb()
@@ -133,7 +143,8 @@ class cl_fact_db_influxdb(ABC):
         """
         Constructor email logic factory
         """
-        logger.debug(pi_ager_logging.me())
+        #logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     
     
@@ -146,7 +157,8 @@ class cl_fact_database_config(ABC):
         """
         Factory method to set the database instance
         """
-        logger.debug(pi_ager_logging.me())
+        #logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_database_config.__o_instance = i_instance
         
     @classmethod        
@@ -154,7 +166,8 @@ class cl_fact_database_config(ABC):
         """
         Factory method to get the database instance
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_database_config.__o_instance is not None:
             return(cl_fact_database_config.__o_instance)
         cl_fact_database_config.__o_instance = cl_db_database_sqlite()
@@ -164,6 +177,7 @@ class cl_fact_database_config(ABC):
         """
         Constructor email logic factory
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     

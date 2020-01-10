@@ -18,7 +18,8 @@ import socket
 import sqlite3 #Remove after test
 import pi_ager_paths #Remove after test
 import pi_ager_names
-import pi_ager_logging
+# import pi_ager_logging
+from main.pi_ager_cl_logger import cl_fact_logger
 from main.pi_ager_cl_database import cl_fact_database_config
 from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
 from messenger.pi_ager_cl_send_email import cl_fact_logic_send_email, cl_logic_send_email
@@ -26,9 +27,10 @@ from messenger.pi_ager_cl_send_email import cl_fact_logic_send_email, cl_logic_s
 from main.pi_ager_cx_exception import *
 from _ast import Pass
 
-global logger
-logger = pi_ager_logging.create_logger(__name__)
-logger.debug('logging initialised')
+# global logger
+# logger = pi_ager_logging.create_logger(__name__)
+# logger.debug('logging initialised')
+cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
 
         
 class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
@@ -37,7 +39,8 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         """
         Constructor for the messenger class
         """ 
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
         
@@ -76,19 +79,28 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         """
         Handle message to create alarm or email or telegram or pushover ... class
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.cx_error  = cx_error
-        logger.exception(self.cx_error, exc_info = True)
-        logger.info("Exception raised: " + type(self.cx_error).__name__  )
-        logger.info(self.it_messenger)
+        # logger.exception(self.cx_error, exc_info = True)
+        # logger.info("Exception raised: " + type(self.cx_error).__name__  )
+        # logger.info(self.it_messenger)
+        cl_fact_logger.get_instance().exception(self.cx_error, exc_info = True)
+        cl_fact_logger.get_instance().info("Exception raised: " + type(self.cx_error).__name__  )
+        cl_fact_logger.get_instance().info(self.it_messenger)
         
         if self.it_messenger: 
-            logger.debug('id = ' + str(self.it_messenger[0]['id']))
-            logger.debug('exception = ' + str(self.it_messenger[0]['exception']))
-            logger.debug('message_type = ' + str(self.it_messenger[0]['message_type']))
-            logger.debug('active = ' + str(self.it_messenger[0]['active']))
+            # logger.debug('id = ' + str(self.it_messenger[0]['id']))
+            # logger.debug('exception = ' + str(self.it_messenger[0]['exception']))
+            # logger.debug('message_type = ' + str(self.it_messenger[0]['message_type']))
+            # logger.debug('active = ' + str(self.it_messenger[0]['active']))
+            cl_fact_logger.get_instance().debug('id = ' + str(self.it_messenger[0]['id']))
+            cl_fact_logger.get_instance().debug('exception = ' + str(self.it_messenger[0]['exception']))
+            cl_fact_logger.get_instance().debug('message_type = ' + str(self.it_messenger[0]['message_type']))
+            cl_fact_logger.get_instance().debug('active = ' + str(self.it_messenger[0]['active']))
             
-        logger.info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
+        # logger.info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
+        cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
         if str(self.cx_error.__class__.__name__ ) == 'cx_Sensor_not_defined':
             self.logic_alarm.execute_short(replication = 3)
             self.exception_known = True
@@ -106,7 +118,8 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             self.logic_alarm.execute_middle(replication = 12)
             
         
-        logger.info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
+        # logger.info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
+        cl_fact_logger.get_instance().info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
         """
         if str(self.cx_error.__class__.__name__ ) == 'cx_Sensor_not_defined':
             self.logic_send_email.execute(self.cx_error, self.build_alarm_subject(), self.build_alarm_message())
@@ -118,9 +131,11 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             self.logic_send_email.execute(self.cx_error, self.build_alarm_subject(), self.build_alarm_message())
             self.exception_known = False
         """
-        logger.info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
+        # logger.info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
+        cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
         
-        logger.info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
+        # logger.info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
+        cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
         return(self.exception_known)
     def build_alarm_message(self):
         return( str(traceback.format_exc()) )
@@ -175,7 +190,8 @@ class cl_fact_logic_messenger(ABC):
         """
         Factory method to set the logic messenger instance
         """        
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logic_messenger.__o_instance = i_instance
         
     @classmethod        
@@ -183,7 +199,8 @@ class cl_fact_logic_messenger(ABC):
         """
         Factory method to get the logic messenger instance
         """        
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_logic_messenger.__o_instance is not None:
             return(cl_fact_logic_messenger.__o_instance)
         cl_fact_logic_messenger.__o_instance = cl_logic_messenger()
@@ -193,7 +210,8 @@ class cl_fact_logic_messenger(ABC):
         """
         Constructor logic messenger factory
         """        
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     
 class cl_fact_db_messenger(ABC):
@@ -204,7 +222,8 @@ class cl_fact_db_messenger(ABC):
         """
         Factory method to set the db messenger instance
         """        
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_db_messenger.__o_instance = i_instance
         
     @classmethod        
@@ -212,7 +231,8 @@ class cl_fact_db_messenger(ABC):
         """
         Factory method to get the db messenger instance
         """        
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_db_messenger.__o_instance is not None:
             return(cl_fact_db_messenger.__o_instance)
         cl_fact_db_messenger.__o_instance = cl_db_messenger()
@@ -222,5 +242,6 @@ class cl_fact_db_messenger(ABC):
         """
         Constructor logic messenger factory
         """        
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    

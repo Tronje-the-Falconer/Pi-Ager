@@ -14,9 +14,9 @@ import time
 import pi_ager_database_check
 pi_ager_database_check.check_and_update_database()
 
-import pi_ager_logging
+#import pi_ager_logging
 from main.pi_ager_cl_logger import cl_fact_logger
-pi_ager_logging.create_logger('main.py')
+#pi_ager_logging.create_logger('main.py')
 import pi_ager_loop
 import pi_ager_init
 import pi_ager_organization
@@ -28,15 +28,16 @@ from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 
-global logger
+#global logger
 
 pi_ager_names.create_json_file()
 pi_ager_database_check.check_and_update_database()
 pi_ager_init.set_language()
-logger = pi_ager_logging.create_logger('main')
-logger.debug('logging initialised')
+#logger = pi_ager_logging.create_logger('main')
+#logger.debug('logging initialised')
 cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
-logger.info(pi_ager_names.logspacer)
+#logger.info(pi_ager_names.logspacer)
+cl_fact_logger.get_instance().info((pi_ager_names.logspacer))
 
 pi_revision.get_and_write_revision_in_database()
 
@@ -48,7 +49,8 @@ pi_ager_init.set_system_starttime()
 os.system('sudo /var/sudowebscript.sh pkillscale &')
 time.sleep(2)
 os.system('sudo /var/sudowebscript.sh startscale &')
-logger.debug('scale restart done')
+#logger.debug('scale restart done')
+cl_fact_logger.get_instance().debug(('scale restart done'))
 
 exception_known = True
 # Send a start message
@@ -63,7 +65,9 @@ try:
     pi_ager_loop.autostart_loop()
 
 except KeyboardInterrupt:
-    logger.warning(_('KeyboardInterrupt'))
+    #logger.warning(_('KeyboardInterrupt'))
+    cl_fact_logger.get_instance().debug(_('KeyboardInterrupt'))
+    
     pass
 
 except Exception as cx_error:

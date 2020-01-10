@@ -2,14 +2,15 @@
 from abc import ABC
 import inspect
 import pi_ager_names
-import pi_ager_logging
+#import pi_ager_logging
 
 
 
 from main.pi_ager_cx_exception import *
+from main.pi_ager_cl_logger import cl_fact_logger
 
-global logger
-logger = pi_ager_logging.create_logger(__name__)
+#global logger
+#logger = pi_ager_logging.create_logger(__name__)
 
         
 class cl_logic_email:
@@ -17,7 +18,8 @@ class cl_logic_email:
         """
         Constructor for the email class
         """ 
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
         
@@ -36,7 +38,8 @@ class cl_logic_email:
         self.to_mail = "claus@fischnet.de"
         
     def execute(self, cx_error_mail, alarm_message, alarm_subject):
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         self.send_email(
             self.server,
@@ -51,7 +54,8 @@ class cl_logic_email:
         """
         Send email
         """
-        logger.debug(pi_ager_logging.me())
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         from smtplib import SMTP 
         from smtplib import SMTPException 
@@ -77,14 +81,17 @@ class cl_logic_email:
     
             s.sendmail(FROM,TO, m.as_string())
             s.quit()
-            logger.debug('Alert Email has been sent!')
+            # logger.debug('Alert Email has been sent!')
+            cl_fact_logger.get_instance().debug('Alert Email has been sent!')
         except SMTPException as cx_error:
             sendefehler = 'Error: unable to send email: {err}'.format(err=cs_error)
-            logger.error(sendefehler)
+            # logger.error(sendefehler)
+            cl_fact_logger.get_instance().error(sendefehler)
         except Exception as cx_error:
             #TODO err undefined!
             sendefehler = 'Error: unable to send email: {err}'.format(err=cx_error)
-            logger.error(sendefehler)
+            # logger.error(sendefehler)
+            cl_fact_logger.get_instance().error(sendefehler)
         
 class th_logic_email(cl_logic_email):   
 

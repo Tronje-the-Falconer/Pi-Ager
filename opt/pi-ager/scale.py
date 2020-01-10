@@ -11,21 +11,25 @@ sys.settrace
 import scale_loop
 import pi_ager_database
 import pi_ager_names
-import pi_ager_logging 
+# import pi_ager_logging 
 from pi_ager_cl_alarm import cl_fact_logic_alarm
 from pi_ager_cl_messenger import cl_fact_logic_messenger
+from main.pi_ager_cl_logger import cl_fact_logger
 
 exception_known = True
 
 try:
-    global logger
-    logger = pi_ager_logging .create_logger('scale')
-    logger.debug('logging initialised')
+    # global logger
+    # logger = pi_ager_logging .create_logger('scale')
+    # logger.debug('logging initialised')
+    cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
 
-    logger.info("Start scale loop")
+    # logger.info("Start scale loop")
+    cl_fact_logger.get_instance().info("Start scale loop")
     scale_loop.doScaleLoop()
 except KeyboardInterrupt:
-    logger.warning('KeyboardInterrupt')
+    # logger.warning('KeyboardInterrupt')
+    cl_fact_logger.get_instance().warning('KeyboardInterrupt')
     pass
 
 except Exception as cx_error:
