@@ -34,18 +34,18 @@ Es gibt sicherliche viele andere Möglichkeiten, das sind nur Vorschläge wie wi
 
 Beispiel für die Versionen 1.6 bis 1.9:
 
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_1_Text.jpg"
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_1_Text.jpg" alt="platine" width="800">
 
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_2_Text.jpg"
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_2_Text.jpg" alt="platine" width="800">
 
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_3_T.jpg"
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_3_T.jpg" alt="platine" width="800">
 
 
 Beispiel für die Versionen 2.0 bis x.x:
 
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/2_2_2_Text.jpg"
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/2_2_2_Text.jpg" alt="platine" width="800">
 
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/2_2_3_T.jpg"
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/2_2_3_T.jpg" alt="platine" width="800">
 
 
 
