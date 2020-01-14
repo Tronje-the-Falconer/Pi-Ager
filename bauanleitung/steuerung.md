@@ -13,6 +13,42 @@ title: "Steuerung"
 
 #### Platine
 
+##### WICHTIGER HINWEIS!
+
+Wir haben einen wichtigen Hinweis zum Thema Pi-Ager Platine in Bezug auf die HX 711 Wägemodule in der Zusammenschaltung mit dem Raspberry Pi.
+
+Für die Waagenfunktion wurden auf der Pi-Ager Platine zwei HX711-Module integriert. Diese Module können laut Spezifikation mit 2,6V- 5,5V versorgt werden.
+Um ein gutes Messsignal zu erhalten, wurden diese Module bisher über die Platine mit 5V versorgt.
+Leider mussten wir nun feststellen (danke an @phylax für den Hinweis), dass dadurch auch die Schnittstelle zum Raspberry Pi außerhalb der GPIO-Spezifikation betrieben wird.
+Die GPIOs des Raspberry's sind mit max 3,3V spezifiziert und KÖNNTEN (muss nicht) durch die erhöhte Spannung geschädigt werden.
+Obwohl bisher keine Schäden bekannt sind, empfehlen wir einen Umbau aller Pi-Ager Platinen auf eine Spannungsversorgung der HX-Module von 5V auf 3,3V.
+Hierfür ist eine kleine Modifikation der Platine notwendig. Eine weitere Verwendung der HX-Module mit einer Spannungsversorgung auf 5V kann auf Dauer gut gehen,
+möglich ist aber auch ein Ausfall des entsprechenden GPIOs und damit wird der eingebaute Raspberry Pi für den Pi-Ager unbrauchbar.
+Wer auf Nummer sicher gehen will, kann natürlich auch auf den Betrieb der Waagenfunktion verzichten und die HX-Module einfach ausbauen.
+
+Wer Platinen selbst anfertigen lassen möchte, bitte erstmal warten bis die neuen Gerber-Dateien fertig und veröffentlicht sind. Der Link wird dann entsprechend veröffentlicht.
+
+Wie dieser Umbau gemacht werden kann ist in den nächsten Bildern zu sehen.
+Es gibt sicherliche viele andere Möglichkeiten, das sind nur Vorschläge wie wir es umgesetzt haben.
+
+
+Beispiel für die Versionen 1.6 bis 1.9:
+
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_1.jpg"
+
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_2.jpg"
+
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_3.jpg"
+
+
+Beispiel für die Versionen 2.0 bis x.x:
+
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/2_2_2.jpg"
+
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/2_2_3.jpg"
+
+
+
 ##### Aktuelle Version der Platine: 
 
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/platine.jpg" alt="platine" width="800">
