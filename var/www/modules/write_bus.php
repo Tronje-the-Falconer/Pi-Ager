@@ -1,5 +1,4 @@
 <?php
-
 // include 'database.php';
 #Bus Werte in Datenbank schreiben
 if(!empty($_POST['change_sensorbus_submit']))

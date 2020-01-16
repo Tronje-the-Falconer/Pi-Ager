@@ -1,4 +1,4 @@
-<?php
+<?php 
                                     include 'header.php';                                       // Template-Kopf und Navigation
                                     include 'modules/names.php';
                                     include 'modules/database.php';
