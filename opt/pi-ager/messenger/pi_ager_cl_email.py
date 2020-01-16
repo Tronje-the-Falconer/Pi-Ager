@@ -27,15 +27,15 @@ class cl_logic_email:
         Read email setting from the database
         """
         self.server = 'smtp.1und1.de'
-        self.user      = 'claus@fischnet.de'
-        self.password  = 's3vEIV1u'
+        self.user      = 'xx@yy'
+        self.password  = 'xx'
         self.STARTTLS  = True
         self.from_mail = 'messenger@fischnet.de'
         
         """
         Read email reciepient's from the database
         """
-        self.to_mail = "claus@fischnet.de"
+        self.to_mail = "xx@yy.de"
         
     def execute(self, cx_error_mail, alarm_message, alarm_subject):
         # logger.debug(pi_ager_logging.me())

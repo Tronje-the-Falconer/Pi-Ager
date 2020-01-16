@@ -15,6 +15,7 @@ from abc import ABC
 import inspect
 import traceback
 import socket
+import sys
 import sqlite3 #Remove after test
 import pi_ager_paths #Remove after test
 import pi_ager_names
@@ -27,12 +28,7 @@ from messenger.pi_ager_cl_send_email import cl_fact_logic_send_email, cl_logic_s
 from main.pi_ager_cx_exception import *
 from _ast import Pass
 
-# global logger
-# logger = pi_ager_logging.create_logger(__name__)
-# logger.debug('logging initialised')
-cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
-
-        
+      
 class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
     
     def __init__(self):
@@ -51,9 +47,6 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         """
         self.db_messenger = cl_fact_db_messenger().get_instance()
         self.it_messenger = self.db_messenger.read_data_from_db()
-        
-        
-        
         
         self.logic_alarm = cl_fact_logic_alarm().get_instance()
         self.logic_send_email = cl_fact_logic_send_email().get_instance()
@@ -82,6 +75,10 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.cx_error  = cx_error
+        #logger.exception(self.cx_error, exc_info = True)
+        cl_fact_logger.get_instance().info("Exception raised: " + type(self.cx_error).__name__ + " - " + str(cx_error) )
+        
+        cl_fact_logger.get_instance().info(self.it_messenger)
         # logger.exception(self.cx_error, exc_info = True)
         # logger.info("Exception raised: " + type(self.cx_error).__name__  )
         # logger.info(self.it_messenger)
@@ -117,9 +114,9 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         else:
             self.logic_alarm.execute_middle(replication = 12)
             
-        
         # logger.info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
         cl_fact_logger.get_instance().info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
+        
         """
         if str(self.cx_error.__class__.__name__ ) == 'cx_Sensor_not_defined':
             self.logic_send_email.execute(self.cx_error, self.build_alarm_subject(), self.build_alarm_message())
@@ -136,30 +133,39 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         
         # logger.info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
         cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
+        
+        if self.exception_known == False:
+            cl_fact_logger.get_instance().critical(str(self.cx_error.__class__.__name__ ))
+            sys.exit(0)
         return(self.exception_known)
     def build_alarm_message(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return( str(traceback.format_exc()) )
     def build_alarm_subject(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         hostname = socket.gethostbyaddr(IP.rstrip())
         return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager ' + hostname + 'occured')
 
 class cl_db_messenger:
     __o_dirty = True
     def __init__(self):
-        pass
-        data = self.read_data_from_db()
-    
-    def build_select_statement(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
+        data = self.read_data_from_db()
+        pass
+    def build_select_statement(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return('SELECT * FROM messenger where active = 1 ')
 
     def get_data(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if self.is_dirty() is True:
             self.data = self.read_data_from_db()
             
         return(self.data)
     
     def read_data_from_db(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         """
         Read from db
         """
@@ -172,6 +178,7 @@ class cl_db_messenger:
         
     
     def is_dirty(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return(cl_db_messenger.__o_dirty)
         pass
     
@@ -179,6 +186,7 @@ class cl_db_messenger:
 class th_logic_messenger(cl_logic_messenger):   
        
     def __init__(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass
 
 

@@ -24,19 +24,11 @@ from cryptography.hazmat.backends import default_backend
 from abc import ABC
 import inspect
 import traceback
-#import pi_ager_names
-# import pi_ager_logging
-#from pi_ager_cl_messenger import cl_fact_logic_messenger
+
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
 
-
-#global logger
-#logger = pi_ager_logging.create_logger(__name__)
-# logger.debug('logging initialised')
-cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
-
-        
+     
 
 class cl_help_crypt:
 

@@ -14,16 +14,11 @@ __status__ = "Production"
 from abc import ABC
 import inspect
 import pi_ager_names
-# import pi_ager_logging
 from messenger.pi_ager_cl_crypt import cl_fact_help_crypt
 from main.pi_ager_cl_database import cl_fact_database_config
 
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
-
-# global logger
-# logger = pi_ager_logging.create_logger(__name__)
-
         
 class cl_logic_email_server:
     def __init__(self):
