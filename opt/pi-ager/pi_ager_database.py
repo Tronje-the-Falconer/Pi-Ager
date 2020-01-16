@@ -13,14 +13,23 @@ import pi_ager_paths
 # import pi_ager_logging
 
 from main.pi_ager_cl_logger import cl_fact_logger
-
+# Lock for concurrent database access
+from ilock import ILock, ILockException 
+global ILock
 global cursor
 global connection
 
-# global logger
+from main.pi_ager_cl_logger import cl_fact_logger
+cl_fact_logger.get_instance()
+#global logger
 # logger = pi_ager_logging.create_logger(__name__)
 # logger.debug('logging initialised')
-cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
+#logger = 
+#print("xxxx")
+#print(logger)
+
+#cl_fact_logger.get_instance().debug("logging initialised __________________________")
+#cl_fact_logger.get_instance().debug("logging initialised __________________________","xx")
 
 
 def get_current_time():
@@ -57,7 +66,7 @@ def open_database():
     # Open database in autocommit mode by setting isolation_level to None.
     connection = sqlite3.connect(pi_ager_paths.sqlite3_file, isolation_level=None, timeout = 10)
     # Set journal mode to WAL (Write-Ahead Log)
-    connection.execute('pragma journal_mode=wal')
+    connection.execute('PRAGMA journal_mode = wal')
     connection.execute('PRAGMA synchronous = OFF')
     connection.execute('PRAGMA read_uncommitted = True')
         
@@ -75,9 +84,16 @@ def execute_query(command):
     """
     global cursor
     global connection
-    cursor.execute(command)
-    connection.commit()
-
+    
+    #logger.debug('Locking pi_ager database access')
+    try:
+        with ILock('pi_ager', timeout=15):
+            cursor.execute(command)
+            connection.commit()
+    except ILockException as cx_error:
+        cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+    #logger.debug('Unlocking pi_ager database access')
+        
 def close_database():
     """
     function for closing the database connection

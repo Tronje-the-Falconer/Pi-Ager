@@ -14,15 +14,11 @@ __status__ = "Development"
 import inspect
 import struct
 import time
-# import pi_ager_logging
 from main.pi_ager_cl_logger import cl_fact_logger
 
 from abc import ABC, abstractmethod
 from main.pi_ager_cx_exception import *
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
-
-# global logger
-# logger = pi_ager_logging.create_logger(__name__) 
 
 class cl_i2c_sensor_sht(ABC):
     

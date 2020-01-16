@@ -34,7 +34,7 @@ class cl_main_sensor_type:
     _type = 0
     _type_ui = ""
     def __init__(self):
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
@@ -53,7 +53,7 @@ class cl_main_sensor_type:
         
 
     def _get_type_ui(self):
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if self._is_valid() == False:
             raise cx_Sensor_not_defined(self._type_ui)
@@ -63,7 +63,7 @@ class cl_main_sensor_type:
         return(self._type_ui)
     
     def _is_valid(self):
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES[self._type]:
 #        if self._type in cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES:
@@ -73,7 +73,7 @@ class cl_main_sensor_type:
             
         
     def _read_sensor_type(self):
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._type = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key))
 
@@ -87,32 +87,33 @@ class cl_main_sensor_type:
         return()
     
     def get_sensor_type(self):
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return(self._type)
     
     def get_sensor_type_ui(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         return(self._type_ui)
     
     def get_name(self):
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return(cl_main_sensor_type.__NAME)
     
     def get_supported_types(self):
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         print('[%s]' % ', '.join(map(str, cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES )))
    
 class th_main_sensor_type(cl_main_sensor_type):   
 
-    
+    __NAME = 'Main_sensor'
     def __init__(self):
         self._type = 3 #SHT75
         self._type_ui = "SHT75"
         self.is_valid = True
+        
         pass
   
     def _is_valid(self):
@@ -127,6 +128,11 @@ class th_main_sensor_type(cl_main_sensor_type):
         return(self._type)
     def _get_type_ui(self):
         return(self._type_ui)
+    def get_name(self):
+        # logger.debug(cl_fact_logger.get_instance().me())
+        #cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        return(th_main_sensor_type.__NAME)
+    
 
 class cl_fact_main_sensor_type(ABC):
     __o_instance = None

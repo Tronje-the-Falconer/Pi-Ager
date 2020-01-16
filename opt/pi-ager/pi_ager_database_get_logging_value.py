@@ -16,6 +16,7 @@ def get_logging_value(destination):
     connection = sqlite3.connect(pi_ager_paths.sqlite3_file)
     connection.row_factory = sqlite3.Row
     cursor = connection.cursor()
+    cursor.execute('PRAGMA journal_mode = wal')
     
     try:
         command = 'SELECT ' + pi_ager_names.value_field + ' FROM ' + pi_ager_names.debug_table + ' WHERE ' + pi_ager_names.key_field + ' = "' + destination + '"'

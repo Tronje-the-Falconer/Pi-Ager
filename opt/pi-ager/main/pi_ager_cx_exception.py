@@ -39,3 +39,11 @@ class cx_i2c_sht_temperature_crc_error(Error):
 class cx_i2c_sht_humidity_crc_error(Error):
     pass
     
+class cx_i2c_bus_error(Error):
+    pass
+
+class cx_adafruit_error(Error):
+    pass
+
+class cx_measurement_error(Error):
+    pass

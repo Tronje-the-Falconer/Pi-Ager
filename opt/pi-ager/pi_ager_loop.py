@@ -22,11 +22,12 @@ import pi_ager_gpio_config
 import pi_ager_organization
 from time import ctime as convert
 
-import main.pi_ager_cx_exception
+from main.pi_ager_cx_exception import (cx_i2c_sht_temperature_crc_error, cx_i2c_sht_humidity_crc_error, cx_i2c_bus_error) 
 from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from sensors.pi_ager_cl_sensor_fact import cl_fact_main_sensor
+from sensors.pi_ager_cl_i2c_bus import  cl_fact_i2c_bus_logic
 
 from main.pi_ager_cl_logger import cl_fact_logger
 
@@ -67,6 +68,9 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     # global logger
     global sensor_humidity_big
     global sensor_temperature_big 
+    last_temperaure = None
+    last_humidity   = None
+    sensordata={}
     sensorname = cl_fact_main_sensor_type.get_instance().get_sensor_type_ui()
     # logger.debug("sensorname: " + str(sensorname))
     # logger.debug("sensortype: " + str(cl_fact_main_sensor_type.get_instance().get_sensor_type()))
@@ -75,52 +79,22 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     
     
     try:
-        if sensorname == 'DHT11' or sensorname == 'DHT22':
-            sensor_humidity_big, sensor_temperature_big = Adafruit_DHT.read_retry(pi_ager_init.sensor, pi_ager_gpio_config.gpio_sensor_data)
-            # logger.debug("sensor_temperature_big: " + str(sensor_temperature_big))
-            # logger.debug("sensor_humidity_big: " + str(sensor_humidity_big))
-            cl_fact_logger.get_instance().debug("sensor_temperature_big: " + str(sensor_temperature_big))
-            cl_fact_logger.get_instance().debug("sensor_humidity_big: " + str(sensor_humidity_big))
-            # atp = 17.271  ermittelt aus dem Datenblatt DHT11 und DHT22
-            # btp = 237.7   ermittelt aus dem Datenblatt DHT11 und DHT22
-        
-        elif sensorname == 'SHT75': #SHT
+        if sensorname == 'DHT11' or sensorname == 'DHT22' or sensorname == 'AM2302' or sensorname == 'SHT75':
             try:
                 main_sensor =  cl_fact_main_sensor().get_instance()
                 main_sensor.execute()
                 measured_data = main_sensor.get_current_data()
                 (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
-                # logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
-                # logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
-                # logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
                 cl_fact_logger.get_instance().debug('sensor_temperature_big: ' + str(sensor_temperature_big))
                 cl_fact_logger.get_instance().debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
-                cl_fact_logger.get_instance().debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
+                cl_fact_logger.get_instance().debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))   
             except pi_sht1x.sht1x.SHT1xError as cx_error:
-                # logger.debug('Exception SHT1 Error')
-                cl_fact_logger.get_instance().debug('Exception SHT1 Error')
-                pass  
-        elif sensorname == 'SHT3x': #SH3x
-            try:
-                main_sensor =  cl_fact_main_sensor().get_instance()
-                main_sensor.execute()
-                measured_data = main_sensor.get_current_data()
-                (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
-                # logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
-                # logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
-                # logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
-                cl_fact_logger.get_instance().debug('sensor_temperature_big: ' + str(sensor_temperature_big))
-                cl_fact_logger.get_instance().debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
-                cl_fact_logger.get_instance().debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
-                
-            except cx_i2c_sht_temperature_crc_error as cx_error:
-                # logger.debug('Exception CRC Error')
-                cl_fact_logger.get_instance().debug('Exception CRC Error')
-                pass  
+                cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
 
-        elif sensorname == 'SHT85': #SH3x
+        elif sensorname == 'SHT3x' or sensorname == 'SHT85': #SH3x
             try:
-                main_sensor =  cl_fact_main_sensor().get_instance()
+                i2c_address_main_sensor = 0x44
+                main_sensor =  cl_fact_main_sensor().get_instance(i_address = i2c_address_main_sensor)
                 main_sensor.execute()
                 measured_data = main_sensor.get_current_data()
                 (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
@@ -131,18 +105,29 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 cl_fact_logger.get_instance().debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
                 cl_fact_logger.get_instance().debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
                 
-            except cx_i2c_sht_temperature_crc_error as cx_error:
-                # logger.debug('Exeption CRC Error')
-                cl_fact_logger.get_instance().debug('Exeption CRC Error')
-                pass  
-        if sensor_humidity_big is not None and sensor_temperature_big is not None:
+            except OSError as cx_error:
+                cl_fact_i2c_bus_logic().set_instance(None)
+                cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+                   
+                                
+            except (cx_i2c_sht_temperature_crc_error,
+                    cx_i2c_sht_humidity_crc_error,
+                    cx_i2c_bus_error ) as cx_error:
+                cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+        last_temperature = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
+        last_humidity = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)                
+        if last_temperaure is not None and last_humidity is not None:
+            sensor_temperature = round(sensor_temperature_big,2)
+            sensor_humidity = round(sensor_humidity_big,2)
+            
+        
+        elif sensor_humidity_big is not None and sensor_temperature_big is not None: # and last_temperaure is not None and last_humidity is not None:
             #sensor_temperature_big = float(sensor_temperature_big)
             sensor_temperature = round(sensor_temperature_big,2)
             sensor_humidity = round(sensor_humidity_big,2)
-            last_temperature = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
-            last_humidity = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)
-            deviation_temperature = abs((sensor_temperature/(last_temperature + 0.1) * 100) - 100)
-            deviation_humidity = abs((sensor_humidity/(last_humidity + 0.1) * 100) - 100)
+
+            deviation_temperature = abs((sensor_temperature/last_temperature * 100) - 100)
+            deviation_humidity = abs((sensor_humidity/last_humidity * 100) - 100)
             
             if sensor_humidity > 100 or deviation_humidity > 20:
                 if humidity_exception_count < 10:
@@ -189,7 +174,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             #logger.warning(logstring)
             cl_fact_logger.get_instance().warning(logstring)
             
-        sensordata={}
+       
         sensordata['sensor_temperature'] = sensor_temperature
         sensordata['sensor_humidity'] = sensor_humidity
     except Exception as cx_error:
@@ -386,7 +371,7 @@ def doMainLoop():
             sensordata_exception_count = 0
             temperature_exception_count = 0
             #sensortype = int(pi_ager_init.sensortype)
-            
+            sensordata = []
             sensortype = cl_fact_main_sensor_type.get_instance().get_sensor_type()
             sensordata = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, sensordata_exception_count)
             sensor_temperature = sensordata['sensor_temperature']
@@ -452,7 +437,7 @@ def doMainLoop():
                 logstring = logstring + ' \n ' +  _('selected sensor') + ': ' + str(cl_fact_main_sensor_type.get_instance().get_sensor_type_ui())
                 # logger.info(logstring)
                 # logstring = _('value in database') + ': ' + str(sensortype)
-                logger.debug(_('value in database') + ': ' + str(sensortype))
+                cl_fact_logger.get_instance().debug(_('value in database') + ': ' + str(sensortype))
                 logstring = logstring + ' \n ' + pi_ager_names.logspacer2
                 # logger.info(pi_ager_names.logspacer2)
     
@@ -857,7 +842,7 @@ def doMainLoop():
     
                 if status_value_has_changed():
                     # logger.info(logstring)
-                    cl_fact_logger.get_instance.info(logstring)
+                    cl_fact_logger.get_instance().info(logstring)
                 
                 # Messwerte in die RRD-Datei schreiben
                 # Schreiben der aktuellen Status-Werte
@@ -888,8 +873,8 @@ def doMainLoop():
             # filepermission = oct(os.stat(pi_ager_paths.logfile_txt_file)[stat.ST_MODE])[-3:]
             # if (filepermission != '666'):
                 # os.chmod(pi_ager_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
-            pi_ager_logging.check_website_logfile()
-            
+            #pi_ager_logging.check_website_logfile()
+            cl_fact_logger.get_instance().check_website_logfile()
             # Mainloop fertig
             # logger.debug('loop complete')
             cl_fact_logger.get_instance().debug('loop complete')

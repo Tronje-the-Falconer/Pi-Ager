@@ -16,7 +16,7 @@ import sqlite3
 from influxdb import InfluxDBClient
 import pi_ager_names
 import pi_ager_paths
-import pi_ager_logging
+#import pi_ager_logging
 from main.pi_ager_cl_logger import cl_fact_logger
 
 
@@ -28,7 +28,7 @@ from main.pi_ager_cx_exception import *
 class cl_db_database_mysql:
     def read_data_from_db(self, i_select_statement):
         # logger.debug(pi_ager_logging.me())
-        cl_fact_logger.get_instance().me()
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         # Builds a dict of dicts it_table from mysql db
         it_table = {}
         
@@ -43,14 +43,17 @@ class cl_db_influxdb:
         password = 'raspberry'
         dbname = 'pi-ager'
         #protocol = 'line'
-
-        self.client =  InfluxDBClient(host, port, user, password, dbname)
-
-        logger.debug("Create database: " + dbname)
+        try:
+            self.client =  InfluxDBClient(host, port, user, password, dbname)
+        except InfluxDBServerError as cx_error:
+            logger.debug("Unable to connect to InfluxDB!")
+            cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+        cl_fact_logger.get_instance().debug("Create database: " + dbname)
         self.client.create_database(dbname)
         
 
     def read_data_from_db(self, i_select_statement):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         """
         Read from db
         """
@@ -77,7 +80,7 @@ class cl_db_influxdb:
         return it_table
  
     def write_data_to_db(self, i_insert_statment):
-        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         self.client.write_points(i_insert_statment)
         
@@ -85,16 +88,17 @@ class cl_db_influxdb:
 
 class cl_db_database_sqlite:
     def __init__(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         #conn = sqlite3.connect(self.garden_db_path)
         connection = sqlite3.connect(pi_ager_paths.sqlite3_file, isolation_level=None, timeout = 10)
         # Need to allow write permissions by others
         connection.row_factory = sqlite3.Row
         self.cursor = connection.cursor()
     def read_data_from_db(self, i_select_statement):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         """
         Read from db
         """
-        
         
         # Builds a dict of dicts it_table from sqlite db
         it_table = {}
@@ -113,6 +117,7 @@ class cl_db_database_sqlite:
         return it_table
  
     def write_data_to_db(self, i_insert_statment, values):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cursor.execute(i_insert_statment, values)
         pass  
 class cl_fact_db_influxdb(ABC):

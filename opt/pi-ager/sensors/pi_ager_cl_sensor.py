@@ -14,7 +14,7 @@ __status__ = "Production"
 from abc import ABC, abstractmethod
 import math
 import inspect
-# import pi_ager_logging
+
 from main.pi_ager_cl_logger import cl_fact_logger
 from datetime import datetime
 
@@ -22,21 +22,17 @@ from datetime import datetime
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 
 from main.pi_ager_cx_exception import *
-#from pi_ager_cl_sensor_fact import *
+
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 from main.pi_ager_cl_database import cl_fact_db_influxdb
         
-# global logger
-# logger = pi_ager_logging.create_logger(__name__) 
-    
 class cl_main_sensor(cl_ab_sensor):
-
+    
     def __init__(self, o_sensor_type):
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._error_counter = 0
-        self._max_errors = 1
-        self._measuring_intervall = 300
+        self._max_errors = 3
         self.o_sensor_type = o_sensor_type
     def get_current_data(self):
         # logger.debug(pi_ager_logging.me())
@@ -54,6 +50,20 @@ class cl_main_sensor(cl_ab_sensor):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return( self.o_sensor_type._get_type() )
     
+    def delete_error_counter(self):
+        logger.debug(pi_ager_logging.me())
+        self._error_counter = 0
+        
+    def check_error_counter(self):
+        logger.debug(pi_ager_logging.me())
+        
+        self._error_counter = self._error_counter + 1
+        logger.debug("Error counter: %i" % self._error_counter)
+        logger.debug("Max errors:    %i" % self._max_errors)
+        
+        if (self._error_counter >= self._max_errors):
+            raise cx_measurement_error ('To much measurment errors occured!')
+        
     def get_dewpoint(self, temperature, humidity):
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
@@ -90,7 +100,7 @@ class cl_main_sensor(cl_ab_sensor):
         """ Write the sensor data to DB"""
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if 1 == 1:
+        if 1 == 2:
             self._write_to_influxdb()
         pass
     def _write_to_influxdb(self):
@@ -102,9 +112,9 @@ class cl_main_sensor(cl_ab_sensor):
         if (self._current_temperature != 0 ):
             json_body = [
                 {
-                    "measurement": "Main_Sensor",
+                    "measurement": "Temperature",
                     "tags": {
-                    "sensor": "Temperature",
+                    "sensor": "Main_Sensor",
                     "sensor_type": str(self.get_sensor_type_ui())
                     },
         #            "time": str(datetime.now()),
@@ -120,9 +130,9 @@ class cl_main_sensor(cl_ab_sensor):
         if (self._current_humidity != 0 ):
             json_body = [
                 {
-                    "measurement": "Main_Sensor",
+                    "measurement": "relative Humidity",
                     "tags": {
-                    "sensor": "Humidity",
+                    "sensor": "Main_Sensor",
                     "sensor_type": str(self.get_sensor_type_ui())
                     },
         #            "time": str(datetime.now()),
@@ -138,9 +148,9 @@ class cl_main_sensor(cl_ab_sensor):
         if (self._current_humidity != 0 ):        
             json_body = [
                 {
-                    "measurement": "Main_Sensor",
+                    "measurement": "DewPoint",
                     "tags": {
-                    "sensor": "DewPoint",
+                    "sensor": "Main_Sensor",
                     "sensor_type": str(self.get_sensor_type_ui())
                     },
         #            "time": str(datetime.now()),
@@ -156,9 +166,9 @@ class cl_main_sensor(cl_ab_sensor):
         if (self._humidity_absolute != 0 ):        
             json_body = [
                 {
-                    "measurement": "Main_Sensor",
+                    "measurement": "absolute Humidity",
                     "tags": {
-                    "sensor": "absolute Humidity",
+                    "sensor": "Main_Sensor",
                     "sensor_type": str(self.get_sensor_type_ui())
                     },
         #            "time": str(datetime.now()),

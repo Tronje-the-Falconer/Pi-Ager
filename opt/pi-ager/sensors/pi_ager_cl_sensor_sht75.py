@@ -31,14 +31,14 @@ from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 class cl_main_sensor_sht75(cl_main_sensor):
     
     def __init__(self):
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
         #self.o_sensor_type = o_sensor_type
         super().__init__(cl_fact_main_sensor_type.get_instance())
                     
-        self._max_errors = 1
+        self._max_errors = 5
         self._old_temperature = 0
         self._current_temperature = 0
         self._temperature_dewpoint = 0
@@ -52,14 +52,16 @@ class cl_main_sensor_sht75(cl_main_sensor):
 
    
     def get_current_data(self):
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         try:
-            self._read_data()
-            
+            self._current_temperature = self._get_current_temperature()
+            self._current_humidity    = self._get_current_humidity()
+            self._dewpoint            = super().get_dewpoint(self._current_temperature, self._current_humidity)
         except pi_sht1x.sht1x.SHT1xError as cx_error:
                 
-                
+            self.check_error_counter()    
+            """
             if sht_exception_count < 10:
                 countup_values = countup('sht_exception', sht_exception_count)
                 logstring = countup_values['logstring']
@@ -71,31 +73,31 @@ class cl_main_sensor_sht75(cl_main_sensor):
                 return recursion
             #Create factory for messenger, get from factory the instance of the messenger, send messages in one line
             exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)    
-
-        self._current_temperature = self._get_current_temperature()
-        self._current_humidity    = self._get_current_humidity()
-        self._dewpoint            = super().get_dewpoint(self._current_temperature, self._current_humidity)
-    
+            """
+            cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+            time.sleep(1)  
+            self.get_current_data()
+            exit
+        self.delete_error_counter()    
         (temperature_dewpoint, humidity_absolute) = self._dewpoint
         
         self.measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint)
         return(self.measured_data)
-        
+    
+
     
     def _get_current_temperature(self):
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         #self._read_data()
 #        self._current_temperature = self._i2c_sensor.get_temperature()
         self._sensor_sht.read_temperature()
         
-        Temperature_Celsius    = sensor_sht.temperature_celsius
-        Temperature_Fahrenheit = sensor_sht.temperature_celsius * 9/5 + 32
+        Temperature_Celsius    = self._sensor_sht.temperature_celsius
+        Temperature_Fahrenheit = self._sensor_sht.temperature_celsius * 9/5 + 32
 
-        # logger.debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
-        # logger.debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
-        cl_fact_logger.get_instance().debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
-        cl_fact_logger.get_instance().debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
+        logger.debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
+        logger.debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
         
         self._current_temperature = Temperature_Celsius
         
@@ -108,16 +110,19 @@ class cl_main_sensor_sht75(cl_main_sensor):
         return(self._current_temperature)
   
     def _get_current_humidity(self):
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         #self._read_data()
 #        self._current_humidity = self._i2c_sensor.get_humidity()
         self._sensor_sht.read_humidity()
+        
+        Humidity = self._sensor_sht.humidity
 
+        logger.debug("Relative Humidity is : %.2f %%RH" %Humidity)
         # logger.debug("Relative Humidity is : %.2f %%RH" %sensor_sht.humidity)
         cl_fact_logger.get_instance().debug("Relative Humidity is : %.2f %%RH" %sensor_sht.humidity)
         
-        self._current_humidity = sensor_sht.humidity
+        self._current_humidity = Humidity
         
         if self._old_humidity is None:
             self._old_humidity = 0
@@ -127,29 +132,30 @@ class cl_main_sensor_sht75(cl_main_sensor):
         return(self._current_humidity)
    
     def _write_to_db(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         super()._write_to_db()
         pass
 
     def soft_reset(self):
         """Performs Soft Reset on SHT chip"""
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         
     def set_heading_on(self):
         """Switch the heading on the sensor on"""
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
 
     
     def set_heading_off(self):
         """Switch the heading on the sensor off"""
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
 
 
     def execute(self):
-        # logger.debug(pi_ager_logging.me())
+        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         #self.get_current_data()
         self._write_to_db()
@@ -160,11 +166,12 @@ class th_main_sensor_sht75(cl_main_sensor_sht75):
     
     
     def __init__(self):
-    
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.get_type_raise = False
         self._type = "SHT75"
         
     def get_type(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if self.get_type_raise == True:
             raise cx_Sensor_not_defined(self._type_ui)        
         return(self._type)
@@ -178,6 +185,7 @@ class cl_fact_sensor_sht75:
 
     @classmethod        
     def get_instance(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_sensor_sht75.__o_instance is not None:
             return(cl_fact_sensor_sht75.__o_instance)
         cl_fact_sensor_sht75.__o_instance = cl_main_sensor_sht75()
@@ -185,9 +193,11 @@ class cl_fact_sensor_sht75:
 
     @classmethod
     def set_instance(self, i_instance):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_sensor_sht75.__o_instance = i_instance
     
     
     def __init__(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
 
