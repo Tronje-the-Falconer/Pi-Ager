@@ -1,4 +1,5 @@
 <?php
+
 $bus = round(get_table_value($config_settings_table,$sensorbus_key), 1);
 
 if ($bus  ==  0) {
