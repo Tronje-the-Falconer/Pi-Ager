@@ -54,17 +54,14 @@
                                                     <?php echo $bus_name; ?>
                                                 </td>
                                             </tr>
+                                            <td style=" text-align: left; padding-left: 20px;">
+                                                    <input type="radio" name="bustype_admin" value="0" <?php echo $checked_bus_0; ?>/><label> i2c</label><br>
+                                                    <input type="radio" name="bustype_admin" value="1" <?php echo $checked_bus_1; ?>/><label> 1wire</label><br>
+                                                    <br>
+                                                </td>
                                             <tr>
                                                 <td>
-                                                    <?php echo _('change bus to: '); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $changebus_name; ?>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                <button class="art-button" name="change_sensorbus" value="change_sensorbus" onclick="return confirm('<?php echo _('ATTENTION: A restart is required!');?>');"><?php echo _('change sensor bus'); ?></button>
+                                                <button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: A restart is required!');?>');"><?php echo _('change sensor bus'); ?></button>
                                                 </td>
                                             </tr>
                                         </table>
