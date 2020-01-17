@@ -11,7 +11,7 @@ if(!empty($_POST['change_sensorbus_submit']))
         print "<script language='javascript'>window.location.href='index.php';</script>";
         for ($x = 1; $x <= 100; $x++){
             sleep(2);
-            file_get_contents(__DIR__ . 'index.php');
+            file_get_contents('./index.php');
         }
         shell_exec('sudo /var/sudowebscript.sh sensorbus1wire');
     }
@@ -20,7 +20,7 @@ if(!empty($_POST['change_sensorbus_submit']))
         logger('DEBUG', 'sensorbus saved. changed to i2c (0)');
         for ($x = 1; $x <= 100; $x++){
             sleep(2);
-            file_get_contents(__DIR__ . 'index.php');
+            file_get_contents('./index.php');
         }
         print "<script language='javascript'>window.location.href='index.php';</script>";
         sleep(5);
