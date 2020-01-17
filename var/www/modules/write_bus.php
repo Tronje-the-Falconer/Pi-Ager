@@ -16,7 +16,7 @@ if(!empty($_POST['change_sensorbus_submit']))
         $bus_string = 'sensorbusi2c';
     }
     #        print "<script>window.close();</script>";
-    file_get_contents('./index.php');
+    #file_get_contents('./index.php');
     header('Location: index.php');
     shell_exec('sudo /var/sudowebscript.sh', $bus_string);
     echo "<meta http-equiv='refresh' content='0'>";
