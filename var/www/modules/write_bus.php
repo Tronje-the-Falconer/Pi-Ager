@@ -18,10 +18,9 @@ if(!empty($_POST['change_sensorbus_submit']))
     else {
         $bus_string = '';
     }
-    #        print "<script>window.close();</script>";
+    #print "<script>window.close();</script>";
     #file_get_contents('./index.php');
     #header('Location: index.php');
-    logger('INFO', $_POST['message']);
     if(isset($_POST['message']) && ($_POST['message'] != $_SESSION['message'])) {
         $command = 'sudo /var/sudowebscript.sh' . $bus_string;
         logger('INFO', $command);
