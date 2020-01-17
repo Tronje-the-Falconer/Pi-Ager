@@ -273,7 +273,7 @@ def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table, c
     clear_history = scale.getWeight()
     calibrate_value_after_weight = scale.getMeasure()
     # logger.info('calibrate_value_after_weight = ' + str(calibrate_value_after_weight))
-    cl_fact_logger.get_instance().info('calibrate_value_after_weight = ' + str(calibrate_value_after_weight)
+    cl_fact_logger.get_instance().info('calibrate_value_after_weight = ' + str(calibrate_value_after_weight))
     reference_unit = (calibrate_value_after_weight - calibrate_value_first_measure)/calibrate_weight * old_ref_unit
     # logger.info('reference_unit = ' + str(reference_unit))
     cl_fact_logger.get_instance().info('reference_unit = ' + str(reference_unit))

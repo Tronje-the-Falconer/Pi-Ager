@@ -27,6 +27,7 @@ try:
     # logger.info("Start scale loop")
     cl_fact_logger.get_instance().info("Start scale loop")
     scale_loop.doScaleLoop()
+    # Hier die Scale Klasse aufrufen. Das kann dann auch in die loop.py. scale.py und scale_loop.py brauchen wir nicht mehr.  
 except KeyboardInterrupt:
     # logger.warning('KeyboardInterrupt')
     cl_fact_logger.get_instance().warning('KeyboardInterrupt')
@@ -38,7 +39,7 @@ except Exception as cx_error:
     #Create factory for alarm, get from factory the instance of the alarm, execute alarm in one line
     #cl_fact_alarm().get_instance().execute()
     
-    #Create factory for messanger, get from factory the instance of the messenger, send messages in one line
+    #Create factory for messenger, get from factory the instance of the messenger, send messages in one line
     cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
     pi_ager_database.write_current_value(pi_ager_names.calibrate_scale1_key,0)
     pi_ager_database.write_current_value(pi_ager_names.calibrate_scale2_key,0)
