@@ -22,7 +22,8 @@ if(!empty($_POST['change_sensorbus_submit']))
     #file_get_contents('./index.php');
     #header('Location: index.php');
     if(isset($_POST['message']) && ($_POST['message'] != $_SESSION['message'])) {
-        shell_exec('sudo /var/sudowebscript.sh' . $bus_string);
+        $command = 'sudo /var/sudowebscript.sh' . $bus_string;
+        shell_exec($command);
         $_SESSION['message'] = $_POST['message'];
         
     }
