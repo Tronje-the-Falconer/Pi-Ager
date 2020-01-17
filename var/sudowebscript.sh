@@ -121,12 +121,12 @@ case "$1" in
     sensorbusi2c) #Sensorbus wurde geaendert auf i2c
 ####### hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
 		rm -r /etc/modprobe.d/Pi-Ager_i2c_off.conf
-        shutdown -h 1
+        shutdown -h 0
     ;;
     sensorbus1wire) #Sensorbus wurde geaendert auf 1wire
 ####### hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln
 		cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
-        shutdown -h 1
+        shutdown -h 0
     ;;
     *) echo "ERROR: invalid parameter: $1 (for $0)"; exit 1 #Fehlerbehandlung
     ;;
