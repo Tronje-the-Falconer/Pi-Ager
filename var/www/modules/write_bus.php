@@ -18,6 +18,5 @@ if(isset($_POST['message']) && ($_POST['message'] != $_SESSION['message'])) {
         }
         $_SESSION['message'] = $_POST['message'];
     }
-    echo "<meta http-equiv='refresh' content='0'>";
 }
 ?>
