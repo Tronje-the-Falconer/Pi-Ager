@@ -23,6 +23,7 @@ if(!empty($_POST['change_sensorbus_submit']))
     #header('Location: index.php');
     if(isset($_POST['message']) && ($_POST['message'] != $_SESSION['message'])) {
         $command = 'sudo /var/sudowebscript.sh' . $bus_string;
+        logger('INFO', $command);
         shell_exec($command);
         $_SESSION['message'] = $_POST['message'];
         
