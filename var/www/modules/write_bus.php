@@ -19,6 +19,7 @@ if(!empty($_POST['change_sensorbus_submit']))
         shell_exec('sudo /var/sudowebscript.sh sensorbusi2c');
         print '<script language="javascript"> alert("'. (_("sensorbus changed to 1wire. please unplug and plug in the power supply for the restart after shutdown.")) . " : " . (_("shutdown")) .'"); </script>';
     }
+    header('Location: index.php');
     echo "<meta http-equiv='refresh' content='0'>";
 }
 ?>
