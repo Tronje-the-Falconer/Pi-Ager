@@ -19,6 +19,6 @@ if(!empty($_POST['change_sensorbus_submit']))
         file_get_contents('./index.php');
         shell_exec('sudo /var/sudowebscript.sh sensorbusi2c');
     }
-    echo "<meta http-equiv='refresh' content='0'>";
+#    echo "<meta http-equiv='refresh' content='0'>";
 }
 ?>
