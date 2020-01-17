@@ -10,15 +10,20 @@ if(!empty($_POST['change_sensorbus_submit']))
         logger('DEBUG', 'sensorbus saved. changed to 1wire (1)');
         $bus_string = 'sensorbus1wire';
     }
-    if ($bus_value == 0){
+    else if ($bus_value == 0){
         write_busvalue(0);
         logger('DEBUG', 'sensorbus saved. changed to i2c (0)');
         $bus_string = 'sensorbusi2c';
     }
+    else {
+        $bus_string = '';
+    }
     #        print "<script>window.close();</script>";
     #file_get_contents('./index.php');
-    header('Location: index.php');
-    shell_exec('sudo /var/sudowebscript.sh'. $bus_string);
+    #header('Location: index.php');
+    if ($bus_string != ''){
+        shell_exec('sudo /var/sudowebscript.sh'. $bus_string);
+    }
     echo "<meta http-equiv='refresh' content='0'>";
 }
 ?>
