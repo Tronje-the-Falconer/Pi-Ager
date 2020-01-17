@@ -21,9 +21,13 @@ if(!empty($_POST['change_sensorbus_submit']))
     #        print "<script>window.close();</script>";
     #file_get_contents('./index.php');
     #header('Location: index.php');
-    if ($bus_string != ''){
-        shell_exec('sudo /var/sudowebscript.sh'. $bus_string);
+    if(isset($_POST['message']) && ($_POST['message'] != $_SESSION['message'])) {
+        shell_exec('sudo /var/sudowebscript.sh' . $bus_string);
+        $_SESSION['message'] = $_POST['message'];
+        
     }
+    
+    
     echo "<meta http-equiv='refresh' content='0'>";
 }
 ?>
