@@ -126,7 +126,7 @@ echo "Starte schreibende Dienste wieder!"
 ${DIENSTE_START_STOP} start
  
 # Starte Shrink
-echo "starte mit PiShrink $(date +%H:%M:%S)"
+echo "starte mit PiShrink $(date +%H:%M:%S) pishrink.sh $OPTARAG ${BACKUP_PFAD}/${BACKUP_NAME}.img"
 sudo /usr/local/bin/pishrink.sh $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img
 
 # Backup umbenennen
