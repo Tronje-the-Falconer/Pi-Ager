@@ -144,8 +144,8 @@ done
 umount "$mountdir"
 rm -rf $mountdir
 # Shrink image
-pishrink.sh -r ${BACKUP_PFAD}/$img ${BACKUP_PFAD}/PiAger_image1.img
+pishrink.sh -r ${BACKUP_PFAD}/$img 
 # Backup umbenennen mit Datum
-mv ${BACKUP_PFAD}/PiAger_image1.img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img
+mv ${BACKUP_PFAD}/PiAger_image.img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img
 # tmp image lösche
 rm $img
