@@ -126,7 +126,7 @@ sed -e "s/Port 57673/Port 22/g" < /etc/ssh/sshd_config > /etc/ssh/sshd_config
 hostname -b rpi-Pi-Ager
 #rm -f /etc/hostname
 #echo "rpi-Pi-Ager" >> /etc/hostname
-sed -e "s/rpi-Pi-AgerTest/rpi-Pi-Ager/g" < /etc/hosts > /etc/hosts
+sed -e "s/rpi-Pi-Ager-Test/rpi-Pi-Ager/g" < /etc/hosts > /etc/hosts
 
 # remove git repository
 rm /opt/git -rf
