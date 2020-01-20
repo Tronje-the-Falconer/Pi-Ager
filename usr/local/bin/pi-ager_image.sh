@@ -48,7 +48,7 @@ loopback=$(losetup -f --show -o "$partstart" "$img")
 mountdir=$(mktemp -d)
 
 mount "$loopback" "$mountdir"
-#read -p "Press enter to continue after image mount"
+read -p "Press enter to continue after image mount"
 
 #read -p "Press enter to continue after copy chroot script"
 
@@ -56,7 +56,7 @@ for i in dev proc sys dev/pts
 do
     mount -o bind /$i $mountdir/$i
 done
-#read -p "Press enter to continue after mount dev sys ..."
+read -p "Press enter to continue after mount dev sys ..."
 echo $mountdir
 regex='(\/.*\/)(.*)'
 [[ $mountdir =~ $regex ]]
