@@ -127,6 +127,7 @@ ${DIENSTE_START_STOP} start
  
 # Starte Shrink
 echo "starte mit PiShrink $(date +%H:%M:%S) pishrink.sh $OPTARAG ${BACKUP_PFAD}/${BACKUP_NAME}.img"
+read -p "Press enter to continue before pishrink call"
 sudo /usr/local/bin/pishrink.sh $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img
 
 # Backup umbenennen
