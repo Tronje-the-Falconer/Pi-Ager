@@ -123,7 +123,7 @@ rm -f /home/pi/.bash_history
 sed -e "s/Port 57673/Port 22/g" < /etc/ssh/sshd_config > /etc/ssh/sshd_config
 
 # change hostname
-hostname -b {rpi-Pi-Ager}
+hostname -b rpi-Pi-Ager
 #rm -f /etc/hostname
 #echo "rpi-Pi-Ager" >> /etc/hostname
 sed -e "s/rpi-Pi-AgerTest/rpi-Pi-Ager/g" < /etc/hosts > /etc/hosts
