@@ -39,6 +39,8 @@ DIENSTE_START_STOP="/etc/init.d/pi-ager-main.sh"	# Dienst die vor Backup gestopp
 
 img_old="$1"
 img = "PiAger_image.img"
+echo $img_old
+echo $img
 cp $img_old $img
 read -p "Press enter to continue after copy image"
 
