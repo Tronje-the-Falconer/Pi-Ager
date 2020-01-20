@@ -124,7 +124,7 @@ dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=1M status=progress
 # Starte Dienste nach Backup
 echo "Starte schreibende Dienste wieder!"
 ${DIENSTE_START_STOP} start
- 
+sync
 # Starte Shrink
 echo "starte mit PiShrink $(date +%H:%M:%S) pishrink.sh $OPTARAG ${BACKUP_PFAD}/${BACKUP_NAME}.img"
 read -p "Press enter to continue before pishrink call"
