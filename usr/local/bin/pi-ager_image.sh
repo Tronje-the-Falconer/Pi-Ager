@@ -41,7 +41,7 @@ img_old="$1"
 img="PiAger_image.img"
 echo "Coping $img_old to $img"
 
-rsync -a --info=progress2 "$img_old" "$img"
+rsync -a --info=progress2 "./$img_old" "$img"
 read -p "Press enter to continue after copy image"
 
 parted_output=$(parted -ms "$img" unit B print | tail -n 1)
