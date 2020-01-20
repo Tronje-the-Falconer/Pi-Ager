@@ -41,7 +41,8 @@ img_old="$1"
 img="PiAger_image.img"
 echo $img_old
 echo $img
-cp $img_old $img
+#cp $img_old $img
+rsync --info=progress2 $img_old $img
 read -p "Press enter to continue after copy image"
 
 parted_output=$(parted -ms "$img" unit B print | tail -n 1)
@@ -146,7 +147,7 @@ umount "$mountdir"
 rm -rf $mountdir
 # Shrink image
 pishrink.sh -r ${BACKUP_PFAD}/$img ${BACKUP_PFAD}/PiAger_image.img
-# Backup umbenennen in image
+# Backup umbenennen mit Datum
 mv ${BACKUP_PFAD}/PiAger_image.img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img
 # tmp image lösche
 rm $img
