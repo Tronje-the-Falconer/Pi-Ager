@@ -119,7 +119,7 @@ ${DIENSTE_START_STOP} stop
  
 # Backup mit Hilfe von dd erstellen und im angegebenen Pfad speichern
 echo "erstelle Backup $(date +%H:%M:%S)"
-#dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=64k status=progress
+dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=1M status=progress
 
 # Starte Dienste nach Backup
 echo "Starte schreibende Dienste wieder!"
