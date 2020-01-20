@@ -39,9 +39,8 @@ DIENSTE_START_STOP="/etc/init.d/pi-ager-main.sh"	# Dienst die vor Backup gestopp
 
 img_old="$1"
 img="PiAger_image.img"
-echo $img_old
-echo $img
-#cp $img_old $img
+echo "Coping $img_old to $img"
+
 rsync --info=progress2 $img_old $img
 read -p "Press enter to continue after copy image"
 
@@ -146,8 +145,8 @@ done
 umount "$mountdir"
 rm -rf $mountdir
 # Shrink image
-pishrink.sh -r ${BACKUP_PFAD}/$img ${BACKUP_PFAD}/PiAger_image.img
+pishrink.sh -r ${BACKUP_PFAD}/$img ${BACKUP_PFAD}/PiAger_image1.img
 # Backup umbenennen mit Datum
-mv ${BACKUP_PFAD}/PiAger_image.img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img
+mv ${BACKUP_PFAD}/PiAger_image1.img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img
 # tmp image lösche
 rm $img
