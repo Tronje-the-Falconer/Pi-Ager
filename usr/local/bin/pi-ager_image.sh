@@ -40,6 +40,8 @@ DIENSTE_START_STOP="/etc/init.d/pi-ager-main.sh"	# Dienst die vor Backup gestopp
 img_old="$1"
 img = "PiAger_image.img"
 cp $img_old $img
+read -p "Press enter to continue after copy image"
+
 parted_output=$(parted -ms "$img" unit B print | tail -n 1)
 partnum=$(echo "$parted_output" | cut -d ':' -f 1)
 partstart=$(echo "$parted_output" | cut -d ':' -f 2 | tr -d 'B')
