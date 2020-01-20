@@ -128,7 +128,7 @@ sync
 # Starte Shrink
 echo "starte mit PiShrink $(date +%H:%M:%S) pishrink.sh $OPTARAG ${BACKUP_PFAD}/${BACKUP_NAME}.img"
 read -p "Press enter to continue before pishrink call"
-sudo /usr/local/bin/pishrink.sh $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img
+sudo /usr/local/bin/pishrink.sh -d $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img
 
 # Backup umbenennen
 mv ${BACKUP_PFAD}/${BACKUP_NAME}.img ${BACKUP_PFAD}/${BACKUP_NAME}_$(date +%Y-%m-%d-%H:%M:%S).img
