@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script-Name: pi-ager_image
-# Version    : 0.0.1
+# Version    : 0.0.2
 # Autor      : DerBurgermeister
 # Datum      : 11.01.2020
 # Dieses Script erstellt aus einem Backup ein Image. Nur für internen Gebrauch
@@ -10,26 +10,25 @@
 #####################################################################
 #
 
-#NFSVOL=192.168.2.142:/backup						# Pfad zur NFS Freigabe (Muss im NAS angelegt werden)
+# Pfad zur NFS Freigabe (Muss im NAS angelegt werden)
 NFSVOL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsvol from nfs_backup where active = 1")
 
-#SUBDIR=pi-ager										# dieses Verzeichniss muss im NAS angelegt sein
+# dieses Verzeichniss muss im NAS angelegt sein
 SUBDIR=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select subdir from nfs_backup where active = 1")
 
 #NFSMOUNT=/home/pi/backup							# Pfad auf dem Pi indem das Backup gespeichert wird
 NFSMOUNT=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsmount from nfs_backup where active = 1")
 
-#BACKUP_PFAD="/home/pi/backup/pi-ager"				# setzt sich zusammen aus dem Dateipfad auf dem Pi und dem Verzeichnis im NAS
+# setzt sich zusammen aus dem Dateipfad auf dem Pi und dem Verzeichnis im NAS
 BACKUP_PFAD=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_path from nfs_backup where active = 1")
 
-#BACKUP_ANZAHL="5"									# behält die letzten "n" Backups
+# behält die letzten "n" Backups
 BACKUP_ANZAHL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select number_of_backups from nfs_backup where active = 1")
 
-#BACKUP_NAME="PiAgerBackup"							# Name des Backup
+# Name des Backup
 BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from nfs_backup where active = 1")
 
 
-DIENSTE_START_STOP="/etc/init.d/pi-ager-main.sh"	# Dienst die vor Backup gestoppt und nach Backup wieder gestartet werden sollen 
 # ENDE VARIABLEN
  
 #####################################################################
@@ -42,7 +41,7 @@ img="PiAger_image.img"
 echo "Coping $img_old to $img"
 
 rsync -a --info=progress2 "./$img_old" "$img"
-read -p "Press enter to continue after copy image"
+#read -p "Press enter to continue after copy image"
 
 parted_output=$(parted -ms "$img" unit B print | tail -n 1)
 partnum=$(echo "$parted_output" | cut -d ':' -f 1)
@@ -52,7 +51,7 @@ loopback=$(losetup -f --show -o "$partstart" "$img")
 mountdir=$(mktemp -d)
 
 mount "$loopback" "$mountdir"
-read -p "Press enter to continue after image mount"
+#read -p "Press enter to continue after image mount"
 
 #read -p "Press enter to continue after copy chroot script"
 
@@ -60,7 +59,7 @@ for i in dev proc sys dev/pts
 do
     mount -o bind /$i $mountdir/$i
 done
-read -p "Press enter to continue after mount dev sys ..."
+#read -p "Press enter to continue after mount dev sys ..."
 echo $mountdir
 regex='(\/.*\/)(.*)'
 [[ $mountdir =~ $regex ]]
