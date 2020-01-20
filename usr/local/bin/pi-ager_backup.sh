@@ -16,26 +16,26 @@
 #####################################################################
 # VARIABLEN - HIER EDITIEREN
 
-#NFSVOL=192.168.2.142:/backup						# Pfad zur NFS Freigabe (Muss im NAS angelegt werden)
+# Server und Pfad zur NFS Freigabe (Muss im NAS angelegt werden)
 NFSVOL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsvol from nfs_backup where active = 1")
 
-#SUBDIR=pi-ager										# dieses Verzeichniss muss im NAS angelegt sein
+# dieses Verzeichniss muss im NAS angelegt sein
 SUBDIR=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select subdir from nfs_backup where active = 1")
 
-#NFSMOUNT=/home/pi/backup							# Pfad auf dem Pi indem das Backup gespeichert wird
+# Pfad auf dem Pi indem das Backup gespeichert wird, hierhin wird gemoundet
 NFSMOUNT=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsmount from nfs_backup where active = 1")
 
-#NFSOPT="nosuid,nodev,rsize=65536,wsize=65536,intr,noatime"
+#z.B. NFSOPT="nosuid,nodev,rsize=65536,wsize=65536,intr,noatime"
 NFSOPT=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsopt from nfs_backup where active = 1")
 
 
-#BACKUP_PFAD="/home/pi/backup/pi-ager"				# setzt sich zusammen aus dem Dateipfad auf dem Pi und dem Verzeichnis im NAS
+# setzt sich zusammen aus dem Dateipfad auf dem Pi und dem Verzeichnis im NAS
 BACKUP_PFAD=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_path from nfs_backup where active = 1")
 
-#BACKUP_ANZAHL="5"									# behält die letzten "n" Backups
+# behält die letzten "n" Backups
 BACKUP_ANZAHL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select number_of_backups from nfs_backup where active = 1")
 
-#BACKUP_NAME="PiAgerBackup"							# Name des Backup
+# Name des Backup
 BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from nfs_backup where active = 1")
 
 
@@ -119,7 +119,7 @@ ${DIENSTE_START_STOP} stop
  
 # Backup mit Hilfe von dd erstellen und im angegebenen Pfad speichern
 echo "erstelle Backup $(date +%H:%M:%S)"
-dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=64k status=progress
+#dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=64k status=progress
 
 # Starte Dienste nach Backup
 echo "Starte schreibende Dienste wieder!"
