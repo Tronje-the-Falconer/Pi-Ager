@@ -47,11 +47,11 @@ parted_output=$(parted -ms "$img" unit B print | tail -n 1)
 partnum=$(echo "$parted_output" | cut -d ':' -f 1)
 partstart=$(echo "$parted_output" | cut -d ':' -f 2 | tr -d 'B')
 loopback=$(losetup -f --show -o "$partstart" "$img")
-
+echo "$parted_output, $partnum, $partstart, $loopback"
 mountdir=$(mktemp -d)
 
 mount "$loopback" "$mountdir"
-#read -p "Press enter to continue after image mount"
+read -p "Press enter to continue after image mount"
 
 #read -p "Press enter to continue after copy chroot script"
 
@@ -85,6 +85,7 @@ apt -y autoremove
 apt -y clean 
 apt -y autoclean 
 
+pip install --upgrade pip
 pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install 
 
 ######################################################
