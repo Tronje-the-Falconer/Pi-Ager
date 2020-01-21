@@ -77,7 +77,7 @@ chroot $chrootdir /bin/bash <<EOF
 
 apt -y update 
 apt -y upgrade 
-apt -y install linux-image
+#apt -y install linux-image
 apt -y autoremove 
 apt -y clean 
 apt -y autoclean 
