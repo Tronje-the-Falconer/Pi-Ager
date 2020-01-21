@@ -75,14 +75,14 @@ chroot $chrootdir /bin/bash <<EOF
 # System update and cleanup
 ######################################################
 
-#apt -y update 
-#apt -y upgrade 
-#apt -y install linux-image
-#apt -y autoremove 
-#apt -y clean 
-#apt -y autoclean 
+apt -y update 
+apt -y upgrade 
+apt -y install linux-image
+apt -y autoremove 
+apt -y clean 
+apt -y autoclean 
 
-#pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install 
+pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install 
 
 ######################################################
 # delete not needed packages
