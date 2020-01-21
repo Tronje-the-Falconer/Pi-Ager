@@ -75,9 +75,9 @@ chroot $chrootdir /bin/bash <<EOF
 # System update and cleanup
 ######################################################
 
-#apt -y update 
-#apt -y upgrade 
-#apt -y install linux-image
+apt -y update 
+apt -y upgrade 
+apt -y install linux-image
 #apt -y autoremove 
 #apt -y clean 
 #apt -y autoclean 
