@@ -52,7 +52,7 @@ echo "partnum = $partnum"
 echo "partstart = $partstart"
 echo "loopback = $loopback"
 echo "####################################################################################"
-parted_output_boot=$(parted -ms "$img_old" unit B print | head -n2 | tail -n 1)
+parted_output_boot=$(parted -ms "$img_old" unit B print | head -n3 | tail -n1)
 partnum_boot=$(echo "$parted_output_boot" | cut -d ':' -f 1)
 partstart_boot=$(echo "$parted_output_boot" | cut -d ':' -f 2 | tr -d 'B')
 loopback_boot=$(losetup -f --show -o "$partstart_boot" "$img_old")
@@ -68,7 +68,7 @@ read -p "Press enter to continue before image mount"
 mountdir=$(mktemp -d)
 
 mount "$loopback" "$mountdir"
-mount -t vfat "$loopback_boot" "$mountdir/boot"
+mount -t msdos "$loopback_boot" "$mountdir/boot"
 read -p "Press enter to continue after image mount"
 
 #read -p "Press enter to continue after copy chroot script"
