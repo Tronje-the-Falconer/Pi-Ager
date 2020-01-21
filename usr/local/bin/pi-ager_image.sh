@@ -75,15 +75,14 @@ chroot $chrootdir /bin/bash <<EOF
 # System update and cleanup
 ######################################################
 
-apt -y update 
-apt -y upgrade 
-apt -y install linux-image
-#update-grub
-apt -y autoremove 
-apt -y clean 
-apt -y autoclean 
+#apt -y update 
+#apt -y upgrade 
+#apt -y install linux-image
+#apt -y autoremove 
+#apt -y clean 
+#apt -y autoclean 
 
-pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install 
+#pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install 
 
 ######################################################
 # delete not needed packages
@@ -119,12 +118,12 @@ rm -f /home/pi/.bash_history
 # Change some settings
 ######################################################
 # change ssh port:
-sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
+#sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
 
 # change hostname
 #sed -i "s/rpi-Pi-Ager-Test/rpi-Pi-Ager/g" /etc/hostname
 #sed -i "s/rpi-Pi-Ager-Test/rpi-Pi-Ager/g" /etc/hosts
-raspi-config nonint do_hostname rpi-Pi-Ager
+#raspi-config nonint do_hostname rpi-Pi-Ager
 
 # remove git repository
 rm /opt/git -rf
