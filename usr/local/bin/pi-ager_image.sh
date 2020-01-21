@@ -40,22 +40,22 @@ img_old="$1"
 img="PiAger_image.img"
 echo "Coping $img_old to $img"
 
-#rsync -a --info=progress2 "./$img_old" "$img"
+rsync -a --info=progress2 "./$img_old" "$img"
 #read -p "Press enter to continue after copy image"
 
-parted_output=$(parted -ms "$img_old" unit B print | tail -n 1)
+parted_output=$(parted -ms "$img" unit B print | tail -n 1)
 partnum=$(echo "$parted_output" | cut -d ':' -f 1)
 partstart=$(echo "$parted_output" | cut -d ':' -f 2 | tr -d 'B')
-loopback=$(losetup -f --show -o "$partstart" "$img_old")
+loopback=$(losetup -f --show -o "$partstart" "$img")
 echo "parted_output = $parted_output"
 echo "partnum = $partnum"
 echo "partstart = $partstart"
 echo "loopback = $loopback"
 echo "####################################################################################"
-parted_output_boot=$(parted -ms "$img_old" unit B print | head -n3 | tail -n1)
+parted_output_boot=$(parted -ms "$img" unit B print | head -n3 | tail -n1)
 partnum_boot=$(echo "$parted_output_boot" | cut -d ':' -f 1)
 partstart_boot=$(echo "$parted_output_boot" | cut -d ':' -f 2 | tr -d 'B')
-loopback_boot=$(losetup -f --show -o "$partstart_boot" "$img_old")
+loopback_boot=$(losetup -f --show -o "$partstart_boot" "$img")
 echo "parted_output_boot = $parted_output_boot"
 echo "partnum_boot = $partnum_boot"
 echo "partstart_boot = $partstart_boot"
@@ -64,12 +64,12 @@ echo "loopback_boot = $loopback_boot"
 
 
 
-read -p "Press enter to continue before image mount"
+#read -p "Press enter to continue before image mount"
 mountdir=$(mktemp -d)
 
 mount "$loopback" "$mountdir"
 mount -t msdos "$loopback_boot" "$mountdir/boot"
-read -p "Press enter to continue after image mount"
+#read -p "Press enter to continue after image mount"
 
 #read -p "Press enter to continue after copy chroot script"
 
@@ -94,21 +94,22 @@ chroot $chrootdir /bin/bash <<EOF
 # apt update and upgrade don't work. Error loding module and hciuart.service
 ######################################################
 
-#apt -y update 
-#apt -y upgrade 
-#apt -y install linux-image
+apt -y update 
+apt -y upgrade 
+apt -y install linux-image
 apt purge -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
 apt purge -y influxdb grafana-server
 apt -y autoremove 
 apt -y clean 
 apt -y autoclean 
 
+######################################################
+#  Pip update
+######################################################
+
 pip install --upgrade pip
 pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install 
 
-######################################################
-# 
-######################################################
 
 
 
