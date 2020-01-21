@@ -68,7 +68,8 @@ read -p "Press enter to continue before image mount"
 mountdir=$(mktemp -d)
 
 mount "$loopback" "$mountdir"
-#read -p "Press enter to continue after image mount"
+mount "$loopback_boot" "$mountdir/boot"
+read -p "Press enter to continue after image mount"
 
 #read -p "Press enter to continue after copy chroot script"
 
