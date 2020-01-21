@@ -40,10 +40,10 @@ img_old="$1"
 img="PiAger_image.img"
 echo "Coping $img_old to $img"
 
-rsync -a --info=progress2 "./$img_old" "$img"
+#rsync -a --info=progress2 "./$img_old" "$img"
 #read -p "Press enter to continue after copy image"
 
-parted_output=$(parted -ms "$img" unit B print | tail -n 1)
+parted_output=$(parted -ms "$img_old" unit B print | tail -n 1)
 partnum=$(echo "$parted_output" | cut -d ':' -f 1)
 partstart=$(echo "$parted_output" | cut -d ':' -f 2 | tr -d 'B')
 loopback=$(losetup -f --show -o "$partstart" "$img")
