@@ -47,11 +47,15 @@ parted_output=$(parted -ms "$img_old" unit B print | tail -n 1)
 partnum=$(echo "$parted_output" | cut -d ':' -f 1)
 partstart=$(echo "$parted_output" | cut -d ':' -f 2 | tr -d 'B')
 loopback=$(losetup -f --show -o "$partstart" "$img")
-echo "$parted_output, $partnum, $partstart, $loopback"
+echo "parted_output = $parted_output"
+echo "partnum = $partnum"
+echo "partstart = $partstart"
+echo "loopback = $loopback"
+read -p "Press enter to continue before image mount"
 mountdir=$(mktemp -d)
 
 mount "$loopback" "$mountdir"
-read -p "Press enter to continue after image mount"
+#read -p "Press enter to continue after image mount"
 
 #read -p "Press enter to continue after copy chroot script"
 
