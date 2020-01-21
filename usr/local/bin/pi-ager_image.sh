@@ -53,9 +53,9 @@ echo "partstart = $partstart"
 echo "loopback = $loopback"
 
 parted_output_boot=$(parted -ms "$img_old" unit B print | head -n2 | tail -n 1)
-partnum_boot=$(echo "$parted_output" | cut -d ':' -f 1)
-partstart_boot=$(echo "$parted_output" | cut -d ':' -f 2 | tr -d 'B')
-loopback_boot=$(losetup -f --show -o "$partstart" "$img_old")
+partnum_boot=$(echo "$parted_output_boot" | cut -d ':' -f 1)
+partstart_boot=$(echo "$parted_output_boot" | cut -d ':' -f 2 | tr -d 'B')
+loopback_boot=$(losetup -f --show -o "$partstart_boot" "$img_old")
 echo "parted_output_boot = $parted_output_boot"
 echo "partnum_boot = $partnum_boot"
 echo "partstart_boot = $partstart_boot"
