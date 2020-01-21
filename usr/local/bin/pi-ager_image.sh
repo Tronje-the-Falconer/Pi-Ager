@@ -124,6 +124,7 @@ sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
 # change hostname
 #sed -i "s/rpi-Pi-Ager-Test/rpi-Pi-Ager/g" /etc/hostname
 #sed -i "s/rpi-Pi-Ager-Test/rpi-Pi-Ager/g" /etc/hosts
+raspi-config nonint do_hostname rpi-Pi-Ager
 
 # remove git repository
 rm /opt/git -rf
@@ -145,5 +146,3 @@ rm -rf $mountdir
 pishrink.sh -r ${BACKUP_PFAD}/$img 
 # Backup umbenennen mit Datum
 mv ${BACKUP_PFAD}/PiAger_image.img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img
-# tmp image lösche
-rm $img
