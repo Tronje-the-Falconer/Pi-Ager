@@ -51,6 +51,19 @@ echo "parted_output = $parted_output"
 echo "partnum = $partnum"
 echo "partstart = $partstart"
 echo "loopback = $loopback"
+
+parted_output_boot=$(parted -ms "$img_old" unit B print | head -n2 | tail -n 1)
+partnum_boot=$(echo "$parted_output" | cut -d ':' -f 1)
+partstart_boot=$(echo "$parted_output" | cut -d ':' -f 2 | tr -d 'B')
+loopback_boot=$(losetup -f --show -o "$partstart" "$img")
+echo "parted_output_boot = $parted_output_boot"
+echo "partnum_boot = $partnum_boot"
+echo "partstart_boot = $partstart_boot"
+echo "loopback_boot = $loopback_boot"
+
+
+
+
 read -p "Press enter to continue before image mount"
 mountdir=$(mktemp -d)
 
