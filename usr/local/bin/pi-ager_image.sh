@@ -72,24 +72,26 @@ chroot $chrootdir /bin/bash <<EOF
 # The aim is to make an new image for the Pi-Ager Communtiy
 
 ######################################################
-# System update and cleanup
+# System delete not needed packages and cleanup
+# apt update and upgrade don't work. Error loding module and hciuart.service
 ######################################################
 
-apt -y update 
-apt -y upgrade 
-apt -y install linux-image
-#apt -y autoremove 
-#apt -y clean 
-#apt -y autoclean 
+#apt -y update 
+#apt -y upgrade 
+#apt -y install linux-image
+apt purge -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
+apt purge -y influxdb grafana-server
+apt -y autoremove 
+apt -y clean 
+apt -y autoclean 
 
 pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install 
 
 ######################################################
-# delete not needed packages
+# 
 ######################################################
 
-apt purge -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
-apt purge -y influxdb grafana-server
+
 
 ######################################################
 # delete not needed files
@@ -118,12 +120,12 @@ rm -f /home/pi/.bash_history
 # Change some settings
 ######################################################
 # change ssh port:
-#sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
+sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
 
 # change hostname
 #sed -i "s/rpi-Pi-Ager-Test/rpi-Pi-Ager/g" /etc/hostname
 #sed -i "s/rpi-Pi-Ager-Test/rpi-Pi-Ager/g" /etc/hosts
-#raspi-config nonint do_hostname rpi-Pi-Ager
+raspi-config nonint do_hostname rpi-Pi-Ager
 
 # remove git repository
 rm /opt/git -rf
