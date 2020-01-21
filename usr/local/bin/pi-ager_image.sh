@@ -46,7 +46,7 @@ echo "Coping $img_old to $img"
 parted_output=$(parted -ms "$img_old" unit B print | tail -n 1)
 partnum=$(echo "$parted_output" | cut -d ':' -f 1)
 partstart=$(echo "$parted_output" | cut -d ':' -f 2 | tr -d 'B')
-loopback=$(losetup -f --show -o "$partstart" "$img")
+loopback=$(losetup -f --show -o "$partstart" "$img_old")
 echo "parted_output = $parted_output"
 echo "partnum = $partnum"
 echo "partstart = $partstart"
@@ -55,7 +55,7 @@ echo "loopback = $loopback"
 parted_output_boot=$(parted -ms "$img_old" unit B print | head -n2 | tail -n 1)
 partnum_boot=$(echo "$parted_output" | cut -d ':' -f 1)
 partstart_boot=$(echo "$parted_output" | cut -d ':' -f 2 | tr -d 'B')
-loopback_boot=$(losetup -f --show -o "$partstart" "$img")
+loopback_boot=$(losetup -f --show -o "$partstart" "$img_old")
 echo "parted_output_boot = $parted_output_boot"
 echo "partnum_boot = $partnum_boot"
 echo "partstart_boot = $partstart_boot"
