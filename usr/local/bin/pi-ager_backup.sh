@@ -63,28 +63,40 @@ fi
 #Überprüfen ob Backupordner vorhanden ist sonst erstellen
 echo "überprüfe ob der Backuppfad vorhanden ist."
 echo "Checking..."
-	if [ -d "$NFSMOUNT" ]
-		then
-			echo "$NFSMOUNT ist vorhanden"
-			else
-				echo "$NFSMOUNT wird angelegt"
-				sudo mkdir $NFSMOUNT
-				sudo chmod -R u=rwx,g+rw-x,o+rwx $NFSMOUNT
-				echo "$NFSMOUNT wurde angelegt"								 
-		fi
+if [ -d "$NFSMOUNT" ]
+	then
+		echo "$NFSMOUNT ist vorhanden"
+	else
+		echo "$NFSMOUNT wird angelegt"
+		sudo mkdir $NFSMOUNT
+		sudo chmod -R u=rwx,g+rw-x,o+rwx $NFSMOUNT
+		echo "$NFSMOUNT wurde angelegt"								 
+fi
  
-#Überprüfen ob PiShrink vorhanden ist sonst herunterladen
+#Überprüfen ob PiShrink aktuell ist sonst herunterladen
 echo "überprüfe ob PiShrink vorhanden ist"
 echo "Checking..."
-if [ -x /usr/local/bin/pishrink.sh ]
+online_md5="$(curl -sL https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh | md5sum | cut -d ' ' -f 1)"
+local_md5="$(md5sum "/usr/local/bin/pishrink.sh" | cut -d ' ' -f 1)"
+if [ "$online_md5" == "$local_md5" ]; 
 	then
-		echo "PiShrink ist vorhanden"	
-	else
-		echo "PiShrink wird geladen!"
+    	echo "PiShrink is the latest version!"
+    else
+    	echo "Installing PiShrink!"
 		wget -N https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
 		chmod +x pishrink.sh
 		sudo mv pishrink.sh /usr/local/bin
 fi
+
+#if [ -x /usr/local/bin/pishrink.sh ]
+#	then
+#		echo "PiShrink ist vorhanden"	
+#	else
+#		echo "PiShrink wird geladen!"
+#		wget -N https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
+#		chmod +x pishrink.sh
+#		sudo mv pishrink.sh /usr/local/bin
+#fi
 
 DIR=$NFSMOUNT/$SUBDIR
  
