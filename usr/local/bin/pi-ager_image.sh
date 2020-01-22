@@ -66,7 +66,9 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
             echo "$COMMAND_LINE_OPTIONS_HELP"
             exit $E_OPTERROR;
         ;;
-        *) break 
+        *) 
+	        echo "$COMMAND_LINE_OPTIONS_HELP"
+            exit $E_OPTERROR; 
         ;;
     esac
 done
@@ -76,8 +78,9 @@ if [ "$do_copy" == true ]; then
 	echo "Coping $img_old to $img"
 	rsync -a --info=progress2 "./$img_old" "$img"
  else
- 	echo "Using $OPTARG as source and target"
  	img="$1"
+ 	echo "Using $img as source and target"
+ 	
  fi
 #img_old="$2"
 #read -p "Press enter to continue after copy image"
