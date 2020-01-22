@@ -110,9 +110,9 @@ echo "loopback_boot = $loopback_boot"
 mountdir=$(mktemp -d)
 
 mount "$loopback" "$mountdir"
+read -p "Press enter to continue after / mount"
 mount -t msdos "$loopback_boot" "$mountdir/boot"
-
-read -p "Press enter to continue after image mount"
+read -p "Press enter to continue after /boot mount"
 
 #read -p "Press enter to continue after copy chroot script"
 
