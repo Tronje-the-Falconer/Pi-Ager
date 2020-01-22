@@ -66,9 +66,11 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
             echo "$COMMAND_LINE_OPTIONS_HELP"
             exit $E_OPTERROR;
         ;;
+        *) break 
+        ;;
     esac
 done
-if [ $do_copy == true ]; then
+if [ "$do_copy" == true ]; then
 	img_old = $OPTARG
 	img="PiAger_image.img"
 	echo "Coping $img_old to $img"
