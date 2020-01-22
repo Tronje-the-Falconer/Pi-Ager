@@ -38,10 +38,11 @@ BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from n
 
 img_old="$1"
 img="PiAger_image.img"
+img = $img_old
 echo "Coping $img_old to $img"
 
 #rsync -a --info=progress2 "./$img_old" "$img"
-img = $img_old
+
 #read -p "Press enter to continue after copy image"
 
 parted_output=$(parted -ms "$img" unit B print | tail -n 1)
