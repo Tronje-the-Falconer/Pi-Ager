@@ -71,13 +71,13 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
     esac
 done
 if [ "$do_copy" == true ]; then
-	img_old = $OPTARG
+	img_old = "$1"
 	img="PiAger_image.img"
 	echo "Coping $img_old to $img"
 	rsync -a --info=progress2 "./$img_old" "$img"
  else
  	echo "Using $OPTARG as source and target"
- 	img= $OPTARG
+ 	img= "$1"
  fi
 #img_old="$2"
 #read -p "Press enter to continue after copy image"
