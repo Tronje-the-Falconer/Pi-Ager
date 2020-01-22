@@ -72,14 +72,16 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
         ;;
     esac
 done
-if [ "$do_copy" == true ]; then
-	img_old="$1"
-	img="PiAger_image.img"
-	echo "Coping $img_old to $img"
-	rsync -a --info=progress2 "./$img_old" "$img"
- else
- 	img="$1"
- 	echo "Using $img as source and target"
+#if [ "$do_copy" == true ]; then
+if [ 1==1];
+	then
+		img_old="$1"
+		img="PiAger_image.img"
+		echo "Coping $img_old to $img"
+		rsync -a --info=progress2 "./$img_old" "$img"
+ 	else
+ 		img="$1"
+ 		echo "Using $img as source and target"
  	
  fi
 #img_old="$2"
