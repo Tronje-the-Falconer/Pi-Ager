@@ -73,7 +73,7 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
     esac
 done
 #if [ "$do_copy" == true ]; then
-if [ 1==2 ];
+if [ 1== 1 ];
 	then
 		img_old="$1"
 		img="PiAger_image.img"
