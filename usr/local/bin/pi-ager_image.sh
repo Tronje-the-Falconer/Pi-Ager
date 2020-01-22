@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script-Name: pi-ager_image
-# Version    : 0.0.2
+# Version    : 0.0.3
 # Autor      : DerBurgermeister
 # Datum      : 11.01.2020
 # Dieses Script erstellt aus einem Backup ein Image. Nur für internen Gebrauch
@@ -34,15 +34,50 @@ BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from n
 #####################################################################
 # Skript (hier sollten nur erfahrene User anpassungen machen!)
 #####################################################################
+COMMAND_LINE_OPTIONS_HELP='
+Command line options:
+    -c          Copy input File. Otherwise the input file will be changed
+    -h          Print this help menu
+
+Examples:
+    Copy backup file to a new image file
+        '`basename $0`' -c PiAgerBackup_2020-01-22-07:02:17.img
+
+    Use backup file as a new image file
+        '`basename $0`' PiAgerBackup_2020-01-22-07:02:17.img
+
+'
+
+VALID_COMMAND_LINE_OPTIONS=":c:h"
 
 
-img_old="$1"
-img="PiAger_image.img"
-img = $img_old
-echo "Coping $img_old to $img"
-
-#rsync -a --info=progress2 "./$img_old" "$img"
-
+while getopts $VALID_COMMAND_LINE_OPTIONS options; do
+    #echo "option is " $options
+    case $options in
+        c)
+        	$do_copy = true;
+        ;;
+        h)
+            echo "$COMMAND_LINE_OPTIONS_HELP"
+            exit $E_OPTERROR;
+        ;;
+        \?)
+            echo "Usage: `basename $0` -h for help";
+            echo "$COMMAND_LINE_OPTIONS_HELP"
+            exit $E_OPTERROR;
+        ;;
+    esac
+done
+if [ $do_copy == true ]; then
+	img_old = $OPTARG
+	img="PiAger_image.img"
+	echo "Coping $img_old to $img"
+	rsync -a --info=progress2 "./$img_old" "$img"
+ else
+ 	echo "Using $OPTARG as source and target"
+ 	img= $OPTARG
+ fi
+#img_old="$2"
 #read -p "Press enter to continue after copy image"
 
 parted_output=$(parted -ms "$img" unit B print | tail -n 1)
