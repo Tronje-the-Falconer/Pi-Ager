@@ -84,7 +84,7 @@ if [ "$do_copy" == true ]; then
  fi
 #img_old="$2"
 #read -p "Press enter to continue after copy image"
-
+echo "####################################################################################"
 parted_output=$(parted -ms "$img" unit B print | tail -n 1)
 partnum=$(echo "$parted_output" | cut -d ':' -f 1)
 partstart=$(echo "$parted_output" | cut -d ':' -f 2 | tr -d 'B')
@@ -102,7 +102,7 @@ echo "parted_output_boot = $parted_output_boot"
 echo "partnum_boot = $partnum_boot"
 echo "partstart_boot = $partstart_boot"
 echo "loopback_boot = $loopback_boot"
-
+echo "####################################################################################"
 
 
 
