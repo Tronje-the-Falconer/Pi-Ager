@@ -67,9 +67,10 @@ echo "loopback_boot = $loopback_boot"
 #read -p "Press enter to continue before image mount"
 mountdir=$(mktemp -d)
 
-mount "$loopback" "$mountdir"
+
 mount -t msdos "$loopback_boot" "$mountdir/boot"
-#read -p "Press enter to continue after image mount"
+mount "$loopback" "$mountdir"
+read -p "Press enter to continue after image mount"
 
 #read -p "Press enter to continue after copy chroot script"
 
@@ -97,6 +98,7 @@ chroot $chrootdir /bin/bash <<EOF
 apt -y update 
 apt -y upgrade 
 apt -y install linux-image
+apt --fix-broken install
 apt purge -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
 apt purge -y influxdb grafana-server
 apt -y autoremove 
