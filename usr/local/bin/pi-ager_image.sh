@@ -112,12 +112,13 @@ echo "##########################################################################
 mountdir=$(mktemp -d)
 
 mount "$loopback" "$mountdir"
-read -p "Press enter to continue after mounting $loopback to $mountdir"
+#read -p "Press enter to continue after mounting $loopback to $mountdir"
 
 #mount -t msdos "$loopback_boot" "$mountdir/boot"
 #read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
+echo "Copy $mountdir/boot.bak/ to $mountdir/boot/"
 rsync -a --info=progress2 "$mountdir/boot.bak/" "$mountdir/boot/"
-read -p "Press enter to continue after copy boot.bak to boot"
+#read -p "Press enter to continue after copy boot.bak to boot"
 
 for i in dev proc sys dev/pts
 do
@@ -200,7 +201,8 @@ rm /opt/git -rf
 EOF
 
 #read -p "Press enter to continue after executin script"
-
+echo "Copy $mountdir/boot/ to $mountdir/boot.bak/"
+rsync -a --info=progress2 "$mountdir/boot/" "$mountdir/boot.bak/"
 for i in dev/pts proc sys dev
 do
     umount $mountdir/$i
@@ -209,9 +211,14 @@ done
 #read -p "Press enter to continue after umount dev sys ..."
 
 umount "$mountdir"
-
+if [ $? -ne 0 ]
+then
+  echo "Error unmounting $mountdir. Maybe $mountdir is open. Image is then corrupt."
+  exit 1
+else
 rm -rf $mountdir
 # Shrink image
 pishrink.sh -r ${BACKUP_PFAD}/$img 
 # Backup umbenennen mit Datum
 mv ${BACKUP_PFAD}/PiAger_image.img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img
+fi
