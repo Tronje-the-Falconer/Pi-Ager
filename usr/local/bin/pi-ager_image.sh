@@ -113,10 +113,11 @@ mountdir=$(mktemp -d)
 
 mount "$loopback" "$mountdir"
 read -p "Press enter to continue after mounting $loopback to $mountdir"
+
 #mount -t msdos "$loopback_boot" "$mountdir/boot"
 #read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
-
-#read -p "Press enter to continue after copy chroot script"
+rsync -a --info=progress2 "$mountdir/boot.bak/ $mountdir/boot/
+read -p "Press enter to continue after copy boot.bak to boot"
 
 for i in dev proc sys dev/pts
 do
