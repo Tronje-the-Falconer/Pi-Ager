@@ -213,12 +213,14 @@ done
 umount "$mountdir"
 if [ $? -ne 0 ]
 then
-  echo "Error unmounting $mountdir. Maybe $mountdir is open. Image is then corrupt."
-  exit 1
+  	echo "Error unmounting $mountdir. Maybe $mountdir is open. Image is then corrupt."
+  	exit 1
 else
-rm -rf $mountdir
-# Shrink image
-pishrink.sh -r ${BACKUP_PFAD}/$img 
-# Backup umbenennen mit Datum
-mv ${BACKUP_PFAD}/PiAger_image.img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img
+	rm -rf $mountdir
+	# Shrink image
+	pishrink.sh -r ${BACKUP_PFAD}/$img 
+	# Backup umbenennen mit Datum
+	mv ${BACKUP_PFAD}/PiAger_image.img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img
+	echo "The image ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img was successfully created."
+	
 fi
