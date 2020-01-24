@@ -113,8 +113,8 @@ mountdir=$(mktemp -d)
 
 mount "$loopback" "$mountdir"
 read -p "Press enter to continue after mounting $loopback to $mountdir"
-mount -t msdos "$loopback_boot" "$mountdir/boot"
-read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
+#mount -t msdos "$loopback_boot" "$mountdir/boot"
+#read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
 
 #read -p "Press enter to continue after copy chroot script"
 
@@ -208,7 +208,7 @@ done
 #read -p "Press enter to continue after umount dev sys ..."
 
 umount "$mountdir"
-umount "$mountdir/boot"
+#umount "$mountdir/boot"
 rm -rf $mountdir
 # Shrink image
 pishrink.sh -r ${BACKUP_PFAD}/$img 
