@@ -112,12 +112,12 @@ echo "##########################################################################
 mountdir=$(mktemp -d)
 
 mount "$loopback" "$mountdir"
-#read -p "Press enter to continue after mounting $loopback to $mountdir"
+read -p "Press enter to continue after mounting $loopback to $mountdir"
 
-#mount -t msdos "$loopback_boot" "$mountdir/boot"
-#read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
-echo "Copy $mountdir/boot.bak/ to $mountdir/boot/"
-rsync -a --info=progress2 "$mountdir/boot.bak/" "$mountdir/boot/"
+mount -t msdos "$loopback_boot" "$mountdir/boot"
+read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
+#echo "Copy $mountdir/boot.bak/ to $mountdir/boot/"
+#rsync -a --info=progress2 "$mountdir/boot.bak/" "$mountdir/boot/"
 #read -p "Press enter to continue after copy boot.bak to boot"
 
 for i in dev proc sys dev/pts
@@ -216,7 +216,9 @@ then
   	echo "Error unmounting $mountdir. Maybe $mountdir is open. Image is then corrupt."
   	exit 1
 else
+	rm -rf $mountdir/boot
 	rm -rf $mountdir
+	
 	# Shrink image
 	pishrink.sh -r ${BACKUP_PFAD}/$img 
 	# Backup umbenennen mit Datum
