@@ -208,6 +208,7 @@ done
 #read -p "Press enter to continue after umount dev sys ..."
 
 umount "$mountdir"
+umount "$mountdir/boot"
 rm -rf $mountdir
 # Shrink image
 pishrink.sh -r ${BACKUP_PFAD}/$img 
