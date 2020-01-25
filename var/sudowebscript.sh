@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # web script allowing user www-data to run commands with root privilegs
-# shell_exec('/var/sudowebscript.sh PARAMETER')
+# shell_exec('/var/sudowebscript.sh PARAMETER snapshot-filename')
 
 # GPIO's aus config.json auslesen
 gpio_cooling_compressor=4
@@ -111,12 +111,15 @@ case "$1" in
         shutdown -h -t 10
     ;;
     savewebcampicture) # macht ein Bild mit der Webcam
-        curl -s -m 5 -o /var/www/images/webcam/snap_$DATE.jpg http://$MYIP:8080/?action=snapshot
-        #fswebcam -r 640X480 --no-banner /var/www/images/webcam/$DATE.jpg
+        #curl -s -m 5 -o /var/www/images/webcam/snap_$DATE.jpg http://$MYIP:8080/?action=snapshot
+        fswebcam -r 640X480 -S 10 $2
     ;;
     ziplogfiles) # Zippt alle logfiles
         pushd /var/www/ && zip -r /var/www/logs/pi-ager_logfiles.zip ./logs/ && popd
         #zip -r -j /var/www/logs/pi-ager_logfiles.zip /var/www/logs/
+    ;;
+   delete_snapshot_files) # delete all .jpg files from folder /var/www/images/webcam/ 
+        rm /var/www/images/webcam/*.jpg
     ;;
     sensorbusi2c) #Sensorbus wurde geaendert auf i2c
 ####### hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln

@@ -57,7 +57,7 @@
     <meta http-equiv="content-type" content="text/html;  charset=utf-8">
     <?php
         if ($_SERVER['PHP_SELF'] == '/webcam.php') {
-            echo "<meta http-equiv=\"refresh\" content=\"5\" />";
+#            echo "<meta http-equiv=\"refresh\" content=\"5\" />";
         }
         elseif ($_SERVER['PHP_SELF'] != '/settings.php') {
             echo "<meta http-equiv=\"refresh\" content=\"120\" />";
