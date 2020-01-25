@@ -149,7 +149,7 @@ apt -y install linux-image
 read -p "Before apt --fix-broken install"
 apt --fix-broken install
 apt purge -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
-apt purge -y influxdb grafana-rpi sysstat stress subversion bareos-common bareos-filedaemon check_mk_agent mysql-common
+apt purge -y influxdb grafana-rpi sysstat stress subversion bareos-common bareos-filedaemon check-mk-agent mysql-common
 apt -y autoremove 
 apt -y clean 
 apt -y autoclean 
