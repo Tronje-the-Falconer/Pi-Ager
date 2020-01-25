@@ -202,6 +202,11 @@ raspi-config nonint do_hostname rpi-Pi-Ager
 # remove git repository
 rm /opt/git -rf
 
+# Restore /boot(setup.txt
+mv /boot/setup.txt.org /boot/setup.txt
+
+# Restore /etc/wpa_supplicant/wpa_supplicant.conf
+mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
 EOF
 
 #read -p "Press enter to continue after executin script"
