@@ -19,7 +19,7 @@
             $_SESSION['message'] = $_POST['message'];
         }
     #3 Sekunden anzeigen, dass System heruntergefahren wird
-        print '<p id=\'info-message\' style=\'color: #ff0000; font-size: 20px;\'><b>'. (_("system shutdown in 10 seconds")) .'</b><br>' . ("m/d/y h:i:s a") . ' </p>
+        print '<p id=\'info-message\' style=\'color: #ff0000; font-size: 20px;\'><b>'. (_("system shutdown in 10 seconds")) .'</b><br>' . date("m/d/y h:i:s a") . ' </p>
             <script language="javascript">
                 setTimeout(function(){document.getElementById("info-message").style.display="none"}, 3000)
                 setTimeout(function(){window.location.href= "/index.php";},3000); 
