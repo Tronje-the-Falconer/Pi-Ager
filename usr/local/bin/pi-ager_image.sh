@@ -1,10 +1,13 @@
 #!/bin/bash
 
 # Script-Name: pi-ager_image
-# Version    : 0.0.3
+# Version    : 0.0.4
 # Autor      : DerBurgermeister
 # Datum      : 11.01.2020
 # Dieses Script erstellt aus einem Backup ein Image. Nur für internen Gebrauch
+# Vorher auf dem Source System noch folgende Befehle ausführen:
+# apt -y update && apt -y upgrade && apt -y install linux-image && apt --fix-broken install
+# Grund: Bei einem Kernel Upgrade gibt es Probleme
 #####################################################################
 #Variablen
 #####################################################################
