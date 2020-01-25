@@ -205,10 +205,10 @@ rm /opt/git -rf
 # remove obsolete direcectories after upgrade
 rm -r /boot.bak
 rm -r /lib/modules.bak
-PRUNE_MODULES=1 sudo rpi-update
+#PRUNE_MODULES=1 sudo rpi-update
 
 # Restore /boot(setup.txt
-mv /boot/setup.txt.org /boot/setup.txt
+#mv /boot/setup.txt.org /boot/setup.txt
 
 # Restore /etc/wpa_supplicant/wpa_supplicant.conf
 mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
