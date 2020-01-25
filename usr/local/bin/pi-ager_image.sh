@@ -207,6 +207,10 @@ mv /boot/setup.txt.org /boot/setup.txt
 
 # Restore /etc/wpa_supplicant/wpa_supplicant.conf
 mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
+
+# Force password change for root
+chage -d 0 root
+
 EOF
 
 #read -p "Press enter to continue after executin script"
