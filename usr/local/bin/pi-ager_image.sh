@@ -219,8 +219,9 @@ chage -d 0 root
 EOF
 
 #read -p "Press enter to continue after executin script"
-echo "Copy $mountdir/boot/ to $mountdir/boot.bak/"
-rsync -a --info=progress2 "$mountdir/boot/" "$mountdir/boot.bak/"
+#echo "Copy $mountdir/boot/ to $mountdir/boot.bak/"
+#rsync -a --info=progress2 "$mountdir/boot/" "$mountdir/boot.bak/"
+
 for i in dev/pts proc sys dev
 do
     umount $mountdir/$i
