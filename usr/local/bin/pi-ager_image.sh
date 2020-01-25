@@ -214,6 +214,7 @@ umount "$mountdir"
 if [ $? -ne 0 ]
 then
   	echo "Error unmounting $mountdir. Maybe $mountdir is open. Image is then corrupt."
+  	lsof $loopdir
   	exit 1
 else
 	rm -rf $mountdir/boot
