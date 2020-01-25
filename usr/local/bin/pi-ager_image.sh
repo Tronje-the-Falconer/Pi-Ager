@@ -140,19 +140,11 @@ chroot $chrootdir /bin/bash <<EOF
 # System delete not needed packages and cleanup
 # 
 ######################################################
-read -p "Before apt -y update"
-apt -y update 
-read -p "Before apt -y upgrade"
-apt -y upgrade 
-read -p "Before apt -y install linux-image"
-apt -y install linux-image
-read -p "Before apt --fix-broken install"
-apt --fix-broken install
+apt -y update && apt -y upgrade && apt -y install linux-image && apt --fix-broken install
+
 apt purge -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
 apt purge -y influxdb grafana-rpi sysstat stress subversion bareos-common bareos-filedaemon check-mk-agent mysql-common
-apt -y autoremove 
-apt -y clean 
-apt -y autoclean 
+apt -y autoremove && apt -y clean && apt -y autoclean 
 
 ######################################################
 #  Pip upgrade and update packages
@@ -177,9 +169,9 @@ find /tmp/ -type f -exec rm "{}" \;
 find /root/.cache/ -type f -exec rm "{}" \;
 
 rm -r /opt/git
-rm -r GPIO-Test
-rm -r MCP3204
-rm -r vc
+rm -r /opt/GPIO-Test
+rm -r /opt/MCP3204
+rm -r /opt/vc
 
 
 ######################################################
