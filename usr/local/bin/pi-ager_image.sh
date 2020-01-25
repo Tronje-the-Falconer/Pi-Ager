@@ -140,10 +140,13 @@ chroot $chrootdir /bin/bash <<EOF
 # System delete not needed packages and cleanup
 # apt update and upgrade don't work. Error loding module and hciuart.service
 ######################################################
-
+read -p "Before apt -y update"
 apt -y update 
+read -p "Before apt -y upgrade"
 apt -y upgrade 
+read -p "Before apt -y install linux-image"
 apt -y install linux-image
+read -p "Before apt --fix-broken install"
 apt --fix-broken install
 apt purge -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
 apt purge -y influxdb grafana-server
