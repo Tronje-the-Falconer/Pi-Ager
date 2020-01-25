@@ -3,15 +3,15 @@
    file for the hx711 modules written for python 3
    
    originaly file from hx711py3 written by dcrystalj https://github.com/dcrystalj/hx711py3/blob/master/hx711.py
+   Timing controlled by performance counter to detect hx711 reset by clk high for more than 60 us
 """
 
 from statistics import mean as pi_mean
 import time
 import RPi.GPIO as GPIO
-from ctypes import *
 
 class HX711:
-    def __init__(self, dout=5, pd_sck=6, gain=128, bitsToRead=24):
+    def __init__(self, dout=10, pd_sck=9, gain=128, bitsToRead=24):
         self.PD_SCK = pd_sck
         self.DOUT = dout
 
@@ -30,20 +30,8 @@ class HX711:
         self.bitsToRead = bitsToRead
         self.twosComplementThreshold = 1 << (bitsToRead-1)
         self.twosComplementOffset = -(1 << (bitsToRead))
-#        self.setGain(gain)
+        self.setGain(gain)
 #        self.read()
-
-# init interrupt control
-        self.irq = CDLL("/opt/pi-ager/interrupts.so")
-        self.irq.setup()
-# reset hx711
-        GPIO.output(self.PD_SCK, True)
-        time.sleep(0.1)   # wait for reset active, > 60ms
-        GPIO.output(self.PD_SCK, False)
-        time.sleep(0.5) 
-# test one read cycle
-        value = self.irq.hx711(self.DOUT, self.PD_SCK)
-
 
     def isReady(self):
         return GPIO.input(self.DOUT) == 0
@@ -58,7 +46,8 @@ class HX711:
 
         GPIO.output(self.PD_SCK, False)
         self.read()
-
+        time.sleep(0.4)  # 400ms settling time after gain change
+        
     def waitForReady(self):
         while not self.isReady():
             pass
@@ -70,28 +59,66 @@ class HX711:
             return unsignedValue
 
     def read(self):
-        self.waitForReady()
-        value = self.irq.hx711(self.DOUT, self.PD_SCK)
-        time.sleep(0.1)   # next conversion in 100ms, i.e. 10 Conversion per second in data sheet
-        return(value)
+        read_repeat_counter = 0
+        read_repeat_counter_max = 10
+        while (read_repeat_counter <= read_repeat_counter_max):
+            read_repeat_counter += 1
+            GPIO.output(self.PD_SCK, False)  # start by setting the pd_sck to 0
+            ready_counter = 0
+            ready_counter_max = 20
+            while (not self.isReady() and ready_counter <= ready_counter_max):
+                time.sleep(0.01)  # sleep for 10 ms because data is not ready
+                ready_counter += 1
+            
+            if ready_counter == ready_counter_max:  # if counter reached max value then try again
+#                print("wait for ready error")
+                self.reset()
+                continue
 
-    def read_org(self):
-        self.waitForReady()
+            unsignedValue = 0
+            for i in range(0, self.bitsToRead):
+                timing_error = False
+                start_counter = time.perf_counter()
+                GPIO.output(self.PD_SCK, True)
+                bitValue = GPIO.input(self.DOUT)
+                GPIO.output(self.PD_SCK, False)
+                end_counter = time.perf_counter()
+                if ((end_counter - start_counter) >= 0.00010):  # choose 100 us, zero not precise enough, check if the hx 711 did not turn off...
+                    timing_error = True
+#                    print("Timing error read data")
+                    self.reset()
+                    break
+#                bitValue = GPIO.input(self.DOUT)
+                unsignedValue = unsignedValue << 1
+                unsignedValue = unsignedValue | bitValue
 
-        unsignedValue = 0
-        for i in range(0, self.bitsToRead):
-            GPIO.output(self.PD_SCK, True)
-            bitValue = GPIO.input(self.DOUT)
-            GPIO.output(self.PD_SCK, False)
-            unsignedValue = unsignedValue << 1
-            unsignedValue = unsignedValue | bitValue
-
+            if timing_error == True:    # retry
+#                print("Timing error read data")
+                continue
+                
         # set channel and gain factor for next reading
-        for i in range(self.GAIN):
-            GPIO.output(self.PD_SCK, True)
-            GPIO.output(self.PD_SCK, False)
+            for i in range(self.GAIN):
+                timing_error = False
+                start_counter = time.perf_counter()
+                GPIO.output(self.PD_SCK, True)
+                GPIO.output(self.PD_SCK, False)
+                end_counter = time.perf_counter()
+                if end_counter - start_counter >= 0.00006:  # check if the hx 711 did not turn off...
+                    timing_error = True
+#                    print("timing error set gain")
+                    break
+            
+            if timing_error == True:    # retry
+                continue
+               
+            time.sleep(0.1)    # next conversion ends after 100ms at a conversion rate of 10 Hz               
+            value = self.correctTwosComplement(unsignedValue)
+            if (value == -1):  # some time 0xffffff is read from hx711, reading failed
+                continue
 
-        return self.correctTwosComplement(unsignedValue)
+            return value
+            
+        return 0     # error, no valid conversion after read_repeat_counter_max retries
 
     def getValue(self):
         return self.read() - self.OFFSET
@@ -132,7 +159,7 @@ class HX711:
 
     def powerUp(self):
         GPIO.output(self.PD_SCK, False)
-        time.sleep(0.0001)
+        time.sleep(0.4)    # 0.0001s to0 short, after reset 400 ms settling time needed
 
     def reset(self):
         self.powerDown()
@@ -173,7 +200,7 @@ class Scale:
         ))
 
         if len(valid_values) == 0:
-            return avg
+           return avg
 
         avg = pi_mean(valid_values)
 
