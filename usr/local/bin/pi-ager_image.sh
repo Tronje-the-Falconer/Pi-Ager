@@ -209,7 +209,7 @@ do
 done
 
 #read -p "Press enter to continue after umount dev sys ..."
-
+umount "$mountdir/boot"
 umount "$mountdir"
 if [ $? -ne 0 ]
 then
