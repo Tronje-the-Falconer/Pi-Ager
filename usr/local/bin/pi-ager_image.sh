@@ -146,10 +146,10 @@ chroot $chrootdir /bin/bash <<EOF
 apt -y update && apt -y upgrade && apt -y install linux-image && apt --fix-broken install
 
 apt purge -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
-apt purge -y influxdb grafana-rpi sysstat stress subversion bareos-common bareos-filedaemon check-mk-agent mysql-common dhcpcd5
+apt purge -y influxdb grafana-rpi sysstat stress subversion bareos-common bareos-filedaemon check-mk-agent mysql-common 
 
 # C++
-apt purge -y g++-8/stable g++ gcc-4.6-base gcc-4.7-base gcc-4.8-base gcc-4.9-base gcc-5-base gcc-6-base gcc-6 gcc-7-base gcc-8-base gcc-8 gcc gdb 
+apt purge -y g++-8 g++ gcc-4.6-base gcc-4.7-base gcc-4.8-base gcc-4.9-base gcc-5-base gcc-6-base gcc-6 gcc-7-base gcc-8-base gcc-8 gcc gdb 
 # Fortran
 apt purge -y gfortran-6 gfortran-8 gfortran
 # Old python version
