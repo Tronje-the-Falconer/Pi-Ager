@@ -146,7 +146,18 @@ chroot $chrootdir /bin/bash <<EOF
 apt -y update && apt -y upgrade && apt -y install linux-image && apt --fix-broken install
 
 apt purge -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
-apt purge -y influxdb grafana-rpi sysstat stress subversion bareos-common bareos-filedaemon check-mk-agent mysql-common
+apt purge -y influxdb grafana-rpi sysstat stress subversion bareos-common bareos-filedaemon check-mk-agent mysql-common dhcpcd5
+
+# C++
+apt purge -y g++-8/stable g++ gcc-4.6-base gcc-4.7-base gcc-4.8-base gcc-4.9-base gcc-5-base gcc-6-base gcc-6 gcc-7-base gcc-8-base gcc-8 gcc gdb 
+# Fortran
+apt purge -y gfortran-6 gfortran-8 gfortran
+# Old python version
+apt purge -y python2-minimal python2.7-minimal python2.7 python2
+# Pango
+apt purge -y libpango-1.0-0 libpangocairo-1.0-0 libpangoft2-1.0-0
+
+
 apt -y autoremove && apt -y clean && apt -y autoclean 
 
 ######################################################
@@ -199,6 +210,15 @@ sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
 #sed -i "s/rpi-Pi-Ager-Test/rpi-Pi-Ager/g" /etc/hosts
 raspi-config nonint do_hostname rpi-Pi-Ager
 
+# Restore /etc/wpa_supplicant/wpa_supplicant.conf
+mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
+
+# Force password change for root
+chage -d 0 root
+
+######################################################
+# remove obsolete files and direcectories 
+######################################################
 # remove git repository
 rm /opt/git -rf
 
@@ -210,11 +230,9 @@ rm -r /lib/modules.bak
 # Restore /boot(setup.txt
 #mv /boot/setup.txt.org /boot/setup.txt
 
-# Restore /etc/wpa_supplicant/wpa_supplicant.conf
-mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
+# Remove obsolete systemd start files
+rm /etc/systemd/system/bacula-fd.service
 
-# Force password change for root
-chage -d 0 root
 
 EOF
 
