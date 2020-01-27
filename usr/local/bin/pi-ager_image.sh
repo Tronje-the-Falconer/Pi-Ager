@@ -145,17 +145,17 @@ chroot $chrootdir /bin/bash <<EOF
 ######################################################
 apt -y update && apt -y upgrade && apt -y install linux-image && apt --fix-broken install
 
-apt purge -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
+apt -y remove timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
 #apt purge -y influxdb grafana-rpi sysstat stress bareos-common bareos-filedaemon check-mk-agent
 
 # C++
-apt purge -y g++-8 g++ gcc-4.6-base gcc-4.7-base gcc-4.8-base gcc-4.9-base gcc-5-base gcc-6-base gcc-6 gcc-7-base gcc-8-base gcc-8 gcc gdb 
+apt -y remove g++-8 g++ gcc-4.6-base gcc-4.7-base gcc-4.8-base gcc-4.9-base gcc-5-base gcc-6-base gcc-6 gcc-7-base gcc-8-base gcc-8 gcc gdb 
 # Fortran
-apt purge -y gfortran-6 gfortran-8 gfortran
+apt -y remove gfortran-6 gfortran-8 gfortran
 # Old python version
-apt purge -y python2-minimal python2.7-minimal python2.7 python2
+apt -y remove python2-minimal python2.7-minimal python2.7 python2
 # Pango
-apt purge -y libpango-1.0-0 libpangocairo-1.0-0 libpangoft2-1.0-0
+apt -y remove libpango-1.0-0 libpangocairo-1.0-0 libpangoft2-1.0-0
 
 
 apt -y autoremove && apt -y clean && apt -y autoclean 
