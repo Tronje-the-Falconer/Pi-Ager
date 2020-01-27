@@ -1,0 +1,62 @@
+Version 2.2.1
+
+- Frontend
+    - Überarbeitung der Icons
+    - UV, Licht und Entfeuchter
+        - Steuerungsfeldern
+        - Graphen
+    - Webcam
+    - Wägezellen
+        - Steuerungsfeld für Offset
+        - Graphen
+    - Steuerungsmöglichkeit für Entfeuchtung
+        - Ohne
+        - Abluft
+        - Abluft mit Entfeuchter
+        - Entfeuchter
+
+- Backend
+    - Umstellung auf Python 3
+    - neue Bibliothek für SHT und DHT Sensoren
+    - Umstellung von Apache auf Lighttpd
+    - Variablen Umbenennungen
+    - Übersetzungsunterstützung (Deutsch, Englisch)
+    - Logik
+        - UV Lichtsteuerung
+        - Lichtsteuerung
+        - Entfeuchter-Steuerung
+        - Wägezellen
+        - Webcamsteuerung
+    - Auslagern der Standardwerte in eine config.json
+    - Entfernen der Werte für Entfeuchtung ein/aus, Entfeuchtungsverzögerung, Kühlen an/aus, aus den csv-Dateien und auslagern in die config.json
+    - Verzeichnis-Strukturierung (config, logs, images/icons, images/graphs, images/webcam)
+--------------------------------------------------------------------------------
+
+Version 2.1.1
+
+- Frontend
+    - neues Frontend
+    - Logfile
+    - Changelog
+    - Sensor auswählbar
+    - wöchentliches Diagramm
+    - RaspberryPi Version in Footer
+    - Programmversion in Footer
+    - Reboot und Shutdown des Raspberry's  über Settings-Seite
+    - Kühlung und Heizung sowie Be/Entfeuchtung im Statusboard visuell getrennt
+    - erlaubte Min-Max-Wertgrenzen werden bei den Einstellungen angezeigt
+    - settings wird über Passwort geschützt
+
+- Backend
+    - Umstellung von DHT22.rdd auf rss.rrd für den Plot
+    - Die Pythondateien liegen in /opt/RSS/
+    - csv-Dateien liegen in /var/www/csv/
+    - Verwendung von /var/sudowebscript.sh für Shell-Befehle
+    - Content-Reload alle 60 Sekunden bei Monitor und Diagramme
+    - Vorfilter für "Mülldaten" vom Sensor SHT11 & SHT22 in Rss.py
+    - Noob-Image (Textdatei für automatisches Setzen von Passwörtern, WiFi-Verbindung und extend Filesystem)
+
+--------------------------------------------------------------------------------
+
+Version 1.1.1-0
+- Übernahme des Systems aus dem Forum

@@ -1,0 +1,129 @@
+﻿#### = Erledigt
+---- = verschoben auf nächstes Release
+.... = Begonnen
+//// = verworfen
+
+Prioritätenliste
+#### 01 Python 23
+#### 02 Website 06 
+#### 03 Website 01
+#### 04 Website 02
+#### 05 Website 32
+     06 Website 24
+#### 07 Website 03
+     08 Webiste 20
+     09 Webiste 10
+     10 Website 07
+     11 Linux 01
+     12 Allgemein 03
+
+
+1) Allgemein
+    01 Lizenz überdenken!
+
+    03 Release vorbereiten (Statustabellen leeren, Agingtables überprüfen)
+    04 Bauanleitung im Wiki verbessern
+    05 Bedienungsanleitung schreiben (https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/_Bedienungsanleitung)
+    06 FAQ im Wiki mit Leben füllen (https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/_FAQ)
+    07 Format der CSV festlegen/veröffentlichen
+
+2) Website
+####01 Upload CSV und eintragen als Agingtable_[CSV-Filename] in Datenbank ACHTUNG! richtige Reihenfolge in Tabelle schreiben! (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/11)
+####02 Editieren der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
+####03 Wägezellen Wizzard (dauerhafte Wertmessung die man sieht, definiertes Gewicht anhängen)
+
+        -Tara
+        - def gewicht
+        - messen mit aktueller Ref unit (0??)
+        - berechnen
+        - wert eintragen- scale neustarten
+        - tara
+        - definiertes Gewicht
+        - Gewicht prüfen
+        
+        - evtl. ref unit anpassen
+        - scale neu starten
+        - tara
+        - def. gewicht anhängen
+        - prüfen
+
+####04 Temperatur Statistiken und aktuelle Werte (http://www.chartjs.org) (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/33)
+####05 Reifetabellenzeile einfärben, welche Phase gerade aktiv
+####06 php logging nutzen
+    07 Translation Aktivieren
+
+    
+    10 Kommentare aussortieren / ergänzen
+####11 Datenbank/-schema per Button erzeugen
+////12 Datenbank auf Vollständigkeit überprüfen. Warnung ausgeben, wenn Dinge fehlen und ergänzen
+        Idee: Beim main start, wird die DB überprüft, bei Fehler wird ein status in der db auf 1 gesetzt. Dieser wird in der Website ausgewertet und angezeigt, dass die DB unvollständig ist.
+        Auf der adminsetie gibt es einen Migrationsbereich Knopf database maintenance mit Checkboxen: Neue Datenbank, Sicherung, und defaultwerte
+        sofern neue Datenbank wird eine neue angelegt und die vorher eingestelklten werte ausgelesen und verwendet.
+        sofern Sicherung wird die aktuelle DB vorher mit zeitstempel gesichert.
+        sofern default werte werden die Standardwerte von uns verwendet
+        Es wird jeweils ein Log bei einer Datenbankoperation geschrieben. Bsp.: Tabelle xy angelegt, oder Spalte xy hinzugefügt oder Wert xy eingefügt.
+####13 Code aufräumen (duplicate Webiste 10)
+####14 Logfile (website) erzeugen, wenn nicht vorhanden // über python erledigt
+####15 admin.php        unter debug fehlen: measuring_interval_debug, agingtable_days_in_seconds_debug
+####16 settings.php     scale-werte fehlen: measuring_interval, measuring_duration, saving_period, samples, spikes
+####17 settings.php     Agingtable-Werte fehlen: failure_humidity_delta, failure_temperature_delta
+    18 on the fly (Ajax) Werte auslesen (phase der reifetabelle, status, temperatur, feuchte, Waage1 und 2, Lichtstatus für Schalter on/off)
+    19 Werte beim schreiben in die db prüfen: failure_humidity_delta, failure_temperature_delta, Scale1 & 2 measuring_interval, measuring_duration, saving_period, samples, spikes
+    20 Helptexte schreiben
+####21 Changelog Bild von Flatmike
+####22 scale, language, sensortyp von settings.php auf admin.php umziehen
+####23 Diagramme von 1/0 auf on/off
+####24 Favicon
+####25 schalter um durch logfiles zu wechseln
+####26 Löschen der Agingtables (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/15)
+    27 Input felder auf Stellen überprüfen, min und max innerhalb des input-tags (fehlend Wägezellen)
+####28 Button für UV-Licht aus
+####29 icon on /off manually M
+
+
+####29 downloadbutton für logfiles als zip
+####30 Supportlink
+####31 Kommentarfeld für Reifetabellen ergänzen (editierbar und unter Reifetabelle anzeigen)
+####32 Export Reifetabelle als csv
+####33 Beim Upload der csv Struktur überprüfen
+####34 Uploadbutton deaktivieren solange keine Datei gewählt
+    
+    
+3) Python
+####01 Stromausfall
+
+####05 Logrotate für pi-ager-logfile prüfen
+    06 Translation aktivieren
+####07 Kommentare entfernen
+####08 Logeinträge kategorisieren (debug, info, warning, error, critical)
+####09 Code aufräumen (nur Funktionen in importierten py's, um doppelte Ausführungen zu vermeiden)
+####10 Logfile (website) erzeugen, wenn nicht vorhanden
+####11 Logging: Datei- und Consolenaufteilung verbessern
+####12 Licht für Webcam automatisch anschalten
+####13 pi_ager_init.py: Variablen, deren Werte hardcoded gesetzt werden, sollten in die pi_ager_names.py überführt werden
+####14 cleanup bei nicht definierten GPIO's abfangen (gpio == Not Null)
+        GPIO.gpio_function(pin) will return a value from: GPIO.IN, GPIO.OUT, GPIO.SPI, GPIO.I2C, GPIO.HARD_PWM, GPIO.SERIAL, GPIO.UNKNOWN
+        0 = GPIO.OUT
+        1 = GPIO.IN
+        40 = GPIO.SERIAL
+        41 = GPIO.SPI
+        42 = GPIO.I2C
+        43 = GPIO.HARD_PWM
+        -1 = GPIO.UNKNOWN
+####15 database import in logging.py
+####16 agingtable korrektur Prüfen der Werte Dictionary Null werte Restart 
+####17 Logik/schaltung auf True und False prüfen
+####18 GPIO Scales prüfen (names.py und hardcoded in scale.py/scaleloop.py)
+####19 cleanup gpio scales?
+####20 Data und sync aus Datenbank bei Scale entfernen
+####21 Schaltungen von Licht und UV auf Zeiten laut Settings prüfen
+####22 Raspberry pi Version bei Systemstart lesen und in sqlite schreiben. Danach übergabe zur Website (https://github.com/Tronje-the-Falconer/Pi-Ager/issues/32)
+####23 nur Status-Werte schreiben, wenn geändert
+    24 beim start der main.py auf vollständige DB prüfen
+####25 exception handler der auf 0 setzt
+####26 UV_licht über Button ausschalten
+    27 Samples bei Calibrate fest in den Code schreiben
+
+4) Linux
+    01 phpliteadmin.php passwort bei Erstinstallation auf allgemeinses PW oder eigenes setzen
+

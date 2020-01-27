@@ -1,10 +1,13 @@
 #!/bin/bash
 
 # Script-Name: pi-ager_image
-# Version    : 0.0.3
+# Version    : 0.0.4
 # Autor      : DerBurgermeister
 # Datum      : 11.01.2020
 # Dieses Script erstellt aus einem Backup ein Image. Nur für internen Gebrauch
+# Vorher auf dem Source System noch folgende Befehle ausführen:
+# apt -y update && apt -y upgrade && apt -y install linux-image && apt --fix-broken install
+# Grund: Bei einem Kernel Upgrade gibt es Probleme
 #####################################################################
 #Variablen
 #####################################################################
@@ -112,10 +115,10 @@ echo "##########################################################################
 mountdir=$(mktemp -d)
 
 mount "$loopback" "$mountdir"
-read -p "Press enter to continue after mounting $loopback to $mountdir"
+#read -p "Press enter to continue after mounting $loopback to $mountdir"
 
 mount -t msdos "$loopback_boot" "$mountdir/boot"
-read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
+#read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
 #echo "Copy $mountdir/boot.bak/ to $mountdir/boot/"
 #rsync -a --info=progress2 "$mountdir/boot.bak/" "$mountdir/boot/"
 #read -p "Press enter to continue after copy boot.bak to boot"
@@ -138,24 +141,27 @@ chroot $chrootdir /bin/bash <<EOF
 
 ######################################################
 # System delete not needed packages and cleanup
-# apt update and upgrade don't work. Error loding module and hciuart.service
+# 
 ######################################################
-read -p "Before apt -y update"
-apt -y update 
-read -p "Before apt -y upgrade"
-apt -y upgrade 
-read -p "Before apt -y install linux-image"
-apt -y install linux-image
-read -p "Before apt --fix-broken install"
-apt --fix-broken install
-apt purge -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
-apt purge -y influxdb grafana-server
-apt -y autoremove 
-apt -y clean 
-apt -y autoclean 
+apt -y update && apt -y upgrade && apt -y install linux-image && apt --fix-broken install
+
+#apt -y remove timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
+apt -y remove influxdb grafana-rpi sysstat stress bareos-common bareos-filedaemon check-mk-agent subversion
+
+# C++
+#apt -y remove g++-8 g++ gcc-4.6-base gcc-4.7-base gcc-4.8-base gcc-4.9-base gcc-5-base gcc-6-base gcc-6 gcc-7-base gcc-8-base gcc-8 gcc gdb 
+# Fortran
+#apt -y remove gfortran-6 gfortran-8 gfortran
+# Old python version
+#apt -y remove python2-minimal python2.7-minimal python2.7 python2
+# Pango
+#apt -y remove libpango-1.0-0 libpangocairo-1.0-0 libpangoft2-1.0-0
+
+
+apt -y autoremove && apt -y clean && apt -y autoclean 
 
 ######################################################
-#  Pip update
+#  Pip upgrade and update packages
 ######################################################
 
 pip install --upgrade pip
@@ -175,6 +181,12 @@ find /var/cache/ -type f -exec rm "{}" \;
 find /var/www/logs/ -type f -exec rm "{}" \;
 find /tmp/ -type f -exec rm "{}" \;
 find /root/.cache/ -type f -exec rm "{}" \;
+
+rm -r /opt/git
+rm -r /opt/GPIO-Test
+rm -r /opt/MCP3204
+rm -r /opt/vc
+
 
 ######################################################
 # Delete personal files (ssh keys ...)
@@ -198,14 +210,36 @@ sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
 #sed -i "s/rpi-Pi-Ager-Test/rpi-Pi-Ager/g" /etc/hosts
 raspi-config nonint do_hostname rpi-Pi-Ager
 
+# Restore /etc/wpa_supplicant/wpa_supplicant.conf
+mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
+
+# Force password change for root
+chage -d 0 root
+
+######################################################
+# remove obsolete files and direcectories 
+######################################################
 # remove git repository
 rm /opt/git -rf
+
+# remove obsolete direcectories after upgrade
+rm -r /boot.bak
+rm -r /lib/modules.bak
+#PRUNE_MODULES=1 sudo rpi-update
+
+# Restore /boot(setup.txt
+#mv /boot/setup.txt.org /boot/setup.txt
+
+# Remove obsolete systemd start files
+rm /etc/systemd/system/bacula-fd.service
+
 
 EOF
 
 #read -p "Press enter to continue after executin script"
-echo "Copy $mountdir/boot/ to $mountdir/boot.bak/"
-rsync -a --info=progress2 "$mountdir/boot/" "$mountdir/boot.bak/"
+#echo "Copy $mountdir/boot/ to $mountdir/boot.bak/"
+#rsync -a --info=progress2 "$mountdir/boot/" "$mountdir/boot.bak/"
+
 for i in dev/pts proc sys dev
 do
     umount $mountdir/$i

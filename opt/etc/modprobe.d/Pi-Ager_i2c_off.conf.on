@@ -1,0 +1,6 @@
+# File for deactivate the i2c bus and use the 1wire bus on GPIO17 / GPIO27
+# If this file has the extension .conf this modules are not loaded
+blacklist spi-bcm2708
+blacklist i2c-bcm2708
+blacklist i2c-dev
+blacklist i2c_algo_bit
