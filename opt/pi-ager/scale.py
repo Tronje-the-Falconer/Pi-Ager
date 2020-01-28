@@ -12,14 +12,14 @@ import scale_loop
 import pi_ager_database
 import pi_ager_names
 #import pi_ager_logging 
-from pi_ager_cl_alarm import cl_fact_logic_alarm
-from pi_ager_cl_messenger import cl_fact_logic_messenger
+from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
+from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from main.pi_ager_cl_logger import cl_fact_logger
 
 exception_known = True
 
 try:
-    cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
+    cl_fact_logger.get_instance().debug('logging initialised __________________________')
 
     # logger.info("Start scale loop")
     cl_fact_logger.get_instance().info("Start scale loop")

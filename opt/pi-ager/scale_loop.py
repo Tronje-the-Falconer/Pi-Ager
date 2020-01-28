@@ -3,12 +3,9 @@ import time
 from hx711 import Scale
 import pi_ager_database
 import pi_ager_names
-from pi_ager_logging import create_logger
+from main.pi_ager_cl_logger import cl_fact_logger
 
-global logger
-
-logger = create_logger(__name__)
-logger.debug('logging initialised')
+cl_fact_logger.get_instance()
 
 def tara_scale(scale, tara_key, data_table, calibrate_key, offset, settings_table):
     global logger
@@ -123,7 +120,7 @@ def doScaleLoop():
     scale2 = Scale(source=None, samples=int(scale2_settings[pi_ager_names.samples_key]), spikes=int(scale2_settings[pi_ager_names.spikes_key]), sleep=scale2_settings[pi_ager_names.sleep_key], dout=pi_ager_names.gpio_scale2_data, pd_sck=pi_ager_names.gpio_scale2_sync, gain=int(scale2_settings[pi_ager_names.gain_key]), bitsToRead=int(scale2_settings[pi_ager_names.bits_to_read_key]))
 
     while True:
-        logger.debug('doScaleLoop() ' + time.strftime('%H:%M:%S', time.localtime()))
+        cl_fact_logger.get_instance().debug('doScaleLoop() ' + time.strftime('%H:%M:%S', time.localtime()))
         scale1.setReferenceUnit(pi_ager_database.get_table_value(scale1_settings_table, pi_ager_names.referenceunit_key))
         scale2.setReferenceUnit(pi_ager_database.get_table_value(scale2_settings_table, pi_ager_names.referenceunit_key))
         
