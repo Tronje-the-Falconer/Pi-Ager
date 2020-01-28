@@ -144,9 +144,7 @@ chroot $chrootdir /bin/bash <<EOF
 apt -y update && apt -y upgrade && apt -y install linux-image && apt --fix-broken install
 apt remove -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
 apt remove -y influxdb grafana-rpi sysystat stress bareos-common bareos-filedaemon check-mk-agent subversion
-apt -y autoremove 
-apt -y clean 
-apt -y autoclean 
+apt -y autoremove && apt -y clean &&  apt -y autoclean 
 
 ######################################################
 #  Pip update
@@ -170,6 +168,11 @@ find /var/www/logs/ -type f -exec rm "{}" \;
 find /tmp/ -type f -exec rm "{}" \;
 find /root/.cache/ -type f -exec rm "{}" \;
 
+rm -r /opt/git
+rm -r /opt/GPIO-Test
+rm -r /opt/MCP3204
+rm -r /opt/vc
+
 ######################################################
 # Delete personal files (ssh keys ...)
 ######################################################
@@ -192,8 +195,14 @@ sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
 #sed -i "s/rpi-Pi-Ager-Test/rpi-Pi-Ager/g" /etc/hosts
 raspi-config nonint do_hostname rpi-Pi-Ager
 
-# remove git repository
-rm /opt/git -rf
+######################################################
+#Force password change for user root
+######################################################
+chage -d 0 root
+
+######################################################
+# move needed settings
+######################################################
 
 EOF
 
