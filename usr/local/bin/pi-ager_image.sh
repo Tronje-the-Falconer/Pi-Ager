@@ -189,6 +189,15 @@ rm -r /boot.bak
 rm -r /lib/modules.bak
 #PRUNE_MODULES=1 sudo rpi-update
 
+# remove obsolete systemd start files
+rm /etc/systemd/system bareos-fd.service
+rm /etc/systemd/system bacula-fd.service
+rm /etc/systemd/system bareos-filedaemon.service
+rm /etc/systemd/system 'check_mk@.service'
+rm /etc/systemd/system check_mk.socket
+rm /etc/systemd/system haveged.service
+rm /etc/systemd/system influxd.service
+
 ######################################################
 # Delete personal files (ssh keys ...)
 ######################################################
@@ -227,6 +236,9 @@ chage -d 0 root
 
 # Restore /etc/wpa_supplicant/wpa_supplicant.conf
 mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
+
+# Restore /var/.htcredentials
+mv /var/.htcredentials.org /var/.htcredentials
 
 EOF
 
