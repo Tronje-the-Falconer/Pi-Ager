@@ -190,20 +190,20 @@ rm -r /lib/modules.bak
 #PRUNE_MODULES=1 sudo rpi-update
 
 # remove obsolete systemd start files
-rm /etc/systemd/system bareos-fd.service
-rm /etc/systemd/system bacula-fd.service
-rm /etc/systemd/system bareos-filedaemon.service
-rm /etc/systemd/system 'check_mk@.service'
-rm /etc/systemd/system check_mk.socket
-rm /etc/systemd/system haveged.service
-rm /etc/systemd/system influxd.service
+rm /etc/systemd/system/bareos-fd.service
+rm /etc/systemd/system/bacula-fd.service
+rm /etc/systemd/system/bareos-filedaemon.service
+rm /etc/systemd/system/'check_mk@.service'
+rm /etc/systemd/system/check_mk.socket
+rm /etc/systemd/system/haveged.service
+rm /etc/systemd/system/influxd.service
 
 ######################################################
 # Delete personal files (ssh keys ...)
 ######################################################
 # root user
-#rm -f /root/.ssh/authorized_keys
-#rm -f /root/.ssh/known_hosts
+rm -f /root/.ssh/authorized_keys
+rm -f /root/.ssh/known_hosts
 
 # pi user
 rm -f /home/pi/.ssh/authorized_keys
@@ -216,8 +216,6 @@ rm -f /home/pi/.bash_history
 sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
 
 # change hostname
-#sed -i "s/rpi-Pi-Ager-Test/rpi-Pi-Ager/g" /etc/hostname
-#sed -i "s/rpi-Pi-Ager-Test/rpi-Pi-Ager/g" /etc/hosts
 raspi-config nonint do_hostname rpi-Pi-Ager
 
 ######################################################
@@ -225,14 +223,9 @@ raspi-config nonint do_hostname rpi-Pi-Ager
 ######################################################
 chage -d 0 root
 
-
-
 ######################################################
 # move needed settings
 ######################################################
-
-# Restore /boot(setup.txt
-#mv /boot/setup.txt.org /boot/setup.txt
 
 # Restore /etc/wpa_supplicant/wpa_supplicant.conf
 mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
