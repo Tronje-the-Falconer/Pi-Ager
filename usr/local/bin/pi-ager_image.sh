@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script-Name: pi-ager_image
-# Version    : 0.0.3
+# Version    : 0.0.5
 # Autor      : DerBurgermeister
 # Datum      : 11.01.2020
 # Dieses Script erstellt aus einem Backup ein Image. Nur für internen Gebrauch
@@ -146,7 +146,7 @@ chroot $chrootdir /bin/bash <<EOF
 
 apt -y update && apt -y upgrade && apt -y install linux-image && apt --fix-broken install
 apt remove -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
-apt remove -y influxdb grafana-rpi syssstat stress bareos-common bareos-filedaemon check-mk-agent subversion
+apt remove -y influxdb grafana-rpi sysstat stress bareos-common bareos-filedaemon check-mk-agent subversion
 apt -y autoremove && apt -y clean &&  apt -y autoclean 
 
 # C++
@@ -184,6 +184,10 @@ rm -r /opt/git
 rm -r /opt/GPIO-Test
 rm -r /opt/MCP3204
 rm -r /opt/vc
+# remove obsolete direcectories after upgrade
+rm -r /boot.bak
+rm -r /lib/modules.bak
+#PRUNE_MODULES=1 sudo rpi-update
 
 ######################################################
 # Delete personal files (ssh keys ...)
@@ -212,15 +216,20 @@ raspi-config nonint do_hostname rpi-Pi-Ager
 ######################################################
 chage -d 0 root
 
+
+
 ######################################################
 # move needed settings
 ######################################################
 
+# Restore /boot(setup.txt
+#mv /boot/setup.txt.org /boot/setup.txt
+
+# Restore /etc/wpa_supplicant/wpa_supplicant.conf
+mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
+
 EOF
 
-#read -p "Press enter to continue after executin script"
-echo "Copy $mountdir/boot/ to $mountdir/boot.bak/"
-rsync -a --info=progress2 "$mountdir/boot/" "$mountdir/boot.bak/"
 for i in dev/pts proc sys dev
 do
     umount $mountdir/$i
