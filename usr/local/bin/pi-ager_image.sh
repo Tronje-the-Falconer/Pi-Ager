@@ -5,6 +5,9 @@
 # Autor      : DerBurgermeister
 # Datum      : 11.01.2020
 # Dieses Script erstellt aus einem Backup ein Image. Nur für internen Gebrauch
+# Vorher auf dem Source System noch folgende Befehle ausführen:
+# apt -y update && apt -y upgrade && apt -y install linux-image && apt --fix-broken install
+# Grund: Bei einem Kernel Upgrade gibt es Probleme
 #####################################################################
 #Variablen
 #####################################################################
@@ -112,10 +115,10 @@ echo "##########################################################################
 mountdir=$(mktemp -d)
 
 mount "$loopback" "$mountdir"
-read -p "Press enter to continue after mounting $loopback to $mountdir"
+#read -p "Press enter to continue after mounting $loopback to $mountdir"
 
 mount -t msdos "$loopback_boot" "$mountdir/boot"
-read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
+#read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
 #echo "Copy $mountdir/boot.bak/ to $mountdir/boot/"
 #rsync -a --info=progress2 "$mountdir/boot.bak/" "$mountdir/boot/"
 #read -p "Press enter to continue after copy boot.bak to boot"
@@ -143,11 +146,20 @@ chroot $chrootdir /bin/bash <<EOF
 
 apt -y update && apt -y upgrade && apt -y install linux-image && apt --fix-broken install
 apt remove -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol
-apt remove -y influxdb grafana-rpi sysystat stress bareos-common bareos-filedaemon check-mk-agent subversion
+apt remove -y influxdb grafana-rpi syssstat stress bareos-common bareos-filedaemon check-mk-agent subversion
 apt -y autoremove && apt -y clean &&  apt -y autoclean 
 
+# C++
+#apt remove -y g++-8/stable g++ gcc-4.6-base gcc-4.7-base gcc-4.8-base gcc-4.9-base gcc-5-base gcc-6-base gcc-6 gcc-7-base gcc-8-base gcc-8 gcc gdb 
+# Fortran
+apt remove -y gfortran-6 gfortran-8 gfortran
+# Old python version
+apt remove -y python2-minimal python2.7-minimal python2.7 python2
+# Pango
+apt remove -y libpango-1.0-0 libpangocairo-1.0-0 libpangoft2-1.0-0
+
 ######################################################
-#  Pip update
+# Pip upgrade and update packages
 ######################################################
 
 pip install --upgrade pip
