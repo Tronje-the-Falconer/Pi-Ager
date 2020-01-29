@@ -13,9 +13,7 @@ import pi_ager_paths
 # import pi_ager_logging
 
 from main.pi_ager_cl_logger import cl_fact_logger
-# Lock for concurrent database access
-from ilock import ILock, ILockException 
-global ILock
+
 global cursor
 global connection
 
@@ -85,14 +83,8 @@ def execute_query(command):
     global cursor
     global connection
     
-    #logger.debug('Locking pi_ager database access')
-    try:
-        with ILock('pi_ager', timeout=15):
-            cursor.execute(command)
-            connection.commit()
-    except ILockException as cx_error:
-        cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
-    #logger.debug('Unlocking pi_ager database access')
+    cursor.execute(command)
+    connection.commit()
         
 def close_database():
     """
