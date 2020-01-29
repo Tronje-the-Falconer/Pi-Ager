@@ -63,7 +63,8 @@ class HX711:
         read_repeat_counter_max = 10
         while (read_repeat_counter <= read_repeat_counter_max):
             read_repeat_counter += 1
-            GPIO.output(self.PD_SCK, False)  # start by setting the pd_sck to 0
+#            GPIO.output(self.PD_SCK, False)  # start by setting the pd_sck to 0
+            self.reset()                      # start with reset
             ready_counter = 0
             ready_counter_max = 20
             while (not self.isReady() and ready_counter <= ready_counter_max):
@@ -72,7 +73,7 @@ class HX711:
             
             if ready_counter == ready_counter_max:  # if counter reached max value then try again
 #                print("wait for ready error")
-                self.reset()
+#                self.reset()
                 continue
 
             unsignedValue = 0
@@ -86,7 +87,7 @@ class HX711:
                 if ((end_counter - start_counter) >= 0.00010):  # choose 100 us, zero not precise enough, check if the hx 711 did not turn off...
                     timing_error = True
 #                    print("Timing error read data")
-                    self.reset()
+#                    self.reset()
                     break
 #                bitValue = GPIO.input(self.DOUT)
                 unsignedValue = unsignedValue << 1
@@ -111,7 +112,7 @@ class HX711:
             if timing_error == True:    # retry
                 continue
                
-            time.sleep(0.1)    # next conversion ends after 100ms at a conversion rate of 10 Hz               
+#            time.sleep(0.1)    # next conversion ends after 100ms at a conversion rate of 10 Hz               
             value = self.correctTwosComplement(unsignedValue)
             if (value == -1):  # some time 0xffffff is read from hx711, reading failed
                 continue
