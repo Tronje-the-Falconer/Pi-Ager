@@ -56,7 +56,7 @@ def autostart_loop():
                 doMainLoop()
             elif status_pi_ager == 1:
                 doMainLoop()
-            pi_ager_logging.check_website_logfile()
+            cl_fact_logger.get_instance().check_website_logfile()
             time.sleep(5)
     except Exception as cx_error:
         cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
