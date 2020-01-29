@@ -9,7 +9,6 @@ from main.pi_ager_cl_logger import cl_fact_logger
 #cl_fact_logger.get_instance()
 
 def tara_scale(scale, tara_key, data_table, calibrate_key, offset, settings_table):
-    cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
     cl_fact_logger.get_instance().debug('performing tara')
     #scale.reset()
     #scale.tare()
@@ -37,7 +36,6 @@ def tara_scale(scale, tara_key, data_table, calibrate_key, offset, settings_tabl
     scale_measures(scale, tara_measuring_endtime, data_table, 1, tara_key, calibrate_key, newoffset, settings_table)
 
 def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, tara_key, calibrate_scale_key, offset, settings_table):
-    cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
     cl_fact_logger.get_instance().debug('scale_measures()')
     measure_start_time = pi_ager_database.get_current_time()
     
@@ -64,14 +62,13 @@ def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, ta
     cl_fact_logger.get_instance().debug('measurement performed')
 
 def get_scale_settings(scale_setting_rows):
-    cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+   
     scale_settings = {}
     for scale_setting_row in scale_setting_rows:
         scale_settings[scale_setting_row[pi_ager_names.key_field]] = scale_setting_row[pi_ager_names.value_field]
     return scale_settings
     
 def get_first_calibrate_measure(scale, scale_settings_table, calibrate_scale_key):
-    cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
     # scale.setReferenceUnit(1)
     scale.setReferenceUnit(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.referenceunit_key))
     scale.setSamples(int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_refunit_tara_key)))
@@ -86,7 +83,6 @@ def get_first_calibrate_measure(scale, scale_settings_table, calibrate_scale_key
     return calibrate_value_before_weight
     
 def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table, calibrate_value_first_measure):
-    cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
     # scale.setReferenceUnit(1)
     old_ref_unit = pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.referenceunit_key)
     scale.setReferenceUnit(old_ref_unit)
@@ -107,7 +103,7 @@ def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table, c
     scale.setSpikes(int(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.spikes_key)))
 
 def doScaleLoop():
-    cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+    
     scale1_settings_table = pi_ager_names.settings_scale1_table
     scale1_table = pi_ager_names.data_scale1_table
     scale2_settings_table = pi_ager_names.settings_scale2_table
