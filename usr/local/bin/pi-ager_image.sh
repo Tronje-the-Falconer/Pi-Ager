@@ -236,8 +236,8 @@ mv /var/.htcredentials.org /var/.htcredentials
 # SQLite3 changes
 ######################################################
 
-sqlite3 /var/www/config/pi-ager.sqlite3 "update debug set value = 20 where key = loglevel_file"
-sqlite3 /var/www/config/pi-ager.sqlite3 "update debug set value = 20 where key = loglevel_console"
+sqlite3 /var/www/config/pi-ager.sqlite3 "update debug set value = 20 where key = 'loglevel_file'"
+sqlite3 /var/www/config/pi-ager.sqlite3 "update debug set value = 20 where key = 'loglevel_console'"
 sqlite3 /var/www/config/pi-ager.sqlite3 "delete from nfs_backup"
 sqlite3 /var/www/config/pi-ager.sqlite3 "delete from alarm"
 sqlite3 /var/www/config/pi-ager.sqlite3 "delete from email_server"
