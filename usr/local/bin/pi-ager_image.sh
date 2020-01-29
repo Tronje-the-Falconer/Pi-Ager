@@ -266,7 +266,7 @@ else
 	rm -rf $mountdir
 	
 	# Shrink and zip image
-	pishrink.sh -r -z ${BACKUP_PFAD}/$img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img.zip 
+	pishrink.sh -r -z ${BACKUP_PFAD}/$img #${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img.zip 
 	# Backup umbenennen mit Datum
 	#mv ${BACKUP_PFAD}/PiAger_image.img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img
 	echo "The image ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img was successfully created."
