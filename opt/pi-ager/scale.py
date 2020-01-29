@@ -33,7 +33,7 @@ except KeyboardInterrupt:
 except Exception as cx_error:
     
     #Create factory for messanger, get from factory the instance of the messenger, send messages in one line
-    exception_known = cl_fact_logic_messenger().get_instance().send(cx_error, "Error in doScaleLoop()")
+    #exception_known = cl_fact_logic_messenger().get_instance().send(cx_error, "Error in doScaleLoop()")
     pi_ager_database.write_current_value(pi_ager_names.calibrate_scale1_key,0)
     pi_ager_database.write_current_value(pi_ager_names.calibrate_scale2_key,0)
     pi_ager_database.write_current_value(pi_ager_names.calibrate_weight_key,0)
