@@ -31,7 +31,6 @@ BACKUP_ANZAHL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select number_of_backup
 # Name des Backup
 BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from nfs_backup where active = 1")
 
-
 # ENDE VARIABLEN
  
 #####################################################################
@@ -232,6 +231,17 @@ mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplican
 
 # Restore /var/.htcredentials
 mv /var/.htcredentials.org /var/.htcredentials
+
+######################################################
+# SQLite3 changes
+######################################################
+
+sqlite3 /var/www/config/pi-ager.sqlite3 <<EOS
+	"update debug set loglevel_file = 20"
+	"update debug set loglevel_console = 20"
+
+EOS
+
 
 EOF
 
