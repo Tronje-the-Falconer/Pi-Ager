@@ -265,7 +265,7 @@ else
 	rm -rf $mountdir/boot
 	rm -rf $mountdir
 
-	if [ 1 == 1]	
+	if [ 1 == 1 ]
 	then
 		# Shrink image
 		pishrink.sh -r ${BACKUP_PFAD}/$img 
