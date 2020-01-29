@@ -11,6 +11,8 @@ sys.settrace
 import scale_loop
 import pi_ager_database
 import pi_ager_names
+import pi_ager_gpio_config
+
 #import pi_ager_logging 
 from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
