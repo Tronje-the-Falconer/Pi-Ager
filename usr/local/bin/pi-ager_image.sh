@@ -264,13 +264,20 @@ then
 else
 	rm -rf $mountdir/boot
 	rm -rf $mountdir
-	
-	# Shrink and zip image
-	# Shrink and zip image
-	pishrink.sh -r -z ${BACKUP_PFAD}/$img 
-	#${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img.zip.
-	# Backup umbenennen mit Datum
-	mv ${BACKUP_PFAD}/PiAger_image.img.gz ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img.gz
+
+	if [ 1 == 1]	
+	then
+		# Shrink image
+		pishrink.sh -r ${BACKUP_PFAD}/$img 
+		# Backup umbenennen mit Datum
+		mv ${BACKUP_PFAD}/$img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img.gz
+	else	
+		# Shrink and zip image
+		pishrink.sh -r -z ${BACKUP_PFAD}/$img 
+		#${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img.zip.
+		# Backup umbenennen mit Datum
+		mv ${BACKUP_PFAD}/PiAger_image.img.gz ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img.gz
+	fi	
 	echo "The image ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img.gz was successfully created."
 
 	
