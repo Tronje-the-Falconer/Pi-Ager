@@ -239,7 +239,11 @@ mv /var/.htcredentials.org /var/.htcredentials
 sqlite3 /var/www/config/pi-ager.sqlite3 <<EOS
 	"update debug set loglevel_file = 20"
 	"update debug set loglevel_console = 20"
-
+	"delete from nfs_backup"
+	"delete from alarm"
+	"delete from email_server"
+	"delete from email_recipient"
+	"delete from messenger"
 EOS
 
 
