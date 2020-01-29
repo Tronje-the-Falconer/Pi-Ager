@@ -3,6 +3,7 @@ import time
 from hx711 import Scale
 import pi_ager_database
 import pi_ager_names
+import pi_ager_gpio_config
 from main.pi_ager_cl_logger import cl_fact_logger
 
 cl_fact_logger.get_instance()
