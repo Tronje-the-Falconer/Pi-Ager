@@ -31,7 +31,7 @@ def tara_scale(scale, tara_key, data_table, calibrate_key, offset, settings_tabl
     scale.setSamples(int(pi_ager_database.get_table_value(settings_table, pi_ager_names.samples_key)))
     scale.setSpikes(int(pi_ager_database.get_table_value(settings_table, pi_ager_names.spikes_key)))
     
-    logger.debug('tara performed - runnig control-measurement')
+    cl_fact_logger.get_instance().debug('tara performed - runnig control-measurement')
     # im Anschluss eine Kontrollmessung machen
     scale_measures(scale, tara_measuring_endtime, data_table, 1, tara_key, calibrate_key, newoffset, settings_table)
 

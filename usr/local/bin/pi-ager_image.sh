@@ -227,7 +227,9 @@ chage -d 0 root
 ######################################################
 
 # Restore /etc/wpa_supplicant/wpa_supplicant.conf
+cp /etc/wpa_supplicant/wpa_supplicant.conf.org /boot/wpa_supplicant.conf
 mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
+ 
 
 # Restore /var/.htcredentials
 mv /var/.htcredentials.org /var/.htcredentials
