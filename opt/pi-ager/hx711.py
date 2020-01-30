@@ -7,6 +7,7 @@
 """
 
 from statistics import mean as pi_mean
+from statistics import stdev as pi_stdev
 import time
 import RPi.GPIO as GPIO
 
@@ -188,20 +189,43 @@ class Scale:
         # cut to old values
         self.history = self.history[-self.samples:]
 
-        avg = pi_mean(self.history)
-        deltas = sorted([abs(i-avg) for i in self.history])
-
-        if len(deltas) < self.spikes:
-            max_permitted_delta = deltas[-1]
+        # if more than 3 samples in history, sort values by magnitude
+        # and remove min and max value
+        if (len(self.history) > 3):
+             temp_hist = sorted(self.history)
+             temp_hist = temp_hist[1:len(temp_hist) - 1]
         else:
-            max_permitted_delta = deltas[-self.spikes]
+             temp_hist = self.history
+             
+        avg = pi_mean(temp_hist)
+        if (len(temp_hist) < 2):
+            sigma = 0
+        else:
+            sigma = pi_stdev(temp_hist)
 
-        valid_values = list(filter(
-            lambda val: abs(val - avg) <= max_permitted_delta, self.history
-        ))
+#        deltas = sorted([abs(i-avg) for i in temp_hist])
+
+#        if len(deltas) < self.spikes:
+#            max_permitted_delta = deltas[-1]
+#        else:
+#            max_permitted_delta = deltas[-self.spikes]
+        
+#        print("max_permitted_delta : %d, avg : %.2f, sigma : %.2f" % (max_permitted_delta, avg, sigma))
+        if (len(temp_hist) < 2):
+           valid_values = temp_hist
+        else:
+           valid_values = list(filter(
+               lambda val: abs(val - avg) <= sigma, temp_hist
+           ))
+
+#        if (len(valid_values) < self.samples):
+#           print("valid_values : %d" % len(valid_values))
 
         if len(valid_values) == 0:
            return avg
+
+#        print(*temp_hist)
+#        print(*valid_values)
 
         avg = pi_mean(valid_values)
 
