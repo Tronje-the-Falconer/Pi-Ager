@@ -105,10 +105,12 @@ case "$1" in
         /usr/local/bin/gpio -g write $gpio_dehumidifier 1
     ;;
     reboot) # reboot
-        reboot -t 10
+        sleep 10
+        reboot
     ;;
     shutdown) #Shutdown 
-        shutdown -h -t 10
+        sleep 10
+        shutdown -h
     ;;
     savewebcampicture) # macht ein Bild mit der Webcam
         #curl -s -m 5 -o /var/www/images/webcam/snap_$DATE.jpg http://$MYIP:8080/?action=snapshot
@@ -124,12 +126,14 @@ case "$1" in
     sensorbusi2c) #Sensorbus wurde geaendert auf i2c
 ####### hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
         rm -r /etc/modprobe.d/Pi-Ager_i2c_off.conf
-        shutdown -h -t 10 
+        sleep 10
+        shutdown -h
     ;;
     sensorbus1wire) #Sensorbus wurde geaendert auf 1wire
 ####### hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln
         cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
-        shutdown -h -t 10
+        sleep 10
+        shutdown -h
     ;;
     *) echo "ERROR: invalid parameter: $1 (for $0)"; exit 1 #Fehlerbehandlung
     ;;
