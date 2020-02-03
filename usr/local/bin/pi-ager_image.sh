@@ -200,6 +200,13 @@ rm /etc/systemd/system/check_mk.socket
 rm /etc/systemd/system/haveged.service
 rm /etc/systemd/system/influxd.service
 
+rm /etc/init.d/bacula-fd
+rm /etc/init.d/bareos-fd
+rm /etc/init.d/grafana-server
+rm /etc/init.d/haveged
+rm /etc/init.d/smartmontools
+
+
 ######################################################
 # Delete personal files (ssh keys ...)
 ######################################################
