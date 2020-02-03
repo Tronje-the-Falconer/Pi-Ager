@@ -246,6 +246,20 @@ delete FROM alarm;
 delete FROM email_server;
 delete FROM email_recipient;
 delete FROM messenger;
+delete FROM scale1_data;
+delete FROM scale2_data;
+delete FROM sensor_humidity_data;
+delete FROM sensor_temperature_data;
+delete FROM uv_status;
+delete FROM circulating_air_status;	
+delete FROM cooling_compressor_status;	
+delete FROM current_values;
+delete FROM dehumidifier_status;
+delete FROM exhaust_air_status;
+delete FROM heater_status;
+delete FROM humidifier_status;
+delete FROM light_status;
+
 END_SQL
 
 EOF
