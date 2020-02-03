@@ -179,10 +179,13 @@ find /var/www/logs/ -type f -exec rm "{}" \;
 find /tmp/ -type f -exec rm "{}" \;
 find /root/.cache/ -type f -exec rm "{}" \;
 
+# delete obsolete /opt direcories
 rm -r /opt/git
 rm -r /opt/GPIO-Test
 rm -r /opt/MCP3204
 rm -r /opt/vc
+
+
 # remove obsolete direcectories after upgrade
 rm -r /boot.bak
 rm -r /lib/modules.bak
@@ -207,6 +210,18 @@ rm -f /root/.ssh/known_hosts
 # pi user
 rm -f /home/pi/.ssh/authorized_keys
 rm -f /home/pi/.bash_history
+rm -f /home/pi/NOAA_data.txt
+rm -f /home/pi/pishrink.log
+rm -f /home/pi/.influx_history
+rm -f /home/pi/.gitconfig
+rm -f /home/pi/.gnupg/
+rm -f /home/pi/.lesshst
+rm -f /home/pi/.selected_editor
+rm -f /home/pi/setup.txt
+rm -f /home/pi/.sqlite_history
+rm -f /home/pi/.wget-hsts
+rm -f /home/pi/subversion
+
 
 ######################################################
 # Change some settings
