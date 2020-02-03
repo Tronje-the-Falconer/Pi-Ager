@@ -8,6 +8,7 @@
         $connection = new SQLite3("/var/www/config/pi-ager.sqlite3");
         $connection->busyTimeout(10000);
         //$connection->enableExceptions(true);
+        $connection->exec('PRAGMA journal_mode = wal;');
     }
 
     function execute_query($command){

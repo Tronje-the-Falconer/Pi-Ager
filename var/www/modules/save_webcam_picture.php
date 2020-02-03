@@ -1,14 +1,16 @@
 <?php
 $latest_ctime = 0;
-$latest_filename = 'logo.png';
+$latest_filename = "logo.png";
 $webcam_path = "/var/www/images/webcam/";
 $jpgfiles = "/var/www/images/webcam/*.jpg";
 $d = dir($webcam_path);      # find latest snapshot image, is only 1 or none
 while (false !== ($entry = $d->read())) {
-    $filepath = "{$webcam_path}{$entry}";
-    if (is_file($filepath) && filectime($filepath) > $latest_ctime) {
+    #       echo "entry: $entry <br/>";
+    $filepath = $webcam_path . $entry;
+    if (is_file($filepath) && (pathinfo($filepath, PATHINFO_EXTENSION) == "jpg") && (filectime($filepath) > $latest_ctime)) {
         $latest_ctime = filectime($filepath);
         $latest_filename = $entry;
+        #         echo "latest: $latest_filename <br/>";
     }
 }
 if (isset ($_POST['save_webcam_picture'])){
