@@ -2,8 +2,9 @@
 Description=Start main routine of Pi-Ager
 
 [Service]
-Type=oneshot
+Type=simple
 ExecStart=python3 /opt/pi-ager/main.py 2>&1
+PIDFile=/tmp/pi-ager_main.pid
 
 [Install]
 Alias=pi-ager
