@@ -95,8 +95,7 @@ then
         echo "Config gelöscht"
     fi
 fi
-systemctl disable setup_reifeschrank # Setupscript in Startroutine deaktivieren (eigentlich nicht nötig, da One-Shot)
-ifup wlan0
+systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren 
 
 # reboot wenn 
 if [ -z "$reboot" ]         #wenn fehlt oder ""
