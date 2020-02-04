@@ -115,7 +115,7 @@
 
     function get_last_change($table, $key)
     {
-        global $last_change_field,$id_field;
+        global $last_change_field,$id_field, $last_change;
         
         open_connection();
         if ($key == NULL){
