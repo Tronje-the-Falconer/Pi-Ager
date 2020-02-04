@@ -128,7 +128,7 @@ fi
 # Stoppe Dienste vor Backup
 echo "Stoppe schreibende Dienste!"
 #${DIENSTE_START_STOP} stop
-systemctl stop pi-ager_main pi-ager_scale pi-ager_agingtable
+systemctl stop pi-ager_main pi-ager_scale pi-ager_agingtable &
  
 # Backup mit Hilfe von dd erstellen und im angegebenen Pfad speichern
 echo "erstelle Backup $(date +%H:%M:%S)"
@@ -137,7 +137,7 @@ dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=1M status=progress
 # Starte Dienste nach Backup
 echo "Starte schreibende Dienste wieder!"
 #${DIENSTE_START_STOP} start
-systemctl start pi-ager_main
+systemctl start pi-ager_main &
 sync
 # Starte Shrink
 echo "starte mit PiShrink $(date +%H:%M:%S) pishrink.sh $OPTARAG ${BACKUP_PFAD}/${BACKUP_NAME}.img"
