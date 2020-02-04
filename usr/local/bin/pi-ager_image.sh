@@ -192,19 +192,13 @@ rm -r /lib/modules.bak
 #PRUNE_MODULES=1 sudo rpi-update
 
 # remove obsolete systemd start files
-rm /etc/systemd/system/bareos-fd.service
-rm /etc/systemd/system/bacula-fd.service
-rm /etc/systemd/system/bareos-filedaemon.service
-rm /etc/systemd/system/'check_mk@.service'
-rm /etc/systemd/system/check_mk.socket
-rm /etc/systemd/system/haveged.service
-rm /etc/systemd/system/influxd.service
+systemctl stop chronograf.service bacula-fd.service bareos-filedaemon.service display-manager.service grafana-server.service influxdb.service 
+systemctl stop check_mk@.service check_mk.socket haveget.service smartd.service
+systemctl disable chronograf.service bacula-fd.service bareos-filedaemon.service display-manager.service grafana-server.service influxdb.service 
+systemctl disable check_mk@.service check_mk.socket haveget.service smartd.service
+systemctl daemon-reload
+systemctl reset-failed
 
-rm /etc/init.d/bacula-fd
-rm /etc/init.d/bareos-fd
-rm /etc/init.d/grafana-server
-rm /etc/init.d/haveged
-rm /etc/init.d/smartmontools
 
 
 ######################################################
