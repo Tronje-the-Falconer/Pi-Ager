@@ -131,28 +131,28 @@ echo "Stoppe schreibende Dienste!"
 systemctl -q is-active pi-ager_main
 if [ $? -eq 0 ];
         then
-        PI_AGER_MAIN_ACTIVE = 1
+        PI_AGER_MAIN_ACTIVE=1
         systemctl stop pi-ager_main pi-ager
         else
-        PI_AGER_MAIN_ACTIVE = 0
+        PI_AGER_MAIN_ACTIVE=0
 fi
 
 systemctl -q is-active pi-ager_scale
 if [ $? -eq 0 ];
         then
-        PI_AGER_SCALE_ACTIVE = 1
+        PI_AGER_SCALE_ACTIVE=1
         systemctl stop pi-ager_scale
         else
-        PI_AGER_SCALE_ACTIVE = 0
+        PI_AGER_SCALE_ACTIVE=0
 fi
 
 systemctl -q is-active pi-ager_agintable
 if [ $? -eq 0 ];
         then
-        PI_AGER_AGINGTABLE_ACTIVE = 1
+        PI_AGER_AGINGTABLE_ACTIVE=1
         systemctl stop pi-ager_agingtable
         else
-        PI_AGER_AGINGTABLE_ACTIVE = 0
+        PI_AGER_AGINGTABLE_ACTIVE=0
 fi
 
 
