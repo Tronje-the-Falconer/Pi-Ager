@@ -236,7 +236,7 @@ raspi-config nonint do_hostname rpi-Pi-Ager
 ######################################################
 #Force password change for user root
 ######################################################
-chage -d 0 root
+#chage -d 0 root
 
 ######################################################
 # SQLite3 changes
