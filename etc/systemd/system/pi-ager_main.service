@@ -1,8 +1,10 @@
 [Unit]
 Description=Start main routine of Pi-Ager
+
 [Service]
 Type=oneshot
-ExecStart=python3 /opt/pi-ager/main.py > /dev/null 2>/dev/null &
+ExecStart=python3 /opt/pi-ager/main.py 2>&1
+
 [Install]
 Alias=pi-ager
 WantedBy=multi-user.target
