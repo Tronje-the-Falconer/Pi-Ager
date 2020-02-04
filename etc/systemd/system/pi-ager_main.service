@@ -1,5 +1,6 @@
 [Unit]
 Description=Start main routine of Pi-Ager
+After=network.target
 
 [Service]
 Type=simple

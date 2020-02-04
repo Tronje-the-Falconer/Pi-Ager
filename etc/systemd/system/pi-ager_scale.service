@@ -1,10 +1,12 @@
 [Unit]
-Description=Start agingtable routine of Pi-Ager
+Description=Start scale routine of Pi-Ager
+After=network.target
 
 [Service]
-Type=oneshot
-ExecStart=python3 /opt/pi-ager/agingtable.py 2>&1
+Type=simple
+ExecStart=python3 /opt/pi-ager/scale.py 2>&1
+PIDFile=/tmp/pi-ager_scale.pid
 
 [Install]
-Alias=pi-ager_agingtable
+Alias=pi-ager_scale
 WantedBy=multi-user.target
