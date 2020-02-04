@@ -2,7 +2,7 @@
 Description=Start scale routine of Pi-Ager
 [Service]
 Type=oneshot
-ExecStart=python3 /opt/pi-ager/scale.py
+ExecStart=python3 /opt/pi-ager/agingtable.py > /dev/null 2>/dev/null &
 
 [Install]
 Alias=pi-ager_scale
