@@ -1,0 +1,10 @@
+[Unit]
+Description=Automatsches Installationsscript für pi-ager zum Setzen von Passwörter und WIFI-Zugang, abhängig von setup.txt in /boot
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/setup_pi-ager.sh
+
+[Install]
+Alias=setup_pi-ager
+WantedBy=multi-user.target
