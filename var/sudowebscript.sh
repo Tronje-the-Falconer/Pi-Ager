@@ -22,33 +22,33 @@ DATE=$(date +"%Y-%m-%d_%H%M%S")
 case "$1" in
     startmain) #Starten von main.py
         #python3 /opt/pi-ager/main.py > /dev/null 2>/dev/null &
-    	service pi-ager_main.sh start
+    	systemctl start  pi-ager_main.sh
     	
     ;;
     pkillmain) #Stoppen von Rss.py
-        service pi-ager_main.sh stop
+        systemctl stop pi-ager_main.sh
     ;;
     grepmain) #Überprüfen von Rss.py | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach RSS.py gesucht
         ps ax | grep -v grep | grep main.py
     ;;
     startagingtable) #Starten von agingtable.py
         #python3 /opt/pi-ager/agingtable.py > /dev/null 2>/dev/null &
-    	service pi-ager_agingtable.sh start
+    	systemctl start pi-ager_agingtable.sh
     ;;
     pkillagingtable) #Stoppen von agingtable.py
         #pkill -f agingtable.py
-    	service pi-ager_agingtable.sh stop
+    	systemctl stop pi-ager_agingtable.sh
     ;;
     grepagingtable) #Überprüfen von agintable.py  | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach Reifetab.py gesucht
         ps ax | grep -v grep | grep agingtable.py
     ;;
     startscale) #Starten von scale1.py
         #python3 /opt/pi-ager/scale.py > /dev/null 2>/dev/null &
-    	service pi-ager_scale start
+    	systemctl start pi-ager_scale
     ;;
     pkillscale) #Stoppen von scale1.py
         #pkill -f scale.py
-        service pi-ager_scale stop
+        systemctl stop pi-ager_scale
     ;;
     grepscale) #Überprüfen von scale1.py | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach RSS.py gesucht
         ps ax | grep -v grep | grep scale.py
