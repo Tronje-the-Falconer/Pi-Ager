@@ -196,6 +196,10 @@ systemctl stop chronograf.service bacula-fd.service bareos-filedaemon.service di
 systemctl stop check_mk@.service check_mk.socket haveget.service smartd.service
 systemctl disable chronograf.service bacula-fd.service bareos-filedaemon.service display-manager.service grafana-server.service influxdb.service 
 systemctl disable check_mk@.service check_mk.socket haveget.service smartd.service
+
+ystemctl enable pi-ager_main.service setup_pi-ager.service
+systemctl enable pi-ager_scale.service pi-ager_agingtable.service
+
 systemctl daemon-reload
 systemctl reset-failed
 
