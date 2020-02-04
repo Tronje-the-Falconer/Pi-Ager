@@ -1,5 +1,5 @@
 [Unit]
-Description=Automatsches Installationsscript für pi-ager zum Setzen von Passwörter und WIFI-zugang, abhaengig von setup.txt in /boot
+Description=Automatsches Installationsscript für pi-ager zum Setzen von Passwörter und WIFI-zugang, abhängig von setup.txt in /boot
 
 [Service]
 Type=oneshot
