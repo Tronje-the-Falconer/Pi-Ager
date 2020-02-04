@@ -1,0 +1,9 @@
+[Unit]
+Description=Start agingtable routine of Pi-Ager
+[Service]
+Type=oneshot
+ExecStart=python3 /opt/pi-ager/agingtable.py
+
+[Install]
+Alias=pi-ager_agingtable
+WantedBy=multi-user.target

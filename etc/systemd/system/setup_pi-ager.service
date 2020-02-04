@@ -1,10 +1,10 @@
 [Unit]
-Description=Start main routine of Pi-Ager
+Description=Automatsches Installationsscript für pi-ager zum Setzen von Passwörter und WIFI-Zugang, abhängig von setup.txt in /boot
 
 [Service]
 Type=oneshot
-ExecStart=python3 /opt/pi-ager/main.py
+ExecStart=/usr/local/bin/setup_pi-ager.sh
 
 [Install]
-Alias=pi-ager
+Alias=setup_pi-ager
 WantedBy=multi-user.target
