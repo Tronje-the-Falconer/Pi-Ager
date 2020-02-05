@@ -95,6 +95,7 @@ then
         echo "Config gelöscht"
     fi
 fi
+
 systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren 
 
 # reboot wenn 

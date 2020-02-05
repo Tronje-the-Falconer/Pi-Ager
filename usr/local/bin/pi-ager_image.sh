@@ -200,10 +200,6 @@ systemctl disable check_mk@.service check_mk.socket haveget.service smartd.servi
 systemctl enable pi-ager_main.service setup_pi-ager.service
 systemctl disable pi-ager_scale.service pi-ager_agingtable.service
 
-systemctl daemon-reload
-systemctl reset-failed
-
-
 
 ######################################################
 # Delete personal files (ssh keys ...)
