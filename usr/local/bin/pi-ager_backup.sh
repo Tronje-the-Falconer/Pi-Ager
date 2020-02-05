@@ -132,7 +132,7 @@ systemctl -q is-active pi-ager_main
 if [ $? -eq 0 ];
         then
         PI_AGER_MAIN_ACTIVE=1
-        systemctl stop pi-ager_main pi-ager
+        systemctl stop pi-ager_main
         else
         PI_AGER_MAIN_ACTIVE=0
 fi
