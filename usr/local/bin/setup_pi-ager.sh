@@ -68,16 +68,10 @@ then
         echo "phpliteadmin gesetzt"
     fi
 
-    # settings pass setzen - https://websistent.com/tools/htdigest-generator-tool/ oder python tool
+    # settings pass setzen
     if [ -n "$webguipw" ]         #wenn nicht ""
     then
-        #htpasswd -b /var/.htpasswd reifeschrank $webguipw
-        user = pi-ager
-        realm = Pi-Ager
-        digest="$( printf "%s:%s:%s" "$user" "$realm" "$webguipw" | 
-           md5sum | awk '{print $1}' )"
-
-		sed -i -e "/^$user:$realm:/ c$user:$realm:$digest" "/var/.htcredentials"
+        htpasswd -b /var/.htpasswd reifeschrank $webguipw
         echo "Passwort webgui gesetzt"
     fi
 
@@ -101,11 +95,8 @@ then
         echo "Config gelöscht"
     fi
 fi
+systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren 
 
-systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
-systemctl disable pi-ager_scale.service pi-ager_agingtable.service # Werden manuell gestartet
-systemctl enable pi-ager_main.service 
-systemctl start pi-ager_main.service
 # reboot wenn 
 if [ -z "$reboot" ]         #wenn fehlt oder ""
 then

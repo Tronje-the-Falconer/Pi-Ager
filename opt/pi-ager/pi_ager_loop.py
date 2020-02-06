@@ -125,14 +125,9 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             #sensor_temperature_big = float(sensor_temperature_big)
             sensor_temperature = round(sensor_temperature_big,2)
             sensor_humidity = round(sensor_humidity_big,2)
-            if last_temperature == 0:
-                deviation_temperature = sensor_temperature
-            else:
-                deviation_temperature = abs((sensor_temperature/last_temperature * 100) - 100)
-            if last_humidity == 0:
-                deviation_humidity = sensor_humidity
-            else:
-                deviation_humidity = abs((sensor_humidity/last_humidity * 100) - 100)
+
+            deviation_temperature = abs((sensor_temperature/last_temperature * 100) - 100)
+            deviation_humidity = abs((sensor_humidity/last_humidity * 100) - 100)
             
             if sensor_humidity > 100 or deviation_humidity > 20:
                 if humidity_exception_count < 10:

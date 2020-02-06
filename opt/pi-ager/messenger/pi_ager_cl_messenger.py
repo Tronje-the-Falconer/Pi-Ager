@@ -24,9 +24,6 @@ from main.pi_ager_cl_logger import cl_fact_logger
 from main.pi_ager_cl_database import cl_fact_database_config
 from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
 from messenger.pi_ager_cl_send_email import cl_fact_logic_send_email, cl_logic_send_email
-from messenger.pi_ager_cl_pushover import cl_fact_logic_pushover, cl_logic_pushover
-from messenger.pi_ager_cl_telegram import cl_fact_logic_telegram, cl_logic_telegram
-
                              
 from main.pi_ager_cx_exception import *
 from _ast import Pass
@@ -53,7 +50,6 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         
         self.logic_alarm = cl_fact_logic_alarm().get_instance()
         self.logic_send_email = cl_fact_logic_send_email().get_instance()
-        
         
         self.exception_known = False
     def send(self, subject, message):
@@ -134,10 +130,9 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         """
         # logger.info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
         cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
-        cl_fact_logic_telegram.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
+        
         # logger.info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
         cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
-        cl_fact_logic_pushover.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
         
         if self.exception_known == False:
             cl_fact_logger.get_instance().critical(str(self.cx_error.__class__.__name__ ))
@@ -148,22 +143,8 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         return( str(traceback.format_exc()) )
     def build_alarm_subject(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
-        hostname = socket.gethostname()
-        try:
-            ip = socket.gethostbyname(hostname)
-        except OSError:
-            # Probably name lookup wasn't set up right; skip this test
-            cl_fact_logger.get_instance().debug('name lookup failure')
-        #self.assertTrue(ip.find('.') >= 0, "Error resolving host to ip.")
-        try:
-            hname, aliases, ipaddrs = socket.gethostbyaddr(ip)
-        except OSError:
-            # Probably a similar problem as above; skip this test
-            cl_fact_logger.get_instance().debug('name lookup failure')
-        #all_host_names = [hostname, hname] + aliases
-        #hostname = socket.gethostbyaddr(IP.rstrip())
-        return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager Hostname ' + hname + ' occured')
+        hostname = socket.gethostbyaddr(IP.rstrip())
+        return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager ' + hostname + 'occured')
 
 class cl_db_messenger:
     __o_dirty = True

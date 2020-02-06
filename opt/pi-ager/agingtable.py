@@ -26,7 +26,7 @@ except KeyboardInterrupt:
     pass
 
 except Exception as e:
-    logstring = ('exception occurred') + '!!!'
+    logstring = _('exception occurred') + '!!!'
     #logger.exception(logstring, exc_info = True)
     cl_fact_logger.get_instance().exception(logstring, exc_info = True)
     pass

@@ -178,8 +178,6 @@ find /var/cache/ -type f -exec rm "{}" \;
 find /var/www/logs/ -type f -exec rm "{}" \;
 find /tmp/ -type f -exec rm "{}" \;
 find /root/.cache/ -type f -exec rm "{}" \;
-touch /var/www/logs/logfile.txt
-touch /var/www/logs/pi-ager.log
 
 # delete obsolete /opt direcories
 rm -r /opt/git
@@ -201,6 +199,10 @@ systemctl disable check_mk@.service check_mk.socket haveget.service smartd.servi
 
 systemctl enable pi-ager_main.service setup_pi-ager.service
 systemctl disable pi-ager_scale.service pi-ager_agingtable.service
+
+systemctl daemon-reload
+systemctl reset-failed
+
 
 
 ######################################################

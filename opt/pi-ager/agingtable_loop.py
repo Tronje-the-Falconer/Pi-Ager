@@ -13,7 +13,6 @@ import pi_ager_init
 import pi_ager_names
 #import pi_ager_logging
 from main.pi_ager_cl_logger import cl_fact_logger
-from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 
 # global logger
 # logger = pi_ager_logging.create_logger(__name__)
@@ -48,7 +47,17 @@ def get_sensortype():
     """
     function for reading the sensor type
     """
-    return cl_fact_main_sensor_type.get_instance().get_sensor_type_ui()
+    global sensortype
+    # global logger
+    
+    if sensortype == 1 :
+        sensorname = 'DHT11'
+    elif sensortype == 2 :
+        sensorname = 'DHT22'
+    elif sensortype == 3 :
+        sensorname = 'SHT'
+    
+    return sensorname
 
 def get_duration_sleep(period_days):
     """
