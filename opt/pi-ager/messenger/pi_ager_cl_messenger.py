@@ -24,6 +24,9 @@ from main.pi_ager_cl_logger import cl_fact_logger
 from main.pi_ager_cl_database import cl_fact_database_config
 from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
 from messenger.pi_ager_cl_send_email import cl_fact_logic_send_email, cl_logic_send_email
+from messenger.pi_ager_cl_pushover import cl_fact_logic_pushover, cl_logic_pushover
+from messenger.pi_ager_cl_telegram import cl_fact_logic_telegram, cl_logic_telegram
+
                              
 from main.pi_ager_cx_exception import *
 from _ast import Pass
@@ -50,6 +53,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         
         self.logic_alarm = cl_fact_logic_alarm().get_instance()
         self.logic_send_email = cl_fact_logic_send_email().get_instance()
+        
         
         self.exception_known = False
     def send(self, subject, message):
@@ -130,9 +134,10 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         """
         # logger.info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
         cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
-        
+        cl_fact_logic_telegram.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
         # logger.info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
         cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
+        cl_fact_logic_pushover.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
         
         if self.exception_known == False:
             cl_fact_logger.get_instance().critical(str(self.cx_error.__class__.__name__ ))
