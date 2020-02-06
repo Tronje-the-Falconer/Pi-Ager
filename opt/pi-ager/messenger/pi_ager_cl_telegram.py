@@ -77,7 +77,7 @@ class cl_fact_logic_telegram(ABC):
         """
         Factory method to set the telegram logic instance
         """
-        logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
         cl_fact_logic_telegram.__o_instance = i_instance
         
     @classmethod        
@@ -85,7 +85,7 @@ class cl_fact_logic_telegram(ABC):
         """
         Factory method to get the telegram logic instance
         """
-        logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
         if cl_fact_logic_telegram.__o_instance is not None:
             return(cl_fact_logic_telegram.__o_instance)
         cl_fact_logic_telegram.__o_instance = cl_logic_telegram()
@@ -95,6 +95,6 @@ class cl_fact_logic_telegram(ABC):
         """
         Constructor telegram logic factory
         """
-        logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
         pass    
     
