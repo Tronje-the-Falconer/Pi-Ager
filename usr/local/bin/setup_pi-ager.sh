@@ -96,8 +96,10 @@ then
     fi
 fi
 
-systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren 
-
+systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
+systemctl disable pi-ager_scale.service pi-ager_agingtable.service # Werden manuell gestartet
+systemctl enable pi-ager_main.service 
+systemctl start pi-ager_main.service
 # reboot wenn 
 if [ -z "$reboot" ]         #wenn fehlt oder ""
 then
