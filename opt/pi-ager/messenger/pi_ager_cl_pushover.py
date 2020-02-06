@@ -2,19 +2,10 @@
 from abc import ABC
 import inspect
 import pi_ager_names
-#import pi_ager_logging
 from pushover import Client
-
-
-
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
-
-
-
 import requests
-
-
 
 class cl_logic_pushover:
     def __init__(self):
