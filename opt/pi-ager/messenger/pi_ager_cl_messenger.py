@@ -163,7 +163,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             cl_fact_logger.get_instance().debug('name lookup failure')
         #all_host_names = [hostname, hname] + aliases
         #hostname = socket.gethostbyaddr(IP.rstrip())
-        return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager Hostname ' + hname + ' with IP-Address ' + ipaddrs + ' occured')
+        return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager Hostname ' + hname + ' with IP-Address ' + str(ipaddrs) + ' occured')
 
 class cl_db_messenger:
     __o_dirty = True
