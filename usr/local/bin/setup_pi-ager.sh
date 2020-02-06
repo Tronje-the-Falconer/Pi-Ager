@@ -68,10 +68,16 @@ then
         echo "phpliteadmin gesetzt"
     fi
 
-    # settings pass setzen
+    # settings pass setzen - https://websistent.com/tools/htdigest-generator-tool/ oder python tool
     if [ -n "$webguipw" ]         #wenn nicht ""
     then
-        htpasswd -b /var/.htpasswd reifeschrank $webguipw
+        #htpasswd -b /var/.htpasswd reifeschrank $webguipw
+        user = pi-ager
+        realm = Pi-Ager
+        digest="$( printf "%s:%s:%s" "$user" "$realm" "$webguipw" | 
+           md5sum | awk '{print $1}' )"
+
+		sed -i -e "/^$user:$realm:/ c$user:$realm:$digest" "/var/.htcredentials"
         echo "Passwort webgui gesetzt"
     fi
 

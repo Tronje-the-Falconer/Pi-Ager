@@ -105,8 +105,8 @@ function leet_text($value)
 $cookie_name = 'pla3412';
 
 //whether or not to put the app in debug mode where errors are outputted
-#$debug = false;
-$debug = true;
+$debug = false;
+#$debug = true;
 
 // the user is allowed to create databases with only these extensions
 $allowed_extensions = array('db','db3','sqlite','sqlite3');
