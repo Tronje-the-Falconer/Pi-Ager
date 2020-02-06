@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//opt/pi-ager/main.py=iso-8859-1
+encoding//opt/pi-ager/messenger/pi_ager_cl_messenger.py=utf-8
 encoding//opt/pi-ager/pi_ager_database.py=utf-8
 encoding//opt/pi-ager/pi_ager_database_check.py=UTF-8
 encoding//opt/pi-ager/pi_ager_names.py=utf-8
