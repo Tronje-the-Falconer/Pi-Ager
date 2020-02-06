@@ -31,19 +31,17 @@ class cl_logic_pushover:
         """
         self.user_key = 'ubesc9691hnx7q7p7xfvj93uw1a9wd'
         self.api_token = 'agfreo188gcafdw5s4eo2ujfub57za&user=ubesc9691hnx7q7p7xfvj93uw1a9wd'
-        client = Client(self.user_key, api_token=self.api_token)
+        self.client = Client(self.user_key, api_token=self.api_token)
         
     def execute(self, alarm_message, alarm_subject):
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         self.send_pushover(
-            self.client,
-            self.bot_chatID,
             alarm_subject,
             alarm_message)        
         
-    def send_pushover(self, bot_token,bot_chatID,alarm_subject, alarm_message):
+    def send_pushover(self, alarm_subject, alarm_message):
         """
         Send pushover
         """

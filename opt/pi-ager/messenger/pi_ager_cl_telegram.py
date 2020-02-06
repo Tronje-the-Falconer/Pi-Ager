@@ -28,8 +28,8 @@ class cl_logic_telegram:
         """
         Read telegram setting from the database
         """
-        bot_token = ''
-        bot_chatID = ''
+        self.bot_token = ''
+        self.bot_chatID = ''
         
     def execute(self, alarm_message, alarm_subject):
         # logger.debug(pi_ager_logging.me())
