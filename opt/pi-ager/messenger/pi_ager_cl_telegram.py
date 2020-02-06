@@ -31,7 +31,7 @@ class cl_logic_telegram:
         self.bot_token = ''
         self.bot_chatID = ''
         
-    def execute(self, alarm_message, alarm_subject):
+    def execute(self, alarm_subject, alarm_message):
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         

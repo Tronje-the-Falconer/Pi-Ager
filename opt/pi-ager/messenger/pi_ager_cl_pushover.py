@@ -33,7 +33,7 @@ class cl_logic_pushover:
         self.api_token = 'a3q7krzvz7s6dek5b998j2xqiiq5kv'
         self.client = Client(self.user_key, api_token=self.api_token)
         
-    def execute(self, alarm_message, alarm_subject):
+    def execute(self, alarm_subject, alarm_message):
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
