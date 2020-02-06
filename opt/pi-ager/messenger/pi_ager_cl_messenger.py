@@ -147,6 +147,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return( str(traceback.format_exc()) )
     def build_alarm_subject(self):
+        IP = '127.0.0.1'
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         hostname = socket.gethostbyaddr(IP.rstrip())
         return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager ' + hostname + 'occured')
