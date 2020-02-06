@@ -147,10 +147,23 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return( str(traceback.format_exc()) )
     def build_alarm_subject(self):
-        IP = '127.0.0.1'
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        hostname = socket.gethostbyaddr(IP.rstrip())
-        return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager ' + hostname + 'occured')
+        
+        hostname = socket.gethostname()
+        try:
+            ip = socket.gethostbyname(hostname)
+        except OSError:
+            # Probably name lookup wasn't set up right; skip this test
+            cl_fact_logger.get_instance().debug('name lookup failure')
+        self.assertTrue(ip.find('.') >= 0, "Error resolving host to ip.")
+        try:
+            hname, aliases, ipaddrs = socket.gethostbyaddr(ip)
+        except OSError:
+            # Probably a similar problem as above; skip this test
+            cl_fact_logger.get_instance().debug('name lookup failure')
+        #all_host_names = [hostname, hname] + aliases
+        #hostname = socket.gethostbyaddr(IP.rstrip())
+        return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager ' + hname + 'occured')
 
 class cl_db_messenger:
     __o_dirty = True
