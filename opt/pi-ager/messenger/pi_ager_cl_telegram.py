@@ -48,7 +48,8 @@ class cl_logic_telegram:
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
-        send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + alarm_subject #+ alarm_message
+        send_text = 'https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + alarm_subject + alarm_message
+        send_text.replace("_", "\_")
         cl_fact_logger.get_instance().debug(send_text)
         try:
             response = requests.get(send_text)
