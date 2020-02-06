@@ -29,7 +29,7 @@ class cl_logic_pushover:
         """
         Read pushover setting from the database
         """
-        self.user_key = 'ubesc9691hnx7q7p7xfvj93uw1a9wd'
+        self.user_key =  'ubesc9691hnx7q7p7xfvj93uw1a9wd'
         self.api_token = 'a3q7krzvz7s6dek5b998j2xqiiq5kv'
         self.client = Client(self.user_key, api_token=self.api_token)
         
