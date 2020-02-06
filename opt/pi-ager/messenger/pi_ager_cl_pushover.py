@@ -75,7 +75,7 @@ class cl_fact_logic_pushover(ABC):
         """
         Factory method to set the pushover logic instance
         """
-        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logic_pushover.__o_instance = i_instance
         
     @classmethod        
@@ -83,7 +83,7 @@ class cl_fact_logic_pushover(ABC):
         """
         Factory method to get the pushover logic instance
         """
-        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_logic_pushover.__o_instance is not None:
             return(cl_fact_logic_pushover.__o_instance)
         cl_fact_logic_pushover.__o_instance = cl_logic_pushover()
@@ -93,6 +93,6 @@ class cl_fact_logic_pushover(ABC):
         """
         Constructor pushover logic factory
         """
-        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     
