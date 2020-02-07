@@ -13,6 +13,7 @@ __status__ = "Productive"
 from abc import ABC
 import inspect
 import pi_ager_names
+from main.pi_ager_cl_database import cl_fact_database_config, cl_ab_database_config
 import requests
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
@@ -31,8 +32,14 @@ class cl_logic_telegram:
         """
         Read telegram setting from the database
         """
-        self.bot_token = '565035742:AAEuvdJE6XSyXiLPaHVVMhAdp7j4_AZ2QFY'
-        self.bot_chatID = '586934879'
+        self.db_telegram = cl_fact_db_telegram().get_instance()
+        self.it_telegram = self.db_telegram.read_data_from_db()
+        if self.it_telegram: 
+            cl_fact_logger.get_instance().debug('bot_token  = ' + str(self.it_telegram[0]['bot_token']))
+            cl_fact_logger.get_instance().debug('bot_chatID = ' + str(self.it_telegram[0]['bot_chatID']))
+        
+        self.bot_token  = str(self.it_telegram[0]['bot_token'])
+        self.bot_chatID = str(self.it_telegram[0]['bot_chatID'])
         
     def execute(self, alarm_subject, alarm_message):
         # logger.debug(pi_ager_logging.me())
@@ -62,7 +69,12 @@ class cl_logic_telegram:
             cl_fact_logger.get_instance().error(sending_error)
         cl_fact_logger.get_instance().debug(response.json())
         return response.json()
+class cl_db_telegram(cl_ab_database_config):
 
+    def build_select_statement(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        return('SELECT * FROM telegram where active = 1 ')
+    
 class th_logic_telegram(cl_logic_telegram):   
 
     def __init__(self):
@@ -97,3 +109,31 @@ class cl_fact_logic_telegram(ABC):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     
+class cl_fact_db_telegram(ABC):
+    __o_instance = None
+    
+    @classmethod
+    def set_instance(self, i_instance):
+        """
+        Factory method to set the db telegram instance
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_db_messenger.__o_instance = i_instance
+        
+    @classmethod        
+    def get_instance(self):
+        """
+        Factory method to get the db telegram instance
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        if cl_fact_db_telegram.__o_instance is not None:
+            return(cl_fact_db_telegram.__o_instance)
+        cl_fact_db_telegram.__o_instance = cl_db_telegram()
+        return(cl_fact_db_telegram.__o_instance)
+
+    def __init__(self):
+        """
+        Constructor logic messenger factory
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        pass    
