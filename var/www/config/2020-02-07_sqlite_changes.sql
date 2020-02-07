@@ -48,13 +48,13 @@ CREATE TABLE email_recipient (
     "to_mail" TEXT NOT NULL,
     "active" INTEGER
 );
-CREATE TABLE "pushover" (
-    "user_key" TEXT NOT NULL,
-    "api-token" TEXT NOT NULL,
-    "active" INTEGER
-);
 CREATE TABLE "telegram" (
     "bot_token" TEXT NOT NULL,
     "bot_chatID" TEXT NOT NULL,
+    "active" INTEGER
+);
+CREATE TABLE pushover (
+    "user_key" TEXT NOT NULL,
+    "api_token" TEXT NOT NULL,
     "active" INTEGER
 );
