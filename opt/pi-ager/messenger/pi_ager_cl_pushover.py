@@ -105,3 +105,31 @@ class cl_fact_logic_pushover(ABC):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     
+class cl_fact_db_pushover(ABC):
+    __o_instance = None
+    
+    @classmethod
+    def set_instance(self, i_instance):
+        """
+        Factory method to set the db pushover instance
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_db_messenger.__o_instance = i_instance
+        
+    @classmethod        
+    def get_instance(self):
+        """
+        Factory method to get the db pushover instance
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        if cl_fact_db_pushover.__o_instance is not None:
+            return(cl_fact_db_pushover.__o_instance)
+        cl_fact_db_pushover.__o_instance = cl_db_pushover()
+        return(cl_fact_db_pushover.__o_instance)
+
+    def __init__(self):
+        """
+        Constructor logic messenger factory
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        pass    
