@@ -49,13 +49,13 @@ class cl_ab_database_config(ABC):
         """
         database_config = cl_fact_database_config().get_instance()
         it_table = database_config.read_data_from_db(self.build_select_statement())
-        cl_db_messenger.__o_dirty = False
+        cl_ab_database_config.__o_dirty = False
         
         return it_table
 
     def is_dirty(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return(cl_db_messenger.__o_dirty)
+        return(cl_ab_database_config.__o_dirty)
         pass
     
 class cl_db_database_mysql:
