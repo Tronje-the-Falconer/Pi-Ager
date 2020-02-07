@@ -10,7 +10,7 @@ __version__ = "1.0.0"
 __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Production"
-from abc import ABC
+from abc import ABC, abstractmethod
 import inspect
 import sqlite3
 from influxdb import InfluxDBClient
