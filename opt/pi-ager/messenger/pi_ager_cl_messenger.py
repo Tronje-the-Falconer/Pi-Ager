@@ -74,16 +74,12 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         """
         Handle message to create alarm or email or telegram or pushover ... class
         """
-        # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.cx_error  = cx_error
-        #logger.exception(self.cx_error, exc_info = True)
         cl_fact_logger.get_instance().info("Exception raised: " + type(self.cx_error).__name__ + " - " + str(cx_error) )
         
         cl_fact_logger.get_instance().info(self.it_messenger)
-        # logger.exception(self.cx_error, exc_info = True)
-        # logger.info("Exception raised: " + type(self.cx_error).__name__  )
-        # logger.info(self.it_messenger)
+
         cl_fact_logger.get_instance().exception(self.cx_error, exc_info = True)
         cl_fact_logger.get_instance().info("Exception raised: " + type(self.cx_error).__name__  )
         cl_fact_logger.get_instance().info(self.it_messenger)
@@ -113,6 +109,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             
         # logger.info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
         cl_fact_logger.get_instance().info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
+        cl_fact_logic_send_email.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
         
         """
         if str(self.cx_error.__class__.__name__ ) == 'cx_Sensor_not_defined':

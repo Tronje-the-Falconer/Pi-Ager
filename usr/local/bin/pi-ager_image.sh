@@ -267,6 +267,8 @@ delete FROM exhaust_air_status;
 delete FROM heater_status;
 delete FROM humidifier_status;
 delete FROM light_status;
+delete FROM pushover;
+delete FROM telegram:
 
 END_SQL
 
