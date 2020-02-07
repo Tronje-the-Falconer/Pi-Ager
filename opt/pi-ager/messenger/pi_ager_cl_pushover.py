@@ -13,6 +13,7 @@ __status__ = "Productive"
 from abc import ABC
 import inspect
 import pi_ager_names
+from main.pi_ager_cl_database import cl_fact_database_config, cl_ab_database_config
 from pushover import Client
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
@@ -29,8 +30,16 @@ class cl_logic_pushover:
         """
         Read pushover setting from the database
         """
-        self.user_key = 'ubesc9691hnx7q7p7xfvj93uw1a9wd'
-        self.api_token = 'a3q7krzvz7s6dek5b998j2xqiiq5kv'
+        
+        self.db_pushover = cl_fact_db_pushover().get_instance()
+        self.it_pushover = self.db_pushover.read_data_from_db()
+        if self.it_pushover: 
+            cl_fact_logger.get_instance().debug('user_key  = ' + str(self.it_pushover[0]['user_key']))
+            cl_fact_logger.get_instance().debug('api_token = ' + str(self.it_pushover[0]['api_token']))
+        
+        self.user_key  = str(self.it_pushover[0]['user_key'])
+        self.api_token = str(self.it_pushover[0]['api_token'])
+        
         self.client = Client(self.user_key, api_token=self.api_token)
         
     def execute(self, alarm_subject, alarm_message):
@@ -55,41 +64,11 @@ class cl_logic_pushover:
             # logger.error(sendefehler)
             cl_fact_logger.get_instance().error(sendefehler)
 
-class cl_db_pushover:
-    __o_dirty = True
-    def __init__(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
-        data = self.read_data_from_db()
-        pass
+class cl_db_pushover(cl_ab_database_config):
+
     def build_select_statement(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return('SELECT * FROM pushover where active = 1 ')
-
-    def get_data(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if self.is_dirty() is True:
-            self.data = self.read_data_from_db()
-            
-        return(self.data)
-    
-    def read_data_from_db(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        """
-        Read from db
-        """
-        database_config = cl_fact_database_config().get_instance()
-        it_table = database_config.read_data_from_db(self.build_select_statement())
-        cl_db_messenger.__o_dirty = False
-        
-        return it_table
- 
-        
-    
-    def is_dirty(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return(cl_db_messenger.__o_dirty)
-        pass
     
 class th_logic_pushover(cl_logic_pushover):   
 
