@@ -19,7 +19,6 @@ import sys
 import sqlite3 #Remove after test
 import pi_ager_paths #Remove after test
 import pi_ager_names
-# import pi_ager_logging
 from main.pi_ager_cl_logger import cl_fact_logger
 from main.pi_ager_cl_database import cl_fact_database_config, cl_ab_database_config
 from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
@@ -27,7 +26,6 @@ from messenger.pi_ager_cl_send_email import cl_fact_logic_send_email, cl_logic_s
 from messenger.pi_ager_cl_pushover import cl_fact_logic_pushover, cl_logic_pushover
 from messenger.pi_ager_cl_telegram import cl_fact_logic_telegram, cl_logic_telegram
 
-                             
 from main.pi_ager_cx_exception import *
 from _ast import Pass
 
@@ -91,16 +89,11 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().info(self.it_messenger)
         
         if self.it_messenger: 
-            # logger.debug('id = ' + str(self.it_messenger[0]['id']))
-            # logger.debug('exception = ' + str(self.it_messenger[0]['exception']))
-            # logger.debug('message_type = ' + str(self.it_messenger[0]['message_type']))
-            # logger.debug('active = ' + str(self.it_messenger[0]['active']))
             cl_fact_logger.get_instance().debug('id = ' + str(self.it_messenger[0]['id']))
             cl_fact_logger.get_instance().debug('exception = ' + str(self.it_messenger[0]['exception']))
             cl_fact_logger.get_instance().debug('message_type = ' + str(self.it_messenger[0]['message_type']))
             cl_fact_logger.get_instance().debug('active = ' + str(self.it_messenger[0]['active']))
-            
-        # logger.info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
+
         cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
         if str(self.cx_error.__class__.__name__ ) == 'cx_Sensor_not_defined':
             self.logic_alarm.execute_short(replication = 3)
@@ -132,10 +125,8 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             self.logic_send_email.execute(self.cx_error, self.build_alarm_subject(), self.build_alarm_message())
             self.exception_known = False
         """
-        # logger.info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
         cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
         cl_fact_logic_telegram.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
-        # logger.info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
         cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
         cl_fact_logic_pushover.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
         
@@ -186,7 +177,6 @@ class cl_fact_logic_messenger(ABC):
         """
         Factory method to set the logic messenger instance
         """        
-        # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logic_messenger.__o_instance = i_instance
         
@@ -195,7 +185,6 @@ class cl_fact_logic_messenger(ABC):
         """
         Factory method to get the logic messenger instance
         """        
-        # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_logic_messenger.__o_instance is not None:
             return(cl_fact_logic_messenger.__o_instance)
@@ -206,7 +195,6 @@ class cl_fact_logic_messenger(ABC):
         """
         Constructor logic messenger factory
         """        
-        # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     
@@ -218,7 +206,6 @@ class cl_fact_db_messenger(ABC):
         """
         Factory method to set the db messenger instance
         """        
-        # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_db_messenger.__o_instance = i_instance
         
@@ -227,7 +214,6 @@ class cl_fact_db_messenger(ABC):
         """
         Factory method to get the db messenger instance
         """        
-        # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_db_messenger.__o_instance is not None:
             return(cl_fact_db_messenger.__o_instance)
@@ -238,6 +224,5 @@ class cl_fact_db_messenger(ABC):
         """
         Constructor logic messenger factory
         """        
-        # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
