@@ -1,7 +1,16 @@
 eclipse.preferences.version=1
 encoding//opt/pi-ager/main.py=iso-8859-1
+encoding//opt/pi-ager/main/pi_ager_cl_database.py=utf-8
 encoding//opt/pi-ager/messenger/pi_ager_cl_messenger.py=utf-8
+encoding//opt/pi-ager/messenger/pi_ager_cl_pushover.py=utf-8
+encoding//opt/pi-ager/messenger/pi_ager_cl_send_email.py=utf-8
+encoding//opt/pi-ager/messenger/pi_ager_cl_telegram.py=utf-8
 encoding//opt/pi-ager/pi_ager_database.py=utf-8
 encoding//opt/pi-ager/pi_ager_database_check.py=UTF-8
 encoding//opt/pi-ager/pi_ager_names.py=utf-8
 encoding//opt/pi-ager/sensors/pi_ager_cl_i2c_bus.py=utf-8
+encoding//opt/pi-ager/sensors/pi_ager_cl_sensor.py=utf-8
+encoding//opt/pi-ager/sensors/pi_ager_cl_sensor_dht11.py=utf-8
+encoding//opt/pi-ager/sensors/pi_ager_cl_sensor_dht22.py=utf-8
+encoding//opt/pi-ager/sensors/pi_ager_cl_sensor_dht_adafruit.py=utf-8
+encoding//opt/pi-ager/sensors/pi_ager_cl_sensor_sht75.py=utf-8

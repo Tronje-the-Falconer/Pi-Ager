@@ -9,7 +9,7 @@ __license__ = "GPL"
 __version__ = "1.0.0"
 __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
-__status__ = "Development"
+__status__ = "Productive"
 
 from abc import ABC
 import inspect

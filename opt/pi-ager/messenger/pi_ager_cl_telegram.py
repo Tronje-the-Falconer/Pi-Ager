@@ -1,26 +1,29 @@
+# -*- coding: utf-8 -*-
 
+"""This class is the class for pi-ager telegram notifications. """
+ 
+__author__ = "Claus Fischer"
+__copyright__ = "Copyright 2020, The Pi-Ager Project"
+__credits__ = ["Claus Fischer"]
+__license__ = "GPL"
+__version__ = "1.0.0"
+__maintainer__ = "Claus Fischer"
+__email__ = "DerBurgermeister@pi-ager.org"
+__status__ = "Productive"
 from abc import ABC
 import inspect
 import pi_ager_names
-#import pi_ager_logging
 import requests
-
-
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
-
-
-
 import requests
-
-
 
 class cl_logic_telegram:
     def __init__(self):
         """
         Constructor for the telegram class
         """ 
-        # logger.debug(pi_ager_logging.me())
+
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
@@ -50,26 +53,20 @@ class cl_logic_telegram:
         alarm_message = alarm_message.replace("_", "\_")
         alarm_subject = alarm_subject.replace("_", "\_")
         send_text = str('https://api.telegram.org/bot' + bot_token + '/sendMessage?chat_id=' + bot_chatID + '&parse_mode=Markdown&text=' + alarm_subject + alarm_message)
-        cl_fact_logger.get_instance().debug(send_text)
+        #cl_fact_logger.get_instance().debug(send_text)
         try:
             response = requests.get(send_text)
         except Exception as cx_error:
-            #TODO err undefined!
-            sendefehler = 'Error: unable to send telegram: {err}'.format(err=cx_error)
+            sending_error = 'Error: unable to send telegram: {err}'.format(err=cx_error)
             # logger.error(sendefehler)
-            cl_fact_logger.get_instance().error(sendefehler)
+            cl_fact_logger.get_instance().error(sending_error)
         cl_fact_logger.get_instance().debug(response.json())
         return response.json()
-    
 
-                
 class th_logic_telegram(cl_logic_telegram):   
 
-    
     def __init__(self):
         pass
-
-
 
 class cl_fact_logic_telegram(ABC):
     __o_instance = None

@@ -1,27 +1,27 @@
+# -*- coding: utf-8 -*-
 
+"""This class is the class for pi-ager pushover notifications. """
+ 
+__author__ = "Claus Fischer"
+__copyright__ = "Copyright 2020, The Pi-Ager Project"
+__credits__ = ["Claus Fischer"]
+__license__ = "GPL"
+__version__ = "1.0.0"
+__maintainer__ = "Claus Fischer"
+__email__ = "DerBurgermeister@pi-ager.org"
+__status__ = "Productive"
 from abc import ABC
 import inspect
 import pi_ager_names
-#import pi_ager_logging
 from pushover import Client
-
-
-
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
-
-
-
-import requests
-
-
 
 class cl_logic_pushover:
     def __init__(self):
         """
         Constructor for the pushover class
         """ 
-        # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
@@ -55,15 +55,47 @@ class cl_logic_pushover:
             # logger.error(sendefehler)
             cl_fact_logger.get_instance().error(sendefehler)
 
+class cl_db_pushover:
+    __o_dirty = True
+    def __init__(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        
+        data = self.read_data_from_db()
+        pass
+    def build_select_statement(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        return('SELECT * FROM pushover where active = 1 ')
 
-                
+    def get_data(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        if self.is_dirty() is True:
+            self.data = self.read_data_from_db()
+            
+        return(self.data)
+    
+    def read_data_from_db(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        """
+        Read from db
+        """
+        database_config = cl_fact_database_config().get_instance()
+        it_table = database_config.read_data_from_db(self.build_select_statement())
+        cl_db_messenger.__o_dirty = False
+        
+        return it_table
+ 
+        
+    
+    def is_dirty(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        return(cl_db_messenger.__o_dirty)
+        pass
+    
 class th_logic_pushover(cl_logic_pushover):   
 
     
     def __init__(self):
         pass
-
-
 
 class cl_fact_logic_pushover(ABC):
     __o_instance = None

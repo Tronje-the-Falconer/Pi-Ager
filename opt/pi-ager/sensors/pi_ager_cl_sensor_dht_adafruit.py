@@ -88,7 +88,7 @@ class cl_main_sensor_dht_adafruit(cl_main_sensor):
         pass
 
     def execute(self):
-        logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         #self.get_current_data()
         self._write_to_db()
     def set_heading_on(self):
