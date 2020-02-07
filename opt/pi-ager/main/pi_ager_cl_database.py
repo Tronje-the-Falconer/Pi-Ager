@@ -24,10 +24,42 @@ from main.pi_ager_cx_exception import *
 
 # global logger
 # logger = pi_ager_logging.create_logger(__name__)
+class cl_ab_database_config(ABC):
+    __o_dirty = True
+    def __init__(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        
+        data = self.read_data_from_db()
+        pass
+    @abstractmethod
+    def build_select_statement(self):
+        pass
 
+    def get_data(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        if self.is_dirty() is True:
+            self.data = self.read_data_from_db()
+            
+        return(self.data)
+    
+    def read_data_from_db(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        """
+        Read from db
+        """
+        database_config = cl_fact_database_config().get_instance()
+        it_table = database_config.read_data_from_db(self.build_select_statement())
+        cl_db_messenger.__o_dirty = False
+        
+        return it_table
+
+    def is_dirty(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        return(cl_db_messenger.__o_dirty)
+        pass
+    
 class cl_db_database_mysql:
     def read_data_from_db(self, i_select_statement):
-        # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         # Builds a dict of dicts it_table from mysql db
         it_table = {}
@@ -35,7 +67,6 @@ class cl_db_database_mysql:
         return it_table
 class cl_db_influxdb:
     def __init__(self):
-        # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         host='localhost'
         port=8086
@@ -57,25 +88,15 @@ class cl_db_influxdb:
         """
         Read from db
         """
-        
-        
         # Builds a dict of dicts it_table from sqlite db
         it_table = {}
-
-        # logger.debug('Select statement = ' + i_select_statement)
         cl_fact_logger.get_instance().debug('Select statement = ' + i_select_statement)
         query = self.cursor.execute(i_select_statement)
-        # logger.debug('Select query = ' + str(query))
         cl_fact_logger.get_instance().debug('Select query = ' + str(query))
-        #db_table = cursor.fetchall()
-        #logger.debug('DB table =' + str(db_table))
-        #connection.close()
-        # Building dict from table rows
-         
+
         colname = [ d[0] for d in query.description ]
         it_table = [ dict(zip(colname, r)) for r in query.fetchall() ] 
 
-        # logger.debug('it table =' + str(it_table))
         cl_fact_logger.get_instance().debug('it table =' + str(it_table))
         return it_table
  
@@ -89,7 +110,6 @@ class cl_db_influxdb:
 class cl_db_database_sqlite:
     def __init__(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        #conn = sqlite3.connect(self.garden_db_path)
         connection = sqlite3.connect(pi_ager_paths.sqlite3_file, isolation_level=None, timeout = 10)
         # Need to allow write permissions by others
         connection.row_factory = sqlite3.Row
@@ -103,16 +123,13 @@ class cl_db_database_sqlite:
         # Builds a dict of dicts it_table from sqlite db
         it_table = {}
 
-        # logger.debug('Select statement = ' + i_select_statement)
         cl_fact_logger.get_instance().debug('Select statement = ' + i_select_statement)
         query = self.cursor.execute(i_select_statement)
-        # logger.debug('Select query = ' + str(query))
         cl_fact_logger.get_instance().debug('Select query = ' + str(query))
         
         colname = [ d[0] for d in query.description ]
         it_table = [ dict(zip(colname, r)) for r in query.fetchall() ] 
 
-        # logger.debug('it table =' + str(it_table))
         cl_fact_logger.get_instance().debug('it table =' + str(it_table))
         return it_table
  
@@ -128,7 +145,6 @@ class cl_fact_db_influxdb(ABC):
         """
         Factory method to set the database instance
         """
-        # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_db_influxdb.__o_instance = i_instance
         
@@ -137,7 +153,6 @@ class cl_fact_db_influxdb(ABC):
         """
         Factory method to get the database instance
         """
-        #logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_db_influxdb.__o_instance is not None:
             return(cl_fact_db_influxdb.__o_instance)
@@ -148,11 +163,8 @@ class cl_fact_db_influxdb(ABC):
         """
         Constructor email logic factory
         """
-        #logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
-    
-    
     
 class cl_fact_database_config(ABC):
     __o_instance = None

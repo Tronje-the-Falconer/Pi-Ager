@@ -165,42 +165,11 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         #hostname = socket.gethostbyaddr(IP.rstrip())
         return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager Hostname ' + hname + ' occured')
 
-class cl_db_messenger:
-    __o_dirty = True
-    def __init__(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
-        data = self.read_data_from_db()
-        pass
+class cl_db_messenger(cl_ab_database_config):
+
     def build_select_statement(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return('SELECT * FROM messenger where active = 1 ')
-
-    def get_data(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if self.is_dirty() is True:
-            self.data = self.read_data_from_db()
-            
-        return(self.data)
-    
-    def read_data_from_db(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        """
-        Read from db
-        """
-        database_config = cl_fact_database_config().get_instance()
-        it_table = database_config.read_data_from_db(self.build_select_statement())
-        cl_db_messenger.__o_dirty = False
-        
-        return it_table
- 
-        
-    
-    def is_dirty(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return(cl_db_messenger.__o_dirty)
-        pass
-    
  
 class th_logic_messenger(cl_logic_messenger):   
        
