@@ -43,13 +43,7 @@ class cl_help_crypt:
         self.cx_error  = cx_error
         backend = default_backend()
         self.pi_serial = self.get_serial()
-        self.kdf = PBKDF2HMAC(
-            algorithm=hashes.SHA256(),
-            length=32,
-            salt=self.pi_serial,
-            iterations=100000,
-            backend=backend
-        )
+       
         
     def get_serial(self):
       # Extract serial from cpuinfo file
@@ -70,17 +64,30 @@ class cl_help_crypt:
 
     def encrypt(self, password):
         
+        kdf = PBKDF2HMAC(
+            algorithm=hashes.SHA256(),
+            length=32,
+            salt=self.pi_serial,
+            iterations=100000,
+            backend=backend
+        )
 
-        encrypted_secret = self.kdf.derive(password.encode('utf-8'))
+        encrypted_secret = kdf.derive(password.encode('utf-8'))
 
         
         return(encrypted_secret)
 
     def decrypt(self, encrypted_secret):
 
-
+        kdf = PBKDF2HMAC(
+            algorithm=hashes.SHA256(),
+            length=32,
+            salt=self.pi_serial,
+            iterations=100000,
+            backend=backend
+        )
         # Generate the key from the user's password
-        password = base64.b64encode(self.kdf.derive(self.pi_serial))
+        password = base64.b64encode(kdf.derive(self.pi_serial))
 
         return(password)
     
