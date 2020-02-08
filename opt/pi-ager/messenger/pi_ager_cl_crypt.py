@@ -72,7 +72,7 @@ class cl_help_crypt:
             length=32,
             salt=str(salt),
             iterations=100000,  # This stretches the hash against brute forcing
-            backend=default_backend(),  # Typically this is OpenSSL
+            backend=backend  # Typically this is OpenSSL
         )
         # Derive a binary hash and encode it with base 64 encoding
         hashed_pwd = base64.b64encode(kdf.derive(self.pi_serial))
