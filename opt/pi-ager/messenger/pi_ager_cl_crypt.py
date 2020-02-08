@@ -73,7 +73,7 @@ class cl_help_crypt:
             backend=default_backend(),  # Typically this is OpenSSL
         )
         # Derive a binary hash and encode it with base 64 encoding
-        hashed_pwd = base64.b64encode(kdf.derive(pi_serial))
+        hashed_pwd = base64.b64encode(kdf.derive(self.pi_serial))
         
         # Set up AES in CBC mode using the hash as the key
         f = Fernet(hashed_pwd)
