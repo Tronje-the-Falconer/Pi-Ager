@@ -121,7 +121,7 @@ class cl_fact_help_crypt(ABC):
         cl_fact_help_crypt.__o_instance = i_instance
         
     @classmethod        
-    def get_instance(self, Exception):
+    def get_instance(self):
         """
         Factory method to get the helper crypt instance
         """        

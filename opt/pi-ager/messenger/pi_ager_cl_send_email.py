@@ -83,7 +83,7 @@ class cl_logic_send_email:
                 alarm_subject,
                 alarm_message)
                  
-    def send_email(self, SERVER,USER,PASSWORT,STARTTLS,FROM,TO,SUBJECT,MESSAGE):
+    def send_email(self, SERVER,USER,PASSWORD,STARTTLS,FROM,TO,SUBJECT,MESSAGE):
         """
         Send email
         """
@@ -93,6 +93,8 @@ class cl_logic_send_email:
         from smtplib import SMTP 
         from smtplib import SMTPException 
         from email.mime.text import MIMEText as text
+        crypt = cl_fact_help_crypt.get_instance()
+        decrypted_secret = crypt.decrypt(PASSWORD)
         if STARTTLS:
             port=587
         else:
@@ -102,7 +104,7 @@ class cl_logic_send_email:
             if STARTTLS:
                 s.starttls()
             
-            s.login(USER,PASSWORT)
+            s.login(USER,decrypted_secret)
             
     
             m = text(MESSAGE, 'plain', 'UTF-8')
