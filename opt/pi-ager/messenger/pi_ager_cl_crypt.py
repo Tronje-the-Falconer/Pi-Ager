@@ -57,6 +57,7 @@ class cl_help_crypt:
       except:
         cpuserial = "ERROR000000000"
         cl_fact_logic_messenger().get_instance(cx_error).send()
+        cl_fact_logic_messenger().get_instance().debug(cpuserial.encode('utf-8'))
       return (cpuserial.encode('utf-8'))
     
 
