@@ -41,7 +41,7 @@ class cl_help_crypt:
             raise cx_direct_call("Please use factory class")
         
         self.cx_error  = cx_error
-        
+        backend = default_backend()
         self.pi_serial = self.get_serial()
         self.kdf = PBKDF2HMAC(
             algorithm=hashes.SHA256(),
