@@ -86,7 +86,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         
         if self.it_messenger: 
             cl_fact_logger.get_instance().debug('exception = ' + str(self.it_messenger[0]['exception']))
-            cl_fact_logger.get_instance().debug('email     = ' + str(self.it_messenger[0]['email']))
+            cl_fact_logger.get_instance().debug('e-mail    = ' + str(self.it_messenger[0]['e-mail']))
             cl_fact_logger.get_instance().debug('pushover  = ' + str(self.it_messenger[0]['pushover']))
             cl_fact_logger.get_instance().debug('telegram  = ' + str(self.it_messenger[0]['telegram']))
             cl_fact_logger.get_instance().debug('alarm     = ' + str(self.it_messenger[0]['alarm']))
