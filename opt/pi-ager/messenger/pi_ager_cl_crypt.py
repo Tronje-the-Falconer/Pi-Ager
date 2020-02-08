@@ -80,7 +80,7 @@ class cl_help_crypt:
 
 
         # Generate the key from the user's password
-        password = base64.b64encode(kdf.derive(self.pi_serial))
+        password = base64.b64encode(self.kdf.derive(self.pi_serial))
 
         return(password)
     
