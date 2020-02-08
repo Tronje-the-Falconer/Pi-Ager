@@ -58,7 +58,7 @@ class cl_help_crypt:
         cpuserial = "ERROR000000000"
         cl_fact_logic_messenger().get_instance(cx_error).send()
         
-      cl_fact_logic_messenger().get_instance().debug(cpuserial.encode('utf-8'))
+      cl_fact_logger.get_instance().debug(cpuserial.encode('utf-8'))
       return (cpuserial.encode('utf-8'))
     
 
