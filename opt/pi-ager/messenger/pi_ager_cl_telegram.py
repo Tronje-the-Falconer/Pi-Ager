@@ -73,7 +73,7 @@ class cl_db_telegram(cl_ab_database_config):
 
     def build_select_statement(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return('SELECT * FROM telegram where active = 1 ')
+        return('SELECT * FROM config_telegram where active = 1 ')
     
 class th_logic_telegram(cl_logic_telegram):   
 

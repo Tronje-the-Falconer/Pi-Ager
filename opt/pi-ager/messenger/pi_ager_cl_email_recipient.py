@@ -15,7 +15,7 @@ from abc import ABC
 import inspect
 import pi_ager_names
 from main.pi_ager_cl_logger import cl_fact_logger
-from main.pi_ager_cl_database import cl_fact_database_config
+from main.pi_ager_cl_database import cl_fact_database_config, cl_ab_database_config
 from main.pi_ager_cx_exception import *
 
 class cl_logic_email_recipient:
@@ -46,45 +46,18 @@ class cl_logic_email_recipient:
         self.db_email_recipient.write_data_to_db(it_table)
         pass
 
-class cl_db_email_recipient:
-    __o_dirty = True
-    def __init__(self):
-        pass
-    
-    def get_data(self):
-        if self.is_dirty() is True:
-            self.data = self.read_data_from_db()
-            
-        return(self.data)
+class cl_db_email_recipient(cl_ab_database_config):
     
     def build_select_statement(self):
-        return('SELECT * FROM email_recipient WHERE active = "1" ')
+        return('SELECT * FROM config_email_recipient WHERE active = "1" ')
+    
     def build_insert_statement(self):
         qmarks = ', '.join('?' * len(self.data))
         cols = ', '.join(self.data.keys())
         
         query = "INSERT INTO %s (%s) VALUES (%s)" % (tablename, cols, qmarks)
         return(query)
-    def read_data_from_db(self):
-        """
-        Read from db
-        """
-        database_config = cl_fact_database_config().get_instance()
-        it_table = database_config.read_data_from_db(self.build_select_statement())
-        cl_db_email_recipient.__o_dirty = False
-        
-        return it_table
     
-    def write_data_to_db(selfs, it_table):
-        values = tuple(self.data.values())
-        database_config = cl_fact_database_config().get_instance()
-        it_table = database_config.write_data_to_db(self.build_insert_statement(), values)
-        cl_db_email_recipient.__o_dirty = False
-      
-    
-    def is_dirty(self):
-        return(cl_db_messenger.__o_dirty)
-        pass
 
         
 class th_logic_email(cl_logic_email_recipient):   

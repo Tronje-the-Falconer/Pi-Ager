@@ -15,6 +15,7 @@ from abc import ABC
 import inspect
 import pi_ager_names
 import pi_ager_gpio_config
+from main.pi_ager_cl_database import cl_fact_database_config, cl_ab_database_config
 import RPi.GPIO as gpio
 from time import sleep
 
@@ -38,12 +39,27 @@ class cl_logic_alarm:
         gpio.setwarnings(False)
         gpio.setup(pi_ager_gpio_config.gpio_alarm, gpio.OUT )
         self.alarm_gpio = pi_ager_gpio_config.gpio_alarm
-        
+        """
         self.replication  = 3
         self.Sleep     = 0.5
         self.High_time = 1
         self.Low_time  = 1
+        """
         
+        """
+        Read alarm setting from the database
+        """
+        
+        self.db_alarm = cl_fact_db_alarm().get_instance()
+        self.it_alarm = self.db_alarm.read_data_from_db()
+        if self.it_alarm: 
+            cl_fact_logger.get_instance().debug('user_key  = ' + str(self.it_alarm[0]['user_key']))
+            cl_fact_logger.get_instance().debug('api_token = ' + str(self.it_alarm[0]['api_token']))
+        
+        self.user_key  = str(self.it_alarm[0]['user_key'])
+        self.api_token = str(self.it_alarm[0]['api_token'])
+        
+        self.client = Client(self.user_key, api_token=self.api_token)
     def set_alarm_type(self,DutyCycle, Frequency, replication, Sleep):
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
@@ -87,6 +103,13 @@ class cl_logic_alarm:
         self.High_time = 2
         self.Low_time  = 2
         self.execute_alarm()
+
+class cl_db_alarm(cl_ab_database_config):
+
+    def build_select_statement(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        return('SELECT * FROM config_alarm where active = 1 ')
+    
 class th_logic_alarm(cl_logic_alarm):   
 
     

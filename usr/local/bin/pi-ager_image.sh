@@ -12,24 +12,24 @@
 #Variablen
 #####################################################################
 #
-
+TABLE = config_nfs_backup
 # Pfad zur NFS Freigabe (Muss im NAS angelegt werden)
-NFSVOL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsvol from nfs_backup where active = 1")
+NFSVOL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsvol from $TABLE where active = 1")
 
 # dieses Verzeichniss muss im NAS angelegt sein
-SUBDIR=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select subdir from nfs_backup where active = 1")
+SUBDIR=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select subdir from $TABLE where active = 1")
 
 #NFSMOUNT=/home/pi/backup							# Pfad auf dem Pi indem das Backup gespeichert wird
-NFSMOUNT=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsmount from nfs_backup where active = 1")
+NFSMOUNT=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsmount from $TABLE where active = 1")
 
 # setzt sich zusammen aus dem Dateipfad auf dem Pi und dem Verzeichnis im NAS
-BACKUP_PFAD=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_path from nfs_backup where active = 1")
+BACKUP_PFAD=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_path from $TABLE where active = 1")
 
 # behält die letzten "n" Backups
-BACKUP_ANZAHL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select number_of_backups from nfs_backup where active = 1")
+BACKUP_ANZAHL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select number_of_backups from $TABLE where active = 1")
 
 # Name des Backup
-BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from nfs_backup where active = 1")
+BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from $TABLE where active = 1")
 
 # ENDE VARIABLEN
  
@@ -249,11 +249,11 @@ raspi-config nonint do_hostname rpi-Pi-Ager
 sqlite3 /var/www/config/pi-ager.sqlite3 <<END_SQL
 UPDATE debug SET value = 20 WHERE key = 'loglevel_file';
 UPDATE debug SET value = 20 WHERE key = 'loglevel_console';
-DELETE FROM nfs_backup;
-delete FROM alarm;
-delete FROM email_server;
-delete FROM email_recipient;
-delete FROM messenger;
+DELETE FROM config_nfs_backup;
+#delete FROM config_alarm;
+delete FROM config_email_server;
+delete FROM config_email_recipient;
+#delete FROM config_messenger;
 delete FROM scale1_data;
 delete FROM scale2_data;
 delete FROM sensor_humidity_data;
@@ -267,8 +267,8 @@ delete FROM exhaust_air_status;
 delete FROM heater_status;
 delete FROM humidifier_status;
 delete FROM light_status;
-delete FROM pushover;
-delete FROM telegram:
+delete FROM config_pushover;
+delete FROM config_telegram:
 
 END_SQL
 

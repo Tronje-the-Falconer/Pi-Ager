@@ -359,10 +359,11 @@ def doMainLoop():
     count_continuing_emergency_loops = 0
     humidify_delay_switch = False
     
-    # logger.debug('doMainLoop()')
+    #Here get instance of Deviation class
     cl_fact_logger.get_instance().debug('doMainLoop()')
     try:
         while status_pi_ager == 1:
+            #Here check Deviation of measurement
             check_and_set_light()
             check_status_agingtable()
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
@@ -888,6 +889,7 @@ def doMainLoop():
     # Ende While-Schleife
         # logger.debug('status!= 1')
         cl_fact_logger.get_instance().debug('status!= 1')
+        #Here clean Deviation time_counter
         pi_ager_gpio_config.defaultGPIO()
  
     except Exception as cx_error:

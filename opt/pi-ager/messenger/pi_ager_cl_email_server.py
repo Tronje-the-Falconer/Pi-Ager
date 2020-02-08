@@ -15,7 +15,7 @@ from abc import ABC
 import inspect
 import pi_ager_names
 from messenger.pi_ager_cl_crypt import cl_fact_help_crypt
-from main.pi_ager_cl_database import cl_fact_database_config
+from main.pi_ager_cl_database import cl_fact_database_config, cl_ab_database_config
 
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
@@ -44,35 +44,10 @@ class cl_logic_email_server:
         
         return(self.it_email_server)
 
-class cl_db_email_server:
-    __o_dirty = True
-    def __init__(self):
-        pass
-    
-    def get_data(self):
-        if self.is_dirty() is True:
-            self.data = self.read_data_from_db()
-            
-        return(self.data)
+class cl_db_email_server(cl_ab_database_config):
     
     def build_select_statement(self):
-        return('SELECT * FROM email_server')
-    
-    def read_data_from_db(self):
-        """
-        Read from db
-        """
-        database_config = cl_fact_database_config().get_instance()
-        it_table = database_config.read_data_from_db(self.build_select_statement())
-        cl_db_email_server.__o_dirty = False
-        
-        return it_table
-        
-        
-    
-    def is_dirty(self):
-        return(cl_db_messenger.__o_dirty)
-        pass
+        return('SELECT * FROM config_email_server')
 
 
 class th_logic_email_server(cl_logic_email_server):   

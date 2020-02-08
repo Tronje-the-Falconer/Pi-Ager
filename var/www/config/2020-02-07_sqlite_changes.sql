@@ -25,36 +25,52 @@ CREATE TABLE 'system' ('id' INTEGER DEFAULT 0 PRIMARY KEY AUTOINCREMENT NOT NULL
 CREATE TABLE 'agingtable_dryaging1' ('id' INTEGER DEFAULT 0 PRIMARY KEY NOT NULL ,'modus' INTEGER, "setpoint_humidity" INTEGER, "setpoint_temperature" INTEGER, "circulation_air_duration" INTEGER,"circulation_air_period" INTEGER, "exhaust_air_duration" INTEGER, "exhaust_air_period" INTEGER, "days" INTEGER DEFAULT 0 NOT NULL, 'comment' TEXT);
 CREATE TABLE 'scale1_settings' ('id' INTEGER DEFAULT 0 PRIMARY KEY AUTOINCREMENT NOT NULL, 'key' TEXT DEFAULT 0 NOT NULL, 'value' REAL DEFAULT 0 NOT NULL, 'last_change' INTEGER DEFAULT 0 NOT NULL);
 CREATE TABLE 'scale2_settings' ('id' INTEGER DEFAULT 0 PRIMARY KEY AUTOINCREMENT NOT NULL, 'key' TEXT DEFAULT 0 NOT NULL, 'value' REAL DEFAULT 0 NOT NULL, 'last_change' INTEGER DEFAULT 0 NOT NULL);
-CREATE TABLE "email_server" (
+CREATE TABLE "config_email_server" (
     "server" TEXT NOT NULL,
     "user" TEXT NOT NULL,
     "password" TEXT NOT NULL,
     "starttls" INTEGER,
     "from_mail" TEXT NOT NULL
 );
-CREATE TABLE "messenger" (
-    "id" INTEGER NOT NULL,
-    "exception" TEXT NOT NULL,
-    "message_type" TEXT NOT NULL,
-    "active" INTEGER
-);
-CREATE TABLE "alarm" (
-    "exception" TEXT NOT NULL,
-    "alarm_length" INTEGER NOT NULL DEFAULT (1),
-    "alarm_duration" INTEGER NOT NULL DEFAULT (1)
-);
-CREATE TABLE email_recipient (
+CREATE TABLE "config_email_recipient" (
     "id" INTEGER NOT NULL,
     "to_mail" TEXT NOT NULL,
     "active" INTEGER
 );
-CREATE TABLE "telegram" (
+CREATE TABLE "config_telegram" (
     "bot_token" TEXT NOT NULL,
     "bot_chatID" TEXT NOT NULL,
     "active" INTEGER
 );
-CREATE TABLE pushover (
+CREATE TABLE "config_pushover" (
     "user_key" TEXT NOT NULL,
     "api_token" TEXT NOT NULL,
     "active" INTEGER
+);
+CREATE TABLE "config_nfs_backup" (
+    "nfsvol" TEXT,
+    "subdir" TEXT,
+    "nfsmount" TEXT,
+    "backup_path" TEXT,
+    "number_of_backups" INTEGER,
+    "backup_name" TEXT,
+    "nfsopt" TEXT,
+    "active" INTEGER
+);
+CREATE TABLE config_messenger (
+    "exception" TEXT NOT NULL,
+    "e-mail" INTEGER,
+    "pushover" INTEGER,
+    "telegram" INTEGER,
+    "alarm" TEXT,
+    "active" INTEGER
+);
+CREATE TABLE "config_alarm" (
+    "alarm" TEXT NOT NULL DEFAULT ('short'),
+    "replication" INTEGER DEFAULT (3),
+    "sleep" REAL DEFAULT (0.5),
+    "high_time" REAL DEFAULT (0.5),
+    "low_time" REAL DEFAULT (0.5),
+    "waveform" TEXT,
+    "frequency" REAL
 );
