@@ -43,7 +43,7 @@ class cl_help_crypt:
         
         self.cx_error  = cx_error
         
-        self.pi_serial = getserial()
+        self.pi_serial = self.getserial()
         
     def getserial():
       # Extract serial from cpuinfo file
