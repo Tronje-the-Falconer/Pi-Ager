@@ -53,13 +53,14 @@ class cl_logic_alarm:
         self.db_alarm = cl_fact_db_alarm().get_instance()
         self.it_alarm = self.db_alarm.read_data_from_db()
         if self.it_alarm: 
-            cl_fact_logger.get_instance().debug('user_key  = ' + str(self.it_alarm[0]['user_key']))
-            cl_fact_logger.get_instance().debug('api_token = ' + str(self.it_alarm[0]['api_token']))
+        #    cl_fact_logger.get_instance().debug('user_key  = ' + str(self.it_alarm[0]['user_key']))
+        #    cl_fact_logger.get_instance().debug('api_token = ' + str(self.it_alarm[0]['api_token']))
         
-        self.user_key  = str(self.it_alarm[0]['user_key'])
-        self.api_token = str(self.it_alarm[0]['api_token'])
+        #self.user_key  = str(self.it_alarm[0]['user_key'])
+        #self.api_token = str(self.it_alarm[0]['api_token'])
         
-        self.client = Client(self.user_key, api_token=self.api_token)
+        #self.client = Client(self.user_key, api_token=self.api_token)
+            pass
     def set_alarm_type(self,DutyCycle, Frequency, replication, Sleep):
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
