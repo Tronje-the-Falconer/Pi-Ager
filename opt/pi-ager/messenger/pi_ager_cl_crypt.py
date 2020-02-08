@@ -16,10 +16,12 @@ import os
 import base64
 import keyring.backend
 
-from cryptography.fernet import Fernet
-from cryptography.hazmat.primitives.hashes import SHA256
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from cryptography.hazmat.backends import default_backend
+#from cryptography.fernet import Fernet
+#from cryptography.hazmat.primitives.hashes import SHA256
+#from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+#from cryptography.hazmat.backends import default_backend
+
+from simplecrypt import encrypt, decrypt
 
 from abc import ABC
 import inspect
@@ -45,8 +47,8 @@ class cl_help_crypt:
         self.pi_serial = bytes(self.getserial(), 'utf-8')
         
         #self.cipher_suite = Fernet(self.pi_serial)
-        key = bytes(Fernet.generate_key(), 'utf-8')
-        self.cipher_suite = Fernet(key)
+        #key = bytes(Fernet.generate_key(), 'utf-8')
+        #self.cipher_suite = Fernet(key)
         
     def getserial(self):
       # Extract serial from cpuinfo file
@@ -79,7 +81,8 @@ class cl_help_crypt:
         hashed_pwd = base64.b64encode(kdf.derive(self.pi_serial))
         """
         #hashed_passwd = bcrypt.hashpw(passwd, self.pi_serial)
-        return(self.cipher_suite.encrypt(secret))
+        #return(self.cipher_suite.encrypt(secret))
+        return(encrypt(self.pi_serial, secret))
         """
         # Set up AES in CBC mode using the hash as the key
         f = Fernet(hashed_pwd)
@@ -108,7 +111,8 @@ class cl_help_crypt:
         secret = f.decrypt(encrypted_secret)
         return(secret)
         """
-        retrun(self.cipher_suite.decrypt(encrypted_secret))
+        #retrun(self.cipher_suite.decrypt(encrypted_secret))
+        return(decrypt(self.pi_serial, encrypted_secret))
         
 class th_help_crypt(cl_help_crypt):   
        
