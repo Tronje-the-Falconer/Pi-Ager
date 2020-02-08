@@ -52,11 +52,11 @@ class cl_logic_send_email:
         """
         Read email recipient's from the database
         """
-        self.db_email_recipient = cl_fact_logic_email_recipient().get_instance()
-        self.it_email_recipient = self.db_email_recipient.get_data()
-        if not self.it_email_recipient:
+        self.logic_email_recipient = cl_fact_logic_email_recipient().get_instance()
+        if not self.logic_email_recipient:
             raise cx_no_email_recipient_config_found 
-        
+        self.it_email_recipient = self.logic_email_recipient.get_data()
+
     def execute(self, alarm_subject, alarm_message):
         if not hasattr(cl_logic_send_email, "it_email_recipient"):
             # logger.info("No email recipient defined!")
