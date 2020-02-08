@@ -79,7 +79,7 @@ class cl_help_crypt:
         hashed_pwd = base64.b64encode(kdf.derive(self.pi_serial))
         """
         #hashed_passwd = bcrypt.hashpw(passwd, self.pi_serial)
-        return(cipher_suite.encrypt(passwd))
+        return(self.cipher_suite.encrypt(passwd))
         """
         # Set up AES in CBC mode using the hash as the key
         f = Fernet(hashed_pwd)
@@ -108,7 +108,7 @@ class cl_help_crypt:
         secret = f.decrypt(encrypted_secret)
         return(secret)
         """
-        retrun(cipher_suite.decrypt(encrypted_secret))
+        retrun(self.cipher_suite.decrypt(encrypted_secret))
         
 class th_help_crypt(cl_help_crypt):   
        
