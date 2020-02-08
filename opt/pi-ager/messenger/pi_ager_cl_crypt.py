@@ -71,7 +71,7 @@ class cl_help_crypt:
     def encrypt(self, password):
         
 
-        encrypted_secret = self.kdf.derive(password)
+        encrypted_secret = self.kdf.derive(password.encode('utf-8'))
 
         
         return(encrypted_secret)
