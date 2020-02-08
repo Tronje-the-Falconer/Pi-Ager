@@ -44,9 +44,9 @@ class cl_help_crypt:
         self.cx_error  = cx_error
         self.pi_serial = bytes(self.getserial(), 'utf-8')
         
-        self.cipher_suite = Fernet(self.pi_serial)
-        #key = Fernet.generate_key()
-        #self.cipher_suite = Fernet(key)
+        #self.cipher_suite = Fernet(self.pi_serial)
+        key = bytes(Fernet.generate_key(), 'utf-8')
+        self.cipher_suite = Fernet(key)
         
     def getserial(self):
       # Extract serial from cpuinfo file
