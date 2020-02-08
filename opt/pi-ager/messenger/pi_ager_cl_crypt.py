@@ -42,7 +42,7 @@ class cl_help_crypt:
             raise cx_direct_call("Please use factory class")
         
         self.cx_error  = cx_error
-        self.pi_serial = byte(self.getserial())
+        self.pi_serial = byte(self.getserial(), 'utf-8')
         
         self.cipher_suite = Fernet(self.pi_serial)
         #key = Fernet.generate_key()
