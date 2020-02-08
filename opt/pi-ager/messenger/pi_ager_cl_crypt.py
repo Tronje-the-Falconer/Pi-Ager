@@ -42,11 +42,11 @@ class cl_help_crypt:
             raise cx_direct_call("Please use factory class")
         
         self.cx_error  = cx_error
-        self.pi_serial = self.getserial() + self.getserial()
+        self.pi_serial = byte(self.getserial())
         
-        #self.cipher_suite = Fernet(self.pi_serial)
-        key = Fernet.generate_key()
-        self.cipher_suite = Fernet(key)
+        self.cipher_suite = Fernet(self.pi_serial)
+        #key = Fernet.generate_key()
+        #self.cipher_suite = Fernet(key)
         
     def getserial(self):
       # Extract serial from cpuinfo file
