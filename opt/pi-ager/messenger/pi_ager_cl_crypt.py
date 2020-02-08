@@ -63,6 +63,7 @@ class cl_help_crypt:
       return (cpuserial.encode('utf-8'))
     """    
     def get_key(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         try:
             with open('/home/pi/system_key.bin', 'rb') as file_object:
                 for line in file_object:
@@ -72,38 +73,23 @@ class cl_help_crypt:
             self.write_key()
         pass
     def write_key(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         with open('/home/pi/system_key.bin', 'wb') as file_object:  file_object.write(self.key)
         pass
     def generate_key(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.key = Fernet.generate_key()
         return(self.key)
 
     def encrypt(self, password):
-        """
-        kdf = PBKDF2HMAC(
-            algorithm=hashes.SHA256(),
-            length=32,
-            salt=self.pi_serial,
-            iterations=100000,
-            backend=self.backend
-        )
-        """
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cipher_suite = Fernet(self.key)
         encrypted_secret = cipher_suite.encrypt(password.encode('utf-8'))
 
         
         return(encrypted_secret)
     def decrypt(self, encrypted_secret):
-        """
-        kdf = PBKDF2HMAC(
-            algorithm=hashes.SHA256(),
-            length=32,
-            salt=self.pi_serial,
-            iterations=100000,
-            backend=self.backend
-        )
-        """
-        # Generate the key from the user's password
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cipher_suite = Fernet(self.key)
         password = cipher_suite.decrypt(encrypted_secret)
 
@@ -122,8 +108,7 @@ class cl_fact_help_crypt(ABC):
     def set_instance(self, i_instance):
         """
         Factory method to set the helper crypt instance
-        """        
-        # logger.debug(pi_ager_logging.me())
+        """
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_help_crypt.__o_instance = i_instance
         
@@ -131,8 +116,7 @@ class cl_fact_help_crypt(ABC):
     def get_instance(self):
         """
         Factory method to get the helper crypt instance
-        """        
-        # logger.debug(pi_ager_logging.me())
+        """
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_help_crypt.__o_instance is not None:
             return(cl_fact_help_crypt.__o_instance)
@@ -142,8 +126,7 @@ class cl_fact_help_crypt(ABC):
     def __init__(self):
         """
         Constructor logic messenger factory
-        """        
-        # logger.debug(pi_ager_logging.me())
+        """
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     
