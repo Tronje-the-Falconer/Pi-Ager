@@ -45,7 +45,7 @@ class cl_help_crypt:
         
         self.pi_serial = self.getserial()
         
-    def getserial():
+    def getserial(self):
       # Extract serial from cpuinfo file
       cpuserial = "0000000000000000"
       try:
