@@ -43,9 +43,9 @@ class cl_help_crypt:
         
         self.cx_error  = cx_error
         #self.backend = default_backend()
-        self.pi_serial = self.get_serial()
-       
-        
+        #self.pi_serial = self.get_serial()
+        self.get_key()
+    """        
     def get_serial(self):
       # Extract serial from cpuinfo file
       cpuserial = "0000000000000000"
@@ -61,7 +61,22 @@ class cl_help_crypt:
         
       cl_fact_logger.get_instance().debug(cpuserial.encode('utf-8'))
       return (cpuserial.encode('utf-8'))
-    
+    """    
+    def get_key(self):
+        try:
+            with open('/home/pi/system_key.bin', 'rb') as file_object:
+                for line in file_object:
+                    self.key = line
+        except:
+            self.generate_key()
+            self.write_key()
+        pass
+    def write_key(self):
+        with open('/home/pi/system_key.bin', 'wb') as file_object:  file_object.write(self.key)
+        pass
+    def generate_key(self):
+        self.key = Fernet.generate_key()
+        return(self.key)
 
     def encrypt(self, password):
         """
@@ -73,12 +88,11 @@ class cl_help_crypt:
             backend=self.backend
         )
         """
-        cipher_suite = Fernet(self.pi_serial)
+        cipher_suite = Fernet(self.key)
         encrypted_secret = cipher_suite.encrypt(password.encode('utf-8'))
 
         
         return(encrypted_secret)
-
     def decrypt(self, encrypted_secret):
         """
         kdf = PBKDF2HMAC(
@@ -90,7 +104,7 @@ class cl_help_crypt:
         )
         """
         # Generate the key from the user's password
-        cipher_suite = Fernet(self.pi_serial)
+        cipher_suite = Fernet(self.key)
         password = cipher_suite.decrypt(encrypted_secret.encode('utf-8'))
 
         return(password)
