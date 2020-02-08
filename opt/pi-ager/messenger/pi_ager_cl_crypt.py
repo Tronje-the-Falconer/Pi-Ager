@@ -65,7 +65,7 @@ class cl_help_crypt:
     def encrypt(self, secret):
         
         # Generate a salt for use in the PBKDF2 hash
-        salt = os.urandom(16).encode('utf-8')
+        salt = os.urandom(16)
         # "base64.b64encode(os.urandom(12))  # Recommended method from cryptography.io
         # Set up the hashing algo
         kdf = PBKDF2HMAC(
