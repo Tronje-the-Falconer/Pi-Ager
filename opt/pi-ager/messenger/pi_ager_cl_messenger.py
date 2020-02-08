@@ -85,11 +85,11 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().info(self.it_messenger)
         
         if self.it_messenger: 
-            cl_fact_logger.get_instance().debug('id = ' + str(self.it_messenger[0]['id']))
             cl_fact_logger.get_instance().debug('exception = ' + str(self.it_messenger[0]['exception']))
-            cl_fact_logger.get_instance().debug('message_type = ' + str(self.it_messenger[0]['message_type']))
-            cl_fact_logger.get_instance().debug('active = ' + str(self.it_messenger[0]['active']))
-
+            cl_fact_logger.get_instance().debug('email     = ' + str(self.it_messenger[0]['email']))
+            cl_fact_logger.get_instance().debug('pushover  = ' + str(self.it_messenger[0]['pushover']))
+            cl_fact_logger.get_instance().debug('telegram  = ' + str(self.it_messenger[0]['telegram']))
+            cl_fact_logger.get_instance().debug('alarm     = ' + str(self.it_messenger[0]['alarm']))
         cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
         if str(self.cx_error.__class__.__name__ ) == 'cx_Sensor_not_defined':
             self.logic_alarm.execute_short(replication = 3)
