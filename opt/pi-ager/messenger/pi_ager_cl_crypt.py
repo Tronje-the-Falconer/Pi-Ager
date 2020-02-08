@@ -16,9 +16,10 @@ import os
 import base64
 import keyring.backend
 
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-from cryptography.hazmat.backends import default_backend
+from cryptography.fernet import Fernet
+#from cryptography.hazmat.primitives import hashes
+#from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+#from cryptography.hazmat.backends import default_backend
 
 from abc import ABC
 import inspect
@@ -41,7 +42,7 @@ class cl_help_crypt:
             raise cx_direct_call("Please use factory class")
         
         self.cx_error  = cx_error
-        self.backend = default_backend()
+        #self.backend = default_backend()
         self.pi_serial = self.get_serial()
        
         
@@ -63,7 +64,7 @@ class cl_help_crypt:
     
 
     def encrypt(self, password):
-        
+        """
         kdf = PBKDF2HMAC(
             algorithm=hashes.SHA256(),
             length=32,
@@ -71,14 +72,15 @@ class cl_help_crypt:
             iterations=100000,
             backend=self.backend
         )
-
-        encrypted_secret = kdf.derive(password.encode('utf-8'))
+        """
+        cipher_suite = Fernet(self.pi_serial)
+        encrypted_secret = cipher_suite.encrypt(password.encode('utf-8'))
 
         
         return(encrypted_secret)
 
     def decrypt(self, encrypted_secret):
-
+        """
         kdf = PBKDF2HMAC(
             algorithm=hashes.SHA256(),
             length=32,
@@ -86,8 +88,10 @@ class cl_help_crypt:
             iterations=100000,
             backend=self.backend
         )
+        """
         # Generate the key from the user's password
-        password = base64.b64encode(kdf.derive(self.pi_serial))
+        cipher_suite = Fernet(self.pi_serial)
+        password = cipher_suite.decrypt(encrypted_secret.encode('utf-8'))
 
         return(password)
     
