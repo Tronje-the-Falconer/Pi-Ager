@@ -108,7 +108,7 @@ class cl_db_alarm(cl_ab_database_config):
 
     def build_select_statement(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return('SELECT * FROM config_alarm where active = 1 ')
+        return('SELECT * FROM config_alarm ')
     
 class th_logic_alarm(cl_logic_alarm):   
 
