@@ -101,7 +101,7 @@ class cl_help_crypt:
         
         
         # Decrypt the secret!
-        secret = Fernet(key).decrypt(encrypted_secret)
+        secret = Fernet(key).decrypt(encrypted_secret.encode('utf-8'))
         return(secret)
     
 class th_help_crypt(cl_help_crypt):   
