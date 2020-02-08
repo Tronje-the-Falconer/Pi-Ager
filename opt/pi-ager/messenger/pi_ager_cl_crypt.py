@@ -42,8 +42,8 @@ class cl_help_crypt:
             raise cx_direct_call("Please use factory class")
         
         self.cx_error  = cx_error
-        
         self.pi_serial = self.getserial()
+        self.cipher_suite = Fernet(self.pi_serial)
         
     def getserial(self):
       # Extract serial from cpuinfo file
@@ -61,7 +61,7 @@ class cl_help_crypt:
     
 
     def encrypt(self, secret):
-        
+        """
         # Generate a salt for use in the PBKDF2 hash
         salt = base64.b64encode(os.urandom(12))  # Recommended method from cryptography.io
         # Set up the hashing algo
@@ -71,18 +71,21 @@ class cl_help_crypt:
             salt=str(salt),
             iterations=100000,  # This stretches the hash against brute forcing
             backend=default_backend(),  # Typically this is OpenSSL
-        )
+        #)
         # Derive a binary hash and encode it with base 64 encoding
         hashed_pwd = base64.b64encode(kdf.derive(self.pi_serial))
-        
+        """
+        #hashed_passwd = bcrypt.hashpw(passwd, self.pi_serial)
+        return(cipher_suite.encrypt(passwd))
+        """
         # Set up AES in CBC mode using the hash as the key
         f = Fernet(hashed_pwd)
         encrypted_secret = f.encrypt(secret)
         
         return(encrypted_secret)
-
+        """
     def decrypt(self, encrypted_secret):
-
+        """
         # Set up the Key Derivation Formula (PBKDF2)
         kdf = PBKDF2HMAC(
             algorithm=SHA256(),
@@ -101,7 +104,9 @@ class cl_help_crypt:
         # Decrypt the secret!
         secret = f.decrypt(encrypted_secret)
         return(secret)
-    
+        """
+        retrun(cipher_suite.decrypt(encrypted_secret))
+        
 class th_help_crypt(cl_help_crypt):   
        
     def __init__(self):
