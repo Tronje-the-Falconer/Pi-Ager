@@ -16,8 +16,7 @@ import os
 import base64
 import keyring.backend
 
-from cryptography.fernet import Fernet
-from cryptography.hazmat.primitives.hashes import SHA256
+from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 from cryptography.hazmat.backends import default_backend
 
@@ -44,6 +43,13 @@ class cl_help_crypt:
         self.cx_error  = cx_error
         
         self.pi_serial = self.get_serial()
+        self.kdf = PBKDF2HMAC(
+            algorithm=hashes.SHA256(),
+            length=32,
+            salt=self.pi_serial,
+            iterations=100000,
+            backend=backend
+        )
         
     def get_serial(self):
       # Extract serial from cpuinfo file
@@ -62,47 +68,21 @@ class cl_help_crypt:
       return (cpuserial.encode('utf-8'))
     
 
-    def encrypt(self, secret):
+    def encrypt(self, password):
         
-        # Generate a salt for use in the PBKDF2 hash
-        salt = os.urandom(16)
-        # "base64.b64encode(os.urandom(12))  # Recommended method from cryptography.io
-        # Set up the hashing algo
-        kdf = PBKDF2HMAC(
-            algorithm=SHA256(),
-            length=32,
-            salt=salt,
-            iterations=100000,  # This stretches the hash against brute forcing
-            backend=default_backend()  # Typically this is OpenSSL
-        )
-        # Derive a binary hash and encode it with base 64 encoding
-        hashed_pwd = base64.b64encode(kdf.derive(self.pi_serial))
-        
-        # Set up AES in CBC mode using the hash as the key
-        encrypted_secret = Fernet(hashed_pwd).encrypt(secret)
+
+        encrypted_secret = self.kdf.derive(password)
+
         
         return(encrypted_secret)
 
     def decrypt(self, encrypted_secret):
 
-        # Set up the Key Derivation Formula (PBKDF2)
-        kdf = PBKDF2HMAC(
-            algorithm=SHA256(),
-            length=32,
-            salt=str(salt),
-            #iterations=int(iterations),
-            iterations=100000,
-            backend=default_backend(),
-        )
+
         # Generate the key from the user's password
-        key = base64.b64encode(kdf.derive(self.pi_serial))
-        
-        # Set up the AES encryption again, using the key
-        
-        
-        # Decrypt the secret!
-        secret = Fernet(key).decrypt(encrypted_secret.encode('utf-8'))
-        return(secret)
+        password = base64.b64encode(kdf.derive(self.pi_serial))
+
+        return(password)
     
 class th_help_crypt(cl_help_crypt):   
        
