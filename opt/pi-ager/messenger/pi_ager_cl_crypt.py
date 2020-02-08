@@ -57,7 +57,7 @@ class cl_help_crypt:
       except:
         cpuserial = "ERROR000000000"
         cl_fact_logic_messenger().get_instance(cx_error).send()
-      return bytes(cpuserial, utf-8)
+      return (cpuserial.encode('utf-8'))
     
 
     def encrypt(self, secret):
