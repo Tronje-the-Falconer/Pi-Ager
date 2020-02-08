@@ -41,7 +41,7 @@ class cl_help_crypt:
             raise cx_direct_call("Please use factory class")
         
         self.cx_error  = cx_error
-        backend = default_backend()
+        self.backend = default_backend()
         self.pi_serial = self.get_serial()
        
         
@@ -69,7 +69,7 @@ class cl_help_crypt:
             length=32,
             salt=self.pi_serial,
             iterations=100000,
-            backend=backend
+            backend=self.backend
         )
 
         encrypted_secret = kdf.derive(password.encode('utf-8'))
@@ -84,7 +84,7 @@ class cl_help_crypt:
             length=32,
             salt=self.pi_serial,
             iterations=100000,
-            backend=backend
+            backend=self.backend
         )
         # Generate the key from the user's password
         password = base64.b64encode(kdf.derive(self.pi_serial))
