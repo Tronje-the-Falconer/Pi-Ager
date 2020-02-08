@@ -65,12 +65,13 @@ class cl_help_crypt:
     def encrypt(self, secret):
         
         # Generate a salt for use in the PBKDF2 hash
-        #salt = base64.b64encode(os.urandom(12))  # Recommended method from cryptography.io
+        salt = os.urandom(16).encode('utf-8')
+        # "base64.b64encode(os.urandom(12))  # Recommended method from cryptography.io
         # Set up the hashing algo
         kdf = PBKDF2HMAC(
             algorithm=SHA256(),
             length=32,
-            salt=str(os.urandom(16)),
+            salt=salt,
             iterations=100000,  # This stretches the hash against brute forcing
             backend=default_backend()  # Typically this is OpenSSL
         )
