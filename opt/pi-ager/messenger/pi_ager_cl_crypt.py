@@ -16,12 +16,10 @@ import os
 import base64
 import keyring.backend
 
-#from cryptography.fernet import Fernet
-#from cryptography.hazmat.primitives.hashes import SHA256
-#from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
-#from cryptography.hazmat.backends import default_backend
-
-from simplecrypt import encrypt, decrypt
+from cryptography.fernet import Fernet
+from cryptography.hazmat.primitives.hashes import SHA256
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+from cryptography.hazmat.backends import default_backend
 
 from abc import ABC
 import inspect
@@ -44,13 +42,10 @@ class cl_help_crypt:
             raise cx_direct_call("Please use factory class")
         
         self.cx_error  = cx_error
-        self.pi_serial = bytes(self.getserial(), 'utf-8')
         
-        #self.cipher_suite = Fernet(self.pi_serial)
-        #key = bytes(Fernet.generate_key(), 'utf-8')
-        #self.cipher_suite = Fernet(key)
+        self.pi_serial = getserial()
         
-    def getserial(self):
+    def getserial():
       # Extract serial from cpuinfo file
       cpuserial = "0000000000000000"
       try:
@@ -66,7 +61,7 @@ class cl_help_crypt:
     
 
     def encrypt(self, secret):
-        """
+        
         # Generate a salt for use in the PBKDF2 hash
         salt = base64.b64encode(os.urandom(12))  # Recommended method from cryptography.io
         # Set up the hashing algo
@@ -76,22 +71,17 @@ class cl_help_crypt:
             salt=str(salt),
             iterations=100000,  # This stretches the hash against brute forcing
             backend=default_backend(),  # Typically this is OpenSSL
-        #)
+        )
         # Derive a binary hash and encode it with base 64 encoding
         hashed_pwd = base64.b64encode(kdf.derive(self.pi_serial))
-        """
-        #hashed_passwd = bcrypt.hashpw(passwd, self.pi_serial)
-        #return(self.cipher_suite.encrypt(secret))
-        return(encrypt(self.pi_serial, secret))
-        """
+        
         # Set up AES in CBC mode using the hash as the key
-        f = Fernet(hashed_pwd)
-        encrypted_secret = f.encrypt(secret)
+        encrypted_secret = Fernet(hashed_pwd).encrypt(secret)
         
         return(encrypted_secret)
-        """
+
     def decrypt(self, encrypted_secret):
-        """
+
         # Set up the Key Derivation Formula (PBKDF2)
         kdf = PBKDF2HMAC(
             algorithm=SHA256(),
@@ -102,18 +92,15 @@ class cl_help_crypt:
             backend=default_backend(),
         )
         # Generate the key from the user's password
-        key = base64.b64encode(kdf.derive(pi_serial))
+        key = base64.b64encode(kdf.derive(self.pi_serial))
         
         # Set up the AES encryption again, using the key
-        f = Fernet(key)
+        
         
         # Decrypt the secret!
-        secret = f.decrypt(encrypted_secret)
+        secret = Fernet(key).decrypt(encrypted_secret)
         return(secret)
-        """
-        #retrun(self.cipher_suite.decrypt(encrypted_secret))
-        return(decrypt(self.pi_serial, encrypted_secret))
-        
+    
 class th_help_crypt(cl_help_crypt):   
        
     def __init__(self):
@@ -133,7 +120,7 @@ class cl_fact_help_crypt(ABC):
         cl_fact_help_crypt.__o_instance = i_instance
         
     @classmethod        
-    def get_instance(self):
+    def get_instance(self, Exception):
         """
         Factory method to get the helper crypt instance
         """        
