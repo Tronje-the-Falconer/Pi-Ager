@@ -105,7 +105,7 @@ class cl_help_crypt:
         """
         # Generate the key from the user's password
         cipher_suite = Fernet(self.key)
-        password = cipher_suite.decrypt(encrypted_secret.encode('utf-8'))
+        password = cipher_suite.decrypt(encrypted_secret)
 
         return(password)
     
