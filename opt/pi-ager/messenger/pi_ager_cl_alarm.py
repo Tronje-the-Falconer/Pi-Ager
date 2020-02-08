@@ -134,3 +134,31 @@ class cl_fact_logic_alarm(ABC):
     def __init__(self):
         pass    
     
+class cl_fact_db_alarm(ABC):
+    __o_instance = None
+    
+    @classmethod
+    def set_instance(self, i_instance):
+        """
+        Factory method to set the db alarm instance
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_db_messenger.__o_instance = i_instance
+        
+    @classmethod        
+    def get_instance(self):
+        """
+        Factory method to get the db alarm instance
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        if cl_fact_db_alarm.__o_instance is not None:
+            return(cl_fact_db_alarm.__o_instance)
+        cl_fact_db_alarm.__o_instance = cl_db_alarm()
+        return(cl_fact_db_alarm.__o_instance)
+
+    def __init__(self):
+        """
+        Constructor logic messenger factory
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        pass    
