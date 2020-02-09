@@ -21,7 +21,7 @@ import pi_ager_paths #Remove after test
 import pi_ager_names
 from main.pi_ager_cl_logger import cl_fact_logger
 from main.pi_ager_cl_database import cl_fact_database_config, cl_ab_database_config
-from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
+from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm, cl_logic_alarm
 from messenger.pi_ager_cl_send_email import cl_fact_logic_send_email, cl_logic_send_email
 from messenger.pi_ager_cl_pushover import cl_fact_logic_pushover, cl_logic_pushover
 from messenger.pi_ager_cl_telegram import cl_fact_logic_telegram, cl_logic_telegram
