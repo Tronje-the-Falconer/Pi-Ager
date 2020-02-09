@@ -32,7 +32,6 @@ class cl_logic_send_email:
         """
         Constructor for the send email class
         """ 
-        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
@@ -58,6 +57,7 @@ class cl_logic_send_email:
         self.it_email_recipient = self.logic_email_recipient.get_data()
 
     def execute(self, alarm_subject, alarm_message):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if not hasattr(cl_logic_send_email, "it_email_recipient"):
             # logger.info("No email recipient defined!")
             cl_fact_logger.get_instance().info("No email recipient defined!")
