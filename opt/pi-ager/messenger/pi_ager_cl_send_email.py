@@ -87,7 +87,7 @@ class cl_logic_send_email:
         from smtplib import SMTPException 
         from email.mime.text import MIMEText as text
         crypt = cl_fact_help_crypt.get_instance()
-        decrypted_secret = crypt.decrypt(PASSWORD).encode()
+        decrypted_secret = crypt.decrypt(PASSWORD).decode()
         
         if STARTTLS:
             port=993
