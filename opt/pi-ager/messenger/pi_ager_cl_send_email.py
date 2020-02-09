@@ -89,7 +89,7 @@ class cl_logic_send_email:
         crypt = cl_fact_help_crypt.get_instance()
         decrypted_secret = crypt.decrypt(PASSWORD)
         if STARTTLS:
-            port=587
+            port=993
         else:
             port=25
         try:
