@@ -79,6 +79,7 @@ class cl_help_crypt:
     def generate_key(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.key = Fernet.generate_key()
+        cl_fact_logger.get_instance().debug("Generated key: " + self.key)
         return(self.key)
 
     def encrypt(self, password):
