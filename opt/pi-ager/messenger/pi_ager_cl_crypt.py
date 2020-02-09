@@ -91,7 +91,7 @@ class cl_help_crypt:
     def decrypt(self, encrypted_secret):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cipher_suite = Fernet(self.key)
-        password = cipher_suite.decrypt(encrypted_secret)
+        password = cipher_suite.decrypt(encrypted_secret.encode('utf-8'))
 
         return(password)
     
