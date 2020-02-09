@@ -45,6 +45,7 @@ class cl_help_crypt:
         #self.backend = default_backend()
         #self.pi_serial = self.get_serial()
         self.get_key()
+        cl_fact_logger.get_instance().debug('Sytemkey = ' + self.key)
     """        
     def get_serial(self):
       # Extract serial from cpuinfo file
@@ -91,6 +92,7 @@ class cl_help_crypt:
         return(encrypted_secret)
     def decrypt(self, encrypted_secret):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        
         cipher_suite = Fernet(self.key)
         password = cipher_suite.decrypt(encrypted_secret.encode('utf-8'))
 
