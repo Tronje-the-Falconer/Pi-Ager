@@ -45,7 +45,7 @@ class cl_help_crypt:
         #self.backend = default_backend()
         #self.pi_serial = self.get_serial()
         self.get_key()
-        cl_fact_logger.get_instance().debug('Sytemkey = ' + self.key)
+        cl_fact_logger.get_instance().debug('Sytemkey = ' + self.key.decode())
     """        
     def get_serial(self):
       # Extract serial from cpuinfo file
