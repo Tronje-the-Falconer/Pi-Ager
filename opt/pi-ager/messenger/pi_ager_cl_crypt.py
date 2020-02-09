@@ -78,7 +78,7 @@ class cl_help_crypt:
         pass
     def generate_key(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        self.key = Fernet.generate_key()
+        self.key = Fernet.generate_key().decode('utf-8')
         cl_fact_logger.get_instance().debug("Generated key: " + self.key)
         return(self.key)
 
