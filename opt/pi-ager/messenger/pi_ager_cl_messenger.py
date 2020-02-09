@@ -122,11 +122,13 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             self.logic_send_email.execute(self.cx_error, self.build_alarm_subject(), self.build_alarm_message())
             self.exception_known = False
         """
+        
+        """
         cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
         cl_fact_logic_telegram.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
         cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
         cl_fact_logic_pushover.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
-        
+        """
         if self.exception_known == False:
             cl_fact_logger.get_instance().critical(str(self.cx_error.__class__.__name__ ))
             sys.exit(0)
