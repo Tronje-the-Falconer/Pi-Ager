@@ -88,11 +88,18 @@ class cl_logic_send_email:
         from email.mime.text import MIMEText as text
         crypt = cl_fact_help_crypt.get_instance()
         decrypted_secret = crypt.decrypt(PASSWORD)
+        
         if STARTTLS:
             port=993
         else:
             port=25
+        cl_fact_logger.get_instance().debug('Server     =' + SERVER)
+        cl_fact_logger.get_instance().debug('Port       =' + port)
+        cl_fact_logger.get_instance().debug('User       =' + USER)
+        cl_fact_logger.get_instance().debug('Password   =' + decrypted_secret)
+        
         try:
+            
             s = SMTP(SERVER,port)
             if STARTTLS:
                 s.starttls()
