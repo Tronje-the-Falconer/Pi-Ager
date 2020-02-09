@@ -58,15 +58,7 @@ class cl_logic_send_email:
 
     def execute(self, alarm_subject, alarm_message):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cl_fact_logger.get_instance().debug(self.it_email_recipient)
-        if not hasattr(cl_logic_send_email, "self.it_email_recipient"):
-            # logger.info("No email recipient defined!")
-            cl_fact_logger.get_instance().info("No email recipient defined!")
-            return
-        # logger.debug(cl_fact_logger.get_instance().me())
-        # logger.debug(self.it_email_server)
-        # logger.debug(self.it_email_recipient)
-        # logger.debug('server = ' + str(self.it_email_server[0]['server']))
+
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(self.it_email_server)
         cl_fact_logger.get_instance().debug(self.it_email_recipient)
