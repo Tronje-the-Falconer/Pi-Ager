@@ -94,7 +94,7 @@ class cl_logic_send_email:
         else:
             port=25
         cl_fact_logger.get_instance().debug('Server     =' + SERVER)
-        cl_fact_logger.get_instance().debug('Port       =' + port)
+        cl_fact_logger.get_instance().debug('Port       =' + str(port))
         cl_fact_logger.get_instance().debug('User       =' + USER)
         cl_fact_logger.get_instance().debug('Password   =' + decrypted_secret)
         
