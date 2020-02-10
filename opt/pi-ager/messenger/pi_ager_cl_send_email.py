@@ -138,7 +138,7 @@ class cl_logic_send_email:
             # logger.error(sendefehler)
             cl_fact_logger.get_instance().error(sending_error)
 
-    def send_email_smtp_ssl(send_mail_smtp):
+    def send_email_smtp_ssl(self, mail_server, mail_port,mail_user,mail_password,mail_starttls,mail_from,mail_to,mail_subject,mail_message):
         """
         Send email
         """
