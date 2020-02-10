@@ -22,7 +22,9 @@ from messenger.pi_ager_cl_email_server import cl_fact_logic_email_server
 from messenger.pi_ager_cl_email_recipient import cl_fact_logic_email_recipient
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
-
+from smtplib import SMTP , SMTP_SSL
+from smtplib import SMTPException 
+from email.mime.text import MIMEText as text
 # global logger
 # logger = pi_ager_logging.create_logger(__name__)
 
@@ -65,69 +67,124 @@ class cl_logic_send_email:
         cl_fact_logger.get_instance().debug('server = ' + str(self.it_email_server[0]['server']))
         
         for i in range(len(self.it_email_recipient)):
-            
-            self.send_email(
-                str(self.it_email_server[0]['server']), #self.server,
-                str(self.it_email_server[0]['user']), #self.user,
-                str(self.it_email_server[0]['password']), #self.password,
-                str(self.it_email_server[0]['starttls']), #self.STARTTLS,
-                str(self.it_email_server[0]['from_mail']), #self.from_mail,
-                str(self.it_email_recipient[i]['to_mail']), #self.to_mail,
-                alarm_subject,
-                alarm_message)
-                 
-    def send_email(self, SERVER,USER,PASSWORD,STARTTLS,FROM,TO,SUBJECT,MESSAGE):
+            if str(self.it_email_server[0]['port']) == 465:
+                self.send_email_smtp_ssl(
+                    str(self.it_email_server[0]['server']), 
+                    str(self.it_email_server[0]['port']),
+                    str(self.it_email_server[0]['user']), 
+                    str(self.it_email_server[0]['password']),
+                    str(self.it_email_server[0]['starttls']),
+                    str(self.it_email_server[0]['from_mail']),
+                    str(self.it_email_recipient[i]['to_mail']),
+                    alarm_subject,
+                    alarm_message)
+            else:
+                self.send_email_smtp(
+                    str(self.it_email_server[0]['server']), 
+                    str(self.it_email_server[0]['port']),
+                    str(self.it_email_server[0]['user']), 
+                    str(self.it_email_server[0]['password']),
+                    str(self.it_email_server[0]['starttls']),
+                    str(self.it_email_server[0]['from_mail']),
+                    str(self.it_email_recipient[i]['to_mail']),
+                    alarm_subject,
+                    alarm_message)
+                     
+    def send_email_smtp(self, mail_server, mail_port,mail_user,mail_password,mail_starttls,mail_from,mail_to,mail_subject,mail_message):
         """
         Send email
         """
         # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
-        from smtplib import SMTP 
-        from smtplib import SMTPException 
-        from email.mime.text import MIMEText as text
+  
         crypt = cl_fact_help_crypt.get_instance()
-        decrypted_secret = crypt.decrypt(PASSWORD).decode()
-        
-        if STARTTLS:
-            port=587
-        else:
-            port=25
-        cl_fact_logger.get_instance().debug('Server     =' + SERVER)
-        cl_fact_logger.get_instance().debug('Port       =' + str(port))
-        cl_fact_logger.get_instance().debug('User       =' + USER)
+        decrypted_secret = crypt.decrypt(mail_password).decode()
+
+        cl_fact_logger.get_instance().debug('Server     =' + mail_server)
+        cl_fact_logger.get_instance().debug('Port       =' + str(mail_port))
+        cl_fact_logger.get_instance().debug('User       =' + mail_user)
         cl_fact_logger.get_instance().debug('Password   =' + decrypted_secret)
         
         try:
             
-            s = SMTP(SERVER,port)
-            if STARTTLS:
-                s.starttls()
+            server = SMTP(mail_server,mail_port)
+            server.ehlo()
+            if mail_starttls:
+                server.starttls()
             
-            s.login(USER,decrypted_secret)
+            server.login(mail_user,decrypted_secret)
             
     
-            m = text(MESSAGE, 'plain', 'UTF-8')
+            message = text(mail_message, 'plain', 'UTF-8')
     
-            m['Subject'] = SUBJECT
-            m['From'] = FROM
-            m['To'] = TO
+            message['Subject'] = mail_subject
+            message['From'] = mail_from
+            message['To'] = mail_to
     
     
-            s.sendmail(FROM,TO, m.as_string())
-            s.quit()
-            # logger.debug('Alert Email has been sent!')
+            server.sendmail(mail_from,mail_to, message.as_string())
+            server.close()
+            
             cl_fact_logger.get_instance().debug('Alert Email has been sent!')
         except SMTPException as cx_error:
-            sendefehler = 'Error: unable to send email: {err}'.format(err=cx_error)
+            sending_error = 'Error: unable to send email: {err}'.format(err=cx_error)
             # logger.error(sendefehler)
-            cl_fact_logger.get_instance().error(sendefehler)
+            cl_fact_logger.get_instance().error(sending_error)
             
         except Exception as cx_error:
             #TODO err undefined!
-            sendefehler = 'Error: unable to send email: {err}'.format(err=cx_error)
+            sending_error = 'Error: unable to send email: {err}'.format(err=cx_error)
             # logger.error(sendefehler)
-            cl_fact_logger.get_instance().error(sendefehler)
+            cl_fact_logger.get_instance().error(sending_error)
+
+    def send_email_smtp_ssl(send_mail_smtp):
+        """
+        Send email
+        """
+        # logger.debug(cl_fact_logger.get_instance().me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        
+  
+        crypt = cl_fact_help_crypt.get_instance()
+        decrypted_secret = crypt.decrypt(password).decode()
+
+        cl_fact_logger.get_instance().debug('Server     =' + mail_server)
+        cl_fact_logger.get_instance().debug('Port       =' + str(mail_port))
+        cl_fact_logger.get_instance().debug('User       =' + mail_user)
+        cl_fact_logger.get_instance().debug('Password   =' + decrypted_secret)
+        
+        try:
+            
+            server_ssl = SMTP_SSL(mail_server,mail_port)
+            server_ssl.ehlo() 
+            if mail_starttls:
+                server_ssl.starttls()
+            
+            server_ssl.login(mail_user,decrypted_secret)
+            
+    
+            message = text(mail_message, 'plain', 'UTF-8')
+    
+            message['Subject'] = mail_subject
+            message['From'] = mail_from
+            message['To'] = mail_to
+    
+    
+            server_ssl.sendmail(mail_from,mail_to, message.as_string())
+            server_ssl.close()
+            
+            cl_fact_logger.get_instance().debug('Alert Email has been sent!')
+        except SMTPException as cx_error:
+            sending_error = 'Error: unable to send email: {err}'.format(err=cx_error)
+            # logger.error(sendefehler)
+            cl_fact_logger.get_instance().error(sending_error)
+            
+        except Exception as cx_error:
+            #TODO err undefined!
+            sending_error = 'Error: unable to send email: {err}'.format(err=cx_error)
+            # logger.error(sendefehler)
+            cl_fact_logger.get_instance().error(sending_error)
         
 class th_logic_send_email(cl_logic_send_email):   
 

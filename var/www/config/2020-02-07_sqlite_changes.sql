@@ -25,13 +25,6 @@ CREATE TABLE 'system' ('id' INTEGER DEFAULT 0 PRIMARY KEY AUTOINCREMENT NOT NULL
 CREATE TABLE 'agingtable_dryaging1' ('id' INTEGER DEFAULT 0 PRIMARY KEY NOT NULL ,'modus' INTEGER, "setpoint_humidity" INTEGER, "setpoint_temperature" INTEGER, "circulation_air_duration" INTEGER,"circulation_air_period" INTEGER, "exhaust_air_duration" INTEGER, "exhaust_air_period" INTEGER, "days" INTEGER DEFAULT 0 NOT NULL, 'comment' TEXT);
 CREATE TABLE 'scale1_settings' ('id' INTEGER DEFAULT 0 PRIMARY KEY AUTOINCREMENT NOT NULL, 'key' TEXT DEFAULT 0 NOT NULL, 'value' REAL DEFAULT 0 NOT NULL, 'last_change' INTEGER DEFAULT 0 NOT NULL);
 CREATE TABLE 'scale2_settings' ('id' INTEGER DEFAULT 0 PRIMARY KEY AUTOINCREMENT NOT NULL, 'key' TEXT DEFAULT 0 NOT NULL, 'value' REAL DEFAULT 0 NOT NULL, 'last_change' INTEGER DEFAULT 0 NOT NULL);
-CREATE TABLE "config_email_server" (
-    "server" TEXT NOT NULL,
-    "user" TEXT NOT NULL,
-    "password" TEXT NOT NULL,
-    "starttls" INTEGER,
-    "from_mail" TEXT NOT NULL
-);
 CREATE TABLE "config_email_recipient" (
     "id" INTEGER NOT NULL,
     "to_mail" TEXT NOT NULL,
@@ -73,4 +66,12 @@ CREATE TABLE "config_alarm" (
     "low_time" REAL DEFAULT (0.5),
     "waveform" TEXT,
     "frequency" REAL
+);
+CREATE TABLE config_email_server (
+    "server" TEXT NOT NULL,
+    "user" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+    "starttls" INTEGER,
+    "from_mail" TEXT NOT NULL,
+    "port" INTEGER NOT NULL
 );
