@@ -53,7 +53,7 @@ class cl_logic_alarm:
         cl_fact_logger.get_instance().debug("Check Alarm: " + alarm)
         for item in self.it_alarm:
             if item.get('alarm') == alarm:
-                cl_fact_logger.get_instance().debug("Found Alarm: " + alarm + "with replication " + item[replication] + ", high_time " + item[high_time]+ ", low_time " + item[low_time])
+                cl_fact_logger.get_instance().debug("Found Alarm: " + alarm + "with replication " + item['replication'] + ", high_time " + item['high_time']+ ", low_time " + item['low_time'])
                 for x in range(0, item['replication']):
                    gpio.output(self.alarm_gpio, True)
                    sleep(item['high_time'])
