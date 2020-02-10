@@ -12,7 +12,7 @@
 #Variablen
 #####################################################################
 #
-TABLE = config_nfs_backup
+TABLE = "config_nfs_backup"
 # Pfad zur NFS Freigabe (Muss im NAS angelegt werden)
 NFSVOL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsvol from $TABLE where active = 1")
 
