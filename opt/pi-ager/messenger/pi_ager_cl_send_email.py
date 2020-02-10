@@ -109,9 +109,12 @@ class cl_logic_send_email:
         cl_fact_logger.get_instance().debug('Password   =' + decrypted_secret)
         
         try:
-            if mail_port == 465:
+            if str(mail_port) == "465":
+                cl_fact_logger.get_instance().debug('Using SMTPSSL mode')
                 server = SMTP_SSL(mail_server,mail_port)
             else:
+                cl_fact_logger.get_instance().debug('Using plain SMTP mode')
+
                 server = SMTP(mail_server,mail_port)
             
             server.ehlo()
