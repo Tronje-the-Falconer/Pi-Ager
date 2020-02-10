@@ -49,8 +49,8 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         self.db_messenger = cl_fact_db_messenger().get_instance()
         self.it_messenger = self.db_messenger.read_data_from_db()
         
-        self.logic_alarm = cl_fact_logic_alarm().get_instance()
-        self.logic_send_email = cl_fact_logic_send_email().get_instance()
+#        self.logic_alarm = cl_fact_logic_alarm().get_instance()
+#        self.logic_send_email = cl_fact_logic_send_email().get_instance()
         
         
         self.exception_known = False
@@ -99,7 +99,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         
                 if item['alarm'] != '': #"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11"
                     cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
-                    self.fact_logic_alarm.get_instance().execute()
+                    cl_fact_logic_alarm().get_instance().execute()
         
                 if item['telegram'] == 1:
                     cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
