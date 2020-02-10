@@ -119,7 +119,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                     cl_fact_logger.get_instance().critical(str(self.cx_error.__class__.__name__ ))
                     sys.exit(0)
                 return(self.exception_known)
-"""
+
     def build_alarm_message(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return( str(traceback.format_exc()) )
