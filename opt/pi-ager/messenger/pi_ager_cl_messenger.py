@@ -97,9 +97,9 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                 cl_fact_logger.get_instance().debug(item['exception'])
                 cl_fact_logger.get_instance().debug(item['e-mail'])
         
-                if item['alarm'] != '': #"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11"
+                if item['alarm'] != '': 
                     cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
-                    #cl_fact_logic_alarm().get_instance().execute_alarm()
+                    cl_fact_logic_alarm().get_instance().execute_alarm(item['alarm'])
         
                 if item['telegram'] == 1:
                     cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
