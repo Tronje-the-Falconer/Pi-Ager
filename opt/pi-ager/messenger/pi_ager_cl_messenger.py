@@ -101,23 +101,23 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                     cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
                     self.logic_alarm.execute()
         
-                elif item['telegram'] == 1:
+                if item['telegram'] == 1:
                     cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
                     cl_fact_logic_telegram.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
         
-                elif item['pushover'] == 1:
+                if item['pushover'] == 1:
                     
                     cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
                     cl_fact_logic_pushover.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
         
-                elif item['e-mail'] == 1:
+                if item['e-mail'] == 1:
         
                     cl_fact_logger.get_instance().info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
                     cl_fact_logic_send_email.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
                 
-                else:
-                    cl_fact_logger.get_instance().critical(str(self.cx_error.__class__.__name__ ))
-                    sys.exit(0)
+                #else:
+                #    cl_fact_logger.get_instance().critical(str(self.cx_error.__class__.__name__ ))
+                #    sys.exit(0)
                 return(self.exception_known)
 
     def build_alarm_message(self):
