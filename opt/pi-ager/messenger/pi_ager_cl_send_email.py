@@ -147,7 +147,7 @@ class cl_logic_send_email:
         
   
         crypt = cl_fact_help_crypt.get_instance()
-        decrypted_secret = crypt.decrypt(password).decode()
+        decrypted_secret = crypt.decrypt(mail_password).decode()
 
         cl_fact_logger.get_instance().debug('Server     =' + mail_server)
         cl_fact_logger.get_instance().debug('Port       =' + str(mail_port))
