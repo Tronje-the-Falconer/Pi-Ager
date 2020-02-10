@@ -40,34 +40,12 @@ class cl_logic_alarm:
         gpio.setup(pi_ager_gpio_config.gpio_alarm, gpio.OUT )
         self.alarm_gpio = pi_ager_gpio_config.gpio_alarm
         """
-        self.replication  = 3
-        self.Sleep     = 0.5
-        self.High_time = 1
-        self.Low_time  = 1
-        """
-        
-        """
         Read alarm setting from the database
         """
         
         self.db_alarm = cl_fact_db_alarm().get_instance()
         self.it_alarm = self.db_alarm.read_data_from_db()
-        if self.it_alarm: 
-        #    cl_fact_logger.get_instance().debug('user_key  = ' + str(self.it_alarm[0]['user_key']))
-        #    cl_fact_logger.get_instance().debug('api_token = ' + str(self.it_alarm[0]['api_token']))
-        
-        #self.user_key  = str(self.it_alarm[0]['user_key'])
-        #self.api_token = str(self.it_alarm[0]['api_token'])
-        
-        #self.client = Client(self.user_key, api_token=self.api_token)
-            pass
-    def set_alarm_type(self,DutyCycle, Frequency, replication, Sleep):
-        # logger.debug(pi_ager_logging.me())
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        self.DutyCycle = DutyCycle
-        self.Frequency = Frequency
-        self.replication  = replication
-        self.Sleep     = Sleep
+
 
     def execute_alarm(self, alarm):
         # logger.debug(pi_ager_logging.me())
@@ -75,11 +53,11 @@ class cl_logic_alarm:
         
         for item in self.it_alarm:
             if item.get('alarm') == alarm:
-                for x in range(0, item[replication]):
+                for x in range(0, item['replication']):
                    gpio.output(self.alarm_gpio, True)
-                   sleep(item[high_time])
+                   sleep(item['high_time'])
                    gpio.output(self.alarm_gpio, False)
-                   sleep(item[low_time])
+                   sleep(item['low_time'])
 """
     def execute_short(self, replication):
         # logger.debug(pi_ager_logging.me())
