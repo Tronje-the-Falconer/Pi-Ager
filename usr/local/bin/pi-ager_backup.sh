@@ -17,29 +17,27 @@
 # VARIABLEN - HIER EDITIEREN
 
 # Server und Pfad zur NFS Freigabe (Muss im NAS angelegt werden)
-NFSVOL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsvol from nfs_backup where active = 1")
+NFSVOL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsvol from config_nfs_backup where active = 1")
 
 # dieses Verzeichniss muss im NAS angelegt sein
-SUBDIR=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select subdir from nfs_backup where active = 1")
+SUBDIR=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select subdir from config_nfs_backup where active = 1")
 
 # Pfad auf dem Pi indem das Backup gespeichert wird, hierhin wird gemoundet
-NFSMOUNT=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsmount from nfs_backup where active = 1")
+NFSMOUNT=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsmount from config_nfs_backup where active = 1")
 
 #z.B. NFSOPT="nosuid,nodev,rsize=65536,wsize=65536,intr,noatime"
-NFSOPT=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsopt from nfs_backup where active = 1")
+NFSOPT=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select nfsopt from config_nfs_backup where active = 1")
 
 
 # setzt sich zusammen aus dem Dateipfad auf dem Pi und dem Verzeichnis im NAS
-BACKUP_PFAD=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_path from nfs_backup where active = 1")
+BACKUP_PFAD=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_path from config_nfs_backup where active = 1")
 
 # behält die letzten "n" Backups
-BACKUP_ANZAHL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select number_of_backups from nfs_backup where active = 1")
+BACKUP_ANZAHL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select number_of_backups from config_nfs_backup where active = 1")
 
 # Name des Backup
-BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from nfs_backup where active = 1")
+BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from config_nfs_backup where active = 1")
 
-
-DIENSTE_START_STOP="/etc/init.d/pi-ager-main.sh"	# Dienst die vor Backup gestoppt und nach Backup wieder gestartet werden sollen 
 # ENDE VARIABLEN
  
 #####################################################################
