@@ -67,18 +67,19 @@ class cl_logic_send_email:
         cl_fact_logger.get_instance().debug('server = ' + str(self.it_email_server[0]['server']))
         
         for i in range(len(self.it_email_recipient)):
-            if str(self.it_email_server[0]['port']) == "465":
-                self.send_email_smtp_ssl(
-                    str(self.it_email_server[0]['server']), 
-                    str(self.it_email_server[0]['port']),
-                    str(self.it_email_server[0]['user']), 
-                    str(self.it_email_server[0]['password']),
-                    str(self.it_email_server[0]['starttls']),
-                    str(self.it_email_server[0]['from_mail']),
-                    str(self.it_email_recipient[i]['to_mail']),
-                    alarm_subject,
-                    alarm_message)
-            else:
+#            if str(self.it_email_server[0]['port']) == "465":
+            self.send_email_smtp(
+                str(self.it_email_server[0]['server']), 
+                str(self.it_email_server[0]['port']),
+                str(self.it_email_server[0]['user']), 
+                str(self.it_email_server[0]['password']),
+                str(self.it_email_server[0]['starttls']),
+                str(self.it_email_server[0]['from_mail']),
+                str(self.it_email_recipient[i]['to_mail']),
+                alarm_subject,
+                alarm_message)
+#        else:
+"""
                 self.send_email_smtp(
                     str(self.it_email_server[0]['server']), 
                     str(self.it_email_server[0]['port']),
@@ -89,7 +90,7 @@ class cl_logic_send_email:
                     str(self.it_email_recipient[i]['to_mail']),
                     alarm_subject,
                     alarm_message)
-                     
+"""                     
     def send_email_smtp(self, mail_server, mail_port,mail_user,mail_password,mail_starttls,mail_from,mail_to,mail_subject,mail_message):
         """
         Send email
@@ -107,8 +108,11 @@ class cl_logic_send_email:
         cl_fact_logger.get_instance().debug('Password   =' + decrypted_secret)
         
         try:
+            if mail_port == 465:
+                server = SMTP_SSL(mail_server,mail_port)
+            else:
+                server = SMTP(mail_server,mail_port)
             
-            server = SMTP(mail_server,mail_port)
             server.ehlo()
             if mail_starttls == 1:
                 server.starttls()
