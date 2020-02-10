@@ -67,7 +67,7 @@ class cl_logic_send_email:
         cl_fact_logger.get_instance().debug('server = ' + str(self.it_email_server[0]['server']))
         
         for i in range(len(self.it_email_recipient)):
-            if str(self.it_email_server[0]['port']) == 465:
+            if str(self.it_email_server[0]['port']) == "465":
                 self.send_email_smtp_ssl(
                     str(self.it_email_server[0]['server']), 
                     str(self.it_email_server[0]['port']),
