@@ -75,13 +75,14 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         Handle message to create alarm or email or telegram or pushover ... class
         """
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        self.cx_error  = cx_error
-        cl_fact_logger.get_instance().info("Exception raised: " + type(self.cx_error).__name__ + " - " + str(cx_error) )
+        self.cx_error       = cx_error
+        self.cx_error_name  = type(self.cx_error).__name__
+        cl_fact_logger.get_instance().info("Exception raised: " + type(self.cx_error_name) + " - " + str(cx_error) )
         
         cl_fact_logger.get_instance().info(self.it_messenger)
 
         cl_fact_logger.get_instance().exception(self.cx_error, exc_info = True)
-        cl_fact_logger.get_instance().info("Exception raised: " + type(self.cx_error).__name__  )
+        cl_fact_logger.get_instance().info("Exception raised: " +  self.cx_error_name )
         cl_fact_logger.get_instance().info(self.it_messenger)
         
         if self.it_messenger: 
@@ -90,52 +91,34 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             cl_fact_logger.get_instance().debug('pushover  = ' + str(self.it_messenger[0]['pushover']))
             cl_fact_logger.get_instance().debug('telegram  = ' + str(self.it_messenger[0]['telegram']))
             cl_fact_logger.get_instance().debug('alarm     = ' + str(self.it_messenger[0]['alarm']))
-        cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
-        if str(self.cx_error.__class__.__name__ ) == 'cx_Sensor_not_defined':
-            self.logic_alarm.execute_short(replication = 3)
-            self.exception_known = True
-        elif str(self.cx_error.__class__.__name__ ) == 'OperationalError':
-            self.logic_alarm.execute_long(replication = 2)
-            self.exception_known = True
-        elif str(self.cx_error.__class__.__name__ ) == 'SHT1xError':
-            self.logic_alarm.execute_middle(replication = 7)
-            self.exception_known = True
-        elif str(self.cx_error.__class__.__name__ ) == 'cx_i2c_sht_temperature_crc_error':
-            self.logic_alarm.execute_middle(replication = 7)
-            self.exception_known = True
-                
-        else:
-            self.logic_alarm.execute_middle(replication = 12)
+     
+        if self.it_messenger[self.cx_error_name]["alarm"] == 1:
+            cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
+            self.logic_alarm.execute()
+
+        elif self.it_messenger[self.cx_error_name]["telegram"] == 1:
+            cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
+            cl_fact_logic_telegram.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
+
+        elif self.it_messenger[self.cx_error_name]["pushover"] == 1:
             
-        # logger.info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
-        cl_fact_logger.get_instance().info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
-        cl_fact_logic_send_email.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
+            cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
+            cl_fact_logic_pushover.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
+
+        elif self.it_messenger[self.cx_error_name]["e-mail"] == 1:
+
+            cl_fact_logger.get_instance().info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
+            cl_fact_logic_send_email.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
         
-        """
-        if str(self.cx_error.__class__.__name__ ) == 'cx_Sensor_not_defined':
-            self.logic_send_email.execute(self.cx_error, self.build_alarm_subject(), self.build_alarm_message())
-            self.exception_known = True
-        elif str(self.cx_error.__class__.__name__ ) == 'OperationalError':
-            self.logic_send_email.execute(self.cx_error, self.build_alarm_subject(), self.build_alarm_message())
-            self.exception_known = True
         else:
-            self.logic_send_email.execute(self.cx_error, self.build_alarm_subject(), self.build_alarm_message())
-            self.exception_known = False
-        """
-        
-        """
-        cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
-        cl_fact_logic_telegram.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
-        cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
-        cl_fact_logic_pushover.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
-        """
-        if self.exception_known == False:
             cl_fact_logger.get_instance().critical(str(self.cx_error.__class__.__name__ ))
             sys.exit(0)
         return(self.exception_known)
+
     def build_alarm_message(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return( str(traceback.format_exc()) )
+
     def build_alarm_subject(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
