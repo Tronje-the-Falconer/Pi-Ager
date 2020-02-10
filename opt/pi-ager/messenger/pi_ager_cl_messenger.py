@@ -59,7 +59,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             self.logic_send_email.execute( subject, message )
         pass
     def alarm(self, replication, duration):
-        if isinstance(self.logic_alarm, cl_logic_alarm): 
+        if isinstance(self.logic_alarm): 
            
             if duration == 'short':
                 self.logic_alarm.execute_short(replication = replication) 
