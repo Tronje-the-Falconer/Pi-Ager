@@ -110,7 +110,7 @@ class cl_logic_send_email:
             
             server = SMTP(mail_server,mail_port)
             server.ehlo()
-            if mail_starttls:
+            if mail_starttls == 1:
                 server.starttls()
             
             server.login(mail_user,decrypted_secret)
@@ -158,7 +158,7 @@ class cl_logic_send_email:
             
             server_ssl = SMTP_SSL(mail_server,mail_port)
             server_ssl.ehlo() 
-            if mail_starttls:
+            if mail_starttls == 1:
                 server_ssl.starttls()
             
             server_ssl.login(mail_user,decrypted_secret)
