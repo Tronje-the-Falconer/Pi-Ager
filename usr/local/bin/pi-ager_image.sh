@@ -237,6 +237,15 @@ sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
 # change hostname
 raspi-config nonint do_hostname rpi-Pi-Ager
 
+# rewrite /var/.htcredentials
+mv /var/.htcredentials.org  /var/.htcredentials
+
+# rewrite /etc/wpa_supplicant/wpa_supplicant.conf
+mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
+
+# rewrite /boot/setup.txt
+mv /root/setup.txt /boot/setup.txt
+
 ######################################################
 #Force password change for user root
 ######################################################
