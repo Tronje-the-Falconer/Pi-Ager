@@ -42,22 +42,26 @@ class cl_logic_send_email:
         Get email-server settings from the server class
         """
         self.logic_email_server = cl_fact_logic_email_server().get_instance()
-        if not self.logic_email_server:
-            return
+        if self.logic_email_server:
+            try:
+                self.it_email_server = self.logic_email_server.get_data()
+            except IndexError as cx_error:
+                raise(cx_error)
                 
-        self.it_email_server = self.logic_email_server.get_data()
-        if not self.it_email_server:
-            return
+        
+        
 
             #raise cx_no_email_server_config_found 
         """
         Read email recipient's from the database
         """
         self.logic_email_recipient = cl_fact_logic_email_recipient().get_instance()
-        if not self.logic_email_recipient:
-            raise cx_no_email_recipient_config_found 
-        self.it_email_recipient = self.logic_email_recipient.get_data()
-
+        if self.it_email_server:
+            try:
+                self.it_email_recipient = self.logic_email_recipient.get_data()
+            except IndexError as cx_error:
+                raise(cx_error)
+            
     def execute(self, alarm_subject, alarm_message):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
 
