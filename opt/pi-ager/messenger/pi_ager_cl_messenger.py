@@ -36,39 +36,26 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         """
         Constructor for the messenger class
         """ 
-        # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
-        
-        
-        
+
         """
         Read messenger data from DB
         """
         self.db_messenger = cl_fact_db_messenger().get_instance()
         self.it_messenger = self.db_messenger.read_data_from_db()
-        
-#        self.logic_alarm = cl_fact_logic_alarm().get_instance()
-#        self.logic_send_email = cl_fact_logic_send_email().get_instance()
-        
-        
+
         self.exception_known = False
-    def send(self, subject, message):
-        if isinstance(self.logic_send_email, cl_logic_send_email): 
-            self.logic_send_email.execute( subject, message )
-        pass
-    def alarm(self, replication, duration):
-        if isinstance(self.logic_alarm): 
-           
-            if duration == 'short':
-                self.logic_alarm.execute_short(replication = replication) 
-            elif duration == 'middle':
-                self.logic_alarm.execute_middle(replication = replication)
-            elif duration == 'long':
-                self.logic_alarm.execute_long(replication = replication)
-            else:
-                self.logic_alarm.execute_middle(replication = replication)  
+    def send_mail(self, subject, message):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_logger.get_instance().info('Send E-Mail' )
+        cl_fact_logic_send_email.get_instance().execute(subject, message)
+
+    def alarm(self, alarm):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
+        cl_fact_logic_alarm().get_instance().execute_alarm(item['alarm'])
         pass
     def handle_exception(self, cx_error):
         """
@@ -115,9 +102,10 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                     cl_fact_logger.get_instance().info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
                     cl_fact_logic_send_email.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
                 
-                #else:
-                #    cl_fact_logger.get_instance().critical(str(self.cx_error.__class__.__name__ ))
-                #    sys.exit(0)
+                if item['raise_exception'] == 1:
+                    cl_fact_logger.get_instance().critical(str(self.cx_error.__class__.__name__ ))
+                    sys.exit(0)
+                
                 return(self.exception_known)
 
     def build_alarm_message(self):
@@ -132,16 +120,15 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             ip = socket.gethostbyname(hostname)
         except OSError:
             # Probably name lookup wasn't set up right; skip this test
-            cl_fact_logger.get_instance().debug('name lookup failure')
+            cl_fact_logger.get_instance().debug('Host name lookup failure')
         #self.assertTrue(ip.find('.') >= 0, "Error resolving host to ip.")
         try:
             hname, aliases, ipaddrs = socket.gethostbyaddr(ip)
         except OSError:
             # Probably a similar problem as above; skip this test
-            cl_fact_logger.get_instance().debug('name lookup failure')
-        #all_host_names = [hostname, hname] + aliases
-        #hostname = socket.gethostbyaddr(IP.rstrip())
-        return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager Hostname ' + hname + ' occured')
+            cl_fact_logger.get_instance().debug('Host name lookup failure')
+
+        return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager Hostname ' + hostname + ' occured')
 
 class cl_db_messenger(cl_ab_database_config):
 

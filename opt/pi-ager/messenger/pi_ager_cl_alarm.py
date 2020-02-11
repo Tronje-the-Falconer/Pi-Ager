@@ -59,34 +59,7 @@ class cl_logic_alarm:
                    sleep(item['high_time'])
                    gpio.output(self.alarm_gpio, False)
                    sleep(item['low_time'])
-"""
-    def execute_short(self, replication):
-        # logger.debug(pi_ager_logging.me())
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        self.replication = replication
-        self.Sleep    = 0.5
-        self.High_time = 0.5
-        self.Low_time  = 0.5
-        self.execute_alarm()
-           
-    def execute_middle(self, replication):
-        # logger.debug(pi_ager_logging.me())
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        self.replication = replication
-        self.Sleep    = 0.5
-        self.High_time = 1
-        self.Low_time  = 1
-        self.execute_alarm()
-        
-    def execute_long(self, replication):
-        # logger.debug(pi_ager_logging.me())
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        self.replication = replication
-        self.Sleep    = 0.5
-        self.High_time = 2
-        self.Low_time  = 2
-        self.execute_alarm()
-"""
+
 class cl_db_alarm(cl_ab_database_config):
 
     def build_select_statement(self):

@@ -50,14 +50,6 @@ CREATE TABLE "config_nfs_backup" (
     "nfsopt" TEXT,
     "active" INTEGER
 );
-CREATE TABLE config_messenger (
-    "exception" TEXT NOT NULL,
-    "e-mail" INTEGER,
-    "pushover" INTEGER,
-    "telegram" INTEGER,
-    "alarm" TEXT,
-    "active" INTEGER
-);
 CREATE TABLE "config_alarm" (
     "alarm" TEXT NOT NULL DEFAULT ('short'),
     "replication" INTEGER DEFAULT (3),
@@ -75,3 +67,11 @@ CREATE TABLE config_email_server (
     "from_mail" TEXT NOT NULL,
     "port" INTEGER NOT NULL
 );
+CREATE TABLE config_messenger (
+    "exception" TEXT NOT NULL,
+    "e-mail" INTEGER,
+    "pushover" INTEGER,
+    "telegram" INTEGER,
+    "alarm" TEXT,
+    "raise_exception" INTEGER
+, "active" INTEGER);
