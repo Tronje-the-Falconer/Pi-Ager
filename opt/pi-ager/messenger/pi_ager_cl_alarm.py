@@ -45,7 +45,11 @@ class cl_logic_alarm:
         
         self.db_alarm = cl_fact_db_alarm().get_instance()
         self.it_alarm = self.db_alarm.read_data_from_db()
-
+        try:
+            if self.it_alarm: 
+                pass
+        except IndexError as cx_error:
+            raise(cx_error)
 
     def execute_alarm(self, alarm):
         # logger.debug(pi_ager_logging.me())
