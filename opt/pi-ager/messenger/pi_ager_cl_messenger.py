@@ -90,8 +90,10 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         
                 if item['telegram'] == 1:
                     cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
-                    cl_fact_logic_telegram.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
-        
+                    try:
+                        cl_fact_logic_telegram.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
+                    except:
+                        cl_fact_logger.get_instance().info('Telegram settings not active: ')
                 if item['pushover'] == 1:
                     
                     cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))

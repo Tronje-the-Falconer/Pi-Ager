@@ -34,13 +34,15 @@ class cl_logic_telegram:
         """
         self.db_telegram = cl_fact_db_telegram().get_instance()
         self.it_telegram = self.db_telegram.read_data_from_db()
-        if self.it_telegram: 
-            cl_fact_logger.get_instance().debug('bot_token  = ' + str(self.it_telegram[0]['bot_token']))
-            cl_fact_logger.get_instance().debug('bot_chatID = ' + str(self.it_telegram[0]['bot_chatID']))
-        
-        self.bot_token  = str(self.it_telegram[0]['bot_token'])
-        self.bot_chatID = str(self.it_telegram[0]['bot_chatID'])
-        
+        try:
+            if self.it_telegram: 
+                cl_fact_logger.get_instance().debug('bot_token  = ' + str(self.it_telegram[0]['bot_token']))
+                cl_fact_logger.get_instance().debug('bot_chatID = ' + str(self.it_telegram[0]['bot_chatID']))
+            
+            self.bot_token  = str(self.it_telegram[0]['bot_token'])
+            self.bot_chatID = str(self.it_telegram[0]['bot_chatID'])
+        except IndexError as cx_error:
+            raise(cx_error)
     def execute(self, alarm_subject, alarm_message):
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
