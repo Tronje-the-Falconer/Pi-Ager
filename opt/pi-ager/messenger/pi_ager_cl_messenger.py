@@ -95,8 +95,10 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                 if item['pushover'] == 1:
                     
                     cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
-                    cl_fact_logic_pushover.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
-        
+                    try:
+                        cl_fact_logic_pushover.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
+                    except:
+                        cl_fact_logger.get_instance().info('Pushover settings not active: ')
                 if item['e-mail'] == 1:
         
                     cl_fact_logger.get_instance().info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))

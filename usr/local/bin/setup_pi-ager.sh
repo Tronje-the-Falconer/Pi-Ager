@@ -74,8 +74,7 @@ then
         #htpasswd -b /var/.htpasswd reifeschrank $webguipw
         user = pi-ager
         realm = Pi-Ager
-        digest="$( printf "%s:%s:%s" "$user" "$realm" "$webguipw" | 
-           md5sum | awk '{print $1}' )"
+        digest="$( printf "%s:%s:%s" "$user" "$realm" "$webguipw" md5sum | awk '{print $1}' )"
 
 		sed -i -e "/^$user:$realm:/ c$user:$realm:$digest" "/var/.htcredentials"
         echo "Passwort webgui gesetzt"
