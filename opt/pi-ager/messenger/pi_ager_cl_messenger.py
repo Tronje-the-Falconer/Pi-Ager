@@ -55,7 +55,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
     def alarm(self, alarm):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
-        cl_fact_logic_alarm().get_instance().execute_alarm(item['alarm'])
+        cl_fact_logic_alarm().get_instance().execute_alarm(alarm)
         pass
     def handle_exception(self, cx_error):
         """
