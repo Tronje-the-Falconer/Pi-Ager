@@ -127,6 +127,10 @@
                                             <td class="text_left_padding"><input name="samples_scale1_admin" type="number" maxlength="4" size="2" required value=<?php echo $samples_scale1; ?>></td>
                                         </tr>
                                         <tr>
+                                            <td class="text_left_padding"><?php # echo _('spikes'); ?><!--:--></td>
+                                            <td class="text_left_padding"><input type="hidden" name="spikes_scale1_admin" type="number" maxlength="4" size="2" required value=<?php echo $spikes_scale1; ?>></td>
+                                        </tr>
+                                        <tr>
                                             <td colspan="2"><h3><?php echo _('scale'); ?> 2</h3></td>
                                         </tr>
                                         <tr>
@@ -148,6 +152,10 @@
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('samples'); ?>:</td>
                                             <td class="text_left_padding"><input name="samples_scale2_admin" type="number" maxlength="4" size="2" required value=<?php echo $samples_scale2; ?>></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text_left_padding"><?php # echo _('spikes'); ?><!--:--></td>
+                                            <td class="text_left_padding"><input type="hidden" name="spikes_scale2_admin" type="number" maxlength="4" size="2" required value=<?php echo $spikes_scale2; ?>></td>
                                         </tr>
                                     </table>
                                     <script>
