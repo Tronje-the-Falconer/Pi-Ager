@@ -57,11 +57,11 @@ class cl_logic_send_email:
         Read email recipient's from the database
         """
         self.logic_email_recipient = cl_fact_logic_email_recipient().get_instance()
-        if self.it_email_recipient:
-            try:
-                self.it_email_recipient = self.logic_email_recipient.get_data()
-            except IndexError as cx_error:
-                raise(cx_error)
+        try:
+            self.it_email_recipient = self.logic_email_recipient.get_data()
+        except IndexError as cx_error:
+            raise(cx_error)
+        
         cl_fact_logger.get_instance().debug(self.it_email_server)
         cl_fact_logger.get_instance().debug(self.it_email_recipient)
         cl_fact_logger.get_instance().debug('server = ' + str(self.it_email_server[0]['server']))
