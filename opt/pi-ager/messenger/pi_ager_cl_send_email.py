@@ -38,6 +38,10 @@ class cl_logic_send_email:
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
                 
+ 
+            
+    def execute(self, alarm_subject, alarm_message):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         """
         Get email-server settings from the server class
         """
@@ -47,9 +51,6 @@ class cl_logic_send_email:
                 self.it_email_server = self.logic_email_server.get_data()
             except IndexError as cx_error:
                 raise(cx_error)
-                
-        
-        
 
             #raise cx_no_email_server_config_found 
         """
@@ -61,11 +62,6 @@ class cl_logic_send_email:
                 self.it_email_recipient = self.logic_email_recipient.get_data()
             except IndexError as cx_error:
                 raise(cx_error)
-            
-    def execute(self, alarm_subject, alarm_message):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(self.it_email_server)
         cl_fact_logger.get_instance().debug(self.it_email_recipient)
         cl_fact_logger.get_instance().debug('server = ' + str(self.it_email_server[0]['server']))
