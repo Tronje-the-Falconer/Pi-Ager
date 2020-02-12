@@ -179,6 +179,11 @@ find /var/www/logs/ -type f -exec rm "{}" \;
 find /tmp/ -type f -exec rm "{}" \;
 find /root/.cache/ -type f -exec rm "{}" \;
 
+touch /var/www/logs/logfile.txt
+chmod 755 /var/www/logs/logfile.txt
+touch /var/www/logs/pi-ager.log
+chmod 755 /var/www/logs/pi-ager.log
+
 # delete obsolete /opt direcories
 rm -r /opt/git
 rm -r /opt/GPIO-Test
