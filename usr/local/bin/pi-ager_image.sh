@@ -108,7 +108,7 @@ echo "partstart_boot = $partstart_boot"
 echo "loopback_boot = $loopback_boot"
 echo "####################################################################################"
 
-
+apt -y update && apt -y upgrade && apt -y install linux-image && apt --fix-broken install
 
 #read -p "Press enter to continue before image mount"
 mountdir=$(mktemp -d)
