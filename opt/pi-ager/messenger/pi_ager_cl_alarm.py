@@ -45,16 +45,16 @@ class cl_logic_alarm:
         
         self.db_alarm = cl_fact_db_alarm().get_instance()
         self.it_alarm = self.db_alarm.read_data_from_db()
+        
+    def execute_alarm(self, alarm):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_logger.get_instance().debug("Check Alarm: " + alarm)
         try:
             if self.it_alarm: 
                 pass
         except IndexError as cx_error:
             raise(cx_error)
 
-    def execute_alarm(self, alarm):
-        # logger.debug(pi_ager_logging.me())
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cl_fact_logger.get_instance().debug("Check Alarm: " + alarm)
         for item in self.it_alarm:
             if item.get('alarm') == alarm:
                 cl_fact_logger.get_instance().debug("Found Alarm: " + alarm + " with replication " + str(item['replication']) + ", high_time " + str(item['high_time']) + ", low_time " + str(item['low_time']))

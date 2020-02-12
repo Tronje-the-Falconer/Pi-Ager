@@ -33,6 +33,12 @@ class cl_logic_pushover:
         
         self.db_pushover = cl_fact_db_pushover().get_instance()
         self.it_pushover = self.db_pushover.read_data_from_db()
+        
+        
+    def execute(self, alarm_subject, alarm_message):
+        # logger.debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        
         try:
             if self.it_pushover: 
                 cl_fact_logger.get_instance().debug('user_key  = ' + str(self.it_pushover[0]['user_key']))
@@ -42,11 +48,8 @@ class cl_logic_pushover:
             self.api_token = str(self.it_pushover[0]['api_token'])
         except IndexError as cx_error:
             raise(cx_error)
-        self.client = Client(self.user_key, api_token=self.api_token)
         
-    def execute(self, alarm_subject, alarm_message):
-        # logger.debug(pi_ager_logging.me())
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        self.client = Client(self.user_key, api_token=self.api_token)
         
         self.send_pushover(
             alarm_subject,
