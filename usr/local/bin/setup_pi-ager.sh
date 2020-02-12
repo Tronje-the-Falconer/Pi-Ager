@@ -73,8 +73,8 @@ then
     then
         user="pi-ager"
         realm="Pi-Ager"
-        digest="$( printf "%s:%s:%s" "$user" "$realm" "$webguipw" | 
-        	md5sum | awk '{print $1}' )"
+        digest="$( printf "%s:%s:%s" "$user" "$realm" "$webguipw" | md5sum | awk '{print $1}' )"
+        
 		rm /var/.htcredentials
 		echo "$user:$realm:$digest" > /var/.htcredentials
         echo "Passwort webgui gesetzt"

@@ -57,7 +57,7 @@ class cl_logic_send_email:
         Read email recipient's from the database
         """
         self.logic_email_recipient = cl_fact_logic_email_recipient().get_instance()
-        if self.it_email_server:
+        if self.it_email_recipient:
             try:
                 self.it_email_recipient = self.logic_email_recipient.get_data()
             except IndexError as cx_error:
