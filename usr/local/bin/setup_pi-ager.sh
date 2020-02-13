@@ -106,7 +106,7 @@ systemctl disable pi-ager_scale.service pi-ager_agingtable.service # Werden manu
 systemctl enable pi-ager_main.service 
 systemctl start pi-ager_main.service
 # reboot wenn 
-if [ -z "$reboot" ]         #wenn fehlt oder ""
-then
-    shutdown -r now
-fi
+#if [ -z "$reboot" ]         #wenn fehlt oder ""
+#then
+#    shutdown -r now
+#fi

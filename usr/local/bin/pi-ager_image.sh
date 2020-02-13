@@ -149,7 +149,7 @@ apt remove -y influxdb grafana-rpi sysstat stress bareos-common bareos-filedaemo
 apt -y autoremove && apt -y clean &&  apt -y autoclean 
 
 # C++
-#apt remove -y g++-8/stable g++ gcc-4.6-base gcc-4.7-base gcc-4.8-base gcc-4.9-base gcc-5-base gcc-6-base gcc-6 gcc-7-base gcc-8-base gcc-8 gcc gdb 
+#apt remove -y g++-8/stable g++ gcc-4.6-base gcc-4.7-base gcc-4.8-base gcc-4.9-base gcc-5-base gcc-6-base gcc-6 gcc-7-base gcc-8-base gcc-8 gcc gdb pi-bluetooth
 # Fortran
 apt remove -y gfortran-6 gfortran-8 gfortran
 # Old python version
@@ -238,6 +238,9 @@ rm -f /home/pi/subversion
 ######################################################
 # change ssh port:
 sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
+
+# Remove System key for encrypt/decrypt
+rm /home/pi/system_key.bin
 
 # change hostname
 raspi-config nonint do_hostname rpi-Pi-Ager
