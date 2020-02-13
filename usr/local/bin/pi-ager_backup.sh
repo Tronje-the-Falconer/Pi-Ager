@@ -185,7 +185,11 @@ sudo /usr/local/bin/pishrink.sh $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img
 mv ${BACKUP_PFAD}/${BACKUP_NAME}.img ${BACKUP_PFAD}/${BACKUP_NAME}_$(date +%Y-%m-%d-%H:%M:%S).img
 
 # Alte Sicherungen die nach X neuen Sicherungen entfernen
-if [ find ${BACKUP_PFAD}/${BACKUP_NAME}* -type f | wc -l > ${BACKUP_ANZAHL} ]; then
+NUMBER_OF_BACKUPS=$(find ${BACKUP_PFAD}/${BACKUP_NAME}* -type f | wc -l)
+echo "Number of backups that are kept. ${BACKUP_ANZAHL}"
+echo "Actual number of backups. ${NUMBER_OF_BACKUPS}"
+
+if [ ${NUMBER_OF_BACKUPS} -gt ${BACKUP_ANZAHL} ]; then
 	pushd ${BACKUP_PFAD}; ls -tr ${BACKUP_PFAD}/${BACKUP_NAME}* | head -n -${BACKUP_ANZAHL} | xargs rm; popd
 fi
 # Sekundenzähler stoppen ########################################
