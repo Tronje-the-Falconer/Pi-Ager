@@ -46,11 +46,10 @@ class cl_logic_send_email:
         Get email-server settings from the server class
         """
         self.logic_email_server = cl_fact_logic_email_server().get_instance()
-        if self.logic_email_server:
-            try:
-                self.it_email_server = self.logic_email_server.get_data()
-            except IndexError as cx_error:
-                raise(cx_error)
+        try:
+            self.it_email_server = self.logic_email_server.get_data()
+        except IndexError as cx_error:
+            raise(cx_error)
 
             #raise cx_no_email_server_config_found 
         """
