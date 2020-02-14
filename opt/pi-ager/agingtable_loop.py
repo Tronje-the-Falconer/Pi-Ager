@@ -295,6 +295,7 @@ def doAgingtableLoop():
         duration_sleep = get_duration_sleep(int (actual_dictionary['days']))
 
     while period <= total_periods and status_agingtable == 1:
+        time.sleep(1)
         status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
         current_time = pi_ager_database.get_current_time()
         if (period_starttime_seconds == 0 and duration_sleep == 0 and period == 0) or current_time >= period_starttime_seconds + duration_sleep:
