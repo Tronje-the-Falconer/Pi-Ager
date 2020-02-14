@@ -624,11 +624,20 @@ def doMainLoop():
                         gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, pi_ager_names.relay_on)     # Kuehlung ein
                     if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor :
                         gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, pi_ager_names.relay_off)    # Kuehlung aus
+                    #if sensor_humidity <= setpoint_humidity - switch_on_humidifier:
+                    #    gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_on)      # Befeuchtung ein
+                    #if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
+                    #    gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)     # Befeuchtung aus
                     if sensor_humidity <= setpoint_humidity - switch_on_humidifier:
-                        gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_on)      # Befeuchtung ein
+                        if not humidify_delay_switch:
+                            humidify_delay_switch = True
+                            humidify_delay_starttime = pi_ager_database.get_current_time()
+                        if pi_ager_database.get_current_time() >= humidify_delay_starttime + delay_humidify:      # Verzoegerung der Luftbefeuchtung
+                            gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_on)  # Luftbefeuchter ein
                     if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
-                        gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)     # Befeuchtung aus
-                
+                        gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)     # Luftbefeuchter aus
+                        humidify_delay_switch = False
+           
                 # Heizen mit Befeuchtung
                 if modus == 2:
                     status_exhaust_fan = False                     # Feuchtereduzierung Abluft aus
@@ -638,11 +647,20 @@ def doMainLoop():
                         gpio.output(pi_ager_gpio_config.gpio_heater, pi_ager_names.relay_on)   # Heizung ein
                     if sensor_temperature >= setpoint_temperature - switch_off_cooling_compressor:
                         gpio.output(pi_ager_gpio_config.gpio_heater, pi_ager_names.relay_off)  # Heizung aus
+                    #if sensor_humidity <= setpoint_humidity - switch_on_humidifier:
+                    #    gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_on)      # Befeuchtung ein
+                    #if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
+                    #    gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)     # Befeuchtung aus
                     if sensor_humidity <= setpoint_humidity - switch_on_humidifier:
-                        gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_on)      # Befeuchtung ein
+                        if not humidify_delay_switch:
+                            humidify_delay_switch = True
+                            humidify_delay_starttime = pi_ager_database.get_current_time()
+                        if pi_ager_database.get_current_time() >= humidify_delay_starttime + delay_humidify:      # Verzoegerung der Luftbefeuchtung
+                            gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_on)  # Luftbefeuchter ein
                     if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
-                        gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)     # Befeuchtung aus
-                
+                        gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)     # Luftbefeuchter aus
+                        humidify_delay_switch = False
+                           
                 # Automatiktemperatur mit Befeuchtung
                 if modus == 3:
                     status_exhaust_fan = False                     # Feuchtereduzierung Abluft aus
@@ -655,10 +673,20 @@ def doMainLoop():
                         gpio.output(pi_ager_gpio_config.gpio_heater, pi_ager_names.relay_on)   # Heizung ein
                     if sensor_temperature >= setpoint_temperature - switch_off_cooling_compressor:
                         gpio.output(pi_ager_gpio_config.gpio_heater, pi_ager_names.relay_off)  # Heizung aus
+                    #if sensor_humidity <= setpoint_humidity - switch_on_humidifier:
+                    #    gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_on)      # Befeuchtung ein
+                    #if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
+                    #    gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)     # Befeuchtung aus
                     if sensor_humidity <= setpoint_humidity - switch_on_humidifier:
-                        gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_on)      # Befeuchtung ein
+                        if not humidify_delay_switch:
+                            humidify_delay_switch = True
+                            humidify_delay_starttime = pi_ager_database.get_current_time()
+                        if pi_ager_database.get_current_time() >= humidify_delay_starttime + delay_humidify:      # Verzoegerung der Luftbefeuchtung
+                            gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_on)  # Luftbefeuchter ein
                     if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
-                        gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)     # Befeuchtung aus
+                        gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)     # Luftbefeuchter aus
+                        humidify_delay_switch = False
+           
                     # logger.info(_('dehumidifier_modus') + ': ' + str(dehumidifier_modus))
                     # logger.info(_('sensor_humidity') + ': ' + str(sensor_humidity))
                     # logger.info(_('setpoint_humidity') + ': ' + str(setpoint_humidity))
@@ -684,13 +712,10 @@ def doMainLoop():
                         if not humidify_delay_switch:
                             humidify_delay_switch = True
                             humidify_delay_starttime = pi_ager_database.get_current_time()
-                        # counter_humidify = counter_humidify + 1
                         if pi_ager_database.get_current_time() >= humidify_delay_starttime + delay_humidify:      # Verzoegerung der Luftbefeuchtung
-                        #if counter_humidify >= delay_humidify:               # Verzoegerung der Luftbefeuchtung
                             gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_on)  # Luftbefeuchter ein
                     if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
                         gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)     # Luftbefeuchter aus
-                        # counter_humidify = 0
                         humidify_delay_switch = False
                     if sensor_humidity >= setpoint_humidity + switch_on_humidifier:
                         if dehumidifier_modus == 1 or dehumidifier_modus == 2:  # entweder nur über Abluft oder mit unterstützung von Entfeuchter
