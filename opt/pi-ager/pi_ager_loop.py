@@ -578,9 +578,9 @@ def doMainLoop():
                             # logger.debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
                             # logger.debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
                             # logger.debug('Licht period: ' + str(light_period))
-                            cl_fact_logger.get_instance.debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
-                            cl_fact_logger.get_instance.debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
-                            cl_fact_logger.get_instance.debug('Licht period: ' + str(light_period))
+                            cl_fact_logger.get_instance().debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
+                            cl_fact_logger.get_instance().debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
+                            cl_fact_logger.get_instance().debug('Licht period: ' + str(light_period))
     
                         if current_time > pi_ager_init.light_stoptime:
                             pi_ager_init.light_starttime = int(time.time()) + light_period  # Timer-Timestamp aktualisiert
