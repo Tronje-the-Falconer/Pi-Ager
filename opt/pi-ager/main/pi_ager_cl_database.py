@@ -136,7 +136,7 @@ class cl_db_database_sqlite:
         colname = [ d[0] for d in query.description ]
         it_table = [ dict(zip(colname, r)) for r in query.fetchall() ] 
 
-        cl_fact_logger.get_instance().debug('it table =' + str(it_table))
+        #cl_fact_logger.get_instance().debug('it table =' + str(it_table))
         return it_table
  
     def write_data_to_db(self, i_insert_statment, values):
