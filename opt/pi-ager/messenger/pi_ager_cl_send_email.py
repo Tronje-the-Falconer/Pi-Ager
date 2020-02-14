@@ -61,9 +61,9 @@ class cl_logic_send_email:
         except IndexError as cx_error:
             raise(cx_error)
         
-        cl_fact_logger.get_instance().debug(self.it_email_server)
-        cl_fact_logger.get_instance().debug(self.it_email_recipient)
-        cl_fact_logger.get_instance().debug('server = ' + str(self.it_email_server[0]['server']))
+        #cl_fact_logger.get_instance().debug(self.it_email_server)
+        #cl_fact_logger.get_instance().debug(self.it_email_recipient)
+        #cl_fact_logger.get_instance().debug('server = ' + str(self.it_email_server[0]['server']))
         
         for i in range(len(self.it_email_recipient)):
 #            if str(self.it_email_server[0]['port']) == "465":
