@@ -43,21 +43,6 @@ def get_dictionary_out_of_sqliterow(row):
     
     return period_dictionary
 
-def get_sensortype():
-    """
-    function for reading the sensor type
-    """
-    global sensortype
-    # global logger
-    
-    if sensortype == 1 :
-        sensorname = 'DHT11'
-    elif sensortype == 2 :
-        sensorname = 'DHT22'
-    elif sensortype == 3 :
-        sensorname = 'SHT'
-    
-    return sensorname
 
 def get_duration_sleep(period_days):
     """
@@ -117,6 +102,8 @@ def read_dictionary_write_settings(period_dictionary):
     """
     function for writing the settings into the DB
     """
+    from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
+    
     global period_endtime
     global period_starttime_seconds
     global day_in_seconds
@@ -177,7 +164,7 @@ def read_dictionary_write_settings(period_dictionary):
     exhaust_air_duration_format = int(period_dictionary['exhaust_air_duration'])/60
     exhaust_air_duration_logstring = "\n" + '.................................' + _('timer exhausting air') + ": " + str(exhaust_air_duration_format) + ' ' + _("minutes")
     period_days_logstring="\n" + '.................................' + _('duration') + ": " + str(period_dictionary['days']) + ' ' + _('days')
-    sensor_logstring = '.................................' + _('sensortype') + ": " + sensorname
+    sensor_logstring = '.................................' + _('sensortype') + ": " + cl_fact_main_sensor_type().get_instance()._get_type_ui( )
     
     pi_ager_database.write_settings(modus, period_dictionary['setpoint_temperature'], period_dictionary['setpoint_humidity'], period_dictionary['circulation_air_period'], period_dictionary['circulation_air_duration'], period_dictionary['exhaust_air_period'], period_dictionary['exhaust_air_duration'])
 
@@ -203,7 +190,7 @@ def doAgingtableLoop():
     global switch_on_humidifier
     global switch_off_humidifier
     global delay_humidify
-    global sensorname
+    #global sensorname
     global sensortype
     # global logger
 
@@ -226,7 +213,6 @@ def doAgingtableLoop():
 
     # bedingte Werte aus Variablen
     # Sensor
-    sensorname = get_sensortype()
     pi_ager_init.set_language()
     # Variablen
     debug_modus = pi_ager_database.get_table_value(pi_ager_names.debug_table, pi_ager_names.loglevel_console_key)
@@ -295,6 +281,7 @@ def doAgingtableLoop():
         duration_sleep = get_duration_sleep(int (actual_dictionary['days']))
 
     while period <= total_periods and status_agingtable == 1:
+        time.sleep(1)
         status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
         current_time = pi_ager_database.get_current_time()
         if (period_starttime_seconds == 0 and duration_sleep == 0 and period == 0) or current_time >= period_starttime_seconds + duration_sleep:
