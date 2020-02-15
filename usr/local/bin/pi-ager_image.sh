@@ -264,8 +264,36 @@ mv /root/setup.txt /boot/setup.txt
 ######################################################
 
 sqlite3 /var/www/config/pi-ager.sqlite3 <<END_SQL
-UPDATE debug SET value = 20 WHERE key = 'loglevel_file';
-UPDATE debug SET value = 20 WHERE key = 'loglevel_console';
+UPDATE debug SET value = '20' WHERE key = 'loglevel_file';
+UPDATE debug SET value = '20' WHERE key = 'loglevel_console';
+UPDATE debug SET value = '86400' WHERE key = 'agingtable_days_in_seconds_debug';
+UPDATE debug SET value = '30' WHERE key = 'measuring_interval_debug';
+UPDATE scale1_settings SET value='0.1' WHERE key='referenceunit';
+UPDATE scale1_settings SET value='300' WHERE key='measuring_interval';
+UPDATE scale1_settings SET value='15' WHERE key='measuring_duration';
+UPDATE scale1_settings SET value='30' WHERE key='saving_period';
+UPDATE scale1_settings SET value='20' WHERE key='samples';
+UPDATE scale2_settings SET value='0.1' WHERE key='referenceunit';
+UPDATE scale2_settings SET value='300' WHERE key='measuring_interval';
+UPDATE scale2_settings SET value='15' WHERE key='measuring_duration';
+UPDATE scale2_settings SET value='30' WHERE key='saving_period';
+UPDATE scale2_settings SET value='20' WHERE key='samples';
+UPDATE config SET value='2' WHERE key='switch_on_cooling_compressor';
+UPDATE config SET value='0' WHERE key='switch_off_cooling_compressor';
+UPDATE config SET value='20' WHERE key='switch_on_humidifier';
+UPDATE config SET value='0' WHERE key='switch_off_humidifier';
+UPDATE config SET value='5' WHERE key='delay_humidify';
+UPDATE config SET value='12' WHERE key='switch_on_light_hour';
+UPDATE config SET value='30' WHERE key='switch_on_light_minute';
+UPDATE config SET value='240' WHERE key='light_duration';
+UPDATE config SET value='21600' WHERE key='light_period';
+UPDATE config SET value='0' WHERE key='light_modus';
+UPDATE config SET value='11' WHERE key='switch_on_uv_hour';
+UPDATE config SET value='30' WHERE key='switch_on_uv_minute';
+UPDATE config SET value='300' WHERE key='uv_duration';
+UPDATE config SET value='21600' WHERE key='uv_period';
+UPDATE config SET value='0' WHERE key='uv_modus';
+UPDATE config SET value='1' WHERE key='modus';
 DELETE FROM config_nfs_backup;
 #delete FROM config_alarm;
 delete FROM config_email_server;
