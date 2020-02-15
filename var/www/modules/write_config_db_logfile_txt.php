@@ -39,9 +39,9 @@
             if ( $switch_on_cooling_compressor_config<11 && $switch_on_cooling_compressor_config>-1 && ($switch_on_cooling_compressor_config != $switch_off_cooling_compressor_config) &&       // Prüfung Einschaltwert setpoint_temperature.
                 ($switch_on_cooling_compressor_config > $switch_off_cooling_compressor_config) &&                                                              // Prüfung Einschaltwert setpoint_temperature.
                 $switch_off_cooling_compressor_config<11 && $switch_off_cooling_compressor_config>-1 &&                                                        // Prüfung Ausschaltwert setpoint_temperature.
-                $switch_on_humidifier_config<11 && $switch_on_humidifier_config>-1 && ($switch_on_humidifier_config != $switch_off_humidifier_config) &&          // Prüfung Einschaltwert Feuchte
+                $switch_on_humidifier_config<31 && $switch_on_humidifier_config>-1 && ($switch_on_humidifier_config != $switch_off_humidifier_config) &&          // Prüfung Einschaltwert Feuchte
                 ($switch_on_humidifier_config > $switch_off_humidifier_config) &&                                                               // Prüfung Einschaltwert Feuchte
-                $switch_off_humidifier_config<11 && $switch_off_humidifier_config>-1 &&                                                          // Prüfung Ausschaltwert Feuchte
+                $switch_off_humidifier_config<31 && $switch_off_humidifier_config>-1 &&                                                          // Prüfung Ausschaltwert Feuchte
                 $delay_humidify_config<61 && $delay_humidify_config>-1 &&                                                            // Prüfung Verzögerung Feuchte
                 $uv_period_config<1441 && $uv_period_config>-1 &&  (($uv_period_config+$uv_duration_config)>0) &&                 // Prüfung Intervall UV
                 $uv_duration_config<1441 && $uv_duration_config>-1  &&                              // Prüfung Dauer UV
