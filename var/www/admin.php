@@ -108,23 +108,23 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('reference unit'); ?>:</td>
-                                            <td class="text_left_padding"><input name="referenceunit_scale1_admin" type="number" step="0.1" min="0.1" max="999.9" required value=<?php echo $referenceunit_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="referenceunit_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" step="0.1" min="0.1" max="999.9" required value=<?php echo $referenceunit_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring interval'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_interval_scale1_admin" type="number" min="10" max="3600" required value=<?php echo $measuring_interval_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="measuring_interval_scale1_admin" type="number" style="width: 90%;" min="10" max="3600" required value=<?php echo $measuring_interval_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring duration'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_duration_scale1_admin" type="number" maxlength="4" size="2" required value=<?php echo $measuring_duration_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="measuring_duration_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $measuring_duration_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
-                                            <td class="text_left_padding"><input name="saving_period_scale1_admin" type="number" maxlength="4" size="2" required value=<?php echo $saving_period_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="saving_period_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $saving_period_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('samples'); ?>:</td>
-                                            <td class="text_left_padding"><input name="samples_scale1_admin" type="number" maxlength="4" size="2" required value=<?php echo $samples_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="samples_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $samples_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php # echo _('spikes'); ?><!--:--></td>
@@ -135,23 +135,23 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('reference unit'); ?>:</td>
-                                            <td class="text_left_padding"><input name="referenceunit_scale2_admin" type="number" step="0.1" min="0.1" max="999.9" required value=<?php echo $referenceunit_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="referenceunit_scale2_admin" type="number" style="width: 90%;" step="0.1" min="0.1" max="999.9" required value=<?php echo $referenceunit_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring interval'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_interval_scale2_admin" type="number" min="10" max="3600" required value=<?php echo $measuring_interval_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="measuring_interval_scale2_admin" type="number" style="width: 90%;" min="10" max="3600" required value=<?php echo $measuring_interval_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring duration'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_duration_scale2_admin" type="number" maxlength="4" size="2" required value=<?php echo $measuring_duration_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="measuring_duration_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $measuring_duration_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
-                                            <td class="text_left_padding"><input name="saving_period_scale2_admin" type="number" maxlength="4" size="2" required value=<?php echo $saving_period_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="saving_period_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $saving_period_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('samples'); ?>:</td>
-                                            <td class="text_left_padding"><input name="samples_scale2_admin" type="number" maxlength="4" size="2" required value=<?php echo $samples_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="samples_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $samples_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php # echo _('spikes'); ?><!--:--></td>
@@ -328,11 +328,11 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo _('measuring interval'); ?>:</td>
-                                                <td><input name="measuring_interval_debug" type="number" min="1" max="60" required value=<?php echo $measuring_interval_debug; ?>></td>
+                                                <td><input name="measuring_interval_debug" type="number" style="width: 90%;" min="1" max="60" required value=<?php echo $measuring_interval_debug; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('agingtable days in seconds'); ?>:</td>
-                                                <td><input name="agingtable_days_in_seconds_debug" type="number" min="1" max="86400" required value=<?php echo $agingtable_days_in_seconds_debug; ?>></td>
+                                                <td><input name="agingtable_days_in_seconds_debug" type="number" style="width: 90%;" min="1" max="86400" required value=<?php echo $agingtable_days_in_seconds_debug; ?>></td>
                                             </tr>
 
                                         </table>

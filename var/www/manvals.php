@@ -13,7 +13,7 @@
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <form method="post" name="manvals">
                                     <div class="hg_container" >
-                                        <table style="width: 100%;" class="miniature_writing">
+                                        <table style="width: 100%;table-layour: fixed";>
                                             <tr>
                                                 <td class="td_png_icon"><h3><?php echo _('operating mode'); ?></h3><img src="images/icons/operatingmode_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_operation_mode_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td style=" text-align: left; padding-left: 20px;">
@@ -50,16 +50,11 @@
 
                                         <hr>
                                         <!----------------------------------------------------------------------------------------Temperatur-->
-                                        <table style="width: 100%;" class="miniature_writing">
+                                        <table style="width: 100%;table-layout: fixed;">
                                             <tr>
                                                 <td rowspan="4" class="td_png_icon"><h3><?php echo _('temperature'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td class="text_left_padding"><?php echo _('setpoint temperature'); ?>:</td>
-                                                <td class="text_left_padding"><input name="setpoint_temperature_settings" type="number" min="0" max="22" value=<?php echo $setpoint_temperature; ?>>°C<span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 22)</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
+                                                <td style="text-align: left;"><input name="setpoint_temperature_settings" type="number" style="width: 30%;" min="0" max="22" value=<?php echo $setpoint_temperature; ?>>°C<span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 22)</span></td>
                                             </tr>
                                         </table>
                                         <script>
@@ -105,11 +100,11 @@
                                         <hr>
                                         <!----------------------------------------------------------------------------------------Luftfeuchte-->
                                         <div style="<?php if ($modus == 0){print "display: none;";}?>">
-                                        <table style="width: 100%;" class="miniature_writing">
+                                        <table style="width: 100%;table-layout: fixed;">
                                             <tr>
                                                 <td rowspan="4" class="td_png_icon"><h3><?php echo _('humidity'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td class="text_left_padding"><?php echo _('setpoint humidity'); ?></td>
-                                                <td class="text_left_padding"><input name="setpoint_humidity_settings" type="number" min="0" max="99" value=<?php echo $setpoint_humidity; ?>>%<span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 99)</span></td>
+                                                <td style="text-align: left;"><input name="setpoint_humidity_settings" type="number" style="width: 30%;" min="0" max="99" value=<?php echo $setpoint_humidity; ?>>%<span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 99)</span></td>
                                             </tr>
                                         </table>
                                         <script>
@@ -131,25 +126,15 @@
                                         <hr>
                                         </div>
                                         <!----------------------------------------------------------------------------------------Umluft-->
-                                        <table style="width: 100%;" class="miniature_writing">
+                                        <table style="width: 100%;table-layout: fixed;">
                                             <tr>
                                                 <td rowspan="4" class="td_png_icon"><h3><?php echo _('timer circulating'); ?></h3><img src="images/icons/circulate_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_exhausting_air_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td class="text_left_padding"><?php echo _('period every'); ?> </td>
-                                                <td class="text_left_padding"><input type="number" min="0" max="1440" name="circulation_air_period_settings" value=<?php echo round($circulation_air_period); ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span></td>
+                                                <td style="text-align: left;"><input type="number" style="width: 35%;" min="0" max="1440" name="circulation_air_period_settings" value=<?php echo round($circulation_air_period); ?>><?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span></td>
                                             </tr>
                                             <tr>
                                                 <td class="text_left_padding"><?php echo _('for the duration of'); ?></td>
-                                                <td class="text_left_padding"><input type="number" min="0" max="1440" name="circulation_air_duration_settings" value=<?php echo $circulation_air_duration; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0=<?php echo _('off'); ?>)</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
+                                                <td style="text-align: left;"><input type="number" style="width: 35%;" min="0" max="1440" name="circulation_air_duration_settings" value=<?php echo $circulation_air_duration; ?>><?php echo _('minutes'); ?><span style="font-size: xx-small"> (0=<?php echo _('off'); ?>)</span></td>
                                             </tr>
                                         </table>
                                         <script>
@@ -173,31 +158,14 @@
                                         </p>
                                         <hr>
                                         <!----------------------------------------------------------------------------------------Abluft-->
-                                        <table style="width: 100%;" class="miniature_writing">
+                                        <table style="width: 100%;table-layout: fixed;">
                                             <tr>
                                                 <td rowspan="4" class="td_png_icon"><h3><?php echo _('timer exhausting air'); ?></h3><img src="images/icons/exhausting_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_circulation_air_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td class="text_left_padding"><?php echo _('period every'); ?> </td>
-                                                <td class="text_left_padding"><input type="number" min="0" max="1440" name="exhaust_air_period_settings" value=<?php echo round($exhaust_air_period); ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span></td>
+                                                <td style="text-align: left;"><input type="number" style="width: 35%;" min="0" max="1440" name="exhaust_air_period_settings" value=<?php echo round($exhaust_air_period); ?>><?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span></td>
                                             </tr>
                                             <tr><td class="text_left_padding"><?php echo _('for the duration of'); ?></td>
-                                                <td class="text_left_padding"><input type="number" min="0" max="1440" name="exhaust_air_duration_settings" value=<?php echo $exhaust_air_duration; ?>><?php echo _('minutes'); ?><span class="display_none" style="font-size: xx-small"> (0=<?php echo _('off'); ?>)</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td class="td_submitbutton">
-                                                    <button class="art-button" name="manvals_form_submit" type="submit" value="manvals_form_submit" onclick="return confirm('<?php echo _('save'); echo ' '; echo _('manual values'); ?>?')"><?php echo _('save'); ?> </button>
-                                                </td>
+                                                <td style="text-align: left;"><input type="number" style="width: 35%;" min="0" max="1440" name="exhaust_air_duration_settings" value=<?php echo $exhaust_air_duration; ?>><?php echo _('minutes'); ?><span style="font-size: xx-small"> (0=<?php echo _('off'); ?>)</span></td>
                                             </tr>
                                         </table>
                                         <script>
@@ -219,5 +187,14 @@
                                             _('period=0 und duration=0 is not useful and not allowed.').'<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_circulation_air_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
+                                        <br>
+                                        <br>
+                                        <table style="width: 100%; align: center;">
+                                             <tr>
+                                                <td class="td_submitbutton">
+                                                    <button class="art-button" name="manvals_form_submit" type="submit" value="manvals_form_submit" onclick="return confirm('<?php echo _('save'); echo ' '; echo _('manual values'); ?>?')"><?php echo _('save'); ?> </button>
+                                                </td>
+                                            </tr>
+                                        </table>                                            
                                     </div>
                                 </form>
