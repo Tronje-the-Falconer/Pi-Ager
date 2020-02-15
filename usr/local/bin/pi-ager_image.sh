@@ -285,7 +285,8 @@ delete FROM heater_status;
 delete FROM humidifier_status;
 delete FROM light_status;
 delete FROM config_pushover;
-delete FROM config_telegram
+delete FROM config_telegram;
+
 
 END_SQL
 
