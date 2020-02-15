@@ -74,7 +74,7 @@
                                                 <tr>
                                                     <td rowspan="4" class="td_png_icon"><h3><?php echo _('humidity'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td><?php echo _('switch-on value').':'; ?></td>
-                                                    <td><input name="switch_on_humidifier_config" type="number" style="width: 30%;" min="0" max="10" required value=<?php echo $switch_on_humidifier; ?>>%<span style="font-size: xx-small">
+                                                    <td><input name="switch_on_humidifier_config" type="number" style="width: 30%;" min="0" max="30" required value=<?php echo $switch_on_humidifier; ?>>%<span style="font-size: xx-small">
                                                     <?php 
                                                                 if($modus == 0 || $modus == 1 || $modus == 2){
                                                                     echo '('._('on at'). ' '.($setpoint_humidity-$switch_on_humidifier)."%)";
@@ -87,7 +87,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td><?php echo _('switch-off value').':'; ?></td>
-                                                    <td><input name="switch_off_humidifier_config" type="number" style="width: 30%;" min="0" max="10" required value=<?php echo $switch_off_humidifier; ?>>%<span style="font-size: xx-small">
+                                                    <td><input name="switch_off_humidifier_config" type="number" style="width: 30%;" min="0" max="30" required value=<?php echo $switch_off_humidifier; ?>>%<span style="font-size: xx-small">
                                                     <?php 
                                                                 if($modus == 0 || $modus == 1 || $modus == 2){
                                                                     echo '('._('off at'). ' '.($setpoint_humidity-$switch_off_humidifier)."%)";
@@ -112,8 +112,8 @@
                                             </script>
                                             <p id="help_humidify_config" class="help_p">
                                                 <?php echo '<b><u>'._('switching hysteresis').'</u></b><br>
-                                                <b>'._('switch-on value').':</b>'._('is the value at which the control becomes active (value: 0-10%)').'<br>
-                                                <b>'._('switch-off value').':</b>'._('is the value at which the control becomes inactive (value: 0-10%)').'<br>'.
+                                                <b>'._('switch-on value').':</b>'._('is the value at which the control becomes active (value: 0-30%)').'<br>
+                                                <b>'._('switch-off value').':</b>'._('is the value at which the control becomes inactive (value: 0-30%)').'<br>'.
                                                 _('the values may not be the same in order to avoid a wild switching on and off.').'<br><br>
                                                 <b>'._('delay').':</b>'._('here the delay time is set until the humidifier turns on if the humidity is too low. this can be used to blast out the rapidly falling air humidity during "cooling", "timer exhaust" or "dehumidification". The minimum value is 0 minutes, the maximum 60 minutes.').'<br><br>
                                                 <b>'._('example').'</b> <i>'._('target humidity').': 75%'._('switch-on value').': 5%'._('switch-off value').': 1%</i><br>'.
