@@ -41,19 +41,15 @@
     elseif ($_SERVER['PHP_SELF'] == '/edit_agingtable.php') {
         $edit_agingtable_active = 'active';
     }
-    $language_admin = 1; #sollte aus der Datenbank kommen
+    
     # Language festlegen
-    if ( $language_admin == 1 ){
-        $language = 'de_DE.utf8';
-    }
-    elseif ( $language_admin == 2 ){
-        $language = 'en_EN.utf8';
-    }
-    putenv("LANG=$language");
+    $language = 'de_DE.utf8';
+    putenv("LANG=$language"); 
     setlocale(LC_ALL, $language);
-        
+
+    # Set the text domain as 'messages'
     $domain = 'pi-ager';
-    bindtextdomain($domain, "/var/www/locale");
+    bindtextdomain($domain, "/var/www/locale"); 
     textdomain($domain);
 ?>
 <!DOCTYPE html>
