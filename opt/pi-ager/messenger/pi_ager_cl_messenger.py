@@ -64,7 +64,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.cx_error       = cx_error
         self.cx_error_name  = type(self.cx_error).__name__
-        #cl_fact_logger.get_instance().info("Exception raised: " + self.cx_error_name + " - " + str(cx_error) )
+        cl_fact_logger.get_instance().info("Exception raised: " + self.cx_error_name + " - " + str(cx_error) )
         
         #cl_fact_logger.get_instance().info(self.it_messenger)
 
@@ -72,12 +72,12 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().info("Exception raised: " +  self.cx_error_name )
         #cl_fact_logger.get_instance().info(self.it_messenger)
         
-        if self.it_messenger: 
-            cl_fact_logger.get_instance().debug('exception = ' + str(self.it_messenger[0]['exception']))
-            cl_fact_logger.get_instance().debug('e-mail    = ' + str(self.it_messenger[0]['e-mail']))
-            cl_fact_logger.get_instance().debug('pushover  = ' + str(self.it_messenger[0]['pushover']))
-            cl_fact_logger.get_instance().debug('telegram  = ' + str(self.it_messenger[0]['telegram']))
-            cl_fact_logger.get_instance().debug('alarm     = ' + str(self.it_messenger[0]['alarm']))
+        #if self.it_messenger: 
+            #cl_fact_logger.get_instance().debug('exception = ' + str(self.it_messenger[0]['exception']))
+            #cl_fact_logger.get_instance().debug('e-mail    = ' + str(self.it_messenger[0]['e-mail']))
+            #cl_fact_logger.get_instance().debug('pushover  = ' + str(self.it_messenger[0]['pushover']))
+            #cl_fact_logger.get_instance().debug('telegram  = ' + str(self.it_messenger[0]['telegram']))
+            #cl_fact_logger.get_instance().debug('alarm     = ' + str(self.it_messenger[0]['alarm']))
      
         for item in self.it_messenger:
             if item.get('exception') == self.cx_error_name :
