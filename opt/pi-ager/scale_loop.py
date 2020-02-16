@@ -93,7 +93,7 @@ def get_first_calibrate_measure(scale, scale_settings_table, calibrate_scale_key
         scale.setSpikes(int(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.spikes_key)))
     except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
-            exit
+            calibrate_value_before_weight = 0
     return calibrate_value_before_weight
     
 def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table, calibrate_value_first_measure):
