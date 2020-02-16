@@ -13,6 +13,7 @@ encoding//opt/pi-ager/pi_ager_database.py=utf-8
 encoding//opt/pi-ager/pi_ager_database_check.py=UTF-8
 encoding//opt/pi-ager/pi_ager_names.py=utf-8
 encoding//opt/pi-ager/sensors/pi_ager_cl_ab_sensor.py=utf-8
+encoding//opt/pi-ager/sensors/pi_ager_cl_hx711.py=utf-8
 encoding//opt/pi-ager/sensors/pi_ager_cl_i2c_bus.py=utf-8
 encoding//opt/pi-ager/sensors/pi_ager_cl_sensor.py=utf-8
 encoding//opt/pi-ager/sensors/pi_ager_cl_sensor_dht11.py=utf-8
