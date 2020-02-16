@@ -41,7 +41,7 @@
     elseif ($_SERVER['PHP_SELF'] == '/edit_agingtable.php') {
         $edit_agingtable_active = 'active';
     }
-    
+    $language_admin = 2; #sollte aus der Datenbank kommen
     # Language festlegen
     if ( $language_admin == 1 ){
         $language = 'de_DE.utf8';
