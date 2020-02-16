@@ -5,6 +5,7 @@ import pi_ager_database
 import pi_ager_names
 import pi_ager_gpio_config
 from main.pi_ager_cl_logger import cl_fact_logger
+from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 
 #cl_fact_logger.get_instance()
 
