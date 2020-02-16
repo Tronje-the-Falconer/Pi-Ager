@@ -95,25 +95,27 @@ def get_first_calibrate_measure(scale, scale_settings_table, calibrate_scale_key
     return calibrate_value_before_weight
     
 def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table, calibrate_value_first_measure):
-    # scale.setReferenceUnit(1)
-    old_ref_unit = pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.referenceunit_key)
-    scale.setReferenceUnit(old_ref_unit)
-    scale.setSamples(int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_refunit_tara_key)))
-    scale.setSpikes(int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.spikes_refunit_tara_key)))
-    
-    calibrate_weight = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_weight_key)
-    clear_history = scale.getWeight()
-    calibrate_value_after_weight = scale.getMeasure()
-    reference_unit = (calibrate_value_after_weight - calibrate_value_first_measure)/calibrate_weight * old_ref_unit
-    if reference_unit == 0:
-        pi_ager_database.write_current_value(calibrate_scale_key,5)
-    else:
-        pi_ager_database.update_value_in_table(scale_settings_table, pi_ager_names.referenceunit_key, reference_unit)
-        scale.setReferenceUnit(reference_unit)
-        pi_ager_database.write_current_value(calibrate_scale_key,4)
-    scale.setSamples(int(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.samples_key)))
-    scale.setSpikes(int(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.spikes_key)))
-
+    try:
+        # scale.setReferenceUnit(1)
+        old_ref_unit = pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.referenceunit_key)
+        scale.setReferenceUnit(old_ref_unit)
+        scale.setSamples(int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.samples_refunit_tara_key)))
+        scale.setSpikes(int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.spikes_refunit_tara_key)))
+        
+        calibrate_weight = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.calibrate_weight_key)
+        clear_history = scale.getWeight()
+        calibrate_value_after_weight = scale.getMeasure()
+        reference_unit = (calibrate_value_after_weight - calibrate_value_first_measure)/calibrate_weight * old_ref_unit
+        if reference_unit == 0:
+            pi_ager_database.write_current_value(calibrate_scale_key,5)
+        else:
+            pi_ager_database.update_value_in_table(scale_settings_table, pi_ager_names.referenceunit_key, reference_unit)
+            scale.setReferenceUnit(reference_unit)
+            pi_ager_database.write_current_value(calibrate_scale_key,4)
+        scale.setSamples(int(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.samples_key)))
+        scale.setSpikes(int(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.spikes_key)))
+    except Exception as cx_error:
+            cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
 def doScaleLoop():
     
     scale1_settings_table = pi_ager_names.settings_scale1_table
