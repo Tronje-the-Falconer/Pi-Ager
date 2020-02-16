@@ -43,13 +43,17 @@
     }
     
     # Language festlegen
-    $language = 'de_DE.utf8';
-    putenv("LANG=$language"); 
+    if ( $language_admin == 1 ){
+        $language = 'de_DE.utf8';
+    }
+    elseif ( $language_admin == 2 ){
+        $language = 'en_EN.utf8';
+    }
+    putenv("LANG=$language");
     setlocale(LC_ALL, $language);
-
-    # Set the text domain as 'messages'
+        
     $domain = 'pi-ager';
-    bindtextdomain($domain, "/var/www/locale"); 
+    bindtextdomain($domain, "/var/www/locale");
     textdomain($domain);
 ?>
 <!DOCTYPE html>
