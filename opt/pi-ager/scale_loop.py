@@ -214,4 +214,4 @@ def doScaleLoop():
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
             pass    
             
-        time.sleep(2)
+        time.sleep(5)
