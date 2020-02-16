@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import time
-from hx711 import HX711
+from hx711 import Scale
 import pi_ager_database
 import pi_ager_names
 import pi_ager_gpio_config
@@ -75,7 +75,6 @@ def get_scale_settings(scale_setting_rows):
             scale_settings[scale_setting_row[pi_ager_names.key_field]] = scale_setting_row[pi_ager_names.value_field]
     except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
-            exit
     return scale_settings
     
 def get_first_calibrate_measure(scale, scale_settings_table, calibrate_scale_key):
@@ -117,7 +116,7 @@ def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table, c
         scale.setSamples(int(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.samples_key)))
         scale.setSpikes(int(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.spikes_key)))
     except Exception as cx_error:
-            cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+        cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
 def doScaleLoop():
     
     scale1_settings_table = pi_ager_names.settings_scale1_table
@@ -146,7 +145,7 @@ def doScaleLoop():
             
             if status_scale1 == 1 or calibrate_scale1 in [1, 2, 3, 4, 5] or status_tara_scale1 in [1, 2]:
                 
-                scale1 = HX711(dout=pi_ager_gpio_config.gpio_scale1_data, pd_sck=pi_ager_gpio_config.gpio_scale1_sync, gain=int(scale1_settings[pi_ager_names.gain_key]), bitsToRead=int(scale1_settings[pi_ager_names.bits_to_read_key]))
+                scale1 = Scale(source=None, samples=int(scale1_settings[pi_ager_names.samples_key]), spikes=int(scale1_settings[pi_ager_names.spikes_key]), sleep=scale1_settings[pi_ager_names.sleep_key], dout=pi_ager_gpio_config.gpio_scale1_data, pd_sck=pi_ager_gpio_config.gpio_scale1_sync, gain=int(scale1_settings[pi_ager_names.gain_key]), bitsToRead=int(scale1_settings[pi_ager_names.bits_to_read_key]))
             
                 scale1_measuring_duration = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.measuring_duration_key)
                 saving_period_scale1 = pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table, pi_ager_names.saving_period_key)
@@ -179,7 +178,7 @@ def doScaleLoop():
     
             if status_scale2 == 1 or calibrate_scale2 in [1, 2, 3, 4, 5] or status_tara_scale2 in [1, 2]:
 
-                scale2 = HX711(dout=pi_ager_gpio_config.gpio_scale2_data, pd_sck=pi_ager_gpio_config.gpio_scale2_sync, gain=int(scale2_settings[pi_ager_names.gain_key]), bitsToRead=int(scale2_settings[pi_ager_names.bits_to_read_key]))
+                scale2 = Scale(source=None, samples=int(scale2_settings[pi_ager_names.samples_key]), spikes=int(scale2_settings[pi_ager_names.spikes_key]), sleep=scale2_settings[pi_ager_names.sleep_key], dout=pi_ager_gpio_config.gpio_scale2_data, pd_sck=pi_ager_gpio_config.gpio_scale2_sync, gain=int(scale2_settings[pi_ager_names.gain_key]), bitsToRead=int(scale2_settings[pi_ager_names.bits_to_read_key]))
                 scale2_measuring_duration = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.measuring_duration_key)
                 saving_period_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.saving_period_key)
                 offset_scale2 = pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table, pi_ager_names.offset_scale_key)
