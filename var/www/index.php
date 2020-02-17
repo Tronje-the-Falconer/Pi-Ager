@@ -1,8 +1,9 @@
 <?php
-                                      include 'header.php';                                       // Template-Kopf und Navigation
                                       include 'modules/database.php';                             // Schnittstelle zur Datenbank
                                       include 'modules/logging.php';                            //liest die Datei fuer das logging ein
                                       include 'modules/names.php';                                // Variablen mit Strings
+                                      include 'header.php';                                       // Template-Kopf und Navigation
+                                      
                                       include 'modules/read_settings_db.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lueftung) und Betriebsart des RSS
                                       include 'modules/read_config_db.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                       include 'modules/read_operating_mode_db.php';                  // Liest die Art der Reifesteuerung
