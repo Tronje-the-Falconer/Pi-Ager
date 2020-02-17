@@ -155,7 +155,6 @@
         while ($index_row < $number_rows) {
             $dataset = $agingtable_rows[$index_row];
             if ($index_row == -1){
-                $data_id = $id_field;
                 $data_modus = $agingtable_modus_field;
                 $data_setpoint_humidity = $agingtable_setpoint_humidity_field;
                 $data_setpoint_temperature = $agingtable_setpoint_temperature_field;
@@ -167,9 +166,6 @@
                 $data_comment = $agingtable_comment_field;
             }
             else{
-                if (!empty($dataset[$id_field])){
-                    $data_id = intval($dataset[$id_field]);
-                } else {$data_id = NULL;}
                 if (!empty($dataset[$agingtable_modus_field])){
                     $data_modus = intval($dataset[$agingtable_modus_field]);
                 } else {$data_modus = NULL;}
@@ -200,7 +196,7 @@
             }
 
 
-            $line = $data_id . ',' . $data_modus . ',' . $data_setpoint_humidity . ',' . $data_setpoint_temperature .',' . $data_circulation_air_duration .',' . $data_circulation_air_period .',' . $data_exhaust_air_duration .',' . $data_exhaust_air_period .',' . $data_days .',' . $data_comment;
+            $line = $data_modus . ',' . $data_setpoint_humidity . ',' . $data_setpoint_temperature .',' . $data_circulation_air_duration .',' . $data_circulation_air_period .',' . $data_exhaust_air_duration .',' . $data_exhaust_air_period .',' . $data_days .',' . $data_comment;
             fputcsv($file, explode(',', $line));
             $index_row++;
         }
