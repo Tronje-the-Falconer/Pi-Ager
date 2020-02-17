@@ -43,7 +43,14 @@
     }
     
     # Language festlegen
-    $language = 'de_DE.utf8';
+    $language = get_table_value($config_settings_table,$language_key);
+    if ($language == 1) {
+        $language = 'de_DE.utf8';
+    }
+    elseif ($language == 2) {
+        $language = 'en_EN.utf8';
+    }
+    # $language = 'de_DE.utf8';
     putenv("LANG=$language");
     setlocale(LC_ALL, $language);
    
