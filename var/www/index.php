@@ -18,7 +18,7 @@
 <?php
 # Language festlegen
 if ( $language_key == 1 ){
-    $language = 'de_DE.utf8';
+    $language = 'de_DE';
 }
 elseif ( $language_key == 2 ){
     $language = 'en_EN.utf8';
