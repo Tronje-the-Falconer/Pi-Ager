@@ -45,8 +45,8 @@
     # Language festlegen
     
     #### BEGIN Language from DB
-    #include 'modules/database.php';
-    #$language = get_table_value($config_settings_table,$language_key);
+    #include 'modules/read_language.php';
+    #$language = get_language($config_settings_table,$language_key);
     #if ($language == 1) {
     #    $language = 'de_DE.utf8';
     #}
