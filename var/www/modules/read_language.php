@@ -3,7 +3,7 @@
     
     function get_language()
     {
-        global $value_field,$id_field;
+        global $value_field,$id_field, $config_settings_table, $language_key;
         
         $table = $config_settings_table;
         $key = $language_key;
