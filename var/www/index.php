@@ -15,17 +15,6 @@
                                 <div style="float: left; padding-left: 8px;" id="time_difference"></div>
                         -->
                                 <!----------------------------------------------------------------------------------------Anzeige T/rLF-->
-<?php
-# Language festlegen
-if ( $language_key == 1 ){
-    $language = 'de_DE.utf8';
-}
-elseif ( $language_key == 2 ){
-    $language = 'en_EN.utf8';
-}
-putenv("LANG=$language");
-setlocale(LC_ALL, $language);
-?>
 
 <?php
  echo "<script src='js/ajax.js'></script>";
