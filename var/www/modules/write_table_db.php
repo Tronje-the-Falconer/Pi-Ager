@@ -155,6 +155,7 @@
         while ($index_row < $number_rows) {
             $dataset = $agingtable_rows[$index_row];
             if ($index_row == -1){
+                $data_id = 'id';
                 $data_modus = $agingtable_modus_field;
                 $data_setpoint_humidity = $agingtable_setpoint_humidity_field;
                 $data_setpoint_temperature = $agingtable_setpoint_temperature_field;
