@@ -196,7 +196,7 @@
             }
 
 
-            $line = $data_modus . ',' . $data_setpoint_humidity . ',' . $data_setpoint_temperature .',' . $data_circulation_air_duration .',' . $data_circulation_air_period .',' . $data_exhaust_air_duration .',' . $data_exhaust_air_period .',' . $data_days .',' . $data_comment;
+            $line = $index_row . ',' . $data_modus . ',' . $data_setpoint_humidity . ',' . $data_setpoint_temperature .',' . $data_circulation_air_duration .',' . $data_circulation_air_period .',' . $data_exhaust_air_duration .',' . $data_exhaust_air_period .',' . $data_days .',' . $data_comment;
             fputcsv($file, explode(',', $line));
             $index_row++;
         }
