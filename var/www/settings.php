@@ -254,7 +254,7 @@
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
                                                     if (isset ($agingtable_names)){
                                                         //echo "<button class=\"art-button\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\" onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
-                                                        echo '<label class=\"art-button-hidden\" for="edit_agingtable" tabindex="0">' . _('edit') . '</label>';
+                                                        //echo '<label class=\"art-button-hidden\" for="edit_agingtable" tabindex="0">' . _('edit') . '</label>';
                                                     }
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;">
@@ -278,7 +278,7 @@
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
                                                     if (isset ($agingtable_names)){
                                                         // echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
-                                                        echo '<label class=\"art-button\" for="export_agingtable" tabindex="0">' . _('export') . '</label>';
+                                                        //echo '<label class=\"art-button\" for="export_agingtable" tabindex="0">' . _('export') . '</label>';
                                                     }
                                                 ?></td></td>
                                         </tr>
