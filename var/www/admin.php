@@ -48,7 +48,7 @@
                                         <table style="width: 100%;" class="miniature_writing">
                                             <tr>
                                                 <td>
-                                                    <?php echo _('current bus: '); ?>
+                                                    <?php echo _('current bus:'); ?>
                                                 </td>
                                                 <td>
                                                     <?php echo $bus_name; ?>
