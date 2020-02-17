@@ -43,14 +43,19 @@
     }
     
     # Language festlegen
-    $language = get_table_value($config_settings_table,$language_key);
-    if ($language == 1) {
-        $language = 'de_DE.utf8';
-    }
-    elseif ($language == 2) {
-        $language = 'en_EN.utf8';
-    }
-    # $language = 'de_DE.utf8';
+    
+    #### BEGIN Language from DB
+    #include 'modules/database.php';
+    #$language = get_table_value($config_settings_table,$language_key);
+    #if ($language == 1) {
+    #    $language = 'de_DE.utf8';
+    #}
+    #elseif ($language == 2) {
+    #    $language = 'en_EN.utf8';
+    #}
+    #### END Language from DB
+    
+    $language = 'de_DE.utf8';
     putenv("LANG=$language");
     setlocale(LC_ALL, $language);
    
