@@ -272,7 +272,7 @@
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
                                                     if (isset ($agingtable_names)){
                                                         // echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
-                                                        echo '<label class=\"art-button\" for="delete_agingtable" tabindex="0">' . _('delete') . '</label>';
+                                                        //echo '<label class=\"art-button\" for="delete_agingtable" tabindex="0">' . _('delete') . '</label>';
                                                     }
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
