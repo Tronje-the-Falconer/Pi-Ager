@@ -15,6 +15,7 @@
                                 <div style="float: left; padding-left: 8px;" id="time_difference"></div>
                         -->
                                 <!----------------------------------------------------------------------------------------Anzeige T/rLF-->
+
 <?php
  echo "<script src='js/ajax.js'></script>";
 ?>

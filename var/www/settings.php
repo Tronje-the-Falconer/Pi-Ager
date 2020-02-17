@@ -142,7 +142,8 @@
                                                     print '</tr>';
                                                     print '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
                                                     print '<tr><td></td><td style="text-align: right;"><form action="scale_wizzard.php" method="post"> <input type="radio" name="scale_wizzard_radiobutton" value="' . $scale1_key . '" checked="checked"><label> '._('scale').' 1</label><br><input type="radio" name="scale_wizzard_radiobutton" value="' . $scale2_key . '"><label> '._('scale').' 2</label> </td><td style="text-align: left;">';
-                                                    echo "<button class=\"art-button\" name=\"scale_wizzard\" value=\"scale_wizzard\"  onclick=\"return confirm('"._('attention').' ! \\n '._('measurement on scales are stopped'). ' \\n ' . _('please relieve the load cell completely') . "!');\">"._('calibrate wizzard')."</button>";
+                                                    echo '<td>';
+													echo "<button class=\"art-button\" name=\"scale_wizzard\" value=\"scale_wizzard\"  onclick=\"return confirm('"._('attention').' ! \\n '._('measurement on scales are stopped'). ' \\n ' . _('please relieve the load cell completely') . "!');\">"._('calibrate wizzard')."</button>";
                                                     print '</form></td></tr>';
                                             } 
                                         ?>
@@ -232,9 +233,9 @@
                                                             }
                                                         }
                                                         echo '</select>';
-                                                        echo "<button class=\"art-button-hidden\" id=\"edit_agingtable\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\" onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
-                                                        echo "<button class=\"art-button-hidden\" id=\"delete_agingtable\" form=\"agingtable_edit\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
-                                                        echo "<button class=\"art-button-hidden\" id=\"export_agingtable\" form=\"agingtable_edit\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
+                                                        echo "<button class=\"art-button\" id=\"edit_agingtable\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\" onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
+                                                        echo "<button class=\"art-button\" id=\"delete_agingtable\" form=\"agingtable_edit\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
+                                                        echo "<button class=\"art-button\" id=\"export_agingtable\" form=\"agingtable_edit\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
                                                     }
                                                     print '</form>';
                                                     
@@ -254,7 +255,7 @@
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
                                                     if (isset ($agingtable_names)){
                                                         //echo "<button class=\"art-button\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\" onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
-                                                        echo '<label class=\"art-button-hidden\" for="edit_agingtable" tabindex="0">' . _('edit') . '</label>';
+                                                        //echo '<label class=\"art-button-hidden\" for="edit_agingtable" tabindex="0">' . _('edit') . '</label>';
                                                     }
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;">
@@ -272,13 +273,13 @@
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
                                                     if (isset ($agingtable_names)){
                                                         // echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
-                                                        echo '<label class=\"art-button\" for="delete_agingtable" tabindex="0">' . _('delete') . '</label>';
+                                                        //echo '<label class=\"art-button\" for="delete_agingtable" tabindex="0">' . _('delete') . '</label>';
                                                     }
                                                 ?></td>
                                             <td style=" text-align: left; padding-left: 20px;"><?php 
                                                     if (isset ($agingtable_names)){
                                                         // echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
-                                                        echo '<label class=\"art-button\" for="export_agingtable" tabindex="0">' . _('export') . '</label>';
+                                                        //echo '<label class=\"art-button\" for="export_agingtable" tabindex="0">' . _('export') . '</label>';
                                                     }
                                                 ?></td></td>
                                         </tr>

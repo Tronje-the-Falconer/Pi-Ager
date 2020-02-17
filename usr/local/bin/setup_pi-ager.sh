@@ -17,6 +17,7 @@ then
     eval $(grep -i "^dbpw=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^wlanssid=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^wlankey=" /boot/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^country=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^keepconf=" /boot/setup.txt| tr -d "\n\r")
 #    eval $(grep -i "^partsize=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^reboot=" /boot/setup.txt| tr -d "\n\r")
@@ -28,6 +29,8 @@ then
     #echo $webguipw
     echo "WLAN SSID:"
     echo $wlanssid
+    echo "Country:"
+    echo $country
     #echo $wlankey
     echo "Config behalten:"
     echo $keepconf
@@ -87,7 +90,8 @@ then
         then
             echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" > /etc/wpa_supplicant/wpa_supplicant.conf
             echo "update_config=1" >> /etc/wpa_supplicant/wpa_supplicant.conf
-            wpa_passphrase $wlanssid $wlankey >> /etc/wpa_supplicant/wpa_supplicant.conf
+            echo "country=$country" >> /etc/wpa_supplicant/wpa_supplicant.conf
+            wpa_passphrase "$wlanssid" $wlankey >> /etc/wpa_supplicant/wpa_supplicant.conf
             ifdown wlan0
             echo "WLAN SSID und Passphrase gesetzt"
         fi
