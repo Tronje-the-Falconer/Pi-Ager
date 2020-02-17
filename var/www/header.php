@@ -46,7 +46,7 @@
     
     #### BEGIN Language from DB
     #include 'modules/read_language.php';
-    #$language = get_language($config_settings_table,$language_key);
+    #$language = get_language();
     #if ($language == 1) {
     #    $language = 'de_DE.utf8';
     #}

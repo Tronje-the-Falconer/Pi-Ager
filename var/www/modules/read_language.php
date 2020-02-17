@@ -1,9 +1,12 @@
 <?php 
     include 'names.php';
     
-    function get_language($table, $key)
+    function get_language()
     {
         global $value_field,$id_field;
+        
+        $table = $config_settings_table;
+        $key = $language_key;
         
         $value = NULL;
         
@@ -28,7 +31,7 @@
                 {
                 $value = $dataset[$value_field];
                 }
-        close_database();
+        $connection->close();
         
         return $value;
     }
