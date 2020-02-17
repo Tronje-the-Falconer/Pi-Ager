@@ -252,7 +252,7 @@ mv /var/.htcredentials.org  /var/.htcredentials
 mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
 
 # rewrite /boot/setup.txt
-mv /root/setup.txt /boot/setup.txt
+#mv /root/setup.txt /boot/setup.txt
 
 ######################################################
 #Force password change for user root
