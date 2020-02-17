@@ -1,9 +1,8 @@
 <?php
+                                      include 'header.php';                                       // Template-Kopf und Navigation
                                       include 'modules/database.php';                             // Schnittstelle zur Datenbank
                                       include 'modules/logging.php';                            //liest die Datei fuer das logging ein
                                       include 'modules/names.php';                                // Variablen mit Strings
-                                      include 'header.php';                                       // Template-Kopf und Navigation
-                                      
                                       include 'modules/read_settings_db.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lueftung) und Betriebsart des RSS
                                       include 'modules/read_config_db.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                       include 'modules/read_operating_mode_db.php';                  // Liest die Art der Reifesteuerung
@@ -16,6 +15,18 @@
                                 <div style="float: left; padding-left: 8px;" id="time_difference"></div>
                         -->
                                 <!----------------------------------------------------------------------------------------Anzeige T/rLF-->
+<?php
+# Language festlegen
+if ( $language_key == 1 ){
+    $language = 'de_DE.utf8';
+}
+elseif ( $language_key == 2 ){
+    $language = 'en_EN.utf8';
+}
+putenv("LANG=$language");
+setlocale(LC_ALL, $language);
+?>
+
 <?php
  echo "<script src='js/ajax.js'></script>";
 ?>

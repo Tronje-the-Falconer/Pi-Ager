@@ -42,15 +42,7 @@
         $edit_agingtable_active = 'active';
     }
     
-    # Language festlegen
-    if ( $language_key == 1 ){
-        $language = 'de_DE.utf8';
-    }
-    elseif ( $language_key == 2 ){
-        $language = 'en_EN.utf8';
-    }
-    putenv("LANG=$language"); 
-    setlocale(LC_ALL, $language);
+
 
     # Set the text domain as 'messages'
     $domain = 'pi-ager';
