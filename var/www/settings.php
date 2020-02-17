@@ -232,9 +232,9 @@
                                                             }
                                                         }
                                                         echo '</select>';
-                                                        echo "<button class=\"art-button-hidden\" id=\"edit_agingtable\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\" onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
-                                                        echo "<button class=\"art-button-hidden\" id=\"delete_agingtable\" form=\"agingtable_edit\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
-                                                        echo "<button class=\"art-button-hidden\" id=\"export_agingtable\" form=\"agingtable_edit\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
+                                                        echo "<button class=\"art-button\" id=\"edit_agingtable\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\" onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
+                                                        echo "<button class=\"art-button\" id=\"delete_agingtable\" form=\"agingtable_edit\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
+                                                        echo "<button class=\"art-button\" id=\"export_agingtable\" form=\"agingtable_edit\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
                                                     }
                                                     print '</form>';
                                                     
