@@ -43,7 +43,12 @@
     }
     
     # Language festlegen
-    $language = 'de_DE.utf8';
+    if ( $language_key == 1 ){
+        $language = 'de_DE.utf8';
+    }
+    elseif ( $language_key == 2 ){
+        $language = 'en_EN.utf8';
+    }
     putenv("LANG=$language"); 
     setlocale(LC_ALL, $language);
 
