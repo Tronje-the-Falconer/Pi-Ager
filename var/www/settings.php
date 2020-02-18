@@ -375,8 +375,8 @@
                                         include ('manvals.php');
                                         }
                                     else {
-                                        echo '<h2 class=\"art-postheader\">'._('manual values'); '</h2>
-                                                <div class=\"hg_container\"><b>'._('manual adjustments are not possible').'</b><br>'._('during fully automatic aging.').'</div>';
+                                        echo '<h2 class="art-postheader">'._('manual values').'</h2>';
+                                        echo '<div class="hg_container"><b>'._('manual adjustments are not possible').'</b><br>'._('during fully automatic aging.').'</div>';
                                          }
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('general configuration'); ?></h2>

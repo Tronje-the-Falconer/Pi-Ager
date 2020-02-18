@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2020-02-16 19:01+0100\n"
-"PO-Revision-Date: 2020-02-18 18:22+0100\n"
+"PO-Revision-Date: 2020-02-18 19:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -710,7 +710,7 @@ msgstr "zum Anfang"
 
 #: manvals.php:12 manvals.php:195 settings.php:377
 msgid "manual values"
-msgstr "Manuelle Werte"
+msgstr "manuelle Werte"
 
 #: manvals.php:20 manvals.php:38
 msgid "cooling"
@@ -1124,11 +1124,11 @@ msgstr "keine Anmerkungen vorhanden"
 
 #: settings.php:378
 msgid "manual adjustments are not possible"
-msgstr "Manuelle Anpassungen sind nicht mölich"
+msgstr "manuelle Anpassungen sind nicht möglich"
 
 #: settings.php:378
 msgid "during fully automatic aging."
-msgstr ""
+msgstr "während der Pi-Ager über die Reifetabelle gesteuert wird."
 
 #: webcam.php:33
 msgid "take webcam snapshot"
@@ -1239,3 +1239,27 @@ msgid "ATTENTION: a shutdown is required, please turn the power off/on to restar
 msgstr ""
 "ACHTUNG: Das System wird heruntergefahren, bitte die Spannungsversorgung aus- und "
 "einschalten um das System neu zu starten!"
+
+#: admin.php:1115
+msgid "ATTENTION: empty statistic tables?"
+msgstr "ACHTUNG: historische Daten löschen?"
+
+#: admin.php:1116
+msgid "historische Daten gelöscht"
+msgstr ""
+
+#: admin.php:1117
+msgid "save loglevel?"
+msgstr "Loglevel speichern?"
+
+#: admin.php:1118
+msgid "ATTENTION: save debug values?"
+msgstr "ACHTUNG: Debug Werte speichern?"
+
+#: admin.php:1119
+msgid "ATTENTION: reboot system?"
+msgstr "ACHTUNG: System neu starten?"
+
+#: admin.php:1129
+msgid "ATTENTION: shutdown system?"
+msgstr "ACHTUNG: System herunterfahren?"
