@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2020-02-16 19:01+0100\n"
-"PO-Revision-Date: 2020-02-18 19:32+0100\n"
+"PO-Revision-Date: 2020-02-18 19:48+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -1260,6 +1260,14 @@ msgstr "ACHTUNG: Debug Werte speichern?"
 msgid "ATTENTION: reboot system?"
 msgstr "ACHTUNG: System neu starten?"
 
-#: admin.php:1129
+#: admin.php:1120
 msgid "ATTENTION: shutdown system?"
 msgstr "ACHTUNG: System herunterfahren?"
+
+#: webcam.php:1121
+msgid "download image file"
+msgstr "Bild heruterladen"
+
+#: logs.php:1122
+msgid "clear logfile : new logfile created"
+msgstr "Logdatei gelöscht : neu Logdatei erstellt"
