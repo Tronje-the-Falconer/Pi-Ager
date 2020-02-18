@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2020-02-16 19:01+0100\n"
-"PO-Revision-Date: 2020-02-17 21:51+0100\n"
+"PO-Revision-Date: 2020-02-18 18:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -37,13 +37,12 @@ msgstr "Wagen Wizzard"
 msgid "attached weight"
 msgstr "angehangenes Gewicht"
 
-#: calibrate_scale.php:45 calibrate_scale.php:66 calibrate_scale.php:71
-#: header.php:143 scale_wizzard.php:38 scale_wizzard.php:57
+#: calibrate_scale.php:45 calibrate_scale.php:66 calibrate_scale.php:71 header.php:143
+#: scale_wizzard.php:38 scale_wizzard.php:57
 msgid "scale wizzard"
 msgstr "Wagen Wizzard"
 
-#: calibrate_scale.php:45 settings.php:106 settings.php:109 settings.php:132
-#: settings.php:135
+#: calibrate_scale.php:45 settings.php:106 settings.php:109 settings.php:132 settings.php:135
 msgid "tara scale"
 msgstr "Tara"
 
@@ -61,7 +60,7 @@ msgstr "Gewicht von der Waage entfernen"
 
 #: calibrate_scale.php:52
 msgid "ok"
-msgstr ""
+msgstr "Ok"
 
 #: calibrate_scale.php:53
 msgid "cancel scale wizzard? referenceunit is set, tara will not be done!"
@@ -113,19 +112,19 @@ msgstr "Uhr"
 
 #: changelog.php:20 logs.php:23
 msgid "file exists"
-msgstr ""
+msgstr "Datei existiert"
 
 #: changelog.php:23 logs.php:26
 msgid "file does not exist"
-msgstr ""
+msgstr "Datei existiert nicht"
 
 #: changelog.php:26 logs.php:29
 msgid "file is readable"
-msgstr ""
+msgstr "Datei ist lesbar"
 
 #: changelog.php:29 logs.php:32
 msgid "file is not readable"
-msgstr ""
+msgstr "Datei ist nicht lesbar"
 
 #: changelog.php:52
 msgid "the developer team"
@@ -159,20 +158,19 @@ msgstr "Allgemeine Einstellungen anpassen"
 msgid "attention! be carful what you do!"
 msgstr "ACHTUNG! Vorsicht beim Ändern dieser Parameter!"
 
-#: config.php:16 diagrams.php:78 diagrams.php:107 diagrams.php:134
-#: index.php:107 index.php:163 manvals.php:55
+#: config.php:16 diagrams.php:78 diagrams.php:107 diagrams.php:134 index.php:107 index.php:163
+#: manvals.php:55
 msgid "temperature"
 msgstr "Temperatur"
 
-#: config.php:16 config.php:75 config.php:135 config.php:163 config.php:202
-#: config.php:241 manvals.php:18 manvals.php:55 manvals.php:105 manvals.php:131
-#: manvals.php:163
+#: config.php:16 config.php:75 config.php:135 config.php:163 config.php:202 config.php:241
+#: manvals.php:18 manvals.php:55 manvals.php:105 manvals.php:131 manvals.php:163
 msgid "help"
 msgstr "Hilfe"
 
-#: config.php:17 config.php:62 config.php:76 config.php:115 config.php:119
-#: config.php:120 manvals.php:72 manvals.php:73 manvals.php:78 manvals.php:79
-#: manvals.php:89 manvals.php:90 manvals.php:92
+#: config.php:17 config.php:62 config.php:76 config.php:115 config.php:119 config.php:120
+#: manvals.php:72 manvals.php:73 manvals.php:78 manvals.php:79 manvals.php:89 manvals.php:90
+#: manvals.php:92
 msgid "switch-on value"
 msgstr "Einschaltwert"
 
@@ -182,11 +180,11 @@ msgstr "Ein"
 
 #: config.php:28 config.php:46 config.php:83 config.php:96
 msgid "see logs"
-msgstr ""
+msgstr "sieh Logs"
 
-#: config.php:35 config.php:63 config.php:89 config.php:116 config.php:119
-#: config.php:121 manvals.php:72 manvals.php:74 manvals.php:78 manvals.php:80
-#: manvals.php:89 manvals.php:91 manvals.php:93
+#: config.php:35 config.php:63 config.php:89 config.php:116 config.php:119 config.php:121
+#: manvals.php:72 manvals.php:74 manvals.php:78 manvals.php:80 manvals.php:89 manvals.php:91
+#: manvals.php:93
 msgid "switch-off value"
 msgstr "Ausschaltwert"
 
@@ -196,8 +194,8 @@ msgstr "Aus"
 
 #: config.php:62
 msgid ""
-"is the value at which the control becomes active (value limit: 0-10 ° C). "
-"This value must always be greater than the switch-off value."
+"is the value at which the control becomes active (value limit: 0-10 ° C). This value must "
+"always be greater than the switch-off value."
 msgstr ""
 
 #: config.php:63
@@ -205,35 +203,33 @@ msgid "is the value at which the control becomes inactive (value: 0-10 ° C)"
 msgstr ""
 
 #: config.php:64 config.php:117
-msgid ""
-"the values may not be the same in order to avoid a wild switching on and off."
+msgid "the values may not be the same in order to avoid a wild switching on and off."
 msgstr ""
 
 #: config.php:66 config.php:127 manvals.php:95 manvals.php:122
 msgid "recommendation"
-msgstr ""
+msgstr "Empfehlungen"
 
 #: config.php:66 config.php:127 manvals.php:95 manvals.php:122
 msgid "check the stored values in the logfile!"
 msgstr ""
 
-#: config.php:68 config.php:128 edit_agingtable.php:104 manvals.php:97
-#: manvals.php:123 manvals.php:155 manvals.php:186 settings.php:145
+#: config.php:68 config.php:128 edit_agingtable.php:104 manvals.php:97 manvals.php:123
+#: manvals.php:155 manvals.php:186 settings.php:145
 msgid "attention"
-msgstr ""
+msgstr "Achtung"
 
 #: config.php:68 config.php:128 manvals.php:97 manvals.php:123
 msgid "use only positive integers!"
-msgstr ""
+msgstr "nur positive ganze Zahlen nutzen!"
 
-#: config.php:69 config.php:129 config.php:157 config.php:196 config.php:235
-#: config.php:264 manvals.php:48 manvals.php:98 manvals.php:124 manvals.php:157
-#: manvals.php:188
+#: config.php:69 config.php:129 config.php:157 config.php:196 config.php:235 config.php:264
+#: manvals.php:48 manvals.php:98 manvals.php:124 manvals.php:157 manvals.php:188
 msgid "close"
-msgstr ""
+msgstr "schließen"
 
-#: config.php:75 diagrams.php:91 diagrams.php:107 diagrams.php:154
-#: diagrams.php:162 index.php:120 index.php:183 manvals.php:105
+#: config.php:75 diagrams.php:91 diagrams.php:107 diagrams.php:154 diagrams.php:162
+#: index.php:120 index.php:183 manvals.php:105
 msgid "humidity"
 msgstr "Feuchte"
 
@@ -241,15 +237,14 @@ msgstr "Feuchte"
 msgid "delay"
 msgstr "Verzögerung"
 
-#: config.php:102 config.php:122 config.php:173 config.php:178 config.php:212
-#: config.php:217 index.php:539 index.php:541 index.php:556 index.php:558
-#: index.php:581 index.php:583 index.php:604 index.php:606 manvals.php:133
-#: manvals.php:137 manvals.php:165 manvals.php:168
+#: config.php:102 config.php:122 config.php:173 config.php:178 config.php:212 config.php:217
+#: index.php:539 index.php:541 index.php:556 index.php:558 index.php:581 index.php:583
+#: index.php:604 index.php:606 manvals.php:133 manvals.php:137 manvals.php:165 manvals.php:168
 msgid "minutes"
 msgstr "Min"
 
-#: config.php:102 config.php:173 config.php:212 manvals.php:57 manvals.php:107
-#: manvals.php:133 manvals.php:165
+#: config.php:102 config.php:173 config.php:212 manvals.php:57 manvals.php:107 manvals.php:133
+#: manvals.php:165
 msgid "to"
 msgstr "bis"
 
@@ -267,15 +262,14 @@ msgstr ""
 
 #: config.php:118
 msgid ""
-"here the delay time is set until the humidifier turns on if the humidity is "
-"too low. this can be used to blast out the rapidly falling air humidity "
-"during \"cooling\", \"timer exhaust\" or \"dehumidification\". The minimum "
-"value is 0 minutes, the maximum 60 minutes."
+"here the delay time is set until the humidifier turns on if the humidity is too low. this "
+"can be used to blast out the rapidly falling air humidity during \"cooling\", \"timer "
+"exhaust\" or \"dehumidification\". The minimum value is 0 minutes, the maximum 60 minutes."
 msgstr ""
 
 #: config.php:119
 msgid "example"
-msgstr ""
+msgstr "Beispiel"
 
 #: config.php:119 config.php:120 config.php:121 manvals.php:119
 msgid "target humidity"
@@ -291,9 +285,8 @@ msgstr "Ausschaltwert Feuchte"
 
 #: config.php:123
 msgid ""
-"so if 70% relative humidity are reached, the control waits for 5 minutes. "
-"only then does the pi-ager humidify the air to 74% and then switch off "
-"humidification again."
+"so if 70% relative humidity are reached, the control waits for 5 minutes. only then does "
+"the pi-ager humidify the air to 74% and then switch off humidification again."
 msgstr ""
 
 #: config.php:124
@@ -302,15 +295,13 @@ msgstr ""
 
 #: config.php:124
 msgid ""
-"in this automatic mode, the humidity is completely automatically "
-"controlled.\n"
-"                                                 the current humidity is "
-"determined first. it is then decided which method (humidification and "
-"dehumidification) is suitable for achieving the desired set-point humidity.\n"
-"                                                 this also means that the "
-"switching values of the hysteresis must not be too close together. "
-"otherwise, humidification and dehumidification could always be switched on "
-"and off alternately."
+"in this automatic mode, the humidity is completely automatically controlled.\n"
+"                                                 the current humidity is determined first. "
+"it is then decided which method (humidification and dehumidification) is suitable for "
+"achieving the desired set-point humidity.\n"
+"                                                 this also means that the switching values "
+"of the hysteresis must not be too close together. otherwise, humidification and "
+"dehumidification could always be switched on and off alternately."
 msgstr ""
 
 #: config.php:135
@@ -350,15 +341,13 @@ msgid "duration & timestamp"
 msgstr "Dauer & Zeitpunkt"
 
 #: config.php:167 config.php:178 config.php:206 config.php:217 diagrams.php:401
-#: diagrams.php:403 diagrams.php:426 diagrams.php:428 diagrams.php:502
-#: diagrams.php:504 diagrams.php:527 diagrams.php:529 diagrams.php:603
-#: diagrams.php:605 diagrams.php:628 diagrams.php:630 diagrams.php:704
-#: diagrams.php:706 diagrams.php:729 diagrams.php:731 diagrams.php:805
-#: diagrams.php:807 diagrams.php:830 diagrams.php:832 diagrams.php:906
-#: diagrams.php:908 diagrams.php:931 diagrams.php:933 diagrams.php:1007
-#: diagrams.php:1009 diagrams.php:1032 diagrams.php:1034 diagrams.php:1108
-#: diagrams.php:1110 diagrams.php:1133 diagrams.php:1135 index.php:428
-#: manvals.php:137 manvals.php:168
+#: diagrams.php:403 diagrams.php:426 diagrams.php:428 diagrams.php:502 diagrams.php:504
+#: diagrams.php:527 diagrams.php:529 diagrams.php:603 diagrams.php:605 diagrams.php:628
+#: diagrams.php:630 diagrams.php:704 diagrams.php:706 diagrams.php:729 diagrams.php:731
+#: diagrams.php:805 diagrams.php:807 diagrams.php:830 diagrams.php:832 diagrams.php:906
+#: diagrams.php:908 diagrams.php:931 diagrams.php:933 diagrams.php:1007 diagrams.php:1009
+#: diagrams.php:1032 diagrams.php:1034 diagrams.php:1108 diagrams.php:1110 diagrams.php:1133
+#: diagrams.php:1135 index.php:428 manvals.php:137 manvals.php:168
 msgid "off"
 msgstr "Aus"
 
@@ -382,8 +371,7 @@ msgstr "Uhr"
 msgid "text for uv help"
 msgstr ""
 
-#: config.php:202 config.php:233 diagrams.php:348 diagrams.php:368
-#: index.php:599
+#: config.php:202 config.php:233 diagrams.php:348 diagrams.php:368 index.php:599
 msgid "light"
 msgstr "Licht"
 
@@ -451,28 +439,27 @@ msgstr ""
 msgid " - φ"
 msgstr ""
 
-#: diagrams.php:199 diagrams.php:212 diagrams.php:228 diagrams.php:255
-#: diagrams.php:296 index.php:221 index.php:234 index.php:250 index.php:277
-#: index.php:320 scale_wizzard.php:27 settings.php:144
+#: diagrams.php:199 diagrams.php:212 diagrams.php:228 diagrams.php:255 diagrams.php:296
+#: index.php:221 index.php:234 index.php:250 index.php:277 index.php:320 scale_wizzard.php:27
+#: settings.php:144
 msgid "scale"
 msgstr "Waage"
 
-#: diagrams.php:389 diagrams.php:490 diagrams.php:591 diagrams.php:692
-#: diagrams.php:793 diagrams.php:894 diagrams.php:995 diagrams.php:1096
-#: index.php:423 index.php:523 index.php:613
+#: diagrams.php:389 diagrams.php:490 diagrams.php:591 diagrams.php:692 diagrams.php:793
+#: diagrams.php:894 diagrams.php:995 diagrams.php:1096 index.php:423 index.php:523
+#: index.php:613
 msgid "status"
 msgstr "Status"
 
-#: diagrams.php:399 diagrams.php:424 diagrams.php:500 diagrams.php:525
-#: diagrams.php:601 diagrams.php:626 diagrams.php:702 diagrams.php:727
-#: diagrams.php:803 diagrams.php:828 diagrams.php:904 diagrams.php:929
-#: diagrams.php:1005 diagrams.php:1030 diagrams.php:1106 diagrams.php:1131
-#: index.php:427
+#: diagrams.php:399 diagrams.php:424 diagrams.php:500 diagrams.php:525 diagrams.php:601
+#: diagrams.php:626 diagrams.php:702 diagrams.php:727 diagrams.php:803 diagrams.php:828
+#: diagrams.php:904 diagrams.php:929 diagrams.php:1005 diagrams.php:1030 diagrams.php:1106
+#: diagrams.php:1131 index.php:427
 msgid "on"
 msgstr "Ein"
 
-#: diagrams.php:416 diagrams.php:517 diagrams.php:618 diagrams.php:719
-#: diagrams.php:820 diagrams.php:921 diagrams.php:1022 diagrams.php:1123
+#: diagrams.php:416 diagrams.php:517 diagrams.php:618 diagrams.php:719 diagrams.php:820
+#: diagrams.php:921 diagrams.php:1022 diagrams.php:1123
 msgid " "
 msgstr ""
 
@@ -511,7 +498,7 @@ msgstr ""
 
 #: edit_agingtable.php:23
 msgid "no agingtable selected"
-msgstr ""
+msgstr "Keine Reifetabelle ausgewählt"
 
 #: edit_agingtable.php:34 settings.php:288
 msgid "modus"
@@ -679,7 +666,7 @@ msgstr "Waage 2"
 
 #: logs.php:9
 msgid "log entries"
-msgstr ""
+msgstr "Log Einträge"
 
 #: logs.php:35
 msgid "file is writable"
@@ -687,7 +674,7 @@ msgstr "Datei ist beschreibbar"
 
 #: logs.php:38
 msgid "file is not writable"
-msgstr "Datei ist nicht beschreibbar"
+msgstr "Datei ist nicht schreibbar"
 
 #: logs.php:42
 msgid "save all logfiles?"
@@ -723,7 +710,7 @@ msgstr "zum Anfang"
 
 #: manvals.php:12 manvals.php:195 settings.php:377
 msgid "manual values"
-msgstr "Manueller Werte"
+msgstr "Manuelle Werte"
 
 #: manvals.php:20 manvals.php:38
 msgid "cooling"
@@ -759,103 +746,96 @@ msgstr ""
 
 #: manvals.php:39
 msgid ""
-"it is cooled to the set temperature with circulating air and humidification "
-"is on,\n"
+"it is cooled to the set temperature with circulating air and humidification is on,\n"
 "                                             the heating is never controlled."
 msgstr ""
 
 #: manvals.php:41
 msgid ""
-"it is heated to the set temperature with circulating air and humidification "
-"is on,\n"
+"it is heated to the set temperature with circulating air and humidification is on,\n"
 "                                             The cooling is never controlled."
 msgstr ""
 
 #: manvals.php:43
 msgid ""
-"the pi-ager cools or heats with circulating air, depending on the set value "
-"and humidification is on."
+"the pi-ager cools or heats with circulating air, depending on the set value and "
+"humidification is on."
 msgstr ""
 
 #: manvals.php:44
 msgid ""
-"like automatic with humidification, additional: when the humidity is "
-"exceeded, the exhaust air switches on until the humidity target is reached "
-"again.\n"
-"                                             since it is a passive "
-"dehumidification, the minimum achievable humidity depends on the dryness of "
-"the ambient air.\n"
-"                                             to avoid a wild switching on "
-"and off, the humidification should be delayed (5-10min)!"
+"like automatic with humidification, additional: when the humidity is exceeded, the exhaust "
+"air switches on until the humidity target is reached again.\n"
+"                                             since it is a passive dehumidification, the "
+"minimum achievable humidity depends on the dryness of the ambient air.\n"
+"                                             to avoid a wild switching on and off, the "
+"humidification should be delayed (5-10min)!"
 msgstr ""
 
-#: manvals.php:56 manvals.php:69 manvals.php:72 manvals.php:73 manvals.php:74
-#: manvals.php:78 manvals.php:79 manvals.php:80 manvals.php:89 manvals.php:90
-#: manvals.php:91 manvals.php:92 manvals.php:93
+#: manvals.php:56 manvals.php:69 manvals.php:72 manvals.php:73 manvals.php:74 manvals.php:78
+#: manvals.php:79 manvals.php:80 manvals.php:89 manvals.php:90 manvals.php:91 manvals.php:92
+#: manvals.php:93
 msgid "setpoint temperature"
 msgstr "Sollwert Temperatur"
 
 #: manvals.php:69
 msgid ""
-"the desired temperature is set here. the minimum value is 0 ° C, the maximum "
-"+ 22 ° C.\n"
-"                                             for technical reasons, not all "
-"values can be approached in any operating mode. the circulating air is "
-"always active during the cooling or heating phases."
+"the desired temperature is set here. the minimum value is 0 ° C, the maximum + 22 ° C.\n"
+"                                             for technical reasons, not all values can be "
+"approached in any operating mode. the circulating air is always active during the cooling "
+"or heating phases."
 msgstr ""
 
 #: manvals.php:72
 msgid "example of cooling"
-msgstr ""
+msgstr "Beispiel Kühlen"
 
 #: manvals.php:73 manvals.php:79
 msgid "switch-on temperature"
-msgstr ""
+msgstr "Einschaltwert Temperatur"
 
 #: manvals.php:74 manvals.php:80
 msgid "switch-off temperature"
-msgstr ""
+msgstr "Ausschaltwert Temperatur"
 
 #: manvals.php:75
 msgid ""
-"so, if 15 degrees are exceeded, the pi-ager cools down to 13 ° C and then "
-"switches off to avoid excessive cooling.\n"
-"                                             the entire behavior is "
-"different from pi-ager to pi-ager and therefore to be determined "
-"individually."
+"so, if 15 degrees are exceeded, the pi-ager cools down to 13 ° C and then switches off to "
+"avoid excessive cooling.\n"
+"                                             the entire behavior is different from pi-ager "
+"to pi-ager and therefore to be determined individually."
 msgstr ""
 
 #: manvals.php:78
 msgid "example of heating"
-msgstr ""
+msgstr "Beispiel Heizen"
 
 #: manvals.php:81
 msgid ""
-"so, if the temperature drops below 19 degrees, the pi-ager heats up to 21 ° "
-"C and then switches off to avoid excessive heating.\n"
-"                                             the entire behavior is "
-"different from pi-ager to pi-ager and therefore to be determined "
-"individually."
+"so, if the temperature drops below 19 degrees, the pi-ager heats up to 21 ° C and then "
+"switches off to avoid excessive heating.\n"
+"                                             the entire behavior is different from pi-ager "
+"to pi-ager and therefore to be determined individually."
 msgstr ""
 
 #: manvals.php:84
 msgid "automatic mode"
-msgstr ""
+msgstr "Automatik Modus"
 
 #: manvals.php:84
 msgid ""
 "in every automatic mode, the temperature is fully automatically controlled.\n"
-"                                             first, the current temperature "
-"is determined. Then decide which method (cooling or heating) is suitable to "
-"reach the setpoint temperature set.\n"
-"                                             this also means that the "
-"switching values of the hysteresis must not be too close together. "
-"Otherwise, cooling and heating could be switched on and off alternately."
+"                                             first, the current temperature is determined. "
+"Then decide which method (cooling or heating) is suitable to reach the setpoint temperature "
+"set.\n"
+"                                             this also means that the switching values of "
+"the hysteresis must not be too close together. Otherwise, cooling and heating could be "
+"switched on and off alternately."
 msgstr ""
 
 #: manvals.php:88
 msgid "example of automatic"
-msgstr ""
+msgstr "Beispiel Automatik"
 
 #: manvals.php:88
 msgid "now it's getting exciting!"
@@ -867,11 +847,11 @@ msgstr ""
 
 #: manvals.php:90 manvals.php:91 manvals.php:92 manvals.php:93
 msgid "sensor temperature"
-msgstr ""
+msgstr "Sensor Temperatur"
 
 #: manvals.php:90
 msgid "cooling on"
-msgstr ""
+msgstr "Kühlen Ein"
 
 #: manvals.php:91
 msgid "2st case"
@@ -879,7 +859,7 @@ msgstr ""
 
 #: manvals.php:91
 msgid "cooling off"
-msgstr ""
+msgstr "Kühlen Aus"
 
 #: manvals.php:92
 msgid "3st case"
@@ -887,7 +867,7 @@ msgstr ""
 
 #: manvals.php:92
 msgid "heating on"
-msgstr ""
+msgstr "Heizen Ein"
 
 #: manvals.php:93
 msgid "4st case"
@@ -895,7 +875,7 @@ msgstr ""
 
 #: manvals.php:93
 msgid "heating off"
-msgstr ""
+msgstr "Heizen Aus"
 
 #: manvals.php:106
 msgid "setpoint humidity"
@@ -903,14 +883,13 @@ msgstr "Sollwert Feuchte"
 
 #: manvals.php:120
 msgid ""
-"the desired humidity is set here. The minimum value is theoretically 0% and "
-"a maximum of 99%.\n"
-"                                            these values will be never "
-"reached normally. The circulating air is always active during "
-"humidification. The effectiveness of the dehumidification (automatic mode "
-"with with humidification and dehumidification) is dependent on the ambient "
-"air humidity, since only a passive dehumidification by exhaust air takes "
-"place."
+"the desired humidity is set here. The minimum value is theoretically 0% and a maximum of "
+"99%.\n"
+"                                            these values will be never reached normally. "
+"The circulating air is always active during humidification. The effectiveness of the "
+"dehumidification (automatic mode with with humidification and dehumidification) is "
+"dependent on the ambient air humidity, since only a passive dehumidification by exhaust air "
+"takes place."
 msgstr ""
 
 #: manvals.php:131
@@ -923,30 +902,30 @@ msgstr "Dauer"
 
 #: manvals.php:149
 msgid ""
-"this is used to set the pause time, which waits until the recirculation is "
-"switched on again. if the value is 0 (= no pause), the circulating air is "
-"permanently switched on. the maximum value is 1440min."
+"this is used to set the pause time, which waits until the recirculation is switched on "
+"again. if the value is 0 (= no pause), the circulating air is permanently switched on. the "
+"maximum value is 1440min."
 msgstr ""
 
 #: manvals.php:151
 msgid ""
-"this sets the circulation time during which the fan is running. at 0, the "
-"circulating air timer function is switched off. the maximum value is 1440min."
+"this sets the circulation time during which the fan is running. at 0, the circulating air "
+"timer function is switched off. the maximum value is 1440min."
 msgstr ""
 
 #: manvals.php:153 manvals.php:184
 msgid "note"
-msgstr ""
+msgstr "Anmerkung"
 
 #: manvals.php:153
 msgid ""
-"the circulating air fan runs independently of the timer settings - also "
-"during cooling, heating and humidification."
+"the circulating air fan runs independently of the timer settings - also during cooling, "
+"heating and humidification."
 msgstr ""
 
 #: manvals.php:156 manvals.php:187
 msgid "period=0 und duration=0 is not useful and not allowed."
-msgstr ""
+msgstr "Zyklus=0 und Dauer=0 ist nicht sinnvoll und nicht erlaubt."
 
 #: manvals.php:163
 msgid "timer exhausting air"
@@ -954,27 +933,26 @@ msgstr "Timer Abluft"
 
 #: manvals.php:180
 msgid ""
-"this is used to set the pause time, which waits until the exhausting is "
-"switched on again. if the .lue is 0 (= no pause), the exhausting air is "
-"permanently switched on. the maximum value is 1440min."
+"this is used to set the pause time, which waits until the exhausting is switched on again. "
+"if the .lue is 0 (= no pause), the exhausting air is permanently switched on. the maximum "
+"value is 1440min."
 msgstr ""
 
 #: manvals.php:182
 msgid ""
-"this sets the exhausting time during which the fan is running. at 0, the "
-"exhausting air timer function is switched off. the maximum value is 1440min."
+"this sets the exhausting time during which the fan is running. at 0, the exhausting air "
+"timer function is switched off. the maximum value is 1440min."
 msgstr ""
 
 #: manvals.php:184
 msgid ""
-"The exhaust air fan runs independently of the timer settings - also during "
-"dehumidification in the \"automatic mode with humidification and "
-"dehumidification."
+"The exhaust air fan runs independently of the timer settings - also during dehumidification "
+"in the \"automatic mode with humidification and dehumidification."
 msgstr ""
 
 #: scale_wizzard.php:24
 msgid "measuring on scales stopped due to calibrating scale"
-msgstr ""
+msgstr "Waagenmessungen werden während des Kalibrierens angehalten"
 
 #: scale_wizzard.php:27
 msgid "starting calibrate"
@@ -1010,7 +988,7 @@ msgstr "keine Waage ausgewählt"
 
 #: settings.php:22
 msgid "operating values"
-msgstr "Aktuelle Werte"
+msgstr "Einstellungen"
 
 #: settings.php:45
 msgid "stop pi-ager?"
@@ -1146,7 +1124,7 @@ msgstr "keine Anmerkungen vorhanden"
 
 #: settings.php:378
 msgid "manual adjustments are not possible"
-msgstr ""
+msgstr "Manuelle Anpassungen sind nicht mölich"
 
 #: settings.php:378
 msgid "during fully automatic aging."
@@ -1251,3 +1229,13 @@ msgstr "Loggen"
 #: admin.php:343
 msgid "database"
 msgstr "Datenbank"
+
+#: admin.php:1113
+msgid "auto"
+msgstr "Auto"
+
+#: admin.php:1114
+msgid "ATTENTION: a shutdown is required, please turn the power off/on to restart the system!"
+msgstr ""
+"ACHTUNG: Das System wird heruntergefahren, bitte die Spannungsversorgung aus- und "
+"einschalten um das System neu zu starten!"
