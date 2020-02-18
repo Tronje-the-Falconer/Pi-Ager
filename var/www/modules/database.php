@@ -308,8 +308,17 @@
             }, fgetcsv($csv_handle, 0, $delimiter));
         
         $fieldcount = count($fields);
-        if ($fieldcount == 9){
-            if ($fields[0] == 'modus' AND $fields[1]== 'setpoint_humidity' AND $fields[2]== 'setpoint_temperature' AND $fields[3]== 'circulation_air_duration' AND $fields[4]== 'circulation_air_period' AND $fields[5]== 'exhaust_air_duration' AND $fields[6]== 'exhaust_air_period' AND $fields[7]== 'days' AND $fields[8]== 'comment'){
+        if ($fieldcount == 10){
+            if ($fields[0] == 'id' AND 
+                $fields[1] == 'modus' AND 
+                $fields[2] == 'setpoint_humidity' AND 
+                $fields[3] == 'setpoint_temperature' AND 
+                $fields[4] == 'circulation_air_duration' AND 
+                $fields[5] == 'circulation_air_period' AND 
+                $fields[6] == 'exhaust_air_duration' AND 
+                $fields[7] == 'exhaust_air_period' AND 
+                $fields[8] == 'days' AND 
+                $fields[9] == 'comment'){
 
                 $create_fields_str = join(', ', array_map(function ($field){
                     if ($field == 'comment'){

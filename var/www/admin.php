@@ -29,7 +29,7 @@
                                                 <?php 
                                                     if($status_uv_manual == 0) {
                                                         echo '<td><img src="/images/icons/status_off_manual_20x20.png" title="uv off"></td>';
-                                                        echo "<td><button class='art-button' name='turn_on_uv' onclick='return confirm('". _('end pause uv-light!') ."');>" . _('on'). "</button></td>";
+                                                        echo "<td><button class='art-button' name='turn_on_uv' onclick='return confirm('". _('end pause uv-light!') ."');>" . _('auto'). "</button></td>";
                                                     }
                                                     else{
                                                         echo '<td><img src="/images/icons/status_on_20x20.png" title="uv on"></td>';
@@ -61,7 +61,7 @@
                                                 </td>
                                             <tr>
                                                 <td>
-                                                <button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: A restart is required!');?>');"><?php echo _('change sensor bus'); ?></button>
+                                                <button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: a shutdown is required, please turn the power off/on to restart the system!');?>');"><?php echo _('change sensor bus'); ?></button>
                                                 </td>
                                             </tr>
                                         </table>
