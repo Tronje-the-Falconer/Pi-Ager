@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2020-02-16 19:01+0100\n"
-"PO-Revision-Date: 2020-02-18 18:22+0100\n"
+"PO-Revision-Date: 2020-02-19 07:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -44,11 +44,11 @@ msgstr "Wagen Wizzard"
 
 #: calibrate_scale.php:45 settings.php:106 settings.php:109 settings.php:132 settings.php:135
 msgid "tara scale"
-msgstr "Tara"
+msgstr "Tara Waage"
 
 #: calibrate_scale.php:47 settings.php:109 settings.php:135 settings.php:145
 msgid "please relieve the load cell completely"
-msgstr "bitte Gewicht von der Waage entfernen"
+msgstr "Bitte Gewicht von der Waage entfernen"
 
 #: calibrate_scale.php:47
 msgid "and press ok"
@@ -65,6 +65,7 @@ msgstr "Ok"
 #: calibrate_scale.php:53
 msgid "cancel scale wizzard? referenceunit is set, tara will not be done!"
 msgstr ""
+"Wizzard unterberechen? Die Referenz Unit wird gespeichert, Tara wird nicht ausgeführt!"
 
 #: calibrate_scale.php:53 edit_agingtable.php:104 scale_wizzard.php:47
 msgid "cancel"
@@ -84,7 +85,7 @@ msgstr "Referenz einheit wird auf den alten Wert gesetzt"
 
 #: calibrate_scale.php:64 calibrate_scale.php:66
 msgid "please try again"
-msgstr "bitte neu versuchen"
+msgstr "Bitte neu versuchen"
 
 #: calibrate_scale.php:71
 msgid "error on calibrating"
@@ -148,7 +149,7 @@ msgstr ""
 
 #: changelog.php:93
 msgid "based on an idea and submission of"
-msgstr ""
+msgstr "basierend auf eine Idee von"
 
 #: config.php:5
 msgid "set general configuration values"
@@ -212,7 +213,7 @@ msgstr "Empfehlungen"
 
 #: config.php:66 config.php:127 manvals.php:95 manvals.php:122
 msgid "check the stored values in the logfile!"
-msgstr ""
+msgstr "Bitte gespeicherte Werte in der Logdatei prüfen!"
 
 #: config.php:68 config.php:128 edit_agingtable.php:104 manvals.php:97 manvals.php:123
 #: manvals.php:155 manvals.php:186 settings.php:145
@@ -250,7 +251,7 @@ msgstr "bis"
 
 #: config.php:114
 msgid "switching hysteresis"
-msgstr "Hysterese"
+msgstr "Schalthysterese"
 
 #: config.php:115
 msgid "is the value at which the control becomes active (value: 0-30%)"
@@ -291,7 +292,7 @@ msgstr ""
 
 #: config.php:124
 msgid "example automatic mode with with humidification and dehumidification"
-msgstr ""
+msgstr "Beispiel Automatikmodus mit Befeutung und Entfeuchtung"
 
 #: config.php:124
 msgid ""
@@ -429,7 +430,7 @@ msgstr "Diagramme"
 
 #: diagrams.php:53
 msgid "every ~ 5 minutes a new value is written!"
-msgstr "jede 5 Min (ca.) wird ein neuer Wert abgespeichert!"
+msgstr "ca. jede 5 Min wird ein neuer Wert abgespeichert!"
 
 #: diagrams.php:134 index.php:163
 msgid " - t"
@@ -490,15 +491,15 @@ msgstr "Umluft"
 #: edit_agingtable.php:18 edit_agingtable.php:23 edit_agingtable.php:26
 #: edit_agingtable.php:103 header.php:150
 msgid "edit agingtable"
-msgstr "Edit Reifetabelle"
+msgstr "Reifetabelle editieren"
 
 #: edit_agingtable.php:18
 msgid "can not edit the controlling agingtable. please select an other"
-msgstr ""
+msgstr "die laufende Reifetabelle kann nicht editiert werden, bitte ein andere auswählen"
 
 #: edit_agingtable.php:23
 msgid "no agingtable selected"
-msgstr "Keine Reifetabelle ausgewählt"
+msgstr "keine Reifetabelle ausgewählt"
 
 #: edit_agingtable.php:34 settings.php:288
 msgid "modus"
@@ -522,7 +523,7 @@ msgstr "Timer Umluft d"
 
 #: edit_agingtable.php:37 settings.php:291
 msgid "timer of the circulation air duration in minutes"
-msgstr ""
+msgstr "Timer für Umluft Dauer in Minuten"
 
 #: edit_agingtable.php:38 settings.php:292
 msgid "timer circulate p"
@@ -530,7 +531,7 @@ msgstr "Timer Umluft p"
 
 #: edit_agingtable.php:38 settings.php:292
 msgid "timer of the circulation air period in minutes"
-msgstr ""
+msgstr "Timer für Umluft Zyklus in Minuten"
 
 #: edit_agingtable.php:39 settings.php:293
 msgid "timer exhaust d"
@@ -538,7 +539,7 @@ msgstr "Timer Abluft d"
 
 #: edit_agingtable.php:39 settings.php:293
 msgid "timer of the exhausting air duration in minutes"
-msgstr ""
+msgstr "Timer für Abluft Dauer in Minuten"
 
 #: edit_agingtable.php:40 settings.php:294
 msgid "timer exhaust p"
@@ -546,7 +547,7 @@ msgstr "Timer Abluft p"
 
 #: edit_agingtable.php:40 settings.php:294
 msgid "timer of the exhausting air period in minutes"
-msgstr ""
+msgstr "Timer für Abluft Zyklus in Minuten"
 
 #: edit_agingtable.php:41 settings.php:295
 msgid "days"
@@ -562,15 +563,15 @@ msgstr "Anmerkungen:"
 
 #: edit_agingtable.php:104
 msgid "cancel editing agingtable"
-msgstr ""
+msgstr "Editieren der Reifetabelle unterbrechen?"
 
 #: footer.php:9
 msgid "running engine: "
-msgstr ""
+msgstr "laufendes System:"
 
 #: header.php:113
 msgid "by"
-msgstr ""
+msgstr "von"
 
 #: header.php:117
 msgid "monitor"
@@ -622,7 +623,7 @@ msgstr "Befeuchter"
 
 #: index.php:500
 msgid "exhausting"
-msgstr "abluft"
+msgstr "Abluft"
 
 #: index.php:509
 msgid "dehumidification"
@@ -638,7 +639,7 @@ msgstr "Umluft"
 
 #: index.php:535 index.php:552 index.php:577 index.php:600
 msgid "timer on"
-msgstr "timer Ein"
+msgstr "Timer Ein"
 
 #: index.php:536 index.php:553 index.php:578 index.php:601
 msgid "always on"
@@ -646,7 +647,7 @@ msgstr "immer Ein"
 
 #: index.php:537 index.php:554 index.php:579 index.php:602
 msgid "timer off"
-msgstr "Timer aus"
+msgstr "Timer Aus"
 
 #: index.php:551
 msgid "exhausting air"
@@ -658,11 +659,11 @@ msgstr "siehe Einstellungen"
 
 #: index.php:633 index.php:640
 msgid "scale1"
-msgstr "Waage 1"
+msgstr "Waage1"
 
 #: index.php:660 index.php:667
 msgid "scale2"
-msgstr "Waage 2"
+msgstr "Waage2"
 
 #: logs.php:9
 msgid "log entries"
@@ -710,7 +711,7 @@ msgstr "zum Anfang"
 
 #: manvals.php:12 manvals.php:195 settings.php:377
 msgid "manual values"
-msgstr "Manuelle Werte"
+msgstr "manuelle Werte"
 
 #: manvals.php:20 manvals.php:38
 msgid "cooling"
@@ -839,7 +840,7 @@ msgstr "Beispiel Automatik"
 
 #: manvals.php:88
 msgid "now it's getting exciting!"
-msgstr ""
+msgstr "jetzt wird es spannend!"
 
 #: manvals.php:90
 msgid "1st case"
@@ -960,7 +961,7 @@ msgstr "Kalibrierung starten"
 
 #: scale_wizzard.php:40
 msgid "please attach a known weight to the loadcell"
-msgstr "bitte ein bekanntes Gewicht an die Wägezelle hängen"
+msgstr "Bitte ein bekanntes Gewicht an die Wägezelle hängen"
 
 #: scale_wizzard.php:40
 msgid "now and enter the weight into the form below:"
@@ -980,7 +981,7 @@ msgstr "Gewicht angehangen"
 
 #: scale_wizzard.php:47
 msgid "cancel scale wizzard?"
-msgstr "Waagen Wizzard unterberechen?"
+msgstr "Wizzard unterberechen?"
 
 #: scale_wizzard.php:57
 msgid "no scale selected"
@@ -1024,7 +1025,7 @@ msgstr "Bitte erstmal die Waage kalibrieren!"
 
 #: settings.php:94 settings.php:97 settings.php:120 settings.php:123
 msgid "start scale"
-msgstr "Start Waage"
+msgstr "Waage starten"
 
 #: settings.php:97 settings.php:123
 msgid "start measurement on scale"
@@ -1032,7 +1033,7 @@ msgstr "Start Waagenmessung"
 
 #: settings.php:97 settings.php:123
 msgid "please calibrate scale after first start !"
-msgstr "nach dem ersten Start bitte Waage kalibrieren!"
+msgstr "Nach dem ersten Start bitte Waage kalibrieren!"
 
 #: settings.php:109 settings.php:135
 msgid "tara on scale"
@@ -1040,11 +1041,11 @@ msgstr "Tara Waage"
 
 #: settings.php:112 settings.php:138
 msgid "stop measurement on scale"
-msgstr "Stop Waagenmessung"
+msgstr "Waagenmessung anhalten"
 
 #: settings.php:112 settings.php:138
 msgid "stop scale"
-msgstr "Stop Waage"
+msgstr "stop Waage"
 
 #: settings.php:145
 msgid "measurement on scales are stopped"
@@ -1076,7 +1077,7 @@ msgstr "Start Reifetabelle"
 
 #: settings.php:206
 msgid "stop agingtable?"
-msgstr "Stop Reifetabelle?"
+msgstr "Reifetabelle anhalten?"
 
 #: settings.php:206
 msgid "pi-ager continues with the last values of the agingtable!"
@@ -1084,7 +1085,7 @@ msgstr "Der Pi-ager arbeitet mit den letzt gültigen Einstellungen!"
 
 #: settings.php:206
 msgid "stop agingtable"
-msgstr "Stop Reifetabelle"
+msgstr "Reifetabelle anhalten"
 
 #: settings.php:235
 msgid "edit agingtable?"
@@ -1124,11 +1125,11 @@ msgstr "keine Anmerkungen vorhanden"
 
 #: settings.php:378
 msgid "manual adjustments are not possible"
-msgstr "Manuelle Anpassungen sind nicht mölich"
+msgstr "manuelle Anpassungen sind nicht möglich"
 
 #: settings.php:378
 msgid "during fully automatic aging."
-msgstr ""
+msgstr "während der Pi-Ager über die Reifetabelle gesteuert wird."
 
 #: webcam.php:33
 msgid "take webcam snapshot"
@@ -1239,3 +1240,35 @@ msgid "ATTENTION: a shutdown is required, please turn the power off/on to restar
 msgstr ""
 "ACHTUNG: Das System wird heruntergefahren, bitte die Spannungsversorgung aus- und "
 "einschalten um das System neu zu starten!"
+
+#: admin.php:1115
+msgid "ATTENTION: empty statistic tables?"
+msgstr "ACHTUNG: historische Daten löschen?"
+
+#: admin.php:1117
+msgid "save loglevel?"
+msgstr "Loglevel speichern?"
+
+#: admin.php:1118
+msgid "ATTENTION: save debug values?"
+msgstr "ACHTUNG: Debug Werte speichern?"
+
+#: admin.php:1119
+msgid "ATTENTION: reboot system?"
+msgstr "ACHTUNG: System neu starten?"
+
+#: admin.php:1120
+msgid "ATTENTION: shutdown system?"
+msgstr "ACHTUNG: System herunterfahren?"
+
+#: webcam.php:1121
+msgid "download image file"
+msgstr "Bild heruterladen"
+
+#: clear_logfile.php:1122
+msgid "clear logfile"
+msgstr "Logdatei gelöscht"
+
+#: clear_logfile.php:1122
+msgid "new logfile created"
+msgstr "neue Logdatei erstellt"
