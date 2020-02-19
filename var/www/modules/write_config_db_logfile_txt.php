@@ -154,7 +154,7 @@
                 if ($modus == 0 || $modus == 1 || $modus == 2)  {
                     $logstring = $logstring . " \n " . _('setpoint temperature').": ".$setpoint_temperature." &deg;C";
                     $logstring = $logstring . " \n " . _('switch-off temperature').": ".$switch_off_cooling_compressor_config." &deg;C ("._('so at')." ".$switch_off_temperature_cooling." &deg;C)";
-                    $logstring = _('switch-on temperature').": ".$switch_on_cooling_compressor_config." &deg;C ("._('so at')." ".$switch_on_temperature." &deg;C)";
+                    $logstring = $logstring . " \n " . _('switch-on temperature').": ".$switch_on_cooling_compressor_config." &deg;C ("._('so at')." ".$switch_on_temperature_cooling." &deg;C)";
                 }
                 
                 if ($modus == 3 || $modus == 4)  {
