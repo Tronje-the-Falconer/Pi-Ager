@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2020-02-16 19:01+0100\n"
-"PO-Revision-Date: 2020-02-18 21:48+0100\n"
+"PO-Revision-Date: 2020-02-19 07:51+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -44,7 +44,7 @@ msgstr "Wagen Wizzard"
 
 #: calibrate_scale.php:45 settings.php:106 settings.php:109 settings.php:132 settings.php:135
 msgid "tara scale"
-msgstr "Tara"
+msgstr "Tara Waage"
 
 #: calibrate_scale.php:47 settings.php:109 settings.php:135 settings.php:145
 msgid "please relieve the load cell completely"
@@ -659,11 +659,11 @@ msgstr "siehe Einstellungen"
 
 #: index.php:633 index.php:640
 msgid "scale1"
-msgstr "Waage 1"
+msgstr "Waage1"
 
 #: index.php:660 index.php:667
 msgid "scale2"
-msgstr "Waage 2"
+msgstr "Waage2"
 
 #: logs.php:9
 msgid "log entries"
@@ -1045,7 +1045,7 @@ msgstr "Waagenmessung anhalten"
 
 #: settings.php:112 settings.php:138
 msgid "stop scale"
-msgstr "Waage anhalten"
+msgstr "stop Waage"
 
 #: settings.php:145
 msgid "measurement on scales are stopped"

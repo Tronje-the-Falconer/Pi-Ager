@@ -22,7 +22,7 @@ include 'modules/read_current_db.php';
                                     }
                                     echo '<img src="images/webcam/'.$latest_filename.'" alt="webcam snapshot file">';
                                     echo '<div><br/>';
-                                    echo '<a href="images/webcam/'.$latest_filename.'" download>download image file</a>';
+                                    echo '<a href="images/webcam/'.$latest_filename.'" download>'; echo _('download image file'); echo '</a>';
                                     echo '<br/></div><br/>';
                                 ?>
 
