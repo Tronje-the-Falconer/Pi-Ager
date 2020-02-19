@@ -294,6 +294,8 @@ UPDATE config SET value='300' WHERE key='uv_duration';
 UPDATE config SET value='21600' WHERE key='uv_period';
 UPDATE config SET value='0' WHERE key='uv_modus';
 UPDATE config SET value='1' WHERE key='modus';
+UPDATE config SET value='60' WHERE key = 'uv_duration';
+UPDATE config SET value='180' WHERE key = 'uv_perod';
 DELETE FROM config_nfs_backup;
 #delete FROM config_alarm;
 delete FROM config_email_server;
