@@ -13,7 +13,7 @@
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <form method="post" name="manvals">
                                     <div class="hg_container" >
-                                        <table style="width: 100%;table-layour: fixed";>
+                                        <table style="width: 100%;table-layout: fixed";>
                                             <tr>
                                                 <td class="td_png_icon"><h3><?php echo _('operating mode'); ?></h3><img src="images/icons/operatingmode_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_operation_mode_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td style=" text-align: left; padding-left: 20px;">

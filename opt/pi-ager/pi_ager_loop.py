@@ -361,6 +361,12 @@ def doMainLoop():
     
     #Here get instance of Deviation class
     cl_fact_logger.get_instance().debug('doMainLoop()')
+    # Here init uv_period and light_period to detect change in loop
+    uv_period = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_period_key))
+    light_period = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_period_key))
+    uv_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_modus_key))
+    light_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_modus_key))  
+          
     try:
         while status_pi_ager == 1:
             #Here check Deviation of measurement
@@ -405,16 +411,32 @@ def doMainLoop():
                 switch_off_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_humidifier_key))
                 delay_humidify = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key))
                 delay_humidify = delay_humidify * 60
-                uv_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_modus_key))
+                uv_modus_temp = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_modus_key))
                 switch_on_uv_hour = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_hour_key))
                 switch_on_uv_minute = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_minute_key))
                 uv_duration = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_duration_key))
-                uv_period = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_period_key))
-                light_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_modus_key))
+                # check if uv_period changed
+                uv_period_temp = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_period_key))
+                if (uv_period_temp != uv_period or uv_modus_temp != uv_modus):
+                    current_time = pi_ager_database.get_current_time()
+                    uv_period = uv_period_temp
+                    uv_modus = uv_modus_temp
+                    pi_ager_init.uv_starttime = current_time
+                    pi_ager_init.uv_stoptime = pi_ager_init.uv_starttime + uv_duration
+                    
+                light_modus_temp = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_modus_key))
                 switch_on_light_hour = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_light_hour_key))
                 switch_on_light_minute = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_light_minute_key))
                 light_duration = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_duration_key))
-                light_period = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_period_key))
+                # check if light_period changed
+                light_period_temp = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_period_key))                
+                if (light_period_temp != light_period or light_modus_temp != light_modus):
+                    current_time = pi_ager_database.get_current_time()
+                    light_period = light_period_temp
+                    light_modus = light_modus_temp
+                    pi_ager_init.light_starttime = current_time
+                    pi_ager_init.light_stoptime = pi_ager_init.light_starttime + light_duration
+                    
                 dehumidifier_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.dehumidifier_modus_key))
     
                 # An dieser Stelle sind alle settings eingelesen, Ausgabe auf Konsole
@@ -520,7 +542,7 @@ def doMainLoop():
                             cl_fact_logger.get_instance().debug('UV-Licht period: ' + str(uv_period))
     
                         if current_time > pi_ager_init.uv_stoptime:
-                            pi_ager_init.uv_starttime = int(time.time()) + uv_period  # Timer-Timestamp aktualisiert
+                            pi_ager_init.uv_starttime = pi_ager_init.uv_starttime + uv_period  # Timer-Timestamp aktualisiert
                             pi_ager_init.uv_stoptime = pi_ager_init.uv_starttime + uv_duration
     
                 if uv_modus == 2:                         # Modus 2 Zeitstempel/Dauer
@@ -583,7 +605,7 @@ def doMainLoop():
                             cl_fact_logger.get_instance().debug('Licht period: ' + str(light_period))
     
                         if current_time > pi_ager_init.light_stoptime:
-                            pi_ager_init.light_starttime = int(time.time()) + light_period  # Timer-Timestamp aktualisiert
+                            pi_ager_init.light_starttime = pi_ager_init.light_starttime + light_period  # Timer-Timestamp aktualisiert
                             pi_ager_init.light_stoptime = pi_ager_init.light_starttime + light_duration
     
                 if light_modus == 2:                         # Modus 2 Zeitstempel/Dauer
