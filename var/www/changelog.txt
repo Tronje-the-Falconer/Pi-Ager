@@ -2,7 +2,7 @@ Version 3.2.1 RC2
 
 - Frontend
 \t	- Pi-Ager			\t\t	Sprachenumschaltung Deutsch und Englisch verfügbar
-<tab indent=10>	- Reifetabelle		<tab indent=20>	Export und Upload funktioniert jetzt
+<tab indent=100>	- Reifetabelle		<tab indent=20>	Export und Upload funktioniert jetzt
 
 - Backend
 	- HX711					Besseres Auslesen der Sensoren mit weniger Peaks. 
