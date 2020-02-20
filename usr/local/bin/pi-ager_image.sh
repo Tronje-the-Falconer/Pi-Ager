@@ -300,6 +300,7 @@ UPDATE config SET value='0' WHERE key = 'light_modus';
 UPDATE config SET value='60' WHERE key = 'uv_duration';
 UPDATE config SET value='180' WHERE key = 'uv_perod';
 UPDATE config SET value='0' WHERE key = 'uv_modus';
+UPDATE config SET value='27' WHERE key = 'save_temperature_humidity_loops';	
 DELETE FROM config_nfs_backup;
 #delete FROM config_alarm;
 delete FROM config_email_server;
