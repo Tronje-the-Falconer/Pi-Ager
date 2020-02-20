@@ -1,8 +1,8 @@
 Version 3.2.1 RC2
 
 - Frontend
-	- Pi-Ager				Sprachenumschaltung Deutsch und Englisch verfügbar
-	- Reifetabelle			Export und Upload funktioniert jetzt
+<tab indent=10>	- Pi-Ager			<tab indent=20>	Sprachenumschaltung Deutsch und Englisch verfügbar
+<tab indent=10>	- Reifetabelle		<tab indent=20>	Export und Upload funktioniert jetzt
 
 - Backend
 	- HX711					Besseres Auslesen der Sensoren mit weniger Peaks. 
@@ -13,6 +13,7 @@ Version 3.2.1 RC2
 	- Licht und UV-Licht	Timer werden sofort aktiv, wenn Periode oder Mode geändert werden.
 	- Benachrichtigung		Messenger Klassen mit Alarm, E-Mail, Telegram und Pushover verfügbar - Noch nicht im Frontend
 	- Logger				Logger Klasse eingebaut
+	- System				Zahlreiche Verbessungen bei Performance und Stabilität 
 
 - System
 	- PHP Version			Neue PHP Version - PHP Version 7.3.11-1~deb10u1 installiert
