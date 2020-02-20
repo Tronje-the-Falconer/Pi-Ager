@@ -61,14 +61,51 @@
                                             </td>
                                             <td>
                                                 <div class="img__wrap">
-                                                    <img class="img__img" src="images/flatmike.gif" alt="">
-                                                    <p class="img__description">Backend</p>
+                                                    <img class="img__img" src="images/derburgermeister.gif" alt="">
+                                                    <p class="img__description">Backend & Linux</p>
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: center"><a class="art-postcontent" href="https://www.grillsportverein.de/forum/members/tronje-the-falconer.73106/" target="_blank"><b>Tronje the Falconer</b></a><br><?php _('backend & linux'); ?><br></td>
-                                            <td style="text-align: center"><a class="art-postcontent" href="https://www.grillsportverein.de/forum/members/flatmike.103390/" target="_blank"><b>Flatmike</b></a><br><?php _('backend'); ?><br></td>
+                                            <td style="text-align: center"><a class="art-postcontent" href="https://www.grillsportverein.de/forum/members/derburgermeister.83866/" target="_blank"><b>DerBurgermeister</b></a><br><?php _('backend & linux'); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="img__wrap">
+                                                    <img class="img__img" src="images/svn.gif" alt="">
+                                                    <p class="img__description">Frontend & Design</p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="img__wrap">
+                                                    <img class="img__img" src="images/phylax.gif" alt="">
+                                                    <p class="img__description">Allrounder</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center"><a class="art-postcontent" href="https://www.grillsportverein.de/forum/members/svn.112183/" target="_blank"><b>svN</b></a><br><?php _('hardware & testing'); ?></td>
+                                            <td style="text-align: center"><a class="art-postcontent" href="https://www.grillsportverein.de/forum/members/phylax.128059/" target="_blank"><b>Phylax</b></a><br><?php _('allrounder'); ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="img__wrap">
+                                                    <img class="img__img" src="images/hama.gif" alt="">
+                                                    <p class="img__description">Hardware & Testing</p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="img__wrap">
+                                                    
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            
+                                            <td style="text-align: center"><a class="art-postcontent" href="https://www.grillsportverein.de/forum/members/ha-ma.74075/" target="_blank"><b>Ha-Ma</b></a><br><?php _('hardware & testing'); ?></td>
+                                            <td></td>
+                                            
                                         </tr>
                                         <tr>
                                             <td>
@@ -79,15 +116,15 @@
                                             </td>
                                             <td>
                                                 <div class="img__wrap">
-                                                    <img class="img__img" src="images/hama.gif" alt="">
-                                                    <p class="img__description">Hardware & Testing</p>
+                                                    <img class="img__img" src="images/flatmike.gif" alt="">
+                                                    <p class="img__description">Backend</p>
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             
-                                            <td style="text-align: center"><a href="https://www.grillsportverein.de/forum/members/steinbacher.79220/" target="_blank"><b>Steinbacher</b></a><br><?php _('frontend & design'); ?></td>
-                                            <td style="text-align: center"><a href="https://www.grillsportverein.de/forum/members/ha-ma.74075/" target="_blank"><b>Ha-Ma</b></a><br><?php _('hardware & testing'); ?></td>
+                                            <td style="text-align: center"><a class="art-postcontent" href="https://www.grillsportverein.de/forum/members/steinbacher.79220/" target="_blank"><b>Steinbacher</b></a><br><?php _('frontend & design'); ?></td>
+                                            <td style="text-align: center"><a class="art-postcontent" href="https://www.grillsportverein.de/forum/members/flatmike.103390/" target="_blank"><b>Flatmike</b></a><br><?php _('backend'); ?><br></td>
                                         </tr>
                                         <tr>
                                             <td style="text-align: center" colspan="2"><br><br><?php echo _('based on an idea and submission of'); echo ' ';?><a href="https://www.grillsportverein.de/forum/members/tommy_j.54659/" target="_blank" title="Tommy_J">Tommy_J</a></td>
