@@ -144,9 +144,8 @@ chroot $chrootdir /bin/bash <<EOF
 ######################################################
 
 apt -y update && apt -y upgrade && apt -y install linux-image && apt --fix-broken install
-apt remove -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol pi-bluetooth
-apt remove -y influxdb grafana-rpi sysstat stress bareos-common bareos-filedaemon check-mk-agent subversion
-apt -y autoremove && apt -y clean &&  apt -y autoclean 
+apt remove -y timidity lxmusic gnome-disk-utility deluge-gtk evince wicd wicd-gtk clipit usermode gucharmap gnome-system-tools pavucontrol pi-bluetooth subversion
+
 
 # C++
 #apt remove -y g++-8/stable g++ gcc-4.6-base gcc-4.7-base gcc-4.8-base gcc-4.9-base gcc-5-base gcc-6-base gcc-6 gcc-7-base gcc-8-base gcc-8 gcc gdb 
@@ -156,6 +155,8 @@ apt remove -y gfortran-6 gfortran-8 gfortran
 apt remove -y python2-minimal python2.7-minimal python2.7 python2
 # Pango
 apt remove -y libpango-1.0-0 libpangocairo-1.0-0 libpangoft2-1.0-0
+
+apt -y autoremove && apt -y clean &&  apt -y autoclean 
 
 ######################################################
 # Pip upgrade and update packages
@@ -184,11 +185,7 @@ chmod 755 /var/www/logs/logfile.txt
 touch /var/www/logs/pi-ager.log
 chmod 755 /var/www/logs/pi-ager.log
 
-# delete obsolete /opt direcories
-rm -r /opt/git
-rm -r /opt/GPIO-Test
-rm -r /opt/MCP3204
-rm -r /opt/vc
+
 
 
 # remove obsolete direcectories after upgrade
@@ -196,48 +193,20 @@ rm -r /boot.bak
 rm -r /lib/modules.bak
 #PRUNE_MODULES=1 sudo rpi-update
 
-# remove obsolete systemd start files
-systemctl stop chronograf.service bacula-fd.service bareos-filedaemon.service display-manager.service grafana-server.service influxdb.service 
-systemctl stop check_mk@.service check_mk.socket haveget.service smartd.service
-systemctl disable chronograf.service bacula-fd.service bareos-filedaemon.service display-manager.service grafana-server.service influxdb.service 
-systemctl disable check_mk@.service check_mk.socket haveget.service smartd.service
-
 systemctl enable pi-ager_main.service setup_pi-ager.service
 systemctl disable pi-ager_scale.service pi-ager_agingtable.service
 
-systemctl daemon-reload
-systemctl reset-failed
+#systemctl daemon-reload
+#systemctl reset-failed
 
 
 
-######################################################
-# Delete personal files (ssh keys ...)
-######################################################
-# root user
-rm -f /root/.ssh/authorized_keys
-rm -f /root/.ssh/known_hosts
 
-# pi user
-rm -f /home/pi/.ssh/authorized_keys
-rm -f /home/pi/.bash_history
-rm -f /home/pi/NOAA_data.txt
-rm -f /home/pi/pishrink.log
-rm -f /home/pi/.influx_history
-rm -f /home/pi/.gitconfig
-rm -f /home/pi/.gnupg/
-rm -f /home/pi/.lesshst
-rm -f /home/pi/.selected_editor
-rm -f /home/pi/setup.txt
-rm -f /home/pi/.sqlite_history
-rm -f /home/pi/.wget-hsts
-rm -f /home/pi/subversion
 
 
 ######################################################
 # Change some settings
 ######################################################
-# change ssh port:
-sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
 
 # Remove System key for encrypt/decrypt
 rm /home/pi/system_key.bin
@@ -326,6 +295,50 @@ delete FROM config_telegram;
 END_SQL
 
 EOF
+
+if [1 == 2] then
+	chroot $chrootdir /bin/bash <<EOF
+	# This commands are called inside of the chroot environment 
+	# The aim is to make an new image for the Pi-Ager Communtiy
+	apt remove -y influxdb grafana-rpi sysstat stress bareos-common bareos-filedaemon check-mk-agent 
+	apt -y autoremove && apt -y clean &&  apt -y autoclean 
+	systemctl stop check_mk@.service check_mk.socket haveget.service smartd.service
+	systemctl disable chronograf.service bacula-fd.service bareos-filedaemon.service display-manager.service grafana-server.service influxdb.service 
+	systemctl disable check_mk@.service check_mk.socket haveget.service smartd.service
+	######################################################
+	# Delete personal files (ssh keys ...)
+	######################################################
+	# root user
+	rm -f /root/.ssh/authorized_keys
+	rm -f /root/.ssh/known_hosts
+	
+	# pi user
+	rm -f /home/pi/.ssh/authorized_keys
+	rm -f /home/pi/.bash_history
+	rm -f /home/pi/NOAA_data.txt
+	rm -f /home/pi/pishrink.log
+	rm -f /home/pi/.influx_history
+	rm -f /home/pi/.gitconfig
+	rm -f /home/pi/.gnupg/
+	rm -f /home/pi/.lesshst
+	rm -f /home/pi/.selected_editor
+	rm -f /home/pi/setup.txt
+	rm -f /home/pi/.sqlite_history
+	rm -f /home/pi/.wget-hsts
+	rm -f /home/pi/subversion
+
+	# delete obsolete /opt direcories
+	rm -r /opt/git
+	rm -r /opt/GPIO-Test
+	rm -r /opt/MCP3204
+	rm -r /opt/vc
+	######################################################
+	# Change some settings
+	######################################################
+	# change ssh port:
+	sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
+EOF
+fi
 
 for i in dev/pts proc sys dev
 do
