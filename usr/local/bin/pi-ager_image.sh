@@ -51,8 +51,8 @@ Examples:
     Use backup file as a new image file - Backup is then the image
         '`basename $0`' -f PiAgerBackup_2020-01-22-07:02:17.img
 	
-	Create my Image - do not delete all
-		'`basename $0`' -m -f PiAgerBackup_2020-01-22-07:02:17.img
+	Create and copy my Image - do not delete all
+		'`basename $0`' -c -m -f PiAgerBackup_2020-01-22-07:02:17.img
 '
 
 VALID_COMMAND_LINE_OPTIONS="cmhf:"
@@ -63,21 +63,15 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
     echo "option is " $options
     case $options in
     	f)
-    		echo "f"
-    		echo "Option f : ($OPTARG)"
     		source_file=${OPTARG}
-    		echo "Source File = $source_file"
 		;;
         c)
-        	echo "c"
         	do_copy=true;
         ;;
         m)
-        	echo "m"
         	my_image=true;
         ;;
         h)
-        	echo "h"
             echo "$COMMAND_LINE_OPTIONS_HELP"
             exit $E_OPTERROR;
         ;;
@@ -99,7 +93,7 @@ fi
 echo "Source File = $source_file"
 echo "do_copy     = $do_copy"
 echo "my_image    = $my_image"
-exit
+
 if [ "$do_copy" == true ]; then
 #if [ 1==1  ];
 	then
