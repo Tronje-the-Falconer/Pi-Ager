@@ -87,7 +87,7 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
         ;;
     esac
 done
-if [ -z "${source_file}" ] then
+if [ -z "${source_file}" ]; then
     echo "$COMMAND_LINE_OPTIONS_HELP"
 fi
 
