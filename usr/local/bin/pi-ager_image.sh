@@ -94,7 +94,7 @@ echo "Source File = $source_file"
 echo "do_copy     = $do_copy"
 echo "my_image    = $my_image"
 
-if [ $do_copy == true ]; then
+if [ $do_copy eq true ]; then
 #if [ 1==1  ];
 	then
 		img_old="$source_file"
