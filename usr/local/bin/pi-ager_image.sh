@@ -38,26 +38,39 @@ BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from c
 #####################################################################
 COMMAND_LINE_OPTIONS_HELP='
 Command line options:
+	-f			Source Filename
     -c          Copy input File. Otherwise the input file will be changed
+    -m			my Image - Do not delete all 
     -h          Print this help menu
 
 Examples:
+
     Copy backup file to a new image file
-        '`basename $0`' -c PiAgerBackup_2020-01-22-07:02:17.img
+        '`basename $0`' -c -f PiAgerBackup_2020-01-22-07:02:17.img
 
-    Use backup file as a new image file
-        '`basename $0`' PiAgerBackup_2020-01-22-07:02:17.img
-
+    Use backup file as a new image file - Backup is then the image
+        '`basename $0`' -f PiAgerBackup_2020-01-22-07:02:17.img
+	
+	Create my Image - do not delete all
+		'`basename $0`' -m -f PiAgerBackup_2020-01-22-07:02:17.img
 '
 
-VALID_COMMAND_LINE_OPTIONS=":c:h"
-
+VALID_COMMAND_LINE_OPTIONS=":m:c:h:f"
+do_copy=false;
+my_image=false;
 
 while getopts $VALID_COMMAND_LINE_OPTIONS options; do
     #echo "option is " $options
     case $options in
+    	f)
+    		source_file=${OPTRARG}
+		;;
         c)
-        	$do_copy = true;
+        	do_copy=true;
+        ;;
+
+        m)
+        	my_image=true;
         ;;
         h)
             echo "$COMMAND_LINE_OPTIONS_HELP"
@@ -74,19 +87,26 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
         ;;
     esac
 done
-#if [ "$do_copy" == true ]; then
-if [ 1==1  ];
+if [ -z "${source_file}" ] ; then
+    echo "$COMMAND_LINE_OPTIONS_HELP"
+fi
+
+echo "Source File = $source_file"
+echo "do copy     = $do_copy"
+echo "my_image    = $my_image
+exit
+if [ "$do_copy" == true ]; then
+#if [ 1==1  ];
 	then
-		img_old="$1"
+		img_old="$source_file"
 		img="PiAger_image.img"
 		echo "Coping $img_old to $img"
 		rsync -a --info=progress2 "./$img_old" "$img"
  	else
- 		img="$1"
+ 		img="$source_file"
  		echo "Using $img as source and target"
  	
  fi
-#img_old="$2"
 #read -p "Press enter to continue after copy image"
 echo "####################################################################################"
 parted_output=$(parted -ms "$img" unit B print | tail -n 1)
@@ -296,7 +316,7 @@ END_SQL
 
 EOF
 
-if [1 == 2] then
+if [ "$my_image" == false ]; then
 	chroot $chrootdir /bin/bash <<EOF
 	# This commands are called inside of the chroot environment 
 	# The aim is to make an new image for the Pi-Ager Communtiy
