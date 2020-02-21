@@ -65,7 +65,8 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
     	f)
     		echo "f"
     		echo "Option f : ($OPTARG)"
-    		source_file=$OPTRARG
+    		source_file=${OPTARG}
+    		echo "Source File = $source_file"
 		;;
         c)
         	echo "c"
