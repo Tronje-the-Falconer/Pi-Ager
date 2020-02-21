@@ -105,7 +105,7 @@ if [ "$do_copy" = true ];
  		echo "Using $img as source and target"
  	
 fi
-exit
+
 #read -p "Press enter to continue after copy image"
 echo "####################################################################################"
 parted_output=$(parted -ms "$img" unit B print | tail -n 1)
