@@ -94,7 +94,7 @@ echo "Source File = $source_file"
 echo "do_copy     = $do_copy"
 echo "my_image    = $my_image"
 
-if [ $do_copy eq true ]; 
+if [ "$do_copy" eq true ]; 
 	then
 		img_old="$source_file"
 		img="PiAger_image.img"
@@ -315,7 +315,7 @@ END_SQL
 
 EOF
 
-if [ $my_image eq false ]; then
+if [ "$my_image" eq false ]; then
 	chroot $chrootdir /bin/bash <<EOF
 	# This commands are called inside of the chroot environment 
 	# The aim is to make an new image for the Pi-Ager Communtiy
