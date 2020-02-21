@@ -93,7 +93,7 @@ fi
 
 echo "Source File = $source_file"
 echo "do copy     = $do_copy"
-echo "my_image    = $my_image
+echo "my_image    = $my_image"
 exit
 if [ "$do_copy" == true ]; then
 #if [ 1==1  ];
