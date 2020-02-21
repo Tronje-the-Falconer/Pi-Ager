@@ -60,7 +60,7 @@ do_copy=false;
 my_image=false;
 
 while getopts $VALID_COMMAND_LINE_OPTIONS options; do
-    #echo "option is " $options
+    echo "option is " $options
     case $options in
     	f)
     		echo "f"
