@@ -87,7 +87,7 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
         ;;
     esac
 done
-if [ -z "${source_file}" ] ; then
+if [ -z "${source_file}" ] then
     echo "$COMMAND_LINE_OPTIONS_HELP"
 fi
 
@@ -316,7 +316,7 @@ END_SQL
 
 EOF
 
-if [ "$my_image" == false ]; then
+if [ "$my_image" == false ] then
 	chroot $chrootdir /bin/bash <<EOF
 	# This commands are called inside of the chroot environment 
 	# The aim is to make an new image for the Pi-Ager Communtiy
