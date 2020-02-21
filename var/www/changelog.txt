@@ -1,33 +1,54 @@
 Version 3.2.1 RC2
 
 - Frontend
-	- Pi-Ager				Sprachenumschaltung Deutsch und Englisch verfügbar
-	- Reifetabelle			Export und Upload funktioniert jetzt
+	- Pi-Ager
+		Sprachenumschaltung Deutsch und Englisch verfügbar
+	- Reifetabelle			
+		Export und Upload funktioniert jetzt
 
 - Backend
-	- HX711					Besseres Auslesen der Sensoren mit weniger Peaks. 
-	- Sensoren				i2c Sensoren SHT85 und SHT3x. Neue Sensoren SHT85 und SHT3x werden unterstützt.
-	- Backup				NFS-Backup möglich
-	- Datenbank				Ist nun stabiler wegen WAL Mode
-	- Abluftlüfter			Abluftlüfter reagiert nun auf den Abschaltbefehl des Timers in weiteren Modi.
-	- Licht und UV-Licht	Timer werden sofort aktiv, wenn Periode oder Mode geändert werden.
-	- Benachrichtigung		Messenger Klassen mit Alarm, E-Mail, Telegram und Pushover verfügbar - Noch nicht im Frontend
-	- Logger				Logger Klasse eingebaut
-	- System				Zahlreiche Verbessungen bei Performance und Stabilität 
+	- HX711					
+		Besseres Auslesen der Sensoren mit weniger Peaks. 
+	- Sensoren				
+		i2c Sensoren SHT85 und SHT3x. Neue Sensoren SHT85 und SHT3x werden unterstützt.
+		SHT75, DHT22 und DHT11 überarbeitet. 
+		Besseres Fehlerhandling
+	- Backup				
+		NFS-Backup möglich
+	- Datenbank				
+		Ist nun stabiler wegen WAL Mode
+	- Abluftlüfter			
+		Abluftlüfter reagiert nun auf den Abschaltbefehl des Timers in weiteren Modi.
+	- Licht und UV-Licht	
+		Timer werden sofort aktiv, wenn Periode oder Mode geändert werden.
+	- Benachrichtigung		
+		Messenger Klassen mit Alarm, E-Mail, Telegram und Pushover verfügbar - Noch nicht im Frontend
+	- Logger				
+		Logger Klasse eingebaut
+	- System				
+		Zahlreiche Verbessungen bei Performance und Stabilität 
 
 - System
-	- PHP Version			Neue PHP Version - PHP Version 7.3.11-1~deb10u1 installiert
-	- Python Version		Neue Python Version - Python 3.7.3 installiert 
-	- Phpliteadmin			Neue Phpliteadmin Version - phpLiteAdmin v1.9.8.2 installiert
-	- Raspberry				Neues Raspian Release Buster - Betriebssystem ist nun Raspian Buster
-	- Raspberry				Mehrere Kernel updates (aktueller Kernel ist installiert)
-	- Raspberry				Boot Verzeichnis vergrößern - Boot Verzeichnis auf ca. 250 MB vergrößert (wegen Buster)
-	- Image					Unnötige APT Pakete und Verzeichnisse entfernen beim Image erstellen 
-	- System				systemd Startscript pi-ager erstellen und testen - systemctl start/stop/status… pi-ager_main.service, pi-ager_scale.service, pi-ager_agingtable
-	- Image					Tabellen löschen - Bewegungsdaten werden gelöscht. Bei Konfigurationstabellen werden Festwerte gesetzt:
-	- Startup				setup.txt aus /boot/ wird nun übernommen und muss genutzt werden, da hier noch Dienste gestartet werden. 
-	- RPi4					Änderungen von für RPi4 Unterstützung wurden fast alle eingebaut. Außer sudowebscript wegen GPIO. RPi4 wird noch nicht unterstützt.
-	- Web-Cam				Es wird kein Viedo erzeugt. Nur einzelne Bilder.
+	- PHP Version			
+		Neue PHP Version - PHP Version 7.3.11-1~deb10u1 installiert
+	- Python Version		
+		Neue Python Version - Python 3.7.3 installiert 
+	- Phpliteadmin			
+		Neue Phpliteadmin Version - phpLiteAdmin v1.9.8.2 installiert
+	- Raspberry				
+		Neues Raspian Release Buster - Betriebssystem ist nun Raspian Buster
+		Mehrere Kernel updates (aktueller Kernel ist installiert)
+		Boot Verzeichnis vergrößern - Boot Verzeichnis auf ca. 250 MB vergrößert (wegen Buster)
+		Änderungen von für RPi4 Unterstützung wurden fast alle eingebaut. Außer sudowebscript wegen GPIO. RPi4 wird noch nicht unterstützt.
+	- System
+		systemd Startscript pi-ager erstellen und testen - systemctl start/stop/status… pi-ager_main.service, pi-ager_scale.service, pi-ager_agingtable
+	- Image
+		Unnötige APT Pakete und Verzeichnisse entfernen beim Image erstellen 
+		Tabellen löschen - Bewegungsdaten werden gelöscht. Bei Konfigurationstabellen werden Festwerte gesetzt:
+	- Startup
+		setup.txt aus /boot/ wird nun übernommen und muss genutzt werden, da hier noch Dienste gestartet werden. 
+	- Web-Cam
+		Es wird kein Viedo erzeugt. Nur einzelne Bilder.
 
 
 --------------------------------------------------------------------------------
