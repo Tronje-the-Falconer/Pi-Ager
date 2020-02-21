@@ -64,6 +64,7 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
     case $options in
     	f)
     		echo "f"
+    		echo "Option f : ($OPTARG)"
     		source_file=(${OPTRARG})
 		;;
         c)
