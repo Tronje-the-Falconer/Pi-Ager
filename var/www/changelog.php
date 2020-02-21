@@ -38,12 +38,14 @@
                                     <table class="miniature_writing">
                                         <tr>
                                             <td>
-                                                <?php 
-                                                    $f = file('changelog.txt');
-                                                    foreach($f as $file) {
-                                                        echo '<br />'. $file;
-                                                    }
-                                                ?>
+                                                <div style="white-space: pre;">
+                                                    <?php 
+                                                        $f = file('changelog.txt');
+                                                        foreach($f as $file) {
+                                                            echo '<br />'. $file;
+                                                        }
+                                                    ?>
+												</div>
                                             </td>
                                         </tr>
                                     </table>
