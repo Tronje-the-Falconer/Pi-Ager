@@ -18,11 +18,11 @@ Version 3.2.1 RC2
 	- Datenbank				
 		Ist nun stabiler wegen WAL Mode
 	- Abluftlüfter			
-		Reagiert nun auf den Abschaltbefehl des Timers in weiteren Modi.
+		Abluftlüfter reagiert nun auf den Abschaltbefehl des Timers in weiteren Modi.
 	- Licht und UV-Licht	
 		Timer werden sofort aktiv, wenn Periode oder Mode geändert werden.
 	- Benachrichtigung		
-		<p>Messenger Klassen mit Alarm, E-Mail, Telegram und Pushover verfügbar - Noch nicht im Frontend</p>
+		Messenger Klassen mit Alarm, E-Mail, Telegram und Pushover verfügbar - Noch nicht im Frontend
 	- Logger				
 		Logger Klasse eingebaut
 	- System				
