@@ -10,7 +10,7 @@ Version 3.2.1 RC2
 	- HX711					
 		Besseres Auslesen der Sensoren mit weniger Peaks. 
 	- Sensoren				
-		i2c Sensoren SHT85 und SHT3x. Neue Sensoren SHT85 und SHT3x werden unterstützt.
+		Neue i2c Sensoren SHT85 und SHT3x werden unterstützt.
 		SHT75, DHT22 und DHT11 überarbeitet. 
 		Besseres Fehlerhandling
 	- Backup				
@@ -18,11 +18,11 @@ Version 3.2.1 RC2
 	- Datenbank				
 		Ist nun stabiler wegen WAL Mode
 	- Abluftlüfter			
-		Abluftlüfter reagiert nun auf den Abschaltbefehl des Timers in weiteren Modi.
+		Reagiert nun auf den Abschaltbefehl des Timers in weiteren Modi.
 	- Licht und UV-Licht	
 		Timer werden sofort aktiv, wenn Periode oder Mode geändert werden.
 	- Benachrichtigung		
-		Messenger Klassen mit Alarm, E-Mail, Telegram und Pushover verfügbar - Noch nicht im Frontend
+		<p>Messenger Klassen mit Alarm, E-Mail, Telegram und Pushover verfügbar - Noch nicht im Frontend</p>
 	- Logger				
 		Logger Klasse eingebaut
 	- System				
