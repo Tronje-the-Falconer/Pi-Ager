@@ -63,16 +63,19 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
     #echo "option is " $options
     case $options in
     	f)
+    		echo "f"
     		source_file=${OPTRARG}
 		;;
         c)
+        	echo "c"
         	do_copy=true;
         ;;
-
         m)
+        	echo "m"
         	my_image=true;
         ;;
         h)
+        	echo "h"
             echo "$COMMAND_LINE_OPTIONS_HELP"
             exit $E_OPTERROR;
         ;;
@@ -92,7 +95,7 @@ if [ -z "${source_file}" ]; then
 fi
 
 echo "Source File = $source_file"
-echo "do copy     = $do_copy"
+echo "do_copy     = $do_copy"
 echo "my_image    = $my_image"
 exit
 if [ "$do_copy" == true ]; then
