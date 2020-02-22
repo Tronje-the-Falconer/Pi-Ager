@@ -8,7 +8,7 @@ Version 3.2.1 RC2
 
 - Backend
 	- HX711					
-		Besseres Auslesen der Sensoren mit weniger Peaks. 
+		Besseres Auslesen der Sensoren mit keinen Peaks mehr. 
 	- Sensoren				
 		Neue i2c Sensoren SHT85 und SHT3x werden unterstützt.
 		SHT75, DHT22 und DHT11 überarbeitet. 
