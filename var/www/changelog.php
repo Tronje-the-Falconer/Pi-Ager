@@ -38,7 +38,7 @@
                                     <table class="miniature_writing">
                                         <tr>
                                             <td>
-                                                <div style="margin-left: 2em; text-indent: 0em; tab-size:5; -moz-tab-size:5; -ms-tab-size:5;white-space:pre-wrap;">
+                                                <div style="display: block; tab-size:5; -moz-tab-size:5; -ms-tab-size:5;white-space:pre-wrap;">
                                                     <?php 
                                                         $f = file('changelog.txt');
                                                         foreach($f as $file) {
