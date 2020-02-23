@@ -42,7 +42,8 @@
                                                     <?php 
                                                         $f = file('changelog.txt');
                                                         foreach($f as $file) {
-                                                            echo '<br />'. $file;
+                                                            #echo '<br />'. $file;
+                                                            echo '<p>'. $file .'</p>'
                                                         }
                                                     ?>
 												</div>
