@@ -43,7 +43,7 @@
                                                         $f = file('changelog.txt');
                                                         foreach($f as $file) {
                                                             #echo '<br />'. $file;
-                                                            echo $file;
+                                                            echo <p>.$file.</p>;
                                                         }
                                                     ?>
 												</div>
