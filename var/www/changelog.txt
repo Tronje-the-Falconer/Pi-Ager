@@ -39,12 +39,13 @@ Version 3.2.1 RC2
 		Neues Raspian Release Buster - Betriebssystem ist nun Raspian Buster
 		Mehrere Kernel updates (aktueller Kernel ist installiert)
 		Boot Verzeichnis vergrößern - Boot Verzeichnis auf ca. 250 MB vergrößert (wegen Buster)
-		Änderungen von für RPi4 Unterstützung wurden fast alle eingebaut. Außer sudowebscript wegen GPIO. RPi4 wird noch nicht unterstützt.
+		Änderungen von für RPi4 Unterstützung wurden fast alle eingebaut. Außer sudowebscript wegen GPIO. 
+		RPi4 wird noch nicht unterstützt.
 	- System
-		systemd Startscript pi-ager erstellen und testen - systemctl start/stop/status… pi-ager_main.service, pi-ager_scale.service, pi-ager_agingtable
+		systemd Startscript erstellt - systemctl start/stop/status… pi-ager_main.service, pi-ager_scale.service, pi-ager_agingtable
 	- Image
 		Unnötige APT Pakete und Verzeichnisse entfernen beim Image erstellen 
-		Tabellen löschen - Bewegungsdaten werden gelöscht. Bei Konfigurationstabellen werden Festwerte gesetzt:
+		Tabellen löschen - Bewegungsdaten werden gelöscht. Bei Konfigurationstabellen werden Festwerte gesetzt.
 	- Startup
 		setup.txt aus /boot/ wird nun übernommen und muss genutzt werden, da hier noch Dienste gestartet werden. 
 	- Web-Cam
