@@ -314,7 +314,7 @@ delete FROM config_telegram;
 END_SQL
 
 EOF
-
+sync
 if [ "$my_image" = false ]; then
 	chroot $chrootdir /bin/bash <<EOF
 	# This commands are called inside of the chroot environment 
@@ -358,7 +358,7 @@ if [ "$my_image" = false ]; then
 	sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
 EOF
 fi
-
+sync
 for i in dev/pts proc sys dev
 do
     umount $mountdir/$i
@@ -367,6 +367,7 @@ done
 #read -p "Press enter to continue after umount dev sys ..."
 umount "$mountdir/boot"
 umount "$mountdir"
+sync
 if [ $? -ne 0 ]
 then
   	echo "Error unmounting $mountdir. Maybe $mountdir is open. Image is then corrupt."
