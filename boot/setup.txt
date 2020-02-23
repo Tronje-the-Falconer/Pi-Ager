@@ -9,21 +9,41 @@
 #
 # Logfile wird unter /boot/setup.log angelegt 
 #
+
 # Hostname, wie soll der Raspberry Pi im Netzwerk heissen:
 piname=
+
 # Passwort für Benutzer pi:
 pipass=
+
 # Passwort für Benutzer root:
 rootpass=
+
 # Passwort für Benutzer pi-ager auf der Webiste settings, admin, webcam:
 webguipw=
+
 # Passwort für Zugriff auf Datenbankverwaltung phpliteadmin
 dbpw=
+
 # WLAN Netzwerkname, Sonderzeichen wie ! oder Leerzeichen muss ein Backslash '\' vorangestelt werden:
 wlanssid=
+
 # WLAN Schlüssel:
 wlankey=
+
 # ISO code your country, e.g. DE, GB
 country=
+
+# Bus type - i2c (0) (SHT3x, SHT85) benutzen oder 1-wire (1) (SHT75, DHT22)
+bus_type=1
+
+# Sensor type 
+# 1: "DHT11"
+# 2: "DHT22"
+# 3: "SHT75"
+# 4: "SHT85"
+# 5: "SHT3x"
+sensor_type=3
+
 # setup.txt nach boot loeschen? leer lassen fuer löschen oder 1 fuer behalten 
 keepconf=0

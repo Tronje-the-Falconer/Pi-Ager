@@ -21,6 +21,8 @@ then
     eval $(grep -i "^keepconf=" /boot/setup.txt| tr -d "\n\r")
 #    eval $(grep -i "^partsize=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^reboot=" /boot/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^bus_type=" /boot/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^sensor_type=" /boot/setup.txt| tr -d "\n\r")
     echo "Variablen"
     echo "Hostname:"
     echo $piname
@@ -34,6 +36,11 @@ then
     #echo $wlankey
     echo "Config behalten:"
     echo $keepconf
+	echo "Bus Typ:"
+	echo $bus_type
+	echo "Sensor Typ:"
+	echo $sensor_type
+	
 #    echo "Partitionsgroesse:"
 #    echo $partsize
 
@@ -103,6 +110,24 @@ then
         rm /boot/setup.txt
         echo "Config gelöscht"
     fi
+    
+    # Bus type setzen
+    if [ -z "$bus_type" ]
+    then
+    	sqlite3 /var/www/config/pi-ager.sqlite3 "UPDATE config SET value = $bus_type WHERE key = 'sensorbus'"
+    	echo "Sensor Bus auf "$bus_type" gesetzt"
+    fi
+    
+    # Sensor type setzen
+    if [ -z "$sensor_type" ]
+    then
+    	sqlite3 /var/www/config/pi-ager.sqlite3 "UPDATE config SET value = $sensor_type WHERE key = 'sensortype'"
+		echo "Sensor Bus auf "$sensor_type" gesetzt"
+    fi
+    
+    
+    sensortype
+    
 fi
 
 systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
