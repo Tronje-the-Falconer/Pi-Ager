@@ -38,15 +38,15 @@
                                     <table class="miniature_writing">
                                         <tr>
                                             <td>
-                                                
-                                                <?php 
-                                                    $f = file('changelog.html');
-                                                    foreach($f as $file) {
-                                                        #echo '<br />'. $file;
-                                                        echo $file;
-                                                    }
-                                                ?>
-												
+                                                <div style="tab-size:5; -moz-tab-size:5; -ms-tab-size:5;white-space:pre-wrap">
+                                                    <?php 
+                                                        $f = file('changelog.html');
+                                                        foreach($f as $file) {
+                                                            #echo '<br />'. $file;
+                                                            echo $file;
+                                                        }
+                                                    ?>
+												</div>
                                             </td>
                                         </tr>
                                     </table>
