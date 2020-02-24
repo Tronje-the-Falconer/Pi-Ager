@@ -2,7 +2,7 @@
 # Pi-Ager 
 # Version 1
 # Standard Hostname              rpi-Pi-Ager 
-# Standard Passwoerter f�r alle  raspberry
+# Standard Passwoerter für alle  raspberry
 # 
 # Nur ausgefüllte Werte werden gesetzt
 # Die Variablennamen dürfen nicht verändert werden!
@@ -45,5 +45,5 @@ bus_type=1
 # 5: "SHT3x"
 sensor_type=3
 
-# setup.txt nach boot loeschen? leer lassen fuer löschen oder 1 fuer behalten 
+# setup.txt nach boot löschen? leer lassen für löschen oder 1 für behalten 
 keepconf=0
