@@ -34,7 +34,7 @@ wlankey=
 # ISO code your country, e.g. DE, GB
 country=
 
-# Bus type - i2c (0) (SHT3x, SHT85) benutzen oder 1-wire (1) (SHT75, DHT22)
+# Bus type - i2c (0) (SHT3x, SHT85) benutzen oder 1-wire (1) (SHT75, DHT22, DHT11)
 bus_type=1
 
 # Sensor type 
