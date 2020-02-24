@@ -39,10 +39,6 @@
                                         <tr>
                                             <td>
                                                 <div style="tab-size:5; -moz-tab-size:5; -ms-tab-size:5;white-space:pre-wrap;list-style-position:outside; margin-bottom: 0px;">
-                                                #p.h2 { }
-                                                #h3 { margin-bottom: 0px; }
-                                                #h4 { margin-bottom: 0px; }
-                                                #li { margin-top: 0px; }
                                                     <?php 
                                                         $f = file('changelog.html');
                                                         foreach($f as $file) {
