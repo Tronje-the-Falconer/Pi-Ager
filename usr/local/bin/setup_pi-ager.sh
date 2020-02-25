@@ -1,4 +1,5 @@
 #!/bin/sh
+# File: setup_pi-ager.sh
 # START
 #crontab richtigstellen 
 sed -n '/reboot/!p' /etc/crontab >/etc/crontabtemp ; mv -f /etc/crontabtemp /etc/crontab # sed sucht | -n abstellen von ausgabe auf Konsole 
@@ -116,6 +117,15 @@ then
     then
     	sqlite3 /var/www/config/pi-ager.sqlite3 "UPDATE config SET value = $bus_type WHERE key = 'sensorbus'"
     	echo "Sensor Bus auf "$bus_type" gesetzt"
+    	if [ "$bus_type" eq 0 ]
+	    	then
+				# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
+        		rm -r /etc/modprobe.d/Pi-Ager_i2c_off.conf
+			elif [ "$bus_type" eq 1 ]
+		then
+				# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln
+        		cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
+    	fi
     fi
     
     # Sensor type setzen
