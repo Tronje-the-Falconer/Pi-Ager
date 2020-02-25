@@ -121,10 +121,12 @@ then
 	    	then
 				# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
         		rm -r /etc/modprobe.d/Pi-Ager_i2c_off.conf
+				echo "I2C is active"
 			elif [ "$bus_type" eq 1 ]
 		then
 				# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln
         		cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
+        		echo "1-wire is active"
     	fi
     fi
     
@@ -134,10 +136,6 @@ then
     	sqlite3 /var/www/config/pi-ager.sqlite3 "UPDATE config SET value = $sensor_type WHERE key = 'sensortype'"
 		echo "Sensor Bus auf "$sensor_type" gesetzt"
     fi
-    
-    
-    sensortype
-    
 fi
 
 systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
