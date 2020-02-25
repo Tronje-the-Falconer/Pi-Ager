@@ -41,10 +41,11 @@
                                                 <div style="tab-size:5; -moz-tab-size:5; -ms-tab-size:5;white-space:pre-wrap;list-style-position:outside; margin-bottom: 0px;">
                                                     <?php 
                                                         $f = file('changelog.html');
-                                                        foreach($f as $file) {
+                                                        include $f;
+                                                        #foreach($f as $file) {
                                                             #echo '<br />'. $file;
-                                                            echo $file;
-                                                        }
+                                                        #    echo $file;
+                                                        #}
                                                     ?>
 												</div>
                                             </td>
