@@ -1,0 +1,12 @@
+[Unit]
+Description=Start agingtable routine of Pi-Ager
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=python3 /opt/pi-ager/agingtable.py 2>&1
+PIDFile=/tmp/pi-ager_agingtable.pid
+
+[Install]
+Alias=pi-ager_agingtable
+WantedBy=multi-user.target
