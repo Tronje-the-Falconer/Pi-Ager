@@ -117,7 +117,7 @@ $faq_url =  'https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/FAQ';
 $sqlite_path = '/var/www/config/pi-ager.sqlite3';
 $logfile_txt_file = '/var/www/logs/logfile.txt';
 $pi_ager_log_file = '/var/www/logs/pi-ager.log';
-$changelogfile = '/var/www/changelog.txt';
+$changelogfile = '/var/www/changelog.html';
 #-----------------------------JSON Keys
 $last_change_temperature_json_key = 'last_change_temperature';
 $last_change_humidity_json_key = 'last_change_humidity';

@@ -35,23 +35,14 @@
                                     </form>
                                     <hr>
                                     <!----------------------------------------------------------------------------------------Logeinträge-->
-                                    <table class="miniature_writing">
-                                        <tr>
-                                            <td>
-                                                <div style="tab-size:5; -moz-tab-size:5; -ms-tab-size:5;white-space:pre-wrap;list-style-position:outside; margin-bottom: 0px;">
-                                                    <?php 
-                                                        #$f = file('changelog.html');
-                                                        include 'changelog.html';
-                                                        #foreach($f as $file) {
-                                                            #echo '<br />'. $file;
-                                                        #    echo $file;
-                                                        #}
-                                                    ?>
-												</div>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <div id="b-placeholder" style="text-align: left; font-size: 12px;">
+                                    </div>
                                 </div>
+                                <script>
+                                  $(function(){
+                                    $("#b-placeholder").load("changelog.html");
+                                  });
+                                </script>                                
                                  <!----------------------------------------------------------------------------------------Hall-of-Fame-->
                                 <h2 class="art-postheader" ><?php echo _('the developer team'); ?></h2>
                                 <div class="hg_container" >
