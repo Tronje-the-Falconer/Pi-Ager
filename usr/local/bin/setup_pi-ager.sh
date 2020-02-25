@@ -44,11 +44,11 @@ then
 	
 #    echo "Partitionsgroesse:"
 #    echo $partsize
-
+    echo "SSH Host Key generieren"
     # SSH Host Key generieren
     /bin/rm -fv /etc/ssh_host_*
-    /usr/sbin/dpkg-reconfigure openssh-server
-
+    #/usr/sbin/dpkg-reconfigure openssh-server
+    systemctl restart ssh.service
     # pi Rechnername setzen
     if [ -n "$piname" ]            #wenn nicht ""
     then
@@ -75,7 +75,7 @@ then
     # phpliteadmin pass setzen
     if [ -n "$dbpw" ]         #wenn nicht ""
     then
-        sed -i 's/raspberry/$dbpw' /var/www/phpliteadmin.php
+        sed -i "s/raspberry/$dbpw/g" /var/www/phpliteadmin.php
         echo "phpliteadmin gesetzt"
     fi
 
@@ -100,7 +100,7 @@ then
             echo "update_config=1" >> /etc/wpa_supplicant/wpa_supplicant.conf
             echo "country=$country" >> /etc/wpa_supplicant/wpa_supplicant.conf
             wpa_passphrase "$wlanssid" $wlankey >> /etc/wpa_supplicant/wpa_supplicant.conf
-            ifdown wlan0
+            #ifdown wlan0
             echo "WLAN SSID und Passphrase gesetzt"
         fi
     fi
