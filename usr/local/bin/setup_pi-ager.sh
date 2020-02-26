@@ -23,6 +23,7 @@ then
     eval $(grep -i "^sensor=" /boot/setup.txt | tr -d "\n\r")    
 #    eval $(grep -i "^partsize=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^reboot=" /boot/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^sensor=" /boot/setup.txt | tr -d "\n\r")  
     echo "Variablen"
     echo "Hostname:"
     echo $piname
@@ -36,7 +37,8 @@ then
     #echo $wlankey
     echo "Config behalten:"
     echo $keepconf
-	echo "sensor=$sensor"    
+
+	echo "Sensor=$sensor"    
 	
 #    echo "Partitionsgroesse:"
 #    echo $partsize
@@ -134,6 +136,7 @@ then
     # hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln
         cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
         echo "1-wire is active"
+
     fi  
 fi
 
