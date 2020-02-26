@@ -34,16 +34,9 @@ wlankey=
 # ISO code your country, e.g. DE, GB
 country=
 
-# Bus type - i2c (0) (SHT3x, SHT85) benutzen oder 1-wire (1) (SHT75, DHT22, DHT11)
-bus_type=1
-
-# Sensor type 
-# 1: "DHT11"
-# 2: "DHT22"
-# 3: "SHT75"
-# 4: "SHT85"
-# 5: "SHT3x"
-sensor_type=3
+# Temperature/Humidity sensor attched to pi-ager:
+# Supported types are : DHT11, DHT22, SHT75, SHT85, SHT3x
+sensor=
 
 # setup.txt nach boot löschen? leer lassen für löschen oder 1 für behalten 
 keepconf=0
