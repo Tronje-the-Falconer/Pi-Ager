@@ -7,8 +7,8 @@
 # Nur ausgefüllte Werte werden gesetzt
 # Die Variablennamen dürfen nicht verändert werden!
 #
-# Logfile wird unter /boot/setup.log angelegt 
 #
+# Logfile wird unter /boot/setup.log angelegt 
 
 # Hostname, wie soll der Raspberry Pi im Netzwerk heissen:
 piname=
@@ -34,16 +34,9 @@ wlankey=
 # ISO code your country, e.g. DE, GB
 country=
 
-# Bus type - i2c (0) (SHT3x, SHT85) benutzen oder 1-wire (1) (SHT75, DHT22, DHT11)
-bus_type=1
+# Temperature/Humidity sensor attched to pi-ager:
+# Supported types are : DHT11, DHT22, SHT75, SHT85, SHT3x
+sensor=
 
-# Sensor type 
-# 1: "DHT11"
-# 2: "DHT22"
-# 3: "SHT75"
-# 4: "SHT85"
-# 5: "SHT3x"
-sensor_type=3
-
-# setup.txt nach boot löschen? leer lassen für löschen oder 1 für behalten 
-keepconf=0
+# setup.txt nach boot loeschen? leer lassen fuer löschen oder 1 fuer behalten 
+keepconf=1

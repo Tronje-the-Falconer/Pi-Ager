@@ -20,10 +20,9 @@ then
     eval $(grep -i "^wlankey=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^country=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^keepconf=" /boot/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^sensor=" /boot/setup.txt | tr -d "\n\r")    
 #    eval $(grep -i "^partsize=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^reboot=" /boot/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^bus_type=" /boot/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^sensor_type=" /boot/setup.txt| tr -d "\n\r")
     echo "Variablen"
     echo "Hostname:"
     echo $piname
@@ -37,10 +36,7 @@ then
     #echo $wlankey
     echo "Config behalten:"
     echo $keepconf
-	echo "Bus Typ:"
-	echo $bus_type
-	echo "Sensor Typ:"
-	echo $sensor_type
+	echo "sensor=$sensor"    
 	
 #    echo "Partitionsgroesse:"
 #    echo $partsize
@@ -112,30 +108,33 @@ then
         echo "Config gelöscht"
     fi
     
-    # Bus type setzen
-    if [ -z "$bus_type" ]
+# check sensor
+    sensorbus=
+    sensornum=
+    case $sensor in
+      "DHT11") sensorbus=1; sensornum=1;;
+      "DHT22") sensorbus=1; sensornum=2;;
+      "SHT75") sensorbus=1; sensornum=3;;
+      "SHT85") sensorbus=0; sensornum=4;;
+      "SHT3x") sensorbus=0; sensornum=5;;
+    esac
+    echo "Bus = $sensorbus  sensor = $sensornum"
+
+    if [ -n "$sensornum" ]    # wenn nicht ""
     then
-    	sqlite3 /var/www/config/pi-ager.sqlite3 "UPDATE config SET value = $bus_type WHERE key = 'sensorbus'"
-    	echo "Sensor Bus auf "$bus_type" gesetzt"
-    	if [ "$bus_type" eq 0 ]
-	    	then
-				# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
-        		rm -r /etc/modprobe.d/Pi-Ager_i2c_off.conf
-				echo "I2C is active"
-			elif [ "$bus_type" eq 1 ]
-		then
-				# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln
-        		cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
-        		echo "1-wire is active"
-    	fi
+        sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; UPDATE config SET value=$sensorbus WHERE key='sensorbus';"
+        sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; UPDATE config SET value=$sensornum WHERE key='sensortype';"
     fi
     
-    # Sensor type setzen
-    if [ -z "$sensor_type" ]
-    then
-    	sqlite3 /var/www/config/pi-ager.sqlite3 "UPDATE config SET value = $sensor_type WHERE key = 'sensortype'"
-		echo "Sensor Bus auf "$sensor_type" gesetzt"
-    fi
+    if [ $sensorbus -eq 0 ]; then
+    # hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
+        rm -r /etc/modprobe.d/Pi-Ager_i2c_off.conf
+        echo "i2c is active"
+    elif [ $sensorbus -eq 1 ]; then
+    # hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln
+        cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
+        echo "1-wire is active"
+    fi  
 fi
 
 systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
