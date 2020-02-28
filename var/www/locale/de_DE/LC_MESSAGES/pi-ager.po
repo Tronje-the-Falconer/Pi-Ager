@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2020-02-16 19:01+0100\n"
-"PO-Revision-Date: 2020-02-19 07:51+0100\n"
+"PO-Revision-Date: 2020-02-28 20:20+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -31,7 +31,7 @@ msgstr ""
 
 #: calibrate_scale.php:11
 msgid "scale_wizzard"
-msgstr "Wagen Wizzard"
+msgstr "Waagen Wizzard"
 
 #: calibrate_scale.php:11
 msgid "attached weight"
@@ -40,7 +40,7 @@ msgstr "angehangenes Gewicht"
 #: calibrate_scale.php:45 calibrate_scale.php:66 calibrate_scale.php:71 header.php:143
 #: scale_wizzard.php:38 scale_wizzard.php:57
 msgid "scale wizzard"
-msgstr "Wagen Wizzard"
+msgstr "Waagen Wizzard"
 
 #: calibrate_scale.php:45 settings.php:106 settings.php:109 settings.php:132 settings.php:135
 msgid "tara scale"
