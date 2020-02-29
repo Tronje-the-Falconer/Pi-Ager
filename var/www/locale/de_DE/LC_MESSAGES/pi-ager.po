@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2020-02-16 19:01+0100\n"
-"PO-Revision-Date: 2020-02-29 22:38+0100\n"
+"PO-Revision-Date: 2020-02-29 22:59+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -35,7 +35,7 @@ msgstr "Waagen Wizzard"
 
 #: calibrate_scale.php:11
 msgid "attached weight"
-msgstr "angehangenes Gewicht"
+msgstr "Angehangenes Gewicht"
 
 #: calibrate_scale.php:45 calibrate_scale.php:66 calibrate_scale.php:71 header.php:143
 #: scale_wizzard.php:38 scale_wizzard.php:57
@@ -69,7 +69,7 @@ msgstr ""
 
 #: calibrate_scale.php:53 edit_agingtable.php:104 scale_wizzard.php:47
 msgid "cancel"
-msgstr "abbrechen"
+msgstr "Abbrechen"
 
 #: calibrate_scale.php:64 calibrate_scale.php:66
 msgid "calibration failed"
@@ -105,7 +105,7 @@ msgstr "Datei Größe"
 
 #: changelog.php:16 logs.php:20
 msgid "last changed at"
-msgstr "letzte Änderung am"
+msgstr "Letzte Änderung am"
 
 #: changelog.php:19
 msgid "oclock"
@@ -149,7 +149,7 @@ msgstr ""
 
 #: changelog.php:93
 msgid "based on an idea and submission of"
-msgstr "basierend auf eine Idee von"
+msgstr "Basierend auf eine Idee von"
 
 #: config.php:5
 msgid "set general configuration values"
@@ -181,7 +181,7 @@ msgstr "Ein"
 
 #: config.php:28 config.php:46 config.php:83 config.php:96
 msgid "see logs"
-msgstr "sieh Logs"
+msgstr "Siehe Logs"
 
 #: config.php:35 config.php:63 config.php:89 config.php:116 config.php:119 config.php:121
 #: manvals.php:72 manvals.php:74 manvals.php:78 manvals.php:80 manvals.php:89 manvals.php:91
@@ -222,12 +222,12 @@ msgstr "Achtung"
 
 #: config.php:68 config.php:128 manvals.php:97 manvals.php:123
 msgid "use only positive integers!"
-msgstr "nur positive ganze Zahlen nutzen!"
+msgstr "Nur positive ganze Zahlen nutzen!"
 
 #: config.php:69 config.php:129 config.php:157 config.php:196 config.php:235 config.php:264
 #: manvals.php:48 manvals.php:98 manvals.php:124 manvals.php:157 manvals.php:188
 msgid "close"
-msgstr "schließen"
+msgstr "Schließen"
 
 #: config.php:75 diagrams.php:91 diagrams.php:107 diagrams.php:154 diagrams.php:162
 #: index.php:120 index.php:183 manvals.php:105
@@ -311,7 +311,7 @@ msgstr "Entfeuchten"
 
 #: config.php:138
 msgid "only exhaust"
-msgstr "nur Abluft"
+msgstr "Nur Abluft"
 
 #: config.php:139
 msgid "exhaust & dehumidifier"
@@ -319,7 +319,7 @@ msgstr "Abluft und Entfeuchter"
 
 #: config.php:140
 msgid "only dehumidifier"
-msgstr "nur Entfeuchter"
+msgstr "Nur Entfeuchter"
 
 #: config.php:155 diagrams.php:853 diagrams.php:873
 msgid "dehumidifier"
@@ -398,7 +398,7 @@ msgstr ""
 
 #: config.php:272 edit_agingtable.php:103 manvals.php:195 admin.php:1107
 msgid "save"
-msgstr "speichern"
+msgstr "Speichern"
 
 #: config.php:272 settings.php:381
 msgid "general configuration"
@@ -406,7 +406,7 @@ msgstr "Allgemeine Konfiguration"
 
 #: config.php:274
 msgid "hide"
-msgstr "schließen"
+msgstr "Schließen"
 
 #: diagrams.php:17 diagrams.php:38
 msgid "hour"
@@ -430,7 +430,7 @@ msgstr "Diagramme"
 
 #: diagrams.php:53
 msgid "every ~ 5 minutes a new value is written!"
-msgstr "ca. jede 5 Min wird ein neuer Wert abgespeichert!"
+msgstr "Ca. jede 5 Min wird ein neuer Wert abgespeichert!"
 
 #: diagrams.php:134 index.php:163
 msgid " - t"
@@ -495,11 +495,11 @@ msgstr "Reifetabelle editieren"
 
 #: edit_agingtable.php:18
 msgid "can not edit the controlling agingtable. please select an other"
-msgstr "die laufende Reifetabelle kann nicht editiert werden, bitte ein andere auswählen"
+msgstr "Die laufende Reifetabelle kann nicht editiert werden, bitte ein andere auswählen"
 
 #: edit_agingtable.php:23
 msgid "no agingtable selected"
-msgstr "keine Reifetabelle ausgewählt"
+msgstr "Keine Reifetabelle ausgewählt"
 
 #: edit_agingtable.php:34 settings.php:288
 msgid "modus"
@@ -611,7 +611,7 @@ msgstr "Typ"
 
 #: index.php:425
 msgid "actual"
-msgstr "aktuell"
+msgstr "Aktuell"
 
 #: index.php:426
 msgid "target"
@@ -643,7 +643,7 @@ msgstr "Timer Ein"
 
 #: index.php:536 index.php:553 index.php:578 index.php:601
 msgid "always on"
-msgstr "immer Ein"
+msgstr "Immer Ein"
 
 #: index.php:537 index.php:554 index.php:579 index.php:602
 msgid "timer off"
@@ -655,7 +655,7 @@ msgstr "Abluft"
 
 #: index.php:626
 msgid "see settings"
-msgstr "siehe Einstellungen"
+msgstr "Siehe Einstellungen"
 
 #: index.php:633 index.php:640
 msgid "scale1"
@@ -687,7 +687,7 @@ msgstr "Logfiles sichern"
 
 #: logs.php:43
 msgid "clear all logfile data?"
-msgstr "alle Logfiles löschen?"
+msgstr "Alle Logfiles löschen?"
 
 #: logs.php:43
 msgid "delete data"
@@ -695,23 +695,23 @@ msgstr "Daten löschen"
 
 #: logs.php:155
 msgid "prev"
-msgstr "zurück"
+msgstr "Zurück"
 
 #: logs.php:157
 msgid "next"
-msgstr "weiter"
+msgstr "Weiter"
 
 #: logs.php:165
 msgid "to bottom"
-msgstr "zum Ende"
+msgstr "Zum Ende"
 
 #: logs.php:171
 msgid "to top"
-msgstr "zum Anfang"
+msgstr "Zum Anfang"
 
 #: manvals.php:12 manvals.php:195 settings.php:377
 msgid "manual values"
-msgstr "manuelle Werte"
+msgstr "Manuelle Werte"
 
 #: manvals.php:20 manvals.php:38
 msgid "cooling"
@@ -739,7 +739,7 @@ msgstr "Umluft und Abluft Timer"
 
 #: manvals.php:25
 msgid "can be used independently of the selected mode."
-msgstr "können unabhängig vom ausgewählten Modus genutzt werden."
+msgstr "Können unabhängig vom ausgewählten Modus genutzt werden."
 
 #: manvals.php:38
 msgid "it is cooled to the set temperature with circulating air."
@@ -840,7 +840,7 @@ msgstr "Beispiel Automatik"
 
 #: manvals.php:88
 msgid "now it's getting exciting!"
-msgstr "jetzt wird es spannend!"
+msgstr "Jetzt wird es spannend!"
 
 #: manvals.php:90
 msgid "1st case"
@@ -985,7 +985,7 @@ msgstr "Wizzard unterberechen?"
 
 #: scale_wizzard.php:57
 msgid "no scale selected"
-msgstr "keine Waage ausgewählt"
+msgstr "Keine Waage ausgewählt"
 
 #: settings.php:22
 msgid "operating values"
@@ -1045,7 +1045,7 @@ msgstr "Waagenmessung anhalten"
 
 #: settings.php:112 settings.php:138
 msgid "stop scale"
-msgstr "stop Waage"
+msgstr "Stop Waage"
 
 #: settings.php:145
 msgid "measurement on scales are stopped"
@@ -1057,11 +1057,11 @@ msgstr "Wizzard Kalibrierung"
 
 #: settings.php:195
 msgid "select new agingtable?"
-msgstr "neue Reifetabelle auswählen?"
+msgstr "Neue Reifetabelle auswählen?"
 
 #: settings.php:195
 msgid "select"
-msgstr "auswählen"
+msgstr "Auswählen"
 
 #: settings.php:203
 msgid "start agingtable?"
@@ -1093,7 +1093,7 @@ msgstr "Reifetabbelle editieren?"
 
 #: settings.php:235 settings.php:257
 msgid "edit"
-msgstr "editieren"
+msgstr "Editieren"
 
 #: settings.php:236
 msgid "delete agingtable?"
@@ -1101,7 +1101,7 @@ msgstr "Reifetabelle löschen?"
 
 #: settings.php:236 settings.php:275
 msgid "delete"
-msgstr "löschen"
+msgstr "Löschen"
 
 #: settings.php:237
 msgid "export agingtable?"
@@ -1109,23 +1109,23 @@ msgstr "Reifetabelle exportieren?"
 
 #: settings.php:237 settings.php:281
 msgid "export"
-msgstr "exportieren"
+msgstr "Exportieren"
 
 #: settings.php:267
 msgid "upload new agingtable?"
-msgstr "neue Reifetabelle hochladen?"
+msgstr "Neue Reifetabelle hochladen?"
 
 #: settings.php:267
 msgid "upload"
-msgstr "hochladen"
+msgstr "Hochladen"
 
 #: settings.php:305
 msgid "no comment"
-msgstr "keine Anmerkungen vorhanden"
+msgstr "Keine Anmerkungen vorhanden"
 
 #: settings.php:378
 msgid "manual adjustments are not possible"
-msgstr "manuelle Anpassungen sind nicht möglich"
+msgstr "Manuelle Anpassungen sind nicht möglich"
 
 #: settings.php:378
 msgid "during fully automatic aging."
@@ -1161,7 +1161,7 @@ msgstr "UV-Licht Schalter"
 
 #: admin.php:1100
 msgid "current bus:"
-msgstr "aktueller Bus:"
+msgstr "Aktueller Bus:"
 
 #: admin.php:1101
 msgid "change sensor bus"
@@ -1189,11 +1189,11 @@ msgstr "Samples"
 
 #: admin.php:1108
 msgid "reboot"
-msgstr "neu starten"
+msgstr "Neu starten"
 
 #: admin.php:1109
 msgid "shutdown"
-msgstr "herunterfahren"
+msgstr "Herunterfahren"
 
 #: admin.php:1110
 msgid "agingtable days in seconds"
@@ -1271,4 +1271,4 @@ msgstr "Logdatei gelöscht"
 
 #: clear_logfile.php:1122
 msgid "new logfile created"
-msgstr "neue Logdatei erstellt"
+msgstr "Neue Logdatei erstellt"
