@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2020-02-16 19:01+0100\n"
-"PO-Revision-Date: 2020-02-29 22:11+0100\n"
+"PO-Revision-Date: 2020-02-29 22:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -973,7 +973,7 @@ msgstr "Gewicht"
 
 #: scale_wizzard.php:42
 msgid "gram"
-msgstr "Gram"
+msgstr "Gramm"
 
 #: scale_wizzard.php:46
 msgid "weight attatched"
