@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2020-02-16 19:01+0100\n"
-"PO-Revision-Date: 2020-02-29 22:59+0100\n"
+"PO-Revision-Date: 2020-02-29 23:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -567,7 +567,7 @@ msgstr "Editieren der Reifetabelle unterbrechen?"
 
 #: footer.php:9
 msgid "running engine: "
-msgstr "laufendes System:"
+msgstr "Laufendes System:"
 
 #: header.php:113
 msgid "by"
