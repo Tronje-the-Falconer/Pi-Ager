@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2020-02-16 19:01+0100\n"
-"PO-Revision-Date: 2020-02-29 22:17+0100\n"
+"PO-Revision-Date: 2020-02-29 22:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -961,11 +961,11 @@ msgstr "Kalibrierung starten"
 
 #: scale_wizzard.php:40
 msgid "please attach a known weight to the loadcell"
-msgstr "Bitte ein bekanntes Gewicht anhängen an:  Wägezelle Nr"
+msgstr "Bitte ein bekanntes Gewicht an Waage "
 
 #: scale_wizzard.php:40
 msgid "now and enter the weight into the form below:"
-msgstr "jetzt  und das Gewicht hier eintragen:"
+msgstr "anhängen und dann das Gewicht hier eintragen:"
 
 #: scale_wizzard.php:42
 msgid "weight"
