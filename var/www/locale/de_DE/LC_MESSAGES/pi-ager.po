@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2020-02-16 19:01+0100\n"
-"PO-Revision-Date: 2020-02-28 20:20+0100\n"
+"PO-Revision-Date: 2020-02-29 22:11+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -69,7 +69,7 @@ msgstr ""
 
 #: calibrate_scale.php:53 edit_agingtable.php:104 scale_wizzard.php:47
 msgid "cancel"
-msgstr ""
+msgstr "abbrechen"
 
 #: calibrate_scale.php:64 calibrate_scale.php:66
 msgid "calibration failed"
@@ -961,7 +961,7 @@ msgstr "Kalibrierung starten"
 
 #: scale_wizzard.php:40
 msgid "please attach a known weight to the loadcell"
-msgstr "Bitte ein bekanntes Gewicht an die Wägezelle hängen"
+msgstr "Bitte ein bekanntes Gewicht anhängen an:  Wägezelle Nr"
 
 #: scale_wizzard.php:40
 msgid "now and enter the weight into the form below:"
@@ -1049,7 +1049,7 @@ msgstr "stop Waage"
 
 #: settings.php:145
 msgid "measurement on scales are stopped"
-msgstr "Waagenmessungen sind angehalten"
+msgstr "Waagenmessungen werden angehalten"
 
 #: settings.php:145
 msgid "calibrate wizzard"
@@ -1165,7 +1165,7 @@ msgstr "aktueller Bus:"
 
 #: admin.php:1101
 msgid "change sensor bus"
-msgstr "Sensor Bus änderen"
+msgstr "Sensor Bus ändern"
 
 #: admin.php:1102
 msgid "reference unit"
@@ -1197,11 +1197,11 @@ msgstr "herunterfahren"
 
 #: admin.php:1110
 msgid "agingtable days in seconds"
-msgstr "Reifetabelle Tage in Sekunden"
+msgstr "Reifetabelle - Tage in Sekunden"
 
 #: admin.php:1111
 msgid "empty statistic tables"
-msgstr "History Daten aus DB löchen"
+msgstr "History Daten aus DB löschen"
 
 #: admin.php:1112
 msgid "database administration"
