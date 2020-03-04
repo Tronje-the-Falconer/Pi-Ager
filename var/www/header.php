@@ -72,11 +72,11 @@
         if ($_SERVER['PHP_SELF'] == '/webcam.php') {
 #            echo "<meta http-equiv=\"refresh\" content=\"5\" />";
         }
-        elseif ($_SERVER['PHP_SELF'] != '/settings.php') {
-            echo "<meta http-equiv=\"refresh\" content=\"120\" />";
+        elseif ($_SERVER['PHP_SELF'] == '/index.php') {
+            echo "<meta http-equiv=\"refresh\" content=\"60\" />";
         }
-        elseif ($_SERVER['PHP_SELF'] != '/edit_agintable.php') {
-            echo "<meta http-equiv=\"refresh\" content=\"480\" />";
+        elseif ($_SERVER['PHP_SELF'] == '/diagrams.php') {
+            echo "<meta http-equiv=\"refresh\" content=\"300\" />";
         }
     ?>
     <head>

@@ -17,7 +17,7 @@
                                     include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                     include 'modules/read_current_db.php';
                                     include 'modules/start_stop_uv.php';
-                                    include 'modules/read_bus.php';                             // liest den gesetzten bus-value
+                                   # include 'modules/read_bus.php';                             // liest den gesetzten bus-value
                                     
 
                                 ?>
@@ -44,32 +44,6 @@
                                 <h2 class="art-postheader"><?php echo _('administration'); ?></h2>
                                 <form method="post" name="admin">
                                     <div class="hg_container">
-                                        <!----------------------------------------------------------------------------------------Sensorbus-->
-                                        <table style="width: 100%;" class="miniature_writing">
-                                            <tr>
-                                                <td>
-                                                    <?php echo _('current bus:'); ?>
-                                                </td>
-                                                <td>
-                                                    <?php echo $bus_name; ?>
-                                                </td>
-                                            </tr>
-                                            <td style=" text-align: left; padding-left: 20px;">
-                                                    <input type="radio" name="bustype_admin" value="0" <?php echo $checked_bus_0; ?>/><label> i2c</label><br>
-                                                    <input type="radio" name="bustype_admin" value="1" <?php echo $checked_bus_1; ?>/><label> 1wire</label><br>
-                                                    <br>
-                                                </td>
-                                            <tr>
-                                                <td>
-                                                <button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: a shutdown is required, please turn the power off/on to restart the system!');?>');"><?php echo _('change sensor bus'); ?></button>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </form>
-                                        
-                                <form method="post" name="admin">
-                                    <div class="hg_container">
                                         <!----------------------------------------------------------------------------------------Sensortype-->
                                         <table style="width: 100%;" class="miniature_writing">
                                             <tr>
@@ -83,7 +57,6 @@
                                                     <input type="radio" name="sensortype_admin" value="5" <?php echo $checked_sens_5; ?>/><label> SHT3x</label><br>
                                                     <br>
                                                 </td>
-                                                
                                             </tr>
                                         </table>
                                         <script>
@@ -99,7 +72,21 @@
                                              echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_sensortype_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
-                                        <hr>
+
+                                        <table style="width: 100%; align: center;">
+                                            <tr>
+                                                <td style="width: 50%;">&nbsp;</td>
+                                                <td>&nbsp;</td>
+                                                <td>
+                                                <button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: a shutdown is required, please turn the power off/on to restart the system!');?>');"><?php echo _('change sensor'); ?></button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </form>
+                                        
+                                <form method="post" name="admin">
+                                    <div class="hg_container">
                                         <!----------------------------------------------------------------------------------------Waagen-->
                                     <table style="width: 100%;" class="miniature_writing">
                                         <tr>

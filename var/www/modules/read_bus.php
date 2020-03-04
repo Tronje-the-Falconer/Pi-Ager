@@ -11,3 +11,4 @@ if ($bus  ==  1) {
     $checked_bus_1 = 'checked="checked"';
     $checked_bus_0 = '';
 }
+?>
