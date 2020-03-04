@@ -5,13 +5,17 @@
     {                       // ist das $_POST-Array gesetzt
         logger('DEBUG', 'button save change_sensorbus pressed');
         unset($_POST['change_sensorbus_submit']);
-        $bus_value = $_POST['bustype_admin'];
-        if ($bus_value == 1){
+        
+        $sensornum = $_POST['sensortype_admin'];
+        write_sensorvalue($sensornum);
+        logger('DEBUG', 'sensortype saved');
+        #        $bus_value = $_POST['bustype_admin'];
+        if ($sensornum == 1 || $sensornum == 2 || $sensornum == 3){
             write_busvalue(1);
             logger('DEBUG', 'sensorbus saved. changed to 1wire (1)');
             shell_exec('sudo /var/sudowebscript.sh sensorbus1wire > /dev/null 2>&1 &');
         }
-        else if ($bus_value == 0){
+        else {
             write_busvalue(0);
             logger('DEBUG', 'sensorbus saved. changed to i2c (0)');
             shell_exec('sudo /var/sudowebscript.sh sensorbusi2c > /dev/null 2>&1 &');
