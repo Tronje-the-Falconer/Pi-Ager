@@ -204,7 +204,9 @@ chmod 755 /var/www/logs/logfile.txt
 touch /var/www/logs/pi-ager.log
 chmod 755 /var/www/logs/pi-ager.log
 
-
+# remove history
+cat /dev/null > /root/.bash_history
+cat /dev/null > /home/pi/.bash_history 
 
 
 # remove obsolete direcectories after upgrade
