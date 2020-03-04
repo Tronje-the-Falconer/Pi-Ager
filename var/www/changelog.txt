@@ -16,7 +16,7 @@ Version 3.2.1 RC2
 	- Backup				
 		NFS-Backup möglich
 	- Datenbank				
-		Ist nun stabiler wegen WAL Mode
+		Ist nun stabiler aufgrund WAL Mode
 	- Abluftlüfter			
 		Abluftlüfter reagiert nun auf den Abschaltbefehl des Timers in weiteren Modi.
 	- Licht und UV-Licht	
@@ -49,7 +49,7 @@ Version 3.2.1 RC2
 	- Startup
 		setup.txt aus /boot/ wird nun übernommen und muss genutzt werden, da hier noch Dienste gestartet werden. 
 	- Web-Cam
-		Es wird kein Viedo erzeugt. Nur einzelne Bilder.
+		Es wird kein Video erzeugt. Nur einzelne Bilder.
 
 
 --------------------------------------------------------------------------------
