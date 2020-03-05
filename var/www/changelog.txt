@@ -1,0 +1,118 @@
+Version 3.2.1 RC2
+
+- Frontend
+	- Pi-Ager
+		Sprachenumschaltung Deutsch und Englisch verfügbar
+	- Reifetabelle			
+		Export und Upload funktioniert jetzt
+
+- Backend
+	- HX711					
+		Besseres Auslesen der Sensoren mit keinen Peaks mehr. 
+	- Sensoren				
+		Neue i2c Sensoren SHT85 und SHT3x werden unterstützt.
+		SHT75, DHT22 und DHT11 überarbeitet. 
+		Besseres Fehlerhandling
+	- Backup				
+		NFS-Backup möglich
+	- Datenbank				
+		Ist nun stabiler wegen WAL Mode
+	- Abluftlüfter			
+		Abluftlüfter reagiert nun auf den Abschaltbefehl des Timers in weiteren Modi.
+	- Licht und UV-Licht	
+		Timer werden sofort aktiv, wenn Periode oder Mode geändert werden.
+	- Benachrichtigung		
+		Messenger Klassen mit Alarm, E-Mail, Telegram und Pushover verfügbar - Noch nicht im Frontend
+	- Logger				
+		Logger Klasse eingebaut
+	- System				
+		Zahlreiche Verbessungen bei Performance und Stabilität 
+
+- System
+	- PHP Version			
+		Neue PHP Version - PHP Version 7.3.11-1~deb10u1 installiert
+	- Python Version		
+		Neue Python Version - Python 3.7.3 installiert 
+	- Phpliteadmin			
+		Neue Phpliteadmin Version - phpLiteAdmin v1.9.8.2 installiert
+	- Raspberry				
+		Neues Raspian Release Buster - Betriebssystem ist nun Raspian Buster
+		Mehrere Kernel updates (aktueller Kernel ist installiert)
+		Boot Verzeichnis vergrößern - Boot Verzeichnis auf ca. 250 MB vergrößert (wegen Buster)
+		Änderungen von für RPi4 Unterstützung wurden fast alle eingebaut. Außer sudowebscript wegen GPIO. 
+		RPi4 wird noch nicht unterstützt.
+	- System
+		systemd Startscript erstellt - systemctl start/stop/status… pi-ager_main.service, pi-ager_scale.service, pi-ager_agingtable
+	- Image
+		Unnötige APT Pakete und Verzeichnisse entfernen beim Image erstellen 
+		Tabellen löschen - Bewegungsdaten werden gelöscht. Bei Konfigurationstabellen werden Festwerte gesetzt.
+	- Startup
+		setup.txt aus /boot/ wird nun übernommen und muss genutzt werden, da hier noch Dienste gestartet werden. 
+	- Web-Cam
+		Es wird kein Viedo erzeugt. Nur einzelne Bilder.
+
+
+--------------------------------------------------------------------------------
+
+Version 2.2.1
+
+- Frontend
+    - Überarbeitung der Icons
+    - UV, Licht und Entfeuchter
+        - Steuerungsfeldern
+        - Graphen
+    - Webcam
+    - Wägezellen
+        - Steuerungsfeld für Offset
+        - Graphen
+    - Steuerungsmöglichkeit für Entfeuchtung
+        - Ohne
+        - Abluft
+        - Abluft mit Entfeuchter
+        - Entfeuchter
+
+- Backend
+    - Umstellung auf Python 3
+    - neue Bibliothek für SHT und DHT Sensoren
+    - Umstellung von Apache auf Lighttpd
+    - Variablen Umbenennungen
+    - Übersetzungsunterstützung (Deutsch, Englisch)
+    - Logik
+        - UV Lichtsteuerung
+        - Lichtsteuerung
+        - Entfeuchter-Steuerung
+        - Wägezellen
+        - Webcamsteuerung
+    - Auslagern der Standardwerte in eine config.json
+    - Entfernen der Werte für Entfeuchtung ein/aus, Entfeuchtungsverzögerung, Kühlen an/aus, aus den csv-Dateien und auslagern in die config.json
+    - Verzeichnis-Strukturierung (config, logs, images/icons, images/graphs, images/webcam)
+--------------------------------------------------------------------------------
+
+Version 2.1.1
+
+- Frontend
+    - neues Frontend
+    - Logfile
+    - Changelog
+    - Sensor auswählbar
+    - wöchentliches Diagramm
+    - RaspberryPi Version in Footer
+    - Programmversion in Footer
+    - Reboot und Shutdown des Raspberry's  über Settings-Seite
+    - Kühlung und Heizung sowie Be/Entfeuchtung im Statusboard visuell getrennt
+    - erlaubte Min-Max-Wertgrenzen werden bei den Einstellungen angezeigt
+    - settings wird über Passwort geschützt
+
+- Backend
+    - Umstellung von DHT22.rdd auf rss.rrd für den Plot
+    - Die Pythondateien liegen in /opt/RSS/
+    - csv-Dateien liegen in /var/www/csv/
+    - Verwendung von /var/sudowebscript.sh für Shell-Befehle
+    - Content-Reload alle 60 Sekunden bei Monitor und Diagramme
+    - Vorfilter für "Mülldaten" vom Sensor SHT11 & SHT22 in Rss.py
+    - Noob-Image (Textdatei für automatisches Setzen von Passwörtern, WiFi-Verbindung und extend Filesystem)
+
+--------------------------------------------------------------------------------
+
+Version 1.1.1-0
+- Übernahme des Systems aus dem Forum

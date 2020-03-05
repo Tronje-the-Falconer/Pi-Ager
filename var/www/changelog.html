@@ -1,0 +1,194 @@
+<style>
+
+ul {
+    list-style-position: outside;
+    list-style-type: disc;
+    padding-top: 0px;
+    padding-left: 20px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    margin-top: -10px;
+    margin-bottom: -5px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+h4 {
+    margin-top: 1.33em;
+    margin-bottom: 1.33em;
+}
+
+h3 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+h2 {
+    margin-top: 0.83em;
+    margin-bottom: 0.83em;
+}
+
+</style>
+
+<h2>Version 3.2.2</h2>
+<h3>Frontend</h3>
+	<h4>Pi-Ager</h4>
+          <ul>
+		<li>Sprachenumschaltung Deutsch und Englisch verfügbar</li>
+          </ul>
+	<h4>Reifetabelle</h4>
+          <ul>		
+		<li>Export und Upload funktioniert jetzt</li>
+          </ul>
+<h3>Backend</h3>
+	<h4>HX711</h4>
+           <ul>					
+		<li>Besseres Auslesen der Sensoren mit keinen Peaks mehr.</li> 
+           </ul>
+	<h4>Sensoren</h4>	
+           <ul>			
+		<li>Neue i2c Sensoren SHT85 und SHT3x werden unterstÜtzt.</li>
+		<li>SHT75, DHT22 und DHT11 überarbeitet.</li> 
+		<li>Besseres Fehlerhandling</li>
+           </ul>
+	<h4>Backup</h4>	
+           <ul>			
+		<li>NFS-Backup möglich - Noch nicht im Frontend</li> 
+           </ul>
+	<h4>Datenbank</h4>
+           <ul>				
+		<li>Ist nun stabiler wegen WAL Mode</li>
+           </ul>
+	<h4>Abluftlüfter</h4>	
+           <ul>		
+		<li>Abluftlüfter reagiert nun auf den Abschaltbefehl des Timers in weiteren Modi.</li>
+           </ul>
+	<h4>Licht und UV-Licht</h4>
+           <ul>	
+		<li>Timer werden sofort aktiv, wenn Periode oder Mode geändert werden.</li>
+           </ul>
+	<h4>Benachrichtigung</h4>  
+           <ul class="logul">		
+		<li>Messenger Klassen mit Alarm, E-Mail, Telegram und Pushover verfügbar - Noch nicht im Frontend</li>
+           </ul>
+	<h4>Logger</h4>	
+           <ul>			
+		<li>Logger Klasse eingebaut</li>
+           </ul>
+	<h4>System</h4>	
+           <ul>			
+		<li>Zahlreiche Verbessungen bei Performance, Speicherauslastung und Stabilität</li> 
+           </ul>
+
+<h3>System</h3>
+	<h4>PHP Version</h4>
+              <ul>			
+		<li>Neue PHP Version - PHP Version 7.3.11-1~deb10u1 installiert</li>
+              </ul>
+	<h4>Python Version</h4>	
+              <ul>	
+		<li>Neue Python Version - Python 3.7.3 installiert</li> 
+              </ul>
+	<h4>Phpliteadmin</h4>
+              <ul>			
+		<li>Neue Phpliteadmin Version - phpLiteAdmin v1.9.8.2 installiert</li>
+              </ul>
+	<h4>Raspberry</h4>
+              <ul>				
+		<li>Neues Raspian Release Buster - Betriebssystem ist nun Raspian Buster</li>
+		<li>Mehrere Kernel updates (aktueller Kernel ist installiert)</li>
+		<li>Boot Verzeichnis vergrößern - Boot Verzeichnis auf ca. 250 MB vergrößert (wegen Buster)</li>
+		<li>Änderung für RPi4 Unterstützung wurden fast alle eingebaut. Außer sudowebscript wegen GPIO.</li> 
+		<li>RPi4 wird noch nicht unterstützt.</li>
+              </ul>
+	<h4>System</h4>
+              <ul>
+		<li>systemd Startscript erstellt - systemctl start/stop/status... pi-ager_main.service, pi-ager_scale.service, pi-ager_agingtable</li>
+              </ul>
+	<h4>Image</h4>
+              <ul>
+		<li>Unglütige APT Pakete und Verzeichnisse entfernen beim Image erstellen</li> 
+		<li>Tabellen löschen - Bewegungsdaten werden gelöscht. Bei Konfigurationstabellen werden Festwerte gesetzt.</li>
+              </ul>
+	<h4>Startup</h4>
+              <ul>
+		<li>setup.txt aus /boot/ wird nun übernommen und muss genutzt werden, da hier noch Dienste gestartet werden.</li>
+              </ul> 
+	<h4>Web-Cam</h4>
+              <ul>
+		<li>Es wird kein Video erzeugt. Nur einzelne Bilder.</li>
+              </ul>
+<hr>
+<!-------------------------------------------------------------------------------->
+
+<h2>Version 2.2.1</h2>
+
+<h3>Frontend</h3>
+    <h4>Überarbeitung der Icons</h4>
+    <h4>UV, Licht und Entfeuchter</h4>
+     <ul>
+        <li>Steuerungsfeldern</li>
+        <li>Graphen</li>
+     </ul>
+    <h4>Webcam</h4>
+    <h4>Wägezellen</h4>
+     <ul>
+        <li>Steuerungsfeld für Offset</li>
+        <li>Graphen</li>
+     </ul>
+    <h4>Steuerungsmöglichkeit für Entfeuchtung</h4>
+     <ul>
+        <li>Ohne</li>
+        <li>Abluft</li>
+        <li>Abluft mit Entfeuchter</li>
+        <li>Entfeuchter</li>
+     </ul>
+
+<h3>Backend</h3>
+    <h4>Umstellung auf Python 3</h4>
+    <h4>neue Bibliothek für SHT und DHT Sensoren</h4>
+    <h4>Umstellung von Apache auf Lighttpd</h4>
+    <h4>Variablen Umbenennungen</h4>
+    <h4>Übersetzungsunterstützung (Deutsch, Englisch)</h4>
+    <h4>Logik</h4>
+      <ul>
+        <li>UV Lichtsteuerung</li>
+        <li>Lichtsteuerung</li>
+        <li>Entfeuchter-Steuerung</li>
+        <li>Wägezellen</li>
+        <li>Webcamsteuerung</li>
+      </ul>
+    <h4>Auslagern der Standardwerte in eine config.json</h4>
+    <h4>Entfernen der Werte für Entfeuchtung ein/aus, Entfeuchtungsverzögerung, Kühlen an/aus, aus den csv-Dateien und auslagern in die config.json</h4>
+    <h4>Verzeichnis-Strukturierung (config, logs, images/icons, images/graphs, images/webcam)</h4>
+<hr>
+<!-------------------------------------------------------------------------------->
+
+<h2>Version 2.1.1</h2>
+
+<h3>Frontend</h3>
+    <h4>neues Frontend</h4>
+    <h4>Logfile</h4>
+    <h4>Changelog</h4>
+    <h4>Sensor auswählbar</h4>
+    <h4>wöchentliches Diagramm</h4>
+    <h4>RaspberryPi Version in Footer</h4>
+    <h4>Programmversion in Footer</h4>
+    <h4>Reboot und Shutdown des Raspberry's über Settings-Seite</h4>
+    <h4>Kühlung und Heizung sowie Be/Entfeuchtung im Statusboard visuell getrennt</h4>
+    <h4>erlaubte Min-Max-Wertgrenzen werden bei den Einstellungen angezeigt</h4>
+    <h4>settings wird über Passwort geschützt</h4>
+
+<h3>Backend</h3>
+    <h4>Umstellung von DHT22.rdd auf rss.rrd für den Plot</h4>
+    <h4>Die Pythondateien liegen in /opt/RSS/</h4>
+    <h4>csv-Dateien liegen in /var/www/csv/</h4>
+    <h4>Verwendung von /var/sudowebscript.sh für Shell-Befehle</h4>
+    <h4>Content-Reload alle 60 Sekunden bei Monitor und Diagramme</h4>
+    <h4>Vorfilter für "Mülldaten" vom Sensor SHT11 und SHT22 in Rss.py</h4>
+    <h4>Noob-Image (Textdatei für automatisches Setzen von Passwörtern, WiFi-Verbindung und extend Filesystem)</h4>
+<hr>
+<!-------------------------------------------------------------------------------->
+
+<h2>Version 1.1.1-0</h2>
+<h3>Übernahme des Systems aus dem Forum</h3>
