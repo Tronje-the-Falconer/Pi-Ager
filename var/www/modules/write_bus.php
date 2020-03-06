@@ -20,7 +20,8 @@
             logger('DEBUG', 'sensorbus saved. changed to i2c (0)');
             shell_exec('sudo /var/sudowebscript.sh sensorbusi2c > /dev/null 2>&1 &');
         }
-        print '<p id=\'info-message\' style=\'color: #ff0000; font-size: 20px;\'><b>'. (_("system shutdown in 10 seconds")) .'</b><br>' . date("m/d/y h:i:s a") . ' </p>';        
+        print '<p id=\'info-message\' style=\'color: #ff0000; font-size: 20px;\'><b>'. (_("system shutdown in 10 seconds")) .'</b><br>' . date("m/d/y h:i:s a") . ' </p>';
+        header("Location: /index.php");
         die();
     #10 Sekunden anzeigen, dass System heruntergefahren wird
 #        print '<p id=\'info-message\' style=\'color: #ff0000; font-size: 20px;\'><b>'. (_("system shutdown in 10 seconds")) .'</b><br>' . date("m/d/y h:i:s a") . ' </p>
