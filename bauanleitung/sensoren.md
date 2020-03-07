@@ -103,6 +103,7 @@ Zwischen Pin 2 (VDD) und Pin 4 (DATA) des Sensors müssen wir einen 10KOhm Wider
 #### SENSIRION SHT3x
 
 <img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT3x.JPG" alt="SHT3x" width="150">
+<img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT3x2.JPG" alt="SHT3x2" width="150">
 
 ##### Pinbelegung SHT3x
 
