@@ -73,9 +73,9 @@ Zwischen PIN 1 (Power +3,3-5,5V) und Pin 2 (DATA) des Sensors müssen wir einen 
 [nach oben](#inhalt)
 
 #### SENSIRION SHT11
-
+<!--
 <img src="https://img.conrad.de/medias/global/ce/5000_5999/5000/5030/5034/503486_LB_00_FB.EPS.jpg" alt="SHT11" width="100">
-
+-->
 ##### Pinbelegung SHT11
 
 <img src="http://diginic.net/fa/wp-content/uploads/2015/06/sht11-pinout.jpg" alt="SHT11 Pinbelegung" width="400">
@@ -88,9 +88,9 @@ Zwischen Pin 2 (DATA) und Pin 4 (VDD) des Sensors müssen wir einen 10KOhm Wider
 [nach oben](#inhalt)
 
 #### SENSIRION SHT75
-
+<!--
 <img src="https://img.conrad.de/medias/global/ce/5000_5999/5000/5030/5034/503492_LB_00_FB.EPS_1000.jpg" alt="SHT75" width="100">
-
+-->
 ##### Pinbelegung SHT75
 
 <img src="http://embedded-lab.com/blog/wp-content/uploads/2011/05/SHT751.jpg" alt="SHT 75 Pinbelegung" width="400">
