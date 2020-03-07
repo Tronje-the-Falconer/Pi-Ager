@@ -110,11 +110,10 @@ Zwischen Pin 2 (VDD) und Pin 4 (DATA) des Sensors müssen wir einen 10KOhm Wider
 
 #### SENSIRION SHT85
 
-<img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT85.jpg" alt="SHT85" width="200">
+<img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT85.jpg" alt="SHT85" width="180">
 
 ##### Pinbelegung SHT85
 
 <img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT85pin.JPG" alt="SHT85 Pinbelegung" width="300">
-
 
 [nach oben](#inhalt)
