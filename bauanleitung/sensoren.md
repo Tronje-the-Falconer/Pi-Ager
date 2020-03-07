@@ -99,9 +99,18 @@ Zwischen Pin 2 (DATA) und Pin 4 (VDD) des Sensors müssen wir einen 10KOhm Wider
 
 Zwischen Pin 2 (VDD) und Pin 4 (DATA) des Sensors müssen wir einen 10KOhm Widerstand anbringen.
 
+
+#### SENSIRION SHT3x
+
+<img src="https://.jpg" alt="SHT75" width="100">
+
 ##### Pinbelegung SHT3x
 
-<img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT3x.JPG" alt="SHT3x Pinbelegung" width="400">
+<img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT3x.JPG" alt="SHT3x Pinbelegung" width="100">
+
+#### SENSIRION SHT85
+
+<img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT85.JPG" alt="SHT85" width="100">
 
 ##### Pinbelegung SHT85
 
