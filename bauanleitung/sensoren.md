@@ -28,7 +28,7 @@ Empfohlen sind die Sensoren SHT3x oder SHT85, da diese mit dem I2C-Bus stabiler 
 
 #### Bau des Sensorkabels
 
-Zum Anschließen des Sensors benutzen wir ein geschrimtes Lankabel, wobei die Schirmung  nur auf der Seite der Pi-Ager Platine bzw. Raspberry Pi auf Masse gelegt werden sollte. Auch ein USB Kalbe hat sich in diesem anwendungsfall bewährt.
+Zum Anschließen des Sensors benutzen wir ein geschrimtes Lankabel, wobei die Schirmung nur auf der Seite der Pi-Ager Platine bzw. Raspberry Pi auf Masse gelegt werden sollte. Auch ein USB Kabel hat sich in diesem Anwendungsfall bewährt.
 
 Zum einfacheren Anschließen der Sensoren SHT75 und SHT85 wurde eine kleine Paltine entwickelt, die man entweder selbst anfertiegen lassen oder im Forum über das beziehen kann.
 
