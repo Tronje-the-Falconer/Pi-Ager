@@ -19,14 +19,18 @@ Empfohlen ist der SHT75, da dieser Stabiler funktioniert und nicht so schnell Fe
 1. [SENSIRION SHT75](#sensirion-sht75)
     1. [Pinbelegung](#pinbelegung-sht75)
     1. [Widerstand](#widerstand-sht75)
+1. [SENSIRION SHT3x](#sensirion-sht3x)
+    1. [Pinbelegung](#pinbelegung-sht3x)
+    1. [Widerstand](#widerstand-sht3x)
+1. [SENSIRION SHT85](#sensirion-sht85)
+    1. [Pinbelegung](#pinbelegung-sht85)
+    1. [Widerstand](#widerstand-sht85)
 
 #### Bau des Sensorkabels
 
-Zum Anschließen des Sensors benutzen wir ein geschrimtes Lankabel, wobei die Schirmung auf beiden Seiten auf Masse gelegt werden sollte.
+Zum Anschließen des Sensors benutzen wir ein geschrimtes Lankabel, wobei die Schirmung  nur auf der Seite der Pi-Ager Platine bzw. Raspberry Pi auf Masse gelegt werden sollte. Auch ein USB Kalbe hat sich in diesem anwendungsfall bewährt.
 
-Um das ganze sauber an den Raspberry anzuschliessen einfach paar Stecker von den Jumperkabel abschneiden und anlöten.
-
-Zwischen den Sensor und dem LAN-Kabel bietet es sich an ein kleine Platine zu basteln, auf der auch der Widerstand verbaut ist. Dadurch haben wir die Möglichkeit einen evtl. defekten Sensor oder Widerstand leicht mal auszutauschen.
+Zum einfacheren Anschließen der Sensoren SHT75 und SHT85 wurde eine kleine Paltine entwickelt, die man entweder selbst anfertiegen lassen oder im Forum über das beziehen kann.
 
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/sensor_board_rueckseite.jpg" alt="Board Rückseite" width="100">
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/sht75_auf_board.jpg" alt="SHT75 auf  Board gesteckt" width="100">
@@ -94,5 +98,14 @@ Zwischen Pin 2 (DATA) und Pin 4 (VDD) des Sensors müssen wir einen 10KOhm Wider
 ##### Widerstand SHT75
 
 Zwischen Pin 2 (VDD) und Pin 4 (DATA) des Sensors müssen wir einen 10KOhm Widerstand anbringen.
+
+##### Pinbelegung SHT3x
+
+<img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT3x.JPG" alt="SHT3x Pinbelegung" width="400">
+
+##### Pinbelegung SHT85
+
+<img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT85pin.JPG" alt="SHT85 Pinbelegung" width="400">
+
 
 [nach oben](#inhalt)
