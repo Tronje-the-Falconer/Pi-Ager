@@ -102,11 +102,11 @@ Zwischen Pin 2 (VDD) und Pin 4 (DATA) des Sensors müssen wir einen 10KOhm Wider
 
 #### SENSIRION SHT3x
 
-<img src="https://.jpg" alt="SHT75" width="100">
+<img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT3x.JPG" alt="SHT3x" width="150">
 
 ##### Pinbelegung SHT3x
 
-<img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT3x.JPG" alt="SHT3x Pinbelegung" width="100">
+<img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT3x.JPG" alt="SHT3x Pinbelegung" width="150">
 
 #### SENSIRION SHT85
 
@@ -114,7 +114,7 @@ Zwischen Pin 2 (VDD) und Pin 4 (DATA) des Sensors müssen wir einen 10KOhm Wider
 
 ##### Pinbelegung SHT85
 
-<img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT85pin.JPG" alt="SHT85 Pinbelegung" width="400">
+<img src="https://github.com/Tronje-the-Falconer/Pi-Ager/blob/resources/bilder/SHT85pin.JPG" alt="SHT85 Pinbelegung" width="150">
 
 
 [nach oben](#inhalt)
