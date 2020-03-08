@@ -48,9 +48,7 @@ class cl_main_sensor_dht11(cl_main_sensor_dht_adafruit):
         self._current_humidity = 0
         
          
-                
-
-   
+  
     def get_current_data(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.measured_data = super().get_current_data()
