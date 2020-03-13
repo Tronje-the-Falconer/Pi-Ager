@@ -30,7 +30,7 @@ import Adafruit_DHT
 class cl_main_sensor_dht11(cl_main_sensor_dht_adafruit):
     
     def __init__(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me()).debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
         #self.o_sensor_type = o_sensor_type
@@ -48,21 +48,19 @@ class cl_main_sensor_dht11(cl_main_sensor_dht_adafruit):
         self._current_humidity = 0
         
          
-                
-
-   
+  
     def get_current_data(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me()).debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.measured_data = super().get_current_data()
         return(self.measured_data)
         
     def _write_to_db(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me()).debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         super()._write_to_db()
         pass
 
     def execute(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me()).debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         #self.get_current_data()
         self._write_to_db()
         
@@ -72,12 +70,12 @@ class th_main_sensor_dht11(cl_main_sensor_dht11):
     
     
     def __init__(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me()).debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.get_type_raise = False
         self._type = "DHT11"
         
     def get_type(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me()).debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if self.get_type_raise == True:
             raise cx_Sensor_not_defined(self._type_ui)        
         return(self._type)
@@ -91,7 +89,7 @@ class cl_fact_sensor_dht11:
 
     @classmethod        
     def get_instance(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me()).debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_sensor_dht11.__o_instance is not None:
             return(cl_fact_sensor_dht11.__o_instance)
         cl_fact_sensor_dht11.__o_instance = cl_main_sensor_dht11()
@@ -99,11 +97,11 @@ class cl_fact_sensor_dht11:
 
     @classmethod
     def set_instance(self, i_instance):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me()).debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_sensor_dht11.__o_instance = i_instance
     
     
     def __init__(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me()).debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
 
