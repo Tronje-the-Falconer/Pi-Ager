@@ -33,9 +33,10 @@ function handleContent() {
         var json_timestamp_humidity = myObj.last_change_humidity;
         var json_timestamp_scale1 = myObj.last_change_scale1;
         var json_timestamp_scale2 = myObj.last_change_scale2;
-        var timestamp = new Date();
-        var timestamp_unix_milliseconds = timestamp.getTime();
-        var timestamp_unix = Math.round(timestamp_unix_milliseconds / 1000);
+//      var timestamp = new Date();
+//      var timestamp_unix_milliseconds = timestamp.getTime();
+//      var timestamp_unix = Math.round(timestamp_unix_milliseconds / 1000);
+        var timestamp_unix = myObj.server_time;
         var time_difference_temperature = timestamp_unix - json_timestamp_temperature;
         var time_difference_humidity = timestamp_unix - json_timestamp_humidity;
         var time_difference_scale1 = timestamp_unix - json_timestamp_scale1;
