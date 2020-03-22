@@ -776,8 +776,10 @@ def doMainLoop():
                     gpio.output(pi_ager_gpio_config.gpio_dehumidifier, pi_ager_names.relay_off)
                 
                 # Schalten des (Abluft-)Luftaustausch-Ventilator
-                cl_fact_logger.get_instance().debug("status_exhaust_air =")
-                cl_fact_logger.get_instance().debug(status_exhaust_air + '%s' %(value or ''))
+                cl_fact_logger.get_instance().debug("status_exhaust_air: %s" % status_exhaust_air)
+                
+                #cl_fact_logger.get_instance().debug("status_exhaust_air =")
+                #cl_fact_logger.get_instance().debug(status_exhaust_air + '%s' %(value or ''))
                 #cl_fact_logger.get_instance().debug(_('status_exhaust_fan =') + (status_exhaust_air + '%s' %(value or '')))
                 
                 #cl_fact_logger.get_instance().debug('status_exhaust_air = ' + status_exhaust_air)
