@@ -130,7 +130,10 @@
             $count_all_values = count($data_values);
             $count_diagram_values = count($timestamp_value_dict);
             if ($count_all_values > $count_diagram_values){
-                $wanted_index = $count_all_values - $count_diagram_values - 1;
+                $wanted_index = $count_all_values - $count_diagram_values - 2;
+                if ($wanted_index < 0){
+                    $wanted_index = 0;
+                }
                 $wanted_timestamp = array_keys($data_values)[$wanted_index];
                 // $timestamp_value_dict[$first_timestamp_diagram] = $data_values[$wanted_timestamp];
                 if ($is_OnOff_value){
