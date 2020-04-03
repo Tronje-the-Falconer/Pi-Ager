@@ -532,7 +532,7 @@ def doMainLoop():
                         else: 
                             status_uv = False                      # UV-Licht aus
                             logstring = logstring + ' \n ' +  _('uv-light timer active') + ' (' + _('uv-light off') +')'
-                            # logger.info(logstring)
+                            cl_fact_logger.get_instance().debug(logstring)
                             # logger.debug('UV-Licht Stoppzeit: ' + convert(pi_ager_init.uv_stoptime))
                             # logger.debug('UV-Licht Startzeit: ' + convert(pi_ager_init.uv_starttime))
                             # logger.debug('UV-Licht period: ' + str(uv_period))
@@ -560,17 +560,17 @@ def doMainLoop():
                     if now >= pi_ager_init.uv_starttime and now <= pi_ager_init.uv_stoptime:
                         status_uv = True                     # UV-Licht an
                         logstring = logstring + ' \n ' +  _('uv-light timestamp active') + ' (' + _('uv-light on') +')'
-                        # logger.info(logstring)
+                        cl_fact_logger.get_instance().debug(logstring)
                     else: 
                         status_uv = False                      # UV-Licht aus
                         logstring = logstring + ' \n ' +  _('uv-light timestamp active') + ' (' + _('uv-light off') +')'
-                        # logger.info(logstring)
+                        cl_fact_logger.get_instance().debug(logstring)
     
                 # Timer fuer Licht
                 if light_modus == 0:                         # Modus 0 Licht aus
                     status_light = False                      # Licht aus
                     logstring = logstring + ' \n ' +  _('modus light') + ': ' + _('off')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                 
                 if light_modus == 1:                            # Modus 1 = Periode/Dauer
                     if light_period == 0:                      # gleich 0 ist an,  Dauer-Timer
@@ -585,7 +585,7 @@ def doMainLoop():
                             if not status_light == True:
                                 status_light = True                     # Licht an
                             logstring = logstring + ' \n ' +  _('light timer active') + ' (' + _('light on') +')'
-                            # logger.info(logstring)
+                            cl_fact_logger.get_instance().debug(logstring)
                             # logger.debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
                             # logger.debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
                             # logger.debug('Licht duration: ' + str(light_duration))
@@ -829,7 +829,7 @@ def doMainLoop():
                 logstring = logstring + ' \n ' + pi_ager_names.logspacer2
                 if gpio.input(pi_ager_gpio_config.gpio_heater) == False:
                     logstring = logstring + ' \n ' +  _('heater') + ' ' + _('on')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_heater = 1
                 else:
                     logstring = logstring + ' \n ' +  _('heater') + ' ' + _('off')
@@ -837,72 +837,71 @@ def doMainLoop():
                     status_heater = 0
                 if gpio.input(pi_ager_gpio_config.gpio_cooling_compressor) == False:
                     logstring = logstring + ' \n ' +  _('cooling compressor') + ' ' + _('on')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_cooling_compressor = 1
                 else:
                     logstring = logstring + ' \n ' +  _('cooling compressor') + ' ' + _('off')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_cooling_compressor = 0
                 if gpio.input(pi_ager_gpio_config.gpio_humidifier) == False:
                     logstring = logstring + ' \n ' +  _('humidifier') + ' ' + _('on')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_humidifier = 1
                 else:
                     logstring = logstring + ' \n ' +  _('humidifier') + ' ' + _('off')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_humidifier = 0
                 if gpio.input(pi_ager_gpio_config.gpio_circulating_air) == False:
                     logstring = logstring + ' \n ' +  _('circulation air') + ' ' + _('on')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_circulating_air = 1
                 else:
                     logstring = logstring + ' \n ' +  _('circulation air') + ' ' + _('off')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_circulating_air = 0
                 if gpio.input(pi_ager_gpio_config.gpio_exhausting_air) == False:
                     logstring = logstring + ' \n ' +  _('exhaust air') + ' ' + _('on')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_exhaust_air = 1
                 else:
                     logstring = logstring + ' \n ' +  _('exhaust air') + ' ' + _('off')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_exhaust_air = 0
                 if gpio.input(pi_ager_gpio_config.gpio_dehumidifier) == False:
                     logstring = logstring + ' \n ' +  _('dehumidifier') + ' ' + _('on')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_dehumidifier = 1
                 else:
                     logstring = logstring + ' \n ' +  _('dehumidifier') + ' ' + _('off')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_dehumidifier = 0
                 if get_gpio_value(pi_ager_gpio_config.gpio_light) == False:
                     logstring = logstring + ' \n ' +  _('light') + ' ' + _('on')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_light = 1
                 else:
                     logstring = logstring + ' \n ' +  _('light') + ' ' + _('off')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_light = 0
                 if gpio.input(pi_ager_gpio_config.gpio_uv) == False:
                     logstring = logstring + ' \n ' +  _('uv-light') + ' ' + _('on')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_uv= 1
                 else:
                     logstring = logstring + ' \n ' +  _('uv-light') + ' ' + _('off')
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                     status_uv = 0
                 if scale1_data > 0:
                     logstring = logstring + ' \n ' +  _('weight scale') + ' 1: ' + str(scale1_data)
-                    # logger.info(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
                 if scale2_data > 0:
                     logstring = logstring + ' \n ' +  _('weight scale') + ' 2: ' + str(scale2_data)
-                    # logger.info(logstring)
-    
-                # logger.info(pi_ager_names.logspacer2)
-                logstring = logstring + ' \n ' + pi_ager_names.logspacer2
+                    cl_fact_logger.get_instance().debug(logstring)
+               
     
                 if status_value_has_changed():
-                    # logger.info(logstring)
+                    
+                    logstring = logstring + ' \n ' + pi_ager_names.logspacer2
                     cl_fact_logger.get_instance().info(logstring)
                 
                 # Messwerte in die RRD-Datei schreiben
@@ -937,7 +936,6 @@ def doMainLoop():
             #pi_ager_logging.check_website_logfile()
             cl_fact_logger.get_instance().check_website_logfile()
             # Mainloop fertig
-            # logger.debug('loop complete')
             cl_fact_logger.get_instance().debug('loop complete')
             pi_ager_init.loopcounter += 1
             
