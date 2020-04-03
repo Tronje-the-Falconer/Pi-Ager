@@ -541,7 +541,7 @@ def doMainLoop():
                             cl_fact_logger.get_instance().debug('UV-Licht period: ' + str(uv_period))
     
                         if current_time > pi_ager_init.uv_stoptime:
-                            pi_ager_init.uv_starttime = pi_ager_init.uv_starttime + uv_period  # Timer-Timestamp aktualisiert
+                            pi_ager_init.uv_starttime = current_time + uv_period  # Timer-Timestamp aktualisiert
                             pi_ager_init.uv_stoptime = pi_ager_init.uv_starttime + uv_duration
     
                 if uv_modus == 2:                         # Modus 2 Zeitstempel/Dauer
@@ -604,7 +604,7 @@ def doMainLoop():
                             cl_fact_logger.get_instance().debug('Licht period: ' + str(light_period))
     
                         if current_time > pi_ager_init.light_stoptime:
-                            pi_ager_init.light_starttime = pi_ager_init.light_starttime + light_period  # Timer-Timestamp aktualisiert
+                            pi_ager_init.light_starttime = current_time + light_period  # Timer-Timestamp aktualisiert
                             pi_ager_init.light_stoptime = pi_ager_init.light_starttime + light_duration
     
                 if light_modus == 2:                         # Modus 2 Zeitstempel/Dauer
@@ -949,5 +949,7 @@ def doMainLoop():
         #Here clean Deviation time_counter
         pi_ager_gpio_config.defaultGPIO()
  
+        # reflect i/o status in DB
+        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, 0, 0, 0, 0) 
     except Exception as cx_error:
        cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
