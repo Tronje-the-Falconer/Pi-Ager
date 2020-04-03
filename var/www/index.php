@@ -591,7 +591,7 @@
                                                     echo '<img src="/images/icons/status_on_manual_20x20.png" title="light on">';
                                                 }
                                                 else{
-                                                    echo '<img src="'.$uv_on_off_png.'">';
+                                                    echo '<img src="'.$light_on_off_png.'">';
                                                 }
                                                 ?>
                                             </td>

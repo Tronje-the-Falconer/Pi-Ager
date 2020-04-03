@@ -123,4 +123,5 @@ $last_change_temperature_json_key = 'last_change_temperature';
 $last_change_humidity_json_key = 'last_change_humidity';
 $last_change_scale1_json_key = 'last_change_scale1';
 $last_change_scale2_json_key = 'last_change_scale2';
+$server_time_json_key = 'server_time';
 ?>
