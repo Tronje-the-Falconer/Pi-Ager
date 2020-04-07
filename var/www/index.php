@@ -578,6 +578,8 @@
                                                 if ($uv_duration > 0 && $uv_period >0) {echo ', '.strtoupper(_('timer on'));}
                                                 elseif ($uv_period == 0) {echo ' '.strtoupper(_('always on'));}
                                                 elseif ($uv_duration == 0) {echo ', '.strtoupper(_('timer off'));}
+                                                elseif ($uv_modus == 0) {echo ', '.strtoupper(_('automatic off'));}
+                                                elseif ($uv_modus == 1) {echo ', '.strtoupper(_('automatic on'));}
                                             ?></td>
                                             <td><?php echo $uv_period.' '._('minutes'); ?></td>
                                             <td></td>
