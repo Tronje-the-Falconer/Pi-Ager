@@ -149,7 +149,7 @@ msgstr ""
 
 #: changelog.php:93
 msgid "based on an idea and submission of"
-msgstr "Basierend auf eine Idee von"
+msgstr "Basierend auf einer Idee von"
 
 #: config.php:5
 msgid "set general configuration values"
@@ -292,7 +292,7 @@ msgstr ""
 
 #: config.php:124
 msgid "example automatic mode with with humidification and dehumidification"
-msgstr "Beispiel Automatikmodus mit Befeutung und Entfeuchtung"
+msgstr "Beispiel Automatikmodus mit Befeuchtung und Entfeuchtung"
 
 #: config.php:124
 msgid ""
@@ -430,7 +430,7 @@ msgstr "Diagramme"
 
 #: diagrams.php:53
 msgid "every ~ 5 minutes a new value is written!"
-msgstr "Ca. jede 5 Min wird ein neuer Wert abgespeichert!"
+msgstr "Ca. alle 5 Min wird ein neuer Wert abgespeichert!"
 
 #: diagrams.php:134 index.php:163
 msgid " - t"
@@ -495,7 +495,7 @@ msgstr "Reifetabelle editieren"
 
 #: edit_agingtable.php:18
 msgid "can not edit the controlling agingtable. please select an other"
-msgstr "Die laufende Reifetabelle kann nicht editiert werden, bitte ein andere auswählen"
+msgstr "Die laufende Reifetabelle kann nicht editiert werden, bitte eine andere auswählen"
 
 #: edit_agingtable.php:23
 msgid "no agingtable selected"
@@ -515,7 +515,7 @@ msgstr "Sollwert Feuchte in %"
 
 #: edit_agingtable.php:36 settings.php:290
 msgid "target temperature in °C"
-msgstr "Sollwert Temoeratur in °C"
+msgstr "Sollwert Temperatur in °C"
 
 #: edit_agingtable.php:37 settings.php:291
 msgid "timer circulate d"
@@ -926,7 +926,7 @@ msgstr ""
 
 #: manvals.php:156 manvals.php:187
 msgid "period=0 und duration=0 is not useful and not allowed."
-msgstr "Zyklus=0 und Dauer=0 ist nicht sinnvoll und nicht erlaubt."
+msgstr "Zyklus=0 und Dauer=0 ist nicht sinnvoll und daher nicht erlaubt."
 
 #: manvals.php:163
 msgid "timer exhausting air"
@@ -981,7 +981,7 @@ msgstr "Gewicht angehangen"
 
 #: scale_wizzard.php:47
 msgid "cancel scale wizzard?"
-msgstr "Wizzard unterberechen?"
+msgstr "Wizzard unterbrechen?"
 
 #: scale_wizzard.php:57
 msgid "no scale selected"
@@ -1005,7 +1005,7 @@ msgstr "Pi-Ager anhalten"
 
 #: settings.php:52
 msgid "start pi-ager?"
-msgstr "Pi-Ager staten?"
+msgstr "Pi-Ager starten?"
 
 #: settings.php:52
 msgid "start pi-ager"
@@ -1021,7 +1021,7 @@ msgstr "Referenz Einheit ist 0"
 
 #: settings.php:94 settings.php:106 settings.php:120 settings.php:132
 msgid "Please calibrate scale first!"
-msgstr "Bitte erstmal die Waage kalibrieren!"
+msgstr "Bitte zuerst die Waage kalibrieren!"
 
 #: settings.php:94 settings.php:97 settings.php:120 settings.php:123
 msgid "start scale"
@@ -1081,7 +1081,7 @@ msgstr "Reifetabelle anhalten?"
 
 #: settings.php:206
 msgid "pi-ager continues with the last values of the agingtable!"
-msgstr "Der Pi-ager arbeitet mit den letzt gültigen Einstellungen!"
+msgstr "Der Pi-Ager arbeitet mit den zuletzt gültigen Werten der Reifetabelle!"
 
 #: settings.php:206
 msgid "stop agingtable"
@@ -1243,7 +1243,7 @@ msgstr ""
 
 #: admin.php:1115
 msgid "ATTENTION: empty statistic tables?"
-msgstr "ACHTUNG: historische Daten löschen?"
+msgstr "ACHTUNG: Historische Daten löschen?"
 
 #: admin.php:1117
 msgid "save loglevel?"
@@ -1263,7 +1263,7 @@ msgstr "ACHTUNG: System herunterfahren?"
 
 #: webcam.php:1121
 msgid "download image file"
-msgstr "Bild heruterladen"
+msgstr "Bild herunterladen"
 
 #: clear_logfile.php:1122
 msgid "clear logfile"
