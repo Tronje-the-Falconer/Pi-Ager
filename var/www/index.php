@@ -575,16 +575,21 @@
                                             <td class="text_left">
                                             <?php 
                                                 echo strtoupper(_('uv-light'));
-                                                if ($uv_duration > 0 && $uv_period >0) {echo ', '.strtoupper(_('timer on'));}
+                                                // UV-LIGHT, TIMER ACTIVE/INACTIVE, only MANUELL OFF
+                                                if ($uv_modus == 0) {echo ' '.strtoupper(_('timer off'));}
+                                                elseif ($uv_modus == 1) {echo ' '.strtoupper(_('timer on'));}
+                                                if ($status_uv_manual == 0){ echo ', '.strtoupper(_('manual switch off'));}
+                                                /* 
+                                                if ($uv_duration > 0 && $uv_period >0) {echo ', '.strtoupper(_('timer active'));}
                                                 elseif ($uv_period == 0) {echo ' '.strtoupper(_('always on'));}
-                                                elseif ($uv_duration == 0) {echo ', '.strtoupper(_('timer off'));}
-                                                
-                                                if ($uv_modus == 0) {echo ', '.strtoupper(_('automatic off'));}
-                                                elseif ($uv_modus == 1) {echo ', '.strtoupper(_('automatic on'));}
+                                                elseif ($uv_duration == 0) {echo ', '.strtoupper(_('timer inactive'));}
+                                                */
+
                                             ?></td>
-                                            <td><?php echo $uv_period.' '._('minutes'); ?></td>
-                                            <td></td>
-                                            <td><?php echo $uv_duration.' '._('minutes'); ?></td>
+                                           	<td><?php echo $uv_period.' '._('minutes'); ?></td>
+                                           	<td></td>
+                                           	<td><?php echo $uv_duration.' '._('minutes'); ?></td>
+                                           
                                         </tr>
                                         <tr>
                                             <td><img <?php if ($light_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/light_42x42.png" alt=""></td>
@@ -601,13 +606,21 @@
                                             <td class="text_left">
                                             <?php 
                                                 echo strtoupper(_('light'));
+                                                //LIGHT, TIMER ACTIVE/INACTIVE, only MANUELL ON
+                                                if ($light_modus == 0) {echo ' '.strtoupper(_('timer off'));}
+                                                elseif ($light_modus == 1) {echo ' '.strtoupper(_('timer on'));}
+                                                if ($status_light_manual == 1){ echo ', '.strtoupper(_('manual switch on'));}
+                                                /*
                                                 if ($light_duration > 0 && $light_period >0) {echo ', '.strtoupper(_('timer on'));}
                                                 elseif ($light_period == 0) {echo ' '.strtoupper(_('always on'));}
                                                 elseif ($light_duration == 0) {echo ', '.strtoupper(_('timer off'));}
-                                            ?></td>
-                                            <td><?php echo $light_period.' '._('minutes'); ?></td>
-                                            <td></td>
-                                            <td><?php echo $light_duration.' '._('minutes'); ?></td>
+                                                */
+                                            
+                                                ?></td>
+                                                <td><?php echo $light_period.' '._('minutes'); ?></td>
+                                            	<td></td>
+                                            	<td><?php echo $light_duration.' '._('minutes'); ?></td>
+                                            
                                         </tr>
                                     </table>
                                     <hr>

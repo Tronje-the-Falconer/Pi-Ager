@@ -23,4 +23,5 @@ encoding//opt/pi-ager/sensors/pi_ager_cl_sensor_dht_adafruit.py=utf-8
 encoding//opt/pi-ager/sensors/pi_ager_cl_sensor_fact.py=utf-8
 encoding//opt/pi-ager/sensors/pi_ager_cl_sensor_sht3x.py=utf-8
 encoding//opt/pi-ager/sensors/pi_ager_cl_sensor_sht75.py=utf-8
+encoding//opt/pi-ager/sensors/pi_ager_cl_sensor_sht85.py=utf-8
 encoding//opt/pi-ager/sensors/pi_ager_cl_sensor_type.py=utf-8
