@@ -190,7 +190,7 @@ def doAgingtableLoop():
     # Reifetabelle aus Datenbank
     agingtable = pi_ager_database.read_agingtable_name_from_config()    # Variable agingtable = Name der Reifetabelle
     agingtable = agingtable.lower()
-
+    finaltime = None
     # bedingte Werte aus Variablen
     # Sensor
     pi_ager_init.set_language()
