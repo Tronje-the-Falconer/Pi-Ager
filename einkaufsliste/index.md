@@ -41,10 +41,10 @@ Die Platine ist grundsätzlich als unbestückt Platine erhältlich. Für Leute d
 * [Verkaufsportal Pi-Ager Platine](https://www.grillsportverein.de/forum/threads/verkaufsportal-pi-ager-reifeschrank-platine.288119/) 
 Zusätzlich zur Steuerplatine benötigt man noch ein [Relaisboard](#relaisboard) => Details sind auf dieser Seite weiter unten zu finden.
 Wer also selbst löten kann, baucht folgende Komponenten:
-* Bauteile Pi-Ager Platine [Reichelt Einkaufsliste](https://www.reichelt.de/my/1647051) (Reichelt EKL) 
+* Bauteile Pi-Ager Platine 2.5 [Reichelt Einkaufsliste](https://www.reichelt.de/my/1647051) (Reichelt EKL) 
 => hier sind alle Bauteile für die Platine die bei Reichelt erhältlich sind zusammengefasst.
 
-  * Allgemeine Komponennten für die Pi-Ager Platine: (diese Liste hier muss für die 2.5 er Version noch aktualisiert werden, der Link zu Reichelt ist aktuell auf die 2,5 Version abgestimmt.)
+  * Allgemeine Komponennten für die Pi-Ager Platine: (die folgende Liste mit den einzelen Komponennten muss für die 2.5 er Version noch aktualisiert werden, der Link zu Reichelt ist aber aktuell auf die 2,5 Version abgestimmt.)
   
     * 2 x JUMPER, schw. m. Grifflasche - [JUMPER 2,54 SW ](https://www.reichelt.de/kurzschlussbruecke-schw-m-grifflasche-jumper-2-54gl-sw-p9019.html?) (Reichelt EKL)
     * 2 x Stiftleisten 2,54 mm, 1X36, gerade- [MPE 087-1-036](https://www.reichelt.de/stiftleisten-2-54-mm-1x36-gerade-mpe-087-1-036-p119890.html?) (Reichelt EKL)
