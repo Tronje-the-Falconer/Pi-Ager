@@ -33,7 +33,7 @@ Wenn jemand fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möc
 * [microSDHC Karte](https://www.reichelt.de/microsdhc-speicherkarte-16gb-sandisk-ultra-sdsquar016ggn6ma-p214843.html?r=1) (min. 8GB)
 * [USB Netzteil 5V / mind. 4A z.B.](https://www.reichelt.de/Netzteile-Festspannung/MW-GST40A05/3/index.html?ACTION=3&LA=2&ARTICLE=171043&GROUPID=4950&artnr=MW+GST40A05&SEARCH=%252A) (Reichelt)
 
-#### Pi-Ager Platine (Hw. Version 2.2)
+#### Pi-Ager Platine (Hw. Version 2.5)
 
 Die Steuerplatine für den Reifeschrank kann man über das GSV Forum beziehen.
 Die Platine ist grundsätzlich als unbestückt Platine erhältlich. Für Leute die etwas Probleme mit dem Löten haben, ist es meistens möglich auch eine bestückte Version zu bekommen, da dieses Projekt ein Hobby ist und wir alle dieses Hobby in unserer Freizeit betreiben kann es bei der bestückten Version zu entsprechenden Wartezeiten kommen.
@@ -41,10 +41,10 @@ Die Platine ist grundsätzlich als unbestückt Platine erhältlich. Für Leute d
 * [Verkaufsportal Pi-Ager Platine](https://www.grillsportverein.de/forum/threads/verkaufsportal-pi-ager-reifeschrank-platine.288119/) 
 Zusätzlich zur Steuerplatine benötigt man noch ein [Relaisboard](#relaisboard) => Details sind auf dieser Seite weiter unten zu finden.
 Wer also selbst löten kann, baucht folgende Komponenten:
-* Bauteile Pi-Ager Platine [Reichelt Einkaufsliste](https://www.reichelt.de/my/1492971) (Reichelt EKL) 
+* Bauteile Pi-Ager Platine [Reichelt Einkaufsliste](https://www.reichelt.de/my/1647051) (Reichelt EKL) 
 => hier sind alle Bauteile für die Platine die bei Reichelt erhältlich sind zusammengefasst.
 
-  * Allgemeine Komponennten für die Pi-Ager Platine:
+  * Allgemeine Komponennten für die Pi-Ager Platine: (diese Liste hier muss für die 2.5 er Version noch aktualisiert werden, der Link zu Reichelt ist aktuell auf die 2,5 Version abgestimmt.)
   
     * 2 x JUMPER, schw. m. Grifflasche - [JUMPER 2,54 SW ](https://www.reichelt.de/kurzschlussbruecke-schw-m-grifflasche-jumper-2-54gl-sw-p9019.html?) (Reichelt EKL)
     * 2 x Stiftleisten 2,54 mm, 1X36, gerade- [MPE 087-1-036](https://www.reichelt.de/stiftleisten-2-54-mm-1x36-gerade-mpe-087-1-036-p119890.html?) (Reichelt EKL)
