@@ -2,7 +2,7 @@ from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
 
 from messenger.pi_ager_cl_crypt import cl_fact_help_crypt
-from Demos.security.sspi.validate_password import password
+
 password = ''
 print("Password             = " + password)
 crypt = cl_fact_help_crypt.get_instance()
