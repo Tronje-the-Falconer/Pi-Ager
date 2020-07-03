@@ -150,6 +150,9 @@ Dieses Board das hier angeboten wird, passte bisher (speziell was die Printstift
 Leider sind beide Typen bei Völkner und Conrad oft ausverkaut... vielicht kriegt man sie auch in China...einfach mal versuchen.
 * ACHTUNG es gibt unterschiedliche Boards, das richtige (bei dem genug Plaz ist um die Relais auszutauschen= hat die Maße: 138x55x17 mm. Die mit den Maßen 134x52x17 sind nicht fuer den Realaistausch geeigent.
 ***
+* Der Einsatz eines entsprechenden Schützes in der Kompressoransteuerung ist wohl die sicherste Variannte da es Schütze gibt die für die entsprechende Gebrauchskategorie gebaut wurden. 
+Hier ein mögliches Schütz dass man einsetzen könnte (ob es zu eurem Kompressor passt sollte euer Elektriker des Vertrauens leicht beurteilen können)
+[Schütz](https://www.voelkner.de/products/1326874/Finder-22.32.0.230.4520-Schuetz-1-Schliesser-1-Oeffner-230-V-DC-230-V-AC-25A-1St..html?ref=51&offer=64f5fd9278547c3f91da0c59797b0153&gclid=CjwKCAjwrvv3BRAJEiwAhwOdM-jWpyaZCpXtuMSwrtjDqcGbzkXXkVIMp_6GBph53KxGhR3LgRa1fhoCLq8QAvD_BwE)
 
 ### Hardware
 
