@@ -92,12 +92,12 @@
         return $value;
     }
 
-    function get_diagram_values($table)
+    function get_diagram_values($table, $nth_value)
     {
         global $value_field, $last_change_field;
         
         open_connection();
-        $sql = 'SELECT ' . $value_field . ', ' .$last_change_field . ' FROM ' . $table;
+        $sql = 'SELECT ' . $value_field . ', ' .$last_change_field . ' FROM ' . $table . ' WHERE (' . $id_field . ' % ' . $nth_value . ') = 0';
         $result = get_query_result($sql);
         while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
         {

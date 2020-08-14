@@ -182,7 +182,15 @@
     $first_timestamp_diagram = get_defined_first_timestamp($last_timestamp_diagram, $diagram_mode);
     
     // echo "Temperatur<br>";
-    $temperature_values = get_diagram_values($data_sensor_temperature_table);
+    $nth_value = 1;
+    if ($diagram_mode == 'month') {
+        $nth_value = 15;
+    }
+    elseif ($diagram_mode == 'week') {
+        $nth_value = 4;
+    }
+    
+    $temperature_values = get_diagram_values($data_sensor_temperature_table, $nth_value);
     $is_OnOff_value = False;
     $temperature_data_diagram = get_data_for_diagram($temperature_values, $is_OnOff_value);
     $temperature_timestamps_axis_text = $temperature_data_diagram[0];
@@ -195,7 +203,7 @@
     // $temperature_dataset = get_dataset_of_values($temperature_values_diagram, $temperature_timestamps_axis);
     
     // echo "humidity_values<br>";
-    $humidity_values = get_diagram_values($data_sensor_humidity_table);
+    $humidity_values = get_diagram_values($data_sensor_humidity_table, $nth_value);
     $is_OnOff_value = False;
     $humidity_data_diagram = get_data_for_diagram($humidity_values, $is_OnOff_value);
     $humidity_timestamps_axis_text = $humidity_data_diagram[0];
@@ -210,7 +218,7 @@
     // $humidity_dataset = get_dataset_of_values($humidity_values, $humidity_timestamps_axis);
     
     // echo "scale1_values<br>";
-    $scale1_values = get_diagram_values($data_scale1_table);
+    $scale1_values = get_diagram_values($data_scale1_table, $nth_value);
     $is_OnOff_value = False;
     $scale1_data_diagram = get_data_for_diagram($scale1_values, $is_OnOff_value);
     $scale1_timestamps_axis_text = $scale1_data_diagram[0];
@@ -225,7 +233,7 @@
     // $scale1_dataset = get_dataset_of_values($scale1_values, $scale1_timestamps_axis);
     
     // echo "scale2_values<br>";
-    $scale2_values = get_diagram_values($data_scale2_table);
+    $scale2_values = get_diagram_values($data_scale2_table, $nth_value);
     $is_OnOff_value = False;
     $scale2_data_diagram = get_data_for_diagram($scale2_values, $is_OnOff_value);
     $scale2_timestamps_axis_text = $scale2_data_diagram[0];
@@ -240,7 +248,7 @@
     // $scale2_dataset = get_dataset_of_values($scale2_values, $scale2_timestamps_axis);
     
     // echo "uv_light_values<br>";
-    $uv_light_values = get_diagram_values($status_uv_table);
+    $uv_light_values = get_diagram_values($status_uv_table, 1);
     $is_OnOff_value = True;
     $uv_light_data_diagram = get_data_for_diagram($uv_light_values, $is_OnOff_value);
     $uv_light_timestamps_axis_text = $uv_light_data_diagram[0];
@@ -259,7 +267,7 @@
     // $uv_light_dataset = get_dataset_of_values($uv_light_values_with_duplicated_last, $uv_light_timestamps_axis);
   
     // echo "light_values<br>";
-    $light_values = get_diagram_values($status_light_table);
+    $light_values = get_diagram_values($status_light_table, 1);
     $is_OnOff_value = True;
     $light_data_diagram = get_data_for_diagram($light_values, $is_OnOff_value);
     $light_timestamps_axis_text = $light_data_diagram[0];
@@ -276,7 +284,7 @@
     // $light_dataset = get_dataset_of_values($light_values_with_duplicated_last, $light_timestamps_axis);
     
     // echo "heater_values<br>";
-    $heater_values = get_diagram_values($status_heater_table);
+    $heater_values = get_diagram_values($status_heater_table, 1);
     $is_OnOff_value = True;
     $heater_data_diagram = get_data_for_diagram($heater_values, $is_OnOff_value);
     $heater_timestamps_axis_text = $heater_data_diagram[0];
@@ -291,7 +299,7 @@
     // $heater_dataset = get_dataset_of_values($heater_values, $heater_timestamps_axis);
     
     // echo "cooler_values<br>";
-    $cooler_values = get_diagram_values($status_cooling_compressor_table);
+    $cooler_values = get_diagram_values($status_cooling_compressor_table, 1);
     $is_OnOff_value = True;
     $cooler_data_diagram = get_data_for_diagram($cooler_values, $is_OnOff_value);
     $cooler_timestamps_axis_text = $cooler_data_diagram[0];
@@ -306,7 +314,7 @@
     // $cooler_dataset = get_dataset_of_values($cooler_values, $cooler_timestamps_axis);
     
     // echo "humidifier_values<br>";
-    $humidifier_values = get_diagram_values($status_humidifier_table);
+    $humidifier_values = get_diagram_values($status_humidifier_table, 1);
     $is_OnOff_value = True;
     $humidifier_data_diagram = get_data_for_diagram($humidifier_values, $is_OnOff_value);
     $humidifier_timestamps_axis_text = $humidifier_data_diagram[0];
@@ -321,7 +329,7 @@
     // $humidifier_dataset = get_dataset_of_values($humidifier_values, $humidifier_timestamps_axis);
     
     // echo "dehumidifier_values<br>";
-    $dehumidifier_values = get_diagram_values($status_dehumidifier_table);
+    $dehumidifier_values = get_diagram_values($status_dehumidifier_table, 1);
     $is_OnOff_value = True;
     $dehumidifier_data_diagram = get_data_for_diagram($dehumidifier_values, $is_OnOff_value);
     $dehumidifier_timestamps_axis_text = $dehumidifier_data_diagram[0];
@@ -336,7 +344,7 @@
     // $dehumidifier_dataset = get_dataset_of_values($dehumidifier_values, $dehumidifier_timestamps_axis);
     
     // echo "exhaust_air_values<br>";
-    $exhaust_air_values = get_diagram_values($status_exhaust_air_table);
+    $exhaust_air_values = get_diagram_values($status_exhaust_air_table, 1);
     $is_OnOff_value = True;
     $exhaust_data_diagram = get_data_for_diagram($exhaust_air_values, $is_OnOff_value);
     $exhaust_air_timestamps_axis_text = $exhaust_data_diagram[0];
@@ -351,7 +359,7 @@
     // $exhaust_air_dataset = get_dataset_of_values($exhaust_air_values, $exhaust_air_timestamps_axis);
     
     // echo "circulate_air_values<br>";
-    $circulate_air_values = get_diagram_values($status_circulating_air_table);
+    $circulate_air_values = get_diagram_values($status_circulating_air_table, 1);
     $is_OnOff_value = True;
     $circulate_air_data_diagram = get_data_for_diagram($circulate_air_values, $is_OnOff_value);
     $circulate_air_timestamps_axis_text = $circulate_air_data_diagram[0];
