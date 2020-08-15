@@ -94,7 +94,7 @@
 
     function get_diagram_values($table, $nth_value)
     {
-        global $value_field, $last_change_field;
+        global $value_field, $last_change_field, $id_field;
         
         open_connection();
         $sql = 'SELECT ' . $value_field . ', ' .$last_change_field . ' FROM ' . $table . ' WHERE (' . $id_field . ' % ' . $nth_value . ') = 0';
