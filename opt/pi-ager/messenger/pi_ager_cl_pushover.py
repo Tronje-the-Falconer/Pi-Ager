@@ -43,33 +43,35 @@ class cl_logic_pushover:
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         try:
-            if self.it_pushover: 
-                cl_fact_logger.get_instance().debug('user_key  = ' + str(self.it_pushover[0]['user_key']))
-                cl_fact_logger.get_instance().debug('api_token = ' + str(self.it_pushover[0]['api_token']))
-            
-            self.user_key  = str(self.it_pushover[0]['user_key'])
-            self.api_token = str(self.it_pushover[0]['api_token'])
+            if self.it_pushover:                
+                self.user_key  = str(self.it_pushover[0]['user_key'])
+                self.api_token = str(self.it_pushover[0]['api_token'])
+                cl_fact_logger.get_instance().debug('user_key  = ' + self.user_key)
+                cl_fact_logger.get_instance().debug('api_token = ' + self.api_token)
         except IndexError as cx_error:
             raise(cx_error)
         
-        self.po = Pushover(self.api_token)
-        self.po.user(self.user_key)
+        po = Pushover(self.api_token)
+        po.user(self.user_key)
         
         self.send_pushover(
+            po,
             alarm_subject,
             alarm_message)        
         
-    def send_pushover(self, alarm_subject, alarm_message):
+    def send_pushover(self, po, alarm_subject, alarm_message):
         """
         Send pushover
         """
-        # logger.debug(pi_ager_logging.me())
+        
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         try:
-            msg = self.po.msg(alarm_message)
+            po = Pushover(self.api_token)
+            po.user(self.user_key)
+            msg = po.msg(alarm_message)
             msg.set("title", alarm_subject)
 
-            self.po.send(msg)
+            po.send(msg)
 
         except Exception as cx_error:
             #TODO err undefined!
