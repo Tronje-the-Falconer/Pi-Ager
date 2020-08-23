@@ -42,7 +42,7 @@ class cl_logic_pushover:
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
-     try:
+        try:
             if self.it_pushover:                
                 self.user_key  = str(self.it_pushover[0]['user_key'])
                 self.api_token = str(self.it_pushover[0]['api_token'])
