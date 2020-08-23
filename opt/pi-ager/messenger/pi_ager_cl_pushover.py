@@ -6,15 +6,16 @@ __author__ = "Claus Fischer"
 __copyright__ = "Copyright 2020, The Pi-Ager Project"
 __credits__ = ["Claus Fischer"]
 __license__ = "GPL"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Productive"
+
 from abc import ABC
 import inspect
 import pi_ager_names
 from main.pi_ager_cl_database import cl_fact_database_config, cl_ab_database_config
-from pushover import Client
+from pushover import Pushover
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
 
@@ -34,6 +35,8 @@ class cl_logic_pushover:
         self.db_pushover = cl_fact_db_pushover().get_instance()
         self.it_pushover = self.db_pushover.read_data_from_db()
         
+
+        
         
     def execute(self, alarm_subject, alarm_message):
         # logger.debug(pi_ager_logging.me())
@@ -49,7 +52,8 @@ class cl_logic_pushover:
         except IndexError as cx_error:
             raise(cx_error)
         
-        self.client = Client(self.user_key, api_token=self.api_token)
+        self.po = Pushover(self.api_token)
+        self.po.user(self.user_key)
         
         self.send_pushover(
             alarm_subject,
@@ -62,7 +66,11 @@ class cl_logic_pushover:
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         try:
-            self.client.send_message(alarm_message, title=alarm_subject)
+            msg = self.po.msg(alarm_message)
+            msg.set("title", alarm_subject)
+
+            self.po.send(msg)
+
         except Exception as cx_error:
             #TODO err undefined!
             sendefehler = 'Error: unable to send pushover: {err}'.format(err=cx_error)
