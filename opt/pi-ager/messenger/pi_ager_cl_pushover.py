@@ -57,8 +57,11 @@ class cl_logic_pushover:
                     po,
                     alarm_subject,
                     alarm_message)        
-        except IndexError as cx_error:
-            raise(cx_error)        
+        except Exception as cx_error:
+            #TODO err undefined!
+            fehler = 'Error: unable to send pushover: {err}'.format(err=cx_error)
+        # logger.error(sendefehler)
+        cl_fact_logger.get_instance().error(fehler)       
     def send_pushover(self, po, alarm_subject, alarm_message):
         """
         Send pushover
@@ -66,8 +69,6 @@ class cl_logic_pushover:
         
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         try:
-            po = Pushover(self.api_token)
-            po.user(self.user_key)
             msg = po.msg(alarm_message)
             msg.set("title", alarm_subject)
 
