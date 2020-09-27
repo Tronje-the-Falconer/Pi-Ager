@@ -92,12 +92,12 @@
         return $value;
     }
 
-    function get_diagram_values($table)
+    function get_diagram_values($table, $nth_value)
     {
-        global $value_field, $last_change_field;
+        global $value_field, $last_change_field, $id_field;
         
         open_connection();
-        $sql = 'SELECT ' . $value_field . ', ' .$last_change_field . ' FROM ' . $table;
+        $sql = 'SELECT ' . $value_field . ', ' .$last_change_field . ' FROM ' . $table . ' WHERE (' . $id_field . ' % ' . $nth_value . ') = 0';
         $result = get_query_result($sql);
         while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
         {
@@ -153,7 +153,7 @@
     }
 
     function get_current_values_for_monitoring(){
-        global $current_values_table, $key_field, $value_field, $sensor_temperature_key, $sensor_humidity_key, $scale1_key, $scale2_key, $last_change_field, $last_change_temperature_json_key, $last_change_humidity_json_key, $last_change_scale1_json_key, $last_change_scale2_json_key;
+        global $current_values_table, $key_field, $value_field, $sensor_temperature_key, $sensor_humidity_key, $scale1_key, $scale2_key, $last_change_field, $last_change_temperature_json_key, $last_change_humidity_json_key, $last_change_scale1_json_key, $last_change_scale2_json_key, $server_time_json_key;
         
         open_connection();
         $sql = 'SELECT * FROM ' . $current_values_table;
@@ -180,6 +180,7 @@
                $values[$last_change_scale2_json_key] =  $dataset[$last_change_field];
            }
         }
+        $values[$server_time_json_key] = time();
         close_database();
         return $values;
     }
