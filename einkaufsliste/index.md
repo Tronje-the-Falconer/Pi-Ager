@@ -101,7 +101,7 @@ Wer also selbst löten kann, baucht folgende Komponenten:
    * Komponenten die bei Reichelt nicht erhältlich sind:
     * Die 2,5mm SMD Klinkenbuchsen sind bei Reichelt leider nicht lieferbar, hier zwei Bezugsquellen:
        * 4 x 2,5 mm Klinkenbuchse (bevorzugte Variante) - [SJ 2523](https://www.mouser.de/ProductDetail/CUI/SJ-2523-SMT-TR/?qs=WyjlAZoYn50TRxpi%2fhdHvw==) (Mouser)
-       * 3 x 2A Sicherung [MINISMDC200F-2 ](https://www.mouser.de/ProductDetail/Littelfuse/MINISMDC200F-2?qs=sGAEpiMZZMsxR%252bBXi4wRUNXkmM90UIcXt9OjDxSw2bA%3d) (Mouser)
+       * 2 x 2A Sicherung [MINISMDC200F-2 ](https://www.mouser.de/ProductDetail/Littelfuse/MINISMDC200F-2?qs=sGAEpiMZZMsxR%252bBXi4wRUNXkmM90UIcXt9OjDxSw2bA%3d) (Mouser)
        * 1 x 1,1A Sicherung [MINISMDC100F-2 ](https://www.mouser.de/ProductDetail/Littelfuse/MINISMDC100F-2?qs=sGAEpiMZZMsxR%252bBXi4wRUNXkmM90UIcXjShDHv3PYgE%3d) (Mouser)
        * Die Sicherungen findet man auch im China (ALiExpress)
 
@@ -117,12 +117,6 @@ Wer also selbst löten kann, baucht folgende Komponenten:
        * 1 x Anschlussklemmensystem 4-pol RM5,08 - [AKL 249-04](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-04/3/index.html?ACTION=3&LA=517&ARTICLE=36688&GROUPID=7543&trstct=lsbght_sldr::36703) (Reichelt - nicht im Warenkorb enthalten)
        * 3 x Anschlussklemmensystem 5-pol RM5,08 - [AKL 249-05](https://www.reichelt.de/Steckbare-Anschlussklemmen/AKL-249-05/3/index.html?ACTION=3&LA=517&ARTICLE=36689&GROUPID=7543&trstct=lsbght_sldr::36696) (Reichelt - nicht im Warenkorb enthalten) 
 
-#### Sensor Platine
-
-* Bauteile für die Sensorplatine:
-    * 2 x SMD-Widerstand, 0805, 10 kOhm, 125 mW, 1%- [RND 0805 1 10K ](https://www.reichelt.de/smd-widerstand-0805-10-kohm-125-mw-1-rnd-0805-1-10k-p183251.html?) (Reichelt EKL)
-    * Option - Pufferung Spannungsversorgung Sensor (auf Sensorplatine):
-    * 1 x SMD Kondenator G1206 - 100µF 6,3V [X5R-G1206 100/6](https://www.reichelt.de/smd-vielschichtkondensator-g1206-100-f-6-3v-x5r-g1206-100-6-p89744.html?) (Reichelt EKL)
 
 #### Waagen Module
  
