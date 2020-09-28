@@ -167,11 +167,16 @@ Hier ein mögliches Schütz dass man einsetzen könnte (ob es zu eurem Kompresso
  
 #### Sensor
 
-* Temperatur-Feuchtigkeitssensor (Empfohlen: Sensirion SHT75) [Sensirion SHT75](https://www.voelkner.de/products/70227/Feuchte-und-Temperaturesensor-Sht75.html?frm=ffs__SHT%2075) (Voelkner)
-  * Unterstützt:
+* Temperatur-Feuchtigkeitssensor (Sensirion SHT3X) 
+    * [Sensirion SHT3x Variannte 1 - blau](https://www.reichelt.de/entwicklerboards-temperatur-und-feuchtigkeitssensor-sht31-d-debo-temp-hum-p235485.html?PROVID=2788&gclid=Cj0KCQjwk8b7BRCaARIsAARRTL6k6-cO-SSTQE_zNjwCXU2QgORjfiIkMufwe5C0RatENoLGv4lxxjkaApNyEALw_wcB) (Reichelt)
+    * [Sensirion SHT3x Variannte 2 - violett](https://www.amazon.de/ACAMPTAR-Temperatur-Feuchtigkeitssensor-Breakout-Wettermodul/dp/B07QS6CXGX/ref=asc_df_B07QS6CXGX/?tag=googshopde-21&linkCode=df0&hvadid=447530082948&hvpos=&hvnetw=g&hvrand=4683590616312955685&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9044713&hvtargid=pla-955407784206&psc=1&th=1&psc=1) (Amazon)
+    * 3D Gehäuse [STL Dateien Gehäuse](https://www.thingiverse.com/thing:4227612) (Thigniverse)
+* SHT 85 [SHT85](https://www.mouser.de/ProductDetail/Sensirion/SHT85?qs=byeeYqUIh0OExKWW1Eu%252BLQ%3D%3D&gclid=Cj0KCQjwk8b7BRCaARIsAARRTL6jkEu0gmwoSHlY3vacO1ct5fAOmUNdLMsSyIZksNNTLvZpIhAjp8MaAkNqEALw_wcB) (mouser)
+* SHT75 - nicht mehr lieferbar
+* Folgende Sensoren kann man im Moment noch nutzen werden aber in einer der nächsten Release nicht mehr unterstützt:
     * [DHT22](https://www.amazon.de/gp/product/B01M9H3GID/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1) (Amazon)
     * [DHT11](https://www.amazon.de/gp/product/B01M7VQLWD/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1) (Amazon)
-* Sensorgehäuse für SHT75 [Gehäuse SHT75](https://www.voelkner.de/products/25666/Sensorgehaeuse-Schwarz.html) (Voelkner)
+* Sensorgehäuse für SHT85 [Gehäuse SHT75](https://www.voelkner.de/products/25666/Sensorgehaeuse-Schwarz.html) (Voelkner)
 * abgeschirmtes Kabel passend für das Sensorgehäuse [ Sensorkabel](https://www.voelkner.de/products/36610/Kabel-6-Polig-Geschirmt-3m.html) (Voelkner)
 * Buchse für SHT75 um den Sensor steckbar zu machen [Buschse RM 1,27](https://www.voelkner.de/products/297503/Fischer-Elektronik-Buchsenleiste-RM-1-27-mm-Inhalt-1-St..html?ref=43&products_model=D23000&gclid=EAIaIQobChMIm4_MyemC2AIVxTLTCh3AEA3UEAQYASABEgIIw_D_BwE) (Voelkner)
 
