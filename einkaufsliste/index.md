@@ -19,13 +19,14 @@ Wenn jemand fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möc
 
 #### Raspberry Pi
 
+
+* Aktuelle Softeareversion: 3.2.2 Bugfix1 
 * [Pi zero W](https://shop.pimoroni.de/products/raspberry-pi-zero-w) Dieses ist die empfohlene Variante da die Platine dafür ausgelegt ist und man meistens auch das integrierte Wlan Modul nutzen kann.
 * !!! Achtung keinen Zero WH kaufen da diese Variannte die Stiftleiste schon draufgelötet hat !!!
 * Alternative 1: 
   * [Pi zero](http://www.whereismypizero.com/) Kann auch genutzt werden, dann braucht man aber ein entsprechendes [Wlan  Modul](https://www.reichelt.de/WLAN-Adapter/EDIMAX-EW-7811UN/3/index.html?&ARTICLE=99944) mit [Adapterkabel](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1) (siehe auch unten)
 * weitere Alternativen:  
-!!!! Achtung !!!! Die Beta Version 3.1.0 ist bisher nur mit dem Pi Zero W ausführlich gestest. Mit den anderen Raspberrys kann es noch zu Problemen führen: z.B. die Bibliothken der Sensoren funktionieren nicht richtig mit den Modellen. Wir sind dran das Problem zu beheben.
-'Sollte man eines der folgenden Raspberry Pi Modelle einsetzen, so muss man ein entsprechende [Jumperkabel](https://www.reichelt.de/Weiteres-Zubehoer/DEBO-KABELSET2/3/index.html?ACTION=3&GROUPID=6671&ARTICLE=176618&OFFSET=16&SID=92WGXOUawQATIAAEvA6EI49c1a6b34c1caf234fea075f5de4093c&LANGUAGE=EN) nutzen je nach dem auch ein [Wlan  Modul](https://www.reichelt.de/WLAN-Adapter/EDIMAX-EW-7811UN/3/index.html?&ARTICLE=99944) mit [Adapterkabel](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1)
+ 'Sollte man eines der folgenden Raspberry Pi Modelle einsetzen, so muss man ein entsprechende [Jumperkabel](https://www.reichelt.de/Weiteres-Zubehoer/DEBO-KABELSET2/3/index.html?ACTION=3&GROUPID=6671&ARTICLE=176618&OFFSET=16&SID=92WGXOUawQATIAAEvA6EI49c1a6b34c1caf234fea075f5de4093c&LANGUAGE=EN) nutzen je nach dem auch ein [Wlan  Modul](https://www.reichelt.de/WLAN-Adapter/EDIMAX-EW-7811UN/3/index.html?&ARTICLE=99944) mit [Adapterkabel](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1)
   * [Raspberry Pi 2 ](https://www.voelkner.de/products/776427/Raspberry-Pi-2-Model-B-1-GB-ohne-Betriebssystem.html?frm=ffs__Raspberry)
   * [Pi 3B](https://www.voelkner.de/products/882046/Raspberry-Pi-3-Model-B-1-GB-ohne-Betriebssystem.html)
   * [Pi 3B+](https://www.amazon.de/Raspberry-Model-Mainboard-MicroSD-Speicherkartenslot/dp/B00LPESRUK)
@@ -100,7 +101,8 @@ Wer also selbst löten kann, baucht folgende Komponenten:
  * (2) Anmerkung
    * Komponenten die bei Reichelt nicht erhältlich sind:
     * Die 2,5mm SMD Klinkenbuchsen sind bei Reichelt leider nicht lieferbar, hier zwei Bezugsquellen:
-       * 4 x 2,5 mm Klinkenbuchse (bevorzugte Variante) - [SJ 2523](https://www.mouser.de/ProductDetail/CUI/SJ-2523-SMT-TR/?qs=WyjlAZoYn50TRxpi%2fhdHvw==) (Mouser)
+       * 3 x 2,5 mm Klinkenbuchse (bevorzugte Variante) - [SJ 2523](https://www.mouser.de/ProductDetail/CUI/SJ-2523-SMT-TR/?qs=WyjlAZoYn50TRxpi%2fhdHvw==) (Mouser)
+       * 1 x 3,5 mm Klinkenbuchse (bevorzugte Variante) - [SJ 3523](https://www.mouser.de/ProductDetail/CUI-Devices/SJ-3523-SMT-TR?qs=%2Fha2pyFadug%2FV73yDUYRuD0IFnHG0voBw8%252BIF5qrvSfPH1qlnUiXig%3D%3D) (Mouser)
        * 2 x 2A Sicherung [MINISMDC200F-2 ](https://www.mouser.de/ProductDetail/Littelfuse/MINISMDC200F-2?qs=sGAEpiMZZMsxR%252bBXi4wRUNXkmM90UIcXt9OjDxSw2bA%3d) (Mouser)
        * 1 x 1,1A Sicherung [MINISMDC100F-2 ](https://www.mouser.de/ProductDetail/Littelfuse/MINISMDC100F-2?qs=sGAEpiMZZMsxR%252bBXi4wRUNXkmM90UIcXjShDHv3PYgE%3d) (Mouser)
        * Die Sicherungen findet man auch im China (ALiExpress)
