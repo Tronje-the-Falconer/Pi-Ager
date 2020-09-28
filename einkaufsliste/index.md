@@ -185,7 +185,7 @@ Hier ein mögliches Schütz dass man einsetzen könnte (ob es zu eurem Kompresso
 (Achtung: Funktion ist z.Zt. noch nicht implementiert)
 
 * Für diese Funktion ist die Unterstützung von 1000 K NTC Sensoren geplant. 
-  * 1000K NTC Sensor [1000K NTC](https://www.wlanthermostuff.de/store/) (Wlanthermostuff)
+  * NTC Sensor [NTC Sensoren](https://wlanthermo.de/shop/categories/zubeh%C3%B6r.1/) (Wlanthermoshop)
 
 #### Be- und Entlüftung
 
