@@ -176,7 +176,7 @@ Hier ein mögliches Schütz dass man einsetzen könnte (ob es zu eurem Kompresso
 * Folgende Sensoren kann man im Moment noch nutzen werden aber in einer der nächsten Release nicht mehr unterstützt:
     * [DHT22](https://www.amazon.de/gp/product/B01M9H3GID/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1) (Amazon)
     * [DHT11](https://www.amazon.de/gp/product/B01M7VQLWD/ref=oh_aui_detailpage_o02_s00?ie=UTF8&psc=1) (Amazon)
-* Sensorgehäuse für SHT85 [Gehäuse SHT75](https://www.voelkner.de/products/25666/Sensorgehaeuse-Schwarz.html) (Voelkner)
+* Sensorgehäuse für SHT75/85 [Gehäuse SHT75/85](https://www.voelkner.de/products/25666/Sensorgehaeuse-Schwarz.html) (Voelkner)
 * abgeschirmtes Kabel passend für das Sensorgehäuse [ Sensorkabel](https://www.voelkner.de/products/36610/Kabel-6-Polig-Geschirmt-3m.html) (Voelkner)
 * Buchse für SHT75 um den Sensor steckbar zu machen [Buschse RM 1,27](https://www.voelkner.de/products/297503/Fischer-Elektronik-Buchsenleiste-RM-1-27-mm-Inhalt-1-St..html?ref=43&products_model=D23000&gclid=EAIaIQobChMIm4_MyemC2AIVxTLTCh3AEA3UEAQYASABEgIIw_D_BwE) (Voelkner)
 
