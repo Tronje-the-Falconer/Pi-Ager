@@ -13,6 +13,10 @@ title: "Steuerung"
 
 #### Platine
 
+Hier sind alle Schatpläne der einzelnen Platinen Versionen zu finden:
+https://github.com/Tronje-the-Falconer/Pi-Ager/tree/resources/platine/circuit
+
+
 ##### WICHTIGER HINWEIS!
 
 Wir haben einen wichtigen Hinweis zum Thema Pi-Ager Platine in Bezug auf die HX 711 Wägemodule in der Zusammenschaltung mit dem Raspberry Pi.
