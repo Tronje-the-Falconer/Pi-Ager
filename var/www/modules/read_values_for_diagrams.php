@@ -181,6 +181,22 @@
     $last_timestamp_diagram = get_current_time();
     $first_timestamp_diagram = get_defined_first_timestamp($last_timestamp_diagram, $diagram_mode);
     
+ 
+    $meat4_sensortype = get_table_value($config_settings_table, $meat4_sensortype_key);
+    $config_sensor4 = get_meatsensor_table_row( $meat4_sensortype );
+    
+    $sensor4_is_current = false;
+    $sensor4_current_mode = 'AC';
+    if (strncmp($config_sensor4['name'], 'LEM', 3) === 0)
+    {
+        $sensor4_is_current = true;
+        if ($config_sensor4['Mode'] == 'DC')
+        {
+            $sensor4_current_mode = 'DC';   
+        }            
+    }
+
+    
     // echo "Temperatur<br>";
     $nth_value = 1;
     if ($diagram_mode == 'month') {
@@ -246,6 +262,35 @@
     // $scale2_timestamps_axis = get_timestamps_for_time_axis($scale2_timestamps, $first_timestamp_scale2);
     // $scale2_timestamps_axis_text = get_text_array_for_time_axis($scale2_timestamps_axis);
     // $scale2_dataset = get_dataset_of_values($scale2_values, $scale2_timestamps_axis);
+    
+    // echo "thermometer1_values<br>";
+    $thermometer1_values = get_diagram_values($data_sensor_temperature_meat1_table, $nth_value);
+    $is_OnOff_value = False;
+    $thermometer1_data_diagram = get_data_for_diagram($thermometer1_values, $is_OnOff_value);
+    $thermometer1_timestamps_axis_text = $thermometer1_data_diagram[0];
+    $thermometer1_dataset = $thermometer1_data_diagram[1];
+    
+    // echo "thermometer2_values<br>";
+    $thermometer2_values = get_diagram_values($data_sensor_temperature_meat2_table, $nth_value);
+    $is_OnOff_value = False;
+    $thermometer2_data_diagram = get_data_for_diagram($thermometer2_values, $is_OnOff_value);
+    $thermometer2_timestamps_axis_text = $thermometer2_data_diagram[0];
+    $thermometer2_dataset = $thermometer2_data_diagram[1];
+    
+    // echo "thermometer3_values<br>";
+    $thermometer3_values = get_diagram_values($data_sensor_temperature_meat3_table, $nth_value);
+    $is_OnOff_value = False;
+    $thermometer3_data_diagram = get_data_for_diagram($thermometer3_values, $is_OnOff_value);
+    $thermometer3_timestamps_axis_text = $thermometer3_data_diagram[0];
+    $thermometer3_dataset = $thermometer3_data_diagram[1];
+    
+    // echo "thermometer4_values<br>";
+    $thermometer4_values = get_diagram_values($data_sensor_temperature_meat4_table, $nth_value);
+    $is_OnOff_value = False;
+    $thermometer4_data_diagram = get_data_for_diagram($thermometer4_values, $is_OnOff_value);
+    $thermometer4_timestamps_axis_text = $thermometer4_data_diagram[0];
+    $thermometer4_dataset = $thermometer4_data_diagram[1];
+
     
     // echo "uv_light_values<br>";
     $uv_light_values = get_diagram_values($status_uv_table, 1);
