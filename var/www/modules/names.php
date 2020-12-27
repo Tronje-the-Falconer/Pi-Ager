@@ -26,6 +26,7 @@ $agingtable_salami_table = 'agingtable_salami';
 $agingtable_dryaging1_table = 'agingtable_dryaging1';
 $agingtable_dryaging2_table = 'agingtable_dryaging1';
 $system_table = 'system';
+$meat_sensortypes = 'meat_sensortypes';
 
 #----------------------------table keys;
 $switch_on_cooling_compressor_key = 'switch_on_cooling_compressor';
@@ -93,6 +94,15 @@ $pi_revision_key = 'pi_revision';
 $pi_ager_version_key = 'pi_ager_version';
 $status_uv_manual_key = 'status_uv_manual';
 $sensorbus_key = 'sensorbus';
+$temperature_meat1_key = 'temperature_meat1';
+$temperature_meat2_key = 'temperature_meat2';
+$temperature_meat3_key = 'temperature_meat3';
+$temperature_meat4_key = 'temperature_meat4';
+$meat1_sensortype_key = 'meat1_sensortype';
+$meat2_sensortype_key = 'meat2_sensortype';
+$meat3_sensortype_key = 'meat3_sensortype';
+$meat4_sensortype_key = 'meat4_sensortype';
+
 
 #-----------------------------table fields;
 $key_field = 'key';
@@ -109,6 +119,16 @@ $agingtable_exhaust_air_duration_field = 'exhaust_air_duration';
 $agingtable_exhaust_air_period_field = 'exhaust_air_period';
 $agingtable_days_field = 'days';
 $agingtable_comment_field = 'comment';
+$meat_sensortypes_name_field = 'name';
+$meat_sensortypes_a_field = 'a';
+$meat_sensortypes_b_field = 'b';
+$meat_sensortypes_c_field = 'c';
+$meat_sensortypes_Rn_field = 'Rn';
+$meat_sensortypes_Mode_field = 'Mode';
+$meat_sensortypes_RefVoltage_field = 'RefVoltage';
+$meat_sensortypes_Sensitivity_field = 'Sensitivity';
+$meat_sensortypes_Turns_field = 'Turns';
+$meat_sensortypes_nAverage_field = 'nAverage';
 
 #-----------------------------Paths and urls
 $thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/';
@@ -123,5 +143,13 @@ $last_change_temperature_json_key = 'last_change_temperature';
 $last_change_humidity_json_key = 'last_change_humidity';
 $last_change_scale1_json_key = 'last_change_scale1';
 $last_change_scale2_json_key = 'last_change_scale2';
+$last_change_temperature_meat1_json_key = 'last_change_temperature_meat1';
+$last_change_temperature_meat2_json_key = 'last_change_temperature_meat2';
+$last_change_temperature_meat3_json_key = 'last_change_temperature_meat3';
+$last_change_temperature_meat4_json_key = 'last_change_temperature_meat4';
+$meat1_sensor_name_json_key = 'meat1_sensor_name';
+$meat2_sensor_name_json_key = 'meat2_sensor_name';
+$meat3_sensor_name_json_key = 'meat3_sensor_name';
+$meat4_sensor_name_json_key = 'meat4_sensor_name';
 $server_time_json_key = 'server_time';
 ?>

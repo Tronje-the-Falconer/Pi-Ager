@@ -55,7 +55,12 @@
                                             include 'modules/read_values_for_diagrams.php';
                                         ?>
                                         <canvas id="temperature_humidity_chart"></canvas>
-                                        <canvas id="scales_chart"></canvas>
+                                        <canvas id="scales1_chart"></canvas>
+                                        <canvas id="scales2_chart"></canvas>
+                                        <canvas id="thermometer1_chart"></canvas> 
+                                        <canvas id="thermometer2_chart"></canvas> 
+                                        <canvas id="thermometer3_chart"></canvas> 
+                                        <canvas id="thermometer4_chart"></canvas> 
                                         <div class="on_off_chart"><canvas id="cooler_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="heater_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="humidifier_chart"></canvas></div>
@@ -64,6 +69,7 @@
                                         <div class="on_off_chart"><canvas id="exhaust_air_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="uv_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="light_chart"></canvas></div>
+                                        
                                         <script>
                                         var timeFormat = 'MM/DD/YYYY HH:mm';
                                         
@@ -112,7 +118,11 @@
                                                     intersect: false,
                                                     callbacks: {
                                                         label: function(tooltipItem, data) {
-                                                            return Number(tooltipItem.yLabel).toFixed(1);
+                                                            if (tooltipItem.datasetIndex === 0) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                            } else if (tooltipItem.datasetIndex === 1) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' %';
+                                                            }
                                                         }
                                                     }
                                                 },
@@ -181,19 +191,14 @@
                                             }
                                         };
                                         
-                                        // Waagen
-                                        var scales_chart = document.getElementById("scales_chart");
-                                        var config_scales_chart = {
+                                        // Waage 1
+                                        var scales1_chart = document.getElementById("scales1_chart");
+                                        var config_scales1_chart = {
                                             type: 'line',
                                             data: {
                                                 labels: 
                                                     <?php 
-                                                    if (strlen($scale1_timestamps_axis_text) > strlen($scale2_timestamps_axis_text)){
-                                                        echo $scale1_timestamps_axis_text;
-                                                    }
-                                                    else{
-                                                        echo $scale2_timestamps_axis_text;
-                                                    }
+                                                    echo $scale1_timestamps_axis_text;
                                                     ?>,
                                                 datasets: [{
                                                     label: '<?php echo _("scale") ?> 1',
@@ -207,25 +212,12 @@
                                                     pointHitRadius: 5,';} ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
-                                                },
-                                                {
-                                                    label: '<?php echo _("scale") ?> 2',
-                                                    yAxisID: 'scale2',
-                                                    data: <?php echo json_encode($scale2_dataset); ?>,
-                                                    backgroundColor: '#BF9543',
-                                                    borderColor: '#BF9543',
-                                                    borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
-                                                    cubicInterpolationMode: 'monotone',
-                                                    fill: false
                                                 }]
                                             },
                                             options: {
                                                 title: {
                                                     display: true,
-                                                    text: '<?php echo _("scale") ?> 1 & 2',
+                                                    text: '<?php echo _("scale") ?> 1',
                                                     fontSize: 24
                                                 },
                                                 tooltips: {
@@ -233,7 +225,7 @@
                                                     intersect: false,
                                                     callbacks: {
                                                         label: function(tooltipItem, data) {
-                                                            return Number(tooltipItem.yLabel).toFixed(1);
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' gr';
                                                         }
                                                     }
                                                 },
@@ -289,7 +281,64 @@
                                                             //stepSize: 1
                                                         }
                                                         
-                                                    },
+                                                    }]
+                                                }
+                                            }
+                                        };
+                                        
+                                        
+                                        // Waage 2
+                                        var scales2_chart = document.getElementById("scales2_chart");
+                                        var config_scales2_chart = {
+                                            type: 'line',
+                                            data: {
+                                                labels: 
+                                                    <?php 
+                                                    echo $scale2_timestamps_axis_text;
+                                                    ?>,
+                                                datasets: [
+                                                {
+                                                    label: '<?php echo _("scale") ?> 2',
+                                                    yAxisID: 'scale2',
+                                                    data: <?php echo json_encode($scale2_dataset); ?>,
+                                                    backgroundColor: '#BF9543',
+                                                    borderColor: '#BF9543',
+                                                    borderWidth: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                }]
+                                            },
+                                            options: {
+                                                title: {
+                                                    display: true,
+                                                    text: '<?php echo _("scale") ?> 2',
+                                                    fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' gr';
+                                                        }
+                                                    }
+                                                },
+                                                scales: {
+                                                    xAxes: [{
+                                                        type: "time",
+                                                        time: {
+                                                            displayFormats: {
+                                                                second: 'HH:mm:ss',
+                                                                minute: 'HH:mm',
+                                                                hour: 'MMM D, H[h]'
+                                                            },
+                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                                        },
+                                                    }, ],
+                                                    yAxes: [
                                                     {
                                                         scaleLabel: {
                                                             display: true,
@@ -299,7 +348,7 @@
                                                         },
                                                         id: 'scale2',
                                                         type: 'linear',
-                                                        position: 'right',
+                                                        position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 if (Math.round(value) === value) {
@@ -336,7 +385,333 @@
                                             }
                                         };
                                         
+                                        // Meat thermometer 1
+                                        var thermometer1_chart = document.getElementById("thermometer1_chart");
+                                        var config_thermometer1_chart = {
+                                            type: 'line',
+                                            data: {
+                                                labels: 
+                                                    <?php 
+                                                    echo $thermometer1_timestamps_axis_text;
+                                                    ?>,
+                                                datasets: [
+                                                {
+                                                    label: '<?php echo _("temperature") ?> 1',
+                                                    yAxisID: 'temperature',
+                                                    data: <?php echo json_encode($thermometer1_dataset); ?>,
+                                                    backgroundColor: '#ff0000',
+                                                    borderColor: '#ff0000',
+                                                    borderWidth: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                }]
+                                            },
+                                            options: {
+                                                title: {
+                                                    display: true,
+                                                    text: '<?php echo _("Thermometer") ?> 1',
+                                                    fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                        }
+                                                    }
+                                                },
+                                                scales: {
+                                                    xAxes: [{
+                                                        type: "time",
+                                                        time: {
+                                                            displayFormats: {
+                                                                second: 'HH:mm:ss',
+                                                                minute: 'HH:mm',
+                                                                hour: 'MMM D, H[h]'
+                                                            },
+                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                                        },
+                                                    }, ],
+                                                    yAxes: [
+                                                    {
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php echo _("temperature") . ' 1'; ?>',
+                                                        //    fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'temperature',
+                                                        type: 'linear',
+                                                        position: 'left',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                if (Math.round(value) === value) {
+                                                                return '  ' + value + ' °C' + '  ';
+                                                                }
+                                                            },
+                                                            fontColor: '#000000',
+                                                            //    fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: 30, 
+                                                            min: -4
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        };
                                         
+                                        // Meat thermometer 2
+                                        var thermometer2_chart = document.getElementById("thermometer2_chart");
+                                        var config_thermometer2_chart = {
+                                            type: 'line',
+                                            data: {
+                                                labels: 
+                                                    <?php 
+                                                    echo $thermometer2_timestamps_axis_text;
+                                                    ?>,
+                                                datasets: [
+                                                {
+                                                    label: '<?php echo _("temperature") ?> 2',
+                                                    yAxisID: 'temperature',
+                                                    data: <?php echo json_encode($thermometer2_dataset); ?>,
+                                                    backgroundColor: '#ff0000',
+                                                    borderColor: '#ff0000',
+                                                    borderWidth: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                }]
+                                            },
+                                            options: {
+                                                title: {
+                                                    display: true,
+                                                    text: '<?php echo _("Thermometer") ?> 2',
+                                                    fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                        }
+                                                    }
+                                                },
+                                                scales: {
+                                                    xAxes: [{
+                                                        type: "time",
+                                                        time: {
+                                                            displayFormats: {
+                                                                second: 'HH:mm:ss',
+                                                                minute: 'HH:mm',
+                                                                hour: 'MMM D, H[h]'
+                                                            },
+                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                                        },
+                                                    }, ],
+                                                    yAxes: [
+                                                    {
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php echo _("temperature") . ' 2'; ?>',
+                                                        //    fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'temperature',
+                                                        type: 'linear',
+                                                        position: 'left',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                if (Math.round(value) === value) {
+                                                                return '  ' + value + ' °C' + '  ';
+                                                                }
+                                                            },
+                                                            fontColor: '#000000',
+                                                            //    fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: 30, 
+                                                            min: -4
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        };
+                                                                                                                        
+                                        
+                                        // Meat thermometer 3
+                                        var thermometer3_chart = document.getElementById("thermometer3_chart");
+                                        var config_thermometer3_chart = {
+                                            type: 'line',
+                                            data: {
+                                                labels: 
+                                                    <?php 
+                                                    echo $thermometer3_timestamps_axis_text;
+                                                    ?>,
+                                                datasets: [
+                                                {
+                                                    label: '<?php echo _("temperature") ?> 3',
+                                                    yAxisID: 'temperature',
+                                                    data: <?php echo json_encode($thermometer3_dataset); ?>,
+                                                    backgroundColor: '#ff0000',
+                                                    borderColor: '#ff0000',
+                                                    borderWidth: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                }]
+                                            },
+                                            options: {
+                                                title: {
+                                                    display: true,
+                                                    text: '<?php echo _("Thermometer") ?> 3',
+                                                    fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                        }
+                                                    }
+                                                },
+                                                scales: {
+                                                    xAxes: [{
+                                                        type: "time",
+                                                        time: {
+                                                            displayFormats: {
+                                                                second: 'HH:mm:ss',
+                                                                minute: 'HH:mm',
+                                                                hour: 'MMM D, H[h]'
+                                                            },
+                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                                        },
+                                                    }, ],
+                                                    yAxes: [
+                                                    {
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php echo _("temperature") . ' 3'; ?>',
+                                                        //    fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'temperature',
+                                                        type: 'linear',
+                                                        position: 'left',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                if (Math.round(value) === value) {
+                                                                return '  ' + value + ' °C' + '  ';
+                                                                }
+                                                            },
+                                                            fontColor: '#000000',
+                                                            //    fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: 30, 
+                                                            min: -4
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        };
+                                                                                                                        
+                                        
+                                        // Meat thermometer 4
+                                        var thermometer4_chart = document.getElementById("thermometer4_chart");
+                                        var config_thermometer4_chart = {
+                                            type: 'line',
+                                            data: {
+                                                labels: 
+                                                    <?php 
+                                                    echo $thermometer4_timestamps_axis_text;
+                                                    ?>,
+                                                datasets: [
+                                                {
+                                                    label: '<?php if ($sensor4_is_current == true) { echo _("Current"); } else { echo _("temperature") . '4';}?>',
+                                                    yAxisID: 'temperature',
+                                                    data: <?php echo json_encode($thermometer4_dataset); ?>,
+                                                    backgroundColor: '#ff0000',
+                                                    borderColor: '#ff0000',
+                                                    borderWidth: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                }]
+                                            },
+                                            options: {
+                                                title: {
+                                                    display: true,
+                                                    text: '<?php if ($sensor4_is_current == true){ if ($sensor4_current_mode == 'AC') { echo "AC-Current"; } else { echo "DC-Current"; }} else { echo _("Thermometer") . ' 4';} ?>',
+                                                    fontSize: 24
+                                                },
+                                                tooltips: {
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + '<?php if ($sensor4_is_current == true){ echo " A"; } else { echo " °C"; } ?>';
+                                                        }
+                                                    }
+                                                },
+                                                scales: {
+                                                    xAxes: [{
+                                                        type: "time",
+                                                        time: {
+                                                            displayFormats: {
+                                                                second: 'HH:mm:ss',
+                                                                minute: 'HH:mm',
+                                                                hour: 'MMM D, H[h]'
+                                                            },
+                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                                        },
+                                                    }, ],
+                                                    yAxes: [
+                                                    {
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php if ($sensor4_is_current == true) { echo _("Current"); } else { echo _("temperature") . '4';}?>',
+                                                        //    fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'temperature',
+                                                        type: 'linear',
+                                                        position: 'left',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                if (Math.round(value) === value) {
+                                                                return '  ' + value + '<?php if ($sensor4_is_current == true) { echo ' A'; } else { echo ' °C'; }?>' + '  ';
+                                                                }
+                                                            },
+                                                            fontColor: '#000000',
+                                                            //    fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: <?php if ($sensor4_is_current == true) { echo '15'; } else { echo '30'; }?>, 
+                                                            min: <?php if ($sensor4_is_current == true) { if ($sensor4_current_mode == 'AC') { echo '0'; } else { echo '-15'; }} else { echo '-4'; }?>
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        };
+                                                                                                                        
+                                                                                                                        
                                         // licht
                                         var light_chart = document.getElementById("light_chart");
                                         var config_light_chart = {
@@ -1147,7 +1522,12 @@
                                         
                                         window.onload = function() {
                                             window.temperature_humidity_chart = new Chart(temperature_humidity_chart, config_temperature_humidity_chart);
-                                            window.scales_chart = new Chart(scales_chart, config_scales_chart);
+                                            window.scales1_chart = new Chart(scales1_chart, config_scales1_chart);
+                                            window.scales2_chart = new Chart(scales2_chart, config_scales2_chart); 
+                                            window.thermometer1_chart = new Chart(thermometer1_chart, config_thermometer1_chart);
+                                            window.thermometer2_chart = new Chart(thermometer2_chart, config_thermometer2_chart);
+                                            window.thermometer3_chart = new Chart(thermometer3_chart, config_thermometer3_chart);
+                                            window.thermometer4_chart = new Chart(thermometer4_chart, config_thermometer4_chart);
                                             window.light_chart = new Chart(light_chart, config_light_chart);
 											window.uv_chart = new Chart(uv_chart, config_uv_chart);
                                             window.heater_chart = new Chart(heater_chart, config_heater_chart);

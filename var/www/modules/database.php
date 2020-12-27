@@ -151,11 +151,55 @@
         
         return $dataset;
     }
-
-    function get_current_values_for_monitoring(){
-        global $current_values_table, $key_field, $value_field, $sensor_temperature_key, $sensor_humidity_key, $scale1_key, $scale2_key, $last_change_field, $last_change_temperature_json_key, $last_change_humidity_json_key, $last_change_scale1_json_key, $last_change_scale2_json_key, $server_time_json_key;
+    
+    function get_meatsensors_dataset()
+    {
+        global $meat_sensortypes;
         
         open_connection();
+        $sql = 'SELECT * FROM ' . $meat_sensortypes;
+        
+        $result = get_query_result($sql);
+    
+        $index = 0;
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+            {
+            $meatsensors_rows[$index] = $dataset;
+            // Beispiel für späteren Aufruf: $meatsensors_rows[0]['name']
+            $index++;
+            }
+        close_database();
+        return $meatsensors_rows;
+    }
+    
+    function get_meatsensor_table_row( $sensortype_id )
+    {
+        global $id_field, $meat_sensortypes;
+        
+        open_connection();
+//        $sql = 'SELECT * FROM ' . $meat_sensortypes . ' WHERE ' . $id_field . ' = ' . intval($sensortype_id);
+        $sql = 'SELECT * FROM ' . $meat_sensortypes . ' WHERE id = ' . intval($sensortype_id);
+//        echo $sql;
+        $result = get_query_result($sql);
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+            {
+            $meatsensor_row = $dataset;
+            }
+        close_database();
+//        echo json_encode($meatsensor_row);
+        return $meatsensor_row;       
+    }
+    
+    function get_current_values_for_monitoring(){
+        global $current_values_table, $key_field, $value_field, $sensor_temperature_key, $sensor_humidity_key, $scale1_key, $scale2_key;
+        global $last_change_field, $last_change_temperature_json_key, $last_change_humidity_json_key, $last_change_scale1_json_key, $last_change_scale2_json_key, $server_time_json_key;
+        global $temperature_meat1_key, $temperature_meat2_key, $temperature_meat3_key, $temperature_meat4_key;
+        global $last_change_temperature_meat1_json_key, $last_change_temperature_meat2_json_key, $last_change_temperature_meat3_json_key, $last_change_temperature_meat4_json_key;
+        global $config_settings_table;
+        global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key;
+        global $meat1_sensor_name_json_key, $meat2_sensor_name_json_key, $meat3_sensor_name_json_key, $meat4_sensor_name_json_key;
+        
+        open_connection(); 
         $sql = 'SELECT * FROM ' . $current_values_table;
         // echo $sql;
         $result = get_query_result($sql);
@@ -179,9 +223,42 @@
            {
                $values[$last_change_scale2_json_key] =  $dataset[$last_change_field];
            }
+           elseif ($dataset[$key_field] == $temperature_meat1_key)
+           {
+               $values[$last_change_temperature_meat1_json_key] =  $dataset[$last_change_field];
+           }
+           elseif ($dataset[$key_field] == $temperature_meat2_key)
+           {
+               $values[$last_change_temperature_meat2_json_key] =  $dataset[$last_change_field];
+           }
+           elseif ($dataset[$key_field] == $temperature_meat3_key)
+           {
+               $values[$last_change_temperature_meat3_json_key] =  $dataset[$last_change_field];
+           }
+           elseif ($dataset[$key_field] == $temperature_meat4_key)
+           {
+               $values[$last_change_temperature_meat4_json_key] =  $dataset[$last_change_field];
+           }           
         }
-        $values[$server_time_json_key] = time();
         close_database();
+        
+        $values[$server_time_json_key] = time();
+
+        $meat1_sensortype_id = get_table_value($config_settings_table, $meat1_sensortype_key);
+        $meat2_sensortype_id = get_table_value($config_settings_table, $meat2_sensortype_key); 
+        $meat3_sensortype_id = get_table_value($config_settings_table, $meat3_sensortype_key);
+        $meat4_sensortype_id = get_table_value($config_settings_table, $meat4_sensortype_key);
+        
+        $row = get_meatsensor_table_row( $meat1_sensortype_id );
+        $values[$meat1_sensor_name_json_key] = $row['name'];
+        
+        $row = get_meatsensor_table_row( $meat2_sensortype_id );
+        $values[$meat2_sensor_name_json_key] = $row['name'];  
+        $row = get_meatsensor_table_row( $meat3_sensortype_id );
+        $values[$meat3_sensor_name_json_key] = $row['name'];
+        $row = get_meatsensor_table_row( $meat4_sensortype_id );
+        $values[$meat4_sensor_name_json_key] = $row['name'];  
+        
         return $values;
     }
     
@@ -508,15 +585,23 @@
         }
     
     function write_admin($language, $referenceunit_scale1, $measuring_interval_scale1, $measuring_duration_scale1, $saving_period_scale1, $samples_scale1, $spikes_scale1,
-                            $referenceunit_scale2, $measuring_interval_scale2, $measuring_duration_scale2, $saving_period_scale2, $samples_scale2, $spikes_scale2)
+                            $referenceunit_scale2, $measuring_interval_scale2, $measuring_duration_scale2, $saving_period_scale2, $samples_scale2, $spikes_scale2,
+                            $temp_sensor1, $temp_sensor2, $temp_sensor3, $temp_sensor4)
     {
-        global $value_field, $last_change_field, $key_field, $config_settings_table, $settings_scale1_table, $settings_scale2_table, $sensortype_key, $language_key,  $referenceunit_key, $scale_measuring_interval_key, $measuring_duration_key, $saving_period_key, $samples_key, $spikes_key;
+        global $value_field, $last_change_field, $key_field, $config_settings_table, $settings_scale1_table, $settings_scale2_table, $sensortype_key, $language_key;
+        global $referenceunit_key, $scale_measuring_interval_key, $measuring_duration_key, $saving_period_key, $samples_key, $spikes_key;
+        global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key;
         
         open_connection();
         
       #  get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($sensortype) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $sensortype_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($language) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $language_key . '"');
-        
+ 
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($temp_sensor1) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $meat1_sensortype_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($temp_sensor2) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $meat2_sensortype_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($temp_sensor3) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $meat3_sensortype_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($temp_sensor4) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $meat4_sensortype_key . '"');
+   
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($referenceunit_scale1) . ' WHERE ' . $key_field . ' = "' . $referenceunit_key . '"');
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($measuring_interval_scale1) . ' WHERE ' . $key_field . ' = "' . $scale_measuring_interval_key . '"');
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($measuring_duration_scale1) . ' WHERE ' . $key_field . ' = "' . $measuring_duration_key . '"');

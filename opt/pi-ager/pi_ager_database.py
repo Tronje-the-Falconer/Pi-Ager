@@ -250,6 +250,32 @@ def get_agingtable_as_rows(agingtable):
     close_database()
     return rows
 
+def get_meatsensor_types_table_as_rows():
+    """
+    function for reading the meatsensor_table
+    """
+    global cursor
+    sql='SELECT * from ' + pi_ager_names.meat_sensortypes_table
+    
+    open_database()
+    execute_query(sql)
+    rows = cursor.fetchall()
+    close_database()
+    return rows
+
+def get_meatsensor_parameter_row( id ):
+    """
+    function for reading parameter row of the meatsensor_table selected by id
+    """
+    global cursor
+    sql = 'SELECT * FROM ' + pi_ager_names.meat_sensortypes_table + ' WHERE id = ' + str(id)
+    
+    open_database()
+    execute_query(sql)
+    row = cursor.fetchone()
+    close_database()
+    return row
+
 def get_scale_settings_from_table(scale_settings_table):
     """
     function for reading the scale_settings-table
@@ -330,7 +356,7 @@ def get_status_uv_manual():
     status_uv_manual = get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_uv_manual_key)
     return status_uv_manual
     
-def write_current_sensordata(loopnumber, sensor_temperature, sensor_humidity):
+def write_current_sensordata(loopnumber, sensor_temperature, sensor_humidity, sensor_meat1, sensor_meat2, sensor_meat3, sensor_meat4):
     """
     function for writing diagram-relevant sensor data
     """
@@ -341,11 +367,21 @@ def write_current_sensordata(loopnumber, sensor_temperature, sensor_humidity):
         open_database()
         execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
         execute_query('INSERT INTO ' + pi_ager_names.data_sensor_humidity_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_humidity) + ',' + str(get_current_time()) + ')')
+        if (sensor_meat1 != None):
+            execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_meat1_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_meat1) + ',' + str(get_current_time()) + ')')
+        if (sensor_meat2 != None):
+            execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_meat2_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_meat2) + ',' + str(get_current_time()) + ')')
+        if (sensor_meat3 != None):
+            execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_meat3_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_meat3) + ',' + str(get_current_time()) + ')')
+        if (sensor_meat4 != None):
+            execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_meat4_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_meat4) + ',' + str(get_current_time()) + ')')
+
+        
         close_database()
 
-def write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier):
+def write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data):
     """
-    function for writing the current values
+    function for writing the current values including meat sensor values
     """
     
     write_changed_values(status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, status_uv, status_light, status_humidifier, status_dehumidifier)
@@ -363,6 +399,15 @@ def write_current(sensor_temperature, status_heater, status_exhaust_air, status_
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_humidifier) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_humidifier_key + '"')
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_dehumidifier) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_dehumidifier_key + '"')
     
+    temp = 'NULL' if (temp_sensor1_data == None) else str(temp_sensor1_data)
+    execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = ' + temp +' , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.temperature_meat1_key + '"')
+    temp = 'NULL' if (temp_sensor2_data == None) else str(temp_sensor2_data)
+    execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = ' + temp +' , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.temperature_meat2_key + '"')
+    temp = 'NULL' if (temp_sensor3_data == None) else str(temp_sensor3_data)
+    execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = ' + temp +' , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.temperature_meat3_key + '"')
+    temp = 'NULL' if (temp_sensor4_data == None) else str(temp_sensor4_data)
+    execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = ' + temp +' , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.temperature_meat4_key + '"')
+     
     close_database()
 
 def update_value_in_table(table, key, value):

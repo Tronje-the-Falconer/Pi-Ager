@@ -35,7 +35,11 @@
     $samples_scale2 = get_table_value($settings_scale2_table,$samples_key);
     $spikes_scale2 = get_table_value($settings_scale2_table,$spikes_key);
 
-    
+    $meat1_sensortype = get_table_value($config_settings_table, $meat1_sensortype_key);
+    $meat2_sensortype = get_table_value($config_settings_table, $meat2_sensortype_key);   
+    $meat3_sensortype = get_table_value($config_settings_table, $meat3_sensortype_key);   
+    $meat4_sensortype = get_table_value($config_settings_table, $meat4_sensortype_key);   
+        
     if ($sensortype == 1) {
         $sensorname = 'DHT11';
         $checked_sens_1 = 'checked="checked"';

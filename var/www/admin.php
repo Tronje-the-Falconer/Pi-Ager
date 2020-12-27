@@ -158,6 +158,131 @@
                                         <button class="art-button" type="button" onclick="help_scales_noneFunction()"><?php echo _('close'); ?></button>
                                     </p>
                                     <hr>
+                                    <!----------------------------------------------------------------------------------------Meat Thermometer-->
+                                    <table style="width: 100%;" class="miniature_writing">
+                                        <tr>
+                                            <td rowspan="6" class="td_png_icon"><h3><?php echo 'Thermometer'; ?></h3><img src="images/icons/temperature_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_thermometer_blockFunction()"><?php echo _('help'); ?></button></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text_left_padding"><?php echo 'Sensor 1'; ?>:</td>
+                                            <td class="text_left_padding">
+                                            <?php 
+                                                $meat_sensors = get_meatsensors_dataset();
+                                                if (isset($meat_sensors))
+                                                {
+                                                    $meatsensor_index = intval($meat1_sensortype);
+                                                    echo '<select name="temp_sensor1_admin">';
+                                                    foreach($meat_sensors as $meatsensor_row)
+                                                    {
+                                                        if (strncmp($meatsensor_row['name'], 'LEM', 3) !== 0)
+                                                        {
+                                                            if ($meatsensor_row[id] == $meatsensor_index)
+                                                            {
+                                                                echo '<option value="'.$meatsensor_row[id].'" selected>'.$meatsensor_row[name].'</option>';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<option value="'.$meatsensor_row[id].'">'.$meatsensor_row[name].'</option>';
+                                                            }
+                                                        }
+                                                    }
+                                                    echo '</select>';
+                                                }
+                                            ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text_left_padding"><?php echo 'Sensor 2'; ?>:</td>
+                                            <td class="text_left_padding">
+                                            <?php 
+                                                if (isset($meat_sensors))
+                                                {
+                                                    $meatsensor_index = intval($meat2_sensortype);
+                                                    echo '<select name="temp_sensor2_admin">';
+                                                    foreach($meat_sensors as $meatsensor_row)
+                                                    {
+                                                        if (strncmp($meatsensor_row['name'], 'LEM', 3) !== 0)
+                                                        {
+                                                            if ($meatsensor_row[id] == $meatsensor_index)
+                                                            {
+                                                                echo '<option value="'.$meatsensor_row[id].'" selected>'.$meatsensor_row[name].'</option>';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<option value="'.$meatsensor_row[id].'">'.$meatsensor_row[name].'</option>';
+                                                            }
+                                                        }
+                                                    }
+                                                    echo '</select>';
+                                                }
+                                            ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text_left_padding"><?php echo 'Sensor 3'; ?>:</td>
+                                            <td class="text_left_padding">
+                                            <?php 
+                                                if (isset($meat_sensors))
+                                                {
+                                                    $meatsensor_index = intval($meat3_sensortype);
+                                                    echo '<select name="temp_sensor3_admin">';
+                                                    foreach($meat_sensors as $meatsensor_row)
+                                                    {
+                                                        if (strncmp($meatsensor_row['name'], 'LEM', 3) !== 0)
+                                                        {
+                                                            if ($meatsensor_row[id] == $meatsensor_index)
+                                                            {
+                                                                echo '<option value="'.$meatsensor_row[id].'" selected>'.$meatsensor_row[name].'</option>';
+                                                            }
+                                                            else
+                                                            {
+                                                                echo '<option value="'.$meatsensor_row[id].'">'.$meatsensor_row[name].'</option>';
+                                                            }
+                                                        }
+                                                    }
+                                                    echo '</select>';
+                                                }
+                                            ?>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text_left_padding"><?php echo 'Sensor 4'; ?>:</td>
+                                            <td class="text_left_padding">
+                                            <?php 
+                                                if (isset($meat_sensors))
+                                                {
+                                                    $meatsensor_index = intval($meat4_sensortype);
+                                                    echo '<select name="temp_sensor4_admin">';
+                                                    foreach($meat_sensors as $meatsensor_row)
+                                                    {
+                                                        if ($meatsensor_row[id] == $meatsensor_index)
+                                                        {
+                                                            echo '<option value="'.$meatsensor_row[id].'" selected>'.$meatsensor_row[name].'</option>';
+                                                        }
+                                                        else
+                                                        {
+                                                            echo '<option value="'.$meatsensor_row[id].'">'.$meatsensor_row[name].'</option>';
+                                                        }
+                                                    }
+                                                    echo '</select>';
+                                                }
+                                            ?>
+                                            </td>
+                                        </tr>                                        
+                                    </table>
+                                    <script>
+                                        function help_thermometer_blockFunction() {
+                                            document.getElementById('help_thermometer').style.display = 'block';
+                                        }
+                                        function help_thermometer_noneFunction() {
+                                            document.getElementById('help_thermometer').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_thermometer" class="help_p">
+                                        <?php echo _('Select your meat thermometer types for upto 4 input channels.<br>Select ------ for channels without sensors<br>'); ?>
+                                        <button class="art-button" type="button" onclick="help_thermometer_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p>
+                                    <hr>                                    
                                         <!----------------------------------------------------------------------------------------Language-->
                                         <table style="width: 100%;" class="miniature_writing">
                                             <tr>
@@ -168,7 +293,6 @@
                                                     <input type="radio" name="language_admin" value="2" <?php echo $checked_language_2; ?>/><label> en_EN</label><br>
                                                     <br>
                                                 </td>
-                                                
                                             </tr>
                                         </table>
                                         <script>
@@ -184,8 +308,6 @@
                                              echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_language_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
-                                        <br>
-                                        <br>
                                         <table style="width: 100%; align: center;">
                                             <tr>
                                                 <td style="width: 50%;">&nbsp;</td>

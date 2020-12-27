@@ -33,7 +33,7 @@ data_sensor_temperature_meat3_table = 'sensor_temperature_meat3_data'
 data_sensor_temperature_meat4_table = 'sensor_temperature_meat4_data'
 debug_table = 'debug'
 system_table = 'system'
-
+meat_sensortypes_table = 'meat_sensortypes'
 
 # table keys
 switch_on_cooling_compressor_key = 'switch_on_cooling_compressor'
@@ -80,10 +80,6 @@ status_scale1_key = 'status_scale1'
 status_scale2_key = 'status_scale2'
 status_tara_scale1_key = 'status_tara_scale1'
 status_tara_scale2_key = 'status_tara_scale2'
-status_temperature_meat1_key = 'status_temperature_meat1'
-status_temperature_meat2_key = 'status_temperature_meat2'
-status_temperature_meat3_key = 'status_temperature_meat3'
-status_temperature_meat4_key = 'status_temperature_meat4'
 status_light_manual_key = 'status_light_manual'
 status_uv_manual_key = 'status_uv_manual'
 scale1_key = 'scale1'
@@ -98,6 +94,7 @@ bits_to_read_key = 'bits_to_read'
 referenceunit_key = 'referenceunit'
 scale_measuring_interval_key = 'measuring_interval'
 save_temperature_humidity_loops_key = 'save_temperature_humidity_loops'
+sensorbus_key = 'sensorbus'
 loglevel_file_key = 'loglevel_file'
 loglevel_console_key = 'loglevel_console'
 agingtable_period_key = 'agingtable_period'
@@ -116,6 +113,15 @@ calibrate_scale1_key = 'calibrate_scale1'
 calibrate_scale2_key = 'calibrate_scale2'
 calibrate_weight_key = 'calibrate_weight'
 offset_scale_key = 'offset'
+temperature_meat1_key = 'temperature_meat1'
+temperature_meat2_key = 'temperature_meat2'
+temperature_meat3_key = 'temperature_meat3'
+temperature_meat4_key = 'temperature_meat4'
+meat1_sensortype_key = 'meat1_sensortype'
+meat2_sensortype_key = 'meat2_sensortype'
+meat3_sensortype_key = 'meat3_sensortype'
+meat4_sensortype_key = 'meat4_sensortype'
+
 
 # table fields
 key_field = 'key'
@@ -132,6 +138,16 @@ agingtable_exhaust_air_duration_field = 'exhaust_air_duration'
 agingtable_exhaust_air_period_field = 'exhaust_air_period'
 agingtable_days_field = 'days'
 agingtable_comment_field = 'comment'
+meat_sensortypes_name_field = 'name'
+meat_sensortypes_a_field = 'a'
+meat_sensortypes_b_field = 'b'
+meat_sensortypes_c_field = 'c'
+meat_sensortypes_Rn_field = 'Rn'
+meat_sensortypes_Mode_field = 'Mode'
+meat_sensortypes_RefVoltage_field = 'RefVoltage'
+meat_sensortypes_Sensitivity_field = 'Sensitivity'
+meat_sensortypes_Turns_field = 'Turns'
+meat_sensortypes_nAverage_field = 'nAverage'
 
 # Paths and urls
 thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/'
@@ -147,7 +163,10 @@ last_change_temperature_json_key = 'last_change_temperature'
 last_change_humidity_json_key = 'last_change_humidity'
 last_change_scale1_json_key = 'last_change_scale1'
 last_change_scale2_json_key = 'last_change_scale2'
-
+last_change_temperature_meat1_json_key = 'last_change_temperature_meat1'
+last_change_temperature_meat2_json_key = 'last_change_temperature_meat2'
+last_change_temperature_meat3_json_key = 'last_change_temperature_meat3'
+last_change_temperature_meat4_json_key = 'last_change_temperature_meat4'
 
 pin_with_voltage = True                      # 3,3V = 1 | GPIO.HIGH  | TRUE
 pin_without_voltage = (not pin_with_voltage) #   0V = 0 | GPIO.LOW   | FALSE
@@ -168,16 +187,26 @@ field_type[system_table + '_' + value_field] = 'TEXT'
 field_type[last_change_field] = 'INTEGER'
 field_type[id_field] = 'INTEGER'
 
-id_value_tables = [data_sensor_temperature_table,data_sensor_humidity_table,status_heater_table,status_exhaust_air_table,status_cooling_compressor_table,status_circulating_air_table, status_uv_table, status_light_table, status_humidifier_table, status_dehumidifier_table, data_scale1_table, data_scale2_table, data_sensor_temperature_meat1_table, data_sensor_temperature_meat2_table, data_sensor_temperature_meat3_table, data_sensor_temperature_meat4_table]
+id_value_tables = [data_sensor_temperature_table,data_sensor_humidity_table,status_heater_table,status_exhaust_air_table,status_cooling_compressor_table,status_circulating_air_table, status_uv_table, status_light_table, status_humidifier_table, status_dehumidifier_table, data_scale1_table, data_scale2_table, data_sensor_temperature_meat1_table, data_sensor_temperature_meat2_table, data_sensor_temperature_meat3_table, data_sensor_temperature_meat4_table, meat_sensortypes_table]
 
 key_value_tables = [current_values_table, settings_scale1_table, settings_scale2_table, config_settings_table, debug_table, system_table]
 
 # Arrays with defined keys in key-value-tables and default values
 table_keys = {}
 
-table_keys[config_settings_table] = (switch_on_cooling_compressor_key,switch_off_cooling_compressor_key,switch_on_humidifier_key,switch_off_humidifier_key,delay_humidify_key,sensortype_key,language_key,switch_on_light_hour_key,switch_on_light_minute_key,light_duration_key,light_period_key,light_modus_key,switch_on_uv_hour_key,switch_on_uv_minute_key,uv_duration_key,uv_period_key,uv_modus_key,dehumidifier_modus_key,circulation_air_period_key,setpoint_temperature_key,exhaust_air_duration_key,modus_key,setpoint_humidity_key,exhaust_air_period_key,circulation_air_duration_key,agingtable_key, failure_humidity_delta_key, failure_temperature_delta_key, samples_refunit_tara_key, spikes_refunit_tara_key, save_temperature_humidity_loops_key)
+table_keys[config_settings_table] = (switch_on_cooling_compressor_key,switch_off_cooling_compressor_key,switch_on_humidifier_key,switch_off_humidifier_key,delay_humidify_key,
+                                     sensortype_key,language_key,switch_on_light_hour_key,switch_on_light_minute_key,light_duration_key,light_period_key,light_modus_key,
+                                     switch_on_uv_hour_key,switch_on_uv_minute_key,uv_duration_key,uv_period_key,uv_modus_key,dehumidifier_modus_key,
+                                     circulation_air_period_key,setpoint_temperature_key,exhaust_air_duration_key,modus_key,setpoint_humidity_key,exhaust_air_period_key,
+                                     circulation_air_duration_key,agingtable_key, failure_humidity_delta_key, failure_temperature_delta_key, samples_refunit_tara_key,
+                                     spikes_refunit_tara_key, save_temperature_humidity_loops_key, sensorbus_key,
+                                     meat1_sensortype_key, meat2_sensortype_key, meat3_sensortype_key, meat4_sensortype_key)
 
-table_keys[current_values_table] = (sensor_temperature_key,sensor_humidity_key,status_circulating_air_key,status_cooling_compressor_key,status_exhaust_air_key,status_heater_key,status_light_key,status_uv_key,status_humidifier_key,status_dehumidifier_key,scale1_key,scale2_key,status_pi_ager_key,status_agingtable_key,status_scale1_key,status_scale2_key,status_tara_scale1_key,status_tara_scale2_key,status_temperature_meat1_key,status_temperature_meat2_key,status_temperature_meat3_key,status_temperature_meat4_key,agingtable_period_key,agingtable_period_starttime_key,status_light_manual_key,calibrate_scale1_key,calibrate_scale2_key,calibrate_weight_key,status_uv_manual_key)
+table_keys[current_values_table] = (sensor_temperature_key,sensor_humidity_key,status_circulating_air_key,status_cooling_compressor_key,status_exhaust_air_key,
+                                    status_heater_key,status_light_key,status_uv_key,status_humidifier_key,status_dehumidifier_key,scale1_key,scale2_key,status_pi_ager_key,
+                                    status_agingtable_key,status_scale1_key,status_scale2_key,status_tara_scale1_key,status_tara_scale2_key,agingtable_period_key,
+                                    agingtable_period_starttime_key,status_light_manual_key,calibrate_scale1_key,calibrate_scale2_key,calibrate_weight_key,
+                                    status_uv_manual_key,temperature_meat1_key,temperature_meat2_key,temperature_meat3_key,temperature_meat4_key)
 
 table_keys[settings_scale1_table] = (samples_key,spikes_key,sleep_key,gain_key,bits_to_read_key,referenceunit_key,scale_measuring_interval_key,measuring_duration_key,saving_period_key,offset_scale_key)
 table_keys[settings_scale2_table] = (samples_key,spikes_key,sleep_key,gain_key,bits_to_read_key,referenceunit_key,scale_measuring_interval_key,measuring_duration_key,saving_period_key,offset_scale_key)
@@ -297,10 +326,6 @@ table_keys_dict['status_scale1_key'] = status_scale1_key
 table_keys_dict['status_scale2_key'] = status_scale2_key
 table_keys_dict['status_tara_scale1_key'] = status_tara_scale1_key
 table_keys_dict['status_tara_scale2_key'] = status_tara_scale2_key
-table_keys_dict['status_temperature_meat1_key'] = status_temperature_meat1_key
-table_keys_dict['status_temperature_meat2_key'] = status_temperature_meat2_key
-table_keys_dict['status_temperature_meat3_key'] = status_temperature_meat3_key
-table_keys_dict['status_temperature_meat4_key'] = status_temperature_meat4_key
 table_keys_dict['status_light_manual_key'] = status_light_manual_key
 table_keys_dict['status_uv_manual_key'] = status_uv_manual_key
 table_keys_dict['scale1_key'] = scale1_key
@@ -333,6 +358,14 @@ table_keys_dict['calibrate_scale1_key'] = calibrate_scale1_key
 table_keys_dict['calibrate_scale2_key'] = calibrate_scale2_key
 table_keys_dict['calibrate_weight_key'] = calibrate_weight_key
 table_keys_dict['offset_scale_key'] = offset_scale_key
+table_keys_dict['temperature_meat1_key'] = temperature_meat1_key
+table_keys_dict['temperature_meat2_key'] = temperature_meat2_key
+table_keys_dict['temperature_meat3_key'] = temperature_meat3_key
+table_keys_dict['temperature_meat4_key'] = temperature_meat4_key
+table_keys_dict['meat1_sensortype_key'] = meat1_sensortype_key
+table_keys_dict['meat2_sensortype_key'] = meat2_sensortype_key
+table_keys_dict['meat3_sensortype_key'] = meat3_sensortype_key
+table_keys_dict['meat4_sensortype_key'] = meat4_sensortype_key
 
 table_fields_dict = {}
 
@@ -350,6 +383,16 @@ table_fields_dict['agingtable_exhaust_air_duration_field'] = agingtable_exhaust_
 table_fields_dict['agingtable_exhaust_air_period_field'] = agingtable_exhaust_air_period_field
 table_fields_dict['agingtable_days_field'] = agingtable_days_field
 table_fields_dict['agingtable_comment_field'] = agingtable_comment_field
+table_fields_dict['meat_sensortypes_name_field'] = meat_sensortypes_name_field
+table_fields_dict['meat_sensortypes_a_field'] = meat_sensortypes_a_field
+table_fields_dict['meat_sensortypes_b_field'] = meat_sensortypes_b_field
+table_fields_dict['meat_sensortypes_c_field'] = meat_sensortypes_c_field
+table_fields_dict['meat_sensortypes_Rn_field'] = meat_sensortypes_Rn_field
+table_fields_dict['meat_sensortypes_Mode_field'] = meat_sensortypes_Mode_field
+table_fields_dict['meat_sensortypes_RefVoltage_field'] = meat_sensortypes_RefVoltage_field
+table_fields_dict['meat_sensortypes_Sensitivity_field'] = meat_sensortypes_Sensitivity_field
+table_fields_dict['meat_sensortypes_Turns_field'] = meat_sensortypes_Turns_field
+table_fields_dict['meat_sensortypes_nAverage_field'] = meat_sensortypes_nAverage_field
 
 path_url_dict = {}
 path_url_dict['thread_url'] = thread_url
@@ -365,6 +408,10 @@ json_keys_dict['last_change_temperature_json_key'] = last_change_temperature_jso
 json_keys_dict['last_change_humidity_json_key'] = last_change_humidity_json_key
 json_keys_dict['last_change_scale1_json_key'] = last_change_scale1_json_key
 json_keys_dict['last_change_scale2_json_key'] = last_change_scale2_json_key
+json_keys_dict['last_change_temperature_meat1_json_key'] = last_change_temperature_meat1_json_key
+json_keys_dict['last_change_temperature_meat2_json_key'] = last_change_temperature_meat2_json_key
+json_keys_dict['last_change_temperature_meat3_json_key'] = last_change_temperature_meat3_json_key
+json_keys_dict['last_change_temperature_meat4_json_key'] = last_change_temperature_meat4_json_key
 
 hardcoded_values_dict = {}
 hardcoded_values_dict['pi_ager_version'] = version_number

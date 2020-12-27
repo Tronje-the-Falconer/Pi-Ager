@@ -18,6 +18,7 @@ import pi_ager_init
 # import pi_ager_logging
 import pi_ager_gpio_config
 import pi_ager_organization
+import pi_ager_mcp3204
 from time import ctime as convert
 
 from main.pi_ager_cx_exception import (cx_i2c_sht_temperature_crc_error, cx_i2c_sht_humidity_crc_error, cx_i2c_bus_error) 
@@ -309,7 +310,17 @@ def status_value_has_changed():
     else:
         return False
 
-
+def get_temp_sensor_data(sensor_config, adc_channel):
+    """
+    read temperature/current from mcp3204 ADC-Channel depending on sensor_configuration  
+    """
+    value = None
+    unit = None
+    with pi_ager_mcp3204.CONVERT_MCP() as convertMCP:
+        value, unit = convertMCP.getValue(sensor_config, adc_channel)
+            
+    return value
+        
 def doMainLoop():
     """
     mainloop, pi-ager is running
@@ -350,6 +361,10 @@ def doMainLoop():
     global dehumidifier_modus             #  Modus Entfeuchter  (1 = über Abluft, 2 = mit Abluft zusammen [unterstützend]; 3 = anstelle von Abluft)
     global status_dehumidifier            #  Entfeuchter
     global status_pi_ager
+    global temp_sensor1_data
+    global temp_sensor2_data 
+    global temp_sensor3_data
+    global temp_sensor4_data    
     # global logger
 
     # Pruefen Sensor, dann Settings einlesen
@@ -377,6 +392,27 @@ def doMainLoop():
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
     
     #Settings
+            # Meat temperature sensors
+            temp_sensor_type_index1 = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.meat1_sensortype_key)
+            temp_sensor_type_index2 = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.meat2_sensortype_key)
+            temp_sensor_type_index3 = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.meat3_sensortype_key)
+            temp_sensor_type_index4 = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.meat4_sensortype_key)
+
+            sensor1_parameter = pi_ager_database.get_meatsensor_parameter_row( int(temp_sensor_type_index1) )
+            sensor2_parameter = pi_ager_database.get_meatsensor_parameter_row( int(temp_sensor_type_index2) )
+            sensor3_parameter = pi_ager_database.get_meatsensor_parameter_row( int(temp_sensor_type_index3) )
+            sensor4_parameter = pi_ager_database.get_meatsensor_parameter_row( int(temp_sensor_type_index4) )
+ 
+            temp_sensor1_data = get_temp_sensor_data(sensor1_parameter, 0)
+            temp_sensor2_data = get_temp_sensor_data(sensor2_parameter, 1)
+            temp_sensor3_data = get_temp_sensor_data(sensor3_parameter, 2)
+            temp_sensor4_data = get_temp_sensor_data(sensor4_parameter, 3)
+            
+            if (temp_sensor1_data == None):
+                cl_fact_logger.get_instance().debug("Meat sensor1 not attached")
+            else:
+                cl_fact_logger.get_instance().debug("Meat sensor1 temperature = " + str(temp_sensor1_data))
+                
             #Sensor
             sht_exception_count = 0
             humidity_exception_count = 0
@@ -907,8 +943,8 @@ def doMainLoop():
                 
                 # Messwerte in die RRD-Datei schreiben
                 # Schreiben der aktuellen Status-Werte
-                pi_ager_database.write_current_sensordata(pi_ager_init.loopcounter, sensor_temperature, sensor_humidity)
-                pi_ager_database.write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier)
+                pi_ager_database.write_current_sensordata(pi_ager_init.loopcounter, sensor_temperature, sensor_humidity, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data)
+                pi_ager_database.write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, status_uv, status_light, status_humidifier, status_dehumidifier, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data)
     
                 #logger.debug('writing current values in database performed')
                 cl_fact_logger.get_instance().debug('writing current values in database performed')
@@ -949,6 +985,6 @@ def doMainLoop():
         pi_ager_gpio_config.defaultGPIO()
  
         # reflect i/o status in DB
-        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, 0, 0, 0, 0) 
+        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, 0, 0, 0, 0, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data) 
     except Exception as cx_error:
        cl_fact_logic_messenger().get_instance().handle_exception(cx_error)

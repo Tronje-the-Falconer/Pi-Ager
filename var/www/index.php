@@ -16,9 +16,7 @@
                         -->
                                 <!----------------------------------------------------------------------------------------Anzeige T/rLF-->
 
-<?php
- echo "<script src='js/ajax.js'></script>";
-?>
+
                                 <div class="thermometers">
                                     <div class="th-display-div">
                                         <table><tr><td><div class="label"><?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'; ?></div><div style="float: center; padding-left: 8px;" id="temperature_values_old"></div></td></tr>
@@ -58,9 +56,92 @@
                                             </tr>
                                         </table>
                                     </div>
+                                    <!------------------------------ ----------------------------------------------------------Anzeige meat thermometers-->
+                                    <div class="th-display-div">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="label">
+                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-Sensor').' 1'; ?>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="denemescale">
+                                                        <div style="padding-left: 8px;" id="json_meat_temperature1"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>                                    
+                                     <div class="th-display-div">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="label">
+                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-Sensor').' 2'; ?>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="denemescale">
+                                                        <div style="padding-left: 8px;" id="json_meat_temperature2"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="th-display-div">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="label">
+                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-Sensor').' 3'; ?>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="denemescale">
+                                                        <div style="padding-left: 8px;" id="json_meat_temperature3"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="th-display-div">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="label">
+                                                        <?php
+                                                        $meatsensortype = get_table_value($config_settings_table, $meat4_sensortype_key);
+                                                        $row = get_meatsensor_table_row( $meatsensortype );
+                                                        if (strncmp($row['name'], 'LEM', 3) === 0)
+                                                        {
+                                                           echo '<img src="images/icons/voltage_42x42.png" alt="" style="padding-top: 10px;">'.'I-Sensor'.' 4';
+                                                        }
+                                                        else {
+                                                           echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-Sensor').' 4';
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="denemescale">
+                                                        <div style="padding-left: 8px;" id="json_meat_temperature4"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>                                                                        
                                     <!------------------------------ ----------------------------------------------------------Anzeige Scales-->
                                     <div class="th-display-div">
-                                        <table><tr><td><div class="label">
+                                        <table><tr><td><div class="label" id="scale1_icon">
                                             <?php echo '<img src="images/icons/scale_42x42.png" alt="" style="padding-top: 10px;">'.'1'; ?></div>
                                             <div style="float: center; padding-left: 8px;" id="scale1_values_old"></div></td></tr>
                                             <tr>
@@ -73,7 +154,7 @@
                                         </table>
                                     </div>
                                     <div class="th-display-div">
-                                        <table><tr><td><div class="label">
+                                        <table><tr><td><div class="label" id="scale2_icon">
                                             <?php echo '<img src="images/icons/scale_42x42.png" alt="" style="padding-top: 10px;">'.'2'; ?></div>
                                             <div style="float: center; padding-left: 8px;" id="scale2_values_old"></div></td></tr>
                                             <tr>
@@ -92,7 +173,8 @@
                                     include 'modules/read_values_for_diagrams.php';
                                 ?>
                                 <canvas class="chart"; id="temperature_humidity_chart"></canvas>
-                                <canvas class="chart"; id="scales_chart"></canvas>
+                                <canvas class="chart"; id="scales1_chart"></canvas>
+                                <canvas class="chart"; id="scales2_chart"></canvas>                                
                                 
                                 <script>
                                     var timeFormat = 'MM/DD/YYYY HH:mm';
@@ -142,7 +224,11 @@
                                                 intersect: false,
                                                 callbacks: {
                                                     label: function(tooltipItem, data) {
-                                                        return Number(tooltipItem.yLabel).toFixed(1);
+                                                        if (tooltipItem.datasetIndex === 0) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                        } else if (tooltipItem.datasetIndex === 1) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' %';
+                                                        }
                                                     }
                                                 }
                                             },
@@ -211,9 +297,9 @@
                                         }
                                     };
 
-                                    // Waagen
-                                    var scales_chart = document.getElementById("scales_chart");
-                                    var config_scales_chart = {
+                                    // Waage 1
+                                    var scales1_chart = document.getElementById("scales1_chart");
+                                    var config_scales1_chart = {
                                         type: 'line',
                                         data: {
                                             labels: 
@@ -230,33 +316,20 @@
                                                 pointHitRadius: 5,';} ?>
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false
-                                            },
-                                            {
-                                                label: '<?php echo _("scale") ?> 2',
-                                                yAxisID: 'scale2',
-                                                data: <?php echo json_encode($scale2_dataset); ?>,
-                                                backgroundColor: '#BF9543',
-                                                borderColor: '#BF9543',
-                                                borderWidth: 2,
-                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                pointHitRadius: 5,';} ?>
-                                                cubicInterpolationMode: 'monotone',
-                                                fill: false
                                             }]
                                         },
                                         options: {
                                             title: {
-                                                display: false,
-                                                text: '<?php echo _("scale") ?> 1 & 2',
-                                                // fontSize: 24
+                                                display: true,
+                                                text: '<?php echo _("scale") ?> 1',
+                                                fontSize: 24
                                             },
                                             tooltips: {
                                                 mode: 'index',
                                                 intersect: false,
                                                 callbacks: {
                                                     label: function(tooltipItem, data) {
-                                                        return Number(tooltipItem.yLabel).toFixed(1);
+                                                        return Number(tooltipItem.yLabel).toFixed(1) + ' gr';
                                                     }
                                                 }
                                             },
@@ -314,7 +387,61 @@
                                                         //stepSize: 1
                                                     }
                                                     
-                                                },
+                                                }]
+                                            }
+                                        }
+                                    };
+                                    
+                                   // Waage 2
+                                    var scales2_chart = document.getElementById("scales2_chart");
+                                    var config_scales2_chart = {
+                                        type: 'line',
+                                        data: {
+                                            labels: 
+                                                <?php echo $scale2_timestamps_axis_text; ?>,
+                                            datasets: [
+                                            {
+                                                label: '<?php echo _("scale") ?> 2',
+                                                yAxisID: 'scale2',
+                                                data: <?php echo json_encode($scale2_dataset); ?>,
+                                                backgroundColor: '#BF9543',
+                                                borderColor: '#BF9543',
+                                                borderWidth: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                pointHitRadius: 5,';} ?>
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
+                                            }]
+                                        },
+                                        options: {
+                                            title: {
+                                                display: true,
+                                                text: '<?php echo _("scale") ?> 2',
+                                                fontSize: 24
+                                            },
+                                            tooltips: {
+                                                mode: 'index',
+                                                intersect: false,
+                                                callbacks: {
+                                                    label: function(tooltipItem, data) {
+                                                        return Number(tooltipItem.yLabel).toFixed(1) + ' gr';
+                                                    }
+                                                }
+                                            },
+                                            scales: {
+                                                xAxes: [{
+                                                    type: "time",
+                                                    time: {
+                                                        displayFormats: {
+                                                            second: 'HH:mm:ss',
+                                                            minute: 'HH:mm',
+                                                            hour: 'MMM D, H[h]'
+                                                        },
+                                                        tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                                    },
+                                                }, ],
+                                                yAxes: [
                                                 {
                                                     scaleLabel: {
                                                         display: true,
@@ -324,7 +451,7 @@
                                                     },
                                                     id: 'scale2',
                                                     type: 'linear',
-                                                    position: 'right',
+                                                    position: 'left',
                                                     ticks: {
                                                         callback: function(value, index, values) {
                                                             if (Math.round(value) === value)
@@ -363,9 +490,15 @@
                                     
                                     window.onload = function() {
                                         window.temperature_humidity_chart = new Chart(temperature_humidity_chart, config_temperature_humidity_chart);
-                                        window.scales_chart = new Chart(scales_chart, config_scales_chart);
+                                        window.scales1_chart = new Chart(scales1_chart, config_scales1_chart);
+                                        window.scales2_chart = new Chart(scales2_chart, config_scales2_chart);                                        
                                     };
                                 </script>
+                                
+                                <?php
+                                 echo "<script src='js/ajax.js'></script>";
+                                ?> 
+                                
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <h2 class="art-postheader"><?php echo _('statusboard'); ?></h2>
                                 <div class="hg_container">
