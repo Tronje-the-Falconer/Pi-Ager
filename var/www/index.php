@@ -214,6 +214,7 @@
                                             },
                                             {
                                                 label: '<?php echo _("temperature") . ' NTC 1' ?>',
+												hidden: true,
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($thermometer1_dataset); ?>,
                                                 backgroundColor: '#F7AC08',
@@ -227,6 +228,7 @@
                                             },
                                             {
                                                 label: '<?php echo _("temperature") . ' NTC 2' ?>',
+												hidden: true,
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($thermometer2_dataset); ?>,
                                                 backgroundColor: '#06AF8F',
@@ -240,6 +242,7 @@
                                             },
                                             {
                                                 label: '<?php echo _("temperature") . ' NTC 3' ?>',
+												hidden: true,
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($thermometer3_dataset); ?>,
                                                 backgroundColor: '#AF06A1',
