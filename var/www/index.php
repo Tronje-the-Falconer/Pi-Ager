@@ -62,7 +62,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="label">
-                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-Sensor').' 1'; ?>
+                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-NTC').' 1'; ?>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -80,7 +80,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="label">
-                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-Sensor').' 2'; ?>
+                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-NTC').' 2'; ?>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -98,7 +98,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="label">
-                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-Sensor').' 3'; ?>
+                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-NTC').' 3'; ?>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -124,7 +124,7 @@
                                                            echo '<img src="images/icons/voltage_42x42.png" alt="" style="padding-top: 10px;">'.'I-Sensor'.' 4';
                                                         }
                                                         else {
-                                                           echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-Sensor').' 4';
+                                                           echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-NTC').' 4';
                                                         }
                                                         ?>
                                                     </div>
@@ -211,6 +211,45 @@
                                                 pointHitRadius: 5,';} ?>
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false
+                                            },
+                                            {
+                                                label: '<?php echo _("temperature") . ' NTC 1' ?>',
+                                                yAxisID: 'temperature',
+                                                data: <?php echo json_encode($thermometer1_dataset); ?>,
+                                                backgroundColor: '#F7AC08',
+                                                borderColor: '#F7AC08',
+                                                borderWidth: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                pointHitRadius: 5,';} ?>
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
+                                            },
+                                            {
+                                                label: '<?php echo _("temperature") . ' NTC 2' ?>',
+                                                yAxisID: 'temperature',
+                                                data: <?php echo json_encode($thermometer2_dataset); ?>,
+                                                backgroundColor: '#06AF8F',
+                                                borderColor: '##06AF8F',
+                                                borderWidth: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                pointHitRadius: 5,';} ?>
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
+                                            },
+                                            {
+                                                label: '<?php echo _("temperature") . ' NTC 3' ?>',
+                                                yAxisID: 'temperature',
+                                                data: <?php echo json_encode($thermometer3_dataset); ?>,
+                                                backgroundColor: '#AF06A1',
+                                                borderColor: '#AF06A1',
+                                                borderWidth: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                pointHitRadius: 5,';} ?>
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
                                             }]
                                         },
                                         options: {
@@ -227,8 +266,14 @@
                                                         if (tooltipItem.datasetIndex === 0) {
                                                             return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
                                                         } else if (tooltipItem.datasetIndex === 1) {
-                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' %';
-                                                        }
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' %';
+                                                        } else if (tooltipItem.datasetIndex === 2) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                        } else if (tooltipItem.datasetIndex === 3) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                        } else if (tooltipItem.datasetIndex === 4) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                        }                                                        
                                                     }
                                                 }
                                             },
@@ -247,7 +292,7 @@
                                                 yAxes: [{
                                                     scaleLabel: {
                                                         display: true,
-                                                        labelString: '<?php echo _("temperature")?> <?php echo _(" - t") ?>',
+                                                        labelString: '<?php echo _("temperature")?> <?php echo _(" - ϑ") ?>',
                                                     //    fontSize: 20,
                                                         fontColor: '#000000'
                                                     },

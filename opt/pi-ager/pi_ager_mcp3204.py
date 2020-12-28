@@ -61,7 +61,7 @@ class CONVERT_MCP:
             try: 
                 v = math.log(Rtheta/Rn)
                 value = (1/(a + b*v + c*v*v)) - 273
-                value = round(value, 2)
+                value = round(value, 3)
             except: #bei unsinnigen Werten (z.B. ein- ausstecken des Sensors im Betrieb) Wert 999.9
                 value = None
                 pass
@@ -93,7 +93,7 @@ class CONVERT_MCP:
                 for i in range(nAverage):
                     ms += (vValues[i] * vValues[i])
                 ms /= nAverage
-                value = round(math.sqrt(ms), 2)
+                value = round(math.sqrt(ms), 3)
 #            avg = statistics.mean(vValues)
 #            value = round(avg, 2)
             else:
@@ -110,7 +110,7 @@ class CONVERT_MCP:
                     vVal = rawVal * 3.3/4095.0
                     
                 vVal = vVal - RefVoltage
-                value = round(vVal / Sensitivity / Turns * 1000.0 , 2)
+                value = round(vVal / Sensitivity / Turns * 1000.0 , 3)
                 
         return value, unit
 
@@ -132,7 +132,7 @@ if __name__ == '__main__':
                         print('sensor not attached')
                     else:
                         if unit == 'T': 
-                            print('sensor {} at channel {} = {} °C or {} °F'.format( convertMCP.sensorName, adcChannel, value, round(value * 1.8 + 32, 2)))
+                            print('sensor {} at channel {} = {} °C or {} °F'.format( convertMCP.sensorName, adcChannel, value, round(value * 1.8 + 32, 3)))
                         else:
                             print('sensor {} at channel {} = {} A'.format( convertMCP.sensorName, adcChannel, value ))
 
@@ -142,7 +142,7 @@ if __name__ == '__main__':
                         print('sensor not attached')
                     else:
                         if unit == 'T': 
-                            print('sensor {} at channel {} = {} °C or {} °F'.format( convertMCP.sensorName, adcChannel, value, round(value * 1.8 + 32, 2)))
+                            print('sensor {} at channel {} = {} °C or {} °F'.format( convertMCP.sensorName, adcChannel, value, round(value * 1.8 + 32, 3)))
                         else:
                             print('sensor {} at channel {} = {} A'.format( convertMCP.sensorName, adcChannel, value ))
 
@@ -152,7 +152,7 @@ if __name__ == '__main__':
                         print('sensor not attached')
                     else:
                         if unit == 'T': 
-                            print('sensor {} at channel {} = {} °C or {} °F'.format( convertMCP.sensorName, adcChannel, value, round(value * 1.8 + 32, 2)))
+                            print('sensor {} at channel {} = {} °C or {} °F'.format( convertMCP.sensorName, adcChannel, value, round(value * 1.8 + 32, 3)))
                         else:
                             print('sensor {} at channel {} = {} A'.format( convertMCP.sensorName, adcChannel, value ))
 
