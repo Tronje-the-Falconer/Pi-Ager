@@ -232,7 +232,7 @@
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($thermometer2_dataset); ?>,
                                                 backgroundColor: '#06AF8F',
-                                                borderColor: '##06AF8F',
+                                                borderColor: '#06AF8F',
                                                 borderWidth: 2,
                                                 <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                 pointHitRadius: 5,';} else {print 'pointRadius: 0,
