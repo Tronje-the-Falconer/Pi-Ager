@@ -231,7 +231,8 @@
                                                     }
                                                 },
                                                 scales: {
-                                                    xAxes: [{
+                                                    xAxes: [
+                                                    {
                                                         type: "time",
                                                         time: {
                                                             displayFormats: {
@@ -242,7 +243,8 @@
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
                                                     }, ],
-                                                    yAxes: [{
+                                                    yAxes: [
+                                                    {
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("scale") . ' 1'; ?>',
@@ -253,35 +255,74 @@
                                                         type: 'linear',
                                                         position: 'left',
                                                         ticks: {
-                                                            callback: function(value, index, values) {
-                                                                if (Math.round(value) === value)
-                                                                return value + ' gr' + ' ';
-                                                            },
-                                                            fontColor: '#000000',
-                                                        //    fontSize: 20,
-                                                            //max: 25000,
-                                                            beginAtZero: true,
-                                                            maxTicksLimit: 10,
-                                                            max: <?php 
-                                                            $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
-                                                            print $max_value_scale1;
-                                                            ?>,
-                                                            min: <?php 
-                                                             $scale1_dataset_edited = array();
-                                                             foreach ($scale1_dataset as $scale1_value){
-                                                                if ($scale1_value != Null){
-                                                                    $scale1_dataset_edited[] = $scale1_value;
-                                                                }
-                                                             }
-                                                             if (empty($scale1_dataset_edited)) {
-                                                                    $scale1_dataset_edited[] = Null;
-                                                             }
-                                                             $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
-                                                            print $min_value_scale1;
-                                                            ?>,
+                                                                callback: function(value, index, values) {
+                                                                    if (Math.round(value) === value)
+                                                                        return value + ' gr' + ' ';
+                                                                },
+                                                                fontColor: '#000000',
+                                                                //    fontSize: 20,
+                                                                //max: 25000,
+                                                                beginAtZero: true,
+                                                                maxTicksLimit: 10,
+                                                                max: <?php 
+                                                                    $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
+                                                                    print $max_value_scale1;
+                                                                ?>,
+                                                                min: <?php 
+                                                                    $scale1_dataset_edited = array();
+                                                                    foreach ($scale1_dataset as $scale1_value){
+                                                                        if ($scale1_value != Null){
+                                                                            $scale1_dataset_edited[] = $scale1_value;
+                                                                        }
+                                                                    }
+                                                                    if (empty($scale1_dataset_edited)) {
+                                                                        $scale1_dataset_edited[] = Null;
+                                                                    }
+                                                                    $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
+                                                                    print $min_value_scale1;
+                                                                ?>,
                                                             //stepSize: 1
                                                         }
-                                                        
+                                                    },
+                                                    {
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            //labelString: '<?php echo _("scale") . ' 1'; ?>',
+                                                            //    fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'scale1_right',
+                                                        type: 'linear',
+                                                        position: 'right',
+                                                        ticks: {
+                                                                callback: function(value, index, values) {
+                                                                    if (Math.round(value) === value)
+                                                                        return value + ' gr' + ' ';
+                                                                },
+                                                                fontColor: '#000000',
+                                                                //    fontSize: 20,
+                                                                //max: 25000,
+                                                                beginAtZero: true,
+                                                                maxTicksLimit: 10,
+                                                                max: <?php 
+                                                                    $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
+                                                                    print $max_value_scale1;
+                                                                ?>,
+                                                                min: <?php 
+                                                                    $scale1_dataset_edited = array();
+                                                                    foreach ($scale1_dataset as $scale1_value){
+                                                                        if ($scale1_value != Null){
+                                                                            $scale1_dataset_edited[] = $scale1_value;
+                                                                        }
+                                                                    }
+                                                                    if (empty($scale1_dataset_edited)) {
+                                                                        $scale1_dataset_edited[] = Null;
+                                                                    }
+                                                                    $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
+                                                                    print $min_value_scale1;
+                                                                ?>,
+                                                            //stepSize: 1
+                                                        }
                                                     }]
                                                 }
                                             }
@@ -328,7 +369,8 @@
                                                     }
                                                 },
                                                 scales: {
-                                                    xAxes: [{
+                                                    xAxes: [
+                                                    {
                                                         type: "time",
                                                         time: {
                                                             displayFormats: {
@@ -344,17 +386,17 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("scale") . ' 2'; ?>',
-                                                        //    fontSize: 20,
+                                                            //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'scale2',
                                                         type: 'linear',
                                                         position: 'left',
                                                         ticks: {
-                                                            callback: function(value, index, values) {
-                                                                if (Math.round(value) === value) {
-                                                                return ' ' + value + ' gr';
-                                                            }
+                                                                callback: function(value, index, values) {
+                                                                    if (Math.round(value) === value) {
+                                                                        return ' ' + value + ' gr';
+                                                                }
                                                             },
                                                             fontColor: '#000000',
                                                             //    fontSize: 20,
@@ -362,23 +404,63 @@
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
                                                             max: <?php 
-                                                            $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
-                                                            print $max_value_scale2;
+                                                                $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
+                                                                print $max_value_scale2;
                                                             ?>,
-                                                        min: <?php 
-                                                             $scale2_dataset_edited = array();
-                                                             foreach ($scale2_dataset as $scale2_value){
-                                                                if ($scale2_value != Null){
-                                                                    $scale2_dataset_edited[] = $scale2_value;
+                                                            min: <?php 
+                                                                $scale2_dataset_edited = array();
+                                                                foreach ($scale2_dataset as $scale2_value){
+                                                                    if ($scale2_value != Null){
+                                                                        $scale2_dataset_edited[] = $scale2_value;
+                                                                    }
                                                                 }
-                                                             }
-                                                             if (empty($scale2_dataset_edited)) {
+                                                                if (empty($scale2_dataset_edited)) {
                                                                     $scale2_dataset_edited[] = Null;
-                                                             }
-                                                             $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
-                                                                
-                                                        print $min_value_scale2;
-                                                        ?>,
+                                                                }
+                                                                $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
+                                                                print $min_value_scale2;
+                                                            ?>,
+                                                            //stepSize: 1
+                                                        }
+                                                    },
+                                                    {
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            //labelString: '<?php echo _("scale") . ' 2'; ?>',
+                                                            //    fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'scale2_right',
+                                                        type: 'linear',
+                                                        position: 'right',
+                                                        ticks: {
+                                                                callback: function(value, index, values) {
+                                                                    if (Math.round(value) === value) {
+                                                                        return ' ' + value + ' gr';
+                                                                }
+                                                            },
+                                                            fontColor: '#000000',
+                                                            //    fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: <?php 
+                                                                $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
+                                                                print $max_value_scale2;
+                                                            ?>,
+                                                            min: <?php 
+                                                                $scale2_dataset_edited = array();
+                                                                foreach ($scale2_dataset as $scale2_value){
+                                                                    if ($scale2_value != Null){
+                                                                        $scale2_dataset_edited[] = $scale2_value;
+                                                                    }
+                                                                }
+                                                                if (empty($scale2_dataset_edited)) {
+                                                                    $scale2_dataset_edited[] = Null;
+                                                                }
+                                                                $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
+                                                                print $min_value_scale2;
+                                                            ?>,
                                                             //stepSize: 1
                                                         }
                                                     }]
@@ -498,7 +580,7 @@
                                                     {
                                                         scaleLabel: {
                                                             display: true,
-                                                        //  labelString: '<?php echo _("temperature")?> <?php echo _(" - ϑ") ?>',
+                                                            //labelString: '<?php echo _("temperature")?> <?php echo _(" - ϑ") ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -536,15 +618,17 @@
                                                     ?>,
                                                 datasets: [
                                                 {
-                                                    label: '<?php if ($sensor4_is_current == true) { echo _("Current"); } else { echo _("temperature") . _(" - ϑ");}?>',
+                                                    label: '<?php if ($sensor4_is_current == true) { echo _("Current") . " - I"; } else { echo _("temperature") . _(" - ϑ");}?>',
                                                     yAxisID: 'temperature',
                                                     data: <?php echo json_encode($thermometer4_dataset); ?>,
                                                     backgroundColor: '#ff0000',
                                                     borderColor: '#ff0000',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    <?php if ($diagram_mode == 'hour') {
+                                                                print 'pointRadius: 1, pointHitRadius: 5,';
+                                                          } else {
+                                                                print 'pointRadius: 0, pointHitRadius: 5,';
+                                                          } ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 }]
@@ -580,7 +664,7 @@
                                                     {
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php if ($sensor4_is_current == true) { echo _("Current"); } else { echo _("temperature") . '4';}?>',
+                                                            labelString: '<?php if ($sensor4_is_current == true) { echo _("Current") . " - I"; } else { echo _("temperature") . _(" - ϑ");}?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -590,7 +674,7 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 if (Math.round(value) === value) {
-                                                                return '  ' + value + '<?php if ($sensor4_is_current == true) { echo ' A'; } else { echo ' °C'; }?>' + '  ';
+                                                                    return '  ' + value + '<?php if ($sensor4_is_current == true) { echo ' A'; } else { echo ' °C'; }?>' + '  ';
                                                                 }
                                                             },
                                                             fontColor: '#000000',
@@ -599,23 +683,23 @@
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
                                                             max: <?php if ($sensor4_is_current == true) { echo '4'; } else { echo '30'; }?>, 
-                                                            min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-4'; }?>	
-														}
+                                                            min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-4'; }?>
+                                                        }
                                                     },
                                                     {
                                                         scaleLabel: {
                                                             display: true,
-                                                        //   labelString: '<?php if ($sensor4_is_current == true) { echo _("Current"); } else { echo _("temperature") . '4';}?>',
+                                                        //    labelString: '<?php if ($sensor4_is_current == true) { echo _("Current"); } else { echo _("temperature") . '4';}?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
-                                                        id: 'temperature_right',
+                                                        id: 'temperature_right4',
                                                         type: 'linear',
                                                         position: 'right',
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 if (Math.round(value) === value) {
-                                                                return '  ' + value + '<?php if ($sensor4_is_current == true) { echo ' A'; } else { echo ' °C'; }?>' + '  ';
+                                                                    return '  ' + value + '<?php if ($sensor4_is_current == true) { echo ' A'; } else { echo ' °C'; }?>' + '  ';
                                                                 }
                                                             },
                                                             fontColor: '#000000',
@@ -624,7 +708,7 @@
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
                                                             max: <?php if ($sensor4_is_current == true) { echo '4'; } else { echo '30'; }?>, 
-                                                            min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-4'; }?>	
+                                                            min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-4'; }?>
                                                         }
                                                     }]
                                                 }

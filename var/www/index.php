@@ -393,7 +393,8 @@
                                                         tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                     },
                                                 }, ],
-                                                yAxes: [{
+                                                yAxes: [
+                                                {
                                                     scaleLabel: {
                                                         display: true,
                                                         labelString: '<?php echo _("scale") . ' 1'; ?>',
@@ -404,37 +405,74 @@
                                                     type: 'linear',
                                                     position: 'left',
                                                     ticks: {
-                                                        callback: function(value, index, values) {
-                                                            if (Math.round(value) === value)
-                                                            return value + ' gr' + ' ';
-                                                        },
-                                                        fontColor: '#000000',
-                                                        // fontSize: 20,
-                                                        //max: 25000,
-                                                        beginAtZero: true,
-                                                        maxTicksLimit: 10,
-                                                        max: <?php 
-                                                        $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
-                                                        
-                                                        print $max_value_scale1;
-                                                        ?>,
-                                                        min: <?php 
-                                                             $scale1_dataset_edited = array();
-                                                             foreach ($scale1_dataset as $scale1_value){
-                                                                if ($scale1_value != Null){
-                                                                    $scale1_dataset_edited[] = $scale1_value;
+                                                            callback: function(value, index, values) {
+                                                                if (Math.round(value) === value)
+                                                                    return value + ' gr' + ' ';
+                                                            },
+                                                            fontColor: '#000000',
+                                                            // fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: <?php 
+                                                                $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
+                                                                print $max_value_scale1;
+                                                            ?>,
+                                                            min: <?php 
+                                                                $scale1_dataset_edited = array();
+                                                                foreach ($scale1_dataset as $scale1_value){
+                                                                    if ($scale1_value != Null){
+                                                                        $scale1_dataset_edited[] = $scale1_value;
+                                                                    }
                                                                 }
-                                                             }
-                                                             if (empty($scale1_dataset_edited)) {
+                                                                if (empty($scale1_dataset_edited)) {
                                                                     $scale1_dataset_edited[] = Null;
-                                                             }
-                                                             $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
-                                                                
-                                                              print $min_value_scale1;
-                                                        ?>,
+                                                                }
+                                                                $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
+                                                                print $min_value_scale1;
+                                                            ?>,
                                                         //stepSize: 1
                                                     }
-                                                    
+                                                },
+                                                {
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        //labelString: '<?php echo _("scale") . ' 1'; ?>',
+                                                        // fontSize: 20,
+                                                        fontColor: '#000000'
+                                                    },
+                                                    id: 'scale1_right',
+                                                    type: 'linear',
+                                                    position: 'right',
+                                                    ticks: {
+                                                            callback: function(value, index, values) {
+                                                                if (Math.round(value) === value)
+                                                                    return value + ' gr' + ' ';
+                                                            },
+                                                            fontColor: '#000000',
+                                                            // fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: <?php 
+                                                                $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
+                                                                print $max_value_scale1;
+                                                            ?>,
+                                                            min: <?php 
+                                                                $scale1_dataset_edited = array();
+                                                                foreach ($scale1_dataset as $scale1_value){
+                                                                    if ($scale1_value != Null){
+                                                                        $scale1_dataset_edited[] = $scale1_value;
+                                                                    }
+                                                                }
+                                                                if (empty($scale1_dataset_edited)) {
+                                                                    $scale1_dataset_edited[] = Null;
+                                                                }
+                                                                $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
+                                                                print $min_value_scale1;
+                                                            ?>,
+                                                        //stepSize: 1
+                                                    }
                                                 }]
                                             }
                                         }
@@ -503,7 +541,7 @@
                                                     ticks: {
                                                         callback: function(value, index, values) {
                                                             if (Math.round(value) === value)
-                                                            return ' ' + value + ' gr';
+                                                                return ' ' + value + ' gr';
                                                         },
                                                         fontColor: '#000000',
                                                         // fontSize: 20,
@@ -511,8 +549,8 @@
                                                         beginAtZero: true,
                                                         maxTicksLimit: 10,
                                                         max: <?php 
-                                                        $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;                                                       
-                                                        print $max_value_scale2;
+                                                            $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;                                                       
+                                                            print $max_value_scale2;
                                                         ?>,
                                                         min: <?php 
                                                              $scale2_dataset_edited = array();
@@ -525,8 +563,48 @@
                                                                     $scale2_dataset_edited[] = Null;
                                                              }
                                                              $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
-                                                                
-                                                        print $min_value_scale2;
+                                                             print $min_value_scale2;
+                                                        ?>,
+                                                        //stepSize: 1
+                                                    }
+                                                    
+                                                },
+                                                {
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        //labelString: '<?php echo _("scale") . ' 2'; ?>',
+                                                        // fontSize: 20,
+                                                        fontColor: '#000000'
+                                                    },
+                                                    id: 'scale2_right',
+                                                    type: 'linear',
+                                                    position: 'right',
+                                                    ticks: {
+                                                        callback: function(value, index, values) {
+                                                            if (Math.round(value) === value)
+                                                                return ' ' + value + ' gr';
+                                                        },
+                                                        fontColor: '#000000',
+                                                        // fontSize: 20,
+                                                        //max: 25000,
+                                                        beginAtZero: true,
+                                                        maxTicksLimit: 10,
+                                                        max: <?php 
+                                                            $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;                                                       
+                                                            print $max_value_scale2;
+                                                        ?>,
+                                                        min: <?php 
+                                                             $scale2_dataset_edited = array();
+                                                             foreach ($scale2_dataset as $scale2_value){
+                                                                if ($scale2_value != Null){
+                                                                    $scale2_dataset_edited[] = $scale2_value;
+                                                                }
+                                                             }
+                                                             if (empty($scale2_dataset_edited)) {
+                                                                    $scale2_dataset_edited[] = Null;
+                                                             }
+                                                             $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
+                                                             print $min_value_scale2;
                                                         ?>,
                                                         //stepSize: 1
                                                     }
