@@ -62,7 +62,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="label">
-                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-Sensor').' 1'; ?>
+                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-NTC').' 1'; ?>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -80,7 +80,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="label">
-                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-Sensor').' 2'; ?>
+                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-NTC').' 2'; ?>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -98,7 +98,7 @@
                                             <tr>
                                                 <td>
                                                     <div class="label">
-                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-Sensor').' 3'; ?>
+                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-NTC').' 3'; ?>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -124,7 +124,7 @@
                                                            echo '<img src="images/icons/voltage_42x42.png" alt="" style="padding-top: 10px;">'.'I-Sensor'.' 4';
                                                         }
                                                         else {
-                                                           echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-Sensor').' 4';
+                                                           echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-NTC').' 4';
                                                         }
                                                         ?>
                                                     </div>
@@ -193,7 +193,7 @@
                                                 backgroundColor: '#C03738',
                                                 borderColor: '#C03738',
                                                 borderWidth: 2,
-                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                 pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                 pointHitRadius: 5,';} ?>
                                                 cubicInterpolationMode: 'monotone',
@@ -206,7 +206,49 @@
                                                 backgroundColor: '#59A9C4',
                                                 borderColor: '#59A9C4',
                                                 borderWidth: 2,
-                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
+                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                pointHitRadius: 5,';} ?>
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
+                                            },
+                                            {
+                                                label: '<?php echo _("temperature") . ' NTC 1' ?>',
+												hidden: true,
+                                                yAxisID: 'temperature',
+                                                data: <?php echo json_encode($thermometer1_dataset); ?>,
+                                                backgroundColor: '#F7AC08',
+                                                borderColor: '#F7AC08',
+                                                borderWidth: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
+                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                pointHitRadius: 5,';} ?>
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
+                                            },
+                                            {
+                                                label: '<?php echo _("temperature") . ' NTC 2' ?>',
+												hidden: true,
+                                                yAxisID: 'temperature',
+                                                data: <?php echo json_encode($thermometer2_dataset); ?>,
+                                                backgroundColor: '#06AF8F',
+                                                borderColor: '##06AF8F',
+                                                borderWidth: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
+                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                pointHitRadius: 5,';} ?>
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
+                                            },
+                                            {
+                                                label: '<?php echo _("temperature") . ' NTC 3' ?>',
+												hidden: true,
+                                                yAxisID: 'temperature',
+                                                data: <?php echo json_encode($thermometer3_dataset); ?>,
+                                                backgroundColor: '#AF06A1',
+                                                borderColor: '#AF06A1',
+                                                borderWidth: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                 pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                 pointHitRadius: 5,';} ?>
                                                 cubicInterpolationMode: 'monotone',
@@ -227,8 +269,14 @@
                                                         if (tooltipItem.datasetIndex === 0) {
                                                             return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
                                                         } else if (tooltipItem.datasetIndex === 1) {
-                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' %';
-                                                        }
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' %';
+                                                        } else if (tooltipItem.datasetIndex === 2) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                        } else if (tooltipItem.datasetIndex === 3) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                        } else if (tooltipItem.datasetIndex === 4) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                        }                                                        
                                                     }
                                                 }
                                             },
@@ -247,7 +295,7 @@
                                                 yAxes: [{
                                                     scaleLabel: {
                                                         display: true,
-                                                        labelString: '<?php echo _("temperature")?> <?php echo _(" - t") ?>',
+                                                        labelString: '<?php echo _("temperature")?> <?php echo _(" - ϑ") ?>',
                                                     //    fontSize: 20,
                                                         fontColor: '#000000'
                                                     },
@@ -311,7 +359,7 @@
                                                 backgroundColor: '#AEC645',
                                                 borderColor: '#AEC645',
                                                 borderWidth: 2,
-                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                 pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                 pointHitRadius: 5,';} ?>
                                                 cubicInterpolationMode: 'monotone',
@@ -345,7 +393,8 @@
                                                         tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                     },
                                                 }, ],
-                                                yAxes: [{
+                                                yAxes: [
+                                                {
                                                     scaleLabel: {
                                                         display: true,
                                                         labelString: '<?php echo _("scale") . ' 1'; ?>',
@@ -356,37 +405,74 @@
                                                     type: 'linear',
                                                     position: 'left',
                                                     ticks: {
-                                                        callback: function(value, index, values) {
-                                                            if (Math.round(value) === value)
-                                                            return value + ' gr' + ' ';
-                                                        },
-                                                        fontColor: '#000000',
-                                                        // fontSize: 20,
-                                                        //max: 25000,
-                                                        beginAtZero: true,
-                                                        maxTicksLimit: 10,
-                                                        max: <?php 
-                                                        $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
-                                                        
-                                                        print $max_value_scale1;
-                                                        ?>,
-                                                        min: <?php 
-                                                             $scale1_dataset_edited = array();
-                                                             foreach ($scale1_dataset as $scale1_value){
-                                                                if ($scale1_value != Null){
-                                                                    $scale1_dataset_edited[] = $scale1_value;
+                                                            callback: function(value, index, values) {
+                                                                if (Math.round(value) === value)
+                                                                    return value + ' gr' + ' ';
+                                                            },
+                                                            fontColor: '#000000',
+                                                            // fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: <?php 
+                                                                $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
+                                                                print $max_value_scale1;
+                                                            ?>,
+                                                            min: <?php 
+                                                                $scale1_dataset_edited = array();
+                                                                foreach ($scale1_dataset as $scale1_value){
+                                                                    if ($scale1_value != Null){
+                                                                        $scale1_dataset_edited[] = $scale1_value;
+                                                                    }
                                                                 }
-                                                             }
-                                                             if (empty($scale1_dataset_edited)) {
+                                                                if (empty($scale1_dataset_edited)) {
                                                                     $scale1_dataset_edited[] = Null;
-                                                             }
-                                                             $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
-                                                                
-                                                              print $min_value_scale1;
-                                                        ?>,
+                                                                }
+                                                                $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
+                                                                print $min_value_scale1;
+                                                            ?>,
                                                         //stepSize: 1
                                                     }
-                                                    
+                                                },
+                                                {
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        //labelString: '<?php echo _("scale") . ' 1'; ?>',
+                                                        // fontSize: 20,
+                                                        fontColor: '#000000'
+                                                    },
+                                                    id: 'scale1_right',
+                                                    type: 'linear',
+                                                    position: 'right',
+                                                    ticks: {
+                                                            callback: function(value, index, values) {
+                                                                if (Math.round(value) === value)
+                                                                    return value + ' gr' + ' ';
+                                                            },
+                                                            fontColor: '#000000',
+                                                            // fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: <?php 
+                                                                $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
+                                                                print $max_value_scale1;
+                                                            ?>,
+                                                            min: <?php 
+                                                                $scale1_dataset_edited = array();
+                                                                foreach ($scale1_dataset as $scale1_value){
+                                                                    if ($scale1_value != Null){
+                                                                        $scale1_dataset_edited[] = $scale1_value;
+                                                                    }
+                                                                }
+                                                                if (empty($scale1_dataset_edited)) {
+                                                                    $scale1_dataset_edited[] = Null;
+                                                                }
+                                                                $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
+                                                                print $min_value_scale1;
+                                                            ?>,
+                                                        //stepSize: 1
+                                                    }
                                                 }]
                                             }
                                         }
@@ -407,7 +493,7 @@
                                                 backgroundColor: '#BF9543',
                                                 borderColor: '#BF9543',
                                                 borderWidth: 2,
-                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                 pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                 pointHitRadius: 5,';} ?>
                                                 cubicInterpolationMode: 'monotone',
@@ -455,7 +541,7 @@
                                                     ticks: {
                                                         callback: function(value, index, values) {
                                                             if (Math.round(value) === value)
-                                                            return ' ' + value + ' gr';
+                                                                return ' ' + value + ' gr';
                                                         },
                                                         fontColor: '#000000',
                                                         // fontSize: 20,
@@ -463,8 +549,8 @@
                                                         beginAtZero: true,
                                                         maxTicksLimit: 10,
                                                         max: <?php 
-                                                        $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;                                                       
-                                                        print $max_value_scale2;
+                                                            $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;                                                       
+                                                            print $max_value_scale2;
                                                         ?>,
                                                         min: <?php 
                                                              $scale2_dataset_edited = array();
@@ -477,8 +563,48 @@
                                                                     $scale2_dataset_edited[] = Null;
                                                              }
                                                              $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
-                                                                
-                                                        print $min_value_scale2;
+                                                             print $min_value_scale2;
+                                                        ?>,
+                                                        //stepSize: 1
+                                                    }
+                                                    
+                                                },
+                                                {
+                                                    scaleLabel: {
+                                                        display: true,
+                                                        //labelString: '<?php echo _("scale") . ' 2'; ?>',
+                                                        // fontSize: 20,
+                                                        fontColor: '#000000'
+                                                    },
+                                                    id: 'scale2_right',
+                                                    type: 'linear',
+                                                    position: 'right',
+                                                    ticks: {
+                                                        callback: function(value, index, values) {
+                                                            if (Math.round(value) === value)
+                                                                return ' ' + value + ' gr';
+                                                        },
+                                                        fontColor: '#000000',
+                                                        // fontSize: 20,
+                                                        //max: 25000,
+                                                        beginAtZero: true,
+                                                        maxTicksLimit: 10,
+                                                        max: <?php 
+                                                            $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;                                                       
+                                                            print $max_value_scale2;
+                                                        ?>,
+                                                        min: <?php 
+                                                             $scale2_dataset_edited = array();
+                                                             foreach ($scale2_dataset as $scale2_value){
+                                                                if ($scale2_value != Null){
+                                                                    $scale2_dataset_edited[] = $scale2_value;
+                                                                }
+                                                             }
+                                                             if (empty($scale2_dataset_edited)) {
+                                                                    $scale2_dataset_edited[] = Null;
+                                                             }
+                                                             $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
+                                                             print $min_value_scale2;
                                                         ?>,
                                                         //stepSize: 1
                                                     }

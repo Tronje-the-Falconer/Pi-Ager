@@ -58,8 +58,9 @@
                                         <canvas id="scales1_chart"></canvas>
                                         <canvas id="scales2_chart"></canvas>
                                         <canvas id="thermometer1_chart"></canvas> 
-                                        <canvas id="thermometer2_chart"></canvas> 
+<!--                                    <canvas id="thermometer2_chart"></canvas> 
                                         <canvas id="thermometer3_chart"></canvas> 
+-->
                                         <canvas id="thermometer4_chart"></canvas> 
                                         <div class="on_off_chart"><canvas id="cooler_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="heater_chart"></canvas></div>
@@ -87,7 +88,7 @@
                                                     backgroundColor: '#C03738',
                                                     borderColor: '#C03738',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                     pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                     pointHitRadius: 5,';} ?>
                                                     cubicInterpolationMode: 'monotone',
@@ -100,7 +101,7 @@
                                                     backgroundColor: '#59A9C4',
                                                     borderColor: '#59A9C4',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                     pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                     pointHitRadius: 5,';} ?>
                                                     cubicInterpolationMode: 'monotone',
@@ -207,7 +208,7 @@
                                                     backgroundColor: '#AEC645',
                                                     borderColor: '#AEC645',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                     pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                     pointHitRadius: 5,';} ?>
                                                     cubicInterpolationMode: 'monotone',
@@ -230,7 +231,8 @@
                                                     }
                                                 },
                                                 scales: {
-                                                    xAxes: [{
+                                                    xAxes: [
+                                                    {
                                                         type: "time",
                                                         time: {
                                                             displayFormats: {
@@ -241,7 +243,8 @@
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
                                                     }, ],
-                                                    yAxes: [{
+                                                    yAxes: [
+                                                    {
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("scale") . ' 1'; ?>',
@@ -252,35 +255,74 @@
                                                         type: 'linear',
                                                         position: 'left',
                                                         ticks: {
-                                                            callback: function(value, index, values) {
-                                                                if (Math.round(value) === value)
-                                                                return value + ' gr' + ' ';
-                                                            },
-                                                            fontColor: '#000000',
-                                                        //    fontSize: 20,
-                                                            //max: 25000,
-                                                            beginAtZero: true,
-                                                            maxTicksLimit: 10,
-                                                            max: <?php 
-                                                            $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
-                                                            print $max_value_scale1;
-                                                            ?>,
-                                                            min: <?php 
-                                                             $scale1_dataset_edited = array();
-                                                             foreach ($scale1_dataset as $scale1_value){
-                                                                if ($scale1_value != Null){
-                                                                    $scale1_dataset_edited[] = $scale1_value;
-                                                                }
-                                                             }
-                                                             if (empty($scale1_dataset_edited)) {
-                                                                    $scale1_dataset_edited[] = Null;
-                                                             }
-                                                             $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
-                                                            print $min_value_scale1;
-                                                            ?>,
+                                                                callback: function(value, index, values) {
+                                                                    if (Math.round(value) === value)
+                                                                        return value + ' gr' + ' ';
+                                                                },
+                                                                fontColor: '#000000',
+                                                                //    fontSize: 20,
+                                                                //max: 25000,
+                                                                beginAtZero: true,
+                                                                maxTicksLimit: 10,
+                                                                max: <?php 
+                                                                    $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
+                                                                    print $max_value_scale1;
+                                                                ?>,
+                                                                min: <?php 
+                                                                    $scale1_dataset_edited = array();
+                                                                    foreach ($scale1_dataset as $scale1_value){
+                                                                        if ($scale1_value != Null){
+                                                                            $scale1_dataset_edited[] = $scale1_value;
+                                                                        }
+                                                                    }
+                                                                    if (empty($scale1_dataset_edited)) {
+                                                                        $scale1_dataset_edited[] = Null;
+                                                                    }
+                                                                    $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
+                                                                    print $min_value_scale1;
+                                                                ?>,
                                                             //stepSize: 1
                                                         }
-                                                        
+                                                    },
+                                                    {
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            //labelString: '<?php echo _("scale") . ' 1'; ?>',
+                                                            //    fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'scale1_right',
+                                                        type: 'linear',
+                                                        position: 'right',
+                                                        ticks: {
+                                                                callback: function(value, index, values) {
+                                                                    if (Math.round(value) === value)
+                                                                        return value + ' gr' + ' ';
+                                                                },
+                                                                fontColor: '#000000',
+                                                                //    fontSize: 20,
+                                                                //max: 25000,
+                                                                beginAtZero: true,
+                                                                maxTicksLimit: 10,
+                                                                max: <?php 
+                                                                    $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
+                                                                    print $max_value_scale1;
+                                                                ?>,
+                                                                min: <?php 
+                                                                    $scale1_dataset_edited = array();
+                                                                    foreach ($scale1_dataset as $scale1_value){
+                                                                        if ($scale1_value != Null){
+                                                                            $scale1_dataset_edited[] = $scale1_value;
+                                                                        }
+                                                                    }
+                                                                    if (empty($scale1_dataset_edited)) {
+                                                                        $scale1_dataset_edited[] = Null;
+                                                                    }
+                                                                    $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
+                                                                    print $min_value_scale1;
+                                                                ?>,
+                                                            //stepSize: 1
+                                                        }
                                                     }]
                                                 }
                                             }
@@ -304,7 +346,7 @@
                                                     backgroundColor: '#BF9543',
                                                     borderColor: '#BF9543',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                     pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                     pointHitRadius: 5,';} ?>
                                                     cubicInterpolationMode: 'monotone',
@@ -327,7 +369,8 @@
                                                     }
                                                 },
                                                 scales: {
-                                                    xAxes: [{
+                                                    xAxes: [
+                                                    {
                                                         type: "time",
                                                         time: {
                                                             displayFormats: {
@@ -343,17 +386,17 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("scale") . ' 2'; ?>',
-                                                        //    fontSize: 20,
+                                                            //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'scale2',
                                                         type: 'linear',
                                                         position: 'left',
                                                         ticks: {
-                                                            callback: function(value, index, values) {
-                                                                if (Math.round(value) === value) {
-                                                                return ' ' + value + ' gr';
-                                                            }
+                                                                callback: function(value, index, values) {
+                                                                    if (Math.round(value) === value) {
+                                                                        return ' ' + value + ' gr';
+                                                                }
                                                             },
                                                             fontColor: '#000000',
                                                             //    fontSize: 20,
@@ -361,23 +404,63 @@
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
                                                             max: <?php 
-                                                            $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
-                                                            print $max_value_scale2;
+                                                                $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
+                                                                print $max_value_scale2;
                                                             ?>,
-                                                        min: <?php 
-                                                             $scale2_dataset_edited = array();
-                                                             foreach ($scale2_dataset as $scale2_value){
-                                                                if ($scale2_value != Null){
-                                                                    $scale2_dataset_edited[] = $scale2_value;
+                                                            min: <?php 
+                                                                $scale2_dataset_edited = array();
+                                                                foreach ($scale2_dataset as $scale2_value){
+                                                                    if ($scale2_value != Null){
+                                                                        $scale2_dataset_edited[] = $scale2_value;
+                                                                    }
                                                                 }
-                                                             }
-                                                             if (empty($scale2_dataset_edited)) {
+                                                                if (empty($scale2_dataset_edited)) {
                                                                     $scale2_dataset_edited[] = Null;
-                                                             }
-                                                             $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
-                                                                
-                                                        print $min_value_scale2;
-                                                        ?>,
+                                                                }
+                                                                $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
+                                                                print $min_value_scale2;
+                                                            ?>,
+                                                            //stepSize: 1
+                                                        }
+                                                    },
+                                                    {
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            //labelString: '<?php echo _("scale") . ' 2'; ?>',
+                                                            //    fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'scale2_right',
+                                                        type: 'linear',
+                                                        position: 'right',
+                                                        ticks: {
+                                                                callback: function(value, index, values) {
+                                                                    if (Math.round(value) === value) {
+                                                                        return ' ' + value + ' gr';
+                                                                }
+                                                            },
+                                                            fontColor: '#000000',
+                                                            //    fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: <?php 
+                                                                $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
+                                                                print $max_value_scale2;
+                                                            ?>,
+                                                            min: <?php 
+                                                                $scale2_dataset_edited = array();
+                                                                foreach ($scale2_dataset as $scale2_value){
+                                                                    if ($scale2_value != Null){
+                                                                        $scale2_dataset_edited[] = $scale2_value;
+                                                                    }
+                                                                }
+                                                                if (empty($scale2_dataset_edited)) {
+                                                                    $scale2_dataset_edited[] = Null;
+                                                                }
+                                                                $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
+                                                                print $min_value_scale2;
+                                                            ?>,
                                                             //stepSize: 1
                                                         }
                                                     }]
@@ -385,187 +468,50 @@
                                             }
                                         };
                                         
-                                        // Meat thermometer 1
+                                        // NTC thermometer 1,2,3
                                         var thermometer1_chart = document.getElementById("thermometer1_chart");
                                         var config_thermometer1_chart = {
                                             type: 'line',
                                             data: {
                                                 labels: 
                                                     <?php 
-                                                    echo $thermometer1_timestamps_axis_text;
+                                                    echo $temperature_timestamps_axis_text;
                                                     ?>,
                                                 datasets: [
                                                 {
-                                                    label: '<?php echo _("temperature") ?> 1',
+                                                    label: '<?php echo _("temperature") . ' NTC 1' ?>',
                                                     yAxisID: 'temperature',
                                                     data: <?php echo json_encode($thermometer1_dataset); ?>,
-                                                    backgroundColor: '#ff0000',
-                                                    borderColor: '#ff0000',
+                                                    backgroundColor: '#F7AC08',
+                                                    borderColor: '#F7AC08',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                     pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                     pointHitRadius: 5,';} ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
-                                                }]
-                                            },
-                                            options: {
-                                                title: {
-                                                    display: true,
-                                                    text: '<?php echo _("Thermometer") ?> 1',
-                                                    fontSize: 24
                                                 },
-                                                tooltips: {
-                                                    mode: 'index',
-                                                    intersect: false,
-                                                    callbacks: {
-                                                        label: function(tooltipItem, data) {
-                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
-                                                        }
-                                                    }
-                                                },
-                                                scales: {
-                                                    xAxes: [{
-                                                        type: "time",
-                                                        time: {
-                                                            displayFormats: {
-                                                                second: 'HH:mm:ss',
-                                                                minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
-                                                            },
-                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
-                                                        },
-                                                    }, ],
-                                                    yAxes: [
-                                                    {
-                                                        scaleLabel: {
-                                                            display: true,
-                                                            labelString: '<?php echo _("temperature") . ' 1'; ?>',
-                                                        //    fontSize: 20,
-                                                            fontColor: '#000000'
-                                                        },
-                                                        id: 'temperature',
-                                                        type: 'linear',
-                                                        position: 'left',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                if (Math.round(value) === value) {
-                                                                return '  ' + value + ' °C' + '  ';
-                                                                }
-                                                            },
-                                                            fontColor: '#000000',
-                                                            //    fontSize: 20,
-                                                            //max: 25000,
-                                                            beginAtZero: true,
-                                                            maxTicksLimit: 10,
-                                                            max: 30, 
-                                                            min: -4
-                                                        }
-                                                    }]
-                                                }
-                                            }
-                                        };
-                                        
-                                        // Meat thermometer 2
-                                        var thermometer2_chart = document.getElementById("thermometer2_chart");
-                                        var config_thermometer2_chart = {
-                                            type: 'line',
-                                            data: {
-                                                labels: 
-                                                    <?php 
-                                                    echo $thermometer2_timestamps_axis_text;
-                                                    ?>,
-                                                datasets: [
                                                 {
-                                                    label: '<?php echo _("temperature") ?> 2',
+                                                    label: '<?php echo _("temperature") . ' NTC 2' ?>',
                                                     yAxisID: 'temperature',
                                                     data: <?php echo json_encode($thermometer2_dataset); ?>,
-                                                    backgroundColor: '#ff0000',
-                                                    borderColor: '#ff0000',
+                                                    backgroundColor: '#06AF8F',
+                                                    borderColor: '#06AF8F',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                     pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                     pointHitRadius: 5,';} ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
-                                                }]
-                                            },
-                                            options: {
-                                                title: {
-                                                    display: true,
-                                                    text: '<?php echo _("Thermometer") ?> 2',
-                                                    fontSize: 24
-                                                },
-                                                tooltips: {
-                                                    mode: 'index',
-                                                    intersect: false,
-                                                    callbacks: {
-                                                        label: function(tooltipItem, data) {
-                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
-                                                        }
-                                                    }
-                                                },
-                                                scales: {
-                                                    xAxes: [{
-                                                        type: "time",
-                                                        time: {
-                                                            displayFormats: {
-                                                                second: 'HH:mm:ss',
-                                                                minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
-                                                            },
-                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
-                                                        },
-                                                    }, ],
-                                                    yAxes: [
-                                                    {
-                                                        scaleLabel: {
-                                                            display: true,
-                                                            labelString: '<?php echo _("temperature") . ' 2'; ?>',
-                                                        //    fontSize: 20,
-                                                            fontColor: '#000000'
-                                                        },
-                                                        id: 'temperature',
-                                                        type: 'linear',
-                                                        position: 'left',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                if (Math.round(value) === value) {
-                                                                return '  ' + value + ' °C' + '  ';
-                                                                }
-                                                            },
-                                                            fontColor: '#000000',
-                                                            //    fontSize: 20,
-                                                            //max: 25000,
-                                                            beginAtZero: true,
-                                                            maxTicksLimit: 10,
-                                                            max: 30, 
-                                                            min: -4
-                                                        }
-                                                    }]
-                                                }
-                                            }
-                                        };
-                                                                                                                        
-                                        
-                                        // Meat thermometer 3
-                                        var thermometer3_chart = document.getElementById("thermometer3_chart");
-                                        var config_thermometer3_chart = {
-                                            type: 'line',
-                                            data: {
-                                                labels: 
-                                                    <?php 
-                                                    echo $thermometer3_timestamps_axis_text;
-                                                    ?>,
-                                                datasets: [
+                                                },                                                
                                                 {
-                                                    label: '<?php echo _("temperature") ?> 3',
+                                                    label: '<?php echo _("temperature") . ' NTC 3' ?>',
                                                     yAxisID: 'temperature',
                                                     data: <?php echo json_encode($thermometer3_dataset); ?>,
-                                                    backgroundColor: '#ff0000',
-                                                    borderColor: '#ff0000',
+                                                    backgroundColor: '#AF06A1',
+                                                    borderColor: '#AF06A1',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                     pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                     pointHitRadius: 5,';} ?>
                                                     cubicInterpolationMode: 'monotone',
@@ -575,7 +521,7 @@
                                             options: {
                                                 title: {
                                                     display: true,
-                                                    text: '<?php echo _("Thermometer") ?> 3',
+                                                    text: '<?php echo _("Thermometer") ?> NTC 1..3',
                                                     fontSize: 24
                                                 },
                                                 tooltips: {
@@ -583,7 +529,13 @@
                                                     intersect: false,
                                                     callbacks: {
                                                         label: function(tooltipItem, data) {
-                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                            if (tooltipItem.datasetIndex === 0) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                            } else if (tooltipItem.datasetIndex === 1) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                            } else if (tooltipItem.datasetIndex === 2) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                            }
                                                         }
                                                     }
                                                 },
@@ -603,7 +555,7 @@
                                                     {
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php echo _("temperature") . ' 3'; ?>',
+                                                            labelString: '<?php echo _("temperature")?> <?php echo _(" - ϑ") ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -624,13 +576,38 @@
                                                             max: 30, 
                                                             min: -4
                                                         }
+                                                    },
+                                                    {
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            //labelString: '<?php echo _("temperature")?> <?php echo _(" - ϑ") ?>',
+                                                        //    fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'temperature_right',
+                                                        type: 'linear',
+                                                        position: 'right',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                if (Math.round(value) === value) {
+                                                                return '  ' + value + ' °C' + '  ';
+                                                                }
+                                                            },
+                                                            fontColor: '#000000',
+                                                            //    fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: 30, 
+                                                            min: -4
+                                                        }
                                                     }]
                                                 }
                                             }
                                         };
-                                                                                                                        
+ 
                                         
-                                        // Meat thermometer 4
+                                        // Meat thermometer NTC 4, can also be AC/DC Current sensor
                                         var thermometer4_chart = document.getElementById("thermometer4_chart");
                                         var config_thermometer4_chart = {
                                             type: 'line',
@@ -641,15 +618,17 @@
                                                     ?>,
                                                 datasets: [
                                                 {
-                                                    label: '<?php if ($sensor4_is_current == true) { echo _("Current"); } else { echo _("temperature") . '4';}?>',
+                                                    label: '<?php if ($sensor4_is_current == true) { echo _("Current") . " - I"; } else { echo _("temperature") . _(" - ϑ");}?>',
                                                     yAxisID: 'temperature',
                                                     data: <?php echo json_encode($thermometer4_dataset); ?>,
                                                     backgroundColor: '#ff0000',
                                                     borderColor: '#ff0000',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    <?php if ($diagram_mode == 'hour') {
+                                                                print 'pointRadius: 1, pointHitRadius: 5,';
+                                                          } else {
+                                                                print 'pointRadius: 0, pointHitRadius: 5,';
+                                                          } ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 }]
@@ -657,7 +636,7 @@
                                             options: {
                                                 title: {
                                                     display: true,
-                                                    text: '<?php if ($sensor4_is_current == true){ if ($sensor4_current_mode == 'AC') { echo "AC-Current"; } else { echo "DC-Current"; }} else { echo _("Thermometer") . ' 4';} ?>',
+                                                    text: '<?php if ($sensor4_is_current == true){ echo "AC/DC-Current"; } else { echo _("Thermometer") . ' NTC 4';} ?>',
                                                     fontSize: 24
                                                 },
                                                 tooltips: {
@@ -685,7 +664,7 @@
                                                     {
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php if ($sensor4_is_current == true) { echo _("Current"); } else { echo _("temperature") . '4';}?>',
+                                                            labelString: '<?php if ($sensor4_is_current == true) { echo _("Current") . " - I"; } else { echo _("temperature") . _(" - ϑ");}?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -695,7 +674,7 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 if (Math.round(value) === value) {
-                                                                return '  ' + value + '<?php if ($sensor4_is_current == true) { echo ' A'; } else { echo ' °C'; }?>' + '  ';
+                                                                    return '  ' + value + '<?php if ($sensor4_is_current == true) { echo ' A'; } else { echo ' °C'; }?>' + '  ';
                                                                 }
                                                             },
                                                             fontColor: '#000000',
@@ -703,8 +682,33 @@
                                                             //max: 25000,
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
-                                                            max: <?php if ($sensor4_is_current == true) { echo '15'; } else { echo '30'; }?>, 
-                                                            min: <?php if ($sensor4_is_current == true) { if ($sensor4_current_mode == 'AC') { echo '0'; } else { echo '-15'; }} else { echo '-4'; }?>
+                                                            max: <?php if ($sensor4_is_current == true) { echo '4'; } else { echo '30'; }?>, 
+                                                            min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-4'; }?>
+                                                        }
+                                                    },
+                                                    {
+                                                        scaleLabel: {
+                                                            display: true,
+                                                        //    labelString: '<?php if ($sensor4_is_current == true) { echo _("Current"); } else { echo _("temperature") . '4';}?>',
+                                                        //    fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'temperature_right4',
+                                                        type: 'linear',
+                                                        position: 'right',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                if (Math.round(value) === value) {
+                                                                    return '  ' + value + '<?php if ($sensor4_is_current == true) { echo ' A'; } else { echo ' °C'; }?>' + '  ';
+                                                                }
+                                                            },
+                                                            fontColor: '#000000',
+                                                            //    fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: <?php if ($sensor4_is_current == true) { echo '4'; } else { echo '30'; }?>, 
+                                                            min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-4'; }?>
                                                         }
                                                     }]
                                                 }
@@ -1525,8 +1529,8 @@
                                             window.scales1_chart = new Chart(scales1_chart, config_scales1_chart);
                                             window.scales2_chart = new Chart(scales2_chart, config_scales2_chart); 
                                             window.thermometer1_chart = new Chart(thermometer1_chart, config_thermometer1_chart);
-                                            window.thermometer2_chart = new Chart(thermometer2_chart, config_thermometer2_chart);
-                                            window.thermometer3_chart = new Chart(thermometer3_chart, config_thermometer3_chart);
+                                        //    window.thermometer2_chart = new Chart(thermometer2_chart, config_thermometer2_chart);
+                                        //    window.thermometer3_chart = new Chart(thermometer3_chart, config_thermometer3_chart);
                                             window.thermometer4_chart = new Chart(thermometer4_chart, config_thermometer4_chart);
                                             window.light_chart = new Chart(light_chart, config_light_chart);
 											window.uv_chart = new Chart(uv_chart, config_uv_chart);
