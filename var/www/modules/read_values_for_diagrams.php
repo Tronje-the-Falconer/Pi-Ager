@@ -69,6 +69,9 @@
     function get_intermediate_value($first_value, $second_value, $first_timestamp, $second_timestamp) {
         global $first_timestamp_diagram;
         # Zwischenwert für ersten Timestamp errechnen
+        if ($first_value == Null || $second_value == Null) {
+            return Null;
+        }
         $teiler = ($first_timestamp_diagram - $first_timestamp) / ($second_timestamp - $first_timestamp);
         $intermediate_value = $first_value + (($second_value - $first_value) / $teiler);
         return $intermediate_value;
