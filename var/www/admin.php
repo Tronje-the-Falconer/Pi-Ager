@@ -255,12 +255,6 @@
                                                     echo '<select name="temp_sensor4_admin">';
                                                     foreach($meat_sensors as $meatsensor_row)
                                                     {
-                                                        # allow only AC mode for LEM sensors
-                                                        if (strncmp($meatsensor_row['name'], 'LEM', 3) === 0)
-                                                        {
-                                                            if ($meatsensor_row['Mode'] == 'DC')
-                                                                continue;
-                                                        }
                                                         if ($meatsensor_row[id] == $meatsensor_index)
                                                         {
                                                             echo '<option value="'.$meatsensor_row[id].'" selected>'.$meatsensor_row[name].'</option>';
