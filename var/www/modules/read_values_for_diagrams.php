@@ -198,7 +198,7 @@
             $sensor4_current_mode = 'DC';   
         }            
     }
-
+ 
     
     // echo "Temperatur<br>";
     $nth_value = 1;
