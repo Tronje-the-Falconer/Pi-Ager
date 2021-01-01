@@ -77,7 +77,7 @@ function handleContent() {
             str_meat4 = '-----';
         }
         else {
-            str_meat4 = temp_meat4.toFixed(1);
+            str_meat4 = temp_meat4.toFixed(2);
         }        
 
         var str_meat1_sensorname = myObj.meat1_sensor_name;
@@ -176,7 +176,7 @@ function handleContent() {
             document.getElementById('json_meat_temperature4').innerHTML = str_meat4 + " A";
         }
         else {
-            document.getElementById('json_meat_temperature4').innerHTML = str_meat4 + " °C";
+            document.getElementById('json_meat_temperature4').innerHTML = temp_meat4.toFixed(1) + " °C";
         }
     }
 }

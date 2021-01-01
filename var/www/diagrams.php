@@ -644,7 +644,7 @@
                                                     intersect: false,
                                                     callbacks: {
                                                         label: function(tooltipItem, data) {
-                                                            return Number(tooltipItem.yLabel).toFixed(1) + '<?php if ($sensor4_is_current == true){ echo " A"; } else { echo " °C"; } ?>';
+                                                            return Number(tooltipItem.yLabel).toFixed(3) + '<?php if ($sensor4_is_current == true){ echo " A"; } else { echo " °C"; } ?>';
                                                         }
                                                     }
                                                 },
