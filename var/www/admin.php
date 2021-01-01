@@ -503,8 +503,8 @@
                                             <tr>
                                                 <td><?php echo _('backup_active'); ?>:</td>
                                                 <td>
-                                                    <input type="checkbox" name="backup_active" value="1" <?php echo $checked_backup_true; ?>/>
                                                     <input type="hidden" name="backup_active" value="0">
+                                                    <input type="checkbox" name="backup_active" value="1" <?php echo $checked_backup_true; ?>/>
                                                 </td>
                                             </tr>
                                         </table>
