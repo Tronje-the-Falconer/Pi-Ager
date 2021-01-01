@@ -2,6 +2,7 @@
 
     if (isset ($_POST['save_backup_values'])){
         logger('DEBUG', 'button save backupvalues pressed');
+        unset($_POST['save_backup_values']);
         $backup_nfsvol = $_POST['backup_nfsvol'];
         $backup_subdir = $_POST['backup_subdir'];
         $backup_nfsmount = $_POST['backup_nfsmount'];
