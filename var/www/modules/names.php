@@ -27,6 +27,7 @@ $agingtable_dryaging1_table = 'agingtable_dryaging1';
 $agingtable_dryaging2_table = 'agingtable_dryaging1';
 $system_table = 'system';
 $meat_sensortypes = 'meat_sensortypes';
+$backup_table = 'config_nfs_backup';
 
 #----------------------------table keys;
 $switch_on_cooling_compressor_key = 'switch_on_cooling_compressor';
@@ -129,6 +130,14 @@ $meat_sensortypes_RefVoltage_field = 'RefVoltage';
 $meat_sensortypes_Sensitivity_field = 'Sensitivity';
 $meat_sensortypes_Turns_field = 'Turns';
 $meat_sensortypes_nAverage_field = 'nAverage';
+$backup_nfsvol_field = 'nfsvol';
+$backup_subdir_field = 'subdir';
+$backup_nfsmount_field = 'nfsmount';
+$backup_path_field = 'backup_path';
+$backup_number_of_backups_field = 'number_of_backups';
+$backup_name_field = 'backup_name';
+$backup_nfsopt_field = 'nfsopt';
+$backup_active_field = 'active';
 
 #-----------------------------Paths and urls
 $thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/';

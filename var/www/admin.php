@@ -11,8 +11,10 @@
                                     include 'modules/database_empty_statistic_tables.php';      // leert die Statistik-Tabellen (Status, data)
                                     include 'modules/write_loglevel_db.php';                    // schreibt das Loglevel in Datenbank
                                     include 'modules/write_debug_values.php';                   // schreibt die Debug-Werte
-                                    include 'modules/write_admin_db.php';                        // schreibt die admin-Werte
+                                    include 'modules/write_admin_db.php';                       // schreibt die admin-Werte
                                     include 'modules/write_bus.php';                            // schreibt den bus-value
+                                    include 'modules/backup_manual.php';                        // steuert manuelles Backup im sudowebscript an
+                                    include 'modules/write_backup_db.php';                      // schreibt die backup-Werte
                                     
                                     include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                     include 'modules/read_current_db.php';
@@ -447,6 +449,74 @@
                                         </table>
                                         <button class="art-button" name="save_debug_values" value="save_debug_values" onclick="return confirm('<?php echo _('ATTENTION: save debug values?');?>');"><?php echo _('save'); ?></button>
                                     </form>
+                                </div>
+                                <hr>
+                                <h2 class="art-postheader"><?php echo _('backup'); ?></h2>
+                                <!----------------------------------------------------------------------------------------Backup-->
+                                <div class="hg_container" >
+                                    <form method="post" name="backup">
+                                        <table style="width: 100%;">
+                                            <?php
+                                                $backup_nfsvol = get_table_value_from_field($backup_table, Null, $backup_nfsvol_field);
+                                                $backup_subdir = get_table_value_from_field($backup_table, Null, $backup_subdir_field);
+                                                $backup_nfsmount= get_table_value_from_field($backup_table, Null, $backup_nfsmount_field);
+                                                $backup_path = get_table_value_from_field($backup_table, Null, $backup_path_field);
+                                                $backup_number_of_backups = get_table_value_from_field($backup_table, Null, $backup_number_of_backups_field);
+                                                $backup_name = get_table_value_from_field($backup_table, Null, $backup_name_field);
+                                                $backup_nfsopt = get_table_value_from_field($backup_table, Null, $backup_nfsopt_field);
+                                                $backup_active = get_table_value_from_field($backup_table, Null, $backup_active_field);
+                                                if($backup_active == 1) {
+                                                    $checked_backup_true = "checked";
+                                                }
+                                                else{
+                                                    $checked_backup_true = "";
+                                                }
+                                            ?>
+                                            <tr>
+                                                <td><?php echo _('nfs volume'); ?>:</td>
+                                                <td><input name="backup_nfsvol" type="text" style="width: 90%; text-align: right;" required value=<?php echo $backup_nfsvol; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td><?php echo _('subdirectory'); ?>:</td>
+                                                <td><input name="backup_subdir" type="text" style="width: 90%; text-align: right;" required value=<?php echo $backup_subdir; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td><?php echo _('nfs mount'); ?>:</td>
+                                                <td><input name="backup_nfsmount" type="text" style="width: 90%; text-align: right;" required value=<?php echo $backup_nfsmount; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td><?php echo _('nfs path'); ?>:</td>
+                                                <td><input name="backup_path" type="text" style="width: 90%; text-align: right;" required value=<?php echo $backup_path; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td><?php echo _('number of backups'); ?>:</td>
+                                                <td><input name="backup_number_of_backups" type="number" min="1" max="60" style="width: 90%;" required value=<?php echo $backup_number_of_backups; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td><?php echo _('backup name'); ?>:</td>
+                                                <td><input name="backup_name" type="text" style="width: 90%; text-align: right;" required value=<?php echo $backup_name; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td><?php echo _('nfs opt'); ?>:</td>
+                                                <td><input name="backup_nfsopt" type="text" style="width: 90%; text-align: right;" required value=<?php echo $backup_nfsopt; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td><?php echo _('backup_active'); ?>:</td>
+                                                <td>
+                                                    <input type="checkbox" name="backup_active" value="1" <?php echo $checked_backup_true; ?>/>
+                                                    <input type="hidden" name="backup_active" value="0">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <button class="art-button" name="save_backup_values" value="save_backup_values" onclick="return confirm('<?php echo _('ATTENTION: save backup values?');?>');"><?php echo _('save'); ?></button>
+                                    </form>
+                                    <table style="width: 100%;">
+                                        <tr>
+                                            <form method="post" name="database">
+                                                <td><button class="art-button" name="manual_backup" value="manual_backup" onclick="return confirm('<?php echo _('ATTENTION: backup manually?');?>');"><?php echo _('backup manually'); ?></button></td>
+                                            </form>
+                                        </tr>
+                                    </table>
                                 </div>
                                 <hr>
                                 <h2 class="art-postheader"><?php echo _('database'); ?></h2>

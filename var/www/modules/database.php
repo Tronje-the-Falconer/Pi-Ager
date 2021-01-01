@@ -683,4 +683,36 @@
         close_database();
         logger('DEBUG', 'delete_data performed');
     }
+
+    function get_table_value_from_field($table, $key, $field)
+    {
+        global $id_field;
+        
+        $value = NULL;
+        open_connection();
+        if ($key == NULL){
+            $sql = 'SELECT ' . $field . ' FROM ' . $table . ' WHERE ' . $id_field . ' = (SELECT MAX(' . $id_field . ') from ' . $table . ')';
+        }
+        else {
+            $sql = 'SELECT ' . $field . ' FROM ' . $table . ' WHERE key = "' . $key . '" AND ' . $id_field . ' = (SELECT MAX(' . $id_field . ') from ' . $table . ' WHERE key = "' . $key . '")';
+        }
+        $result = get_query_result($sql);
+            while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+                {
+                $value = $dataset[$field];
+                }
+        close_database();
+        
+        return $value;
+    }
+    
+    function write_backupvalues($backup_nfsvol, $backup_subdir, $backup_nfsmount, $backup_path, $backup_number_of_backups, $backup_name, $backup_nfsopt, $backup_active){
+        global $id_field, $backup_table, $backup_nfsvol_field, $backup_subdir_field, $backup_nfsmount_field, $backup_path_field, $backup_number_of_backups_field, $backup_name_field, $backup_nfsopt_field, $backup_active_field;
+        
+        open_connection();
+        $sql = 'UPDATE ' . $backup_table . ' SET "' . $backup_nfsvol_field . '" = "' . $backup_nfsvol . '" , "' . $backup_subdir_field . '" = "' . $backup_subdir . '" , "' . $backup_nfsmount_field . '" = "' . $backup_nfsmount . '" , "' . $backup_path_field . '" = "' . $backup_path . '" , "' . $backup_number_of_backups_field . '" = ' . $backup_number_of_backups . ' , "' . $backup_name_field . '" = "' . $backup_name . '" , "' . $backup_nfsopt_field . '" = "' . $backup_nfsopt . '" , "' . $backup_active_field . '" = "' . $backup_active . '" ' . ' WHERE ' . $id_field . ' = 1';
+        execute_query($sql);
+        
+        close_database();
+    }
 ?>
