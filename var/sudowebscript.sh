@@ -23,7 +23,6 @@ case "$1" in
     startmain) #Starten von main.py
         #python3 /opt/pi-ager/main.py > /dev/null 2>/dev/null &
     	systemctl start pi-ager_main &
-    	
     ;;
     pkillmain) #Stoppen von Rss.py
         systemctl stop pi-ager_main &
@@ -128,6 +127,9 @@ case "$1" in
     ;;
    delete_snapshot_files) # delete all .jpg files from folder /var/www/images/webcam/ 
         rm /var/www/images/webcam/*.jpg
+    ;;
+    backup) # Backupscript ausfuehren
+        /usr/local/bin/piager_backup.sh
     ;;
     sensorbusi2c) #Sensorbus wurde geaendert auf i2c
 ####### hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
