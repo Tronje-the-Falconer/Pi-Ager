@@ -112,7 +112,30 @@
         
         return $values;
     }
-
+    
+    // get only part of values, range is defined by last_timestamp_diagram and first_timestamp_diagram
+    function get_diagram_values_range($table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram)
+    {
+        global $value_field, $last_change_field, $id_field;
+        
+        open_connection();
+        $sql = 'SELECT ' . $value_field . ', ' .$last_change_field . ' FROM ' . $table . ' WHERE (' . $id_field . ' % ' . $nth_value . ') = 0' . ' AND ' . $last_change_field . ' BETWEEN ' . $first_timestamp_diagram . ' AND ' . $last_timestamp_diagram;
+        $result = get_query_result($sql);
+        $values = array();
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+        {
+            $values[$dataset[$last_change_field]] = $dataset[$value_field];
+        }
+        close_database();
+        
+        //if (!isset ($values)){
+        //    $values = array();
+        //    $values['1'] = 0;
+        //}
+        
+        return $values;
+    }
+    
     function get_last_change($table, $key)
     {
         global $last_change_field,$id_field, $last_change;

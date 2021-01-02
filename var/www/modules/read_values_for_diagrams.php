@@ -178,6 +178,35 @@
         $return_array = array($timestamps_axis_text, $dataset);
         return $return_array;
     }
+
+    
+    function get_data_for_sensor_diagram($data_values){
+        global $last_timestamp_diagram;
+        global $first_timestamp_diagram;
+        
+        $timestamp_value_dict = array();
+        $timestamps = array_keys($data_values);
+        $timestamp_value_dict[$first_timestamp_diagram] = Null;
+        
+        if (count($timestamps) > 0) {
+            foreach ($timestamps as $timestamp){
+                if ($timestamp >= $first_timestamp_diagram){
+                    $timestamp_value_dict[$timestamp] = $data_values[$timestamp];
+                }
+            }
+        }
+        $timestamp_value_dict[$last_timestamp_diagram] = Null;
+        
+        $timestamps_axis_text = get_text_array_for_time_axis(array_keys($timestamp_value_dict));
+        $dataset = array_values($timestamp_value_dict);
+        // print "dataset: " . count($dataset) . "<br>";
+        // print "timestamps_axis_text: " . $timestamps_axis_text . "<br>";
+        // echo '<pre>';
+        // var_dump($dataset);
+        // echo '</pre>';
+        $return_array = array($timestamps_axis_text, $dataset);
+        return $return_array;
+    }   
     
     global $last_timestamp_diagram;
     global $first_timestamp_diagram;
@@ -209,9 +238,10 @@
         $nth_value = 4;
     }
     
-    $temperature_values = get_diagram_values($data_sensor_temperature_table, $nth_value);
-    $is_OnOff_value = False;
-    $temperature_data_diagram = get_data_for_diagram($temperature_values, $is_OnOff_value);
+    
+    $temperature_values = get_diagram_values_range($data_sensor_temperature_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    //$is_OnOff_value = False;
+    $temperature_data_diagram = get_data_for_sensor_diagram($temperature_values);
     $temperature_timestamps_axis_text = $temperature_data_diagram[0];
     $temperature_dataset = $temperature_data_diagram[1];
     
@@ -222,9 +252,9 @@
     // $temperature_dataset = get_dataset_of_values($temperature_values_diagram, $temperature_timestamps_axis);
     
     // echo "humidity_values<br>";
-    $humidity_values = get_diagram_values($data_sensor_humidity_table, $nth_value);
-    $is_OnOff_value = False;
-    $humidity_data_diagram = get_data_for_diagram($humidity_values, $is_OnOff_value);
+    $humidity_values = get_diagram_values_range($data_sensor_humidity_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    //$is_OnOff_value = False;
+    $humidity_data_diagram = get_data_for_sensor_diagram($humidity_values);
     $humidity_timestamps_axis_text = $humidity_data_diagram[0];
     $humidity_dataset = $humidity_data_diagram[1];
     
@@ -237,9 +267,9 @@
     // $humidity_dataset = get_dataset_of_values($humidity_values, $humidity_timestamps_axis);
     
     // echo "scale1_values<br>";
-    $scale1_values = get_diagram_values($data_scale1_table, $nth_value);
-    $is_OnOff_value = False;
-    $scale1_data_diagram = get_data_for_diagram($scale1_values, $is_OnOff_value);
+    $scale1_values = get_diagram_values_range($data_scale1_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    //$is_OnOff_value = False;
+    $scale1_data_diagram = get_data_for_sensor_diagram($scale1_values);
     $scale1_timestamps_axis_text = $scale1_data_diagram[0];
     $scale1_dataset = $scale1_data_diagram[1];
     
@@ -252,9 +282,9 @@
     // $scale1_dataset = get_dataset_of_values($scale1_values, $scale1_timestamps_axis);
     
     // echo "scale2_values<br>";
-    $scale2_values = get_diagram_values($data_scale2_table, $nth_value);
-    $is_OnOff_value = False;
-    $scale2_data_diagram = get_data_for_diagram($scale2_values, $is_OnOff_value);
+    $scale2_values = get_diagram_values_range($data_scale2_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    //$is_OnOff_value = False;
+    $scale2_data_diagram = get_data_for_sensor_diagram($scale2_values);
     $scale2_timestamps_axis_text = $scale2_data_diagram[0];
     $scale2_dataset = $scale2_data_diagram[1];
     
@@ -267,33 +297,32 @@
     // $scale2_dataset = get_dataset_of_values($scale2_values, $scale2_timestamps_axis);
     
     // echo "thermometer1_values<br>";
-    $thermometer1_values = get_diagram_values($data_sensor_temperature_meat1_table, $nth_value);
-    $is_OnOff_value = False;
-    $thermometer1_data_diagram = get_data_for_diagram($thermometer1_values, $is_OnOff_value);
+    $thermometer1_values = get_diagram_values_range($data_sensor_temperature_meat1_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    //$is_OnOff_value = False;
+    $thermometer1_data_diagram = get_data_for_sensor_diagram($thermometer1_values);
     $thermometer1_timestamps_axis_text = $thermometer1_data_diagram[0];
     $thermometer1_dataset = $thermometer1_data_diagram[1];
     
     // echo "thermometer2_values<br>";
-    $thermometer2_values = get_diagram_values($data_sensor_temperature_meat2_table, $nth_value);
-    $is_OnOff_value = False;
-    $thermometer2_data_diagram = get_data_for_diagram($thermometer2_values, $is_OnOff_value);
+    $thermometer2_values = get_diagram_values_range($data_sensor_temperature_meat2_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    //$is_OnOff_value = False;
+    $thermometer2_data_diagram = get_data_for_sensor_diagram($thermometer2_values);
     $thermometer2_timestamps_axis_text = $thermometer2_data_diagram[0];
     $thermometer2_dataset = $thermometer2_data_diagram[1];
     
     // echo "thermometer3_values<br>";
-    $thermometer3_values = get_diagram_values($data_sensor_temperature_meat3_table, $nth_value);
-    $is_OnOff_value = False;
-    $thermometer3_data_diagram = get_data_for_diagram($thermometer3_values, $is_OnOff_value);
+    $thermometer3_values = get_diagram_values_range($data_sensor_temperature_meat3_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    //$is_OnOff_value = False;
+    $thermometer3_data_diagram = get_data_for_sensor_diagram($thermometer3_values);
     $thermometer3_timestamps_axis_text = $thermometer3_data_diagram[0];
     $thermometer3_dataset = $thermometer3_data_diagram[1];
     
     // echo "thermometer4_values<br>";
-    $thermometer4_values = get_diagram_values($data_sensor_temperature_meat4_table, $nth_value);
-    $is_OnOff_value = False;
-    $thermometer4_data_diagram = get_data_for_diagram($thermometer4_values, $is_OnOff_value);
+    $thermometer4_values = get_diagram_values_range($data_sensor_temperature_meat4_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    //$is_OnOff_value = False;
+    $thermometer4_data_diagram = get_data_for_sensor_diagram($thermometer4_values);
     $thermometer4_timestamps_axis_text = $thermometer4_data_diagram[0];
     $thermometer4_dataset = $thermometer4_data_diagram[1];
-
     
     // echo "uv_light_values<br>";
     $uv_light_values = get_diagram_values($status_uv_table, 1);
