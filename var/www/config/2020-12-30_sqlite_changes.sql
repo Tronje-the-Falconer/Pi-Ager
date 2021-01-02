@@ -452,6 +452,7 @@ DROP TABLE IF EXISTS "config_nfs_backup";
 -- Table structure for config_nfs_backup
 ----
 CREATE TABLE "config_nfs_backup" (
+	"id" INTEGER,
     "nfsvol" TEXT,
     "subdir" TEXT,
     "nfsmount" TEXT,
