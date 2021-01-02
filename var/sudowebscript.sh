@@ -129,7 +129,7 @@ case "$1" in
         rm /var/www/images/webcam/*.jpg
     ;;
     backup) # Backupscript ausfuehren
-        /usr/local/bin/piager_backup.sh
+        nohup /usr/local/bin/pi-ager_backup.sh &
     ;;
     sensorbusi2c) #Sensorbus wurde geaendert auf i2c
 ####### hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
