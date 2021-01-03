@@ -69,11 +69,11 @@ fi
 #Überprüfen ob Backup aktiv ist
 if [ -z "$BACKUP_STATUS" ]
 	then
+	echo "Backup ist inaktiv. Backup wird gestartet!"
+	#sqlite3 /var/www/config/pi-ager.sqlite3 "BEGIN TRANSACTION;UPDATE config SET value = '1.0' where key = 'backup_status'; COMMIT;"	
+	else
 	echo "Backup ist aktiv. Backup wird nicht gestartet!"
 	exit 1
-	else
-	echo "Backup ist inaktiv. Backup wird gestartet!"
-	#sqlite3 /var/www/config/pi-ager.sqlite3 "BEGIN TRANSACTION;UPDATE config SET value = '1.0' where key = 'backup_status'; COMMIT;"
 fi	
 
 
