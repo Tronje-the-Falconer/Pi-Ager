@@ -45,7 +45,7 @@ BACKUP_STATUS=$(/var/sudowebscript.sh grepbackup)
 echo $$
 if [ -z "$BACKUP_STATUS[1]]" ]
 	then
-	  echo "Ich bin nicht Ich"
+	  echo "Zweiter Backup Prozess vorhanden!"
 	else
 	  unset BACKUP_STATUS
 fi	 
@@ -84,11 +84,10 @@ fi
 #Überprüfen ob Backup aktiv ist
 if [ -z "$BACKUP_STATUS" ]
 	then
-	echo "Backup ist inaktiv. Backup wird gestartet!"
-	#sqlite3 /var/www/config/pi-ager.sqlite3 "BEGIN TRANSACTION;UPDATE config SET value = '1.0' where key = 'backup_status'; COMMIT;"	
+	  echo "Backup ist inaktiv. Backup wird gestartet!"
 	else
-	echo "Backup ist aktiv. Backup wird nicht gestartet!"
-	exit 1
+	  echo "Backup ist aktiv. Backup wird nicht gestartet!"
+	  exit 1
 fi	
 
 
