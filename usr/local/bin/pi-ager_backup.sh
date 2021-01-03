@@ -43,10 +43,11 @@ systemctl daemon-reload
 # Lese Status der Pi-Ager Prozesse
 BACKUP_STATUS=$(/var/sudowebscript.sh grepbackup)
 echo $$
-if [[ $BACKUP_STATUS == $$ ]]  
+if [ -z "$BACKUP_STATUS[1]]" ]
 	then
-	echo "Ich bin Ich"
-	unset BACKUP_STATUS
+	  echo "Ich bin nicht Ich"
+	else
+	  unset BACKUP_STATUS
 fi	 
 echo "Backup Status ist $BACKUP_STATUS"
 
