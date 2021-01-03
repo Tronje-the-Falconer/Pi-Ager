@@ -39,11 +39,13 @@ BACKUP_ANZAHL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select number_of_backup
 BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from config_nfs_backup where active = 1")
 
 # Lese Backup Status
-BACKUP_STATUS=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select value from config where key = 'backup_status' ")
+#BACKUP_STATUS=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select value from config where key = 'backup_status' ")
+BACKUP_STATUS=$(/var/sudowebscript.sh grepmain) 
 echo "Backup Status ist $BACKUP_STATUS"
 
 # Lese Agingtable Status
-AGINGTABLE_STATUS=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select value from config where key = 'agingtable_status' ")
+#AGINGTABLE_STATUS=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select value from config where key = 'agingtable_status' ")
+AGINGTABLE_STATUS=$(/var/sudowebscript.sh grepagingtable)
 echo "Agingtable Status ist $AGINGTABLE_STATUS"
 # ENDE VARIABLEN
  
@@ -57,21 +59,22 @@ anfang=$(date +%s)
 
 echo "Starte mit dem Backup, dies kann einige Zeit dauern"
 #Überprüfen ob Agingtable aktiv ist
-if [ $AGINGTABLE_STATUS != 0.0 ]
+if [ $AGINGTABLE_STATUS != NULL ]
 	then
 	echo "Aginttable ist aktiv. Backup wird nicht gestartet!"
 	exit 1
 fi	
 #Überprüfen ob Backup aktiv ist
-if [ $BACKUP_STATUS != 0.0 ]
+if [ $BACKUP_STATUS != NULL ]
 	then
 	echo "Backup ist aktiv. Backup wird nicht gestartet!"
 	exit 1
 	else
 	echo "Backup ist inaktiv. Backup wird gestartet!"
-	sqlite3 /var/www/config/pi-ager.sqlite3 "BEGIN TRANSACTION;UPDATE config SET value = '1.0' where key = 'backup_status'; COMMIT;"
+	#sqlite3 /var/www/config/pi-ager.sqlite3 "BEGIN TRANSACTION;UPDATE config SET value = '1.0' where key = 'backup_status'; COMMIT;"
 fi	
 
+exit 1
 
 #Überprüfen ob der NFS-Server vorhanden ist
 echo "überprüfe ob der NFS-Server vorhanden ist."
@@ -154,27 +157,33 @@ systemctl -q is-active pi-ager_main
 if [ $? -eq 0 ];
         then
         PI_AGER_MAIN_ACTIVE=1
+        echo "Stoppe Pi-Ager Main"
         systemctl stop pi-ager_main 
         else
         PI_AGER_MAIN_ACTIVE=0
+        echo "Pi-Ager Main ist nicht gestartet"
 fi
 
 systemctl -q is-active pi-ager_scale
 if [ $? -eq 0 ];
         then
         PI_AGER_SCALE_ACTIVE=1
+        echo "Stoppe Pi-Ager Scale"
         systemctl stop pi-ager_scale
         else
         PI_AGER_SCALE_ACTIVE=0
+        echo "Pi-Ager Scale ist nicht gestartet"
 fi
 
 systemctl -q is-active pi-ager_agintable
 if [ $? -eq 0 ];
         then
         PI_AGER_AGINGTABLE_ACTIVE=1
+        echo "Stoppe Pi-Ager Agingtable"
         systemctl stop pi-ager_agingtable
         else
         PI_AGER_AGINGTABLE_ACTIVE=0
+        echo "Pi-Ager Agingtable ist nicht gestartet"
 fi
 
 
@@ -186,15 +195,18 @@ dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=1M status=progress
 echo "Starte schreibende Dienste wieder!"
 #${DIENSTE_START_STOP} start
 if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
-  systemctl start pi-ager_main
+  "Starte Pi-Ager Main"
+  systemctl start pi-ager_main &
 fi
 
 if [ $PI_AGER_SCALE_ACTIVE == 1 ]; then
-  systemctl start pi-ager_scale
+  "Startee Pi-Ager Scale"
+  systemctl start pi-ager_scale &
 fi
 
 if [ $PI_AGER_AGINGTABLE_ACTIVE == 1 ]; then
-  systemctl start pi-ager_agingtable
+  "Stoppe Pi-Ager Agingtable"
+  systemctl start pi-ager_agingtable &
 fi
 
 sync
@@ -209,7 +221,7 @@ sudo /usr/local/bin/pishrink.sh $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img
 mv ${BACKUP_PFAD}/${BACKUP_NAME}.img ${BACKUP_PFAD}/${BACKUP_NAME}_$(date +%Y-%m-%d-%H:%M:%S).img
 
 # Backup beendet
-sqlite3 /var/www/config/pi-ager.sqlite3 "BEGIN TRANSACTION;UPDATE config SET value = '0.0' where key = 'backup_status'; COMMIT;"
+#sqlite3 /var/www/config/pi-ager.sqlite3 "BEGIN TRANSACTION;UPDATE config SET value = '0.0' where key = 'backup_status'; COMMIT;"
 
 # Alte Sicherungen die nach X neuen Sicherungen entfernen
 NUMBER_OF_BACKUPS=$(find ${BACKUP_PFAD}/${BACKUP_NAME}* -type f | wc -l)
