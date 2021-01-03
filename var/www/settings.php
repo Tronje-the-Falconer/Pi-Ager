@@ -69,7 +69,12 @@
                                             print '<tr>';
                                             // Prüft, ob Prozess scale läuft ( NULL = scale.py läuft nicht als Prozess)
                                             $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
-                                            if ($grepscale == NULL){
+                                            if ($grepbackup != NULL){ //wenn backup läuft
+                                                echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
+                                                <td></td>
+                                                <td>';
+                                                echo "Backup is currently running! ";
+                                            elseif ($grepscale == NULL){
                                                 echo '<td><img src="images/icons/scale_fail_42x42.png" alt="" style="padding: 10px;"></td>
                                                 <td></td>
                                                 <td>';
