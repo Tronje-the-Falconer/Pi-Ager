@@ -40,16 +40,18 @@ BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from c
 
 systemctl daemon-reload
 
-# Lese Status der Pi-Ager Prozesse
-BACKUP_STATUS=$(/var/sudowebscript.sh grepbackup)
-echo $$
-if [ -z "$BACKUP_STATUS[1]]" ]
+# Prüfen, ob Backup schon läuft
+currsh=$0
+currpid=$$
+runpid=$(lsof -t $currsh| paste -s -d " ")
+if [[ $runpid != $currpid ]]
 	then
 	  echo "Zweiter Backup Prozess vorhanden!"
-	else
-	  unset BACKUP_STATUS
+	  exit 1
 fi	 
-echo "Backup Status ist $BACKUP_STATUS"
+
+
+# Lese Status der Pi-Ager Prozesse
 
 MAIN_STATUS=$(/var/sudowebscript.sh grepmain) 
 echo "Main Status ist $MAIN_STATUS"
