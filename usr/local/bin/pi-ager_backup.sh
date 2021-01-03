@@ -41,7 +41,12 @@ BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from c
 systemctl daemon-reload
 
 # Lese Status der Pi-Ager Prozesse
-BACKUP_STATUS=$(/var/sudowebscript.sh grepbackup) 
+BACKUP_STATUS=$(/var/sudowebscript.sh grepbackup)
+if [[ $BACKUP_STATUS == $$ ]]  
+	then
+	echo "Ich bin Ich"
+	unset $BACKUP_STATUS
+fi	 
 echo "Backup Status ist $BACKUP_STATUS"
 
 MAIN_STATUS=$(/var/sudowebscript.sh grepmain) 
