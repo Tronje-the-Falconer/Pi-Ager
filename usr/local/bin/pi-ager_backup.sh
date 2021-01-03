@@ -43,6 +43,8 @@ BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from c
 BACKUP_STATUS=$(/var/sudowebscript.sh grepmain) 
 echo "Backup Status ist $BACKUP_STATUS"
 
+systemctl daemon-reload
+
 # Lese Agingtable Status
 #AGINGTABLE_STATUS=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select value from config where key = 'agingtable_status' ")
 AGINGTABLE_STATUS=$(/var/sudowebscript.sh grepagingtable)
