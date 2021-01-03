@@ -65,7 +65,7 @@ if [ $BACKUP_STATUS != 0.0 ]
 	exit 1
 	else
 	echo "Backup ist inaktiv. Backup wird gestartet!"
-	sqlite3 /var/www/config/pi-ager.sqlite3 "insert into config (value) values (1) where key = "agingtable_status" "
+	sqlite3 /var/www/config/pi-ager.sqlite3 "insert into config (value) values (1) where key = 'agingtable_status' "
 	
 fi	
 
@@ -207,8 +207,10 @@ sudo /usr/local/bin/pishrink.sh $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img
 
 # Backup umbenennen
 mv ${BACKUP_PFAD}/${BACKUP_NAME}.img ${BACKUP_PFAD}/${BACKUP_NAME}_$(date +%Y-%m-%d-%H:%M:%S).img
+
 # Backup beendet
-sqlite3 /var/www/config/pi-ager.sqlite3 "insert into config (value) values (0) where key = "agingtable_status" "
+sqlite3 /var/www/config/pi-ager.sqlite3 "insert into config (value) values (0) where key = 'agingtable_status' "
+
 # Alte Sicherungen die nach X neuen Sicherungen entfernen
 NUMBER_OF_BACKUPS=$(find ${BACKUP_PFAD}/${BACKUP_NAME}* -type f | wc -l)
 echo "Number of backups that are kept. ${BACKUP_ANZAHL}"
