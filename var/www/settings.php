@@ -36,7 +36,7 @@
                                             <td></td>
                                             <td>';
                                             echo "Backup is currently running! ";
-                                            
+                                        }
                                         elseif ($grepmain == NULL){ // wenn main.py nicht läuft und der Status in DB aus ist
                                             
                                             echo '<td><img src="images/icons/operatingmode_fail_42x42.png" style="padding: 10px;"></td>
@@ -74,6 +74,7 @@
                                                 <td></td>
                                                 <td>';
                                                 echo "Backup is currently running! ";
+                                            }
                                             elseif ($grepscale == NULL){
                                                 echo '<td><img src="images/icons/scale_fail_42x42.png" alt="" style="padding: 10px;"></td>
                                                 <td></td>
