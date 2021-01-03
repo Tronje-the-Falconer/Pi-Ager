@@ -76,8 +76,10 @@ echo "Starte mit dem Backup, dies kann einige Zeit dauern"
 #Überprüfen ob Agingtable aktiv ist
 if [ -z "$AGINGTABLE_STATUS" ]
 	then
-	echo "Agingtable ist aktiv. Backup wird nicht gestartet!"
-	exit 1
+	  echo "Agingtable ist nicht aktiv. Backup wird gestartet!"
+	else
+  	  echo "Agingtable ist aktiv. Backup wird nicht gestartet!"
+	  exit 1
 fi	
 #Überprüfen ob Backup aktiv ist
 if [ -z "$BACKUP_STATUS" ]
