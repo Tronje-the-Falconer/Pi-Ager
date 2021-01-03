@@ -46,7 +46,7 @@ echo $$
 if [[ $BACKUP_STATUS == $$ ]]  
 	then
 	echo "Ich bin Ich"
-	unset $BACKUP_STATUS
+	unset BACKUP_STATUS
 fi	 
 echo "Backup Status ist $BACKUP_STATUS"
 
