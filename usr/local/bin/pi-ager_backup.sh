@@ -59,13 +59,13 @@ anfang=$(date +%s)
 
 echo "Starte mit dem Backup, dies kann einige Zeit dauern"
 #Überprüfen ob Agingtable aktiv ist
-if [ $AGINGTABLE_STATUS != NULL ]
+if [ $AGINGTABLE_STATUS ne NULL ]
 	then
 	echo "Aginttable ist aktiv. Backup wird nicht gestartet!"
 	exit 1
 fi	
 #Überprüfen ob Backup aktiv ist
-if [ $BACKUP_STATUS != NULL ]
+if [ $BACKUP_STATUS ne NULL ]
 	then
 	echo "Backup ist aktiv. Backup wird nicht gestartet!"
 	exit 1
