@@ -356,6 +356,63 @@
         close_database();
         return $agingtable_rows;
     }
+
+    function get_e_mail_recipients_dataset()
+    {
+        global $email_recipients_table;
+        open_connection();
+        $sql = 'SELECT * FROM ' . $email_recipients_table;
+        
+        $result = get_query_result($sql);
+    
+        $index = 0;
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+            {
+            $e_mail_recipients_rows[$index] = $dataset;
+            // Beispiel für späteren Aufruf: $e_mail_recipients_rows[0]['setpoint_temperature']
+            $index++;
+            }
+        close_database();
+        return $e_mail_recipients_rows;
+    }
+    
+    function get_alarm_dataset()
+    {
+        global $alarm_table;
+        open_connection();
+        $sql = 'SELECT * FROM ' . $alarm_table;
+        
+        $result = get_query_result($sql);
+    
+        $index = 0;
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+            {
+            $alarm_rows[$index] = $dataset;
+            // Beispiel für späteren Aufruf: $alarm_rows[0]['setpoint_temperature']
+            $index++;
+            }
+        close_database();
+        return $alarm_rows;
+    }
+    
+    function get_messenger_dataset()
+    {
+        global $messenger_table;
+        open_connection();
+        $sql = 'SELECT * FROM ' . $messenger_table;
+        
+        $result = get_query_result($sql);
+    
+        $index = 0;
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+            {
+            $messenger_rows[$index] = $dataset;
+            // Beispiel für späteren Aufruf: $messenger_rows[0]['setpoint_temperature']
+            $index++;
+            }
+        close_database();
+        return $messenger_rows;
+    }
     
     function write_agingtable($agingtable){
         global $value_field, $last_change_field, $key_field, $config_settings_table, $agingtable_key;
