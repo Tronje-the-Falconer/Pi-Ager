@@ -39,11 +39,11 @@ BACKUP_ANZAHL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select number_of_backup
 BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from config_nfs_backup where active = 1")
 
 # Lese Backup Status
-BACKUP_STATUS=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select value from config where key = "backup_status" ")
+BACKUP_STATUS=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select value from config where key = 'backup_status' ")
 echo "Backup Status ist $BACKUP_STATUS"
 
 # Lese Agingtable Status
-AGINGTABLE_STATUS=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select value from config where key = "agingtable_status" ")
+AGINGTABLE_STATUS=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select value from config where key = 'agingtable_status' ")
 echo "Agingtable Status ist $AGINGTABLE_STATUS"
 # ENDE VARIABLEN
  
@@ -53,13 +53,13 @@ echo "Agingtable Status ist $AGINGTABLE_STATUS"
 
 echo "Starte mit dem Backup, dies kann einige Zeit dauern"
 #Überprüfen ob Agingtable aktiv ist
-if ["$AGINGTABLE_STATUS == 1"]
+if [ $AGINGTABLE_STATUS -eq 1 ]
 	then
 	echo "Aginttable ist aktive. Backup wird nicht gestartet!"
 	exit 1
 fi	
 #Überprüfen ob Backup aktiv ist
-if ["$BACKUP_STATUS == 1"]
+if [ $BACKUP_STATUS -eq 1 ]
 	then
 	echo "Backup ist aktiv. Backup wird nicht gestartet!"
 	exit 1
