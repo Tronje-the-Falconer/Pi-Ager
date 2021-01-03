@@ -74,7 +74,7 @@ if [ -z "$BACKUP_STATUS" ]
 	#sqlite3 /var/www/config/pi-ager.sqlite3 "BEGIN TRANSACTION;UPDATE config SET value = '1.0' where key = 'backup_status'; COMMIT;"
 fi	
 
-exit 1
+
 
 #Überprüfen ob der NFS-Server vorhanden ist
 echo "überprüfe ob der NFS-Server vorhanden ist."
