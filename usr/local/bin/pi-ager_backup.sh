@@ -44,8 +44,8 @@ systemctl daemon-reload
 currsh=$0
 currpid=$$
 runpid=$(lsof -t $currsh| paste -s -d " ")
-echo $currpid
-echo $runpid
+#echo $currpid
+#echo $runpid
 if [[ $runpid != $currpid ]]
 	then
 	  echo "Zweiter Backup Prozess vorhanden!"
