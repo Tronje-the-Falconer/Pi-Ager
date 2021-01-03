@@ -13,6 +13,7 @@
     $webcam_active = '';
     $scale_wizzard_active = '';
     $admin_active = '';
+    $notification_active = '';
 
     if ($_SERVER['PHP_SELF'] == '/index.php') {
         $monitor_active = 'active';
@@ -40,6 +41,9 @@
     }
     elseif ($_SERVER['PHP_SELF'] == '/edit_agingtable.php') {
         $edit_agingtable_active = 'active';
+    }
+    elseif ($_SERVER['PHP_SELF'] == '/notification.php') {
+        $notification_active = 'active';
     }
     
     # Language festlegen
@@ -139,6 +143,7 @@
                                     echo '</a></li>';
                                 }
                             ?>
+                            <li><a href="notification.php" class="<?php echo $notification_active; ?>"><?php echo _('notification'); ?></a></li>
                             <li><a href="logs.php" class="<?php echo $logs_active; ?>"><?php echo _('logs'); ?></a></li>
                             <li><a href="webcam.php" class="<?php echo $webcam_active; ?>"><?php echo _('webcam'); ?></a></li>
                             <?php 
