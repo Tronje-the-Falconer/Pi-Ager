@@ -52,6 +52,10 @@ case "$1" in
     grepscale) #Überprüfen von scale1.py | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach RSS.py gesucht
         ps ax | grep -v grep | grep scale.py
     ;;
+    grepbackup) #Überprüfen von pi-ager_backup.sh | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach RSS.py gesucht
+        ps ax | grep -v grep | grep pi-ager_backup.sh
+    ;;
+    
     startwebcam)
         /opt/mjpg-streamer/webcam.sh > /dev/null 2>/dev/null
     ;;

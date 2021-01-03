@@ -38,17 +38,23 @@ BACKUP_ANZAHL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select number_of_backup
 # Name des Backup
 BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from config_nfs_backup where active = 1")
 
-# Lese Backup Status
-#BACKUP_STATUS=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select value from config where key = 'backup_status' ")
-BACKUP_STATUS=$(/var/sudowebscript.sh grepmain) 
-echo "Backup Status ist $BACKUP_STATUS"
-
 systemctl daemon-reload
 
-# Lese Agingtable Status
-#AGINGTABLE_STATUS=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select value from config where key = 'agingtable_status' ")
+# Lese Status der Pi-Ager Prozesse
+BACKUP_STATUS=$(/var/sudowebscript.sh grepbackup) 
+echo "Backup Status ist $BACKUP_STATUS"
+
+MAIN_STATUS=$(/var/sudowebscript.sh grepmain) 
+echo "Main Status ist $MAIN_STATUS"
+
 AGINGTABLE_STATUS=$(/var/sudowebscript.sh grepagingtable)
 echo "Agingtable Status ist $AGINGTABLE_STATUS"
+
+SCALE_STATUS=$(/var/sudowebscript.sh grepscale)
+echo "Scale Status ist $SCALE_STATUS"
+
+
+
 # ENDE VARIABLEN
  
 #####################################################################
@@ -63,7 +69,7 @@ echo "Starte mit dem Backup, dies kann einige Zeit dauern"
 #Überprüfen ob Agingtable aktiv ist
 if [ -z "$AGINGTABLE_STATUS" ]
 	then
-	echo "Aginttable ist aktiv. Backup wird nicht gestartet!"
+	echo "Agingtable ist aktiv. Backup wird nicht gestartet!"
 	exit 1
 fi	
 #Überprüfen ob Backup aktiv ist
@@ -155,39 +161,36 @@ fi
 # Stoppe Dienste vor Backup
 echo "Stoppe schreibende Dienste!"
 #${DIENSTE_START_STOP} stop
-systemctl -q is-active pi-ager_main
-if [ $? -eq 0 ];
-        then
-        PI_AGER_MAIN_ACTIVE=1
-        echo "Stoppe Pi-Ager Main"
-        systemctl stop pi-ager_main 
-        else
-        PI_AGER_MAIN_ACTIVE=0
-        echo "Pi-Ager Main ist nicht gestartet"
+
+if [ -z "$MAIN_STATUS" ]
+	then
+	PI_AGER_MAIN_ACTIVE=1
+      echo "Stoppe Pi-Ager Main"
+      systemctl stop pi-ager_main 
+    else
+      PI_AGER_MAIN_ACTIVE=0
+      echo "Pi-Ager Main ist nicht gestartet"
+fi	
+
+if [ -z "$AGINGTABLE_STATUS" ]
+	then
+	  PI_AGER_AGINGTABLE_ACTIVE=1
+      echo "Stoppe Pi-Ager Agingtable"
+      systemctl stop pi-ager_agingtable
+    else
+      PI_AGER_AGINGTABLE_ACTIVE=0
+      echo "Pi-Ager Agingtable ist nicht gestartet"
 fi
 
-systemctl -q is-active pi-ager_scale
-if [ $? -eq 0 ];
-        then
-        PI_AGER_SCALE_ACTIVE=1
-        echo "Stoppe Pi-Ager Scale"
-        systemctl stop pi-ager_scale
-        else
-        PI_AGER_SCALE_ACTIVE=0
-        echo "Pi-Ager Scale ist nicht gestartet"
+if [ -z "$SCALE_STATUS" ]
+	then
+	  PI_AGER_SCALE_ACTIVE=1
+      echo "Stoppe Pi-Ager Scale"
+      systemctl stop pi-ager_scale
+    else
+      PI_AGER_SCALE_ACTIVE=0
+      echo "Pi-Ager Scale ist nicht gestartet"
 fi
-
-systemctl -q is-active pi-ager_agintable
-if [ $? -eq 0 ];
-        then
-        PI_AGER_AGINGTABLE_ACTIVE=1
-        echo "Stoppe Pi-Ager Agingtable"
-        systemctl stop pi-ager_agingtable
-        else
-        PI_AGER_AGINGTABLE_ACTIVE=0
-        echo "Pi-Ager Agingtable ist nicht gestartet"
-fi
-
 
 # Backup mit Hilfe von dd erstellen und im angegebenen Pfad speichern
 echo "erstelle Backup $(date +%H:%M:%S)"
