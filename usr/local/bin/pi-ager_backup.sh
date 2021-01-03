@@ -38,6 +38,13 @@ BACKUP_ANZAHL=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select number_of_backup
 # Name des Backup
 BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from config_nfs_backup where active = 1")
 
+# Lese Backup Status
+BACKUP_STATUS=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select value from config where key = "backup_status" ")
+echo "Backup Status ist $BACKUP_STATUS"
+
+# Lese Agingtable Status
+AGINGTABLE_STATUS=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select value from config where key = "agingtable_status" ")
+echo "Agingtable Status ist $AGINGTABLE_STATUS"
 # ENDE VARIABLEN
  
 #####################################################################
@@ -45,6 +52,23 @@ BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from c
 #####################################################################
 
 echo "Starte mit dem Backup, dies kann einige Zeit dauern"
+#Überprüfen ob Agingtable aktiv ist
+if [AGINGTABLE_STATUS == 1]
+	then
+	echo "Aginttable ist aktive. Backup wird nicht gestartet!"
+	exit 1
+fi	
+#Überprüfen ob Backup aktiv ist
+if [BACKUP_STATUS == 1]
+	then
+	echo "Backup ist aktiv. Backup wird nicht gestartet!"
+	exit 1
+	else
+	echo "Backup ist inaktiv. Backup wird gestartet!"
+	sqlite3 /var/www/config/pi-ager.sqlite3 "insert into config (value) values (1) where key = "agingtable_status" "
+	
+fi	
+
 read -p "weiter mit Enter mit Ctrl + c beenden"
 echo "ok los gehts lehne dich zurück $(date +%H:%M:%S)"
 anfang=$(date +%s)
@@ -183,7 +207,8 @@ sudo /usr/local/bin/pishrink.sh $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img
 
 # Backup umbenennen
 mv ${BACKUP_PFAD}/${BACKUP_NAME}.img ${BACKUP_PFAD}/${BACKUP_NAME}_$(date +%Y-%m-%d-%H:%M:%S).img
-
+# Backup beendet
+sqlite3 /var/www/config/pi-ager.sqlite3 "insert into config (value) values (0) where key = "agingtable_status" "
 # Alte Sicherungen die nach X neuen Sicherungen entfernen
 NUMBER_OF_BACKUPS=$(find ${BACKUP_PFAD}/${BACKUP_NAME}* -type f | wc -l)
 echo "Number of backups that are kept. ${BACKUP_ANZAHL}"

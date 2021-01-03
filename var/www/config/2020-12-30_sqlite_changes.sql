@@ -153,6 +153,9 @@ INSERT INTO "config" ("id","key","value","last_change") VALUES ('33','meat1_sens
 INSERT INTO "config" ("id","key","value","last_change") VALUES ('34','meat2_sensortype','0.0','1609323268');
 INSERT INTO "config" ("id","key","value","last_change") VALUES ('35','meat3_sensortype','0.0','1609323268');
 INSERT INTO "config" ("id","key","value","last_change") VALUES ('36','meat4_sensortype','0.0','1609323268');
+INSERT INTO "config" ("id","key","value","last_change") VALUES ('37','backup_status','0','0');
+INSERT INTO "config" ("id","key","value","last_change") VALUES ('38','agingtable_status','0','0');
+
 
 ----
 -- Drop table for scale1_data
