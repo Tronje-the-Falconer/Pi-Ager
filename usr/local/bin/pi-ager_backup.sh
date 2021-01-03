@@ -171,32 +171,32 @@ echo "Stoppe schreibende Dienste!"
 
 if [ -z "$MAIN_STATUS" ]
 	then
-	PI_AGER_MAIN_ACTIVE=1
-      echo "Stoppe Pi-Ager Main"
-      systemctl stop pi-ager_main 
-    else
       PI_AGER_MAIN_ACTIVE=0
       echo "Pi-Ager Main ist nicht gestartet"
+    else
+      PI_AGER_MAIN_ACTIVE=1
+      echo "Stoppe Pi-Ager Main"
+      systemctl stop pi-ager_main 
 fi	
 
 if [ -z "$AGINGTABLE_STATUS" ]
 	then
+      PI_AGER_AGINGTABLE_ACTIVE=0
+      echo "Pi-Ager Agingtable ist nicht gestartet"
+    else
 	  PI_AGER_AGINGTABLE_ACTIVE=1
       echo "Stoppe Pi-Ager Agingtable"
       systemctl stop pi-ager_agingtable
-    else
-      PI_AGER_AGINGTABLE_ACTIVE=0
-      echo "Pi-Ager Agingtable ist nicht gestartet"
 fi
 
 if [ -z "$SCALE_STATUS" ]
 	then
+      PI_AGER_SCALE_ACTIVE=0
+      echo "Pi-Ager Scale ist nicht gestartet"
+    else
 	  PI_AGER_SCALE_ACTIVE=1
       echo "Stoppe Pi-Ager Scale"
       systemctl stop pi-ager_scale
-    else
-      PI_AGER_SCALE_ACTIVE=0
-      echo "Pi-Ager Scale ist nicht gestartet"
 fi
 
 # Backup mit Hilfe von dd erstellen und im angegebenen Pfad speichern
