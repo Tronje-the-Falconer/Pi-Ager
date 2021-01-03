@@ -51,6 +51,10 @@ echo "Agingtable Status ist $AGINGTABLE_STATUS"
 # Skript (hier sollten nur erfahrene User anpassungen machen!)
 #####################################################################
 
+read -p "weiter mit Enter mit Ctrl + c beenden"
+echo "ok los gehts lehne dich zurück $(date +%H:%M:%S)"
+anfang=$(date +%s)
+
 echo "Starte mit dem Backup, dies kann einige Zeit dauern"
 #Überprüfen ob Agingtable aktiv ist
 if [ $AGINGTABLE_STATUS != 0.0 ]
@@ -69,11 +73,9 @@ if [ $BACKUP_STATUS != 0.0 ]
 	
 fi	
 
-read -p "weiter mit Enter mit Ctrl + c beenden"
-echo "ok los gehts lehne dich zurück $(date +%H:%M:%S)"
-anfang=$(date +%s)
 
-#Überprüfen ob Backup aktiv ist
+
+#Überprüfen ob der NFS-Server vorhanden ist
 echo "überprüfe ob der NFS-Server vorhanden ist."
 echo "Checking..."
 if [ -z "$NFSVOL" ]
