@@ -498,7 +498,7 @@
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('nfs opt'); ?>:</td>
-                                                <td><input name="backup_nfsopt" type="text" style="width: 90%; text-align: right;" required value=<?php echo $backup_nfsopt; ?>></td>
+                                                <td><input name="backup_nfsopt" type="text" style="width: 90%; text-align: right;" required value="<?php echo $backup_nfsopt; ?>"></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('backup_active'); ?>:</td>

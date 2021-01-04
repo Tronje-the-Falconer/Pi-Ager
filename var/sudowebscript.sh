@@ -135,6 +135,15 @@ case "$1" in
     backup) # Backupscript ausfuehren
         /usr/local/bin/pi-ager_backup.sh >> /var/log/pi-ager_backup.log  
     ;;
+    test_mailserver) 
+            /usr/local/bin/piager_mailserver_test.sh
+    ;;
+    test_pushover) 
+            /usr/local/bin/piager_pushover_test.sh
+    ;;
+    test_telegram) 
+            /usr/local/bin/piager_telegram_test.sh
+    ;;
     sensorbusi2c) #Sensorbus wurde geaendert auf i2c
 		# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln (SHT3x und SHT85)
         rm -r /etc/modprobe.d/Pi-Ager_i2c_off.conf
