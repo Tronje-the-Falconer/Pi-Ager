@@ -3,6 +3,7 @@
                                     include 'modules/names.php';
                                     include 'modules/database.php';
                                     include 'modules/logging.php';                            //liest die Datei fuer das logging ein
+                                    include 'modules/test_notifications.php'; 
                                     
                                     
                                 ?>
