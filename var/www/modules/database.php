@@ -357,61 +357,129 @@
         return $agingtable_rows;
     }
 
-    function get_e_mail_recipients_dataset()
+    function get_table_dataset($table)
     {
-        global $email_recipients_table;
         open_connection();
-        $sql = 'SELECT * FROM ' . $email_recipients_table;
+        $sql = 'SELECT * FROM ' . $table;
         
         $result = get_query_result($sql);
     
         $index = 0;
         while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
             {
-            $e_mail_recipients_rows[$index] = $dataset;
-            // Beispiel für späteren Aufruf: $e_mail_recipients_rows[0]['setpoint_temperature']
+            $dataset_rows[$index] = $dataset;
+            // Beispiel für späteren Aufruf: $dataset_rows[0]['setpoint_temperature']
             $index++;
             }
         close_database();
-        return $e_mail_recipients_rows;
+        return $dataset_rows;
     }
     
-    function get_alarm_dataset()
-    {
-        global $alarm_table;
+    function write_telegram_values($telegram_bot_token, $telegram_bot_chatid, $telegram_active){
+        global $telegram_table, $telegram_bot_token_field, $telegram_bot_chat_id_field, $telegram_active_field, $telegram_id_field;
         open_connection();
-        $sql = 'SELECT * FROM ' . $alarm_table;
+        $sql = 'UPDATE ' . $telegram_table . ' SET "' . $telegram_bot_token_field . '" = "' . $telegram_bot_token . '" , "' . $telegram_bot_chat_id_field . '" = "' . $telegram_bot_chatid . '", "'. $telegram_active_field . '" = ' . $telegram_active . ' WHERE "' . $telegram_id_field . '" = 1';
+        execute_query($sql);
         
-        $result = get_query_result($sql);
-    
-        $index = 0;
-        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
-            {
-            $alarm_rows[$index] = $dataset;
-            // Beispiel für späteren Aufruf: $alarm_rows[0]['setpoint_temperature']
-            $index++;
-            }
         close_database();
-        return $alarm_rows;
     }
     
-    function get_messenger_dataset()
-    {
-        global $messenger_table;
+    function write_pushover_values($pushover_user_key, $pushover_api_token, $pushover_active){
+        global $pushover_table, $pushover_user_key_field, $pushover_api_token_field, $pushover_active_field, $pushover_id_field;
         open_connection();
-        $sql = 'SELECT * FROM ' . $messenger_table;
+        $sql = 'UPDATE ' . $pushover_table . ' SET "' . $pushover_user_key_field . '" = "' . $pushover_user_key . '" , "' . $pushover_api_token_field . '" = "' . $pushover_api_token . '", "'. $pushover_active_field . '" = ' . $pushover_active . ' WHERE "' . $pushover_id_field . '" = 1';
+        execute_query($sql);
         
-        $result = get_query_result($sql);
-    
-        $index = 0;
-        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
-            {
-            $messenger_rows[$index] = $dataset;
-            // Beispiel für späteren Aufruf: $messenger_rows[0]['setpoint_temperature']
-            $index++;
-            }
         close_database();
-        return $messenger_rows;
+    }
+    
+    function write_mailserver_values($mailserver_server, $mailserver_user, $mailserver_password, $mailserver_starttls, $mailserver_from_mail, $mailserver_port){
+        global $mailserver_table, $mailserver_id_field, $mailserver_server_field, $mailserver_user_field, $mailserver_password_field, $mailserver_starttls_field, $mailserver_from_mail_field, $mailserver_port_field;
+        open_connection();
+        $sql = 'UPDATE ' . $mailserver_table . ' SET "' . $mailserver_server_field . '" = "' . $mailserver_server . '" , "' . $mailserver_user_field . '" = "' . $mailserver_user . '" , "' . $mailserver_password_field . '" = "' . $mailserver_password . '" , "' . $mailserver_starttls_field . '" = "' . $mailserver_starttls . '" , "' . $mailserver_from_mail_field . '" = "' . $mailserver_from_mail . '" , "' . $mailserver_port_field . '" = "' . $mailserver_port. '" WHERE "' . $mailserver_id_field . '" = 1';
+
+        execute_query($sql);
+        
+        close_database();
+    }
+    
+    function write_mail_recipient_values($e_mail_recipients_id, $e_mail_recipients_to_mail, $e_mail_recipients_active){
+        global $email_recipients_table, $e_mail_recipients_to_mail_field, $e_mail_recipients_active_field, $e_mail_recipients_id_field;
+        open_connection();
+        $sql = 'UPDATE ' . $email_recipients_table . ' SET "' . $e_mail_recipients_to_mail_field . '" = "' . $e_mail_recipients_to_mail . '" , "' . $e_mail_recipients_active_field . '" = "' . $e_mail_recipients_active . '" WHERE "' . $e_mail_recipients_id_field . '" = ' . $e_mail_recipients_id;
+        
+        execute_query($sql);
+        
+        close_database();
+    }
+    
+    function write_messenger_values($messenger_id, $messenger_exception, $messenger_e_mail, $messenger_pushover, $messenger_telegram, $messenger_alarm, $messenger_raise_exception, $messenger_active ){
+        global $messenger_table, $messenger_id_field, $messenger_exception_field, $messenger_e_mail_field, $messenger_pushover_field, $messenger_telegram_field, $messenger_alarm_field, $messenger_raise_exception_field, $messenger_active_field;
+        open_connection();
+        $sql = 'UPDATE ' . $messenger_table . ' SET "' . $messenger_exception_field . '" = "' . $messenger_exception . '" , "' . $messenger_e_mail_field . '" = "' . $messenger_e_mail . '" , "' . $messenger_pushover_field . '" = "' . $messenger_pushover . '" , "' . $messenger_telegram_field . '" = "' . $messenger_telegram . '" , "' . $messenger_alarm_field . '" = "' . $messenger_alarm . '" , "' . $messenger_raise_exception_field . '" = "' . $messenger_raise_exception . '" , "' . $messenger_active_field . '" = "' . $messenger_active . '" WHERE "' . $messenger_id_field . '" = ' . $messenger_id ;
+        
+        execute_query($sql);
+        
+        close_database();
+    }
+    
+    function write_alarm_values($alarm_id, $alarm_alarm, $alarm_replication, $alarm_sleep, $alarm_high_time, $alarm_low_time, $alarm_waveform, $alarm_frequency ){
+        global $alarm_table, $alarm_id_field, $alarm_alarm_field, $alarm_replication_field, $alarm_sleep_field, $alarm_high_time_field, $alarm_low_time_field, $alarm_waveform_field, $alarm_frequency_field;
+        open_connection();
+        $sql = 'UPDATE ' . $alarm_table . ' SET "' . $alarm_alarm_field . '" = "' . $alarm_alarm . '" , "' . $alarm_replication_field . '" = "' . $alarm_replication . '" , "' . $alarm_sleep_field . '" = "' . $alarm_sleep . '" , "' . $alarm_high_time_field . '" = "' . $alarm_high_time . '" , "' . $alarm_low_time_field . '" = "' . $alarm_low_time . '" , "' . $alarm_waveform_field . '" = "' . $alarm_waveform . '" , "' . $alarm_frequency_field . '" = "' . $alarm_frequency . '" WHERE "' . $alarm_id_field . '" = ' . $alarm_id ;
+        
+        execute_query($sql);
+        
+        close_database();
+        
+    }
+    
+    function add_alarm($alarm_alarm, $alarm_replication, $alarm_sleep, $alarm_high_time, $alarm_low_time, $alarm_waveform, $alarm_frequency ){
+        global $alarm_table, $alarm_id_field, $alarm_alarm_field, $alarm_replication_field, $alarm_sleep_field, $alarm_high_time_field, $alarm_low_time_field, $alarm_waveform_field, $alarm_frequency_field;
+        open_connection();
+        $sql = 'INSERT INTO ' . $alarm_table . ' ("' . $alarm_alarm_field . '","' . $alarm_replication_field . '","' . $alarm_sleep_field . '","' . $alarm_high_time_field . '","' . $alarm_low_time_field . '","' . $alarm_waveform_field . '","' . $alarm_frequency_field . '") VALUES ("' . $alarm_alarm .'",' . $alarm_replication .',' . $alarm_sleep .',' . $alarm_high_time .',' . $alarm_low_time .',"' . $alarm_waveform .'",' . $alarm_frequency . ')';
+        execute_query($sql);
+        
+        close_database();        
+    }
+    
+    function add_messenger($add_messenger_exception, $add_checked_messenger_e_mail, $add_checked_pushover, $add_checked_telegram, $add_messenger_alarm, $add_checked_messenger_raise_exeption, $add_checked_active ){
+        global $messenger_table, $messenger_id_field, $messenger_exception_field, $messenger_e_mail_field, $messenger_pushover_field, $messenger_telegram_field, $messenger_alarm_field, $messenger_raise_exception_field, $messenger_active_field;;
+        open_connection();
+        $sql = 'INSERT INTO ' . $messenger_table . ' ("' . $messenger_exception_field . '","' . $messenger_e_mail_field . '","' . $messenger_pushover_field . '","' . $messenger_telegram_field . '","' . $messenger_alarm_field . '","' . $messenger_raise_exception_field . '","' . $messenger_active_field . '") VALUES ("' . $add_messenger_exception .'",' . $add_checked_messenger_e_mail .',' . $add_checked_pushover .',' . $add_checked_telegram .',"' . $add_messenger_alarm .'",' . $add_checked_messenger_raise_exeption .',' . $add_checked_active . ')';
+        execute_query($sql);
+        
+        close_database();
+    }
+    
+    function add_mail_recipient($add_e_mail_recipients_to_mail, $add_e_mail_recipients_active){
+        global $email_recipients_table, $e_mail_recipients_to_mail_field, $e_mail_recipients_active_field;
+        open_connection();
+        $sql = 'INSERT INTO ' . $email_recipients_table . ' ("'. $e_mail_recipients_to_mail_field . '","' . $e_mail_recipients_active_field . '") VALUES ( "' . $add_e_mail_recipients_to_mail . '" , ' . $add_e_mail_recipients_active . ')';
+        echo $sql;
+        execute_query($sql);
+        
+        close_database();
+    }
+    
+    function write_agingtable($agingtable){
+        global $value_field, $last_change_field, $key_field, $config_settings_table, $agingtable_key;
+        
+        $id_agingtable = get_agingtable_id_by_name($agingtable);
+        
+        open_connection();
+        $sql = 'UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = "' . $id_agingtable . '" , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' = "' . $agingtable_key . '"';
+        execute_query($sql);
+        
+        close_database();
+    }
+    
+    function delete_row_from_table($tablename, $id_field, $row_id){
+        open_connection();
+        $sql = 'DELETE FROM ' . $tablename . ' WHERE  "' . $id_field . '" = ' . $row_id;
+        execute_query($sql);
+        
+        close_database();
     }
     
     function write_agingtable($agingtable){
