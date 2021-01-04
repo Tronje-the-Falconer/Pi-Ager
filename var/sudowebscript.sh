@@ -133,16 +133,16 @@ case "$1" in
         rm /var/www/images/webcam/*.jpg
     ;;
     backup) # Backupscript ausfuehren
-        nohup /usr/local/bin/pi-ager_backup.sh &
+        /usr/local/bin/pi-ager_backup.sh >> /var/log/pi-ager_backup.log  
     ;;
     sensorbusi2c) #Sensorbus wurde geaendert auf i2c
-####### hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
+		# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln (SHT3x und SHT85)
         rm -r /etc/modprobe.d/Pi-Ager_i2c_off.conf
         sleep 3
         shutdown -h now
     ;;
     sensorbus1wire) #Sensorbus wurde geaendert auf 1wire
-####### hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln
+		# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln (DHT* und SHT75)
         cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
         sleep 3
         shutdown -h now
