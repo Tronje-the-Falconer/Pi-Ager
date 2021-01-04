@@ -125,11 +125,20 @@ case "$1" in
         pushd /var/www/ && zip -r /var/www/logs/pi-ager_logfiles.zip ./logs/ && popd
         #zip -r -j /var/www/logs/pi-ager_logfiles.zip /var/www/logs/
     ;;
-   delete_snapshot_files) # delete all .jpg files from folder /var/www/images/webcam/ 
+    delete_snapshot_files) # delete all .jpg files from folder /var/www/images/webcam/ 
         rm /var/www/images/webcam/*.jpg
     ;;
     backup) # Backupscript ausfuehren
         nohup /usr/local/bin/pi-ager_backup.sh &
+    ;;
+    test_mailserver) 
+            /usr/local/bin/piager_mailserver_test.sh
+    ;;
+    test_pushover) 
+            /usr/local/bin/piager_pushover_test.sh
+    ;;
+    test_telegram) 
+            /usr/local/bin/piager_telegram_test.sh
     ;;
     sensorbusi2c) #Sensorbus wurde geaendert auf i2c
 ####### hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
