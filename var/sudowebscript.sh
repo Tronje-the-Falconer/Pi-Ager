@@ -129,7 +129,7 @@ case "$1" in
         pushd /var/www/ && zip -r /var/www/logs/pi-ager_logfiles.zip ./logs/ && popd
         #zip -r -j /var/www/logs/pi-ager_logfiles.zip /var/www/logs/
     ;;
-   delete_snapshot_files) # delete all .jpg files from folder /var/www/images/webcam/ 
+    delete_snapshot_files) # delete all .jpg files from folder /var/www/images/webcam/ 
         rm /var/www/images/webcam/*.jpg
     ;;
     backup) # Backupscript ausfuehren
