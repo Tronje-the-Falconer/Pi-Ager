@@ -338,6 +338,13 @@
                                                 $mailserver_starttls = get_table_value_from_field($mailserver_table, Null, $mailserver_starttls_field,);
                                                 $mailserver_from_mail = get_table_value_from_field($mailserver_table, Null, $mailserver_from_mail_field);
                                                 $mailserver_port = get_table_value_from_field($mailserver_table, Null, $mailserver_port_field);
+                                                
+                                                if ($mailserver_password == ''){
+                                                    $old_mailserver_password = '';
+                                                }
+                                                else{
+                                                    $old_mailserver_password = '123456789abcdefghi';
+                                                }
                                             ?>
                                             <tr>
                                                 <td><?php echo _('server'); ?>:</td>
@@ -349,7 +356,7 @@
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('password'); ?>:</td>
-                                                <td><input name="mailserver_password" type="text" style="width: 90%; text-align: right;" required value=<?php echo $mailserver_password; ?>></td>
+                                                <td><input name="mailserver_password" type="password" style="width: 90%; text-align: right;" required value=<?php echo $old_mailserver_password; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('starttls'); ?>:</td>
