@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2021-01-05 13:02+0100\n"
-"PO-Revision-Date: 2021-01-05 13:43+0100\n"
+"PO-Revision-Date: 2021-01-05 15:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -197,15 +197,15 @@ msgstr "ACHTUNG: Debug Werte speichern?"
 
 #: admin.php:454
 msgid "backup"
-msgstr ""
+msgstr "Backup"
 
 #: admin.php:476
 msgid "nfs volume"
-msgstr ""
+msgstr "nfs Verzeichnis"
 
 #: admin.php:480
 msgid "subdirectory"
-msgstr ""
+msgstr "Unterverzeichnis"
 
 #: admin.php:484
 msgid "nfs mount"
@@ -213,23 +213,23 @@ msgstr ""
 
 #: admin.php:488
 msgid "nfs path"
-msgstr ""
+msgstr "nfs Pfad"
 
 #: admin.php:492
 msgid "number of backups"
-msgstr ""
+msgstr "Anzahl Backups"
 
 #: admin.php:496
 msgid "backup name"
-msgstr ""
+msgstr "Backup Name"
 
 #: admin.php:500
 msgid "nfs opt"
-msgstr ""
+msgstr "nfs Option"
 
 #: admin.php:504
 msgid "backup_active"
-msgstr ""
+msgstr "Backup Aktiv"
 
 #: admin.php:511
 msgid "ATTENTION: save backup values?"
@@ -241,11 +241,11 @@ msgstr "ACHTUNG: Manuelles Backup starten?"
 
 #: admin.php:519
 msgid "backup manually"
-msgstr ""
+msgstr "Backup manuell"
 
 #: admin.php:522
 msgid "Agingtable is active. No backup possible!"
-msgstr ""
+msgstr "Reifetabelle ist aktiv. Backup nicht möglich!"
 
 #: admin.php:530
 msgid "database"
@@ -265,15 +265,15 @@ msgstr "Datenbank Administration"
 
 #: admin.php:545
 msgid "python"
-msgstr ""
+msgstr "Python"
 
 #: admin.php:551 admin.php:557
 msgid "ATTENTION: kill"
-msgstr ""
+msgstr "ACHTUNG: kill"
 
 #: admin.php:551 admin.php:554 admin.php:557
 msgid "stop"
-msgstr ""
+msgstr "Stop"
 
 #: admin.php:552 admin.php:555 admin.php:558
 msgid "start"
@@ -281,7 +281,7 @@ msgstr "start"
 
 #: admin.php:554
 msgid "ATTENTION:"
-msgstr ""
+msgstr "ACHTUNG:"
 
 #: calibrate_scale.php:11 modules/tara_scale.php:11
 msgid "scale_wizzard"
@@ -386,7 +386,7 @@ msgstr "Datei ist nicht lesbar"
 
 #: changelog.php:47
 msgid "the developer team"
-msgstr ""
+msgstr "Das Entwicklerteam:"
 
 #: changelog.php:65 changelog.php:66
 msgid "backend & linux"
@@ -951,11 +951,11 @@ msgstr "Abluft"
 
 #: index.php:840
 msgid "manual switch off"
-msgstr ""
+msgstr "manuell AUS"
 
 #: index.php:871
 msgid "manual switch on"
-msgstr ""
+msgstr "manuell EIN"
 
 #: index.php:902
 msgid "see settings"
@@ -1318,15 +1318,15 @@ msgstr "Heizen"
 
 #: modules/read_systemdetails.php:94 modules/read_systemdetails.php:96
 msgid "model unknown! Please contact us."
-msgstr ""
+msgstr "Modell nicht gefunden! Bitte kontaktieren sie uns!"
 
 #: modules/start_stop_light.php:4
 msgid "light switched on manually"
-msgstr ""
+msgstr "Licht manuell eingeschaltet"
 
 #: modules/start_stop_light.php:9
 msgid "light switched off manually"
-msgstr ""
+msgstr "Licht manuell ausgeschaltet"
 
 #: modules/start_stop_program.php:16 modules/start_stop_program.php:49
 #: modules/start_stop_program.php:118 modules/start_stop_program.php:218
@@ -1343,16 +1343,16 @@ msgstr "gestartet"
 #: modules/start_stop_program.php:144 modules/start_stop_program.php:222
 #: modules/start_stop_program.php:248 modules/start_stop_program.php:274
 msgid "could not be started"
-msgstr ""
+msgstr "konnte nicht gestartet werden"
 
 #: modules/start_stop_program.php:28
 msgid "is running"
-msgstr ""
+msgstr "läuft"
 
 #: modules/start_stop_program.php:34 modules/start_stop_program.php:81
 #: modules/start_stop_program.php:173
 msgid "no idea what is happening"
-msgstr ""
+msgstr "keine Idee was passier ist ..."
 
 #: modules/start_stop_program.php:51
 msgid "started due to agingtable start"
@@ -1364,19 +1364,17 @@ msgstr "Reifetabelle gestartet"
 
 #: modules/start_stop_program.php:67 modules/start_stop_program.php:149
 msgid "is already running"
-msgstr ""
+msgstr "läuft schon"
 
 #: modules/start_stop_program.php:69
 msgid "is already running or started due to agingtable start"
-msgstr ""
+msgstr "läuft schon oder wurde durch die Reifetabelle gestartet"
 
 #: modules/start_stop_program.php:76
 msgid "agingtable could not be started"
 msgstr "Reifetabelle kann nicht gestartet werden"
 
 #: modules/start_stop_program.php:89
-#, fuzzy
-#| msgid "measuring on scales stopped due to calibrating scale"
 msgid "agingtable stopped due to stopping"
 msgstr "Waagenmessungen werden während des Kalibrierens angehalten"
 
@@ -1415,7 +1413,7 @@ msgstr "Webcam gestartet"
 
 #: modules/start_stop_program.php:200
 msgid "webcam could not be started"
-msgstr ""
+msgstr "Wencam konnte nicht gestartet werden"
 
 #: modules/start_stop_program.php:207
 msgid "webcam stopped"
@@ -1424,7 +1422,7 @@ msgstr "Webcam angehalten"
 #: modules/start_stop_program.php:227 modules/start_stop_program.php:253
 #: modules/start_stop_program.php:279
 msgid "already running"
-msgstr ""
+msgstr "läuft schon"
 
 #: modules/start_stop_program.php:234 modules/start_stop_program.php:260
 #: modules/start_stop_program.php:286
@@ -1433,7 +1431,7 @@ msgstr ""
 
 #: modules/start_stop_uv.php:4
 msgid "uv switched on manually"
-msgstr ""
+msgstr "UV manuell eingeschaltet"
 
 #: modules/start_stop_uv.php:10
 msgid "uv switched off manually"
@@ -1453,7 +1451,7 @@ msgstr "Administration Einstellungen"
 #: modules/write_notification_db.php:143 modules/write_notification_db.php:154
 #: modules/write_notification_db.php:165
 msgid "values saved"
-msgstr ""
+msgstr "Einstellungen wurden gespeichert"
 
 #: modules/write_backup_db.php:17
 msgid "backup values"
@@ -1512,7 +1510,7 @@ msgstr "Zeitstempel Licht"
 
 #: modules/write_config_db_logfile_txt.php:151
 msgid "configuration has been changed."
-msgstr ""
+msgstr "Konfiguratiuon wurde geändert."
 
 #: modules/write_config_db_logfile_txt.php:156
 #: modules/write_config_db_logfile_txt.php:157
@@ -1635,12 +1633,12 @@ msgstr "Licht Modus"
 #: modules/write_config_db_logfile_txt.php:197
 #: modules/write_settings_db_logfile_txt.php:197
 msgid "values saved in file Database"
-msgstr ""
+msgstr "Werte wurden in die DB gespeichert"
 
 #: modules/write_config_db_logfile_txt.php:201
 #: modules/write_settings_db_logfile_txt.php:200
 msgid "values not in the specified limits!"
-msgstr ""
+msgstr "Werte sind nicht in den spetifizierten Grenzen!"
 
 #: modules/write_loglevel_db.php:10
 msgid "loglevel"
@@ -1648,7 +1646,7 @@ msgstr "Loglevel"
 
 #: modules/write_loglevel_db.php:10
 msgid "the selection is saved"
-msgstr ""
+msgstr "Die Auswahl wurde gespeichert"
 
 #: modules/write_notification_db.php:25
 msgid "messenger values"
@@ -1664,11 +1662,11 @@ msgstr "E-Mail Empfänger Einstellungen"
 
 #: modules/write_notification_db.php:129
 msgid "ad mail recipient"
-msgstr ""
+msgstr "E-Mail Empfänger hinzufügen"
 
 #: modules/write_notification_db.php:129
 msgid "mail recipient added"
-msgstr ""
+msgstr "E-Mail Empfänger hinzugefügt"
 
 #: modules/write_notification_db.php:143
 msgid "mailserver values"
@@ -1684,7 +1682,7 @@ msgstr "Telegram Einstellungen"
 
 #: modules/write_settings_db_logfile_txt.php:148
 msgid "values have been manually changed."
-msgstr ""
+msgstr "Werte wurden manuell geändert."
 
 #: modules/write_settings_db_logfile_txt.php:149
 msgid "sensor"
@@ -1710,15 +1708,17 @@ msgstr ""
 
 #: modules/write_table_db.php:76
 msgid "unexpected Error"
-msgstr ""
+msgstr "unerwarteter Fehler"
 
 #: modules/write_table_db.php:94
 msgid "error on upload new agingtable: only csv-files allowed"
 msgstr ""
+"Fehler beim Hochladen der neuen Reifetabelle: nur csv Dateien sind zugelassen"
 
 #: modules/write_table_db.php:102
 msgid "error on upload new agingtable: only 500kb allowed"
 msgstr ""
+"Fehler beim Hochladen der neuen Reifetabelle: max. 500kb sind zugelassen"
 
 #: modules/write_table_db.php:129 modules/write_table_db.php:135
 #: modules/write_table_db.php:140
@@ -1734,10 +1734,12 @@ msgstr "Datei ind DB geschrieben"
 #: modules/write_table_db.php:133 modules/write_table_db.php:135
 msgid "csv-file has not the right structure. please use a default-template"
 msgstr ""
+"Die csv Datei hat nicht die erforderliche Struktur, bitte die Defaultvorlage "
+"nutzen."
 
 #: modules/write_table_db.php:140
 msgid "please select an file to upload"
-msgstr ""
+msgstr "bitte eine Datei zum hochladen auswählen"
 
 #: modules/write_table_db.php:215
 msgid "export agintable"
@@ -1745,15 +1747,15 @@ msgstr "Reifetabelle exportieren"
 
 #: modules/write_table_db.php:215
 msgid "done"
-msgstr ""
+msgstr "Fertig!"
 
 #: notification.php:10
 msgid "messenger"
-msgstr ""
+msgstr "Messenger"
 
 #: notification.php:16 notification.php:161 notification.php:262
 msgid "id"
-msgstr "id"
+msgstr "ID"
 
 #: notification.php:17 notification.php:121
 msgid "exception"
@@ -1761,11 +1763,11 @@ msgstr "Fehler"
 
 #: notification.php:18 notification.php:122 notification.php:256
 msgid "e-mail"
-msgstr ""
+msgstr "E-Mail"
 
 #: notification.php:19 notification.php:123 notification.php:386
 msgid "pushover"
-msgstr ""
+msgstr "Pushover"
 
 #: notification.php:20 notification.php:124 notification.php:431
 msgid "telegram"
@@ -1774,16 +1776,16 @@ msgstr "Telegram"
 #: notification.php:21 notification.php:125 notification.php:155
 #: notification.php:162 notification.php:227
 msgid "alarm"
-msgstr ""
+msgstr "Alarm"
 
 #: notification.php:22 notification.php:126
 msgid "raise_exception"
-msgstr ""
+msgstr "Fehler auslösen"
 
 #: notification.php:23 notification.php:127 notification.php:264
 #: notification.php:311
 msgid "active"
-msgstr ""
+msgstr "aktiv"
 
 #: notification.php:116
 msgid "ATTENTION: save messenger values?"
@@ -1795,7 +1797,7 @@ msgstr "ACHTUNG: Messenger hinzufügen?"
 
 #: notification.php:144 notification.php:246 notification.php:319
 msgid "add"
-msgstr ""
+msgstr "hinzufügen"
 
 #: notification.php:148 notification.php:250 notification.php:323
 msgid "id to delete: "
@@ -1816,23 +1818,23 @@ msgstr "Kopie"
 
 #: notification.php:164 notification.php:229
 msgid "sleep"
-msgstr ""
+msgstr "Pause"
 
 #: notification.php:165 notification.php:230
 msgid "high_time"
-msgstr ""
+msgstr "EIN Zeit"
 
 #: notification.php:166 notification.php:231
 msgid "low_time"
-msgstr ""
+msgstr "AUS Zeit"
 
 #: notification.php:167 notification.php:232
 msgid "waveform"
-msgstr ""
+msgstr "Schwingungsform"
 
 #: notification.php:168 notification.php:233
 msgid "frequency"
-msgstr ""
+msgstr "Frequenz"
 
 #: notification.php:222
 msgid "ATTENTION: save alarm values?"
@@ -1856,27 +1858,27 @@ msgstr "ACHTUNG: E-Mailempfänger Einstellungen speichern?"
 
 #: notification.php:319
 msgid "ATTENTION: add e_mail recipient?"
-msgstr ""
+msgstr "ACHTUNG: Einen E-Mail Empfänger hinzufügen?"
 
 #: notification.php:323
 msgid "ATTENTION: delete e-mail recipient?"
-msgstr ""
+msgstr "ACHTUNG: E-Mail Empfänger löschen?"
 
 #: notification.php:329
 msgid "Mailserver"
-msgstr ""
+msgstr "Mail Server"
 
 #: notification.php:343
 msgid "server"
-msgstr ""
+msgstr "Server"
 
 #: notification.php:347
 msgid "user"
-msgstr ""
+msgstr "Benutzer"
 
 #: notification.php:351
 msgid "password"
-msgstr ""
+msgstr "Passwort"
 
 #: notification.php:355
 msgid "starttls"
@@ -1884,7 +1886,7 @@ msgstr ""
 
 #: notification.php:359
 msgid "from mail"
-msgstr ""
+msgstr "von E-Mail"
 
 #: notification.php:363
 msgid "port"
@@ -1896,7 +1898,7 @@ msgstr "ACHTUNG: Maislserver Einstellungen speichern?"
 
 #: notification.php:373
 msgid "testmail adress"
-msgstr ""
+msgstr "Test E-Mailadresse"
 
 #: notification.php:378
 msgid "ATTENTION: test mailserver? be shure you have saved the values before!"
@@ -1904,7 +1906,7 @@ msgstr ""
 
 #: notification.php:378
 msgid "test mailserver"
-msgstr ""
+msgstr "Test E-Mailserver"
 
 #: notification.php:404
 msgid "user key"
@@ -1916,7 +1918,7 @@ msgstr ""
 
 #: notification.php:412
 msgid "pushover_active"
-msgstr ""
+msgstr "Pushover aktiv"
 
 #: notification.php:419
 msgid "ATTENTION: save pushover values?"
@@ -1926,10 +1928,12 @@ msgstr "ACHTUNG: Pushover Einstellungen speichern?"
 msgid ""
 "ATTENTION: test pushover values? be shure you have saved the values before!"
 msgstr ""
+"ACHTUNG: Pushover Einstellungen testen? Bitte vorher sicherstellen, dass die "
+"Einstellungen gespeichert wurden!"
 
 #: notification.php:424
 msgid "test pushover values"
-msgstr ""
+msgstr "Pushover Testeinstellungen"
 
 #: notification.php:449
 msgid "bot token"
@@ -1941,7 +1945,7 @@ msgstr ""
 
 #: notification.php:457
 msgid "telegram_active"
-msgstr ""
+msgstr "Telegram aktiv"
 
 #: notification.php:464
 msgid "ATTENTION: save telegram values?"
@@ -1951,10 +1955,12 @@ msgstr "ACHTUNG: Telegram Einstellungen speichern?"
 msgid ""
 "ATTENTION: test telegram values? be shure you have saved the values before!"
 msgstr ""
+"ACHTUNG: Telegram Einstellungen testen? Bitte vorher sicherstellen, dass die "
+"Einstellungen gespeichert wurden!"
 
 #: notification.php:469
 msgid "test telegram values"
-msgstr ""
+msgstr "Telegram Testeinstellungen"
 
 #: scale_wizzard.php:24
 msgid "measuring on scales stopped due to calibrating scale"
@@ -2002,7 +2008,7 @@ msgstr "Pi-Ager anhalten?"
 
 #: settings.php:52
 msgid "if agingtable is running, it will be stopped also!"
-msgstr ""
+msgstr "wenn die Reifetabelle läuft wird sie auch angehalten!"
 
 #: settings.php:52
 msgid "stop pi-ager"
