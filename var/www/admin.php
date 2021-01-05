@@ -519,7 +519,7 @@
                                                         echo '<td><button class="art-button" name="manual_backup" value="manual_backup" onclick="return confirm(' . _('ATTENTION: backup manually?') . ');">' . _('backup manually') . '</button></td>';
                                                     }
                                                     else{
-                                                        echo '<td>' . _('agingtable is active.no backup possible!') . '</td>';
+                                                        echo '<td>' . _('Agingtable is active. No backup possible!') . '</td>';
                                                     }
                                                 ?>
                                             </form>
