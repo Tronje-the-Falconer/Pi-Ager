@@ -393,10 +393,10 @@
         close_database();
     }
     
-    function write_mailserver_values($mailserver_server, $mailserver_user, $mailserver_password, $mailserver_starttls, $mailserver_from_mail, $mailserver_port){
-        global $mailserver_table, $mailserver_id_field, $mailserver_server_field, $mailserver_user_field, $mailserver_password_field, $mailserver_starttls_field, $mailserver_from_mail_field, $mailserver_port_field;
+    function write_mailserver_values($mailserver_server, $mailserver_user, $mailserver_starttls, $mailserver_from_mail, $mailserver_port){
+        global $mailserver_table, $mailserver_id_field, $mailserver_server_field, $mailserver_user_field, $mailserver_starttls_field, $mailserver_from_mail_field, $mailserver_port_field;
         open_connection();
-        $sql = 'UPDATE ' . $mailserver_table . ' SET "' . $mailserver_server_field . '" = "' . $mailserver_server . '" , "' . $mailserver_user_field . '" = "' . $mailserver_user . '" , "' . $mailserver_password_field . '" = "' . $mailserver_password . '" , "' . $mailserver_starttls_field . '" = "' . $mailserver_starttls . '" , "' . $mailserver_from_mail_field . '" = "' . $mailserver_from_mail . '" , "' . $mailserver_port_field . '" = "' . $mailserver_port. '" WHERE "' . $mailserver_id_field . '" = 1';
+        $sql = 'UPDATE ' . $mailserver_table . ' SET "' . $mailserver_server_field . '" = "' . $mailserver_server . '" , "' . $mailserver_user_field . '" = "' . $mailserver_user . '" , "' . $mailserver_starttls_field . '" = "' . $mailserver_starttls . '" , "' . $mailserver_from_mail_field . '" = "' . $mailserver_from_mail . '" , "' . $mailserver_port_field . '" = "' . $mailserver_port. '" WHERE "' . $mailserver_id_field . '" = 1';
 
         execute_query($sql);
         
