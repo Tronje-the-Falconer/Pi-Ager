@@ -145,7 +145,7 @@
                                     </form>
                                     <form method="post" name="delete_messenger">
                                         <table id="show_messenger" class="show_messenger">
-                                            <tr><td>id to delete:</td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td><td><button class="art-button" name="delete_messenger" value="delete_messenger" onclick="return confirm('<?php echo _('ATTENTION: delete messenger?');?>');"><?php echo _('delete'); ?></button></td></tr>
+                                            <tr><td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td><td><button class="art-button" name="delete_messenger" value="delete_messenger" onclick="return confirm('<?php echo _('ATTENTION: delete messenger?');?>');"><?php echo _('delete'); ?></button></td></tr>
                                         </table>
                                     </form>
                                 </div>
@@ -247,7 +247,7 @@
                                     </form>
                                     <form method="post" name="delete_alarm">
                                         <table id="show_alarm" class="show_alarm">
-                                            <tr><td>id to delete:</td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td><td><button class="art-button" name="delete_alarm" value="delete_alarm" onclick="return confirm('<?php echo _('ATTENTION: delete alarm?');?>');"><?php echo _('delete'); ?></button></td></tr>
+                                            <tr><td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td><td><button class="art-button" name="delete_alarm" value="delete_alarm" onclick="return confirm('<?php echo _('ATTENTION: delete alarm?');?>');"><?php echo _('delete'); ?></button></td></tr>
                                         </table>
                                     </form>
                                 </div>
@@ -320,7 +320,7 @@
                                     </form>
                                     <form method="post" name="delete_e_mail_recipient">
                                         <table id="show_e_mail_recipient" class="show_e_mail_recipient">
-                                            <tr><td>id to delete:</td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td><td><button class="art-button" name="delete_e_mail_recipient" value="delete_e_mail_recipient" onclick="return confirm('<?php echo _('ATTENTION: delete e-mail recipient?');?>');"><?php echo _('delete'); ?></button></td></tr>
+                                            <tr><td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td><td><button class="art-button" name="delete_e_mail_recipient" value="delete_e_mail_recipient" onclick="return confirm('<?php echo _('ATTENTION: delete e-mail recipient?');?>');"><?php echo _('delete'); ?></button></td></tr>
                                         </table>
                                     </form>
                                 </div>
