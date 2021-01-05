@@ -375,7 +375,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td></td>
-                                                    <td><button class="art-button" name="mailserver_test" value="mailserver_test" onclick="return confirm('<?php echo _('ATTENTION: test mailserver? first save values!');?>');"><?php echo _('test mailserver'); ?></button></td>
+                                                    <td><button class="art-button" name="mailserver_test" value="mailserver_test" onclick="return confirm('<?php echo _('ATTENTION: test mailserver? be shure you have saved the values before!');?>');"><?php echo _('test mailserver'); ?></button></td>
                                                 </tr>
                                             </form>
                                         </tr>
@@ -421,7 +421,7 @@
                                     <table style="width: 100%;">
                                         <tr>
                                             <form method="post" name="pushover_test">
-                                                <td><button class="art-button" name="pushover_test" value="pushover_test" onclick="return confirm('<?php echo _('ATTENTION: test pushover values? first save them!');?>');"><?php echo _('test pushover values'); ?></button></td>
+                                                <td><button class="art-button" name="pushover_test" value="pushover_test" onclick="return confirm('<?php echo _('ATTENTION: test pushover values? be shure you have saved the values before!');?>');"><?php echo _('test pushover values'); ?></button></td>
                                             </form>
                                         </tr>
                                     </table>
@@ -466,7 +466,7 @@
                                     <table style="width: 100%;">
                                         <tr>
                                             <form method="post" name="telegram_test">
-                                                <td><button class="art-button" name="telegram_test" value="telegram_test" onclick="return confirm('<?php echo _('ATTENTION: test telegram values? first save them!');?>');"><?php echo _('test telegram values'); ?></button></td>
+                                                <td><button class="art-button" name="telegram_test" value="telegram_test" onclick="return confirm('<?php echo _('ATTENTION: test telegram values? be shure you have saved the values before!');?>');"><?php echo _('test telegram values'); ?></button></td>
                                             </form>
                                         </tr>
                                     </table>
