@@ -196,8 +196,35 @@
             }
         }
         $timestamp_value_dict[$last_timestamp_diagram] = Null;
+        $timestamps = array_keys($timestamp_value_dict);
+        $timestamps_axis_text = get_text_array_for_time_axis($timestamps);
+        $dataset = array_values($timestamp_value_dict);
+        // print "dataset: " . count($dataset) . "<br>";
+        // print "timestamps_axis_text: " . $timestamps_axis_text . "<br>";
+        // echo '<pre>';
+        // var_dump($dataset);
+        // echo '</pre>';
+        $return_array = array($timestamps_axis_text, $dataset, $timestamps);
+        return $return_array;
+    }   
+    
+    // reconstruct NTC diagram with timebase from ref_timestamps derived from temperature or humidity data
+    function get_data_for_NTC_diagram($data_values, $ref_timestamps){
         
-        $timestamps_axis_text = get_text_array_for_time_axis(array_keys($timestamp_value_dict));
+        $timestamp_value_dict = array();
+        $timestamps = array_keys($data_values);
+        // preload timestamp_value_dict with ref_timestamps and values set to Null
+        foreach ($ref_timestamps as $ref_timestamp) {
+            $timestamp_value_dict[$ref_timestamp] = Null;
+        }
+        // now fill timestamp_value_dict with values from data_values
+        if (count($timestamps) > 0) {
+            foreach ($timestamps as $timestamp){
+                $timestamp_value_dict[$timestamp] = $data_values[$timestamp];
+            }
+        }
+        
+        $timestamps_axis_text = get_text_array_for_time_axis($ref_timestamps);
         $dataset = array_values($timestamp_value_dict);
         // print "dataset: " . count($dataset) . "<br>";
         // print "timestamps_axis_text: " . $timestamps_axis_text . "<br>";
@@ -206,7 +233,7 @@
         // echo '</pre>';
         $return_array = array($timestamps_axis_text, $dataset);
         return $return_array;
-    }   
+    }
     
     global $last_timestamp_diagram;
     global $first_timestamp_diagram;
@@ -244,6 +271,8 @@
     $temperature_data_diagram = get_data_for_sensor_diagram($temperature_values);
     $temperature_timestamps_axis_text = $temperature_data_diagram[0];
     $temperature_dataset = $temperature_data_diagram[1];
+    
+    $ref_timestamps = $temperature_data_diagram[2];
     
     // $temperature_timestamps = array_keys($temperature_values);
     // $temperature_timestamps_axis = get_timestamps_for_time_axis($temperature_timestamps);
@@ -299,28 +328,28 @@
     // echo "thermometer1_values<br>";
     $thermometer1_values = get_diagram_values_range($data_sensor_temperature_meat1_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
     //$is_OnOff_value = False;
-    $thermometer1_data_diagram = get_data_for_sensor_diagram($thermometer1_values);
+    $thermometer1_data_diagram = get_data_for_NTC_diagram($thermometer1_values, $ref_timestamps);
     $thermometer1_timestamps_axis_text = $thermometer1_data_diagram[0];
     $thermometer1_dataset = $thermometer1_data_diagram[1];
     
     // echo "thermometer2_values<br>";
     $thermometer2_values = get_diagram_values_range($data_sensor_temperature_meat2_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
     //$is_OnOff_value = False;
-    $thermometer2_data_diagram = get_data_for_sensor_diagram($thermometer2_values);
+    $thermometer2_data_diagram = get_data_for_NTC_diagram($thermometer2_values, $ref_timestamps);
     $thermometer2_timestamps_axis_text = $thermometer2_data_diagram[0];
     $thermometer2_dataset = $thermometer2_data_diagram[1];
     
     // echo "thermometer3_values<br>";
     $thermometer3_values = get_diagram_values_range($data_sensor_temperature_meat3_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
     //$is_OnOff_value = False;
-    $thermometer3_data_diagram = get_data_for_sensor_diagram($thermometer3_values);
+    $thermometer3_data_diagram = get_data_for_NTC_diagram($thermometer3_values, $ref_timestamps);
     $thermometer3_timestamps_axis_text = $thermometer3_data_diagram[0];
     $thermometer3_dataset = $thermometer3_data_diagram[1];
     
     // echo "thermometer4_values<br>";
     $thermometer4_values = get_diagram_values_range($data_sensor_temperature_meat4_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
     //$is_OnOff_value = False;
-    $thermometer4_data_diagram = get_data_for_sensor_diagram($thermometer4_values);
+    $thermometer4_data_diagram = get_data_for_NTC_diagram($thermometer4_values, $ref_timestamps);
     $thermometer4_timestamps_axis_text = $thermometer4_data_diagram[0];
     $thermometer4_dataset = $thermometer4_data_diagram[1];
     

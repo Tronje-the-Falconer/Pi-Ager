@@ -548,32 +548,44 @@ DROP TABLE IF EXISTS "meat_sensortypes";
 ----
 -- Table structure for meat_sensortypes
 ----
-CREATE TABLE 'meat_sensortypes' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'name' TEXT DEFAULT NULL, 'a' REAL DEFAULT NULL, 'b' REAL DEFAULT NULL, 'c' REAL DEFAULT NULL, 'Rn' REAL DEFAULT NULL, 'Mode' TEXT DEFAULT NULL, 'RefVoltage' REAL DEFAULT NULL, 'Sensitivity' REAL DEFAULT NULL, 'Turns' INTEGER DEFAULT NULL, 'nAverage' INTEGER DEFAULT NULL, key TEXT DEFAULT 0 NOT NULL, value REAL DEFAULT 0 NOT NULL, last_change INTEGER DEFAULT 0 NOT NULL);
+CREATE TABLE "meat_sensortypes" (
+	"id"	INTEGER NOT NULL,
+	"name"	TEXT DEFAULT NULL,
+	"a"	REAL DEFAULT NULL,
+	"b"	REAL DEFAULT NULL,
+	"c"	REAL DEFAULT NULL,
+	"Rn"	REAL DEFAULT NULL,
+	"Mode"	TEXT DEFAULT NULL,
+	"RefVoltage"	REAL DEFAULT NULL,
+	"Sensitivity"	REAL DEFAULT NULL,
+	"Turns"	INTEGER DEFAULT NULL,
+	"nAverage"	INTEGER DEFAULT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
 
 ----
 -- Data dump for meat_sensortypes, a total of 20 rows
 ----
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('0','------',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('1','Fantast','0.003355834','0.00025698192','1.6391056e-06','50.08',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('2','MAVERICK','0.003356158','0.00022237925','2.652016e-06','1004.0',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('3','iGrill2','0.0033562424','0.00025319218','2.7988397e-06','99.61',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('4','ThermoWorks','0.0033556417','0.0002519145','2.360696e-06','97.31',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('5','ET-73','0.00335672','0.000291888','4.39054e-06','200.0',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('6','PERFEKTION','0.003356199','0.00024352911','3.4519389e-06','200.1',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('7','100K6A1B','0.00335639','0.000241116','2.43362e-06','100.0',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('8','FANTAST_NEU','0.00334519','0.000243825','2.61726e-06','220.0',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('9','100K3950','0.0033527432','0.00025977101','3.693425e-06','100.0',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('10','Inkbird','0.0033552456','0.00025608666','1.9317204e-06','48.59',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('11','5K3A1B','0.0033555','0.000257','2.43e-06','5.0',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('12','ET-735','0.0033566373','0.00019664428','9.6248678e-07','998.9',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('13','Acurite','0.0033555291','0.00025249073','2.5667292e-06','50.21',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('14','ODC','0.0033538614','0.00022352517','2.4382337e-06','1000.0',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('15','Santos','0.0033561093','0.00023552814','2.1375541e-06','200.82',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('16','SmokeMAX','0.0033561946','0.0002550005','2.5976258e-06','99.645',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('17','Weber_6743','0.0033558796','0.00027111149','3.1838428e-06','102.315',NULL,NULL,NULL,NULL,NULL,'0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('18','LEM-HO6P-AC',NULL,NULL,NULL,NULL,'AC','1.6672','76.67','2','100','0','0.0','0');
-INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES ('19','LEM-HO6P-DC',NULL,NULL,NULL,NULL,'DC','1.6672','76.67','2','50','0','0.0','0');
-
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('0','------',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('1','Fantast','0.003355834','0.00025698192','1.6391056e-06','50.08',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('2','MAVERICK','0.003356158','0.00022237925','2.652016e-06','1004.0',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('3','iGrill2','0.0033562424','0.00025319218','2.7988397e-06','99.61',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('4','ThermoWorks','0.0033556417','0.0002519145','2.360696e-06','97.31',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('5','ET-73','0.00335672','0.000291888','4.39054e-06','200.0',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('6','PERFEKTION','0.003356199','0.00024352911','3.4519389e-06','200.1',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('7','100K6A1B','0.00335639','0.000241116','2.43362e-06','100.0',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('8','FANTAST_NEU','0.00334519','0.000243825','2.61726e-06','220.0',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('9','100K3950','0.0033527432','0.00025977101','3.693425e-06','100.0',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('10','Inkbird','0.0033552456','0.00025608666','1.9317204e-06','48.59',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('11','5K3A1B','0.0033555','0.000257','2.43e-06','5.0',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('12','ET-735','0.0033566373','0.00019664428','9.6248678e-07','998.9',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('13','Acurite','0.0033555291','0.00025249073','2.5667292e-06','50.21',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('14','ODC','0.0033538614','0.00022352517','2.4382337e-06','1000.0',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('15','Santos','0.0033561093','0.00023552814','2.1375541e-06','200.82',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('16','SmokeMAX','0.0033561946','0.0002550005','2.5976258e-06','99.645',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('17','Weber_6743','0.0033558796','0.00027111149','3.1838428e-06','102.315',NULL,NULL,NULL,NULL,NULL);
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('18','LEM-HO6P-AC',NULL,NULL,NULL,NULL,'AC','1.6672','76.67','2','100');
+INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage") VALUES ('19','LEM-HO6P-DC',NULL,NULL,NULL,NULL,'DC','1.6672','76.67','2','50');
 ----
 -- Drop table for current_values
 ----

@@ -142,7 +142,7 @@
                                                     yAxes: [{
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php echo _("temperature") ?> <?php echo _(" - t") ?>',
+                                                            labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },

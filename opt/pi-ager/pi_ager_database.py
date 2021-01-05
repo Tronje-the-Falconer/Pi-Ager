@@ -364,21 +364,22 @@ def write_current_sensordata(loopnumber, sensor_temperature, sensor_humidity, se
     save_loop = int(get_table_value(pi_ager_names.config_settings_table, pi_ager_names.save_temperature_humidity_loops_key))
     
     if loopnumber % save_loop == 0:   # schreibt für HaMa's Diagramme alle 150 Loops die Werte in die DB
+        current_time = str(get_current_time())   # get current_time timestamp the same for all sensor data tables
         open_database()
-        execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + str(get_current_time()) + ')')
-        execute_query('INSERT INTO ' + pi_ager_names.data_sensor_humidity_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_humidity) + ',' + str(get_current_time()) + ')')
-        #if (sensor_meat1 != None):
-        temp = 'NULL' if (sensor_meat1 == None) else str(sensor_meat1)
-        execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_meat1_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ temp + ',' + str(get_current_time()) + ')')
-        #if (sensor_meat2 != None):
-        temp = 'NULL' if (sensor_meat2 == None) else str(sensor_meat2)
-        execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_meat2_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ temp + ',' + str(get_current_time()) + ')')
-        #if (sensor_meat3 != None):
-        temp = 'NULL' if (sensor_meat3 == None) else str(sensor_meat3)
-        execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_meat3_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ temp + ',' + str(get_current_time()) + ')')
-        #if (sensor_meat4 != None):
-        temp = 'NULL' if (sensor_meat4 == None) else str(sensor_meat4)
-        execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_meat4_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ temp + ',' + str(get_current_time()) + ')')
+        execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + current_time + ')')
+        execute_query('INSERT INTO ' + pi_ager_names.data_sensor_humidity_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_humidity) + ',' + current_time + ')')
+        if (sensor_meat1 != None):
+            #temp = 'NULL' if (sensor_meat1 == None) else str(sensor_meat1)
+            execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_meat1_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_meat1) + ',' + current_time + ')')
+        if (sensor_meat2 != None):
+            #temp = 'NULL' if (sensor_meat2 == None) else str(sensor_meat2)
+            execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_meat2_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_meat2) + ',' + current_time + ')')
+        if (sensor_meat3 != None):
+            #temp = 'NULL' if (sensor_meat3 == None) else str(sensor_meat3)
+            execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_meat3_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_meat3) + ',' + current_time + ')')
+        if (sensor_meat4 != None):
+            #temp = 'NULL' if (sensor_meat4 == None) else str(sensor_meat4)
+            execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_meat4_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_meat4) + ',' + current_time + ')')
 
         
         close_database()
