@@ -51,6 +51,17 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().info('Send E-Mail' )
         cl_fact_logic_send_email.get_instance().execute(subject, message)
+    
+    def send_pushover(self, subject, message):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_logger.get_instance().info('Send Pushover' )
+        cl_fact_logic_pushover.get_instance().execute(subject, message)
+
+    def send_telegram(self, subject, message):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_logger.get_instance().info('Send Telegram' )
+        cl_fact_logic_telegram.get_instance().execute(subject, message)
+
 
     def alarm(self, alarm):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
