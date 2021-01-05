@@ -417,6 +417,7 @@ DROP TABLE IF EXISTS "config_telegram";
 -- Table structure for config_telegram
 ----
 CREATE TABLE "config_telegram" (
+	"id" INTEGER,
     "bot_token" TEXT NOT NULL,
     "bot_chatID" TEXT NOT NULL,
     "active" INTEGER
@@ -435,6 +436,7 @@ DROP TABLE IF EXISTS "config_pushover";
 -- Table structure for config_pushover
 ----
 CREATE TABLE "config_pushover" (
+	"id" INTEGER,
     "user_key" TEXT NOT NULL,
     "api_token" TEXT NOT NULL,
     "active" INTEGER
@@ -500,6 +502,7 @@ DROP TABLE IF EXISTS "config_email_server";
 -- Table structure for config_email_server
 ----
 CREATE TABLE config_email_server (
+	"id" INTEGER,
     "server" TEXT NOT NULL,
     "user" TEXT NOT NULL,
     "password" TEXT NOT NULL,
