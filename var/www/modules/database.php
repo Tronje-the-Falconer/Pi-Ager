@@ -482,18 +482,7 @@
         close_database();
     }
     
-    function write_agingtable($agingtable){
-        global $value_field, $last_change_field, $key_field, $config_settings_table, $agingtable_key;
-        
-        $id_agingtable = get_agingtable_id_by_name($agingtable);
-        
-        open_connection();
-        $sql = 'UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = "' . $id_agingtable . '" , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' = "' . $agingtable_key . '"';
-        execute_query($sql);
-        
-        close_database();
-    }
-    
+  
     function delete_agingtable($agingtable){
         global  $config_settings_table, $id_field, $agingtables_table, $agingtable_key;
         
