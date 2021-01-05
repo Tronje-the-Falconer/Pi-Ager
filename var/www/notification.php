@@ -370,10 +370,6 @@
                                         <tr>
                                             <form method="post" name="mailserver_test">
                                                 <tr>
-                                                    <td><?php echo _('testmail adress'); ?>:</td>
-                                                    <td><input name="mailserver_testadress" type="text" style="width: 90%; text-align: right;" required value=></td>
-                                                </tr>
-                                                <tr>
                                                     <td></td>
                                                     <td><button class="art-button" name="mailserver_test" value="mailserver_test" onclick="return confirm('<?php echo _('ATTENTION: test mailserver? be shure you have saved the values before!');?>');"><?php echo _('test mailserver'); ?></button></td>
                                                 </tr>
