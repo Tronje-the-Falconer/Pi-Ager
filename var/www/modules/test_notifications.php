@@ -3,7 +3,7 @@
     if (isset ($_POST['mailserver_test'])){
         logger('DEBUG', 'button mailserver test pressed');
         unset($_POST['mailserver_test']);
-        shell_exec('sudo /var/sudowebscript.sh test_mailserver' > /dev/null 2>&1 &');
+        shell_exec('sudo /var/sudowebscript.sh test_mailserver > /dev/null 2>&1 &');
     }
     if (isset ($_POST['pushover_test'])){
         logger('DEBUG', 'button pushover test pressed');
