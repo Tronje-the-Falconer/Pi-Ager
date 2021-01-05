@@ -136,13 +136,13 @@ case "$1" in
         /usr/local/bin/pi-ager_backup.sh >> /var/log/pi-ager_backup.log  
     ;;
     test_mailserver) 
-            python3 /opt/pi-ager/messenger/pi_ager_test_mail.py
+            python3 /opt/pi-ager/pi_ager_test_mail.py
     ;;
     test_pushover) 
-            python3 /opt/pi-ager/messenger/pi_ager_test_pushover.py
+            python3 /opt/pi-ager/pi_ager_test_pushover.py
     ;;
     test_telegram) 
-            python3 /opt/pi-ager/messenger/pi_ager_test_telegram.py
+            python3 /opt/pi-ager/pi_ager_test_telegram.py
     ;;
     sensorbusi2c) #Sensorbus wurde geaendert auf i2c
 		# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln (SHT3x und SHT85)
