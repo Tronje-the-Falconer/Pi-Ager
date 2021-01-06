@@ -147,21 +147,21 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                 if item['telegram'] == 1:
                     cl_fact_logger.get_instance().info('Check Event for Telegram: ' + event)
                     try:
-                        cl_fact_logic_telegram.get_instance().execute(build_event_subject(), event)
+                        cl_fact_logic_telegram.get_instance().execute(self.build_event_subject(), event)
                     except:
                         cl_fact_logger.get_instance().info('Telegram settings not active: ')
                 
                 if item['pushover'] == 1:
                     cl_fact_logger.get_instance().info('Check Event for Pushover: ' + event)
                     try:
-                        cl_fact_logic_pushover.get_instance().execute(build_event_subject(), event)
+                        cl_fact_logic_pushover.get_instance().execute(self.build_event_subject(), event)
                     except:
                         cl_fact_logger.get_instance().info('Pushover settings not active: ')
 
                 if item['e-mail'] == 1:
                     cl_fact_logger.get_instance().info('Check Event for E-Mail: ' + event)
                     try:
-                        cl_fact_logic_send_email.get_instance().execute(build_event_subject(), event)
+                        cl_fact_logic_send_email.get_instance().execute(self.build_event_subject(), event)
                     except:
                         cl_fact_logger.get_instance().info('E-Mail settings not active: ')
                         
