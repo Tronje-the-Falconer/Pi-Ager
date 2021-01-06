@@ -7,7 +7,7 @@
         $index_row = 0;
         $index_row_id = 1;
         while ($index_row < $count_messenger_number_rows) {
-            $messenger_id = $_POST['messenger_id_' . $index_row_id];
+            $messenger_id = $_POST['messenger_id_' . $index_row];
             $messenger_exception = $_POST['messenger_exception_' . $index_row_id ];
             $checked_messenger_e_mail_true = $_POST['checked_messenger_e_mail_true_' . $index_row_id];
             $checked_pushover_true = $_POST['checked_pushover_true_' . $index_row_id];
