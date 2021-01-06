@@ -135,7 +135,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
      
         for item in self.it_messenger_event:
             if item.get('event') == event :
-                if (info_text == '' ):
+                if not info_text:
                     self_info_text = item['event_text']
                 else:
                     self.info_text    = info_text
