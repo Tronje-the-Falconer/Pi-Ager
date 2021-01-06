@@ -131,7 +131,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         """
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().info("Event raised: " + event )
-       
+        self.event        = event
      
         for item in self.it_messenger_event:
             if item.get('event') == event :
@@ -147,21 +147,21 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                 if item['telegram'] == 1:
                     cl_fact_logger.get_instance().info('Check Event for Telegram: ' + event)
                     try:
-                        cl_fact_logic_telegram.get_instance().execute(event, event)
+                        cl_fact_logic_telegram.get_instance().execute(build_event_subject(), event)
                     except:
                         cl_fact_logger.get_instance().info('Telegram settings not active: ')
                 
                 if item['pushover'] == 1:
                     cl_fact_logger.get_instance().info('Check Event for Pushover: ' + event)
                     try:
-                        cl_fact_logic_pushover.get_instance().execute(event, event)
+                        cl_fact_logic_pushover.get_instance().execute(build_event_subject(), event)
                     except:
                         cl_fact_logger.get_instance().info('Pushover settings not active: ')
 
                 if item['e-mail'] == 1:
                     cl_fact_logger.get_instance().info('Check Event for E-Mail: ' + event)
                     try:
-                        cl_fact_logic_send_email.get_instance().execute(event, event)
+                        cl_fact_logic_send_email.get_instance().execute(build_event_subject(), event)
                     except:
                         cl_fact_logger.get_instance().info('E-Mail settings not active: ')
                         
@@ -192,6 +192,24 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             cl_fact_logger.get_instance().debug('Host name lookup failure')
 
         return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager Hostname ' + hostname + ' occured')
+
+    def build_event_subject(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        
+        hostname = socket.gethostname()
+        try:
+            ip = socket.gethostbyname(hostname)
+        except OSError:
+            # Probably name lookup wasn't set up right; skip this test
+            cl_fact_logger.get_instance().debug('Host name lookup failure')
+        #self.assertTrue(ip.find('.') >= 0, "Error resolving host to ip.")
+        try:
+            hname, aliases, ipaddrs = socket.gethostbyaddr(ip)
+        except OSError:
+            # Probably a similar problem as above; skip this test
+            cl_fact_logger.get_instance().debug('Host name lookup failure')
+
+        return('Event ' + self.event + ' on Pi-Ager Hostname ' + hostname + ' occured')
 
 class cl_db_messenger_exception(cl_ab_database_config):
 
