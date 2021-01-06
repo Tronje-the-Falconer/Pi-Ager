@@ -490,7 +490,7 @@
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('number of backups'); ?>:</td>
-                                                <td><input name="backup_number_of_backups" type="number" min="1" max="60" style="width: 90%;" required value=<?php echo $backup_number_of_backups; ?>></td>
+                                                <td><input name="backup_number_of_backups" type="number" step="1" min="1" max="60" style="width: 90%;" required value=<?php echo $backup_number_of_backups; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('backup name'); ?>:</td>
@@ -498,7 +498,7 @@
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('nfs opt'); ?>:</td>
-                                                <td><input name="backup_nfsopt" type="text" style="width: 90%; text-align: right;" required value="<?php echo $backup_nfsopt; ?>"></td>
+                                                <td><input name="backup_nfsopt" type="text" style="width: 90%; text-align: right;" value="<?php echo $backup_nfsopt; ?>"></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('backup_active'); ?>:</td>
