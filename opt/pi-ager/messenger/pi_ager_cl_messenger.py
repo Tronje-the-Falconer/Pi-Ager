@@ -163,6 +163,7 @@ class cl_db_messenger_exception(cl_ab_database_config):
     def build_select_statement(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return('SELECT * FROM config_messenger_exception where active = 1 ')
+    
 class cl_db_messenger_event(cl_ab_database_config):
 
     def build_select_statement(self):
@@ -207,7 +208,7 @@ class cl_fact_logic_messenger(ABC):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     
-class cl_fact_db_messenger(ABC):
+class cl_fact_db_messenger_exception(ABC):
     __o_instance = None
     
     @classmethod
@@ -216,7 +217,7 @@ class cl_fact_db_messenger(ABC):
         Factory method to set the db messenger instance
         """        
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cl_fact_db_messenger.__o_instance = i_instance
+        cl_fact_db_messenger_exception.__o_instance = i_instance
         
     @classmethod        
     def get_instance(self):
@@ -224,14 +225,43 @@ class cl_fact_db_messenger(ABC):
         Factory method to get the db messenger instance
         """        
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if cl_fact_db_messenger.__o_instance is not None:
-            return(cl_fact_db_messenger.__o_instance)
-        cl_fact_db_messenger.__o_instance = cl_db_messenger()
-        return(cl_fact_db_messenger.__o_instance)
+        if cl_fact_db_messenger_exception.__o_instance is not None:
+            return(cl_fact_db_messenger_exception.__o_instance)
+        cl_fact_db_messenger_exception.__o_instance = cl_db_messenger_exception()
+        return(cl_fact_db_messenger_exception.__o_instance)
 
     def __init__(self):
         """
-        Constructor logic messenger factory
+        Constructor logic messenger exception factory
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        pass    
+
+class cl_fact_db_messenger_event(ABC):
+    __o_instance = None
+    
+    @classmethod
+    def set_instance(self, i_instance):
+        """
+        Factory method to set the db messenger instance
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_db_messenger_event.__o_instance = i_instance
+        
+    @classmethod        
+    def get_instance(self):
+        """
+        Factory method to get the db messenger instance
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        if cl_fact_db_messenger_event.__o_instance is not None:
+            return(cl_fact_db_messenger_event.__o_instance)
+        cl_fact_db_messenger_event.__o_instance = cl_db_messenger_event()
+        return(cl_fact_db_messenger_event.__o_instance)
+
+    def __init__(self):
+        """
+        Constructor logic messenger event factory
         """        
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
