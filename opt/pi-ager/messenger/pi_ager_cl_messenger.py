@@ -191,7 +191,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             # Probably a similar problem as above; skip this test
             cl_fact_logger.get_instance().debug('Host name lookup failure')
 
-        return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager Hostname ' + hostname + ' occured')
+        return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager Hostname ' + hostname + ' occured \n' )
 
     def build_event_subject(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
@@ -209,7 +209,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             # Probably a similar problem as above; skip this test
             cl_fact_logger.get_instance().debug('Host name lookup failure')
 
-        return('Event ' + self.event + ' on Pi-Ager Hostname ' + hostname + ' occured')
+        return('Event ' + self.event + ' on Pi-Ager Hostname ' + hostname + ' occured \n')
 
 class cl_db_messenger_exception(cl_ab_database_config):
 
