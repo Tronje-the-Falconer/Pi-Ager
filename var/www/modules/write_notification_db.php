@@ -96,6 +96,9 @@
         $alarm_low_time = $_POST['add_alarm_low_time'];
         $alarm_waveform = $_POST['add_alarm_waveform'];
         $alarm_frequency = $_POST['add_alarm_frequency'];
+        if ($alarm_frequency == Null){
+            $alarm_frequency = 0;
+        }
         add_alarm($alarm_alarm, $alarm_replication, $alarm_sleep, $alarm_high_time, $alarm_low_time, $alarm_waveform, $alarm_frequency );
     }
     
