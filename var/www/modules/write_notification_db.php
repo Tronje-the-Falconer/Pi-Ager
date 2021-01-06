@@ -122,7 +122,7 @@
         logger('DEBUG', 'button add e-mail recipient pressed');
         unset($_POST['add_e_mail_recipient']);
         $add_e_mail_recipients_to_mail = $_POST['add_e_mail_recipient_to_mail'];
-        $add_e_mail_recipients_active = $_POST['checked_e_mail_recipient_true'];
+        $add_e_mail_recipients_active = $_POST['add_checked_e_mail_recipient_true'];
         add_mail_recipient($add_e_mail_recipients_to_mail, $add_e_mail_recipients_active);
 
         logger('DEBUG', 'mail recipient added');
