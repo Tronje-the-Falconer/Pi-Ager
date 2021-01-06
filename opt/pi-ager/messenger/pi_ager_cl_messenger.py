@@ -128,6 +128,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
     def handle_event(self, event, info_text=None):
         """
         Handle event to create alarm or email or telegram or pushover ... class
+        If the second parameter info_text is empty, the value is taken from the field envent_text in table config_messenger_event 
         """
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().info("Event raised: " + event )
