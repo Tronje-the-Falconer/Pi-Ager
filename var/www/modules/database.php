@@ -853,4 +853,21 @@
         
         close_database();
     }
+
+    function get_alarm_names(){
+        global $alarm_alarm_field, $alarm_table;
+        
+        open_connection();
+        $sql = 'SELECT ' . $alarm_alarm_field . ' FROM ' . $alarm_table;
+        $result = get_query_result($sql);
+        $index = 0;
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+            {
+            $alarm_names[$index] = $dataset[$alarm_alarm_field];
+            $index++;
+            }
+        close_database();
+        
+        return $alarm_names;
+    }
 ?>
