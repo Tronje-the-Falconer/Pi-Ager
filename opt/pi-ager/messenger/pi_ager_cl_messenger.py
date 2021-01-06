@@ -213,7 +213,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
     
     def build_event_message(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return( 'Message: ' + self.event + '/n' )
+        return( 'Message: ' + self.event + '\n' )
 
 class cl_db_messenger_exception(cl_ab_database_config):
 
