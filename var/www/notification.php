@@ -236,12 +236,12 @@
                                                             } else {$alarm_frequency = '';}
                                                                 echo '<td><input type="hidden" name="alarm_id_' . $index_row . '" value="' . $alarm_id . '">'. $alarm_id .'</td>';
                                                                 echo '<td><input name="alarm_alarm_' . $alarm_id . '" type="text" style="width: 90%; text-align: right;" required value='. $alarm_alarm .'></td>';
-                                                                echo '<td><input name="alarm_replication_' . $alarm_id . '" type="number" step="1" style="width: 90%; text-align: right;" required value='. $alarm_replication .'></td>';
-                                                                echo '<td><input name="alarm_sleep_' . $alarm_id . '" type="number" style="width: 90%; text-align: right;" required value='. $alarm_sleep .'></td>';
-                                                                echo '<td><input name="alarm_high_time_' . $alarm_id . '" type="number" step="0.1" style="width: 90%; text-align: right;" required value='. $alarm_high_time .'></td>';
-                                                                echo '<td><input name="alarm_low_time_' . $alarm_id . '" type="number" step="0.1" style="width: 90%; text-align: right;" required value='. $alarm_low_time .'></td>';
+                                                                echo '<td><input name="alarm_replication_' . $alarm_id . '" type="number" min="1" max="10" step="1" style="width: 90%; text-align: right;" required value='. $alarm_replication .'></td>';
+                                                                echo '<td><input name="alarm_sleep_' . $alarm_id . '" type="number" min="0.1" max="5.0" step="0.1" style="width: 90%; text-align: right;" required value='. $alarm_sleep .'></td>';
+                                                                echo '<td><input name="alarm_high_time_' . $alarm_id . '" type="number" min="0.1" max="5.0"  step="0.1" style="width: 90%; text-align: right;" required value='. $alarm_high_time .'></td>';
+                                                                echo '<td><input name="alarm_low_time_' . $alarm_id . '" type="number" min="0.1" max="5.0" step="0.1" style="width: 90%; text-align: right;" required value='. $alarm_low_time .'></td>';
                                                                 /* echo '<td><input name="alarm_waveform_' . $alarm_id . '" type="text" style="width: 90%; text-align: right;" required value='. $alarm_waveform .'></td>';
-                                                                echo '<td><input name="alarm_frequency_' . $alarm_id . '" type="number" style="width: 90%; text-align: right;" required value='. $alarm_frequency .'></td>';
+                                                                echo '<td><input name="alarm_frequency_' . $alarm_id . '" type="number" min="1" max="5" step="0.1" style="width: 90%; text-align: right;" required value='. $alarm_frequency .'></td>';
                                                                 */
                                                                 echo '<td><input name="alarm_waveform_' . $alarm_id . '" type="hidden" style="width: 90%; text-align: right;"  value='. $alarm_waveform .'></td>';
                                                                 echo '<td><input name="alarm_frequency_' . $alarm_id . '" type="hidden" style="width: 90%; text-align: right;"  value='. $alarm_frequency .'></td>';
@@ -272,12 +272,12 @@
                                             </tr>
                                             <tr>
                                                 <td><input name="add_alarm_alarm" type="text" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_replication" type="number" step="1" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_sleep" type="number" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_high_time" type="number" step="0.1" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_low_time" type="number" step="0.1" style="width: 90%; text-align: right;" required></td>';
+                                                <td><input name="add_alarm_replication" type="number" min="1" max="10" step="1" style="width: 90%; text-align: right;" required></td>';
+                                                <td><input name="add_alarm_sleep" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>';
+                                                <td><input name="add_alarm_high_time" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>';
+                                                <td><input name="add_alarm_low_time" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>';
                                                 <!-- <td><input name="add_alarm_waveform" type="text" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_frequency" type="number" style="width: 90%; text-align: right;" required></td>'; -->
+                                                <td><input name="add_alarm_frequency" type="number" min="1" max="5" step="1" style="width: 90%; text-align: right;" required></td>'; -->
                                                 <td><input name="add_alarm_waveform" type="hidden" style="width: 90%; text-align: right;"></td>';
                                                 <td><input name="add_alarm_frequency" type="hidden" style="width: 90%; text-align: right;">0</td>';
                                                             
