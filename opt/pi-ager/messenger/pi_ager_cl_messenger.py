@@ -41,10 +41,17 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             raise cx_direct_call("Please use factory class")
 
         """
-        Read messenger data from DB
+        Read messenger data from exception DB
         """
-        self.db_messenger = cl_fact_db_messenger().get_instance()
-        self.it_messenger = self.db_messenger.read_data_from_db()
+        self.db_messenger_exception = cl_fact_db_messenger_exception().get_instance()
+        self.it_messenger_exception = self.db_messenger_exception.read_data_from_db()
+
+        """
+        Read messenger data from event DB
+        """
+        self.db_messenger_event = cl_fact_db_messenger_event().get_instance()
+        self.it_messenger_event = self.db_messenger_event.read_data_from_db()
+
 
         self.exception_known = False
     def send_mail(self, subject, message):
@@ -90,7 +97,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             #cl_fact_logger.get_instance().debug('telegram  = ' + str(self.it_messenger[0]['telegram']))
             #cl_fact_logger.get_instance().debug('alarm     = ' + str(self.it_messenger[0]['alarm']))
      
-        for item in self.it_messenger:
+        for item in self.it_messenger_exception:
             if item.get('exception') == self.cx_error_name :
                 cl_fact_logger.get_instance().debug(item['exception'])
                 cl_fact_logger.get_instance().debug(item['e-mail'])
@@ -151,11 +158,18 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
 
         return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager Hostname ' + hostname + ' occured')
 
-class cl_db_messenger(cl_ab_database_config):
+class cl_db_messenger_exception(cl_ab_database_config):
 
     def build_select_statement(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return('SELECT * FROM config_messenger where active = 1 ')
+        return('SELECT * FROM config_messenger_exception where active = 1 ')
+class cl_db_messenger_event(cl_ab_database_config):
+
+    def build_select_statement(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        return('SELECT * FROM config_messenger_event where active = 1 ')
+ 
+ 
  
 class th_logic_messenger(cl_logic_messenger):   
        
