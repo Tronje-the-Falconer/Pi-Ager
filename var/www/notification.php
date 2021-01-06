@@ -98,7 +98,7 @@
                                                                         <input type="checkbox" name="checked_pushover_true_' . $messenger_id . '" value="1" ' . $checked_messenger_pushover_true .'></td>';
                                                                 echo '<td> <input type="hidden" name="checked_telegram_true_' . $messenger_id . '" value="0">
                                                                         <input type="checkbox" name="checked_telegram_true_' . $messenger_id . '" value="1" ' . $checked_messenger_telegram_true .'></td>';
-                                                                echo '<td><input name="messenger_alarm_' . $messenger_id . '" type="text" style="width: 90%; text-align: right;" required value='. $messenger_alarm .'></td>';
+                                                                echo '<td><input name="messenger_alarm_' . $messenger_id . '" type="text" style="width: 90%; text-align: right;" value='. $messenger_alarm .'></td>';
                                                                 echo '<td> <input type="hidden" name="checked_messenger_raise_exeption_true_' . $messenger_id . '" value="0">
                                                                         <input type="checkbox" name="checked_messenger_raise_exeption_true_' . $messenger_id . '" value="1" ' . $checked_messenger_raise_exeption_true .'></td>';
                                                                  echo '<td> <input type="hidden" name="checked_active_true_' . $messenger_id . '" value="0">
@@ -134,7 +134,7 @@
                                                      <input type="checkbox" name="add_checked_pushover_true" value="1"></td>
                                                 <td> <input type="hidden" name="add_checked_telegram_true" value="0">
                                                      <input type="checkbox" name="add_checked_telegram_true" value="1"></td>
-                                                <td><input name="add_messenger_alarm" type="text" style="width: 90%; text-align: right;" required value></td>
+                                                <td><input name="add_messenger_alarm" type="text" style="width: 90%; text-align: right;"></td>
                                                 <td> <input type="hidden" name="add_checked_messenger_raise_exeption_true" value="0">
                                                     <input type="checkbox" name="add_checked_messenger_raise_exeption_true" value="1"></td>
                                                     <td> <input type="hidden" name="add_checked_active_true" value="0">
@@ -145,7 +145,12 @@
                                     </form>
                                     <form method="post" name="delete_messenger">
                                         <table id="show_messenger" class="show_messenger">
-                                            <tr><td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td><td><button class="art-button" name="delete_messenger" value="delete_messenger" onclick="return confirm('<?php echo _('ATTENTION: delete messenger?');?>');"><?php echo _('delete'); ?></button></td></tr>
+                                            <tr>
+                                                <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button class="art-button" name="delete_messenger" value="delete_messenger" onclick="return confirm('<?php echo _('ATTENTION: delete messenger?');?>');"><?php echo _('delete'); ?></button></td>
+                                            </tr>
                                         </table>
                                     </form>
                                 </div>
@@ -164,8 +169,11 @@
                                                 <td class="show_alarm_cell"><div class="tooltip"><?php echo _('sleep') ?><span class="tooltiptext"><?php echo _('sleep'); ?></span></div></td>
                                                 <td class="show_alarm_cell"><div class="tooltip"><?php echo _('high_time') ?><span class="tooltiptext"><?php echo _('high_time'); ?></span></div></td>
                                                 <td class="show_alarm_cell"><div class="tooltip"><?php echo _('low_time') ?><span class="tooltiptext"><?php echo _('low_time'); ?></span></div></td>
-                                                <td class="show_alarm_cell"><div class="tooltip"><?php echo _('waveform') ?><span class="tooltiptext"><?php echo _('waveform'); ?></span></div></td>
+                                                <!--<td class="show_alarm_cell"><div class="tooltip"><?php echo _('waveform') ?><span class="tooltiptext"><?php echo _('waveform'); ?></span></div></td>
                                                 <td class="show_alarm_cell"><div class="tooltip"><?php echo _('frequency') ?><span class="tooltiptext"><?php echo _('frequency'); ?></span></div></td>
+                                                -->
+                                                <td class="show_alarm_cell"></td>
+                                                <td class="show_alarm_cell"></td>
                                             </tr>
                                             <?php 
                                                 $index_row = 0;
@@ -203,12 +211,15 @@
                                                             } else {$alarm_frequency = '';}
                                                                 echo '<td><input type="hidden" name="alarm_id_' . $index_row . '" value="' . $alarm_id . '">'. $alarm_id .'</td>';
                                                                 echo '<td><input name="alarm_alarm_' . $alarm_id . '" type="text" style="width: 90%; text-align: right;" required value='. $alarm_alarm .'></td>';
-                                                                echo '<td><input name="alarm_replication_' . $alarm_id . '" type="number" step="1" style="width: 90%; text-align: right;" value='. $alarm_replication .'></td>';
-                                                                echo '<td><input name="alarm_sleep_' . $alarm_id . '" type="number" style="width: 90%; text-align: right;" value='. $alarm_sleep .'></td>';
-                                                                echo '<td><input name="alarm_high_time_' . $alarm_id . '" type="number" step="0.1" style="width: 90%; text-align: right;" value='. $alarm_high_time .'></td>';
-                                                                echo '<td><input name="alarm_low_time_' . $alarm_id . '" type="number" step="0.1" style="width: 90%; text-align: right;" value='. $alarm_low_time .'></td>';
-                                                                echo '<td><input name="alarm_waveform_' . $alarm_id . '" type="text" style="width: 90%; text-align: right;" value='. $alarm_waveform .'></td>';
-                                                                echo '<td><input name="alarm_frequency_' . $alarm_id . '" type="number" style="width: 90%; text-align: right;" value='. $alarm_frequency .'></td>';
+                                                                echo '<td><input name="alarm_replication_' . $alarm_id . '" type="number" step="1" style="width: 90%; text-align: right;" required value='. $alarm_replication .'></td>';
+                                                                echo '<td><input name="alarm_sleep_' . $alarm_id . '" type="number" style="width: 90%; text-align: right;" required value='. $alarm_sleep .'></td>';
+                                                                echo '<td><input name="alarm_high_time_' . $alarm_id . '" type="number" step="0.1" style="width: 90%; text-align: right;" required value='. $alarm_high_time .'></td>';
+                                                                echo '<td><input name="alarm_low_time_' . $alarm_id . '" type="number" step="0.1" style="width: 90%; text-align: right;" required value='. $alarm_low_time .'></td>';
+                                                                /* echo '<td><input name="alarm_waveform_' . $alarm_id . '" type="text" style="width: 90%; text-align: right;" required value='. $alarm_waveform .'></td>';
+                                                                echo '<td><input name="alarm_frequency_' . $alarm_id . '" type="number" style="width: 90%; text-align: right;" required value='. $alarm_frequency .'></td>';
+                                                                */
+                                                                echo '<td><input name="alarm_waveform_' . $alarm_id . '" type="hidden" style="width: 90%; text-align: right;"  value='. $alarm_waveform .'></td>';
+                                                                echo '<td><input name="alarm_frequency_' . $alarm_id . '" type="hidden" style="width: 90%; text-align: right;"  value='. $alarm_frequency .'></td>';
                                                             echo '</tr>';
                                                             $index_row++;
                                                         }
@@ -229,17 +240,21 @@
                                                 <td class="show_alarm_cell"><div class="tooltip"><?php echo _('sleep') ?><span class="tooltiptext"><?php echo _('sleep'); ?></span></div></td>
                                                 <td class="show_alarm_cell"><div class="tooltip"><?php echo _('high_time') ?><span class="tooltiptext"><?php echo _('high_time'); ?></span></div></td>
                                                 <td class="show_alarm_cell"><div class="tooltip"><?php echo _('low_time') ?><span class="tooltiptext"><?php echo _('low_time'); ?></span></div></td>
-                                                <td class="show_alarm_cell"><div class="tooltip"><?php echo _('waveform') ?><span class="tooltiptext"><?php echo _('waveform'); ?></span></div></td>
-                                                <td class="show_alarm_cell"><div class="tooltip"><?php echo _('frequency') ?><span class="tooltiptext"><?php echo _('frequency'); ?></span></div></td>
+                                                <!-- <td class="show_alarm_cell"><div class="tooltip"><?php echo _('waveform') ?><span class="tooltiptext"><?php echo _('waveform'); ?></span></div></td>
+                                                <td class="show_alarm_cell"><div class="tooltip"><?php echo _('frequency') ?><span class="tooltiptext"><?php echo _('frequency'); ?></span></div></td> -->
+                                                <td class="show_alarm_cell"></td>
+                                                <td class="show_alarm_cell"></td>
                                             </tr>
                                             <tr>
                                                 <td><input name="add_alarm_alarm" type="text" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_replication" type="number" step="1" style="width: 90%; text-align: right;" ></td>';
-                                                <td><input name="add_alarm_sleep" type="number" style="width: 90%; text-align: right;" ></td>';
-                                                <td><input name="add_alarm_high_time" type="number" step="0.1" style="width: 90%; text-align: right;" ></td>';
-                                                <td><input name="add_alarm_low_time" type="number" step="0.1" style="width: 90%; text-align: right;" ></td>';
-                                                <td><input name="add_alarm_waveform" type="text" style="width: 90%; text-align: right;" ></td>';
-                                                <td><input name="add_alarm_frequency" type="number" style="width: 90%; text-align: right;" ></td>';
+                                                <td><input name="add_alarm_replication" type="number" step="1" style="width: 90%; text-align: right;" required></td>';
+                                                <td><input name="add_alarm_sleep" type="number" style="width: 90%; text-align: right;" required></td>';
+                                                <td><input name="add_alarm_high_time" type="number" step="0.1" style="width: 90%; text-align: right;" required></td>';
+                                                <td><input name="add_alarm_low_time" type="number" step="0.1" style="width: 90%; text-align: right;" required></td>';
+                                                <!-- <td><input name="add_alarm_waveform" type="text" style="width: 90%; text-align: right;" required></td>';
+                                                <td><input name="add_alarm_frequency" type="number" style="width: 90%; text-align: right;" required></td>'; -->
+                                                <td><input name="add_alarm_waveform" type="hidden" style="width: 90%; text-align: right;"></td>';
+                                                <td><input name="add_alarm_frequency" type="hidden" style="width: 90%; text-align: right;">0</td>';
                                                             
                                             </tr>
                                         </table>
@@ -247,7 +262,12 @@
                                     </form>
                                     <form method="post" name="delete_alarm">
                                         <table id="show_alarm" class="show_alarm">
-                                            <tr><td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td><td><button class="art-button" name="delete_alarm" value="delete_alarm" onclick="return confirm('<?php echo _('ATTENTION: delete alarm?');?>');"><?php echo _('delete'); ?></button></td></tr>
+                                            <tr>
+                                                <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td>
+                                            </tr>
+                                            <tr>
+                                                <td><button class="art-button" name="delete_alarm" value="delete_alarm" onclick="return confirm('<?php echo _('ATTENTION: delete alarm?');?>');"><?php echo _('delete'); ?></button></td>
+                                            </tr>
                                         </table>
                                     </form>
                                 </div>
@@ -320,7 +340,12 @@
                                     </form>
                                     <form method="post" name="delete_e_mail_recipient">
                                         <table id="show_e_mail_recipient" class="show_e_mail_recipient">
-                                            <tr><td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td><td><button class="art-button" name="delete_e_mail_recipient" value="delete_e_mail_recipient" onclick="return confirm('<?php echo _('ATTENTION: delete e-mail recipient?');?>');"><?php echo _('delete'); ?></button></td></tr>
+                                            <tr>
+                                                <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td>
+                                            </tr>
+                                            <tr>
+                                              <td><button class="art-button" name="delete_e_mail_recipient" value="delete_e_mail_recipient" onclick="return confirm('<?php echo _('ATTENTION: delete e-mail recipient?');?>');"><?php echo _('delete'); ?></button></td>
+                                            </tr>
                                         </table>
                                     </form>
                                 </div>
@@ -348,7 +373,7 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo _('server'); ?>:</td>
-                                                <td><input name="mailserver_server" type="text" style="width: 90%; text-align: right;"required value=<?php echo $mailserver_server; ?>></td>
+                                                <td><input name="mailserver_server" type="text" style="width: 90%; text-align: right;" required value=<?php echo $mailserver_server; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('user'); ?>:</td>
@@ -405,7 +430,7 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo _('user key'); ?>:</td>
-                                                <td><input name="pushover_user_key" type="text" style="width: 90%; text-align: right;"required value=<?php echo $pushover_user_key; ?>></td>
+                                                <td><input name="pushover_user_key" type="text" style="width: 90%; text-align: right;" required value=<?php echo $pushover_user_key; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('api token'); ?>:</td>
@@ -450,7 +475,7 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo _('bot token'); ?>:</td>
-                                                <td><input name="telegram_bot_token" type="text" style="width: 90%; text-align: right;"required value=<?php echo $telegram_bot_token; ?>></td>
+                                                <td><input name="telegram_bot_token" type="text" style="width: 90%; text-align: right;" required value=<?php echo $telegram_bot_token; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('bot chatID'); ?>:</td>
