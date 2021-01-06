@@ -12,7 +12,7 @@ except Exception as cx_error:
     cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
 
 """
-cl_fact_logic_messenger().get_instance().handle_event('Pi-Ager_started')
+cl_fact_logic_messenger().get_instance().handle_event('Pi-Ager_started', 'Pi-Ager was started')
 """
 try:
     cl_fact_logic_messenger.get_instance().send_pushover('Hallo', 'Pushover Hello')

@@ -125,13 +125,14 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                 return(self.exception_known)
 
 
-    def handle_event(self, event):
+    def handle_event(self, event, info_text):
         """
         Handle event to create alarm or email or telegram or pushover ... class
         """
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().info("Event raised: " + event )
         self.event        = event
+        self.info_text    = info_text
      
         for item in self.it_messenger_event:
             if item.get('event') == event :
@@ -213,7 +214,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
     
     def build_event_message(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return( 'Message: ' + self.event + '\n' )
+        return( 'Message: ' + self.info_text + '\n' )
 
 class cl_db_messenger_exception(cl_ab_database_config):
 
