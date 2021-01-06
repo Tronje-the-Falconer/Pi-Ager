@@ -7,7 +7,7 @@
         $index_row = 0;
         $index_row_id = 1;
         while ($index_row < $count_messenger_number_rows) {
-            $messenger_id = $_POST['messenger_id_' . $index_row_id];
+            $messenger_id = $_POST['messenger_id_' . $index_row];
             $messenger_exception = $_POST['messenger_exception_' . $index_row_id ];
             $checked_messenger_e_mail_true = $_POST['checked_messenger_e_mail_true_' . $index_row_id];
             $checked_pushover_true = $_POST['checked_pushover_true_' . $index_row_id];
@@ -96,6 +96,9 @@
         $alarm_low_time = $_POST['add_alarm_low_time'];
         $alarm_waveform = $_POST['add_alarm_waveform'];
         $alarm_frequency = $_POST['add_alarm_frequency'];
+        if ($alarm_frequency == Null){
+            $alarm_frequency = 0;
+        }
         add_alarm($alarm_alarm, $alarm_replication, $alarm_sleep, $alarm_high_time, $alarm_low_time, $alarm_waveform, $alarm_frequency );
     }
     
@@ -122,7 +125,7 @@
         logger('DEBUG', 'button add e-mail recipient pressed');
         unset($_POST['add_e_mail_recipient']);
         $add_e_mail_recipients_to_mail = $_POST['add_e_mail_recipient_to_mail'];
-        $add_e_mail_recipients_active = $_POST['checked_e_mail_recipient_true'];
+        $add_e_mail_recipients_active = $_POST['add_checked_e_mail_recipient_true'];
         add_mail_recipient($add_e_mail_recipients_to_mail, $add_e_mail_recipients_active);
 
         logger('DEBUG', 'mail recipient added');

@@ -22,6 +22,6 @@ except Exception as cx_error:
     cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
     
 try:
-    cl_fact_logic_messenger().get_instance().send_telegram('Test message from Pi-Ager', 'Telegram settings are ok.')
+    cl_fact_logic_messenger().get_instance().send_telegram('Test message from Pi-Ager: ', 'Telegram settings are ok.')
 except IndexError as cx_error:
     logger.debug('Telegram settings not maintained')

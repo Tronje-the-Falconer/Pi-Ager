@@ -438,6 +438,7 @@
         global $alarm_table, $alarm_id_field, $alarm_alarm_field, $alarm_replication_field, $alarm_sleep_field, $alarm_high_time_field, $alarm_low_time_field, $alarm_waveform_field, $alarm_frequency_field;
         open_connection();
         $sql = 'INSERT INTO ' . $alarm_table . ' ("' . $alarm_alarm_field . '","' . $alarm_replication_field . '","' . $alarm_sleep_field . '","' . $alarm_high_time_field . '","' . $alarm_low_time_field . '","' . $alarm_waveform_field . '","' . $alarm_frequency_field . '") VALUES ("' . $alarm_alarm .'",' . $alarm_replication .',' . $alarm_sleep .',' . $alarm_high_time .',' . $alarm_low_time .',"' . $alarm_waveform .'",' . $alarm_frequency . ')';
+            
         execute_query($sql);
         
         close_database();        
@@ -456,7 +457,7 @@
         global $email_recipients_table, $e_mail_recipients_to_mail_field, $e_mail_recipients_active_field;
         open_connection();
         $sql = 'INSERT INTO ' . $email_recipients_table . ' ("'. $e_mail_recipients_to_mail_field . '","' . $e_mail_recipients_active_field . '") VALUES ( "' . $add_e_mail_recipients_to_mail . '" , ' . $add_e_mail_recipients_active . ')';
-        echo $sql;
+
         execute_query($sql);
         
         close_database();
@@ -851,5 +852,22 @@
         execute_query($sql);
         
         close_database();
+    }
+
+    function get_alarm_names(){
+        global $alarm_alarm_field, $alarm_table;
+        
+        open_connection();
+        $sql = 'SELECT ' . $alarm_alarm_field . ' FROM ' . $alarm_table;
+        $result = get_query_result($sql);
+        $index = 0;
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+            {
+            $alarm_names[$index] = $dataset[$alarm_alarm_field];
+            $index++;
+            }
+        close_database();
+        
+        return $alarm_names;
     }
 ?>

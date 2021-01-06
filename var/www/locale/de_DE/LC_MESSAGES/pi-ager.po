@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2021-01-05 13:02+0100\n"
-"PO-Revision-Date: 2021-01-05 15:44+0100\n"
+"PO-Revision-Date: 2021-01-06 13:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -1763,7 +1763,7 @@ msgstr "Fehler"
 
 #: notification.php:18 notification.php:122 notification.php:256
 msgid "e-mail"
-msgstr "E-Mail"
+msgstr "Mail"
 
 #: notification.php:19 notification.php:123 notification.php:386
 msgid "pushover"
@@ -1814,7 +1814,7 @@ msgstr "Löschen"
 
 #: notification.php:163 notification.php:228
 msgid "replication"
-msgstr "Kopie"
+msgstr "Anzahl"
 
 #: notification.php:164 notification.php:229
 msgid "sleep"
@@ -1906,7 +1906,7 @@ msgstr ""
 
 #: notification.php:378
 msgid "test mailserver"
-msgstr "Test E-Mailserver"
+msgstr "E-Mail Testnachricht senden"
 
 #: notification.php:404
 msgid "user key"
@@ -1933,7 +1933,7 @@ msgstr ""
 
 #: notification.php:424
 msgid "test pushover values"
-msgstr "Pushover Testeinstellungen"
+msgstr "Pushover Testnachricht senden"
 
 #: notification.php:449
 msgid "bot token"
@@ -1960,7 +1960,7 @@ msgstr ""
 
 #: notification.php:469
 msgid "test telegram values"
-msgstr "Telegram Testeinstellungen"
+msgstr "Telegram Testnachricht senden"
 
 #: scale_wizzard.php:24
 msgid "measuring on scales stopped due to calibrating scale"
