@@ -125,7 +125,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                 return(self.exception_known)
 
 
-    def handle_event(self, event, *info_text):
+    def handle_event(self, event, info_text=None):
         """
         Handle event to create alarm or email or telegram or pushover ... class
         """
