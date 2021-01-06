@@ -1,6 +1,7 @@
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
+"""
 try:
 
     logger = cl_fact_logger.get_instance()
@@ -10,9 +11,9 @@ try:
 except Exception as cx_error:
     cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
 
-
+"""
 cl_fact_logic_messenger().get_instance().handle_event('Pi-Ager_started')
-
+"""
 try:
     cl_fact_logic_messenger.get_instance().send_pushover('Hallo', 'Pushover Hello')
 except IndexError as cx_error:
@@ -27,3 +28,4 @@ try:
 except IndexError as cx_error:
     logger.debug('Alarm settings not maintained')
 
+"""
