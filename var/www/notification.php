@@ -103,7 +103,7 @@
                                                                 echo '<td> <input type="hidden" name="checked_telegram_true_' . $messenger_id . '" value="0">
                                                                         <input type="checkbox" name="checked_telegram_true_' . $messenger_id . '" value="1" ' . $checked_messenger_telegram_true .'></td>';
                                                                 if (isset ($alarm_names)){
-                                                                        echo '<td><select name="messenger_alarm_"' . $messenger_id . '>';
+                                                                        echo '<td><select name="messenger_alarm_' . $messenger_id . '">';
                                                                         echo '<option value=" "> <br>';
                                                                         foreach($alarm_names as $name) {
                                                                             if ($name!=$selected_alarm_name){
