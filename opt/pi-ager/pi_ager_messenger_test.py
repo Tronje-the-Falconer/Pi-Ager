@@ -11,6 +11,8 @@ except Exception as cx_error:
     cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
 
 
+cl_fact_logic_messenger().get_instance().handle_event('Pi-Ager_started')
+
 try:
     cl_fact_logic_messenger.get_instance().send_pushover('Hallo', 'Pushover Hello')
 except IndexError as cx_error:
