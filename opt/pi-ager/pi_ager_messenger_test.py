@@ -13,6 +13,8 @@ except Exception as cx_error:
 
 """
 cl_fact_logic_messenger().get_instance().handle_event('Pi-Ager_started', 'Pi-Ager was started')
+#if the second parameter is empty, the value is take from the field envent_text in table config_messenger_event 
+cl_fact_logic_messenger().get_instance().handle_event('Pi-Ager_started', '') 
 """
 try:
     cl_fact_logic_messenger.get_instance().send_pushover('Hallo', 'Pushover Hello')
