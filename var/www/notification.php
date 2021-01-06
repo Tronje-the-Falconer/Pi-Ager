@@ -271,15 +271,15 @@
                                                 <td class="show_alarm_cell"></td>
                                             </tr>
                                             <tr>
-                                                <td><input name="add_alarm_alarm" type="text" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_replication" type="number" min="1" max="10" step="1" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_sleep" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_high_time" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_low_time" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>';
-                                                <!-- <td><input name="add_alarm_waveform" type="text" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_frequency" type="number" min="1" max="5" step="1" style="width: 90%; text-align: right;" required></td>'; -->
-                                                <td><input name="add_alarm_waveform" type="hidden" style="width: 90%; text-align: right;"></td>';
-                                                <td><input name="add_alarm_frequency" type="hidden" style="width: 90%; text-align: right;">0</td>';
+                                                <td><input name="add_alarm_alarm" type="text" style="width: 90%; text-align: right;" required></td>
+                                                <td><input name="add_alarm_replication" type="number" min="1" max="10" step="1" style="width: 90%; text-align: right;" required></td>
+                                                <td><input name="add_alarm_sleep" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>
+                                                <td><input name="add_alarm_high_time" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>
+                                                <td><input name="add_alarm_low_time" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>
+                                                <!-- <td><input name="add_alarm_waveform" type="text" style="width: 90%; text-align: right;" required></td>
+                                                <td><input name="add_alarm_frequency" type="number" min="1" max="5" step="1" style="width: 90%; text-align: right;" required></td> -->
+                                                <td><input name="add_alarm_waveform" type="hidden" style="width: 90%; text-align: right;"></td>
+                                                <td><input name="add_alarm_frequency" type="hidden" style="width: 90%; text-align: right;">0</td>
                                                             
                                             </tr>
                                         </table>
@@ -356,7 +356,7 @@
                                                 <td class="show_email_recipientscell"><div class="tooltip"><?php echo _('active') ?><span class="tooltiptext"><?php echo _('active'); ?></span></div></td>
                                             </tr>
                                             <tr>
-                                                <td><input name="add_e_mail_recipient_to_mail" type="text" style="width: 90%; text-align: right;" required value></td>'
+                                                <td><input name="add_e_mail_recipient_to_mail" type="text" style="width: 90%; text-align: right;" required value></td>
                                                 <td> <input type="hidden" name="add_checked_e_mail_recipient_true" value="0">
                                                     <input type="checkbox" name="add_checked_e_mail_recipient_true" value="1"></td>
                                             </tr>
