@@ -83,10 +83,10 @@
                                                     echo '<tr>';
                                                         echo '<input name="years" type="hidden" value = ' . $years . '>';
                                                         /* echo '<td><input name="years" type="number" step="1" style="width: 90%; text-align: right;" value = ' . $years . '></td>'; */
-                                                        echo '<td><input name="months" type="number" step="1" style="width: 90%; text-align: right;" value = ' . $months . '></td>';
-                                                        echo '<td><input name="days" type="number" step="1" style="width: 90%; text-align: right;" value = ' . $days . '></td>';
-                                                        echo '<td><input name="hours" type="number" step="1" style="width: 90%; text-align: right;" value = ' . $hours . '></td>';
-                                                        echo '<td><input name="minutes" type="number" step="1" style="width: 90%; text-align: right;" value = ' . $minutes . '></td>';
+                                                        echo '<td><input name="months" type="number" min="0" max="12.0" step="1" style="width: 90%; text-align: right;" value = ' . $months . '></td>';
+                                                        echo '<td><input name="days" type="number" min="0" max="31.0" step="1" style="width: 90%; text-align: right;" value = ' . $days . '></td>';
+                                                        echo '<td><input name="hours" type="number"  min="0" max="24.0" step="1" style="width: 90%; text-align: right;" value = ' . $hours . '></td>';
+                                                        echo '<td><input name="minutes" type="number" min="0" max="60.0" step="1" style="width: 90%; text-align: right;" value = ' . $minutes . '></td>';
                                                     echo '</tr>';
                                                 echo '</table>';
                                                 echo '<button class="art-button" name="change_customtime" value="change_customtime" onclick="return confirm("' . _("change customtime?") . '");">' . _("change") . '</button>';
@@ -728,8 +728,8 @@
                                                             //max: 25000,
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
-                                                            max: <?php if ($sensor4_is_current == true) { echo '4'; } else { echo '30'; }?>, 
-                                                            min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-4'; }?>
+                                                            max: <?php if ($sensor4_is_current == true) { echo '1'; } else { echo '30'; }?>, 
+                                                            min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-1'; }?>
                                                         }
                                                     },
                                                     {
@@ -753,8 +753,8 @@
                                                             //max: 25000,
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
-                                                            max: <?php if ($sensor4_is_current == true) { echo '4'; } else { echo '30'; }?>, 
-                                                            min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-4'; }?>
+                                                            max: <?php if ($sensor4_is_current == true) { echo '1'; } else { echo '30'; }?>, 
+                                                            min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-1'; }?>
                                                         }
                                                     }]
                                                 }
