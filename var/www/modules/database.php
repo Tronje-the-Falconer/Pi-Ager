@@ -433,6 +433,17 @@
         close_database();
         
     }
+
+    function write_customtime($new_customtime){
+        global $value_field, $key_field, $config_settings_table, $customtime_for_diagrams_key;
+        
+        open_connection();
+        $sql = 'UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . $new_customtime . ' WHERE ' . $key_field . ' = "' . $customtime_for_diagrams_key . '";';
+
+        execute_query($sql);
+        
+        close_database();
+    }
     
     function add_alarm($alarm_alarm, $alarm_replication, $alarm_sleep, $alarm_high_time, $alarm_low_time, $alarm_waveform, $alarm_frequency ){
         global $alarm_table, $alarm_id_field, $alarm_alarm_field, $alarm_replication_field, $alarm_sleep_field, $alarm_high_time_field, $alarm_low_time_field, $alarm_waveform_field, $alarm_frequency_field;
