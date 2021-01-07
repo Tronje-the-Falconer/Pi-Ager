@@ -109,6 +109,7 @@ $meat1_sensortype_key = 'meat1_sensortype';
 $meat2_sensortype_key = 'meat2_sensortype';
 $meat3_sensortype_key = 'meat3_sensortype';
 $meat4_sensortype_key = 'meat4_sensortype';
+$customtime_for_diagrams_key = 'customtime_for_diagrams';
 
 
 #-----------------------------table fields;
