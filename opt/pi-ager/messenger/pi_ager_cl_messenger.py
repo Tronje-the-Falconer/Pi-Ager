@@ -41,10 +41,17 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             raise cx_direct_call("Please use factory class")
 
         """
-        Read messenger data from DB
+        Read messenger data from exception DB
         """
-        self.db_messenger = cl_fact_db_messenger().get_instance()
-        self.it_messenger = self.db_messenger.read_data_from_db()
+        self.db_messenger_exception = cl_fact_db_messenger_exception().get_instance()
+        self.it_messenger_exception = self.db_messenger_exception.read_data_from_db()
+
+        """
+        Read messenger data from event DB
+        """
+        self.db_messenger_event = cl_fact_db_messenger_event().get_instance()
+        self.it_messenger_event = self.db_messenger_event.read_data_from_db()
+
 
         self.exception_known = False
     def send_mail(self, subject, message):
@@ -70,27 +77,15 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         pass
     def handle_exception(self, cx_error):
         """
-        Handle message to create alarm or email or telegram or pushover ... class
+        Handle exception to create alarm or email or telegram or pushover ... class
         """
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.cx_error       = cx_error
         self.cx_error_name  = type(self.cx_error).__name__
         cl_fact_logger.get_instance().info("Exception raised: " + self.cx_error_name + " - " + str(cx_error) + self.build_alarm_subject() + self.build_alarm_message() )
-        
-        #cl_fact_logger.get_instance().info(self.it_messenger)
-
-        #cl_fact_logger.get_instance().exception(self.cx_error, exc_info = True)
-        #cl_fact_logger.get_instance().info("Exception raised: " +  self.cx_error_name )
-        #cl_fact_logger.get_instance().info(self.it_messenger)
-        
-        #if self.it_messenger: 
-            #cl_fact_logger.get_instance().debug('exception = ' + str(self.it_messenger[0]['exception']))
-            #cl_fact_logger.get_instance().debug('e-mail    = ' + str(self.it_messenger[0]['e-mail']))
-            #cl_fact_logger.get_instance().debug('pushover  = ' + str(self.it_messenger[0]['pushover']))
-            #cl_fact_logger.get_instance().debug('telegram  = ' + str(self.it_messenger[0]['telegram']))
-            #cl_fact_logger.get_instance().debug('alarm     = ' + str(self.it_messenger[0]['alarm']))
+       
      
-        for item in self.it_messenger:
+        for item in self.it_messenger_exception:
             if item.get('exception') == self.cx_error_name :
                 cl_fact_logger.get_instance().debug(item['exception'])
                 cl_fact_logger.get_instance().debug(item['e-mail'])
@@ -129,6 +124,62 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                 
                 return(self.exception_known)
 
+
+    def handle_event(self, event, info_text=None):
+        """
+        Handle event to create alarm or email or telegram or pushover ... class
+        If the second parameter info_text is empty, the value is taken from the field envent_text in table config_messenger_event 
+        """
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_logger.get_instance().info('Event raised: ' + event + ' with info text: '+ str(info_text) )
+        
+        self.event        = event
+     
+        for item in self.it_messenger_event:
+            if item.get('event') == event :
+                if (info_text == None):
+                    self.info_text = item['event_text']
+                else:
+                    self.info_text    = info_text
+    
+                cl_fact_logger.get_instance().info('Info text is: '+ str(self.info_text) )
+                
+                cl_fact_logger.get_instance().debug(item['event'])
+        
+                if item['alarm'] != '': 
+                    cl_fact_logger.get_instance().info('Check Event for Alarm:  ' + event)
+                    try:
+                        cl_fact_logic_alarm().get_instance().execute_alarm(item['alarm'])
+                    except:
+                        cl_fact_logger.get_instance().info('Alarm settings not active: ')
+                
+                if item['telegram'] == 1:
+                    cl_fact_logger.get_instance().info('Check Event for Telegram: ' + event)
+                    try:
+                        cl_fact_logic_telegram.get_instance().execute(self.build_event_subject(), self.build_event_message())
+                    except:
+                        cl_fact_logger.get_instance().info('Telegram settings not active: ')
+                
+                if item['pushover'] == 1:
+                    cl_fact_logger.get_instance().info('Check Event for Pushover: ' + event)
+                    try:
+                        cl_fact_logic_pushover.get_instance().execute(self.build_event_subject(), self.build_event_message())
+                    except:
+                        cl_fact_logger.get_instance().info('Pushover settings not active: ')
+
+                if item['e-mail'] == 1:
+                    cl_fact_logger.get_instance().info('Check Event for E-Mail: ' + event)
+                    try:
+                        cl_fact_logic_send_email.get_instance().execute(self.build_event_subject(), self.build_event_message())
+                    except:
+                        cl_fact_logger.get_instance().info('E-Mail settings not active: ')
+                        
+                
+                return()
+
+
+
+
     def build_alarm_message(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return( str(traceback.format_exc()) )
@@ -149,13 +200,43 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
             # Probably a similar problem as above; skip this test
             cl_fact_logger.get_instance().debug('Host name lookup failure')
 
-        return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager Hostname ' + hostname + ' occured')
+        return('Exception ' + str(self.cx_error.__class__.__name__ ) + ' on Pi-Ager Hostname ' + hostname + ' occured \n' )
 
-class cl_db_messenger(cl_ab_database_config):
+    def build_event_subject(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        
+        hostname = socket.gethostname()
+        try:
+            ip = socket.gethostbyname(hostname)
+        except OSError:
+            # Probably name lookup wasn't set up right; skip this test
+            cl_fact_logger.get_instance().debug('Host name lookup failure')
+        #self.assertTrue(ip.find('.') >= 0, "Error resolving host to ip.")
+        try:
+            hname, aliases, ipaddrs = socket.gethostbyaddr(ip)
+        except OSError:
+            # Probably a similar problem as above; skip this test
+            cl_fact_logger.get_instance().debug('Host name lookup failure')
+
+        return('Event ' + self.event + ' on Pi-Ager Hostname ' + hostname + ' raised \n')
+    
+    def build_event_message(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        return( 'Message: ' + self.info_text + '\n' )
+
+class cl_db_messenger_exception(cl_ab_database_config):
 
     def build_select_statement(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return('SELECT * FROM config_messenger where active = 1 ')
+        return('SELECT * FROM config_messenger_exception where active = 1 ')
+    
+class cl_db_messenger_event(cl_ab_database_config):
+
+    def build_select_statement(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        return('SELECT * FROM config_messenger_event where active = 1 ')
+ 
+ 
  
 class th_logic_messenger(cl_logic_messenger):   
        
@@ -193,7 +274,7 @@ class cl_fact_logic_messenger(ABC):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     
-class cl_fact_db_messenger(ABC):
+class cl_fact_db_messenger_exception(ABC):
     __o_instance = None
     
     @classmethod
@@ -202,7 +283,7 @@ class cl_fact_db_messenger(ABC):
         Factory method to set the db messenger instance
         """        
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cl_fact_db_messenger.__o_instance = i_instance
+        cl_fact_db_messenger_exception.__o_instance = i_instance
         
     @classmethod        
     def get_instance(self):
@@ -210,14 +291,43 @@ class cl_fact_db_messenger(ABC):
         Factory method to get the db messenger instance
         """        
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if cl_fact_db_messenger.__o_instance is not None:
-            return(cl_fact_db_messenger.__o_instance)
-        cl_fact_db_messenger.__o_instance = cl_db_messenger()
-        return(cl_fact_db_messenger.__o_instance)
+        if cl_fact_db_messenger_exception.__o_instance is not None:
+            return(cl_fact_db_messenger_exception.__o_instance)
+        cl_fact_db_messenger_exception.__o_instance = cl_db_messenger_exception()
+        return(cl_fact_db_messenger_exception.__o_instance)
 
     def __init__(self):
         """
-        Constructor logic messenger factory
+        Constructor logic messenger exception factory
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        pass    
+
+class cl_fact_db_messenger_event(ABC):
+    __o_instance = None
+    
+    @classmethod
+    def set_instance(self, i_instance):
+        """
+        Factory method to set the db messenger instance
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_db_messenger_event.__o_instance = i_instance
+        
+    @classmethod        
+    def get_instance(self):
+        """
+        Factory method to get the db messenger instance
+        """        
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        if cl_fact_db_messenger_event.__o_instance is not None:
+            return(cl_fact_db_messenger_event.__o_instance)
+        cl_fact_db_messenger_event.__o_instance = cl_db_messenger_event()
+        return(cl_fact_db_messenger_event.__o_instance)
+
+    def __init__(self):
+        """
+        Constructor logic messenger event factory
         """        
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    

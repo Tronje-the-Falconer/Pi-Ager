@@ -55,7 +55,7 @@ cl_fact_logger.get_instance().debug(('scale restart done'))
 exception_known = True
 # Send a start message
 try:
-    cl_fact_logic_messenger().get_instance().send_mail('Pi-Ager Start', 'Pi-Ager was started')
+    cl_fact_logic_messenger().get_instance().handle_event('Pi-Ager_started', '') #if the second parameter is empty, the value is take from the field envent_text in table config_messenger_event 
 except Exception as cx_error:
     exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
     pass
