@@ -1,5 +1,6 @@
 <?php 
     function get_defined_first_timestamp($last_timestamp, $delta){
+        global $customtime;
         Switch ($delta){
             case 'hour':
                 return $last_timestamp - 3600;
