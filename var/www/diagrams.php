@@ -74,14 +74,15 @@
                                             echo '<form method="post" name="change_customtime">';
                                                 echo '<table style="width: 100%;">';
                                                     echo '<tr>';
-                                                        echo '<td>years</td>';
+                                                        /* echo '<td>years</td>'; */
                                                         echo '<td>month</td>';
                                                         echo '<td>days</td>';
                                                         echo '<td>hours</td>';
                                                         echo '<td>minutes</td>';
                                                     echo '</tr>';
                                                     echo '<tr>';
-                                                        echo '<td><input name="years" type="number" step="1" style="width: 90%; text-align: right;" value = ' . $years . '></td>';
+							<input name="years" type="hidden" value = ' . $years . '>
+                                                        /* echo '<td><input name="years" type="number" step="1" style="width: 90%; text-align: right;" value = ' . $years . '></td>'; */
                                                         echo '<td><input name="months" type="number" step="1" style="width: 90%; text-align: right;" value = ' . $months . '></td>';
                                                         echo '<td><input name="days" type="number" step="1" style="width: 90%; text-align: right;" value = ' . $days . '></td>';
                                                         echo '<td><input name="hours" type="number" step="1" style="width: 90%; text-align: right;" value = ' . $hours . '></td>';
