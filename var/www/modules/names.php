@@ -34,7 +34,7 @@ $mailserver_table = 'config_email_server';
 $email_recipients_table = 'config_email_recipient';
 $alarm_table = 'config_alarm';
 $messenger_table = 'config_messenger_exception';
-$messenger_table_event = 'config_messenger_event';
+$messenger_event_table = 'config_messenger_event';
 
 #----------------------------table keys;
 $switch_on_cooling_compressor_key = 'switch_on_cooling_compressor';

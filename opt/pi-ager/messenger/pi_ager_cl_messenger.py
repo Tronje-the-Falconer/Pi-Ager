@@ -6,7 +6,7 @@ __author__ = "Claus Fischer"
 __copyright__ = "Copyright 2019, The Pi-Ager Project"
 __credits__ = ["Claus Fischer"]
 __license__ = "GPL"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Productive"
@@ -124,7 +124,6 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                 
                 return(self.exception_known)
 
-
     def handle_event(self, event, info_text=None):
         """
         Handle event to create alarm or email or telegram or pushover ... class
@@ -133,7 +132,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().info('Event raised: ' + event + ' with info text: '+ str(info_text) )
         
-        self.event        = event
+        self.event = event
      
         for item in self.it_messenger_event:
             if item.get('event') == event :
