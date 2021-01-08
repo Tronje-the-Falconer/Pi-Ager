@@ -34,8 +34,7 @@ $mailserver_table = 'config_email_server';
 $email_recipients_table = 'config_email_recipient';
 $alarm_table = 'config_alarm';
 $messenger_table = 'config_messenger_exception';
-$messenger_table_event = 'config_messenger_event';
-//Test7
+$messenger_event_table = 'config_messenger_event';
 
 #----------------------------table keys;
 $switch_on_cooling_compressor_key = 'switch_on_cooling_compressor';
@@ -111,6 +110,7 @@ $meat1_sensortype_key = 'meat1_sensortype';
 $meat2_sensortype_key = 'meat2_sensortype';
 $meat3_sensortype_key = 'meat3_sensortype';
 $meat4_sensortype_key = 'meat4_sensortype';
+$customtime_for_diagrams_key = 'customtime_for_diagrams';
 
 
 #-----------------------------table fields;

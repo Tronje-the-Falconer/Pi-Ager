@@ -1,5 +1,6 @@
 <?php 
     function get_defined_first_timestamp($last_timestamp, $delta){
+        global $customtime;
         Switch ($delta){
             case 'hour':
                 return $last_timestamp - 3600;
@@ -9,6 +10,8 @@
                 return $last_timestamp - 604800;
             case 'month':
                 return $last_timestamp - 2629700;
+            case 'custom':
+                return $last_timestamp - $customtime;
         }
         logger('DEBUG', 'get_defined_first_timestamp_from_array performed');
     }
@@ -237,6 +240,7 @@
     
     global $last_timestamp_diagram;
     global $first_timestamp_diagram;
+    $customtime = intval(get_table_value($config_settings_table, $customtime_for_diagrams_key));
     $last_timestamp_diagram = get_current_time();
     $first_timestamp_diagram = get_defined_first_timestamp($last_timestamp_diagram, $diagram_mode);
     

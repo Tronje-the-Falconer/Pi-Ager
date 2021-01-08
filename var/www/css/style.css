@@ -1129,7 +1129,7 @@ button.art-button
    -webkit-box-sizing: content-box;
    -moz-box-sizing: content-box;
    box-sizing: content-box;
-   min-width: 50px;
+   min-width: 30px;
 }
 
 .art-button img

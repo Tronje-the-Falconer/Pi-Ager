@@ -11,7 +11,7 @@
                                 <!----------------------------------------------------------------------------------------Messenger-->
                                 <div class="hg_container" >
                                     <form method="post" name="messenger">
-                                        <table id="show_messenger" class="show_messenger">
+                                        <table id="show_messenger" class="show_messenger" style="width: 100%;">
                                             <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
                                                 <td class="show_messenger_cell"><div class="tooltip"><?php echo _('id') ?><span class="tooltiptext"><?php echo _('id'); ?></span></div></td>
                                                 <td class="show_messenger_cell"><div class="tooltip"><?php echo _('exception') ?><span class="tooltiptext"><?php echo _('exception'); ?></span></div></td>
@@ -133,7 +133,7 @@
                                     <button class="art-button" name="save_messenger_values" value="save_messenger_values" onclick="return confirm('<?php echo _('ATTENTION: save messenger values?');?>');"><?php echo _('save'); ?></button>
                                     </form>
                                     <form method="post" name="add_messenger">
-                                        <table id="show_messenger" class="show_messenger">
+                                        <table id="show_messenger" class="show_messenger" style="width: 100%;">
                                             <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
                                                 <td class="show_messenger_cell"><div class="tooltip"><?php echo _('exception') ?><span class="tooltiptext"><?php echo _('exception'); ?></span></div></td>
                                                 <td class="show_messenger_cell"><div class="tooltip"><?php echo _('e-mail') ?><span class="tooltiptext"><?php echo _('e-mail'); ?></span></div></td>
@@ -169,12 +169,12 @@
                                         <button class="art-button" name="add_messenger" value="add_messenger" onclick="return confirm('<?php echo _('ATTENTION: add messenger?');?>');"><?php echo _('add'); ?></button>
                                     </form>
                                     <form method="post" name="delete_messenger">
-                                        <table id="show_messenger" class="show_messenger">
+                                        <table id="show_messenger" class="show_messenger" style="width: 100%;">
                                             <tr>
                                                 <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td>
                                             </tr>
                                             <tr>
-                                                <td><button class="art-button" name="delete_messenger" value="delete_messenger" onclick="return confirm('<?php echo _('ATTENTION: delete messenger?');?>');"><?php echo _('delete'); ?></button></td>
+                                                <td colspan=2><button class="art-button" name="delete_messenger" value="delete_messenger" onclick="return confirm('<?php echo _('ATTENTION: delete messenger?');?>');"><?php echo _('delete'); ?></button></td>
                                             </tr>
                                         </table>
                                     </form>
@@ -186,7 +186,7 @@
                                 <!----------------------------------------------------------------------------------------Alarm-->
                                 <div class="hg_container" >
                                     <form method="post" name="alarm">
-                                        <table id="show_alarm" class="show_alarm">
+                                        <table id="show_alarm" class="show_alarm" style="width: 100%;">
                                             <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
                                                 <td class="show_alarm_cell"><div class="tooltip"><?php echo _('id') ?><span class="tooltiptext"><?php echo _('id'); ?></span></div></td>
                                                 <td class="show_alarm_cell"><div class="tooltip"><?php echo _('alarm') ?><span class="tooltiptext"><?php echo _('alarm'); ?></span></div></td>
@@ -258,7 +258,7 @@
                                     <button class="art-button" name="save_alarm_values" value="save_alarm_values" onclick="return confirm('<?php echo _('ATTENTION: save alarm values?');?>');"><?php echo _('save'); ?></button>
                                     </form>
                                     <form method="post" name="add_alarm">
-                                        <table id="show_alarm" class="show_alarm">
+                                        <table id="show_alarm" class="show_alarm" style="width: 100%;">
                                             <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
                                                 <td class="show_alarm_cell"><div class="tooltip"><?php echo _('alarm') ?><span class="tooltiptext"><?php echo _('alarm'); ?></span></div></td>
                                                 <td class="show_alarm_cell"><div class="tooltip"><?php echo _('replication') ?><span class="tooltiptext"><?php echo _('replication'); ?></span></div></td>
@@ -271,27 +271,27 @@
                                                 <td class="show_alarm_cell"></td>
                                             </tr>
                                             <tr>
-                                                <td><input name="add_alarm_alarm" type="text" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_replication" type="number" min="1" max="10" step="1" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_sleep" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_high_time" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_low_time" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>';
-                                                <!-- <td><input name="add_alarm_waveform" type="text" style="width: 90%; text-align: right;" required></td>';
-                                                <td><input name="add_alarm_frequency" type="number" min="1" max="5" step="1" style="width: 90%; text-align: right;" required></td>'; -->
-                                                <td><input name="add_alarm_waveform" type="hidden" style="width: 90%; text-align: right;"></td>';
-                                                <td><input name="add_alarm_frequency" type="hidden" style="width: 90%; text-align: right;">0</td>';
+                                                <td><input name="add_alarm_alarm" type="text" style="width: 90%; text-align: right;" required></td>
+                                                <td><input name="add_alarm_replication" type="number" min="1" max="10" step="1" style="width: 90%; text-align: right;" required></td>
+                                                <td><input name="add_alarm_sleep" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>
+                                                <td><input name="add_alarm_high_time" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>
+                                                <td><input name="add_alarm_low_time" type="number" min="0.1" max="5" step="0.1" style="width: 90%; text-align: right;" required></td>
+                                                <!-- <td><input name="add_alarm_waveform" type="text" style="width: 90%; text-align: right;" required></td>
+                                                <td><input name="add_alarm_frequency" type="number" min="1" max="5" step="1" style="width: 90%; text-align: right;" required></td> -->
+                                                <td><input name="add_alarm_waveform" type="hidden" style="width: 90%; text-align: right;"></td>
+                                                <td><input name="add_alarm_frequency" type="hidden" style="width: 90%; text-align: right;">0</td>
                                                             
                                             </tr>
                                         </table>
                                         <button class="art-button" name="add_alarm" value="add_alarm" onclick="return confirm('<?php echo _('ATTENTION: add alarm?');?>');"><?php echo _('add'); ?></button>
                                     </form>
                                     <form method="post" name="delete_alarm">
-                                        <table id="show_alarm" class="show_alarm">
+                                        <table id="show_alarm" class="show_alarm" style="width: 100%;">
                                             <tr>
                                                 <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td>
                                             </tr>
                                             <tr>
-                                                <td><button class="art-button" name="delete_alarm" value="delete_alarm" onclick="return confirm('<?php echo _('ATTENTION: delete alarm?');?>');"><?php echo _('delete'); ?></button></td>
+                                                <td colspan=2><button class="art-button" name="delete_alarm" value="delete_alarm" onclick="return confirm('<?php echo _('ATTENTION: delete alarm?');?>');"><?php echo _('delete'); ?></button></td>
                                             </tr>
                                         </table>
                                     </form>
@@ -302,7 +302,7 @@
                                 <!----------------------------------------------------------------------------------------e-Mail-->
                                 <div class="hg_container" >
                                     <form method="post" name="email_recipients">
-                                        <table id="show_email_recipients" class="show_email_recipients">
+                                        <table id="show_email_recipients" class="show_email_recipients" style="width: 100%;">
                                             <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
                                                 <td class="show_email_recipientscell"><div class="tooltip"><?php echo _('id') ?><span class="tooltiptext"><?php echo _('id'); ?></span></div></td>
                                                 <td class="show_email_recipientscell"><div class="tooltip"><?php echo _('to mail') ?><span class="tooltiptext"><?php echo _('to mail'); ?></span></div></td>
@@ -350,13 +350,13 @@
                                         <button class="art-button" name="save_e_mail_recipient_values" value="save_e_mail_recipient_values" onclick="return confirm('<?php echo _('ATTENTION: save e_mail recipient values?');?>');"><?php echo _('save'); ?></button>
                                     </form>
                                     <form method="post" name="add_e_mail_recipient">
-                                        <table id="show_email_recipients" class="show_email_recipients">
+                                        <table id="show_email_recipients" class="show_email_recipients" style="width: 100%;">
                                             <tr>
                                                 <td class="show_email_recipientscell"><div class="tooltip"><?php echo _('to mail') ?><span class="tooltiptext"><?php echo _('to mail'); ?></span></div></td>
                                                 <td class="show_email_recipientscell"><div class="tooltip"><?php echo _('active') ?><span class="tooltiptext"><?php echo _('active'); ?></span></div></td>
                                             </tr>
                                             <tr>
-                                                <td><input name="add_e_mail_recipient_to_mail" type="text" style="width: 90%; text-align: right;" required value></td>'
+                                                <td><input name="add_e_mail_recipient_to_mail" type="text" style="width: 90%; text-align: right;" required value></td>
                                                 <td> <input type="hidden" name="add_checked_e_mail_recipient_true" value="0">
                                                     <input type="checkbox" name="add_checked_e_mail_recipient_true" value="1"></td>
                                             </tr>
@@ -364,12 +364,12 @@
                                         <button class="art-button" name="add_e_mail_recipient" value="add_e_mail_recipient" onclick="return confirm('<?php echo _('ATTENTION: add e_mail recipient?');?>');"><?php echo _('add'); ?></button>
                                     </form>
                                     <form method="post" name="delete_e_mail_recipient">
-                                        <table id="show_e_mail_recipient" class="show_e_mail_recipient">
+                                        <table id="show_e_mail_recipient" class="show_e_mail_recipient" style="width: 100%;">
                                             <tr>
                                                 <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" step="1" style="width: 90%; text-align: right;" ></td>
                                             </tr>
                                             <tr>
-                                              <td><button class="art-button" name="delete_e_mail_recipient" value="delete_e_mail_recipient" onclick="return confirm('<?php echo _('ATTENTION: delete e-mail recipient?');?>');"><?php echo _('delete'); ?></button></td>
+                                              <td colspan=2><button class="art-button" name="delete_e_mail_recipient" value="delete_e_mail_recipient" onclick="return confirm('<?php echo _('ATTENTION: delete e-mail recipient?');?>');"><?php echo _('delete'); ?></button></td>
                                             </tr>
                                         </table>
                                     </form>
@@ -379,7 +379,7 @@
                                 <h2 class="art-postheader"><?php echo _('Mailserver'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Mailserver-->
                                 <div class="hg_container" >
-                                    <form method="post" name="mailserver">
+                                    <form method="post" name="mailserver" width="100%">
                                         <table style="width: 100%;">
                                             <?php
                                                 $mailserver_server = get_table_value_from_field($mailserver_table, Null, $mailserver_server_field,);

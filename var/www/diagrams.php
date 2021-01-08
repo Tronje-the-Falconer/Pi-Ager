@@ -2,6 +2,7 @@
                                     include 'header.php';                                       // Template-Kopf und Navigation
                                     include 'modules/database.php';
                                     include 'modules/logging.php';                            //liest die Datei fuer das logging ein
+                                    include 'modules/write_customtime_db.php';                        //speichert die individuelle Zeit für die Diagramme
                                 ?>
                                 <!----------------------------------------------------------------------------------------Was eben hier hin kommt ...-->
                                 <?php 
@@ -21,6 +22,8 @@
                                                 return $diagram_mode_translated = _('week');
                                             case 'month':
                                                 return $diagram_mode_translated = _('month');
+                                            case 'custom':
+                                                return $diagram_mode_translated = _('custom');
                                         }
                                     }
                                     $diagram_mode_translated = get_translated_diagram_mode($diagram_mode);
@@ -33,20 +36,63 @@
                                             <td><img src="images/icons/daily_42x42.png" alt=""></td>
                                             <td><img src="images/icons/week_42x42.png" alt=""></td>
                                             <td><img src="images/icons/month_42x42.png" alt=""></td>
+                                            <td><img src="images/icons/custom_42x42.png" alt=""></td>
                                         </tr>
                                         <tr>
                                             <td><a href="diagrams.php?diagram_mode=hour" class="art-button"><?php echo _('hour'); ?></a></td>
                                             <td><a href="diagrams.php?diagram_mode=day" class="art-button"><?php echo _('day'); ?></a></td>
                                             <td><a href="diagrams.php?diagram_mode=week" class="art-button"><?php echo _('week'); ?></a></td>
                                             <td><a href="diagrams.php?diagram_mode=month" class="art-button"><?php echo _('month'); ?></a></td>
+                                            <td><a href="diagrams.php?diagram_mode=custom" class="art-button"><?php echo _('custom'); ?></a></td>
                                         </tr>
 <!--                                        <tr>
                                             <td><button class="art-button" type="button" id="hour">hour</button></td>
                                             <td><button class="art-button" type="button" id="day">day</button></td>
                                             <td><button class="art-button" type="button" id="week">week</button></td>
                                             <td><button class="art-button" type="button" id="month">month</button></td>
+                                            <td><button class="art-button" type="button" id="month">custom</button></td>
                                         </tr>
 -->                                 </table>
+                                    <?php
+                                        if ($diagram_mode_translated == 'custom'){
+                                            
+                                            $duration = get_table_value($config_settings_table, $customtime_for_diagrams_key); 
+                                            $years = floor ($duration / 31557600);
+                                            $duration = $duration - $years * 31557600;
+                                            $months = floor($duration / 2628000);
+                                            $duration = $duration - $months * 2628000;
+                                            $days = floor($duration / 86400);
+                                            $duration = $duration - $days * 86400;
+                                            $hours = floor($duration / 3600);
+                                            $duration = $duration - $hours * 3600;
+                                            $minutes = floor($duration / 60);
+                                            $duration = $duration - $minutes * 60;
+                                            $seconds = floor($duration / 1);
+                                            
+                                            
+                                            echo '<hr>';
+                                            echo '<form method="post" name="change_customtime">';
+                                                echo '<table style="width: 100%;">';
+                                                    echo '<tr>';
+                                                        /* echo '<td>years</td>'; */
+                                                        echo '<td>month</td>';
+                                                        echo '<td>days</td>';
+                                                        echo '<td>hours</td>';
+                                                        echo '<td>minutes</td>';
+                                                    echo '</tr>';
+                                                    echo '<tr>';
+                                                        echo '<input name="years" type="hidden" value = ' . $years . '>';
+                                                        /* echo '<td><input name="years" type="number" step="1" style="width: 90%; text-align: right;" value = ' . $years . '></td>'; */
+                                                        echo '<td><input name="months" type="number" min="0" max="12.0" step="1" style="width: 90%; text-align: right;" value = ' . $months . '></td>';
+                                                        echo '<td><input name="days" type="number" min="0" max="31.0" step="1" style="width: 90%; text-align: right;" value = ' . $days . '></td>';
+                                                        echo '<td><input name="hours" type="number"  min="0" max="24.0" step="1" style="width: 90%; text-align: right;" value = ' . $hours . '></td>';
+                                                        echo '<td><input name="minutes" type="number" min="0" max="60.0" step="1" style="width: 90%; text-align: right;" value = ' . $minutes . '></td>';
+                                                    echo '</tr>';
+                                                echo '</table>';
+                                                echo '<button class="art-button" name="change_customtime" value="change_customtime" onclick="return confirm("' . _("change customtime?") . '");">' . _("change") . '</button>';
+                                            echo '</form>';
+                                        }
+                                    ?>
                                 </div>
 
                                     <div style="">
@@ -682,8 +728,8 @@
                                                             //max: 25000,
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
-                                                            max: <?php if ($sensor4_is_current == true) { echo '4'; } else { echo '30'; }?>, 
-                                                            min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-4'; }?>
+                                                            max: <?php if ($sensor4_is_current == true) { echo '1'; } else { echo '30'; }?>, 
+                                                            min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-1'; }?>
                                                         }
                                                     },
                                                     {
@@ -707,8 +753,8 @@
                                                             //max: 25000,
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
-                                                            max: <?php if ($sensor4_is_current == true) { echo '4'; } else { echo '30'; }?>, 
-                                                            min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-4'; }?>
+                                                            max: <?php if ($sensor4_is_current == true) { echo '1'; } else { echo '30'; }?>, 
+                                                            min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-1'; }?>
                                                         }
                                                     }]
                                                 }
