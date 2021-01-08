@@ -132,7 +132,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().info('Event raised: ' + event + ' with info text: '+ str(info_text) )
         
-        self.event        = event
+        self.event = event
      
         for item in self.it_messenger_event:
             if item.get('event') == event :
