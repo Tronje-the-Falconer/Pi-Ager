@@ -205,6 +205,20 @@ def get_last_change(table, key):
     last_change = row[pi_ager_names.last_change_field]
     return last_change
     
+def get_table_value_last_change(table, key):
+    """
+    function to read value and last_change to a known key
+    """
+    global cursor
+
+    sql='SELECT ' + pi_ager_names.value_field + ', ' + pi_ager_names.last_change_field + ' FROM ' + table + ' o WHERE o.key = "' + key + '" AND o.id = (SELECT MAX(i.id) from ' + table + ' i WHERE i.key = "' + key + '")'
+    open_database()
+    execute_query(sql)
+    row = cursor.fetchone()
+    close_database()
+
+    return row
+        
 
 def write_current_value(key, value):
     """
@@ -447,16 +461,20 @@ def write_scale(scale_table,value_scale):
     function for writing the configuration values of the scales
     """
 
-    if scale_table == pi_ager_names.data_scale1_table:
-        scale_key = pi_ager_names.scale1_key
-    elif scale_table == pi_ager_names.data_scale2_table:
-        scale_key = pi_ager_names.scale2_key
-        
+    str_current_time = str(get_current_time())
     open_database()
     
-    execute_query('INSERT INTO ' + scale_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES (' + str(value_scale) + ',' + str(get_current_time()) + ')')
-    execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(value_scale) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + scale_key + '"')
-    
+    if scale_table == pi_ager_names.data_scale1_table:
+        scale_key = pi_ager_names.scale1_key
+        execute_query('INSERT INTO ' + pi_ager_names.data_scale1_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES (' + str(value_scale) + ',' + str_current_time + ')')
+        execute_query('INSERT INTO ' + pi_ager_names.data_scale2_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES (' + 'NULL' + ',' + str_current_time + ')')
+        execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(value_scale) +'" , "' + pi_ager_names.last_change_field + '" = ' + str_current_time +' WHERE ' + pi_ager_names.key_field + ' = "' + scale_key + '"')
+    elif scale_table == pi_ager_names.data_scale2_table:
+        scale_key = pi_ager_names.scale2_key
+        execute_query('INSERT INTO ' + pi_ager_names.data_scale2_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES (' + str(value_scale) + ',' + str_current_time + ')')
+        execute_query('INSERT INTO ' + pi_ager_names.data_scale1_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES (' + 'NULL' + ',' + str_current_time + ')')
+        execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(value_scale) +'" , "' + pi_ager_names.last_change_field + '" = ' + str_current_time +' WHERE ' + pi_ager_names.key_field + ' = "' + scale_key + '"')        
+
     close_database()
 
 def write_tables(agingtable):

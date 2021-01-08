@@ -9,6 +9,9 @@ from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 
 #cl_fact_logger.get_instance()
 
+last_measure_scale1 = 0
+last_measure_scale2 = 0
+
 def tara_scale(scale, tara_key, data_table, calibrate_key, offset, settings_table):
     cl_fact_logger.get_instance().debug('performing tara')
     try:
@@ -35,11 +38,14 @@ def tara_scale(scale, tara_key, data_table, calibrate_key, offset, settings_tabl
         
         cl_fact_logger.get_instance().debug('tara performed - runnig control-measurement')
         # im Anschluss eine Kontrollmessung machen
-        scale_measures(scale, tara_measuring_endtime, data_table, 1, tara_key, calibrate_key, newoffset, settings_table)
+        # scale_measures(scale, tara_measuring_endtime, data_table, 1, tara_key, calibrate_key, newoffset, settings_table)
     except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
 
 def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, tara_key, calibrate_scale_key, offset, settings_table):
+    global last_measure_scale1
+    global last_measure_scale2 
+    
     cl_fact_logger.get_instance().debug('scale_measures()')
     try:
         measure_start_time = pi_ager_database.get_current_time()
@@ -62,6 +68,10 @@ def scale_measures(scale, scale_measuring_endtime, data_table, saving_period, ta
             if (current_time - measure_start_time) % saving_period == 0 and current_time != save_time:      # speichern je nach datenbankeintrag fuer saving_period
                 save_time = current_time
                 pi_ager_database.write_scale(data_table,value)
+                if data_table == pi_ager_names.data_scale1_table:
+                    last_measure_scale1 = pi_ager_database.get_current_time()
+                else:
+                    last_measure_scale2 = pi_ager_database.get_current_time()
                 cl_fact_logger.get_instance().debug('scale-value saved in database ' + time.strftime('%H:%M:%S', time.localtime()))
             current_time = pi_ager_database.get_current_time()
         cl_fact_logger.get_instance().debug('measurement performed')
@@ -117,7 +127,10 @@ def calculate_reference_unit(scale, calibrate_scale_key, scale_settings_table, c
         scale.setSpikes(int(pi_ager_database.get_table_value(scale_settings_table, pi_ager_names.spikes_key)))
     except Exception as cx_error:
         cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+        
 def doScaleLoop():
+    global last_measure_scale1
+    global last_measure_scale2
     
     scale1_settings_table = pi_ager_names.settings_scale1_table
     scale1_table = pi_ager_names.data_scale1_table
@@ -163,20 +176,20 @@ def doScaleLoop():
         
                 if calibrate_scale1 == 1:
                     first_calibrate_value = get_first_calibrate_measure(scale1, scale1_settings_table, pi_ager_names.calibrate_scale1_key)
-         
-                if calibrate_scale1 == 3:
+                elif calibrate_scale1 == 3:
                     calculate_reference_unit(scale1, pi_ager_names.calibrate_scale1_key, pi_ager_names.settings_scale1_table, first_calibrate_value)
-                if status_tara_scale1 == 1:
+                elif status_tara_scale1 == 1:
                     tara_scale(scale1, pi_ager_names.status_tara_scale1_key, pi_ager_names.data_scale1_table, pi_ager_names.calibrate_scale1_key, offset_scale1, pi_ager_names.settings_scale1_table)
-                
-                if pi_ager_database.get_scale_table_row(scale1_table) != None:
-                    last_measure_scale1 = pi_ager_database.get_scale_table_row(scale1_table)[pi_ager_names.last_change_field]
-                    time_difference_scale1 = pi_ager_database.get_current_time() - last_measure_scale1
                 else:
-                    time_difference_scale1 = measuring_interval_scale1 + 1
-                if time_difference_scale1 >= measuring_interval_scale1:
-                    scale1_measuring_endtime =  pi_ager_database.get_current_time() + scale1_measuring_duration
-                    scale_measures(scale1, scale1_measuring_endtime, pi_ager_names.data_scale1_table, saving_period_scale1, pi_ager_names.status_tara_scale1_key,pi_ager_names.calibrate_scale1_key, offset_scale1, pi_ager_names.settings_scale1_table)
+                    # if pi_ager_database.get_scale_table_row(scale1_table) != None:
+                    #     last_measure_scale1 = pi_ager_database.get_scale_table_row(scale1_table)[pi_ager_names.last_change_field]
+                    #     time_difference_scale1 = pi_ager_database.get_current_time() - last_measure_scale1
+                    # else:
+                    #     time_difference_scale1 = measuring_interval_scale1 + 1
+                    time_difference_scale1 = pi_ager_database.get_current_time() - last_measure_scale1    
+                    if time_difference_scale1 >= measuring_interval_scale1:
+                        scale1_measuring_endtime =  pi_ager_database.get_current_time() + scale1_measuring_duration
+                        scale_measures(scale1, scale1_measuring_endtime, pi_ager_names.data_scale1_table, saving_period_scale1, pi_ager_names.status_tara_scale1_key,pi_ager_names.calibrate_scale1_key, offset_scale1, pi_ager_names.settings_scale1_table)
     
             if status_scale2 == 1 or calibrate_scale2 in [1, 2, 3, 4, 5] or status_tara_scale2 in [1, 2]:
 
@@ -195,22 +208,21 @@ def doScaleLoop():
         
                 if calibrate_scale2 == 1:
                     first_calibrate_value = get_first_calibrate_measure(scale2, scale2_settings_table, pi_ager_names.calibrate_scale2_key)
-                    
-                if calibrate_scale2 == 3:
+                elif calibrate_scale2 == 3:
                     calculate_reference_unit(scale2, pi_ager_names.calibrate_scale2_key, pi_ager_names.settings_scale2_table, first_calibrate_value)
-
-                if status_tara_scale2 == 1:
+                elif status_tara_scale2 == 1:
                     tara_scale(scale2, pi_ager_names.status_tara_scale2_key, pi_ager_names.data_scale2_table, pi_ager_names.calibrate_scale2_key, offset_scale2, pi_ager_names.settings_scale2_table)
-                    
-        
-                if pi_ager_database.get_scale_table_row(scale2_table) != None:
-                    last_measure_scale2 = pi_ager_database.get_scale_table_row(scale2_table)[pi_ager_names.last_change_field]
+                else:    
+                    # if pi_ager_database.get_scale_table_row(scale2_table) != None:
+                    #     last_measure_scale2 = pi_ager_database.get_scale_table_row(scale2_table)[pi_ager_names.last_change_field]
+                    #     time_difference_scale2 = pi_ager_database.get_current_time() - last_measure_scale2
+                    # else:
+                    #     time_difference_scale2 = measuring_interval_scale2 + 1
                     time_difference_scale2 = pi_ager_database.get_current_time() - last_measure_scale2
-                else:
-                    time_difference_scale2 = measuring_interval_scale2 + 1
-                if time_difference_scale2 >= measuring_interval_scale2:
-                    scale2_measuring_endtime = pi_ager_database.get_current_time() + scale2_measuring_duration
-                    scale_measures(scale2, scale2_measuring_endtime, pi_ager_names.data_scale2_table, saving_period_scale2, pi_ager_names.status_tara_scale2_key, pi_ager_names.calibrate_scale2_key, offset_scale2, pi_ager_names.settings_scale2_table)
+                    if time_difference_scale2 >= measuring_interval_scale2:
+                        scale2_measuring_endtime = pi_ager_database.get_current_time() + scale2_measuring_duration
+                        scale_measures(scale2, scale2_measuring_endtime, pi_ager_names.data_scale2_table, saving_period_scale2, pi_ager_names.status_tara_scale2_key, pi_ager_names.calibrate_scale2_key, offset_scale2, pi_ager_names.settings_scale2_table)
+        
         except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
             pass    

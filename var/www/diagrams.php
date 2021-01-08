@@ -101,8 +101,7 @@
                                             include 'modules/read_values_for_diagrams.php';
                                         ?>
                                         <canvas id="temperature_humidity_chart"></canvas>
-                                        <canvas id="scales1_chart"></canvas>
-                                        <canvas id="scales2_chart"></canvas>
+                                        <canvas id="scales_chart"></canvas>
                                         <canvas id="thermometer1_chart"></canvas> 
 <!--                                    <canvas id="thermometer2_chart"></canvas> 
                                         <canvas id="thermometer3_chart"></canvas> 
@@ -238,9 +237,10 @@
                                             }
                                         };
                                         
-                                        // Waage 1
-                                        var scales1_chart = document.getElementById("scales1_chart");
-                                        var config_scales1_chart = {
+                                        
+                                        // Waagen
+                                        var scales_chart = document.getElementById("scales_chart");
+                                        var config_scales_chart = {
                                             type: 'line',
                                             data: {
                                                 labels: 
@@ -254,17 +254,32 @@
                                                     backgroundColor: '#AEC645',
                                                     borderColor: '#AEC645',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
                                                     pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                     pointHitRadius: 5,';} ?>
                                                     cubicInterpolationMode: 'monotone',
-                                                    fill: false
+                                                    fill: false,
+                                                    spanGaps: true
+                                                },
+                                                {
+                                                    label: '<?php echo _("scale") ?> 2',
+                                                    yAxisID: 'scale2',
+                                                    data: <?php echo json_encode($scale2_dataset); ?>,
+                                                    backgroundColor: '#BF9543',
+                                                    borderColor: '#BF9543',
+                                                    borderWidth: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false,
+                                                    spanGaps: true
                                                 }]
                                             },
                                             options: {
                                                 title: {
                                                     display: true,
-                                                    text: '<?php echo _("scale") ?> 1',
+                                                    text: '<?php echo _("scale") ?> 1 & 2',
                                                     fontSize: 24
                                                 },
                                                 tooltips: {
@@ -272,13 +287,12 @@
                                                     intersect: false,
                                                     callbacks: {
                                                         label: function(tooltipItem, data) {
-                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' gr';
+                                                            return Number(tooltipItem.yLabel).toFixed(1);
                                                         }
                                                     }
                                                 },
                                                 scales: {
-                                                    xAxes: [
-                                                    {
+                                                    xAxes: [{
                                                         type: "time",
                                                         time: {
                                                             displayFormats: {
@@ -289,8 +303,7 @@
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
                                                     }, ],
-                                                    yAxes: [
-                                                    {
+                                                    yAxes: [{
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("scale") . ' 1'; ?>',
@@ -301,189 +314,51 @@
                                                         type: 'linear',
                                                         position: 'left',
                                                         ticks: {
-                                                                callback: function(value, index, values) {
-                                                                    if (Math.round(value) === value)
-                                                                        return value + ' gr' + ' ';
-                                                                },
-                                                                fontColor: '#000000',
-                                                                //    fontSize: 20,
-                                                                //max: 25000,
-                                                                beginAtZero: true,
-                                                                maxTicksLimit: 10,
-                                                                max: <?php 
-                                                                    $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
-                                                                    print $max_value_scale1;
-                                                                ?>,
-                                                                min: <?php 
-                                                                    $scale1_dataset_edited = array();
-                                                                    foreach ($scale1_dataset as $scale1_value){
-                                                                        if ($scale1_value != Null){
-                                                                            $scale1_dataset_edited[] = $scale1_value;
-                                                                        }
-                                                                    }
-                                                                    if (empty($scale1_dataset_edited)) {
-                                                                        $scale1_dataset_edited[] = Null;
-                                                                    }
-                                                                    $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
-                                                                    print $min_value_scale1;
-                                                                ?>,
-                                                            //stepSize: 1
-                                                        }
-                                                    },
-                                                    {
-                                                        scaleLabel: {
-                                                            display: true,
-                                                            //labelString: '<?php echo _("scale") . ' 1'; ?>',
-                                                            //    fontSize: 20,
-                                                            fontColor: '#000000'
-                                                        },
-                                                        id: 'scale1_right',
-                                                        type: 'linear',
-                                                        position: 'right',
-                                                        ticks: {
-                                                                callback: function(value, index, values) {
-                                                                    if (Math.round(value) === value)
-                                                                        return value + ' gr' + ' ';
-                                                                },
-                                                                fontColor: '#000000',
-                                                                //    fontSize: 20,
-                                                                //max: 25000,
-                                                                beginAtZero: true,
-                                                                maxTicksLimit: 10,
-                                                                max: <?php 
-                                                                    $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
-                                                                    print $max_value_scale1;
-                                                                ?>,
-                                                                min: <?php 
-                                                                    $scale1_dataset_edited = array();
-                                                                    foreach ($scale1_dataset as $scale1_value){
-                                                                        if ($scale1_value != Null){
-                                                                            $scale1_dataset_edited[] = $scale1_value;
-                                                                        }
-                                                                    }
-                                                                    if (empty($scale1_dataset_edited)) {
-                                                                        $scale1_dataset_edited[] = Null;
-                                                                    }
-                                                                    $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
-                                                                    print $min_value_scale1;
-                                                                ?>,
-                                                            //stepSize: 1
-                                                        }
-                                                    }]
-                                                }
-                                            }
-                                        };
-                                        
-                                        
-                                        // Waage 2
-                                        var scales2_chart = document.getElementById("scales2_chart");
-                                        var config_scales2_chart = {
-                                            type: 'line',
-                                            data: {
-                                                labels: 
-                                                    <?php 
-                                                    echo $scale2_timestamps_axis_text;
-                                                    ?>,
-                                                datasets: [
-                                                {
-                                                    label: '<?php echo _("scale") ?> 2',
-                                                    yAxisID: 'scale2',
-                                                    data: <?php echo json_encode($scale2_dataset); ?>,
-                                                    backgroundColor: '#BF9543',
-                                                    borderColor: '#BF9543',
-                                                    borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
-                                                    cubicInterpolationMode: 'monotone',
-                                                    fill: false
-                                                }]
-                                            },
-                                            options: {
-                                                title: {
-                                                    display: true,
-                                                    text: '<?php echo _("scale") ?> 2',
-                                                    fontSize: 24
-                                                },
-                                                tooltips: {
-                                                    mode: 'index',
-                                                    intersect: false,
-                                                    callbacks: {
-                                                        label: function(tooltipItem, data) {
-                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' gr';
-                                                        }
-                                                    }
-                                                },
-                                                scales: {
-                                                    xAxes: [
-                                                    {
-                                                        type: "time",
-                                                        time: {
-                                                            displayFormats: {
-                                                                second: 'HH:mm:ss',
-                                                                minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
+                                                            callback: function(value, index, values) {
+                                                                if (Math.round(value) === value)
+                                                                return value + ' gr' + ' ';
                                                             },
-                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
-                                                        },
-                                                    }, ],
-                                                    yAxes: [
+                                                            fontColor: '#000000',
+                                                        //    fontSize: 20,
+                                                            //max: 25000,
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: <?php 
+                                                            $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
+                                                            print $max_value_scale1;
+                                                            ?>,
+                                                            min: <?php 
+                                                             $scale1_dataset_edited = array();
+                                                             foreach ($scale1_dataset as $scale1_value){
+                                                                if ($scale1_value != Null){
+                                                                    $scale1_dataset_edited[] = $scale1_value;
+                                                                }
+                                                             }
+                                                             if (empty($scale1_dataset_edited)) {
+                                                                    $scale1_dataset_edited[] = Null;
+                                                             }
+                                                             $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
+                                                            print $min_value_scale1;
+                                                            ?>,
+                                                            //stepSize: 1
+                                                        }
+                                                        
+                                                    },
                                                     {
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("scale") . ' 2'; ?>',
-                                                            //    fontSize: 20,
+                                                        //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'scale2',
                                                         type: 'linear',
-                                                        position: 'left',
-                                                        ticks: {
-                                                                callback: function(value, index, values) {
-                                                                    if (Math.round(value) === value) {
-                                                                        return ' ' + value + ' gr';
-                                                                }
-                                                            },
-                                                            fontColor: '#000000',
-                                                            //    fontSize: 20,
-                                                            //max: 25000,
-                                                            beginAtZero: true,
-                                                            maxTicksLimit: 10,
-                                                            max: <?php 
-                                                                $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
-                                                                print $max_value_scale2;
-                                                            ?>,
-                                                            min: <?php 
-                                                                $scale2_dataset_edited = array();
-                                                                foreach ($scale2_dataset as $scale2_value){
-                                                                    if ($scale2_value != Null){
-                                                                        $scale2_dataset_edited[] = $scale2_value;
-                                                                    }
-                                                                }
-                                                                if (empty($scale2_dataset_edited)) {
-                                                                    $scale2_dataset_edited[] = Null;
-                                                                }
-                                                                $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
-                                                                print $min_value_scale2;
-                                                            ?>,
-                                                            //stepSize: 1
-                                                        }
-                                                    },
-                                                    {
-                                                        scaleLabel: {
-                                                            display: true,
-                                                            //labelString: '<?php echo _("scale") . ' 2'; ?>',
-                                                            //    fontSize: 20,
-                                                            fontColor: '#000000'
-                                                        },
-                                                        id: 'scale2_right',
-                                                        type: 'linear',
                                                         position: 'right',
                                                         ticks: {
-                                                                callback: function(value, index, values) {
-                                                                    if (Math.round(value) === value) {
-                                                                        return ' ' + value + ' gr';
-                                                                }
+                                                            callback: function(value, index, values) {
+                                                                if (Math.round(value) === value) {
+                                                                return ' ' + value + ' gr';
+                                                            }
                                                             },
                                                             fontColor: '#000000',
                                                             //    fontSize: 20,
@@ -491,21 +366,21 @@
                                                             beginAtZero: true,
                                                             maxTicksLimit: 10,
                                                             max: <?php 
-                                                                $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
-                                                                print $max_value_scale2;
+                                                            $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;
+                                                            print $max_value_scale2;
                                                             ?>,
                                                             min: <?php 
-                                                                $scale2_dataset_edited = array();
-                                                                foreach ($scale2_dataset as $scale2_value){
-                                                                    if ($scale2_value != Null){
-                                                                        $scale2_dataset_edited[] = $scale2_value;
-                                                                    }
+                                                             $scale2_dataset_edited = array();
+                                                             foreach ($scale2_dataset as $scale2_value){
+                                                                if ($scale2_value != Null){
+                                                                    $scale2_dataset_edited[] = $scale2_value;
                                                                 }
-                                                                if (empty($scale2_dataset_edited)) {
+                                                             }
+                                                             if (empty($scale2_dataset_edited)) {
                                                                     $scale2_dataset_edited[] = Null;
-                                                                }
-                                                                $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
-                                                                print $min_value_scale2;
+                                                             }
+                                                             $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
+                                                            print $min_value_scale2;
                                                             ?>,
                                                             //stepSize: 1
                                                         }
@@ -1572,8 +1447,7 @@
                                         
                                         window.onload = function() {
                                             window.temperature_humidity_chart = new Chart(temperature_humidity_chart, config_temperature_humidity_chart);
-                                            window.scales1_chart = new Chart(scales1_chart, config_scales1_chart);
-                                            window.scales2_chart = new Chart(scales2_chart, config_scales2_chart); 
+                                            window.scales_chart = new Chart(scales_chart, config_scales_chart);
                                             window.thermometer1_chart = new Chart(thermometer1_chart, config_thermometer1_chart);
                                         //    window.thermometer2_chart = new Chart(thermometer2_chart, config_thermometer2_chart);
                                         //    window.thermometer3_chart = new Chart(thermometer3_chart, config_thermometer3_chart);

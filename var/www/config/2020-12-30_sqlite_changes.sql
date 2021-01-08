@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS "scale2_data";
 ----
 -- Table structure for scale2_data
 ----
-CREATE TABLE "scale2_data" ('id' INTEGER DEFAULT 0 PRIMARY KEY AUTOINCREMENT NOT NULL, 'value' REAL DEFAULT 0 NOT NULL, 'last_change' INTEGER DEFAULT 0 NOT NULL, key TEXT DEFAULT 0 NOT NULL);
+CREATE TABLE "scale2_data" ('id' INTEGER DEFAULT 0 PRIMARY KEY AUTOINCREMENT NOT NULL, 'value' REAL DEFAULT 0, 'last_change' INTEGER DEFAULT 0 NOT NULL, key TEXT DEFAULT 0 NOT NULL);
 
 ----
 -- Data dump for scale2_data, a total of 0 rows
@@ -163,7 +163,7 @@ DROP TABLE IF EXISTS "scale1_data";
 ----
 -- Table structure for scale1_data
 ----
-CREATE TABLE "scale1_data" ('id' INTEGER DEFAULT 0 PRIMARY KEY AUTOINCREMENT NOT NULL, 'value' REAL DEFAULT 0 NOT NULL, 'last_change' INTEGER DEFAULT 0 NOT NULL, key TEXT DEFAULT 0 NOT NULL);
+CREATE TABLE "scale1_data" ('id' INTEGER DEFAULT 0 PRIMARY KEY AUTOINCREMENT NOT NULL, 'value' REAL DEFAULT 0, 'last_change' INTEGER DEFAULT 0 NOT NULL, key TEXT DEFAULT 0 NOT NULL);
 
 ----
 -- Data dump for scale1_data, a total of 0 rows

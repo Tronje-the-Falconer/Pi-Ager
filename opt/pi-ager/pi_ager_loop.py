@@ -837,7 +837,8 @@ def doMainLoop():
                     # gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_off)
                 
                 # Lesen der Scales Daten
-                scale1_row = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale1_table)
+                # scale1_row = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale1_table)
+                scale1_row = pi_ager_database.get_table_value_last_change(pi_ager_names.current_values_table, pi_ager_names.scale1_key)
                 if scale1_row == None:
                     scale1_data = 0
                 else:
@@ -849,7 +850,8 @@ def doMainLoop():
                     else:
                         scale1_data = 0
     
-                scale2_row = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale2_table)
+                # scale2_row = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale2_table)
+                scale2_row = pi_ager_database.get_table_value_last_change(pi_ager_names.current_values_table, pi_ager_names.scale2_key)
                 if scale2_row == None:
                     scale2_data = 0
                 else:
