@@ -120,6 +120,13 @@
         delete_row_from_table($messenger_table,$messenger_id_field,$id);
     }
     
+    if (isset ($_POST['delete_event'])){
+        logger('DEBUG', 'button delete event pressed');
+        unset($_POST['delete_event']);
+        $id =  $_POST['id'];
+        delete_row_from_table($messenger_event_table,$event_id_field,$id);
+    }
+    
     if (isset ($_POST['delete_e_mail_recipient'])){
         logger('DEBUG', 'button delete e-mail recipient pressed');
         unset($_POST['delete_e_mail_recipient']);
