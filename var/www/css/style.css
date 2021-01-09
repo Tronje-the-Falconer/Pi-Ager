@@ -444,13 +444,15 @@ li p, .art-postcontent li p, .art-blockcontent li p
 .default-responsive .art-logo
 {
   display: none;
-}.art-headline
+}
+
+.art-headline
 {
   display: inline-block;
   position: absolute;
   min-width: 50px;
   top: 50px;
-  left: 15.52%;
+  left: 45% !important;
   margin-left: -38px !important;
   line-height: 100%;
   -webkit-transform: rotate(0deg);
@@ -484,7 +486,7 @@ text-shadow: 0px 0px 12px rgba(23, 23, 23, 0.98);
   position: absolute;
   min-width: 50px;
   top: 86px;
-  left: 14.17%;
+  left: 45% !important;
   line-height: 100%;
   margin-left: -19px !important;
   -webkit-transform: rotate(0deg);
