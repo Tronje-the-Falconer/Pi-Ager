@@ -23,7 +23,7 @@
                                         print '<script language="javascript"> alert("'. (_("edit agingtable")) . " : " . (_("no agingtable selected")) .'"); window.location.href = "settings.php";</script>';
                                     }
                                     
-                                    echo strtoupper(_('edit agingtable'));
+                                    echo strtoupper(_('edit agingtable:'));
                                     echo ' ' . strtoupper($agingtable_to_edit);
                                     
                                     ?></h2>
