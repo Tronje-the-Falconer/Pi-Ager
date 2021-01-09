@@ -154,6 +154,7 @@
                                                 <?php
                                                     if (isset ($alarm_names)){
                                                             echo '<td><select name="add_messenger_alarm">';
+                                                            echo '<option value=""><br>';
                                                             foreach($alarm_names as $name) {
                                                                 echo '<option value="'.$name.'">'.$name.'<br>';
                                                             }
@@ -252,7 +253,7 @@
                                                             }
                                                             if (!empty($dataset[$event_eventtext_field])){
                                                                 $event_eventtext = $dataset[$event_eventtext_field];
-                                                            } else {$event_eventtext = 'error';}
+                                                            } else {$event_eventtext = '';}
                                                             
                                                             if (!empty($dataset[$event_active_field])){
                                                                 $event_active = $dataset[$event_active_field];
@@ -286,7 +287,7 @@
                                                                         echo '</select></td>';
                                                                 }
                                                                 echo '<td>
-                                                                        <input type="text" name="event_eventtext_' . $event_id . '" type="text" style="width: 90%; text-align: right;" required value=' . $event_eventtext .'></td>';
+                                                                        <input type="text" name="event_eventtext_' . $event_id . '" type="text" style="width: 90%; text-align: right;" required value="' . $event_eventtext .'"></td>';
                                                                  echo '<td> <input type="hidden" name="checked_event_active_true_' . $event_id . '" value="0">
                                                                         <input type="checkbox" name="checked_event_active_true_' . $event_id . '" value="1" ' . $checked_event_active_true .'></td>';
                                                             echo '</tr>';
@@ -323,6 +324,7 @@
                                                 <?php
                                                     if (isset ($alarm_names)){
                                                             echo '<td><select name="add_event_alarm">';
+                                                            echo '<option value=""><br>';
                                                             foreach($alarm_names as $name) {
                                                                 echo '<option value="'.$name.'">'.$name.'<br>';
                                                             }
