@@ -505,7 +505,7 @@
                                                                 }
                                                             } else {$e_mail_recipients_active = '';}
                                                                 echo '<td><input type="hidden" name="e_mail_recipient_id_' . $index_row . '" value="' . $e_mail_recipients_id . '">'. $e_mail_recipients_id .'</td>';
-                                                                echo '<td><input name="e_mail_recipient_to_mail_' . $e_mail_recipients_id . '" type="text" style="width: 90%; text-align: right;" required value='. $e_mail_recipients_to_mail .'></td>';
+                                                                echo '<td><input name="e_mail_recipient_to_mail_' . $e_mail_recipients_id . '" type="email" style="width: 90%; text-align: right;" required value='. $e_mail_recipients_to_mail .'></td>';
                                                                 echo '<td> <input type="hidden" name="checked_e_mail_recipient_true_' . $e_mail_recipients_id . '" value="0">
                                                                         <input type="checkbox" name="checked_e_mail_recipient_true_' . $e_mail_recipients_id . '" value="1" ' . $checked_e_mail_recipient_true .'></td>';
                                                             echo '</tr>';
@@ -527,7 +527,7 @@
                                                 <td class="show_email_recipientscell"><div class="tooltip"><?php echo _('active') ?><span class="tooltiptext"><?php echo _('active'); ?></span></div></td>
                                             </tr>
                                             <tr>
-                                                <td><input name="add_e_mail_recipient_to_mail" type="text" style="width: 90%; text-align: right;" required value></td>
+                                                <td><input name="add_e_mail_recipient_to_mail" type="email" style="width: 90%; text-align: right;" required value></td>
                                                 <td> <input type="hidden" name="add_checked_e_mail_recipient_true" value="0">
                                                     <input type="checkbox" name="add_checked_e_mail_recipient_true" value="1"></td>
                                             </tr>
