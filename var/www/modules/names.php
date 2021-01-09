@@ -180,6 +180,14 @@ $messenger_telegram_field = 'telegram';
 $messenger_alarm_field = 'alarm';
 $messenger_raise_exception_field = 'raise_exception';
 $messenger_active_field = 'active';
+$event_id_field = 'id';
+$event_event_field = 'event';
+$event_e_mail_field = 'e-mail';
+$event_pushover_field = 'pushover';
+$event_telegram_field = 'telegram';
+$event_alarm_field = 'alarm';
+$event_eventtext_field = 'event_text';
+$event_active_field = 'active';
 
 #-----------------------------Paths and urls
 $thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/';

@@ -423,6 +423,16 @@
         close_database();
     }
     
+    function write_event_values($event_id, $event_event, $event_e_mail, $event_pushover, $event_telegram, $event_alarm, $event_eventtext, $event_active ){
+        global $messenger_event_table, $event_id_field, $event_event_field, $event_e_mail_field, $event_pushover_field, $event_telegram_field, $event_alarm_field, $event_eventtext_field, $event_active_field;
+        open_connection();
+        $sql = 'UPDATE ' . $messenger_event_table . ' SET "' . $event_event_field . '" = "' . $event_event . '" , "' . $event_e_mail_field . '" = "' . $event_e_mail . '" , "' . $event_pushover_field . '" = "' . $event_pushover . '" , "' . $event_telegram_field . '" = "' . $event_telegram . '" , "' . $event_alarm_field . '" = "' . $event_alarm . '" , "' . $event_eventtext_field . '" = "' . $event_eventtext . '" , "' . $event_active_field . '" = "' . $event_active . '" WHERE "' . $event_id_field . '" = ' . $event_id ;
+        
+        execute_query($sql);
+        
+        close_database();
+    }
+    
     function write_alarm_values($alarm_id, $alarm_alarm, $alarm_replication, $alarm_sleep, $alarm_high_time, $alarm_low_time, $alarm_waveform, $alarm_frequency ){
         global $alarm_table, $alarm_id_field, $alarm_alarm_field, $alarm_replication_field, $alarm_sleep_field, $alarm_high_time_field, $alarm_low_time_field, $alarm_waveform_field, $alarm_frequency_field;
         open_connection();
@@ -455,10 +465,19 @@
         close_database();        
     }
     
-    function add_messenger($add_messenger_exception, $add_checked_messenger_e_mail, $add_checked_pushover, $add_checked_telegram, $add_messenger_alarm, $add_checked_messenger_raise_exeption, $add_checked_active ){
+    function add_messenger($add_messenger_exception, $add_checked_messenger_e_mail, $add_checked_messenger_pushover, $add_checked_messenger_telegram, $add_messenger_alarm, $add_checked_messenger_raise_exeption, $add_checked_messenger_active ){
         global $messenger_table, $messenger_id_field, $messenger_exception_field, $messenger_e_mail_field, $messenger_pushover_field, $messenger_telegram_field, $messenger_alarm_field, $messenger_raise_exception_field, $messenger_active_field;;
         open_connection();
-        $sql = 'INSERT INTO ' . $messenger_table . ' ("' . $messenger_exception_field . '","' . $messenger_e_mail_field . '","' . $messenger_pushover_field . '","' . $messenger_telegram_field . '","' . $messenger_alarm_field . '","' . $messenger_raise_exception_field . '","' . $messenger_active_field . '") VALUES ("' . $add_messenger_exception .'",' . $add_checked_messenger_e_mail .',' . $add_checked_pushover .',' . $add_checked_telegram .',"' . $add_messenger_alarm .'",' . $add_checked_messenger_raise_exeption .',' . $add_checked_active . ')';
+        $sql = 'INSERT INTO ' . $messenger_table . ' ("' . $messenger_exception_field . '","' . $messenger_e_mail_field . '","' . $messenger_pushover_field . '","' . $messenger_telegram_field . '","' . $messenger_alarm_field . '","' . $messenger_raise_exception_field . '","' . $messenger_active_field . '") VALUES ("' . $add_messenger_exception .'",' . $add_checked_messenger_e_mail .',' . $add_checked_messenger_pushover .',' . $add_checked_messenger_telegram .',"' . $add_messenger_alarm .'",' . $add_checked_messenger_raise_exeption .',' . $add_checked_messenger_active . ')';
+        execute_query($sql);
+        
+        close_database();
+    }
+    
+    function add_event($add_event_event, $add_checked_event_e_mail, $add_checked_event_pushover, $add_checked_event_telegram, $add_event_alarm, $add_eventtext, $add_checked_alarm_active ){
+        global $messenger_event_table, $event_id_field, $event_event_field, $event_e_mail_field, $event_pushover_field, $event_telegram_field, $event_alarm_field, $event_eventtext_field, $event_active_field;;
+        open_connection();
+        $sql = 'INSERT INTO ' . $messenger_event_table . ' ("' . $event_event_field . '","' . $event_e_mail_field . '","' . $event_pushover_field . '","' . $event_telegram_field . '","' . $event_alarm_field . '","' . $event_eventtext_field . '","' . $event_active_field . '") VALUES ("' . $add_event_event .'",' . $add_checked_event_e_mail .',' . $add_checked_event_pushover .',' . $add_checked_event_telegram .',"' . $add_event_alarm .'","' . $add_eventtext .'",' . $add_checked_alarm_active . ')';
         execute_query($sql);
         
         close_database();

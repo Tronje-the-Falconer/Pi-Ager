@@ -10,13 +10,13 @@
             $messenger_id = $_POST['messenger_id_' . $index_row];
             $messenger_exception = $_POST['messenger_exception_' . $index_row_id ];
             $checked_messenger_e_mail_true = $_POST['checked_messenger_e_mail_true_' . $index_row_id];
-            $checked_pushover_true = $_POST['checked_pushover_true_' . $index_row_id];
-            $checked_telegram_true = $_POST['checked_telegram_true_' . $index_row_id];
+            $checked_messenger_pushover_true = $_POST['checked_messenger_pushover_true_' . $index_row_id];
+            $checked_messenger_telegram_true = $_POST['checked_messenger_telegram_true_' . $index_row_id];
             $messenger_alarm = $_POST['messenger_alarm_' . $index_row_id];
             $checked_messenger_raise_exeption_true = $_POST['checked_messenger_raise_exeption_true_' . $index_row_id];
-            $checked_active_true = $_POST['checked_active_true_' . $index_row_id];
+            $checked_messenger_active_true = $_POST['checked_messenger_active_true_' . $index_row_id];
             
-            write_messenger_values($messenger_id, $messenger_exception, $checked_messenger_e_mail_true, $checked_pushover_true, $checked_telegram_true, $messenger_alarm, $checked_messenger_raise_exeption_true, $checked_active_true );
+            write_messenger_values($messenger_id, $messenger_exception, $checked_messenger_e_mail_true, $checked_messenger_pushover_true, $checked_messenger_telegram_true, $messenger_alarm, $checked_messenger_raise_exeption_true, $checked_messenger_active_true );
             $index_row_id++;
             $index_row++;
         }
@@ -31,13 +31,54 @@
         
         $add_messenger_exception = $_POST['add_messenger_exception'];
         $add_checked_messenger_e_mail_true = $_POST['add_checked_messenger_e_mail_true'];
-        $add_checked_pushover_true = $_POST['add_checked_pushover_true'];
-        $add_checked_telegram_true = $_POST['add_checked_telegram_true'];
+        $add_checked_messenger_pushover_true = $_POST['add_checked_messenger_pushover_true'];
+        $add_checked_messenger_telegram_true = $_POST['add_checked_messenger_telegram_true'];
         $add_messenger_alarm = $_POST['add_messenger_alarm'];
         $add_checked_messenger_raise_exeption_true = $_POST['add_checked_messenger_raise_exeption_true'];
-        $add_checked_active_true = $_POST['add_checked_active_true'];
+        $add_checked_messenger_active_true = $_POST['add_checked_messenger_active_true'];
         
-        add_messenger($add_messenger_exception, $add_checked_messenger_e_mail_true, $add_checked_pushover_true, $add_checked_telegram_true, $add_messenger_alarm, $add_checked_messenger_raise_exeption_true, $add_checked_active_true );
+        add_messenger($add_messenger_exception, $add_checked_messenger_e_mail_true, $add_checked_messenger_pushover_true, $add_checked_messenger_telegram_true, $add_messenger_alarm, $add_checked_messenger_raise_exeption_true, $add_checked_messenger_active_true );
+    }
+    
+    if (isset ($_POST['save_event_values'])){
+        logger('DEBUG', 'button save event pressed');
+        unset($_POST['save_event_values']);
+        
+        $count_event_number_rows = $_POST['count_event_number_rows'];
+        $index_row = 0;
+        $index_row_id = 1;
+        while ($index_row < $count_event_number_rows) {
+            $event_id = $_POST['event_id_' . $index_row];
+            $event_event = $_POST['event_event_' . $index_row_id ];
+            $checked_event_e_mail_true = $_POST['checked_event_e_mail_true_' . $index_row_id];
+            $checked_pushover_true = $_POST['checked_event_pushover_true_' . $index_row_id];
+            $checked_telegram_true = $_POST['checked_event_telegram_true_' . $index_row_id];
+            $event_alarm = $_POST['event_alarm_' . $index_row_id];
+            $event_eventtext = $_POST['event_eventtext_' . $index_row_id];
+            $checked_active_true = $_POST['checked_event_active_true_' . $index_row_id];
+            
+            write_event_values($event_id, $event_event, $checked_event_e_mail_true, $checked_pushover_true, $checked_telegram_true, $event_alarm, $event_eventtext, $checked_active_true );
+            $index_row_id++;
+            $index_row++;
+        }
+
+        logger('DEBUG', 'event values saved');
+        print '<script language="javascript"> alert("'. (_("event values")) . " : " . (_("values saved")) .'"); </script>';
+    }
+    
+    if (isset ($_POST['add_event'])){
+        logger('DEBUG', 'button add event');
+        unset($_POST['add_event']);
+        
+        $add_event_event = $_POST['add_event_event'];
+        $add_checked_event_e_mail_true = $_POST['add_checked_event_e_mail_true'];
+        $add_checked_event_pushover_true = $_POST['add_checked_event_pushover_true'];
+        $add_checked_event_telegram_true = $_POST['add_checked_event_telegram_true'];
+        $add_event_alarm = $_POST['add_event_alarm'];
+        $add_event_eventtext = $_POST['add_event_eventtext'];
+        $add_checked_event_active_true = $_POST['add_checked_event_active_true'];
+        
+        add_event($add_event_event, $add_checked_event_e_mail_true, $add_checked_event_pushover_true, $add_checked_event_telegram_true, $add_event_alarm, $add_event_eventtext, $add_checked_event_active_true );
     }
     
     if (isset ($_POST['save_alarm_values'])){
