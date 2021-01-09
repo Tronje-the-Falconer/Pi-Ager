@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2021-01-05 13:02+0100\n"
-"PO-Revision-Date: 2021-01-06 13:19+0100\n"
+"PO-Revision-Date: 2021-01-09 17:41+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -780,7 +780,7 @@ msgstr "Umluft"
 #: edit_agingtable.php:18 edit_agingtable.php:23 edit_agingtable.php:26
 #: edit_agingtable.php:103 header.php:168
 msgid "edit agingtable"
-msgstr "Reifetabelle editieren"
+msgstr "Editor"
 
 #: edit_agingtable.php:18
 msgid "can not edit the controlling agingtable. please select an other"
@@ -1814,7 +1814,7 @@ msgstr "Löschen"
 
 #: notification.php:163 notification.php:228
 msgid "replication"
-msgstr "Anzahl"
+msgstr "Wiederholung"
 
 #: notification.php:164 notification.php:229
 msgid "sleep"

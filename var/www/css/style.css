@@ -620,7 +620,7 @@ ul.art-hmenu, ul.art-hmenu ul
 
 ul.art-hmenu 
 {
-   display: inline-block;
+   display: block;
    vertical-align: bottom;
    padding-left: 19px;
    padding-right: 19px;
