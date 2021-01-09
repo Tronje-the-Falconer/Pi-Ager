@@ -123,7 +123,7 @@
     if (isset ($_POST['delete_event'])){
         logger('DEBUG', 'button delete event pressed');
         unset($_POST['delete_event']);
-        $id =  $_POST['id'];
+        $id =  $_POST['event_id'];
         delete_row_from_table($messenger_event_table,$event_id_field,$id);
     }
     
