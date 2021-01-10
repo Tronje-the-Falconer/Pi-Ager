@@ -135,7 +135,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                     cl_fact_logger.get_instance().debug('second_sensor_temperature_big: ' + str(second_sensor_temperature_big))
                     cl_fact_logger.get_instance().debug('second_sensor_humidity_big: ' + str(second_sensor_humidity_big)) 
                     cl_fact_logger.get_instance().debug('second_sensor_dewpoint_big: ' + str(second_sensor_dewpoint_big))
-                    raise cx_i2c_sht_humidity_crc_error
+                    exit()
                 except OSError as cx_error:
                     cl_fact_i2c_bus_logic().set_instance(None)
                     cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
