@@ -144,7 +144,7 @@ class cl_second_sensor_type(cl_main_sensor_type):
     def _is_valid(self):
         # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if cl_main_sensor_type.__SUPPORTED_SECOND_SENSOR_TYPES[self._type]:
+        if cl_second_sensor_type.__SUPPORTED_SECOND_SENSOR_TYPES[self._type]:
 #        if self._type in cl_main_sensor_type.__SUPPORTED_MAIN_SENSOR_TYPES:
             return(True)
         else:
@@ -183,7 +183,7 @@ class cl_second_sensor_type(cl_main_sensor_type):
     def get_supported_types(self):
         # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        print('[%s]' % ', '.join(map(str, cl_main_sensor_type.__SUPPORTED_SECOND_SENSOR_TYPES )))
+        print('[%s]' % ', '.join(map(str, cl_second_sensor_type.__SUPPORTED_SECOND_SENSOR_TYPES )))
 
 
 
