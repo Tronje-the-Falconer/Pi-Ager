@@ -523,6 +523,41 @@
                                             </td>
                                             <td class="text_left_top"><?php echo '<b>'.strtoupper(_('agingtable')).':</b><br>'.$maturity_type;?></td>
                                         </tr>
+                                        <tr>
+                                                <?php 
+                                                    // Prüft, ob Prozess spannung vorhanden ist
+                                                    $read_gpio_voltage = shell_exec('sudo /var/sudowebscript.sh read_gpio_voltage');
+                                                    if ($read_gpio_voltage == 0){
+                                                        echo '<td>';
+                                                        echo '<img src="images/icons/5v_42x42.png" alt="" style="padding-top: 10px;">';
+                                                        echo '</td>';
+                                                        echo '<td style="text-align: left; ">' . _('5V voltage is present') . '</td>';
+                                                    }
+                                                    else {
+                                                        echo '<td>';
+                                                        echo '<img src="images/icons/5v_fail_42x42.png" alt="" style="padding-top: 10px;">';
+                                                        echo '</td>';
+                                                        echo '<td style="text-align: left; font-size: 24px; color: red;">' . _('5V voltage is not present') . '</td>';
+                                                    }
+                                                ?>
+                                                <?php 
+                                                    // Prüft, ob Batteriespannung vorhanden ist
+                                                    $read_gpio_battery = shell_exec('sudo /var/sudowebscript.sh read_gpio_battery');
+                                                    if ($read_gpio_battery == 0){
+                                                        echo '<td>';
+                                                        echo '<img src="images/icons/battery_42x42.png" alt="" style="padding-top: 10px;">';
+                                                        echo '</td>';
+                                                        echo '<td style="text-align: left; ">' . _('battery voltage ok') . '</td>';
+                                                    }
+                                                    else {
+                                                        echo '<td>';
+                                                        echo '<img src="images/icons/battery_fail_42x42.png" alt="" style="padding-top: 10px;">';
+                                                        echo '</td>';
+                                                        echo '<td style="text-align: left; font-size: 24px; color: red;">' . _('battery voltage low !!') . '</td>';
+                                                    }
+                                                ?>
+                                            <td></td>
+                                        </tr>
                                     </table>
                                     <hr>
                                     <h2><?php echo _('temperatures'); ?></h2>
