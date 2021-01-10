@@ -67,6 +67,11 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     # global logger
     global sensor_humidity_big
     global sensor_temperature_big 
+    global sensor_dewpoint_big
+    global second_sensor_humidity_big
+    global second_sensor_temperature_big 
+    global second_sensor_dewpoint_big    
+    
     last_temperaure = None
     last_humidity   = None
     sensordata={}
@@ -117,16 +122,16 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             if second_sensor_type > 0:
                 try:
                     i2c_address_main_sensor = 0x45
-                    main_sensor =  cl_fact_main_sensor().get_instance(i_address = i2c_address_main_sensor)
-                    main_sensor.execute()
-                    measured_data = main_sensor.get_current_data()
-                    (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
+                    second_sensor =  cl_fact_main_sensor().get_instance(i_address = i2c_address_main_sensor)
+                    second_sensor.execute()
+                    measured_second_data = second_sensor.get_current_data()
+                    (second_sensor_temperature_big, second_sensor_humidity_big, second_sensor_dewpoint_big) = measured_second_data
                     # logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
                     # logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
                     # logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
-                    cl_fact_logger.get_instance().debug('sensor_temperature_big: ' + str(sensor_temperature_big))
-                    cl_fact_logger.get_instance().debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
-                    cl_fact_logger.get_instance().debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
+                    cl_fact_logger.get_instance().debug('second_sensor_temperature_big: ' + str(second_sensor_temperature_big))
+                    cl_fact_logger.get_instance().debug('second_sensor_humidity_big: ' + str(second_sensor_humidity_big)) 
+                    cl_fact_logger.get_instance().debug('second_sensor_dewpoint_big: ' + str(second_sensor_dewpoint_big))
                 except OSError as cx_error:
                     cl_fact_i2c_bus_logic().set_instance(None)
                     cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
@@ -134,7 +139,10 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                         cx_i2c_sht_humidity_crc_error,
                         cx_i2c_bus_error ) as cx_error:
                     cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
-            endif
+            
+            """
+            Zweiter Sensor SHT3x oder SHT85 Ende
+            """
         last_temperature = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
         last_humidity = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)                
         if last_temperaure is not None and last_humidity is not None:
