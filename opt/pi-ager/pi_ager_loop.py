@@ -24,8 +24,8 @@ from time import ctime as convert
 from main.pi_ager_cx_exception import (cx_i2c_sht_temperature_crc_error, cx_i2c_sht_humidity_crc_error, cx_i2c_bus_error) 
 from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
-from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
-from sensors.pi_ager_cl_sensor_fact import cl_fact_main_sensor
+from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type, cl_fact_second_sensor_type
+from sensors.pi_ager_cl_sensor_fact import cl_fact_main_sensor, cl_fact_second_sensor
 from sensors.pi_ager_cl_i2c_bus import  cl_fact_i2c_bus_logic
 
 from main.pi_ager_cl_logger import cl_fact_logger
@@ -92,7 +92,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
 
         elif sensorname == 'SHT3x' or sensorname == 'SHT85': #SH3x
             try:
-                i2c_address_main_sensor = 0x44
+                i2c_address_main_sensor = 0x44 #0x45
                 main_sensor =  cl_fact_main_sensor().get_instance(i_address = i2c_address_main_sensor)
                 main_sensor.execute()
                 measured_data = main_sensor.get_current_data()
@@ -103,16 +103,38 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 cl_fact_logger.get_instance().debug('sensor_temperature_big: ' + str(sensor_temperature_big))
                 cl_fact_logger.get_instance().debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
                 cl_fact_logger.get_instance().debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
-                
             except OSError as cx_error:
                 cl_fact_i2c_bus_logic().set_instance(None)
                 cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
-                   
-                                
             except (cx_i2c_sht_temperature_crc_error,
                     cx_i2c_sht_humidity_crc_error,
                     cx_i2c_bus_error ) as cx_error:
                 cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+            """
+            Zweiter Sensor SHT3x oder SHT85
+            """        
+            second_sensor_type = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensorsecondtype_key))
+            if second_sensor_type > 0:
+                try:
+                    i2c_address_main_sensor = 0x45
+                    main_sensor =  cl_fact_main_sensor().get_instance(i_address = i2c_address_main_sensor)
+                    main_sensor.execute()
+                    measured_data = main_sensor.get_current_data()
+                    (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
+                    # logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
+                    # logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
+                    # logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
+                    cl_fact_logger.get_instance().debug('sensor_temperature_big: ' + str(sensor_temperature_big))
+                    cl_fact_logger.get_instance().debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
+                    cl_fact_logger.get_instance().debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
+                except OSError as cx_error:
+                    cl_fact_i2c_bus_logic().set_instance(None)
+                    cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+                except (cx_i2c_sht_temperature_crc_error,
+                        cx_i2c_sht_humidity_crc_error,
+                        cx_i2c_bus_error ) as cx_error:
+                    cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+            endif
         last_temperature = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
         last_humidity = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)                
         if last_temperaure is not None and last_humidity is not None:

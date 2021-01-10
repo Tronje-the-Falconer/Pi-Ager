@@ -60,4 +60,35 @@ class cl_fact_main_sensor:
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         pass    
+class cl_fact_second_sensor:
+    
+#    Only a singleton instance for second_sensor
+    __o_sensor_type = cl_fact_second_sensor_type().get_instance()
+    __o_instance = None
+    
+    @classmethod        
+    def get_instance(self, i_address=None):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        if cl_fact_second_sensor.__o_instance is not None :
+            return(cl_fact_second_sensor.__o_instance)
+        try:
+            if cl_fact_second_sensor.__o_sensor_type._get_type_ui( ) == 'SHT3x':
+                cl_fact_second_sensor.__o_instance = cl_fact_sensor_sht3x.get_instance(i_address)
+            elif cl_fact_second_sensor.__o_sensor_type._get_type_ui( ) == 'SHT85':
+                cl_fact_second_sensor.__o_instance = cl_fact_sensor_sht85.get_instance(i_address)
+            
+                
+        except Exception as original_error:
+            raise original_error        
+        return(cl_fact_second_sensor.__o_instance)
 
+    @classmethod
+    def set_instance(self, i_instance):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_second_sensor.__o_instance = i_instance
+              
+    
+    def __init__(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        
+        pass    
