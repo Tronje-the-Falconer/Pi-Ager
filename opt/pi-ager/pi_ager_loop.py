@@ -120,7 +120,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             """
             second_sensorname = cl_fact_second_sensor_type.get_instance().get_sensor_type_ui()        
             cl_fact_logger.get_instance().debug('Second sensor is: ' + str(second_sensorname))    
-            Exit                                                                                                      
+                                                                                                                
             if second_sensor_type > 0:
             #if 1 == 2:
                 try:
