@@ -523,11 +523,38 @@
                                             </td>
                                             <td class="text_left_top"><?php echo '<b>'.strtoupper(_('agingtable')).':</b><br>'.$maturity_type;?></td>
                                         </tr>
+                                    </table>
+                                    <hr>
+                                    <table class="switching_state miniature_writing">
+                                        <tr>
+                                                <?php 
+                                                    // Prüft, ob Prozess spannung vorhanden ist
+                                                    $read_gpio_digital_switch = shell_exec('sudo /var/sudowebscript.sh read_gpio_digital_switch');
+                                                    if ($read_gpio_digital_switch == 0){
+                                                        echo '<td>';
+                                                        echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;">';
+                                                        echo '</td>';
+                                                        echo '<td style="text-align: left; ">' . _('Switch is on') . '</td>';
+                                                    }
+                                                    else {
+                                                        echo '<td>';
+                                                        echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;">';
+                                                        echo '</td>';
+                                                        echo '<td style="text-align: left;">' . _('Switch is off') . '</td>';
+                                                    }
+                                                ?>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <hr>
+                                    <table class="switching_state miniature_writing">
                                         <tr>
                                                 <?php 
                                                     // Prüft, ob Prozess spannung vorhanden ist
                                                     $read_gpio_voltage = shell_exec('sudo /var/sudowebscript.sh read_gpio_voltage');
-                                                    if ($read_gpio_voltage == 0){
+                                                    if ($read_gpio_voltage == 1){
                                                         echo '<td>';
                                                         echo '<img src="images/icons/5v_42x42.png" alt="" style="padding-top: 10px;">';
                                                         echo '</td>';
@@ -543,7 +570,7 @@
                                                 <?php 
                                                     // Prüft, ob Batteriespannung vorhanden ist
                                                     $read_gpio_battery = shell_exec('sudo /var/sudowebscript.sh read_gpio_battery');
-                                                    if ($read_gpio_battery == 0){
+                                                    if ($read_gpio_battery == 1){
                                                         echo '<td>';
                                                         echo '<img src="images/icons/battery_42x42.png" alt="" style="padding-top: 10px;">';
                                                         echo '</td>';
@@ -556,9 +583,9 @@
                                                         echo '<td style="text-align: left; font-size: 24px; color: red;">' . _('battery voltage low !!') . '</td>';
                                                     }
                                                 ?>
-                                            <td></td>
                                         </tr>
                                     </table>
+                                    <hr>
                                     <hr>
                                     <h2><?php echo _('temperatures'); ?></h2>
                                     <br>
