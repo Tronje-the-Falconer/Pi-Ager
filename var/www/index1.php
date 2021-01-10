@@ -42,6 +42,9 @@
                                             <td id="current_json_dewpoint_1" style="text-align: left; font-size: 24px;"></td>
                                             <td style="text-align: left; font-size: 24px;"><strong>&deg;C</strong></td>
                                         </tr>
+									</table>
+                                    <hr>
+                                    <table class="switching_state miniature_writing">
                                         <tr>
                                             <td colspan=4>
                                                 <img src="images/icons/temperature_extern_42x42.png" alt="" style="padding-top: 10px;">
