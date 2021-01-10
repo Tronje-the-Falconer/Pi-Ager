@@ -119,8 +119,9 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             Zweiter Sensor SHT3x oder SHT85
             """        
             second_sensor_type = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensorsecondtype_key))
-            #if second_sensor_type > 0:
-            if 1 == 2:
+                                                                                                                         
+            if second_sensor_type > 0:
+            #if 1 == 2:
                 try:
                     i2c_address_main_sensor = 0x45
                     second_sensor =  cl_fact_main_sensor().get_instance(i_address = i2c_address_main_sensor)
