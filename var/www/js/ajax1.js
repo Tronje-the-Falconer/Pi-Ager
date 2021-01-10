@@ -85,7 +85,7 @@ function handleContent() {
             str_temperature_main = '-----';
         }
         else {
-            str_temperature_main = temperature_main.toFixed(0);
+            str_temperature_main = temperature_main.toFixed(1);
         }
         if (humidity_main === null) {
             str_humidity_main = '-----';
@@ -97,13 +97,13 @@ function handleContent() {
             str_dewpoint_main = '-----';
         // }
         // else {
-            // str_dewpoint_main = dewpoint_main.toFixed(0);
+            // str_dewpoint_main = dewpoint_main.toFixed(1);
         // }
         // if (temperature_extern === null) {
             str_temperature_extern = '-----';
         // }
         // else {
-            // str_temperature_extern = temperature_extern.toFixed(0);
+            // str_temperature_extern = temperature_extern.toFixed(1);
         // }
         // if (humidity_extern === null) {
             str_humidity_extern = '-----';
@@ -115,7 +115,7 @@ function handleContent() {
             str_dewpoint_extern = '-----';
         // }
         // else {
-            // str_dewpoint_extern = dewpoint_extern.toFixed(0);
+            // str_dewpoint_extern = dewpoint_extern.toFixed(1);
         // }
         if (gr_scale1 === null) {
             str_gr_scale1 = '-----';
