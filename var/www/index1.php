@@ -18,55 +18,54 @@
                                 <div class="hg_container">
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td>
+                                            <td colspan=4>
                                                 <img src="images/icons/temperature.png" alt="" style="padding-top: 10px;">
                                             </td>
+                                            <td colspan=4>
+                                                <img src="images/icons/humidity.png" alt="" style="padding-top: 10px;">
+                                            </td>
+                                            <td colspan=4>
+                                                <img src="images/icons/dew_point.png" alt="" style="padding-top: 10px;">
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td id="current_json_temperature_0" style="text-align: right; font-size: 24px;"></td>
                                             <td style="font-size: 24px;">.</td>
                                             <td id="current_json_temperature_1" style="text-align: left; font-size: 24px;"></td>
                                             <td style="text-align: left; font-size: 24px;"><strong>&deg;C</strong></td>
-                                            <td></td>
-                                            <td>
-                                                <img src="images/icons/temperature_extern_42x42.png" alt="" style="padding-top: 10px;">
-                                            </td>
-                                            <td id="current_json_temperature_extern_0" style="text-align: right;"></td>
-                                            <td>.</td>
-                                            <td id="current_json_temperature_extern_1" style="text-align: left;"></td>
-                                            <td style="text-align: left;"><strong>&deg;C</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="images/icons/humidity.png" alt="" style="padding-top: 10px;">
-                                            </td>
                                             <td id="current_json_humidity_0" style="text-align: right; font-size: 24px;"></td>
                                             <td style="font-size: 24px;">.</td>
                                             <td id="current_json_humidity_1" style="text-align: left; font-size: 24px;"></td>
                                             <td style="text-align: left; font-size: 24px;"><strong>&#37</strong></td>
-                                            <td></td>
-                                            <td>
-                                                <img src="images/icons/humidity_extern_42x42.png" alt="" style="padding-top: 10px;">
-                                            </td>
-                                            <td id="current_json_humidity_extern_0" style="text-align: right;"></td>
-                                            <td>.</td>
-                                            <td id="current_json_humidity_extern_1" style="text-align: left;"></td>
-                                            <td style="text-align: left;"><strong>&#37</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="images/icons/dew_point.png" alt="" style="padding-top: 10px;">
-                                            </td>
                                             <td id="current_json_dewpoint_0" style="text-align: right; font-size: 24px;"></td>
                                             <td style="font-size: 24px;">.</td>
                                             <td id="current_json_dewpoint_1" style="text-align: left; font-size: 24px;"></td>
                                             <td style="text-align: left; font-size: 24px;"><strong>&deg;C</strong></td>
-                                            <td></td>
-                                            <td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan=4>
+                                                <img src="images/icons/temperature_extern_42x42.png" alt="" style="padding-top: 10px;">
+                                            </td>
+                                            <td colspan=4>
+                                                <img src="images/icons/humidity_extern_42x42.png" alt="" style="padding-top: 10px;">
+                                            </td>
+                                            <td colspan=4>
                                                 <img src="images/icons/dew_point_extern_42x42.png" alt="" style="padding-top: 10px;">
                                             </td>
-                                            <td id="current_json_dewpoint_extern_0" style="text-align: right;"></td>
-                                            <td>.</td>
-                                            <td id="current_json_dewpoint_extern_1" style="text-align: left;"></td>
-                                            <td style="text-align: left;"><strong>&deg;C</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td id="current_json_temperature_extern_0" style="text-align: right; font-size: 20px;"></td>
+                                            <td style="font-size: 20px;">.</td>
+                                            <td id="current_json_temperature_extern_1" style="text-align: left; font-size: 20px;"></td>
+                                            <td style="text-align: left; font-size: 20px;"><strong>&deg;C</strong></td>
+                                            <td id="current_json_humidity_extern_0" style="text-align: right; font-size: 20px;"></td>
+                                            <td style="font-size: 20px;">.</td>
+                                            <td id="current_json_humidity_extern_1" style="text-align: left; font-size: 20px;"></td>
+                                            <td style="text-align: left; font-size: 20px;"><strong>&#37</strong></td>
+                                            <td id="current_json_dewpoint_extern_0" style="text-align: right; font-size: 20px;"></td>
+                                            <td style="font-size: 20px;">.</td>
+                                            <td id="current_json_dewpoint_extern_1" style="text-align: left; font-size: 20px;"></td>
+                                            <td style="text-align: left; font-size: 20px;"><strong>&deg;C</strong></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -77,40 +76,32 @@
                                     <table class="switching_state miniature_writing">
                                         <tr>
                                             <td>
-                                                <img src="images/icons/temperature_42x42.png" alt="">
+                                                <img src="images/icons/temperature_42x42.png" alt="">&thetasym; 1
                                             </td>
                                             <td>
-                                                <?php echo _('&thetasym;-NTC').' 1'; ?>
-                                            </td>
-                                            <td id="json_meat_temperature1">
-                                            </td>
-                                            <td></td>
-                                            <td>
-                                                <img src="images/icons/temperature_42x42.png" alt="">
+                                                <img src="images/icons/temperature_42x42.png" alt="">&thetasym; 2
                                             </td>
                                             <td>
-                                                <?php echo _('&thetasym;-NTC').' 2'; ?>
+                                                <img src="images/icons/temperature_42x42.png" alt="">&thetasym; 3
                                             </td>
-                                            <td id="json_temperature_meat2">
+                                        <tr>
+                                            <td id="json_meat_temperature1" style="font-size: 20px;">
+                                            </td>
+                                            <td id="json_meat_temperature2" style="font-size: 20px;">
+                                            </td>
+                                            <td id="json_meat_temperature3" style="font-size: 20px;">
                                             </td>
                                         </tr>
+                                    </table>
+                                    <hr>
+                                    <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td>
-                                                <img src="images/icons/temperature_42x42.png" alt="">
-                                            </td>
-                                            <td>
-                                                <?php echo _('&thetasym;-NTC').' 3'; ?>
-                                            </td>
-                                            <td id="json_temperature_meat3">
-                                            </td>
-                                            <td></td>
                                             <td>
                                                 <img src="images/icons/voltage_42x42.png" alt="">
                                             </td>
-                                            <td>
-                                                <?php echo _('I-Sensor') .' 4'; ?>
-                                            </td>
-                                            <td id="json_temperature_meat4"></td>
+                                        </tr>
+                                        <tr>
+                                            <td id="json_meat_temperature4" style="font-size: 20px;"></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -124,19 +115,16 @@
                                                 <img src="images/icons/scale_42x42.png" alt="">1
                                             </td>
                                             <td>
-                                            <td>
                                                 <img src="images/icons/scale_42x42.png" alt="" style="padding-top: 10px;">2
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td id="scale1_values_old"></td>
-                                            <td></td>
-                                            <td id="scale2_values_old"></td>
+                                            <td id="scale1_values_old" style="font-size: 20px;"></td>
+                                            <td id="scale2_values_old" style="font-size: 20px;"></td>
                                         </tr>
                                         <tr>
-                                            <td id="scale_json_scale1"></td>
-                                            <td></td>
-                                            <td id="scale_json_scale2"></td>
+                                            <td id="scale_json_scale1" style="font-size: 20px;"></td>
+                                            <td id="scale_json_scale2" style="font-size: 20px;"></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -483,6 +471,8 @@
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <h2 class="art-postheader"><?php echo _('statusboard'); ?></h2>
                                 <div class="hg_container">
+                                    <h2><?php echo _('general'); ?></h2>
+                                    <br>
                                     <table class="switching_state miniature_writing">
                                         <tr>
                                             <td>
@@ -532,6 +522,8 @@
                                         </tr>
                                     </table>
                                     <hr>
+                                    <h2><?php echo _('temperatures'); ?></h2>
+                                    <br>
                                     <table class="switching_state miniature_writing">
                                         <tr>
                                             <td><b><?php echo strtoupper(_('type')); ?></b></td>
@@ -632,6 +624,8 @@
                                        </tr>
                                     </table>
                                     <hr>
+                                    <h2><?php echo _('timer'); ?></h2>
+                                    <br>
                                     <table class="switching_state miniature_writing">
                                         <tr>
                                             <td><b><?php echo strtoupper(_('type')); ?></b></td>
@@ -738,6 +732,8 @@
                                         </tr>
                                     </table>
                                     <hr>
+                                    <h2><?php echo _('scales'); ?></h2>
+                                    <br>
                                     <table class="switching_state miniature_writing">
                                         <tr>
                                             <td><b><?php echo strtoupper(_('type')); ?></b></td>
