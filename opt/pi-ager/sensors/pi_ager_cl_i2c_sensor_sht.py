@@ -32,6 +32,7 @@ class cl_i2c_sensor_sht(ABC):
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
         #self._sensor_type = o_sensor_type
+        cl_fact_logger.get_instance().debug('i2c address is ' + str(i_address))
         self._i2c_bus = i_i2c_bus
         self._address = i_address
         

@@ -65,6 +65,7 @@ class cl_i2c_bus_logic():
     def get_i2c_address(self):
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_logger.get_instance().debug('i2c address is ' + str(self._address))
         return(self._address)
 
 class th_i2c_bus_logic():
