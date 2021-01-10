@@ -14,7 +14,7 @@ __status__ = "Production"
 from abc import ABC, abstractmethod
 import inspect
 from main.pi_ager_cl_logger import cl_fact_logger
-from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
+from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type, cl_fact_second_sensor_type
 from main.pi_ager_cx_exception import *
 from sensors.pi_ager_cl_sensor_sht75 import cl_fact_sensor_sht75
 from sensors.pi_ager_cl_sensor_sht3x import cl_fact_sensor_sht3x
