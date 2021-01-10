@@ -18,57 +18,39 @@
                                 <div class="hg_container">
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td colspan=4>
+                                            <td>
                                                 <img src="images/icons/temperature.png" alt="" style="padding-top: 10px;">
                                             </td>
-                                            <td colspan=4>
+                                            <td>
                                                 <img src="images/icons/humidity.png" alt="" style="padding-top: 10px;">
                                             </td>
-                                            <td colspan=4>
+                                            <td>
                                                 <img src="images/icons/dew_point.png" alt="" style="padding-top: 10px;">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td id="current_json_temperature_0" style="text-align: right; font-size: 24px;"></td>
-                                            <td style="font-size: 24px;">.</td>
-                                            <td id="current_json_temperature_1" style="text-align: left; font-size: 24px;"></td>
-                                            <td style="text-align: left; font-size: 24px;"><strong>&deg;C</strong></td>
-                                            <td id="current_json_humidity_0" style="text-align: right; font-size: 24px;"></td>
-                                            <td style="font-size: 24px;">.</td>
-                                            <td id="current_json_humidity_1" style="text-align: left; font-size: 24px;"></td>
-                                            <td style="text-align: left; font-size: 24px;"><strong>&#37</strong></td>
-                                            <td id="current_json_dewpoint_0" style="text-align: right; font-size: 24px;"></td>
-                                            <td style="font-size: 24px;">.</td>
-                                            <td id="current_json_dewpoint_1" style="text-align: left; font-size: 24px;"></td>
-                                            <td style="text-align: left; font-size: 24px;"><strong>&deg;C</strong></td>
+                                            <td id="json_temperature_main" style="text-align: center; font-size: 24px;"></td>
+                                            <td id="json_humidity_main" style="text-align: center; font-size: 24px;"></td>
+                                            <td id="json_dewpoint_main" style="text-align: center; font-size: 24px;"></td>
                                         </tr>
 									</table>
                                     <hr>
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td colspan=4>
+                                            <td>
                                                 <img src="images/icons/temperature_extern_42x42.png" alt="" style="padding-top: 10px;">
                                             </td>
-                                            <td colspan=4>
+                                            <td>
                                                 <img src="images/icons/humidity_extern_42x42.png" alt="" style="padding-top: 10px;">
                                             </td>
-                                            <td colspan=4>
+                                            <td>
                                                 <img src="images/icons/dew_point_extern_42x42.png" alt="" style="padding-top: 10px;">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td id="current_json_temperature_extern_0" style="text-align: right; font-size: 20px;"></td>
-                                            <td style="font-size: 20px;">.</td>
-                                            <td id="current_json_temperature_extern_1" style="text-align: left; font-size: 20px;"></td>
-                                            <td style="text-align: left; font-size: 20px;"><strong>&deg;C</strong></td>
-                                            <td id="current_json_humidity_extern_0" style="text-align: right; font-size: 20px;"></td>
-                                            <td style="font-size: 20px;">.</td>
-                                            <td id="current_json_humidity_extern_1" style="text-align: left; font-size: 20px;"></td>
-                                            <td style="text-align: left; font-size: 20px;"><strong>&#37</strong></td>
-                                            <td id="current_json_dewpoint_extern_0" style="text-align: right; font-size: 20px;"></td>
-                                            <td style="font-size: 20px;">.</td>
-                                            <td id="current_json_dewpoint_extern_1" style="text-align: left; font-size: 20px;"></td>
-                                            <td style="text-align: left; font-size: 20px;"><strong>&deg;C</strong></td>
+                                            <td id="json_temperature_extern" style="text-align: center; font-size: 20px;"></td>
+                                            <td id="json_humidity_extern" style="text-align: center; font-size: 20px;"></td>
+                                            <td id="json_dewpoint_extern" style="text-align: center; font-size: 20px;"></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -122,12 +104,8 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td id="scale1_values_old" style="font-size: 20px;"></td>
-                                            <td id="scale2_values_old" style="font-size: 20px;"></td>
-                                        </tr>
-                                        <tr>
-                                            <td id="scale_json_scale1" style="font-size: 20px;"></td>
-                                            <td id="scale_json_scale2" style="font-size: 20px;"></td>
+                                            <td id="json_scale1" style="font-size: 20px;"></td>
+                                            <td id="json_scale2" style="font-size: 20px;"></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -564,7 +542,7 @@
                                                         echo '<td>';
                                                         echo '<img src="images/icons/5v_fail_42x42.png" alt="" style="padding-top: 10px;">';
                                                         echo '</td>';
-                                                        echo '<td style="text-align: left; font-size: 24px; color: red;">' . _('5V voltage is not present') . '</td>';
+                                                        echo '<td style="text-align: left; color: red;">' . _('5V voltage is not present') . '</td>';
                                                     }
                                                 ?>
                                                 <?php 
@@ -580,7 +558,7 @@
                                                         echo '<td>';
                                                         echo '<img src="images/icons/battery_fail_42x42.png" alt="" style="padding-top: 10px;">';
                                                         echo '</td>';
-                                                        echo '<td style="text-align: left; font-size: 24px; color: red;">' . _('battery voltage low !!') . '</td>';
+                                                        echo '<td style="text-align: left; color: red;">' . _('battery voltage low !!') . '</td>';
                                                     }
                                                 ?>
                                         </tr>
