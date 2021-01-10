@@ -123,8 +123,8 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             if second_sensor_type > 0:
             #if 1 == 2:
                 try:
-                    i2c_address_main_sensor = 0x45
-                    second_sensor =  cl_fact_main_sensor().get_instance(i_address = i2c_address_main_sensor)
+                    i2c_address_second_sensor = 0x45
+                    second_sensor =  cl_fact_main_sensor().get_instance(i_address = i2c_address_second_sensor)
                     second_sensor.execute()
                     measured_second_data = second_sensor.get_current_data()
                     (second_sensor_temperature_big, second_sensor_humidity_big, second_sensor_dewpoint_big) = measured_second_data
