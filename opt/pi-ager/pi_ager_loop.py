@@ -117,10 +117,10 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
             """
             Zweiter Sensor SHT3x oder SHT85
-            """        
-            second_sensor_type = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensorsecondtype_key))
-            cl_fact_logger.get_instance().debug('Second sensor is: ' + str(second_sensor_type))    
-            SystemExit                                                                                                         
+            """
+            second_sensorname = cl_fact_second_sensor_type.get_instance().get_sensor_type_ui()        
+            cl_fact_logger.get_instance().debug('Second sensor is: ' + str(second_sensorname))    
+            Exit                                                                                                      
             if second_sensor_type > 0:
             #if 1 == 2:
                 try:
