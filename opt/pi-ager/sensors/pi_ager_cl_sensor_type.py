@@ -245,7 +245,7 @@ class cl_fact_second_sensor_type(ABC):
     def get_instance(self):
         if cl_fact_second_sensor_type.__o_instance is not None:
             return(cl_fact_second_sensor_type.__o_instance)
-        cl_fact_second_sensor_type.__o_instance = cl_main_sensor_type()
+        cl_fact_second_sensor_type.__o_instance = cl_scond_sensor_type()
         return(cl_fact_second_sensor_type.__o_instance)
 
     def __init__(self):
