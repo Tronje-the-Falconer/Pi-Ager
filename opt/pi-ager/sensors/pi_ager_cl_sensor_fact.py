@@ -69,6 +69,7 @@ class cl_fact_second_sensor:
     @classmethod        
     def get_instance(self, i_address=None):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_logger.get_instance().debug('cl_fact_second_sensor')
         if cl_fact_second_sensor.__o_instance is not None :
             return(cl_fact_second_sensor.__o_instance)
         try:
