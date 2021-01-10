@@ -12,6 +12,10 @@ gpio_exhausting_air=23
 gpio_uv_light=25
 gpio_light=8
 gpio_dehumidifier=7
+gpio_voltage=26
+gpio_battery=11
+gpio_digital_switch=22
+
 
 # IP-Adresse
 MYIP=$(hostname -I | cut -d' ' -f1)
@@ -112,6 +116,15 @@ case "$1" in
     ;;
     write_gpio_dehumidifier_value_to_1)# Ansteuern von GPIO Entfeuchter
         /usr/local/bin/gpio -g write $gpio_dehumidifier 1
+    ;;
+    read_gpio_voltage)# Ansteuern von GPIO Stromspannung
+        /usr/local/bin/gpio -g read $gpio_voltage
+    ;;
+    read_gpio_battery)# Ansteuern von GPIO Batterie
+        /usr/local/bin/gpio -g read $gpio_battery
+    ;;
+    read_gpio_digital_switch)# Ansteuern von GPIO Schalter
+        /usr/local/bin/gpio -g read $gpio_digital_switch
     ;;
     reboot) # reboot
         sleep 3
