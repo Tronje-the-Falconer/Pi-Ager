@@ -478,8 +478,8 @@
                                             <td></td>
                                             <td></td>
                                         </tr>
-                                        <tr>
-                                                <?php 
+                                        </tr>
+                                            <?php 
                                                     // Prüft, ob Prozess RSS läuft
                                                     $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
                                                     if ($grepmain == 0){
@@ -495,18 +495,8 @@
                                                         echo '<td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                     }
                                                 ?>
-                                            </td>
-                                            <td class="text_left_top"><?php echo '<b>'.strtoupper(_('operating mode')).':</b><br>';
-                                                if ($grepmain == 0){
-                                                    echo strtoupper(("see settings"));
-                                                }
-                                                elseif ($grepmain != 0 and $status_piager == 0){
-                                                    echo strtoupper(("off"));
-                                                }
-                                                elseif($grepmain != 0 and $status_piager == 1){
-                                                    echo $modus_name;
-                                                }
-                                                ?>
+                                            <td class="text_left">
+                                                <?php echo '<b>'.strtoupper(_('operating mode')); ?>
                                             </td>
                                             <?php 
                                                     // Prüft, ob Prozess spannung vorhanden ist
@@ -527,37 +517,73 @@
                                                 ?>
                                         </tr>
                                         <tr>
-                                                <?php 
-                                                    // Prüft, ob Prozess Reifetab läuft
-                                                    $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
-                                                    if ($grepagingtable == 0){
-                                                        echo '<td><img src="images/icons/agingtable_42x42.png" alt="" style="padding: 10px;"></td>';
-                                                        echo '<td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
-                                                    }
-                                                    else {
-                                                        echo '<td><img src="images/icons/agingtable_42x42.gif" alt="" style="padding: 10px;"></td>';
-                                                        echo '<td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>';
-                                                    }
+                                            <td></td>   
+                                            <td></td>
+                                            <td class="text_left_top">
+                                                <?php
+                                                if ($grepmain == 0){
+                                                    echo strtoupper(("see settings"));
+                                                }
+                                                elseif ($grepmain != 0 and $status_piager == 0){
+                                                    echo strtoupper(("off"));
+                                                }
+                                                elseif($grepmain != 0 and $status_piager == 1){
+                                                    echo $modus_name;
+                                                }
                                                 ?>
-                                            <td class="text_left_top"><?php echo '<b>'.strtoupper(_('agingtable')).':</b><br>'.$maturity_type;?></td>
+                                            </td>
                                             <?php 
-                                                    // Prüft, ob Batteriespannung vorhanden ist
-                                                    $read_gpio_battery = shell_exec('sudo /var/sudowebscript.sh read_gpio_battery');
-                                                    if ($read_gpio_battery == 1){
-                                                        echo '<td >';
-                                                        echo '<img src="images/icons/battery_42x42.png" alt="" style="padding-top: 10px;">';
-                                                        echo '</td>';
-                                                        echo '<td></td>';
-                                                        echo '<td style="text-align: left; ">' . _('battery voltage ok') . '</td>';
-                                                    }
-                                                    else {
-                                                        echo '<td >';
-                                                        echo '<img src="images/icons/battery_fail_42x42.png" alt="" style="padding-top: 10px;">';
-                                                        echo '</td>';
-                                                        echo '<td></td>';
-                                                        echo '<td style="text-align: left; color: red;">' . _('battery voltage low !!') . '</td>';
-                                                    }
-                                                ?>
+                                                // Prüft, ob Batteriespannung vorhanden ist
+                                                $read_gpio_battery = shell_exec('sudo /var/sudowebscript.sh read_gpio_battery');
+                                                if ($read_gpio_battery == 1){
+                                                    echo '<td >';
+                                                    echo '<img src="images/icons/battery_42x42.png" alt="" style="padding-top: 10px;">';
+                                                    echo '</td>';
+                                                    echo '<td></td>';
+                                                    echo '<td style="text-align: left; ">' . _('battery voltage ok') . '</td>';
+                                                }
+                                                else {
+                                                    echo '<td >';
+                                                    echo '<img src="images/icons/battery_fail_42x42.png" alt="" style="padding-top: 10px;">';
+                                                    echo '</td>';
+                                                    echo '<td></td>';
+                                                    echo '<td style="text-align: left; color: red;">' . _('battery voltage low !!') . '</td>';
+                                                }
+                                            ?>
+                                        </tr>
+                                        <tr>
+                                            <td height="20px"></td>
+                                            <td height="20px"></td>
+                                            <td height="20px"></td>
+                                            <td height="20px"><td>
+                                            <td height="20px"></td>
+                                            <td height="20px"></td>
+                                        </tr>
+                                        <tr>
+                                            <?php 
+                                                // Prüft, ob Prozess Reifetab läuft
+                                                $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
+                                                if ($grepagingtable == 0){
+                                                    echo '<td><img src="images/icons/agingtable_42x42.png" alt="" style="padding: 10px;"></td>';
+                                                    echo '<td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
+                                                }
+                                                else {
+                                                    echo '<td><img src="images/icons/agingtable_42x42.gif" alt="" style="padding: 10px;"></td>';
+                                                    echo '<td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>';
+                                                }
+                                            ?>
+                                            <td class="text_left"><?php echo '<b>'.strtoupper(_('agingtable')).':' ?></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text_left_top"><?php echo $maturity_type;?></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     </table>
                                     <hr>
