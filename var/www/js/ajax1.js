@@ -199,13 +199,13 @@ function handleContent() {
             document.getElementById('json_scale1').innerHTML = '-----' + " gr";
         }
         else {
-            document.getElementById('json_scale1').innerHTML = str_gr_scale1 + " &#37";
+            document.getElementById('json_scale1').innerHTML = str_gr_scale1 + " gr";
         }
         if (str_gr_scale2.substring(0,3) == '---' || status_scale2 == 0) {
             document.getElementById('json_scale2').innerHTML = '-----' + " gr";
         }
         else {
-            document.getElementById('json_scale2').innerHTML = str_gr_scale2 + " &#37";
+            document.getElementById('json_scale2').innerHTML = str_gr_scale2 + " gr";
         }
         
         //------------------------ Setzen der Meat Thermometer Werte
