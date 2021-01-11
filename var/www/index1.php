@@ -96,16 +96,27 @@
                                 <div class="hg_container">
                                     <table class="switching_state miniature_writing">
                                         <tr>
+                                            <td width="100px"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td width="100px"></td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td></td>
                                             <td>
                                                 <img src="images/icons/scale_42x42.png" alt="">1
                                             </td>
                                             <td>
                                                 <img src="images/icons/scale_42x42.png" alt="" style="padding-top: 10px;">2
                                             </td>
+                                            <td></td>
                                         </tr>
                                         <tr>
+                                            <td></td>
                                             <td id="json_scale1" style="font-size: 20px;"></td>
                                             <td id="json_scale2" style="font-size: 20px;"></td>
+                                            <td></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -155,7 +166,7 @@
                                             },
                                             {
                                                 label: '<?php echo _("temperature") . ' NTC 1' ?>',
-                                                hidden: true,
+												hidden: true,
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($thermometer1_dataset); ?>,
                                                 backgroundColor: '#F7AC08',
@@ -169,7 +180,7 @@
                                             },
                                             {
                                                 label: '<?php echo _("temperature") . ' NTC 2' ?>',
-                                                hidden: true,
+												hidden: true,
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($thermometer2_dataset); ?>,
                                                 backgroundColor: '#06AF8F',
@@ -183,7 +194,7 @@
                                             },
                                             {
                                                 label: '<?php echo _("temperature") . ' NTC 3' ?>',
-                                                hidden: true,
+												hidden: true,
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($thermometer3_dataset); ?>,
                                                 backgroundColor: '#AF06A1',
@@ -376,19 +387,23 @@
                                                         print $max_value_scale1;
                                                         ?>,
                                                         min: <?php 
-                                                             $scale1_dataset_edited = array();
-                                                             foreach ($scale1_dataset as $scale1_value){
-                                                                if ($scale1_value != Null){
-                                                                    $scale1_dataset_edited[] = $scale1_value;
-                                                                }
-                                                             }
-                                                             if (empty($scale1_dataset_edited)) {
-                                                                    $scale1_dataset_edited[] = Null;
-                                                             }
-                                                             $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
-                                                                
-                                                              print $min_value_scale1;
-                                                        ?>,
+                                                            $scale1_dataset_max = array_filter($scale1_dataset);
+                                                            if (empty($scale1_dataset_max)) {
+                                                                    $scale1_dataset_max[] = Null;
+                                                            }
+                                                            $max_scale1 = max($scale1_dataset_max);
+                                                            $max_value_scale1 = intval($max_scale1 + abs($max_scale1) / 100 * 5) + 1;
+                                                            print $max_value_scale1;
+                                                            ?>,
+                                                            min: <?php 
+                                                            $scale1_dataset_min = array_filter($scale1_dataset);
+                                                            if (empty($scale1_dataset_min)) {
+                                                                    $scale1_dataset_min[] = Null;
+                                                            }
+                                                            $min_scale1 = min($scale1_dataset_min);
+                                                            $min_value_scale1 = intval($min_scale1 - abs($min_scale1) / 100 * 5) - 1;
+                                                            print $min_value_scale1;
+                                                            ?>,
                                                         //stepSize: 1
                                                     }
                                                     
@@ -414,23 +429,23 @@
                                                         beginAtZero: true,
                                                         maxTicksLimit: 10,
                                                         max: <?php 
-                                                        $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;                                                       
-                                                        print $max_value_scale2;
-                                                        ?>,
-                                                        min: <?php 
-                                                             $scale2_dataset_edited = array();
-                                                             foreach ($scale2_dataset as $scale2_value){
-                                                                if ($scale2_value != Null){
-                                                                    $scale2_dataset_edited[] = $scale2_value;
-                                                                }
-                                                             }
-                                                             if (empty($scale2_dataset_edited)) {
-                                                                    $scale2_dataset_edited[] = Null;
-                                                             }
-                                                             $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
-                                                                
-                                                        print $min_value_scale2;
-                                                        ?>,
+                                                            $scale2_dataset_max = array_filter($scale2_dataset);
+                                                            if (empty($scale2_dataset_max)) {
+                                                                    $scale2_dataset_max[] = Null;
+                                                            }
+                                                            $max_scale2 = max($scale2_dataset_max);
+                                                            $max_value_scale2 = intval($max_scale2 + abs($max_scale2) / 100 * 5) + 1;
+                                                            print $max_value_scale2;
+                                                            ?>,
+                                                            min: <?php 
+                                                            $scale2_dataset_min = array_filter($scale2_dataset);
+                                                            if (empty($scale2_dataset_min)) {
+                                                                    $scale2_dataset_min[] = Null;
+                                                            }
+                                                            $min_scale2 = min($scale2_dataset_min);
+                                                            $min_value_scale2 = intval($min_scale2 - abs($min_scale2) / 100 * 5) - 1;
+                                                            print $min_value_scale2;
+                                                            ?>,
                                                         //stepSize: 1
                                                     }
                                                     
@@ -456,21 +471,28 @@
                                     <br>
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td>
+                                            <td width="100px"></td>
+                                            <td width="100px"></td>
+                                            <td class="text_left"></td>
+                                            <td width="100px"><td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
                                                 <?php 
                                                     // Prüft, ob Prozess RSS läuft
                                                     $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
                                                     if ($grepmain == 0){
-                                                        echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;">';
-                                                        echo '<br><img src="images/icons/operatingmode_fail_42x42.png" alt="" style="padding: 10px;">';
+                                                        echo '<td><img src="images/icons/operatingmode_fail_42x42.png" alt="" style="padding: 10px;"></td>';
+                                                        echo '<td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                     }
                                                     elseif ($grepmain != 0 and $status_piager == 0){
-                                                        echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;">';
-                                                        echo '<br><img src="images/icons/operatingmode_42x42.png" alt="" style="padding: 10px;">';
+                                                        echo '<td><img src="images/icons/operatingmode_42x42.png" alt="" style="padding: 10px;"></td>';
+                                                        echo '<td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                     }
                                                     elseif ($grepmain != 0 and $status_piager == 1) {
-                                                        echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;">';
-                                                        echo '<br><img src="images/icons/operating_42x42.gif" alt="" style="padding: 10px;">';
+                                                        echo '<td><img src="images/icons/operating_42x42.gif" alt="" style="padding: 10px;"></td>';
+                                                        echo '<td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                     }
                                                 ?>
                                             </td>
@@ -484,27 +506,74 @@
                                                 elseif($grepmain != 0 and $status_piager == 1){
                                                     echo $modus_name;
                                                 }
-                                                ?></td>
-                                            <td>
+                                                ?>
+                                            </td>
+                                            <?php 
+                                                    // Prüft, ob Prozess spannung vorhanden ist
+                                                    $read_gpio_voltage = shell_exec('sudo /var/sudowebscript.sh read_gpio_voltage');
+                                                    if ($read_gpio_voltage == 1){
+                                                        echo '<td>';
+                                                        echo '<img src="images/icons/5v_42x42.png" alt="" style="padding-top: 10px;">';
+                                                        echo '</td>';
+                                                        echo '<td style="text-align: left; ">' . _('powersuply ok') . '</td>';
+                                                    }
+                                                    else {
+                                                        echo '<td>';
+                                                        echo '<img src="images/icons/5v_fail_42x42.png" alt="" style="padding-top: 10px;">';
+                                                        echo '</td>';
+                                                        echo '<td></td>';
+                                                        echo '<td style="text-align: left; color: red;">' . _('no powersuply! batterymode') . '</td>';
+                                                    }
+                                                ?>
+                                        </tr>
+                                        <tr>
                                                 <?php 
                                                     // Prüft, ob Prozess Reifetab läuft
                                                     $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
                                                     if ($grepagingtable == 0){
-                                                        echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;">';
-                                                        echo '<br><img src="images/icons/agingtable_42x42.png" alt="" style="padding: 10px;">';
+                                                        echo '<td><img src="images/icons/agingtable_42x42.png" alt="" style="padding: 10px;"></td>';
+                                                        echo '<td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                     }
                                                     else {
-                                                        echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;">';
-                                                        echo '<br><img src="images/icons/agingtable_42x42.gif" alt="" style="padding: 10px;">';
+                                                        echo '<td><img src="images/icons/agingtable_42x42.gif" alt="" style="padding: 10px;"></td>';
+                                                        echo '<td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                     }
                                                 ?>
-                                            </td>
                                             <td class="text_left_top"><?php echo '<b>'.strtoupper(_('agingtable')).':</b><br>'.$maturity_type;?></td>
+                                            <?php 
+                                                    // Prüft, ob Batteriespannung vorhanden ist
+                                                    $read_gpio_battery = shell_exec('sudo /var/sudowebscript.sh read_gpio_battery');
+                                                    if ($read_gpio_battery == 1){
+                                                        echo '<td >';
+                                                        echo '<img src="images/icons/battery_42x42.png" alt="" style="padding-top: 10px;">';
+                                                        echo '</td>';
+                                                        echo '<td></td>';
+                                                        echo '<td style="text-align: left; ">' . _('battery voltage ok') . '</td>';
+                                                    }
+                                                    else {
+                                                        echo '<td >';
+                                                        echo '<img src="images/icons/battery_fail_42x42.png" alt="" style="padding-top: 10px;">';
+                                                        echo '</td>';
+                                                        echo '<td></td>';
+                                                        echo '<td style="text-align: left; color: red;">' . _('battery voltage low !!') . '</td>';
+                                                    }
+                                                ?>
                                         </tr>
                                     </table>
                                     <hr>
                                     <table class="switching_state miniature_writing">
                                         <tr>
+                                            <td width="100px"></td>
+                                            <td width="100px"></td>
+                                            <td class="text_left"></td>
+                                            <td width="100px"><td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <img src="images/icons/switch_42x42.png" alt="" style="padding-top: 10px;">
+                                            </td>
                                                 <?php 
                                                     // Prüft, ob Prozess spannung vorhanden ist
                                                     $read_gpio_digital_switch = shell_exec('sudo /var/sudowebscript.sh read_gpio_digital_switch');
@@ -527,55 +596,18 @@
                                         </tr>
                                     </table>
                                     <hr>
-                                    <table class="switching_state miniature_writing">
-                                        <tr>
-                                                <?php 
-                                                    // Prüft, ob Prozess spannung vorhanden ist
-                                                    $read_gpio_voltage = shell_exec('sudo /var/sudowebscript.sh read_gpio_voltage');
-                                                    if ($read_gpio_voltage == 1){
-                                                        echo '<td>';
-                                                        echo '<img src="images/icons/5v_42x42.png" alt="" style="padding-top: 10px;">';
-                                                        echo '</td>';
-                                                        echo '<td style="text-align: left; ">' . _('5V voltage is present') . '</td>';
-                                                    }
-                                                    else {
-                                                        echo '<td>';
-                                                        echo '<img src="images/icons/5v_fail_42x42.png" alt="" style="padding-top: 10px;">';
-                                                        echo '</td>';
-                                                        echo '<td style="text-align: left; color: red;">' . _('5V voltage is not present') . '</td>';
-                                                    }
-                                                ?>
-                                                <?php 
-                                                    // Prüft, ob Batteriespannung vorhanden ist
-                                                    $read_gpio_battery = shell_exec('sudo /var/sudowebscript.sh read_gpio_battery');
-                                                    if ($read_gpio_battery == 1){
-                                                        echo '<td>';
-                                                        echo '<img src="images/icons/battery_42x42.png" alt="" style="padding-top: 10px;">';
-                                                        echo '</td>';
-                                                        echo '<td style="text-align: left; ">' . _('battery voltage ok') . '</td>';
-                                                    }
-                                                    else {
-                                                        echo '<td>';
-                                                        echo '<img src="images/icons/battery_fail_42x42.png" alt="" style="padding-top: 10px;">';
-                                                        echo '</td>';
-                                                        echo '<td style="text-align: left; color: red;">' . _('battery voltage low !!') . '</td>';
-                                                    }
-                                                ?>
-                                        </tr>
-                                    </table>
-                                    <hr>
                                     <hr>
                                     <h2><?php echo _('temperatures'); ?></h2>
                                     <br>
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td><b><?php echo strtoupper(_('type')); ?></b></td>
-                                            <td><b><?php echo strtoupper(_('status')); ?></b></td>
+                                            <td  width="100px"><b><?php echo strtoupper(_('type')); ?></b></td>
+                                            <td  width="100px"><b><?php echo strtoupper(_('status')); ?></b></td>
                                             <td class="text_left">&nbsp;</td>
-                                            <td><b><?php echo strtoupper(_('actual')); ?></b></td>
-                                            <td><b><?php echo strtoupper(_('target')); ?></b></td>
-                                            <td><b><?php echo strtoupper(_('on')); ?></b></td>
-                                            <td><b><?php echo strtoupper(_('off')); ?></b></td>
+                                            <td  width="100px"><b><?php echo strtoupper(_('actual')); ?></b></td>
+                                            <td  width="100px"><b><?php echo strtoupper(_('target')); ?></b></td>
+                                            <td  width="100px"><b><?php echo strtoupper(_('on')); ?></b></td>
+                                            <td  width="100px"><b><?php echo strtoupper(_('off')); ?></b></td>
                                         </tr>
                                         <tr>
                                             <?php 
@@ -671,12 +703,12 @@
                                     <br>
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td><b><?php echo strtoupper(_('type')); ?></b></td>
-                                            <td><b><?php echo strtoupper(_('status')); ?></b></td>
+                                            <td width="100px"><b><?php echo strtoupper(_('type')); ?></b></td>
+                                            <td width="100px"><b><?php echo strtoupper(_('status')); ?></b></td>
                                             <td class="text_left">&nbsp;</td>
-                                            <td><b><?php echo strtoupper(_('period')); ?></b></td>
-                                            <td>&nbsp;</td>
-                                            <td><b><?php echo strtoupper(_('duration')); ?></b></td>
+                                            <td width="100px"><b><?php echo strtoupper(_('period')); ?></b></td>
+                                            <td width="100px">&nbsp;</td>
+                                            <td width="100px"><b><?php echo strtoupper(_('duration')); ?></b></td>
                                         </tr>
                                         <tr>
                                             <td><img <?php if ($circulation_air_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/circulate_42x42.png" alt=""></td>
@@ -779,12 +811,12 @@
                                     <br>
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td><b><?php echo strtoupper(_('type')); ?></b></td>
-                                            <td><b><?php echo strtoupper(_('status')); ?></b></td>
-                                            <td class="text_left">&nbsp;</td>
-                                            <td class="text_left">&nbsp;</td>
-                                            <td>&nbsp;</td>
-                                            <td class="text_left">&nbsp;</td>
+                                            <td width="100px"><b><?php echo strtoupper(_('type')); ?></b></td>
+                                            <td width="100px"><b><?php echo strtoupper(_('status')); ?></b></td>
+                                            <td></td>
+                                            <td width="100px"></td>
+                                            <td width="100px"></td>
+                                            <td width="100px"></td>
                                         </tr>
                                         <tr>
                                             <?php
@@ -792,28 +824,28 @@
                                                 if ($grepscale == 0){
                                                     echo '<td><img src="images/icons/scale_fail_42x42.png" alt=""></td>
                                                             <td><img src="images/icons/status_off_20x20.png" title=""></td>
-                                                            <td>';
+                                                            <td class="text_left">';
                                                     echo strtoupper(_('see settings'));
                                                     echo '</td>';
                                                 }
                                                 elseif ($grepscale != 0 and $status_scale1 == 0){
-                                                    echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
+                                                    echo '<td><img src="images/icons/scale_42x42.png" alt=""></td>
                                                             <td><img src="images/icons/status_off_20x20.png" title=""></td>
-                                                            <td>';
+                                                            <td class="text_left">';
                                                     echo strtoupper(_('scale1'));
                                                     echo '</td>';
                                                 }
                                                 elseif ($grepscale != 0 and $status_scale1 == 1) {
                                                     echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
                                                             <td><img src="images/icons/status_on_20x20.png" title=""></td>
-                                                            <td>';
+                                                            <td  class="text_left">';
                                                     echo strtoupper(_('scale1'));
                                                     echo '</td>';
                                                 }
                                             ?>
-                                            <td class="text_left">&nbsp;</td>
-                                            <td class="text_left">&nbsp;</td>
-                                            <td class="text_left">&nbsp;</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <?php
@@ -824,23 +856,23 @@
                                                             <td></td>';
                                                 }
                                                 elseif ($grepscale != 0 and $status_scale2 == 0){
-                                                    echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
+                                                    echo '<td><img src="images/icons/scale_42x42.png" alt=""></td>
                                                             <td><img src="images/icons/status_off_20x20.png" title=></td>
-                                                            <td>';
+                                                            <td  class="text_left">';
                                                     echo strtoupper(_('scale2'));
                                                     echo '</td>';
                                                 }
                                                 elseif ($grepscale != 0 and $status_scale2 == 1) {
                                                   echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
                                                             <td><img src="images/icons/status_on_20x20.png" title=></td>
-                                                            <td>';
+                                                            <td  class="text_left">';
                                                     echo strtoupper(_('scale2'));
                                                     echo '</td>';
                                                 }
                                             ?>
-                                            <td class="text_left">&nbsp;</td>
-                                            <td class="text_left">&nbsp;</td>
-                                            <td class="text_left">&nbsp;</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     </table>
                                 </div>
