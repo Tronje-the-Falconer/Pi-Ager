@@ -434,19 +434,23 @@
                                                         print $max_value_scale1;
                                                         ?>,
                                                         min: <?php 
-                                                             $scale1_dataset_edited = array();
-                                                             foreach ($scale1_dataset as $scale1_value){
-                                                                if ($scale1_value != Null){
-                                                                    $scale1_dataset_edited[] = $scale1_value;
-                                                                }
-                                                             }
-                                                             if (empty($scale1_dataset_edited)) {
-                                                                    $scale1_dataset_edited[] = Null;
-                                                             }
-                                                             $min_value_scale1 = intval(min($scale1_dataset_edited) - (max($scale1_dataset) / 100 * 5))-1;
-                                                                
-                                                              print $min_value_scale1;
-                                                        ?>,
+                                                            $scale1_dataset_max = array_filter($scale1_dataset);
+                                                            if (empty($scale1_dataset_max)) {
+                                                                    $scale1_dataset_max[] = Null;
+                                                            }
+                                                            $max_scale1 = max($scale1_dataset_max);
+                                                            $max_value_scale1 = intval($max_scale1 + abs($max_scale1) / 100 * 5) + 1;
+                                                            print $max_value_scale1;
+                                                            ?>,
+                                                            min: <?php 
+                                                            $scale1_dataset_min = array_filter($scale1_dataset);
+                                                            if (empty($scale1_dataset_min)) {
+                                                                    $scale1_dataset_min[] = Null;
+                                                            }
+                                                            $min_scale1 = min($scale1_dataset_min);
+                                                            $min_value_scale1 = intval($min_scale1 - abs($min_scale1) / 100 * 5) - 1;
+                                                            print $min_value_scale1;
+                                                            ?>,
                                                         //stepSize: 1
                                                     }
                                                     
@@ -472,23 +476,23 @@
                                                         beginAtZero: true,
                                                         maxTicksLimit: 10,
                                                         max: <?php 
-                                                        $max_value_scale2 = intval(max($scale2_dataset) + (max($scale2_dataset) / 100 * 5))+1;                                                       
-                                                        print $max_value_scale2;
-                                                        ?>,
-                                                        min: <?php 
-                                                             $scale2_dataset_edited = array();
-                                                             foreach ($scale2_dataset as $scale2_value){
-                                                                if ($scale2_value != Null){
-                                                                    $scale2_dataset_edited[] = $scale2_value;
-                                                                }
-                                                             }
-                                                             if (empty($scale2_dataset_edited)) {
-                                                                    $scale2_dataset_edited[] = Null;
-                                                             }
-                                                             $min_value_scale2 = intval(min($scale2_dataset_edited) - (max($scale2_dataset) / 100 * 5))-1;
-                                                                
-                                                        print $min_value_scale2;
-                                                        ?>,
+                                                            $scale2_dataset_max = array_filter($scale2_dataset);
+                                                            if (empty($scale2_dataset_max)) {
+                                                                    $scale2_dataset_max[] = Null;
+                                                            }
+                                                            $max_scale2 = max($scale2_dataset_max);
+                                                            $max_value_scale2 = intval($max_scale2 + abs($max_scale2) / 100 * 5) + 1;
+                                                            print $max_value_scale2;
+                                                            ?>,
+                                                            min: <?php 
+                                                            $scale2_dataset_min = array_filter($scale2_dataset);
+                                                            if (empty($scale2_dataset_min)) {
+                                                                    $scale2_dataset_min[] = Null;
+                                                            }
+                                                            $min_scale2 = min($scale2_dataset_min);
+                                                            $min_value_scale2 = intval($min_scale2 - abs($min_scale2) / 100 * 5) - 1;
+                                                            print $min_value_scale2;
+                                                            ?>,
                                                         //stepSize: 1
                                                     }
                                                     
