@@ -511,7 +511,6 @@
                                                         echo '<td>';
                                                         echo '<img src="images/icons/5v_fail_42x42.png" alt="" style="padding-top: 10px;">';
                                                         echo '</td>';
-                                                        echo '<td></td>';
                                                         echo '<td style="text-align: left; color: red;">' . _('no powersuply! batterymode') . '</td>';
                                                     }
                                                 ?>
@@ -539,14 +538,12 @@
                                                     echo '<td >';
                                                     echo '<img src="images/icons/battery_42x42.png" alt="" style="padding-top: 10px;">';
                                                     echo '</td>';
-                                                    echo '<td></td>';
                                                     echo '<td style="text-align: left; ">' . _('battery voltage ok') . '</td>';
                                                 }
                                                 else {
                                                     echo '<td >';
                                                     echo '<img src="images/icons/battery_fail_42x42.png" alt="" style="padding-top: 10px;">';
                                                     echo '</td>';
-                                                    echo '<td></td>';
                                                     echo '<td style="text-align: left; color: red;">' . _('battery voltage low !!') . '</td>';
                                                 }
                                             ?>
