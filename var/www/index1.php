@@ -478,7 +478,7 @@
                                             <td></td>
                                             <td></td>
                                         </tr>
-                                        </tr>
+                                        <tr>
                                             <?php 
                                                     // Prüft, ob Prozess RSS läuft
                                                     $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
@@ -552,7 +552,7 @@
                                             <td height="20px"></td>
                                             <td height="20px"></td>
                                             <td height="20px"></td>
-                                            <td height="20px"><td>
+                                            <td height="20px"></td>
                                             <td height="20px"></td>
                                             <td height="20px"></td>
                                         </tr>
