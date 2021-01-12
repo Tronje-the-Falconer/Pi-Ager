@@ -85,7 +85,7 @@ class cl_fact_active_main_sensor:
         return(cl_fact_main_sensor.__o_instance)
 
     @classmethod
-    def set_instance(self, i_active_sensor, i_address=None, i_instance):
+    def set_instance(self, i_active_sensor, i_instance, i_address=None,):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_main_sensor.__o_instance = i_instance
               
@@ -108,7 +108,7 @@ class cl_fact_active_second_sensor:
     return(cl_fact_main_sensor.__o_instance)
 
     @classmethod
-    def set_instance(self, i_active_sensor, i_address=None, i_instance):
+    def set_instance(self, i_active_sensor, i_instance, i_address=None):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_second_sensor.__o_instance = i_instance
               
