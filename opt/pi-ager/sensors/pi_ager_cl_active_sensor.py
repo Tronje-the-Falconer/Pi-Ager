@@ -74,12 +74,13 @@ class cl_fact_active_main_sensor:
     @classmethod        
     def get_instance(self, i_address=None):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        
         active_sensor = 'MAIN'
         if cl_fact_active_main_sensor.__o_instance is not None :
         
             return(cl_fact_active_main_sensor.__o_instance)
         try:
-            cl_fact_active_main_sensor.__o_instance = cl_fact_active_main_sensor.get_instance(active_sensor, i_address)
+            cl_fact_active_main_sensor.__o_instance = cl_fact_active_main_sensor.get_instance(cl_fact_active_main_sensor.__o_main_sensor_type, active_sensor, i_address)
  
         except Exception as original_error:
             raise original_error        
@@ -108,7 +109,7 @@ class cl_fact_active_second_sensor:
         
             return(cl_fact_second_sensor.__o_instance)
         try:
-            cl_fact_active_second_sensor.__o_instance = cl_fact_active_second_sensor.get_instance(active_sensor, i_address)
+            cl_fact_active_second_sensor.__o_instance = cl_fact_active_second_sensor.get_instance(cl_fact_active_main_sensor.__o_main_sensor_type, active_sensor, i_address)
         except Exception as original_error:
             raise original_error        
         return(cl_fact_main_sensor.__o_instance)
