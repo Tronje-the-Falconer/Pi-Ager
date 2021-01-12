@@ -36,8 +36,6 @@ class cl_fact_sensor:
         except KeyError:
             pass 
         if  cl_fact_sensor.__o_instance is not None :
-            
-        #    return(cl_fact_sensor.__o_instance)
             return(cl_fact_sensor.__o_instance)
         try:
             if   cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'SHT75':

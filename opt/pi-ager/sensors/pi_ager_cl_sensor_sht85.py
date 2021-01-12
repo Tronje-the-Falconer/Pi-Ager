@@ -80,10 +80,12 @@ class cl_fact_sensor_sht85:
     @classmethod        
     def get_instance(self, i_active_sensor, i_address):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if __ot_instances.pop(i_active_sensor) is not None :
-            
-        #    return(cl_fact_sensor.__o_instance)
-            return(__ot_instances.pop(i_active_sensor))
+        try:
+            cl_fact_sensor_sht85.__o_instance = cl_fact_sensor_sht85.__ot_instances.pop(i_active_sensor)
+        except KeyError:
+            pass 
+        if  cl_fact_sensor_sht85.__o_instance is not None :
+            return(cl_fact_sensor_sht85.__o_instance)
         cl_fact_sensor_sht85.__o_instance = cl_main_sensor_sht85(i_active_sensor, i_address)
         return(cl_fact_sensor_sht85.__o_instance)
 
