@@ -20,11 +20,22 @@ from datetime import datetime
 
 
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
+#from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type, cl_fact_second_sensor_type
 
 from main.pi_ager_cx_exception import *
 
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 from main.pi_ager_cl_database import cl_fact_db_influxdb
+        
+        
+from sensors.pi_ager_cl_sensor_sht75 import cl_fact_sensor_sht75
+from sensors.pi_ager_cl_sensor_sht3x import cl_fact_sensor_sht3x
+from sensors.pi_ager_cl_sensor_sht85 import cl_fact_sensor_sht85
+from sensors.pi_ager_cl_sensor_dht11 import cl_fact_sensor_dht11
+from sensors.pi_ager_cl_sensor_dht22 import cl_fact_sensor_dht22        
+        
+        
+        
         
 class cl_sensor(cl_ab_sensor):
     
