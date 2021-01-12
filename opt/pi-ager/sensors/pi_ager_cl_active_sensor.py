@@ -27,18 +27,18 @@ from main.pi_ager_cx_exception import *
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 from main.pi_ager_cl_database import cl_fact_db_influxdb
         
-class cl_active_main_sensor(self, i_active_sensor, i_address):
+class cl_active_main_sensor():
     
-    def __init__(self, o_sensor_type):
+    def __init__(self, o_sensor_type, i_active_sensor, i_address):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.o_sensor_type = o_sensor_type
         self.o_sensor = cl_fact_sensor().get_instance(i_active_sensor, i_address)
     def execute(self):
         self_o_sensor.execute()
 
-class cl_active_second_sensor(self, i_active_sensor, i_address):
+class cl_active_second_sensor():
     
-    def __init__(self, o_sensor_type):
+    def __init__(self, o_sensor_type, i_active_sensor, i_address):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.o_sensor_type = o_sensor_type
         self.o_sensor = cl_fact_sensor().get_instance(i_active_sensor, i_address)
