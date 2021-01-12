@@ -101,7 +101,7 @@ class cl_fact_active_main_sensor:
         pass    
 class cl_fact_active_second_sensor:
 #    Only a singleton instance for main_sensor
-    __o_main_sensor_type = cl_fact_main_sensor_type().get_instance()
+    __o_main_sensor_type = cl_fact_second_sensor_type().get_instance()
     __o_instance = None
     
     @classmethod        
@@ -112,7 +112,7 @@ class cl_fact_active_second_sensor:
         
             return(cl_fact_second_sensor.__o_instance)
         try:
-            cl_fact_active_second_sensor.__o_instance = cl_active_second_sensor(cl_fact_active_main_sensor.__o_main_sensor_type, active_sensor, i_address)
+            cl_fact_active_second_sensor.__o_instance = cl_active_second_sensor(cl_fact_active_second_sensor.__o_main_sensor_type, active_sensor, i_address)
         except Exception as original_error:
             raise original_error        
         return(cl_fact_main_sensor.__o_instance)
