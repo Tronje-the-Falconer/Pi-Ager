@@ -9,116 +9,163 @@
                                       include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
                                       include 'modules/read_current_db.php';                    // Liest die gemessenen Werte Temp, Humy, Timestamp
                                 ?>
-                                <h2 class="art-postheader"><?php echo _('mainsensors'); ?></h2>
+                                <h2 class="art-postheader"><?php echo _('current values'); ?></h2>
                         <!--        <div style="float: left; padding-left: 8px;" id="timestamp"></div>
                                 <div style="float: left; padding-left: 8px;" id="json_timestamp"></div>
                                 <div style="float: left; padding-left: 8px;" id="time_difference"></div>
                         -->
                                 <!----------------------------------------------------------------------------------------Anzeige T/rLF-->
-                                <div class="hg_container">
-                                    <table class="switching_state miniature_writing">
-                                        <tr>
-                                            <td>
-                                                <img src="images/icons/temperature.png" alt="" style="padding-top: 10px;">
-                                            </td>
-                                            <td>
-                                                <img src="images/icons/humidity.png" alt="" style="padding-top: 10px;">
-                                            </td>
-                                            <td>
-                                                <img src="images/icons/dew_point.png" alt="" style="padding-top: 10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td id="json_temperature_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #ff0000;"></td>
-                                            <td id="json_humidity_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #0066FF;"></td>
-                                            <td id="json_dewpoint_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #00cc66;"></td>
-                                        </tr>
-									</table>
-                                    <hr>
-                                    <table class="switching_state miniature_writing">
-                                        <tr>
-                                            <td>
-                                                <img src="images/icons/temperature_extern_42x42.png" alt="" style="padding-top: 10px;">
-                                            </td>
-                                            <td>
-                                                <img src="images/icons/humidity_extern_42x42.png" alt="" style="padding-top: 10px;">
-                                            </td>
-                                            <td>
-                                                <img src="images/icons/dew_point_extern_42x42.png" alt="" style="padding-top: 10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td id="json_temperature_extern" style="text-align: center; font-size: 20px;"></td>
-                                            <td id="json_humidity_extern" style="text-align: center; font-size: 20px;"></td>
-                                            <td id="json_dewpoint_extern" style="text-align: center; font-size: 20px;"></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                                <hr>
+
+
+                                <div class="thermometers">
+                                    <div class="th-display-div">
+                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'; ?></div><div style="float: center; padding-left: 8px;" id="temperature_values_old"></div></td></tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="de">
+                                                        <div class="den">
+                                                            <div class="dene">
+                                                                <div class="denem">
+                                                                    <div class="deneme">
+                                                                        <div style="float: left; padding-left: 8px;" id="current_json_temperature_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_temperature_1"></div></span><strong>&deg;C</strong>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="th-display-div">
+                                        <table><tr><td><div class="label"><?php echo '<img src="images/icons/humidity_42x42.png" alt="" style="padding-top: 10px;">'; ?></div><div style="float: center; padding-left: 8px;" id="humidity_values_old"></div></td></tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="de">
+                                                        <div class="den">
+                                                            <div class="dene">
+                                                                <div class="denem">
+                                                                    <div class="deneme">
+                                                                        <div style="float: left; padding-left: 8px;" id="current_json_humidity_0"></div><span>.<div style="float: right; padding-top: 37px;" id="current_json_humidity_1"></div></span><strong>&#37 </strong>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                     <!------------------------------ ----------------------------------------------------------Anzeige meat thermometers-->
-                                <h2 class="art-postheader"><?php echo _('ntc sensors'); ?></h2>
-                                <div class="hg_container">
-                                    <table class="switching_state miniature_writing">
-                                        <tr>
-                                            <td>
-                                                <img src="images/icons/temperature_42x42.png" alt="">&thetasym; 1
-                                            </td>
-                                            <td>
-                                                <img src="images/icons/temperature_42x42.png" alt="">&thetasym; 2
-                                            </td>
-                                            <td>
-                                                <img src="images/icons/temperature_42x42.png" alt="">&thetasym; 3
-                                            </td>
-                                        <tr>
-                                            <td id="json_meat_temperature1" style="font-size: 20px;">
-                                            </td>
-                                            <td id="json_meat_temperature2" style="font-size: 20px;">
-                                            </td>
-                                            <td id="json_meat_temperature3" style="font-size: 20px;">
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <hr>
-                                    <table class="switching_state miniature_writing">
-                                        <tr>
-                                            <td>
-                                                <img src="images/icons/voltage_42x42.png" alt="">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td id="json_meat_temperature4" style="font-size: 20px;"></td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            <hr>
-                            <!------------------------------ ----------------------------------------------------------Anzeige Scales-->
-                            <h2 class="art-postheader"><?php echo _('scales'); ?></h2>
-                                <div class="hg_container">
-                                    <table class="switching_state miniature_writing">
-                                        <tr>
-                                            <td width="100px"></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td width="100px"></td>
-                                            
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>
-                                                <img src="images/icons/scale_42x42.png" alt="">1
-                                            </td>
-                                            <td>
-                                                <img src="images/icons/scale_42x42.png" alt="" style="padding-top: 10px;">2
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td id="json_scale1" style="font-size: 20px;"></td>
-                                            <td id="json_scale2" style="font-size: 20px;"></td>
-                                            <td></td>
-                                        </tr>
-                                    </table>
+                                    <div class="th-display-div">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="label">
+                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-NTC').' 1'; ?>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="denemescale">
+                                                        <div style="padding-left: 8px;" id="json_meat_temperature1"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>                                    
+                                     <div class="th-display-div">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="label">
+                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-NTC').' 2'; ?>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="denemescale">
+                                                        <div style="padding-left: 8px;" id="json_meat_temperature2"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="th-display-div">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="label">
+                                                        <?php echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-NTC').' 3'; ?>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="denemescale">
+                                                        <div style="padding-left: 8px;" id="json_meat_temperature3"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="th-display-div">
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <div class="label">
+                                                        <?php
+                                                        $meatsensortype = get_table_value($config_settings_table, $meat4_sensortype_key);
+                                                        $row = get_meatsensor_table_row( $meatsensortype );
+                                                        if (strncmp($row['name'], 'LEM', 3) === 0)
+                                                        {
+                                                           echo '<img src="images/icons/voltage_42x42.png" alt="" style="padding-top: 10px;">'.'I-Sensor'.' 4';
+                                                        }
+                                                        else {
+                                                           echo '<img src="images/icons/temperature_42x42.png" alt="" style="padding-top: 10px;">'._('&thetasym;-NTC').' 4';
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="denemescale">
+                                                        <div style="padding-left: 8px;" id="json_meat_temperature4"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>                                                                        
+                                    <!------------------------------ ----------------------------------------------------------Anzeige Scales-->
+                                    <div class="th-display-div">
+                                        <table><tr><td><div class="label" id="scale1_icon">
+                                            <?php echo '<img src="images/icons/scale_42x42.png" alt="" style="padding-top: 10px;">'.'1'; ?></div>
+                                            <div style="float: center; padding-left: 8px;" id="scale1_values_old"></div></td></tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="denemescale">
+                                                        <div style="padding-left: 8px;" id="scale_json_scale1"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="th-display-div">
+                                        <table><tr><td><div class="label" id="scale2_icon">
+                                            <?php echo '<img src="images/icons/scale_42x42.png" alt="" style="padding-top: 10px;">'.'2'; ?></div>
+                                            <div style="float: center; padding-left: 8px;" id="scale2_values_old"></div></td></tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="denemescale">
+                                                        <div style="padding-left: 8px;" id="scale_json_scale2"></div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
                                 </div>
                                 <!------------------------------ ----------------------------------------------------------T/rLF Diagramm-->
                                 <?php
@@ -467,59 +514,27 @@
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <h2 class="art-postheader"><?php echo _('statusboard'); ?></h2>
                                 <div class="hg_container">
-                                    <h2><?php echo _('general'); ?></h2>
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td width="100px"></td>
-                                            <td width="100px"></td>
-                                            <td class="text_left"></td>
-                                            <td width="100px"><td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <?php 
+                                            <td>
+                                                <?php 
                                                     // Prüft, ob Prozess RSS läuft
                                                     $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
                                                     if ($grepmain == 0){
-                                                        echo '<td><img src="images/icons/operatingmode_fail_42x42.png" alt="" style="padding: 10px;"></td>';
-                                                        echo '<td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
+                                                        echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;">';
+                                                        echo '<br><img src="images/icons/operatingmode_fail_42x42.png" alt="" style="padding: 10px;">';
                                                     }
                                                     elseif ($grepmain != 0 and $status_piager == 0){
-                                                        echo '<td><img src="images/icons/operatingmode_42x42.png" alt="" style="padding: 10px;"></td>';
-                                                        echo '<td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
+                                                        echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;">';
+                                                        echo '<br><img src="images/icons/operatingmode_42x42.png" alt="" style="padding: 10px;">';
                                                     }
                                                     elseif ($grepmain != 0 and $status_piager == 1) {
-                                                        echo '<td><img src="images/icons/operating_42x42.gif" alt="" style="padding: 10px;"></td>';
-                                                        echo '<td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>';
+                                                        echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;">';
+                                                        echo '<br><img src="images/icons/operating_42x42.gif" alt="" style="padding: 10px;">';
                                                     }
                                                 ?>
-                                            <td class="text_left">
-                                                <?php echo '<b>'.strtoupper(_('operating mode')); ?>
                                             </td>
-                                            <?php 
-                                                    // Prüft, ob Prozess spannung vorhanden ist
-                                                    $read_gpio_voltage = shell_exec('sudo /var/sudowebscript.sh read_gpio_voltage');
-                                                    if ($read_gpio_voltage == 1){
-                                                        echo '<td>';
-                                                        echo '<img src="images/icons/5v_42x42.png" alt="" style="padding-top: 10px;">';
-                                                        echo '</td>';
-                                                        echo '<td style="text-align: left; ">' . _('powersuply ok') . '</td>';
-                                                    }
-                                                    else {
-                                                        echo '<td>';
-                                                        echo '<img src="images/icons/5v_fail_42x42.png" alt="" style="padding-top: 10px;">';
-                                                        echo '</td>';
-                                                        echo '<td style="text-align: left; color: red;">' . _('no powersuply! batterymode') . '</td>';
-                                                    }
-                                                ?>
-                                                <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>   
-                                            <td></td>
-                                            <td class="text_left_top">
-                                                <?php
+                                            <td class="text_left_top"><?php echo '<b>'.strtoupper(_('operating mode')).':</b><br>';
                                                 if ($grepmain == 0){
                                                     echo strtoupper(("see settings"));
                                                 }
@@ -529,109 +544,34 @@
                                                 elseif($grepmain != 0 and $status_piager == 1){
                                                     echo $modus_name;
                                                 }
-                                                ?>
-                                            </td>
-                                            <?php 
-                                                // Prüft, ob Batteriespannung vorhanden ist
-                                                $read_gpio_battery = shell_exec('sudo /var/sudowebscript.sh read_gpio_battery');
-                                                if ($read_gpio_battery == 1){
-                                                    echo '<td>';
-                                                    echo '<img src="images/icons/battery_42x42.png" alt="" style="padding-top: 10px;">';
-                                                    echo '</td>';
-                                                    echo '<td style="text-align: left; ">' . _('battery voltage ok') . '</td>';
-                                                }
-                                                else {
-                                                    echo '<td>';
-                                                    echo '<img src="images/icons/battery_fail_42x42.png" alt="" style="padding-top: 10px;">';
-                                                    echo '</td>';
-                                                    echo '<td style="text-align: left; color: red;">' . _('battery voltage low !!') . '</td>';
-                                                }
-                                            ?>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td height="20px"></td>
-                                            <td height="20px"></td>
-                                            <td height="20px"></td>
-                                            <td height="20px"></td>
-                                            <td height="20px"></td>
-                                            <td height="20px"></td>
-                                        </tr>
-                                        <tr>
-                                            <?php 
-                                                // Prüft, ob Prozess Reifetab läuft
-                                                $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
-                                                if ($grepagingtable == 0){
-                                                    echo '<td><img src="images/icons/agingtable_42x42.png" alt="" style="padding: 10px;"></td>';
-                                                    echo '<td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
-                                                }
-                                                else {
-                                                    echo '<td><img src="images/icons/agingtable_42x42.gif" alt="" style="padding: 10px;"></td>';
-                                                    echo '<td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>';
-                                                }
-                                            ?>
-                                            <td class="text_left"><?php echo '<b>'.strtoupper(_('agingtable')).':' ?></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="text_left_top"><?php echo $maturity_type;?></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    </table>
-                                    <hr>
-                                    <table class="switching_state miniature_writing">
-                                        <tr>
-                                            <td width="100px"></td>
-                                            <td width="100px"></td>
-                                            <td class="text_left"></td>
-                                            <td width="100px"><td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                        <tr>
+                                                ?></td>
                                             <td>
-                                                <img src="images/icons/switch_42x42.png" alt="" style="padding-top: 10px;">
-                                            </td>
                                                 <?php 
-                                                    // Prüft, ob Prozess spannung vorhanden ist
-                                                    $read_gpio_digital_switch = shell_exec('sudo /var/sudowebscript.sh read_gpio_digital_switch');
-                                                    if ($read_gpio_digital_switch == 0){
-                                                        echo '<td>';
-                                                        echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;">';
-                                                        echo '</td>';
-                                                        echo '<td style="text-align: left; ">' . _('Switch is on') . '</td>';
+                                                    // Prüft, ob Prozess Reifetab läuft
+                                                    $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
+                                                    if ($grepagingtable == 0){
+                                                        echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;">';
+                                                        echo '<br><img src="images/icons/agingtable_42x42.png" alt="" style="padding: 10px;">';
                                                     }
                                                     else {
-                                                        echo '<td>';
-                                                        echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;">';
-                                                        echo '</td>';
-                                                        echo '<td style="text-align: left;">' . _('Switch is off') . '</td>';
+                                                        echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;">';
+                                                        echo '<br><img src="images/icons/agingtable_42x42.gif" alt="" style="padding: 10px;">';
                                                     }
                                                 ?>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            </td>
+                                            <td class="text_left_top"><?php echo '<b>'.strtoupper(_('agingtable')).':</b><br>'.$maturity_type;?></td>
                                         </tr>
                                     </table>
                                     <hr>
-                                    <hr>
-                                    <h2><?php echo _('temperatures'); ?></h2>
-                                    <br>
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td  width="100px"><b><?php echo strtoupper(_('type')); ?></b></td>
-                                            <td  width="100px"><b><?php echo strtoupper(_('status')); ?></b></td>
+                                            <td><b><?php echo strtoupper(_('type')); ?></b></td>
+                                            <td><b><?php echo strtoupper(_('status')); ?></b></td>
                                             <td class="text_left">&nbsp;</td>
-                                            <td  width="100px"><b><?php echo strtoupper(_('actual')); ?></b></td>
-                                            <td  width="100px"><b><?php echo strtoupper(_('target')); ?></b></td>
-                                            <td  width="100px"><b><?php echo strtoupper(_('on')); ?></b></td>
-                                            <td  width="100px"><b><?php echo strtoupper(_('off')); ?></b></td>
+                                            <td><b><?php echo strtoupper(_('actual')); ?></b></td>
+                                            <td><b><?php echo strtoupper(_('target')); ?></b></td>
+                                            <td><b><?php echo strtoupper(_('on')); ?></b></td>
+                                            <td><b><?php echo strtoupper(_('off')); ?></b></td>
                                         </tr>
                                         <tr>
                                             <?php 
@@ -723,16 +663,14 @@
                                        </tr>
                                     </table>
                                     <hr>
-                                    <h2><?php echo _('timer'); ?></h2>
-                                    <br>
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td width="100px"><b><?php echo strtoupper(_('type')); ?></b></td>
-                                            <td width="100px"><b><?php echo strtoupper(_('status')); ?></b></td>
+                                            <td><b><?php echo strtoupper(_('type')); ?></b></td>
+                                            <td><b><?php echo strtoupper(_('status')); ?></b></td>
                                             <td class="text_left">&nbsp;</td>
-                                            <td width="100px"></td>
-                                            <td width="100px"><b><?php echo strtoupper(_('period')); ?></b></td>
-                                            <td width="100px"><b><?php echo strtoupper(_('duration')); ?></b></td>
+                                            <td><b><?php echo strtoupper(_('period')); ?></b></td>
+                                            <td>&nbsp;</td>
+                                            <td><b><?php echo strtoupper(_('duration')); ?></b></td>
                                         </tr>
                                         <tr>
                                             <td><img <?php if ($circulation_air_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/circulate_42x42.png" alt=""></td>
@@ -744,10 +682,13 @@
                                                 elseif ($circulation_air_period == 0) {echo  ' '. strtoupper(_('always on'));}
                                                 elseif ($circulation_air_duration == 0) {echo ', '. strtoupper(_('timer off'));}
                                             ?></td>
-                                            <td></td>
                                             <td><?php echo $circulation_air_period.' '._('minutes'); ?></td>
+                                            <td></td>
                                             <td><?php echo $circulation_air_duration.' '._('minutes'); ?></td>
                                         </tr>
+
+
+
                                         <tr>
                                             <td><img <?php if ($exhaust_air_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/exhausting_42x42.png" alt=""></td>
                                             <td><img src="<?php echo $exhausting_on_off_png ;?>" title="PIN_FAN 23[16] -> IN 4 (PIN 5)"></td>
@@ -758,10 +699,13 @@
                                                 elseif ($exhaust_air_period == 0) {echo  ' '. strtoupper(_('always on'));}
                                                 elseif ($exhaust_air_duration == 0) {echo ', '. strtoupper(_('timer off'));}
                                             ?></td>
-                                            <td></td>
                                             <td><?php echo $exhaust_air_period.' '._('minutes'); ?></td>
+                                            <td></td>
                                             <td><?php echo $exhaust_air_duration.' '._('minutes'); ?></td>
                                         </tr>
+
+
+
                                         <tr>
                                             <td><img <?php if ($uv_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/uv-light_42x42.png" alt=""></td>
                                             <td><?php
@@ -785,9 +729,10 @@
                                                 elseif ($uv_period == 0) {echo ' '.strtoupper(_('always on'));}
                                                 elseif ($uv_duration == 0) {echo ', '.strtoupper(_('timer inactive'));}
                                                 */
+
                                             ?></td>
-                                           	<td></td>
                                            	<td><?php echo $uv_period.' '._('minutes'); ?></td>
+                                           	<td></td>
                                            	<td><?php echo $uv_duration.' '._('minutes'); ?></td>
                                            
                                         </tr>
@@ -817,23 +762,21 @@
                                                 */
                                             
                                                 ?></td>
-                                                <td></td>
                                                 <td><?php echo $light_period.' '._('minutes'); ?></td>
-                                                <td><?php echo $light_duration.' '._('minutes'); ?></td>
+                                            	<td></td>
+                                            	<td><?php echo $light_duration.' '._('minutes'); ?></td>
                                             
                                         </tr>
                                     </table>
                                     <hr>
-                                    <h2><?php echo _('scales'); ?></h2>
-                                    <br>
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td width="100px"><b><?php echo strtoupper(_('type')); ?></b></td>
-                                            <td width="100px"><b><?php echo strtoupper(_('status')); ?></b></td>
-                                            <td></td>
-                                            <td width="100px"></td>
-                                            <td width="100px"></td>
-                                            <td width="100px"></td>
+                                            <td><b><?php echo strtoupper(_('type')); ?></b></td>
+                                            <td><b><?php echo strtoupper(_('status')); ?></b></td>
+                                            <td class="text_left">&nbsp;</td>
+                                            <td class="text_left">&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td class="text_left">&nbsp;</td>
                                         </tr>
                                         <tr>
                                             <?php
@@ -841,28 +784,28 @@
                                                 if ($grepscale == 0){
                                                     echo '<td><img src="images/icons/scale_fail_42x42.png" alt=""></td>
                                                             <td><img src="images/icons/status_off_20x20.png" title=""></td>
-                                                            <td class="text_left">';
+                                                            <td>';
                                                     echo strtoupper(_('see settings'));
                                                     echo '</td>';
                                                 }
                                                 elseif ($grepscale != 0 and $status_scale1 == 0){
-                                                    echo '<td><img src="images/icons/scale_42x42.png" alt=""></td>
+                                                    echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
                                                             <td><img src="images/icons/status_off_20x20.png" title=""></td>
-                                                            <td class="text_left">';
+                                                            <td>';
                                                     echo strtoupper(_('scale1'));
                                                     echo '</td>';
                                                 }
                                                 elseif ($grepscale != 0 and $status_scale1 == 1) {
                                                     echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
                                                             <td><img src="images/icons/status_on_20x20.png" title=""></td>
-                                                            <td  class="text_left">';
+                                                            <td>';
                                                     echo strtoupper(_('scale1'));
                                                     echo '</td>';
                                                 }
                                             ?>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td class="text_left">&nbsp;</td>
+                                            <td class="text_left">&nbsp;</td>
+                                            <td class="text_left">&nbsp;</td>
                                         </tr>
                                         <tr>
                                             <?php
@@ -873,23 +816,23 @@
                                                             <td></td>';
                                                 }
                                                 elseif ($grepscale != 0 and $status_scale2 == 0){
-                                                    echo '<td><img src="images/icons/scale_42x42.png" alt=""></td>
+                                                    echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
                                                             <td><img src="images/icons/status_off_20x20.png" title=></td>
-                                                            <td  class="text_left">';
+                                                            <td>';
                                                     echo strtoupper(_('scale2'));
                                                     echo '</td>';
                                                 }
                                                 elseif ($grepscale != 0 and $status_scale2 == 1) {
                                                   echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
                                                             <td><img src="images/icons/status_on_20x20.png" title=></td>
-                                                            <td  class="text_left">';
+                                                            <td>';
                                                     echo strtoupper(_('scale2'));
                                                     echo '</td>';
                                                 }
                                             ?>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td class="text_left">&nbsp;</td>
+                                            <td class="text_left">&nbsp;</td>
+                                            <td class="text_left">&nbsp;</td>
                                         </tr>
                                     </table>
                                 </div>
