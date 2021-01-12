@@ -44,8 +44,9 @@ class cl_active_second_sensor():
         self.o_sensor_type = o_sensor_type
         self.o_sensor = cl_fact_sensor().get_instance(i_active_sensor, i_address)
     def execute(self):
-        self_o_sensor.execute()
-
+        self.o_sensor.execute()
+    def get_current_data(self):
+        self.o_sensor.get_current_data()
        
 class th_active_sensor():
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
