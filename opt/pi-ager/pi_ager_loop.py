@@ -25,7 +25,7 @@ from main.pi_ager_cx_exception import (cx_i2c_sht_temperature_crc_error, cx_i2c_
 from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type, cl_fact_second_sensor_type
-from sensors.pi_ager_cl_sensor_fact import cl_fact_main_sensor, cl_fact_second_sensor
+from sensors.pi_ager_cl_active_sensor import cl_fact_active_main_sensor, cl_fact_active_second_sensor
 from sensors.pi_ager_cl_i2c_bus import  cl_fact_i2c_bus_logic
 
 from main.pi_ager_cl_logger import cl_fact_logger
@@ -85,7 +85,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     try:
         if sensorname == 'DHT11' or sensorname == 'DHT22' or sensorname == 'AM2302' or sensorname == 'SHT75':
             try:
-                main_sensor =  cl_fact_main_sensor().get_instance()
+                main_sensor =  cl_fact_active_main_sensor().get_instance()
                 main_sensor.execute()
                 measured_data = main_sensor.get_current_data()
                 (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
@@ -98,7 +98,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
         elif sensorname == 'SHT3x' or sensorname == 'SHT85': #SH3x
             try:
                 i2c_address_main_sensor = 0x44 #0x45
-                main_sensor =  cl_fact_main_sensor().get_instance(i_address = i2c_address_main_sensor)
+                main_sensor =  cl_fact_active_main_sensor().get_instance(i_address = i2c_address_main_sensor)
                 main_sensor.execute()
                 measured_data = main_sensor.get_current_data()
                 (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
@@ -122,10 +122,10 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             cl_fact_logger.get_instance().debug('Second sensor is: ' + str(second_sensorname))    
                                                                                                                 
             if second_sensorname == 'SHT3x' or sensorname == 'SHT85':
-            #if 1 == 2:
+              if 1 == 2:
                 try:
                     i2c_address_second_sensor = 0x45
-                    second_sensor =  cl_fact_second_sensor().get_instance(i_address = i2c_address_second_sensor)
+                    second_sensor =  cl_fact_active_second_sensor().get_instance(i_address = i2c_address_second_sensor)
                     second_sensor.execute()
                     measured_second_data = second_sensor.get_current_data()
                     (second_sensor_temperature_big, second_sensor_humidity_big, second_sensor_dewpoint_big) = measured_second_data

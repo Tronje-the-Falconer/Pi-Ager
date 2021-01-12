@@ -32,7 +32,7 @@ from sensors.pi_ager_cl_sensor_sht import cl_main_sensor_sht
 class cl_main_sensor_sht85(cl_main_sensor_sht):
     
     
-    def __init__(self, i_address):
+    def __init__(self, i_active_sensor, i_address):
         # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
@@ -76,17 +76,19 @@ class cl_fact_sensor_sht85:
 #    Only a singleton instance for main_sensor
     __o_sensor_type = fact_main_sensor_type.get_instance()
     __o_instance = None
-
+    __ot_instances = {}
     @classmethod        
-    def get_instance(self, i_address):
+    def get_instance(self, i_active_sensor, i_address):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if cl_fact_sensor_sht85.__o_instance is not None:
-            return(cl_fact_sensor_sht85.__o_instance)
-        cl_fact_sensor_sht85.__o_instance = cl_main_sensor_sht85(i_address)
+        if __ot_instances.pop(i_active_sensor) is not None :
+            
+        #    return(cl_fact_sensor.__o_instance)
+            return(__ot_instances.pop(i_active_sensor))
+        cl_fact_sensor_sht85.__o_instance = cl_main_sensor_sht85(i_active_sensor, i_address)
         return(cl_fact_sensor_sht85.__o_instance)
 
     @classmethod
-    def set_instance(self, i_instance):
+    def set_instance(self, i_active_sensor, i_instance):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_sensor_sht85.__o_instance = i_instance
     

@@ -26,7 +26,7 @@ from main.pi_ager_cx_exception import *
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 from main.pi_ager_cl_database import cl_fact_db_influxdb
         
-class cl_main_sensor(cl_ab_sensor):
+class cl_sensor(cl_ab_sensor):
     
     def __init__(self, o_sensor_type):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
@@ -177,7 +177,7 @@ class cl_main_sensor(cl_ab_sensor):
         pass
 
        
-class th_main_sensor():
+class th_sensor():
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
     NAME = 'Main_sensor'
     
@@ -192,6 +192,43 @@ class th_main_sensor():
             raise cx_Sensor_not_defined(self._type_ui)        
         return(self._type)
 
+class cl_fact_sensor:
     
+#    Only a singleton instance for main_sensor
+    __o_sensor_type = cl_fact_main_sensor_type().get_instance()
+    __o_instance = None
+    __ot_instances = {}
+    @classmethod        
+    def get_instance(self, i_active_sensor, i_address=None):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        if __ot_instances.pop(i_active_sensor) is not None :
+            
+        #    return(cl_fact_sensor.__o_instance)
+            return(__ot_instances.pop(i_active_sensor))
+        try:
+            if   cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'SHT75':
+                cl_fact_sensor.__o_instance = cl_fact_sensor_sht75.get_instance()
+            elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'SHT3x':
+                cl_fact_sensor.__o_instance = cl_fact_sensor_sht3x.get_instance(i_address)
+            elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'SHT85':
+                cl_fact_sensor.__o_instance = cl_fact_sensor_sht85.get_instance(i_address)
+            elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'DHT22':
+                cl_fact_sensor.__o_instance = cl_fact_sensor_dht22.get_instance()
+            elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'DHT11':
+                cl_fact_sensor.__o_instance = cl_fact_sensor_dht11.get_instance()
+            __ot_instances.update(i_active_sensor, cl_fact_sensor.__o_instance)    
+                
+        except Exception as original_error:
+            raise original_error        
+        return(cl_fact_main_sensor.__o_instance)
 
-
+    @classmethod
+    def set_instance(self, i_instance):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_sensor.__o_instance = i_instance
+              
+    
+    def __init__(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        
+        pass    

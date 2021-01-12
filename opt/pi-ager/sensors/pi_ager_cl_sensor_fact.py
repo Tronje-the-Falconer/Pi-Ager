@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-
-"""This class is for handling the main sensor(s) for the Pi-Ager."""
+"""
 
 __author__ = "Claus Fischer"
 __copyright__ = "Copyright 2019, The Pi-Ager Project"
@@ -93,3 +92,4 @@ class cl_fact_second_sensor:
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         pass    
+"""
