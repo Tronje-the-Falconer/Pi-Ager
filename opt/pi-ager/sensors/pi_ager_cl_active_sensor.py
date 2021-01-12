@@ -37,7 +37,7 @@ class cl_active_main_sensor():
     def execute(self):
         self.o_sensor.execute()
     def get_current_data(self):
-        self.o_sensor.get_current_data()
+        return( self.o_sensor.get_current_data() )
         
 class cl_active_second_sensor():
     
@@ -48,7 +48,7 @@ class cl_active_second_sensor():
     def execute(self):
         self.o_sensor.execute()
     def get_current_data(self):
-        self.o_sensor.get_current_data()
+        return( self.o_sensor.get_current_data() )
        
 class th_active_sensor():
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
