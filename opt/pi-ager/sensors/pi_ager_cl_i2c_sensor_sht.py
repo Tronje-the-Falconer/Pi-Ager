@@ -112,7 +112,7 @@ class cl_fact_i2c_sensor_sht(ABC):
             return(cl_fact_i2c_sensor_sht.__o_instance)
         
         cl_fact_i2c_sensor_sht.__o_instance = cl_i2c_sensor_sht(i_active_sensor, i_i2c_bus, i_address)
-        cl_fact_logger.get_instance().debug("__ot_instance " + str(cl_facti2c_sensor_sht.__o_instance) + " created for " + i_active_sensor)
+        cl_fact_logger.get_instance().debug("__ot_instance " + str(cl_fact_i2c_sensor_sht.__o_instance) + " created for " + i_active_sensor)
         line = {i_active_sensor:cl_fact_i2c_sensor_sht.__o_instance}
         cl_fact_i2c_sensor_sht.__ot_instances.update(line)   
         cl_fact_logger.get_instance().debug("__ot_instances = " + str(cl_fact_i2c_sensor_sht.__ot_instances))
