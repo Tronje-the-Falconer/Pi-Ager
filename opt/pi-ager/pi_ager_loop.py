@@ -122,7 +122,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             cl_fact_logger.get_instance().debug('Second sensor is: ' + str(second_sensorname))    
                                                                                                                 
             if second_sensorname == 'SHT3x' or sensorname == 'SHT85':
-            #  if 1 == 2:
+              if 1 == 2:
                 try:
                     i2c_address_second_sensor = 0x45
                     second_sensor =  cl_fact_active_second_sensor().get_instance(i_address = i2c_address_second_sensor)
