@@ -35,7 +35,7 @@ class cl_active_main_sensor():
         self.o_sensor_type = o_sensor_type
         self.o_sensor = cl_fact_sensor().get_instance(i_active_sensor, i_address)
     def execute(self):
-        self_o_sensor.execute()
+        self.o_sensor.execute()
 
 class cl_active_second_sensor():
     
