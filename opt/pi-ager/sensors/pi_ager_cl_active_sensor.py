@@ -81,7 +81,7 @@ class cl_fact_active_main_sensor:
         try:
             cl_fact_active_main_sensor.__o_instance = cl_fact_active_main_sensor.get_instance(active_sensor, i_address)
  
-        except Exception as original_error:cl_fact_sensor
+        except Exception as original_error:
             raise original_error        
         return(cl_fact_active_main_sensor.__o_instance)
 
