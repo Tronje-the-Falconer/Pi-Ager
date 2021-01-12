@@ -622,7 +622,7 @@ ul.art-hmenu, ul.art-hmenu ul
 
 ul.art-hmenu 
 {
-   display: block;
+   display: inline-block;
    vertical-align: bottom;
    padding-left: 19px;
    padding-right: 19px;
@@ -640,7 +640,7 @@ nav.art-nav
 }
 
 .art-nav-inner{
-   text-align: right;
+   text-align: center;
    margin:0 auto;
 }
 

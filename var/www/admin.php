@@ -28,14 +28,18 @@
                                     <form  method="post" name="uv-light">
                                         <table style="width: 100%;">
                                             <tr>
+                                                <td width="100px"></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
                                                 <?php 
                                                     if($status_uv_manual == 0) {
                                                         echo '<td><img src="/images/icons/status_off_manual_20x20.png" title="uv off"></td>';
-                                                        echo "<td><button class='art-button' name='turn_on_uv' onclick='return confirm('". _('end pause uv-light!') ."');>" . _('auto'). "</button></td>";
+                                                        echo "<td style='text-align: left;'><button class='art-button' name='turn_on_uv' onclick='return confirm('". _('end pause uv-light!') ."');>" . _('auto'). "</button></td>";
                                                     }
                                                     else{
                                                         echo '<td><img src="/images/icons/status_on_20x20.png" title="uv on"></td>';
-                                                        echo "<td><button class='art-button' name='turn_off_uv' onclick='return confirm('". _('pause uv-light!') ."');>" . _('off'). "</button></td>";
+                                                        echo "<td style='text-align: left;'><button class='art-button' name='turn_off_uv' onclick='return confirm('". _('pause uv-light!') ."');>" . _('off'). "</button></td>";
                                                     }
                                                 ?>
                                             </tr>
@@ -48,6 +52,10 @@
                                     <div class="hg_container">
                                         <!----------------------------------------------------------------------------------------Sensortype-->
                                         <table style="width: 100%;" class="miniature_writing">
+                                            <tr>
+                                                <td style="width: 100px;"></td>
+                                                <td></td>
+                                            </tr>
                                             <tr>
                                                 <td class="td_png_icon"><h3><?php echo _('sensortype'); ?></h3><img src="images/icons/sensortype_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_sensortype_blockFunction()"><?php echo _('help'); ?></button>
                                                 </td>
@@ -77,11 +85,12 @@
 
                                         <table style="width: 100%; align: center;">
                                             <tr>
-                                                <td style="width: 50%;">&nbsp;</td>
+                                                <td style="width: 100px;"></td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
                                                 <td>&nbsp;</td>
-                                                <td>
-                                                <button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: a shutdown is required, please turn the power off/on to restart the system!');?>');"><?php echo _('change sensor'); ?></button>
-                                                </td>
+                                                <td style='text-align: left;'><br><button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: a shutdown is required, please turn the power off/on to restart the system!');?>');"><?php echo _('change sensor'); ?></button></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -312,9 +321,7 @@
                                         </p>
                                         <table style="width: 100%; align: center;">
                                             <tr>
-                                                <td style="width: 50%;">&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td><button class="art-button" name="admin_form_submit" type="submit" value="admin_form_submit" onclick="return confirm('<?php echo _('save'); echo ' '; echo _('administration 1'); ?>?')"><?php echo _('save'); ?></button></td>
+                                                <td rowspan=3><button class="art-button" name="admin_form_submit" type="submit" value="admin_form_submit" onclick="return confirm('<?php echo _('save'); echo ' '; echo _('administration 1'); ?>?')"><?php echo _('save'); ?></button></td>
                                             </tr>
                                         </table>
                                     </div>
