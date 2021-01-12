@@ -54,7 +54,7 @@ class cl_fact_sensor:
                 
         except Exception as original_error:
             raise original_error        
-        return(cl_fact_main_sensor.__o_instance)
+        return(cl_fact_sensor.__o_instance)
 
     @classmethod
     def set_instance(self, i_instance):
