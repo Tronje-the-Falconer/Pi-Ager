@@ -15,7 +15,7 @@ from abc import ABC, abstractmethod
 import math
 import inspect
 
-from sensors.pi_ager_cl_sensor import cl_fact_sensor
+from sensors.pi_ager_cl_sensor_fact import cl_fact_sensor
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from main.pi_ager_cl_logger import cl_fact_logger
 from datetime import datetime
