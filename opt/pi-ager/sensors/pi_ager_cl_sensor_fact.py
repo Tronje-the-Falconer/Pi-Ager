@@ -41,15 +41,15 @@ class cl_fact_sensor:
             return(cl_fact_sensor.__o_instance)
         try:
             if   cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'SHT75':
-                cl_fact_sensor.__o_instance = cl_fact_sensor_sht75.get_instance()
+                cl_fact_sensor.__o_instance = cl_fact_sensor_sht75.get_instance(i_active_sensor)
             elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'SHT3x':
-                cl_fact_sensor.__o_instance = cl_fact_sensor_sht3x.get_instance(i_address)
+                cl_fact_sensor.__o_instance = cl_fact_sensor_sht3x.get_instance(i_active_sensor,i_address)
             elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'SHT85':
-                cl_fact_sensor.__o_instance = cl_fact_sensor_sht85.get_instance(i_address)
+                cl_fact_sensor.__o_instance = cl_fact_sensor_sht85.get_instance(i_active_sensor,i_address)
             elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'DHT22':
-                cl_fact_sensor.__o_instance = cl_fact_sensor_dht22.get_instance()
+                cl_fact_sensor.__o_instance = cl_fact_sensor_dht22.get_instance(i_active_sensor)
             elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'DHT11':
-                cl_fact_sensor.__o_instance = cl_fact_sensor_dht11.get_instance()
+                cl_fact_sensor.__o_instance = cl_fact_sensor_dht11.get_instance(i_active_sensor)
             __ot_instances.update(i_active_sensor, cl_fact_sensor.__o_instance)    
                 
         except Exception as original_error:
