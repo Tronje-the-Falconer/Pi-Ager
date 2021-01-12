@@ -91,7 +91,7 @@ class cl_fact_sensor_sht85:
             return(cl_fact_sensor_sht85.__o_instance)
         
         cl_fact_sensor_sht85.__o_instance = cl_main_sensor_sht85(i_active_sensor, i_address)
-        cl_fact_logger.get_instance().debug("__ot_instance " + cl_fact_sensor_sht85.__o_instance + " created for " + i_active_sensor)
+        cl_fact_logger.get_instance().debug("__ot_instance " + str(cl_fact_sensor_sht85.__o_instance) + " created for " + i_active_sensor)
         line = {i_active_sensor:cl_fact_sensor_sht85.__o_instance}
         cl_fact_sensor_sht85.__ot_instances.update(line)   
         cl_fact_logger.get_instance().debug("__ot_instances = " + str(cl_fact_sensor_sht85.__ot_instances))
