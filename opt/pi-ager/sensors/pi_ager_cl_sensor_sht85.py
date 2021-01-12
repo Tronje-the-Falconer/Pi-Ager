@@ -86,7 +86,11 @@ class cl_fact_sensor_sht85:
             pass 
         if  cl_fact_sensor_sht85.__o_instance is not None :
             return(cl_fact_sensor_sht85.__o_instance)
+        
         cl_fact_sensor_sht85.__o_instance = cl_main_sensor_sht85(i_active_sensor, i_address)
+        line = {i_active_sensor:cl_fact_sensor_sht85.__o_instance}
+        cl_fact_sensor_sht85.__ot_instances.update(line)   
+        
         return(cl_fact_sensor_sht85.__o_instance)
 
     @classmethod
