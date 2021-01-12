@@ -29,9 +29,9 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td id="json_temperature_main" style="text-align: center; font-size: 24px;"></td>
-                                            <td id="json_humidity_main" style="text-align: center; font-size: 24px;"></td>
-                                            <td id="json_dewpoint_main" style="text-align: center; font-size: 24px;"></td>
+                                            <td id="json_temperature_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #ff0000;"></td>
+                                            <td id="json_humidity_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #0066FF;"></td>
+                                            <td id="json_dewpoint_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #00cc66;"></td>
                                         </tr>
 									</table>
                                     <hr>
