@@ -202,7 +202,7 @@ class cl_fact_sensor:
     def get_instance(self, i_active_sensor, i_address=None):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug("Active Sensor = " + i_active_sensor)
-        cl_fact_sensor.__o_instance = __ot_instances.pop(i_active_sensor)
+        cl_fact_sensor.__o_instance = cl_fact_sensor.__ot_instances.pop(i_active_sensor)
         if  cl_fact_sensor.__o_instance is not None :
             
         #    return(cl_fact_sensor.__o_instance)
