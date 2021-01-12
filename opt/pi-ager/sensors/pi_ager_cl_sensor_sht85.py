@@ -40,7 +40,7 @@ class cl_main_sensor_sht85(cl_main_sensor_sht):
         cl_fact_logger.get_instance().debug("i2c address is" + str(i_address))
         self.o_sensor_type = cl_fact_main_sensor_type.get_instance()
         self.o_address     = i_address
-        super().__init__(self.o_sensor_type, self.o_address)
+        super().__init__(i_active_sensor, self.o_sensor_type, self.o_address)
 
     def get_current_data(self):
         # logger.debug(cl_fact_logger.get_instance().me())

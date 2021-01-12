@@ -6,7 +6,7 @@ __author__ = "Claus Fischer"
 __copyright__ = "Copyright 2019, The Pi-Ager Project"
 __credits__ = ["Claus Fischer"]
 __license__ = "GPL"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Production"
@@ -37,7 +37,7 @@ class cl_main_sensor_sht(cl_sensor, ABC):
     _TRIGGER = 0x2C06
     _STATUS_BITS_MASK = 0xFFFC
     
-    def __init__(self, i_sensor_type, i_address):
+    def __init__(self, i_active_sensor, i_sensor_type, i_address):
         # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug("i2c address is" + str(i_address))
@@ -62,6 +62,7 @@ class cl_main_sensor_sht(cl_sensor, ABC):
         
         self.o_sensor_type = i_sensor_type
         super().__init__(self.o_sensor_type)
+        self.o_active_sensor= i_active_sensor
 
 
 
@@ -94,7 +95,7 @@ class cl_main_sensor_sht(cl_sensor, ABC):
         try:
             self._i2c_bus = cl_fact_i2c_bus_logic.get_instance().get_i2c_bus()
             cl_fact_logger.get_instance().debug(self._i2c_bus)
-            self._i2c_sensor = cl_fact_i2c_sensor_sht.get_instance(self._i2c_bus, self.o_address)
+            self._i2c_sensor = cl_fact_i2c_sensor_sht.get_instance(self.o_active_sensor, self._i2c_bus, self.o_address)
             self._send_i2c_start_command()
         except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
