@@ -53,7 +53,7 @@ class cl_fact_sensor:
             cl_fact_logger.get_instance().debug("__ot_instances = " + str(cl_fact_sensor.__ot_instances))
             line = {i_active_sensor:cl_fact_sensor.__o_instance}
             cl_fact_sensor.__ot_instances.update(line)    
-            cl_fact_logger.get_instance().debug("__ot_instances = " + str(cl_fact_sensor_sht85.__ot_instances))    
+            cl_fact_logger.get_instance().debug("__ot_instances = " + str(cl_fact_sensor.__ot_instances))    
         except Exception as original_error:
             raise original_error        
         return(cl_fact_sensor.__o_instance)
