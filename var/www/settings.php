@@ -23,7 +23,16 @@
                                 <!----------------------------------------------------------------------------------------Programme starten/stoppen-->
                                 <div class="hg_container">
                                     <h2>Pi-Ager</h2>
-                                    <table style="width: 100%"><tr>
+                                    <table style="width: 100%">
+                                    <tr>
+                                        <td width="100px"></td>
+                                        <td width="100px"></td>
+                                        <td width="200px"></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
                                     <?php 
                                         print '<form  method="post">';
                                         // Prüft, ob Prozess RSS läuft ( NULL = Rss.py läuft nicht als Prozess, )
@@ -34,7 +43,7 @@
                                         if ($grepbackup != NULL){ //wenn backup läuft
                                             echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
                                             <td></td>
-                                            <td>';
+                                            <td></td><td></td><td></td>';
                                             echo "Backup is currently running! ";
                                         }
                                         elseif ($grepmain == NULL){ // wenn main.py nicht läuft und der Status in DB aus ist
@@ -61,10 +70,19 @@
                                         }
                                         print ' </form>';
                                     ?>
+                                        <td></td>
                                     </tr></table>
                                     <hr>
                                     <h2><?php echo _('scales') ?></h2>
                                     <table style="width: 100%">
+                                        <tr>
+                                            <td width="100px"></td>
+                                            <td width="100px"></td>
+                                            <td width="200px"></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
                                         <?php
                                             print '<tr>';
                                             // Prüft, ob Prozess scale läuft ( NULL = scale.py läuft nicht als Prozess)
@@ -165,16 +183,34 @@
                                     <hr>
                                     <h2><?php echo _('agingtable') ?></h2>
                                     <!----------------------------------------------------------------------------------------Reifetabelle auswählen-->
-
+                                    <?php $agingtable_names = get_agingtable_names(); ?>
                                     <table style="width: 100%" class="switching_state miniature_writing">
                                         <tr>
+                                            <td width="100px"></td>
+                                            <td width="100px"></td>
+                                            <td width="200px"></td>
+                                            <td ></td>
+                                            <td ></td>
+                                        </tr>
+                                        <form  method="post">
+                                        <tr>
                                             <td>
-                                                <img src="images/icons/agingtable_42x42.png" alt="">
+                                                <?php
+                                                    if ($grepagingtable == NULL){
+                                                        echo '<img src="images/icons/agingtable_42x42.png" alt="" style="padding: 10px;">';
+                                                        echo '</td><td>';
+                                                        echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding: 10px;">';
+                                                    }
+                                                    else {
+                                                        echo '<img src="images/icons/agingtable_42x42.gif" alt="" style="padding: 10px;">';
+                                                        echo '</td><td>';
+                                                        echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding: 10px;">';
+                                                        
+                                                    }
+                                                ?>
                                             </td>
-                                            <td style=" text-align: left; padding-left: 20px;">
+                                            <td style="text-align: left;">
                                                 <?php 
-                                                    print '<form  method="post">';
-                                                    $agingtable_names = get_agingtable_names();
                                                     if (isset ($agingtable_names)){
                                                         foreach($agingtable_names as $name) {
                                                             if ($name==$desired_maturity){
@@ -186,54 +222,63 @@
 
                                                             }
                                                         }
-                                                        echo '</td><td>';
-                                                        if ($grepagingtable == NULL){
-                                                            echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding-right: 20px;">';
-                                                            echo '<img src="images/icons/agingtable_42x42.png" alt="" style="padding-left: 10px;">';
-                                                        }
-                                                        else {
-                                                            echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding-right: 20px;">';
-                                                            echo '<img src="images/icons/agingtable_42x42.gif" alt="" style="padding-left: 10px;">';
-                                                        }
                                                     }
-                                                    else{
-                                                        echo '</td><td>';
-                                                    }
-                                                    echo '</td>';
                                                 ?>
+                                            </td>
+                                            <td style="text-align: left;">
+                                                
+                                            </td>
+                                            <td></td>
                                         </tr>
                                         <tr>
-                                            <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
-                                            <td style=" text-align: left; padding-left: 20px;"><?php
+                                            <td></td>
+                                            <td></td>
+                                            <td style="text-align: left;">
+                                                <?php
                                                     if (isset ($agingtable_names)){
                                                         echo "<button class=\"art-button\" name=\"select_agingtable\" value=\"select_agingtable\"onclick=\"return confirm('"._('select new agingtable?')."');\">"._('select')."</button>";
                                                     }
                                                 ?>
                                             </td>
-
-                                            <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    if (isset ($agingtable_names)){
-                                                        if ($grepagingtable == NULL){
-                                                            echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" value=\"pi-ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')." \\n "._('manual values will be overwritten in database!')."');\">"._('start agingtable')."</button>";
-                                                        }
-                                                        else {
-                                                            echo "<button class=\"art-button\" name=\"agingtable_stop\" value=\"agingtable_stop\" onclick=\"return confirm('"._('stop agingtable?').' \\n '._('pi-ager continues with the last values of the agingtable!')."');\">"._('stop agingtable')."</button>";
-                                                        }
-                                                    }
-                                                    echo '</form>';
-                                                ?>
+                                            <td style=" text-align: left; padding-left: 20px;">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
-                                            <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
-                                            <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td style="text-align: left;">
+                                                <?php
+                                                    if (isset ($agingtable_names)){
+                                                            if ($grepagingtable == NULL){
+                                                                echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" value=\"pi-ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')." \\n "._('manual values will be overwritten in database!')."');\">"._('start agingtable')."</button>";
+                                                            }
+                                                            else {
+                                                                echo "<button class=\"art-button\" name=\"agingtable_stop\" value=\"agingtable_stop\" onclick=\"return confirm('"._('stop agingtable?').' \\n '._('pi-ager continues with the last values of the agingtable!')."');\">"._('stop agingtable')."</button>";
+                                                            }
+                                                        }
+                                                ?>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    </form>
+                                            
+                                            
+                                    <table>
+                                        <form  id="agingtable_edit" method="post">
+                                        <tr>
+                                            <td width="100px"></td>
+                                            <td width="100px"></td>
+                                            <td width="200px"></td>
+                                            <td ></td>
+                                            <td ></td>
                                         </tr>
                                         <tr>
-                                            <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
-                                            <td style=" text-align: left; padding-left: 20px;"><br>
+                                            <td>&nbsp;</td>
+                                            <td>&nbsp;</td>
+                                            <td colspan=3><br>
                                                 <?php 
-                                                    print '<form  id="agingtable_edit" method="post">';
                                                     if (isset ($agingtable_names)){
                                                         echo '<select name="agingtable_edit">';
                                                         foreach($agingtable_names as $name) {
@@ -254,47 +299,27 @@
                                                     
                                                 ?>
                                             </td>
-                                            <td style=" text-align: left; padding-left: 20px;">
-
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td colspan=2>
                                                 <?php
                                                     print '<form method="post" id="upload_new_agingtable" enctype="multipart/form-data">';
                                                     print '<input type="file" name="file" id="csv-file"  accept=".csv" onchange="enableButton()">';
                                                     echo '</form>';
                                                 ?>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
-                                            <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    if (isset ($agingtable_names)){
-                                                        //echo "<button class=\"art-button\" form=\"agingtable_edit\" formaction=\"/edit_agingtable.php\" name=\"edit_agingtable\" value=\"edit_agingtable\" onclick=\"return confirm('"._('edit agingtable?')."');\">"._('edit')."</button>";
-                                                        //echo '<label class=\"art-button-hidden\" for="edit_agingtable" tabindex="0">' . _('edit') . '</label>';
-                                                    }
-                                                ?></td>
                                             <td style=" text-align: left; padding-left: 20px;">
-                                           <script>
-                                                function enableButton() {
-                                                    document.getElementById("upload_new_agingtable_button").disabled = false;
-                                                }
-                                            </script>
+                                                <script>
+                                                    function enableButton() {
+                                                        document.getElementById("upload_new_agingtable_button").disabled = false;
+                                                    }
+                                                </script>
                                                 <?php 
                                                     echo "<button class=\"art-button\" disabled=\"true\" id=\"upload_new_agingtable_button\" form=\"upload_new_agingtable\" name=\"upload_new_agingtable\" value=\"upload_new_agingtable\" onclick=\"return confirm('"._('upload new agingtable?')."');\">"._('upload')."</button>";
                                                 ?>
-                                        </tr>
-                                        <tr>
-                                            <td style=" text-align: left; padding-left: 20px;">&nbsp;</td>
-                                            <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    if (isset ($agingtable_names)){
-                                                        // echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"delete_agingtable\" value=\"delete_agingtable\"onclick=\"return confirm('"._('delete agingtable?')."');\">"._('delete')."</button>";
-                                                        //echo '<label class=\"art-button\" for="delete_agingtable" tabindex="0">' . _('delete') . '</label>';
-                                                    }
-                                                ?></td>
-                                            <td style=" text-align: left; padding-left: 20px;"><?php 
-                                                    if (isset ($agingtable_names)){
-                                                        // echo "<button class=\"art-button\" form=\"agingtable_edit\" name=\"export_agingtable\" value=\"export_agingtable\"onclick=\"return confirm('"._('export agingtable?')."');\">"._('export')."</button>";
-                                                        //echo '<label class=\"art-button\" for="export_agingtable" tabindex="0">' . _('export') . '</label>';
-                                                    }
-                                                ?></td></td>
+                                            </td>
                                         </tr>
                                     </table>
                                     <table id="show_agingtable" class="show_agingtable">

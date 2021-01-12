@@ -468,7 +468,6 @@
                                 <h2 class="art-postheader"><?php echo _('statusboard'); ?></h2>
                                 <div class="hg_container">
                                     <h2><?php echo _('general'); ?></h2>
-                                    <br>
                                     <table class="switching_state miniature_writing">
                                         <tr>
                                             <td width="100px"></td>
@@ -514,6 +513,7 @@
                                                         echo '<td style="text-align: left; color: red;">' . _('no powersuply! batterymode') . '</td>';
                                                     }
                                                 ?>
+                                                <td></td>
                                         </tr>
                                         <tr>
                                             <td></td>   
@@ -535,18 +535,19 @@
                                                 // Prüft, ob Batteriespannung vorhanden ist
                                                 $read_gpio_battery = shell_exec('sudo /var/sudowebscript.sh read_gpio_battery');
                                                 if ($read_gpio_battery == 1){
-                                                    echo '<td >';
+                                                    echo '<td>';
                                                     echo '<img src="images/icons/battery_42x42.png" alt="" style="padding-top: 10px;">';
                                                     echo '</td>';
                                                     echo '<td style="text-align: left; ">' . _('battery voltage ok') . '</td>';
                                                 }
                                                 else {
-                                                    echo '<td >';
+                                                    echo '<td>';
                                                     echo '<img src="images/icons/battery_fail_42x42.png" alt="" style="padding-top: 10px;">';
                                                     echo '</td>';
                                                     echo '<td style="text-align: left; color: red;">' . _('battery voltage low !!') . '</td>';
                                                 }
                                             ?>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td height="20px"></td>
@@ -729,8 +730,8 @@
                                             <td width="100px"><b><?php echo strtoupper(_('type')); ?></b></td>
                                             <td width="100px"><b><?php echo strtoupper(_('status')); ?></b></td>
                                             <td class="text_left">&nbsp;</td>
+                                            <td width="100px"></td>
                                             <td width="100px"><b><?php echo strtoupper(_('period')); ?></b></td>
-                                            <td width="100px">&nbsp;</td>
                                             <td width="100px"><b><?php echo strtoupper(_('duration')); ?></b></td>
                                         </tr>
                                         <tr>
@@ -743,13 +744,10 @@
                                                 elseif ($circulation_air_period == 0) {echo  ' '. strtoupper(_('always on'));}
                                                 elseif ($circulation_air_duration == 0) {echo ', '. strtoupper(_('timer off'));}
                                             ?></td>
-                                            <td><?php echo $circulation_air_period.' '._('minutes'); ?></td>
                                             <td></td>
+                                            <td><?php echo $circulation_air_period.' '._('minutes'); ?></td>
                                             <td><?php echo $circulation_air_duration.' '._('minutes'); ?></td>
                                         </tr>
-
-
-
                                         <tr>
                                             <td><img <?php if ($exhaust_air_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/exhausting_42x42.png" alt=""></td>
                                             <td><img src="<?php echo $exhausting_on_off_png ;?>" title="PIN_FAN 23[16] -> IN 4 (PIN 5)"></td>
@@ -760,13 +758,10 @@
                                                 elseif ($exhaust_air_period == 0) {echo  ' '. strtoupper(_('always on'));}
                                                 elseif ($exhaust_air_duration == 0) {echo ', '. strtoupper(_('timer off'));}
                                             ?></td>
-                                            <td><?php echo $exhaust_air_period.' '._('minutes'); ?></td>
                                             <td></td>
+                                            <td><?php echo $exhaust_air_period.' '._('minutes'); ?></td>
                                             <td><?php echo $exhaust_air_duration.' '._('minutes'); ?></td>
                                         </tr>
-
-
-
                                         <tr>
                                             <td><img <?php if ($uv_duration == 0) {echo 'class="transpng"';} ?> src="images/icons/uv-light_42x42.png" alt=""></td>
                                             <td><?php
@@ -790,10 +785,9 @@
                                                 elseif ($uv_period == 0) {echo ' '.strtoupper(_('always on'));}
                                                 elseif ($uv_duration == 0) {echo ', '.strtoupper(_('timer inactive'));}
                                                 */
-
                                             ?></td>
-                                           	<td><?php echo $uv_period.' '._('minutes'); ?></td>
                                            	<td></td>
+                                           	<td><?php echo $uv_period.' '._('minutes'); ?></td>
                                            	<td><?php echo $uv_duration.' '._('minutes'); ?></td>
                                            
                                         </tr>
@@ -823,9 +817,9 @@
                                                 */
                                             
                                                 ?></td>
+                                                <td></td>
                                                 <td><?php echo $light_period.' '._('minutes'); ?></td>
-                                            	<td></td>
-                                            	<td><?php echo $light_duration.' '._('minutes'); ?></td>
+                                                <td><?php echo $light_duration.' '._('minutes'); ?></td>
                                             
                                         </tr>
                                     </table>

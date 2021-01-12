@@ -15,6 +15,10 @@
                                     <div class="hg_container" >
                                         <table style="width: 100%;table-layout: fixed";>
                                             <tr>
+                                                <td class="td_png_icon"></td>
+                                                <td style=" text-align: left; padding-left: 20px; height:10px;"></td>
+                                            </tr>
+                                            <tr>
                                                 <td class="td_png_icon"><h3><?php echo _('operating mode'); ?></h3><img src="images/icons/operatingmode_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_operation_mode_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td style=" text-align: left; padding-left: 20px;">
                                                 <input type="radio" name="modus_settings" value="0" <?php echo $checked_0; ?>/><label> <?php echo _('cooling'); ?></label><br>

@@ -267,10 +267,10 @@
                                             <br>
                                             <table style="width: 100%; align: center;">
                                                 <tr>
-                                                    <td style="width: 50%;">&nbsp;</td>
+                                                    <td style="width: 75%; text-align: right;">&nbsp;</td>
                                                     <td>&nbsp;</td>
-                                                    <td><button class="art-button" name="config_form_submit" type="submit" value="config_form_submit" onclick="return confirm('<?php echo _('save'); echo ' '; echo _('general configuration'); ?>?')"><?php echo _('save'); ?></button></td>
-                                                    <td>
+                                                    <td style="text-align: right;"><button class="art-button" name="config_form_submit" type="submit" value="config_form_submit" onclick="return confirm('<?php echo _('save'); echo ' '; echo _('general configuration'); ?>?')"><?php echo _('save'); ?></button></td>
+                                                    <td style="text-align: left;">
                                                         <button class="art-button" type="button" onclick="setconfig_noneFunction()"><?php echo _('hide'); ?></button>
                                                     </td>
                                                 </tr>
