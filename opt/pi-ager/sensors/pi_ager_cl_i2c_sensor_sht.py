@@ -26,7 +26,7 @@ class cl_i2c_sensor_sht(ABC):
     __measuring_intervall = 300
 
 
-    def __init__(self, i_i2c_bus, i_address):
+    def __init__(self, i_active_sensor, i_i2c_bus, i_address):
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
