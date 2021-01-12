@@ -22,7 +22,7 @@ from sensors.pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 from sensors.pi_ager_cl_i2c_sensor_sht import cl_fact_i2c_sensor_sht
 from main.pi_ager_cx_exception import *
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
-from sensors.pi_ager_cl_sensor import cl_main_sensor#
+from sensors.pi_ager_cl_sensor import cl_sensor#
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 from sensors.pi_ager_cl_sensor_sht import cl_main_sensor_sht
 

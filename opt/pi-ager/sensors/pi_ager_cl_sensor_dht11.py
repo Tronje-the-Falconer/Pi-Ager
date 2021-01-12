@@ -21,7 +21,7 @@ import pi_ager_gpio_config
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from main.pi_ager_cx_exception import *
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
-from sensors.pi_ager_cl_sensor import cl_main_sensor#
+from sensors.pi_ager_cl_sensor import cl_sensor#
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 from sensors.pi_ager_cl_sensor_dht_adafruit import cl_main_sensor_dht_adafruit
 import Adafruit_DHT
