@@ -35,7 +35,8 @@ class cl_fact_sensor:
             cl_fact_sensor.__o_instance = cl_fact_sensor.__ot_instances.pop(i_active_sensor)
             cl_fact_logger.get_instance().debug("__ot_instance for " + i_active_sensor + " = " + str(cl_fact_sensor.__ot_instances))
         except KeyError:
-            pass 
+            cl_fact_sensor.__o_instance = None
+            
         if  cl_fact_sensor.__o_instance is not None :
             cl_fact_logger.get_instance().debug("Returning __ot_instance = " + str(cl_fact_sensor.__o_instance))
             return(cl_fact_sensor.__o_instance)
