@@ -77,18 +77,18 @@ class cl_fact_active_main_sensor:
         active_sensor = 'MAIN'
         if cl_fact_active_main_sensor.__o_instance is not None :
         
-            return(cl_fact_main_sensor.__o_instance)
+            return(cl_fact_active_main_sensor.__o_instance)
         try:
-            cl_fact_active_main_sensor.__o_instance = cl_fact_sensor.get_instance(active_sensor, i_address)
+            cl_fact_active_main_sensor.__o_instance = cl_fact_active_main_sensor.get_instance(active_sensor, i_address)
  
-        except Exception as original_error:
+        except Exception as original_error:cl_fact_sensor
             raise original_error        
-        return(cl_fact_main_sensor.__o_instance)
+        return(cl_fact_active_main_sensor.__o_instance)
 
     @classmethod
     def set_instance(self, i_active_sensor, i_instance, i_address=None,):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cl_fact_main_sensor.__o_instance = i_instance
+        cl_fact_active_main_sensor.__o_instance = i_instance
               
     
     def __init__(self):
