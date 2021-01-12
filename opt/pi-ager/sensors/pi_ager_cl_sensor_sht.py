@@ -40,7 +40,7 @@ class cl_main_sensor_sht(cl_sensor, ABC):
     def __init__(self, i_sensor_type, i_address):
         # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-
+        cl_fact_logger.get_instance().debug("i2c address is" + str(i_address))
                     
         self._max_errors = 1
         self._old_temperature = 0
