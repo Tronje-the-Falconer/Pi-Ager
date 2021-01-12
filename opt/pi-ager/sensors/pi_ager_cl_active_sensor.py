@@ -110,12 +110,12 @@ class cl_fact_active_second_sensor:
         active_sensor = 'SECOND'
         if cl_fact_active_second_sensor.__o_instance is not None :
         
-            return(cl_fact_second_sensor.__o_instance)
+            return(cl_fact_active_second_sensor.__o_instance)
         try:
             cl_fact_active_second_sensor.__o_instance = cl_active_second_sensor(cl_fact_active_second_sensor.__o_main_sensor_type, active_sensor, i_address)
         except Exception as original_error:
             raise original_error        
-        return(cl_fact_second_sensor.__o_instance)
+        return(cl_fact_active_second_sensor.__o_instance)
 
     @classmethod
     def set_instance(self, i_active_sensor, i_instance, i_address=None):
