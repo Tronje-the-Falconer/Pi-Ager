@@ -202,11 +202,14 @@ class cl_fact_sensor:
     def get_instance(self, i_active_sensor, i_address=None):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug("Active Sensor = " + i_active_sensor)
-        cl_fact_sensor.__o_instance = cl_fact_sensor.__ot_instances.pop(i_active_sensor)
+        try:
+            cl_fact_sensor.__o_instance = cl_fact_sensor.__ot_instances.pop(i_active_sensor)
+        except KeyError:
+            pass 
         if  cl_fact_sensor.__o_instance is not None :
             
         #    return(cl_fact_sensor.__o_instance)
-            return(__ot_instances.pop(i_active_sensor))
+            return(cl_fact_sensor.__o_instance)
         try:
             if   cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'SHT75':
                 cl_fact_sensor.__o_instance = cl_fact_sensor_sht75.get_instance()
