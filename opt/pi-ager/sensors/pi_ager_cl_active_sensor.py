@@ -95,17 +95,22 @@ class cl_fact_active_main_sensor:
         
         pass    
 class cl_fact_active_second_sensor:
+#    Only a singleton instance for main_sensor
+    __o_main_sensor_type = cl_fact_main_sensor_type().get_instance()
+    __o_instance = None
     
-    cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-    active_sensor = 'SECOND'
-    if cl_fact_active_second_sensor.__o_instance is not None :
-    
-        return(cl_fact_second_sensor.__o_instance)
-    try:
-        cl_fact_active_second_sensor.__o_instance = cl_fact_active_second_sensor.get_instance(active_sensor, i_address)
-    except Exception as original_error:
-        raise original_error        
-    return(cl_fact_main_sensor.__o_instance)
+    @classmethod        
+    def get_instance(self, i_address=None):    
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        active_sensor = 'SECOND'
+        if cl_fact_active_second_sensor.__o_instance is not None :
+        
+            return(cl_fact_second_sensor.__o_instance)
+        try:
+            cl_fact_active_second_sensor.__o_instance = cl_fact_active_second_sensor.get_instance(active_sensor, i_address)
+        except Exception as original_error:
+            raise original_error        
+        return(cl_fact_main_sensor.__o_instance)
 
     @classmethod
     def set_instance(self, i_active_sensor, i_instance, i_address=None):
