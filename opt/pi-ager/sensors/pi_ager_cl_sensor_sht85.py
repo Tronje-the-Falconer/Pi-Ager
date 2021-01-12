@@ -82,11 +82,11 @@ class cl_fact_sensor_sht85:
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         try:
             cl_fact_sensor_sht85.__o_instance = cl_fact_sensor_sht85.__ot_instances.pop(i_active_sensor)
-            cl_fact_logger.get_instance().debug("__ot_instance for " + i_active_sensor + " = " + str(cl_fact_sensor_sht85.__ot_instance))
+            cl_fact_logger.get_instance().debug("__ot_instance for " + i_active_sensor + " = " + str(cl_fact_sensor_sht85.__o_instance))
         except KeyError:
             pass 
         if  cl_fact_sensor_sht85.__o_instance is not None :
-            cl_fact_logger.get_instance().debug("Returning __ot_instance = " + str(cl_fact_sensor_sht85.__ot_instance))
+            cl_fact_logger.get_instance().debug("Returning __ot_instance = " + str(cl_fact_sensor_sht85.__o_instance))
             return(cl_fact_sensor_sht85.__o_instance)
         
         cl_fact_sensor_sht85.__o_instance = cl_main_sensor_sht85(i_active_sensor, i_address)
