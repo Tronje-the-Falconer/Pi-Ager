@@ -48,6 +48,7 @@ class cl_fact_sensor:
                 cl_fact_sensor.__o_instance = cl_fact_sensor_dht22.get_instance(i_active_sensor)
             elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'DHT11':
                 cl_fact_sensor.__o_instance = cl_fact_sensor_dht11.get_instance(i_active_sensor)
+            cl_fact_logger.get_instance().debug("__ot_instances = " + cl_fact_sensor.__ot_instances)
             cl_fact_sensor.__ot_instances.update(i_active_sensor, cl_fact_sensor.__o_instance)    
                 
         except Exception as original_error:
