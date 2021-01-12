@@ -80,6 +80,7 @@ class cl_fact_sensor_sht85:
     @classmethod        
     def get_instance(self, i_active_sensor, i_address):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_logger.get_instance().debug("cl_fact_sensor_sht85.get_instance")
         try:
             cl_fact_sensor_sht85.__o_instance = cl_fact_sensor_sht85.__ot_instances.pop(i_active_sensor)
             cl_fact_logger.get_instance().debug("__ot_instance for " + i_active_sensor + " = " + str(cl_fact_sensor_sht85.__o_instance))
