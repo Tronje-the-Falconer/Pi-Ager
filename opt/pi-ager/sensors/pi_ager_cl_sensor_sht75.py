@@ -28,7 +28,7 @@ from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 # global logger
 # logger = pi_ager_logging.create_logger(__name__) 
 
-class cl_main_sensor_sht75(cl_main_sensor):
+class cl_main_sensor_sht75(cl_sensor):
     
     def __init__(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())

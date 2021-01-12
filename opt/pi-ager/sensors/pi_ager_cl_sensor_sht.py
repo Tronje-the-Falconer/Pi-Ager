@@ -22,13 +22,13 @@ from sensors.pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 from sensors.pi_ager_cl_i2c_sensor_sht import cl_fact_i2c_sensor_sht
 from main.pi_ager_cx_exception import *
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
-from sensors.pi_ager_cl_sensor import cl_main_sensor#
+from sensors.pi_ager_cl_sensor import cl_sensor#
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 
 # global logger
 # logger = pi_ager_logging.create_logger(__name__) 
 
-class cl_main_sensor_sht(cl_main_sensor, ABC):
+class cl_main_sensor_sht(cl_sensor, ABC):
     
     _RESET = 0x30A2
     _HEATER_ON = 0x306D
