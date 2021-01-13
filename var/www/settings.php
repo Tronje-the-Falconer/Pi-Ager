@@ -301,16 +301,28 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td height="20px">&nbsp;</td>
                                             <td></td>
                                             <td></td>
-                                            <td colspan=2>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td colspan=2 style=" text-align: left; >
                                                 <?php
                                                     print '<form method="post" id="upload_new_agingtable" enctype="multipart/form-data">';
                                                     print '<input type="file" name="file" id="csv-file"  accept=".csv" onchange="enableButton()">';
                                                     echo '</form>';
                                                 ?>
                                             </td>
-                                            <td style=" text-align: left; padding-left: 20px;">
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td style=" text-align: left; ">
                                                 <script>
                                                     function enableButton() {
                                                         document.getElementById("upload_new_agingtable_button").disabled = false;
@@ -320,6 +332,8 @@
                                                     echo "<button class=\"art-button\" disabled=\"true\" id=\"upload_new_agingtable_button\" form=\"upload_new_agingtable\" name=\"upload_new_agingtable\" value=\"upload_new_agingtable\" onclick=\"return confirm('"._('upload new agingtable?')."');\">"._('upload')."</button>";
                                                 ?>
                                             </td>
+                                            <td></td>
+                                            <td></td>
                                         </tr>
                                     </table>
                                     <table id="show_agingtable" class="show_agingtable">

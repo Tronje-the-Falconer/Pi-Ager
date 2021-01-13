@@ -1,6 +1,7 @@
 <?php
     $sensor_temperature = round(get_table_value($current_values_table,$sensor_temperature_key), 1);
     $sensortype = get_table_value($config_settings_table,$sensortype_key);
+    $sensorsecondtype_key = get_table_value($config_settings_table,$sensorsecondtype_key);
     $language = get_table_value($config_settings_table,$language_key);
     $switch_on_cooling_compressor = get_table_value($config_settings_table,$switch_on_cooling_compressor_key);
     $switch_off_cooling_compressor = get_table_value($config_settings_table,$switch_off_cooling_compressor_key);
@@ -75,6 +76,42 @@
     else {
         $checked_sens_5 = '';
     }
+    if ($sensorsecondtype_key == 1) {
+        $sensorsecondname = 'DHT11';
+        $checked_senssecond_1 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_1 = '';
+    }
+    if ($sensorsecondtype_key == 2) {
+        $sensorsecondname = 'DHT22';
+        $checked_senssecond_2 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_2 = '';
+    }
+    if ($sensorsecondtype_key == 3) {
+        $sensorsecondname = 'SHT75';
+        $checked_senssecond_3 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_3 = '';
+    }
+    if ($sensorsecondtype_key == 4) {
+        $sensorsecondname = 'SHT85';
+        $checked_senssecond_4 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_4 = '';
+    }
+    if ($sensorsecondtype_key == 5) {
+        $sensorsecondname = 'SHT3x';
+        $checked_senssecond_5 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_5 = '';
+    }
+
     if ($language == 1) {
         $checked_language_1 = 'checked="checked"';
     }

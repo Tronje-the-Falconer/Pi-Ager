@@ -19,7 +19,7 @@
                                     include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                     include 'modules/read_current_db.php';
                                     include 'modules/start_stop_uv.php';
-                                   # include 'modules/read_bus.php';                             // liest den gesetzten bus-value
+                                    include 'modules/read_bus.php';                             // liest den gesetzten bus-value
                                     
 
                                 ?>
@@ -54,7 +54,9 @@
                                         <table style="width: 100%;" class="miniature_writing">
                                             <tr>
                                                 <td style="width: 100px;"></td>
-                                                <td></td>
+                                                <td style="width: 150px; text-align: left; padding-left: 20px;"><h3><?php echo _('internal'); ?></h3></td>
+                                                <td style="width: 100px; "></td>
+                                                <td style="width: 150px; text-align: left; padding-left: 20px;"><h3><?php echo _('external'); ?></h3></td>
                                             </tr>
                                             <tr>
                                                 <td class="td_png_icon"><h3><?php echo _('sensortype'); ?></h3><img src="images/icons/sensortype_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_sensortype_blockFunction()"><?php echo _('help'); ?></button>
@@ -65,6 +67,22 @@
                                                     <input type="radio" name="sensortype_admin" value="3" <?php echo $checked_sens_3; ?>/><label> SHT75</label><br>
                                                     <input type="radio" name="sensortype_admin" value="4" <?php echo $checked_sens_4; ?>/><label> SHT85</label><br>
                                                     <input type="radio" name="sensortype_admin" value="5" <?php echo $checked_sens_5; ?>/><label> SHT3x</label><br>
+                                                    <br>
+                                                </td>
+                                                <td></td>
+                                                <td style=" text-align: left; padding-left: 20px;">
+                                                    <?php 
+                                                        if ($sens_second_active != ''){
+                                                            echo '<ul>' . _('only configurable if internal sensor is set to sht3x or sht85') . '</ul><br><br>'; 
+                                                        }
+                                                    ?>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="0" <?php echo $checked_senssecond_0 . ' ' . $sens_second_active; ?>/><label> disabled</label><br>
+                                                    <!--
+                                                    <input type="radio" name="sensorsecondtype_admin" value="1" <?php echo $checked_senssecond_1 . ' ' . $sens_second_active; ?>/><label> DHT11</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="2" <?php echo $checked_senssecond_2 . ' ' . $sens_second_active; ?>/><label> DHT22</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="3" <?php echo $checked_senssecond_3 . ' ' . $sens_second_active; ?>/><label> SHT75</label><br> -->
+                                                    <input type="radio" name="sensorsecondtype_admin" value="4" <?php echo $checked_senssecond_4 . ' ' . $sens_second_active; ?>/><label> SHT85</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="5" <?php echo $checked_senssecond_5 . ' ' . $sens_second_active; ?>/><label> SHT3x</label><br>
                                                     <br>
                                                 </td>
                                             </tr>
@@ -90,7 +108,7 @@
                                             </tr>
                                             <tr>
                                                 <td>&nbsp;</td>
-                                                <td style='text-align: left;'><br><button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: a shutdown is required, please turn the power off/on to restart the system!');?>');"><?php echo _('change sensor'); ?></button></td>
+                                                <td><br><button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: a shutdown is required, please turn the power off/on to restart the system!');?>');"><?php echo _('change sensors'); ?></button></td>
                                             </tr>
                                         </table>
                                     </div>

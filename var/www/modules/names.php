@@ -44,6 +44,7 @@ $switch_off_humidifier_key = 'switch_off_humidifier';
 $delay_humidify_key = 'delay_humidify';
 $referenceunit_key = 'referenceunit';
 $sensortype_key = 'sensortype';
+$sensorsecondtype_key = 'secondsensortype';
 $language_key = 'language';
 $switch_on_light_hour_key = 'switch_on_light_hour';
 $switch_on_light_minute_key = 'switch_on_light_minute';
