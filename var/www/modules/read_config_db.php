@@ -44,6 +44,7 @@
     if ($sensortype == 1) {
         $sensorname = 'DHT11';
         $checked_sens_1 = 'checked="checked"';
+        $sens_second_active = 'disabled = "true"';
     }
     else {
         $checked_sens_1 = '';
@@ -51,6 +52,7 @@
     if ($sensortype == 2) {
         $sensorname = 'DHT22';
         $checked_sens_2 = 'checked="checked"';
+        $sens_second_active = 'disabled = "true"';
     }
     else {
         $checked_sens_2 = '';
@@ -58,6 +60,7 @@
     if ($sensortype == 3) {
         $sensorname = 'SHT75';
         $checked_sens_3 = 'checked="checked"';
+        $sens_second_active = 'disabled = "true"';
     }
     else {
         $checked_sens_3 = '';
@@ -65,6 +68,7 @@
     if ($sensortype == 4) {
         $sensorname = 'SHT85';
         $checked_sens_4 = 'checked="checked"';
+        $sens_second_active = '';
     }
     else {
         $checked_sens_4 = '';
@@ -72,9 +76,17 @@
     if ($sensortype == 5) {
         $sensorname = 'SHT3x';
         $checked_sens_5 = 'checked="checked"';
+        $sens_second_active = '';
     }
     else {
         $checked_sens_5 = '';
+    }
+    if ($sensorsecondtype_key == 0) {
+        $sensorsecondname = 'disabled';
+        $checked_senssecond_0 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_0 = '';
     }
     if ($sensorsecondtype_key == 1) {
         $sensorsecondname = 'DHT11';
@@ -85,7 +97,6 @@
     }
     if ($sensorsecondtype_key == 2) {
         $sensorsecondname = 'DHT22';
-        $checked_senssecond_2 = 'checked="checked"';
     }
     else {
         $checked_senssecond_2 = '';
