@@ -16,6 +16,7 @@
                         -->
                                 <!----------------------------------------------------------------------------------------Anzeige T/rLF-->
                                 <div class="hg_container">
+                                    <h2><?php echo _('internal'); ?></h2>
                                     <table class="switching_state miniature_writing">
                                         <tr>
                                             <td>
@@ -33,26 +34,32 @@
                                             <td id="json_humidity_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #0066FF;"></td>
                                             <td id="json_dewpoint_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #00cc66;"></td>
                                         </tr>
-									</table>
-                                    <hr>
-                                    <table class="switching_state miniature_writing">
-                                        <tr>
-                                            <td>
-                                                <img src="images/icons/temperature_extern_42x42.png" alt="" style="padding-top: 10px;">
-                                            </td>
-                                            <td>
-                                                <img src="images/icons/humidity_extern_42x42.png" alt="" style="padding-top: 10px;">
-                                            </td>
-                                            <td>
-                                                <img src="images/icons/dew_point_extern_42x42.png" alt="" style="padding-top: 10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td id="json_temperature_extern" style="text-align: center; font-size: 20px;"></td>
-                                            <td id="json_humidity_extern" style="text-align: center; font-size: 20px;"></td>
-                                            <td id="json_dewpoint_extern" style="text-align: center; font-size: 20px;"></td>
-                                        </tr>
                                     </table>
+                                    <?php
+                                        if ($checked_senssecond_0== ''){
+                                            echo '<hr><h2>';
+                                            echo _('external');
+                                            echo '</h2>
+                                                    <table class="switching_state miniature_writing">
+                                                        <tr>
+                                                            <td>
+                                                                <img src="images/icons/temperature_extern_42x42.png" alt="" style="padding-top: 10px;">
+                                                            </td>
+                                                            <td>
+                                                                <img src="images/icons/humidity_extern_42x42.png" alt="" style="padding-top: 10px;">
+                                                            </td>
+                                                            <td>
+                                                                <img src="images/icons/dew_point_extern_42x42.png" alt="" style="padding-top: 10px;">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td id="json_temperature_extern" style="text-align: center; font-size: 20px;"></td>
+                                                            <td id="json_humidity_extern" style="text-align: center; font-size: 20px;"></td>
+                                                            <td id="json_dewpoint_extern" style="text-align: center; font-size: 20px;"></td>
+                                                        </tr>
+                                                    </table>';
+                                        }
+                                    ?>
                                 </div>
                                 <hr>
                                     <!------------------------------ ----------------------------------------------------------Anzeige meat thermometers-->
@@ -636,7 +643,7 @@
                                         <tr>
                                             <?php 
                                                 if ($modus==0 || $modus==1){
-                                                    echo '<td ><img src="images/icons/cooling_42x42.png" alt=""></td>
+                                                    echo '<td><img src="images/icons/cooling_42x42.png" alt=""></td>
                                                         <td><img src="'.$cooler_on_off_png.'" title="PIN_COOL 4[7] -> IN 1 (PIN2)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('cooler'));
@@ -647,7 +654,7 @@
                                                         <td>'.($setpoint_temperature + $switch_off_cooling_compressor).' °C</td>';
                                                 }
                                                 if ($modus==2){
-                                                    echo '<td ><img src="images/icons/heating_42x42.png" alt=""></td>
+                                                    echo '<td><img src="images/icons/heating_42x42.png" alt=""></td>
                                                         <td><img src="'.$heater_on_off_png.'" title="PIN_HEATER 3[5] -> IN 2 (PIN 3)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('heater'));
@@ -658,7 +665,7 @@
                                                         <td>'.($setpoint_temperature - $switch_off_cooling_compressor).' °C</td>';
                                                 }
                                                 if ($modus==3 || $modus==4){
-                                                    echo '<td ><img src="images/icons/cooling_42x42.png" alt=""></td>
+                                                    echo '<td><img src="images/icons/cooling_42x42.png" alt=""></td>
                                                         <td><img src="'.$cooler_on_off_png.'" title="PIN_COOL 4[7] -> IN 1 (PIN2)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('cooler'));
@@ -680,7 +687,7 @@
                                         <tr>
                                            <?php 
                                                 if ($modus==1 || $modus==2 || $modus==3){
-                                                    echo '   <td ><img src="images/icons/humidification_42x42.png" alt=""></td>
+                                                    echo '<td ><img src="images/icons/humidification_42x42.png" alt=""></td>
                                                         <td><img src='.$humidifier_on_off_png.' title="PIN_HUM 18[12] -> IN 3 (PIN 4)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('humidification'));
@@ -692,7 +699,7 @@
                                                 }
 
                                                 if ($modus==4){
-                                                    echo '   <td ><img src="images/icons/humidification_42x42.png" alt=""></td>
+                                                    echo '<td ><img src="images/icons/humidification_42x42.png" alt=""></td>
                                                         <td><img src='.$humidifier_on_off_png.' title="PIN_HUM 18[12] -> IN 3 (PIN 4)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('humidification'));
