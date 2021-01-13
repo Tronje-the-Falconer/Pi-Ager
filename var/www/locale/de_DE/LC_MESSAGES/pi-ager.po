@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2021-01-11 22:20+0100\n"
-"PO-Revision-Date: 2021-01-11 22:36+0100\n"
+"PO-Revision-Date: 2021-01-12 07:39+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -146,7 +146,7 @@ msgid ""
 "us"
 msgstr ""
 "Sprache einstellen. Wenn die gewünschte Sprache fehlt, setzen sie sich bitte "
-"mit uns in Verbindung! "
+"mit uns in Verbindung"
 
 #: admin.php:317 admin.php:426 admin.php:450 admin.php:511 config.php:272
 #: edit_agingtable.php:103 manvals.php:195 notification.php:133
@@ -390,7 +390,7 @@ msgstr "Datei ist nicht lesbar"
 
 #: changelog.php:47
 msgid "the developer team"
-msgstr "Das Entwicklerteam:"
+msgstr "Das Entwicklerteam:  "
 
 #: changelog.php:65 changelog.php:66
 msgid "backend & linux"
@@ -878,11 +878,11 @@ msgstr "Anmerkungen:"
 
 #: edit_agingtable.php:104
 msgid "cancel editing agingtable"
-msgstr "Editieren der Reifetabelle unterbrechen?"
+msgstr "Editieren der Reifetabelle unterbrechen"
 
 #: footer.php:9
 msgid "running engine: "
-msgstr "Laufendes System:"
+msgstr "Laufendes System: "
 
 #: header.php:130
 msgid "by"
@@ -898,7 +898,7 @@ msgstr "Einstellungen"
 
 #: header.php:146
 msgid "notification"
-msgstr "Benachrichtigung"
+msgstr "Nachrichten"
 
 #: header.php:147
 msgid "logs"
@@ -1015,7 +1015,7 @@ msgstr "Spannungsversorgung OK"
 
 #: index1.php:514
 msgid "no powersuply! batterymode"
-msgstr "Spannunggsversorgung fehlerhaft!"
+msgstr "Spannunggsversorgung fehlerhaft! Batteriemodus."
 
 #: index1.php:541
 msgid "battery voltage ok"
@@ -1390,7 +1390,7 @@ msgstr "Heizen"
 
 #: modules/read_systemdetails.php:94 modules/read_systemdetails.php:96
 msgid "model unknown! Please contact us."
-msgstr "Modell nicht gefunden! Bitte kontaktieren sie uns!"
+msgstr "Modell nicht gefunden! Bitte kontaktieren sie uns."
 
 #: modules/start_stop_light.php:4
 msgid "light switched on manually"
@@ -1424,7 +1424,7 @@ msgstr "läuft"
 #: modules/start_stop_program.php:34 modules/start_stop_program.php:81
 #: modules/start_stop_program.php:173
 msgid "no idea what is happening"
-msgstr "keine Idee was passier ist ..."
+msgstr "keine Idee was passier ist"
 
 #: modules/start_stop_program.php:51
 msgid "started due to agingtable start"
@@ -1471,7 +1471,7 @@ msgstr "Tarierung Waage läuft"
 
 #: modules/start_stop_program.php:153 modules/start_stop_program.php:158
 msgid "measuring on scale started."
-msgstr "Waagenmessungen gestartet"
+msgstr "Waagenmessungen gestartet."
 
 #: modules/start_stop_program.php:180 modules/start_stop_program.php:185
 msgid "measuring scale stopped"
@@ -1740,7 +1740,7 @@ msgstr "E-Mail Empfänger hinzugefügt"
 
 #: modules/write_notification_db.php:198
 msgid "mailserver values"
-msgstr " Werte Mailserver"
+msgstr "Werte Mailserver"
 
 #: modules/write_notification_db.php:209
 msgid "pushover values"
@@ -1793,7 +1793,7 @@ msgstr ""
 #: modules/write_table_db.php:129 modules/write_table_db.php:135
 #: modules/write_table_db.php:140
 msgid "upload agingtable"
-msgstr "Reifetabelle hochladen?"
+msgstr "Reifetabelle hochladen"
 
 #: modules/write_table_db.php:129
 msgid "file saved in database"
@@ -1803,7 +1803,7 @@ msgstr "Datei ind DB geschrieben"
 msgid "csv-file has not the right structure. please use a default-template"
 msgstr ""
 "Die csv Datei hat nicht die erforderliche Struktur, bitte die Defaultvorlage "
-"nutzen."
+"nutzen"
 
 #: modules/write_table_db.php:140
 msgid "please select an file to upload"
@@ -1815,7 +1815,7 @@ msgstr "Reifetabelle exportieren"
 
 #: modules/write_table_db.php:215
 msgid "done"
-msgstr "Fertig!"
+msgstr "Fertig"
 
 #: notification.php:10
 msgid "messenger"
@@ -1876,7 +1876,7 @@ msgstr "hinzufügen"
 #: notification.php:175 notification.php:345 notification.php:462
 #: notification.php:540
 msgid "id to delete: "
-msgstr "zu löschende ID"
+msgstr "zu löschende ID: "
 
 #: notification.php:178
 msgid "ATTENTION: delete messenger?"
