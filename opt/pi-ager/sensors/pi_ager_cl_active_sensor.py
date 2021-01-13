@@ -20,9 +20,6 @@ from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type, cl_fact_sec
 from main.pi_ager_cl_logger import cl_fact_logger
 from datetime import datetime
 
-
-#from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
-
 from main.pi_ager_cx_exception import *
 
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
