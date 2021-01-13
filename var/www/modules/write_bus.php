@@ -7,7 +7,9 @@
         unset($_POST['change_sensorbus_submit']);
         
         $sensornum = $_POST['sensortype_admin'];
+        $sensorsecondnum = $_POST['sensorsecondtype_admin'];
         write_sensorvalue($sensornum);
+        write_sensorsecondvalue($sensorsecondnum);
         logger('DEBUG', 'sensortype saved');
         #        $bus_value = $_POST['bustype_admin'];
         if ($sensornum == 1 || $sensornum == 2 || $sensornum == 3){

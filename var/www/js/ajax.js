@@ -153,25 +153,84 @@ function handleContent() {
         else {
             str_meat4 = temp_meat4.toFixed(2);
         }
+        
+        //colouring main values
+        if (temperature_main < 1){
+            color_temp = '#0119F0';
+        } else if(temperature_main >=1 && temperature_main < 8){
+            color_temp = '#00FAD0';
+        }
+        else if(temperature_main >=8 && temperature_main < 14){
+            color_temp = '#E0D909';
+        }
+        else if(temperature_main >=14 && temperature_main < 21){
+            color_temp = '#FA9E02';
+        }
+        else if(temperature_main >=21 ){
+            color_temp = '#F01A00';
+        }
+        
+        if (humidity_main < 45){
+            color_hum = '#C87308';
+        }
+        else if(humidity_main >=45 && humidity_main < 65){
+            color_hum = '#AD657C';
+        }
+        else if(humidity_main >=65 && humidity_main < 75){
+            color_hum = '#8D54AF';
+        }
+        else if(humidity_main >=75 && humidity_main < 90){
+            color_hum = '#643fd6';
+        }
+        else if(humidity_main >=90 ){
+            color_hum = '#011EF7';
+        }
+        
+        //td_styling_pre = 'style="text-align: center; font-size: 24px; text-shadow:0 0 5px "
+        td_styling_pre = '0 0 5px ';
+        td_styling_post = ';"';
+        
+        if (str_temperature_main == '-----'){
+            color_temp_full = td_styling_pre + '#888888';
+        }
+        else{
+            color_temp_full = td_styling_pre + color_temp ;
+        }
+        if (str_humidity_main == '-----'){
+            color_hum_full = td_styling_pre + '#888888';
+        }
+        else{
+            color_hum_full = td_styling_pre + color_hum;
+        }
 
         //------------------------Setzen der Hauptsensorwerte auf der Webseite
         if (str_temperature_main.substring(0,3) == '---' || status_piager == 0) {
             document.getElementById('json_temperature_main').innerHTML = '-----' + " °C";
+            //document.getElementById('style_temperature_main').innerHTML = color_temp_full ;
+            document.getElementById("json_temperature_main").style.textShadow = color_temp_full;
         }
         else {
             document.getElementById('json_temperature_main').innerHTML = str_temperature_main + " °C";
+            //document.getElementById('style_temperature_main').innerHTML = color_temp_full;
+            document.getElementById("json_temperature_main").style.textShadow = color_temp_full;
         }
         if (str_humidity_main.substring(0,3) == '---' || status_piager == 0) {
             document.getElementById('json_humidity_main').innerHTML = '-----' + " &#37";
+            //document.getElementById('style_humidity_main').innerHTML = color_hum_full;
+            document.getElementById('json_humidity_main').style.textShadow = color_hum_full;
         }
         else {
             document.getElementById('json_humidity_main').innerHTML = str_humidity_main + " &#37";
+            //document.getElementById('style_humidity_main').innerHTML = color_hum_full;
+            document.getElementById('json_humidity_main').style.textShadow = color_hum_full;
         }
         if (str_dewpoint_main.substring(0,3) == '---' || status_piager == 0) {
             document.getElementById('json_dewpoint_main').innerHTML = '-----' + " °C";
+            //document.getElementById('style_dewpoint_main').innerHTML = '#888888';
         }
         else {
             document.getElementById('json_dewpoint_main').innerHTML = str_dewpoint_main + " °C";
+            //document.getElementById('style_dewpoint_main').innerHTML = '#888888';
         }
 
         //------------------------Setzen der Externsensorwerte auf der Webseite

@@ -1,6 +1,7 @@
 <?php
     $sensor_temperature = round(get_table_value($current_values_table,$sensor_temperature_key), 1);
     $sensortype = get_table_value($config_settings_table,$sensortype_key);
+    $sensorsecondtype_key = get_table_value($config_settings_table,$sensorsecondtype_key);
     $language = get_table_value($config_settings_table,$language_key);
     $switch_on_cooling_compressor = get_table_value($config_settings_table,$switch_on_cooling_compressor_key);
     $switch_off_cooling_compressor = get_table_value($config_settings_table,$switch_off_cooling_compressor_key);
@@ -43,6 +44,7 @@
     if ($sensortype == 1) {
         $sensorname = 'DHT11';
         $checked_sens_1 = 'checked="checked"';
+        $sens_second_active = 'disabled = "true"';
     }
     else {
         $checked_sens_1 = '';
@@ -50,6 +52,7 @@
     if ($sensortype == 2) {
         $sensorname = 'DHT22';
         $checked_sens_2 = 'checked="checked"';
+        $sens_second_active = 'disabled = "true"';
     }
     else {
         $checked_sens_2 = '';
@@ -57,6 +60,7 @@
     if ($sensortype == 3) {
         $sensorname = 'SHT75';
         $checked_sens_3 = 'checked="checked"';
+        $sens_second_active = 'disabled = "true"';
     }
     else {
         $checked_sens_3 = '';
@@ -64,6 +68,7 @@
     if ($sensortype == 4) {
         $sensorname = 'SHT85';
         $checked_sens_4 = 'checked="checked"';
+        $sens_second_active = '';
     }
     else {
         $checked_sens_4 = '';
@@ -71,10 +76,53 @@
     if ($sensortype == 5) {
         $sensorname = 'SHT3x';
         $checked_sens_5 = 'checked="checked"';
+        $sens_second_active = '';
     }
     else {
         $checked_sens_5 = '';
     }
+    if ($sensorsecondtype_key == 0) {
+        $sensorsecondname = 'disabled';
+        $checked_senssecond_0 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_0 = '';
+    }
+    if ($sensorsecondtype_key == 1) {
+        $sensorsecondname = 'DHT11';
+        $checked_senssecond_1 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_1 = '';
+    }
+    if ($sensorsecondtype_key == 2) {
+        $sensorsecondname = 'DHT22';
+    }
+    else {
+        $checked_senssecond_2 = '';
+    }
+    if ($sensorsecondtype_key == 3) {
+        $sensorsecondname = 'SHT75';
+        $checked_senssecond_3 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_3 = '';
+    }
+    if ($sensorsecondtype_key == 4) {
+        $sensorsecondname = 'SHT85';
+        $checked_senssecond_4 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_4 = '';
+    }
+    if ($sensorsecondtype_key == 5) {
+        $sensorsecondname = 'SHT3x';
+        $checked_senssecond_5 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_5 = '';
+    }
+
     if ($language == 1) {
         $checked_language_1 = 'checked="checked"';
     }
