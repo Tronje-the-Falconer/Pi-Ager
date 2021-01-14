@@ -28,7 +28,7 @@ from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 # global logger
 # logger = pi_ager_logging.create_logger(__name__) 
 
-class cl_main_sensor_sht(cl_sensor, ABC):
+class cl_sensor_sht(cl_sensor, ABC):
     
     _RESET = 0x30A2
     _HEATER_ON = 0x306D

@@ -24,13 +24,19 @@ from sensors.pi_ager_cl_sensor_dht22 import cl_fact_sensor_dht22
 class cl_fact_sensor:
     
 #    Only a singleton instance for main_sensor
-    __o_sensor_type = cl_fact_main_sensor_type().get_instance()
+    __o_sensor_type = None
     __o_instance = None
     __ot_instances = {}
     @classmethod        
     def get_instance(self, i_active_sensor, i_address=None):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cl_fact_logger.get_instance().debug("Active Sensor = " + i_active_sensor)
+        if i_active_sensor == "MAIN": 
+               cl_fact_sensor.__o_sensor_type = cl_fact_main_sensor_type().get_instance()
+               
+        elif i_active_sensor == "SECOND": 
+            cl_fact_sensor.__o_sensor_type = cl_fact_second_sensor_type().get_instance()
+        l_sensor_type = cl_fact_sensor.__o_sensor_type
+        cl_fact_logger.get_instance().debug("Active Sensor = " + i_active_sensor + " with type " + l_sensor_type.get_sensor_type_ui() + " and address " + str(i_address))
         try:
             cl_fact_sensor.__o_instance = cl_fact_sensor.__ot_instances.pop(i_active_sensor)
             cl_fact_logger.get_instance().debug("__ot_instance for " + i_active_sensor + " = " + str(cl_fact_sensor.__ot_instances))
@@ -42,15 +48,16 @@ class cl_fact_sensor:
             return(cl_fact_sensor.__o_instance)
         try:
             if   cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'SHT75':
-                cl_fact_sensor.__o_instance = cl_fact_sensor_sht75.get_instance(i_active_sensor)
+                cl_fact_sensor.__o_instance = cl_fact_sensor_sht75.get_instance(l_sensor_type, i_active_sensor)
             elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'SHT3x':
-                cl_fact_sensor.__o_instance = cl_fact_sensor_sht3x.get_instance(i_active_sensor,i_address)
+                cl_fact_sensor.__o_instance = cl_fact_sensor_sht3x.get_instance(l_sensor_type, i_active_sensor, i_address)
             elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'SHT85':
-                cl_fact_sensor.__o_instance = cl_fact_sensor_sht85.get_instance(i_active_sensor,i_address)
+                cl_fact_sensor.__o_instance = cl_fact_sensor_sht85.get_instance(l_sensor_type, i_active_sensor, i_address)
             elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'DHT22':
-                cl_fact_sensor.__o_instance = cl_fact_sensor_dht22.get_instance(i_active_sensor)
+                cl_fact_sensor.__o_instance = cl_fact_sensor_dht22.get_instance(l_sensor_type, i_active_sensor)
             elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'DHT11':
-                cl_fact_sensor.__o_instance = cl_fact_sensor_dht11.get_instance(i_active_sensor)
+                cl_fact_sensor.__o_instance = cl_fact_sensor_dht11.get_instance(l_sensor_type, i_active_sensor)
+                
             cl_fact_logger.get_instance().debug("__ot_instances = " + str(cl_fact_sensor.__ot_instances))
             line = {i_active_sensor:cl_fact_sensor.__o_instance}
             cl_fact_sensor.__ot_instances.update(line)    

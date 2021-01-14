@@ -24,21 +24,20 @@ from main.pi_ager_cx_exception import *
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor import cl_sensor#
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
-from sensors.pi_ager_cl_sensor_sht import cl_main_sensor_sht
+from sensors.pi_ager_cl_sensor_sht import cl_sensor_sht
 
 # global logger
 # logger = pi_ager_logging.create_logger(__name__) 
 
-class cl_main_sensor_sht85(cl_main_sensor_sht):
+class cl_sensor_sht85(cl_sensor_sht):
     
-    
-    def __init__(self, i_active_sensor, i_address):
+    def __init__(self, i_sensor_type, i_active_sensor, i_address):
         # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
         cl_fact_logger.get_instance().debug("i2c address is" + str(i_address))
-        self.o_sensor_type = cl_fact_main_sensor_type.get_instance()
+        self.o_sensor_type = i_sensor_type
         self.o_address     = i_address
         super().__init__(i_active_sensor, self.o_sensor_type, self.o_address)
 
@@ -54,9 +53,9 @@ class cl_main_sensor_sht85(cl_main_sensor_sht):
         #self.get_current_data()
         self._write_to_db()
         
-class th_main_sensor_sht85(cl_main_sensor_sht85):
+class th_sensor_sht85(cl_sensor_sht85):
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
-    NAME = 'Main_sensor'
+    NAME = 'Sensor SHT85'
     
     
     def __init__(self):
@@ -69,16 +68,15 @@ class th_main_sensor_sht85(cl_main_sensor_sht85):
         if self.get_type_raise == True:
             raise cx_Sensor_not_defined(self._type_ui)        
         return(self._type)
-
     
 class cl_fact_sensor_sht85: 
-    fact_main_sensor_type = cl_fact_main_sensor_type()
+    #fact_main_sensor_type = cl_fact_main_sensor_type()
 #    Only a singleton instance for main_sensor
-    __o_sensor_type = fact_main_sensor_type.get_instance()
+    #__o_sensor_type = fact_main_sensor_type.get_instance()
     __o_instance = None
     __ot_instances = {}
     @classmethod        
-    def get_instance(self, i_active_sensor, i_address):
+    def get_instance(self, i_sensor_type, i_active_sensor, i_address):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug("cl_fact_sensor_sht85.get_instance")
         try:
@@ -91,7 +89,7 @@ class cl_fact_sensor_sht85:
             cl_fact_logger.get_instance().debug("Returning __ot_instance = " + str(cl_fact_sensor_sht85.__o_instance))
             return(cl_fact_sensor_sht85.__o_instance)
         
-        cl_fact_sensor_sht85.__o_instance = cl_main_sensor_sht85(i_active_sensor, i_address)
+        cl_fact_sensor_sht85.__o_instance = cl_sensor_sht85(i_sensor_type, i_active_sensor, i_address)
         cl_fact_logger.get_instance().debug("__ot_instance " + str(cl_fact_sensor_sht85.__o_instance) + " created for " + i_active_sensor)
         line = {i_active_sensor:cl_fact_sensor_sht85.__o_instance}
         cl_fact_sensor_sht85.__ot_instances.update(line)   

@@ -28,14 +28,14 @@ from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 # global logger
 # logger = pi_ager_logging.create_logger(__name__) 
 
-class cl_main_sensor_sht75(cl_sensor):
+class cl_sensor_sht75(cl_sensor):
     
-    def __init__(self):
+    def __init__(self, i_sensor_type, i_active_sensor):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
-        #self.o_sensor_type = o_sensor_type
-        super().__init__(cl_fact_main_sensor_type.get_instance())
+        self.o_sensor_type = i_sensor_type
+        #super().__init__(cl_fact_main_sensor_type.get_instance())
                     
         self._max_errors = 5
         self._old_temperature = 0
@@ -150,7 +150,7 @@ class cl_main_sensor_sht75(cl_sensor):
         #self.get_current_data()
         self._write_to_db()
         
-class th_main_sensor_sht75(cl_main_sensor_sht75):
+class th_sensor_sht75(cl_sensor_sht75):
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
     NAME = 'Main_sensor'
     
@@ -168,17 +168,17 @@ class th_main_sensor_sht75(cl_main_sensor_sht75):
 
     
 class cl_fact_sensor_sht75: 
-    fact_main_sensor_type = cl_fact_main_sensor_type()
+    #fact_main_sensor_type = cl_fact_main_sensor_type()
 #    Only a singleton instance for main_sensor
-    __o_sensor_type = fact_main_sensor_type.get_instance()
+    #__o_sensor_type = fact_main_sensor_type.get_instance()
     __o_instance = None
 
     @classmethod        
-    def get_instance(self):
+    def get_instance(self, i_sensor_type, i_active_sensor):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_sensor_sht75.__o_instance is not None:
             return(cl_fact_sensor_sht75.__o_instance)
-        cl_fact_sensor_sht75.__o_instance = cl_main_sensor_sht75()
+        cl_fact_sensor_sht75.__o_instance = cl_sensor_sht75(i_sensor_type, i_active_sensor)
         return(cl_fact_sensor_sht75.__o_instance)
 
     @classmethod

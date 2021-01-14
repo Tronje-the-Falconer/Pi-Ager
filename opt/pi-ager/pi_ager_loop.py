@@ -76,6 +76,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     last_humidity   = None
     sensordata={}
     sensorname = cl_fact_main_sensor_type.get_instance().get_sensor_type_ui()
+    second_sensorname = None
     # logger.debug("sensorname: " + str(sensorname))
     # logger.debug("sensortype: " + str(cl_fact_main_sensor_type.get_instance().get_sensor_type()))
     cl_fact_logger.get_instance().debug("sensorname: " + str(sensorname))
@@ -102,9 +103,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 main_sensor.execute()
                 measured_data = main_sensor.get_current_data()
                 (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
-                # logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
-                # logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
-                # logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
+
                 cl_fact_logger.get_instance().debug('sensor_temperature_big: ' + str(sensor_temperature_big))
                 cl_fact_logger.get_instance().debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
                 cl_fact_logger.get_instance().debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
@@ -121,17 +120,15 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             second_sensorname = cl_fact_second_sensor_type.get_instance().get_sensor_type_ui()        
             cl_fact_logger.get_instance().debug('Second sensor is: ' + str(second_sensorname))    
                                                                                                                 
-            if second_sensorname == 'SHT3x' or sensorname == 'SHT85':
-              if 1 == 2:
+            if second_sensorname == 'SHT3x' or second_sensorname == 'SHT85':
+                
                 try:
                     i2c_address_second_sensor = 0x45
                     second_sensor =  cl_fact_active_second_sensor().get_instance(i_address = i2c_address_second_sensor)
                     second_sensor.execute()
                     measured_second_data = second_sensor.get_current_data()
                     (second_sensor_temperature_big, second_sensor_humidity_big, second_sensor_dewpoint_big) = measured_second_data
-                    # logger.debug('sensor_temperature_big: ' + str(sensor_temperature_big))
-                    # logger.debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
-                    # logger.debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
+
                     cl_fact_logger.get_instance().debug('second_sensor_temperature_big: ' + str(second_sensor_temperature_big))
                     cl_fact_logger.get_instance().debug('second_sensor_humidity_big: ' + str(second_sensor_humidity_big)) 
                     cl_fact_logger.get_instance().debug('second_sensor_dewpoint_big: ' + str(second_sensor_dewpoint_big))

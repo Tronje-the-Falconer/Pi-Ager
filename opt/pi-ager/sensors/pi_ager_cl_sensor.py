@@ -18,7 +18,6 @@ import inspect
 from main.pi_ager_cl_logger import cl_fact_logger
 from datetime import datetime
 
-
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 #from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type, cl_fact_second_sensor_type
 
@@ -26,19 +25,15 @@ from main.pi_ager_cx_exception import *
 
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 from main.pi_ager_cl_database import cl_fact_db_influxdb
-        
-      
-        
-        
-        
-        
+
 class cl_sensor(cl_ab_sensor):
-    
+
     def __init__(self, o_sensor_type):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._error_counter = 0
         self._max_errors = 3
         self.o_sensor_type = o_sensor_type
+        
     def get_current_data(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if (self._error_counter >= self._max_errors):
@@ -46,7 +41,7 @@ class cl_sensor(cl_ab_sensor):
                  
     def get_sensor_type_ui(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return( self.o_sensor_type.get_sensor_type_ui() )
+        return( self.o_sensor_type.get_sensor_type_ui())
     
     def get_sensor_type(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
