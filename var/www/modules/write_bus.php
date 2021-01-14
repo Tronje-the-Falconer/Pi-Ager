@@ -8,7 +8,12 @@
         
         $bus = $_POST['bus'];
         $sensornum = $_POST['sensortype_admin'];
-        $sensorsecondnum = $_POST['sensorsecondtype_admin'];
+        if (isset ($_POST['sensorsecondtype_admin'])){
+            $sensorsecondnum = $_POST['sensorsecondtype_admin'];
+        } else {
+            $sensorsecondnum =  $_POST['sensorsecondtype_admin_inaktive'];
+        }
+        
         write_sensorvalue($sensornum);
         write_sensorsecondvalue($sensorsecondnum);
         logger('DEBUG', 'sensortype saved');
