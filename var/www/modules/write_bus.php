@@ -27,6 +27,9 @@
             header("Location: /shutdown.php");
             die();
         }
+        else {
+            logger('DEBUG', 'sensorbus is already correct');
+        }
 #        print '<p id=\'info-message\' style=\'color: #ff0000; font-size: 20px;\'><b>'. (_("system shutdown in 10 seconds")) .'</b><br>' . date("m/d/y h:i:s a") . ' </p>';
 
     # 10 Sekunden anzeigen, dass System heruntergefahren wird

@@ -72,8 +72,8 @@
                                                 <td></td>
                                                 <td style=" text-align: left; padding-left: 20px;">
                                                     <?php 
-                                                        if ($sens_second_active != ''){
-                                                            echo '<ul>' . _('only configurable if internal sensor is set to sht3x or sht85') . '</ul><br><br>'; 
+                                                        if ($sens_second_active != '' OR $sensorsecondtype == 0){
+                                                            echo '<ul>' . _('only configurable if internal sensor is set to sht3x or sht85') . '</ul><br><br>';
                                                         }
                                                     ?>
                                                     <input type="radio" name="sensorsecondtype_admin" value="0" <?php echo $checked_senssecond_0 . ' ' . $sens_second_active; ?>/><label> disabled</label><br>
@@ -83,11 +83,16 @@
                                                     <input type="radio" name="sensorsecondtype_admin" value="3" <?php echo $checked_senssecond_3 . ' ' . $sens_second_active; ?>/><label> SHT75</label><br> -->
                                                     <input type="radio" name="sensorsecondtype_admin" value="4" <?php echo $checked_senssecond_4 . ' ' . $sens_second_active; ?>/><label> SHT85</label><br>
                                                     <input type="radio" name="sensorsecondtype_admin" value="5" <?php echo $checked_senssecond_5 . ' ' . $sens_second_active; ?>/><label> SHT3x</label><br>
+                                                     <?php 
+                                                        if ($sens_second_active != '' OR $sensorsecondtype == 0){
+                                                            echo '<input type="hidden" name="sensorsecondtype_admin" value="' . $sensorsecondtype . '" />';
+                                                        }
+                                                    ?>
                                                     <br>
                                                 </td>
                                             </tr>
                                         </table>
-                                        <input type="hidden" name="bus" type="number" value="<?php $bus; ?>">
+                                        <input name="bus" type="hidden" required value="<?php echo $bus; ?>">
                                         <script>
                                             function help_sensortype_blockFunction() {
                                                 document.getElementById('help_sensortype').style.display = 'block';

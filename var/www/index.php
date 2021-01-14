@@ -37,7 +37,7 @@
                                         </tr>
                                     </table>
                                     <?php
-                                        if ($bus_name == 'i2c'){
+                                        if ($bus == 1 || $sensorsecondtype == 0){
                                             echo '<table class="switching_state miniature_writing" style="display: none !important;">';
                                         }
                                         else {

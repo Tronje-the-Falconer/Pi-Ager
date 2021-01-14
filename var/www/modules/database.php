@@ -684,7 +684,7 @@
         global $value_field, $key_field, $config_settings_table, $sensorbus_key;
         
         open_connection();
-        $sql = 'UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . $chosen_busvalue . ' WHERE ' . $key_field . ' = "' . $sensorbus_key . '";';
+        $sql = 'UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($chosen_busvalue) . ' WHERE ' . $key_field . ' = "' . $sensorbus_key . '";';
         execute_query($sql);
         
         close_database();
