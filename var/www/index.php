@@ -492,7 +492,7 @@
                                         <tr>
                                             <?php 
                                                     // Prüft, ob Prozess RSS läuft
-                                                    $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
+                                                    //$grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
                                                     if ($grepmain == 0){
                                                         echo '<td><img src="images/icons/operatingmode_fail_42x42.png" alt="" style="padding: 10px;"></td>';
                                                         echo '<td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
@@ -511,7 +511,7 @@
                                             </td>
                                             <?php 
                                                     // Prüft, ob Prozess spannung vorhanden ist
-                                                    $read_gpio_voltage = shell_exec('sudo /var/sudowebscript.sh read_gpio_voltage');
+                                                    //$read_gpio_voltage = shell_exec('sudo /var/sudowebscript.sh read_gpio_voltage');
                                                     if ($read_gpio_voltage == 1){
                                                         echo '<td>';
                                                         echo '<img src="images/icons/5v_42x42.png" alt="" style="padding-top: 10px;">';
@@ -545,7 +545,7 @@
                                             </td>
                                             <?php 
                                                 // Prüft, ob Batteriespannung vorhanden ist
-                                                $read_gpio_battery = shell_exec('sudo /var/sudowebscript.sh read_gpio_battery');
+                                                //$read_gpio_battery = shell_exec('sudo /var/sudowebscript.sh read_gpio_battery');
                                                 if ($read_gpio_battery == 1){
                                                     echo '<td>';
                                                     echo '<img src="images/icons/battery_42x42.png" alt="" style="padding-top: 10px;">';
@@ -572,7 +572,7 @@
                                         <tr>
                                             <?php 
                                                 // Prüft, ob Prozess Reifetab läuft
-                                                $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
+                                                //$grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
                                                 if ($grepagingtable == 0){
                                                     echo '<td><img src="images/icons/agingtable_42x42.png" alt="" style="padding: 10px;"></td>';
                                                     echo '<td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
@@ -612,7 +612,7 @@
                                             </td>
                                                 <?php 
                                                     // Prüft, ob Prozess spannung vorhanden ist
-                                                    $read_gpio_digital_switch = shell_exec('sudo /var/sudowebscript.sh read_gpio_digital_switch');
+                                                    //$read_gpio_digital_switch = shell_exec('sudo /var/sudowebscript.sh read_gpio_digital_switch');
                                                     if ($read_gpio_digital_switch == 0){
                                                         echo '<td>';
                                                         echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;">';
@@ -849,7 +849,7 @@
                                         </tr>
                                         <tr>
                                             <?php
-                                                $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
+                                                //$grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
                                                 if ($grepscale == 0){
                                                     echo '<td><img src="images/icons/scale_fail_42x42.png" alt=""></td>
                                                             <td><img src="images/icons/status_off_20x20.png" title=""></td>
@@ -878,7 +878,7 @@
                                         </tr>
                                         <tr>
                                             <?php
-                                                $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
+                                                //$grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
                                                 if ($grepscale == 0){
                                                     echo '<td></td>
                                                             <td></td>
