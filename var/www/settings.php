@@ -36,10 +36,10 @@
                                     <?php 
                                         print '<form  method="post">';
                                         // Prüft, ob Prozess RSS läuft ( NULL = Rss.py läuft nicht als Prozess, )
-                                        $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
+                                        //$grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
                                         // Prüft, ob Prozess Reifetab läuft ()
-                                        $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
-                                        $grepbackup = shell_exec('sudo /var/sudowebscript.sh grepbackup');
+                                        //$grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
+                                        //$grepbackup = shell_exec('sudo /var/sudowebscript.sh grepbackup');
                                         if ($grepbackup != NULL){ //wenn backup läuft
                                             echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
                                             <td></td>
@@ -86,7 +86,7 @@
                                         <?php
                                             print '<tr>';
                                             // Prüft, ob Prozess scale läuft ( NULL = scale.py läuft nicht als Prozess)
-                                            $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
+                                            //$grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
                                             if ($grepbackup != NULL){ //wenn backup läuft
                                                 echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
                                                 <td></td>

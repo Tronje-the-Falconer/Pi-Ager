@@ -1,4 +1,16 @@
-<?php 
+<?php
+#gpio
+$gpio_cooling_compressor = 4;
+$gpio_heater = 3;
+$gpio_humidifier = 18;
+$gpio_circulating_air = 24;
+$gpio_exhausting_air = 23;
+$gpio_uv_light = 25;
+$gpio_light = 8;
+$gpio_dehumidifier = 7;
+$gpio_voltage = 26;
+$gpio_battery = 11;
+$gpio_digital_switch = 22;
 #------------------------ tables names
 $config_settings_table = 'config';
 $data_sensor_temperature_table = 'sensor_temperature_data';
