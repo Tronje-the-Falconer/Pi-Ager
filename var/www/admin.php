@@ -87,6 +87,7 @@
                                                 </td>
                                             </tr>
                                         </table>
+                                        <input type="hidden" name="bus" type="number" value="<?php $bus; ?>">
                                         <script>
                                             function help_sensortype_blockFunction() {
                                                 document.getElementById('help_sensortype').style.display = 'block';

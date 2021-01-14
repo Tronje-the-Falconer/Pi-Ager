@@ -8,6 +8,7 @@
                                       include 'modules/read_operating_mode_db.php';                  // Liest die Art der Reifesteuerung
                                       include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
                                       include 'modules/read_current_db.php';                    // Liest die gemessenen Werte Temp, Humy, Timestamp
+                                      include 'modules/read_bus.php';                           //liest den bus aus, um externsensor ein oder auszublenden
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('mainsensors'); ?></h2>
                         <!--        <div style="float: left; padding-left: 8px;" id="timestamp"></div>
@@ -36,11 +37,16 @@
                                         </tr>
                                     </table>
                                     <?php
-                                        if ($checked_senssecond_0== ''){
+                                        if ($bus_name == 'i2c'){
+                                            echo '<table class="switching_state miniature_writing" style="display: none !important;">';
+                                        }
+                                        else {
                                             echo '<hr><h2>';
                                             echo _('external');
-                                            echo '</h2>
-                                                    <table class="switching_state miniature_writing">
+                                            echo '</h2>';
+                                            echo '<table class="switching_state miniature_writing">';
+                                        }
+                                        echo '    
                                                         <tr>
                                                             <td>
                                                                 <img src="images/icons/temperature_extern_42x42.png" alt="" style="padding-top: 10px;">
@@ -58,7 +64,6 @@
                                                             <td id="json_dewpoint_extern" style="text-align: center; font-size: 20px;"></td>
                                                         </tr>
                                                     </table>';
-                                        }
                                     ?>
                                 </div>
                                 <hr>
