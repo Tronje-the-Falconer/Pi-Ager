@@ -545,7 +545,8 @@
                                         <tr>
                                             <form method="post" name="manual_backup">
                                                 <?php 
-                                                    $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
+                                                    //$grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
+                                                    $grepagingtable = shell_exec('ps ax | grep -v grep | grep agingtable.py');
                                                     if ($grepagingtable == 0){
                                                         echo '<td><button class="art-button" name="manual_backup" value="manual_backup" onclick="return confirm(' . _('ATTENTION: backup manually?') . ');">' . _('backup manually') . '</button></td>';
                                                     }
