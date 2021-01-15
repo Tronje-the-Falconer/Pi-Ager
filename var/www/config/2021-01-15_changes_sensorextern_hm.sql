@@ -1,7 +1,7 @@
 ----
 -- phpLiteAdmin database dump (https://www.phpliteadmin.org/)
 -- phpLiteAdmin version: 1.9.8.2
--- Exported: 9:12pm on January 15, 2021 (CET)
+-- Exported: 10:00pm on January 15, 2021 (CET)
 -- database file: ./config/pi-ager.sqlite3
 ----
 BEGIN TRANSACTION;
@@ -44,7 +44,7 @@ INSERT INTO "config" ("id","key","value","last_change") VALUES ('27','failure_hu
 INSERT INTO "config" ("id","key","value","last_change") VALUES ('28','failure_temperature_delta','4.0','0');
 INSERT INTO "config" ("id","key","value","last_change") VALUES ('29','samples_refunit_tara','20.0','0');
 INSERT INTO "config" ("id","key","value","last_change") VALUES ('30','spikes_refunit_tara','4.0','0');
-INSERT INTO "config" ("id","key","value","last_change") VALUES ('31','save_temperature_humidity_loops','27.0','0');
+INSERT INTO "config" ("id","key","value","last_change") VALUES ('31','save_temperature_humidity_loops','6.0','0');
 INSERT INTO "config" ("id","key","value","last_change") VALUES ('32','sensorbus','0.0','0');
 INSERT INTO "config" ("id","key","value","last_change") VALUES ('33','meat1_sensortype','1.0','1610706559');
 INSERT INTO "config" ("id","key","value","last_change") VALUES ('34','meat2_sensortype','3.0','1610706559');
@@ -63,19 +63,19 @@ CREATE TABLE "current_values" ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
 ----
 -- Data dump for current_values, a total of 33 rows
 ----
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('1','sensor_temperature','16.52','1610741566');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('2','sensor_humidity','36.9','1610741566');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('3','status_circulating_air','1.0','1610741566');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('4','status_cooling_compressor','0.0','1610741566');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('5','status_exhaust_air','0.0','1610741566');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('6','status_heater','1.0','1610741566');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('7','status_light','0.0','1610741566');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('8','status_uv','0.0','1610741566');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('9','status_humidifier','1.0','1610741566');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('10','status_dehumidifier','0.0','1610741566');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('11','scale1','400.620238095238','1610741540');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('1','sensor_temperature','4.41','1610744415');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('2','sensor_humidity','38.15','1610744416');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('3','status_circulating_air','1.0','1610744416');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('4','status_cooling_compressor','0.0','1610744416');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('5','status_exhaust_air','0.0','1610744416');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('6','status_heater','1.0','1610744415');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('7','status_light','0.0','1610744416');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('8','status_uv','0.0','1610744416');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('9','status_humidifier','1.0','1610744416');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('10','status_dehumidifier','0.0','1610744416');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('11','scale1','547.320068027211','1610744409');
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('12','scale2','0.0','1610650477');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('13','status_piager','1.0','1610727742');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('13','status_piager','1.0','1610743612');
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('14','status_agingtable','0.0','1610724548');
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('15','status_scale1','0.0','1610724560');
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('16','status_scale2','0.0','1610650477');
@@ -88,10 +88,10 @@ INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('22','ca
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('23','calibrate_scale2','0.0','1608641257');
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('24','calibrate_weight','0.0','1608641257');
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('25','status_uv_manual','0.0','1608641257');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('26','temperature_meat1','17.538','1610741566');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('27','temperature_meat2','17.006','1610741566');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('28','temperature_meat3',NULL,'1610741566');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('29','temperature_meat4','0.043','1610741566');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('26','temperature_meat1','6.236','1610744416');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('27','temperature_meat2','5.229','1610744416');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('28','temperature_meat3',NULL,'1610744416');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('29','temperature_meat4','0.414','1610744416');
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('30','sensor_dewpoint','0.0','1610724567');
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('31','sensor_extern_temperature','0.0','1610724567');
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('32','sensor_extern_humidity','55.0','1610724567');
@@ -108,16 +108,6 @@ CREATE TABLE 'sensor_dewpoint_data' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT 
 INSERT INTO "sensor_dewpoint_data" ("id","value","last_change","key") VALUES ('1','22.0','1610724498','0');
 
 ----
--- Table structure for sensor_extern_dewpiont_data
-----
-CREATE TABLE 'sensor_extern_dewpiont_data' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0 , 'value' REAL NOT NULL DEFAULT 0 , 'last_change' INTEGER NOT NULL DEFAULT 0 , 'key' TEXT NOT NULL DEFAULT '0');
-
-----
--- Data dump for sensor_extern_dewpiont_data, a total of 1 rows
-----
-INSERT INTO "sensor_extern_dewpiont_data" ("id","value","last_change","key") VALUES ('1','2.0','1610724498','0');
-
-----
 -- Table structure for sensor_extern_temperature_data
 ----
 CREATE TABLE 'sensor_extern_temperature_data' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0 , 'value' REAL NOT NULL DEFAULT 0 , 'last_change' INTEGER NOT NULL DEFAULT 0 , 'key' TEXT NOT NULL DEFAULT '0');
@@ -128,19 +118,22 @@ CREATE TABLE 'sensor_extern_temperature_data' ('id' INTEGER PRIMARY KEY AUTOINCR
 INSERT INTO "sensor_extern_temperature_data" ("id","value","last_change","key") VALUES ('1','11.0','1610724498','0');
 
 ----
+-- Table structure for sensor_extern_dewpoint_data
+----
+CREATE TABLE 'sensor_extern_dewpoint_data' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0 , 'value' REAL NOT NULL DEFAULT 0 , 'last_change' INTEGER NOT NULL DEFAULT 0 , 'key' TEXT NOT NULL DEFAULT '0');
+
+----
+-- Data dump for sensor_extern_dewpoint_data, a total of 0 rows
+----
+
+----
 -- Table structure for sensor_extern_humidity_data
 ----
-CREATE TABLE 'sensor_extern_humidity_data' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0 , 'value' REAL NOT NULL DEFAULT 0 , 'last_change' INTEGER NOT NULL DEFAULT 0 , 'key' TEXT NOT NULL DEFAULT '0');
+CREATE TABLE 'sensor_extern_humidity_data' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0 , 'value' INTEGER NOT NULL DEFAULT 0 , 'last_change' INTEGER NOT NULL DEFAULT 0 , 'key' INTEGER NOT NULL DEFAULT 0 );
 
 ----
--- Data dump for sensor_extern_humidity_data, a total of 1 rows
+-- Data dump for sensor_extern_humidity_data, a total of 0 rows
 ----
-INSERT INTO "sensor_extern_humidity_data" ("id","value","last_change","key") VALUES ('1','55.0','1610724498','0');
-
-----
--- structure for index humidity	 on table sensor_extern_humidity_data
-----
-CREATE INDEX 'humidity	' ON "sensor_extern_humidity_data" ("last_change" ASC);
 
 ----
 -- structure for index temperature_extern on table sensor_extern_temperature_data
@@ -148,12 +141,17 @@ CREATE INDEX 'humidity	' ON "sensor_extern_humidity_data" ("last_change" ASC);
 CREATE INDEX 'temperature_extern' ON "sensor_extern_temperature_data" ("last_change" ASC);
 
 ----
--- structure for index dewpoint_extern on table sensor_extern_dewpiont_data
-----
-CREATE INDEX 'dewpoint_extern' ON "sensor_extern_dewpiont_data" ("last_change" ASC);
-
-----
 -- structure for index dewpoint on table sensor_dewpoint_data
 ----
 CREATE INDEX 'dewpoint' ON "sensor_dewpoint_data" ("last_change" ASC);
+
+----
+-- structure for index dewpoint_extern on table sensor_extern_dewpoint_data
+----
+CREATE INDEX 'dewpoint_extern' ON "sensor_extern_dewpoint_data" ("last_change" ASC);
+
+----
+-- structure for index humidity_extern on table sensor_extern_humidity_data
+----
+CREATE INDEX 'humidity_extern' ON "sensor_extern_humidity_data" ("last_change" ASC);
 COMMIT;
