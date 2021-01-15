@@ -893,6 +893,14 @@
         
         close_database();
     }
+    
+    function write_table_value($table, $field_key, $key, $field_value, $value){
+        open_connection();
+        $sql = 'UPDATE ' . $table . ' SET "' . $field_value . '" = "' . $value . '" WHERE "' . $field_key . '" = "' . $key .'"';
+        execute_query($sql);
+        
+        close_database();
+    }
 
     function get_alarm_names(){
         global $alarm_alarm_field, $alarm_table;
