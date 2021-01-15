@@ -55,7 +55,7 @@
             $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain'); # RSS hat sich geändert daher neu setzen
             if($grepmain != 0) {                
                 write_table_value($config_settings_table, $key_field, $agingtable_startperiod_key, $value_field, $agingtable_startperiod);
-                write_table_value($config_settings_table, $key_field, $agingtable_startperiod_key, $value_field, $agingtable_startday);
+                write_table_value($config_settings_table, $key_field, $agingtable_startday_key, $value_field, $agingtable_startday);
                 write_start_in_database($status_agingtable_key);
                 sleep(2); //warten auf annahme der Startsequenz
                 // prüfen ob main immer noch läuft und ob main im messloop
@@ -75,7 +75,7 @@
         }
         elseif($grepmain != 0) {
                 write_table_value($config_settings_table, $key_field, $agingtable_startperiod_key, $value_field, $agingtable_startperiod);
-                write_table_value($config_settings_table, $key_field, $agingtable_startperiod_key, $value_field, $agingtable_startday);
+                write_table_value($config_settings_table, $key_field, $agingtable_startday_key, $value_field, $agingtable_startday);
                 write_start_in_database($status_agingtable_key);
                 sleep(5);
                 $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
