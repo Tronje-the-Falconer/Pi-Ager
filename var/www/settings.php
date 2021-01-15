@@ -188,7 +188,7 @@
                                         <tr>
                                             <td width="100px"></td>
                                             <td width="100px"></td>
-                                            <td width="200px"></td>
+                                            <td width="150px"></td>
                                             <td ></td>
                                             <td ></td>
                                         </tr>
@@ -225,10 +225,9 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <td style="text-align: left;">
-                                                
-                                            </td>
-                                            <td></td>
+                                            <td align="left">Startphase: <input type="number" name="agingtable_startperiod"> <br>
+                                            Starttag: <input type="number" name="agingtable_startday"></td>
+                                            <td align="left"></td>
                                         </tr>
                                         <tr>
                                             <td></td>
@@ -259,7 +258,7 @@
                                                 ?>
                                             </td>
                                             <td></td>
-                                            <td></td>
+                                            <td align="left"></td>
                                         </tr>
                                     </table>
                                     </form>
@@ -336,8 +335,23 @@
                                             <td></td>
                                         </tr>
                                     </table>
+                                    <?php
+                                         $current_period = get_table_value($current_values_table, $agingtable_period_key);
+                                     ?>
+                                    <table style="width: 100%" class="switching_state miniature_writing">
+                                        <tr>
+                                            <td width="75px" colspan="2" align="left"><?php echo _('aktual phase and time') ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="75px"><?php echo _('phase') ?></td><td align="left"><?php echo intval($current_period) + 1 ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="75px"><?php echo _('day')  ?></td><td align="left"><?php echo $current_period  ?></td>
+                                        </tr>
+                                    </table>
                                     <table id="show_agingtable" class="show_agingtable">
                                         <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo  _('phase') ?><span class="tooltiptext"><?php echo   _('phase') ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('modus') ?><span class="tooltiptext"><?php echo _('aging-modus'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">&phi;<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
@@ -358,7 +372,6 @@
                                                     $agingtable_comment = _('no comment');
                                                 }
                                                 
-                                                $current_period = get_table_value($current_values_table, $agingtable_period_key);
                                                 //$current_period_0 = $current_period - 1;
                                                 try {
                                                     $number_rows = count($agingtable_rows);
@@ -396,6 +409,7 @@
                                                         else{
                                                             echo '<tr>';
                                                         }
+                                                            echo '<td>'. ($index_row + 1) .'</td>';
                                                             echo '<td>'. $data_modus .'</td>';
                                                             echo '<td>'. $data_setpoint_humidity .'</td>';
                                                             echo '<td>'. $data_setpoint_temperature .'</td>';
