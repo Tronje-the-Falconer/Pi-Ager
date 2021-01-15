@@ -212,17 +212,17 @@ dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=1M status=progress
 echo "Starte schreibende Dienste wieder!"
 #${DIENSTE_START_STOP} start
 if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
-  "Starte Pi-Ager Main"
+echo  "Starte Pi-Ager Main"
   systemctl start pi-ager_main &
 fi
 
 if [ $PI_AGER_SCALE_ACTIVE == 1 ]; then
-  "Startee Pi-Ager Scale"
+echo  "Starte Pi-Ager Scale"
   systemctl start pi-ager_scale &
 fi
 
 if [ $PI_AGER_AGINGTABLE_ACTIVE == 1 ]; then
-  "Stoppe Pi-Ager Agingtable"
+echo  "Starte Pi-Ager Agingtable"
   systemctl start pi-ager_agingtable &
 fi
 
