@@ -125,7 +125,7 @@ $meat3_sensortype_key = 'meat3_sensortype';
 $meat4_sensortype_key = 'meat4_sensortype';
 $customtime_for_diagrams_key = 'customtime_for_diagrams';
 $agingtable_startday_key = 'agingtable_startday';
-$agingtable_startperiod_key = 'agingtable_startday';
+$agingtable_startperiod_key = 'agingtable_startperiod';
 
 #-----------------------------table fields;
 $key_field = 'key';
