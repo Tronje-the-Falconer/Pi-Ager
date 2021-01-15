@@ -133,9 +133,15 @@
                                                     backgroundColor: '#C03738',
                                                     borderColor: '#C03738',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 },
@@ -146,9 +152,15 @@
                                                     backgroundColor: '#59A9C4',
                                                     borderColor: '#59A9C4',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 }]
@@ -254,9 +266,15 @@
                                                     backgroundColor: '#AEC645',
                                                     borderColor: '#AEC645',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false,
                                                     spanGaps: true
@@ -268,9 +286,15 @@
                                                     backgroundColor: '#BF9543',
                                                     borderColor: '#BF9543',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false,
                                                     spanGaps: true
@@ -408,9 +432,15 @@
                                                     backgroundColor: '#F7AC08',
                                                     borderColor: '#F7AC08',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 },
@@ -421,9 +451,15 @@
                                                     backgroundColor: '#06AF8F',
                                                     borderColor: '#06AF8F',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 },                                                
@@ -434,9 +470,15 @@
                                                     backgroundColor: '#AF06A1',
                                                     borderColor: '#AF06A1',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 }]
@@ -547,11 +589,15 @@
                                                     backgroundColor: '#ff0000',
                                                     borderColor: '#ff0000',
                                                     borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {
-                                                                print 'pointRadius: 1, pointHitRadius: 5,';
-                                                          } else {
-                                                                print 'pointRadius: 0, pointHitRadius: 5,';
-                                                          } ?>
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 }]

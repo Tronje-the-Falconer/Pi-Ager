@@ -268,6 +268,15 @@
     elseif ($diagram_mode == 'week') {
         $nth_value = 4;
     }
+    elseif ($diagram_mode == 'custom') {
+        $min_time_window = 604800 / 4;  // if time windows <= 1/4 week then nth = 1
+        if ($customtime > $min_time_window) {   
+            $nth_value =  intval($customtime / $min_time_window);
+            if ($nth_value < 1) {
+                $nth_value = 1;
+            }
+        }
+    }
     
     
     $temperature_values = get_diagram_values_range($data_sensor_temperature_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
