@@ -44,7 +44,7 @@
         }
         if (isset($_POST['agingtable_startday'])){
             $agingtable_startday = $_POST['agingtable_startday'];
-            $agingtable_startday = $agingtable_startday - 1;
+            $agingtable_startday = $agingtable_startday;
         } else {
             $agingtable_startday = 0;
         }
