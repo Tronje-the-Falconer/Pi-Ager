@@ -5,6 +5,7 @@
                                     include 'modules/write_customtime_db.php';                        //speichert die individuelle Zeit für die Diagramme
                                 ?>
                                 <!----------------------------------------------------------------------------------------Was eben hier hin kommt ...-->
+								
                                 <?php 
                                     // wenn nichts anderes ausgewählt wurde, ist Stündlich ausgewählt
                                     if (isset ($_GET['diagram_mode'])) {
