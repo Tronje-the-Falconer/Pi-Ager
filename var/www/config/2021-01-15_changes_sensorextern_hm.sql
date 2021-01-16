@@ -9,6 +9,7 @@ BEGIN TRANSACTION;
 ----
 -- Table structure for config
 ----
+DROP TABLE IF EXISTS "config";
 CREATE TABLE 'config' ('id' INTEGER DEFAULT 0 PRIMARY KEY AUTOINCREMENT NOT NULL, 'key' TEXT DEFAULT 0 NOT NULL, 'value' REAL DEFAULT 0 NOT NULL, 'last_change' INTEGER DEFAULT 0 NOT NULL);
 
 ----
@@ -58,6 +59,7 @@ INSERT INTO "config" ("id","key","value","last_change") VALUES ('40','agingtable
 ----
 -- Table structure for current_values
 ----
+DROP TABLE IF EXISTS "current_values";
 CREATE TABLE "current_values" ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'key' TEXT NOT NULL, 'value' REAL, 'last_change' INTEGER NOT NULL);
 
 ----
@@ -100,6 +102,7 @@ INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('33','se
 ----
 -- Table structure for sensor_dewpoint_data
 ----
+DROP TABLE IF EXISTS "sensor_dewpoint_data";
 CREATE TABLE 'sensor_dewpoint_data' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0 , 'value' REAL NOT NULL DEFAULT 0 , 'last_change' INTEGER NOT NULL DEFAULT 0 , 'key' TEXT NOT NULL DEFAULT '0');
 
 ----
@@ -110,6 +113,7 @@ INSERT INTO "sensor_dewpoint_data" ("id","value","last_change","key") VALUES ('1
 ----
 -- Table structure for sensor_extern_temperature_data
 ----
+DROP TABLE IF EXISTS "sensor_extern_temperature_data";
 CREATE TABLE 'sensor_extern_temperature_data' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0 , 'value' REAL NOT NULL DEFAULT 0 , 'last_change' INTEGER NOT NULL DEFAULT 0 , 'key' TEXT NOT NULL DEFAULT '0');
 
 ----
@@ -120,6 +124,7 @@ INSERT INTO "sensor_extern_temperature_data" ("id","value","last_change","key") 
 ----
 -- Table structure for sensor_extern_dewpoint_data
 ----
+DROP TABLE IF EXISTS "sensor_extern_dewpoint_data";
 CREATE TABLE 'sensor_extern_dewpoint_data' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0 , 'value' REAL NOT NULL DEFAULT 0 , 'last_change' INTEGER NOT NULL DEFAULT 0 , 'key' TEXT NOT NULL DEFAULT '0');
 
 ----
@@ -130,6 +135,7 @@ INSERT INTO "sensor_extern_dewpoint_data" ("id","value","last_change","key") VAL
 ----
 -- Table structure for sensor_extern_humidity_data
 ----
+DROP TABLE IF EXISTS "sensor_extern_humidity_data";
 CREATE TABLE 'sensor_extern_humidity_data' ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL DEFAULT 0 , 'value' REAL NOT NULL DEFAULT 0 , 'last_change' INTEGER NOT NULL DEFAULT 0 , 'key' TEXT NOT NULL DEFAULT '0');
 
 ----
