@@ -21,11 +21,11 @@
                                             <tr>
                                                 <td class="td_png_icon"><h3><?php echo _('operating mode'); ?></h3><img src="images/icons/operatingmode_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_operation_mode_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td style=" text-align: left; padding-left: 20px;">
-                                                <input type="radio" name="modus_settings" value="0" <?php echo $checked_0; ?>/><label> <?php echo _('cooling'); ?></label><br>
-                                                <input type="radio" name="modus_settings" value="1" <?php echo $checked_1; ?>/><label> <?php echo _('cooling with humidification'); ?></label><br>
-                                                <input type="radio" name="modus_settings" value="2" <?php echo $checked_2; ?>/><label> <?php echo _('heating with humidification'); ?></label><br>
-                                                <input type="radio" name="modus_settings" value="3" <?php echo $checked_3; ?>/><label> <?php echo _('automatik with humidification'); ?></label><br>
-                                                <input type="radio" name="modus_settings" value="4" <?php echo $checked_4; ?>/><label> <?php echo _('automatik with dehumidification and humidification'); ?></label><br><br>
+                                                <input type="radio" name="modus_settings" value="0" <?php echo $checked_0; ?>/><label> <?php echo '0 - '._('cooling'); ?></label><br>
+                                                <input type="radio" name="modus_settings" value="1" <?php echo $checked_1; ?>/><label> <?php echo '1 - '._('cooling with humidification'); ?></label><br>
+                                                <input type="radio" name="modus_settings" value="2" <?php echo $checked_2; ?>/><label> <?php echo '2 - '._('heating with humidification'); ?></label><br>
+                                                <input type="radio" name="modus_settings" value="3" <?php echo $checked_3; ?>/><label> <?php echo '3 - '._('automatik with humidification'); ?></label><br>
+                                                <input type="radio" name="modus_settings" value="4" <?php echo $checked_4; ?>/><label> <?php echo '4 - '._('automatik with dehumidification and humidification'); ?></label><br><br>
                                                 <?php echo '<b>'._('circulating air and exhaust air timer').'</b> '._('can be used independently of the selected mode.'); ?>
                                                 </td>
                                             </tr>
