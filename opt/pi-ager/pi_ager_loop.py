@@ -141,9 +141,12 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                         cx_i2c_bus_error ) as cx_error:
                     cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
             
+            cl_fact_logger.get_instance().debug('Second sensor end: ' + str(second_sensorname))  
             """
             Zweiter Sensor SHT3x oder SHT85 Ende
             """
+        cl_fact_logger.get_instance().debug('After Second sensor end: ' + str(second_sensorname))  
+
         last_temperature = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
         last_humidity = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)                
         if last_temperaure is not None and last_humidity is not None:
