@@ -47,6 +47,10 @@ $email_recipients_table = 'config_email_recipient';
 $alarm_table = 'config_alarm';
 $messenger_table = 'config_messenger_exception';
 $messenger_event_table = 'config_messenger_event';
+$data_sensor_dewpoint_table = 'sensor_dewpoint_data';
+$data_sensor_extern_temperature_table = 'sensor_extern_temperature_data';
+$data_sensor_extern_dewpoint_table = 'sensor_extern_dewpoint_data';
+$data_sensor_extern_humidity_table ='sensor_extern_humidity_data';
 
 #----------------------------table keys;
 $switch_on_cooling_compressor_key = 'switch_on_cooling_compressor';
@@ -126,6 +130,10 @@ $meat4_sensortype_key = 'meat4_sensortype';
 $customtime_for_diagrams_key = 'customtime_for_diagrams';
 $agingtable_startday_key = 'agingtable_startday';
 $agingtable_startperiod_key = 'agingtable_startperiod';
+$sensor_dewpoint_key = 'sensor_dewpoint';
+$sensor_extern_temperature_key = 'sensor_extern_temperature';
+$sensor_extern_humidity_key = 'sensor_extern_humidity';
+$sensor_extern_dewpoint_key = 'sensor_extern_dewpoint';
 
 #-----------------------------table fields;
 $key_field = 'key';
@@ -214,6 +222,10 @@ $changelogfile = '/var/www/changelog.html';
 #-----------------------------JSON Keys
 $last_change_temperature_json_key = 'last_change_temperature';
 $last_change_humidity_json_key = 'last_change_humidity';
+$last_change_dewpoint_json_key = 'last_change_dewpoint';
+$last_change_extern_temperature_json_key = 'last_change_extern_temperature';
+$last_change_extern_humidity_json_key = 'last_change_extern_humidity';
+$last_change_extern_dewpoint_json_key = 'last_change_extern_dewpoint';
 $last_change_scale1_json_key = 'last_change_scale1';
 $last_change_scale2_json_key = 'last_change_scale2';
 $last_change_temperature_meat1_json_key = 'last_change_temperature_meat1';

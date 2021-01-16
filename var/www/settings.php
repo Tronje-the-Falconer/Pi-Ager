@@ -225,8 +225,18 @@
                                                     }
                                                 ?>
                                             </td>
-                                            <td align="left"><?php echo _('startphase') . ':' ?> <input width="50px" type="number" step="1" name="agingtable_startperiod"> <br>
-                                            <?php echo _('startday') . ':' ?><input width="50px"type="number" step="1" name="agingtable_startday"></td>
+                                            <td>
+                                                <table>
+                                                   <tr>
+                                                        <td align="left"><?php echo _('startphase') . ':' ?></td>
+                                                        <td><input type="number" step="1" name="agingtable_startperiod" value="1"> </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><?php echo _('startday of phase') . ':' ?></td>
+                                                        <td><input type="number" step="1" name="agingtable_startday" value="1"></td>
+                                                    </tr>
+                                                </table>
+                                            </td>
                                             <td align="left"></td>
                                         </tr>
                                         <tr>
