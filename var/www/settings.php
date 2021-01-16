@@ -229,11 +229,11 @@
                                                 <table>
                                                    <tr>
                                                         <td align="left"><?php echo _('startphase') . ':' ?></td>
-                                                        <td ><input style="width:50px;" type="number" step="1" name="agingtable_startperiod" value="1"> </td>
+                                                        <td><input type="number" style="width: 60px; step="1" name="agingtable_startperiod" value="1"> </td>
                                                     </tr>
                                                     <tr>
                                                         <td><?php echo _('startday of phase') . ':' ?></td>
-                                                        <td ><input style="width:50px;" type="number" step="1" name="agingtable_startday" value="1"></td>
+                                                        <td><input type="number" style="width: 60px; step="1" name="agingtable_startday" value="1"></td>
                                                     </tr>
                                                 </table>
                                             </td>
