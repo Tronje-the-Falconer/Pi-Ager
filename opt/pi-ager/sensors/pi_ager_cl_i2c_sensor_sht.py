@@ -102,20 +102,20 @@ class cl_fact_i2c_sensor_sht(ABC):
         """
         try:
             cl_fact_i2c_sensor_sht.__o_instance = cl_fact_i2c_sensor_sht.__ot_instances.pop(i_active_sensor)
-            cl_fact_logger.get_instance().debug("__ot_instance for " + i_active_sensor + " = " + str(cl_fact_i2c_sensor_sht.__o_instance))
+            cl_fact_logger.get_instance().debug("i2c __ot_instance for " + i_active_sensor + " = " + str(cl_fact_i2c_sensor_sht.__o_instance) + " found ")
         except KeyError:
-            cl_fact_logger.get_instance().debug("__ot_instance not found for " + i_active_sensor)
+            cl_fact_logger.get_instance().debug("i2c __ot_instance not found for " + i_active_sensor)
             cl_fact_i2c_sensor_sht.__o_instance = None
              
         if  cl_fact_i2c_sensor_sht.__o_instance is not None :
-            cl_fact_logger.get_instance().debug("Returning __ot_instance = " + str(cl_fact_i2c_sensor_sht.__o_instance))
+            cl_fact_logger.get_instance().debug("Returning i2c __ot_instance = " + str(cl_fact_i2c_sensor_sht.__o_instance))
             return(cl_fact_i2c_sensor_sht.__o_instance)
         
         cl_fact_i2c_sensor_sht.__o_instance = cl_i2c_sensor_sht(i_active_sensor, i_i2c_bus, i_address)
         cl_fact_logger.get_instance().debug("__ot_instance " + str(cl_fact_i2c_sensor_sht.__o_instance) + " created for " + i_active_sensor)
         line = {i_active_sensor:cl_fact_i2c_sensor_sht.__o_instance}
         cl_fact_i2c_sensor_sht.__ot_instances.update(line)   
-        cl_fact_logger.get_instance().debug("__ot_instances = " + str(cl_fact_i2c_sensor_sht.__ot_instances))
+        cl_fact_logger.get_instance().debug("New i2c__ot_instances = " + str(cl_fact_i2c_sensor_sht.__ot_instances))
         return(cl_fact_i2c_sensor_sht.__o_instance)
 
     def __init__(self):
