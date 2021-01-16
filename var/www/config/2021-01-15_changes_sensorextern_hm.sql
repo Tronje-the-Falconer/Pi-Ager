@@ -86,7 +86,7 @@ INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('18','st
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('19','agingtable_period','0.0','1610724489');
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('20','agingtable_period_starttime','1610724479.0','1610724479');
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('21','status_light_manual','0.0','1608641257');
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('22','calibrate_scale1','2.0','1610215277');
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('22','calibrate_scale1','0.0','1610215277');
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('23','calibrate_scale2','0.0','1608641257');
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('24','calibrate_weight','0.0','1608641257');
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES ('25','status_uv_manual','0.0','1608641257');
