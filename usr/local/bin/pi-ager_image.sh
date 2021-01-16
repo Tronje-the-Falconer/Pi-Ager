@@ -380,10 +380,10 @@ else
 	rm -rf $mountdir
 	
 	# Shrink image
-	pishrink.sh -r ${BACKUP_PFAD}/$img
+	pishrink.sh -r $img
 	read -p "weiter mit Enter mit Ctrl + c beenden" 
 	# Shrink image umbenennen mit Datum
-	mv ${BACKUP_PFAD}/$img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img
+	mv $img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img
 	echo "The image ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img was successfully created."
 	
 fi
