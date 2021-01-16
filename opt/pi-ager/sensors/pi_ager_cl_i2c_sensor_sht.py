@@ -91,8 +91,7 @@ class cl_fact_i2c_sensor_sht(ABC):
         """
         Factory method to set the i2c logic instance
         """
-        # logger.debug(pi_ager_logging.me())
-        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_i2c_sensor_sht.__o_instance = i_instance
         
     @classmethod        
@@ -100,7 +99,7 @@ class cl_fact_i2c_sensor_sht(ABC):
         """
         Factory method to get the i2c logic instance
         """
-        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug("Old i2c__ot_instances = " + str(cl_fact_i2c_sensor_sht.__ot_instances))
 
         try:
