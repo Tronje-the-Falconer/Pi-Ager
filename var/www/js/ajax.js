@@ -17,6 +17,7 @@ if (!xmlHttpObject) {
 function loadContent() {
     // xmlHttpObject.open('get','config/current.json');
     xmlHttpObject.open('GET', 'modules/monitor_query.php');
+    xmlHttpObject.setRequestHeader("Cache-Control", "max-age=0");
     xmlHttpObject.onreadystatechange = handleContent;
     xmlHttpObject.send(null);
     // xmlHttpObject.open('get','config/scales.json');
