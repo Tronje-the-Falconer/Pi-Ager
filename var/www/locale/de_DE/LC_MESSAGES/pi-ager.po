@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
-"POT-Creation-Date: 2021-01-16 13:25+0100\n"
-"PO-Revision-Date: 2021-01-16 14:21+0100\n"
+"POT-Creation-Date: 2021-01-17 13:24+0100\n"
+"PO-Revision-Date: 2021-01-17 13:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -104,7 +104,7 @@ msgid "change sensors"
 msgstr "Sensor ändern"
 
 #: admin.php:124 index.php:107 index.php:940 index_old2.php:95
-#: index_old2.php:827 settings.php:76
+#: index_old2.php:827 settings.php:75
 msgid "scales"
 msgstr "Waagen"
 
@@ -115,7 +115,7 @@ msgstr "Waagen"
 #: index_old2.php:309 index_old2.php:323 index_old2.php:340 index_old2.php:367
 #: index_old2.php:414 modules/start_stop_program.php:169
 #: modules/start_stop_program.php:174 modules/start_stop_program.php:196
-#: modules/start_stop_program.php:201 scale_wizzard.php:27 settings.php:175
+#: modules/start_stop_program.php:201 scale_wizzard.php:27 settings.php:173
 msgid "scale"
 msgstr "Waage"
 
@@ -164,7 +164,7 @@ msgstr ""
 "mit uns in Verbindung"
 
 #: admin.php:344 admin.php:453 admin.php:477 admin.php:538 config.php:272
-#: edit_agingtable.php:103 manvals.php:199 notification.php:133
+#: edit_agingtable.php:115 manvals.php:199 notification.php:133
 #: notification.php:303 notification.php:429 notification.php:521
 #: notification.php:595 notification.php:643 notification.php:688
 msgid "save"
@@ -316,12 +316,12 @@ msgstr "Angehangenes Gewicht"
 msgid "scale wizzard"
 msgstr "Waagen Wizzard"
 
-#: calibrate_scale.php:45 settings.php:137 settings.php:140 settings.php:163
-#: settings.php:166
+#: calibrate_scale.php:45 settings.php:134 settings.php:137 settings.php:160
+#: settings.php:163
 msgid "tara scale"
 msgstr "Tara Waage"
 
-#: calibrate_scale.php:47 settings.php:140 settings.php:166 settings.php:177
+#: calibrate_scale.php:47 settings.php:137 settings.php:163 settings.php:175
 msgid "please relieve the load cell completely"
 msgstr "Bitte Gewicht von der Waage entfernen"
 
@@ -343,7 +343,7 @@ msgstr ""
 "Wizzard unterberechen? Die Referenz Unit wird gespeichert, Tara wird nicht "
 "ausgeführt!"
 
-#: calibrate_scale.php:53 edit_agingtable.php:104 scale_wizzard.php:47
+#: calibrate_scale.php:53 edit_agingtable.php:116 scale_wizzard.php:47
 msgid "cancel"
 msgstr "Abbrechen"
 
@@ -496,8 +496,8 @@ msgstr "Empfehlungen"
 msgid "check the stored values in the logfile!"
 msgstr "Bitte gespeicherte Werte in der Logdatei prüfen!"
 
-#: config.php:68 config.php:128 edit_agingtable.php:104 manvals.php:101
-#: manvals.php:127 manvals.php:159 manvals.php:190 settings.php:177
+#: config.php:68 config.php:128 edit_agingtable.php:116 manvals.php:101
+#: manvals.php:127 manvals.php:159 manvals.php:190 settings.php:175
 msgid "attention"
 msgstr "Achtung"
 
@@ -692,8 +692,10 @@ msgstr ""
 
 #: config.php:241 config.php:262 index.php:486 index.php:686 index_old.php:562
 #: index_old2.php:573 modules/write_table_db.php:10
-#: modules/write_table_db.php:61 modules/write_table_db.php:70
-#: modules/write_table_db.php:73 modules/write_table_db.php:76 settings.php:184
+#: modules/write_table_db.php:63 modules/write_table_db.php:72
+#: modules/write_table_db.php:75 modules/write_table_db.php:78
+#: modules/write_table_db.php:240 modules/write_table_db.php:263
+#: settings.php:182
 msgid "agingtable"
 msgstr "Reifetabelle"
 
@@ -818,88 +820,119 @@ msgstr "Abluft"
 msgid "circulate air"
 msgstr "Umluft"
 
-#: edit_agingtable.php:18 edit_agingtable.php:23 edit_agingtable.php:103
+#: edit_agingtable.php:26 edit_agingtable.php:31 edit_agingtable.php:115
 #: header.php:168
 msgid "edit agingtable"
 msgstr "Editor"
 
-#: edit_agingtable.php:18
+#: edit_agingtable.php:26
+msgid "no agingtable selected"
+msgstr "Keine Reifetabelle ausgewählt"
+
+#: edit_agingtable.php:31
 msgid "can not edit the controlling agingtable. please select an other"
 msgstr ""
 "Die laufende Reifetabelle kann nicht editiert werden, bitte eine andere "
 "auswählen"
 
-#: edit_agingtable.php:23
-msgid "no agingtable selected"
-msgstr "Keine Reifetabelle ausgewählt"
-
-#: edit_agingtable.php:26
+#: edit_agingtable.php:34
 msgid "edit agingtable:"
 msgstr "Reifetabelle editieren:"
 
-#: edit_agingtable.php:34 index.php:499 settings.php:365
+#: edit_agingtable.php:42 index.php:490 index.php:498 settings.php:356
+#: settings.php:364
+msgid "phase"
+msgstr "Phase"
+
+#: edit_agingtable.php:43 index.php:499 settings.php:365
 msgid "modus"
 msgstr "Modus"
 
-#: edit_agingtable.php:34 index.php:499 settings.php:365
+#: edit_agingtable.php:43 index.php:499 settings.php:365
 msgid "aging-modus"
 msgstr "Reifemodus"
 
-#: edit_agingtable.php:35 index.php:500 settings.php:366
+#: edit_agingtable.php:44 index.php:500 settings.php:366
 msgid "target humidity in %"
 msgstr "Sollwert Feuchte in %"
 
-#: edit_agingtable.php:36 index.php:501 settings.php:367
+#: edit_agingtable.php:45 index.php:501 settings.php:367
 msgid "target temperature in °C"
 msgstr "Sollwert Temperatur in °C"
 
-#: edit_agingtable.php:37 index.php:502 settings.php:368
+#: edit_agingtable.php:46 index.php:502 settings.php:368
 msgid "timer circulate d"
 msgstr "Timer Umluft d"
 
-#: edit_agingtable.php:37 index.php:502 settings.php:368
+#: edit_agingtable.php:46 index.php:502 settings.php:368
 msgid "timer of the circulation air duration in minutes"
 msgstr "Timer für Umluft Dauer in Minuten"
 
-#: edit_agingtable.php:38 index.php:503 settings.php:369
+#: edit_agingtable.php:47 index.php:503 settings.php:369
 msgid "timer circulate p"
 msgstr "Timer Umluft p"
 
-#: edit_agingtable.php:38 index.php:503 settings.php:369
+#: edit_agingtable.php:47 index.php:503 settings.php:369
 msgid "timer of the circulation air period in minutes"
 msgstr "Timer für Umluft Zyklus in Minuten"
 
-#: edit_agingtable.php:39 index.php:504 settings.php:370
+#: edit_agingtable.php:48 index.php:504 settings.php:370
 msgid "timer exhaust d"
 msgstr "Timer Abluft d"
 
-#: edit_agingtable.php:39 index.php:504 settings.php:370
+#: edit_agingtable.php:48 index.php:504 settings.php:370
 msgid "timer of the exhausting air duration in minutes"
 msgstr "Timer für Abluft Dauer in Minuten"
 
-#: edit_agingtable.php:40 index.php:505 settings.php:371
+#: edit_agingtable.php:49 index.php:505 settings.php:371
 msgid "timer exhaust p"
 msgstr "Timer Abluft p"
 
-#: edit_agingtable.php:40 index.php:505 settings.php:371
+#: edit_agingtable.php:49 index.php:505 settings.php:371
 msgid "timer of the exhausting air period in minutes"
 msgstr "Timer für Abluft Zyklus in Minuten"
 
-#: edit_agingtable.php:41 index.php:506 settings.php:372
+#: edit_agingtable.php:50 index.php:506 settings.php:372
 msgid "days"
 msgstr "Tage"
 
-#: edit_agingtable.php:41 index.php:506 settings.php:372
+#: edit_agingtable.php:50 index.php:506 settings.php:372
 msgid "duration of hanging phase in days"
 msgstr "Dauer der Reifephase in Tagen"
 
-#: edit_agingtable.php:98 index.php:573 settings.php:444
+#: edit_agingtable.php:110 index.php:573 settings.php:444
 msgid "comment:"
 msgstr "Anmerkungen:"
 
-#: edit_agingtable.php:104
+#: edit_agingtable.php:116
 msgid "cancel editing agingtable"
 msgstr "Editieren der Reifetabelle unterbrechen"
+
+#: edit_agingtable.php:121
+msgid "phase to delete"
+msgstr "zu löschende Phase: "
+
+#: edit_agingtable.php:126 notification.php:178 notification.php:348
+#: notification.php:465 notification.php:543 settings.php:302
+msgid "delete"
+msgstr "Löschen"
+
+#: edit_agingtable.php:126
+msgid "delete row"
+msgstr "Zeile löschen"
+
+#: edit_agingtable.php:133
+msgid "number of rows"
+msgstr "Anzahl Zeilen"
+
+#: edit_agingtable.php:138 notification.php:170 notification.php:340
+#: notification.php:457 notification.php:535
+msgid "add"
+msgstr "hinzufügen"
+
+#: edit_agingtable.php:138
+msgid "add rows"
+msgstr "Zeilen hinzufügen"
 
 #: footer.php:9
 msgid "running engine: "
@@ -936,10 +969,6 @@ msgstr "Hauptsensoren"
 #: index.php:71 index_old2.php:59
 msgid "ntc sensors"
 msgstr "NTC Sensoren"
-
-#: index.php:490 index.php:498 settings.php:356 settings.php:364
-msgid "phase"
-msgstr "Phase"
 
 #: index.php:515 settings.php:382
 msgid "no comment"
@@ -1797,60 +1826,68 @@ msgstr "Sensor"
 msgid "is selected"
 msgstr "ist ausgewählt"
 
-#: modules/write_table_db.php:61
+#: modules/write_table_db.php:63
 msgid "edited agingtable saved"
 msgstr "editierte Reifetabelle gespeichert"
 
-#: modules/write_table_db.php:70
+#: modules/write_table_db.php:72
 msgid "deleted"
 msgstr "gelöscht"
 
-#: modules/write_table_db.php:73
+#: modules/write_table_db.php:75
 msgid "can not edit the controlling agingtable. Please choose an other first"
 msgstr ""
 "Die laufende Reifetabelle kann nicht editiert werden, bitte vorher eine "
 "andere auswählen"
 
-#: modules/write_table_db.php:76
+#: modules/write_table_db.php:78
 msgid "unexpected Error"
 msgstr "unerwarteter Fehler"
 
-#: modules/write_table_db.php:94
+#: modules/write_table_db.php:96
 msgid "error on upload new agingtable: only csv-files allowed"
 msgstr ""
 "Fehler beim Hochladen der neuen Reifetabelle: nur csv Dateien sind zugelassen"
 
-#: modules/write_table_db.php:102
+#: modules/write_table_db.php:104
 msgid "error on upload new agingtable: only 500kb allowed"
 msgstr ""
 "Fehler beim Hochladen der neuen Reifetabelle: max. 500kb sind zugelassen"
 
-#: modules/write_table_db.php:129 modules/write_table_db.php:135
-#: modules/write_table_db.php:140
+#: modules/write_table_db.php:131 modules/write_table_db.php:137
+#: modules/write_table_db.php:142
 msgid "upload agingtable"
 msgstr "Reifetabelle hochladen"
 
-#: modules/write_table_db.php:129
+#: modules/write_table_db.php:131
 msgid "file saved in database"
 msgstr "Datei ind DB geschrieben"
 
-#: modules/write_table_db.php:133 modules/write_table_db.php:135
+#: modules/write_table_db.php:135 modules/write_table_db.php:137
 msgid "csv-file has not the right structure. please use a default-template"
 msgstr ""
 "Die csv Datei hat nicht die erforderliche Struktur, bitte die Defaultvorlage "
 "nutzen"
 
-#: modules/write_table_db.php:140
+#: modules/write_table_db.php:142
 msgid "please select an file to upload"
 msgstr "bitte eine Datei zum hochladen auswählen"
 
-#: modules/write_table_db.php:215
+#: modules/write_table_db.php:217
 msgid "export agintable"
 msgstr "Reifetabelle exportieren"
 
-#: modules/write_table_db.php:215
+#: modules/write_table_db.php:217
 msgid "done"
 msgstr "Fertig"
+
+#: modules/write_table_db.php:240
+msgid "row in agingtable deleted"
+msgstr "Zeile in Reifetabelle gelöscht"
+
+#: modules/write_table_db.php:263
+msgid "rows in agingtable deleted"
+msgstr "Zeilen in Reifetabelle gelöscht"
 
 #: notification.php:10
 msgid "messenger"
@@ -1903,11 +1940,6 @@ msgstr "ACHTUNG: Messenger Einstellungen speichern?"
 msgid "ATTENTION: add messenger?"
 msgstr "ACHTUNG: Messenger hinzufügen?"
 
-#: notification.php:170 notification.php:340 notification.php:457
-#: notification.php:535
-msgid "add"
-msgstr "hinzufügen"
-
 #: notification.php:175 notification.php:345 notification.php:462
 #: notification.php:540
 msgid "id to delete: "
@@ -1916,11 +1948,6 @@ msgstr "zu löschende ID: "
 #: notification.php:178
 msgid "ATTENTION: delete messenger?"
 msgstr "ACHTUNG: Messenger löschen?"
-
-#: notification.php:178 notification.php:348 notification.php:465
-#: notification.php:543 settings.php:304
-msgid "delete"
-msgstr "Löschen"
 
 #: notification.php:186 notification.php:193 notification.php:308
 msgid "event"
@@ -2134,131 +2161,131 @@ msgstr "Keine Waage ausgewählt"
 msgid "operating values"
 msgstr "Einstellungen"
 
-#: settings.php:61
+#: settings.php:60
 msgid "stop pi-ager?"
 msgstr "Pi-Ager anhalten?"
 
-#: settings.php:61
+#: settings.php:60
 msgid "if agingtable is running, it will be stopped also!"
 msgstr "wenn die Reifetabelle läuft wird sie auch angehalten!"
 
-#: settings.php:61
+#: settings.php:60
 msgid "stop pi-ager"
 msgstr "Pi-Ager anhalten"
 
-#: settings.php:68
+#: settings.php:67
 msgid "start pi-ager?"
 msgstr "Pi-Ager starten?"
 
-#: settings.php:68
+#: settings.php:67
 msgid "start pi-ager"
 msgstr "Pi-Ager starten"
 
-#: settings.php:125 settings.php:137 settings.php:151 settings.php:163
+#: settings.php:122 settings.php:134 settings.php:148 settings.php:160
 msgid "Reference unit is 0 in Scale"
 msgstr "Referenz Einheit ist 0"
 
-#: settings.php:125 settings.php:137 settings.php:151 settings.php:163
+#: settings.php:122 settings.php:134 settings.php:148 settings.php:160
 msgid "Please calibrate scale first!"
 msgstr "Bitte zuerst die Waage kalibrieren!"
 
-#: settings.php:125 settings.php:128 settings.php:151 settings.php:154
+#: settings.php:122 settings.php:125 settings.php:148 settings.php:151
 msgid "start scale"
 msgstr "Waage starten"
 
-#: settings.php:128 settings.php:154
+#: settings.php:125 settings.php:151
 msgid "start measurement on scale"
 msgstr "Start Waagenmessung"
 
-#: settings.php:128 settings.php:154
+#: settings.php:125 settings.php:151
 msgid "please calibrate scale after first start !"
 msgstr "Nach dem ersten Start bitte Waage kalibrieren!"
 
-#: settings.php:140 settings.php:166
+#: settings.php:137 settings.php:163
 msgid "tara on scale"
 msgstr "Tara Waage"
 
-#: settings.php:143 settings.php:169
+#: settings.php:140 settings.php:166
 msgid "stop measurement on scale"
 msgstr "Waagenmessung anhalten"
 
-#: settings.php:143 settings.php:169
+#: settings.php:140 settings.php:166
 msgid "stop scale"
 msgstr "Stop Waage"
 
-#: settings.php:177
+#: settings.php:175
 msgid "measurement on scales are stopped"
 msgstr "Waagenmessungen werden angehalten"
 
-#: settings.php:177
+#: settings.php:175
 msgid "calibrate wizzard"
 msgstr "Wizzard Kalibrierung"
 
-#: settings.php:231
+#: settings.php:229
 msgid "startphase"
 msgstr "Startphase"
 
-#: settings.php:235
+#: settings.php:233
 msgid "startday of phase"
 msgstr "Starttag der Phase"
 
-#: settings.php:248
+#: settings.php:246
 msgid "select new agingtable?"
 msgstr "Neue Reifetabelle auswählen?"
 
-#: settings.php:248
+#: settings.php:246
 msgid "select"
 msgstr "Auswählen"
 
-#: settings.php:262
+#: settings.php:260
 msgid "start agingtable?"
 msgstr "Reifetabelle starten?"
 
-#: settings.php:262
+#: settings.php:260
 msgid "manual values will be overwritten in database!"
 msgstr "Die manuellen Werte werden in der Datanbank überschrieben!"
 
-#: settings.php:262
+#: settings.php:260
 msgid "start agingtable"
 msgstr "Start Reifetabelle"
 
-#: settings.php:265
+#: settings.php:263
 msgid "stop agingtable?"
 msgstr "Reifetabelle anhalten?"
 
-#: settings.php:265
+#: settings.php:263
 msgid "pi-ager continues with the last values of the agingtable!"
 msgstr "Der Pi-Ager arbeitet mit den zuletzt gültigen Werten der Reifetabelle!"
 
-#: settings.php:265
+#: settings.php:263
 msgid "stop agingtable"
 msgstr "Reifetabelle anhalten"
 
-#: settings.php:303
+#: settings.php:301
 msgid "edit agingtable?"
 msgstr "Reifetabbelle editieren?"
 
-#: settings.php:303
+#: settings.php:301
 msgid "edit"
 msgstr "Editieren"
 
-#: settings.php:304
+#: settings.php:302
 msgid "delete agingtable?"
 msgstr "Reifetabelle löschen?"
 
-#: settings.php:305
+#: settings.php:303
 msgid "export agingtable?"
 msgstr "Reifetabelle exportieren?"
 
-#: settings.php:305
+#: settings.php:303
 msgid "export"
 msgstr "Exportieren"
 
-#: settings.php:341
+#: settings.php:339
 msgid "upload new agingtable?"
 msgstr "Neue Reifetabelle hochladen?"
 
-#: settings.php:341
+#: settings.php:339
 msgid "upload"
 msgstr "Hochladen"
 

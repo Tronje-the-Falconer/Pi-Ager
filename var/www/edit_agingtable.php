@@ -122,7 +122,7 @@
                                                 <input type="hidden" name="agingtable_edit" type="text" value="<?php echo $agingtable_to_edit ?>">
                                                 <?php $_SESSION['agingtable_row_array'] = $row_id_array; ?>
                                             </td>
-                                            <td><input name="delete_agingtable_row" maxlength="2" style="width: 90%;" size="1" min="1" max="99" type = "number" value="1"></td>
+                                            <td><input name="delete_agingtable_row" maxlength="2" style="width: 50px;" size="1" min="1" max="99" type = "number" value="1"></td>
                                             <td><button class="art-button" name="delete_agingtable_row_submit" type="submit" value="delete_agingtable_row_submit" onclick="return confirm('<?php echo _('delete'); echo ' '; echo _('delete row'); ?>?')"><?php echo _('delete'); ?></button></td>
                                         </tr>
                                     </table>
@@ -134,7 +134,7 @@
                                                 <input type="hidden" name="agingtable_edit" type="text" value="<?php echo $agingtable_to_edit ?>">
                                                 <input type="hidden" name="agingtable_number_rows" type="text" value="<?php echo $number_rows ?>">
                                             </td>
-                                            <td><input name="adding_agingtable_rows" maxlength="2" style="width: 90%;" size="1" min="1" max="99" type = "number" value="1"></td>
+                                            <td><input name="adding_agingtable_rows" maxlength="2" style="width: 50px;" size="1" min="1" max="99" type = "number" value="1"></td>
                                             <td><button class="art-button" name="adding_agingtable_row_submit" type="submit" value="adding_agingtable_row_submit" onclick="return confirm('<?php echo _('add'); echo ' '; echo _('add rows'); ?>?')"><?php echo _('add'); ?></button></td>
                                         </tr>
                                     </table>

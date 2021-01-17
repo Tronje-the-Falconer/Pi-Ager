@@ -134,6 +134,7 @@ $sensor_dewpoint_key = 'sensor_dewpoint';
 $sensor_extern_temperature_key = 'sensor_extern_temperature';
 $sensor_extern_humidity_key = 'sensor_extern_humidity';
 $sensor_extern_dewpoint_key = 'sensor_extern_dewpoint';
+$agingtable_period_day_key = 'agingtable_period_day';
 
 #-----------------------------table fields;
 $key_field = 'key';
