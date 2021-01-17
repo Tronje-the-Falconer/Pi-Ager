@@ -94,7 +94,17 @@
                                     <table class="switching_state miniature_writing">
                                         <tr>
                                             <td>
-                                                <img src="images/icons/voltage_42x42.png" alt="">
+                                                <?php
+                                                $meatsensortype = get_table_value($config_settings_table, $meat4_sensortype_key);
+                                                $row = get_meatsensor_table_row( $meatsensortype );
+                                                if (strncmp($row['name'], 'LEM', 3) === 0)
+                                                {
+                                                    echo '<img src="images/icons/voltage_42x42.png" alt="">';
+                                                }
+                                                else {
+                                                    echo '<img src="images/icons/temperature_42x42.png" alt="" >'.'&thetasym; 4';
+                                                }
+                                                ?>
                                             </td>
                                         </tr>
                                         <tr>
