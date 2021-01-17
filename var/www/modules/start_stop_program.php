@@ -201,28 +201,6 @@
         $logstring = _('measuring scale stopped'). ' ' . _('scale'). ' 2';
         logger('INFO', $logstring);
     }
- 
-    if (isset($_POST['webcam_start'])){
-        $grepwebcam = shell_exec('sudo /var/sudowebscript.sh grepwebcam');
-        if($grepwebcam == 0) {
-            shell_exec('sudo /var/sudowebscript.sh startwebcam');
-            sleep (1); # 1 Sec auf start der Py-Datei warten
-            $grepwebcam = shell_exec('sudo /var/sudowebscript.sh grepwebcam');
-            if($grepwebcam != 0) {
-                $logstring = _('webcam started');
-                logger('INFO', $logstring);
-            }
-            else{
-                $logstring = _('webcam could not be started');
-                logger('INFO', $logstring);
-            }
-        }
-    }
-    if (isset($_POST['webcam_stop'])){
-        shell_exec('sudo /var/sudowebscript.sh pkillwebcam');
-        $logstring = _('webcam stopped');
-        logger('INFO', $logstring);
-     }
      
     if (isset($_POST['admin_start_main'])){
         $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
