@@ -29,7 +29,7 @@
             
             if ($SettingsInputIsValid == TRUE)
                 {
-                    if ( $setpoint_temperature_setting<23 &&  $setpoint_temperature_setting>-1 &&                                                                    // Prüfung Soll-Temperatur
+                    if ( $setpoint_temperature_setting<26 &&  $setpoint_temperature_setting>-1 &&                                                                    // Prüfung Soll-Temperatur
                         $setpoint_humidity_setting<100 && $setpoint_humidity_setting>-1 &&                                                                      // Prüfung Soll-Feuchtigkeit
                         $circulation_air_period_setting<1441 && $circulation_air_period_setting>-1 &&  (($circulation_air_period_setting+$circulation_air_duration_setting)>0) &&                 // Prüfung Intervall Umluft
                         $circulation_air_duration_setting<1441 && $circulation_air_duration_setting>-1  &&                                                                // Prüfung Dauer Umluft

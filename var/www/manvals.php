@@ -58,7 +58,7 @@
                                             <tr>
                                                 <td rowspan="4" class="td_png_icon"><h3><?php echo _('temperature'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td class="text_left_padding"><?php echo _('setpoint temperature'); ?>:</td>
-                                                <td style="text-align: left;"><input name="setpoint_temperature_settings" type="number" style="width: 30%;" min="0" max="22" value=<?php echo $setpoint_temperature; ?>>°C<span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 22)</span></td>
+                                                <td style="text-align: left;"><input name="setpoint_temperature_settings" type="number" style="width: 30%;" min="0" max="25" value=<?php echo $setpoint_temperature; ?>>°C<span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 25)</span></td>
                                             </tr>
                                         </table>
                                         <script>
@@ -70,7 +70,7 @@
                                             }
                                         </script>
                                         <p id="help_temperature" class="help_p">
-                                            <?php echo '<b>'._('setpoint temperature').':</b> '._('the desired temperature is set here. the minimum value is 0 ° C, the maximum + 22 ° C.
+                                            <?php echo '<b>'._('setpoint temperature').':</b> '._('the desired temperature is set here. the minimum value is 0 ° C, the maximum + 25 ° C.
                                              for technical reasons, not all values can be approached in any operating mode. the circulating air is always active during the cooling or heating phases.').'<br><br>'.
                                             '<br><br>
                                             <b>'._('example of cooling').':</b> <i>'._('setpoint temperature').': 12°C; '._('switch-on value').': 3°C; '._('switch-off value').': 1°C</i><br>'.
