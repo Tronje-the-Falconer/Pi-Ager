@@ -345,6 +345,7 @@
                                     </table>
                                     <?php
                                          $current_period = get_table_value($current_values_table, $agingtable_period_key);
+                                         $current_period_day = get_table_value($current_values_table, $agingtable_period_day_key);
                                      ?>
                                      <br>
                                     <table style="width: 100%" class="switching_state miniature_writing">
@@ -355,7 +356,7 @@
                                             <td width="75px"><?php echo _('phase') ?></td><td align="left"><?php echo intval($current_period) + 1 ?></td>
                                         </tr>
                                         <tr>
-                                            <td width="75px"><?php echo _('day')  ?></td><td align="left"><?php echo $current_period  ?></td>
+                                            <td width="75px"><?php echo _('day')  ?></td><td align="left"><?php echo $current_period_day  ?></td>
                                         </tr>
                                     </table>
                                     <table id="show_agingtable" class="show_agingtable">

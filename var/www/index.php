@@ -480,7 +480,7 @@
                                 <?php 
                                     if ($grepagingtable != NULL){
                                         $current_period = get_table_value($current_values_table, $agingtable_period_key);
-                                        $current_day = get_table_value($current_values_table, $agingtable_period_key);
+                                        $current_period_day = get_table_value($current_values_table, $agingtable_period_day_key);
                                         echo '
                                         <hr>
                                         <h2 class="art-postheader">' . _('agingtable') .'</h2>
@@ -490,7 +490,7 @@
                                                 <td width="75px">' . _('phase') . '</td><td align="left">' . (intval($current_period) + 1) . '</td>
                                             </tr>
                                             <tr>
-                                                <td width="75px">' . _('day') . '</td><td align="left">' . (intval($current_period) + 1) . '</td>
+                                                <td width="75px">' . _('day') . '</td><td align="left">' . (intval($current_period_day)) . '</td>
                                             </tr>
                                         </table>
                                         <table id="show_agingtable" class="show_agingtable">
