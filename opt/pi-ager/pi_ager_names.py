@@ -21,6 +21,10 @@ status_light_table = 'light_status'
 data_sensor_temperature_table = 'sensor_temperature_data'
 data_sensor_humidity_table = 'sensor_humidity_data'
 data_sensor_dewpoint_table = 'sensor_dewpoint_data'
+data_second_sensor_temperature_table = 'sensor_extern_temperature_data'
+data_second_sensor_humidity_table = 'sensor_extern_humidity_data'
+data_second_sensor_dewpoint_table = 'sensor_extern_dewpoint_data'
+
 status_dehumidifier_table = 'dehumidifier_status'
 status_humidifier_table = 'humidifier_status'
 data_scale1_table = 'scale1_data'
@@ -70,6 +74,9 @@ agingtable_key = 'agingtable'
 sensor_temperature_key = 'sensor_temperature'
 sensor_humidity_key = 'sensor_humidity'
 sensor_dewpoint_key = 'sensor_dewpoint'
+second_sensor_temperature_key = 'sensor_extern_temperature'
+second_sensor_humidity_key = 'sensor_extern_humidity'
+second_sensor_dewpoint_key = 'sensor_extern_dewpoint'
 status_pi_ager_key = 'status_piager'
 status_agingtable_key = 'status_agingtable'
 status_heater_key = 'status_heater'
@@ -195,7 +202,7 @@ field_type[system_table + '_' + value_field] = 'TEXT'
 field_type[last_change_field] = 'INTEGER'
 field_type[id_field] = 'INTEGER'
 
-id_value_tables = [data_sensor_temperature_table,data_sensor_humidity_table,data_sensor_dewpoint_table,status_heater_table,status_exhaust_air_table,status_cooling_compressor_table,status_circulating_air_table, status_uv_table, status_light_table, status_humidifier_table, status_dehumidifier_table, data_scale1_table, data_scale2_table, data_sensor_temperature_meat1_table, data_sensor_temperature_meat2_table, data_sensor_temperature_meat3_table, data_sensor_temperature_meat4_table]
+id_value_tables = [data_sensor_temperature_table,data_sensor_humidity_table,data_sensor_dewpoint_table, data_second_sensor_temperature_table,data_second_sensor_humidity_table,data_second_sensor_dewpoint_table, status_heater_table,status_exhaust_air_table,status_cooling_compressor_table,status_circulating_air_table, status_uv_table, status_light_table, status_humidifier_table, status_dehumidifier_table, data_scale1_table, data_scale2_table, data_sensor_temperature_meat1_table, data_sensor_temperature_meat2_table, data_sensor_temperature_meat3_table, data_sensor_temperature_meat4_table]
 
 key_value_tables = [current_values_table, settings_scale1_table, settings_scale2_table, config_settings_table, debug_table, system_table]
 

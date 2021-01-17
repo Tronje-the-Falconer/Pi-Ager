@@ -370,11 +370,10 @@ def get_status_uv_manual():
     status_uv_manual = get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_uv_manual_key)
     return status_uv_manual
     
-def write_current_sensordata(loopnumber, sensor_temperature, sensor_humidity, sensor_dewpoint, sensor_meat1, sensor_meat2, sensor_meat3, sensor_meat4):
+def write_current_sensordata(loopnumber, sensor_temperature, sensor_humidity, sensor_dewpoint, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, sensor_meat1, sensor_meat2, sensor_meat3, sensor_meat4):
     """
     function for writing diagram-relevant sensor data
     """
-    
     save_loop = int(get_table_value(pi_ager_names.config_settings_table, pi_ager_names.save_temperature_humidity_loops_key))
     
     if loopnumber % save_loop == 0:   # schreibt für HaMa's Diagramme alle 150 Loops die Werte in die DB
@@ -383,6 +382,11 @@ def write_current_sensordata(loopnumber, sensor_temperature, sensor_humidity, se
         execute_query('INSERT INTO ' + pi_ager_names.data_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_temperature) + ', ' + current_time + ')')
         execute_query('INSERT INTO ' + pi_ager_names.data_sensor_humidity_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_humidity) + ',' + current_time + ')')
         execute_query('INSERT INTO ' + pi_ager_names.data_sensor_dewpoint_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(sensor_dewpoint) + ',' + current_time + ')')
+        if (second_sensor_humidity != 0):
+            
+            execute_query('INSERT INTO ' + pi_ager_names.data_second_sensor_temperature_table + '(' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(second_sensor_temperature) + ', ' + current_time + ')')
+            execute_query('INSERT INTO ' + pi_ager_names.data_second_sensor_humidity_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(second_sensor_humidity) + ',' + current_time + ')')
+            execute_query('INSERT INTO ' + pi_ager_names.data_second_sensor_dewpoint_table + ' (' + str(pi_ager_names.value_field) + ',' + str(pi_ager_names.last_change_field) +') VALUES ('+ str(second_sensor_dewpoint) + ',' + current_time + ')')
 
         if (sensor_meat1 != None):
             #temp = 'NULL' if (sensor_meat1 == None) else str(sensor_meat1)
@@ -400,11 +404,11 @@ def write_current_sensordata(loopnumber, sensor_temperature, sensor_humidity, se
         
         close_database()
 
-def write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, sensor_dewpoint,  status_uv, status_light, status_humidifier, status_dehumidifier, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data):
+def write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, sensor_dewpoint,second_sensor_temperature,second_sensor_humidity, second_sensor_dewpoint, status_uv, status_light, status_humidifier, status_dehumidifier, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data):
     """
     function for writing the current values including meat sensor values
     """
-    
+                
     write_changed_values(status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, status_uv, status_light, status_humidifier, status_dehumidifier)
     
     open_database()
@@ -420,6 +424,12 @@ def write_current(sensor_temperature, status_heater, status_exhaust_air, status_
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_light) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_light_key + '"')
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_humidifier) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_humidifier_key + '"')
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_dehumidifier) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_dehumidifier_key + '"')
+    
+    if (second_sensor_humidity != 0):
+        execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(second_sensor_temperature) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.second_sensor_temperature_key + '"')
+        execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(second_sensor_humidity) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.second_sensor_humidity_key + '"')
+        execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(second_sensor_dewpoint) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.second_sensor_dewpoint_key + '"')
+    
     
     temp = 'NULL' if (temp_sensor1_data == None) else str(temp_sensor1_data)
     execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = ' + temp +' , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.temperature_meat1_key + '"')
