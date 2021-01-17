@@ -132,6 +132,12 @@ def doScaleLoop():
     global last_measure_scale1
     global last_measure_scale2
     
+    pi_ager_database.write_current_value(pi_ager_names.calibrate_scale1_key, 0)
+    pi_ager_database.write_current_value(pi_ager_names.calibrate_scale2_key, 0)   
+    
+    pi_ager_database.write_current_value(pi_ager_names.status_tara_scale1_key, 0)
+    pi_ager_database.write_current_value(pi_ager_names.status_tara_scale2_key, 0)
+        
     scale1_settings_table = pi_ager_names.settings_scale1_table
     scale1_table = pi_ager_names.data_scale1_table
     scale2_settings_table = pi_ager_names.settings_scale2_table
