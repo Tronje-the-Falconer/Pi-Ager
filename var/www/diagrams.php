@@ -731,6 +731,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
+														ticks: {
+															autoSkip: false,
+															maxRotation: 0,
+															minRotation: 0
+														}
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -832,6 +837,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
+														ticks: {
+															autoSkip: false,
+															maxRotation: 0,
+															minRotation: 0
+														}														
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -933,6 +943,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
+														ticks: {
+															autoSkip: false,
+															maxRotation: 0,
+															minRotation: 0
+														}														
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1034,6 +1049,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
+														ticks: {
+															autoSkip: false,
+															maxRotation: 0,
+															minRotation: 0
+														}														
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1135,6 +1155,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
+														ticks: {
+															autoSkip: false,
+															maxRotation: 0,
+															minRotation: 0
+														}														
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1236,6 +1261,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
+														ticks: {
+															autoSkip: false,
+															maxRotation: 0,
+															minRotation: 0
+														}														
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1337,6 +1367,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
+														ticks: {
+															autoSkip: false,
+															maxRotation: 0,
+															minRotation: 0
+														}														
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1438,6 +1473,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
+														ticks: {
+															autoSkip: false,
+															maxRotation: 0,
+															minRotation: 0
+														}														
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
