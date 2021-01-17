@@ -11,14 +11,16 @@
 version_number = '3.1.0'
 # tables names
 config_settings_table = 'config'
-data_sensor_temperature_table = 'sensor_temperature_data'
+
 status_heater_table = 'heater_status'
 status_exhaust_air_table = 'exhaust_air_status'
 status_cooling_compressor_table = 'cooling_compressor_status'
 status_circulating_air_table = 'circulating_air_status'
 status_uv_table = 'uv_status'
 status_light_table = 'light_status'
+data_sensor_temperature_table = 'sensor_temperature_data'
 data_sensor_humidity_table = 'sensor_humidity_data'
+data_sensor_dewpoint_table = 'sensor_dewpoint_data'
 status_dehumidifier_table = 'dehumidifier_status'
 status_humidifier_table = 'humidifier_status'
 data_scale1_table = 'scale1_data'
@@ -67,6 +69,7 @@ circulation_air_duration_key = 'circulation_air_duration'
 agingtable_key = 'agingtable'
 sensor_temperature_key = 'sensor_temperature'
 sensor_humidity_key = 'sensor_humidity'
+sensor_dewpoint_key = 'sensor_dewpoint'
 status_pi_ager_key = 'status_piager'
 status_agingtable_key = 'status_agingtable'
 status_heater_key = 'status_heater'
@@ -108,6 +111,8 @@ spikes_refunit_tara_key = 'spikes_refunit_tara'
 saving_period_key = 'saving_period'
 failure_temperature_delta_key = 'failure_temperature_delta'
 failure_humidity_delta_key = 'failure_humidity_delta'
+failure_dewpoint_delta_key = 'failure_dewpoint_delta'
+
 pi_revision_key = 'pi_revision'
 pi_ager_version_key = 'pi_ager_version'
 calibrate_scale1_key = 'calibrate_scale1'
@@ -162,6 +167,8 @@ changelogfile = '/var/www/changelog.txt'
 # JSON Keys
 last_change_temperature_json_key = 'last_change_temperature'
 last_change_humidity_json_key = 'last_change_humidity'
+last_change_dewpoint_json_key = 'last_change_dewpoint'
+
 last_change_scale1_json_key = 'last_change_scale1'
 last_change_scale2_json_key = 'last_change_scale2'
 last_change_temperature_meat1_json_key = 'last_change_temperature_meat1'
@@ -188,7 +195,7 @@ field_type[system_table + '_' + value_field] = 'TEXT'
 field_type[last_change_field] = 'INTEGER'
 field_type[id_field] = 'INTEGER'
 
-id_value_tables = [data_sensor_temperature_table,data_sensor_humidity_table,status_heater_table,status_exhaust_air_table,status_cooling_compressor_table,status_circulating_air_table, status_uv_table, status_light_table, status_humidifier_table, status_dehumidifier_table, data_scale1_table, data_scale2_table, data_sensor_temperature_meat1_table, data_sensor_temperature_meat2_table, data_sensor_temperature_meat3_table, data_sensor_temperature_meat4_table]
+id_value_tables = [data_sensor_temperature_table,data_sensor_humidity_table,data_sensor_dewpoint_table,status_heater_table,status_exhaust_air_table,status_cooling_compressor_table,status_circulating_air_table, status_uv_table, status_light_table, status_humidifier_table, status_dehumidifier_table, data_scale1_table, data_scale2_table, data_sensor_temperature_meat1_table, data_sensor_temperature_meat2_table, data_sensor_temperature_meat3_table, data_sensor_temperature_meat4_table]
 
 key_value_tables = [current_values_table, settings_scale1_table, settings_scale2_table, config_settings_table, debug_table, system_table]
 
@@ -203,7 +210,7 @@ table_keys[config_settings_table] = (switch_on_cooling_compressor_key,switch_off
                                      spikes_refunit_tara_key, save_temperature_humidity_loops_key, sensorbus_key,
                                      meat1_sensortype_key, meat2_sensortype_key, meat3_sensortype_key, meat4_sensortype_key)
 
-table_keys[current_values_table] = (sensor_temperature_key,sensor_humidity_key,status_circulating_air_key,status_cooling_compressor_key,status_exhaust_air_key,
+table_keys[current_values_table] = (sensor_temperature_key,sensor_humidity_key, sensor_dewpoint_key, status_circulating_air_key,status_cooling_compressor_key,status_exhaust_air_key,
                                     status_heater_key,status_light_key,status_uv_key,status_humidifier_key,status_dehumidifier_key,scale1_key,scale2_key,status_pi_ager_key,
                                     status_agingtable_key,status_scale1_key,status_scale2_key,status_tara_scale1_key,status_tara_scale2_key,agingtable_period_key,
                                     agingtable_period_starttime_key,status_light_manual_key,calibrate_scale1_key,calibrate_scale2_key,calibrate_weight_key,
@@ -266,6 +273,7 @@ tables_dict['status_circulating_air_table'] = status_circulating_air_table
 tables_dict['status_uv_table'] = status_uv_table
 tables_dict['status_light_table'] = status_light_table
 tables_dict['data_sensor_humidity_table'] = data_sensor_humidity_table
+tables_dict['data_sensor_dewpoint_table'] = data_sensor_dewpoint_table
 tables_dict['status_dehumidifier_table'] = status_dehumidifier_table
 tables_dict['status_humidifier_table'] = status_humidifier_table
 tables_dict['data_scale1_table'] = data_scale1_table
@@ -308,11 +316,13 @@ table_keys_dict['setpoint_temperature_key'] = setpoint_temperature_key
 table_keys_dict['exhaust_air_duration_key'] = exhaust_air_duration_key
 table_keys_dict['modus_key'] = modus_key
 table_keys_dict['setpoint_humidity_key'] = setpoint_humidity_key
+#table_keys_dict['setpoint_dewpoint_key'] = setpoint_dewpoint_key
 table_keys_dict['exhaust_air_period_key'] = exhaust_air_period_key
 table_keys_dict['circulation_air_duration_key'] = circulation_air_duration_key
 table_keys_dict['agingtable_key'] = agingtable_key
 table_keys_dict['sensor_temperature_key'] = sensor_temperature_key
 table_keys_dict['sensor_humidity_key'] = sensor_humidity_key
+table_keys_dict['sensor_dewpoint_key'] = sensor_dewpoint_key
 table_keys_dict['status_pi_ager_key'] = status_pi_ager_key
 table_keys_dict['status_agingtable_key'] = status_agingtable_key
 table_keys_dict['status_heater_key'] = status_heater_key
@@ -407,6 +417,7 @@ path_url_dict['changelogfile'] = changelogfile
 json_keys_dict = {}
 json_keys_dict['last_change_temperature_json_key'] = last_change_temperature_json_key
 json_keys_dict['last_change_humidity_json_key'] = last_change_humidity_json_key
+json_keys_dict['last_change_dewpoint_json_key'] = last_change_dewpoint_json_key
 json_keys_dict['last_change_scale1_json_key'] = last_change_scale1_json_key
 json_keys_dict['last_change_scale2_json_key'] = last_change_scale2_json_key
 json_keys_dict['last_change_temperature_meat1_json_key'] = last_change_temperature_meat1_json_key
