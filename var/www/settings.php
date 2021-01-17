@@ -30,7 +30,6 @@
                                         <td width="200px"></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
                                     </tr>
                                     <tr>
                                     <?php 
@@ -59,14 +58,14 @@
                                         elseif ($grepmain != NULL and $status_piager == 1){ // wenn main.py läuft und Status in DB eingeschaltet
                                             echo '<td><img src="images/icons/operating_42x42.gif" alt="" style="padding: 10px;"></td><td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td><td>';
                                             echo "<button class=\"art-button\" name=\"pi-ager_agingtable_stop\" value=\"pi-ager_agingtable_stop\" onclick=\"return confirm('"._('stop pi-ager?').' \\n '._('if agingtable is running, it will be stopped also!')."');\">"._('stop pi-ager')."</button>";
-                                            echo '</td>';
+                                            echo '</td><td></td>';
                                         }
                                         elseif ($grepmain != NULL and $status_piager == 0){ //Wenn main.py  läuft und der Status in DB aus ist
                                             echo '<td><img src="images/icons/operatingmode_42x42.png" style="padding: 10px;"></td>
                                             <td><img src="images/icons/status_off_20x20.png" style="padding-top: 10px;"></td>
                                             <td>';
                                             echo "<button class=\"art-button\" name=\"main_start\" value=\"main_start\" onclick=\"return confirm('"._('start pi-ager?')."');\">"._('start pi-ager')."</button>";
-                                            echo '</td>';
+                                            echo '</td><td></td>';
                                         }
                                         print ' </form>';
                                     ?>
@@ -79,8 +78,6 @@
                                             <td width="100px"></td>
                                             <td width="100px"></td>
                                             <td width="200px"></td>
-                                            <td></td>
-                                            <td></td>
                                             <td></td>
                                         </tr>
                                         <?php
@@ -171,8 +168,9 @@
                                                     }
                                                     print ' </form>';
                                                     print '</tr>';
-                                                    print '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
-                                                    print '<tr><td></td><td style="text-align: right;"><form action="scale_wizzard.php" method="post"> <input type="radio" name="scale_wizzard_radiobutton" value="' . $scale1_key . '" checked="checked"><label> '._('scale').'&nbsp1</label><br><input type="radio" name="scale_wizzard_radiobutton" value="' . $scale2_key . '"><label> '._('scale').'&nbsp2</label> </td><td style="text-align: left;">';
+                                                    print '<tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>';
+                                                    print '<tr><td></td>
+                                                    <td style="text-align: right;"></td><td><form action="scale_wizzard.php" method="post"> <input type="radio" name="scale_wizzard_radiobutton" value="' . $scale1_key . '" checked="checked"><label> '._('scale').'&nbsp1</label><br><input type="radio" name="scale_wizzard_radiobutton" value="' . $scale2_key . '"><label> '._('scale').'&nbsp2</label> </td>';
                                                     echo '<td>';
                                                     echo "<button class=\"art-button\" name=\"scale_wizzard\" value=\"scale_wizzard\"  onclick=\"return confirm('"._('attention').' ! \\n '._('measurement on scales are stopped'). ' \\n ' . _('please relieve the load cell completely') . "!');\">"._('calibrate wizzard')."</button>";
                                                     print '</form></td></tr>';
@@ -348,6 +346,7 @@
                                     <?php
                                          $current_period = get_table_value($current_values_table, $agingtable_period_key);
                                      ?>
+                                     <br>
                                     <table style="width: 100%" class="switching_state miniature_writing">
                                         <tr>
                                             <td width="75px" colspan="2" align="left"><?php echo _('actual phase and day') ?></td>
