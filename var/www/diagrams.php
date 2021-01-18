@@ -231,13 +231,13 @@
                                                         labelString: '<?php echo _("humidity") ?>',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return ' ' + value + ' %' + '    ';
+                                                                return '  ' + value + ' %' + '  ';
                                                             },
                                                             fontColor: '#000000',
                                                            //    fontSize: 20,
                                                             max: <?php 
-                                                            $max_value_humidiy = intval(max($humidity_dataset) + (max($humidity_dataset) / 100 * 1))+10;
-                                                            print min (100,max (10,$max_value_humidiy));
+                                                            $max_value_humidiy = intval(max($humidity_dataset)/10) * 10 + 10;
+                                                            print $max_value_humidiy;
                                                             ?>,
                                                             //min: <?php 
                                                             //$min_value_humidiy = intval(min($humidity_dataset) - (min($humidity_dataset) / 100 * 1))-1;
