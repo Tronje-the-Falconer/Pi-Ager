@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
-"POT-Creation-Date: 2021-01-17 13:24+0100\n"
-"PO-Revision-Date: 2021-01-17 13:27+0100\n"
+"POT-Creation-Date: 2021-01-18 11:19+0100\n"
+"PO-Revision-Date: 2021-01-18 12:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -33,15 +33,15 @@ msgid "pause uv-light!"
 msgstr "UV-Licht Pause!"
 
 #: admin.php:42 config.php:167 config.php:178 config.php:206 config.php:217
-#: diagrams.php:750 diagrams.php:752 diagrams.php:775 diagrams.php:777
-#: diagrams.php:851 diagrams.php:853 diagrams.php:876 diagrams.php:878
-#: diagrams.php:952 diagrams.php:954 diagrams.php:977 diagrams.php:979
-#: diagrams.php:1053 diagrams.php:1055 diagrams.php:1078 diagrams.php:1080
-#: diagrams.php:1154 diagrams.php:1156 diagrams.php:1179 diagrams.php:1181
-#: diagrams.php:1255 diagrams.php:1257 diagrams.php:1280 diagrams.php:1282
-#: diagrams.php:1356 diagrams.php:1358 diagrams.php:1381 diagrams.php:1383
-#: diagrams.php:1457 diagrams.php:1459 diagrams.php:1482 diagrams.php:1484
-#: index.php:747 index_old.php:574 index_old2.php:634 manvals.php:141
+#: diagrams.php:755 diagrams.php:757 diagrams.php:780 diagrams.php:782
+#: diagrams.php:861 diagrams.php:863 diagrams.php:886 diagrams.php:888
+#: diagrams.php:967 diagrams.php:969 diagrams.php:992 diagrams.php:994
+#: diagrams.php:1073 diagrams.php:1075 diagrams.php:1098 diagrams.php:1100
+#: diagrams.php:1179 diagrams.php:1181 diagrams.php:1204 diagrams.php:1206
+#: diagrams.php:1285 diagrams.php:1287 diagrams.php:1310 diagrams.php:1312
+#: diagrams.php:1391 diagrams.php:1393 diagrams.php:1416 diagrams.php:1418
+#: diagrams.php:1497 diagrams.php:1499 diagrams.php:1522 diagrams.php:1524
+#: index.php:757 index_old.php:574 index_old2.php:634 manvals.php:141
 #: manvals.php:172 modules/write_config_db_logfile_txt.php:113
 #: modules/write_config_db_logfile_txt.php:129
 #: modules/write_settings_db_logfile_txt.php:108
@@ -103,14 +103,14 @@ msgstr ""
 msgid "change sensors"
 msgstr "Sensor ändern"
 
-#: admin.php:124 index.php:107 index.php:940 index_old2.php:95
+#: admin.php:124 index.php:117 index.php:950 index_old2.php:95
 #: index_old2.php:827 settings.php:75
 msgid "scales"
 msgstr "Waagen"
 
 #: admin.php:125 admin.php:152 diagrams.php:264 diagrams.php:284
-#: diagrams.php:307 diagrams.php:334 diagrams.php:376 index.php:321
-#: index.php:335 index.php:352 index.php:379 index.php:426 index_old.php:356
+#: diagrams.php:307 diagrams.php:334 diagrams.php:376 index.php:331
+#: index.php:345 index.php:362 index.php:389 index.php:436 index_old.php:356
 #: index_old.php:370 index_old.php:387 index_old.php:414 index_old.php:461
 #: index_old2.php:309 index_old2.php:323 index_old2.php:340 index_old2.php:367
 #: index_old2.php:414 modules/start_stop_program.php:169
@@ -442,7 +442,7 @@ msgstr "ACHTUNG! Vorsicht beim Ändern dieser Parameter!"
 #: config.php:16 diagrams.php:131 diagrams.php:172 diagrams.php:203
 #: diagrams.php:430 diagrams.php:449 diagrams.php:468 diagrams.php:524
 #: diagrams.php:549 diagrams.php:587 diagrams.php:637 diagrams.php:662
-#: index.php:154 index.php:180 index.php:194 index.php:208 index.php:262
+#: index.php:164 index.php:190 index.php:204 index.php:218 index.php:272
 #: index_old.php:189 index_old.php:215 index_old.php:229 index_old.php:243
 #: index_old.php:297 index_old2.php:142 index_old2.php:168 index_old2.php:182
 #: index_old2.php:196 index_old2.php:250 manvals.php:59
@@ -506,7 +506,7 @@ msgid "use only positive integers!"
 msgstr "Nur positive ganze Zahlen nutzen!"
 
 #: config.php:75 diagrams.php:150 diagrams.php:172 diagrams.php:223
-#: diagrams.php:231 index.php:167 index.php:282 index_old.php:202
+#: diagrams.php:231 index.php:177 index.php:292 index_old.php:202
 #: index_old.php:317 index_old2.php:155 index_old2.php:270 manvals.php:109
 msgid "humidity"
 msgstr "Feuchte"
@@ -516,8 +516,8 @@ msgid "delay"
 msgstr "Verzögerung"
 
 #: config.php:102 config.php:122 config.php:173 config.php:178 config.php:212
-#: config.php:217 index.php:861 index.php:862 index.php:875 index.php:876
-#: index.php:903 index.php:904 index.php:934 index.php:935 index_old.php:685
+#: config.php:217 index.php:871 index.php:872 index.php:885 index.php:886
+#: index.php:913 index.php:914 index.php:944 index.php:945 index_old.php:685
 #: index_old.php:687 index_old.php:702 index_old.php:704 index_old.php:734
 #: index_old.php:736 index_old.php:765 index_old.php:767 index_old2.php:748
 #: index_old2.php:749 index_old2.php:762 index_old2.php:763 index_old2.php:790
@@ -634,7 +634,7 @@ msgstr "Abluft und Entfeuchter"
 msgid "only dehumidifier"
 msgstr "Nur Entfeuchter"
 
-#: config.php:155 diagrams.php:1202 diagrams.php:1222
+#: config.php:155 diagrams.php:1227 diagrams.php:1247
 msgid "dehumidifier"
 msgstr "Entfeuchter"
 
@@ -664,7 +664,7 @@ msgstr "Dauer & Zeitpunkt"
 msgid "period every"
 msgstr "Zyklus"
 
-#: config.php:177 config.php:216 index.php:848 index_old.php:673
+#: config.php:177 config.php:216 index.php:858 index_old.php:673
 #: index_old2.php:735 manvals.php:155 manvals.php:186
 msgid "duration"
 msgstr "Dauer"
@@ -682,7 +682,7 @@ msgid "text for uv help"
 msgstr ""
 
 #: config.php:202 config.php:233 diagrams.php:697 diagrams.php:717
-#: index.php:921 index_old.php:753 index_old2.php:808
+#: index.php:931 index_old.php:753 index_old2.php:808
 msgid "light"
 msgstr "Licht"
 
@@ -690,7 +690,7 @@ msgstr "Licht"
 msgid "text for light help"
 msgstr ""
 
-#: config.php:241 config.php:262 index.php:486 index.php:686 index_old.php:562
+#: config.php:241 config.php:262 index.php:496 index.php:696 index_old.php:562
 #: index_old2.php:573 modules/write_table_db.php:10
 #: modules/write_table_db.php:63 modules/write_table_db.php:72
 #: modules/write_table_db.php:75 modules/write_table_db.php:78
@@ -723,7 +723,7 @@ msgstr "Schließen"
 msgid "hour"
 msgstr "Stunde"
 
-#: diagrams.php:21 diagrams.php:44 index.php:493 settings.php:359
+#: diagrams.php:21 diagrams.php:44 index.php:503 settings.php:359
 msgid "day"
 msgstr "Tag"
 
@@ -756,11 +756,11 @@ msgid "every ~ 5 minutes a new value is written!"
 msgstr "Ca. alle 5 Min wird ein neuer Wert abgespeichert!"
 
 #: diagrams.php:203 diagrams.php:524 diagrams.php:549 diagrams.php:587
-#: diagrams.php:637 index.php:262 index_old.php:297 index_old2.php:250
+#: diagrams.php:637 index.php:272 index_old.php:297 index_old2.php:250
 msgid " - ϑ"
 msgstr ""
 
-#: diagrams.php:223 index.php:282 index_old.php:317 index_old2.php:270
+#: diagrams.php:223 index.php:292 index_old.php:317 index_old2.php:270
 msgid " - φ"
 msgstr ""
 
@@ -772,51 +772,51 @@ msgstr "Thermometer"
 msgid "Current"
 msgstr "Strom"
 
-#: diagrams.php:738 diagrams.php:839 diagrams.php:940 diagrams.php:1041
-#: diagrams.php:1142 diagrams.php:1243 diagrams.php:1344 diagrams.php:1445
-#: index.php:742 index.php:844 index.php:945 index_old.php:569
+#: diagrams.php:743 diagrams.php:849 diagrams.php:955 diagrams.php:1061
+#: diagrams.php:1167 diagrams.php:1273 diagrams.php:1379 diagrams.php:1485
+#: index.php:752 index.php:854 index.php:955 index_old.php:569
 #: index_old.php:669 index_old.php:775 index_old2.php:629 index_old2.php:731
 #: index_old2.php:832
 msgid "status"
 msgstr "Status"
 
-#: diagrams.php:748 diagrams.php:773 diagrams.php:849 diagrams.php:874
-#: diagrams.php:950 diagrams.php:975 diagrams.php:1051 diagrams.php:1076
-#: diagrams.php:1152 diagrams.php:1177 diagrams.php:1253 diagrams.php:1278
-#: diagrams.php:1354 diagrams.php:1379 diagrams.php:1455 diagrams.php:1480
-#: index.php:746 index_old.php:573 index_old2.php:633
+#: diagrams.php:753 diagrams.php:778 diagrams.php:859 diagrams.php:884
+#: diagrams.php:965 diagrams.php:990 diagrams.php:1071 diagrams.php:1096
+#: diagrams.php:1177 diagrams.php:1202 diagrams.php:1283 diagrams.php:1308
+#: diagrams.php:1389 diagrams.php:1414 diagrams.php:1495 diagrams.php:1520
+#: index.php:756 index_old.php:573 index_old2.php:633
 msgid "on"
 msgstr "Ein"
 
-#: diagrams.php:765 diagrams.php:866 diagrams.php:967 diagrams.php:1068
-#: diagrams.php:1169 diagrams.php:1270 diagrams.php:1371 diagrams.php:1472
+#: diagrams.php:770 diagrams.php:876 diagrams.php:982 diagrams.php:1088
+#: diagrams.php:1194 diagrams.php:1300 diagrams.php:1406 diagrams.php:1512
 msgid " "
 msgstr ""
 
-#: diagrams.php:798 diagrams.php:818 index.php:891 index_old.php:722
+#: diagrams.php:803 diagrams.php:823 index.php:901 index_old.php:722
 #: index_old2.php:778
 msgid "uv-light"
 msgstr "UV-Licht"
 
-#: diagrams.php:899 diagrams.php:919 index.php:766 index.php:785
+#: diagrams.php:909 diagrams.php:929 index.php:776 index.php:795
 #: index_old.php:593 index_old.php:612 index_old2.php:653 index_old2.php:672
 msgid "heater"
 msgstr "Heizung"
 
-#: diagrams.php:1000 diagrams.php:1020 index.php:755 index.php:777
+#: diagrams.php:1015 diagrams.php:1035 index.php:765 index.php:787
 #: index_old.php:582 index_old.php:604 index_old2.php:642 index_old2.php:664
 msgid "cooler"
 msgstr "Kompressor"
 
-#: diagrams.php:1101 diagrams.php:1121
+#: diagrams.php:1121 diagrams.php:1141
 msgid "humidifier"
 msgstr "Befeuchter"
 
-#: diagrams.php:1303 diagrams.php:1323
+#: diagrams.php:1333 diagrams.php:1353
 msgid "exhaust air"
 msgstr "Abluft"
 
-#: diagrams.php:1404 diagrams.php:1424
+#: diagrams.php:1439 diagrams.php:1459
 msgid "circulate air"
 msgstr "Umluft"
 
@@ -839,68 +839,68 @@ msgstr ""
 msgid "edit agingtable:"
 msgstr "Reifetabelle editieren:"
 
-#: edit_agingtable.php:42 index.php:490 index.php:498 settings.php:356
+#: edit_agingtable.php:42 index.php:500 index.php:508 settings.php:356
 #: settings.php:364
 msgid "phase"
 msgstr "Phase"
 
-#: edit_agingtable.php:43 index.php:499 settings.php:365
+#: edit_agingtable.php:43 index.php:509 settings.php:365
 msgid "modus"
 msgstr "Modus"
 
-#: edit_agingtable.php:43 index.php:499 settings.php:365
+#: edit_agingtable.php:43 index.php:509 settings.php:365
 msgid "aging-modus"
 msgstr "Reifemodus"
 
-#: edit_agingtable.php:44 index.php:500 settings.php:366
+#: edit_agingtable.php:44 index.php:510 settings.php:366
 msgid "target humidity in %"
 msgstr "Sollwert Feuchte in %"
 
-#: edit_agingtable.php:45 index.php:501 settings.php:367
+#: edit_agingtable.php:45 index.php:511 settings.php:367
 msgid "target temperature in °C"
 msgstr "Sollwert Temperatur in °C"
 
-#: edit_agingtable.php:46 index.php:502 settings.php:368
+#: edit_agingtable.php:46 index.php:512 settings.php:368
 msgid "timer circulate d"
 msgstr "Timer Umluft d"
 
-#: edit_agingtable.php:46 index.php:502 settings.php:368
+#: edit_agingtable.php:46 index.php:512 settings.php:368
 msgid "timer of the circulation air duration in minutes"
 msgstr "Timer für Umluft Dauer in Minuten"
 
-#: edit_agingtable.php:47 index.php:503 settings.php:369
+#: edit_agingtable.php:47 index.php:513 settings.php:369
 msgid "timer circulate p"
 msgstr "Timer Umluft p"
 
-#: edit_agingtable.php:47 index.php:503 settings.php:369
+#: edit_agingtable.php:47 index.php:513 settings.php:369
 msgid "timer of the circulation air period in minutes"
 msgstr "Timer für Umluft Zyklus in Minuten"
 
-#: edit_agingtable.php:48 index.php:504 settings.php:370
+#: edit_agingtable.php:48 index.php:514 settings.php:370
 msgid "timer exhaust d"
 msgstr "Timer Abluft d"
 
-#: edit_agingtable.php:48 index.php:504 settings.php:370
+#: edit_agingtable.php:48 index.php:514 settings.php:370
 msgid "timer of the exhausting air duration in minutes"
 msgstr "Timer für Abluft Dauer in Minuten"
 
-#: edit_agingtable.php:49 index.php:505 settings.php:371
+#: edit_agingtable.php:49 index.php:515 settings.php:371
 msgid "timer exhaust p"
 msgstr "Timer Abluft p"
 
-#: edit_agingtable.php:49 index.php:505 settings.php:371
+#: edit_agingtable.php:49 index.php:515 settings.php:371
 msgid "timer of the exhausting air period in minutes"
 msgstr "Timer für Abluft Zyklus in Minuten"
 
-#: edit_agingtable.php:50 index.php:506 settings.php:372
+#: edit_agingtable.php:50 index.php:516 settings.php:372
 msgid "days"
 msgstr "Tage"
 
-#: edit_agingtable.php:50 index.php:506 settings.php:372
+#: edit_agingtable.php:50 index.php:516 settings.php:372
 msgid "duration of hanging phase in days"
 msgstr "Dauer der Reifephase in Tagen"
 
-#: edit_agingtable.php:110 index.php:573 settings.php:444
+#: edit_agingtable.php:110 index.php:583 settings.php:444
 msgid "comment:"
 msgstr "Anmerkungen:"
 
@@ -928,11 +928,11 @@ msgstr "Anzahl Zeilen"
 #: edit_agingtable.php:138 notification.php:170 notification.php:340
 #: notification.php:457 notification.php:535
 msgid "add"
-msgstr "hinzufügen"
+msgstr "Hinzufügen"
 
 #: edit_agingtable.php:138
 msgid "add rows"
-msgstr "Zeilen hinzufügen"
+msgstr "Zeile(n) hinzufügen"
 
 #: footer.php:9
 msgid "running engine: "
@@ -970,133 +970,133 @@ msgstr "Hauptsensoren"
 msgid "ntc sensors"
 msgstr "NTC Sensoren"
 
-#: index.php:515 settings.php:382
+#: index.php:525 settings.php:382
 msgid "no comment"
 msgstr "Keine Anmerkungen vorhanden"
 
-#: index.php:581 index_old.php:515 index_old2.php:468
+#: index.php:591 index_old.php:515 index_old2.php:468
 msgid "statusboard"
 msgstr "Statusbord"
 
-#: index.php:583 index_old2.php:470
+#: index.php:593 index_old2.php:470
 msgid "general"
 msgstr "Allgemein"
 
-#: index.php:611 index_old.php:537 index_old2.php:498 manvals.php:22
+#: index.php:621 index_old.php:537 index_old2.php:498 manvals.php:22
 #: modules/write_config_db_logfile_txt.php:152
 #: modules/write_settings_db_logfile_txt.php:150
 msgid "operating mode"
 msgstr "Modus"
 
-#: index.php:620 index_old2.php:507
+#: index.php:630 index_old2.php:507
 msgid "powersuply ok"
 msgstr "Spannungsversorgung OK"
 
-#: index.php:626 index_old2.php:513
+#: index.php:636 index_old2.php:513
 msgid "no powersuply! batterymode"
 msgstr "Spannunggsversorgung fehlerhaft! Batteriemodus."
 
-#: index.php:654 index_old2.php:541
+#: index.php:664 index_old2.php:541
 msgid "battery voltage ok"
 msgstr "Batteriespannung OK"
 
-#: index.php:660 index_old2.php:547
+#: index.php:670 index_old2.php:547
 msgid "battery voltage low !!"
 msgstr "Batteriespannung tief!"
 
-#: index.php:721 index_old2.php:608
+#: index.php:731 index_old2.php:608
 msgid "Switch is on"
 msgstr "Schalter EIN"
 
-#: index.php:727 index_old2.php:614
+#: index.php:737 index_old2.php:614
 msgid "Switch is off"
 msgstr "Schalter AUS"
 
-#: index.php:737 index_old2.php:624
+#: index.php:747 index_old2.php:624
 msgid "temperatures"
 msgstr "Temperaturen"
 
-#: index.php:741 index.php:843 index.php:944 index_old.php:568
+#: index.php:751 index.php:853 index.php:954 index_old.php:568
 #: index_old.php:668 index_old.php:774 index_old2.php:628 index_old2.php:730
 #: index_old2.php:831
 msgid "type"
 msgstr "Typ"
 
-#: index.php:744 index_old.php:571 index_old2.php:631
+#: index.php:754 index_old.php:571 index_old2.php:631
 msgid "actual"
 msgstr "Aktuell"
 
-#: index.php:745 index_old.php:572 index_old2.php:632
+#: index.php:755 index_old.php:572 index_old2.php:632
 msgid "target"
 msgstr "Sollwert"
 
-#: index.php:799 index.php:811 index_old.php:626 index_old.php:638
+#: index.php:809 index.php:821 index_old.php:626 index_old.php:638
 #: index_old2.php:686 index_old2.php:698
 msgid "humidification"
 msgstr "Befeuchter"
 
-#: index.php:819 index_old.php:646 index_old2.php:706
+#: index.php:829 index_old.php:646 index_old2.php:706
 msgid "exhausting"
 msgstr "Abluft"
 
-#: index.php:828 index_old.php:655 index_old2.php:715
+#: index.php:838 index_old.php:655 index_old2.php:715
 msgid "dehumidification"
 msgstr "Entfeuchter"
 
-#: index.php:839 index_old2.php:726
+#: index.php:849 index_old2.php:726
 msgid "timer"
 msgstr "Timer"
 
-#: index.php:847 index_old.php:671 index_old2.php:734 manvals.php:153
+#: index.php:857 index_old.php:671 index_old2.php:734 manvals.php:153
 #: manvals.php:184
 msgid "period"
 msgstr "Zyklus"
 
-#: index.php:855 index_old.php:680 index_old2.php:742
+#: index.php:865 index_old.php:680 index_old2.php:742
 #: modules/read_settings_db.php:40
 msgid "circulating air"
 msgstr "Umluft"
 
-#: index.php:856 index.php:870 index.php:894 index.php:924 index_old.php:681
+#: index.php:866 index.php:880 index.php:904 index.php:934 index_old.php:681
 #: index_old.php:698 index_old.php:725 index_old.php:756 index_old2.php:743
 #: index_old2.php:757 index_old2.php:781 index_old2.php:811
 msgid "timer on"
 msgstr "Timer Ein"
 
-#: index.php:857 index.php:871 index_old.php:682 index_old.php:699
+#: index.php:867 index.php:881 index_old.php:682 index_old.php:699
 #: index_old2.php:744 index_old2.php:758
 msgid "always on"
 msgstr "Immer Ein"
 
-#: index.php:858 index.php:872 index.php:893 index.php:923 index_old.php:683
+#: index.php:868 index.php:882 index.php:903 index.php:933 index_old.php:683
 #: index_old.php:700 index_old.php:724 index_old.php:755 index_old2.php:745
 #: index_old2.php:759 index_old2.php:780 index_old2.php:810
 msgid "timer off"
 msgstr "Timer Aus"
 
-#: index.php:869 index_old.php:697 index_old2.php:756
+#: index.php:879 index_old.php:697 index_old2.php:756
 #: modules/read_settings_db.php:40
 msgid "exhausting air"
 msgstr "Abluft"
 
-#: index.php:895 index_old.php:726 index_old2.php:782
+#: index.php:905 index_old.php:726 index_old2.php:782
 msgid "manual switch off"
 msgstr "manuell AUS"
 
-#: index.php:925 index_old.php:757 index_old2.php:812
+#: index.php:935 index_old.php:757 index_old2.php:812
 msgid "manual switch on"
 msgstr "manuell EIN"
 
-#: index.php:958 index_old.php:788 index_old2.php:845
+#: index.php:968 index_old.php:788 index_old2.php:845
 msgid "see settings"
 msgstr "Siehe Einstellungen"
 
-#: index.php:965 index.php:972 index_old.php:795 index_old.php:802
+#: index.php:975 index.php:982 index_old.php:795 index_old.php:802
 #: index_old2.php:852 index_old2.php:859
 msgid "scale1"
 msgstr "Waage1"
 
-#: index.php:992 index.php:999 index_old.php:822 index_old.php:829
+#: index.php:1002 index.php:1009 index_old.php:822 index_old.php:829
 #: index_old2.php:879 index_old2.php:886
 msgid "scale2"
 msgstr "Waage2"
@@ -1240,7 +1240,7 @@ msgstr "Sollwert Temperatur"
 #: manvals.php:73
 msgid ""
 "the desired temperature is set here. the minimum value is 0 ° C, the maximum "
-"+ 22 ° C.\n"
+"+ 25 ° C.\n"
 "                                             for technical reasons, not all "
 "values can be approached in any operating mode. the circulating air is "
 "always active during the cooling or heating phases."
@@ -1467,8 +1467,8 @@ msgid "light switched off manually"
 msgstr "Licht manuell ausgeschaltet"
 
 #: modules/start_stop_program.php:16 modules/start_stop_program.php:63
-#: modules/start_stop_program.php:134 modules/start_stop_program.php:234
-#: modules/start_stop_program.php:260 modules/start_stop_program.php:286
+#: modules/start_stop_program.php:134 modules/start_stop_program.php:212
+#: modules/start_stop_program.php:238 modules/start_stop_program.php:264
 msgid "manually started"
 msgstr "manuell gestartet"
 
@@ -1478,8 +1478,8 @@ msgid "started"
 msgstr "gestartet"
 
 #: modules/start_stop_program.php:22 modules/start_stop_program.php:72
-#: modules/start_stop_program.php:160 modules/start_stop_program.php:238
-#: modules/start_stop_program.php:264 modules/start_stop_program.php:290
+#: modules/start_stop_program.php:160 modules/start_stop_program.php:216
+#: modules/start_stop_program.php:242 modules/start_stop_program.php:268
 msgid "could not be started"
 msgstr "konnte nicht gestartet werden"
 
@@ -1541,25 +1541,13 @@ msgstr "Waagenmessungen gestartet."
 msgid "measuring scale stopped"
 msgstr "Waagenmessungen angehalten"
 
-#: modules/start_stop_program.php:212
-msgid "webcam started"
-msgstr "Webcam gestartet"
-
-#: modules/start_stop_program.php:216
-msgid "webcam could not be started"
-msgstr "Wencam konnte nicht gestartet werden"
-
-#: modules/start_stop_program.php:223
-msgid "webcam stopped"
-msgstr "Webcam angehalten"
-
-#: modules/start_stop_program.php:243 modules/start_stop_program.php:269
-#: modules/start_stop_program.php:295
+#: modules/start_stop_program.php:221 modules/start_stop_program.php:247
+#: modules/start_stop_program.php:273
 msgid "already running"
 msgstr "läuft schon"
 
-#: modules/start_stop_program.php:250 modules/start_stop_program.php:276
-#: modules/start_stop_program.php:302
+#: modules/start_stop_program.php:228 modules/start_stop_program.php:254
+#: modules/start_stop_program.php:280
 msgid "killed"
 msgstr ""
 
@@ -1883,11 +1871,11 @@ msgstr "Fertig"
 
 #: modules/write_table_db.php:240
 msgid "row in agingtable deleted"
-msgstr "Zeile in Reifetabelle gelöscht"
+msgstr "Zeile(n) in Reifetabelle gelöscht"
 
 #: modules/write_table_db.php:263
-msgid "rows in agingtable deleted"
-msgstr "Zeilen in Reifetabelle gelöscht"
+msgid "rows in agingtable added"
+msgstr "Zeile(n) in Reifetabelle hinzugefügt"
 
 #: notification.php:10
 msgid "messenger"
@@ -2316,6 +2304,15 @@ msgstr "Licht einschalten"
 #: webcam.php:48
 msgid "turn off light"
 msgstr "Licht ausschalten"
+
+#~ msgid "webcam started"
+#~ msgstr "Webcam gestartet"
+
+#~ msgid "webcam could not be started"
+#~ msgstr "Wencam konnte nicht gestartet werden"
+
+#~ msgid "webcam stopped"
+#~ msgstr "Webcam angehalten"
 
 #~ msgid "testmail adress"
 #~ msgstr "Test E-Mailadresse"

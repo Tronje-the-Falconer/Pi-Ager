@@ -260,6 +260,6 @@
        
         $logstring = 'added rows in agingtable done';
         logger('DEBUG', $logstring );
-        print '<script language="javascript"> alert("'. (_("agingtable")) . " : " . (_("rows in agingtable deleted")) .'"); window.location.href = "edit_agingtable.php"; </script>';
+        print '<script language="javascript"> alert("'. (_("agingtable")) . " : " . (_("rows in agingtable added")) .'"); window.location.href = "edit_agingtable.php"; </script>';
     }
 ?>
