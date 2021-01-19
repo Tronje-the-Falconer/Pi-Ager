@@ -20,20 +20,20 @@
                                     <h2><?php echo _('internal'); ?></h2>
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td>
+                                            <td width="33%">
                                                 <img src="images/icons/temperature.png" alt="" style="padding-top: 10px;">
                                             </td>
-                                            <td>
+                                            <td width="33%">
                                                 <img src="images/icons/humidity.png" alt="" style="padding-top: 10px;">
                                             </td>
-                                            <td>
+                                            <td width="33%">
                                                 <img src="images/icons/dew_point.png" alt="" style="padding-top: 10px;">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td id="json_temperature_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #ff0000;"></td>
-                                            <td id="json_humidity_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #0066FF;"></td>
-                                            <td id="json_dewpoint_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #00cc66;"></td>
+                                            <td width="33%" id="json_temperature_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #ff0000;"></td>
+                                            <td width="33%" id="json_humidity_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #0066FF;"></td>
+                                            <td  width="33%" id="json_dewpoint_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #00cc66;"></td>
                                         </tr>
                                     </table>
                                     <?php
@@ -48,20 +48,20 @@
                                         }
                                         echo '    
                                                         <tr>
-                                                            <td>
+                                                            <td width="33%">
                                                                 <img src="images/icons/temperature_extern_42x42.png" alt="" style="padding-top: 10px;">
                                                             </td>
-                                                            <td>
+                                                            <td width="33%">
                                                                 <img src="images/icons/humidity_extern_42x42.png" alt="" style="padding-top: 10px;">
                                                             </td>
-                                                            <td>
+                                                            <td width="33%">
                                                                 <img src="images/icons/dew_point_extern_42x42.png" alt="" style="padding-top: 10px;">
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td id="json_temperature_extern" style="text-align: center; font-size: 20px;"></td>
-                                                            <td id="json_humidity_extern" style="text-align: center; font-size: 20px;"></td>
-                                                            <td id="json_dewpoint_extern" style="text-align: center; font-size: 20px;"></td>
+                                                            <td width="33%" id="json_temperature_extern" align="center" style="text-align: center; font-size: 20px;"></td>
+                                                            <td width="33%" id="json_humidity_extern" align="center" style="text-align: center; font-size: 20px;"></td>
+                                                            <td width="33%" id="json_dewpoint_extern" align="center" style="text-align: center; font-size: 20px;"></td>
                                                         </tr>
                                                     </table>';
                                     ?>
@@ -188,7 +188,7 @@
                                             },
                                             {
                                                 label: '<?php echo _("temperature") . ' NTC 1' ?>',
-												hidden: true,
+                                                hidden: true,
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($thermometer1_dataset); ?>,
                                                 backgroundColor: '#F7AC08',
@@ -202,7 +202,7 @@
                                             },
                                             {
                                                 label: '<?php echo _("temperature") . ' NTC 2' ?>',
-												hidden: true,
+                                                hidden: true,
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($thermometer2_dataset); ?>,
                                                 backgroundColor: '#06AF8F',
@@ -216,7 +216,7 @@
                                             },
                                             {
                                                 label: '<?php echo _("temperature") . ' NTC 3' ?>',
-												hidden: true,
+                                                hidden: true,
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($thermometer3_dataset); ?>,
                                                 backgroundColor: '#AF06A1',
@@ -909,9 +909,9 @@
                                                 elseif ($uv_duration == 0) {echo ', '.strtoupper(_('timer inactive'));}
                                                 */
                                             ?></td>
-                                           	<td></td>
-                                           	<td><?php echo $uv_period.' '._('minutes'); ?></td>
-                                           	<td><?php echo $uv_duration.' '._('minutes'); ?></td>
+                                            <td></td>
+                                            <td><?php echo $uv_period.' '._('minutes'); ?></td>
+                                            <td><?php echo $uv_duration.' '._('minutes'); ?></td>
                                            
                                         </tr>
                                         <tr>
