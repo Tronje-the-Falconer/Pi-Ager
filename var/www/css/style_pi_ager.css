@@ -103,17 +103,13 @@ body {
 /* Zellen Schaltzustände */
 .text_left  {
     text-align: left;
+	width: 300px;
 }
 
 .text_left_top  {
     vertical-align: top;
     text-align: left;
 }
-
-.text_left  {
-    text-align: left;
-}
-
 
 .td_png_icon{
     text-align: center;
