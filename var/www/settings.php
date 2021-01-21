@@ -317,7 +317,7 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
-                                            <td colspan=2 style=" text-align: left; >
+                                            <td colspan=2 style=" text-align: left;">
                                                 <?php
                                                     print '<form method="post" id="upload_new_agingtable" enctype="multipart/form-data">';
                                                     print '<input type="file" name="file" id="csv-file"  accept=".csv" onchange="enableButton()">';
