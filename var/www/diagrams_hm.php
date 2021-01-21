@@ -662,8 +662,9 @@
                                                             maxTicksLimit: 10,
                                                             //max: <?php if ($sensor4_is_current == true) { echo '2'; } else { echo '30'; }?>, 
                                                             //min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-1'; }?>
+															//
 															max: <?php
-															$max_value_thermometer4 = intval(max($non_empties = array_filter($thermometer4_dataset))/2) * 2 + 1;
+															$max_value_thermometer4 = intval(max($non_empties = array_filter($thermometer4_dataset))/1) * 1 + 1;
                                                             print $max_value_thermometer4;
                                                             ?>,
                                                             //min: -2
@@ -698,7 +699,7 @@
                                                             //min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-1'; }?>
 															//
 															max: <?php
-															$max_value_thermometer4 = intval(max($non_empties = array_filter($thermometer4_dataset))/2) * 2 + 1;
+															$max_value_thermometer4 = intval(max($non_empties = array_filter($thermometer4_dataset))/1) * 1 + 1;
                                                             print $max_value_thermometer4;
                                                             ?>,
                                                             //min: -2
