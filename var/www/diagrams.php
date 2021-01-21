@@ -196,6 +196,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
+														ticks: {
+															autoSkip: false,
+															maxRotation: 0,
+															minRotation: 0
+														},		
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -335,6 +340,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
+														ticks: {
+															autoSkip: false,
+															maxRotation: 0,
+															minRotation: 0
+														},															
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -524,6 +534,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
+														ticks: {
+															autoSkip: false,
+															maxRotation: 0,
+															minRotation: 0
+														},	
                                                     }, ],
                                                     yAxes: [
                                                     {
@@ -653,6 +668,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
+														ticks: {
+															autoSkip: false,
+															maxRotation: 0,
+															minRotation: 0
+														},		
                                                     }, ],
                                                     yAxes: [
                                                     {
@@ -779,7 +799,7 @@
 															autoSkip: false,
 															maxRotation: 0,
 															minRotation: 0
-														}
+														},
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -885,7 +905,7 @@
 															autoSkip: false,
 															maxRotation: 0,
 															minRotation: 0
-														}														
+														},														
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -991,7 +1011,7 @@
 															autoSkip: false,
 															maxRotation: 0,
 															minRotation: 0
-														}														
+														},														
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1097,7 +1117,7 @@
 															autoSkip: false,
 															maxRotation: 0,
 															minRotation: 0
-														}														
+														},														
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1203,7 +1223,7 @@
 															autoSkip: false,
 															maxRotation: 0,
 															minRotation: 0
-														}														
+														},														
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1309,7 +1329,7 @@
 															autoSkip: false,
 															maxRotation: 0,
 															minRotation: 0
-														}														
+														},														
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1415,7 +1435,7 @@
 															autoSkip: false,
 															maxRotation: 0,
 															minRotation: 0
-														}														
+														},														
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1521,7 +1541,7 @@
 															autoSkip: false,
 															maxRotation: 0,
 															minRotation: 0
-														}														
+														},														
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
