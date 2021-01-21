@@ -283,15 +283,17 @@
                                                         fontColor: '#000000',
                                                         // fontSize: 20,															
 														//max: 30,
+														//min: -2
+													//-----austoscale start	
 														max: <?php 
-                                                            $max_value_temperature = intval (max(max($temperature_dataset),max($thermometer1_dataset),max($thermometer2_dataset),max($thermometer3_dataset))/10)*10 +15;
-                                                            print $max_value_temperature;
-                                                            ?>,
-                                                        //min: -2
+                                                        $max_value_temperature = intval (max(max($temperature_dataset),max($thermometer1_dataset),max($thermometer2_dataset),max($thermometer3_dataset))/10)*10 +15;
+                                                        print $max_value_temperature;
+                                                        ?>,
 														min: <?php														
-															$min_value_temperature = intval (min(min($non_empties = array_filter($temperature_dataset)),min($non_empties = array_filter($thermometer1_dataset)),min($non_empties = array_filter($thermometer2_dataset)),min($non_empties = array_filter($thermometer2_dataset)))/1)*1 - 1;
-															print $min_value_temperature;	
-                                                            ?>,														
+													    $min_value_temperature = intval (min(min($non_empties = array_filter($temperature_dataset)),min($non_empties = array_filter($thermometer1_dataset)),min($non_empties = array_filter($thermometer2_dataset)),min($non_empties = array_filter($thermometer2_dataset)))/1)*1 - 1;
+														print $min_value_temperature;	
+                                                        ?>
+													//-----austoscale start			
                                                     }
                                                     
                                                 }, {
