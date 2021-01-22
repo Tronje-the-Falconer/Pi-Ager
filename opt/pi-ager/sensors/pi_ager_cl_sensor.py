@@ -66,13 +66,13 @@ class cl_sensor(cl_ab_sensor):
             raise cx_measurement_error ('To much measurment errors occured!')
     def calc_mean_temperature(self, temperature):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        __counter = __counter + 1
-        __temperature_sum = __temperature_sum + temperature
-        __mean_temperature = __temperature_sum / __counter
+        cl_sensor.__counter = cl_sensor.__counter + 1
+        cl_sensor.__temperature_sum = cl_sensor.__temperature_sum + temperature
+        cl_sensor.__mean_temperature = cl_sensor.__temperature_sum / cl_sensor.__counter
     
     def get_mean_temperature(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return(__mean_temperature)
+        return(cl_sensor.__mean_temperature)
     
     def get_dewpoint(self, temperature, humidity):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
