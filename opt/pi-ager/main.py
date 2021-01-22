@@ -7,8 +7,10 @@ this is the control for a self-made dry aging fridge
 """
 
 # Importieren der Module
-import os
+import os, sys
 import time
+
+sys.modules[__name__].__dict__.clear()
  
 #Zuerst Datenbank prüfen
 import pi_ager_database_check
