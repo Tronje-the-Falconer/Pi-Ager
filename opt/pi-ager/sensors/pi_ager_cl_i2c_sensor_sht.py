@@ -100,7 +100,7 @@ class cl_fact_i2c_sensor_sht(ABC):
         Factory method to get the i2c logic instance
         """
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cl_fact_logger.get_instance().debug("Old i2c__ot_instances = " + str(cl_fact_i2c_sensor_sht.__ot_instances))
+        cl_fact_logger.get_instance().debug("Old i2c __ot_instances = " + str(cl_fact_i2c_sensor_sht.__ot_instances))
 
         try:
             cl_fact_i2c_sensor_sht.__o_instance = cl_fact_i2c_sensor_sht.__ot_instances.pop(i_active_sensor)
@@ -114,10 +114,10 @@ class cl_fact_i2c_sensor_sht(ABC):
             return(cl_fact_i2c_sensor_sht.__o_instance)
         
         cl_fact_i2c_sensor_sht.__o_instance = cl_i2c_sensor_sht(i_active_sensor, i_i2c_bus, i_address)
-        cl_fact_logger.get_instance().debug("__ot_instance for " + i_active_sensor + " =  " + str(cl_fact_i2c_sensor_sht.__o_instance) + " created" )
+        cl_fact_logger.get_instance().debug("i2c __ot_instance for " + i_active_sensor + " =  " + str(cl_fact_i2c_sensor_sht.__o_instance) + " created" )
         line = {i_active_sensor:cl_fact_i2c_sensor_sht.__o_instance}
         cl_fact_i2c_sensor_sht.__ot_instances.update(line)   
-        cl_fact_logger.get_instance().debug("New i2c__ot_instances = " + str(cl_fact_i2c_sensor_sht.__ot_instances))
+        cl_fact_logger.get_instance().debug("New i2c __ot_instances = " + str(cl_fact_i2c_sensor_sht.__ot_instances))
         return(cl_fact_i2c_sensor_sht.__o_instance)
 
     def __init__(self):

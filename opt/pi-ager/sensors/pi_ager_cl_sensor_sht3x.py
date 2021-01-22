@@ -81,21 +81,22 @@ class cl_fact_sensor_sht3x:
     def get_instance(self, i_sensor_type, i_active_sensor, i_address):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug("cl_fact_sensor_sht3x.get_instance")
+        cl_fact_logger.get_instance().debug("Old sht3x __ot_instances = " + str(cl_fact_sensor_sht3x.__ot_instances))
         try:
             cl_fact_sensor_sht3x.__o_instance = cl_fact_sensor_sht3x.__ot_instances.pop(i_active_sensor)
-            cl_fact_logger.get_instance().debug("__ot_instance for " + i_active_sensor + " = " + str(cl_fact_sensor_sht3x.__o_instance))
+            cl_fact_logger.get_instance().debug("sht3x __ot_instance for " + i_active_sensor + " = " + str(cl_fact_sensor_sht3x.__o_instance))
         except KeyError:
-            cl_fact_logger.get_instance().debug("__ot_instance not found for " + i_active_sensor)
+            cl_fact_logger.get_instance().debug("sht3x __ot_instance not found for " + i_active_sensor)
             cl_fact_sensor_sht3x.__o_instance = None 
         if  cl_fact_sensor_sht3x.__o_instance is not None :
-            cl_fact_logger.get_instance().debug("Returning __ot_instance = " + str(cl_fact_sensor_sht3x.__o_instance))
+            cl_fact_logger.get_instance().debug("sht3x  __ot_instance = " + str(cl_fact_sensor_sht3x.__o_instance)+ " Returning")
             return(cl_fact_sensor_sht3x.__o_instance)
         
         cl_fact_sensor_sht3x.__o_instance = cl_sensor_sht3x(i_sensor_type, i_active_sensor, i_address)
-        cl_fact_logger.get_instance().debug("__ot_instance " + str(cl_fact_sensor_sht3x.__o_instance) + " created for " + i_active_sensor)
+        cl_fact_logger.get_instance().debug("sht3x __ot_instance " + i_active_sensor + str(cl_fact_sensor_sht3x.__o_instance) + " created for " )
         line = {i_active_sensor:cl_fact_sensor_sht3x.__o_instance}
         cl_fact_sensor_sht3x.__ot_instances.update(line)   
-        cl_fact_logger.get_instance().debug("__ot_instances = " + str(cl_fact_sensor_sht3x.__ot_instances))
+        cl_fact_logger.get_instance().debug("New sht3x __ot_instances = " + str(cl_fact_sensor_sht3x.__ot_instances))
         return(cl_fact_sensor_sht3x.__o_instance)
 
     @classmethod
