@@ -27,11 +27,11 @@ from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 from main.pi_ager_cl_database import cl_fact_db_influxdb
 
 class cl_sensor(cl_ab_sensor):
-    
+    """
     __mean_temperature = 0
     __temperature_sum = 0
     __counter = 0
-    
+    """
     def __init__(self, o_sensor_type):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._error_counter = 0
@@ -64,7 +64,7 @@ class cl_sensor(cl_ab_sensor):
         
         if (self._error_counter >= self._max_errors):
             raise cx_measurement_error ('To much measurment errors occured!')
-"""
+    """
     def calc_mean_temperature(self, temperature):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_sensor.__counter = cl_sensor.__counter + 1
@@ -74,7 +74,7 @@ class cl_sensor(cl_ab_sensor):
     def get_mean_temperature(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return(cl_sensor.__mean_temperature)
-"""    
+    """    
     def get_dewpoint(self, temperature, humidity):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if (temperature >= 0):
