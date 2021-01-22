@@ -30,6 +30,8 @@ class cl_fact_sensor:
     @classmethod        
     def get_instance(self, i_active_sensor, i_address=None):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_logger.get_instance().debug("Old i2c__ot_instances = " + str(cl_fact_sensor.__ot_instances))
+
         if i_active_sensor == "MAIN": 
                cl_fact_sensor.__o_sensor_type = cl_fact_main_sensor_type().get_instance()
                
