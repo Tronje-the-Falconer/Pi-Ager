@@ -7,8 +7,9 @@ this is the control for a self-made dry aging fridge
 """
 
 # Importieren der Module
-import os
 import sys
+sys.modules[__name__].__dict__.clear()
+import os
 import time
 
 sys.modules[__name__].__dict__.clear()
