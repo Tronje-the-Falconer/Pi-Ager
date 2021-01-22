@@ -239,7 +239,14 @@ class cl_sensor_sht(cl_sensor, ABC):
         cl_fact_logger.get_instance().debug(self._current_temperature)
         cl_fact_logger.get_instance().debug(self._current_humidity)
         self._dewpoint            = super().get_dewpoint(self._current_temperature, self._current_humidity)
-    
+        super().calc_mean_temperature(self._current_temperature)
+        self.mean_temperature     = super().get_mean_temperature()
+        cl_fact_logger.get_instance().debug("Mean temperature :", self.mean_temperature) 
+       
+       
+       
+       
+       
         (temperature_dewpoint, humidity_absolute) = self._dewpoint
         
         self.measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint)
