@@ -12,8 +12,7 @@ sys.modules[__name__].__dict__.clear()
 import os
 import time
 
-sys.modules[__name__].__dict__.clear()
- 
+
 #Zuerst Datenbank prüfen
 import pi_ager_database_check
 pi_ager_database_check.check_and_update_database()
