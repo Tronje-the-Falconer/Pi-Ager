@@ -69,6 +69,8 @@ class cl_sensor(cl_ab_sensor):
         cl_sensor.__counter = cl_sensor.__counter + 1
         cl_sensor.__temperature_sum = cl_sensor.__temperature_sum + temperature
         cl_sensor.__mean_temperature = cl_sensor.__temperature_sum / cl_sensor.__counter
+        cl_fact_logger.get_instance().debug("Mean Values counter:" + str(cl_sensor.__counter )+ "Temp: " + str(temperature) + "Mean: " + str(cl_sensor.__mean_temperature) )
+
     
     def get_mean_temperature(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
