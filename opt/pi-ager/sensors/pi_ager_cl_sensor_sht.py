@@ -51,6 +51,7 @@ class cl_sensor_sht(cl_sensor, ABC):
         self._current_humidity = 0
         
         self.o_address = i_address
+        
 
         self._alert_pending = False
         self._heater_status = False
@@ -241,7 +242,7 @@ class cl_sensor_sht(cl_sensor, ABC):
         self._dewpoint            = super().get_dewpoint(self._current_temperature, self._current_humidity)
         super().calc_mean_temperature(self._current_temperature)
         self.mean_temperature     = super().get_mean_temperature()
-        cl_fact_logger.get_instance().debug("Mean temperature :"+ str(self.mean_temperature)) 
+        cl_fact_logger.get_instance().debug(self.o_active_sensor + "Mean temperature :"+ str(self.mean_temperature)) 
         
        
        
