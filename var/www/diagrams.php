@@ -5,7 +5,6 @@
                                     include 'modules/write_customtime_db.php';                        //speichert die individuelle Zeit für die Diagramme
                                 ?>
                                 <!----------------------------------------------------------------------------------------Was eben hier hin kommt ...-->
-								
                                 <?php 
                                     // wenn nichts anderes ausgewählt wurde, ist Stündlich ausgewählt
                                     if (isset ($_GET['diagram_mode'])) {
@@ -128,7 +127,7 @@
                                                 labels: 
                                                     <?php echo $temperature_timestamps_axis_text; ?>,
                                                 datasets: [{
-                                                    label: '<?php echo _("temperature") ?>',
+                                                    label: '<?php echo _("temperature") . ' int.' ?>',
                                                     yAxisID: 'temperature',
                                                     data: <?php echo json_encode($temperature_dataset);?>,
                                                     backgroundColor: '#C03738',
@@ -147,11 +146,87 @@
                                                     fill: false
                                                 },
                                                 {
-                                                    label: '<?php echo _("humidity") ?>',
+                                                    label: '<?php echo _("temperature") . ' ext.' ?>',
+                                                    yAxisID: 'temperature',
+                                                    data: <?php echo json_encode($extern_temperature_dataset); ?>,
+                                                    backgroundColor: '#8A0808',
+                                                    borderColor: '#8A0808',
+                                                    borderWidth: 2,
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("dewpoint") . ' int.' ?>',
+                                                    yAxisID: 'temperature',
+                                                    data: <?php echo json_encode($dewpoint_dataset); ?>,
+                                                    backgroundColor: '#04B431',
+                                                    borderColor: '#04B431',
+                                                    borderWidth: 2,
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("dewpoint") . ' ext.' ?>',
+                                                    yAxisID: 'temperature',
+                                                    data: <?php echo json_encode($extern_dewpoint_dataset); ?>,
+                                                    backgroundColor: '#0B6121',
+                                                    borderColor: '#0B6121',
+                                                    borderWidth: 2,
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("humidity") . ' int.' ?>',
                                                     yAxisID: 'humidity',
                                                     data: <?php echo json_encode($humidity_dataset); ?>,
                                                     backgroundColor: '#59A9C4',
                                                     borderColor: '#59A9C4',
+                                                    borderWidth: 2,
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("humidity") . ' ext.' ?>',
+                                                    yAxisID: 'humidity',
+                                                    data: <?php echo json_encode($extern_humidity_dataset); ?>,
+                                                    backgroundColor: '#08298A',
+                                                    borderColor: '#08298A',
                                                     borderWidth: 2,
                                                     <?php
                                                         if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
@@ -180,6 +255,14 @@
                                                             if (tooltipItem.datasetIndex === 0) {
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
                                                             } else if (tooltipItem.datasetIndex === 1) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                            } else if (tooltipItem.datasetIndex === 2) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                            } else if (tooltipItem.datasetIndex === 3) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                            } else if (tooltipItem.datasetIndex === 4) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' %';
+                                                            } else if (tooltipItem.datasetIndex === 5) {
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' %';
                                                             }
                                                         }
@@ -196,11 +279,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
-														ticks: {
-															autoSkip: false,
-															maxRotation: 0,
-															minRotation: 0
-														},		
+                                                        ticks: {
+                                                            autoSkip: false,
+                                                            maxRotation: 0,
+                                                            minRotation: 0
+                                                        },
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -217,19 +300,19 @@
                                                                 return '  ' + value + ' °C' + '  ';
                                                             },
                                                             fontColor: '#000000',
-															//fontSize: 20,
+                                                            //fontSize: 20,
                                                             //max: 30,
                                                             //min: -2	
-                                                         //-----austoscale start															
-															max: <?php 
-                                                            $max_value_temperature = intval(max($temperature_dataset)/10)*10 +15;
-                                                            print $max_value_temperature;
+                                                         //-----austoscale start
+                                                            max: <?php 
+                                                                 $max_value_temperature = intval(max(max($temperature_dataset),max($extern_temperature_dataset),max($dewpoint_dataset),max($extern_dewpoint_dataset))/10)*10 +15;
+                                                                 print $max_value_temperature;
                                                             ?>,
-															min: <?php														
-                                                            $min_value_temperature = intval(min($non_empties = array_filter($temperature_dataset))/1)*1 - 1;
-															print $min_value_temperature;	
+                                                            min: <?php
+                                                                 $min_value_temperature = intval(min(min($non_empties = array_filter($temperature_dataset)),min($non_empties = array_filter($extern_temperature_dataset)),min($non_empties = array_filter($dewpoint_dataset)),min($non_empties = array_filter($extern_dewpoint_dataset)))/1)*1 - 1;
+                                                                 print $min_value_temperature;	
                                                             ?>
-														//-----autoscale end
+                                                        //-----autoscale end
                                                         }
                                                         
                                                     }, {
@@ -251,7 +334,7 @@
                                                             fontColor: '#000000',
                                                            //    fontSize: 20,
                                                             max: <?php 
-                                                            $max_value_humidiy = intval(max($humidity_dataset)/10) * 10 + 10;
+                                                            $max_value_humidiy = intval(max(max($humidity_dataset),max($extern_humidity_dataset))/10) * 10 + 10;
                                                             print $max_value_humidiy;
                                                             ?>,
                                                             //min: <?php 
@@ -265,7 +348,6 @@
                                             }
                                         };
                                         
-										
                                         // Waagen
                                         var scales_chart = document.getElementById("scales_chart");
                                         var config_scales_chart = {
@@ -342,11 +424,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
-														ticks: {
-															autoSkip: false,
-															maxRotation: 0,
-															minRotation: 0
-														},															
+                                                        ticks: {
+                                                            autoSkip: false,
+                                                            maxRotation: 0,
+                                                            minRotation: 0
+                                                        },
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -536,11 +618,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
-														ticks: {
-															autoSkip: false,
-															maxRotation: 0,
-															minRotation: 0
-														},	
+                                                        ticks: {
+                                                            autoSkip: false,
+                                                            maxRotation: 0,
+                                                            minRotation: 0
+                                                        },
                                                     }, ],
                                                     yAxes: [
                                                     {
@@ -566,16 +648,16 @@
                                                             maxTicksLimit: 10,
                                                             //max: 30, 
                                                             //min: -2
-														//-----austoscale start		
-															max: <?php 
-                                                            $max_value_temperature = intval (max(max($thermometer1_dataset),max($thermometer2_dataset),max($thermometer3_dataset))/10)*10 +15;
-                                                            print $max_value_temperature;
+                                                        //-----austoscale start
+                                                            max: <?php 
+                                                                 $max_value_temperature = intval (max(max($thermometer1_dataset),max($thermometer2_dataset),max($thermometer3_dataset))/10)*10 +15;
+                                                                 print $max_value_temperature;
                                                             ?>,
-														    min: <?php														
-															$min_value_temperature = intval (min(min($non_empties = array_filter($thermometer1_dataset)),min($non_empties = array_filter($thermometer2_dataset)),min($non_empties = array_filter($thermometer2_dataset)))/1)*1 - 1;
-															print $min_value_temperature;	
-                                                            ?>	
-														//-----austoscale end	
+                                                            min: <?php
+                                                                 $min_value_temperature = intval (min(min($non_empties = array_filter($thermometer1_dataset)),min($non_empties = array_filter($thermometer2_dataset)),min($non_empties = array_filter($thermometer2_dataset)))/1)*1 - 1;
+                                                                 print $min_value_temperature;
+                                                            ?>
+                                                        //-----austoscale end
                                                         }
                                                     },
                                                     {
@@ -601,16 +683,16 @@
                                                             maxTicksLimit: 10,
                                                             //max: 30, 
                                                             //min: -4
-														//-----austoscale start		
-															max: <?php 
-                                                            $max_value_temperature = intval (max(max($thermometer1_dataset),max($thermometer2_dataset),max($thermometer3_dataset))/10)*10 +15;
-                                                            print $max_value_temperature;
+                                                        //-----austoscale start		
+                                                            max: <?php 
+                                                                 $max_value_temperature = intval (max(max($thermometer1_dataset),max($thermometer2_dataset),max($thermometer3_dataset))/10)*10 +15;
+                                                                 print $max_value_temperature;
                                                             ?>,
-														    min: <?php														
-															$min_value_temperature = intval (min(min($non_empties = array_filter($thermometer1_dataset)),min($non_empties = array_filter($thermometer2_dataset)),min($non_empties = array_filter($thermometer2_dataset)))/1)*1 - 1;
-															print $min_value_temperature;	
+                                                            min: <?php
+                                                                 $min_value_temperature = intval (min(min($non_empties = array_filter($thermometer1_dataset)),min($non_empties = array_filter($thermometer2_dataset)),min($non_empties = array_filter($thermometer2_dataset)))/1)*1 - 1;
+                                                                 print $min_value_temperature;
                                                             ?>	
-														//-----austoscale start			
+                                                        //-----austoscale start
                                                         }
                                                     }]
                                                 }
@@ -674,11 +756,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
-														ticks: {
-															autoSkip: false,
-															maxRotation: 0,
-															minRotation: 0
-														},		
+                                                        ticks: {
+                                                            autoSkip: false,
+                                                            maxRotation: 0,
+                                                            minRotation: 0
+                                                        },
                                                     }, ],
                                                     yAxes: [
                                                     {
@@ -704,16 +786,16 @@
                                                             maxTicksLimit: 10,
                                                             //max: <?php if ($sensor4_is_current == true) { echo '2'; } else { echo '30'; }?>, 
                                                             //min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-1'; }?>
-														//-----austoscale start		
-															max: <?php
-															$max_value_thermometer4 = intval(max($non_empties = array_filter($thermometer4_dataset))/1) * 1 + 1;
-                                                            print $max_value_thermometer4;
+                                                        //-----austoscale start
+                                                            max: <?php
+                                                                 $max_value_thermometer4 = intval(max($non_empties = array_filter($thermometer4_dataset))/1) * 1 + 1;
+                                                                 print $max_value_thermometer4;
                                                             ?>,
-															min: <?php														
-                                                            $min_value_thermometer4 = intval(min($non_empties = array_filter($thermometer4_dataset))/2) * 2 - 0;
-															print $min_value_thermometer4;	
-															?>
-														//-----austoscale end	
+                                                            min: <?php
+                                                                 $min_value_thermometer4 = intval(min($non_empties = array_filter($thermometer4_dataset))/2) * 2 - 0;
+                                                                 print $min_value_thermometer4;	
+                                                            ?>
+                                                        //-----austoscale end
                                                         }
                                                     },
                                                     {
@@ -739,17 +821,17 @@
                                                             maxTicksLimit: 10,
                                                             //max: <?php if ($sensor4_is_current == true) { echo '2'; } else { echo '30'; }?>, 
                                                             //min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-1'; }?>
-														//-----austoscale start	
-															max: <?php
-															$max_value_thermometer4 = intval(max($non_empties = array_filter($thermometer4_dataset))/1) * 1 + 1;
-                                                            print $max_value_thermometer4;
+                                                        //-----austoscale start	
+                                                            max: <?php
+                                                                 $max_value_thermometer4 = intval(max($non_empties = array_filter($thermometer4_dataset))/1) * 1 + 1;
+                                                                 print $max_value_thermometer4;
                                                             ?>,
-															min: <?php														
-                                                            $min_value_thermometer4 = intval(min($non_empties = array_filter($thermometer4_dataset))/2) * 2 - 0;
-															print $min_value_thermometer4;	
-															?>
-														//-----austoscale end	
-														}
+                                                            min: <?php
+                                                                 $min_value_thermometer4 = intval(min($non_empties = array_filter($thermometer4_dataset))/2) * 2 - 0;
+                                                                 print $min_value_thermometer4;	
+                                                            ?>
+                                                        //-----austoscale end
+                                                        }
                                                     }]
                                                 }
                                             }
@@ -801,11 +883,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
-														ticks: {
-															autoSkip: false,
-															maxRotation: 0,
-															minRotation: 0
-														},
+                                                        ticks: {
+                                                            autoSkip: false,
+                                                            maxRotation: 0,
+                                                            minRotation: 0
+                                                        },
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -862,7 +944,7 @@
                                             }
                                         };
                                         
-										// uv
+                                        // uv
                                         var uv_chart = document.getElementById("uv_chart");
                                         var config_uv_chart = {
                                             type: 'line',
@@ -907,11 +989,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
-														ticks: {
-															autoSkip: false,
-															maxRotation: 0,
-															minRotation: 0
-														},														
+                                                        ticks: {
+                                                            autoSkip: false,
+                                                            maxRotation: 0,
+                                                            minRotation: 0
+                                                        },
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -968,7 +1050,7 @@
                                             }
                                         };
                                         
-										// heater
+                                        // heater
                                         var heater_chart = document.getElementById("heater_chart");
                                         var config_heater_chart = {
                                             type: 'line',
@@ -1013,11 +1095,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
-														ticks: {
-															autoSkip: false,
-															maxRotation: 0,
-															minRotation: 0
-														},														
+                                                        ticks: {
+                                                            autoSkip: false,
+                                                            maxRotation: 0,
+                                                            minRotation: 0
+                                                        },
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1074,7 +1156,7 @@
                                             }
                                         };
                                         
-										// cooler
+                                        // cooler
                                         var cooler_chart = document.getElementById("cooler_chart");
                                         var config_cooler_chart = {
                                             type: 'line',
@@ -1119,11 +1201,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
-														ticks: {
-															autoSkip: false,
-															maxRotation: 0,
-															minRotation: 0
-														},														
+                                                        ticks: {
+                                                            autoSkip: false,
+                                                            maxRotation: 0,
+                                                            minRotation: 0
+                                                        },
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1179,7 +1261,6 @@
                                                 }
                                             }
                                         };
-										
                                         // humidifier
                                         var humidifier_chart = document.getElementById("humidifier_chart");
                                         var config_humidifier_chart = {
@@ -1225,11 +1306,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
-														ticks: {
-															autoSkip: false,
-															maxRotation: 0,
-															minRotation: 0
-														},														
+                                                        ticks: {
+                                                            autoSkip: false,
+                                                            maxRotation: 0,
+                                                            minRotation: 0
+                                                        },
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1286,7 +1367,7 @@
                                             }
                                         };
                                         
-										// dehumidifier
+                                        // dehumidifier
                                         var dehumidifier_chart = document.getElementById("dehumidifier_chart");
                                         var config_dehumidifier_chart = {
                                             type: 'line',
@@ -1331,11 +1412,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
-														ticks: {
-															autoSkip: false,
-															maxRotation: 0,
-															minRotation: 0
-														},														
+                                                        ticks: {
+                                                            autoSkip: false,
+                                                            maxRotation: 0,
+                                                            minRotation: 0
+                                                        },
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1391,7 +1472,6 @@
                                                 }
                                             }
                                         };
-										
                                         // exhaust_air
                                         var exhaust_air_chart = document.getElementById("exhaust_air_chart");
                                         var config_exhaust_air_chart = {
@@ -1437,11 +1517,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
-														ticks: {
-															autoSkip: false,
-															maxRotation: 0,
-															minRotation: 0
-														},														
+                                                        ticks: {
+                                                            autoSkip: false,
+                                                            maxRotation: 0,
+                                                            minRotation: 0
+                                                        },
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1498,7 +1578,7 @@
                                             }
                                         };
                                         
-										// circulate air
+                                        // circulate air
                                         var circulation_air_chart = document.getElementById("circulation_air_chart");
                                         var config_circulation_air_chart = {
                                             type: 'line',
@@ -1543,11 +1623,11 @@
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
-														ticks: {
-															autoSkip: false,
-															maxRotation: 0,
-															minRotation: 0
-														},														
+                                                        ticks: {
+                                                            autoSkip: false,
+                                                            maxRotation: 0,
+                                                            minRotation: 0
+                                                        },
                                                     }, ],
                                                     yAxes: [{
                                                         scaleLabel: {
@@ -1612,13 +1692,13 @@
                                         //    window.thermometer3_chart = new Chart(thermometer3_chart, config_thermometer3_chart);
                                             window.thermometer4_chart = new Chart(thermometer4_chart, config_thermometer4_chart);
                                             window.light_chart = new Chart(light_chart, config_light_chart);
-											window.uv_chart = new Chart(uv_chart, config_uv_chart);
+                                            window.uv_chart = new Chart(uv_chart, config_uv_chart);
                                             window.heater_chart = new Chart(heater_chart, config_heater_chart);
-											window.cooler_chart = new Chart(cooler_chart, config_cooler_chart);
+                                            window.cooler_chart = new Chart(cooler_chart, config_cooler_chart);
                                             window.humidifier_chart = new Chart(humidifier_chart, config_humidifier_chart);
-											window.dehumidifier_chart = new Chart(dehumidifier_chart, config_dehumidifier_chart);
+                                            window.dehumidifier_chart = new Chart(dehumidifier_chart, config_dehumidifier_chart);
                                             window.exhaust_air_chart =  new Chart(exhaust_air_chart, config_exhaust_air_chart);
-											window.circulation_air_chart =  new Chart(circulation_air_chart, config_circulation_air_chart);
+                                            window.circulation_air_chart =  new Chart(circulation_air_chart, config_circulation_air_chart);
                                         };
                                         // document.getElementById('hour').addEventListener('click', function() {
                                             // diagram_mode = 'hour';

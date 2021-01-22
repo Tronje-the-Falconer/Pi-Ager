@@ -281,19 +281,19 @@
                                                             return '  ' + value + ' °C' + '  ';
                                                         },
                                                         fontColor: '#000000',
-                                                        // fontSize: 20,															
-														//max: 30,
-														//min: -2
-													//-----austoscale start	
-														max: <?php 
-                                                        $max_value_temperature = intval (max(max($temperature_dataset),max($thermometer1_dataset),max($thermometer2_dataset),max($thermometer3_dataset))/10)*10 +15;
-                                                        print $max_value_temperature;
+                                                        // fontSize: 20,
+                                                        //max: 30,
+                                                        //min: -2
+                                                    //-----austoscale start	
+                                                        max: <?php 
+                                                             $max_value_temperature = intval (max(max($temperature_dataset),max($thermometer1_dataset),max($thermometer2_dataset),max($thermometer3_dataset))/10)*10 +15;
+                                                             print $max_value_temperature;
                                                         ?>,
-														min: <?php														
-													    $min_value_temperature = intval (min(min($non_empties = array_filter($temperature_dataset)),min($non_empties = array_filter($thermometer1_dataset)),min($non_empties = array_filter($thermometer2_dataset)),min($non_empties = array_filter($thermometer2_dataset)))/1)*1 - 1;
-														print $min_value_temperature;	
+                                                        min: <?php
+                                                             $min_value_temperature = intval (min(min($non_empties = array_filter($temperature_dataset)),min($non_empties = array_filter($thermometer1_dataset)),min($non_empties = array_filter($thermometer2_dataset)),min($non_empties = array_filter($thermometer2_dataset)))/1)*1 - 1;
+                                                             print $min_value_temperature;
                                                         ?>
-													//-----austoscale start			
+                                                    //-----austoscale start
                                                     }
                                                     
                                                 }, {
@@ -409,16 +409,12 @@
                                                             return value + ' gr' + ' ';
                                                         },
                                                         fontColor: '#000000',
-                                                        // fontSize: 20,
-                                                        //max: 25000,
-                                                        beginAtZero: true,
-                                                        maxTicksLimit: 10,
-                                                        max: <?php 
-                                                        $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
-                                                        
-                                                        print $max_value_scale1;
-                                                        ?>,
-                                                        min: <?php 
+                                                            // fontSize: 20,
+                                                            //max: 25000,
+                                                            //min: 0
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: <?php 
                                                             $scale1_dataset_max = array_filter($scale1_dataset);
                                                             if (empty($scale1_dataset_max)) {
                                                                     $scale1_dataset_max[] = Null;
@@ -436,7 +432,7 @@
                                                             $min_value_scale1 = intval($min_scale1 - abs($min_scale1) / 100 * 5) - 1;
                                                             print $min_value_scale1;
                                                             ?>,
-                                                        //stepSize: 1
+                                                            //stepSize: 1
                                                     }
                                                     
                                                 },

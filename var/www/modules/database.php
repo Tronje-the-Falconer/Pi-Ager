@@ -222,6 +222,7 @@
         global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key;
         global $meat1_sensor_name_json_key, $meat2_sensor_name_json_key, $meat3_sensor_name_json_key, $meat4_sensor_name_json_key;
         global $sensor_dewpoint_key, $sensor_extern_temperature_key, $sensor_extern_humidity_key, $sensor_extern_dewpoint_key;
+        global $last_change_dewpoint_json_key, $last_change_extern_temperature_json_key, $last_change_extern_humidity_json_key, $last_change_extern_dewpoint_json_key;
         
         open_connection(); 
         $sql = 'SELECT * FROM ' . $current_values_table;
@@ -267,12 +268,10 @@
            {
                $values[$last_change_dewpoint_json_key] =  $dataset[$last_change_field];
            }
-           
            elseif ($dataset[$key_field] == $sensor_extern_temperature_key)
            {
                $values[$last_change_extern_temperature_json_key] =  $dataset[$last_change_field];
            }
-           
            elseif ($dataset[$key_field] == $sensor_extern_humidity_key)
            {
                $values[$last_change_extern_humidity_json_key] =  $dataset[$last_change_field];
