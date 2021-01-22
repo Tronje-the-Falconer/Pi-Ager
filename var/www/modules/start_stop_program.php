@@ -38,15 +38,15 @@
     if (isset($_POST['pi-ager_agingtable_start'])){
         if (isset($_POST['agingtable_startperiod'])){
             $agingtable_startperiod = $_POST['agingtable_startperiod'];
-            $agingtable_startperiod = $agingtable_startperiod - 1;
+            // $agingtable_startperiod = $agingtable_startperiod - 1;
         } else {
-            $agingtable_startperiod = 0;
+            $agingtable_startperiod = 1;
         }
         if (isset($_POST['agingtable_startday'])){
             $agingtable_startday = $_POST['agingtable_startday'];
-            $agingtable_startday = $agingtable_startday;
+            // $agingtable_startday = $agingtable_startday;
         } else {
-            $agingtable_startday = 0;
+            $agingtable_startday = 1;
         }
         $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain'); #Rss.py
         if($grepmain == 0) {
@@ -77,7 +77,7 @@
                 write_table_value($config_settings_table, $key_field, $agingtable_startperiod_key, $value_field, $agingtable_startperiod);
                 write_table_value($config_settings_table, $key_field, $agingtable_startday_key, $value_field, $agingtable_startday);
                 write_start_in_database($status_agingtable_key);
-                sleep(5);
+                sleep(10);     // need so long because main_loop period is 10 seconds, that is the maximum time to detect start of agingtable
                 $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
                 //wenn agingtable läuft dann Log schreiben
                 $logstring = 'main.py '._('is already running');

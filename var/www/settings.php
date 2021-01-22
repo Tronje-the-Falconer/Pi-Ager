@@ -23,7 +23,7 @@
                                 <!----------------------------------------------------------------------------------------Programme starten/stoppen-->
                                 <div class="hg_container">
                                     <h2>Pi-Ager</h2>
-                                    <table style="width: 100%">
+                                    <table style="width: 100%;">
                                     <tr>
                                         <td width="100px"></td>
                                         <td width="100px"></td>
@@ -73,7 +73,7 @@
                                     </tr></table>
                                     <hr>
                                     <h2><?php echo _('scales') ?></h2>
-                                    <table style="width: 100%">
+                                    <table style="width: 100%;">
                                         <tr>
                                             <td width="100px"></td>
                                             <td width="100px"></td>
@@ -182,7 +182,7 @@
                                     <h2><?php echo _('agingtable') ?></h2>
                                     <!----------------------------------------------------------------------------------------Reifetabelle auswählen-->
                                     <?php $agingtable_names = get_agingtable_names(); ?>
-                                    <table style="width: 100%" class="switching_state miniature_writing">
+                                    <table style="width: 100%;" class="switching_state miniature_writing">
                                         <tr>
                                             <td width="100px"></td>
                                             <td width="100px"></td>
@@ -227,11 +227,11 @@
                                                 <table>
                                                    <tr>
                                                         <td align="left"><?php echo _('startphase') . ':' ?></td>
-                                                        <td><input type="number" style="width: 60px; step="1" name="agingtable_startperiod" value="1"> </td>
+                                                        <td><input type="number" style="width: 60px;" step="1" name="agingtable_startperiod" value="1" min="1" max="50"> </td>
                                                     </tr>
                                                     <tr>
                                                         <td><?php echo _('startday of phase') . ':' ?></td>
-                                                        <td><input type="number" style="width: 60px; step="1" name="agingtable_startday" value="1"></td>
+                                                        <td><input type="number" style="width: 60px;" step="1" name="agingtable_startday" value="1" min="1" max="50"></td>
                                                     </tr>
                                                 </table>
                                             </td>
@@ -348,7 +348,7 @@
                                          $current_period_day = get_table_value($current_values_table, $agingtable_period_day_key);
                                      ?>
                                      <br>
-                                    <table style="width: 100%" class="switching_state miniature_writing">
+                                    <table style="width: 100%;" class="switching_state miniature_writing">
                                         <tr>
                                             <td width="75px" colspan="2" align="left"><?php echo _('actual phase and day') ?></td>
                                         </tr>
@@ -360,7 +360,7 @@
                                         </tr>
                                     </table>
                                     <table id="show_agingtable" class="show_agingtable">
-                                        <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
+                                        <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033;">
                                             <td class="show_agingcell"><div class="tooltip"><?php echo  _('phase') ?><span class="tooltiptext"><?php echo   _('phase') ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('modus') ?><span class="tooltiptext"><?php echo _('aging-modus'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">&phi;<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
@@ -437,7 +437,7 @@
                                             }
                                         ?>
                                     </table>
-                                    <table style="width: 100%" class="switching_state miniature_writing">
+                                    <table style="width: 100%;" class="switching_state miniature_writing">
                                         <tr>
                                         <?php 
                                             $agingtable_comment_with_carriage_return = nl2br($agingtable_comment);
@@ -459,7 +459,11 @@
                                 <?php 
                                     include ('config.php'); 
                                 ?>
-                                
+                                <script>
+                                    if ( window.history.replaceState ) {
+                                        window.history.replaceState( null, null, window.location.href );
+                                    }
+                                </script>
                                 <!----------------------------------------------------------------------------------------Content Ende-->
                             </div>
                         </div>
