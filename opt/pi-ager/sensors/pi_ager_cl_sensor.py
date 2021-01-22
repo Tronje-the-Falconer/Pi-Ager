@@ -28,9 +28,9 @@ from main.pi_ager_cl_database import cl_fact_db_influxdb
 
 class cl_sensor(cl_ab_sensor):
     
-    self.__mean_temperature = 0
-    self.__temperature_sum = 0
-    self.__counter = 0
+    __mean_temperature = 0
+    __temperature_sum = 0
+    __counter = 0
     
     def __init__(self, o_sensor_type):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
