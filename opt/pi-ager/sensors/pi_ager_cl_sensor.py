@@ -28,14 +28,15 @@ from main.pi_ager_cl_database import cl_fact_db_influxdb
 
 class cl_sensor(cl_ab_sensor):
 
-    __mean_temperature = 0
-    __temperature_sum = 0
-    __counter = 0
     def __init__(self, o_sensor_type):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._error_counter = 0
         self._max_errors = 3
         self.o_sensor_type = o_sensor_type
+        
+        self.o_mean_temperature = 0
+        self.o_temperature_sum = 0
+        self.o_counter = 0
         
     def get_current_data(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
@@ -66,15 +67,15 @@ class cl_sensor(cl_ab_sensor):
 
     def calc_mean_temperature(self, temperature):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cl_sensor.__counter = cl_sensor.__counter + 1
-        cl_sensor.__temperature_sum = cl_sensor.__temperature_sum + temperature
-        cl_sensor.__mean_temperature = cl_sensor.__temperature_sum / cl_sensor.__counter
-        cl_fact_logger.get_instance().debug("Mean Values counter:" + str(cl_sensor.__counter )+ "Temp: " + str(temperature) + "Mean: " + str(cl_sensor.__mean_temperature) )
+        self.o_counter = self.o_counter + 1
+        self.o_temperature_sum = self.o_temperature_sum + temperature
+        self.o_mean_temperature = self.o_temperature_sum / cl_sensor.__counter
+        cl_fact_logger.get_instance().debug("Mean Values counter:" + str(self.o_counter )+ "Temp: " + str(temperature) + "Mean: " + str(self.o_mean_temperature) )
 
     
     def get_mean_temperature(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return(cl_sensor.__mean_temperature)
+        return(self.o_mean_temperature)
 
     def get_dewpoint(self, temperature, humidity):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
