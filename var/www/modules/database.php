@@ -847,10 +847,14 @@
     //Statistik Tabellen leeren
     function delete_statistic_tables()
     {
-        global $data_sensor_temperature_table, $data_sensor_humidity_table, $status_heater_table, $status_exhaust_air_table, $status_cooling_compressor_table, $status_circulating_air_table, $status_uv_table, $status_light_table, $status_humidifier_table, $status_dehumidifier_table, $data_scale1_table, $data_scale2_table, $data_sensor_temperature_meat1_table, $data_sensor_temperature_meat2_table, $data_sensor_temperature_meat3_table, $data_sensor_temperature_meat4_table;
+        global $data_sensor_temperature_table, $data_sensor_humidity_table, $data_sensor_dewpoint_table, $data_sensor_extern_temperature_table, $data_sensor_extern_humidity_table, $data_sensor_extern_dewpoint_table, $status_heater_table, $status_exhaust_air_table, $status_cooling_compressor_table, $status_circulating_air_table, $status_uv_table, $status_light_table, $status_humidifier_table, $status_dehumidifier_table, $data_scale1_table, $data_scale2_table, $data_sensor_temperature_meat1_table, $data_sensor_temperature_meat2_table, $data_sensor_temperature_meat3_table, $data_sensor_temperature_meat4_table;
 
         delete_data($data_sensor_temperature_table);
         delete_data($data_sensor_humidity_table);
+        delete_data($data_sensor_dewpoint_table);
+        delete_data($data_sensor_extern_temperature_table);
+        delete_data($data_sensor_extern_humidity_table);
+        delete_data($data_sensor_extern_dewpoint_table);
         delete_data($status_heater_table);
         delete_data($status_exhaust_air_table);
         delete_data($status_cooling_compressor_table);
