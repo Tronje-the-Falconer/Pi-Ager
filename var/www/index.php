@@ -284,16 +284,73 @@
                                                         // fontSize: 20,
                                                         //max: 30,
                                                         //min: -2
-                                                    //-----austoscale start	
-                                                        max: <?php 
-                                                             $max_value_temperature = intval (max(max($temperature_dataset),max($thermometer1_dataset),max($thermometer2_dataset),max($thermometer3_dataset))/10)*10 +15;
+                                                    //-----austoscale max start max
+                                                        max: <?php
+                                                            $dataset1 = ($non_empties = array_filter($temperature_dataset));
+                                                            if (empty($dataset1)) {
+                                                                    $dataset1[] = Null;
+                                                            }
+                                                            $value_dataset1 = max($dataset1);
+
+                                                            $dataset2 = ($non_empties = array_filter($thermometer1_dataset));
+                                                            if (empty($dataset2)) {
+                                                                    $dataset2[] = Null;
+                                                            }
+                                                            $value_dataset2 = max($dataset2);
+
+                                                            $dataset3 = ($non_empties = array_filter($thermometer2_dataset));
+                                                            if (empty($dataset3)) {
+                                                                    $dataset3[] = Null;
+                                                            }
+                                                            $value_dataset3 = max($dataset3);
+
+                                                            $dataset4 = ($non_empties = array_filter($thermometer3_dataset));
+                                                            if (empty($dataset4)) {
+                                                                    $dataset4[] = Null;
+                                                            }
+                                                            $value_dataset4 = max($dataset4);
+
+                                                             $max_value_temperature = intval (max ($value_dataset1, $value_dataset2, $value_dataset3, $value_dataset4)/5)*5 + 10;
+
                                                              print $max_value_temperature;
                                                         ?>,
-                                                        min: <?php
-                                                             $min_value_temperature = intval (min(min($non_empties = array_filter($temperature_dataset)),min($non_empties = array_filter($thermometer1_dataset)),min($non_empties = array_filter($thermometer2_dataset)),min($non_empties = array_filter($thermometer2_dataset)))/1)*1 - 1;
+                                                    //-----austoscale max end
+
+                                                    //-----austoscale min start
+                                                        min: <?php 
+                                                            $dataset1 = ($non_empties = array_filter($temperature_dataset));
+                                                            if (empty($dataset1)) {
+                                                                    $dataset1[] = 100;
+                                                            }
+                                                            $value_dataset1 = min($dataset1);
+
+                                                            $dataset2 = ($non_empties = array_filter($thermometer1_dataset));
+                                                            if (empty($dataset2)) {
+                                                                    $dataset2[] = 100;
+                                                            }
+                                                            $value_dataset2 = min($dataset2);
+
+                                                            $dataset3 = ($non_empties = array_filter($thermometer2_dataset));
+                                                            if (empty($dataset3)) {
+                                                                    $dataset3[] = 100;
+                                                            }
+                                                            $value_dataset3 = min($dataset3);
+
+                                                            $dataset4 = ($non_empties = array_filter($thermometer3_dataset));
+                                                            if (empty($dataset4)) {
+                                                                    $dataset4[] = 100;
+                                                            }
+                                                            $value_dataset4 = min($dataset4);
+
+                                                             if ($value_dataset1 == 100 and $value_dataset2 == 100 and $value_dataset3 == 100 and $value_dataset4 == 100) {
+                                                               $min_value_temperature = -4;
+                                                            } 
+                                                            else {
+                                                               $min_value_temperature = intval (min ($value_dataset1, $value_dataset2, $value_dataset3, $value_dataset4)/1)*1 - 1;
+                                                            }
                                                              print $min_value_temperature;
                                                         ?>
-                                                    //-----austoscale start
+                                                    //-----austoscale min end
                                                     }
                                                     
                                                 }, {
