@@ -1,2 +1,0 @@
-- name: Epic issues for GitHub
-  uses: cloudaper/epics-action@v1.0.2
