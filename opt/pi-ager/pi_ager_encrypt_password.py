@@ -14,7 +14,7 @@ print("Password             = " + smtp_password)
 cl_fact_logger.get_instance().debug('Password = ' + smtp_password)
 crypt = cl_fact_help_crypt.get_instance()
 print("Encrypt")
-encrypted_secret = crypt.encrypt(password).decode("utf-8") 
+encrypted_secret = crypt.encrypt(smtp_password).decode("utf-8") 
 cl_fact_logger.get_instance().debug('Encrypted secret is ' + encrypted_secret )
 cl_fact_db_email_server().get_instance().update_password(encrypted_secret)
 
