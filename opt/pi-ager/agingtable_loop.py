@@ -83,7 +83,7 @@ def continue_after_power_failure(current_dictionary):
     else:
         return True
 
-def read_dictionary_write_settings(period_dictionary):
+def read_dictionary_write_settings(period_dictionary, period_first_day = 0):
     """
     function for writing the settings into the DB
     """
@@ -151,13 +151,27 @@ def read_dictionary_write_settings(period_dictionary):
     
     pi_ager_database.write_settings(modus, period_dictionary['setpoint_temperature'], period_dictionary['setpoint_humidity'], period_dictionary['circulation_air_period'], period_dictionary['circulation_air_duration'], period_dictionary['exhaust_air_period'], period_dictionary['exhaust_air_duration'])
 
-    period_starttime_seconds = pi_ager_database.get_current_time()
+    period_starttime_seconds = pi_ager_database.get_current_time() - period_first_day * day_in_seconds
     pi_ager_database.write_current_value(pi_ager_names.agingtable_period_starttime_key, period_starttime_seconds)
-    period_endtime = datetime.datetime.now() + datetime.timedelta(days = period_dictionary['days']) # days = parameter von datetime.timedelta
+    period_endtime = datetime.datetime.now() + datetime.timedelta(days = period_dictionary['days'] - period_first_day) # days = parameter von datetime.timedelta
 
     logstring = _('values') + ': ' + operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + "\n" + setpoint_humidity_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n"
     cl_fact_logger.get_instance().info(logstring)
-    
+
+def eval_final_time(rows, start_period, start_day):
+    """
+    evaluate final time, when aging starts in rows[period] and with first_day in period
+    """
+    row_number = 0                              # Setzt Variable row_number auf 0
+    total_days = int(rows[int(start_period)]["days"]) - start_day    # Setzt Variable duration auf 0
+    total_rows = len(rows)
+    if total_rows > (start_period + 1):
+        for var in list(range(int(start_period) + 1, int(total_rows))):
+            total_days += int(rows[var]["days"])      # errechnet die Gesamtdauer
+   
+    finaltime = datetime.datetime.now() + datetime.timedelta(days = total_days)  # days = parameter von datetime.timedeltatotal_periods = row_number - 1
+    return finaltime
+
 def doAgingtableLoop():
     """
     main function for the agingtable
@@ -177,6 +191,11 @@ def doAgingtableLoop():
     pi_ager_database.write_start_in_database(pi_ager_names.status_agingtable_key)
     status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
     period = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.agingtable_period_key)              # setzt periodenzaehler
+    
+    start_period = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.agingtable_startperiod_key)
+    start_day = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.agingtable_startday_key)
+    pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.agingtable_startday_key, 1)
+    pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.agingtable_startperiod_key, 1)
     
     period_settings = {}
     # Allgemeingueltige Werte aus Datenbank
@@ -216,16 +235,34 @@ def doAgingtableLoop():
     for row in rows:
         total_duration += int(row["days"])                           # errechnet die Gesamtdauer
         dict_agingtable[row_number] = get_dictionary_out_of_sqliterow(row)
-        
         row_number += 1                                             # Zeilenanzahl wird hochgezaehlt (fuer Dictionary Nummer und total_periods)
    
     total_periods = row_number - 1
    
     cl_fact_logger.get_instance().debug('total duration (days): ' + str(total_duration))
-    cl_fact_logger.get_instance().debug('total periods: ' + str(total_periods))
+    cl_fact_logger.get_instance().debug('total periods: ' + str(total_periods + 1))
+    
+    # make shure not to start with a period out of range
+    if (period > total_periods):
+        period = 0
+        pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, period)
+        
+    #Start der Reifetabelle ab bestimmter Zeit
+    manual_starttime = False
+    if start_day != 1 or start_period != 1: # Wenn ueber das Frontend ein Starttag oder eine Startperiode eingetragen wurde
+        if (start_period > (total_periods + 1)):
+            start_period = total_periods + 1
+        actual_dictionary = dict_agingtable[start_period - 1] #ausgewaehlte periode aus dem Reifetabellendictionary auswaehlen
+        days_in_period = int(actual_dictionary['days'])
+        if (start_day > days_in_period):
+            start_day = days_in_period
+        duration_sleep = get_duration_sleep(days_in_period) #Laufzeit der Periode auslesen
+        period_starttime_seconds = pi_ager_database.get_current_time() - (start_day - 1) * day_in_seconds # eigentlicher Startzeitpunkt der Periode zur Berechnung der Sleeptime        
+        period = start_period - 1
+        manual_starttime = True # Boolean fuer das erkennen der manuellen Startzeit
 
     # Wenn period = 0 wird die Reifetabelle neu gestartet, ansonsten an der aktuellen period fortgesetzt
-    if period == 0:
+    elif period == 0:
 
         # Sprache
         # ####   Set up message catalog access
@@ -240,32 +277,62 @@ def doAgingtableLoop():
         period_starttime_seconds = 0
         duration_sleep = 0
         actual_dictionary = None  # setzt aktuelles Dictionary zurueck
-        
+
     elif not continue_after_power_failure(dict_agingtable[period]):
-        
+
         # To Do: ALARM (Piezo) einfügen
         logstring = 'interruption agingtable' + ' "' + agingtable + '" ' + 'in period ' + str(period) + '!!!'
         cl_fact_logger.get_instance().critical(logstring)
         pi_ager_database.write_stop_in_database(pi_ager_names.status_agingtable_key)
+        pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, 0)
         status_agingtable = 0
-        pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, status_agingtable)
         
     else: #Sensorwerte sind im Toleranzbereich, Reifetabelle kann normal fortgesetzt werden
         #eventuell noch Prüfung, ob der Periodenwechsel vor zu langer Zeit hätte stattfinden müssen
-        period_starttime_seconds = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.agingtable_period_starttime_key)
+        # period_starttime_seconds = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.agingtable_period_starttime_key)
         actual_dictionary = dict_agingtable[period]
-        duration_sleep = get_duration_sleep(int (actual_dictionary['days']))
+        read_dictionary_write_settings(actual_dictionary)
+        #duration_sleep = get_duration_sleep(int (actual_dictionary['days']))
 
-    while period <= total_periods and status_agingtable == 1:
+    pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, period)
+    pi_ager_database.write_current_value(pi_ager_names.agingtable_period_day_key, start_day) #Tag der Periode in DB schreiben
+    old_current_day = start_day
+    
+    while status_agingtable == 1:
         time.sleep(1)
         status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
         current_time = pi_ager_database.get_current_time()
-        if (period_starttime_seconds == 0 and duration_sleep == 0 and period == 0) or current_time >= period_starttime_seconds + duration_sleep:
+        if (period_starttime_seconds == 0 and duration_sleep == 0 and period == 0) or current_time >= period_starttime_seconds + duration_sleep or manual_starttime:
+            
+            if period == total_periods + 1:
+                logstring = _('Program') + ' "' + agingtable + '" ' + _('ends the control.') + '\n Pi Ager ' + _('continues to work with the last values.')
+                cl_fact_logger.get_instance().info(logstring)
+                # Piezo piepen lassen
+                break
+            
             pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, period)
             cl_fact_logger.get_instance().debug('period' + ': ' + str(period))
             actual_dictionary = dict_agingtable[period]
-            if period == 0:
-                logstring = _('start values period 1 of') + ' ' +str(total_periods + 1)
+            
+            if manual_starttime :
+                # remaining_days = duration_sleep // day_in_seconds - startday #ganzzahl der restlichen Tage
+                # remaining_days = (current_time - period_starttime_seconds) // day_in_seconds 
+                # current_day = int (actual_dictionary['days']) - remaining_days # aktueller Tag ist Tage aus Reifetabelle - die restlichen Tage
+                old_current_day = start_day
+                pi_ager_database.write_current_value(pi_ager_names.agingtable_period_day_key, start_day) #Tag der Periode in DB schreiben
+                logstring = _('start with period ') + str(period + 1) + ' of ' + str(total_periods + 1)
+                cl_fact_logger.get_instance().info(logstring)
+                final_time = eval_final_time(rows, period, start_day - 1)
+                read_dictionary_write_settings(actual_dictionary, start_day - 1)
+                logstring = _('next change of values') + ': ' + period_endtime.strftime('%d.%m.%Y  %H:%M')
+                cl_fact_logger.get_instance().info(logstring)
+                logstring = _('end of program') + ': ' + final_time.strftime('%d.%m.%Y  %H:%M')
+                cl_fact_logger.get_instance().info(logstring) 
+                # print("start_day in manual_starttime : " + str(start_day))
+                manual_starttime = False
+
+            elif period == 0:
+                logstring = _('start values period 1 of') + ' ' + str(total_periods + 1)
                 cl_fact_logger.get_instance().info(logstring)
                 finaltime = datetime.datetime.now() + datetime.timedelta(days = total_duration)  # days = parameter von datetime.timedelta
                 read_dictionary_write_settings(actual_dictionary)
@@ -273,15 +340,7 @@ def doAgingtableLoop():
                 cl_fact_logger.get_instance().info(logstring)
                 logstring = _('end of program') + ': ' + finaltime.strftime('%d.%m.%Y  %H:%M')
                 cl_fact_logger.get_instance().info(logstring)
-                
-            elif period == total_periods:
-                logstring = _('new values for period') + ' ' + str(period + 1) + ' ' +  _('of') + ' ' + str(total_periods + 1)
-                cl_fact_logger.get_instance().info(logstring)
-                read_dictionary_write_settings(actual_dictionary)
-                logstring = _('Program') + ' "' + agingtable + '" ' + _('ends the control.') + '\n Pi Ager ' + _('continues to work with the last values.')
-                cl_fact_logger.get_instance().info(logstring)
-                # Piezo piepen lassen
-                
+
             else:
                 logstring = _('new values for period') + ' ' + str(period + 1) + ' ' + _('of') + ' ' + str(total_periods + 1)
                 cl_fact_logger.get_instance().info(logstring)
@@ -301,6 +360,14 @@ def doAgingtableLoop():
             cl_fact_logger.get_instance().info(_('in agingtable duration_sleep-loop. duration_sleep left') + ': ' + str(period_starttime_seconds + duration_sleep - current_time) + ' ' + 'seconds')
         else:
             cl_fact_logger.get_instance().debug('in agingtable duration_sleep-loop. duration_sleep left: ' + str(period_starttime_seconds + duration_sleep - current_time) + ' sec.')
+        
+        # remaining_days = (period_starttime_seconds + duration_sleep - current_time - 1) // day_in_seconds 
+        # current_day = int (actual_dictionary['days']) - remaining_days # aktueller Tag ist Tage aus Reifetabelle - die restlichen Tage
+        current_day = (current_time - period_starttime_seconds) // day_in_seconds + 1
+        # print("Current day : " + str(current_day))
+        if (current_day != old_current_day):
+            pi_ager_database.write_current_value(pi_ager_names.agingtable_period_day_key, current_day) #Tag der Periode in DB schreiben
+            old_current_day = current_day
             
     pi_ager_database.write_stop_in_database(pi_ager_names.status_agingtable_key)
     pi_ager_database.write_current_value(pi_ager_names.agingtable_period_key, 0)

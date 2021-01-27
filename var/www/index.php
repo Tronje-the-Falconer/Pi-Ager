@@ -20,20 +20,20 @@
                                     <h2><?php echo _('internal'); ?></h2>
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td>
+                                            <td width="33%">
                                                 <img src="images/icons/temperature.png" alt="" style="padding-top: 10px;">
                                             </td>
-                                            <td>
+                                            <td width="33%">
                                                 <img src="images/icons/humidity.png" alt="" style="padding-top: 10px;">
                                             </td>
-                                            <td>
+                                            <td width="33%">
                                                 <img src="images/icons/dew_point.png" alt="" style="padding-top: 10px;">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td id="json_temperature_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #ff0000;"></td>
-                                            <td id="json_humidity_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #0066FF;"></td>
-                                            <td id="json_dewpoint_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #00cc66;"></td>
+                                            <td width="33%" id="json_temperature_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #ff0000;"></td>
+                                            <td width="33%" id="json_humidity_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #0066FF;"></td>
+                                            <td  width="33%" id="json_dewpoint_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #00cc66;"></td>
                                         </tr>
                                     </table>
                                     <?php
@@ -48,20 +48,20 @@
                                         }
                                         echo '    
                                                         <tr>
-                                                            <td>
+                                                            <td width="33%">
                                                                 <img src="images/icons/temperature_extern_42x42.png" alt="" style="padding-top: 10px;">
                                                             </td>
-                                                            <td>
+                                                            <td width="33%">
                                                                 <img src="images/icons/humidity_extern_42x42.png" alt="" style="padding-top: 10px;">
                                                             </td>
-                                                            <td>
+                                                            <td width="33%">
                                                                 <img src="images/icons/dew_point_extern_42x42.png" alt="" style="padding-top: 10px;">
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td id="json_temperature_extern" style="text-align: center; font-size: 20px;"></td>
-                                                            <td id="json_humidity_extern" style="text-align: center; font-size: 20px;"></td>
-                                                            <td id="json_dewpoint_extern" style="text-align: center; font-size: 20px;"></td>
+                                                            <td width="33%" id="json_temperature_extern" align="center" style="text-align: center; font-size: 20px;"></td>
+                                                            <td width="33%" id="json_humidity_extern" align="center" style="text-align: center; font-size: 20px;"></td>
+                                                            <td width="33%" id="json_dewpoint_extern" align="center" style="text-align: center; font-size: 20px;"></td>
                                                         </tr>
                                                     </table>';
                                     ?>
@@ -188,7 +188,7 @@
                                             },
                                             {
                                                 label: '<?php echo _("temperature") . ' NTC 1' ?>',
-												hidden: true,
+                                                hidden: true,
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($thermometer1_dataset); ?>,
                                                 backgroundColor: '#F7AC08',
@@ -202,7 +202,7 @@
                                             },
                                             {
                                                 label: '<?php echo _("temperature") . ' NTC 2' ?>',
-												hidden: true,
+                                                hidden: true,
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($thermometer2_dataset); ?>,
                                                 backgroundColor: '#06AF8F',
@@ -216,7 +216,7 @@
                                             },
                                             {
                                                 label: '<?php echo _("temperature") . ' NTC 3' ?>',
-												hidden: true,
+                                                hidden: true,
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($thermometer3_dataset); ?>,
                                                 backgroundColor: '#AF06A1',
@@ -278,12 +278,79 @@
                                                     position: 'left',
                                                     ticks: {
                                                         callback: function(value, index, values) {
-                                                            return '  ' + value + ' °C' + '  ';;
+                                                            return '  ' + value + ' °C' + '  ';
                                                         },
                                                         fontColor: '#000000',
                                                         // fontSize: 20,
-                                                        max: 30,
-                                                        min: -4
+                                                        //max: 30,
+                                                        //min: -2
+                                                    //-----austoscale max start max
+                                                        max: <?php
+                                                            $dataset1 = ($non_empties = array_filter($temperature_dataset));
+                                                            if (empty($dataset1)) {
+                                                                    $dataset1[] = Null;
+                                                            }
+                                                            $value_dataset1 = max($dataset1);
+
+                                                            $dataset2 = ($non_empties = array_filter($thermometer1_dataset));
+                                                            if (empty($dataset2)) {
+                                                                    $dataset2[] = Null;
+                                                            }
+                                                            $value_dataset2 = max($dataset2);
+
+                                                            $dataset3 = ($non_empties = array_filter($thermometer2_dataset));
+                                                            if (empty($dataset3)) {
+                                                                    $dataset3[] = Null;
+                                                            }
+                                                            $value_dataset3 = max($dataset3);
+
+                                                            $dataset4 = ($non_empties = array_filter($thermometer3_dataset));
+                                                            if (empty($dataset4)) {
+                                                                    $dataset4[] = Null;
+                                                            }
+                                                            $value_dataset4 = max($dataset4);
+
+                                                             $max_value_temperature = intval (max ($value_dataset1, $value_dataset2, $value_dataset3, $value_dataset4)/5)*5 + 10;
+
+                                                             print $max_value_temperature;
+                                                        ?>,
+                                                    //-----austoscale max end
+
+                                                    //-----austoscale min start
+                                                        min: <?php 
+                                                            $dataset1 = ($non_empties = array_filter($temperature_dataset));
+                                                            if (empty($dataset1)) {
+                                                                    $dataset1[] = 100;
+                                                            }
+                                                            $value_dataset1 = min($dataset1);
+
+                                                            $dataset2 = ($non_empties = array_filter($thermometer1_dataset));
+                                                            if (empty($dataset2)) {
+                                                                    $dataset2[] = 100;
+                                                            }
+                                                            $value_dataset2 = min($dataset2);
+
+                                                            $dataset3 = ($non_empties = array_filter($thermometer2_dataset));
+                                                            if (empty($dataset3)) {
+                                                                    $dataset3[] = 100;
+                                                            }
+                                                            $value_dataset3 = min($dataset3);
+
+                                                            $dataset4 = ($non_empties = array_filter($thermometer3_dataset));
+                                                            if (empty($dataset4)) {
+                                                                    $dataset4[] = 100;
+                                                            }
+                                                            $value_dataset4 = min($dataset4);
+
+                                                             if ($value_dataset1 == 100 and $value_dataset2 == 100 and $value_dataset3 == 100 and $value_dataset4 == 100) {
+                                                               $min_value_temperature = -4;
+                                                            } 
+                                                            else {
+                                                               $min_value_temperature = intval (min ($value_dataset1, $value_dataset2, $value_dataset3, $value_dataset4)/1)*1 - 1;
+                                                            }
+                                                             print $min_value_temperature;
+                                                        ?>
+                                                    //-----austoscale min end
                                                     }
                                                     
                                                 }, {
@@ -299,19 +366,19 @@
                                                     position: 'right',
                                                     ticks: {
                                                         callback: function(value, index, values) {
-                                                            return ' ' + value + ' %' + '    ';
+                                                            return '  ' + value + ' %' + '  ';
                                                         },
                                                         fontColor: '#000000',
                                                         // fontSize: 20,
                                                         max: <?php 
-                                                            $max_value_humidiy = intval(max($humidity_dataset) + (max($humidity_dataset) / 100 * 1))+10;
-                                                            print min (100,max (10,$max_value_humidiy));
+                                                            $max_value_humidiy = intval(max($humidity_dataset)/10) * 10 + 10;
+                                                            print $max_value_humidiy;
                                                             ?>,
                                                         // min: <?php 
                                                         // $min_value_humidiy = intval(min($humidity_dataset) - (max($humidity_dataset) / 100 * 1))-1;                                                      
                                                         // print $min_value_humidiy;
                                                         // ?>
-                                                        max: 100,
+                                                        // max: 100,
                                                         min: 0
                                                     }
                                                 }]
@@ -399,16 +466,12 @@
                                                             return value + ' gr' + ' ';
                                                         },
                                                         fontColor: '#000000',
-                                                        // fontSize: 20,
-                                                        //max: 25000,
-                                                        beginAtZero: true,
-                                                        maxTicksLimit: 10,
-                                                        max: <?php 
-                                                        $max_value_scale1 = intval(max($scale1_dataset) + (max($scale1_dataset) / 100 * 5))+1;
-                                                        
-                                                        print $max_value_scale1;
-                                                        ?>,
-                                                        min: <?php 
+                                                            // fontSize: 20,
+                                                            //max: 25000,
+                                                            //min: 0
+                                                            beginAtZero: true,
+                                                            maxTicksLimit: 10,
+                                                            max: <?php 
                                                             $scale1_dataset_max = array_filter($scale1_dataset);
                                                             if (empty($scale1_dataset_max)) {
                                                                     $scale1_dataset_max[] = Null;
@@ -426,7 +489,7 @@
                                                             $min_value_scale1 = intval($min_scale1 - abs($min_scale1) / 100 * 5) - 1;
                                                             print $min_value_scale1;
                                                             ?>,
-                                                        //stepSize: 1
+                                                            //stepSize: 1
                                                     }
                                                     
                                                 },
@@ -909,9 +972,9 @@
                                                 elseif ($uv_duration == 0) {echo ', '.strtoupper(_('timer inactive'));}
                                                 */
                                             ?></td>
-                                           	<td></td>
-                                           	<td><?php echo $uv_period.' '._('minutes'); ?></td>
-                                           	<td><?php echo $uv_duration.' '._('minutes'); ?></td>
+                                            <td></td>
+                                            <td><?php echo $uv_period.' '._('minutes'); ?></td>
+                                            <td><?php echo $uv_duration.' '._('minutes'); ?></td>
                                            
                                         </tr>
                                         <tr>

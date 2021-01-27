@@ -307,6 +307,43 @@
     // $humidity_timestamps_axis = get_timestamps_for_time_axis($humidity_timestamps, $first_timestamp_humidity);
     // $humidity_timestamps_axis_text = get_text_array_for_time_axis($humidity_timestamps_axis);
     // $humidity_dataset = get_dataset_of_values($humidity_values, $humidity_timestamps_axis);
+
+//-------------------------------------- neuHM
+
+
+    // echo "dewpoint_values<br>";
+    $dewpoint_values = get_diagram_values_range($data_sensor_dewpoint_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    //$is_OnOff_value = False;
+    $dewpoint_data_diagram = get_data_for_sensor_diagram($dewpoint_values);
+    $dewpoint_timestamps_axis_text = $dewpoint_data_diagram[0];
+    $dewpoint_dataset = $dewpoint_data_diagram[1];
+
+
+    // echo "temperature_extern_values<br>";
+    $extern_temperature_values = get_diagram_values_range($data_sensor_extern_temperature_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    //$is_OnOff_value = False;
+    $extern_temperature_data_diagram = get_data_for_sensor_diagram($extern_temperature_values);
+    $extern_temperature_timestamps_axis_text = $extern_temperature_data_diagram[0];
+    $extern_temperature_dataset = $extern_temperature_data_diagram[1];
+    
+    
+    // echo "humidity_extern_values<br>";
+    $extern_humidity_values = get_diagram_values_range($data_sensor_extern_humidity_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    //$is_OnOff_value = False;
+    $extern_humidity_data_diagram = get_data_for_sensor_diagram($extern_humidity_values);
+    $extern_humidity_timestamps_axis_text = $extern_humidity_data_diagram[0];
+    $extern_humidity_dataset = $extern_humidity_data_diagram[1];
+
+
+    // echo "dewpoint_extern_values<br>";
+    $extern_dewpoint_values = get_diagram_values_range($data_sensor_extern_dewpoint_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    //$is_OnOff_value = False;
+    $extern_dewpoint_data_diagram = get_data_for_sensor_diagram($extern_dewpoint_values);
+    $extern_dewpoint_timestamps_axis_text = $extern_dewpoint_data_diagram[0];
+    $extern_dewpoint_dataset = $extern_dewpoint_data_diagram[1];
+
+
+//----------------------------------------neuHM
     
     // echo "scale1_values<br>";
     $scale1_values = get_diagram_values_range($data_scale1_table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram);

@@ -222,6 +222,7 @@
         global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key;
         global $meat1_sensor_name_json_key, $meat2_sensor_name_json_key, $meat3_sensor_name_json_key, $meat4_sensor_name_json_key;
         global $sensor_dewpoint_key, $sensor_extern_temperature_key, $sensor_extern_humidity_key, $sensor_extern_dewpoint_key;
+        global $last_change_dewpoint_json_key, $last_change_extern_temperature_json_key, $last_change_extern_humidity_json_key, $last_change_extern_dewpoint_json_key;
         
         open_connection(); 
         $sql = 'SELECT * FROM ' . $current_values_table;
@@ -267,12 +268,10 @@
            {
                $values[$last_change_dewpoint_json_key] =  $dataset[$last_change_field];
            }
-           
            elseif ($dataset[$key_field] == $sensor_extern_temperature_key)
            {
                $values[$last_change_extern_temperature_json_key] =  $dataset[$last_change_field];
            }
-           
            elseif ($dataset[$key_field] == $sensor_extern_humidity_key)
            {
                $values[$last_change_extern_humidity_json_key] =  $dataset[$last_change_field];
@@ -848,10 +847,14 @@
     //Statistik Tabellen leeren
     function delete_statistic_tables()
     {
-        global $data_sensor_temperature_table, $data_sensor_humidity_table, $status_heater_table, $status_exhaust_air_table, $status_cooling_compressor_table, $status_circulating_air_table, $status_uv_table, $status_light_table, $status_humidifier_table, $status_dehumidifier_table, $data_scale1_table, $data_scale2_table, $data_sensor_temperature_meat1_table, $data_sensor_temperature_meat2_table, $data_sensor_temperature_meat3_table, $data_sensor_temperature_meat4_table;
+        global $data_sensor_temperature_table, $data_sensor_humidity_table, $data_sensor_dewpoint_table, $data_sensor_extern_temperature_table, $data_sensor_extern_humidity_table, $data_sensor_extern_dewpoint_table, $status_heater_table, $status_exhaust_air_table, $status_cooling_compressor_table, $status_circulating_air_table, $status_uv_table, $status_light_table, $status_humidifier_table, $status_dehumidifier_table, $data_scale1_table, $data_scale2_table, $data_sensor_temperature_meat1_table, $data_sensor_temperature_meat2_table, $data_sensor_temperature_meat3_table, $data_sensor_temperature_meat4_table;
 
         delete_data($data_sensor_temperature_table);
         delete_data($data_sensor_humidity_table);
+        delete_data($data_sensor_dewpoint_table);
+        delete_data($data_sensor_extern_temperature_table);
+        delete_data($data_sensor_extern_humidity_table);
+        delete_data($data_sensor_extern_dewpoint_table);
         delete_data($status_heater_table);
         delete_data($status_exhaust_air_table);
         delete_data($status_cooling_compressor_table);

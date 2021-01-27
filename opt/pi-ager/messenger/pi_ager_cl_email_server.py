@@ -48,7 +48,7 @@ class cl_db_email_server(cl_ab_database_config):
         return('SELECT * FROM config_email_server')
     
     def update_password(self, mail_password):
-        sql_statement = "BEGIN TRANSACTION;UPDATE cconfig_email_server SET password = " + mail_password + " WHERE ID = '1'; COMMIT;"
+        sql_statement = "BEGIN TRANSACTION;UPDATE config_email_server SET password = " + mail_password + " WHERE ID = '1'; COMMIT;"
 
 class th_logic_email_server(cl_logic_email_server):   
 
