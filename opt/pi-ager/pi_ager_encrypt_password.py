@@ -7,7 +7,7 @@ from main.pi_ager_cl_logger import cl_fact_logger
 
 
 cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-cl_fact_logger.get_instance().debug('Encrypt password called.)
+cl_fact_logger.get_instance().debug('Encrypt password called.')
 
 password = sys.argv[1]
 print("Password             = " + password)
