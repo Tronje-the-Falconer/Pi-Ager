@@ -4,13 +4,14 @@ from main.pi_ager_cl_logger import cl_fact_logger
 from messenger.pi_ager_cl_email_server import cl_fact_db_email_server
 from messenger.pi_ager_cl_crypt import cl_fact_help_crypt
 from main.pi_ager_cl_logger import cl_fact_logger
+#from Demos.security.sspi.validate_password import password
+ 
 
-
-cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
 cl_fact_logger.get_instance().debug('Encrypt password called.')
 
-password = sys.argv[1]
-print("Password             = " + password)
+smtp_password = sys.argv[1]
+print("Password             = " + smtp_password)
+cl_fact_logger.get_instance().debug('Password = ' + smtp_password)
 crypt = cl_fact_help_crypt.get_instance()
 print("Encrypt")
 encrypted_secret = crypt.encrypt(password).decode("utf-8") 

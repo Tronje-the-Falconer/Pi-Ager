@@ -116,10 +116,13 @@ class cl_db_influxdb:
 class cl_db_database_sqlite:
     def __init__(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        connection = sqlite3.connect(pi_ager_paths.sqlite3_file, isolation_level=None, timeout = 10)
+        self.connection = sqlite3.connect(pi_ager_paths.sqlite3_file, isolation_level=None, timeout = 10)
         # Need to allow write permissions by others
-        connection.row_factory = sqlite3.Row
-        self.cursor = connection.cursor()
+        self.connection.row_factory = sqlite3.Row
+        self.cursor = self.connection.cursor()
+    def commit(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        self.connection.commit()    
     def read_data_from_db(self, i_select_statement):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         """
@@ -139,9 +142,9 @@ class cl_db_database_sqlite:
         #cl_fact_logger.get_instance().debug('it table =' + str(it_table))
         return it_table
  
-    def write_data_to_db(self, i_insert_statment, values):
+    def write_data_to_db(self, i_insert_statment):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cursor.execute(i_insert_statment, values)
+        self.cursor.execute(i_insert_statment)
         pass  
 class cl_fact_db_influxdb(ABC):
     __o_instance = None

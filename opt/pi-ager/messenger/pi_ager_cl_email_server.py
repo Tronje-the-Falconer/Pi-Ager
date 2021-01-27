@@ -15,7 +15,7 @@ from abc import ABC
 import inspect
 import pi_ager_names
 from messenger.pi_ager_cl_crypt import cl_fact_help_crypt
-from main.pi_ager_cl_database import cl_fact_database_config, cl_ab_database_config
+from main.pi_ager_cl_database import cl_fact_database_config, cl_ab_database_config, cl_db_database_sqlite
 
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
@@ -28,8 +28,7 @@ class cl_logic_email_server:
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
-        
-        
+                
         """
         Read email-server settings from the database
         """
@@ -43,13 +42,26 @@ class cl_logic_email_server:
         return(self.it_email_server)
 
 class cl_db_email_server(cl_ab_database_config):
-    
+    def __init__(self):
+        """
+        Database 
+        
+        !!!!!!!!!!!!!!!!!! Achtung Factory fehlt noch !!!!!!!!!!!!!!!!!!
+        """
+        self.database = cl_db_database_sqlite() 
     def build_select_statement(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return('SELECT * FROM config_email_server')
     
     def update_password(self, mail_password):
-        sql_statement = "BEGIN TRANSACTION;UPDATE config_email_server SET password = " + mail_password + " WHERE ID = '1'; COMMIT;"
-
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_logger.get_instance().debug("Writing password to db" + mail_password)
+        sql_statement = "UPDATE config_email_server SET password = '" + mail_password + "' WHERE ID = '1';"
+        cl_fact_logger.get_instance().debug(sql_statement)
+        
+        self.database.write_data_to_db(sql_statement)
+        self.database.commit()
+        
 class th_logic_email_server(cl_logic_email_server):   
 
     
