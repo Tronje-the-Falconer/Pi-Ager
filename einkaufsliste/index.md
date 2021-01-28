@@ -123,14 +123,18 @@ Wer also selbst löten kann, baucht folgende Komponenten:
 
 #### USV Modul 
 Es besteht die Option ein USV (unterbrechungsfreie Spannungsversorgung) Modul einzusetzen, damit bei einem möglichen Spannungsausfall ein Alarm ausgelöst, oder z.B. eine Nachricht verschickt werden kann. 
-!!! Achtung !!! Da das USV Modul nur einen begrenzten Strom liefern kann, muss man entsprehend vorsichtig sein, wenn man weitere Komponennten direkt an den Raspberry anschließt. Otipmal für den Einsatz eines USV Moduls ist die Verwendung des Raspberry Zero da dieser eine geringere Strohmaufnahme hat.
+!!! Achtung !!!
+1. Da das USV Modul nur einen begrenzten Strom liefern kann, muss man entsprehend vorsichtig sein, wenn man weitere Komponennten direkt an den Raspberry anschließt. Otipmal für den Einsatz eines USV Moduls ist die Verwendung des Raspberry Zero da dieser eine geringere Strohmaufnahme hat.
+
+2. Unbedingt auf die Polarität des Akkus achten ( siehe auch Hinweis auf der Herstelleseite - Link siehe unten - ). Es gibt Hersteller bei denen der Stecker anders belegt ist, in dem Fall würde man beim Verbinden des Akkus mit dem USV Modul, dieses sofort zerstören.
+
 
 * USV Modul 
 [Adafruit PowerBoost 1000C](https://www.exp-tech.de/module/stromspannung/6462/adafruit-powerboost-1000-charger-rechargeable-5v-lipo-usb-boost-at-1a-1000c?gclid=EAIaIQobChMIlN7npKWq3wIVA6aaCh1jEAeYEAQYBSABEgKsaPD_BwE)
 oder
 [Adafruit PowerBoost 1000C](https://eckstein-shop.de/Adafruit-PowerBoost-1000-Charger-Rechargeable-5V-Lipo-USB-Boost-1A-1000C)
  
- Hier findet man weitere Informationen, die beim Einsatzt des Moduls beachtet werden müssen: [ADAFRUIT](https://www.adafruit.com/product/2465)
+ Hier findet man weitere Informationen, die beim Einsatzt des Moduls beachtet werden müssen: [ADAFRUIT](https://learn.adafruit.com/adafruit-powerboost-1000c-load-share-usb-charge-boost?view=all)
 
 #### Relaisboard
 
