@@ -30,30 +30,10 @@ Hierfür ist eine kleine Modifikation der Platine notwendig. Eine weitere Verwen
 möglich ist aber auch ein Ausfall des entsprechenden GPIOs und damit wird der eingebaute Raspberry Pi für den Pi-Ager unbrauchbar.
 Wer auf Nummer sicher gehen will, kann natürlich auch auf den Betrieb der Waagenfunktion verzichten und die HX-Module einfach ausbauen.
 
-Wer Platinen selbst anfertigen lassen möchte, bitte erstmal warten bis die neuen Gerber-Dateien fertig und veröffentlicht sind. Der Link wird dann entsprechend veröffentlicht.
-
-Wie dieser Umbau gemacht werden kann ist in den nächsten Bildern zu sehen.
-Es gibt sicherliche viele andere Möglichkeiten, das sind nur Vorschläge wie wir es umgesetzt haben.
+Umbau in Bildern siehe ende das Seite...
 
 
-Beispiel für die Versionen 1.6 bis 1.9:
-
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_1_Text.JPG" alt="platine" width="400">
-
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_2_Text.JPG" alt="platine" width="400">
-
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_3_T.JPG" alt="platine" width="400">
-
-
-Beispiel für die Versionen 2.0 bis x.x:
-
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/2_2_2_Text.JPG" alt="platine" width="400">
-
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/2_2_3_T.JPG" alt="platine" width="400">
-
-
-
-##### Aktuelle Version der Platine: 
+##### Aktuelle Version der Platine: 2.5 ( Bilder müssen noch aktualisiert werden )
 
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/platine.jpg" alt="platine" width="800">
 
@@ -64,26 +44,29 @@ Jeder fabig martkierte Bereich kann weggelassen werden, die nicht markierten Kom
 
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/platine_aufteilung.jpg" alt="platine_aufteilung" width="800">
 
-##### NTC Temperatursensoren:  (Diese Funktion ist in der aktuellen Software Version 3.1.0 noch nicht implemetiert)
-Sollte man zusätzliche Temperaturmessungen ( z.B. Fleischtemperatur, Umgebungstemperatur des Kühlschrenks, ...) benötigen, stehen hier 4 Messkanäle zur Verfügung. 
+##### NTC Temperatursensoren:  (Diese Funktion ist in der aktuellen Software Version 3.2.2 noch nicht implemetiert)
+Sollte man zusätzliche Temperaturmessungen ( z.B. Fleischtemperatur, Umgebungstemperatur des Kühlschrenks, ...) benötigen, stehen hier 3/4 Messkanäle zur Verfügung.
 
-##### Externer Hardwareschalter:  (Diese Funktion ist in der aktuellen Software Version 3.1.0 noch nicht implemetiert)
+##### Stromerfassungsmodul: 
+Kanal 4 des AD-Wandlers kann für ein Stromerfassungsmodul genutzt werden. Ab Platinen Version 2.5 ist dieser Kanal extra mit einer 3,5 mm / 3 poligen Klinkenbuchse und der entsprecheden Beschaltung ausgestattet worden. Die älteren Versionen können relativ einfach umgebaut werden, man muss hier nur einen 2,5 mm  / 3 poligen Klinkenstecker nutzen. Empfohlender Stromsensor Typ siehe Einkaufsliste.
+
+##### Externer Hardwareschalter:  (Diese Funktion ist in der aktuellen Software Version 3.2.2 noch nicht implemetiert)
 Hier kann z.B. der potentialfreie Türkontakt des Kühlschranks angeschlossen werden, mit Hilfe dessen man z.B. das Licht einschalten kann, sobald man die Tür öffenet. 
 ... oder sobald die Tür geöffnet wird , wird ein stiller Alarm ausgelößt ;-)
 Naja ... mal schauen welche Funktionen im Laufe der Zeit implementeirt werden
 
-##### USV Modul:  (Diese Funktion ist in der aktuellen Software Version 3.1.0 noch nicht implemetiert)
+##### USV Modul:  (Diese Funktion ist in der aktuellen Software Version 3.2.2 noch nicht implemetiert)
 Es besteht die Option ein USV (unterbrechungsfreie Spannungsversorgung) Modul einzusetzen, damit bei einem möglichen Spannungsausfall ein Alarm ausgelöst, oder  z.B. eine Nachricht verschickt werden kann.
 In Abhängigkeit des eingesetzen Akkus läuft der Raspberry, die Temperatur und Feuchtemessung und der Alarmsummer eine entsprechende Zeit weiter.
 Da das USV Modul nur einen begrenzten Strom liefern kann, muss man entsprehend vorsichtig sein wenn man weitere Komponenten direkt an den Raspberry anschließt. Optimal für den Einsatz eines USV Moduls ist die Verwendung des Raspberry Zero, da dieser eine geringere Strohmaufnahme hat.
 
-##### Alarm Summer:  (Diese Funktion ist in der aktuellen Software Version 3.1.0 noch nicht implemetiert)
+##### Alarm Summer:  (Diese Funktion ist in der aktuellen Software Version 3.2.2 noch nicht implemetiert)
 Ab Version 1.7 wurde ein Alarmsummer integriert, mit dessen Hilfe entsprechende Zuständen das Systems akustisch gemeldet werden können.
 
 ##### Waagen:
-Die Gewichtmessung ist auf der Basis des HX 711 Moduls aufgebaut. Wer das Gewicht des zu reifenden Fleisches über einen längeren Zeitraum beobachten möchte, kann bis zu 2 Wägezellen an dem System beteiben.
+Die Gewichtmessung ist auf der Basis des HX 711 Moduls aufgebaut. Wer das Gewicht des zu reifenden Fleisches über einen längeren Zeitraum beobachten möchte, kann bis zu 2 Wägezellen an dem System betreiben.
 
-##### Display:  (Diese Funktion ist in der aktuellen Software Version 3.1.0 noch nicht implemetiert)
+##### Display:  (Diese Funktion ist in der aktuellen Software Version 3.2.2 noch nicht implemetiert)
 Mit Hilfe des Dispays kann man die wichtigsten Funktionen vor Ort direkt am Kühlschrank bedienen und beobachten.
 
 
@@ -108,4 +91,27 @@ Zur Steuerung der Pi-Agers ist auch ein Relaisboard notwendig. Da in der Anfäng
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/wiki/relaisbeschriftung.png" alt="relaisbeschriftung" width="800">
 
 Kann hier runtergeladen werden:  [Relaisbeschriftung PI-Ager](https://github.com/Tronje-the-Falconer/Pi-Ager/raw/resources/wiki/relaisbeschriftung.png) 
+
+
+##### Umbau Spannungsversorgung HX711 Module bei älteren Platinenversionen:
+
+Wie dieser Umbau gemacht werden kann ist in den nächsten Bildern zu sehen.
+Es gibt sicherliche viele andere Möglichkeiten, das sind nur Vorschläge wie wir es umgesetzt haben.
+
+
+Beispiel für die Versionen 1.6 bis 1.9:
+
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_1_Text.JPG" alt="platine" width="400">
+
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_2_Text.JPG" alt="platine" width="400">
+
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/1_8_3_T.JPG" alt="platine" width="400">
+
+
+Beispiel für die Versionen 2.0 bis x.x:
+
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/2_2_2_Text.JPG" alt="platine" width="400">
+
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/2_2_3_T.JPG" alt="platine" width="400">
+
 
