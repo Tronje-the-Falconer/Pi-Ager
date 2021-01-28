@@ -1,7 +1,7 @@
 ---
 name: Feature request
 about: 'FRQ: Suggest an idea for this project'
-title: ''
+title: 'FRQ: '
 labels: ''
 assignees: ''
 

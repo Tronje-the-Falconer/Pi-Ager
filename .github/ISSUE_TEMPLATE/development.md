@@ -1,7 +1,7 @@
 ---
 name: Development
 about: 'DEV: Name of the developer issue'
-title: "[DEV]"
+title: 'DEV: '
 labels: ''
 assignees: ''
 

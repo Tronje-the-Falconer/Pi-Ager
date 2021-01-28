@@ -1,7 +1,7 @@
 ---
 name: EPIC
 about: 'EPIC: Name of the EPIC'
-title: "[EPIC]"
+title: 'EPIC: '
 labels: ''
 assignees: ''
 
