@@ -191,7 +191,7 @@
         $mailserver_port = $_POST['mailserver_port'];
         
         if ($mailserver_password != '123456789abcdefghi'){
-            shell_exec('sudo /var/sudowebscript.sh encrypt_password ' . $mailserver_password . ' > /dev/null 2>&1 &');
+            shell_exec('sudo /var/sudowebscript.sh encrypt_password "' . $mailserver_password . '" > /dev/null 2>&1 &');
         }
         write_mailserver_values($mailserver_server, $mailserver_user, $mailserver_starttls, $mailserver_from_mail, $mailserver_port);
         logger('DEBUG', 'mailserver values saved');
