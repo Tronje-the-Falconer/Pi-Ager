@@ -85,6 +85,7 @@
     ?>
     <head>
         <title>Pi-Ager</title>
+        <meta charset="UTF-8" />
         <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
         <link href="css/style_pi_ager.css" rel="stylesheet" type="text/css" />
         <!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
