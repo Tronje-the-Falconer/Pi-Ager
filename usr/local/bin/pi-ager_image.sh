@@ -387,7 +387,7 @@ then
 else
 	rm -rf $mountdir/boot
 	rm -rf $mountdir
-	
+	sleep 5
 	# Shrink image
 	pishrink.sh -r $img
 	read -p "weiter mit Enter mit Ctrl + c beenden" 
