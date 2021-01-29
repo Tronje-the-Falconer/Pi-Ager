@@ -20,7 +20,7 @@ if (use_base64 == 'base64'):
     smtp_password = message_bytes.decode('ascii')
 else:
 """
-password = import_smtp_password
+smtp_password = import_smtp_password
 
 
 
