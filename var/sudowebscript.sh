@@ -158,7 +158,7 @@ case "$1" in
             python3 /opt/pi-ager/pi_ager_test_telegram.py
     ;;
     encrypt_password) # $2 ist unverschluesseltes passwort
-            python3 /opt/pi-ager/pi_ager_encrypt_password.py $2 'base64'
+            python3 /opt/pi-ager/pi_ager_encrypt_password.py $2 #'base64'
     ;;
     sensorbusi2c) #Sensorbus wurde geaendert auf i2c
 		# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln (SHT3x und SHT85)

@@ -11,15 +11,16 @@ from main.pi_ager_cl_logger import cl_fact_logger
 cl_fact_logger.get_instance().debug('Encrypt password called.')
 
 import_smtp_password = sys.argv[1]
-use_base64 = sys.argv[2]
-cl_fact_logger.get_instance().debug('Encrypt password called.')
-
+#use_base64 = sys.argv[2]
+#cl_fact_logger.get_instance().debug('Encrypt password called.')
+"""
 if (use_base64 == 'base64'):
     base64_bytes = base64_message.encode('ascii')
     message_bytes = base64.b64decode(import_smtp_password)
     smtp_password = message_bytes.decode('ascii')
 else:
-    smtp_password = import_smtp_password
+"""
+password = import_smtp_password
 
 
 
@@ -37,5 +38,6 @@ print("Secret = " + encrypted_secret)
 print("Decrypt")
 
 decrypted_secret = crypt.decrypt(encrypted_secret)
+cl_fact_logger.get_instance().debug('Decrypted password is ' + decrypted_secret )
 print(decrypted_secret)
 

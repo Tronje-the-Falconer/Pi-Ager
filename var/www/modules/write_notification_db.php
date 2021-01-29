@@ -192,8 +192,8 @@
         
         
         if ($mailserver_password != '123456789abcdefghi'){
-            $mailserver_password_base64 = base64_decode($mailserver_password);
-            shell_exec('sudo /var/sudowebscript.sh encrypt_password ' . $mailserver_password_base64 . ' "base64" > /dev/null 2>&1 &');
+            //$mailserver_password_base64 = base64_decode($mailserver_password);
+            shell_exec('sudo /var/sudowebscript.sh encrypt_password "' . $mailserver_password . '" "base64" > /dev/null 2>&1 &');
         }
         write_mailserver_values($mailserver_server, $mailserver_user, $mailserver_starttls, $mailserver_from_mail, $mailserver_port);
         logger('DEBUG', 'mailserver values saved');
