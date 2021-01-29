@@ -190,7 +190,7 @@
         $mailserver_from_mail = $_POST['mailserver_from_mail'];
         $mailserver_port = $_POST['mailserver_port'];
         
-        print '<script language="javascript"> alert("'. (_("mailserver values")) . " : " . (_($mailserver_password)) .'"); </script>';
+        
         if ($mailserver_password != '123456789abcdefghi'){
             $mailserver_password_base64 = base64_decode($mailserver_password);
             shell_exec('sudo /var/sudowebscript.sh encrypt_password ' . $mailserver_password_base64 . ' "base64" > /dev/null 2>&1 &');

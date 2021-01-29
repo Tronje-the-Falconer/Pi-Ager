@@ -12,6 +12,7 @@ cl_fact_logger.get_instance().debug('Encrypt password called.')
 
 import_smtp_password = sys.argv[1]
 use_base64 = sys.argv[2]
+cl_fact_logger.get_instance().debug('Encrypt password called.')
 
 if (use_base64 == 'base64'):
     base64_bytes = base64_message.encode('ascii')
