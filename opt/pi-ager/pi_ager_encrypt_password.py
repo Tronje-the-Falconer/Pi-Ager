@@ -38,6 +38,6 @@ print("Secret = " + encrypted_secret)
 print("Decrypt")
 
 decrypted_secret = crypt.decrypt(encrypted_secret)
-cl_fact_logger.get_instance().debug('Decrypted password is ' + decrypted_secret )
+cl_fact_logger.get_instance().debug('Decrypted password is ' + str(decrypted_secret) )
 print(decrypted_secret)
 
