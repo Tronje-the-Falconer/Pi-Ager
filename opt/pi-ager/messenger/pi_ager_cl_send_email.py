@@ -38,14 +38,14 @@ class cl_logic_send_email:
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call("Please use factory class")
                 
- 
+        self.logic_email_server = cl_fact_logic_email_server().get_instance()
             
     def execute(self, alarm_subject, alarm_message):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         """
         Get email-server settings from the server class
         """
-        self.logic_email_server = cl_fact_logic_email_server().get_instance()
+        
         try:
             self.it_email_server = self.logic_email_server.get_data()
         except IndexError as cx_error:
@@ -106,6 +106,11 @@ class cl_logic_send_email:
             server.ehlo()
             if mail_starttls == 1:
                 server.starttls()
+                server.ehlo()
+            
+            auth_string = ""
+            if auth_string == "":
+                server.docmd('AUTH', 'XOAUTH2 ' + base64.b64encode(auth_string))
             
             server.login(mail_user,decrypted_secret)
             

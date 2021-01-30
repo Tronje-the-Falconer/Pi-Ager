@@ -234,6 +234,10 @@ rm /home/pi/system_key.bin
 
 # change hostname
 raspi-config nonint do_hostname rpi-Pi-Ager
+# expand filesystem
+raspi-config nonint do_expand_rootfs
+# enable ssh
+raspi-config nonint do_ssh
 
 # rewrite /var/.htcredentials
 mv /var/.htcredentials.org  /var/.htcredentials
