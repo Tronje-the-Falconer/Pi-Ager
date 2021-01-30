@@ -200,9 +200,9 @@ find /tmp/ -type f -exec rm "{}" \;
 find /root/.cache/ -type f -exec rm "{}" \;
 
 touch /var/www/logs/logfile.txt
-chmod 755 /var/www/logs/logfile.txt
+chmod 666 /var/www/logs/logfile.txt
 touch /var/www/logs/pi-ager.log
-chmod 755 /var/www/logs/pi-ager.log
+chmod 666 /var/www/logs/pi-ager.log
 
 # remove history
 cat /dev/null > /root/.bash_history
@@ -234,10 +234,6 @@ rm /home/pi/system_key.bin
 
 # change hostname
 raspi-config nonint do_hostname rpi-Pi-Ager
-
-# Expand filesystem at boot
-echo "raspi-config nonint do_expand_rootfs # expand filesystem" >> /boot/cmdline.txt
-
 
 # rewrite /var/.htcredentials
 mv /var/.htcredentials.org  /var/.htcredentials
@@ -299,20 +295,11 @@ DELETE FROM config_nfs_backup;
 #delete FROM config_alarm;
 delete FROM config_email_server;
 delete FROM config_email_recipient;
-INSERT INTO "config_email_recipient" ("id","to_mail","active") VALUES ('1','',NULL)
 #delete FROM config_messenger;
 delete FROM scale1_data;
 delete FROM scale2_data;
 delete FROM sensor_humidity_data;
 delete FROM sensor_temperature_data;
-delete FROM sensor_dewpoint_data;
-delete FROM sensor_extern_humidity_data;
-delete FROM sensor_extern_temperature_data;
-delete FROM sensor_extern_dewpoint_data;
-delete FROM sensor_temperature_meat1_data;
-delete FROM sensor_temperature_meat2_data;
-delete FROM sensor_temperature_meat3_data;
-delete FROM sensor_temperature_meat4_data;
 delete FROM uv_status;
 delete FROM circulating_air_status;	
 delete FROM cooling_compressor_status;	
@@ -388,15 +375,15 @@ then
   	echo "Error unmounting $mountdir. Maybe $mountdir is open. Image is then corrupt."
   	lsof $loopdir
   	exit 1
-else
-	rm -rf $mountdir/boot
-	rm -rf $mountdir
-	sleep 5
+fi
+rm -rf $mountdir/boot
+rm -rf $mountdir
+if [[ ! -f "$img" ]]; then
+	#read -p "$img is not a file. why?"
+fi	
 	# Shrink image
-	pishrink.sh -r $img
-	read -p "weiter mit Enter mit Ctrl + c beenden" 
-	# Shrink image umbenennen mit Datum
-	mv $img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img
+	pishrink.sh -r ${BACKUP_PFAD}/$img 
+	# Backup umbenennen mit Datum
+	mv ${BACKUP_PFAD}/PiAger_image.img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img
 	echo "The image ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H:%M:%S).img was successfully created."
 	
-fi
