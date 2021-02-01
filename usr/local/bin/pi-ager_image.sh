@@ -89,7 +89,7 @@ done
 if [ -z "${source_file}" ]; then
     echo "$COMMAND_LINE_OPTIONS_HELP"
 fi
-if [[ ! -f "$img" ]]; then
+if [[ ! -f "$source_file" ]]; then
 	echo "$img not found!"
 	exit;
 fi
