@@ -90,7 +90,7 @@ if [ -z "${source_file}" ]; then
     echo "$COMMAND_LINE_OPTIONS_HELP"
 fi
 if [[ ! -f "$source_file" ]]; then
-	echo "$img not found!"
+	echo "$img used"
 	exit;
 fi
 echo "Source File = $source_file"
@@ -237,9 +237,6 @@ rm /home/pi/system_key.bin
 
 # change hostname
 raspi-config nonint do_hostname rpi-Pi-Ager
-
-# expand filesystem
-raspi-config nonint do_expand_rootfs
 
 # rewrite /var/.htcredentials
 mv /var/.htcredentials.org  /var/.htcredentials

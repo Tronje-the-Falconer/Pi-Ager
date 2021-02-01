@@ -145,9 +145,7 @@ systemctl disable pi-ager_scale.service pi-ager_agingtable.service # Werden manu
 systemctl enable pi-ager_main.service 
 systemctl start pi-ager_main.service
 ifup wlan0
-
-# reboot wenn 
-if [ -z "$reboot" ]         #wenn fehlt oder ""
-then
-    shutdown -r now
-fi
+# expand filesystem
+raspi-config nonint do_expand_rootfs
+# reboot
+shutdown -r now
