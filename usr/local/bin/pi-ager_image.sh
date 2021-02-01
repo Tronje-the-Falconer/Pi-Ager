@@ -90,7 +90,7 @@ if [ -z "${source_file}" ]; then
     echo "$COMMAND_LINE_OPTIONS_HELP"
 fi
 if [[ ! -f "$source_file" ]]; then
-	echo "$img used"
+	echo "$source_file not found!"
 	exit;
 fi
 echo "Source File = $source_file"
@@ -382,7 +382,7 @@ fi
 rm -rf $mountdir/boot
 rm -rf $mountdir
 if [[ ! -f "$img" ]]; then
-	echo "$img is not a file. why?"
+	echo "Shrink $img"
 fi	
 	# Shrink image
 	pishrink.sh -r ${BACKUP_PFAD}/$img 
