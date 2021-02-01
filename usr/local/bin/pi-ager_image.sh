@@ -379,7 +379,7 @@ fi
 rm -rf $mountdir/boot
 rm -rf $mountdir
 if [[ ! -f "$img" ]]; then
-	#read -p "$img is not a file. why?"
+	echo "$img is not a file. why?"
 fi	
 	# Shrink image
 	pishrink.sh -r ${BACKUP_PFAD}/$img 
