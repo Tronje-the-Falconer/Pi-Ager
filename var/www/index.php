@@ -142,6 +142,7 @@
                                         </tr>
                                     </table>
                                 </div>
+                                <hr>
                                 <!------------------------------ ----------------------------------------------------------T/rLF Diagramm-->
                                 <?php
                                     $diagram_mode = 'custom';
@@ -235,11 +236,11 @@
                                             }]
                                         },
                                         options: {
-                                            title: {
-                                                display: false,
-                                                text: '',
-                                                // fontSize: 24
-                                            },
+                                                title: {
+                                                    display: true,
+                                                    text: '<?php echo _("temperature") ?> & <?php echo _("humidity") ?>',
+                                                    fontSize: 24
+                                                },
                                             legend: {
                                                 labels: {
                                                     usePointStyle: true,
@@ -395,7 +396,6 @@
                                             }
                                         }
                                     };
-
                                     
                                     // Waagen
                                     var scales_chart = document.getElementById("scales_chart");
@@ -437,9 +437,9 @@
                                         },
                                         options: {
                                             title: {
-                                                display: false,
+                                                display: true,
                                                 text: '<?php echo _("scale") ?> 1 & 2',
-                                                // fontSize: 24
+                                                fontSize: 24
                                             },
                                             legend: {
                                                 labels: {
@@ -561,7 +561,7 @@
                                         window.scales_chart = new Chart(scales_chart, config_scales_chart);
                                     };
                                 </script>
-                                
+                                <hr>
                                 <?php
                                  echo "<script src='js/ajax.js'></script>";
                                 ?> 
