@@ -414,6 +414,7 @@
                                                 <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
                                                 pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                 pointHitRadius: 5,';} ?>
+                                                pointStyle:'rect',
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false,
                                                 spanGaps: true
@@ -428,6 +429,7 @@
                                                 <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
                                                 pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                 pointHitRadius: 5,';} ?>
+                                                pointStyle:'rect',
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false,
                                                 spanGaps: true
