@@ -659,16 +659,18 @@
     function get_loglevel($destination){
         global $value_field, $debug_table, $key_field;
         
-        open_connection();
+        $log_level = get_table_value($debug_table, $destination);
+        return $log_level;
+        // open_connection();
         
-        $sql = 'SELECT ' . $value_field . ' FROM ' . $debug_table . ' WHERE ' . $key_field . ' = "' . $destination . '"';
-        $result = get_query_result($sql);
+        // $sql = 'SELECT ' . $value_field . ' FROM ' . $debug_table . ' WHERE ' . $key_field . ' = "' . $destination . '"';
+        // $result = get_query_result($sql);
         
-        $row = $result->fetchArray();
+        // $row = $result->fetchArray();
         
-        close_database();
+        // close_database();
         
-        return $row;
+        //return $row;
     }
     
     function get_calibrate_status($calibrate_scale){
