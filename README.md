@@ -25,7 +25,7 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduc
 ## Versioning
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/Tronje-the-Falconer/Pi-Ager/tags). 
 
-## Credits: Include a section for credits in order to highlight and link to the authors of your project.
+## Credits:
 
  **Tronje the Falconer**  - *Front & Backend* - [Tronje the Falconer](https://github.com/Tronje-the-Falconer)
  
@@ -33,12 +33,17 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
  
  **GSV-Ha-Ma** - *Hardware & Testing* - [GSV-Ha-Ma](https://github.com/GSV-Ha-Ma)
  
+ **GSV-DerBurgermeister** - *Backend* - [GSV-DerBurgermeister](https://github.com/GSV-DerBurgermeister)
+ 
+ **phylax2020** - *Front & Backend* - [phylax2020](https://github.com/phylax2020)
+ 
+ **Marfinho** - *Frontend* - [Marfinho](https://github.com/Marfinho)
+ 
  **GSV-Steinbacher** - *Frontend* - [GSV-Steinbacher](https://github.com/GSV-Steinbacher)
  
  **Tommy_J** - *Initial work* - [Tommy_J](https://www.grillsportverein.de/forum/members/tommy_j.54659/)
 
 See also the list of [contributors](https://github.com/Tronje-the-Falconer/Pi-Ager/contributors) who participated in this project.
-
 
 ## License:
 
