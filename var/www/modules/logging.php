@@ -25,7 +25,7 @@
         
         $loglevel_file_value = intval(get_loglevel($loglevel_file_key));
         
-        $logfile_txt_file = intval($loglevel_file_value);
+        // $logfile_txt_file = intval($loglevel_file_value);
         $message_website_log = $date_website_log . ' ' . $message  . " \n ";
         $message_pi_ager_log = $date_pi_ager_log . ' ' . __FILE__ . ' ' . $loglevel . ' ' . $message . " \n ";
         
