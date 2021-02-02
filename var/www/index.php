@@ -142,9 +142,10 @@
                                         </tr>
                                     </table>
                                 </div>
+                                <hr>
                                 <!------------------------------ ----------------------------------------------------------T/rLF Diagramm-->
                                 <?php
-                                    $diagram_mode = 'hour';
+                                    $diagram_mode = 'custom';
                                     include 'modules/read_values_for_diagrams.php';
                                 ?>
                                 <canvas class="chart"; id="temperature_humidity_chart"></canvas>
@@ -170,6 +171,7 @@
                                                 <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                 pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                 pointHitRadius: 5,';} ?>
+                                                pointStyle:'rect',
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false
                                             },
@@ -183,6 +185,7 @@
                                                 <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                 pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                 pointHitRadius: 5,';} ?>
+                                                pointStyle:'rect',
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false
                                             },
@@ -197,6 +200,7 @@
                                                 <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                 pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                 pointHitRadius: 5,';} ?>
+                                                pointStyle:'rect',
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false
                                             },
@@ -211,6 +215,7 @@
                                                 <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                 pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                 pointHitRadius: 5,';} ?>
+                                                pointStyle:'rect',
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false
                                             },
@@ -225,15 +230,21 @@
                                                 <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
                                                 pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                 pointHitRadius: 5,';} ?>
+                                                pointStyle:'rect',
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false
                                             }]
                                         },
                                         options: {
-                                            title: {
-                                                display: false,
-                                                text: '',
-                                                // fontSize: 24
+                                                title: {
+                                                    display: true,
+                                                    text: '<?php echo _("temperature") ?> & <?php echo _("humidity") ?>',
+                                                    fontSize: 24
+                                                },
+                                            legend: {
+                                                labels: {
+                                                    usePointStyle: true,
+                                                },
                                             },
                                             tooltips: {
                                                 mode: 'index',
@@ -385,7 +396,6 @@
                                             }
                                         }
                                     };
-
                                     
                                     // Waagen
                                     var scales_chart = document.getElementById("scales_chart");
@@ -404,6 +414,7 @@
                                                 <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
                                                 pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                 pointHitRadius: 5,';} ?>
+                                                pointStyle:'rect',
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false,
                                                 spanGaps: true
@@ -418,6 +429,7 @@
                                                 <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
                                                 pointHitRadius: 5,';} else {print 'pointRadius: 0,
                                                 pointHitRadius: 5,';} ?>
+                                                pointStyle:'rect',
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false,
                                                 spanGaps: true
@@ -425,9 +437,14 @@
                                         },
                                         options: {
                                             title: {
-                                                display: false,
+                                                display: true,
                                                 text: '<?php echo _("scale") ?> 1 & 2',
-                                                // fontSize: 24
+                                                fontSize: 24
+                                            },
+                                            legend: {
+                                                labels: {
+                                                    usePointStyle: true,
+                                                },
                                             },
                                             tooltips: {
                                                 mode: 'index',
@@ -544,7 +561,7 @@
                                         window.scales_chart = new Chart(scales_chart, config_scales_chart);
                                     };
                                 </script>
-                                
+                                <hr>
                                 <?php
                                  echo "<script src='js/ajax.js'></script>";
                                 ?> 

@@ -142,6 +142,7 @@
                                                             print 'pointRadius: 0, pointHitRadius: 5,';
                                                         }
                                                     ?>
+                                                    pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 },
@@ -161,6 +162,7 @@
                                                             print 'pointRadius: 0, pointHitRadius: 5,';
                                                         }
                                                     ?>
+                                                    pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 },
@@ -180,6 +182,7 @@
                                                             print 'pointRadius: 0, pointHitRadius: 5,';
                                                         }
                                                     ?>
+                                                    pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 },
@@ -199,6 +202,7 @@
                                                             print 'pointRadius: 0, pointHitRadius: 5,';
                                                         }
                                                     ?>
+                                                    pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 },
@@ -218,6 +222,7 @@
                                                             print 'pointRadius: 0, pointHitRadius: 5,';
                                                         }
                                                     ?>
+                                                    pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 },
@@ -237,6 +242,7 @@
                                                             print 'pointRadius: 0, pointHitRadius: 5,';
                                                         }
                                                     ?>
+                                                    pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 }]
@@ -246,6 +252,11 @@
                                                     display: true,
                                                     text: '<?php echo _("temperature") ?> & <?php echo _("humidity") ?>',
                                                     fontSize: 24
+                                                },
+                                                legend: {
+                                                    labels: {
+                                                    usePointStyle: true,
+                                                    },
                                                 },
                                                 tooltips: {
                                                     mode: 'index',
@@ -430,6 +441,7 @@
                                                             print 'pointRadius: 0, pointHitRadius: 5,';
                                                         }
                                                     ?>
+                                                    pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false,
                                                     spanGaps: true
@@ -450,6 +462,7 @@
                                                             print 'pointRadius: 0, pointHitRadius: 5,';
                                                         }
                                                     ?>
+                                                    pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false,
                                                     spanGaps: true
@@ -460,6 +473,11 @@
                                                     display: true,
                                                     text: '<?php echo _("scale") ?> 1 & 2',
                                                     fontSize: 24
+                                                },
+                                                legend: {
+                                                    labels: {
+                                                    usePointStyle: true,
+                                                    },
                                                 },
                                                 tooltips: {
                                                     mode: 'index',
@@ -601,6 +619,7 @@
                                                             print 'pointRadius: 0, pointHitRadius: 5,';
                                                         }
                                                     ?>
+                                                    pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 },
@@ -620,6 +639,7 @@
                                                             print 'pointRadius: 0, pointHitRadius: 5,';
                                                         }
                                                     ?>
+                                                    pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 },                                                
@@ -639,6 +659,7 @@
                                                             print 'pointRadius: 0, pointHitRadius: 5,';
                                                         }
                                                     ?>
+                                                    pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 }]
@@ -648,6 +669,11 @@
                                                     display: true,
                                                     text: '<?php echo _("Thermometer") ?> NTC 1..3',
                                                     fontSize: 24
+                                                },
+                                                legend: {
+                                                    labels: {
+                                                    usePointStyle: true,
+                                                    },
                                                 },
                                                 tooltips: {
                                                     mode: 'index',
@@ -873,6 +899,7 @@
                                                             print 'pointRadius: 0, pointHitRadius: 5,';
                                                         }
                                                     ?>
+                                                    pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
                                                 }]
@@ -882,6 +909,11 @@
                                                     display: true,
                                                     text: '<?php if ($sensor4_is_current == true){ echo "AC/DC-Current"; } else { echo _("Thermometer") . ' NTC 4';} ?>',
                                                     fontSize: 24
+                                                },
+                                                legend: {
+                                                    labels: {
+                                                    usePointStyle: true,
+                                                    },
                                                 },
                                                 tooltips: {
                                                     mode: 'index',
@@ -1078,6 +1110,7 @@
                                                     radius: 0,
                                                     pointRadius: 0,
                                                     pointHitRadius: 0,
+                                                    pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
                                                     steppedLine: true,
@@ -1091,6 +1124,11 @@
                                                     display: true,
                                                     text: '<?php echo _("light"); ?>',
                                                     fontSize: 24
+                                                },
+                                                legend: {
+                                                    labels: {
+                                                    usePointStyle: true,
+                                                    },
                                                 },
                                                 tooltips: {
                                                     enabled: false
@@ -1184,6 +1222,7 @@
                                                     radius: 0,
                                                     pointRadius: 0,
                                                     pointHitRadius: 0,
+                                                    pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
                                                     steppedLine: true,
@@ -1197,6 +1236,11 @@
                                                     display: true,
                                                     text: '<?php echo _("uv-light"); ?>',
                                                     fontSize: 24
+                                                },
+                                                legend: {
+                                                    labels: {
+                                                    usePointStyle: true,
+                                                    },
                                                 },
                                                 tooltips: {
                                                     enabled: false
@@ -1290,6 +1334,7 @@
                                                     radius: 0,
                                                     pointRadius: 0,
                                                     pointHitRadius: 0,
+                                                    pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
                                                     steppedLine: true,
@@ -1303,6 +1348,11 @@
                                                     display: true,
                                                     text: '<?php echo _("heater"); ?>',
                                                     fontSize: 24
+                                                },
+                                                legend: {
+                                                    labels: {
+                                                    usePointStyle: true,
+                                                    },
                                                 },
                                                 tooltips: {
                                                     enabled: false
@@ -1396,6 +1446,7 @@
                                                     radius: 0,
                                                     pointRadius: 0,
                                                     pointHitRadius: 0,
+                                                    pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
                                                     steppedLine: true,
@@ -1409,6 +1460,11 @@
                                                     display: true,
                                                     text: '<?php echo _("cooler"); ?>',
                                                     fontSize: 24
+                                                },
+                                                legend: {
+                                                    labels: {
+                                                    usePointStyle: true,
+                                                    },
                                                 },
                                                 tooltips: {
                                                     enabled: false
@@ -1501,6 +1557,7 @@
                                                     radius: 0,
                                                     pointRadius: 0,
                                                     pointHitRadius: 0,
+                                                    pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
                                                     steppedLine: true,
@@ -1514,6 +1571,11 @@
                                                     display: true,
                                                     text: '<?php echo _("humidifier"); ?>',
                                                     fontSize: 24
+                                                },
+                                                legend: {
+                                                    labels: {
+                                                    usePointStyle: true,
+                                                    },
                                                 },
                                                 tooltips: {
                                                     enabled: false
@@ -1607,6 +1669,7 @@
                                                     radius: 0,
                                                     pointRadius: 0,
                                                     pointHitRadius: 0,
+                                                    pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
                                                     steppedLine: true,
@@ -1620,6 +1683,11 @@
                                                     display: true,
                                                     text: '<?php echo _("dehumidifier"); ?>',
                                                     fontSize: 24
+                                                },
+                                                legend: {
+                                                    labels: {
+                                                    usePointStyle: true,
+                                                    },
                                                 },
                                                 tooltips: {
                                                     enabled: false
@@ -1712,6 +1780,7 @@
                                                     radius: 0,
                                                     pointRadius: 0,
                                                     pointHitRadius: 0,
+                                                    pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
                                                     steppedLine: true,
@@ -1725,6 +1794,11 @@
                                                     display: true,
                                                     text: '<?php echo _("exhaust air"); ?>',
                                                     fontSize: 24
+                                                },
+                                                legend: {
+                                                    labels: {
+                                                    usePointStyle: true,
+                                                    },
                                                 },
                                                 tooltips: {
                                                     enabled: false
@@ -1818,6 +1892,7 @@
                                                     radius: 0,
                                                     pointRadius: 0,
                                                     pointHitRadius: 0,
+                                                    pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
                                                     steppedLine: true,
@@ -1831,6 +1906,11 @@
                                                     display: true,
                                                     text: '<?php echo _("circulate air"); ?>',
                                                     fontSize: 24
+                                                },
+                                                legend: {
+                                                    labels: {
+                                                    usePointStyle: true,
+                                                    },
                                                 },
                                                 tooltips: {
                                                     enabled: false
