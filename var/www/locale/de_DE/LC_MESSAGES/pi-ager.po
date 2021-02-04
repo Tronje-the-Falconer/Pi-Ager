@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
-"POT-Creation-Date: 2021-01-18 11:19+0100\n"
-"PO-Revision-Date: 2021-01-18 12:00+0100\n"
+"POT-Creation-Date: 2021-02-04 14:11+0100\n"
+"PO-Revision-Date: 2021-02-04 16:14+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -33,31 +33,48 @@ msgid "pause uv-light!"
 msgstr "UV-Licht Pause!"
 
 #: admin.php:42 config.php:167 config.php:178 config.php:206 config.php:217
-#: diagrams.php:755 diagrams.php:757 diagrams.php:780 diagrams.php:782
-#: diagrams.php:861 diagrams.php:863 diagrams.php:886 diagrams.php:888
-#: diagrams.php:967 diagrams.php:969 diagrams.php:992 diagrams.php:994
-#: diagrams.php:1073 diagrams.php:1075 diagrams.php:1098 diagrams.php:1100
-#: diagrams.php:1179 diagrams.php:1181 diagrams.php:1204 diagrams.php:1206
-#: diagrams.php:1285 diagrams.php:1287 diagrams.php:1310 diagrams.php:1312
-#: diagrams.php:1391 diagrams.php:1393 diagrams.php:1416 diagrams.php:1418
-#: diagrams.php:1497 diagrams.php:1499 diagrams.php:1522 diagrams.php:1524
-#: index.php:757 index_old.php:574 index_old2.php:634 manvals.php:141
-#: manvals.php:172 modules/write_config_db_logfile_txt.php:113
+#: diagrams.php:1397 diagrams.php:1399 diagrams.php:1422 diagrams.php:1424
+#: diagrams.php:1509 diagrams.php:1511 diagrams.php:1534 diagrams.php:1536
+#: diagrams.php:1621 diagrams.php:1623 diagrams.php:1646 diagrams.php:1648
+#: diagrams.php:1733 diagrams.php:1735 diagrams.php:1758 diagrams.php:1760
+#: diagrams.php:1844 diagrams.php:1846 diagrams.php:1869 diagrams.php:1871
+#: diagrams.php:1956 diagrams.php:1958 diagrams.php:1981 diagrams.php:1983
+#: diagrams.php:2067 diagrams.php:2069 diagrams.php:2092 diagrams.php:2094
+#: diagrams.php:2179 diagrams.php:2181 diagrams.php:2204 diagrams.php:2206
+#: diagrams_04022021_Kopie.php:1168 diagrams_04022021_Kopie.php:1170
+#: diagrams_04022021_Kopie.php:1193 diagrams_04022021_Kopie.php:1195
+#: diagrams_04022021_Kopie.php:1280 diagrams_04022021_Kopie.php:1282
+#: diagrams_04022021_Kopie.php:1305 diagrams_04022021_Kopie.php:1307
+#: diagrams_04022021_Kopie.php:1392 diagrams_04022021_Kopie.php:1394
+#: diagrams_04022021_Kopie.php:1417 diagrams_04022021_Kopie.php:1419
+#: diagrams_04022021_Kopie.php:1504 diagrams_04022021_Kopie.php:1506
+#: diagrams_04022021_Kopie.php:1529 diagrams_04022021_Kopie.php:1531
+#: diagrams_04022021_Kopie.php:1615 diagrams_04022021_Kopie.php:1617
+#: diagrams_04022021_Kopie.php:1640 diagrams_04022021_Kopie.php:1642
+#: diagrams_04022021_Kopie.php:1727 diagrams_04022021_Kopie.php:1729
+#: diagrams_04022021_Kopie.php:1752 diagrams_04022021_Kopie.php:1754
+#: diagrams_04022021_Kopie.php:1838 diagrams_04022021_Kopie.php:1840
+#: diagrams_04022021_Kopie.php:1863 diagrams_04022021_Kopie.php:1865
+#: diagrams_04022021_Kopie.php:1950 diagrams_04022021_Kopie.php:1952
+#: diagrams_04022021_Kopie.php:1975 diagrams_04022021_Kopie.php:1977
+#: index.php:866 index_04022021_Kopie.php:837 index_auto.php:763
+#: index_old.php:574 index_old2.php:634 manvals.php:141 manvals.php:172
+#: modules/write_config_db_logfile_txt.php:113
 #: modules/write_config_db_logfile_txt.php:129
 #: modules/write_settings_db_logfile_txt.php:108
 #: modules/write_settings_db_logfile_txt.php:125
 msgid "off"
 msgstr "Aus"
 
-#: admin.php:50 header.php:142
+#: admin.php:50 header.php:143
 msgid "administration"
 msgstr "Admin"
 
-#: admin.php:57 index.php:20
+#: admin.php:57 index.php:20 index_04022021_Kopie.php:20 index_auto.php:20
 msgid "internal"
 msgstr "Sensor intern"
 
-#: admin.php:59 index.php:45
+#: admin.php:59 index.php:45 index_04022021_Kopie.php:45 index_auto.php:45
 msgid "external"
 msgstr "Sensor extern"
 
@@ -103,17 +120,24 @@ msgstr ""
 msgid "change sensors"
 msgstr "Sensor ändern"
 
-#: admin.php:124 index.php:117 index.php:950 index_old2.php:95
-#: index_old2.php:827 settings.php:75
+#: admin.php:124 index.php:117 index.php:1059 index_04022021_Kopie.php:117
+#: index_04022021_Kopie.php:1030 index_auto.php:117 index_auto.php:956
+#: index_old2.php:95 index_old2.php:827 settings.php:75
 msgid "scales"
 msgstr "Waagen"
 
-#: admin.php:125 admin.php:152 diagrams.php:264 diagrams.php:284
-#: diagrams.php:307 diagrams.php:334 diagrams.php:376 index.php:331
-#: index.php:345 index.php:362 index.php:389 index.php:436 index_old.php:356
-#: index_old.php:370 index_old.php:387 index_old.php:414 index_old.php:461
-#: index_old2.php:309 index_old2.php:323 index_old2.php:340 index_old2.php:367
-#: index_old2.php:414 modules/start_stop_program.php:169
+#: admin.php:125 admin.php:152 diagrams.php:658 diagrams.php:679
+#: diagrams.php:703 diagrams.php:740 diagrams.php:782
+#: diagrams_04022021_Kopie.php:429 diagrams_04022021_Kopie.php:450
+#: diagrams_04022021_Kopie.php:474 diagrams_04022021_Kopie.php:511
+#: diagrams_04022021_Kopie.php:553 index.php:437 index.php:452 index.php:470
+#: index.php:502 index.php:545 index_04022021_Kopie.php:408
+#: index_04022021_Kopie.php:423 index_04022021_Kopie.php:441
+#: index_04022021_Kopie.php:473 index_04022021_Kopie.php:516 index_auto.php:341
+#: index_auto.php:355 index_auto.php:372 index_auto.php:399 index_auto.php:442
+#: index_old.php:356 index_old.php:370 index_old.php:387 index_old.php:414
+#: index_old.php:461 index_old2.php:309 index_old2.php:323 index_old2.php:340
+#: index_old2.php:367 index_old2.php:414 modules/start_stop_program.php:169
 #: modules/start_stop_program.php:174 modules/start_stop_program.php:196
 #: modules/start_stop_program.php:201 scale_wizzard.php:27 settings.php:173
 msgid "scale"
@@ -150,6 +174,8 @@ msgid ""
 "Select your meat thermometer types for upto 4 input channels.<br>Select "
 "------ for channels without sensors<br>"
 msgstr ""
+"Sensortypen für bis zu 4 Eingangskanäle wählen. <br> Für Kanäle ohne "
+"Sensoren ----- wählen<br>"
 
 #: admin.php:320 admin.php:338
 msgid "language"
@@ -311,7 +337,7 @@ msgid "attached weight"
 msgstr "Angehangenes Gewicht"
 
 #: calibrate_scale.php:45 calibrate_scale.php:66 calibrate_scale.php:71
-#: header.php:161 modules/tara_scale.php:39 scale_wizzard.php:38
+#: header.php:162 modules/tara_scale.php:39 scale_wizzard.php:38
 #: scale_wizzard.php:57
 msgid "scale wizzard"
 msgstr "Waagen Wizzard"
@@ -367,7 +393,7 @@ msgstr "Bitte neu versuchen"
 msgid "error on calibrating"
 msgstr "Fehler bei der Kalibrierung"
 
-#: changelog.php:5 header.php:154
+#: changelog.php:5 header.php:155
 msgid "changelog"
 msgstr ""
 
@@ -439,15 +465,26 @@ msgstr "Allgemeine Einstellungen anpassen"
 msgid "attention! be carful what you do!"
 msgstr "ACHTUNG! Vorsicht beim Ändern dieser Parameter!"
 
-#: config.php:16 diagrams.php:131 diagrams.php:172 diagrams.php:203
-#: diagrams.php:430 diagrams.php:449 diagrams.php:468 diagrams.php:524
-#: diagrams.php:549 diagrams.php:587 diagrams.php:637 diagrams.php:662
-#: index.php:164 index.php:190 index.php:204 index.php:218 index.php:272
+#: config.php:16 diagrams.php:131 diagrams.php:151 diagrams.php:214
+#: diagrams.php:259 diagrams.php:508 diagrams.php:572 diagrams.php:581
+#: diagrams.php:836 diagrams.php:856 diagrams.php:876 diagrams.php:943
+#: diagrams.php:1023 diagrams.php:1116 diagrams.php:1177 diagrams.php:1250
+#: diagrams_04022021_Kopie.php:130 diagrams_04022021_Kopie.php:150
+#: diagrams_04022021_Kopie.php:253 diagrams_04022021_Kopie.php:302
+#: diagrams_04022021_Kopie.php:607 diagrams_04022021_Kopie.php:627
+#: diagrams_04022021_Kopie.php:647 diagrams_04022021_Kopie.php:714
+#: diagrams_04022021_Kopie.php:794 diagrams_04022021_Kopie.php:887
+#: diagrams_04022021_Kopie.php:948 diagrams_04022021_Kopie.php:1021
+#: index.php:165 index.php:185 index.php:205 index.php:263 index.php:305
+#: index_04022021_Kopie.php:165 index_04022021_Kopie.php:193
+#: index_04022021_Kopie.php:208 index_04022021_Kopie.php:223
+#: index_04022021_Kopie.php:241 index_04022021_Kopie.php:283 index_auto.php:164
+#: index_auto.php:190 index_auto.php:204 index_auto.php:218 index_auto.php:272
 #: index_old.php:189 index_old.php:215 index_old.php:229 index_old.php:243
 #: index_old.php:297 index_old2.php:142 index_old2.php:168 index_old2.php:182
 #: index_old2.php:196 index_old2.php:250 manvals.php:59
 msgid "temperature"
-msgstr "Temperatur"
+msgstr "Temp."
 
 #: config.php:17 config.php:62 config.php:76 config.php:115 config.php:119
 #: config.php:120 manvals.php:76 manvals.php:77 manvals.php:82 manvals.php:83
@@ -478,15 +515,21 @@ msgid ""
 "is the value at which the control becomes active (value limit: 0-10 ° C). "
 "This value must always be greater than the switch-off value."
 msgstr ""
+"ist der Wert, bei dem die Einschaltung erfolgt (Wertgrenze: 0-10 ° C). "
+"Dieser Wert muss immer größer sein als der Ausschaltwert."
 
 #: config.php:63
 msgid "is the value at which the control becomes inactive (value: 0-10 ° C)"
 msgstr ""
+"ist der Wert, bei dem die Ausschaltung erfolgt (Wertgrenze: 0-10 ° C). "
+"Dieser Wert muss immer kleiner sein als der Einschaltwert."
 
 #: config.php:64 config.php:117
 msgid ""
 "the values may not be the same in order to avoid a wild switching on and off."
 msgstr ""
+"Um ein ständiges Ein- und Ausschalten zu vermeiden, dürfen die Werte nicht "
+"gleich sein."
 
 #: config.php:66 config.php:127 manvals.php:99 manvals.php:126
 msgid "recommendation"
@@ -505,9 +548,16 @@ msgstr "Achtung"
 msgid "use only positive integers!"
 msgstr "Nur positive ganze Zahlen nutzen!"
 
-#: config.php:75 diagrams.php:150 diagrams.php:172 diagrams.php:223
-#: diagrams.php:231 index.php:177 index.php:292 index_old.php:202
-#: index_old.php:317 index_old2.php:155 index_old2.php:270 manvals.php:109
+#: config.php:75 diagrams.php:171 diagrams.php:191 diagrams.php:214
+#: diagrams.php:322 diagrams.php:330 diagrams.php:417 diagrams.php:437
+#: diagrams.php:580 diagrams_04022021_Kopie.php:210
+#: diagrams_04022021_Kopie.php:230 diagrams_04022021_Kopie.php:253
+#: diagrams_04022021_Kopie.php:389 diagrams_04022021_Kopie.php:397
+#: index.php:220 index.php:240 index.php:263 index.php:380
+#: index_04022021_Kopie.php:179 index_04022021_Kopie.php:241
+#: index_04022021_Kopie.php:370 index_auto.php:177 index_auto.php:302
+#: index_old.php:202 index_old.php:317 index_old2.php:155 index_old2.php:270
+#: manvals.php:109
 msgid "humidity"
 msgstr "Feuchte"
 
@@ -516,13 +566,19 @@ msgid "delay"
 msgstr "Verzögerung"
 
 #: config.php:102 config.php:122 config.php:173 config.php:178 config.php:212
-#: config.php:217 index.php:871 index.php:872 index.php:885 index.php:886
-#: index.php:913 index.php:914 index.php:944 index.php:945 index_old.php:685
-#: index_old.php:687 index_old.php:702 index_old.php:704 index_old.php:734
-#: index_old.php:736 index_old.php:765 index_old.php:767 index_old2.php:748
-#: index_old2.php:749 index_old2.php:762 index_old2.php:763 index_old2.php:790
-#: index_old2.php:791 index_old2.php:821 index_old2.php:822 manvals.php:137
-#: manvals.php:141 manvals.php:169 manvals.php:172
+#: config.php:217 index.php:980 index.php:981 index.php:994 index.php:995
+#: index.php:1022 index.php:1023 index.php:1053 index.php:1054
+#: index_04022021_Kopie.php:951 index_04022021_Kopie.php:952
+#: index_04022021_Kopie.php:965 index_04022021_Kopie.php:966
+#: index_04022021_Kopie.php:993 index_04022021_Kopie.php:994
+#: index_04022021_Kopie.php:1024 index_04022021_Kopie.php:1025
+#: index_auto.php:877 index_auto.php:878 index_auto.php:891 index_auto.php:892
+#: index_auto.php:919 index_auto.php:920 index_auto.php:950 index_auto.php:951
+#: index_old.php:685 index_old.php:687 index_old.php:702 index_old.php:704
+#: index_old.php:734 index_old.php:736 index_old.php:765 index_old.php:767
+#: index_old2.php:748 index_old2.php:749 index_old2.php:762 index_old2.php:763
+#: index_old2.php:790 index_old2.php:791 index_old2.php:821 index_old2.php:822
+#: manvals.php:137 manvals.php:141 manvals.php:169 manvals.php:172
 #: modules/write_config_db_logfile_txt.php:119
 #: modules/write_config_db_logfile_txt.php:120
 #: modules/write_config_db_logfile_txt.php:125
@@ -562,10 +618,14 @@ msgstr "Schalthysterese"
 #: config.php:115
 msgid "is the value at which the control becomes active (value: 0-30%)"
 msgstr ""
+"ist der Wert, bei dem die Einschaltung erfolgt (Wertgrenze: 0-30%). Dieser "
+"Wert muss immer größer sein als der Ausschaltwert."
 
 #: config.php:116
 msgid "is the value at which the control becomes inactive (value: 0-30%)"
 msgstr ""
+"ist der Wert, bei dem die Ausschaltung erfolgt (Wertgrenze: 0-30%). Dieser "
+"Wert muss immer kleiner sein als der Einschaltwert."
 
 #: config.php:118
 msgid ""
@@ -574,6 +634,12 @@ msgid ""
 "during \"cooling\", \"timer exhaust\" or \"dehumidification\". The minimum "
 "value is 0 minutes, the maximum 60 minutes."
 msgstr ""
+"hier wird die Verzögerungszeit für die Einschaltung des Befeuchters "
+"eingestellt . Diese Funktion  kann genutzt werden, um bei einer schnell "
+"fallenden Luftfeuchttigkeit, verursacht duch das  Kühlen, die "
+"Frischluftansaugung oder das Entfeuchten, nicht sofort die Befeuchtung zu "
+"aktivieren und zu viel Wasser in das System zu bringen. Der minimale Wert "
+"ist 0 Minuten, der maximale 60 Minuten."
 
 #: config.php:119
 msgid "example"
@@ -597,6 +663,9 @@ msgid ""
 "only then does the pi-ager humidify the air to 74% and then switch off "
 "humidification again."
 msgstr ""
+"wenn also 70% relative Luftfeuchtigkeit erreicht werden, wartet die Regelung "
+"5 Minuten, erst dann befeuchtet der Pi-Ager die Luft auf 74% und schaltet "
+"dann die Befeuchtung wieder ab."
 
 #: config.php:124
 msgid "example automatic mode with with humidification and dehumidification"
@@ -614,6 +683,12 @@ msgid ""
 "otherwise, humidification and dehumidification could always be switched on "
 "and off alternately."
 msgstr ""
+"in diesem Automatikmodus wird die Feuchte vollständig automatisch geregelt.  "
+"Zuerst wird die aktuelle Feuchte ermittelt, dann wird entschieden, welche "
+"Methode (Be- und Entfeuchtung) geeignet ist, um die gewünschte Sollfeuchte "
+"zu erreichen. Das bedeutet auch, dass die Schaltwerte der Hysterese nicht zu "
+"dicht beieinander liegen dürfen, sonst könnten Be- und Entfeuchter immer "
+"abwechselnd ein- und ausgeschaltet werden."
 
 #: config.php:135 modules/read_settings_db.php:40
 msgid "dehumidify"
@@ -634,13 +709,14 @@ msgstr "Abluft und Entfeuchter"
 msgid "only dehumidifier"
 msgstr "Nur Entfeuchter"
 
-#: config.php:155 diagrams.php:1227 diagrams.php:1247
+#: config.php:155 diagrams.php:1892 diagrams.php:1913
+#: diagrams_04022021_Kopie.php:1663 diagrams_04022021_Kopie.php:1684
 msgid "dehumidifier"
 msgstr "Entfeuchter"
 
 #: config.php:155
 msgid "text for dehumidifier help"
-msgstr ""
+msgstr "Text für Hilfe: Entfeuchter"
 
 #: config.php:163 config.php:194
 msgid "uv"
@@ -664,8 +740,9 @@ msgstr "Dauer & Zeitpunkt"
 msgid "period every"
 msgstr "Zyklus"
 
-#: config.php:177 config.php:216 index.php:858 index_old.php:673
-#: index_old2.php:735 manvals.php:155 manvals.php:186
+#: config.php:177 config.php:216 index.php:967 index_04022021_Kopie.php:938
+#: index_auto.php:864 index_old.php:673 index_old2.php:735 manvals.php:155
+#: manvals.php:186
 msgid "duration"
 msgstr "Dauer"
 
@@ -679,23 +756,26 @@ msgstr "Uhr"
 
 #: config.php:194
 msgid "text for uv help"
-msgstr ""
+msgstr "Text für Hilfe: UV Licht"
 
-#: config.php:202 config.php:233 diagrams.php:697 diagrams.php:717
-#: index.php:931 index_old.php:753 index_old2.php:808
+#: config.php:202 config.php:233 diagrams.php:1333 diagrams.php:1354
+#: diagrams_04022021_Kopie.php:1104 diagrams_04022021_Kopie.php:1125
+#: index.php:1040 index_04022021_Kopie.php:1011 index_auto.php:937
+#: index_old.php:753 index_old2.php:808
 msgid "light"
 msgstr "Licht"
 
 #: config.php:233
 msgid "text for light help"
-msgstr ""
+msgstr "Text für Hilfe: Licht"
 
-#: config.php:241 config.php:262 index.php:496 index.php:696 index_old.php:562
-#: index_old2.php:573 modules/write_table_db.php:10
-#: modules/write_table_db.php:63 modules/write_table_db.php:72
-#: modules/write_table_db.php:75 modules/write_table_db.php:78
-#: modules/write_table_db.php:240 modules/write_table_db.php:263
-#: settings.php:182
+#: config.php:241 config.php:262 index.php:605 index.php:805
+#: index_04022021_Kopie.php:576 index_04022021_Kopie.php:776 index_auto.php:502
+#: index_auto.php:702 index_old.php:562 index_old2.php:573
+#: modules/write_table_db.php:10 modules/write_table_db.php:63
+#: modules/write_table_db.php:72 modules/write_table_db.php:75
+#: modules/write_table_db.php:78 modules/write_table_db.php:240
+#: modules/write_table_db.php:263 settings.php:182
 msgid "agingtable"
 msgstr "Reifetabelle"
 
@@ -709,7 +789,7 @@ msgstr "Fehler Temperatur"
 
 #: config.php:262
 msgid "text for agingtable help"
-msgstr ""
+msgstr "Text für Hilfe: Reifetabelle"
 
 #: config.php:272 modules/write_config_db_logfile_txt.php:204 settings.php:458
 msgid "general configuration"
@@ -719,109 +799,163 @@ msgstr "Allgemeine Konfiguration"
 msgid "hide"
 msgstr "Schließen"
 
-#: diagrams.php:19 diagrams.php:43
+#: diagrams.php:18 diagrams.php:42 diagrams_04022021_Kopie.php:18
+#: diagrams_04022021_Kopie.php:42
 msgid "hour"
 msgstr "Stunde"
 
-#: diagrams.php:21 diagrams.php:44 index.php:503 settings.php:359
+#: diagrams.php:20 diagrams.php:43 diagrams_04022021_Kopie.php:20
+#: diagrams_04022021_Kopie.php:43 index.php:612 index_04022021_Kopie.php:583
+#: index_auto.php:509 settings.php:359
 msgid "day"
 msgstr "Tag"
 
-#: diagrams.php:23 diagrams.php:45
+#: diagrams.php:22 diagrams.php:44 diagrams_04022021_Kopie.php:22
+#: diagrams_04022021_Kopie.php:44
 msgid "week"
 msgstr "Woche"
 
-#: diagrams.php:25 diagrams.php:46
+#: diagrams.php:24 diagrams.php:45 diagrams_04022021_Kopie.php:24
+#: diagrams_04022021_Kopie.php:45
 msgid "month"
 msgstr "Monat"
 
-#: diagrams.php:27 diagrams.php:47
+#: diagrams.php:26 diagrams.php:46 diagrams_04022021_Kopie.php:26
+#: diagrams_04022021_Kopie.php:46
 msgid "custom"
 msgstr ""
 
-#: diagrams.php:32 header.php:135
+#: diagrams.php:31 diagrams_04022021_Kopie.php:31 header.php:136
 msgid "diagrams"
 msgstr "Diagramme"
 
-#: diagrams.php:93
+#: diagrams.php:92 diagrams_04022021_Kopie.php:92
 msgid "change customtime?"
 msgstr "den benutzerdefinierten Zeitraum ändern?"
 
-#: diagrams.php:93
+#: diagrams.php:92 diagrams_04022021_Kopie.php:92
 msgid "change"
 msgstr "ändern"
 
-#: diagrams.php:100
+#: diagrams.php:99 diagrams_04022021_Kopie.php:99
 msgid "every ~ 5 minutes a new value is written!"
 msgstr "Ca. alle 5 Min wird ein neuer Wert abgespeichert!"
 
-#: diagrams.php:203 diagrams.php:524 diagrams.php:549 diagrams.php:587
-#: diagrams.php:637 index.php:272 index_old.php:297 index_old2.php:250
+#: diagrams.php:259 diagrams.php:508 diagrams.php:572 diagrams.php:581
+#: diagrams.php:943 diagrams.php:1023 diagrams.php:1116 diagrams.php:1177
+#: diagrams.php:1250 diagrams_04022021_Kopie.php:302
+#: diagrams_04022021_Kopie.php:714 diagrams_04022021_Kopie.php:794
+#: diagrams_04022021_Kopie.php:887 diagrams_04022021_Kopie.php:948
+#: index.php:305 index_04022021_Kopie.php:283 index_auto.php:272
+#: index_old.php:297 index_old2.php:250
 msgid " - ϑ"
-msgstr ""
+msgstr " - ϑ"
 
-#: diagrams.php:223 index.php:292 index_old.php:317 index_old2.php:270
+#: diagrams.php:322 diagrams.php:571 diagrams_04022021_Kopie.php:389
+#: index.php:380 index_04022021_Kopie.php:370 index_auto.php:302
+#: index_old.php:317 index_old2.php:270
 msgid " - φ"
-msgstr ""
+msgstr " - φ"
 
-#: diagrams.php:490 diagrams.php:609
+#: diagrams.php:375 diagrams.php:395 diagrams.php:461 diagrams.php:462
+#: diagrams_04022021_Kopie.php:170 diagrams_04022021_Kopie.php:190
+msgid "dewpoint"
+msgstr "Taupunkt"
+
+#: diagrams.php:461 diagrams.php:571
+msgid "humidity abs"
+msgstr "abs. Feuchte "
+
+#: diagrams.php:899 diagrams.php:1139 diagrams_04022021_Kopie.php:670
+#: diagrams_04022021_Kopie.php:910
 msgid "Thermometer"
 msgstr "Thermometer"
 
-#: diagrams.php:587 diagrams.php:637 diagrams.php:662
+#: diagrams.php:1116 diagrams.php:1177 diagrams.php:1250
+#: diagrams_04022021_Kopie.php:887 diagrams_04022021_Kopie.php:948
+#: diagrams_04022021_Kopie.php:1021
 msgid "Current"
 msgstr "Strom"
 
-#: diagrams.php:743 diagrams.php:849 diagrams.php:955 diagrams.php:1061
-#: diagrams.php:1167 diagrams.php:1273 diagrams.php:1379 diagrams.php:1485
-#: index.php:752 index.php:854 index.php:955 index_old.php:569
+#: diagrams.php:1385 diagrams.php:1497 diagrams.php:1609 diagrams.php:1721
+#: diagrams.php:1832 diagrams.php:1944 diagrams.php:2055 diagrams.php:2167
+#: diagrams_04022021_Kopie.php:1156 diagrams_04022021_Kopie.php:1268
+#: diagrams_04022021_Kopie.php:1380 diagrams_04022021_Kopie.php:1492
+#: diagrams_04022021_Kopie.php:1603 diagrams_04022021_Kopie.php:1715
+#: diagrams_04022021_Kopie.php:1826 diagrams_04022021_Kopie.php:1938
+#: index.php:861 index.php:963 index.php:1064 index_04022021_Kopie.php:832
+#: index_04022021_Kopie.php:934 index_04022021_Kopie.php:1035
+#: index_auto.php:758 index_auto.php:860 index_auto.php:961 index_old.php:569
 #: index_old.php:669 index_old.php:775 index_old2.php:629 index_old2.php:731
 #: index_old2.php:832
 msgid "status"
 msgstr "Status"
 
-#: diagrams.php:753 diagrams.php:778 diagrams.php:859 diagrams.php:884
-#: diagrams.php:965 diagrams.php:990 diagrams.php:1071 diagrams.php:1096
-#: diagrams.php:1177 diagrams.php:1202 diagrams.php:1283 diagrams.php:1308
-#: diagrams.php:1389 diagrams.php:1414 diagrams.php:1495 diagrams.php:1520
-#: index.php:756 index_old.php:573 index_old2.php:633
+#: diagrams.php:1395 diagrams.php:1420 diagrams.php:1507 diagrams.php:1532
+#: diagrams.php:1619 diagrams.php:1644 diagrams.php:1731 diagrams.php:1756
+#: diagrams.php:1842 diagrams.php:1867 diagrams.php:1954 diagrams.php:1979
+#: diagrams.php:2065 diagrams.php:2090 diagrams.php:2177 diagrams.php:2202
+#: diagrams_04022021_Kopie.php:1166 diagrams_04022021_Kopie.php:1191
+#: diagrams_04022021_Kopie.php:1278 diagrams_04022021_Kopie.php:1303
+#: diagrams_04022021_Kopie.php:1390 diagrams_04022021_Kopie.php:1415
+#: diagrams_04022021_Kopie.php:1502 diagrams_04022021_Kopie.php:1527
+#: diagrams_04022021_Kopie.php:1613 diagrams_04022021_Kopie.php:1638
+#: diagrams_04022021_Kopie.php:1725 diagrams_04022021_Kopie.php:1750
+#: diagrams_04022021_Kopie.php:1836 diagrams_04022021_Kopie.php:1861
+#: diagrams_04022021_Kopie.php:1948 diagrams_04022021_Kopie.php:1973
+#: index.php:865 index_04022021_Kopie.php:836 index_auto.php:762
+#: index_old.php:573 index_old2.php:633
 msgid "on"
 msgstr "Ein"
 
-#: diagrams.php:770 diagrams.php:876 diagrams.php:982 diagrams.php:1088
-#: diagrams.php:1194 diagrams.php:1300 diagrams.php:1406 diagrams.php:1512
+#: diagrams.php:1412 diagrams.php:1524 diagrams.php:1636 diagrams.php:1748
+#: diagrams.php:1859 diagrams.php:1971 diagrams.php:2082 diagrams.php:2194
+#: diagrams_04022021_Kopie.php:1183 diagrams_04022021_Kopie.php:1295
+#: diagrams_04022021_Kopie.php:1407 diagrams_04022021_Kopie.php:1519
+#: diagrams_04022021_Kopie.php:1630 diagrams_04022021_Kopie.php:1742
+#: diagrams_04022021_Kopie.php:1853 diagrams_04022021_Kopie.php:1965
 msgid " "
 msgstr ""
 
-#: diagrams.php:803 diagrams.php:823 index.php:901 index_old.php:722
-#: index_old2.php:778
+#: diagrams.php:1445 diagrams.php:1466 diagrams_04022021_Kopie.php:1216
+#: diagrams_04022021_Kopie.php:1237 index.php:1010 index_04022021_Kopie.php:981
+#: index_auto.php:907 index_old.php:722 index_old2.php:778
 msgid "uv-light"
 msgstr "UV-Licht"
 
-#: diagrams.php:909 diagrams.php:929 index.php:776 index.php:795
-#: index_old.php:593 index_old.php:612 index_old2.php:653 index_old2.php:672
+#: diagrams.php:1557 diagrams.php:1578 diagrams_04022021_Kopie.php:1328
+#: diagrams_04022021_Kopie.php:1349 index.php:885 index.php:904
+#: index_04022021_Kopie.php:856 index_04022021_Kopie.php:875 index_auto.php:782
+#: index_auto.php:801 index_old.php:593 index_old.php:612 index_old2.php:653
+#: index_old2.php:672
 msgid "heater"
 msgstr "Heizung"
 
-#: diagrams.php:1015 diagrams.php:1035 index.php:765 index.php:787
-#: index_old.php:582 index_old.php:604 index_old2.php:642 index_old2.php:664
+#: diagrams.php:1669 diagrams.php:1690 diagrams_04022021_Kopie.php:1440
+#: diagrams_04022021_Kopie.php:1461 index.php:874 index.php:896
+#: index_04022021_Kopie.php:845 index_04022021_Kopie.php:867 index_auto.php:771
+#: index_auto.php:793 index_old.php:582 index_old.php:604 index_old2.php:642
+#: index_old2.php:664
 msgid "cooler"
 msgstr "Kompressor"
 
-#: diagrams.php:1121 diagrams.php:1141
+#: diagrams.php:1780 diagrams.php:1801 diagrams_04022021_Kopie.php:1551
+#: diagrams_04022021_Kopie.php:1572
 msgid "humidifier"
 msgstr "Befeuchter"
 
-#: diagrams.php:1333 diagrams.php:1353
+#: diagrams.php:2003 diagrams.php:2024 diagrams_04022021_Kopie.php:1774
+#: diagrams_04022021_Kopie.php:1795
 msgid "exhaust air"
 msgstr "Abluft"
 
-#: diagrams.php:1439 diagrams.php:1459
+#: diagrams.php:2115 diagrams.php:2136 diagrams_04022021_Kopie.php:1886
+#: diagrams_04022021_Kopie.php:1907
 msgid "circulate air"
 msgstr "Umluft"
 
 #: edit_agingtable.php:26 edit_agingtable.php:31 edit_agingtable.php:115
-#: header.php:168
+#: header.php:169
 msgid "edit agingtable"
 msgstr "Editor"
 
@@ -839,68 +973,84 @@ msgstr ""
 msgid "edit agingtable:"
 msgstr "Reifetabelle editieren:"
 
-#: edit_agingtable.php:42 index.php:500 index.php:508 settings.php:356
-#: settings.php:364
+#: edit_agingtable.php:42 index.php:609 index.php:617
+#: index_04022021_Kopie.php:580 index_04022021_Kopie.php:588 index_auto.php:506
+#: index_auto.php:514 settings.php:356 settings.php:364
 msgid "phase"
 msgstr "Phase"
 
-#: edit_agingtable.php:43 index.php:509 settings.php:365
+#: edit_agingtable.php:43 index.php:618 index_04022021_Kopie.php:589
+#: index_auto.php:515 settings.php:365
 msgid "modus"
 msgstr "Modus"
 
-#: edit_agingtable.php:43 index.php:509 settings.php:365
+#: edit_agingtable.php:43 index.php:618 index_04022021_Kopie.php:589
+#: index_auto.php:515 settings.php:365
 msgid "aging-modus"
 msgstr "Reifemodus"
 
-#: edit_agingtable.php:44 index.php:510 settings.php:366
+#: edit_agingtable.php:44 index.php:619 index_04022021_Kopie.php:590
+#: index_auto.php:516 settings.php:366
 msgid "target humidity in %"
 msgstr "Sollwert Feuchte in %"
 
-#: edit_agingtable.php:45 index.php:511 settings.php:367
+#: edit_agingtable.php:45 index.php:620 index_04022021_Kopie.php:591
+#: index_auto.php:517 settings.php:367
 msgid "target temperature in °C"
 msgstr "Sollwert Temperatur in °C"
 
-#: edit_agingtable.php:46 index.php:512 settings.php:368
+#: edit_agingtable.php:46 index.php:621 index_04022021_Kopie.php:592
+#: index_auto.php:518 settings.php:368
 msgid "timer circulate d"
 msgstr "Timer Umluft d"
 
-#: edit_agingtable.php:46 index.php:512 settings.php:368
+#: edit_agingtable.php:46 index.php:621 index_04022021_Kopie.php:592
+#: index_auto.php:518 settings.php:368
 msgid "timer of the circulation air duration in minutes"
 msgstr "Timer für Umluft Dauer in Minuten"
 
-#: edit_agingtable.php:47 index.php:513 settings.php:369
+#: edit_agingtable.php:47 index.php:622 index_04022021_Kopie.php:593
+#: index_auto.php:519 settings.php:369
 msgid "timer circulate p"
 msgstr "Timer Umluft p"
 
-#: edit_agingtable.php:47 index.php:513 settings.php:369
+#: edit_agingtable.php:47 index.php:622 index_04022021_Kopie.php:593
+#: index_auto.php:519 settings.php:369
 msgid "timer of the circulation air period in minutes"
 msgstr "Timer für Umluft Zyklus in Minuten"
 
-#: edit_agingtable.php:48 index.php:514 settings.php:370
+#: edit_agingtable.php:48 index.php:623 index_04022021_Kopie.php:594
+#: index_auto.php:520 settings.php:370
 msgid "timer exhaust d"
 msgstr "Timer Abluft d"
 
-#: edit_agingtable.php:48 index.php:514 settings.php:370
+#: edit_agingtable.php:48 index.php:623 index_04022021_Kopie.php:594
+#: index_auto.php:520 settings.php:370
 msgid "timer of the exhausting air duration in minutes"
 msgstr "Timer für Abluft Dauer in Minuten"
 
-#: edit_agingtable.php:49 index.php:515 settings.php:371
+#: edit_agingtable.php:49 index.php:624 index_04022021_Kopie.php:595
+#: index_auto.php:521 settings.php:371
 msgid "timer exhaust p"
 msgstr "Timer Abluft p"
 
-#: edit_agingtable.php:49 index.php:515 settings.php:371
+#: edit_agingtable.php:49 index.php:624 index_04022021_Kopie.php:595
+#: index_auto.php:521 settings.php:371
 msgid "timer of the exhausting air period in minutes"
 msgstr "Timer für Abluft Zyklus in Minuten"
 
-#: edit_agingtable.php:50 index.php:516 settings.php:372
+#: edit_agingtable.php:50 index.php:625 index_04022021_Kopie.php:596
+#: index_auto.php:522 settings.php:372
 msgid "days"
 msgstr "Tage"
 
-#: edit_agingtable.php:50 index.php:516 settings.php:372
+#: edit_agingtable.php:50 index.php:625 index_04022021_Kopie.php:596
+#: index_auto.php:522 settings.php:372
 msgid "duration of hanging phase in days"
 msgstr "Dauer der Reifephase in Tagen"
 
-#: edit_agingtable.php:110 index.php:583 settings.php:444
+#: edit_agingtable.php:110 index.php:692 index_04022021_Kopie.php:663
+#: index_auto.php:589 settings.php:444
 msgid "comment:"
 msgstr "Anmerkungen:"
 
@@ -912,192 +1062,223 @@ msgstr "Editieren der Reifetabelle unterbrechen"
 msgid "phase to delete"
 msgstr "zu löschende Phase: "
 
+#: edit_agingtable.php:126
+msgid "delete row"
+msgstr "Zeile löschen"
+
 #: edit_agingtable.php:126 notification.php:178 notification.php:348
 #: notification.php:465 notification.php:543 settings.php:302
 msgid "delete"
 msgstr "Löschen"
 
-#: edit_agingtable.php:126
-msgid "delete row"
-msgstr "Zeile löschen"
-
 #: edit_agingtable.php:133
 msgid "number of rows"
 msgstr "Anzahl Zeilen"
+
+#: edit_agingtable.php:138
+msgid "add rows"
+msgstr "Zeile(n) hinzufügen"
 
 #: edit_agingtable.php:138 notification.php:170 notification.php:340
 #: notification.php:457 notification.php:535
 msgid "add"
 msgstr "Hinzufügen"
 
-#: edit_agingtable.php:138
-msgid "add rows"
-msgstr "Zeile(n) hinzufügen"
-
 #: footer.php:9
 msgid "running engine: "
 msgstr "Laufendes System: "
 
-#: header.php:130
+#: header.php:131
 msgid "by"
 msgstr "von"
 
-#: header.php:134
+#: header.php:135
 msgid "monitor"
 msgstr "Monitor"
 
-#: header.php:136
+#: header.php:137
 msgid "settings"
 msgstr "Einstellungen"
 
-#: header.php:146
+#: header.php:147
 msgid "notification"
 msgstr "Nachrichten"
 
-#: header.php:147
+#: header.php:148
 msgid "logs"
 msgstr "Logs"
 
-#: header.php:148
+#: header.php:149
 msgid "webcam"
 msgstr "Webcam"
 
-#: index.php:13 index_old2.php:12
+#: index.php:13 index_04022021_Kopie.php:13 index_auto.php:13 index_old2.php:12
 msgid "mainsensors"
 msgstr "Hauptsensoren"
 
-#: index.php:71 index_old2.php:59
+#: index.php:71 index_04022021_Kopie.php:71 index_auto.php:71 index_old2.php:59
 msgid "ntc sensors"
 msgstr "NTC Sensoren"
 
-#: index.php:525 settings.php:382
+#: index.php:634 index_04022021_Kopie.php:605 index_auto.php:531
+#: settings.php:382
 msgid "no comment"
 msgstr "Keine Anmerkungen vorhanden"
 
-#: index.php:591 index_old.php:515 index_old2.php:468
+#: index.php:700 index_04022021_Kopie.php:671 index_auto.php:597
+#: index_old.php:515 index_old2.php:468
 msgid "statusboard"
 msgstr "Statusbord"
 
-#: index.php:593 index_old2.php:470
+#: index.php:702 index_04022021_Kopie.php:673 index_auto.php:599
+#: index_old2.php:470
 msgid "general"
 msgstr "Allgemein"
 
-#: index.php:621 index_old.php:537 index_old2.php:498 manvals.php:22
+#: index.php:730 index_04022021_Kopie.php:701 index_auto.php:627
+#: index_old.php:537 index_old2.php:498 manvals.php:22
 #: modules/write_config_db_logfile_txt.php:152
 #: modules/write_settings_db_logfile_txt.php:150
 msgid "operating mode"
 msgstr "Modus"
 
-#: index.php:630 index_old2.php:507
+#: index.php:739 index_04022021_Kopie.php:710 index_auto.php:636
+#: index_old2.php:507
 msgid "powersuply ok"
 msgstr "Spannungsversorgung OK"
 
-#: index.php:636 index_old2.php:513
+#: index.php:745 index_04022021_Kopie.php:716 index_auto.php:642
+#: index_old2.php:513
 msgid "no powersuply! batterymode"
 msgstr "Spannunggsversorgung fehlerhaft! Batteriemodus."
 
-#: index.php:664 index_old2.php:541
+#: index.php:773 index_04022021_Kopie.php:744 index_auto.php:670
+#: index_old2.php:541
 msgid "battery voltage ok"
 msgstr "Batteriespannung OK"
 
-#: index.php:670 index_old2.php:547
+#: index.php:779 index_04022021_Kopie.php:750 index_auto.php:676
+#: index_old2.php:547
 msgid "battery voltage low !!"
 msgstr "Batteriespannung tief!"
 
-#: index.php:731 index_old2.php:608
+#: index.php:840 index_04022021_Kopie.php:811 index_auto.php:737
+#: index_old2.php:608
 msgid "Switch is on"
 msgstr "Schalter EIN"
 
-#: index.php:737 index_old2.php:614
+#: index.php:846 index_04022021_Kopie.php:817 index_auto.php:743
+#: index_old2.php:614
 msgid "Switch is off"
 msgstr "Schalter AUS"
 
-#: index.php:747 index_old2.php:624
+#: index.php:856 index_04022021_Kopie.php:827 index_auto.php:753
+#: index_old2.php:624
 msgid "temperatures"
 msgstr "Temperaturen"
 
-#: index.php:751 index.php:853 index.php:954 index_old.php:568
+#: index.php:860 index.php:962 index.php:1063 index_04022021_Kopie.php:831
+#: index_04022021_Kopie.php:933 index_04022021_Kopie.php:1034
+#: index_auto.php:757 index_auto.php:859 index_auto.php:960 index_old.php:568
 #: index_old.php:668 index_old.php:774 index_old2.php:628 index_old2.php:730
 #: index_old2.php:831
 msgid "type"
 msgstr "Typ"
 
-#: index.php:754 index_old.php:571 index_old2.php:631
+#: index.php:863 index_04022021_Kopie.php:834 index_auto.php:760
+#: index_old.php:571 index_old2.php:631
 msgid "actual"
 msgstr "Aktuell"
 
-#: index.php:755 index_old.php:572 index_old2.php:632
+#: index.php:864 index_04022021_Kopie.php:835 index_auto.php:761
+#: index_old.php:572 index_old2.php:632
 msgid "target"
 msgstr "Sollwert"
 
-#: index.php:809 index.php:821 index_old.php:626 index_old.php:638
-#: index_old2.php:686 index_old2.php:698
+#: index.php:918 index.php:930 index_04022021_Kopie.php:889
+#: index_04022021_Kopie.php:901 index_auto.php:815 index_auto.php:827
+#: index_old.php:626 index_old.php:638 index_old2.php:686 index_old2.php:698
 msgid "humidification"
 msgstr "Befeuchter"
 
-#: index.php:829 index_old.php:646 index_old2.php:706
+#: index.php:938 index_04022021_Kopie.php:909 index_auto.php:835
+#: index_old.php:646 index_old2.php:706
 msgid "exhausting"
 msgstr "Abluft"
 
-#: index.php:838 index_old.php:655 index_old2.php:715
+#: index.php:947 index_04022021_Kopie.php:918 index_auto.php:844
+#: index_old.php:655 index_old2.php:715
 msgid "dehumidification"
 msgstr "Entfeuchter"
 
-#: index.php:849 index_old2.php:726
+#: index.php:958 index_04022021_Kopie.php:929 index_auto.php:855
+#: index_old2.php:726
 msgid "timer"
 msgstr "Timer"
 
-#: index.php:857 index_old.php:671 index_old2.php:734 manvals.php:153
-#: manvals.php:184
+#: index.php:966 index_04022021_Kopie.php:937 index_auto.php:863
+#: index_old.php:671 index_old2.php:734 manvals.php:153 manvals.php:184
 msgid "period"
 msgstr "Zyklus"
 
-#: index.php:865 index_old.php:680 index_old2.php:742
-#: modules/read_settings_db.php:40
+#: index.php:974 index_04022021_Kopie.php:945 index_auto.php:871
+#: index_old.php:680 index_old2.php:742 modules/read_settings_db.php:40
 msgid "circulating air"
 msgstr "Umluft"
 
-#: index.php:866 index.php:880 index.php:904 index.php:934 index_old.php:681
-#: index_old.php:698 index_old.php:725 index_old.php:756 index_old2.php:743
-#: index_old2.php:757 index_old2.php:781 index_old2.php:811
+#: index.php:975 index.php:989 index.php:1013 index.php:1043
+#: index_04022021_Kopie.php:946 index_04022021_Kopie.php:960
+#: index_04022021_Kopie.php:984 index_04022021_Kopie.php:1014
+#: index_auto.php:872 index_auto.php:886 index_auto.php:910 index_auto.php:940
+#: index_old.php:681 index_old.php:698 index_old.php:725 index_old.php:756
+#: index_old2.php:743 index_old2.php:757 index_old2.php:781 index_old2.php:811
 msgid "timer on"
 msgstr "Timer Ein"
 
-#: index.php:867 index.php:881 index_old.php:682 index_old.php:699
-#: index_old2.php:744 index_old2.php:758
+#: index.php:976 index.php:990 index_04022021_Kopie.php:947
+#: index_04022021_Kopie.php:961 index_auto.php:873 index_auto.php:887
+#: index_old.php:682 index_old.php:699 index_old2.php:744 index_old2.php:758
 msgid "always on"
 msgstr "Immer Ein"
 
-#: index.php:868 index.php:882 index.php:903 index.php:933 index_old.php:683
-#: index_old.php:700 index_old.php:724 index_old.php:755 index_old2.php:745
-#: index_old2.php:759 index_old2.php:780 index_old2.php:810
+#: index.php:977 index.php:991 index.php:1012 index.php:1042
+#: index_04022021_Kopie.php:948 index_04022021_Kopie.php:962
+#: index_04022021_Kopie.php:983 index_04022021_Kopie.php:1013
+#: index_auto.php:874 index_auto.php:888 index_auto.php:909 index_auto.php:939
+#: index_old.php:683 index_old.php:700 index_old.php:724 index_old.php:755
+#: index_old2.php:745 index_old2.php:759 index_old2.php:780 index_old2.php:810
 msgid "timer off"
 msgstr "Timer Aus"
 
-#: index.php:879 index_old.php:697 index_old2.php:756
-#: modules/read_settings_db.php:40
+#: index.php:988 index_04022021_Kopie.php:959 index_auto.php:885
+#: index_old.php:697 index_old2.php:756 modules/read_settings_db.php:40
 msgid "exhausting air"
 msgstr "Abluft"
 
-#: index.php:905 index_old.php:726 index_old2.php:782
+#: index.php:1014 index_04022021_Kopie.php:985 index_auto.php:911
+#: index_old.php:726 index_old2.php:782
 msgid "manual switch off"
 msgstr "manuell AUS"
 
-#: index.php:935 index_old.php:757 index_old2.php:812
+#: index.php:1044 index_04022021_Kopie.php:1015 index_auto.php:941
+#: index_old.php:757 index_old2.php:812
 msgid "manual switch on"
 msgstr "manuell EIN"
 
-#: index.php:968 index_old.php:788 index_old2.php:845
+#: index.php:1077 index_04022021_Kopie.php:1048 index_auto.php:974
+#: index_old.php:788 index_old2.php:845
 msgid "see settings"
 msgstr "Siehe Einstellungen"
 
-#: index.php:975 index.php:982 index_old.php:795 index_old.php:802
-#: index_old2.php:852 index_old2.php:859
+#: index.php:1084 index.php:1091 index_04022021_Kopie.php:1055
+#: index_04022021_Kopie.php:1062 index_auto.php:981 index_auto.php:988
+#: index_old.php:795 index_old.php:802 index_old2.php:852 index_old2.php:859
 msgid "scale1"
 msgstr "Waage1"
 
-#: index.php:1002 index.php:1009 index_old.php:822 index_old.php:829
-#: index_old2.php:879 index_old2.php:886
+#: index.php:1111 index.php:1118 index_04022021_Kopie.php:1082
+#: index_04022021_Kopie.php:1089 index_auto.php:1008 index_auto.php:1015
+#: index_old.php:822 index_old.php:829 index_old2.php:879 index_old2.php:886
 msgid "scale2"
 msgstr "Waage2"
 
@@ -1193,7 +1374,7 @@ msgstr "Können unabhängig vom ausgewählten Modus genutzt werden."
 
 #: manvals.php:42
 msgid "it is cooled to the set temperature with circulating air."
-msgstr ""
+msgstr "es wird mit Umluft auf die eingestellte Temperatur gekühlt."
 
 #: manvals.php:43
 msgid ""
@@ -1201,6 +1382,8 @@ msgid ""
 "is on,\n"
 "                                             the heating is never controlled."
 msgstr ""
+"es wird mit Umluft auf die eingestellte Temperatur gekühlt und die "
+"Befeuchtung ist eingeschaltet, die Heizung wird nicht geregelt."
 
 #: manvals.php:45
 msgid ""
@@ -1208,6 +1391,8 @@ msgid ""
 "is on,\n"
 "                                             The cooling is never controlled."
 msgstr ""
+"es wird mit Umluft auf die eingestellte Temperatur geheizt und die "
+"Befeuchtung ist eingeschaltet, Die Kühlung wird nicht geregelt."
 
 #: manvals.php:47
 msgid ""
@@ -1226,6 +1411,12 @@ msgid ""
 "                                             to avoid a wild switching on "
 "and off, the humidification should be delayed (5-10min)!"
 msgstr ""
+"... wie Automatik mit Befeuchtung, zusätzlich: bei Überschreitung der "
+"Feuchte schaltet die Abluft ein, bis das Feuchteziel wieder erreicht ist. Da "
+"es sich um eine passive Entfeuchtung handelt, ist die minimal erreichbare "
+"Feuchte abhängig von der Trockenheit der Umgebungsluft. Um ein wildes Ein- "
+"und Ausschalten zu vermeiden, sollte die Befeuchtung verzögert werden "
+"(5-60min)!"
 
 #: manvals.php:60 manvals.php:73 manvals.php:76 manvals.php:77 manvals.php:78
 #: manvals.php:82 manvals.php:83 manvals.php:84 manvals.php:93 manvals.php:94
@@ -1245,6 +1436,10 @@ msgid ""
 "values can be approached in any operating mode. the circulating air is "
 "always active during the cooling or heating phases."
 msgstr ""
+"hier wird die gewünschte Temperatur eingestellt. der Minimalwert ist 0 ° C, "
+"der Maximalwert + 25 ° C. Aus technischen Gründen können nicht alle Werte in "
+"jeder Betriebsart angefahren werden. Die Umluft ist während der Kühl- oder "
+"Heizphasen immer aktiv."
 
 #: manvals.php:76
 msgid "example of cooling"
@@ -1268,6 +1463,10 @@ msgid ""
 "different from pi-ager to pi-ager and therefore to be determined "
 "individually."
 msgstr ""
+"so kühlt der Pi-Ager bei Überschreitung von 15 Grad auf 13 ° C ab und "
+"schaltet dann ab, um eine übermäßige Abkühlung zu vermeiden. Das gesamte "
+"Verhalten ist von Pi-Ager zu Pi-Ager unterschiedlich und daher individuell "
+"zu bestimmen."
 
 #: manvals.php:82
 msgid "example of heating"
@@ -1281,6 +1480,10 @@ msgid ""
 "different from pi-ager to pi-ager and therefore to be determined "
 "individually."
 msgstr ""
+"so, wenn die Temperatur unter 19 Grad fällt, heizt der Pi-Pager auf 21 ° C "
+"auf und schaltet dann ab, um eine übermäßige Erwärmung zu vermeiden. Das "
+"gesamte Verhalten ist von Pi-Ager zu Pi-Ager unterschiedlich und daher "
+"individuell zu bestimmen."
 
 #: manvals.php:88
 msgid "automatic mode"
@@ -1296,6 +1499,14 @@ msgid ""
 "switching values of the hysteresis must not be too close together. "
 "Otherwise, cooling and heating could be switched on and off alternately."
 msgstr ""
+"in jedem Automatikbetrieb wird die Temperatur vollautomatisch geregelt. "
+"Zunächst wird die aktuelle Temperatur ermittelt, dann wird entschieden, "
+"welche Methode (Kühlen oder Heizen) geeignet ist, um die eingestellte "
+"Solltemperatur zu erreichen. Das bedeutet auch, dass die Schaltwerte der "
+"Hysterese nicht zu dicht beieinander liegen dürfen. Sonst könnten Kühlen und "
+"Heizen abwechselnd ein- und ausgeschaltet werden.\n"
+"\n"
+"Übersetzt mit www.DeepL.com/Translator (kostenlose Version)"
 
 #: manvals.php:92
 msgid "example of automatic"
@@ -1307,7 +1518,7 @@ msgstr "Jetzt wird es spannend!"
 
 #: manvals.php:94
 msgid "1st case"
-msgstr ""
+msgstr "Fall 1:"
 
 #: manvals.php:94 manvals.php:95 manvals.php:96 manvals.php:97
 msgid "sensor temperature"
@@ -1319,7 +1530,7 @@ msgstr "Kühlen Ein"
 
 #: manvals.php:95
 msgid "2st case"
-msgstr ""
+msgstr "Fall 2:"
 
 #: manvals.php:95
 msgid "cooling off"
@@ -1327,7 +1538,7 @@ msgstr "Kühlen Aus"
 
 #: manvals.php:96
 msgid "3st case"
-msgstr ""
+msgstr "Fall 3:"
 
 #: manvals.php:96
 msgid "heating on"
@@ -1335,7 +1546,7 @@ msgstr "Heizen Ein"
 
 #: manvals.php:97
 msgid "4st case"
-msgstr ""
+msgstr "Fall 4:"
 
 #: manvals.php:97
 msgid "heating off"
@@ -1359,6 +1570,14 @@ msgid ""
 "air humidity, since only a passive dehumidification by exhaust air takes "
 "place."
 msgstr ""
+"hier wird hier die gewünschte Luftfeuchtigkeit eingestellt. Der Minimalwert "
+"liegt theoretisch bei 0 % und der Maximalwert bei 99 %. Diese Werte werden "
+"im Normalfall nie erreicht. Die Umluft ist während der Befeuchtung immer "
+"aktiv. Die Wirksamkeit der Entfeuchtung (Automatikbetrieb mit mit Be- und "
+"Entfeuchtung) ist abhängig von der Raumluftfeuchte, da nur eine passive "
+"Entfeuchtung durch Abluft stattfindet.\n"
+"\n"
+"Übersetzt mit www.DeepL.com/Translator (kostenlose Version)"
 
 #: manvals.php:135
 msgid "timer circulating"
@@ -1374,12 +1593,17 @@ msgid ""
 "switched on again. if the value is 0 (= no pause), the circulating air is "
 "permanently switched on. the maximum value is 1440min."
 msgstr ""
+"hier wird die Zeit eingestellt, die das System pausiert bis die Umluft "
+"wieder eingeschaltet wird. Ist der Wert 0 (= keine Pause), wird die Umluft "
+"permanent eingeschaltet. Der maximale Wert beträgt 1440min."
 
 #: manvals.php:155
 msgid ""
 "this sets the circulation time during which the fan is running. at 0, the "
 "circulating air timer function is switched off. the maximum value is 1440min."
 msgstr ""
+"hier wird die Zeit eingestellt, die der Lüfter laufen soll. Bei 0 ist die "
+"Umlufttimerfunktion ausgeschaltet. Der maximale Wert beträgt 1440min."
 
 #: manvals.php:157 manvals.php:188
 msgid "note"
@@ -1390,6 +1614,8 @@ msgid ""
 "the circulating air fan runs independently of the timer settings - also "
 "during cooling, heating and humidification."
 msgstr ""
+"Der Umluftventilator läuft unabhängig von den Timer-Einstellungen, auch beim "
+"Kühlen, Heizen und Befeuchten."
 
 #: manvals.php:160 manvals.php:191
 msgid "period=0 und duration=0 is not useful and not allowed."
@@ -1405,12 +1631,17 @@ msgid ""
 "switched on again. if the .lue is 0 (= no pause), the exhausting air is "
 "permanently switched on. the maximum value is 1440min."
 msgstr ""
+"hier wird die Zeit eingestellt, die das System pausiert bis die Abluft "
+"wieder eingeschaltet wird. Ist der Wert = 0 (keine Pause), wird die Abluft "
+"permanent eingeschaltet. Der maximale Wert ist 1440Min."
 
 #: manvals.php:186
 msgid ""
 "this sets the exhausting time during which the fan is running. at 0, the "
 "exhausting air timer function is switched off. the maximum value is 1440min."
 msgstr ""
+"Hier wird die Zeit eingestellt, die der Lüfter laufen soll. Bei 0 ist die "
+"Abluft Timerfunktion ausgeschaltet. Der maximale Wert beträgt 1440 Min."
 
 #: manvals.php:188
 msgid ""
@@ -1418,6 +1649,8 @@ msgid ""
 "dehumidification in the \"automatic mode with humidification and "
 "dehumidification."
 msgstr ""
+"Der Abluftventilator läuft unabhängig von den Timer-Einstellungen - auch "
+"während der Entfeuchtung im \"Automatikbetrieb mit Be- und Entfeuchtung\""
 
 #: modules/clear_logfile.php:8
 msgid "new logfile manually created"
@@ -1434,7 +1667,7 @@ msgstr "Neue Logdatei erstellt"
 #: modules/clear_logfile.php:16
 #, php-format
 msgid "could not find %s!"
-msgstr ""
+msgstr "%s konnte nicht gefunden werden!"
 
 #: modules/database_empty_statistic_tables.php:8
 msgid "statistic tables emptied"
@@ -1570,8 +1803,8 @@ msgstr "Administration Einstellungen"
 #: modules/write_admin_db.php:29 modules/write_backup_db.php:17
 #: modules/write_debug_values.php:11 modules/write_notification_db.php:25
 #: modules/write_notification_db.php:66 modules/write_notification_db.php:106
-#: modules/write_notification_db.php:169 modules/write_notification_db.php:198
-#: modules/write_notification_db.php:209 modules/write_notification_db.php:220
+#: modules/write_notification_db.php:169 modules/write_notification_db.php:201
+#: modules/write_notification_db.php:212 modules/write_notification_db.php:223
 msgid "values saved"
 msgstr "Einstellungen wurden gespeichert"
 
@@ -1790,15 +2023,15 @@ msgstr "E-Mail Empfänger hinzufügen"
 msgid "mail recipient added"
 msgstr "E-Mail Empfänger hinzugefügt"
 
-#: modules/write_notification_db.php:198
+#: modules/write_notification_db.php:201
 msgid "mailserver values"
 msgstr "Werte Mailserver"
 
-#: modules/write_notification_db.php:209
+#: modules/write_notification_db.php:212
 msgid "pushover values"
 msgstr "Pushover Einstellungen"
 
-#: modules/write_notification_db.php:220
+#: modules/write_notification_db.php:223
 msgid "telegram values"
 msgstr "Telegram Einstellungen"
 
