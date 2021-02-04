@@ -101,12 +101,6 @@
                                             include 'modules/read_values_for_diagrams.php';
                                         ?>
                                         <canvas id="temperature_humidity_chart"></canvas>
-                                        <canvas id="scales_chart"></canvas>
-                                        <canvas id="thermometer1_chart"></canvas> 
-<!--                                    <canvas id="thermometer2_chart"></canvas> 
-                                        <canvas id="thermometer3_chart"></canvas> 
--->
-                                        <canvas id="thermometer4_chart"></canvas> 
                                         <div class="on_off_chart"><canvas id="cooler_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="heater_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="humidifier_chart"></canvas></div>
@@ -115,6 +109,13 @@
                                         <div class="on_off_chart"><canvas id="exhaust_air_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="uv_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="light_chart"></canvas></div>
+                                        <canvas id="scales_chart"></canvas>
+                                        <canvas id="thermometer1_chart"></canvas> 
+<!--                                    <canvas id="thermometer2_chart"></canvas> 
+                                        <canvas id="thermometer3_chart"></canvas> 
+-->
+                                        <canvas id="thermometer4_chart"></canvas> 
+                                        <canvas id="dewpoint_humidity_chart"></canvas> 
                                         
                                         <script>
                                         var timeFormat = 'MM/DD/YYYY HH:mm';
@@ -130,8 +131,8 @@
                                                     label: '<?php echo _("temperature") . ' int.' ?>',
                                                     yAxisID: 'temperature',
                                                     data: <?php echo json_encode($temperature_dataset);?>,
-                                                    backgroundColor: '#C03738',
-                                                    borderColor: '#C03738',
+                                                    backgroundColor: '#FF4040',
+                                                    borderColor: '#FF4040',
                                                     borderWidth: 2,
                                                     <?php
                                                         if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
@@ -152,46 +153,6 @@
                                                     data: <?php echo json_encode($extern_temperature_dataset); ?>,
                                                     backgroundColor: '#8A0808',
                                                     borderColor: '#8A0808',
-                                                    borderWidth: 2,
-                                                    <?php
-                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
-                                                            print 'pointRadius: 1, pointHitRadius: 5,';
-                                                        }
-                                                        else
-                                                        {
-                                                            print 'pointRadius: 0, pointHitRadius: 5,';
-                                                        }
-                                                    ?>
-                                                    pointStyle:'rect',
-                                                    cubicInterpolationMode: 'monotone',
-                                                    fill: false
-                                                },
-                                                {
-                                                    label: '<?php echo _("dewpoint") . ' int.' ?>',
-                                                    yAxisID: 'temperature',
-                                                    data: <?php echo json_encode($dewpoint_dataset); ?>,
-                                                    backgroundColor: '#04B431',
-                                                    borderColor: '#04B431',
-                                                    borderWidth: 2,
-                                                    <?php
-                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
-                                                            print 'pointRadius: 1, pointHitRadius: 5,';
-                                                        }
-                                                        else
-                                                        {
-                                                            print 'pointRadius: 0, pointHitRadius: 5,';
-                                                        }
-                                                    ?>
-                                                    pointStyle:'rect',
-                                                    cubicInterpolationMode: 'monotone',
-                                                    fill: false
-                                                },
-                                                {
-                                                    label: '<?php echo _("dewpoint") . ' ext.' ?>',
-                                                    yAxisID: 'temperature',
-                                                    data: <?php echo json_encode($extern_dewpoint_dataset); ?>,
-                                                    backgroundColor: '#0B6121',
-                                                    borderColor: '#0B6121',
                                                     borderWidth: 2,
                                                     <?php
                                                         if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
@@ -268,12 +229,8 @@
                                                             } else if (tooltipItem.datasetIndex === 1) {
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
                                                             } else if (tooltipItem.datasetIndex === 2) {
-                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
-                                                            } else if (tooltipItem.datasetIndex === 3) {
-                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
-                                                            } else if (tooltipItem.datasetIndex === 4) {
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' %';
-                                                            } else if (tooltipItem.datasetIndex === 5) {
+                                                            } else if (tooltipItem.datasetIndex === 3) {
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' %';
                                                             }
                                                         }
@@ -328,19 +285,7 @@
                                                             }
                                                             $value_dataset2 = max($dataset2);
 
-                                                            $dataset3 = ($non_empties = array_filter($dewpoint_dataset));
-                                                            if (empty($dataset3)) {
-                                                                    $dataset3[] = Null;
-                                                            }
-                                                            $value_dataset3 = max($dataset3);
-
-                                                            $dataset4 = ($non_empties = array_filter($extern_dewpoint_dataset));
-                                                            if (empty($dataset4)) {
-                                                                    $dataset4[] = Null;
-                                                            }
-                                                            $value_dataset4 = max($dataset4);
-
-                                                             $max_value_temperature = intval (max ($value_dataset1, $value_dataset2, $value_dataset3, $value_dataset4)/5)*5 + 10;
+                                                            $max_value_temperature = intval (max ($value_dataset1, $value_dataset2)/5)*5 + 10;
 
                                                              print $max_value_temperature;
                                                         ?>,
@@ -359,24 +304,12 @@
                                                                     $dataset2[] = 100;
                                                             }
                                                             $value_dataset2 = min($dataset2);
-
-                                                            $dataset3 = ($non_empties = array_filter($dewpoint_dataset));
-                                                            if (empty($dataset3)) {
-                                                                    $dataset3[] = 100;
-                                                            }
-                                                            $value_dataset3 = min($dataset3);
-
-                                                            $dataset4 = ($non_empties = array_filter($extern_dewpoint_dataset));
-                                                            if (empty($dataset4)) {
-                                                                    $dataset4[] = 100;
-                                                            }
-                                                            $value_dataset4 = min($dataset4);
                                                              
                                                             if ($value_dataset1 == 100 and $value_dataset2 == 100 and $value_dataset3 == 100) {
                                                                $min_value_temperature = -4;
                                                             } 
                                                             else {
-                                                               $min_value_temperature = intval (min ($value_dataset1, $value_dataset2, $value_dataset3, $value_dataset4)/1)*1 - 2;
+                                                               $min_value_temperature = intval (min ($value_dataset1, $value_dataset2)/1)*1 - 2;
                                                             }
                                                              print $min_value_temperature;
                                                         ?>
@@ -401,10 +334,24 @@
                                                             },
                                                             fontColor: '#000000',
                                                            //    fontSize: 20,
-                                                            max: <?php 
-                                                            $max_value_humidiy = intval(max(max($humidity_dataset),max($extern_humidity_dataset))/10) * 10 + 10;
-                                                            print $max_value_humidiy;
+                                                            max: <?php
+                                                                $dataset1 = ($non_empties = array_filter($humidity_dataset));
+                                                                if (empty($dataset1)) {
+                                                                        $dataset1[] = Null;
+                                                                }
+                                                                $value_dataset1 = max($dataset1);
+
+                                                                $dataset2 = ($non_empties = array_filter($extern_humidity_dataset));
+                                                                if (empty($dataset2)) {
+                                                                        $dataset2[] = Null;
+                                                                }
+                                                                $value_dataset2 = max($dataset2);
+
+                                                                 $max_value_humidiy = intval (max ($value_dataset1, $value_dataset2)/10)*10 + 10;
+
+                                                                 print $max_value_humidiy;
                                                             ?>,
+                                                    //-----austoscale max end
                                                             //min: <?php 
                                                             //$min_value_humidiy = intval(min($humidity_dataset) - (min($humidity_dataset) / 100 * 1))-1;
                                                             //?>
@@ -415,7 +362,289 @@
                                                 }
                                             }
                                         };
-                                        
+ 
+
+                                        // Taupunkt und absolute Feuchte
+                                        var dewpoint_humidity_chart = document.getElementById("dewpoint_humidity_chart");
+                                        var config_dewpoint_humidity_chart = {
+                                            type: 'line',
+                                            data: {
+                                                labels: 
+                                                    <?php echo $dewpoint_timestamps_axis_text; ?>,
+                                                datasets: [{
+                                                    label: '<?php echo _("dewpoint") . ' int.' ?>',
+                                                    yAxisID: 'temperature',
+                                                    data: <?php echo json_encode($dewpoint_dataset); ?>,
+                                                    backgroundColor: '#04B431',
+                                                    borderColor: '#04B431',
+                                                    borderWidth: 2,
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
+                                                    pointStyle:'rect',
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("dewpoint") . ' ext.' ?>',
+                                                    yAxisID: 'temperature',
+                                                    data: <?php echo json_encode($extern_dewpoint_dataset); ?>,
+                                                    backgroundColor: '#0B6121',
+                                                    borderColor: '#0B6121',
+                                                    borderWidth: 2,
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
+                                                    pointStyle:'rect',
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+
+// Vorbereitung abs Feuchte
+/*                                                },
+                                                {
+                                                    label: '<?php echo _("humidity") . ' int.' ?>',
+                                                    yAxisID: 'humidity',
+                                                    data: <?php echo json_encode($humidity_dataset); ?>,
+                                                    backgroundColor: '#59A9C4',
+                                                    borderColor: '#59A9C4',
+                                                    borderWidth: 2,
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
+                                                    pointStyle:'rect',
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("humidity") . ' ext.' ?>',
+                                                    yAxisID: 'humidity',
+                                                    data: <?php echo json_encode($extern_humidity_dataset); ?>,
+                                                    backgroundColor: '#08298A',
+                                                    borderColor: '#08298A',
+                                                    borderWidth: 2,
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
+                                                    pointStyle:'rect',
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+*/
+                                                }]
+                                            },
+                                            options: {
+                                                title: {
+                                                    display: true,
+                                                    //text: '<?php echo _("dewpoint") ?> & <?php echo _("humidity abs") ?>',
+                                                    text: '<?php echo _("dewpoint") ?>',
+                                                    fontSize: 24
+                                                },
+                                                legend: {
+                                                    labels: {
+                                                    usePointStyle: true,
+                                                    },
+                                                },
+                                                tooltips: {
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            if (tooltipItem.datasetIndex === 0) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                            } else if (tooltipItem.datasetIndex === 1) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+/*                                                            } else if (tooltipItem.datasetIndex === 2) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °g/m3';
+                                                            } else if (tooltipItem.datasetIndex === 3) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °g/m3';
+*/
+                                                            }
+                                                        }
+                                                    }
+                                                },
+                                                scales: {
+                                                    xAxes: [{
+                                                        type: "time",
+                                                        time: {
+                                                            displayFormats: {
+                                                                second: 'HH:mm:ss',
+                                                                minute: 'HH:mm',
+                                                                hour: 'MMM D, H[h]'
+                                                            },
+                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                                        },
+                                                        ticks: {
+                                                            autoSkip: false,
+                                                            maxRotation: 0,
+                                                            minRotation: 0
+                                                        },
+                                                    }, ],
+                                                    yAxes: [{
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
+                                                        //    fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'temperature',
+                                                        type: 'linear',
+                                                        position: 'left',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                return '  ' + value + ' °C' + '  ';
+                                                            },
+                                                            fontColor: '#000000',
+                                                            //fontSize: 20,
+                                                            //max: 30,
+                                                            //min: -2
+                                                    //-----austoscale max start max
+                                                        max: <?php
+                                                            $dataset1 = ($non_empties = array_filter($dewpoint_dataset));
+                                                            if (empty($dataset1)) {
+                                                                    $dataset1[] = Null;
+                                                            }
+                                                            $value_dataset1 = max($dataset1);
+
+                                                            $dataset2 = ($non_empties = array_filter($extern_dewpoint_dataset));
+                                                            if (empty($dataset2)) {
+                                                                    $dataset2[] = Null;
+                                                            }
+                                                            $value_dataset2 = max($dataset2);
+
+                                                            $max_value_temperature = intval (max ($value_dataset1, $value_dataset2)/5)*5 + 10;
+
+                                                             print $max_value_temperature;
+                                                        ?>,
+                                                    //-----austoscale max end
+
+                                                    //-----austoscale min start
+                                                        min: <?php 
+                                                            $dataset1 = ($non_empties = array_filter($dewpoint_dataset));
+                                                            if (empty($dataset1)) {
+                                                                    $dataset1[] = 100;
+                                                            }
+                                                            $value_dataset1 = min($dataset1);
+
+                                                            $dataset2 = ($non_empties = array_filter($extern_dewpoint_dataset));
+                                                            if (empty($dataset2)) {
+                                                                    $dataset2[] = 100;
+                                                            }
+                                                            $value_dataset2 = min($dataset2);
+                                                             
+                                                            if ($value_dataset1 == 100 and $value_dataset2 == 100) {
+                                                               $min_value_temperature = -4;
+                                                            } 
+                                                            else {
+                                                               $min_value_temperature = intval (min ($value_dataset1, $value_dataset2)/1)*1 - 2;
+                                                            }
+                                                             print $min_value_temperature;
+                                                        ?>
+                                                    //-----austoscale min end
+                                                        }
+                                                        
+                                                    }, {
+                                                        scaleLabel: {
+                                                            display: true,
+//                                                            labelString: '<?php echo _("humidity abs") ?> <?php echo _(" - φ") ?>',
+                                                              labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
+                                                        //    fontSize: 20,
+                                                            fontColor: '#000000'
+                                                        },
+                                                        id: 'humidity',
+                                                        type: 'linear',
+                                                        display: true,
+                                                        position: 'right',
+//                                                      labelString: '<?php echo _("humidity") ?>',
+                                                        labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+//                                                              return '  ' + value + ' g/m3' + '  ';
+                                                                return '  ' + value + ' °C' + '  ';
+                                                            },
+                                                            fontColor: '#000000',
+                                                           //    fontSize: 20,
+/*                                                            max: <?php 
+                                                            $max_value_humidiy = intval(max(max($humidity_dataset),max($extern_humidity_dataset))/10) * 10 + 10;
+                                                            print $max_value_humidiy;
+                                                            ?>,
+                                                            //min: <?php 
+                                                            //$min_value_humidiy = intval(min($humidity_dataset) - (min($humidity_dataset) / 100 * 1))-1;
+                                                            //?>
+                                                            //max: 100,
+                                                            min: 0
+*/
+                                                    //-----austoscale max start max
+                                                        max: <?php
+                                                            $dataset1 = ($non_empties = array_filter($dewpoint_dataset));
+                                                            if (empty($dataset1)) {
+                                                                    $dataset1[] = Null;
+                                                            }
+                                                            $value_dataset1 = max($dataset1);
+
+                                                            $dataset2 = ($non_empties = array_filter($extern_dewpoint_dataset));
+                                                            if (empty($dataset2)) {
+                                                                    $dataset2[] = Null;
+                                                            }
+                                                            $value_dataset2 = max($dataset2);
+
+                                                            $max_value_temperature = intval (max ($value_dataset1, $value_dataset2)/5)*5 + 10;
+
+                                                             print $max_value_temperature;
+                                                        ?>,
+                                                    //-----austoscale max end
+
+                                                    //-----austoscale min start
+                                                        min: <?php 
+                                                            $dataset1 = ($non_empties = array_filter($dewpoint_dataset));
+                                                            if (empty($dataset1)) {
+                                                                    $dataset1[] = 100;
+                                                            }
+                                                            $value_dataset1 = min($dataset1);
+
+                                                            $dataset2 = ($non_empties = array_filter($extern_dewpoint_dataset));
+                                                            if (empty($dataset2)) {
+                                                                    $dataset2[] = 100;
+                                                            }
+                                                            $value_dataset2 = min($dataset2);
+                                                             
+                                                            if ($value_dataset1 == 100 and $value_dataset2 == 100) {
+                                                               $min_value_temperature = -4;
+                                                            } 
+                                                            else {
+                                                               $min_value_temperature = intval (min ($value_dataset1, $value_dataset2)/1)*1 - 2;
+                                                            }
+                                                             print $min_value_temperature;
+                                                        ?>
+                                                    //-----austoscale min end
+                                                        }
+                                                    }]
+                                                }
+                                            }
+                                        };
+ 
                                         // Waagen
                                         var scales_chart = document.getElementById("scales_chart");
                                         var config_scales_chart = {
@@ -531,7 +760,7 @@
                                                                     $scale1_dataset_max[] = Null;
                                                             }
                                                             $max_scale1 = max($scale1_dataset_max);
-                                                            $max_value_scale1 = intval($max_scale1 + abs($max_scale1) / 100 * 5) + 1;
+                                                            $max_value_scale1 = intval($max_scale1 + abs($max_scale1) / 100 * 5) + 10;
                                                             print $max_value_scale1;
                                                             ?>,
                                                             min: <?php 
@@ -540,7 +769,7 @@
                                                                     $scale1_dataset_min[] = Null;
                                                             }
                                                             $min_scale1 = min($scale1_dataset_min);
-                                                            $min_value_scale1 = intval($min_scale1 - abs($min_scale1) / 100 * 5) - 1;
+                                                            $min_value_scale1 = intval($min_scale1 - abs($min_scale1) / 100 * 5) - 2;
                                                             print $min_value_scale1;
                                                             ?>,
                                                             //stepSize: 1
@@ -574,7 +803,7 @@
                                                                     $scale2_dataset_max[] = Null;
                                                             }
                                                             $max_scale2 = max($scale2_dataset_max);
-                                                            $max_value_scale2 = intval($max_scale2 + abs($max_scale2) / 100 * 5) + 1;
+                                                            $max_value_scale2 = intval($max_scale2 + abs($max_scale2) / 100 * 5) + 10;
                                                             print $max_value_scale2;
                                                             ?>,
                                                             min: <?php 
@@ -583,7 +812,7 @@
                                                                     $scale2_dataset_min[] = Null;
                                                             }
                                                             $min_scale2 = min($scale2_dataset_min);
-                                                            $min_value_scale2 = intval($min_scale2 - abs($min_scale2) / 100 * 5) - 1;
+                                                            $min_value_scale2 = intval($min_scale2 - abs($min_scale2) / 100 * 5) - 2;
                                                             print $min_value_scale2;
                                                             ?>,
                                                             //stepSize: 1
@@ -791,7 +1020,7 @@
                                                     {
                                                         scaleLabel: {
                                                             display: true,
-                                                            //labelString: '<?php echo _("temperature")?> <?php echo _(" - ϑ") ?>',
+                                                            labelString: '<?php echo _("temperature")?> <?php echo _(" - ϑ") ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -1018,7 +1247,7 @@
                                                     {
                                                         scaleLabel: {
                                                             display: true,
-                                                        //    labelString: '<?php if ($sensor4_is_current == true) { echo _("Current"); } else { echo _("temperature") . '4';}?>',
+                                                            labelString: '<?php if ($sensor4_is_current == true) { echo _("Current") . " - I"; } else { echo _("temperature") . _(" - ϑ");}?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -1663,8 +1892,8 @@
                                                     label: '<?php echo _("dehumidifier"); ?>',
                                                     yAxisID: 'status',
                                                     data: <?php echo json_encode($dehumidifier_dataset);?>,
-                                                    backgroundColor: '#CFED53',
-                                                    borderColor: '#CFED53',
+                                                    backgroundColor: '#BDB76B',
+                                                    borderColor: '#BDB76B',
                                                     borderWidth: 0.1,
                                                     radius: 0,
                                                     pointRadius: 0,
@@ -1991,6 +2220,7 @@
                                             window.temperature_humidity_chart = new Chart(temperature_humidity_chart, config_temperature_humidity_chart);
                                             window.scales_chart = new Chart(scales_chart, config_scales_chart);
                                             window.thermometer1_chart = new Chart(thermometer1_chart, config_thermometer1_chart);
+                                            window.dewpoint_humidity_chart = new Chart(dewpoint_humidity_chart, config_dewpoint_humidity_chart);
                                         //    window.thermometer2_chart = new Chart(thermometer2_chart, config_thermometer2_chart);
                                         //    window.thermometer3_chart = new Chart(thermometer3_chart, config_thermometer3_chart);
                                             window.thermometer4_chart = new Chart(thermometer4_chart, config_thermometer4_chart);

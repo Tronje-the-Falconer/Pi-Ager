@@ -161,78 +161,100 @@
                                         data: {
                                             labels:
                                                 <?php echo $temperature_timestamps_axis_text; ?>,
-                                            datasets: [{
-                                                label: '<?php echo _("temperature") ?>',
-                                                yAxisID: 'temperature',
-                                                data: <?php echo json_encode($temperature_dataset);?>,
-                                                backgroundColor: '#C03738',
-                                                borderColor: '#C03738',
-                                                borderWidth: 2,
-                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
-                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                pointHitRadius: 5,';} ?>
-                                                pointStyle:'rect',
-                                                cubicInterpolationMode: 'monotone',
-                                                fill: false
-                                            },
-                                            {
-                                                label: '<?php echo _("humidity") ?>',
-                                                yAxisID: 'humidity',
-                                                data: <?php echo json_encode($humidity_dataset); ?>,
-                                                backgroundColor: '#59A9C4',
-                                                borderColor: '#59A9C4',
-                                                borderWidth: 2,
-                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
-                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                pointHitRadius: 5,';} ?>
-                                                pointStyle:'rect',
-                                                cubicInterpolationMode: 'monotone',
-                                                fill: false
-                                            },
-                                            {
-                                                label: '<?php echo _("temperature") . ' NTC 1' ?>',
-                                                hidden: true,
-                                                yAxisID: 'temperature',
-                                                data: <?php echo json_encode($thermometer1_dataset); ?>,
-                                                backgroundColor: '#F7AC08',
-                                                borderColor: '#F7AC08',
-                                                borderWidth: 2,
-                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
-                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                pointHitRadius: 5,';} ?>
-                                                pointStyle:'rect',
-                                                cubicInterpolationMode: 'monotone',
-                                                fill: false
-                                            },
-                                            {
-                                                label: '<?php echo _("temperature") . ' NTC 2' ?>',
-                                                hidden: true,
-                                                yAxisID: 'temperature',
-                                                data: <?php echo json_encode($thermometer2_dataset); ?>,
-                                                backgroundColor: '#06AF8F',
-                                                borderColor: '#06AF8F',
-                                                borderWidth: 2,
-                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
-                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                pointHitRadius: 5,';} ?>
-                                                pointStyle:'rect',
-                                                cubicInterpolationMode: 'monotone',
-                                                fill: false
-                                            },
-                                            {
-                                                label: '<?php echo _("temperature") . ' NTC 3' ?>',
-                                                hidden: true,
-                                                yAxisID: 'temperature',
-                                                data: <?php echo json_encode($thermometer3_dataset); ?>,
-                                                backgroundColor: '#AF06A1',
-                                                borderColor: '#AF06A1',
-                                                borderWidth: 2,
-                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
-                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                pointHitRadius: 5,';} ?>
-                                                pointStyle:'rect',
-                                                cubicInterpolationMode: 'monotone',
-                                                fill: false
+                                                datasets: [{
+                                                    label: '<?php echo _("temperature") . ' int.' ?>',
+                                                    yAxisID: 'temperature',
+                                                    data: <?php echo json_encode($temperature_dataset);?>,
+                                                    backgroundColor: '#FF4040',
+                                                    borderColor: '#FF4040',
+                                                    borderWidth: 2,
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
+                                                    pointStyle:'rect',
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("temperature") . ' ext.' ?>',
+                                                    yAxisID: 'temperature',
+                                                    data: <?php echo json_encode($extern_temperature_dataset); ?>,
+                                                    backgroundColor: '#8A0808',
+                                                    borderColor: '#8A0808',
+                                                    borderWidth: 2,
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
+                                                    pointStyle:'rect',
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("temperature") . ' NTC 1' ?>',
+                                                    hidden: true,
+                                                    yAxisID: 'temperature',
+                                                    data: <?php echo json_encode($thermometer1_dataset); ?>,
+                                                    backgroundColor: '#F7AC08',
+                                                    borderColor: '#F7AC08',
+                                                    borderWidth: 2,
+                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
+                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
+                                                    pointHitRadius: 5,';} ?>
+                                                    pointStyle:'rect',
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("humidity") . ' int.' ?>',
+                                                    yAxisID: 'humidity',
+                                                    data: <?php echo json_encode($humidity_dataset); ?>,
+                                                    backgroundColor: '#59A9C4',
+                                                    borderColor: '#59A9C4',
+                                                    borderWidth: 2,
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
+                                                    pointStyle:'rect',
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },
+                                                {
+                                                    label: '<?php echo _("humidity") . ' ext.' ?>',
+                                                    yAxisID: 'humidity',
+                                                    data: <?php echo json_encode($extern_humidity_dataset); ?>,
+                                                    backgroundColor: '#08298A',
+                                                    borderColor: '#08298A',
+                                                    borderWidth: 2,
+                                                    <?php
+                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else
+                                                        {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
+                                                    pointStyle:'rect',
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
                                             }]
                                         },
                                         options: {
@@ -254,13 +276,13 @@
                                                         if (tooltipItem.datasetIndex === 0) {
                                                             return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
                                                         } else if (tooltipItem.datasetIndex === 1) {
-                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' %';
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
                                                         } else if (tooltipItem.datasetIndex === 2) {
                                                             return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
                                                         } else if (tooltipItem.datasetIndex === 3) {
-                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °%';
                                                         } else if (tooltipItem.datasetIndex === 4) {
-                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °%';
                                                         }                                                        
                                                     }
                                                 }
@@ -303,25 +325,19 @@
                                                             }
                                                             $value_dataset1 = max($dataset1);
 
-                                                            $dataset2 = ($non_empties = array_filter($thermometer1_dataset));
+                                                            $dataset2 = ($non_empties = array_filter($extern_temperature_dataset));
                                                             if (empty($dataset2)) {
                                                                     $dataset2[] = Null;
                                                             }
                                                             $value_dataset2 = max($dataset2);
 
-                                                            $dataset3 = ($non_empties = array_filter($thermometer2_dataset));
+                                                            $dataset3 = ($non_empties = array_filter($thermometer1_dataset));
                                                             if (empty($dataset3)) {
                                                                     $dataset3[] = Null;
                                                             }
                                                             $value_dataset3 = max($dataset3);
 
-                                                            $dataset4 = ($non_empties = array_filter($thermometer3_dataset));
-                                                            if (empty($dataset4)) {
-                                                                    $dataset4[] = Null;
-                                                            }
-                                                            $value_dataset4 = max($dataset4);
-
-                                                             $max_value_temperature = intval (max ($value_dataset1, $value_dataset2, $value_dataset3, $value_dataset4)/5)*5 + 10;
+                                                             $max_value_temperature = intval (max ($value_dataset1, $value_dataset2, $value_dataset3)/5)*5 + 10;
 
                                                              print $max_value_temperature;
                                                         ?>,
@@ -335,29 +351,23 @@
                                                             }
                                                             $value_dataset1 = min($dataset1);
 
-                                                            $dataset2 = ($non_empties = array_filter($thermometer1_dataset));
+                                                            $dataset2 = ($non_empties = array_filter($extern_temperature_dataset));
                                                             if (empty($dataset2)) {
                                                                     $dataset2[] = 100;
                                                             }
                                                             $value_dataset2 = min($dataset2);
 
-                                                            $dataset3 = ($non_empties = array_filter($thermometer2_dataset));
+                                                            $dataset3 = ($non_empties = array_filter($thermometer1_dataset));
                                                             if (empty($dataset3)) {
                                                                     $dataset3[] = 100;
                                                             }
                                                             $value_dataset3 = min($dataset3);
 
-                                                            $dataset4 = ($non_empties = array_filter($thermometer3_dataset));
-                                                            if (empty($dataset4)) {
-                                                                    $dataset4[] = 100;
-                                                            }
-                                                            $value_dataset4 = min($dataset4);
-
-                                                             if ($value_dataset1 == 100 and $value_dataset2 == 100 and $value_dataset3 == 100 and $value_dataset4 == 100) {
+                                                             if ($value_dataset1 == 100 and $value_dataset2 == 100 and $value_dataset3 == 100) {
                                                                $min_value_temperature = -4;
                                                             } 
                                                             else {
-                                                               $min_value_temperature = intval (min ($value_dataset1, $value_dataset2, $value_dataset3, $value_dataset4)/1)*1 - 1;
+                                                               $min_value_temperature = intval (min ($value_dataset1, $value_dataset2, $value_dataset3)/1)*1 - 1;
                                                             }
                                                              print $min_value_temperature;
                                                         ?>
@@ -381,15 +391,34 @@
                                                         },
                                                         fontColor: '#000000',
                                                         // fontSize: 20,
-                                                        max: <?php 
-                                                            $max_value_humidiy = intval(max($humidity_dataset)/10) * 10 + 10;
-                                                            print $max_value_humidiy;
-                                                            ?>,
+//                                                        max: <?php 
+//                                                            $max_value_humidiy = intval(max($humidity_dataset)/10) * 10 + 10;
+//                                                            print $max_value_humidiy;
+//                                                            ?>,
+                                                        // max: 100,
+                                                    //-----austoscale max start max
+                                                        max: <?php
+                                                            $dataset1 = ($non_empties = array_filter($humidity_dataset));
+                                                            if (empty($dataset1)) {
+                                                                    $dataset1[] = Null;
+                                                            }
+                                                            $value_dataset1 = max($dataset1);
+
+                                                            $dataset2 = ($non_empties = array_filter($extern_humidity_dataset));
+                                                            if (empty($dataset2)) {
+                                                                    $dataset2[] = Null;
+                                                            }
+                                                            $value_dataset2 = max($dataset2);
+
+                                                             $max_value_humidiy = intval (max ($value_dataset1, $value_dataset2)/10)*10 + 10;
+
+                                                             print $max_value_humidiy;
+                                                        ?>,
+                                                    //-----austoscale max end
                                                         // min: <?php 
                                                         // $min_value_humidiy = intval(min($humidity_dataset) - (max($humidity_dataset) / 100 * 1))-1;                                                      
                                                         // print $min_value_humidiy;
                                                         // ?>
-                                                        // max: 100,
                                                         min: 0
                                                     }
                                                 }]
@@ -494,7 +523,7 @@
                                                                     $scale1_dataset_max[] = Null;
                                                             }
                                                             $max_scale1 = max($scale1_dataset_max);
-                                                            $max_value_scale1 = intval($max_scale1 + abs($max_scale1) / 100 * 5) + 1;
+                                                            $max_value_scale1 = intval($max_scale1 + abs($max_scale1) / 100 * 5) + 10;
                                                             print $max_value_scale1;
                                                             ?>,
                                                             min: <?php 
@@ -503,7 +532,7 @@
                                                                     $scale1_dataset_min[] = Null;
                                                             }
                                                             $min_scale1 = min($scale1_dataset_min);
-                                                            $min_value_scale1 = intval($min_scale1 - abs($min_scale1) / 100 * 5) - 1;
+                                                            $min_value_scale1 = intval($min_scale1 - abs($min_scale1) / 100 * 5) - 2;
                                                             print $min_value_scale1;
                                                             ?>,
                                                             //stepSize: 1
@@ -536,7 +565,7 @@
                                                                     $scale2_dataset_max[] = Null;
                                                             }
                                                             $max_scale2 = max($scale2_dataset_max);
-                                                            $max_value_scale2 = intval($max_scale2 + abs($max_scale2) / 100 * 5) + 1;
+                                                            $max_value_scale2 = intval($max_scale2 + abs($max_scale2) / 100 * 5) + 10;
                                                             print $max_value_scale2;
                                                             ?>,
                                                             min: <?php 
@@ -545,7 +574,7 @@
                                                                     $scale2_dataset_min[] = Null;
                                                             }
                                                             $min_scale2 = min($scale2_dataset_min);
-                                                            $min_value_scale2 = intval($min_scale2 - abs($min_scale2) / 100 * 5) - 1;
+                                                            $min_value_scale2 = intval($min_scale2 - abs($min_scale2) / 100 * 5) - 2;
                                                             print $min_value_scale2;
                                                             ?>,
                                                         //stepSize: 1
