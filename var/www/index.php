@@ -298,6 +298,11 @@
                                                         },
                                                         tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                     },
+                                                    ticks: {
+                                                        autoSkip: false,
+                                                        maxRotation: 0,
+                                                        minRotation: 0
+                                                    },
                                                 }, ],
                                                 yAxes: [{
                                                     scaleLabel: {
@@ -375,51 +380,46 @@
                                                     }
                                                     
                                                 }, {
-                                                    scaleLabel: {
-                                                        display: true,
-                                                        labelString: '<?php echo _("humidity") ?> <?php echo _(" - φ") ?>',
-                                                        // fontSize: 20,
-                                                        fontColor: '#000000'
-                                                    },
-                                                    id: 'humidity',
-                                                    type: 'linear',
-                                                    display: true,
-                                                    position: 'right',
-                                                    ticks: {
-                                                        callback: function(value, index, values) {
-                                                            return '  ' + value + ' %' + '  ';
+                                                        scaleLabel: {
+                                                            display: true,
+                                                            labelString: '<?php echo _("humidity") ?> <?php echo _(" - φ") ?>',
+                                                        //    fontSize: 20,
+                                                            fontColor: '#000000'
                                                         },
-                                                        fontColor: '#000000',
-                                                        // fontSize: 20,
-//                                                        max: <?php 
-//                                                            $max_value_humidiy = intval(max($humidity_dataset)/10) * 10 + 10;
-//                                                            print $max_value_humidiy;
-//                                                            ?>,
-                                                        // max: 100,
-                                                    //-----austoscale max start max
-                                                        max: <?php
-                                                            $dataset1 = ($non_empties = array_filter($humidity_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = Null;
-                                                            }
-                                                            $value_dataset1 = max($dataset1);
+                                                        id: 'humidity',
+                                                        type: 'linear',
+                                                        display: true,
+                                                        position: 'right',
+                                                        labelString: '<?php echo _("humidity") ?>',
+                                                        ticks: {
+                                                            callback: function(value, index, values) {
+                                                                return '  ' + value + ' %' + '  ';
+                                                            },
+                                                            fontColor: '#000000',
+                                                           //    fontSize: 20,
+                                                            max: <?php
+                                                                $dataset1 = ($non_empties = array_filter($humidity_dataset));
+                                                                if (empty($dataset1)) {
+                                                                        $dataset1[] = Null;
+                                                                }
+                                                                $value_dataset1 = max($dataset1);
 
-                                                            $dataset2 = ($non_empties = array_filter($extern_humidity_dataset));
-                                                            if (empty($dataset2)) {
-                                                                    $dataset2[] = Null;
-                                                            }
-                                                            $value_dataset2 = max($dataset2);
+                                                                $dataset2 = ($non_empties = array_filter($extern_humidity_dataset));
+                                                                if (empty($dataset2)) {
+                                                                        $dataset2[] = Null;
+                                                                }
+                                                                $value_dataset2 = max($dataset2);
 
-                                                             $max_value_humidiy = intval (max ($value_dataset1, $value_dataset2)/10)*10 + 10;
+                                                                 $max_value_humidiy = intval (max ($value_dataset1, $value_dataset2)/10)*10 + 10;
 
-                                                             print $max_value_humidiy;
-                                                        ?>,
+                                                                 print $max_value_humidiy;
+                                                            ?>,
                                                     //-----austoscale max end
-                                                        // min: <?php 
-                                                        // $min_value_humidiy = intval(min($humidity_dataset) - (max($humidity_dataset) / 100 * 1))-1;                                                      
-                                                        // print $min_value_humidiy;
-                                                        // ?>
-                                                        min: 0
+                                                            //min: <?php 
+                                                            //$min_value_humidiy = intval(min($humidity_dataset) - (min($humidity_dataset) / 100 * 1))-1;
+                                                            //?>
+                                                            //max: 100,
+                                                            min: 0
                                                     }
                                                 }]
                                             }
@@ -494,6 +494,11 @@
                                                             hour: 'MMM D, H[h]'
                                                         },
                                                         tooltipFormat: 'DD. MMM. YYYY HH:mm'
+                                                    },
+                                                    ticks: {
+                                                        autoSkip: false,
+                                                        maxRotation: 0,
+                                                        minRotation: 0
                                                     },
                                                 }, ],
                                                 yAxes: [{
