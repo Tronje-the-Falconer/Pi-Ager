@@ -84,15 +84,16 @@ class cl_logic_send_email:
         """
         # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
   
         crypt = cl_fact_help_crypt.get_instance()
         decrypted_secret = crypt.decrypt(mail_password).decode()
 
-        cl_fact_logger.get_instance().debug('Server     =' + mail_server)
-        cl_fact_logger.get_instance().debug('Port       =' + str(mail_port))
-        cl_fact_logger.get_instance().debug('User       =' + mail_user)
-        cl_fact_logger.get_instance().debug('Password   =' + decrypted_secret)
+        cl_fact_logger.get_instance().debug('Server     = ' + mail_server)
+        cl_fact_logger.get_instance().debug('Port       = ' + str(mail_port))
+        cl_fact_logger.get_instance().debug('User       = ' + mail_user)
+        cl_fact_logger.get_instance().debug('Password   = ' + decrypted_secret)
+        # cl_fact_logger.get_instance().debug('Mail from  = ' + mail_from)
+        cl_fact_logger.get_instance().debug('Mail to    = ' + mail_to)
         
         try:
             if str(mail_port) == "465":
@@ -100,37 +101,29 @@ class cl_logic_send_email:
                 server = SMTP_SSL(mail_server,mail_port)
             else:
                 cl_fact_logger.get_instance().debug('Using plain SMTP mode')
-
                 server = SMTP(mail_server,mail_port)
-            
+
             server.ehlo()
-            if mail_starttls == 1:
+            if str(mail_port) == "587":
                 server.starttls()
                 server.ehlo()
-            
-            auth_string = ""
-            if auth_string == "":
-                server.docmd('AUTH', 'XOAUTH2 ' + base64.b64encode(auth_string))
-            
+
             server.login(mail_user,decrypted_secret)
-            
-    
+
             message = text(mail_message, 'plain', 'UTF-8')
-    
             message['Subject'] = mail_subject
-            message['From'] = mail_from
+            message['From'] = mail_user
             message['To'] = mail_to
-    
-    
-            server.sendmail(mail_from,mail_to, message.as_string())
+
+            server.sendmail(mail_user, mail_to, message.as_string())
             server.close()
-            
             cl_fact_logger.get_instance().debug('Alert Email has been sent!')
+
         except SMTPException as cx_error:
             sending_error = 'Error: unable to send email: {err}'.format(err=cx_error)
             # logger.error(sendefehler)
             cl_fact_logger.get_instance().error(sending_error)
-            
+
         except Exception as cx_error:
             #TODO err undefined!
             sending_error = 'Error: unable to send email: {err}'.format(err=cx_error)
@@ -138,11 +131,9 @@ class cl_logic_send_email:
             cl_fact_logger.get_instance().error(sending_error)
 
 class th_logic_send_email(cl_logic_send_email):   
-
     
     def __init__(self):
         pass
-
 
 class cl_fact_logic_send_email(ABC):
     __o_instance = None
