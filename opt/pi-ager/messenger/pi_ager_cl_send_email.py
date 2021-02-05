@@ -72,13 +72,11 @@ class cl_logic_send_email:
                 str(self.it_email_server[0]['port']),
                 str(self.it_email_server[0]['user']), 
                 str(self.it_email_server[0]['password']),
-                str(self.it_email_server[0]['starttls']),
-                str(self.it_email_server[0]['from_mail']),
                 str(self.it_email_recipient[i]['to_mail']),
                 alarm_subject,
                 alarm_message)
 
-    def send_email_smtp(self, mail_server, mail_port,mail_user,mail_password,mail_starttls,mail_from,mail_to,mail_subject,mail_message):
+    def send_email_smtp(self, mail_server, mail_port, mail_user, mail_password, mail_to, mail_subject, mail_message):
         """
         Send email
         """

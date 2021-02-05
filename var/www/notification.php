@@ -554,11 +554,23 @@
                                         <table style="width: 100%;">
                                             <?php
                                                 $mailserver_server = get_table_value_from_field($mailserver_table, Null, $mailserver_server_field,);
+                                                if ($mailserver_server == NULL) {
+                                                    $mailserver_server = '';
+                                                }
                                                 $mailserver_user = get_table_value_from_field($mailserver_table, Null, $mailserver_user_field);
+                                                if ($mailserver_user == NULL) {
+                                                    $mailserver_user = '';
+                                                }
                                                 $mailserver_password = get_table_value_from_field($mailserver_table, Null, $mailserver_password_field);
-                                                $mailserver_starttls = get_table_value_from_field($mailserver_table, Null, $mailserver_starttls_field,);
-                                                $mailserver_from_mail = get_table_value_from_field($mailserver_table, Null, $mailserver_from_mail_field);
+                                                if ($mailserver_password == NULL) {
+                                                    $mailserver_password = '';
+                                                }
+                                                /* $mailserver_starttls = get_table_value_from_field($mailserver_table, Null, $mailserver_starttls_field,);
+                                                $mailserver_from_mail = get_table_value_from_field($mailserver_table, Null, $mailserver_from_mail_field); */
                                                 $mailserver_port = get_table_value_from_field($mailserver_table, Null, $mailserver_port_field);
+                                                if ($mailserver_port == NULL) {
+                                                    $mailserver_port = 465;
+                                                }
                                                 
                                                 if ($mailserver_password == ''){
                                                     $old_mailserver_password = '';
@@ -579,17 +591,35 @@
                                                 <td><?php echo _('password'); ?>:</td>
                                                 <td><input name="mailserver_password" type="password" style="width: 90%; text-align: right;" required value=<?php echo $old_mailserver_password; ?>></td>
                                             </tr>
-                                            <tr>
+                                            <!-- <tr>
                                                 <td><?php echo _('starttls'); ?>:</td>
                                                 <td><input name="mailserver_starttls" type="number" style="width: 90%; text-align: right;" required value=<?php echo $mailserver_starttls; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('from mail'); ?>:</td>
                                                 <td><input name="mailserver_from_mail" type="text" style="width: 90%; text-align: right;" required value=<?php echo $mailserver_from_mail; ?>></td>
-                                            </tr>
+                                            </tr> -->
                                             <tr>
                                                 <td><?php echo _('port'); ?>:</td>
-                                                <td><input name="mailserver_port" type="number" style="width: 90%; text-align: right;" required value=<?php echo $mailserver_port; ?>></td>
+                                                <!-- <td><input name="mailserver_port" type="number" style="width: 90%; text-align: right;" required value=<?php echo $mailserver_port; ?>></td> -->
+                                                <td>
+                                                <?php
+                                                    echo '<select name="mailserver_port" style="width: 90%; text-align-last: right;">';
+                                                    if ($mailserver_port == 465) {
+                                                        echo '<option selected style="direction: rtl;">' . '465' . '</option>';
+                                                    }
+                                                    else {
+                                                        echo '<option style="direction: rtl;">' . '465' . '</option>';
+                                                    }
+                                                    if ($mailserver_port == 587) {
+                                                        echo '<option selected style="direction: rtl;">' . '587' . '</option>';
+                                                    }
+                                                    else {
+                                                        echo '<option style="direction: rtl;">' . '587' . '</option>';
+                                                    }                                                    
+                                                    echo '</select>';
+                                                ?>
+                                                </td>
                                             </tr>
                                         </table>
                                         <button class="art-button" name="save_mailserver_values" value="save_mailserver_values" onclick="return confirm('<?php echo _('ATTENTION: save mailserver values?');?>');"><?php echo _('save'); ?></button>
