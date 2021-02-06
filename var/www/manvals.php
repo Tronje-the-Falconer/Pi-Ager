@@ -39,12 +39,8 @@
                                             }
                                         </script>
                                         <p id="help_operation_mode" class="help_p">
-                                            <?php echo '<b>'._('cooling').':</b>  '._('helptext_operation_mode_cooling').'<br><br><b>'.
-                                            _('cooling with humidification').':</b>  '._('helptext_operation_mode_cooling_and_humidification').'<br><br><b>'.
-                                            _('heating with humidification').':</b> '._('helptext_operation_mode_heating_and_humidification').'<br><br><b>'.
-                                            _('automatik with humidification').':</b>'._('helptext_operation_mode_automatik_with_humidification').'<br><br><b>'.
-                                            _('automatik with dehumidification and humidification').':</b> '._('helptext_operation_mode_automatik_dehumidification_and_humidification').
-                                            '<br><br>'; ?>
+                                            <?php echo _('helptext_operation_mode');
+                                                  echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_operation_mode_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
 
