@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-EN\n"
-"POT-Creation-Date: 2021-02-08 10:35+0100\n"
-"PO-Revision-Date: 2021-02-08 10:37+0100\n"
+"POT-Creation-Date: 2021-02-08 13:28+0100\n"
+"PO-Revision-Date: 2021-02-08 13:39+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -85,11 +85,11 @@ msgstr ""
 msgid "external"
 msgstr ""
 
-#: admin.php:62 admin.php:101
+#: admin.php:62
 msgid "sensortype"
 msgstr ""
 
-#: admin.php:62 admin.php:124 admin.php:195 admin.php:320 config.php:16
+#: admin.php:62 admin.php:124 admin.php:196 admin.php:322 config.php:16
 #: config.php:70 config.php:117 config.php:145 config.php:184 config.php:223
 #: manvals.php:22 manvals.php:51 manvals.php:74 manvals.php:97 manvals.php:123
 msgid "help"
@@ -100,11 +100,10 @@ msgid "only configurable if internal sensor is set to sht3x or sht85"
 msgstr ""
 
 #: admin.php:101
-msgid ""
-"connect your sensor according to instructions and select the right type."
+msgid "helptext_sensortype_admin"
 msgstr ""
 
-#: admin.php:103 admin.php:189 admin.php:314 admin.php:340 config.php:64
+#: admin.php:103 admin.php:190 admin.php:316 admin.php:342 config.php:64
 #: config.php:111 config.php:139 config.php:178 config.php:217 config.php:246
 #: manvals.php:44 manvals.php:67 manvals.php:90 manvals.php:117 manvals.php:142
 msgid "close"
@@ -144,7 +143,7 @@ msgstr ""
 msgid "reference unit"
 msgstr ""
 
-#: admin.php:132 admin.php:159 admin.php:468
+#: admin.php:132 admin.php:159 admin.php:470
 msgid "measuring interval"
 msgstr ""
 
@@ -161,163 +160,157 @@ msgid "samples"
 msgstr ""
 
 #: admin.php:188
-msgid ""
-"10KG China Zelle: 205<br>20kg China Zelle: 102<br>50kg Edelstahl Zelle: "
-"74<br>20kg Edelstahl Zelle: 186<br>"
+msgid "helptext_scale_admin"
 msgstr ""
 
-#: admin.php:313
-msgid ""
-"Select your meat thermometer types for upto 4 input channels.<br>Select "
-"------ for channels without sensors<br>"
+#: admin.php:314
+msgid "helptext_thermometer_admin"
 msgstr ""
 
-#: admin.php:320 admin.php:338
+#: admin.php:322
 msgid "language"
 msgstr ""
 
-#: admin.php:338
-msgid ""
-"set the language. if you are missing your prefered language, please contact "
-"us"
+#: admin.php:340
+msgid "helptext_language_admin"
 msgstr ""
 
-#: admin.php:344 admin.php:453 admin.php:477 admin.php:538 config.php:254
+#: admin.php:346 admin.php:455 admin.php:479 admin.php:540 config.php:254
 #: edit_agingtable.php:115 manvals.php:149 notification.php:133
 #: notification.php:303 notification.php:429 notification.php:521
 #: notification.php:625 notification.php:673 notification.php:718
 msgid "save"
 msgstr ""
 
-#: admin.php:344
+#: admin.php:346
 msgid "administration 1"
 msgstr ""
 
-#: admin.php:350
+#: admin.php:352
 msgid "reboot & shutdown"
 msgstr ""
 
-#: admin.php:356
+#: admin.php:358
 msgid "ATTENTION: reboot system?"
 msgstr ""
 
-#: admin.php:356 reboot.php:8
+#: admin.php:358 reboot.php:8
 msgid "reboot"
 msgstr ""
 
-#: admin.php:357
+#: admin.php:359
 msgid "ATTENTION: shutdown system?"
 msgstr ""
 
-#: admin.php:357 shutdown.php:8
+#: admin.php:359 shutdown.php:8
 msgid "shutdown"
 msgstr ""
 
-#: admin.php:363
+#: admin.php:365
 msgid "logging"
 msgstr ""
 
-#: admin.php:453
+#: admin.php:455
 msgid "save loglevel?"
 msgstr ""
 
-#: admin.php:458 modules/write_debug_values.php:11
+#: admin.php:460 modules/write_debug_values.php:11
 msgid "debug values"
 msgstr ""
 
-#: admin.php:472
+#: admin.php:474
 msgid "agingtable days in seconds"
 msgstr ""
 
-#: admin.php:477
+#: admin.php:479
 msgid "ATTENTION: save debug values?"
 msgstr ""
 
-#: admin.php:481
+#: admin.php:483
 msgid "backup"
 msgstr ""
 
-#: admin.php:503
+#: admin.php:505
 msgid "nfs volume"
 msgstr ""
 
-#: admin.php:507
+#: admin.php:509
 msgid "subdirectory"
 msgstr ""
 
-#: admin.php:511
+#: admin.php:513
 msgid "nfs mount"
 msgstr ""
 
-#: admin.php:515
+#: admin.php:517
 msgid "nfs path"
 msgstr ""
 
-#: admin.php:519
+#: admin.php:521
 msgid "number of backups"
 msgstr ""
 
-#: admin.php:523
+#: admin.php:525
 msgid "backup name"
 msgstr ""
 
-#: admin.php:527
+#: admin.php:529
 msgid "nfs opt"
 msgstr ""
 
-#: admin.php:531
+#: admin.php:533
 msgid "backup_active"
 msgstr ""
 
-#: admin.php:538
+#: admin.php:540
 msgid "ATTENTION: save backup values?"
 msgstr ""
 
-#: admin.php:547
+#: admin.php:549
 msgid "ATTENTION: backup manually?"
 msgstr ""
 
-#: admin.php:547
+#: admin.php:549
 msgid "backup manually"
 msgstr ""
 
-#: admin.php:550
+#: admin.php:552
 msgid "Agingtable is active. No backup possible!"
 msgstr ""
 
-#: admin.php:558
+#: admin.php:560
 msgid "database"
 msgstr ""
 
-#: admin.php:564
+#: admin.php:566
 msgid "ATTENTION: empty statistic tables?"
 msgstr ""
 
-#: admin.php:564
+#: admin.php:566
 msgid "empty statistic tables"
 msgstr ""
 
-#: admin.php:566
+#: admin.php:568
 msgid "database administration"
 msgstr ""
 
-#: admin.php:573
+#: admin.php:575
 msgid "python"
 msgstr ""
 
-#: admin.php:579 admin.php:585
+#: admin.php:581 admin.php:587
 msgid "ATTENTION: kill"
 msgstr ""
 
-#: admin.php:579 admin.php:582 admin.php:585
+#: admin.php:581 admin.php:584 admin.php:587
 msgid "stop"
 msgstr ""
 
-#: admin.php:580 admin.php:583 admin.php:586
+#: admin.php:582 admin.php:585 admin.php:588
 msgid "start"
 msgstr ""
 
-#: admin.php:582
+#: admin.php:584
 msgid "ATTENTION:"
 msgstr ""
 
@@ -500,6 +493,17 @@ msgstr ""
 #: config.php:62
 msgid "helptext_temperature_config"
 msgstr ""
+"<b>switch-on value: </b>  is the value at which the control becomes active "
+"(value limit: 0-10 ° C). This value must always be greater than the switch-"
+"off value.\n"
+"<br><br>\n"
+"<b>switch-off value: </b> is the value at which the control becomes inactive "
+"(value: 0-10 ° C). The values may not be the same in order to avoid a wild "
+"switching on and off.\n"
+"<br><br>\n"
+"<b>recommendation:</b> check the stored values in the logfile!\n"
+"<br><br>\n"
+"<b>attention: </b> use only positive integers!"
 
 #: config.php:70 diagrams.php:171 diagrams.php:191 diagrams.php:214
 #: diagrams.php:322 diagrams.php:330 diagrams.php:417 diagrams.php:437
@@ -560,6 +564,43 @@ msgstr ""
 #: config.php:109
 msgid "helptext_humidify_config"
 msgstr ""
+"<br><br>\n"
+"<b>switching hysteresis:</b>\n"
+"<br><br>\n"
+"<b>switch-on value: </b> is the value at which the control becomes active "
+"(value: 0-30%)\n"
+"<b>switch-off value: </b>  is the value at which the control becomes "
+"inactive (value: 0-30%)\n"
+"<br>the values may not be the same in order to avoid a wild switching on and "
+"off.\n"
+"<br><br>\n"
+"<b>delay: </b>here the delay time is set until the humidifier turns on if "
+"the humidity is too low. this can be used to blast out the rapidly falling "
+"air humidity during \"cooling\", \"timer exhaust\" or \"dehumidification\". "
+"The minimum value is 0 minutes, the maximum 60 minutes.\n"
+"<br><br>\n"
+"<b>example </b></b><i> target humidity: 75% ; switch-on value: 5% ; switch-"
+"off value: 1%</i>\n"
+"<br>switch-on humidity = target humidity - switch-on value --> 75% - 5% = "
+"70%\n"
+"<br>switch-off humidity = target humidity - switch-off value--> 75% - 1% = "
+"74%\n"
+"<br>delay = 5 minutes\n"
+"<br>so if 70% relative humidity are reached, the control waits for 5 "
+"minutes. only then does the pi-ager humidify the air to 74% and then switch "
+"off humidification again.\n"
+"<br><br>\n"
+"<b>example automatic mode with with humidification and dehumidification: </"
+"b> in this automatic mode, the humidity is completely automatically "
+"controlled. the current humidity is determined first. it is then decided "
+"which method (humidification and dehumidification) is suitable for achieving "
+"the desired set-point humidity. this also means that the switching values of "
+"the hysteresis must not be too close together. otherwise, humidification and "
+"dehumidification could always be switched on and off alternately.\n"
+"<br><br>\n"
+"<b>recommendation:</b> check the stored values in the logfile!\n"
+"<br><br>\n"
+"<b>attention: </b> use only positive integers!"
 
 #: config.php:117 modules/read_settings_db.php:40
 msgid "dehumidify"
@@ -583,6 +624,16 @@ msgstr ""
 #: config.php:137
 msgid "helptext_dehumidifier_config"
 msgstr ""
+"<br><br>\n"
+"<b>only exhaust: </b> Text.\n"
+"<br><br>\n"
+"<b>exhaust & dehumidifier: </b> Text.\n"
+"<br><br>\n"
+"<b>only dehumidifier:</b> Text.\n"
+"<br><br>\n"
+"<b>recommendation:</b> Text.\n"
+"<br><br>\n"
+"<b>attention: </b> Text."
 
 #: config.php:145
 msgid "uv"
@@ -622,6 +673,20 @@ msgstr ""
 #: config.php:176
 msgid "helptext_uv_config"
 msgstr ""
+"<br><br>\n"
+"<b>period: </b> This is used to set the pause time, which waits until the UV "
+"light is switched on again. If the value is 0 (= no pause), the UV light is "
+"permanently switched on. The maximum value is 1440min.\n"
+"<br><br>\n"
+"<b>duration: </b> This sets UV light time during which the light is switched "
+"on. At 0, the UV light timer function is switched off. The maximum value is "
+"1440min.\n"
+"<br><br>\n"
+"<b>timestamp: </b> Text.\n"
+"<br><br>\n"
+"<b>note: </b>  Text\n"
+"<br><br>\n"
+"<b>attention: </b> period=0 und duration=0 is not useful and not allowed."
 
 #: config.php:184 diagrams.php:1333 diagrams.php:1354
 #: diagrams_neu_test.php:1272 diagrams_neu_test.php:1293 diagrams_old.php:697
@@ -632,6 +697,20 @@ msgstr ""
 #: config.php:215
 msgid "helptext_light_config"
 msgstr ""
+"<br><br>\n"
+"<b>period: </b> This is used to set the pause time, which waits until the "
+"light is switched on again. If the value is 0 (= no pause), the light is "
+"permanently switched on. The maximum value is 1440min.\n"
+"<br><br>\n"
+"<b>duration: </b> This sets UV light time during which the light is switched "
+"on. At 0, the UV light timer function is switched off. The maximum value is "
+"1440min.\n"
+"<br><br>\n"
+"<b>timestamp: </b> Text.\n"
+"<br><br>\n"
+"<b>note: </b>  Text\n"
+"<br><br>\n"
+"<b>attention: </b> period=0 und duration=0 is not useful and not allowed."
 
 #: config.php:223 index.php:610 index.php:810 index_old.php:562
 #: index_old2.php:573 modules/write_table_db.php:10
@@ -653,6 +732,11 @@ msgstr ""
 #: config.php:244
 msgid "helptext_agingtable_config"
 msgstr ""
+"<br><br>\n"
+"<b>failure humidity delta: </b> Text.\n"
+"<br><br>\n"
+"<b>failure temperature delta: </b> Text.\n"
+"<br><br>"
 
 #: config.php:254 modules/write_config_db_logfile_txt.php:204 settings.php:458
 msgid "general configuration"
@@ -1321,6 +1405,27 @@ msgid "for the duration of"
 msgstr ""
 
 #: manvals.php:115
+msgid "helptext_circulation_air"
+msgstr ""
+"<br><br>\n"
+"<b>period: </b> This is used to set the pause time, which waits until the "
+"recirculation is switched on again. if the value is 0 (= no pause), the "
+"circulating air is permanently switched on. the maximum value is 1440min.\n"
+"<br><br>\n"
+"<b>duration: </b> This sets the circulation time during which the fan is "
+"running. at 0, the circulating air timer function is switched off. the "
+"maximum value is 1440min.\n"
+"<br><br>\n"
+"<b>note: </b> The circulating air fan runs independently of the timer "
+"settings - also during cooling, heating and humidification.\n"
+"<br><br>\n"
+"<b>attention: </b> period=0 und duration=0 is not useful and not allowed."
+
+#: manvals.php:123
+msgid "timer exhausting air"
+msgstr ""
+
+#: manvals.php:140
 msgid "helptext_exhausting_air"
 msgstr ""
 "<br><br>\n"
@@ -1335,27 +1440,6 @@ msgstr ""
 "<b>note: </b>  The exhaust air fan runs independently of the timer settings "
 "- also during dehumidification in the \"automatic mode with humidification "
 "and dehumidification.\n"
-"<br><br>\n"
-"<b>attention: </b> period=0 und duration=0 is not useful and not allowed."
-
-#: manvals.php:123
-msgid "timer exhausting air"
-msgstr ""
-
-#: manvals.php:140
-msgid "helptext_circulation_air"
-msgstr ""
-"<br><br>\n"
-"<b>period: </b> This is used to set the pause time, which waits until the "
-"recirculation is switched on again. if the value is 0 (= no pause), the "
-"circulating air is permanently switched on. the maximum value is 1440min.\n"
-"<br><br>\n"
-"<b>duration: </b> This sets the circulation time during which the fan is "
-"running. at 0, the circulating air timer function is switched off. the "
-"maximum value is 1440min.\n"
-"<br><br>\n"
-"<b>note: </b> The circulating air fan runs independently of the timer "
-"settings - also during cooling, heating and humidification.\n"
 "<br><br>\n"
 "<b>attention: </b> period=0 und duration=0 is not useful and not allowed."
 
