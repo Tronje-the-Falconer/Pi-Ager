@@ -105,14 +105,14 @@
                                         </table>
                                         <script>
                                             function help_exhausting_air_blockFunction() {
-                                                document.getElementById('help_exhausting_air').style.display = 'block';
+                                                document.getElementById('help_circulation_air').style.display = 'block';
                                             }
                                             function help_exhausting_air_noneFunction() {
-                                                document.getElementById('help_exhausting_air').style.display = 'none';
+                                                document.getElementById('help_circulation_air').style.display = 'none';
                                             }
                                         </script>
-                                        <p id="help_exhausting_air" class="help_p">
-                                            <?php echo _('helptext_exhausting_air');
+                                        <p id="help_circulation_air" class="help_p">
+                                            <?php echo _('helptext_circulation_air');
                                                   echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_exhausting_air_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
@@ -130,14 +130,14 @@
                                         </table>
                                         <script>
                                             function help_circulation_air_blockFunction() {
-                                                document.getElementById('help_circulation_air').style.display = 'block';
+                                                document.getElementById('help_exhausting_air').style.display = 'block';
                                             }
                                             function help_circulation_air_noneFunction() {
-                                                document.getElementById('help_circulation_air').style.display = 'none';
+                                                document.getElementById('help_exhausting_air').style.display = 'none';
                                             }
                                         </script>
-                                        <p id="help_circulation_air" class="help_p">
-                                            <?php  echo _('helptext_circulation_air');
+                                        <p id="help_exhausting_air" class="help_p">
+                                            <?php  echo _('helptext_exhausting_air');
                                                   echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_circulation_air_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>

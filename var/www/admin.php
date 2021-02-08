@@ -321,7 +321,7 @@
                                                 </td>
                                                 <td style=" text-align: left; padding-left: 20px;">
                                                     <input type="radio" name="language_admin" value="1" <?php echo $checked_language_1; ?>/><label> de_DE</label><br>
-                                                    <input type="radio" name="language_admin" value="2" <?php echo $checked_language_2; ?>/><label> en_EN</label><br>
+                                                    <input type="radio" name="language_admin" value="2" <?php echo $checked_language_2; ?>/><label> en_GB</label><br>
                                                     <br>
                                                 </td>
                                             </tr>

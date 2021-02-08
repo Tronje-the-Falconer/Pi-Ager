@@ -55,7 +55,7 @@
         $language = 'de_DE.utf8';
     }
     elseif ($language == 2) {
-        $language = 'en_EN.utf8';
+        $language = 'en_GB.utf8';
     }
     #### END Language from DB
     
