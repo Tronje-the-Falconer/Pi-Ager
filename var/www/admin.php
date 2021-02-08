@@ -98,8 +98,8 @@
                                             }
                                         </script>
                                         <p id="help_sensortype" class="help_p">
-                                            <?php  echo '<b>'._('sensortype').':</b> '._('connect your sensor according to instructions and select the right type.');
-                                             echo '<br><br>'; ?>
+                                            <?php echo _('helptext_sensortype_admin');
+                                                  echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_sensortype_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
 
@@ -185,7 +185,8 @@
                                         }
                                     </script>
                                     <p id="help_scales" class="help_p">
-                                        <?php echo _('10KG China Zelle: 205<br>20kg China Zelle: 102<br>50kg Edelstahl Zelle: 74<br>20kg Edelstahl Zelle: 186<br>'); ?>
+                                            <?php echo _('helptext_scale_admin');
+                                                  echo '<br><br>'; ?>
                                         <button class="art-button" type="button" onclick="help_scales_noneFunction()"><?php echo _('close'); ?></button>
                                     </p>
                                     <hr>
@@ -310,7 +311,8 @@
                                         }
                                     </script>
                                     <p id="help_thermometer" class="help_p">
-                                        <?php echo _('Select your meat thermometer types for upto 4 input channels.<br>Select ------ for channels without sensors<br>'); ?>
+                                         <?php echo _('helptext_thermometer_admin');
+                                               echo '<br><br>'; ?>
                                         <button class="art-button" type="button" onclick="help_thermometer_noneFunction()"><?php echo _('close'); ?></button>
                                     </p>
                                     <hr>                                    
@@ -335,8 +337,8 @@
                                             }
                                         </script>
                                         <p id="help_language" class="help_p">
-                                            <?php  echo '<b>'._('language').':</b> '._('set the language. if you are missing your prefered language, please contact us');
-                                             echo '<br><br>'; ?>
+                                         <?php echo _('helptext_language_admin');
+                                               echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_language_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
                                         <table style="width: 100%; align: center;">
