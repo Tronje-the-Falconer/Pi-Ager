@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
-"POT-Creation-Date: 2021-02-06 23:13+0100\n"
-"PO-Revision-Date: 2021-02-06 23:17+0100\n"
+"POT-Creation-Date: 2021-02-08 12:03+0100\n"
+"PO-Revision-Date: 2021-02-08 12:04+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -87,11 +87,11 @@ msgstr "Sensor intern"
 msgid "external"
 msgstr "Sensor extern"
 
-#: admin.php:62 admin.php:101
+#: admin.php:62
 msgid "sensortype"
 msgstr "Sensor Typ"
 
-#: admin.php:62 admin.php:124 admin.php:195 admin.php:320 config.php:16
+#: admin.php:62 admin.php:124 admin.php:196 admin.php:322 config.php:16
 #: config.php:70 config.php:117 config.php:145 config.php:184 config.php:223
 #: manvals.php:22 manvals.php:51 manvals.php:74 manvals.php:97 manvals.php:123
 msgid "help"
@@ -103,13 +103,10 @@ msgstr ""
 "Einstellbar nur wenn als interner Sensor der SHT3x oder SHT85 ausgewählt ist"
 
 #: admin.php:101
-msgid ""
-"connect your sensor according to instructions and select the right type."
+msgid "helptext_sensortype_admin"
 msgstr ""
-"Schließen sie den Sensor richtig an  und wählen sie den entsprechenden Typ "
-"aus."
 
-#: admin.php:103 admin.php:189 admin.php:314 admin.php:340 config.php:64
+#: admin.php:103 admin.php:190 admin.php:316 admin.php:342 config.php:64
 #: config.php:111 config.php:139 config.php:178 config.php:217 config.php:246
 #: manvals.php:44 manvals.php:67 manvals.php:90 manvals.php:117 manvals.php:142
 msgid "close"
@@ -151,7 +148,7 @@ msgstr "Waage"
 msgid "reference unit"
 msgstr "Referenz Unit"
 
-#: admin.php:132 admin.php:159 admin.php:468
+#: admin.php:132 admin.php:159 admin.php:470
 msgid "measuring interval"
 msgstr "Messintervall"
 
@@ -168,167 +165,157 @@ msgid "samples"
 msgstr "Samples"
 
 #: admin.php:188
-msgid ""
-"10KG China Zelle: 205<br>20kg China Zelle: 102<br>50kg Edelstahl Zelle: "
-"74<br>20kg Edelstahl Zelle: 186<br>"
+msgid "helptext_scale_admin"
 msgstr ""
 
-#: admin.php:313
-msgid ""
-"Select your meat thermometer types for upto 4 input channels.<br>Select "
-"------ for channels without sensors<br>"
+#: admin.php:314
+msgid "helptext_thermometer_admin"
 msgstr ""
-"Sensortypen für bis zu 4 Eingangskanäle wählen. <br> Für Kanäle ohne "
-"Sensoren ----- wählen<br>"
 
-#: admin.php:320 admin.php:338
+#: admin.php:322
 msgid "language"
 msgstr "Sprache"
 
-#: admin.php:338
-msgid ""
-"set the language. if you are missing your prefered language, please contact "
-"us"
+#: admin.php:340
+msgid "helptext_language_admin"
 msgstr ""
-"Sprache einstellen. Wenn die gewünschte Sprache fehlt, setzen sie sich bitte "
-"mit uns in Verbindung"
 
-#: admin.php:344 admin.php:453 admin.php:477 admin.php:538 config.php:254
+#: admin.php:346 admin.php:455 admin.php:479 admin.php:540 config.php:254
 #: edit_agingtable.php:115 manvals.php:149 notification.php:133
 #: notification.php:303 notification.php:429 notification.php:521
 #: notification.php:625 notification.php:673 notification.php:718
 msgid "save"
 msgstr "Speichern"
 
-#: admin.php:344
+#: admin.php:346
 msgid "administration 1"
 msgstr "Administration 1"
 
-#: admin.php:350
+#: admin.php:352
 msgid "reboot & shutdown"
 msgstr "Neustarten & Herunterfahren"
 
-#: admin.php:356
+#: admin.php:358
 msgid "ATTENTION: reboot system?"
 msgstr "ACHTUNG: System neu starten?"
 
-#: admin.php:356 reboot.php:8
+#: admin.php:358 reboot.php:8
 msgid "reboot"
 msgstr "Neu starten"
 
-#: admin.php:357
+#: admin.php:359
 msgid "ATTENTION: shutdown system?"
 msgstr "ACHTUNG: System herunterfahren?"
 
-#: admin.php:357 shutdown.php:8
+#: admin.php:359 shutdown.php:8
 msgid "shutdown"
 msgstr "Herunterfahren"
 
-#: admin.php:363
+#: admin.php:365
 msgid "logging"
 msgstr "Loggen"
 
-#: admin.php:453
+#: admin.php:455
 msgid "save loglevel?"
 msgstr "Loglevel speichern?"
 
-#: admin.php:458 modules/write_debug_values.php:11
+#: admin.php:460 modules/write_debug_values.php:11
 msgid "debug values"
 msgstr "Debug Werte"
 
-#: admin.php:472
+#: admin.php:474
 msgid "agingtable days in seconds"
 msgstr "Reifetabelle - Tage in Sekunden"
 
-#: admin.php:477
+#: admin.php:479
 msgid "ATTENTION: save debug values?"
 msgstr "ACHTUNG: Debug Werte speichern?"
 
-#: admin.php:481
+#: admin.php:483
 msgid "backup"
 msgstr "Backup"
 
-#: admin.php:503
+#: admin.php:505
 msgid "nfs volume"
 msgstr "nfs Verzeichnis"
 
-#: admin.php:507
+#: admin.php:509
 msgid "subdirectory"
 msgstr "Unterverzeichnis"
 
-#: admin.php:511
+#: admin.php:513
 msgid "nfs mount"
 msgstr ""
 
-#: admin.php:515
+#: admin.php:517
 msgid "nfs path"
 msgstr "nfs Pfad"
 
-#: admin.php:519
+#: admin.php:521
 msgid "number of backups"
 msgstr "Anzahl Backups"
 
-#: admin.php:523
+#: admin.php:525
 msgid "backup name"
 msgstr "Backup Name"
 
-#: admin.php:527
+#: admin.php:529
 msgid "nfs opt"
 msgstr "nfs Option"
 
-#: admin.php:531
+#: admin.php:533
 msgid "backup_active"
 msgstr "Backup Aktiv"
 
-#: admin.php:538
+#: admin.php:540
 msgid "ATTENTION: save backup values?"
 msgstr "ACHTUNG: Backup Einstellungen speichern?"
 
-#: admin.php:547
+#: admin.php:549
 msgid "ATTENTION: backup manually?"
 msgstr "ACHTUNG: Manuelles Backup starten?"
 
-#: admin.php:547
+#: admin.php:549
 msgid "backup manually"
 msgstr "Backup manuell"
 
-#: admin.php:550
+#: admin.php:552
 msgid "Agingtable is active. No backup possible!"
 msgstr "Reifetabelle ist aktiv. Backup nicht möglich!"
 
-#: admin.php:558
+#: admin.php:560
 msgid "database"
 msgstr "Datenbank"
 
-#: admin.php:564
+#: admin.php:566
 msgid "ATTENTION: empty statistic tables?"
 msgstr "ACHTUNG: Historische Daten löschen?"
 
-#: admin.php:564
+#: admin.php:566
 msgid "empty statistic tables"
 msgstr "History Daten aus DB löschen"
 
-#: admin.php:566
+#: admin.php:568
 msgid "database administration"
 msgstr "Datenbank Administration"
 
-#: admin.php:573
+#: admin.php:575
 msgid "python"
 msgstr "Python"
 
-#: admin.php:579 admin.php:585
+#: admin.php:581 admin.php:587
 msgid "ATTENTION: kill"
 msgstr "ACHTUNG: kill"
 
-#: admin.php:579 admin.php:582 admin.php:585
+#: admin.php:581 admin.php:584 admin.php:587
 msgid "stop"
 msgstr "Stop"
 
-#: admin.php:580 admin.php:583 admin.php:586
+#: admin.php:582 admin.php:585 admin.php:588
 msgid "start"
 msgstr "start"
 
-#: admin.php:582
+#: admin.php:584
 msgid "ATTENTION:"
 msgstr "ACHTUNG:"
 
@@ -1339,7 +1326,7 @@ msgid "for the duration of"
 msgstr "Dauer"
 
 #: manvals.php:115
-msgid "helptext_exhausting_air"
+msgid "helptext_circulation_air"
 msgstr ""
 "<b>Zyklus: </b> Hier wird die Zeit eingestellt, die gewartet wird, bis die "
 "Umluft wieder eingeschaltet wird. Ist der Wert 0 (= keine Pause), wird die "
@@ -1360,21 +1347,19 @@ msgid "timer exhausting air"
 msgstr "Timer Abluft"
 
 #: manvals.php:140
-msgid "helptext_circulation_air"
+msgid "helptext_exhausting_air"
 msgstr ""
-"<b>Zyklus: </b>\n"
-"Hier wird die Pausenzeit eingestellt, die gewartet wird, bis die Abluft "
-"wieder eingeschaltet wird. Ist der Wert 0 (= keine Pause), wird die Abluft "
-"permanent eingeschaltet. Der maximale Wert ist 1440Min.\n"
+"<b>Zyklus: </b>Hier wird die Pausenzeit eingestellt, die gewartet wird, bis "
+"die Abluft wieder eingeschaltet wird. Ist der Wert 0 (= keine Pause), wird "
+"die Abluft permanent eingeschaltet. Der maximale Wert ist 1440Min.\n"
 "<br><br>\n"
-"<b>Dauer: </b>\n"
-"Hier wird die Abluftzeit eingestellt, während der der Lüfter läuft. Bei 0 "
-"ist die Ablufttimerfunktion ausgeschaltet. Der maximale Wert beträgt "
-"1440Min.\n"
+"<b>Dauer: </b> Hier wird die Abluftzeit eingestellt, während der der Lüfter "
+"läuft. Bei 0 ist die Ablufttimerfunktion ausgeschaltet. Der maximale Wert "
+"beträgt 1440Min.\n"
 "<br><br>\n"
-"<b>Anmerkung: </b>\n"
-"Der Abluftventilator läuft unabhängig von den Timer-Einstellungen - auch "
-"während der Entfeuchtung im \"Automatikbetrieb mit Be- und Entfeuchtung\".\n"
+"<b>Anmerkung: </b>Der Abluftventilator läuft unabhängig von den Timer-"
+"Einstellungen - auch während der Entfeuchtung im \"Automatikbetrieb mit Be- "
+"und Entfeuchtung\".\n"
 "<br><br>\n"
 "<b>Achtung: </b>\n"
 "Zyklus=0 und Dauer=0 ist nicht sinnvoll und daher nicht erlaubt."
@@ -2276,6 +2261,26 @@ msgid "turn off light"
 msgstr "Licht ausschalten"
 
 #~ msgid ""
+#~ "connect your sensor according to instructions and select the right type."
+#~ msgstr ""
+#~ "Schließen sie den Sensor richtig an  und wählen sie den entsprechenden "
+#~ "Typ aus."
+
+#~ msgid ""
+#~ "Select your meat thermometer types for upto 4 input channels.<br>Select "
+#~ "------ for channels without sensors<br>"
+#~ msgstr ""
+#~ "Sensortypen für bis zu 4 Eingangskanäle wählen. <br> Für Kanäle ohne "
+#~ "Sensoren ----- wählen<br>"
+
+#~ msgid ""
+#~ "set the language. if you are missing your prefered language, please "
+#~ "contact us"
+#~ msgstr ""
+#~ "Sprache einstellen. Wenn die gewünschte Sprache fehlt, setzen sie sich "
+#~ "bitte mit uns in Verbindung"
+
+#~ msgid ""
 #~ "is the value at which the control becomes active (value limit: 0-10 ° C). "
 #~ "This value must always be greater than the switch-off value."
 #~ msgstr ""
@@ -2431,11 +2436,6 @@ msgstr "Licht ausschalten"
 #~ "<b>Empfehlungen:</b> Bitte gespeicherte Werte in der Logdatei prüfen!\n"
 #~ "<br><br>\n"
 #~ "<b>Achtung:</b> Nur positive ganze Zahlen nutzen!"
-
-#, fuzzy
-#~| msgid "target humidity"
-#~ msgid "helptext_setpoint_humidity"
-#~ msgstr "Sollwert Feuchte"
 
 #, fuzzy
 #~| msgid "target humidity"
