@@ -134,19 +134,19 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring duration'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_duration_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $measuring_duration_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="measuring_duration_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $measuring_duration_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
-                                            <td class="text_left_padding"><input name="saving_period_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $saving_period_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="saving_period_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $saving_period_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('samples'); ?>:</td>
-                                            <td class="text_left_padding"><input name="samples_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $samples_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="samples_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" max="200" required value=<?php echo $samples_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php # echo _('spikes'); ?><!--:--></td>
-                                            <td class="text_left_padding"><input type="hidden" name="spikes_scale1_admin" type="number" maxlength="4" size="2" required value=<?php echo $spikes_scale1; ?>></td>
+                                            <td class="text_left_padding"><input type="hidden" name="spikes_scale1_admin" type="number" maxlength="4" size="2" min="0" required value=<?php echo $spikes_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2"><h3><?php echo _('scale'); ?> 2</h3></td>
@@ -161,19 +161,19 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring duration'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_duration_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $measuring_duration_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="measuring_duration_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $measuring_duration_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
-                                            <td class="text_left_padding"><input name="saving_period_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $saving_period_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="saving_period_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $saving_period_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('samples'); ?>:</td>
-                                            <td class="text_left_padding"><input name="samples_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $samples_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="samples_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" max="1000" required value=<?php echo $samples_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php # echo _('spikes'); ?><!--:--></td>
-                                            <td class="text_left_padding"><input type="hidden" name="spikes_scale2_admin" type="number" maxlength="4" size="2" required value=<?php echo $spikes_scale2; ?>></td>
+                                            <td class="text_left_padding"><input type="hidden" name="spikes_scale2_admin" type="number" maxlength="4" size="2" min="0" required value=<?php echo $spikes_scale2; ?>></td>
                                         </tr>
                                     </table>
                                     <script>
