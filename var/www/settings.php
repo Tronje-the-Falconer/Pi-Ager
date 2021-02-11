@@ -353,10 +353,10 @@
                                             <td width="75px" colspan="2" align="left"><h3><?php echo _('actual phase and day') ?></h3></td>
                                         </tr>
                                         <tr>
-                                            <td width="75px"><?php echo _('phase') ?></td><td align="left"><?php echo intval($current_period) + 1 ?></td>
+                                            <td width="75px"><?php echo _('phase').' :' ?></td><td align="left"><?php echo intval($current_period) + 1 ?></td>
                                         </tr>
                                         <tr>
-                                            <td width="75px"><?php echo _('day')  ?></td><td align="left"><?php echo $current_period_day  ?></td>
+                                            <td width="75px"><?php echo _('day').' :' ?></td><td align="left"><?php echo $current_period_day  ?></td>
                                         </tr>
                                     </table>
                                     <table id="show_agingtable" class="show_agingtable">
