@@ -186,9 +186,9 @@
         $mailserver_server = $_POST['mailserver_server'];
         $mailserver_user = $_POST['mailserver_user'];
         $mailserver_password = $_POST['mailserver_password'];
-        $mailserver_starttls = $_POST['mailserver_starttls'];
-        $mailserver_from_mail = $_POST['mailserver_from_mail'];
-        $mailserver_port = $_POST['mailserver_port'];
+        // $mailserver_starttls = $_POST['mailserver_starttls'];
+        // $mailserver_from_mail = $_POST['mailserver_from_mail'];
+        $mailserver_port = intval($_POST['mailserver_port']);
         
         logger('DEBUG', 'password = ' . $mailserver_password);
         if ($mailserver_password != '123456789abcdefghi'){
@@ -196,7 +196,7 @@
             $mailserver_password_converted = str_replace("'", "'\''", $mailserver_password);
             shell_exec("sudo /var/sudowebscript.sh encrypt_password '" . $mailserver_password_converted . "' > /dev/null 2>&1 &");
         }
-        write_mailserver_values($mailserver_server, $mailserver_user, $mailserver_starttls, $mailserver_from_mail, $mailserver_port);
+        write_mailserver_values($mailserver_server, $mailserver_user, $mailserver_port);
         logger('DEBUG', 'mailserver values saved');
         print '<script language="javascript"> alert("'. (_("mailserver values")) . " : " . (_("values saved")) .'"); </script>';
     }

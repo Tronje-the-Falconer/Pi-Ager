@@ -98,8 +98,8 @@
                                             }
                                         </script>
                                         <p id="help_sensortype" class="help_p">
-                                            <?php  echo '<b>'._('sensortype').':</b> '._('connect your sensor according to instructions and select the right type.');
-                                             echo '<br><br>'; ?>
+                                            <?php echo _('helptext_sensortype_admin');
+                                                  echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_sensortype_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
 
@@ -134,19 +134,19 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring duration'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_duration_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $measuring_duration_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="measuring_duration_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $measuring_duration_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
-                                            <td class="text_left_padding"><input name="saving_period_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $saving_period_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="saving_period_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $saving_period_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('samples'); ?>:</td>
-                                            <td class="text_left_padding"><input name="samples_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $samples_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="samples_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" max="200" required value=<?php echo $samples_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php # echo _('spikes'); ?><!--:--></td>
-                                            <td class="text_left_padding"><input type="hidden" name="spikes_scale1_admin" type="number" maxlength="4" size="2" required value=<?php echo $spikes_scale1; ?>></td>
+                                            <td class="text_left_padding"><input type="hidden" name="spikes_scale1_admin" type="number" maxlength="4" size="2" min="0" required value=<?php echo $spikes_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2"><h3><?php echo _('scale'); ?> 2</h3></td>
@@ -161,19 +161,19 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('measuring duration'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_duration_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $measuring_duration_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="measuring_duration_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $measuring_duration_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
-                                            <td class="text_left_padding"><input name="saving_period_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $saving_period_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="saving_period_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $saving_period_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('samples'); ?>:</td>
-                                            <td class="text_left_padding"><input name="samples_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $samples_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="samples_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" max="1000" required value=<?php echo $samples_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php # echo _('spikes'); ?><!--:--></td>
-                                            <td class="text_left_padding"><input type="hidden" name="spikes_scale2_admin" type="number" maxlength="4" size="2" required value=<?php echo $spikes_scale2; ?>></td>
+                                            <td class="text_left_padding"><input type="hidden" name="spikes_scale2_admin" type="number" maxlength="4" size="2" min="0" required value=<?php echo $spikes_scale2; ?>></td>
                                         </tr>
                                     </table>
                                     <script>
@@ -185,7 +185,8 @@
                                         }
                                     </script>
                                     <p id="help_scales" class="help_p">
-                                        <?php echo _('10KG China Zelle: 205<br>20kg China Zelle: 102<br>50kg Edelstahl Zelle: 74<br>20kg Edelstahl Zelle: 186<br>'); ?>
+                                            <?php echo _('helptext_scale_admin');
+                                                  echo '<br><br>'; ?>
                                         <button class="art-button" type="button" onclick="help_scales_noneFunction()"><?php echo _('close'); ?></button>
                                     </p>
                                     <hr>
@@ -310,7 +311,8 @@
                                         }
                                     </script>
                                     <p id="help_thermometer" class="help_p">
-                                        <?php echo _('Select your meat thermometer types for upto 4 input channels.<br>Select ------ for channels without sensors<br>'); ?>
+                                         <?php echo _('helptext_thermometer_admin');
+                                               echo '<br><br>'; ?>
                                         <button class="art-button" type="button" onclick="help_thermometer_noneFunction()"><?php echo _('close'); ?></button>
                                     </p>
                                     <hr>                                    
@@ -321,7 +323,7 @@
                                                 </td>
                                                 <td style=" text-align: left; padding-left: 20px;">
                                                     <input type="radio" name="language_admin" value="1" <?php echo $checked_language_1; ?>/><label> de_DE</label><br>
-                                                    <input type="radio" name="language_admin" value="2" <?php echo $checked_language_2; ?>/><label> en_EN</label><br>
+                                                    <input type="radio" name="language_admin" value="2" <?php echo $checked_language_2; ?>/><label> en_GB</label><br>
                                                     <br>
                                                 </td>
                                             </tr>
@@ -335,8 +337,8 @@
                                             }
                                         </script>
                                         <p id="help_language" class="help_p">
-                                            <?php  echo '<b>'._('language').':</b> '._('set the language. if you are missing your prefered language, please contact us');
-                                             echo '<br><br>'; ?>
+                                         <?php echo _('helptext_language_admin');
+                                               echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_language_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
                                         <table style="width: 100%; align: center;">

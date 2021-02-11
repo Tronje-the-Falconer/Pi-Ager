@@ -39,16 +39,8 @@
                                             }
                                         </script>
                                         <p id="help_operation_mode" class="help_p">
-                                            <?php echo '<b>'._('cooling').':</b>  '._('it is cooled to the set temperature with circulating air.').'<br><br><b>'.
-                                            _('cooling with humidification').':</b>  '._('it is cooled to the set temperature with circulating air and humidification is on,
-                                             the heating is never controlled.').'<br><br><b>'.
-                                            _('heating with humidification').':</b> '._('it is heated to the set temperature with circulating air and humidification is on,
-                                             The cooling is never controlled.').'<br><br><b>'.
-                                            _('automatik with humidification').':</b>'._('the pi-ager cools or heats with circulating air, depending on the set value and humidification is on.').'<br><br><b>'.
-                                            _('automatik with dehumidification and humidification').':</b> '._('like automatic with humidification, additional: when the humidity is exceeded, the exhaust air switches on until the humidity target is reached again.
-                                             since it is a passive dehumidification, the minimum achievable humidity depends on the dryness of the ambient air.
-                                             to avoid a wild switching on and off, the humidification should be delayed (5-10min)!').
-                                            '<br><br>'; ?>
+                                            <?php echo _('helptext_operation_mode');
+                                                  echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_operation_mode_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
 
@@ -70,35 +62,8 @@
                                             }
                                         </script>
                                         <p id="help_temperature" class="help_p">
-                                            <?php echo '<b>'._('setpoint temperature').':</b> '._('the desired temperature is set here. the minimum value is 0 ° C, the maximum + 25 ° C.
-                                             for technical reasons, not all values can be approached in any operating mode. the circulating air is always active during the cooling or heating phases.').'<br><br>'.
-                                            '<br><br>
-                                            <b>'._('example of cooling').':</b> <i>'._('setpoint temperature').': 12°C; '._('switch-on value').': 3°C; '._('switch-off value').': 1°C</i><br>'.
-                                            _('switch-on temperature').' = '._('setpoint temperature').' + '._('switch-on value').' --> 12°C + 3°C = 15°C<br>'.
-                                            _('switch-off temperature').' = '._('setpoint temperature').' + '._('switch-off value').' --> 12°C + 1°C = 13°C<br>'.
-                                            _('so, if 15 degrees are exceeded, the pi-ager cools down to 13 ° C and then switches off to avoid excessive cooling.
-                                             the entire behavior is different from pi-ager to pi-ager and therefore to be determined individually.').
-                                            '<br><br>
-                                            <b>'._('example of heating').':</b> <i>'._('setpoint temperature').': 22°C; '._('switch-on value').': 3°C; '._('switch-off value').' 1°C</i><br>'.
-                                            _('switch-on temperature').' = '._('setpoint temperature').' - '._('switch-on value').'  --> 22°C - 3°C = 19°C<br>'.
-                                            _('switch-off temperature').' = '._('setpoint temperature').' - '._('switch-off value').' --> 22°C - 1°C = 21°C<br>'.
-                                            _('so, if the temperature drops below 19 degrees, the pi-ager heats up to 21 ° C and then switches off to avoid excessive heating.
-                                             the entire behavior is different from pi-ager to pi-ager and therefore to be determined individually.').
-                                            '<br><br>
-                                            <b>'._('automatic mode').':</b> '._('in every automatic mode, the temperature is fully automatically controlled.
-                                             first, the current temperature is determined. Then decide which method (cooling or heating) is suitable to reach the setpoint temperature set.
-                                             this also means that the switching values of the hysteresis must not be too close together. Otherwise, cooling and heating could be switched on and off alternately.').
-                                            '<br><br>
-                                            <b>'._('example of automatic').':</b> '._("now it's getting exciting!").'<br>
-                                            <i>'._('setpoint temperature').': 15°C; '._('switch-on value').': 5°C; '._('switch-off value').' 3°C</i><br>'.
-                                            _('1st case').': '._('sensor temperature').' >= ('._('setpoint temperature').' + '._('switch-on value').' [=20°C]) = '._('cooling on').'<br>'.
-                                            _('2st case').': '._('sensor temperature').' <= ('._('setpoint temperature').' + '._('switch-off value').' [=18°C]) = '._('cooling off').'<br>'.
-                                            _('3st case').': '._('sensor temperature').' >= ('._('setpoint temperature').' - '._('switch-on value').' [=10°C]) = '._('heating on').'<br>'.
-                                            _('4st case').': '._('sensor temperature').' <= ('._('setpoint temperature').' - '._('switch-off value').' [=12°C]) = '._('heating off').
-                                            '<br><br>
-                                            <b>'._('recommendation').':</b> '._('check the stored values in the logfile!').
-                                            '<br><br>
-                                            <b>'._('attention').':</b> '._('use only positive integers!').'<br><br>'; ?>
+                                            <?php echo _('helptext_temperature_setpoint');
+                                                  echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_temperature_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
                                         <hr>
@@ -120,11 +85,8 @@
                                             }
                                         </script>
                                         <p id="help_humidify" class="help_p">
-                                            <?php echo '<b>'._('target humidity').
-                                            ':</b> '._('the desired humidity is set here. The minimum value is theoretically 0% and a maximum of 99%.
-                                            these values will be never reached normally. The circulating air is always active during humidification. The effectiveness of the dehumidification (automatic mode with with humidification and dehumidification) is dependent on the ambient air humidity, since only a passive dehumidification by exhaust air takes place.').
-                                            '<br><br><b>'._('recommendation').':</b> '._('check the stored values in the logfile!').'<br><br>
-                                             <b>'._('attention').'</b> '._('use only positive integers!').'<br><br>';?>
+                                            <?php echo _('helptext_humidity_setpoint');
+                                                  echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_humidify_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
                                         <hr>
@@ -143,21 +105,15 @@
                                         </table>
                                         <script>
                                             function help_exhausting_air_blockFunction() {
-                                                document.getElementById('help_exhausting_air').style.display = 'block';
+                                                document.getElementById('help_circulation_air').style.display = 'block';
                                             }
                                             function help_exhausting_air_noneFunction() {
-                                                document.getElementById('help_exhausting_air').style.display = 'none';
+                                                document.getElementById('help_circulation_air').style.display = 'none';
                                             }
                                         </script>
-                                        <p id="help_exhausting_air" class="help_p">
-                                            <?php echo '<b>'._('period').':</b> '._('this is used to set the pause time, which waits until the recirculation is switched on again. if the value is 0 (= no pause), the circulating air is permanently switched on. the maximum value is 1440min.').
-                                            '<br><br>
-                                            <b>'._('duration').':</b>'._('this sets the circulation time during which the fan is running. at 0, the circulating air timer function is switched off. the maximum value is 1440min.').
-                                             '<br><br>
-                                            <b>'._('note').':</b> '._('the circulating air fan runs independently of the timer settings - also during cooling, heating and humidification.').
-                                             '<br><br>
-                                            <b>'._('attention').':</b><br>'.
-                                            _('period=0 und duration=0 is not useful and not allowed.').'<br><br>'; ?>
+                                        <p id="help_circulation_air" class="help_p">
+                                            <?php echo _('helptext_circulation_air');
+                                                  echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_exhausting_air_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
                                         <hr>
@@ -174,21 +130,15 @@
                                         </table>
                                         <script>
                                             function help_circulation_air_blockFunction() {
-                                                document.getElementById('help_circulation_air').style.display = 'block';
+                                                document.getElementById('help_exhausting_air').style.display = 'block';
                                             }
                                             function help_circulation_air_noneFunction() {
-                                                document.getElementById('help_circulation_air').style.display = 'none';
+                                                document.getElementById('help_exhausting_air').style.display = 'none';
                                             }
                                         </script>
-                                        <p id="help_circulation_air" class="help_p">
-                                            <?php  echo '<b>'._('period').':</b> '._('this is used to set the pause time, which waits until the exhausting is switched on again. if the .lue is 0 (= no pause), the exhausting air is permanently switched on. the maximum value is 1440min.').
-                                             '<br><br>
-                                            <b>'._('duration').':</b> '._('this sets the exhausting time during which the fan is running. at 0, the exhausting air timer function is switched off. the maximum value is 1440min.').
-                                             '<br><br>
-                                            <b>'._('note').':</b> '._('The exhaust air fan runs independently of the timer settings - also during dehumidification in the "automatic mode with humidification and dehumidification.').
-                                             '<br><br>
-                                            <b>'._('attention').':</b><br>'.
-                                            _('period=0 und duration=0 is not useful and not allowed.').'<br><br>'; ?>
+                                        <p id="help_exhausting_air" class="help_p">
+                                            <?php  echo _('helptext_exhausting_air');
+                                                  echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_circulation_air_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
                                         <br>

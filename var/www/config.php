@@ -59,13 +59,8 @@
                                                 }
                                             </script>
                                             <p id="help_temperature_config" class="help_p">
-                                                <?php echo '<b>'._('switch-on value').':</b> '._('is the value at which the control becomes active (value limit: 0-10 ° C). This value must always be greater than the switch-off value.').'<br><b>'.
-                                                _('switch-off value').':</b> '._('is the value at which the control becomes inactive (value: 0-10 ° C)').'<br>'.
-                                                _('the values may not be the same in order to avoid a wild switching on and off.').
-                                                '<br><br>
-                                                <b>'._('recommendation').':</b> '._('check the stored values in the logfile!').
-                                                '<br><br>
-                                                <b>'._('attention').':</b> '._('use only positive integers!').'<br><br>'; ?>
+                                                <?php echo _('helptext_temperature_config');
+                                                      echo '<br><br>'; ?>
                                                 <button class="art-button" type="button" onclick="help_temperature_config_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
                                             <hr>
@@ -111,21 +106,8 @@
                                                 }
                                             </script>
                                             <p id="help_humidify_config" class="help_p">
-                                                <?php echo '<b><u>'._('switching hysteresis').'</u></b><br>
-                                                <b>'._('switch-on value').':</b>'._('is the value at which the control becomes active (value: 0-30%)').'<br>
-                                                <b>'._('switch-off value').':</b>'._('is the value at which the control becomes inactive (value: 0-30%)').'<br>'.
-                                                _('the values may not be the same in order to avoid a wild switching on and off.').'<br><br>
-                                                <b>'._('delay').':</b>'._('here the delay time is set until the humidifier turns on if the humidity is too low. this can be used to blast out the rapidly falling air humidity during "cooling", "timer exhaust" or "dehumidification". The minimum value is 0 minutes, the maximum 60 minutes.').'<br><br>
-                                                <b>'._('example').'</b> <i>'._('target humidity').': 75%'._('switch-on value').': 5%'._('switch-off value').': 1%</i><br>'.
-                                                _('switch-on humidity').' = '._('target humidity').' - '._('switch-on value').' --> 75% - 5% = 70%<br>'.
-                                                _('switch-off humidity').' = '._('target humidity').' - '._('switch-off value').'--> 75% - 1% = 74%<br>'.
-                                                _('delay').' = 5 '._('minutes').'<br>'.
-                                                _('so if 70% relative humidity are reached, the control waits for 5 minutes. only then does the pi-ager humidify the air to 74% and then switch off humidification again.').'<br><br>
-                                                <b>'._('example automatic mode with with humidification and dehumidification').':</b>'._('in this automatic mode, the humidity is completely automatically controlled.
-                                                 the current humidity is determined first. it is then decided which method (humidification and dehumidification) is suitable for achieving the desired set-point humidity.
-                                                 this also means that the switching values of the hysteresis must not be too close together. otherwise, humidification and dehumidification could always be switched on and off alternately.').'<br><br>
-                                                 <b>'._('recommendation').':</b> '._('check the stored values in the logfile!').'<br><br>
-                                                 <b>'._('attention').'</b> '._('use only positive integers!').'<br><br>';?>
+                                                <?php echo _('helptext_humidify_config');
+                                                      echo '<br><br>'; ?>
                                                 <button class="art-button" type="button" onclick="help_humidify_config_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
                                             <hr>
@@ -152,8 +134,8 @@
                                                 }
                                             </script>
                                             <p id="help_dehumidifier" class="help_p">
-                                                <?php  echo '<b>'._('dehumidifier').':</b> '._('text for dehumidifier help');
-                                                 echo '<br><br>'; ?>
+                                                <?php echo _('helptext_dehumidifier_config');
+                                                      echo '<br><br>'; ?>
                                                 <button class="art-button" type="button" onclick="help_dehumidifier_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
                                             <hr>
@@ -191,8 +173,8 @@
                                                 }
                                             </script>
                                             <p id="help_uv" class="help_p">
-                                                <?php  echo '<b>'._('uv').':</b> '._('text for uv help');
-                                                 echo '<br><br>'; ?>
+                                                <?php echo _('helptext_uv_config');
+                                                      echo '<br><br>'; ?>
                                                 <button class="art-button" type="button" onclick="help_uv_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
                                             <hr>
@@ -230,8 +212,8 @@
                                                 }
                                             </script>
                                             <p id="help_light" class="help_p">
-                                                <?php  echo '<b>'._('light').':</b> '._('text for light help');
-                                                 echo '<br><br>'; ?>
+                                                <?php echo _('helptext_light_config');
+                                                      echo '<br><br>'; ?>
                                                 <button class="art-button" type="button" onclick="help_light_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
                                             <hr>
@@ -259,8 +241,8 @@
                                                 }
                                             </script>
                                             <p id="help_agingtable" class="help_p">
-                                                <?php  echo '<b>'._('agingtable').':</b> '._('text for agingtable help');
-                                                 echo '<br><br>'; ?>
+                                                <?php echo _('helptext_agingtable_config');
+                                                      echo '<br><br>'; ?>
                                                 <button class="art-button" type="button" onclick="help_agingtable_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
                                             <br>

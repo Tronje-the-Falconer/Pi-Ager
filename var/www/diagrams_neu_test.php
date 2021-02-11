@@ -101,6 +101,13 @@
                                             include 'modules/read_values_for_diagrams.php';
                                         ?>
                                         <canvas id="temperature_humidity_chart"></canvas>
+                                        <canvas id="dewpoint_humidity_chart"></canvas> 
+                                        <canvas id="scales_chart"></canvas>
+                                        <canvas id="thermometer1_chart"></canvas> 
+<!--                                    <canvas id="thermometer2_chart"></canvas> 
+                                        <canvas id="thermometer3_chart"></canvas> 
+-->
+                                        <canvas id="thermometer4_chart"></canvas> 
                                         <div class="on_off_chart"><canvas id="cooler_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="heater_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="humidifier_chart"></canvas></div>
@@ -109,13 +116,6 @@
                                         <div class="on_off_chart"><canvas id="exhaust_air_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="uv_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="light_chart"></canvas></div>
-                                        <canvas id="scales_chart"></canvas>
-                                        <canvas id="thermometer1_chart"></canvas> 
-<!--                                    <canvas id="thermometer2_chart"></canvas> 
-                                        <canvas id="thermometer3_chart"></canvas> 
--->
-                                        <canvas id="thermometer4_chart"></canvas> 
-                                        <canvas id="dewpoint_humidity_chart"></canvas> 
                                         
                                         <script>
                                         var timeFormat = 'MM/DD/YYYY HH:mm';
@@ -334,24 +334,10 @@
                                                             },
                                                             fontColor: '#000000',
                                                            //    fontSize: 20,
-                                                            max: <?php
-                                                                $dataset1 = ($non_empties = array_filter($humidity_dataset));
-                                                                if (empty($dataset1)) {
-                                                                        $dataset1[] = Null;
-                                                                }
-                                                                $value_dataset1 = max($dataset1);
-
-                                                                $dataset2 = ($non_empties = array_filter($extern_humidity_dataset));
-                                                                if (empty($dataset2)) {
-                                                                        $dataset2[] = Null;
-                                                                }
-                                                                $value_dataset2 = max($dataset2);
-
-                                                                 $max_value_humidiy = intval (max ($value_dataset1, $value_dataset2)/10)*10 + 10;
-
-                                                                 print $max_value_humidiy;
+                                                            max: <?php 
+                                                            $max_value_humidiy = intval(max(max($humidity_dataset),max($extern_humidity_dataset))/10) * 10 + 10;
+                                                            print $max_value_humidiy;
                                                             ?>,
-                                                    //-----austoscale max end
                                                             //min: <?php 
                                                             //$min_value_humidiy = intval(min($humidity_dataset) - (min($humidity_dataset) / 100 * 1))-1;
                                                             //?>
@@ -410,9 +396,7 @@
                                                     pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
-
-// Vorbereitung abs Feuchte
-/*                                                },
+                                                },
                                                 {
                                                     label: '<?php echo _("humidity") . ' int.' ?>',
                                                     yAxisID: 'humidity',
@@ -452,14 +436,12 @@
                                                     pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
-*/
                                                 }]
                                             },
                                             options: {
                                                 title: {
                                                     display: true,
-                                                    //text: '<?php echo _("dewpoint") ?> & <?php echo _("humidity abs") ?>',
-                                                    text: '<?php echo _("dewpoint") ?>',
+                                                    text: '<?php echo _("dewpoint") ?> & <?php echo _("humidity abs") ?>',
                                                     fontSize: 24
                                                 },
                                                 legend: {
@@ -476,11 +458,10 @@
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
                                                             } else if (tooltipItem.datasetIndex === 1) {
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
-/*                                                            } else if (tooltipItem.datasetIndex === 2) {
+                                                            } else if (tooltipItem.datasetIndex === 2) {
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' °g/m3';
                                                             } else if (tooltipItem.datasetIndex === 3) {
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' °g/m3';
-*/
                                                             }
                                                         }
                                                     }
@@ -568,8 +549,7 @@
                                                     }, {
                                                         scaleLabel: {
                                                             display: true,
-//                                                            labelString: '<?php echo _("humidity abs") ?> <?php echo _(" - φ") ?>',
-                                                              labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
+                                                            labelString: '<?php echo _("humidity abs") ?> <?php echo _(" - φ") ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -577,16 +557,14 @@
                                                         type: 'linear',
                                                         display: true,
                                                         position: 'right',
-//                                                      labelString: '<?php echo _("humidity") ?>',
-                                                        labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
+                                                        labelString: '<?php echo _("humidity") ?>',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-//                                                              return '  ' + value + ' g/m3' + '  ';
-                                                                return '  ' + value + ' °C' + '  ';
+                                                                return '  ' + value + ' g/m3' + '  ';
                                                             },
                                                             fontColor: '#000000',
                                                            //    fontSize: 20,
-/*                                                            max: <?php 
+                                                            max: <?php 
                                                             $max_value_humidiy = intval(max(max($humidity_dataset),max($extern_humidity_dataset))/10) * 10 + 10;
                                                             print $max_value_humidiy;
                                                             ?>,
@@ -595,55 +573,16 @@
                                                             //?>
                                                             //max: 100,
                                                             min: 0
-*/
-                                                    //-----austoscale max start max
-                                                        max: <?php
-                                                            $dataset1 = ($non_empties = array_filter($dewpoint_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = Null;
-                                                            }
-                                                            $value_dataset1 = max($dataset1);
-
-                                                            $dataset2 = ($non_empties = array_filter($extern_dewpoint_dataset));
-                                                            if (empty($dataset2)) {
-                                                                    $dataset2[] = Null;
-                                                            }
-                                                            $value_dataset2 = max($dataset2);
-
-                                                            $max_value_temperature = intval (max ($value_dataset1, $value_dataset2)/5)*5 + 10;
-
-                                                             print $max_value_temperature;
-                                                        ?>,
-                                                    //-----austoscale max end
-
-                                                    //-----austoscale min start
-                                                        min: <?php 
-                                                            $dataset1 = ($non_empties = array_filter($dewpoint_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = 100;
-                                                            }
-                                                            $value_dataset1 = min($dataset1);
-
-                                                            $dataset2 = ($non_empties = array_filter($extern_dewpoint_dataset));
-                                                            if (empty($dataset2)) {
-                                                                    $dataset2[] = 100;
-                                                            }
-                                                            $value_dataset2 = min($dataset2);
-                                                             
-                                                            if ($value_dataset1 == 100 and $value_dataset2 == 100) {
-                                                               $min_value_temperature = -4;
-                                                            } 
-                                                            else {
-                                                               $min_value_temperature = intval (min ($value_dataset1, $value_dataset2)/1)*1 - 2;
-                                                            }
-                                                             print $min_value_temperature;
-                                                        ?>
-                                                    //-----austoscale min end
                                                         }
                                                     }]
                                                 }
                                             }
                                         };
+
+
+
+
+
  
                                         // Waagen
                                         var scales_chart = document.getElementById("scales_chart");
@@ -760,7 +699,7 @@
                                                                     $scale1_dataset_max[] = Null;
                                                             }
                                                             $max_scale1 = max($scale1_dataset_max);
-                                                            $max_value_scale1 = intval($max_scale1 + abs($max_scale1) / 100 * 5) + 10;
+                                                            $max_value_scale1 = intval($max_scale1 + abs($max_scale1) / 100 * 5) + 100;
                                                             print $max_value_scale1;
                                                             ?>,
                                                             min: <?php 
@@ -769,7 +708,7 @@
                                                                     $scale1_dataset_min[] = Null;
                                                             }
                                                             $min_scale1 = min($scale1_dataset_min);
-                                                            $min_value_scale1 = intval($min_scale1 - abs($min_scale1) / 100 * 5) - 2;
+                                                            $min_value_scale1 = intval($min_scale1 - abs($min_scale1) / 100 * 5) - 5;
                                                             print $min_value_scale1;
                                                             ?>,
                                                             //stepSize: 1
@@ -803,7 +742,7 @@
                                                                     $scale2_dataset_max[] = Null;
                                                             }
                                                             $max_scale2 = max($scale2_dataset_max);
-                                                            $max_value_scale2 = intval($max_scale2 + abs($max_scale2) / 100 * 5) + 10;
+                                                            $max_value_scale2 = intval($max_scale2 + abs($max_scale2) / 100 * 5) + 100;
                                                             print $max_value_scale2;
                                                             ?>,
                                                             min: <?php 
@@ -812,7 +751,7 @@
                                                                     $scale2_dataset_min[] = Null;
                                                             }
                                                             $min_scale2 = min($scale2_dataset_min);
-                                                            $min_value_scale2 = intval($min_scale2 - abs($min_scale2) / 100 * 5) - 2;
+                                                            $min_value_scale2 = intval($min_scale2 - abs($min_scale2) / 100 * 5) - 5;
                                                             print $min_value_scale2;
                                                             ?>,
                                                             //stepSize: 1
@@ -1020,7 +959,7 @@
                                                     {
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php echo _("temperature")?> <?php echo _(" - ϑ") ?>',
+                                                            //labelString: '<?php echo _("temperature")?> <?php echo _(" - ϑ") ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -1247,7 +1186,7 @@
                                                     {
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php if ($sensor4_is_current == true) { echo _("Current") . " - I"; } else { echo _("temperature") . _(" - ϑ");}?>',
+                                                        //    labelString: '<?php if ($sensor4_is_current == true) { echo _("Current"); } else { echo _("temperature") . '4';}?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },

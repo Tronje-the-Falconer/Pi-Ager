@@ -860,7 +860,7 @@ def doMainLoop():
                 if modus == 4:
                     status_dehumidifier = False        # Entfeuchter aus
                     database_value_status_exhaust_fan = int(pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_exhaust_air_key))
-                    if database_value_status_exhaust_fan == 0:
+                    if database_value_status_exhaust_fan == 0 or dehumidifier_modus == 3:
                         status_exhaust_fan = False                                   # Abluft ist aktuell aus
                     else:
                         status_exhaust_fan = True                                   # Abluft ist aktuell an
