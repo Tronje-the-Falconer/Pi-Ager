@@ -265,55 +265,12 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return '  ' + value + ' °C' + '  ';
+                                                                return '  ' + value.toFixed(1) + ' °C' + '  ';
                                                             },
                                                             fontColor: '#000000',
                                                             //fontSize: 20,
                                                             //max: 30,
                                                             //min: -2
-                                                    //-----austoscale max start max
-                                                        max: <?php
-                                                            $dataset1 = ($non_empties = array_filter($temperature_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = Null;
-                                                            }
-                                                            $value_dataset1 = max($dataset1);
-
-                                                            $dataset2 = ($non_empties = array_filter($extern_temperature_dataset));
-                                                            if (empty($dataset2)) {
-                                                                    $dataset2[] = Null;
-                                                            }
-                                                            $value_dataset2 = max($dataset2);
-
-                                                            $max_value_temperature = intval (max ($value_dataset1, $value_dataset2)/5)*5 + 10;
-
-                                                             print $max_value_temperature;
-                                                        ?>,
-                                                    //-----austoscale max end
-
-                                                    //-----austoscale min start
-                                                        min: <?php 
-                                                            $dataset1 = ($non_empties = array_filter($temperature_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = 100;
-                                                            }
-                                                            $value_dataset1 = min($dataset1);
-
-                                                            $dataset2 = ($non_empties = array_filter($extern_temperature_dataset));
-                                                            if (empty($dataset2)) {
-                                                                    $dataset2[] = 100;
-                                                            }
-                                                            $value_dataset2 = min($dataset2);
-                                                             
-                                                            if ($value_dataset1 == 100 and $value_dataset2 == 100 and $value_dataset3 == 100) {
-                                                               $min_value_temperature = -4;
-                                                            } 
-                                                            else {
-                                                               $min_value_temperature = intval (min ($value_dataset1, $value_dataset2)/1)*1 - 2;
-                                                            }
-                                                             print $min_value_temperature;
-                                                        ?>
-                                                    //-----austoscale min end
                                                         }
                                                         
                                                     }, {
@@ -330,33 +287,13 @@
                                                         labelString: '<?php echo _("humidity") ?>',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return '  ' + value + ' %' + '  ';
+                                                                return '  ' + value.toFixed(0) + ' %' + '  ';
                                                             },
                                                             fontColor: '#000000',
                                                            //    fontSize: 20,
-                                                            max: <?php
-                                                                $dataset1 = ($non_empties = array_filter($humidity_dataset));
-                                                                if (empty($dataset1)) {
-                                                                        $dataset1[] = Null;
-                                                                }
-                                                                $value_dataset1 = max($dataset1);
-
-                                                                $dataset2 = ($non_empties = array_filter($extern_humidity_dataset));
-                                                                if (empty($dataset2)) {
-                                                                        $dataset2[] = Null;
-                                                                }
-                                                                $value_dataset2 = max($dataset2);
-
-                                                                 $max_value_humidiy = intval (max ($value_dataset1, $value_dataset2)/10)*10 + 10;
-
-                                                                 print $max_value_humidiy;
-                                                            ?>,
-                                                    //-----austoscale max end
-                                                            //min: <?php 
-                                                            //$min_value_humidiy = intval(min($humidity_dataset) - (min($humidity_dataset) / 100 * 1))-1;
-                                                            //?>
-                                                            //max: 100,
-                                                            min: 0
+														   beginAtZero: true,
+                                                           // max: 100
+                                                           min: 0
                                                         }
                                                     }]
                                                 }
@@ -514,60 +451,17 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return '  ' + value + ' °C' + '  ';
+                                                                return '  ' + value.toFixed(1) + ' °C' + '  ';
                                                             },
                                                             fontColor: '#000000',
                                                             //fontSize: 20,
                                                             //max: 30,
                                                             //min: -2
-                                                    //-----austoscale max start max
-                                                        max: <?php
-                                                            $dataset1 = ($non_empties = array_filter($dewpoint_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = Null;
-                                                            }
-                                                            $value_dataset1 = max($dataset1);
-
-                                                            $dataset2 = ($non_empties = array_filter($extern_dewpoint_dataset));
-                                                            if (empty($dataset2)) {
-                                                                    $dataset2[] = Null;
-                                                            }
-                                                            $value_dataset2 = max($dataset2);
-
-                                                            $max_value_temperature = intval (max ($value_dataset1, $value_dataset2)/5)*5 + 10;
-
-                                                             print $max_value_temperature;
-                                                        ?>,
-                                                    //-----austoscale max end
-
-                                                    //-----austoscale min start
-                                                        min: <?php 
-                                                            $dataset1 = ($non_empties = array_filter($dewpoint_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = 100;
-                                                            }
-                                                            $value_dataset1 = min($dataset1);
-
-                                                            $dataset2 = ($non_empties = array_filter($extern_dewpoint_dataset));
-                                                            if (empty($dataset2)) {
-                                                                    $dataset2[] = 100;
-                                                            }
-                                                            $value_dataset2 = min($dataset2);
-                                                             
-                                                            if ($value_dataset1 == 100 and $value_dataset2 == 100) {
-                                                               $min_value_temperature = -4;
-                                                            } 
-                                                            else {
-                                                               $min_value_temperature = intval (min ($value_dataset1, $value_dataset2)/1)*1 - 2;
-                                                            }
-                                                             print $min_value_temperature;
-                                                        ?>
-                                                    //-----austoscale min end
                                                         }
                                                         
                                                     }, {
                                                         scaleLabel: {
-                                                            display: true,
+                                                            display: false,
 //                                                            labelString: '<?php echo _("humidity abs") ?> <?php echo _(" - φ") ?>',
                                                               labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
                                                         //    fontSize: 20,
@@ -581,64 +475,14 @@
                                                         labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-//                                                              return '  ' + value + ' g/m3' + '  ';
-                                                                return '  ' + value + ' °C' + '  ';
+//                                                              return '  ' + value.toFixed(0) + ' g/m3' + '  ';
+                                                                return '                    ';
                                                             },
                                                             fontColor: '#000000',
-                                                           //    fontSize: 20,
-/*                                                            max: <?php 
-                                                            $max_value_humidiy = intval(max(max($humidity_dataset),max($extern_humidity_dataset))/10) * 10 + 10;
-                                                            print $max_value_humidiy;
-                                                            ?>,
-                                                            //min: <?php 
-                                                            //$min_value_humidiy = intval(min($humidity_dataset) - (min($humidity_dataset) / 100 * 1))-1;
-                                                            //?>
+                                                            //fontSize: 20,
+                                                            //beginAtZero: true,  
                                                             //max: 100,
                                                             min: 0
-*/
-                                                    //-----austoscale max start max
-                                                        max: <?php
-                                                            $dataset1 = ($non_empties = array_filter($dewpoint_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = Null;
-                                                            }
-                                                            $value_dataset1 = max($dataset1);
-
-                                                            $dataset2 = ($non_empties = array_filter($extern_dewpoint_dataset));
-                                                            if (empty($dataset2)) {
-                                                                    $dataset2[] = Null;
-                                                            }
-                                                            $value_dataset2 = max($dataset2);
-
-                                                            $max_value_temperature = intval (max ($value_dataset1, $value_dataset2)/5)*5 + 10;
-
-                                                             print $max_value_temperature;
-                                                        ?>,
-                                                    //-----austoscale max end
-
-                                                    //-----austoscale min start
-                                                        min: <?php 
-                                                            $dataset1 = ($non_empties = array_filter($dewpoint_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = 100;
-                                                            }
-                                                            $value_dataset1 = min($dataset1);
-
-                                                            $dataset2 = ($non_empties = array_filter($extern_dewpoint_dataset));
-                                                            if (empty($dataset2)) {
-                                                                    $dataset2[] = 100;
-                                                            }
-                                                            $value_dataset2 = min($dataset2);
-                                                             
-                                                            if ($value_dataset1 == 100 and $value_dataset2 == 100) {
-                                                               $min_value_temperature = -4;
-                                                            } 
-                                                            else {
-                                                               $min_value_temperature = intval (min ($value_dataset1, $value_dataset2)/1)*1 - 2;
-                                                            }
-                                                             print $min_value_temperature;
-                                                        ?>
-                                                    //-----austoscale min end
                                                         }
                                                     }]
                                                 }
@@ -677,7 +521,7 @@
                                                 },
                                                 {
                                                     label: '<?php echo _("scale") ?> 2',
-                                                    yAxisID: 'scale2',
+                                                    yAxisID: 'scale1',
                                                     data: <?php echo json_encode($scale2_dataset); ?>,
                                                     backgroundColor: '#BF9543',
                                                     borderColor: '#BF9543',
@@ -750,35 +594,17 @@
                                                                 return value + ' gr' + ' ';
                                                             },
                                                             fontColor: '#000000',
-                                                        //    fontSize: 20,
-                                                            //max: 25000,
+                                                            //fontSize: 20,
                                                             beginAtZero: true,
-                                                            maxTicksLimit: 10,
-                                                            max: <?php 
-                                                            $scale1_dataset_max = array_filter($scale1_dataset);
-                                                            if (empty($scale1_dataset_max)) {
-                                                                    $scale1_dataset_max[] = Null;
-                                                            }
-                                                            $max_scale1 = max($scale1_dataset_max);
-                                                            $max_value_scale1 = intval($max_scale1 + abs($max_scale1) / 100 * 5) + 10;
-                                                            print $max_value_scale1;
-                                                            ?>,
-                                                            min: <?php 
-                                                            $scale1_dataset_min = array_filter($scale1_dataset);
-                                                            if (empty($scale1_dataset_min)) {
-                                                                    $scale1_dataset_min[] = Null;
-                                                            }
-                                                            $min_scale1 = min($scale1_dataset_min);
-                                                            $min_value_scale1 = intval($min_scale1 - abs($min_scale1) / 100 * 5) - 2;
-                                                            print $min_value_scale1;
-                                                            ?>,
+															//max: 20000,
+                                                            //min: 0, 
                                                             //stepSize: 1
                                                         }
                                                         
                                                     },
                                                     {
                                                         scaleLabel: {
-                                                            display: true,
+                                                            display: false,
                                                             labelString: '<?php echo _("scale") . ' 2'; ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
@@ -789,32 +615,14 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 if (Math.round(value) === value) {
-                                                                return ' ' + value + ' gr';
+                                                                return '                    ';
                                                             }
                                                             },
                                                             fontColor: '#000000',
                                                             //    fontSize: 20,
-                                                            //max: 25000,
                                                             beginAtZero: true,
-                                                            maxTicksLimit: 10,
-                                                            max: <?php 
-                                                            $scale2_dataset_max = array_filter($scale2_dataset);
-                                                            if (empty($scale2_dataset_max)) {
-                                                                    $scale2_dataset_max[] = Null;
-                                                            }
-                                                            $max_scale2 = max($scale2_dataset_max);
-                                                            $max_value_scale2 = intval($max_scale2 + abs($max_scale2) / 100 * 5) + 10;
-                                                            print $max_value_scale2;
-                                                            ?>,
-                                                            min: <?php 
-                                                            $scale2_dataset_min = array_filter($scale2_dataset);
-                                                            if (empty($scale2_dataset_min)) {
-                                                                    $scale2_dataset_min[] = Null;
-                                                            }
-                                                            $min_scale2 = min($scale2_dataset_min);
-                                                            $min_value_scale2 = intval($min_scale2 - abs($min_scale2) / 100 * 5) - 2;
-                                                            print $min_value_scale2;
-                                                            ?>,
+															//max: 20000,
+                                                            //min: 0
                                                             //stepSize: 1
                                                         }
                                                     }]
@@ -949,77 +757,20 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                if (Math.round(value) === value) {
-                                                                return '  ' + value + ' °C' + '  ';
-                                                                }
+                                                                return '  ' + value.toFixed(1) + ' °C' + '  ';
                                                             },
                                                             fontColor: '#000000',
                                                             //    fontSize: 20,
                                                             //max: 25000,
-                                                            beginAtZero: true,
-                                                            maxTicksLimit: 10,
+                                                            //beginAtZero: true,
+                                                            //maxTicksLimit: 10,
                                                         //max: 30, 
                                                         //min: -2
-                                                    //-----austoscale max start max
-                                                        max: <?php
-                                                            $dataset1 = ($non_empties = array_filter($thermometer1_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = Null;
-                                                            }
-                                                            $value_dataset1 = max($dataset1);
-
-                                                            $dataset2 = ($non_empties = array_filter($thermometer2_dataset));
-                                                            if (empty($dataset2)) {
-                                                                    $dataset2[] = Null;
-                                                            }
-                                                            $value_dataset2 = max($dataset2);
-
-                                                            $dataset3 = ($non_empties = array_filter($thermometer3_dataset));
-                                                            if (empty($dataset3)) {
-                                                                    $dataset3[] = Null;
-                                                            }
-                                                            $value_dataset3 = max($dataset3);
-
-                                                             $max_value_temperature = intval (max ($value_dataset1, $value_dataset2, $value_dataset3)/5)*5 + 10;
-
-                                                             print $max_value_temperature;
-                                                        ?>,
-                                                    //-----austoscale max end
-
-                                                    //-----austoscale min start
-                                                        min: <?php 
-                                                            $dataset1 = ($non_empties = array_filter($thermometer1_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = 100;
-                                                            }
-                                                            $value_dataset1 = intval(min($dataset1));
-
-                                                            $dataset2 = ($non_empties = array_filter($thermometer2_dataset));
-                                                            if (empty($dataset2)) {
-                                                                    $dataset2[] = 100;
-                                                            }
-                                                            $value_dataset2 = intval (min($dataset2));
-
-                                                            $dataset3 = ($non_empties = array_filter($thermometer3_dataset));
-                                                            if (empty($dataset3)) {
-                                                                    $dataset3[] = 100;
-                                                            }
-                                                            $value_dataset3 = intval (min($dataset3));
-
-                                                            if ($value_dataset1 == 100 and $value_dataset2 == 100 and $value_dataset3 == 100) {
-                                                               $min_value_temperature = -4;
-                                                            } 
-                                                            else {
-                                                               $min_value_temperature = intval (min ($value_dataset1, $value_dataset2, $value_dataset3)/1)*1 - 2;
-                                                            }
-                                                             print $min_value_temperature;
-                                                        ?>
-                                                    //-----austoscale min end
                                                         }
                                                     },
                                                     {
                                                         scaleLabel: {
-                                                            display: true,
+                                                            display: false,
                                                             labelString: '<?php echo _("temperature")?> <?php echo _(" - ϑ") ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
@@ -1029,9 +780,7 @@
                                                         position: 'right',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                if (Math.round(value) === value) {
-                                                                return '  ' + value + ' °C' + '  ';
-                                                                }
+                                                                return '                    ';
                                                             },
                                                             fontColor: '#000000',
                                                             //    fontSize: 20,
@@ -1040,61 +789,6 @@
                                                             maxTicksLimit: 10,
                                                         //max: 30, 
                                                         //min: -4
-                                                    //-----austoscale max start max
-                                                        max: <?php
-                                                            $dataset1 = ($non_empties = array_filter($thermometer1_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = Null;
-                                                            }
-                                                            $value_dataset1 = max($dataset1);
-
-                                                            $dataset2 = ($non_empties = array_filter($thermometer2_dataset));
-                                                            if (empty($dataset2)) {
-                                                                    $dataset2[] = Null;
-                                                            }
-                                                            $value_dataset2 = max($dataset2);
-
-                                                            $dataset3 = ($non_empties = array_filter($thermometer3_dataset));
-                                                            if (empty($dataset3)) {
-                                                                    $dataset3[] = Null;
-                                                            }
-                                                            $value_dataset3 = max($dataset3);
-
-                                                             $max_value_temperature = intval (max ($value_dataset1, $value_dataset2, $value_dataset3)/5)*5 + 10;
-
-                                                             print $max_value_temperature;
-                                                        ?>,
-                                                    //-----austoscale max end
-
-                                                    //-----austoscale min start
-                                                        min: <?php 
-                                                            $dataset1 = ($non_empties = array_filter($thermometer1_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = 100;
-                                                            }
-                                                            $value_dataset1 = intval(min($dataset1));
-
-                                                            $dataset2 = ($non_empties = array_filter($thermometer2_dataset));
-                                                            if (empty($dataset2)) {
-                                                                    $dataset2[] = 100;
-                                                            }
-                                                            $value_dataset2 = intval (min($dataset2));
-
-                                                            $dataset3 = ($non_empties = array_filter($thermometer3_dataset));
-                                                            if (empty($dataset3)) {
-                                                                    $dataset3[] = 100;
-                                                            }
-                                                            $value_dataset3 = intval (min($dataset3));
-
-                                                            if ($value_dataset1 == 100 and $value_dataset2 == 100 and $value_dataset3 == 100) {
-                                                               $min_value_temperature = -4;
-                                                            } 
-                                                            else {
-                                                               $min_value_temperature = intval (min ($value_dataset1, $value_dataset2, $value_dataset3)/1)*1 - 2;
-                                                            }
-                                                             print $min_value_temperature;
-                                                        ?>
-                                                    //-----austoscale min end
                                                         }
                                                     }]
                                                 }
@@ -1183,8 +877,7 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                if (Math.round(value) === value) {
-                                                                    return '  ' + value + '<?php if ($sensor4_is_current == true) { echo ' A'; } else { echo ' °C'; }?>' + '  ';
+                                                                    return '  ' + value.toFixed(1) + '<?php if ($sensor4_is_current == true) { echo ' A'; } else { echo ' °C'; }?>' + '  ';
                                                                 }
                                                             },
                                                             fontColor: '#000000',
@@ -1194,59 +887,11 @@
                                                             maxTicksLimit: 10,
                                                             //max: <?php if ($sensor4_is_current == true) { echo '2'; } else { echo '30'; }?>, 
                                                             //min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-1'; }?>
-                                                    //-----austoscale max start
-                                                        max: <?php
-                                                            $dataset1 = ($non_empties = array_filter($thermometer4_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = Null;
-                                                            }
-                                                            $value_dataset1 = max($dataset1);
-
-                                                            if ($sensor4_is_current == true) {
-                                                               $max_multi = 1;
-                                                               $max_offset= 1;
-                                                            } 
-                                                            else {
-                                                               $max_multi = 5;
-                                                               $max_offset= 10;
-                                                            }
-                                                            $max_value_temperature = intval (($value_dataset1)/$max_multi)*$max_multi + $max_offset;
-
-                                                            print $max_value_temperature;
-                                                        ?>,
-                                                    //-----austoscale max end
-
-                                                    //-----austoscale min start
-                                                        min: <?php 
-                                                            $dataset1 = ($non_empties = array_filter($thermometer4_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = 100;
-                                                            }
-                                                            $value_dataset1 = intval(min($dataset1));
-
-                                                            if ($sensor4_is_current == true) {
-                                                               $min_multi = 1;
-                                                               $min_offset = 0;
-                                                            } 
-                                                            else {
-                                                               $min_multi = 5;
-                                                               $min_offset = -4;
-                                                            }
-
-                                                            if ($value_dataset1 == 100) {
-                                                               $min_value_temperature = 0;
-                                                            } 
-                                                            else {
-                                                               $min_value_temperature = intval (($value_dataset1)/$min_multi)*$min_multi + $min_offset;
-                                                            }
-                                                             print $min_value_temperature;
-                                                        ?>
-                                                    //-----austoscale min end
                                                         }
                                                     },
                                                     {
                                                         scaleLabel: {
-                                                            display: true,
+                                                            display: false,
                                                             labelString: '<?php if ($sensor4_is_current == true) { echo _("Current") . " - I"; } else { echo _("temperature") . _(" - ϑ");}?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
@@ -1256,65 +901,17 @@
                                                         position: 'right',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                if (Math.round(value) === value) {
-                                                                    return '  ' + value + '<?php if ($sensor4_is_current == true) { echo ' A'; } else { echo ' °C'; }?>' + '  ';
+
+                                                                    return '                   ';
                                                                 }
                                                             },
                                                             fontColor: '#000000',
                                                             //    fontSize: 20,
                                                             //max: 25000,
-                                                            beginAtZero: true,
-                                                            maxTicksLimit: 10,
+                                                            beginAtZero: true
+                                                            //maxTicksLimit: 10
                                                             //max: <?php if ($sensor4_is_current == true) { echo '2'; } else { echo '30'; }?>, 
                                                             //min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-1'; }?>
-                                                    //-----austoscale max start
-                                                        max: <?php
-                                                            $dataset1 = ($non_empties = array_filter($thermometer4_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = Null;
-                                                            }
-                                                            $value_dataset1 = max($dataset1);
-
-                                                            if ($sensor4_is_current == true) {
-                                                               $max_multi = 1;
-                                                               $max_offset= 1;
-                                                            } 
-                                                            else {
-                                                               $max_multi = 5;
-                                                               $max_offset= 10;
-                                                            }
-                                                            $max_value_temperature = intval (($value_dataset1)/$max_multi)*$max_multi + $max_offset;
-
-                                                            print $max_value_temperature;
-                                                        ?>,
-                                                    //-----austoscale max end
-
-                                                    //-----austoscale min start
-                                                        min: <?php 
-                                                            $dataset1 = ($non_empties = array_filter($thermometer4_dataset));
-                                                            if (empty($dataset1)) {
-                                                                    $dataset1[] = 100;
-                                                            }
-                                                            $value_dataset1 = intval(min($dataset1));
-
-                                                            if ($sensor4_is_current == true) {
-                                                               $min_multi = 1;
-                                                               $min_offset = 0;
-                                                            } 
-                                                            else {
-                                                               $min_multi = 5;
-                                                               $min_offset = -4;
-                                                            }
-
-                                                            if ($value_dataset1 == 100) {
-                                                               $min_value_temperature = 0;
-                                                            } 
-                                                            else {
-                                                               $min_value_temperature = intval (($value_dataset1)/$min_multi)*$min_multi + $min_offset;
-                                                            }
-                                                             print $min_value_temperature;
-                                                        ?>
-                                                    //-----austoscale min end
                                                         }
                                                     }]
                                                 }
