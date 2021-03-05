@@ -113,8 +113,7 @@
                                         <canvas id="thermometer1_chart"></canvas> 
 <!--                                    <canvas id="thermometer2_chart"></canvas> 
                                         <canvas id="thermometer3_chart"></canvas> 
--->
-                                        <canvas id="thermometer4_chart"></canvas> 
+                                        <canvas id="thermometer4_chart"></canvas>  -->
                                         <canvas id="dewpoint_humidity_chart"></canvas> 
                                         
                                         <script>
@@ -243,7 +242,7 @@
                                                             displayFormats: {
                                                                 second: 'HH:mm:ss',
                                                                 minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
+                                                                hour: 'MMM D, HH:mm'
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
@@ -265,14 +264,16 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return '  ' + value.toFixed(1) + ' °C' + '  ';
+                                                                val = Math.round(value * 10)/10;
+                                                                return '  ' + val + ' °C' + '  ';
                                                             },
                                                             fontColor: '#000000',
-                                                            //fontSize: 20,
+                                                            beginAtZero: false,
+                                                            suggestedMax: 15,
+                                                            suggestedMin: 10															
                                                             //max: 30,
                                                             //min: -2
                                                         }
-                                                        
                                                     }, {
                                                         scaleLabel: {
                                                             display: true,
@@ -287,20 +288,21 @@
                                                         labelString: '<?php echo _("humidity") ?>',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return '  ' + value.toFixed(0) + ' %' + '  ';
+                                                                val = Math.round(value * 10)/10;
+                                                                return '  ' + val + ' %' + '  ';
                                                             },
                                                             fontColor: '#000000',
-                                                           //    fontSize: 20,
-														   beginAtZero: true,
-                                                           // max: 100
-                                                           min: 0
+                                                            beginAtZero: true,
+                                                            //suggestedMax: 100,
+                                                            //suggestedMin: 30
+                                                            //max: 100,
+                                                            //min: 0
                                                         }
                                                     }]
                                                 }
                                             }
                                         };
  
-
                                         // Taupunkt und absolute Feuchte
                                         var dewpoint_humidity_chart = document.getElementById("dewpoint_humidity_chart");
                                         var config_dewpoint_humidity_chart = {
@@ -371,7 +373,7 @@
                                                     fill: false
                                                 },
                                                 {
-                                                    label: '<?php echo _("humidity") . ' ext.' ?>',
+                                                    label: '<?php echo _("humidity abs") . ' ext.' ?>',
                                                     yAxisID: 'humidity',
                                                     data: <?php echo json_encode($extern_humidity_dataset); ?>,
                                                     backgroundColor: '#08298A',
@@ -429,7 +431,7 @@
                                                             displayFormats: {
                                                                 second: 'HH:mm:ss',
                                                                 minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
+                                                                hour: 'MMM D, HH:mm'
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
@@ -451,17 +453,18 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                return '  ' + value.toFixed(1) + ' °C' + '  ';
+                                                                val = Math.round(value * 10)/10;
+                                                                return '  ' + val + ' °C' + '  ';
                                                             },
                                                             fontColor: '#000000',
-                                                            //fontSize: 20,
+                                                            suggestedMax: 10,
+                                                            suggestedMin: -2															
                                                             //max: 30,
                                                             //min: -2
                                                         }
-                                                        
                                                     }, {
                                                         scaleLabel: {
-                                                            display: false,
+                                                            display: true,
 //                                                            labelString: '<?php echo _("humidity abs") ?> <?php echo _(" - φ") ?>',
                                                               labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
                                                         //    fontSize: 20,
@@ -475,14 +478,17 @@
                                                         labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-//                                                              return '  ' + value.toFixed(0) + ' g/m3' + '  ';
-                                                                return '                    ';
+                                                                val = Math.round(value * 10)/10;
+//                                                              return '  ' + val + ' g/m3' + '  ';
+                                                                return '  ' + '        ' + ' ' + '  ';
                                                             },
                                                             fontColor: '#000000',
-                                                            //fontSize: 20,
-                                                            //beginAtZero: true,  
-                                                            //max: 100,
-                                                            min: 0
+/*                                                           
+                                                            suggestedMax: 10,
+                                                            suggestedMin: 0,															
+                                                            //max: 30,
+                                                            //min: -2
+*/
                                                         }
                                                     }]
                                                 }
@@ -494,10 +500,7 @@
                                         var config_scales_chart = {
                                             type: 'line',
                                             data: {
-                                                labels: 
-                                                    <?php 
-                                                    echo $scale1_timestamps_axis_text;
-                                                    ?>,
+                                                labels: <?php echo $scale1_timestamps_axis_text; ?>,
                                                 datasets: [{
                                                     label: '<?php echo _("scale") ?> 1',
                                                     yAxisID: 'scale1',
@@ -521,7 +524,7 @@
                                                 },
                                                 {
                                                     label: '<?php echo _("scale") ?> 2',
-                                                    yAxisID: 'scale1',
+                                                    yAxisID: 'scale2',
                                                     data: <?php echo json_encode($scale2_dataset); ?>,
                                                     backgroundColor: '#BF9543',
                                                     borderColor: '#BF9543',
@@ -557,7 +560,11 @@
                                                     intersect: false,
                                                     callbacks: {
                                                         label: function(tooltipItem, data) {
-                                                            return Number(tooltipItem.yLabel).toFixed(1);
+                                                            if (tooltipItem.datasetIndex === 0) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' gr';
+                                                            } else if (tooltipItem.datasetIndex === 1) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' gr';
+                                                            }
                                                         }
                                                     }
                                                 },
@@ -568,7 +575,7 @@
                                                             displayFormats: {
                                                                 second: 'HH:mm:ss',
                                                                 minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
+                                                                hour: 'MMM D, HH:mm'
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
@@ -582,7 +589,6 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("scale") . ' 1'; ?>',
-                                                        //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'scale1',
@@ -590,23 +596,20 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                if (Math.round(value) === value)
-                                                                return value + ' gr' + ' ';
+                                                                val = Math.round(value * 10)/10;
+                                                                return val + ' gr' + ' ';
                                                             },
                                                             fontColor: '#000000',
-                                                            //fontSize: 20,
                                                             beginAtZero: true,
-															//max: 20000,
-                                                            //min: 0, 
-                                                            //stepSize: 1
+                                                            maxTicksLimit: 10,
+                                                            suggestedMax: 100
+	                                                        //suggestedMin: 0
                                                         }
-                                                        
                                                     },
                                                     {
                                                         scaleLabel: {
-                                                            display: false,
+                                                            display: true,
                                                             labelString: '<?php echo _("scale") . ' 2'; ?>',
-                                                        //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
                                                         id: 'scale2',
@@ -614,23 +617,21 @@
                                                         position: 'right',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                if (Math.round(value) === value) {
-                                                                return '                    ';
-                                                            }
+                                                                val = Math.round(value * 10)/10;    
+                                                                return ' ' + val + ' gr';
                                                             },
                                                             fontColor: '#000000',
-                                                            //    fontSize: 20,
                                                             beginAtZero: true,
-															//max: 20000,
-                                                            //min: 0
-                                                            //stepSize: 1
+                                                            maxTicksLimit: 10,
+                                                            suggestedMax: 100
+                                                           //suggestedMin: 0
                                                         }
                                                     }]
                                                 }
                                             }
                                         };
                                         
-                                        // NTC thermometer 1,2,3
+                                        // NTC thermometer 1,2,3 on left side and ntc4/Current Sensor on right side
                                         var thermometer1_chart = document.getElementById("thermometer1_chart");
                                         var config_thermometer1_chart = {
                                             type: 'line',
@@ -699,116 +700,10 @@
                                                     pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
-                                                }]
-                                            },
-                                            options: {
-                                                title: {
-                                                    display: true,
-                                                    text: '<?php echo _("Thermometer") ?> NTC 1..3',
-                                                    fontSize: 24
                                                 },
-                                                legend: {
-                                                    labels: {
-                                                    usePointStyle: true,
-                                                    },
-                                                },
-                                                tooltips: {
-                                                    mode: 'index',
-                                                    intersect: false,
-                                                    callbacks: {
-                                                        label: function(tooltipItem, data) {
-                                                            if (tooltipItem.datasetIndex === 0) {
-                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
-                                                            } else if (tooltipItem.datasetIndex === 1) {
-                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
-                                                            } else if (tooltipItem.datasetIndex === 2) {
-                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
-                                                            }
-                                                        }
-                                                    }
-                                                },
-                                                scales: {
-                                                    xAxes: [{
-                                                        type: "time",
-                                                        time: {
-                                                            displayFormats: {
-                                                                second: 'HH:mm:ss',
-                                                                minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
-                                                            },
-                                                            tooltipFormat: 'DD. MMM. YYYY HH:mm'
-                                                        },
-                                                        ticks: {
-                                                            autoSkip: false,
-                                                            maxRotation: 0,
-                                                            minRotation: 0
-                                                        },
-                                                    }, ],
-                                                    yAxes: [
-                                                    {
-                                                        scaleLabel: {
-                                                            display: true,
-                                                            labelString: '<?php echo _("temperature")?> <?php echo _(" - ϑ") ?>',
-                                                        //    fontSize: 20,
-                                                            fontColor: '#000000'
-                                                        },
-                                                        id: 'temperature',
-                                                        type: 'linear',
-                                                        position: 'left',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                return '  ' + value.toFixed(1) + ' °C' + '  ';
-                                                            },
-                                                            fontColor: '#000000',
-                                                            //    fontSize: 20,
-                                                            //max: 25000,
-                                                            //beginAtZero: true,
-                                                            //maxTicksLimit: 10,
-                                                        //max: 30, 
-                                                        //min: -2
-                                                        }
-                                                    },
-                                                    {
-                                                        scaleLabel: {
-                                                            display: false,
-                                                            labelString: '<?php echo _("temperature")?> <?php echo _(" - ϑ") ?>',
-                                                        //    fontSize: 20,
-                                                            fontColor: '#000000'
-                                                        },
-                                                        id: 'temperature_right',
-                                                        type: 'linear',
-                                                        position: 'right',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-                                                                return '                    ';
-                                                            },
-                                                            fontColor: '#000000',
-                                                            //    fontSize: 20,
-                                                            //max: 25000,
-                                                            beginAtZero: true,
-                                                            maxTicksLimit: 10,
-                                                        //max: 30, 
-                                                        //min: -4
-                                                        }
-                                                    }]
-                                                }
-                                            }
-                                        };
- 
-                                        
-                                        // Meat thermometer NTC 4, can also be AC/DC Current sensor
-                                        var thermometer4_chart = document.getElementById("thermometer4_chart");
-                                        var config_thermometer4_chart = {
-                                            type: 'line',
-                                            data: {
-                                                labels: 
-                                                    <?php 
-                                                    echo $thermometer4_timestamps_axis_text;
-                                                    ?>,
-                                                datasets: [
                                                 {
-                                                    label: '<?php if ($sensor4_is_current == true) { echo _("Current") . " - I"; } else { echo _("temperature") . _(" - ϑ");}?>',
-                                                    yAxisID: 'temperature',
+                                                    label: '<?php if ($sensor4_is_current == true) { echo _("Current"); } else { echo _("temperature") . ' NTC 4';}?>',
+                                                    yAxisID: 'temp_current',
                                                     data: <?php echo json_encode($thermometer4_dataset); ?>,
                                                     backgroundColor: '#ff0000',
                                                     borderColor: '#ff0000',
@@ -830,7 +725,7 @@
                                             options: {
                                                 title: {
                                                     display: true,
-                                                    text: '<?php if ($sensor4_is_current == true){ echo "AC/DC-Current"; } else { echo _("Thermometer") . ' NTC 4';} ?>',
+                                                    text: '<?php if ($sensor4_is_current == true) { echo  _("Thermometer") . " NTC 1..3, " . _("Current"); } else { echo _("Thermometer") . " NTC 1..4";}?>',
                                                     fontSize: 24
                                                 },
                                                 legend: {
@@ -843,7 +738,15 @@
                                                     intersect: false,
                                                     callbacks: {
                                                         label: function(tooltipItem, data) {
-                                                            return Number(tooltipItem.yLabel).toFixed(3) + '<?php if ($sensor4_is_current == true){ echo " A"; } else { echo " °C"; } ?>';
+                                                            if (tooltipItem.datasetIndex === 0) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                            } else if (tooltipItem.datasetIndex === 1) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                            } else if (tooltipItem.datasetIndex === 2) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
+                                                            } else if (tooltipItem.datasetIndex === 3) {
+                                                                <?php if ($sensor4_is_current == true){ echo 'return Number(tooltipItem.yLabel).toFixed(3) + " A";'; } else { echo 'return Number(tooltipItem.yLabel).toFixed(1) + " °C";';}?> 
+                                                            }
                                                         }
                                                     }
                                                 },
@@ -854,7 +757,7 @@
                                                             displayFormats: {
                                                                 second: 'HH:mm:ss',
                                                                 minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
+                                                                hour: 'MMM D, HH:mm'
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
@@ -868,7 +771,7 @@
                                                     {
                                                         scaleLabel: {
                                                             display: true,
-                                                            labelString: '<?php if ($sensor4_is_current == true) { echo _("Current") . " - I"; } else { echo _("temperature") . _(" - ϑ");}?>',
+                                                            labelString: '<?php echo "NTC 1..3 " . _("temperature")?> <?php echo _(" - ϑ") ?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -877,47 +780,46 @@
                                                         position: 'left',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-                                                                    return '  ' + value.toFixed(1) + '<?php if ($sensor4_is_current == true) { echo ' A'; } else { echo ' °C'; }?>' + '  ';
-                                                                }
+                                                                val = Math.round(value * 10)/10;
+                                                                return '  ' + val + ' °C' + '  ';
                                                             },
                                                             fontColor: '#000000',
                                                             //    fontSize: 20,
                                                             //max: 25000,
-                                                            beginAtZero: true,
+                                                            beginAtZero: false,
                                                             maxTicksLimit: 10,
-                                                            //max: <?php if ($sensor4_is_current == true) { echo '2'; } else { echo '30'; }?>, 
-                                                            //min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-1'; }?>
+                                                            suggestedMax: 15,
+                                                            suggestedMin: 5
                                                         }
                                                     },
                                                     {
                                                         scaleLabel: {
-                                                            display: false,
-                                                            labelString: '<?php if ($sensor4_is_current == true) { echo _("Current") . " - I"; } else { echo _("temperature") . _(" - ϑ");}?>',
+                                                            display: true,
+                                                            labelString: '<?php if ($sensor4_is_current == true) { echo _("Current") . " - I"; } else { echo "NTC4 " . _("temperature") . _(" - ϑ");}?>',
                                                         //    fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
-                                                        id: 'temperature_right4',
+                                                        id: 'temp_current',
                                                         type: 'linear',
                                                         position: 'right',
                                                         ticks: {
                                                             callback: function(value, index, values) {
-
-                                                                    return '                   ';
-                                                                }
+                                                                val = Math.round(value * <?php if ($sensor4_is_current == true) { echo '1000)/1000';} else { echo '10)/10';}?>;
+                                                                return '  ' + val + '<?php if ($sensor4_is_current == true) { echo ' A'; } else { echo ' °C'; }?>' + '  ';
                                                             },
                                                             fontColor: '#000000',
-                                                            //    fontSize: 20,
-                                                            //max: 25000,
-                                                            beginAtZero: true
-                                                            //maxTicksLimit: 10
-                                                            //max: <?php if ($sensor4_is_current == true) { echo '2'; } else { echo '30'; }?>, 
-                                                            //min: <?php if ($sensor4_is_current == true) { echo '0'; } else { echo '-1'; }?>
+                                                            beginAtZero: <?php if ($sensor4_is_current == true) { echo 'true';} else { echo 'false';}?>,
+                                                            maxTicksLimit: 10,
+	                                                        suggestedMin: <?php if ($sensor4_is_current == true) { echo '0';} else { echo '10';}?>,
+                                                            suggestedMax: <?php if ($sensor4_is_current == true) { echo '2';} else { echo '20';}?>
+                                                            //max: 30, 
+                                                            //min: -4
                                                         }
                                                     }]
                                                 }
                                             }
                                         };
-                                                                                                                        
+ 
                                                                                                                         
                                         // licht
                                         var light_chart = document.getElementById("light_chart");
@@ -966,7 +868,7 @@
                                                             displayFormats: {
                                                                 second: 'HH:mm:ss',
                                                                 minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
+                                                                hour: 'MMM D, HH:mm'
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
@@ -1078,7 +980,7 @@
                                                             displayFormats: {
                                                                 second: 'HH:mm:ss',
                                                                 minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
+                                                                hour: 'MMM D, HH:mm'
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
@@ -1190,7 +1092,7 @@
                                                             displayFormats: {
                                                                 second: 'HH:mm:ss',
                                                                 minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
+                                                                hour: 'MMM D, HH:mm'
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
@@ -1302,7 +1204,7 @@
                                                             displayFormats: {
                                                                 second: 'HH:mm:ss',
                                                                 minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
+                                                                hour: 'MMM D, HH:mm'
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
@@ -1413,7 +1315,7 @@
                                                             displayFormats: {
                                                                 second: 'HH:mm:ss',
                                                                 minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
+                                                                hour: 'MMM D, HH:mm'
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
@@ -1525,7 +1427,7 @@
                                                             displayFormats: {
                                                                 second: 'HH:mm:ss',
                                                                 minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
+                                                                hour: 'MMM D, HH:mm'
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
@@ -1636,7 +1538,7 @@
                                                             displayFormats: {
                                                                 second: 'HH:mm:ss',
                                                                 minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
+                                                                hour: 'MMM D, HH:mm'
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
@@ -1748,7 +1650,7 @@
                                                             displayFormats: {
                                                                 second: 'HH:mm:ss',
                                                                 minute: 'HH:mm',
-                                                                hour: 'MMM D, H[h]'
+                                                                hour: 'MMM D, HH:mm'
                                                             },
                                                             tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                         },
@@ -1820,7 +1722,7 @@
                                             window.dewpoint_humidity_chart = new Chart(dewpoint_humidity_chart, config_dewpoint_humidity_chart);
                                         //    window.thermometer2_chart = new Chart(thermometer2_chart, config_thermometer2_chart);
                                         //    window.thermometer3_chart = new Chart(thermometer3_chart, config_thermometer3_chart);
-                                            window.thermometer4_chart = new Chart(thermometer4_chart, config_thermometer4_chart);
+                                        //    window.thermometer4_chart = new Chart(thermometer4_chart, config_thermometer4_chart);
                                             window.light_chart = new Chart(light_chart, config_light_chart);
                                             window.uv_chart = new Chart(uv_chart, config_uv_chart);
                                             window.heater_chart = new Chart(heater_chart, config_heater_chart);

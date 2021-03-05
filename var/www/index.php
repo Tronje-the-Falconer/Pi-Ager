@@ -294,7 +294,7 @@
                                                         displayFormats: {
                                                             second: 'HH:mm:ss',
                                                             minute: 'HH:mm',
-                                                            hour: 'MMM D, H[h]'
+                                                            hour: 'MMM D, HH:mm'
                                                         },
                                                         tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                     },
@@ -319,8 +319,10 @@
                                                             return '  ' + value.toFixed(1) + ' °C' + '  ';
 														},
                                                         fontColor: '#000000',
-														// fontSize: 20,
-													    //max: 30,
+                                                        beginAtZero: false,
+                                                        suggestedMax: 15,
+                                                        suggestedMin: 10															
+                                                        //max: 30,
                                                         //min: -2
                                                     }
                                                     
@@ -342,9 +344,10 @@
                                                                 return '  ' + value + ' %' + '  ';
                                                             },
      													   fontColor: '#000000',
-                                                           //    fontSize: 20,
-                                                           beginAtZero: true
-														   //max: 100,
+                                                           beginAtZero: true,
+                                                           //suggestedMax: 100,
+                                                           //suggestedMin: 30
+                                                           //max: 100,
                                                            //min: 0
                                                     }
                                                 }]
@@ -417,7 +420,7 @@
                                                         displayFormats: {
                                                             second: 'HH:mm:ss',
                                                             minute: 'HH:mm',
-                                                            hour: 'MMM D, H[h]'
+                                                            hour: 'MMM D, HH:mm'
                                                         },
                                                         tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                     },
@@ -443,10 +446,10 @@
                                                             return value + ' gr' + ' ';
                                                         },
                                                         fontColor: '#000000',
-                                                        // fontSize: 20,
-                                                        beginAtZero: true
-														//max: 25000,
-                                                        //min: 0
+                                                        beginAtZero: true,
+                                                        maxTicksLimit: 10,
+                                                        suggestedMax: 100
+                                                        //suggestedMin: 0
                                                     }
                                                     
                                                 },
@@ -466,10 +469,10 @@
                                                             return ' ' + value + ' gr';
                                                         },
                                                         fontColor: '#000000',
-                                                        // fontSize: 20,
-                                                        beginAtZero: true
-													    // max: 100
-                                                        //min:0 
+                                                        beginAtZero: true,
+                                                        maxTicksLimit: 10,
+                                                        suggestedMax: 100
+                                                        //suggestedMin: 0
 
                                                     }
                                                     
