@@ -1123,7 +1123,7 @@ button.art-button
    white-space: nowrap;
    text-align: center;
    color: #404040;
-   margin: 0 5px 0 0 !important;
+   margin: 0 5px 0 5px !important;
    overflow: visible;
    cursor: pointer;
    text-indent: 0;
@@ -1131,7 +1131,7 @@ button.art-button
    -webkit-box-sizing: content-box;
    -moz-box-sizing: content-box;
    box-sizing: content-box;
-   min-width: 30px;
+   min-width: 50px;
 }
 
 .art-button img
