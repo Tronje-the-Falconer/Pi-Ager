@@ -37,12 +37,12 @@
                                                     if($status_uv_manual == 0) {
                                                         echo '<td><img src="/images/icons/status_off_manual_20x20.png" title="uv off"></td>';
                                                         echo '<td style="text-align: left; ">' . _('uv light manual off') . '</td>';
-                                                        echo "<td style='text-align: left;'><button class='art-button' name='turn_on_uv' onclick='return confirm('". _('end pause uv-light!') ."');>" . _('auto'). "</button></td>";
+                                                        echo '<td style="text-align: left;"><button class="art-button" name="turn_on_uv" onclick="return confirm(\'' . _('end pause uv-light!') . '\');">' . _('auto'). '</button></td>';
                                                     }
                                                     else{
                                                         echo '<td><img src="/images/icons/status_on_20x20.png" title="uv on"></td>';
 														echo '<td style="text-align: left;">' . _('auto mode on') . '</td>';
-                                                        echo "<td style='text-align: left;'><button class='art-button' name='turn_off_uv' onclick='return confirm('". _('pause uv-light!') ."');>" . _('uv light off'). '</button></td>';
+                                                        echo '<td style="text-align: left;"><button class="art-button" name="turn_off_uv" onclick="return confirm(\''. _('pause uv-light!') . '\');">' . _('uv light off'). '</button></td>';
                                                     }
                                                 ?>
                                             </tr>
