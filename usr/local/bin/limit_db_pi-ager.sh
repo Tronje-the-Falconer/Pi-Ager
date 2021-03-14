@@ -16,8 +16,9 @@ exec &>> /var/log/pi-ager/db-cleanup.log
 # Day seconds = 86400
 # Hour seconds = 3600
 # Half hour = 1800
+# Here: take 3 month
 
-range_seconds=2629700
+range_seconds=$((2629700 * 3))
 # echo "range_seconds: $range_seconds"
 
 seconds_now=$EPOCHSECONDS
@@ -26,13 +27,7 @@ seconds_now=$EPOCHSECONDS
 limit=$((seconds_now - range_seconds))
 # echo $limit
 
-sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; DELETE FROM sensor_temperature_data WHERE last_change < $limit;"
-sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; DELETE FROM sensor_humidity_data WHERE last_change < $limit;"
-sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; DELETE FROM scale1_data WHERE last_change < $limit;"
-sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; DELETE FROM scale2_data WHERE last_change < $limit;"
-sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; DELETE FROM sensor_temperature_meat1_data WHERE last_change < $limit;"
-sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; DELETE FROM sensor_temperature_meat2_data WHERE last_change < $limit;"
-sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; DELETE FROM sensor_temperature_meat3_data WHERE last_change < $limit;"
-sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; DELETE FROM sensor_temperature_meat4_data WHERE last_change < $limit;"
+sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; DELETE FROM all_scales WHERE last_change < $limit;"
+sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; DELETE FROM all_sensors WHERE last_change < $limit;"
 
 echo $(date '+%d-%m-%Y %H:%M:%S') "Pi-Ager database shrinked"

@@ -89,7 +89,7 @@ class cl_logic_send_email:
         cl_fact_logger.get_instance().debug('Server     = ' + mail_server)
         cl_fact_logger.get_instance().debug('Port       = ' + str(mail_port))
         cl_fact_logger.get_instance().debug('User       = ' + mail_user)
-        cl_fact_logger.get_instance().debug('Password   = ' + decrypted_secret)
+        # cl_fact_logger.get_instance().debug('Password   = ' + decrypted_secret)
         # cl_fact_logger.get_instance().debug('Mail from  = ' + mail_from)
         cl_fact_logger.get_instance().debug('Mail to    = ' + mail_to)
         

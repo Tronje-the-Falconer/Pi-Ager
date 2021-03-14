@@ -14,9 +14,9 @@
     $status_light_manual =get_table_value($current_values_table,$status_light_manual_key);
     $status_uv_manual = get_table_value($current_values_table, $status_uv_manual_key);
     
-    $current_scale1_timestamp_last_change_dataset = get_scale_table_row($data_scale1_table);
-    $current_scale1_timestamp_last_change = $current_scale1_timestamp_last_change_dataset[$last_change_field];
-    $current_scale2_timestamp_last_change_dataset = get_scale_table_row($data_scale2_table);
-    $current_scale2_timestamp_last_change = $current_scale2_timestamp_last_change_dataset[$last_change_field];
+    # $current_scale1_timestamp_last_change_dataset = get_scale_table_row($data_scale1_table);
+    # $current_scale1_timestamp_last_change = $current_scale1_timestamp_last_change_dataset[$last_change_field];
+    # $current_scale2_timestamp_last_change_dataset = get_scale_table_row($data_scale2_table);
+    # $current_scale2_timestamp_last_change = $current_scale2_timestamp_last_change_dataset[$last_change_field];
     logger('DEBUG', 'read_current_db performed');
 ?>

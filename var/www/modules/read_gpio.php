@@ -28,10 +28,14 @@
     // $grepscale1 = shell_exec('sudo /var/sudowebscript.sh grepscale1');
     // $grepscale2 = shell_exec('sudo /var/sudowebscript.sh grepscale2');
     $grepmain = exec('pgrep -a python3 | grep main.py');
-    $grepagingtable = exec('pgrep -a python3 | grep agingtable.py');
-    $grepscale = exec('pgrep -a python3 | grep scale.py');
-    //$grepwebcam = shell_exec('ps ax | grep -v grep | grep mjpg-streamer');
+    // $grepagingtable = exec('pgrep -a python3 | grep agingtable.py');
+    $grepagingtable = intval(get_table_value($current_values_table, $status_agingtable_key));
+    // $grepscale = exec('pgrep -a python3 | grep scale.py');
+    // $grepwebcam = shell_exec('ps ax | grep -v grep | grep mjpg-streamer');
     $grepbackup = shell_exec('ps ax | grep -v grep | grep pi-ager_backup.sh');
+    # check if scale threads are alive
+    $scale1_thread_alive = intval(get_table_value($current_values_table, $scale1_thread_alive_key));
+    $scale2_thread_alive = intval(get_table_value($current_values_table, $scale2_thread_alive_key));
     
     #Schaltzustände setzen
     if($read_gpio_cooling_compressor == 0) {

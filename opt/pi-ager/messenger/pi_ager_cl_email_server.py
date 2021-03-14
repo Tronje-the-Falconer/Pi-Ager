@@ -60,7 +60,7 @@ class cl_db_email_server(cl_ab_database_config):
         cl_fact_logger.get_instance().debug(sql_statement)
         
         self.database.write_data_to_db(sql_statement)
-        self.database.commit()
+        # self.database.commit()    # done in class cl_db_database_sqlite.write_data_to_db
         
 class th_logic_email_server(cl_logic_email_server):   
 

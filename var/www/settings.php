@@ -50,7 +50,8 @@
                                             echo '<td><img src="images/icons/operatingmode_fail_42x42.png" style="padding: 10px;"></td>
                                             <td></td>
                                             <td>';
-                                            echo "now you have proof that developers are not perfect! ";
+                                            echo "Pi-Ager service not running!<br>";
+                                            echo "Maybe you have proved that developers are not perfect! ";
                                             echo " please go to: ";
                                             echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a>';
                                             echo '</td><td></td>';
@@ -82,7 +83,7 @@
                                         </tr>
                                         <?php
                                             print '<tr>';
-                                            // Prüft, ob Prozess scale läuft ( NULL = scale.py läuft nicht als Prozess)
+                                            // Prüft, ob scale threads laufen 
                                             //$grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
                                             if ($grepbackup != NULL){ //wenn backup läuft
                                                 echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
@@ -90,31 +91,33 @@
                                                 <td>';
                                                 echo "Backup is currently running! ";
                                             }
-                                            elseif ($grepscale == NULL){
-                                                echo '<td><img src="images/icons/scale_fail_42x42.png" alt="" style="padding: 10px;"></td>
-                                                <td></td>
-                                                <td>';
-                                                echo "now you have proof that developers are not perfect! ";
-                                                echo " please go to: ";
-                                                echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a>';
-                                                echo '</td><td></td>';
-                                                echo '</tr>';
-                                            }
-                                            elseif ($grepscale != NULL){
-                                                if (intval(get_table_value($settings_scale1_table, $referenceunit_key)) == 0){
-                                                    $tara_scale1_disabled = true;
+                                            else {
+                                                if ($grepmain == NULL or intval(get_table_value($current_values_table, $scale1_thread_alive_key)) == 0 or intval(get_table_value($current_values_table, $scale2_thread_alive_key)) == 0){
+                                                    echo '<td><img src="images/icons/scale_fail_42x42.gif" alt="" style="padding: 10px;"></td>
+                                                    <td></td>
+                                                    <td>';
+                                                    echo "Pi-Ager service not running!<br>";
+                                                    echo "Maybe you have proved that developers are not perfect! ";
+                                                    echo " please go to: ";
+                                                    echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a>';
+                                                    echo '</td><td></td>';
+                                                    echo '</tr>';
                                                 }
-                                                else{
-                                                    $tara_scale1_disabled = false;
-                                                }
-                                                if (intval(get_table_value($settings_scale2_table, $referenceunit_key)) == 0){
-                                                    $tara_scale2_disabled = true;
-                                                }
-                                                else{
-                                                    $tara_scale2_disabled = false;
-                                                }
-                                                print '<form  method="post">';
-                                                if (intval(get_table_value($current_values_table,$status_scale1_key)) == 0){
+                                                else {
+                                                    if (intval(get_table_value($settings_scale1_table, $referenceunit_key)) == 0){
+                                                        $tara_scale1_disabled = true;
+                                                    }
+                                                    else{
+                                                        $tara_scale1_disabled = false;
+                                                    }
+                                                    if (intval(get_table_value($settings_scale2_table, $referenceunit_key)) == 0){
+                                                        $tara_scale2_disabled = true;
+                                                    }
+                                                    else{
+                                                        $tara_scale2_disabled = false;
+                                                    }
+                                                    print '<form  method="post">';
+                                                    if (intval(get_table_value($current_values_table, $status_scale1_key)) == 0){
                                                         echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
                                                         <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                         <td>';
@@ -126,7 +129,7 @@
                                                         }
                                                         echo '</td><td></td></tr><tr>';
                                                     }
-                                                    elseif (intval(get_table_value($current_values_table,$status_scale1_key)) == 1) {
+                                                    else {
                                                         echo '<td><img src="images/icons/scale_42x42.gif" alt="" style="padding: 10px;"></td>
                                                         <td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                         <td>';
@@ -152,7 +155,7 @@
                                                         }
                                                         echo '</td><td></td>';
                                                     }
-                                                    elseif (intval(get_table_value($current_values_table,$status_scale2_key)) == 1){
+                                                    else {
                                                         echo '<td><img src="images/icons/scale_42x42.gif" alt="" style="padding: 10px;"></td>
                                                         <td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                         <td>';
@@ -172,8 +175,9 @@
                                                     print '<tr><td></td>
                                                     <td style="text-align: right;"></td><td><form action="scale_wizzard.php" method="post"> <input type="radio" name="scale_wizzard_radiobutton" value="' . $scale1_key . '" checked="checked"><label> '._('scale').'&nbsp1</label><br><input type="radio" name="scale_wizzard_radiobutton" value="' . $scale2_key . '"><label> '._('scale').'&nbsp2</label> </td>';
                                                     echo '<td>';
-                                                    echo "<button class=\"art-button\" name=\"scale_wizzard\" value=\"scale_wizzard\"  onclick=\"return confirm('"._('attention').' ! \\n '._('measurement on scales are stopped'). ' \\n ' . _('please relieve the load cell completely') . "!');\">"._('calibrate wizzard')."</button>";
+                                                    echo "<button class=\"art-button\" type=\"submit\" name=\"scale_wizzard\" value=\"scale_wizzard\" onclick=\"return confirm('"._('attention').' ! \\n\\n'._('measurement on scales are stopped'). ' \\n' . _('please relieve the load cell completely') . "!');\">"._('calibrate wizzard')."</button>";
                                                     print '</form></td></tr>';
+                                                }
                                             } 
                                         ?>
                                         
@@ -186,15 +190,36 @@
                                         <tr>
                                             <td width="100px"></td>
                                             <td width="100px"></td>
-                                            <td width="150px"></td>
+                                            <td width="200px"></td>
                                             <td ></td>
                                             <td ></td>
                                         </tr>
-                                        <form  method="post">
-                                        <tr>
-                                            <td>
-                                                <?php
-                                                    if ($grepagingtable == NULL){
+                                         <?php
+                                            print '<tr>';
+                                            // Prüft, ob main thread läuft
+                                            // oder backup läuft
+                                            if ($grepbackup != NULL){ //wenn backup läuft
+                                                echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
+                                                <td></td>
+                                                <td>';
+                                                echo "Backup is currently running! ";
+                                            }
+                                            else {
+                                                if ($grepmain == NULL or intval(get_table_value($current_values_table, $aging_thread_alive_key)) == 0){
+                                                    echo '<td><img src="images/icons/agingtable_fail_42x42.gif" alt="" style="padding: 10px;"></td>
+                                                    <td></td>
+                                                    <td>';
+                                                    echo "Pi-Ager service not running!<br>";
+                                                    echo "Maybe you have proved that developers are not perfect! ";
+                                                    echo " please go to: ";
+                                                    echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a>';
+                                                    echo '</td><td></td>';
+                                                    echo '</tr>';
+                                                }                                       
+                                                else {
+                                                    echo '<form  method="post"> <tr> <td>';
+                                                
+                                                    if ($grepagingtable == 0){
                                                         echo '<img src="images/icons/agingtable_42x42.png" alt="" style="padding: 10px;">';
                                                         echo '</td><td>';
                                                         echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding: 10px;">';
@@ -203,12 +228,9 @@
                                                         echo '<img src="images/icons/agingtable_42x42.gif" alt="" style="padding: 10px;">';
                                                         echo '</td><td>';
                                                         echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding: 10px;">';
-                                                        
                                                     }
-                                                ?>
-                                            </td>
-                                            <td style="text-align: left;">
-                                                <?php 
+                                                    echo '</td> <td style="text-align: left;">';
+
                                                     if (isset ($agingtable_names)){
                                                         foreach($agingtable_names as $name) {
                                                             if ($name==$desired_maturity){
@@ -221,64 +243,65 @@
                                                             }
                                                         }
                                                     }
-                                                ?>
-                                            </td>
-                                            <td>
-                                                <table>
-                                                   <tr>
-                                                        <td align="left"><?php echo _('startphase') . ':' ?></td>
-                                                        <td><input type="number" style="width: 60px;" step="1" name="agingtable_startperiod" value="1" min="1" max="50"> </td>
+                                                    echo '</td>';
+                                
+                                                    echo '<td>
+                                                        <table>
+                                                            <tr>
+                                                                <td align="left">' . _('startphase') . ':' . '</td>';
+                                                          echo '<td><input type="number" style="width: 60px;" step="1" name="agingtable_startperiod" value="1" min="1" max="50"> </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>' . _('startday of phase') . ':' . '</td>';
+                                                          echo '<td><input type="number" style="width: 60px;" step="1" name="agingtable_startday" value="1" min="1" max="50"></td>
+                                                            </tr>
+                                                        </table>
+                                                        </td>
+                                                        <td align="left"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td><?php echo _('startday of phase') . ':' ?></td>
-                                                        <td><input type="number" style="width: 60px;" step="1" name="agingtable_startday" value="1" min="1" max="50"></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td style="text-align: left;">';
+
+                                                        if (isset ($agingtable_names)){
+                                                            echo "<button class=\"art-button\" name=\"select_agingtable\" value=\"select_agingtable\"onclick=\"return confirm('"._('select new agingtable?')."');\">"._('select')."</button>";
+                                                        }
+
+                                                  echo '</td>
+                                                        <td style=" text-align: left; padding-left: 20px;">
+                                                        </td>
                                                     </tr>
-                                                </table>
-                                            </td>
-                                            <td align="left"></td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td style="text-align: left;">
-                                                <?php
-                                                    if (isset ($agingtable_names)){
-                                                        echo "<button class=\"art-button\" name=\"select_agingtable\" value=\"select_agingtable\"onclick=\"return confirm('"._('select new agingtable?')."');\">"._('select')."</button>";
-                                                    }
-                                                ?>
-                                            </td>
-                                            <td style=" text-align: left; padding-left: 20px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td style="text-align: left;">
-                                                <?php
-                                                    if (isset ($agingtable_names)){
-                                                            if ($grepagingtable == NULL){
+                                                    <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td style="text-align: left;">';
+
+                                                        if (isset ($agingtable_names)){
+                                                            if ($grepagingtable == 0){
                                                                 echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" value=\"pi-ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')." \\n "._('manual values will be overwritten in database!')."');\">"._('start agingtable')."</button>";
                                                             }
                                                             else {
                                                                 echo "<button class=\"art-button\" name=\"agingtable_stop\" value=\"agingtable_stop\" onclick=\"return confirm('"._('stop agingtable?').' \\n '._('pi-ager continues with the last values of the agingtable!')."');\">"._('stop agingtable')."</button>";
                                                             }
                                                         }
-                                                ?>
-                                            </td>
-                                            <td></td>
-                                            <td align="left"></td>
-                                        </tr>
+
+                                                 echo '</td>
+                                                        <td></td>
+                                                        <td align="left"></td>
+                                                    </tr>
                                     </table>
-                                    </form>
-                                            
+                                    </form>';
+                                                }
+                                            }?>        
                                             
                                     <table>
                                         <form  id="agingtable_edit" method="post">
                                         <tr>
                                             <td width="100px"></td>
                                             <td width="100px"></td>
-                                            <td width="200px"></td>
-                                            <td ></td>
+                                            <td width="250px"></td>
+                                            <td width="100px"></td>
                                             <td ></td>
                                         </tr>
                                         <tr>
@@ -413,7 +436,7 @@
                                                             $data_days = $dataset[$agingtable_days_field];
                                                         } else {$data_days = '..';}
 
-                                                        if ($current_period == $index_row AND $grepagingtable != NULL){
+                                                        if ($current_period == $index_row AND $grepagingtable != 0){
                                                             echo '<tr bgcolor=#D19600 >';
                                                         }
                                                         else{
@@ -433,7 +456,7 @@
                                                     } 
                                                  }
                                                  catch (Exception $e) {
-                                                    }
+                                                 }
                                             }
                                         ?>
                                     </table>
@@ -447,7 +470,7 @@
                                     </table>
                                 </div>
                                 <?php 
-                                    if ($grepagingtable == NULL){
+                                    if ($grepagingtable == 0){
                                         include ('manvals.php');
                                         }
                                     else {
@@ -459,11 +482,11 @@
                                 <?php 
                                     include ('config.php'); 
                                 ?>
-                                <script>
+                            <!--    <script>
                                     if ( window.history.replaceState ) {
                                         window.history.replaceState( null, null, window.location.href );
                                     }
-                                </script>
+                                </script> -->
                                 <!----------------------------------------------------------------------------------------Content Ende-->
                             </div>
                         </div>

@@ -16,7 +16,7 @@ board_mode = gpio.BCM              # GPIO board mode (BCM = Broadcom SOC channel
 
 # linke Pinleiste:
 # 3 V
-gpio_notinuse_0 = 2                 
+gpio_notinuse_2 = 2                 
 gpio_heater = 3                    # GPIO fuer Heizkabel
 gpio_cooling_compressor = 4        # GPIO fuer Kuehlschrankkompressor
 # Ground
@@ -28,7 +28,7 @@ gpio_scale2_data = 10               # GPIO fuer Waage2 Data
 gpio_scale2_sync = 9                # GPIO fuer Waage2 Sync
 gpio_ups_bat_low = 11               # GPIO fuer UPS Batterie low signal
 # Ground
-gpio_notinuse_2 =  0
+gpio_notinuse_3 =  0
 gpio_scale1_data = 5                # GPIO fuer Waage1 Data
 gpio_scale1_sync = 6                # GPIO fuer Waage1 Sync
 gpio_alarm = 13                     # GPIO fuer Piezzo
@@ -83,7 +83,7 @@ def setupGPIO():
     
     # linke Pinleiste:
     # 3,3 V
-    # gpio.setup(pi_ager_names.gpio_notinuse_0, gpio. )            
+    # gpio.setup(pi_ager_names.gpio_notinuse_2, gpio. )            
     gpio.setup(gpio_heater, gpio.OUT)                # Heizung setzen
     gpio.setup(gpio_cooling_compressor, gpio.OUT)    # Kuehlung setzen
     # Ground
@@ -95,7 +95,7 @@ def setupGPIO():
     gpio.setup(gpio_scale2_sync, gpio.OUT)            # Scale2 Sync setzen
     # gpio.setup(pi_ager_names.gpio_ups_bat_low, gpio.IN)           # UPS Bat LOW signal
     # Ground
-    # gpio.setup(pi_ager_names.gpio_notinuse_2, gpio. )
+    # gpio.setup(pi_ager_names.gpio_notinuse_3, gpio. )
     gpio.setup(gpio_scale1_data, gpio.IN)             # Scale1 Data setzen
     gpio.setup(gpio_scale1_sync, gpio.OUT)            # Scale1 Sync setzen
     gpio.setup(gpio_alarm, gpio.OUT )                 # Piezzo setzen
@@ -177,11 +177,11 @@ def gpios_are_in_use():
     else:
         return False
 
-def gpio_is_in_use(gpio):
+def gpio_is_in_use(gpio_pin):
     """
     check if GPIO is in use
     """
-    gpio_used = gpio.gpio_function(gpio)
+    gpio_used = gpio.gpio_function(gpio_pin)
     
     if gpio_used == -1:
         return False

@@ -160,109 +160,110 @@
                                         type: 'line',
                                         data: {
                                             labels:
-                                                <?php echo $temperature_timestamps_axis_text; ?>,
-                                                datasets: [{
-                                                    label: '<?php echo _("temperature") . ' int.' ?>',
-                                                    yAxisID: 'temperature',
-                                                    data: <?php echo json_encode($temperature_dataset);?>,
-                                                    backgroundColor: '#FF4040',
-                                                    borderColor: '#FF4040',
-                                                    borderWidth: 2,
-                                                    <?php
-                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
-                                                            print 'pointRadius: 1, pointHitRadius: 5,';
-                                                        }
-                                                        else
-                                                        {
-                                                            print 'pointRadius: 0, pointHitRadius: 5,';
-                                                        }
-                                                    ?>
-                                                    pointStyle:'rect',
-                                                    cubicInterpolationMode: 'monotone',
-                                                    fill: false
-                                                },
-                                                {
-                                                    label: '<?php echo _("temperature") . ' ext.' ?>',
-                                                    yAxisID: 'temperature',
-                                                    data: <?php echo json_encode($extern_temperature_dataset); ?>,
-                                                    backgroundColor: '#8A0808',
-                                                    borderColor: '#8A0808',
-                                                    borderWidth: 2,
-                                                    <?php
-                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
-                                                            print 'pointRadius: 1, pointHitRadius: 5,';
-                                                        }
-                                                        else
-                                                        {
-                                                            print 'pointRadius: 0, pointHitRadius: 5,';
-                                                        }
-                                                    ?>
-                                                    pointStyle:'rect',
-                                                    cubicInterpolationMode: 'monotone',
-                                                    fill: false
-                                                },
-                                                {
-                                                    label: '<?php echo _("temperature") . ' NTC 1' ?>',
-                                                    hidden: true,
-                                                    yAxisID: 'temperature',
-                                                    data: <?php echo json_encode($thermometer1_dataset); ?>,
-                                                    backgroundColor: '#F7AC08',
-                                                    borderColor: '#F7AC08',
-                                                    borderWidth: 2,
-                                                    <?php if ($diagram_mode == 'hour') {print 'pointRadius: 1,
-                                                    pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                    pointHitRadius: 5,';} ?>
-                                                    pointStyle:'rect',
-                                                    cubicInterpolationMode: 'monotone',
-                                                    fill: false
-                                                },
-                                                {
-                                                    label: '<?php echo _("humidity") . ' int.' ?>',
-                                                    yAxisID: 'humidity',
-                                                    data: <?php echo json_encode($humidity_dataset); ?>,
-                                                    backgroundColor: '#59A9C4',
-                                                    borderColor: '#59A9C4',
-                                                    borderWidth: 2,
-                                                    <?php
-                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
-                                                            print 'pointRadius: 1, pointHitRadius: 5,';
-                                                        }
-                                                        else
-                                                        {
-                                                            print 'pointRadius: 0, pointHitRadius: 5,';
-                                                        }
-                                                    ?>
-                                                    pointStyle:'rect',
-                                                    cubicInterpolationMode: 'monotone',
-                                                    fill: false
-                                                },
-                                                {
-                                                    label: '<?php echo _("humidity") . ' ext.' ?>',
-                                                    yAxisID: 'humidity',
-                                                    data: <?php echo json_encode($extern_humidity_dataset); ?>,
-                                                    backgroundColor: '#08298A',
-                                                    borderColor: '#08298A',
-                                                    borderWidth: 2,
-                                                    <?php
-                                                        if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
-                                                            print 'pointRadius: 1, pointHitRadius: 5,';
-                                                        }
-                                                        else
-                                                        {
-                                                            print 'pointRadius: 0, pointHitRadius: 5,';
-                                                        }
-                                                    ?>
-                                                    pointStyle:'rect',
-                                                    cubicInterpolationMode: 'monotone',
-                                                    fill: false
+                                                <?php echo $all_sensors_timestamps_axis; ?>,
+                                            datasets: [{
+                                                label: '<?php echo _("temperature") . ' int.' ?>',
+                                                yAxisID: 'temperature',
+                                                data: <?php echo json_encode($temperature_dataset);?>,
+                                                backgroundColor: '#FF4040',
+                                                borderColor: '#FF4040',
+                                                borderWidth: 2,
+                                                <?php
+                                                    if ($customtime <= 3600) {
+                                                        print 'pointRadius: 1, pointHitRadius: 5,';
+                                                    }
+                                                    else {
+                                                        print 'pointRadius: 0, pointHitRadius: 5,';
+                                                    }
+                                                ?>
+                                                pointStyle:'rect',
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
+                                            },
+                                            {
+                                                label: '<?php echo _("temperature") . ' ext.' ?>',
+                                                yAxisID: 'temperature',
+                                                data: <?php echo json_encode($extern_temperature_dataset); ?>,
+                                                backgroundColor: '#8A0808',
+                                                borderColor: '#8A0808',
+                                                borderWidth: 2,
+                                                <?php
+                                                    if ($customtime <= 3600) {
+                                                        print 'pointRadius: 1, pointHitRadius: 5,';
+                                                    }
+                                                    else {
+                                                        print 'pointRadius: 0, pointHitRadius: 5,';
+                                                    }
+                                                ?>
+                                                pointStyle:'rect',
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
+                                            },
+                                            {
+                                                label: '<?php echo _("temperature") . ' NTC 1' ?>',
+                                                hidden: true,
+                                                yAxisID: 'temperature',
+                                                data: <?php echo json_encode($thermometer1_dataset); ?>,
+                                                backgroundColor: '#F7AC08',
+                                                borderColor: '#F7AC08',
+                                                borderWidth: 2,
+                                                <?php
+                                                    if ($customtime <= 3600) {
+                                                        print 'pointRadius: 1, pointHitRadius: 5,';
+                                                    }
+                                                    else {
+                                                        print 'pointRadius: 0, pointHitRadius: 5,';
+                                                    }
+                                                ?>
+                                                pointStyle:'rect',
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
+                                            },                                            
+                                            {
+                                                label: '<?php echo _("humidity") . ' int.' ?>',
+                                                yAxisID: 'humidity',
+                                                data: <?php echo json_encode($humidity_dataset); ?>,
+                                                backgroundColor: '#59A9C4',
+                                                borderColor: '#59A9C4',
+                                                borderWidth: 2,
+                                                <?php
+                                                    if ($customtime <= 3600) {
+                                                        print 'pointRadius: 1, pointHitRadius: 5,';
+                                                    }
+                                                    else {
+                                                        print 'pointRadius: 0, pointHitRadius: 5,';
+                                                    }
+                                                ?>
+                                                pointStyle:'rect',
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
+                                            },
+                                            {
+                                                label: '<?php echo _("humidity") . ' ext.' ?>',
+                                                yAxisID: 'humidity',
+                                                data: <?php echo json_encode($extern_humidity_dataset); ?>,
+                                                backgroundColor: '#08298A',
+                                                borderColor: '#08298A',
+                                                borderWidth: 2,
+                                                <?php
+                                                    if ($customtime <= 3600) {
+                                                        print 'pointRadius: 1, pointHitRadius: 5,';
+                                                    }
+                                                    else {
+                                                        print 'pointRadius: 0, pointHitRadius: 5,';
+                                                    }
+                                                ?>
+                                                pointStyle:'rect',
+                                                cubicInterpolationMode: 'monotone',
+                                                fill: false
                                             }]
                                         },
                                         options: {
-                                                title: {
-                                                    display: true,
-                                                    text: '<?php echo _("temperature") ?> & <?php echo _("humidity") ?>',
-                                                    fontSize: 24
-                                                },
+                                            title: {
+                                                display: true,
+                                                text: '<?php echo _("temperature") ?> & <?php echo _("humidity") ?>',
+                                                fontSize: 24
+                                            },
                                             legend: {
                                                 labels: {
                                                     usePointStyle: true,
@@ -280,9 +281,9 @@
                                                         } else if (tooltipItem.datasetIndex === 2) {
                                                             return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
                                                         } else if (tooltipItem.datasetIndex === 3) {
-                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °%';
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' %';
                                                         } else if (tooltipItem.datasetIndex === 4) {
-                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' °%';
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' %';
                                                         }                                                        
                                                     }
                                                 }
@@ -294,7 +295,7 @@
                                                         displayFormats: {
                                                             second: 'HH:mm:ss',
                                                             minute: 'HH:mm',
-                                                            hour: 'MMM D, HH:mm'
+                                                            hour: 'MMM D, H[h]'
                                                         },
                                                         tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                     },
@@ -314,10 +315,10 @@
                                                     id: 'temperature',
                                                     type: 'linear',
                                                     position: 'left',
-													ticks: {
-														callback: function(value, index, values) {
-                                                            return '  ' + value.toFixed(1) + ' °C' + '  ';
-														},
+                                                    ticks: {
+                                                        callback: function(value, index, values) {
+                                                            return '  ' +  Math.round(value * 10)/10 + ' °C' + '  ';
+                                                        },
                                                         fontColor: '#000000',
                                                         beginAtZero: false,
                                                         suggestedMax: 15,
@@ -325,30 +326,28 @@
                                                         //max: 30,
                                                         //min: -2
                                                     }
-                                                    
                                                 }, {
-                                                        scaleLabel: {
-                                                            display: true,
-                                                            labelString: '<?php echo _("humidity") ?> <?php echo _(" - φ") ?>',
-                                                        //    fontSize: 20,
-                                                            fontColor: '#000000'
-                                                        },
-                                                        id: 'humidity',
-                                                        type: 'linear',
+                                                    scaleLabel: {
                                                         display: true,
-                                                        position: 'right',
-                                                        labelString: '<?php echo _("humidity") ?>',
-                                                        ticks: {
-                                                            callback: function(value, index, values) {
-																if (Math.round(value) === value)
-                                                                return '  ' + value + ' %' + '  ';
-                                                            },
-     													   fontColor: '#000000',
-                                                           beginAtZero: true,
-                                                           //suggestedMax: 100,
-                                                           //suggestedMin: 30
-                                                           //max: 100,
-                                                           //min: 0
+                                                        labelString: '<?php echo _("humidity") ?> <?php echo _(" - φ") ?>',
+                                                        // fontSize: 20,
+                                                        fontColor: '#000000'
+                                                    },
+                                                    id: 'humidity',
+                                                    type: 'linear',
+                                                    display: true,
+                                                    position: 'right',
+                                                    labelString: '<?php echo _("humidity") ?>',
+                                                    ticks: {
+                                                        callback: function(value, index, values) {
+                                                            return '  ' + Math.round(value * 10)/10 + ' %' + '  ';
+                                                        },
+                                                        fontColor: '#000000',
+                                                        beginAtZero: true,
+                                                        //suggestedMax: 100,
+                                                        //suggestedMin: 30
+                                                        //max: 100,
+                                                        //min: 0
                                                     }
                                                 }]
                                             }
@@ -360,8 +359,7 @@
                                     var config_scales_chart = {
                                         type: 'line',
                                         data: {
-                                            labels: 
-                                                <?php echo $scale1_timestamps_axis_text; ?>,
+                                            labels: <?php echo $all_scales_timestamps_axis; ?>,
                                             datasets: [{
                                                 label: '<?php echo _("scale") ?> 1',
                                                 yAxisID: 'scale1',
@@ -369,9 +367,14 @@
                                                 backgroundColor: '#AEC645',
                                                 borderColor: '#AEC645',
                                                 borderWidth: 2,
-                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                pointHitRadius: 5,';} ?>
+                                                <?php
+                                                    if ($customtime <= 3600) {
+                                                        print 'pointRadius: 2, pointHitRadius: 5,';
+                                                    }
+                                                    else {
+                                                        print 'pointRadius: 0, pointHitRadius: 5,';
+                                                    }
+                                                ?>
                                                 pointStyle:'rect',
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false,
@@ -380,13 +383,18 @@
                                             {
                                                 label: '<?php echo _("scale") ?> 2',
                                                 yAxisID: 'scale2',
-                                                data: <?php echo json_encode($scale2_dataset); ?>,
+                                                data: <?php echo json_encode($scale2_dataset);?>,
                                                 backgroundColor: '#BF9543',
                                                 borderColor: '#BF9543',
                                                 borderWidth: 2,
-                                                <?php if ($diagram_mode == 'hour') {print 'pointRadius: 2,
-                                                pointHitRadius: 5,';} else {print 'pointRadius: 0,
-                                                pointHitRadius: 5,';} ?>
+                                                <?php
+                                                    if ($customtime <= 3600) {
+                                                        print 'pointRadius: 2, pointHitRadius: 5,';
+                                                    }
+                                                    else {
+                                                        print 'pointRadius: 0, pointHitRadius: 5,';
+                                                    }
+                                                ?>
                                                 pointStyle:'rect',
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false,
@@ -420,7 +428,7 @@
                                                         displayFormats: {
                                                             second: 'HH:mm:ss',
                                                             minute: 'HH:mm',
-                                                            hour: 'MMM D, HH:mm'
+                                                            hour: 'MMM D, H[h]'
                                                         },
                                                         tooltipFormat: 'DD. MMM. YYYY HH:mm'
                                                     },
@@ -442,8 +450,8 @@
                                                     position: 'left',
                                                     ticks: {
                                                         callback: function(value, index, values) {
-                                                            if (Math.round(value) === value)
-                                                            return value + ' gr' + ' ';
+                                                            val = Math.round(value * 10)/10;
+                                                            return val + ' gr' + ' ';
                                                         },
                                                         fontColor: '#000000',
                                                         beginAtZero: true,
@@ -451,7 +459,6 @@
                                                         suggestedMax: 100
                                                         //suggestedMin: 0
                                                     }
-                                                    
                                                 },
                                                 {
                                                     scaleLabel: {
@@ -465,17 +472,15 @@
                                                     position: 'right',
                                                     ticks: {
                                                         callback: function(value, index, values) {
-                                                            if (Math.round(value) === value)
-                                                            return ' ' + value + ' gr';
+                                                            val = Math.round(value * 10)/10;
+                                                            return ' ' + val + ' gr';
                                                         },
                                                         fontColor: '#000000',
                                                         beginAtZero: true,
                                                         maxTicksLimit: 10,
                                                         suggestedMax: 100
                                                         //suggestedMin: 0
-
                                                     }
-                                                    
                                                 }]
                                             }
                                         }
@@ -813,10 +818,10 @@
                                                         <td class="text_left">';
                                                     echo strtoupper(_('humidification'));
                                                     echo '</td>
-                                                        <td>'.$sensor_humidity.'%</td>
-                                                        <td>'.$setpoint_humidity.'%</td>
-                                                        <td>'.($setpoint_humidity - $switch_on_humidifier).'%</td>
-                                                        <td>'.($setpoint_humidity - $switch_off_humidifier).'%</td>';
+                                                        <td>'.$sensor_humidity.' %</td>
+                                                        <td>'.$setpoint_humidity.' %</td>
+                                                        <td>'.($setpoint_humidity - $switch_on_humidifier).' %</td>
+                                                        <td>'.($setpoint_humidity - $switch_off_humidifier).' %</td>';
                                                 }
 
                                                 if ($modus==4){
@@ -824,28 +829,28 @@
                                                         <td><img src='.$humidifier_on_off_png.' title="PIN_HUM 18[12] -> IN 3 (PIN 4)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('humidification'));
-                                                    echo '<td>'.$sensor_humidity.'%</td>
-                                                        <td>'.$setpoint_humidity.'%</td>
-                                                        <td>'.($setpoint_humidity - $switch_on_humidifier).'%</td>
-                                                        <td>'.($setpoint_humidity - $switch_off_humidifier).'%</td></tr>';
+                                                    echo '<td>'.$sensor_humidity.' %</td>
+                                                        <td>'.$setpoint_humidity.' %</td>
+                                                        <td>'.($setpoint_humidity - $switch_on_humidifier).' %</td>
+                                                        <td>'.($setpoint_humidity - $switch_off_humidifier).' %</td></tr>';
                                                     echo '<tr> <td ><img src="images/icons/exhausting_42x42.png" alt=""></td>
                                                         <td><img src='.$exhausting_on_off_png.' title="PIN_EXH 23[16] -> IN 5 (PIN 5)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('exhausting'));
                                                     echo '</td>
-                                                        <td>'.$sensor_humidity.'%</td>
-                                                        <td>'.$setpoint_humidity.'%</td>
-                                                        <td>'.($setpoint_humidity + $switch_on_humidifier).'%</td>
-                                                        <td>'.($setpoint_humidity + $switch_off_humidifier).'%</td></tr>';
+                                                        <td>'.$sensor_humidity.' %</td>
+                                                        <td>'.$setpoint_humidity.' %</td>
+                                                        <td>'.($setpoint_humidity + $switch_on_humidifier).' %</td>
+                                                        <td>'.($setpoint_humidity + $switch_off_humidifier).' %</td></tr>';
                                                     echo '<tr> <td ><img src="images/icons/dehumidification_42x42.png" alt=""></td>
                                                         <td><img src='.$dehumidifier_on_off_png.' title="PIN_DEH 7[26] -> IN 8 (PIN 9)"></td>
                                                         <td class="text_left">';
                                                     echo strtoupper(_('dehumidification'));
                                                     echo '</td>
-                                                        <td>'.$sensor_humidity.'%</td>
-                                                        <td>'.$setpoint_humidity.'%</td>
-                                                        <td>'.($setpoint_humidity + $switch_on_humidifier).'%</td>
-                                                        <td>'.($setpoint_humidity + $switch_off_humidifier).'%</td></tr>';
+                                                        <td>'.$sensor_humidity.' %</td>
+                                                        <td>'.$setpoint_humidity.' %</td>
+                                                        <td>'.($setpoint_humidity + $switch_on_humidifier).' %</td>
+                                                        <td>'.($setpoint_humidity + $switch_off_humidifier).' %</td></tr>';
                                                 }
                                           ?>
                                        </tr>
@@ -966,21 +971,21 @@
                                         <tr>
                                             <?php
                                                 //$grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
-                                                if ($grepscale == 0){
-                                                    echo '<td><img src="images/icons/scale_fail_42x42.png" alt=""></td>
+                                                if ($scale1_thread_alive == 0){
+                                                    echo '<td><img src="images/icons/scale_fail_42x42.gif" alt=""></td>
                                                             <td><img src="images/icons/status_off_20x20.png" title=""></td>
                                                             <td class="text_left">';
                                                     echo strtoupper(_('see settings'));
                                                     echo '</td>';
                                                 }
-                                                elseif ($grepscale != 0 and $status_scale1 == 0){
+                                                elseif ($status_scale1 == 0){
                                                     echo '<td><img src="images/icons/scale_42x42.png" alt=""></td>
                                                             <td><img src="images/icons/status_off_20x20.png" title=""></td>
                                                             <td class="text_left">';
                                                     echo strtoupper(_('scale1'));
                                                     echo '</td>';
                                                 }
-                                                elseif ($grepscale != 0 and $status_scale1 == 1) {
+                                                elseif ($status_scale1 == 1) {
                                                     echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
                                                             <td><img src="images/icons/status_on_20x20.png" title=""></td>
                                                             <td  class="text_left">';
@@ -995,19 +1000,21 @@
                                         <tr>
                                             <?php
                                                 //$grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
-                                                if ($grepscale == 0){
-                                                    echo '<td></td>
-                                                            <td></td>
-                                                            <td></td>';
+                                                if ($scale2_thread_alive == 0){
+                                                    echo '<td><img src="images/icons/scale_fail_42x42.gif" alt=""></td>
+                                                            <td><img src="images/icons/status_off_20x20.png" title=""></td>
+                                                            <td class="text_left">';
+                                                    echo strtoupper(_('see settings'));
+                                                    echo '</td>';
                                                 }
-                                                elseif ($grepscale != 0 and $status_scale2 == 0){
+                                                elseif ($status_scale2 == 0){
                                                     echo '<td><img src="images/icons/scale_42x42.png" alt=""></td>
                                                             <td><img src="images/icons/status_off_20x20.png" title=></td>
                                                             <td  class="text_left">';
                                                     echo strtoupper(_('scale2'));
                                                     echo '</td>';
                                                 }
-                                                elseif ($grepscale != 0 and $status_scale2 == 1) {
+                                                elseif ($status_scale2 == 1) {
                                                   echo '<td><img src="images/icons/scale_42x42.gif" alt=""></td>
                                                             <td><img src="images/icons/status_on_20x20.png" title=></td>
                                                             <td  class="text_left">';

@@ -125,7 +125,7 @@
                                             type: 'line',
                                             data: {
                                                 labels: 
-                                                    <?php echo $temperature_timestamps_axis_text; ?>,
+                                                    <?php echo $all_sensors_timestamps_axis; ?>,
                                                 datasets: [{
                                                     label: '<?php echo _("temperature") . ' int.' ?>',
                                                     yAxisID: 'temperature',
@@ -309,7 +309,7 @@
                                             type: 'line',
                                             data: {
                                                 labels: 
-                                                    <?php echo $dewpoint_timestamps_axis_text; ?>,
+                                                    <?php echo $all_sensors_timestamps_axis; ?>,
                                                 datasets: [{
                                                     label: '<?php echo _("dewpoint") . ' int.' ?>',
                                                     yAxisID: 'temperature',
@@ -500,7 +500,7 @@
                                         var config_scales_chart = {
                                             type: 'line',
                                             data: {
-                                                labels: <?php echo $scale1_timestamps_axis_text; ?>,
+                                                labels: <?php echo $all_scales_timestamps_axis; ?>,
                                                 datasets: [{
                                                     label: '<?php echo _("scale") ?> 1',
                                                     yAxisID: 'scale1',
@@ -638,7 +638,7 @@
                                             data: {
                                                 labels: 
                                                     <?php 
-                                                    echo $temperature_timestamps_axis_text;
+                                                    echo $all_sensors_timestamps_axis;
                                                     ?>,
                                                 datasets: [
                                                 {
