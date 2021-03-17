@@ -42,8 +42,9 @@
                                         if ($grepbackup != NULL){ //wenn backup läuft
                                             echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
                                             <td></td>
-                                            <td></td><td></td><td></td>';
+                                            <td>';
                                             echo "Backup is currently running! ";
+                                            echo '</td>';
                                         }
                                         elseif ($grepmain == NULL){ // wenn main.py nicht läuft und der Status in DB aus ist
                                             
@@ -90,6 +91,7 @@
                                                 <td></td>
                                                 <td>';
                                                 echo "Backup is currently running! ";
+                                                echo '</td></tr>';
                                             }
                                             else {
                                                 if ($grepmain == NULL or intval(get_table_value($current_values_table, $scale1_thread_alive_key)) == 0 or intval(get_table_value($current_values_table, $scale2_thread_alive_key)) == 0){
@@ -203,6 +205,7 @@
                                                 <td></td>
                                                 <td>';
                                                 echo "Backup is currently running! ";
+                                                echo '</td></tr>';
                                             }
                                             else {
                                                 if ($grepmain == NULL or intval(get_table_value($current_values_table, $aging_thread_alive_key)) == 0){
