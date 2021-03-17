@@ -133,7 +133,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('offset'); ?>:</td>
-                                            <td class="text_left_padding"><input name="offset_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $offset_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="offset_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" step="0.1" required value=<?php echo $offset_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
@@ -165,7 +165,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('offset'); ?>:</td>
-                                            <td class="text_left_padding"><input name="offset_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" required value=<?php echo $offset_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="offset_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" step="0.1" required value=<?php echo $offset_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
