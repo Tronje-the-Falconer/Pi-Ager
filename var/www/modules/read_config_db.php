@@ -21,8 +21,9 @@
     $dehumidifier_modus = get_table_value($config_settings_table,$dehumidifier_modus_key);
     $failure_humidity_delta = get_table_value($config_settings_table, $failure_humidity_delta_key);
     $failure_temperature_delta = get_table_value($config_settings_table, $failure_temperature_delta_key);
-    
+
     $referenceunit_scale1 = number_format(floatval(get_table_value($settings_scale1_table,$referenceunit_key)), 1, '.', '');
+    $offset_scale1 = number_format(floatval(get_table_value($settings_scale1_table, $offset_key)), 1, '.', '');
     $measuring_interval_scale1 = get_table_value($settings_scale1_table,$scale_measuring_interval_key);
     $measuring_duration_scale1 = get_table_value($settings_scale1_table,$measuring_duration_key);
     $saving_period_scale1 = get_table_value($settings_scale1_table,$saving_period_key);
@@ -30,6 +31,7 @@
     $spikes_scale1 = get_table_value($settings_scale1_table,$spikes_key);
     
     $referenceunit_scale2 = number_format(floatval(get_table_value($settings_scale2_table,$referenceunit_key)), 1, '.', '');
+    $offset_scale2 = number_format(floatval(get_table_value($settings_scale2_table, $offset_key)), 1, '.', '');    
     $measuring_interval_scale2 = get_table_value($settings_scale2_table,$scale_measuring_interval_key);
     $measuring_duration_scale2 = get_table_value($settings_scale2_table,$measuring_duration_key);
     $saving_period_scale2 = get_table_value($settings_scale2_table,$saving_period_key);

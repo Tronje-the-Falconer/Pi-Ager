@@ -112,29 +112,51 @@
         
         return $values;
     }
-    
-    // get only part of values, range is defined by last_timestamp_diagram and first_timestamp_diagram
-    function get_diagram_values_range($table, $nth_value, $first_timestamp_diagram, $last_timestamp_diagram)
+     
+    // get all analog sensors data from all_sensors_table
+    function get_allsensors_dataset($nth_value, $first_timestamp_diagram, $last_timestamp_diagram)
     {
-        global $value_field, $last_change_field, $id_field;
+        global $all_sensors_table, $id_field, $last_change_field;
         
         open_connection();
-        $sql = 'SELECT ' . $value_field . ', ' .$last_change_field . ' FROM ' . $table . ' WHERE (' . $id_field . ' % ' . $nth_value . ') = 0' . ' AND ' . $last_change_field . ' BETWEEN ' . $first_timestamp_diagram . ' AND ' . $last_timestamp_diagram;
+        $sql = 'SELECT * FROM ' . $all_sensors_table. ' WHERE (' . $id_field . ' % ' . $nth_value . ') = 0' . ' AND ' . $last_change_field . ' BETWEEN ' . $first_timestamp_diagram . ' AND ' . $last_timestamp_diagram;
+        
         $result = get_query_result($sql);
-        $values = array();
+    
+        $index = 0;
+        $allsensors_rows = array();
         while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
-        {
-            $values[$dataset[$last_change_field]] = $dataset[$value_field];
-        }
+            {
+            $allsensors_rows[$index] = $dataset;
+            // Beispiel für späteren Aufruf: $allsensors_rows[0]['name']
+            $index++;
+            }
         close_database();
-        
-        //if (!isset ($values)){
-        //    $values = array();
-        //    $values['1'] = 0;
-        //}
-        
-        return $values;
+        return $allsensors_rows;
     }
+     
+    // get all scale sensors data from all_scales_table
+    function get_allscales_dataset($nth_value, $first_timestamp_diagram, $last_timestamp_diagram)
+    {
+        global $all_scales_table, $id_field, $last_change_field;
+        
+        open_connection();
+        $sql = 'SELECT * FROM ' . $all_scales_table. ' WHERE (' . $id_field . ' % ' . $nth_value . ') = 0' . ' AND ' . $last_change_field . ' BETWEEN ' . $first_timestamp_diagram . ' AND ' . $last_timestamp_diagram;
+        
+        $result = get_query_result($sql);
+    
+        $index = 0;
+        $allscales_rows = array();
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+            {
+            $allscales_rows[$index] = $dataset;
+            // Beispiel für späteren Aufruf: $allscales_rows[0]['name']
+            $index++;
+            }
+        close_database();
+        return $allscales_rows;
+    }
+
     
     function get_last_change($table, $key)
     {
@@ -782,12 +804,12 @@
         close_database();
         }
     
-    function write_admin($language, $referenceunit_scale1, $measuring_interval_scale1, $measuring_duration_scale1, $saving_period_scale1, $samples_scale1, $spikes_scale1,
-                            $referenceunit_scale2, $measuring_interval_scale2, $measuring_duration_scale2, $saving_period_scale2, $samples_scale2, $spikes_scale2,
+    function write_admin($language, $referenceunit_scale1, $measuring_interval_scale1, $measuring_duration_scale1, $saving_period_scale1, $samples_scale1, $spikes_scale1, $offset_scale1,
+                            $referenceunit_scale2, $measuring_interval_scale2, $measuring_duration_scale2, $saving_period_scale2, $samples_scale2, $spikes_scale2, $offset_scale2,
                             $temp_sensor1, $temp_sensor2, $temp_sensor3, $temp_sensor4)
     {
         global $value_field, $last_change_field, $key_field, $config_settings_table, $settings_scale1_table, $settings_scale2_table, $sensortype_key, $language_key;
-        global $referenceunit_key, $scale_measuring_interval_key, $measuring_duration_key, $saving_period_key, $samples_key, $spikes_key;
+        global $referenceunit_key, $scale_measuring_interval_key, $measuring_duration_key, $saving_period_key, $samples_key, $spikes_key, $offset_key;
         global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key;
         
         open_connection();
@@ -806,7 +828,7 @@
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($saving_period_scale1) . ' WHERE ' . $key_field . ' = "' . $saving_period_key . '"');
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($samples_scale1) . ' WHERE ' . $key_field . ' = "' . $samples_key . '"');
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($spikes_scale1) . ' WHERE ' . $key_field . ' = "' . $spikes_key . '"');
-        
+        get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($offset_scale1) . ' WHERE ' . $key_field . ' = "' . $offset_key . '"');        
         
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($referenceunit_scale2) . ' WHERE ' . $key_field . ' = "' . $referenceunit_key . '"');
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($measuring_interval_scale2) . ' WHERE ' . $key_field . ' = "' . $scale_measuring_interval_key . '"');
@@ -814,6 +836,7 @@
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($saving_period_scale2) . ' WHERE ' . $key_field . ' = "' . $saving_period_key . '"');
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($samples_scale2) . ' WHERE ' . $key_field . ' = "' . $samples_key . '"');
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($spikes_scale2) . ' WHERE ' . $key_field . ' = "' . $spikes_key . '"');
+        get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($offset_scale2) . ' WHERE ' . $key_field . ' = "' . $offset_key . '"');       
         
         close_database();
     }
@@ -849,14 +872,14 @@
     //Statistik Tabellen leeren
     function delete_statistic_tables()
     {
-        global $data_sensor_temperature_table, $data_sensor_humidity_table, $data_sensor_dewpoint_table, $data_sensor_extern_temperature_table, $data_sensor_extern_humidity_table, $data_sensor_extern_dewpoint_table, $status_heater_table, $status_exhaust_air_table, $status_cooling_compressor_table, $status_circulating_air_table, $status_uv_table, $status_light_table, $status_humidifier_table, $status_dehumidifier_table, $data_scale1_table, $data_scale2_table, $data_sensor_temperature_meat1_table, $data_sensor_temperature_meat2_table, $data_sensor_temperature_meat3_table, $data_sensor_temperature_meat4_table;
+        global $status_heater_table, $status_exhaust_air_table, $status_cooling_compressor_table, $status_circulating_air_table, $status_uv_table, $status_light_table, $status_humidifier_table, $status_dehumidifier_table, $all_sensors_table, $all_scales_table;
 
-        delete_data($data_sensor_temperature_table);
-        delete_data($data_sensor_humidity_table);
-        delete_data($data_sensor_dewpoint_table);
-        delete_data($data_sensor_extern_temperature_table);
-        delete_data($data_sensor_extern_humidity_table);
-        delete_data($data_sensor_extern_dewpoint_table);
+        // delete_data($data_sensor_temperature_table);
+        // delete_data($data_sensor_humidity_table);
+        // delete_data($data_sensor_dewpoint_table);
+        // delete_data($data_sensor_extern_temperature_table);
+        // delete_data($data_sensor_extern_humidity_table);
+        // delete_data($data_sensor_extern_dewpoint_table);
         delete_data($status_heater_table);
         delete_data($status_exhaust_air_table);
         delete_data($status_cooling_compressor_table);
@@ -866,13 +889,17 @@
         delete_data($status_light_table);
         delete_data($status_humidifier_table);
         delete_data($status_dehumidifier_table);
-        delete_data($data_scale1_table);
-        delete_data($data_scale2_table);
-        delete_data($data_sensor_temperature_meat1_table);
-        delete_data($data_sensor_temperature_meat2_table);
-        delete_data($data_sensor_temperature_meat3_table);
-        delete_data($data_sensor_temperature_meat4_table);
+        // delete_data($data_scale1_table);
+        // delete_data($data_scale2_table);
+        // delete_data($data_sensor_temperature_meat1_table);
+        // delete_data($data_sensor_temperature_meat2_table);
+        // delete_data($data_sensor_temperature_meat3_table);
+        // delete_data($data_sensor_temperature_meat4_table);
+        delete_data($all_sensors_table);
+        delete_data($all_scales_table);
         logger('DEBUG', 'delete_statistic_tables performed');
+        init_statistic_tables();
+        logger('DEBUG', 'initialize statistic tables performed');
     }
      
      function delete_data($table_name)
@@ -880,12 +907,50 @@
         open_connection();
         $sql = 'DELETE FROM ' . $table_name;
         get_query_result($sql);
-        $sql = 'VACUUM';
-        get_query_result($sql);
+        // VACUUM should not be used when other processes access the DB, concurrency problem
+        // $sql = 'VACUUM';
+        // get_query_result($sql);
         close_database();
         logger('DEBUG', 'delete_data performed');
     }
+    
+    // insert values with keys into table
+    function insert_value_into_status_table( $table, $value )
+    {
+        global $value_field, $last_change_field;
+        
+        $sql = 'INSERT INTO ' . $table . ' (' . $value_field . ', ' . $last_change_field . ' ) VALUES (' . strval($value) . ', ' . strval(get_current_time()) . ')';
+        open_connection();
+        execute_query($sql);
+        close_database();           
+    }
 
+    // set initial value into statistic tables derived from current_values table
+    function init_statistic_tables()
+    {
+        global $status_heater_table, $status_exhaust_air_table, $status_cooling_compressor_table, $status_circulating_air_table, $status_uv_table, $status_light_table, $status_humidifier_table, $status_dehumidifier_table;
+        global $status_heater_key, $status_exhaust_air_key, $status_cooling_compressor_key, $status_circulating_air_key, $status_uv_key, $status_light_key, $status_humidifier_key, $status_dehumidifier_key;
+        global $current_values_table;
+        
+        $status = get_table_value($current_values_table, $status_heater_key);
+        insert_value_into_status_table( $status_heater_table, $status );
+        $status = get_table_value($current_values_table, $status_exhaust_air_key);
+        insert_value_into_status_table( $status_exhaust_air_table, $status );
+        $status = get_table_value($current_values_table, $status_cooling_compressor_key);
+        insert_value_into_status_table( $status_cooling_compressor_table, $status ); 
+        $status = get_table_value($current_values_table, $status_circulating_air_key);
+        insert_value_into_status_table( $status_circulating_air_table, $status ); 
+        $status = get_table_value($current_values_table, $status_uv_key);
+        insert_value_into_status_table( $status_uv_table, $status );  
+        $status = get_table_value($current_values_table, $status_light_key);
+        insert_value_into_status_table( $status_light_table, $status );
+        $status = get_table_value($current_values_table, $status_humidifier_key);
+        insert_value_into_status_table( $status_humidifier_table, $status );                
+        $status = get_table_value($current_values_table, $status_dehumidifier_key);
+        insert_value_into_status_table( $status_dehumidifier_table, $status );                        
+    }
+    
+    
     function get_table_value_from_field($table, $key, $field)
     {
         global $id_field;

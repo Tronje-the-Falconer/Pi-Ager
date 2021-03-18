@@ -25,7 +25,7 @@ include 'modules/read_current_db.php';
                                     echo '<a href="images/webcam/'.$latest_filename.'" download>'; echo _('download image file'); echo '</a>';
                                     echo '<br/></div><br/>';
                                 ?>
-
+				                <h2 class="art-postheader"><?php echo _('webcam'); ?></h2>
                                 <div class="hg_container">
                                     <form  method="post" name="webcam">
                                         <table style="width: 100%;">
@@ -35,17 +35,27 @@ include 'modules/read_current_db.php';
                                         </table>
                                     </form>
                                 </div>
+				                <h2 class="art-postheader"><?php echo _('light switch'); ?></h2>
                                 <div class="hg_container">
                                     <form  method="post" name="light">
                                         <table style="width: 100%;">
-                                            <tr>
+		                                    <tr>
+                                                <td width="100px"></td>
+                                                <td width="180px"></td>
+                                                <td></td>
+                                            </tr>
+											<tr>
                                                  <?php 
                                                     
                                                     if($status_light_manual == 0) {
-                                                         echo '<td><button class="art-button" name="turn_on_light" >'; echo _('turn on light'); echo '</button></td>';
+                                                        echo '<td><img src="/images/icons/status_on_20x20.png" title="uv off"></td>';
+														echo '<td style="text-align: left; ">' . _('auto mode on') . '</td>';
+													    echo '<td align="left"><button class="art-button" name="turn_on_light" >'; echo _('light on'); echo '</button></td>';
                                                     }
                                                     else{
-                                                        echo '<td><button class="art-button" name="turn_off_light" >'; echo _('turn off light'); echo '</button></td>';
+													    echo '<td><img src="/images/icons/status_on_manual_20x20.png" title="uv on"></td>';
+														echo '<td style="text-align: left;">' . _('light manual on') . '</td>';
+                                                        echo '<td align="left"><button class="art-button" name="turn_off_light" >'; echo _('auto'); echo '</button></td>';
                                                     }
                                                 ?>
                                             </tr>

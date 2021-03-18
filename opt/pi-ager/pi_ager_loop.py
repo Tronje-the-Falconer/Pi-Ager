@@ -34,14 +34,17 @@ from main.pi_ager_cl_logger import cl_fact_logger
 # logger = pi_ager_logging.create_logger(__name__)
 # logger.debug('logging initialised')
 
+system_shutdown = False
+
 def autostart_loop():
     """
     starting loop. pi is startet. pi-ager is not startet. waiting for value 1 in database pi-ager-status
     """
     global status_pi_ager
+    global system_shutdown
     # global logger 
     try:
-        while True:
+        while not system_shutdown:
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
             status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
             current_agingtable_period = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.agingtable_period_key)
@@ -50,8 +53,7 @@ def autostart_loop():
             # logger.debug('autostart_loop ' + time.strftime('%H:%M:%S', time.localtime()))
             cl_fact_logger.get_instance().debug('autostart_loop ' + time.strftime('%H:%M:%S', time.localtime()))
             if status_agingtable == 1:
-                os.system('sudo /var/sudowebscript.sh startagingtable &')
-                
+                # os.system('sudo /var/sudowebscript.sh startagingtable &')
                 doMainLoop()
             elif status_pi_ager == 1:
                 doMainLoop()
@@ -326,21 +328,24 @@ def check_status_agingtable():
     check status of agingtable
     """
     try:
-        status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
-        process_agingtable = subprocess.getstatusoutput('ps ax | grep -v grep | grep agingtable.py &')
+        # status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
+        # process_agingtable = subprocess.getstatusoutput('ps ax | grep -v grep | grep agingtable.py &')
         # (0, '16114 pts/0    R+     0:01 python3 /opt/pi-ager/agingtable.py\n16238 pts/1    S+     0:00 sudo python3 agingtable.py\n16256 pts/1    R+     0:00 python3 agingtable.py')
         # läuft nicht Exitcode 0
         # (1, '')
         # läuft nicht Exitcode 1
         
-        if process_agingtable[1] == '':
-            process_agingtable_running = False
-        else:
-            process_agingtable_running = True
-        if status_agingtable == 1 and process_agingtable_running == False:
-            os.system('sudo /var/sudowebscript.sh startagingtable &')
+        # if process_agingtable[1] == '':
+        #     process_agingtable_running = False
+        # else:
+        #     process_agingtable_running = True
+        # if status_agingtable == 1 and process_agingtable_running == False:
+        #     os.system('sudo /var/sudowebscript.sh startagingtable &')
+        pass
     except Exception as cx_error:
-        cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+        # cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+        pass
+        
 def check_and_set_light():
     """
     manual light switch
@@ -400,7 +405,12 @@ def get_temp_sensor_data(sensor_config, adc_channel):
         value, unit = convertMCP.getValue(sensor_config, adc_channel)
             
     return value
-        
+
+def do_system_shutdown():
+     global system_shutdown
+     cl_fact_logger.get_instance().debug('in do_system_shutdown')
+     system_shutdown = True
+     
 def doMainLoop():
     """
     mainloop, pi-ager is running
@@ -450,8 +460,8 @@ def doMainLoop():
     global temp_sensor1_data
     global temp_sensor2_data 
     global temp_sensor3_data
-    global temp_sensor4_data    
-    # global logger
+    global temp_sensor4_data 
+    global system_shutdown
 
     # Pruefen Sensor, dann Settings einlesen
 
@@ -471,7 +481,7 @@ def doMainLoop():
     light_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_modus_key))  
           
     try:
-        while status_pi_ager == 1:
+        while status_pi_ager == 1 and not system_shutdown:
             #Here check Deviation of measurement
             check_and_set_light()
             check_status_agingtable()
@@ -949,9 +959,11 @@ def doMainLoop():
                     scale1_data = 0
                 else:
                     scale1_value = scale1_row[pi_ager_names.value_field]
+                    if scale1_value == None:
+                        scale1_value = 0
                     scale1_last_change = scale1_row[pi_ager_names.last_change_field]
                     timediff_scale1 = pi_ager_database.get_current_time() - scale1_last_change
-                    if timediff_scale1 < pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table,pi_ager_names.scale_measuring_interval_key):
+                    if timediff_scale1 < 12: # (ist nicht zuverlässig, wenn scale measure loop = ca 5s. Da brauchen wir etwas anderes...) pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table,pi_ager_names.scale_measuring_interval_key):
                         scale1_data = scale1_value
                     else:
                         scale1_data = 0
@@ -962,9 +974,11 @@ def doMainLoop():
                     scale2_data = 0
                 else:
                     scale2_value = scale2_row[pi_ager_names.value_field]
+                    if scale2_value == None:
+                        scale2_value = 0
                     scale2_last_change = scale2_row[pi_ager_names.last_change_field]
                     timediff_scale2 = pi_ager_database.get_current_time() - scale2_last_change
-                    if timediff_scale2 < pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table,pi_ager_names.scale_measuring_interval_key):
+                    if timediff_scale2 < 12: # (ist nicht zuverlässig, wenn scale measure loop = ca 5s. Da brauchen wir etwas anderes...) pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table,pi_ager_names.scale_measuring_interval_key):
                         scale2_data = scale2_value
                     else:
                         scale2_data = 0
@@ -1045,15 +1059,23 @@ def doMainLoop():
                
     
                 if status_value_has_changed():
-                    
                     logstring = logstring + ' \n ' + pi_ager_names.logspacer2
                 # Logstring komplett schreiben
                 cl_fact_logger.get_instance().info(logstring)
                     
                 # Messwerte in die RRD-Datei schreiben
                 # Schreiben der aktuellen Status-Werte
-                pi_ager_database.write_current_sensordata(pi_ager_init.loopcounter, sensor_temperature, sensor_humidity, sensor_dewpoint, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data)
+                # pi_ager_database.write_current_sensordata(pi_ager_init.loopcounter, sensor_temperature, sensor_humidity, sensor_dewpoint, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data)
                 pi_ager_database.write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, sensor_dewpoint, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint,status_uv, status_light, status_humidifier, status_dehumidifier, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data)
+                if (str(cl_fact_second_sensor_type.get_instance().get_sensor_type_ui()) == 'disabled'):
+                    sensor2_temp = None
+                    sensor2_hum = None
+                    sensor2_dew = None
+                else:
+                    sensor2_temp = second_sensor_temperature
+                    sensor2_hum = second_sensor_humidity
+                    sensor2_dew = second_sensor_dewpoint
+                pi_ager_database.write_all_sensordata(pi_ager_init.loopcounter, sensor_temperature, sensor_humidity, sensor_dewpoint, sensor2_temp, sensor2_hum, sensor2_dew, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data, None, None)    
                 cl_fact_logger.get_instance().debug('writing current values in database performed')
             
             else:
@@ -1082,8 +1104,7 @@ def doMainLoop():
             # Mainloop fertig
             cl_fact_logger.get_instance().debug('loop complete')
             pi_ager_init.loopcounter += 1
-            
-            
+
             
     # Ende While-Schleife
         # logger.debug('status!= 1')

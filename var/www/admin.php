@@ -29,17 +29,20 @@
                                         <table style="width: 100%;">
                                             <tr>
                                                 <td width="100px"></td>
+                                                <td width="180px"></td>
                                                 <td></td>
                                             </tr>
                                             <tr>
-                                                <?php 
+												<?php 
                                                     if($status_uv_manual == 0) {
                                                         echo '<td><img src="/images/icons/status_off_manual_20x20.png" title="uv off"></td>';
-                                                        echo "<td style='text-align: left;'><button class='art-button' name='turn_on_uv' onclick='return confirm('". _('end pause uv-light!') ."');>" . _('auto'). "</button></td>";
+                                                        echo '<td style="text-align: left; ">' . _('uv light manual off') . '</td>';
+                                                        echo '<td style="text-align: left;"><button class="art-button" name="turn_on_uv" onclick="return confirm(\'' . _('end pause uv-light!') . '\');">' . _('auto'). '</button></td>';
                                                     }
                                                     else{
                                                         echo '<td><img src="/images/icons/status_on_20x20.png" title="uv on"></td>';
-                                                        echo "<td style='text-align: left;'><button class='art-button' name='turn_off_uv' onclick='return confirm('". _('pause uv-light!') ."');>" . _('off'). "</button></td>";
+														echo '<td style="text-align: left;">' . _('auto mode on') . '</td>';
+                                                        echo '<td style="text-align: left;"><button class="art-button" name="turn_off_uv" onclick="return confirm(\''. _('pause uv-light!') . '\');">' . _('uv light off'). '</button></td>';
                                                     }
                                                 ?>
                                             </tr>
@@ -121,7 +124,7 @@
                                         <!----------------------------------------------------------------------------------------Waagen-->
                                     <table style="width: 100%;" class="miniature_writing">
                                         <tr>
-                                            <td rowspan="14" class="td_png_icon"><h3><?php echo _('scales'); ?></h3><img src="images/icons/scale_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_scales_blockFunction()"><?php echo _('help'); ?></button></td>
+                                            <td rowspan="16" class="td_png_icon"><h3><?php echo _('scales'); ?></h3><img src="images/icons/scale_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_scales_blockFunction()"><?php echo _('help'); ?></button></td>
                                             <td colspan="3"><h3><?php echo _('scale'); ?> 1</h3></td>
                                         </tr>
                                         <tr>
@@ -129,24 +132,29 @@
                                             <td class="text_left_padding"><input name="referenceunit_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" step="0.1" min="0.1" max="999.9" required value=<?php echo $referenceunit_scale1; ?>></td>
                                         </tr>
                                         <tr>
-                                            <td class="text_left_padding"><?php echo _('measuring interval'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_interval_scale1_admin" type="number" style="width: 90%;" min="10" max="3600" required value=<?php echo $measuring_interval_scale1; ?>></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text_left_padding"><?php echo _('measuring duration'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_duration_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $measuring_duration_scale1; ?>></td>
+                                            <td class="text_left_padding"><?php echo _('offset'); ?>:</td>
+                                            <td class="text_left_padding"><input name="offset_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" step="0.1" required value=<?php echo $offset_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
-                                            <td class="text_left_padding"><input name="saving_period_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $saving_period_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="saving_period_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="5" max="300" step="1" required value=<?php echo $saving_period_scale1; ?>></td>
+                                        </tr>                                        
+                                        <tr>
+                                            <td class="text_left_padding"><?php # echo _('measuring interval'); ?><!--:--></td>
+                                            <td class="text_left_padding"><input name="measuring_interval_scale1_admin" type="hidden" style="width: 90%;" min="2" max="20" step="1" required value=<?php echo $measuring_interval_scale1; ?>></td>
                                         </tr>
                                         <tr>
-                                            <td class="text_left_padding"><?php echo _('samples'); ?>:</td>
-                                            <td class="text_left_padding"><input name="samples_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" max="200" required value=<?php echo $samples_scale1; ?>></td>
+                                            <td class="text_left_padding"><?php # echo _('measuring duration'); ?><!--:--></td>
+                                            <td class="text_left_padding"><input name="measuring_duration_scale1_admin" type="hidden" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $measuring_duration_scale1; ?>></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="text_left_padding"><?php # echo _('samples'); ?><!--:--></td>
+                                            <td class="text_left_padding"><input name="samples_scale1_admin" type="hidden" style="width: 90%;" maxlength="4" size="2" min="2" max="25" step="1" required value=<?php echo $samples_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php # echo _('spikes'); ?><!--:--></td>
-                                            <td class="text_left_padding"><input type="hidden" name="spikes_scale1_admin" type="number" maxlength="4" size="2" min="0" required value=<?php echo $spikes_scale1; ?>></td>
+                                            <td class="text_left_padding"><input type="hidden" name="spikes_scale1_admin" type="number" maxlength="4" size="2" required value=<?php echo $spikes_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2"><h3><?php echo _('scale'); ?> 2</h3></td>
@@ -156,24 +164,29 @@
                                             <td class="text_left_padding"><input name="referenceunit_scale2_admin" type="number" style="width: 90%;" step="0.1" min="0.1" max="999.9" required value=<?php echo $referenceunit_scale2; ?>></td>
                                         </tr>
                                         <tr>
-                                            <td class="text_left_padding"><?php echo _('measuring interval'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_interval_scale2_admin" type="number" style="width: 90%;" min="10" max="3600" required value=<?php echo $measuring_interval_scale2; ?>></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text_left_padding"><?php echo _('measuring duration'); ?>:</td>
-                                            <td class="text_left_padding"><input name="measuring_duration_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $measuring_duration_scale2; ?>></td>
+                                            <td class="text_left_padding"><?php echo _('offset'); ?>:</td>
+                                            <td class="text_left_padding"><input name="offset_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" step="0.1" required value=<?php echo $offset_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
-                                            <td class="text_left_padding"><input name="saving_period_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $saving_period_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="saving_period_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="5" max="300" step="1" required value=<?php echo $saving_period_scale2; ?>></td>
+                                        </tr>                                        
+                                        <tr>
+                                            <td class="text_left_padding"><?php # echo _('measuring interval'); ?><!--:--></td>
+                                            <td class="text_left_padding"><input name="measuring_interval_scale2_admin" type="hidden" style="width: 90%;" min="2" max="20" step="1" required value=<?php echo $measuring_interval_scale2; ?>></td>
                                         </tr>
                                         <tr>
-                                            <td class="text_left_padding"><?php echo _('samples'); ?>:</td>
-                                            <td class="text_left_padding"><input name="samples_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="1" max="1000" required value=<?php echo $samples_scale2; ?>></td>
+                                            <td class="text_left_padding"><?php # echo _('measuring duration'); ?><!--:--></td>
+                                            <td class="text_left_padding"><input name="measuring_duration_scale2_admin" type="hidden" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $measuring_duration_scale2; ?>></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="text_left_padding"><?php # echo _('samples'); ?><!--:--></td>
+                                            <td class="text_left_padding"><input name="samples_scale2_admin" type="hidden" style="width: 90%;" maxlength="4" size="2" min="2" max="25" step="1" required value=<?php echo $samples_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php # echo _('spikes'); ?><!--:--></td>
-                                            <td class="text_left_padding"><input type="hidden" name="spikes_scale2_admin" type="number" maxlength="4" size="2" min="0" required value=<?php echo $spikes_scale2; ?>></td>
+                                            <td class="text_left_padding"><input type="hidden" name="spikes_scale2_admin" type="number" maxlength="4" size="2" required value=<?php echo $spikes_scale2; ?>></td>
                                         </tr>
                                     </table>
                                     <script>
@@ -185,8 +198,8 @@
                                         }
                                     </script>
                                     <p id="help_scales" class="help_p">
-                                            <?php echo _('helptext_scale_admin');
-                                                  echo '<br><br>'; ?>
+                                        <?php echo _('helptext_scale_admin');
+                                              echo '<br><br>'; ?>
                                         <button class="art-button" type="button" onclick="help_scales_noneFunction()"><?php echo _('close'); ?></button>
                                     </p>
                                     <hr>
@@ -311,8 +324,8 @@
                                         }
                                     </script>
                                     <p id="help_thermometer" class="help_p">
-                                         <?php echo _('helptext_thermometer_admin');
-                                               echo '<br><br>'; ?>
+                                        <?php echo _('helptext_thermometer_admin');
+                                              echo '<br><br>'; ?>
                                         <button class="art-button" type="button" onclick="help_thermometer_noneFunction()"><?php echo _('close'); ?></button>
                                     </p>
                                     <hr>                                    
@@ -337,8 +350,8 @@
                                             }
                                         </script>
                                         <p id="help_language" class="help_p">
-                                         <?php echo _('helptext_language_admin');
-                                               echo '<br><br>'; ?>
+                                            <?php echo _('helptext_language_admin');
+                                                  echo '<br><br>'; ?>
                                             <button class="art-button" type="button" onclick="help_language_noneFunction()"><?php echo _('close'); ?></button>
                                         </p>
                                         <table style="width: 100%; align: center;">
@@ -463,13 +476,13 @@
                                     <form method="post" name="debug">
                                         <table style="width: 100%;">
                                             <?php
-                                                $measuring_interval_debug = get_table_value($debug_table, $measuring_interval_debug_key);
+                                                // $measuring_interval_debug = get_table_value($debug_table, $measuring_interval_debug_key);
                                                 $agingtable_days_in_seconds_debug = get_table_value($debug_table, $agingtable_days_in_seconds_debug_key);
                                             ?>
-                                            <tr>
-                                                <td><?php echo _('measuring interval'); ?>:</td>
-                                                <td><input name="measuring_interval_debug" type="number" style="width: 90%;" min="1" max="60" required value=<?php echo $measuring_interval_debug; ?>></td>
-                                            </tr>
+                                             <!-- <tr>
+                                                <td><?p hp echo _('measuring interval'); ?>:</td>
+                                                <td><input name="measuring_interval_debug" type="number" style="width: 90%;" min="1" max="60" required value=<?p hp echo $measuring_interval_debug; ?>></td>
+                                            </tr> -->
                                             <tr>
                                                 <td><?php echo _('agingtable days in seconds'); ?>:</td>
                                                 <td><input name="agingtable_days_in_seconds_debug" type="number" style="width: 90%;" min="1" max="86400" required value=<?php echo $agingtable_days_in_seconds_debug; ?>></td>
@@ -544,7 +557,8 @@
                                             <form method="post" name="manual_backup">
                                                 <?php 
                                                     //$grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
-                                                    $grepagingtable = shell_exec('ps ax | grep -v grep | grep agingtable.py');
+                                                    // $grepagingtable = shell_exec('ps ax | grep -v grep | grep agingtable.py');
+                                                    $grepagingtable = intval(get_table_value($current_values_table, $status_agingtable_key));
                                                     if ($grepagingtable == 0){
                                                         echo '<td><button class="art-button" name="manual_backup" value="manual_backup" onclick="return confirm(' . _('ATTENTION: backup manually?') . ');">' . _('backup manually') . '</button></td>';
                                                     }
@@ -581,11 +595,11 @@
                                                         echo '<td><button class="art-button" name="admin_stop_main" value="admin_stop_main" onclick="return confirm("' . _('ATTENTION: kill') . 'main.py?");">' . _('stop') . ' main.py</button></td>';
                                                         echo '<td><button class="art-button" name="admin_start_main" value="admin_start_main" onclick="return confirm("' .  _('start') . 'main.py?");">' . _('start') . ' main.py</button></td>';
                                                     echo '</tr></tr>';
-                                                        echo '<td><button class="art-button" name="admin_stop_agingtable"  value="admin_stop_agingtable" onclick="return confirm("' . _('ATTENTION:') . 'kill agingtable.py?");">' . _('stop') . ' agingtable.py</button></td>';
-                                                        echo '<td><button class="art-button" name="admin_start_agingtable"  value="admin_start_agingtable" onclick="return confirm("' . _('start') . 'agingtable.py?");">' . _('start') . '  agingtable.py</button></td>';
+                                                        // echo '<td><button class="art-button" name="admin_stop_agingtable"  value="admin_stop_agingtable" onclick="return confirm("' . _('ATTENTION:') . 'kill agingtable.py?");">' . _('stop') . ' agingtable.py</button></td>';
+                                                        // echo '<td><button class="art-button" name="admin_start_agingtable"  value="admin_start_agingtable" onclick="return confirm("' . _('start') . 'agingtable.py?");">' . _('start') . '  agingtable.py</button></td>';
                                                     echo '</tr></tr>';
-                                                        echo '<td><button class="art-button" name="admin_stop_scale"  value="admin_stop_scale" onclick="return confirm("' . _('ATTENTION: kill') . 'scale.py?");">' . _('stop') . '  scale.py</button></td>';
-                                                        echo '<td><button class="art-button" name="admin_start_scale"  value="admin_start_scale" onclick="return confirm("' . _('start') . ' scale.py?");">' . _('start') . '  scale.py</button></td>';
+                                                        // echo '<td><button class="art-button" name="admin_stop_scale"  value="admin_stop_scale" onclick="return confirm("' . _('ATTENTION: kill') . 'scale.py?");">' . _('stop') . '  scale.py</button></td>';
+                                                        // echo '<td><button class="art-button" name="admin_start_scale"  value="admin_start_scale" onclick="return confirm("' . _('start') . ' scale.py?");">' . _('start') . '  scale.py</button></td>';
                                                     echo '</tr>';
                                                 echo '</table>';
                                             echo '</form>';

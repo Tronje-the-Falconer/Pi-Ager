@@ -8,7 +8,7 @@
 #import RPi.GPIO as gpio
 
 ########################### Definition of variables
-version_number = '3.1.0'
+version_number = '3.2.3'
 # tables names
 config_settings_table = 'config'
 
@@ -18,28 +18,17 @@ status_cooling_compressor_table = 'cooling_compressor_status'
 status_circulating_air_table = 'circulating_air_status'
 status_uv_table = 'uv_status'
 status_light_table = 'light_status'
-data_sensor_temperature_table = 'sensor_temperature_data'
-data_sensor_humidity_table = 'sensor_humidity_data'
-data_sensor_dewpoint_table = 'sensor_dewpoint_data'
-data_second_sensor_temperature_table = 'sensor_extern_temperature_data'
-data_second_sensor_humidity_table = 'sensor_extern_humidity_data'
-data_second_sensor_dewpoint_table = 'sensor_extern_dewpoint_data'
-
 status_dehumidifier_table = 'dehumidifier_status'
 status_humidifier_table = 'humidifier_status'
-data_scale1_table = 'scale1_data'
-data_scale2_table = 'scale2_data'
 current_values_table = 'current_values'
 agingtables_table = 'agingtables'
 settings_scale1_table = 'scale1_settings'
 settings_scale2_table = 'scale2_settings'
-data_sensor_temperature_meat1_table = 'sensor_temperature_meat1_data'
-data_sensor_temperature_meat2_table = 'sensor_temperature_meat2_data'
-data_sensor_temperature_meat3_table = 'sensor_temperature_meat3_data'
-data_sensor_temperature_meat4_table = 'sensor_temperature_meat4_data'
 debug_table = 'debug'
 system_table = 'system'
 meat_sensortypes_table = 'meat_sensortypes'
+all_sensors_table = 'all_sensors'
+all_scales_table = 'all_scales'
 
 # table keys
 switch_on_cooling_compressor_key = 'switch_on_cooling_compressor'
@@ -122,6 +111,9 @@ failure_dewpoint_delta_key = 'failure_dewpoint_delta'
 agingtable_period_day_key = 'agingtable_period_day'
 agingtable_startday_key = 'agingtable_startday'
 agingtable_startperiod_key = 'agingtable_startperiod'
+aging_thread_alive_key = 'aging_thread_alive'
+scale1_thread_alive_key = 'scale1_thread_alive'
+scale2_thread_alive_key = 'scale2_thread_alive'
 
 pi_revision_key = 'pi_revision'
 pi_ager_version_key = 'pi_ager_version'
@@ -164,6 +156,20 @@ meat_sensortypes_RefVoltage_field = 'RefVoltage'
 meat_sensortypes_Sensitivity_field = 'Sensitivity'
 meat_sensortypes_Turns_field = 'Turns'
 meat_sensortypes_nAverage_field = 'nAverage'
+tempint_field = 'tempint'
+tempext_field = 'tempext'
+humint_field = 'humint'
+humext_field = 'humext'
+dewint_field = 'dewint'
+dewext_field = 'dewext'
+humintabs_field = 'humintabs'
+humextabs_field = 'humextabs'
+ntc1_field = 'ntc1'
+ntc2_field = 'ntc2'
+ntc3_field = 'ntc3'
+ntc4_field = 'ntc4'
+scale1_field = 'scale1'
+scale2_field = 'scale2'
 
 # Paths and urls
 thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/'
@@ -205,7 +211,7 @@ field_type[system_table + '_' + value_field] = 'TEXT'
 field_type[last_change_field] = 'INTEGER'
 field_type[id_field] = 'INTEGER'
 
-id_value_tables = [data_sensor_temperature_table,data_sensor_humidity_table,data_sensor_dewpoint_table, data_second_sensor_temperature_table,data_second_sensor_humidity_table,data_second_sensor_dewpoint_table, status_heater_table,status_exhaust_air_table,status_cooling_compressor_table,status_circulating_air_table, status_uv_table, status_light_table, status_humidifier_table, status_dehumidifier_table, data_scale1_table, data_scale2_table, data_sensor_temperature_meat1_table, data_sensor_temperature_meat2_table, data_sensor_temperature_meat3_table, data_sensor_temperature_meat4_table]
+id_value_tables = [status_heater_table,status_exhaust_air_table,status_cooling_compressor_table,status_circulating_air_table, status_uv_table, status_light_table, status_humidifier_table, status_dehumidifier_table]
 
 key_value_tables = [current_values_table, settings_scale1_table, settings_scale2_table, config_settings_table, debug_table, system_table]
 
@@ -237,33 +243,33 @@ default_values = {}
 #default values config table
 default_values[config_settings_table + '_' + sensortype_key] = 3 #SHT
 default_values[config_settings_table + '_' + language_key] = 1 #Deutsch de-DE
-default_values[config_settings_table + '_' + save_temperature_humidity_loops_key] = 150
+default_values[config_settings_table + '_' + save_temperature_humidity_loops_key] = 27
 
 #default values scale1_settings table
-default_values[settings_scale1_table + '_' + samples_key] = 300
+default_values[settings_scale1_table + '_' + samples_key] = 20
 default_values[settings_scale1_table + '_' + spikes_key] = 60
 default_values[settings_scale1_table + '_' + sleep_key] = 0.1
 default_values[settings_scale1_table + '_' + gain_key] = 128
 default_values[settings_scale1_table + '_' + bits_to_read_key] = 24
 default_values[settings_scale1_table + '_' + referenceunit_key] = 221.2
-default_values[settings_scale1_table + '_' + scale_measuring_interval_key] = 120
+default_values[settings_scale1_table + '_' + scale_measuring_interval_key] = 5
 default_values[settings_scale1_table + '_' + measuring_duration_key] = 100
-default_values[settings_scale1_table + '_' + saving_period_key] = 240
+default_values[settings_scale1_table + '_' + saving_period_key] = 120
 
 #default values scale2_settings table
-default_values[settings_scale2_table + '_' + samples_key] = 300
+default_values[settings_scale2_table + '_' + samples_key] = 20
 default_values[settings_scale2_table + '_' + spikes_key] = 60
 default_values[settings_scale2_table + '_' + sleep_key] = 0.1
 default_values[settings_scale2_table + '_' + gain_key] = 128
 default_values[settings_scale2_table + '_' + bits_to_read_key] = 24
 default_values[settings_scale2_table + '_' + referenceunit_key] = 221.2
-default_values[settings_scale2_table + '_' + scale_measuring_interval_key] = 120
+default_values[settings_scale2_table + '_' + scale_measuring_interval_key] = 5
 default_values[settings_scale2_table + '_' + measuring_duration_key] = 100
-default_values[settings_scale2_table + '_' + saving_period_key] = 240
+default_values[settings_scale2_table + '_' + saving_period_key] = 120
 
 #default values debug table
 default_values[debug_table + '_' + measuring_interval_debug_key] = 30
-default_values[debug_table + '_' + agingtable_days_in_seconds_debug_key] = 1
+default_values[debug_table + '_' + agingtable_days_in_seconds_debug_key] = 60
 default_values[debug_table + '_' + loglevel_file_key] = 10
 default_values[debug_table + '_' + loglevel_console_key] = 20
 
@@ -275,27 +281,18 @@ default_values[system_table + '_' + pi_ager_version_key] = '"' + version_number 
 tables_dict = {}
 
 tables_dict['config_settings_table'] = config_settings_table
-tables_dict['data_sensor_temperature_table'] = data_sensor_temperature_table
 tables_dict['status_heater_table'] = status_heater_table
 tables_dict['status_exhaust_air_table'] = status_exhaust_air_table
 tables_dict['status_cooling_compressor_table'] = status_cooling_compressor_table
 tables_dict['status_circulating_air_table'] = status_circulating_air_table
 tables_dict['status_uv_table'] = status_uv_table
 tables_dict['status_light_table'] = status_light_table
-tables_dict['data_sensor_humidity_table'] = data_sensor_humidity_table
-tables_dict['data_sensor_dewpoint_table'] = data_sensor_dewpoint_table
 tables_dict['status_dehumidifier_table'] = status_dehumidifier_table
 tables_dict['status_humidifier_table'] = status_humidifier_table
-tables_dict['data_scale1_table'] = data_scale1_table
-tables_dict['data_scale2_table'] = data_scale2_table
 tables_dict['current_values_table'] = current_values_table
 tables_dict['agingtables_table'] = agingtables_table
 tables_dict['settings_scale1_table'] = settings_scale1_table
 tables_dict['settings_scale2_table'] = settings_scale2_table
-tables_dict['data_sensor_temperature_meat1_table'] = data_sensor_temperature_meat1_table
-tables_dict['data_sensor_temperature_meat2_table'] = data_sensor_temperature_meat2_table
-tables_dict['data_sensor_temperature_meat3_table'] = data_sensor_temperature_meat3_table
-tables_dict['data_sensor_temperature_meat4_table'] = data_sensor_temperature_meat4_table
 tables_dict['debug_table'] = debug_table
 tables_dict['system_table'] = system_table
 
