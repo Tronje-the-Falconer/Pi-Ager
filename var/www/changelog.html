@@ -31,15 +31,54 @@ h2 {
 </style>
 <h2>Version 3.2.3 pre</h2>
 <h3>Frontend</h3>
-	<h4>Pi-Ager</h4>
+	<h4>Pi-Ager allgemein</h4>
           <ul>
-			<li>Neue Felder für Backup und Benachrichtigung.</li>
+		  	<li>Alle Seiten wurden überarbeitet, sie werden jetzt merklich schnellerer aufgebaut.</li>
+			<li>Neue Seiten / Funktionen für Backup und Benachrichtigung wurden hinzugefügt.</li>
 			<li>Übersetzungen wurden hinzugefügt.</li>
+			<li>Alle Hilfetexte wurden überarbeitet und übersetzt.</li>
+          </ul>
+    <h4>Monitorseite</h4>
+          <ul>		
+			<li>Darstellung der Sensorwerte wurde überarbeitet.</li>
+			<li>Sensor extern wurde hinzugefügt. (sichtbar nur wenn er auch ausgewählt ist)</li> 
+			<li>Taupunkt wurde hinzugefügt.</li> 
+			<li>NTC Sensoren und Stromsensor wurde hinzugefügt.</li> 
+			<li>Diagramme wurden überarbeitet.</li> 
+			<li>Bei laufender Reifetabelle wird die aktuelle Phase angezeigt</li> 
+			<li>Status Schalter (Digitaleingang) wurde hinzugefügt. (wird erstmal nur angezeigt)</li> 
+			<li>Status 5V Spannungsversorgung wurde hinzugefügt. (wird erstmal nur angezeigt)</li> 
+			<li>Status Batteriespannung USV Modul wurde hinzugefügt. (wird erstmal nur angezeigt)</li> 
           </ul>
 	<h4>Diagramme</h4>
           <ul>		
-			<li>Es werden nun weniger Werte gelesen. Dies beschleunigt die Anzeige bei Tag, Woche und Monat</li> 
-          </ul>
+			<li>In Abhängigkeit der ausgewählten Zeitspanne werden weniger Werte gelesen. Dies beschleunigt signifikant die Anzeige der Diagramme / Seite.</li> 
+            <li>Es wurde ein neuer Button "custom" hinzugefügt. Es ist jetzt möglich, die Zeitspanne der Diagramme benutzerdefiniert einzustellen.</li> 
+			<li>Skalierung der Y Achsen wurde überarbeitet. Es wurde eine automatische Skalierung eingebaut die auch auf die ein- bzw, augeblendeten Datensätze reagiert. </li> 
+		  </ul>
+	<h4>Reifetabelle</h4>
+          <ul>
+			<li>Startphase und Starttag kann jetzt ausgewählt werden und wird angezeigt.</li>
+			<li>Editor: Pahsen (Zeilen) können jetzt hinzugefügt und gelöscht werden</li>
+          </ul>	
+	<h4>Administration</h4>
+          <ul>
+			<li>Auswahl der Sensoren wurde überarbeitet</li>
+			<li>Einstellungen für die Waagen wurden überarbeitet und die Einstellparameter reduziert.</li>
+			<li>Sensoren die an dem A/D Wandler betrieben werden können, wurden implementiert. (NTC Temperatursensoren und Stromsensor)</li>
+		    <li>Backup Einstellungen wurden ergänzt</li>
+          </ul>	  
+	<h4>Nachrichten</h4>
+          <ul>
+			<li>Messenger Einstellungen wurden hinzugefügt</li>
+			<li>Event Einstellungen wurden hinzugefügt</li>
+			<li>Alarm Einstellungen wurden hinzugefügt</li>
+			<li>E-Mail Einstellungen wurden hinzugefügt</li>
+		    <li>E-Mail Server Einstellungen wurden hinzugefügt</li>
+			<li>Pushover Einstellungen wurden hinzugefügt</li>
+			<li>Telegram Einstellungen wurden hinzugefügt</li>
+          </ul>	 	 
+		  
 <h3>Backend</h3>
 	<h4>Datenbank</h4>
 	        <ul>			
@@ -48,7 +87,8 @@ h2 {
 	<h4>Sensoren</h4>	
            <ul>			
 		<li>DHT11 wird ab dem nächsten Haupt-Release nicht mehr unterstützt, da er zu ungenaue Werte liefert.</li>
-		<li>Temperatursensoren und Stromsensor werden nun unterstützt.</li>
+		<li>I2C: ein zusätlicher externer Sensor (SHT 3x Adr45)wird unterstützt.(Nur wenn der erste  Sensor ein SHT85 oder SHT3x mit Adr44 ist) </li>
+		<li>Temperatursensoren und ein analoger Stromsensor LEM-H06P werden unterstützt.</li>
 		   </ul>
 	<h4>Backup</h4>	
            <ul>		
@@ -60,6 +100,7 @@ h2 {
            <ul>		
 		<li>Benachrichtigung über Frontend wird unterstützt. (Messenger, Alarm, E-Mail, Pushover, Telegram)</li>
 		<li>Benachrichtigung ist noch nicht überall eingebaut, wo es notwendig sein könnte. </li>
+		<li>Alarme / Events sind noch nicht vollständig eingebaut. </li>		
            </ul>
 
 
