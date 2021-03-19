@@ -950,6 +950,24 @@
         insert_value_into_status_table( $status_dehumidifier_table, $status );                        
     }
     
+    function is_table_empty($table)
+    {
+        $sql = 'SELECT COUNT(*) as count FROM ' . $table ;
+        open_connection();
+        $result = get_query_result($sql);
+        $row = $result->fetchArray(SQLITE3_ASSOC);
+        close_database();        
+        $numRows = $row['count'];
+
+        // echo 'is_table_empty result : ' . $numRows . '<br>';
+
+        if ($numRows == 0) {
+            return True;
+        }
+        else {
+            return False;
+        }
+    }
     
     function get_table_value_from_field($table, $key, $field)
     {
@@ -976,11 +994,18 @@
     function write_backupvalues($backup_nfsvol, $backup_subdir, $backup_nfsmount, $backup_path, $backup_number_of_backups, $backup_name, $backup_nfsopt, $backup_active){
         global $id_field, $backup_table, $backup_nfsvol_field, $backup_subdir_field, $backup_nfsmount_field, $backup_path_field, $backup_number_of_backups_field, $backup_name_field, $backup_nfsopt_field, $backup_active_field;
         
-        open_connection();
-        $sql = 'UPDATE ' . $backup_table . ' SET "' . $backup_nfsvol_field . '" = "' . $backup_nfsvol . '" , "' . $backup_subdir_field . '" = "' . $backup_subdir . '" , "' . $backup_nfsmount_field . '" = "' . $backup_nfsmount . '" , "' . $backup_path_field . '" = "' . $backup_path . '" , "' . $backup_number_of_backups_field . '" = ' . $backup_number_of_backups . ' , "' . $backup_name_field . '" = "' . $backup_name . '" , "' . $backup_nfsopt_field . '" = "' . $backup_nfsopt . '" , "' . $backup_active_field . '" = "' . $backup_active . '" ' . ' WHERE ' . $id_field . ' = 1';
-        execute_query($sql);
-        
-        close_database();
+        if (is_table_empty($backup_table) == True) {
+            open_connection();
+            $sql = 'INSERT INTO ' . $backup_table . ' (' . $id_field . ', ' . $backup_nfsvol_field . ', ' . $backup_subdir_field . ', ' . $backup_nfsmount_field . ', ' . $backup_path_field . ', ' . $backup_number_of_backups_field . ', ' . $backup_name_field . ', ' . $backup_nfsopt_field . ', ' . $backup_active_field . ' ) VALUES (' . '"1"' . ', "' . $backup_nfsvol . '", "' . $backup_subdir . '", "' . $backup_nfsmount . '", "' . $backup_path . '", "' .  strval($backup_number_of_backups) . '", "' . $backup_name . '", "' . $backup_nfsopt . '", "' . strval($backup_active) . '")';
+            execute_query($sql);
+            close_database();
+        }
+        else {
+            open_connection();
+            $sql = 'UPDATE ' . $backup_table . ' SET "' . $backup_nfsvol_field . '" = "' . $backup_nfsvol . '" , "' . $backup_subdir_field . '" = "' . $backup_subdir . '" , "' . $backup_nfsmount_field . '" = "' . $backup_nfsmount . '" , "' . $backup_path_field . '" = "' . $backup_path . '" , "' . $backup_number_of_backups_field . '" = ' . $backup_number_of_backups . ' , "' . $backup_name_field . '" = "' . $backup_name . '" , "' . $backup_nfsopt_field . '" = "' . $backup_nfsopt . '" , "' . $backup_active_field . '" = "' . $backup_active . '" ' . ' WHERE ' . $id_field . ' = 1';
+            execute_query($sql);
+            close_database();
+        }
     }
     
     function write_table_value($table, $field_key, $key, $field_value, $value){

@@ -58,11 +58,11 @@ fi
 MAIN_STATUS=$(/var/sudowebscript.sh grepmain) 
 echo "Main Status ist $MAIN_STATUS"
 
-AGINGTABLE_STATUS=$(/var/sudowebscript.sh grepagingtable)
-echo "Agingtable Status ist $AGINGTABLE_STATUS"
+# AGINGTABLE_STATUS=$(/var/sudowebscript.sh grepagingtable)
+# echo "Agingtable Status ist $AGINGTABLE_STATUS"
 
-SCALE_STATUS=$(/var/sudowebscript.sh grepscale)
-echo "Scale Status ist $SCALE_STATUS"
+# SCALE_STATUS=$(/var/sudowebscript.sh grepscale)
+# echo "Scale Status ist $SCALE_STATUS"
 
 
 
@@ -72,19 +72,19 @@ echo "Scale Status ist $SCALE_STATUS"
 # Skript (hier sollten nur erfahrene User anpassungen machen!)
 #####################################################################
 
-read -p "weiter mit Enter mit Ctrl + c beenden"
+read -p "weiter mit Enter mit Ctrl + c beenden" -t 3
 echo "ok los gehts lehne dich zurück $(date +%H:%M:%S)"
 anfang=$(date +%s)
 
 echo "Starte mit dem Backup, dies kann einige Zeit dauern"
 #Überprüfen ob Agingtable aktiv ist
-if [ -z "$AGINGTABLE_STATUS" ]
-	then
-	  echo "Agingtable ist nicht aktiv. Backup wird gestartet!"
-	else
-  	  echo "Agingtable ist aktiv. Backup wird nicht gestartet!"
-	  exit 1
-fi	
+# if [ -z "$AGINGTABLE_STATUS" ]
+#    then
+#	  echo "Agingtable ist nicht aktiv. Backup wird gestartet!"
+#	else
+#  	  echo "Agingtable ist aktiv. Backup wird nicht gestartet!"
+#	  exit 1
+#fi	
 #Überprüfen ob Backup aktiv ist
 if [ -z "$BACKUP_STATUS" ]
 	then
@@ -181,28 +181,29 @@ if [ -z "$MAIN_STATUS" ]
     else
       PI_AGER_MAIN_ACTIVE=1
       echo "Stoppe Pi-Ager Main"
-      systemctl stop pi-ager_main 
+      systemctl stop pi-ager_main
+      sleep 10
 fi	
 
-if [ -z "$AGINGTABLE_STATUS" ]
-	then
-      PI_AGER_AGINGTABLE_ACTIVE=0
-      echo "Pi-Ager Agingtable ist nicht gestartet"
-    else
-	  PI_AGER_AGINGTABLE_ACTIVE=1
-      echo "Stoppe Pi-Ager Agingtable"
-      systemctl stop pi-ager_agingtable
-fi
+#if [ -z "$AGINGTABLE_STATUS" ]
+#	then
+#      PI_AGER_AGINGTABLE_ACTIVE=0
+#      echo "Pi-Ager Agingtable ist nicht gestartet"
+#    else
+#	  PI_AGER_AGINGTABLE_ACTIVE=1
+#      echo "Stoppe Pi-Ager Agingtable"
+#      systemctl stop pi-ager_agingtable
+#fi
 
-if [ -z "$SCALE_STATUS" ]
-	then
-      PI_AGER_SCALE_ACTIVE=0
-      echo "Pi-Ager Scale ist nicht gestartet"
-    else
-	  PI_AGER_SCALE_ACTIVE=1
-      echo "Stoppe Pi-Ager Scale"
-      systemctl stop pi-ager_scale
-fi
+#if [ -z "$SCALE_STATUS" ]
+#	then
+#      PI_AGER_SCALE_ACTIVE=0
+#      echo "Pi-Ager Scale ist nicht gestartet"
+#    else
+#	  PI_AGER_SCALE_ACTIVE=1
+#      echo "Stoppe Pi-Ager Scale"
+#      systemctl stop pi-ager_scale
+#fi
 
 # Backup mit Hilfe von dd erstellen und im angegebenen Pfad speichern
 echo "erstelle Backup $(date +%H:%M:%S)"
@@ -216,15 +217,15 @@ echo  "Starte Pi-Ager Main"
   systemctl start pi-ager_main &
 fi
 
-if [ $PI_AGER_SCALE_ACTIVE == 1 ]; then
-echo  "Starte Pi-Ager Scale"
-  systemctl start pi-ager_scale &
-fi
+#if [ $PI_AGER_SCALE_ACTIVE == 1 ]; then
+#echo  "Starte Pi-Ager Scale"
+#  systemctl start pi-ager_scale &
+#fi
 
-if [ $PI_AGER_AGINGTABLE_ACTIVE == 1 ]; then
-echo  "Starte Pi-Ager Agingtable"
-  systemctl start pi-ager_agingtable &
-fi
+#if [ $PI_AGER_AGINGTABLE_ACTIVE == 1 ]; then
+#echo  "Starte Pi-Ager Agingtable"
+#  systemctl start pi-ager_agingtable &
+#fi
 
 sync
 # Starte Shrink
