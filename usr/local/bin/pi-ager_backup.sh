@@ -163,6 +163,7 @@ if [ -z $NFSOPT ]
  fi
 # Prüfen, ob das Zielverzeichnis existiert
 echo "Prüfe ob das Zielverzeichnis existiert"
+sleep 2
 if [ ! -d "$DIR" ];
 	then
 	echo "Backupverzeichnis existiert nicht. Abbruch! Bitte anlegen"
@@ -206,8 +207,9 @@ fi
 #fi
 
 # Backup mit Hilfe von dd erstellen und im angegebenen Pfad speichern
+sync
 echo "erstelle Backup $(date +%H:%M:%S)"
-dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=1M status=progress
+dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=1M status=progress 2>&1
 
 # Starte Dienste nach Backup
 echo "Starte schreibende Dienste wieder!"
@@ -270,4 +272,7 @@ echo -e $(date +%c)": "'Backup und verkleinern erfolgreich abgeschlossen nach '$
 elif [ $diff -ge 3600 ]; then
 echo -e $(date +%c)": "'Backup und verkleinern erfolgreich abgeschlossen nach '$[$diff / 3600] 'Stunden '$[$diff % 3600 / 60] 'Minuten '$[$diff % 60] 'Sekunden'
 fi
+
+# unmounten
+umount $NFSMOUNT
 
