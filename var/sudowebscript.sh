@@ -146,7 +146,7 @@ case "$1" in
         rm /var/www/images/webcam/*.jpg
     ;;
     backup) # Backupscript ausfuehren
-        /usr/local/bin/pi-ager_backup.sh >> /var/log/pi-ager_backup.log  
+        /usr/local/bin/pi-ager_backup.sh >> /var/log/pi-ager_backup.log &
     ;;
     test_mailserver) 
             python3 /opt/pi-ager/pi_ager_test_mail.py
