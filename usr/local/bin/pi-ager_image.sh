@@ -332,6 +332,8 @@ if [ "$my_image" = false ]; then
 	######################################################
 	# Delete personal files (ssh keys ...)
 	######################################################
+	# systems
+	rm -f /etc/wpa_supplicant/wpa_supplicant.conf
 	# root user
 	rm -f /root/.ssh/authorized_keys
 	rm -f /root/.ssh/known_hosts

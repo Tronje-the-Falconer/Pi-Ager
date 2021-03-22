@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script-Name: pi-ager_backup
-# Version    : 0.9.7
+# Version    : 0.9.8
 # Autor      : denni_m
 # Datum      : 10.02.2019
 # Coauthor   : DerBurgermeister
