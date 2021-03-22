@@ -654,7 +654,7 @@
                                             <td class="text_left_top">
                                                 <?php
                                                 if ($grepmain == 0){
-                                                    echo strtoupper(("see settings"));
+                                                    echo strtoupper(_('see settings'));
                                                 }
                                                 elseif ($grepmain != 0 and $status_piager == 0){
                                                     echo strtoupper(("off"));
