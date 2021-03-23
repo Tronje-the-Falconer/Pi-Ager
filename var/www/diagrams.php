@@ -96,10 +96,13 @@
                                 </div>
 
                                     <div style="">
-                                        <h4><?php echo _('every ~ 5 minutes a new value is written!'); ?></h4>
-                                        <?php
-                                            include 'modules/read_values_for_diagrams.php';
-                                        ?>
+                                        <h4><?php 
+					                        include 'modules/read_values_for_diagrams.php';
+											$temperatur_humidity_saving_period = ceil($save_temperature_humidity_loops * 10 /60);
+											echo _('every');
+							                echo '<td> ~ '.$temperatur_humidity_saving_period.' </td>';
+											echo _('minutes a new value is written!'); 
+										    ?></h4>
                                         <canvas id="temperature_humidity_chart"></canvas>
                                         <div class="on_off_chart"><canvas id="cooler_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="heater_chart"></canvas></div>
