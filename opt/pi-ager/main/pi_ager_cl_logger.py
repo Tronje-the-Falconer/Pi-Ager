@@ -129,31 +129,41 @@ class cl_logger:
         logging.handlers.GroupWriteRotatingFileHandler = GroupWriteRotatingFileHandler
         
         # Logger fuer website
-        website_log_rotatingfilehandler = logging.handlers.GroupWriteRotatingFileHandler(pi_ager_paths.get_path_logfile_txt_file(), mode='a', maxBytes=1048576, backupCount=36, encoding=None, delay=False)
-        website_log_rotatingfilehandler.setLevel(logging.INFO)
-        website_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(message)s', '%y-%m-%d %H:%M:%S')
-        website_log_rotatingfilehandler.setFormatter(website_log_rotatingfilehandler_formatter)
+        self.website_log_rotatingfilehandler = logging.handlers.GroupWriteRotatingFileHandler(pi_ager_paths.get_path_logfile_txt_file(), mode='a', maxBytes=1048576, backupCount=36, encoding=None, delay=False)
+        self.website_log_rotatingfilehandler.setLevel(logging.INFO)
+        self.website_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(message)s', '%y-%m-%d %H:%M:%S')
+        self.website_log_rotatingfilehandler.setFormatter(self.website_log_rotatingfilehandler_formatter)
     
         # Logger fuer pi-ager debugging
         self.check_pi_ager_logfile()
-        pi_ager_log_rotatingfilehandler = logging.handlers.GroupWriteRotatingFileHandler(pi_ager_paths.get_pi_ager_log_file_path(), mode='a', maxBytes=1048576, backupCount=20, encoding=None, delay=False)
-        pi_ager_log_rotatingfilehandler.setLevel(self.get_logginglevel(loglevel_file_value))
-        pi_ager_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(name)-40s %(levelname)-8s %(message)s', '%m-%d %H:%M:%S')
-        pi_ager_log_rotatingfilehandler.setFormatter(pi_ager_log_rotatingfilehandler_formatter)
+        self.pi_ager_log_rotatingfilehandler = logging.handlers.GroupWriteRotatingFileHandler(pi_ager_paths.get_pi_ager_log_file_path(), mode='a', maxBytes=1048576, backupCount=20, encoding=None, delay=False)
+        self.pi_ager_log_rotatingfilehandler.setLevel(self.get_logginglevel(loglevel_file_value))
+        self.pi_ager_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(name)-40s %(levelname)-8s %(message)s', '%m-%d %H:%M:%S')
+        self.pi_ager_log_rotatingfilehandler.setFormatter(self.pi_ager_log_rotatingfilehandler_formatter)
     
         # Logger fuer die Console
-        console_streamhandler = logging.StreamHandler()
-        console_streamhandler.setLevel(self.get_logginglevel(loglevel_console_value))
-        console_streamhandler_formatter = logging.Formatter(' %(levelname)-10s: %(name)-8s %(message)s')
-        console_streamhandler.setFormatter(console_streamhandler_formatter)
+        self.console_streamhandler = logging.StreamHandler()
+        self.console_streamhandler.setLevel(self.get_logginglevel(loglevel_console_value))
+        self.console_streamhandler_formatter = logging.Formatter(' %(levelname)-10s: %(name)-8s %(message)s')
+        self.console_streamhandler.setFormatter(self.console_streamhandler_formatter)
         
         logger = logging.getLogger(pythonfile)
         logger.setLevel(logging.DEBUG)
-        logger.addHandler(website_log_rotatingfilehandler)
-        logger.addHandler(pi_ager_log_rotatingfilehandler)
-        logger.addHandler(console_streamhandler)
+        logger.addHandler(self.website_log_rotatingfilehandler)
+        logger.addHandler(self.pi_ager_log_rotatingfilehandler)
+        logger.addHandler(self.console_streamhandler)
         
         return logger
+        
+    def update_logger_loglevels( self ):
+        """
+        update log levels for console and file
+        """
+        loglevel_file_value = pi_ager_database_get_logging_value.get_logging_value('loglevel_file')
+        loglevel_console_value = pi_ager_database_get_logging_value.get_logging_value('loglevel_console')
+        self.pi_ager_log_rotatingfilehandler.setLevel(self.get_logginglevel(loglevel_file_value))
+        self.console_streamhandler.setLevel(self.get_logginglevel(loglevel_console_value))
+        
     def me(self):
         """
         Returns the logsting for logging in every method for the current code line (how i am)
