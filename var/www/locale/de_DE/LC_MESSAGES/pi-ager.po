@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
-"POT-Creation-Date: 2021-03-25 11:21+0100\n"
-"PO-Revision-Date: 2021-03-25 11:27+0100\n"
+"POT-Creation-Date: 2021-03-25 14:12+0100\n"
+"PO-Revision-Date: 2021-03-25 14:12+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -150,7 +150,7 @@ msgstr "Referenz Unit"
 
 #: admin.php:135 admin.php:167
 msgid "offset"
-msgstr ""
+msgstr "offset"
 
 #: admin.php:139 admin.php:171
 msgid "saving period"
@@ -317,7 +317,7 @@ msgstr "Unterverzeichnis"
 
 #: admin.php:526
 msgid "nfs mount"
-msgstr ""
+msgstr "nfs mount"
 
 #: admin.php:530
 msgid "nfs path"
@@ -454,7 +454,7 @@ msgstr "Fehler bei der Kalibrierung"
 
 #: changelog.php:5 header.php:155
 msgid "changelog"
-msgstr ""
+msgstr "changelog"
 
 #: changelog.php:13 logs.php:17
 msgid "file verification"
@@ -494,23 +494,23 @@ msgstr "Das Entwicklerteam"
 
 #: changelog.php:65 changelog.php:66
 msgid "backend & linux"
-msgstr ""
+msgstr "backend & linux"
 
 #: changelog.php:83 changelog.php:101
 msgid "hardware & testing"
-msgstr ""
+msgstr "hardware & testing"
 
 #: changelog.php:84
 msgid "allrounder"
-msgstr ""
+msgstr "allrounder"
 
 #: changelog.php:121
 msgid "frontend & design"
-msgstr ""
+msgstr "frontend & design"
 
 #: changelog.php:122
 msgid "backend"
-msgstr ""
+msgstr "backend"
 
 #: changelog.php:125
 msgid "based on an idea and submission of"
@@ -597,14 +597,14 @@ msgid "delay"
 msgstr "Verzögerung"
 
 #: config.php:97 config.php:155 config.php:160 config.php:194 config.php:199
-#: diagrams.php:81 index.php:177 index.php:928 index.php:929 index.php:942
-#: index.php:943 index.php:970 index.php:971 index.php:1001 index.php:1002
-#: index_old.php:685 index_old.php:687 index_old.php:702 index_old.php:704
-#: index_old.php:734 index_old.php:736 index_old.php:765 index_old.php:767
-#: index_old2.php:748 index_old2.php:749 index_old2.php:762 index_old2.php:763
-#: index_old2.php:790 index_old2.php:791 index_old2.php:821 index_old2.php:822
-#: manvals.php:99 manvals.php:103 manvals.php:125 manvals.php:128
-#: modules/write_config_db_logfile_txt.php:119
+#: diagrams.php:81 diagrams.php:104 index.php:177 index.php:928 index.php:929
+#: index.php:942 index.php:943 index.php:970 index.php:971 index.php:1001
+#: index.php:1002 index_old.php:685 index_old.php:687 index_old.php:702
+#: index_old.php:704 index_old.php:734 index_old.php:736 index_old.php:765
+#: index_old.php:767 index_old2.php:748 index_old2.php:749 index_old2.php:762
+#: index_old2.php:763 index_old2.php:790 index_old2.php:791 index_old2.php:821
+#: index_old2.php:822 manvals.php:99 manvals.php:103 manvals.php:125
+#: manvals.php:128 modules/write_config_db_logfile_txt.php:119
 #: modules/write_config_db_logfile_txt.php:120
 #: modules/write_config_db_logfile_txt.php:125
 #: modules/write_config_db_logfile_txt.php:135
@@ -920,7 +920,7 @@ msgstr "Monat"
 #: diagrams.php:26 diagrams.php:46 diagrams_neu_test.php:26
 #: diagrams_neu_test.php:46 diagrams_old.php:27 diagrams_old.php:47
 msgid "custom"
-msgstr ""
+msgstr "custom"
 
 #: diagrams.php:31 diagrams_neu_test.php:31 diagrams_old.php:32 header.php:136
 #: index.php:149
@@ -949,12 +949,8 @@ msgid "change"
 msgstr "ändern"
 
 #: diagrams.php:102
-msgid "every"
-msgstr "jede"
-
-#: diagrams.php:104
-msgid "minutes a new value is written!"
-msgstr "Minuten wird ein neuer Wert in die Datenbank gespeichert!"
+msgid "storage interval of the data in the database"
+msgstr "Speicherintervall der Daten in die Datenbank"
 
 #: diagrams.php:261 diagrams.php:450 diagrams.php:472 diagrams.php:481
 #: diagrams.php:777 diagrams.php:801 diagrams_neu_test.php:259
@@ -1373,7 +1369,7 @@ msgstr "Aktuelle Werte"
 
 #: index_old.php:65 index_old.php:83 index_old.php:101 index_old.php:127
 msgid "&thetasym;-NTC"
-msgstr ""
+msgstr "&thetasym;-NTC"
 
 #: logs.php:9
 msgid "log entries"
@@ -1750,7 +1746,7 @@ msgstr "läuft schon"
 
 #: modules/start_stop_program.php:268
 msgid "killed"
-msgstr ""
+msgstr "killed"
 
 #: modules/start_stop_uv.php:4
 msgid "uv switched on manually"
@@ -2272,11 +2268,11 @@ msgstr "E-Mail Testnachricht senden"
 
 #: notification.php:658
 msgid "user key"
-msgstr ""
+msgstr "user key"
 
 #: notification.php:662
 msgid "api token"
-msgstr ""
+msgstr "api token"
 
 #: notification.php:666
 msgid "pushover_active"
@@ -2299,11 +2295,11 @@ msgstr "Pushover Testnachricht senden"
 
 #: notification.php:703
 msgid "bot token"
-msgstr ""
+msgstr "bot token"
 
 #: notification.php:707
 msgid "bot chatID"
-msgstr ""
+msgstr "bot chatID"
 
 #: notification.php:711
 msgid "telegram_active"
@@ -2523,6 +2519,12 @@ msgstr "Licht EIN"
 #: webcam.php:57
 msgid "light manual on"
 msgstr "Licht manuell EIN"
+
+#~ msgid "every"
+#~ msgstr "alle"
+
+#~ msgid "minutes a new value is written!"
+#~ msgstr "Minuten wird ein neuer Wert in die Datenbank gespeichert!"
 
 #~ msgid "measuring duration"
 #~ msgstr "Messdauer"
