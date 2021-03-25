@@ -89,7 +89,7 @@
                                                         echo '<td><input name="minutes" type="number" min="0" max="60.0" step="1" style="width: 90%; text-align: right;" value = ' . $minutes . '></td>';
                                                     echo '</tr>';
                                                 echo '</table>';
-                                                echo '<button class="art-button" name="change_customtime" value="change_customtime" onclick="return confirm("' . _("change customtime?") . '");">' . _("change") . '</button>';
+                                                echo '<button class="art-button" name="change_customtime" value="change_customtime" onclick="return confirm(\'' . _('change customtime?') . '\');">' . _('change') . '</button>';
                                             echo '</form>';
                                         }
                                     ?>
