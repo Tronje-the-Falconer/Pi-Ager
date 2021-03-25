@@ -48,6 +48,7 @@ def autostart_loop():
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
             status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
             current_agingtable_period = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.agingtable_period_key)
+            cl_fact_logger.get_instance().update_logger_loglevels()
             check_and_set_light()
             
             # logger.debug('autostart_loop ' + time.strftime('%H:%M:%S', time.localtime()))
@@ -486,7 +487,9 @@ def doMainLoop():
             check_and_set_light()
             check_status_agingtable()
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
-    
+            # update logging levels if changed by FE
+            cl_fact_logger.get_instance().update_logger_loglevels()
+            
     #Settings
             # Meat temperature sensors
             temp_sensor_type_index1 = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.meat1_sensortype_key)

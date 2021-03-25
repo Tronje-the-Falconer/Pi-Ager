@@ -6,6 +6,7 @@
         logger('DEBUG', 'button save change_sensorbus pressed');
         unset($_POST['change_sensorbus_submit']);
         
+        $old_sensorsecondtype = get_table_value($config_settings_table, $sensorsecondtype_key);
         $bus = $_POST['bus'];
         $sensornum = $_POST['sensortype_admin'];
         if (isset ($_POST['sensorsecondtype_admin'])){
@@ -31,6 +32,11 @@
             shell_exec('sudo /var/sudowebscript.sh sensorbusi2c > /dev/null 2>&1 &');
             header("Location: /shutdown.php");
             die();
+        }
+        else if ($old_sensorsecondtype != $sensorsecondnum) {
+            // echo 'second sensor changed<br>';
+            header("Location: /shutdown.php");
+            die(); 
         }
         else {
             logger('DEBUG', 'sensorbus is already correct');

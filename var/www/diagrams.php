@@ -74,11 +74,11 @@
                                             echo '<form method="post" name="change_customtime">';
                                                 echo '<table style="width: 100%;">';
                                                     echo '<tr>';
-                                                        /* echo '<td>years</td>'; */
-                                                        echo '<td>month</td>';
-                                                        echo '<td>days</td>';
-                                                        echo '<td>hours</td>';
-                                                        echo '<td>minutes</td>';
+                                                        /* echo '<td>' . _('years') . '</td>'; */
+                                                        echo '<td>' . _('months') . '</td>';
+                                                        echo '<td>' . _('days') . '</td>';
+                                                        echo '<td>' . _('hours') . '</td>';
+                                                        echo '<td>' . _('minutes') .'</td>';
                                                     echo '</tr>';
                                                     echo '<tr>';
                                                         echo '<input name="years" type="hidden" value = ' . $years . '>';
@@ -96,10 +96,13 @@
                                 </div>
 
                                     <div style="">
-                                        <h4><?php echo _('every ~ 5 minutes a new value is written!'); ?></h4>
-                                        <?php
-                                            include 'modules/read_values_for_diagrams.php';
-                                        ?>
+                                        <h4><?php 
+					                        include 'modules/read_values_for_diagrams.php';
+											$temperatur_humidity_saving_period = ceil (2 *($save_temperature_humidity_loops * 10 /60)) / 2;
+											echo _('storage interval of the data in the database');
+							                echo '<td>: ~ '.$temperatur_humidity_saving_period.' </td>';
+											echo _('minutes'); 
+										    ?></h4>
                                         <canvas id="temperature_humidity_chart"></canvas>
                                         <div class="on_off_chart"><canvas id="cooler_chart"></canvas></div>
                                         <div class="on_off_chart"><canvas id="heater_chart"></canvas></div>
