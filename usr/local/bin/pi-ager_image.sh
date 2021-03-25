@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script-Name: pi-ager_image
-# Version    : 0.0.5
+# Version    : 0.0.9
 # Autor      : DerBurgermeister
 # Datum      : 11.01.2020
 # Dieses Script erstellt aus einem Backup ein Image. Nur für internen Gebrauch
@@ -295,14 +295,11 @@ UPDATE config SET value='180' WHERE key = 'uv_perod';
 UPDATE config SET value='0' WHERE key = 'uv_modus';
 UPDATE config SET value='27' WHERE key = 'save_temperature_humidity_loops';	
 DELETE FROM config_nfs_backup;
-#delete FROM config_alarm;
 delete FROM config_email_server;
 delete FROM config_email_recipient;
 #delete FROM config_messenger;
-delete FROM scale1_data;
-delete FROM scale2_data;
-delete FROM sensor_humidity_data;
-delete FROM sensor_temperature_data;
+delete FROM all_scales;
+delete FROM all_sensors;
 delete FROM uv_status;
 delete FROM circulating_air_status;	
 delete FROM cooling_compressor_status;	
@@ -314,6 +311,15 @@ delete FROM humidifier_status;
 delete FROM light_status;
 delete FROM config_pushover;
 delete FROM config_telegram;
+
+UPDATE config_messenger_exception SET "e-mail" = 0;
+UPDATE config_messenger_exception SET "pushover" = 0;
+UPDATE config_messenger_exception SET "telegram" = 0;
+	
+UPDATE config_messenger_event SET "e-mail" = 0;
+UPDATE config_messenger_event SET "pushover" = 0;
+UPDATE config_messenger_event SET "telegram" = 0;
+
 
 
 END_SQL
