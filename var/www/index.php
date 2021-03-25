@@ -9,6 +9,7 @@
                                       include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
                                       include 'modules/read_current_db.php';                    // Liest die gemessenen Werte Temp, Humy, Timestamp
                                       include 'modules/read_bus.php';                           //liest den bus aus, um externsensor ein oder auszublenden
+								      include 'modules/write_customtime_db.php';                 //speichert die individuelle Zeit für die Diagramme
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('mainsensors'); ?></h2>
                         <!--        <div style="float: left; padding-left: 8px;" id="timestamp"></div>
@@ -144,7 +145,53 @@
                                 </div>
                                 <hr>
                                 <!------------------------------ ----------------------------------------------------------T/rLF Diagramm-->
-                                <?php
+                               
+                                <h2 class="art-postheader"><?php echo _('diagrams'); ?></h2>
+                                <div class="hg_container" style="margin-bottom: 20px; margin-top: 20px;">
+                                    <table style="width: 100%;">
+
+                                    <?php
+                                      //  if ($diagram_mode_translated == 'custom'){
+                                            
+                                            $duration = get_table_value($config_settings_table, $customtime_for_diagrams_key); 
+                                            $years = floor ($duration / 31557600);
+                                            $duration = $duration - $years * 31557600;
+                                            $months = floor($duration / 2628000);
+                                            $duration = $duration - $months * 2628000;
+                                            $days = floor($duration / 86400);
+                                            $duration = $duration - $days * 86400;
+                                            $hours = floor($duration / 3600);
+                                            $duration = $duration - $hours * 3600;
+                                            $minutes = floor($duration / 60);
+                                            $duration = $duration - $minutes * 60;
+                                            $seconds = floor($duration / 1);             
+                                            
+                                           // echo '<hr>';
+                                            echo '<form method="post" name="change_customtime">';
+                                                echo '<table style="width: 100%;">';
+                                                    echo '<tr>';
+                                                        /* echo '<td>' . _('years') . '</td>'; */
+                                                        echo '<td>' . _('months') . '</td>';
+                                                        echo '<td>' . _('days') . '</td>';
+                                                        echo '<td>' . _('hours') . '</td>';
+                                                        echo '<td>' . _('minutes') .'</td>';
+                                                    echo '</tr>';
+                                                    echo '<tr>';
+                                                        echo '<input name="years" type="hidden" value = ' . $years . '>';
+                                                        /* echo '<td><input name="years" type="number" step="1" style="width: 90%; text-align: right;" value = ' . $years . '></td>'; */
+                                                        echo '<td><input name="months" type="number" min="0" max="12.0" step="1" style="width: 90%; text-align: right;" value = ' . $months . '></td>';
+                                                        echo '<td><input name="days" type="number" min="0" max="31.0" step="1" style="width: 90%; text-align: right;" value = ' . $days . '></td>';
+                                                        echo '<td><input name="hours" type="number"  min="0" max="24.0" step="1" style="width: 90%; text-align: right;" value = ' . $hours . '></td>';
+                                                        echo '<td><input name="minutes" type="number" min="0" max="60.0" step="1" style="width: 90%; text-align: right;" value = ' . $minutes . '></td>';
+                                                    echo '</tr>';
+                                                echo '</table>';
+                                                echo '<button class="art-button" name="change_customtime7" value="change_customtime" onclick="return confirm("' . _("change customtime?") . '");">' . _("change") . '</button>';
+                                            echo '</form>';
+                                       // }
+                                    ?>
+                                </div>
+
+							   <?php
                                     $diagram_mode = 'custom';
                                     include 'modules/read_values_for_diagrams.php';
                                 ?>

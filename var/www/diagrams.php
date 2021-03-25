@@ -74,11 +74,11 @@
                                             echo '<form method="post" name="change_customtime">';
                                                 echo '<table style="width: 100%;">';
                                                     echo '<tr>';
-                                                        /* echo '<td>years</td>'; */
-                                                        echo '<td>month</td>';
-                                                        echo '<td>days</td>';
-                                                        echo '<td>hours</td>';
-                                                        echo '<td>minutes</td>';
+                                                        /* echo '<td>' . _('years') . '</td>'; */
+                                                        echo '<td>' . _('months') . '</td>';
+                                                        echo '<td>' . _('days') . '</td>';
+                                                        echo '<td>' . _('hours') . '</td>';
+                                                        echo '<td>' . _('minutes') .'</td>';
                                                     echo '</tr>';
                                                     echo '<tr>';
                                                         echo '<input name="years" type="hidden" value = ' . $years . '>';
