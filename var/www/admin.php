@@ -560,7 +560,7 @@
                                                     // $grepagingtable = shell_exec('ps ax | grep -v grep | grep agingtable.py');
                                                     $grepagingtable = intval(get_table_value($current_values_table, $status_agingtable_key));
                                                     if ($grepagingtable == 0){
-                                                        echo '<td><button class="art-button" name="manual_backup" value="manual_backup" onclick="return confirm(' . _('ATTENTION: backup manually?') . ');">' . _('backup manually') . '</button></td>';
+                                                        echo '<td><button class="art-button" name="manual_backup" value="manual_backup" onclick="return confirm(\'' . _('ATTENTION: backup manually?') . '\');">' . _('backup manually') . '</button></td>';
                                                     }
                                                     else{
                                                         echo '<td>' . _('Agingtable is active. No backup possible!') . '</td>';
