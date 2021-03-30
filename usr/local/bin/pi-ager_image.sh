@@ -228,23 +228,32 @@ systemctl disable pi-ager_scale.service pi-ager_agingtable.service
 
 
 
-######################################################
+******************************************************
 # Change some settings
-######################################################
+******************************************************
 
+######################################################
 # Remove System key for encrypt/decrypt
+######################################################
 rm /home/pi/system_key.bin
 
+######################################################
 # change hostname
+######################################################
 raspi-config nonint do_hostname rpi-Pi-Ager
 
 # rewrite /var/.htcredentials
 mv /var/.htcredentials.org  /var/.htcredentials
 
+######################################################
 # rewrite /etc/wpa_supplicant/wpa_supplicant.conf
+######################################################
 mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
 
+
+######################################################
 # rewrite /boot/setup.txt
+######################################################
 #mv /root/setup.txt /boot/setup.txt
 
 ######################################################
@@ -358,8 +367,34 @@ if [ "$my_image" = false ]; then
 	rm -f /home/pi/.sqlite_history
 	rm -f /home/pi/.wget-hsts
 	rm -f /home/pi/subversion
-
+	
+	# delete obsolete /etc direcories
+	rm -rf /etc/bacula
+	rm -rf /etc/bareos
+	rm -rf /etc/grafana
+	rm -rf /etc/ingluxdb
+	rm -rf /etc/telegraf
+	
+	rm -rf /etc/python2.7
+	rm -rf /etc/python3.5
+	
+	userdel bareos
+	userdel telegraf
+	userdel influxdb
+	userdel grafana
+	userdel chronograf
+	userdel kapacitor
+	
+	
+	# delete obsolete /var direcories
+	rm /var/www/logs/*
+	rm /var/logs
+	
+	# delete obsolete /tmp direcory
+	rm -rf /tmp
+	
 	# delete obsolete /opt direcories
+	rm -
 	rm -r /opt/git
 	rm -r /opt/GPIO-Test
 	rm -r /opt/MCP3204
