@@ -11,6 +11,10 @@ __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Productive"
 
+import globals
+# init global threading.lock
+globals.init()
+
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
