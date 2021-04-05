@@ -213,8 +213,8 @@ cat /dev/null > /home/pi/.bash_history
 
 
 # remove obsolete direcectories after upgrade
-rm -r /boot.bak
-rm -r /lib/modules.bak
+rm -f /boot.bak
+rm -f /lib/modules.bak
 #PRUNE_MODULES=1 sudo rpi-update
 
 systemctl enable pi-ager_main.service setup_pi-ager.service
@@ -394,11 +394,10 @@ if [ "$my_image" = false ]; then
 	rm -rf /tmp
 	
 	# delete obsolete /opt direcories
-	rm -
-	rm -r /opt/git
-	rm -r /opt/GPIO-Test
-	rm -r /opt/MCP3204
-	rm -r /opt/vc
+	rm -rf /opt/git
+	rm -rf /opt/GPIO-Test
+	rm -rf /opt/MCP3204
+	rm -rf /opt/vc
 	######################################################
 	# Change some settings
 	######################################################
