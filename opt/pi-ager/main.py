@@ -104,9 +104,9 @@ finally:
     cl_fact_logger.get_instance().debug('main.finally')
     #if exception_known == False:
     pi_ager_init.loopcounter = 0
-    pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
-    pi_ager_database.write_stop_in_database(pi_ager_names.status_scale1_key)
-    pi_ager_database.write_stop_in_database(pi_ager_names.status_scale2_key)
+    # pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
+    # pi_ager_database.write_stop_in_database(pi_ager_names.status_scale1_key)
+    # pi_ager_database.write_stop_in_database(pi_ager_names.status_scale2_key)
         # os.system('sudo /var/sudowebscript.sh pkillscale &')
         # os.system('sudo /var/sudowebscript.sh pkillmain &')
     cl_fact_logger.get_instance().debug('waiting for all threads terminating...')   
