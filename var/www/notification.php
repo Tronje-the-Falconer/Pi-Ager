@@ -481,40 +481,42 @@
                                             </tr>
                                             <?php 
                                                 // Empfaenger aus DB auslesen und als Tabelle schreiben
-                                                $index_row = 0;
-                                                $e_mail_recipients_rows = get_table_dataset($email_recipients_table);
-                                                if ($e_mail_recipients_rows != false){
-                                                    try {
-                                                        $count_e_mail_recipients_number_rows = count($e_mail_recipients_rows);
-                                                        while ($index_row < $count_e_mail_recipients_number_rows) {
-                                                            $checked_e_mail_recipient_true = "";
-                                                            $dataset = $e_mail_recipients_rows[$index_row];
-                                                            // $num = count($dataset);
-                                                            if (!empty($dataset[$e_mail_recipients_id_field])){
-                                                                $e_mail_recipients_id = $dataset[$e_mail_recipients_id_field];
-                                                            } else {$e_mail_recipients_id = '..';}
-                                                            if (!empty($dataset[$e_mail_recipients_to_mail_field])){
-                                                                $e_mail_recipients_to_mail = $dataset[$e_mail_recipients_to_mail_field];
-                                                            } else {$e_mail_recipients_to_mail = '..';}
-                                                            if (!empty($dataset[$e_mail_recipients_active_field])){
-                                                                $e_mail_recipients_active = $dataset[$e_mail_recipients_active_field];
-                                                                if ($e_mail_recipients_active == 1){
-                                                                    $checked_e_mail_recipient_true = "checked";
-                                                                } else { 
-                                                                    $checked_e_mail_recipient_true = "";
-                                                                }
-                                                            } else {$e_mail_recipients_active = '';}
+                                                if (is_table_empty($email_recipients_table) == False) {
+                                                    $index_row = 0;
+                                                    $e_mail_recipients_rows = get_table_dataset($email_recipients_table);
+                                                    if ($e_mail_recipients_rows != false){
+                                                        try {
+                                                            $count_e_mail_recipients_number_rows = count($e_mail_recipients_rows);
+                                                            while ($index_row < $count_e_mail_recipients_number_rows) {
+                                                                $checked_e_mail_recipient_true = "";
+                                                                $dataset = $e_mail_recipients_rows[$index_row];
+                                                                // $num = count($dataset);
+                                                                if (!empty($dataset[$e_mail_recipients_id_field])){
+                                                                    $e_mail_recipients_id = $dataset[$e_mail_recipients_id_field];
+                                                                } else {$e_mail_recipients_id = '..';}
+                                                                if (!empty($dataset[$e_mail_recipients_to_mail_field])){
+                                                                    $e_mail_recipients_to_mail = $dataset[$e_mail_recipients_to_mail_field];
+                                                                } else {$e_mail_recipients_to_mail = '..';}
+                                                                if (!empty($dataset[$e_mail_recipients_active_field])){
+                                                                    $e_mail_recipients_active = $dataset[$e_mail_recipients_active_field];
+                                                                    if ($e_mail_recipients_active == 1){
+                                                                        $checked_e_mail_recipient_true = "checked";
+                                                                    } else { 
+                                                                        $checked_e_mail_recipient_true = "";
+                                                                    }
+                                                                } else {$e_mail_recipients_active = '';}
                                                                 echo '<td><input type="hidden" name="e_mail_recipient_id_' . $index_row . '" value="' . $e_mail_recipients_id . '">'. $e_mail_recipients_id .'</td>';
                                                                 echo '<td><input name="e_mail_recipient_to_mail_' . $e_mail_recipients_id . '" type="email" style="width: 90%; text-align: right;" required value='. $e_mail_recipients_to_mail .'></td>';
                                                                 echo '<td> <input type="hidden" name="checked_e_mail_recipient_true_' . $e_mail_recipients_id . '" value="0">
                                                                         <input type="checkbox" name="checked_e_mail_recipient_true_' . $e_mail_recipients_id . '" value="1" ' . $checked_e_mail_recipient_true .'></td>';
-                                                            echo '</tr>';
-                                                            $index_row++;
+                                                                echo '</tr>';
+                                                                $index_row++;
+                                                            }
+                                                            echo '<input type="hidden" name="count_e_mail_recipients_number_rows" value="' . $count_e_mail_recipients_number_rows . '">';
                                                         }
-                                                        echo '<input type="hidden" name="count_e_mail_recipients_number_rows" value="' . $count_e_mail_recipients_number_rows . '">';
-                                                     }
-                                                     catch (Exception $e) {
+                                                        catch (Exception $e) {
                                                         }
+                                                    }
                                                 }
                                             ?>
                                         </table>

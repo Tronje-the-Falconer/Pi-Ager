@@ -58,6 +58,25 @@
         return $column_array;
     }
     
+    function is_table_empty($table)
+    {
+        $sql = 'SELECT COUNT(*) as count FROM ' . $table ;
+        open_connection();
+        $result = get_query_result($sql);
+        $row = $result->fetchArray(SQLITE3_ASSOC);
+        close_database();        
+        $numRows = $row['count'];
+
+        # echo 'is_table_empty result, number of rows : ' . $numRows . '<br>';
+
+        if ($numRows == 0) {
+            return True;
+        }
+        else {
+            return False;
+        }
+    }
+    
     function get_current_time(){
         $current_time = time();
         return $current_time;
@@ -405,6 +424,7 @@
         $result = get_query_result($sql);
     
         $index = 0;
+        $dataset_rows = array();
         while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
             {
             $dataset_rows[$index] = $dataset;
@@ -417,40 +437,73 @@
     
     function write_telegram_values($telegram_bot_token, $telegram_bot_chatid, $telegram_active){
         global $telegram_table, $telegram_bot_token_field, $telegram_bot_chat_id_field, $telegram_active_field, $telegram_id_field;
-        open_connection();
-        $sql = 'UPDATE ' . $telegram_table . ' SET "' . $telegram_bot_token_field . '" = "' . $telegram_bot_token . '" , "' . $telegram_bot_chat_id_field . '" = "' . $telegram_bot_chatid . '", "'. $telegram_active_field . '" = ' . $telegram_active . ' WHERE "' . $telegram_id_field . '" = 1';
-        execute_query($sql);
         
-        close_database();
+        if (is_table_empty($telegram_table) == True) {
+            open_connection();
+            $sql = 'INSERT INTO ' . $telegram_table . ' (' . $telegram_id_field . ', ' . $telegram_bot_token_field . ', ' . $telegram_bot_chat_id_field . ', ' . $telegram_active_field . ' ) VALUES (' . '"1"' . ', "' . $telegram_bot_token . '", "'. $telegram_bot_chatid . '", "' . strval($telegram_active) . '")';
+            execute_query($sql);
+            close_database();
+        }
+        else {        
+            open_connection();
+            $sql = 'UPDATE ' . $telegram_table . ' SET "' . $telegram_bot_token_field . '" = "' . $telegram_bot_token . '" , "' . $telegram_bot_chat_id_field . '" = "' . $telegram_bot_chatid . '", "'. $telegram_active_field . '" = ' . $telegram_active . ' WHERE "' . $telegram_id_field . '" = 1';
+            execute_query($sql);
+            close_database();
+        }
     }
     
     function write_pushover_values($pushover_user_key, $pushover_api_token, $pushover_active){
         global $pushover_table, $pushover_user_key_field, $pushover_api_token_field, $pushover_active_field, $pushover_id_field;
-        open_connection();
-        $sql = 'UPDATE ' . $pushover_table . ' SET "' . $pushover_user_key_field . '" = "' . $pushover_user_key . '" , "' . $pushover_api_token_field . '" = "' . $pushover_api_token . '", "'. $pushover_active_field . '" = ' . $pushover_active . ' WHERE "' . $pushover_id_field . '" = 1';
-        execute_query($sql);
+
+        if (is_table_empty($pushover_table) == True) {
+            open_connection();
+            $sql = 'INSERT INTO ' . $pushover_table . ' (' . $pushover_id_field . ', ' . $pushover_user_key_field . ', ' . $pushover_api_token_field . ', ' . $pushover_active_field . ' ) VALUES (' . '"1"' . ', "' . $pushover_user_key . '", "'. $pushover_api_token . '", "' . strval($pushover_active) . '")';
+            execute_query($sql);
+            close_database();
+        }
+        else {
+            open_connection();
+            $sql = 'UPDATE ' . $pushover_table . ' SET "' . $pushover_user_key_field . '" = "' . $pushover_user_key . '" , "' . $pushover_api_token_field . '" = "' . $pushover_api_token . '", "'. $pushover_active_field . '" = ' . $pushover_active . ' WHERE "' . $pushover_id_field . '" = 1';
+            execute_query($sql);
+            close_database();
+        }
+    }
+    
+    function write_dummy_mailserver_values() {
+        global $mailserver_table, $mailserver_id_field, $mailserver_server_field, $mailserver_user_field, $mailserver_port_field;
         
-        close_database();
+        if (is_table_empty($mailserver_table) == True) {
+            open_connection();
+            $sql = 'INSERT INTO ' . $mailserver_table . ' (' . $mailserver_id_field . ', ' . $mailserver_server_field . ', ' . $mailserver_user_field . ', ' . 'password' . ', ' . $mailserver_port_field . ' ) VALUES (' . '"1", "dummyServer", "dummyUser", "dummyPassword", "465"' . ')';
+            execute_query($sql);
+            close_database();
+        }
     }
     
     function write_mailserver_values($mailserver_server, $mailserver_user, $mailserver_port){
         global $mailserver_table, $mailserver_id_field, $mailserver_server_field, $mailserver_user_field, $mailserver_port_field;
+        
         open_connection();
         $sql = 'UPDATE ' . $mailserver_table . ' SET "' . $mailserver_server_field . '" = "' . $mailserver_server . '" , "' . $mailserver_user_field . '" = "' . $mailserver_user . '" , "' . $mailserver_port_field . '" = "' . $mailserver_port. '" WHERE "' . $mailserver_id_field . '" = 1';
-
         execute_query($sql);
-        
         close_database();
     }
     
     function write_mail_recipient_values($e_mail_recipients_id, $e_mail_recipients_to_mail, $e_mail_recipients_active){
         global $email_recipients_table, $e_mail_recipients_to_mail_field, $e_mail_recipients_active_field, $e_mail_recipients_id_field;
-        open_connection();
-        $sql = 'UPDATE ' . $email_recipients_table . ' SET "' . $e_mail_recipients_to_mail_field . '" = "' . $e_mail_recipients_to_mail . '" , "' . $e_mail_recipients_active_field . '" = "' . $e_mail_recipients_active . '" WHERE "' . $e_mail_recipients_id_field . '" = ' . $e_mail_recipients_id;
         
-        execute_query($sql);
-        
-        close_database();
+        if (is_table_empty($email_recipients_table) == True) {
+            open_connection();
+            $sql = 'INSERT INTO ' . $email_recipients_table . ' (' . $e_mail_recipients_id_field . ', ' . $e_mail_recipients_to_mail_field . ', ' . $e_mail_recipients_active_field . ' ) VALUES (' . '"1"' . ', "' . $e_mail_recipients_to_mail . '", "' . strval($e_mail_recipients_active) . '")';
+            execute_query($sql);
+            close_database();    
+        }
+        else {
+            open_connection();
+            $sql = 'UPDATE ' . $email_recipients_table . ' SET "' . $e_mail_recipients_to_mail_field . '" = "' . $e_mail_recipients_to_mail . '" , "' . $e_mail_recipients_active_field . '" = "' . $e_mail_recipients_active . '" WHERE "' . $e_mail_recipients_id_field . '" = ' . $e_mail_recipients_id;
+            execute_query($sql);
+            close_database();
+        }
     }
     
     function write_messenger_values($messenger_id, $messenger_exception, $messenger_e_mail, $messenger_pushover, $messenger_telegram, $messenger_alarm, $messenger_raise_exception, $messenger_active ){
@@ -948,25 +1001,6 @@
         insert_value_into_status_table( $status_humidifier_table, $status );                
         $status = get_table_value($current_values_table, $status_dehumidifier_key);
         insert_value_into_status_table( $status_dehumidifier_table, $status );                        
-    }
-    
-    function is_table_empty($table)
-    {
-        $sql = 'SELECT COUNT(*) as count FROM ' . $table ;
-        open_connection();
-        $result = get_query_result($sql);
-        $row = $result->fetchArray(SQLITE3_ASSOC);
-        close_database();        
-        $numRows = $row['count'];
-
-        // echo 'is_table_empty result : ' . $numRows . '<br>';
-
-        if ($numRows == 0) {
-            return True;
-        }
-        else {
-            return False;
-        }
     }
     
     function get_table_value_from_field($table, $key, $field)
