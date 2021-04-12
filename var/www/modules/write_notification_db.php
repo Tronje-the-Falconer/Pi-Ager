@@ -190,11 +190,16 @@
         // $mailserver_from_mail = $_POST['mailserver_from_mail'];
         $mailserver_port = intval($_POST['mailserver_port']);
         
+        // check if mailserver table is empty. If so, generate row with dummy values and id=1
+        if (is_table_empty($mailserver_table) == True) {
+            write_dummy_mailserver_values();
+        }
+        
         logger('DEBUG', 'password = ' . $mailserver_password);
         if ($mailserver_password != '123456789abcdefghi'){
             //$mailserver_password_base64 = base64_decode($mailserver_password);
             $mailserver_password_converted = str_replace("'", "'\''", $mailserver_password);
-            shell_exec("sudo /var/sudowebscript.sh encrypt_password '" . $mailserver_password_converted . "' > /dev/null 2>&1 &");
+            shell_exec("sudo /var/sudowebscript.sh encrypt_password '" . $mailserver_password_converted . "' > /dev/null 2>&1");
         }
         write_mailserver_values($mailserver_server, $mailserver_user, $mailserver_port);
         logger('DEBUG', 'mailserver values saved');

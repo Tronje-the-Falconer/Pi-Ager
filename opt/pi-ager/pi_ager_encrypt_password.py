@@ -1,5 +1,9 @@
 import sys
 import base64
+
+import globals
+globals.init()
+
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
 from messenger.pi_ager_cl_email_server import cl_fact_db_email_server

@@ -278,16 +278,11 @@ DROP TABLE IF EXISTS "config_email_recipient";
 ----
 -- Table structure for config_email_recipient
 ----
-CREATE TABLE "config_email_recipient" (
+CREATE TABLE 'config_email_recipient' (
     "id" INTEGER NOT NULL,
     "to_mail" TEXT NOT NULL,
     "active" INTEGER
-);
-
-----
--- Data dump for config_email_recipient, a total of 1 rows
-----
-INSERT INTO "config_email_recipient" ("id","to_mail","active") VALUES ('1','max.mustermann@provider.de','0');
+, PRIMARY KEY ("id") );
 
 ----
 -- Drop table for meat_sensortypes
@@ -331,8 +326,8 @@ DROP TABLE IF EXISTS "config_nfs_backup";
 ----
 -- Table structure for config_nfs_backup
 ----
-CREATE TABLE "config_nfs_backup" (
-    "id" INTEGER,
+CREATE TABLE 'config_nfs_backup' (
+	"id" INTEGER,
     "nfsvol" TEXT,
     "subdir" TEXT,
     "nfsmount" TEXT,
@@ -355,8 +350,8 @@ DROP TABLE IF EXISTS "config_telegram";
 ----
 -- Table structure for config_telegram
 ----
-CREATE TABLE "config_telegram" (
-    "id" INTEGER,
+CREATE TABLE 'config_telegram' (
+	"id" INTEGER,
     "bot_token" TEXT NOT NULL,
     "bot_chatID" TEXT NOT NULL,
     "active" INTEGER
@@ -374,8 +369,8 @@ DROP TABLE IF EXISTS "config_pushover";
 ----
 -- Table structure for config_pushover
 ----
-CREATE TABLE "config_pushover" (
-    "id" INTEGER,
+CREATE TABLE 'config_pushover' (
+	"id" INTEGER,
     "user_key" TEXT NOT NULL,
     "api_token" TEXT NOT NULL,
     "active" INTEGER
@@ -447,24 +442,24 @@ DROP TABLE IF EXISTS "config_messenger_exception";
 ----
 -- Table structure for config_messenger_exception
 ----
-CREATE TABLE "config_messenger_exception" (
-    "id" INTEGER,
+CREATE TABLE 'config_messenger_exception' (
     "exception" TEXT NOT NULL,
     "e-mail" INTEGER,
     "pushover" INTEGER,
     "telegram" INTEGER,
     "alarm" TEXT,
     "raise_exception" INTEGER
-, "active" INTEGER);
+, "active" INTEGER, 'id'  INTEGER PRIMARY KEY NOT NULL  );
+
 
 ----
 -- Data dump for config_messenger_exception, a total of 5 rows
 ----
-INSERT INTO "config_messenger_exception" ("id","exception","e-mail","pushover","telegram","alarm","raise_exception","active") VALUES ('1','cx_Sensor_not_defined','0','0','0','short','1','1');
-INSERT INTO "config_messenger_exception" ("id","exception","e-mail","pushover","telegram","alarm","raise_exception","active") VALUES ('2','OperationalError','0','0','0','short','1','1');
-INSERT INTO "config_messenger_exception" ("id","exception","e-mail","pushover","telegram","alarm","raise_exception","active") VALUES ('3','FileNotFoundError','0','0','0','short','1','1');
-INSERT INTO "config_messenger_exception" ("id","exception","e-mail","pushover","telegram","alarm","raise_exception","active") VALUES ('4','OSError','0','0','0','short','1','1');
-INSERT INTO "config_messenger_exception" ("id","exception","e-mail","pushover","telegram","alarm","raise_exception","active") VALUES ('5','cx_measurement_error','0','0','0','short','1','1');
+INSERT INTO "config_messenger_exception" ("exception","e-mail","pushover","telegram","alarm","raise_exception","active","id") VALUES ('cx_sensor_not_defined','0','0','0','short','0','1','1');
+INSERT INTO "config_messenger_exception" ("exception","e-mail","pushover","telegram","alarm","raise_exception","active","id") VALUES ('OperationalError','0','0','0','short','1','1','2');
+INSERT INTO "config_messenger_exception" ("exception","e-mail","pushover","telegram","alarm","raise_exception","active","id") VALUES ('FileNotFoundError','0','0','0','short','1','1','3');
+INSERT INTO "config_messenger_exception" ("exception","e-mail","pushover","telegram","alarm","raise_exception","active","id") VALUES ('OSError','0','0','0','short','0','1','4');
+INSERT INTO "config_messenger_exception" ("exception","e-mail","pushover","telegram","alarm","raise_exception","active","id") VALUES ('cx_measurement_error','0','0','0','short','0','1','5');
 
 ----
 -- Drop table for config_messenger_event
@@ -474,21 +469,19 @@ DROP TABLE IF EXISTS "config_messenger_event";
 ----
 -- Table structure for config_messenger_event
 ----
-CREATE TABLE "config_messenger_event" (
-    "id" INTEGER,
+CREATE TABLE 'config_messenger_event' (
     "event" TEXT NOT NULL,
     "e-mail" INTEGER,
     "pushover" INTEGER,
     "telegram" INTEGER,
     "alarm" TEXT,
     "event_text" TEXT,
-    "active" INTEGER);
+    "active" INTEGER, 'id'  INTEGER PRIMARY KEY NOT NULL  );
 
 ----
 -- Data dump for config_messenger_event, a total of 1 rows
 ----
-INSERT INTO "config_messenger_event" ("id","event","e-mail","pushover","telegram","alarm","event_text","active") VALUES ('1','Pi-Ager_started','0','0','0','','Test','0');
-
+INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('Pi-Ager_started','0','0','0',' ','Test  Event Pi-Ager Zero','0','1');
 ----
 -- Drop table for config_alarm
 ----
@@ -498,14 +491,15 @@ DROP TABLE IF EXISTS "config_alarm";
 -- Table structure for config_alarm
 ----
 CREATE TABLE "config_alarm" (
-    "id" INTEGER,
-    "alarm" TEXT NOT NULL DEFAULT ('short'),
-    "replication" INTEGER DEFAULT (3),
-    "sleep" REAL DEFAULT (0.5),
-    "high_time" REAL DEFAULT (0.5),
-    "low_time" REAL DEFAULT (0.5),
-    "waveform" TEXT,
-    "frequency" REAL
+	"id"	INTEGER NOT NULL,
+	"alarm"	TEXT NOT NULL DEFAULT ('short'),
+	"replication"	INTEGER DEFAULT (3),
+	"sleep"	REAL DEFAULT (0.5),
+	"high_time"	REAL DEFAULT (0.5),
+	"low_time"	REAL DEFAULT (0.5),
+	"waveform"	TEXT,
+	"frequency"	REAL,
+	PRIMARY KEY("id")
 );
 
 ----
@@ -562,7 +556,7 @@ INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES ('5','bi
 INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES ('6','referenceunit','205.0','1613669467');
 INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES ('7','measuring_interval','300.0','0');
 INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES ('8','measuring_duration','15.0','0');
-INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES ('9','saving_period','30.0','0');
+INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES ('9','saving_period','120.0','0');
 INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES ('10','offset','528.4','1613669506');
 
 ----
@@ -586,7 +580,7 @@ INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES ('5','bi
 INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES ('6','referenceunit','205.0','1613243596');
 INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES ('7','measuring_interval','300.0','0');
 INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES ('8','measuring_duration','15.0','0');
-INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES ('9','saving_period','30.0','0');
+INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES ('9','saving_period','120.0','0');
 INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES ('10','offset','500.0','1613243410');
 
 ----
@@ -597,7 +591,7 @@ DROP TABLE IF EXISTS "config_email_server";
 ----
 -- Table structure for config_email_server
 ----
-CREATE TABLE "config_email_server" ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'server' TEXT NOT NULL, 'user' TEXT NOT NULL, 'password' TEXT NOT NULL, 'port' INTEGER NOT NULL);
+CREATE TABLE "config_email_server" ('id' INTEGER NOT NULL, 'server' TEXT NOT NULL, 'user' TEXT NOT NULL, 'password' TEXT NOT NULL, 'port' INTEGER NOT NULL);
 
 ----
 -- Data dump for config_email_server, a total of 0 rows
