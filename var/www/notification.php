@@ -517,10 +517,13 @@
                                                         catch (Exception $e) {
                                                         }
                                                     }
+                                                    echo '</table>';
+                                                    echo '<button class="art-button" name="save_e_mail_recipient_values" value="save_e_mail_recipient_values" onclick="return confirm(\'' . _('ATTENTION: save e_mail recipient values?') . '\');">' . _('save') . '</button>';
+                                                }
+                                                else {
+                                                   echo '</table>'; 
                                                 }
                                             ?>
-                                        </table>
-                                        <button class="art-button" name="save_e_mail_recipient_values" value="save_e_mail_recipient_values" onclick="return confirm('<?php echo _('ATTENTION: save e_mail recipient values?');?>');"><?php echo _('save'); ?></button>
                                     </form>
                                     <form method="post" name="add_e_mail_recipient">
                                         <table id="show_email_recipients" class="show_email_recipients" style="width: 100%;">
@@ -539,7 +542,7 @@
                                     <form method="post" name="delete_e_mail_recipient">
                                         <table id="show_e_mail_recipient" class="show_e_mail_recipient" style="width: 100%;">
                                             <tr>
-                                                <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" min="2" step="1" style="width: 90%; text-align: right;" ></td>
+                                                <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" min="1" step="1" style="width: 90%; text-align: right;" ></td>
                                             </tr>
                                             <tr>
                                               <td colspan=2><button class="art-button" name="delete_e_mail_recipient" value="delete_e_mail_recipient" onclick="return confirm('<?php echo _('ATTENTION: delete e-mail recipient?');?>');"><?php echo _('delete'); ?></button></td>
