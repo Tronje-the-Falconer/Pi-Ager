@@ -207,7 +207,10 @@ fi
 #fi
 
 # Backup mit Hilfe von dd erstellen und im angegebenen Pfad speichern
+# write buffer and clear caches
 sync
+echo 1 > /proc/sys/vm/drop_caches
+
 echo "erstelle Backup $(date +%H:%M:%S)"
 dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=1M status=progress 2>&1
 
