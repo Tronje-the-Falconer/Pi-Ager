@@ -223,14 +223,14 @@
                                                     echo '<form  method="post"> <tr> <td>';
                                                 
                                                     if ($grepagingtable == 0){
-                                                        echo '<img src="images/icons/agingtable_42x42.png" alt="" style="padding: 10px;">';
+                                                        echo '<img src="images/icons/agingtable_42x42.png" alt="" style="padding: 0px;">';
                                                         echo '</td><td>';
-                                                        echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding: 10px;">';
+                                                        echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding: 0px;">';
                                                     }
                                                     else {
-                                                        echo '<img src="images/icons/agingtable_42x42.gif" alt="" style="padding: 10px;">';
+                                                        echo '<img src="images/icons/agingtable_42x42.gif" alt="" style="padding: 0px;">';
                                                         echo '</td><td>';
-                                                        echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding: 10px;">';
+                                                        echo '<img src="images/icons/status_on_20x20.png" alt="" style="padding: 0px;">';
                                                     }
                                                     echo '</td> <td style="text-align: left;">';
 
