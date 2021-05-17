@@ -611,7 +611,7 @@
         global  $config_settings_table, $id_field, $agingtables_table, $agingtable_key;
         
         $id_agingtable_to_delete = get_agingtable_id_by_name($agingtable);
-        $id_chosen_agingtable = get_table_value($config_settings_table, $agingtable_key);;
+        $id_chosen_agingtable = get_table_value($config_settings_table, $agingtable_key);
 
         if ($id_chosen_agingtable == $id_agingtable_to_delete){
             return FALSE;
