@@ -27,9 +27,10 @@
                                     }
                                     $id_agingtable_to_edit = get_agingtable_id_by_name($agingtable_to_edit);
                                     $id_chosen_agingtable = get_table_value($config_settings_table, $agingtable_key);
-                                    if ($id_agingtable_to_edit == $id_chosen_agingtable){
-                                        print '<script language="javascript"> alert("'. (_("edit agingtable")) . " : " . (_("can not edit the controlling agingtable. please select an other")) .'"); window.location.href = "settings.php";</script>';
-                                        header ( 'Location: settings.php' );
+                                    $grepagingtable = intval(get_table_value($current_values_table, $status_agingtable_key));
+                                    if ($id_agingtable_to_edit == $id_chosen_agingtable && $grepagingtable == 1){
+                                        print '<script language="javascript"> alert("'. (_("edit agingtable")) . " : " . (_("can not edit the controlling agingtable. please select another")) .'"); window.location.href = "settings.php";</script>';
+                                        //header ( 'Location: settings.php' );
                                     }
                                     echo strtoupper(_('edit agingtable:'));
                                     echo ' ' . strtoupper($agingtable_to_edit);

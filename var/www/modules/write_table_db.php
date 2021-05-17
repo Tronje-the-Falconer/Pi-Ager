@@ -72,7 +72,7 @@
             print '<script language="javascript"> alert("'. (_("agingtable")) . " : " . (_("agingtable")) . ' ' . $edit_agingtable . ' ' . (_("deleted")) . '"); </script>';
         }
         elseif ($returncode == FALSE){
-            print '<script language="javascript"> alert("'. (_("agingtable")) . " : " . $edit_agingtable . ' ' . (_("can not edit the controlling agingtable. Please choose an other first")) .'"); </script>';
+            print '<script language="javascript"> alert("'. (_("agingtable")) . " : " . $edit_agingtable . ' ' . (_("can not delete the controlling agingtable. Please choose another first")) .'"); </script>';
         }
         else{
             print '<script language="javascript"> alert("'. (_("agingtable")) . " : " . (_("unexpected Error")) .'"); </script>';
@@ -139,7 +139,7 @@
             
         }
         else{
-            print '<script language="javascript"> alert("'. (_("upload agingtable")) . " : " . (_("please select an file to upload")) .'"); window.location.href = "settings.php";</script>';
+            print '<script language="javascript"> alert("'. (_("upload agingtable")) . " : " . (_("please select a file to upload")) .'"); window.location.href = "settings.php";</script>';
         }
     }
     if (isset ($_POST['export_agingtable'])){
