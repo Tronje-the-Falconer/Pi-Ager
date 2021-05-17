@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
-"POT-Creation-Date: 2021-03-25 14:12+0100\n"
-"PO-Revision-Date: 2021-03-25 14:12+0100\n"
+"POT-Creation-Date: 2021-05-17 17:56+0200\n"
+"PO-Revision-Date: 2021-05-17 18:03+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -249,9 +249,9 @@ msgstr ""
 "<br><br>"
 
 #: admin.php:359 admin.php:468 admin.php:492 admin.php:553 config.php:254
-#: edit_agingtable.php:115 manvals.php:149 notification.php:133
+#: edit_agingtable.php:116 manvals.php:149 notification.php:133
 #: notification.php:303 notification.php:429 notification.php:521
-#: notification.php:625 notification.php:673 notification.php:718
+#: notification.php:630 notification.php:678 notification.php:723
 msgid "save"
 msgstr "Speichern"
 
@@ -428,7 +428,7 @@ msgstr ""
 "Wizzard unterberechen? Die Referenz Unit wird gespeichert, Tara wird nicht "
 "ausgeführt!"
 
-#: calibrate_scale.php:55 edit_agingtable.php:116 scale_wizzard.php:48
+#: calibrate_scale.php:55 edit_agingtable.php:117 scale_wizzard.php:48
 msgid "cancel"
 msgstr "Abbrechen"
 
@@ -931,7 +931,7 @@ msgstr "Diagramme"
 msgid "months"
 msgstr "Monate"
 
-#: diagrams.php:79 edit_agingtable.php:50 index.php:175 index.php:573
+#: diagrams.php:79 edit_agingtable.php:51 index.php:175 index.php:573
 #: settings.php:398
 msgid "days"
 msgstr "Tage"
@@ -1082,7 +1082,7 @@ msgstr "Umluft"
 msgid "every ~ 5 minutes a new value is written!"
 msgstr "Ca. alle 5 Min wird ein neuer Wert abgespeichert!"
 
-#: edit_agingtable.php:26 edit_agingtable.php:31 edit_agingtable.php:115
+#: edit_agingtable.php:26 edit_agingtable.php:32 edit_agingtable.php:116
 #: header.php:169
 msgid "edit agingtable"
 msgstr "Editor"
@@ -1091,108 +1091,108 @@ msgstr "Editor"
 msgid "no agingtable selected"
 msgstr "Keine Reifetabelle ausgewählt"
 
-#: edit_agingtable.php:31
-msgid "can not edit the controlling agingtable. please select an other"
+#: edit_agingtable.php:32
+msgid "can not edit the controlling agingtable. please select another"
 msgstr ""
 "Die laufende Reifetabelle kann nicht editiert werden, bitte eine andere "
-"auswählen"
+"auswählen."
 
-#: edit_agingtable.php:34
+#: edit_agingtable.php:35
 msgid "edit agingtable:"
 msgstr "Reifetabelle editieren:"
 
-#: edit_agingtable.php:42 index.php:557 index.php:565 settings.php:382
+#: edit_agingtable.php:43 index.php:557 index.php:565 settings.php:382
 #: settings.php:390
 msgid "phase"
 msgstr "Phase"
 
-#: edit_agingtable.php:43 index.php:566 settings.php:391
+#: edit_agingtable.php:44 index.php:566 settings.php:391
 msgid "modus"
 msgstr "Modus"
 
-#: edit_agingtable.php:43 index.php:566 settings.php:391
+#: edit_agingtable.php:44 index.php:566 settings.php:391
 msgid "aging-modus"
 msgstr "Reifemodus"
 
-#: edit_agingtable.php:44 index.php:567 settings.php:392
+#: edit_agingtable.php:45 index.php:567 settings.php:392
 msgid "target humidity in %"
 msgstr "Sollwert Feuchte in %"
 
-#: edit_agingtable.php:45 index.php:568 settings.php:393
+#: edit_agingtable.php:46 index.php:568 settings.php:393
 msgid "target temperature in °C"
 msgstr "Sollwert Temperatur in °C"
 
-#: edit_agingtable.php:46 index.php:569 settings.php:394
+#: edit_agingtable.php:47 index.php:569 settings.php:394
 msgid "timer circulate d"
 msgstr "Timer Umluft d"
 
-#: edit_agingtable.php:46 index.php:569 settings.php:394
+#: edit_agingtable.php:47 index.php:569 settings.php:394
 msgid "timer of the circulation air duration in minutes"
 msgstr "Timer für Umluft Dauer in Minuten"
 
-#: edit_agingtable.php:47 index.php:570 settings.php:395
+#: edit_agingtable.php:48 index.php:570 settings.php:395
 msgid "timer circulate p"
 msgstr "Timer Umluft p"
 
-#: edit_agingtable.php:47 index.php:570 settings.php:395
+#: edit_agingtable.php:48 index.php:570 settings.php:395
 msgid "timer of the circulation air period in minutes"
 msgstr "Timer für Umluft Zyklus in Minuten"
 
-#: edit_agingtable.php:48 index.php:571 settings.php:396
+#: edit_agingtable.php:49 index.php:571 settings.php:396
 msgid "timer exhaust d"
 msgstr "Timer Abluft d"
 
-#: edit_agingtable.php:48 index.php:571 settings.php:396
+#: edit_agingtable.php:49 index.php:571 settings.php:396
 msgid "timer of the exhausting air duration in minutes"
 msgstr "Timer für Abluft Dauer in Minuten"
 
-#: edit_agingtable.php:49 index.php:572 settings.php:397
+#: edit_agingtable.php:50 index.php:572 settings.php:397
 msgid "timer exhaust p"
 msgstr "Timer Abluft p"
 
-#: edit_agingtable.php:49 index.php:572 settings.php:397
+#: edit_agingtable.php:50 index.php:572 settings.php:397
 msgid "timer of the exhausting air period in minutes"
 msgstr "Timer für Abluft Zyklus in Minuten"
 
-#: edit_agingtable.php:50 index.php:573 settings.php:398
+#: edit_agingtable.php:51 index.php:573 settings.php:398
 msgid "duration of hanging phase in days"
 msgstr "Dauer der Reifephase in Tagen"
 
-#: edit_agingtable.php:110 index.php:640 settings.php:470
+#: edit_agingtable.php:111 index.php:640 settings.php:470
 msgid "comment:"
 msgstr "Anmerkungen:"
 
-#: edit_agingtable.php:116 settings.php:180
+#: edit_agingtable.php:117 settings.php:180
 msgid "attention"
 msgstr "Achtung"
 
-#: edit_agingtable.php:116
+#: edit_agingtable.php:117
 msgid "cancel editing agingtable"
 msgstr "Editieren der Reifetabelle unterbrechen"
 
-#: edit_agingtable.php:121
+#: edit_agingtable.php:122
 msgid "phase to delete"
 msgstr "zu löschende Phase"
 
-#: edit_agingtable.php:126
+#: edit_agingtable.php:127
 msgid "delete row"
 msgstr "Zeile löschen"
 
-#: edit_agingtable.php:126 notification.php:178 notification.php:348
-#: notification.php:465 notification.php:543 settings.php:328
+#: edit_agingtable.php:127 notification.php:178 notification.php:348
+#: notification.php:465 notification.php:548 settings.php:328
 msgid "delete"
 msgstr "Löschen"
 
-#: edit_agingtable.php:133
+#: edit_agingtable.php:134
 msgid "number of rows"
 msgstr "Anzahl Zeilen"
 
-#: edit_agingtable.php:138
+#: edit_agingtable.php:139
 msgid "add rows"
 msgstr "Zeile(n) hinzufügen"
 
-#: edit_agingtable.php:138 notification.php:170 notification.php:340
-#: notification.php:457 notification.php:535
+#: edit_agingtable.php:139 notification.php:170 notification.php:340
+#: notification.php:457 notification.php:540
 msgid "add"
 msgstr "Hinzufügen"
 
@@ -1771,8 +1771,8 @@ msgstr "Administration Einstellungen"
 #: modules/write_admin_db.php:31 modules/write_backup_db.php:17
 #: modules/write_debug_values.php:11 modules/write_notification_db.php:25
 #: modules/write_notification_db.php:66 modules/write_notification_db.php:106
-#: modules/write_notification_db.php:169 modules/write_notification_db.php:201
-#: modules/write_notification_db.php:212 modules/write_notification_db.php:223
+#: modules/write_notification_db.php:169 modules/write_notification_db.php:206
+#: modules/write_notification_db.php:217 modules/write_notification_db.php:228
 msgid "values saved"
 msgstr "Einstellungen wurden gespeichert"
 
@@ -2001,15 +2001,15 @@ msgstr "E-Mail Empfänger hinzufügen"
 msgid "mail recipient added"
 msgstr "E-Mail Empfänger hinzugefügt"
 
-#: modules/write_notification_db.php:201
+#: modules/write_notification_db.php:206
 msgid "mailserver values"
 msgstr "Werte Mailserver"
 
-#: modules/write_notification_db.php:212
+#: modules/write_notification_db.php:217
 msgid "pushover values"
 msgstr "Pushover Einstellungen"
 
-#: modules/write_notification_db.php:223
+#: modules/write_notification_db.php:228
 msgid "telegram values"
 msgstr "Telegram Einstellungen"
 
@@ -2034,10 +2034,10 @@ msgid "deleted"
 msgstr "gelöscht"
 
 #: modules/write_table_db.php:75
-msgid "can not edit the controlling agingtable. Please choose an other first"
+msgid "can not delete the controlling agingtable. Please choose another first"
 msgstr ""
-"Die laufende Reifetabelle kann nicht editiert werden, bitte vorher eine "
-"andere auswählen"
+"Die laufende Reifetabelle kann nicht gelöscht werden, bitte vor dem Löschen "
+"eine andere auswählen."
 
 #: modules/write_table_db.php:78
 msgid "unexpected Error"
@@ -2069,7 +2069,9 @@ msgstr ""
 "nutzen"
 
 #: modules/write_table_db.php:142
-msgid "please select an file to upload"
+#, fuzzy
+#| msgid "please select an file to upload"
+msgid "please select a file to upload"
 msgstr "bitte eine Datei zum hochladen auswählen"
 
 #: modules/write_table_db.php:217
@@ -2107,12 +2109,12 @@ msgid "e-mail"
 msgstr "Mail"
 
 #: notification.php:19 notification.php:140 notification.php:195
-#: notification.php:310 notification.php:640
+#: notification.php:310 notification.php:645
 msgid "pushover"
 msgstr "Pushover"
 
 #: notification.php:20 notification.php:141 notification.php:196
-#: notification.php:311 notification.php:685
+#: notification.php:311 notification.php:690
 msgid "telegram"
 msgstr "Telegram"
 
@@ -2127,7 +2129,7 @@ msgid "raise exception"
 msgstr "Fehler auslösen"
 
 #: notification.php:23 notification.php:144 notification.php:199
-#: notification.php:314 notification.php:480 notification.php:527
+#: notification.php:314 notification.php:480 notification.php:532
 msgid "active"
 msgstr "aktiv"
 
@@ -2140,7 +2142,7 @@ msgid "ATTENTION: add messenger?"
 msgstr "ACHTUNG: Messenger hinzufügen?"
 
 #: notification.php:175 notification.php:345 notification.php:462
-#: notification.php:540
+#: notification.php:545
 msgid "id to delete: "
 msgstr "zu löschende ID: "
 
@@ -2208,7 +2210,7 @@ msgstr "ACHTUNG: Alarm hinzufügen?"
 msgid "ATTENTION: delete alarm?"
 msgstr "ACHTUNG: Alarm löschen?"
 
-#: notification.php:479 notification.php:526
+#: notification.php:479 notification.php:531
 msgid "to mail"
 msgstr "an E-Mail"
 
@@ -2216,107 +2218,107 @@ msgstr "an E-Mail"
 msgid "ATTENTION: save e_mail recipient values?"
 msgstr "ACHTUNG: E-Mailempfänger Einstellungen speichern?"
 
-#: notification.php:535
+#: notification.php:540
 msgid "ATTENTION: add e_mail recipient?"
 msgstr "ACHTUNG: Einen E-Mail Empfänger hinzufügen?"
 
-#: notification.php:543
+#: notification.php:548
 msgid "ATTENTION: delete e-mail recipient?"
 msgstr "ACHTUNG: E-Mail Empfänger löschen?"
 
-#: notification.php:550
+#: notification.php:555
 msgid "Mailserver"
 msgstr "Mail Server"
 
-#: notification.php:583
+#: notification.php:588
 msgid "server"
 msgstr "Server"
 
-#: notification.php:587
+#: notification.php:592
 msgid "user"
 msgstr "Benutzer"
 
-#: notification.php:591
+#: notification.php:596
 msgid "password"
 msgstr "Passwort"
 
-#: notification.php:595
+#: notification.php:600
 msgid "starttls"
 msgstr "starttls"
 
-#: notification.php:599
+#: notification.php:604
 msgid "from mail"
 msgstr "von E-Mail"
 
-#: notification.php:603
+#: notification.php:608
 msgid "port"
 msgstr "Port"
 
-#: notification.php:625
+#: notification.php:630
 msgid "ATTENTION: save mailserver values?"
 msgstr "ACHTUNG: Mailserver Einstellungen speichern?"
 
-#: notification.php:632
+#: notification.php:637
 msgid "ATTENTION: test mailserver? be shure you have saved the values before!"
 msgstr ""
 "ACHTUNG: Mailserver testen? Bitte sicherstellen dass die Einstellungen "
 "vorher gespeichert wurden!"
 
-#: notification.php:632
+#: notification.php:637
 msgid "test mailserver"
 msgstr "E-Mail Testnachricht senden"
 
-#: notification.php:658
+#: notification.php:663
 msgid "user key"
 msgstr "user key"
 
-#: notification.php:662
+#: notification.php:667
 msgid "api token"
 msgstr "api token"
 
-#: notification.php:666
+#: notification.php:671
 msgid "pushover_active"
 msgstr "Pushover aktiv"
 
-#: notification.php:673
+#: notification.php:678
 msgid "ATTENTION: save pushover values?"
 msgstr "ACHTUNG: Pushover Einstellungen speichern?"
 
-#: notification.php:678
+#: notification.php:683
 msgid ""
 "ATTENTION: test pushover values? be shure you have saved the values before!"
 msgstr ""
 "ACHTUNG: Pushover Einstellungen testen? Bitte vorher sicherstellen, dass die "
 "Einstellungen gespeichert wurden!"
 
-#: notification.php:678
+#: notification.php:683
 msgid "test pushover values"
 msgstr "Pushover Testnachricht senden"
 
-#: notification.php:703
+#: notification.php:708
 msgid "bot token"
 msgstr "bot token"
 
-#: notification.php:707
+#: notification.php:712
 msgid "bot chatID"
 msgstr "bot chatID"
 
-#: notification.php:711
+#: notification.php:716
 msgid "telegram_active"
 msgstr "Telegram aktiv"
 
-#: notification.php:718
+#: notification.php:723
 msgid "ATTENTION: save telegram values?"
 msgstr "ACHTUNG: Telegram Einstellungen speichern?"
 
-#: notification.php:723
+#: notification.php:728
 msgid ""
 "ATTENTION: test telegram values? be shure you have saved the values before!"
 msgstr ""
 "ACHTUNG: Telegram Einstellungen testen? Bitte vorher sicherstellen, dass die "
 "Einstellungen gespeichert wurden!"
 
-#: notification.php:723
+#: notification.php:728
 msgid "test telegram values"
 msgstr "Telegram Testnachricht senden"
 
