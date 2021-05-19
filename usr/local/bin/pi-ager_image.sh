@@ -85,7 +85,7 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
             exit $E_OPTERROR;
         ;;
         \?)
-            echo "Usage: `basename $0` -h for help";
+            echo "Usage: `basename $0` -h for help"
             echo "$COMMAND_LINE_OPTIONS_HELP"
             exit $E_OPTERROR;
         ;;
@@ -95,7 +95,7 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
         ;;
     esac
 done
-if [ "last_backup" = true && -z "${source_file}"]
+if [ "last_backup" = true && "my_image" = true ]
 	echo "Use Source_file with -f or Lastname -l for filename. Not the same!"
 	exit;
 fi
