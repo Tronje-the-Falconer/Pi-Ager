@@ -38,25 +38,25 @@ BACKUP_NAME=$(sqlite3 /var/www/config/pi-ager.sqlite3 "select backup_name from c
 #####################################################################
 COMMAND_LINE_OPTIONS_HELP='
 Command line options:
-	-f			Source Filename or
-	-l			Take the last Backup file
+    -f			Source Filename or
+    -l			Take the last Backup file
     -c          Make a Copy of the input File. Otherwise the input file will be changed
     -m			my Image - Do not delete all 
     -h          Print this help menu
 
 Examples:
 
- 	Copy last backup file to a new image file
- 		'`basename $0`' -c -l 
- 		
+    Copy last backup file to a new image file
+         '`basename $0`' -c -l 
+
     Copy backup file to a new image file
         '`basename $0`' -c -f PiAgerBackup_2020-01-22-07:02:17.img
 
     Use backup file as a new image file - Backup is then the image
         '`basename $0`' -f PiAgerBackup_2020-01-22-07:02:17.img
 	
-	Create and copy my Image - do not delete all
-		'`basename $0`' -c -m -f PiAgerBackup_2020-01-22-07:02:17.img
+    Create and copy my Image - do not delete all test packages
+        '`basename $0`' -c -m -f PiAgerBackup_2020-01-22-07:02:17.img
 '
 
 VALID_COMMAND_LINE_OPTIONS="cmhf:"
@@ -68,16 +68,16 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
     #echo "option is " $options
     case $options in
     	f)
-    		source_file=${OPTARG}
-		;;
-		l)
-        	last_backup=true;
+            source_file=${OPTARG}
+        ;;
+        l)
+            last_backup=true;
         ;;
         c)
-        	do_copy=true;
+            do_copy=true;
         ;;
         m)
-        	my_image=true;
+            my_image=true;
         ;;
         h)
             echo "$COMMAND_LINE_OPTIONS_HELP"
