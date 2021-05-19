@@ -73,7 +73,6 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
 		l)
         	last_backup=true;
         ;;
-        
         c)
         	do_copy=true;
         ;;
