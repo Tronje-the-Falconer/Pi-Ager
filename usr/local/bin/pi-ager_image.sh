@@ -101,6 +101,7 @@ fi
 
 if [ "$last_backup" = true ]; 
 	then
+	echo "Load last bachup file."
 	source_file = $(ls -lrt $(find ./ -type f) | grep 'Backup' | tail -n 1 | cut -d: -f2- | head)
 fi
 
@@ -108,7 +109,7 @@ if [ -z "${source_file}" ]; then
     echo "$COMMAND_LINE_OPTIONS_HELP"
 fi
 if [[ ! -f "$source_file" ]]; then
-	echo "$source_file not found!"
+	echo "Source File $source_file not found!"
 	exit;
 fi
 echo "Source File = $source_file"
