@@ -94,12 +94,12 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
         ;;
     esac
 done
-if [ "last_backup" = true && "my_image" = true ];
+if [ "$last_backup" = true && "$my_image" = true ];
 	echo "Use Source_file with -f or Lastname -l for filename. Not the same!"
 	exit;
 fi
 
-if [ "last_backup" = true ]; 
+if [ "$last_backup" = true ]; 
 	then
 	source_file = $(ls -lrt $(find ./ -type f) | grep 'Backup' | tail -n 1 | cut -d: -f2- | head)
 fi
