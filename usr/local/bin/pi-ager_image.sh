@@ -59,7 +59,7 @@ Examples:
         '`basename $0`' -c -m -f PiAgerBackup_2020-01-22-07:02:17.img
 '
 
-VALID_COMMAND_LINE_OPTIONS="cmhf:"
+VALID_COMMAND_LINE_OPTIONS="clmhf:"
 do_copy=false;
 my_image=false;
 last_backup=false;
