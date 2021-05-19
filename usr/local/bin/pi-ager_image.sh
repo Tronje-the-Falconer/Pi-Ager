@@ -102,7 +102,7 @@ fi
 if [ "$last_backup" = true ]; 
 	then
 	echo "Load last bachup file."
-	source_file = ${BACKUP_PFAD}/$"./"(ls -lrt $(find ./ -type f) | grep 'Backup' | tail -n 1 | cut -d: -f2- | head)
+	source_file = ${BACKUP_PFAD}"/"(ls -lrt $(find ./ -type f) | grep 'Backup' | tail -n 1 | cut -d: -f2- | head)
 fi
 
 if [ -z "${source_file}" ]; then
