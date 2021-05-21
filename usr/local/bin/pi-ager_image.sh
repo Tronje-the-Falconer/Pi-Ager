@@ -103,7 +103,7 @@ if [ "$last_backup" = true ];
 	then
 	echo "Load last backup file."
 	
-	Pi_Ager_backup = $(ls -lrt $(find ./ -type f) | grep 'Backup' | tail -n 1 | cut -d' ' -f9- | cut -d/ -f2- | head)
+	Pi_Ager_backup = $(ls -lrt $(find ${BACKUP_PFAD} -type f) | grep 'Backup' | tail -n 1 | cut -d' ' -f9- | cut -d/ -f2- | head)
 	
 	echo "Backup file is" $Pi_Ager_backup
 	source_file = ${BACKUP_PFAD}/$Pi_Ager_backup
