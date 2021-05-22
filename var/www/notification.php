@@ -179,6 +179,22 @@
                                             </tr>
                                         </table>
                                     </form>
+                                    <p class="help_b">
+                                        <button class="art-button" type="button" onclick="help_messenger_blockFunction()"><?php echo _('help'); ?></button>
+                                    </p>
+                                    <script>
+                                        function help_messenger_blockFunction() {
+                                            document.getElementById('help_messenger').style.display = 'block';
+                                        }
+                                        function help_messenger_noneFunction() {
+                                            document.getElementById('help_messenger').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_messenger" class="help_p">
+                                        <?php echo _('helptext_messenger');
+                                              echo '<br><br>'; ?>
+                                        <button class="art-button" type="button" onclick="help_messenger_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p>
                                 </div>
                                 <hr>
                                 
@@ -349,6 +365,22 @@
                                             </tr>
                                         </table>
                                     </form>
+                                    <p class="help_b">
+                                        <button class="art-button" type="button" onclick="help_event_blockFunction()"><?php echo _('help'); ?></button>
+                                    </p>
+                                    <script>
+                                        function help_event_blockFunction() {
+                                            document.getElementById('help_event').style.display = 'block';
+                                        }
+                                        function help_event_noneFunction() {
+                                            document.getElementById('help_event').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_event" class="help_p">
+                                        <?php echo _('helptext_event');
+                                              echo '<br><br>'; ?>
+                                        <button class="art-button" type="button" onclick="help_event_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p>                                    
                                 </div>
                                 <hr>
                                 
@@ -466,6 +498,22 @@
                                             </tr>
                                         </table>
                                     </form>
+                                    <p class="help_b">
+                                        <button class="art-button" type="button" onclick="help_alarm_blockFunction()"><?php echo _('help'); ?></button>
+                                    </p>
+                                    <script>
+                                        function help_alarm_blockFunction() {
+                                            document.getElementById('help_alarm').style.display = 'block';
+                                        }
+                                        function help_alarm_noneFunction() {
+                                            document.getElementById('help_alarm').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_alarm" class="help_p">
+                                        <?php echo _('helptext_alarm');
+                                              echo '<br><br>'; ?>
+                                        <button class="art-button" type="button" onclick="help_alarm_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p>                                                                        
                                 </div>
                                 <hr>
                                 
@@ -549,6 +597,22 @@
                                             </tr>
                                         </table>
                                     </form>
+                                    <p class="help_b">
+                                        <button class="art-button" type="button" onclick="help_email_blockFunction()"><?php echo _('help'); ?></button>
+                                    </p>
+                                    <script>
+                                        function help_email_blockFunction() {
+                                            document.getElementById('help_email').style.display = 'block';
+                                        }
+                                        function help_email_noneFunction() {
+                                            document.getElementById('help_email').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_email" class="help_p">
+                                        <?php echo _('helptext_email');
+                                              echo '<br><br>'; ?>
+                                        <button class="art-button" type="button" onclick="help_email_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p>                                                                        
                                 </div>
                                 <hr>
                                 
@@ -639,6 +703,22 @@
                                             </form>
                                         </tr>
                                     </table>
+                                    <p class="help_b">
+                                        <button class="art-button" type="button" onclick="help_mailserver_blockFunction()"><?php echo _('help'); ?></button>
+                                    </p>
+                                    <script>
+                                        function help_mailserver_blockFunction() {
+                                            document.getElementById('help_mailserver').style.display = 'block';
+                                        }
+                                        function help_mailserver_noneFunction() {
+                                            document.getElementById('help_mailserver').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_mailserver" class="help_p">
+                                        <?php echo _('helptext_mailserver');
+                                              echo '<br><br>'; ?>
+                                        <button class="art-button" type="button" onclick="help_mailserver_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p>                                                                                         
                                 </div>
                                 <hr>
                                 
@@ -684,6 +764,22 @@
                                             </form>
                                         </tr>
                                     </table>
+                                    <p class="help_b">
+                                        <button class="art-button" type="button" onclick="help_pushover_blockFunction()"><?php echo _('help'); ?></button>
+                                    </p>
+                                    <script>
+                                        function help_pushover_blockFunction() {
+                                            document.getElementById('help_pushover').style.display = 'block';
+                                        }
+                                        function help_pushover_noneFunction() {
+                                            document.getElementById('help_pushover').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_pushover" class="help_p">
+                                        <?php echo _('helptext_pushover');
+                                              echo '<br><br>'; ?>
+                                        <button class="art-button" type="button" onclick="help_pushover_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p> 
                                 </div>
                                 <hr>
                                 
@@ -729,6 +825,22 @@
                                             </form>
                                         </tr>
                                     </table>
+                                    <p class="help_b">
+                                        <button class="art-button" type="button" onclick="help_telegram_blockFunction()"><?php echo _('help'); ?></button>
+                                    </p>
+                                    <script>
+                                        function help_telegram_blockFunction() {
+                                            document.getElementById('help_telegram').style.display = 'block';
+                                        }
+                                        function help_telegram_noneFunction() {
+                                            document.getElementById('help_telegram').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_telegram" class="help_p">
+                                        <?php echo _('helptext_telegram');
+                                              echo '<br><br>'; ?>
+                                        <button class="art-button" type="button" onclick="help_telegram_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p> 
                                 </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->
                             </div>

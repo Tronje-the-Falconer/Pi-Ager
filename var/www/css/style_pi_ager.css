@@ -39,6 +39,12 @@ body {
 
 
 /* Hilfe-Texte in den Einstellungen */
+.help_b {
+   text-align: left;
+   font-size: 11px;
+   color:  #555555;
+   padding: 10px;
+}
 
 .help_p {
    display: none;

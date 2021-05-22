@@ -569,6 +569,27 @@
                                             </form>
                                         </tr>
                                     </table>
+                                    <table style="width: 100%; align: center;">
+                                        <tr>
+                                            <td style="text-align: left; padding-left: 10px;" >
+                                                <button class="art-button" type="button" onclick="help_backup_blockFunction()"><?php echo _('help'); ?></button>
+                                            </td>
+                                        </tr>
+                                    </table>
+
+                                    <script>
+                                        function help_backup_blockFunction() {
+                                            document.getElementById('help_backup').style.display = 'block';
+                                        }
+                                        function help_backup_noneFunction() {
+                                            document.getElementById('help_backup').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_backup" class="help_p">
+                                        <?php echo _('helptext_backup');
+                                              echo '<br><br>'; ?>
+                                        <button class="art-button" type="button" onclick="help_backup_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p>
                                 </div>
                                 <hr>
                                 <h2 class="art-postheader"><?php echo _('database'); ?></h2>
