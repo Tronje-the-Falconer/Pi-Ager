@@ -113,7 +113,7 @@ if [ -d "$NFSMOUNT" ]
 		echo "$NFSMOUNT ist vorhanden"
 	else
 		echo "$NFSMOUNT wird angelegt"
-		sudo mkdir $NFSMOUNT
+		sudo mkdir -p $NFSMOUNT
 		sudo chmod -R u=rwx,g+rw-x,o+rwx $NFSMOUNT
 		echo "$NFSMOUNT wurde angelegt"								 
 fi
