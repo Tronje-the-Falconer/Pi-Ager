@@ -63,6 +63,7 @@ agingtable_key = 'agingtable'
 sensor_temperature_key = 'sensor_temperature'
 sensor_humidity_key = 'sensor_humidity'
 sensor_dewpoint_key = 'sensor_dewpoint'
+
 second_sensor_temperature_key = 'sensor_extern_temperature'
 second_sensor_humidity_key = 'sensor_extern_humidity'
 second_sensor_dewpoint_key = 'sensor_extern_dewpoint'
@@ -99,6 +100,7 @@ loglevel_file_key = 'loglevel_file'
 loglevel_console_key = 'loglevel_console'
 agingtable_period_key = 'agingtable_period'
 agingtable_period_starttime_key = 'agingtable_period_starttime'
+customtime_for_diagrams_key = 'customtime_for_diagrams'
 measuring_interval_debug_key = 'measuring_interval_debug'
 agingtable_days_in_seconds_debug_key = 'agingtable_days_in_seconds_debug'
 measuring_duration_key = 'measuring_duration'
@@ -224,13 +226,15 @@ table_keys[config_settings_table] = (switch_on_cooling_compressor_key,switch_off
                                      circulation_air_period_key,setpoint_temperature_key,exhaust_air_duration_key,modus_key,setpoint_humidity_key,exhaust_air_period_key,
                                      circulation_air_duration_key,agingtable_key, failure_humidity_delta_key, failure_temperature_delta_key, samples_refunit_tara_key,
                                      spikes_refunit_tara_key, save_temperature_humidity_loops_key, sensorbus_key,
-                                     meat1_sensortype_key, meat2_sensortype_key, meat3_sensortype_key, meat4_sensortype_key)
+                                     meat1_sensortype_key, meat2_sensortype_key, meat3_sensortype_key, meat4_sensortype_key, customtime_for_diagrams_key, sensorsecondtype_key,
+                                     agingtable_startperiod_key, agingtable_startday_key)
 
-table_keys[current_values_table] = (sensor_temperature_key,sensor_humidity_key, sensor_dewpoint_key, status_circulating_air_key,status_cooling_compressor_key,status_exhaust_air_key,
-                                    status_heater_key,status_light_key,status_uv_key,status_humidifier_key,status_dehumidifier_key,scale1_key,scale2_key,status_pi_ager_key,
-                                    status_agingtable_key,status_scale1_key,status_scale2_key,status_tara_scale1_key,status_tara_scale2_key,agingtable_period_key,
-                                    agingtable_period_starttime_key,status_light_manual_key,calibrate_scale1_key,calibrate_scale2_key,calibrate_weight_key,
-                                    status_uv_manual_key,temperature_meat1_key,temperature_meat2_key,temperature_meat3_key,temperature_meat4_key)
+table_keys[current_values_table] = (sensor_temperature_key, sensor_humidity_key, status_circulating_air_key, status_cooling_compressor_key, status_exhaust_air_key,
+                                    status_heater_key, status_light_key, status_uv_key, status_humidifier_key, status_dehumidifier_key, scale1_key, scale2_key, status_pi_ager_key,
+                                    status_agingtable_key, status_scale1_key, status_scale2_key, status_tara_scale1_key, status_tara_scale2_key, agingtable_period_key,
+                                    agingtable_period_starttime_key, status_light_manual_key, calibrate_scale1_key, calibrate_scale2_key, calibrate_weight_key,
+                                    status_uv_manual_key, temperature_meat1_key, temperature_meat2_key, temperature_meat3_key, temperature_meat4_key, sensor_dewpoint_key, second_sensor_temperature_key,
+                                    second_sensor_humidity_key, second_sensor_dewpoint_key, agingtable_period_day_key, scale1_thread_alive_key, scale2_thread_alive_key, aging_thread_alive_key)
 
 table_keys[settings_scale1_table] = (samples_key,spikes_key,sleep_key,gain_key,bits_to_read_key,referenceunit_key,scale_measuring_interval_key,measuring_duration_key,saving_period_key,offset_scale_key)
 table_keys[settings_scale2_table] = (samples_key,spikes_key,sleep_key,gain_key,bits_to_read_key,referenceunit_key,scale_measuring_interval_key,measuring_duration_key,saving_period_key,offset_scale_key)
@@ -243,7 +247,7 @@ default_values = {}
 #default values config table
 default_values[config_settings_table + '_' + sensortype_key] = 3 #SHT
 default_values[config_settings_table + '_' + language_key] = 1 #Deutsch de-DE
-default_values[config_settings_table + '_' + save_temperature_humidity_loops_key] = 27
+default_values[config_settings_table + '_' + save_temperature_humidity_loops_key] = 15
 
 #default values scale1_settings table
 default_values[settings_scale1_table + '_' + samples_key] = 20
@@ -327,6 +331,7 @@ table_keys_dict['setpoint_humidity_key'] = setpoint_humidity_key
 table_keys_dict['exhaust_air_period_key'] = exhaust_air_period_key
 table_keys_dict['circulation_air_duration_key'] = circulation_air_duration_key
 table_keys_dict['agingtable_key'] = agingtable_key
+
 table_keys_dict['sensor_temperature_key'] = sensor_temperature_key
 table_keys_dict['sensor_humidity_key'] = sensor_humidity_key
 table_keys_dict['sensor_dewpoint_key'] = sensor_dewpoint_key
