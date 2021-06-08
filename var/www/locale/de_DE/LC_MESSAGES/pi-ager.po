@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
-"POT-Creation-Date: 2021-05-17 17:56+0200\n"
-"PO-Revision-Date: 2021-05-22 20:30+0200\n"
+"POT-Creation-Date: 2021-06-04 10:44+0200\n"
+"PO-Revision-Date: 2021-06-08 13:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -60,9 +60,12 @@ msgstr "Sensor extern"
 msgid "sensortype"
 msgstr "Sensor Typ"
 
-#: admin.php:65 admin.php:127 admin.php:209 admin.php:335 config.php:16
-#: config.php:70 config.php:117 config.php:145 config.php:184 config.php:223
-#: manvals.php:22 manvals.php:51 manvals.php:74 manvals.php:97 manvals.php:123
+#: admin.php:65 admin.php:127 admin.php:209 admin.php:335 admin.php:575
+#: config.php:16 config.php:70 config.php:117 config.php:145 config.php:184
+#: config.php:223 manvals.php:22 manvals.php:51 manvals.php:74 manvals.php:97
+#: manvals.php:123 notification.php:183 notification.php:369
+#: notification.php:502 notification.php:601 notification.php:707
+#: notification.php:768 notification.php:829
 msgid "help"
 msgstr "Hilfe"
 
@@ -107,9 +110,12 @@ msgstr ""
 "werden.\n"
 "<br><br>"
 
-#: admin.php:106 admin.php:203 admin.php:329 admin.php:355 config.php:64
-#: config.php:111 config.php:139 config.php:178 config.php:217 config.php:246
-#: manvals.php:44 manvals.php:67 manvals.php:90 manvals.php:117 manvals.php:142
+#: admin.php:106 admin.php:203 admin.php:329 admin.php:355 admin.php:591
+#: config.php:64 config.php:111 config.php:139 config.php:178 config.php:217
+#: config.php:246 manvals.php:44 manvals.php:67 manvals.php:90 manvals.php:117
+#: manvals.php:142 notification.php:196 notification.php:382
+#: notification.php:515 notification.php:614 notification.php:720
+#: notification.php:781 notification.php:842
 msgid "close"
 msgstr "Schließen"
 
@@ -250,8 +256,8 @@ msgstr ""
 
 #: admin.php:359 admin.php:468 admin.php:492 admin.php:553 config.php:254
 #: edit_agingtable.php:116 manvals.php:149 notification.php:133
-#: notification.php:303 notification.php:429 notification.php:521
-#: notification.php:630 notification.php:678 notification.php:723
+#: notification.php:319 notification.php:461 notification.php:569
+#: notification.php:694 notification.php:758 notification.php:819
 msgid "save"
 msgstr "Speichern"
 
@@ -355,35 +361,82 @@ msgstr "Backup manuell"
 msgid "Agingtable is active. No backup possible!"
 msgstr "Reifetabelle ist aktiv. Backup nicht möglich!"
 
-#: admin.php:574
+#: admin.php:589
+msgid "helptext_backup"
+msgstr ""
+"<br><br>\n"
+"<b>Backup - Script über NFS:</b> \n"
+"<br><br>\n"
+"<br>Das System besitzt eine Funktion mit der ein komplettes Image des Pi-"
+"Agers auf ein NAS oder einem NFS Mount abgelegt werden kann. \n"
+"<br><br>\n"
+"<b>Achtung! </b> Je größer die SD-Karte ist, umso länger dauert der Backup "
+"Prozess. Das liegt auch daran, da der NFS Mount über WLAN verbunden ist. Mit "
+"einem LAN Anschluss geht es vermutlich schneller.\n"
+"<br><br>\n"
+"<b>Allgemeine Informationen: </b> \n"
+"<br>Über das Script pi-ager-main.sh wird der Pi-Ager gestoppt. In dieser "
+"Zeit ist keine Pi-Ager Funktion aktiv, das bedeutet, dass die Relais für "
+"diese Zeit alle abgesteurt werden.\n"
+"<br>Wenn der Backupprozess abgeschlossen ist, startet der Pi-Ager "
+"automatisch und läuft  mit den letzen Einstellungen weiter.  \n"
+"<br><br>\n"
+"<b>nfs Verzeichnis: </b> Hier trägt man die Server und NFS-Freigabe ein\n"
+"<br>z.B.: 192.168.0.111:/srv/backup\n"
+"<br><br>\n"
+"<b>Unterverzeichnis: </b>Hier kann man ein mögliches Unterverzeichnis "
+"angeben\n"
+"<br>z.B.: pi-ager\n"
+"<br><br>\n"
+"<b>nfs mount: </b> An diese Stelle wird die NFS-Freigabe auf dem Raspberry "
+"Pi gemountet\n"
+"<br>z.B.: /home/pi/backup\n"
+"<br><br>\n"
+"<b>nfs Pfad: </b> Setzt sich zusammen aus dem Dateipfad auf dem Pi "
+"(nfsmount) und dem NFS- Unterverzeichnis \n"
+"<br>z.B.: /home/pi/backup/pi-ager\n"
+"<br><br>\n"
+"<b>Anzahl Backups: </b>Anzahl der letzten n Backups die behalten werden.\n"
+"<br>z.B.  2\n"
+"<br><br>\n"
+"<b>Backup Name: </b> Name des Backup-Files\n"
+"<br>z.B.: pi_ager_backup\n"
+"<br><br>\n"
+"<b>nfs Option: </b> Hier können Optionen für das Mounten angegeben werden.\n"
+"<br><br>\n"
+"<b>Backup Aktiv: </b>Soll ein Backup durgeführt werden, muss diese Checkbox "
+"angewählt sein. Durch das abwählen kann das Backup deaktiviert werden\n"
+"<br><br>"
+
+#: admin.php:595
 msgid "database"
 msgstr "Datenbank"
 
-#: admin.php:580
+#: admin.php:601
 msgid "ATTENTION: empty statistic tables?"
 msgstr "ACHTUNG: Historische Daten löschen?"
 
-#: admin.php:580
+#: admin.php:601
 msgid "empty statistic tables"
 msgstr "History Daten aus DB löschen"
 
-#: admin.php:582
+#: admin.php:603
 msgid "database administration"
 msgstr "Datenbank Administration"
 
-#: admin.php:589
+#: admin.php:610
 msgid "python"
 msgstr "Python"
 
-#: admin.php:595
+#: admin.php:616
 msgid "ATTENTION: kill"
 msgstr "ACHTUNG: kill"
 
-#: admin.php:595
+#: admin.php:616
 msgid "stop"
 msgstr "Stop"
 
-#: admin.php:596
+#: admin.php:617
 msgid "start"
 msgstr "Start"
 
@@ -1178,8 +1231,8 @@ msgstr "zu löschende Phase"
 msgid "delete row"
 msgstr "Zeile löschen"
 
-#: edit_agingtable.php:127 notification.php:178 notification.php:348
-#: notification.php:465 notification.php:548 settings.php:328
+#: edit_agingtable.php:127 notification.php:178 notification.php:364
+#: notification.php:497 notification.php:596 settings.php:328
 msgid "delete"
 msgstr "Löschen"
 
@@ -1191,8 +1244,8 @@ msgstr "Anzahl Zeilen"
 msgid "add rows"
 msgstr "Zeile(n) hinzufügen"
 
-#: edit_agingtable.php:139 notification.php:170 notification.php:340
-#: notification.php:457 notification.php:540
+#: edit_agingtable.php:139 notification.php:170 notification.php:356
+#: notification.php:489 notification.php:588
 msgid "add"
 msgstr "Hinzufügen"
 
@@ -2069,8 +2122,6 @@ msgstr ""
 "nutzen"
 
 #: modules/write_table_db.php:142
-#, fuzzy
-#| msgid "please select an file to upload"
 msgid "please select a file to upload"
 msgstr "bitte eine Datei zum hochladen auswählen"
 
@@ -2094,8 +2145,8 @@ msgstr "Zeile(n) in Reifetabelle hinzugefügt"
 msgid "messenger"
 msgstr "Messenger"
 
-#: notification.php:16 notification.php:192 notification.php:362
-#: notification.php:478
+#: notification.php:16 notification.php:208 notification.php:394
+#: notification.php:526
 msgid "id"
 msgstr "ID"
 
@@ -2103,24 +2154,24 @@ msgstr "ID"
 msgid "exception"
 msgstr "Fehler"
 
-#: notification.php:18 notification.php:139 notification.php:194
-#: notification.php:309 notification.php:472
+#: notification.php:18 notification.php:139 notification.php:210
+#: notification.php:325 notification.php:520
 msgid "e-mail"
 msgstr "Mail"
 
-#: notification.php:19 notification.php:140 notification.php:195
-#: notification.php:310 notification.php:645
+#: notification.php:19 notification.php:140 notification.php:211
+#: notification.php:326 notification.php:725
 msgid "pushover"
 msgstr "Pushover"
 
-#: notification.php:20 notification.php:141 notification.php:196
-#: notification.php:311 notification.php:690
+#: notification.php:20 notification.php:141 notification.php:212
+#: notification.php:327 notification.php:786
 msgid "telegram"
 msgstr "Telegram"
 
-#: notification.php:21 notification.php:142 notification.php:197
-#: notification.php:312 notification.php:356 notification.php:363
-#: notification.php:434
+#: notification.php:21 notification.php:142 notification.php:213
+#: notification.php:328 notification.php:388 notification.php:395
+#: notification.php:466
 msgid "alarm"
 msgstr "Alarm"
 
@@ -2128,8 +2179,8 @@ msgstr "Alarm"
 msgid "raise exception"
 msgstr "Fehler auslösen"
 
-#: notification.php:23 notification.php:144 notification.php:199
-#: notification.php:314 notification.php:480 notification.php:532
+#: notification.php:23 notification.php:144 notification.php:215
+#: notification.php:330 notification.php:528 notification.php:580
 msgid "active"
 msgstr "aktiv"
 
@@ -2141,8 +2192,8 @@ msgstr "ACHTUNG: Messenger Einstellungen speichern?"
 msgid "ATTENTION: add messenger?"
 msgstr "ACHTUNG: Messenger hinzufügen?"
 
-#: notification.php:175 notification.php:345 notification.php:462
-#: notification.php:545
+#: notification.php:175 notification.php:361 notification.php:494
+#: notification.php:593
 msgid "id to delete: "
 msgstr "zu löschende ID: "
 
@@ -2150,177 +2201,402 @@ msgstr "zu löschende ID: "
 msgid "ATTENTION: delete messenger?"
 msgstr "ACHTUNG: Messenger löschen?"
 
-#: notification.php:186 notification.php:193 notification.php:308
+#: notification.php:194
+msgid "helptext_messenger"
+msgstr ""
+"<br><br>\n"
+"<b>Mesenger </b>\n"
+"<br>Der Messenger steuert die Benachrichtigung an die einzelnen Dienste wie "
+"E-Mail, Alarm, Pushover und Telegram. \n"
+"<br>Hier kann einzelnen Exceptions bzw. Fehler zugeordnet werden, wohin die "
+"Nachricht übergeben wird und ob ein Stopp des Systems aktiviert werden "
+"soll. \n"
+"<br><br>\n"
+"<b>Fehler: </b>Hier wird der Fehler, den das System erkennt, eingetragen. "
+"Diese Spalte ist meistens schon vordefiniert.\n"
+"<br><br>\n"
+"<b>Checkboxen: </b>Hier kann man den entsprechenden Benachrichtigungsdienst "
+"aktivieren, über den die Nachricht versendet werden soll.\n"
+"<br><br>\n"
+"<b>Alarm: </b> Hier kann man die Art das akustischen Alarm ( Signalgeber auf "
+"der Platine) auswählen. Die Alarmarten kann man weiter unten im Bereich "
+"\"Alarm\" entsprechend defineren.\n"
+"<br><br>\n"
+"<b>Fehler auslösen: </b> Über die Anwahl dieser Checkbox kann man festlegen, "
+"ob beim auftreten dieses Fehlers ein Systemstop erfolgen soll. ( meistens "
+"macht es Sinn). Ist die Checkbox nicht angewählt, erfolgt nur eine "
+"Benachrichtigung über den angewählten Dienst.\n"
+"<br><br>\n"
+"<b>Aktiv: </b> Hier kann man auswählen ob dieser Fehler überhaupt beachtet "
+"werden soll. Ist diese Checkbox nicht angewählt, erfolgt kein Stopp des "
+"Systems und es erfolgt auch keine Benachrichtigung oder Protokollierung.\n"
+"<br><br>"
+
+#: notification.php:202 notification.php:209 notification.php:324
 msgid "event"
 msgstr "Event"
 
-#: notification.php:198 notification.php:313
+#: notification.php:214 notification.php:329
 msgid "event text"
 msgstr "Event Text"
 
-#: notification.php:198
+#: notification.php:214
 msgid "eventtext"
 msgstr "Event Text"
 
-#: notification.php:303
+#: notification.php:319
 msgid "ATTENTION: save event values?"
 msgstr "ACHTUNG: Event Werte  speichern?"
 
-#: notification.php:340
+#: notification.php:356
 msgid "ATTENTION: add event?"
 msgstr "ACHTUNG: Event hinzufügen?"
 
-#: notification.php:348
+#: notification.php:364
 msgid "ATTENTION: delete event?"
 msgstr "ACHTUNG: Event löschen?"
 
-#: notification.php:364 notification.php:435
+#: notification.php:380
+msgid "helptext_event"
+msgstr ""
+"<br><br>\n"
+"<b>Event </b>\n"
+"<br><br>\n"
+"<br>Der Eventmanager steuert die Benachrichtigung an die einzelnen Dienste "
+"wie E-Mail, Alarm, Pushover und Telegram. \n"
+"<br>Hier kann den Events zugeordnet werden, wohin die Nachricht übergeben "
+"wird und ob akustischer Alarm  aktiviert werden soll. \n"
+"<br><br>\n"
+"<b>Event: </b>Hier wird das von System erkannte Event eingetragen. Diese "
+"Spalte ist meistens schon vordefiniert.\n"
+"<br><br>\n"
+"<b>Checkboxen: </b>Hier kann man den entsprechenden Benachrichtigungsdienst "
+"aktivieren, über den die Nachricht versendet werden soll.\n"
+"<br><br>\n"
+"<b>Alarm: </b> Hier kann man die Art das akustischen Alarm auswählen "
+"(Signalgeber auf der Platine). Die Alarmarten kann man weiter unten im "
+"Bereich \"Alarm\" entsprechend defineren.\n"
+"<br><br>\n"
+"<b>Event Text: </b>Hier kann man jedem Event eine Text zuornden der dann als "
+"Nachricht über den entsprechenden Dienst versendet wird.\n"
+"<br><br>\n"
+"<b>Aktiv: </b> Hier kann man auswählen, ob dieses Event überhaupt beachtet "
+"werden soll. Ist diese Checkbox nicht angewählt, erfolgt keine "
+"Benachrichtigung oder Protokollierung.\n"
+"<br><br>"
+
+#: notification.php:396 notification.php:467
 msgid "replication"
 msgstr "Wiederholung"
 
-#: notification.php:365 notification.php:436
+#: notification.php:397 notification.php:468
 msgid "sleep"
 msgstr "Pause"
 
-#: notification.php:366 notification.php:437
+#: notification.php:398 notification.php:469
 msgid "high_time"
 msgstr "EIN Zeit"
 
-#: notification.php:367 notification.php:438
+#: notification.php:399 notification.php:470
 msgid "low_time"
 msgstr "AUS Zeit"
 
-#: notification.php:368 notification.php:439
+#: notification.php:400 notification.php:471
 msgid "waveform"
 msgstr "Schwingungsform"
 
-#: notification.php:369 notification.php:440
+#: notification.php:401 notification.php:472
 msgid "frequency"
 msgstr "Frequenz"
 
-#: notification.php:429
+#: notification.php:461
 msgid "ATTENTION: save alarm values?"
 msgstr "ACHTUNG: Alarmwerte speichern?"
 
-#: notification.php:457
+#: notification.php:489
 msgid "ATTENTION: add alarm?"
 msgstr "ACHTUNG: Alarm hinzufügen?"
 
-#: notification.php:465
+#: notification.php:497
 msgid "ATTENTION: delete alarm?"
 msgstr "ACHTUNG: Alarm löschen?"
 
-#: notification.php:479 notification.php:531
+#: notification.php:513
+msgid "helptext_alarm"
+msgstr ""
+"<br><br>\n"
+"<b>Alarm Funktion: </b>\n"
+"<br><br>\n"
+"<br>Hier kann man unterschiedliche Alarmarten für den akustischen Alarm "
+"definieren. \n"
+"<br>Folgende Parameter sind einstellbar:\n"
+"<br><br>\n"
+"<b>Alarm: </b> Hier trägt man die Bezeichnung der Alarmkonfiguration ein.\n"
+"<br> Diese Bezeichnung erscheint dann in den jeweiligen Auswahlfelder in den "
+"Bereichen Messenger oder Event.\n"
+"<br><br>\n"
+"<b>Wiederholungen: </b> Hier trägt man ein, wie oft eine Alarmsequenz "
+"wiederholt werden soll.\n"
+"<br><br>\n"
+"<b>Pause:</b> Hier trägt man die Pausenzeit zwischen den Wiederholungen "
+"ein.\n"
+"<br><br>\n"
+"<b>EIN Zeit:</b> Hier trägt man Zeit ein, wie lange der Signalgeber wärend "
+"einer Alarmsequenz angesteuert werden soll.\n"
+"<br><br>\n"
+"<b>AUS Zeit:</b> Hier trägt man Zeit ein, wie lange der Signalgeber wärend "
+"einer Alarmsequenz abgeschaltet werden soll.\n"
+"<br><br>\n"
+"<br>Möchte man eine Alarmkonfiguration aus der Liste löschen, kann man sie, "
+"durch das auswählen der entsprechenden ID, aus der Datenbank komplett "
+"entfernen.\n"
+"<br><br>"
+
+#: notification.php:527 notification.php:579
 msgid "to mail"
 msgstr "an E-Mail"
 
-#: notification.php:521
+#: notification.php:569
 msgid "ATTENTION: save e_mail recipient values?"
 msgstr "ACHTUNG: E-Mailempfänger Einstellungen speichern?"
 
-#: notification.php:540
+#: notification.php:588
 msgid "ATTENTION: add e_mail recipient?"
 msgstr "ACHTUNG: Einen E-Mail Empfänger hinzufügen?"
 
-#: notification.php:548
+#: notification.php:596
 msgid "ATTENTION: delete e-mail recipient?"
 msgstr "ACHTUNG: E-Mail Empfänger löschen?"
 
-#: notification.php:555
+#: notification.php:612
+msgid "helptext_email"
+msgstr ""
+"<br><br>\n"
+"<b>E-Mail: </b\n"
+"<br><br>\n"
+"<br>Hier kann man E-Mail Adressen eintragen, an die Benachrichtigungen "
+"gesendet werden sollen.\n"
+"<br><br>\n"
+"<br>Mit Hilfe der Checkbox \"Aktiv\" kann man das Senden an die "
+"entsprechende E-Mail Adresse aktivieren oder deaktivieren.\n"
+"<br><br>\n"
+"<br>Möchte man eine E-Mail Adresse aus der Liste löschen, kann man sie, "
+"durch das Auswählen der entsprechenden ID, aus der Datenbank komplett "
+"entfernen.\n"
+"<br><br>"
+
+#: notification.php:619
 msgid "Mailserver"
 msgstr "Mail Server"
 
-#: notification.php:588
+#: notification.php:652
 msgid "server"
 msgstr "Server"
 
-#: notification.php:592
+#: notification.php:656
 msgid "user"
 msgstr "Benutzer"
 
-#: notification.php:596
+#: notification.php:660
 msgid "password"
 msgstr "Passwort"
 
-#: notification.php:600
+#: notification.php:664
 msgid "starttls"
 msgstr "starttls"
 
-#: notification.php:604
+#: notification.php:668
 msgid "from mail"
 msgstr "von E-Mail"
 
-#: notification.php:608
+#: notification.php:672
 msgid "port"
 msgstr "Port"
 
-#: notification.php:630
+#: notification.php:694
 msgid "ATTENTION: save mailserver values?"
 msgstr "ACHTUNG: Mailserver Einstellungen speichern?"
 
-#: notification.php:637
+#: notification.php:701
 msgid "ATTENTION: test mailserver? be shure you have saved the values before!"
 msgstr ""
 "ACHTUNG: Mailserver testen? Bitte sicherstellen dass die Einstellungen "
 "vorher gespeichert wurden!"
 
-#: notification.php:637
+#: notification.php:701
 msgid "test mailserver"
 msgstr "E-Mail Testnachricht senden"
 
-#: notification.php:663
+#: notification.php:718
+msgid "helptext_mailserver"
+msgstr ""
+"<br><br>\n"
+"<b>Mail Server: </b>\n"
+"<br><br>\n"
+"<b>Server: </b> Hier trägt man den entsprechenden SMTP Server von eurem "
+"Provider ein, z.B. securesmtp.t-online.de\n"
+"<br><br>\n"
+"<b>Benutzer: </b> Hier trägt man den entsprechenden Benutzernamen für den "
+"SMTP Server ein.\n"
+"<br><br>\n"
+"<b>Passwort:</b> Passwort für den Benutzer\n"
+"<br><br>\n"
+"<b>Port:</b> Hier wählt man den Port für den SMTP Server aus.\n"
+"<br><br>"
+
+#: notification.php:743
 msgid "user key"
 msgstr "user key"
 
-#: notification.php:667
+#: notification.php:747
 msgid "api token"
 msgstr "api token"
 
-#: notification.php:671
+#: notification.php:751
 msgid "pushover_active"
 msgstr "Pushover aktiv"
 
-#: notification.php:678
+#: notification.php:758
 msgid "ATTENTION: save pushover values?"
 msgstr "ACHTUNG: Pushover Einstellungen speichern?"
 
-#: notification.php:683
+#: notification.php:763
 msgid ""
 "ATTENTION: test pushover values? be shure you have saved the values before!"
 msgstr ""
 "ACHTUNG: Pushover Einstellungen testen? Bitte vorher sicherstellen, dass die "
 "Einstellungen gespeichert wurden!"
 
-#: notification.php:683
+#: notification.php:763
 msgid "test pushover values"
 msgstr "Pushover Testnachricht senden"
 
-#: notification.php:708
+#: notification.php:779
+msgid "helptext_pushover"
+msgstr ""
+"<br><br>\n"
+"<b>Pushover:</b>\n"
+"<br><br>\n"
+"<br>Um Pushover nutzen zu können, muss man sich die APP für das "
+"entsprechende System (Android / IOS) herunterladen, installieren und einen "
+"Account erstellen.\n"
+"<br>Nach der Anmeldung erhält man eine E-Mail, über die man die Anmeldung "
+"bestätigen muss.\n"
+"<br><br>\n"
+"<br>Um den <b>User-Key </b>und <b>API Token/Key </b>zu generieren muss man "
+"sich hier einloggen: https://pushover.net/\n"
+"<br>Auf der Seite findet man dann nach dem Login den eigenen User-Key. \n"
+"<br><br>\n"
+"<br>Als nächstes muss man eine Anwendung registrieren: </b><i> Create an "
+"Application/API Token </i>\n"
+"<br>Als Name kann man dann \"Pi-Ager\" eintragen, wer möchte, kann auch ein "
+"Icon hinzufügen.\n"
+"<br>Ist dieser Vorgang abgeschlossen, wird ein API Token/Key generiert.  \n"
+"<br>Diese 2 Strings (<b>User-Key </b>und <b>API Token/Key </b>) müssen in "
+"die entsprechende Felder auf der Pi-Ager Seite \"Benachrichtigung\" "
+"eingetragen werden.\n"
+"<br>(Speichern nicht vergessen)\n"
+"<br><br>\n"
+"<br>Wenn die APP auf dem Handy schon installiert ist und man sich mit dem "
+"Account angemeldet hat,\n"
+"<br>kann man über die Pi-Ager Seite eine Testnachricht senden.\n"
+"<br>Kommt diese an, ist alles richtig eingestellt.\n"
+"<br><br>"
+
+#: notification.php:804
 msgid "bot token"
 msgstr "bot token"
 
-#: notification.php:712
+#: notification.php:808
 msgid "bot chatID"
 msgstr "bot chatID"
 
-#: notification.php:716
+#: notification.php:812
 msgid "telegram_active"
 msgstr "Telegram aktiv"
 
-#: notification.php:723
+#: notification.php:819
 msgid "ATTENTION: save telegram values?"
 msgstr "ACHTUNG: Telegram Einstellungen speichern?"
 
-#: notification.php:728
+#: notification.php:824
 msgid ""
 "ATTENTION: test telegram values? be shure you have saved the values before!"
 msgstr ""
 "ACHTUNG: Telegram Einstellungen testen? Bitte vorher sicherstellen, dass die "
 "Einstellungen gespeichert wurden!"
 
-#: notification.php:728
+#: notification.php:824
 msgid "test telegram values"
 msgstr "Telegram Testnachricht senden"
+
+#: notification.php:840
+msgid "helptext_telegram"
+msgstr ""
+"<br><br>\n"
+"<b>Telegram:</b>\n"
+"<br><br>\n"
+"<br>Um Telegram nutzen zu können, muss man die APP für das entsprechende "
+"System (Android / IOS) herunterladen und installieren.\n"
+"<br>Wenn das abgeschossen ist, gibt man im oberen Suchfeld \"BotFather\" ein "
+"und wählt dann den Chat aus.\n"
+"<br><br>\n"
+"<br>Jetzt kann man einen Bot erstellen:\n"
+"<br>Dafür sendet man dem neuen Nutzer BotFather einfach die Nachrichten:\n"
+"<br>/newbot\n"
+"<br>Man wird dann aufgefordert, die Bot Bezeichnung und den Bot-User Namen "
+"festzulegen (Der User Name muss unbedingt auf <b>bot</b> enden). \n"
+"<br>z.B. :\n"
+"<br><b>Bot Name:</b></b><i> Pi-Ager </i>oder</b><i> Reifeschrank </i>oder</"
+"b><i> Mein-Pi-Ager</i>\n"
+"<br><b>User Name:</b></b><i> Name_bot </i>oder</b><i> irgendein Name_bot </"
+"i>\n"
+"<br>Zum Abschluss bekommt man den sogenannten Token, eine längere "
+"Zeichenkette, die euren Bot eindeutig identifiziert. \n"
+"<br>Z.B: </b><i> 123456787:ABcdEFGhijklm-aTchoFJ_pb6oZKxzx8Zw</i>\n"
+"<br>Am besten man kopiert den Token-Code direkt in eine Text Datei .\n"
+"<br>Optional kann man ein Nutzerbild für den Bot etc. einrichten – sendet "
+"einfach im Telegram-Client Befehle wie /setuserpic, /help usw. \n"
+"<br><br>\n"
+"<br><b>Wichtig: </b>Man muss jetzt den Bot erstmal starten und eine erste "
+"Nachricht versenden, sonst funktioniert der nächste Schritt nicht.\n"
+"<br><br>\n"
+"<br>Um den Bot zu starten, klickt man auf dem Link in der Antwort, der sieht "
+"dann so ähnlich aus: </b><i>t.me/Name_bot</i>\n"
+"<br>Es öffnet sich ein Chatfenster, in dem man dann den Bot starten kann. \n"
+"<br>Das kann (je nach Version) über ein Feld gemacht werden oder man sendet "
+"den Befehl / Nachricht :\n"
+"<br>/start\n"
+"<br><br>\n"
+"<br>Jetzt muss man die Chat ID rausfinden.\n"
+"<br>Es ist wirklich wichtig, über das Smartphone etwas in einen Chat "
+"einzutippen z.B.: „Hallo Test“, denn sonst funktioniert es nicht.\n"
+"<br>Als nächstes ruft man folgende URL im Browser auf: https://api.telegram."
+"org/bot[HTTP-TOKEN]/getUpdates\n"
+"<br>[HTTP-TOKEN] muss man durch den ermittelten String ersetzen.\n"
+"<br>z.B.: \n"
+"<br>https://api.telegram.org/bot<b>123456787:ABcdEFGhijklm-"
+"aTchoFJ_pb6oZKxzx8Zw</b>/getUpdates\n"
+"<br>Als Antwort kommt dann so etwas ähnliches: \n"
+"<br>{\"ok\":true,\"result\":[{\"update_id\":277706798,\n"
+"<br>\"message\":{\"message_id\":3,\"from\":{\"id\":<b>374628888</b>,"
+"\"first_name\":\"Frank\",\"last_name\":\"Mustermann\"},\"chat\":{\"id"
+"\":374628888,\"first_name\":\"Frank\",\"last_name\":\"Mustermann\",\"type\":"
+"\"private\"},\"date\":1499083767,\"text\":\"Hallo Test\"}}]}\n"
+"<br>Was wir brauchen ist die Zahl/ String nach \"id\", also hier wäre das "
+"<b>374628888</b>.\n"
+"<br><br>\n"
+"<br>Dann hat man alles was man für den Pi-Ager braucht:\n"
+"<br><b>bot token (HTTP Token):</b> 123456787:ABcdEFGhijklm-"
+"aTchoFJ_pb6oZKxzx8Zw\n"
+"<br><b>bot chatID:</b> 374628888\n"
+"<br><br>\n"
+"<br>Diese 2 Strings müssen in die entsprechende Felder auf der Pi-Ager Seite "
+"\"Benachrichtigung\" eingetragen werden.\n"
+"<br>(Speichern nicht vergessen)\n"
+"<br>Jetzt kann man über die Pi-Ager Seite eine Testnachricht senden.\n"
+"<br>Kommt diese an, ist alles richtig eingestellt.\n"
+"<br><br>"
 
 #: scale_wizzard.php:24
 msgid "measuring on scales stopped due to calibrating scale"
