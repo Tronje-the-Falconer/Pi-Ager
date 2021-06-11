@@ -49,7 +49,7 @@ def autostart_loop():
             status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
             current_agingtable_period = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.agingtable_period_key)
             cl_fact_logger.get_instance().update_logger_loglevels()
-            check_and_set_light()
+            # check_and_set_light()
             
             # logger.debug('autostart_loop ' + time.strftime('%H:%M:%S', time.localtime()))
             cl_fact_logger.get_instance().debug('autostart_loop ' + time.strftime('%H:%M:%S', time.localtime()))

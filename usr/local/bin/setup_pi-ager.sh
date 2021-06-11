@@ -73,8 +73,8 @@ then
     # phpliteadmin pass setzen
     if [ -n "$dbpw" ]         #wenn nicht ""
     then
-        sed -i "s/raspberry/$dbpw/g" /var/www/phpliteadmin.php
-        echo "phpliteadmin gesetzt"
+        sed -i "s/raspberry/$dbpw/g" /var/www/phpliteadmin.config.php
+        echo "phpliteadmin.config.php gesetzt"
     fi
 
     # settings pass setzen oder direkt mit https://websistent.com/tools/htdigest-generator-tool/ 
@@ -141,11 +141,11 @@ then
 fi
 
 systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
-systemctl disable pi-ager_scale.service pi-ager_agingtable.service # Werden manuell gestartet
+# systemctl disable pi-ager_scale.service pi-ager_agingtable.service # Werden manuell gestartet
 systemctl enable pi-ager_main.service 
 systemctl start pi-ager_main.service
 ifup wlan0
 # expand filesystem
-raspi-config nonint do_expand_rootfs
+# raspi-config nonint do_expand_rootfs
 # reboot
 shutdown -r now

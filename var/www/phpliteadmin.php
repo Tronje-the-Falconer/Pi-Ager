@@ -1,5 +1,5 @@
 <?php
-//
+//	
 //	Project: phpLiteAdmin (https://www.phpliteadmin.org/)
 //	Version: 1.9.8.2
 //	Summary: PHP-based admin tool to manage SQLite2 and SQLite3 databases on the web
@@ -11,25 +11,25 @@
 //	   Christopher Kramer (crazy4chrissi@gmail.com, http://en.christosoft.de)
 //	   Ayman Teryaki (http://havalite.com)
 //	   Dreadnaut (dreadnaut@gmail.com, http://dreadnaut.altervista.org)
-//
-//
+//	
+//	
 //	Copyright (C) 2019, phpLiteAdmin
-//
+//	
 //	This program is free software: you can redistribute it and/or modify
 //	it under the terms of the GNU General Public License as published by
 //	the Free Software Foundation, either version 3 of the License, or
 //	(at your option) any later version.
-//
+//	
 //	This program is distributed in the hope that it will be useful,
 //	but WITHOUT ANY WARRANTY; without even the implied warranty of
 //	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 //	GNU General Public License for more details.
-//
+//	
 //	You should have received a copy of the GNU General Public License
 //	along with this program.  If not, see <https://www.gnu.org/licenses/>.
-//
+//	
 //	////////////////////////////////////////////////////////////////////////
-//
+//	
 //	Please report any bugs you may encounter to our issue tracker here:
 //		https://bitbucket.org/phpliteadmin/public/issues?status=new&status=open
 
@@ -44,10 +44,10 @@
 // Please see https://bitbucket.org/phpliteadmin/public/wiki/Configuration for more details
 
 //password to gain access
-$password = 'raspberry';
+$password = 'admin';
 
 //directory relative to this file to search for databases (if false, manually list databases in the $databases variable)
-$directory = './config';
+$directory = '.';
 
 //whether or not to scan the subdirectories of the above directory infinitely deep
 $subdirectories = false;
@@ -56,8 +56,12 @@ $subdirectories = false;
 //if any of the databases do not exist as they are referenced by their path, they will be created automatically
 $databases = array(
 	array(
-		'path'=> 'pi-ager.sqlite',
-		'name'=> 'Pi Ager'
+		'path'=> 'database1.sqlite',
+		'name'=> 'Database 1'
+	),
+	array(
+		'path'=> 'database2.sqlite',
+		'name'=> 'Database 2'
 	),
 );
 
@@ -85,18 +89,18 @@ $maxSavedQueries = 10;
 //a list of custom functions that can be applied to columns in the databases
 //make sure to define every function below if it is not a core PHP function
 $custom_functions = array(
-    'md5', 'sha1', 'time', 'strtotime',
-    // add the names of your custom functions to this array
-    /* 'leet_text', */
+	'md5', 'sha1', 'time', 'strtotime',
+	// add the names of your custom functions to this array
+	/* 'leet_text', */
 );
 
 // define your custom functions here
 /*
- function leet_text($value)
- {
- return strtr($value, 'eaAsSOl', '344zZ01');
- }
- */
+function leet_text($value)
+{
+  return strtr($value, 'eaAsSOl', '344zZ01');
+}
+*/
 
 
 /* ---- Advanced options ---- */
@@ -114,304 +118,304 @@ $allowed_extensions = array('db','db3','sqlite','sqlite3');
 // English language-texts.
 // Read our wiki on how to translate: https://bitbucket.org/phpliteadmin/public/wiki/Localization
 $lang = array(
-    "direction" => "LTR",
-    "date_format" => 'g:ia \o\n F j, Y (T)',  // see http://php.net/manual/en/function.date.php for what the letters stand for
-    "ver" => "version",
-    "for" => "for",
-    "to" => "to",
-    "go" => "Go",
-    "yes" => "Yes",
-    "no" => "No",
-    "sql" => "SQL",
-    "csv" => "CSV",
-    "csv_tbl" => "Table that CSV pertains to",
-    "srch" => "Search",
-    "srch_again" => "Do Another Search",
-    "login" => "Log In",
-    "logout" => "Logout",
-    "view" => "View",              // here, the noun SQL view is meant, not the verb "to view"
-    "confirm" => "Confirm",
-    "cancel" => "Cancel",
-    "save_as" => "Save As",
-    "options" => "Options",
-    "no_opt" => "No options",
-    "help" => "Help",
-    "installed" => "installed",
-    "not_installed" => "not installed",
-    "done" => "done",
-    "insert" => "Insert",
-    "export" => "Export",
-    "import" => "Import",
-    "rename" => "Rename",
-    "empty" => "Empty",
-    "drop" => "Drop",
-    "tbl" => "Table",
-    "chart" => "Chart",
-    "err" => "ERROR",
-    "act" => "Action",
-    "rec" => "Records",
-    "col" => "Column",
-    "cols" => "Columns",
-    "rows" => "row(s)",
-    "edit" => "Edit",
-    "del" => "Delete",
-    "add" => "Add",
-    "backup" => "Backup database file",
-    "before" => "Before",
-    "after" => "After",
-    "passwd" => "Password",
-    "passwd_incorrect" => "Incorrect password.",
-    "chk_ext" => "Checking supported SQLite PHP extensions",
-    "autoincrement" => "Autoincrement",
-    "not_null" => "Not NULL",
-    "attention" => "Attention",
-    "none" => "None",
-    "as_defined" => "As defined",
-    "expression" => "Expression",
-    "download" => "Download",
-    "open_in_browser" => "Open in browser",
-    
-    "sqlite_ext" => "SQLite extension",
-    "sqlite_ext_support" => "It appears that none of the supported SQLite library extensions are available in your installation of PHP. You may not use %s until you install at least one of them.",
-    "sqlite_v" => "SQLite version",
-    "sqlite_v_error" => "It appears that your database is of SQLite version %s but your installation of PHP does not contain the necessary extensions to handle this version. To fix the problem, either delete the database and allow %s to create it automatically or recreate it manually as SQLite version %s.",
-    "report_issue" => "The problem cannot be diagnosed properly. Please file an issue report at",
-    "sqlite_limit" => "Due to the limitations of SQLite, only the field name and data type can be modified.",
-    
-    "php_v" => "PHP version",
-    "new_version" => "There is a new version!",
-    
-    "db_dump" => "database dump",
-    "db_f" => "database file",
-    "db_ch" => "Change Database",
-    "db_event" => "Database Event",
-    "db_name" => "Database name",
-    "db_rename" => "Rename Database",
-    "db_renamed" => "Database '%s' has been renamed to",
-    "db_del" => "Delete Database",
-    "db_path" => "Path to database",
-    "db_size" => "Size of database",
-    "db_mod" => "Database last modified",
-    "db_create" => "Create New Database",
-    "db_vac" => "The database, '%s', has been VACUUMed.",
-    "db_not_writeable" => "The database, '%s', does not exist and cannot be created because the containing directory, '%s', is not writable. The application is unusable until you make it writable.",
-    "db_setup" => "There was a problem setting up your database, %s. An attempt will be made to find out what's going on so you can fix the problem more easily",
-    "db_exists" => "A database, other file or directory of the name '%s' already exists.",
-    "db_blank" => "The database name cannot be blank.",
-    
-    "exported" => "Exported",
-    "struct" => "Structure",
-    "struct_for" => "structure for",
-    "on_tbl" => "on table",
-    "data_dump" => "Data dump for",
-    "backup_hint" => "Hint: To backup your database, the easiest way is to %s.",
-    "backup_hint_linktext" => "download the database-file",
-    "total_rows" => "a total of %s rows",
-    "total" => "Total",
-    "not_dir" => "The directory you specified to scan for databases does not exist or is not a directory.",
-    "bad_php_directive" => "It appears that the PHP directive, 'register_globals' is enabled. This is bad. You need to disable it before continuing.",
-    "page_gen" => "Page generated in %s seconds.",
-    "powered" => "Powered by",
-    "free_software" => "This is free software.",
-    "please_donate" => "Please donate.",
-    "remember" => "Remember me",
-    "no_db" => "Welcome to %s. It appears that you have selected to scan a directory for databases to manage. However, %s could not find any valid SQLite databases. You may use the form below to create your first database.",
-    "no_db2" => "The directory you specified does not contain any existing databases to manage, and the directory is not writable. This means you can't create any new databases using %s. Either make the directory writable or manually upload databases to the directory.",
-    "dir_not_executable" => "The directory you specified cannot be scanned for databases as %s has no execute permissions on it. On Linux, use 'chmod +x %s' to fix this.",
-    
-    "create" => "Create",
-    "created" => "has been created",
-    "create_tbl" => "Create new table",
-    "create_tbl_db" => "Create new table on database",
-    "create_trigger" => "Creating new trigger on table",
-    "create_index" => "Creating new index on table",
-    "create_index1" => "Create Index",
-    "create_view" => "Create new view on database",
-    
-    "trigger" => "Trigger",
-    "triggers" => "Triggers",
-    "trigger_name" => "Trigger name",
-    "trigger_act" => "Trigger Action",
-    "trigger_step" => "Trigger Steps (semicolon terminated)",
-    "when_exp" => "WHEN expression (type expression without 'WHEN')",
-    "index" => "Index",
-    "indexes" => "Indexes",
-    "index_name" => "Index name",
-    "name" => "Name",
-    "unique" => "Unique",
-    "seq_no" => "Seq. No.",
-    "emptied" => "has been emptied",
-    "dropped" => "has been dropped",
-    "renamed" => "has been renamed to",
-    "altered" => "has been altered successfully",
-    "inserted" => "inserted",
-    "deleted" => "deleted",
-    "affected" => "affected",
-    "blank_index" => "Index name must not be blank.",
-    "one_index" => "You must specify at least one index column.",
-    "docu" => "Documentation",
-    "license" => "License",
-    "proj_site" => "Project Site",
-    "bug_report" => "This may be a bug that needs to be reported at",
-    "return" => "Return",
-    "browse" => "Browse",
-    "fld" => "Field",
-    "fld_num" => "Number of Fields",
-    "fields" => "Fields",
-    "type" => "Type",
-    "operator" => "Operator",
-    "val" => "Value",
-    "update" => "Update",
-    "comments" => "Comments",
-    
-    "specify_fields" => "You must specify the number of table fields.",
-    "specify_tbl" => "You must specify a table name.",
-    "specify_col" => "You must specify a column.",
-    
-    "tbl_exists" => "Table of the same name already exists.",
-    "show" => "Show",
-    "show_rows" => "Showing %s row(s). ",
-    "showing" => "Showing",
-    "showing_rows" => "Showing rows",
-    "query_time" => "(Query took %s sec)",
-    "syntax_err" => "There is a problem with the syntax of your query (Query was not executed)",
-    "run_sql" => "Run SQL query/queries on database '%s'",
-    "recent_queries" => "Recent Queries",
-    "full_texts" => "Show full texts",
-    "no_full_texts" => "Shorten long texts",
-    
-    "ques_empty" => "Are you sure you want to empty the table '%s'?",
-    "ques_drop" => "Are you sure you want to drop the table '%s'?",
-    "ques_drop_view" => "Are you sure you want to drop the view '%s'?",
-    "ques_del_rows" => "Are you sure you want to delete row(s) %s from table '%s'?",
-    "ques_del_db" => "Are you sure you want to delete the database '%s'?",
-    "ques_column_delete" => "Are you sure you want to delete column(s) %s from table '%s'?",
-    "ques_del_index" => "Are you sure you want to delete index '%s'?",
-    "ques_del_trigger" => "Are you sure you want to delete trigger '%s'?",
-    "ques_primarykey_add" => "Are you sure you want to add a primary key for the column(s) %s in table '%s'?",
-    
-    "export_struct" => "Export with structure",
-    "export_data" => "Export with data",
-    "add_drop" => "Add DROP TABLE",
-    "add_transact" => "Add TRANSACTION",
-    "fld_terminated" => "Fields terminated by",
-    "fld_enclosed" => "Fields enclosed by",
-    "fld_escaped" => "Fields escaped by",
-    "fld_names" => "Field names in first row",
-    "rep_null" => "Replace NULL by",
-    "rem_crlf" => "Remove CRLF characters within fields",
-    "put_fld" => "Put field names in first row",
-    "null_represent" => "NULL represented by",
-    "import_suc" => "Import was successful.",
-    "import_into" => "Import into",
-    "import_f" => "File to import",
-    "max_file_size" => "Maximum file size",
-    "rename_tbl" => "Rename table '%s' to",
-    
-    "rows_records" => "row(s) starting from record # ",
-    "rows_aff" => "row(s) affected. ",
-    
-    "as_a" => "as a",
-    "readonly_tbl" => "'%s' is a view, which means it is a SELECT statement treated as a read-only table. You may not edit or insert records.",
-    "chk_all" => "Check All",
-    "unchk_all" => "Uncheck All",
-    "with_sel" => "With Selected",
-    
-    "no_tbl" => "No table in database.",
-    "no_chart" => "If you can read this, it means the chart could not be generated. The data you are trying to view may not be appropriate for a chart.",
-    "no_rows" => "There are no rows in the table for the range you selected.",
-    "no_sel" => "You did not select anything.",
-    
-    "chart_type" => "Chart Type",
-    "chart_bar" => "Bar Chart",
-    "chart_pie" => "Pie Chart",
-    "chart_line" => "Line Chart",
-    "lbl" => "Labels",
-    "empty_tbl" => "This table is empty.",
-    "click" => "Click here",
-    "insert_rows" => "to insert rows.",
-    "restart_insert" => "Restart insertion with ",
-    "ignore" => "Ignore",
-    "func" => "Function",
-    "new_insert" => "Insert As New Row",
-    "save_ch" => "Save Changes",
-    "def_val" => "Default Value",
-    "prim_key" => "Primary Key",
-    "tbl_end" => "field(s) at end of table",
-    "query_used_table" => "Query used to create this table",
-    "query_used_view" => "Query used to create this view",
-    "create_index2" => "Create an index on",
-    "create_trigger2" => "Create a new trigger",
-    "new_fld" => "Adding new field(s) to table '%s'",
-    "add_flds" => "Add Fields",
-    "edit_col" => "Editing column '%s'",
-    "vac" => "Vacuum",
-    "vac_desc" => "Large databases sometimes need to be VACUUMed to reduce their footprint on the server. Click the button below to VACUUM the database '%s'.",
-    "vac_on_empty"=>"Rebuild database file to recover unused space (Vacuum)",
-    "event" => "Event",
-    "each_row" => "For Each Row",
-    "define_index" => "Define index properties",
-    "dup_val" => "Duplicate values",
-    "allow" => "Allowed",
-    "not_allow" => "Not Allowed",
-    "asc" => "Ascending",
-    "desc" => "Descending",
-    "warn0" => "You have been warned.",
-    "warn_passwd" => "You are using the default password, which can be dangerous. You can change it easily at the top of %s.",
-    "counting_skipped" => "Counting of records has been skipped for some tables because your database is comparably big and some tables don't have primary keys assigned to them so counting might be slow. Add a primary key to these tables or %sforce counting%s.",
-    "sel_state" => "Select Statement",
-    "delimit" => "Delimiter",
-    "back_top" => "Back to Top",
-    "choose_f" => "Choose File",
-    "instead" => "Instead of",
-    "define_in_col" => "Define index column(s)",
-    
-    "delete_only_managed" => "You can only delete databases managed by this tool!",
-    "rename_only_managed" => "You can only rename databases managed by this tool!",
-    "db_moved_outside" => "You either tried to move the database into a directory where it cannot be managed anylonger, or the check if you did this failed because of missing rights.",
-    "extension_not_allowed" => "The extension you provided is not within the list of allowed extensions. Please use one of the following extensions",
-    "add_allowed_extension" => "You can add extensions to this list by adding your extension to \$allowed_extensions in the configuration.",
-    "database_not_writable" => "The database-file is not writable, so its content cannot be changed in any way.",
-    "directory_not_writable" => "The database-file itself is writable, but to write into it, the containing directory needs to be writable as well. This is because SQLite puts temporary files in there for locking.",
-    "tbl_inexistent" => "Table %s does not exist",
-    "col_inexistent" => "Column %s does not exist",
-    
-    // errors that can happen when ALTER TABLE fails. You don't necessarily have to translate these.
-    "alter_failed" => "Altering of Table %s failed",
-    "alter_tbl_name_not_replacable" => "could not replace the table name with the temporary one",
-    "alter_no_def" => "no ALTER definition",
-    "alter_parse_failed" =>"failed to parse ALTER definition",
-    "alter_action_not_recognized" => "ALTER action could not be recognized",
-    "alter_no_add_col" => "no column to add detected in ALTER statement",
-    "alter_pattern_mismatch"=>"Pattern did not match on your original CREATE TABLE statement",
-    "alter_col_not_recognized" => "could not recognize new or old column name",
-    "alter_unknown_operation" => "Unknown ALTER operation!",
-    
-    /* Help documentation */
-    "help_doc" => "Help Documentation",
-    "help1" => "SQLite Library Extensions",
-    "help1_x" => "%s uses PHP library extensions that allow interaction with SQLite databases. Currently, %s supports PDO, SQLite3, and SQLiteDatabase. Both PDO and SQLite3 deal with version 3 of SQLite, while SQLiteDatabase deals with version 2. So, if your PHP installation includes more than one SQLite library extension, PDO and SQLite3 will take precedence to make use of the better technology. However, if you have existing databases that are of version 2 of SQLite, %s will be forced to use SQLiteDatabase for only those databases. Not all databases need to be of the same version. During the database creation, however, the most advanced extension will be used.",
-    "help2" => "Creating a New Database",
-    "help2_x" => "When you create a new database, the name you entered will be appended with the appropriate file extension (.db, .db3, .sqlite, etc.) if you do not include it yourself. The database will be created in the directory you specified as the \$directory variable.",
-    "help3" => "Tables vs. Views",
-    "help3_x" => "On the main database page, there is a list of tables and views. Since views are read-only, certain operations will be disabled. These disabled operations will be apparent by their omission in the location where they should appear on the row for a view. If you want to change the data for a view, you need to drop that view and create a new view with the appropriate SELECT statement that queries other existing tables. For more information, see <a href='http://en.wikipedia.org/wiki/View_(database)' target='_blank'>http://en.wikipedia.org/wiki/View_(database)</a>",
-    "help4" => "Writing a Select Statement for a New View",
-    "help4_x" => "When you create a new view, you must write an SQL SELECT statement that it will use as its data. A view is simply a read-only table that can be accessed and queried like a regular table, except it cannot be modified through insertion, column editing, or row editing. It is only used for conveniently fetching data.",
-    "help5" => "Export Structure to SQL File",
-    "help5_x" => "During the process for exporting to an SQL file, you may choose to include the queries that create the table and columns.",
-    "help6" => "Export Data to SQL File",
-    "help6_x" => "During the process for exporting to an SQL file, you may choose to include the queries that populate the table(s) with the current records of the table(s).",
-    "help7" => "Add Drop Table to Exported SQL File",
-    "help7_x" => "During the process for exporting to an SQL file, you may choose to include queries to DROP the existing tables before adding them so that problems do not occur when trying to create tables that already exist.",
-    "help8" => "Add Transaction to Exported SQL File",
-    "help8_x" => "During the process for exporting to an SQL file, you may choose to wrap the queries around a TRANSACTION so that if an error occurs at any time during the importation process using the exported file, the database can be reverted to its previous state, preventing partially updated data from populating the database.",
-    "help9" => "Add Comments to Exported SQL File",
-    "help9_x" => "During the process for exporting to an SQL file, you may choose to include comments that explain each step of the process so that a human can better understand what is happening.",
-    "help10" => "Partial Indexes",
-    "help10_x" => "Partial indexes are indexes over a subset of the rows of a table specified by a WHERE clause. Note this requires at least SQLite 3.8.0 and database files with partial indexes won't be readable or writable by older versions. See the <a href='https://www.sqlite.org/partialindex.html' target='_blank'>SQLite documentation.</a>",
-    "help11" => "Maximum size of file uploads",
-    "help11_x" => "The maximum size of file uploads is determined by three PHP settings: <em>upload_max_filesize</em>, <em>post_max_size</em> and <em>memory_limit</em>. The smallest of these three limits the maximum size for file uploads. To upload larger files, adjust these values in your <em>php.ini</em> file."
-    
+	"direction" => "LTR",
+	"date_format" => 'g:ia \o\n F j, Y (T)',  // see http://php.net/manual/en/function.date.php for what the letters stand for
+	"ver" => "version",
+	"for" => "for",
+	"to" => "to",
+	"go" => "Go",
+	"yes" => "Yes",
+	"no" => "No",
+	"sql" => "SQL",
+	"csv" => "CSV",
+	"csv_tbl" => "Table that CSV pertains to",
+	"srch" => "Search",
+	"srch_again" => "Do Another Search",
+	"login" => "Log In",
+	"logout" => "Logout",
+	"view" => "View",              // here, the noun SQL view is meant, not the verb "to view"
+	"confirm" => "Confirm",
+	"cancel" => "Cancel",
+	"save_as" => "Save As",
+	"options" => "Options",
+	"no_opt" => "No options",
+	"help" => "Help",
+	"installed" => "installed",
+	"not_installed" => "not installed",
+	"done" => "done",
+	"insert" => "Insert",
+	"export" => "Export",
+	"import" => "Import",
+	"rename" => "Rename",
+	"empty" => "Empty",
+	"drop" => "Drop",
+	"tbl" => "Table",
+	"chart" => "Chart",
+	"err" => "ERROR",
+	"act" => "Action",
+	"rec" => "Records",
+	"col" => "Column",
+	"cols" => "Columns",
+	"rows" => "row(s)",
+	"edit" => "Edit",
+	"del" => "Delete",
+	"add" => "Add",
+	"backup" => "Backup database file",
+	"before" => "Before",
+	"after" => "After",
+	"passwd" => "Password",
+	"passwd_incorrect" => "Incorrect password.",
+	"chk_ext" => "Checking supported SQLite PHP extensions",
+	"autoincrement" => "Autoincrement",
+	"not_null" => "Not NULL",
+	"attention" => "Attention",
+	"none" => "None",
+	"as_defined" => "As defined",
+	"expression" => "Expression",
+	"download" => "Download",
+	"open_in_browser" => "Open in browser",
+	
+	"sqlite_ext" => "SQLite extension",
+	"sqlite_ext_support" => "It appears that none of the supported SQLite library extensions are available in your installation of PHP. You may not use %s until you install at least one of them.",
+	"sqlite_v" => "SQLite version",
+	"sqlite_v_error" => "It appears that your database is of SQLite version %s but your installation of PHP does not contain the necessary extensions to handle this version. To fix the problem, either delete the database and allow %s to create it automatically or recreate it manually as SQLite version %s.",
+	"report_issue" => "The problem cannot be diagnosed properly. Please file an issue report at",
+	"sqlite_limit" => "Due to the limitations of SQLite, only the field name and data type can be modified.",
+	
+	"php_v" => "PHP version",
+	"new_version" => "There is a new version!",
+	
+	"db_dump" => "database dump",
+	"db_f" => "database file",
+	"db_ch" => "Change Database",
+	"db_event" => "Database Event",
+	"db_name" => "Database name",
+	"db_rename" => "Rename Database",
+	"db_renamed" => "Database '%s' has been renamed to",
+	"db_del" => "Delete Database",
+	"db_path" => "Path to database",
+	"db_size" => "Size of database",
+	"db_mod" => "Database last modified",
+	"db_create" => "Create New Database",
+	"db_vac" => "The database, '%s', has been VACUUMed.",
+	"db_not_writeable" => "The database, '%s', does not exist and cannot be created because the containing directory, '%s', is not writable. The application is unusable until you make it writable.",
+	"db_setup" => "There was a problem setting up your database, %s. An attempt will be made to find out what's going on so you can fix the problem more easily",
+	"db_exists" => "A database, other file or directory of the name '%s' already exists.",
+	"db_blank" => "The database name cannot be blank.",
+		
+	"exported" => "Exported",
+	"struct" => "Structure",
+	"struct_for" => "structure for",
+	"on_tbl" => "on table",
+	"data_dump" => "Data dump for",
+	"backup_hint" => "Hint: To backup your database, the easiest way is to %s.",
+	"backup_hint_linktext" => "download the database-file",
+	"total_rows" => "a total of %s rows",
+	"total" => "Total",
+	"not_dir" => "The directory you specified to scan for databases does not exist or is not a directory.",
+	"bad_php_directive" => "It appears that the PHP directive, 'register_globals' is enabled. This is bad. You need to disable it before continuing.",
+	"page_gen" => "Page generated in %s seconds.",
+	"powered" => "Powered by",
+	"free_software" => "This is free software.",
+	"please_donate" => "Please donate.",
+	"remember" => "Remember me",
+	"no_db" => "Welcome to %s. It appears that you have selected to scan a directory for databases to manage. However, %s could not find any valid SQLite databases. You may use the form below to create your first database.",
+	"no_db2" => "The directory you specified does not contain any existing databases to manage, and the directory is not writable. This means you can't create any new databases using %s. Either make the directory writable or manually upload databases to the directory.",
+	"dir_not_executable" => "The directory you specified cannot be scanned for databases as %s has no execute permissions on it. On Linux, use 'chmod +x %s' to fix this.",
+	
+	"create" => "Create",
+	"created" => "has been created",
+	"create_tbl" => "Create new table",
+	"create_tbl_db" => "Create new table on database",
+	"create_trigger" => "Creating new trigger on table",
+	"create_index" => "Creating new index on table",
+	"create_index1" => "Create Index",
+	"create_view" => "Create new view on database",
+	
+	"trigger" => "Trigger",
+	"triggers" => "Triggers",
+	"trigger_name" => "Trigger name",
+	"trigger_act" => "Trigger Action",
+	"trigger_step" => "Trigger Steps (semicolon terminated)",
+	"when_exp" => "WHEN expression (type expression without 'WHEN')",
+	"index" => "Index",
+	"indexes" => "Indexes",
+	"index_name" => "Index name",
+	"name" => "Name",
+	"unique" => "Unique",
+	"seq_no" => "Seq. No.",
+	"emptied" => "has been emptied",
+	"dropped" => "has been dropped",
+	"renamed" => "has been renamed to",
+	"altered" => "has been altered successfully",
+	"inserted" => "inserted",
+	"deleted" => "deleted",
+	"affected" => "affected",
+	"blank_index" => "Index name must not be blank.",
+	"one_index" => "You must specify at least one index column.",
+	"docu" => "Documentation",
+	"license" => "License",
+	"proj_site" => "Project Site",
+	"bug_report" => "This may be a bug that needs to be reported at",
+	"return" => "Return",
+	"browse" => "Browse",
+	"fld" => "Field",
+	"fld_num" => "Number of Fields",
+	"fields" => "Fields",
+	"type" => "Type",
+	"operator" => "Operator",
+	"val" => "Value",
+	"update" => "Update",
+	"comments" => "Comments",
+	
+	"specify_fields" => "You must specify the number of table fields.",
+	"specify_tbl" => "You must specify a table name.",
+	"specify_col" => "You must specify a column.",
+	
+	"tbl_exists" => "Table of the same name already exists.",
+	"show" => "Show",
+	"show_rows" => "Showing %s row(s). ",
+	"showing" => "Showing",
+	"showing_rows" => "Showing rows",
+	"query_time" => "(Query took %s sec)",
+	"syntax_err" => "There is a problem with the syntax of your query (Query was not executed)",
+	"run_sql" => "Run SQL query/queries on database '%s'",
+	"recent_queries" => "Recent Queries",
+	"full_texts" => "Show full texts",
+	"no_full_texts" => "Shorten long texts",
+	
+	"ques_empty" => "Are you sure you want to empty the table '%s'?",
+	"ques_drop" => "Are you sure you want to drop the table '%s'?",
+	"ques_drop_view" => "Are you sure you want to drop the view '%s'?",
+	"ques_del_rows" => "Are you sure you want to delete row(s) %s from table '%s'?",
+	"ques_del_db" => "Are you sure you want to delete the database '%s'?",
+	"ques_column_delete" => "Are you sure you want to delete column(s) %s from table '%s'?",
+	"ques_del_index" => "Are you sure you want to delete index '%s'?",
+	"ques_del_trigger" => "Are you sure you want to delete trigger '%s'?",
+	"ques_primarykey_add" => "Are you sure you want to add a primary key for the column(s) %s in table '%s'?",
+	
+	"export_struct" => "Export with structure",
+	"export_data" => "Export with data",
+	"add_drop" => "Add DROP TABLE",
+	"add_transact" => "Add TRANSACTION",
+	"fld_terminated" => "Fields terminated by",
+	"fld_enclosed" => "Fields enclosed by",
+	"fld_escaped" => "Fields escaped by",
+	"fld_names" => "Field names in first row",
+	"rep_null" => "Replace NULL by",
+	"rem_crlf" => "Remove CRLF characters within fields",
+	"put_fld" => "Put field names in first row",
+	"null_represent" => "NULL represented by",
+	"import_suc" => "Import was successful.",
+	"import_into" => "Import into",
+	"import_f" => "File to import",
+	"max_file_size" => "Maximum file size",
+	"rename_tbl" => "Rename table '%s' to",
+	
+	"rows_records" => "row(s) starting from record # ",
+	"rows_aff" => "row(s) affected. ",
+	
+	"as_a" => "as a",
+	"readonly_tbl" => "'%s' is a view, which means it is a SELECT statement treated as a read-only table. You may not edit or insert records.",
+	"chk_all" => "Check All",
+	"unchk_all" => "Uncheck All",
+	"with_sel" => "With Selected",
+	
+	"no_tbl" => "No table in database.",
+	"no_chart" => "If you can read this, it means the chart could not be generated. The data you are trying to view may not be appropriate for a chart.",
+	"no_rows" => "There are no rows in the table for the range you selected.",
+	"no_sel" => "You did not select anything.",
+	
+	"chart_type" => "Chart Type",
+	"chart_bar" => "Bar Chart",
+	"chart_pie" => "Pie Chart",
+	"chart_line" => "Line Chart",
+	"lbl" => "Labels",
+	"empty_tbl" => "This table is empty.",
+	"click" => "Click here",
+	"insert_rows" => "to insert rows.",
+	"restart_insert" => "Restart insertion with ",
+	"ignore" => "Ignore",
+	"func" => "Function",
+	"new_insert" => "Insert As New Row",
+	"save_ch" => "Save Changes",
+	"def_val" => "Default Value",
+	"prim_key" => "Primary Key",
+	"tbl_end" => "field(s) at end of table",
+	"query_used_table" => "Query used to create this table",
+	"query_used_view" => "Query used to create this view",
+	"create_index2" => "Create an index on",
+	"create_trigger2" => "Create a new trigger",
+	"new_fld" => "Adding new field(s) to table '%s'",
+	"add_flds" => "Add Fields",
+	"edit_col" => "Editing column '%s'",
+	"vac" => "Vacuum",
+	"vac_desc" => "Large databases sometimes need to be VACUUMed to reduce their footprint on the server. Click the button below to VACUUM the database '%s'.",
+	"vac_on_empty"=>"Rebuild database file to recover unused space (Vacuum)",
+	"event" => "Event",
+	"each_row" => "For Each Row",
+	"define_index" => "Define index properties",
+	"dup_val" => "Duplicate values",
+	"allow" => "Allowed",
+	"not_allow" => "Not Allowed",
+	"asc" => "Ascending",
+	"desc" => "Descending",
+	"warn0" => "You have been warned.",
+	"warn_passwd" => "You are using the default password, which can be dangerous. You can change it easily at the top of %s.",
+	"counting_skipped" => "Counting of records has been skipped for some tables because your database is comparably big and some tables don't have primary keys assigned to them so counting might be slow. Add a primary key to these tables or %sforce counting%s.",
+	"sel_state" => "Select Statement",
+	"delimit" => "Delimiter",
+	"back_top" => "Back to Top",
+	"choose_f" => "Choose File",
+	"instead" => "Instead of",
+	"define_in_col" => "Define index column(s)",
+	
+	"delete_only_managed" => "You can only delete databases managed by this tool!",
+	"rename_only_managed" => "You can only rename databases managed by this tool!",
+	"db_moved_outside" => "You either tried to move the database into a directory where it cannot be managed anylonger, or the check if you did this failed because of missing rights.",
+	"extension_not_allowed" => "The extension you provided is not within the list of allowed extensions. Please use one of the following extensions",
+	"add_allowed_extension" => "You can add extensions to this list by adding your extension to \$allowed_extensions in the configuration.",
+	"database_not_writable" => "The database-file is not writable, so its content cannot be changed in any way.",
+	"directory_not_writable" => "The database-file itself is writable, but to write into it, the containing directory needs to be writable as well. This is because SQLite puts temporary files in there for locking.",
+	"tbl_inexistent" => "Table %s does not exist",
+	"col_inexistent" => "Column %s does not exist",
+
+	// errors that can happen when ALTER TABLE fails. You don't necessarily have to translate these.
+	"alter_failed" => "Altering of Table %s failed",
+	"alter_tbl_name_not_replacable" => "could not replace the table name with the temporary one",
+	"alter_no_def" => "no ALTER definition",
+	"alter_parse_failed" =>"failed to parse ALTER definition",
+	"alter_action_not_recognized" => "ALTER action could not be recognized",
+	"alter_no_add_col" => "no column to add detected in ALTER statement",
+	"alter_pattern_mismatch"=>"Pattern did not match on your original CREATE TABLE statement",
+	"alter_col_not_recognized" => "could not recognize new or old column name",
+	"alter_unknown_operation" => "Unknown ALTER operation!",
+	
+	/* Help documentation */
+	"help_doc" => "Help Documentation",
+	"help1" => "SQLite Library Extensions",
+	"help1_x" => "%s uses PHP library extensions that allow interaction with SQLite databases. Currently, %s supports PDO, SQLite3, and SQLiteDatabase. Both PDO and SQLite3 deal with version 3 of SQLite, while SQLiteDatabase deals with version 2. So, if your PHP installation includes more than one SQLite library extension, PDO and SQLite3 will take precedence to make use of the better technology. However, if you have existing databases that are of version 2 of SQLite, %s will be forced to use SQLiteDatabase for only those databases. Not all databases need to be of the same version. During the database creation, however, the most advanced extension will be used.",
+	"help2" => "Creating a New Database",
+	"help2_x" => "When you create a new database, the name you entered will be appended with the appropriate file extension (.db, .db3, .sqlite, etc.) if you do not include it yourself. The database will be created in the directory you specified as the \$directory variable.",
+	"help3" => "Tables vs. Views",
+	"help3_x" => "On the main database page, there is a list of tables and views. Since views are read-only, certain operations will be disabled. These disabled operations will be apparent by their omission in the location where they should appear on the row for a view. If you want to change the data for a view, you need to drop that view and create a new view with the appropriate SELECT statement that queries other existing tables. For more information, see <a href='http://en.wikipedia.org/wiki/View_(database)' target='_blank'>http://en.wikipedia.org/wiki/View_(database)</a>",
+	"help4" => "Writing a Select Statement for a New View",
+	"help4_x" => "When you create a new view, you must write an SQL SELECT statement that it will use as its data. A view is simply a read-only table that can be accessed and queried like a regular table, except it cannot be modified through insertion, column editing, or row editing. It is only used for conveniently fetching data.",
+	"help5" => "Export Structure to SQL File",
+	"help5_x" => "During the process for exporting to an SQL file, you may choose to include the queries that create the table and columns.",
+	"help6" => "Export Data to SQL File",
+	"help6_x" => "During the process for exporting to an SQL file, you may choose to include the queries that populate the table(s) with the current records of the table(s).",
+	"help7" => "Add Drop Table to Exported SQL File",
+	"help7_x" => "During the process for exporting to an SQL file, you may choose to include queries to DROP the existing tables before adding them so that problems do not occur when trying to create tables that already exist.",
+	"help8" => "Add Transaction to Exported SQL File",
+	"help8_x" => "During the process for exporting to an SQL file, you may choose to wrap the queries around a TRANSACTION so that if an error occurs at any time during the importation process using the exported file, the database can be reverted to its previous state, preventing partially updated data from populating the database.",
+	"help9" => "Add Comments to Exported SQL File",
+	"help9_x" => "During the process for exporting to an SQL file, you may choose to include comments that explain each step of the process so that a human can better understand what is happening.",
+	"help10" => "Partial Indexes",
+	"help10_x" => "Partial indexes are indexes over a subset of the rows of a table specified by a WHERE clause. Note this requires at least SQLite 3.8.0 and database files with partial indexes won't be readable or writable by older versions. See the <a href='https://www.sqlite.org/partialindex.html' target='_blank'>SQLite documentation.</a>",
+	"help11" => "Maximum size of file uploads",
+	"help11_x" => "The maximum size of file uploads is determined by three PHP settings: <em>upload_max_filesize</em>, <em>post_max_size</em> and <em>memory_limit</em>. The smallest of these three limits the maximum size for file uploads. To upload larger files, adjust these values in your <em>php.ini</em> file."
+
 );
 
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -424,7 +428,7 @@ $lang = array(
 $config_filename = './phpliteadmin.config.php';
 if (is_readable($config_filename))
 {
-    include_once $config_filename;
+	include_once $config_filename;
 }
 
 //constants 1
@@ -445,8 +449,8 @@ ob_start();
 // we get out of the main code as soon as possible, without inizializing the session
 if (isset($_GET['resource']))
 {
-    Resources::output($_GET['resource']);
-    exit();
+	Resources::output($_GET['resource']);
+	exit();
 }
 
 // don't mess with this - required for the login session
@@ -461,11 +465,11 @@ $params = new GetParameters();
 
 if($debug==true)
 {
-    ini_set("display_errors", 1);
-    error_reporting(E_STRICT | E_ALL);
+	ini_set("display_errors", 1);
+	error_reporting(E_STRICT | E_ALL);
 } else
 {
-    @ini_set("display_errors", 0);
+	@ini_set("display_errors", 0);
 }
 
 // start the timer to record page load time
@@ -473,32 +477,32 @@ $pageTimer = new MicroTimer();
 
 // load language file
 if($language != 'en') {
-    $temp_lang=$lang;
-    if(is_file('languages/lang_'.$language.'.php'))
-        include('languages/lang_'.$language.'.php');
-        elseif(is_file('lang_'.$language.'.php'))
-        include('lang_'.$language.'.php');
-        $lang = array_merge($temp_lang, $lang);
-        unset($temp_lang);
+ 	$temp_lang=$lang;
+	if(is_file('languages/lang_'.$language.'.php'))
+		include('languages/lang_'.$language.'.php');
+	elseif(is_file('lang_'.$language.'.php'))
+		include('lang_'.$language.'.php');
+	$lang = array_merge($temp_lang, $lang);
+	unset($temp_lang);
 }
 
 // stripslashes if MAGIC QUOTES is turned on
 // This is only a workaround. Please better turn off magic quotes!
 // This code is from http://php.net/manual/en/security.magicquotes.disabling.php
 if (get_magic_quotes_gpc()) {
-    $process = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
-    while (list($key, $val) = each($process)) {
-        foreach ($val as $k => $v) {
-            unset($process[$key][$k]);
-            if (is_array($v)) {
-                $process[$key][stripslashes($k)] = $v;
-                $process[] = &$process[$key][stripslashes($k)];
-            } else {
-                $process[$key][stripslashes($k)] = stripslashes($v);
-            }
-        }
-    }
-    unset($process);
+	$process = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
+	while (list($key, $val) = each($process)) {
+		foreach ($val as $k => $v) {
+			unset($process[$key][$k]);
+			if (is_array($v)) {
+				$process[$key][stripslashes($k)] = $v;
+				$process[] = &$process[$key][stripslashes($k)];
+			} else {
+				$process[$key][stripslashes($k)] = stripslashes($v);
+			}
+		}
+	}
+	unset($process);
 }
 
 
@@ -513,187 +517,187 @@ $sqlite_functions = array("abs", "hex", "length", "lower", "ltrim", "random", "r
 // for php < 5.6.0
 if(!function_exists('hash_equals'))
 {
-    function hash_equals($str1, $str2)
-    {
-        if(strlen($str1) != strlen($str2))
-            return false;
-            else {
-                $res = $str1 ^ $str2;
-                $ret = 0;
-                for($i = strlen($res) - 1; $i >= 0; $i--)
-                    $ret |= ord($res[$i]);
-                    return !$ret;
-            }
-    }
+	function hash_equals($str1, $str2)
+	{
+		if(strlen($str1) != strlen($str2))
+			return false;
+		else {
+			$res = $str1 ^ $str2;
+			$ret = 0;
+			for($i = strlen($res) - 1; $i >= 0; $i--)
+				$ret |= ord($res[$i]);
+			return !$ret;
+		}
+	}
 }
 
 //function that allows SQL delimiter to be ignored inside comments or strings
 function explode_sql($delimiter, $sql)
 {
-    $ign = array('"' => '"', "'" => "'", "/*" => "*/", "--" => "\n"); // Ignore sequences.
-    $out = array();
-    $last = 0;
-    $slen = strlen($sql);
-    $dlen = strlen($delimiter);
-    $i = 0;
-    while($i < $slen)
-    {
-        // Split on delimiter
-        if($slen - $i >= $dlen && substr($sql, $i, $dlen) == $delimiter)
-        {
-            array_push($out, substr($sql, $last, $i - $last));
-            $last = $i + $dlen;
-            $i += $dlen;
-            continue;
-        }
-        // Eat comments and string literals
-        foreach($ign as $start => $end)
-        {
-            $ilen = strlen($start);
-            if($slen - $i >= $ilen && substr($sql, $i, $ilen) == $start)
-            {
-                $i+=strlen($start);
-                $elen = strlen($end);
-                while($i < $slen)
-                {
-                    if($slen - $i >= $elen && substr($sql, $i, $elen) == $end)
-                    {
-                        // SQL comment characters can be escaped by doubling the character. This recognizes and skips those.
-                        if($start == $end && $slen - $i >= $elen*2 && substr($sql, $i, $elen*2) == $end.$end)
-                        {
-                            $i += $elen * 2;
-                            continue;
-                        }
-                        else
-                        {
-                            $i += $elen;
-                            continue 3;
-                        }
-                    }
-                    $i++;
-                }
-                continue 2;
-            }
-        }
-        $i++;
-    }
-    if($last < $slen)
-        array_push($out, substr($sql, $last, $slen - $last));
-        return $out;
+	$ign = array('"' => '"', "'" => "'", "/*" => "*/", "--" => "\n"); // Ignore sequences.
+	$out = array();
+	$last = 0;
+	$slen = strlen($sql);
+	$dlen = strlen($delimiter);
+	$i = 0;
+	while($i < $slen)
+	{
+		// Split on delimiter
+		if($slen - $i >= $dlen && substr($sql, $i, $dlen) == $delimiter)
+		{
+			array_push($out, substr($sql, $last, $i - $last));
+			$last = $i + $dlen;
+			$i += $dlen;
+			continue;
+		}
+		// Eat comments and string literals
+		foreach($ign as $start => $end)
+		{
+			$ilen = strlen($start);
+			if($slen - $i >= $ilen && substr($sql, $i, $ilen) == $start)
+			{
+				$i+=strlen($start);
+				$elen = strlen($end);
+				while($i < $slen)
+				{
+					if($slen - $i >= $elen && substr($sql, $i, $elen) == $end)
+					{
+						// SQL comment characters can be escaped by doubling the character. This recognizes and skips those.
+						if($start == $end && $slen - $i >= $elen*2 && substr($sql, $i, $elen*2) == $end.$end)
+						{
+							$i += $elen * 2;
+							continue;
+						}
+						else
+						{
+							$i += $elen;
+							continue 3;
+						}
+					}
+					$i++;
+				}
+				continue 2;
+			}
+		}
+		$i++;
+	}
+	if($last < $slen)
+		array_push($out, substr($sql, $last, $slen - $last));
+	return $out;
 }
 
 //function to scan entire directory tree and subdirectories
 function dir_tree($dir)
 {
-    $path = array();
-    $stack = array($dir);
-    while($stack)
-    {
-        $thisdir = array_pop($stack);
-        if($dircont = scandir($thisdir))
-        {
-            $i=0;
-            while(isset($dircont[$i]))
-            {
-                if($dircont[$i] !== '.' && $dircont[$i] !== '..')
-                {
-                    $current_file = $thisdir.DIRECTORY_SEPARATOR.$dircont[$i];
-                    if(is_file($current_file))
-                    {
-                        $path[] = $thisdir.DIRECTORY_SEPARATOR.$dircont[$i];
-                    }
-                    elseif (is_dir($current_file))
-                    {
-                        $path[] = $thisdir.DIRECTORY_SEPARATOR.$dircont[$i];
-                        $stack[] = $current_file;
-                    }
-                }
-                $i++;
-            }
-        }
-    }
-    return $path;
+	$path = array();
+	$stack = array($dir);
+	while($stack)
+	{
+		$thisdir = array_pop($stack);
+		if($dircont = scandir($thisdir))
+		{
+			$i=0;
+			while(isset($dircont[$i]))
+			{
+				if($dircont[$i] !== '.' && $dircont[$i] !== '..')
+				{
+					$current_file = $thisdir.DIRECTORY_SEPARATOR.$dircont[$i];
+					if(is_file($current_file))
+					{
+						$path[] = $thisdir.DIRECTORY_SEPARATOR.$dircont[$i];
+					}
+					elseif (is_dir($current_file))
+					{
+						$path[] = $thisdir.DIRECTORY_SEPARATOR.$dircont[$i];
+						$stack[] = $current_file;
+					}
+				}
+				$i++;
+			}
+		}
+	}
+	return $path;
 }
 
 //the function echo the help [?] links to the documentation
 function helpLink($name)
 {
-    global $lang;
-    return "<a href='?help=1' onclick='openHelp(\"".$name."\"); return false;' class='helpq' title='".$lang['help'].": ".$name."' target='_blank'><span>[?]</span></a>";
+	global $lang;
+	return "<a href='?help=1' onclick='openHelp(\"".$name."\"); return false;' class='helpq' title='".$lang['help'].": ".$name."' target='_blank'><span>[?]</span></a>";
 }
 
 // function to encode value into HTML just like htmlentities, but with adjusted default settings
 function htmlencode($value, $flags=ENT_QUOTES, $encoding ="UTF-8")
 {
-    return htmlentities($value, $flags, $encoding);
+	return htmlentities($value, $flags, $encoding);
 }
 
 // reduce string chars
 function subString($str)
 {
-    global $charsNum, $params;
-    if($charsNum > 10 && (!isset($params->fulltexts) || !$params->fulltexts) && mb_strlen($str)>$charsNum)
-    {
-        $str = mb_substr($str, 0, $charsNum).'...';
-    }
-    return $str;
+	global $charsNum, $params;
+	if($charsNum > 10 && (!isset($params->fulltexts) || !$params->fulltexts) && mb_strlen($str)>$charsNum)
+	{
+		$str = mb_substr($str, 0, $charsNum).'...';
+	}
+	return $str;
 }
 
 // marks searchwords and htmlencodes correctly
 function markSearchWords($input, $field, $search)
 {
-    $output = htmlencode($input);
-    if(isset($search['values'][$field]) && is_array($search['values'][$field]))
-    {
-        // build one regex that matches (all) search words
-        $regex = '/';
-        $vali=0;
-        foreach($search['values'][$field] as $searchValue)
-        {
-            if($search['operators'][$field] =='LIKE' || $search['operators'][$field] == 'LIKE%')
-                $regex .= '(?:'.($searchValue[0]=='%'?'':'^'); // does the searchvalue have to occur at the start?
-                $regex .= preg_quote(trim($searchValue,'%'),'/');  // the search value
-                if($search['operators'][$field] =='LIKE' || $search['operators'][$field] == 'LIKE%')
-                    $regex .= (substr($searchValue,-1)=='%'?'':'$').')';  // does the searchvalue have to occur at the end?
-                    if($vali++<count($search['values'][$field]))
-                        $regex .= '|';    // there is another search value, so we add a |
-        }
-        $regex .= '/u';
-        // LIKE operator is not case sensitive, others are
-        if($search['operators'][$field] =='LIKE' || $search['operators'][$field] == 'LIKE%')
-            $regex.= 'i';
-            
-            // split the string into parts that match and should be highlighted and parts in between
-            // $fldBetweenParts: the parts that don't match (might contain empty strings)
-            $fldBetweenParts = preg_split($regex, $input);
-            // $fldFoundParts[0]: the parts that match
-            preg_match_all($regex, $input, $fldFoundParts);
-            
-            // stick the parts together
-            $output = '';
-            foreach($fldBetweenParts as $index => $betweenPart)
-            {
-                $output .= htmlencode($betweenPart); // part that does not match (might be empty)
-                if(isset($fldFoundParts[0][$index]))
-                    $output .= '<u class="found">'.htmlencode($fldFoundParts[0][$index]).'</u>'; // the part that matched
-            }
-    }
-    return $output;
+	$output = htmlencode($input);
+	if(isset($search['values'][$field]) && is_array($search['values'][$field]))
+	{
+		// build one regex that matches (all) search words
+		$regex = '/';
+		$vali=0;
+		foreach($search['values'][$field] as $searchValue)
+		{
+			if($search['operators'][$field] =='LIKE' || $search['operators'][$field] == 'LIKE%')
+				$regex .= '(?:'.($searchValue[0]=='%'?'':'^'); // does the searchvalue have to occur at the start?
+			$regex .= preg_quote(trim($searchValue,'%'),'/');  // the search value
+			if($search['operators'][$field] =='LIKE' || $search['operators'][$field] == 'LIKE%')
+				$regex .= (substr($searchValue,-1)=='%'?'':'$').')';  // does the searchvalue have to occur at the end?
+			if($vali++<count($search['values'][$field]))
+				$regex .= '|';    // there is another search value, so we add a |
+		}
+		$regex .= '/u';
+		// LIKE operator is not case sensitive, others are
+		if($search['operators'][$field] =='LIKE' || $search['operators'][$field] == 'LIKE%')
+			$regex.= 'i';
+
+		// split the string into parts that match and should be highlighted and parts in between
+		// $fldBetweenParts: the parts that don't match (might contain empty strings)
+		$fldBetweenParts = preg_split($regex, $input);
+		// $fldFoundParts[0]: the parts that match
+		preg_match_all($regex, $input, $fldFoundParts);
+
+		// stick the parts together
+		$output = '';
+		foreach($fldBetweenParts as $index => $betweenPart)
+		{
+			$output .= htmlencode($betweenPart); // part that does not match (might be empty)
+			if(isset($fldFoundParts[0][$index]))
+				$output .= '<u class="found">'.htmlencode($fldFoundParts[0][$index]).'</u>'; // the part that matched
+		}
+	}
+	return $output;
 }
 
 // checks the (new) name of a database file
 function checkDbName($name)
 {
-    global $allowed_extensions;
-    $info = pathinfo($name);
-    if(isset($info['extension']) && !in_array($info['extension'], $allowed_extensions))
-    {
-        return false;
-    } else
-    {
-        return (!is_file($name) && !is_dir($name));
-    }
-    
+	global $allowed_extensions;
+	$info = pathinfo($name);
+	if(isset($info['extension']) && !in_array($info['extension'], $allowed_extensions))
+	{
+		return false;
+	} else
+	{
+		return (!is_file($name) && !is_dir($name));
+	}
+
 }
 
 // check whether a path is a db managed by this tool
@@ -701,34 +705,34 @@ function checkDbName($name)
 // returns the key of the db if managed, false otherwise.
 function isManagedDB($path)
 {
-    global $databases;
-    foreach($databases as $db_key => $database)
-    {
-        if($path === $database['path'])
-        {
-            // a db we manage. Thats okay.
-            // return the key.
-            return $db_key;
-        }
-    }
-    // not a db we manage!
-    return false;
+	global $databases;
+	foreach($databases as $db_key => $database)
+	{
+		if($path === $database['path'])
+		{
+			// a db we manage. Thats okay.
+			// return the key.
+			return $db_key;
+		}
+	}
+	// not a db we manage!
+	return false;
 }
 
 // from a typename of a colun, get the type of the column's affinty
 // see https://www.sqlite.org/datatype3.html section 2.1 for rules
 function get_type_affinity($type)
 {
-    if (preg_match("/INT/i", $type))
-        return "INTEGER";
-        else if (preg_match("/(?:CHAR|CLOB|TEXT)/i", $type))
-            return "TEXT";
-            else if (preg_match("/BLOB/i", $type) || $type=="")
-                return "NONE";
-                else if (preg_match("/(?:REAL|FLOA|DOUB)/i", $type))
-                    return "REAL";
-                    else
-                        return "NUMERIC";
+	if (preg_match("/INT/i", $type))
+		return "INTEGER";
+	else if (preg_match("/(?:CHAR|CLOB|TEXT)/i", $type))
+		return "TEXT";
+	else if (preg_match("/BLOB/i", $type) || $type=="")
+		return "NONE";
+	else if (preg_match("/(?:REAL|FLOA|DOUB)/i", $type))
+		return "REAL";
+	else
+		return "NUMERIC";
 }
 
 
@@ -736,36 +740,36 @@ function get_type_affinity($type)
 // post_max_size and memory_limit. Returns -1 in case of no limit.
 function fileUploadMaxSize()
 {
-    $max1 = parseSize(ini_get('post_max_size'));
-    $max2 = parseSize(ini_get('upload_max_filesize'));
-    $max3 = parseSize(ini_get('memory_limit'));
-    if($max1>0 && ($max1<=$max2 || $max2==0) && ($max1<=$max3 || $max3==-1))
-        return $max1;
-        elseif($max2>0 && ($max2<=$max1 || $max1==0) && ($max2<=$max3 || $max3==-1))
-        return $max2;
-        elseif($max3>-1 && ($max3<=$max1 || $max1==0) && ($max3<=$max2 || $max2==0))
-        return $max3;
-        else
-            return -1; // no limit
+	$max1 = parseSize(ini_get('post_max_size'));
+	$max2 = parseSize(ini_get('upload_max_filesize'));
+	$max3 = parseSize(ini_get('memory_limit'));
+	if($max1>0 && ($max1<=$max2 || $max2==0) && ($max1<=$max3 || $max3==-1))
+		return $max1;
+	elseif($max2>0 && ($max2<=$max1 || $max1==0) && ($max2<=$max3 || $max3==-1))
+		return $max2;
+	elseif($max3>-1 && ($max3<=$max1 || $max1==0) && ($max3<=$max2 || $max2==0))
+		return $max3;
+	else
+		return -1; // no limit
 }
 
 // Parses given size string like "12M" into number of bytes
 // based on https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Component%21Utility%21Bytes.php/function/Bytes%3A%3AtoInt/8.2.x
 function parseSize($size)
 {
-    // Remove the non-unit characters from the size.
-    $unit = preg_replace('/[^bkmgtpezy]/i', '', $size);
-    // Remove the non-numeric characters from the size.
-    $size = preg_replace('/[^0-9\.]/', '', $size);
-    if ($unit)
-    {
-        // Find the position of the unit in the ordered string which is the power
-        // of magnitude to multiply a kilobyte by.
-        return round($size * pow(1024, stripos('bkmgtpezy', $unit[0])));
-    }
-    else {
-        return round($size);
-    }
+	// Remove the non-unit characters from the size.
+	$unit = preg_replace('/[^bkmgtpezy]/i', '', $size);
+	// Remove the non-numeric characters from the size.
+	$size = preg_replace('/[^0-9\.]/', '', $size);
+	if ($unit)
+	{
+		// Find the position of the unit in the ordered string which is the power
+		// of magnitude to multiply a kilobyte by.
+		return round($size * pow(1024, stripos('bkmgtpezy', $unit[0])));
+	}
+	else {
+		return round($size);
+	}
 }
 
 
@@ -774,1037 +778,1037 @@ $auth = new Authorization(); //create authorization object
 
 // check if user has attempted to log out
 if (isset($_GET['logout']))
-    $auth->revoke();
-    // check if user has attempted to log in
-    else if (isset($_POST['login']) && isset($_POST['password']))
-    {
-        $attempt = $auth->attemptGrant($_POST['password'], isset($_POST['remember']));
-        $params->redirect( $attempt ? array():array('failed'=>'1') );
-    }
-    
-    //- Actions on database files and bulk data
-    if ($auth->isAuthorized())
-    {
-        
-        //- Create a new database
-        if(isset($_POST['new_dbname']))
-        {
-            if($_POST['new_dbname']=='')
-                $params->redirect(array('table'=>null), $lang['err'].': '.$lang['db_blank']);
-                else
-                {
-                    $str = preg_replace('@[^\w\-.]@u','', $_POST['new_dbname']);
-                    $dbname = $str;
-                    $dbpath = $str;
-                    if(checkDbName($dbname))
-                    {
-                        $tdata = array();
-                        $tdata['name'] = $dbname;
-                        $tdata['path'] = $directory.DIRECTORY_SEPARATOR.$dbpath;
-                        if(isset($_POST['new_dbtype']))
-                            $tdata['type'] = $_POST['new_dbtype'];
-                            else
-                                $tdata['type'] = 3;
-                                $td = new Database($tdata);
-                                $td->query("VACUUM");
-                    } else
-                    {
-                        if(is_file($dbname) || is_dir($dbname))
-                            $params->redirect(array('view'=>'structure'),$lang['err'].': '.sprintf($lang['db_exists'], htmlencode($dbname)));
-                            else
-                                $params->redirect(array('view'=>'structure'),$lang['extension_not_allowed'].': '.implode(', ', array_map('htmlencode', $allowed_extensions)).'<br />'.$lang['add_allowed_extension']);
-                    }
-                }
-        }
-        
-        //- Scan a directory for databases
-        if($directory!==false)
-        {
-            if($directory[strlen($directory)-1]==DIRECTORY_SEPARATOR) //if user has a trailing slash in the directory, remove it
-                $directory = substr($directory, 0, strlen($directory)-1);
-                
-                if(is_dir($directory)) //make sure the directory is valid
-                {
-                    if($subdirectories===true)
-                        $arr = dir_tree($directory);
-                        else
-                            $arr = scandir($directory);
-                            $databases = array();
-                            $j = 0;
-                            for($i=0; $i<sizeof($arr); $i++) //iterate through all the files in the databases
-                            {
-                                if($subdirectories===false)
-                                    $arr[$i] = $directory.DIRECTORY_SEPARATOR.$arr[$i];
-                                    
-                                    if(@!is_file($arr[$i])) continue;
-                                    $con = file_get_contents($arr[$i], NULL, NULL, 0, 60);
-                                    if(strpos($con, "** This file contains an SQLite 2.1 database **", 0)!==false || strpos($con, "SQLite format 3", 0)!==false)
-                                    {
-                                        $databases[$j]['path'] = $arr[$i];
-                                        if($subdirectories===false)
-                                            $databases[$j]['name'] = basename($arr[$i]);
-                                            else
-                                                $databases[$j]['name'] = $arr[$i];
-                                                $databases[$j]['writable'] = is_writable($databases[$j]['path']);
-                                                $databases[$j]['writable_dir'] = is_writable(dirname($databases[$j]['path']));
-                                                $databases[$j]['readable'] = is_readable($databases[$j]['path']);
-                                                $j++;
-                                    }
-                            }
-                            // 22 August 2011: gkf fixed bug #50.
-                            sort($databases);
-                            if(isset($tdata))
-                            {
-                                foreach($databases as $db_id => $database)
-                                {
-                                    if($database['path'] === $tdata['path'])
-                                    {
-                                        $currentDB = $database;
-                                        $params->database = $database['path'];
-                                        break;
-                                    }
-                                }
-                            }
-                }
-                else //the directory is not valid - display error and exit
-                {
-                    echo "<div class='confirm' style='margin:20px;'>".$lang['not_dir']."</div>";
-                    exit();
-                }
-        }
-        else
-        {
-            for($i=0; $i<sizeof($databases); $i++)
-            {
-                if(!file_exists($databases[$i]['path']))
-                {
-                    // the file does not exist and will be created when clicked, if permissions allow to
-                    $databases[$i]['writable'] = is_writable(dirname($databases[$i]['path']));
-                    $databases[$i]['writable_dir'] = is_writable(dirname($databases[$i]['path']));
-                    $databases[$i]['readable'] = is_writable(dirname($databases[$i]['path']));
-                }
-                else
-                {
-                    $databases[$i]['writable'] = is_writable($databases[$i]['path']);
-                    $databases[$i]['writable_dir'] = is_writable(dirname($databases[$i]['path']));
-                    $databases[$i]['readable'] = is_readable($databases[$i]['path']);
-                }
-            }
-            sort($databases);
-        }
-        // we now have the $databases array set. Check whether selected DB is a managed Db (is in this array)
-        if(!isset($currentDB) && (isset($_GET['database']) || isset($_POST['database']) ) )
-        {
-            $selected_db = ( isset($_POST['database']) ? $_POST['database'] : $_GET['database'] );
-            $db_key = isManagedDB($selected_db);
-            if($db_key!==false) {
-                $currentDB = $databases[$db_key];
-                $params->database = $databases[$db_key]['path'];
-            }
-        }
-        
-        //- Delete an existing database
-        if(isset($_GET['database_delete']))
-        {
-            $dbpath = $_POST['database_delete'];
-            // check whether $dbpath really is a db we manage
-            $checkDB = isManagedDB($dbpath);
-            if($checkDB !== false)
-            {
-                unlink($dbpath);
-                unset($params->database);
-                unset($currentDB);
-                unset($databases[$checkDB]);
-            } else die($lang['err'].': '.$lang['delete_only_managed']);
-        }
-        
-        //- Rename an existing database
-        if(isset($_GET['database_rename']))
-        {
-            $oldpath = $_POST['oldname'];
-            $newpath = $_POST['newname'];
-            $oldpath_parts = pathinfo($oldpath);
-            $newpath_parts = pathinfo($newpath);
-            // only rename?
-            $newpath = $oldpath_parts['dirname'].DIRECTORY_SEPARATOR.basename($_POST['newname']);
-            if($newpath != $_POST['newname'] && $subdirectories)
-            {
-                // it seems that the file should not only be renamed but additionally moved.
-                // we need to make sure it stays within $directory...
-                $new_realpath = realpath($newpath_parts['dirname']).DIRECTORY_SEPARATOR;
-                $directory_realpath = realpath($directory).DIRECTORY_SEPARATOR;
-                if(strpos($new_realpath, $directory_realpath)===0)
-                {
-                    // its okay, the new directory is within $directory
-                    $newpath =  $_POST['newname'];
-                }
-                else $params->redirect(array('view'=>'rename'), $lang['err'].': '.$lang['db_moved_outside']);
-            }
-            
-            if(checkDbName($newpath))
-            {
-                $checkDB = isManagedDB($oldpath);
-                if($checkDB !==false )
-                {
-                    rename($oldpath, $newpath);
-                    $databases[$checkDB]['path'] = $newpath;
-                    $databases[$checkDB]['name'] = basename($newpath);
-                    $currentDB = $databases[$checkDB];
-                    $params->database = $databases[$checkDB]['path'];
-                    $params->redirect(array('view'=>'rename'), sprintf($lang['db_renamed'], htmlencode($oldpath))." '".htmlencode($newpath)."'.");
-                }
-                else $params->redirect(array('view'=>'rename'), $lang['err'].': '.$lang['rename_only_managed']);
-            }
-            else
-            {
-                if(is_file($newpath) || is_dir($newpath))
-                    $params->redirect(array('view'=>'rename'), $lang['err'].": " . sprintf($lang['db_exists'], htmlencode($newpath)));
-                    else
-                        $params->redirect(array('view'=>'rename'), $lang['err'].": " . $lang['extension_not_allowed'].': '.implode(', ', array_map('htmlencode', $allowed_extensions)).'<br />'.$lang['add_allowed_extension']);
-            }
-        }
-        
-        
-        //- Export (download a dump) an existing database
-        if(isset($_POST['export']))
-        {
-            ob_end_clean();
-            $export_filename = str_replace(array("\r", "\n"), '',$_POST['filename']); // against http header injection (php < 5.1.2 only)
-            if($_POST['export_type']=="sql")
-            {
-                header('Content-Type: text/sql');
-                header('Content-Disposition: attachment; filename="'.$export_filename.'.'.$_POST['export_type'].'";');
-                if(isset($_POST['tables']))
-                    $tables = $_POST['tables'];
-                    else
-                    {
-                        $tables = array();
-                        $tables[0] = $_POST['single_table'];
-                    }
-                    $drop = isset($_POST['drop']);
-                    $structure = isset($_POST['structure']);
-                    $data = isset($_POST['data']);
-                    $transaction = isset($_POST['transaction']);
-                    $comments = isset($_POST['comments']);
-                    $db = new Database($currentDB);
-                    echo $db->export_sql($tables, $drop, $structure, $data, $transaction, $comments);
-            }
-            else if($_POST['export_type']=="csv")
-            {
-                header("Content-type: application/csv");
-                header('Content-Disposition: attachment; filename="'.$export_filename.'.'.$_POST['export_type'].'";');
-                header("Pragma: no-cache");
-                header("Expires: 0");
-                if(isset($_POST['tables']))
-                    $tables = $_POST['tables'];
-                    else
-                    {
-                        $tables = array();
-                        $tables[0] = $_POST['single_table'];
-                    }
-                    $field_terminate = $_POST['export_csv_fieldsterminated'];
-                    $field_enclosed = $_POST['export_csv_fieldsenclosed'];
-                    $field_escaped = $_POST['export_csv_fieldsescaped'];
-                    $null = $_POST['export_csv_replacenull'];
-                    $crlf = isset($_POST['export_csv_crlf']);
-                    $fields_in_first_row = isset($_POST['export_csv_fieldnames']);
-                    $db = new Database($currentDB);
-                    echo $db->export_csv($tables, $field_terminate, $field_enclosed, $field_escaped, $null, $crlf, $fields_in_first_row);
-            }
-            exit();
-        }
-        
-        //- Import a file into an existing database
-        if(isset($_POST['import']))
-        {
-            $db = new Database($currentDB);
-            $db->registerUserFunction($custom_functions);
-            if($_POST['import_type']=="sql")
-            {
-                $data = file_get_contents($_FILES["file"]["tmp_name"]);
-                $importSuccess = $db->import_sql($data);
-            }
-            else
-            {
-                $field_terminate = $_POST['import_csv_fieldsterminated'];
-                $field_enclosed = $_POST['import_csv_fieldsenclosed'];
-                $field_escaped = $_POST['import_csv_fieldsescaped'];
-                $null = $_POST['import_csv_replacenull'];
-                $fields_in_first_row = isset($_POST['import_csv_fieldnames']);
-                if(isset($_POST['single_table']) && $_POST['single_table']!='')
-                    $table = $_POST['single_table'];
-                    else
-                    {
-                        $table = basename($_FILES["file"]["name"],".csv");
-                        $i="";
-                        while($db->getTypeOfTable($table.$i)!="")
-                        {
-                            if($i=="")
-                                $i=2;
-                                else
-                                    $i++;
-                        }
-                        $table = $table.$i;
-                    }
-                    $importSuccess = $db->import_csv($_FILES["file"]["tmp_name"], $table, $field_terminate, $field_enclosed, $field_escaped, $null, $fields_in_first_row);
-            }
-        }
-        //- Download (backup) a database file (as SQLite file, not as dump)
-        if(isset($_GET['download']) && isManagedDB($_GET['download'])!==false)
-        {
-            ob_end_clean();
-            header("Content-type: application/octet-stream");
-            header('Content-Disposition: attachment; filename="'.basename($_GET['download']).'";');
-            header("Pragma: no-cache");
-            header("Expires: 0");
-            readfile($_GET['download']);
-            exit;
-        }
-        
-        //- Select database (from session or first available)
-        if(!isset($currentDB) && count($databases)>0)
-        {
-            //set the current database to the first existing one in the array (default)
-            $currentDB = reset($databases);
-            $params->database = $currentDB['path'];
-        }
-        
-        if(isset($currentDB))
-        {
-            //- Open database (creates a Database object)
-            $db = new Database($currentDB); //create the Database object
-            $db->registerUserFunction($custom_functions);
-        }
-        
-        // collect parameters early, just once
-        $target_table = isset($_GET['table']) ? $_GET['table'] : null;
-        // are we working on a view? let's check once here
-        $target_table_type = !is_null($target_table) ? $db->getTypeOfTable($target_table) : null;
-        if(is_null($target_table_type) && !is_null($target_table))
-            $params->redirect(array('table'=>null), $lang['err'].': '.sprintf($lang['tbl_inexistent'], htmlencode($target_table)));
-            $params->table = $target_table;
-            
-            // initialize / change fulltexts and numrows parameter
-            if(isset($_GET['fulltexts']))
-                $params->fulltexts = ($_GET['fulltexts'] ? 1 : 0);
-                else
-                    $params->fulltexts = 0;
-                    
-                    if(isset($_GET['numRows']) && intval($_GET['numRows'])>0)
-                        $params->numRows = intval($_GET['numRows']);
-                        else
-                            $params->numRows = $rowsNum;
-                            
-                            //- Switch on $_GET['action'] for operations without output
-                            if(isset($_GET['action']) && isset($_GET['confirm']))
-                            {
-                                switch($_GET['action'])
-                                {
-                                    //- Table actions
-                                    
-                                    //- Create table (=table_create)
-                                    case "table_create":
-                                        $num = intval($_POST['rows']);
-                                        $name = $_POST['tablename'];
-                                        $primary_keys = array();
-                                        for($i=0; $i<$num; $i++)
-                                        {
-                                            if($_POST[$i.'_field']!="" && isset($_POST[$i.'_primarykey']))
-                                            {
-                                                $primary_keys[] = $_POST[$i.'_field'];
-                                            }
-                                        }
-                                        $query = "CREATE TABLE ".$db->quote($name)." (";
-                                        for($i=0; $i<$num; $i++)
-                                        {
-                                            if($_POST[$i.'_field']!="")
-                                            {
-                                                $query .= $db->quote($_POST[$i.'_field'])." ";
-                                                $query .= $_POST[$i.'_type']." ";
-                                                if(isset($_POST[$i.'_primarykey']))
-                                                {
-                                                    if(count($primary_keys)==1)
-                                                    {
-                                                        $query .= "PRIMARY KEY ";
-                                                        if(isset($_POST[$i.'_autoincrement']) && $db->getType() != "SQLiteDatabase")
-                                                            $query .=  "AUTOINCREMENT ";
-                                                    }
-                                                    $query .= "NOT NULL ";
-                                                }
-                                                if(!isset($_POST[$i.'_primarykey']) && isset($_POST[$i.'_notnull']))
-                                                    $query .= "NOT NULL ";
-                                                    if($_POST[$i.'_defaultoption']!='defined' && $_POST[$i.'_defaultoption']!='none' && $_POST[$i.'_defaultoption']!='expr')
-                                                        $query .= "DEFAULT ".$_POST[$i.'_defaultoption']." ";
-                                                        elseif($_POST[$i.'_defaultoption']=='expr')
-                                                        $query .= "DEFAULT (".$_POST[$i.'_defaultvalue'].") ";
-                                                        elseif(isset($_POST[$i.'_defaultvalue']) && $_POST[$i.'_defaultoption']=='defined')
-                                                        {
-                                                            $typeAffinity = get_type_affinity($_POST[$i.'_type']);
-                                                            if(($typeAffinity=="INTEGER" || $typeAffinity=="REAL" || $typeAffinity=="NUMERIC") && is_numeric($_POST[$i.'_defaultvalue']))
-                                                                $query .= "DEFAULT ".$_POST[$i.'_defaultvalue']."  ";
-                                                                else
-                                                                    $query .= "DEFAULT ".$db->quote($_POST[$i.'_defaultvalue'])." ";
-                                                        }
-                                                        $query = substr($query, 0, -1);
-                                                        $query .= ", ";
-                                            }
-                                        }
-                                        if (count($primary_keys)>1)
-                                        {
-                                            $compound_key = "";
-                                            foreach ($primary_keys as $primary_key)
-                                            {
-                                                $compound_key .= ($compound_key=="" ? "" : ", ") . $db->quote($primary_key);
-                                            }
-                                            $query .= "PRIMARY KEY (".$compound_key."), ";
-                                        }
-                                        $query = substr($query, 0, -2);
-                                        $query .= ")";
-                                        $result = $db->query($query);
-                                        if($result === false)
-                                            $completed = $db->getError(true);
-                                            else
-                                                $completed = $lang['tbl']." '".htmlencode($_POST['tablename'])."' ".$lang['created'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
-                                                $params->redirect(($result===false ? array() : array('action'=>'column_view', 'table'=>$name) ), $completed);
-                                                break;
-                                                
-                                                //- Empty table (=table_empty)
-                                    case "table_empty":
-                                        $query1 = "DELETE FROM ".$db->quote_id($_GET['table']).";";
-                                        $result1 = $db->query($query1);
-                                        if($result1 === false)
-                                            $completed = $db->getError(true);
-                                            if(isset($_POST['vacuum']) && $_POST['vacuum'])
-                                            {
-                                                $query2 = "VACUUM;";
-                                                $result2 = $db->query($query2);
-                                            }
-                                            else
-                                                $query2 = "";
-                                                if($result1 !== false)
-                                                    $completed = $lang['tbl']." '".htmlencode($_GET['table'])."' ".$lang['emptied'].".<br/><span style='font-size:11px;'>".htmlencode($query1)."<br />".htmlencode($query2)."</span>";
-                                                    $params->redirect(($result1===false ? array() : array('action'=>'row_view') ), $completed);
-                                                    break;
-                                                    
-                                                    //- Create view (=view_create)
-                                    case "view_create":
-                                        $query = "CREATE VIEW ".$db->quote($_POST['viewname'])." AS ".$_POST['select'];
-                                        $result = $db->query($query);
-                                        if($result === false)
-                                            $completed = $db->getError(true);
-                                            else
-                                                $completed = $lang['view']." '".htmlencode($_POST['viewname'])."' ".$lang['created'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
-                                                $params->redirect(($result===false ? array() : array('action'=>'column_view', 'table'=>$_POST['viewname']) ), $completed);
-                                                break;
-                                                
-                                                //- Drop table (=table_drop)
-                                    case "table_drop":
-                                        $query1 = "DROP TABLE ".$db->quote_id($_GET['table']).";";
-                                        $result1=$db->query($query1);
-                                        if($result1 === false)
-                                            $completed = $db->getError(true);
-                                            if(isset($_POST['vacuum']) && $_POST['vacuum'])
-                                            {
-                                                $query2 = "VACUUM;";
-                                                $result2 = $db->query($query2);
-                                            }
-                                            else
-                                                $query2 = "";
-                                                if($result1 !== false)
-                                                {
-                                                    $target_table = null;
-                                                    $completed = $lang['tbl']." '".htmlencode($_GET['table'])."' ".$lang['dropped'].".<br/><span style='font-size:11px;'>".htmlencode($query1)."<br />".htmlencode($query2)."</span>";;
-                                                }
-                                                $params->redirect(array('table'=>null), $completed);
-                                                break;
-                                                
-                                                //- Drop view (=view_drop)
-                                    case "view_drop":
-                                        $query = "DROP VIEW ".$db->quote_id($_POST['viewname']);
-                                        $result=$db->query($query);
-                                        if($result === false)
-                                            $completed = $db->getError(true);
-                                            else
-                                                $completed = $lang['view']." '".htmlencode($_POST['viewname'])."' ".$lang['dropped'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
-                                                $params->redirect(array('table'=>null), $completed);
-                                                break;
-                                                
-                                                //- Rename table (=table_rename)
-                                    case "table_rename":
-                                        $query = "ALTER TABLE ".$db->quote_id($_GET['table'])." RENAME TO ".$db->quote($_POST['newname']);
-                                        $type = $db->getTypeOfTable($_GET['table']);
-                                        if($db->getVersion()==3 && $type=='table' // SQLite 3 can rename tables, not views
-                                            // In SQL(ite) table names are case-insensitve, so changing is not supported by SQLite.
-                                            // But table names are stored and displayed case sensitive, so we use the workaround for case sensitive renaming.
-                                            && !($_GET['table'] !== $_POST['newname'] && strtolower($_GET['table']) === strtolower($_POST['newname']))
-                                            )
-                                            $result = $db->query($query, true);
-                                            else
-                                                // Workaround can rename tables of sqlite2 and views of both sqlite versions. Can also do case sensitive renames.
-                                                $result = $db->query($query, false);
-                                                if($result === false)
-                                                    $completed = $db->getError(true);
-                                                    else
-                                                    {
-                                                        $completed = $lang['tbl']." '".htmlencode($_GET['table'])."' ".$lang['renamed']." '".htmlencode($_POST['newname'])."'.<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
-                                                        $target_table = $_POST['newname'];
-                                                    }
-                                                    $params->redirect(array('action'=>'row_view', 'table'=>$_POST['newname']), $completed);
-                                                    break;
-                                                    
-                                                    //- Search table (=table_search)
-                                    case "table_search":
-                                        $searchValues = array();
-                                        $searchOperators = array();
-                                        
-                                        $tableInfo = $db->getTableInfo($target_table);
-                                        $j = 0;
-                                        $whereExpr = array();
-                                        for($i=0; $i<sizeof($tableInfo); $i++)
-                                        {
-                                            $field = $tableInfo[$i][1];
-                                            $operator = $_POST['field_'.$i.'_operator'];
-                                            $searchOperators[$field] = $operator;
-                                            $value = $_POST['field_'.$i.'_value'];
-                                            if($value!="" || $operator=="!= ''" || $operator=="= ''" || $operator == 'IS NULL' || $operator == 'IS NOT NULL')
-                                            {
-                                                if($operator=="= ''" || $operator=="!= ''" || $operator == 'IS NULL' || $operator == 'IS NOT NULL')
-                                                    $whereExpr[$j] = $db->quote_id($field)." ".$operator;
-                                                    else{
-                                                        if($operator == "LIKE%"){
-                                                            $operator = "LIKE";
-                                                            if(!preg_match('/(^%)|(%$)/', $value)) $value = '%'.$value.'%';
-                                                            $searchValues[$field] = array($value);
-                                                            $valueQuoted = $db->quote($value);
-                                                        }
-                                                        elseif($operator == 'IN' || $operator == 'NOT IN')
-                                                        {
-                                                            $value = trim($value, '() ');
-                                                            $values = explode(',',$value);
-                                                            $values = array_map('trim', $values, array_fill(0,count($values),' \'"'));
-                                                            if($operator == 'IN')
-                                                                $searchValues[$field] = $values;
-                                                                $values = array_map(array($db, 'quote'), $values);
-                                                                $valueQuoted = '(' .implode(', ', $values) . ')';
-                                                        }
-                                                        else
-                                                        {
-                                                            $searchValues[$field] = array($value);
-                                                            $valueQuoted = $db->quote($value);
-                                                        }
-                                                        $whereExpr[$j] = $db->quote_id($field)." ".$operator." ".$valueQuoted;
-                                                    }
-                                                    $j++;
-                                            }
-                                        }
-                                        $searchWhere = '';
-                                        if(sizeof($whereExpr)>0)
-                                        {
-                                            $searchWhere .= " WHERE ".$whereExpr[0];
-                                            for($i=1; $i<sizeof($whereExpr); $i++)
-                                            {
-                                                $searchWhere .= " AND ".$whereExpr[$i];
-                                            }
-                                        }
-                                        $searchID = md5($searchWhere);
-                                        $_SESSION[COOKIENAME.'search'][$searchID] = array(
-                                            'where' => $searchWhere,
-                                            'values' => $searchValues,
-                                            'operators' => $searchOperators
-                                        );
-                                        $params->redirect(array('action'=>'table_search','search'=>$searchID));
-                                        break;
-                                        
-                                        //- Row actions
-                                        
-                                        //- Create row (=row_create)
-                                    case "row_create":
-                                        $completed = "";
-                                        $num = $_POST['newRows'];
-                                        $z = 0;
-                                        $error = false;
-                                        
-                                        $tableInfo = $db->getTableInfo($target_table);
-                                        
-                                        for($i=0; $i<$num; $i++)
-                                        {
-                                            if(!isset($_POST[$i.":ignore"]))
-                                            {
-                                                $query_cols = "";
-                                                $query_vals = "";
-                                                $all_default = true;
-                                                for($j=0; $j<sizeof($tableInfo); $j++)
-                                                {
-                                                    $null = isset($_POST[$j."_null"][$i]);
-                                                    $type = strtoupper($tableInfo[$j]['type']);
-                                                    $typeAffinity = get_type_affinity($type);
-                                                    if(!$null && isset($_POST[$i.":".$j]))
-                                                        $value = $_POST[$i.":".$j];
-                                                        else
-                                                            $value = "";
-                                                            if(preg_match('/^BLOB/', $type))
-                                                            {
-                                                                if($_FILES[$i.":".$j]["error"] == UPLOAD_ERR_OK && is_file($_FILES[$i.":".$j]["tmp_name"]))
-                                                                    $blobFiles[$j] = $_FILES[$i.":".$j]["tmp_name"];
-                                                                    else
-                                                                        $blobFiles[$j] = null;
-                                                            }
-                                                            elseif($value===$tableInfo[$j]['dflt_value'])
-                                                            {
-                                                                // if the value is the default value, skip it
-                                                                continue;
-                                                            }
-                                                            $all_default = false;
-                                                            $query_cols .= $db->quote_id($tableInfo[$j]['name']).",";
-                                                            
-                                                            $function = $_POST["function_".$j][$i];
-                                                            if($function!="")
-                                                                $query_vals .= $function."(";
-                                                                if(preg_match('/^BLOB/', $type))
-                                                                    $query_vals .= ':blobval'.$j;
-                                                                    elseif(($typeAffinity=="TEXT" || $typeAffinity=="NONE") && !$null)
-                                                                    $query_vals .= $db->quote($value);
-                                                                    elseif(($typeAffinity=="INTEGER" || $typeAffinity=="REAL"|| $typeAffinity=="NUMERIC") && $value=="")
-                                                                    $query_vals .= "NULL";
-                                                                    elseif($null)
-                                                                    $query_vals .= "NULL";
-                                                                    else
-                                                                        $query_vals .= $db->quote($value);
-                                                                        if($function!="")
-                                                                            $query_vals .= ")";
-                                                                            $query_vals .= ",";
-                                                }
-                                                $query = "INSERT INTO ".$db->quote_id($target_table);
-                                                if(!$all_default)
-                                                {
-                                                    $query_cols = substr($query_cols, 0, strlen($query_cols)-1);
-                                                    $query_vals = substr($query_vals, 0, strlen($query_vals)-1);
-                                                    
-                                                    $query.=" (". $query_cols . ") VALUES (". $query_vals. ")";
-                                                } else {
-                                                    $query .= " DEFAULT VALUES";
-                                                }
-                                                if(isset($blobFiles))
-                                                {
-                                                    // blob files need to be done using a prepared statement because the query size would be too large
-                                                    $handle = $db->prepareQuery($query);
-                                                    foreach($blobFiles as $j=>$filename)
-                                                        $db->bindValue($handle, ':blobval'.$j, file_get_contents($filename), 'blob');
-                                                        
-                                                        $result1 = $db->executePrepared($handle, false);
-                                                }
-                                                else
-                                                    $result1 = $db->query($query);
-                                                    if($result1===false)
-                                                        $error = true;
-                                                        $completed .= "<span style='font-size:11px;'>".htmlencode($query)."</span><br/>";
-                                                        $z++;
-                                            }
-                                        }
-                                        if($error)
-                                            $completed = $db->getError(true);
-                                            else
-                                                $completed = $z." ".$lang['rows']." ".$lang['inserted'].".<br/><br/>".$completed;
-                                                $params->redirect(array('action'=>'row_view'), $completed);
-                                                break;
-                                                
-                                                //- Delete row (=row_delete)
-                                    case "row_delete":
-                                        $pks = json_decode($_GET['pk']);
-                                        
-                                        $query = "DELETE FROM ".$db->quote_id($target_table)." WHERE (".$db->wherePK($target_table,json_decode($pks[0])).")";
-                                        for($i=1; $i<sizeof($pks); $i++)
-                                        {
-                                            $query .= " OR (".$db->wherePK($target_table,json_decode($pks[$i])).")";
-                                        }
-                                        $result = $db->query($query);
-                                        if($result === false)
-                                            $completed = $db->getError(true);
-                                            else
-                                                $completed = sizeof($pks)." ".$lang['rows']." ".$lang['deleted'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
-                                                $params->redirect(array('action'=>'row_view'), $completed);
-                                                break;
-                                                
-                                                //- Edit row (=row_edit)
-                                    case "row_edit":
-                                        $pks = json_decode($_GET['pk']);
-                                        $z = 0;
-                                        
-                                        $tableInfo = $db->getTableInfo($target_table);
-                                        
-                                        if(isset($_POST['new_row']))
-                                            $completed = "";
-                                            else
-                                                $completed = sizeof($pks)." ".$lang['rows']." ".$lang['affected'].".<br/><br/>";
-                                                
-                                                for($i=0; $i<sizeof($pks); $i++)
-                                                {
-                                                    if(isset($_POST['new_row']))
-                                                    {
-                                                        $query_cols = "";
-                                                        $query_vals = "";
-                                                        $all_default = true;
-                                                        for($j=0; $j<sizeof($tableInfo); $j++)
-                                                        {
-                                                            $null = isset($_POST[$j."_null"][$i]);
-                                                            $type = strtoupper($tableInfo[$j]['type']);
-                                                            $typeAffinity = get_type_affinity($type);
-                                                            if(!$null)
-                                                            {
-                                                                if(preg_match('/^BLOB/', $type))
-                                                                {
-                                                                    if(isset($_POST["row_".$i."_field_".$j."_blob_use"]) && $_POST["row_".$i."_field_".$j."_blob_use"]=='old')
-                                                                    {
-                                                                        $select = 'SELECT '.$db->quote_id($tableInfo[$j]['name']).' AS \'blob\' FROM '.$db->quote_id($target_table).' WHERE '.$db->wherePK($target_table, json_decode($pks[$i]));
-                                                                        $bl = $db->select($select);
-                                                                        $blobFiles[$j] = $bl['blob'];
-                                                                        unset($bl);
-                                                                    }
-                                                                    else
-                                                                    {
-                                                                        if($_FILES[$i.":".$j]["error"] == UPLOAD_ERR_OK && is_file($_FILES[$i.":".$j]["tmp_name"]))
-                                                                            $blobFiles[$j] = file_get_contents($_FILES[$i.":".$j]["tmp_name"]);
-                                                                            else
-                                                                                $blobFiles[$j] = null;
-                                                                    }
-                                                                }
-                                                                else
-                                                                    $value = $_POST[$j][$i];
-                                                            }
-                                                            else
-                                                                $value = "";
-                                                                if(!preg_match('/^BLOB/', $type) && $value===$tableInfo[$j]['dflt_value'])
-                                                                {
-                                                                    // if the value is the default value, skip it
-                                                                    continue;
-                                                                }
-                                                                $all_default = false;
-                                                                $query_cols .= $db->quote_id($tableInfo[$j]['name']).",";
-                                                                
-                                                                $function = $_POST["function_".$j][$i];
-                                                                if($function!="")
-                                                                    $query_vals .= $function."(";
-                                                                    
-                                                                    if(preg_match('/^BLOB/', $type))
-                                                                        $query_vals .= ':blobval'.$j;
-                                                                        elseif(($typeAffinity=="TEXT" || $typeAffinity=="NONE") && !$null)
-                                                                        $query_vals .= $db->quote($value);
-                                                                        elseif(($typeAffinity=="INTEGER" || $typeAffinity=="REAL"|| $typeAffinity=="NUMERIC") && $value=="")
-                                                                        $query_vals .= "NULL";
-                                                                        elseif($null)
-                                                                        $query_vals .= "NULL";
-                                                                        else
-                                                                            $query_vals .= $db->quote($value);
-                                                                            if($function!="")
-                                                                                $query_vals .= ")";
-                                                                                $query_vals .= ",";
-                                                        }
-                                                        $query = "INSERT INTO ".$db->quote_id($target_table);
-                                                        if(!$all_default)
-                                                        {
-                                                            $query_cols = substr($query_cols, 0, strlen($query_cols)-1);
-                                                            $query_vals = substr($query_vals, 0, strlen($query_vals)-1);
-                                                            
-                                                            $query.=" (". $query_cols . ") VALUES (". $query_vals. ")";
-                                                        } else {
-                                                            $query .= " DEFAULT VALUES";
-                                                        }
-                                                        
-                                                        if(isset($blobFiles))
-                                                        {
-                                                            // blob files need to be done using a prepared statement because the query size would be too large
-                                                            $handle = $db->prepareQuery($query);
-                                                            foreach($blobFiles as $j=>$blobval)
-                                                                $db->bindValue($handle, ':blobval'.$j, $blobval, 'blob');
-                                                                
-                                                                $result1 = $db->executePrepared($handle, false);
-                                                        }
-                                                        else
-                                                            $result1 = $db->query($query);
-                                                            if($result1===false)
-                                                                $error = true;
-                                                                $z++;
-                                                    }
-                                                    else
-                                                    {
-                                                        $query = "UPDATE ".$db->quote_id($target_table)." SET ";
-                                                        for($j=0; $j<sizeof($tableInfo); $j++)
-                                                        {
-                                                            $type = strtoupper($tableInfo[$j]['type']);
-                                                            $function = $_POST["function_".$j][$i];
-                                                            $null = isset($_POST[$j."_null"][$i]);
-                                                            // if the old BLOB value is chosen to be kept, just skip this column
-                                                            if(!$null && preg_match('/^BLOB/', $type) && isset($_POST["row_".$i."_field_".$j."_blob_use"]) && $_POST["row_".$i."_field_".$j."_blob_use"]=='old')
-                                                                continue;
-                                                                if(!$null && preg_match('/^BLOB/', $type))
-                                                                {
-                                                                    if($_FILES[$i.":".$j]["error"] == UPLOAD_ERR_OK && is_file($_FILES[$i.":".$j]["tmp_name"]))
-                                                                        $blobFiles[$j] = $_FILES[$i.":".$j]["tmp_name"];
-                                                                        else
-                                                                            $blobFiles[$j] = null;
-                                                                }
-                                                                
-                                                                $query .= $db->quote_id($tableInfo[$j]['name'])."=";
-                                                                if($function!="")
-                                                                    $query .= $function."(";
-                                                                    if($null)
-                                                                        $query .= "NULL";
-                                                                        else
-                                                                        {
-                                                                            if(preg_match('/^BLOB/', $type))
-                                                                                $query .= ':blobval'.$j;
-                                                                                else
-                                                                                    $query .= $db->quote($_POST[$j][$i]);
-                                                                        }
-                                                                        if($function!="")
-                                                                            $query .= ")";
-                                                                            $query .= ", ";
-                                                        }
-                                                        $query = substr($query, 0, -2);
-                                                        $query .= " WHERE ".$db->wherePK($target_table, json_decode($pks[$i]));
-                                                        if(isset($blobFiles))
-                                                        {
-                                                            // blob files need to be done using a prepared statement because the query size would be too large
-                                                            $handle = $db->prepareQuery($query);
-                                                            foreach($blobFiles as $j=>$filename)
-                                                                $db->bindValue($handle, ':blobval'.$j, file_get_contents($filename), 'blob');
-                                                                
-                                                                $result1 = $db->executePrepared($handle, false);
-                                                        }
-                                                        else
-                                                            $result1 = $db->query($query);
-                                                            if($result1===false)
-                                                            {
-                                                                $error = true;
-                                                            }
-                                                    }
-                                                    $completed .= "<span style='font-size:11px;'>".htmlencode($query)."</span><br/>";
-                                                }
-                                                if($error)
-                                                    $completed = $db->getError(true);
-                                                    elseif(isset($_POST['new_row']))
-                                                    $completed = $z." ".$lang['rows']." ".$lang['inserted'].".<br/><br/>".$completed;
-                                                    $params->redirect(array('action'=>'row_view'), $completed);
-                                                    break;
-                                                    
-                                                    
-                                    case "row_get_blob":
-                                        $blobVal = $db->select("SELECT ".$db->quote_id($_GET['column'])." AS 'blob' FROM ".$db->quote_id($target_table)." WHERE ".$db->wherePK($target_table, json_decode($_GET['pk'])));
-                                        $filename = 'download';
-                                        if(function_exists('getimagesizefromstring'))     // introduced in PHP 5.4.0
-                                            $imagesize = getimagesizefromstring($blobVal['blob']);
-                                            if(isset($imagesize) && $imagesize!==false && isset($imagesize['mime']))
-                                                $mimetype = $imagesize['mime'];
-                                                elseif(class_exists('finfo'))  // included since php 5.3.0, but might be disabled on Windows
-                                                {
-                                                    $finfo    = new finfo(FILEINFO_MIME);
-                                                    $mimetype = $finfo->buffer($blobVal['blob']);
-                                                }
-                                                else
-                                                    $mimetype = "application/octet-stream";
-                                                    
-                                                    if(isset($imagesize) && $imagesize!==false && isset($imagesize[2]))
-                                                        $extension = image_type_to_extension($imagesize[2]);
-                                                        else
-                                                            $extension = '.blob';
-                                                            ob_end_clean();
-                                                            header('Content-Length: '.strlen($blobVal['blob']));
-                                                            header("Content-type: ".$mimetype);
-                                                            if(isset($_GET['download_blob']) && $_GET['download_blob'])
-                                                                header('Content-Disposition: attachment; filename="'.$filename.$extension.'";');
-                                                                header("Pragma: no-cache");
-                                                                header("Expires: 0");
-                                                                echo $blobVal['blob'];
-                                                                exit;
-                                                                break;
-                                                                
-                                                                
-                                                                //- Column actions
-                                                                
-                                                                //- Create column (=column_create)
-                                    case "column_create":
-                                        $num = intval($_POST['rows']);
-                                        for($i=0; $i<$num; $i++)
-                                        {
-                                            if($_POST[$i.'_field']!="")
-                                            {
-                                                $query = "ALTER TABLE ".$db->quote_id($target_table)." ADD ".$db->quote($_POST[$i.'_field'])." ";
-                                                $query .= $_POST[$i.'_type']." ";
-                                                if(isset($_POST[$i.'_primarykey']))
-                                                    $query .= "PRIMARY KEY ";
-                                                    if(isset($_POST[$i.'_notnull']))
-                                                        $query .= "NOT NULL ";
-                                                        if($_POST[$i.'_defaultoption']!='defined' && $_POST[$i.'_defaultoption']!='none' && $_POST[$i.'_defaultoption']!='expr')
-                                                            $query .= "DEFAULT ".$_POST[$i.'_defaultoption']." ";
-                                                            elseif($_POST[$i.'_defaultoption']=='expr')
-                                                            $query .= "DEFAULT (".$_POST[$i.'_defaultvalue'].") ";
-                                                            elseif(isset($_POST[$i.'_defaultvalue']) && $_POST[$i.'_defaultoption']=='defined')
-                                                            {
-                                                                $typeAffinity = get_type_affinity($_POST[$i.'_type']);
-                                                                if(($typeAffinity=="INTEGER" || $typeAffinity=="REAL" || $typeAffinity=="NUMERIC") && is_numeric($_POST[$i.'_defaultvalue']))
-                                                                    $query .= "DEFAULT ".$_POST[$i.'_defaultvalue']."  ";
-                                                                    else
-                                                                        $query .= "DEFAULT ".$db->quote($_POST[$i.'_defaultvalue'])." ";
-                                                            }
-                                                            if($db->getVersion()==3 &&
-                                                                ($_POST[$i.'_defaultoption']=='defined' || $_POST[$i.'_defaultoption']=='none' || $_POST[$i.'_defaultoption']=='NULL')
-                                                                // Sqlite3 cannot add columns with default values that are not constant
-                                                                && !isset($_POST[$i.'_primarykey'])
-                                                                // sqlite3 cannot add primary key columns
-                                                                && (!isset($_POST[$i.'_notnull']) || $_POST[$i.'_defaultoption']!='none')
-                                                                // SQLite3 cannot add NOT NULL columns without DEFAULT even if the table is empty
-                                                                )
-                                                                // use SQLITE3 ALTER TABLE ADD COLUMN
-                                                                $result = $db->query($query, true);
-                                                                else
-                                                                    // use ALTER TABLE workaround
-                                                                    $result = $db->query($query, false);
-                                                                    if($result===false)
-                                                                        $error = true;
-                                            }
-                                        }
-                                        if($error)
-                                            $completed = $db->getError(true);
-                                            else
-                                                $completed = $lang['tbl']." '".htmlencode($target_table)."' ".$lang['altered'].".";
-                                                $params->redirect(array('action'=>'column_view'), $completed);
-                                                break;
-                                                
-                                                //- Delete column (=column_delete)
-                                    case "column_delete":
-                                        $pks = explode(":", $_GET['pk']);
-                                        $query = "ALTER TABLE ".$db->quote_id($target_table).' DROP '.$db->quote_id($pks[0]);
-                                        for($i=1; $i<sizeof($pks); $i++)
-                                        {
-                                            $query .= ", DROP ".$db->quote_id($pks[$i]);
-                                        }
-                                        $result = $db->query($query);
-                                        if($result === false)
-                                            $completed = $db->getError(true);
-                                            else
-                                                $completed = $lang['tbl']." '".htmlencode($target_table)."' ".$lang['altered'].".";
-                                                $params->redirect(array('action'=>'column_view'), $completed);
-                                                break;
-                                                
-                                                //- Add a primary key (=primarykey_add)
-                                    case "primarykey_add":
-                                        $pks = explode(":", $_GET['pk']);
-                                        $query = "ALTER TABLE ".$db->quote_id($target_table).' ADD PRIMARY KEY ('.$db->quote_id($pks[0]);
-                                        for($i=1; $i<sizeof($pks); $i++)
-                                        {
-                                            $query .= ", ".$db->quote_id($pks[$i]);
-                                        }
-                                        $query .= ")";
-                                        $result = $db->query($query);
-                                        if($result === false)
-                                            $completed = $db->getError(true);
-                                            else
-                                                $completed = $lang['tbl']." '".htmlencode($target_table)."' ".$lang['altered'].".";
-                                                $params->redirect(array('action'=>'column_view'), $completed);
-                                                break;
-                                                
-                                                //- Edit column (=column_edit)
-                                    case "column_edit":
-                                        $query = "ALTER TABLE ".$db->quote_id($target_table).' CHANGE '.$db->quote_id($_POST['oldvalue'])." ".$db->quote($_POST['0_field'])." ".$_POST['0_type'];
-                                        $result = $db->query($query);
-                                        if($result === false)
-                                            $completed = $db->getError(true);
-                                            else
-                                                $completed = $lang['tbl']." '".htmlencode($target_table)."' ".$lang['altered'].".";
-                                                $params->redirect(array('action'=>'column_view'), $completed);
-                                                break;
-                                                
-                                                //- Delete trigger (=trigger_delete)
-                                    case "trigger_delete":
-                                        $query = "DROP TRIGGER ".$db->quote_id($_GET['pk']);
-                                        $result = $db->query($query);
-                                        if($result === false)
-                                            $completed = $db->getError(true);
-                                            else
-                                                $completed = $lang['trigger']." '".htmlencode($_GET['pk'])."' ".$lang['deleted'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
-                                                $params->redirect(array('action'=>'column_view'), $completed);
-                                                break;
-                                                
-                                                //- Delete index (=index_delete)
-                                    case "index_delete":
-                                        $query = "DROP INDEX ".$db->quote_id($_GET['pk']);
-                                        $result = $db->query($query);
-                                        if($result === false)
-                                            $completed = $db->getError(true);
-                                            else
-                                                $completed = $lang['index']." '".htmlencode($_GET['pk'])."' ".$lang['deleted'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
-                                                $params->redirect(array('action'=>'column_view'), $completed);
-                                                break;
-                                                
-                                                //- Create trigger (=trigger_create)
-                                    case "trigger_create":
-                                        $str = "CREATE TRIGGER ".$db->quote($_POST['trigger_name']);
-                                        if($_POST['beforeafter']!="")
-                                            $str .= " ".$_POST['beforeafter'];
-                                            $str .= " ".$_POST['event']." ON ".$db->quote_id($target_table);
-                                            if(isset($_POST['foreachrow']))
-                                                $str .= " FOR EACH ROW";
-                                                if($_POST['whenexpression']!="")
-                                                    $str .= " WHEN ".$_POST['whenexpression'];
-                                                    $str .= " BEGIN";
-                                                    $str .= " ".$_POST['triggersteps'];
-                                                    $str .= " END";
-                                                    $query = $str;
-                                                    $result = $db->query($query);
-                                                    if($result === false)
-                                                        $completed = $db->getError(true);
-                                                        else
-                                                            $completed = $lang['trigger']." ".$lang['created'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
-                                                            $params->redirect(array('action'=>'column_view'), $completed);
-                                                            break;
-                                                            
-                                                            //- Create index (=index_create)
-                                    case "index_create":
-                                        $num = $_POST['num'];
-                                        if($_POST['name']=="")
-                                        {
-                                            $completed = $lang['blank_index'];
-                                        }
-                                        else if($_POST['0_field']=="")
-                                        {
-                                            $completed = $lang['one_index'];
-                                        }
-                                        else
-                                        {
-                                            $str = "CREATE ";
-                                            if($_POST['duplicate']=="no")
-                                                $str .= "UNIQUE ";
-                                                $str .= "INDEX ".$db->quote($_POST['name'])." ON ".$db->quote_id($target_table)." (";
-                                                $str .= $db->quote_id($_POST['0_field']).$_POST['0_order'];
-                                                for($i=1; $i<$num; $i++)
-                                                {
-                                                    if($_POST[$i.'_field']!="")
-                                                        $str .= ", ".$db->quote_id($_POST[$i.'_field']).$_POST[$i.'_order'];
-                                                }
-                                                $str .= ")";
-                                                if(isset($_POST['where']) && $_POST['where']!='')
-                                                    $str.=" WHERE ".$_POST['where'];
-                                                    $query = $str;
-                                                    $result = $db->query($query);
-                                                    if($result === false)
-                                                        $completed = $db->getError(true);
-                                                        else
-                                                            $completed = $lang['index']." ".$lang['created'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
-                                        }
-                                        $params->redirect(array('action'=>'column_view'), $completed);
-                                        break;
-                                }
-                            }
-    }
-    
-    // if not in debug mode, destroy all output until here
-    if($debug)
-        $bufferedOutput = ob_get_contents();
-        ob_end_clean();
-        
-        //- HTML: output starts here
-        header('Content-Type: text/html; charset=utf-8');
-        ?>
+	$auth->revoke();
+// check if user has attempted to log in
+else if (isset($_POST['login']) && isset($_POST['password']))
+{
+	$attempt = $auth->attemptGrant($_POST['password'], isset($_POST['remember']));
+	$params->redirect( $attempt ? array():array('failed'=>'1') );
+}
+
+//- Actions on database files and bulk data
+if ($auth->isAuthorized())
+{
+
+	//- Create a new database
+	if(isset($_POST['new_dbname']))
+	{
+		if($_POST['new_dbname']=='')
+			$params->redirect(array('table'=>null), $lang['err'].': '.$lang['db_blank']);
+		else
+		{
+			$str = preg_replace('@[^\w\-.]@u','', $_POST['new_dbname']);
+			$dbname = $str;
+			$dbpath = $str;
+			if(checkDbName($dbname))
+			{
+				$tdata = array();
+				$tdata['name'] = $dbname;
+				$tdata['path'] = $directory.DIRECTORY_SEPARATOR.$dbpath;
+				if(isset($_POST['new_dbtype']))
+					$tdata['type'] = $_POST['new_dbtype'];
+				else
+					$tdata['type'] = 3;
+				$td = new Database($tdata);
+				$td->query("VACUUM");
+			} else
+			{
+				if(is_file($dbname) || is_dir($dbname))
+					$params->redirect(array('view'=>'structure'),$lang['err'].': '.sprintf($lang['db_exists'], htmlencode($dbname)));
+				else
+					$params->redirect(array('view'=>'structure'),$lang['extension_not_allowed'].': '.implode(', ', array_map('htmlencode', $allowed_extensions)).'<br />'.$lang['add_allowed_extension']);
+			}
+		}
+	}
+
+	//- Scan a directory for databases
+	if($directory!==false)
+	{
+		if($directory[strlen($directory)-1]==DIRECTORY_SEPARATOR) //if user has a trailing slash in the directory, remove it
+			$directory = substr($directory, 0, strlen($directory)-1);
+
+		if(is_dir($directory)) //make sure the directory is valid
+		{
+			if($subdirectories===true)
+				$arr = dir_tree($directory);
+			else
+				$arr = scandir($directory);
+			$databases = array();
+			$j = 0;
+			for($i=0; $i<sizeof($arr); $i++) //iterate through all the files in the databases
+			{
+				if($subdirectories===false)
+					$arr[$i] = $directory.DIRECTORY_SEPARATOR.$arr[$i];
+
+				if(@!is_file($arr[$i])) continue;
+				$con = file_get_contents($arr[$i], NULL, NULL, 0, 60);
+				if(strpos($con, "** This file contains an SQLite 2.1 database **", 0)!==false || strpos($con, "SQLite format 3", 0)!==false)
+				{
+					$databases[$j]['path'] = $arr[$i];
+					if($subdirectories===false)
+						$databases[$j]['name'] = basename($arr[$i]);
+					else
+						$databases[$j]['name'] = $arr[$i];
+					$databases[$j]['writable'] = is_writable($databases[$j]['path']);
+					$databases[$j]['writable_dir'] = is_writable(dirname($databases[$j]['path']));
+					$databases[$j]['readable'] = is_readable($databases[$j]['path']);
+					$j++;
+				}
+			}
+			// 22 August 2011: gkf fixed bug #50.
+			sort($databases);
+			if(isset($tdata))
+			{
+				foreach($databases as $db_id => $database)
+				{
+					if($database['path'] === $tdata['path'])
+					{
+						$currentDB = $database;
+						$params->database = $database['path'];
+						break;
+					}
+				}
+			}
+		}
+		else //the directory is not valid - display error and exit
+		{
+			echo "<div class='confirm' style='margin:20px;'>".$lang['not_dir']."</div>";
+			exit();
+		}
+	}
+	else
+	{
+		for($i=0; $i<sizeof($databases); $i++)
+		{
+			if(!file_exists($databases[$i]['path']))
+			{
+				// the file does not exist and will be created when clicked, if permissions allow to
+				$databases[$i]['writable'] = is_writable(dirname($databases[$i]['path']));
+				$databases[$i]['writable_dir'] = is_writable(dirname($databases[$i]['path']));
+				$databases[$i]['readable'] = is_writable(dirname($databases[$i]['path']));
+			}
+			else
+			{
+				$databases[$i]['writable'] = is_writable($databases[$i]['path']);
+				$databases[$i]['writable_dir'] = is_writable(dirname($databases[$i]['path']));
+				$databases[$i]['readable'] = is_readable($databases[$i]['path']);
+			}
+		}
+		sort($databases);
+	}
+	// we now have the $databases array set. Check whether selected DB is a managed Db (is in this array)
+	if(!isset($currentDB) && (isset($_GET['database']) || isset($_POST['database']) ) )
+	{
+		$selected_db = ( isset($_POST['database']) ? $_POST['database'] : $_GET['database'] );
+		$db_key = isManagedDB($selected_db);
+		if($db_key!==false) {
+			$currentDB = $databases[$db_key];
+			$params->database = $databases[$db_key]['path'];
+		}
+	}
+
+	//- Delete an existing database
+	if(isset($_GET['database_delete']))
+	{
+		$dbpath = $_POST['database_delete'];
+		// check whether $dbpath really is a db we manage
+		$checkDB = isManagedDB($dbpath);
+		if($checkDB !== false)
+		{
+			unlink($dbpath);
+			unset($params->database);
+			unset($currentDB);
+			unset($databases[$checkDB]);
+		} else die($lang['err'].': '.$lang['delete_only_managed']);
+	}
+
+	//- Rename an existing database
+	if(isset($_GET['database_rename']))
+	{
+		$oldpath = $_POST['oldname'];
+		$newpath = $_POST['newname'];
+		$oldpath_parts = pathinfo($oldpath);
+		$newpath_parts = pathinfo($newpath);
+		// only rename?
+		$newpath = $oldpath_parts['dirname'].DIRECTORY_SEPARATOR.basename($_POST['newname']);
+		if($newpath != $_POST['newname'] && $subdirectories)
+		{
+			// it seems that the file should not only be renamed but additionally moved.
+			// we need to make sure it stays within $directory...
+			$new_realpath = realpath($newpath_parts['dirname']).DIRECTORY_SEPARATOR;
+			$directory_realpath = realpath($directory).DIRECTORY_SEPARATOR;
+			if(strpos($new_realpath, $directory_realpath)===0)
+			{
+				// its okay, the new directory is within $directory
+				$newpath =  $_POST['newname'];
+			}
+			else $params->redirect(array('view'=>'rename'), $lang['err'].': '.$lang['db_moved_outside']);
+		}
+
+		if(checkDbName($newpath))
+		{
+			$checkDB = isManagedDB($oldpath);
+			if($checkDB !==false )
+			{
+				rename($oldpath, $newpath);
+				$databases[$checkDB]['path'] = $newpath;
+				$databases[$checkDB]['name'] = basename($newpath);
+				$currentDB = $databases[$checkDB];
+				$params->database = $databases[$checkDB]['path'];
+				$params->redirect(array('view'=>'rename'), sprintf($lang['db_renamed'], htmlencode($oldpath))." '".htmlencode($newpath)."'.");
+			}
+			else $params->redirect(array('view'=>'rename'), $lang['err'].': '.$lang['rename_only_managed']);
+		}
+		else
+		{
+			if(is_file($newpath) || is_dir($newpath))
+				$params->redirect(array('view'=>'rename'), $lang['err'].": " . sprintf($lang['db_exists'], htmlencode($newpath)));
+			else
+				$params->redirect(array('view'=>'rename'), $lang['err'].": " . $lang['extension_not_allowed'].': '.implode(', ', array_map('htmlencode', $allowed_extensions)).'<br />'.$lang['add_allowed_extension']);
+		}
+	}
+
+
+	//- Export (download a dump) an existing database
+	if(isset($_POST['export']))
+	{
+		ob_end_clean();
+		$export_filename = str_replace(array("\r", "\n"), '',$_POST['filename']); // against http header injection (php < 5.1.2 only)
+		if($_POST['export_type']=="sql")
+		{
+			header('Content-Type: text/sql');
+			header('Content-Disposition: attachment; filename="'.$export_filename.'.'.$_POST['export_type'].'";');
+			if(isset($_POST['tables']))
+				$tables = $_POST['tables'];
+			else
+			{
+				$tables = array();
+				$tables[0] = $_POST['single_table'];
+			}
+			$drop = isset($_POST['drop']);
+			$structure = isset($_POST['structure']);
+			$data = isset($_POST['data']);
+			$transaction = isset($_POST['transaction']);
+			$comments = isset($_POST['comments']);
+			$db = new Database($currentDB);
+			echo $db->export_sql($tables, $drop, $structure, $data, $transaction, $comments);
+		}
+		else if($_POST['export_type']=="csv")
+		{
+			header("Content-type: application/csv");
+			header('Content-Disposition: attachment; filename="'.$export_filename.'.'.$_POST['export_type'].'";');
+			header("Pragma: no-cache");
+			header("Expires: 0");
+			if(isset($_POST['tables']))
+				$tables = $_POST['tables'];
+			else
+			{
+				$tables = array();
+				$tables[0] = $_POST['single_table'];
+			}
+			$field_terminate = $_POST['export_csv_fieldsterminated'];
+			$field_enclosed = $_POST['export_csv_fieldsenclosed'];
+			$field_escaped = $_POST['export_csv_fieldsescaped'];
+			$null = $_POST['export_csv_replacenull'];
+			$crlf = isset($_POST['export_csv_crlf']);
+			$fields_in_first_row = isset($_POST['export_csv_fieldnames']);
+			$db = new Database($currentDB);
+			echo $db->export_csv($tables, $field_terminate, $field_enclosed, $field_escaped, $null, $crlf, $fields_in_first_row);
+		}
+		exit();
+	}
+
+	//- Import a file into an existing database
+	if(isset($_POST['import']))
+	{
+		$db = new Database($currentDB);
+		$db->registerUserFunction($custom_functions);
+		if($_POST['import_type']=="sql")
+		{
+			$data = file_get_contents($_FILES["file"]["tmp_name"]);
+			$importSuccess = $db->import_sql($data);
+		}
+		else
+		{
+			$field_terminate = $_POST['import_csv_fieldsterminated'];
+			$field_enclosed = $_POST['import_csv_fieldsenclosed'];
+			$field_escaped = $_POST['import_csv_fieldsescaped'];
+			$null = $_POST['import_csv_replacenull'];
+			$fields_in_first_row = isset($_POST['import_csv_fieldnames']);
+			if(isset($_POST['single_table']) && $_POST['single_table']!='')
+				$table = $_POST['single_table'];
+			else
+			{
+				$table = basename($_FILES["file"]["name"],".csv");
+				$i="";
+				while($db->getTypeOfTable($table.$i)!="")
+				{
+					if($i=="")
+						$i=2;
+					else
+						$i++;
+				}
+				$table = $table.$i;
+			}
+			$importSuccess = $db->import_csv($_FILES["file"]["tmp_name"], $table, $field_terminate, $field_enclosed, $field_escaped, $null, $fields_in_first_row);
+		}
+	}
+	//- Download (backup) a database file (as SQLite file, not as dump)
+	if(isset($_GET['download']) && isManagedDB($_GET['download'])!==false)
+	{
+		ob_end_clean();
+		header("Content-type: application/octet-stream");
+		header('Content-Disposition: attachment; filename="'.basename($_GET['download']).'";');
+		header("Pragma: no-cache");
+		header("Expires: 0");
+		readfile($_GET['download']);
+		exit;
+	}
+
+	//- Select database (from session or first available)
+	if(!isset($currentDB) && count($databases)>0)
+	{
+		//set the current database to the first existing one in the array (default)
+		$currentDB = reset($databases);
+		$params->database = $currentDB['path'];
+	}
+
+	if(isset($currentDB))
+	{
+		//- Open database (creates a Database object)
+		$db = new Database($currentDB); //create the Database object
+		$db->registerUserFunction($custom_functions);
+	}
+
+	// collect parameters early, just once
+	$target_table = isset($_GET['table']) ? $_GET['table'] : null;
+	// are we working on a view? let's check once here
+	$target_table_type = !is_null($target_table) ? $db->getTypeOfTable($target_table) : null;
+	if(is_null($target_table_type) && !is_null($target_table))
+		$params->redirect(array('table'=>null), $lang['err'].': '.sprintf($lang['tbl_inexistent'], htmlencode($target_table)));
+	$params->table = $target_table;
+
+	// initialize / change fulltexts and numrows parameter
+	if(isset($_GET['fulltexts']))
+		$params->fulltexts = ($_GET['fulltexts'] ? 1 : 0);
+	else
+		$params->fulltexts = 0;
+
+	if(isset($_GET['numRows']) && intval($_GET['numRows'])>0)
+		$params->numRows = intval($_GET['numRows']);
+	else
+		$params->numRows = $rowsNum;
+
+	//- Switch on $_GET['action'] for operations without output
+	if(isset($_GET['action']) && isset($_GET['confirm']))
+	{
+		switch($_GET['action'])
+		{
+		//- Table actions
+
+			//- Create table (=table_create)
+			case "table_create":
+				$num = intval($_POST['rows']);
+				$name = $_POST['tablename'];
+				$primary_keys = array();
+				for($i=0; $i<$num; $i++)
+				{
+					if($_POST[$i.'_field']!="" && isset($_POST[$i.'_primarykey']))
+					{
+						$primary_keys[] = $_POST[$i.'_field'];
+					}
+				}
+				$query = "CREATE TABLE ".$db->quote($name)." (";
+				for($i=0; $i<$num; $i++)
+				{
+					if($_POST[$i.'_field']!="")
+					{
+						$query .= $db->quote($_POST[$i.'_field'])." ";
+						$query .= $_POST[$i.'_type']." ";
+						if(isset($_POST[$i.'_primarykey']))
+						{
+							if(count($primary_keys)==1)
+							{
+								$query .= "PRIMARY KEY ";
+								if(isset($_POST[$i.'_autoincrement']) && $db->getType() != "SQLiteDatabase")
+									$query .=  "AUTOINCREMENT ";
+							}
+							$query .= "NOT NULL ";
+						}
+						if(!isset($_POST[$i.'_primarykey']) && isset($_POST[$i.'_notnull']))
+							$query .= "NOT NULL ";
+						if($_POST[$i.'_defaultoption']!='defined' && $_POST[$i.'_defaultoption']!='none' && $_POST[$i.'_defaultoption']!='expr')
+							$query .= "DEFAULT ".$_POST[$i.'_defaultoption']." ";
+						elseif($_POST[$i.'_defaultoption']=='expr')
+							$query .= "DEFAULT (".$_POST[$i.'_defaultvalue'].") ";
+						elseif(isset($_POST[$i.'_defaultvalue']) && $_POST[$i.'_defaultoption']=='defined')
+						{
+							$typeAffinity = get_type_affinity($_POST[$i.'_type']);
+							if(($typeAffinity=="INTEGER" || $typeAffinity=="REAL" || $typeAffinity=="NUMERIC") && is_numeric($_POST[$i.'_defaultvalue']))
+								$query .= "DEFAULT ".$_POST[$i.'_defaultvalue']."  ";
+							else
+								$query .= "DEFAULT ".$db->quote($_POST[$i.'_defaultvalue'])." ";
+						}
+						$query = substr($query, 0, -1);
+						$query .= ", ";
+					}
+				}
+				if (count($primary_keys)>1)
+				{
+					$compound_key = "";
+					foreach ($primary_keys as $primary_key)
+					{
+						$compound_key .= ($compound_key=="" ? "" : ", ") . $db->quote($primary_key);
+					}
+					$query .= "PRIMARY KEY (".$compound_key."), ";
+				}
+				$query = substr($query, 0, -2);
+				$query .= ")";
+				$result = $db->query($query);
+				if($result === false)
+					$completed = $db->getError(true);
+				else
+					$completed = $lang['tbl']." '".htmlencode($_POST['tablename'])."' ".$lang['created'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
+				$params->redirect(($result===false ? array() : array('action'=>'column_view', 'table'=>$name) ), $completed);
+				break;
+
+			//- Empty table (=table_empty)
+			case "table_empty":
+				$query1 = "DELETE FROM ".$db->quote_id($_GET['table']).";";
+				$result1 = $db->query($query1);
+				if($result1 === false)
+					$completed = $db->getError(true);
+				if(isset($_POST['vacuum']) && $_POST['vacuum'])
+				{
+					$query2 = "VACUUM;";
+					$result2 = $db->query($query2);
+				}
+				else
+					$query2 = "";
+				if($result1 !== false)
+					$completed = $lang['tbl']." '".htmlencode($_GET['table'])."' ".$lang['emptied'].".<br/><span style='font-size:11px;'>".htmlencode($query1)."<br />".htmlencode($query2)."</span>";
+				$params->redirect(($result1===false ? array() : array('action'=>'row_view') ), $completed);
+				break;
+
+			//- Create view (=view_create)
+			case "view_create":
+				$query = "CREATE VIEW ".$db->quote($_POST['viewname'])." AS ".$_POST['select'];
+				$result = $db->query($query);
+				if($result === false)
+					$completed = $db->getError(true);
+				else
+					$completed = $lang['view']." '".htmlencode($_POST['viewname'])."' ".$lang['created'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
+				$params->redirect(($result===false ? array() : array('action'=>'column_view', 'table'=>$_POST['viewname']) ), $completed);
+				break;
+
+			//- Drop table (=table_drop)
+			case "table_drop":
+				$query1 = "DROP TABLE ".$db->quote_id($_GET['table']).";";
+				$result1=$db->query($query1);
+				if($result1 === false)
+					$completed = $db->getError(true);
+				if(isset($_POST['vacuum']) && $_POST['vacuum'])
+				{
+					$query2 = "VACUUM;";
+					$result2 = $db->query($query2);
+				}
+				else
+					$query2 = "";
+				if($result1 !== false)
+				{
+					$target_table = null;
+					$completed = $lang['tbl']." '".htmlencode($_GET['table'])."' ".$lang['dropped'].".<br/><span style='font-size:11px;'>".htmlencode($query1)."<br />".htmlencode($query2)."</span>";;
+				}
+				$params->redirect(array('table'=>null), $completed);
+				break;
+
+			//- Drop view (=view_drop)
+			case "view_drop":
+				$query = "DROP VIEW ".$db->quote_id($_POST['viewname']);
+				$result=$db->query($query);
+				if($result === false)
+					$completed = $db->getError(true);
+				else
+					$completed = $lang['view']." '".htmlencode($_POST['viewname'])."' ".$lang['dropped'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
+				$params->redirect(array('table'=>null), $completed);
+				break;
+
+			//- Rename table (=table_rename)
+			case "table_rename":
+				$query = "ALTER TABLE ".$db->quote_id($_GET['table'])." RENAME TO ".$db->quote($_POST['newname']);
+				$type = $db->getTypeOfTable($_GET['table']);
+				if($db->getVersion()==3 && $type=='table' // SQLite 3 can rename tables, not views 
+					// In SQL(ite) table names are case-insensitve, so changing is not supported by SQLite.
+					// But table names are stored and displayed case sensitive, so we use the workaround for case sensitive renaming.
+					&& !($_GET['table'] !== $_POST['newname'] && strtolower($_GET['table']) === strtolower($_POST['newname']))
+					)
+					$result = $db->query($query, true);
+				else
+					// Workaround can rename tables of sqlite2 and views of both sqlite versions. Can also do case sensitive renames. 
+					$result = $db->query($query, false); 
+				if($result === false)
+					$completed = $db->getError(true);
+				else
+				{
+					$completed = $lang['tbl']." '".htmlencode($_GET['table'])."' ".$lang['renamed']." '".htmlencode($_POST['newname'])."'.<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
+					$target_table = $_POST['newname'];
+				}
+				$params->redirect(array('action'=>'row_view', 'table'=>$_POST['newname']), $completed);
+				break;
+
+			//- Search table (=table_search)
+			case "table_search":
+				$searchValues = array();
+				$searchOperators = array();
+
+				$tableInfo = $db->getTableInfo($target_table);
+				$j = 0;
+				$whereExpr = array();
+				for($i=0; $i<sizeof($tableInfo); $i++)
+				{
+					$field = $tableInfo[$i][1];
+					$operator = $_POST['field_'.$i.'_operator'];
+					$searchOperators[$field] = $operator;
+					$value = $_POST['field_'.$i.'_value'];
+					if($value!="" || $operator=="!= ''" || $operator=="= ''" || $operator == 'IS NULL' || $operator == 'IS NOT NULL')
+					{
+						if($operator=="= ''" || $operator=="!= ''" || $operator == 'IS NULL' || $operator == 'IS NOT NULL')
+							$whereExpr[$j] = $db->quote_id($field)." ".$operator;
+						else{
+							if($operator == "LIKE%"){
+								$operator = "LIKE";
+								if(!preg_match('/(^%)|(%$)/', $value)) $value = '%'.$value.'%';
+								$searchValues[$field] = array($value);
+								$valueQuoted = $db->quote($value);
+							}
+							elseif($operator == 'IN' || $operator == 'NOT IN')
+							{
+								$value = trim($value, '() ');
+								$values = explode(',',$value);
+								$values = array_map('trim', $values, array_fill(0,count($values),' \'"'));
+								if($operator == 'IN')
+									$searchValues[$field] = $values;
+								$values = array_map(array($db, 'quote'), $values);
+								$valueQuoted = '(' .implode(', ', $values) . ')';
+							}
+							else
+							{
+								$searchValues[$field] = array($value);
+								$valueQuoted = $db->quote($value);
+							}
+							$whereExpr[$j] = $db->quote_id($field)." ".$operator." ".$valueQuoted;
+						}
+						$j++;
+					}
+				}
+				$searchWhere = '';
+				if(sizeof($whereExpr)>0)
+				{
+					$searchWhere .= " WHERE ".$whereExpr[0];
+					for($i=1; $i<sizeof($whereExpr); $i++)
+					{
+						$searchWhere .= " AND ".$whereExpr[$i];
+					}
+				}
+				$searchID = md5($searchWhere);
+				$_SESSION[COOKIENAME.'search'][$searchID] = array(
+					'where' => $searchWhere,
+					'values' => $searchValues,
+					'operators' => $searchOperators
+					);
+				$params->redirect(array('action'=>'table_search','search'=>$searchID));
+			break;
+
+		//- Row actions
+
+			//- Create row (=row_create)
+			case "row_create":
+				$completed = "";
+				$num = $_POST['newRows'];
+				$z = 0;
+				$error = false;
+
+				$tableInfo = $db->getTableInfo($target_table);
+
+				for($i=0; $i<$num; $i++)
+				{
+					if(!isset($_POST[$i.":ignore"]))
+					{
+						$query_cols = "";
+						$query_vals = "";
+						$all_default = true;
+						for($j=0; $j<sizeof($tableInfo); $j++)
+						{
+							$null = isset($_POST[$j."_null"][$i]);
+							$type = strtoupper($tableInfo[$j]['type']);
+							$typeAffinity = get_type_affinity($type);
+							if(!$null && isset($_POST[$i.":".$j]))
+								$value = $_POST[$i.":".$j];
+							else
+								$value = "";
+							if(preg_match('/^BLOB/', $type))
+							{
+								if($_FILES[$i.":".$j]["error"] == UPLOAD_ERR_OK && is_file($_FILES[$i.":".$j]["tmp_name"]))
+									$blobFiles[$j] = $_FILES[$i.":".$j]["tmp_name"];
+								else
+									$blobFiles[$j] = null;
+							}
+							elseif($value===$tableInfo[$j]['dflt_value'])
+							{
+								// if the value is the default value, skip it
+								continue;
+							}
+							$all_default = false;
+							$query_cols .= $db->quote_id($tableInfo[$j]['name']).",";
+
+							$function = $_POST["function_".$j][$i];
+							if($function!="")
+								$query_vals .= $function."(";
+							if(preg_match('/^BLOB/', $type))
+								$query_vals .= ':blobval'.$j;
+							elseif(($typeAffinity=="TEXT" || $typeAffinity=="NONE") && !$null)
+								$query_vals .= $db->quote($value);
+							elseif(($typeAffinity=="INTEGER" || $typeAffinity=="REAL"|| $typeAffinity=="NUMERIC") && $value=="")
+								$query_vals .= "NULL";
+							elseif($null)
+								$query_vals .= "NULL";
+							else
+								$query_vals .= $db->quote($value);
+							if($function!="")
+								$query_vals .= ")";
+							$query_vals .= ",";
+						}
+						$query = "INSERT INTO ".$db->quote_id($target_table);
+						if(!$all_default)
+						{
+							$query_cols = substr($query_cols, 0, strlen($query_cols)-1);
+							$query_vals = substr($query_vals, 0, strlen($query_vals)-1);
+
+							$query.=" (". $query_cols . ") VALUES (". $query_vals. ")";
+						} else {
+							$query .= " DEFAULT VALUES";
+						}
+						if(isset($blobFiles))
+						{
+							// blob files need to be done using a prepared statement because the query size would be too large
+							$handle = $db->prepareQuery($query);
+							foreach($blobFiles as $j=>$filename)
+								$db->bindValue($handle, ':blobval'.$j, file_get_contents($filename), 'blob');
+
+							$result1 = $db->executePrepared($handle, false);
+						}
+						else
+							$result1 = $db->query($query);
+						if($result1===false)
+							$error = true;
+						$completed .= "<span style='font-size:11px;'>".htmlencode($query)."</span><br/>";
+						$z++;
+					}
+				}
+				if($error)
+					$completed = $db->getError(true);
+				else
+					$completed = $z." ".$lang['rows']." ".$lang['inserted'].".<br/><br/>".$completed;
+				$params->redirect(array('action'=>'row_view'), $completed);
+				break;
+
+			//- Delete row (=row_delete)
+			case "row_delete":
+				$pks = json_decode($_GET['pk']);
+
+				$query = "DELETE FROM ".$db->quote_id($target_table)." WHERE (".$db->wherePK($target_table,json_decode($pks[0])).")";
+				for($i=1; $i<sizeof($pks); $i++)
+				{
+					$query .= " OR (".$db->wherePK($target_table,json_decode($pks[$i])).")";
+				}
+				$result = $db->query($query);
+				if($result === false)
+					$completed = $db->getError(true);
+				else
+					$completed = sizeof($pks)." ".$lang['rows']." ".$lang['deleted'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
+				$params->redirect(array('action'=>'row_view'), $completed);
+				break;
+
+			//- Edit row (=row_edit)
+			case "row_edit":
+				$pks = json_decode($_GET['pk']);
+				$z = 0;
+
+				$tableInfo = $db->getTableInfo($target_table);
+
+				if(isset($_POST['new_row']))
+					$completed = "";
+				else
+					$completed = sizeof($pks)." ".$lang['rows']." ".$lang['affected'].".<br/><br/>";
+
+				for($i=0; $i<sizeof($pks); $i++)
+				{
+					if(isset($_POST['new_row']))
+					{
+						$query_cols = "";
+						$query_vals = "";
+						$all_default = true;
+						for($j=0; $j<sizeof($tableInfo); $j++)
+						{
+							$null = isset($_POST[$j."_null"][$i]);
+							$type = strtoupper($tableInfo[$j]['type']);
+							$typeAffinity = get_type_affinity($type);
+							if(!$null)
+							{
+								if(preg_match('/^BLOB/', $type))
+								{
+									if(isset($_POST["row_".$i."_field_".$j."_blob_use"]) && $_POST["row_".$i."_field_".$j."_blob_use"]=='old')
+									{
+										$select = 'SELECT '.$db->quote_id($tableInfo[$j]['name']).' AS \'blob\' FROM '.$db->quote_id($target_table).' WHERE '.$db->wherePK($target_table, json_decode($pks[$i]));
+										$bl = $db->select($select);
+										$blobFiles[$j] = $bl['blob'];
+										unset($bl);
+									}
+									else
+									{
+										if($_FILES[$i.":".$j]["error"] == UPLOAD_ERR_OK && is_file($_FILES[$i.":".$j]["tmp_name"]))
+											$blobFiles[$j] = file_get_contents($_FILES[$i.":".$j]["tmp_name"]);
+										else
+											$blobFiles[$j] = null;
+									}
+								}
+								else
+									$value = $_POST[$j][$i];
+							}
+							else
+								$value = "";
+							if(!preg_match('/^BLOB/', $type) && $value===$tableInfo[$j]['dflt_value'])
+							{
+								// if the value is the default value, skip it
+								continue;
+							}
+							$all_default = false;
+							$query_cols .= $db->quote_id($tableInfo[$j]['name']).",";
+
+							$function = $_POST["function_".$j][$i];
+							if($function!="")
+								$query_vals .= $function."(";
+
+							if(preg_match('/^BLOB/', $type))
+								$query_vals .= ':blobval'.$j;
+							elseif(($typeAffinity=="TEXT" || $typeAffinity=="NONE") && !$null)
+								$query_vals .= $db->quote($value);
+							elseif(($typeAffinity=="INTEGER" || $typeAffinity=="REAL"|| $typeAffinity=="NUMERIC") && $value=="")
+								$query_vals .= "NULL";
+							elseif($null)
+								$query_vals .= "NULL";
+							else
+								$query_vals .= $db->quote($value);
+							if($function!="")
+								$query_vals .= ")";
+							$query_vals .= ",";
+						}
+						$query = "INSERT INTO ".$db->quote_id($target_table);
+						if(!$all_default)
+						{
+							$query_cols = substr($query_cols, 0, strlen($query_cols)-1);
+							$query_vals = substr($query_vals, 0, strlen($query_vals)-1);
+
+							$query.=" (". $query_cols . ") VALUES (". $query_vals. ")";
+						} else {
+							$query .= " DEFAULT VALUES";
+						}
+
+						if(isset($blobFiles))
+						{
+							// blob files need to be done using a prepared statement because the query size would be too large
+							$handle = $db->prepareQuery($query);
+							foreach($blobFiles as $j=>$blobval)
+								$db->bindValue($handle, ':blobval'.$j, $blobval, 'blob');
+
+							$result1 = $db->executePrepared($handle, false);
+						}
+						else
+							$result1 = $db->query($query);
+						if($result1===false)
+							$error = true;
+						$z++;
+					}
+					else
+					{
+						$query = "UPDATE ".$db->quote_id($target_table)." SET ";
+						for($j=0; $j<sizeof($tableInfo); $j++)
+						{
+							$type = strtoupper($tableInfo[$j]['type']);
+							$function = $_POST["function_".$j][$i];
+							$null = isset($_POST[$j."_null"][$i]);
+							// if the old BLOB value is chosen to be kept, just skip this column
+							if(!$null && preg_match('/^BLOB/', $type) && isset($_POST["row_".$i."_field_".$j."_blob_use"]) && $_POST["row_".$i."_field_".$j."_blob_use"]=='old')
+								continue;
+							if(!$null && preg_match('/^BLOB/', $type))
+							{
+								if($_FILES[$i.":".$j]["error"] == UPLOAD_ERR_OK && is_file($_FILES[$i.":".$j]["tmp_name"]))
+									$blobFiles[$j] = $_FILES[$i.":".$j]["tmp_name"];
+								else
+									$blobFiles[$j] = null;
+							}
+
+							$query .= $db->quote_id($tableInfo[$j]['name'])."=";
+							if($function!="")
+								$query .= $function."(";
+							if($null)
+								$query .= "NULL";
+							else
+							{
+								if(preg_match('/^BLOB/', $type))
+									$query .= ':blobval'.$j;
+								else
+									$query .= $db->quote($_POST[$j][$i]);
+							}
+							if($function!="")
+								$query .= ")";
+							$query .= ", ";
+						}
+						$query = substr($query, 0, -2);
+						$query .= " WHERE ".$db->wherePK($target_table, json_decode($pks[$i]));
+						if(isset($blobFiles))
+						{
+							// blob files need to be done using a prepared statement because the query size would be too large
+							$handle = $db->prepareQuery($query);
+							foreach($blobFiles as $j=>$filename)
+								$db->bindValue($handle, ':blobval'.$j, file_get_contents($filename), 'blob');
+
+							$result1 = $db->executePrepared($handle, false);
+						}
+						else
+							$result1 = $db->query($query);
+						if($result1===false)
+						{
+							$error = true;
+						}
+					}
+					$completed .= "<span style='font-size:11px;'>".htmlencode($query)."</span><br/>";
+				}
+				if($error)
+					$completed = $db->getError(true);
+				elseif(isset($_POST['new_row']))
+					$completed = $z." ".$lang['rows']." ".$lang['inserted'].".<br/><br/>".$completed;
+				$params->redirect(array('action'=>'row_view'), $completed);
+				break;
+
+
+			case "row_get_blob":
+				$blobVal = $db->select("SELECT ".$db->quote_id($_GET['column'])." AS 'blob' FROM ".$db->quote_id($target_table)." WHERE ".$db->wherePK($target_table, json_decode($_GET['pk'])));
+				$filename = 'download';
+				if(function_exists('getimagesizefromstring'))     // introduced in PHP 5.4.0
+					$imagesize = getimagesizefromstring($blobVal['blob']);
+				if(isset($imagesize) && $imagesize!==false && isset($imagesize['mime']))
+					$mimetype = $imagesize['mime'];
+				elseif(class_exists('finfo'))  // included since php 5.3.0, but might be disabled on Windows
+				{
+					$finfo    = new finfo(FILEINFO_MIME);
+					$mimetype = $finfo->buffer($blobVal['blob']);
+				}
+				else
+					$mimetype = "application/octet-stream";
+
+				if(isset($imagesize) && $imagesize!==false && isset($imagesize[2]))
+					$extension = image_type_to_extension($imagesize[2]);
+				else
+					$extension = '.blob';
+				ob_end_clean();
+				header('Content-Length: '.strlen($blobVal['blob']));
+				header("Content-type: ".$mimetype);
+				if(isset($_GET['download_blob']) && $_GET['download_blob'])
+					header('Content-Disposition: attachment; filename="'.$filename.$extension.'";');
+				header("Pragma: no-cache");
+				header("Expires: 0");
+				echo $blobVal['blob'];
+				exit;
+				break;
+
+
+		//- Column actions
+
+			//- Create column (=column_create)
+			case "column_create":
+				$num = intval($_POST['rows']);
+				for($i=0; $i<$num; $i++)
+				{
+					if($_POST[$i.'_field']!="")
+					{
+						$query = "ALTER TABLE ".$db->quote_id($target_table)." ADD ".$db->quote($_POST[$i.'_field'])." ";
+						$query .= $_POST[$i.'_type']." ";
+						if(isset($_POST[$i.'_primarykey']))
+							$query .= "PRIMARY KEY ";
+						if(isset($_POST[$i.'_notnull']))
+							$query .= "NOT NULL ";
+						if($_POST[$i.'_defaultoption']!='defined' && $_POST[$i.'_defaultoption']!='none' && $_POST[$i.'_defaultoption']!='expr')
+							$query .= "DEFAULT ".$_POST[$i.'_defaultoption']." ";
+						elseif($_POST[$i.'_defaultoption']=='expr')
+							$query .= "DEFAULT (".$_POST[$i.'_defaultvalue'].") ";
+						elseif(isset($_POST[$i.'_defaultvalue']) && $_POST[$i.'_defaultoption']=='defined')
+						{
+							$typeAffinity = get_type_affinity($_POST[$i.'_type']);
+							if(($typeAffinity=="INTEGER" || $typeAffinity=="REAL" || $typeAffinity=="NUMERIC") && is_numeric($_POST[$i.'_defaultvalue']))
+								$query .= "DEFAULT ".$_POST[$i.'_defaultvalue']."  ";
+							else
+								$query .= "DEFAULT ".$db->quote($_POST[$i.'_defaultvalue'])." ";
+						}
+						if($db->getVersion()==3 &&
+							($_POST[$i.'_defaultoption']=='defined' || $_POST[$i.'_defaultoption']=='none' || $_POST[$i.'_defaultoption']=='NULL')
+							// Sqlite3 cannot add columns with default values that are not constant
+							&& !isset($_POST[$i.'_primarykey'])
+							// sqlite3 cannot add primary key columns
+							&& (!isset($_POST[$i.'_notnull']) || $_POST[$i.'_defaultoption']!='none')
+							// SQLite3 cannot add NOT NULL columns without DEFAULT even if the table is empty
+							)
+							// use SQLITE3 ALTER TABLE ADD COLUMN
+							$result = $db->query($query, true);
+						else
+							// use ALTER TABLE workaround
+							$result = $db->query($query, false);
+						if($result===false)
+							$error = true;
+					}
+				}
+				if($error)
+					$completed = $db->getError(true);
+				else
+					$completed = $lang['tbl']." '".htmlencode($target_table)."' ".$lang['altered'].".";
+				$params->redirect(array('action'=>'column_view'), $completed);
+				break;
+
+			//- Delete column (=column_delete)
+			case "column_delete":
+				$pks = explode(":", $_GET['pk']);
+				$query = "ALTER TABLE ".$db->quote_id($target_table).' DROP '.$db->quote_id($pks[0]);
+				for($i=1; $i<sizeof($pks); $i++)
+				{
+					$query .= ", DROP ".$db->quote_id($pks[$i]);
+				}
+				$result = $db->query($query);
+				if($result === false)
+					$completed = $db->getError(true);
+				else
+					$completed = $lang['tbl']." '".htmlencode($target_table)."' ".$lang['altered'].".";
+				$params->redirect(array('action'=>'column_view'), $completed);
+				break;
+
+			//- Add a primary key (=primarykey_add)
+			case "primarykey_add":
+				$pks = explode(":", $_GET['pk']);
+				$query = "ALTER TABLE ".$db->quote_id($target_table).' ADD PRIMARY KEY ('.$db->quote_id($pks[0]);
+				for($i=1; $i<sizeof($pks); $i++)
+				{
+					$query .= ", ".$db->quote_id($pks[$i]);
+				}
+				$query .= ")";
+				$result = $db->query($query);
+				if($result === false)
+					$completed = $db->getError(true);
+				else
+					$completed = $lang['tbl']." '".htmlencode($target_table)."' ".$lang['altered'].".";
+				$params->redirect(array('action'=>'column_view'), $completed);
+				break;
+
+			//- Edit column (=column_edit)
+			case "column_edit":
+				$query = "ALTER TABLE ".$db->quote_id($target_table).' CHANGE '.$db->quote_id($_POST['oldvalue'])." ".$db->quote($_POST['0_field'])." ".$_POST['0_type'];
+				$result = $db->query($query);
+				if($result === false)
+					$completed = $db->getError(true);
+				else
+					$completed = $lang['tbl']." '".htmlencode($target_table)."' ".$lang['altered'].".";
+				$params->redirect(array('action'=>'column_view'), $completed);
+				break;
+
+			//- Delete trigger (=trigger_delete)
+			case "trigger_delete":
+				$query = "DROP TRIGGER ".$db->quote_id($_GET['pk']);
+				$result = $db->query($query);
+				if($result === false)
+					$completed = $db->getError(true);
+				else
+					$completed = $lang['trigger']." '".htmlencode($_GET['pk'])."' ".$lang['deleted'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
+				$params->redirect(array('action'=>'column_view'), $completed);
+				break;
+
+			//- Delete index (=index_delete)
+			case "index_delete":
+				$query = "DROP INDEX ".$db->quote_id($_GET['pk']);
+				$result = $db->query($query);
+				if($result === false)
+					$completed = $db->getError(true);
+				else
+					$completed = $lang['index']." '".htmlencode($_GET['pk'])."' ".$lang['deleted'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
+				$params->redirect(array('action'=>'column_view'), $completed);
+				break;
+
+			//- Create trigger (=trigger_create)
+			case "trigger_create":
+				$str = "CREATE TRIGGER ".$db->quote($_POST['trigger_name']);
+				if($_POST['beforeafter']!="")
+					$str .= " ".$_POST['beforeafter'];
+				$str .= " ".$_POST['event']." ON ".$db->quote_id($target_table);
+				if(isset($_POST['foreachrow']))
+					$str .= " FOR EACH ROW";
+				if($_POST['whenexpression']!="")
+					$str .= " WHEN ".$_POST['whenexpression'];
+				$str .= " BEGIN";
+				$str .= " ".$_POST['triggersteps'];
+				$str .= " END";
+				$query = $str;
+				$result = $db->query($query);
+				if($result === false)
+					$completed = $db->getError(true);
+				else
+					$completed = $lang['trigger']." ".$lang['created'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
+				$params->redirect(array('action'=>'column_view'), $completed);
+				break;
+
+			//- Create index (=index_create)
+			case "index_create":
+				$num = $_POST['num'];
+				if($_POST['name']=="")
+				{
+					$completed = $lang['blank_index'];
+				}
+				else if($_POST['0_field']=="")
+				{
+					$completed = $lang['one_index'];
+				}
+				else
+				{
+					$str = "CREATE ";
+					if($_POST['duplicate']=="no")
+						$str .= "UNIQUE ";
+					$str .= "INDEX ".$db->quote($_POST['name'])." ON ".$db->quote_id($target_table)." (";
+					$str .= $db->quote_id($_POST['0_field']).$_POST['0_order'];
+					for($i=1; $i<$num; $i++)
+					{
+						if($_POST[$i.'_field']!="")
+							$str .= ", ".$db->quote_id($_POST[$i.'_field']).$_POST[$i.'_order'];
+					}
+					$str .= ")";
+					if(isset($_POST['where']) && $_POST['where']!='')
+						$str.=" WHERE ".$_POST['where'];
+					$query = $str;
+					$result = $db->query($query);
+					if($result === false)
+						$completed = $db->getError(true);
+					else
+						$completed = $lang['index']." ".$lang['created'].".<br/><span style='font-size:11px;'>".htmlencode($query)."</span>";
+				}
+				$params->redirect(array('action'=>'column_view'), $completed);
+				break;
+		}
+	}
+}
+
+// if not in debug mode, destroy all output until here
+if($debug)
+	$bufferedOutput = ob_get_contents();
+ob_end_clean();
+
+//- HTML: output starts here
+header('Content-Type: text/html; charset=utf-8');
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>

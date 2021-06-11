@@ -109,8 +109,9 @@
             logger('INFO', $logstring);
         }
         write_stop_in_database($status_piager_key);
-        sleep(1);
-        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_cooling_compressor_value_to_1'));
+        # wait 10 seconds, needed by pi_ager_loop.py to detect stop request and turning off all gpio outputs
+        sleep(10);
+/*        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_cooling_compressor_value_to_1'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_heater_value_to_1'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_humidifier_value_to_1'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_circulating_air_value_to_1'));
@@ -118,6 +119,7 @@
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_uv_value_to_1'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_light_value_to_1'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_dehumidifier_value_to_1'));
+*/
         $logstring = 'Pi-Ager '._('stopped');
         logger('INFO', $logstring);
     }
