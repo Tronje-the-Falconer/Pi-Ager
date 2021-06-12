@@ -7,7 +7,7 @@
                                     include 'modules/write_notification_db.php';
                                     
                                 ?>
-                                <h2 class="art-postheader"><?php echo _('messenger'); ?></h2>
+                                <h2 class="art-postheader"><?php echo _('exceptions'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Messenger-->
                                 <div class="hg_container" >
                                     <form method="post" name="messenger">
@@ -130,7 +130,7 @@
                                                 }
                                             ?>
                                         </table>
-                                    <button class="art-button" name="save_messenger_values" value="save_messenger_values" onclick="return confirm('<?php echo _('ATTENTION: save messenger values?');?>');"><?php echo _('save'); ?></button>
+                                    <button class="art-button" name="save_messenger_values" value="save_messenger_values" onclick="return confirm('<?php echo _('ATTENTION: save messenger values? IMPORTANT: after modifications in this area you have to reboot the system! ');?>');"><?php echo _('save'); ?></button>
                                     </form>
                                     <form method="post" name="add_messenger">
                                         <table id="show_messenger" class="show_messenger" style="width: 100%;">
@@ -167,12 +167,12 @@
                                                          <input type="checkbox" name="add_checked_messenger_active_true" value="1"></td>
                                             </tr>
                                         </table>
-                                        <button class="art-button" name="add_messenger" value="add_messenger" onclick="return confirm('<?php echo _('ATTENTION: add messenger?');?>');"><?php echo _('add'); ?></button>
+                                        <button class="art-button" name="add_messenger" value="add_messenger" onclick="return confirm('<?php echo _('ATTENTION: add messenger? IMPORTANT: after modifications in this area you have to reboot the system!');?>');"><?php echo _('add'); ?></button>
                                     </form>
                                     <form method="post" name="delete_messenger">
                                         <table id="show_messenger" class="show_messenger" style="width: 100%;">
                                             <tr>
-                                                <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" min="2" step="1" style="width: 90%; text-align: right;" ></td>
+                                                <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" min="7" step="1" style="width: 90%; text-align: right;" ></td>
                                             </tr>
                                             <tr>
                                                 <td colspan=2><button class="art-button" name="delete_messenger" value="delete_messenger" onclick="return confirm('<?php echo _('ATTENTION: delete messenger?');?>');"><?php echo _('delete'); ?></button></td>
