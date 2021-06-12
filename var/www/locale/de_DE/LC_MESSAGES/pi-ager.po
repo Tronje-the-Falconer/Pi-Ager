@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2021-06-12 12:52+0200\n"
-"PO-Revision-Date: 2021-06-12 13:29+0200\n"
+"PO-Revision-Date: 2021-06-12 13:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -2087,12 +2087,16 @@ msgid ""
 "ATTENTION: save messenger values? IMPORTANT: after modifications in this "
 "area you have to reboot the system! "
 msgstr ""
+"ACHTUNG: Messenger Werte speichern? WICHTIG: nach Änderungen in diesem "
+"Bereich muss das System neu gestartet werden! "
 
 #: notification.php:170
 msgid ""
 "ATTENTION: add messenger? IMPORTANT: after modifications in this area you "
 "have to reboot the system!"
 msgstr ""
+"ACHTUNG: Messenger Werte hinzufügen? WICHTIG: nach Änderungen in diesem "
+"Bereich muss das System neu gestartet werden!"
 
 #: notification.php:175 notification.php:361 notification.php:494
 #: notification.php:593
