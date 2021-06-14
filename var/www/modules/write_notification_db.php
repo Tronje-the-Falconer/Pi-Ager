@@ -5,19 +5,19 @@
         
         $count_messenger_number_rows = $_POST['count_messenger_number_rows'];
         $index_row = 0;
-        $index_row_id = 1;
+        // $index_row_id = 1;
         while ($index_row < $count_messenger_number_rows) {
             $messenger_id = $_POST['messenger_id_' . $index_row];
-            $messenger_exception = $_POST['messenger_exception_' . $index_row_id ];
-            $checked_messenger_e_mail_true = $_POST['checked_messenger_e_mail_true_' . $index_row_id];
-            $checked_messenger_pushover_true = $_POST['checked_messenger_pushover_true_' . $index_row_id];
-            $checked_messenger_telegram_true = $_POST['checked_messenger_telegram_true_' . $index_row_id];
-            $messenger_alarm = $_POST['messenger_alarm_' . $index_row_id];
-            $checked_messenger_raise_exeption_true = $_POST['checked_messenger_raise_exeption_true_' . $index_row_id];
-            $checked_messenger_active_true = $_POST['checked_messenger_active_true_' . $index_row_id];
+            $messenger_exception = $_POST['messenger_exception_' . $messenger_id ];
+            $checked_messenger_e_mail_true = $_POST['checked_messenger_e_mail_true_' . $messenger_id];
+            $checked_messenger_pushover_true = $_POST['checked_messenger_pushover_true_' . $messenger_id];
+            $checked_messenger_telegram_true = $_POST['checked_messenger_telegram_true_' . $messenger_id];
+            $messenger_alarm = $_POST['messenger_alarm_' . $messenger_id];
+            $checked_messenger_raise_exeption_true = $_POST['checked_messenger_raise_exeption_true_' . $messenger_id];
+            $checked_messenger_active_true = $_POST['checked_messenger_active_true_' . $messenger_id];
             
             write_messenger_values($messenger_id, $messenger_exception, $checked_messenger_e_mail_true, $checked_messenger_pushover_true, $checked_messenger_telegram_true, $messenger_alarm, $checked_messenger_raise_exeption_true, $checked_messenger_active_true );
-            $index_row_id++;
+            // $index_row_id++;
             $index_row++;
         }
 
@@ -46,19 +46,19 @@
         
         $count_event_number_rows = $_POST['count_event_number_rows'];
         $index_row = 0;
-        $index_row_id = 1;
+        // $index_row_id = 1;
         while ($index_row < $count_event_number_rows) {
             $event_id = $_POST['event_id_' . $index_row];
-            $event_event = $_POST['event_event_' . $index_row_id ];
-            $checked_event_e_mail_true = $_POST['checked_event_e_mail_true_' . $index_row_id];
-            $checked_pushover_true = $_POST['checked_event_pushover_true_' . $index_row_id];
-            $checked_telegram_true = $_POST['checked_event_telegram_true_' . $index_row_id];
-            $event_alarm = $_POST['event_alarm_' . $index_row_id];
-            $event_eventtext = $_POST['event_eventtext_' . $index_row_id];
-            $checked_active_true = $_POST['checked_event_active_true_' . $index_row_id];
+            $event_event = $_POST['event_event_' . $event_id ];
+            $checked_event_e_mail_true = $_POST['checked_event_e_mail_true_' . $event_id];
+            $checked_pushover_true = $_POST['checked_event_pushover_true_' . $event_id];
+            $checked_telegram_true = $_POST['checked_event_telegram_true_' . $event_id];
+            $event_alarm = $_POST['event_alarm_' . $event_id];
+            $event_eventtext = $_POST['event_eventtext_' . $event_id];
+            $checked_active_true = $_POST['checked_event_active_true_' . $event_id];
             
             write_event_values($event_id, $event_event, $checked_event_e_mail_true, $checked_pushover_true, $checked_telegram_true, $event_alarm, $event_eventtext, $checked_active_true );
-            $index_row_id++;
+            // $index_row_id++;
             $index_row++;
         }
 
@@ -87,18 +87,18 @@
         
         $count_alarm_number_rows = $_POST['count_alarm_number_rows'];
         $index_row = 0;
-        $index_row_id = 1;
+        // $index_row_id = 1;
         while ($index_row < $count_alarm_number_rows) {
             $alarm_id = $_POST['alarm_id_' . $index_row];
-            $alarm_alarm = $_POST['alarm_alarm_' . $index_row_id ];
-            $alarm_replication = $_POST['alarm_replication_' . $index_row_id];
-            $alarm_sleep = $_POST['alarm_sleep_' . $index_row_id];
-            $alarm_high_time = $_POST['alarm_high_time_' . $index_row_id];
-            $alarm_low_time = $_POST['alarm_low_time_' . $index_row_id];
-            $alarm_waveform = $_POST['alarm_waveform_' . $index_row_id];
-            $alarm_frequency = $_POST['alarm_frequency_' . $index_row_id];
+            $alarm_alarm = $_POST['alarm_alarm_' . $alarm_id ];
+            $alarm_replication = $_POST['alarm_replication_' . $alarm_id];
+            $alarm_sleep = $_POST['alarm_sleep_' . $alarm_id];
+            $alarm_high_time = $_POST['alarm_high_time_' . $alarm_id];
+            $alarm_low_time = $_POST['alarm_low_time_' . $alarm_id];
+            $alarm_waveform = $_POST['alarm_waveform_' . $alarm_id];
+            $alarm_frequency = $_POST['alarm_frequency_' . $alarm_id];
             write_alarm_values($alarm_id, $alarm_alarm, $alarm_replication, $alarm_sleep, $alarm_high_time, $alarm_low_time, $alarm_waveform, $alarm_frequency );
-            $index_row_id++;
+            // $index_row_id++;
             $index_row++;
         }
 
@@ -155,13 +155,13 @@
         unset($_POST['save_e_mail_recipient_values']);
         $count_e_mail_recipients_number_rows = $_POST['count_e_mail_recipients_number_rows'];
         $index_row = 0;
-        $index_row_id = 1;
+        // $index_row_id = 1;
         while ($index_row < $count_e_mail_recipients_number_rows) {
             $e_mail_recipients_id = $_POST['e_mail_recipient_id_' . $index_row];
-            $e_mail_recipients_to_mail = $_POST['e_mail_recipient_to_mail_' . $index_row_id ];
-            $e_mail_recipients_active = $_POST['checked_e_mail_recipient_true_' . $index_row_id];
+            $e_mail_recipients_to_mail = $_POST['e_mail_recipient_to_mail_' . $e_mail_recipients_id ];
+            $e_mail_recipients_active = $_POST['checked_e_mail_recipient_true_' . $e_mail_recipients_id];
             write_mail_recipient_values($e_mail_recipients_id, $e_mail_recipients_to_mail, $e_mail_recipients_active);
-            $index_row_id++;
+            // $index_row_id++;
             $index_row++;
         }
 

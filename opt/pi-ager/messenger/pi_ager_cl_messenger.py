@@ -75,6 +75,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
         cl_fact_logic_alarm().get_instance().execute_alarm(alarm)
         pass
+        
     def handle_exception(self, cx_error):
         """
         Handle exception to create alarm or email or telegram or pushover ... class
@@ -84,7 +85,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         self.cx_error_name  = type(self.cx_error).__name__
         cl_fact_logger.get_instance().info("Exception raised: " + self.cx_error_name + " - " + str(cx_error) + self.build_alarm_subject() + self.build_alarm_message() )
        
-     
+        self.it_messenger_exception = self.db_messenger_exception.read_data_from_db()
         for item in self.it_messenger_exception:
             if item.get('exception') == self.cx_error_name :
                 cl_fact_logger.get_instance().debug(item['exception'])
@@ -133,7 +134,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().info('Event raised: ' + event + ' with info text: '+ str(info_text) )
         
         self.event = event
-     
+        self.it_messenger_event = self.db_messenger_event.read_data_from_db()
         for item in self.it_messenger_event:
             if item.get('event') == event :
                 if (info_text == None):

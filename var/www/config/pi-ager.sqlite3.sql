@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS `system` (
 	`value`	TEXT NOT NULL DEFAULT 0,
 	`last_change`	INTEGER NOT NULL DEFAULT 0
 );
-INSERT INTO `system` (id,key,value,last_change) VALUES (1,'pi_revision','9000c1',1623433043);
+INSERT INTO `system` (id,key,value,last_change) VALUES (1,'pi_revision','9000c1',1623676126);
 INSERT INTO `system` (id,key,value,last_change) VALUES (3,'pi_ager_version','3.3.0',0);
 DROP TABLE IF EXISTS `scale2_settings`;
 CREATE TABLE IF NOT EXISTS `scale2_settings` (
@@ -139,43 +139,43 @@ CREATE TABLE IF NOT EXISTS `current_values` (
 	`value`	REAL,
 	`last_change`	INTEGER NOT NULL
 );
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (1,'sensor_temperature',22.97,1623180476);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (2,'sensor_humidity',53.42,1623180476);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (3,'status_circulating_air',0.0,1623180476);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (4,'status_cooling_compressor',0.0,1623180476);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (5,'status_exhaust_air',0.0,1623180476);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (6,'status_heater',0.0,1623180476);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (7,'status_light',0.0,1623180476);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (8,'status_uv',0.0,1623180476);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (9,'status_humidifier',0.0,1623180476);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (10,'status_dehumidifier',0.0,1623180476);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (1,'sensor_temperature',23.37,1623660980);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (2,'sensor_humidity',50.98,1623660980);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (3,'status_circulating_air',0.0,1623660980);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (4,'status_cooling_compressor',0.0,1623660980);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (5,'status_exhaust_air',0.0,1623660980);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (6,'status_heater',0.0,1623660980);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (7,'status_light',0.0,1623660980);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (8,'status_uv',0.0,1623660980);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (9,'status_humidifier',0.0,1623660980);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (10,'status_dehumidifier',0.0,1623660980);
 INSERT INTO `current_values` (id,key,value,last_change) VALUES (11,'scale1',-518.86,1621504017);
 INSERT INTO `current_values` (id,key,value,last_change) VALUES (12,'scale2',-491.908,1621504021);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (13,'status_piager',0.0,1623180459);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (14,'status_agingtable',0.0,1623508279);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (15,'status_scale1',0.0,1621504017);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (16,'status_scale2',0.0,1621504022);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (17,'status_tara_scale1',0.0,1623508280);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (18,'status_tara_scale2',0.0,1623508280);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (13,'status_piager',0.0,1623689521);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (14,'status_agingtable',0.0,1623689521);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (15,'status_scale1',0.0,1623689521);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (16,'status_scale2',0.0,1623689521);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (17,'status_tara_scale1',0.0,1623689521);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (18,'status_tara_scale2',0.0,1623689521);
 INSERT INTO `current_values` (id,key,value,last_change) VALUES (19,'agingtable_period',0.0,1622982705);
 INSERT INTO `current_values` (id,key,value,last_change) VALUES (20,'agingtable_period_starttime',1622982208.0,1622982208);
 INSERT INTO `current_values` (id,key,value,last_change) VALUES (21,'status_light_manual',0.0,1622627581);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (22,'calibrate_scale1',0.0,1623508280);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (23,'calibrate_scale2',0.0,1623508280);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (24,'calibrate_weight',0.0,1623508280);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (22,'calibrate_scale1',0.0,1623689521);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (23,'calibrate_scale2',0.0,1623689521);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (24,'calibrate_weight',0.0,1623689521);
 INSERT INTO `current_values` (id,key,value,last_change) VALUES (25,'status_uv_manual',1.0,1622578030);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (26,'temperature_meat1',23.707,1623180476);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (27,'temperature_meat2',NULL,1623180476);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (28,'temperature_meat3',NULL,1623180476);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (29,'temperature_meat4',23.541,1623180476);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (30,'sensor_dewpoint',13.0,1623180476);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (26,'temperature_meat1',24.0,1623660980);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (27,'temperature_meat2',NULL,1623660980);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (28,'temperature_meat3',NULL,1623660980);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (29,'temperature_meat4',23.916,1623660980);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (30,'sensor_dewpoint',12.66,1623660980);
 INSERT INTO `current_values` (id,key,value,last_change) VALUES (31,'sensor_extern_temperature',23.31,1611420926);
 INSERT INTO `current_values` (id,key,value,last_change) VALUES (32,'sensor_extern_humidity',38.79,1611420926);
 INSERT INTO `current_values` (id,key,value,last_change) VALUES (33,'sensor_extern_dewpoint',8.5,1611420926);
 INSERT INTO `current_values` (id,key,value,last_change) VALUES (34,'agingtable_period_day',1.0,1622982705);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (35,'scale1_thread_alive',0.0,1623508280);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (36,'scale2_thread_alive',0.0,1623508280);
-INSERT INTO `current_values` (id,key,value,last_change) VALUES (37,'aging_thread_alive',0.0,1623508279);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (35,'scale1_thread_alive',0.0,1623689521);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (36,'scale2_thread_alive',0.0,1623689521);
+INSERT INTO `current_values` (id,key,value,last_change) VALUES (37,'aging_thread_alive',0.0,1623689521);
 DROP TABLE IF EXISTS `cooling_compressor_status`;
 CREATE TABLE IF NOT EXISTS `cooling_compressor_status` (
 	`id`	INTEGER NOT NULL DEFAULT 0 PRIMARY KEY AUTOINCREMENT,
@@ -228,6 +228,8 @@ INSERT INTO `config_messenger_exception` (exception,e-mail,pushover,telegram,ala
 INSERT INTO `config_messenger_exception` (exception,e-mail,pushover,telegram,alarm,raise_exception,active,id) VALUES ('OSError',0,0,0,'short',1,1,4);
 INSERT INTO `config_messenger_exception` (exception,e-mail,pushover,telegram,alarm,raise_exception,active,id) VALUES ('cx_measurement_error',0,0,0,'short',1,1,5);
 INSERT INTO `config_messenger_exception` (exception,e-mail,pushover,telegram,alarm,raise_exception,active,id) VALUES ('cx_i2c_sht_temperature_crc_error',0,0,0,'short',1,1,6);
+INSERT INTO `config_messenger_exception` (exception,e-mail,pushover,telegram,alarm,raise_exception,active,id) VALUES ('cx_i2c_bus_error',0,0,0,'short',1,1,7);
+INSERT INTO `config_messenger_exception` (exception,e-mail,pushover,telegram,alarm,raise_exception,active,id) VALUES ('cx_i2c_sht_humidity_crc_error',0,0,0,'short',1,1,8);
 DROP TABLE IF EXISTS `config_messenger_event`;
 CREATE TABLE IF NOT EXISTS `config_messenger_event` (
 	`event`	TEXT NOT NULL,
@@ -447,14 +449,6 @@ INSERT INTO `agingtable_dryaging1` (id,modus,setpoint_humidity,setpoint_temperat
 INSERT INTO `agingtable_dryaging1` (id,modus,setpoint_humidity,setpoint_temperature,circulation_air_duration,circulation_air_period,exhaust_air_duration,exhaust_air_period,days,comment) VALUES (5,NULL,45,7,648,2952,NULL,17712,12,NULL);
 INSERT INTO `agingtable_dryaging1` (id,modus,setpoint_humidity,setpoint_temperature,circulation_air_duration,circulation_air_period,exhaust_air_duration,exhaust_air_period,days,comment) VALUES (6,NULL,33,NULL,540,3060,NULL,18360,8,NULL);
 INSERT INTO `agingtable_dryaging1` (id,modus,setpoint_humidity,setpoint_temperature,circulation_air_duration,circulation_air_period,exhaust_air_duration,exhaust_air_period,days,comment) VALUES (7,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,'');
-DROP TABLE IF EXISTS ``;
-CREATE TABLE IF NOT EXISTS `` (
-	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	`name`	TEXT NOT NULL
-);
-INSERT INTO `` (id,name) VALUES (1,'salami');
-INSERT INTO `` (id,name) VALUES (2,'dryaging1');
-INSERT INTO `` (id,name) VALUES (3,'dryaging2');
 DROP INDEX IF EXISTS `all_sensors_index`;
 CREATE INDEX IF NOT EXISTS `all_sensors_index` ON `all_sensors` (
 	`last_change`	ASC

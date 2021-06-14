@@ -53,7 +53,7 @@
                                             <td>';
                                             echo "Pi-Ager service not running!<br>";
                                             echo "Maybe you have proved that developers are not perfect! ";
-                                            echo " please go to: ";
+                                            echo " please check logs or go to: ";
                                             echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a>';
                                             echo '</td><td></td>';
                                         }
@@ -100,7 +100,7 @@
                                                     <td>';
                                                     echo "Pi-Ager service not running!<br>";
                                                     echo "Maybe you have proved that developers are not perfect! ";
-                                                    echo " please go to: ";
+                                                    echo " please check logs or go to: ";
                                                     echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a>';
                                                     echo '</td><td></td>';
                                                     echo '</tr>';
@@ -214,7 +214,7 @@
                                                     <td>';
                                                     echo "Pi-Ager service not running!<br>";
                                                     echo "Maybe you have proved that developers are not perfect! ";
-                                                    echo " please go to: ";
+                                                    echo " please check logs or go to: ";
                                                     echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a>';
                                                     echo '</td><td></td>';
                                                     echo '</tr>';
