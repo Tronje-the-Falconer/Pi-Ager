@@ -129,7 +129,7 @@ class cl_logger:
         logging.handlers.GroupWriteRotatingFileHandler = GroupWriteRotatingFileHandler
         
         # Logger fuer website
-        self.website_log_rotatingfilehandler = logging.handlers.GroupWriteRotatingFileHandler(pi_ager_paths.get_path_logfile_txt_file(), mode='a', maxBytes=1048576, backupCount=36, encoding=None, delay=False)
+        self.website_log_rotatingfilehandler = logging.handlers.GroupWriteRotatingFileHandler(pi_ager_paths.get_path_logfile_txt_file(), mode='a', maxBytes=262144, backupCount=36, encoding=None, delay=False)
         self.website_log_rotatingfilehandler.setLevel(logging.INFO)
         self.website_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(message)s', '%y-%m-%d %H:%M:%S')
         self.website_log_rotatingfilehandler.setFormatter(self.website_log_rotatingfilehandler_formatter)

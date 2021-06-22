@@ -223,7 +223,12 @@
     $dewpoint_dataset = array_column($all_sensors_rows, 'dewint');
     $dewpoint_dataset[] = Null;
     array_unshift($dewpoint_dataset, Null);
-     
+
+    // value array for humintabs
+    $humidity_abs_dataset = array_column($all_sensors_rows, 'humintabs');
+    $humidity_abs_dataset[] = Null;
+    array_unshift($humidity_abs_dataset, Null);
+         
     // value array for tempext
     $extern_temperature_dataset = array_column($all_sensors_rows, 'tempext');
     $extern_temperature_dataset[] = Null;
@@ -238,7 +243,12 @@
     $extern_dewpoint_dataset = array_column($all_sensors_rows, 'dewext');
     $extern_dewpoint_dataset[] = Null;
     array_unshift($extern_dewpoint_dataset, Null);           
-    
+
+    // value array for humextabs
+    $extern_humidity_abs_dataset = array_column($all_sensors_rows, 'humextabs');
+    $extern_humidity_abs_dataset[] = Null;
+    array_unshift($extern_humidity_abs_dataset, Null);
+        
     // value array for ntc1
     $thermometer1_dataset = array_column($all_sensors_rows, 'ntc1');
     $thermometer1_dataset[] = Null;

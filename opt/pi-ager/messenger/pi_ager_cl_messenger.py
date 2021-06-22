@@ -11,6 +11,8 @@ __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Productive"
 
+""" Modified 16.06.21 by phylax to handle also unknown exceptions """
+
 from abc import ABC
 import inspect
 import traceback
@@ -75,7 +77,41 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
         cl_fact_logic_alarm().get_instance().execute_alarm(alarm)
         pass
-        
+    
+    def send_messages(self, messenger_exception_row):
+        if messenger_exception_row['alarm'] != '': 
+            cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
+            try:
+                cl_fact_logic_alarm().get_instance().execute_alarm(messenger_exception_row['alarm'])
+            except:
+                cl_fact_logger.get_instance().info('Alarm settings not active: ')
+                
+        if messenger_exception_row['telegram'] == 1:
+            cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
+            try:
+                cl_fact_logic_telegram.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
+            except:
+                cl_fact_logger.get_instance().info('Telegram settings not active: ')
+                
+        if messenger_exception_row['pushover'] == 1:
+            cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
+            try:
+                cl_fact_logic_pushover.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
+            except:
+                cl_fact_logger.get_instance().info('Pushover settings not active: ')
+
+        if messenger_exception_row['e-mail'] == 1:
+            cl_fact_logger.get_instance().info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
+            try:
+                cl_fact_logic_send_email.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
+            except:
+                cl_fact_logger.get_instance().info('E-Mail settings not active: ')
+                        
+        if messenger_exception_row['raise_exception'] == 1:
+            cl_fact_logger.get_instance().critical(str(self.cx_error.__class__.__name__ ))
+            sys.exit(0)
+
+                    
     def handle_exception(self, cx_error):
         """
         Handle exception to create alarm or email or telegram or pushover ... class
@@ -86,44 +122,30 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().info("Exception raised: " + self.cx_error_name + " - " + str(cx_error) + self.build_alarm_subject() + self.build_alarm_message() )
        
         self.it_messenger_exception = self.db_messenger_exception.read_data_from_db()
+        self.exception_known = False
+        
         for item in self.it_messenger_exception:
             if item.get('exception') == self.cx_error_name :
-                cl_fact_logger.get_instance().debug(item['exception'])
-                cl_fact_logger.get_instance().debug(item['e-mail'])
+                self.exception_known = True
+                cl_fact_logger.get_instance().debug('Known exception name: ' + item['exception'])
+                cl_fact_logger.get_instance().debug('Known exception e-mail: ' + str(item['e-mail']))
+                cl_fact_logger.get_instance().debug('Known exception pushover: ' + str(item['pushover']))
+                cl_fact_logger.get_instance().debug('Known exception telegram: ' + str(item['telegram']))
+                cl_fact_logger.get_instance().debug('Known exception alarm: ' + str(item['alarm']))
+                cl_fact_logger.get_instance().debug('Known exception raise_exception: ' + str(item['raise_exception']))
+                cl_fact_logger.get_instance().debug('Known exception active: ' + str(item['active']))
+                cl_fact_logger.get_instance().debug('Known exception id: ' + str(item['id']))
+                
+                if (item['active'] == 1):
+                    self.send_messages(item)
         
-                if item['alarm'] != '': 
-                    cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
-                    try:
-                        cl_fact_logic_alarm().get_instance().execute_alarm(item['alarm'])
-                    except:
-                        cl_fact_logger.get_instance().info('Alarm settings not active: ')
-                
-                if item['telegram'] == 1:
-                    cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
-                    try:
-                        cl_fact_logic_telegram.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
-                    except:
-                        cl_fact_logger.get_instance().info('Telegram settings not active: ')
-                
-                if item['pushover'] == 1:
-                    cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
-                    try:
-                        cl_fact_logic_pushover.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
-                    except:
-                        cl_fact_logger.get_instance().info('Pushover settings not active: ')
-
-                if item['e-mail'] == 1:
-                    cl_fact_logger.get_instance().info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
-                    try:
-                        cl_fact_logic_send_email.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
-                    except:
-                        cl_fact_logger.get_instance().info('E-Mail settings not active: ')
-                        
-                if item['raise_exception'] == 1:
-                    cl_fact_logger.get_instance().critical(str(self.cx_error.__class__.__name__ ))
-                    sys.exit(0)
-                
-                return(self.exception_known)
+        # if we land here exception is unknown or should not be handled
+        if (self.exception_known == False):
+            item = self.it_messenger_exception[0]   # first row with data for unknown exception
+            if (item['active'] == 1):
+                self.send_messages(item)
+                    
+        return(self.exception_known)
 
     def handle_event(self, event, info_text=None):
         """
@@ -228,8 +250,10 @@ class cl_db_messenger_exception(cl_ab_database_config):
 
     def build_select_statement(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return('SELECT * FROM config_messenger_exception where active = 1 ')
-    
+        # return('SELECT * FROM config_messenger_exception where active = 1 ')
+        # select all exceptions in table, active is checked in handle_exception
+        return('SELECT * FROM config_messenger_exception')
+        
 class cl_db_messenger_event(cl_ab_database_config):
 
     def build_select_statement(self):

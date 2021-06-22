@@ -1226,7 +1226,7 @@ input[type="text"], input[type="password"], input[type="email"], input[type="url
 {
    width: auto;
    padding: 2px 0;
-   color: #7A5800 !important;
+   color: #7A5800;
    font-size: 13px;
    font-family: Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
    font-weight: bold;

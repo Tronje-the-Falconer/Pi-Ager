@@ -228,7 +228,8 @@ class cl_sensor_sht(cl_sensor, ABC):
         #return x & 2 ** n != 0 
     
         # a more bitwise- and performance-friendly version:
-        return (x & 1 << n != 0)        
+        return (x & 1 << n != 0) 
+        
     def get_current_data(self):
         # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
@@ -237,19 +238,19 @@ class cl_sensor_sht(cl_sensor, ABC):
         self._current_humidity    = self._get_current_humidity()
         # logger.debug(self._current_temperature)
         # logger.debug(self._current_humidity)
-        cl_fact_logger.get_instance().debug(self._current_temperature)
-        cl_fact_logger.get_instance().debug(self._current_humidity)
+        cl_fact_logger.get_instance().debug("sht temperature : " + str(self._current_temperature))
+        cl_fact_logger.get_instance().debug("sht humidity : " + str(self._current_humidity))
         self._dewpoint            = super().get_dewpoint(self._current_temperature, self._current_humidity)
-        super().calc_mean_temperature(self._current_temperature)
-        self.mean_temperature     = super().get_mean_temperature()
-        cl_fact_logger.get_instance().debug(self.o_active_sensor + "Mean temperature :"+ str(self.mean_temperature)) 
+        # super().calc_mean_temperature(self._current_temperature)
+        # self.mean_temperature     = super().get_mean_temperature()
+        # cl_fact_logger.get_instance().debug(self.o_active_sensor + "Mean temperature :"+ str(self.mean_temperature)) 
         
        
        
        
         (temperature_dewpoint, humidity_absolute) = self._dewpoint
         
-        self.measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint)
+        self.measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint, humidity_absolute)
         return(self.measured_data)
         
     

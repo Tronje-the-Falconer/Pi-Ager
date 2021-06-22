@@ -40,9 +40,11 @@ function handleContent() {
             //values
         var temperature_main = myObj.sensor_temperature;
         var humidity_main = myObj.sensor_humidity;
+        var humidity_abs_main = myObj.sensor_humidity_abs;        
         var dewpoint_main = myObj.sensor_dewpoint;
         var temperature_extern = myObj.sensor_extern_temperature;
         var humidity_extern = myObj.sensor_extern_humidity;
+        var humidity_extern_abs = myObj.sensor_extern_humidity_abs;
         var dewpoint_extern = myObj.sensor_extern_dewpoint;
         var gr_scale1 = myObj.scale1;
         var gr_scale2 = myObj.scale2;
@@ -71,9 +73,11 @@ function handleContent() {
         
         var str_temperature_main;
         var str_humidity_main;
+        var str_humidity_abs_main;
         var str_dewpoint_main;
         var str_temperature_extern;
         var str_humidity_extern;
+        var str_humidity_abs_extern;
         var str_dewpoint_extern;
         var str_gr_scale1;
         var str_gr_scale2;

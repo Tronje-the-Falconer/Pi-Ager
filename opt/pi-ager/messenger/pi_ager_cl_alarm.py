@@ -49,6 +49,7 @@ class cl_logic_alarm:
     def execute_alarm(self, alarm):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug("Check Alarm: " + alarm)
+        self.it_alarm = self.db_alarm.read_data_from_db()
         try:
             if self.it_alarm: 
                 pass

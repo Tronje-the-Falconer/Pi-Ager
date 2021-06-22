@@ -77,7 +77,9 @@ class cl_sensor_dht_adafruit(cl_sensor):
         cl_fact_logger.get_instance().debug("Temperature in Celsius is : %.2f C" %self._current_temperature)
         cl_fact_logger.get_instance().debug("Relative Humidity is : %.2f %%RH" %self._current_humidity)
         self._dewpoint     = super().get_dewpoint(self._current_temperature, self._current_humidity)
-        self.measured_data = (self._current_temperature, self._current_humidity, self._dewpoint)
+        
+        (temperature_dewpoint, humidity_absolute) = self._dewpoint
+        self.measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint, humidity_absolute)
         return(self.measured_data)
         
     

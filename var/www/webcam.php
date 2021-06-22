@@ -67,7 +67,7 @@ include 'modules/read_current_db.php';
                     </div>
                 </div>
             </div>
-        </div>
+<!--        </div> -->
         <?php 
             include 'footer.php';
         ?>

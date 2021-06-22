@@ -63,7 +63,7 @@ def autostart_loop():
     except Exception as cx_error:
         cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
             
-def get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, dewpoint_exception_count, sensordata_exception_count):
+def get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, dewpoint_exception_count, humidity_abs_exception_count, sensordata_exception_count):
     """
     try to read sensordata
     """
@@ -71,17 +71,21 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     global sensor_humidity_big
     global sensor_temperature_big 
     global sensor_dewpoint_big
+    global sensor_humidity_abs_big
     global second_sensor_humidity_big
     global second_sensor_temperature_big 
     global second_sensor_dewpoint_big    
+    global second_sensor_humidity_abs_big
     
-    last_temperaure = None
+    last_temperature = None
     last_humidity   = None
     last_dewpoint   = None
+    last_humidity_abs = None
+    
     second_sensor_humidity_big = 0
     second_sensor_temperature_big = 0
     second_sensor_dewpoint_big = 0
-    
+    second_sensor_humidity_abs_big = 0
     
     sensordata={}
     sensorname = cl_fact_main_sensor_type.get_instance().get_sensor_type_ui()
@@ -98,10 +102,12 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 main_sensor =  cl_fact_active_main_sensor().get_instance()
                 main_sensor.execute()
                 measured_data = main_sensor.get_current_data()
-                (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
+                (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big, sensor_humidity_abs_big) = measured_data
                 cl_fact_logger.get_instance().debug('sensor_temperature_big: ' + str(sensor_temperature_big))
                 cl_fact_logger.get_instance().debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
                 cl_fact_logger.get_instance().debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))   
+                cl_fact_logger.get_instance().debug('sensor_humidity_abs_big: ' + str(sensor_humidity_abs_big))
+                
             except pi_sht1x.sht1x.SHT1xError as cx_error:
                 cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
 
@@ -111,14 +117,17 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 main_sensor =  cl_fact_active_main_sensor().get_instance(i_address = i2c_address_main_sensor)
                 main_sensor.execute()
                 measured_data = main_sensor.get_current_data()
-                (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big) = measured_data
+                (sensor_temperature_big, sensor_humidity_big, sensor_dewpoint_big, sensor_humidity_abs_big) = measured_data
 
                 cl_fact_logger.get_instance().debug('sensor_temperature_big: ' + str(sensor_temperature_big))
                 cl_fact_logger.get_instance().debug('sensor_humidity_big: ' + str(sensor_humidity_big)) 
                 cl_fact_logger.get_instance().debug('sensor_dewpoint_big: ' + str(sensor_dewpoint_big))
+                cl_fact_logger.get_instance().debug('sensor_humidity_abs_big: ' + str(sensor_humidity_abs_big))
+                
             except OSError as cx_error:
                 cl_fact_i2c_bus_logic().set_instance(None)
                 cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+                
             except (cx_i2c_sht_temperature_crc_error,
                     cx_i2c_sht_humidity_crc_error,
                     cx_i2c_bus_error ) as cx_error:
@@ -136,15 +145,17 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                     second_sensor =  cl_fact_active_second_sensor().get_instance(i_address = i2c_address_second_sensor)
                     second_sensor.execute()
                     measured_second_data = second_sensor.get_current_data()
-                    (second_sensor_temperature_big, second_sensor_humidity_big, second_sensor_dewpoint_big) = measured_second_data
+                    (second_sensor_temperature_big, second_sensor_humidity_big, second_sensor_dewpoint_big, second_sensor_humidity_abs_big) = measured_second_data
 
                     cl_fact_logger.get_instance().debug('second_sensor_temperature_big: ' + str(second_sensor_temperature_big))
                     cl_fact_logger.get_instance().debug('second_sensor_humidity_big: ' + str(second_sensor_humidity_big)) 
                     cl_fact_logger.get_instance().debug('second_sensor_dewpoint_big: ' + str(second_sensor_dewpoint_big))
+                    cl_fact_logger.get_instance().debug('second_sensor_humidity_abs_big: ' + str(second_sensor_humidity_abs_big))
                     
                 except OSError as cx_error:
                     cl_fact_i2c_bus_logic().set_instance(None)
                     cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+                    
                 except (cx_i2c_sht_temperature_crc_error,
                         cx_i2c_sht_humidity_crc_error,
                         cx_i2c_bus_error ) as cx_error:
@@ -158,22 +169,29 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
 
         last_temperature = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
         last_humidity = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)         
-        last_dewpoint = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_dewpoint_key)      
-        if last_temperaure is not None and last_humidity is not None:
+        last_dewpoint = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_dewpoint_key)  
+        last_humidity_abs = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_abs_key)
+        
+        if last_temperature is not None and last_humidity is not None:
             sensor_temperature = round(sensor_temperature_big,2)
             sensor_humidity = round(sensor_humidity_big,2)
             sensor_dewpoint = round(sensor_dewpoint_big,2)
+            sensor_humidity_abs = round(sensor_humidity_abs_big,2)
             second_sensor_temperature = round(second_sensor_temperature_big,2)
             second_sensor_humidity = round(second_sensor_humidity_big,2)
-            second_sensor_dewpoint = round(second_sensor_dewpoint_big,2)        
+            second_sensor_dewpoint = round(second_sensor_dewpoint_big,2) 
+            second_sensor_humidity_abs = round(second_sensor_humidity_abs_big,2)
         elif sensor_humidity_big is not None and sensor_temperature_big is not None and sensor_dewpoint_big is not None: # and last_temperaure is not None and last_humidity is not None:
             #sensor_temperature_big = float(sensor_temperature_big)
             sensor_temperature = round(sensor_temperature_big,2)
             sensor_humidity = round(sensor_humidity_big,2)
             sensor_dewpoint = round(sensor_dewpoint_big,2)
+            sensor_humidity_abs = round(sensor_humidity_abs_big,2)
             second_sensor_temperature = round(second_sensor_temperature_big,2)
             second_sensor_humidity = round(second_sensor_humidity_big,2)
-            second_sensor_dewpoint = round(second_sensor_dewpoint_big,2) 
+            second_sensor_dewpoint = round(second_sensor_dewpoint_big,2)
+            second_sensor_humidity_abs = round(second_sensor_humidity_abs_big,2)
+            
             #temperature
             if last_temperature == 0:
                 deviation_temperature = sensor_temperature
@@ -191,7 +209,13 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 deviation_dewpoint = sensor_dewpoint
             else:
                 deviation_dewpoint = abs((sensor_dewpoint/last_dewpoint * 100) - 100)
-            
+                
+            #humidity abs
+            if last_humidity_abs == 0:
+                deviation_humidity_abs = sensor_humidity_abs
+            else:
+                deviation_humidity_abs = abs((sensor_humidity_abs/last_humidity_abs * 100) - 100)  
+                
             #temperature
             if sensor_temperature > 60 or deviation_temperature > 20:
                 if temperature_exception_count < 10:
@@ -201,10 +225,11 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                     # logger.debug(logstring)
                     cl_fact_logger.get_instance().debug(logstring)
                     time.sleep(1)
-                    recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, dewpoint_exception_count, sensordata_exception_count)
+                    recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, dewpoint_exception_count, humidity_abs_exception_count, sensordata_exception_count)
                     return recursion
                 else:
                     pass
+                    
             #humidity
             if sensor_humidity > 100 or deviation_humidity > 20:
                 if humidity_exception_count < 10:
@@ -214,10 +239,11 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                     # logger.debug(logstring)
                     cl_fact_logger.get_instance().debug(logstring)
                     time.sleep(1)
-                    recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, dewpoint_exception_count, sensordata_exception_count)
+                    recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, dewpoint_exception_count, humidity_abs_exception_count, sensordata_exception_count)
                     return recursion
                 else:
                     pass
+                    
             #dewpoint
             if sensor_dewpoint > 60 or deviation_dewpoint > 20:
                 if dewpoint_exception_count < 10:
@@ -227,14 +253,31 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                     # logger.debug(logstring)
                     cl_fact_logger.get_instance().debug(logstring)
                     time.sleep(1)
-                    recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, dewpoint_exception_count, sensordata_exception_count)
+                    recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, dewpoint_exception_count, humidity_abs_exception_count, sensordata_exception_count)
                     return recursion
                 else:
                     pass
+                    
+            #humidity abs
+            if sensor_humidity_abs > 100 or deviation_humidity_abs > 20:
+                if humidity_abs_exception_count < 10:
+                    countup_values = countup('humidity_abs_exception', humidity_abs_exception_count)
+                    logstring = countup_values['logstring']
+                    humidity_abs_exception_count = countup_values['counter']
+                    # logger.debug(logstring)
+                    cl_fact_logger.get_instance().debug(logstring)
+                    time.sleep(1)
+                    recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, dewpoint_exception_count, humidity_abs_exception_count, sensordata_exception_count)
+                    return recursion
+                else:
+                    pass
+                                        
         elif sensordata_exception_count < 10:
             sensor_temperature = None
             sensor_humidity =    None
             sensor_dewpoint =    None
+            sensor_humidity_abs = None
+            
             countup_values = countup('sensordata_exception', sensordata_exception_count)
             logstring = countup_values['logstring']
             sensordata_exception_count = countup_values['counter']
@@ -242,13 +285,15 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             # logger.debug(logstring)
             cl_fact_logger.get_instance().debug(logstring)
             time.sleep(1)
-            recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, dewpoint_exception_count, sensordata_exception_count)
+            recursion = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, dewpoint_exception_count, humidity_abs_exception_count, sensordata_exception_count)
             return recursion
         
         else:
             sensor_temperature = None
             sensor_humidity =    None
             sensor_dewpoint    = None
+            sensor_humidity_abs = None
+            
             logstring = _('Failed to get sensordata.')
             #logger.warning(logstring)
             cl_fact_logger.get_instance().warning(logstring)
@@ -257,9 +302,11 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
         sensordata['sensor_temperature'] = sensor_temperature
         sensordata['sensor_humidity'] = sensor_humidity
         sensordata['sensor_dewpoint'] = sensor_dewpoint
+        sensordata['sensor_humidity_abs'] = sensor_humidity_abs       
         sensordata['second_sensor_temperature'] = second_sensor_temperature
         sensordata['second_sensor_humidity'] = second_sensor_humidity
         sensordata['second_sensor_dewpoint'] = second_sensor_dewpoint
+        sensordata['second_sensor_humidity_abs'] = second_sensor_humidity_abs
         cl_fact_logger.get_instance().debug( sensordata)
         
         #exit()
@@ -275,8 +322,12 @@ def countup(countername, counter):
         logstring = 'SHT1xError occured, trying again, current number of retries: '
     elif countername == 'humidity_exception':
         logstring = 'no plausible humidity value [> 100 or too much deviation], trying again, current number of retries: '
+    elif countername == 'humidity_abs_exception':
+        logstring = 'no plausible humidity abs value [> 100 or too much deviation], trying again, current number of retries: '       
     elif countername == 'temperature_exception':
         logstring = 'no plausible temperature value [> 60 or too much deviation], trying again, current number of retries: '
+    elif countername == 'dewpoint_exception':
+        logstring = 'no plausible dewpoint value [> 60 or too much deviation], trying again, current number of retries: '        
     elif countername == 'sensordata_exception':
         logstring = 'sensordata has NULL values, trying again, current number of retries: '
     else:
@@ -518,28 +569,36 @@ def doMainLoop():
             sensordata_exception_count = 0
             temperature_exception_count = 0
             dewpoint_exception_count = 0
+            humidity_abs_exception_count = 0
             
             #sensortype = int(pi_ager_init.sensortype)
             sensordata = []
             second_sensor_temperature = 0
             second_sensor_humidity = 0
             second_sensor_dewpoint = 0
+            second_sensor_humidity_abs = 0
+            
             sensortype = cl_fact_main_sensor_type.get_instance().get_sensor_type()
-            sensordata = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, dewpoint_exception_count, sensordata_exception_count)
+            sensordata = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, dewpoint_exception_count, humidity_abs_exception_count, sensordata_exception_count)
             sensor_temperature = sensordata['sensor_temperature']
             sensor_humidity = sensordata['sensor_humidity']
             sensor_dewpoint = sensordata['sensor_dewpoint']
+            sensor_humidity_abs = sensordata['sensor_humidity_abs']
+            
             cl_fact_logger.get_instance().debug("sensor_temperature = " + str(sensor_temperature))
             cl_fact_logger.get_instance().debug("sensor_humidity    = " + str(sensor_humidity))
             cl_fact_logger.get_instance().debug("sensor_dewpoint    = " + str(sensor_dewpoint))
+            cl_fact_logger.get_instance().debug("sensor_humidity_abs    = " + str(sensor_humidity_abs))
             
             second_sensor_temperature = sensordata['second_sensor_temperature']
             second_sensor_humidity = sensordata['second_sensor_humidity']
             second_sensor_dewpoint = sensordata['second_sensor_dewpoint']
+            second_sensor_humidity_abs = sensordata['second_sensor_humidity_abs']
+            
             cl_fact_logger.get_instance().debug("external sensor_temperature = " + str(second_sensor_temperature))
             cl_fact_logger.get_instance().debug("external sensor_humidity    = " + str(second_sensor_humidity))
             cl_fact_logger.get_instance().debug("external sensor_dewpoint    = " + str(second_sensor_dewpoint))
-            
+            cl_fact_logger.get_instance().debug("external sensor_humidity_abs    = " + str(second_sensor_humidity_abs))
             
             # Prüfen, ob Sensordaten empfangen wurden und falls nicht, auf Notfallmodus wechseln
             if sensor_temperature != None and sensor_humidity != None and sensor_dewpoint != None:
@@ -610,13 +669,15 @@ def doMainLoop():
                 logstring = logstring + ' \n ' +  _('actual humidity') + ': ' + str(sensor_humidity) + ' %'
                 #cl_fact_logger.get_instance().debug(logstring)
                 logstring = logstring + ' \n ' +  _('actual dewpoint') + ': ' + str(sensor_dewpoint) + ' C'
+                logstring = logstring + ' \n ' +  _('actual humidity abs') + ': ' + str(sensor_humidity_abs) + ' %'
                 #cl_fact_logger.get_instance().debug(logstring)
                 logstring = logstring + ' \n ' + pi_ager_names.logspacer2
                 if (str(cl_fact_second_sensor_type.get_instance().get_sensor_type_ui()) != 'disabled'):
                     logstring = logstring + ' \n ' +  _('selected external sensor') + ': ' + str(cl_fact_second_sensor_type.get_instance().get_sensor_type_ui())
                     logstring = logstring + ' \n ' +  _('actual temperature') + ': ' + str(second_sensor_temperature) + ' C'
                     logstring = logstring + ' \n ' +  _('actual humidity') + ': ' + str(second_sensor_humidity) + ' %'
-                    logstring = logstring + ' \n ' +  _('actual dewpoint') + ': ' + str(second_sensor_dewpoint) + ' C'                
+                    logstring = logstring + ' \n ' +  _('actual dewpoint') + ': ' + str(second_sensor_dewpoint) + ' C'  
+                    logstring = logstring + ' \n ' +  _('actual humidity abs') + ': ' + str(second_sensor_humidity_abs) + ' %'
                     logstring = logstring + ' \n ' + pi_ager_names.logspacer2
                
                 #cl_fact_logger.get_instance().debug(_('value in database') + ': ' + str(sensortype))
@@ -1069,16 +1130,18 @@ def doMainLoop():
                 # Messwerte in die RRD-Datei schreiben
                 # Schreiben der aktuellen Status-Werte
                 # pi_ager_database.write_current_sensordata(pi_ager_init.loopcounter, sensor_temperature, sensor_humidity, sensor_dewpoint, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data)
-                pi_ager_database.write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, sensor_dewpoint, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint,status_uv, status_light, status_humidifier, status_dehumidifier, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data)
+                pi_ager_database.write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, status_uv, status_light, status_humidifier, status_dehumidifier, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data)
                 if (str(cl_fact_second_sensor_type.get_instance().get_sensor_type_ui()) == 'disabled'):
                     sensor2_temp = None
                     sensor2_hum = None
                     sensor2_dew = None
+                    sensor2_hum_abs = None
                 else:
                     sensor2_temp = second_sensor_temperature
                     sensor2_hum = second_sensor_humidity
                     sensor2_dew = second_sensor_dewpoint
-                pi_ager_database.write_all_sensordata(pi_ager_init.loopcounter, sensor_temperature, sensor_humidity, sensor_dewpoint, sensor2_temp, sensor2_hum, sensor2_dew, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data, None, None)    
+                    sensor2_hum_abs = second_sensor_humidity_abs
+                pi_ager_database.write_all_sensordata(pi_ager_init.loopcounter, sensor_temperature, sensor_humidity, sensor_dewpoint, sensor2_temp, sensor2_hum, sensor2_dew, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data, sensor_humidity_abs, sensor2_hum_abs)    
                 cl_fact_logger.get_instance().debug('writing current values in database performed')
             
             else:
@@ -1116,6 +1179,6 @@ def doMainLoop():
         pi_ager_gpio_config.defaultGPIO()
  
         # reflect i/o status in DB
-        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, sensor_dewpoint, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, 0, 0, 0, 0, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data) 
+        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, 0, 0, 0, 0, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data) 
     except Exception as cx_error:
        cl_fact_logic_messenger().get_instance().handle_exception(cx_error)

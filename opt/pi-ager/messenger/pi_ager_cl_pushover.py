@@ -41,7 +41,7 @@ class cl_logic_pushover:
     def execute(self, alarm_subject, alarm_message):
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
+        self.it_pushover = self.db_pushover.read_data_from_db()
         try:
             if self.it_pushover:                
                 user_key  = str(self.it_pushover[0]['user_key'])

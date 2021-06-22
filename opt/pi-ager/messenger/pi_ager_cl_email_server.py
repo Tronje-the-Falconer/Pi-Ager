@@ -38,7 +38,7 @@ class cl_logic_email_server:
     
     def get_data(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
+        self.it_email_server = self.db_email_server.read_data_from_db()
         return(self.it_email_server)
 
 class cl_db_email_server(cl_ab_database_config):

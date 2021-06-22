@@ -255,15 +255,17 @@
     }
     
     function get_current_values_for_monitoring(){
-        global $current_values_table, $key_field, $value_field, $sensor_temperature_key, $sensor_humidity_key, $scale1_key, $scale2_key;
+        global $current_values_table, $key_field, $value_field, $sensor_temperature_key, $sensor_humidity_key, $sensor_humidity_abs_key, $scale1_key, $scale2_key;
         global $last_change_field, $last_change_temperature_json_key, $last_change_humidity_json_key, $last_change_scale1_json_key, $last_change_scale2_json_key, $server_time_json_key;
+        global $last_change_humidity_abs_json_key;
         global $temperature_meat1_key, $temperature_meat2_key, $temperature_meat3_key, $temperature_meat4_key;
         global $last_change_temperature_meat1_json_key, $last_change_temperature_meat2_json_key, $last_change_temperature_meat3_json_key, $last_change_temperature_meat4_json_key;
         global $config_settings_table;
         global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key;
         global $meat1_sensor_name_json_key, $meat2_sensor_name_json_key, $meat3_sensor_name_json_key, $meat4_sensor_name_json_key;
-        global $sensor_dewpoint_key, $sensor_extern_temperature_key, $sensor_extern_humidity_key, $sensor_extern_dewpoint_key;
+        global $sensor_dewpoint_key, $sensor_extern_temperature_key, $sensor_extern_humidity_key, $sensor_extern_humidity_abs_key, $sensor_extern_dewpoint_key;
         global $last_change_dewpoint_json_key, $last_change_extern_temperature_json_key, $last_change_extern_humidity_json_key, $last_change_extern_dewpoint_json_key;
+        global $last_change_extern_humidity_abs_json_key;
         
         open_connection(); 
         $sql = 'SELECT * FROM ' . $current_values_table;
@@ -280,6 +282,10 @@
            elseif ($dataset[$key_field] == $sensor_humidity_key)
            {
                $values[$last_change_humidity_json_key] =  $dataset[$last_change_field];
+           }
+           elseif ($dataset[$key_field] == $sensor_humidity_abs_key)
+           {
+               $values[$last_change_humidity_abs_json_key] =  $dataset[$last_change_field];
            }
            elseif ($dataset[$key_field] == $scale1_key)
            {
@@ -316,6 +322,10 @@
            elseif ($dataset[$key_field] == $sensor_extern_humidity_key)
            {
                $values[$last_change_extern_humidity_json_key] =  $dataset[$last_change_field];
+           }
+           elseif ($dataset[$key_field] == $sensor_extern_humidity_abs_key)
+           {
+               $values[$last_change_extern_humidity_abs_json_key] =  $dataset[$last_change_field];
            }
            elseif ($dataset[$key_field] == $sensor_extern_dewpoint_key)
            {

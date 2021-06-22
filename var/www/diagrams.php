@@ -354,11 +354,11 @@
                                                     fill: false
 
 // Vorbereitung abs Feuchte
-/*                                                },
+                                                },
                                                 {
-                                                    label: '<?php echo _("humidity") . ' int.' ?>',
-                                                    yAxisID: 'humidity',
-                                                    data: <?php echo json_encode($humidity_dataset); ?>,
+                                                    label: '<?php echo _("humidity abs") . ' int.' ?>',
+                                                    yAxisID: 'humidityabs',
+                                                    data: <?php echo json_encode($humidity_abs_dataset); ?>,
                                                     backgroundColor: '#59A9C4',
                                                     borderColor: '#59A9C4',
                                                     borderWidth: 2,
@@ -377,8 +377,8 @@
                                                 },
                                                 {
                                                     label: '<?php echo _("humidity abs") . ' ext.' ?>',
-                                                    yAxisID: 'humidity',
-                                                    data: <?php echo json_encode($extern_humidity_dataset); ?>,
+                                                    yAxisID: 'humidityabs',
+                                                    data: <?php echo json_encode($extern_humidity_abs_dataset); ?>,
                                                     backgroundColor: '#08298A',
                                                     borderColor: '#08298A',
                                                     borderWidth: 2,
@@ -394,14 +394,14 @@
                                                     pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
-*/
+
                                                 }]
                                             },
                                             options: {
                                                 title: {
                                                     display: true,
-                                                    //text: '<?php echo _("dewpoint") ?> & <?php echo _("humidity abs") ?>',
-                                                    text: '<?php echo _("dewpoint") ?>',
+                                                    text: '<?php echo _("dewpoint") ?> & <?php echo _("humidity abs") ?>',
+                                                    //text: '<?php echo _("dewpoint") ?>',
                                                     fontSize: 24
                                                 },
                                                 legend: {
@@ -418,11 +418,10 @@
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
                                                             } else if (tooltipItem.datasetIndex === 1) {
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
-/*                                                            } else if (tooltipItem.datasetIndex === 2) {
-                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °g/m3';
+                                                            } else if (tooltipItem.datasetIndex === 2) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' g/m³';
                                                             } else if (tooltipItem.datasetIndex === 3) {
-                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °g/m3';
-*/
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' g/m³';
                                                             }
                                                         }
                                                     }
@@ -468,28 +467,28 @@
                                                     }, {
                                                         scaleLabel: {
                                                             display: true,
-//                                                            labelString: '<?php echo _("humidity abs") ?> <?php echo _(" - φ") ?>',
-                                                              labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
-                                                        //    fontSize: 20,
+                                                            labelString: '<?php echo _("humidity abs") ?> <?php echo _(" - φ") ?>',
+                                                            //  labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
+                                                            //  fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
-                                                        id: 'humidity',
+                                                        id: 'humidityabs',
                                                         type: 'linear',
                                                         display: true,
                                                         position: 'right',
-//                                                      labelString: '<?php echo _("humidity") ?>',
-                                                        labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
+                                                        labelString: '<?php echo _("humidity abs") ?>',
+                                                        // labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 val = Math.round(value * 10)/10;
-//                                                              return '  ' + val + ' g/m3' + '  ';
-                                                                return '  ' + '        ' + ' ' + '  ';
+                                                                return '  ' + val + ' g/m³' + '  ';
+                                                               // return '  ' + '        ' + ' ' + '  ';
                                                             },
                                                             fontColor: '#000000',
-/*                                                           
+                                                           
                                                             suggestedMax: 10,
                                                             suggestedMin: 0,															
-                                                            //max: 30,
+/*                                                            //max: 30,
                                                             //min: -2
 */
                                                         }
@@ -1761,7 +1760,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+<!--        </div> -->
         <?php 
             include 'footer.php';
         ?>

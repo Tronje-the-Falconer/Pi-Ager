@@ -37,8 +37,9 @@ class cl_logic_email_recipient:
         
     def get_data(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
+        self.it_email_recipient = self.db_email_recipient.read_data_from_db()
         return(self.it_email_recipient)
+        
     def write_data(self, it_table):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.db_email_recipient.write_data_to_db(it_table)

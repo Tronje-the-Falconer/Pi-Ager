@@ -35,6 +35,7 @@
         }
         else if ($old_sensorsecondtype != $sensorsecondnum) {
             // echo 'second sensor changed<br>';
+            shell_exec('sudo /var/sudowebscript.sh shutdown > /dev/null 2>&1 &');
             header("Location: /shutdown.php");
             die(); 
         }

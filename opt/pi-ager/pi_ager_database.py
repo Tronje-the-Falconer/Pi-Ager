@@ -423,7 +423,7 @@ def write_all_sensordata(loopnumber, sensor_temperature, sensor_humidity, sensor
             close_database()
 
 
-def write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, sensor_dewpoint,second_sensor_temperature,second_sensor_humidity, second_sensor_dewpoint, status_uv, status_light, status_humidifier, status_dehumidifier, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data):
+def write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature,second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, status_uv, status_light, status_humidifier, status_dehumidifier, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data):
     """
     function for writing the current values including meat sensor values
     """
@@ -439,6 +439,7 @@ def write_current(sensor_temperature, status_heater, status_exhaust_air, status_
         execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_circulating_air) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_circulating_air_key + '"')
         execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(sensor_humidity) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.sensor_humidity_key + '"')
         execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(sensor_dewpoint) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.sensor_dewpoint_key + '"')
+        execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(sensor_humidity_abs) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.sensor_humidity_abs_key + '"')
         execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_uv) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_uv_key + '"')
         execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_light) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_light_key + '"')
         execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(status_humidifier) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.status_humidifier_key + '"')
@@ -448,7 +449,7 @@ def write_current(sensor_temperature, status_heater, status_exhaust_air, status_
             execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(second_sensor_temperature) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.second_sensor_temperature_key + '"')
             execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(second_sensor_humidity) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.second_sensor_humidity_key + '"')
             execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(second_sensor_dewpoint) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.second_sensor_dewpoint_key + '"')
-    
+            execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "' + str(second_sensor_humidity_abs) +'" , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.second_sensor_humidity_abs_key + '"')    
     
         temp = 'NULL' if (temp_sensor1_data == None) else str(temp_sensor1_data)
         execute_query('UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = ' + temp +' , "' + pi_ager_names.last_change_field + '" = ' + str(get_current_time()) +' WHERE ' + pi_ager_names.key_field + ' = "' + pi_ager_names.temperature_meat1_key + '"')

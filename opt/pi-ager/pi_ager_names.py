@@ -63,10 +63,13 @@ agingtable_key = 'agingtable'
 sensor_temperature_key = 'sensor_temperature'
 sensor_humidity_key = 'sensor_humidity'
 sensor_dewpoint_key = 'sensor_dewpoint'
+sensor_humidity_abs_key = 'sensor_humidity_abs'
 
 second_sensor_temperature_key = 'sensor_extern_temperature'
 second_sensor_humidity_key = 'sensor_extern_humidity'
 second_sensor_dewpoint_key = 'sensor_extern_dewpoint'
+second_sensor_humidity_abs_key = 'sensor_extern_humidity_abs'
+
 status_pi_ager_key = 'status_piager'
 status_agingtable_key = 'status_agingtable'
 status_heater_key = 'status_heater'
@@ -234,7 +237,8 @@ table_keys[current_values_table] = (sensor_temperature_key, sensor_humidity_key,
                                     status_agingtable_key, status_scale1_key, status_scale2_key, status_tara_scale1_key, status_tara_scale2_key, agingtable_period_key,
                                     agingtable_period_starttime_key, status_light_manual_key, calibrate_scale1_key, calibrate_scale2_key, calibrate_weight_key,
                                     status_uv_manual_key, temperature_meat1_key, temperature_meat2_key, temperature_meat3_key, temperature_meat4_key, sensor_dewpoint_key, second_sensor_temperature_key,
-                                    second_sensor_humidity_key, second_sensor_dewpoint_key, agingtable_period_day_key, scale1_thread_alive_key, scale2_thread_alive_key, aging_thread_alive_key)
+                                    second_sensor_humidity_key, second_sensor_dewpoint_key, agingtable_period_day_key, scale1_thread_alive_key, scale2_thread_alive_key, aging_thread_alive_key, 
+                                    sensor_humidity_abs_key, second_sensor_humidity_abs_key)
 
 table_keys[settings_scale1_table] = (samples_key,spikes_key,sleep_key,gain_key,bits_to_read_key,referenceunit_key,scale_measuring_interval_key,measuring_duration_key,saving_period_key,offset_scale_key)
 table_keys[settings_scale2_table] = (samples_key,spikes_key,sleep_key,gain_key,bits_to_read_key,referenceunit_key,scale_measuring_interval_key,measuring_duration_key,saving_period_key,offset_scale_key)

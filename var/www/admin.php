@@ -613,8 +613,8 @@
                                             echo '<form  method="post" name="boot">';
                                                 echo '<table style="width: 100%;">';
                                                     echo '<tr>';
-                                                        echo '<td><button class="art-button" name="admin_stop_main" value="admin_stop_main" onclick="return confirm("' . _('ATTENTION: kill') . 'main.py?");">' . _('stop') . ' main.py</button></td>';
-                                                        echo '<td><button class="art-button" name="admin_start_main" value="admin_start_main" onclick="return confirm("' .  _('start') . 'main.py?");">' . _('start') . ' main.py</button></td>';
+                                                        echo '<td><button class="art-button" name="admin_stop_main" value="admin_stop_main" onclick="return confirm(\'' . _('ATTENTION: stop') . ' main.py service?' . '\');">' . _('stop') . ' main.py</button></td>';
+                                                        echo '<td><button class="art-button" name="admin_start_main" value="admin_start_main" onclick="return confirm(\'' .  _('start') . ' main.py service?' . '\');">' . _('start') . ' main.py</button></td>';
                                                     echo '</tr></tr>';
                                                         // echo '<td><button class="art-button" name="admin_stop_agingtable"  value="admin_stop_agingtable" onclick="return confirm("' . _('ATTENTION:') . 'kill agingtable.py?");">' . _('stop') . ' agingtable.py</button></td>';
                                                         // echo '<td><button class="art-button" name="admin_start_agingtable"  value="admin_start_agingtable" onclick="return confirm("' . _('start') . 'agingtable.py?");">' . _('start') . '  agingtable.py</button></td>';
@@ -634,7 +634,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+<!--        </div> -->
         <?php 
             include 'footer.php';
         ?>

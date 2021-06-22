@@ -95,7 +95,12 @@
                                                                 $checked_messenger_active_true = '';
                                                             }
                                                                 echo '<td><input type="hidden" name="messenger_id_' . $index_row . '" value="' . $messenger_id . '">'. $messenger_id .'</td>';
-                                                                echo '<td><input name="messenger_exception_' . $messenger_id . '" type="text" style="width: 90%; text-align: right;" required value=' . $messenger_exception .'></td>';
+                                                                if ($index_row == 0) {
+                                                                    echo '<td><input name="messenger_exception_' . $messenger_id . '" type="text" style="width: 90%; text-align: right; background-color: lightgrey; color: red;" readonly required value=' . $messenger_exception .'></td>';
+                                                                }
+                                                                else {
+                                                                    echo '<td><input name="messenger_exception_' . $messenger_id . '" type="text" style="width: 90%; text-align: right;" required value=' . $messenger_exception .'></td>';                            
+                                                                }
                                                                 echo '<td> <input type="hidden" name="checked_messenger_e_mail_true_' . $messenger_id . '" value="0">
                                                                         <input type="checkbox" name="checked_messenger_e_mail_true_' . $messenger_id . '" value="1" ' . $checked_messenger_e_mail_true .'></td>';
                                                                 echo '<td> <input type="hidden" name="checked_messenger_pushover_true_' . $messenger_id . '" value="0">
@@ -172,7 +177,7 @@
                                     <form method="post" name="delete_messenger">
                                         <table id="show_messenger" class="show_messenger" style="width: 100%;">
                                             <tr>
-                                                <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" min="7" step="1" style="width: 90%; text-align: right;" ></td>
+                                                <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" min="8" step="1" style="width: 90%; text-align: right;" ></td>
                                             </tr>
                                             <tr>
                                                 <td colspan=2><button class="art-button" name="delete_messenger" value="delete_messenger" onclick="return confirm('<?php echo _('ATTENTION: delete messenger?');?>');"><?php echo _('delete'); ?></button></td>
@@ -281,7 +286,7 @@
                                                                 $checked_event_active_true = '';
                                                             }
                                                                 echo '<td><input type="hidden" name="event_id_' . $index_row . '" value="' . $event_id . '">'. $event_id .'</td>';
-                                                                echo '<td><input name="event_event_' . $event_id . '" type="text" style="width: 90%; text-align: right;" required value=' . $event_event .'></td>';
+                                                                echo '<td><input name="event_event_' . $event_id . '" type="text" style="width: 90%; text-align: right; background-color: lightgrey;" readonly required value=' . $event_event .'></td>';
                                                                 echo '<td> <input type="hidden" name="checked_event_e_mail_true_' . $event_id . '" value="0">
                                                                         <input type="checkbox" name="checked_event_e_mail_true_' . $event_id . '" value="1" ' . $checked_event_e_mail_true .'></td>';
                                                                 echo '<td> <input type="hidden" name="checked_event_pushover_true_' . $event_id . '" value="0">
@@ -848,7 +853,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+<!--        </div> -->
         <?php 
             include 'footer.php';
         ?>

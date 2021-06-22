@@ -76,10 +76,14 @@ class cl_sensor_sht75(cl_sensor):
             time.sleep(1)  
             self.get_current_data()
             exit
-        self.delete_error_counter()    
+        self.delete_error_counter()
+
+        cl_fact_logger.get_instance().debug("sht75 temperature : %.2f" % self._current_temperature)
+        cl_fact_logger.get_instance().debug("sht75 humidity : %.2f" % self._current_humidity)
+        
         (temperature_dewpoint, humidity_absolute) = self._dewpoint
         
-        self.measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint)
+        self.measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint, humidity_absolute)
         return(self.measured_data)
     
 

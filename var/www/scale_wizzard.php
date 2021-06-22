@@ -49,7 +49,7 @@
             # echo "<button class=\"art-button\" type=\"submit\" name=\"scale_wizzard_cancel\" formnovalidate onclick=\"return confirm('"._('cancel scale wizzard').' ? '. "');\">"._('cancel')."</button>";
             echo '</form>';
             echo '</div>';
-            echo '</div></div></div></div></div></div>';
+            echo '</div></div></div></div></div>';
             include 'footer.php';
         }
     }

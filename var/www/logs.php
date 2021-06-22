@@ -49,8 +49,8 @@
                                         $files = glob('logs/*.txt*');
                                         $filecounter = 0;
                                         foreach ($files as $file) {
-                                            ${'filename'.$filecounter} = basename($file);
-                                            ${'filecontent'.$filecounter} = file($file);
+                                           // ${'filename'.$filecounter} = basename($file);
+                                           // ${'filecontent'.$filecounter} = file($file);
                                             $filecounter++;
                                         }
                                     ?>
@@ -62,6 +62,7 @@
                                         
                                         window.onload = function () {
                                             write_filecontent(logfilepath + current_logfile);
+                                            document.getElementById("currentfile").innerHTML = (current_logfile);  
                                         }
                                         
                                         function write_filecontent(file){
@@ -84,12 +85,17 @@
                                             }
                                             if (xmlHttp) {
                                               xmlHttp.open('GET', file, true);
+                                              xmlHttp.setRequestHeader("Cache-Control", "max-age=0");
                                               xmlHttp.onreadystatechange = function () {
-                                                  if (xmlHttp.readyState == 4) {
+                                                  if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
                                                       text = xmlHttp.responseText;
-                                                      newtext = text.replace(/(?:\r\n|\r|\n)/g, '<br />');
+                                                      //newtext = text.replace(/(?:\r\n|\r|\n)/g, '<br />');
+                                                      newtext = text.replace(/(?:\\[rn]|[\r\n])/g, '<br>');
+                                                      newtext = newtext.replace(/exception/gi, function(x) {
+                                                      return('<span style="color: red;">' + x + '</span>');   
+                                                      });
                                                       document.getElementById("filecontent").innerHTML = (newtext);
-                                                      //document.getElementById("filecontent").innerHTML = (xmlHttp.responseText);
+                                                      // document.getElementById("filecontent").textContent = text;
                                                       
                                                       
                                                   }
@@ -112,18 +118,21 @@
                                                 current_logfile = 'logfile.txt.1';
                                                 logfilecount = 1;
                                                 alert(current_logfile);
+                                                document.getElementById("currentfile").innerHTML = (current_logfile);
                                             }
                                             else if (logfilecount < phplogfilecount && logfilecount != (phplogfilecount-1)){
                                                 logfilecount++;
                                                 write_filecontent(logfilepath + "logfile.txt." + logfilecount.toString());
                                                 current_logfile = 'logfile.txt.' + logfilecount.toString();// + nächste Zahl
                                                 alert(current_logfile);
+                                                document.getElementById("currentfile").innerHTML = (current_logfile);
                                             }
                                             else {
                                                 write_filecontent(logfilepath + "logfile.txt");
                                                 current_logfile = 'logfile.txt'
                                                 logfilecount = -1;
                                                 alert('first logfile ' + current_logfile);
+                                                document.getElementById("currentfile").innerHTML = (current_logfile);                                                
                                             }
                                         }
                                         
@@ -134,18 +143,21 @@
                                                 current_logfile = 'logfile.txt.' + firstlogfile.toString();
                                                 logfilecount = firstlogfile;
                                                 alert(current_logfile);
+                                                document.getElementById("currentfile").innerHTML = (current_logfile);                                                
                                             }
                                             else if (logfilecount <= phplogfilecount && logfilecount != 1){
                                                 logfilecount--;
                                                 write_filecontent(logfilepath + "logfile.txt." + logfilecount.toString());// + nächste Zahl
                                                 current_logfile = 'logfile.txt.' + logfilecount.toString();// + nächste Zahl
                                                 alert(current_logfile);
+                                                document.getElementById("currentfile").innerHTML = (current_logfile);                                               
                                             }
                                             else {
                                                 write_filecontent(logfilepath + "logfile.txt");
                                                 current_logfile = 'logfile.txt'
                                                 logfilecount = -1;
                                                 alert('current logfile ' + current_logfile);
+                                                document.getElementById("currentfile").innerHTML = (current_logfile);                                                
                                             }
                                         }
                                     </script>
@@ -155,16 +167,18 @@
                                                 <button  class="art-button" onClick="prev_logfile(<?php print $filecounter; ?>);">< <?php print _('prev'); ?> </button>
                                             </td>
                                             <td><button  class="art-button" onClick="next_logfile(<?php print $filecounter; ?>);"> <?php print _('next'); ?> ></button></td>
+                                            <td style="width: 100%; background-color: silver; text-align: center;" id="currentfile"></td>
                                         </tr>
                                     </table>
                                     <!----------------------------------------------------------------------------------------Logeinträge-->
+                                    <div style="margin: 5px; height: 500px; border: 1px solid #ccc; overflow: auto;">
                                     <table style="width: 100%" class="miniature_writing">
                                         <tr>
                                             <td>
                                                 <p id="begin" align="right">
                                                     <a  href="#end"><?php echo _('to bottom') ?></a>
                                                 </p>
-                                                <div id="filecontent"></div>
+                                                <div id="filecontent" ></div>
                                                 </div>
                                                 </br></br>
                                                 <p align="right" id="end">
@@ -174,14 +188,15 @@
                                             </td>
                                         </tr>
                                     </table>
+                                    </div>
                                 </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php 
-            include 'footer.php';
-        ?>
+                            </div>  <!-- art-layout-cell art-content -->
+                        </div>      <!-- art-content-layout-row -->
+                    </div>          <!-- art-content-layout -->
+                </div>             <!--  art-layout-wrapper -->
+            </div>                  <!-- art-sheet clearfix -->
+            <?php 
+                include 'footer.php';
+            ?>                   
+<!--    </div>                       art-main -->
