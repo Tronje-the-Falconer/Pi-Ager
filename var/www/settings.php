@@ -51,10 +51,11 @@
                                             echo '<td><img src="images/icons/operatingmode_fail_42x42.png" style="padding: 10px;"></td>
                                             <td></td>
                                             <td>';
-                                            echo "Pi-Ager service not running!<br>";
-                                            echo "Maybe you have proved that developers are not perfect! ";
-                                            echo " please check logs or go to: ";
-                                            echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a>';
+                                            echo _('Pi-Ager service not running!<br>');
+                                            echo _('Maybe you have proved that developers are not perfect!<br> ');
+                                            echo _('please check logs or go to: <br>');
+                                            echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a><br>';
+											echo _('after after fixing the error you have to reboot the system <br>');
                                             echo '</td><td></td>';
                                         }
                                         elseif ($grepmain != NULL and $status_piager == 1){ // wenn main.py läuft und Status in DB eingeschaltet
@@ -98,10 +99,11 @@
                                                     echo '<td><img src="images/icons/scale_fail_42x42.gif" alt="" style="padding: 10px;"></td>
                                                     <td></td>
                                                     <td>';
-                                                    echo "Pi-Ager service not running!<br>";
-                                                    echo "Maybe you have proved that developers are not perfect! ";
-                                                    echo " please check logs or go to: ";
-                                                    echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a>';
+                                                    echo _('Pi-Ager service not running!<br>');
+                                                    echo _('Maybe you have proved that developers are not perfect!<br> ');
+                                                    echo _('please check logs or go to: <br>');
+                                                    echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a><br>';
+											        echo _('after after fixing the error you have to reboot the system <br>');
                                                     echo '</td><td></td>';
                                                     echo '</tr>';
                                                 }
@@ -212,10 +214,11 @@
                                                     echo '<td><img src="images/icons/agingtable_fail_42x42.gif" alt="" style="padding: 10px;"></td>
                                                     <td></td>
                                                     <td>';
-                                                    echo "Pi-Ager service not running!<br>";
-                                                    echo "Maybe you have proved that developers are not perfect! ";
-                                                    echo " please check logs or go to: ";
-                                                    echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a>';
+                                                    echo _('Pi-Ager service not running!<br>');
+                                                    echo _('Maybe you have proved that developers are not perfect!<br> ');
+                                                    echo _('please check logs or go to: <br>');
+                                                    echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a><br>';
+											        echo _('after after fixing the error you have to reboot the system <br>');
                                                     echo '</td><td></td>';
                                                     echo '</tr>';
                                                 }                                       

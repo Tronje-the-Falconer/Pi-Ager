@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
-"POT-Creation-Date: 2021-06-12 12:52+0200\n"
-"PO-Revision-Date: 2021-06-21 13:19+0200\n"
+"POT-Creation-Date: 2021-06-23 16:07+0200\n"
+"PO-Revision-Date: 2021-06-23 16:15+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ../../###GITHUB/branches/entwicklung/var/www\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -131,7 +131,7 @@ msgstr ""
 msgid "change sensors"
 msgstr "Sensor ändern"
 
-#: admin.php:127 index.php:118 index.php:1007 settings.php:77
+#: admin.php:127 index.php:118 index.php:1007 settings.php:78
 msgid "scales"
 msgstr "Waagen"
 
@@ -140,7 +140,7 @@ msgstr "Waagen"
 #: diagrams_old.php:284 diagrams_old.php:307 diagrams_old.php:334
 #: diagrams_old.php:376 index.php:411 index.php:431 index.php:454 index.php:491
 #: index.php:513 modules/start_stop_program.php:238
-#: modules/start_stop_program.php:243 scale_wizzard.php:27 settings.php:178
+#: modules/start_stop_program.php:243 scale_wizzard.php:27 settings.php:180
 msgid "scale"
 msgstr "Waage"
 
@@ -374,10 +374,6 @@ msgstr ""
 "diese Zeit alle abgesteurt werden.\n"
 "<br>Wenn der Backupprozess abgeschlossen ist, startet der Pi-Ager "
 "automatisch und läuft  mit den letzen Einstellungen weiter.  \n"
-"<br>Der Fortschritt des Backup Prozesses kann in einem Terminal Fenster "
-"beobachtet werden. Probleme mit dem Backup werden dort aufgezeigt: \n"
-"<br> cd /var/log\n"
-"<br> cat pi-ager_backup.log\n"
 "<br><br>\n"
 "<b>nfs Verzeichnis: </b> Hier trägt man die Server und NFS-Freigabe ein\n"
 "<br>z.B.: 192.168.0.111:/srv/backup\n"
@@ -454,12 +450,12 @@ msgstr "Angehangenes Gewicht"
 msgid "scale wizzard"
 msgstr "Waagen Wizzard"
 
-#: calibrate_scale.php:47 settings.php:139 settings.php:142 settings.php:165
-#: settings.php:168
+#: calibrate_scale.php:47 settings.php:141 settings.php:144 settings.php:167
+#: settings.php:170
 msgid "tara scale"
 msgstr "Tara Waage"
 
-#: calibrate_scale.php:49 settings.php:142 settings.php:168 settings.php:180
+#: calibrate_scale.php:49 settings.php:144 settings.php:170 settings.php:182
 msgid "please relieve the load cell completely"
 msgstr "Bitte Gewicht von der Waage entfernen"
 
@@ -878,7 +874,7 @@ msgstr ""
 #: modules/write_table_db.php:63 modules/write_table_db.php:72
 #: modules/write_table_db.php:75 modules/write_table_db.php:78
 #: modules/write_table_db.php:240 modules/write_table_db.php:263
-#: settings.php:188
+#: settings.php:190
 msgid "agingtable"
 msgstr "Reifetabelle"
 
@@ -905,7 +901,7 @@ msgstr ""
 "<br>Die Reifetabelle muss dann manuell gestartet werden.\n"
 "<br><br>"
 
-#: config.php:254 modules/write_config_db_logfile_txt.php:204 settings.php:484
+#: config.php:254 modules/write_config_db_logfile_txt.php:204 settings.php:487
 msgid "general configuration"
 msgstr "Allgemeine Konfiguration"
 
@@ -918,7 +914,7 @@ msgid "hour"
 msgstr "Stunde"
 
 #: diagrams.php:20 diagrams.php:43 diagrams_old.php:21 diagrams_old.php:44
-#: index.php:560 settings.php:385
+#: index.php:560 settings.php:388
 msgid "day"
 msgstr "Tag"
 
@@ -943,7 +939,7 @@ msgid "months"
 msgstr "Monate"
 
 #: diagrams.php:79 edit_agingtable.php:51 index.php:175 index.php:573
-#: settings.php:398
+#: settings.php:401
 msgid "days"
 msgstr "Tage"
 
@@ -1078,68 +1074,68 @@ msgstr ""
 msgid "edit agingtable:"
 msgstr "Reifetabelle editieren:"
 
-#: edit_agingtable.php:43 index.php:557 index.php:565 settings.php:382
-#: settings.php:390
+#: edit_agingtable.php:43 index.php:557 index.php:565 settings.php:385
+#: settings.php:393
 msgid "phase"
 msgstr "Phase"
 
-#: edit_agingtable.php:44 index.php:566 settings.php:391
+#: edit_agingtable.php:44 index.php:566 settings.php:394
 msgid "modus"
 msgstr "Modus"
 
-#: edit_agingtable.php:44 index.php:566 settings.php:391
+#: edit_agingtable.php:44 index.php:566 settings.php:394
 msgid "aging-modus"
 msgstr "Reifemodus"
 
-#: edit_agingtable.php:45 index.php:567 settings.php:392
+#: edit_agingtable.php:45 index.php:567 settings.php:395
 msgid "target humidity in %"
 msgstr "Sollwert Feuchte in %"
 
-#: edit_agingtable.php:46 index.php:568 settings.php:393
+#: edit_agingtable.php:46 index.php:568 settings.php:396
 msgid "target temperature in °C"
 msgstr "Sollwert Temperatur in °C"
 
-#: edit_agingtable.php:47 index.php:569 settings.php:394
+#: edit_agingtable.php:47 index.php:569 settings.php:397
 msgid "timer circulate d"
 msgstr "Timer Umluft d"
 
-#: edit_agingtable.php:47 index.php:569 settings.php:394
+#: edit_agingtable.php:47 index.php:569 settings.php:397
 msgid "timer of the circulation air duration in minutes"
 msgstr "Timer für Umluft Dauer in Minuten"
 
-#: edit_agingtable.php:48 index.php:570 settings.php:395
+#: edit_agingtable.php:48 index.php:570 settings.php:398
 msgid "timer circulate p"
 msgstr "Timer Umluft p"
 
-#: edit_agingtable.php:48 index.php:570 settings.php:395
+#: edit_agingtable.php:48 index.php:570 settings.php:398
 msgid "timer of the circulation air period in minutes"
 msgstr "Timer für Umluft Zyklus in Minuten"
 
-#: edit_agingtable.php:49 index.php:571 settings.php:396
+#: edit_agingtable.php:49 index.php:571 settings.php:399
 msgid "timer exhaust d"
 msgstr "Timer Abluft d"
 
-#: edit_agingtable.php:49 index.php:571 settings.php:396
+#: edit_agingtable.php:49 index.php:571 settings.php:399
 msgid "timer of the exhausting air duration in minutes"
 msgstr "Timer für Abluft Dauer in Minuten"
 
-#: edit_agingtable.php:50 index.php:572 settings.php:397
+#: edit_agingtable.php:50 index.php:572 settings.php:400
 msgid "timer exhaust p"
 msgstr "Timer Abluft p"
 
-#: edit_agingtable.php:50 index.php:572 settings.php:397
+#: edit_agingtable.php:50 index.php:572 settings.php:400
 msgid "timer of the exhausting air period in minutes"
 msgstr "Timer für Abluft Zyklus in Minuten"
 
-#: edit_agingtable.php:51 index.php:573 settings.php:398
+#: edit_agingtable.php:51 index.php:573 settings.php:401
 msgid "duration of hanging phase in days"
 msgstr "Dauer der Reifephase in Tagen"
 
-#: edit_agingtable.php:111 index.php:640 settings.php:470
+#: edit_agingtable.php:111 index.php:640 settings.php:473
 msgid "comment:"
 msgstr "Anmerkungen:"
 
-#: edit_agingtable.php:117 settings.php:180
+#: edit_agingtable.php:117 settings.php:182
 msgid "attention"
 msgstr "Achtung"
 
@@ -1156,7 +1152,7 @@ msgid "delete row"
 msgstr "Zeile löschen"
 
 #: edit_agingtable.php:127 notification.php:178 notification.php:364
-#: notification.php:497 notification.php:596 settings.php:328
+#: notification.php:497 notification.php:596 settings.php:331
 msgid "delete"
 msgstr "Löschen"
 
@@ -1209,7 +1205,7 @@ msgstr "Hauptsensoren"
 msgid "ntc sensors"
 msgstr "NTC Sensoren"
 
-#: index.php:582 settings.php:408
+#: index.php:582 settings.php:411
 msgid "no comment"
 msgstr "Keine Anmerkungen vorhanden"
 
@@ -1371,7 +1367,7 @@ msgid "to top"
 msgstr "Zum Anfang"
 
 #: manvals.php:12 manvals.php:149 modules/write_settings_db_logfile_txt.php:205
-#: settings.php:480
+#: settings.php:483
 msgid "manual values"
 msgstr "Manuelle Werte"
 
@@ -2124,6 +2120,10 @@ msgstr ""
 "soll. \n"
 "<br><br>\n"
 "\n"
+"<b>!!! Wichtig !!!: </b>Werden in diesem Bereich Änderungen vorgenommen, "
+"muss z.Zt. das System neu gestartet werden (Reboot) damit diese Änderungen "
+"aktiv werden.\n"
+"<br><br>\n"
 "<b> Es wird dringend empfohlen ALLE Fehler so einzustellen, dass sie bei "
 "ihrem Eintreten IMMER einen Stop des Systems auslösen. Ist dieses nicht der "
 "Fall, kann es zu Schäden am Reifeschrank führen.</b>\n"
@@ -2554,143 +2554,160 @@ msgstr "Keine Waage ausgewählt"
 msgid "operating values"
 msgstr "Einstellungen"
 
-#: settings.php:62
+#: settings.php:54 settings.php:102 settings.php:217
+msgid "Pi-Ager service not running!<br>"
+msgstr "Der Pi-Ager Service läuft nicht!<br>"
+
+#: settings.php:55 settings.php:103 settings.php:218
+msgid "Maybe you have proved that developers are not perfect!<br> "
+msgstr ""
+"Vielleicht haben Sie bewiesen, dass die Entwickler nicht perfekt sind ;-)<br>"
+
+#: settings.php:56 settings.php:104 settings.php:219
+msgid "please check logs or go to: <br>"
+msgstr "Bitte prüfen Sie die Logs oder gehen Sie auf: <br>"
+
+#: settings.php:58 settings.php:106 settings.php:221
+msgid "after after fixing the error you have to reboot the system <br>"
+msgstr "Nach dem Beheben das Fehlers, muss das System neu gebootet werden!<br>"
+
+#: settings.php:63
 msgid "stop pi-ager?"
 msgstr "Pi-Ager anhalten?"
 
-#: settings.php:62
+#: settings.php:63
 msgid "if agingtable is running, it will be stopped also!"
 msgstr "wenn die Reifetabelle läuft wird sie auch angehalten!"
 
-#: settings.php:62
+#: settings.php:63
 msgid "stop pi-ager"
 msgstr "Pi-Ager anhalten"
 
-#: settings.php:69
+#: settings.php:70
 msgid "start pi-ager?"
 msgstr "Pi-Ager starten?"
 
-#: settings.php:69
+#: settings.php:70
 msgid "start pi-ager"
 msgstr "Pi-Ager starten"
 
-#: settings.php:127 settings.php:139 settings.php:153 settings.php:165
+#: settings.php:129 settings.php:141 settings.php:155 settings.php:167
 msgid "Reference unit is 0 in Scale"
 msgstr "Referenz Einheit ist 0"
 
-#: settings.php:127 settings.php:139 settings.php:153 settings.php:165
+#: settings.php:129 settings.php:141 settings.php:155 settings.php:167
 msgid "Please calibrate scale first!"
 msgstr "Bitte zuerst die Waage kalibrieren!"
 
-#: settings.php:127 settings.php:130 settings.php:153 settings.php:156
+#: settings.php:129 settings.php:132 settings.php:155 settings.php:158
 msgid "start scale"
 msgstr "Waage starten"
 
-#: settings.php:130 settings.php:156
+#: settings.php:132 settings.php:158
 msgid "start measurement on scale"
 msgstr "Start Waagenmessung"
 
-#: settings.php:130 settings.php:156
+#: settings.php:132 settings.php:158
 msgid "please calibrate scale after first start !"
 msgstr "Nach dem ersten Start bitte Waage kalibrieren!"
 
-#: settings.php:142 settings.php:168
+#: settings.php:144 settings.php:170
 msgid "tara on scale"
 msgstr "Tara Waage"
 
-#: settings.php:145 settings.php:171
+#: settings.php:147 settings.php:173
 msgid "stop measurement on scale"
 msgstr "Waagenmessung anhalten"
 
-#: settings.php:145 settings.php:171
+#: settings.php:147 settings.php:173
 msgid "stop scale"
 msgstr "Stop Waage"
 
-#: settings.php:180
+#: settings.php:182
 msgid "measurement on scales are stopped"
 msgstr "Waagenmessungen werden angehalten"
 
-#: settings.php:180
+#: settings.php:182
 msgid "calibrate wizzard"
 msgstr "Wizzard Kalibrierung"
 
-#: settings.php:254
+#: settings.php:257
 msgid "startphase"
 msgstr "Startphase"
 
-#: settings.php:258
+#: settings.php:261
 msgid "startday of phase"
 msgstr "Starttag der Phase"
 
-#: settings.php:271
+#: settings.php:274
 msgid "select new agingtable?"
 msgstr "Neue Reifetabelle auswählen?"
 
-#: settings.php:271
+#: settings.php:274
 msgid "select"
 msgstr "Auswählen"
 
-#: settings.php:285
+#: settings.php:288
 msgid "start agingtable?"
 msgstr "Reifetabelle starten?"
 
-#: settings.php:285
+#: settings.php:288
 msgid "manual values will be overwritten in database!"
 msgstr "Die manuellen Werte werden in der Datanbank überschrieben!"
 
-#: settings.php:285
+#: settings.php:288
 msgid "start agingtable"
 msgstr "Start Reifetabelle"
 
-#: settings.php:288
+#: settings.php:291
 msgid "stop agingtable?"
 msgstr "Reifetabelle anhalten?"
 
-#: settings.php:288
+#: settings.php:291
 msgid "pi-ager continues with the last values of the agingtable!"
 msgstr "Der Pi-Ager arbeitet mit den zuletzt gültigen Werten der Reifetabelle!"
 
-#: settings.php:288
+#: settings.php:291
 msgid "stop agingtable"
 msgstr "Reifetabelle anhalten"
 
-#: settings.php:327
+#: settings.php:330
 msgid "edit agingtable?"
 msgstr "Reifetabbelle editieren?"
 
-#: settings.php:327
+#: settings.php:330
 msgid "edit"
 msgstr "Editieren"
 
-#: settings.php:328
+#: settings.php:331
 msgid "delete agingtable?"
 msgstr "Reifetabelle löschen?"
 
-#: settings.php:329
+#: settings.php:332
 msgid "export agingtable?"
 msgstr "Reifetabelle exportieren?"
 
-#: settings.php:329
+#: settings.php:332
 msgid "export"
 msgstr "Exportieren"
 
-#: settings.php:365
+#: settings.php:368
 msgid "upload new agingtable?"
 msgstr "Neue Reifetabelle hochladen?"
 
-#: settings.php:365
+#: settings.php:368
 msgid "upload"
 msgstr "Hochladen"
 
-#: settings.php:379
+#: settings.php:382
 msgid "actual phase and day"
 msgstr "Aktuelle Phase und Tag"
 
-#: settings.php:481
+#: settings.php:484
 msgid "manual adjustments are not possible"
 msgstr "Manuelle Anpassungen sind nicht möglich"
 
-#: settings.php:481
+#: settings.php:484
 msgid "during fully automatic aging."
 msgstr "während der Pi-Ager über die Reifetabelle gesteuert wird."
 
