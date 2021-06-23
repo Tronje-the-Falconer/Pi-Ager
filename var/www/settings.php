@@ -55,7 +55,7 @@
                                             echo _('Maybe you have proved that developers are not perfect!<br> ');
                                             echo _('please check logs or go to: <br>');
                                             echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a><br>';
-											echo _('after after fixing the error you have to reboot the system <br>');
+											echo _('after fixing the error you have to reboot the system <br>');
                                             echo '</td><td></td>';
                                         }
                                         elseif ($grepmain != NULL and $status_piager == 1){ // wenn main.py läuft und Status in DB eingeschaltet
@@ -103,7 +103,7 @@
                                                     echo _('Maybe you have proved that developers are not perfect!<br> ');
                                                     echo _('please check logs or go to: <br>');
                                                     echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a><br>';
-											        echo _('after after fixing the error you have to reboot the system <br>');
+											        echo _('after fixing the error you have to reboot the system <br>');
                                                     echo '</td><td></td>';
                                                     echo '</tr>';
                                                 }
@@ -218,7 +218,7 @@
                                                     echo _('Maybe you have proved that developers are not perfect!<br> ');
                                                     echo _('please check logs or go to: <br>');
                                                     echo '<a href="'.$error_reporting_url.'" target="_blank">Error reporting</a><br>';
-											        echo _('after after fixing the error you have to reboot the system <br>');
+											        echo _('after fixing the error you have to reboot the system <br>');
                                                     echo '</td><td></td>';
                                                     echo '</tr>';
                                                 }                                       
