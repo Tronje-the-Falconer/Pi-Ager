@@ -6,7 +6,7 @@ __author__ = "Claus Fischer"
 __copyright__ = "Copyright 2019, The Pi-Ager Project"
 __credits__ = ["Claus Fischer"]
 __license__ = "GPL"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Production"
@@ -22,13 +22,13 @@ from sensors.pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 from sensors.pi_ager_cl_i2c_sensor_sht import cl_fact_i2c_sensor_sht
 from main.pi_ager_cx_exception import *
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
-from sensors.pi_ager_cl_sensor import cl_main_sensor#
+from sensors.pi_ager_cl_sensor import cl_sensor#
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 
 # global logger
 # logger = pi_ager_logging.create_logger(__name__) 
 
-class cl_main_sensor_sht(cl_main_sensor, ABC):
+class cl_sensor_sht(cl_sensor, ABC):
     
     _RESET = 0x30A2
     _HEATER_ON = 0x306D
@@ -37,10 +37,10 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
     _TRIGGER = 0x2C06
     _STATUS_BITS_MASK = 0xFFFC
     
-    def __init__(self, i_sensor_type, i_address):
+    def __init__(self, i_active_sensor, i_sensor_type, i_address):
         # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-
+        cl_fact_logger.get_instance().debug("i2c address is" + str(i_address))
                     
         self._max_errors = 1
         self._old_temperature = 0
@@ -51,6 +51,7 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
         self._current_humidity = 0
         
         self.o_address = i_address
+        
 
         self._alert_pending = False
         self._heater_status = False
@@ -62,7 +63,10 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
         
         self.o_sensor_type = i_sensor_type
         super().__init__(self.o_sensor_type)
-
+        self.o_active_sensor= i_active_sensor
+        self._i2c_bus = cl_fact_i2c_bus_logic.get_instance().get_i2c_bus()
+        cl_fact_logger.get_instance().debug(self._i2c_bus)
+        self._i2c_sensor = cl_fact_i2c_sensor_sht.get_instance(self.o_active_sensor, self._i2c_bus, self.o_address)
 
 
  
@@ -92,9 +96,7 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
                      
         try:
-            self._i2c_bus = cl_fact_i2c_bus_logic.get_instance().get_i2c_bus()
-            cl_fact_logger.get_instance().debug(self._i2c_bus)
-            self._i2c_sensor = cl_fact_i2c_sensor_sht.get_instance(self._i2c_bus, self.o_address)
+           
             self._send_i2c_start_command()
         except Exception as cx_error:
             cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
@@ -226,7 +228,8 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
         #return x & 2 ** n != 0 
     
         # a more bitwise- and performance-friendly version:
-        return (x & 1 << n != 0)        
+        return (x & 1 << n != 0) 
+        
     def get_current_data(self):
         # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
@@ -235,13 +238,19 @@ class cl_main_sensor_sht(cl_main_sensor, ABC):
         self._current_humidity    = self._get_current_humidity()
         # logger.debug(self._current_temperature)
         # logger.debug(self._current_humidity)
-        cl_fact_logger.get_instance().debug(self._current_temperature)
-        cl_fact_logger.get_instance().debug(self._current_humidity)
+        cl_fact_logger.get_instance().debug("sht temperature : " + str(self._current_temperature))
+        cl_fact_logger.get_instance().debug("sht humidity : " + str(self._current_humidity))
         self._dewpoint            = super().get_dewpoint(self._current_temperature, self._current_humidity)
-    
+        # super().calc_mean_temperature(self._current_temperature)
+        # self.mean_temperature     = super().get_mean_temperature()
+        # cl_fact_logger.get_instance().debug(self.o_active_sensor + "Mean temperature :"+ str(self.mean_temperature)) 
+        
+       
+       
+       
         (temperature_dewpoint, humidity_absolute) = self._dewpoint
         
-        self.measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint)
+        self.measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint, humidity_absolute)
         return(self.measured_data)
         
     

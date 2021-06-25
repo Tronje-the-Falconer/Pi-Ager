@@ -14,6 +14,8 @@
         $logstring = 'button save edit agingtable pressed';
         logger('DEBUG', $logstring );
         
+        unset($_SESSION['agingtable_to_edit']);
+        
         $agingtable_to_edit = $_POST['agingtable_edit'];
         $maxrow = $_POST['max_row'];
         $comment = $_POST['comment_edit_agingtable'];
@@ -70,7 +72,7 @@
             print '<script language="javascript"> alert("'. (_("agingtable")) . " : " . (_("agingtable")) . ' ' . $edit_agingtable . ' ' . (_("deleted")) . '"); </script>';
         }
         elseif ($returncode == FALSE){
-            print '<script language="javascript"> alert("'. (_("agingtable")) . " : " . $edit_agingtable . ' ' . (_("can not edit the controlling agingtable. Please choose an other first")) .'"); </script>';
+            print '<script language="javascript"> alert("'. (_("agingtable")) . " : " . $edit_agingtable . ' ' . (_("can not delete the controlling agingtable. Please choose another first")) .'"); </script>';
         }
         else{
             print '<script language="javascript"> alert("'. (_("agingtable")) . " : " . (_("unexpected Error")) .'"); </script>';
@@ -137,7 +139,7 @@
             
         }
         else{
-            print '<script language="javascript"> alert("'. (_("upload agingtable")) . " : " . (_("please select an file to upload")) .'"); window.location.href = "settings.php";</script>';
+            print '<script language="javascript"> alert("'. (_("upload agingtable")) . " : " . (_("please select a file to upload")) .'"); window.location.href = "settings.php";</script>';
         }
     }
     if (isset ($_POST['export_agingtable'])){
@@ -213,5 +215,51 @@
         $logstring = 'button export  pressed';
         logger('DEBUG', $logstring );
         print '<script language="javascript"> alert("'. (_("export agintable")) . " : " . (_("done")) .'"); </script>';
+    }
+
+    if (isset ($_POST['delete_agingtable_row_submit'])){
+        $logstring = 'button delete row in agingtable pressed';
+        logger('DEBUG', $logstring );
+        unset($_POST['delete_agingtable_row_submit']);
+        
+        $agingtable_to_edit = $_POST['agingtable_edit'];
+        $_SESSION['agingtable_to_edit'] = $agingtable_to_edit;
+        $agingtable_to_edit_sql = 'agingtable_' . $agingtable_to_edit;
+        $delete_agingtable_row = intval($_POST['delete_agingtable_row']);
+        $agingtable_row_array = $_SESSION['agingtable_row_array'];
+        $rownumber_to_delete = $agingtable_row_array[$delete_agingtable_row];
+
+        $sql = 'DELETE FROM ' . $agingtable_to_edit_sql . ' WHERE  "id" = ' . $rownumber_to_delete ;
+
+        open_connection();
+        execute_query($sql);
+        close_database();
+        $logstring = 'delete row in agingtable done';
+        logger('DEBUG', $logstring );
+        
+        print '<script language="javascript"> alert("'. (_("agingtable")) . " : " . (_("row in agingtable deleted")) .'"); window.location.href = "edit_agingtable.php"; ></script>';
+    }
+    if (isset ($_POST['adding_agingtable_row_submit'])){
+        $logstring = 'button add row in agingtable pressed';
+        logger('DEBUG', $logstring );
+        unset($_POST['adding_agingtable_row_submit']);
+        
+        $agingtable_to_edit = $_POST['agingtable_edit'];
+        $_SESSION['agingtable_to_edit'] = $agingtable_to_edit;
+        $agingtable_to_edit_sql = 'agingtable_' . $agingtable_to_edit;
+        $add_agingtable_rows = $_POST['adding_agingtable_rows'];
+        
+        $index_row = 0;
+        while ($index_row < $add_agingtable_rows) {
+            $sql = 'INSERT INTO ' . $agingtable_to_edit_sql . '("' . $agingtable_modus_field . '", "' . $agingtable_setpoint_humidity_field . '", "' . $agingtable_setpoint_temperature_field . '", "' . $agingtable_circulation_air_duration_field . '", "' . $agingtable_circulation_air_period_field . '", "' . $agingtable_exhaust_air_duration_field . '", "' . $agingtable_exhaust_air_period_field . '", "' . $agingtable_days_field . '", "'. $agingtable_comment_field .'") VALUES (NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,"")';
+            open_connection();
+            execute_query($sql);
+            close_database();
+            $index_row++;
+        }
+       
+        $logstring = 'added rows in agingtable done';
+        logger('DEBUG', $logstring );
+        print '<script language="javascript"> alert("'. (_("agingtable")) . " : " . (_("rows in agingtable added")) .'"); window.location.href = "edit_agingtable.php"; </script>';
     }
 ?>

@@ -21,8 +21,7 @@ body {
     margin: 0 auto;
     padding: 10px;
     margin-bottom: 20px;
-    max-width: 473px;
-
+    max-width: 800px;
 }
 
 
@@ -40,6 +39,12 @@ body {
 
 
 /* Hilfe-Texte in den Einstellungen */
+.help_b {
+   text-align: left;
+   font-size: 11px;
+   color:  #555555;
+   padding: 10px;
+}
 
 .help_p {
    display: none;
@@ -104,17 +109,13 @@ body {
 /* Zellen Schaltzustände */
 .text_left  {
     text-align: left;
+	width: 300px;
 }
 
 .text_left_top  {
     vertical-align: top;
     text-align: left;
 }
-
-.text_left  {
-    text-align: left;
-}
-
 
 .td_png_icon{
     text-align: center;

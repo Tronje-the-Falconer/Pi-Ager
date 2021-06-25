@@ -1,6 +1,6 @@
 # Initial Konfiguration
 # Pi-Ager 
-# Version 1
+
 # Standard Hostname              rpi-Pi-Ager 
 # Standard Passwoerter für alle  raspberry
 # 

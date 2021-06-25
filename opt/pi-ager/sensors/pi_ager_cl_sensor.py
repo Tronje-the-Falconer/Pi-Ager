@@ -6,7 +6,7 @@ __author__ = "Claus Fischer"
 __copyright__ = "Copyright 2019, The Pi-Ager Project"
 __credits__ = ["Claus Fischer"]
 __license__ = "GPL"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Production"
@@ -18,21 +18,26 @@ import inspect
 from main.pi_ager_cl_logger import cl_fact_logger
 from datetime import datetime
 
-
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
+#from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type, cl_fact_second_sensor_type
 
 from main.pi_ager_cx_exception import *
 
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 from main.pi_ager_cl_database import cl_fact_db_influxdb
-        
-class cl_main_sensor(cl_ab_sensor):
-    
+
+class cl_sensor(cl_ab_sensor):
+
     def __init__(self, o_sensor_type):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._error_counter = 0
         self._max_errors = 3
         self.o_sensor_type = o_sensor_type
+        
+        self.o_mean_temperature = 0
+        self.o_temperature_sum = 0
+        self.o_counter = 0
+        
     def get_current_data(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if (self._error_counter >= self._max_errors):
@@ -40,7 +45,7 @@ class cl_main_sensor(cl_ab_sensor):
                  
     def get_sensor_type_ui(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return( self.o_sensor_type.get_sensor_type_ui() )
+        return( self.o_sensor_type.get_sensor_type_ui())
     
     def get_sensor_type(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
@@ -59,7 +64,19 @@ class cl_main_sensor(cl_ab_sensor):
         
         if (self._error_counter >= self._max_errors):
             raise cx_measurement_error ('To much measurment errors occured!')
-        
+
+    def calc_mean_temperature(self, temperature):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        self.o_counter = self.o_counter + 1
+        self.o_temperature_sum = self.o_temperature_sum + temperature
+        self.o_mean_temperature = self.o_temperature_sum / self.o_counter
+        cl_fact_logger.get_instance().debug("Mean Values counter:" + str(self.o_counter )+ "Temp: " + str(temperature) + "Mean: " + str(self.o_mean_temperature) )
+
+    
+    def get_mean_temperature(self):
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        return(self.o_mean_temperature)
+
     def get_dewpoint(self, temperature, humidity):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if (temperature >= 0):
@@ -80,7 +97,7 @@ class cl_main_sensor(cl_ab_sensor):
         v = math.log10(DD/6.1078)
         self._temperature_dewpoint = b*v/(a-v) 
         self._humidity_absolute = 10**5 * mw/R * DD/temperature_kelvin
-        cl_fact_logger.get_instance().debug("Calculated DewPoint for Temp %.2f C and Hum %.2f is %.2f" % (temperature,humidity,self._temperature_dewpoint))
+        cl_fact_logger.get_instance().debug("Calculated DewPoint for Temp %.2f C and Hum %.2f is %.2f, HumAbs is %.2f grams/m³" % (temperature,humidity,self._temperature_dewpoint, self._humidity_absolute))
 
         calculated_dewpoint = (self._temperature_dewpoint, self._humidity_absolute)
         return(calculated_dewpoint)
@@ -177,7 +194,7 @@ class cl_main_sensor(cl_ab_sensor):
         pass
 
        
-class th_main_sensor():
+class th_sensor():
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
     NAME = 'Main_sensor'
     
@@ -191,7 +208,4 @@ class th_main_sensor():
         if self.get_type_raise == True:
             raise cx_Sensor_not_defined(self._type_ui)        
         return(self._type)
-
-    
-
 

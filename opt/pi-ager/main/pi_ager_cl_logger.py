@@ -25,6 +25,19 @@ import pi_ager_database_get_logging_value
 
 from main.pi_ager_cx_exception import *
 
+class GroupWriteRotatingFileHandler(handlers.RotatingFileHandler):
+
+    def doRollover(self):
+        """
+        Override base class method to make the new log file group writable.
+        """
+        # Rotate the file first.
+        handlers.RotatingFileHandler.doRollover(self)
+
+        # Add group write to the current permissions.
+        currMode = os.stat(self.baseFilename).st_mode
+        os.chmod(self.baseFilename, currMode | stat.S_IWOTH | stat.S_IWGRP)
+        
 class cl_logger:
 
     def __init__(self):
@@ -80,14 +93,31 @@ class cl_logger:
         global logger
         filepath = pi_ager_paths.get_path_logfile_txt_file()
         website_logfile = pathlib.Path(filepath)
-        filepermission = oct(os.stat(pi_ager_paths.logfile_txt_file)[stat.ST_MODE])[-3:]
+        # filepermission = oct(os.stat(pi_ager_paths.logfile_txt_file)[stat.ST_MODE])[-3:]
         if not website_logfile.is_file():
             new_website_logfile = open(pi_ager_paths.get_path_logfile_txt_file(), "wb")
             new_website_logfile.close()
-            #os.chmod(pi_ager_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
+            # os.chmod(pi_ager_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
+        filepermission = oct(os.stat(pi_ager_paths.logfile_txt_file)[stat.ST_MODE])[-3:]
         if (filepermission != '666'):
             os.chmod(pi_ager_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
     
+    def check_pi_ager_logfile(self):
+        """
+        checking and setting permission for the pi_ager logfile 
+        """
+        global logger
+        filepath = pi_ager_paths.get_pi_ager_log_file_path()
+        pi_ager_logfile = pathlib.Path(filepath)
+        # filepermission = oct(os.stat(pi_ager_paths.pi_ager_log_file)[stat.ST_MODE])[-3:]
+        if not pi_ager_logfile.is_file():
+            new_pi_ager_logfile = open(filepath, "wb")
+            new_pi_ager_logfile.close()
+            #os.chmod(pi_ager_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
+        filepermission = oct(os.stat(pi_ager_paths.pi_ager_log_file)[stat.ST_MODE])[-3:]
+        if (filepermission != '666'):
+            os.chmod(filepath, stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
+        
     def create_logger(self,pythonfile):
         """
         creating loggers
@@ -95,32 +125,45 @@ class cl_logger:
         self.check_website_logfile()
         loglevel_file_value = pi_ager_database_get_logging_value.get_logging_value('loglevel_file')
         loglevel_console_value = pi_ager_database_get_logging_value.get_logging_value('loglevel_console')
-        logging.handlers.RotatingFileHandler
+        #logging.handlers.RotatingFileHandler
+        logging.handlers.GroupWriteRotatingFileHandler = GroupWriteRotatingFileHandler
+        
         # Logger fuer website
-        website_log_rotatingfilehandler = logging.handlers.RotatingFileHandler(pi_ager_paths.get_path_logfile_txt_file(), mode='a', maxBytes=1048576, backupCount=36, encoding=None, delay=False)
-        website_log_rotatingfilehandler.setLevel(logging.INFO)
-        website_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(message)s', '%y-%m-%d %H:%M:%S')
-        website_log_rotatingfilehandler.setFormatter(website_log_rotatingfilehandler_formatter)
+        self.website_log_rotatingfilehandler = logging.handlers.GroupWriteRotatingFileHandler(pi_ager_paths.get_path_logfile_txt_file(), mode='a', maxBytes=262144, backupCount=36, encoding=None, delay=False)
+        self.website_log_rotatingfilehandler.setLevel(logging.INFO)
+        self.website_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(message)s', '%y-%m-%d %H:%M:%S')
+        self.website_log_rotatingfilehandler.setFormatter(self.website_log_rotatingfilehandler_formatter)
     
         # Logger fuer pi-ager debugging
-        pi_ager_log_rotatingfilehandler = logging.handlers.RotatingFileHandler(pi_ager_paths.get_pi_ager_log_file_path(), mode='a', maxBytes=2097152, backupCount=20, encoding=None, delay=False)
-        pi_ager_log_rotatingfilehandler.setLevel(self.get_logginglevel(loglevel_file_value))
-        pi_ager_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(name)-40s %(levelname)-8s %(message)s', '%m-%d %H:%M:%S')
-        pi_ager_log_rotatingfilehandler.setFormatter(pi_ager_log_rotatingfilehandler_formatter)
+        self.check_pi_ager_logfile()
+        self.pi_ager_log_rotatingfilehandler = logging.handlers.GroupWriteRotatingFileHandler(pi_ager_paths.get_pi_ager_log_file_path(), mode='a', maxBytes=1048576, backupCount=20, encoding=None, delay=False)
+        self.pi_ager_log_rotatingfilehandler.setLevel(self.get_logginglevel(loglevel_file_value))
+        self.pi_ager_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(name)-40s %(levelname)-8s %(message)s', '%m-%d %H:%M:%S')
+        self.pi_ager_log_rotatingfilehandler.setFormatter(self.pi_ager_log_rotatingfilehandler_formatter)
     
         # Logger fuer die Console
-        console_streamhandler = logging.StreamHandler()
-        console_streamhandler.setLevel(self.get_logginglevel(loglevel_console_value))
-        console_streamhandler_formatter = logging.Formatter(' %(levelname)-10s: %(name)-8s %(message)s')
-        console_streamhandler.setFormatter(console_streamhandler_formatter)
+        self.console_streamhandler = logging.StreamHandler()
+        self.console_streamhandler.setLevel(self.get_logginglevel(loglevel_console_value))
+        self.console_streamhandler_formatter = logging.Formatter(' %(levelname)-10s: %(name)-8s %(message)s')
+        self.console_streamhandler.setFormatter(self.console_streamhandler_formatter)
         
         logger = logging.getLogger(pythonfile)
         logger.setLevel(logging.DEBUG)
-        logger.addHandler(website_log_rotatingfilehandler)
-        logger.addHandler(pi_ager_log_rotatingfilehandler)
-        logger.addHandler(console_streamhandler)
+        logger.addHandler(self.website_log_rotatingfilehandler)
+        logger.addHandler(self.pi_ager_log_rotatingfilehandler)
+        logger.addHandler(self.console_streamhandler)
         
         return logger
+        
+    def update_logger_loglevels( self ):
+        """
+        update log levels for console and file
+        """
+        loglevel_file_value = pi_ager_database_get_logging_value.get_logging_value('loglevel_file')
+        loglevel_console_value = pi_ager_database_get_logging_value.get_logging_value('loglevel_console')
+        self.pi_ager_log_rotatingfilehandler.setLevel(self.get_logginglevel(loglevel_file_value))
+        self.console_streamhandler.setLevel(self.get_logginglevel(loglevel_console_value))
+        
     def me(self):
         """
         Returns the logsting for logging in every method for the current code line (how i am)
@@ -177,6 +220,8 @@ class th_logger(cl_logger):
         return(loglevel)
     
     def check_website_logfile(self):
+        pass
+    def check_pi_ager_logfile(self):
         pass
     def create_logger(self,pythonfile):
         pass

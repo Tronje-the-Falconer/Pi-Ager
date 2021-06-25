@@ -1,0 +1,2661 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pi-Ager-EN\n"
+"POT-Creation-Date: 2021-06-12 13:31+0200\n"
+"PO-Revision-Date: 2021-06-21 14:13+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_GB\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.0\n"
+"X-Poedit-Basepath: ../../###GITHUB/branches/entwicklung/var/www\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin.php:26
+msgid "uv-light switch"
+msgstr ""
+
+#: admin.php:39
+msgid "uv light manual off"
+msgstr ""
+
+#: admin.php:40
+msgid "end pause uv-light!"
+msgstr ""
+
+#: admin.php:40 webcam.php:58
+msgid "auto"
+msgstr ""
+
+#: admin.php:44 webcam.php:52
+msgid "auto mode on"
+msgstr ""
+
+#: admin.php:45
+msgid "pause uv-light!"
+msgstr ""
+
+#: admin.php:45
+msgid "uv light off"
+msgstr ""
+
+#: admin.php:53 header.php:143
+msgid "administration"
+msgstr ""
+
+#: admin.php:60 index.php:21
+msgid "internal"
+msgstr ""
+
+#: admin.php:62 index.php:46
+msgid "external"
+msgstr ""
+
+#: admin.php:65
+msgid "sensortype"
+msgstr ""
+
+#: admin.php:65 admin.php:127 admin.php:209 admin.php:335 admin.php:575
+#: config.php:16 config.php:70 config.php:117 config.php:145 config.php:184
+#: config.php:223 manvals.php:22 manvals.php:51 manvals.php:74 manvals.php:97
+#: manvals.php:123 notification.php:183 notification.php:369
+#: notification.php:502 notification.php:601 notification.php:707
+#: notification.php:768 notification.php:829
+msgid "help"
+msgstr ""
+
+#: admin.php:79
+msgid "only configurable if internal sensor is set to sht3x or sht85"
+msgstr ""
+
+#: admin.php:104
+msgid "helptext_sensortype_admin"
+msgstr ""
+"<br><br>\n"
+"<b>Sensor intern: </b> Here you can select the sensor to control the "
+"temperature and humidity in the Pi-Ager.\n"
+"The older 1-Wire sensors DHT11/22 and SHT75 as well as the newer I2C sensors "
+"(Bus Adr.44) can be used.\n"
+"<br><br>\n"
+"<b>Sensor extern: </b>It is possible to connect another sensor to the "
+"system. The external sensor can be used to monitor the external "
+"environmental conditions of the Pi-Ager. The external temperature and "
+"humidity can be used as a source of information, especially for the control "
+"of humidity in the Pi-Ager.\n"
+"<br>It should be noted that currently only the SHT3X sensors can have their "
+"I2C bus address changed. Therefore only these sensors can be used as "
+"external sensors.\n"
+"<br>With the help of an external circuit, e.g. with a 10kOhm resistor, the "
+"bus address of the SHT3x sensor can be changed to the required address 45. "
+"Some SHT3X sensor boards are also equipped with a corresponding jumper.\n"
+"<br><br>\n"
+"<b>Remark: </b> The connection of 2 sensors is only possible if you use the "
+"new I2C sensors. The external sensor is connected in parallel to the "
+"internal sensor to the corresponding terminals of the Pi-Ager board.\n"
+"<br>For the connection of the sensors always shielded cables must be used, e."
+"g. USB cables or Ethernet cables. The length of the sensor cable should not "
+"exceed 1.5m. It is important that the shield of the sensor lines is always "
+"connected on the Pi-Ager board side.\n"
+"<br><br>\n"
+"<b>Attention: </b> The connection of a sensor may only be done in a de-"
+"energized state, otherwise there is a risk of short circuit and the "
+"Raspberry can be damaged.\n"
+"<br><br>"
+
+#: admin.php:106 admin.php:203 admin.php:329 admin.php:355 admin.php:591
+#: config.php:64 config.php:111 config.php:139 config.php:178 config.php:217
+#: config.php:246 manvals.php:44 manvals.php:67 manvals.php:90 manvals.php:117
+#: manvals.php:142 notification.php:196 notification.php:382
+#: notification.php:515 notification.php:614 notification.php:720
+#: notification.php:781 notification.php:842
+msgid "close"
+msgstr ""
+
+#: admin.php:116
+msgid ""
+"ATTENTION: a shutdown is required, please turn the power off/on to restart "
+"the system!"
+msgstr ""
+
+#: admin.php:116
+msgid "change sensors"
+msgstr ""
+
+#: admin.php:127 index.php:118 index.php:1007 settings.php:77
+msgid "scales"
+msgstr ""
+
+#: admin.php:128 admin.php:160 diagrams.php:508 diagrams.php:529
+#: diagrams.php:553 diagrams.php:594 diagrams.php:615 diagrams_old.php:264
+#: diagrams_old.php:284 diagrams_old.php:307 diagrams_old.php:334
+#: diagrams_old.php:376 index.php:411 index.php:431 index.php:454 index.php:491
+#: index.php:513 modules/start_stop_program.php:238
+#: modules/start_stop_program.php:243 scale_wizzard.php:27 settings.php:178
+msgid "scale"
+msgstr ""
+
+#: admin.php:131 admin.php:163
+msgid "reference unit"
+msgstr ""
+
+#: admin.php:135 admin.php:167
+msgid "offset"
+msgstr ""
+
+#: admin.php:139 admin.php:171
+msgid "saving period"
+msgstr ""
+
+#: admin.php:201
+msgid "helptext_scale_admin"
+msgstr ""
+"<br><br>\n"
+"<b><u>Load cell setting parameters: </u></b>\n"
+"<br><br>\n"
+"<b>Reference Unit: </b> The specific characteristic value of the load cell "
+"used is entered here.\n"
+"<br>On the settings page, the exact value for the reference unit of the load "
+"cell used can be determined with the help of the scale wizard.\n"
+"<br><br>\n"
+"<b>Offset: </b> The specific characteristic value of the load cell is "
+"entered here.\n"
+"<br>On the settings page, the exact value for the offset of the load cell "
+"used can be determined with the help of the scale wizard. \n"
+"<br><br>\n"
+"<b>Storage cycle: </b>\n"
+"<br>Here you can set the cycle in which you save the values to the database "
+"table for showing the weight data in the scale diagrams.\n"
+"<br>Recommended value is 300 seconds.\n"
+"<br><br>\n"
+"<b>Typical Ref. Unit values: </b>\n"
+"<br>10KG China Zelle: 205\n"
+"<br>20kg China Zelle: 102\n"
+"<br>50kg Edelstahl Zelle: 74\n"
+"<br>20kg Edelstahl Zelle: 186\n"
+"<br><br>"
+
+#: admin.php:327
+msgid "helptext_thermometer_admin"
+msgstr ""
+"<br><br>\n"
+"<b><u>Analog sensors: </u></b>\n"
+"<br>A 4-channel AD converter was implemented on the Pi-Ager board and "
+"integrated into the software. With this it is now possible to operate "
+"various other analog sensors on the system. (especially NTC temperature "
+"sensors)\n"
+"<br>\n"
+"<br>If sensor channels are not used, please select ------.\n"
+"<br><br>\n"
+"<b>Temperature sensors: </b> For example, if you want to monitor the "
+"temperature in the meat at different points, this is possible with the "
+"appropriate meat temperature sensors. Due to the lower temperatures, the "
+"100K sensors are recommended because of the better resolution. However, the "
+"1000kOhm NTC sensors also work without problems. \n"
+"<br>Nearly all temperature sensors can be used, which are also used in the "
+"Wlanthermo project.\n"
+"<br><br>\n"
+"<b>Current sensor: </b> It is possible to connect a current sensor to "
+"channel 4. So it is possible to monitor the current of the system.\n"
+"<br> Supported sensor type: LEM HO 6-P/SP33 (It is important to use the "
+"version with the 3.3V power supply).\n"
+"<br> For correct values to be displayed, 3 windings (turns) must be passed "
+"through the sensor. \n"
+"<br><br>\n"
+"<br><b>Attention! </b> It is necessary to count the turns that are passed "
+"through the feedthrough of the sensor. At this point you can easily make a "
+"mistake.\n"
+"<br><br>\n"
+"<b>Annotation: </b>Up to board version 2.2 all 4 inputs were prepared for "
+"NTC sensors and equipped with 2.5 mm stereo jack sockets. From board version "
+"2.3 on, channel 4 has been prepared for connection of a current sensor (3.5 "
+"mm stereo jack socket) and can be used immediately. All boards with version "
+"2.2 and smaller can be modified to connect a current sensor. But you have to "
+"use a 2.5 mm jack plug in this case.\n"
+"<br><br>"
+
+#: admin.php:335
+msgid "language"
+msgstr ""
+
+#: admin.php:353
+msgid "helptext_language_admin"
+msgstr ""
+"<br><br>\n"
+"<b>Language: </b> Here you can set the desired languages for the system.\n"
+"<br><br>\n"
+"<br><b>Attention! </b> For the language settings to work, the appropriate "
+"language pack must be installed on the Rasperry Pi with sudo raspi-config "
+"using a terminal program, e.g. PuTTY :\n"
+"<br> Select 'Localisation Options'\n"
+"<br> Select 'Change Locale'\n"
+"<br> Select 'en_GB.UTF-8 UTF8'\n"
+"<br> Select 'de_DE.UTF-8 UTF8'\n"
+"<br><br>"
+
+#: admin.php:359 admin.php:468 admin.php:492 admin.php:553 config.php:254
+#: edit_agingtable.php:116 manvals.php:149 notification.php:133
+#: notification.php:319 notification.php:461 notification.php:569
+#: notification.php:694 notification.php:758 notification.php:819
+msgid "save"
+msgstr ""
+
+#: admin.php:359
+msgid "administration 1"
+msgstr ""
+
+#: admin.php:365
+msgid "reboot & shutdown"
+msgstr ""
+
+#: admin.php:371
+msgid "ATTENTION: reboot system?"
+msgstr ""
+
+#: admin.php:371 reboot.php:8
+msgid "reboot"
+msgstr ""
+
+#: admin.php:372
+msgid "ATTENTION: shutdown system?"
+msgstr ""
+
+#: admin.php:372 shutdown.php:8
+msgid "shutdown"
+msgstr ""
+
+#: admin.php:378
+msgid "logging"
+msgstr ""
+
+#: admin.php:468
+msgid "save loglevel?"
+msgstr ""
+
+#: admin.php:473 modules/write_debug_values.php:11
+msgid "debug values"
+msgstr ""
+
+#: admin.php:483
+msgid "measuring interval"
+msgstr ""
+
+#: admin.php:487
+msgid "agingtable days in seconds"
+msgstr ""
+
+#: admin.php:492
+msgid "ATTENTION: save debug values?"
+msgstr ""
+
+#: admin.php:496
+msgid "backup"
+msgstr ""
+
+#: admin.php:518
+msgid "nfs volume"
+msgstr ""
+
+#: admin.php:522
+msgid "subdirectory"
+msgstr ""
+
+#: admin.php:526
+msgid "nfs mount"
+msgstr ""
+
+#: admin.php:530
+msgid "nfs path"
+msgstr ""
+
+#: admin.php:534
+msgid "number of backups"
+msgstr ""
+
+#: admin.php:538
+msgid "backup name"
+msgstr ""
+
+#: admin.php:542
+msgid "nfs opt"
+msgstr ""
+
+#: admin.php:546
+msgid "backup_active"
+msgstr ""
+
+#: admin.php:553
+msgid "ATTENTION: save backup values?"
+msgstr ""
+
+#: admin.php:563
+msgid "ATTENTION: backup manually?"
+msgstr ""
+
+#: admin.php:563
+msgid "backup manually"
+msgstr ""
+
+#: admin.php:566
+msgid "Agingtable is active. No backup possible!"
+msgstr ""
+
+#: admin.php:589
+msgid "helptext_backup"
+msgstr ""
+"<br><br>\n"
+"<b>backup - script over NFS:</b> \n"
+"<br><br>\n"
+"<br>The system has a function with which a complete image of the Pi-Ager can "
+"be stored on a NAS or a NFS mount. \n"
+"<br><br>\n"
+"<b>caution. </b> The larger the SD card, the longer the backup process will "
+"take. This is also because the NFS mount is connected via WLAN. With a LAN "
+"connection it probably goes faster.\n"
+"<br><br>\n"
+"<b>general information:</b> \n"
+"<br>About the script pi-ager-main.sh the Pi-Ager is stopped. During this "
+"time no Pi-Ager function is active, this means that the relays are all down "
+"for this time.\n"
+"<br>When the backup process is finished, the Pi-Ager starts automatically "
+"and runs with the last settings.  \n"
+"<br>The progress of the backup process can be monitored using a terminal "
+"window. Any problems occurring during backup are also logged.\n"
+"<br>In the terminal window enter the following commands:\n"
+"<br> cd /var/log\n"
+"<br> cat pi-ager_backup.log\n"
+"<br><br>\n"
+"<b>nfs directory: </b> Here you enter the server and NFS share.\n"
+"<br>z.B.: 192.168.0.111:/srv/backup\n"
+"<br><br>\n"
+"<b>subdirectory: </b>Here you can specify a possible subdirectory.\n"
+"<br>e.g.: pi-ager\n"
+"<br><br>\n"
+"<b>nfs mount: </b> This is where the NFS share is mounted on the Raspberry "
+"Pi.\n"
+"<br>e.g.: /home/pi/backup\n"
+"<br><br>\n"
+"<b>nfs path: </b> Is composed of the file path on the Pi (nfsmount) and the "
+"NFS subdirectory. \n"
+"<br>e.g.: /home/pi/backup/pi-ager\n"
+"<br><br>\n"
+"<b>Number of backups: </b>Number of last n backups kept.\n"
+"<br>e.g. 2\n"
+"<br><br>\n"
+"<b>backup name: </b> Name of the backup file.\n"
+"<br>e.g.: pi_ager_backup\n"
+"<br><br>\n"
+"<b>nfs option: </b> Options for mounting can be specified here.\n"
+"<br>Here you can find possible options:\n"
+"<br>http://manpages.ubuntu.com/manpages/impish/en/man8/mount.8.html\n"
+"<br><br>\n"
+"<b>backup active: </b>If a backup is to be performed, this checkbox must be "
+"selected. By deselecting it, the backup can be disabled\n"
+"<br><br>"
+
+#: admin.php:595
+msgid "database"
+msgstr ""
+
+#: admin.php:601
+msgid "ATTENTION: empty statistic tables?"
+msgstr ""
+
+#: admin.php:601
+msgid "empty statistic tables"
+msgstr ""
+
+#: admin.php:603
+msgid "database administration"
+msgstr ""
+
+#: admin.php:610
+msgid "python"
+msgstr ""
+
+#: admin.php:616
+msgid "ATTENTION: kill"
+msgstr ""
+
+#: admin.php:616
+msgid "stop"
+msgstr ""
+
+#: admin.php:617
+msgid "start"
+msgstr ""
+
+#: calibrate_scale.php:11 modules/tara_scale.php:11
+msgid "scale_wizzard"
+msgstr ""
+
+#: calibrate_scale.php:11 modules/tara_scale.php:11
+msgid "attached weight"
+msgstr ""
+
+#: calibrate_scale.php:47 calibrate_scale.php:68 calibrate_scale.php:73
+#: header.php:162 modules/tara_scale.php:44 scale_wizzard.php:38
+#: scale_wizzard.php:59
+msgid "scale wizzard"
+msgstr ""
+
+#: calibrate_scale.php:47 settings.php:139 settings.php:142 settings.php:165
+#: settings.php:168
+msgid "tara scale"
+msgstr ""
+
+#: calibrate_scale.php:49 settings.php:142 settings.php:168 settings.php:180
+msgid "please relieve the load cell completely"
+msgstr ""
+
+#: calibrate_scale.php:49
+msgid "and press ok"
+msgstr ""
+
+#: calibrate_scale.php:54
+msgid "relieve the load cell completely"
+msgstr ""
+
+#: calibrate_scale.php:54
+msgid "ok"
+msgstr ""
+
+#: calibrate_scale.php:55
+msgid "cancel scale wizzard? referenceunit is set, tara will not be done!"
+msgstr ""
+
+#: calibrate_scale.php:55 edit_agingtable.php:117 scale_wizzard.php:48
+msgid "cancel"
+msgstr ""
+
+#: calibrate_scale.php:66 calibrate_scale.php:68
+msgid "calibration failed"
+msgstr ""
+
+#: calibrate_scale.php:66 calibrate_scale.php:68
+msgid "calculated reference unit is 0"
+msgstr ""
+
+#: calibrate_scale.php:66 calibrate_scale.php:68
+msgid "referenceunit is set to old value"
+msgstr ""
+
+#: calibrate_scale.php:66 calibrate_scale.php:68
+msgid "please try again"
+msgstr ""
+
+#: calibrate_scale.php:73
+msgid "error on calibrating"
+msgstr ""
+
+#: changelog.php:5 header.php:155
+msgid "changelog"
+msgstr ""
+
+#: changelog.php:13 logs.php:17
+msgid "file verification"
+msgstr ""
+
+#: changelog.php:14 logs.php:18
+msgid "file size"
+msgstr ""
+
+#: changelog.php:16 logs.php:20
+msgid "last changed at"
+msgstr ""
+
+#: changelog.php:19
+msgid "oclock"
+msgstr ""
+
+#: changelog.php:20 logs.php:23
+msgid "file exists"
+msgstr ""
+
+#: changelog.php:23 logs.php:26
+msgid "file does not exist"
+msgstr ""
+
+#: changelog.php:26 logs.php:29
+msgid "file is readable"
+msgstr ""
+
+#: changelog.php:29 logs.php:32
+msgid "file is not readable"
+msgstr ""
+
+#: changelog.php:47
+msgid "the developer team"
+msgstr ""
+
+#: changelog.php:65 changelog.php:66
+msgid "backend & linux"
+msgstr ""
+
+#: changelog.php:83 changelog.php:101
+msgid "hardware & testing"
+msgstr ""
+
+#: changelog.php:84
+msgid "allrounder"
+msgstr ""
+
+#: changelog.php:121
+msgid "frontend & design"
+msgstr ""
+
+#: changelog.php:122
+msgid "backend"
+msgstr ""
+
+#: changelog.php:125
+msgid "based on an idea and submission of"
+msgstr ""
+
+#: config.php:5
+msgid "set general configuration values"
+msgstr ""
+
+#: config.php:11
+msgid "attention! be carful what you do!"
+msgstr ""
+
+#: config.php:16 diagrams.php:133 diagrams.php:153 diagrams.php:216
+#: diagrams.php:261 diagrams.php:450 diagrams.php:472 diagrams.php:481
+#: diagrams.php:648 diagrams.php:668 diagrams.php:688 diagrams.php:708
+#: diagrams.php:777 diagrams.php:801 diagrams_old.php:131 diagrams_old.php:172
+#: diagrams_old.php:203 diagrams_old.php:430 diagrams_old.php:449
+#: diagrams_old.php:468 diagrams_old.php:524 diagrams_old.php:549
+#: diagrams_old.php:587 diagrams_old.php:637 diagrams_old.php:662 index.php:212
+#: index.php:231 index.php:250 index.php:311 index.php:358 manvals.php:51
+msgid "temperature"
+msgstr ""
+
+#: config.php:17 config.php:71
+msgid "switch-on value"
+msgstr ""
+
+#: config.php:22 config.php:25 config.php:75
+msgid "on at"
+msgstr ""
+
+#: config.php:28 config.php:46 config.php:78 config.php:91
+msgid "see logs"
+msgstr ""
+
+#: config.php:35 config.php:84
+msgid "switch-off value"
+msgstr ""
+
+#: config.php:40 config.php:43 config.php:88
+msgid "off at"
+msgstr ""
+
+#: config.php:62
+msgid "helptext_temperature_config"
+msgstr ""
+"<br><br>\n"
+"<b>switch-on value: </b>  is the value at which the control becomes active "
+"(value limit: 0-10 ° C). This value must always be greater than the switch-"
+"off value.\n"
+"<br><br>\n"
+"<b>switch-off value: </b> is the value at which the control becomes inactive "
+"(value: 0-10 ° C). The values may not be the same in order to avoid a wild "
+"switching on and off.\n"
+"<br><br>\n"
+"<b>recommendation:</b> check the stored values in the logfile!\n"
+"<br><br>\n"
+"<b>attention: </b> use only positive integers!\n"
+"<br><br>"
+
+#: config.php:70 diagrams.php:173 diagrams.php:193 diagrams.php:216
+#: diagrams.php:283 diagrams.php:291 diagrams.php:359 diagrams.php:480
+#: diagrams_old.php:150 diagrams_old.php:172 diagrams_old.php:223
+#: diagrams_old.php:231 index.php:270 index.php:289 index.php:311 index.php:379
+#: index.php:387 manvals.php:74
+msgid "humidity"
+msgstr ""
+
+#: config.php:96
+msgid "delay"
+msgstr ""
+
+#: config.php:97 config.php:155 config.php:160 config.php:194 config.php:199
+#: diagrams.php:81 diagrams.php:104 index.php:177 index.php:928 index.php:929
+#: index.php:942 index.php:943 index.php:970 index.php:971 index.php:1001
+#: index.php:1002 manvals.php:99 manvals.php:103 manvals.php:125
+#: manvals.php:128 modules/write_config_db_logfile_txt.php:119
+#: modules/write_config_db_logfile_txt.php:120
+#: modules/write_config_db_logfile_txt.php:125
+#: modules/write_config_db_logfile_txt.php:135
+#: modules/write_config_db_logfile_txt.php:136
+#: modules/write_config_db_logfile_txt.php:141
+#: modules/write_config_db_logfile_txt.php:172
+#: modules/write_config_db_logfile_txt.php:181
+#: modules/write_config_db_logfile_txt.php:183
+#: modules/write_config_db_logfile_txt.php:184
+#: modules/write_config_db_logfile_txt.php:185
+#: modules/write_config_db_logfile_txt.php:186
+#: modules/write_settings_db_logfile_txt.php:114
+#: modules/write_settings_db_logfile_txt.php:115
+#: modules/write_settings_db_logfile_txt.php:120
+#: modules/write_settings_db_logfile_txt.php:131
+#: modules/write_settings_db_logfile_txt.php:132
+#: modules/write_settings_db_logfile_txt.php:137
+#: modules/write_settings_db_logfile_txt.php:170
+#: modules/write_settings_db_logfile_txt.php:179
+#: modules/write_settings_db_logfile_txt.php:182
+#: modules/write_settings_db_logfile_txt.php:183
+#: modules/write_settings_db_logfile_txt.php:184
+#: modules/write_settings_db_logfile_txt.php:185
+msgid "minutes"
+msgstr ""
+
+#: config.php:97 config.php:155 config.php:194 manvals.php:53 manvals.php:76
+#: manvals.php:99 manvals.php:125
+msgid "to"
+msgstr ""
+
+#: config.php:109
+msgid "helptext_humidify_config"
+msgstr ""
+"<br><br>\n"
+"<b>switching hysteresis:</b>\n"
+"<br><br>\n"
+"<b>switch-on value: </b> is the value at which the control becomes active "
+"(value: 0-30%)\n"
+"<b>switch-off value: </b>  is the value at which the control becomes "
+"inactive (value: 0-30%)\n"
+"<br>the values may not be the same in order to avoid a wild switching on and "
+"off.\n"
+"<br><br>\n"
+"<b>delay: </b>here the delay time is set until the humidifier turns on if "
+"the humidity is too low. this can be used to blast out the rapidly falling "
+"air humidity during \"cooling\", \"timer exhaust\" or \"dehumidification\". "
+"The minimum value is 0 minutes, the maximum 60 minutes.\n"
+"<br><br>\n"
+"<b>example </b></b><i> target humidity: 75% ; switch-on value: 5% ; switch-"
+"off value: 1%</i>\n"
+"<br>switch-on humidity = target humidity - switch-on value --> 75% - 5% = "
+"70%\n"
+"<br>switch-off humidity = target humidity - switch-off value--> 75% - 1% = "
+"74%\n"
+"<br>delay = 5 minutes\n"
+"<br>so if 70% relative humidity are reached, the control waits for 5 "
+"minutes. only then does the pi-ager humidify the air to 74% and then switch "
+"off humidification again.\n"
+"<br><br>\n"
+"<b>example automatic mode with with humidification and dehumidification: </"
+"b> in this automatic mode, the humidity is completely automatically "
+"controlled. the current humidity is determined first. it is then decided "
+"which method (humidification and dehumidification) is suitable for achieving "
+"the desired set-point humidity. this also means that the switching values of "
+"the hysteresis must not be too close together. otherwise, humidification and "
+"dehumidification could always be switched on and off alternately.\n"
+"<br><br>\n"
+"<b>recommendation:</b> check the stored values in the logfile!\n"
+"<br><br>\n"
+"<b>attention: </b> use only positive integers!\n"
+"<br><br>"
+
+#: config.php:117 modules/read_settings_db.php:40
+msgid "dehumidify"
+msgstr ""
+
+#: config.php:120 modules/write_config_db_logfile_txt.php:103
+#: modules/write_settings_db_logfile_txt.php:98
+msgid "only exhaust"
+msgstr ""
+
+#: config.php:121 modules/write_config_db_logfile_txt.php:106
+#: modules/write_settings_db_logfile_txt.php:101
+msgid "exhaust & dehumidifier"
+msgstr ""
+
+#: config.php:122 modules/write_config_db_logfile_txt.php:109
+#: modules/write_settings_db_logfile_txt.php:104
+msgid "only dehumidifier"
+msgstr ""
+
+#: config.php:137
+msgid "helptext_dehumidifier_config"
+msgstr ""
+"<br><br>\n"
+"<b>only exhaust: </b> Because passive dehumidification by exhaust air takes "
+"place in this mode, the effectiveness of the dehumidification is very "
+"dependent on the ambient air humidity.\n"
+"<br><br>\n"
+"<b>exhaust & dehumidifier: </b> In this mode, dehumidification via exhaust "
+"air is active together with a separate dehumidifier.\n"
+"<br><br>\n"
+"<b>only dehumidifier:</b> In this mode, the dehumidification of the air in "
+"the Pi-ager is performed only by a dehumidifier.\n"
+"<br><br>\n"
+"<b>recommendation:</b> The delay time in humidity control is not active on "
+"the dehumidifier, it only affects the humidifier..\n"
+"<br><br>\n"
+"<b>attention: </b> Since there are very few dehumidifiers on the market that "
+"are effective at the low temperatures, you should carefully consider which "
+"device you want to use for what.\n"
+"<br><br>"
+
+#: config.php:145
+msgid "uv"
+msgstr ""
+
+#: config.php:147 config.php:186 modules/write_config_db_logfile_txt.php:118
+#: modules/write_config_db_logfile_txt.php:134
+#: modules/write_settings_db_logfile_txt.php:113
+#: modules/write_settings_db_logfile_txt.php:130
+msgid "duration & period"
+msgstr ""
+
+#: config.php:148 config.php:187 modules/write_config_db_logfile_txt.php:123
+#: modules/write_config_db_logfile_txt.php:139
+#: modules/write_settings_db_logfile_txt.php:118
+#: modules/write_settings_db_logfile_txt.php:135
+msgid "duration & timestamp"
+msgstr ""
+
+#: config.php:149 config.php:160 config.php:188 config.php:199 diagrams.php:899
+#: diagrams.php:901 diagrams.php:924 diagrams.php:926 diagrams.php:1011
+#: diagrams.php:1013 diagrams.php:1036 diagrams.php:1038 diagrams.php:1123
+#: diagrams.php:1125 diagrams.php:1148 diagrams.php:1150 diagrams.php:1235
+#: diagrams.php:1237 diagrams.php:1260 diagrams.php:1262 diagrams.php:1346
+#: diagrams.php:1348 diagrams.php:1371 diagrams.php:1373 diagrams.php:1458
+#: diagrams.php:1460 diagrams.php:1483 diagrams.php:1485 diagrams.php:1569
+#: diagrams.php:1571 diagrams.php:1594 diagrams.php:1596 diagrams.php:1681
+#: diagrams.php:1683 diagrams.php:1706 diagrams.php:1708 diagrams_old.php:755
+#: diagrams_old.php:757 diagrams_old.php:780 diagrams_old.php:782
+#: diagrams_old.php:861 diagrams_old.php:863 diagrams_old.php:886
+#: diagrams_old.php:888 diagrams_old.php:967 diagrams_old.php:969
+#: diagrams_old.php:992 diagrams_old.php:994 diagrams_old.php:1073
+#: diagrams_old.php:1075 diagrams_old.php:1098 diagrams_old.php:1100
+#: diagrams_old.php:1179 diagrams_old.php:1181 diagrams_old.php:1204
+#: diagrams_old.php:1206 diagrams_old.php:1285 diagrams_old.php:1287
+#: diagrams_old.php:1310 diagrams_old.php:1312 diagrams_old.php:1391
+#: diagrams_old.php:1393 diagrams_old.php:1416 diagrams_old.php:1418
+#: diagrams_old.php:1497 diagrams_old.php:1499 diagrams_old.php:1522
+#: diagrams_old.php:1524 index.php:814 manvals.php:103 manvals.php:128
+#: modules/write_config_db_logfile_txt.php:113
+#: modules/write_config_db_logfile_txt.php:129
+#: modules/write_settings_db_logfile_txt.php:108
+#: modules/write_settings_db_logfile_txt.php:125
+msgid "off"
+msgstr ""
+
+#: config.php:154 config.php:193 manvals.php:98 manvals.php:124
+msgid "period every"
+msgstr ""
+
+#: config.php:159 config.php:198 index.php:915
+msgid "duration"
+msgstr ""
+
+#: config.php:163 config.php:202
+msgid "timestamp"
+msgstr ""
+
+#: config.php:164 config.php:203 logs.php:22
+msgid "o'clock"
+msgstr ""
+
+#: config.php:176
+msgid "helptext_uv_config"
+msgstr ""
+"<br><br>\n"
+"<b>period: </b> This is used to set the pause time, which waits until the UV "
+"light is switched on again. If the value is 0 (= no pause), the UV light is "
+"permanently switched on. The maximum value is 1440min.\n"
+"<br><br>\n"
+"<b>duration: </b> This sets UV light time during which the light is switched "
+"on. At 0, the UV light timer function is switched off. The maximum value is "
+"1440min.\n"
+"<br><br>\n"
+"<b>timestamp: </b> As an alternative to the cycle, a fixed time can be set "
+"here at which the UV light is switched on for the set duration.\n"
+"<br><br>\n"
+"<b>note: </b> For security reasons, you can manually switch off the UV light "
+"permanently via a switch on the admin page.  In this case, the timer can no "
+"longer turn on the UV light.\n"
+"<br><br>\n"
+"<b>attention: </b> period=0 und duration=0 is not useful and not allowed.\n"
+"<br><br>"
+
+#: config.php:184 diagrams.php:835 diagrams.php:856 diagrams_old.php:697
+#: diagrams_old.php:717 index.php:988
+msgid "light"
+msgstr ""
+
+#: config.php:215
+msgid "helptext_light_config"
+msgstr ""
+"<br><br>\n"
+"<b>period: </b> This is used to set the pause time, which waits until the "
+"light is switched on again. If the value is 0 (= no pause), the light is "
+"permanently switched on. The maximum value is 1440min.\n"
+"<br><br>\n"
+"<b>duration: </b> This sets light time during which the light is switched "
+"on. At 0, the light timer function is switched off. The maximum value is "
+"1440min.\n"
+"<br><br>\n"
+"<b>timestamp: </b> As an alternative to the cycle, a fixed time can be set "
+"here at which the light is switched on for the set duration.\n"
+"<br><br>\n"
+"<b>note: </b>  You can manually switch on the light permanently via a switch "
+"on the webcam page. In this case, the timer can no longer turn off the "
+"light.\n"
+"<br><br>\n"
+"<b>attention: </b> period=0 und duration=0 is not useful and not allowed.\n"
+"<br><br>"
+
+#: config.php:223 index.php:553 index.php:753 modules/write_table_db.php:10
+#: modules/write_table_db.php:63 modules/write_table_db.php:72
+#: modules/write_table_db.php:75 modules/write_table_db.php:78
+#: modules/write_table_db.php:240 modules/write_table_db.php:263
+#: settings.php:188
+msgid "agingtable"
+msgstr ""
+
+#: config.php:227
+msgid "failure humidity delta"
+msgstr ""
+
+#: config.php:231
+msgid "failure temperature delta"
+msgstr ""
+
+#: config.php:244
+msgid "helptext_agingtable_config"
+msgstr ""
+"<br><br>\n"
+"<b>failure humidity delta: </b> The difference between current and setpoint "
+"humidity must be less then this value to continue operating the aging table "
+"after a power failure.\n"
+"<br>Otherwise operating the aging table is stopped.\n"
+"<br><br>\n"
+"<b>failure temperature delta: </b> The difference between current and "
+"setpoint temperature must be less then this value to continue operating the "
+"aging table after a power failure.\n"
+"<br>Otherwise operating the aging table is stopped.\n"
+"<br><br>"
+
+#: config.php:254 modules/write_config_db_logfile_txt.php:204 settings.php:484
+msgid "general configuration"
+msgstr ""
+
+#: config.php:256
+msgid "hide"
+msgstr ""
+
+#: diagrams.php:18 diagrams.php:42 diagrams_old.php:19 diagrams_old.php:43
+msgid "hour"
+msgstr ""
+
+#: diagrams.php:20 diagrams.php:43 diagrams_old.php:21 diagrams_old.php:44
+#: index.php:560 settings.php:385
+msgid "day"
+msgstr ""
+
+#: diagrams.php:22 diagrams.php:44 diagrams_old.php:23 diagrams_old.php:45
+msgid "week"
+msgstr ""
+
+#: diagrams.php:24 diagrams.php:45 diagrams_old.php:25 diagrams_old.php:46
+msgid "month"
+msgstr ""
+
+#: diagrams.php:26 diagrams.php:46 diagrams_old.php:27 diagrams_old.php:47
+msgid "custom"
+msgstr ""
+
+#: diagrams.php:31 diagrams_old.php:32 header.php:136 index.php:149
+msgid "diagrams"
+msgstr ""
+
+#: diagrams.php:78 index.php:174
+msgid "months"
+msgstr ""
+
+#: diagrams.php:79 edit_agingtable.php:51 index.php:175 index.php:573
+#: settings.php:398
+msgid "days"
+msgstr ""
+
+#: diagrams.php:80 index.php:176
+msgid "hours"
+msgstr ""
+
+#: diagrams.php:92 diagrams_old.php:93 index.php:188
+msgid "change customtime?"
+msgstr ""
+
+#: diagrams.php:92 diagrams_old.php:93 index.php:188
+msgid "change"
+msgstr ""
+
+#: diagrams.php:102
+msgid "storage interval of the data in the database"
+msgstr ""
+
+#: diagrams.php:261 diagrams.php:450 diagrams.php:472 diagrams.php:481
+#: diagrams.php:777 diagrams.php:801 diagrams_old.php:203 diagrams_old.php:524
+#: diagrams_old.php:549 diagrams_old.php:587 diagrams_old.php:637 index.php:358
+msgid " - ϑ"
+msgstr ""
+
+#: diagrams.php:283 diagrams.php:471 diagrams_old.php:223 index.php:379
+msgid " - φ"
+msgstr ""
+
+#: diagrams.php:317 diagrams.php:337 diagrams.php:403 diagrams.php:404
+msgid "dewpoint"
+msgstr ""
+
+#: diagrams.php:379 diagrams.php:403 diagrams.php:471
+msgid "humidity abs"
+msgstr ""
+
+#: diagrams.php:708 diagrams.php:731 diagrams.php:801 diagrams_old.php:587
+#: diagrams_old.php:637 diagrams_old.php:662
+msgid "Current"
+msgstr ""
+
+#: diagrams.php:731 diagrams_old.php:490 diagrams_old.php:609
+msgid "Thermometer"
+msgstr ""
+
+#: diagrams.php:887 diagrams.php:999 diagrams.php:1111 diagrams.php:1223
+#: diagrams.php:1334 diagrams.php:1446 diagrams.php:1557 diagrams.php:1669
+#: diagrams_old.php:743 diagrams_old.php:849 diagrams_old.php:955
+#: diagrams_old.php:1061 diagrams_old.php:1167 diagrams_old.php:1273
+#: diagrams_old.php:1379 diagrams_old.php:1485 index.php:809 index.php:911
+#: index.php:1012
+msgid "status"
+msgstr ""
+
+#: diagrams.php:897 diagrams.php:922 diagrams.php:1009 diagrams.php:1034
+#: diagrams.php:1121 diagrams.php:1146 diagrams.php:1233 diagrams.php:1258
+#: diagrams.php:1344 diagrams.php:1369 diagrams.php:1456 diagrams.php:1481
+#: diagrams.php:1567 diagrams.php:1592 diagrams.php:1679 diagrams.php:1704
+#: diagrams_old.php:753 diagrams_old.php:778 diagrams_old.php:859
+#: diagrams_old.php:884 diagrams_old.php:965 diagrams_old.php:990
+#: diagrams_old.php:1071 diagrams_old.php:1096 diagrams_old.php:1177
+#: diagrams_old.php:1202 diagrams_old.php:1283 diagrams_old.php:1308
+#: diagrams_old.php:1389 diagrams_old.php:1414 diagrams_old.php:1495
+#: diagrams_old.php:1520 index.php:813
+msgid "on"
+msgstr ""
+
+#: diagrams.php:914 diagrams.php:1026 diagrams.php:1138 diagrams.php:1250
+#: diagrams.php:1361 diagrams.php:1473 diagrams.php:1584 diagrams.php:1696
+#: diagrams_old.php:770 diagrams_old.php:876 diagrams_old.php:982
+#: diagrams_old.php:1088 diagrams_old.php:1194 diagrams_old.php:1300
+#: diagrams_old.php:1406 diagrams_old.php:1512
+msgid " "
+msgstr ""
+
+#: diagrams.php:947 diagrams.php:968 diagrams_old.php:803 diagrams_old.php:823
+#: index.php:958
+msgid "uv-light"
+msgstr ""
+
+#: diagrams.php:1059 diagrams.php:1080 diagrams_old.php:909
+#: diagrams_old.php:929 index.php:833 index.php:852
+msgid "heater"
+msgstr ""
+
+#: diagrams.php:1171 diagrams.php:1192 diagrams_old.php:1015
+#: diagrams_old.php:1035 index.php:822 index.php:844
+msgid "cooler"
+msgstr ""
+
+#: diagrams.php:1282 diagrams.php:1303 diagrams_old.php:1121
+#: diagrams_old.php:1141
+msgid "humidifier"
+msgstr ""
+
+#: diagrams.php:1394 diagrams.php:1415 diagrams_old.php:1227
+#: diagrams_old.php:1247
+msgid "dehumidifier"
+msgstr ""
+
+#: diagrams.php:1505 diagrams.php:1526 diagrams_old.php:1333
+#: diagrams_old.php:1353
+msgid "exhaust air"
+msgstr ""
+
+#: diagrams.php:1617 diagrams.php:1638 diagrams_old.php:1439
+#: diagrams_old.php:1459
+msgid "circulate air"
+msgstr ""
+
+#: diagrams_old.php:100
+msgid "every ~ 5 minutes a new value is written!"
+msgstr ""
+
+#: edit_agingtable.php:26 edit_agingtable.php:32 edit_agingtable.php:116
+#: header.php:169
+msgid "edit agingtable"
+msgstr ""
+
+#: edit_agingtable.php:26
+msgid "no agingtable selected"
+msgstr ""
+
+#: edit_agingtable.php:32
+msgid "can not edit the controlling agingtable. please select another"
+msgstr ""
+
+#: edit_agingtable.php:35
+msgid "edit agingtable:"
+msgstr ""
+
+#: edit_agingtable.php:43 index.php:557 index.php:565 settings.php:382
+#: settings.php:390
+msgid "phase"
+msgstr ""
+
+#: edit_agingtable.php:44 index.php:566 settings.php:391
+msgid "modus"
+msgstr ""
+
+#: edit_agingtable.php:44 index.php:566 settings.php:391
+msgid "aging-modus"
+msgstr ""
+
+#: edit_agingtable.php:45 index.php:567 settings.php:392
+msgid "target humidity in %"
+msgstr ""
+
+#: edit_agingtable.php:46 index.php:568 settings.php:393
+msgid "target temperature in °C"
+msgstr ""
+
+#: edit_agingtable.php:47 index.php:569 settings.php:394
+msgid "timer circulate d"
+msgstr ""
+
+#: edit_agingtable.php:47 index.php:569 settings.php:394
+msgid "timer of the circulation air duration in minutes"
+msgstr ""
+
+#: edit_agingtable.php:48 index.php:570 settings.php:395
+msgid "timer circulate p"
+msgstr ""
+
+#: edit_agingtable.php:48 index.php:570 settings.php:395
+msgid "timer of the circulation air period in minutes"
+msgstr ""
+
+#: edit_agingtable.php:49 index.php:571 settings.php:396
+msgid "timer exhaust d"
+msgstr ""
+
+#: edit_agingtable.php:49 index.php:571 settings.php:396
+msgid "timer of the exhausting air duration in minutes"
+msgstr ""
+
+#: edit_agingtable.php:50 index.php:572 settings.php:397
+msgid "timer exhaust p"
+msgstr ""
+
+#: edit_agingtable.php:50 index.php:572 settings.php:397
+msgid "timer of the exhausting air period in minutes"
+msgstr ""
+
+#: edit_agingtable.php:51 index.php:573 settings.php:398
+msgid "duration of hanging phase in days"
+msgstr ""
+
+#: edit_agingtable.php:111 index.php:640 settings.php:470
+msgid "comment:"
+msgstr ""
+
+#: edit_agingtable.php:117 settings.php:180
+msgid "attention"
+msgstr ""
+
+#: edit_agingtable.php:117
+msgid "cancel editing agingtable"
+msgstr ""
+
+#: edit_agingtable.php:122
+msgid "phase to delete"
+msgstr ""
+
+#: edit_agingtable.php:127
+msgid "delete row"
+msgstr ""
+
+#: edit_agingtable.php:127 notification.php:178 notification.php:364
+#: notification.php:497 notification.php:596 settings.php:328
+msgid "delete"
+msgstr ""
+
+#: edit_agingtable.php:134
+msgid "number of rows"
+msgstr ""
+
+#: edit_agingtable.php:139
+msgid "add rows"
+msgstr ""
+
+#: edit_agingtable.php:139 notification.php:170 notification.php:356
+#: notification.php:489 notification.php:588
+msgid "add"
+msgstr ""
+
+#: footer.php:9
+msgid "running engine: "
+msgstr ""
+
+#: header.php:131
+msgid "by"
+msgstr ""
+
+#: header.php:135
+msgid "monitor"
+msgstr ""
+
+#: header.php:137
+msgid "settings"
+msgstr ""
+
+#: header.php:147
+msgid "notification"
+msgstr ""
+
+#: header.php:148
+msgid "logs"
+msgstr ""
+
+#: header.php:149 webcam.php:28
+msgid "webcam"
+msgstr ""
+
+#: index.php:14
+msgid "mainsensors"
+msgstr ""
+
+#: index.php:72
+msgid "ntc sensors"
+msgstr ""
+
+#: index.php:582 settings.php:408
+msgid "no comment"
+msgstr ""
+
+#: index.php:648
+msgid "statusboard"
+msgstr ""
+
+#: index.php:650
+msgid "general"
+msgstr ""
+
+#: index.php:678 manvals.php:22 modules/write_config_db_logfile_txt.php:152
+#: modules/write_settings_db_logfile_txt.php:150
+msgid "operating mode"
+msgstr ""
+
+#: index.php:687
+msgid "powersuply ok"
+msgstr ""
+
+#: index.php:693
+msgid "no powersuply! batterymode"
+msgstr ""
+
+#: index.php:704 index.php:1025 index.php:1054
+msgid "see settings"
+msgstr ""
+
+#: index.php:721
+msgid "battery voltage ok"
+msgstr ""
+
+#: index.php:727
+msgid "battery voltage low !!"
+msgstr ""
+
+#: index.php:788
+msgid "Switch is on"
+msgstr ""
+
+#: index.php:794
+msgid "Switch is off"
+msgstr ""
+
+#: index.php:804
+msgid "temperatures"
+msgstr ""
+
+#: index.php:808 index.php:910 index.php:1011
+msgid "type"
+msgstr ""
+
+#: index.php:811
+msgid "actual"
+msgstr ""
+
+#: index.php:812
+msgid "target"
+msgstr ""
+
+#: index.php:866 index.php:878
+msgid "humidification"
+msgstr ""
+
+#: index.php:886
+msgid "exhausting"
+msgstr ""
+
+#: index.php:895
+msgid "dehumidification"
+msgstr ""
+
+#: index.php:906
+msgid "timer"
+msgstr ""
+
+#: index.php:914
+msgid "period"
+msgstr ""
+
+#: index.php:922 modules/read_settings_db.php:40
+msgid "circulating air"
+msgstr ""
+
+#: index.php:923 index.php:937 index.php:961 index.php:991
+msgid "timer on"
+msgstr ""
+
+#: index.php:924 index.php:938
+msgid "always on"
+msgstr ""
+
+#: index.php:925 index.php:939 index.php:960 index.php:990
+msgid "timer off"
+msgstr ""
+
+#: index.php:936 modules/read_settings_db.php:40
+msgid "exhausting air"
+msgstr ""
+
+#: index.php:962
+msgid "manual switch off"
+msgstr ""
+
+#: index.php:992
+msgid "manual switch on"
+msgstr ""
+
+#: index.php:1032 index.php:1039
+msgid "scale1"
+msgstr ""
+
+#: index.php:1061 index.php:1068
+msgid "scale2"
+msgstr ""
+
+#: logs.php:9
+msgid "log entries"
+msgstr ""
+
+#: logs.php:35
+msgid "file is writable"
+msgstr ""
+
+#: logs.php:38
+msgid "file is not writable"
+msgstr ""
+
+#: logs.php:42
+msgid "save all logfiles?"
+msgstr ""
+
+#: logs.php:42
+msgid "save logfiles"
+msgstr ""
+
+#: logs.php:43
+msgid "clear all logfile data?"
+msgstr ""
+
+#: logs.php:43
+msgid "delete data"
+msgstr ""
+
+#: logs.php:155
+msgid "prev"
+msgstr ""
+
+#: logs.php:157
+msgid "next"
+msgstr ""
+
+#: logs.php:165
+msgid "to bottom"
+msgstr ""
+
+#: logs.php:171
+msgid "to top"
+msgstr ""
+
+#: manvals.php:12 manvals.php:149 modules/write_settings_db_logfile_txt.php:205
+#: settings.php:480
+msgid "manual values"
+msgstr ""
+
+#: manvals.php:24 modules/read_settings_db.php:12
+#: modules/read_settings_db.php:19 modules/read_settings_db.php:33
+#: modules/read_settings_db.php:40 modules/write_config_db_logfile_txt.php:64
+#: modules/write_settings_db_logfile_txt.php:60
+msgid "cooling"
+msgstr ""
+
+#: manvals.php:25 modules/write_config_db_logfile_txt.php:70
+#: modules/write_settings_db_logfile_txt.php:66
+msgid "cooling with humidification"
+msgstr ""
+
+#: manvals.php:26 modules/write_config_db_logfile_txt.php:76
+#: modules/write_settings_db_logfile_txt.php:72
+msgid "heating with humidification"
+msgstr ""
+
+#: manvals.php:27
+msgid "automatik with humidification"
+msgstr ""
+
+#: manvals.php:28
+msgid "automatik with dehumidification and humidification"
+msgstr ""
+
+#: manvals.php:29
+msgid "circulating air and exhaust air timer"
+msgstr ""
+
+#: manvals.php:29
+msgid "can be used independently of the selected mode."
+msgstr ""
+
+#: manvals.php:42
+msgid "helptext_operation_mode"
+msgstr ""
+"<br><br>\n"
+"<b>0 - cooling: </b> It is cooled to the set temperature with circulating "
+"air.\n"
+"<br><br>\n"
+"<b>1 - cooling with humidification: </b> It is cooled to the set temperature "
+"with circulating air and humidification is on, the heating is never "
+"controlled.\n"
+"<br><br>\n"
+"<b>2 - heating with humidification: </b> It is heated to the set temperature "
+"with circulating air and humidification is on, the cooling is never "
+"controlled.\n"
+"<br><br>\n"
+"<b>3 - automatic with humidification: </b> The pi-ager cools or heats with "
+"circulating air, depending on the set value and humidification is on.\n"
+"<br><br>\n"
+"<b>4 - automatic with dehumidification and humidification </b>Like automatic "
+"with humidification, additionally: If the humidity is exceeded, the exhaust "
+"air or/and the dehumidifier switches on until the humidity setpoint is "
+"reached again. Since the mode \"only exhaust air\" is a passive "
+"dehumidification, the minimum achievable humidity depends on the dryness of "
+"the ambient air. to avoid a wild switching on and off, the humidification "
+"should be delayed (5-10min)!\n"
+"<br><br>"
+
+#: manvals.php:52 modules/write_config_db_logfile_txt.php:155
+#: modules/write_config_db_logfile_txt.php:161
+#: modules/write_settings_db_logfile_txt.php:153
+#: modules/write_settings_db_logfile_txt.php:159
+msgid "setpoint temperature"
+msgstr ""
+
+#: manvals.php:65
+msgid "helptext_temperature_setpoint"
+msgstr ""
+"<br><br>\n"
+"<b>setpoint temperature:</b> The desired temperature is set here. The min "
+"and the max value are limited. \n"
+"<br> For technical reasons, not all values can be approached in any "
+"operating mode. the circulating air is always active during the cooling or "
+"heating phases.\n"
+"<br><br>\n"
+"<b>example of cooling:</b>\n"
+"<i>setpoint temperature: 12°C; switch-on value: 3°C; switch-off value: 1°C</"
+"i>\n"
+"<br>switch-on temperature = setpoint temperature + switch-on value --> 12°C "
+"+ 3°C = 15°C\n"
+"<br>switch-off temperature = setpoint temperature + switch-off value --> "
+"12°C + 1°C = 13°C\n"
+"<br>So, if 15 degrees are exceeded, the pi-ager cools down to 13 ° C and "
+"then switches off to avoid excessive cooling. \n"
+"<br>The entire behavior is different from pi-ager to pi-ager and therefore "
+"to be determined individually.\n"
+"<br><br>\n"
+"<b>example of heating:</b>\n"
+"</b><i>setpoint temperature: 22°C; switch-on value: 3°C; switch-off value "
+"1°C</i>\n"
+"<br>switch-on temperature = setpoint temperature - switch-on value --> 22°C "
+"- 3°C = 19°C\n"
+"<br>switch-off temperature = setpoint temperature - switch-off value --> "
+"22°C - 1°C = 21°C\n"
+"<br>So, if the temperature drops below 19 degrees, the pi-ager heats up to "
+"21 ° C and then switches off to avoid excessive heating.\n"
+"<br>The entire behavior is different from pi-ager to pi-ager and therefore "
+"to be determined individually.\n"
+"<br><br>\n"
+"<b>automatic mode:</b> in every automatic mode, the temperature is fully "
+"automatically controlled. \n"
+"first, the current temperature is determined. Then decide which method "
+"(cooling or heating) is suitable to reach the setpoint temperature set. this "
+"also means that the switching values of the hysteresis must not be too close "
+"together. Otherwise, cooling and heating could be switched on and off "
+"alternately.\n"
+"<br><br>\n"
+"<b>example of automatic:</b> setpoint temperature: 15°C; switch-on value: "
+"5°C; switch-off value 3°C\n"
+"<br>1st case: sensor temperature >= (setpoint temperature + switch-on value "
+"[=20°C]) = cooling on\n"
+"<br>2st case: sensor temperature <= (setpoint temperature + switch-off value "
+"[=18°C]) = cooling off\n"
+"<br>3st case: sensor temperature >= (setpoint temperature - switch-on value "
+"[=10°C]) = heating on\n"
+"<br>4st case: sensor temperature <= (setpoint temperature - switch-off value "
+"[=12°C]) = heating off\n"
+"<br><br>\n"
+"<b>recommendation:</b> check the stored values in the logfile!\n"
+"<br><br>\n"
+"<b>attention:</b> use only positive integers!\n"
+"<br><br>"
+
+#: manvals.php:75 modules/write_config_db_logfile_txt.php:169
+#: modules/write_config_db_logfile_txt.php:176
+#: modules/write_settings_db_logfile_txt.php:167
+#: modules/write_settings_db_logfile_txt.php:174
+msgid "setpoint humidity"
+msgstr ""
+
+#: manvals.php:88
+msgid "helptext_humidity_setpoint"
+msgstr ""
+"<br><br>\n"
+"<b>target humidity: </b> the desired humidity is set here.\n"
+"<br>The minimum value is theoretically 0% and a maximum of 99%. these values "
+"will be never reached normally. The circulating air is always active during "
+"humidification. \n"
+"<br>The effectiveness of the dehumidification (automatic mode with with "
+"humidification and dehumidification) is dependent on the ambient air "
+"humidity, since only a passive dehumidification by exhaust air takes place.\n"
+"<br><br>\n"
+"<b>recommendation: </b> check the stored values in the logfile!\n"
+"<br><br>\n"
+"<b>attention! </b> se only positive integers!\n"
+"<br><br>"
+
+#: manvals.php:97
+msgid "timer circulating"
+msgstr ""
+
+#: manvals.php:102 manvals.php:127
+msgid "for the duration of"
+msgstr ""
+
+#: manvals.php:115
+msgid "helptext_circulation_air"
+msgstr ""
+"<br><br>\n"
+"<b>period: </b> this is used to set the pause time, which waits until the "
+"exhausting is switched on again. if the value is 0 (= no pause), the "
+"exhausting air is permanently switched on. the maximum value is 1440min.\n"
+"<br><br>\n"
+"<b>duration: </b> this sets the exhausting time during which the fan is "
+"running. at 0, the exhausting air timer function is switched off. the "
+"maximum value is 1440min.\n"
+"<br><br>\n"
+"<b>note: </b> The exhaust air fan runs independently of the timer settings - "
+"also during dehumidification in the \"automatic mode with humidification and "
+"dehumidification.\n"
+"<br><br>\n"
+"<b>attention: </b> period=0 und duration=0 is not useful and not allowed.\n"
+"<br><br>"
+
+#: manvals.php:123
+msgid "timer exhausting air"
+msgstr ""
+
+#: manvals.php:140
+msgid "helptext_exhausting_air"
+msgstr ""
+"<br><br>\n"
+"<b>period: </b> This is used to set the pause time, which waits until the "
+"exhausting is switched on again. If the value is 0 (= no pause), the "
+"exhausting air is permanently switched on. the maximum value is 1440min.\n"
+"<br><br>\n"
+"<b>duration: </b> This sets the exhausting time during which the fan is "
+"running. If the value is 0, the exhausting air timer function is switched "
+"off. The maximum value is 1440min.\n"
+"<br><br>\n"
+"<b>note: </b> The exhaust air fan runs independently of the timer settings - "
+"also during dehumidification in the \"automatic mode with humidification and "
+"dehumidification.\n"
+"<br><br>\n"
+"<b>attention: </b> period=0 und duration=0 is not useful and not allowed.\n"
+"<br><br>"
+
+#: modules/clear_logfile.php:8
+msgid "new logfile manually created"
+msgstr ""
+
+#: modules/clear_logfile.php:10
+msgid "clear logfile"
+msgstr ""
+
+#: modules/clear_logfile.php:10
+msgid "new logfile created"
+msgstr ""
+
+#: modules/clear_logfile.php:16
+#, php-format
+msgid "could not find %s!"
+msgstr ""
+
+#: modules/database_empty_statistic_tables.php:8
+msgid "statistic tables emptied"
+msgstr ""
+
+#: modules/read_operating_mode_db.php:11
+msgid "none"
+msgstr ""
+
+#: modules/read_settings_db.php:19 modules/read_settings_db.php:26
+#: modules/read_settings_db.php:33 modules/read_settings_db.php:40
+msgid "humidify"
+msgstr ""
+
+#: modules/read_settings_db.php:26 modules/read_settings_db.php:33
+#: modules/read_settings_db.php:40
+msgid "heating"
+msgstr ""
+
+#: modules/read_systemdetails.php:94 modules/read_systemdetails.php:96
+msgid "model unknown! Please contact us."
+msgstr ""
+
+#: modules/start_stop_light.php:4
+msgid "light switched on manually"
+msgstr ""
+
+#: modules/start_stop_light.php:9
+msgid "light switched off manually"
+msgstr ""
+
+#: modules/start_stop_program.php:16 modules/start_stop_program.php:63
+#: modules/start_stop_program.php:254
+msgid "manually started"
+msgstr ""
+
+#: modules/start_stop_program.php:18 modules/start_stop_program.php:30
+#: modules/start_stop_program.php:139 modules/start_stop_program.php:156
+msgid "started"
+msgstr ""
+
+#: modules/start_stop_program.php:22 modules/start_stop_program.php:73
+#: modules/start_stop_program.php:258
+msgid "could not be started"
+msgstr ""
+
+#: modules/start_stop_program.php:28
+msgid "is running"
+msgstr ""
+
+#: modules/start_stop_program.php:34 modules/start_stop_program.php:99
+msgid "no idea what is happening"
+msgstr ""
+
+#: modules/start_stop_program.php:65
+msgid "started due to agingtable start"
+msgstr ""
+
+#: modules/start_stop_program.php:67 modules/start_stop_program.php:90
+msgid "agingtable started"
+msgstr ""
+
+#: modules/start_stop_program.php:85
+msgid "is already running"
+msgstr ""
+
+#: modules/start_stop_program.php:87
+msgid "is already running or started due to agingtable start"
+msgstr ""
+
+#: modules/start_stop_program.php:94
+msgid "agingtable could not be started"
+msgstr ""
+
+#: modules/start_stop_program.php:108
+msgid "agingtable stopped due to stopping"
+msgstr ""
+
+#: modules/start_stop_program.php:123
+msgid "stopped"
+msgstr ""
+
+#: modules/start_stop_program.php:128
+msgid "agingtable stopped"
+msgstr ""
+
+#: modules/start_stop_program.php:139 modules/start_stop_program.php:156
+msgid "measuring scale"
+msgstr ""
+
+#: modules/start_stop_program.php:144 modules/start_stop_program.php:161
+msgid "performing tara on scale"
+msgstr ""
+
+#: modules/start_stop_program.php:238 modules/start_stop_program.php:243
+msgid "measuring scale stopped"
+msgstr ""
+
+#: modules/start_stop_program.php:263
+msgid "already running"
+msgstr ""
+
+#: modules/start_stop_program.php:270
+msgid "killed"
+msgstr ""
+
+#: modules/start_stop_uv.php:4
+msgid "uv switched on manually"
+msgstr ""
+
+#: modules/start_stop_uv.php:10
+msgid "uv switched off manually"
+msgstr ""
+
+#: modules/tara_scale.php:42 modules/tara_scale.php:44
+msgid "calibration done"
+msgstr ""
+
+#: modules/tara_scale.php:54
+msgid "calibration aborted"
+msgstr ""
+
+#: modules/write_admin_db.php:31
+msgid "administration values"
+msgstr ""
+
+#: modules/write_admin_db.php:31 modules/write_backup_db.php:17
+#: modules/write_debug_values.php:11 modules/write_notification_db.php:25
+#: modules/write_notification_db.php:66 modules/write_notification_db.php:106
+#: modules/write_notification_db.php:169 modules/write_notification_db.php:206
+#: modules/write_notification_db.php:217 modules/write_notification_db.php:228
+msgid "values saved"
+msgstr ""
+
+#: modules/write_backup_db.php:17
+msgid "backup values"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:31
+#: modules/write_settings_db_logfile_txt.php:24
+msgid "unauthorized character - please use only positive integers!"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:81
+#: modules/write_settings_db_logfile_txt.php:77
+msgid "automatic with humidification"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:89
+#: modules/write_settings_db_logfile_txt.php:85
+msgid "automatic with dehumidification and humidification"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:119
+#: modules/write_settings_db_logfile_txt.php:114
+msgid "uv period"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:120
+#: modules/write_config_db_logfile_txt.php:125
+#: modules/write_settings_db_logfile_txt.php:115
+#: modules/write_settings_db_logfile_txt.php:120
+msgid "uv duration"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:124
+#: modules/write_settings_db_logfile_txt.php:119
+msgid "uv timestamp"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:135
+#: modules/write_settings_db_logfile_txt.php:131
+msgid "light period"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:136
+#: modules/write_config_db_logfile_txt.php:141
+#: modules/write_settings_db_logfile_txt.php:132
+#: modules/write_settings_db_logfile_txt.php:137
+msgid "light duration"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:140
+#: modules/write_settings_db_logfile_txt.php:136
+msgid "light timestamp"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:151
+msgid "configuration has been changed."
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:156
+#: modules/write_settings_db_logfile_txt.php:154
+msgid "switch-off temperature"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:156
+#: modules/write_config_db_logfile_txt.php:157
+#: modules/write_config_db_logfile_txt.php:162
+#: modules/write_config_db_logfile_txt.php:163
+#: modules/write_config_db_logfile_txt.php:164
+#: modules/write_config_db_logfile_txt.php:165
+#: modules/write_config_db_logfile_txt.php:170
+#: modules/write_config_db_logfile_txt.php:171
+#: modules/write_config_db_logfile_txt.php:177
+#: modules/write_config_db_logfile_txt.php:178
+#: modules/write_config_db_logfile_txt.php:179
+#: modules/write_config_db_logfile_txt.php:180
+#: modules/write_settings_db_logfile_txt.php:154
+#: modules/write_settings_db_logfile_txt.php:155
+#: modules/write_settings_db_logfile_txt.php:160
+#: modules/write_settings_db_logfile_txt.php:161
+#: modules/write_settings_db_logfile_txt.php:162
+#: modules/write_settings_db_logfile_txt.php:163
+#: modules/write_settings_db_logfile_txt.php:168
+#: modules/write_settings_db_logfile_txt.php:169
+#: modules/write_settings_db_logfile_txt.php:175
+#: modules/write_settings_db_logfile_txt.php:176
+#: modules/write_settings_db_logfile_txt.php:177
+#: modules/write_settings_db_logfile_txt.php:178
+msgid "so at"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:157
+#: modules/write_settings_db_logfile_txt.php:155
+msgid "switch-on temperature"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:162
+#: modules/write_settings_db_logfile_txt.php:160
+msgid "switch-on heater"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:163
+#: modules/write_settings_db_logfile_txt.php:161
+msgid "switch-off heater"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:164
+#: modules/write_settings_db_logfile_txt.php:162
+msgid "switch-on cooler"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:165
+#: modules/write_settings_db_logfile_txt.php:163
+msgid "switch-off cooler"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:170
+#: modules/write_config_db_logfile_txt.php:177
+#: modules/write_settings_db_logfile_txt.php:168
+#: modules/write_settings_db_logfile_txt.php:175
+msgid "switch-on humidifier"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:171
+#: modules/write_config_db_logfile_txt.php:178
+#: modules/write_settings_db_logfile_txt.php:169
+#: modules/write_settings_db_logfile_txt.php:176
+msgid "switch-off humidifier"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:172
+#: modules/write_settings_db_logfile_txt.php:170
+msgid "delay humidifier"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:179
+#: modules/write_settings_db_logfile_txt.php:177
+msgid "switch-on exhausting"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:180
+#: modules/write_settings_db_logfile_txt.php:178
+msgid "switch-off exhausting"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:181
+#: modules/write_settings_db_logfile_txt.php:179
+msgid "delay exhausting"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:183
+#: modules/write_settings_db_logfile_txt.php:182
+msgid "circulation air period"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:184
+#: modules/write_settings_db_logfile_txt.php:183
+msgid "circulation air duration"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:185
+#: modules/write_settings_db_logfile_txt.php:184
+msgid "exhausting air period"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:186
+#: modules/write_settings_db_logfile_txt.php:185
+msgid "exhausting air duration"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:187
+#: modules/write_settings_db_logfile_txt.php:186
+msgid "dehumidify modus"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:188
+#: modules/write_settings_db_logfile_txt.php:187
+msgid "uv modus"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:191
+#: modules/write_settings_db_logfile_txt.php:190
+msgid "light modus"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:197
+#: modules/write_settings_db_logfile_txt.php:197
+msgid "values saved in file Database"
+msgstr ""
+
+#: modules/write_config_db_logfile_txt.php:201
+#: modules/write_settings_db_logfile_txt.php:200
+msgid "values not in the specified limits!"
+msgstr ""
+
+#: modules/write_loglevel_db.php:10
+msgid "loglevel"
+msgstr ""
+
+#: modules/write_loglevel_db.php:10
+msgid "the selection is saved"
+msgstr ""
+
+#: modules/write_notification_db.php:25
+msgid "messenger values"
+msgstr ""
+
+#: modules/write_notification_db.php:66
+msgid "event values"
+msgstr ""
+
+#: modules/write_notification_db.php:106
+msgid "alarm values"
+msgstr ""
+
+#: modules/write_notification_db.php:169
+msgid "mail recipient values"
+msgstr ""
+
+#: modules/write_notification_db.php:180
+msgid "ad mail recipient"
+msgstr ""
+
+#: modules/write_notification_db.php:180
+msgid "mail recipient added"
+msgstr ""
+
+#: modules/write_notification_db.php:206
+msgid "mailserver values"
+msgstr ""
+
+#: modules/write_notification_db.php:217
+msgid "pushover values"
+msgstr ""
+
+#: modules/write_notification_db.php:228
+msgid "telegram values"
+msgstr ""
+
+#: modules/write_settings_db_logfile_txt.php:148
+msgid "values have been manually changed."
+msgstr ""
+
+#: modules/write_settings_db_logfile_txt.php:149
+msgid "sensor"
+msgstr ""
+
+#: modules/write_table_db.php:10
+msgid "is selected"
+msgstr ""
+
+#: modules/write_table_db.php:63
+msgid "edited agingtable saved"
+msgstr ""
+
+#: modules/write_table_db.php:72
+msgid "deleted"
+msgstr ""
+
+#: modules/write_table_db.php:75
+msgid "can not delete the controlling agingtable. Please choose another first"
+msgstr ""
+
+#: modules/write_table_db.php:78
+msgid "unexpected Error"
+msgstr ""
+
+#: modules/write_table_db.php:96
+msgid "error on upload new agingtable: only csv-files allowed"
+msgstr ""
+
+#: modules/write_table_db.php:104
+msgid "error on upload new agingtable: only 500kb allowed"
+msgstr ""
+
+#: modules/write_table_db.php:131 modules/write_table_db.php:137
+#: modules/write_table_db.php:142
+msgid "upload agingtable"
+msgstr ""
+
+#: modules/write_table_db.php:131
+msgid "file saved in database"
+msgstr ""
+
+#: modules/write_table_db.php:135 modules/write_table_db.php:137
+msgid "csv-file has not the right structure. please use a default-template"
+msgstr ""
+
+#: modules/write_table_db.php:142
+msgid "please select a file to upload"
+msgstr ""
+
+#: modules/write_table_db.php:217
+msgid "export agintable"
+msgstr ""
+
+#: modules/write_table_db.php:217
+msgid "done"
+msgstr ""
+
+#: modules/write_table_db.php:240
+msgid "row in agingtable deleted"
+msgstr ""
+
+#: modules/write_table_db.php:263
+msgid "rows in agingtable added"
+msgstr ""
+
+#: notification.php:10
+msgid "exceptions"
+msgstr ""
+
+#: notification.php:16 notification.php:208 notification.php:394
+#: notification.php:526
+msgid "id"
+msgstr ""
+
+#: notification.php:17 notification.php:138
+msgid "exception"
+msgstr ""
+
+#: notification.php:18 notification.php:139 notification.php:210
+#: notification.php:325 notification.php:520
+msgid "e-mail"
+msgstr ""
+
+#: notification.php:19 notification.php:140 notification.php:211
+#: notification.php:326 notification.php:725
+msgid "pushover"
+msgstr ""
+
+#: notification.php:20 notification.php:141 notification.php:212
+#: notification.php:327 notification.php:786
+msgid "telegram"
+msgstr ""
+
+#: notification.php:21 notification.php:142 notification.php:213
+#: notification.php:328 notification.php:388 notification.php:395
+#: notification.php:466
+msgid "alarm"
+msgstr ""
+
+#: notification.php:22 notification.php:143
+msgid "raise exception"
+msgstr ""
+
+#: notification.php:23 notification.php:144 notification.php:215
+#: notification.php:330 notification.php:528 notification.php:580
+msgid "active"
+msgstr ""
+
+#: notification.php:133
+msgid ""
+"ATTENTION: save messenger values? IMPORTANT: after modifications in this "
+"area you have to reboot the system! "
+msgstr ""
+
+#: notification.php:170
+msgid ""
+"ATTENTION: add messenger? IMPORTANT: after modifications in this area you "
+"have to reboot the system!"
+msgstr ""
+
+#: notification.php:175 notification.php:361 notification.php:494
+#: notification.php:593
+msgid "id to delete: "
+msgstr ""
+
+#: notification.php:178
+msgid "ATTENTION: delete messenger?"
+msgstr ""
+
+#: notification.php:194
+msgid "helptext_messenger"
+msgstr ""
+"<br><br>\n"
+"<b>System error</b>\n"
+"<br><br>\n"
+"<br>The error manager / messenger controls the notification to the "
+"individual services such as email, alarm, pushover and Telegram. \n"
+"<br>Here individual errors or exceptions can be assigned, where the message "
+"is passed and whether a stop of the system should be activated. \n"
+"<br><br>\n"
+"\n"
+"<b>It is strongly recommended to set ALL errors so that they ALWAYS trigger "
+"a stop of the system (exception) when they occur. Failure to do so may "
+"result in damage to the hoop cabinet</b>.\n"
+"<br><br>\n"
+"<b>Error: </b>The error that the system detects is entered here. This column "
+"is mostly already predefined.\n"
+"<br><br>\n"
+"<b>Checkboxes: </b>Here you can activate the appropriate notification "
+"service through which the message should be sent.\n"
+"<br><br>\n"
+"<b>Alarm: </b> Here you can select the type of acoustic alarm ( signal "
+"generator on the board). One can define the alarm types further down in the "
+"range \"alarm\" accordingly.\n"
+"<br><br>\n"
+"<b>Trigger stop: </b> By selecting this checkbox, you can define whether the "
+"system should be stopped when this error occurs. <b>(THIS IS STRONGLY "
+"RECOMMENDED!!!)</b>. If the checkbox is not selected, there will only be a "
+"notification about the selected service.\n"
+"<br><br>\n"
+"<b>Active: </b> Here you can select whether this error should be considered "
+"at all. If this checkbox is not selected, there is no stop of the system and "
+"there is also no notification or logging.\n"
+"<br><br>\n"
+"\n"
+"Translated with www.DeepL.com/Translator (free version)"
+
+#: notification.php:202 notification.php:209 notification.php:324
+msgid "event"
+msgstr ""
+
+#: notification.php:214 notification.php:329
+msgid "event text"
+msgstr ""
+
+#: notification.php:214
+msgid "eventtext"
+msgstr ""
+
+#: notification.php:319
+msgid "ATTENTION: save event values?"
+msgstr ""
+
+#: notification.php:356
+msgid "ATTENTION: add event?"
+msgstr ""
+
+#: notification.php:364
+msgid "ATTENTION: delete event?"
+msgstr ""
+
+#: notification.php:380
+msgid "helptext_event"
+msgstr ""
+"<br><br>\n"
+"<b>event</b>\n"
+"<br><br>\n"
+"<br>The event manager controls the notification to the different services "
+"like email, alarm, pushover and telegram. \n"
+"<br>Here you can assign to the events where to pass the message and whether "
+"to activate audible alarm. \n"
+"<br><br>\n"
+"<b>event: </b>Here the event detected by the system is entered. This column "
+"is mostly already predefined.\n"
+"<br><br>\n"
+"<b>checkboxes: </b>Here you can activate the appropriate notification "
+"service through which the message should be sent.\n"
+"<br><br>\n"
+"<b>alarm: </b> Here you can select the type of acoustic alarm ( beeper) on "
+"the board. The alarm types can be defined further down in the \"Alarm\" area "
+"accordingly.\n"
+"<br><br>\n"
+"<b>event text: </b>Here you can assign each event a text that is then sent "
+"as a message via the appropriate service.\n"
+"<br><br>\n"
+"<b>active: </b> Here you can select whether this event should be considered "
+"at all. If this checkbox is not selected, no notification or logging will "
+"occur.\n"
+"<br><br>"
+
+#: notification.php:396 notification.php:467
+msgid "replication"
+msgstr ""
+
+#: notification.php:397 notification.php:468
+msgid "sleep"
+msgstr ""
+
+#: notification.php:398 notification.php:469
+msgid "high_time"
+msgstr ""
+
+#: notification.php:399 notification.php:470
+msgid "low_time"
+msgstr ""
+
+#: notification.php:400 notification.php:471
+msgid "waveform"
+msgstr ""
+
+#: notification.php:401 notification.php:472
+msgid "frequency"
+msgstr ""
+
+#: notification.php:461
+msgid "ATTENTION: save alarm values?"
+msgstr ""
+
+#: notification.php:489
+msgid "ATTENTION: add alarm?"
+msgstr ""
+
+#: notification.php:497
+msgid "ATTENTION: delete alarm?"
+msgstr ""
+
+#: notification.php:513
+msgid "helptext_alarm"
+msgstr ""
+"<br><br>\n"
+"<b>alarm function:</b>\n"
+"<br><br>\n"
+"<br>Here you can define different alarm types for the acoustic alarm. \n"
+"<br>The following parameters can be set:\n"
+"<br><br>\n"
+"<b>alarm: </b> Here you can enter the name of the alarm configuration.\n"
+"<br> This name then appears in the respective selection fields in the "
+"Messenger or Event areas.\n"
+"<br><br>\n"
+"<b>replication: </b> Here you can enter how often an alarm sequence should "
+"be repeated.\n"
+"<br><br>\n"
+"<b>sleep:</b> Here you can enter the pause time between the repetitions.\n"
+"<br><br>\n"
+"<b>high time:</b> Here you can enter the time how long the beeper should be "
+"activated during an alarm sequence.\n"
+"<br><br>\n"
+"<b>low time:</b> Here you can enter the time for which the beeper should be "
+"switched off during an alarm sequence.\n"
+"<br><br>\n"
+"<br>If you want to delete an alarm configuration from the list, you can "
+"remove it completely from the database by selecting the appropriate ID.\n"
+"<br><br>"
+
+#: notification.php:527 notification.php:579
+msgid "to mail"
+msgstr ""
+
+#: notification.php:569
+msgid "ATTENTION: save e_mail recipient values?"
+msgstr ""
+
+#: notification.php:588
+msgid "ATTENTION: add e_mail recipient?"
+msgstr ""
+
+#: notification.php:596
+msgid "ATTENTION: delete e-mail recipient?"
+msgstr ""
+
+#: notification.php:612
+msgid "helptext_email"
+msgstr ""
+"<br><br>\n"
+"<b>email: </b\n"
+"<br><br>\n"
+"<br>Here you can enter email addresses to which notifications should be "
+"sent.\n"
+"<br><br>\n"
+"<br>With the help of the checkbox \"Active\" one can activate or deactivate "
+"the sending to the corresponding e-mail address.\n"
+"<br><br>\n"
+"<br>If you want to delete an e-mail address from the list, you can remove it "
+"completely from the database by selecting the corresponding ID.\n"
+"<br><br>"
+
+#: notification.php:619
+msgid "Mailserver"
+msgstr ""
+
+#: notification.php:652
+msgid "server"
+msgstr ""
+
+#: notification.php:656
+msgid "user"
+msgstr ""
+
+#: notification.php:660
+msgid "password"
+msgstr ""
+
+#: notification.php:664
+msgid "starttls"
+msgstr ""
+
+#: notification.php:668
+msgid "from mail"
+msgstr ""
+
+#: notification.php:672
+msgid "port"
+msgstr ""
+
+#: notification.php:694
+msgid "ATTENTION: save mailserver values?"
+msgstr ""
+
+#: notification.php:701
+msgid "ATTENTION: test mailserver? be shure you have saved the values before!"
+msgstr ""
+
+#: notification.php:701
+msgid "test mailserver"
+msgstr ""
+
+#: notification.php:718
+msgid "helptext_mailserver"
+msgstr ""
+"<br><br>\n"
+"<b>mail server:</b>\n"
+"<br><br>\n"
+"<b>server: </b> Here you enter the corresponding SMTP server from your "
+"provider, e.g. securesmtp.t-online.de\n"
+"<br><br>\n"
+"<b>user: </b> Here you enter the corresponding user name for the SMTP "
+"server.\n"
+"<br><br>\n"
+"<b>password:</b> Password for the user.\n"
+"<br><br>\n"
+"<b>port:</b> Here you select the port for the SMTP server.\n"
+"<br><br>"
+
+#: notification.php:743
+msgid "user key"
+msgstr ""
+
+#: notification.php:747
+msgid "api token"
+msgstr ""
+
+#: notification.php:751
+msgid "pushover_active"
+msgstr ""
+
+#: notification.php:758
+msgid "ATTENTION: save pushover values?"
+msgstr ""
+
+#: notification.php:763
+msgid ""
+"ATTENTION: test pushover values? be shure you have saved the values before!"
+msgstr ""
+
+#: notification.php:763
+msgid "test pushover values"
+msgstr ""
+
+#: notification.php:779
+msgid "helptext_pushover"
+msgstr ""
+"<br><br>\n"
+"<b>Pushover:</b>\n"
+"<br><br>\n"
+"<br>To use Pushover, one must download and install the APP for the "
+"appropriate system (Android / IOS) and create an account.\n"
+"<br>After registration, you receive an email through to confirm the "
+"registration.\n"
+"<br><br>\n"
+"<br>To generate the <b>User-Key </b>and <b>API Token/Key </b>one must log in "
+"here: https://pushover.net/\n"
+"<br>On the page you can then find your own user key after login. \n"
+"<br><br>\n"
+"<br>Next you have to register an application: </b><i> Create an Application/"
+"API Token </i>\n"
+"<br>You can then enter \"Pi-Ager\" as the name, and if you want, you can "
+"also add an icon.\n"
+"<br>Once this process is complete, an API token/key is generated.  \n"
+"<br>These 2 strings (<b>User-Key</b>and <b>API Token/Key</b>) must be "
+"entered into the corresponding fields on the Pi-Ager \"Notification\" page.\n"
+"<br>(Don't forget to save)\n"
+"<br><br>\n"
+"<br>If the APP is already installed on your phone and you have logged in "
+"with your account,\n"
+"<br>you can send a test message via the Pi-Ager page.\n"
+"<br>If this arrives, everything is set correctly.\n"
+"<br><br>"
+
+#: notification.php:804
+msgid "bot token"
+msgstr ""
+
+#: notification.php:808
+msgid "bot chatID"
+msgstr ""
+
+#: notification.php:812
+msgid "telegram_active"
+msgstr ""
+
+#: notification.php:819
+msgid "ATTENTION: save telegram values?"
+msgstr ""
+
+#: notification.php:824
+msgid ""
+"ATTENTION: test telegram values? be shure you have saved the values before!"
+msgstr ""
+
+#: notification.php:824
+msgid "test telegram values"
+msgstr ""
+
+#: notification.php:840
+msgid "helptext_telegram"
+msgstr ""
+"<br><br>\n"
+"<b>Telegram:</b>\n"
+"<br><br>\n"
+"<br>To use Telegram, you have to download and install the APP for the "
+"appropriate system (Android / IOS).\n"
+"<br>When that is shot down, one enters \"BotFather\" in the top search box "
+"and then selects the chat.\n"
+"<br><br>\n"
+"<br>Now you can create a bot:\n"
+"<br>For this, one simply sends the user BotFather the messages:\n"
+"<br>/newbot\n"
+"<br>You will then be asked to specify the bot name and the bot user name "
+"(The user name must necessarily end in <b>bot</b>). \n"
+"<br>e.g. :\n"
+"<br><b>Bot Name:</b></b><i> Pi-Ager </i>or</b><i> Matured Cupboard </i>or</"
+"b><i> My-Pi-Ager</i>.\n"
+"<br><b>User Name:</b></b><i> Name_bot </i>or</b><i> any Name_bot</i>.\n"
+"<br>Finally you get the so called token, a longer string that uniquely "
+"identifies your bot. \n"
+"<br>For example: </b><i> 123456787:ABcdEFGhijklm-aTchoFJ_pb6oZKxzx8Zw</i>\n"
+"<br>It is best to copy the token code directly into a text file .\n"
+"<br>Optionally you can set up a user picture for the bot etc - just send "
+"commands like /setuserpic, /help etc in the Telegram client. \n"
+"<br><br>\n"
+"<br><b>Important: </b>You have to start the bot now first and send a first "
+"message, otherwise the next step will not work.\n"
+"<br><br>\n"
+"<br>To start the bot, click on the link in the reply, it will look something "
+"like this:</b><i>t.me/Name_bot</i>.\n"
+"<br>It opens a chat window, in which you can then start the bot. \n"
+"<br>This can be done (depending on the version) via a field or you send the "
+"command / message :\n"
+"<br>/start\n"
+"<br><br>\n"
+"<br>Now you have to find out the chat id.\n"
+"<br>It is really important to type something in a chat via the smartphone "
+"for example: \"Hello Test\", because otherwise it won't work.\n"
+"<br>Next you call the following URL in the browser: https://api.telegram.org/"
+"bot[HTTP-TOKEN]/getUpdates\n"
+"<br>[HTTP-TOKEN] you have to replace with the determined string.\n"
+"<br>For example: \n"
+"<br>https://api.telegram.org/bot<b>123456787:ABcdEFGhijklm-"
+"aTchoFJ_pb6oZKxzx8Zw</b>/getUpdates\n"
+"<br>The response will be something like this: \n"
+"<br>{\"ok\":true,\"result\":[{\"update_id\":277706798,\n"
+"<br>\"message\":{\"message_id\":3,\"from\":{\"id\":<b>374628888</b>,"
+"\"first_name\":\"Frank\",\"last_name\":\"Mustermann\"},\"chat\":{\"id"
+"\":374628888,\"first_name\":\"Frank\",\"last_name\":\"Mustermann\",\"type\":"
+"\"private\"},\"date\":1499083767,\"text\":\"Hallo Test\"}}]}\n"
+"<br>What we need is the number/string after \"id\", so here that would be "
+"<b>374628888</b>.\n"
+"<br><br>\n"
+"<br>Then you have everything you need for the pi agers:\n"
+"<br><b>bot token (HTTP token):</b> 123456787:ABcdEFGhijklm-"
+"aTchoFJ_pb6oZKxzx8Zw\n"
+"<br><b>bot chatID:</b> 374628888\n"
+"<br><br>\n"
+"<br>These 2 strings must be entered into the appropriate fields on the Pi-"
+"Ager \"Notification\" page.\n"
+"<br>(Don't forget to save)\n"
+"<br>Now you can send a test message via the Pi-Ager page.\n"
+"<br>If this arrives, everything is set correctly.\n"
+"<br><br>"
+
+#: scale_wizzard.php:24
+msgid "measuring on scales stopped due to calibrating scale"
+msgstr ""
+
+#: scale_wizzard.php:27
+msgid "starting calibrate"
+msgstr ""
+
+#: scale_wizzard.php:40
+msgid "please attach a known weight to the loadcell"
+msgstr ""
+
+#: scale_wizzard.php:40
+msgid "now and enter the weight into the form below:"
+msgstr ""
+
+#: scale_wizzard.php:42
+msgid "weight"
+msgstr ""
+
+#: scale_wizzard.php:42
+msgid "gram"
+msgstr ""
+
+#: scale_wizzard.php:47
+msgid "weight attatched"
+msgstr ""
+
+#: scale_wizzard.php:48
+msgid "cancel scale wizzard"
+msgstr ""
+
+#: scale_wizzard.php:59
+msgid "no scale selected"
+msgstr ""
+
+#: settings.php:22
+msgid "operating values"
+msgstr ""
+
+#: settings.php:62
+msgid "stop pi-ager?"
+msgstr ""
+
+#: settings.php:62
+msgid "if agingtable is running, it will be stopped also!"
+msgstr ""
+
+#: settings.php:62
+msgid "stop pi-ager"
+msgstr ""
+
+#: settings.php:69
+msgid "start pi-ager?"
+msgstr ""
+
+#: settings.php:69
+msgid "start pi-ager"
+msgstr ""
+
+#: settings.php:127 settings.php:139 settings.php:153 settings.php:165
+msgid "Reference unit is 0 in Scale"
+msgstr ""
+
+#: settings.php:127 settings.php:139 settings.php:153 settings.php:165
+msgid "Please calibrate scale first!"
+msgstr ""
+
+#: settings.php:127 settings.php:130 settings.php:153 settings.php:156
+msgid "start scale"
+msgstr ""
+
+#: settings.php:130 settings.php:156
+msgid "start measurement on scale"
+msgstr ""
+
+#: settings.php:130 settings.php:156
+msgid "please calibrate scale after first start !"
+msgstr ""
+
+#: settings.php:142 settings.php:168
+msgid "tara on scale"
+msgstr ""
+
+#: settings.php:145 settings.php:171
+msgid "stop measurement on scale"
+msgstr ""
+
+#: settings.php:145 settings.php:171
+msgid "stop scale"
+msgstr ""
+
+#: settings.php:180
+msgid "measurement on scales are stopped"
+msgstr ""
+
+#: settings.php:180
+msgid "calibrate wizzard"
+msgstr ""
+
+#: settings.php:254
+msgid "startphase"
+msgstr ""
+
+#: settings.php:258
+msgid "startday of phase"
+msgstr ""
+
+#: settings.php:271
+msgid "select new agingtable?"
+msgstr ""
+
+#: settings.php:271
+msgid "select"
+msgstr ""
+
+#: settings.php:285
+msgid "start agingtable?"
+msgstr ""
+
+#: settings.php:285
+msgid "manual values will be overwritten in database!"
+msgstr ""
+
+#: settings.php:285
+msgid "start agingtable"
+msgstr ""
+
+#: settings.php:288
+msgid "stop agingtable?"
+msgstr ""
+
+#: settings.php:288
+msgid "pi-ager continues with the last values of the agingtable!"
+msgstr ""
+
+#: settings.php:288
+msgid "stop agingtable"
+msgstr ""
+
+#: settings.php:327
+msgid "edit agingtable?"
+msgstr ""
+
+#: settings.php:327
+msgid "edit"
+msgstr ""
+
+#: settings.php:328
+msgid "delete agingtable?"
+msgstr ""
+
+#: settings.php:329
+msgid "export agingtable?"
+msgstr ""
+
+#: settings.php:329
+msgid "export"
+msgstr ""
+
+#: settings.php:365
+msgid "upload new agingtable?"
+msgstr ""
+
+#: settings.php:365
+msgid "upload"
+msgstr ""
+
+#: settings.php:379
+msgid "actual phase and day"
+msgstr ""
+
+#: settings.php:481
+msgid "manual adjustments are not possible"
+msgstr ""
+
+#: settings.php:481
+msgid "during fully automatic aging."
+msgstr ""
+
+#: webcam.php:25
+msgid "download image file"
+msgstr ""
+
+#: webcam.php:33
+msgid "take webcam snapshot"
+msgstr ""
+
+#: webcam.php:38
+msgid "light switch"
+msgstr ""
+
+#: webcam.php:53
+msgid "light on"
+msgstr ""
+
+#: webcam.php:57
+msgid "light manual on"
+msgstr ""

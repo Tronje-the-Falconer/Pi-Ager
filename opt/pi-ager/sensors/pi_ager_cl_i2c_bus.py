@@ -6,7 +6,7 @@ __author__ = "Claus Fischer"
 __copyright__ = "Copyright 2019, The Pi-Ager Project"
 __credits__ = ["Claus Fischer"]
 __license__ = "GPL"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Development"
@@ -61,12 +61,13 @@ class cl_i2c_bus_logic():
         # logger.debug(self.bus1)
         cl_fact_logger.get_instance().debug(self.bus1)
         return(self.bus1)
-    
+"""    
     def get_i2c_address(self):
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        cl_fact_logger.get_instance().debug('i2c address is ' + str(self._address))
         return(self._address)
-
+"""
 class th_i2c_bus_logic():
     
     def __init__(self):

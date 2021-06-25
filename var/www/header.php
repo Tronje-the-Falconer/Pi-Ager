@@ -13,6 +13,7 @@
     $webcam_active = '';
     $scale_wizzard_active = '';
     $admin_active = '';
+    $notification_active = '';
 
     if ($_SERVER['PHP_SELF'] == '/index.php') {
         $monitor_active = 'active';
@@ -41,6 +42,9 @@
     elseif ($_SERVER['PHP_SELF'] == '/edit_agingtable.php') {
         $edit_agingtable_active = 'active';
     }
+    elseif ($_SERVER['PHP_SELF'] == '/notification.php') {
+        $notification_active = 'active';
+    }
     
     # Language festlegen
     
@@ -51,7 +55,7 @@
         $language = 'de_DE.utf8';
     }
     elseif ($language == 2) {
-        $language = 'en_EN.utf8';
+        $language = 'en_GB.utf8';
     }
     #### END Language from DB
     
@@ -81,6 +85,7 @@
     ?>
     <head>
         <title>Pi-Ager</title>
+        <meta charset="UTF-8" />
         <meta name="viewport" content="initial-scale = 1.0, maximum-scale = 1.0, user-scalable = no, width = device-width">
         <link href="css/style_pi_ager.css" rel="stylesheet" type="text/css" />
         <!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -139,6 +144,7 @@
                                     echo '</a></li>';
                                 }
                             ?>
+                            <li><a href="notification.php" class="<?php echo $notification_active; ?>"><?php echo _('notification'); ?></a></li>
                             <li><a href="logs.php" class="<?php echo $logs_active; ?>"><?php echo _('logs'); ?></a></li>
                             <li><a href="webcam.php" class="<?php echo $webcam_active; ?>"><?php echo _('webcam'); ?></a></li>
                             <?php 

@@ -25,6 +25,7 @@
         write_startstop_status_in_database($calibrate_weight_key, $known_weight);
         write_startstop_status_in_database($scale_calibrate_key, 3);
         $scale_calibrate_status = 3;
+        $done = NULL;
         while ($done != 'done') {
             $scale_calibrate_status = get_calibrate_status($scale_calibrate_key);
             if ($scale_calibrate_status == 4){
@@ -38,7 +39,8 @@
         }
         if ($scale_calibrate_status == 4){
             write_stop_in_database($calibrate_weight_key);
-            write_stop_in_database($scale_calibrate_key);
+            // write_stop_in_database($scale_calibrate_key);
+            // do this later in tara_scale
             
             // Seite aufbauen mit OK Button
             include 'header.php';                                     // Template-Kopf und Navigation
@@ -49,8 +51,8 @@
             echo '<input type="hidden" name="scale_number" type="text" value="'. $scale_number . '">';
             echo '<input type="hidden" name="current_scale1_status" type="text" value="'. $current_scale1_status . '">';
             echo '<input type="hidden" name="current_scale2_status" type="text" value="'. $current_scale2_status . '">';
-            echo '<button class="art-button" name="scale_wizzard3" value="scale_wizzard3"  onclick="return confirm("' ._('relieve the load cell completely'). '?");">'._('ok'). '</button>';
-            echo '<button class="art-button" name="scale_wizzard_cancel"  formnovalidate formaction="settings.php" onclick="return confirm("' ._('cancel scale wizzard? referenceunit is set, tara will not be done!'). '?");">'._('cancel'). '</button>';
+            echo "<button class=\"art-button\" name=\"scale_wizzard3\" value=\"scale_wizzard3\"  onclick=\"return confirm('"._('relieve the load cell completely').' ? '. "');\">"._('ok')."</button>";
+            echo "<button class=\"art-button\" name=\"scale_wizzard_cancel\"  formnovalidate onclick=\"return confirm('"._('cancel scale wizzard? referenceunit is set, tara will not be done!'). "');\">"._('cancel'). "</button>";
             echo '</form>';
             echo '</div>';
             echo '</div></div></div></div></div></div>';
@@ -63,12 +65,18 @@
             write_startstop_status_in_database($status_scale2_key, $current_scale2_status);
             $logstring = _('calibration failed') . '! ' . _('calculated reference unit is 0') . ' ' . _('referenceunit is set to old value') . '!' . _('please try again');
             logger('WARNING', $logstring);
-            print '<script language="javascript"> alert("'. (_("scale wizzard")) . " : " . (_("calibration failed")) . "! \\n " . (_("calculated reference unit is 0")) . ". \\n " . (_("referenceunit is set to old value")) . "! \\n " . (_("please try again")) . '"); window.location.href = "../settings.php";</script>';
+            print '<script language="javascript"> alert("'. (_("scale wizzard")) . " : " . (_("calibration failed")) . "! \\n " . (_("calculated reference unit is 0")) . ". \\n " . (_("referenceunit is set to old value")) . "! \\n " . (_("please try again")) . '"); window.location.href = "settings.php";</script>';
         }
         else{
             $logstring = 'error on calibrating';
             logger('DEBUG', $logstring);
-            print '<script language="javascript"> alert("'. (_("scale wizzard")) . " : " . (_("error on calibrating")) .'"); window.location.href = "../settings.php";</script>';
+            print '<script language="javascript"> alert("'. (_("scale wizzard")) . " : " . (_("error on calibrating")) .'"); window.location.href = "settings.php";</script>';
         }
+    }
+    if (isset($_POST['scale_wizzard_cancel'])) {
+        write_startstop_status_in_database($calibrate_scale1_key, 0);
+        write_startstop_status_in_database($calibrate_scale2_key, 0);
+        header("location: settings.php");
+        exit();
     }
 ?>

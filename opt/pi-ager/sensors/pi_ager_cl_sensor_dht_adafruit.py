@@ -21,11 +21,11 @@ import pi_ager_gpio_config
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from main.pi_ager_cx_exception import *
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
-from sensors.pi_ager_cl_sensor import cl_main_sensor#
+from sensors.pi_ager_cl_sensor import cl_sensor#
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 import Adafruit_DHT
 
-class cl_main_sensor_dht_adafruit(cl_main_sensor):
+class cl_sensor_dht_adafruit(cl_sensor):
     
     def __init__(self, i_sensor_dht):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
@@ -77,7 +77,9 @@ class cl_main_sensor_dht_adafruit(cl_main_sensor):
         cl_fact_logger.get_instance().debug("Temperature in Celsius is : %.2f C" %self._current_temperature)
         cl_fact_logger.get_instance().debug("Relative Humidity is : %.2f %%RH" %self._current_humidity)
         self._dewpoint     = super().get_dewpoint(self._current_temperature, self._current_humidity)
-        self.measured_data = (self._current_temperature, self._current_humidity, self._dewpoint)
+        
+        (temperature_dewpoint, humidity_absolute) = self._dewpoint
+        self.measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint, humidity_absolute)
         return(self.measured_data)
         
     
@@ -103,7 +105,7 @@ class cl_main_sensor_dht_adafruit(cl_main_sensor):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug('Not avaiable for this sensor type')
         
-class th_main_sensor_dht_adafruit(cl_main_sensor_dht_adafruit):
+class th_sensor_dht_adafruit(cl_sensor_dht_adafruit):
 #    SUPPORTED_MAIN_SENSOR_TYPES = ["dht_adafruit", "dht_adafruit", "DHT22"]
     NAME = 'Main_sensor'
     

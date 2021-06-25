@@ -6,7 +6,7 @@ __author__ = "Claus Fischer"
 __copyright__ = "Copyright 2019, The Pi-Ager Project"
 __credits__ = ["Claus Fischer"]
 __license__ = "GPL"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Development"
@@ -26,12 +26,13 @@ class cl_i2c_sensor_sht(ABC):
     __measuring_intervall = 300
 
 
-    def __init__(self, i_i2c_bus, i_address):
+    def __init__(self, i_active_sensor, i_i2c_bus, i_address):
         # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
         #self._sensor_type = o_sensor_type
+        cl_fact_logger.get_instance().debug('i2c address is ' + str(i_address))
         self._i2c_bus = i_i2c_bus
         self._address = i_address
         
@@ -84,26 +85,39 @@ class th_i2c_sensor_sht():
     
 class cl_fact_i2c_sensor_sht(ABC):
     __o_instance = None
-        
+    __ot_instances = {}        
     @classmethod
     def set_instance(self, i_instance):
         """
         Factory method to set the i2c logic instance
         """
-        # logger.debug(pi_ager_logging.me())
-        cl_fact_logger.get_instance().debug(pi_ager_logging.me())
+        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_i2c_sensor_sht.__o_instance = i_instance
         
     @classmethod        
-    def get_instance(self, i_i2c_bus, i_address):
+    def get_instance(self, i_active_sensor, i_i2c_bus, i_address):
         """
         Factory method to get the i2c logic instance
         """
-        # logger.debug(pi_ager_logging.me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if cl_fact_i2c_sensor_sht.__o_instance is not None:
+        cl_fact_logger.get_instance().debug("Old i2c __ot_instances = " + str(cl_fact_i2c_sensor_sht.__ot_instances))
+
+        try:
+            cl_fact_i2c_sensor_sht.__o_instance = cl_fact_i2c_sensor_sht.__ot_instances.pop(i_active_sensor)
+            cl_fact_logger.get_instance().debug("i2c __ot_instance for " + i_active_sensor + " = " + str(cl_fact_i2c_sensor_sht.__o_instance) + " found ")
+        except KeyError:
+            cl_fact_logger.get_instance().debug("i2c __ot_instance for " + i_active_sensor + " not found ")
+            cl_fact_i2c_sensor_sht.__o_instance = None
+             
+        if  cl_fact_i2c_sensor_sht.__o_instance is not None :
+            cl_fact_logger.get_instance().debug("i2c __ot_instance for " + i_active_sensor + " = "+ str(cl_fact_i2c_sensor_sht.__o_instance) + " Returning")
             return(cl_fact_i2c_sensor_sht.__o_instance)
-        cl_fact_i2c_sensor_sht.__o_instance = cl_i2c_sensor_sht(i_i2c_bus, i_address)
+        
+        cl_fact_i2c_sensor_sht.__o_instance = cl_i2c_sensor_sht(i_active_sensor, i_i2c_bus, i_address)
+        cl_fact_logger.get_instance().debug("i2c __ot_instance for " + i_active_sensor + " =  " + str(cl_fact_i2c_sensor_sht.__o_instance) + " created" )
+        line = {i_active_sensor:cl_fact_i2c_sensor_sht.__o_instance}
+        cl_fact_i2c_sensor_sht.__ot_instances.update(line)   
+        cl_fact_logger.get_instance().debug("New i2c __ot_instances = " + str(cl_fact_i2c_sensor_sht.__ot_instances))
         return(cl_fact_i2c_sensor_sht.__o_instance)
 
     def __init__(self):
@@ -114,8 +128,3 @@ class cl_fact_i2c_sensor_sht(ABC):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     
-    
-    
-    def __init__(self):
-        pass    
-

@@ -444,13 +444,15 @@ li p, .art-postcontent li p, .art-blockcontent li p
 .default-responsive .art-logo
 {
   display: none;
-}.art-headline
+}
+
+.art-headline
 {
   display: inline-block;
   position: absolute;
   min-width: 50px;
   top: 50px;
-  left: 15.52%;
+  left: 45% !important;
   margin-left: -38px !important;
   line-height: 100%;
   -webkit-transform: rotate(0deg);
@@ -484,7 +486,7 @@ text-shadow: 0px 0px 12px rgba(23, 23, 23, 0.98);
   position: absolute;
   min-width: 50px;
   top: 86px;
-  left: 14.17%;
+  left: 45% !important;
   line-height: 100%;
   margin-left: -19px !important;
   -webkit-transform: rotate(0deg);
@@ -638,12 +640,12 @@ nav.art-nav
 }
 
 .art-nav-inner{
-   text-align: right;
+   text-align: center;
    margin:0 auto;
 }
 
 .desktop  .art-nav-inner{
-   width: 900px;
+   width: 1000px;
    padding-left: 19px;
    padding-right: 19px;
 }
@@ -1121,7 +1123,7 @@ button.art-button
    white-space: nowrap;
    text-align: center;
    color: #404040;
-   margin: 0 5px 0 0 !important;
+   margin: 0 5px 0 5px !important;
    overflow: visible;
    cursor: pointer;
    text-indent: 0;
@@ -1217,14 +1219,14 @@ input.art-button
 input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="number"], input[type="range"], input[type="tel"], input[type="time"], input[type="week"], textarea
 {
    background: #F8FAFB;
-   border:1px solid rgba(255, 196, 46, 0.2);
+   border:1px solid rgba(255, 196, 46, 0.5);
    margin:0 auto;
 }
 input[type="text"], input[type="password"], input[type="email"], input[type="url"], input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="number"], input[type="range"], input[type="tel"], input[type="time"], input[type="week"], textarea
 {
    width: auto;
    padding: 2px 0;
-   color: #7A5800 !important;
+   color: #7A5800;
    font-size: 13px;
    font-family: Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
    font-weight: bold;

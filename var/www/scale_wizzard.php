@@ -30,7 +30,7 @@
         while ($scale_calibrate_status != 2) {
             $scale_calibrate_status = get_calibrate_status($scale_calibrate_key);
             sleep(1);
-            // Python misst jetzt den Wert mit der Refunit = 1
+            // Python misst jetzt den Wert mit der Refunit = x (can be any value, but not 0)
         }
         if ($scale_calibrate_status == 2){
         // Seite aufbauen mit Button und eingabe von Gewicht in Gramm
@@ -43,11 +43,13 @@
             echo '<input type="hidden" name="scale_number" type="text" value="'. $scale_number . '">';
             echo '<input type="hidden" name="current_scale1_status" type="text" value="'. $current_scale1_status . '">';
             echo '<input type="hidden" name="current_scale2_status" type="text" value="'. $current_scale2_status . '">';
-            echo '<button class="art-button" name="scale_wizzard2" value="scale_wizzard2"  onclick="return confirm("' ._('weight attatched'). '?");">'._('weight attatched'). '</button>';
-            echo '<button class="art-button" name="scale_wizzard_cancel"  formnovalidate formaction="settings.php" onclick="return confirm("' ._('cancel scale wizzard?'). '?");">'._('cancel'). '</button>';
+            # echo "<button class=\"art-button\" type=\"submit\" name=\"scale_wizzard2\" onclick=\"return confirm('"._('weight attatched').' ? '. "');\">"._('weight attatched')."</button>";
+            echo '<button class="art-button" type="submit" name="scale_wizzard2" onclick="return confirm(\'' ._('weight attatched'). ' ? \');">'._('weight attatched').'</button>';
+            echo '<button class="art-button" type="submit" name="scale_wizzard_cancel"  formnovalidate onclick="return confirm(\'' ._('cancel scale wizzard'). ' ? \');">'._('cancel').'</button>';
+            # echo "<button class=\"art-button\" type=\"submit\" name=\"scale_wizzard_cancel\" formnovalidate onclick=\"return confirm('"._('cancel scale wizzard').' ? '. "');\">"._('cancel')."</button>";
             echo '</form>';
             echo '</div>';
-            echo '</div></div></div></div></div></div>';
+            echo '</div></div></div></div></div>';
             include 'footer.php';
         }
     }

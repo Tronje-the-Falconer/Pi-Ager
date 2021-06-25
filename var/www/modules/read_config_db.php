@@ -1,6 +1,7 @@
 <?php
     $sensor_temperature = round(get_table_value($current_values_table,$sensor_temperature_key), 1);
     $sensortype = get_table_value($config_settings_table,$sensortype_key);
+    $sensorsecondtype = get_table_value($config_settings_table,$sensorsecondtype_key);
     $language = get_table_value($config_settings_table,$language_key);
     $switch_on_cooling_compressor = get_table_value($config_settings_table,$switch_on_cooling_compressor_key);
     $switch_off_cooling_compressor = get_table_value($config_settings_table,$switch_off_cooling_compressor_key);
@@ -20,8 +21,9 @@
     $dehumidifier_modus = get_table_value($config_settings_table,$dehumidifier_modus_key);
     $failure_humidity_delta = get_table_value($config_settings_table, $failure_humidity_delta_key);
     $failure_temperature_delta = get_table_value($config_settings_table, $failure_temperature_delta_key);
-    
+
     $referenceunit_scale1 = number_format(floatval(get_table_value($settings_scale1_table,$referenceunit_key)), 1, '.', '');
+    $offset_scale1 = number_format(floatval(get_table_value($settings_scale1_table, $offset_key)), 1, '.', '');
     $measuring_interval_scale1 = get_table_value($settings_scale1_table,$scale_measuring_interval_key);
     $measuring_duration_scale1 = get_table_value($settings_scale1_table,$measuring_duration_key);
     $saving_period_scale1 = get_table_value($settings_scale1_table,$saving_period_key);
@@ -29,16 +31,22 @@
     $spikes_scale1 = get_table_value($settings_scale1_table,$spikes_key);
     
     $referenceunit_scale2 = number_format(floatval(get_table_value($settings_scale2_table,$referenceunit_key)), 1, '.', '');
+    $offset_scale2 = number_format(floatval(get_table_value($settings_scale2_table, $offset_key)), 1, '.', '');    
     $measuring_interval_scale2 = get_table_value($settings_scale2_table,$scale_measuring_interval_key);
     $measuring_duration_scale2 = get_table_value($settings_scale2_table,$measuring_duration_key);
     $saving_period_scale2 = get_table_value($settings_scale2_table,$saving_period_key);
     $samples_scale2 = get_table_value($settings_scale2_table,$samples_key);
     $spikes_scale2 = get_table_value($settings_scale2_table,$spikes_key);
 
-    
+    $meat1_sensortype = get_table_value($config_settings_table, $meat1_sensortype_key);
+    $meat2_sensortype = get_table_value($config_settings_table, $meat2_sensortype_key);   
+    $meat3_sensortype = get_table_value($config_settings_table, $meat3_sensortype_key);   
+    $meat4_sensortype = get_table_value($config_settings_table, $meat4_sensortype_key);   
+        
     if ($sensortype == 1) {
         $sensorname = 'DHT11';
         $checked_sens_1 = 'checked="checked"';
+        $sens_second_active = 'disabled = "true"';
     }
     else {
         $checked_sens_1 = '';
@@ -46,6 +54,7 @@
     if ($sensortype == 2) {
         $sensorname = 'DHT22';
         $checked_sens_2 = 'checked="checked"';
+        $sens_second_active = 'disabled = "true"';
     }
     else {
         $checked_sens_2 = '';
@@ -53,6 +62,7 @@
     if ($sensortype == 3) {
         $sensorname = 'SHT75';
         $checked_sens_3 = 'checked="checked"';
+        $sens_second_active = 'disabled = "true"';
     }
     else {
         $checked_sens_3 = '';
@@ -60,6 +70,7 @@
     if ($sensortype == 4) {
         $sensorname = 'SHT85';
         $checked_sens_4 = 'checked="checked"';
+        $sens_second_active = '';
     }
     else {
         $checked_sens_4 = '';
@@ -67,10 +78,53 @@
     if ($sensortype == 5) {
         $sensorname = 'SHT3x';
         $checked_sens_5 = 'checked="checked"';
+        $sens_second_active = '';
     }
     else {
         $checked_sens_5 = '';
     }
+    if ($sensorsecondtype == 0) {
+        $sensorsecondname = 'disabled';
+        $checked_senssecond_0 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_0 = '';
+    }
+    if ($sensorsecondtype == 1) {
+        $sensorsecondname = 'DHT11';
+        $checked_senssecond_1 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_1 = '';
+    }
+    if ($sensorsecondtype == 2) {
+        $sensorsecondname = 'DHT22';
+    }
+    else {
+        $checked_senssecond_2 = '';
+    }
+    if ($sensorsecondtype == 3) {
+        $sensorsecondname = 'SHT75';
+        $checked_senssecond_3 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_3 = '';
+    }
+    if ($sensorsecondtype == 4) {
+        $sensorsecondname = 'SHT85';
+        $checked_senssecond_4 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_4 = '';
+    }
+    if ($sensorsecondtype == 5) {
+        $sensorsecondname = 'SHT3x';
+        $checked_senssecond_5 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_5 = '';
+    }
+
     if ($language == 1) {
         $checked_language_1 = 'checked="checked"';
     }

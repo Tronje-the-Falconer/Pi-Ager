@@ -21,21 +21,21 @@ import pi_ager_gpio_config
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from main.pi_ager_cx_exception import *
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
-from sensors.pi_ager_cl_sensor import cl_main_sensor#
+from sensors.pi_ager_cl_sensor import cl_sensor#
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
-from sensors.pi_ager_cl_sensor_dht_adafruit import cl_main_sensor_dht_adafruit
+from sensors.pi_ager_cl_sensor_dht_adafruit import cl_sensor_dht_adafruit
 import Adafruit_DHT
 
 
-class cl_main_sensor_dht11(cl_main_sensor_dht_adafruit):
+class cl_sensor_dht11(cl_sensor_dht_adafruit):
     
-    def __init__(self):
+    def __init__(self, i_sensor_type, i_active_sensor):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
-        #self.o_sensor_type = o_sensor_type
+        self.o_sensor_type = i__sensor_type
         self._sensor_dht = Adafruit_DHT.DHT11
-        self.o_sensor_type = cl_fact_main_sensor_type.get_instance()
+        #self.o_sensor_type = cl_fact_main_sensor_type.get_instance()
         super().__init__(self.o_sensor_type)
         
        
@@ -64,9 +64,9 @@ class cl_main_sensor_dht11(cl_main_sensor_dht_adafruit):
         #self.get_current_data()
         self._write_to_db()
         
-class th_main_sensor_dht11(cl_main_sensor_dht11):
+class th_sensor_dht11(cl_sensor_dht11):
 
-    NAME = 'Main_sensor'
+    NAME = 'Sensor DHT11'
     
     
     def __init__(self):
@@ -84,15 +84,15 @@ class th_main_sensor_dht11(cl_main_sensor_dht11):
 class cl_fact_sensor_dht11: 
     fact_main_sensor_type = cl_fact_main_sensor_type()
 #    Only a singleton instance for main_sensor
-    __o_sensor_type = fact_main_sensor_type.get_instance()
+    #__o_sensor_type = fact_main_sensor_type.get_instance()
     __o_instance = None
 
     @classmethod        
-    def get_instance(self):
+    def get_instance(self, i_sensor_type, i_active_sensor):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_sensor_dht11.__o_instance is not None:
             return(cl_fact_sensor_dht11.__o_instance)
-        cl_fact_sensor_dht11.__o_instance = cl_main_sensor_dht11()
+        cl_fact_sensor_dht11.__o_instance = cl_sensor_dht11(i_sensor_type, i_active_sensor)
         return(cl_fact_sensor_dht11.__o_instance)
 
     @classmethod

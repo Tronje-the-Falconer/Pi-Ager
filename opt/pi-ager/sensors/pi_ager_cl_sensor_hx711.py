@@ -11,7 +11,7 @@ from statistics import stdev as pi_stdev
 import time
 import RPi.GPIO as GPIO
 
-class HX711:
+class cl_sensor_hx711:
     def __init__(self, dout=10, pd_sck=9, gain=128, bitsToRead=24):
         self.PD_SCK = pd_sck
         self.DOUT = dout
@@ -26,7 +26,7 @@ class HX711:
         self.REFERENCE_UNIT = 1
 
         self.GAIN = 0
-        self.OFFSET = 1
+        self.OFFSET = 0
         self.lastVal = 0
         self.bitsToRead = bitsToRead
         self.twosComplementThreshold = 1 << (bitsToRead-1)
@@ -64,7 +64,6 @@ class HX711:
         read_repeat_counter_max = 10
         while (read_repeat_counter <= read_repeat_counter_max):
             read_repeat_counter += 1
-#            GPIO.output(self.PD_SCK, False)  # start by setting the pd_sck to 0
             self.reset()                      # start with reset
             ready_counter = 0
             ready_counter_max = 20
@@ -73,8 +72,6 @@ class HX711:
                 ready_counter += 1
             
             if ready_counter == ready_counter_max:  # if counter reached max value then try again
-#                print("wait for ready error")
-#                self.reset()
                 continue
 
             unsignedValue = 0
@@ -90,7 +87,6 @@ class HX711:
 #                    print("Timing error read data")
 #                    self.reset()
                     break
-#                bitValue = GPIO.input(self.DOUT)
                 unsignedValue = unsignedValue << 1
                 unsignedValue = unsignedValue | bitValue
 
@@ -122,32 +118,20 @@ class HX711:
             
         return 0     # error, no valid conversion after read_repeat_counter_max retries
 
-    def getValue(self):
-        return self.read() - self.OFFSET
-
-    def getWeight(self):
-        value = self.getValue()
+    def getRawWeight(self):
+        value = self.read()
         value /= self.REFERENCE_UNIT
+        value -= self.OFFSET
         return value
-
-    def tare(self, times=25):
-        reference_unit = self.REFERENCE_UNIT
-        self.setReferenceUnit(1)
-
-        # remove spikes
-        cut = times//5
-        values = sorted([self.read() for i in range(times)])[cut:-cut]
-        offset = pi_mean(values)
-
-        self.setOffset(offset)
-
-        self.setReferenceUnit(reference_unit)
 
     def setOffset(self, offset):
         self.OFFSET = offset
 
     def setReferenceUnit(self, reference_unit):
-        self.REFERENCE_UNIT = reference_unit
+        if reference_unit == 0:
+            self.REFERENCE_UNIT = 1
+        else:
+            self.REFERENCE_UNIT = reference_unit
 
     # HX711 datasheet states that setting the PDA_CLOCK pin on high
     # for a more than 60 microseconds would power off the chip.
@@ -167,25 +151,23 @@ class HX711:
         self.powerDown()
         self.powerUp()
 
-class Scale:
-    def __init__(self, source=None, samples=20, spikes=4, sleep=0.1, dout=10, pd_sck=9, gain=128, bitsToRead=24):
+class cl_scale(cl_sensor_hx711):
+    def __init__(self, samples=20, dout=10, pd_sck=9, gain=128, bitsToRead=24):
+        super().__init__(dout, pd_sck, gain, bitsToRead)
         self.gain = gain
         self.dout = dout
         self.pd_sck = pd_sck
         self.bitsToRead = bitsToRead
-        self.source = source or HX711(dout=self.dout, pd_sck=self.pd_sck, gain=self.gain, bitsToRead=self.bitsToRead)
         self.samples = samples
-        self.spikes = spikes
-        self.sleep = sleep
         self.history = []
 
-    def newMeasure(self):
-        value = self.source.getWeight()
+    def getWeightAppendHistory(self):
+        value = self.getRawWeight()
         self.history.append(value)
 
-    def getMeasure(self):
+    def getWeightFiltered(self):
         """Useful for continuous measurements."""
-        self.newMeasure()
+        self.getWeightAppendHistory()
         # cut to old values
         self.history = self.history[-self.samples:]
 
@@ -203,14 +185,6 @@ class Scale:
         else:
             sigma = pi_stdev(temp_hist)
 
-#        deltas = sorted([abs(i-avg) for i in temp_hist])
-
-#        if len(deltas) < self.spikes:
-#            max_permitted_delta = deltas[-1]
-#        else:
-#            max_permitted_delta = deltas[-self.spikes]
-        
-#        print("max_permitted_delta : %d, avg : %.2f, sigma : %.2f" % (max_permitted_delta, avg, sigma))
         if (len(temp_hist) < 2):
            valid_values = temp_hist
         else:
@@ -231,34 +205,11 @@ class Scale:
 
         return avg
 
-    def getWeight(self, samples=None):
+    def getWeightFilteredFlushingHistory(self, samples=None):
         """Get weight for once in a while. It clears history first."""
         self.history = []
-
-        [self.newMeasure() for i in range(samples or self.samples)]
-
-        return self.getMeasure()
-
-    def tare(self, times=25):
-        self.source.tare(times)
+        [self.getWeightAppendHistory() for i in range(samples or self.samples)]
+        return self.getWeightFiltered()
 
     def setSamples(self, samples):
         self.samples = samples
-
-    def setSpikes(self, spikes):
-        self.spikes = spikes
-
-    def setOffset(self, offset):
-        self.source.setOffset(offset)
-
-    def setReferenceUnit(self, reference_unit):
-        self.source.setReferenceUnit(reference_unit)
-
-    def powerDown(self):
-        self.source.powerDown()
-
-    def powerUp(self):
-        self.source.powerUp()
-
-    def reset(self):
-        self.source.reset()

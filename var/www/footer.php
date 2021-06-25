@@ -29,5 +29,7 @@
                 </div>
             </div>
         </footer>
+
+        </div>    <!-- art-main -->    
     </body>
 </html>
