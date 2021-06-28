@@ -45,7 +45,7 @@ Passwort für Zugriff auf Datenbankverwaltung phpliteadmin
       
     dbpw=
 
-WLAN Netzwerkname: Sonderzeichen wie ! oder Leerzeichen muss ein Backslash '\' vorangestelt werden:
+WLAN Netzwerkname: Sonderzeichen wie ! oder Leerzeichen muss ein Backslash '\\' vorangestelt werden:
 
     wlanssid=
 
