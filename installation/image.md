@@ -10,7 +10,7 @@ Im Falle eines andseren Betriebssystems, reicht es nicht aus, Windows als virtue
 
 Das Image muss unter [Releases](https://github.com/Tronje-the-Falconer/Pi-Ager/releases) downloaden und auf die SD-Karte schreiben.
 
-Dafür läd man sich das Programm [Win 32 Disk Imager von Sourceforge](http://sourceforge.net/projects/win32diskimager/) herunter und installiert dieses.
+Dafür läd man sich das Programm [Win 32 Disk Imager von Sourceforge](http://sourceforge.net/projects/win32diskimager/) oder [balena etcher](https://www.balena.io/etcher/) herunter und installiert dieses.
 
 Jetzt legt man eine mind. 8GB große SD-Karte in einen Kartenleser ein und wartet bis Windows diese erkannt hat.
  
