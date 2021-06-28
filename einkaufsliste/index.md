@@ -28,6 +28,7 @@ Wenn jemand fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möc
   * [Pi 3B](https://www.voelkner.de/products/882046/Raspberry-Pi-3-Model-B-1-GB-ohne-Betriebssystem.html)
   * [Pi 3B+](https://www.amazon.de/Raspberry-Model-Mainboard-MicroSD-Speicherkartenslot/dp/B00LPESRUK)
   * [Pi 3A+](https://www.reichelt.de/raspberry-pi-3-a-4x-1-4-ghz-512-mb-ram-wlan-bt-raspberry-pi-3a-p243791.html?PROVID=2788&gclid=EAIaIQobChMI2f_aj_ym3wIVSZnVCh2OVgd8EAQYAiABEgIuw_D_BwE&&r=1)
+  * [Pi 4](https://www.reichelt.de/de/de/raspberry-pi-4-b-4x-1-5-ghz-4-gb-ram-wlan-bt-rasp-pi-4-b-4gb-p259920.html?PROVID=2788&gclid=EAIaIQobChMIxoC60qC68QIVZfx3Ch3flgcGEAQYAiABEgLyIPD_BwE&&r=1)
 * [microSDHC Karte](https://www.reichelt.de/microsdhc-speicherkarte-16gb-sandisk-ultra-sdsquar016ggn6ma-p214843.html?r=1) (min. 8GB)
 * [USB Netzteil 5V / mind. 4A z.B.](https://www.reichelt.de/Netzteile-Festspannung/MW-GST40A05/3/index.html?ACTION=3&LA=2&ARTICLE=171043&GROUPID=4950&artnr=MW+GST40A05&SEARCH=%252A) (Reichelt)
 
