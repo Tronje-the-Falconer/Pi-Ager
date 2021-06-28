@@ -31,7 +31,7 @@ Diese Anleitung basiert auf Windows. Für andere Betriebssysteme muss evtl. eine
 
 Das Pi-Ager System ist grundsätzlich auf der Basis des Betriebsystems Pi OS Lite und des Rasspberry Zero W  aufgebaut.
 
-Für Pi zero: [Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/)
+Für Pi zero: [Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/) (auch für Pi 3/4 Versionen nutzbar)
 
 Für Pi 4/3 kann man auch die Desktop Version nutzen: [Pi OS with desktop and recommended software](https://www.raspberrypi.org/software/operating-systems/)
 
@@ -64,13 +64,12 @@ eine Datei mit dem Namen wpa_supplicant.conf mit dem Inhalt (ESSID und die PASSP
 
 {% highlight plaintext linenos %}
 # Datei wpa_supplicant.conf in der Boot-Partition (Raspbian Stretch)
-country=DE  #omit if US
-ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-update_config=1
+country=DE 
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev 
+update_config=1 
 network={
-       ssid="ESSID "
-       psk="PASSPHRASE"
-       key_mgmt=WPA-PSK
+     ssid="WLAN SSID"
+     psk="WLAN PASSWORT"
 }
 {% endhighlight %}
 
@@ -131,6 +130,9 @@ Sollte die Frage nicht gestellt werden müssen wir den Raspberry manuell starten
 sudo sync
 sudo reboot
 {% endhighlight %}
+
+
+hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
 
 Sofern kein Ethernetanschluss gegeben ist, aber ein WLAN-Stick zur Verfügung steht sollte jetzt Punkt [WiFi-Verbindung](#wifi-verbindung) vorgezogen werden.
 
