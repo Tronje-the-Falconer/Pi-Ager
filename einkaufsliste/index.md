@@ -17,7 +17,7 @@ Wenn jemand fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möc
 #### Raspberry Pi
 
 
-* Aktuelle Softeareversion: 3.2.2 Bugfix1 
+* Aktuelle Softeareversion: 3.3.0 
 * [Pi zero W](https://shop.pimoroni.de/products/raspberry-pi-zero-w) Dieses ist die empfohlene Variante da die Platine dafür ausgelegt ist und man meistens auch das integrierte Wlan Modul nutzen kann.
 * !!! Achtung keinen Zero WH kaufen da diese Variannte die Stiftleiste schon draufgelötet hat !!!
 * Alternative 1: 
