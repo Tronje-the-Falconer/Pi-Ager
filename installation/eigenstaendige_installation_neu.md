@@ -5,7 +5,7 @@ title: "Eigenständige Installation"
 # eigenständige Installation (für erfahrene User)
 # Inhalt
 
-* [Betriebssystem RASPBIAN LITE](#betriebssystem-raspian-lite)
+* [Betriebssystem RASPBIAN LITE](#betriebssystem)
 * [WiFi-Verbindung](#wifi-verbindung)
 * [Softwarepakete](#softwarepakete)
     * [lighttpd](#lighttpd)
@@ -22,11 +22,20 @@ title: "Eigenständige Installation"
 * [Programm Reifeschranksteuerung](#programm-reifeschranksteuerung)
 
 
+------------------------------------------------------------------------------------------------------------
+
+
 Diese Anleitung basiert auf Windows. Für andere Betriebssysteme muss evtl. eine andere Vorgehensweise gewählt werden (z.B. beschreiben der SD-Karte.
 
-# Betriebssystem RASPBIAN LITE
+# Betriebssystem 
 
-Download [RASPBIAN LITE](https://www.raspberrypi.org/downloads/raspbian/)
+Das Pi-Ager System ist grundsätzlich auf der Basis des Betriebsystems Pi OS Lite und des Rasspberry Zero W  aufgebaut.
+
+Für Pi zero: [Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/)
+
+Für Pi 4/3 kann man auch die Desktop Version nutzen: [Pi OS with desktop and recommended software](https://www.raspberrypi.org/software/operating-systems/)
+
+-----------------------------------------
 
 Dieses entpacken wir und müssen es auf die SD-Karte schreiben.
 
