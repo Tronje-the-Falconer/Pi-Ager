@@ -24,6 +24,7 @@ Wenn der Vorgang abgeschlossen ist öffnet man den Windows Dateiexplorer und geh
 
 und gibt bei den Parametern hinter dem =-Zeichen die gewünschten Daten an. (Sofern nichts angegeben wird, sind die Passwörter standardmäßig raspberry) :
 
+
 Hostname, wie soll der RaspberryPi im Netzwerk heißen:
 
     piname=
@@ -39,19 +40,32 @@ Passwort für Benutzer root:
 Passwort für Benutzer pi-ager auf der Webiste Settings, Admin und Webcam:
 
     webguipw=
+    
+Passwort für Zugriff auf Datenbankverwaltung phpliteadmin
+      
+    dbpw=
 
-WLAN Netzwerkname:
+WLAN Netzwerkname: Sonderzeichen wie ! oder Leerzeichen muss ein Backslash '\' vorangestelt werden:
 
     wlanssid=
 
 WLAN Schluessel:
 
     wlankey=
+    
+ISO code your country, e.g. DE, GB    
+    
+    country=
 
-setup.txt nach boot loeschen? leer lassen für Löschen oder 1 für Behalten
+angeschlossener interner Temperatur/Feuchtesensor Pi-Pager:
+unterstüzte Typen : DHT11, DHT22, SHT75, SHT85, SHT3x
 
-     keepconf=
+    sensor=
 
+setup.txt nach boot loeschen? leer lassen für Löschen oder 1 für behalten
+
+    keepconf=
+     
 
 Die Änderungen speichert man und wirft die Speicherkarte in Windows aus.
 
