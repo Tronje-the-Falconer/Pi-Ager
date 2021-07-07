@@ -38,6 +38,7 @@ import signal
 import threading
 import pi_ager_cl_scale
 import pi_ager_cl_agingtable
+import pi_ager_cl_nextion
 
 # catch signal.SIGTERM and signal.SIGINT when killing main to gracefully shutdown system
 def signal_handler(signum, frame):
@@ -73,6 +74,11 @@ cl_fact_logger.get_instance().debug('Starting agingtable thread ' + time.strftim
 agingtable_thread = pi_ager_cl_agingtable.cl_aging_thread()
 agingtable_thread.start()
 cl_fact_logger.get_instance().debug('Starting agingtable thread done' + time.strftime('%H:%M:%S', time.localtime()))
+
+cl_fact_logger.get_instance().debug('Starting nextion display thread ' + time.strftime('%H:%M:%S', time.localtime()))
+nextion_thread = pi_ager_cl_nextion.pi_ager_cl_nextion()
+nextion_thread.start()
+cl_fact_logger.get_instance().debug('Starting nextion display thread done' + time.strftime('%H:%M:%S', time.localtime()))
 
 exception_known = True
 
@@ -113,8 +119,13 @@ finally:
     scale1_thread.stop_received = True
     scale2_thread.stop_received = True
     agingtable_thread.stop_received = True
+    nextion_thread.loop.call_soon_threadsafe(nextion_thread.stop_event.set)
+    nextion_thread.stop_loop()
+    
     scale1_thread.join()
     scale2_thread.join()
     agingtable_thread.join()
+    nextion_thread.join()  
+    
     cl_fact_logger.get_instance().debug('threads terminated')   
     pi_ager_organization.goodbye()
