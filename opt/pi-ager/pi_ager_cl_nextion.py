@@ -55,8 +55,8 @@ class pi_ager_cl_nextion( threading.Thread ):
         elif type_ == EventType.TOUCH:
             print('A button (id: %d) was touched on page %d' % (data.component_id, data.page_id))
             self.current_page_id = data.page_id
+            self.loop.call_soon_threadsafe(self.button_event.set)
             
-        self.loop.call_soon_threadsafe(self.button_event.set)
         # self.button_event.set()
         logging.info('Event %s data: %s', type_, str(data))
     
@@ -215,7 +215,7 @@ class pi_ager_cl_nextion( threading.Thread ):
                 self.button_event.clear()
                 logging.info('button pressed processed')
         except Exception as e:
-            logging.error(str(e))
+            logging.error('button_waiter stopped ' + str(e))
             pass    
     
     def get_pi_model(self):
@@ -247,6 +247,8 @@ class pi_ager_cl_nextion( threading.Thread ):
         
         wifi_ssid = self.get_wifi_ssid()
         await self.client.set('values.wifi_conn.txt', wifi_ssid)
+        
+        await self.client.set('values.status_light.val', 0)
         
         self.current_page_id = 1
         await self.client.command('page 1')     
@@ -322,42 +324,42 @@ class pi_ager_cl_nextion( threading.Thread ):
         if values['circulating_air'] == 0:
             await self.client.set('led_circulate.pic', 10) 
         else:
-            await self.client.set('led_circulate.pic', 11) 
+            await self.client.set('led_circulate.pic', 47) 
 
         if values['compressor'] == 0:
             await self.client.set('led_compressor.pic', 10) 
         else:
-            await self.client.set('led_compressor.pic', 11) 
+            await self.client.set('led_compressor.pic', 47) 
 
         if values['exhaust_air'] == 0:
             await self.client.set('led_exhaust.pic', 10) 
         else:
-            await self.client.set('led_exhaust.pic', 11) 
+            await self.client.set('led_exhaust.pic', 47) 
 
         if values['heater'] == 0:
             await self.client.set('led_heater.pic', 10) 
         else:
-            await self.client.set('led_heater.pic', 11) 
+            await self.client.set('led_heater.pic', 47) 
             
         if values['light'] == 0:
             await self.client.set('led_light.pic', 10) 
         else:
-            await self.client.set('led_lightr.pic', 11) 
+            await self.client.set('led_lightr.pic', 47) 
             
         if values['uv'] == 0:
             await self.client.set('led_uv.pic', 10) 
         else:
-            await self.client.set('led_uv.pic', 11) 
+            await self.client.set('led_uv.pic', 47) 
             
         if values['humidifier'] == 0:
             await self.client.set('led_humid.pic', 10) 
         else:
-            await self.client.set('led_humid.pic', 11) 
+            await self.client.set('led_humid.pic', 47) 
             
         if values['dehumidifier'] == 0:
             await self.client.set('led_dehumid.pic', 10) 
         else:
-            await self.client.set('led_dehumid.pic', 11)  
+            await self.client.set('led_dehumid.pic', 47)  
     
     async def update_base_values(self):
         values = self.db_get_base_values()
@@ -420,10 +422,7 @@ class pi_ager_cl_nextion( threading.Thread ):
             
     async def process_page1(self):
         await self.update_base_values()
-            
-    async def process_page2(self):
-        pass
-            
+
     async def process_page3(self):
         await self.update_states()
             
@@ -441,7 +440,7 @@ class pi_ager_cl_nextion( threading.Thread ):
         self.button_event = asyncio.Event()
         self.stop_event = asyncio.Event()
         # self.waiter_task = asyncio.create_task(self.button_waiter(self.button_event))
-        self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))   
+        # self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))   
         
         self.client = Nextion('/dev/ttyS0', 9600, self.nextion_event_handler, self.loop)
         logging.info('client generated')
@@ -449,11 +448,13 @@ class pi_ager_cl_nextion( threading.Thread ):
             await self.client.connect()
             logging.info('client connected')
             cl_fact_logger.get_instance().info('Nextion client connected')
+            self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))                                                                                              
         except Exception as e:
-            logging.error(str(e))
+            logging.error('run_client exception1: ' + str(e))
             cl_fact_logger.get_instance().info('Could not connect to Nextion client. Possible HDMI display not connected')
             while not self.stop_event.is_set():
                 await asyncio.sleep(1)
+            return                                                                                                              
 
         logging.info('sleep:' + str(await self.client.get('sleep')))
         
@@ -470,8 +471,6 @@ class pi_ager_cl_nextion( threading.Thread ):
             try:
                 if self.current_page_id == 1:
                     await self.process_page1()
-                elif self.current_page_id == 2:
-                    await self.process_page2()
                 elif self.current_page_id == 3:
                     await self.process_page3()
                 elif self.current_page_id == 4:
@@ -482,7 +481,7 @@ class pi_ager_cl_nextion( threading.Thread ):
                     await self.process_page12()  
                     
             except Exception as e:
-                logging.error(str(e))
+                logging.error('run_client exception2: ' + str(e))
             
             # await self.client.set('values.temp_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
             # await self.client.set('values.humidity_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
@@ -492,9 +491,9 @@ class pi_ager_cl_nextion( threading.Thread ):
             # await self.client.set('values.dewpoint_set.txt', "%.1f" % (random.randint(0, 1000) / 10))
             # await self.client.set('values.status_uv.val', 1)
             # await self.client.command('page dp')
-            await asyncio.sleep(2)
+            await asyncio.sleep(3)
        
-        print('finished')
+        logging.info('run_client finished')
         
     def inner_ctrl_c_signal_handler(self, sig, frame):
         self.stop_event.set()
@@ -507,7 +506,7 @@ class pi_ager_cl_nextion( threading.Thread ):
         
     def run(self):
         logging.basicConfig(
-            format='%(asctime)s - %(levelname)s - %(message)s',
+            format='%(asctime)s - %(module)s - %(levelname)s - %(message)s',
             level=logging.DEBUG,
             handlers=[
                 logging.StreamHandler()
@@ -529,6 +528,8 @@ class pi_ager_cl_nextion( threading.Thread ):
         #     task.cancel()
             logging.info('run_forever stopped')
             tasks = asyncio.all_tasks(self.loop)
+            count = len(tasks)
+            logging.info('Elements in tasks list : ' + str(count))                                                                        
             for t in [t for t in tasks if not (t.done() or t.cancelled())]:
                 self.loop.run_until_complete(t)
 
@@ -540,9 +541,8 @@ class pi_ager_cl_nextion( threading.Thread ):
         #         'exception': task.exception(),
         #         'task': task
         #         })
-        # except Exception as e:
-        #    logging.info('in run at exception')
-        #    logging.info(str(e))
+        except Exception as e:
+            logging.info('Nextion thread in exception ' + str(e))
             
         finally:
             #logging.info('after finally')
@@ -550,12 +550,14 @@ class pi_ager_cl_nextion( threading.Thread ):
             self.loop.close()
             
     def stop_loop(self):
-        #logging.info('in stop_loop')
+        logging.info('in stop_loop')
         tasks = asyncio.all_tasks(self.loop)
+        count = len(tasks)
+        logging.info('Elements in task list : ' + str(count))        
         for t in tasks:
             t.cancel()
         self.loop.stop()
-        #logging.info('after self.loop.stop')
+        logging.info('after self.loop.stop')
 
         
         
