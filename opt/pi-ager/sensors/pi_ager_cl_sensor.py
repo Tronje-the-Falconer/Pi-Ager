@@ -79,6 +79,8 @@ class cl_sensor(cl_ab_sensor):
 
     def get_dewpoint(self, temperature, humidity):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        if humidity == 0:
+            humidity = 1
         if (temperature >= 0):
             a = 7.5
             b = 237.3
