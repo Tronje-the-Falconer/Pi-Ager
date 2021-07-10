@@ -419,7 +419,39 @@ class pi_ager_cl_nextion( threading.Thread ):
             await self.client.set('txt_scale2.txt', '--.-')
         else:
             await self.client.set('txt_scale2.txt', "%.0f" % (values['scale2'])) 
-            
+
+    async def update_page9_values(self):
+        status_piager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key )
+        secondsensortype = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensorsecondtype_key)  # disabled if 0
+        
+        temp_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
+        humidity_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)
+
+        temp_soll = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key)
+        humitidy_soll = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key)
+
+        temp_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_temperature_key)
+        humid_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_humidity_key)
+        
+        await self.client.set('txt_temp_set.txt', "%.1f" % (temp_soll))
+        await self.client.set('txt_humid_set.txt', "%.1f" % (humitidy_soll))
+        
+        if status_piager == 0:
+            await self.client.set('txt_temp.txt', '--.-')
+            await self.client.set('txt_humid.txt', '--.-')
+            await self.client.set('txt_temp_ext.txt', '--.-') 
+            await self.client.set('txt_humid_ext.txt', '--.-')
+        else:
+            await self.client.set('txt_temp.txt', "%.1f" % (temp_ist))
+            await self.client.set('txt_humid.txt', "%.1f" % (humidity_ist)) 
+            if secondsensortype != 0:
+                await self.client.set('txt_temp_ext.txt', "%.1f" % (temp_ext))
+                await self.client.set('txt_humid_ext.txt',"%.1f" % (humid_ext))
+            else:
+                await self.client.set('txt_temp_ext.txt', '--.-') 
+                await self.client.set('txt_humid_ext.txt', '--.-')
+        
+
     async def process_page1(self):
         await self.update_base_values()
 
@@ -431,8 +463,9 @@ class pi_ager_cl_nextion( threading.Thread ):
             
     async def process_page9(self):
         await self.update_states()
-        await self.update_base_values()
-   
+        # await self.update_base_values()
+        await self.update_page9_values()
+        
     async def process_page12(self):
         await self.update_extended_values()
     
