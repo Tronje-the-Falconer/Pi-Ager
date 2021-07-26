@@ -34,7 +34,9 @@ case "$1" in
     grepmain) #Überprüfen von Rss.py | ps ax gibt Prozessliste zurück, wird nach grep übergeben und Versionsnummer von Grep wird hinzugefügt, wird dann nach grep nochmals übergeben und nach RSS.py gesucht
         ps ax | grep -v grep | grep main.py
     ;;
-
+    startfirmwareprog) # start tft display firmware programming
+        python3 /opt/pi-ager/piager_upload_firmware.py /dev/ttyS0 /var/www/nextion/pi-ager.tft >/dev/null 2>/dev/null &
+    ;;
     reboot) # reboot
         sleep 3
         reboot

@@ -648,3 +648,12 @@ def repair_column_type(table, fieldname):
     # logger.debug(logstring)
     # cl_fact_logger.get_instance().debug(logstring)
     pass
+
+def update_nextion_table( progress, status ):
+    """
+    function to update nextion table progress and status values
+    """
+    with globals.lock:
+        open_database()
+        execute_query('UPDATE ' + pi_ager_names.nextion_table + ' SET ' + pi_ager_names.progress_field + ' = ' + str(progress) + ', ' + pi_ager_names.status_field + ' = "' + status + '" WHERE id = 1' )
+        close_database()

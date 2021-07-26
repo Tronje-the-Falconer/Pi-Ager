@@ -14,6 +14,7 @@
                                     include 'modules/write_admin_db.php';                       // schreibt die admin-Werte
                                     include 'modules/write_bus.php';                            // schreibt den bus-value
                                     include 'modules/backup_manual.php';                        // steuert manuelles Backup im sudowebscript an
+                                    include 'modules/nextion_upload_firmware.php';              // upload firmware file for nextion hmi display                                    
                                     include 'modules/write_backup_db.php';                      // schreibt die backup-Werte
                                     
                                     include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
@@ -604,6 +605,315 @@
                                         </tr>
                                     </table>
                                 </div>
+                                
+                                <hr>
+                                <h2 class="art-postheader"><?php echo _('Nextion Display Firmware'); ?></h2>
+                                <!----------------------------------------------------------------------------------------Nextion display Firmware -->
+                                <div class="hg_container" >                                    
+                                    <table style="width: 100%;">
+                                        <tr>
+                                            <form method="post" id="nextion" enctype="multipart/form-data">
+                                                <td>
+                                                    <label for="tft_file">
+                                                        Firmware file: <input type="file" name="tft_file" id="tft_file" accept=".zip" onchange="enableButton()">
+                                                    </label>
+                                                </td>
+                                            </form>
+                                            <td style=" text-align: left; ">
+                                                <script>
+                                                    function enableButton() {
+                                                        document.getElementById("upload_nextion_firmware").disabled = false;
+                                                    }
+                                                </script>
+                                                <button class="art-button" disabled id="upload_nextion_firmware" form="nextion" name="upload_nextion_firmware" value="upload_nextion_firmware" onclick="enableProgrammingButton()">upload</button>
+                                                <script>
+                                                    function enableProgrammingButton(){
+                                                        if (confirm('upload new firmware file?')) { 
+                                                            //document.getElementById("program_firmware").disabled = false;
+                                                            return true;
+                                                        }
+                                                        return false;
+                                                    }
+                                                </script>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button class="art-button" id="program_firmware" name="program_firmware" value="program_firmware" onclick="move_bar()">start programming</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                             <!--   <progress style="width: 100%; height: 20px; position: relative;" id="programming" value="32" max="100"> 32% </progress> -->
+                                                <div id="progress_label" class="progress" data-label="0% Complete">
+                                                    <span id="upload_progress" class="value" style="width:0%;"></span>
+                                                </div>
+                                            <!--    <script> -->
+                                            <!--    $("#progress_label").css("border", "3px solid red"); -->
+                                            <!--    </script> -->
+                                            </td>
+                                        </tr>
+<!--                                        <tr>
+                                            <td colspan="2">
+                                                <button disabled class="art-button" id="test_button" name="test_button">test button</button>
+                                            </td>
+                                        </tr> -->
+                                    </table>
+                                </div>
+                                
+                                <script>
+                                                                    
+                                    var first_action = false;
+                                    var second_action = false;
+                                
+                                    function show_error( msg ) {
+                                        $('#progress_label').css('border', '3px solid red');
+                                        $('#progress_label').attr('data-label', msg);
+                                        $("#program_firmware").attr("disabled", false);
+                                    }
+                                    
+                                    async function do_finalize( success ) {
+                                        $.ajax({
+                                            method: 'POST',
+                                            url: 'nextion_control.php?q=finalize',
+                                        })
+                                        .done(function( msg ) {
+                                            //console.log('programming :' + msg);
+                                            if (msg != 'ready') {
+                                                show_error( msg );
+                                            }
+                                            else {
+                                                if (success == true) {
+                                                    $('#progress_label').attr('data-label', 'ready');
+                                                }
+                                                $("#program_firmware").attr("disabled", false);
+                                            }
+                                        })
+                                        .fail(function(xhr, textStatus) {
+                                            show_error(textStatus);
+                                            console.log( "Ajax failed: " + xhr.statusText);
+                                            console.log(textStatus);
+                                            //console.log(error);
+                                        });
+                                    }
+                                    
+                                    async function do_programming() {
+                                        while (true) {
+                                            $.ajax({
+                                                method: 'POST',
+                                                url: 'nextion_control.php?q=program',
+                                            })
+                                            .done(function( msg ) {
+                                                //console.log('programming :' + msg);
+                                                try {
+                                                    programming_status = JSON.parse(msg);
+                                                    progress = programming_status.progress.toString();
+                                                    status = programming_status.status;
+                                                    //console.log('second ajax function done. status :' + status);
+                                                    $('#upload_progress').css('width', progress + '%');
+                                                    $('#progress_label').attr('data-label', progress + '%' + ' complete');
+                                                    second_action = true;
+                                                }
+                                                catch(err) {
+                                                    console.log('error: ' + err);
+                                                    $("#program_firmware").attr("disabled", false);
+                                                }
+                                            })
+                                            .fail(function(xhr, textStatus) {
+                                                show_error(textStatus);
+                                                console.log( "Ajax failed: " + xhr.statusText);
+                                                console.log(textStatus);
+                                                //console.log(error);
+                                                second_action = false;
+                                            });
+                                            
+                                            await new Promise(resolve => setTimeout(resolve, 3000));
+                                            
+                                            if (second_action == false || status == 'failed') {
+                                                //console.log('break 1');
+                                                show_error('HMI display flashing failed. Check cables.');
+                                                do_finalize( false );
+                                                break;
+                                            }
+                                            if (status == 'idle' || status == 'running') {
+                                                //console.log('continue');
+                                                // await new Promise(resolve => setTimeout(resolve, 3000));   
+                                                continue;
+                                            }
+                                            if (status == 'success') {
+                                                //console.log('break 2');
+                                                $('#progress_label').attr('data-label', 'Starting Pi-Ager Service now');
+                                                do_finalize( true );
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    
+                                    async function move_bar() {
+                                        $('#progress_label').css('border', '3px solid #8c8c8c');
+                                        $('#progress_label').attr('data-label', 'ready');
+                                        $('#upload_progress').css('width', '0%');
+                                        $("#program_firmware").attr("disabled", true);
+                                        if (confirm('Pi-Ager service will be stopped to flash the HMI display firmware.\nContinue ?')) {
+                                            $.ajax({
+                                                method: 'POST',
+                                                url: 'nextion_control.php?q=check',
+                                            })
+                                            .done(function( msg ) {
+                                                if (msg != 'ready') {
+                                                    show_error( msg );
+                                                }
+                                                else {
+                                                    $('#progress_label').attr('data-label', 'ready');
+                                                    //console.log('First ajax done');
+                                                    do_programming();
+                                                }
+                                            })
+                                            .fail(function(xhr, textStatus) {
+                                                show_error(textStatus);
+                                                console.log( "First ajax failed: " + xhr.statusText);
+                                                console.log(textStatus);
+                                                //console.log(error);
+                                            });
+                                            
+                                            return;
+/*
+                                            ajax = new XMLHttpRequest();
+                                            method = "POST";
+                                            url = "nextion_control.php?q=check";
+                                            asynchronous = true;
+                                            
+                                            ajax.open(method, url, asynchronous);
+                                            
+                                            ajax.onerror = function() {
+                                                error = true;
+                                                //alert('Error occurred during programming firmware');
+                                                show_error('firmware check failed');
+                                                //$('#progress_label').css('border', '3px solid red');
+                                                //$('#progress_label').attr('data-label', 'firmware check failed');
+                                            }
+                                            // sending ajax request
+                                            ajax.send();
+*/                                            
+                                            // receiving response from nextion_control.php
+/*                                            ajax.onreadystatechange = async function() {
+                                                if (this.readyState == 4 && this.status == 200) {
+                                                    //alert(this.responseText);
+                                                    if (this.responseText != 'ready') {
+                                                        $('#progress_label').css('border', '3px solid red');
+                                                        $('#progress_label').attr('data-label', this.responseText);
+                                                        //var label = document.getElementById("progress_label");
+                                                        //label.setAttribute("data-label", this.responseText);
+                                                    } */
+/*                                                    else {
+                                                        error = false;
+                                                        ajax2 = new XMLHttpRequest();
+                                                        url = "nextion_control.php?q=program";
+                                            
+                                                        status = 'idle';
+                                                        ajax2.onerror = function() {
+                                                            error = true;
+                                                            alert('Error occurred during programming firmware');
+                                                            $('#progress_label').css('border', '3px solid red');
+                                                            $('#progress_label').attr('data-label', 'firmware check failed');
+                                                        }
+                                                        // receiving response from nextion_control.php
+                                                        ajax2.onreadystatechange = function() {
+                                                            if (this.readyState == 4 && this.status == 200) {
+                                                                //alert(this.responseText);
+                                                                programming_status = JSON.parse(this.responseText);
+                                                                progress = programming_status.progress.toString();
+                                                                status = programming_status.status;
+                                                                $('#upload_progress').css('width', progress + '%');
+                                                                $('#progress_label').attr('data-label', progress + '%' + ' complete');
+                                                            }
+                                                        }
+                                            
+                                                        while (true) {
+                                                            // sending ajax request
+                                                            ajax2.open(method, url, asynchronous);
+                                                            ajax2.send(); 
+                                                            await new Promise(resolve => setTimeout(resolve, 3000));
+                                                            if (status == 'idle') {
+                                                                continue;
+                                                            }
+                                                            if (status == 'running') {
+                                                                continue;
+                                                            }
+                                                            if (status == 'success') {
+                                                                break;
+                                                            }
+                                                            if (status == 'failed' || error == true) {
+                                                                $('#progress_label').css('border', '3px solid red');
+                                                                $('#progress_label').attr('data-label', 'programming failed');
+                                                                break;
+                                                            }
+                                                        }                                                
+                                            
+                                                    } 
+                                                }
+                                            }         */
+                                            
+/*                                            await new Promise(resolve => setTimeout(resolve, 12000));
+                                            if (error == true) {
+                                                return;
+                                            }
+                                            
+                                            ajax2 = new XMLHttpRequest();
+                                            url = "nextion_control.php?q=program";
+                                            
+                                            status = 'idle';
+                                            // receiving response from nextion_control.php
+                                            ajax2.onreadystatechange = function() {
+                                                if (this.readyState == 4 && this.status == 200) {
+                                                    //alert(this.responseText);
+                                                    programming_status = JSON.parse(this.responseText);
+                                                    progress = programming_status.progress.toString();
+                                                    status = programming_status.status;
+                                                    $('#upload_progress').css('width', progress + '%');
+                                                    $('#progress_label').attr('data-label', progress + '%' + ' complete');
+                                                }
+                                            }
+                                            
+                                            while (true) {
+                                                // sending ajax request
+                                                ajax2.open(method, url, asynchronous);
+                                                ajax2.send(); 
+                                                await new Promise(resolve => setTimeout(resolve, 3000));
+                                                if (status == 'idle') {
+                                                    continue;
+                                                }
+                                                if (status == 'running') {
+                                                    continue;
+                                                }
+                                                if (status == 'success') {
+                                                    break;
+                                                }
+                                                if (status == 'failed') {
+                                                    $('#progress_label').css('border', '3px solid red');
+                                                    $('#progress_label').attr('data-label', 'failed');
+                                                    break;
+                                                }
+                                            }                                                
+*/                                            
+                                            //var elem = document.getElementById("upload_progress");
+                                            //var label = document.getElementById("progress_label");
+                                            //var width = 1;
+                                            //var id = setInterval(frame, 10);
+                                            //return true;
+                                            //function frame() {
+                                            //    if (width >= 100) {
+                                            //        clearInterval(id);
+                                            //    } else {
+                                            //        width++;
+                                            //        elem.style.width = width + '%';
+                                            //        label.setAttribute("data-label", width.toString() + '%' + ' complete');
+                                            //    }
+                                            //}
+                                        }
+                                    }
+                                </script> 
+                                
                                 <?php
                                     if ($loglevel_console == 10 and $loglevel_file == 10){
                                         echo '<hr>';

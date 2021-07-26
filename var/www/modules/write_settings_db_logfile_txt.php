@@ -15,13 +15,13 @@
             $exhaust_air_period_setting = $_POST['exhaust_air_period_settings'];
             $exhaust_air_duration_setting = $_POST['exhaust_air_duration_settings'];
         
-        // if(isset ($modus_setting) && $modus_setting <> NULL) {             // ist das $_POST-Array gesetzt
+        // if(isset ($modus_setting) && $modus_setting <> NULL) {      // ist das $_POST-Array gesetzt
         if($modus_setting != NULL) {             // ist das $_POST-Array gesetzt
             $SettingsInputIsValid = TRUE;
-            foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
+            foreach ($_POST as $CheckInput) {   // Prüfen, ob nur Zahlen eingegeben wurden
                 if ($CheckInput != 'manvals_form_submit') {
-                    if (preg_match('/[.\D]/', $CheckInput)) {
-                        $message_settings = _('unauthorized character - please use only positive integers!');
+                    if (!(preg_match('/^-?\d+$/', $CheckInput))) {
+                        $message_settings = _('unauthorized character - please use only integers!');
                         $SettingsInputIsValid = FALSE;
                     }
                 }
@@ -29,7 +29,7 @@
             
             if ($SettingsInputIsValid == TRUE)
                 {
-                    if ( $setpoint_temperature_setting<31 &&  $setpoint_temperature_setting>-1 &&                                                                    // Prüfung Soll-Temperatur
+                    if ( $setpoint_temperature_setting < 31 &&  $setpoint_temperature_setting > -12 &&                                                                    // Prüfung Soll-Temperatur
                         $setpoint_humidity_setting<100 && $setpoint_humidity_setting>-1 &&                                                                      // Prüfung Soll-Feuchtigkeit
                         $circulation_air_period_setting<1441 && $circulation_air_period_setting>-1 &&  (($circulation_air_period_setting+$circulation_air_duration_setting)>0) &&                 // Prüfung Intervall Umluft
                         $circulation_air_duration_setting<1441 && $circulation_air_duration_setting>-1  &&                                                                // Prüfung Dauer Umluft

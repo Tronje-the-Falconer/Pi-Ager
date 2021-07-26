@@ -41,6 +41,7 @@ $messenger_table = 'config_messenger_exception';
 $messenger_event_table = 'config_messenger_event';
 $all_sensors_table = 'all_sensors';
 $all_scales_table = 'all_scales';
+$nextion_table = 'nextion';
 
 #----------------------------table keys;
 $switch_on_cooling_compressor_key = 'switch_on_cooling_compressor';
@@ -226,6 +227,8 @@ $ntc3_field = 'ntc3';
 $ntc4_field = 'ntc4';
 $scale1_field = 'scale1';
 $scale2_field = 'scale2';
+$progress_field = 'progress';
+$status_field = 'status';
 
 #-----------------------------Paths and urls
 $thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/';
