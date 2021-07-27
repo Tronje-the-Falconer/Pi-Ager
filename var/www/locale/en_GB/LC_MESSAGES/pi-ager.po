@@ -1,77 +1,77 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-EN\n"
-"POT-Creation-Date: 2021-06-12 13:31+0200\n"
-"PO-Revision-Date: 2021-06-21 14:13+0200\n"
+"POT-Creation-Date: 2021-07-27 14:53+0200\n"
+"PO-Revision-Date: 2021-07-27 14:55+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ../../###GITHUB/branches/entwicklung/var/www\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin.php:26
+#: admin.php:27
 msgid "uv-light switch"
 msgstr ""
 
-#: admin.php:39
+#: admin.php:40
 msgid "uv light manual off"
 msgstr ""
 
-#: admin.php:40
+#: admin.php:41
 msgid "end pause uv-light!"
 msgstr ""
 
-#: admin.php:40 webcam.php:58
+#: admin.php:41 webcam.php:58
 msgid "auto"
 msgstr ""
 
-#: admin.php:44 webcam.php:52
+#: admin.php:45 webcam.php:52
 msgid "auto mode on"
 msgstr ""
 
-#: admin.php:45
+#: admin.php:46
 msgid "pause uv-light!"
 msgstr ""
 
-#: admin.php:45
+#: admin.php:46
 msgid "uv light off"
 msgstr ""
 
-#: admin.php:53 header.php:143
+#: admin.php:54 header.php:143
 msgid "administration"
 msgstr ""
 
-#: admin.php:60 index.php:21
+#: admin.php:61 index.php:21
 msgid "internal"
 msgstr ""
 
-#: admin.php:62 index.php:46
+#: admin.php:63 index.php:46
 msgid "external"
 msgstr ""
 
-#: admin.php:65
+#: admin.php:66
 msgid "sensortype"
 msgstr ""
 
-#: admin.php:65 admin.php:127 admin.php:209 admin.php:335 admin.php:575
-#: config.php:16 config.php:70 config.php:117 config.php:145 config.php:184
-#: config.php:223 manvals.php:22 manvals.php:51 manvals.php:74 manvals.php:97
-#: manvals.php:123 notification.php:183 notification.php:369
-#: notification.php:502 notification.php:601 notification.php:707
-#: notification.php:768 notification.php:829
+#: admin.php:66 admin.php:128 admin.php:210 admin.php:336 admin.php:576
+#: admin.php:661 config.php:16 config.php:70 config.php:117 config.php:145
+#: config.php:184 config.php:223 manvals.php:22 manvals.php:51 manvals.php:74
+#: manvals.php:97 manvals.php:123 notification.php:188 notification.php:374
+#: notification.php:507 notification.php:606 notification.php:712
+#: notification.php:773 notification.php:834
 msgid "help"
 msgstr ""
 
-#: admin.php:79
+#: admin.php:80
 msgid "only configurable if internal sensor is set to sht3x or sht85"
 msgstr ""
 
-#: admin.php:104
+#: admin.php:105
 msgid "helptext_sensortype_admin"
 msgstr ""
 "<br><br>\n"
@@ -105,51 +105,50 @@ msgstr ""
 "Raspberry can be damaged.\n"
 "<br><br>"
 
-#: admin.php:106 admin.php:203 admin.php:329 admin.php:355 admin.php:591
-#: config.php:64 config.php:111 config.php:139 config.php:178 config.php:217
-#: config.php:246 manvals.php:44 manvals.php:67 manvals.php:90 manvals.php:117
-#: manvals.php:142 notification.php:196 notification.php:382
-#: notification.php:515 notification.php:614 notification.php:720
-#: notification.php:781 notification.php:842
+#: admin.php:107 admin.php:204 admin.php:330 admin.php:356 admin.php:592
+#: admin.php:676 config.php:64 config.php:111 config.php:139 config.php:178
+#: config.php:217 config.php:246 manvals.php:44 manvals.php:67 manvals.php:90
+#: manvals.php:117 manvals.php:142 notification.php:201 notification.php:387
+#: notification.php:520 notification.php:619 notification.php:725
+#: notification.php:786 notification.php:847
 msgid "close"
 msgstr ""
 
-#: admin.php:116
+#: admin.php:117
 msgid ""
 "ATTENTION: a shutdown is required, please turn the power off/on to restart "
 "the system!"
 msgstr ""
 
-#: admin.php:116
+#: admin.php:117
 msgid "change sensors"
 msgstr ""
 
-#: admin.php:127 index.php:118 index.php:1007 settings.php:77
+#: admin.php:128 index.php:118 index.php:1007 settings.php:78
 msgid "scales"
 msgstr ""
 
-#: admin.php:128 admin.php:160 diagrams.php:508 diagrams.php:529
-#: diagrams.php:553 diagrams.php:594 diagrams.php:615 diagrams_old.php:264
-#: diagrams_old.php:284 diagrams_old.php:307 diagrams_old.php:334
-#: diagrams_old.php:376 index.php:411 index.php:431 index.php:454 index.php:491
-#: index.php:513 modules/start_stop_program.php:238
-#: modules/start_stop_program.php:243 scale_wizzard.php:27 settings.php:178
+#: admin.php:129 admin.php:161 diagrams.php:507 diagrams.php:528
+#: diagrams.php:552 diagrams.php:593 diagrams.php:614 index.php:411
+#: index.php:431 index.php:454 index.php:491 index.php:513
+#: modules/start_stop_program.php:238 modules/start_stop_program.php:243
+#: scale_wizzard.php:27 settings.php:180
 msgid "scale"
 msgstr ""
 
-#: admin.php:131 admin.php:163
+#: admin.php:132 admin.php:164
 msgid "reference unit"
 msgstr ""
 
-#: admin.php:135 admin.php:167
+#: admin.php:136 admin.php:168
 msgid "offset"
 msgstr ""
 
-#: admin.php:139 admin.php:171
+#: admin.php:140 admin.php:172
 msgid "saving period"
 msgstr ""
 
-#: admin.php:201
+#: admin.php:202
 msgid "helptext_scale_admin"
 msgstr ""
 "<br><br>\n"
@@ -177,7 +176,7 @@ msgstr ""
 "<br>20kg Edelstahl Zelle: 186\n"
 "<br><br>"
 
-#: admin.php:327
+#: admin.php:328
 msgid "helptext_thermometer_admin"
 msgstr ""
 "<br><br>\n"
@@ -216,11 +215,11 @@ msgstr ""
 "use a 2.5 mm jack plug in this case.\n"
 "<br><br>"
 
-#: admin.php:335
+#: admin.php:336
 msgid "language"
 msgstr ""
 
-#: admin.php:353
+#: admin.php:354
 msgid "helptext_language_admin"
 msgstr ""
 "<br><br>\n"
@@ -235,114 +234,114 @@ msgstr ""
 "<br> Select 'de_DE.UTF-8 UTF8'\n"
 "<br><br>"
 
-#: admin.php:359 admin.php:468 admin.php:492 admin.php:553 config.php:254
-#: edit_agingtable.php:116 manvals.php:149 notification.php:133
-#: notification.php:319 notification.php:461 notification.php:569
-#: notification.php:694 notification.php:758 notification.php:819
+#: admin.php:360 admin.php:469 admin.php:493 admin.php:554 config.php:254
+#: edit_agingtable.php:116 manvals.php:149 notification.php:138
+#: notification.php:324 notification.php:466 notification.php:574
+#: notification.php:699 notification.php:763 notification.php:824
 msgid "save"
 msgstr ""
 
-#: admin.php:359
+#: admin.php:360
 msgid "administration 1"
 msgstr ""
 
-#: admin.php:365
+#: admin.php:366
 msgid "reboot & shutdown"
 msgstr ""
 
-#: admin.php:371
+#: admin.php:372
 msgid "ATTENTION: reboot system?"
 msgstr ""
 
-#: admin.php:371 reboot.php:8
+#: admin.php:372 reboot.php:8
 msgid "reboot"
 msgstr ""
 
-#: admin.php:372
+#: admin.php:373
 msgid "ATTENTION: shutdown system?"
 msgstr ""
 
-#: admin.php:372 shutdown.php:8
+#: admin.php:373 shutdown.php:8
 msgid "shutdown"
 msgstr ""
 
-#: admin.php:378
+#: admin.php:379
 msgid "logging"
 msgstr ""
 
-#: admin.php:468
+#: admin.php:469
 msgid "save loglevel?"
 msgstr ""
 
-#: admin.php:473 modules/write_debug_values.php:11
+#: admin.php:474 modules/write_debug_values.php:11
 msgid "debug values"
 msgstr ""
 
-#: admin.php:483
+#: admin.php:484
 msgid "measuring interval"
 msgstr ""
 
-#: admin.php:487
+#: admin.php:488
 msgid "agingtable days in seconds"
 msgstr ""
 
-#: admin.php:492
+#: admin.php:493
 msgid "ATTENTION: save debug values?"
 msgstr ""
 
-#: admin.php:496
+#: admin.php:497
 msgid "backup"
 msgstr ""
 
-#: admin.php:518
+#: admin.php:519
 msgid "nfs volume"
 msgstr ""
 
-#: admin.php:522
+#: admin.php:523
 msgid "subdirectory"
 msgstr ""
 
-#: admin.php:526
+#: admin.php:527
 msgid "nfs mount"
 msgstr ""
 
-#: admin.php:530
+#: admin.php:531
 msgid "nfs path"
 msgstr ""
 
-#: admin.php:534
+#: admin.php:535
 msgid "number of backups"
 msgstr ""
 
-#: admin.php:538
+#: admin.php:539
 msgid "backup name"
 msgstr ""
 
-#: admin.php:542
+#: admin.php:543
 msgid "nfs opt"
 msgstr ""
 
-#: admin.php:546
+#: admin.php:547
 msgid "backup_active"
 msgstr ""
 
-#: admin.php:553
+#: admin.php:554
 msgid "ATTENTION: save backup values?"
 msgstr ""
 
-#: admin.php:563
+#: admin.php:564
 msgid "ATTENTION: backup manually?"
 msgstr ""
 
-#: admin.php:563
+#: admin.php:564
 msgid "backup manually"
 msgstr ""
 
-#: admin.php:566
+#: admin.php:567
 msgid "Agingtable is active. No backup possible!"
 msgstr ""
 
-#: admin.php:589
+#: admin.php:590
 msgid "helptext_backup"
 msgstr ""
 "<br><br>\n"
@@ -361,11 +360,6 @@ msgstr ""
 "for this time.\n"
 "<br>When the backup process is finished, the Pi-Ager starts automatically "
 "and runs with the last settings.  \n"
-"<br>The progress of the backup process can be monitored using a terminal "
-"window. Any problems occurring during backup are also logged.\n"
-"<br>In the terminal window enter the following commands:\n"
-"<br> cd /var/log\n"
-"<br> cat pi-ager_backup.log\n"
 "<br><br>\n"
 "<b>nfs directory: </b> Here you enter the server and NFS share.\n"
 "<br>z.B.: 192.168.0.111:/srv/backup\n"
@@ -395,35 +389,66 @@ msgstr ""
 "selected. By deselecting it, the backup can be disabled\n"
 "<br><br>"
 
-#: admin.php:595
+#: admin.php:596
 msgid "database"
 msgstr ""
 
-#: admin.php:601
+#: admin.php:602
 msgid "ATTENTION: empty statistic tables?"
 msgstr ""
 
-#: admin.php:601
+#: admin.php:602
 msgid "empty statistic tables"
 msgstr ""
 
-#: admin.php:603
+#: admin.php:604
 msgid "database administration"
 msgstr ""
 
 #: admin.php:610
+msgid "Nextion Display Firmware"
+msgstr ""
+
+#: admin.php:614
+msgid "start programming"
+msgstr ""
+
+#: admin.php:674
+msgid "helptext_display"
+msgstr ""
+"<br><br>\n"
+"<b>Nextion Display Firmware:</b>\n"
+"<br><br>\n"
+"<br>Here you can program the display with the firmware already stored in the "
+"software.\n"
+"<br>In this case, you do not need to upload another file into the system ! \n"
+"<br><br>\n"
+"<br>If someone wants to modify the firmware of the display and adapt it to "
+"their own needs,\n"
+"<br>this alternative firmware file can be uploaded here and the display "
+"programmed via the upper button. \n"
+"<br><br>\n"
+"<b>Caution! </b>Whoever creates a new firmware must know very well what he "
+"is doing, because changes can change IDs and these then no longer match the "
+"firmware on the Python side. This firmware would then no longer work, "
+"adjustments would then be necessary on the Python side. Also important: the "
+"user must compress the .tft file from the Nextion Design Tool with ZIP, then "
+"upload it.\n"
+"<br><br>"
+
+#: admin.php:942
 msgid "python"
 msgstr ""
 
-#: admin.php:616
-msgid "ATTENTION: kill"
+#: admin.php:948
+msgid "ATTENTION: stop"
 msgstr ""
 
-#: admin.php:616
+#: admin.php:948
 msgid "stop"
 msgstr ""
 
-#: admin.php:617
+#: admin.php:949
 msgid "start"
 msgstr ""
 
@@ -441,12 +466,12 @@ msgstr ""
 msgid "scale wizzard"
 msgstr ""
 
-#: calibrate_scale.php:47 settings.php:139 settings.php:142 settings.php:165
-#: settings.php:168
+#: calibrate_scale.php:47 settings.php:141 settings.php:144 settings.php:167
+#: settings.php:170
 msgid "tara scale"
 msgstr ""
 
-#: calibrate_scale.php:49 settings.php:142 settings.php:168 settings.php:180
+#: calibrate_scale.php:49 settings.php:144 settings.php:170 settings.php:182
 msgid "please relieve the load cell completely"
 msgstr ""
 
@@ -563,13 +588,10 @@ msgid "attention! be carful what you do!"
 msgstr ""
 
 #: config.php:16 diagrams.php:133 diagrams.php:153 diagrams.php:216
-#: diagrams.php:261 diagrams.php:450 diagrams.php:472 diagrams.php:481
-#: diagrams.php:648 diagrams.php:668 diagrams.php:688 diagrams.php:708
-#: diagrams.php:777 diagrams.php:801 diagrams_old.php:131 diagrams_old.php:172
-#: diagrams_old.php:203 diagrams_old.php:430 diagrams_old.php:449
-#: diagrams_old.php:468 diagrams_old.php:524 diagrams_old.php:549
-#: diagrams_old.php:587 diagrams_old.php:637 diagrams_old.php:662 index.php:212
-#: index.php:231 index.php:250 index.php:311 index.php:358 manvals.php:51
+#: diagrams.php:261 diagrams.php:449 diagrams.php:471 diagrams.php:480
+#: diagrams.php:647 diagrams.php:667 diagrams.php:687 diagrams.php:707
+#: diagrams.php:776 diagrams.php:800 index.php:212 index.php:231 index.php:250
+#: index.php:311 index.php:358 manvals.php:51
 msgid "temperature"
 msgstr ""
 
@@ -611,10 +633,8 @@ msgstr ""
 "<br><br>"
 
 #: config.php:70 diagrams.php:173 diagrams.php:193 diagrams.php:216
-#: diagrams.php:283 diagrams.php:291 diagrams.php:359 diagrams.php:480
-#: diagrams_old.php:150 diagrams_old.php:172 diagrams_old.php:223
-#: diagrams_old.php:231 index.php:270 index.php:289 index.php:311 index.php:379
-#: index.php:387 manvals.php:74
+#: diagrams.php:283 diagrams.php:291 index.php:270 index.php:289 index.php:311
+#: index.php:379 index.php:387 manvals.php:74
 msgid "humidity"
 msgstr ""
 
@@ -759,27 +779,16 @@ msgstr ""
 msgid "duration & timestamp"
 msgstr ""
 
-#: config.php:149 config.php:160 config.php:188 config.php:199 diagrams.php:899
-#: diagrams.php:901 diagrams.php:924 diagrams.php:926 diagrams.php:1011
-#: diagrams.php:1013 diagrams.php:1036 diagrams.php:1038 diagrams.php:1123
-#: diagrams.php:1125 diagrams.php:1148 diagrams.php:1150 diagrams.php:1235
-#: diagrams.php:1237 diagrams.php:1260 diagrams.php:1262 diagrams.php:1346
-#: diagrams.php:1348 diagrams.php:1371 diagrams.php:1373 diagrams.php:1458
-#: diagrams.php:1460 diagrams.php:1483 diagrams.php:1485 diagrams.php:1569
-#: diagrams.php:1571 diagrams.php:1594 diagrams.php:1596 diagrams.php:1681
-#: diagrams.php:1683 diagrams.php:1706 diagrams.php:1708 diagrams_old.php:755
-#: diagrams_old.php:757 diagrams_old.php:780 diagrams_old.php:782
-#: diagrams_old.php:861 diagrams_old.php:863 diagrams_old.php:886
-#: diagrams_old.php:888 diagrams_old.php:967 diagrams_old.php:969
-#: diagrams_old.php:992 diagrams_old.php:994 diagrams_old.php:1073
-#: diagrams_old.php:1075 diagrams_old.php:1098 diagrams_old.php:1100
-#: diagrams_old.php:1179 diagrams_old.php:1181 diagrams_old.php:1204
-#: diagrams_old.php:1206 diagrams_old.php:1285 diagrams_old.php:1287
-#: diagrams_old.php:1310 diagrams_old.php:1312 diagrams_old.php:1391
-#: diagrams_old.php:1393 diagrams_old.php:1416 diagrams_old.php:1418
-#: diagrams_old.php:1497 diagrams_old.php:1499 diagrams_old.php:1522
-#: diagrams_old.php:1524 index.php:814 manvals.php:103 manvals.php:128
-#: modules/write_config_db_logfile_txt.php:113
+#: config.php:149 config.php:160 config.php:188 config.php:199 diagrams.php:898
+#: diagrams.php:900 diagrams.php:923 diagrams.php:925 diagrams.php:1010
+#: diagrams.php:1012 diagrams.php:1035 diagrams.php:1037 diagrams.php:1122
+#: diagrams.php:1124 diagrams.php:1147 diagrams.php:1149 diagrams.php:1234
+#: diagrams.php:1236 diagrams.php:1259 diagrams.php:1261 diagrams.php:1345
+#: diagrams.php:1347 diagrams.php:1370 diagrams.php:1372 diagrams.php:1457
+#: diagrams.php:1459 diagrams.php:1482 diagrams.php:1484 diagrams.php:1568
+#: diagrams.php:1570 diagrams.php:1593 diagrams.php:1595 diagrams.php:1680
+#: diagrams.php:1682 diagrams.php:1705 diagrams.php:1707 index.php:814
+#: manvals.php:103 manvals.php:128 modules/write_config_db_logfile_txt.php:113
 #: modules/write_config_db_logfile_txt.php:129
 #: modules/write_settings_db_logfile_txt.php:108
 #: modules/write_settings_db_logfile_txt.php:125
@@ -824,8 +833,7 @@ msgstr ""
 "<b>attention: </b> period=0 und duration=0 is not useful and not allowed.\n"
 "<br><br>"
 
-#: config.php:184 diagrams.php:835 diagrams.php:856 diagrams_old.php:697
-#: diagrams_old.php:717 index.php:988
+#: config.php:184 diagrams.php:834 diagrams.php:855 index.php:988
 msgid "light"
 msgstr ""
 
@@ -855,7 +863,7 @@ msgstr ""
 #: modules/write_table_db.php:63 modules/write_table_db.php:72
 #: modules/write_table_db.php:75 modules/write_table_db.php:78
 #: modules/write_table_db.php:240 modules/write_table_db.php:263
-#: settings.php:188
+#: settings.php:190
 msgid "agingtable"
 msgstr ""
 
@@ -882,7 +890,7 @@ msgstr ""
 "<br>Otherwise operating the aging table is stopped.\n"
 "<br><br>"
 
-#: config.php:254 modules/write_config_db_logfile_txt.php:204 settings.php:484
+#: config.php:254 modules/write_config_db_logfile_txt.php:204 settings.php:487
 msgid "general configuration"
 msgstr ""
 
@@ -890,28 +898,27 @@ msgstr ""
 msgid "hide"
 msgstr ""
 
-#: diagrams.php:18 diagrams.php:42 diagrams_old.php:19 diagrams_old.php:43
+#: diagrams.php:18 diagrams.php:42
 msgid "hour"
 msgstr ""
 
-#: diagrams.php:20 diagrams.php:43 diagrams_old.php:21 diagrams_old.php:44
-#: index.php:560 settings.php:385
+#: diagrams.php:20 diagrams.php:43 index.php:560 settings.php:388
 msgid "day"
 msgstr ""
 
-#: diagrams.php:22 diagrams.php:44 diagrams_old.php:23 diagrams_old.php:45
+#: diagrams.php:22 diagrams.php:44
 msgid "week"
 msgstr ""
 
-#: diagrams.php:24 diagrams.php:45 diagrams_old.php:25 diagrams_old.php:46
+#: diagrams.php:24 diagrams.php:45
 msgid "month"
 msgstr ""
 
-#: diagrams.php:26 diagrams.php:46 diagrams_old.php:27 diagrams_old.php:47
+#: diagrams.php:26 diagrams.php:46
 msgid "custom"
 msgstr ""
 
-#: diagrams.php:31 diagrams_old.php:32 header.php:136 index.php:149
+#: diagrams.php:31 header.php:136 index.php:149
 msgid "diagrams"
 msgstr ""
 
@@ -920,7 +927,7 @@ msgid "months"
 msgstr ""
 
 #: diagrams.php:79 edit_agingtable.php:51 index.php:175 index.php:573
-#: settings.php:398
+#: settings.php:401
 msgid "days"
 msgstr ""
 
@@ -928,11 +935,11 @@ msgstr ""
 msgid "hours"
 msgstr ""
 
-#: diagrams.php:92 diagrams_old.php:93 index.php:188
+#: diagrams.php:92 index.php:188
 msgid "change customtime?"
 msgstr ""
 
-#: diagrams.php:92 diagrams_old.php:93 index.php:188
+#: diagrams.php:92 index.php:188
 msgid "change"
 msgstr ""
 
@@ -940,13 +947,12 @@ msgstr ""
 msgid "storage interval of the data in the database"
 msgstr ""
 
-#: diagrams.php:261 diagrams.php:450 diagrams.php:472 diagrams.php:481
-#: diagrams.php:777 diagrams.php:801 diagrams_old.php:203 diagrams_old.php:524
-#: diagrams_old.php:549 diagrams_old.php:587 diagrams_old.php:637 index.php:358
+#: diagrams.php:261 diagrams.php:449 diagrams.php:471 diagrams.php:480
+#: diagrams.php:776 diagrams.php:800 index.php:358
 msgid " - ϑ"
 msgstr ""
 
-#: diagrams.php:283 diagrams.php:471 diagrams_old.php:223 index.php:379
+#: diagrams.php:283 diagrams.php:470 index.php:379
 msgid " - φ"
 msgstr ""
 
@@ -954,86 +960,64 @@ msgstr ""
 msgid "dewpoint"
 msgstr ""
 
-#: diagrams.php:379 diagrams.php:403 diagrams.php:471
+#: diagrams.php:359 diagrams.php:379 diagrams.php:403 diagrams.php:470
+#: diagrams.php:479
 msgid "humidity abs"
 msgstr ""
 
-#: diagrams.php:708 diagrams.php:731 diagrams.php:801 diagrams_old.php:587
-#: diagrams_old.php:637 diagrams_old.php:662
+#: diagrams.php:707 diagrams.php:730 diagrams.php:800
 msgid "Current"
 msgstr ""
 
-#: diagrams.php:731 diagrams_old.php:490 diagrams_old.php:609
+#: diagrams.php:730
 msgid "Thermometer"
 msgstr ""
 
-#: diagrams.php:887 diagrams.php:999 diagrams.php:1111 diagrams.php:1223
-#: diagrams.php:1334 diagrams.php:1446 diagrams.php:1557 diagrams.php:1669
-#: diagrams_old.php:743 diagrams_old.php:849 diagrams_old.php:955
-#: diagrams_old.php:1061 diagrams_old.php:1167 diagrams_old.php:1273
-#: diagrams_old.php:1379 diagrams_old.php:1485 index.php:809 index.php:911
-#: index.php:1012
+#: diagrams.php:886 diagrams.php:998 diagrams.php:1110 diagrams.php:1222
+#: diagrams.php:1333 diagrams.php:1445 diagrams.php:1556 diagrams.php:1668
+#: index.php:809 index.php:911 index.php:1012
 msgid "status"
 msgstr ""
 
-#: diagrams.php:897 diagrams.php:922 diagrams.php:1009 diagrams.php:1034
-#: diagrams.php:1121 diagrams.php:1146 diagrams.php:1233 diagrams.php:1258
-#: diagrams.php:1344 diagrams.php:1369 diagrams.php:1456 diagrams.php:1481
-#: diagrams.php:1567 diagrams.php:1592 diagrams.php:1679 diagrams.php:1704
-#: diagrams_old.php:753 diagrams_old.php:778 diagrams_old.php:859
-#: diagrams_old.php:884 diagrams_old.php:965 diagrams_old.php:990
-#: diagrams_old.php:1071 diagrams_old.php:1096 diagrams_old.php:1177
-#: diagrams_old.php:1202 diagrams_old.php:1283 diagrams_old.php:1308
-#: diagrams_old.php:1389 diagrams_old.php:1414 diagrams_old.php:1495
-#: diagrams_old.php:1520 index.php:813
+#: diagrams.php:896 diagrams.php:921 diagrams.php:1008 diagrams.php:1033
+#: diagrams.php:1120 diagrams.php:1145 diagrams.php:1232 diagrams.php:1257
+#: diagrams.php:1343 diagrams.php:1368 diagrams.php:1455 diagrams.php:1480
+#: diagrams.php:1566 diagrams.php:1591 diagrams.php:1678 diagrams.php:1703
+#: index.php:813
 msgid "on"
 msgstr ""
 
-#: diagrams.php:914 diagrams.php:1026 diagrams.php:1138 diagrams.php:1250
-#: diagrams.php:1361 diagrams.php:1473 diagrams.php:1584 diagrams.php:1696
-#: diagrams_old.php:770 diagrams_old.php:876 diagrams_old.php:982
-#: diagrams_old.php:1088 diagrams_old.php:1194 diagrams_old.php:1300
-#: diagrams_old.php:1406 diagrams_old.php:1512
+#: diagrams.php:913 diagrams.php:1025 diagrams.php:1137 diagrams.php:1249
+#: diagrams.php:1360 diagrams.php:1472 diagrams.php:1583 diagrams.php:1695
 msgid " "
 msgstr ""
 
-#: diagrams.php:947 diagrams.php:968 diagrams_old.php:803 diagrams_old.php:823
-#: index.php:958
+#: diagrams.php:946 diagrams.php:967 index.php:958
 msgid "uv-light"
 msgstr ""
 
-#: diagrams.php:1059 diagrams.php:1080 diagrams_old.php:909
-#: diagrams_old.php:929 index.php:833 index.php:852
+#: diagrams.php:1058 diagrams.php:1079 index.php:833 index.php:852
 msgid "heater"
 msgstr ""
 
-#: diagrams.php:1171 diagrams.php:1192 diagrams_old.php:1015
-#: diagrams_old.php:1035 index.php:822 index.php:844
+#: diagrams.php:1170 diagrams.php:1191 index.php:822 index.php:844
 msgid "cooler"
 msgstr ""
 
-#: diagrams.php:1282 diagrams.php:1303 diagrams_old.php:1121
-#: diagrams_old.php:1141
+#: diagrams.php:1281 diagrams.php:1302
 msgid "humidifier"
 msgstr ""
 
-#: diagrams.php:1394 diagrams.php:1415 diagrams_old.php:1227
-#: diagrams_old.php:1247
+#: diagrams.php:1393 diagrams.php:1414
 msgid "dehumidifier"
 msgstr ""
 
-#: diagrams.php:1505 diagrams.php:1526 diagrams_old.php:1333
-#: diagrams_old.php:1353
+#: diagrams.php:1504 diagrams.php:1525
 msgid "exhaust air"
 msgstr ""
 
-#: diagrams.php:1617 diagrams.php:1638 diagrams_old.php:1439
-#: diagrams_old.php:1459
+#: diagrams.php:1616 diagrams.php:1637
 msgid "circulate air"
-msgstr ""
-
-#: diagrams_old.php:100
-msgid "every ~ 5 minutes a new value is written!"
 msgstr ""
 
 #: edit_agingtable.php:26 edit_agingtable.php:32 edit_agingtable.php:116
@@ -1053,68 +1037,68 @@ msgstr ""
 msgid "edit agingtable:"
 msgstr ""
 
-#: edit_agingtable.php:43 index.php:557 index.php:565 settings.php:382
-#: settings.php:390
+#: edit_agingtable.php:43 index.php:557 index.php:565 settings.php:385
+#: settings.php:393
 msgid "phase"
 msgstr ""
 
-#: edit_agingtable.php:44 index.php:566 settings.php:391
+#: edit_agingtable.php:44 index.php:566 settings.php:394
 msgid "modus"
 msgstr ""
 
-#: edit_agingtable.php:44 index.php:566 settings.php:391
+#: edit_agingtable.php:44 index.php:566 settings.php:394
 msgid "aging-modus"
 msgstr ""
 
-#: edit_agingtable.php:45 index.php:567 settings.php:392
+#: edit_agingtable.php:45 index.php:567 settings.php:395
 msgid "target humidity in %"
 msgstr ""
 
-#: edit_agingtable.php:46 index.php:568 settings.php:393
+#: edit_agingtable.php:46 index.php:568 settings.php:396
 msgid "target temperature in °C"
 msgstr ""
 
-#: edit_agingtable.php:47 index.php:569 settings.php:394
+#: edit_agingtable.php:47 index.php:569 settings.php:397
 msgid "timer circulate d"
 msgstr ""
 
-#: edit_agingtable.php:47 index.php:569 settings.php:394
+#: edit_agingtable.php:47 index.php:569 settings.php:397
 msgid "timer of the circulation air duration in minutes"
 msgstr ""
 
-#: edit_agingtable.php:48 index.php:570 settings.php:395
+#: edit_agingtable.php:48 index.php:570 settings.php:398
 msgid "timer circulate p"
 msgstr ""
 
-#: edit_agingtable.php:48 index.php:570 settings.php:395
+#: edit_agingtable.php:48 index.php:570 settings.php:398
 msgid "timer of the circulation air period in minutes"
 msgstr ""
 
-#: edit_agingtable.php:49 index.php:571 settings.php:396
+#: edit_agingtable.php:49 index.php:571 settings.php:399
 msgid "timer exhaust d"
 msgstr ""
 
-#: edit_agingtable.php:49 index.php:571 settings.php:396
+#: edit_agingtable.php:49 index.php:571 settings.php:399
 msgid "timer of the exhausting air duration in minutes"
 msgstr ""
 
-#: edit_agingtable.php:50 index.php:572 settings.php:397
+#: edit_agingtable.php:50 index.php:572 settings.php:400
 msgid "timer exhaust p"
 msgstr ""
 
-#: edit_agingtable.php:50 index.php:572 settings.php:397
+#: edit_agingtable.php:50 index.php:572 settings.php:400
 msgid "timer of the exhausting air period in minutes"
 msgstr ""
 
-#: edit_agingtable.php:51 index.php:573 settings.php:398
+#: edit_agingtable.php:51 index.php:573 settings.php:401
 msgid "duration of hanging phase in days"
 msgstr ""
 
-#: edit_agingtable.php:111 index.php:640 settings.php:470
+#: edit_agingtable.php:111 index.php:640 settings.php:473
 msgid "comment:"
 msgstr ""
 
-#: edit_agingtable.php:117 settings.php:180
+#: edit_agingtable.php:117 settings.php:182
 msgid "attention"
 msgstr ""
 
@@ -1130,8 +1114,8 @@ msgstr ""
 msgid "delete row"
 msgstr ""
 
-#: edit_agingtable.php:127 notification.php:178 notification.php:364
-#: notification.php:497 notification.php:596 settings.php:328
+#: edit_agingtable.php:127 notification.php:183 notification.php:369
+#: notification.php:502 notification.php:601 settings.php:331
 msgid "delete"
 msgstr ""
 
@@ -1143,8 +1127,8 @@ msgstr ""
 msgid "add rows"
 msgstr ""
 
-#: edit_agingtable.php:139 notification.php:170 notification.php:356
-#: notification.php:489 notification.php:588
+#: edit_agingtable.php:139 notification.php:175 notification.php:361
+#: notification.php:494 notification.php:593
 msgid "add"
 msgstr ""
 
@@ -1184,7 +1168,7 @@ msgstr ""
 msgid "ntc sensors"
 msgstr ""
 
-#: index.php:582 settings.php:408
+#: index.php:582 settings.php:411
 msgid "no comment"
 msgstr ""
 
@@ -1329,24 +1313,24 @@ msgstr ""
 msgid "delete data"
 msgstr ""
 
-#: logs.php:155
+#: logs.php:167
 msgid "prev"
 msgstr ""
 
-#: logs.php:157
+#: logs.php:169
 msgid "next"
 msgstr ""
 
-#: logs.php:165
+#: logs.php:179
 msgid "to bottom"
 msgstr ""
 
-#: logs.php:171
+#: logs.php:185
 msgid "to top"
 msgstr ""
 
 #: manvals.php:12 manvals.php:149 modules/write_settings_db_logfile_txt.php:205
-#: settings.php:480
+#: settings.php:483
 msgid "manual values"
 msgstr ""
 
@@ -1570,6 +1554,37 @@ msgstr ""
 msgid "statistic tables emptied"
 msgstr ""
 
+#: modules/nextion_upload_firmware.php:17
+msgid "error on upload new nextion firmware: only .zip-files allowed"
+msgstr ""
+
+#: modules/nextion_upload_firmware.php:25
+msgid "error on upload new nextion firmware: only 6000kb allowed"
+msgstr ""
+
+#: modules/nextion_upload_firmware.php:48
+#: modules/nextion_upload_firmware.php:51
+#: modules/nextion_upload_firmware.php:55
+#: modules/nextion_upload_firmware.php:61
+msgid "upload firmware file"
+msgstr ""
+
+#: modules/nextion_upload_firmware.php:48
+msgid "wrong zip file content, must be pi-ager.tft "
+msgstr ""
+
+#: modules/nextion_upload_firmware.php:51
+msgid "error during unzip uploaded file"
+msgstr ""
+
+#: modules/nextion_upload_firmware.php:55
+msgid "please select a zip file with content pi-ager.tft to upload"
+msgstr ""
+
+#: modules/nextion_upload_firmware.php:61
+msgid "please select a zip file to upload"
+msgstr ""
+
 #: modules/read_operating_mode_db.php:11
 msgid "none"
 msgstr ""
@@ -1584,7 +1599,7 @@ msgstr ""
 msgid "heating"
 msgstr ""
 
-#: modules/read_systemdetails.php:94 modules/read_systemdetails.php:96
+#: modules/read_systemdetails.php:114 modules/read_systemdetails.php:116
 msgid "model unknown! Please contact us."
 msgstr ""
 
@@ -1667,7 +1682,7 @@ msgstr ""
 msgid "already running"
 msgstr ""
 
-#: modules/start_stop_program.php:270
+#: modules/start_stop_program.php:270 nextion_control.php:23
 msgid "killed"
 msgstr ""
 
@@ -1704,7 +1719,6 @@ msgid "backup values"
 msgstr ""
 
 #: modules/write_config_db_logfile_txt.php:31
-#: modules/write_settings_db_logfile_txt.php:24
 msgid "unauthorized character - please use only positive integers!"
 msgstr ""
 
@@ -1936,6 +1950,10 @@ msgstr ""
 msgid "telegram values"
 msgstr ""
 
+#: modules/write_settings_db_logfile_txt.php:24
+msgid "unauthorized character - please use only integers!"
+msgstr ""
+
 #: modules/write_settings_db_logfile_txt.php:148
 msgid "values have been manually changed."
 msgstr ""
@@ -2009,67 +2027,67 @@ msgstr ""
 msgid "exceptions"
 msgstr ""
 
-#: notification.php:16 notification.php:208 notification.php:394
-#: notification.php:526
+#: notification.php:16 notification.php:213 notification.php:399
+#: notification.php:531
 msgid "id"
 msgstr ""
 
-#: notification.php:17 notification.php:138
+#: notification.php:17 notification.php:143
 msgid "exception"
 msgstr ""
 
-#: notification.php:18 notification.php:139 notification.php:210
-#: notification.php:325 notification.php:520
+#: notification.php:18 notification.php:144 notification.php:215
+#: notification.php:330 notification.php:525
 msgid "e-mail"
 msgstr ""
 
-#: notification.php:19 notification.php:140 notification.php:211
-#: notification.php:326 notification.php:725
+#: notification.php:19 notification.php:145 notification.php:216
+#: notification.php:331 notification.php:730
 msgid "pushover"
 msgstr ""
 
-#: notification.php:20 notification.php:141 notification.php:212
-#: notification.php:327 notification.php:786
+#: notification.php:20 notification.php:146 notification.php:217
+#: notification.php:332 notification.php:791
 msgid "telegram"
 msgstr ""
 
-#: notification.php:21 notification.php:142 notification.php:213
-#: notification.php:328 notification.php:388 notification.php:395
-#: notification.php:466
+#: notification.php:21 notification.php:147 notification.php:218
+#: notification.php:333 notification.php:393 notification.php:400
+#: notification.php:471
 msgid "alarm"
 msgstr ""
 
-#: notification.php:22 notification.php:143
+#: notification.php:22 notification.php:148
 msgid "raise exception"
 msgstr ""
 
-#: notification.php:23 notification.php:144 notification.php:215
-#: notification.php:330 notification.php:528 notification.php:580
+#: notification.php:23 notification.php:149 notification.php:220
+#: notification.php:335 notification.php:533 notification.php:585
 msgid "active"
 msgstr ""
 
-#: notification.php:133
+#: notification.php:138
 msgid ""
 "ATTENTION: save messenger values? IMPORTANT: after modifications in this "
 "area you have to reboot the system! "
 msgstr ""
 
-#: notification.php:170
+#: notification.php:175
 msgid ""
 "ATTENTION: add messenger? IMPORTANT: after modifications in this area you "
 "have to reboot the system!"
 msgstr ""
 
-#: notification.php:175 notification.php:361 notification.php:494
-#: notification.php:593
+#: notification.php:180 notification.php:366 notification.php:499
+#: notification.php:598
 msgid "id to delete: "
 msgstr ""
 
-#: notification.php:178
+#: notification.php:183
 msgid "ATTENTION: delete messenger?"
 msgstr ""
 
-#: notification.php:194
+#: notification.php:199
 msgid "helptext_messenger"
 msgstr ""
 "<br><br>\n"
@@ -2081,6 +2099,9 @@ msgstr ""
 "is passed and whether a stop of the system should be activated. \n"
 "<br><br>\n"
 "\n"
+"<b>!!! Important !!!: </b>If changes are made in this area, the system must "
+"be restarted at present (reboot) so that these changes become active.\n"
+"<br><br>\n"
 "<b>It is strongly recommended to set ALL errors so that they ALWAYS trigger "
 "a stop of the system (exception) when they occur. Failure to do so may "
 "result in damage to the hoop cabinet</b>.\n"
@@ -2107,31 +2128,31 @@ msgstr ""
 "\n"
 "Translated with www.DeepL.com/Translator (free version)"
 
-#: notification.php:202 notification.php:209 notification.php:324
+#: notification.php:207 notification.php:214 notification.php:329
 msgid "event"
 msgstr ""
 
-#: notification.php:214 notification.php:329
+#: notification.php:219 notification.php:334
 msgid "event text"
 msgstr ""
 
-#: notification.php:214
+#: notification.php:219
 msgid "eventtext"
 msgstr ""
 
-#: notification.php:319
+#: notification.php:324
 msgid "ATTENTION: save event values?"
 msgstr ""
 
-#: notification.php:356
+#: notification.php:361
 msgid "ATTENTION: add event?"
 msgstr ""
 
-#: notification.php:364
+#: notification.php:369
 msgid "ATTENTION: delete event?"
 msgstr ""
 
-#: notification.php:380
+#: notification.php:385
 msgid "helptext_event"
 msgstr ""
 "<br><br>\n"
@@ -2160,43 +2181,43 @@ msgstr ""
 "occur.\n"
 "<br><br>"
 
-#: notification.php:396 notification.php:467
+#: notification.php:401 notification.php:472
 msgid "replication"
 msgstr ""
 
-#: notification.php:397 notification.php:468
+#: notification.php:402 notification.php:473
 msgid "sleep"
 msgstr ""
 
-#: notification.php:398 notification.php:469
+#: notification.php:403 notification.php:474
 msgid "high_time"
 msgstr ""
 
-#: notification.php:399 notification.php:470
+#: notification.php:404 notification.php:475
 msgid "low_time"
 msgstr ""
 
-#: notification.php:400 notification.php:471
+#: notification.php:405 notification.php:476
 msgid "waveform"
 msgstr ""
 
-#: notification.php:401 notification.php:472
+#: notification.php:406 notification.php:477
 msgid "frequency"
 msgstr ""
 
-#: notification.php:461
+#: notification.php:466
 msgid "ATTENTION: save alarm values?"
 msgstr ""
 
-#: notification.php:489
+#: notification.php:494
 msgid "ATTENTION: add alarm?"
 msgstr ""
 
-#: notification.php:497
+#: notification.php:502
 msgid "ATTENTION: delete alarm?"
 msgstr ""
 
-#: notification.php:513
+#: notification.php:518
 msgid "helptext_alarm"
 msgstr ""
 "<br><br>\n"
@@ -2224,23 +2245,23 @@ msgstr ""
 "remove it completely from the database by selecting the appropriate ID.\n"
 "<br><br>"
 
-#: notification.php:527 notification.php:579
+#: notification.php:532 notification.php:584
 msgid "to mail"
 msgstr ""
 
-#: notification.php:569
+#: notification.php:574
 msgid "ATTENTION: save e_mail recipient values?"
 msgstr ""
 
-#: notification.php:588
+#: notification.php:593
 msgid "ATTENTION: add e_mail recipient?"
 msgstr ""
 
-#: notification.php:596
+#: notification.php:601
 msgid "ATTENTION: delete e-mail recipient?"
 msgstr ""
 
-#: notification.php:612
+#: notification.php:617
 msgid "helptext_email"
 msgstr ""
 "<br><br>\n"
@@ -2256,47 +2277,47 @@ msgstr ""
 "completely from the database by selecting the corresponding ID.\n"
 "<br><br>"
 
-#: notification.php:619
+#: notification.php:624
 msgid "Mailserver"
 msgstr ""
 
-#: notification.php:652
+#: notification.php:657
 msgid "server"
 msgstr ""
 
-#: notification.php:656
+#: notification.php:661
 msgid "user"
 msgstr ""
 
-#: notification.php:660
+#: notification.php:665
 msgid "password"
 msgstr ""
 
-#: notification.php:664
+#: notification.php:669
 msgid "starttls"
 msgstr ""
 
-#: notification.php:668
+#: notification.php:673
 msgid "from mail"
 msgstr ""
 
-#: notification.php:672
+#: notification.php:677
 msgid "port"
 msgstr ""
 
-#: notification.php:694
+#: notification.php:699
 msgid "ATTENTION: save mailserver values?"
 msgstr ""
 
-#: notification.php:701
+#: notification.php:706
 msgid "ATTENTION: test mailserver? be shure you have saved the values before!"
 msgstr ""
 
-#: notification.php:701
+#: notification.php:706
 msgid "test mailserver"
 msgstr ""
 
-#: notification.php:718
+#: notification.php:723
 msgid "helptext_mailserver"
 msgstr ""
 "<br><br>\n"
@@ -2313,32 +2334,32 @@ msgstr ""
 "<b>port:</b> Here you select the port for the SMTP server.\n"
 "<br><br>"
 
-#: notification.php:743
+#: notification.php:748
 msgid "user key"
 msgstr ""
 
-#: notification.php:747
+#: notification.php:752
 msgid "api token"
 msgstr ""
 
-#: notification.php:751
+#: notification.php:756
 msgid "pushover_active"
 msgstr ""
 
-#: notification.php:758
+#: notification.php:763
 msgid "ATTENTION: save pushover values?"
 msgstr ""
 
-#: notification.php:763
+#: notification.php:768
 msgid ""
 "ATTENTION: test pushover values? be shure you have saved the values before!"
 msgstr ""
 
-#: notification.php:763
+#: notification.php:768
 msgid "test pushover values"
 msgstr ""
 
-#: notification.php:779
+#: notification.php:784
 msgid "helptext_pushover"
 msgstr ""
 "<br><br>\n"
@@ -2368,32 +2389,32 @@ msgstr ""
 "<br>If this arrives, everything is set correctly.\n"
 "<br><br>"
 
-#: notification.php:804
+#: notification.php:809
 msgid "bot token"
 msgstr ""
 
-#: notification.php:808
+#: notification.php:813
 msgid "bot chatID"
 msgstr ""
 
-#: notification.php:812
+#: notification.php:817
 msgid "telegram_active"
 msgstr ""
 
-#: notification.php:819
+#: notification.php:824
 msgid "ATTENTION: save telegram values?"
 msgstr ""
 
-#: notification.php:824
+#: notification.php:829
 msgid ""
 "ATTENTION: test telegram values? be shure you have saved the values before!"
 msgstr ""
 
-#: notification.php:824
+#: notification.php:829
 msgid "test telegram values"
 msgstr ""
 
-#: notification.php:840
+#: notification.php:845
 msgid "helptext_telegram"
 msgstr ""
 "<br><br>\n"
@@ -2500,143 +2521,159 @@ msgstr ""
 msgid "operating values"
 msgstr ""
 
-#: settings.php:62
+#: settings.php:54 settings.php:102 settings.php:217
+msgid "Pi-Ager service not running!<br>"
+msgstr ""
+
+#: settings.php:55 settings.php:103 settings.php:218
+msgid "Maybe you have proved that developers are not perfect!<br> "
+msgstr ""
+
+#: settings.php:56 settings.php:104 settings.php:219
+msgid "please check logs or go to: <br>"
+msgstr ""
+
+#: settings.php:58 settings.php:106 settings.php:221
+msgid "after fixing the error you have to reboot the system <br>"
+msgstr ""
+
+#: settings.php:63
 msgid "stop pi-ager?"
 msgstr ""
 
-#: settings.php:62
+#: settings.php:63
 msgid "if agingtable is running, it will be stopped also!"
 msgstr ""
 
-#: settings.php:62
+#: settings.php:63
 msgid "stop pi-ager"
 msgstr ""
 
-#: settings.php:69
+#: settings.php:70
 msgid "start pi-ager?"
 msgstr ""
 
-#: settings.php:69
+#: settings.php:70
 msgid "start pi-ager"
 msgstr ""
 
-#: settings.php:127 settings.php:139 settings.php:153 settings.php:165
+#: settings.php:129 settings.php:141 settings.php:155 settings.php:167
 msgid "Reference unit is 0 in Scale"
 msgstr ""
 
-#: settings.php:127 settings.php:139 settings.php:153 settings.php:165
+#: settings.php:129 settings.php:141 settings.php:155 settings.php:167
 msgid "Please calibrate scale first!"
 msgstr ""
 
-#: settings.php:127 settings.php:130 settings.php:153 settings.php:156
+#: settings.php:129 settings.php:132 settings.php:155 settings.php:158
 msgid "start scale"
 msgstr ""
 
-#: settings.php:130 settings.php:156
+#: settings.php:132 settings.php:158
 msgid "start measurement on scale"
 msgstr ""
 
-#: settings.php:130 settings.php:156
+#: settings.php:132 settings.php:158
 msgid "please calibrate scale after first start !"
 msgstr ""
 
-#: settings.php:142 settings.php:168
+#: settings.php:144 settings.php:170
 msgid "tara on scale"
 msgstr ""
 
-#: settings.php:145 settings.php:171
+#: settings.php:147 settings.php:173
 msgid "stop measurement on scale"
 msgstr ""
 
-#: settings.php:145 settings.php:171
+#: settings.php:147 settings.php:173
 msgid "stop scale"
 msgstr ""
 
-#: settings.php:180
+#: settings.php:182
 msgid "measurement on scales are stopped"
 msgstr ""
 
-#: settings.php:180
+#: settings.php:182
 msgid "calibrate wizzard"
 msgstr ""
 
-#: settings.php:254
+#: settings.php:257
 msgid "startphase"
 msgstr ""
 
-#: settings.php:258
+#: settings.php:261
 msgid "startday of phase"
 msgstr ""
 
-#: settings.php:271
+#: settings.php:274
 msgid "select new agingtable?"
 msgstr ""
 
-#: settings.php:271
+#: settings.php:274
 msgid "select"
 msgstr ""
 
-#: settings.php:285
+#: settings.php:288
 msgid "start agingtable?"
 msgstr ""
 
-#: settings.php:285
+#: settings.php:288
 msgid "manual values will be overwritten in database!"
 msgstr ""
 
-#: settings.php:285
+#: settings.php:288
 msgid "start agingtable"
 msgstr ""
 
-#: settings.php:288
+#: settings.php:291
 msgid "stop agingtable?"
 msgstr ""
 
-#: settings.php:288
+#: settings.php:291
 msgid "pi-ager continues with the last values of the agingtable!"
 msgstr ""
 
-#: settings.php:288
+#: settings.php:291
 msgid "stop agingtable"
 msgstr ""
 
-#: settings.php:327
+#: settings.php:330
 msgid "edit agingtable?"
 msgstr ""
 
-#: settings.php:327
+#: settings.php:330
 msgid "edit"
 msgstr ""
 
-#: settings.php:328
+#: settings.php:331
 msgid "delete agingtable?"
 msgstr ""
 
-#: settings.php:329
+#: settings.php:332
 msgid "export agingtable?"
 msgstr ""
 
-#: settings.php:329
+#: settings.php:332
 msgid "export"
 msgstr ""
 
-#: settings.php:365
+#: settings.php:368
 msgid "upload new agingtable?"
 msgstr ""
 
-#: settings.php:365
+#: settings.php:368
 msgid "upload"
 msgstr ""
 
-#: settings.php:379
+#: settings.php:382
 msgid "actual phase and day"
 msgstr ""
 
-#: settings.php:481
+#: settings.php:484
 msgid "manual adjustments are not possible"
 msgstr ""
 
-#: settings.php:481
+#: settings.php:484
 msgid "during fully automatic aging."
 msgstr ""
 

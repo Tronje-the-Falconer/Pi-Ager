@@ -610,12 +610,28 @@
                                 <h2 class="art-postheader"><?php echo _('Nextion Display Firmware'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Nextion display Firmware -->
                                 <div class="hg_container" >                                    
+                                            <td colspan="2">
+                                                <button class="art-button" id="program_firmware" name="program_firmware" value="program_firmware" onclick="move_bar()"><?php echo _('start programming'); ?></button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                             <!--   <progress style="width: 100%; height: 20px; position: relative;" id="programming" value="32" max="100"> 32% </progress> -->
+                                                <div id="progress_label" class="progress" data-label="0% Complete">
+                                                    <span id="upload_progress" class="value" style="width:0%;"></span>
+                                                </div>
+                                            <!--    <script> -->
+                                            <!--    $("#progress_label").css("border", "3px solid red"); -->
+                                            <!--    </script> -->
+                                            </td>
+                                        </tr>
                                     <table style="width: 100%;">
+                                        <hr>
                                         <tr>
                                             <form method="post" id="nextion" enctype="multipart/form-data">
                                                 <td>
                                                     <label for="tft_file">
-                                                        Firmware file: <input type="file" name="tft_file" id="tft_file" accept=".zip" onchange="enableButton()">
+			                                        alternativ firmware file: <input type="file" name="tft_file" id="tft_file" accept=".zip" onchange="enableButton()">
                                                     </label>
                                                 </td>
                                             </form>
@@ -637,22 +653,28 @@
                                                 </script>
                                             </td>
                                         </tr>
+                                        
                                         <tr>
-                                            <td colspan="2">
-                                                <button class="art-button" id="program_firmware" name="program_firmware" value="program_firmware" onclick="move_bar()">start programming</button>
+                                    <table style="width: 100%; align: center;">
+                                        <tr>
+                                            <td style="text-align: left; padding-left: 10px;" >
+                                                <button class="art-button" type="button" onclick="help_display_blockFunction()"><?php echo _('help'); ?></button>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td colspan="2">
-                                             <!--   <progress style="width: 100%; height: 20px; position: relative;" id="programming" value="32" max="100"> 32% </progress> -->
-                                                <div id="progress_label" class="progress" data-label="0% Complete">
-                                                    <span id="upload_progress" class="value" style="width:0%;"></span>
-                                                </div>
-                                            <!--    <script> -->
-                                            <!--    $("#progress_label").css("border", "3px solid red"); -->
-                                            <!--    </script> -->
-                                            </td>
-                                        </tr>
+                                    </table>
+                                    <script>
+                                        function help_display_blockFunction() {
+                                            document.getElementById('help_display').style.display = 'block';
+                                        }
+                                        function help_display_noneFunction() {
+                                            document.getElementById('help_display').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_display" class="help_p">
+                                        <?php echo _('helptext_display');
+                                              echo '<br><br>'; ?>
+                                        <button class="art-button" type="button" onclick="help_display_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p>
 <!--                                        <tr>
                                             <td colspan="2">
                                                 <button disabled class="art-button" id="test_button" name="test_button">test button</button>
