@@ -340,7 +340,7 @@ INSERT INTO "agingtables" ("id","name") VALUES (1,'salami');
 INSERT INTO "agingtables" ("id","name") VALUES (2,'dryaging1');
 INSERT INTO "agingtables" ("id","name") VALUES (3,'dryaging2');
 INSERT INTO "system" ("id","key","value","last_change") VALUES (1,'pi_revision','9000c1',1627221519);
-INSERT INTO "system" ("id","key","value","last_change") VALUES (3,'pi_ager_version','3.3.1 RC1',0);
+INSERT INTO "system" ("id","key","value","last_change") VALUES (3,'pi_ager_version','3.3.1',0);
 INSERT INTO "agingtable_dryaging1" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (1,4,85,2,1440,2160,900,12960,12,'Testtabelle');
 INSERT INTO "agingtable_dryaging1" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (2,NULL,30,4,2520,1080,NULL,6480,8,NULL);
 INSERT INTO "agingtable_dryaging1" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (3,NULL,70,NULL,1080,2520,NULL,15120,8,NULL);
