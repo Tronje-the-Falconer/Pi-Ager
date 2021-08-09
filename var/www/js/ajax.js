@@ -319,9 +319,11 @@ function handleContent() {
     function myTimer() {
         //var d = new Date();
         //console.log('timer event every 3 s');
-        var loc = location.href;
-        //console.log('location.href :' + loc);
-        if (loc.indexOf('index.php') !== -1)
+        //var loc = location.href;
+        var loc = location.pathname;
+        //console.log('location.pathname :' + loc);
+        //if (loc.indexOf('index.php') !== -1)
+        if (loc === '/index.php' || loc === '/')
             loadContent();
     }
 
