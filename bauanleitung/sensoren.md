@@ -114,7 +114,7 @@ Die empfohlene Methode:
 man entfernt den 10kOhm Widerstand zur Masse und lötet einen 10kOhm Widerstand zw. den Pin AD und VVV (3,3V).
 In diesem Fall erhält der Sensor die Adresse 45 und kann als externen Sensor betrieben werden.
 
-<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/sht3x_Adresse.JPEG" alt="SHT3x_Adresse" width="150">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/SHT3xAdresse.jpeg" alt="SHT3x_Adresse" width="150">
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/sht3x_4.jpg" alt="SHT3x_4" width="150">
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/sht3x_5.jpg" alt="SHT3x_5" width="150">
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/sht3x_6.jpg" alt="SHT3x_6" width="150">
