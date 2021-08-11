@@ -105,9 +105,13 @@ Zwischen Pin 2 (VDD) und Pin 4 (DATA) des Sensors müssen wir einen 10KOhm Wider
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/SHT3x.JPG" alt="SHT3x" width="150">
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/SHT3x2.JPG" alt="SHT3x2" width="150">
 
-##### Pinbelegung SHT3x
+Adresse umstellen für externen Sensor:
 
-
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/SHT3x_Adresse.JPEG" alt="SHT3x_Adresse" width="150">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/SHT3x_4.jpg" alt="SHT3x_4" width="150">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/SHT3x_5.jpg" alt="SHT3x_5" width="150">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/SHT3x_6.jpg" alt="SHT3x_6" width="150">
+<img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/SHT3x_7.JPG" alt="SHT3x_7" width="150">
 
 #### SENSIRION SHT85
 
