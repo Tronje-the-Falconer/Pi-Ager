@@ -90,6 +90,26 @@ switch ($pirevision){
         return $piversion = 'Raspberry Pi 4 Model B v.1.1 </br> (Sony, UK) </br> 2GB RAM';
     case 'c03111':
         return $piversion = 'Raspberry Pi 4 Model B v.1.1 </br> (Sony, UK) </br> 4GB RAM';
+    case 'b03112':
+        return $piversion = 'Raspberry Pi 4 Model B v.1.2 </br> (Sony, UK) </br> 2GB RAM';
+    case 'c03112':
+        return $piversion = 'Raspberry Pi 4 Model B v.1.2 </br> (Sony, UK) </br> 4GB RAM';
+    case 'b03114':
+        return $piversion = 'Raspberry Pi 4 Model B v.1.4 </br> (Sony, UK) </br> 2GB RAM';
+    case 'c03114':
+        return $piversion = 'Raspberry Pi 4 Model B v.1.4 </br> (Sony, UK) </br> 4GB RAM';
+    case 'd03114':
+        return $piversion = 'Raspberry Pi 4 Model B v.1.4 </br> (Sony, UK) </br> 8GB RAM';
+    case 'c03130':
+        return $piversion = 'Raspberry Pi 4 Model Pi400 v1.0 </br> (Sony, UK) </br> 4GB RAM';
+    case 'a03140':
+        return $piversion = 'Raspberry Pi 4 Model CM4 v1.0 </br> (Sony, UK) </br> 1GB RAM';
+    case 'b03140':
+        return $piversion = 'Raspberry Pi 4 Model CM4 v1.0 </br> (Sony, UK) </br> 2GB RAM';
+    case 'c03140':
+        return $piversion = 'Raspberry Pi 4 Model CM4 v1.0 </br> (Sony, UK) </br> 4GB RAM';
+    case 'd03140':
+        return $piversion = 'Raspberry Pi 4 Model CM4 v1.0 </br> (Sony, UK) </br> 8GB RAM';
     case '0000':
         return $piversion = _('model unknown! Please contact us.');
     default:

@@ -887,8 +887,8 @@
                                                     echo '</td>
                                                         <td>'.$sensor_humidity.' %</td>
                                                         <td>'.$setpoint_humidity.' %</td>
-                                                        <td>'.($setpoint_humidity + $switch_on_humidifier).' %</td>
-                                                        <td>'.($setpoint_humidity + $switch_off_humidifier).' %</td></tr>';
+                                                        <td>'.((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100).' %</td>
+                                                        <td>'.((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100).' %</td></tr>';
                                                     echo '<tr> <td ><img src="images/icons/dehumidification_42x42.png" alt=""></td>
                                                         <td><img src='.$dehumidifier_on_off_png.' title="PIN_DEH 7[26] -> IN 8 (PIN 9)"></td>
                                                         <td class="text_left">';
@@ -896,8 +896,8 @@
                                                     echo '</td>
                                                         <td>'.$sensor_humidity.' %</td>
                                                         <td>'.$setpoint_humidity.' %</td>
-                                                        <td>'.($setpoint_humidity + $switch_on_humidifier).' %</td>
-                                                        <td>'.($setpoint_humidity + $switch_off_humidifier).' %</td></tr>';
+                                                        <td>'.((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100).' %</td>
+                                                        <td>'.((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100).' %</td></tr>';
                                                 }
                                           ?>
                                        </tr>

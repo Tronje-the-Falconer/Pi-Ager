@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
-"POT-Creation-Date: 2021-06-23 18:55+0200\n"
-"PO-Revision-Date: 2021-06-23 18:56+0200\n"
+"POT-Creation-Date: 2021-07-27 14:25+0200\n"
+"PO-Revision-Date: 2021-08-05 15:47+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -16,65 +16,65 @@ msgstr ""
 "X-Poedit-KeywordsList: heating\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: admin.php:26
+#: admin.php:27
 msgid "uv-light switch"
 msgstr "UV-Licht Schalter"
 
-#: admin.php:39
+#: admin.php:40
 msgid "uv light manual off"
 msgstr "UV Licht manuell AUS"
 
-#: admin.php:40
+#: admin.php:41
 msgid "end pause uv-light!"
 msgstr "Pause UV Licht ende!"
 
-#: admin.php:40 webcam.php:58
+#: admin.php:41 webcam.php:58
 msgid "auto"
 msgstr "Auto"
 
-#: admin.php:44 webcam.php:52
+#: admin.php:45 webcam.php:52
 msgid "auto mode on"
 msgstr "Automatik Modus EIN"
 
-#: admin.php:45
+#: admin.php:46
 msgid "pause uv-light!"
 msgstr "UV-Licht Pause!"
 
-#: admin.php:45
+#: admin.php:46
 msgid "uv light off"
 msgstr "UV Licht AUS"
 
-#: admin.php:53 header.php:143
+#: admin.php:54 header.php:143
 msgid "administration"
 msgstr "Admin"
 
-#: admin.php:60 index.php:21
+#: admin.php:61 index.php:21
 msgid "internal"
 msgstr "Sensor intern"
 
-#: admin.php:62 index.php:46
+#: admin.php:63 index.php:46
 msgid "external"
 msgstr "Sensor extern"
 
-#: admin.php:65
+#: admin.php:66
 msgid "sensortype"
 msgstr "Sensor Typ"
 
-#: admin.php:65 admin.php:127 admin.php:209 admin.php:335 admin.php:575
-#: config.php:16 config.php:70 config.php:117 config.php:145 config.php:184
-#: config.php:223 manvals.php:22 manvals.php:51 manvals.php:74 manvals.php:97
-#: manvals.php:123 notification.php:188 notification.php:374
+#: admin.php:66 admin.php:128 admin.php:210 admin.php:336 admin.php:576
+#: admin.php:661 config.php:16 config.php:70 config.php:117 config.php:145
+#: config.php:184 config.php:223 manvals.php:22 manvals.php:51 manvals.php:74
+#: manvals.php:97 manvals.php:123 notification.php:188 notification.php:374
 #: notification.php:507 notification.php:606 notification.php:712
 #: notification.php:773 notification.php:834
 msgid "help"
 msgstr "Hilfe"
 
-#: admin.php:79
+#: admin.php:80
 msgid "only configurable if internal sensor is set to sht3x or sht85"
 msgstr ""
 "Einstellbar nur wenn als interner Sensor der SHT3x oder SHT85 ausgewählt ist"
 
-#: admin.php:104
+#: admin.php:105
 msgid "helptext_sensortype_admin"
 msgstr ""
 "<br><br>\n"
@@ -110,16 +110,16 @@ msgstr ""
 "werden.\n"
 "<br><br>"
 
-#: admin.php:106 admin.php:203 admin.php:329 admin.php:355 admin.php:591
-#: config.php:64 config.php:111 config.php:139 config.php:178 config.php:217
-#: config.php:246 manvals.php:44 manvals.php:67 manvals.php:90 manvals.php:117
-#: manvals.php:142 notification.php:201 notification.php:387
+#: admin.php:107 admin.php:204 admin.php:330 admin.php:356 admin.php:592
+#: admin.php:676 config.php:64 config.php:111 config.php:139 config.php:178
+#: config.php:217 config.php:246 manvals.php:44 manvals.php:67 manvals.php:90
+#: manvals.php:117 manvals.php:142 notification.php:201 notification.php:387
 #: notification.php:520 notification.php:619 notification.php:725
 #: notification.php:786 notification.php:847
 msgid "close"
 msgstr "Schließen"
 
-#: admin.php:116
+#: admin.php:117
 msgid ""
 "ATTENTION: a shutdown is required, please turn the power off/on to restart "
 "the system!"
@@ -127,15 +127,15 @@ msgstr ""
 "ACHTUNG: Das System wird heruntergefahren, bitte die Spannungsversorgung "
 "aus- und einschalten um das System neu zu starten!"
 
-#: admin.php:116
+#: admin.php:117
 msgid "change sensors"
 msgstr "Sensor ändern"
 
-#: admin.php:127 index.php:118 index.php:1007 settings.php:78
+#: admin.php:128 index.php:118 index.php:1007 settings.php:78
 msgid "scales"
 msgstr "Waagen"
 
-#: admin.php:128 admin.php:160 diagrams.php:507 diagrams.php:528
+#: admin.php:129 admin.php:161 diagrams.php:507 diagrams.php:528
 #: diagrams.php:552 diagrams.php:593 diagrams.php:614 index.php:411
 #: index.php:431 index.php:454 index.php:491 index.php:513
 #: modules/start_stop_program.php:238 modules/start_stop_program.php:243
@@ -143,19 +143,19 @@ msgstr "Waagen"
 msgid "scale"
 msgstr "Waage"
 
-#: admin.php:131 admin.php:163
+#: admin.php:132 admin.php:164
 msgid "reference unit"
 msgstr "Referenz Unit"
 
-#: admin.php:135 admin.php:167
+#: admin.php:136 admin.php:168
 msgid "offset"
 msgstr "offset"
 
-#: admin.php:139 admin.php:171
+#: admin.php:140 admin.php:172
 msgid "saving period"
 msgstr "Speicherzyklus"
 
-#: admin.php:201
+#: admin.php:202
 msgid "helptext_scale_admin"
 msgstr ""
 "<br><br>\n"
@@ -185,7 +185,7 @@ msgstr ""
 "<br>20kg Edelstahl Zelle: 186\n"
 "<br><br>"
 
-#: admin.php:327
+#: admin.php:328
 msgid "helptext_thermometer_admin"
 msgstr ""
 "<br><br>\n"
@@ -225,11 +225,11 @@ msgstr ""
 "kann. Man muss aber in diesem Fall einen 2,5 mm Klinkenstecker verwenden.\n"
 "<br><br>"
 
-#: admin.php:335
+#: admin.php:336
 msgid "language"
 msgstr "Sprache"
 
-#: admin.php:353
+#: admin.php:354
 msgid "helptext_language_admin"
 msgstr ""
 "<br><br>\n"
@@ -247,114 +247,114 @@ msgstr ""
 "<br> Select 'de_DE.UTF-8 UTF8'\n"
 "<br><br>"
 
-#: admin.php:359 admin.php:468 admin.php:492 admin.php:553 config.php:254
+#: admin.php:360 admin.php:469 admin.php:493 admin.php:554 config.php:254
 #: edit_agingtable.php:116 manvals.php:149 notification.php:138
 #: notification.php:324 notification.php:466 notification.php:574
 #: notification.php:699 notification.php:763 notification.php:824
 msgid "save"
 msgstr "Speichern"
 
-#: admin.php:359
+#: admin.php:360
 msgid "administration 1"
 msgstr "Administration"
 
-#: admin.php:365
+#: admin.php:366
 msgid "reboot & shutdown"
 msgstr "Neustarten & Herunterfahren"
 
-#: admin.php:371
+#: admin.php:372
 msgid "ATTENTION: reboot system?"
 msgstr "ACHTUNG: System neu starten?"
 
-#: admin.php:371 reboot.php:8
+#: admin.php:372 reboot.php:8
 msgid "reboot"
 msgstr "Neu starten"
 
-#: admin.php:372
+#: admin.php:373
 msgid "ATTENTION: shutdown system?"
 msgstr "ACHTUNG: System herunterfahren?"
 
-#: admin.php:372 shutdown.php:8
+#: admin.php:373 shutdown.php:8
 msgid "shutdown"
 msgstr "Herunterfahren"
 
-#: admin.php:378
+#: admin.php:379
 msgid "logging"
 msgstr "Loggen"
 
-#: admin.php:468
+#: admin.php:469
 msgid "save loglevel?"
 msgstr "Loglevel speichern?"
 
-#: admin.php:473 modules/write_debug_values.php:11
+#: admin.php:474 modules/write_debug_values.php:11
 msgid "debug values"
 msgstr "Debug Werte"
 
-#: admin.php:483
+#: admin.php:484
 msgid "measuring interval"
 msgstr "Messintervall"
 
-#: admin.php:487
+#: admin.php:488
 msgid "agingtable days in seconds"
 msgstr "Reifetabelle - Tage in Sekunden"
 
-#: admin.php:492
+#: admin.php:493
 msgid "ATTENTION: save debug values?"
 msgstr "ACHTUNG: Debug Werte speichern?"
 
-#: admin.php:496
+#: admin.php:497
 msgid "backup"
 msgstr "Backup"
 
-#: admin.php:518
+#: admin.php:519
 msgid "nfs volume"
 msgstr "nfs Verzeichnis"
 
-#: admin.php:522
+#: admin.php:523
 msgid "subdirectory"
 msgstr "Unterverzeichnis"
 
-#: admin.php:526
+#: admin.php:527
 msgid "nfs mount"
 msgstr "nfs mount"
 
-#: admin.php:530
+#: admin.php:531
 msgid "nfs path"
 msgstr "nfs Pfad"
 
-#: admin.php:534
+#: admin.php:535
 msgid "number of backups"
 msgstr "Anzahl Backups"
 
-#: admin.php:538
+#: admin.php:539
 msgid "backup name"
 msgstr "Backup Name"
 
-#: admin.php:542
+#: admin.php:543
 msgid "nfs opt"
 msgstr "nfs Option"
 
-#: admin.php:546
+#: admin.php:547
 msgid "backup_active"
 msgstr "Backup Aktiv"
 
-#: admin.php:553
+#: admin.php:554
 msgid "ATTENTION: save backup values?"
 msgstr "ACHTUNG: Backup Einstellungen speichern?"
 
-#: admin.php:563
+#: admin.php:564
 msgid "ATTENTION: backup manually?"
 msgstr "ACHTUNG: Manuelles Backup starten?"
 
-#: admin.php:563
+#: admin.php:564
 msgid "backup manually"
 msgstr "Backup manuell"
 
-#: admin.php:566
+#: admin.php:567
 msgid "Agingtable is active. No backup possible!"
 msgstr "Reifetabelle ist aktiv. Backup nicht möglich!"
 
-#: admin.php:589
+#: admin.php:590
 msgid "helptext_backup"
 msgstr ""
 "<br><br>\n"
@@ -407,37 +407,68 @@ msgstr ""
 "angewählt sein. Durch das abwählen kann das Backup deaktiviert werden\n"
 "<br><br>"
 
-#: admin.php:595
+#: admin.php:596
 msgid "database"
 msgstr "Datenbank"
 
-#: admin.php:601
+#: admin.php:602
 msgid "ATTENTION: empty statistic tables?"
 msgstr "ACHTUNG: Historische Daten löschen?"
 
-#: admin.php:601
+#: admin.php:602
 msgid "empty statistic tables"
 msgstr "History Daten aus DB löschen"
 
-#: admin.php:603
+#: admin.php:604
 msgid "database administration"
 msgstr "Datenbank Administration"
 
 #: admin.php:610
+msgid "Nextion Display Firmware"
+msgstr ""
+
+#: admin.php:614
+msgid "start programming"
+msgstr "Programierung starten"
+
+#: admin.php:674
+msgid "helptext_display"
+msgstr ""
+"<br><br>\n"
+"<b>Nextion Display Firmware:</b>\n"
+"<br><br>\n"
+"<br>Hier kann man das Display mit der, in der Software schon hinterlegten, "
+"Firmware programieren.\n"
+"<br>In diesem Fall muss man keine weitere Datei in das System hochladen ! \n"
+"<br><br>\n"
+"<br>Sollte jemand die Firmware des Displays modifizieren und an die eigenen "
+"Bedürfnisse anpassen wollen,\n"
+"<br>kann diese alternative Firmware Datei hier hochgeladen und über den "
+"oberen Button das Display programiert werden. \n"
+"<br><br>\n"
+"<b>Achtung! </b>Wer eine neue Firmware erstellt, muss sehr genau wissen, was "
+"er tut, denn Änderungen können IDs verändern und diese stimmen dann auf der "
+"Python Seite nicht mehr mit der Firmware überein. Diese Firmware würde dann "
+"nicht mehr funktionieren, es wären dann auf der Python Seite Anpassungen "
+"nötig. \n"
+"<br>Wichtig: Das .tft  File muss \"pi-ager.tft\" heißen damit der Upload "
+"funktioniert. Das pi-ager.tft File aus dem Nextion Design Tool muss man mit  "
+"ZIP komprimieren und dann erst als pi-ager.zip hochladen.  \n"
+"<br><br>"
+
+#: admin.php:942
 msgid "python"
 msgstr "Python"
 
-#: admin.php:616
-#, fuzzy
-#| msgid "ATTENTION:"
+#: admin.php:948
 msgid "ATTENTION: stop"
-msgstr "ACHTUNG:"
+msgstr "ACHTUNG: Stop"
 
-#: admin.php:616
+#: admin.php:948
 msgid "stop"
 msgstr "Stop"
 
-#: admin.php:617
+#: admin.php:949
 msgid "start"
 msgstr "Start"
 
@@ -1562,6 +1593,40 @@ msgstr "%s konnte nicht gefunden werden!"
 msgid "statistic tables emptied"
 msgstr "History Daten gelöscht"
 
+#: modules/nextion_upload_firmware.php:17
+msgid "error on upload new nextion firmware: only .zip-files allowed"
+msgstr ""
+"Fehler beim Hochladen der neuen nextionfirmware, nur .zip Dateien sind "
+"zugelassen"
+
+#: modules/nextion_upload_firmware.php:25
+msgid "error on upload new nextion firmware: only 6000kb allowed"
+msgstr "Fehler beim Hochladen der neuen Firmware: max. 600kb sind zugelassen"
+
+#: modules/nextion_upload_firmware.php:48
+#: modules/nextion_upload_firmware.php:51
+#: modules/nextion_upload_firmware.php:55
+#: modules/nextion_upload_firmware.php:61
+msgid "upload firmware file"
+msgstr "Firmware Datei hochladen"
+
+#: modules/nextion_upload_firmware.php:48
+msgid "wrong zip file content, must be pi-ager.tft "
+msgstr ""
+
+#: modules/nextion_upload_firmware.php:51
+msgid "error during unzip uploaded file"
+msgstr ""
+
+#: modules/nextion_upload_firmware.php:55
+msgid "please select a zip file with content pi-ager.tft to upload"
+msgstr ""
+"zum Hochladen bitte eine Zip-Datei mit dem Inhalt pi-ager.tft auswählen"
+
+#: modules/nextion_upload_firmware.php:61
+msgid "please select a zip file to upload"
+msgstr "bitte eine zip Datei zum hochladen auswählen"
+
 #: modules/read_operating_mode_db.php:11
 msgid "none"
 msgstr "keine"
@@ -1576,7 +1641,7 @@ msgstr "Befeuchten"
 msgid "heating"
 msgstr "Heizen"
 
-#: modules/read_systemdetails.php:94 modules/read_systemdetails.php:96
+#: modules/read_systemdetails.php:114 modules/read_systemdetails.php:116
 msgid "model unknown! Please contact us."
 msgstr "Modell nicht gefunden! Bitte kontaktieren sie uns."
 
@@ -1659,7 +1724,7 @@ msgstr "Waagenmessungen angehalten"
 msgid "already running"
 msgstr "läuft schon"
 
-#: modules/start_stop_program.php:270
+#: modules/start_stop_program.php:270 nextion_control.php:23
 msgid "killed"
 msgstr "killed"
 
@@ -1696,7 +1761,6 @@ msgid "backup values"
 msgstr "Backup Einstellungen"
 
 #: modules/write_config_db_logfile_txt.php:31
-#: modules/write_settings_db_logfile_txt.php:24
 msgid "unauthorized character - please use only positive integers!"
 msgstr "Nur positive ganze Zahlen nutzen!"
 
@@ -1927,6 +1991,10 @@ msgstr "Pushover Einstellungen"
 #: modules/write_notification_db.php:228
 msgid "telegram values"
 msgstr "Telegram Einstellungen"
+
+#: modules/write_settings_db_logfile_txt.php:24
+msgid "unauthorized character - please use only integers!"
+msgstr "Nur ganze Zahlen nutzen!"
 
 #: modules/write_settings_db_logfile_txt.php:148
 msgid "values have been manually changed."

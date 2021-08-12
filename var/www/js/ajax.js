@@ -317,6 +317,14 @@ function handleContent() {
     var myVar = setInterval(myTimer, 3000);
 
     function myTimer() {
-        var d = new Date();
-        loadContent();
+        //var d = new Date();
+        //console.log('timer event every 3 s');
+        //var loc = location.href;
+        var loc = location.pathname;
+        //console.log('location.pathname :' + loc);
+        //if (loc.indexOf('index.php') !== -1)
+        if (loc === '/index.php' || loc === '/')
+            loadContent();
     }
+
+    

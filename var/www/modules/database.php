@@ -216,6 +216,28 @@
         return $dataset;
     }
     
+    function get_nextion_dataset()
+    {
+        global $nextion_table, $id_field, $progress_field, $status_field;
+        
+        open_connection();
+        $sql = 'SELECT ' . $progress_field . ',' . $status_field . ' FROM ' . $nextion_table . ' WHERE ' . $id_field . '=1';
+        $result = get_query_result($sql);
+        $dataset = $result->fetchArray(SQLITE3_ASSOC);
+        close_database();
+        return $dataset;
+    }
+    
+    function update_nextion_table( $progress, $status )
+    {
+        global $nextion_table, $id_field, $progress_field, $status_field;
+        
+        open_connection();
+        $sql = 'UPDATE ' . $nextion_table . ' SET "' . $progress_field . '" = "' . $progress . '" , "' . $status_field . '" = "' . $status . '" WHERE "' . $id_field . '" = 1';
+        execute_query($sql);
+        close_database();        
+    }
+    
     function get_meatsensors_dataset()
     {
         global $meat_sensortypes;
