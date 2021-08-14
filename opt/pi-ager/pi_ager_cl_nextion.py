@@ -475,7 +475,7 @@ class pi_ager_cl_nextion( threading.Thread ):
         # self.waiter_task = asyncio.create_task(self.button_waiter(self.button_event))
         # self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))   
         
-        self.client = Nextion('/dev/ttyS0', 9600, self.nextion_event_handler, self.loop)
+        self.client = Nextion('/dev/serial0', 9600, self.nextion_event_handler, self.loop)
         logging.info('client generated')
         try:
             await self.client.connect()
