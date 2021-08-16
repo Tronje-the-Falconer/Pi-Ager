@@ -29,6 +29,7 @@ from sensors.pi_ager_cl_active_sensor import cl_fact_active_main_sensor, cl_fact
 from sensors.pi_ager_cl_i2c_bus import  cl_fact_i2c_bus_logic
 
 from main.pi_ager_cl_logger import cl_fact_logger
+import globals
 
 # global logger
 # logger = pi_ager_logging.create_logger(__name__)
@@ -356,7 +357,8 @@ def switch_light(relay_state):
     """
     setting gpio for light
     """
-    set_gpio_value(pi_ager_gpio_config.gpio_light, relay_state)
+    if not globals.hands_off_light_switch:
+        set_gpio_value(pi_ager_gpio_config.gpio_light, relay_state)
 
 def status_light_in_current_values_is_on():
     """

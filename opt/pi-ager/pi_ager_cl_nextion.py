@@ -6,8 +6,9 @@
     Serial port has to be enabled and login disabled using raspi-config
     
 """
+import globals
 if __name__ == '__main__':
-    import globals
+    # import globals
     # init global threading.lock
     globals.init()
     
@@ -29,6 +30,22 @@ from nextion import Nextion, EventType
 
 import threading
 
+class Timer:
+    def __init__(self, timeout, callback):
+        self._timeout = timeout
+        self._callback = callback
+        self._task = None
+
+    async def _job(self):
+        await asyncio.sleep(self._timeout)
+        await self._callback()
+
+    def start(self):
+        self._task = asyncio.ensure_future(self._job())
+        
+    def cancel(self):
+        self._task.cancel()
+
 class pi_ager_cl_nextion( threading.Thread ):
 
     def __init__( self ):
@@ -46,6 +63,7 @@ class pi_ager_cl_nextion( threading.Thread ):
         self.current_theme = 'fridge'
         self.test_flag = False
         self.light_status = False
+        self.light_timer = Timer(600, self.turn_off_light)
         
     def nextion_event_handler(self, type_, data):
         self.data = data
@@ -60,6 +78,18 @@ class pi_ager_cl_nextion( threading.Thread ):
         # self.button_event.set()
         logging.info('Event %s data: %s', type_, str(data))
     
+    async def turn_off_light(self):
+        logging.info('Light turn off timeout')
+        gpio.output(pi_ager_gpio_config.gpio_light, True)
+        globals.hands_off_light_switch = False
+        self.light_status = False       # turn off
+        # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 0)
+        if self.current_theme == 'fridge':
+            await self.client.set('btn_light.pic', 12) 
+        else:
+            await self.client.set('btn_light.pic', 39)
+        await self.client.set('values.status_light.val', 0) 
+        
     async def control_light_status(self):
         #light_status = await self.client.get('values.status_light.val')  
         if self.light_status == True:
@@ -67,15 +97,22 @@ class pi_ager_cl_nextion( threading.Thread ):
             if self.current_theme == 'fridge':
                 await self.client.set('btn_light.pic', 12) 
             else:
-                await self.client.set('btn_light.pic', 39) 
+                await self.client.set('btn_light.pic', 39)
+            self.light_timer.cancel()                
             gpio.output(pi_ager_gpio_config.gpio_light, True)
+            globals.hands_off_light_switch = False
+            # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 0)
+            
         else:
             self.light_status = True       # turn on
             if self.current_theme == 'fridge':
                 await self.client.set('btn_light.pic', 13)
             else:
-                await self.client.set('btn_light.pic', 41) 
+                await self.client.set('btn_light.pic', 41)
+            self.light_timer.start()
+            globals.hands_off_light_switch = True   
             gpio.output(pi_ager_gpio_config.gpio_light, False)
+            # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 1)
             
     async def button_waiter(self, event):
         try:
@@ -344,7 +381,7 @@ class pi_ager_cl_nextion( threading.Thread ):
         if values['light'] == 0:
             await self.client.set('led_light.pic', 10) 
         else:
-            await self.client.set('led_lightr.pic', 47) 
+            await self.client.set('led_light.pic', 47) 
             
         if values['uv'] == 0:
             await self.client.set('led_uv.pic', 10) 
