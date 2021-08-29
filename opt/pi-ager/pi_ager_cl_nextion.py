@@ -113,6 +113,54 @@ class pi_ager_cl_nextion( threading.Thread ):
             globals.hands_off_light_switch = True   
             gpio.output(pi_ager_gpio_config.gpio_light, False)
             # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 1)
+    
+    async def control_piager_start_stop(self):  # start/stop pi-ager
+        button_state = await self.client.get('btn_piager.val')
+        if button_state == 0:
+            pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key, 0)
+            pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key, 0)
+        else:
+            pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key, 1)
+    
+    async def init_page_17(self):  # initialize values  
+        temp_soll = round(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key))
+        humitidy_soll = round(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key))
+        modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.modus_key))
+        
+        await self.client.set('n_temp_soll.val', temp_soll)
+        await self.client.set('n_hum_soll.val', humitidy_soll)
+        await self.client.set('n_mod.val',modus)
+
+    async def save_page17_values(self):
+        #get values and check if within limits
+        temp_soll = await self.client.get('n_temp_soll.val')
+        hum_soll = await self.client.get('n_hum_soll.val')
+        modus = await self.client.get('n_mod.val')
+    
+        if (temp_soll < -11):
+            temp_soll = -11
+            await self.client.set('n_temp_soll.val', temp_soll)
+        elif (temp_soll > 30):
+            temp_soll = 30
+            await self.client.set('n_temp_soll.val', temp_soll)
+            
+        if (hum_soll < 0):
+            hum_soll = 0
+            await self.client.set('n_hum_soll.val', hum_soll)
+        elif (hum_soll > 99):
+            hum_soll = 99
+            await self.client.set('n_hum_soll.val', hum_soll)
+            
+        if (modus < 0):
+            modus = 0
+            await self.client.set('n_mod.val', modus)
+        elif (modus > 4):
+            modus = 4
+            await self.client.set('n_mod.val', modus)  
+            
+        pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key, temp_soll)    
+        pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key, hum_soll)    
+        pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.modus_key, modus)    
             
     async def button_waiter(self, event):
         try:
@@ -152,6 +200,10 @@ class pi_ager_cl_nextion( threading.Thread ):
                         self.current_theme = 'steak'
                         await self.client.command('page 10')
                         self.current_page_id = 10
+                elif self.data.page_id == 2 and self.data.component_id == 9:
+                    await self.client.command('page 17')
+                    self.current_page_id = 17
+                    await self.init_page_17()
                 elif self.data.page_id == 3 and self.data.component_id == 1:
                     await self.control_light_status()
                 elif self.data.page_id == 3 and self.data.component_id == 10:
@@ -247,7 +299,18 @@ class pi_ager_cl_nextion( threading.Thread ):
                     self.current_page_id = 9            
                 elif self.data.page_id == 15 and self.data.component_id == 6:
                     await self.control_light_status()   
-
+                elif self.data.page_id == 17 and self.data.component_id == 3:   # button menu
+                    await self.client.command('page 2')
+                    self.current_page_id = 2
+                elif self.data.page_id == 17 and self.data.component_id == 4:   # button home
+                    await self.client.command('page 1')
+                    self.current_page_id = 1   
+                elif self.data.page_id == 17 and self.data.component_id == 2:   # button light
+                    await self.control_light_status()
+                elif self.data.page_id == 17 and self.data.component_id == 6:   # button pi-ager start/stop
+                    await self.control_piager_start_stop()
+                elif self.data.page_id == 17 and self.data.component_id == 14:  # button save new Temp/Hum. values
+                    await self.save_page17_values()
                     
                 self.button_event.clear()
                 logging.info('button pressed processed')
@@ -488,7 +551,11 @@ class pi_ager_cl_nextion( threading.Thread ):
                 await self.client.set('txt_temp_ext.txt', '--.-') 
                 await self.client.set('txt_humid_ext.txt', '--.-')
         
+    async def update_page17_values(self):
+        status_piager = int(pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key ))
 
+        await self.client.set('btn_piager.val', status_piager)
+   
     async def process_page1(self):
         await self.update_base_values()
 
@@ -505,7 +572,10 @@ class pi_ager_cl_nextion( threading.Thread ):
         
     async def process_page12(self):
         await self.update_extended_values()
-    
+        
+    async def process_page17(self):
+        await self.update_page17_values()
+        
     async def run_client(self):
         self.button_event = asyncio.Event()
         self.stop_event = asyncio.Event()
@@ -549,6 +619,8 @@ class pi_ager_cl_nextion( threading.Thread ):
                     await self.process_page9() 
                 elif self.current_page_id == 12:
                     await self.process_page12()  
+                elif self.current_page_id == 17:
+                    await self.process_page17()
                     
             except Exception as e:
                 logging.error('run_client exception2: ' + str(e))
