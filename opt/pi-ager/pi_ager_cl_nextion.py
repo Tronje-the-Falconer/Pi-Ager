@@ -309,7 +309,7 @@ class pi_ager_cl_nextion( threading.Thread ):
                     await self.control_light_status()
                 elif self.data.page_id == 17 and self.data.component_id == 6:   # button pi-ager start/stop
                     await self.control_piager_start_stop()
-                elif self.data.page_id == 17 and self.data.component_id == 14:  # button save new Temp/Hum. values
+                elif self.data.page_id == 17 and self.data.component_id == 9:  # button save new Temp/Hum. values
                     await self.save_page17_values()
                     
                 self.button_event.clear()
