@@ -15,7 +15,7 @@ from abc import ABC
 import inspect
 import pi_ager_names
 from main.pi_ager_cl_database import cl_fact_database_config, cl_ab_database_config
-from pushover import Pushover
+from messenger.pushover import Pushover
 from main.pi_ager_cx_exception import *
 from main.pi_ager_cl_logger import cl_fact_logger
 
@@ -51,28 +51,30 @@ class cl_logic_pushover:
 
         
                 po = Pushover(api_token)
-                po.user(user_key)
+                # po.user(user_key)
         
                 self.send_pushover(
                     po,
+                    user_key,
                     alarm_subject,
                     alarm_message)        
         except Exception as cx_error:
             #TODO err undefined!
             fehler = 'Error: unable to send pushover: {err}'.format(err=cx_error)
             cl_fact_logger.get_instance().error(fehler)       
-    def send_pushover(self, po, alarm_subject, alarm_message):
+    def send_pushover(self, po, user_key, alarm_subject, alarm_message):
         """
         Send pushover
         """
         
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         try:
-            msg = po.msg(alarm_message)
-            msg.set("title", alarm_subject)
+            # msg = po.msg(alarm_message)
+            # msg.set("title", alarm_subject)
 
-            po.send(msg)
-
+            # po.send(msg)
+            po.message(user_key, alarm_message, title=alarm_subject)
+            
         except Exception as cx_error:
             #TODO err undefined!
             sendefehler = 'Error: unable to send pushover: {err}'.format(err=cx_error)
