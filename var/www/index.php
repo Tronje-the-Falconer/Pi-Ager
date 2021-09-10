@@ -228,9 +228,10 @@
                                                 fill: false
                                             },
                                             {
-                                                label: '<?php echo _("temperature") . ' ext.' ?>',
+                                                label: '<?php echo _("temperature") . ' avg.' ?>',
                                                 yAxisID: 'temperature',
-                                                data: <?php echo json_encode($extern_temperature_dataset); ?>,
+                                                //data: <?php echo json_encode($extern_temperature_dataset); ?>,
+												data: <?php echo json_encode($temperature_avg_dataset); ?>,
                                                 backgroundColor: '#8A0808',
                                                 borderColor: '#8A0808',
                                                 borderWidth: 2,
@@ -286,9 +287,10 @@
                                                 fill: false
                                             },
                                             {
-                                                label: '<?php echo _("humidity") . ' ext.' ?>',
+                                                label: '<?php echo _("humidity") . ' avg.' ?>',
                                                 yAxisID: 'humidity',
-                                                data: <?php echo json_encode($extern_humidity_dataset); ?>,
+                                                //data: <?php echo json_encode($extern_humidity_dataset); ?>,
+												data: <?php echo json_encode($humidity_avg_dataset); ?>,
                                                 backgroundColor: '#08298A',
                                                 borderColor: '#08298A',
                                                 borderWidth: 2,

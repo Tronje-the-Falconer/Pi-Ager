@@ -129,6 +129,60 @@
         $return_array = array($timestamps_axis_text, $dataset);
         return $return_array;
     }
+
+    // filter dataset with moving average, window in minutes, if window == 0 -> filter is off
+    function moving_average_filter($timestamps, $dataset, $window_minutes) {
+        if ($window_minutes == 0) {
+            return $dataset;
+        }
+        
+        $window_seconds = $window_minutes * 60;
+        $element_count = count($timestamps);
+        // $dataset_elements = count($dataset);
+        // echo 'Element count timestamps : ' . $element_count . '<br>';
+        // echo 'Element count dataset    : ' . $dataset_elements . '<br>';
+        $total_time = $timestamps[$element_count-1] - $timestamps[0];
+        if ($window_seconds > $total_time) {
+            return $dataset;
+        }
+        // convert time window into index range
+        $start_time = $timestamps[0];
+        $end_time = $start_time + $window_seconds;
+        $cnt_index = 0; 
+        for ($i = 0; $i < $element_count; ++$i) {
+            if ($timestamps[$i] <= $end_time) {
+                $cnt_index++;
+            }
+            else {
+                break;
+            }
+        }
+        
+        $filtered = array();
+        
+        for ($i = 0; $i < $element_count; ++$i) {
+            $start_index = $i - $cnt_index/2;
+            $end_index = $start_index + $cnt_index;
+            $sum = 0;
+            $cnt_sum = 0;
+            for ($j = $start_index; $j < $end_index; ++$j) {
+                if ($j < 0 or $j > $element_count - 1)  // must be within array limits
+                    continue;
+                if ($dataset[$j] == Null) {
+                    continue;
+                }
+                $sum += $dataset[$j];
+                $cnt_sum += 1;
+            }
+            if ($cnt_sum == 0) {
+                $filtered[$i] = Null;
+            }
+            else {
+                $filtered[$i] = $sum / $cnt_sum;
+            }
+        }
+        return $filtered;
+    }
     
 /*----------------------------------------------------------------------------*/
 
@@ -163,7 +217,23 @@
     $corr_factor = 27.0/$save_temperature_humidity_loops;
     $corr_factor_scale = max($temperatur_humidity_saving_period/$saving_period_scale1, $temperatur_humidity_saving_period/$saving_period_scale2);  
     
-    $nth_value = 1;
+ 
+    //$moving_average_window_x 
+	
+	$x = ($last_timestamp_diagram - $first_timestamp_diagram)/60;
+  
+    if ($x < 1440) {
+        $moving_average_window_x = (0.14*($x)+ 21); //  x<1T
+    }
+    elseif ($x < 44640) {
+        $moving_average_window_x = (0.042*($x)+167); // x<1Mon  
+    }
+    else {
+        $moving_average_window_x = (1.063*($x)-44500); //  x>1Mon
+    }
+     
+
+   $nth_value = 1;
     $nth_value_scale = 1;
 
     if ($diagram_mode == 'month') {
@@ -186,16 +256,19 @@
                 $nth_value_scale = 1;
             }            
         }
-    }
+     }
+	
         
     // reading all_sensors_table
     $all_sensors_rows = get_allsensors_dataset($nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
     // reading all_scales_table
     $all_scales_rows = get_allscales_dataset($nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
     
+    // print "moving average window: " . $moving_average_window_x . " minutes <br>";
+    // print "time window diagram: " . $x . " minutes <br>";
     // print "all_scales_rows count: " . count($all_scales_rows) . "<br>";
-    // print "all_sensors_rows count: " . count($all_sensors_rows) . "<br>";
-    // print "row-0 tempint, last_change :" . $all_sensors_rows[0]['tempint'] . '  ' . $all_sensors_rows[0]['last_change'] . "<br>";
+    // print "all_sensors_rows count: " . count($all_sensors_rows) . "<br>";    
+	// print "row-0 tempint, last_change :" . $all_sensors_rows[0]['tempint'] . '  ' . $all_sensors_rows[0]['last_change'] . "<br>";
     
     // common x-axis timestamps for all_sensors
     $all_sensors_timestamps_array = array_column($all_sensors_rows, 'last_change');
@@ -213,11 +286,13 @@
     $temperature_dataset = array_column($all_sensors_rows, 'tempint');
     $temperature_dataset[] = Null;
     array_unshift($temperature_dataset, Null);
-
+    $temperature_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $temperature_dataset, $moving_average_window_x);
+    
     // value array for humint
     $humidity_dataset = array_column($all_sensors_rows, 'humint');
     $humidity_dataset[] = Null;
     array_unshift($humidity_dataset, Null);
+    $humidity_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $humidity_dataset, $moving_average_window_x);
     
     // value array for dewint
     $dewpoint_dataset = array_column($all_sensors_rows, 'dewint');
@@ -233,11 +308,13 @@
     $extern_temperature_dataset = array_column($all_sensors_rows, 'tempext');
     $extern_temperature_dataset[] = Null;
     array_unshift($extern_temperature_dataset, Null);
+    //$extern_temperature_dataset = moving_average_filter($all_sensors_timestamps_array, $extern_temperature_dataset, $moving_average_window_x);
 
     // value array for humext
     $extern_humidity_dataset = array_column($all_sensors_rows, 'humext');
     $extern_humidity_dataset[] = Null;
     array_unshift($extern_humidity_dataset, Null);
+    //$extern_humidity_dataset = moving_average_filter($all_sensors_timestamps_array, $extern_humidity_dataset, $moving_average_window_x);
     
     // value array for dewext
     $extern_dewpoint_dataset = array_column($all_sensors_rows, 'dewext');
