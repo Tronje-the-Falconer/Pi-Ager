@@ -340,7 +340,7 @@ INSERT INTO "agingtables" ("id","name") VALUES (1,'salami');
 INSERT INTO "agingtables" ("id","name") VALUES (2,'dryaging1');
 INSERT INTO "agingtables" ("id","name") VALUES (3,'dryaging2');
 INSERT INTO "system" ("id","key","value","last_change") VALUES (1,'pi_revision','9000c1',1627221519);
-INSERT INTO "system" ("id","key","value","last_change") VALUES (3,'pi_ager_version','3.3.1',0);
+INSERT INTO "system" ("id","key","value","last_change") VALUES (3,'pi_ager_version','3.3.2',0);
 INSERT INTO "agingtable_dryaging1" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (1,4,85,2,1440,2160,900,12960,12,'Testtabelle');
 INSERT INTO "agingtable_dryaging1" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (2,NULL,30,4,2520,1080,NULL,6480,8,NULL);
 INSERT INTO "agingtable_dryaging1" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (3,NULL,70,NULL,1080,2520,NULL,15120,8,NULL);
@@ -368,8 +368,8 @@ INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage"
 INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES (17,'Weber_6743',0.0033558796,0.00027111149,3.1838428e-06,102.315,NULL,NULL,NULL,NULL,NULL,'0',0.0,0);
 INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES (18,'LEM-HO6P-AC',NULL,NULL,NULL,NULL,'AC',1.6672,76.67,2,100,'0',0.0,0);
 INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES (19,'LEM-HO6P-DC',NULL,NULL,NULL,NULL,'DC',1.6672,76.67,2,50,'0',0.0,0);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (1,'switch_on_cooling_compressor',2.0,1622578102);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (2,'switch_off_cooling_compressor',0.0,1622578102);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (1,'switch_on_cooling_compressor',1.0,1622578102);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (2,'switch_off_cooling_compressor',-1.0,1622578102);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (3,'switch_on_humidifier',20.0,1622578102);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (4,'switch_off_humidifier',0.0,1622578102);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (5,'delay_humidify',5.0,1622578102);
@@ -389,7 +389,7 @@ INSERT INTO "config" ("id","key","value","last_change") VALUES (18,'dehumidifier
 INSERT INTO "config" ("id","key","value","last_change") VALUES (19,'circulation_air_period',3600.0,1627201482);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (20,'setpoint_temperature',21.0,1627201482);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (21,'exhaust_air_duration',900.0,1627201482);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (22,'modus',4.0,1627201482);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (22,'modus',3.0,1627201482);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (23,'setpoint_humidity',75.0,1627201482);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (24,'exhaust_air_period',21600.0,1627201482);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (25,'circulation_air_duration',900.0,1627201482);

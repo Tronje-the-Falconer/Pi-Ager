@@ -27,8 +27,8 @@
         $ConfigInputIsValid = TRUE;
         foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
             if ($CheckInput != 'config_form_submit') {
-                if (preg_match('/[.\D]/', $CheckInput)) {
-                    $message_config = _('unauthorized character - please use only positive integers!');
+                if (!(preg_match('/^-?\d+$/', $CheckInput))) {
+                    $message_config = _('unauthorized character - please use only integers!');
                     $ConfigInputIsValid = FALSE;
                 }
             }
@@ -36,19 +36,19 @@
 
         if ($ConfigInputIsValid == TRUE)
         {
-            if ( $switch_on_cooling_compressor_config<11 && $switch_on_cooling_compressor_config>-1 && ($switch_on_cooling_compressor_config != $switch_off_cooling_compressor_config) &&       // Prüfung Einschaltwert setpoint_temperature.
+            if ( $switch_on_cooling_compressor_config < 11 && $switch_on_cooling_compressor_config > -11 && ($switch_on_cooling_compressor_config != $switch_off_cooling_compressor_config) &&       // Prüfung Einschaltwert setpoint_temperature.
                 ($switch_on_cooling_compressor_config > $switch_off_cooling_compressor_config) &&                                                              // Prüfung Einschaltwert setpoint_temperature.
-                $switch_off_cooling_compressor_config<11 && $switch_off_cooling_compressor_config>-1 &&                                                        // Prüfung Ausschaltwert setpoint_temperature.
-                $switch_on_humidifier_config<31 && $switch_on_humidifier_config>-1 && ($switch_on_humidifier_config != $switch_off_humidifier_config) &&          // Prüfung Einschaltwert Feuchte
+                $switch_off_cooling_compressor_config < 11 && $switch_off_cooling_compressor_config > -11 &&                                                        // Prüfung Ausschaltwert setpoint_temperature.
+                $switch_on_humidifier_config < 31 && $switch_on_humidifier_config > -31 && ($switch_on_humidifier_config != $switch_off_humidifier_config) &&          // Prüfung Einschaltwert Feuchte
                 ($switch_on_humidifier_config > $switch_off_humidifier_config) &&                                                               // Prüfung Einschaltwert Feuchte
-                $switch_off_humidifier_config<31 && $switch_off_humidifier_config>-1 &&                                                          // Prüfung Ausschaltwert Feuchte
-                $delay_humidify_config<61 && $delay_humidify_config>-1 &&                                                            // Prüfung Verzögerung Feuchte
-                $uv_period_config<1441 && $uv_period_config>-1 &&  (($uv_period_config+$uv_duration_config)>0) &&                 // Prüfung Intervall UV
-                $uv_duration_config<1441 && $uv_duration_config>-1  &&                              // Prüfung Dauer UV
-                $switch_on_uv_hour_config>=0 && $switch_on_uv_hour_config<24 && $switch_on_uv_minute_config>=0 && $switch_on_uv_minute_config<60 && // UV Uhrzeit
-                $light_period_config<1441 && $light_period_config>-1 &&  (($light_period_config+$light_duration_config)>0) &&                 // Prüfung Intervall Licht
-                $light_duration_config<1441 && $light_duration_config>-1  &&                              // Prüfung Dauer Licht
-                $switch_on_light_hour_config>=0 && $switch_on_light_hour_config<24 && $switch_on_light_minute_config>=0 && $switch_on_light_minute_config<60 // Licht Uhrzeit
+                $switch_off_humidifier_config < 31 && $switch_off_humidifier_config > -31 &&                                                          // Prüfung Ausschaltwert Feuchte
+                $delay_humidify_config < 61 && $delay_humidify_config > -1 &&                                                            // Prüfung Verzögerung Feuchte
+                $uv_period_config < 1441 && $uv_period_config > -1 &&  (($uv_period_config+$uv_duration_config) > 0) &&                 // Prüfung Intervall UV
+                $uv_duration_config < 1441 && $uv_duration_config > -1  &&                              // Prüfung Dauer UV
+                $switch_on_uv_hour_config >= 0 && $switch_on_uv_hour_config < 24 && $switch_on_uv_minute_config >= 0 && $switch_on_uv_minute_config < 60 && // UV Uhrzeit
+                $light_period_config < 1441 && $light_period_config > -1 &&  (($light_period_config+$light_duration_config) > 0) &&                 // Prüfung Intervall Licht
+                $light_duration_config < 1441 && $light_duration_config > -1  &&                              // Prüfung Dauer Licht
+                $switch_on_light_hour_config >= 0 && $switch_on_light_hour_config < 24 && $switch_on_light_minute_config >= 0 && $switch_on_light_minute_config < 60 // Licht Uhrzeit
             )
             {
                 # Eingestellte Werte in config/config.json und logs/logfile.txt speichern
