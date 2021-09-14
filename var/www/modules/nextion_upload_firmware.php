@@ -6,7 +6,17 @@
         $logstring = 'button upload tft firmware pressed';
         logger('DEBUG', $logstring );
         
-        $upload_folder = '/var/www/nextion/'; //Das Upload-Verzeichnis
+        $tft_display_type = get_table_value($config_settings_table, $tft_display_type_key);
+        if ($tft_display_type == 1) {
+            $upload_folder = '/var/www/nextion/NX3224K028/'; //Das Upload-Verzeichnis NX3224K028
+        }
+        else if ($tft_display_type == 2) {
+            $upload_folder = '/var/www/nextion/NX3224F028/'; //Das Upload-Verzeichnis NX3224F028
+        }
+        else {
+            $upload_folder = '/var/www/nextion/NX3224T028/'; //Das Upload-Verzeichnis NX3224T028
+        }
+        
         $filename = pathinfo($_FILES['tft_file']['name'], PATHINFO_FILENAME);
         if ($filename != ''){
             $extension = strtolower(pathinfo($_FILES['tft_file']['name'], PATHINFO_EXTENSION));

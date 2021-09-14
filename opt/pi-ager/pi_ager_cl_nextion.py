@@ -339,6 +339,17 @@ class pi_ager_cl_nextion( threading.Thread ):
     
     async def init_display_values(self):
         version = pi_ager_database.get_table_value(pi_ager_names.system_table, pi_ager_names.pi_ager_version_key )
+        display_type = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.tft_display_type_key )
+        
+        display_name = ''
+        if display_type == 1:
+            display_name = 'NX3224K028'
+        elif display_type == 2:
+            display_name = 'NX3224F028'
+        else:
+            display_name = 'NX3224T028'
+
+        await self.client.set('values.displ_version.txt', display_name)
         await self.client.set('values.sw_version.txt', version)
         
         model = self.get_pi_model()

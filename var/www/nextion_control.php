@@ -5,8 +5,20 @@
     
     // get the q parameter from URL
     $request = $_REQUEST["q"];        //$request = $_GET['q'];
+    
+    $tft_display_type = get_table_value($config_settings_table, $tft_display_type_key);
+    if ($tft_display_type == 1) {
+        $filename = '/var/www/nextion/NX3224K028/pi-ager.tft'; //Das Upload-Verzeichnis NX3224K028
+    }
+    else if ($tft_display_type == 2) {
+        $filename = '/var/www/nextion/NX3224F028/pi-ager.tft'; //Das Upload-Verzeichnis NX3224F028
+    }
+    else {
+        $filename = '/var/www/nextion/NX3224T028/pi-ager.tft'; //Das Upload-Verzeichnis NX3224T028
+    }  
+    
     if ($request == 'check') {
-        $filename = '/var/www/nextion/pi-ager.tft';
+        // $filename = '/var/www/nextion/pi-ager.tft';
         if (!file_exists( $filename )) {
             echo 'Firmware file ' . $filename . ' missing.';
             exit;
@@ -27,7 +39,7 @@
             // start firmware programming
             echo 'ready';
             //session_write_close();
-            shell_exec('sudo /var/sudowebscript.sh startfirmwareprog');
+            shell_exec('sudo /var/sudowebscript.sh startfirmwareprog ' . $filename);
         } 
         else {
             echo 'firmware allready programming';

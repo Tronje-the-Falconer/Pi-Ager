@@ -35,7 +35,7 @@ case "$1" in
         ps ax | grep -v grep | grep main.py
     ;;
     startfirmwareprog) # start tft display firmware programming
-        python3 /opt/pi-ager/piager_upload_firmware.py /dev/serial0 /var/www/nextion/pi-ager.tft >/dev/null 2>/dev/null &
+        python3 /opt/pi-ager/piager_upload_firmware.py /dev/serial0 $2 >/dev/null 2>/dev/null &
     ;;
     reboot) # reboot
         sleep 3

@@ -135,7 +135,7 @@ meat1_sensortype_key = 'meat1_sensortype'
 meat2_sensortype_key = 'meat2_sensortype'
 meat3_sensortype_key = 'meat3_sensortype'
 meat4_sensortype_key = 'meat4_sensortype'
-
+tft_display_type_key = 'tft_display_type'
 
 # table fields
 key_field = 'key'

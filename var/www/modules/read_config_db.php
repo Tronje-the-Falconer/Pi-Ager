@@ -21,7 +21,8 @@
     $dehumidifier_modus = get_table_value($config_settings_table,$dehumidifier_modus_key);
     $failure_humidity_delta = get_table_value($config_settings_table, $failure_humidity_delta_key);
     $failure_temperature_delta = get_table_value($config_settings_table, $failure_temperature_delta_key);
-
+    $tft_display_type = get_table_value($config_settings_table, $tft_display_type_key);
+    
     $referenceunit_scale1 = number_format(floatval(get_table_value($settings_scale1_table,$referenceunit_key)), 1, '.', '');
     $offset_scale1 = number_format(floatval(get_table_value($settings_scale1_table, $offset_key)), 1, '.', '');
     $measuring_interval_scale1 = get_table_value($settings_scale1_table,$scale_measuring_interval_key);
@@ -191,5 +192,25 @@
     else {
         $checked_dehumidify_3 = '';
     }
+
+    if ($tft_display_type == 1) {
+        $checked_tft_display_type_1 = 'checked="checked"';
+    }
+    else {
+        $checked_tft_display_type_1 = '';
+    }
+    if ($tft_display_type == 2) {
+        $checked_tft_display_type_2 = 'checked="checked"';
+    }
+    else {
+        $checked_tft_display_type_2 = '';
+    }
+    if ($tft_display_type == 3) {
+        $checked_tft_display_type_3 = 'checked="checked"';
+    }
+    else {
+        $checked_tft_display_type_3 = '';
+    }
+    
     logger('DEBUG', 'read_config_db performed');
 ?>

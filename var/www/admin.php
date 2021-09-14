@@ -16,6 +16,7 @@
                                     include 'modules/backup_manual.php';                        // steuert manuelles Backup im sudowebscript an
                                     include 'modules/nextion_upload_firmware.php';              // upload firmware file for nextion hmi display                                    
                                     include 'modules/write_backup_db.php';                      // schreibt die backup-Werte
+                                    include 'modules/write_nextion_type_db.php';                // nextion display type save
                                     
                                     include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                     include 'modules/read_current_db.php';
@@ -609,13 +610,30 @@
                                 <hr>
                                 <h2 class="art-postheader"><?php echo _('Nextion Display Firmware'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Nextion display Firmware -->
-                                <div class="hg_container" >                                    
-                                            <td colspan="2">
+                                <div class="hg_container" >
+                                    <form method="post" name="nextion_display">
+                                        <table style="width: 100%;" class="miniature_writing">
+                                            <tr>
+                                                <td class="td_png_icon"><h3><?php echo _('TFT Display'); ?></h3><img src="images/icons/touch_screen_44x44.png" alt=""></td>
+                                                <td style=" text-align: left; padding-left: 20px;"><br>
+                                                    <input type="radio" name="tft_display_type_admin" value="1" <?php echo $checked_tft_display_type_1; ?>/><label> NX3224K028 (Enhanced)</label><br>
+                                                    <input type="radio" name="tft_display_type_admin" value="2" <?php echo $checked_tft_display_type_2; ?>/><label> NX3224F028 (Discovery)</label><br>
+                                                    <input type="radio" name="tft_display_type_admin" value="3" <?php echo $checked_tft_display_type_3; ?>/><label> NX3224T028 (Basic)</label><br>
+                                                    <br>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <button class="art-button" name="save_nextion_display_type" value="save_nextion_display_type" onclick="return confirm('<?php echo _('ATTENTION: save Nextion display type?');?>');"><?php echo _('save'); ?></button>
+                                    </form>
+                                    <hr>
+                                    <table style="width: 100%;">
+                                        <tr>
+                                            <td>
                                                 <button class="art-button" id="program_firmware" name="program_firmware" value="program_firmware" onclick="move_bar()"><?php echo _('start programming'); ?></button>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="2">
+                                            <td>
                                              <!--   <progress style="width: 100%; height: 20px; position: relative;" id="programming" value="32" max="100"> 32% </progress> -->
                                                 <div id="progress_label" class="progress" data-label="0% Complete">
                                                     <span id="upload_progress" class="value" style="width:0%;"></span>
@@ -625,6 +643,7 @@
                                             <!--    </script> -->
                                             </td>
                                         </tr>
+                                    </table>
                                     <table style="width: 100%;">
                                         <hr>
                                         <tr>
@@ -654,32 +673,26 @@
                                             </td>
                                         </tr>
                                         
-                                        <tr>
-                                    <table style="width: 100%; align: center;">
-                                        <tr>
-                                            <td style="text-align: left; padding-left: 10px;" >
-                                                <button class="art-button" type="button" onclick="help_display_blockFunction()"><?php echo _('help'); ?></button>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <script>
-                                        function help_display_blockFunction() {
-                                            document.getElementById('help_display').style.display = 'block';
-                                        }
-                                        function help_display_noneFunction() {
-                                            document.getElementById('help_display').style.display = 'none';
-                                        }
-                                    </script>
-                                    <p id="help_display" class="help_p">
-                                        <?php echo _('helptext_display');
-                                              echo '<br><br>'; ?>
-                                        <button class="art-button" type="button" onclick="help_display_noneFunction()"><?php echo _('close'); ?></button>
-                                    </p>
-<!--                                        <tr>
-                                            <td colspan="2">
-                                                <button disabled class="art-button" id="test_button" name="test_button">test button</button>
-                                            </td>
-                                        </tr> -->
+                                        <table style="width: 100%; align: center;">
+                                            <tr>
+                                                <td style="text-align: left; padding-left: 10px;" >
+                                                    <button class="art-button" type="button" onclick="help_display_blockFunction()"><?php echo _('help'); ?></button>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <script>
+                                            function help_display_blockFunction() {
+                                                document.getElementById('help_display').style.display = 'block';
+                                            }
+                                            function help_display_noneFunction() {
+                                                document.getElementById('help_display').style.display = 'none';
+                                            }
+                                        </script>
+                                        <p id="help_display" class="help_p">
+                                            <?php echo _('helptext_display');
+                                                echo '<br><br>'; ?>
+                                            <button class="art-button" type="button" onclick="help_display_noneFunction()"><?php echo _('close'); ?></button>
+                                        </p>
                                     </table>
                                 </div>
                                 
@@ -799,141 +812,10 @@
                                             });
                                             
                                             return;
-/*
-                                            ajax = new XMLHttpRequest();
-                                            method = "POST";
-                                            url = "nextion_control.php?q=check";
-                                            asynchronous = true;
-                                            
-                                            ajax.open(method, url, asynchronous);
-                                            
-                                            ajax.onerror = function() {
-                                                error = true;
-                                                //alert('Error occurred during programming firmware');
-                                                show_error('firmware check failed');
-                                                //$('#progress_label').css('border', '3px solid red');
-                                                //$('#progress_label').attr('data-label', 'firmware check failed');
-                                            }
-                                            // sending ajax request
-                                            ajax.send();
-*/                                            
-                                            // receiving response from nextion_control.php
-/*                                            ajax.onreadystatechange = async function() {
-                                                if (this.readyState == 4 && this.status == 200) {
-                                                    //alert(this.responseText);
-                                                    if (this.responseText != 'ready') {
-                                                        $('#progress_label').css('border', '3px solid red');
-                                                        $('#progress_label').attr('data-label', this.responseText);
-                                                        //var label = document.getElementById("progress_label");
-                                                        //label.setAttribute("data-label", this.responseText);
-                                                    } */
-/*                                                    else {
-                                                        error = false;
-                                                        ajax2 = new XMLHttpRequest();
-                                                        url = "nextion_control.php?q=program";
-                                            
-                                                        status = 'idle';
-                                                        ajax2.onerror = function() {
-                                                            error = true;
-                                                            alert('Error occurred during programming firmware');
-                                                            $('#progress_label').css('border', '3px solid red');
-                                                            $('#progress_label').attr('data-label', 'firmware check failed');
-                                                        }
-                                                        // receiving response from nextion_control.php
-                                                        ajax2.onreadystatechange = function() {
-                                                            if (this.readyState == 4 && this.status == 200) {
-                                                                //alert(this.responseText);
-                                                                programming_status = JSON.parse(this.responseText);
-                                                                progress = programming_status.progress.toString();
-                                                                status = programming_status.status;
-                                                                $('#upload_progress').css('width', progress + '%');
-                                                                $('#progress_label').attr('data-label', progress + '%' + ' complete');
-                                                            }
-                                                        }
-                                            
-                                                        while (true) {
-                                                            // sending ajax request
-                                                            ajax2.open(method, url, asynchronous);
-                                                            ajax2.send(); 
-                                                            await new Promise(resolve => setTimeout(resolve, 3000));
-                                                            if (status == 'idle') {
-                                                                continue;
-                                                            }
-                                                            if (status == 'running') {
-                                                                continue;
-                                                            }
-                                                            if (status == 'success') {
-                                                                break;
-                                                            }
-                                                            if (status == 'failed' || error == true) {
-                                                                $('#progress_label').css('border', '3px solid red');
-                                                                $('#progress_label').attr('data-label', 'programming failed');
-                                                                break;
-                                                            }
-                                                        }                                                
-                                            
-                                                    } 
-                                                }
-                                            }         */
-                                            
-/*                                            await new Promise(resolve => setTimeout(resolve, 12000));
-                                            if (error == true) {
-                                                return;
-                                            }
-                                            
-                                            ajax2 = new XMLHttpRequest();
-                                            url = "nextion_control.php?q=program";
-                                            
-                                            status = 'idle';
-                                            // receiving response from nextion_control.php
-                                            ajax2.onreadystatechange = function() {
-                                                if (this.readyState == 4 && this.status == 200) {
-                                                    //alert(this.responseText);
-                                                    programming_status = JSON.parse(this.responseText);
-                                                    progress = programming_status.progress.toString();
-                                                    status = programming_status.status;
-                                                    $('#upload_progress').css('width', progress + '%');
-                                                    $('#progress_label').attr('data-label', progress + '%' + ' complete');
-                                                }
-                                            }
-                                            
-                                            while (true) {
-                                                // sending ajax request
-                                                ajax2.open(method, url, asynchronous);
-                                                ajax2.send(); 
-                                                await new Promise(resolve => setTimeout(resolve, 3000));
-                                                if (status == 'idle') {
-                                                    continue;
-                                                }
-                                                if (status == 'running') {
-                                                    continue;
-                                                }
-                                                if (status == 'success') {
-                                                    break;
-                                                }
-                                                if (status == 'failed') {
-                                                    $('#progress_label').css('border', '3px solid red');
-                                                    $('#progress_label').attr('data-label', 'failed');
-                                                    break;
-                                                }
-                                            }                                                
-*/                                            
-                                            //var elem = document.getElementById("upload_progress");
-                                            //var label = document.getElementById("progress_label");
-                                            //var width = 1;
-                                            //var id = setInterval(frame, 10);
-                                            //return true;
-                                            //function frame() {
-                                            //    if (width >= 100) {
-                                            //        clearInterval(id);
-                                            //    } else {
-                                            //        width++;
-                                            //        elem.style.width = width + '%';
-                                            //        label.setAttribute("data-label", width.toString() + '%' + ' complete');
-                                            //    }
-                                            //}
+
                                         }
                                     }
+
                                 </script> 
                                 
                                 <?php
@@ -961,6 +843,13 @@
                                 ?>
                                 
                                 <!----------------------------------------------------------------------------------------Content Ende-->
+                                
+                                <script>
+                                    if ( window.history.replaceState ) {    // avoid page confirmation on refresh
+                                        window.history.replaceState( null, null, window.location.href );
+                                    }
+                                </script>
+                                
                             </div>
                         </div>
                     </div>

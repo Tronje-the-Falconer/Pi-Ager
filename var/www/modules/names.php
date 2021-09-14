@@ -137,6 +137,7 @@ $status_light_key = 'status_light';
 $status_uv_key = 'status_uv';
 $status_humidifier_key = 'status_humidifier';
 $status_dehumidifier_key = 'status_dehumidifier';
+$tft_display_type_key = 'tft_display_type';
 
 #-----------------------------table fields;
 $key_field = 'key';
