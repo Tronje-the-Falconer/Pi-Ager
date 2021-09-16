@@ -122,7 +122,7 @@ class pi_ager_cl_nextion( threading.Thread ):
         else:
             pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key, 1)
     
-    async def init_page_17(self):  # initialize values  
+    async def init_page_17_19(self):  # initialize values  
         temp_soll = round(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key))
         humitidy_soll = round(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key))
         modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.modus_key))
@@ -131,7 +131,7 @@ class pi_ager_cl_nextion( threading.Thread ):
         await self.client.set('n_hum_soll.val', humitidy_soll)
         await self.client.set('n_mod.val',modus)
 
-    async def save_page17_values(self):
+    async def save_page_17_19_values(self):
         #get values and check if within limits
         temp_soll = await self.client.get('n_temp_soll.val')
         hum_soll = await self.client.get('n_hum_soll.val')
@@ -203,7 +203,7 @@ class pi_ager_cl_nextion( threading.Thread ):
                 elif self.data.page_id == 2 and self.data.component_id == 9:
                     await self.client.command('page 17')
                     self.current_page_id = 17
-                    await self.init_page_17()
+                    await self.init_page_17_19()
                 elif self.data.page_id == 3 and self.data.component_id == 1:
                     await self.control_light_status()
                 elif self.data.page_id == 3 and self.data.component_id == 10:
@@ -243,16 +243,16 @@ class pi_ager_cl_nextion( threading.Thread ):
                     await self.control_light_status()
                 elif self.data.page_id == 10 and self.data.component_id == 6:
                     await self.control_light_status()
-                elif self.data.page_id == 10 and self.data.component_id == 1:
+                elif self.data.page_id == 10 and self.data.component_id == 1:   # goto main_steak
                     await self.client.command('page 9')
                     self.current_page_id = 9
-                elif self.data.page_id == 10 and self.data.component_id == 2:
+                elif self.data.page_id == 10 and self.data.component_id == 2:   # goto values_steak
                     await self.client.command('page 12')
                     self.current_page_id = 12
                 #elif self.data.page_id == 10 and self.data.component_id == 2:
                 #    await self.client.command('page 11')
                 #    self.current_page_id = 11
-                elif self.data.page_id == 10 and self.data.component_id == 5:
+                elif self.data.page_id == 10 and self.data.component_id == 5:   # goto menu_steak or menu_fridge
                     if (self.current_theme == 'steak'):
                         self.current_theme = 'fridge'
                         await self.client.command('page 2')
@@ -261,15 +261,16 @@ class pi_ager_cl_nextion( threading.Thread ):
                         self.current_theme = 'steak'
                         await self.client.command('page 10')
                         self.current_page_id = 10
-                elif self.data.page_id == 10 and self.data.component_id == 3:
+                elif self.data.page_id == 10 and self.data.component_id == 3:   # goto setting_steak
                     await self.client.command('page 15')
                     self.current_page_id = 15
-                elif self.data.page_id == 10 and self.data.component_id == 4:
+                elif self.data.page_id == 10 and self.data.component_id == 4:   # goto info_steak
                     await self.client.command('page 14')
                     self.current_page_id = 14
-#                elif self.data.page_id == 11 and self.data.component_id == 8:
-#                    await self.client.command('page 10')
-#                    self.current_page_id = 10                                        
+                elif self.data.page_id == 10 and self.data.component_id == 8:   # goto control_steak
+                    await self.client.command('page 19')
+                    self.current_page_id = 19 
+                    await self.init_page_17_19()                    
 #                elif self.data.page_id == 11 and self.data.component_id == 18:
 #                    await self.client.command('page 9')
 #                    self.current_page_id = 9                                             
@@ -310,8 +311,20 @@ class pi_ager_cl_nextion( threading.Thread ):
                 elif self.data.page_id == 17 and self.data.component_id == 6:   # button pi-ager start/stop
                     await self.control_piager_start_stop()
                 elif self.data.page_id == 17 and self.data.component_id == 9:  # button save new Temp/Hum. values
-                    await self.save_page17_values()
-                    
+                    await self.save_page_17_19_values()
+                elif self.data.page_id == 19 and self.data.component_id == 2:   # button menu
+                    await self.client.command('page 10')
+                    self.current_page_id = 10
+                elif self.data.page_id == 19 and self.data.component_id == 3:   # button home
+                    await self.client.command('page 9')
+                    self.current_page_id = 9   
+                elif self.data.page_id == 19 and self.data.component_id == 4:   # button light
+                    await self.control_light_status()
+                elif self.data.page_id == 19 and self.data.component_id == 9:   # button pi-ager start/stop
+                    await self.control_piager_start_stop()
+                elif self.data.page_id == 19 and self.data.component_id == 1:  # button save new Temp/Hum. values
+                    await self.save_page_17_19_values()
+                                        
                 self.button_event.clear()
                 logging.info('button pressed processed')
         except Exception as e:
@@ -562,11 +575,11 @@ class pi_ager_cl_nextion( threading.Thread ):
                 await self.client.set('txt_temp_ext.txt', '--.-') 
                 await self.client.set('txt_humid_ext.txt', '--.-')
         
-    async def update_page17_values(self):
+    async def update_page_17_19_values(self):
         status_piager = int(pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key ))
 
         await self.client.set('btn_piager.val', status_piager)
-   
+
     async def process_page1(self):
         await self.update_base_values()
 
@@ -584,8 +597,8 @@ class pi_ager_cl_nextion( threading.Thread ):
     async def process_page12(self):
         await self.update_extended_values()
         
-    async def process_page17(self):
-        await self.update_page17_values()
+    async def process_page_17_19(self):
+        await self.update_page_17_19_values()
         
     async def run_client(self):
         self.button_event = asyncio.Event()
@@ -631,7 +644,9 @@ class pi_ager_cl_nextion( threading.Thread ):
                 elif self.current_page_id == 12:
                     await self.process_page12()  
                 elif self.current_page_id == 17:
-                    await self.process_page17()
+                    await self.process_page_17_19()
+                elif self.current_page_id == 19:
+                    await self.process_page_17_19()  
                     
             except Exception as e:
                 logging.error('run_client exception2: ' + str(e))
