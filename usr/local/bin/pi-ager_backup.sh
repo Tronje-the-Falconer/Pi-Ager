@@ -191,15 +191,58 @@ if [ -z $NFSOPT ]
 fi
 
 # Prüfen, ob das Zielverzeichnis existiert
-echo "Prüfe ob das Zielverzeichnis existiert"
+echo "Prüfen, ob das Zielverzeichnis $DIR existiert"
 sleep 2
 if [ ! -d "$DIR" ];
 	then
-        echo "Backupverzeichnis existiert nicht. Abbruch! Bitte anlegen"
+        echo "Backupverzeichnis $DIR existiert nicht. Abbruch! Bitte anlegen"
         umount $NFSMOUNT
         exit 1
     else
-        echo "Backupverzeichnis existiert = ${DIR}"
+        echo "Backupverzeichnis $DIR existiert"
+fi
+
+# prüfe, ob current user in das Verzeichnis schreiben kann
+
+u="$USER"
+echo "Prüfen, ob $u in das Backup Verzeichnis schreiben kann"
+
+INFO=( $(stat -L -c "0%a %G %U" "$DIR") )
+PERM=${INFO[0]}
+GROUP=${INFO[1]}
+OWNER=${INFO[2]}
+
+ACCESS=no
+if (( ($PERM & 0x02) != 0 )); then
+    # Everyone has write access
+    ACCESS=yes
+elif (( ($PERM & 0x10) != 0 )); then
+    # Some group has write access.
+    # Is user in that group?
+    gs=( $(groups $u) )
+    for g in "${gs[@]}"; do
+        if [[ $GROUP == $g ]]; then
+            ACCESS=yes
+            break
+        fi
+    done
+elif (( ($PERM & 0x80) != 0 )); then
+    # The owner has write access.
+    # Does the user own the file?
+    [[ $u == $OWNER ]] && ACCESS=yes
+fi
+
+if [ "$ACCESS" == "no" ]; then
+      echo "$u hat keine Schreibrechte. Abbruch"
+      echo "Entweder für das Backupverzeichnis mit chmod Schreibrechte einräumen oder"
+      echo "mit chown Besitzer und Gruppe anpassen"
+      echo "OWNER = $OWNER"
+      echo "GROUP = $GROUP"
+      echo "Rechte = $PERM"
+      umount $NFSMOUNT
+      exit 1
+    else
+      echo "$u hat Schreibrechte für $DIR"
 fi
 
 # Stoppe Dienste vor Backup
@@ -224,6 +267,17 @@ echo 1 > /proc/sys/vm/drop_caches
 
 echo "erstelle Backup ${BACKUP_PFAD}/${BACKUP_NAME}.img $(date +%T)"
 dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=1M status=progress 2>&1
+status=$?
+if [ $status -ne 0 ]; then
+  echo "Fehler $status beim Erstellen des Backup. Abbruch"
+  echo "Starte schreibende Dienste wieder!"
+  if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
+    echo  "Starte Pi-Ager Main"
+    systemctl start pi-ager_main &
+  fi
+  umount $NFSMOUNT
+  exit 1
+fi
 
 # Starte Dienste nach Backup
 echo "Starte schreibende Dienste wieder!"

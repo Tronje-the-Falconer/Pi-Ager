@@ -451,6 +451,8 @@ UPDATE config_messenger_event SET "e-mail" = 0;
 UPDATE config_messenger_event SET "pushover" = 0;
 UPDATE config_messenger_event SET "telegram" = 0;
 
+INSERT INTO "config_nfs_backup" ("id","nfsvol","subdir","nfsmount","backup_path","number_of_backups","backup_name","nfsopt","active") VALUES ('1','','pi-ager-vxxx','/home/nfs/public','/home/nfs/public/pi-ager-vxxx','3','PiAgerBackup','nosuid,nodev','1');
+
 END_SQL
 # Rebuild DB to reduce the size of the DB
 sqlite3 /var/www/config/pi-ager.sqlite3 'VACUUM;'
