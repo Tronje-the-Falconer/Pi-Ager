@@ -87,7 +87,7 @@ anfang=$(date +%s)
 echo "Starte mit dem Backup, dies kann einige Zeit dauern"
 
 # Überprüfen ob Agingtable aktiv ist
-echo "überprüfe ob aging_table aktiv ist"
+echo "Überprüfen, ob aging_table aktiv ist"
 echo "agingtable status is ${AGINGTABLE_STATUS}"
 if [ $AGINGTABLE_STATUS -ne "1" ]
     then
@@ -99,40 +99,62 @@ fi
 
 
 #Überprüfen ob der NFS-Server vorhanden ist
-echo "überprüfe ob der NFS-Server vorhanden ist."
-echo "Checking..."
+echo "Überprüfen, ob das nfs Verzeichnis in der Tabelle vorhanden ist."
 if [ -z "$NFSVOL" ]
 	then
-        echo "Backup nicht korrekt eingestellt. Bitte Tabelle nfs_backup prüfen!"
+        echo "Backup nicht korrekt eingestellt. Bitte nfs Verzeichnis in die Tabelle eintragen!"
         exit 1
     else
         echo "$NFSVOL ist vorhanden"
 fi
 
-# Überprüfen ob der Backup Pfad vorhanden ist
-echo "überprüfe ob Backup Pfad vorhanden ist."	
-echo "Checking ..."
+echo "Überprüfen, ob nfs Verzeichnis korrekt aufgebaut ist, z.B.: 192.168.0.111:/srv/backup"
+
+array=(${NFSVOL//:/ })
+serverIP=${array[0]}
+echo "NFS IP Adresse = $serverIP"
+localIP=$(hostname -I)
+#remove last space character
+localIP=${localIP// /}
+echo "Locale IP Adresse = $localIP"
+
+echo "Überprüfen, ob nfs Server IP definiert ist"
+if [[ "$serverIP" =~ ^(([1-9]?[0-9]|1[0-9][0-9]|2([0-4][0-9]|5[0-5]))\.){3}([1-9]?[0-9]|1[0-9][0-9]|2([0-4][0-9]|5[0-5]))$ ]]; then
+  echo "nfs Server Adresse $serverIP ist definiert"
+else
+  echo "nfs Server Adresse $serverIP ist nicht definiert oder falsches Format. Abbruch"
+  exit 1
+fi
+
+echo "Überprüfen, ob sich nfs Server IP und lokale IP unterscheiden"
+if [[ "$localIP" == "$serverIP" ]]; then
+  echo "nfs Server IP und lokale IP sind gleich. Abbruch"
+  exit 1
+else
+  echo "nfs Server IP und lokale IP unterscheiden sich."
+fi
+
+# Überprüfen ob der Backup Pfad in der Tabelle vorhanden ist
+echo "Überprüfen, ob Backup Pfad in der Tabelle vorhanden ist."	
 if [ -z "$BACKUP_PFAD" ]
 	then
-        echo "Backup Pfad nicht korrekt eingestellt. Bitte Tabelle nfs_backup prüfen!"
+        echo "Backup Pfad nicht korrekt eingestellt. Bitte Tabelle nfs_backup prüfen. Abbruch"
         exit 1
     else
         echo "$BACKUP_PFAD ist vorhanden"
 fi
 
 #Überprüfen ob NFS Mount point in der Tabelle existiert
-echo "überprüfe ob NFS Mount point definiert ist."
-echo "Checking ..."
+echo "Überprüfen, ob NFS Mount point definiert ist."
 if [ -z "$NFSMOUNT" ]
 	then
-        echo "Kein NFS Mount point definiert. Bitte Tabelle nfs_backup prüfen!"
+        echo "Kein NFS Mount point definiert. Bitte Tabelle nfs_backup prüfen. Abbruch"
         exit 1
     else
         echo "$NFSMOUNT ist definiert"
 fi
 
-echo "überprüfe ob NFS Mount point im file system angelegt ist."
-echo "Checking..."
+echo "Überprüfen, ob NFS Mount point im file system angelegt ist."
 if [ -d "$NFSMOUNT" ]
 	then
 		echo "$NFSMOUNT ist angelegt"
@@ -144,11 +166,11 @@ if [ -d "$NFSMOUNT" ]
 fi
  
 #Überprüfen ob PiShrink aktuell ist sonst herunterladen
-echo "überprüfe ob PiShrink vorhanden ist"
+echo "Überprüfen, ob PiShrink vorhanden ist"
 echo "Checking..."
 online_md5="$(curl -sL https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh | md5sum | cut -d ' ' -f 1)"
 local_md5="$(md5sum "/usr/local/bin/pishrink.sh" | cut -d ' ' -f 1)"
-if [ "$online_md5" == "$local_md5" ]; 
+if [[ "$online_md5" == "$local_md5" ]]; 
 	then
     	echo "PiShrink is the latest version!"
     else
@@ -185,9 +207,16 @@ echo "hänge NFS-Volume ein"
 
 if [ -z $NFSOPT ]
 	then
-		sudo mount -t nfs4 $NFSVOL $NFSMOUNT -o $NFSOPT
+		mount -t nfs4 $NFSVOL $NFSMOUNT -o $NFSOPT
+        mountstatus=$?
  	else
- 		sudo mount -t nfs4 $NFSVOL $NFSMOUNT
+ 		mount -t nfs4 $NFSVOL $NFSMOUNT
+        mountstatus=$?
+fi
+
+if [ $mountstatus -ne 0 ]; then
+  echo "Fehler $mountstatus beim Einhängen des NFS-Volume. Abbruch"
+  exit 1
 fi
 
 # Prüfen, ob das Zielverzeichnis existiert
@@ -232,7 +261,7 @@ elif (( ($PERM & 0x80) != 0 )); then
     [[ $u == $OWNER ]] && ACCESS=yes
 fi
 
-if [ "$ACCESS" == "no" ]; then
+if [[ "$ACCESS" == "no" ]]; then
       echo "$u hat keine Schreibrechte. Abbruch"
       echo "Entweder für das Backupverzeichnis mit chmod Schreibrechte einräumen oder"
       echo "mit chown Besitzer und Gruppe anpassen"
@@ -267,9 +296,9 @@ echo 1 > /proc/sys/vm/drop_caches
 
 echo "erstelle Backup ${BACKUP_PFAD}/${BACKUP_NAME}.img $(date +%T)"
 dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=1M status=progress 2>&1
-status=$?
-if [ $status -ne 0 ]; then
-  echo "Fehler $status beim Erstellen des Backup. Abbruch"
+ddstatus=$?
+if [ $ddstatus -ne 0 ]; then
+  echo "Fehler $ddstatus beim Erstellen des Backup. Abbruch"
   echo "Starte schreibende Dienste wieder!"
   if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
     echo  "Starte Pi-Ager Main"
@@ -293,7 +322,7 @@ echo "starte mit PiShrink $(date +%T) pishrink.sh $OPTARG ${BACKUP_PFAD}/${BACKU
 #read -p "Press enter to continue before pishrink call"
 # -d write debug file
 #sudo /usr/local/bin/pishrink.sh -d $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img
-sudo /usr/local/bin/pishrink.sh ${BACKUP_PFAD}/${BACKUP_NAME}.img
+/usr/local/bin/pishrink.sh ${BACKUP_PFAD}/${BACKUP_NAME}.img
 
 # Backup umbenennen
 mv ${BACKUP_PFAD}/${BACKUP_NAME}.img ${BACKUP_PFAD}/${BACKUP_NAME}_$(date +%Y-%m-%d-%H%M%S).img
