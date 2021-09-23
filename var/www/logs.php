@@ -41,6 +41,7 @@
                                                 </td>
                                                 <td><button class="art-button" name="save_logfiles" onclick="return confirm(<?php echo _('save all logfiles?'); ?>);"><?php echo _('save logfiles'); ?></button></td>
                                                 <td><button class="art-button" name="clear_logfile" onclick="return confirm(<?php echo _('clear all logfile data?'); ?>);"><?php echo _('delete data'); ?></button></td>
+                                                <td><button class="art-button" name="view_pi_ager_logfile" onClick="window.open('/logs/pi-ager.log');"><?php echo _('open pi-ager.log in new tab'); ?></button></td>
                                             </tr>
                                         </table>
                                     </form>
