@@ -468,7 +468,6 @@
                                         </label>
                                         <br><br>
                                         <button class="art-button" name="save_loglevel" value="save_loglevel" onclick="return confirm('<?php echo _('save loglevel?');?>');"><?php echo _('save'); ?></button>
-                                        
                                     </form>
                                 </div>
                                 <hr>
@@ -571,6 +570,7 @@
                                             </form>
                                         </tr>
                                     </table>
+				    <button class="art-button" name="view_pi_ager_backup_logfile" onClick="window.open('/logs/pi-ager-backup.log');"><?php echo _('open pi-ager-backup.log in new tab'); ?></button>
                                     <table style="width: 100%; align: center;">
                                         <tr>
                                             <td style="text-align: left; padding-left: 10px;" >
