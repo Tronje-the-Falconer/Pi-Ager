@@ -502,8 +502,8 @@
                                             <?php
                                                 $backup_nfsvol = get_table_value_from_field($backup_table, Null, $backup_nfsvol_field);
                                                 $backup_subdir = get_table_value_from_field($backup_table, Null, $backup_subdir_field);
-                                                $backup_nfsmount= get_table_value_from_field($backup_table, Null, $backup_nfsmount_field);
-                                                $backup_path = get_table_value_from_field($backup_table, Null, $backup_path_field);
+                                                // $backup_nfsmount= get_table_value_from_field($backup_table, Null, $backup_nfsmount_field);
+                                                // $backup_path = get_table_value_from_field($backup_table, Null, $backup_path_field);
                                                 $backup_number_of_backups = get_table_value_from_field($backup_table, Null, $backup_number_of_backups_field);
                                                 $backup_name = get_table_value_from_field($backup_table, Null, $backup_name_field);
                                                 $backup_nfsopt = get_table_value_from_field($backup_table, Null, $backup_nfsopt_field);
@@ -521,16 +521,18 @@
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('subdirectory'); ?>:</td>
-                                                <td><input name="backup_subdir" type="text" style="width: 90%; text-align: right;" required value=<?php echo $backup_subdir; ?>></td>
+                                                <td><input name="backup_subdir" type="text" style="width: 90%; text-align: right;" value=<?php echo $backup_subdir; ?>></td>
                                             </tr>
+<!--                                            
                                             <tr>
                                                 <td><?php echo _('nfs mount'); ?>:</td>
-                                                <td><input name="backup_nfsmount" type="text" style="width: 90%; text-align: right;" required value=<?php echo $backup_nfsmount; ?>></td>
+                                                <td><input name="backup_nfsmount" type="text" style="width: 90%; text-align: right; background-color: lightgrey;" readonly required value=<?php echo $backup_nfsmount; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('nfs path'); ?>:</td>
-                                                <td><input name="backup_path" type="text" style="width: 90%; text-align: right;" required value=<?php echo $backup_path; ?>></td>
+                                                <td><input name="backup_path" type="text" style="width: 90%; text-align: right; background-color: lightgrey;" readonly required value=<?php echo $backup_path; ?>></td>
                                             </tr>
+-->                                            
                                             <tr>
                                                 <td><?php echo _('number of backups'); ?>:</td>
                                                 <td><input name="backup_number_of_backups" type="number" step="1" min="1" max="60" style="width: 90%;" required value=<?php echo $backup_number_of_backups; ?>></td>
@@ -570,7 +572,7 @@
                                             </form>
                                         </tr>
                                     </table>
-				    <button class="art-button" name="view_pi_ager_backup_logfile" onClick="window.open('/logs/pi-ager-backup.log');"><?php echo _('open pi-ager-backup.log in new tab'); ?></button>
+                                    <button class="art-button" name="view_pi_ager_backup_logfile" onClick="window.open('/logs/pi-ager_backup.log');"><?php echo _('open pi-ager_backup.log in new tab'); ?></button>
                                     <table style="width: 100%; align: center;">
                                         <tr>
                                             <td style="text-align: left; padding-left: 10px;" >

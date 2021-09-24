@@ -20,10 +20,12 @@ NFSVOL=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nf
 SUBDIR=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select subdir from config_nfs_backup where active = 1")
 
 #NFSMOUNT=/home/pi/backup							# Pfad auf dem Pi indem das Backup gespeichert wird
-NFSMOUNT=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsmount from config_nfs_backup where active = 1")
+# NFSMOUNT=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsmount from config_nfs_backup where active = 1")
+NFSMOUNT="/home/nfs/public"
 
 # setzt sich zusammen aus dem Dateipfad auf dem Pi und dem Verzeichnis im NAS
-BACKUP_PFAD=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select backup_path from config_nfs_backup where active = 1")
+# BACKUP_PFAD=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select backup_path from config_nfs_backup where active = 1")
+BACKUP_PFAD="$NFSMOUNT/$SUBDIR"
 
 #z.B. NFSOPT="nosuid,nodev,rsize=65536,wsize=65536,intr,noatime"
 NFSOPT=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsopt from config_nfs_backup where active = 1")
@@ -451,7 +453,7 @@ UPDATE config_messenger_event SET "e-mail" = 0;
 UPDATE config_messenger_event SET "pushover" = 0;
 UPDATE config_messenger_event SET "telegram" = 0;
 
-INSERT INTO "config_nfs_backup" ("id","nfsvol","subdir","nfsmount","backup_path","number_of_backups","backup_name","nfsopt","active") VALUES ('1','','pi-ager-vxxx','/home/nfs/public','/home/nfs/public/pi-ager-vxxx','3','PiAgerBackup','nosuid,nodev','1');
+INSERT INTO "config_nfs_backup" ("id","nfsvol","subdir","number_of_backups","backup_name","nfsopt","active") VALUES ('1','','','3','PiAgerBackup','nosuid,nodev','1');
 
 END_SQL
 # Rebuild DB to reduce the size of the DB
@@ -510,8 +512,9 @@ if [ "$my_image" = false ]; then
 	# userdel kapacitor
 	
 	
-	# delete obsolete /var direcories
+	# delete logs and greate empty backup.log
 	rm /var/www/logs/*
+    touch /var/www/logs/pi-ager_backup.log
 	# rm /var/logs
 	
 	# delete obsolete /tmp direcory
