@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2021-07-27 14:25+0200\n"
-"PO-Revision-Date: 2021-09-24 09:44+0200\n"
+"PO-Revision-Date: 2021-09-25 10:27+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -2662,7 +2662,7 @@ msgstr "Pi-Ager starten"
 
 #: settings.php:129 settings.php:141 settings.php:155 settings.php:167
 msgid "Reference unit is 0 in Scale"
-msgstr "Referenz Einheit ist 0"
+msgstr "Referenz Einheit ist 0 in Waage"
 
 #: settings.php:129 settings.php:141 settings.php:155 settings.php:167
 msgid "Please calibrate scale first!"
