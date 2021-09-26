@@ -27,6 +27,11 @@ popd () {
     command popd "$@" > /dev/null
 }
 
+start_piager () {
+    $(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "UPDATE current_values SET value = '1' WHERE key = 'status_piager'")
+}
+
+
 echo "--------------------------------------------------------------------------------------"
 #sleep 5
 # Server und Pfad zur NFS Freigabe (Muss im NAS angelegt werden)
@@ -55,6 +60,10 @@ BACKUP_NAME=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "sele
 # get status aging_table from current_values
 AGINGTABLE_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_agingtable'")
 AGINGTABLE_STATUS=${AGINGTABLE_STATUS%.*}
+
+# get status_piager from current_values
+PIAGER_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_piager'")
+PIAGER_STATUS=${PIAGER_STATUS%.*}
 
 # systemctl daemon-reload
 
@@ -289,7 +298,7 @@ if [ -z "$MAIN_STATUS" ]
     else
       PI_AGER_MAIN_ACTIVE=1
       echo "Stop Pi-Ager Main service, wait 10s to continue."
-      systemctl stop pi-ager_main
+      systemctl stop pi-ager_main &
       sleep 10
 fi	
 
@@ -306,19 +315,15 @@ if [ $ddstatus -ne 0 ]; then
   echo "error $ddstatus during dd command. Backup stopped."
 #  echo "Start Pi-Ager Main service again!"
   if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
+    if [ $PIAGER_STATUS == 1 ]; then
+        echo "Set pi-ager active in DB"
+        start_piager
+    fi
     echo  "Start Pi-Ager Main service again."
     systemctl start pi-ager_main &
   fi
   umount $NFSMOUNT
   exit 1
-fi
-
-# Starte Dienste nach Backup
-# echo "Starte schreibende Dienste wieder!"
-#${DIENSTE_START_STOP} start
-if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
-    echo  "Start Pi-Ager Main service again."
-    systemctl start pi-ager_main &
 fi
 
 sync
@@ -374,3 +379,14 @@ fi
 sync
 umount $NFSMOUNT
 
+
+# Starte pi-ager service nach Backup
+
+if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
+    if [ $PIAGER_STATUS == 1 ]; then
+        echo "Set pi-ager active in DB"
+        start_piager
+    fi
+    echo  "Start Pi-Ager Main service again."
+    systemctl start pi-ager_main &
+fi
