@@ -33,7 +33,7 @@ echo "--------------------------------------------------------------------------
 NFSVOL=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsvol from config_nfs_backup where active = 1")
 
 # dieses Verzeichniss muss im NAS angelegt sein
-SUBDIR=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select subdir from config_nfs_backup where active = 1")
+# SUBDIR=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select subdir from config_nfs_backup where active = 1")
 
 # Pfad auf dem Pi indem das Backup gespeichert wird, hierhin wird gemoundet
 # NFSMOUNT=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsmount from config_nfs_backup where active = 1")
@@ -44,7 +44,7 @@ NFSOPT=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nf
 
 # setzt sich zusammen aus dem Dateipfad auf dem Pi und dem Verzeichnis im NAS
 # BACKUP_PFAD=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select backup_path from config_nfs_backup where active = 1")
-BACKUP_PFAD="$NFSMOUNT/$SUBDIR"
+BACKUP_PFAD="$NFSMOUNT"
 
 # behält die letzten "n" Backups
 BACKUP_ANZAHL=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select number_of_backups from config_nfs_backup where active = 1")
@@ -155,7 +155,7 @@ fi
 #        echo "$NFSMOUNT ist definiert"
 # fi
 
-echo "check if NFS mount point $NFSMOUNT exists in local filesystem."
+echo "check if default NFS mount point $NFSMOUNT exists in local filesystem."
 if [ -d "$NFSMOUNT" ]
 	then
 		echo "$NFSMOUNT exists. Backup continues."
@@ -192,12 +192,12 @@ fi
 #		sudo mv pishrink.sh /usr/local/bin
 #fi
 
-DIR=$NFSMOUNT/$SUBDIR
+DIR=$NFSMOUNT
  
 echo "Start $BACKUP_NAME $(date +%T)"
 echo "NFSVOL=$NFSVOL"
 echo "NFSMOUNT=$NFSMOUNT"
-echo "Backup directory=$DIR"
+# echo "Backup directory=$DIR"
 echo "NFSOPT=$NFSOPT"
 echo "Backup file ${BACKUP_PFAD}/${BACKUP_NAME}.img"
 
@@ -205,7 +205,7 @@ echo "Backup file ${BACKUP_PFAD}/${BACKUP_NAME}.img"
 umount $NFSMOUNT
 
 # NFS-Volume mounten
-echo "mount NFS-Volume."
+echo "mount NFS-Volume. Map $NFSVOL to $NFSMOUNT"
 
 if [ -z $NFSOPT ]
 	then
@@ -219,24 +219,26 @@ fi
 if [ $mountstatus -ne 0 ]; then
   echo "Error $mountstatus during mount NFS Volume $NFSVOL. Backup stopped."
   exit 1
+else
+  echo "mount NFS-Volume $NFSVOL successfull. Backup continues."
 fi
 
 # Prüfen, ob das Zielverzeichnis existiert
-echo "check if target directory $DIR exists on the nfs Server."
-sleep 2
-if [ ! -d "$DIR" ];
-	then
-        echo "target directory $DIR does not exist. Please create this directory. Backup stopped."
-        umount $NFSMOUNT
-        exit 1
-    else
-        echo "target directory $DIR exists. Backup continues."
-fi
+# echo "check if target directory $DIR exists on the nfs Server."
+# sleep 2
+# if [ ! -d "$DIR" ];
+#	then
+#        echo "target directory $DIR does not exist. Please create this directory. Backup stopped."
+#        umount $NFSMOUNT
+#        exit 1
+#    else
+#        echo "target directory $DIR exists. Backup continues."
+# fi
 
 # prüfe, ob current user in das Verzeichnis schreiben kann
 
 u="$USER"
-echo "check if $u can write into $DIR"
+echo "check if $u can write into $DIR mapped to $NFSVOL"
 
 INFO=( $(stat -L -c "0%a %G %U" "$DIR") )
 PERM=${INFO[0]}
@@ -273,7 +275,7 @@ if [[ "$ACCESS" == "no" ]]; then
       umount $NFSMOUNT
       exit 1
     else
-      echo "$u can write into $DIR, Backup continues."
+      echo "$u can write into $DIR mapped to $NFSVOL, Backup continues."
 fi
 
 # Stoppe Dienste vor Backup
@@ -296,7 +298,7 @@ fi
 sync
 echo 1 > /proc/sys/vm/drop_caches
 
-echo "now create Backup ${BACKUP_PFAD}/${BACKUP_NAME}.img at $(date +%T) with command dd. This needs some time to complete ..."
+echo "create now Backup ${BACKUP_PFAD}/${BACKUP_NAME}.img at $(date +%T) with command dd. This needs some time to complete ..."
 dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=1M 2>&1
 
 ddstatus=$?

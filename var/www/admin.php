@@ -501,7 +501,7 @@
                                         <table style="width: 100%;">
                                             <?php
                                                 $backup_nfsvol = get_table_value_from_field($backup_table, Null, $backup_nfsvol_field);
-                                                $backup_subdir = get_table_value_from_field($backup_table, Null, $backup_subdir_field);
+                                                // $backup_subdir = get_table_value_from_field($backup_table, Null, $backup_subdir_field);
                                                 // $backup_nfsmount= get_table_value_from_field($backup_table, Null, $backup_nfsmount_field);
                                                 // $backup_path = get_table_value_from_field($backup_table, Null, $backup_path_field);
                                                 $backup_number_of_backups = get_table_value_from_field($backup_table, Null, $backup_number_of_backups_field);
@@ -519,11 +519,11 @@
                                                 <td><?php echo _('nfs volume'); ?>:</td>
                                                 <td><input name="backup_nfsvol" type="text" style="width: 90%; text-align: right;" required value=<?php echo $backup_nfsvol; ?>></td>
                                             </tr>
+<!--
                                             <tr>
                                                 <td><?php echo _('subdirectory'); ?>:</td>
                                                 <td><input name="backup_subdir" type="text" style="width: 90%; text-align: right;" value=<?php echo $backup_subdir; ?>></td>
                                             </tr>
-<!--                                            
                                             <tr>
                                                 <td><?php echo _('nfs mount'); ?>:</td>
                                                 <td><input name="backup_nfsmount" type="text" style="width: 90%; text-align: right; background-color: lightgrey;" readonly required value=<?php echo $backup_nfsmount; ?>></td>

@@ -17,7 +17,7 @@
 NFSVOL=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsvol from config_nfs_backup where active = 1")
 
 # dieses Verzeichniss muss im NAS angelegt sein
-SUBDIR=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select subdir from config_nfs_backup where active = 1")
+# SUBDIR=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select subdir from config_nfs_backup where active = 1")
 
 #NFSMOUNT=/home/pi/backup							# Pfad auf dem Pi indem das Backup gespeichert wird
 # NFSMOUNT=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsmount from config_nfs_backup where active = 1")
@@ -25,7 +25,7 @@ NFSMOUNT="/home/nfs/public"
 
 # setzt sich zusammen aus dem Dateipfad auf dem Pi und dem Verzeichnis im NAS
 # BACKUP_PFAD=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select backup_path from config_nfs_backup where active = 1")
-BACKUP_PFAD="$NFSMOUNT/$SUBDIR"
+BACKUP_PFAD="$NFSMOUNT"
 
 #z.B. NFSOPT="nosuid,nodev,rsize=65536,wsize=65536,intr,noatime"
 NFSOPT=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsopt from config_nfs_backup where active = 1")
@@ -165,26 +165,35 @@ echo "NFSMOUNT=$NFSMOUNT"
 umount $NFSMOUNT
 
 # NFS-Volume mounten
-echo "hänge NFS-Volume ein"
-echo $NFSOPT
+echo "hänge NFS-Volume $NFSVOL ein"
+
 if [ -z $NFSOPT ]
 	then
 		mount -t nfs4 $NFSVOL $NFSMOUNT -o $NFSOPT
+        mountstatus=$?
  	else
  		mount -t nfs4 $NFSVOL $NFSMOUNT
- fi
+        mountstatus=$?
+fi
+
+if [ $mountstatus -ne 0 ]; then
+  echo "Error $mountstatus during mount NFS Volume $NFSVOL. Image script stopped."
+  exit 1
+else
+  echo "mount NFS-Volume $NFSVOL successfull. Image script continues."
+fi
 
 # Prüfen, ob das Zielverzeichnis existiert
-echo "Prüfe ob das Zielverzeichnis existiert"
-sleep 2
-if [ ! -d "$BACKUP_PFAD" ];
-	then
-        echo "Backupverzeichnis existiert nicht. Abbruch! Bitte anlegen"
-        umount $NFSMOUNT
-        exit 1
-    else
-        echo "Backupverzeichnis existiert = ${BACKUP_PFAD}"
-fi
+# echo "Prüfe ob das Zielverzeichnis existiert"
+# sleep 2
+# if [ ! -d "$BACKUP_PFAD" ];
+#	then
+#        echo "Backupverzeichnis existiert nicht. Abbruch! Bitte anlegen"
+#        umount $NFSMOUNT
+#        exit 1
+#    else
+#        echo "Backupverzeichnis existiert = ${BACKUP_PFAD}"
+# fi
     
 if [ "$last_backup" = true ]; 
 	then
@@ -453,7 +462,7 @@ UPDATE config_messenger_event SET "e-mail" = 0;
 UPDATE config_messenger_event SET "pushover" = 0;
 UPDATE config_messenger_event SET "telegram" = 0;
 
-INSERT INTO "config_nfs_backup" ("id","nfsvol","subdir","number_of_backups","backup_name","nfsopt","active") VALUES ('1','','','3','PiAgerBackup','nosuid,nodev','1');
+INSERT INTO "config_nfs_backup" ("id","nfsvol","number_of_backups","backup_name","nfsopt","active") VALUES ('1','','3','PiAgerBackup','nosuid,nodev','1');
 
 END_SQL
 # Rebuild DB to reduce the size of the DB

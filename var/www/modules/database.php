@@ -1057,18 +1057,18 @@
         return $value;
     }
     
-    function write_backupvalues($backup_nfsvol, $backup_subdir, $backup_number_of_backups, $backup_name, $backup_nfsopt, $backup_active){
-        global $id_field, $backup_table, $backup_nfsvol_field, $backup_subdir_field, $backup_number_of_backups_field, $backup_name_field, $backup_nfsopt_field, $backup_active_field;
+    function write_backupvalues($backup_nfsvol, $backup_number_of_backups, $backup_name, $backup_nfsopt, $backup_active){
+        global $id_field, $backup_table, $backup_nfsvol_field, $backup_number_of_backups_field, $backup_name_field, $backup_nfsopt_field, $backup_active_field;
         
         if (is_table_empty($backup_table) == True) {
             open_connection();
-            $sql = 'INSERT INTO ' . $backup_table . ' (' . $id_field . ', ' . $backup_nfsvol_field . ', ' . $backup_subdir_field . ', ' . $backup_number_of_backups_field . ', ' . $backup_name_field . ', ' . $backup_nfsopt_field . ', ' . $backup_active_field . ' ) VALUES (' . '"1"' . ', "' . $backup_nfsvol . '", "' . $backup_subdir . '", "' .  strval($backup_number_of_backups) . '", "' . $backup_name . '", "' . $backup_nfsopt . '", "' . strval($backup_active) . '")';
+            $sql = 'INSERT INTO ' . $backup_table . ' (' . $id_field . ', ' . $backup_nfsvol_field . ', ' . $backup_number_of_backups_field . ', ' . $backup_name_field . ', ' . $backup_nfsopt_field . ', ' . $backup_active_field . ' ) VALUES (' . '"1"' . ', "' . $backup_nfsvol . '", "' .  strval($backup_number_of_backups) . '", "' . $backup_name . '", "' . $backup_nfsopt . '", "' . strval($backup_active) . '")';
             execute_query($sql);
             close_database();
         }
         else {
             open_connection();
-            $sql = 'UPDATE ' . $backup_table . ' SET "' . $backup_nfsvol_field . '" = "' . $backup_nfsvol . '" , "' . $backup_subdir_field . '" = "' . $backup_subdir . '" , "' . $backup_number_of_backups_field . '" = ' . $backup_number_of_backups . ' , "' . $backup_name_field . '" = "' . $backup_name . '" , "' . $backup_nfsopt_field . '" = "' . $backup_nfsopt . '" , "' . $backup_active_field . '" = "' . $backup_active . '" ' . ' WHERE ' . $id_field . ' = 1';
+            $sql = 'UPDATE ' . $backup_table . ' SET "' . $backup_nfsvol_field . '" = "' . $backup_nfsvol . '" , "' .  $backup_number_of_backups_field . '" = ' . $backup_number_of_backups . ' , "' . $backup_name_field . '" = "' . $backup_name . '" , "' . $backup_nfsopt_field . '" = "' . $backup_nfsopt . '" , "' . $backup_active_field . '" = "' . $backup_active . '" ' . ' WHERE ' . $id_field . ' = 1';
             execute_query($sql);
             close_database();
         }
