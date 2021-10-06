@@ -119,6 +119,7 @@ finally:
     scale1_thread.stop_received = True
     scale2_thread.stop_received = True
     agingtable_thread.stop_received = True
+    nextion_thread.prep_show_offline()
     nextion_thread.loop.call_soon_threadsafe(nextion_thread.stop_event.set)
     nextion_thread.stop_loop()
     

@@ -375,7 +375,9 @@ class pi_ager_cl_nextion( threading.Thread ):
         await self.client.set('values.status_light.val', 0)
         
         self.current_page_id = 1
-        await self.client.command('page 1')     
+        await self.client.set('sleep', 0)
+        await self.client.command('page 1') 
+        await self.client.set('thsp', 0)
         
     def db_get_base_values(self):
         status_piager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key )
@@ -646,7 +648,9 @@ class pi_ager_cl_nextion( threading.Thread ):
                 elif self.current_page_id == 17:
                     await self.process_page_17_19()
                 elif self.current_page_id == 19:
-                    await self.process_page_17_19()  
+                    await self.process_page_17_19()
+                elif self.current_page_id == 13:
+                    await self.show_offline()    
                     
             except Exception as e:
                 logging.error('run_client exception2: ' + str(e))
@@ -660,7 +664,7 @@ class pi_ager_cl_nextion( threading.Thread ):
             # await self.client.set('values.status_uv.val', 1)
             # await self.client.command('page dp')
             await asyncio.sleep(3)
-       
+
         logging.info('run_client finished')
         
     def inner_ctrl_c_signal_handler(self, sig, frame):
@@ -716,7 +720,17 @@ class pi_ager_cl_nextion( threading.Thread ):
             #logging.info('after finally')
             cl_fact_logger.get_instance().info('Nextion client stopped')
             self.loop.close()
+    
+    async def show_offline(self):
+        if self.client != None:
+            await self.client.set('sleep', 0)
+            await self.client.command('page 13')
+            await self.client.set('thsp', 0)
             
+    def prep_show_offline(self):
+        self.current_page_id = 13
+        time.sleep(4)
+        
     def stop_loop(self):
         logging.info('in stop_loop')
         tasks = asyncio.all_tasks(self.loop)
@@ -740,9 +754,11 @@ def main():
             
     except KeyboardInterrupt:
         print("Ctrl-c received! Sending Stop to thread...")
-        # nextion_thread.stop_event.set()
+        # show offline state on display
+        nextion_thread.prep_show_offline()
+        # set stop event
         nextion_thread.loop.call_soon_threadsafe(nextion_thread.stop_event.set)
-        # time.sleep(2)
+        # time.sleep(1)
         nextion_thread.stop_loop()
             
     nextion_thread.join()
