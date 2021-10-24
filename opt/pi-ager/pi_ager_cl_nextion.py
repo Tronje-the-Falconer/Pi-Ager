@@ -640,7 +640,9 @@ class pi_ager_cl_nextion( threading.Thread ):
                 elif self.current_page_id == 3:
                     await self.process_page3()
                 elif self.current_page_id == 4:
-                    await self.process_page4()  
+                    await self.process_page4()
+                elif self.current_page_id == 5:
+                    await self.show_offline()                        
                 elif self.current_page_id == 9:
                     await self.process_page9() 
                 elif self.current_page_id == 12:
@@ -724,11 +726,17 @@ class pi_ager_cl_nextion( threading.Thread ):
     async def show_offline(self):
         if self.client != None:
             await self.client.set('sleep', 0)
-            await self.client.command('page 13')
+            if self.current_theme == 'fridge':
+                await self.client.command('page 5')
+            else:
+                await self.client.command('page 13')
             await self.client.set('thsp', 0)
             
     def prep_show_offline(self):
-        self.current_page_id = 13
+        if self.current_theme == 'fridge':
+            self.current_page_id = 5
+        else:    
+            self.current_page_id = 13
         time.sleep(4)
         
     def stop_loop(self):
