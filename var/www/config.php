@@ -245,6 +245,38 @@
                                                       echo '<br><br>'; ?>
                                                 <button class="art-button" type="button" onclick="help_agingtable_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
+                                            <hr>
+                                            <!----------------------------------------------------------------------------------------temperature limits to generate events -->
+                                            <table style="width: 100%;table-layout: fixed;">
+                                                <tr>
+                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('internal temperature limits'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_event_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td><?php echo _('low temperature limit'); ?>:</td>
+                                                    <td><input name="internal_temperature_low_limit_config" type="number" style="width: 30%;" min="-11" max="30" required value=<?php echo $internal_temperature_low_limit; ?>>&nbsp;°C<span style="font-size: xx-small"> (-11 <?php echo _('to'); ?> 30)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><?php echo _('high temperature limit').':'; ?></td>
+                                                    <td><input name="internal_temperature_high_limit_config" type="number" style="width: 30%;" min="-11" max="30" required value= <?php echo $internal_temperature_high_limit; ?>>&nbsp;°C<span style="font-size: xx-small"> (-11 <?php echo _('to'); ?> 30)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><?php echo _('hysteresis').':'; ?></td>
+                                                    <td><input name="internal_temperature_hysteresis_config" type="number" style="width: 30%;" min="1" max="10" required value= <?php echo $internal_temperature_hysteresis; ?>>&nbsp;°C<span style="font-size: xx-small"> (1 <?php echo _('to'); ?> 10)</span></td>
+                                                </tr>                                                
+                                                
+                                            </table>
+                                            <script>
+                                                function help_temperature_event_config_blockFunction() {
+                                                    document.getElementById('help_temperature_event_config').style.display = 'block';
+                                                }
+                                                function help_temperature_event_config_noneFunction() {
+                                                    document.getElementById('help_temperature_event_config').style.display = 'none';
+                                                }
+                                            </script>
+                                            <p id="help_temperature_event_config" class="help_p">
+                                                <?php echo _('helptext_temperature_event_config');
+                                                      echo '<br><br>'; ?>
+                                                <button class="art-button" type="button" onclick="help_temperature_event_config_noneFunction()"><?php echo _('close'); ?></button>
+                                            </p>                                            
+
                                             <br>
                                             <br>
                                             <table style="width: 100%; align: center;">

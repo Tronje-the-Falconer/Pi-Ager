@@ -462,6 +462,7 @@ UPDATE config_messenger_exception SET "telegram" = 0;
 UPDATE config_messenger_event SET "e-mail" = 0;
 UPDATE config_messenger_event SET "pushover" = 0;
 UPDATE config_messenger_event SET "telegram" = 0;
+UPDATE config_messenger_event SET "active" = 0;
 
 INSERT INTO "config_nfs_backup" ("id","nfsvol","number_of_backups","backup_name","nfsopt","active") VALUES ('1','','3','PiAgerBackup','nosuid,nodev','1');
 

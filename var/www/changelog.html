@@ -38,6 +38,7 @@ h2 {
         <li>Bug fix für Nextion TFT HMI Displays: wenn das Kühlschrank-Symbol bzw. das Licht Icon aktiviert wird, wird das Licht für 10 Minuten eingeschaltet.</li>
         <li>Zusätzlich wurde eine Seite eingefügt, wo es möglich ist, die Sollwerte für Temperatur und Feuchte einzustellen.</li>
         <li>Auf dieser Seite kann auch der Pi-Ager gestartet und gestoppt werden.</li>
+        <li>Ist der Pi-Ager offline, wird auf dem Display eine entsprechende Seite angezeigt.</li>
         <li>Wichtig:</li>
         <li>Die im Pi-Ager Image hinterlegte aktuelle Display Firmware muss nochmals geflasht werden, damit die oben aufgeführten Features funktionieren.
         Hierzu muss auf der ADMIN Seite in der Sektion 'NEXTION DISPLAY FIRMWARE' erst das angeschlossene Display Device ausgewählt und gespeichert werden. 
@@ -64,7 +65,15 @@ h2 {
 <h4>Nachrichten</h4>
     <ul>
         <li>Die pushover Library in den letzten Versionen ist nicht kompatibel mit python3.x. Der Bug wurde gefixed.</li> 
-    </ul> 
+    </ul>
+    
+<h4>Events</h4>
+    <ul>
+        <li>Überwachung der internen Temperaturmesswerte, Min- und Max-Werte können eingestellt werden und können bei Unter-bzw.-Überschreitung ein Event auslösen.</li>
+        <li>Überwachung der UPS Batterie-Spannung und der Versorgungsspannung. UPS Batterie low und Powerfail können Events auslösen.</li>
+        <li>Überwachung des Schalter-Eingangs. Schalter geschlossen kann ein Event auslösen.</li>
+        <li>Achtung: die Überwachung der o.g. Messwerte erfolgt in einem 10s Zeitraster.
+    </ul>
 <hr>
 
 

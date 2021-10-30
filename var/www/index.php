@@ -131,7 +131,7 @@
                                                 <img src="images/icons/scale_42x42.png" alt="">1
                                             </td>
                                             <td>
-                                                <img src="images/icons/scale_42x42.png" alt="" style="padding-top: 10px;">2
+                                                <img src="images/icons/scale_42x42.png" alt="">2
                                             </td>
                                             <td></td>
                                         </tr>

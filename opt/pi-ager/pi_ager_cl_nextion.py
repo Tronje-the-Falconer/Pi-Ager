@@ -18,6 +18,7 @@ import asyncio
 import signal
 import logging
 import random
+from collections import namedtuple
 import RPi.GPIO as gpio
 
 import pi_ager_database
@@ -66,12 +67,13 @@ class pi_ager_cl_nextion( threading.Thread ):
         self.light_timer = Timer(600, self.turn_off_light)
         
     def nextion_event_handler(self, type_, data):
-        self.data = data
-        self.type_ = type_
+
         if type_ == EventType.STARTUP:
             print('We have booted up!')
         elif type_ == EventType.TOUCH:
             print('A button (id: %d) was touched on page %d' % (data.component_id, data.page_id))
+            self.data = data
+            self.type_ = type_
             self.current_page_id = data.page_id
             self.loop.call_soon_threadsafe(self.button_event.set)
             
@@ -738,6 +740,16 @@ class pi_ager_cl_nextion( threading.Thread ):
         else:    
             self.current_page_id = 13
         time.sleep(4)
+    
+    def reset_page_after_powergood(self):
+        if self.client != None:
+            if self.data == None:
+                # simulate touch event with page_id = 1, component_id = 7 and touch_event = 0x65
+                Touch = namedtuple("Touch", "page_id component_id touch_event")
+                self.data = Touch(1, 7, 1)
+            else:
+                print('Simulate button (id: %d) was touched on page %d' % (self.data.component_id, self.data.page_id))
+            self.loop.call_soon_threadsafe(self.button_event.set)
         
     def stop_loop(self):
         logging.info('in stop_loop')
@@ -755,11 +767,11 @@ def main():
     nextion_thread = pi_ager_cl_nextion()
     # signal.signal(signal.SIGINT, nextion_thread.inner_ctrl_c_signal_handler)
     nextion_thread.start()
-    
+    i = 0
     try:
         while True:
             time.sleep(1)
-            
+
     except KeyboardInterrupt:
         print("Ctrl-c received! Sending Stop to thread...")
         # show offline state on display
@@ -772,6 +784,7 @@ def main():
     nextion_thread.join()
     print('thread finished.')
     
+
 if __name__ == '__main__':
     main()
         

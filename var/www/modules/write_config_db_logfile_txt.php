@@ -22,8 +22,10 @@
         $dehumidifier_modus_config = $_POST['dehumidifier_modus_config'];
         $failure_temperature_delta_config = $_POST['failure_temperature_delta_config'];
         $failure_humidity_delta_config = $_POST['failure_humidity_delta_config'];
+        $internal_temperature_low_limit = $_POST['internal_temperature_low_limit_config'];
+        $internal_temperature_high_limit = $_POST['internal_temperature_high_limit_config'];
+        $internal_temperature_hysteresis = $_POST['internal_temperature_hysteresis_config'];
         
-
         $ConfigInputIsValid = TRUE;
         foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
             if ($CheckInput != 'config_form_submit') {
@@ -48,7 +50,11 @@
                 $switch_on_uv_hour_config >= 0 && $switch_on_uv_hour_config < 24 && $switch_on_uv_minute_config >= 0 && $switch_on_uv_minute_config < 60 && // UV Uhrzeit
                 $light_period_config < 1441 && $light_period_config > -1 &&  (($light_period_config+$light_duration_config) > 0) &&                 // Prüfung Intervall Licht
                 $light_duration_config < 1441 && $light_duration_config > -1  &&                              // Prüfung Dauer Licht
-                $switch_on_light_hour_config >= 0 && $switch_on_light_hour_config < 24 && $switch_on_light_minute_config >= 0 && $switch_on_light_minute_config < 60 // Licht Uhrzeit
+                $switch_on_light_hour_config >= 0 && $switch_on_light_hour_config < 24 && $switch_on_light_minute_config >= 0 && $switch_on_light_minute_config < 60 && // Licht Uhrzeit
+                $internal_temperature_low_limit >= -11 && $internal_temperature_low_limit <= 30 && // Temperatur low limit Überwachung
+                $internal_temperature_high_limit >= -11 && $internal_temperature_high_limit <= 30 && // Temperatur high limit Überwachung
+                $internal_temperature_high_limit > $internal_temperature_low_limit &&
+                $internal_temperature_hysteresis >= 1 && $internal_temperature_hysteresis <= 10  // Temperatur hysteresis für Event Generierung
             )
             {
                 # Eingestellte Werte in config/config.json und logs/logfile.txt speichern
@@ -56,7 +62,7 @@
                             $switch_on_humidifier_config, $switch_off_humidifier_config, $delay_humidify_config, $uv_modus_config, $uv_duration_config,
                             $uv_period_config, $switch_on_uv_hour_config, $switch_on_uv_minute_config, $light_modus_config, $light_duration_config,
                             $light_period_config, $switch_on_light_hour_config, $switch_on_light_minute_config, $dehumidifier_modus_config,
-                            $failure_temperature_delta_config, $failure_humidity_delta_config);
+                            $failure_temperature_delta_config, $failure_humidity_delta_config, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis);
                 logger('DEBUG', 'configvalues saved');
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus
