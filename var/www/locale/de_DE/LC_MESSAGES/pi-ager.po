@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
 "POT-Creation-Date: 2021-10-31 14:06+0100\n"
-"PO-Revision-Date: 2021-10-31 14:26+0100\n"
+"PO-Revision-Date: 2021-10-31 15:05+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -952,7 +952,7 @@ msgstr "Interne Temperatur Grenzwerte"
 
 #: config.php:253
 msgid "low temperature limit"
-msgstr "Temp. Grenzwert Hoch"
+msgstr "Temp. Grenzwert Tief"
 
 #: config.php:257
 msgid "high temperature limit"
