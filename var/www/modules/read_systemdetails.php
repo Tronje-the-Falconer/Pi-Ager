@@ -3,7 +3,7 @@
 # http://elinux.org/RPi_HardwareHistory#Board_Revision_History and
 # https://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
 # https://www.raspberrypi.org/documentation/hardware/raspberrypi/revision-codes/README.md
-# Stand 21.06.2017
+# Stand 31.10.2021
 global $piversion, $piager_version;
 $pirevision = get_table_value($system_table, $pi_revision_key);
 $piager_version = get_table_value($system_table, $pi_ager_version_key);
@@ -60,6 +60,8 @@ switch ($pirevision){
         return $piversion = 'Raspberry Pi Zero W v.1.1 </br> (Sony, UK) </br> 512MB RAM';
     case '920093':
         return $piversion = 'Raspberry Pi Zero v.1.3 </br> (Embest, China) </br> 512MB RAM';
+    case '902120':
+        return $piversion = 'Raspberry Pi Zero 2 W Rev 1.0 </br> (Sony UK) </br> 512MB RAM';        
     case 'a01040':
         return $piversion = 'Raspberry Pi 2 Model B v.1.0 </br>(Sony, UK)<br> 1GB RAM';
     case 'a01041':

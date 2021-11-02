@@ -167,6 +167,8 @@ class cl_scale(cl_sensor_hx711):
 
     def getWeightFiltered(self):
         """Useful for continuous measurements."""
+        while len(self.history) < 3:
+            self.getWeightAppendHistory()
         self.getWeightAppendHistory()
         # cut to old values
         self.history = self.history[-self.samples:]

@@ -178,7 +178,15 @@
                 $filtered[$i] = Null;
             }
             else {
-                $filtered[$i] = $sum / $cnt_sum;
+                if ($dataset[$i] == Null) {
+                    $filtered[$i] = Null;
+                }
+                else {
+                    $filtered[$i] = $sum / $cnt_sum;
+                }
+            }
+            if ($filtered[$i] == Null and $dataset[$i] != Null) {
+                $filtered[$i] = $dataset[$i];
             }
         }
         return $filtered;

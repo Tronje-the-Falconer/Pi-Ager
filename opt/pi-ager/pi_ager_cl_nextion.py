@@ -11,7 +11,8 @@ if __name__ == '__main__':
     # import globals
     # init global threading.lock
     globals.init()
-    
+
+from abc import ABC   
 import subprocess
 import time
 import asyncio
@@ -47,7 +48,7 @@ class Timer:
     def cancel(self):
         self._task.cancel()
 
-class pi_ager_cl_nextion( threading.Thread ):
+class cl_nextion( threading.Thread ):
 
     def __init__( self ):
         super().__init__() 
@@ -761,12 +762,37 @@ class pi_ager_cl_nextion( threading.Thread ):
         self.loop.stop()
         logging.info('after self.loop.stop')
 
+class cl_fact_nextion(ABC):
+    __o_instance = None
+    
+    @classmethod
+    def set_instance(self, i_instance):
+        """
+        Factory method to set the nextion instance
+        """
+        cl_fact_nextion.__o_instance = i_instance
         
+    @classmethod        
+    def get_instance(self):
+        """
+        Factory method to get the nextion instance
+        """
+        if cl_fact_nextion.__o_instance is not None:
+            return(cl_fact_nextion.__o_instance)
+        cl_fact_nextion.__o_instance = cl_nextion()
+        cl_fact_logger.get_instance().debug('nextion factory done')
+        return(cl_fact_nextion.__o_instance)
+
+    def __init__(self):
+        """
+        Constructor nextion factory
+        """
+        pass    
+            
         
 def main():
-    nextion_thread = pi_ager_cl_nextion()
     # signal.signal(signal.SIGINT, nextion_thread.inner_ctrl_c_signal_handler)
-    nextion_thread.start()
+    cl_fact_nextion.get_instance().start()
     i = 0
     try:
         while True:
@@ -775,13 +801,13 @@ def main():
     except KeyboardInterrupt:
         print("Ctrl-c received! Sending Stop to thread...")
         # show offline state on display
-        nextion_thread.prep_show_offline()
+        cl_fact_nextion.get_instance().prep_show_offline()
         # set stop event
-        nextion_thread.loop.call_soon_threadsafe(nextion_thread.stop_event.set)
+        cl_fact_nextion.get_instance().loop.call_soon_threadsafe(cl_fact_nextion.get_instance().stop_event.set)
         # time.sleep(1)
-        nextion_thread.stop_loop()
+        cl_fact_nextion.get_instance().stop_loop()
             
-    nextion_thread.join()
+    cl_fact_nextion.get_instance().join()
     print('thread finished.')
     
 

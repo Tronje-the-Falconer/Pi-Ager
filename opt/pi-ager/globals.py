@@ -11,5 +11,5 @@ def init():
     lock = threading.Lock()
     global hands_off_light_switch
     hands_off_light_switch = False
-    nextion_thread = None
+
     

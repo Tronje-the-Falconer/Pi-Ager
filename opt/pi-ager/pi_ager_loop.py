@@ -14,8 +14,7 @@ import pi_ager_database
 import pi_ager_names
 import pi_ager_paths
 import pi_ager_init
-# import pi_ager_logging
-# import pi_ager_logging
+
 import pi_ager_gpio_config
 import pi_ager_organization
 import pi_ager_mcp3204
@@ -26,14 +25,12 @@ from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type, cl_fact_second_sensor_type
 from sensors.pi_ager_cl_active_sensor import cl_fact_active_main_sensor, cl_fact_active_second_sensor
-from sensors.pi_ager_cl_i2c_bus import  cl_fact_i2c_bus_logic
+from sensors.pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 
 from main.pi_ager_cl_logger import cl_fact_logger
-import globals
+from pi_ager_cl_nextion import cl_fact_nextion
 
-# global logger
-# logger = pi_ager_logging.create_logger(__name__)
-# logger.debug('logging initialised')
+import globals
 
 system_shutdown = False
 
@@ -88,7 +85,6 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     """
     try to read sensordata
     """
-    # global logger
     global sensor_humidity_big
     global sensor_temperature_big 
     global sensor_dewpoint_big
@@ -528,8 +524,8 @@ def generate_power_monitor_events():
         # generate event
         try:
             cl_fact_logger.get_instance().info('Power monitor signals powergood')
-            cl_fact_logic_messenger().get_instance().handle_event('powergood') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
-            globals.nextion_thread.reset_page_after_powergood() #activate last current page
+            cl_fact_logic_messenger().get_instance().handle_event('powergood')  #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+            cl_fact_nextion.get_instance().reset_page_after_powergood()         #activate last current page
         except Exception as cx_error:
             exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
             pass

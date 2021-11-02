@@ -33,12 +33,13 @@ import pi_revision
 from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
+from pi_ager_cl_nextion import cl_fact_nextion
 
 import signal
 import threading
 import pi_ager_cl_scale
 import pi_ager_cl_agingtable
-import pi_ager_cl_nextion
+
 
 # catch signal.SIGTERM and signal.SIGINT when killing main to gracefully shutdown system
 def signal_handler(signum, frame):
@@ -76,8 +77,7 @@ agingtable_thread.start()
 cl_fact_logger.get_instance().debug('Starting agingtable thread done' + time.strftime('%H:%M:%S', time.localtime()))
 
 cl_fact_logger.get_instance().debug('Starting nextion display thread ' + time.strftime('%H:%M:%S', time.localtime()))
-globals.nextion_thread = pi_ager_cl_nextion.pi_ager_cl_nextion()
-globals.nextion_thread.start()
+cl_fact_nextion.get_instance().start()
 cl_fact_logger.get_instance().debug('Starting nextion display thread done' + time.strftime('%H:%M:%S', time.localtime()))
 
 exception_known = True
@@ -119,14 +119,15 @@ finally:
     scale1_thread.stop_received = True
     scale2_thread.stop_received = True
     agingtable_thread.stop_received = True
-    globals.nextion_thread.prep_show_offline()
-    globals.nextion_thread.loop.call_soon_threadsafe(globals.nextion_thread.stop_event.set)
-    globals.nextion_thread.stop_loop()
+
+    cl_fact_nextion.get_instance().prep_show_offline()
+    cl_fact_nextion.get_instance().loop.call_soon_threadsafe(cl_fact_nextion.get_instance().stop_event.set)
+    cl_fact_nextion.get_instance().stop_loop()
     
     scale1_thread.join()
     scale2_thread.join()
     agingtable_thread.join()
-    globals.nextion_thread.join()  
+    cl_fact_nextion.get_instance().join()
     
     cl_fact_logger.get_instance().debug('threads terminated')
     

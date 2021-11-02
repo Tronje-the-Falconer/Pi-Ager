@@ -662,8 +662,8 @@
                                                         document.getElementById("upload_nextion_firmware").disabled = false;
                                                     }
                                                 </script>
-                                                <button class="art-button" disabled id="upload_nextion_firmware" form="nextion" name="upload_nextion_firmware" value="upload_nextion_firmware" onclick="enableProgrammingButton()">upload</button>
-                                                <script>
+                                                <button class="art-button" disabled id="upload_nextion_firmware" form="nextion" name="upload_nextion_firmware" value="upload_nextion_firmware" onclick="return confirm('<?php echo _('upload new firmware file?');?>');"><?php echo _('upload'); ?></button>
+<!--                                                <script>
                                                     function enableProgrammingButton(){
                                                         if (confirm('upload new firmware file?')) { 
                                                             //document.getElementById("program_firmware").disabled = false;
@@ -671,7 +671,7 @@
                                                         }
                                                         return false;
                                                     }
-                                                </script>
+                                                </script> -->
                                             </td>
                                         </tr>
                                         
