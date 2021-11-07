@@ -171,8 +171,18 @@ class cl_nextion( threading.Thread ):
                 print('waiting for button pressed ...')
                 await self.button_event.wait()
                 print('... got it!')
-
-                if self.data.page_id == 1 and self.data.component_id == 8:
+                
+                if self.data.component_id == -1:    # component_id = -1 to signal powergood event happened. Activate last active page_id
+                    cmd = 'page ' + str(self.data.page_id)
+                    await self.client.command(cmd)
+                    self.current_page_id = self.data.page_id
+                elif self.data.page_id == 0:
+                    await self.client.command('page 1')
+                    self.current_page_id = 1
+                elif self.data.page_id == 8:
+                    await self.client.command('page 9')
+                    self.current_page_id = 9
+                elif self.data.page_id == 1 and self.data.component_id == 8:
                     await self.control_light_status()
                 elif self.data.page_id == 1 and self.data.component_id == 7:
                     await self.client.command('page 2')
@@ -192,6 +202,7 @@ class cl_nextion( threading.Thread ):
                     await self.client.command('page 7')
                     self.current_page_id = 7  
                 elif self.data.page_id == 2 and self.data.component_id == 5:
+                    await self.init_info_page_values()
                     await self.client.command('page 6')
                     self.current_page_id = 6  
                 elif self.data.page_id == 2 and self.data.component_id == 7:
@@ -268,6 +279,7 @@ class cl_nextion( threading.Thread ):
                     await self.client.command('page 15')
                     self.current_page_id = 15
                 elif self.data.page_id == 10 and self.data.component_id == 4:   # goto info_steak
+                    await self.init_info_page_values()
                     await self.client.command('page 14')
                     self.current_page_id = 14
                 elif self.data.page_id == 10 and self.data.component_id == 8:   # goto control_steak
@@ -353,7 +365,7 @@ class cl_nextion( threading.Thread ):
         except Exception as e:
             return ''
     
-    async def init_display_values(self):
+    async def init_info_page_values(self):
         version = pi_ager_database.get_table_value(pi_ager_names.system_table, pi_ager_names.pi_ager_version_key )
         display_type = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.tft_display_type_key )
         
@@ -377,6 +389,10 @@ class cl_nextion( threading.Thread ):
         
         await self.client.set('values.status_light.val', 0)
         
+    
+    async def init_display_values(self):
+        await self.init_info_page_values()
+
         self.current_page_id = 1
         await self.client.set('sleep', 0)
         await self.client.command('page 1') 
@@ -734,6 +750,7 @@ class cl_nextion( threading.Thread ):
             else:
                 await self.client.command('page 13')
             await self.client.set('thsp', 0)
+            self.current_page_id = None
             
     def prep_show_offline(self):
         if self.current_theme == 'fridge':
@@ -744,12 +761,18 @@ class cl_nextion( threading.Thread ):
     
     def reset_page_after_powergood(self):
         if self.client != None:
-            if self.data == None:
-                # simulate touch event with page_id = 1, component_id = 7 and touch_event = 0x65
+            if self.data == None:   # assume current page = 1
+                # simulate touch event with page_id = 0, component_id = 1 and touch_event = 1 to enter main_fridge (page 1)
                 Touch = namedtuple("Touch", "page_id component_id touch_event")
-                self.data = Touch(1, 7, 1)
+                self.data = Touch(0, 1, 1)
+                print('set Display page 1 active')
+                cl_fact_logger.get_instance().info('Nextion client after powergood. Page 1 now active page')
             else:
-                print('Simulate button (id: %d) was touched on page %d' % (self.data.component_id, self.data.page_id))
+                print('Simulate button id = -1 on page %d' % (self.current_page_id))
+                cl_fact_logger.get_instance().info('Nextion client after powergood. Simulate touch event on button id = -1' + ' on page id ' + str(self.current_page_id))
+                Touch = namedtuple("Touch", "page_id component_id touch_event")
+                self.data = Touch(self.current_page_id, -1, 1)            
+            
             self.loop.call_soon_threadsafe(self.button_event.set)
         
     def stop_loop(self):
@@ -795,6 +818,13 @@ def main():
     cl_fact_nextion.get_instance().start()
     i = 0
     try:
+        while i < 30:
+            i = i + 1
+            time.sleep(1)
+            
+        # simulate powerfail, set last active page  
+        # cl_fact_nextion.get_instance().reset_page_after_powergood()
+        
         while True:
             time.sleep(1)
 

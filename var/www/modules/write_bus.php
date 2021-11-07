@@ -7,6 +7,7 @@
         unset($_POST['change_sensorbus_submit']);
         
         $old_sensorsecondtype = get_table_value($config_settings_table, $sensorsecondtype_key);
+        $old_sensortype = get_table_value($config_settings_table, $sensortype_key);
         $bus = $_POST['bus'];
         $sensornum = $_POST['sensortype_admin'];
         if (isset ($_POST['sensorsecondtype_admin'])){
@@ -39,8 +40,14 @@
             header("Location: /shutdown.php");
             die(); 
         }
+        else if ($old_sensortype != $sensornum) {
+            // echo 'main sensor changed<br>';
+            shell_exec('sudo /var/sudowebscript.sh shutdown > /dev/null 2>&1 &');
+            header("Location: /shutdown.php");
+            die(); 
+        }            
         else {
-            logger('DEBUG', 'sensorbus is already correct');
+            logger('DEBUG', 'no sensor changed, sensorbus is already correct');
         }
 #        print '<p id=\'info-message\' style=\'color: #ff0000; font-size: 20px;\'><b>'. (_("system shutdown in 10 seconds")) .'</b><br>' . date("m/d/y h:i:s a") . ' </p>';
 

@@ -9,7 +9,7 @@
                                 <h2 class="art-postheader"><?php echo _('log entries'); ?></h2>
                                 <div class="hg_container" style="text-align: left;">
                                     <form  method="post">
-                                        <table style="width: 100%" class="miniature_writing">
+                                        <table style="width: 100%;" class="miniature_writing">
                                             <tr>
                                                 <td>
                                                     <?php 
@@ -37,11 +37,20 @@
                                                         else {
                                                             echo '<img src="images/icons/check_false_42x42.png"> '._('file is not writable').'<br />';
                                                         }
+                                                        echo '<br />';
                                                     ?>
                                                 </td>
-                                                <td><button class="art-button" name="save_logfiles" onclick="return confirm(<?php echo _('save all logfiles?'); ?>);"><?php echo _('save logfiles'); ?></button></td>
-                                                <td><button class="art-button" name="clear_logfile" onclick="return confirm(<?php echo _('clear all logfile data?'); ?>);"><?php echo _('delete data'); ?></button></td>
-                                                <td><button class="art-button" name="view_pi_ager_logfile" onClick="window.open('/logs/pi-ager.log');"><?php echo _('open pi-ager.log in new tab'); ?></button></td>
+                                            </tr>
+                                        </table>
+                                        <table style="width: 100%;" class="miniature_writing">
+                                            <tr>
+                                                <td style="text-align: left;">
+                                                    <div style="width: 100%;">
+                                                        <button class="art-button" name="save_logfiles" onclick="return confirm(<?php echo _('save all logfiles?'); ?>);"><?php echo _('save logfiles'); ?></button>
+                                                        <button class="art-button" name="clear_logfile" onclick="return confirm(<?php echo _('clear all logfile data?'); ?>);"><?php echo _('delete data'); ?></button>
+                                                        <button class="art-button" name="view_pi_ager_logfile" onClick="window.open('/logs/pi-ager.log');"><?php echo _('open pi-ager.log in new tab'); ?></button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         </table>
                                     </form>

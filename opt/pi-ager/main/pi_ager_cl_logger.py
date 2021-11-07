@@ -65,7 +65,7 @@ class cl_logger:
         self.logger.critical(logsting, *args, **kwargs)
         
     def exception(self, logsting, *args, **kwargs):
-        self.logger.critical(logsting, *args, **kwargs)
+        self.logger.exception(logsting, *args, **kwargs)
                                     
     def get_logginglevel(self,loglevelstring):        # Builds a dict of dicts it_table from mysql db
         """

@@ -491,10 +491,12 @@ def generate_ups_bat_events():
         try:
             cl_fact_logger.get_instance().info('UPS battery is low')
             cl_fact_logic_messenger().get_instance().handle_event('ups_bat_low') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+            cl_fact_logger.get_instance().info('Shutdown Pi-Ager now')
+            do_system_shutdown()
         except Exception as cx_error:
             exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
             pass
-            
+        
     if ups_bat_low == False and ups_bat_low_temp == True:
         # generate event
         try:
