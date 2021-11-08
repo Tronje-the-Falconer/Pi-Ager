@@ -17,8 +17,9 @@ Wenn jemand fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möc
 #### Raspberry Pi
 
 
-* Aktuelle Softeareversion: 3.3.0 
-* [Pi zero W](https://shop.pimoroni.de/products/raspberry-pi-zero-w) Dieses ist die empfohlene Variante da die Platine dafür ausgelegt ist und man meistens auch das integrierte Wlan Modul nutzen kann.
+* Aktuelle Softeareversion: 3.3.2
+*  NEU [Pi zero 2 W](https://www.reichelt.de/de/de/raspberry-pi-zero-2-w-4x-1-ghz-512-mb-ram-wlan-bt-rasp-pi-zero2-w-p313902.html?&trstct=pos_0&nbc=1) Dieses ist die empfohlene Variante da die Pi-Ager Platine dafür ausgelegt ist, führt zu schnelleren Aufbauzeiten des Userintercace und man auch das integrierte Wlan Modul nutzen kann.
+* [Pi zero W](https://shop.pimoroni.de/products/raspberry-pi-zero-w) Die Platine ist dafür ausgelegt und man kann auch das integrierte Wlan Modul nutzen.
 * !!! Achtung keinen Zero WH kaufen da diese Variannte die Stiftleiste schon draufgelötet hat !!!
 * Alternative 1: 
   * [Pi zero](http://www.whereismypizero.com/) Kann auch genutzt werden, dann braucht man aber ein entsprechendes [Wlan  Modul](https://www.reichelt.de/WLAN-Adapter/EDIMAX-EW-7811UN/3/index.html?&ARTICLE=99944) mit [Adapterkabel](https://www.amazon.de/gp/product/B002P4TO3I/ref=oh_aui_detailpage_o08_s00?ie=UTF8&psc=1) (siehe auch unten)
@@ -125,9 +126,13 @@ Wer also selbst löten kann, baucht folgende Komponenten:
 #### USV Modul 
 Es besteht die Option ein USV (unterbrechungsfreie Spannungsversorgung) Modul einzusetzen, damit bei einem möglichen Spannungsausfall ein Alarm ausgelöst, oder z.B. eine Nachricht verschickt werden kann. 
 !!! Achtung !!!
-1. Da das USV Modul nur einen begrenzten Strom liefern kann, muss man entsprehend vorsichtig sein, wenn man weitere Komponennten direkt an den Raspberry anschließt. Otipmal für den Einsatz eines USV Moduls ist die Verwendung des Raspberry Zero da dieser eine geringere Strohmaufnahme hat.
+1. Tests haben ergeben ,dass es bei bestimmten Kombinationen USV Modul / Akku und Ladezustand des Akkus sehr leicht zu einenm Schaden das USV Moduls kommen kann, wenn man bei einem rel. leeren akku das System wieder mit Spannung versorgt und startet. 
 
-2. Unbedingt auf die Polarität des Akkus achten ( siehe auch Hinweis auf der Herstelleseite - Link siehe unten - ). Es gibt Hersteller bei denen der Stecker anders belegt ist, in dem Fall würde man beim Verbinden des Akkus mit dem USV Modul, dieses sofort zerstören.
+!!!! Daher ist es bis auf Weiteres nicht empfohlen das Modul einzusetzen !!!!
+
+2. Da das USV Modul nur einen begrenzten Strom liefern kann, muss man entsprehend vorsichtig sein, wenn man weitere Komponennten direkt an den Raspberry anschließt. Otipmal für den Einsatz eines USV Moduls ist die Verwendung des Raspberry Zero da dieser eine geringere Strohmaufnahme hat.
+
+3. Unbedingt auf die Polarität des Akkus achten ( siehe auch Hinweis auf der Herstelleseite - Link siehe unten - ). Es gibt Hersteller bei denen der Stecker anders belegt ist, in dem Fall würde man beim Verbinden des Akkus mit dem USV Modul, dieses sofort zerstören.
 
 
 * USV Modul 
