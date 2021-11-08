@@ -126,7 +126,7 @@ Wer also selbst löten kann, baucht folgende Komponenten:
 #### USV Modul 
 Es besteht die Option ein USV (unterbrechungsfreie Spannungsversorgung) Modul einzusetzen, damit bei einem möglichen Spannungsausfall ein Alarm ausgelöst, oder z.B. eine Nachricht verschickt werden kann. 
 !!! Achtung !!!
-1. Tests haben ergeben ,dass es bei bestimmten Kombinationen USV Modul / Akku und Ladezustand des Akkus sehr leicht zu einenm Schaden das USV Moduls kommen kann, wenn man bei einem rel. leeren akku das System wieder mit Spannung versorgt und startet. 
+1. Tests haben ergeben, dass es bei bestimmten Kombinationen USV Modul / Akku und Ladezustand des Akkus sehr leicht zu einem Schaden das USV Moduls kommen kann, wenn man bei einem rel. leeren Akku das System wieder mit Spannung versorgt und startet. 
 
 !!!! Daher ist es bis auf Weiteres nicht empfohlen das Modul einzusetzen !!!!
 
