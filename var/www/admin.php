@@ -744,7 +744,9 @@
                                                 //console.log('programming :' + msg);
                                                 try {
                                                     programming_status = JSON.parse(msg);
-                                                    progress = programming_status.progress.toString();
+                                                    // progress in 0.2 % units
+                                                    progress_tmp = programming_status.progress/5.0;
+                                                    progress = progress_tmp.toFixed(1);
                                                     status = programming_status.status;
                                                     //console.log('second ajax function done. status :' + status);
                                                     $('#upload_progress').css('width', progress + '%');
@@ -764,7 +766,7 @@
                                                 second_action = false;
                                             });
                                             
-                                            await new Promise(resolve => setTimeout(resolve, 3000));
+                                            await new Promise(resolve => setTimeout(resolve, 1000));
                                             
                                             if (second_action == false || status == 'failed') {
                                                 //console.log('break 1');
@@ -788,7 +790,7 @@
                                     
                                     async function move_bar() {
                                         $('#progress_label').css('border', '3px solid #8c8c8c');
-                                        $('#progress_label').attr('data-label', 'ready');
+                                        $('#progress_label').attr('data-label', 'preparing...');
                                         $('#upload_progress').css('width', '0%');
                                         $("#program_firmware").attr("disabled", true);
                                         if (confirm('Pi-Ager service will be stopped to flash the HMI display firmware.\nContinue ?')) {

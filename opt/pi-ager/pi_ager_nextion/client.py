@@ -397,11 +397,12 @@ class Nextion:
                 )
 
             uploaded_bytes += len(buf)
-            uploaded_percentage_tmp = int(uploaded_bytes / file_size * 100)
+            uploaded_percentage_tmp = int(uploaded_bytes / file_size * 500) # every 0.2 %
             if uploaded_percentage_tmp != uploaded_percentage:
                 uploaded_percentage = uploaded_percentage_tmp
-                logger.info("Uploaded: %d%%", uploaded_percentage)
-                pi_ager_database.update_nextion_table(uploaded_percentage, "running")
+                logger.info("Uploaded: %.1f %%" % (uploaded_percentage/5.0))
+                pi_ager_database.update_nextion_table(uploaded_percentage, "running") # every 0.2 % 
                 
         logger.info("Successfully uploaded %d bytes" % uploaded_bytes)
-        pi_ager_database.update_nextion_table(100, "success")
+        pi_ager_database.update_nextion_table(500, "success")
+        
