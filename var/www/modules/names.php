@@ -141,6 +141,7 @@ $tft_display_type_key = 'tft_display_type';
 $internal_temperature_low_limit_key = 'internal_temperature_low_limit';
 $internal_temperature_high_limit_key = 'internal_temperature_high_limit';
 $internal_temperature_hysteresis_key = 'internal_temperature_hysteresis';
+$shutdown_on_batlow_key = 'shutdown_on_batlow';
 
 #-----------------------------table fields;
 $key_field = 'key';

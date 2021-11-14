@@ -436,6 +436,7 @@ UPDATE config SET value='0.0' WHERE key = 'meat3_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'meat4_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'secondsensortype';
 UPDATE config SET value='1.0' WHERE key = 'tft_display_type';
+UPDATE config SET value='0.0' WHERE key = 'shutdown_on_batlow';
 
 DELETE FROM config_nfs_backup;
 delete FROM config_email_server;

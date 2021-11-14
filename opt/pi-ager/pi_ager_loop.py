@@ -48,9 +48,12 @@ internal_temperature_hysteresis = None
 
 #-------------------------------------------------------------------------------------
 # for UPS Bat Low, Power Monitor and Switch, check to issue events
-ups_bat_low = True   # akku ok
-power_monitor = True
-pi_switch = True
+ups_bat_low = True      # akku ok
+bat_low_true_count = 0  # counter for bat_low true
+bat_low_false_count = 0 # counter for bat_low false
+bat_low_count_max = 3   # max count for bat_low true and false 
+power_monitor = True    # power supply ok
+pi_switch = True        # switch open
 #-------------------------------------------------------------------------------------
 
 
@@ -482,23 +485,39 @@ def do_system_shutdown():
      system_shutdown = True
 
 def generate_ups_bat_events():
-    global ups_bat_low
+    global ups_bat_low          # akku ok
+    global bat_low_true_count   # counter for bat_low true
+    global bat_low_false_count  # counter for bat_low false
+    global bat_low_count_max    # max count for bat_low true and false 
     
+    shutdown_on_batlow = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.shutdown_on_batlow_key))
     ups_bat_low_temp = pi_ager_gpio_config.check_ups_bat_low()
     cl_fact_logger.get_instance().debug('UPS battery state is ' + ('ok' if ups_bat_low_temp else 'low'))
-    if ups_bat_low == True and ups_bat_low_temp == False:
+    
+    if ups_bat_low_temp == False:
+        bat_low_false_count += 1
+        bat_low_true_count = 0
+    else:
+        bat_low_true_count += 1
+        bat_low_false_count = 0
+        
+    if ups_bat_low == True and bat_low_false_count >= bat_low_count_max:
         # generate event
+        ups_bat_low = False
         try:
             cl_fact_logger.get_instance().info('UPS battery is low')
             cl_fact_logic_messenger().get_instance().handle_event('ups_bat_low') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
-            cl_fact_logger.get_instance().info('Shutdown Pi-Ager now')
-            do_system_shutdown()
+            if shutdown_on_batlow == 1:
+                cl_fact_logger.get_instance().info('Shutdown Pi-Ager now')
+                # do_system_shutdown()
+                os.system("shutdown -h now")
         except Exception as cx_error:
             exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
             pass
         
-    if ups_bat_low == False and ups_bat_low_temp == True:
+    if ups_bat_low == False and bat_low_true_count >= bat_low_count_max:
         # generate event
+        ups_bat_low = True
         try:
             cl_fact_logger.get_instance().info('UPS battery is ok')
             cl_fact_logic_messenger().get_instance().handle_event('ups_bat_ok') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
@@ -506,8 +525,6 @@ def generate_ups_bat_events():
             exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
             pass
                         
-    ups_bat_low = ups_bat_low_temp
-    
 def generate_power_monitor_events():
     global power_monitor
     
@@ -675,9 +692,12 @@ def doMainLoop():
     global internal_temperature_high_limit
     global internal_temperature_hysteresis
     
-    global ups_bat_low   # True if akku ok
-    global power_monitor
-    global pi_switch
+    global ups_bat_low          # akku ok
+    global bat_low_true_count   # counter for bat_low true
+    global bat_low_false_count  # counter for bat_low false
+    global bat_low_count_max    # max count for bat_low true and false 
+    global power_monitor        # power supply ok
+    global pi_switch            # switch open
     #-------------------------------------------
     
     # Pruefen Sensor, dann Settings einlesen
@@ -704,10 +724,13 @@ def doMainLoop():
     internal_temperature_high_limit = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.internal_temperature_high_limit_key)
     internal_temperature_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.internal_temperature_hysteresis_key) 
 
-    # init ups_bat_low, power_monitor, pi_switch
-    ups_bat_low = True
-    power_monitor = True
-    pi_switch = True
+    # for UPS Bat Low, Power Monitor and Switch, check to issue events
+    ups_bat_low = True      # akku ok
+    bat_low_true_count = 0  # counter for bat_low true
+    bat_low_false_count = 0 # counter for bat_low false
+    bat_low_count_max = 3   # max count for bat_low true and false 
+    power_monitor = True    # power supply ok
+    pi_switch = True        # switch open
     
     try:
         while status_pi_ager == 1 and not system_shutdown:

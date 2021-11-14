@@ -25,6 +25,7 @@
     $internal_temperature_low_limit = get_table_value($config_settings_table, $internal_temperature_low_limit_key);
     $internal_temperature_high_limit = get_table_value($config_settings_table, $internal_temperature_high_limit_key);
     $internal_temperature_hysteresis = get_table_value($config_settings_table, $internal_temperature_hysteresis_key);
+    $shutdown_on_batlow =  intval(get_table_value($config_settings_table, $shutdown_on_batlow_key));
     
     $referenceunit_scale1 = number_format(floatval(get_table_value($settings_scale1_table,$referenceunit_key)), 1, '.', '');
     $offset_scale1 = number_format(floatval(get_table_value($settings_scale1_table, $offset_key)), 1, '.', '');

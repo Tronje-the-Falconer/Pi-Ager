@@ -25,6 +25,7 @@
         $internal_temperature_low_limit = $_POST['internal_temperature_low_limit_config'];
         $internal_temperature_high_limit = $_POST['internal_temperature_high_limit_config'];
         $internal_temperature_hysteresis = $_POST['internal_temperature_hysteresis_config'];
+        $shutdown_on_batlow_config = $_POST['shutdown_on_batlow_config'];
         
         $ConfigInputIsValid = TRUE;
         foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
@@ -62,7 +63,8 @@
                             $switch_on_humidifier_config, $switch_off_humidifier_config, $delay_humidify_config, $uv_modus_config, $uv_duration_config,
                             $uv_period_config, $switch_on_uv_hour_config, $switch_on_uv_minute_config, $light_modus_config, $light_duration_config,
                             $light_period_config, $switch_on_light_hour_config, $switch_on_light_minute_config, $dehumidifier_modus_config,
-                            $failure_temperature_delta_config, $failure_humidity_delta_config, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis);
+                            $failure_temperature_delta_config, $failure_humidity_delta_config, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
+                            $shutdown_on_batlow_config);
                 logger('DEBUG', 'configvalues saved');
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus

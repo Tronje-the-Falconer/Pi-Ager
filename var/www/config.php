@@ -275,8 +275,40 @@
                                                 <?php echo _('helptext_temperature_event_config');
                                                       echo '<br><br>'; ?>
                                                 <button class="art-button" type="button" onclick="help_temperature_event_config_noneFunction()"><?php echo _('close'); ?></button>
+                                            </p>
+                                            <hr>
+                                            <!----------------------------------------------------------------------------------------shutdown on battery low -->
+                                            <table style="width: 100%;table-layout: fixed;">
+                                                <?php
+                                                    if ($shutdown_on_batlow == 1) {
+                                                        $checked_shutdown_on_batlow_true = 'checked';
+                                                    }
+                                                    else {
+                                                        $checked_shutdown_on_batlow_true = '';
+                                                    }
+                                                ?>
+                                                <tr>
+                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('UPS battery'); ?></h3><img src="images/icons/battery_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_shutdown_on_batlow_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td><?php echo _('shutdown on battery low'); ?>:</td>
+                                                    <td>
+                                                        <input type="hidden" name="shutdown_on_batlow_config" value="0">
+                                                        <input type="checkbox" name="shutdown_on_batlow_config" value="1" <?php echo $checked_shutdown_on_batlow_true; ?>/>
+                                                    <td>
+                                                </tr>
+                                            </table>
+                                            <script>
+                                                function help_shutdown_on_batlow_config_blockFunction() {
+                                                    document.getElementById('help_shutdown_on_batlow_config').style.display = 'block';
+                                                }
+                                                function help_shutdown_on_batlow_config__noneFunction() {
+                                                    document.getElementById('help_shutdown_on_batlow_config').style.display = 'none';
+                                                }
+                                            </script> 
+                                            <p id="help_shutdown_on_batlow_config" class="help_p">
+                                                <?php echo _('helptext_shutdown_on_batlow_config');
+                                                      echo '<br><br>'; ?>
+                                                <button class="art-button" type="button" onclick="help_shutdown_on_batlow_config__noneFunction()"><?php echo _('close'); ?></button>
                                             </p>                                            
-
                                             <br>
                                             <br>
                                             <table style="width: 100%; align: center;">
