@@ -289,7 +289,7 @@
                                                 ?>
                                                 <tr>
                                                     <td rowspan="4" class="td_png_icon"><h3><?php echo _('UPS battery'); ?></h3><img src="images/icons/battery_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_shutdown_on_batlow_config_blockFunction()"><?php echo _('help'); ?></button></td>
-                                                    <td><?php echo _('shutdown on battery low'); ?>:</td>
+                                                    <td style="width: 50%;"><?php echo _('shutdown on battery low'); ?>:</td>
                                                     <td>
                                                         <input type="hidden" name="shutdown_on_batlow_config" value="0">
                                                         <input type="checkbox" name="shutdown_on_batlow_config" value="1" <?php echo $checked_shutdown_on_batlow_true; ?>/>

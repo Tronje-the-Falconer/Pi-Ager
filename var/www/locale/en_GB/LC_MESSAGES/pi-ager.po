@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-EN\n"
-"POT-Creation-Date: 2021-10-31 14:35+0100\n"
-"PO-Revision-Date: 2021-10-31 17:40+0100\n"
+"POT-Creation-Date: 2021-11-14 11:49+0100\n"
+"PO-Revision-Date: 2021-11-14 12:03+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.0\n"
-"X-Poedit-Basepath: ../../####GITHUB_PI-AGER/branches/entwicklung/var/www\n"
+"X-Poedit-Basepath: ../../../../../../svn/branches/entwicklung/var/www\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
@@ -60,10 +60,11 @@ msgstr ""
 
 #: admin.php:67 admin.php:129 admin.php:211 admin.php:337 admin.php:579
 #: admin.php:681 config.php:16 config.php:70 config.php:117 config.php:145
-#: config.php:184 config.php:223 config.php:252 manvals.php:22 manvals.php:51
-#: manvals.php:74 manvals.php:97 manvals.php:123 notification.php:191
-#: notification.php:383 notification.php:516 notification.php:615
-#: notification.php:721 notification.php:782 notification.php:843
+#: config.php:184 config.php:223 config.php:252 config.php:291 manvals.php:22
+#: manvals.php:51 manvals.php:74 manvals.php:97 manvals.php:123
+#: notification.php:191 notification.php:383 notification.php:516
+#: notification.php:615 notification.php:721 notification.php:782
+#: notification.php:843
 msgid "help"
 msgstr ""
 
@@ -107,10 +108,11 @@ msgstr ""
 
 #: admin.php:108 admin.php:205 admin.php:331 admin.php:357 admin.php:595
 #: admin.php:696 config.php:64 config.php:111 config.php:139 config.php:178
-#: config.php:217 config.php:246 config.php:277 manvals.php:44 manvals.php:67
-#: manvals.php:90 manvals.php:117 manvals.php:142 notification.php:204
-#: notification.php:396 notification.php:529 notification.php:628
-#: notification.php:734 notification.php:795 notification.php:856
+#: config.php:217 config.php:246 config.php:277 config.php:310 manvals.php:44
+#: manvals.php:67 manvals.php:90 manvals.php:117 manvals.php:142
+#: notification.php:204 notification.php:396 notification.php:529
+#: notification.php:628 notification.php:734 notification.php:795
+#: notification.php:856
 msgid "close"
 msgstr ""
 
@@ -235,7 +237,7 @@ msgstr ""
 "<br><br>"
 
 #: admin.php:361 admin.php:470 admin.php:493 admin.php:556 admin.php:628
-#: config.php:286 edit_agingtable.php:116 manvals.php:149 notification.php:141
+#: config.php:318 edit_agingtable.php:116 manvals.php:149 notification.php:141
 #: notification.php:327 notification.php:475 notification.php:583
 #: notification.php:708 notification.php:772 notification.php:833
 msgid "save"
@@ -425,6 +427,14 @@ msgstr ""
 msgid "start programming"
 msgstr ""
 
+#: admin.php:665
+msgid "upload new firmware file?"
+msgstr ""
+
+#: admin.php:665 settings.php:368
+msgid "upload"
+msgstr ""
+
 #: admin.php:694
 msgid "helptext_display"
 msgstr ""
@@ -449,19 +459,19 @@ msgstr ""
 "compressed with ZIP and then uploaded as pi-ager.zip.  \n"
 "<br><br>"
 
-#: admin.php:826
+#: admin.php:828
 msgid "python"
 msgstr ""
 
-#: admin.php:832
+#: admin.php:834
 msgid "ATTENTION: stop"
 msgstr ""
 
-#: admin.php:832
+#: admin.php:834
 msgid "stop"
 msgstr ""
 
-#: admin.php:833
+#: admin.php:835
 msgid "start"
 msgstr ""
 
@@ -661,18 +671,18 @@ msgstr ""
 #: diagrams.php:81 diagrams.php:104 index.php:177 index.php:930 index.php:931
 #: index.php:944 index.php:945 index.php:972 index.php:973 index.php:1003
 #: index.php:1004 manvals.php:99 manvals.php:103 manvals.php:125
-#: manvals.php:128 modules/write_config_db_logfile_txt.php:125
-#: modules/write_config_db_logfile_txt.php:126
-#: modules/write_config_db_logfile_txt.php:131
-#: modules/write_config_db_logfile_txt.php:141
-#: modules/write_config_db_logfile_txt.php:142
-#: modules/write_config_db_logfile_txt.php:147
-#: modules/write_config_db_logfile_txt.php:178
-#: modules/write_config_db_logfile_txt.php:187
+#: manvals.php:128 modules/write_config_db_logfile_txt.php:127
+#: modules/write_config_db_logfile_txt.php:128
+#: modules/write_config_db_logfile_txt.php:133
+#: modules/write_config_db_logfile_txt.php:143
+#: modules/write_config_db_logfile_txt.php:144
+#: modules/write_config_db_logfile_txt.php:149
+#: modules/write_config_db_logfile_txt.php:180
 #: modules/write_config_db_logfile_txt.php:189
-#: modules/write_config_db_logfile_txt.php:190
 #: modules/write_config_db_logfile_txt.php:191
 #: modules/write_config_db_logfile_txt.php:192
+#: modules/write_config_db_logfile_txt.php:193
+#: modules/write_config_db_logfile_txt.php:194
 #: modules/write_settings_db_logfile_txt.php:114
 #: modules/write_settings_db_logfile_txt.php:115
 #: modules/write_settings_db_logfile_txt.php:120
@@ -762,17 +772,17 @@ msgstr ""
 msgid "dehumidify"
 msgstr ""
 
-#: config.php:120 modules/write_config_db_logfile_txt.php:109
+#: config.php:120 modules/write_config_db_logfile_txt.php:111
 #: modules/write_settings_db_logfile_txt.php:98
 msgid "only exhaust"
 msgstr ""
 
-#: config.php:121 modules/write_config_db_logfile_txt.php:112
+#: config.php:121 modules/write_config_db_logfile_txt.php:114
 #: modules/write_settings_db_logfile_txt.php:101
 msgid "exhaust & dehumidifier"
 msgstr ""
 
-#: config.php:122 modules/write_config_db_logfile_txt.php:115
+#: config.php:122 modules/write_config_db_logfile_txt.php:117
 #: modules/write_settings_db_logfile_txt.php:104
 msgid "only dehumidifier"
 msgstr ""
@@ -803,15 +813,15 @@ msgstr ""
 msgid "uv"
 msgstr ""
 
-#: config.php:147 config.php:186 modules/write_config_db_logfile_txt.php:124
-#: modules/write_config_db_logfile_txt.php:140
+#: config.php:147 config.php:186 modules/write_config_db_logfile_txt.php:126
+#: modules/write_config_db_logfile_txt.php:142
 #: modules/write_settings_db_logfile_txt.php:113
 #: modules/write_settings_db_logfile_txt.php:130
 msgid "duration & period"
 msgstr ""
 
-#: config.php:148 config.php:187 modules/write_config_db_logfile_txt.php:129
-#: modules/write_config_db_logfile_txt.php:145
+#: config.php:148 config.php:187 modules/write_config_db_logfile_txt.php:131
+#: modules/write_config_db_logfile_txt.php:147
 #: modules/write_settings_db_logfile_txt.php:118
 #: modules/write_settings_db_logfile_txt.php:135
 msgid "duration & timestamp"
@@ -826,8 +836,8 @@ msgstr ""
 #: diagrams.php:1459 diagrams.php:1482 diagrams.php:1484 diagrams.php:1568
 #: diagrams.php:1570 diagrams.php:1593 diagrams.php:1595 diagrams.php:1680
 #: diagrams.php:1682 diagrams.php:1705 diagrams.php:1707 index.php:816
-#: manvals.php:103 manvals.php:128 modules/write_config_db_logfile_txt.php:119
-#: modules/write_config_db_logfile_txt.php:135
+#: manvals.php:103 manvals.php:128 modules/write_config_db_logfile_txt.php:121
+#: modules/write_config_db_logfile_txt.php:137
 #: modules/write_settings_db_logfile_txt.php:108
 #: modules/write_settings_db_logfile_txt.php:125
 msgid "off"
@@ -960,11 +970,30 @@ msgstr ""
 "next under / exceeding of the limit value.\n"
 "<br><br>"
 
-#: config.php:286 modules/write_config_db_logfile_txt.php:210 settings.php:487
+#: config.php:291
+msgid "UPS battery"
+msgstr ""
+
+#: config.php:292
+msgid "shutdown on battery low"
+msgstr ""
+
+#: config.php:308
+msgid "helptext_shutdown_on_batlow_config"
+msgstr ""
+"<br><br>\n"
+"<b>UPS battery:</b>The Pi-Ager board can be equipped with an UPS module from "
+"Adafruit (PowerBoost 1000C). This module activates the attached LiPo accu on "
+"powerfail and monitors continuously the accu voltage. When this voltage "
+"drops below about 3.6V then the Pi-Ager can be shutdown to prevent further "
+"discharge and damage of the accu\n"
+"<br><br>"
+
+#: config.php:318 modules/write_config_db_logfile_txt.php:212 settings.php:487
 msgid "general configuration"
 msgstr ""
 
-#: config.php:288
+#: config.php:320
 msgid "hide"
 msgstr ""
 
@@ -1250,7 +1279,7 @@ msgstr ""
 msgid "general"
 msgstr ""
 
-#: index.php:680 manvals.php:22 modules/write_config_db_logfile_txt.php:158
+#: index.php:680 manvals.php:22 modules/write_config_db_logfile_txt.php:160
 #: modules/write_settings_db_logfile_txt.php:150
 msgid "operating mode"
 msgstr ""
@@ -1367,39 +1396,39 @@ msgstr ""
 msgid "file is not writable"
 msgstr ""
 
-#: logs.php:42
+#: logs.php:49
 msgid "save all logfiles?"
 msgstr ""
 
-#: logs.php:42
+#: logs.php:49
 msgid "save logfiles"
 msgstr ""
 
-#: logs.php:43
+#: logs.php:50
 msgid "clear all logfile data?"
 msgstr ""
 
-#: logs.php:43
+#: logs.php:50
 msgid "delete data"
 msgstr ""
 
-#: logs.php:44
+#: logs.php:51
 msgid "open pi-ager.log in new tab"
 msgstr ""
 
-#: logs.php:168
+#: logs.php:177
 msgid "prev"
 msgstr ""
 
-#: logs.php:170
+#: logs.php:179
 msgid "next"
 msgstr ""
 
-#: logs.php:180
+#: logs.php:189
 msgid "to bottom"
 msgstr ""
 
-#: logs.php:186
+#: logs.php:195
 msgid "to top"
 msgstr ""
 
@@ -1410,17 +1439,17 @@ msgstr ""
 
 #: manvals.php:24 modules/read_settings_db.php:12
 #: modules/read_settings_db.php:19 modules/read_settings_db.php:33
-#: modules/read_settings_db.php:40 modules/write_config_db_logfile_txt.php:70
+#: modules/read_settings_db.php:40 modules/write_config_db_logfile_txt.php:72
 #: modules/write_settings_db_logfile_txt.php:60
 msgid "cooling"
 msgstr ""
 
-#: manvals.php:25 modules/write_config_db_logfile_txt.php:76
+#: manvals.php:25 modules/write_config_db_logfile_txt.php:78
 #: modules/write_settings_db_logfile_txt.php:66
 msgid "cooling with humidification"
 msgstr ""
 
-#: manvals.php:26 modules/write_config_db_logfile_txt.php:82
+#: manvals.php:26 modules/write_config_db_logfile_txt.php:84
 #: modules/write_settings_db_logfile_txt.php:72
 msgid "heating with humidification"
 msgstr ""
@@ -1468,8 +1497,8 @@ msgstr ""
 "should be delayed (5-10min)!\n"
 "<br><br>"
 
-#: manvals.php:52 modules/write_config_db_logfile_txt.php:161
-#: modules/write_config_db_logfile_txt.php:167
+#: manvals.php:52 modules/write_config_db_logfile_txt.php:163
+#: modules/write_config_db_logfile_txt.php:169
 #: modules/write_settings_db_logfile_txt.php:153
 #: modules/write_settings_db_logfile_txt.php:159
 msgid "setpoint temperature"
@@ -1559,8 +1588,8 @@ msgstr ""
 "<b>Recommendations:</b> Please check stored values in the log file!\n"
 "<br><br>"
 
-#: manvals.php:75 modules/write_config_db_logfile_txt.php:175
-#: modules/write_config_db_logfile_txt.php:182
+#: manvals.php:75 modules/write_config_db_logfile_txt.php:177
+#: modules/write_config_db_logfile_txt.php:184
 #: modules/write_settings_db_logfile_txt.php:167
 #: modules/write_settings_db_logfile_txt.php:174
 msgid "setpoint humidity"
@@ -1699,7 +1728,7 @@ msgstr ""
 msgid "heating"
 msgstr ""
 
-#: modules/read_systemdetails.php:114 modules/read_systemdetails.php:116
+#: modules/read_systemdetails.php:116 modules/read_systemdetails.php:118
 msgid "model unknown! Please contact us."
 msgstr ""
 
@@ -1818,76 +1847,76 @@ msgstr ""
 msgid "backup values"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:33
+#: modules/write_config_db_logfile_txt.php:34
 #: modules/write_settings_db_logfile_txt.php:24
 msgid "unauthorized character - please use only integers!"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:87
+#: modules/write_config_db_logfile_txt.php:89
 #: modules/write_settings_db_logfile_txt.php:77
 msgid "automatic with humidification"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:95
+#: modules/write_config_db_logfile_txt.php:97
 #: modules/write_settings_db_logfile_txt.php:85
 msgid "automatic with dehumidification and humidification"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:125
+#: modules/write_config_db_logfile_txt.php:127
 #: modules/write_settings_db_logfile_txt.php:114
 msgid "uv period"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:126
-#: modules/write_config_db_logfile_txt.php:131
+#: modules/write_config_db_logfile_txt.php:128
+#: modules/write_config_db_logfile_txt.php:133
 #: modules/write_settings_db_logfile_txt.php:115
 #: modules/write_settings_db_logfile_txt.php:120
 msgid "uv duration"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:130
+#: modules/write_config_db_logfile_txt.php:132
 #: modules/write_settings_db_logfile_txt.php:119
 msgid "uv timestamp"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:141
+#: modules/write_config_db_logfile_txt.php:143
 #: modules/write_settings_db_logfile_txt.php:131
 msgid "light period"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:142
-#: modules/write_config_db_logfile_txt.php:147
+#: modules/write_config_db_logfile_txt.php:144
+#: modules/write_config_db_logfile_txt.php:149
 #: modules/write_settings_db_logfile_txt.php:132
 #: modules/write_settings_db_logfile_txt.php:137
 msgid "light duration"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:146
+#: modules/write_config_db_logfile_txt.php:148
 #: modules/write_settings_db_logfile_txt.php:136
 msgid "light timestamp"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:157
+#: modules/write_config_db_logfile_txt.php:159
 msgid "configuration has been changed."
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:162
+#: modules/write_config_db_logfile_txt.php:164
 #: modules/write_settings_db_logfile_txt.php:154
 msgid "switch-off temperature"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:162
-#: modules/write_config_db_logfile_txt.php:163
-#: modules/write_config_db_logfile_txt.php:168
-#: modules/write_config_db_logfile_txt.php:169
+#: modules/write_config_db_logfile_txt.php:164
+#: modules/write_config_db_logfile_txt.php:165
 #: modules/write_config_db_logfile_txt.php:170
 #: modules/write_config_db_logfile_txt.php:171
-#: modules/write_config_db_logfile_txt.php:176
-#: modules/write_config_db_logfile_txt.php:177
-#: modules/write_config_db_logfile_txt.php:183
-#: modules/write_config_db_logfile_txt.php:184
+#: modules/write_config_db_logfile_txt.php:172
+#: modules/write_config_db_logfile_txt.php:173
+#: modules/write_config_db_logfile_txt.php:178
+#: modules/write_config_db_logfile_txt.php:179
 #: modules/write_config_db_logfile_txt.php:185
 #: modules/write_config_db_logfile_txt.php:186
+#: modules/write_config_db_logfile_txt.php:187
+#: modules/write_config_db_logfile_txt.php:188
 #: modules/write_settings_db_logfile_txt.php:154
 #: modules/write_settings_db_logfile_txt.php:155
 #: modules/write_settings_db_logfile_txt.php:160
@@ -1903,106 +1932,106 @@ msgstr ""
 msgid "so at"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:163
+#: modules/write_config_db_logfile_txt.php:165
 #: modules/write_settings_db_logfile_txt.php:155
 msgid "switch-on temperature"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:168
+#: modules/write_config_db_logfile_txt.php:170
 #: modules/write_settings_db_logfile_txt.php:160
 msgid "switch-on heater"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:169
+#: modules/write_config_db_logfile_txt.php:171
 #: modules/write_settings_db_logfile_txt.php:161
 msgid "switch-off heater"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:170
+#: modules/write_config_db_logfile_txt.php:172
 #: modules/write_settings_db_logfile_txt.php:162
 msgid "switch-on cooler"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:171
+#: modules/write_config_db_logfile_txt.php:173
 #: modules/write_settings_db_logfile_txt.php:163
 msgid "switch-off cooler"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:176
-#: modules/write_config_db_logfile_txt.php:183
+#: modules/write_config_db_logfile_txt.php:178
+#: modules/write_config_db_logfile_txt.php:185
 #: modules/write_settings_db_logfile_txt.php:168
 #: modules/write_settings_db_logfile_txt.php:175
 msgid "switch-on humidifier"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:177
-#: modules/write_config_db_logfile_txt.php:184
+#: modules/write_config_db_logfile_txt.php:179
+#: modules/write_config_db_logfile_txt.php:186
 #: modules/write_settings_db_logfile_txt.php:169
 #: modules/write_settings_db_logfile_txt.php:176
 msgid "switch-off humidifier"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:178
+#: modules/write_config_db_logfile_txt.php:180
 #: modules/write_settings_db_logfile_txt.php:170
 msgid "delay humidifier"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:185
+#: modules/write_config_db_logfile_txt.php:187
 #: modules/write_settings_db_logfile_txt.php:177
 msgid "switch-on exhausting"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:186
+#: modules/write_config_db_logfile_txt.php:188
 #: modules/write_settings_db_logfile_txt.php:178
 msgid "switch-off exhausting"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:187
+#: modules/write_config_db_logfile_txt.php:189
 #: modules/write_settings_db_logfile_txt.php:179
 msgid "delay exhausting"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:189
+#: modules/write_config_db_logfile_txt.php:191
 #: modules/write_settings_db_logfile_txt.php:182
 msgid "circulation air period"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:190
+#: modules/write_config_db_logfile_txt.php:192
 #: modules/write_settings_db_logfile_txt.php:183
 msgid "circulation air duration"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:191
+#: modules/write_config_db_logfile_txt.php:193
 #: modules/write_settings_db_logfile_txt.php:184
 msgid "exhausting air period"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:192
+#: modules/write_config_db_logfile_txt.php:194
 #: modules/write_settings_db_logfile_txt.php:185
 msgid "exhausting air duration"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:193
+#: modules/write_config_db_logfile_txt.php:195
 #: modules/write_settings_db_logfile_txt.php:186
 msgid "dehumidify modus"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:194
+#: modules/write_config_db_logfile_txt.php:196
 #: modules/write_settings_db_logfile_txt.php:187
 msgid "uv modus"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:197
+#: modules/write_config_db_logfile_txt.php:199
 #: modules/write_settings_db_logfile_txt.php:190
 msgid "light modus"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:203
+#: modules/write_config_db_logfile_txt.php:205
 #: modules/write_settings_db_logfile_txt.php:197
 msgid "values saved in file Database"
 msgstr ""
 
-#: modules/write_config_db_logfile_txt.php:207
+#: modules/write_config_db_logfile_txt.php:209
 #: modules/write_settings_db_logfile_txt.php:200
 msgid "values not in the specified limits!"
 msgstr ""
@@ -2756,10 +2785,6 @@ msgstr ""
 
 #: settings.php:368
 msgid "upload new agingtable?"
-msgstr ""
-
-#: settings.php:368
-msgid "upload"
 msgstr ""
 
 #: settings.php:382
