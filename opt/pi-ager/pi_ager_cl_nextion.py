@@ -761,18 +761,19 @@ class cl_nextion( threading.Thread ):
     
     def reset_page_after_powergood(self):
         if self.client != None:
-            if self.data == None:   # assume current page = 1
-                # simulate touch event with page_id = 0, component_id = 1 and touch_event = 1 to enter main_fridge (page 1)
+            if self.data == None:   # assume current page = 1, cause no touch event happened
+                print('simulate touch event with page_id = 0, component_id = 1 and touch_event = 1 to enter main_fridge (page 1)')
                 Touch = namedtuple("Touch", "page_id component_id touch_event")
                 self.data = Touch(0, 1, 1)
                 print('set Display page 1 active')
                 cl_fact_logger.get_instance().info('Nextion client after powergood. Page 1 now active page')
             else:
-                print('Simulate button id = -1 on page %d' % (self.current_page_id))
-                cl_fact_logger.get_instance().info('Nextion client after powergood. Simulate touch event on button id = -1' + ' on page id ' + str(self.current_page_id))
+                print('To force showing page 1, simulate button id = -1 on current page %d' % (self.current_page_id))
+                cl_fact_logger.get_instance().info('Nextion client after powergood. Page 1 now active page')
                 Touch = namedtuple("Touch", "page_id component_id touch_event")
-                self.data = Touch(self.current_page_id, -1, 1)            
-            
+                # self.data = Touch(self.current_page_id, -1, 1)            
+                self.data = Touch(1, -1, 1)
+                
             self.loop.call_soon_threadsafe(self.button_event.set)
         
     def stop_loop(self):
