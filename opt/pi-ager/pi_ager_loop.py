@@ -544,7 +544,7 @@ def generate_power_monitor_events():
         try:
             cl_fact_logger.get_instance().info('Power monitor signals powergood')
             cl_fact_logic_messenger().get_instance().handle_event('powergood')  #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
-            cl_fact_nextion.get_instance().reset_page_after_powergood()         #activate last current page
+            # cl_fact_nextion.get_instance().reset_page_after_powergood()         #activate last current page
         except Exception as cx_error:
             exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
             pass

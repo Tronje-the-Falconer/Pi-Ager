@@ -1,7 +1,7 @@
 import asyncio
 import binascii
 import logging
-import os
+import os,stat
 import struct
 import typing
 from collections import namedtuple
@@ -17,6 +17,21 @@ import pi_ager_names
 import pi_ager_database
 
 logger = logging.getLogger("nextion").getChild(__name__)
+# set log level
+logger.setLevel(logging.DEBUG)
+
+# define file handler and set formatter
+# logfile = '/var/www/logs/nextion.log'
+# logf = open(logfile, "ab")
+# logf.close()
+# os.chmod(logfile, stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
+
+# file_handler = logging.FileHandler(logfile)
+# formatter    = logging.Formatter('%(asctime)s : %(levelname)s : %(name)s : %(message)s')
+# file_handler.setFormatter(formatter)
+
+# add file handler to logger
+# logger.addHandler(file_handler)
 logger.debug("logging initialized")
 
 TouchDataPayload = namedtuple("Touch", "page_id component_id touch_event")
@@ -62,6 +77,7 @@ class Nextion:
         logger.debug("Handle event: %s", message)
 
         typ = message[0]
+        # logger.debug("event: 0x%02x", typ)
         if typ == EventType.TOUCH:  # Touch event
             self.event_handler(
                 EventType(typ),
@@ -84,6 +100,7 @@ class Nextion:
             self._loop.create_task(self.on_wakeup())
             self.event_handler(EventType(typ), None)
         elif typ == EventType.STARTUP:  # System successful start up
+            self._sleeping = False
             self._loop.create_task(self.on_startup())
             self.event_handler(EventType(typ), None)
         elif typ == EventType.SD_CARD_UPGRADE:  # Start SD card upgrade
@@ -183,7 +200,8 @@ class Nextion:
 
     async def _update_sleep_status(self):
         self._sleeping = bool(await self._command("get sleep"))
-
+        # logger.info("update sleep mode = " + str(self._sleeping))
+        
     async def _try_connect_on_different_baudrates(self):
         baudrates = self._get_priority_ordered_baudrates()
 
@@ -238,7 +256,7 @@ class Nextion:
             logger.debug(
                 'Device sleeps. Scheduling "%s" set for execution after wakeup', key
             )
-            self.sets_todo[key] = value
+            # self.sets_todo[key] = value
         else:
             return await self.command("%s=%s" % (key, out_value), timeout=timeout)
 
@@ -249,6 +267,7 @@ class Nextion:
         last_exception = None
         while attempts_remained > 0:
             attempts_remained -= 1
+            # logger.debug("Attempts remained : %d", attempts_remained)
             if isinstance(last_exception, CommandTimeout):
                 try:
                     logger.info("Reconnecting")
@@ -306,11 +325,14 @@ class Nextion:
                     if command.partition(" ")[0] in ["get", "sendme"]:
                         finished = True
             else:  # this will run if loop ended successfully
+                # logger.info('_command returned')
                 return data if data is not None else result
 
         if last_exception is not None:
+            # logger.info('_command returned with exception')
             raise last_exception
-
+            
+      
     def write_command(self, command):
         if not isinstance(command, typing.ByteString):
             command = command.encode(self.encoding)
@@ -325,9 +347,10 @@ class Nextion:
             pass
 
     async def command(self, command: str, timeout=IO_TIMEOUT, attempts=None):
+        # logger.info('Start command lock')
         async with self._command_lock:
             return await self._command(command, timeout=timeout, attempts=attempts)
-
+        
     def is_sleeping(self):
         return self._sleeping
 

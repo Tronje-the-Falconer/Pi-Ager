@@ -28,7 +28,7 @@ import pi_ager_gpio_config
 
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from main.pi_ager_cl_logger import cl_fact_logger
-from nextion import Nextion, EventType
+from pi_ager_nextion.client import Nextion, EventType
 
 import threading
 
@@ -57,6 +57,7 @@ class cl_nextion( threading.Thread ):
         self.waiter_task = None
         self.stop_event = None
         self.button_event = None
+        self.reconnect_event = None
         # self.original_sigint_handler = signal.getsignal(signal.SIGINT)
         self.data = None
         self.type_ = None
@@ -70,9 +71,9 @@ class cl_nextion( threading.Thread ):
     def nextion_event_handler(self, type_, data):
 
         if type_ == EventType.STARTUP:
-            print('We have booted up!')
+            cl_fact_logger.get_instance().debug('We have booted up!')
         elif type_ == EventType.TOUCH:
-            print('A button (id: %d) was touched on page %d' % (data.component_id, data.page_id))
+            cl_fact_logger.get_instance().debug('A button (id: %d) was touched on page %d' % (data.component_id, data.page_id))
             self.data = data
             self.type_ = type_
             self.current_page_id = data.page_id
@@ -171,12 +172,14 @@ class cl_nextion( threading.Thread ):
                 print('waiting for button pressed ...')
                 await self.button_event.wait()
                 print('... got it!')
-                
+                cl_fact_logger.get_instance().debug('button_waiter: page_id = %d, component_id = %d' % (self.data.page_id, self.data.component_id))
                 if self.data.component_id == -1:    # component_id = -1 to signal powergood event happened. Activate last active page_id
+                    # await self.client.set('sleep', 0)
                     cmd = 'page ' + str(self.data.page_id)
                     await self.client.command(cmd)
                     self.current_page_id = self.data.page_id
                 elif self.data.page_id == 0:
+                    # await self.client.set('sleep', 0)
                     await self.client.command('page 1')
                     self.current_page_id = 1
                 elif self.data.page_id == 8:
@@ -508,7 +511,7 @@ class cl_nextion( threading.Thread ):
     
     async def update_base_values(self):
         values = self.db_get_base_values()
-        
+        cl_fact_logger.get_instance().debug('Update_base_values')
         await self.client.set('txt_temp_set.txt', "%.1f" % (values['temp_soll']))
         await self.client.set('txt_humid_set.txt', "%.1f" % (values['humitidy_soll']))        
         if values['status_piager'] == 0:
@@ -624,6 +627,7 @@ class cl_nextion( threading.Thread ):
     async def run_client(self):
         self.button_event = asyncio.Event()
         self.stop_event = asyncio.Event()
+        self.reconnect_event = asyncio.Event()
         # self.waiter_task = asyncio.create_task(self.button_waiter(self.button_event))
         # self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))   
         
@@ -652,7 +656,8 @@ class cl_nextion( threading.Thread ):
             #    await self.client.set('txt_temp.txt', "%.1f" % (random.randint(0, 1000) / 10))
             #except Exception as e:
             #    logging.error(str(e))
-            #    pass 
+            #    pass
+            cl_fact_logger.get_instance().debug('Client running')
             try:
                 if self.current_page_id == 1:
                     await self.process_page1()
@@ -675,7 +680,7 @@ class cl_nextion( threading.Thread ):
                     
             except Exception as e:
                 logging.error('run_client exception2: ' + str(e))
-            
+                cl_fact_logger.get_instance().debug('run_client exception2')
             # await self.client.set('values.temp_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
             # await self.client.set('values.humidity_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
             # await self.client.set('values.dewpoint_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
@@ -684,6 +689,10 @@ class cl_nextion( threading.Thread ):
             # await self.client.set('values.dewpoint_set.txt', "%.1f" % (random.randint(0, 1000) / 10))
             # await self.client.set('values.status_uv.val', 1)
             # await self.client.command('page dp')
+            if self.reconnect_event.is_set():
+                await self.client.reconnect()
+                self.reconnect_event.clear()
+                
             await asyncio.sleep(3)
 
         logging.info('run_client finished')
@@ -761,6 +770,8 @@ class cl_nextion( threading.Thread ):
     
     def reset_page_after_powergood(self):
         if self.client != None:
+            self.loop.call_soon_threadsafe(self.reconnect_event.set)
+            time.sleep(4)
             if self.data == None:   # assume current page = 1, cause no touch event happened
                 print('simulate touch event with page_id = 0, component_id = 1 and touch_event = 1 to enter main_fridge (page 1)')
                 Touch = namedtuple("Touch", "page_id component_id touch_event")
@@ -819,7 +830,7 @@ def main():
     cl_fact_nextion.get_instance().start()
     i = 0
     try:
-        while i < 30:
+        while i < 60:
             i = i + 1
             time.sleep(1)
             
