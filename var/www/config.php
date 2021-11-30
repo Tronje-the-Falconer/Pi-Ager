@@ -251,11 +251,11 @@
                                                 <tr>
                                                     <td rowspan="4" class="td_png_icon"><h3><?php echo _('internal temperature limits'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_event_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td><?php echo _('low temperature limit'); ?>:</td>
-                                                    <td><input name="internal_temperature_low_limit_config" type="number" style="width: 30%;" min="-11" max="30" required value=<?php echo $internal_temperature_low_limit; ?>>&nbsp;°C<span style="font-size: xx-small"> (-11 <?php echo _('to'); ?> 30)</span></td>
+                                                    <td><input name="internal_temperature_low_limit_config" type="number" style="width: 30%;" min="-11" max="70" required value=<?php echo $internal_temperature_low_limit; ?>>&nbsp;°C<span style="font-size: xx-small"> (-11 <?php echo _('to'); ?> 70)</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td><?php echo _('high temperature limit').':'; ?></td>
-                                                    <td><input name="internal_temperature_high_limit_config" type="number" style="width: 30%;" min="-11" max="30" required value= <?php echo $internal_temperature_high_limit; ?>>&nbsp;°C<span style="font-size: xx-small"> (-11 <?php echo _('to'); ?> 30)</span></td>
+                                                    <td><input name="internal_temperature_high_limit_config" type="number" style="width: 30%;" min="-11" max="70" required value= <?php echo $internal_temperature_high_limit; ?>>&nbsp;°C<span style="font-size: xx-small"> (-11 <?php echo _('to'); ?> 70)</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td><?php echo _('hysteresis').':'; ?></td>

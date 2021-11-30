@@ -52,8 +52,8 @@
                 $light_period_config < 1441 && $light_period_config > -1 &&  (($light_period_config+$light_duration_config) > 0) &&                 // Prüfung Intervall Licht
                 $light_duration_config < 1441 && $light_duration_config > -1  &&                              // Prüfung Dauer Licht
                 $switch_on_light_hour_config >= 0 && $switch_on_light_hour_config < 24 && $switch_on_light_minute_config >= 0 && $switch_on_light_minute_config < 60 && // Licht Uhrzeit
-                $internal_temperature_low_limit >= -11 && $internal_temperature_low_limit <= 30 && // Temperatur low limit Überwachung
-                $internal_temperature_high_limit >= -11 && $internal_temperature_high_limit <= 30 && // Temperatur high limit Überwachung
+                $internal_temperature_low_limit >= -11 && $internal_temperature_low_limit <= 70 && // Temperatur low limit Überwachung
+                $internal_temperature_high_limit >= -11 && $internal_temperature_high_limit <= 70 && // Temperatur high limit Überwachung
                 $internal_temperature_high_limit > $internal_temperature_low_limit &&
                 $internal_temperature_hysteresis >= 1 && $internal_temperature_hysteresis <= 10  // Temperatur hysteresis für Event Generierung
             )

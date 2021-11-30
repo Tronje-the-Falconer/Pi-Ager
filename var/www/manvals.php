@@ -50,7 +50,7 @@
                                             <tr>
                                                 <td rowspan="4" class="td_png_icon"><h3><?php echo _('temperature'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td class="text_left_padding"><?php echo _('setpoint temperature'); ?>:</td>
-                                                <td style="text-align: left;"><input name="setpoint_temperature_settings" type="number" style="width: 30%;" min="-11" max="30" value=<?php echo $setpoint_temperature; ?>>&nbsp;°C<span style="font-size: xx-small"> (-11 <?php echo _('to'); ?> 30)</span></td>
+                                                <td style="text-align: left;"><input name="setpoint_temperature_settings" type="number" style="width: 30%;" min="-11" max="70" value=<?php echo $setpoint_temperature; ?>>&nbsp;°C<span style="font-size: xx-small"> (-11 <?php echo _('to'); ?> 70)</span></td>
                                             </tr>
                                         </table>
                                         <script>

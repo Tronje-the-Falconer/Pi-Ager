@@ -144,8 +144,8 @@ class cl_nextion( threading.Thread ):
         if (temp_soll < -11):
             temp_soll = -11
             await self.client.set('n_temp_soll.val', temp_soll)
-        elif (temp_soll > 30):
-            temp_soll = 30
+        elif (temp_soll > 70):
+            temp_soll = 70
             await self.client.set('n_temp_soll.val', temp_soll)
             
         if (hum_soll < 0):
