@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # File: setup_pi-ager.sh
 # START
 #crontab richtigstellen 
@@ -21,8 +21,7 @@ then
     eval $(grep -i "^country=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^keepconf=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^sensor=" /boot/setup.txt | tr -d "\n\r")    
-#    eval $(grep -i "^partsize=" /boot/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^reboot=" /boot/setup.txt| tr -d "\n\r")
+#    eval $(grep -i "^reboot=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^sensor=" /boot/setup.txt | tr -d "\n\r")  
     echo "Variablen"
     echo "Hostname:"
@@ -39,9 +38,7 @@ then
     echo $keepconf
 
 	echo "Sensor=$sensor"    
-	
-#    echo "Partitionsgroesse:"
-#    echo $partsize
+
     echo "SSH Host Key generieren"
     # SSH Host Key generieren
     /bin/rm -fv /etc/ssh_host_*
@@ -97,8 +94,7 @@ then
             echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" > /etc/wpa_supplicant/wpa_supplicant.conf
             echo "update_config=1" >> /etc/wpa_supplicant/wpa_supplicant.conf
             echo "country=$country" >> /etc/wpa_supplicant/wpa_supplicant.conf
-            wpa_passphrase "$wlanssid" $wlankey >> /etc/wpa_supplicant/wpa_supplicant.conf
-            #ifdown wlan0
+            wpa_passphrase "$wlanssid" "$wlankey" >> /etc/wpa_supplicant/wpa_supplicant.conf
             echo "WLAN SSID und Passphrase gesetzt"
         fi
     fi
@@ -126,6 +122,7 @@ then
     then
         sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; UPDATE config SET value=$sensorbus WHERE key='sensorbus';"
         sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; UPDATE config SET value=$sensornum WHERE key='sensortype';"
+        echo "sensorbus und sensornum in DB gesetzt"
     fi
     
     if [ $sensorbus -eq 0 ]; then
@@ -141,11 +138,10 @@ then
 fi
 
 systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
-# systemctl disable pi-ager_scale.service pi-ager_agingtable.service # Werden manuell gestartet
+
 systemctl enable pi-ager_main.service 
 systemctl start pi-ager_main.service
 ifup wlan0
-# expand filesystem
-# raspi-config nonint do_expand_rootfs
+
 # reboot
 shutdown -r now

@@ -148,7 +148,7 @@ class cl_logger:
         self.console_streamhandler.setFormatter(self.console_streamhandler_formatter)
         
         logger = logging.getLogger(pythonfile)
-        logger.setLevel(logging.DEBUG)
+        # logger.setLevel(logging.DEBUG)
         logger.addHandler(self.website_log_rotatingfilehandler)
         logger.addHandler(self.pi_ager_log_rotatingfilehandler)
         logger.addHandler(self.console_streamhandler)

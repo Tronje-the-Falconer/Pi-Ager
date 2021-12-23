@@ -5,8 +5,10 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=python3 /opt/pi-ager/main.py 2>&1
+ExecStart=python3 /opt/pi-ager/main.py 1>/dev/null 2>&1
 PIDFile=/tmp/pi-ager_main.pid
+StandardOutput=null
+StandardError=null
 
 [Install]
 Alias=pi-ager
