@@ -17,7 +17,7 @@ import subprocess
 import time
 import asyncio
 import signal
-import logging
+# import logging
 import random
 from collections import namedtuple
 import RPi.GPIO as gpio
@@ -26,9 +26,10 @@ import pi_ager_database
 import pi_ager_names
 import pi_ager_gpio_config
 
-from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
-from main.pi_ager_cl_logger import cl_fact_logger
+# from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
+# from main.pi_ager_cl_logger import cl_fact_logger
 from pi_ager_nextion.client import Nextion, EventType
+from main.pi_ager_cl_logger import cl_fact_logger
 
 import threading
 
@@ -80,10 +81,10 @@ class cl_nextion( threading.Thread ):
             self.loop.call_soon_threadsafe(self.button_event.set)
             
         # self.button_event.set()
-        logging.info('Event %s data: %s', type_, str(data))
+        cl_fact_logger.get_instance().info('Event %s data: %s', type_, str(data))
     
     async def turn_off_light(self):
-        logging.info('Light turn off timeout')
+        cl_fact_logger.get_instance().info('Light turn off timeout')
         gpio.output(pi_ager_gpio_config.gpio_light, True)
         globals.hands_off_light_switch = False
         self.light_status = False       # turn off
@@ -169,9 +170,9 @@ class cl_nextion( threading.Thread ):
     async def button_waiter(self, event):
         try:
             while True:
-                print('waiting for button pressed ...')
+#                print('waiting for button pressed ...')
                 await self.button_event.wait()
-                print('... got it!')
+#                print('... got it!')
                 cl_fact_logger.get_instance().debug('button_waiter: page_id = %d, component_id = %d' % (self.data.page_id, self.data.component_id))
                 if self.data.component_id == -1:    # component_id = -1 to signal powergood event happened. Activate last active page_id
                     # await self.client.set('sleep', 0)
@@ -344,9 +345,9 @@ class cl_nextion( threading.Thread ):
                     await self.save_page_17_19_values()
                                         
                 self.button_event.clear()
-                logging.info('button pressed processed')
+                cl_fact_logger.get_instance().info('button pressed processed')
         except Exception as e:
-            logging.error('button_waiter stopped ' + str(e))
+            cl_fact_logger.get_instance().error('button_waiter stopped ' + str(e))
             pass    
     
     def get_pi_model(self):
@@ -384,7 +385,7 @@ class cl_nextion( threading.Thread ):
         await self.client.set('values.sw_version.txt', version)
         
         model = self.get_pi_model()
-        print('pi model: ' + model)
+#        print('pi model: ' + model)
         await self.client.set('values.pi_model.txt', model)
         
         wifi_ssid = self.get_wifi_ssid()
@@ -632,20 +633,20 @@ class cl_nextion( threading.Thread ):
         # self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))   
         
         self.client = Nextion('/dev/serial0', 9600, self.nextion_event_handler, self.loop)
-        logging.info('client generated')
+        cl_fact_logger.get_instance().info('client generated')
         try:
             await self.client.connect()
-            logging.info('client connected')
+            cl_fact_logger.get_instance().info('client connected')
             cl_fact_logger.get_instance().info('Nextion client connected')
             self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))                                                                                              
         except Exception as e:
-            logging.error('run_client exception1: ' + str(e))
-            cl_fact_logger.get_instance().info('Could not connect to Nextion client. Possible HDMI display not connected')
+            cl_fact_logger.get_instance().error('run_client exception1: ' + str(e))
+            cl_fact_logger.get_instance().error('Could not connect to Nextion client. Possible HDMI display not connected')
             while not self.stop_event.is_set():
                 await asyncio.sleep(1)
             return                                                                                                              
 
-        logging.info('sleep:' + str(await self.client.get('sleep')))
+        cl_fact_logger.get_instance().info('sleep:' + str(await self.client.get('sleep')))
         
         # init internal display values
         await self.init_display_values()
@@ -655,9 +656,9 @@ class cl_nextion( threading.Thread ):
             #try:
             #    await self.client.set('txt_temp.txt', "%.1f" % (random.randint(0, 1000) / 10))
             #except Exception as e:
-            #    logging.error(str(e))
+            #    cl_fact_logger.get_instance().error(str(e))
             #    pass
-            cl_fact_logger.get_instance().debug('Client running')
+            # cl_fact_logger.get_instance().debug('Client running')
             try:
                 if self.current_page_id == 1:
                     await self.process_page1()
@@ -679,7 +680,7 @@ class cl_nextion( threading.Thread ):
                     await self.show_offline()    
                     
             except Exception as e:
-                logging.error('run_client exception2: ' + str(e))
+                cl_fact_logger.get_instance().error('run_client exception2: ' + str(e))
                 cl_fact_logger.get_instance().debug('run_client exception2')
             # await self.client.set('values.temp_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
             # await self.client.set('values.humidity_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
@@ -695,7 +696,7 @@ class cl_nextion( threading.Thread ):
                 
             await asyncio.sleep(3)
 
-        logging.info('run_client finished')
+        cl_fact_logger.get_instance().info('run_client finished')
         
     def inner_ctrl_c_signal_handler(self, sig, frame):
         self.stop_event.set()
@@ -707,12 +708,12 @@ class cl_nextion( threading.Thread ):
         gpio.setup(pi_ager_gpio_config.gpio_light, gpio.OUT)   
         
     def run(self):
-        logging.basicConfig(
-            format='%(asctime)s - %(module)s - %(levelname)s - %(message)s',
-            level=logging.DEBUG,
-            handlers=[
-                logging.StreamHandler()
-            ])
+#        logging.basicConfig(
+#            format='%(asctime)s - %(module)s - %(levelname)s - %(message)s',
+#            level=logging.DEBUG,
+#            handlers=[
+#                logging.StreamHandler()
+#            ])
         
         self.init_gpio()
     
@@ -728,10 +729,10 @@ class cl_nextion( threading.Thread ):
         # tasks = [task for task in asyncio.all_tasks(self.loop) if not task.done()]
         # for task in tasks:
         #     task.cancel()
-            logging.info('run_forever stopped')
+            cl_fact_logger.get_instance().info('run_forever stopped')
             tasks = asyncio.all_tasks(self.loop)
             count = len(tasks)
-            logging.info('Elements in tasks list : ' + str(count))                                                                        
+            cl_fact_logger.get_instance().info('Elements in tasks list : ' + str(count))                                                                        
             for t in [t for t in tasks if not (t.done() or t.cancelled())]:
                 self.loop.run_until_complete(t)
 
@@ -744,10 +745,10 @@ class cl_nextion( threading.Thread ):
         #         'task': task
         #         })
         except Exception as e:
-            logging.info('Nextion thread in exception ' + str(e))
+            cl_fact_logger.get_instance().info('Nextion thread in exception ' + str(e))
             
         finally:
-            #logging.info('after finally')
+            #cl_fact_logger.get_instance().info('after finally')
             cl_fact_logger.get_instance().info('Nextion client stopped')
             self.loop.close()
     
@@ -773,13 +774,13 @@ class cl_nextion( threading.Thread ):
             self.loop.call_soon_threadsafe(self.reconnect_event.set)
             time.sleep(4)
             if self.data == None:   # assume current page = 1, cause no touch event happened
-                print('simulate touch event with page_id = 0, component_id = 1 and touch_event = 1 to enter main_fridge (page 1)')
+#                print('simulate touch event with page_id = 0, component_id = 1 and touch_event = 1 to enter main_fridge (page 1)')
                 Touch = namedtuple("Touch", "page_id component_id touch_event")
                 self.data = Touch(0, 1, 1)
-                print('set Display page 1 active')
+#                print('set Display page 1 active')
                 cl_fact_logger.get_instance().info('Nextion client after powergood. Page 1 now active page')
             else:
-                print('To force showing page 1, simulate button id = -1 on current page %d' % (self.current_page_id))
+#                print('To force showing page 1, simulate button id = -1 on current page %d' % (self.current_page_id))
                 cl_fact_logger.get_instance().info('Nextion client after powergood. Page 1 now active page')
                 Touch = namedtuple("Touch", "page_id component_id touch_event")
                 # self.data = Touch(self.current_page_id, -1, 1)            
@@ -788,14 +789,14 @@ class cl_nextion( threading.Thread ):
             self.loop.call_soon_threadsafe(self.button_event.set)
         
     def stop_loop(self):
-        logging.info('in stop_loop')
+        cl_fact_logger.get_instance().info('in stop_loop')
         tasks = asyncio.all_tasks(self.loop)
         count = len(tasks)
-        logging.info('Elements in task list : ' + str(count))        
+        cl_fact_logger.get_instance().info('Elements in task list : ' + str(count))        
         for t in tasks:
             t.cancel()
         self.loop.stop()
-        logging.info('after self.loop.stop')
+        cl_fact_logger.get_instance().info('after self.loop.stop')
 
 class cl_fact_nextion(ABC):
     __o_instance = None
@@ -815,7 +816,7 @@ class cl_fact_nextion(ABC):
         if cl_fact_nextion.__o_instance is not None:
             return(cl_fact_nextion.__o_instance)
         cl_fact_nextion.__o_instance = cl_nextion()
-        cl_fact_logger.get_instance().debug('nextion factory done')
+#        cl_fact_logger.get_instance().debug('nextion factory done')
         return(cl_fact_nextion.__o_instance)
 
     def __init__(self):

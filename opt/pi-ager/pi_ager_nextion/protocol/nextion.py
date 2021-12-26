@@ -1,11 +1,12 @@
 import binascii
-import logging
+# import logging
 import typing
 from enum import IntEnum
 
 from .base import BasicProtocol
 
-logger = logging.getLogger("nextion").getChild(__name__)
+from main.pi_ager_cl_logger import cl_fact_logger
+# logger = logging.getLogger("nextion").getChild(__name__)
 
 
 class EventType(IntEnum):
@@ -62,7 +63,7 @@ class NextionProtocol(BasicProtocol):
                 break
 
             self._reset_dropped_buffer()
-            logger.debug("received: %s", binascii.hexlify(message))
+            cl_fact_logger.get_instance().debug("received: %s", binascii.hexlify(message))
 
             if self.is_event(message):
                 self.event_message_handler(message)
@@ -71,7 +72,7 @@ class NextionProtocol(BasicProtocol):
 
     def _reset_dropped_buffer(self):
         if len(self.dropped_buffer):
-            logger.warning(
+            cl_fact_logger.get_instance().warning(
                 "Junk received. Dropped bytes %s", binascii.hexlify(self.dropped_buffer)
             )
             self.dropped_buffer = b""
@@ -113,4 +114,4 @@ class NextionProtocol(BasicProtocol):
     def write(self, data: bytes, eol=True):
         assert isinstance(data, bytes)
         self.transport.write(data + self.EOL if eol else b"")
-        logger.debug("sent: %s", data)
+        cl_fact_logger.get_instance().debug("sent: %s", data)

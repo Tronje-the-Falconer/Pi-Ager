@@ -16,14 +16,14 @@ import logging
 from logging import handlers
 import inspect
 import pathlib
-import os, stat
+import os, stat, sys
 import pi_ager_names
 import pi_ager_paths
 #import pi_ager_logging
 import pi_ager_database_get_logging_value
 
 
-from main.pi_ager_cx_exception import *
+# from main.pi_ager_cx_exception import *
 
 class GroupWriteRotatingFileHandler(handlers.RotatingFileHandler):
 
@@ -50,28 +50,34 @@ class cl_logger:
         pass
         
     def debug(self, logsting, *args, **kwargs):
-        self.logger.debug(logsting, *args, **kwargs)
+        calling_modul_name = os.path.basename(inspect.currentframe().f_back.f_code.co_filename)
+        self.logger.debug('{0:35}  {1}'.format(calling_modul_name, logsting), *args, **kwargs)
 
     def info(self, logsting, *args, **kwargs):
-        self.logger.info(logsting, *args, **kwargs)
+        calling_modul_name = os.path.basename(inspect.currentframe().f_back.f_code.co_filename)
+        self.logger.info('{0:35}  {1}'.format(calling_modul_name, logsting), *args, **kwargs)
     
     def warning(self, logsting, *args, **kwargs):
-        self.logger.warning(logsting, *args, **kwargs)
+        calling_modul_name = os.path.basename(inspect.currentframe().f_back.f_code.co_filename)
+        self.logger.warning('{0:35}  {1}'.format(calling_modul_name, logsting), *args, **kwargs)
     
     def error(self, logsting, *args, **kwargs):
-        self.logger.error(logsting, *args, **kwargs)
+        calling_modul_name = os.path.basename(inspect.currentframe().f_back.f_code.co_filename) 
+        self.logger.error('{0:35}  {1}'.format(calling_modul_name, logsting), *args, **kwargs)
     
     def critical(self, logsting, *args, **kwargs):
-        self.logger.critical(logsting, *args, **kwargs)
+        calling_modul_name = os.path.basename(inspect.currentframe().f_back.f_code.co_filename)
+        self.logger.critical('{0:35}  {1}'.format(calling_modul_name, logsting), *args, **kwargs)
         
     def exception(self, logsting, *args, **kwargs):
-        self.logger.exception(logsting, *args, **kwargs)
-                                    
+        calling_modul_name = os.path.basename(inspect.currentframe().f_back.f_code.co_filename)
+        self.logger.exception('{0:35}  {1}'.format(calling_modul_name, logsting), *args, **kwargs)
+        
     def get_logginglevel(self,loglevelstring):        # Builds a dict of dicts it_table from mysql db
         """
         setting loglevels
         """
-        global logger
+        # global logger
         
         if loglevelstring == 10:
             loglevel = logging.DEBUG
@@ -90,7 +96,7 @@ class cl_logger:
         """
         checking and setting permission for the website logfile 
         """
-        global logger
+        # global logger
         filepath = pi_ager_paths.get_path_logfile_txt_file()
         website_logfile = pathlib.Path(filepath)
         # filepermission = oct(os.stat(pi_ager_paths.logfile_txt_file)[stat.ST_MODE])[-3:]
@@ -106,7 +112,7 @@ class cl_logger:
         """
         checking and setting permission for the pi_ager logfile 
         """
-        global logger
+        # global logger
         filepath = pi_ager_paths.get_pi_ager_log_file_path()
         pi_ager_logfile = pathlib.Path(filepath)
         # filepermission = oct(os.stat(pi_ager_paths.pi_ager_log_file)[stat.ST_MODE])[-3:]
@@ -137,18 +143,20 @@ class cl_logger:
         # Logger fuer pi-ager debugging
         self.check_pi_ager_logfile()
         self.pi_ager_log_rotatingfilehandler = logging.handlers.GroupWriteRotatingFileHandler(pi_ager_paths.get_pi_ager_log_file_path(), mode='a', maxBytes=1048576, backupCount=20, encoding=None, delay=False)
-        self.pi_ager_log_rotatingfilehandler.setLevel(self.get_logginglevel(loglevel_file_value))
-        self.pi_ager_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(name)-40s %(levelname)-8s %(message)s', '%m-%d %H:%M:%S')
+        log_level = self.get_logginglevel(loglevel_file_value)
+        self.pi_ager_log_rotatingfilehandler.setLevel(log_level)
+        self.pi_ager_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(levelname)-10s %(message)s', '%m-%d %H:%M:%S')
         self.pi_ager_log_rotatingfilehandler.setFormatter(self.pi_ager_log_rotatingfilehandler_formatter)
     
         # Logger fuer die Console
-        self.console_streamhandler = logging.StreamHandler()
-        self.console_streamhandler.setLevel(self.get_logginglevel(loglevel_console_value))
-        self.console_streamhandler_formatter = logging.Formatter(' %(levelname)-10s: %(name)-8s %(message)s')
+        self.console_streamhandler = logging.StreamHandler(sys.stdout)
+        log_level = self.get_logginglevel(loglevel_console_value)
+        self.console_streamhandler.setLevel(log_level)
+        self.console_streamhandler_formatter = logging.Formatter(' %(levelname)-10s: %(message)s')
         self.console_streamhandler.setFormatter(self.console_streamhandler_formatter)
         
         logger = logging.getLogger(pythonfile)
-        # logger.setLevel(logging.DEBUG)
+        logger.setLevel(logging.DEBUG)
         logger.addHandler(self.website_log_rotatingfilehandler)
         logger.addHandler(self.pi_ager_log_rotatingfilehandler)
         logger.addHandler(self.console_streamhandler)
@@ -161,8 +169,12 @@ class cl_logger:
         """
         loglevel_file_value = pi_ager_database_get_logging_value.get_logging_value('loglevel_file')
         loglevel_console_value = pi_ager_database_get_logging_value.get_logging_value('loglevel_console')
-        self.pi_ager_log_rotatingfilehandler.setLevel(self.get_logginglevel(loglevel_file_value))
-        self.console_streamhandler.setLevel(self.get_logginglevel(loglevel_console_value))
+
+        log_level = self.get_logginglevel(loglevel_file_value)
+        self.pi_ager_log_rotatingfilehandler.setLevel(log_level)
+        
+        log_level = self.get_logginglevel(loglevel_console_value)
+        self.console_streamhandler.setLevel(log_level)
         
     def me(self):
         """
@@ -204,7 +216,7 @@ class th_logger(cl_logger):
         """
         setting loglevels
         """
-        global logger
+        # global logger
         
         if loglevelstring == 10:
             loglevel = logging.DEBUG

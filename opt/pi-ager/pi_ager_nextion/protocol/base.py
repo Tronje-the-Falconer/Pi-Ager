@@ -1,8 +1,9 @@
 import asyncio
 import binascii
-import logging
+#import logging
 
-logger = logging.getLogger("nextion").getChild(__name__)
+from main.pi_ager_cl_logger import cl_fact_logger
+#logger = logging.getLogger("nextion").getChild(__name__)
 
 
 class BasicProtocol(asyncio.Protocol):
@@ -23,11 +24,11 @@ class BasicProtocol(asyncio.Protocol):
 
     def connection_made(self, transport):
         self.transport = transport
-        logger.info("Connected to serial")
+        cl_fact_logger.get_instance().info("Connected to serial")
         self.connect_future.set_result(True)
 
     def data_received(self, data):
-        logger.debug("received: %s", binascii.hexlify(data))
+        cl_fact_logger.get_instance().debug("received: %s", binascii.hexlify(data))
         self.queue.put_nowait(data)
 
     def read_no_wait(self) -> bytes:
@@ -39,10 +40,10 @@ class BasicProtocol(asyncio.Protocol):
     def write(self, data: bytes, eol=True):
         assert isinstance(data, bytes)
         self.transport.write(data)
-        logger.debug("sent: %d bytes", len(data))
+        cl_fact_logger.get_instance().debug("sent: %d bytes", len(data))
 
     def connection_lost(self, exc):
-        logger.error("Connection lost")
+        cl_fact_logger.get_instance().error("Connection lost")
         if not self.connect_future.done():
             self.connect_future.set_result(False)
         # self.connect_future = asyncio.get_event_loop().create_future()
