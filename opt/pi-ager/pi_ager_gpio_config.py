@@ -33,7 +33,7 @@ gpio_scale1_data = 5                # GPIO fuer Waage1 Data
 gpio_scale1_sync = 6                # GPIO fuer Waage1 Sync
 gpio_alarm = 13                     # GPIO fuer Piezzo
 gpio_temperature_meat_MISO = 19     # GPIO fuer A/D Wandler Fleischtemperatursensoren
-gpio_power_monitor = 26             # GPIO für Powersignal
+gpio_power_monitor = 26             # GPIO fuer Powersignal
 # Ground
 
 # rechte Pinleiste:#
