@@ -47,7 +47,7 @@ case "$1" in
     ;;
     savewebcampicture) # macht ein Bild mit der Webcam
         #curl -s -m 5 -o /var/www/images/webcam/snap_$DATE.jpg http://$MYIP:8080/?action=snapshot
-        fswebcam -r 640X480 -S 10 $2
+        fswebcam --fps 15 -r 640x480 -S 10 $2
     ;;
     ziplogfiles) # Zippt alle logfiles
         pushd /var/www/ && zip -r /var/www/logs/pi-ager_logfiles.zip ./logs/ && popd

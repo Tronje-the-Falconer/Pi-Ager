@@ -39,12 +39,13 @@ class GroupWriteRotatingFileHandler(handlers.RotatingFileHandler):
         os.chmod(self.baseFilename, currMode | stat.S_IWOTH | stat.S_IWGRP)
         
 class AppFilter(logging.Filter):
+    # add modulename attribute to formatter string
     def filter(self, record):
         frameinfo = inspect.getouterframes(inspect.currentframe())
 #        print('number of frames : ', len(frameinfo))
         if len(frameinfo) > 6:
-            (frame, source, lineno, func, lines, index) = frameinfo[6]
-            record.modulename = os.path.basename(source)   # os.path.basename(frame.f_code.co_filename)
+            (frame, source, lineno, func, lines, index) = frameinfo[6]  # caller frame number is 6 with reference to AppFilter when single instance logger in pi_ager_cl_logger.py is used
+            record.modulename = os.path.basename(source) + '(' + str(lineno) + ')'  # extract module name and line number of caller
         else:
             record.modulname = ''
         return True
@@ -184,7 +185,7 @@ class cl_logger:
         
     def me(self):
         """
-        Returns the logsting for logging in every method for the current code line (how i am)
+        Returns the logstring for logging in every method for the current code line (how i am)
         """
         prev_frame = inspect.currentframe().f_back
         the_class  = prev_frame.f_locals["self"].__class__
