@@ -174,9 +174,9 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <button  class="art-button" onClick="prev_logfile(<?php print $filecounter; ?>);">< <?php print _('prev'); ?> </button>
+                                                <button  class="art-button" onClick="prev_logfile(<?php print $filecounter; ?>);"> <?php print _('prev'); ?> </button>
                                             </td>
-                                            <td><button  class="art-button" onClick="next_logfile(<?php print $filecounter; ?>);"> <?php print _('next'); ?> ></button></td>
+                                            <td><button  class="art-button" onClick="next_logfile(<?php print $filecounter; ?>);"> <?php print _('next'); ?> </button></td>
                                             <td style="width: 100%; background-color: silver; text-align: center;" id="currentfile"></td>
                                         </tr>
                                     </table>
