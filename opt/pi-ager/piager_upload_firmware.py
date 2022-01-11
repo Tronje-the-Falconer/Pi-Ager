@@ -1,6 +1,7 @@
 import argparse
 import asyncio
-import logging
+# import logging
+from main.pi_ager_cl_logger import cl_fact_logger
 
 if __name__ == '__main__':
     import globals
@@ -20,7 +21,7 @@ async def upload(args):
         await nextion.connect()
         await nextion.upload_firmware(args.file, args.upload_baud)
     except Exception as e:
-        logging.exception("Failed to upload firmware: " + str(e))
+        cl_fact_logger.get_instance().exception("Failed to upload firmware: " + str(e))
         pi_ager_database.update_nextion_table(0, "failed")
 
 def main():
@@ -46,10 +47,10 @@ def main():
 
     args = parser.parse_args()
 
-    logging.basicConfig(
-        level=logging.DEBUG if args.verbose else logging.INFO,
-        format="%(asctime)s %(levelname)-8s %(name)-15s %(message)s",
-    )
+#    logging.basicConfig(
+#        level=logging.DEBUG if args.verbose else logging.INFO,
+#        format="%(asctime)s %(levelname)-8s %(name)-15s %(message)s",
+#    )
 
     loop = asyncio.get_event_loop()
     loop.run_until_complete(upload(args))

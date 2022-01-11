@@ -14,8 +14,7 @@ import pi_ager_database
 import pi_ager_names
 import pi_ager_paths
 import pi_ager_init
-# import pi_ager_logging
-# import pi_ager_logging
+
 import pi_ager_gpio_config
 import pi_ager_organization
 import pi_ager_mcp3204
@@ -26,15 +25,37 @@ from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type, cl_fact_second_sensor_type
 from sensors.pi_ager_cl_active_sensor import cl_fact_active_main_sensor, cl_fact_active_second_sensor
-from sensors.pi_ager_cl_i2c_bus import  cl_fact_i2c_bus_logic
+from sensors.pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 
 from main.pi_ager_cl_logger import cl_fact_logger
+from pi_ager_cl_nextion import cl_fact_nextion
 
-# global logger
-# logger = pi_ager_logging.create_logger(__name__)
-# logger.debug('logging initialised')
+import globals
 
 system_shutdown = False
+
+#-------------------------------------------------------------------------------------
+#
+# for temperature outside high or low limit, generate event, hysteresis used to prevent lots of events, these flags 
+# store limit reached state
+internal_temperature_low_limit_reached = False
+internal_temperature_high_limit_reached = False
+internal_temperature_low_limit = None
+internal_temperature_high_limit = None
+internal_temperature_hysteresis = None
+#
+#-------------------------------------------------------------------------------------
+
+#-------------------------------------------------------------------------------------
+# for UPS Bat Low, Power Monitor and Switch, check to issue events
+ups_bat_low = True      # akku ok
+bat_low_true_count = 0  # counter for bat_low true
+bat_low_false_count = 0 # counter for bat_low false
+bat_low_count_max = 3   # max count for bat_low true and false 
+power_monitor = True    # power supply ok
+pi_switch = True        # switch open
+#-------------------------------------------------------------------------------------
+
 
 def autostart_loop():
     """
@@ -67,7 +88,6 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
     """
     try to read sensordata
     """
-    # global logger
     global sensor_humidity_big
     global sensor_temperature_big 
     global sensor_dewpoint_big
@@ -356,7 +376,8 @@ def switch_light(relay_state):
     """
     setting gpio for light
     """
-    set_gpio_value(pi_ager_gpio_config.gpio_light, relay_state)
+    if not globals.hands_off_light_switch:
+        set_gpio_value(pi_ager_gpio_config.gpio_light, relay_state)
 
 def status_light_in_current_values_is_on():
     """
@@ -462,7 +483,155 @@ def do_system_shutdown():
      global system_shutdown
      cl_fact_logger.get_instance().debug('in do_system_shutdown')
      system_shutdown = True
-     
+
+def generate_ups_bat_events():
+    global ups_bat_low          # akku ok
+    global bat_low_true_count   # counter for bat_low true
+    global bat_low_false_count  # counter for bat_low false
+    global bat_low_count_max    # max count for bat_low true and false 
+    
+    shutdown_on_batlow = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.shutdown_on_batlow_key))
+    ups_bat_low_temp = pi_ager_gpio_config.check_ups_bat_low()
+    cl_fact_logger.get_instance().debug('UPS battery state is ' + ('ok' if ups_bat_low_temp else 'low'))
+    
+    if ups_bat_low_temp == False:
+        bat_low_false_count += 1
+        bat_low_true_count = 0
+    else:
+        bat_low_true_count += 1
+        bat_low_false_count = 0
+        
+    if ups_bat_low == True and bat_low_false_count >= bat_low_count_max:
+        # generate event
+        ups_bat_low = False
+        try:
+            cl_fact_logger.get_instance().info('UPS battery is low')
+            cl_fact_logic_messenger().get_instance().handle_event('ups_bat_low') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+            if shutdown_on_batlow == 1:
+                cl_fact_logger.get_instance().info('Shutdown Pi-Ager now')
+                # do_system_shutdown()
+                os.system("shutdown -h now")
+        except Exception as cx_error:
+            exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+            pass
+        
+    if ups_bat_low == False and bat_low_true_count >= bat_low_count_max:
+        # generate event
+        ups_bat_low = True
+        try:
+            cl_fact_logger.get_instance().info('UPS battery is ok')
+            cl_fact_logic_messenger().get_instance().handle_event('ups_bat_ok') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+        except Exception as cx_error:
+            exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+            pass
+                        
+def generate_power_monitor_events():
+    global power_monitor
+    
+    power_monitor_temp = pi_ager_gpio_config.check_power_monitor()
+    cl_fact_logger.get_instance().debug('Power monitor state is ' + ('powergood' if power_monitor_temp else 'powerfail'))
+    if power_monitor == True and power_monitor_temp == False:
+        # generate event
+        try:
+            cl_fact_logger.get_instance().info('Power monitor signals powerfail')
+            cl_fact_logic_messenger().get_instance().handle_event('powerfail') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+        except Exception as cx_error:
+            exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+            pass
+            
+    if power_monitor == False and power_monitor_temp == True:
+        # generate event
+        try:
+            cl_fact_logger.get_instance().info('Power monitor signals powergood')
+            cl_fact_logic_messenger().get_instance().handle_event('powergood')  #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+            # cl_fact_nextion.get_instance().reset_page_after_powergood()         #activate last current page
+        except Exception as cx_error:
+            exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+            pass
+            
+    power_monitor = power_monitor_temp 
+    
+def generate_switch_event():
+    global pi_switch
+    
+    pi_switch_temp = pi_ager_gpio_config.check_switch()
+    cl_fact_logger.get_instance().debug('Switch state is ' + ('off' if pi_switch_temp else 'on'))
+    if pi_switch == True and pi_switch_temp == False:
+        # generate event
+        try:
+            cl_fact_logger.get_instance().info('Switch is shorted to GND')
+            cl_fact_logic_messenger().get_instance().handle_event('switch_on') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+        except Exception as cx_error:
+            exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+            pass
+            
+    if pi_switch == False and pi_switch_temp == True:
+        # generate event
+        try:
+            cl_fact_logger.get_instance().info('Switch is open')
+            cl_fact_logic_messenger().get_instance().handle_event('switch_off') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+        except Exception as cx_error:
+            exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+            pass            
+            
+    pi_switch = pi_switch_temp 
+    
+def generate_low_limit_reached_event():
+    # generate event
+    try:
+        cl_fact_logic_messenger().get_instance().handle_event('Int_Temp_Low_Limit') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+    except Exception as cx_error:
+        exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+        pass
+        
+def generate_high_limit_reached_event():
+    # generate event
+    try:
+        cl_fact_logic_messenger().get_instance().handle_event('Int_Temp_High_Limit') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+    except Exception as cx_error:
+        exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+        pass
+        
+def check_internal_temperature_limits():
+    global internal_temperature_low_limit_reached
+    global internal_temperature_high_limit_reached
+    global internal_temperature_low_limit
+    global internal_temperature_high_limit
+    global internal_temperature_hysteresis
+    global sensor_temperature
+    
+    # check if settings in config table changed
+    internal_temperature_low_limit_temp = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.internal_temperature_low_limit_key)
+    internal_temperature_high_limit_temp = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.internal_temperature_high_limit_key)
+    internal_temperature_hysteresis_temp = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.internal_temperature_hysteresis_key) 
+    if internal_temperature_hysteresis_temp != internal_temperature_hysteresis:
+        internal_temperature_low_limit_reached = False
+        internal_temperature_high_limit_reached = False
+    if internal_temperature_low_limit_temp != internal_temperature_low_limit:
+        internal_temperature_low_limit_reached = False
+    if internal_temperature_high_limit_temp != internal_temperature_high_limit:
+        internal_temperature_high_limit_reached = False
+
+    internal_temperature_low_limit = internal_temperature_low_limit_temp
+    internal_temperature_high_limit = internal_temperature_high_limit_temp
+    internal_temperature_hysteresis = internal_temperature_hysteresis_temp
+    
+    if sensor_temperature != None:
+        if sensor_temperature <= internal_temperature_low_limit and internal_temperature_low_limit_reached == False:
+            internal_temperature_low_limit_reached = True
+            generate_low_limit_reached_event()
+            cl_fact_logger.get_instance().info('Internal temperature low limit ' + str(internal_temperature_low_limit) + '°C ' + 'reached')
+        if sensor_temperature >= (internal_temperature_low_limit + internal_temperature_hysteresis):
+            internal_temperature_low_limit_reached = False
+            cl_fact_logger.get_instance().debug('Internal temperature ' + str(sensor_temperature) + '°C higher than ' + str(internal_temperature_low_limit + internal_temperature_hysteresis) + '°C. (low limit + hysteresis)')
+        if sensor_temperature >= internal_temperature_high_limit and internal_temperature_high_limit_reached == False:
+            internal_temperature_high_limit_reached = True
+            generate_high_limit_reached_event()
+            cl_fact_logger.get_instance().info('Internal temperature high limit ' + str(internal_temperature_high_limit) + '°C ' + 'reached')
+        if sensor_temperature <= (internal_temperature_high_limit - internal_temperature_hysteresis):
+            internal_temperature_high_limit_reached = False            
+            cl_fact_logger.get_instance().debug('Internal temperature ' + str(sensor_temperature) + '°C lower than ' + str(internal_temperature_high_limit - internal_temperature_hysteresis) + '°C. (high limit - hysteresis)')
+            
 def doMainLoop():
     """
     mainloop, pi-ager is running
@@ -515,6 +684,22 @@ def doMainLoop():
     global temp_sensor4_data 
     global system_shutdown
 
+    #--------------------------------------------
+    # for event generation
+    global internal_temperature_low_limit_reached
+    global internal_temperature_high_limit_reached
+    global internal_temperature_low_limit
+    global internal_temperature_high_limit
+    global internal_temperature_hysteresis
+    
+    global ups_bat_low          # akku ok
+    global bat_low_true_count   # counter for bat_low true
+    global bat_low_false_count  # counter for bat_low false
+    global bat_low_count_max    # max count for bat_low true and false 
+    global power_monitor        # power supply ok
+    global pi_switch            # switch open
+    #-------------------------------------------
+    
     # Pruefen Sensor, dann Settings einlesen
 
     pi_ager_database.write_start_in_database(pi_ager_names.status_pi_ager_key)
@@ -531,7 +716,22 @@ def doMainLoop():
     light_period = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_period_key))
     uv_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_modus_key))
     light_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_modus_key))  
-          
+    
+    # init temperature limits, generate events if temperature is out of limits
+    internal_temperature_low_limit_reached = False
+    internal_temperature_high_limit_reached = False
+    internal_temperature_low_limit = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.internal_temperature_low_limit_key)
+    internal_temperature_high_limit = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.internal_temperature_high_limit_key)
+    internal_temperature_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.internal_temperature_hysteresis_key) 
+
+    # for UPS Bat Low, Power Monitor and Switch, check to issue events
+    ups_bat_low = True      # akku ok
+    bat_low_true_count = 0  # counter for bat_low true
+    bat_low_false_count = 0 # counter for bat_low false
+    bat_low_count_max = 3   # max count for bat_low true and false 
+    power_monitor = True    # power supply ok
+    pi_switch = True        # switch open
+    
     try:
         while status_pi_ager == 1 and not system_shutdown:
             #Here check Deviation of measurement
@@ -558,10 +758,10 @@ def doMainLoop():
             temp_sensor3_data = get_temp_sensor_data(sensor3_parameter, 2)
             temp_sensor4_data = get_temp_sensor_data(sensor4_parameter, 3)
             
-            if (temp_sensor1_data == None):
-                cl_fact_logger.get_instance().debug("Meat sensor1 not attached")
-            else:
-                cl_fact_logger.get_instance().debug("Meat sensor1 temperature = " + str(temp_sensor1_data))
+            # if (temp_sensor1_data == None):
+            #     cl_fact_logger.get_instance().debug("Meat sensor1 not attached")
+            # else:
+            #     cl_fact_logger.get_instance().debug("Meat sensor1 temperature = " + str(temp_sensor1_data))
                 
             #Sensor
             sht_exception_count = 0
@@ -1143,7 +1343,17 @@ def doMainLoop():
                     sensor2_hum_abs = second_sensor_humidity_abs
                 pi_ager_database.write_all_sensordata(pi_ager_init.loopcounter, sensor_temperature, sensor_humidity, sensor_dewpoint, sensor2_temp, sensor2_hum, sensor2_dew, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data, sensor_humidity_abs, sensor2_hum_abs)    
                 cl_fact_logger.get_instance().debug('writing current values in database performed')
-            
+                
+                # check if events should be issued
+                cl_fact_logger.get_instance().debug('checking internal temperature sensor limits')
+                check_internal_temperature_limits()
+                cl_fact_logger.get_instance().debug('checking UPS state')
+                generate_ups_bat_events()
+                cl_fact_logger.get_instance().debug('checking power monitor')
+                generate_power_monitor_events()
+                cl_fact_logger.get_instance().debug('checking switch')
+                generate_switch_event()        
+                
             else:
                 count_continuing_emergency_loops += 1
                 # logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter) + ' without sensordata!!')

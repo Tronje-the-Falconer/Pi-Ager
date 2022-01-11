@@ -33,12 +33,13 @@ import pi_revision
 from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
+from pi_ager_cl_nextion import cl_fact_nextion
 
 import signal
 import threading
 import pi_ager_cl_scale
 import pi_ager_cl_agingtable
-import pi_ager_cl_nextion
+
 
 # catch signal.SIGTERM and signal.SIGINT when killing main to gracefully shutdown system
 def signal_handler(signum, frame):
@@ -76,8 +77,7 @@ agingtable_thread.start()
 cl_fact_logger.get_instance().debug('Starting agingtable thread done' + time.strftime('%H:%M:%S', time.localtime()))
 
 cl_fact_logger.get_instance().debug('Starting nextion display thread ' + time.strftime('%H:%M:%S', time.localtime()))
-nextion_thread = pi_ager_cl_nextion.pi_ager_cl_nextion()
-nextion_thread.start()
+cl_fact_nextion.get_instance().start()
 cl_fact_logger.get_instance().debug('Starting nextion display thread done' + time.strftime('%H:%M:%S', time.localtime()))
 
 exception_known = True
@@ -86,9 +86,9 @@ exception_known = True
 signal.signal(signal.SIGTERM, signal_handler)
 signal.signal(signal.SIGINT, signal_handler)
 
-# Send a start message
+# Send a start message/event
 try:
-    cl_fact_logic_messenger().get_instance().handle_event('Pi-Ager_started', None) #if the second parameter is empty, the value is take from the field envent_text in table config_messenger_event 
+    cl_fact_logic_messenger().get_instance().handle_event('Pi-Ager_started') #if the second parameter is empty, the value is take from the field envent_text in table config_messenger_event 
 except Exception as cx_error:
     exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
     pass
@@ -119,13 +119,24 @@ finally:
     scale1_thread.stop_received = True
     scale2_thread.stop_received = True
     agingtable_thread.stop_received = True
-    nextion_thread.loop.call_soon_threadsafe(nextion_thread.stop_event.set)
-    nextion_thread.stop_loop()
+
+    cl_fact_nextion.get_instance().prep_show_offline()
+    cl_fact_nextion.get_instance().loop.call_soon_threadsafe(cl_fact_nextion.get_instance().stop_event.set)
+    cl_fact_nextion.get_instance().stop_loop()
     
     scale1_thread.join()
     scale2_thread.join()
     agingtable_thread.join()
-    nextion_thread.join()  
+    cl_fact_nextion.get_instance().join()
     
-    cl_fact_logger.get_instance().debug('threads terminated')   
+    cl_fact_logger.get_instance().debug('threads terminated')
+    
+    # Send shutdown message/event
+    try:
+        cl_fact_logic_messenger().get_instance().handle_event('Pi-Ager_offline') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+    except Exception as cx_error:
+        exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+        pass
+    
+    # release GPIO resources, send message to log
     pi_ager_organization.goodbye()

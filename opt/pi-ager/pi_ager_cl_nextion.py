@@ -6,30 +6,50 @@
     Serial port has to be enabled and login disabled using raspi-config
     
 """
+import globals
 if __name__ == '__main__':
-    import globals
+    # import globals
     # init global threading.lock
     globals.init()
-    
+
+from abc import ABC   
 import subprocess
 import time
 import asyncio
 import signal
-import logging
+# import logging
 import random
+from collections import namedtuple
 import RPi.GPIO as gpio
 
 import pi_ager_database
 import pi_ager_names
 import pi_ager_gpio_config
 
-from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
+# from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
+# from main.pi_ager_cl_logger import cl_fact_logger
+from pi_ager_nextion.client import Nextion, EventType
 from main.pi_ager_cl_logger import cl_fact_logger
-from nextion import Nextion, EventType
 
 import threading
 
-class pi_ager_cl_nextion( threading.Thread ):
+class Timer:
+    def __init__(self, timeout, callback):
+        self._timeout = timeout
+        self._callback = callback
+        self._task = None
+
+    async def _job(self):
+        await asyncio.sleep(self._timeout)
+        await self._callback()
+
+    def start(self):
+        self._task = asyncio.ensure_future(self._job())
+        
+    def cancel(self):
+        self._task.cancel()
+
+class cl_nextion( threading.Thread ):
 
     def __init__( self ):
         super().__init__() 
@@ -38,6 +58,7 @@ class pi_ager_cl_nextion( threading.Thread ):
         self.waiter_task = None
         self.stop_event = None
         self.button_event = None
+        self.reconnect_event = None
         # self.original_sigint_handler = signal.getsignal(signal.SIGINT)
         self.data = None
         self.type_ = None
@@ -46,20 +67,34 @@ class pi_ager_cl_nextion( threading.Thread ):
         self.current_theme = 'fridge'
         self.test_flag = False
         self.light_status = False
+        self.light_timer = Timer(600, self.turn_off_light)
         
     def nextion_event_handler(self, type_, data):
-        self.data = data
-        self.type_ = type_
+
         if type_ == EventType.STARTUP:
-            print('We have booted up!')
+            cl_fact_logger.get_instance().debug('We have booted up!')
         elif type_ == EventType.TOUCH:
-            print('A button (id: %d) was touched on page %d' % (data.component_id, data.page_id))
+            cl_fact_logger.get_instance().debug('A button (id: %d) was touched on page %d' % (data.component_id, data.page_id))
+            self.data = data
+            self.type_ = type_
             self.current_page_id = data.page_id
             self.loop.call_soon_threadsafe(self.button_event.set)
             
         # self.button_event.set()
-        logging.info('Event %s data: %s', type_, str(data))
+        cl_fact_logger.get_instance().info('Event %s data: %s', type_, str(data))
     
+    async def turn_off_light(self):
+        cl_fact_logger.get_instance().info('Light turn off timeout')
+        gpio.output(pi_ager_gpio_config.gpio_light, True)
+        globals.hands_off_light_switch = False
+        self.light_status = False       # turn off
+        # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 0)
+        if self.current_theme == 'fridge':
+            await self.client.set('btn_light.pic', 12) 
+        else:
+            await self.client.set('btn_light.pic', 39)
+        await self.client.set('values.status_light.val', 0) 
+        
     async def control_light_status(self):
         #light_status = await self.client.get('values.status_light.val')  
         if self.light_status == True:
@@ -67,24 +102,91 @@ class pi_ager_cl_nextion( threading.Thread ):
             if self.current_theme == 'fridge':
                 await self.client.set('btn_light.pic', 12) 
             else:
-                await self.client.set('btn_light.pic', 39) 
+                await self.client.set('btn_light.pic', 39)
+            self.light_timer.cancel()                
             gpio.output(pi_ager_gpio_config.gpio_light, True)
+            globals.hands_off_light_switch = False
+            # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 0)
+            
         else:
             self.light_status = True       # turn on
             if self.current_theme == 'fridge':
                 await self.client.set('btn_light.pic', 13)
             else:
-                await self.client.set('btn_light.pic', 41) 
+                await self.client.set('btn_light.pic', 41)
+            self.light_timer.start()
+            globals.hands_off_light_switch = True   
             gpio.output(pi_ager_gpio_config.gpio_light, False)
+            # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 1)
+    
+    async def control_piager_start_stop(self):  # start/stop pi-ager
+        button_state = await self.client.get('btn_piager.val')
+        if button_state == 0:
+            pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key, 0)
+            pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key, 0)
+        else:
+            pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key, 1)
+    
+    async def init_page_17_19(self):  # initialize values  
+        temp_soll = round(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key))
+        humitidy_soll = round(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key))
+        modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.modus_key))
+        
+        await self.client.set('n_temp_soll.val', temp_soll)
+        await self.client.set('n_hum_soll.val', humitidy_soll)
+        await self.client.set('n_mod.val',modus)
+
+    async def save_page_17_19_values(self):
+        #get values and check if within limits
+        temp_soll = await self.client.get('n_temp_soll.val')
+        hum_soll = await self.client.get('n_hum_soll.val')
+        modus = await self.client.get('n_mod.val')
+    
+        if (temp_soll < -11):
+            temp_soll = -11
+            await self.client.set('n_temp_soll.val', temp_soll)
+        elif (temp_soll > 70):
+            temp_soll = 70
+            await self.client.set('n_temp_soll.val', temp_soll)
+            
+        if (hum_soll < 0):
+            hum_soll = 0
+            await self.client.set('n_hum_soll.val', hum_soll)
+        elif (hum_soll > 99):
+            hum_soll = 99
+            await self.client.set('n_hum_soll.val', hum_soll)
+            
+        if (modus < 0):
+            modus = 0
+            await self.client.set('n_mod.val', modus)
+        elif (modus > 4):
+            modus = 4
+            await self.client.set('n_mod.val', modus)  
+            
+        pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key, temp_soll)    
+        pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key, hum_soll)    
+        pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.modus_key, modus)    
             
     async def button_waiter(self, event):
         try:
             while True:
-                print('waiting for button pressed ...')
+#                print('waiting for button pressed ...')
                 await self.button_event.wait()
-                print('... got it!')
-
-                if self.data.page_id == 1 and self.data.component_id == 8:
+#                print('... got it!')
+                cl_fact_logger.get_instance().debug('button_waiter: page_id = %d, component_id = %d' % (self.data.page_id, self.data.component_id))
+                if self.data.component_id == -1:    # component_id = -1 to signal powergood event happened. Activate last active page_id
+                    # await self.client.set('sleep', 0)
+                    cmd = 'page ' + str(self.data.page_id)
+                    await self.client.command(cmd)
+                    self.current_page_id = self.data.page_id
+                elif self.data.page_id == 0:
+                    # await self.client.set('sleep', 0)
+                    await self.client.command('page 1')
+                    self.current_page_id = 1
+                elif self.data.page_id == 8:
+                    await self.client.command('page 9')
+                    self.current_page_id = 9
+                elif self.data.page_id == 1 and self.data.component_id == 8:
                     await self.control_light_status()
                 elif self.data.page_id == 1 and self.data.component_id == 7:
                     await self.client.command('page 2')
@@ -104,6 +206,7 @@ class pi_ager_cl_nextion( threading.Thread ):
                     await self.client.command('page 7')
                     self.current_page_id = 7  
                 elif self.data.page_id == 2 and self.data.component_id == 5:
+                    await self.init_info_page_values()
                     await self.client.command('page 6')
                     self.current_page_id = 6  
                 elif self.data.page_id == 2 and self.data.component_id == 7:
@@ -115,6 +218,10 @@ class pi_ager_cl_nextion( threading.Thread ):
                         self.current_theme = 'steak'
                         await self.client.command('page 10')
                         self.current_page_id = 10
+                elif self.data.page_id == 2 and self.data.component_id == 9:
+                    await self.client.command('page 17')
+                    self.current_page_id = 17
+                    await self.init_page_17_19()
                 elif self.data.page_id == 3 and self.data.component_id == 1:
                     await self.control_light_status()
                 elif self.data.page_id == 3 and self.data.component_id == 10:
@@ -154,16 +261,16 @@ class pi_ager_cl_nextion( threading.Thread ):
                     await self.control_light_status()
                 elif self.data.page_id == 10 and self.data.component_id == 6:
                     await self.control_light_status()
-                elif self.data.page_id == 10 and self.data.component_id == 1:
+                elif self.data.page_id == 10 and self.data.component_id == 1:   # goto main_steak
                     await self.client.command('page 9')
                     self.current_page_id = 9
-                elif self.data.page_id == 10 and self.data.component_id == 2:
+                elif self.data.page_id == 10 and self.data.component_id == 2:   # goto values_steak
                     await self.client.command('page 12')
                     self.current_page_id = 12
                 #elif self.data.page_id == 10 and self.data.component_id == 2:
                 #    await self.client.command('page 11')
                 #    self.current_page_id = 11
-                elif self.data.page_id == 10 and self.data.component_id == 5:
+                elif self.data.page_id == 10 and self.data.component_id == 5:   # goto menu_steak or menu_fridge
                     if (self.current_theme == 'steak'):
                         self.current_theme = 'fridge'
                         await self.client.command('page 2')
@@ -172,15 +279,17 @@ class pi_ager_cl_nextion( threading.Thread ):
                         self.current_theme = 'steak'
                         await self.client.command('page 10')
                         self.current_page_id = 10
-                elif self.data.page_id == 10 and self.data.component_id == 3:
+                elif self.data.page_id == 10 and self.data.component_id == 3:   # goto setting_steak
                     await self.client.command('page 15')
                     self.current_page_id = 15
-                elif self.data.page_id == 10 and self.data.component_id == 4:
+                elif self.data.page_id == 10 and self.data.component_id == 4:   # goto info_steak
+                    await self.init_info_page_values()
                     await self.client.command('page 14')
                     self.current_page_id = 14
-#                elif self.data.page_id == 11 and self.data.component_id == 8:
-#                    await self.client.command('page 10')
-#                    self.current_page_id = 10                                        
+                elif self.data.page_id == 10 and self.data.component_id == 8:   # goto control_steak
+                    await self.client.command('page 19')
+                    self.current_page_id = 19 
+                    await self.init_page_17_19()                    
 #                elif self.data.page_id == 11 and self.data.component_id == 18:
 #                    await self.client.command('page 9')
 #                    self.current_page_id = 9                                             
@@ -210,12 +319,35 @@ class pi_ager_cl_nextion( threading.Thread ):
                     self.current_page_id = 9            
                 elif self.data.page_id == 15 and self.data.component_id == 6:
                     await self.control_light_status()   
-
-                    
+                elif self.data.page_id == 17 and self.data.component_id == 3:   # button menu
+                    await self.client.command('page 2')
+                    self.current_page_id = 2
+                elif self.data.page_id == 17 and self.data.component_id == 4:   # button home
+                    await self.client.command('page 1')
+                    self.current_page_id = 1   
+                elif self.data.page_id == 17 and self.data.component_id == 2:   # button light
+                    await self.control_light_status()
+                elif self.data.page_id == 17 and self.data.component_id == 6:   # button pi-ager start/stop
+                    await self.control_piager_start_stop()
+                elif self.data.page_id == 17 and self.data.component_id == 9:  # button save new Temp/Hum. values
+                    await self.save_page_17_19_values()
+                elif self.data.page_id == 19 and self.data.component_id == 2:   # button menu
+                    await self.client.command('page 10')
+                    self.current_page_id = 10
+                elif self.data.page_id == 19 and self.data.component_id == 3:   # button home
+                    await self.client.command('page 9')
+                    self.current_page_id = 9   
+                elif self.data.page_id == 19 and self.data.component_id == 4:   # button light
+                    await self.control_light_status()
+                elif self.data.page_id == 19 and self.data.component_id == 9:   # button pi-ager start/stop
+                    await self.control_piager_start_stop()
+                elif self.data.page_id == 19 and self.data.component_id == 1:  # button save new Temp/Hum. values
+                    await self.save_page_17_19_values()
+                                        
                 self.button_event.clear()
-                logging.info('button pressed processed')
+                cl_fact_logger.get_instance().info('button pressed processed')
         except Exception as e:
-            logging.error('button_waiter stopped ' + str(e))
+            cl_fact_logger.get_instance().error('button_waiter stopped ' + str(e))
             pass    
     
     def get_pi_model(self):
@@ -237,12 +369,23 @@ class pi_ager_cl_nextion( threading.Thread ):
         except Exception as e:
             return ''
     
-    async def init_display_values(self):
+    async def init_info_page_values(self):
         version = pi_ager_database.get_table_value(pi_ager_names.system_table, pi_ager_names.pi_ager_version_key )
+        display_type = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.tft_display_type_key )
+        
+        display_name = ''
+        if display_type == 1:
+            display_name = 'NX3224K028'
+        elif display_type == 2:
+            display_name = 'NX3224F028'
+        else:
+            display_name = 'NX3224T028'
+
+        await self.client.set('values.displ_version.txt', display_name)
         await self.client.set('values.sw_version.txt', version)
         
         model = self.get_pi_model()
-        print('pi model: ' + model)
+#        print('pi model: ' + model)
         await self.client.set('values.pi_model.txt', model)
         
         wifi_ssid = self.get_wifi_ssid()
@@ -250,8 +393,14 @@ class pi_ager_cl_nextion( threading.Thread ):
         
         await self.client.set('values.status_light.val', 0)
         
+    
+    async def init_display_values(self):
+        await self.init_info_page_values()
+
         self.current_page_id = 1
-        await self.client.command('page 1')     
+        await self.client.set('sleep', 0)
+        await self.client.command('page 1') 
+        await self.client.set('thsp', 0)
         
     def db_get_base_values(self):
         status_piager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key )
@@ -344,7 +493,7 @@ class pi_ager_cl_nextion( threading.Thread ):
         if values['light'] == 0:
             await self.client.set('led_light.pic', 10) 
         else:
-            await self.client.set('led_lightr.pic', 47) 
+            await self.client.set('led_light.pic', 47) 
             
         if values['uv'] == 0:
             await self.client.set('led_uv.pic', 10) 
@@ -363,7 +512,7 @@ class pi_ager_cl_nextion( threading.Thread ):
     
     async def update_base_values(self):
         values = self.db_get_base_values()
-        
+        cl_fact_logger.get_instance().debug('Update_base_values')
         await self.client.set('txt_temp_set.txt', "%.1f" % (values['temp_soll']))
         await self.client.set('txt_humid_set.txt', "%.1f" % (values['humitidy_soll']))        
         if values['status_piager'] == 0:
@@ -451,6 +600,10 @@ class pi_ager_cl_nextion( threading.Thread ):
                 await self.client.set('txt_temp_ext.txt', '--.-') 
                 await self.client.set('txt_humid_ext.txt', '--.-')
         
+    async def update_page_17_19_values(self):
+        status_piager = int(pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key ))
+
+        await self.client.set('btn_piager.val', status_piager)
 
     async def process_page1(self):
         await self.update_base_values()
@@ -468,28 +621,32 @@ class pi_ager_cl_nextion( threading.Thread ):
         
     async def process_page12(self):
         await self.update_extended_values()
-    
+        
+    async def process_page_17_19(self):
+        await self.update_page_17_19_values()
+        
     async def run_client(self):
         self.button_event = asyncio.Event()
         self.stop_event = asyncio.Event()
+        self.reconnect_event = asyncio.Event()
         # self.waiter_task = asyncio.create_task(self.button_waiter(self.button_event))
         # self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))   
         
-        self.client = Nextion('/dev/ttyS0', 9600, self.nextion_event_handler, self.loop)
-        logging.info('client generated')
+        self.client = Nextion('/dev/serial0', 9600, self.nextion_event_handler, self.loop)
+        cl_fact_logger.get_instance().info('client generated')
         try:
             await self.client.connect()
-            logging.info('client connected')
+            cl_fact_logger.get_instance().info('client connected')
             cl_fact_logger.get_instance().info('Nextion client connected')
             self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))                                                                                              
         except Exception as e:
-            logging.error('run_client exception1: ' + str(e))
-            cl_fact_logger.get_instance().info('Could not connect to Nextion client. Possible HDMI display not connected')
+            cl_fact_logger.get_instance().error('run_client exception1: ' + str(e))
+            cl_fact_logger.get_instance().error('Could not connect to Nextion client. Possible HDMI display not connected')
             while not self.stop_event.is_set():
                 await asyncio.sleep(1)
             return                                                                                                              
 
-        logging.info('sleep:' + str(await self.client.get('sleep')))
+        cl_fact_logger.get_instance().info('sleep:' + str(await self.client.get('sleep')))
         
         # init internal display values
         await self.init_display_values()
@@ -499,23 +656,32 @@ class pi_ager_cl_nextion( threading.Thread ):
             #try:
             #    await self.client.set('txt_temp.txt', "%.1f" % (random.randint(0, 1000) / 10))
             #except Exception as e:
-            #    logging.error(str(e))
-            #    pass 
+            #    cl_fact_logger.get_instance().error(str(e))
+            #    pass
+            # cl_fact_logger.get_instance().debug('Client running')
             try:
                 if self.current_page_id == 1:
                     await self.process_page1()
                 elif self.current_page_id == 3:
                     await self.process_page3()
                 elif self.current_page_id == 4:
-                    await self.process_page4()  
+                    await self.process_page4()
+                elif self.current_page_id == 5:
+                    await self.show_offline()                        
                 elif self.current_page_id == 9:
                     await self.process_page9() 
                 elif self.current_page_id == 12:
                     await self.process_page12()  
+                elif self.current_page_id == 17:
+                    await self.process_page_17_19()
+                elif self.current_page_id == 19:
+                    await self.process_page_17_19()
+                elif self.current_page_id == 13:
+                    await self.show_offline()    
                     
             except Exception as e:
-                logging.error('run_client exception2: ' + str(e))
-            
+                cl_fact_logger.get_instance().error('run_client exception2: ' + str(e))
+                cl_fact_logger.get_instance().debug('run_client exception2')
             # await self.client.set('values.temp_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
             # await self.client.set('values.humidity_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
             # await self.client.set('values.dewpoint_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
@@ -524,9 +690,13 @@ class pi_ager_cl_nextion( threading.Thread ):
             # await self.client.set('values.dewpoint_set.txt', "%.1f" % (random.randint(0, 1000) / 10))
             # await self.client.set('values.status_uv.val', 1)
             # await self.client.command('page dp')
+            if self.reconnect_event.is_set():
+                await self.client.reconnect()
+                self.reconnect_event.clear()
+                
             await asyncio.sleep(3)
-       
-        logging.info('run_client finished')
+
+        cl_fact_logger.get_instance().info('run_client finished')
         
     def inner_ctrl_c_signal_handler(self, sig, frame):
         self.stop_event.set()
@@ -538,12 +708,12 @@ class pi_ager_cl_nextion( threading.Thread ):
         gpio.setup(pi_ager_gpio_config.gpio_light, gpio.OUT)   
         
     def run(self):
-        logging.basicConfig(
-            format='%(asctime)s - %(module)s - %(levelname)s - %(message)s',
-            level=logging.DEBUG,
-            handlers=[
-                logging.StreamHandler()
-            ])
+#        logging.basicConfig(
+#            format='%(asctime)s - %(module)s - %(levelname)s - %(message)s',
+#            level=logging.DEBUG,
+#            handlers=[
+#                logging.StreamHandler()
+#            ])
         
         self.init_gpio()
     
@@ -559,10 +729,10 @@ class pi_ager_cl_nextion( threading.Thread ):
         # tasks = [task for task in asyncio.all_tasks(self.loop) if not task.done()]
         # for task in tasks:
         #     task.cancel()
-            logging.info('run_forever stopped')
+            cl_fact_logger.get_instance().info('run_forever stopped')
             tasks = asyncio.all_tasks(self.loop)
             count = len(tasks)
-            logging.info('Elements in tasks list : ' + str(count))                                                                        
+            cl_fact_logger.get_instance().info('Elements in tasks list : ' + str(count))                                                                        
             for t in [t for t in tasks if not (t.done() or t.cancelled())]:
                 self.loop.run_until_complete(t)
 
@@ -575,44 +745,115 @@ class pi_ager_cl_nextion( threading.Thread ):
         #         'task': task
         #         })
         except Exception as e:
-            logging.info('Nextion thread in exception ' + str(e))
+            cl_fact_logger.get_instance().info('Nextion thread in exception ' + str(e))
             
         finally:
-            #logging.info('after finally')
+            #cl_fact_logger.get_instance().info('after finally')
             cl_fact_logger.get_instance().info('Nextion client stopped')
             self.loop.close()
+    
+    async def show_offline(self):
+        if self.client != None:
+            await self.client.set('sleep', 0)
+            if self.current_theme == 'fridge':
+                await self.client.command('page 5')
+            else:
+                await self.client.command('page 13')
+            await self.client.set('thsp', 0)
+            self.current_page_id = None
             
+    def prep_show_offline(self):
+        if self.current_theme == 'fridge':
+            self.current_page_id = 5
+        else:    
+            self.current_page_id = 13
+        time.sleep(4)
+    
+    def reset_page_after_powergood(self):
+        if self.client != None:
+            self.loop.call_soon_threadsafe(self.reconnect_event.set)
+            time.sleep(4)
+            if self.data == None:   # assume current page = 1, cause no touch event happened
+#                print('simulate touch event with page_id = 0, component_id = 1 and touch_event = 1 to enter main_fridge (page 1)')
+                Touch = namedtuple("Touch", "page_id component_id touch_event")
+                self.data = Touch(0, 1, 1)
+#                print('set Display page 1 active')
+                cl_fact_logger.get_instance().info('Nextion client after powergood. Page 1 now active page')
+            else:
+#                print('To force showing page 1, simulate button id = -1 on current page %d' % (self.current_page_id))
+                cl_fact_logger.get_instance().info('Nextion client after powergood. Page 1 now active page')
+                Touch = namedtuple("Touch", "page_id component_id touch_event")
+                # self.data = Touch(self.current_page_id, -1, 1)            
+                self.data = Touch(1, -1, 1)
+                
+            self.loop.call_soon_threadsafe(self.button_event.set)
+        
     def stop_loop(self):
-        logging.info('in stop_loop')
+        cl_fact_logger.get_instance().info('in stop_loop')
         tasks = asyncio.all_tasks(self.loop)
         count = len(tasks)
-        logging.info('Elements in task list : ' + str(count))        
+        cl_fact_logger.get_instance().info('Elements in task list : ' + str(count))        
         for t in tasks:
             t.cancel()
         self.loop.stop()
-        logging.info('after self.loop.stop')
+        cl_fact_logger.get_instance().info('after self.loop.stop')
 
+class cl_fact_nextion(ABC):
+    __o_instance = None
+    
+    @classmethod
+    def set_instance(self, i_instance):
+        """
+        Factory method to set the nextion instance
+        """
+        cl_fact_nextion.__o_instance = i_instance
         
+    @classmethod        
+    def get_instance(self):
+        """
+        Factory method to get the nextion instance
+        """
+        if cl_fact_nextion.__o_instance is not None:
+            return(cl_fact_nextion.__o_instance)
+        cl_fact_nextion.__o_instance = cl_nextion()
+#        cl_fact_logger.get_instance().debug('nextion factory done')
+        return(cl_fact_nextion.__o_instance)
+
+    def __init__(self):
+        """
+        Constructor nextion factory
+        """
+        pass    
+            
         
 def main():
-    nextion_thread = pi_ager_cl_nextion()
     # signal.signal(signal.SIGINT, nextion_thread.inner_ctrl_c_signal_handler)
-    nextion_thread.start()
-    
+    cl_fact_nextion.get_instance().start()
+    i = 0
     try:
-        while True:
+        while i < 60:
+            i = i + 1
             time.sleep(1)
             
+        # simulate powerfail, set last active page  
+        # cl_fact_nextion.get_instance().reset_page_after_powergood()
+        
+        while True:
+            time.sleep(1)
+
     except KeyboardInterrupt:
         print("Ctrl-c received! Sending Stop to thread...")
-        # nextion_thread.stop_event.set()
-        nextion_thread.loop.call_soon_threadsafe(nextion_thread.stop_event.set)
-        # time.sleep(2)
-        nextion_thread.stop_loop()
+        # show offline state on display
+        cl_fact_nextion.get_instance().prep_show_offline()
+        # set stop event
+        cl_fact_nextion.get_instance().loop.call_soon_threadsafe(cl_fact_nextion.get_instance().stop_event.set)
+        # time.sleep(1)
+        cl_fact_nextion.get_instance().stop_loop()
             
-    nextion_thread.join()
+    cl_fact_nextion.get_instance().join()
     print('thread finished.')
     
+
 if __name__ == '__main__':
     main()
         

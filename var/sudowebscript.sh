@@ -35,7 +35,7 @@ case "$1" in
         ps ax | grep -v grep | grep main.py
     ;;
     startfirmwareprog) # start tft display firmware programming
-        python3 /opt/pi-ager/piager_upload_firmware.py /dev/ttyS0 /var/www/nextion/pi-ager.tft >/dev/null 2>/dev/null &
+        python3 /opt/pi-ager/piager_upload_firmware.py /dev/serial0 $2 >/dev/null 2>/dev/null &
     ;;
     reboot) # reboot
         sleep 3
@@ -47,7 +47,7 @@ case "$1" in
     ;;
     savewebcampicture) # macht ein Bild mit der Webcam
         #curl -s -m 5 -o /var/www/images/webcam/snap_$DATE.jpg http://$MYIP:8080/?action=snapshot
-        fswebcam -r 640X480 -S 10 $2
+        fswebcam --fps 30 -r 640x480 -S 20 $2
     ;;
     ziplogfiles) # Zippt alle logfiles
         pushd /var/www/ && zip -r /var/www/logs/pi-ager_logfiles.zip ./logs/ && popd
@@ -57,7 +57,7 @@ case "$1" in
         rm /var/www/images/webcam/*.jpg
     ;;
     backup) # Backupscript ausfuehren
-        /usr/local/bin/pi-ager_backup.sh >> /var/log/pi-ager_backup.log &
+        /usr/local/bin/pi-ager_backup.sh >> /var/www/logs/pi-ager_backup.log &
     ;;
     test_mailserver) 
             python3 /opt/pi-ager/pi_ager_test_mail.py

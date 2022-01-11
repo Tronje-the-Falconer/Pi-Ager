@@ -33,7 +33,7 @@ gpio_scale1_data = 5                # GPIO fuer Waage1 Data
 gpio_scale1_sync = 6                # GPIO fuer Waage1 Sync
 gpio_alarm = 13                     # GPIO fuer Piezzo
 gpio_temperature_meat_MISO = 19     # GPIO fuer A/D Wandler Fleischtemperatursensoren
-gpio_power_monitor = 26             # GPIO für Powersignal
+gpio_power_monitor = 26             # GPIO fuer Powersignal
 # Ground
 
 # rechte Pinleiste:#
@@ -93,7 +93,7 @@ def setupGPIO():
     # 3,3 V
     gpio.setup(gpio_scale2_data, gpio.IN)             # Scale2 Data setzen
     gpio.setup(gpio_scale2_sync, gpio.OUT)            # Scale2 Sync setzen
-    # gpio.setup(pi_ager_names.gpio_ups_bat_low, gpio.IN)           # UPS Bat LOW signal
+    gpio.setup(gpio_ups_bat_low, gpio.IN)             # UPS Bat LOW signal
     # Ground
     # gpio.setup(pi_ager_names.gpio_notinuse_3, gpio. )
     gpio.setup(gpio_scale1_data, gpio.IN)             # Scale1 Data setzen
@@ -187,3 +187,34 @@ def gpio_is_in_use(gpio_pin):
         return False
     else:
         return True
+
+def check_ups_bat_low():
+    """
+    check UPS Bat Low input
+    return True if ok
+    """
+    if gpio.input(gpio_ups_bat_low) == 1:
+        return True
+    else:
+        return False
+    
+def check_power_monitor():
+    """
+    check Power Monitor input
+    return True if ok
+    """
+    if gpio.input(gpio_power_monitor) == 1:
+        return True
+    else:
+        return False
+
+def check_switch():
+    """
+    check switch input
+    return True if high
+    return False if low (switch active low)
+    """
+    if gpio.input(gpio_switch) == 1:
+        return True
+    else:
+        return False    

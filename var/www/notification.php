@@ -98,6 +98,9 @@
                                                                 if ($index_row == 0) {
                                                                     echo '<td><input name="messenger_exception_' . $messenger_id . '" type="text" style="width: 90%; text-align: right; background-color: lightgrey; color: red;" readonly required value=' . $messenger_exception .'></td>';
                                                                 }
+                                                                else if ($index_row <= 9) {
+                                                                    echo '<td><input name="messenger_exception_' . $messenger_id . '" type="text" style="width: 90%; text-align: right; background-color: #E8E8E8;" readonly required value=' . $messenger_exception .'></td>';                            
+                                                                }
                                                                 else {
                                                                     echo '<td><input name="messenger_exception_' . $messenger_id . '" type="text" style="width: 90%; text-align: right;" required value=' . $messenger_exception .'></td>';                            
                                                                 }
@@ -135,7 +138,7 @@
                                                 }
                                             ?>
                                         </table>
-                                    <button class="art-button" name="save_messenger_values" value="save_messenger_values" onclick="return confirm('<?php echo _('ATTENTION: save messenger values? IMPORTANT: after modifications in this area you have to reboot the system! ');?>');"><?php echo _('save'); ?></button>
+                                    <button class="art-button" name="save_messenger_values" value="save_messenger_values" onclick="return confirm('<?php echo _('ATTENTION: save messenger values?');?>');"><?php echo _('save'); ?></button>
                                     </form>
                                     <form method="post" name="add_messenger">
                                         <table id="show_messenger" class="show_messenger" style="width: 100%;">
@@ -172,12 +175,12 @@
                                                          <input type="checkbox" name="add_checked_messenger_active_true" value="1"></td>
                                             </tr>
                                         </table>
-                                        <button class="art-button" name="add_messenger" value="add_messenger" onclick="return confirm('<?php echo _('ATTENTION: add messenger? IMPORTANT: after modifications in this area you have to reboot the system!');?>');"><?php echo _('add'); ?></button>
+                                        <button class="art-button" name="add_messenger" value="add_messenger" onclick="return confirm('<?php echo _('ATTENTION: add messenger?');?>');"><?php echo _('add'); ?></button>
                                     </form>
                                     <form method="post" name="delete_messenger">
                                         <table id="show_messenger" class="show_messenger" style="width: 100%;">
                                             <tr>
-                                                <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" min="8" step="1" style="width: 90%; text-align: right;" ></td>
+                                                <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" min="10" step="1" style="width: 90%; text-align: right;" ></td>
                                             </tr>
                                             <tr>
                                                 <td colspan=2><button class="art-button" name="delete_messenger" value="delete_messenger" onclick="return confirm('<?php echo _('ATTENTION: delete messenger?');?>');"><?php echo _('delete'); ?></button></td>
@@ -308,7 +311,7 @@
                                                                         echo '</select></td>';
                                                                 }
                                                                 echo '<td>
-                                                                        <input type="text" name="event_eventtext_' . $event_id . '" type="text" style="width: 90%; text-align: right;" required value="' . $event_eventtext .'"></td>';
+                                                                        <input type="text" name="event_eventtext_' . $event_id . '" style="width: 90%; text-align: right;" value="' . $event_eventtext .'"></td>';
                                                                  echo '<td> <input type="hidden" name="checked_event_active_true_' . $event_id . '" value="0">
                                                                         <input type="checkbox" name="checked_event_active_true_' . $event_id . '" value="1" ' . $checked_event_active_true .'></td>';
                                                             echo '</tr>';
@@ -323,6 +326,7 @@
                                         </table>
                                     <button class="art-button" name="save_event_values" value="save_event_values" onclick="return confirm('<?php echo _('ATTENTION: save event values?');?>');"><?php echo _('save'); ?></button>
                                     </form>
+                                   
                                     <form method="post" name="add_event">
                                         <table id="show_event" class="show_event" style="width: 100%;">
                                             <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
@@ -353,9 +357,12 @@
                                                     }
                                                 ?>
                                                 <td>
-                                                    <input type="text" name="add_event_eventtext"></td>
-                                                <td> <input type="hidden" name="add_checked_event_active_true" value="0">
-                                                         <input type="checkbox" name="add_checked_event_active_true" value="1"></td>
+                                                    <input type="text" name="add_event_eventtext" style="width: 90%; text-align: right;">
+                                                </td>
+                                                <td>
+                                                    <input type="hidden" name="add_checked_event_active_true" value="0">
+                                                    <input type="checkbox" name="add_checked_event_active_true" value="1">
+                                                </td>
                                             </tr>
                                         </table>
                                         <button class="art-button" name="add_event" value="add_event" onclick="return confirm('<?php echo _('ATTENTION: add event?');?>');"><?php echo _('add'); ?></button>
@@ -363,13 +370,15 @@
                                     <form method="post" name="delete_event">
                                         <table id="show_event" class="show_event" style="width: 100%;">
                                             <tr>
-                                                <td><?php echo _('id to delete: ') ?></td><td><input name="event_id" type="number" min= "2" step="1" style="width: 90%; text-align: right;" ></td>
+                                                <td><?php echo _('id to delete: ') ?></td>
+                                                <td><input name="event_id" type="number" min= "11" step="1" style="width: 90%; text-align: right;" ></td>
                                             </tr>
                                             <tr>
                                                 <td colspan=2><button class="art-button" name="delete_event" value="delete_event" onclick="return confirm('<?php echo _('ATTENTION: delete event?');?>');"><?php echo _('delete'); ?></button></td>
                                             </tr>
                                         </table>
                                     </form>
+                                    
                                     <p class="help_b">
                                         <button class="art-button" type="button" onclick="help_event_blockFunction()"><?php echo _('help'); ?></button>
                                     </p>

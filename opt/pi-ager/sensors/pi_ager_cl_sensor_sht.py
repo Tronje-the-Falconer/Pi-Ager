@@ -25,8 +25,6 @@ from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor import cl_sensor#
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 
-# global logger
-# logger = pi_ager_logging.create_logger(__name__) 
 
 class cl_sensor_sht(cl_sensor, ABC):
     
@@ -38,7 +36,6 @@ class cl_sensor_sht(cl_sensor, ABC):
     _STATUS_BITS_MASK = 0xFFFC
     
     def __init__(self, i_active_sensor, i_sensor_type, i_address):
-        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug("i2c address is" + str(i_address))
                     
@@ -71,7 +68,6 @@ class cl_sensor_sht(cl_sensor, ABC):
 
  
     def _send_i2c_start_command(self):
-        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         msb_data = 0x24
@@ -80,7 +76,7 @@ class cl_sensor_sht(cl_sensor, ABC):
         #Write the sensor data
         self._i2c_bus.write_byte_data(self._i2c_sensor.get_address(), msb_data, lsb_data)
 
-        time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
+        time.sleep(0.01) #This is so the sensor has time to perform the measurement and write its registers before you read it
         
         
         msb_data = 0x21
@@ -88,24 +84,15 @@ class cl_sensor_sht(cl_sensor, ABC):
         #Write the sensor data
         self._i2c_bus.write_byte_data(self._i2c_sensor.get_address(), msb_data, lsb_data)
 
-        time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
+        time.sleep(0.01) #This is so the sensor has time to perform the measurement and write its registers before you read it
    
     
     def _read_data(self):
-        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
                      
-        try:
-           
-            self._send_i2c_start_command()
-        except Exception as cx_error:
-            cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
- 
-        try:
-            self.data0 = self._i2c_bus.read_i2c_block_data(self._i2c_sensor.get_address(), 0x00, 8)
-        except OSError as cx_error:
-            self._error_counter = self._error_counter + 1
-            raise cx_error
+        self._send_i2c_start_command()
+        self.data0 = self._i2c_bus.read_i2c_block_data(self._i2c_sensor.get_address(), 0x00, 8)
+
         self.t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
         self.h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
         
@@ -118,7 +105,6 @@ class cl_sensor_sht(cl_sensor, ABC):
 
         localtime = time.asctime( time.localtime(time.time()) )
         if hex(t_crc_calc) != hex(t_crc):
-        #if 1 != 1:
             cl_fact_logger.get_instance().debug("Local current time :", localtime)    
             cl_fact_logger.get_instance().debug("Temperature CRC calc is : %x " %t_crc_calc)
             cl_fact_logger.get_instance().debug("Temperature CRC real is : %x " %t_crc) 
@@ -128,38 +114,21 @@ class cl_sensor_sht(cl_sensor, ABC):
             else:
                 self.soft_reset()
                 self.clear_status_register()
-                raise cx_i2c_sht_temperature_crc_error
-            # logger.debug("Local current time :", localtime)    
-            # logger.debug("Temperature CRC calc is : %x " %t_crc_calc)
-            # logger.debug("Temperature CRC real is : %x " %t_crc) 
-            # logger.error("CRC Error")
-            cl_fact_logger.get_instance().debug("Local current time :", localtime)    
-            cl_fact_logger.get_instance().debug("Temperature CRC calc is : %x " %t_crc_calc)
-            cl_fact_logger.get_instance().debug("Temperature CRC real is : %x " %t_crc) 
-            cl_fact_logger.get_instance().error("CRC Error")
-            raise cx_i2c_sht_temperature_crc_error
-            # logger.debug("Local current time :", localtime)    
-            # logger.debug("Temperature CRC calc is : %x " %t_crc_calc)
-            # logger.debug("Temperature CRC real is : %x " %t_crc) 
-            # logger.error("CRC Error")
-            cl_fact_logger.get_instance().debug("Local current time :", localtime)    
-            cl_fact_logger.get_instance().debug("Temperature CRC calc is : %x " %t_crc_calc)
-            cl_fact_logger.get_instance().debug("Temperature CRC real is : %x " %t_crc) 
-            cl_fact_logger.get_instance().error("CRC Error")
+
             raise cx_i2c_sht_temperature_crc_error
         
         if hex(h_crc_calc) != hex(h_crc):
-        #if 1 != 1:
             cl_fact_logger.get_instance().debug("Local current time :", localtime)    
             cl_fact_logger.get_instance().debug("Humidity CRC calc is : %x " %h_crc_calc)
             cl_fact_logger.get_instance().debug("Humidity CRC real is : %x " %h_crc) 
-   
+            cl_fact_logger.get_instance().error("CRC Error")   
             if (self._system_reset_detected == True):
                  cl_fact_main_sensor().set_instance(None)
             else:
                 self.soft_reset()
                 self.clear_status_register()
-                raise cx_i2c_sht_humidity_crc_error
+                
+            raise cx_i2c_sht_humidity_crc_error
             
    
 
@@ -171,7 +140,7 @@ class cl_sensor_sht(cl_sensor, ABC):
         #Write the sensor data
         self._i2c_bus.write_byte_data(self._i2c_sensor.get_address(), msb_data, lsb_data)
 
-        time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
+        time.sleep(0.01) #This is so the sensor has ime to perform the measurement and write its registers before you read it
         self.read_status_register()
         
     def read_status_register(self):
@@ -184,13 +153,10 @@ class cl_sensor_sht(cl_sensor, ABC):
 
         time.sleep(0.01) #This is so the sensor has tme to preform the mesurement and write its registers before you read it
         
-        try:
-            self.data0 = self._i2c_bus.read_i2c_block_data(self._i2c_sensor.get_address(), 0x00, 16)
-        except Exception as cx_error:
-            pass
+        self.data0 = self._i2c_bus.read_i2c_block_data(self._i2c_sensor.get_address(), 0x00, 16)
 
         self.status_register = (self.data0[0]<<8) + self.data0[1]
-        cl_fact_logger.get_instance().debug(self.status_register)
+        cl_fact_logger.get_instance().debug("Status register is : %x " %self.status_register)
         
         if self.is_set(self.status_register, 15): self._alert_pending = True 
         else: self._alert_pending = False
@@ -212,75 +178,72 @@ class cl_sensor_sht(cl_sensor, ABC):
         cl_fact_logger.get_instance().debug("System reset detected: %r" % self._system_reset_detected)
         cl_fact_logger.get_instance().debug("Command status successfully %r" % self._command_status_successfully)
 
-        "CRC Values"
+        # CRC Values
          
         status_register_crc = self._i2c_sensor.calculate_checksum(self.status_register)
         localtime = time.asctime( time.localtime(time.time()) )
         sensor_crc = self.data0[2]
         if hex(status_register_crc) != hex(sensor_crc):
-        #if 1 != 1:
             cl_fact_logger.get_instance().debug("Local current time :", localtime)    
             cl_fact_logger.get_instance().debug("Status Register CRC calc is : %x " %status_register_crc)
             cl_fact_logger.get_instance().debug("Status Register CRC real is : %x " %sensor_crc) 
             cl_fact_logger.get_instance().error("Status Register CRC Error")
+            
     def is_set(self, x, n):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         #return x & 2 ** n != 0 
     
         # a more bitwise- and performance-friendly version:
         return (x & 1 << n != 0) 
         
     def get_current_data(self):
-        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        self._read_data()
-        self._current_temperature = self._get_current_temperature()
-        self._current_humidity    = self._get_current_humidity()
-        # logger.debug(self._current_temperature)
-        # logger.debug(self._current_humidity)
-        cl_fact_logger.get_instance().debug("sht temperature : " + str(self._current_temperature))
-        cl_fact_logger.get_instance().debug("sht humidity : " + str(self._current_humidity))
-        self._dewpoint            = super().get_dewpoint(self._current_temperature, self._current_humidity)
-        # super().calc_mean_temperature(self._current_temperature)
-        # self.mean_temperature     = super().get_mean_temperature()
-        # cl_fact_logger.get_instance().debug(self.o_active_sensor + "Mean temperature :"+ str(self.mean_temperature)) 
         
-       
-       
-       
-        (temperature_dewpoint, humidity_absolute) = self._dewpoint
+        repeat_count = 0
+        while repeat_count < 5:
+            try:
+                self._read_data()
+                    
+                self._current_temperature = self._get_current_temperature()
+                self._current_humidity    = self._get_current_humidity()
+
+                cl_fact_logger.get_instance().debug("sht temperature : " + str(self._current_temperature))
+                cl_fact_logger.get_instance().debug("sht humidity : " + str(self._current_humidity))
+                self._dewpoint = super().get_dewpoint(self._current_temperature, self._current_humidity)
+                (temperature_dewpoint, humidity_absolute) = self._dewpoint
         
-        self.measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint, humidity_absolute)
-        return(self.measured_data)
+                self.measured_data = (self._current_temperature, self._current_humidity, temperature_dewpoint, humidity_absolute)
+                return(self.measured_data)
+                
+            except Exception as cx_error:
+                repeat_count = repeat_count + 1
+                cl_fact_logger.get_instance().exception(cx_error)
+                cl_fact_logger.get_instance().debug('Retry getting measurement from I2C. Current retry count : ' + str(repeat_count))
+
+                
+        raise cx_measurement_error ('Too many measurement errors occurred!')
         
     
     def _get_current_temperature(self):
-        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        #self._read_data()
-#        self._current_temperature = self._i2c_sensor.get_temperature()
+
         t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
         
         Temperature_Celsius    = ((175.72 * self.t_val) / 2**16 - 1 ) - 45 #do the maths from datasheet
         Temperature_Fahrenheit = ((315.0  * self.t_val) / 2**16 - 1 ) - 49 #do the maths from datasheet
 
-        # logger.debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
-        # logger.debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
         cl_fact_logger.get_instance().debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
         cl_fact_logger.get_instance().debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
             
         return(Temperature_Celsius)
   
     def _get_current_humidity(self):
-        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        #self._read_data()
-#        self._current_humidity = self._i2c_sensor.get_humidity()
+
         h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
         
         Humidity = ((100.0 * self.h_val) / 2**16 - 1 )
 
-        # logger.debug("Relative Humidity is : %.2f %%RH" %Humidity)
         cl_fact_logger.get_instance().debug("Relative Humidity is : %.2f %%RH" %Humidity)
 
         return(Humidity)
@@ -292,32 +255,27 @@ class cl_sensor_sht(cl_sensor, ABC):
 
     def soft_reset(self):
         """Performs Soft Reset on SHT chip"""
-        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-    #self._i2c_bus.write_word_data(self._RESET)
+
         msb_data = 0x30
         lsb_data = 0xA2
         #Write the sensor data
         self._i2c_bus.write_byte_data(self._i2c_sensor.get_address(), msb_data, lsb_data)   
         self._send_i2c_start_command()
-#        self._i2c_bus.wr    ite_byte_data(self._i2c_sensor.get_address(), self._RESET)   
+ 
     def set_heading_on(self):
         """Switch the heading on the sensor on"""
-        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._i2c_bus.write(self._HEATER_ON)
         pass
     
     def set_heading_off(self):
         """Switch the heading on the sensor off"""
-        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._i2c_bus.write(self._HEATER_OFF)
         pass
 
     def execute(self):
-        # logger.debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        #self.get_current_data()
         self._write_to_db()
         

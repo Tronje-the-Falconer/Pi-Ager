@@ -859,12 +859,14 @@
                             $switch_on_humidifier, $switch_off_humidifier, $delay_humidify, $uv_modus, $uv_duration, 
                             $uv_period, $switch_on_uv_hour, $switch_on_uv_minute, $light_modus, $light_duration, 
                             $light_period, $switch_on_light_hour, $switch_on_light_minute, $dehumidifier_modus, 
-                            $failure_temperature_delta, $failure_humidity_delta)
+                            $failure_temperature_delta, $failure_humidity_delta, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
+                            $shutdown_on_batlow)
         {
         global $value_field, $last_change_field, $key_field, $config_settings_table, $switch_on_cooling_compressor_key,
                 $switch_off_cooling_compressor_key, $switch_on_humidifier_key, $switch_off_humidifier_key, $delay_humidify_key, $uv_modus_key,
                 $uv_duration_key, $uv_period_key, $switch_on_uv_hour_key, $switch_on_uv_minute_key, $light_modus_key, $light_duration_key, $light_period_key,
-                $switch_on_light_hour_key, $switch_on_light_minute_key, $dehumidifier_modus_key, $failure_temperature_delta_key, $failure_humidity_delta_key; 
+                $switch_on_light_hour_key, $switch_on_light_minute_key, $dehumidifier_modus_key, $failure_temperature_delta_key, $failure_humidity_delta_key, 
+                $internal_temperature_low_limit_key, $internal_temperature_high_limit_key, $internal_temperature_hysteresis_key, $shutdown_on_batlow_key;
         open_connection();
 
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($switch_on_cooling_compressor) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $switch_on_cooling_compressor_key . '"');
@@ -885,6 +887,10 @@
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($dehumidifier_modus) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' = "' . $dehumidifier_modus_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($failure_temperature_delta) . ' WHERE ' . $key_field . ' = "' . $failure_temperature_delta_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($failure_humidity_delta) . ' WHERE ' . $key_field . ' = "' . $failure_humidity_delta_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($internal_temperature_low_limit) . ' WHERE ' . $key_field . ' = "' . $internal_temperature_low_limit_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($internal_temperature_high_limit) . ' WHERE ' . $key_field . ' = "' . $internal_temperature_high_limit_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($internal_temperature_hysteresis) . ' WHERE ' . $key_field . ' = "' . $internal_temperature_hysteresis_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($shutdown_on_batlow) . ' WHERE ' . $key_field . ' = "' . $shutdown_on_batlow_key . '"');
         
         close_database();
         }
@@ -1057,18 +1063,18 @@
         return $value;
     }
     
-    function write_backupvalues($backup_nfsvol, $backup_subdir, $backup_nfsmount, $backup_path, $backup_number_of_backups, $backup_name, $backup_nfsopt, $backup_active){
-        global $id_field, $backup_table, $backup_nfsvol_field, $backup_subdir_field, $backup_nfsmount_field, $backup_path_field, $backup_number_of_backups_field, $backup_name_field, $backup_nfsopt_field, $backup_active_field;
+    function write_backupvalues($backup_nfsvol, $backup_number_of_backups, $backup_name, $backup_nfsopt, $backup_active){
+        global $id_field, $backup_table, $backup_nfsvol_field, $backup_number_of_backups_field, $backup_name_field, $backup_nfsopt_field, $backup_active_field;
         
         if (is_table_empty($backup_table) == True) {
             open_connection();
-            $sql = 'INSERT INTO ' . $backup_table . ' (' . $id_field . ', ' . $backup_nfsvol_field . ', ' . $backup_subdir_field . ', ' . $backup_nfsmount_field . ', ' . $backup_path_field . ', ' . $backup_number_of_backups_field . ', ' . $backup_name_field . ', ' . $backup_nfsopt_field . ', ' . $backup_active_field . ' ) VALUES (' . '"1"' . ', "' . $backup_nfsvol . '", "' . $backup_subdir . '", "' . $backup_nfsmount . '", "' . $backup_path . '", "' .  strval($backup_number_of_backups) . '", "' . $backup_name . '", "' . $backup_nfsopt . '", "' . strval($backup_active) . '")';
+            $sql = 'INSERT INTO ' . $backup_table . ' (' . $id_field . ', ' . $backup_nfsvol_field . ', ' . $backup_number_of_backups_field . ', ' . $backup_name_field . ', ' . $backup_nfsopt_field . ', ' . $backup_active_field . ' ) VALUES (' . '"1"' . ', "' . $backup_nfsvol . '", "' .  strval($backup_number_of_backups) . '", "' . $backup_name . '", "' . $backup_nfsopt . '", "' . strval($backup_active) . '")';
             execute_query($sql);
             close_database();
         }
         else {
             open_connection();
-            $sql = 'UPDATE ' . $backup_table . ' SET "' . $backup_nfsvol_field . '" = "' . $backup_nfsvol . '" , "' . $backup_subdir_field . '" = "' . $backup_subdir . '" , "' . $backup_nfsmount_field . '" = "' . $backup_nfsmount . '" , "' . $backup_path_field . '" = "' . $backup_path . '" , "' . $backup_number_of_backups_field . '" = ' . $backup_number_of_backups . ' , "' . $backup_name_field . '" = "' . $backup_name . '" , "' . $backup_nfsopt_field . '" = "' . $backup_nfsopt . '" , "' . $backup_active_field . '" = "' . $backup_active . '" ' . ' WHERE ' . $id_field . ' = 1';
+            $sql = 'UPDATE ' . $backup_table . ' SET "' . $backup_nfsvol_field . '" = "' . $backup_nfsvol . '" , "' .  $backup_number_of_backups_field . '" = ' . $backup_number_of_backups . ' , "' . $backup_name_field . '" = "' . $backup_name . '" , "' . $backup_nfsopt_field . '" = "' . $backup_nfsopt . '" , "' . $backup_active_field . '" = "' . $backup_active . '" ' . ' WHERE ' . $id_field . ' = 1';
             execute_query($sql);
             close_database();
         }

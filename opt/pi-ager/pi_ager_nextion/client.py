@@ -1,7 +1,7 @@
 import asyncio
 import binascii
-import logging
-import os
+#import logging
+import os,stat
 import struct
 import typing
 from collections import namedtuple
@@ -15,9 +15,25 @@ from .protocol import BasicProtocol, EventType, NextionProtocol, ResponseType
     
 import pi_ager_names
 import pi_ager_database
+from main.pi_ager_cl_logger import cl_fact_logger
 
-logger = logging.getLogger("nextion").getChild(__name__)
-logger.debug("logging initialized")
+#logger = logging.getLogger("nextion").getChild(__name__)
+# set log level
+#logger.setLevel(logging.DEBUG)
+
+# define file handler and set formatter
+# logfile = '/var/www/logs/nextion.log'
+# logf = open(logfile, "ab")
+# logf.close()
+# os.chmod(logfile, stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
+
+# file_handler = logging.FileHandler(logfile)
+# formatter    = logging.Formatter('%(asctime)s : %(levelname)s : %(name)s : %(message)s')
+# file_handler.setFormatter(formatter)
+
+# add file handler to logger
+# logger.addHandler(file_handler)
+cl_fact_logger.get_instance().debug("logging initialized")
 
 TouchDataPayload = namedtuple("Touch", "page_id component_id touch_event")
 TouchCoordinateDataPayload = namedtuple("TouchCoordinate", "x y touch_event")
@@ -40,7 +56,7 @@ class Nextion:
         self._connection = None
         self._command_lock = asyncio.Lock()
         self.event_handler = event_handler or (
-            lambda t, d: logger.info("Event %s data: %s" % (t, str(d)))
+            lambda t, d: cl_fact_logger.get_instance().info("Event %s data: %s" % (t, str(d)))
         )
         self.reconnect_attempts = reconnect_attempts
         self.encoding = encoding
@@ -52,16 +68,17 @@ class Nextion:
         await self.command("bkcmd=3")  # Let's ensure we receive expected responses
 
     async def on_wakeup(self):
-        logger.debug('Updating variables after wakeup: "%s"', str(self.sets_todo))
+        cl_fact_logger.get_instance().debug('Updating variables after wakeup: "%s"', str(self.sets_todo))
         for k, v in self.sets_todo.items():
             self._loop.create_task(self.set(k, v))
         self.sets_todo = {}
         self._sleeping = False
 
     def event_message_handler(self, message):
-        logger.debug("Handle event: %s", message)
+        cl_fact_logger.get_instance().debug("Handle event: %s", message)
 
         typ = message[0]
+        # cl_fact_logger.get_instance().debug("event: 0x%02x", typ)
         if typ == EventType.TOUCH:  # Touch event
             self.event_handler(
                 EventType(typ),
@@ -84,12 +101,13 @@ class Nextion:
             self._loop.create_task(self.on_wakeup())
             self.event_handler(EventType(typ), None)
         elif typ == EventType.STARTUP:  # System successful start up
+            self._sleeping = False
             self._loop.create_task(self.on_startup())
             self.event_handler(EventType(typ), None)
         elif typ == EventType.SD_CARD_UPGRADE:  # Start SD card upgrade
             self.event_handler(EventType(typ), None)
         else:
-            logger.warning("Other event: 0x%02x", typ)
+            cl_fact_logger.get_instance().warning("Other event: 0x%02x", typ)
 
     def _make_protocol(self) -> NextionProtocol:
         return NextionProtocol(event_message_handler=self.event_message_handler)
@@ -97,14 +115,14 @@ class Nextion:
     async def _connect_at_baud(self, baud):
         delay_between_connect_attempts = (1000000 / baud + 30) / 1000
 
-        logger.info("Connecting: %s, baud: %s", self._url, baud)
+        cl_fact_logger.get_instance().info("Connecting: %s, baud: %s", self._url, baud)
         try:
             await self._create_serial_connection(baud)
         except OSError as e:
             if e.errno == 2:
                 raise ConnectionFailed("Failed to open serial connection: %s" % e)
             else:
-                logger.warning("Baud %s not supported: %s", baud, e)
+                cl_fact_logger.get_instance().warning("Baud %s not supported: %s", baud, e)
                 return False
 
         await self._connection.wait_connection()
@@ -126,7 +144,7 @@ class Nextion:
         if result:
             return result
         else:
-            logger.warning("No valid reply on %d baud. Closing connection", baud)
+            cl_fact_logger.get_instance().warning("No valid reply on %d baud. Closing connection", baud)
             await self._connection.close()
             return False
 
@@ -142,7 +160,7 @@ class Nextion:
                 if result[:6] == b"comok ":
                     break
                 else:
-                    logger.warning("Wrong reply %s to connect attempt", result)
+                    cl_fact_logger.get_instance().warning("Wrong reply %s to connect attempt", result)
             except asyncio.TimeoutError:
                 pass  # Attempt a next method
         return result
@@ -157,14 +175,14 @@ class Nextion:
             result = await self._try_connect_on_different_baudrates()
 
             data = result[7:].decode().split(",")
-            logger.info(
+            cl_fact_logger.get_instance().info(
                 "Address: %s", data[1]
             )  # <unknown>-<address>, if address then all commands need to be
             # prepended with address. See https://nextion.tech/2017/12/08/nextion-hmi-upload-protocol-v1-1/
-            logger.info("Detected model: %s", data[2])
-            logger.info("Firmware version: %s", data[3])
-            logger.info("Serial number: %s", data[5])
-            logger.info("Flash size: %s", data[6])
+            cl_fact_logger.get_instance().info("Detected model: %s", data[2])
+            cl_fact_logger.get_instance().info("Firmware version: %s", data[3])
+            cl_fact_logger.get_instance().info("Serial number: %s", data[5])
+            cl_fact_logger.get_instance().info("Flash size: %s", data[6])
 
             try:
                 await self._command("bkcmd=3", attempts=1)
@@ -173,17 +191,18 @@ class Nextion:
 
             await self._update_sleep_status()
 
-            logger.info("Successfully connected to the device")
+            cl_fact_logger.get_instance().info("Successfully connected to the device")
         except ConnectionFailed:
-            logger.exception("Connection failed")
+            cl_fact_logger.get_instance().exception("Connection failed")
             raise
         except:
-            logger.exception("Unexpected exception during connect")
+            cl_fact_logger.get_instance().exception("Unexpected exception during connect")
             raise
 
     async def _update_sleep_status(self):
         self._sleeping = bool(await self._command("get sleep"))
-
+        # cl_fact_logger.get_instance().info("update sleep mode = " + str(self._sleeping))
+        
     async def _try_connect_on_different_baudrates(self):
         baudrates = self._get_priority_ordered_baudrates()
 
@@ -193,7 +212,7 @@ class Nextion:
                 self._baudrate = baud
                 break
             else:
-                logger.warning("Baud %d did not work", baud)
+                cl_fact_logger.get_instance().warning("Baud %d did not work", baud)
         else:
             raise ConnectionFailed("No baud rate suited")
         return result
@@ -225,7 +244,7 @@ class Nextion:
         if isinstance(value, str):
             out_value = '"%s"' % value
         elif isinstance(value, float):
-            logger.warning("Float is not supported. Converting to string")
+            cl_fact_logger.get_instance().warning("Float is not supported. Converting to string")
             out_value = '"%s"' % str(value)
         elif isinstance(value, int):
             out_value = str(value)
@@ -235,10 +254,10 @@ class Nextion:
             )
 
         if self._sleeping and key not in ["sleep"]:
-            logger.debug(
+            cl_fact_logger.get_instance().debug(
                 'Device sleeps. Scheduling "%s" set for execution after wakeup', key
             )
-            self.sets_todo[key] = value
+            # self.sets_todo[key] = value
         else:
             return await self.command("%s=%s" % (key, out_value), timeout=timeout)
 
@@ -249,13 +268,14 @@ class Nextion:
         last_exception = None
         while attempts_remained > 0:
             attempts_remained -= 1
+            # cl_fact_logger.get_instance().debug("Attempts remained : %d", attempts_remained)
             if isinstance(last_exception, CommandTimeout):
                 try:
-                    logger.info("Reconnecting")
+                    cl_fact_logger.get_instance().info("Reconnecting")
                     await self.reconnect()
                     last_exception = None
                 except ConnectionFailed:
-                    logger.error("Reconnect failed")
+                    cl_fact_logger.get_instance().error("Reconnect failed")
                     await asyncio.sleep(1)
                     continue
 
@@ -271,7 +291,7 @@ class Nextion:
                 try:
                     response = await self.read_packet(timeout=timeout)
                 except asyncio.TimeoutError as e:
-                    logger.error('Command "%s" timeout.', command)
+                    cl_fact_logger.get_instance().error('Command "%s" timeout.', command)
                     last_exception = CommandTimeout(
                         'Command "%s" response was not received' % command
                     )
@@ -300,17 +320,20 @@ class Nextion:
                     elif type_ == ResponseType.NUMBER:  # number
                         data = struct.unpack("i", raw)[0]
                     else:
-                        logger.error(
+                        cl_fact_logger.get_instance().error(
                             "Unknown data received: %s" % binascii.hexlify(response)
                         )
                     if command.partition(" ")[0] in ["get", "sendme"]:
                         finished = True
             else:  # this will run if loop ended successfully
+                # cl_fact_logger.get_instance().info('_command returned')
                 return data if data is not None else result
 
         if last_exception is not None:
+            # cl_fact_logger.get_instance().info('_command returned with exception')
             raise last_exception
-
+            
+      
     def write_command(self, command):
         if not isinstance(command, typing.ByteString):
             command = command.encode(self.encoding)
@@ -320,14 +343,15 @@ class Nextion:
     def flush_read_buffer(self):
         try:
             while True:
-                logger.debug("Flushing message: %s", self._connection.read_no_wait())
+                cl_fact_logger.get_instance().debug("Flushing message: %s", self._connection.read_no_wait())
         except asyncio.QueueEmpty:
             pass
 
     async def command(self, command: str, timeout=IO_TIMEOUT, attempts=None):
+        # cl_fact_logger.get_instance().info('Start command lock')
         async with self._command_lock:
             return await self._command(command, timeout=timeout, attempts=attempts)
-
+        
     def is_sleeping(self):
         return self._sleeping
 
@@ -356,17 +380,17 @@ class Nextion:
 
         file_size = os.fstat(file.fileno()).st_size
 
-        logger.info("About to upload %d bytes" % (file_size))
+        cl_fact_logger.get_instance().info("About to upload %d bytes" % (file_size))
         await self.set("sleep", 0)
         await asyncio.sleep(0.15)
         try:
             await self.set("usup", 1)
             await self.set("ussp", 0)
         except CommandFailed as e:
-            logger.warning("Additional sleep configuration failed: %s" % str(e))
+            cl_fact_logger.get_instance().warning("Additional sleep configuration failed: %s" % str(e))
 
         self.write_command("whmi-wri %d,%d,0" % (file_size, upload_baud))
-        logger.info("Reconnecting at new baud rate: %d" % (upload_baud))
+        cl_fact_logger.get_instance().info("Reconnecting at new baud rate: %d" % (upload_baud))
         await self._connection.close()
         _, self._connection = await serial_asyncio.create_serial_connection(
             self._loop, self._make_upload_protocol, url=self._url, baudrate=upload_baud
@@ -378,7 +402,7 @@ class Nextion:
                 "Wrong response to upload command: %s" % binascii.hexlify(res)
             )
 
-        logger.info("Device is ready to accept upload")
+        cl_fact_logger.get_instance().info("Device is ready to accept upload")
 
         uploaded_bytes = 0
         chunk_size = 4096
@@ -397,11 +421,12 @@ class Nextion:
                 )
 
             uploaded_bytes += len(buf)
-            uploaded_percentage_tmp = int(uploaded_bytes / file_size * 100)
+            uploaded_percentage_tmp = int(uploaded_bytes / file_size * 500) # every 0.2 %
             if uploaded_percentage_tmp != uploaded_percentage:
                 uploaded_percentage = uploaded_percentage_tmp
-                logger.info("Uploaded: %d%%", uploaded_percentage)
-                pi_ager_database.update_nextion_table(uploaded_percentage, "running")
+                cl_fact_logger.get_instance().info("Uploaded: %.1f %%" % (uploaded_percentage/5.0))
+                pi_ager_database.update_nextion_table(uploaded_percentage, "running") # every 0.2 % 
                 
-        logger.info("Successfully uploaded %d bytes" % uploaded_bytes)
-        pi_ager_database.update_nextion_table(100, "success")
+        cl_fact_logger.get_instance().info("Successfully uploaded %d bytes" % uploaded_bytes)
+        pi_ager_database.update_nextion_table(500, "success")
+        

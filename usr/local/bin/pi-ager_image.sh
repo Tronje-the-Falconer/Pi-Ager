@@ -17,13 +17,15 @@
 NFSVOL=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsvol from config_nfs_backup where active = 1")
 
 # dieses Verzeichniss muss im NAS angelegt sein
-SUBDIR=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select subdir from config_nfs_backup where active = 1")
+# SUBDIR=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select subdir from config_nfs_backup where active = 1")
 
 #NFSMOUNT=/home/pi/backup							# Pfad auf dem Pi indem das Backup gespeichert wird
-NFSMOUNT=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsmount from config_nfs_backup where active = 1")
+# NFSMOUNT=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsmount from config_nfs_backup where active = 1")
+NFSMOUNT="/home/nfs/public"
 
 # setzt sich zusammen aus dem Dateipfad auf dem Pi und dem Verzeichnis im NAS
-BACKUP_PFAD=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select backup_path from config_nfs_backup where active = 1")
+# BACKUP_PFAD=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select backup_path from config_nfs_backup where active = 1")
+BACKUP_PFAD="$NFSMOUNT"
 
 #z.B. NFSOPT="nosuid,nodev,rsize=65536,wsize=65536,intr,noatime"
 NFSOPT=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsopt from config_nfs_backup where active = 1")
@@ -163,26 +165,35 @@ echo "NFSMOUNT=$NFSMOUNT"
 umount $NFSMOUNT
 
 # NFS-Volume mounten
-echo "hänge NFS-Volume ein"
-echo $NFSOPT
+echo "hänge NFS-Volume $NFSVOL ein"
+
 if [ -z $NFSOPT ]
 	then
 		mount -t nfs4 $NFSVOL $NFSMOUNT -o $NFSOPT
+        mountstatus=$?
  	else
  		mount -t nfs4 $NFSVOL $NFSMOUNT
- fi
+        mountstatus=$?
+fi
+
+if [ $mountstatus -ne 0 ]; then
+  echo "Error $mountstatus during mount NFS Volume $NFSVOL. Image script stopped."
+  exit 1
+else
+  echo "mount NFS-Volume $NFSVOL successfull. Image script continues."
+fi
 
 # Prüfen, ob das Zielverzeichnis existiert
-echo "Prüfe ob das Zielverzeichnis existiert"
-sleep 2
-if [ ! -d "$BACKUP_PFAD" ];
-	then
-        echo "Backupverzeichnis existiert nicht. Abbruch! Bitte anlegen"
-        umount $NFSMOUNT
-        exit 1
-    else
-        echo "Backupverzeichnis existiert = ${BACKUP_PFAD}"
-fi
+# echo "Prüfe ob das Zielverzeichnis existiert"
+# sleep 2
+# if [ ! -d "$BACKUP_PFAD" ];
+#	then
+#        echo "Backupverzeichnis existiert nicht. Abbruch! Bitte anlegen"
+#        umount $NFSMOUNT
+#        exit 1
+#    else
+#        echo "Backupverzeichnis existiert = ${BACKUP_PFAD}"
+# fi
     
 if [ "$last_backup" = true ]; 
 	then
@@ -396,8 +407,8 @@ UPDATE scale2_settings SET value='300' WHERE key='measuring_interval';
 UPDATE scale2_settings SET value='15' WHERE key='measuring_duration';
 UPDATE scale2_settings SET value='150' WHERE key='saving_period';
 UPDATE scale2_settings SET value='20' WHERE key='samples';
-UPDATE config SET value='2' WHERE key='switch_on_cooling_compressor';
-UPDATE config SET value='0' WHERE key='switch_off_cooling_compressor';
+UPDATE config SET value='1' WHERE key='switch_on_cooling_compressor';
+UPDATE config SET value='-1' WHERE key='switch_off_cooling_compressor';
 UPDATE config SET value='20' WHERE key='switch_on_humidifier';
 UPDATE config SET value='0' WHERE key='switch_off_humidifier';
 UPDATE config SET value='5' WHERE key='delay_humidify';
@@ -411,7 +422,7 @@ UPDATE config SET value='30' WHERE key='switch_on_uv_minute';
 UPDATE config SET value='300' WHERE key='uv_duration';
 UPDATE config SET value='21600' WHERE key='uv_period';
 UPDATE config SET value='0' WHERE key='uv_modus';
-UPDATE config SET value='4' WHERE key='modus';
+UPDATE config SET value='3' WHERE key='modus';
 UPDATE config SET value='60' WHERE key = 'light_duration';
 UPDATE config SET value='180' WHERE key = 'light_perod';
 UPDATE config SET value='0' WHERE key = 'light_modus';
@@ -424,6 +435,8 @@ UPDATE config SET value='0.0' WHERE key = 'meat2_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'meat3_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'meat4_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'secondsensortype';
+UPDATE config SET value='1.0' WHERE key = 'tft_display_type';
+UPDATE config SET value='0.0' WHERE key = 'shutdown_on_batlow';
 
 DELETE FROM config_nfs_backup;
 delete FROM config_email_server;
@@ -450,6 +463,9 @@ UPDATE config_messenger_exception SET "telegram" = 0;
 UPDATE config_messenger_event SET "e-mail" = 0;
 UPDATE config_messenger_event SET "pushover" = 0;
 UPDATE config_messenger_event SET "telegram" = 0;
+UPDATE config_messenger_event SET "active" = 0;
+
+INSERT INTO "config_nfs_backup" ("id","nfsvol","number_of_backups","backup_name","nfsopt","active") VALUES ('1','','3','PiAgerBackup','nosuid,nodev','1');
 
 END_SQL
 # Rebuild DB to reduce the size of the DB
@@ -508,8 +524,9 @@ if [ "$my_image" = false ]; then
 	# userdel kapacitor
 	
 	
-	# delete obsolete /var direcories
+	# delete logs and greate empty backup.log
 	rm /var/www/logs/*
+    touch /var/www/logs/pi-ager_backup.log
 	# rm /var/logs
 	
 	# delete obsolete /tmp direcory

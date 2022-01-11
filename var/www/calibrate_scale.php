@@ -55,7 +55,7 @@
             echo "<button class=\"art-button\" name=\"scale_wizzard_cancel\"  formnovalidate onclick=\"return confirm('"._('cancel scale wizzard? referenceunit is set, tara will not be done!'). "');\">"._('cancel'). "</button>";
             echo '</form>';
             echo '</div>';
-            echo '</div></div></div></div></div></div>';
+            echo '</div></div></div></div></div>';
             include 'footer.php';
         }
         elseif ($scale_calibrate_status == 5){

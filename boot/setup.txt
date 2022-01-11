@@ -6,7 +6,11 @@
 # 
 # Nur ausgefüllte Werte werden gesetzt
 # Die Variablennamen dürfen nicht verändert werden!
+# Wenn die Werte Sonderzeichen wie /?}][{|@!"§$%&-_.:,;#+~* oder Leerzeichen enthalten,
+# müssen die Werte in 'Single Quotes' gesetzt werden. 'Single Quotes' dürfen dann nicht
+# Bestandteil des Wertes sein!
 #
+# Z.B.: wlankey='FRITZ!Box 7490 |&;()<>"\$`^~@€{}.'
 #
 # Logfile wird unter /boot/setup.log angelegt 
 
@@ -22,16 +26,16 @@ rootpass=
 # Passwort für Benutzer pi-ager auf der Webiste settings, admin, webcam:
 webguipw=
 
-# Passwort für Zugriff auf Datenbankverwaltung phpliteadmin
+# Passwort für Zugriff auf Datenbankverwaltung phpliteadmin:
 dbpw=
 
-# WLAN Netzwerkname, Sonderzeichen wie ! oder Leerzeichen muss ein Backslash '\' vorangestelt werden:
+# WLAN Netzwerkname:
 wlanssid=
 
-# WLAN Schlüssel:
+# WLAN Schlüssel (mindesten 8 Zeichen):
 wlankey=
 
-# ISO code your country, e.g. DE, GB
+# ISO code your country, e.g. DE, GB:
 country=
 
 # Temperature/Humidity sensor attched to pi-ager:

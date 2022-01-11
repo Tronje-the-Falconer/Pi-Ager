@@ -137,6 +137,11 @@ $status_light_key = 'status_light';
 $status_uv_key = 'status_uv';
 $status_humidifier_key = 'status_humidifier';
 $status_dehumidifier_key = 'status_dehumidifier';
+$tft_display_type_key = 'tft_display_type';
+$internal_temperature_low_limit_key = 'internal_temperature_low_limit';
+$internal_temperature_high_limit_key = 'internal_temperature_high_limit';
+$internal_temperature_hysteresis_key = 'internal_temperature_hysteresis';
+$shutdown_on_batlow_key = 'shutdown_on_batlow';
 
 #-----------------------------table fields;
 $key_field = 'key';

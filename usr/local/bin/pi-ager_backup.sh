@@ -27,23 +27,51 @@ popd () {
     command popd "$@" > /dev/null
 }
 
+start_piager () {
+    $(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "UPDATE current_values SET value = '1' WHERE key = 'status_piager'")
+}
+
+start_scale1 () {
+    $(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "UPDATE current_values SET value = '1' WHERE key = 'status_scale1'")
+}
+
+start_scale2 () {
+    $(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "UPDATE current_values SET value = '1' WHERE key = 'status_scale2'")
+}
+
+set_piager_status () {
+    if [ $PIAGER_STATUS == 1 ]; then
+        echo "Set pi-ager active in DB"
+        start_piager
+    fi
+    if [ $SCALE1_STATUS == 1 ]; then
+        echo "Set scale1 active in DB"
+        start_scale1
+    fi
+    if [ $SCALE2_STATUS == 1 ]; then
+        echo "Set scale2 active in DB"
+        start_scale2
+    fi
+}
+
 echo "--------------------------------------------------------------------------------------"
 #sleep 5
 # Server und Pfad zur NFS Freigabe (Muss im NAS angelegt werden)
 NFSVOL=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsvol from config_nfs_backup where active = 1")
 
 # dieses Verzeichniss muss im NAS angelegt sein
-SUBDIR=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select subdir from config_nfs_backup where active = 1")
+# SUBDIR=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select subdir from config_nfs_backup where active = 1")
 
 # Pfad auf dem Pi indem das Backup gespeichert wird, hierhin wird gemoundet
-NFSMOUNT=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsmount from config_nfs_backup where active = 1")
+# NFSMOUNT=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsmount from config_nfs_backup where active = 1")
+NFSMOUNT="/home/nfs/public"
 
 #z.B. NFSOPT="nosuid,nodev,rsize=65536,wsize=65536,intr,noatime"
 NFSOPT=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select nfsopt from config_nfs_backup where active = 1")
 
-
 # setzt sich zusammen aus dem Dateipfad auf dem Pi und dem Verzeichnis im NAS
-BACKUP_PFAD=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select backup_path from config_nfs_backup where active = 1")
+# BACKUP_PFAD=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select backup_path from config_nfs_backup where active = 1")
+BACKUP_PFAD="$NFSMOUNT"
 
 # behält die letzten "n" Backups
 BACKUP_ANZAHL=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select number_of_backups from config_nfs_backup where active = 1")
@@ -55,6 +83,16 @@ BACKUP_NAME=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "sele
 AGINGTABLE_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_agingtable'")
 AGINGTABLE_STATUS=${AGINGTABLE_STATUS%.*}
 
+# get status_piager from current_values
+PIAGER_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_piager'")
+PIAGER_STATUS=${PIAGER_STATUS%.*}
+
+# get status_scale1 and status_cale2 from current_values
+SCALE1_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_scale1'")
+SCALE1_STATUS=${SCALE1_STATUS%.*}
+SCALE2_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_scale2'")
+SCALE2_STATUS=${SCALE2_STATUS%.*}
+
 # systemctl daemon-reload
 
 # Prüfen, ob Backup schon läuft
@@ -65,14 +103,14 @@ echo "current PID:  $currpid"
 echo "Running PID : $runpid"
 if [[ $runpid != $currpid ]]
 	then
-	  echo "Zweiter Backup Prozess vorhanden!"
+	  echo "Another backup process is already running! Current backup process stopped."
 	  exit 1
 fi	 
 
 # Lese Status der Pi-Ager Prozesse
 
 MAIN_STATUS=$(/var/sudowebscript.sh grepmain) 
-echo "Main Status ist $MAIN_STATUS"
+echo "Main Status is $MAIN_STATUS"
 
 # ENDE VARIABLEN
  
@@ -81,81 +119,104 @@ echo "Main Status ist $MAIN_STATUS"
 #####################################################################
 
 # read -p "weiter mit Enter mit Ctrl + c beenden" -t 3
-echo "ok los gehts lehne dich zurück $(date +%T)"
+echo "ok let's go $(date +%T)"
 anfang=$(date +%s)
 
-echo "Starte mit dem Backup, dies kann einige Zeit dauern"
+echo "Backup is starting, it will need some time to complete ..."
 
 # Überprüfen ob Agingtable aktiv ist
-echo "überprüfe ob aging_table aktiv ist"
+echo "check if aging_table is active"
 echo "agingtable status is ${AGINGTABLE_STATUS}"
 if [ $AGINGTABLE_STATUS -ne "1" ]
     then
-	  echo "Agingtable ist nicht aktiv. Backup wird gestartet!"
+	  echo "Agingtable is not active. Backup continues!"
 	else
-  	  echo "Agingtable ist aktiv. Backup wird nicht gestartet!"
+  	  echo "Agingtable is active. Backup stopped!"
 	  exit 1
 fi	
 
 
 #Überprüfen ob der NFS-Server vorhanden ist
-echo "überprüfe ob der NFS-Server vorhanden ist."
-echo "Checking..."
+echo "check if nfs directory exists in the backup table."
 if [ -z "$NFSVOL" ]
 	then
-        echo "Backup nicht korrekt eingestellt. Bitte Tabelle nfs_backup prüfen!"
+        echo "backup not setup correctly. Please enter nfs directory in the backup table! Format example is <ip address>:/folder/subfolder"
         exit 1
     else
-        echo "$NFSVOL ist vorhanden"
+        echo "$NFSVOL exists. Backup continues!"
 fi
 
-# Überprüfen ob der Backup Pfad vorhanden ist
-echo "überprüfe ob Backup Pfad vorhanden ist."	
-echo "Checking ..."
-if [ -z "$BACKUP_PFAD" ]
-	then
-        echo "Backup Pfad nicht korrekt eingestellt. Bitte Tabelle nfs_backup prüfen!"
-        exit 1
-    else
-        echo "$BACKUP_PFAD ist vorhanden"
+echo "check if format of nfs directory is correct, e.g.: 192.168.0.111:/srv/backup"
+
+array=(${NFSVOL//:/ })
+serverIP=${array[0]}
+echo "NFS IP address = $serverIP"
+localIP=$(hostname -I)
+#remove last space character
+localIP=${localIP// /}
+echo "Local IP address = $localIP"
+
+echo "check if nfs Server IP address has correct format"
+if [[ "$serverIP" =~ ^(([1-9]?[0-9]|1[0-9][0-9]|2([0-4][0-9]|5[0-5]))\.){3}([1-9]?[0-9]|1[0-9][0-9]|2([0-4][0-9]|5[0-5]))$ ]]; then
+  echo "nfs Server address $serverIP has correct format"
+else
+  echo "nfs Server address $serverIP is not defined or has wrong format. Backup stopped."
+  exit 1
 fi
+
+echo "check if nfs Server IP and local IP are different."
+if [[ "$localIP" == "$serverIP" ]]; then
+  echo "nfs Server IP and local IP are equal. Backup stopped."
+  exit 1
+else
+  echo "nfs Server IP and local IP are different. Backup continues."
+fi
+
+# Überprüfen ob der Backup Pfad in der Tabelle vorhanden ist
+# echo "Überprüfen, ob Backup Pfad in der Tabelle vorhanden ist."	
+# if [ -z "$BACKUP_PFAD" ]
+#	then
+#        echo "Backup Pfad nicht korrekt eingestellt. Bitte Tabelle nfs_backup prüfen. Abbruch"
+#        exit 1
+#    else
+#        echo "$BACKUP_PFAD ist vorhanden"
+# fi
 
 #Überprüfen ob NFS Mount point in der Tabelle existiert
-echo "überprüfe ob NFS Mount point definiert ist."
-echo "Checking ..."
-if [ -z "$NFSMOUNT" ]
-	then
-        echo "Kein NFS Mount point definiert. Bitte Tabelle nfs_backup prüfen!"
-        exit 1
-    else
-        echo "$NFSMOUNT ist definiert"
-fi
+# echo "Überprüfen, ob NFS Mount point definiert ist."
+# if [ -z "$NFSMOUNT" ]
+#	then
+#        echo "Kein NFS Mount point definiert. Bitte Tabelle nfs_backup prüfen. Abbruch"
+#        exit 1
+#    else
+#        echo "$NFSMOUNT ist definiert"
+# fi
 
-echo "überprüfe ob NFS Mount point im file system angelegt ist."
-echo "Checking..."
+echo "check if default NFS mount point $NFSMOUNT exists in local filesystem."
 if [ -d "$NFSMOUNT" ]
 	then
-		echo "$NFSMOUNT ist angelegt"
+		echo "$NFSMOUNT exists. Backup continues."
 	else
-		echo "$NFSMOUNT wird angelegt"
-		sudo mkdir -p $NFSMOUNT
-		sudo chmod -R u=rwx,g+rw-x,o+rwx $NFSMOUNT
-		echo "$NFSMOUNT wurde angelegt"								 
+		echo "$NFSMOUNT missing, will be be created."
+		mkdir -p $NFSMOUNT
+		chmod -R u=rwx,g+rw-x,o+rwx $NFSMOUNT
+		echo "$NFSMOUNT is created."								 
 fi
  
 #Überprüfen ob PiShrink aktuell ist sonst herunterladen
-echo "überprüfe ob PiShrink vorhanden ist"
+echo "check if PiShrink exists."
 echo "Checking..."
 online_md5="$(curl -sL https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh | md5sum | cut -d ' ' -f 1)"
 local_md5="$(md5sum "/usr/local/bin/pishrink.sh" | cut -d ' ' -f 1)"
-if [ "$online_md5" == "$local_md5" ]; 
+if [[ "$online_md5" == "$local_md5" ]]; 
 	then
     	echo "PiShrink is the latest version!"
     else
     	echo "Installing PiShrink!"
 		wget -N https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
 		chmod +x pishrink.sh
-		sudo mv pishrink.sh /usr/local/bin
+		mv pishrink.sh /usr/local/bin
+        echo "PiShrink installed."
 fi
 
 #if [ -x /usr/local/bin/pishrink.sh ]
@@ -168,12 +229,12 @@ fi
 #		sudo mv pishrink.sh /usr/local/bin
 #fi
 
-DIR=$NFSMOUNT/$SUBDIR
+DIR=$NFSMOUNT
  
-echo "Starte $BACKUP_NAME $(date +%T)"
+echo "Start $BACKUP_NAME $(date +%T)"
 echo "NFSVOL=$NFSVOL"
 echo "NFSMOUNT=$NFSMOUNT"
-echo "Backup Verzeichnis=$DIR"
+# echo "Backup directory=$DIR"
 echo "NFSOPT=$NFSOPT"
 echo "Backup file ${BACKUP_PFAD}/${BACKUP_NAME}.img"
 
@@ -181,39 +242,91 @@ echo "Backup file ${BACKUP_PFAD}/${BACKUP_NAME}.img"
 umount $NFSMOUNT
 
 # NFS-Volume mounten
-echo "hänge NFS-Volume ein"
+echo "mount NFS-Volume. Map $NFSVOL to $NFSMOUNT"
 
 if [ -z $NFSOPT ]
 	then
-		sudo mount -t nfs4 $NFSVOL $NFSMOUNT -o $NFSOPT
+		mount -t nfs4 $NFSVOL $NFSMOUNT -o $NFSOPT
+        mountstatus=$?
  	else
- 		sudo mount -t nfs4 $NFSVOL $NFSMOUNT
+ 		mount -t nfs4 $NFSVOL $NFSMOUNT
+        mountstatus=$?
+fi
+
+if [ $mountstatus -ne 0 ]; then
+  echo "Error $mountstatus during mount NFS Volume $NFSVOL. Backup stopped."
+  exit 1
+else
+  echo "mount NFS-Volume $NFSVOL successfull. Backup continues."
 fi
 
 # Prüfen, ob das Zielverzeichnis existiert
-echo "Prüfe ob das Zielverzeichnis existiert"
-sleep 2
-if [ ! -d "$DIR" ];
-	then
-        echo "Backupverzeichnis existiert nicht. Abbruch! Bitte anlegen"
-        umount $NFSMOUNT
-        exit 1
+# echo "check if target directory $DIR exists on the nfs Server."
+# sleep 2
+# if [ ! -d "$DIR" ];
+#	then
+#        echo "target directory $DIR does not exist. Please create this directory. Backup stopped."
+#        umount $NFSMOUNT
+#        exit 1
+#    else
+#        echo "target directory $DIR exists. Backup continues."
+# fi
+
+# prüfe, ob current user in das Verzeichnis schreiben kann
+
+u="$USER"
+echo "check if $u can write into $DIR mapped to $NFSVOL"
+
+INFO=( $(stat -L -c "0%a %G %U" "$DIR") )
+PERM=${INFO[0]}
+GROUP=${INFO[1]}
+OWNER=${INFO[2]}
+
+ACCESS=no
+if (( ($PERM & 0x02) != 0 )); then
+    # Everyone has write access
+    ACCESS=yes
+elif (( ($PERM & 0x10) != 0 )); then
+    # Some group has write access.
+    # Is user in that group?
+    gs=( $(groups $u) )
+    for g in "${gs[@]}"; do
+        if [[ $GROUP == $g ]]; then
+            ACCESS=yes
+            break
+        fi
+    done
+elif (( ($PERM & 0x80) != 0 )); then
+    # The owner has write access.
+    # Does the user own the file?
+    [[ $u == $OWNER ]] && ACCESS=yes
+fi
+
+if [[ "$ACCESS" == "no" ]]; then
+      echo "$u has no WRITE permission. Backup stopped."
+      echo "Can be fixed by using command chmod, or"
+      echo "adjust OWNER and GROUP by using command chown."
+      echo "OWNER = $OWNER"
+      echo "GROUP = $GROUP"
+      echo "PERMISSION = $PERM"
+      umount $NFSMOUNT
+      exit 1
     else
-        echo "Backupverzeichnis existiert = ${DIR}"
+      echo "$u can write into $DIR mapped to $NFSVOL, Backup continues."
 fi
 
 # Stoppe Dienste vor Backup
-echo "Stoppe schreibende Dienste!"
+# echo "Stop Pi-Ager Main service!"
 #${DIENSTE_START_STOP} stop
 
 if [ -z "$MAIN_STATUS" ]
 	then
       PI_AGER_MAIN_ACTIVE=0
-      echo "Pi-Ager Main ist nicht gestartet"
+      echo "Pi-Ager Main is already stopped"
     else
       PI_AGER_MAIN_ACTIVE=1
-      echo "Stoppe Pi-Ager Main"
-      systemctl stop pi-ager_main
+      echo "Stop Pi-Ager Main service, wait 10s to continue."
+      systemctl stop pi-ager_main &
       sleep 10
 fi	
 
@@ -222,24 +335,29 @@ fi
 sync
 echo 1 > /proc/sys/vm/drop_caches
 
-echo "erstelle Backup ${BACKUP_PFAD}/${BACKUP_NAME}.img $(date +%T)"
-dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=1M status=progress 2>&1
+echo "create now Backup ${BACKUP_PFAD}/${BACKUP_NAME}.img at $(date +%T) with command dd. This needs some time to complete ..."
+dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=1M 2>&1
 
-# Starte Dienste nach Backup
-echo "Starte schreibende Dienste wieder!"
-#${DIENSTE_START_STOP} start
-if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
-    echo  "Starte Pi-Ager Main"
+ddstatus=$?
+if [ $ddstatus -ne 0 ]; then
+  echo "error $ddstatus during dd command. Backup stopped."
+#  echo "Start Pi-Ager Main service again!"
+  if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
+    set_piager_status
+    echo  "Start Pi-Ager Main service again."
     systemctl start pi-ager_main &
+  fi
+  umount $NFSMOUNT
+  exit 1
 fi
 
 sync
 # Starte Shrink
-echo "starte mit PiShrink $(date +%T) pishrink.sh $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img"
+echo "start PiShrink $(date +%T) pishrink.sh $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img"
 #read -p "Press enter to continue before pishrink call"
 # -d write debug file
 #sudo /usr/local/bin/pishrink.sh -d $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img
-sudo /usr/local/bin/pishrink.sh ${BACKUP_PFAD}/${BACKUP_NAME}.img
+/usr/local/bin/pishrink.sh ${BACKUP_PFAD}/${BACKUP_NAME}.img
 
 # Backup umbenennen
 mv ${BACKUP_PFAD}/${BACKUP_NAME}.img ${BACKUP_PFAD}/${BACKUP_NAME}_$(date +%Y-%m-%d-%H%M%S).img
@@ -269,20 +387,28 @@ echo -e "\n"
 
 # Prüfen, ob benoetigte Zeit kleiner als 60 sec ##################
 if [ $diff -lt 60 ]; then
-    echo -e $(date +%c)": "'Backup und verkleinern erfolgreich abgeschlossen nach '$diff' Sekunden'
+    echo -e $(date +%c)": "'Backup and shrinking successful after '$diff' seconds'
 
 # Wenn kleiner 3600 Sekunden, in Minuten und Sekunden umrechnen
 #################################################################
-    elif [ $diff -lt  3599 ]; then
-        echo -e $(date +%c)": "'Backup und verkleinern erfolgreich abgeschlossen nach '$[$diff / 60] 'Minuten(s) '$[$diff % 60] 'Sekunden'
+elif [ $diff -lt  3599 ]; then
+   echo -e $(date +%c)": "'Backup and shrinking successful after '$[$diff / 60] 'minute(s) '$[$diff % 60] 'seconds'
 
 # Wenn gleich oder groeßer 3600 Sekunden, in Stunden Minuten und Sekunden umrechnen
 #################################################################
-    elif [ $diff -ge 3600 ]; then
-        echo -e $(date +%c)": "'Backup und verkleinern erfolgreich abgeschlossen nach '$[$diff / 3600] 'Stunden '$[$diff % 3600 / 60] 'Minuten '$[$diff % 60] 'Sekunden'
+elif [ $diff -ge 3600 ]; then
+   echo -e $(date +%c)": "'Backup and shrinking successful after '$[$diff / 3600] 'hour(s) '$[$diff % 3600 / 60] 'minutes '$[$diff % 60] 'seconds'
 fi
 
 # unmounten
 sync
 umount $NFSMOUNT
 
+
+# Starte pi-ager service nach Backup
+
+if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
+    set_piager_status
+    echo  "Start Pi-Ager Main service again."
+    systemctl start pi-ager_main &
+fi

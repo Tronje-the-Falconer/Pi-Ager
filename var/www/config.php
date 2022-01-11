@@ -15,7 +15,7 @@
                                                 <tr>
                                                     <td rowspan="4" class="td_png_icon"><h3><?php echo _('temperature'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td><?php echo _('switch-on value'); ?>:</td>
-                                                    <td><input name="switch_on_cooling_compressor_config" type="number" style="width: 30%;" min="0" max="10" required value=<?php echo $switch_on_cooling_compressor; ?>>&nbsp;°C
+                                                    <td><input name="switch_on_cooling_compressor_config" type="number" style="width: 30%;" min="-10" max="10" required value=<?php echo $switch_on_cooling_compressor; ?>>&nbsp;°C
                                                         <span style="font-size: xx-small;">
                                                             <?php 
                                                                 if($modus == 0 || $modus == 1){
@@ -33,7 +33,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td><?php echo _('switch-off value').':'; ?></td>
-                                                    <td><input name="switch_off_cooling_compressor_config" type="number" style="width: 30%;" min="0" max="10" required value= <?php echo $switch_off_cooling_compressor; ?>>&nbsp;°C
+                                                    <td><input name="switch_off_cooling_compressor_config" type="number" style="width: 30%;" min="-10" max="10" required value= <?php echo $switch_off_cooling_compressor; ?>>&nbsp;°C
                                                         <span style="font-size: xx-small">
                                                             <?php 
                                                                 if($modus == 0 || $modus == 1){
@@ -69,7 +69,7 @@
                                                 <tr>
                                                     <td rowspan="4" class="td_png_icon"><h3><?php echo _('humidity'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td><?php echo _('switch-on value').':'; ?></td>
-                                                    <td><input name="switch_on_humidifier_config" type="number" style="width: 30%;" min="0" max="30" required value=<?php echo $switch_on_humidifier; ?>>&nbsp;%<span style="font-size: xx-small">
+                                                    <td><input name="switch_on_humidifier_config" type="number" style="width: 30%;" min="-30" max="30" required value=<?php echo $switch_on_humidifier; ?>>&nbsp;%<span style="font-size: xx-small">
                                                     <?php 
                                                                 if($modus == 0 || $modus == 1 || $modus == 2){
                                                                     echo '('._('on at'). ' '.($setpoint_humidity-$switch_on_humidifier)."%)";
@@ -82,7 +82,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td><?php echo _('switch-off value').':'; ?></td>
-                                                    <td><input name="switch_off_humidifier_config" type="number" style="width: 30%;" min="0" max="30" required value=<?php echo $switch_off_humidifier; ?>>&nbsp;%<span style="font-size: xx-small">
+                                                    <td><input name="switch_off_humidifier_config" type="number" style="width: 30%;" min="-30" max="30" required value=<?php echo $switch_off_humidifier; ?>>&nbsp;%<span style="font-size: xx-small">
                                                     <?php 
                                                                 if($modus == 0 || $modus == 1 || $modus == 2){
                                                                     echo '('._('off at'). ' '.($setpoint_humidity-$switch_off_humidifier)."%)";
@@ -245,6 +245,70 @@
                                                       echo '<br><br>'; ?>
                                                 <button class="art-button" type="button" onclick="help_agingtable_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
+                                            <hr>
+                                            <!----------------------------------------------------------------------------------------temperature limits to generate events -->
+                                            <table style="width: 100%;table-layout: fixed;">
+                                                <tr>
+                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('internal temperature limits'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_event_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td><?php echo _('low temperature limit'); ?>:</td>
+                                                    <td><input name="internal_temperature_low_limit_config" type="number" style="width: 30%;" min="-11" max="70" required value=<?php echo $internal_temperature_low_limit; ?>>&nbsp;°C<span style="font-size: xx-small"> (-11 <?php echo _('to'); ?> 70)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><?php echo _('high temperature limit').':'; ?></td>
+                                                    <td><input name="internal_temperature_high_limit_config" type="number" style="width: 30%;" min="-11" max="70" required value= <?php echo $internal_temperature_high_limit; ?>>&nbsp;°C<span style="font-size: xx-small"> (-11 <?php echo _('to'); ?> 70)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><?php echo _('hysteresis').':'; ?></td>
+                                                    <td><input name="internal_temperature_hysteresis_config" type="number" style="width: 30%;" min="1" max="10" required value= <?php echo $internal_temperature_hysteresis; ?>>&nbsp;°C<span style="font-size: xx-small"> (1 <?php echo _('to'); ?> 10)</span></td>
+                                                </tr>                                                
+                                                
+                                            </table>
+                                            <script>
+                                                function help_temperature_event_config_blockFunction() {
+                                                    document.getElementById('help_temperature_event_config').style.display = 'block';
+                                                }
+                                                function help_temperature_event_config_noneFunction() {
+                                                    document.getElementById('help_temperature_event_config').style.display = 'none';
+                                                }
+                                            </script>
+                                            <p id="help_temperature_event_config" class="help_p">
+                                                <?php echo _('helptext_temperature_event_config');
+                                                      echo '<br><br>'; ?>
+                                                <button class="art-button" type="button" onclick="help_temperature_event_config_noneFunction()"><?php echo _('close'); ?></button>
+                                            </p>
+                                            <hr>
+                                            <!----------------------------------------------------------------------------------------shutdown on battery low -->
+                                            <table style="width: 100%;table-layout: fixed;">
+                                                <?php
+                                                    if ($shutdown_on_batlow == 1) {
+                                                        $checked_shutdown_on_batlow_true = 'checked';
+                                                    }
+                                                    else {
+                                                        $checked_shutdown_on_batlow_true = '';
+                                                    }
+                                                ?>
+                                                <tr>
+                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('UPS battery'); ?></h3><img src="images/icons/battery_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_shutdown_on_batlow_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td style="width: 50%;"><?php echo _('shutdown on battery low'); ?>:</td>
+                                                    <td>
+                                                        <input type="hidden" name="shutdown_on_batlow_config" value="0">
+                                                        <input type="checkbox" name="shutdown_on_batlow_config" value="1" <?php echo $checked_shutdown_on_batlow_true; ?>/>
+                                                    <td>
+                                                </tr>
+                                            </table>
+                                            <script>
+                                                function help_shutdown_on_batlow_config_blockFunction() {
+                                                    document.getElementById('help_shutdown_on_batlow_config').style.display = 'block';
+                                                }
+                                                function help_shutdown_on_batlow_config__noneFunction() {
+                                                    document.getElementById('help_shutdown_on_batlow_config').style.display = 'none';
+                                                }
+                                            </script> 
+                                            <p id="help_shutdown_on_batlow_config" class="help_p">
+                                                <?php echo _('helptext_shutdown_on_batlow_config');
+                                                      echo '<br><br>'; ?>
+                                                <button class="art-button" type="button" onclick="help_shutdown_on_batlow_config__noneFunction()"><?php echo _('close'); ?></button>
+                                            </p>                                            
                                             <br>
                                             <br>
                                             <table style="width: 100%; align: center;">
