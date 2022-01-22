@@ -636,7 +636,7 @@ class cl_nextion( threading.Thread ):
         cl_fact_logger.get_instance().info('client generated')
         try:
             await self.client.connect()
-            cl_fact_logger.get_instance().info('client connected')
+#            cl_fact_logger.get_instance().info('client connected')
             cl_fact_logger.get_instance().info('Nextion client connected')
             self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))                                                                                              
         except Exception as e:
@@ -789,14 +789,16 @@ class cl_nextion( threading.Thread ):
             self.loop.call_soon_threadsafe(self.button_event.set)
         
     def stop_loop(self):
-        cl_fact_logger.get_instance().info('in stop_loop')
+        cl_fact_logger.get_instance().debug('in stop_loop')
         tasks = asyncio.all_tasks(self.loop)
         count = len(tasks)
-        cl_fact_logger.get_instance().info('Elements in task list : ' + str(count))        
+        cl_fact_logger.get_instance().debug('Elements in task list : ' + str(count))        
         for t in tasks:
+            name = getattr(t, 'name', f'Task-{id(t)}')
+            cl_fact_logger.get_instance().debug('Task name : ' + name)    
             t.cancel()
-        self.loop.stop()
-        cl_fact_logger.get_instance().info('after self.loop.stop')
+        self.loop.call_soon_threadsafe(self.loop.stop)
+        cl_fact_logger.get_instance().debug('after self.loop.stop')
 
 class cl_fact_nextion(ABC):
     __o_instance = None
