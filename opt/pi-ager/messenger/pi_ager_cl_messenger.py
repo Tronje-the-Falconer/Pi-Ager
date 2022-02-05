@@ -109,9 +109,35 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                         
         if messenger_exception_row['raise_exception'] == 1:
             cl_fact_logger.get_instance().critical(str(self.cx_error.__class__.__name__ ))
+            self.stop_piager()  # set stop pi-ager in current_values table
             sys.exit(0)
-
-                    
+    
+    def stop_piager(self):
+        """
+        stop piager and agingtable in database when exception occurred, befor sys.exit
+        """
+        self.database = cl_fact_database_config.get_instance()
+        sql_statement1 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.status_pi_ager_key + '";'
+        sql_statement2 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.status_agingtable_key + '";'
+        sql_statement3 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.status_scale1_key + '";'
+        sql_statement4 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.status_scale2_key + '";'
+        sql_statement5 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.agingtable_period_key + '";'
+        sql_statement6 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "1"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.agingtable_period_day_key + '";'
+        
+        cl_fact_logger.get_instance().debug('stop pi_ager sql statement : ' + sql_statement1)
+        cl_fact_logger.get_instance().debug('stop agingtable sql statement : ' + sql_statement2 )
+        cl_fact_logger.get_instance().debug('stop scale1 sql statement : ' + sql_statement3 )
+        cl_fact_logger.get_instance().debug('stop scale1 sql statement : ' + sql_statement4 )
+        cl_fact_logger.get_instance().debug('reset agingtable period sql statement : ' + sql_statement5 )
+        cl_fact_logger.get_instance().debug('reset agingtable period day sql statement : ' + sql_statement6 )
+        
+        self.database.write_data_to_db(sql_statement1)
+        self.database.write_data_to_db(sql_statement2)
+        self.database.write_data_to_db(sql_statement3)
+        self.database.write_data_to_db(sql_statement4)
+        self.database.write_data_to_db(sql_statement5)
+        self.database.write_data_to_db(sql_statement6)   
+        
     def handle_exception(self, cx_error):
         """
         Handle exception to create alarm or email or telegram or pushover ... class

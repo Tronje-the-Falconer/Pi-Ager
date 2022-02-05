@@ -78,14 +78,14 @@
                 write_table_value($config_settings_table, $key_field, $agingtable_startperiod_key, $value_field, $agingtable_startperiod);
                 write_table_value($config_settings_table, $key_field, $agingtable_startday_key, $value_field, $agingtable_startday);
                 write_start_in_database($status_agingtable_key);
-                # sleep(10);     // need so long because main_loop period is 10 seconds, that is the maximum time to detect start of agingtable
+                sleep( 2 );     // agingtable thread needs about 1s to detect start of agingtable
                 # $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
                 $grepagingtable = intval(get_table_value($current_values_table, $status_agingtable_key));
                 //wenn agingtable läuft dann Log schreiben
-                $logstring = 'main.py '._('is already running');
-                logger('INFO', $logstring);
-                $logstring = 'Pi-Ager '._('is already running or started due to agingtable start');
-                logger('INFO', $logstring);
+                # $logstring = 'main.py '._('is already running');
+                # logger('INFO', $logstring);
+                # $logstring = 'Pi-Ager '._('is already running or started due to agingtable start');
+                # logger('INFO', $logstring);
                 if ($grepagingtable != 0) {
                     $logstring = _('agingtable started');
                     logger('INFO', $logstring);
@@ -104,7 +104,7 @@
         # $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
         $grepagingtable = intval(get_table_value($current_values_table, $status_agingtable_key));
         write_stop_in_database($status_agingtable_key);
-        if ($grepagingtable !=0){
+        if ($grepagingtable != 0){
             $logstring = _('agingtable stopped due to stopping') . " Pi-Ager";
             logger('INFO', $logstring);
         }

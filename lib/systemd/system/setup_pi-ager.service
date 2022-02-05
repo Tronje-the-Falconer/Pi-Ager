@@ -3,7 +3,10 @@ Description=Automatsches Installationsscript für pi-ager zum Setzen von Passwö
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/setup_pi-ager.sh  2>>&1>> /boot/setup.log
+ExecStart=/usr/local/bin/setup_pi-ager.sh
+
+StandardOutput=append:/boot/setup.log
+StandardError=append:/boot/setup.log
 
 [Install]
 Alias=setup_pi-ager

@@ -379,9 +379,10 @@ raspi-config nonint do_hostname rpi-Pi-Ager
 
 
 ######################################################
-# rewrite /boot/setup.txt
+# rewrite /boot/setup.txt, remove /boot/setup.log
 ######################################################
 #mv /root/setup.txt /boot/setup.txt
+rm /boot/setup.log
 
 ######################################################
 #Force password change for user root
@@ -437,6 +438,11 @@ UPDATE config SET value='0.0' WHERE key = 'meat4_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'secondsensortype';
 UPDATE config SET value='1.0' WHERE key = 'tft_display_type';
 UPDATE config SET value='0.0' WHERE key = 'shutdown_on_batlow';
+
+UPDATE current_values SET value='0' WHERE key = 'status_piager';
+UPDATE current_values SET value='0' WHERE key = 'status_scale1';
+UPDATE current_values SET value='0' WHERE key = 'status_scale2';
+UPDATE current_values SET value='0' WHERE key = 'status_agingtable';
 
 DELETE FROM config_nfs_backup;
 delete FROM config_email_server;

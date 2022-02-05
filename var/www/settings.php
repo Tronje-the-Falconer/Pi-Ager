@@ -223,6 +223,9 @@
                                                     echo '</tr>';
                                                 }                                       
                                                 else {
+                                                    echo '<td></td><td></td><td style="text-align: left;">';
+                                                    echo _('Selected aging table');
+                                                    echo ' : ' . $desired_maturity . '<br></td>'; 
                                                     echo '<form  method="post"> <tr> <td>';
                                                 
                                                     if ($grepagingtable == 0){
@@ -239,13 +242,20 @@
 
                                                     if (isset ($agingtable_names)){
                                                         foreach($agingtable_names as $name) {
-                                                            if ($name==$desired_maturity){
-                                                                echo '<input type="radio" name="agingtable" value="'.$name.'" checked="checked"><label> '.$name.'</label><br>';
+                                                            if ($name == $desired_maturity){
+                                                                echo '<input type="radio" ';
+                                                                if ($grepagingtable != 0){
+                                                                    echo 'disabled="true" ';
+                                                                }
+                                                                echo 'name="agingtable" value="'.$name.'" checked="checked"><label> '.$name.'</label><br>';
                                                             }
                                                             else
                                                             {
-                                                                echo '<input type="radio" name="agingtable" value="'.$name.'"><label> '.$name.'</label><br>';
-
+                                                                echo '<input type="radio" ';
+                                                                if ($grepagingtable != 0){
+                                                                    echo 'disabled="true" ';
+                                                                }                                                                
+                                                                echo 'name="agingtable" value="'.$name.'"><label> '.$name.'</label><br>';
                                                             }
                                                         }
                                                     }
@@ -271,7 +281,11 @@
                                                         <td style="text-align: left;">';
 
                                                         if (isset ($agingtable_names)){
-                                                            echo "<button class=\"art-button\" name=\"select_agingtable\" value=\"select_agingtable\"onclick=\"return confirm('"._('select new agingtable?')."');\">"._('select')."</button>";
+                                                            echo "<button class=\"art-button\" ";
+                                                            if ($grepagingtable != 0){
+                                                                echo 'disabled="true" ';
+                                                            }
+                                                            echo "name=\"select_agingtable\" value=\"select_agingtable\"onclick=\"return confirm('"._('select new agingtable?')."');\">"._('select')."</button>";
                                                         }
 
                                                   echo '</td>
@@ -323,7 +337,12 @@
                                                             }
                                                             else
                                                             {
-                                                                echo '<option value="'.$name.'" selected>'.$name.'<br>';
+                                                            //    if ($grepagingtable == 0) {
+                                                            //        echo '<option value="'.$name.'" selected>'.$name.'<br>';
+                                                            //    }
+                                                            //    else {
+                                                                    echo '<option value="'.$name.'" disabled>'.$name.'<br>';
+                                                            //    }
                                                             }
                                                         }
                                                         echo '</select>';
@@ -488,11 +507,13 @@
                                 <?php 
                                     include ('config.php'); 
                                 ?>
-                            <!--    <script>
-                                    if ( window.history.replaceState ) {
+                                
+                                <script>
+                                    if ( window.history.replaceState ) {    // avoid page confirmation on refresh
                                         window.history.replaceState( null, null, window.location.href );
                                     }
-                                </script> -->
+                                </script>
+                                
                                 <!----------------------------------------------------------------------------------------Content Ende-->
                             </div>
                         </div>

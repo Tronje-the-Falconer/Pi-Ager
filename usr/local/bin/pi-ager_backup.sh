@@ -84,14 +84,14 @@ AGINGTABLE_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3
 AGINGTABLE_STATUS=${AGINGTABLE_STATUS%.*}
 
 # get status_piager from current_values
-PIAGER_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_piager'")
-PIAGER_STATUS=${PIAGER_STATUS%.*}
+# PIAGER_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_piager'")
+# PIAGER_STATUS=${PIAGER_STATUS%.*}
 
 # get status_scale1 and status_cale2 from current_values
-SCALE1_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_scale1'")
-SCALE1_STATUS=${SCALE1_STATUS%.*}
-SCALE2_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_scale2'")
-SCALE2_STATUS=${SCALE2_STATUS%.*}
+# SCALE1_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_scale1'")
+# SCALE1_STATUS=${SCALE1_STATUS%.*}
+# SCALE2_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_scale2'")
+# SCALE2_STATUS=${SCALE2_STATUS%.*}
 
 # systemctl daemon-reload
 
@@ -343,7 +343,7 @@ if [ $ddstatus -ne 0 ]; then
   echo "error $ddstatus during dd command. Backup stopped."
 #  echo "Start Pi-Ager Main service again!"
   if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
-    set_piager_status
+#    set_piager_status
     echo  "Start Pi-Ager Main service again."
     systemctl start pi-ager_main &
   fi
@@ -408,7 +408,7 @@ umount $NFSMOUNT
 # Starte pi-ager service nach Backup
 
 if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
-    set_piager_status
+#    set_piager_status
     echo  "Start Pi-Ager Main service again."
     systemctl start pi-ager_main &
 fi

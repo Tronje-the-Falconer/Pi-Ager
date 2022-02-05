@@ -470,29 +470,25 @@
                                         <button class="art-button" name="save_loglevel" value="save_loglevel" onclick="return confirm('<?php echo _('save loglevel?');?>');"><?php echo _('save'); ?></button>
                                     </form>
                                 </div>
-                                <hr>
-                                <h2 class="art-postheader"><?php echo _('debug values'); ?></h2>
-                                <!----------------------------------------------------------------------------------------Debugging-->
-                                <div class="hg_container" >
-                                    <form method="post" name="debug">
-                                        <table style="width: 100%;">
-                                            <?php
-                                                // $measuring_interval_debug = get_table_value($debug_table, $measuring_interval_debug_key);
-                                                $agingtable_days_in_seconds_debug = get_table_value($debug_table, $agingtable_days_in_seconds_debug_key);
-                                            ?>
-                                             <!-- <tr>
-                                                <td><?p hp echo _('measuring interval'); ?>:</td>
-                                                <td><input name="measuring_interval_debug" type="number" style="width: 90%;" min="1" max="60" required value=<?p hp echo $measuring_interval_debug; ?>></td>
-                                            </tr> -->
-                                            <tr>
-                                                <td><?php echo _('agingtable days in seconds'); ?>:</td>
-                                                <td><input name="agingtable_days_in_seconds_debug" type="number" style="width: 90%;" min="1" max="86400" required value=<?php echo $agingtable_days_in_seconds_debug; ?>></td>
-                                            </tr>
-
-                                        </table>
-                                        <button class="art-button" name="save_debug_values" value="save_debug_values" onclick="return confirm('<?php echo _('ATTENTION: save debug values?');?>');"><?php echo _('save'); ?></button>
-                                    </form>
-                                </div>
+                                <?php
+                                    if ($loglevel_console == 10 and $loglevel_file == 10) {
+                                        echo '<hr>';
+                                        echo '<h2 class="art-postheader">' . _('debug values') . '</h2>';
+                                /* <!----------------------------------------------------------------------------------------Debugging--> */
+                                        echo '<div class="hg_container" >';
+                                        echo '<form method="post" name="debug">';
+                                        echo '<table style="width: 100%;">';
+                                        $agingtable_days_in_seconds_debug = get_table_value($debug_table, $agingtable_days_in_seconds_debug_key);
+                                        echo '<tr>';
+                                        echo '<td>' . _('agingtable days in seconds') . ':</td>';
+                                        echo '<td><input name="agingtable_days_in_seconds_debug" type="number" style="width: 90%;" min="1" max="86400" required value=' . $agingtable_days_in_seconds_debug . '></td>';
+                                        echo '</tr>';
+                                        echo '</table>';
+                                        echo '<button class="art-button" name="save_debug_values" value="save_debug_values" onclick="return confirm(\'' . _('ATTENTION: save debug values?') . '\');">' . _('save') . '</button>';
+                                        echo '</form>';
+                                        echo '</div>';
+                                    }
+                                ?>
                                 <hr>
                                 <h2 class="art-postheader"><?php echo _('backup'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Backup-->
@@ -604,7 +600,7 @@
                                             <form method="post" name="database">
                                                 <td><button class="art-button" name="empty_statistic_tables" value="empty_statistic_tables" onclick="return confirm('<?php echo _('ATTENTION: empty statistic tables?');?>');"><?php echo _('empty statistic tables'); ?></button></td>
                                             </form>
-                                            <td><button class="art-button" name="database_administration" onclick="window.location.href='/phpliteadmin.php'"><?php echo _('database administration'); ?></button></td>
+                                            <td><button class="art-button" name="database_administration" onclick="window.open('/phpliteadmin.php')"><?php echo _('database administration'); ?></button></td>
                                         </tr>
                                     </table>
                                 </div>

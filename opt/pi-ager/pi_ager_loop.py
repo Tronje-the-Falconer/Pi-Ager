@@ -67,18 +67,12 @@ def autostart_loop():
     try:
         while not system_shutdown:
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
-            status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
-            current_agingtable_period = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.agingtable_period_key)
             cl_fact_logger.get_instance().update_logger_loglevels()
-            # check_and_set_light()
-            
-            # logger.debug('autostart_loop ' + time.strftime('%H:%M:%S', time.localtime()))
             cl_fact_logger.get_instance().debug('autostart_loop ' + time.strftime('%H:%M:%S', time.localtime()))
-            if status_agingtable == 1:
-                # os.system('sudo /var/sudowebscript.sh startagingtable &')
+            # enter main loop when start is true
+            if status_pi_ager == 1:
                 doMainLoop()
-            elif status_pi_ager == 1:
-                doMainLoop()
+
             cl_fact_logger.get_instance().check_website_logfile()
             time.sleep(5)
     except Exception as cx_error:
@@ -315,7 +309,6 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
             sensor_humidity_abs = None
             
             logstring = _('Failed to get sensordata.')
-            #logger.warning(logstring)
             cl_fact_logger.get_instance().warning(logstring)
             
        
@@ -395,29 +388,6 @@ def status_light_in_current_values_is_on():
             return False
     except Exception as cx_error:
         cl_fact_logic_messenger().get_instance(cx_error).send()
-        
-def check_status_agingtable():
-    """
-    check status of agingtable
-    """
-    try:
-        # status_agingtable = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key)
-        # process_agingtable = subprocess.getstatusoutput('ps ax | grep -v grep | grep agingtable.py &')
-        # (0, '16114 pts/0    R+     0:01 python3 /opt/pi-ager/agingtable.py\n16238 pts/1    S+     0:00 sudo python3 agingtable.py\n16256 pts/1    R+     0:00 python3 agingtable.py')
-        # läuft nicht Exitcode 0
-        # (1, '')
-        # läuft nicht Exitcode 1
-        
-        # if process_agingtable[1] == '':
-        #     process_agingtable_running = False
-        # else:
-        #     process_agingtable_running = True
-        # if status_agingtable == 1 and process_agingtable_running == False:
-        #     os.system('sudo /var/sudowebscript.sh startagingtable &')
-        pass
-    except Exception as cx_error:
-        # cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
-        pass
         
 def check_and_set_light():
     """
@@ -736,7 +706,6 @@ def doMainLoop():
         while status_pi_ager == 1 and not system_shutdown:
             #Here check Deviation of measurement
             check_and_set_light()
-            check_status_agingtable()
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
             # update logging levels if changed by FE
             cl_fact_logger.get_instance().update_logger_loglevels()
@@ -1315,10 +1284,10 @@ def doMainLoop():
                     #cl_fact_logger.get_instance().debug(logstring)
                     status_uv = 0
                 if scale1_data > 0:
-                    logstring = logstring + ' \n ' +  _('weight scale') + ' 1: ' + str(scale1_data)
+                    logstring = logstring + ' \n ' +  _('weight scale') + ' 1: ' + str(round(scale1_data)) + ' g'
                     #cl_fact_logger.get_instance().debug(logstring)
                 if scale2_data > 0:
-                    logstring = logstring + ' \n ' +  _('weight scale') + ' 2: ' + str(scale2_data)
+                    logstring = logstring + ' \n ' +  _('weight scale') + ' 2: ' + str(round(scale2_data)) + ' g'
                     #cl_fact_logger.get_instance().debug(logstring)
                
     

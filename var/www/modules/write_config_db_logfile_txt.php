@@ -20,8 +20,8 @@
         $uv_modus_config = $_POST['uv_modus_config'];
         $light_modus_config = $_POST['light_modus_config'];
         $dehumidifier_modus_config = $_POST['dehumidifier_modus_config'];
-        $failure_temperature_delta_config = $_POST['failure_temperature_delta_config'];
-        $failure_humidity_delta_config = $_POST['failure_humidity_delta_config'];
+        $failure_temperature_delta_config = 10;  // $_POST['failure_temperature_delta_config'];
+        $failure_humidity_delta_config = 4; // $_POST['failure_humidity_delta_config'];
         $internal_temperature_low_limit = $_POST['internal_temperature_low_limit_config'];
         $internal_temperature_high_limit = $_POST['internal_temperature_high_limit_config'];
         $internal_temperature_hysteresis = $_POST['internal_temperature_hysteresis_config'];

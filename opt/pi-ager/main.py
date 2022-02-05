@@ -20,9 +20,7 @@ globals.init()
 import pi_ager_database_check
 pi_ager_database_check.check_and_update_database()
 
-#import pi_ager_logging
 from main.pi_ager_cl_logger import cl_fact_logger
-#pi_ager_logging.create_logger('main.py')
 import pi_ager_loop
 import pi_ager_init
 import pi_ager_organization
@@ -110,9 +108,9 @@ finally:
     cl_fact_logger.get_instance().debug('main.finally')
     #if exception_known == False:
     pi_ager_init.loopcounter = 0
-    pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
-    pi_ager_database.write_stop_in_database(pi_ager_names.status_scale1_key)
-    pi_ager_database.write_stop_in_database(pi_ager_names.status_scale2_key)
+#    pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
+#    pi_ager_database.write_stop_in_database(pi_ager_names.status_scale1_key)
+#    pi_ager_database.write_stop_in_database(pi_ager_names.status_scale2_key)
         # os.system('sudo /var/sudowebscript.sh pkillscale &')
         # os.system('sudo /var/sudowebscript.sh pkillmain &')
     cl_fact_logger.get_instance().debug('waiting for all threads terminating...')   

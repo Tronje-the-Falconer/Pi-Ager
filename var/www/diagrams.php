@@ -563,9 +563,9 @@
                                                     callbacks: {
                                                         label: function(tooltipItem, data) {
                                                             if (tooltipItem.datasetIndex === 0) {
-                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' gr';
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' g';
                                                             } else if (tooltipItem.datasetIndex === 1) {
-                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' gr';
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' g';
                                                             }
                                                         }
                                                     }
@@ -599,7 +599,7 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 val = Math.round(value * 10)/10;
-                                                                return val + ' gr' + ' ';
+                                                                return val + ' g' + ' ';
                                                             },
                                                             fontColor: '#000000',
                                                             beginAtZero: true,
@@ -620,7 +620,7 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 val = Math.round(value * 10)/10;    
-                                                                return ' ' + val + ' gr';
+                                                                return ' ' + val + ' g';
                                                             },
                                                             fontColor: '#000000',
                                                             beginAtZero: true,

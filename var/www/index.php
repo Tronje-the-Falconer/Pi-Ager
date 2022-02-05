@@ -32,9 +32,9 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td width="33%" id="json_temperature_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #ff0000;"></td>
-                                            <td width="33%" id="json_humidity_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #0066FF;"></td>
-                                            <td  width="33%" id="json_dewpoint_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #00cc66;"></td>
+                                            <td width="33%" id="json_temperature_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #ff0000;">&nbsp;</td>
+                                            <td width="33%" id="json_humidity_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #0066FF;">&nbsp;</td>
+                                            <td width="33%" id="json_dewpoint_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #00cc66;">&nbsp;</td>
                                         </tr>
                                     </table>
                                     <?php
@@ -60,9 +60,9 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td width="33%" id="json_temperature_extern" align="center" style="text-align: center; font-size: 20px;"></td>
-                                                            <td width="33%" id="json_humidity_extern" align="center" style="text-align: center; font-size: 20px;"></td>
-                                                            <td width="33%" id="json_dewpoint_extern" align="center" style="text-align: center; font-size: 20px;"></td>
+                                                            <td width="33%" id="json_temperature_extern" align="center" style="text-align: center; font-size: 20px;">&nbsp;</td>
+                                                            <td width="33%" id="json_humidity_extern" align="center" style="text-align: center; font-size: 20px;">&nbsp;</td>
+                                                            <td width="33%" id="json_dewpoint_extern" align="center" style="text-align: center; font-size: 20px;">&nbsp;</td>
                                                         </tr>
                                                     </table>';
                                     ?>
@@ -83,12 +83,9 @@
                                                 <img src="images/icons/temperature_42x42.png" alt="">&thetasym; 3
                                             </td>
                                         <tr>
-                                            <td id="json_meat_temperature1" style="font-size: 20px;">
-                                            </td>
-                                            <td id="json_meat_temperature2" style="font-size: 20px;">
-                                            </td>
-                                            <td id="json_meat_temperature3" style="font-size: 20px;">
-                                            </td>
+                                            <td id="json_meat_temperature1" style="font-size: 20px;">&nbsp;</td>
+                                            <td id="json_meat_temperature2" style="font-size: 20px;">&nbsp;</td>
+                                            <td id="json_meat_temperature3" style="font-size: 20px;">&nbsp;</td>
                                         </tr>
                                     </table>
                                     <hr>
@@ -109,7 +106,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td id="json_meat_temperature4" style="font-size: 20px;"></td>
+                                            <td id="json_meat_temperature4" style="font-size: 20px;">&nbsp;</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -137,8 +134,8 @@
                                         </tr>
                                         <tr>
                                             <td></td>
-                                            <td id="json_scale1" style="font-size: 20px;"></td>
-                                            <td id="json_scale2" style="font-size: 20px;"></td>
+                                            <td id="json_scale1" style="font-size: 20px;">&nbsp;</td>
+                                            <td id="json_scale2" style="font-size: 20px;">&nbsp;</td>
                                             <td></td>
                                         </tr>
                                     </table>
@@ -466,7 +463,11 @@
                                                 intersect: false,
                                                 callbacks: {
                                                     label: function(tooltipItem, data) {
-                                                        return Number(tooltipItem.yLabel).toFixed(1);
+                                                        if (tooltipItem.datasetIndex === 0) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' g';
+                                                        } else if (tooltipItem.datasetIndex === 1) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' g';
+                                                        }
                                                     }
                                                 }
                                             },
@@ -500,7 +501,7 @@
                                                     ticks: {
                                                         callback: function(value, index, values) {
                                                             val = Math.round(value * 10)/10;
-                                                            return val + ' gr' + ' ';
+                                                            return val + ' g' + ' ';
                                                         },
                                                         fontColor: '#000000',
                                                         beginAtZero: true,
@@ -522,7 +523,7 @@
                                                     ticks: {
                                                         callback: function(value, index, values) {
                                                             val = Math.round(value * 10)/10;
-                                                            return ' ' + val + ' gr';
+                                                            return ' ' + val + ' g';
                                                         },
                                                         fontColor: '#000000',
                                                         beginAtZero: true,
@@ -551,7 +552,6 @@
                                         $current_period = get_table_value($current_values_table, $agingtable_period_key);
                                         $current_period_day = get_table_value($current_values_table, $agingtable_period_day_key);
                                         echo '
-                                        <hr>
                                         <h2 class="art-postheader">' . _('agingtable') .'</h2>
                                         <div class="hg_container">
                                         <table style="width: 100%" class="switching_state miniature_writing">
@@ -564,15 +564,15 @@
                                         </table>
                                         <table id="show_agingtable" class="show_agingtable">
                                             <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
-                                                <td class="show_agingcell"><div class="tooltip">' . _('phase') . '<span class="tooltiptext">' .  _("phase") . '></span></div></td>
-                                                <td class="show_agingcell"><div class="tooltip">' . _('modus') . '<span class="tooltiptext">' .  _("aging-modus") . '></span></div></td>
+                                                <td class="show_agingcell"><div class="tooltip">' . _('phase') . '<span class="tooltiptext">' . _("phase") . '</span></div></td>
+                                                <td class="show_agingcell"><div class="tooltip">' . _('modus') . '<span class="tooltiptext">' . _("aging-modus") . '</span></div></td>
                                                 <td class="show_agingcell"><div class="tooltip">&phi;<span class="tooltiptext">' . _('target humidity in %') . '</span></div></td>
-                                                <td class="show_agingcell"><div class="tooltip">°C<span class="tooltiptext">' .  _('target temperature in °C') . '</span></div></td>
+                                                <td class="show_agingcell"><div class="tooltip">°C<span class="tooltiptext">' . _('target temperature in °C') . '</span></div></td>
                                                 <td class="show_agingcell"><div class="tooltip">' . _('timer circulate d') . '<span class="tooltiptext">' . _('timer of the circulation air duration in minutes') . '</span></div></td>
-                                                <td class="show_agingcell"><div class="tooltip">' .  _('timer circulate p') . '<span class="tooltiptext">' . _('timer of the circulation air period in minutes') . '</span></div></td>
-                                                <td class="show_agingcell"><div class="tooltip">' .  _('timer exhaust d') . '<span class="tooltiptext">' . _('timer of the exhausting air duration in minutes') . '</span></div></td>
+                                                <td class="show_agingcell"><div class="tooltip">' . _('timer circulate p') . '<span class="tooltiptext">' . _('timer of the circulation air period in minutes') . '</span></div></td>
+                                                <td class="show_agingcell"><div class="tooltip">' . _('timer exhaust d') . '<span class="tooltiptext">' . _('timer of the exhausting air duration in minutes') . '</span></div></td>
                                                 <td class="show_agingcell"><div class="tooltip">' . _('timer exhaust p') . '<span class="tooltiptext">' . _('timer of the exhausting air period in minutes') . '</span></div></td>
-                                                <td class="show_agingcell"><div class="tooltip">' .  _('days')  . '<span class="tooltiptext">' . _('duration of hanging phase in days') . '</span></div></td>
+                                                <td class="show_agingcell"><div class="tooltip">' . _('days') . '<span class="tooltiptext">' . _('duration of hanging phase in days') . '</span></div></td>
                                             </tr>';
                                                 // Gewählte Agingtable aus DB auslesen und als Tabelle beschreiben
                                                 $index_row = 0;
@@ -642,7 +642,8 @@
                                                 echo  '<td width="150px" align="right">' . _('comment:') . '</td><td align="left">' . $agingtable_comment_with_carriage_return . '</td>';
                                             echo '</tr>
                                         </table>
-                                        </div>';
+                                        </div>
+                                        <hr>';
                                     }
                                 ?>
                                 
