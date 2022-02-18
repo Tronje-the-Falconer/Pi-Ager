@@ -1292,9 +1292,9 @@ def doMainLoop():
                
     
                 if status_value_has_changed():
-                    logstring = logstring + ' \n ' + pi_ager_names.logspacer2
+                    logstring = logstring + ' \n ' + pi_ager_names.logspacer2 + '\n'
                 # Logstring komplett schreiben
-                cl_fact_logger.get_instance().info(logstring)
+                    cl_fact_logger.get_instance().info(logstring)
                     
                 # Messwerte in die RRD-Datei schreiben
                 # Schreiben der aktuellen Status-Werte
@@ -1337,7 +1337,8 @@ def doMainLoop():
             # logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter))
             cl_fact_logger.get_instance().debug('loopnumber: ' + str(pi_ager_init.loopcounter))
     
-            time.sleep(10)  
+            # every 5 seconds a new measurement
+            time.sleep(5)  
             
             # Logfile auf Rechte prüfen und evtl. neu setzen
             

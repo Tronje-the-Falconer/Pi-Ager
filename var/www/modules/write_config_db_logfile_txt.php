@@ -28,9 +28,18 @@
         $shutdown_on_batlow_config = $_POST['shutdown_on_batlow_config'];
         
         $ConfigInputIsValid = TRUE;
-        foreach ($_POST as $CheckInput) {                                  // Prüfen, ob nur Zahlen eingegeben wurden
-            if ($CheckInput != 'config_form_submit') {
-                if (!(preg_match('/^-?\d+$/', $CheckInput))) {
+        foreach ($_POST as $key => $value) {  // Prüfen, ob nur Zahlen eingegeben wurden
+            if ($key == 'config_form_submit') {
+                continue;
+            }
+            else if ($key == 'switch_on_cooling_compressor_config' || $key == 'switch_off_cooling_compressor_config') {
+                if (is_numeric($value) == FALSE) {
+                    $message_config = _('unauthorized character - please use only integers!');
+                    $ConfigInputIsValid = FALSE;
+                }
+            }
+            else {
+                if (!(preg_match('/^-?\d+$/', $value))) {
                     $message_config = _('unauthorized character - please use only integers!');
                     $ConfigInputIsValid = FALSE;
                 }
@@ -146,7 +155,7 @@
                 if ($light_modus_config == 2) {
                     $light_modus_name = _('duration & timestamp');
                     $logtext_light = _('light timestamp').": ".$switch_on_light_hour_config.":".$switch_on_light_minute_config;
-                    $logtext_light_duration = _('light duration').": ".$light_duration_config/60 ." "._('minutes');
+                    $logtext_light_duration = _('light duration').": ".$light_duration_config ." "._('minutes');
                 }
                 // $circulation_air_duration = $circulation_air_duration/60;
                 // $circulation_air_period = $circulation_air_period/60;
@@ -177,7 +186,7 @@
                     $logstring = $logstring . " \n " . _('setpoint humidity').": ".$setpoint_humidity."% "."&phi;";
                     $logstring = $logstring . " \n " . _('switch-on humidifier').": ".$switch_on_humidifier_config." % &phi; ("._('so at')." ".$switch_on_humidity." % &phi;)";
                     $logstring = $logstring . " \n " . _('switch-off humidifier').": ".$switch_off_humidifier_config." % &phi; ("._('so at')." ".$switch_off_humidity." % &phi;)";
-                    $logstring = $logstring . " \n " . _('delay humidifier')." ".$delay_humidify_config." "._('minutes');
+                    $logstring = $logstring . " \n " . _('delay humidifier').": ".$delay_humidify_config." "._('minutes');
                 }
 
                 if ($modus == 4) {
@@ -186,11 +195,11 @@
                     $logstring = $logstring . " \n " . _('switch-off humidifier').": ".$switch_off_humidifier_config."% &phi; ("._('so at')." ".$switch_off_humidify."% &phi;)";
                     $logstring = $logstring . " \n " . _('switch-on exhausting').": ".$switch_on_humidifier_config."% &phi; ("._('so at')." ".$switch_on_dehumidify."% &phi;)";
                     $logstring = $logstring . " \n " . _('switch-off exhausting').": ".$switch_off_humidifier_config."% &phi; ("._('so at')." ".$switch_off_dehumidify."% &phi;)";
-                    $logstring = $logstring . " \n " . _('delay exhausting')." ".$delay_humidify_config ." ". _('minutes');
+                    $logstring = $logstring . " \n " . _('delay exhausting').": ".$delay_humidify_config ." ". _('minutes');
                 }
                 $logstring = $logstring . " \n " . _('circulation air period').": ".$circulation_air_period." "._('minutes');
                 $logstring = $logstring . " \n " . _('circulation air duration').": ".$circulation_air_duration." "._('minutes');
-                $logstring = $logstring . " \n " . _('exhausting air period')." ".$exhaust_air_period." "._('minutes');
+                $logstring = $logstring . " \n " . _('exhausting air period').": ".$exhaust_air_period." "._('minutes');
                 $logstring = $logstring . " \n " . _('exhausting air duration').": ".$exhaust_air_duration." "._('minutes');
                 $logstring = $logstring . " \n " . _('dehumidify modus').": ".$dehumidifier_modus_name;
                 $logstring = $logstring . " \n " . _('uv modus').": ".$uv_modus_name;

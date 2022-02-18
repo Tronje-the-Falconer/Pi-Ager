@@ -276,6 +276,41 @@
         return $meatsensor_row;       
     }
     
+    function get_current_values_for_ajax(){
+        global $current_values_table, $key_field, $value_field;
+        global $last_change_field, $server_time_json_key;
+        global $config_settings_table;
+        global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key;
+        global $meat1_sensor_name_json_key, $meat2_sensor_name_json_key, $meat3_sensor_name_json_key, $meat4_sensor_name_json_key;
+        
+        open_connection(); 
+        $sql = 'SELECT * FROM ' . $current_values_table;
+        $result = get_query_result($sql);
+        $values = array();
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC)) {
+            $values[$dataset[$key_field]] = [$dataset[$value_field], $dataset[$last_change_field]]; 
+        }
+        close_database();
+        
+        $values[$server_time_json_key] = time();
+
+        $meat1_sensortype_id = get_table_value($config_settings_table, $meat1_sensortype_key);
+        $meat2_sensortype_id = get_table_value($config_settings_table, $meat2_sensortype_key); 
+        $meat3_sensortype_id = get_table_value($config_settings_table, $meat3_sensortype_key);
+        $meat4_sensortype_id = get_table_value($config_settings_table, $meat4_sensortype_key);
+        
+        $row = get_meatsensor_table_row( $meat1_sensortype_id );
+        $values[$meat1_sensor_name_json_key] = $row['name'];
+        $row = get_meatsensor_table_row( $meat2_sensortype_id );
+        $values[$meat2_sensor_name_json_key] = $row['name'];  
+        $row = get_meatsensor_table_row( $meat3_sensortype_id );
+        $values[$meat3_sensor_name_json_key] = $row['name'];
+        $row = get_meatsensor_table_row( $meat4_sensortype_id );
+        $values[$meat4_sensor_name_json_key] = $row['name'];  
+        
+        return $values;
+    }
+        
     function get_current_values_for_monitoring(){
         global $current_values_table, $key_field, $value_field, $sensor_temperature_key, $sensor_humidity_key, $sensor_humidity_abs_key, $scale1_key, $scale2_key;
         global $last_change_field, $last_change_temperature_json_key, $last_change_humidity_json_key, $last_change_scale1_json_key, $last_change_scale2_json_key, $server_time_json_key;
@@ -294,6 +329,7 @@
         // echo $sql;
         $result = get_query_result($sql);
         $values = array();
+        
         while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
         {
            $values[$dataset[$key_field]] =  $dataset[$value_field];
@@ -579,7 +615,33 @@
         
         close_database();
     }
-    
+
+    function write_diagram_modus($diagram_modus_name){
+        //  'hour'   => 0
+        //  'day'    => 1
+        //  'week'   => 2
+        //  'month'  => 3
+        //  'custom' => 4
+        global $value_field, $key_field, $config_settings_table, $diagram_modus_key, $last_change_field;
+        
+        $diagram_modus_names = array('hour', 'day', 'week', 'month', 'custom');
+        $diagram_modus_index = array_search($diagram_modus_name, $diagram_modus_names);
+        
+        $old_diagram_modus_index = get_table_value($config_settings_table, $diagram_modus_key);
+        
+        open_connection();
+        if ($old_diagram_modus_index === NULL) {
+            $sql = 'INSERT INTO ' . $config_settings_table . ' ("' . $key_field . '","' . $value_field . '","' . $last_change_field . '") VALUES ("' . $diagram_modus_key . '", ' . $diagram_modus_index . ', ' . get_current_time() . ')';
+        }
+        else {
+            $sql = 'UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . $diagram_modus_index . ' WHERE ' . $key_field . ' = "' . $diagram_modus_key . '";';
+        }
+
+        execute_query($sql);
+        close_database();
+    } 
+
+ 
     function add_alarm($alarm_alarm, $alarm_replication, $alarm_sleep, $alarm_high_time, $alarm_low_time, $alarm_waveform, $alarm_frequency ){
         global $alarm_table, $alarm_id_field, $alarm_alarm_field, $alarm_replication_field, $alarm_sleep_field, $alarm_high_time_field, $alarm_low_time_field, $alarm_waveform_field, $alarm_frequency_field;
         open_connection();

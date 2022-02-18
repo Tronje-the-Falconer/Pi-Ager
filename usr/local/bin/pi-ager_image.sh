@@ -430,7 +430,7 @@ UPDATE config SET value='0' WHERE key = 'light_modus';
 UPDATE config SET value='60' WHERE key = 'uv_duration';
 UPDATE config SET value='180' WHERE key = 'uv_perod';
 UPDATE config SET value='0' WHERE key = 'uv_modus';
-UPDATE config SET value='15' WHERE key = 'save_temperature_humidity_loops';	
+UPDATE config SET value='6' WHERE key = 'save_temperature_humidity_loops';	
 UPDATE config SET value='0.0' WHERE key = 'meat1_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'meat2_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'meat3_sensortype';

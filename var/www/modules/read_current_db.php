@@ -1,6 +1,6 @@
 <?php 
-    $sensor_temperature = round(get_table_value($current_values_table,$sensor_temperature_key), 1);
-    $sensor_humidity = round(get_table_value($current_values_table,$sensor_humidity_key), 1);
+    $sensor_temperature = number_format(floatval(get_table_value($current_values_table,$sensor_temperature_key)), 1, '.', '');
+    $sensor_humidity = round(get_table_value($current_values_table,$sensor_humidity_key), 0);
     $status_exhaust_air = get_table_value($current_values_table,$status_exhaust_air_key);
     $status_circulating_air = get_table_value($current_values_table,$status_circulating_air_key);
     $status_heater = get_table_value($current_values_table,$status_heater_key);

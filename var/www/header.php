@@ -73,15 +73,15 @@
 <html>
     <meta http-equiv="content-type" content="text/html;  charset=utf-8">
     <?php
-        if ($_SERVER['PHP_SELF'] == '/webcam.php') {
+#        if ($_SERVER['PHP_SELF'] == '/webcam.php') {
 #            echo "<meta http-equiv=\"refresh\" content=\"5\" />";
-        }
-        elseif ($_SERVER['PHP_SELF'] == '/index.php') {
-            echo "<meta http-equiv=\"refresh\" content=\"60\" />";
-        }
-        elseif ($_SERVER['PHP_SELF'] == '/diagrams.php') {
-            echo "<meta http-equiv=\"refresh\" content=\"300\" />";
-        }
+#        }
+#        elseif ($_SERVER['PHP_SELF'] == '/index.php') {
+#            echo "<meta http-equiv=\"refresh\" content=\"60\" />";
+#        }
+#        elseif ($_SERVER['PHP_SELF'] == '/diagrams.php') {
+#            echo "<meta http-equiv=\"refresh\" content=\"300\" />";
+#        }
     ?>
     <head>
         <title>Pi-Ager</title>
@@ -97,7 +97,7 @@
 <!-- <script src="./node_modules/chart.js/dist/Chart.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> -->
         <script src="js/jquery.js"></script>
-        <script src="js/ajax.js"></script>
+<!--        <script src="js/ajax.js"></script> -->
         <script src="js/script.js"></script>
         <script src="js/script.responsive.js"></script>
 

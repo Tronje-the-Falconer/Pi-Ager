@@ -388,7 +388,7 @@ def write_all_sensordata(loopnumber, sensor_temperature, sensor_humidity, sensor
     """
     save_loop = int(get_table_value(pi_ager_names.config_settings_table, pi_ager_names.save_temperature_humidity_loops_key))
     
-    if loopnumber % save_loop == 0:   # schreibt für HaMa's Diagramme alle 150 Loops die Werte in die DB
+    if loopnumber % (save_loop * 2) == 0:   # schreibt Daten für die Diagramme alle n Loops in die DB, measurement loop von 10s auf 5s verkürzt
         current_time = str(get_current_time())   # get current_time timestamp the same for all sensor data tables
         
         with globals.lock:

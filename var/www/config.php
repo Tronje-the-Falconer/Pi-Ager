@@ -15,7 +15,7 @@
                                                 <tr>
                                                     <td rowspan="4" class="td_png_icon"><h3><?php echo _('temperature'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td><?php echo _('switch-on value'); ?>:</td>
-                                                    <td><input name="switch_on_cooling_compressor_config" type="number" style="width: 30%;" min="-10" max="10" required value=<?php echo $switch_on_cooling_compressor; ?>>&nbsp;°C
+                                                    <td><input name="switch_on_cooling_compressor_config" type="number" style="width: 30%;" min="-10" max="10" step="0.1" required value=<?php echo $switch_on_cooling_compressor; ?>>&nbsp;°C
                                                         <span style="font-size: xx-small;">
                                                             <?php 
                                                                 if($modus == 0 || $modus == 1){
@@ -33,7 +33,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td><?php echo _('switch-off value').':'; ?></td>
-                                                    <td><input name="switch_off_cooling_compressor_config" type="number" style="width: 30%;" min="-10" max="10" required value= <?php echo $switch_off_cooling_compressor; ?>>&nbsp;°C
+                                                    <td><input name="switch_off_cooling_compressor_config" type="number" style="width: 30%;" min="-10" max="10" step="0.1" required value= <?php echo $switch_off_cooling_compressor; ?>>&nbsp;°C
                                                         <span style="font-size: xx-small">
                                                             <?php 
                                                                 if($modus == 0 || $modus == 1){

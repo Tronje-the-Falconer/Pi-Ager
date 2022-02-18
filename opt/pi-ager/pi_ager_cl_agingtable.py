@@ -168,7 +168,7 @@ class cl_aging_thread( threading.Thread ):
         exhaust_air_period_logstring = "\n" + '.................................' + _('timer exhaust air period every') + ": " + str(exhaust_air_period_format) + ' ' + _("minutes")
         exhaust_air_duration_format = int(period_dictionary['exhaust_air_duration'])/60
         exhaust_air_duration_logstring = "\n" + '.................................' + _('timer exhausting air') + ": " + str(exhaust_air_duration_format) + ' ' + _("minutes")
-        period_days_logstring="\n" + '.................................' + _('duration') + ": " + str(period_dictionary['days']) + ' ' + _('days')
+        period_days_logstring="\n" + '.................................' + _('duration') + ": " + str(period_dictionary['days']) + ' ' + (_('days') if period_dictionary['days'] > 1 else _('day'))
         sensor_logstring = '.................................' + _('sensortype') + ": " + cl_fact_main_sensor_type().get_instance()._get_type_ui( )
         
         pi_ager_database.write_settings(modus, period_dictionary['setpoint_temperature'], period_dictionary['setpoint_humidity'], period_dictionary['circulation_air_period'], period_dictionary['circulation_air_duration'], period_dictionary['exhaust_air_period'], period_dictionary['exhaust_air_duration'])

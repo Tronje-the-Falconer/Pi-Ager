@@ -26,7 +26,7 @@ class cl_scale_thread(threading.Thread):
     def run(self):
         try:
             cl_fact_logger.get_instance().debug('logging initialised __________________________')
-            cl_fact_logger.get_instance().info('Start scale loop' + str(self.scale_id + 1) + ' ' + time.strftime('%H:%M:%S', time.localtime()))
+            cl_fact_logger.get_instance().info(_('Start scale loop') + str(self.scale_id + 1) + ' ' + time.strftime('%H:%M:%S', time.localtime()))
             if self.scale_id == 0:
                 pi_ager_database.write_current_value(pi_ager_names.scale1_thread_alive_key, 1)
             else:
@@ -42,10 +42,12 @@ class cl_scale_thread(threading.Thread):
                 pi_ager_database.write_current_value(pi_ager_names.calibrate_scale1_key, 0)
                 pi_ager_database.write_current_value(pi_ager_names.status_tara_scale1_key, 0)
                 pi_ager_database.write_current_value(pi_ager_names.scale1_thread_alive_key, 0)
+                cl_fact_logger.get_instance().info(_('Scale loop1 stopped at') + ' ' + time.strftime('%H:%M:%S', time.localtime()))
             else:
                 pi_ager_database.write_current_value(pi_ager_names.calibrate_scale2_key, 0)
                 pi_ager_database.write_current_value(pi_ager_names.status_tara_scale2_key, 0)
                 pi_ager_database.write_current_value(pi_ager_names.scale2_thread_alive_key, 0)
+                cl_fact_logger.get_instance().info(_('Scale loop2 stopped at') + ' ' + time.strftime('%H:%M:%S', time.localtime()))
                 
             pi_ager_database.write_current_value(pi_ager_names.calibrate_weight_key, 0)
                     

@@ -1,7 +1,7 @@
 <?php
-    $modus = round(get_table_value($config_settings_table,$modus_key), 1);
-    $setpoint_temperature = round(get_table_value($config_settings_table,$setpoint_temperature_key), 1);
-    $setpoint_humidity = round(get_table_value($config_settings_table,$setpoint_humidity_key), 1);
+    $modus = intval(get_table_value($config_settings_table,$modus_key));
+    $setpoint_temperature = number_format(floatval(get_table_value($config_settings_table,$setpoint_temperature_key)), 1, '.', '');
+    $setpoint_humidity = round(get_table_value($config_settings_table,$setpoint_humidity_key), 0);
     $circulation_air_duration = round(get_table_value($config_settings_table,$circulation_air_duration_key), 1)/60;
     $circulation_air_period = round(get_table_value($config_settings_table,$circulation_air_period_key), 1)/60;
     $exhaust_air_duration = round(get_table_value($config_settings_table,$exhaust_air_duration_key), 1)/60;

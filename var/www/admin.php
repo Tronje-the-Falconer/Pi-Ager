@@ -648,7 +648,7 @@
                                             <form method="post" id="nextion" enctype="multipart/form-data">
                                                 <td>
                                                     <label for="tft_file">
-			                                        alternativ firmware file: <input type="file" name="tft_file" id="tft_file" accept=".zip" onchange="enableButton()">
+			                                        <?php echo _('alternative firmware file:');?> <input type="file" name="tft_file" id="tft_file" accept=".zip" onchange="enableButton()">
                                                     </label>
                                                 </td>
                                             </form>

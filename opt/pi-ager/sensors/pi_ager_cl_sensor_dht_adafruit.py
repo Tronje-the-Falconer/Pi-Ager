@@ -75,7 +75,7 @@ class cl_sensor_dht_adafruit(cl_sensor):
         self.delete_error_counter() 
         cl_fact_logger.get_instance().debug('Too many measurement errors occurred!')
         
-        raise cx_measurement_error ('Too many measurement errors occurred!')    
+        raise cx_measurement_error (_('Too many measurement errors occurred!'))    
    
     def _write_to_db(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())

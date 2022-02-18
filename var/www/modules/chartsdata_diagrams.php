@@ -9,7 +9,7 @@
             case 'week':
                 return $last_timestamp - 604800;
             case 'month':
-                return $last_timestamp - 2629700;
+                return $last_timestamp - 2678400;
             case 'custom':
                 return $last_timestamp - $customtime;
         }
@@ -60,13 +60,11 @@
         global $first_timestamp_diagram;
         global $last_timestamp_diagram;
         // echo ("First Timestamp: " . $first_timestamp_diagram . "Last Timestamp: " . $last_timestamp_diagram . "<br>");
-        $intermediate_timestamp_diagram = ($first_timestamp_diagram + $last_timestamp_diagram) / 2;
         $timestamps_in_db = array_keys($data_values);
         $last_timestamp_in_db = end($timestamps_in_db);
         $timestamp_value_dict = array();
         if ($timestamp_count_in_diagram == 0) {
             $timestamp_value_dict[$first_timestamp_diagram] = $data_values[$last_timestamp_in_db];
-            // $timestamp_value_dict[$intermediate_timestamp_diagram] = $data_values[$last_timestamp_in_db];
             $timestamp_value_dict[$last_timestamp_diagram] = $data_values[$last_timestamp_in_db];
         }
         elseif ($timestamp_count_in_diagram == 1) {
@@ -109,13 +107,14 @@
         $timestamps = array_keys($data_values);
         $timestamps_axis = get_timestamps_for_time_axis($timestamps);
         $values_diagram = get_timestamps_with_values_for_missing_data($data_values, count($timestamps_axis));
-        $timestamps_axis_text = get_text_array_for_time_axis(array_keys($values_diagram));
+//        $timestamps_axis_text = get_text_array_for_time_axis(array_keys($values_diagram));
         $dataset = get_dataset_of_values($values_diagram, $timestamps_axis);
         // print "timestamps_axis: " . count($timestamps_axis) . "<br>";
         // print "values_diagram: " . count($values_diagram) . "<br>";
         // print "dataset: " . count($dataset) . "<br>";
         
-        $return_array = array($timestamps_axis_text, $dataset);
+//        $return_array = array($timestamps_axis_text, $dataset);
+        $return_array = array(array_keys($values_diagram), $dataset);
         return $return_array;
     }
 
@@ -274,25 +273,25 @@
     $all_sensors_timestamps_array = array_column($all_sensors_rows, 'last_change');
     $all_sensors_timestamps_array[] = $last_timestamp_diagram;
     array_unshift($all_sensors_timestamps_array, $first_timestamp_diagram);
-    $all_sensors_timestamps_axis = get_text_array_for_time_axis($all_sensors_timestamps_array);
+//    $all_sensors_timestamps_axis = get_text_array_for_time_axis($all_sensors_timestamps_array);
     
     // common x-axis timestamps for all_scales
     $all_scales_timestamps_array = array_column($all_scales_rows, 'last_change');
     $all_scales_timestamps_array[] = $last_timestamp_diagram;
     array_unshift($all_scales_timestamps_array, $first_timestamp_diagram);
-    $all_scales_timestamps_axis = get_text_array_for_time_axis($all_scales_timestamps_array);
+//    $all_scales_timestamps_axis = get_text_array_for_time_axis($all_scales_timestamps_array);
         
     // value array for tempint
     $temperature_dataset = array_column($all_sensors_rows, 'tempint');
     $temperature_dataset[] = Null;
     array_unshift($temperature_dataset, Null);
-    $temperature_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $temperature_dataset, $moving_average_window_x);
+//    $temperature_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $temperature_dataset, $moving_average_window_x);
     
     // value array for humint
     $humidity_dataset = array_column($all_sensors_rows, 'humint');
     $humidity_dataset[] = Null;
     array_unshift($humidity_dataset, Null);
-    $humidity_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $humidity_dataset, $moving_average_window_x);
+//    $humidity_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $humidity_dataset, $moving_average_window_x);
     
     // value array for dewint
     $dewpoint_dataset = array_column($all_sensors_rows, 'dewint');
@@ -314,7 +313,7 @@
     $extern_humidity_dataset = array_column($all_sensors_rows, 'humext');
     $extern_humidity_dataset[] = Null;
     array_unshift($extern_humidity_dataset, Null);
-    //$extern_humidity_dataset = moving_average_filter($all_sensors_timestamps_array, $extern_humidity_dataset, $moving_average_window_x);
+//    $extern_humidity_dataset = moving_average_filter($all_sensors_timestamps_array, $extern_humidity_dataset, $moving_average_window_x);
     
     // value array for dewext
     $extern_dewpoint_dataset = array_column($all_sensors_rows, 'dewext');
@@ -359,63 +358,51 @@
     // echo "uv_light_values<br>";
     $uv_light_values = get_diagram_values($status_uv_table, 1);
     $uv_light_data_diagram = get_data_for_diagram($uv_light_values);
-    $uv_light_timestamps_axis_text = $uv_light_data_diagram[0];
+    $uv_light_timestamps_axis = $uv_light_data_diagram[0];
     $uv_light_dataset = $uv_light_data_diagram[1];
  
     // echo "light_values<br>";
     $light_values = get_diagram_values($status_light_table, 1);
     $light_data_diagram = get_data_for_diagram($light_values);
-    $light_timestamps_axis_text = $light_data_diagram[0];
+    $light_timestamps_axis = $light_data_diagram[0];
     $light_dataset = $light_data_diagram[1];
 
     // echo "heater_values<br>";
     $heater_values = get_diagram_values($status_heater_table, 1);
     $heater_data_diagram = get_data_for_diagram($heater_values);
-    $heater_timestamps_axis_text = $heater_data_diagram[0];
+    $heater_timestamps_axis = $heater_data_diagram[0];
     $heater_dataset = $heater_data_diagram[1];
     
     // echo "cooler_values<br>";
     $cooler_values = get_diagram_values($status_cooling_compressor_table, 1);
     $cooler_data_diagram = get_data_for_diagram($cooler_values);
-    $cooler_timestamps_axis_text = $cooler_data_diagram[0];
+    $cooler_timestamps_axis = $cooler_data_diagram[0];
     $cooler_dataset = $cooler_data_diagram[1];
 
     // echo "humidifier_values<br>";
     $humidifier_values = get_diagram_values($status_humidifier_table, 1);
     $humidifier_data_diagram = get_data_for_diagram($humidifier_values);
-    $humidifier_timestamps_axis_text = $humidifier_data_diagram[0];
+    $humidifier_timestamps_axis = $humidifier_data_diagram[0];
     $humidifier_dataset = $humidifier_data_diagram[1];
 
     // echo "dehumidifier_values<br>";
     $dehumidifier_values = get_diagram_values($status_dehumidifier_table, 1);
     $dehumidifier_data_diagram = get_data_for_diagram($dehumidifier_values);
-    $dehumidifier_timestamps_axis_text = $dehumidifier_data_diagram[0];
+    $dehumidifier_timestamps_axis = $dehumidifier_data_diagram[0];
     $dehumidifier_dataset = $dehumidifier_data_diagram[1];
 
     // echo "exhaust_air_values<br>";
     $exhaust_air_values = get_diagram_values($status_exhaust_air_table, 1);
     $exhaust_data_diagram = get_data_for_diagram($exhaust_air_values);
-    $exhaust_air_timestamps_axis_text = $exhaust_data_diagram[0];
+    $exhaust_air_timestamps_axis = $exhaust_data_diagram[0];
     $exhaust_air_dataset = $exhaust_data_diagram[1];
 
     // echo "circulate_air_values<br>";
     $circulate_air_values = get_diagram_values($status_circulating_air_table, 1);
     $circulate_air_data_diagram = get_data_for_diagram($circulate_air_values);
-    $circulate_air_timestamps_axis_text = $circulate_air_data_diagram[0];
+    $circulate_air_timestamps_axis = $circulate_air_data_diagram[0];
     $circulate_air_dataset = $circulate_air_data_diagram[1];
     
     logger('DEBUG', 'read_values_for_diagrams performed');
-
-    // test
-    /*
-    open_connection(); 
-    $sql = 'SELECT * FROM ' . $current_values_table;
-    $result = get_query_result($sql);
-    $rows = array();
-    while ($dataset = $result->fetchArray(SQLITE3_ASSOC)) {
-       $rows[$dataset[$key_field]] = [$dataset[$value_field], $dataset[$last_change_field]]; 
-    }
-    $msg = json_encode($rows);
-    logger('DEBUG', $msg);
-    */
+ 
 ?>

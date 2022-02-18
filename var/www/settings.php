@@ -43,7 +43,7 @@
                                             echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
                                             <td></td>
                                             <td>';
-                                            echo "Backup is currently running! ";
+                                            echo _('Backup is currently running!');
                                             echo '</td>';
                                         }
                                         elseif ($grepmain == NULL){ // wenn main.py nicht läuft und der Status in DB aus ist
@@ -91,7 +91,7 @@
                                                 echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
                                                 <td></td>
                                                 <td>';
-                                                echo "Backup is currently running! ";
+                                                echo _('Backup is currently running!');
                                                 echo '</td></tr>';
                                             }
                                             else {
@@ -190,7 +190,7 @@
                                     <h2><?php echo _('agingtable') ?></h2>
                                     <!----------------------------------------------------------------------------------------Reifetabelle auswählen-->
                                     <?php $agingtable_names = get_agingtable_names(); ?>
-                                    <table style="width: 100%;" class="switching_state miniature_writing">
+                                    <table style="width: 100%;" >
                                         <tr>
                                             <td width="100px"></td>
                                             <td width="100px"></td>
@@ -206,7 +206,7 @@
                                                 echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
                                                 <td></td>
                                                 <td>';
-                                                echo "Backup is currently running! ";
+                                                echo _('Backup is currently running!');
                                                 echo '</td></tr>';
                                             }
                                             else {

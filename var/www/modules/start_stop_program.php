@@ -109,8 +109,8 @@
             logger('INFO', $logstring);
         }
         write_stop_in_database($status_piager_key);
-        # wait 10 seconds, needed by pi_ager_loop.py to detect stop request and turning off all gpio outputs
-        sleep(10);
+        # wait 5 seconds, needed by pi_ager_loop.py to detect stop request and turning off all gpio outputs
+        sleep(5);
 /*        $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_cooling_compressor_value_to_1'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_heater_value_to_1'));
         $val = trim(@shell_exec('sudo /var/sudowebscript.sh write_gpio_humidifier_value_to_1'));

@@ -221,7 +221,7 @@ class cl_sensor_sht(cl_sensor, ABC):
                 cl_fact_logger.get_instance().debug('Retry getting measurement from I2C. Current retry count : ' + str(repeat_count))
 
                 
-        raise cx_measurement_error ('Too many measurement errors occurred!')
+        raise cx_measurement_error (_('Too many measurement errors occurred!'))
         
     
     def _get_current_temperature(self):
