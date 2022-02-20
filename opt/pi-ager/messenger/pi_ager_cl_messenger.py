@@ -145,7 +145,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.cx_error       = cx_error
         self.cx_error_name  = type(self.cx_error).__name__
-        cl_fact_logger.get_instance().info("Exception raised: " + self.cx_error_name + " - " + str(cx_error) + self.build_alarm_subject() + self.build_alarm_message() )
+        cl_fact_logger.get_instance().info("Exception raised: " + self.cx_error_name + " - " + str(cx_error) + "\n" + self.build_alarm_subject() + self.build_alarm_message() )
        
         self.it_messenger_exception = self.db_messenger_exception.read_data_from_db()
         self.exception_known = False

@@ -49,6 +49,10 @@
                                                         </span>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td><?php echo _('delay'); ?>:</td>
+                                                    <td><input name="delay_cooler_config" type="number" style="width: 30%;" min="30" max="120" step="1" required value=<?php echo $delay_cooler; ?>>&nbsp;<?php echo _('seconds'); ?><span style="font-size: xx-small"> (30 <?php echo _('to'); ?> 120)</span></td>
+                                                </tr>
                                             </table>
                                             <script>
                                                 function help_temperature_config_blockFunction() {

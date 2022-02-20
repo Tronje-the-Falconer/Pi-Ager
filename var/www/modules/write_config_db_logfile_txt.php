@@ -26,6 +26,7 @@
         $internal_temperature_high_limit = $_POST['internal_temperature_high_limit_config'];
         $internal_temperature_hysteresis = $_POST['internal_temperature_hysteresis_config'];
         $shutdown_on_batlow_config = $_POST['shutdown_on_batlow_config'];
+        $delay_cooler_config = $_POST['delay_cooler_config'];
         
         $ConfigInputIsValid = TRUE;
         foreach ($_POST as $key => $value) {  // Prüfen, ob nur Zahlen eingegeben wurden
@@ -64,7 +65,8 @@
                 $internal_temperature_low_limit >= -11 && $internal_temperature_low_limit <= 70 && // Temperatur low limit Überwachung
                 $internal_temperature_high_limit >= -11 && $internal_temperature_high_limit <= 70 && // Temperatur high limit Überwachung
                 $internal_temperature_high_limit > $internal_temperature_low_limit &&
-                $internal_temperature_hysteresis >= 1 && $internal_temperature_hysteresis <= 10  // Temperatur hysteresis für Event Generierung
+                $internal_temperature_hysteresis >= 1 && $internal_temperature_hysteresis <= 10 && // Temperatur hysteresis für Event Generierung
+                $delay_cooler_config >= 30 && $delay_cooler_config <= 120   // cooler delay if cooler turned off and should turned on again
             )
             {
                 # Eingestellte Werte in config/config.json und logs/logfile.txt speichern
@@ -73,7 +75,7 @@
                             $uv_period_config, $switch_on_uv_hour_config, $switch_on_uv_minute_config, $light_modus_config, $light_duration_config,
                             $light_period_config, $switch_on_light_hour_config, $switch_on_light_minute_config, $dehumidifier_modus_config,
                             $failure_temperature_delta_config, $failure_humidity_delta_config, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
-                            $shutdown_on_batlow_config);
+                            $shutdown_on_batlow_config, $delay_cooler_config);
                 logger('DEBUG', 'configvalues saved');
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus

@@ -119,6 +119,7 @@ class cl_aging_thread( threading.Thread ):
         global switch_on_humidifier
         global switch_off_humidifier
         global delay_humidify
+        global delay_cooling_compressor
         global sensorname
         global sensortype
     
@@ -127,7 +128,7 @@ class cl_aging_thread( threading.Thread ):
         # Variablen aus Dictionary setzen
         for key, value in iter(period_dictionary.items()):
             if value == None or value == '':                      # wenn ein Wert leer ist muss er aus der letzten settings.json ausgelesen  werden
-                value = pi_ager_database.get_table_value(pi_ager_names.config_settings_table,key)
+                value = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, key)
                 period_dictionary[key] = value
             else:
                 value = int(value)
@@ -156,6 +157,7 @@ class cl_aging_thread( threading.Thread ):
         setpoint_temperature_logstring = "\n" + '.................................' + _('setpoint temperature') + ": " + str(period_dictionary['setpoint_temperature']) + " C"
         switch_on_cooling_compressor_logstring = "\n" + '.................................' + _('switch-on value temperature') + ": " + str(switch_on_cooling_compressor) + " C"
         switch_off_cooling_compressor_logstring = "\n" + '.................................' + _('switch-off value temperature') + ": " + str(switch_off_cooling_compressor) + " C"
+        delay_cooling_compressor_logstring = "\n" + '.................................' + _('cooling compressor delay') + ": " + str(delay_cooling_compressor) + ' ' + _("seconds")
         setpoint_humidity_logstring = "\n" + '.................................' + _('setpoint humidity') + ": " + str(period_dictionary['setpoint_humidity']) + "%"
         switch_on_humidifier_logstring = "\n" + '.................................' + _('switch-on value humidity') + ": " + str(switch_on_humidifier) + "%"
         switch_off_humidifier_logstring = "\n" + '.................................' + _('switch-off value humidity') + ": " + str(switch_off_humidifier) + "%"
@@ -177,7 +179,7 @@ class cl_aging_thread( threading.Thread ):
         pi_ager_database.write_current_value(pi_ager_names.agingtable_period_starttime_key, period_starttime_seconds)
         period_endtime = datetime.datetime.now() + datetime.timedelta(days = period_dictionary['days'] - period_first_day) # days = parameter von datetime.timedelta
     
-        logstring = _('values') + ': ' + operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + "\n" + setpoint_humidity_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n"
+        logstring = _('values') + ': ' + operating_mode + setpoint_temperature_logstring + switch_on_cooling_compressor_logstring + switch_off_cooling_compressor_logstring + delay_cooling_compressor_logstring + "\n" + setpoint_humidity_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_days_logstring + "\n" + sensor_logstring + "\n"
         cl_fact_logger.get_instance().info(logstring)
     
     def eval_final_time(self, rows, start_period, start_day):
@@ -208,6 +210,7 @@ class cl_aging_thread( threading.Thread ):
         global switch_on_humidifier
         global switch_off_humidifier
         global delay_humidify
+        global delay_cooling_compressor
         global sensortype
 
         while True:
@@ -236,6 +239,7 @@ class cl_aging_thread( threading.Thread ):
             switch_on_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_humidifier_key)
             switch_off_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_humidifier_key)
             delay_humidify = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key)
+            delay_cooling_compressor = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_cooler_key)    
             
             # Reifetabelle aus Datenbank
             agingtable = pi_ager_database.read_agingtable_name_from_config()    # Variable agingtable = Name der Reifetabelle

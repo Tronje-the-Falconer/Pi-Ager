@@ -438,6 +438,8 @@ UPDATE config SET value='0.0' WHERE key = 'meat4_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'secondsensortype';
 UPDATE config SET value='1.0' WHERE key = 'tft_display_type';
 UPDATE config SET value='0.0' WHERE key = 'shutdown_on_batlow';
+UPDATE config SET value='0.0' WHERE key = 'diagram_modus';
+UPDATE config SET value='30.0' WHERE key = 'delay_cooler';
 
 UPDATE current_values SET value='0' WHERE key = 'status_piager';
 UPDATE current_values SET value='0' WHERE key = 'status_scale1';

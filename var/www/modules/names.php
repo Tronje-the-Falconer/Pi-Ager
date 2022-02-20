@@ -143,6 +143,7 @@ $internal_temperature_high_limit_key = 'internal_temperature_high_limit';
 $internal_temperature_hysteresis_key = 'internal_temperature_hysteresis';
 $shutdown_on_batlow_key = 'shutdown_on_batlow';
 $diagram_modus_key = 'diagram_modus';
+$delay_cooler_key = 'delay_cooler';
 
 #-----------------------------table fields;
 $key_field = 'key';

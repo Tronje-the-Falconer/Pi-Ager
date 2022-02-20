@@ -29,7 +29,8 @@ from sensors.pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 
 from main.pi_ager_cl_logger import cl_fact_logger
 from pi_ager_cl_nextion import cl_fact_nextion
-
+from threading import Timer
+ 
 import globals
 
 system_shutdown = False
@@ -601,7 +602,44 @@ def check_internal_temperature_limits():
         if sensor_temperature <= (internal_temperature_high_limit - internal_temperature_hysteresis):
             internal_temperature_high_limit_reached = False            
             cl_fact_logger.get_instance().debug('Internal temperature ' + str(sensor_temperature) + '°C lower than ' + str(internal_temperature_high_limit - internal_temperature_hysteresis) + '°C. (high limit - hysteresis)')
-            
+
+cooling_compressor_request = False
+cooling_Delay_timer = None
+cooling_Delay_timer_running = False
+
+def delay_cooling_compressor_callback():
+    global cooling_compressor_request
+    global cooling_Delay_timer_running
+    if (cooling_compressor_request == False):   # turn on compressor
+        gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, False)
+    cooling_Delay_timer_running = False
+#    cl_fact_logger.get_instance().info('delay_cooling_compressor_callback finished')
+    
+def delay_cooling_compressor(  level ):
+    """
+    when cooling compressor should turned off then next turn-on request will be delayed
+    level false == relay_on == cooler active
+    """
+    global cooling_compressor_request
+    global cooling_Delay_timer_running
+    global cooling_Delay_timer
+    
+    # if compressor is currently on and new request (level) should turn off compressor
+    current_state = gpio.input(pi_ager_gpio_config.gpio_cooling_compressor) # if false, compressor is on
+    delay_cooler = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_cooler_key))
+    if (current_state == False and level == True and cooling_Delay_timer_running == False):  # start timer
+        cooling_Delay_timer = Timer(delay_cooler, delay_cooling_compressor_callback)
+        cooling_Delay_timer.start()
+        cooling_Delay_timer_running = True
+        gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, level)
+#        cl_fact_logger.get_instance().info('cooling compressor delay timer started')
+ 
+    cooling_compressor_request = level
+    if (cooling_Delay_timer_running == False):
+        gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, level) 
+#    cl_fact_logger.get_instance().info('delay_cooling_compressor function finished')
+    
+    
 def doMainLoop():
     """
     mainloop, pi-ager is running
@@ -654,6 +692,8 @@ def doMainLoop():
     global temp_sensor4_data 
     global system_shutdown
 
+    global cooling_Delay_timer
+    global cooling_Delay_timer_running
     #--------------------------------------------
     # for event generation
     global internal_temperature_low_limit_reached
@@ -1017,9 +1057,9 @@ def doMainLoop():
                     gpio.output(pi_ager_gpio_config.gpio_heater, pi_ager_names.relay_off)                     # Heizung aus
                     gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)                 # Befeuchtung aus
                     if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
-                        gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, pi_ager_names.relay_on)      # Kuehlung ein
+                        delay_cooling_compressor( pi_ager_names.relay_on)      # Kuehlung ein
                     if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor :
-                        gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, pi_ager_names.relay_off)     # Kuehlung aus
+                        delay_cooling_compressor( pi_ager_names.relay_off)     # Kuehlung aus
                 
                 # Kuehlen mit Befeuchtung
                 if modus == 1:
@@ -1027,9 +1067,9 @@ def doMainLoop():
                     status_dehumidifier = False        # Entfeuchter aus
                     gpio.output(pi_ager_gpio_config.gpio_heater, pi_ager_names.relay_off)      # Heizung aus
                     if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
-                        gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, pi_ager_names.relay_on)     # Kuehlung ein
+                        delay_cooling_compressor( pi_ager_names.relay_on)     # Kuehlung ein
                     if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor :
-                        gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, pi_ager_names.relay_off)    # Kuehlung aus
+                        delay_cooling_compressor( pi_ager_names.relay_off)    # Kuehlung aus
                     #if sensor_humidity <= setpoint_humidity - switch_on_humidifier:
                     #    gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_on)      # Befeuchtung ein
                     #if sensor_humidity >= setpoint_humidity - switch_off_humidifier:
@@ -1048,7 +1088,7 @@ def doMainLoop():
                 if modus == 2:
                     status_exhaust_fan = False                     # Feuchtereduzierung Abluft aus
                     status_dehumidifier = False        # Entfeuchter aus
-                    gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, pi_ager_names.relay_off)        # Kuehlung aus
+                    delay_cooling_compressor( pi_ager_names.relay_off)        # Kuehlung aus
                     if sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor:
                         gpio.output(pi_ager_gpio_config.gpio_heater, pi_ager_names.relay_on)   # Heizung ein
                     if sensor_temperature >= setpoint_temperature - switch_off_cooling_compressor:
@@ -1072,9 +1112,9 @@ def doMainLoop():
                     status_exhaust_fan = False                     # Feuchtereduzierung Abluft aus
                     status_dehumidifier = False        # Entfeuchter aus
                     if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
-                        gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, pi_ager_names.relay_on)     # Kuehlung ein
+                        delay_cooling_compressor( pi_ager_names.relay_on)     # Kuehlung ein
                     if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor:
-                        gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, pi_ager_names.relay_off)    # Kuehlung aus
+                        delay_cooling_compressor( pi_ager_names.relay_off)    # Kuehlung aus
                     if sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor:
                         gpio.output(pi_ager_gpio_config.gpio_heater, pi_ager_names.relay_on)   # Heizung ein
                     if sensor_temperature >= setpoint_temperature - switch_off_cooling_compressor:
@@ -1108,11 +1148,11 @@ def doMainLoop():
                     else:
                         status_exhaust_fan = True                                   # Abluft ist aktuell an
                     if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
-                        gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, pi_ager_names.relay_on)     # Kuehlung ein
+                        delay_cooling_compressor( pi_ager_names.relay_on)     # Kuehlung ein
                     if sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor:
                         gpio.output(pi_ager_gpio_config.gpio_heater, pi_ager_names.relay_on)   # Heizung ein
                     if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor:
-                        gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, pi_ager_names.relay_off)    # Kuehlung aus
+                        delay_cooling_compressor( pi_ager_names.relay_off)    # Kuehlung aus
                     if sensor_temperature >= setpoint_temperature - switch_off_cooling_compressor:
                         gpio.output(pi_ager_gpio_config.gpio_heater, pi_ager_names.relay_off)  # Heizung aus
                     if sensor_humidity <= setpoint_humidity - switch_on_humidifier:
@@ -1353,12 +1393,22 @@ def doMainLoop():
 
             
     # Ende While-Schleife
-        # logger.debug('status!= 1')
-        cl_fact_logger.get_instance().debug('status!= 1')
-        #Here clean Deviation time_counter
-        pi_ager_gpio_config.defaultGPIO()
+        cl_fact_logger.get_instance().debug('status != 1 or shutdown')
+#        pi_ager_gpio_config.defaultGPIO()
  
         # reflect i/o status in DB
-        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, 0, 0, 0, 0, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data) 
+#        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, 0, 0, 0, 0, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data) 
+        cl_fact_logger.get_instance().debug('in loop try end -----------------------------------------------------')
+        
     except Exception as cx_error:
-       cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+        cl_fact_logger.get_instance().debug('in loop exception-----------------------------------------------------')
+        cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+
+    finally:
+        cl_fact_logger.get_instance().debug('in loop finally-----------------------------------------------------')  
+        if (cooling_Delay_timer_running):
+            cooling_Delay_timer.cancel()
+            
+        pi_ager_gpio_config.defaultGPIO()
+        # reflect i/o status in DB
+        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, 0, 0, 0, 0, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data)     

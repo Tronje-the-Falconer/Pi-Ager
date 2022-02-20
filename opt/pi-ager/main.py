@@ -41,7 +41,7 @@ import pi_ager_cl_agingtable
 
 # catch signal.SIGTERM and signal.SIGINT when killing main to gracefully shutdown system
 def signal_handler(signum, frame):
-    cl_fact_logger.get_instance().debug('SIGTERM or SIGINT issued')
+    cl_fact_logger.get_instance().debug('SIGTERM or SIGINT issued---------------------------------------------------------')
     pi_ager_loop.do_system_shutdown()
     # sys.exit(0) # raises SystemExit exception
    
@@ -93,19 +93,19 @@ except Exception as cx_error:
 
 try:
     pi_ager_loop.autostart_loop()
-
+    cl_fact_logger.get_instance().debug('in main try at end -------------------------------------------------------------------')
 except KeyboardInterrupt:
     #logger.warning(_('KeyboardInterrupt'))
     cl_fact_logger.get_instance().debug(_('KeyboardInterrupt'))
     pass
 
 except Exception as cx_error:
-    cl_fact_logger.get_instance().debug('main.exception')
+    cl_fact_logger.get_instance().debug('main.exception ------------------------------------------------------------------')
     exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
     # pass
 
 finally:
-    cl_fact_logger.get_instance().debug('main.finally')
+    cl_fact_logger.get_instance().debug('main.finally --------------------------------------------------------------------')
     #if exception_known == False:
     pi_ager_init.loopcounter = 0
 #    pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
