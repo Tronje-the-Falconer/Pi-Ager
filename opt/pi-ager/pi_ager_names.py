@@ -142,6 +142,7 @@ internal_temperature_low_limit_key = 'internal_temperature_low_limit'
 internal_temperature_high_limit_key = 'internal_temperature_high_limit'
 internal_temperature_hysteresis_key = 'internal_temperature_hysteresis'
 shutdown_on_batlow_key = 'shutdown_on_batlow'
+dewpoint_check_key = 'dewpoint_check'
 
 # table fields
 key_field = 'key'
@@ -240,7 +241,7 @@ table_keys[config_settings_table] = (switch_on_cooling_compressor_key,switch_off
                                      spikes_refunit_tara_key, save_temperature_humidity_loops_key, sensorbus_key,
                                      meat1_sensortype_key, meat2_sensortype_key, meat3_sensortype_key, meat4_sensortype_key, customtime_for_diagrams_key, sensorsecondtype_key,
                                      agingtable_startperiod_key, agingtable_startday_key, tft_display_type_key, internal_temperature_low_limit_key, internal_temperature_high_limit_key, internal_temperature_hysteresis_key,
-                                     shutdown_on_batlow_key)
+                                     shutdown_on_batlow_key, dewpoint_check_key)
 
 table_keys[current_values_table] = (sensor_temperature_key, sensor_humidity_key, status_circulating_air_key, status_cooling_compressor_key, status_exhaust_air_key,
                                     status_heater_key, status_light_key, status_uv_key, status_humidifier_key, status_dehumidifier_key, scale1_key, scale2_key, status_pi_ager_key,

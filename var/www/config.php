@@ -116,6 +116,14 @@
                                             </p>
                                             <hr>
                                             <!----------------------------------------------------------------------------------------dehumidify-->
+                                            <?php
+                                                if ($dewpoint_check == 1) {
+                                                    $dewpoint_check_config_active = 'checked';
+                                                }
+                                                else {
+                                                    $dewpoint_check_config_active = '';
+                                                }
+                                            ?>
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <tr>
                                                     <td class="td_png_icon"><h3><?php echo _('dehumidify'); ?></h3><img src="images/icons/dehumidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_dehumidifier_blockFunction()"><?php echo _('help'); ?></button>
@@ -123,10 +131,11 @@
                                                     <td style=" text-align: left; padding-left: 20px;">
                                                         <input type="radio" name="dehumidifier_modus_config" value="1" <?php echo $checked_dehumidify_1; ?>/><label> <?php echo _('only exhaust'); ?></label><br>
                                                         <input type="radio" name="dehumidifier_modus_config" value="2" <?php echo $checked_dehumidify_2; ?>/><label> <?php echo _('exhaust & dehumidifier'); ?></label><br>
-                                                        <input type="radio" name="dehumidifier_modus_config" value="3" <?php echo $checked_dehumidify_3; ?>/><label> <?php echo _('only dehumidifier'); ?></label><br>
-                                                        <br>
+                                                        <input type="radio" name="dehumidifier_modus_config" value="3" <?php echo $checked_dehumidify_3; ?>/><label> <?php echo _('only dehumidifier'); ?></label><br><br>
+                                                        <?php echo _('Taupunktprüfung aktiv'); ?>:
+                                                        <input type="hidden" name="dewpoint_check_config" value="0"/>
+                                                        <input type="checkbox" name="dewpoint_check_config" value="1" <?php echo $dewpoint_check_config_active; ?>/>
                                                     </td>
-                                                    
                                                 </tr>
                                             </table>
                                             <script>
@@ -263,12 +272,12 @@
                                                     }
                                                 ?>
                                                 <tr>
-                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('UPS battery'); ?></h3><img src="images/icons/battery_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_shutdown_on_batlow_config_blockFunction()"><?php echo _('help'); ?></button></td>
-                                                    <td style="width: 50%;"><?php echo _('shutdown on battery low'); ?>:</td>
-                                                    <td>
-                                                        <input type="hidden" name="shutdown_on_batlow_config" value="0">
+                                                    <td rowspan="3" class="td_png_icon"><h3><?php echo _('UPS battery'); ?></h3><img src="images/icons/battery_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_shutdown_on_batlow_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td columnspan="2" style="width: 100%;"><?php echo _('shutdown on battery low'); ?>:
+                                                        <input type="hidden" name="shutdown_on_batlow_config" value="0"/>
                                                         <input type="checkbox" name="shutdown_on_batlow_config" value="1" <?php echo $checked_shutdown_on_batlow_true; ?>/>
-                                                    <td>
+                                                    </td>
+                                                    <td></td>
                                                 </tr>
                                             </table>
                                             <script>

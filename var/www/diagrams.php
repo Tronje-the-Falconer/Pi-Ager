@@ -103,7 +103,7 @@
                                             data: $("#queryformid").serialize(), // serializes the form's elements.
                                             success: function(data)
                                             {
-                                                alert(data); // show response from the php script.
+                                                // alert(data); // show response from the php script.
                                                 loadContentAlldg();    // refresh charts
                                             }
                                         });
@@ -210,7 +210,7 @@
                                         <h4><?php 
 					                        include 'modules/chartsdata_diagrams.php';
 											$temperatur_humidity_saving_period = ceil (2 *($save_temperature_humidity_loops * 10 /60)) / 2;
-											echo _('storage interval of the data in the database');
+											echo _('storage interval of the sensor data in the database');
 							                echo ': ~ ' . $temperatur_humidity_saving_period . ' ';
 											echo _('minutes'); 
 										    ?></h4>

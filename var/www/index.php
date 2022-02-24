@@ -309,7 +309,7 @@
                                         data: $("#queryformid").serialize(), // serializes the form's elements.
                                         success: function(data)
                                         {
-                                            alert(data); // show response from the php script.
+                                            // alert(data); // show response from the php script.
                                             loadContentdg();    // refresh charts
                                         }
                                     });
