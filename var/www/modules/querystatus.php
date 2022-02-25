@@ -139,35 +139,35 @@
         $current_values['mod_stat_line1'] = $cooler_on_off_png;
         $current_values['mod_name_line1'] = strtoupper(_('cooler'));
         $current_values['mod_current_line1'] = $sensor_temperature;
-        $current_values['mod_setpoint_line1'] = $setpoint_temperature;
-        $current_values['mod_on_line1'] = $setpoint_temperature + $switch_on_cooling_compressor;
-        $current_values['mod_off_line1'] = $setpoint_temperature + $switch_off_cooling_compressor;
+        $current_values['mod_setpoint_line1'] = number_format(floatval($setpoint_temperature), 1, '.', '');
+        $current_values['mod_on_line1'] = number_format(floatval($setpoint_temperature + $switch_on_cooling_compressor), 1, '.', '');
+        $current_values['mod_off_line1'] = number_format(floatval($setpoint_temperature + $switch_off_cooling_compressor), 1, '.', '');
     }
     else if ($modus == 2) {
         $current_values['mod_type_line1'] = 'images/icons/heating_42x42.png';
         $current_values['mod_stat_line1'] = $heater_on_off_png;
         $current_values['mod_name_line1'] = strtoupper(_('heater'));
         $current_values['mod_current_line1'] = $sensor_temperature;
-        $current_values['mod_setpoint_line1'] = $setpoint_temperature;
-        $current_values['mod_on_line1'] = $setpoint_temperature - $switch_on_cooling_compressor;
-        $current_values['mod_off_line1'] = $setpoint_temperature - $switch_off_cooling_compressor;
+        $current_values['mod_setpoint_line1'] = number_format(floatval($setpoint_temperature), 1, '.', '');
+        $current_values['mod_on_line1'] = number_format(floatval($setpoint_temperature - $switch_on_cooling_compressor), 1, '.', '');
+        $current_values['mod_off_line1'] = number_format(floatval($setpoint_temperature - $switch_off_cooling_compressor), 1, '.', '');
     }
     else {
         $current_values['mod_type_line1'] = 'images/icons/cooling_42x42.png';
         $current_values['mod_stat_line1'] = $cooler_on_off_png;
         $current_values['mod_name_line1'] = strtoupper(_('cooler'));
         $current_values['mod_current_line1'] = $sensor_temperature;
-        $current_values['mod_setpoint_line1'] = $setpoint_temperature;
-        $current_values['mod_on_line1'] = $setpoint_temperature + $switch_on_cooling_compressor;
-        $current_values['mod_off_line1'] = $setpoint_temperature + $switch_off_cooling_compressor;
+        $current_values['mod_setpoint_line1'] = number_format(floatval($setpoint_temperature), 1, '.', '');
+        $current_values['mod_on_line1'] = number_format(floatval($setpoint_temperature + $switch_on_cooling_compressor), 1, '.', '');
+        $current_values['mod_off_line1'] = number_format(floatval($setpoint_temperature + $switch_off_cooling_compressor), 1, '.', '');
         
         $current_values['mod_type_line2'] = 'images/icons/heating_42x42.png';
         $current_values['mod_stat_line2'] = $heater_on_off_png;
         $current_values['mod_name_line2'] = strtoupper(_('heater'));
         $current_values['mod_current_line2'] = $sensor_temperature;
-        $current_values['mod_setpoint_line2'] = $setpoint_temperature;
-        $current_values['mod_on_line2'] = $setpoint_temperature - $switch_on_cooling_compressor;
-        $current_values['mod_off_line2'] = $setpoint_temperature - $switch_off_cooling_compressor;        
+        $current_values['mod_setpoint_line2'] = number_format(floatval($setpoint_temperature), 1, '.', '');
+        $current_values['mod_on_line2'] = number_format(floatval($setpoint_temperature - $switch_on_cooling_compressor), 1, '.', '');
+        $current_values['mod_off_line2'] = number_format(floatval($setpoint_temperature - $switch_off_cooling_compressor), 1, '.', '');  
     }
 
     if ($modus == 1 || $modus == 2 || $modus == 3) {

@@ -445,6 +445,7 @@ UPDATE current_values SET value='0' WHERE key = 'status_piager';
 UPDATE current_values SET value='0' WHERE key = 'status_scale1';
 UPDATE current_values SET value='0' WHERE key = 'status_scale2';
 UPDATE current_values SET value='0' WHERE key = 'status_agingtable';
+UPDATE current_values SET value='0' WHERE key = 'dewpoint_check';
 
 DELETE FROM config_nfs_backup;
 delete FROM config_email_server;
