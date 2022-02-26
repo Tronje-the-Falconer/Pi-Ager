@@ -132,7 +132,7 @@
                                                         <input type="radio" name="dehumidifier_modus_config" value="1" <?php echo $checked_dehumidify_1; ?>/><label> <?php echo _('only exhaust'); ?></label><br>
                                                         <input type="radio" name="dehumidifier_modus_config" value="2" <?php echo $checked_dehumidify_2; ?>/><label> <?php echo _('exhaust & dehumidifier'); ?></label><br>
                                                         <input type="radio" name="dehumidifier_modus_config" value="3" <?php echo $checked_dehumidify_3; ?>/><label> <?php echo _('only dehumidifier'); ?></label><br><br>
-                                                        <?php echo _('Taupunktprüfung aktiv'); ?>:
+                                                        <?php echo _('dewpoint check aktive'); ?>:
                                                         <input type="hidden" name="dewpoint_check_config" value="0"/>
                                                         <input type="checkbox" name="dewpoint_check_config" value="1" <?php echo $dewpoint_check_config_active; ?>/>
                                                     </td>

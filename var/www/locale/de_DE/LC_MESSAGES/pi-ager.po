@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
-"POT-Creation-Date: 2022-02-24 20:38+0100\n"
-"PO-Revision-Date: 2022-02-24 20:57+0100\n"
+"POT-Creation-Date: 2022-02-25 14:30+0100\n"
+"PO-Revision-Date: 2022-02-25 14:32+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -1261,8 +1261,8 @@ msgid "only dehumidifier"
 msgstr "Nur Entfeuchter"
 
 #: var/www/config.php:135
-msgid "Taupunktprüfung aktiv"
-msgstr "dewpoint active"
+msgid "dewpoint check aktive"
+msgstr "Taupunktprüfung aktiv"
 
 #: var/www/config.php:150
 msgid "helptext_dehumidifier_config"
@@ -3304,6 +3304,9 @@ msgstr "Licht Schalter"
 #: var/www/webcam.php:57
 msgid "light manual on"
 msgstr "Licht manuell EIN"
+
+#~ msgid "Taupunktprüfung aktiv"
+#~ msgstr "dewpoint active"
 
 #~ msgid "Sensor humidity ="
 #~ msgstr "Sensor Feuchte ="
