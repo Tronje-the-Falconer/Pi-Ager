@@ -223,7 +223,7 @@
                     $current_values['mod_stat_line6'] = 'images/icons/status_on_20x20.png';
                 }
             }
-            $strtemp = strtoupper(_('abs. humidity check') . ': ');
+            $strtemp = mb_strtoupper(_('abs. humidity check') . ': ');
             if ($dewpoint_check == 1) {
                 $strtemp = $strtemp . strtoupper(_('on'));
             }

@@ -1116,7 +1116,7 @@
                                                             }
                                                         }
                                                         echo '<td id="mod_name_line6_id" class="text_left">';
-                                                        echo strtoupper(_('abs. humidity check') . ': ');
+                                                        echo mb_strtoupper(_('abs. humidity check') . ': ');
                                                         
                                                         if ($dewpoint_check == 1) {
                                                             echo strtoupper(_('on'));
