@@ -65,6 +65,12 @@ async function handleContent( msg ) {
     else {
         str_dewpoint_main = dewpoint_main.toFixed(1);
     }
+    if (humidity_abs_main === null) {
+        str_humidity_abs_main = '-----';
+    }
+    else {
+        str_humidity_abs_main = humidity_abs_main.toFixed(1);
+    }
     if (temperature_extern === null) {
         str_temperature_extern = '-----';
     }
@@ -82,6 +88,12 @@ async function handleContent( msg ) {
     }
     else {
         str_dewpoint_extern = dewpoint_extern.toFixed(1);
+    }
+    if (humidity_extern_abs === null) {
+        str_humidity_abs_extern = '-----';
+    }
+    else {
+        str_humidity_abs_extern = dewpoint_extern.toFixed(1);
     }
     if (gr_scale1 === null) {
         str_gr_scale1 = '-----';
@@ -158,23 +170,23 @@ async function handleContent( msg ) {
         color_hum = '#011EF7';
     }
     
-    if (dewpoint_main === null){
-        color_dewpoint = '#888888';
+    if (humidity_abs_main === null){
+        color_humidity_abs = '#888888';
     } 
-    else if (dewpoint_main < 1){
-        color_dewpoint = '#0119F0';
+    else if (humidity_abs_main < 1){
+        color_humidity_abs = '#0119F0';
     } 
-    else if(dewpoint_main >=1 && dewpoint_main < 8){
-        color_dewpoint = '#00FAD0';
+    else if(humidity_abs_main >=1 && humidity_abs_main < 8){
+        color_humidity_abs = '#00FAD0';
     }
-    else if(dewpoint_main >=8 && dewpoint_main < 14){
-        color_dewpoint = '#E0D909';
+    else if(humidity_abs_main >=8 && humidity_abs_main < 14){
+        color_humidity_abs = '#E0D909';
     }
-    else if(dewpoint_main >=14 && dewpoint_main < 21){
-        color_dewpoint = '#FA9E02';
+    else if(humidity_abs_main >=14 && humidity_abs_main < 21){
+        color_humidity_abs = '#FA9E02';
     }
-    else if(dewpoint_main >=21 ){
-        color_dewpoint = '#F01A00';
+    else if(humidity_abs_main >=21 ){
+        color_humidity_abs = '#F01A00';
     }
     //text-shadow:0 0 5px #888888
     td_styling_pre = '0 0 5px ';
@@ -201,15 +213,16 @@ async function handleContent( msg ) {
         });
         $('#json_humidity_main').css('textShadow', td_styling_pre + color_hum);
     }
-    if (str_dewpoint_main.substring(0,3) == '---' || status_piager == 0 || grepmain == 0) {
-        $('#json_dewpoint_main').html('-----' + " °C");
-        $('#json_dewpoint_main').css('textShadow', td_styling_pre + '#888888');
+    
+    if (str_humidity_abs_main.substring(0,3) == '---' || status_piager == 0 || grepmain == 0) {
+        $('#json_hum_abs_main').html('-----' + " g/m³");
+        $('#json_hum_abs_main').css('textShadow', td_styling_pre + '#888888');
     }
     else {
-        $('#json_dewpoint_main').fadeOut(500, function(){
-            $(this).html(str_dewpoint_main + " °C").fadeIn(500);
+        $('#json_hum_abs_main').fadeOut(500, function(){
+            $(this).html(str_humidity_abs_main + " g/m³").fadeIn(500);
         });
-        $('#json_dewpoint_main').css('textShadow', td_styling_pre + color_dewpoint);
+        $('#json_hum_abs_main').css('textShadow', td_styling_pre + color_humidity_abs);
     }
 
     //------------------------Setzen der Externsensorwerte auf der Webseite
@@ -225,11 +238,12 @@ async function handleContent( msg ) {
     else {
         $('#json_humidity_extern').html(str_humidity_extern + " &#37");
     }
-    if (str_dewpoint_extern.substring(0,3) == '---' || status_piager == 0 || grepmain == 0) {
-        $('#json_dewpoint_extern').html('-----' + " °C");
+    
+    if (str_humidity_abs_extern.substring(0,3) == '---' || status_piager == 0 || grepmain == 0) {
+        $('#json_hum_abs_extern').html('-----' + " g/m³");
     }
     else {
-        $('#json_dewpoint_extern').html(str_dewpoint_extern + " °C");
+        $('#json_hum_abs_extern').html(str_dewpoint_extern + " g/m³");
     }
     
     //------------------------Setzen der Scale1-Werte auf der Webseite

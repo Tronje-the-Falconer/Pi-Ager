@@ -7,7 +7,7 @@
     $exhaust_air_duration = round(get_table_value($config_settings_table,$exhaust_air_duration_key), 1)/60;
     $exhaust_air_period = round(get_table_value($config_settings_table,$exhaust_air_period_key), 1)/60;
 
-    
+    $modus_name = '';
     if ($modus  ==  0) {
         $modus_name = '- '._('cooling');
         $checked_0 = 'checked="checked"';

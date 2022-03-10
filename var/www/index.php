@@ -28,7 +28,7 @@
                                                 <img src="images/icons/humidity.png" alt="" style="padding-top: 10px;">
                                             </td>
                                             <td width="33%">
-                                                <img src="images/icons/dew_point.png" alt="" style="padding-top: 10px;">
+                                                <img src="images/icons/humidity_abs.png" alt="" style="padding-top: 10px;">
                                             </td>
                                         </tr>
                                         <tr>
@@ -36,10 +36,10 @@
                                                 if ($grepmain == 0 or $status_piager == 0) {
                                                     $temp_main = '-----';
                                                     $hum_main = '-----';
-                                                    $dew_main = '-----';
+                                                    $hum_abs_main = '-----';
                                                     $temp_ext = '-----';
                                                     $hum_ext = '-----';
-                                                    $dew_ext = '-----';
+                                                    $hum_abs_ext = '-----';
                                                     $temp_ntc1 = '-----';
                                                     $temp_ntc2 = '-----';
                                                     $temp_ntc3 = '-----';
@@ -48,12 +48,12 @@
                                                 else {
                                                     $temp_main = $sensor_temperature;
                                                     $hum_main = $sensor_humidity;
-                                                    $data_from_db = get_table_value($current_values_table, $sensor_dewpoint_key);
+                                                    $data_from_db = get_table_value($current_values_table, $sensor_humidity_abs_key);
                                                     if ($data_from_db === null) {
-                                                        $dew_main = '-----';
+                                                        $hum_abs_main = '-----';
                                                     }
                                                     else {
-                                                        $dew_main = number_format(floatval($data_from_db), 1, '.', '');
+                                                        $hum_abs_main = number_format(floatval($data_from_db), 1, '.', '');
                                                     }
                                                     $data_from_db = get_table_value($current_values_table, $sensor_extern_temperature_key);
                                                     if ($data_from_db === null) {
@@ -69,12 +69,12 @@
                                                     else {
                                                         $hum_ext = round($data_from_db, 0);
                                                     }
-                                                    $data_from_db = get_table_value($current_values_table, $sensor_extern_dewpoint_key);
+                                                    $data_from_db = get_table_value($current_values_table, $sensor_extern_humidity_abs_key);
                                                     if ($data_from_db === null) {
-                                                        $dew_ext = '-----';
+                                                        $hum_abs_ext = '-----';
                                                     }
                                                     else {
-                                                        $dew_ext = number_format(floatval($data_from_db), 1, '.', '');
+                                                        $hum_abs_ext = number_format(floatval($data_from_db), 1, '.', '');
                                                     }
                                                     $data_from_db = get_table_value($current_values_table, $temperature_meat1_key);
                                                     if ($data_from_db === null) {
@@ -142,7 +142,7 @@
                                             ?>
                                             <td width="33%" id="json_temperature_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #ff0000;"><?php echo $temp_main . ' °C';?></td>
                                             <td width="33%" id="json_humidity_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #0066FF;"><?php echo $hum_main . ' %';?></td>
-                                            <td width="33%" id="json_dewpoint_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #00cc66;"><?php echo $dew_main . ' °C';?></td>
+                                            <td width="33%" id="json_hum_abs_main" style="text-align: center; font-size: 24px; text-shadow:0 0 5px #00cc66;"><?php echo $hum_abs_main . ' g/m³';?></td>
                                         </tr>
                                     </table>
                                     <?php
@@ -164,13 +164,13 @@
                                                     <img src="images/icons/humidity_extern_42x42.png" alt="" style="padding-top: 10px;">
                                                 </td>
                                                 <td width="33%">
-                                                    <img src="images/icons/dew_point_extern_42x42.png" alt="" style="padding-top: 10px;">
+                                                    <img src="images/icons/humidity_extern_abs_42x42.png" alt="" style="padding-top: 10px;">
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td width="33%" id="json_temperature_extern" align="center" style="text-align: center; font-size: 20px;"><?php echo $temp_ext . " °C";?></td>
                                                 <td width="33%" id="json_humidity_extern" align="center" style="text-align: center; font-size: 20px;"><?php echo $hum_ext . " %";?></td>
-                                                <td width="33%" id="json_dewpoint_extern" align="center" style="text-align: center; font-size: 20px;"><?php echo $dew_ext . " °C";?></td>
+                                                <td width="33%" id="json_hum_abs_extern" align="center" style="text-align: center; font-size: 20px;"><?php echo $hum_abs_ext . " g/m³";?></td>
                                             </tr>
                                         </table>
                                 </div>
@@ -889,8 +889,7 @@
                                         <tr>
                                             <td></td>   
                                             <td></td>
-                                            <td id="main_status_text" class="text_left_top">
-                                                <?php
+                                            <td id="main_status_text" class="text_left_top"><?php
                                                 if ($grepmain == 0){
                                                     echo strtoupper(_('see settings'));
                                                 }
@@ -900,8 +899,7 @@
                                                 elseif($grepmain != 0 and $status_piager == 1){
                                                     echo $modus_name;
                                                 }
-                                                ?>
-                                            </td>
+                                                ?></td>
                                             <?php 
                                                 // Prüft, ob Batteriespannung vorhanden ist
                                                 //$read_gpio_battery = shell_exec('sudo /var/sudowebscript.sh read_gpio_battery');
@@ -1046,6 +1044,7 @@
                                                         <td id="mod_setpoint_line1_id">'.$setpoint_temperature.' °C</td>
                                                         <td id="mod_on_line1_id">'.($setpoint_temperature + $switch_on_cooling_compressor).' °C</td>
                                                         <td id="mod_off_line1_id">'.($setpoint_temperature + $switch_off_cooling_compressor).' °C</td></tr>';
+                                                        
                                                     echo '<tr><td ><img id="mod_type_line2_id" src="images/icons/heating_42x42.png" alt=""></td>
                                                         <td><img id="mod_stat_line2_id" src="'.$heater_on_off_png.'" title="PIN_HEATER 3[5] -> IN 2 (PIN 3)"></td>
                                                         <td id="mod_name_line2_id" class="text_left">';
@@ -1080,15 +1079,7 @@
                                                         <td id="mod_setpoint_line3_id">'.$setpoint_humidity.' %</td>
                                                         <td id="mod_on_line3_id">'.($setpoint_humidity - $switch_on_humidifier).' %</td>
                                                         <td id="mod_off_line3_id">'.($setpoint_humidity - $switch_off_humidifier).' %</td></tr>';
-                                                    echo '<tr><td ><img id="mod_type_line4_id" src="images/icons/exhausting_42x42.png" alt=""></td>
-                                                        <td><img id="mod_stat_line4_id" src='.$exhausting_on_off_png.' title="PIN_EXH 23[16] -> IN 5 (PIN 5)"></td>
-                                                        <td id="mod_name_line4_id" class="text_left">';
-                                                    echo strtoupper(_('exhausting'));
-                                                    echo '</td>
-                                                        <td id="mod_current_line4_id">'.$sensor_humidity.' %</td>
-                                                        <td id="mod_setpoint_line4_id">'.$setpoint_humidity.' %</td>
-                                                        <td id="mod_on_line4_id">'.((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100).' %</td>
-                                                        <td id="mod_off_line4_id">'.((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100).' %</td></tr>';
+                                               
                                                     echo '<tr><td ><img id="mod_type_line5_id" src="images/icons/dehumidification_42x42.png" alt=""></td>
                                                         <td><img id="mod_stat_line5_id" src='.$dehumidifier_on_off_png.' title="PIN_DEH 7[26] -> IN 8 (PIN 9)"></td>
                                                         <td id="mod_name_line5_id" class="text_left">';
@@ -1098,6 +1089,43 @@
                                                         <td id="mod_setpoint_line5_id">'.$setpoint_humidity.' %</td>
                                                         <td id="mod_on_line5_id">'.((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100).' %</td>
                                                         <td id="mod_off_line5_id">'.((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100).' %</td></tr>';
+                                                        
+                                                    echo '<tr><td ><img id="mod_type_line4_id" src="images/icons/exhausting_42x42.png" alt=""></td>
+                                                        <td><img id="mod_stat_line4_id" src='.$exhausting_on_off_png.' title="PIN_EXH 23[16] -> IN 5 (PIN 5)"></td>
+                                                        <td id="mod_name_line4_id" class="text_left">';
+                                                    echo strtoupper(_('exhausting'));
+                                                    echo '</td>
+                                                        <td id="mod_current_line4_id">'.$sensor_humidity.' %</td>
+                                                        <td id="mod_setpoint_line4_id">'.$setpoint_humidity.' %</td>
+                                                        <td id="mod_on_line4_id">'.((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100).' %</td>
+                                                        <td id="mod_off_line4_id">'.((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100).' %</td></tr>';
+                                                    
+                                                    if (!($bus == 1 || $sensorsecondtype == 0)){  // show abs. humidity check aktive only with second sensor
+                                                        echo '<tr><td></td>';  // skip type column
+                                                        if ($dehumidifier_modus == 3) {     // only dehumidification
+                                                            echo '<td><img id="mod_stat_line6_id" src="images/icons/status_off_20x20.png" alt=""></td>';
+                                                        }
+                                                        else {
+                                                            $sensor_humidity_abs = get_table_value($current_values_table, $sensor_humidity_abs_key);
+                                                            $sensor_extern_humidity_abs = get_table_value($current_values_table, $sensor_extern_humidity_abs_key);
+                                                            if ($sensor_humidity_abs > $sensor_extern_humidity_abs) {
+                                                                echo '<td><img id="mod_stat_line6_id" src="images/icons/status_on_red_20x20.png" alt=""></td>';
+                                                            }
+                                                            else {
+                                                                echo '<td><img id="mod_stat_line6_id" src="images/icons/status_on_20x20.png" alt=""></td>';
+                                                            }
+                                                        }
+                                                        echo '<td id="mod_name_line6_id" class="text_left">';
+                                                        echo strtoupper(_('abs. humidity check') . ': ');
+                                                        
+                                                        if ($dewpoint_check == 1) {
+                                                            echo strtoupper(_('on'));
+                                                        }
+                                                        else {
+                                                            echo strtoupper(_('off'));
+                                                        }
+                                                        echo '</td></tr>';  
+                                                    }
                                                 }
                                           ?>
                                        </tr>

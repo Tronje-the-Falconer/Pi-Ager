@@ -27,7 +27,8 @@ async function handleContentStatus( msg ) {
     $('#gpio_voltage_img').attr('src', myObj.powersupply_img);
     $('#gpio_voltage_text').html(myObj.powersupply_text);    
     $('#gpio_voltage_text').css('color', myObj.powersupply_text_color);
-
+    
+    var main_status_text = $('#main_status_text').html();
     $('#main_status_text').html(myObj.main_status_text);
 
     $('#gpio_battery_img').attr('src', myObj.battery_img);
@@ -96,6 +97,9 @@ async function handleContentStatus( msg ) {
         $('#mod_setpoint_line5_id').html(myObj.mod_setpoint_line5 + ' %');
         $('#mod_on_line5_id').html(myObj.mod_on_line5 + ' %');
         $('#mod_off_line5_id').html(myObj.mod_off_line5 + ' %');
+        
+        $('#mod_stat_line6_id').attr('src', myObj.mod_stat_line6);
+        $('#mod_name_line6_id').html(myObj.mod_name_line6);
     }
 
     // timer circulation air
@@ -133,7 +137,11 @@ async function handleContentStatus( msg ) {
     
 //    $('#scale2_img_id').attr('src', myObj.scale2_img_id);
     $('#scale2_onoff_status_id').attr('src', myObj.scale2_onoff_status_id);    
-    $('#scale2_status_text_id').html(myObj.scale2_status_text_id);      
+    $('#scale2_status_text_id').html(myObj.scale2_status_text_id); 
+
+    if (main_status_text.localeCompare( myObj.main_status_text ) != 0) {   // refresh when mode changed
+        window.location.href = "index.php"; 
+    }
 }
 
 // request current pi-ager status and show it on index.php

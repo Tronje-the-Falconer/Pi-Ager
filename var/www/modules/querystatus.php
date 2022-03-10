@@ -33,6 +33,13 @@
     $sensor_humidity = round(get_table_value($current_values_table,$sensor_humidity_key), 0);
     $desired_maturity = read_agingtable_name_from_config();
     
+    $bus = intval(get_table_value($config_settings_table, $sensorbus_key));
+    $sensorsecondtype = intval(get_table_value($config_settings_table,$sensorsecondtype_key));
+    $dehumidifier_modus = intval(get_table_value($config_settings_table,$dehumidifier_modus_key));
+    $dewpoint_check = intval(get_table_value($config_settings_table, $dewpoint_check_key));
+    $sensor_humidity_abs = get_table_value($current_values_table, $sensor_humidity_abs_key);
+    $sensor_extern_humidity_abs = get_table_value($current_values_table, $sensor_extern_humidity_abs_key);
+    
     $current_values = array();
 
     $current_values['grepmain'] = $grepmain;
@@ -202,7 +209,33 @@
         $current_values['mod_current_line5'] = $sensor_humidity;
         $current_values['mod_setpoint_line5'] = $setpoint_humidity;
         $current_values['mod_on_line5'] = ((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100);
-        $current_values['mod_off_line5'] = ((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100);         
+        $current_values['mod_off_line5'] = ((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100);
+
+        if (!($bus == 1 || $sensorsecondtype == 0)) {  // show abs. humidity check aktive only with second sensor
+            if ($dehumidifier_modus == 3) {             // only dehumidification
+                $current_values['mod_stat_line6'] = 'images/icons/status_off_20x20.png';
+            }
+            else {
+                if ($sensor_humidity_abs > $sensor_extern_humidity_abs) {
+                    $current_values['mod_stat_line6'] = 'images/icons/status_on_red_20x20.png';
+                }
+                else {
+                    $current_values['mod_stat_line6'] = 'images/icons/status_on_20x20.png';
+                }
+            }
+            $strtemp = strtoupper(_('abs. humidity check') . ': ');
+            if ($dewpoint_check == 1) {
+                $strtemp = $strtemp . strtoupper(_('on'));
+            }
+            else {
+                $strtemp = $strtemp . strtoupper(_('off'));
+            }
+            $current_values['mod_name_line6'] = $strtemp;  
+        }
+        else {
+            $current_values['mod_stat_line6'] = 'images/icons/status_off_20x20.png';
+            $current_values['mod_name_line6'] = '';  
+        }
     }
     
     if ($grepagingtable){
