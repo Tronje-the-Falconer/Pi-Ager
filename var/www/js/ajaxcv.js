@@ -93,7 +93,7 @@ async function handleContent( msg ) {
         str_humidity_abs_extern = '-----';
     }
     else {
-        str_humidity_abs_extern = dewpoint_extern.toFixed(1);
+        str_humidity_abs_extern = humidity_extern_abs.toFixed(1);
     }
     if (gr_scale1 === null) {
         str_gr_scale1 = '-----';
@@ -243,7 +243,7 @@ async function handleContent( msg ) {
         $('#json_hum_abs_extern').html('-----' + " g/m³");
     }
     else {
-        $('#json_hum_abs_extern').html(str_dewpoint_extern + " g/m³");
+        $('#json_hum_abs_extern').html(str_humidity_abs_extern + " g/m³");
     }
     
     //------------------------Setzen der Scale1-Werte auf der Webseite

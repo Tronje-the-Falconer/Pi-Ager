@@ -408,6 +408,7 @@ class cl_nextion( threading.Thread ):
         temp_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
         humidity_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)
         dewpoint_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_dewpoint_key)
+        humabs = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_abs_key)
         temp_soll = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key)
         humitidy_soll = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key)
     
@@ -416,6 +417,7 @@ class cl_nextion( threading.Thread ):
         values['temp_ist'] = temp_ist
         values['humidity_ist'] = humidity_ist
         values['dewpoint_ist'] = dewpoint_ist
+        values['humabs'] = humabs
         values['temp_soll'] = temp_soll
         values['humitidy_soll'] = humitidy_soll
                          
@@ -436,6 +438,7 @@ class cl_nextion( threading.Thread ):
         temp_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_temperature_key)
         humid_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_humidity_key)
         dewp_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_dewpoint_key)
+        humabs_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_humidity_abs_key)
         
         values = dict()
         values['status_piager'] = status_piager
@@ -451,6 +454,7 @@ class cl_nextion( threading.Thread ):
         values['temp_ext'] = temp_ext
         values['humid_ext'] = humid_ext        
         values['dewp_ext'] = dewp_ext        
+        values['humabs_ext'] = humabs_ext
         
         return values
     
@@ -518,18 +522,18 @@ class cl_nextion( threading.Thread ):
         if values['status_piager'] == 0:
             await self.client.set('txt_temp.txt', '--.-')
             await self.client.set('txt_humid.txt', '--.-')
-            await self.client.set('txt_dew.txt', '--.-')
+            await self.client.set('txt_humabs.txt', '--.-')
         else:
             await self.client.set('txt_temp.txt', "%.1f" % (values['temp_ist']))
             await self.client.set('txt_humid.txt', "%.1f" % (values['humidity_ist']))        
-            await self.client.set('txt_dew.txt', "%.1f" % (values['dewpoint_ist']))      
+            await self.client.set('txt_humabs.txt', "%.1f" % (values['humabs']))      
     
     async def update_extended_values(self):
         values = self.db_get_extended_values()
         if values['status_piager'] == 0:
             await self.client.set('txt_temp_ext.txt', '--.-') 
             await self.client.set('txt_humid_ext.txt', '--.-')
-            await self.client.set('txt_dewp_ext.txt', '--.-')
+            await self.client.set('txt_humabs_ext.txt', '--.-')
             await self.client.set('txt_temp_meat1.txt', '--.-')
             await self.client.set('txt_temp_meat2.txt', '--.-')
             await self.client.set('txt_temp_meat3.txt', '--.-')
@@ -538,11 +542,11 @@ class cl_nextion( threading.Thread ):
             if values['status_secondsensor'] != 0:
                 await self.client.set('txt_temp_ext.txt', "%.1f" % (values['temp_ext']))
                 await self.client.set('txt_humid_ext.txt',"%.1f" % (values['humid_ext']))
-                await self.client.set('txt_dewp_ext.txt', "%.1f" % (values['dewp_ext']))
+                await self.client.set('txt_humabs_ext.txt', "%.1f" % (values['humabs_ext']))
             else:
                 await self.client.set('txt_temp_ext.txt', '--.-') 
                 await self.client.set('txt_humid_ext.txt', '--.-')
-                await self.client.set('txt_dewp_ext.txt', '--.-')    
+                await self.client.set('txt_humabs_ext.txt', '--.-')    
                 
             if values['temp_meat1'] == None:
                 await self.client.set('txt_temp_meat1.txt', '--.-')
@@ -579,8 +583,8 @@ class cl_nextion( threading.Thread ):
         temp_soll = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key)
         humitidy_soll = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key)
 
-        temp_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_temperature_key)
-        humid_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_humidity_key)
+        humabs_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_humidity_abs_key)
+        humabs = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_abs_key)
         
         await self.client.set('txt_temp_set.txt', "%.1f" % (temp_soll))
         await self.client.set('txt_humid_set.txt', "%.1f" % (humitidy_soll))
@@ -588,17 +592,18 @@ class cl_nextion( threading.Thread ):
         if status_piager == 0:
             await self.client.set('txt_temp.txt', '--.-')
             await self.client.set('txt_humid.txt', '--.-')
-            await self.client.set('txt_temp_ext.txt', '--.-') 
-            await self.client.set('txt_humid_ext.txt', '--.-')
+            await self.client.set('txt_humabs_ext.txt', '--.-') 
+            await self.client.set('txt_humabs.txt', '--.-')
         else:
             await self.client.set('txt_temp.txt', "%.1f" % (temp_ist))
-            await self.client.set('txt_humid.txt', "%.1f" % (humidity_ist)) 
+            await self.client.set('txt_humid.txt', "%.1f" % (humidity_ist))
+            await self.client.set('txt_humabs.txt', "%.1f" % (humabs))
             if secondsensortype != 0:
-                await self.client.set('txt_temp_ext.txt', "%.1f" % (temp_ext))
-                await self.client.set('txt_humid_ext.txt',"%.1f" % (humid_ext))
+                # await self.client.set('txt_dewp.txt', "%.1f" % (dewpoint))
+                await self.client.set('txt_humabs_ext.txt',"%.1f" % (humabs_ext))
             else:
-                await self.client.set('txt_temp_ext.txt', '--.-') 
-                await self.client.set('txt_humid_ext.txt', '--.-')
+                # await self.client.set('txt_dewp.txt', '--.-') 
+                await self.client.set('txt_humabs_ext.txt', '--.-')
         
     async def update_page_17_19_values(self):
         status_piager = int(pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key ))
@@ -680,8 +685,8 @@ class cl_nextion( threading.Thread ):
                     await self.show_offline()    
                     
             except Exception as e:
-                cl_fact_logger.get_instance().error('run_client exception2: ' + str(e))
-                cl_fact_logger.get_instance().debug('run_client exception2')
+                cl_fact_logger.get_instance().debug('run_client exception2: ' + str(e))
+            #    cl_fact_logger.get_instance().debug('run_client exception2')
             # await self.client.set('values.temp_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
             # await self.client.set('values.humidity_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
             # await self.client.set('values.dewpoint_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))

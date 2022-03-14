@@ -1469,7 +1469,7 @@ def doMainLoop():
 #        pi_ager_gpio_config.defaultGPIO()
  
         # reflect i/o status in DB
-#        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, 0, 0, 0, 0, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data) 
+        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, 0, 0, 0, 0, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data) 
         cl_fact_logger.get_instance().debug('in loop try end -----------------------------------------------------')
         
     except Exception as cx_error:
@@ -1483,4 +1483,4 @@ def doMainLoop():
             
         pi_ager_gpio_config.defaultGPIO()
         # reflect i/o status in DB
-        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, 0, 0, 0, 0, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data)     
+        # pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, 0, 0, 0, 0, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data)     
