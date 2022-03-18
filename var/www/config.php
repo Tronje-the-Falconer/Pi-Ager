@@ -140,6 +140,9 @@
                                                                 echo '<input type="checkbox" name="dewpoint_check_config" value="1" ';
                                                                 echo $dewpoint_check_config_active . '/>';
                                                             }
+                                                            else {
+                                                                echo '<input type="hidden" name="dewpoint_check_config" value="0"/>';
+                                                            }
                                                         ?>
                                                     </td>
                                                 </tr>

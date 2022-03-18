@@ -145,6 +145,8 @@ $shutdown_on_batlow_key = 'shutdown_on_batlow';
 $diagram_modus_key = 'diagram_modus';
 $delay_cooler_key = 'delay_cooler';
 $dewpoint_check_key = 'dewpoint_check';
+$status_humidity_check_key = 'status_humidity_check';
+$humidity_check_hysteresis_key = 'humidity_check_hysteresis';
 
 #-----------------------------table fields;
 $key_field = 'key';

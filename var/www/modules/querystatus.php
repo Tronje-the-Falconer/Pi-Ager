@@ -39,6 +39,7 @@
     $dewpoint_check = intval(get_table_value($config_settings_table, $dewpoint_check_key));
     $sensor_humidity_abs = get_table_value($current_values_table, $sensor_humidity_abs_key);
     $sensor_extern_humidity_abs = get_table_value($current_values_table, $sensor_extern_humidity_abs_key);
+    $status_humidity_check = intval(get_table_value($current_values_table, $status_humidity_check_key));
     
     $current_values = array();
 
@@ -216,7 +217,8 @@
                 $current_values['mod_stat_line6'] = 'images/icons/status_off_20x20.png';
             }
             else {
-                if ($sensor_humidity_abs > $sensor_extern_humidity_abs) {
+                // if ($sensor_humidity_abs < $sensor_extern_humidity_abs) {
+                if ($status_humidity_check == 1) {    
                     $current_values['mod_stat_line6'] = 'images/icons/status_on_red_20x20.png';
                 }
                 else {

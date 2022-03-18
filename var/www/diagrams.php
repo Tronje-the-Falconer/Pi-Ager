@@ -421,6 +421,7 @@
                                                 labels: [], 
                                                 datasets: [{
                                                     label: '<?php echo _("dewpoint") . ' int.' ?>',
+                                                    hidden: true,
                                                     yAxisID: 'temperature',
                                                     data: <?php echo json_encode($dewpoint_dataset); ?>,
                                                     backgroundColor: '#04B431',
@@ -441,6 +442,7 @@
                                                 },
                                                 {
                                                     label: '<?php echo _("dewpoint") . ' ext.' ?>',
+                                                    hidden: true,
                                                     yAxisID: 'temperature',
                                                     data: <?php echo json_encode($extern_dewpoint_dataset); ?>,
                                                     backgroundColor: '#0B6121',
@@ -1874,7 +1876,7 @@
                                         
                                         // restore hidden flags for dewpoint_humidity_chart
                                         dataset_count = config_dewpoint_humidity_chart.data.datasets.length;
-                                        for (i = 0; i < dataset_count; ++i) {
+                                        for (i = 2; i < dataset_count; ++i) {
                                             key = 'diagrams_dew_dataset' + i.toString();
                                             chart_hidden = window.localStorage.getItem(key);
                                             if (chart_hidden == null) {
@@ -1919,7 +1921,7 @@
                                             }                                            
                                             
                                             count = dewpoint_humidity_chart.data.datasets.length;
-                                            for (i = 0; i < count; ++i) {
+                                            for (i = 2; i < count; ++i) {
                                                 var ds_visible = dewpoint_humidity_chart.isDatasetVisible(i);
                                                 var loc_store_name = 'diagrams_dew_dataset' + i.toString();
                                                 console.log('loc_store_name = ' + loc_store_name + '  ' + ds_visible);

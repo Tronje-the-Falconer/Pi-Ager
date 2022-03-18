@@ -1013,6 +1013,10 @@
                                                     $sensor_temperature = '--.-';
                                                     $sensor_humidity = '--.-';
                                                 }
+                                                $cooler_on = number_format(floatval($setpoint_temperature + $switch_on_cooling_compressor), 1, '.', '');
+                                                $cooler_off = number_format(floatval($setpoint_temperature + $switch_off_cooling_compressor), 1, '.', '');
+                                                $heater_on = number_format(floatval($setpoint_temperature - $switch_on_cooling_compressor), 1, '.', '');
+                                                $heater_off = number_format(floatval($setpoint_temperature - $switch_off_cooling_compressor), 1, '.', '');
                                                 if ($modus == 0 || $modus == 1){
                                                     echo '<td><img id="mod_type_line1_id" src="images/icons/cooling_42x42.png" alt=""></td>
                                                         <td><img id="mod_stat_line1_id" src="'.$cooler_on_off_png.'" title="PIN_COOL 4[7] -> IN 1 (PIN2)"></td>
@@ -1021,8 +1025,8 @@
                                                     echo '</td>
                                                         <td id="mod_current_line1_id">'.$sensor_temperature.' °C</td>
                                                         <td id="mod_setpoint_line1_id">'.$setpoint_temperature.' °C</td>
-                                                        <td id="mod_on_line1_id">'.($setpoint_temperature + $switch_on_cooling_compressor).' °C</td>
-                                                        <td id="mod_off_line1_id">'.($setpoint_temperature + $switch_off_cooling_compressor).' °C</td>';
+                                                        <td id="mod_on_line1_id">'.$cooler_on.' °C</td>
+                                                        <td id="mod_off_line1_id">'.$cooler_off.' °C</td>';
                                                 }
                                                 else if ($modus == 2){
                                                     echo '<td><img id="mod_type_line1_id" src="images/icons/heating_42x42.png" alt=""></td>
@@ -1032,8 +1036,8 @@
                                                     echo '</td>
                                                         <td id="mod_current_line1_id">'.$sensor_temperature.' °C</td>
                                                         <td id="mod_setpoint_line1_id">'.$setpoint_temperature.' °C</td>
-                                                        <td id="mod_on_line1_id">'.($setpoint_temperature - $switch_on_cooling_compressor).' °C</td>
-                                                        <td id="mod_off_line1_id">'.($setpoint_temperature - $switch_off_cooling_compressor).' °C</td>';
+                                                        <td id="mod_on_line1_id">'.$heater_on.' °C</td>
+                                                        <td id="mod_off_line1_id">'.$heater_off.' °C</td>';
                                                 }
                                                 else {
                                                     echo '<td><img id="mod_type_line1_id" src="images/icons/cooling_42x42.png" alt=""></td>
@@ -1042,8 +1046,8 @@
                                                     echo strtoupper(_('cooler'));
                                                     echo '<td id="mod_current_line1_id">'.$sensor_temperature.' °C</td>
                                                         <td id="mod_setpoint_line1_id">'.$setpoint_temperature.' °C</td>
-                                                        <td id="mod_on_line1_id">'.($setpoint_temperature + $switch_on_cooling_compressor).' °C</td>
-                                                        <td id="mod_off_line1_id">'.($setpoint_temperature + $switch_off_cooling_compressor).' °C</td></tr>';
+                                                        <td id="mod_on_line1_id">'.$cooler_on.' °C</td>
+                                                        <td id="mod_off_line1_id">'.$cooler_off.' °C</td></tr>';
                                                         
                                                     echo '<tr><td ><img id="mod_type_line2_id" src="images/icons/heating_42x42.png" alt=""></td>
                                                         <td><img id="mod_stat_line2_id" src="'.$heater_on_off_png.'" title="PIN_HEATER 3[5] -> IN 2 (PIN 3)"></td>
@@ -1051,8 +1055,8 @@
                                                     echo strtoupper(_('heater'));
                                                     echo '<td id="mod_current_line2_id">'.$sensor_temperature.' °C</td>
                                                         <td id="mod_setpoint_line2_id">'.$setpoint_temperature.' °C</td>
-                                                        <td id="mod_on_line2_id">'.($setpoint_temperature - $switch_on_cooling_compressor).' °C</td>
-                                                        <td id="mod_off_line2_id">'.($setpoint_temperature - $switch_off_cooling_compressor).' °C</td>';
+                                                        <td id="mod_on_line2_id">'.$heater_on.' °C</td>
+                                                        <td id="mod_off_line2_id">'.$heater_off.' °C</td>';
                                                 }
                                             ?>
                                         </tr>
@@ -1106,9 +1110,11 @@
                                                             echo '<td><img id="mod_stat_line6_id" src="images/icons/status_off_20x20.png" alt=""></td>';
                                                         }
                                                         else {
-                                                            $sensor_humidity_abs = get_table_value($current_values_table, $sensor_humidity_abs_key);
-                                                            $sensor_extern_humidity_abs = get_table_value($current_values_table, $sensor_extern_humidity_abs_key);
-                                                            if ($sensor_humidity_abs > $sensor_extern_humidity_abs) {
+                                                            // $sensor_humidity_abs = get_table_value($current_values_table, $sensor_humidity_abs_key);
+                                                            // $sensor_extern_humidity_abs = get_table_value($current_values_table, $sensor_extern_humidity_abs_key);
+                                                            $status_humidity_check = intval(get_table_value($current_values_table, $status_humidity_check_key));
+                                                            //if ($sensor_humidity_abs < $sensor_extern_humidity_abs) {
+                                                            if ($status_humidity_check == 1) {
                                                                 echo '<td><img id="mod_stat_line6_id" src="images/icons/status_on_red_20x20.png" alt=""></td>';
                                                             }
                                                             else {

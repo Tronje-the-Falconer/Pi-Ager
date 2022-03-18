@@ -631,37 +631,51 @@ def delay_cooling_compressor(  level ):
         gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, level) 
 #    cl_fact_logger.get_instance().info('delay_cooling_compressor function finished')
 
-def check_int_ext_dewpoints():
+def check_int_ext_humidity():
     """
-    Check difference between internal and external dewpoints.
-    If external dewpoint is greater than internal dewpoint and if dewpoint check is enabled
+    Check difference between internal and external abs. humidity.
+    If external abs. humidity is greater than internal abs. humidity and if abs. humidity check is enabled
     return True, means: turn off fan
     """
     global second_sensor_dewpoint       #  Gerechneter Taupunkt externer Sensor
     global second_sensor_humidity_abs   #  absolute Feuchte externer Sensor
     global sensor_dewpoint              #  Gerechneter Taupunkt interner Sensor
     global sensor_humidity_abs          #  absolute Feuchte interner Sensor
+    global last_humidity_check_state    #  
+    
+    humidity_check_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.humidity_check_hysteresis_key)
     
     # check if we have a second sensor
     second_sensorname = cl_fact_second_sensor_type.get_instance().get_sensor_type_ui()
     # check if dewpoint_check is enabled
     dewpoint_check = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.dewpoint_check_key))
-#    cl_fact_logger.get_instance().debug('Second sensor name : ' + second_sensorname)
-#    cl_fact_logger.get_instance().debug('dewpoint_check flag : ' + str(dewpoint_check))
-#    cl_fact_logger.get_instance().debug('hum_abs_ext : ' + str(second_sensor_humidity_abs))
-#    cl_fact_logger.get_instance().debug('hum_abs_int : ' + str(sensor_humidity_abs))
+    # cl_fact_logger.get_instance().debug('Second sensor name : ' + second_sensorname)
+    # cl_fact_logger.get_instance().debug('dewpoint_check flag : ' + str(dewpoint_check))
+    # cl_fact_logger.get_instance().debug('hum_abs_ext : ' + str(second_sensor_humidity_abs))
+    # cl_fact_logger.get_instance().debug('hum_abs_int : ' + str(sensor_humidity_abs))
     
     if (dewpoint_check == 0):
-        cl_fact_logger.get_instance().debug('check_int_ext_dewpoints determins fans on ')
-        return False # if check is turned off, normal mode is allowed, exhaust fan can be turned on or off
+        # cl_fact_logger.get_instance().debug('check_int_ext_humidity determins fan untouched ')
+        last_humidity_check_state = False
+        pi_ager_database.write_current_value(pi_ager_names.status_humidity_check_key, 0)
+        return last_humidity_check_state # if check is turned off, normal mode is allowed, exhaust fan can be turned on or off
         
     if second_sensorname == 'SHT3x' or second_sensorname == 'SHT85':
+        # cl_fact_logger.get_instance().debug('in check_int_ext_humidity') 
+        # if second_sensor_humidity_abs >= (sensor_humidity_abs + humidity_check_hysteresis/2.0):
         if second_sensor_humidity_abs >= sensor_humidity_abs:
-            cl_fact_logger.get_instance().debug('check_int_ext_dewpoints determins fans off ')
-            return True    # exhaust fan off
+            cl_fact_logger.get_instance().debug('check_int_ext_humidity determins fan off ')
+            pi_ager_database.write_current_value(pi_ager_names.status_humidity_check_key, 1)
+            last_humidity_check_state = True    # exhaust fan off
             
-    cl_fact_logger.get_instance().debug('check_int_ext_dewpoints determins fans on ')
-    return False
+        # if second_sensor_humidity_abs <= (sensor_humidity_abs - humidity_check_hysteresis/2.0):
+        if second_sensor_humidity_abs <= (sensor_humidity_abs - humidity_check_hysteresis):
+            cl_fact_logger.get_instance().debug('check_int_ext_humidity determins fan untouched ')
+            pi_ager_database.write_current_value(pi_ager_names.status_humidity_check_key, 0)
+            last_humidity_check_state = False    # exhaust fan untouched          
+            
+    return last_humidity_check_state 
+            
   
     
 def doMainLoop():
@@ -681,6 +695,7 @@ def doMainLoop():
     global second_sensor_humidity         #  Gemessene Feuchtigkeit am Sensor
     global second_sensor_dewpoint         #  Gerechneter Taupunkt
     global second_sensor_humidity_abs
+    global last_humidity_check_state        # für hysterese int/ext abs. humidity check
     
     global switch_on_cooling_compressor   #  Einschalttemperatur
     global switch_off_cooling_compressor  #  Ausschalttemperatur
@@ -745,6 +760,9 @@ def doMainLoop():
     status_exhaust_fan = False          # status set bei mode 4
     status_exhaust_air = False          # relais status --> this is later calculated by status_fan and status_timer and check_int_ext_dewpoint
     status_exhaust_air_timer = False    # status set by timer
+    
+    last_humidity_check_state = False
+    pi_ager_database.write_current_value(pi_ager_names.status_humidity_check_key, 0)
     
     #Here get instance of Deviation class
     cl_fact_logger.get_instance().debug('in doMainLoop()')
@@ -1097,6 +1115,10 @@ def doMainLoop():
                         logstring = logstring + ' \n ' +  _('light timestamp active') + ' (' + _('light off') +')'
                         # cl_fact_logger.get_instance().debug(logstring)
     
+                if (modus != 4):
+                    last_humidity_check_state = False
+                    pi_ager_database.write_current_value(pi_ager_names.status_humidity_check_key, 0)
+                    
                 # Kuehlen
                 if modus == 0:
                     # turn off states possibly set by other modes
@@ -1265,15 +1287,16 @@ def doMainLoop():
                 
                 # Schalten des (Abluft-)Luftaustausch-Ventilator
                 # Einschalten immer, wenn der status_exhaust_air_timer true ist. Der status_exhaust_fan wird
-                # verknüpft mit check_int_ext_dewpoints, d.h.wenn externe abs. Feuchte höher ist als interne abs. Feuchte und
-                # die Taupunktprüfung aktiv ist, dann wird der Luftaustausch-Ventilator nicht eingeschaltet.
+                # verknüpft mit check_int_ext_humidity, d.h.wenn externe abs. Feuchte höher ist als interne abs. Feuchte und
+                # die Feuchteprüfung aktiv ist, dann wird der Luftaustausch-Ventilator nicht eingeschaltet.
                 # Priorität hat jedoch der xhaust_air_timer
                 # 
                 cl_fact_logger.get_instance().debug("status_exhaust_air = %r" % status_exhaust_air_timer) 
                 cl_fact_logger.get_instance().debug("status_exhaust_fan = %r" % status_exhaust_fan)
                 
-                # verknüpfte dewpoint_check mit status_exhaust_fan aus der Regelung
-                status_exhaust_fan = status_exhaust_fan and not check_int_ext_dewpoints();
+                # verknüpfe check_int_ext_humidity mit status_exhaust_fan aus der Regelung
+                check_result = check_int_ext_humidity()
+                status_exhaust_fan = status_exhaust_fan and not check_result
                 
                 if (status_exhaust_air_timer == True or status_exhaust_fan == True):
                     gpio.output(pi_ager_gpio_config.gpio_exhausting_air, pi_ager_names.relay_on)
