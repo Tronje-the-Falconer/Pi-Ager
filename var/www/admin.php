@@ -66,31 +66,27 @@
                                             <tr>
                                                 <td class="td_png_icon"><h3><?php echo _('sensortype'); ?></h3><img src="images/icons/sensortype_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_sensortype_blockFunction()"><?php echo _('help'); ?></button>
                                                 </td>
-                                                <td style=" text-align: left; padding-left: 20px;">
+                                                <td style=" text-align: left; padding-left: 20px;"><br>
                                                     <input type="radio" name="sensortype_admin" value="1" <?php echo $checked_sens_1; ?>/><label><span style="color: #7A5800 !important"> DHT11</span></label><br>
                                                     <input type="radio" name="sensortype_admin" value="2" <?php echo $checked_sens_2; ?>/><label><span style="color: #7A5800 !important"> DHT22</span></label><br>
                                                     <input type="radio" name="sensortype_admin" value="3" <?php echo $checked_sens_3; ?>/><label><span style="color: #7A5800 !important"> SHT75</span></label><br>
-                                                    <input type="radio" name="sensortype_admin" value="4" <?php echo $checked_sens_4; ?>/><label> SHT85</label><br>
-                                                    <input type="radio" name="sensortype_admin" value="5" <?php echo $checked_sens_5; ?>/><label> SHT3x</label><br>
+                                                    <input type="radio" name="sensortype_admin" value="4" <?php echo $checked_sens_4; ?>/><label><strong> SHT85</strong></label><br>
+                                                    <input type="radio" name="sensortype_admin" value="5" <?php echo $checked_sens_5; ?>/><label><strong> SHT3x</strong></label><br>
                                                     <br>
                                                 </td>
                                                 <td></td>
                                                 <td style=" text-align: left; padding-left: 20px;">
-                                                    <?php 
-                                                        if ($sens_second_active != ''){
-                                                            echo '<ul>' . _('only configurable if internal sensor is set to sht3x or sht85') . '</ul><br><br>';
-                                                            echo '<input type="hidden" name="sensorsecondtype_admin_inaktive" value="' . $sensorsecondtype . '" />';
-                                                        }
-                                                    ?>
-                                                    <input type="radio" name="sensorsecondtype_admin" value="0" <?php echo $checked_senssecond_0 . ' ' . $sens_second_active; ?>/><label> disabled</label><br>
-                                                    <!--
-                                                    <input type="radio" name="sensorsecondtype_admin" value="1" <?php echo $checked_senssecond_1 . ' ' . $sens_second_active; ?>/><label> DHT11</label><br>
-                                                    <input type="radio" name="sensorsecondtype_admin" value="2" <?php echo $checked_senssecond_2 . ' ' . $sens_second_active; ?>/><label> DHT22</label><br>
-                                                    <input type="radio" name="sensorsecondtype_admin" value="3" <?php echo $checked_senssecond_3 . ' ' . $sens_second_active; ?>/><label> SHT75</label><br> -->
-                                                    <input type="radio" name="sensorsecondtype_admin" value="4" <?php echo $checked_senssecond_4 . ' ' . $sens_second_active; ?>/><label> SHT85</label><br>
-                                                    <input type="radio" name="sensorsecondtype_admin" value="5" <?php echo $checked_senssecond_5 . ' ' . $sens_second_active; ?>/><label> SHT3x</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="0" <?php echo $checked_senssecond_0; ?>/><label> disabled</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="4" <?php echo $checked_senssecond_4; ?>/><label> SHT85</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="5" <?php echo $checked_senssecond_5; ?>/><label> SHT3x</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="6" <?php echo $checked_senssecond_6; ?>/><label> MiThermometer</label><br>
                                                     <br>
                                                 </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td colspan="2"><label>MiThermometer MAC address a4:c1:38:&nbsp;</label><div class="tooltip"><input type="text" size="8" maxlength="8" placeholder="xx:yy:zz" id="mac_last_3_bytes" name="mac_last_3_bytes" value=<?php echo $mi_mac_last3bytes;?>><span class="tooltiptext"><?php echo _('Enter last 3 bytes of device address');?></span></div></td>
                                             </tr>
                                         </table>
                                         <input name="bus" type="hidden" required value="<?php echo $bus; ?>">
@@ -110,12 +106,7 @@
 
                                         <table style="width: 100%; align: center;">
                                             <tr>
-                                                <td style="width: 100px;"></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td><br><button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: a shutdown is required, please turn the power off/on to restart the system!');?>');"><?php echo _('change sensors'); ?></button></td>
+                                                <td><br><button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: a shutdown may be required due to sensor or MAC address change, please turn the power off/on to restart the system!');?>');"><?php echo _('change sensors'); ?></button></td>
                                             </tr>
                                         </table>
                                     </div>

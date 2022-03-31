@@ -30,7 +30,12 @@ async function handleContent( msg ) {
     var status_scale1 = myObj.status_scale1[0];
     var status_scale2 = myObj.status_scale2[0];
     var grepmain = myObj.grepmain;
-    //console.log('grepmain = ', grepmain);
+    
+    var MiSensor_battery = myObj.MiSensor_battery[0];
+    var sensorsecondtype = myObj.sensorsecondtype;
+    var sensorbus = myObj.sensorbus;
+    
+    // console.log('temperature_extern = ', temperature_extern);
     
     var str_temperature_main;
     var str_humidity_main;
@@ -46,6 +51,14 @@ async function handleContent( msg ) {
     var str_meat2;
     var str_meat3;
     var str_meat4; 
+    var str_MiSensor_battery;
+    
+    if (MiSensor_battery == null) {
+        str_MiSensor_battery = '----';
+    }
+    else {
+        str_MiSensor_battery = MiSensor_battery.toFixed(2);
+    }
     
     if (temperature_main === null) {
         str_temperature_main = '-----';
@@ -244,6 +257,9 @@ async function handleContent( msg ) {
     }
     else {
         $('#json_hum_abs_extern').html(str_humidity_abs_extern + " g/m³");
+    }
+    if (sensorsecondtype == 6) {
+        $('#secondsensorname_id').html('(MiThermometer, battery: ' + str_MiSensor_battery + 'V)');
     }
     
     //------------------------Setzen der Scale1-Werte auf der Webseite

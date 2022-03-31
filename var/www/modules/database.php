@@ -282,6 +282,7 @@
         global $config_settings_table;
         global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key;
         global $meat1_sensor_name_json_key, $meat2_sensor_name_json_key, $meat3_sensor_name_json_key, $meat4_sensor_name_json_key;
+        global $sensorsecondtype_key, $sensorbus_key;
         
         open_connection(); 
         $sql = 'SELECT * FROM ' . $current_values_table;
@@ -307,6 +308,11 @@
         $values[$meat3_sensor_name_json_key] = $row['name'];
         $row = get_meatsensor_table_row( $meat4_sensortype_id );
         $values[$meat4_sensor_name_json_key] = $row['name'];  
+        
+        $sensorsecondtype = get_table_value($config_settings_table, $sensorsecondtype_key);
+        $sensorbus = get_table_value($config_settings_table, $sensorbus_key);
+        $values['sensorsecondtype'] = $sensorsecondtype; 
+        $values['sensorbus'] = $sensorbus;
         
         return $values;
     }

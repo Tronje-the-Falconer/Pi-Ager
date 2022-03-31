@@ -30,6 +30,8 @@ meat_sensortypes_table = 'meat_sensortypes'
 all_sensors_table = 'all_sensors'
 all_scales_table = 'all_scales'
 nextion_table = 'nextion'
+atc_mi_thermometer_mac_table = 'atc_mi_thermometer_mac'
+atc_mi_thermometer_data_table = 'atc_mi_thermometer_data'
 
 # table keys
 switch_on_cooling_compressor_key = 'switch_on_cooling_compressor'
@@ -145,6 +147,9 @@ shutdown_on_batlow_key = 'shutdown_on_batlow'
 dewpoint_check_key = 'dewpoint_check'
 status_humidity_check_key = 'status_humidity_check'
 humidity_check_hysteresis_key = 'humidity_check_hysteresis'
+mi_data_key = 'mi_data'
+mi_mac_last3bytes_key = 'mi_mac_last3bytes'
+MiSensor_battery_key = 'MiSensor_battery'
 
 # table fields
 key_field = 'key'

@@ -100,7 +100,8 @@ class cl_main_sensor_type:
 class cl_second_sensor_type(cl_main_sensor_type):
     __SUPPORTED_SECOND_SENSOR_TYPES = { 0: "disabled",
                                         4: "SHT85",
-                                        5: "SHT3x"}
+                                        5: "SHT3x",
+                                        6: "MiThermometer"}
     __NAME = 'Second_sensor'
     _type = 0
     _type_ui = ""

@@ -38,7 +38,15 @@ import threading
 import pi_ager_cl_scale
 import pi_ager_cl_agingtable
 
-
+def kill_mi_thermometer():
+    # check if /home/pi/MiTemperature2/LYWSD03MMC.py is running and then kill this process
+    stream = os.popen('pgrep -lf python3 | grep LYWSD03MMC.py | wc -l')
+    output = stream.read().rstrip('\n')
+    cl_fact_logger.get_instance().debug('Killing /home/pi/MiTemperature2/LYWSD03MMC.py')
+    if (output != '0'):
+        os.system("pgrep -lf LYWSD03MMC.py | grep LYWSD03MMC.py | awk '{print $1}' | xargs kill")
+        cl_fact_logger.get_instance().debug('LYWSD03MMC.py terminated')
+        
 # catch signal.SIGTERM and signal.SIGINT when killing main to gracefully shutdown system
 def signal_handler(signum, frame):
     cl_fact_logger.get_instance().debug('SIGTERM or SIGINT issued---------------------------------------------------------')
@@ -129,6 +137,9 @@ finally:
     
     cl_fact_logger.get_instance().debug('threads terminated')
     
+    # kill mi_thermometer process if running
+    kill_mi_thermometer()
+
     # Send shutdown message/event
     try:
         cl_fact_logic_messenger().get_instance().handle_event('Pi-Ager_offline') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 

@@ -131,11 +131,15 @@ async function handleContentStatus( msg ) {
     $('#timer_dur_line4_id').html(myObj.timer_dur_line4);    
 
     // scales
-//    $('#scale1_img_id').attr('src', myObj.scale1_img_id);
+    if ($('#scale1_img_id').attr('src').localeCompare(myObj.scale1_img_id) != 0) {
+        $('#scale1_img_id').attr('src', myObj.scale1_img_id);
+    }
     $('#scale1_onoff_status_id').attr('src', myObj.scale1_onoff_status_id);    
     $('#scale1_status_text_id').html(myObj.scale1_status_text_id);  
     
-//    $('#scale2_img_id').attr('src', myObj.scale2_img_id);
+    if ($('#scale2_img_id').attr('src').localeCompare(myObj.scale2_img_id) != 0) {
+        $('#scale2_img_id').attr('src', myObj.scale2_img_id);
+    }
     $('#scale2_onoff_status_id').attr('src', myObj.scale2_onoff_status_id);    
     $('#scale2_status_text_id').html(myObj.scale2_status_text_id); 
 

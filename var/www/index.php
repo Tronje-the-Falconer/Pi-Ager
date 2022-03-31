@@ -12,13 +12,11 @@
 								    //  include 'modules/write_customtime_db.php';                 //speichert die individuelle Zeit für die Diagramme
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('mainsensors'); ?></h2>
-                        <!--        <div style="float: left; padding-left: 8px;" id="timestamp"></div>
-                                <div style="float: left; padding-left: 8px;" id="json_timestamp"></div>
-                                <div style="float: left; padding-left: 8px;" id="time_difference"></div>
-                        -->
+
                                 <!----------------------------------------------------------------------------------------Anzeige T/rLF-->
                                 <div class="hg_container">
                                     <h2><?php echo _('internal'); ?></h2>
+                                    <h4><?php echo '(' . $sensorname . ')'; ?></h4>
                                     <table class="switching_state miniature_writing">
                                         <tr>
                                             <td width="33%">
@@ -146,13 +144,25 @@
                                         </tr>
                                     </table>
                                     <?php
-                                        if ($bus == 1 || $sensorsecondtype == 0){
+                                        if ($sensorsecondtype == 0){
                                             echo '<table class="switching_state miniature_writing" style="display: none !important;">';
                                         }
                                         else {
                                             echo '<hr><h2>';
                                             echo _('external');
                                             echo '</h2>';
+                                            if ($sensorsecondname == 'MiThermometer') {
+                                                if ($MiSensor_battery === null) {
+                                                    echo '<h4 id="secondsensorname_id">(' . $sensorsecondname . ', battery: ' . '----V)</h4>';
+                                                }
+                                                else {
+                                                    $MiSensor_battery_tmp = number_format(floatval($MiSensor_battery), 2, '.', '');
+                                                    echo '<h4 id="secondsensorname_id">(' . $sensorsecondname . ', battery: ' . $MiSensor_battery_tmp . 'V)</h4>';
+                                                }
+                                            }
+                                            else {
+                                                echo '<h4 id="secondsensorname_id">(' . $sensorsecondname . ')</h4>';
+                                            }
                                             echo '<table class="switching_state miniature_writing">';
                                         }
                                     ?>

@@ -1,5 +1,5 @@
 <?php
-    $sensor_temperature = round(get_table_value($current_values_table,$sensor_temperature_key), 1);
+    # $sensor_temperature = round(get_table_value($current_values_table,$sensor_temperature_key), 1);
     $sensortype = get_table_value($config_settings_table,$sensortype_key);
     $sensorsecondtype = get_table_value($config_settings_table,$sensorsecondtype_key);
     $language = get_table_value($config_settings_table,$language_key);
@@ -49,7 +49,9 @@
     $meat2_sensortype = get_table_value($config_settings_table, $meat2_sensortype_key);   
     $meat3_sensortype = get_table_value($config_settings_table, $meat3_sensortype_key);   
     $meat4_sensortype = get_table_value($config_settings_table, $meat4_sensortype_key);   
-        
+    
+    $mi_mac_last3bytes = get_table_value_from_field($atc_mi_thermometer_mac_table, NULL, $mi_mac_last3bytes_key);
+    
     if ($sensortype == 1) {
         $sensorname = 'DHT11';
         $checked_sens_1 = 'checked="checked"';
@@ -97,26 +99,7 @@
     else {
         $checked_senssecond_0 = '';
     }
-    if ($sensorsecondtype == 1) {
-        $sensorsecondname = 'DHT11';
-        $checked_senssecond_1 = 'checked="checked"';
-    }
-    else {
-        $checked_senssecond_1 = '';
-    }
-    if ($sensorsecondtype == 2) {
-        $sensorsecondname = 'DHT22';
-    }
-    else {
-        $checked_senssecond_2 = '';
-    }
-    if ($sensorsecondtype == 3) {
-        $sensorsecondname = 'SHT75';
-        $checked_senssecond_3 = 'checked="checked"';
-    }
-    else {
-        $checked_senssecond_3 = '';
-    }
+
     if ($sensorsecondtype == 4) {
         $sensorsecondname = 'SHT85';
         $checked_senssecond_4 = 'checked="checked"';
@@ -131,7 +114,14 @@
     else {
         $checked_senssecond_5 = '';
     }
-
+    if ($sensorsecondtype == 6) {
+        $sensorsecondname = 'MiThermometer';
+        $checked_senssecond_6 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_6 = '';
+    }
+    
     if ($language == 1) {
         $checked_language_1 = 'checked="checked"';
     }

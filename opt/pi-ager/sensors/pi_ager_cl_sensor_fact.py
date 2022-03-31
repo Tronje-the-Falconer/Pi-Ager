@@ -20,6 +20,7 @@ from sensors.pi_ager_cl_sensor_sht3x import cl_fact_sensor_sht3x
 from sensors.pi_ager_cl_sensor_sht85 import cl_fact_sensor_sht85
 from sensors.pi_ager_cl_sensor_dht11 import cl_fact_sensor_dht11
 from sensors.pi_ager_cl_sensor_dht22 import cl_fact_sensor_dht22
+from sensors.pi_ager_cl_sensor_MiThermometer import cl_fact_sensor_MiThermometer
 
 class cl_fact_sensor:
     
@@ -59,6 +60,9 @@ class cl_fact_sensor:
                 cl_fact_sensor.__o_instance = cl_fact_sensor_dht22.get_instance(l_sensor_type, i_active_sensor)
             elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'DHT11':
                 cl_fact_sensor.__o_instance = cl_fact_sensor_dht11.get_instance(l_sensor_type, i_active_sensor)
+            elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'MiThermometer':
+                cl_fact_sensor.__o_instance = cl_fact_sensor_MiThermometer.get_instance(l_sensor_type, i_active_sensor) 
+                
             cl_fact_logger.get_instance().debug("__ot_instance for " + i_active_sensor + " =  " + str(cl_fact_sensor.__o_instance) + " created" )
             
             cl_fact_logger.get_instance().debug("__ot_instances = " + str(cl_fact_sensor.__ot_instances))

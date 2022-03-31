@@ -540,9 +540,18 @@ class cl_nextion( threading.Thread ):
         
         else:
             if values['status_secondsensor'] != 0:
-                await self.client.set('txt_temp_ext.txt', "%.1f" % (values['temp_ext']))
-                await self.client.set('txt_humid_ext.txt',"%.1f" % (values['humid_ext']))
-                await self.client.set('txt_humabs_ext.txt', "%.1f" % (values['humabs_ext']))
+                if values['temp_ext'] == None:
+                    await self.client.set('txt_temp_ext.txt', '--.-')
+                else:
+                    await self.client.set('txt_temp_ext.txt', "%.1f" % (values['temp_ext']))
+                if values['humid_ext'] == None:
+                    await self.client.set('txt_humid_ext.txt', '--.-')
+                else:
+                    await self.client.set('txt_humid_ext.txt',"%.1f" % (values['humid_ext']))
+                if values['humabs_ext'] == None:
+                    await self.client.set('txt_humabs_ext.txt', '--.-')
+                else:
+                    await self.client.set('txt_humabs_ext.txt', "%.1f" % (values['humabs_ext']))
             else:
                 await self.client.set('txt_temp_ext.txt', '--.-') 
                 await self.client.set('txt_humid_ext.txt', '--.-')
@@ -600,7 +609,10 @@ class cl_nextion( threading.Thread ):
             await self.client.set('txt_humabs.txt', "%.1f" % (humabs))
             if secondsensortype != 0:
                 # await self.client.set('txt_dewp.txt', "%.1f" % (dewpoint))
-                await self.client.set('txt_humabs_ext.txt',"%.1f" % (humabs_ext))
+                if humabs_ext == None:
+                    await self.client.set('txt_humabs_ext.txt', '--.-')
+                else:
+                    await self.client.set('txt_humabs_ext.txt',"%.1f" % (humabs_ext))
             else:
                 # await self.client.set('txt_dewp.txt', '--.-') 
                 await self.client.set('txt_humabs_ext.txt', '--.-')
