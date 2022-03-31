@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager\n"
-"POT-Creation-Date: 2022-03-10 18:43+0100\n"
-"PO-Revision-Date: 2022-03-10 18:48+0100\n"
+"POT-Creation-Date: 2022-03-31 17:03+0200\n"
+"PO-Revision-Date: 2022-03-31 17:46+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -11,13 +11,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
-"X-Poedit-Basepath: ../../../../../../svn/branches/entwicklung\n"
+"X-Poedit-Basepath: ../../../../../svn/branches/entwicklung\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: heating\n"
-"X-Poedit-SearchPath-0: opt/pi-ager\n"
-"X-Poedit-SearchPath-1: var/www\n"
+"X-Poedit-SearchPath-0: var/www\n"
+"X-Poedit-SearchPath-1: opt/pi-ager\n"
 
-#: opt/pi-ager/main.py:99
+#: opt/pi-ager/main.py:107
 msgid "KeyboardInterrupt"
 msgstr ""
 
@@ -42,8 +42,8 @@ msgid "operation mode"
 msgstr "Betriebsmodus"
 
 #: opt/pi-ager/pi_ager_cl_agingtable.py:145 var/www/manvals.php:24
-#: var/www/modules/querystatus.php:103 var/www/modules/querystatus.php:107
-#: var/www/modules/querystatus.php:115 var/www/modules/querystatus.php:119
+#: var/www/modules/querystatus.php:106 var/www/modules/querystatus.php:110
+#: var/www/modules/querystatus.php:118 var/www/modules/querystatus.php:122
 #: var/www/modules/read_settings_db.php:12
 #: var/www/modules/read_settings_db.php:19
 #: var/www/modules/read_settings_db.php:33
@@ -122,17 +122,17 @@ msgstr "Verzögerung Befeuchter"
 #: opt/pi-ager/pi_ager_cl_agingtable.py:168
 #: opt/pi-ager/pi_ager_cl_agingtable.py:170
 #: opt/pi-ager/pi_ager_cl_agingtable.py:172 var/www/config.php:101
-#: var/www/config.php:174 var/www/config.php:179 var/www/config.php:213
-#: var/www/config.php:218 var/www/diagrams.php:81 var/www/diagrams.php:215
-#: var/www/index.php:283 var/www/index.php:1157 var/www/index.php:1158
-#: var/www/index.php:1172 var/www/index.php:1173 var/www/index.php:1201
-#: var/www/index.php:1202 var/www/index.php:1233 var/www/index.php:1234
+#: var/www/config.php:177 var/www/config.php:182 var/www/config.php:216
+#: var/www/config.php:221 var/www/diagrams.php:81 var/www/diagrams.php:215
+#: var/www/index.php:293 var/www/index.php:1173 var/www/index.php:1174
+#: var/www/index.php:1188 var/www/index.php:1189 var/www/index.php:1217
+#: var/www/index.php:1218 var/www/index.php:1249 var/www/index.php:1250
 #: var/www/manvals.php:99 var/www/manvals.php:103 var/www/manvals.php:125
-#: var/www/manvals.php:128 var/www/modules/querystatus.php:270
-#: var/www/modules/querystatus.php:271 var/www/modules/querystatus.php:294
-#: var/www/modules/querystatus.php:295 var/www/modules/querystatus.php:325
-#: var/www/modules/querystatus.php:326 var/www/modules/querystatus.php:357
-#: var/www/modules/querystatus.php:358
+#: var/www/manvals.php:128 var/www/modules/querystatus.php:274
+#: var/www/modules/querystatus.php:275 var/www/modules/querystatus.php:298
+#: var/www/modules/querystatus.php:299 var/www/modules/querystatus.php:329
+#: var/www/modules/querystatus.php:330 var/www/modules/querystatus.php:361
+#: var/www/modules/querystatus.php:362
 #: var/www/modules/write_config_db_logfile_txt.php:139
 #: var/www/modules/write_config_db_logfile_txt.php:140
 #: var/www/modules/write_config_db_logfile_txt.php:145
@@ -176,18 +176,18 @@ msgstr "Timer für Abluft Zyklus in Minuten"
 msgid "timer exhausting air"
 msgstr "Timer für Abluft Dauer in Minuten"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:173 var/www/config.php:178
-#: var/www/config.php:217 var/www/index.php:1143
+#: opt/pi-ager/pi_ager_cl_agingtable.py:173 var/www/config.php:181
+#: var/www/config.php:220 var/www/index.php:1159
 msgid "duration"
 msgstr "Dauer"
 
 #: opt/pi-ager/pi_ager_cl_agingtable.py:173 var/www/edit_agingtable.php:51
-#: var/www/index.php:281 var/www/index.php:754 var/www/settings.php:420
+#: var/www/index.php:291 var/www/index.php:764 var/www/settings.php:420
 msgid "days"
 msgstr "Tage"
 
 #: opt/pi-ager/pi_ager_cl_agingtable.py:173 var/www/diagrams.php:14
-#: var/www/diagrams.php:45 var/www/diagrams.php:79 var/www/index.php:741
+#: var/www/diagrams.php:45 var/www/diagrams.php:79 var/www/index.php:751
 #: var/www/modules/save_diagram_mode.php:33 var/www/settings.php:407
 msgid "day"
 msgstr "Tag"
@@ -249,11 +249,11 @@ msgstr "neue Werte für Zyklus"
 msgid "in agingtable duration_sleep-loop. duration_sleep left"
 msgstr "Restzeit im laufenden Zyklus"
 
-#: opt/pi-ager/pi_ager_cl_nextion.py:636
+#: opt/pi-ager/pi_ager_cl_nextion.py:653
 msgid "Client instance generated"
 msgstr "Clientinstanz generiert"
 
-#: opt/pi-ager/pi_ager_cl_nextion.py:640
+#: opt/pi-ager/pi_ager_cl_nextion.py:657
 msgid "Nextion client connected"
 msgstr "Nextion Client verbunden"
 
@@ -277,87 +277,87 @@ msgstr "Sensor Typ eingestellt auf"
 msgid "wrong sensortype in settings"
 msgstr "falscher Sensortyp in den Einstellungen"
 
-#: opt/pi-ager/pi_ager_loop.py:304
+#: opt/pi-ager/pi_ager_loop.py:322
 msgid "Failed to get sensordata."
 msgstr "Erfassen der Sensordaten fehlgeschlagen."
 
-#: opt/pi-ager/pi_ager_loop.py:915
+#: opt/pi-ager/pi_ager_loop.py:956
 msgid "selected internal sensor"
 msgstr "Ausgewählter interner Sensor"
 
-#: opt/pi-ager/pi_ager_loop.py:917
+#: opt/pi-ager/pi_ager_loop.py:958
 msgid "target temperature"
 msgstr "Sollwert Temperatur in °C"
 
-#: opt/pi-ager/pi_ager_loop.py:919 opt/pi-ager/pi_ager_loop.py:931
+#: opt/pi-ager/pi_ager_loop.py:960 opt/pi-ager/pi_ager_loop.py:972
 msgid "actual temperature"
 msgstr "Aktuelle Temperatur"
 
-#: opt/pi-ager/pi_ager_loop.py:922
+#: opt/pi-ager/pi_ager_loop.py:963
 msgid "target humidity"
 msgstr "Sollwert Feuchte"
 
-#: opt/pi-ager/pi_ager_loop.py:923 opt/pi-ager/pi_ager_loop.py:932
+#: opt/pi-ager/pi_ager_loop.py:964 opt/pi-ager/pi_ager_loop.py:973
 msgid "actual humidity"
 msgstr "Aktuelle Feuchte"
 
-#: opt/pi-ager/pi_ager_loop.py:925 opt/pi-ager/pi_ager_loop.py:933
+#: opt/pi-ager/pi_ager_loop.py:966 opt/pi-ager/pi_ager_loop.py:974
 msgid "actual dewpoint"
 msgstr "Aktueller Taupunkt"
 
-#: opt/pi-ager/pi_ager_loop.py:926 opt/pi-ager/pi_ager_loop.py:934
+#: opt/pi-ager/pi_ager_loop.py:967 opt/pi-ager/pi_ager_loop.py:975
 msgid "actual humidity abs"
 msgstr "Aktuelle absolute Feuchte"
 
-#: opt/pi-ager/pi_ager_loop.py:930
+#: opt/pi-ager/pi_ager_loop.py:971
 msgid "selected external sensor"
 msgstr "Ausgewählter externer Sensor"
 
-#: opt/pi-ager/pi_ager_loop.py:951 opt/pi-ager/pi_ager_loop.py:955
+#: opt/pi-ager/pi_ager_loop.py:992 opt/pi-ager/pi_ager_loop.py:996
 msgid "circulation air timer active"
 msgstr "Umluft Timer aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:951 opt/pi-ager/pi_ager_loop.py:968
+#: opt/pi-ager/pi_ager_loop.py:992 opt/pi-ager/pi_ager_loop.py:1009
 msgid "fan off"
 msgstr "Ventilator aus"
 
-#: opt/pi-ager/pi_ager_loop.py:955 opt/pi-ager/pi_ager_loop.py:972
+#: opt/pi-ager/pi_ager_loop.py:996 opt/pi-ager/pi_ager_loop.py:1013
 msgid "fan on"
 msgstr "Ventilator ein"
 
-#: opt/pi-ager/pi_ager_loop.py:968 opt/pi-ager/pi_ager_loop.py:972
+#: opt/pi-ager/pi_ager_loop.py:1009 opt/pi-ager/pi_ager_loop.py:1013
 msgid "exhaust air timer active"
 msgstr "Abluft Timer aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:980 opt/pi-ager/pi_ager_loop.py:984
+#: opt/pi-ager/pi_ager_loop.py:1021 opt/pi-ager/pi_ager_loop.py:1025
 msgid "modus uv-light"
 msgstr "Modus UV-Licht"
 
-#: opt/pi-ager/pi_ager_loop.py:980 opt/pi-ager/pi_ager_loop.py:1044
-#: opt/pi-ager/pi_ager_loop.py:1339 opt/pi-ager/pi_ager_loop.py:1346
-#: opt/pi-ager/pi_ager_loop.py:1354 opt/pi-ager/pi_ager_loop.py:1362
-#: opt/pi-ager/pi_ager_loop.py:1370 opt/pi-ager/pi_ager_loop.py:1378
-#: opt/pi-ager/pi_ager_loop.py:1386 opt/pi-ager/pi_ager_loop.py:1394
-#: var/www/config.php:168 var/www/config.php:179 var/www/config.php:207
-#: var/www/config.php:218 var/www/diagrams.php:995 var/www/diagrams.php:997
-#: var/www/diagrams.php:1020 var/www/diagrams.php:1022
-#: var/www/diagrams.php:1106 var/www/diagrams.php:1108
-#: var/www/diagrams.php:1131 var/www/diagrams.php:1133
-#: var/www/diagrams.php:1217 var/www/diagrams.php:1219
-#: var/www/diagrams.php:1242 var/www/diagrams.php:1244
-#: var/www/diagrams.php:1328 var/www/diagrams.php:1330
-#: var/www/diagrams.php:1353 var/www/diagrams.php:1355
-#: var/www/diagrams.php:1439 var/www/diagrams.php:1441
-#: var/www/diagrams.php:1464 var/www/diagrams.php:1466
-#: var/www/diagrams.php:1550 var/www/diagrams.php:1552
-#: var/www/diagrams.php:1575 var/www/diagrams.php:1577
-#: var/www/diagrams.php:1661 var/www/diagrams.php:1663
-#: var/www/diagrams.php:1686 var/www/diagrams.php:1688
-#: var/www/diagrams.php:1772 var/www/diagrams.php:1774
-#: var/www/diagrams.php:1797 var/www/diagrams.php:1799 var/www/index.php:897
-#: var/www/index.php:1008 var/www/index.php:1125 var/www/manvals.php:103
-#: var/www/manvals.php:128 var/www/modules/querystatus.php:126
-#: var/www/modules/querystatus.php:231
+#: opt/pi-ager/pi_ager_loop.py:1021 opt/pi-ager/pi_ager_loop.py:1085
+#: opt/pi-ager/pi_ager_loop.py:1385 opt/pi-ager/pi_ager_loop.py:1392
+#: opt/pi-ager/pi_ager_loop.py:1400 opt/pi-ager/pi_ager_loop.py:1408
+#: opt/pi-ager/pi_ager_loop.py:1416 opt/pi-ager/pi_ager_loop.py:1424
+#: opt/pi-ager/pi_ager_loop.py:1432 opt/pi-ager/pi_ager_loop.py:1440
+#: var/www/config.php:171 var/www/config.php:182 var/www/config.php:210
+#: var/www/config.php:221 var/www/diagrams.php:997 var/www/diagrams.php:999
+#: var/www/diagrams.php:1022 var/www/diagrams.php:1024
+#: var/www/diagrams.php:1108 var/www/diagrams.php:1110
+#: var/www/diagrams.php:1133 var/www/diagrams.php:1135
+#: var/www/diagrams.php:1219 var/www/diagrams.php:1221
+#: var/www/diagrams.php:1244 var/www/diagrams.php:1246
+#: var/www/diagrams.php:1330 var/www/diagrams.php:1332
+#: var/www/diagrams.php:1355 var/www/diagrams.php:1357
+#: var/www/diagrams.php:1441 var/www/diagrams.php:1443
+#: var/www/diagrams.php:1466 var/www/diagrams.php:1468
+#: var/www/diagrams.php:1552 var/www/diagrams.php:1554
+#: var/www/diagrams.php:1577 var/www/diagrams.php:1579
+#: var/www/diagrams.php:1663 var/www/diagrams.php:1665
+#: var/www/diagrams.php:1688 var/www/diagrams.php:1690
+#: var/www/diagrams.php:1774 var/www/diagrams.php:1776
+#: var/www/diagrams.php:1799 var/www/diagrams.php:1801 var/www/index.php:907
+#: var/www/index.php:1018 var/www/index.php:1141 var/www/manvals.php:103
+#: var/www/manvals.php:128 var/www/modules/querystatus.php:129
+#: var/www/modules/querystatus.php:235
 #: var/www/modules/write_config_db_logfile_txt.php:133
 #: var/www/modules/write_config_db_logfile_txt.php:149
 #: var/www/modules/write_settings_db_logfile_txt.php:117
@@ -365,103 +365,103 @@ msgstr "Modus UV-Licht"
 msgid "off"
 msgstr "Aus"
 
-#: opt/pi-ager/pi_ager_loop.py:984 opt/pi-ager/pi_ager_loop.py:1335
-#: opt/pi-ager/pi_ager_loop.py:1342 opt/pi-ager/pi_ager_loop.py:1350
-#: opt/pi-ager/pi_ager_loop.py:1358 opt/pi-ager/pi_ager_loop.py:1366
-#: opt/pi-ager/pi_ager_loop.py:1374 opt/pi-ager/pi_ager_loop.py:1382
-#: opt/pi-ager/pi_ager_loop.py:1390 var/www/diagrams.php:993
-#: var/www/diagrams.php:1018 var/www/diagrams.php:1104
-#: var/www/diagrams.php:1129 var/www/diagrams.php:1215
-#: var/www/diagrams.php:1240 var/www/diagrams.php:1326
-#: var/www/diagrams.php:1351 var/www/diagrams.php:1437
-#: var/www/diagrams.php:1462 var/www/diagrams.php:1548
-#: var/www/diagrams.php:1573 var/www/diagrams.php:1659
-#: var/www/diagrams.php:1684 var/www/diagrams.php:1770
-#: var/www/diagrams.php:1795 var/www/index.php:1007 var/www/index.php:1122
-#: var/www/modules/querystatus.php:228
+#: opt/pi-ager/pi_ager_loop.py:1025 opt/pi-ager/pi_ager_loop.py:1381
+#: opt/pi-ager/pi_ager_loop.py:1388 opt/pi-ager/pi_ager_loop.py:1396
+#: opt/pi-ager/pi_ager_loop.py:1404 opt/pi-ager/pi_ager_loop.py:1412
+#: opt/pi-ager/pi_ager_loop.py:1420 opt/pi-ager/pi_ager_loop.py:1428
+#: opt/pi-ager/pi_ager_loop.py:1436 var/www/diagrams.php:995
+#: var/www/diagrams.php:1020 var/www/diagrams.php:1106
+#: var/www/diagrams.php:1131 var/www/diagrams.php:1217
+#: var/www/diagrams.php:1242 var/www/diagrams.php:1328
+#: var/www/diagrams.php:1353 var/www/diagrams.php:1439
+#: var/www/diagrams.php:1464 var/www/diagrams.php:1550
+#: var/www/diagrams.php:1575 var/www/diagrams.php:1661
+#: var/www/diagrams.php:1686 var/www/diagrams.php:1772
+#: var/www/diagrams.php:1797 var/www/index.php:1017 var/www/index.php:1138
+#: var/www/modules/querystatus.php:232
 msgid "on"
 msgstr "Ein"
 
-#: opt/pi-ager/pi_ager_loop.py:995 opt/pi-ager/pi_ager_loop.py:1006
+#: opt/pi-ager/pi_ager_loop.py:1036 opt/pi-ager/pi_ager_loop.py:1047
 msgid "uv-light timer active"
 msgstr "UV-Licht Timer aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:995 opt/pi-ager/pi_ager_loop.py:1034
+#: opt/pi-ager/pi_ager_loop.py:1036 opt/pi-ager/pi_ager_loop.py:1075
 msgid "uv-light on"
 msgstr "UV-Licht Ein"
 
-#: opt/pi-ager/pi_ager_loop.py:1006 opt/pi-ager/pi_ager_loop.py:1038
+#: opt/pi-ager/pi_ager_loop.py:1047 opt/pi-ager/pi_ager_loop.py:1079
 msgid "uv-light off"
 msgstr "UV-Licht AUS"
 
-#: opt/pi-ager/pi_ager_loop.py:1034 opt/pi-ager/pi_ager_loop.py:1038
+#: opt/pi-ager/pi_ager_loop.py:1075 opt/pi-ager/pi_ager_loop.py:1079
 msgid "uv-light timestamp active"
 msgstr "Zeitpunkt UV-Licht Ein"
 
-#: opt/pi-ager/pi_ager_loop.py:1044
+#: opt/pi-ager/pi_ager_loop.py:1085
 msgid "modus light"
 msgstr "Modus Licht"
 
-#: opt/pi-ager/pi_ager_loop.py:1059 opt/pi-ager/pi_ager_loop.py:1069
+#: opt/pi-ager/pi_ager_loop.py:1100 opt/pi-ager/pi_ager_loop.py:1110
 msgid "light timer active"
 msgstr "Licht Timer aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1059 opt/pi-ager/pi_ager_loop.py:1093
+#: opt/pi-ager/pi_ager_loop.py:1100 opt/pi-ager/pi_ager_loop.py:1134
 #: var/www/webcam.php:53
 msgid "light on"
 msgstr "Licht EIN"
 
-#: opt/pi-ager/pi_ager_loop.py:1069 opt/pi-ager/pi_ager_loop.py:1097
+#: opt/pi-ager/pi_ager_loop.py:1110 opt/pi-ager/pi_ager_loop.py:1138
 msgid "light off"
 msgstr "Licht AUS"
 
-#: opt/pi-ager/pi_ager_loop.py:1093 opt/pi-ager/pi_ager_loop.py:1097
+#: opt/pi-ager/pi_ager_loop.py:1134 opt/pi-ager/pi_ager_loop.py:1138
 msgid "light timestamp active"
 msgstr "Zeitpunkt Licht Ein"
 
-#: opt/pi-ager/pi_ager_loop.py:1335 opt/pi-ager/pi_ager_loop.py:1339
-#: var/www/diagrams.php:1153 var/www/diagrams.php:1174 var/www/index.php:1031
-#: var/www/index.php:1051 var/www/modules/querystatus.php:156
-#: var/www/modules/querystatus.php:173
+#: opt/pi-ager/pi_ager_loop.py:1381 opt/pi-ager/pi_ager_loop.py:1385
+#: var/www/diagrams.php:1155 var/www/diagrams.php:1176 var/www/index.php:1045
+#: var/www/index.php:1065 var/www/modules/querystatus.php:159
+#: var/www/modules/querystatus.php:176
 msgid "heater"
 msgstr "Heizung"
 
-#: opt/pi-ager/pi_ager_loop.py:1342 opt/pi-ager/pi_ager_loop.py:1346
+#: opt/pi-ager/pi_ager_loop.py:1388 opt/pi-ager/pi_ager_loop.py:1392
 msgid "cooling compressor"
 msgstr "Kühlen"
 
-#: opt/pi-ager/pi_ager_loop.py:1350 opt/pi-ager/pi_ager_loop.py:1354
-#: var/www/diagrams.php:1375 var/www/diagrams.php:1396
+#: opt/pi-ager/pi_ager_loop.py:1396 opt/pi-ager/pi_ager_loop.py:1400
+#: var/www/diagrams.php:1377 var/www/diagrams.php:1398
 msgid "humidifier"
 msgstr "Befeuchter"
 
-#: opt/pi-ager/pi_ager_loop.py:1358 opt/pi-ager/pi_ager_loop.py:1362
+#: opt/pi-ager/pi_ager_loop.py:1404 opt/pi-ager/pi_ager_loop.py:1408
 msgid "circulation air"
 msgstr "Umluft"
 
-#: opt/pi-ager/pi_ager_loop.py:1366 opt/pi-ager/pi_ager_loop.py:1370
-#: var/www/diagrams.php:1597 var/www/diagrams.php:1618
+#: opt/pi-ager/pi_ager_loop.py:1412 opt/pi-ager/pi_ager_loop.py:1416
+#: var/www/diagrams.php:1599 var/www/diagrams.php:1620
 msgid "exhaust air"
 msgstr "Abluft"
 
-#: opt/pi-ager/pi_ager_loop.py:1374 opt/pi-ager/pi_ager_loop.py:1378
-#: var/www/diagrams.php:1486 var/www/diagrams.php:1507
+#: opt/pi-ager/pi_ager_loop.py:1420 opt/pi-ager/pi_ager_loop.py:1424
+#: var/www/diagrams.php:1488 var/www/diagrams.php:1509
 msgid "dehumidifier"
 msgstr "Entfeuchter"
 
-#: opt/pi-ager/pi_ager_loop.py:1382 opt/pi-ager/pi_ager_loop.py:1386
-#: var/www/config.php:203 var/www/diagrams.php:931 var/www/diagrams.php:952
-#: var/www/index.php:1220 var/www/modules/querystatus.php:346
+#: opt/pi-ager/pi_ager_loop.py:1428 opt/pi-ager/pi_ager_loop.py:1432
+#: var/www/config.php:206 var/www/diagrams.php:933 var/www/diagrams.php:954
+#: var/www/index.php:1236 var/www/modules/querystatus.php:350
 msgid "light"
 msgstr "Licht"
 
-#: opt/pi-ager/pi_ager_loop.py:1390 opt/pi-ager/pi_ager_loop.py:1394
-#: var/www/diagrams.php:1042 var/www/diagrams.php:1063 var/www/index.php:1189
-#: var/www/modules/querystatus.php:314
+#: opt/pi-ager/pi_ager_loop.py:1436 opt/pi-ager/pi_ager_loop.py:1440
+#: var/www/diagrams.php:1044 var/www/diagrams.php:1065 var/www/index.php:1205
+#: var/www/modules/querystatus.php:318
 msgid "uv-light"
 msgstr "UV-Licht"
 
-#: opt/pi-ager/pi_ager_loop.py:1398 opt/pi-ager/pi_ager_loop.py:1401
+#: opt/pi-ager/pi_ager_loop.py:1444 opt/pi-ager/pi_ager_loop.py:1447
 msgid "weight scale"
 msgstr "Waagenmessung"
 
@@ -519,19 +519,19 @@ msgstr "UV Licht AUS"
 msgid "administration"
 msgstr "Admin"
 
-#: var/www/admin.php:62 var/www/index.php:21
+#: var/www/admin.php:62 var/www/index.php:18
 msgid "internal"
 msgstr "Sensor intern"
 
-#: var/www/admin.php:64 var/www/index.php:154
+#: var/www/admin.php:64 var/www/index.php:152
 msgid "external"
 msgstr "Sensor extern"
 
-#: var/www/admin.php:67 var/www/admin.php:129 var/www/admin.php:211
-#: var/www/admin.php:337 var/www/admin.php:575 var/www/admin.php:677
+#: var/www/admin.php:67 var/www/admin.php:120 var/www/admin.php:202
+#: var/www/admin.php:328 var/www/admin.php:566 var/www/admin.php:668
 #: var/www/config.php:16 var/www/config.php:74 var/www/config.php:129
-#: var/www/config.php:164 var/www/config.php:203 var/www/config.php:242
-#: var/www/config.php:281 var/www/manvals.php:22 var/www/manvals.php:51
+#: var/www/config.php:167 var/www/config.php:206 var/www/config.php:245
+#: var/www/config.php:284 var/www/manvals.php:22 var/www/manvals.php:51
 #: var/www/manvals.php:74 var/www/manvals.php:97 var/www/manvals.php:123
 #: var/www/notification.php:191 var/www/notification.php:383
 #: var/www/notification.php:516 var/www/notification.php:615
@@ -540,52 +540,73 @@ msgstr "Sensor extern"
 msgid "help"
 msgstr "Hilfe"
 
-#: var/www/admin.php:81
-msgid "only configurable if internal sensor is set to sht3x or sht85"
-msgstr ""
-"Einstellbar nur wenn als interner Sensor der SHT3x oder SHT85 ausgewählt ist"
+#: var/www/admin.php:89
+msgid "Enter last 3 bytes of device address"
+msgstr "Geben Sie die letzten 3 Bytes der Geräteadresse ein"
 
-#: var/www/admin.php:106
+#: var/www/admin.php:102
 msgid "helptext_sensortype_admin"
 msgstr ""
 "<br><br>\n"
 "<b>Sensor intern: </b> Hier kann man den Sensor auswählen, mit dem die "
 "Temperatur und Luftfeuchte im Reifeschrank geregelt wird.\n"
-"Es können sowohl die älteren 1Wire Sensoren DHT11/22 und SHT75, als auch die "
-"neueren I2C Sensoren (Bus Adr.44) genutzt werden.\n"
+"Es können sowohl die älteren 1-Wire Sensoren DHT11/22 und SHT75, als auch "
+"die neueren I2C Sensoren (Bus Adr.44) genutzt werden.\n"
 "<br><br>\n"
 "<b>Sensor extern: </b>Es besteht die Möglichkeit, einen weiteren Sensor an "
 "das System anzuschließen. Mit dem externen Sensor kann man die äußeren "
 "Umgebungsbedingungen des Pi-Agers erfassen. Die externe Temperatur und "
 "Feuchtigkeit kann als Informationsquelle, speziell für die Regelung der "
-"Feuchtigkeit im Reifeschrank, genutz werden.\n"
-"<br>Es ist zu beachten, dass z.Zt. nur bei den SHT3X Sensoren die I2C "
-"Bussadresse geändert werden kann. Somit sind z.Zt. nur diese als externer "
-"Sensor einsetzbar.\n"
+"Feuchtigkeit im Reifeschrank, genutzt werden.\n"
+"<br>Es ist zu beachten, dass z.Zt. nur bei den SHT3X Sensoren die I2C Bus-"
+"Adresse geändert werden kann. Somit sind z.Zt. nur diese und der Bluetooth "
+"Sensor 'Mi Temperature and Humidity Monitor 2' als externe Sensoren "
+"einsetzbar.\n"
 "<br>Mit Hilfe einer externen Beschaltung z.B. mit einem 10kOhm Wiederstand, "
-"kann man die Bussadresse des SHT3x Sensors auf die benötigte Adr.45 ändern. "
-"Manche SHT3X Sensorboards sind auch mit einem entsprechenden Jumper "
+"kann man die I2C Bus-Adresse des SHT3x Sensors auf die benötigte Adr.45 "
+"ändern. Manche SHT3X Sensorboards sind auch mit einem entsprechenden Jumper "
 "ausgestattet.\n"
+"<br><img src=\"./images/icons/MiTemperatureSensor2.png\" alt=\"\">\n"
+"<br>Der 'Mi Temperature and Humidity Monitor 2' kann in Verbindung mit allen "
+"internen Sensoren verwendet werden.\n"
+"<br>Dieser Sensor kann nur mit einer benutzerdefinierten Firmware verwendet "
+"werden. Um diesen Sensor zu flashen, ist es erforderlich, ein Android-"
+"basiertes Smartphone oder Tablet zu verwenden und diese Seite im Browser zu "
+"öffnen:\n"
+"<br><a href=\"https://pvvx.github.io/ATC_MiThermometer/TelinkMiFlasher.html"
+"\" target=\"_blank\">TelinkMiFlasher</a>\n"
+"<br>Auf der Telink-Flasher-Seite: Drücken Sie \"Verbinden\": Der Browser "
+"sollte ein Popup mit sichtbaren Bluetooth-Geräten öffnen. Wählen Sie das "
+"entsprechende Zielgerät (z. B. LYWSD03MMC) zum Koppeln aus.\n"
+"<br>Nachdem die Verbindung hergestellt wurde, wird die Schaltfläche "
+"\"Aktivierung ausführen\" angezeigt. Drücken Sie diese Schaltfläche, um den "
+"Vorgang der Entschlüsselung des Encryption Keys zu starten.\n"
+"<br>Jetzt können Sie die Schaltfläche Benutzerdefinierte Firmware ver x.x "
+"drücken, um die benutzerdefinierte Firmware direkt zu flashen. Alternativ "
+"können Sie über die Dateiauswahl eine bestimmte Firmware-Binärdatei (d. h. "
+"die Original-Firmware) auswählen\n"
+"<br>Drücken Sie \"Start Flashing\".\n"
+"<br>\n"
+"<b>Achtung:</b> Notieren Sie sich nach dem Flashen die 6-Byte-Geräte-MAC-"
+"Adresse des MiThermometers. Die letzten 3 Bytes müssen in die Admin-Seite "
+"des pi-ager eingefügt werden.\n"
 "<br><br>\n"
-"<b>Bemerkung: </b> Der Anschluss von 2 Sensoren ist nur möglich, wenn man "
-"die neuen I2C Sensoren einsetzt. Der externen Sensor wird parallel zu dem "
-"internen Sensor an die entsprechneden Klemmen der Pi-Ager Platine "
-"angeschlossen.\n"
-"<br>Für den Anschluss der Sensoren müssen immer abgschirmte Leitungen z.B. "
-"USB Leitungen oder Ethernetleitungen genutzt werden. Die Länge der "
-"Sensorleitung sollte 1,5m nicht überschreiten. Wichtig ist, dass der Schirm "
-"der Sensorleitungen auf der Pi-Ager Platinenseite immer angeschlossen wird.\n"
+"<b>Achtung: </b>Für den Anschluss der Sensoren müssen immer abgeschirmte "
+"Leitungen z.B. USB Leitungen oder Ethernetleitungen genutzt werden. Die "
+"Länge der Sensorleitung sollte 1,5m nicht überschreiten. Wichtig ist, dass "
+"der Schirm der Sensorleitungen auf der Pi-Ager Platinenseite immer "
+"angeschlossen wird.\n"
 "<br><br>\n"
 "<b>Achtung: </b> Das Anklemmen eines Sensors darf nur im stromlosen Zustand "
-"erfolgen, sonnst besteht Kurzschlussgefahr und der Raspberry kann beschädigt "
+"erfolgen, sonst besteht Kurzschlussgefahr und der Raspberry kann beschädigt "
 "werden.\n"
 "<br><br>"
 
-#: var/www/admin.php:108 var/www/admin.php:205 var/www/admin.php:331
-#: var/www/admin.php:357 var/www/admin.php:591 var/www/admin.php:692
-#: var/www/config.php:68 var/www/config.php:115 var/www/config.php:158
-#: var/www/config.php:197 var/www/config.php:236 var/www/config.php:267
-#: var/www/config.php:300 var/www/manvals.php:44 var/www/manvals.php:67
+#: var/www/admin.php:104 var/www/admin.php:196 var/www/admin.php:322
+#: var/www/admin.php:348 var/www/admin.php:582 var/www/admin.php:683
+#: var/www/config.php:68 var/www/config.php:115 var/www/config.php:161
+#: var/www/config.php:200 var/www/config.php:239 var/www/config.php:270
+#: var/www/config.php:303 var/www/manvals.php:44 var/www/manvals.php:67
 #: var/www/manvals.php:90 var/www/manvals.php:117 var/www/manvals.php:142
 #: var/www/notification.php:204 var/www/notification.php:396
 #: var/www/notification.php:529 var/www/notification.php:628
@@ -594,46 +615,47 @@ msgstr ""
 msgid "close"
 msgstr "Schließen"
 
-#: var/www/admin.php:118
+#: var/www/admin.php:109
 msgid ""
-"ATTENTION: a shutdown is required, please turn the power off/on to restart "
-"the system!"
+"ATTENTION: a shutdown may be required due to sensor or MAC address change, "
+"please turn the power off/on to restart the system!"
 msgstr ""
-"ACHTUNG: Das System wird heruntergefahren, bitte die Spannungsversorgung "
-"aus- und einschalten um das System neu zu starten!"
+"ACHTUNG: Aufgrund einer Sensor- oder MAC-Adressänderung kann eine "
+"Abschaltung erforderlich sein, bitte schalten Sie das Gerät aus / ein, um "
+"das System neu zu starten!"
 
-#: var/www/admin.php:118
+#: var/www/admin.php:109
 msgid "change sensors"
-msgstr "Sensor ändern"
+msgstr "Sensoren ändern"
 
-#: var/www/admin.php:129 var/www/index.php:224 var/www/index.php:1239
+#: var/www/admin.php:120 var/www/index.php:234 var/www/index.php:1255
 #: var/www/settings.php:78
 msgid "scales"
 msgstr "Waagen"
 
-#: var/www/admin.php:130 var/www/admin.php:162 var/www/diagrams.php:608
-#: var/www/diagrams.php:629 var/www/diagrams.php:653 var/www/diagrams.php:694
-#: var/www/diagrams.php:715 var/www/index.php:536 var/www/index.php:556
-#: var/www/index.php:579 var/www/index.php:620 var/www/index.php:642
+#: var/www/admin.php:121 var/www/admin.php:153 var/www/diagrams.php:610
+#: var/www/diagrams.php:631 var/www/diagrams.php:655 var/www/diagrams.php:696
+#: var/www/diagrams.php:717 var/www/index.php:546 var/www/index.php:566
+#: var/www/index.php:589 var/www/index.php:630 var/www/index.php:652
 #: var/www/modules/start_stop_program.php:238
 #: var/www/modules/start_stop_program.php:243 var/www/scale_wizzard.php:27
 #: var/www/settings.php:180
 msgid "scale"
 msgstr "Waage"
 
-#: var/www/admin.php:133 var/www/admin.php:165
+#: var/www/admin.php:124 var/www/admin.php:156
 msgid "reference unit"
 msgstr "Referenz Unit"
 
-#: var/www/admin.php:137 var/www/admin.php:169
+#: var/www/admin.php:128 var/www/admin.php:160
 msgid "offset"
 msgstr "offset"
 
-#: var/www/admin.php:141 var/www/admin.php:173
+#: var/www/admin.php:132 var/www/admin.php:164
 msgid "saving period"
 msgstr "Speicherzyklus"
 
-#: var/www/admin.php:203
+#: var/www/admin.php:194
 msgid "helptext_scale_admin"
 msgstr ""
 "<br><br>\n"
@@ -663,7 +685,7 @@ msgstr ""
 "<br>20kg Edelstahl Zelle: 186\n"
 "<br><br>"
 
-#: var/www/admin.php:329
+#: var/www/admin.php:320
 msgid "helptext_thermometer_admin"
 msgstr ""
 "<br><br>\n"
@@ -703,11 +725,11 @@ msgstr ""
 "kann. Man muss aber in diesem Fall einen 2,5 mm Klinkenstecker verwenden.\n"
 "<br><br>"
 
-#: var/www/admin.php:337
+#: var/www/admin.php:328
 msgid "language"
 msgstr "Sprache"
 
-#: var/www/admin.php:355
+#: var/www/admin.php:346
 msgid "helptext_language_admin"
 msgstr ""
 "<br><br>\n"
@@ -725,8 +747,8 @@ msgstr ""
 "<br> Select 'de_DE.UTF-8 UTF8'\n"
 "<br><br>"
 
-#: var/www/admin.php:361 var/www/admin.php:470 var/www/admin.php:487
-#: var/www/admin.php:552 var/www/admin.php:624 var/www/config.php:308
+#: var/www/admin.php:352 var/www/admin.php:461 var/www/admin.php:478
+#: var/www/admin.php:543 var/www/admin.php:615 var/www/config.php:311
 #: var/www/edit_agingtable.php:116 var/www/manvals.php:149
 #: var/www/notification.php:141 var/www/notification.php:327
 #: var/www/notification.php:475 var/www/notification.php:583
@@ -735,107 +757,107 @@ msgstr ""
 msgid "save"
 msgstr "Speichern"
 
-#: var/www/admin.php:361
+#: var/www/admin.php:352
 msgid "administration 1"
 msgstr "Administration"
 
-#: var/www/admin.php:367
+#: var/www/admin.php:358
 msgid "reboot & shutdown"
 msgstr "Neustarten & Herunterfahren"
 
-#: var/www/admin.php:373
+#: var/www/admin.php:364
 msgid "ATTENTION: reboot system?"
 msgstr "ACHTUNG: System neu starten?"
 
-#: var/www/admin.php:373 var/www/reboot.php:8
+#: var/www/admin.php:364 var/www/reboot.php:8
 msgid "reboot"
 msgstr "Neu starten"
 
-#: var/www/admin.php:374
+#: var/www/admin.php:365
 msgid "ATTENTION: shutdown system?"
 msgstr "ACHTUNG: System herunterfahren?"
 
-#: var/www/admin.php:374 var/www/shutdown.php:8
+#: var/www/admin.php:365 var/www/shutdown.php:8
 msgid "shutdown"
 msgstr "Herunterfahren"
 
-#: var/www/admin.php:380
+#: var/www/admin.php:371
 msgid "logging"
 msgstr "Loggen"
 
-#: var/www/admin.php:470
+#: var/www/admin.php:461
 msgid "save loglevel?"
 msgstr "Loglevel speichern?"
 
-#: var/www/admin.php:476 var/www/modules/write_debug_values.php:11
+#: var/www/admin.php:467 var/www/modules/write_debug_values.php:11
 msgid "debug values"
 msgstr "Debug Werte"
 
-#: var/www/admin.php:483
+#: var/www/admin.php:474
 msgid "agingtable days in seconds"
 msgstr "Reifetabelle - Tage in Sekunden"
 
-#: var/www/admin.php:487
+#: var/www/admin.php:478
 msgid "ATTENTION: save debug values?"
 msgstr "ACHTUNG: Debug Werte speichern?"
 
-#: var/www/admin.php:493
+#: var/www/admin.php:484
 msgid "backup"
 msgstr "Backup"
 
-#: var/www/admin.php:515
+#: var/www/admin.php:506
 msgid "nfs volume"
 msgstr "nfs Verzeichnis"
 
-#: var/www/admin.php:520
+#: var/www/admin.php:511
 msgid "subdirectory"
 msgstr "Unterverzeichnis"
 
-#: var/www/admin.php:524
+#: var/www/admin.php:515
 msgid "nfs mount"
 msgstr "nfs mount"
 
-#: var/www/admin.php:528
+#: var/www/admin.php:519
 msgid "nfs path"
 msgstr "nfs Pfad"
 
-#: var/www/admin.php:533
+#: var/www/admin.php:524
 msgid "number of backups"
 msgstr "Anzahl Backups"
 
-#: var/www/admin.php:537
+#: var/www/admin.php:528
 msgid "backup name"
 msgstr "Backup Name"
 
-#: var/www/admin.php:541
+#: var/www/admin.php:532
 msgid "nfs opt"
 msgstr "nfs Option"
 
-#: var/www/admin.php:545
+#: var/www/admin.php:536
 msgid "backup_active"
 msgstr "Backup Aktiv"
 
-#: var/www/admin.php:552
+#: var/www/admin.php:543
 msgid "ATTENTION: save backup values?"
 msgstr "ACHTUNG: Backup Einstellungen speichern?"
 
-#: var/www/admin.php:562
+#: var/www/admin.php:553
 msgid "ATTENTION: backup manually?"
 msgstr "ACHTUNG: Manuelles Backup starten?"
 
-#: var/www/admin.php:562
+#: var/www/admin.php:553
 msgid "backup manually"
 msgstr "Backup manuell"
 
-#: var/www/admin.php:565
+#: var/www/admin.php:556
 msgid "Agingtable is active. No backup possible!"
 msgstr "Reifetabelle ist aktiv. Backup nicht möglich!"
 
-#: var/www/admin.php:571
+#: var/www/admin.php:562
 msgid "open pi-ager_backup.log in new tab"
 msgstr "pi-ager_backup.log in einem neuen Tab öffen"
 
-#: var/www/admin.php:589
+#: var/www/admin.php:580
 msgid "helptext_backup"
 msgstr ""
 "<br><br>\n"
@@ -882,51 +904,51 @@ msgstr ""
 "werden\n"
 "<br><br>"
 
-#: var/www/admin.php:595
+#: var/www/admin.php:586
 msgid "database"
 msgstr "Datenbank"
 
-#: var/www/admin.php:601
+#: var/www/admin.php:592
 msgid "ATTENTION: empty statistic tables?"
 msgstr "ACHTUNG: Historische Daten löschen?"
 
-#: var/www/admin.php:601
+#: var/www/admin.php:592
 msgid "empty statistic tables"
 msgstr "History Daten aus DB löschen"
 
-#: var/www/admin.php:603
+#: var/www/admin.php:594
 msgid "database administration"
 msgstr "Datenbank Administration"
 
-#: var/www/admin.php:609
+#: var/www/admin.php:600
 msgid "Nextion Display Firmware"
 msgstr "Nextion Display Firmware"
 
-#: var/www/admin.php:615
+#: var/www/admin.php:606
 msgid "TFT Display"
 msgstr ""
 
-#: var/www/admin.php:624
+#: var/www/admin.php:615
 msgid "ATTENTION: save Nextion display type?"
 msgstr "ACHTUNG: Nextion Displaytyp speichern?"
 
-#: var/www/admin.php:630
+#: var/www/admin.php:621
 msgid "start programming"
 msgstr "Programierung starten"
 
-#: var/www/admin.php:651
+#: var/www/admin.php:642
 msgid "alternative firmware file:"
 msgstr "Alternative Firmware Datei:"
 
-#: var/www/admin.php:661
+#: var/www/admin.php:652
 msgid "upload new firmware file?"
 msgstr "Firmware Datei hochladen ?"
 
-#: var/www/admin.php:661 var/www/settings.php:387
+#: var/www/admin.php:652 var/www/settings.php:387
 msgid "upload"
 msgstr "Hochladen"
 
-#: var/www/admin.php:690
+#: var/www/admin.php:681
 msgid "helptext_display"
 msgstr ""
 "<br><br>\n"
@@ -951,19 +973,19 @@ msgstr ""
 "ZIP komprimieren und dann erst als pi-ager.zip hochladen.  \n"
 "<br><br>"
 
-#: var/www/admin.php:824
+#: var/www/admin.php:815
 msgid "python"
 msgstr "Python"
 
-#: var/www/admin.php:830
+#: var/www/admin.php:821
 msgid "ATTENTION: stop"
 msgstr "ACHTUNG: Stop"
 
-#: var/www/admin.php:830
+#: var/www/admin.php:821
 msgid "stop"
 msgstr "Stop"
 
-#: var/www/admin.php:831
+#: var/www/admin.php:822
 msgid "start"
 msgstr "Start"
 
@@ -1108,11 +1130,11 @@ msgid "attention! be carful what you do!"
 msgstr "ACHTUNG! Vorsicht beim Ändern dieser Parameter!"
 
 #: var/www/config.php:16 var/www/diagrams.php:240 var/www/diagrams.php:260
-#: var/www/diagrams.php:323 var/www/diagrams.php:368 var/www/diagrams.php:552
-#: var/www/diagrams.php:745 var/www/diagrams.php:765 var/www/diagrams.php:785
-#: var/www/diagrams.php:805 var/www/diagrams.php:874 var/www/diagrams.php:898
-#: var/www/index.php:337 var/www/index.php:356 var/www/index.php:375
-#: var/www/index.php:436 var/www/index.php:483 var/www/manvals.php:51
+#: var/www/diagrams.php:323 var/www/diagrams.php:368 var/www/diagrams.php:554
+#: var/www/diagrams.php:747 var/www/diagrams.php:767 var/www/diagrams.php:787
+#: var/www/diagrams.php:807 var/www/diagrams.php:876 var/www/diagrams.php:900
+#: var/www/index.php:347 var/www/index.php:366 var/www/index.php:385
+#: var/www/index.php:446 var/www/index.php:493 var/www/manvals.php:51
 msgid "temperature"
 msgstr "Temperatur"
 
@@ -1141,9 +1163,9 @@ msgstr "Aus bei"
 msgid "delay"
 msgstr "Verzögerung"
 
-#: var/www/config.php:54 var/www/config.php:101 var/www/config.php:174
-#: var/www/config.php:213 var/www/config.php:244 var/www/config.php:248
-#: var/www/config.php:252 var/www/manvals.php:53 var/www/manvals.php:76
+#: var/www/config.php:54 var/www/config.php:101 var/www/config.php:177
+#: var/www/config.php:216 var/www/config.php:247 var/www/config.php:251
+#: var/www/config.php:255 var/www/manvals.php:53 var/www/manvals.php:76
 #: var/www/manvals.php:99 var/www/manvals.php:125
 msgid "to"
 msgstr "bis"
@@ -1172,8 +1194,8 @@ msgstr ""
 
 #: var/www/config.php:74 var/www/diagrams.php:280 var/www/diagrams.php:300
 #: var/www/diagrams.php:323 var/www/diagrams.php:390 var/www/diagrams.php:398
-#: var/www/index.php:395 var/www/index.php:414 var/www/index.php:436
-#: var/www/index.php:504 var/www/index.php:512 var/www/manvals.php:74
+#: var/www/index.php:405 var/www/index.php:424 var/www/index.php:446
+#: var/www/index.php:514 var/www/index.php:522 var/www/manvals.php:74
 msgid "humidity"
 msgstr "Feuchte"
 
@@ -1242,7 +1264,7 @@ msgstr ""
 "<b>Achtung: </b> Nur ganze Zahlen verwenden!\n"
 "<br><br>"
 
-#: var/www/config.php:129 var/www/modules/querystatus.php:119
+#: var/www/config.php:129 var/www/modules/querystatus.php:122
 #: var/www/modules/read_settings_db.php:40
 msgid "dehumidify"
 msgstr "Entfeuchten"
@@ -1266,7 +1288,7 @@ msgstr "Nur Entfeuchter"
 msgid "abs. humidity check aktive"
 msgstr "Abs. Feuchteprüfung aktiv"
 
-#: var/www/config.php:156
+#: var/www/config.php:159
 msgid "helptext_dehumidifier_config"
 msgstr ""
 "<br><br>\n"
@@ -1289,11 +1311,11 @@ msgstr ""
 "man wofür einsetzen möchte.\n"
 "<br><br>"
 
-#: var/www/config.php:164
+#: var/www/config.php:167
 msgid "uv"
 msgstr "UV-Licht"
 
-#: var/www/config.php:166 var/www/config.php:205
+#: var/www/config.php:169 var/www/config.php:208
 #: var/www/modules/write_config_db_logfile_txt.php:138
 #: var/www/modules/write_config_db_logfile_txt.php:154
 #: var/www/modules/write_settings_db_logfile_txt.php:122
@@ -1301,7 +1323,7 @@ msgstr "UV-Licht"
 msgid "duration & period"
 msgstr "Dauer & Zyklus"
 
-#: var/www/config.php:167 var/www/config.php:206
+#: var/www/config.php:170 var/www/config.php:209
 #: var/www/modules/write_config_db_logfile_txt.php:143
 #: var/www/modules/write_config_db_logfile_txt.php:159
 #: var/www/modules/write_settings_db_logfile_txt.php:127
@@ -1309,20 +1331,20 @@ msgstr "Dauer & Zyklus"
 msgid "duration & timestamp"
 msgstr "Dauer & Zeitpunkt"
 
-#: var/www/config.php:173 var/www/config.php:212 var/www/manvals.php:98
+#: var/www/config.php:176 var/www/config.php:215 var/www/manvals.php:98
 #: var/www/manvals.php:124
 msgid "period every"
 msgstr "Zyklus"
 
-#: var/www/config.php:182 var/www/config.php:221
+#: var/www/config.php:185 var/www/config.php:224
 msgid "timestamp"
 msgstr "Zeitpunkt"
 
-#: var/www/config.php:183 var/www/config.php:222 var/www/logs.php:22
+#: var/www/config.php:186 var/www/config.php:225 var/www/logs.php:22
 msgid "o'clock"
 msgstr "Uhr"
 
-#: var/www/config.php:195
+#: var/www/config.php:198
 msgid "helptext_uv_config"
 msgstr ""
 "<br><br>\n"
@@ -1345,7 +1367,7 @@ msgstr ""
 "<b>Achtung: </b> Zyklus=0 und Dauer=0 ist nicht sinnvoll und nicht erlaubt.\n"
 "<br><br>"
 
-#: var/www/config.php:234
+#: var/www/config.php:237
 msgid "helptext_light_config"
 msgstr ""
 "<br><br>\n"
@@ -1368,23 +1390,23 @@ msgstr ""
 "<b>Achtung: </b> Zyklus=0 und Dauer=0 ist nicht sinnvoll und nicht erlaubt.\n"
 "<br><br>"
 
-#: var/www/config.php:242
+#: var/www/config.php:245
 msgid "internal temperature limits"
 msgstr "Interne Temperatur Grenzwerte"
 
-#: var/www/config.php:243
+#: var/www/config.php:246
 msgid "low temperature limit"
 msgstr "Temp. Grenzwert Tief"
 
-#: var/www/config.php:247
+#: var/www/config.php:250
 msgid "high temperature limit"
 msgstr "Temp. Grenzwert Hoch"
 
-#: var/www/config.php:251
+#: var/www/config.php:254
 msgid "hysteresis"
 msgstr "Hysterese"
 
-#: var/www/config.php:265
+#: var/www/config.php:268
 msgid "helptext_temperature_event_config"
 msgstr ""
 "<br><br>\n"
@@ -1400,15 +1422,15 @@ msgstr ""
 "nächsten Unter / Überschreiten des Grenzwertes einen neunen Alarm auslöst.\n"
 "<br><br>"
 
-#: var/www/config.php:281
+#: var/www/config.php:284
 msgid "UPS battery"
 msgstr "UPS Batterie"
 
-#: var/www/config.php:282
+#: var/www/config.php:285
 msgid "shutdown on battery low"
 msgstr "Raspberry Pi herunterfahren, wenn die Batterie fast leer ist"
 
-#: var/www/config.php:298
+#: var/www/config.php:301
 msgid "helptext_shutdown_on_batlow_config"
 msgstr ""
 "<br><br>\n"
@@ -1423,12 +1445,12 @@ msgstr ""
 "Entladung führt zur Beschädigung des Akkus\n"
 "<br><br>"
 
-#: var/www/config.php:308 var/www/modules/write_config_db_logfile_txt.php:224
+#: var/www/config.php:311 var/www/modules/write_config_db_logfile_txt.php:224
 #: var/www/settings.php:506
 msgid "general configuration"
 msgstr "Allgemeine Konfiguration"
 
-#: var/www/config.php:310
+#: var/www/config.php:313
 msgid "hide"
 msgstr "Schließen"
 
@@ -1450,9 +1472,9 @@ msgstr "Monat"
 #: var/www/diagrams.php:20 var/www/diagrams.php:48
 #: var/www/modules/save_diagram_mode.php:45
 msgid "custom"
-msgstr "Benutzer def."
+msgstr "Benutzer def"
 
-#: var/www/diagrams.php:33 var/www/header.php:136 var/www/index.php:249
+#: var/www/diagrams.php:33 var/www/header.php:136 var/www/index.php:259
 #: var/www/modules/save_diagram_mode.php:29
 #: var/www/modules/save_diagram_mode.php:33
 #: var/www/modules/save_diagram_mode.php:37
@@ -1461,11 +1483,11 @@ msgstr "Benutzer def."
 msgid "diagrams"
 msgstr "Diagramme"
 
-#: var/www/diagrams.php:78 var/www/index.php:280
+#: var/www/diagrams.php:78 var/www/index.php:290
 msgid "months"
 msgstr "Monate"
 
-#: var/www/diagrams.php:91 var/www/index.php:295
+#: var/www/diagrams.php:91 var/www/index.php:305
 msgid "change"
 msgstr "ändern"
 
@@ -1473,54 +1495,54 @@ msgstr "ändern"
 msgid "storage interval of the sensor data in the database"
 msgstr "Speicherintervall der Daten in die Datenbank"
 
-#: var/www/diagrams.php:368 var/www/diagrams.php:552 var/www/diagrams.php:874
-#: var/www/diagrams.php:898 var/www/index.php:483
+#: var/www/diagrams.php:368 var/www/diagrams.php:554 var/www/diagrams.php:876
+#: var/www/diagrams.php:900 var/www/index.php:493
 msgid " - ϑ"
 msgstr " - ϑ"
 
-#: var/www/diagrams.php:390 var/www/diagrams.php:573 var/www/index.php:504
+#: var/www/diagrams.php:390 var/www/diagrams.php:575 var/www/index.php:514
 msgid " - φ"
 msgstr " - φ"
 
-#: var/www/diagrams.php:423 var/www/diagrams.php:443 var/www/diagrams.php:507
+#: var/www/diagrams.php:423 var/www/diagrams.php:444 var/www/diagrams.php:509
 msgid "dewpoint"
 msgstr "Taupunkt"
 
-#: var/www/diagrams.php:463 var/www/diagrams.php:483 var/www/diagrams.php:507
-#: var/www/diagrams.php:573 var/www/diagrams.php:581
+#: var/www/diagrams.php:465 var/www/diagrams.php:485 var/www/diagrams.php:509
+#: var/www/diagrams.php:575 var/www/diagrams.php:583
 msgid "humidity abs"
 msgstr "abs. Feuchte"
 
-#: var/www/diagrams.php:805 var/www/diagrams.php:828 var/www/diagrams.php:898
+#: var/www/diagrams.php:807 var/www/diagrams.php:830 var/www/diagrams.php:900
 msgid "Current"
 msgstr "Strom"
 
-#: var/www/diagrams.php:828
+#: var/www/diagrams.php:830
 msgid "Thermometer"
 msgstr "Thermometer"
 
-#: var/www/diagrams.php:983 var/www/diagrams.php:1094 var/www/diagrams.php:1205
-#: var/www/diagrams.php:1316 var/www/diagrams.php:1427
-#: var/www/diagrams.php:1538 var/www/diagrams.php:1649
-#: var/www/diagrams.php:1760 var/www/index.php:1003 var/www/index.php:1139
-#: var/www/index.php:1244
+#: var/www/diagrams.php:985 var/www/diagrams.php:1096 var/www/diagrams.php:1207
+#: var/www/diagrams.php:1318 var/www/diagrams.php:1429
+#: var/www/diagrams.php:1540 var/www/diagrams.php:1651
+#: var/www/diagrams.php:1762 var/www/index.php:1013 var/www/index.php:1155
+#: var/www/index.php:1260
 msgid "status"
 msgstr "Status"
 
-#: var/www/diagrams.php:1010 var/www/diagrams.php:1121
-#: var/www/diagrams.php:1232 var/www/diagrams.php:1343
-#: var/www/diagrams.php:1454 var/www/diagrams.php:1565
-#: var/www/diagrams.php:1676 var/www/diagrams.php:1787
+#: var/www/diagrams.php:1012 var/www/diagrams.php:1123
+#: var/www/diagrams.php:1234 var/www/diagrams.php:1345
+#: var/www/diagrams.php:1456 var/www/diagrams.php:1567
+#: var/www/diagrams.php:1678 var/www/diagrams.php:1789
 msgid " "
 msgstr ""
 
-#: var/www/diagrams.php:1264 var/www/diagrams.php:1285 var/www/index.php:1020
-#: var/www/index.php:1042 var/www/modules/querystatus.php:147
-#: var/www/modules/querystatus.php:165
+#: var/www/diagrams.php:1266 var/www/diagrams.php:1287 var/www/index.php:1034
+#: var/www/index.php:1056 var/www/modules/querystatus.php:150
+#: var/www/modules/querystatus.php:168
 msgid "cooler"
 msgstr "Kompressor"
 
-#: var/www/diagrams.php:1708 var/www/diagrams.php:1729
+#: var/www/diagrams.php:1710 var/www/diagrams.php:1731
 msgid "circulate air"
 msgstr "Umluft"
 
@@ -1543,77 +1565,77 @@ msgstr ""
 msgid "edit agingtable:"
 msgstr "Reifetabelle editieren:"
 
-#: var/www/edit_agingtable.php:43 var/www/index.php:738 var/www/index.php:746
+#: var/www/edit_agingtable.php:43 var/www/index.php:748 var/www/index.php:756
 #: var/www/settings.php:404 var/www/settings.php:412
 msgid "phase"
 msgstr "Phase"
 
-#: var/www/edit_agingtable.php:44 var/www/index.php:747
+#: var/www/edit_agingtable.php:44 var/www/index.php:757
 #: var/www/settings.php:413
 msgid "modus"
 msgstr "Modus"
 
-#: var/www/edit_agingtable.php:44 var/www/index.php:747
+#: var/www/edit_agingtable.php:44 var/www/index.php:757
 #: var/www/settings.php:413
 msgid "aging-modus"
 msgstr "Reifemodus"
 
-#: var/www/edit_agingtable.php:45 var/www/index.php:748
+#: var/www/edit_agingtable.php:45 var/www/index.php:758
 #: var/www/settings.php:414
 msgid "target humidity in %"
 msgstr "Sollwert Feuchte in %"
 
-#: var/www/edit_agingtable.php:46 var/www/index.php:749
+#: var/www/edit_agingtable.php:46 var/www/index.php:759
 #: var/www/settings.php:415
 msgid "target temperature in °C"
 msgstr "Sollwert Temperatur in °C"
 
-#: var/www/edit_agingtable.php:47 var/www/index.php:750
+#: var/www/edit_agingtable.php:47 var/www/index.php:760
 #: var/www/settings.php:416
 msgid "timer circulate d"
 msgstr "Timer Umluft d"
 
-#: var/www/edit_agingtable.php:47 var/www/index.php:750
+#: var/www/edit_agingtable.php:47 var/www/index.php:760
 #: var/www/settings.php:416
 msgid "timer of the circulation air duration in minutes"
 msgstr "Timer für Umluft Dauer in Minuten"
 
-#: var/www/edit_agingtable.php:48 var/www/index.php:751
+#: var/www/edit_agingtable.php:48 var/www/index.php:761
 #: var/www/settings.php:417
 msgid "timer circulate p"
 msgstr "Timer Umluft p"
 
-#: var/www/edit_agingtable.php:48 var/www/index.php:751
+#: var/www/edit_agingtable.php:48 var/www/index.php:761
 #: var/www/settings.php:417
 msgid "timer of the circulation air period in minutes"
 msgstr "Timer für Umluft Zyklus in Minuten"
 
-#: var/www/edit_agingtable.php:49 var/www/index.php:752
+#: var/www/edit_agingtable.php:49 var/www/index.php:762
 #: var/www/settings.php:418
 msgid "timer exhaust d"
 msgstr "Timer Abluft d"
 
-#: var/www/edit_agingtable.php:49 var/www/index.php:752
+#: var/www/edit_agingtable.php:49 var/www/index.php:762
 #: var/www/settings.php:418
 msgid "timer of the exhausting air duration in minutes"
 msgstr "Timer für Abluft Dauer in Minuten"
 
-#: var/www/edit_agingtable.php:50 var/www/index.php:753
+#: var/www/edit_agingtable.php:50 var/www/index.php:763
 #: var/www/settings.php:419
 msgid "timer exhaust p"
 msgstr "Timer Abluft p"
 
-#: var/www/edit_agingtable.php:50 var/www/index.php:753
+#: var/www/edit_agingtable.php:50 var/www/index.php:763
 #: var/www/settings.php:419
 msgid "timer of the exhausting air period in minutes"
 msgstr "Timer für Abluft Zyklus in Minuten"
 
-#: var/www/edit_agingtable.php:51 var/www/index.php:754
+#: var/www/edit_agingtable.php:51 var/www/index.php:764
 #: var/www/settings.php:420
 msgid "duration of hanging phase in days"
 msgstr "Dauer der Reifephase in Tagen"
 
-#: var/www/edit_agingtable.php:111 var/www/index.php:830
+#: var/www/edit_agingtable.php:111 var/www/index.php:840
 #: var/www/settings.php:492
 msgid "comment:"
 msgstr "Anmerkungen:"
@@ -1686,15 +1708,15 @@ msgstr "Webcam"
 msgid "mainsensors"
 msgstr "Hauptsensoren"
 
-#: var/www/index.php:179
+#: var/www/index.php:189
 msgid "ntc sensors"
 msgstr "NTC Sensoren"
 
-#: var/www/index.php:282
+#: var/www/index.php:292
 msgid "hours"
 msgstr "Stunden"
 
-#: var/www/index.php:734 var/www/index.php:945
+#: var/www/index.php:744 var/www/index.php:955
 #: var/www/modules/write_table_db.php:10 var/www/modules/write_table_db.php:63
 #: var/www/modules/write_table_db.php:72 var/www/modules/write_table_db.php:75
 #: var/www/modules/write_table_db.php:78 var/www/modules/write_table_db.php:240
@@ -1702,139 +1724,139 @@ msgstr "Stunden"
 msgid "agingtable"
 msgstr "Reifetabelle"
 
-#: var/www/index.php:763 var/www/settings.php:430
+#: var/www/index.php:773 var/www/settings.php:430
 msgid "no comment"
 msgstr "Keine Anmerkungen vorhanden"
 
-#: var/www/index.php:839
+#: var/www/index.php:849
 msgid "statusboard"
 msgstr "Statusbord"
 
-#: var/www/index.php:841
+#: var/www/index.php:851
 msgid "general"
 msgstr "Allgemein"
 
-#: var/www/index.php:869 var/www/manvals.php:22
+#: var/www/index.php:879 var/www/manvals.php:22
 #: var/www/modules/write_config_db_logfile_txt.php:172
 #: var/www/modules/write_settings_db_logfile_txt.php:159
 msgid "operating mode"
 msgstr "Modus"
 
-#: var/www/index.php:878 var/www/modules/querystatus.php:72
+#: var/www/index.php:888 var/www/modules/querystatus.php:75
 msgid "power supply ok"
 msgstr "Spannungsversorgung OK"
 
-#: var/www/index.php:884 var/www/modules/querystatus.php:77
+#: var/www/index.php:894 var/www/modules/querystatus.php:80
 msgid "no power supply! batterymode"
 msgstr "Spannungsversorgung fehlerhaft! Batteriemodus"
 
-#: var/www/index.php:894 var/www/index.php:1257 var/www/index.php:1286
-#: var/www/modules/querystatus.php:123 var/www/modules/querystatus.php:364
-#: var/www/modules/querystatus.php:380
+#: var/www/index.php:904 var/www/index.php:1273 var/www/index.php:1302
+#: var/www/modules/querystatus.php:126 var/www/modules/querystatus.php:368
+#: var/www/modules/querystatus.php:384
 msgid "see settings"
 msgstr "Siehe Einstellungen"
 
-#: var/www/index.php:910 var/www/modules/querystatus.php:83
+#: var/www/index.php:920 var/www/modules/querystatus.php:86
 msgid "battery voltage ok"
 msgstr "Batteriespannung OK"
 
-#: var/www/index.php:916 var/www/modules/querystatus.php:88
+#: var/www/index.php:926 var/www/modules/querystatus.php:91
 msgid "battery voltage low !!"
 msgstr "Batteriespannung tief!"
 
-#: var/www/index.php:982 var/www/modules/querystatus.php:94
+#: var/www/index.php:992 var/www/modules/querystatus.php:97
 msgid "Switch is on"
 msgstr "Schalter EIN"
 
-#: var/www/index.php:988 var/www/modules/querystatus.php:98
+#: var/www/index.php:998 var/www/modules/querystatus.php:101
 msgid "Switch is off"
 msgstr "Schalter AUS"
 
-#: var/www/index.php:998
+#: var/www/index.php:1008
 msgid "temperatures"
 msgstr "Temperaturen"
 
-#: var/www/index.php:1002 var/www/index.php:1138 var/www/index.php:1243
+#: var/www/index.php:1012 var/www/index.php:1154 var/www/index.php:1259
 msgid "type"
 msgstr "Typ"
 
-#: var/www/index.php:1005
+#: var/www/index.php:1015
 msgid "actual"
 msgstr "Aktuell"
 
-#: var/www/index.php:1006
+#: var/www/index.php:1016
 msgid "target"
 msgstr "Sollwert"
 
-#: var/www/index.php:1065 var/www/index.php:1077
-#: var/www/modules/querystatus.php:183 var/www/modules/querystatus.php:192
+#: var/www/index.php:1079 var/www/index.php:1091
+#: var/www/modules/querystatus.php:186 var/www/modules/querystatus.php:195
 msgid "humidification"
 msgstr "Befeuchter"
 
-#: var/www/index.php:1086 var/www/modules/querystatus.php:208
+#: var/www/index.php:1100 var/www/modules/querystatus.php:211
 msgid "dehumidification"
 msgstr "Entfeuchter"
 
-#: var/www/index.php:1096 var/www/modules/querystatus.php:200
+#: var/www/index.php:1110 var/www/modules/querystatus.php:203
 msgid "exhausting"
 msgstr "Abluft"
 
-#: var/www/index.php:1119 var/www/modules/querystatus.php:226
+#: var/www/index.php:1135 var/www/modules/querystatus.php:230
 msgid "abs. humidity check"
 msgstr "Abs. Feuchteprüfung"
 
-#: var/www/index.php:1134
+#: var/www/index.php:1150
 msgid "timer"
 msgstr "Timer"
 
-#: var/www/index.php:1142
+#: var/www/index.php:1158
 msgid "period"
 msgstr "Zyklus"
 
-#: var/www/index.php:1151 var/www/modules/querystatus.php:119
-#: var/www/modules/querystatus.php:259 var/www/modules/read_settings_db.php:40
+#: var/www/index.php:1167 var/www/modules/querystatus.php:122
+#: var/www/modules/querystatus.php:263 var/www/modules/read_settings_db.php:40
 msgid "circulating air"
 msgstr "Umluft"
 
-#: var/www/index.php:1152 var/www/index.php:1167 var/www/index.php:1192
-#: var/www/index.php:1223 var/www/modules/querystatus.php:261
-#: var/www/modules/querystatus.php:285 var/www/modules/querystatus.php:319
-#: var/www/modules/querystatus.php:351
+#: var/www/index.php:1168 var/www/index.php:1183 var/www/index.php:1208
+#: var/www/index.php:1239 var/www/modules/querystatus.php:265
+#: var/www/modules/querystatus.php:289 var/www/modules/querystatus.php:323
+#: var/www/modules/querystatus.php:355
 msgid "timer on"
 msgstr "Timer Ein"
 
-#: var/www/index.php:1153 var/www/index.php:1168
-#: var/www/modules/querystatus.php:264 var/www/modules/querystatus.php:288
+#: var/www/index.php:1169 var/www/index.php:1184
+#: var/www/modules/querystatus.php:268 var/www/modules/querystatus.php:292
 msgid "always on"
 msgstr "Immer Ein"
 
-#: var/www/index.php:1154 var/www/index.php:1169 var/www/index.php:1191
-#: var/www/index.php:1222 var/www/modules/querystatus.php:267
-#: var/www/modules/querystatus.php:291 var/www/modules/querystatus.php:316
-#: var/www/modules/querystatus.php:348
+#: var/www/index.php:1170 var/www/index.php:1185 var/www/index.php:1207
+#: var/www/index.php:1238 var/www/modules/querystatus.php:271
+#: var/www/modules/querystatus.php:295 var/www/modules/querystatus.php:320
+#: var/www/modules/querystatus.php:352
 msgid "timer off"
 msgstr "Timer Aus"
 
-#: var/www/index.php:1166 var/www/modules/querystatus.php:119
-#: var/www/modules/querystatus.php:283 var/www/modules/read_settings_db.php:40
+#: var/www/index.php:1182 var/www/modules/querystatus.php:122
+#: var/www/modules/querystatus.php:287 var/www/modules/read_settings_db.php:40
 msgid "exhausting air"
 msgstr "Abluft"
 
-#: var/www/index.php:1193 var/www/modules/querystatus.php:322
+#: var/www/index.php:1209 var/www/modules/querystatus.php:326
 msgid "manual switch off"
 msgstr "manuell AUS"
 
-#: var/www/index.php:1224 var/www/modules/querystatus.php:354
+#: var/www/index.php:1240 var/www/modules/querystatus.php:358
 msgid "manual switch on"
 msgstr "manuell EIN"
 
-#: var/www/index.php:1264 var/www/index.php:1271
-#: var/www/modules/querystatus.php:369 var/www/modules/querystatus.php:374
+#: var/www/index.php:1280 var/www/index.php:1287
+#: var/www/modules/querystatus.php:373 var/www/modules/querystatus.php:378
 msgid "scale1"
 msgstr "Waage1"
 
-#: var/www/index.php:1293 var/www/index.php:1300
-#: var/www/modules/querystatus.php:385 var/www/modules/querystatus.php:390
+#: var/www/index.php:1309 var/www/index.php:1316
+#: var/www/modules/querystatus.php:389 var/www/modules/querystatus.php:394
 msgid "scale2"
 msgstr "Waage2"
 
@@ -2151,13 +2173,13 @@ msgstr ""
 msgid "please select a zip file to upload"
 msgstr "bitte eine zip Datei zum hochladen auswählen"
 
-#: var/www/modules/queryat.php:33 var/www/modules/querystatus.php:245
+#: var/www/modules/queryat.php:33 var/www/modules/querystatus.php:249
 #: var/www/modules/read_operating_mode_db.php:11
 msgid "none"
 msgstr "keine"
 
-#: var/www/modules/querystatus.php:107 var/www/modules/querystatus.php:111
-#: var/www/modules/querystatus.php:115 var/www/modules/querystatus.php:119
+#: var/www/modules/querystatus.php:110 var/www/modules/querystatus.php:114
+#: var/www/modules/querystatus.php:118 var/www/modules/querystatus.php:122
 #: var/www/modules/read_settings_db.php:19
 #: var/www/modules/read_settings_db.php:26
 #: var/www/modules/read_settings_db.php:33
@@ -2165,8 +2187,8 @@ msgstr "keine"
 msgid "humidify"
 msgstr "Befeuchten"
 
-#: var/www/modules/querystatus.php:111 var/www/modules/querystatus.php:115
-#: var/www/modules/querystatus.php:119 var/www/modules/read_settings_db.php:26
+#: var/www/modules/querystatus.php:114 var/www/modules/querystatus.php:118
+#: var/www/modules/querystatus.php:122 var/www/modules/read_settings_db.php:26
 #: var/www/modules/read_settings_db.php:33
 #: var/www/modules/read_settings_db.php:40
 msgid "heating"
@@ -2300,6 +2322,40 @@ msgstr "Einstellungen wurden gespeichert"
 #: var/www/modules/write_backup_db.php:17
 msgid "backup values"
 msgstr "Backup Einstellungen"
+
+#: var/www/modules/write_bus.php:34
+msgid ""
+"Can not combine selected internal and external sensors.\\nExternal sensors "
+"SHT85 or SHT3x can only combined with internal sensors SHT85 or SNT3x,"
+"\\nwhen I2C addresses are different.\\nSee also help!"
+msgstr ""
+"Ausgewählte interne und externe Sensoren können nicht kombiniert werden.\n"
+"Externe Sensoren SHT85 oder SHT3x können nur mit internen Sensoren SHT85 "
+"oder SHT3x kombiniert werden,\n"
+"wenn I2C-Adressen unterschiedlich sind.\n"
+"Siehe auch Hilfe!"
+
+#: var/www/modules/write_bus.php:42
+msgid "Change to 1-wire"
+msgstr "Wechsel zu 1-Draht"
+
+#: var/www/modules/write_bus.php:50
+msgid "Change to I2C"
+msgstr "Wechsel zu I2C"
+
+#: var/www/modules/write_bus.php:58
+msgid "Sensor type changed"
+msgstr "Sensor Typ geändert"
+
+#: var/www/modules/write_bus.php:64
+msgid "MiThermometer MAC address changed.\\nSystem reboot needed!"
+msgstr ""
+"Mac-Adresse des MiThermometers geändert.\n"
+"Systemneustart erforderlich!"
+
+#: var/www/modules/write_bus.php:72
+msgid "Nothing changed"
+msgstr "Keine Änderung der Einstellungen"
 
 #: var/www/modules/write_config_db_logfile_txt.php:39
 #: var/www/modules/write_config_db_logfile_txt.php:45
@@ -3310,6 +3366,11 @@ msgstr "Licht Schalter"
 #: var/www/webcam.php:57
 msgid "light manual on"
 msgstr "Licht manuell EIN"
+
+#~ msgid "only configurable if internal sensor is set to sht3x or sht85"
+#~ msgstr ""
+#~ "Einstellbar nur wenn als interner Sensor der SHT3x oder SHT85 ausgewählt "
+#~ "ist"
 
 #~ msgid "Taupunktprüfung aktiv"
 #~ msgstr "dewpoint active"
