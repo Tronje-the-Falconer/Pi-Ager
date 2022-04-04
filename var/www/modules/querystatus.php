@@ -214,7 +214,7 @@
         $current_values['mod_on_line5'] = ((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100);
         $current_values['mod_off_line5'] = ((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100);
 
-        if (!($bus == 1 || $sensorsecondtype == 0)) {  // show abs. humidity check aktive only with second sensor
+        if ($sensorsecondtype != 0) {  // show abs. humidity check aktive only with second sensor
             if ($dehumidifier_modus == 3) {             // only dehumidification
                 $current_values['mod_stat_line6'] = 'images/icons/status_off_20x20.png';
             }

@@ -1494,7 +1494,7 @@ def doMainLoop():
             # if (filepermission != '666'):
                 # os.chmod(pi_ager_paths.get_path_logfile_txt_file(), stat.S_IWOTH|stat.S_IWGRP|stat.S_IWUSR|stat.S_IROTH|stat.S_IRGRP|stat.S_IRUSR)
             #pi_ager_logging.check_website_logfile()
-            cl_fact_logger.get_instance().check_website_logfile() 
+            #  cl_fact_logger.get_instance().check_website_logfile() 
             # Mainloop fertig
             cl_fact_logger.get_instance().debug('loop complete')
             pi_ager_init.loopcounter += 1

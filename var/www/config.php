@@ -133,8 +133,8 @@
                                                         <input type="radio" name="dehumidifier_modus_config" value="2" <?php echo $checked_dehumidify_2; ?>/><label> <?php echo _('exhaust & dehumidifier'); ?></label><br>
                                                         <input type="radio" name="dehumidifier_modus_config" value="3" <?php echo $checked_dehumidify_3; ?>/><label> <?php echo _('only dehumidifier'); ?></label><br><br>
                                                         <?php
-                                                            $bus = round(get_table_value($config_settings_table, $sensorbus_key), 1);
-                                                            if (!($bus == 1 || $sensorsecondtype == 0)){        //($bus == 0 and $sensorsecondtype != 0) {
+                                                            # $bus = intval(get_table_value($config_settings_table, $sensorbus_key));
+                                                            if ($sensorsecondtype != 0){        //($bus == 0 and $sensorsecondtype != 0) {
                                                                 echo _('abs. humidity check aktive') . ': ';
                                                                 echo '<input type="hidden" name="dewpoint_check_config" value="0"/>';
                                                                 echo '<input type="checkbox" name="dewpoint_check_config" value="1" ';

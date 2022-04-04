@@ -1114,7 +1114,7 @@
                                                         <td id="mod_on_line4_id">'.((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100).' %</td>
                                                         <td id="mod_off_line4_id">'.((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100).' %</td></tr>';
                                                     
-                                                    if (!($bus == 1 || $sensorsecondtype == 0)){  // show abs. humidity check aktive only with second sensor
+                                                    if ($sensorsecondtype != 0){  # if (!($bus == 1 || $sensorsecondtype == 0)){  // show abs. humidity check aktive only with second sensor
                                                         echo '<tr><td></td>';  // skip type column
                                                         if ($dehumidifier_modus == 3) {     // only dehumidification
                                                             echo '<td><img id="mod_stat_line6_id" src="images/icons/status_off_20x20.png" alt=""></td>';
