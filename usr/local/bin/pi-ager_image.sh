@@ -436,12 +436,17 @@ UPDATE config SET value='0.0' WHERE key = 'diagram_modus';
 UPDATE config SET value='30.0' WHERE key = 'delay_cooler';
 UPDATE config SET value='1' WHERE key = 'dewpoint_check';
 UPDATE config SET value='0.2' WHERE key = 'humidity_check_hysteresis';
+UPDATE config SET value='3600.0' WHERE key = 'customtime_for_diagrams';
+UPDATE config SET value='0.0' WHERE key = 'diagram_modus';
 
 UPDATE current_values SET value='0' WHERE key = 'status_piager';
 UPDATE current_values SET value='0' WHERE key = 'status_scale1';
 UPDATE current_values SET value='0' WHERE key = 'status_scale2';
 UPDATE current_values SET value='0' WHERE key = 'status_agingtable';
 UPDATE current_values SET value='0' WHERE key = 'status_humidity_check';
+
+UPDATE atc_mi_thermometer_mac SET mi_mac_last3bytes='' WHERE id='1';
+UPDATE atc_mi_thermometer_data SET mi_data='' WHERE id='1';
 
 DELETE FROM config_nfs_backup;
 delete FROM config_email_server;
