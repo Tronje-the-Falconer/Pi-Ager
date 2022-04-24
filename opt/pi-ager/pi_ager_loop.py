@@ -949,29 +949,29 @@ def doMainLoop():
                 current_time = pi_ager_database.get_current_time()
                 
                 logstring = ' \n ' + pi_ager_names.logspacer
-                logstring = logstring + ' \n ' + 'Main loop/Unix-Timestamp: (' + str(current_time)+ ')'
+                # logstring = logstring + ' \n ' + 'Main loop/Unix-Timestamp: (' + str(current_time)+ ')'
                 #cl_fact_logger.get_instance().debug(logstring)
-                logstring = logstring + ' \n ' + pi_ager_names.logspacer2
+                # logstring = logstring + ' \n ' + pi_ager_names.logspacer2
                 #cl_fact_logger.get_instance().debug(logstring)
                 logstring = logstring + ' \n ' +  _('selected internal sensor') + ': ' + str(cl_fact_main_sensor_type.get_instance().get_sensor_type_ui())
                 
-                logstring = logstring + ' \n ' + _('target temperature') + ': ' + str(setpoint_temperature) + ' C'
+                logstring = logstring + ' \n ' + _('target temperature') + ': ' + str(setpoint_temperature) + ' °C'
                 #cl_fact_logger.get_instance().debug(logstring)
-                logstring = logstring + ' \n ' +  _('actual temperature') + ': ' + str(sensor_temperature) + ' C'
+                logstring = logstring + ' \n ' +  _('actual temperature') + ': ' + str(sensor_temperature) + ' °C'
                 #cl_fact_logger.get_instance().debug(logstring)
                 logstring = logstring + ' \n ' + pi_ager_names.logspacer2
                 logstring = logstring + ' \n ' +  _('target humidity') + ': ' + str(setpoint_humidity) + ' %'
                 logstring = logstring + ' \n ' +  _('actual humidity') + ': ' + str(sensor_humidity) + ' %'
                 #cl_fact_logger.get_instance().debug(logstring)
-                logstring = logstring + ' \n ' +  _('actual dewpoint') + ': ' + str(sensor_dewpoint) + ' C'
+                logstring = logstring + ' \n ' +  _('actual dewpoint') + ': ' + str(sensor_dewpoint) + ' °C'
                 logstring = logstring + ' \n ' +  _('actual humidity abs') + ': ' + str(sensor_humidity_abs) + ' g/m³'
                 #cl_fact_logger.get_instance().debug(logstring)
                 logstring = logstring + ' \n ' + pi_ager_names.logspacer2
                 if (str(cl_fact_second_sensor_type.get_instance().get_sensor_type_ui()) != 'disabled'):
                     logstring = logstring + ' \n ' +  _('selected external sensor') + ': ' + str(cl_fact_second_sensor_type.get_instance().get_sensor_type_ui())
-                    logstring = logstring + ' \n ' +  _('actual temperature') + ': ' + str(second_sensor_temperature) + ' C'
+                    logstring = logstring + ' \n ' +  _('actual temperature') + ': ' + str(second_sensor_temperature) + ' °C'
                     logstring = logstring + ' \n ' +  _('actual humidity') + ': ' + str(second_sensor_humidity) + ' %'
-                    logstring = logstring + ' \n ' +  _('actual dewpoint') + ': ' + str(second_sensor_dewpoint) + ' C'  
+                    logstring = logstring + ' \n ' +  _('actual dewpoint') + ': ' + str(second_sensor_dewpoint) + ' °C'  
                     logstring = logstring + ' \n ' +  _('actual humidity abs') + ': ' + str(second_sensor_humidity_abs) + ' g/m³'
                     logstring = logstring + ' \n ' + pi_ager_names.logspacer2
                
