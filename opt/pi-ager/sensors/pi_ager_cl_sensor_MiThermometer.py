@@ -2,16 +2,6 @@
  
 """This class is for handling the Xiaomi Mi Temperature and Humidity Monitor 2 sensor."""
 
-__author__ = "Claus Fischer"
-__copyright__ = "Copyright 2019, The Pi-Ager Project"
-__credits__ = ["Claus Fischer"]
-__license__ = "GPL"
-__version__ = "1.0.0"
-__maintainer__ = "Claus Fischer"
-__email__ = "DerBurgermeister@pi-ager.org"
-__status__ = "Production"
-
-
 from main.pi_ager_cl_logger import cl_fact_logger
 import time
 from sensors.pi_ager_cl_sensor import cl_sensor
