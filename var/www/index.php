@@ -1332,7 +1332,7 @@
                                     if ( window.history.replaceState ) {    // avoid page confirmation on refresh
                                         window.history.replaceState( null, null, window.location.href );
                                     }
-                                </script>  -->>
+                                </script>  -->
                                 
                             </div>
                         </div>
