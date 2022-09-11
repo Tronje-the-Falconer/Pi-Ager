@@ -737,33 +737,48 @@
                                 
                                  <!----------------------------------------------------------------------------------------Reifetabelle-->
                                 <?php 
-                                    if ($grepagingtable != NULL){
-                                        $current_period = get_table_value($current_values_table, $agingtable_period_key);
-                                        $current_period_day = get_table_value($current_values_table, $agingtable_period_day_key);
-                                        echo '
-                                        <h2 class="art-postheader">' . _('agingtable') .'</h2>
-                                        <div class="hg_container">
-                                        <table style="width: 100%" class="switching_state miniature_writing">
-                                            <tr>
-                                                <td width="75px">' . _('phase') . '</td><td align="left" id="current_period_head_index">' . (intval($current_period) + 1) . '</td>
-                                            </tr>
-                                            <tr>
-                                                <td width="75px">' . _('day') . '</td><td align="left" id="current_period_day_head_index">' . (intval($current_period_day)) . '</td>
-                                            </tr>
-                                        </table>
-                                        <table id="show_agingtable" class="show_agingtable">
-                                            <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
-                                                <td class="show_agingcell"><div class="tooltip">' . _('phase') . '<span class="tooltiptext">' . _("phase") . '</span></div></td>
-                                                <td class="show_agingcell"><div class="tooltip">' . _('modus') . '<span class="tooltiptext">' . _("aging-modus") . '</span></div></td>
-                                                <td class="show_agingcell"><div class="tooltip">&phi;<span class="tooltiptext">' . _('target humidity in %') . '</span></div></td>
-                                                <td class="show_agingcell"><div class="tooltip">°C<span class="tooltiptext">' . _('target temperature in °C') . '</span></div></td>
-                                                <td class="show_agingcell"><div class="tooltip">' . _('timer circulate d') . '<span class="tooltiptext">' . _('timer of the circulation air duration in minutes') . '</span></div></td>
-                                                <td class="show_agingcell"><div class="tooltip">' . _('timer circulate p') . '<span class="tooltiptext">' . _('timer of the circulation air period in minutes') . '</span></div></td>
-                                                <td class="show_agingcell"><div class="tooltip">' . _('timer exhaust d') . '<span class="tooltiptext">' . _('timer of the exhausting air duration in minutes') . '</span></div></td>
-                                                <td class="show_agingcell"><div class="tooltip">' . _('timer exhaust p') . '<span class="tooltiptext">' . _('timer of the exhausting air period in minutes') . '</span></div></td>
-                                                <td class="show_agingcell"><div class="tooltip">' . _('days') . '<span class="tooltiptext">' . _('duration of hanging phase in days') . '</span></div></td>
-                                            </tr>';
-                                                // Gewählte Agingtable aus DB auslesen und als Tabelle beschreiben
+                                    $current_period = intval(get_table_value($current_values_table, $agingtable_period_key));
+                                    $current_period_day = intval(get_table_value($current_values_table, $agingtable_period_day_key));
+                                 ?>        
+                                <h2 id="aging_table_header_id" class="art-postheader"><?php echo _('agingtable') . ' - ' . $maturity_type; ?></h2>
+                                <div class="hg_container">
+                                    <table style="width: 100%" class="switching_state miniature_writing">
+                                        <tr>
+                                            <td width="75px"><?php echo _('phase'); ?></td>
+                                            <td align="left" id="current_period_head_index"><?php if ($grepagingtable != 0) { echo ($current_period + 1);} else { echo '';} ?></td>
+                                        </tr>
+                                        <tr>
+                                            <td width="75px"><?php echo _('day'); ?></td>
+                                            <td align="left" id="current_period_day_head_index"><?php if ($grepagingtable != 0) { echo ($current_period_day);} else { echo '';} ?></td>
+                                        </tr>
+                                    </table>
+                                    
+                                    <table id="show_agingtable" class="show_agingtable">
+                                        <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('phase'); ?><span class="tooltiptext"><?php echo _('phase'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('modus'); ?><span class="tooltiptext"><?php echo _('aging-modus'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">&phi;<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip">°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate d'); ?><span class="tooltiptext"><?php echo _('timer of the circulation air duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate p'); ?><span class="tooltiptext"><?php echo _('timer of the circulation air period in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust d'); ?><span class="tooltiptext"><?php echo _('timer of the exhausting air duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust p'); ?><span class="tooltiptext"><?php echo _('timer of the exhausting air period in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('days'); ?><span class="tooltiptext"><?php echo _('duration of hanging phase in days'); ?></span></div></td>
+                                        </tr>
+                                        
+                                        <?php
+                                            // Gewählte Agingtable aus DB auslesen und als Tabelle beschreiben
+                                            $data_modus = ' ';
+                                            $data_setpoint_humidity = ' ';
+                                            $data_setpoint_temperature = ' ';
+                                            $data_circulation_air_duration = ' ';
+                                            $data_circulation_air_period = ' ';
+                                            $data_exhaust_air_duration = ' ';
+                                            $data_exhaust_air_period = ' ';
+                                            $data_days = '';
+                                            $agingtable_comment_with_carriage_return = '';
+                                            
+                                            if ($grepagingtable != 0) {
                                                 $index_row = 0;
                                                 $agingtable_rows = get_agingtable_dataset($desired_maturity);
                                                 if ($agingtable_rows != false){
@@ -772,49 +787,38 @@
                                                     if (!isset($agingtable_comment)){
                                                         $agingtable_comment = _('no comment');
                                                     }
+                                                    $agingtable_comment_with_carriage_return = nl2br($agingtable_comment);
                                                     
-                                                    
-                                                    //$current_period_0 = $current_period - 1;
                                                     try {
-                                                        $data_modus = '..';
-                                                        $data_setpoint_humidity = '..';
-                                                        $data_setpoint_temperature = '..';
-                                                        $data_circulation_air_duration = '..';
-                                                        $data_circulation_air_period = '..';
-                                                        $data_exhaust_air_duration = '..';
-                                                        $data_exhaust_air_period = '..';
-                                                        $data_days = '..';
-                                                        
                                                         $number_rows = count($agingtable_rows);
                                                         while ($index_row < $number_rows) {
                                                             $dataset = $agingtable_rows[$index_row];
-                                                            // $num = count($dataset);
                                                             if (!empty($dataset[$agingtable_modus_field])){
                                                                 $data_modus = $dataset[$agingtable_modus_field];
-                                                            }// else {$data_modus = '..';}
+                                                            }
                                                             if (!empty($dataset[$agingtable_setpoint_humidity_field])){
                                                                 $data_setpoint_humidity = $dataset[$agingtable_setpoint_humidity_field];
-                                                            }// else {$data_setpoint_humidity = '..';}
+                                                            }
                                                             if (!empty($dataset[$agingtable_setpoint_temperature_field])){
                                                                 $data_setpoint_temperature = $dataset[$agingtable_setpoint_temperature_field];
-                                                            }// else {$data_setpoint_temperature = '..';}
+                                                            }
                                                             if (!empty($dataset[$agingtable_circulation_air_duration_field])){
                                                                 $data_circulation_air_duration = $dataset[$agingtable_circulation_air_duration_field]/60;
-                                                            }// else {$data_circulation_air_duration = '..';}
+                                                            }
                                                             if (!empty($dataset[$agingtable_circulation_air_period_field])){
                                                                 $data_circulation_air_period = $dataset[$agingtable_circulation_air_period_field]/60;
-                                                            }// else {$data_circulation_air_period = '..';}
+                                                            }
                                                             if (!empty($dataset[$agingtable_exhaust_air_duration_field])){
                                                                 $data_exhaust_air_duration = $dataset[$agingtable_exhaust_air_duration_field]/60;
-                                                            }// else {$data_exhaust_air_duration = '..';}
+                                                            }
                                                             if (!empty($dataset[$agingtable_exhaust_air_period_field])){
                                                                 $data_exhaust_air_period = $dataset[$agingtable_exhaust_air_period_field]/60;
-                                                            }// else {$data_exhaust_air_period = '..';}
+                                                            }
                                                             if (!empty($dataset[$agingtable_days_field])){
                                                                 $data_days = $dataset[$agingtable_days_field];
-                                                            }// else {$data_days = '..';}
+                                                            }
 
-                                                            if ($current_period == $index_row AND $grepagingtable != NULL){
+                                                            if ($current_period == $index_row AND $grepagingtable != 0){
                                                                 echo '<tr bgcolor=#D19600 >';
                                                                 echo '<td id="current_period_index">'. ($current_period +1) .'</td>';
                                                                 echo '<td id="data_modus_index">'. $data_modus .'</td>';
@@ -826,6 +830,7 @@
                                                                 echo '<td id="data_exhaust_air_period_index">'. $data_exhaust_air_period .'</td>';
                                                                 echo '<td id="data_days_index">'. $data_days .'</td>';
                                                                 echo '</tr>';
+                                                                break;
                                                             }
                                                             $index_row++;
                                                         } 
@@ -833,18 +838,33 @@
                                                     catch (Exception $e) {
                                                     }
                                                 }
-                                        echo '</table>
-                                        <table style="width: 100%" class="switching_state miniature_writing">
-                                            <tr>';
-                                                $agingtable_comment_with_carriage_return = nl2br($agingtable_comment);
-                                                echo  '<td width="150px" align="right">' . _('comment:') . '</td><td align="left">' . $agingtable_comment_with_carriage_return . '</td>';
-                                            echo '</tr>
-                                        </table>
-                                        </div>
-                                        <hr>';
-                                    }
-                                ?>
+                                            }
+                                            else {
+                                                echo '<tr bgcolor=#D19600 >';
+                                                echo '<td id="current_period_index">&nbsp;</td>';
+                                                echo '<td id="data_modus_index">&nbsp;</td>';
+                                                echo '<td id="data_setpoint_humidity_index">&nbsp;</td>';
+                                                echo '<td id="data_setpoint_temperature_index">&nbsp;</td>';
+                                                echo '<td id="data_circulation_air_duration_index">&nbsp;</td>';
+                                                echo '<td id="data_circulation_air_period_index">&nbsp;</td>';
+                                                echo '<td id="data_exhaust_air_duration_index">&nbsp;</td>';
+                                                echo '<td id="data_exhaust_air_period_index">&nbsp;</td>';
+                                                echo '<td id="data_days_index">&nbsp;</td>';
+                                                echo '</tr>';
+                                            }
+                                        ?>
+                                    </table>
+                                        
+                                    <table style="width: 100%" class="switching_state miniature_writing">
+                                        <tr>
+                                            <td width="150px" align="right"><?php echo _('comment:'); ?></td>
+                                            <td id="agingtable_comment_with_carriage_return" align="left"><?php echo $agingtable_comment_with_carriage_return; ?></td>
+                                        </tr>
+                                    </table>
+                                </div>
                                 
+                                <hr>
+                               
                                 <!----------------------------------------------------------------------------------------Betriebsart-->
                                 <h2 class="art-postheader"><?php echo _('statusboard'); ?></h2>
                                 <div class="hg_container">

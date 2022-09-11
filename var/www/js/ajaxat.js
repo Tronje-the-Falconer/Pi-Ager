@@ -6,6 +6,7 @@ async function handleContentat( msg ) {
     console.log('in handleContentat');
     myObj = JSON.parse(msg);
 
+    maturity_type = myObj.maturity_type;
     grepagingtable = myObj.grepagingtable;
     current_period = myObj.current_period;
     current_period_day = myObj.current_period_day;
@@ -17,21 +18,23 @@ async function handleContentat( msg ) {
     data_exhaust_air_duration = myObj.data_exhaust_air_duration;   
     data_exhaust_air_period = myObj.data_exhaust_air_period;   
     data_days = myObj.data_days;
+    agingtable_comment = myObj.agingtable_comment;
+    console.log('current period:' + current_period + "!");
     
-    if (grepagingtable != 0) {
-        console.log('current period : ' + current_period);
-        $('#current_period_head_index').html(current_period);
-        $('#current_period_index').html(current_period);
-        $('#data_modus_index').html(data_modus);
-        $('#data_setpoint_humidity_index').html(data_setpoint_humidity);
-        $('#data_setpoint_temperature_index').html(data_setpoint_temperature);
-        $('#data_circulation_air_duration_index').html(data_circulation_air_duration);
-        $('#data_circulation_air_period_index').html(data_circulation_air_period);
-        $('#data_exhaust_air_duration_index').html(data_exhaust_air_duration);
-        $('#data_exhaust_air_period_index').html(data_exhaust_air_period);
-        $('#data_days_index').html(data_days);
-    }
-   
+    $('#aging_table_header_id').html(maturity_type);
+    $('#current_period_head_index').html(current_period);
+    $('#current_period_day_head_index').html(current_period_day);
+    $('#current_period_index').html(current_period);
+    $('#data_modus_index').html(data_modus);
+    $('#data_setpoint_humidity_index').html(data_setpoint_humidity);
+    $('#data_setpoint_temperature_index').html(data_setpoint_temperature);
+    $('#data_circulation_air_duration_index').html(data_circulation_air_duration);
+    $('#data_circulation_air_period_index').html(data_circulation_air_period);
+    $('#data_exhaust_air_duration_index').html(data_exhaust_air_duration);
+    $('#data_exhaust_air_period_index').html(data_exhaust_air_period);
+    $('#data_days_index').html(data_days);
+    $('#agingtable_comment_with_carriage_return').html(agingtable_comment);
+       
 }
 
 // request aging table current phase data every 10s and show them on index.php
