@@ -41,7 +41,7 @@ class cl_sensor_MiThermometer(cl_sensor):
                 if (current_time - self.data_timestamp) > 20:   # when difference is greater than 20 s, then bluetooth connection may be broken
                     if self.event_out_of_range == False:
                         self.event_out_of_range = True
-                        cl_fact_logger.get_instance().info('MiSensor possibly out of range!')
+                        cl_fact_logger.get_instance().debug('MiSensor possibly out of range!')
                         cl_fact_logic_messenger().get_instance().handle_event('Mi_Sensor_failed') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
                     pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.MiSensor_battery_key, None)    
                     return(None,None,None,None)
@@ -53,7 +53,7 @@ class cl_sensor_MiThermometer(cl_sensor):
                 cl_fact_logger.get_instance().debug('MiThermometer battery (V) : ' + str(self.battery))
                 if self.event_out_of_range == True:
                         self.event_out_of_range = False
-                        cl_fact_logger.get_instance().info('MiSensor within range again!')
+                        cl_fact_logger.get_instance().debug('MiSensor within range again!')
                         cl_fact_logic_messenger().get_instance().handle_event('Mi_Sensor_ok') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
                 return(self.measured_data)
             except:

@@ -64,7 +64,8 @@ class cl_logic_alarm:
                    sleep(item['high_time'])
                    gpio.output(self.alarm_gpio, False)
                    sleep(item['low_time'])
-
+                   sleep(item['sleep'])
+                   
 class cl_db_alarm(cl_ab_database_config):
 
     def build_select_statement(self):

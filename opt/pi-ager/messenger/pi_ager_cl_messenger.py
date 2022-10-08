@@ -79,29 +79,29 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         pass
     
     def send_messages(self, messenger_exception_row):
-        if messenger_exception_row['alarm'] != '': 
-            cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
+        if self.is_not_blank(messenger_exception_row['alarm']): 
+            cl_fact_logger.get_instance().info('Trigger Alarm:  ' + str(self.cx_error.__class__.__name__ ))
             try:
                 cl_fact_logic_alarm().get_instance().execute_alarm(messenger_exception_row['alarm'])
             except:
                 cl_fact_logger.get_instance().info('Alarm settings not active: ')
                 
         if messenger_exception_row['telegram'] == 1:
-            cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
+            cl_fact_logger.get_instance().info('Trigger Telegram: ' + str(self.cx_error.__class__.__name__))
             try:
                 cl_fact_logic_telegram.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
             except:
                 cl_fact_logger.get_instance().info('Telegram settings not active: ')
                 
         if messenger_exception_row['pushover'] == 1:
-            cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
+            cl_fact_logger.get_instance().info('Trigger Pushover: ' + str(self.cx_error.__class__.__name__))
             try:
                 cl_fact_logic_pushover.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
             except:
                 cl_fact_logger.get_instance().info('Pushover settings not active: ')
 
         if messenger_exception_row['e-mail'] == 1:
-            cl_fact_logger.get_instance().info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
+            cl_fact_logger.get_instance().info('Trigger E-Mail: ' + str(self.cx_error.__class__.__name__))
             try:
                 cl_fact_logic_send_email.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
             except:
@@ -173,13 +173,16 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                     
         return(self.exception_known)
 
+    def is_not_blank(self, s):
+        return bool(s and not s.isspace())
+        
     def handle_event(self, event, info_text=None):
         """
         Handle event to create alarm or email or telegram or pushover ... class
-        If the second parameter info_text is empty, the value is taken from the field envent_text in table config_messenger_event 
+        The second parameter info_text and the value taken from the field envent_text in table config_messenger_event are merged
         """
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cl_fact_logger.get_instance().info('Event raised: ' + event + ' with info text: '+ str(info_text) )
+        cl_fact_logger.get_instance().info('Event state: ' + event )
         
         self.event = event
         self.it_messenger_event = self.db_messenger_event.read_data_from_db()
@@ -188,35 +191,34 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                 if (info_text == None):
                     self.info_text = item['event_text']
                 else:
-                    self.info_text    = info_text
-    
-                cl_fact_logger.get_instance().info('Info text is: '+ str(self.info_text) )
+                    self.info_text    = item['event_text'] + '\n' + info_text
+                
+#                cl_fact_logger.get_instance().info('Info text is: '+ str(self.info_text) )
                 
                 cl_fact_logger.get_instance().debug(item['event'])
-        
-                if item['alarm'] != '': 
-                    cl_fact_logger.get_instance().info('Check Event for Alarm:  ' + event)
+                if self.is_not_blank(item['alarm']):
+                    cl_fact_logger.get_instance().info('Trigger Alarm:  ' + event)
                     try:
                         cl_fact_logic_alarm().get_instance().execute_alarm(item['alarm'])
                     except:
                         cl_fact_logger.get_instance().info('Alarm settings not active: ')
                 
                 if item['telegram'] == 1:
-                    cl_fact_logger.get_instance().info('Check Event for Telegram: ' + event)
+                    cl_fact_logger.get_instance().info('Trigger Telegram: ' + event)
                     try:
                         cl_fact_logic_telegram.get_instance().execute(self.build_event_subject(), self.build_event_message())
                     except:
                         cl_fact_logger.get_instance().info('Telegram settings not active: ')
                 
                 if item['pushover'] == 1:
-                    cl_fact_logger.get_instance().info('Check Event for Pushover: ' + event)
+                    cl_fact_logger.get_instance().info('Trigger Pushover: ' + event)
                     try:
                         cl_fact_logic_pushover.get_instance().execute(self.build_event_subject(), self.build_event_message())
                     except:
                         cl_fact_logger.get_instance().info('Pushover settings not active: ')
 
                 if item['e-mail'] == 1:
-                    cl_fact_logger.get_instance().info('Check Event for E-Mail: ' + event)
+                    cl_fact_logger.get_instance().info('Trigger E-Mail: ' + event)
                     try:
                         cl_fact_logic_send_email.get_instance().execute(self.build_event_subject(), self.build_event_message())
                     except:

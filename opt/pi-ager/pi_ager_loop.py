@@ -420,7 +420,8 @@ def check_and_set_light():
 
 def status_value_has_changed():
     """
-    check if value has changed
+    check if value has changed, return also string with states on or off 
+    changed state is in red
     """
     global status_circulating_air         #  Umluft
     global status_exhaust_air             #  (Abluft-)Luftaustausch
@@ -431,23 +432,152 @@ def status_value_has_changed():
     global status_uv                      #  UV-Licht
     global status_light                   #  Licht
     
+    changed = False
+    log_string_html = pi_ager_names.logspacer2 + '\n' + _('GPIO states') + ':'
+    log_string = log_string_html[:]
+    
     current_value_rows = pi_ager_database.get_current(pi_ager_names.current_values_table, True)
     current_values = {}
     for current_row in current_value_rows:
         current_values[current_row[pi_ager_names.key_field]] = current_row[pi_ager_names.value_field]
     
-    if (status_circulating_air != current_values[pi_ager_names.status_circulating_air_key]
-        or status_exhaust_air != current_values[pi_ager_names.status_exhaust_air_key]
-        or status_heater != current_values[pi_ager_names.status_heater_key]
-        or status_cooling_compressor != current_values[pi_ager_names.status_cooling_compressor_key]
-        or status_humidifier != current_values[pi_ager_names.status_humidifier_key]
-        or status_dehumidifier != current_values[pi_ager_names.status_dehumidifier_key]
-        or status_uv != current_values[pi_ager_names.status_uv_key]
-        or status_light != current_values[pi_ager_names.status_light_key]
-        or pi_ager_init.loopcounter == 0):
-        return True
+    if gpio.input(pi_ager_gpio_config.gpio_heater) == False:
+        status_heater = 1
+        if status_heater != current_values[pi_ager_names.status_heater_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('heater') + ' ' + _('on') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('heater') + ' ' + _('on')
+        log_string = log_string + ' \n ' + _('heater') + ' ' + _('on')
     else:
-        return False
+        status_heater = 0
+        if status_heater != current_values[pi_ager_names.status_heater_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('heater') + ' ' + _('off') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('heater') + ' ' + _('off')       
+        log_string = log_string + ' \n ' + _('heater') + ' ' + _('off')
+        
+    if gpio.input(pi_ager_gpio_config.gpio_cooling_compressor) == False:
+        status_cooling_compressor = 1
+        if status_cooling_compressor != current_values[pi_ager_names.status_cooling_compressor_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('cooling compressor') + ' ' + _('on') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('cooling compressor') + ' ' + _('on')
+        log_string = log_string + ' \n ' + _('cooling compressor') + ' ' + _('on')            
+    else:
+        status_cooling_compressor = 0
+        if status_cooling_compressor != current_values[pi_ager_names.status_cooling_compressor_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('cooling compressor') + ' ' + _('off') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('cooling compressor') + ' ' + _('off')
+        log_string = log_string + ' \n ' + _('cooling compressor') + ' ' + _('off')
+        
+    if gpio.input(pi_ager_gpio_config.gpio_humidifier) == False:
+        status_humidifier = 1
+        if status_humidifier != current_values[pi_ager_names.status_humidifier_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('humidifier') + ' ' + _('on') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('humidifier') + ' ' + _('on')
+        log_string = log_string + ' \n ' + _('humidifier') + ' ' + _('on')            
+    else:
+        status_humidifier = 0
+        if status_humidifier != current_values[pi_ager_names.status_humidifier_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('humidifier') + ' ' + _('off') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('humidifier') + ' ' + _('off')
+        log_string = log_string + ' \n ' + _('humidifier') + ' ' + _('off')
+        
+    if gpio.input(pi_ager_gpio_config.gpio_circulating_air) == False:
+        status_circulating_air = 1
+        if status_circulating_air != current_values[pi_ager_names.status_circulating_air_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('circulation air') + ' ' + _('on') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('circulation air') + ' ' + _('on')
+        log_string = log_string + ' \n ' + _('circulation air') + ' ' + _('on')            
+    else:
+        status_circulating_air = 0
+        if status_circulating_air != current_values[pi_ager_names.status_circulating_air_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('circulation air') + ' ' + _('off') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('circulation air') + ' ' + _('off')            
+        log_string = log_string + ' \n ' + _('circulation air') + ' ' + _('off')
+        
+    if gpio.input(pi_ager_gpio_config.gpio_exhausting_air) == False:
+        status_exhaust_air = 1
+        if status_exhaust_air != current_values[pi_ager_names.status_exhaust_air_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('exhaust air') + ' ' + _('on') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('exhaust air') + ' ' + _('on')
+        log_string = log_string + ' \n ' + _('exhaust air') + ' ' + _('on')            
+    else:
+        status_exhaust_air = 0
+        if status_exhaust_air != current_values[pi_ager_names.status_exhaust_air_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('exhaust air') + ' ' + _('off') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('exhaust air') + ' ' + _('off')            
+        log_string = log_string + ' \n ' + _('exhaust air') + ' ' + _('off')
+        
+    if gpio.input(pi_ager_gpio_config.gpio_dehumidifier) == False:
+        status_dehumidifier = 1
+        if status_dehumidifier != current_values[pi_ager_names.status_dehumidifier_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('dehumidifier') + ' ' + _('on') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('dehumidifier') + ' ' + _('on')
+        log_string = log_string + ' \n ' + _('dehumidifier') + ' ' + _('on')
+    else:
+        status_dehumidifier = 0
+        if status_dehumidifier != current_values[pi_ager_names.status_dehumidifier_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('dehumidifier') + ' ' + _('off') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('dehumidifier') + ' ' + _('off')            
+        log_string = log_string + ' \n ' + _('dehumidifier') + ' ' + _('off')
+        
+    if gpio.input(pi_ager_gpio_config.gpio_light) == False:
+        status_light = 1
+        if status_light != current_values[pi_ager_names.status_light_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('light') + ' ' + _('on') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('light') + ' ' + _('on')
+        log_string = log_string + ' \n ' + _('light') + ' ' + _('on')
+    else:
+        status_light = 0
+        if status_light != current_values[pi_ager_names.status_light_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('light') + ' ' + _('off') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('light') + ' ' + _('off')            
+        log_string = log_string + ' \n ' + _('light') + ' ' + _('off')
+        
+    if gpio.input(pi_ager_gpio_config.gpio_uv) == False:
+        status_uv = 1
+        if status_uv != current_values[pi_ager_names.status_uv_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('uv-light') + ' ' + _('on') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('uv-light') + ' ' + _('on')
+        log_string = log_string + ' \n ' + _('uv-light') + ' ' + _('on')
+    else:
+        status_uv = 0
+        if status_uv != current_values[pi_ager_names.status_uv_key]:
+            changed = True
+            log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('uv-light') + ' ' + _('off') + '</span>'
+        else:
+            log_string_html = log_string_html + ' \n ' + _('uv-light') + ' ' + _('off')            
+        log_string = log_string + ' \n ' + _('uv-light') + ' ' + _('off')
+
+    return changed, log_string, log_string_html
 
 def get_temp_sensor_data(sensor_config, adc_channel):
     """
@@ -557,18 +687,18 @@ def generate_switch_event():
             
     pi_switch = pi_switch_temp 
     
-def generate_low_limit_reached_event():
+def generate_low_limit_reached_event(event_msg):
     # generate event
     try:
-        cl_fact_logic_messenger().get_instance().handle_event('Int_Temp_Low_Limit') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+        cl_fact_logic_messenger().get_instance().handle_event('Int_Temp_Low_Limit', event_msg) #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
     except Exception as cx_error:
         exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
         pass
         
-def generate_high_limit_reached_event():
+def generate_high_limit_reached_event(event_msg):
     # generate event
     try:
-        cl_fact_logic_messenger().get_instance().handle_event('Int_Temp_High_Limit') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+        cl_fact_logic_messenger().get_instance().handle_event('Int_Temp_High_Limit', event_msg) #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
     except Exception as cx_error:
         exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
         pass
@@ -600,15 +730,17 @@ def check_internal_temperature_limits():
     if sensor_temperature != None:
         if sensor_temperature <= internal_temperature_low_limit and internal_temperature_low_limit_reached == False:
             internal_temperature_low_limit_reached = True
-            generate_low_limit_reached_event()
-            cl_fact_logger.get_instance().info('Internal temperature low limit ' + str(internal_temperature_low_limit) + '°C ' + 'reached')
+            event_msg = 'Internal temperature low limit ' + str(internal_temperature_low_limit) + '°C ' + 'reached'
+            generate_low_limit_reached_event(event_msg)
+            cl_fact_logger.get_instance().info(event_msg)
         if sensor_temperature >= (internal_temperature_low_limit + internal_temperature_hysteresis):
             internal_temperature_low_limit_reached = False
             cl_fact_logger.get_instance().debug('Internal temperature ' + str(sensor_temperature) + '°C higher than ' + str(internal_temperature_low_limit + internal_temperature_hysteresis) + '°C. (low limit + hysteresis)')
         if sensor_temperature >= internal_temperature_high_limit and internal_temperature_high_limit_reached == False:
             internal_temperature_high_limit_reached = True
-            generate_high_limit_reached_event()
-            cl_fact_logger.get_instance().info('Internal temperature high limit ' + str(internal_temperature_high_limit) + '°C ' + 'reached')
+            event_msg = 'Internal temperature high limit ' + str(internal_temperature_high_limit) + '°C ' + 'reached'
+            generate_high_limit_reached_event(event_msg)
+            cl_fact_logger.get_instance().info(event_msg)
         if sensor_temperature <= (internal_temperature_high_limit - internal_temperature_hysteresis):
             internal_temperature_high_limit_reached = False            
             cl_fact_logger.get_instance().debug('Internal temperature ' + str(sensor_temperature) + '°C lower than ' + str(internal_temperature_high_limit - internal_temperature_hysteresis) + '°C. (high limit - hysteresis)')
@@ -694,7 +826,13 @@ def check_int_ext_humidity():
             
     return last_humidity_check_state 
             
-  
+def generate_status_change_event(logstring):
+    # generate event
+    try:
+        cl_fact_logic_messenger().get_instance().handle_event('GPIO_status_changed', logstring) #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+    except Exception as cx_error:
+        exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+        pass    
     
 def doMainLoop():
     """
@@ -1377,82 +1515,21 @@ def doMainLoop():
                 # Ausgabe der Werte auf der Konsole
                 # logger.info(pi_ager_names.logspacer2)
                 logstring = logstring + ' \n ' + pi_ager_names.logspacer2
-                if gpio.input(pi_ager_gpio_config.gpio_heater) == False:
-                    logstring = logstring + ' \n ' +  _('heater') + ' ' + _('on')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_heater = 1
-                else:
-                    logstring = logstring + ' \n ' +  _('heater') + ' ' + _('off')
-                    status_heater = 0
-                if gpio.input(pi_ager_gpio_config.gpio_cooling_compressor) == False:
-                    logstring = logstring + ' \n ' +  _('cooling compressor') + ' ' + _('on')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_cooling_compressor = 1
-                else:
-                    logstring = logstring + ' \n ' +  _('cooling compressor') + ' ' + _('off')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_cooling_compressor = 0
-                if gpio.input(pi_ager_gpio_config.gpio_humidifier) == False:
-                    logstring = logstring + ' \n ' +  _('humidifier') + ' ' + _('on')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_humidifier = 1
-                else:
-                    logstring = logstring + ' \n ' +  _('humidifier') + ' ' + _('off')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_humidifier = 0
-                if gpio.input(pi_ager_gpio_config.gpio_circulating_air) == False:
-                    logstring = logstring + ' \n ' +  _('circulation air') + ' ' + _('on')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_circulating_air = 1
-                else:
-                    logstring = logstring + ' \n ' +  _('circulation air') + ' ' + _('off')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_circulating_air = 0
-                if gpio.input(pi_ager_gpio_config.gpio_exhausting_air) == False:
-                    logstring = logstring + ' \n ' +  _('exhaust air') + ' ' + _('on')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_exhaust_air = 1
-                else:
-                    logstring = logstring + ' \n ' +  _('exhaust air') + ' ' + _('off')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_exhaust_air = 0
-                if gpio.input(pi_ager_gpio_config.gpio_dehumidifier) == False:
-                    logstring = logstring + ' \n ' +  _('dehumidifier') + ' ' + _('on')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_dehumidifier = 1
-                else:
-                    logstring = logstring + ' \n ' +  _('dehumidifier') + ' ' + _('off')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_dehumidifier = 0
-                if get_gpio_value(pi_ager_gpio_config.gpio_light) == False:
-                    logstring = logstring + ' \n ' +  _('light') + ' ' + _('on')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_light = 1
-                else:
-                    logstring = logstring + ' \n ' +  _('light') + ' ' + _('off')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_light = 0
-                if gpio.input(pi_ager_gpio_config.gpio_uv) == False:
-                    logstring = logstring + ' \n ' +  _('uv-light') + ' ' + _('on')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_uv= 1
-                else:
-                    logstring = logstring + ' \n ' +  _('uv-light') + ' ' + _('off')
-                    #cl_fact_logger.get_instance().debug(logstring)
-                    status_uv = 0
+
                 if scale1_data > 0:
                     logstring = logstring + ' \n ' +  _('weight scale') + ' 1: ' + str(round(scale1_data)) + ' g'
-                    #cl_fact_logger.get_instance().debug(logstring)
                 if scale2_data > 0:
                     logstring = logstring + ' \n ' +  _('weight scale') + ' 2: ' + str(round(scale2_data)) + ' g'
-                    #cl_fact_logger.get_instance().debug(logstring)
-               
-                cl_fact_logger.get_instance().debug(logstring)
                 
-                if status_value_has_changed():
-                    logstring = logstring + ' \n ' + pi_ager_names.logspacer2 + '\n'
+                (log_changed, log, log_html) = status_value_has_changed()
+                
+                log_html = logstring + ' \n ' + log_html + '\n' + pi_ager_names.logspacer2 + '\n'
+                log_event = logstring + ' \n ' + log + '\n' + pi_ager_names.logspacer2 + '\n'
+                cl_fact_logger.get_instance().debug(log_event)
+                if log_changed:
                     # Logstring komplett schreiben
-                    cl_fact_logger.get_instance().info(logstring)
+                    cl_fact_logger.get_instance().info(log_html)
+                    generate_status_change_event(log_event)
                     
                 # Messwerte in die RRD-Datei schreiben
                 # Schreiben der aktuellen Status-Werte

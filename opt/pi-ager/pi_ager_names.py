@@ -8,7 +8,7 @@
 #import RPi.GPIO as gpio
 
 ########################### Definition of variables
-version_number = '3.3.2'
+version_number = '3.3.3'
 # tables names
 config_settings_table = 'config'
 
@@ -220,8 +220,8 @@ pin_without_voltage = (not pin_with_voltage) #   0V = 0 | GPIO.LOW   | FALSE
 relay_on = pin_without_voltage   # negative Logik!!! des Relay's, Schaltet bei 0 | GPIO.LOW  | False  ein
 relay_off = (not relay_on)       # negative Logik!!! des Relay's, Schaltet bei 1 | GPIO.High | True aus
 
-logspacer = "***********************************************"
-logspacer2 = '-------------------------------------------------------'
+logspacer  = "*****************************************"
+logspacer2 = '-----------------------------------------'
 
 ######################################### DATABASE-CHECK
 

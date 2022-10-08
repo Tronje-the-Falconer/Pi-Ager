@@ -199,6 +199,7 @@
                     $logstring = $logstring . " \n " . _('switch-on exhausting').": ".$switch_on_humidifier_config."% &phi; ("._('so at')." ".$switch_on_dehumidify."% &phi;)";
                     $logstring = $logstring . " \n " . _('switch-off exhausting').": ".$switch_off_humidifier_config."% &phi; ("._('so at')." ".$switch_off_dehumidify."% &phi;)";
                     $logstring = $logstring . " \n " . _('delay exhausting').": ".$delay_humidify_config ." ". _('minutes');
+                    $logstring = $logstring . " \n " . _('abs. humidity check aktive').": " . (($dewpoint_check_config == 0) ? _('off') : _('on'));
                 }
                 $logstring = $logstring . " \n " . _('circulation air period').": ".$circulation_air_period." "._('minutes');
                 $logstring = $logstring . " \n " . _('circulation air duration').": ".$circulation_air_duration." "._('minutes');
@@ -211,6 +212,10 @@
                 $logstring = $logstring . " \n " . _('light modus').": ".$light_modus_name;
                 $logstring = $logstring . " \n " . $logtext_light;
                 $logstring = $logstring . " \n " . $logtext_light_duration;
+                $logstring = $logstring . " \n " . _('low temperature limit').": ".$internal_temperature_low_limit." &deg;C";
+                $logstring = $logstring . " \n " . _('high temperature limit').": ".$internal_temperature_high_limit." &deg;C";
+                $logstring = $logstring . " \n " . _('hysteresis').": ".$internal_temperature_hysteresis." &deg;C";
+                $logstring = $logstring . " \n " . _('shutdown on battery low').": " . (($shutdown_on_batlow_config == 0) ? _('off') : _('on'));
                 $logstring = $logstring . " \n " . "***********************************************";
                 logger('INFO', $logstring);
 
