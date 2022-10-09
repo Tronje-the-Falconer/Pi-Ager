@@ -432,7 +432,7 @@ def status_value_has_changed():
     global status_uv                      #  UV-Licht
     global status_light                   #  Licht
     
-    changed = False
+    changed = pi_ager_init.loopcounter == 0
     log_string_html = pi_ager_names.logspacer2 + '\n' + _('GPIO states') + ':'
     log_string = log_string_html[:]
     
