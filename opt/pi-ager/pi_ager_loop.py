@@ -446,136 +446,152 @@ def status_value_has_changed():
         if status_heater != current_values[pi_ager_names.status_heater_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('heater') + ' ' + _('on') + '</span>'
+            log_string = log_string + ' \n*' + _('heater') + ' ' + _('on')
         else:
             log_string_html = log_string_html + ' \n ' + _('heater') + ' ' + _('on')
-        log_string = log_string + ' \n ' + _('heater') + ' ' + _('on')
+            log_string = log_string + ' \n ' + _('heater') + ' ' + _('on')
     else:
         status_heater = 0
         if status_heater != current_values[pi_ager_names.status_heater_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('heater') + ' ' + _('off') + '</span>'
+            log_string = log_string + ' \n*' + _('heater') + ' ' + _('off')
         else:
-            log_string_html = log_string_html + ' \n ' + _('heater') + ' ' + _('off')       
-        log_string = log_string + ' \n ' + _('heater') + ' ' + _('off')
+            log_string_html = log_string_html + ' \n ' + _('heater') + ' ' + _('off')
+            log_string = log_string + ' \n ' + _('heater') + ' ' + _('off')
         
     if gpio.input(pi_ager_gpio_config.gpio_cooling_compressor) == False:
         status_cooling_compressor = 1
         if status_cooling_compressor != current_values[pi_ager_names.status_cooling_compressor_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('cooling compressor') + ' ' + _('on') + '</span>'
+            log_string = log_string + ' \n*' + _('cooling compressor') + ' ' + _('on')
         else:
             log_string_html = log_string_html + ' \n ' + _('cooling compressor') + ' ' + _('on')
-        log_string = log_string + ' \n ' + _('cooling compressor') + ' ' + _('on')            
+            log_string = log_string + ' \n ' + _('cooling compressor') + ' ' + _('on')
     else:
         status_cooling_compressor = 0
         if status_cooling_compressor != current_values[pi_ager_names.status_cooling_compressor_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('cooling compressor') + ' ' + _('off') + '</span>'
+            log_string = log_string + ' \n*' + _('cooling compressor') + ' ' + _('off')
         else:
             log_string_html = log_string_html + ' \n ' + _('cooling compressor') + ' ' + _('off')
-        log_string = log_string + ' \n ' + _('cooling compressor') + ' ' + _('off')
+            log_string = log_string + ' \n ' + _('cooling compressor') + ' ' + _('off')
         
     if gpio.input(pi_ager_gpio_config.gpio_humidifier) == False:
         status_humidifier = 1
         if status_humidifier != current_values[pi_ager_names.status_humidifier_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('humidifier') + ' ' + _('on') + '</span>'
+            log_string = log_string + ' \n*' + _('humidifier') + ' ' + _('on')
         else:
             log_string_html = log_string_html + ' \n ' + _('humidifier') + ' ' + _('on')
-        log_string = log_string + ' \n ' + _('humidifier') + ' ' + _('on')            
+            log_string = log_string + ' \n ' + _('humidifier') + ' ' + _('on')
     else:
         status_humidifier = 0
         if status_humidifier != current_values[pi_ager_names.status_humidifier_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('humidifier') + ' ' + _('off') + '</span>'
+            log_string = log_string + ' \n*' + _('humidifier') + ' ' + _('off')
         else:
             log_string_html = log_string_html + ' \n ' + _('humidifier') + ' ' + _('off')
-        log_string = log_string + ' \n ' + _('humidifier') + ' ' + _('off')
+            log_string = log_string + ' \n ' + _('humidifier') + ' ' + _('off')
         
     if gpio.input(pi_ager_gpio_config.gpio_circulating_air) == False:
         status_circulating_air = 1
         if status_circulating_air != current_values[pi_ager_names.status_circulating_air_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('circulation air') + ' ' + _('on') + '</span>'
+            log_string = log_string + ' \n*' + _('circulation air') + ' ' + _('on')
         else:
             log_string_html = log_string_html + ' \n ' + _('circulation air') + ' ' + _('on')
-        log_string = log_string + ' \n ' + _('circulation air') + ' ' + _('on')            
+            log_string = log_string + ' \n ' + _('circulation air') + ' ' + _('on')
     else:
         status_circulating_air = 0
         if status_circulating_air != current_values[pi_ager_names.status_circulating_air_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('circulation air') + ' ' + _('off') + '</span>'
+            log_string = log_string + ' \n*' + _('circulation air') + ' ' + _('off')
         else:
             log_string_html = log_string_html + ' \n ' + _('circulation air') + ' ' + _('off')            
-        log_string = log_string + ' \n ' + _('circulation air') + ' ' + _('off')
+            log_string = log_string + ' \n ' + _('circulation air') + ' ' + _('off')
         
     if gpio.input(pi_ager_gpio_config.gpio_exhausting_air) == False:
         status_exhaust_air = 1
         if status_exhaust_air != current_values[pi_ager_names.status_exhaust_air_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('exhaust air') + ' ' + _('on') + '</span>'
+            log_string = log_string + ' \n*' + _('exhaust air') + ' ' + _('on')
         else:
             log_string_html = log_string_html + ' \n ' + _('exhaust air') + ' ' + _('on')
-        log_string = log_string + ' \n ' + _('exhaust air') + ' ' + _('on')            
+            log_string = log_string + ' \n ' + _('exhaust air') + ' ' + _('on')
     else:
         status_exhaust_air = 0
         if status_exhaust_air != current_values[pi_ager_names.status_exhaust_air_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('exhaust air') + ' ' + _('off') + '</span>'
+            log_string = log_string + ' \n*' + _('exhaust air') + ' ' + _('off')
         else:
             log_string_html = log_string_html + ' \n ' + _('exhaust air') + ' ' + _('off')            
-        log_string = log_string + ' \n ' + _('exhaust air') + ' ' + _('off')
+            log_string = log_string + ' \n ' + _('exhaust air') + ' ' + _('off')
         
     if gpio.input(pi_ager_gpio_config.gpio_dehumidifier) == False:
         status_dehumidifier = 1
         if status_dehumidifier != current_values[pi_ager_names.status_dehumidifier_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('dehumidifier') + ' ' + _('on') + '</span>'
+            log_string = log_string + ' \n*' + _('dehumidifier') + ' ' + _('on')
         else:
             log_string_html = log_string_html + ' \n ' + _('dehumidifier') + ' ' + _('on')
-        log_string = log_string + ' \n ' + _('dehumidifier') + ' ' + _('on')
+            log_string = log_string + ' \n ' + _('dehumidifier') + ' ' + _('on')
     else:
         status_dehumidifier = 0
         if status_dehumidifier != current_values[pi_ager_names.status_dehumidifier_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('dehumidifier') + ' ' + _('off') + '</span>'
+            log_string = log_string + ' \n*' + _('dehumidifier') + ' ' + _('off')
         else:
             log_string_html = log_string_html + ' \n ' + _('dehumidifier') + ' ' + _('off')            
-        log_string = log_string + ' \n ' + _('dehumidifier') + ' ' + _('off')
+            log_string = log_string + ' \n ' + _('dehumidifier') + ' ' + _('off')
         
     if gpio.input(pi_ager_gpio_config.gpio_light) == False:
         status_light = 1
         if status_light != current_values[pi_ager_names.status_light_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('light') + ' ' + _('on') + '</span>'
+            log_string = log_string + ' \n*' + _('light') + ' ' + _('on')
         else:
             log_string_html = log_string_html + ' \n ' + _('light') + ' ' + _('on')
-        log_string = log_string + ' \n ' + _('light') + ' ' + _('on')
+            log_string = log_string + ' \n ' + _('light') + ' ' + _('on')
     else:
         status_light = 0
         if status_light != current_values[pi_ager_names.status_light_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('light') + ' ' + _('off') + '</span>'
+            log_string = log_string + ' \n*' + _('light') + ' ' + _('off')
         else:
             log_string_html = log_string_html + ' \n ' + _('light') + ' ' + _('off')            
-        log_string = log_string + ' \n ' + _('light') + ' ' + _('off')
+            log_string = log_string + ' \n ' + _('light') + ' ' + _('off')
         
     if gpio.input(pi_ager_gpio_config.gpio_uv) == False:
         status_uv = 1
         if status_uv != current_values[pi_ager_names.status_uv_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('uv-light') + ' ' + _('on') + '</span>'
+            log_string = log_string + ' \n*' + _('uv-light') + ' ' + _('on')
         else:
             log_string_html = log_string_html + ' \n ' + _('uv-light') + ' ' + _('on')
-        log_string = log_string + ' \n ' + _('uv-light') + ' ' + _('on')
+            log_string = log_string + ' \n ' + _('uv-light') + ' ' + _('on')
     else:
         status_uv = 0
         if status_uv != current_values[pi_ager_names.status_uv_key]:
             changed = True
             log_string_html = log_string_html + ' \n ' + '<span style="color: red;">' + _('uv-light') + ' ' + _('off') + '</span>'
+            log_string = log_string + ' \n*' + _('uv-light') + ' ' + _('off')
         else:
             log_string_html = log_string_html + ' \n ' + _('uv-light') + ' ' + _('off')            
-        log_string = log_string + ' \n ' + _('uv-light') + ' ' + _('off')
+            log_string = log_string + ' \n ' + _('uv-light') + ' ' + _('off')
 
     return changed, log_string, log_string_html
 
