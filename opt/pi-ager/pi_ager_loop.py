@@ -380,9 +380,20 @@ def switch_light(relay_state):
     """
     setting gpio for light
     """
-    if not globals.hands_off_light_switch:
+    if not globals.hands_off_light_switch and globals.switch_control_light == 0:
         set_gpio_value(pi_ager_gpio_config.gpio_light, relay_state)
-
+        
+def switch_uv_light(relay_state):
+    """
+    setting gpio for uv_light
+    """
+    if globals.switch_control_light == 0:
+        set_gpio_value(pi_ager_gpio_config.gpio_uv, relay_state)
+        
+def get_global_switch_setting():
+    globals.switch_control_light = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_control_light_key))
+    globals.switch_control_uv_light = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_control_uv_light_key))
+    
 def status_light_in_current_values_is_on():
     """
     check for light current value
@@ -632,10 +643,10 @@ def generate_ups_bat_events():
         # generate event
         ups_bat_low = False
         try:
-            cl_fact_logger.get_instance().info('UPS battery is low')
+            cl_fact_logger.get_instance().info(_('UPS battery is low'))
             cl_fact_logic_messenger().get_instance().handle_event('ups_bat_low') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
             if shutdown_on_batlow == 1:
-                cl_fact_logger.get_instance().info('Shutdown Pi-Ager now')
+                cl_fact_logger.get_instance().info(_('Shutdown Pi-Ager now'))
                 # do_system_shutdown()
                 os.system("shutdown -h now")
         except Exception as cx_error:
@@ -646,7 +657,7 @@ def generate_ups_bat_events():
         # generate event
         ups_bat_low = True
         try:
-            cl_fact_logger.get_instance().info('UPS battery is ok')
+            cl_fact_logger.get_instance().info(_('UPS battery is ok'))
             cl_fact_logic_messenger().get_instance().handle_event('ups_bat_ok') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
         except Exception as cx_error:
             exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
@@ -660,7 +671,7 @@ def generate_power_monitor_events():
     if power_monitor == True and power_monitor_temp == False:
         # generate event
         try:
-            cl_fact_logger.get_instance().info('Power monitor signals powerfail')
+            cl_fact_logger.get_instance().info(_('Power monitor signals powerfail'))
             cl_fact_logic_messenger().get_instance().handle_event('powerfail') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
         except Exception as cx_error:
             exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
@@ -669,7 +680,7 @@ def generate_power_monitor_events():
     if power_monitor == False and power_monitor_temp == True:
         # generate event
         try:
-            cl_fact_logger.get_instance().info('Power monitor signals powergood')
+            cl_fact_logger.get_instance().info(_('Power monitor signals powergood'))
             cl_fact_logic_messenger().get_instance().handle_event('powergood')  #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
             # cl_fact_nextion.get_instance().reset_page_after_powergood()         #activate last current page
         except Exception as cx_error:
@@ -686,7 +697,7 @@ def generate_switch_event():
     if pi_switch == True and pi_switch_temp == False:
         # generate event
         try:
-            cl_fact_logger.get_instance().info('Switch is shorted to GND')
+            cl_fact_logger.get_instance().info(_('Switch is shorted to GND'))
             cl_fact_logic_messenger().get_instance().handle_event('switch_on') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
         except Exception as cx_error:
             exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
@@ -695,7 +706,7 @@ def generate_switch_event():
     if pi_switch == False and pi_switch_temp == True:
         # generate event
         try:
-            cl_fact_logger.get_instance().info('Switch is open')
+            cl_fact_logger.get_instance().info(_('Switch is open'))
             cl_fact_logic_messenger().get_instance().handle_event('switch_off') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
         except Exception as cx_error:
             exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
@@ -977,8 +988,10 @@ def doMainLoop():
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
             # update logging levels if changed by FE
             cl_fact_logger.get_instance().update_logger_loglevels()
-            
+
     #Settings
+            # global switch control for light and uv light
+            get_global_switch_setting()
             # Meat temperature sensors
             temp_sensor_type_index1 = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.meat1_sensortype_key)
             temp_sensor_type_index2 = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.meat2_sensortype_key)
@@ -994,11 +1007,6 @@ def doMainLoop():
             temp_sensor2_data = get_temp_sensor_data(sensor2_parameter, 1)
             temp_sensor3_data = get_temp_sensor_data(sensor3_parameter, 2)
             temp_sensor4_data = get_temp_sensor_data(sensor4_parameter, 3)
-            
-            # if (temp_sensor1_data == None):
-            #     cl_fact_logger.get_instance().debug("Meat sensor1 not attached")
-            # else:
-            #     cl_fact_logger.get_instance().debug("Meat sensor1 temperature = " + str(temp_sensor1_data))
                 
             #Sensor
             sht_exception_count = 0
@@ -1484,10 +1492,12 @@ def doMainLoop():
                 
                 # Schalten des UV_Licht
                 if status_uv == True and pi_ager_database.get_status_uv_manual() == 1:
-                    gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_on)
+                    switch_uv_light(pi_ager_names.relay_on)
+                    # gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_on)
     
                 if status_uv == False or pi_ager_database.get_status_uv_manual() == 0:
-                    gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_off)
+                    switch_uv_light(pi_ager_names.relay_off)
+                    # gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_off)
                 
                 # Schalten des Licht
                 if status_light == True:

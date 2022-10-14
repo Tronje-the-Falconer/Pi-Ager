@@ -308,6 +308,7 @@
                                             </td>
                                         </tr>                                        
                                     </table>
+
                                     <script>
                                         function help_thermometer_blockFunction() {
                                             document.getElementById('help_thermometer').style.display = 'block';
@@ -322,36 +323,95 @@
                                         <button class="art-button" type="button" onclick="help_thermometer_noneFunction()"><?php echo _('close'); ?></button>
                                     </p>
                                     <hr>                                    
-                                        <!----------------------------------------------------------------------------------------Language-->
-                                        <table style="width: 100%;" class="miniature_writing">
-                                            <tr>
-                                                <td class="td_png_icon"><h3><?php echo _('language'); ?></h3><img src="images/icons/language_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_language_blockFunction()"><?php echo _('help'); ?></button>
-                                                </td>
-                                                <td style=" text-align: left; padding-left: 20px;">
-                                                    <input type="radio" name="language_admin" value="1" <?php echo $checked_language_1; ?>/><label> de_DE</label><br>
-                                                    <input type="radio" name="language_admin" value="2" <?php echo $checked_language_2; ?>/><label> en_GB</label><br>
-                                                    <br>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <script>
-                                            function help_language_blockFunction() {
-                                                document.getElementById('help_language').style.display = 'block';
-                                            }
-                                            function help_language_noneFunction() {
-                                                document.getElementById('help_language').style.display = 'none';
-                                            }
-                                        </script>
-                                        <p id="help_language" class="help_p">
-                                            <?php echo _('helptext_language_admin');
-                                                  echo '<br><br>'; ?>
-                                            <button class="art-button" type="button" onclick="help_language_noneFunction()"><?php echo _('close'); ?></button>
-                                        </p>
-                                        <table style="width: 100%; align: center;">
-                                            <tr>
-                                                <td rowspan=3><button class="art-button" name="admin_form_submit" type="submit" value="admin_form_submit" onclick="return confirm('<?php echo _('save'); echo ' '; echo _('administration 1'); ?>?')"><?php echo _('save'); ?></button></td>
-                                            </tr>
-                                        </table>
+                                    <!----------------------------------------------------------------------------------------Language-->
+                                    <table style="width: 100%;" class="miniature_writing">
+                                        <tr>
+                                            <td class="td_png_icon"><h3><?php echo _('language'); ?></h3><img src="images/icons/language_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_language_blockFunction()"><?php echo _('help'); ?></button>
+                                            </td>
+                                            <td style=" text-align: left; padding-left: 20px;">
+                                                <input type="radio" name="language_admin" value="1" <?php echo $checked_language_1; ?>/><label> de_DE</label><br>
+                                                <input type="radio" name="language_admin" value="2" <?php echo $checked_language_2; ?>/><label> en_GB</label><br>
+                                                <br>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <script>
+                                        function help_language_blockFunction() {
+                                            document.getElementById('help_language').style.display = 'block';
+                                        }
+                                        function help_language_noneFunction() {
+                                            document.getElementById('help_language').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_language" class="help_p">
+                                        <?php echo _('helptext_language_admin');
+                                              echo '<br><br>'; ?>
+                                        <button class="art-button" type="button" onclick="help_language_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p>
+                                    <hr>
+                                    <!-----------------------------------------------------------switch control-->
+                                    <table style="width: 100%;" class="miniature_writing">
+                                        <tr>
+                                             <td rowspan="6" class="td_png_icon"><h3><?php echo _('switch control'); ?></h3><img src="images/icons/switch_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_switch_blockFunction()"><?php echo _('help'); ?></button></td>
+                                        </tr>
+                                        <tr><td>&nbsp;</td></tr>
+                                        <tr>
+                                            <td class="text_left_padding"><?php echo _('UV Light'); ?>:</td>
+                                            <td class="text_left_padding">
+                                                <select name="switch_UV_light_admin" style="width: 150px;">
+                                                    <?php
+                                                        $mode_names_uv = array(_('not active'), _('turn on UV light'), _('turn off UV light'));
+                                                        for ($i = 0; $i < 3; $i++) {
+                                                            if ($i == $switch_control_uv_light) {
+                                                                echo '<option value="' . $i . '" selected>' . $mode_names_uv[$i] . '</option>';
+                                                            }
+                                                            else {
+                                                                echo '<option value="' . $i . '">' . $mode_names_uv[$i] . '</option>';
+                                                            }
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </td>
+                                        </tr>                                       
+                                         <tr>
+                                            <td class="text_left_padding"><?php echo _('Light'); ?>:</td>
+                                            <td class="text_left_padding">
+                                                <select name="switch_light_admin" style="width: 150px;">
+                                                    <?php
+                                                        $mode_names = array(_('not active'), _('turn on light'), _('turn off light'));
+                                                        for ($i = 0; $i < 3; $i++) {
+                                                            if ($i == $switch_control_light) {
+                                                                echo '<option value="' . $i . '" selected>' . $mode_names[$i] . '</option>';
+                                                            }
+                                                            else {
+                                                                echo '<option value="' . $i . '">' . $mode_names[$i] . '</option>';
+                                                            }
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr><td>&nbsp;</td></tr>
+                                    </table>
+                                    <script>
+                                        function help_switch_blockFunction() {
+                                            document.getElementById('help_switch').style.display = 'block';
+                                        }
+                                        function help_switch_noneFunction() {
+                                            document.getElementById('help_switch').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_switch" class="help_p">
+                                        <?php echo _('helptext_switch_admin');
+                                              echo '<br><br>'; ?>
+                                        <button class="art-button" type="button" onclick="help_switch_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p>
+                                    <!-------------------submit button -->    
+                                    <table style="width: 100%; align: center;">
+                                        <tr>
+                                            <td rowspan=3><button class="art-button" name="admin_form_submit" type="submit" value="admin_form_submit" onclick="return confirm('<?php echo _('save'); echo ' '; echo _('administration 1'); ?>?')"><?php echo _('save'); ?></button></td>
+                                        </tr>
+                                    </table>
                                     </div>
                                 </form>
                                 <hr>

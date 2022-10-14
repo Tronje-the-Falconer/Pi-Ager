@@ -51,6 +51,8 @@
     $meat4_sensortype = get_table_value($config_settings_table, $meat4_sensortype_key);   
     
     $mi_mac_last3bytes = get_table_value_from_field($atc_mi_thermometer_mac_table, NULL, $mi_mac_last3bytes_key);
+    $switch_control_uv_light = intval(get_table_value($config_settings_table, $switch_control_uv_light_key));
+    $switch_control_light = intval(get_table_value($config_settings_table, $switch_control_light_key));
     
     if ($sensortype == 1) {
         $sensorname = 'DHT11';

@@ -75,6 +75,9 @@ second_sensor_humidity_key = 'sensor_extern_humidity'
 second_sensor_dewpoint_key = 'sensor_extern_dewpoint'
 second_sensor_humidity_abs_key = 'sensor_extern_humidity_abs'
 
+switch_control_uv_light_key = 'switch_control_uv_light'
+switch_control_light_key = 'switch_control_light'
+
 status_pi_ager_key = 'status_piager'
 status_agingtable_key = 'status_agingtable'
 status_heater_key = 'status_heater'

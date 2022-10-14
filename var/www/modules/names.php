@@ -152,6 +152,8 @@ $humidity_check_hysteresis_key = 'humidity_check_hysteresis';
 $mi_data_key = 'mi_data';
 $mi_mac_last3bytes_key = 'mi_mac_last3bytes';
 $MiSensor_battery_key = 'MiSensor_battery';
+$switch_control_uv_light_key = 'switch_control_uv_light';
+$switch_control_light_key = 'switch_control_light';
 
 #-----------------------------table fields;
 $key_field = 'key';

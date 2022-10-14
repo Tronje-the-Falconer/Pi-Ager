@@ -968,11 +968,11 @@
     
     function write_admin($language, $referenceunit_scale1, $measuring_interval_scale1, $measuring_duration_scale1, $saving_period_scale1, $samples_scale1, $spikes_scale1, $offset_scale1,
                             $referenceunit_scale2, $measuring_interval_scale2, $measuring_duration_scale2, $saving_period_scale2, $samples_scale2, $spikes_scale2, $offset_scale2,
-                            $temp_sensor1, $temp_sensor2, $temp_sensor3, $temp_sensor4)
+                            $temp_sensor1, $temp_sensor2, $temp_sensor3, $temp_sensor4, $switch_control_uv_light_admin, $switch_control_light_admin)
     {
         global $value_field, $last_change_field, $key_field, $config_settings_table, $settings_scale1_table, $settings_scale2_table, $sensortype_key, $language_key;
         global $referenceunit_key, $scale_measuring_interval_key, $measuring_duration_key, $saving_period_key, $samples_key, $spikes_key, $offset_key;
-        global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key;
+        global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key, $switch_control_uv_light_key, $switch_control_light_key;
         
         open_connection();
         
@@ -983,6 +983,8 @@
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($temp_sensor2) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $meat2_sensortype_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($temp_sensor3) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $meat3_sensortype_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($temp_sensor4) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $meat4_sensortype_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($switch_control_uv_light_admin) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $switch_control_uv_light_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($switch_control_light_admin) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $switch_control_light_key . '"');
    
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($referenceunit_scale1) . ' WHERE ' . $key_field . ' = "' . $referenceunit_key . '"');
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($measuring_interval_scale1) . ' WHERE ' . $key_field . ' = "' . $scale_measuring_interval_key . '"');
