@@ -2,6 +2,8 @@
 """
     thread for switch control
 """
+import pi_ager_gpio_config
+import RPi.GPIO as gpio
 from abc import ABC
 import time
 import globals
@@ -10,9 +12,12 @@ if __name__ == '__main__':
     # import globals
     # init global threading.lock
     globals.init()
+    gpio.setwarnings(False)
+    gpio.setmode(pi_ager_gpio_config.board_mode)
+    gpio.setup(pi_ager_gpio_config.gpio_uv, gpio.OUT )   
+    gpio.setup(pi_ager_gpio_config.gpio_light, gpio.OUT )          
+    gpio.setup(pi_ager_gpio_config.gpio_switch, gpio.IN )   # manueller Schalter setzen
 
-import pi_ager_gpio_config
-import RPi.GPIO as gpio
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from main.pi_ager_cl_logger import cl_fact_logger
 import threading
@@ -22,11 +27,6 @@ class cl_switch_control_thread(threading.Thread):
     def __init__(self):
         super().__init__() 
         self.stop_received = False
-        gpio.setwarnings(False)
-        gpio.setmode(pi_ager_gpio_config.board_mode)
-        gpio.setup(pi_ager_gpio_config.gpio_uv, gpio.OUT )   
-        gpio.setup(pi_ager_gpio_config.gpio_light, gpio.OUT )          
-        gpio.setup(pi_ager_gpio_config.gpio_switch, gpio.IN )   # manueller Schalter setzen
         
     def run(self):
         try:

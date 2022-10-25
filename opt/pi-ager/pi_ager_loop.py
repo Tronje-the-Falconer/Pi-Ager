@@ -387,7 +387,7 @@ def switch_uv_light(relay_state):
     """
     setting gpio for uv_light
     """
-    if globals.switch_control_light == 0:
+    if globals.switch_control_uv_light == 0:
         set_gpio_value(pi_ager_gpio_config.gpio_uv, relay_state)
         
 def get_global_switch_setting():
