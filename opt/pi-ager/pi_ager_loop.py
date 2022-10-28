@@ -380,15 +380,17 @@ def switch_light(relay_state):
     """
     setting gpio for light
     """
-    if not globals.hands_off_light_switch and globals.switch_control_light == 0:
-        set_gpio_value(pi_ager_gpio_config.gpio_light, relay_state)
+    if not globals.hands_off_light_switch:
+        #set_gpio_value(pi_ager_gpio_config.gpio_light, relay_state)
+        globals.requested_state_light = relay_state
         
 def switch_uv_light(relay_state):
     """
     setting gpio for uv_light
     """
-    if globals.switch_control_uv_light == 0:
-        set_gpio_value(pi_ager_gpio_config.gpio_uv, relay_state)
+    # if globals.switch_control_uv_light == 0:
+        # set_gpio_value(pi_ager_gpio_config.gpio_uv, relay_state)
+    globals.requested_state_uv_light = relay_state
         
 def get_global_switch_setting():
     globals.switch_control_light = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_control_light_key))
@@ -984,7 +986,7 @@ def doMainLoop():
     try:
         while status_pi_ager == 1 and not system_shutdown:
             #Here check Deviation of measurement
-            check_and_set_light()
+            # check_and_set_light()
             status_pi_ager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key)
             # update logging levels if changed by FE
             cl_fact_logger.get_instance().update_logger_loglevels()
@@ -1494,16 +1496,15 @@ def doMainLoop():
                 if status_uv == True and pi_ager_database.get_status_uv_manual() == 1:
                     switch_uv_light(pi_ager_names.relay_on)
                     # gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_on)
-    
-                if status_uv == False or pi_ager_database.get_status_uv_manual() == 0:
+                else:   #if status_uv == False or pi_ager_database.get_status_uv_manual() == 0:
                     switch_uv_light(pi_ager_names.relay_off)
                     # gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_off)
                 
                 # Schalten des Licht
-                if status_light == True:
+                if status_light == True or pi_ager_database.get_status_light_manual() == 1:
                     switch_light(pi_ager_names.relay_on)
                     # gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_on)
-                if status_light == False and pi_ager_database.get_status_light_manual() == 0:
+                else:   #if status_light == False:   #  and pi_ager_database.get_status_light_manual() == 0:
                     switch_light(pi_ager_names.relay_off)
                     # gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_off)
                 

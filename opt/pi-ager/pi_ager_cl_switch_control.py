@@ -2,6 +2,7 @@
 """
     thread for switch control
 """
+import pi_ager_names
 import pi_ager_gpio_config
 import RPi.GPIO as gpio
 from abc import ABC
@@ -42,29 +43,39 @@ class cl_switch_control_thread(threading.Thread):
             
     def do_swich_control_loop(self):
         while not self.stop_received and threading.main_thread().is_alive():
+            # copy states from global to local to avoid race conditions
             current_switch_state = gpio.input(pi_ager_gpio_config.gpio_switch)
-            if (globals.switch_control_uv_light == 1):   # turn on uv light when switch is active (closed)
-                if (current_switch_state == False):
-                    gpio.output(pi_ager_gpio_config.gpio_uv, 1)
+            switch_control_uv_light = globals.switch_control_uv_light
+            switch_control_light = globals.switch_control_light
+            requested_state_uv_light = globals.requested_state_uv_light
+            requested_state_light = globals.requested_state_light
+            
+            if switch_control_uv_light == 0:    # requested state is output state
+                gpio.output(pi_ager_gpio_config.gpio_uv, requested_state_uv_light)
+            elif switch_control_uv_light == 1:    # turn off UV light when switch is open else output requested state
+                if current_switch_state == True:    # switch open
+                    gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_off)
                 else:
-                    gpio.output(pi_ager_gpio_config.gpio_uv, 0)
-            if (globals.switch_control_uv_light == 2):   # turn on uv light when switch is active (open)
-                if (current_switch_state == False):
-                    gpio.output(pi_ager_gpio_config.gpio_uv, 0)
+                    gpio.output(pi_ager_gpio_config.gpio_uv, requested_state_uv_light)
+            elif switch_control_uv_light == 2:    # turn off UV light when switch is closed else output requested state
+                if current_switch_state == False:    # switch closed
+                    gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_off)
                 else:
-                    gpio.output(pi_ager_gpio_config.gpio_uv, 1)
-                    
-            if (globals.switch_control_light == 1):   # turn on light when switch is active (closed)
-                if (current_switch_state == False):
-                    gpio.output(pi_ager_gpio_config.gpio_light, 1)
+                    gpio.output(pi_ager_gpio_config.gpio_uv, requested_state_uv_light)
+
+            if switch_control_light == 0:    # requested state is output state
+                gpio.output(pi_ager_gpio_config.gpio_light, requested_state_light)
+            elif switch_control_light == 1:    # turn on light when switch is open else output requested state
+                if current_switch_state == True:    # switch open
+                    gpio.output(pi_ager_gpio_config.gpio_light, pi_ager_names.relay_on)
                 else:
-                    gpio.output(pi_ager_gpio_config.gpio_light, 0)
-            if (globals.switch_control_light == 2):   # turn on light when switch is active (open)
-                if (current_switch_state == False):
-                    gpio.output(pi_ager_gpio_config.gpio_light, 0)
+                    gpio.output(pi_ager_gpio_config.gpio_light, requested_state_light)
+            elif switch_control_light == 2:    # turn on light when switch is closed else output requested state
+                if current_switch_state == False:    # switch closed
+                    gpio.output(pi_ager_gpio_config.gpio_light, pi_ager_names.relay_on)
                 else:
-                    gpio.output(pi_ager_gpio_config.gpio_light, 1)
-                    
+                    gpio.output(pi_ager_gpio_config.gpio_light, requested_state_light)
+
             time.sleep(0.4)
 
 class cl_fact_switch_control(ABC):

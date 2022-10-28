@@ -358,9 +358,9 @@
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('UV Light'); ?>:</td>
                                             <td class="text_left_padding">
-                                                <select name="switch_UV_light_admin" style="width: 150px;">
+                                                <select name="switch_UV_light_admin" style="width: 280px;">
                                                     <?php
-                                                        $mode_names_uv = array(_('not active'), _('turn on UV light'), _('turn off UV light'));
+                                                        $mode_names_uv = array(_('not active'), _('turn off if switch is open'), _('turn off if switch is closed'));
                                                         for ($i = 0; $i < 3; $i++) {
                                                             if ($i == $switch_control_uv_light) {
                                                                 echo '<option value="' . $i . '" selected>' . $mode_names_uv[$i] . '</option>';
@@ -376,9 +376,9 @@
                                          <tr>
                                             <td class="text_left_padding"><?php echo _('Light'); ?>:</td>
                                             <td class="text_left_padding">
-                                                <select name="switch_light_admin" style="width: 150px;">
+                                                <select name="switch_light_admin" style="width: 280px;">
                                                     <?php
-                                                        $mode_names = array(_('not active'), _('turn on light'), _('turn off light'));
+                                                        $mode_names = array(_('not active'), _('turn on if switch is open'), _('turn on if switch is closed'));
                                                         for ($i = 0; $i < 3; $i++) {
                                                             if ($i == $switch_control_light) {
                                                                 echo '<option value="' . $i . '" selected>' . $mode_names[$i] . '</option>';

@@ -85,7 +85,8 @@ class cl_nextion( threading.Thread ):
     
     async def turn_off_light(self):
         cl_fact_logger.get_instance().debug('Light turn off timeout')
-        gpio.output(pi_ager_gpio_config.gpio_light, True)
+        # gpio.output(pi_ager_gpio_config.gpio_light, True)
+        globals.requested_state_light = pi_ager_names.relay_off
         globals.hands_off_light_switch = False
         self.light_status = False       # turn off
         # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 0)
@@ -104,7 +105,8 @@ class cl_nextion( threading.Thread ):
             else:
                 await self.client.set('btn_light.pic', 39)
             self.light_timer.cancel()                
-            gpio.output(pi_ager_gpio_config.gpio_light, True)
+            # gpio.output(pi_ager_gpio_config.gpio_light, True)
+            globals.requested_state_light = pi_ager_names.relay_off
             globals.hands_off_light_switch = False
             # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 0)
             
@@ -115,8 +117,9 @@ class cl_nextion( threading.Thread ):
             else:
                 await self.client.set('btn_light.pic', 41)
             self.light_timer.start()
-            globals.hands_off_light_switch = True   
-            gpio.output(pi_ager_gpio_config.gpio_light, False)
+            globals.hands_off_light_switch = True 
+            globals.requested_state_light = pi_ager_names.relay_on
+            # gpio.output(pi_ager_gpio_config.gpio_light, False)
             # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 1)
     
     async def control_piager_start_stop(self):  # start/stop pi-ager
