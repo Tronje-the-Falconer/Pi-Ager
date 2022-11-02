@@ -56,8 +56,10 @@ class cl_nextion( threading.Thread ):
         
         self.client = None
         self.waiter_task = None
+        self.wakeup_task = None
         self.stop_event = None
         self.button_event = None
+        self.wakeup_event = None
         self.reconnect_event = None
         # self.original_sigint_handler = signal.getsignal(signal.SIGINT)
         self.data = None
@@ -79,12 +81,28 @@ class cl_nextion( threading.Thread ):
             self.type_ = type_
             self.current_page_id = data.page_id
             self.loop.call_soon_threadsafe(self.button_event.set)
-            
-        # self.button_event.set()
-        cl_fact_logger.get_instance().debug('Event %s data: %s', type_, str(data))
-    
+        elif type_ == EventType.AUTO_WAKE:
+            cl_fact_logger.get_instance().debug('nextion event handler found AUTO_WAKE')
+            self.loop.call_soon_threadsafe(self.wakeup_event.set)
+        else:    
+            cl_fact_logger.get_instance().debug('Event %s data: %s', type_, str(data))
+        
+    async def update_light_val(self):
+        if self.light_status == False:      # turn off
+            await self.client.set('values.status_light.val', 0)
+            if self.current_theme == 'fridge':
+                await self.client.set('btn_light.pic', 12) 
+            else:
+                await self.client.set('btn_light.pic', 39)
+        else:
+            await self.client.set('values.status_light.val', 1)
+            if self.current_theme == 'fridge':
+                await self.client.set('btn_light.pic', 13)
+            else:
+                await self.client.set('btn_light.pic', 41) 
+                
     async def turn_off_light(self):
-        cl_fact_logger.get_instance().debug('Light turn off timeout')
+        cl_fact_logger.get_instance().info('Light turned off after 10 minutes timeout')
         # gpio.output(pi_ager_gpio_config.gpio_light, True)
         globals.requested_state_light = pi_ager_names.relay_off
         globals.hands_off_light_switch = False
@@ -99,6 +117,7 @@ class cl_nextion( threading.Thread ):
     async def control_light_status(self):
         #light_status = await self.client.get('values.status_light.val')  
         if self.light_status == True:
+            cl_fact_logger.get_instance().info('Light turned off')
             self.light_status = False       # turn off
             if self.current_theme == 'fridge':
                 await self.client.set('btn_light.pic', 12) 
@@ -108,9 +127,11 @@ class cl_nextion( threading.Thread ):
             # gpio.output(pi_ager_gpio_config.gpio_light, True)
             globals.requested_state_light = pi_ager_names.relay_off
             globals.hands_off_light_switch = False
+            await self.client.set('values.status_light.val', 0) 
             # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 0)
             
         else:
+            cl_fact_logger.get_instance().info('Light turned on')
             self.light_status = True       # turn on
             if self.current_theme == 'fridge':
                 await self.client.set('btn_light.pic', 13)
@@ -119,6 +140,7 @@ class cl_nextion( threading.Thread ):
             self.light_timer.start()
             globals.hands_off_light_switch = True 
             globals.requested_state_light = pi_ager_names.relay_on
+            await self.client.set('values.status_light.val', 1)
             # gpio.output(pi_ager_gpio_config.gpio_light, False)
             # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 1)
     
@@ -169,8 +191,20 @@ class cl_nextion( threading.Thread ):
         pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key, temp_soll)    
         pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key, hum_soll)    
         pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.modus_key, modus)    
+
+    async def wakeup_waiter(self, event):   # process touch screen wakeup event
+        try:
+            while True:
+                await self.wakeup_event.wait()
+                cl_fact_logger.get_instance().debug('wakeup_waiter: wakeup event happened')
+                await self.update_light_val()
+                self.wakeup_event.clear()
+                cl_fact_logger.get_instance().debug('wakeup event processed')
+        except Exception as e:
+            cl_fact_logger.get_instance().error('wakeup_waiter stopped ' + str(e))
+            pass
             
-    async def button_waiter(self, event):
+    async def button_waiter(self, event):   # process touch screen button events
         try:
             while True:
 #                print('waiting for button pressed ...')
@@ -647,6 +681,7 @@ class cl_nextion( threading.Thread ):
         
     async def run_client(self):
         self.button_event = asyncio.Event()
+        self.wakeup_event = asyncio.Event()
         self.stop_event = asyncio.Event()
         self.reconnect_event = asyncio.Event()
         # self.waiter_task = asyncio.create_task(self.button_waiter(self.button_event))
@@ -658,7 +693,8 @@ class cl_nextion( threading.Thread ):
             await self.client.connect()
 #            cl_fact_logger.get_instance().info('client connected')
             cl_fact_logger.get_instance().info(_('Nextion client connected'))
-            self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))                                                                                              
+            self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))
+            self.wakeup_task = self.loop.create_task(self.wakeup_waiter(self.wakeup_event))            
         except Exception as e:
             cl_fact_logger.get_instance().error('run_client exception1: ' + str(e))
             cl_fact_logger.get_instance().error('Could not connect to Nextion client. Possible HDMI display not connected')
@@ -672,14 +708,8 @@ class cl_nextion( threading.Thread ):
         await self.init_display_values()
 
         while not self.stop_event.is_set():
-            # test what happens, when object is not in page
-            #try:
-            #    await self.client.set('txt_temp.txt', "%.1f" % (random.randint(0, 1000) / 10))
-            #except Exception as e:
-            #    cl_fact_logger.get_instance().error(str(e))
-            #    pass
-            # cl_fact_logger.get_instance().debug('Client running')
             try:
+                # await self.update_light_val()   # update status in nextion values, needed when display was turned off caused by light timeout
                 if self.current_page_id == 1:
                     await self.process_page1()
                 elif self.current_page_id == 3:
@@ -701,15 +731,7 @@ class cl_nextion( threading.Thread ):
                     
             except Exception as e:
                 cl_fact_logger.get_instance().debug('run_client exception2: ' + str(e))
-            #    cl_fact_logger.get_instance().debug('run_client exception2')
-            # await self.client.set('values.temp_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
-            # await self.client.set('values.humidity_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
-            # await self.client.set('values.dewpoint_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
-            # await self.client.set('values.temp_set.txt', "%.1f" % (random.randint(0, 1000) / 10))
-            # await self.client.set('values.humidity_set.txt', "%.1f" % (random.randint(0, 1000) / 10))
-            # await self.client.set('values.dewpoint_set.txt', "%.1f" % (random.randint(0, 1000) / 10))
-            # await self.client.set('values.status_uv.val', 1)
-            # await self.client.command('page dp')
+
             if self.reconnect_event.is_set():
                 await self.client.reconnect()
                 self.reconnect_event.clear()
