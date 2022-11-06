@@ -208,7 +208,7 @@ echo "check if PiShrink exists."
 echo "Checking..."
 online_md5="$(curl -sL https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh | md5sum | cut -d ' ' -f 1)"
 local_md5="$(md5sum "/usr/local/bin/pishrink.sh" | cut -d ' ' -f 1)"
-if [[ "$online_md5" == "$local_md5" ]]; 
+if [[ "$online_md5" == "$local_md5" ]] 
 	then
     	echo "PiShrink is the latest version!"
     else
@@ -244,15 +244,17 @@ umount $NFSMOUNT
 # NFS-Volume mounten
 echo "mount NFS-Volume. Map $NFSVOL to $NFSMOUNT"
 
-if [ -z $NFSOPT ]
+if [ -n "$NFSOPT" ]
 	then
+        echo "mount with options: $NFSOPT"
 		mount -t nfs4 $NFSVOL $NFSMOUNT -o $NFSOPT
         mountstatus=$?
  	else
+        echo "mount w/o options"
  		mount -t nfs4 $NFSVOL $NFSMOUNT
         mountstatus=$?
 fi
-
+# exit 1
 if [ $mountstatus -ne 0 ]; then
   echo "Error $mountstatus during mount NFS Volume $NFSVOL. Backup stopped."
   exit 1
@@ -263,7 +265,7 @@ fi
 # Prüfen, ob das Zielverzeichnis existiert
 # echo "check if target directory $DIR exists on the nfs Server."
 # sleep 2
-# if [ ! -d "$DIR" ];
+# if [ ! -d "$DIR" ]
 #	then
 #        echo "target directory $DIR does not exist. Please create this directory. Backup stopped."
 #        umount $NFSMOUNT
@@ -314,6 +316,9 @@ if [[ "$ACCESS" == "no" ]]; then
     else
       echo "$u can write into $DIR mapped to $NFSVOL, Backup continues."
 fi
+
+#  umount $NFSMOUNT
+#  exit 1
 
 # Stoppe Dienste vor Backup
 # echo "Stop Pi-Ager Main service!"

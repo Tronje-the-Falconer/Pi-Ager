@@ -167,11 +167,13 @@ umount $NFSMOUNT
 # NFS-Volume mounten
 echo "hänge NFS-Volume $NFSVOL ein"
 
-if [ -z $NFSOPT ]
+if [ -n "$NFSOPT" ]
 	then
+        echo "mount with options: $NFSOPT"
 		mount -t nfs4 $NFSVOL $NFSMOUNT -o $NFSOPT
         mountstatus=$?
  	else
+        echo "mount w/o options"
  		mount -t nfs4 $NFSVOL $NFSMOUNT
         mountstatus=$?
 fi
@@ -195,7 +197,7 @@ fi
 #        echo "Backupverzeichnis existiert = ${BACKUP_PFAD}"
 # fi
     
-if [ "$last_backup" = true ]; 
+if [ "$last_backup" = true ] 
 	then
 	echo "Load last backup file."
 	echo "Backup path is  ${BACKUP_PFAD}"
@@ -218,7 +220,7 @@ echo "Source File = $source_file"
 echo "do_copy     = $do_copy"
 echo "my_image    = $my_image"
 
-if [ "$do_copy" = true ]; 
+if [ "$do_copy" = true ] 
 	then
 		img_old="$source_file"
         new_image="PiAger_image.img"
@@ -582,7 +584,7 @@ losetup -d ${loopback}
 
 rm -rf $mountdir/boot
 rm -rf $mountdir
-if [[ ! -f "$img" ]];
+if [[ ! -f "$img" ]]
     then
         echo "cannot shrink $img"
     else
