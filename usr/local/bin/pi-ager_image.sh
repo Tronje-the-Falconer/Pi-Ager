@@ -260,7 +260,7 @@ echo "mount directory is ${mountdir}"
 mount ${loopback} ${mountdir}
 #read -p "Press enter to continue after mounting $loopback to $mountdir"
 
-mount -t msdos "$loopback_boot" "$mountdir/boot"
+mount -t vfat -o shortname=winnt "$loopback_boot" "$mountdir/boot"
 #read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
 #echo "Copy $mountdir/boot.bak/ to $mountdir/boot/"
 #rsync -a --info=progress2 "$mountdir/boot.bak/" "$mountdir/boot/"
@@ -383,8 +383,10 @@ raspi-config nonint do_hostname rpi-Pi-Ager
 ######################################################
 # rewrite /boot/setup.txt, remove /boot/setup.log
 ######################################################
-#mv /root/setup.txt /boot/setup.txt
+rm /boot/setup.txt
 rm /boot/setup.log
+wget -O setup.txt -nv https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/entwicklung/boot/setup.txt
+mv /setup.txt /boot/setup.txt
 
 ######################################################
 #Force password change for user root
