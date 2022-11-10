@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-DE\n"
-"POT-Creation-Date: 2022-10-28 10:18+0200\n"
-"PO-Revision-Date: 2022-10-28 11:02+0200\n"
+"POT-Creation-Date: 2022-11-10 16:13+0100\n"
+"PO-Revision-Date: 2022-11-10 16:18+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -249,11 +249,11 @@ msgstr "neue Werte für Zyklus"
 msgid "in agingtable duration_sleep-loop. duration_sleep left"
 msgstr "Restzeit im laufenden Zyklus"
 
-#: opt/pi-ager/pi_ager_cl_nextion.py:656
+#: opt/pi-ager/pi_ager_cl_nextion.py:691
 msgid "Client instance generated"
 msgstr "Clientinstanz generiert"
 
-#: opt/pi-ager/pi_ager_cl_nextion.py:660
+#: opt/pi-ager/pi_ager_cl_nextion.py:695
 msgid "Nextion client connected"
 msgstr "Nextion Client verbunden"
 
@@ -637,8 +637,11 @@ msgid "help"
 msgstr "Hilfe"
 
 #: var/www/admin.php:89
-msgid "Enter last 3 bytes of device address"
-msgstr "Geben Sie die letzten 3 Bytes der Geräteadresse ein"
+msgid ""
+"Enter last 3 bytes of device address separated by colons, e.g.: 26:44:d2"
+msgstr ""
+"Geben Sie die letzten 3 Bytes der Geräteadresse durch Doppelpunkte getrennt "
+"ein, z. B.: 26:44:d2"
 
 #: var/www/admin.php:102
 msgid "helptext_sensortype_admin"
@@ -683,9 +686,13 @@ msgstr ""
 "die Original-Firmware) auswählen\n"
 "<br>Drücken Sie \"Start Flashing\".\n"
 "<br>\n"
-"<b>Achtung:</b> Notieren Sie sich nach dem Flashen die 6-Byte-Geräte-MAC-"
-"Adresse des MiThermometers. Die letzten 3 Bytes müssen in die Admin-Seite "
-"des pi-ager eingefügt werden.\n"
+"<b>Achtung:</b> Notieren Sie sich nach dem Flashen die letzten 3 Bytes der 6-"
+"Byte-Geräte-MAC-Adresse des MiThermometers. Die ersten drei Bytes sind immer "
+"gleich (A4:C1:38) und werden daher nicht angezeigt. Außerdem enthält der BLE-"
+"Name die letzten drei Bytes der MAC-Adresse. Die letzten 3 Bytes müssen in "
+"die Admin-Seite des pi-ager getrennt durch Doppelpunkte eingefügt werden, z."
+"B.: c4:c1:34\n"
+"<br><img src=\"./images/icons/telink_connect.jpg\" alt=\"\">\n"
 "<br><br>\n"
 "<b>Achtung: </b>Für den Anschluss der Sensoren müssen immer abgeschirmte "
 "Leitungen z.B. USB Leitungen oder Ethernetleitungen genutzt werden. Die "
@@ -2490,7 +2497,14 @@ msgstr "Einstellungen wurden gespeichert"
 msgid "backup values"
 msgstr "Backup Einstellungen"
 
-#: var/www/modules/write_bus.php:34
+#: var/www/modules/write_bus.php:24
+msgid ""
+"Format error in MAC address last 3 bytes. Format must be e.g.: 2a:53:f9 "
+msgstr ""
+"Format Fehler in den letzten 3 Bytes der MAC Adresse. Das Format muss "
+"folgendermaßen aussehen, z.B.: 2a:53:f9"
+
+#: var/www/modules/write_bus.php:40
 msgid ""
 "Can not combine selected internal and external sensors.\\nExternal sensors "
 "SHT85 or SHT3x can only combined with internal sensors SHT85 or SNT3x,"
@@ -2502,25 +2516,25 @@ msgstr ""
 "wenn I2C-Adressen unterschiedlich sind.\n"
 "Siehe auch Hilfe!"
 
-#: var/www/modules/write_bus.php:42
+#: var/www/modules/write_bus.php:48
 msgid "Change to 1-wire"
 msgstr "Wechsel zu 1-Draht"
 
-#: var/www/modules/write_bus.php:50
+#: var/www/modules/write_bus.php:56
 msgid "Change to I2C"
 msgstr "Wechsel zu I2C"
 
-#: var/www/modules/write_bus.php:58
+#: var/www/modules/write_bus.php:64
 msgid "Sensor type changed"
 msgstr "Sensor Typ geändert"
 
-#: var/www/modules/write_bus.php:64
+#: var/www/modules/write_bus.php:70
 msgid "MiThermometer MAC address changed.\\nSystem reboot needed!"
 msgstr ""
 "Mac-Adresse des MiThermometers geändert.\n"
 "Systemneustart erforderlich!"
 
-#: var/www/modules/write_bus.php:72
+#: var/www/modules/write_bus.php:78
 msgid "Nothing changed"
 msgstr "Keine Änderung der Einstellungen"
 

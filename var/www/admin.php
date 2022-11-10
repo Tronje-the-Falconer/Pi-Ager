@@ -86,7 +86,7 @@
                                             <tr>
                                                 <td></td>
                                                 <td></td>
-                                                <td colspan="2"><label>MiThermometer MAC address a4:c1:38:&nbsp;</label><div class="tooltip"><input type="text" size="8" maxlength="8" placeholder="xx:yy:zz" id="mac_last_3_bytes" name="mac_last_3_bytes" value=<?php echo $mi_mac_last3bytes;?>><span class="tooltiptext"><?php echo _('Enter last 3 bytes of device address');?></span></div></td>
+                                                <td colspan="2"><label>MiThermometer MAC address a4:c1:38:&nbsp;</label><div class="tooltip"><input type="text" size="9" maxlength="8" id="mac_last_3_bytes" name="mac_last_3_bytes" value=<?php echo $mi_mac_last3bytes;?>><span class="tooltiptext"><?php echo _('Enter last 3 bytes of device address separated by colons, e.g.: 26:44:d2');?></span></div></td>
                                             </tr>
                                         </table>
                                         <input name="bus" type="hidden" required value="<?php echo $bus; ?>">

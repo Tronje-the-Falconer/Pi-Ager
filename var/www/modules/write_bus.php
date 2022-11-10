@@ -15,9 +15,15 @@
         $sensornum = $_POST['sensortype_admin'];
         $sensorsecondnum = $_POST['sensorsecondtype_admin'];
         
-        if (isset($_POST['mac_last_3_bytes'])) {
+        if (isset($_POST['mac_last_3_bytes']) && ($sensorsecondnum == 6)) {
             # echo 'in mac address set <br>';
             $mac_last_3_bytes = $_POST['mac_last_3_bytes'];
+            $mac_pattern = "/^[0-9a-f]{2}:[0-9a-f]{2}:[0-9a-f]{2}$/i";
+            $match = preg_match($mac_pattern, $mac_last_3_bytes);
+            if ($match == 0) {
+                echo '<script language="javascript"> alert("' . _('Format error in MAC address last 3 bytes. Format must be e.g.: 2a:53:f9 ') . '"); </script>';
+                goto end_write_bus;
+            }
             # echo 'mac_last_3_bytes: ' . $mac_last_3_bytes . '<br>';
             # echo 'mi_mac_last3bytes: ' . $mi_mac_last3bytes . '<br>';
             write_table_value($atc_mi_thermometer_mac_table, $id_field, '1', $mi_mac_last3bytes_key, $mac_last_3_bytes);
@@ -71,5 +77,6 @@
             }
             echo '<script language="javascript"> alert("' . _('Nothing changed') . '"); </script>';
         }
+        end_write_bus:
     }
 ?>
