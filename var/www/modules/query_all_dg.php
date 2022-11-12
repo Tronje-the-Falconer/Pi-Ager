@@ -374,7 +374,7 @@
     $current_values['circulate_air_dataset'] = $circulate_air_dataset;    
 
     $current_values['scale1_dataset'] = $scale1_dataset;
-    $current_values['scale2_dataset'] = $scale_dataset;
+    $current_values['scale2_dataset'] = $scale2_dataset;
     
     echo json_encode($current_values);    
     // encode data and return it to client

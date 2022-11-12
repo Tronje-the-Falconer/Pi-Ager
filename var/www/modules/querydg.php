@@ -211,7 +211,7 @@
         $current_values['humidity_avg_dataset'] = $humidity_avg_dataset;
         $current_values['thermometer1_dataset'] = $thermometer1_dataset;
         $current_values['scale1_dataset'] = $scale1_dataset;
-        $current_values['scale2_dataset'] = $scale_dataset;
+        $current_values['scale2_dataset'] = $scale2_dataset;
         $current_values['customtime'] = $customtime;
         // encode data and return it to client
         echo json_encode($current_values);
