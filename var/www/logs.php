@@ -20,12 +20,12 @@
                                                             echo _('last changed at').': ';
                                                             echo date('d M Y, H:i:s', $mtime);
                                                             echo ' '._("o'clock").'<br />';
-                                                            echo '<img src="images/icons/check_true_42x42.png"> '._('file exists').'<br />';
+//                                                            echo '<img src="images/icons/check_true_42x42.png"> '._('file exists').'<br />';
                                                         }
                                                         else {
                                                             echo '<img src="images/icons/check_false_42x42.png"> '._('file does not exist').'<br />';
                                                         }
-                                                        if (is_readable($logfile)) {
+/*                                                        if (is_readable($logfile)) {
                                                             echo '<img src="images/icons/check_true_42x42.png"> '._('file is readable').'<br />';
                                                         }
                                                         else {
@@ -36,7 +36,7 @@
                                                         }
                                                         else {
                                                             echo '<img src="images/icons/check_false_42x42.png"> '._('file is not writable').'<br />';
-                                                        }
+                                                        } */
                                                         echo '<br />';
                                                     ?>
                                                 </td>
@@ -181,7 +181,7 @@
                                         </tr>
                                     </table>
                                     <!----------------------------------------------------------------------------------------Logeinträge-->
-                                    <div style="margin: 5px; height: 500px; border: 1px solid #ccc; overflow: auto;">
+                                    <div style="margin: 5px; height: 600px; border: 1px solid #ccc; overflow: auto;">
                                     <table style="width: 100%" class="miniature_writing">
                                         <tr>
                                             <td>
