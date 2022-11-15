@@ -73,7 +73,7 @@ class cl_main_sensor_type:
         self._type = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key))
 
         # logger.info('Sensor number is: ' + str(self._type))
-        cl_fact_logger.get_instance().info('Sensor number is: ' + str(self._type))
+        cl_fact_logger.get_instance().debug('Sensor number is: ' + str(self._type))
         if self._is_valid() == False:
             raise cx_Sensor_not_defined(self._type_ui)        
         self._type_ui = self._get_type_ui()        
@@ -146,7 +146,7 @@ class cl_second_sensor_type(cl_main_sensor_type):
         # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._type = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensorsecondtype_key))
 
-        cl_fact_logger.get_instance().info('Second Sensor number is: ' + str(self._type))
+        cl_fact_logger.get_instance().debug('Second Sensor number is: ' + str(self._type))
         if self._is_valid() == False:
             raise cx_Sensor_not_defined(self._type_ui)        
         self._type_ui = self._get_type_ui()        

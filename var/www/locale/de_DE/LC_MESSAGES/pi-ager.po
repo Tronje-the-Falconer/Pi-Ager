@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-DE\n"
-"POT-Creation-Date: 2022-11-10 16:13+0100\n"
-"PO-Revision-Date: 2022-11-10 16:18+0100\n"
+"POT-Creation-Date: 2022-11-15 11:06+0100\n"
+"PO-Revision-Date: 2022-11-15 11:07+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -17,7 +17,11 @@ msgstr ""
 "X-Poedit-SearchPath-0: var/www\n"
 "X-Poedit-SearchPath-1: opt/pi-ager\n"
 
-#: opt/pi-ager/main.py:112
+#: opt/pi-ager/main.py:64
+msgid "Pi-Ager Main started"
+msgstr "Pi-Ager Main gestartet"
+
+#: opt/pi-ager/main.py:114
 msgid "KeyboardInterrupt"
 msgstr ""
 
@@ -33,15 +37,15 @@ msgstr "Reifeprogramm angehalten um"
 msgid "current period"
 msgstr "aktuelle Periode"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:145
-#: opt/pi-ager/pi_ager_cl_agingtable.py:147
-#: opt/pi-ager/pi_ager_cl_agingtable.py:149
-#: opt/pi-ager/pi_ager_cl_agingtable.py:151
-#: opt/pi-ager/pi_ager_cl_agingtable.py:153
+#: opt/pi-ager/pi_ager_cl_agingtable.py:146
+#: opt/pi-ager/pi_ager_cl_agingtable.py:148
+#: opt/pi-ager/pi_ager_cl_agingtable.py:150
+#: opt/pi-ager/pi_ager_cl_agingtable.py:152
+#: opt/pi-ager/pi_ager_cl_agingtable.py:154
 msgid "operation mode"
 msgstr "Betriebsmodus"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:145 var/www/manvals.php:24
+#: opt/pi-ager/pi_ager_cl_agingtable.py:146 var/www/manvals.php:24
 #: var/www/modules/querystatus.php:106 var/www/modules/querystatus.php:110
 #: var/www/modules/querystatus.php:118 var/www/modules/querystatus.php:122
 #: var/www/modules/read_settings_db.php:12
@@ -53,27 +57,27 @@ msgstr "Betriebsmodus"
 msgid "cooling"
 msgstr "Kühlen"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:147
+#: opt/pi-ager/pi_ager_cl_agingtable.py:148
 msgid "cooling with humidify"
 msgstr "Kühlen mit Befeuchten"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:149
+#: opt/pi-ager/pi_ager_cl_agingtable.py:150
 msgid "heating with humidify"
 msgstr "Heizen mit Befeuchten"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:151
+#: opt/pi-ager/pi_ager_cl_agingtable.py:152
 msgid "automatic with humidify"
 msgstr "Automatik mit Befeuchten"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:153
+#: opt/pi-ager/pi_ager_cl_agingtable.py:154
 msgid "automatic with dehumidify and humidify"
 msgstr "Automatik mit Befeuchten und Entfeuchten"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:155
+#: opt/pi-ager/pi_ager_cl_agingtable.py:156
 msgid "operation mode wrong or set incorrectly"
 msgstr "Betriebsart falsch oder falsch eingestellt"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:157 var/www/manvals.php:52
+#: opt/pi-ager/pi_ager_cl_agingtable.py:158 var/www/manvals.php:52
 #: var/www/modules/write_config_db_logfile_txt.php:175
 #: var/www/modules/write_config_db_logfile_txt.php:181
 #: var/www/modules/write_settings_db_logfile_txt.php:162
@@ -81,23 +85,23 @@ msgstr "Betriebsart falsch oder falsch eingestellt"
 msgid "setpoint temperature"
 msgstr "Sollwert Temperatur"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:158
+#: opt/pi-ager/pi_ager_cl_agingtable.py:159
 msgid "switch-on value temperature"
 msgstr "Einschaltwert Temperatur"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:159
+#: opt/pi-ager/pi_ager_cl_agingtable.py:160
 msgid "switch-off value temperature"
 msgstr "Ausschaltwert Temperatur"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:160
+#: opt/pi-ager/pi_ager_cl_agingtable.py:161
 msgid "cooling compressor delay"
 msgstr "Verzögerung"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:160 var/www/config.php:54
+#: opt/pi-ager/pi_ager_cl_agingtable.py:161 var/www/config.php:54
 msgid "seconds"
 msgstr "Sekunden"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:161 var/www/manvals.php:75
+#: opt/pi-ager/pi_ager_cl_agingtable.py:162 var/www/manvals.php:75
 #: var/www/modules/write_config_db_logfile_txt.php:189
 #: var/www/modules/write_config_db_logfile_txt.php:196
 #: var/www/modules/write_settings_db_logfile_txt.php:176
@@ -105,23 +109,23 @@ msgstr "Sekunden"
 msgid "setpoint humidity"
 msgstr "Sollwert Feuchte"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:162
+#: opt/pi-ager/pi_ager_cl_agingtable.py:163
 msgid "switch-on value humidity"
 msgstr "Einschaltwert Feuchte"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:163
+#: opt/pi-ager/pi_ager_cl_agingtable.py:164
 msgid "switch-off value humidity"
 msgstr "Ausschaltwert Feuchte"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:164
+#: opt/pi-ager/pi_ager_cl_agingtable.py:165
 msgid "humidification delay"
 msgstr "Verzögerung Befeuchter"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:164
-#: opt/pi-ager/pi_ager_cl_agingtable.py:166
-#: opt/pi-ager/pi_ager_cl_agingtable.py:168
-#: opt/pi-ager/pi_ager_cl_agingtable.py:170
-#: opt/pi-ager/pi_ager_cl_agingtable.py:172 var/www/config.php:101
+#: opt/pi-ager/pi_ager_cl_agingtable.py:165
+#: opt/pi-ager/pi_ager_cl_agingtable.py:167
+#: opt/pi-ager/pi_ager_cl_agingtable.py:169
+#: opt/pi-ager/pi_ager_cl_agingtable.py:171
+#: opt/pi-ager/pi_ager_cl_agingtable.py:173 var/www/config.php:101
 #: var/www/config.php:177 var/www/config.php:182 var/www/config.php:216
 #: var/www/config.php:221 var/www/diagrams.php:81 var/www/diagrams.php:215
 #: var/www/index.php:293 var/www/index.php:1193 var/www/index.php:1194
@@ -160,92 +164,92 @@ msgstr "Verzögerung Befeuchter"
 msgid "minutes"
 msgstr "Minuten"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:166
+#: opt/pi-ager/pi_ager_cl_agingtable.py:167
 msgid "timer circulation air period every"
 msgstr "Timer für Umluft Zyklus in Minuten"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:168
+#: opt/pi-ager/pi_ager_cl_agingtable.py:169
 msgid "timer circulation air"
 msgstr "Timer für Umluft Dauer in Minuten"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:170
+#: opt/pi-ager/pi_ager_cl_agingtable.py:171
 msgid "timer exhaust air period every"
 msgstr "Timer für Abluft Zyklus in Minuten"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:172 var/www/manvals.php:123
+#: opt/pi-ager/pi_ager_cl_agingtable.py:173 var/www/manvals.php:123
 msgid "timer exhausting air"
 msgstr "Timer für Abluft Dauer in Minuten"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:173 var/www/config.php:181
+#: opt/pi-ager/pi_ager_cl_agingtable.py:174 var/www/config.php:181
 #: var/www/config.php:220 var/www/index.php:1179
 msgid "duration"
 msgstr "Dauer"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:173 var/www/edit_agingtable.php:51
+#: opt/pi-ager/pi_ager_cl_agingtable.py:174 var/www/edit_agingtable.php:51
 #: var/www/index.php:291 var/www/index.php:766 var/www/settings.php:420
 msgid "days"
 msgstr "Tage"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:173 var/www/diagrams.php:14
+#: opt/pi-ager/pi_ager_cl_agingtable.py:174 var/www/diagrams.php:14
 #: var/www/diagrams.php:45 var/www/diagrams.php:79 var/www/index.php:751
 #: var/www/modules/save_diagram_mode.php:33 var/www/settings.php:407
 msgid "day"
 msgstr "Tag"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:174 var/www/admin.php:67
+#: opt/pi-ager/pi_ager_cl_agingtable.py:175 var/www/admin.php:67
 msgid "sensortype"
 msgstr "Sensor Typ"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:182
+#: opt/pi-ager/pi_ager_cl_agingtable.py:183
 msgid "values"
 msgstr "Werte"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:258
+#: opt/pi-ager/pi_ager_cl_agingtable.py:265
 msgid "the climate values are now controlled by the automatic program"
 msgstr "Die Klimawerte werden nun automatisch kontrolliert durch die Tabelle"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:356
+#: opt/pi-ager/pi_ager_cl_agingtable.py:363
 msgid "Program"
 msgstr "Programm"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:356
+#: opt/pi-ager/pi_ager_cl_agingtable.py:363
 msgid "ends the control."
 msgstr "beendet die Kontrolle."
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:356
+#: opt/pi-ager/pi_ager_cl_agingtable.py:363
 msgid "continues to work with the last values."
 msgstr "Der Pi-Ager arbeitet mit den zuletzt gültigen Werten der Reifetabelle."
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:371
+#: opt/pi-ager/pi_ager_cl_agingtable.py:378
 msgid "start with period "
 msgstr "starte mit Zyklus "
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:371
-#: opt/pi-ager/pi_ager_cl_agingtable.py:393
+#: opt/pi-ager/pi_ager_cl_agingtable.py:378
+#: opt/pi-ager/pi_ager_cl_agingtable.py:400
 msgid "of"
 msgstr "von"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:375
-#: opt/pi-ager/pi_ager_cl_agingtable.py:386
-#: opt/pi-ager/pi_ager_cl_agingtable.py:396
+#: opt/pi-ager/pi_ager_cl_agingtable.py:382
+#: opt/pi-ager/pi_ager_cl_agingtable.py:393
+#: opt/pi-ager/pi_ager_cl_agingtable.py:403
 msgid "next change of values"
 msgstr "Nächste Änderung der Werte"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:377
-#: opt/pi-ager/pi_ager_cl_agingtable.py:388
-#: opt/pi-ager/pi_ager_cl_agingtable.py:403
+#: opt/pi-ager/pi_ager_cl_agingtable.py:384
+#: opt/pi-ager/pi_ager_cl_agingtable.py:395
+#: opt/pi-ager/pi_ager_cl_agingtable.py:410
 msgid "end of program"
 msgstr "Ende des Programms"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:382
+#: opt/pi-ager/pi_ager_cl_agingtable.py:389
 msgid "start values period 1 of"
 msgstr "Starte mit Werten des Zyklus 1 von"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:393
+#: opt/pi-ager/pi_ager_cl_agingtable.py:400
 msgid "new values for period"
 msgstr "neue Werte für Zyklus"
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:410
+#: opt/pi-ager/pi_ager_cl_agingtable.py:417
 msgid "in agingtable duration_sleep-loop. duration_sleep left"
 msgstr "Restzeit im laufenden Zyklus"
 
@@ -1243,7 +1247,7 @@ msgstr "Letzte Änderung am"
 msgid "oclock"
 msgstr "Uhr"
 
-#: var/www/changelog.php:20 var/www/logs.php:23
+#: var/www/changelog.php:20
 msgid "file exists"
 msgstr "Datei existiert"
 
@@ -1251,11 +1255,11 @@ msgstr "Datei existiert"
 msgid "file does not exist"
 msgstr "Datei existiert nicht"
 
-#: var/www/changelog.php:26 var/www/logs.php:29
+#: var/www/changelog.php:26
 msgid "file is readable"
 msgstr "Datei ist lesbar"
 
-#: var/www/changelog.php:29 var/www/logs.php:32
+#: var/www/changelog.php:29
 msgid "file is not readable"
 msgstr "Datei ist nicht lesbar"
 
@@ -2037,14 +2041,6 @@ msgstr "Waage2"
 #: var/www/logs.php:9
 msgid "log entries"
 msgstr "Log Einträge"
-
-#: var/www/logs.php:35
-msgid "file is writable"
-msgstr "Datei ist beschreibbar"
-
-#: var/www/logs.php:38
-msgid "file is not writable"
-msgstr "Datei ist nicht schreibbar"
 
 #: var/www/logs.php:49
 msgid "save all logfiles?"
@@ -3547,6 +3543,12 @@ msgstr "Licht Schalter"
 #: var/www/webcam.php:57
 msgid "light manual on"
 msgstr "Licht manuell EIN"
+
+#~ msgid "file is writable"
+#~ msgstr "Datei ist beschreibbar"
+
+#~ msgid "file is not writable"
+#~ msgstr "Datei ist nicht schreibbar"
 
 #~ msgid "turn on UV light"
 #~ msgstr "UV Licht einschalten"

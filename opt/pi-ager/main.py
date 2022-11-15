@@ -59,8 +59,10 @@ pi_ager_database_check.check_and_update_database()
 pi_ager_init.set_language()
 
 cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
-cl_fact_logger.get_instance().info((pi_ager_names.logspacer))
-
+cl_fact_logger.get_instance().info('\n\n')
+cl_fact_logger.get_instance().info(pi_ager_names.logspacer)
+cl_fact_logger.get_instance().info(_('Pi-Ager Main started'))
+cl_fact_logger.get_instance().info(pi_ager_names.logspacer)
 pi_revision.get_and_write_revision_in_database()
 
 pi_ager_init.setup_GPIO()
