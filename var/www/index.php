@@ -986,7 +986,7 @@
                                             <td></td>
                                         </tr>
                                     </table>
-
+                                    <!--------------------------------------switch-->
                                     <hr>
                                     <table class="switching_state miniature_writing">
                                         <tr>
@@ -1023,7 +1023,44 @@
                                             <td></td>
                                         </tr>
                                     </table>
+                                    <!--------------------------------------defrost-->
                                     <hr>
+                                    <table class="switching_state miniature_writing">
+                                        <tr>
+                                            <td width="100px"></td>
+                                            <td width="100px"></td>
+                                            <td class="text_left"></td>
+                                            <td width="100px"><td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <img src="images/icons/defrost_42x42.png" alt="" style="padding: 10px;">
+                                            </td>
+                                                <?php 
+                                                    // checks if defrost is in progress
+                                                    $defrost_in_progress = intval(get_table_value($current_values_table, $status_defrost_key)); 
+                                                    if ($defrost_in_progress == 1){
+                                                        echo '<td>';
+                                                        echo '<img id="defrost_img" src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;">';
+                                                        echo '</td>';
+                                                        echo '<td id="defrost_text" style="text-align: left; ">' . _('Defrost in progress') . '</td>';
+                                                    }
+                                                    else {
+                                                        echo '<td>';
+                                                        echo '<img id="defrost_img" src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;">';
+                                                        echo '</td>';
+                                                        echo '<td id="defrost_text" style="text-align: left;">' . _('Defrost currently off') . '</td>';
+                                                    }
+                                                ?>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <!---------------------------------------temperatures-->
                                     <hr>
                                     <h2><?php echo _('temperatures'); ?></h2>
                                     <br>

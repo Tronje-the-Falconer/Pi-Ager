@@ -54,8 +54,8 @@ def signal_handler(signum, frame):
     pi_ager_loop.do_system_shutdown()
     # sys.exit(0) # raises SystemExit exception
    
-pi_ager_names.create_json_file()
-pi_ager_database_check.check_and_update_database()
+# pi_ager_names.create_json_file()
+# pi_ager_database_check.check_and_update_database()
 pi_ager_init.set_language()
 
 cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
@@ -106,6 +106,9 @@ except Exception as cx_error:
     exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
     pass
 
+# init defrost state off
+pi_ager_database.write_startstop_status_in_database(pi_ager_names.status_defrost_key, 0)
+
 try:
     pi_ager_loop.autostart_loop()
     cl_fact_logger.get_instance().debug('in main try at end -------------------------------------------------------------------')
@@ -155,6 +158,6 @@ finally:
     except Exception as cx_error:
         exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
         pass
-    
+
     # release GPIO resources, send message to log
     pi_ager_organization.goodbye()

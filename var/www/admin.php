@@ -16,6 +16,7 @@
                                     include 'modules/backup_manual.php';                        // steuert manuelles Backup im sudowebscript an
                                     include 'modules/nextion_upload_firmware.php';              // upload firmware file for nextion hmi display                                    
                                     include 'modules/write_backup_db.php';                      // schreibt die backup-Werte
+                                    include 'modules/write_defrost_db.php';                     // schreibt die defrost Werte in die DB
                                     include 'modules/write_nextion_type_db.php';                // nextion display type save
                                     
                                     include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
@@ -415,6 +416,65 @@
                                     </div>
                                 </form>
                                 <hr>
+
+                                <h2 class="art-postheader"><?php echo _('defrost'); ?></h2>
+                                <!-----------------------------------------------------------------------------Automatic Defrost-->
+                                <form method="post" name="defrost">
+                                    <div class="hg_container" >
+                                        <table style="width: 100%; table-layout: fixed;">
+                                            <?php
+                                                $defrost_active = get_table_value_from_field($defrost_table, Null, $defrost_active_field);
+                                                $defrost_temperature = number_format(floatval(get_table_value_from_field($defrost_table, Null, $defrost_temperature_field)), 1, '.', '');
+                                                $defrost_cycle_hours = get_table_value_from_field($defrost_table, Null, $defrost_cycle_hours_field);
+                                                if ($defrost_active == 1) {
+                                                    $checked_defrost_true = "checked";
+                                                }
+                                                else{
+                                                    $checked_defrost_true = "";
+                                                }
+                                            ?>
+                                            <tr>
+                                                <td rowspan="5" class="td_png_icon"><h3><?php echo _('defrost'); ?></h3><img src="images/icons/defrost_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_defrost_blockFunction()"><?php echo _('help'); ?></button></td>                                            
+                                                <td class="text_left_padding"><?php echo _('defrost temperature'); ?>:</td>
+                                                <td style="text-align: left;"><input name="defrost_temperature" type="number" min="1" max="22" step="0.1" style="width: 30%;" required value=<?php echo $defrost_temperature; ?>>&nbsp;°C<span style="font-size: xx-small"> (1 <?php echo _('to'); ?> 12)</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('defrost cycle'); ?>:</td>
+                                                <td style="text-align: left;"><input name="defrost_cycle_hours" type="number" min="1" max="24" step="1" style="width: 30%;" required value=<?php echo $defrost_cycle_hours; ?>>&nbsp;<?php echo _('hours'); ?><span style="font-size: xx-small"> (1 <?php echo _('to'); ?> 24)</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('defrost active'); ?>:</td>
+                                                <td style="text-align: left;">
+                                                    <input type="hidden" name="defrost_active" value="0">
+                                                    <input type="checkbox" name="defrost_active" value="1" <?php echo $checked_defrost_true; ?>/>
+                                                </td>
+                                            </tr>
+                                            <tr><td>&nbsp;</td></tr>
+                                            <tr><td>&nbsp;</td></tr> 
+                                        </table>
+
+                                        <script>
+                                            function help_defrost_blockFunction() {
+                                                document.getElementById('help_defrost').style.display = 'block';
+                                            }
+                                            function help_defrost_noneFunction() {
+                                                document.getElementById('help_defrost').style.display = 'none';
+                                            }
+                                        </script>
+                                        <p id="help_defrost" class="help_p">
+                                            <?php echo _('helptext_defrost');
+                                                echo '<br><br>'; ?>
+                                            <button class="art-button" type="button" onclick="help_defrost_noneFunction()"><?php echo _('close'); ?></button>
+                                        </p>
+                                        <table style="width: 100%; align: center;">
+                                            <tr>
+                                                <td><button class="art-button" name="save_defrost_values" value="save_defrost_values" onclick="return confirm('<?php echo _('ATTENTION: save defrost values?');?>');"><?php echo _('save'); ?></button></td>
+                                            </tr>
+                                        </table>                                    
+                                    </div>
+                                </form>
+                                <hr>
+                                
                                 <h2 class="art-postheader"><?php echo _('reboot & shutdown'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Reboot/Shutdown-->
                                 <div class="hg_container">
@@ -643,6 +703,7 @@
                                     </p>
                                 </div>
                                 <hr>
+                                
                                 <h2 class="art-postheader"><?php echo _('database'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Database-->
                                 <div class="hg_container" >                                    

@@ -52,7 +52,10 @@ async function handleContentStatus( msg ) {
     
     $('#switch_img').attr('src', myObj.switch_img);
     $('#switch_text').html(myObj.switch_text);
-
+    
+    $('#defrost_img').attr('src', myObj.defrost_img);
+    $('#defrost_text').html(myObj.defrost_text);
+    
     var modus = myObj.modus;
     // temperatures
     $('#mod_type_line1_id').attr('src', myObj.mod_type_line1);

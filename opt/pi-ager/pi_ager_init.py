@@ -111,6 +111,7 @@ def set_system_starttime():
     global uv_stoptime
     global light_starttime
     global light_stoptime
+    global defrost_cycle_start
     # global logger
 
     # logger.debug('set_system_starttime()')
@@ -123,7 +124,8 @@ def set_system_starttime():
     uv_stoptime = uv_starttime
     light_starttime = system_starttime
     light_stoptime = light_starttime
-
+    defrost_cycle_start = system_starttime
+    
 def set_language():
     """
     setting up language

@@ -26,6 +26,7 @@
     // get pi-ager status to refresh statusboard on index.php via ajax
     
     $status_piager = intval(get_table_value($current_values_table, $status_piager_key));
+    $status_defrost = intval(get_table_value($current_values_table, $status_defrost_key));
     $modus = intval(get_table_value($config_settings_table, $modus_key));
     $status_scale1 = intval(get_table_value($current_values_table, $status_scale1_key));
 	$status_scale2 = intval(get_table_value($current_values_table, $status_scale2_key));
@@ -100,6 +101,15 @@
     else {
         $current_values['switch_text'] = _('Switch is off');
         $current_values['switch_img'] = 'images/icons/status_off_20x20.png';
+    }
+    
+    if ($status_defrost == 1){
+        $current_values['defrost_text'] = _('Defrost in progress');
+        $current_values['defrost_img'] = 'images/icons/status_on_20x20.png';
+    }
+    else {
+        $current_values['defrost_text'] = _('Defrost currently off');
+        $current_values['defrost_img'] = 'images/icons/status_off_20x20.png';
     }
 
     if ($modus  ==  0) {

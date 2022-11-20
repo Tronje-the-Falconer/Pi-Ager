@@ -84,8 +84,8 @@ def setupGPIO():
     # linke Pinleiste:
     # 3,3 V
     # gpio.setup(pi_ager_names.gpio_notinuse_2, gpio. )            
-    gpio.setup(gpio_heater, gpio.OUT)                # Heizung setzen
-    gpio.setup(gpio_cooling_compressor, gpio.OUT)    # Kuehlung setzen
+    gpio.setup(gpio_heater, gpio.OUT, initial=gpio.HIGH)                # Heizung setzen
+    gpio.setup(gpio_cooling_compressor, gpio.OUT, initial=gpio.HIGH)    # Kuehlung setzen
     # Ground
     # gpio.setup(pi_ager_names.gpio_sensor_data, gpio. )           # wird ueber Bibliothek gesetzt
     # gpio.setup(pi_ager_names.gpio_sensor_sync, gpio. )           # wird ueber Bibliothek gesetzt
@@ -109,14 +109,14 @@ def setupGPIO():
     # Ground
     # gpio.setup(pi_ager_names.gpio_display_txd, gpio. )
     # gpio.setup(pi_ager_names.gpio_display_rxd, gpio. )
-    gpio.setup(gpio_humidifier, gpio.OUT)            # Befeuchter setzen
+    gpio.setup(gpio_humidifier, gpio.OUT, initial=gpio.HIGH)            # Befeuchter setzen
     # Ground
-    gpio.setup(gpio_exhausting_air, gpio.OUT)        # Abluft setzen
-    gpio.setup(gpio_circulating_air, gpio.OUT)       # Umluft setzen
+    gpio.setup(gpio_exhausting_air, gpio.OUT, initial=gpio.HIGH)        # Abluft setzen
+    gpio.setup(gpio_circulating_air, gpio.OUT, initial=gpio.HIGH)       # Umluft setzen
     # Ground
-    gpio.setup(gpio_uv, gpio.OUT)                    # UV-Licht setzen
-    gpio.setup(gpio_light, gpio.OUT)                 # Licht setzen
-    gpio.setup(gpio_dehumidifier, gpio.OUT)          # Dehumidifier setzen
+    gpio.setup(gpio_uv, gpio.OUT, initial=gpio.HIGH)                    # UV-Licht setzen
+    gpio.setup(gpio_light, gpio.OUT, initial=gpio.HIGH)                 # Licht setzen
+    gpio.setup(gpio_dehumidifier, gpio.OUT, initial=gpio.HIGH)          # Dehumidifier setzen
     # gpio.setup(pi_ager_names.gpio_notinuse_4, gpio. )
     # Ground
     # gpio.setup(pi_ager_names.gpio_notinuse_5, gpio. )

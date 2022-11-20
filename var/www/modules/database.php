@@ -1127,12 +1127,14 @@
             $sql = 'SELECT ' . $field . ' FROM ' . $table . ' WHERE key = "' . $key . '" AND ' . $id_field . ' = (SELECT MAX(' . $id_field . ') from ' . $table . ' WHERE key = "' . $key . '")';
         }
         $result = get_query_result($sql);
-            while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
-                {
-                $value = $dataset[$field];
-                }
+        if ($result == NULL) {
+            close_database();
+            return $value;
+        }
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC)) {
+            $value = $dataset[$field];
+        }
         close_database();
-        
         return $value;
     }
     
@@ -1147,7 +1149,24 @@
         }
         else {
             open_connection();
-            $sql = 'UPDATE ' . $backup_table . ' SET "' . $backup_nfsvol_field . '" = "' . $backup_nfsvol . '" , "' .  $backup_number_of_backups_field . '" = ' . $backup_number_of_backups . ' , "' . $backup_name_field . '" = "' . $backup_name . '" , "' . $backup_nfsopt_field . '" = "' . $backup_nfsopt . '" , "' . $backup_active_field . '" = "' . $backup_active . '" ' . ' WHERE ' . $id_field . ' = 1';
+            $sql = 'UPDATE ' . $backup_table . ' SET "' . $backup_nfsvol_field . '" = "' . $backup_nfsvol . '" , "' .  $backup_number_of_backups_field . '" = "' . $backup_number_of_backups . '" , "' . $backup_name_field . '" = "' . $backup_name . '" , "' . $backup_nfsopt_field . '" = "' . $backup_nfsopt . '" , "' . $backup_active_field . '" = "' . $backup_active . '" ' . ' WHERE ' . $id_field . ' = 1';
+            execute_query($sql);
+            close_database();
+        }
+    }
+    
+    function write_defrost_values($defrost_temperature, $defrost_cycle_hours, $defrost_active){
+        global $id_field, $defrost_table, $defrost_temperature_field, $defrost_cycle_hours_field, $defrost_active_field;
+        
+        if (is_table_empty($defrost_table) == True) {
+            open_connection();
+            $sql = 'INSERT INTO ' . $defrost_table . ' (' . $id_field . ', ' . $defrost_active_field . ', ' . $defrost_temperature_field . ', ' . $defrost_cycle_hours_field . ' ) VALUES (' . '"1"' . ', "' . strval($defrost_active) . '", "' .  strval($defrost_temperature) . '", "' . strval($defrost_cycle_hours) . '")';
+            execute_query($sql);
+            close_database();
+        }
+        else {
+            open_connection();
+            $sql = 'UPDATE ' . $defrost_table . ' SET "' . $defrost_active_field . '" = "' . $defrost_active . '" , "' .  $defrost_temperature_field . '" = "' . $defrost_temperature . '" , "' . $defrost_cycle_hours_field . '" = "' . $defrost_cycle_hours . '"  ' . ' WHERE ' . $id_field . ' = 1';
             execute_query($sql);
             close_database();
         }

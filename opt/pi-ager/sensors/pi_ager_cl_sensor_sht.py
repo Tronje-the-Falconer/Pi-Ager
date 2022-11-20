@@ -200,7 +200,8 @@ class cl_sensor_sht(cl_sensor, ABC):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         repeat_count = 0
-        while repeat_count < 5:
+        repeat_count_max = 5
+        while repeat_count < repeat_count_max:
             try:
                 self._read_data()
                     
@@ -217,10 +218,11 @@ class cl_sensor_sht(cl_sensor, ABC):
                 
             except Exception as cx_error:
                 repeat_count = repeat_count + 1
-                cl_fact_logger.get_instance().exception(cx_error)
-                cl_fact_logger.get_instance().debug('Retry getting measurement from I2C. Current retry count : ' + str(repeat_count))
+                if (repeat_count == 1):
+                    cl_fact_logger.get_instance().exception(cx_error)
+                else:
+                    cl_fact_logger.get_instance().error(f"Retry getting measurement from I2C device. Current retry count : {repeat_count}, max retry count : {repeat_count_max}")      
 
-                
         raise cx_measurement_error (_('Too many measurement errors occurred!'))
         
     

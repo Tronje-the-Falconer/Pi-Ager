@@ -44,6 +44,7 @@ $all_scales_table = 'all_scales';
 $nextion_table = 'nextion';
 $atc_mi_thermometer_mac_table = 'atc_mi_thermometer_mac';
 $atc_mi_thermometer_data_table = 'atc_mi_thermometer_data';
+$defrost_table = 'config_defrost';
 
 #----------------------------table keys;
 $switch_on_cooling_compressor_key = 'switch_on_cooling_compressor';
@@ -154,6 +155,7 @@ $mi_mac_last3bytes_key = 'mi_mac_last3bytes';
 $MiSensor_battery_key = 'MiSensor_battery';
 $switch_control_uv_light_key = 'switch_control_uv_light';
 $switch_control_light_key = 'switch_control_light';
+$status_defrost_key = 'status_defrost';
 
 #-----------------------------table fields;
 $key_field = 'key';
@@ -246,6 +248,9 @@ $scale1_field = 'scale1';
 $scale2_field = 'scale2';
 $progress_field = 'progress';
 $status_field = 'status';
+$defrost_active_field = 'active';
+$defrost_temperature_field = 'temperature';
+$defrost_cycle_hours_field = 'cycle_hours';
 
 #-----------------------------Paths and urls
 $thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/';
