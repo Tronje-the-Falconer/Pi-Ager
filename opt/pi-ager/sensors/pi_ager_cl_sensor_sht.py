@@ -231,8 +231,8 @@ class cl_sensor_sht(cl_sensor, ABC):
 
         t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
         
-        Temperature_Celsius    = ((175.72 * self.t_val) / 2**16 - 1 ) - 45 #do the maths from datasheet
-        Temperature_Fahrenheit = ((315.0  * self.t_val) / 2**16 - 1 ) - 49 #do the maths from datasheet
+        Temperature_Celsius    = (175.72 * self.t_val) / (2**16 - 1 ) - 45 #do the maths from datasheet
+        Temperature_Fahrenheit = (315.0  * self.t_val) / (2**16 - 1 ) - 49 #do the maths from datasheet
 
         cl_fact_logger.get_instance().debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
         cl_fact_logger.get_instance().debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
@@ -244,7 +244,7 @@ class cl_sensor_sht(cl_sensor, ABC):
 
         h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
         
-        Humidity = ((100.0 * self.h_val) / 2**16 - 1 )
+        Humidity = (100.0 * self.h_val) / (2**16 - 1 )
 
         cl_fact_logger.get_instance().debug("Relative Humidity is : %.2f %%RH" %Humidity)
 
