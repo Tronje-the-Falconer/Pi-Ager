@@ -421,7 +421,7 @@
                                 <!-----------------------------------------------------------------------------Automatic Defrost-->
                                 <form method="post" name="defrost">
                                     <div class="hg_container" >
-                                        <table style="width: 100%; table-layout: fixed;">
+                                        <table style="width: 100%;" class="miniature_writing">
                                             <?php
                                                 $defrost_active = get_table_value_from_field($defrost_table, Null, $defrost_active_field);
                                                 $defrost_temperature = number_format(floatval(get_table_value_from_field($defrost_table, Null, $defrost_temperature_field)), 1, '.', '');

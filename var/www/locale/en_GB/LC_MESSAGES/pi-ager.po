@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-GB\n"
-"POT-Creation-Date: 2022-11-20 18:46+0100\n"
-"PO-Revision-Date: 2022-11-20 19:19+0100\n"
+"POT-Creation-Date: 2022-11-27 22:20+0100\n"
+"PO-Revision-Date: 2022-11-27 22:20+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -163,23 +163,22 @@ msgid "minutes"
 msgstr ""
 
 #: opt/pi-ager/pi_ager_cl_agingtable.py:167
-msgid "timer circulation air period every"
+msgid "timer circulation air OFF duration"
 msgstr ""
 
 #: opt/pi-ager/pi_ager_cl_agingtable.py:169
-msgid "timer circulation air"
+msgid "timer circulation air ON duration"
 msgstr ""
 
 #: opt/pi-ager/pi_ager_cl_agingtable.py:171
-msgid "timer exhaust air period every"
+msgid "timer exhaust air OFF duration"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:173 var/www/manvals.php:123
-msgid "timer exhausting air"
+#: opt/pi-ager/pi_ager_cl_agingtable.py:173
+msgid "timer exhaust air ON duration"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:174 var/www/config.php:181
-#: var/www/config.php:220 var/www/index.php:1216
+#: opt/pi-ager/pi_ager_cl_agingtable.py:174
 msgid "duration"
 msgstr ""
 
@@ -295,46 +294,46 @@ msgstr ""
 msgid "Failed to get sensordata."
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:458
+#: opt/pi-ager/pi_ager_loop.py:459
 msgid "defrost process stopped"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:467
+#: opt/pi-ager/pi_ager_loop.py:469
 msgid "defrost process started"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:525
+#: opt/pi-ager/pi_ager_loop.py:528
 msgid "GPIO states"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:537 opt/pi-ager/pi_ager_loop.py:538
 #: opt/pi-ager/pi_ager_loop.py:540 opt/pi-ager/pi_ager_loop.py:541
-#: opt/pi-ager/pi_ager_loop.py:546 opt/pi-ager/pi_ager_loop.py:547
+#: opt/pi-ager/pi_ager_loop.py:543 opt/pi-ager/pi_ager_loop.py:544
 #: opt/pi-ager/pi_ager_loop.py:549 opt/pi-ager/pi_ager_loop.py:550
+#: opt/pi-ager/pi_ager_loop.py:552 opt/pi-ager/pi_ager_loop.py:553
 #: var/www/diagrams.php:1155 var/www/diagrams.php:1176 var/www/index.php:1102
 #: var/www/index.php:1122 var/www/modules/querystatus.php:169
 #: var/www/modules/querystatus.php:186
 msgid "heater"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:537 opt/pi-ager/pi_ager_loop.py:538
 #: opt/pi-ager/pi_ager_loop.py:540 opt/pi-ager/pi_ager_loop.py:541
-#: opt/pi-ager/pi_ager_loop.py:556 opt/pi-ager/pi_ager_loop.py:557
+#: opt/pi-ager/pi_ager_loop.py:543 opt/pi-ager/pi_ager_loop.py:544
 #: opt/pi-ager/pi_ager_loop.py:559 opt/pi-ager/pi_ager_loop.py:560
-#: opt/pi-ager/pi_ager_loop.py:575 opt/pi-ager/pi_ager_loop.py:576
+#: opt/pi-ager/pi_ager_loop.py:562 opt/pi-ager/pi_ager_loop.py:563
 #: opt/pi-ager/pi_ager_loop.py:578 opt/pi-ager/pi_ager_loop.py:579
-#: opt/pi-ager/pi_ager_loop.py:594 opt/pi-ager/pi_ager_loop.py:595
+#: opt/pi-ager/pi_ager_loop.py:581 opt/pi-ager/pi_ager_loop.py:582
 #: opt/pi-ager/pi_ager_loop.py:597 opt/pi-ager/pi_ager_loop.py:598
-#: opt/pi-ager/pi_ager_loop.py:613 opt/pi-ager/pi_ager_loop.py:614
+#: opt/pi-ager/pi_ager_loop.py:600 opt/pi-ager/pi_ager_loop.py:601
 #: opt/pi-ager/pi_ager_loop.py:616 opt/pi-ager/pi_ager_loop.py:617
-#: opt/pi-ager/pi_ager_loop.py:632 opt/pi-ager/pi_ager_loop.py:633
+#: opt/pi-ager/pi_ager_loop.py:619 opt/pi-ager/pi_ager_loop.py:620
 #: opt/pi-ager/pi_ager_loop.py:635 opt/pi-ager/pi_ager_loop.py:636
-#: opt/pi-ager/pi_ager_loop.py:651 opt/pi-ager/pi_ager_loop.py:652
+#: opt/pi-ager/pi_ager_loop.py:638 opt/pi-ager/pi_ager_loop.py:639
 #: opt/pi-ager/pi_ager_loop.py:654 opt/pi-ager/pi_ager_loop.py:655
-#: opt/pi-ager/pi_ager_loop.py:670 opt/pi-ager/pi_ager_loop.py:671
+#: opt/pi-ager/pi_ager_loop.py:657 opt/pi-ager/pi_ager_loop.py:658
 #: opt/pi-ager/pi_ager_loop.py:673 opt/pi-ager/pi_ager_loop.py:674
-#: opt/pi-ager/pi_ager_loop.py:1287 var/www/diagrams.php:995
-#: var/www/diagrams.php:1020 var/www/diagrams.php:1106
+#: opt/pi-ager/pi_ager_loop.py:676 opt/pi-ager/pi_ager_loop.py:677
+#: opt/pi-ager/pi_ager_loop.py:1309 opt/pi-ager/pi_ager_loop.py:1371
+#: var/www/diagrams.php:995 var/www/diagrams.php:1020 var/www/diagrams.php:1106
 #: var/www/diagrams.php:1131 var/www/diagrams.php:1217
 #: var/www/diagrams.php:1242 var/www/diagrams.php:1328
 #: var/www/diagrams.php:1353 var/www/diagrams.php:1439
@@ -348,26 +347,25 @@ msgstr ""
 msgid "on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:546 opt/pi-ager/pi_ager_loop.py:547
 #: opt/pi-ager/pi_ager_loop.py:549 opt/pi-ager/pi_ager_loop.py:550
-#: opt/pi-ager/pi_ager_loop.py:565 opt/pi-ager/pi_ager_loop.py:566
+#: opt/pi-ager/pi_ager_loop.py:552 opt/pi-ager/pi_ager_loop.py:553
 #: opt/pi-ager/pi_ager_loop.py:568 opt/pi-ager/pi_ager_loop.py:569
-#: opt/pi-ager/pi_ager_loop.py:584 opt/pi-ager/pi_ager_loop.py:585
+#: opt/pi-ager/pi_ager_loop.py:571 opt/pi-ager/pi_ager_loop.py:572
 #: opt/pi-ager/pi_ager_loop.py:587 opt/pi-ager/pi_ager_loop.py:588
-#: opt/pi-ager/pi_ager_loop.py:603 opt/pi-ager/pi_ager_loop.py:604
+#: opt/pi-ager/pi_ager_loop.py:590 opt/pi-ager/pi_ager_loop.py:591
 #: opt/pi-ager/pi_ager_loop.py:606 opt/pi-ager/pi_ager_loop.py:607
-#: opt/pi-ager/pi_ager_loop.py:622 opt/pi-ager/pi_ager_loop.py:623
+#: opt/pi-ager/pi_ager_loop.py:609 opt/pi-ager/pi_ager_loop.py:610
 #: opt/pi-ager/pi_ager_loop.py:625 opt/pi-ager/pi_ager_loop.py:626
-#: opt/pi-ager/pi_ager_loop.py:641 opt/pi-ager/pi_ager_loop.py:642
+#: opt/pi-ager/pi_ager_loop.py:628 opt/pi-ager/pi_ager_loop.py:629
 #: opt/pi-ager/pi_ager_loop.py:644 opt/pi-ager/pi_ager_loop.py:645
-#: opt/pi-ager/pi_ager_loop.py:660 opt/pi-ager/pi_ager_loop.py:661
+#: opt/pi-ager/pi_ager_loop.py:647 opt/pi-ager/pi_ager_loop.py:648
 #: opt/pi-ager/pi_ager_loop.py:663 opt/pi-ager/pi_ager_loop.py:664
-#: opt/pi-ager/pi_ager_loop.py:679 opt/pi-ager/pi_ager_loop.py:680
+#: opt/pi-ager/pi_ager_loop.py:666 opt/pi-ager/pi_ager_loop.py:667
 #: opt/pi-ager/pi_ager_loop.py:682 opt/pi-ager/pi_ager_loop.py:683
-#: opt/pi-ager/pi_ager_loop.py:1283 opt/pi-ager/pi_ager_loop.py:1347
-#: var/www/config.php:171 var/www/config.php:182 var/www/config.php:210
-#: var/www/config.php:221 var/www/diagrams.php:997 var/www/diagrams.php:999
-#: var/www/diagrams.php:1022 var/www/diagrams.php:1024
+#: opt/pi-ager/pi_ager_loop.py:685 opt/pi-ager/pi_ager_loop.py:686
+#: opt/pi-ager/pi_ager_loop.py:1305 opt/pi-ager/pi_ager_loop.py:1367
+#: var/www/config.php:171 var/www/config.php:210 var/www/diagrams.php:997
+#: var/www/diagrams.php:999 var/www/diagrams.php:1022 var/www/diagrams.php:1024
 #: var/www/diagrams.php:1108 var/www/diagrams.php:1110
 #: var/www/diagrams.php:1133 var/www/diagrams.php:1135
 #: var/www/diagrams.php:1219 var/www/diagrams.php:1221
@@ -382,9 +380,8 @@ msgstr ""
 #: var/www/diagrams.php:1688 var/www/diagrams.php:1690
 #: var/www/diagrams.php:1774 var/www/diagrams.php:1776
 #: var/www/diagrams.php:1799 var/www/diagrams.php:1801 var/www/index.php:927
-#: var/www/index.php:1075 var/www/index.php:1198 var/www/manvals.php:103
-#: var/www/manvals.php:128 var/www/modules/querystatus.php:139
-#: var/www/modules/querystatus.php:245
+#: var/www/index.php:1075 var/www/index.php:1198
+#: var/www/modules/querystatus.php:139 var/www/modules/querystatus.php:245
 #: var/www/modules/write_config_db_logfile_txt.php:133
 #: var/www/modules/write_config_db_logfile_txt.php:149
 #: var/www/modules/write_config_db_logfile_txt.php:202
@@ -394,180 +391,236 @@ msgstr ""
 msgid "off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:556 opt/pi-ager/pi_ager_loop.py:557
 #: opt/pi-ager/pi_ager_loop.py:559 opt/pi-ager/pi_ager_loop.py:560
-#: opt/pi-ager/pi_ager_loop.py:565 opt/pi-ager/pi_ager_loop.py:566
+#: opt/pi-ager/pi_ager_loop.py:562 opt/pi-ager/pi_ager_loop.py:563
 #: opt/pi-ager/pi_ager_loop.py:568 opt/pi-ager/pi_ager_loop.py:569
+#: opt/pi-ager/pi_ager_loop.py:571 opt/pi-ager/pi_ager_loop.py:572
 msgid "cooling compressor"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:575 opt/pi-ager/pi_ager_loop.py:576
 #: opt/pi-ager/pi_ager_loop.py:578 opt/pi-ager/pi_ager_loop.py:579
-#: opt/pi-ager/pi_ager_loop.py:584 opt/pi-ager/pi_ager_loop.py:585
+#: opt/pi-ager/pi_ager_loop.py:581 opt/pi-ager/pi_ager_loop.py:582
 #: opt/pi-ager/pi_ager_loop.py:587 opt/pi-ager/pi_ager_loop.py:588
+#: opt/pi-ager/pi_ager_loop.py:590 opt/pi-ager/pi_ager_loop.py:591
 #: var/www/diagrams.php:1377 var/www/diagrams.php:1398
 msgid "humidifier"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:594 opt/pi-ager/pi_ager_loop.py:595
 #: opt/pi-ager/pi_ager_loop.py:597 opt/pi-ager/pi_ager_loop.py:598
-#: opt/pi-ager/pi_ager_loop.py:603 opt/pi-ager/pi_ager_loop.py:604
+#: opt/pi-ager/pi_ager_loop.py:600 opt/pi-ager/pi_ager_loop.py:601
 #: opt/pi-ager/pi_ager_loop.py:606 opt/pi-ager/pi_ager_loop.py:607
+#: opt/pi-ager/pi_ager_loop.py:609 opt/pi-ager/pi_ager_loop.py:610
 msgid "circulation air"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:613 opt/pi-ager/pi_ager_loop.py:614
 #: opt/pi-ager/pi_ager_loop.py:616 opt/pi-ager/pi_ager_loop.py:617
-#: opt/pi-ager/pi_ager_loop.py:622 opt/pi-ager/pi_ager_loop.py:623
+#: opt/pi-ager/pi_ager_loop.py:619 opt/pi-ager/pi_ager_loop.py:620
 #: opt/pi-ager/pi_ager_loop.py:625 opt/pi-ager/pi_ager_loop.py:626
+#: opt/pi-ager/pi_ager_loop.py:628 opt/pi-ager/pi_ager_loop.py:629
 #: var/www/diagrams.php:1599 var/www/diagrams.php:1620
 msgid "exhaust air"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:632 opt/pi-ager/pi_ager_loop.py:633
 #: opt/pi-ager/pi_ager_loop.py:635 opt/pi-ager/pi_ager_loop.py:636
-#: opt/pi-ager/pi_ager_loop.py:641 opt/pi-ager/pi_ager_loop.py:642
+#: opt/pi-ager/pi_ager_loop.py:638 opt/pi-ager/pi_ager_loop.py:639
 #: opt/pi-ager/pi_ager_loop.py:644 opt/pi-ager/pi_ager_loop.py:645
+#: opt/pi-ager/pi_ager_loop.py:647 opt/pi-ager/pi_ager_loop.py:648
 #: var/www/diagrams.php:1488 var/www/diagrams.php:1509
 msgid "dehumidifier"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:651 opt/pi-ager/pi_ager_loop.py:652
 #: opt/pi-ager/pi_ager_loop.py:654 opt/pi-ager/pi_ager_loop.py:655
-#: opt/pi-ager/pi_ager_loop.py:660 opt/pi-ager/pi_ager_loop.py:661
+#: opt/pi-ager/pi_ager_loop.py:657 opt/pi-ager/pi_ager_loop.py:658
 #: opt/pi-ager/pi_ager_loop.py:663 opt/pi-ager/pi_ager_loop.py:664
+#: opt/pi-ager/pi_ager_loop.py:666 opt/pi-ager/pi_ager_loop.py:667
 #: var/www/config.php:206 var/www/diagrams.php:933 var/www/diagrams.php:954
 #: var/www/index.php:1293 var/www/modules/querystatus.php:360
 msgid "light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:670 opt/pi-ager/pi_ager_loop.py:671
 #: opt/pi-ager/pi_ager_loop.py:673 opt/pi-ager/pi_ager_loop.py:674
-#: opt/pi-ager/pi_ager_loop.py:679 opt/pi-ager/pi_ager_loop.py:680
+#: opt/pi-ager/pi_ager_loop.py:676 opt/pi-ager/pi_ager_loop.py:677
 #: opt/pi-ager/pi_ager_loop.py:682 opt/pi-ager/pi_ager_loop.py:683
+#: opt/pi-ager/pi_ager_loop.py:685 opt/pi-ager/pi_ager_loop.py:686
 #: var/www/diagrams.php:1044 var/www/diagrams.php:1065 var/www/index.php:1262
 #: var/www/modules/querystatus.php:328
 msgid "uv-light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:724
+#: opt/pi-ager/pi_ager_loop.py:727
 msgid "UPS battery is low"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:727
+#: opt/pi-ager/pi_ager_loop.py:730
 msgid "Shutdown Pi-Ager now"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:738
+#: opt/pi-ager/pi_ager_loop.py:741
 msgid "UPS battery is ok"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:752
+#: opt/pi-ager/pi_ager_loop.py:755
 msgid "Power monitor signals powerfail"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:761
+#: opt/pi-ager/pi_ager_loop.py:764
 msgid "Power monitor signals powergood"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:778
+#: opt/pi-ager/pi_ager_loop.py:781
 msgid "Switch is shorted to GND"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:787
+#: opt/pi-ager/pi_ager_loop.py:790
 msgid "Switch is open"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1218
+#: opt/pi-ager/pi_ager_loop.py:1230
 msgid "selected internal sensor"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1220
+#: opt/pi-ager/pi_ager_loop.py:1232
 msgid "target temperature"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1222 opt/pi-ager/pi_ager_loop.py:1234
+#: opt/pi-ager/pi_ager_loop.py:1234 opt/pi-ager/pi_ager_loop.py:1246
 msgid "actual temperature"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1225
+#: opt/pi-ager/pi_ager_loop.py:1237
 msgid "target humidity"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1226 opt/pi-ager/pi_ager_loop.py:1235
+#: opt/pi-ager/pi_ager_loop.py:1238 opt/pi-ager/pi_ager_loop.py:1247
 msgid "actual humidity"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1228 opt/pi-ager/pi_ager_loop.py:1236
+#: opt/pi-ager/pi_ager_loop.py:1240 opt/pi-ager/pi_ager_loop.py:1248
 msgid "actual dewpoint"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1229 opt/pi-ager/pi_ager_loop.py:1237
+#: opt/pi-ager/pi_ager_loop.py:1241 opt/pi-ager/pi_ager_loop.py:1249
 msgid "actual humidity abs"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1233
+#: opt/pi-ager/pi_ager_loop.py:1245
 msgid "selected external sensor"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1254 opt/pi-ager/pi_ager_loop.py:1258
-msgid "circulation air timer active"
+#: opt/pi-ager/pi_ager_loop.py:1261 opt/pi-ager/pi_ager_loop.py:1264
+#: opt/pi-ager/pi_ager_loop.py:1267
+msgid "circulation air timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1254 opt/pi-ager/pi_ager_loop.py:1271
-msgid "fan off"
+#: opt/pi-ager/pi_ager_loop.py:1261 opt/pi-ager/pi_ager_loop.py:1267
+#: opt/pi-ager/pi_ager_loop.py:1283 opt/pi-ager/pi_ager_loop.py:1289
+msgid "fan permanent off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1258 opt/pi-ager/pi_ager_loop.py:1275
-msgid "fan on"
+#: opt/pi-ager/pi_ager_loop.py:1264 opt/pi-ager/pi_ager_loop.py:1286
+msgid "fan permanent on"
 msgstr ""
 
 #: opt/pi-ager/pi_ager_loop.py:1271 opt/pi-ager/pi_ager_loop.py:1275
+msgid "circulation air timer active"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1271 opt/pi-ager/pi_ager_loop.py:1293
+msgid "fan on"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1275 opt/pi-ager/pi_ager_loop.py:1297
+msgid "fan off"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1283 opt/pi-ager/pi_ager_loop.py:1286
+#: opt/pi-ager/pi_ager_loop.py:1289
+msgid "exhaust air timer inactive"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1293 opt/pi-ager/pi_ager_loop.py:1297
 msgid "exhaust air timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1283 opt/pi-ager/pi_ager_loop.py:1287
+#: opt/pi-ager/pi_ager_loop.py:1305 opt/pi-ager/pi_ager_loop.py:1309
 msgid "modus uv-light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1298 opt/pi-ager/pi_ager_loop.py:1309
+#: opt/pi-ager/pi_ager_loop.py:1312 opt/pi-ager/pi_ager_loop.py:1315
+#: opt/pi-ager/pi_ager_loop.py:1318
+msgid "uv-light timer inactive"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1312 opt/pi-ager/pi_ager_loop.py:1315
+#: opt/pi-ager/pi_ager_loop.py:1345
+msgid "uv-light permanent off"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1318
+msgid "uv-light permanent on"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1325 opt/pi-ager/pi_ager_loop.py:1332
 msgid "uv-light timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1298 opt/pi-ager/pi_ager_loop.py:1337
+#: opt/pi-ager/pi_ager_loop.py:1325 opt/pi-ager/pi_ager_loop.py:1357
 msgid "uv-light on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1309 opt/pi-ager/pi_ager_loop.py:1341
+#: opt/pi-ager/pi_ager_loop.py:1332 opt/pi-ager/pi_ager_loop.py:1361
 msgid "uv-light off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1337 opt/pi-ager/pi_ager_loop.py:1341
+#: opt/pi-ager/pi_ager_loop.py:1345
+msgid "uv-light timestamp inactive"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1357 opt/pi-ager/pi_ager_loop.py:1361
 msgid "uv-light timestamp active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1347
+#: opt/pi-ager/pi_ager_loop.py:1367 opt/pi-ager/pi_ager_loop.py:1371
 msgid "modus light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1362 opt/pi-ager/pi_ager_loop.py:1372
+#: opt/pi-ager/pi_ager_loop.py:1374 opt/pi-ager/pi_ager_loop.py:1378
+#: opt/pi-ager/pi_ager_loop.py:1382
+msgid "light timer inactive"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1374 opt/pi-ager/pi_ager_loop.py:1378
+#: opt/pi-ager/pi_ager_loop.py:1412
+msgid "light permanent off"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1382
+msgid "light permanent on"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1390 opt/pi-ager/pi_ager_loop.py:1397
 msgid "light timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1362 opt/pi-ager/pi_ager_loop.py:1396
+#: opt/pi-ager/pi_ager_loop.py:1390 opt/pi-ager/pi_ager_loop.py:1424
 #: var/www/webcam.php:53
 msgid "light on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1372 opt/pi-ager/pi_ager_loop.py:1400
+#: opt/pi-ager/pi_ager_loop.py:1397 opt/pi-ager/pi_ager_loop.py:1428
 msgid "light off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1396 opt/pi-ager/pi_ager_loop.py:1400
+#: opt/pi-ager/pi_ager_loop.py:1412
+msgid "light timestamp inactive"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1424 opt/pi-ager/pi_ager_loop.py:1428
 msgid "light timestamp active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1660 opt/pi-ager/pi_ager_loop.py:1662
+#: opt/pi-ager/pi_ager_loop.py:1693 opt/pi-ager/pi_ager_loop.py:1695
+#: opt/pi-ager/pi_ager_loop.py:1698 opt/pi-ager/pi_ager_loop.py:1700
 msgid "weight scale"
 msgstr ""
 
@@ -926,10 +979,11 @@ msgid "defrost temperature"
 msgstr ""
 
 #: var/www/admin.php:439 var/www/admin.php:443 var/www/config.php:54
-#: var/www/config.php:101 var/www/config.php:177 var/www/config.php:216
-#: var/www/config.php:247 var/www/config.php:251 var/www/config.php:255
-#: var/www/manvals.php:53 var/www/manvals.php:76 var/www/manvals.php:99
-#: var/www/manvals.php:125
+#: var/www/config.php:101 var/www/config.php:177 var/www/config.php:182
+#: var/www/config.php:216 var/www/config.php:221 var/www/config.php:247
+#: var/www/config.php:251 var/www/config.php:255 var/www/manvals.php:53
+#: var/www/manvals.php:76 var/www/manvals.php:99 var/www/manvals.php:103
+#: var/www/manvals.php:125 var/www/manvals.php:128
 msgid "to"
 msgstr ""
 
@@ -1286,20 +1340,8 @@ msgstr ""
 msgid "oclock"
 msgstr ""
 
-#: var/www/changelog.php:20
-msgid "file exists"
-msgstr ""
-
 #: var/www/changelog.php:23 var/www/logs.php:26
 msgid "file does not exist"
-msgstr ""
-
-#: var/www/changelog.php:26
-msgid "file is readable"
-msgstr ""
-
-#: var/www/changelog.php:29
-msgid "file is not readable"
 msgstr ""
 
 #: var/www/changelog.php:47
@@ -1524,24 +1566,23 @@ msgid "uv"
 msgstr ""
 
 #: var/www/config.php:169 var/www/config.php:208
-#: var/www/modules/write_config_db_logfile_txt.php:138
-#: var/www/modules/write_config_db_logfile_txt.php:154
 #: var/www/modules/write_settings_db_logfile_txt.php:122
 #: var/www/modules/write_settings_db_logfile_txt.php:139
-msgid "duration & period"
+msgid "ON/OFF duration"
 msgstr ""
 
 #: var/www/config.php:170 var/www/config.php:209
-#: var/www/modules/write_config_db_logfile_txt.php:143
-#: var/www/modules/write_config_db_logfile_txt.php:159
-#: var/www/modules/write_settings_db_logfile_txt.php:127
-#: var/www/modules/write_settings_db_logfile_txt.php:144
-msgid "duration & timestamp"
+msgid "ON duration & timestamp"
 msgstr ""
 
 #: var/www/config.php:176 var/www/config.php:215 var/www/manvals.php:98
 #: var/www/manvals.php:124
-msgid "period every"
+msgid "OFF duration"
+msgstr ""
+
+#: var/www/config.php:181 var/www/config.php:220 var/www/manvals.php:102
+#: var/www/manvals.php:127
+msgid "ON duration"
 msgstr ""
 
 #: var/www/config.php:185 var/www/config.php:224
@@ -1556,44 +1597,46 @@ msgstr ""
 msgid "helptext_uv_config"
 msgstr ""
 "<br><br>\n"
-"<b>period: </b> This is used to set the pause time, which waits until the UV "
-"light is switched on again. If the value is 0 (= no pause), the UV light is "
-"permanently switched on. The maximum value is 1440min.\n"
+"<b>UV OFF duration: </b> This is used to set the pause duration, which waits "
+"until the UV light is switched on again. If the value is 0 (= no pause), the "
+"UV light is permanently switched on. The maximum value is 1440min.\n"
 "<br><br>\n"
-"<b>duration: </b> This sets UV light time during which the light is switched "
-"on. At 0, the UV light timer function is switched off. The maximum value is "
-"1440min.\n"
+"<b>UV ON duration: </b> This sets the UV light duration during which the "
+"light is switched on. At 0, the UV light is permanently switched off. The "
+"maximum value is 1440min.\n"
 "<br><br>\n"
 "<b>timestamp: </b> As an alternative to the cycle, a fixed time can be set "
-"here at which the UV light is switched on for the set duration.\n"
+"here at which the UV light is switched on for the set UV light duration.\n"
 "<br><br>\n"
 "<b>note: </b> For security reasons, you can manually switch off the UV light "
-"permanently via a switch on the admin page.  In this case, the timer can no "
+"permanently via a switch on the admin page. In this case, the timer can no "
 "longer turn on the UV light.\n"
 "<br><br>\n"
-"<b>attention: </b> period=0 und duration=0 is not useful and not allowed.\n"
+"<b>attention: </b> UV ON duration=0 and UV OFF duration=0: the UV light is "
+"permanently switched off.\n"
 "<br><br>"
 
 #: var/www/config.php:237
 msgid "helptext_light_config"
 msgstr ""
 "<br><br>\n"
-"<b>period: </b> This is used to set the pause time, which waits until the "
-"light is switched on again. If the value is 0 (= no pause), the light is "
+"<b>OFF duration: </b> This is used to set the pause time, which waits until "
+"the light is switched on again. If the value is 0 (= no pause), the light is "
 "permanently switched on. The maximum value is 1440min.\n"
 "<br><br>\n"
-"<b>duration: </b> This sets light time during which the light is switched "
-"on. At 0, the light timer function is switched off. The maximum value is "
+"<b>ON duration: </b> This sets light time during which the light is switched "
+"on. At 0, the light is permanently switched off. The maximum value is "
 "1440min.\n"
 "<br><br>\n"
 "<b>timestamp: </b> As an alternative to the cycle, a fixed time can be set "
-"here at which the light is switched on for the set duration.\n"
+"here at which the light is switched on for the set ON duration.\n"
 "<br><br>\n"
-"<b>note: </b>  You can manually switch on the light permanently via a switch "
+"<b>note: </b> You can manually switch on the light permanently via a switch "
 "on the webcam page. In this case, the timer can no longer turn off the "
 "light.\n"
 "<br><br>\n"
-"<b>attention: </b> period=0 und duration=0 is not useful and not allowed.\n"
+"<b>attention: </b> ON duration=0 and OFF duration=0: the light is "
+"permanently switched off.\n"
 "<br><br>"
 
 #: var/www/config.php:245
@@ -1790,43 +1833,35 @@ msgstr ""
 msgid "target temperature in °C"
 msgstr ""
 
-#: var/www/edit_agingtable.php:47 var/www/index.php:762
-#: var/www/settings.php:416
+#: var/www/edit_agingtable.php:47
 msgid "timer circulate d"
 msgstr ""
 
-#: var/www/edit_agingtable.php:47 var/www/index.php:762
-#: var/www/settings.php:416
+#: var/www/edit_agingtable.php:47
 msgid "timer of the circulation air duration in minutes"
 msgstr ""
 
-#: var/www/edit_agingtable.php:48 var/www/index.php:763
-#: var/www/settings.php:417
+#: var/www/edit_agingtable.php:48
 msgid "timer circulate p"
 msgstr ""
 
-#: var/www/edit_agingtable.php:48 var/www/index.php:763
-#: var/www/settings.php:417
+#: var/www/edit_agingtable.php:48
 msgid "timer of the circulation air period in minutes"
 msgstr ""
 
-#: var/www/edit_agingtable.php:49 var/www/index.php:764
-#: var/www/settings.php:418
+#: var/www/edit_agingtable.php:49
 msgid "timer exhaust d"
 msgstr ""
 
-#: var/www/edit_agingtable.php:49 var/www/index.php:764
-#: var/www/settings.php:418
+#: var/www/edit_agingtable.php:49
 msgid "timer of the exhausting air duration in minutes"
 msgstr ""
 
-#: var/www/edit_agingtable.php:50 var/www/index.php:765
-#: var/www/settings.php:419
+#: var/www/edit_agingtable.php:50
 msgid "timer exhaust p"
 msgstr ""
 
-#: var/www/edit_agingtable.php:50 var/www/index.php:765
-#: var/www/settings.php:419
+#: var/www/edit_agingtable.php:50
 msgid "timer of the exhausting air period in minutes"
 msgstr ""
 
@@ -1919,6 +1954,38 @@ msgstr ""
 #: var/www/modules/write_table_db.php:240
 #: var/www/modules/write_table_db.php:263 var/www/settings.php:190
 msgid "agingtable"
+msgstr ""
+
+#: var/www/index.php:762 var/www/settings.php:416
+msgid "timer circulate ON duration"
+msgstr ""
+
+#: var/www/index.php:762 var/www/settings.php:416
+msgid "timer of the circulation air ON duration in minutes"
+msgstr ""
+
+#: var/www/index.php:763 var/www/settings.php:417
+msgid "timer circulate OFF duration"
+msgstr ""
+
+#: var/www/index.php:763 var/www/settings.php:417
+msgid "timer of the circulation air OFF duration in minutes"
+msgstr ""
+
+#: var/www/index.php:764 var/www/settings.php:418
+msgid "timer exhaust ON duration"
+msgstr ""
+
+#: var/www/index.php:764 var/www/settings.php:418
+msgid "timer of the exhausting air ON duration in minutes"
+msgstr ""
+
+#: var/www/index.php:765 var/www/settings.php:419
+msgid "timer exhaust OFF duration"
+msgstr ""
+
+#: var/www/index.php:765 var/www/settings.php:419
+msgid "timer of the exhausting air OFF duration in minutes"
 msgstr ""
 
 #: var/www/index.php:788 var/www/modules/queryat.php:60
@@ -2016,7 +2083,11 @@ msgid "timer"
 msgstr ""
 
 #: var/www/index.php:1215
-msgid "period"
+msgid "OFF DURATION"
+msgstr ""
+
+#: var/www/index.php:1216
+msgid "ON DURATION"
 msgstr ""
 
 #: var/www/index.php:1224 var/www/modules/querystatus.php:132
@@ -2090,19 +2161,19 @@ msgstr ""
 msgid "open pi-ager.log in new tab"
 msgstr ""
 
-#: var/www/logs.php:177
+#: var/www/logs.php:165
 msgid "prev"
 msgstr ""
 
-#: var/www/logs.php:179
+#: var/www/logs.php:167
 msgid "next"
 msgstr ""
 
-#: var/www/logs.php:189
+#: var/www/logs.php:177
 msgid "to bottom"
 msgstr ""
 
-#: var/www/logs.php:195
+#: var/www/logs.php:183
 msgid "to top"
 msgstr ""
 
@@ -2270,46 +2341,48 @@ msgstr ""
 msgid "timer circulating"
 msgstr ""
 
-#: var/www/manvals.php:102 var/www/manvals.php:127
-msgid "for the duration of"
-msgstr ""
-
 #: var/www/manvals.php:115
 msgid "helptext_circulation_air"
 msgstr ""
 "<br><br>\n"
-"<b>period: </b> this is used to set the pause time, which waits until the "
-"exhausting is switched on again. if the value is 0 (= no pause), the "
-"exhausting air is permanently switched on. the maximum value is 1440min.\n"
+"<b>OFF duration: </b> This is used to set the pause time, which waits until "
+"the circulation air is switched on again. If the value is 0 (= no pause), "
+"the circulation air is permanently switched on. The maximum value is "
+"1440min.\n"
 "<br><br>\n"
-"<b>duration: </b> this sets the exhausting time during which the fan is "
-"running. at 0, the exhausting air timer function is switched off. the "
+"<b>ON duration: </b> This sets the circulation air time during which the fan "
+"is running. At 0, the circulation air is permanently switched off. The "
 "maximum value is 1440min.\n"
 "<br><br>\n"
-"<b>note: </b> The exhaust air fan runs independently of the timer settings - "
-"also during dehumidification in the \"automatic mode with humidification and "
-"dehumidification.\n"
+"<b>note: </b> The circulation air fan runs independently of the timer "
+"settings - also during cooling, heating and humidification.\n"
 "<br><br>\n"
-"<b>attention: </b> period=0 und duration=0 is not useful and not allowed.\n"
+"<b>attention: </b> OFF duration=0 and ON duration=0: circulation air is "
+"permanently switched off.\n"
 "<br><br>"
+
+#: var/www/manvals.php:123
+msgid "timer exhausting air"
+msgstr ""
 
 #: var/www/manvals.php:140
 msgid "helptext_exhausting_air"
 msgstr ""
 "<br><br>\n"
-"<b>period: </b> This is used to set the pause time, which waits until the "
-"exhausting is switched on again. If the value is 0 (= no pause), the "
-"exhausting air is permanently switched on. the maximum value is 1440min.\n"
+"<b>OFF duration: </b> This is used to set the pause time, which waits until "
+"the exhausting air is switched on again. If the value is 0 (= no pause), the "
+"exhausting air is permanently switched on. The maximum value is 1440min.\n"
 "<br><br>\n"
-"<b>duration: </b> This sets the exhausting time during which the fan is "
-"running. If the value is 0, the exhausting air timer function is switched "
-"off. The maximum value is 1440min.\n"
+"<b>ON duration: </b> This sets the exhausting air time during which the fan "
+"is running. At 0, the exhausting air is permanently switched off. the "
+"maximum value is 1440min.\n"
 "<br><br>\n"
-"<b>note: </b> The exhaust air fan runs independently of the timer settings - "
-"also during dehumidification in the \"automatic mode with humidification and "
-"dehumidification.\n"
+"<b>note: </b> The exhausting air fan runs independently of the timer "
+"settings - also during dehumidification in the automatic mode with "
+"humidification and dehumidification.\n"
 "<br><br>\n"
-"<b>attention: </b> period=0 und duration=0 is not useful and not allowed.\n"
+"<b>attention: </b> OFF duration=0 and ON duration=0: exhausting air is "
+"permanently switched off.\n"
 "<br><br>"
 
 #: var/www/modules/clear_logfile.php:8
@@ -2516,8 +2589,7 @@ msgid "backup values"
 msgstr ""
 
 #: var/www/modules/write_bus.php:24
-msgid ""
-"Format error in MAC address last 3 bytes. Format must be e.g.: 2a:53:f9 "
+msgid "Format error in MAC address last 3 bytes. Format must be e.g.: 2a:53:f9"
 msgstr ""
 
 #: var/www/modules/write_bus.php:40
@@ -2564,38 +2636,46 @@ msgstr ""
 msgid "automatic with dehumidification and humidification"
 msgstr ""
 
+#: var/www/modules/write_config_db_logfile_txt.php:138
+msgid "UV ON/OFF duration"
+msgstr ""
+
 #: var/www/modules/write_config_db_logfile_txt.php:139
-#: var/www/modules/write_settings_db_logfile_txt.php:123
-msgid "uv period"
+msgid "UV OFF duration"
 msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:140
 #: var/www/modules/write_config_db_logfile_txt.php:145
-#: var/www/modules/write_settings_db_logfile_txt.php:124
-#: var/www/modules/write_settings_db_logfile_txt.php:129
-msgid "uv duration"
+msgid "UV ON duration"
+msgstr ""
+
+#: var/www/modules/write_config_db_logfile_txt.php:143
+msgid "UV ON duration & timestamp"
 msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:144
-#: var/www/modules/write_settings_db_logfile_txt.php:128
-msgid "uv timestamp"
+msgid "UV timestamp"
+msgstr ""
+
+#: var/www/modules/write_config_db_logfile_txt.php:154
+msgid "Light ON/OFF duration"
 msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:155
-#: var/www/modules/write_settings_db_logfile_txt.php:140
-msgid "light period"
+msgid "Light OFF duration"
 msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:156
 #: var/www/modules/write_config_db_logfile_txt.php:161
-#: var/www/modules/write_settings_db_logfile_txt.php:141
-#: var/www/modules/write_settings_db_logfile_txt.php:146
-msgid "light duration"
+msgid "Light ON duration"
+msgstr ""
+
+#: var/www/modules/write_config_db_logfile_txt.php:159
+msgid "Light ON duration & timestamp"
 msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:160
-#: var/www/modules/write_settings_db_logfile_txt.php:145
-msgid "light timestamp"
+msgid "Light timestamp"
 msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:171
@@ -2695,22 +2775,22 @@ msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:204
 #: var/www/modules/write_settings_db_logfile_txt.php:191
-msgid "circulation air period"
+msgid "circulation air OFF duration"
 msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:205
 #: var/www/modules/write_settings_db_logfile_txt.php:192
-msgid "circulation air duration"
+msgid "circulation air ON duration"
 msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:206
 #: var/www/modules/write_settings_db_logfile_txt.php:193
-msgid "exhausting air period"
+msgid "exhausting air OFF duration"
 msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:207
 #: var/www/modules/write_settings_db_logfile_txt.php:194
-msgid "exhausting air duration"
+msgid "exhausting air ON duration"
 msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:208
@@ -2719,13 +2799,11 @@ msgid "dehumidify modus"
 msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:209
-#: var/www/modules/write_settings_db_logfile_txt.php:196
-msgid "uv modus"
+msgid "UV modus"
 msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:212
-#: var/www/modules/write_settings_db_logfile_txt.php:199
-msgid "light modus"
+msgid "Light modus"
 msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:222
@@ -2734,8 +2812,7 @@ msgid "values saved in file Database"
 msgstr ""
 
 #: var/www/modules/write_config_db_logfile_txt.php:226
-#: var/www/modules/write_settings_db_logfile_txt.php:209
-msgid "values not in the specified limits!"
+msgid "values not within the specified limits!"
 msgstr ""
 
 #: var/www/modules/write_defrost_db.php:12
@@ -2790,12 +2867,55 @@ msgstr ""
 msgid "telegram values"
 msgstr ""
 
+#: var/www/modules/write_settings_db_logfile_txt.php:123
+msgid "uv OFF duration"
+msgstr ""
+
+#: var/www/modules/write_settings_db_logfile_txt.php:124
+#: var/www/modules/write_settings_db_logfile_txt.php:129
+msgid "uv ON duration"
+msgstr ""
+
+#: var/www/modules/write_settings_db_logfile_txt.php:127
+#: var/www/modules/write_settings_db_logfile_txt.php:144
+msgid "duration & timestamp"
+msgstr ""
+
+#: var/www/modules/write_settings_db_logfile_txt.php:128
+msgid "uv timestamp"
+msgstr ""
+
+#: var/www/modules/write_settings_db_logfile_txt.php:140
+msgid "light OFF duration"
+msgstr ""
+
+#: var/www/modules/write_settings_db_logfile_txt.php:141
+#: var/www/modules/write_settings_db_logfile_txt.php:146
+msgid "light ON duration"
+msgstr ""
+
+#: var/www/modules/write_settings_db_logfile_txt.php:145
+msgid "light timestamp"
+msgstr ""
+
 #: var/www/modules/write_settings_db_logfile_txt.php:157
 msgid "values have been manually changed."
 msgstr ""
 
 #: var/www/modules/write_settings_db_logfile_txt.php:158
 msgid "sensor"
+msgstr ""
+
+#: var/www/modules/write_settings_db_logfile_txt.php:196
+msgid "uv modus"
+msgstr ""
+
+#: var/www/modules/write_settings_db_logfile_txt.php:199
+msgid "light modus"
+msgstr ""
+
+#: var/www/modules/write_settings_db_logfile_txt.php:209
+msgid "values not in the specified limits!"
 msgstr ""
 
 #: var/www/modules/write_table_db.php:10

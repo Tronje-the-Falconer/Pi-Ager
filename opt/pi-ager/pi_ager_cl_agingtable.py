@@ -164,13 +164,13 @@ class cl_aging_thread( threading.Thread ):
         switch_off_humidifier_logstring = "\n" + '.................................' + _('switch-off value humidity') + ": " + str(switch_off_humidifier) + "%"
         delay_humidify_logstring = "\n" + '.................................' + _('humidification delay') + ": " + str(delay_humidify) + ' ' + _("minutes")
         circulation_air_period_format = int(period_dictionary['circulation_air_period'])/60
-        circulation_air_period_logstring = "\n" + '.................................' + _('timer circulation air period every') + ": " + str(circulation_air_period_format) + ' ' + _("minutes")
+        circulation_air_period_logstring = "\n" + '.................................' + _('timer circulation air OFF duration') + ": " + str(circulation_air_period_format) + ' ' + _("minutes")
         circulation_air_duration_format = int(period_dictionary['circulation_air_duration'])/60
-        circulation_air_duration_logstring = "\n" + '.................................' + _('timer circulation air') + ": " + str(circulation_air_duration_format) + ' ' + _("minutes")
+        circulation_air_duration_logstring = "\n" + '.................................' + _('timer circulation air ON duration') + ": " + str(circulation_air_duration_format) + ' ' + _("minutes")
         exhaust_air_period_format = int(period_dictionary['exhaust_air_period'])/60
-        exhaust_air_period_logstring = "\n" + '.................................' + _('timer exhaust air period every') + ": " + str(exhaust_air_period_format) + ' ' + _("minutes")
+        exhaust_air_period_logstring = "\n" + '.................................' + _('timer exhaust air OFF duration') + ": " + str(exhaust_air_period_format) + ' ' + _("minutes")
         exhaust_air_duration_format = int(period_dictionary['exhaust_air_duration'])/60
-        exhaust_air_duration_logstring = "\n" + '.................................' + _('timer exhausting air') + ": " + str(exhaust_air_duration_format) + ' ' + _("minutes")
+        exhaust_air_duration_logstring = "\n" + '.................................' + _('timer exhaust air ON duration') + ": " + str(exhaust_air_duration_format) + ' ' + _("minutes")
         period_days_logstring="\n" + '.................................' + _('duration') + ": " + str(period_dictionary['days']) + ' ' + (_('days') if period_dictionary['days'] > 1 else _('day'))
         sensor_logstring = '.................................' + _('sensortype') + ": " + cl_fact_main_sensor_type().get_instance()._get_type_ui( )
         

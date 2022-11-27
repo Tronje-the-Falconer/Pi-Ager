@@ -56,7 +56,7 @@ async function loadContentat() {
 }
 
 // timer for page data refresh
-var myVarat = setInterval(myTimerat, 10000);
+var myVarat = setInterval(myTimerat, 5000);
 
 function myTimerat() {
     var loc = location.pathname;

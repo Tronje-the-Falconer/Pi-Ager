@@ -68,11 +68,11 @@
                                         var mainlogfile = "logfile.txt";
                                         var logfilepath = "/logs/";
                                         var current_logfile = 'logfile.txt';
-                                        var logfilecount = -1;
+                                        var logfileindex = 0;  // points to logfile.txt
                                         
                                         window.onload = function () {
                                             write_filecontent(logfilepath + current_logfile);
-                                            document.getElementById("currentfile").innerHTML = (current_logfile);  
+                                            document.getElementById("currentfile").innerHTML = (current_logfile);
                                         }
                                         
                                         function write_filecontent(file){
@@ -106,8 +106,7 @@
                                                       });
                                                       document.getElementById("filecontent").innerHTML = (newtext);
                                                       // document.getElementById("filecontent").textContent = text;
-                                                      
-                                                      
+                                                      document.getElementById("end_href").click();
                                                   }
                                               };
                                               xmlHttp.send(null);
@@ -123,51 +122,40 @@
                                             // return file;
                                         // }
                                         function prev_logfile(phplogfilecount){
-                                            if (logfilecount == -1 || logfilecount == 0){
-                                                write_filecontent(logfilepath + "logfile.txt.1");
-                                                current_logfile = 'logfile.txt.1';
-                                                logfilecount = 1;
-                                                alert(current_logfile);
-                                                document.getElementById("currentfile").innerHTML = (current_logfile);
+                                            console.log('prev clicked. phplogfilecount = ' + phplogfilecount + ' logfileindex = ' + logfileindex);
+                                            if (phplogfilecount == 0 || phplogfilecount == 1) {  // file is missing or only mainlogfile
+                                                return;
                                             }
-                                            else if (logfilecount < phplogfilecount && logfilecount != (phplogfilecount-1)){
-                                                logfilecount++;
-                                                write_filecontent(logfilepath + "logfile.txt." + logfilecount.toString());
-                                                current_logfile = 'logfile.txt.' + logfilecount.toString();// + nächste Zahl
-                                                alert(current_logfile);
+                                            // here we have more than 1 log file
+                                            if (logfileindex < (phplogfilecount - 1)){
+                                                logfileindex++;
+                                                write_filecontent(logfilepath + "logfile.txt." + logfileindex.toString());
+                                                current_logfile = 'logfile.txt.' + logfileindex.toString();
+                                                // alert(current_logfile);
                                                 document.getElementById("currentfile").innerHTML = (current_logfile);
-                                            }
-                                            else {
-                                                write_filecontent(logfilepath + "logfile.txt");
-                                                current_logfile = 'logfile.txt'
-                                                logfilecount = -1;
-                                                alert('first logfile ' + current_logfile);
-                                                document.getElementById("currentfile").innerHTML = (current_logfile);                                                
                                             }
                                         }
                                         
                                         function next_logfile(phplogfilecount){
-                                            if (logfilecount <= 0){
-                                                firstlogfile = phplogfilecount-1
-                                                write_filecontent(logfilepath + "logfile.txt." + firstlogfile.toString());
-                                                current_logfile = 'logfile.txt.' + firstlogfile.toString();
-                                                logfilecount = firstlogfile;
-                                                alert(current_logfile);
-                                                document.getElementById("currentfile").innerHTML = (current_logfile);                                                
+                                            console.log('next clicked. phplogfilecount = ' + phplogfilecount + ' logfileindex = ' + logfileindex);
+                                            if (phplogfilecount == 0 || phplogfilecount == 1) {  // file is missing or only mainlogfile
+                                                return;
                                             }
-                                            else if (logfilecount <= phplogfilecount && logfilecount != 1){
-                                                logfilecount--;
-                                                write_filecontent(logfilepath + "logfile.txt." + logfilecount.toString());// + nächste Zahl
-                                                current_logfile = 'logfile.txt.' + logfilecount.toString();// + nächste Zahl
-                                                alert(current_logfile);
-                                                document.getElementById("currentfile").innerHTML = (current_logfile);                                               
-                                            }
-                                            else {
-                                                write_filecontent(logfilepath + "logfile.txt");
-                                                current_logfile = 'logfile.txt'
-                                                logfilecount = -1;
-                                                alert('current logfile ' + current_logfile);
-                                                document.getElementById("currentfile").innerHTML = (current_logfile);                                                
+                                            // here we have more than 1 log file                                            
+                                            if (logfileindex > 0){
+                                                logfileindex--;
+                                                if (logfileindex == 0) {
+                                                    write_filecontent(logfilepath + "logfile.txt");
+                                                    current_logfile = 'logfile.txt'
+                                                    // alert('current logfile ' + current_logfile);
+                                                    document.getElementById("currentfile").innerHTML = (current_logfile);      
+                                                }
+                                                else {
+                                                    write_filecontent(logfilepath + "logfile.txt." + logfileindex.toString());
+                                                    current_logfile = 'logfile.txt.' + logfileindex.toString();
+                                                    // alert(current_logfile);
+                                                    document.getElementById("currentfile").innerHTML = (current_logfile);                                               
+                                                }
                                             }
                                         }
                                     </script>
@@ -186,14 +174,13 @@
                                         <tr>
                                             <td>
                                                 <p id="begin" align="right">
-                                                    <a  href="#end"><?php echo _('to bottom') ?></a>
+                                                    <a id="end_href" href="#end"><?php echo _('to bottom') ?></a>
                                                 </p>
                                                 <div id="filecontent" ></div>
                                                 </div>
                                                 </br></br>
                                                 <p align="right" id="end">
-                                                    <a align="right" href="#begin"><?php echo _('to top') ?></a>
-                                                    
+                                                    <a href="#begin"><?php echo _('to top') ?></a>
                                                 </p>
                                             </td>
                                         </tr>

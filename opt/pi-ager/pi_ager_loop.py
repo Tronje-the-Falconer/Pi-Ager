@@ -409,6 +409,7 @@ def switch_light(relay_state):
     if not globals.hands_off_light_switch:
         #set_gpio_value(pi_ager_gpio_config.gpio_light, relay_state)
         globals.requested_state_light = relay_state
+        # cl_fact_logger.get_instance().info(f"switch light state = {relay_state}")
         
 def switch_uv_light(relay_state):
     """
@@ -456,6 +457,7 @@ def control_defrost():
     if (sensor_temperature >= defrost_temperature): # can now finish defrost
         if (defrost_status == 1):
             cl_fact_logger.get_instance().info(_('defrost process stopped'))
+            cl_fact_logic_messenger().get_instance().handle_event('Defrost_stopped') 
         defrost_status = 0
         pi_ager_database.write_current_value(pi_ager_names.status_defrost_key, 0)
         defrost_cycle_elapsed = False
@@ -465,6 +467,7 @@ def control_defrost():
     # here set defrost_status to 1,  turn on circulation air, turn on heater, turn off cooler: defrost now active
     if (defrost_status == 0):
         cl_fact_logger.get_instance().info(_('defrost process started'))
+        cl_fact_logic_messenger().get_instance().handle_event('Defrost_started') 
     defrost_status = 1
     pi_ager_database.write_current_value(pi_ager_names.status_defrost_key, 1)
     gpio.output(pi_ager_gpio_config.gpio_heater, pi_ager_names.relay_on)
@@ -950,6 +953,7 @@ def doMainLoop():
     global circulation_air_period         #  Umluftperiode
     global exhaust_air_duration           #  (Abluft-)luftaustauschdauer
     global exhaust_air_period             #  (Abluft-)luftaustauschperiode
+    
     global sensor_temperature             #  Gemessene Temperatur am Sensor
     global sensor_humidity                #  Gemessene Feuchtigkeit am Sensor
     global sensor_dewpoint                #  Gerechneter Taupunkt
@@ -975,19 +979,21 @@ def doMainLoop():
     #counter_humidify = 0
     global delay_humidify                 #  Luftbefeuchtungsverzoegerung
     global status_exhaust_fan             #  Variable fuer die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
+    
     global uv_modus                       #  Modus UV-Licht  (1 = Periode/Dauer; 2= Zeitstempel/Dauer)
     global status_uv                      #  UV-Licht
     global switch_on_uv_hour              #  Stunde wann das UV Licht angeschaltet werden soll
     global switch_on_uv_minute            #  Minute wann das UV Licht ausgeschaltet werden soll
     global uv_duration                    #  Dauer der UV_Belichtung
     global uv_period                      #  Periode für UV_Licht
+    
     global light_modus                    #  ModusLicht  (1 = Periode/Dauer; 2= Zeitstempel/Dauer)
     global status_light                   #  Licht
     global switch_on_light_hour           #  Stunde wann Licht angeschaltet werden soll
     global switch_on_light_minute         #  Minute wann das Licht ausgeschaltet werden soll
     global light_duration                 #  Dauer für Licht
     global light_period                   #  Periode für Licht
-    global light_stoptime                 #  Unix-Zeitstempel fuer den Stop des UV-Light
+    
     global dehumidifier_modus             #  Modus Entfeuchter  (1 = über Abluft, 2 = mit Abluft zusammen [unterstützend]; 3 = anstelle von Abluft)
     global status_dehumidifier            #  Entfeuchter
     global status_pi_ager
@@ -1035,10 +1041,14 @@ def doMainLoop():
     
     #Here get instance of Deviation class
     cl_fact_logger.get_instance().debug('in doMainLoop()')
+    
     # Here init uv_period and light_period to detect change in loop
     uv_period = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_period_key))
-    light_period = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_period_key))
+    uv_duration = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_duration_key))
     uv_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_modus_key))
+    
+    light_period = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_period_key))
+    light_duration = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_duration_key))
     light_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_modus_key))  
     
     # init temperature limits, generate events if temperature is out of limits
@@ -1160,17 +1170,20 @@ def doMainLoop():
                 switch_off_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_humidifier_key))
                 delay_humidify = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key))
                 delay_humidify = delay_humidify * 60
+                
                 uv_modus_temp = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_modus_key))
                 switch_on_uv_hour = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_hour_key))
                 switch_on_uv_minute = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_minute_key))
-                uv_duration = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_duration_key))
+                uv_duration_temp = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_duration_key))
+                uv_period_temp = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_period_key)) 
                 
-                # check if uv_period changed
-                uv_period_temp = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_period_key))
-                if (uv_period_temp != uv_period or uv_modus_temp != uv_modus):
-                    current_time = pi_ager_database.get_current_time()
+                current_time = pi_ager_database.get_current_time()
+                
+                # check if uv settings changed
+                if (uv_period_temp != uv_period or uv_duration_temp != uv_duration or uv_modus_temp != uv_modus):
                     uv_period = uv_period_temp
                     uv_modus = uv_modus_temp
+                    uv_duration = uv_duration_temp
                     pi_ager_init.uv_starttime = current_time
                     pi_ager_init.uv_stoptime = pi_ager_init.uv_starttime + uv_duration
                 
@@ -1178,37 +1191,36 @@ def doMainLoop():
                 if (exhaust_air_period_temp != exhaust_air_period or exhaust_air_duration_temp != exhaust_air_duration):
                     exhaust_air_period = exhaust_air_period_temp
                     exhaust_air_duration = exhaust_air_duration_temp
-                    pi_ager_init.exhaust_air_start = int(time.time())   # Timer-Timestamp aktualisiert
+                    pi_ager_init.exhaust_air_start = current_time   # Timer-Timestamp aktualisiert
 
                 # check if circulation_air period or duration changed
                 if (circulation_air_period_temp != circulation_air_period or circulation_air_duration_temp != circulation_air_duration):
                     circulation_air_period = circulation_air_period_temp
                     circulation_air_duration = circulation_air_duration_temp
-                    pi_ager_init.circulation_air_start = int(time.time())   # Timer-Timestamp aktualisiert
+                    pi_ager_init.circulation_air_start = current_time   # Timer-Timestamp aktualisiert
                 
                 # check if defrost_cycle_seconds changed
                 if (defrost_cycle_seconds_temp != defrost_cycle_seconds):
                     defrost_cycle_seconds = defrost_cycle_seconds_temp
-                    pi_ager_init.defrost_cycle_start = int(time.time())   # Timer-Timestamp aktualisiert
+                    pi_ager_init.defrost_cycle_start = current_time   # Timer-Timestamp aktualisiert
                     
                 light_modus_temp = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_modus_key))
                 switch_on_light_hour = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_light_hour_key))
                 switch_on_light_minute = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_light_minute_key))
-                light_duration = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_duration_key))
-                # check if light_period changed
-                light_period_temp = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_period_key))                
-                if (light_period_temp != light_period or light_modus_temp != light_modus):
-                    current_time = pi_ager_database.get_current_time()
+                light_duration_temp = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_duration_key))
+                light_period_temp = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.light_period_key))
+                
+                # check if light settings changed
+                if (light_period_temp != light_period or light_duration_temp != light_duration or light_modus_temp != light_modus):
                     light_period = light_period_temp
                     light_modus = light_modus_temp
+                    light_duration = light_duration_temp
                     pi_ager_init.light_starttime = current_time
                     pi_ager_init.light_stoptime = pi_ager_init.light_starttime + light_duration
                     
                 dehumidifier_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.dehumidifier_modus_key))
     
                 # An dieser Stelle sind alle settings eingelesen, Ausgabe auf Konsole
-                #os.system('clear') # Clears the terminal
-                current_time = pi_ager_database.get_current_time()
                 
                 logstring = ' \n ' + pi_ager_names.logspacer
                 # logstring = logstring + ' \n ' + 'Main loop/Unix-Timestamp: (' + str(current_time)+ ')'
@@ -1244,73 +1256,81 @@ def doMainLoop():
                 
                 # Durch den folgenden Timer laeuft der Ventilator in den vorgegebenen Intervallen zusaetzlich zur generellen Umluft bei aktivem Heizen, Kuehlen oder Befeuchten
                 # Timer fuer Luftumwaelzung-Ventilator
-                if circulation_air_period == 0:                          # gleich 0 ist an,  Dauer-Timer
+                if (circulation_air_period == 0 and circulation_air_duration == 0):
+                    status_circulating_air = False  # no timer
+                    logstring = logstring + ' \n ' +  _('circulation air timer inactive') + ' (' + _('fan permanent off') +')'
+                elif circulation_air_period == 0:                          # gleich 0 ist an,  Dauer-EIN
                     status_circulating_air = True
-                if circulation_air_duration == 0:                        # gleich 0 ist aus, kein Timer
+                    logstring = logstring + ' \n ' +  _('circulation air timer inactive') + ' (' + _('fan permanent on') +')'
+                elif circulation_air_duration == 0:                        # gleich 0 ist aus, Dauer-AUS
                     status_circulating_air = False
-                if circulation_air_duration > 0:
-                    if current_time < pi_ager_init.circulation_air_start + circulation_air_period:
-                        status_circulating_air = False                       # Umluft - Ventilator aus
-                        logstring = logstring + ' \n ' +  _('circulation air timer active') + ' (' + _('fan off') +')'
-                        # cl_fact_logger.get_instance().debug(logstring)
-                    if current_time >= pi_ager_init.circulation_air_start + circulation_air_period:
-                        status_circulating_air = True                      # Umluft - Ventilator an
+                    logstring = logstring + ' \n ' +  _('circulation air timer inactive') + ' (' + _('fan permanent off') +')'
+                else:
+                    if current_time < pi_ager_init.circulation_air_start + circulation_air_duration:
+                        status_circulating_air = True                       # Umluft - Ventilator an
                         logstring = logstring + ' \n ' +  _('circulation air timer active') + ' (' + _('fan on') +')'
                         # cl_fact_logger.get_instance().debug(logstring)
+                    if current_time >= pi_ager_init.circulation_air_start + circulation_air_duration:
+                        status_circulating_air = False                      # Umluft - Ventilator aus
+                        logstring = logstring + ' \n ' +  _('circulation air timer active') + ' (' + _('fan off') +')'
+                        # cl_fact_logger.get_instance().debug(logstring)
                     if current_time >= pi_ager_init.circulation_air_start + circulation_air_period + circulation_air_duration:
-                        pi_ager_init.circulation_air_start = int(time.time())    # Timer-Timestamp aktualisiert
+                        pi_ager_init.circulation_air_start = current_time    # Timer-Timestamp aktualisiert
                         
                 # Timer fuer (Abluft-)Luftaustausch-Ventilator
-                if exhaust_air_period == 0:                      # gleich 0 ist an,  Dauer-Timer
-                    status_exhaust_air_timer = True
-                if exhaust_air_duration == 0:                        # gleich 0 ist aus, kein Timer
+                if (exhaust_air_period == 0 and exhaust_air_duration == 0):
                     status_exhaust_air_timer = False
-                if exhaust_air_duration > 0:                        # gleich 0 ist aus, kein Timer
-                    if current_time < pi_ager_init.exhaust_air_start + exhaust_air_period:
-                        status_exhaust_air_timer = False                      # (Abluft-)Luftaustausch-Ventilator aus
-                        logstring = logstring + ' \n ' +  _('exhaust air timer active') + ' (' + _('fan off') +')'
-                        # cl_fact_logger.get_instance().debug(logstring)
-                    if current_time >= pi_ager_init.exhaust_air_start + exhaust_air_period:
-                        status_exhaust_air_timer = True                     # (Abluft-)Luftaustausch-Ventilator an
+                    logstring = logstring + ' \n ' +  _('exhaust air timer inactive') + ' (' + _('fan permanent off') +')'
+                elif exhaust_air_period == 0:                      # gleich 0 ist an,  Dauer-Timer
+                    status_exhaust_air_timer = True
+                    logstring = logstring + ' \n ' +  _('exhaust air timer inactive') + ' (' + _('fan permanent on') +')'
+                elif exhaust_air_duration == 0:                        # gleich 0 ist aus, kein Timer
+                    status_exhaust_air_timer = False
+                    logstring = logstring + ' \n ' +  _('exhaust air timer inactive') + ' (' + _('fan permanent off') +')'
+                else:
+                    if current_time < pi_ager_init.exhaust_air_start + exhaust_air_duration:
+                        status_exhaust_air_timer = True                      # (Abluft-)Luftaustausch-Ventilator aus
                         logstring = logstring + ' \n ' +  _('exhaust air timer active') + ' (' + _('fan on') +')'
                         # cl_fact_logger.get_instance().debug(logstring)
+                    if current_time >= pi_ager_init.exhaust_air_start + exhaust_air_duration:
+                        status_exhaust_air_timer = False                     # (Abluft-)Luftaustausch-Ventilator an
+                        logstring = logstring + ' \n ' +  _('exhaust air timer active') + ' (' + _('fan off') +')'
+                        # cl_fact_logger.get_instance().debug(logstring)
                     if current_time >= pi_ager_init.exhaust_air_start + exhaust_air_period + exhaust_air_duration:
-                        pi_ager_init.exhaust_air_start = int(time.time())   # Timer-Timestamp aktualisiert
+                        pi_ager_init.exhaust_air_start = current_time       # Timer-Timestamp aktualisiert
                         
                 # Timer fuer UV-Licht
-                if uv_modus == 0:                         # Modus 0 UV-Licht aus
-                    status_uv = False                      # UV-Licht aus
+                if uv_modus == 0:                               # Modus 0 UV-Licht aus
+                    status_uv = False                           # UV-Licht aus
                     logstring = logstring + ' \n ' +  _('modus uv-light') + ': ' + _('off')
                     # cl_fact_logger.get_instance().debug(logstring)
                 
-                if uv_modus == 1:                            # Modus 1 = Periode/Dauer
+                if uv_modus == 1:                               # Modus 1 = EIN/AUS Dauer
                     logstring = logstring + ' \n ' +  _('modus uv-light') + ': ' + _('on')
-                    if uv_period == 0:                      # gleich 0 ist an,  Dauer-Timer
-                        status_uv = True
-                    if uv_duration == 0:                        # gleich 0 ist aus, kein Timer
+                    if (uv_period == 0 and uv_duration == 0):   # beide 0: kein Timer
                         status_uv = False
-                    if uv_duration > 0:                        # ungleich 0,  Timer                
-                        if pi_ager_init.uv_stoptime == pi_ager_init.system_starttime:
+                        logstring = logstring + ' \n ' +  _('uv-light timer inactive') + ' (' + _('uv-light permanent off') +')'
+                    elif uv_duration == 0:                      # EIN Dauer gleich 0, kein Timer, dauernd AUS
+                        status_uv = False
+                        logstring = logstring + ' \n ' +  _('uv-light timer inactive') + ' (' + _('uv-light permanent off') +')'
+                    elif uv_period == 0:                        # AUS Dauer gleich 0, kein Timer, dauernd EIN
+                        status_uv = True
+                        logstring = logstring + ' \n ' +  _('uv-light timer inactive') + ' (' + _('uv-light permanent on') +')'
+                    else:                                       # beide nicht null, Timer                
+                        if pi_ager_init.uv_stoptime == pi_ager_init.system_starttime:           # first run
                             pi_ager_init.uv_stoptime = pi_ager_init.uv_starttime + uv_duration
-                            status_uv = True
+                            status_uv = False
                         if current_time >= pi_ager_init.uv_starttime and current_time <= pi_ager_init.uv_stoptime:
                             status_uv = True                     # UV-Licht an
                             logstring = logstring + ' \n ' +  _('uv-light timer active') + ' (' + _('uv-light on') +')'
                             # cl_fact_logger.get_instance().debug(logstring)
-
                             # cl_fact_logger.get_instance().debug('UV-Licht Startzeit: ' + convert(pi_ager_init.uv_starttime))
                             # cl_fact_logger.get_instance().debug('UV-Licht Stoppzeit: ' + convert(pi_ager_init.uv_stoptime))
-                            #logger.debug('UV-Licht Startzeit: ' + pi_ager_init.uv_starttime.strftime('%d %B %Y %H:%M:%S'))
-                            #logger.debug('UV-Licht Stoppzeit: ' + pi_ager_init.uv_stoptime.strftime('%Y-%m-%d %H:%M:%S'))
-                            # logger.debug('UV-Licht duration: ' + str(uv_duration))
                             # cl_fact_logger.get_instance().debug('UV-Licht duration: ' + str(uv_duration))
                         else: 
                             status_uv = False                      # UV-Licht aus
                             logstring = logstring + ' \n ' +  _('uv-light timer active') + ' (' + _('uv-light off') +')'
                             # cl_fact_logger.get_instance().debug(logstring)
-                            # logger.debug('UV-Licht Stoppzeit: ' + convert(pi_ager_init.uv_stoptime))
-                            # logger.debug('UV-Licht Startzeit: ' + convert(pi_ager_init.uv_starttime))
-                            # logger.debug('UV-Licht period: ' + str(uv_period))
                             # cl_fact_logger.get_instance().debug('UV-Licht Stoppzeit: ' + convert(pi_ager_init.uv_stoptime))
                             # cl_fact_logger.get_instance().debug('UV-Licht Startzeit: ' + convert(pi_ager_init.uv_starttime))
                             # cl_fact_logger.get_instance().debug('UV-Licht period: ' + str(uv_period))
@@ -1320,60 +1340,62 @@ def doMainLoop():
                             pi_ager_init.uv_stoptime = pi_ager_init.uv_starttime + uv_duration
     
                 if uv_modus == 2:                         # Modus 2 Zeitstempel/Dauer
-                    now = datetime.datetime.now()
-                    year_now = now.year
-                    month_now = now.month
-                    day_now = now.day
+                    if (uv_duration == 0):
+                        status_uv = False                 # UV-Licht aus
+                        logstring = logstring + ' \n ' +  _('uv-light timestamp inactive') + ' (' + _('uv-light permanent off') +')'
+                    else:
+                        now = datetime.datetime.now()
+                        year_now = now.year
+                        month_now = now.month
+                        day_now = now.day
     
-                    pi_ager_init.uv_starttime = datetime.datetime(year_now, month_now, day_now, switch_on_uv_hour, switch_on_uv_minute, 0, 0)
-                    pi_ager_init.uv_stoptime = pi_ager_init.uv_starttime + datetime.timedelta(0, uv_duration)
-                    cl_fact_logger.get_instance().debug(pi_ager_init.uv_starttime)
-                    cl_fact_logger.get_instance().debug(pi_ager_init.uv_stoptime)
-                    #cl_fact_logger.get_instance().debug(pi_ager_init.uv_starttime)
-                    #cl_fact_logger.get_instance().debug(pi_ager_init.uv_stoptime)
+                        pi_ager_init.uv_starttime = datetime.datetime(year_now, month_now, day_now, switch_on_uv_hour, switch_on_uv_minute, 0, 0)
+                        pi_ager_init.uv_stoptime = pi_ager_init.uv_starttime + datetime.timedelta(0, uv_duration)
     
-                    if now >= pi_ager_init.uv_starttime and now <= pi_ager_init.uv_stoptime:
-                        status_uv = True                     # UV-Licht an
-                        logstring = logstring + ' \n ' +  _('uv-light timestamp active') + ' (' + _('uv-light on') +')'
-                        # cl_fact_logger.get_instance().debug(logstring)
-                    else: 
-                        status_uv = False                      # UV-Licht aus
-                        logstring = logstring + ' \n ' +  _('uv-light timestamp active') + ' (' + _('uv-light off') +')'
-                        # cl_fact_logger.get_instance().debug(logstring)
+                        if now >= pi_ager_init.uv_starttime and now <= pi_ager_init.uv_stoptime:
+                            status_uv = True                     # UV-Licht an
+                            logstring = logstring + ' \n ' +  _('uv-light timestamp active') + ' (' + _('uv-light on') +')'
+                            # cl_fact_logger.get_instance().debug(logstring)
+                        else: 
+                            status_uv = False                      # UV-Licht aus
+                            logstring = logstring + ' \n ' +  _('uv-light timestamp active') + ' (' + _('uv-light off') +')'
+                            # cl_fact_logger.get_instance().debug(logstring)
     
                 # Timer fuer Licht
-                if light_modus == 0:                         # Modus 0 Licht aus
-                    status_light = False                      # Licht aus
+                if light_modus == 0:                            # Modus 0 Licht aus
+                    status_light = False                        # Licht aus
                     logstring = logstring + ' \n ' +  _('modus light') + ': ' + _('off')
                     # cl_fact_logger.get_instance().debug(logstring)
                 
-                if light_modus == 1:                            # Modus 1 = Periode/Dauer
-                    if light_period == 0:                      # gleich 0 ist an,  Dauer-Timer
-                        status_light = True
-                    if light_duration == 0:                        # gleich 0 ist aus, kein Timer
+                if light_modus == 1:                            # Modus 1 = EIN/AUS Dauer
+                    logstring = logstring + ' \n ' +  _('modus light') + ': ' + _('on')
+                    if (light_period == 0 and light_duration == 0):   # beide 0: kein Timer
                         status_light = False
-                    if light_duration > 0:                        # es ist eine Dauer eingetragen                
-                        if pi_ager_init.light_stoptime == pi_ager_init.system_starttime:
+                        logstring = logstring + ' \n ' +  _('light timer inactive') + ' (' + _('light permanent off') +')'
+                        # cl_fact_logger.get_instance().info("Light period and duration are both 0")
+                    elif light_duration == 0:                   # EIN Dauer gleich 0, kein Timer, dauernd AUS
+                        status_light = False
+                        logstring = logstring + ' \n ' +  _('light timer inactive') + ' (' + _('light permanent off') +')'
+                        # cl_fact_logger.get_instance().info("Only duration is 0")
+                    elif light_period == 0:                     # AUS Dauer gleich 0, kein Timer, dauernd EIN
+                        status_light = True
+                        logstring = logstring + ' \n ' +  _('light timer inactive') + ' (' + _('light permanent on') +')'
+                        # cl_fact_logger.get_instance().info("Only period is 0")
+                    else:                                       # beide nicht null, Timer                 
+                        if pi_ager_init.light_stoptime == pi_ager_init.system_starttime:         # first run
                             pi_ager_init.light_stoptime = pi_ager_init.light_starttime + light_duration
-                            status_light = True
+                            status_light = False
                         if current_time >= pi_ager_init.light_starttime and current_time <= pi_ager_init.light_stoptime:
-                            if not status_light == True:
-                                status_light = True                     # Licht an
+                            status_light = True                     # Licht an
                             logstring = logstring + ' \n ' +  _('light timer active') + ' (' + _('light on') +')'
                             # cl_fact_logger.get_instance().debug(logstring)
-                            # logger.debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
-                            # logger.debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
-                            # logger.debug('Licht duration: ' + str(light_duration))
-                            cl_fact_logger.get_instance().debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
-                            cl_fact_logger.get_instance().debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
-                            cl_fact_logger.get_instance().debug('Licht duration: ' + str(light_duration))
+                            # cl_fact_logger.get_instance().debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
+                            # cl_fact_logger.get_instance().debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
+                            # cl_fact_logger.get_instance().debug('Licht duration: ' + str(light_duration))
                         else: 
-                            status_light = False                      # Licht aus
+                            status_light = False                    # Licht aus
                             logstring = logstring + ' \n ' +  _('light timer active') + ' (' + _('light off') +')'
                             # cl_fact_logger.get_instance().debug(logstring)
-                            # logger.debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
-                            # logger.debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
-                            # logger.debug('Licht period: ' + str(light_period))
                             # cl_fact_logger.get_instance().debug('Licht Stoppzeit: ' + str(pi_ager_init.light_stoptime))
                             # cl_fact_logger.get_instance().debug('Licht Startzeit: ' + str(pi_ager_init.light_starttime))
                             # cl_fact_logger.get_instance().debug('Licht period: ' + str(light_period))
@@ -1381,30 +1403,40 @@ def doMainLoop():
                         if current_time > pi_ager_init.light_stoptime:
                             pi_ager_init.light_starttime = current_time + light_period  # Timer-Timestamp aktualisiert
                             pi_ager_init.light_stoptime = pi_ager_init.light_starttime + light_duration
-    
+                        
+                        # cl_fact_logger.get_instance().info(f"Both not 0, state is {status_light}")
+                        
                 if light_modus == 2:                         # Modus 2 Zeitstempel/Dauer
-                    now = datetime.datetime.now()
-                    year_now = now.year
-                    month_now = now.month
-                    day_now = now.day
+                    if (light_duration == 0):
+                        status_light = False                 # Licht aus
+                        logstring = logstring + ' \n ' +  _('light timestamp inactive') + ' (' + _('light permanent off') +')'
+                    else:
+                        now = datetime.datetime.now()
+                        year_now = now.year
+                        month_now = now.month
+                        day_now = now.day
     
-                    pi_ager_init.light_starttime = datetime.datetime(year_now, month_now, day_now, switch_on_light_hour, switch_on_light_minute, 0, 0)
-                    pi_ager_init.light_stoptime = pi_ager_init.light_starttime + datetime.timedelta(0, light_duration)
+                        pi_ager_init.light_starttime = datetime.datetime(year_now, month_now, day_now, switch_on_light_hour, switch_on_light_minute, 0, 0)
+                        pi_ager_init.light_stoptime = pi_ager_init.light_starttime + datetime.timedelta(0, light_duration)
     
-                    if now >= pi_ager_init.light_starttime and now <= pi_ager_init.light_stoptime:
+                        if now >= pi_ager_init.light_starttime and now <= pi_ager_init.light_stoptime:
                             status_light = True                     # Licht an
                             logstring = logstring + ' \n ' +  _('light timestamp active') + ' (' + _('light on') +')'
                             # cl_fact_logger.get_instance().debug(logstring)
-                    else: 
-                        status_light = False                      # Licht aus
-                        logstring = logstring + ' \n ' +  _('light timestamp active') + ' (' + _('light off') +')'
-                        # cl_fact_logger.get_instance().debug(logstring)
-                        
+                        else: 
+                            status_light = False                      # Licht aus
+                            logstring = logstring + ' \n ' +  _('light timestamp active') + ' (' + _('light off') +')'
+                            # cl_fact_logger.get_instance().debug(logstring)
+                
+                # timer for defrost              
                 if current_time >= pi_ager_init.defrost_cycle_start + defrost_cycle_seconds:
-                    pi_ager_init.defrost_cycle_start = int(time.time())    # Timer-Timestamp aktualisiert
+                    pi_ager_init.defrost_cycle_start = current_time    # Timer-Timestamp aktualisiert
                     defrost_cycle_elapsed = True
                     cl_fact_logger.get_instance().debug('defrost cycle elapsed')
-                    
+                
+                #-------------------------------
+                # Dry aging mode processing
+                #-------------------------------
                 if (modus != 4):
                     last_humidity_check_state = False
                     pi_ager_database.write_current_value(pi_ager_names.status_humidity_check_key, 0)
@@ -1414,7 +1446,7 @@ def doMainLoop():
                     # turn off states possibly set by other modes
                     status_exhaust_fan = False         # Feuchtereduzierung Abluft aus
                     status_dehumidifier = False        # Entfeuchter aus
-                    # gpio.output(pi_ager_gpio_config.gpio_heater, pi_ager_names.relay_off)                     # Heizung aus
+                    # gpio.output(pi_ager_gpio_config.gpio_heater, pi_ager_names.relay_off)                   # Heizung aus
                     control_heater(pi_ager_names.relay_off)
                     gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)                 # Befeuchtung aus
                     
@@ -1582,7 +1614,7 @@ def doMainLoop():
                 # Schalten des Entfeuchters
                 if status_dehumidifier == True:
                     gpio.output(pi_ager_gpio_config.gpio_dehumidifier, pi_ager_names.relay_on)
-                if status_dehumidifier == False:
+                else:
                     gpio.output(pi_ager_gpio_config.gpio_dehumidifier, pi_ager_names.relay_off)
                 
                 # Schalten des (Abluft-)Luftaustausch-Ventilator
@@ -1614,6 +1646,7 @@ def doMainLoop():
                     # gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_off)
                 
                 # Schalten des Licht
+                # cl_fact_logger.get_instance().info(f"Status light check befor switch_light is {status_light}")
                 if status_light == True or pi_ager_database.get_status_light_manual() == 1:
                     switch_light(pi_ager_names.relay_on)
                     # gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_on)
@@ -1625,40 +1658,45 @@ def doMainLoop():
                 # scale1_row = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale1_table)
                 scale1_row = pi_ager_database.get_table_value_last_change(pi_ager_names.current_values_table, pi_ager_names.scale1_key)
                 if scale1_row == None:
-                    scale1_data = 0
+                    scale1_data = None
                 else:
                     scale1_value = scale1_row[pi_ager_names.value_field]
-                    if scale1_value == None:
-                        scale1_value = 0
+#                    if scale1_value == None:
+#                        scale1_value = 0
                     scale1_last_change = scale1_row[pi_ager_names.last_change_field]
                     timediff_scale1 = pi_ager_database.get_current_time() - scale1_last_change
                     if timediff_scale1 < 12: # (ist nicht zuverlässig, wenn scale measure loop = ca 5s. Da brauchen wir etwas anderes...) pi_ager_database.get_table_value(pi_ager_names.settings_scale1_table,pi_ager_names.scale_measuring_interval_key):
                         scale1_data = scale1_value
                     else:
-                        scale1_data = 0
+                        scale1_data = None
     
                 # scale2_row = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale2_table)
                 scale2_row = pi_ager_database.get_table_value_last_change(pi_ager_names.current_values_table, pi_ager_names.scale2_key)
                 if scale2_row == None:
-                    scale2_data = 0
+                    scale2_data = None
                 else:
                     scale2_value = scale2_row[pi_ager_names.value_field]
-                    if scale2_value == None:
-                        scale2_value = 0
+#                    if scale2_value == None:
+#                        scale2_value = 0
                     scale2_last_change = scale2_row[pi_ager_names.last_change_field]
                     timediff_scale2 = pi_ager_database.get_current_time() - scale2_last_change
                     if timediff_scale2 < 12: # (ist nicht zuverlässig, wenn scale measure loop = ca 5s. Da brauchen wir etwas anderes...) pi_ager_database.get_table_value(pi_ager_names.settings_scale2_table,pi_ager_names.scale_measuring_interval_key):
                         scale2_data = scale2_value
                     else:
-                        scale2_data = 0
+                        scale2_data = None
                 
                 # Ausgabe der Werte auf der Konsole
                 # logger.info(pi_ager_names.logspacer2)
                 logstring = logstring + ' \n ' + pi_ager_names.logspacer2
 
-                if scale1_data > 0:
+                if scale1_data == None:
+                    logstring = logstring + ' \n ' +  _('weight scale') + ' 1: ' + '------'
+                else:
                     logstring = logstring + ' \n ' +  _('weight scale') + ' 1: ' + str(round(scale1_data)) + ' g'
-                if scale2_data > 0:
+                    
+                if scale2_data == None:
+                    logstring = logstring + ' \n ' +  _('weight scale') + ' 2: ' + '------'
+                else:
                     logstring = logstring + ' \n ' +  _('weight scale') + ' 2: ' + str(round(scale2_data)) + ' g'
                 
                 (log_changed, log, log_html) = status_value_has_changed()

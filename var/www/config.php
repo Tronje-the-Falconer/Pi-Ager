@@ -166,20 +166,20 @@
                                                 <tr>
                                                     <td rowspan="4" class="td_png_icon"><h3><?php echo _('uv'); ?></h3><img src="images/icons/uv-light_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_uv_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td colspan="2" style="text-align: left; padding-left: 20px;">
-                                                        <input type="radio" name="uv_modus_config" value="1" <?php echo $checked_uv_1; ?>/><label> <?php echo _('duration & period'); ?></label><br>
-                                                        <input type="radio" name="uv_modus_config" value="2" <?php echo $checked_uv_2; ?>/><label> <?php echo _('duration & timestamp'); ?></label><br>
+                                                        <input type="radio" name="uv_modus_config" value="1" <?php echo $checked_uv_1; ?>/><label> <?php echo _('ON/OFF duration'); ?></label><br>
+                                                        <input type="radio" name="uv_modus_config" value="2" <?php echo $checked_uv_2; ?>/><label> <?php echo _('ON duration & timestamp'); ?></label><br>
                                                         <input type="radio" name="uv_modus_config" value="0" <?php echo $checked_uv_0; ?>/><label> <?php echo _('off'); ?></label><br>
                                                         <br>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><?php echo _('period every').':'; ?></td>
+                                                    <td><?php echo _('OFF duration').':'; ?></td>
                                                     <td><input name="uv_period_config" type="number" style="width: 30%;" min="0" max="1440" required value=<?php echo $uv_period; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span>
                                                     </span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><?php echo _('duration'); ?>:</td>
-                                                    <td><input name="uv_duration_config" type="number" style="width: 30%;" min="0" max="1440" required value=<?php echo $uv_duration; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0=<?php echo _('off'); ?>)</span></td>
+                                                    <td><?php echo _('ON duration'); ?>:</td>
+                                                    <td><input name="uv_duration_config" type="number" style="width: 30%;" min="0" max="1440" required value=<?php echo $uv_duration; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span></td>
                                                 </tr>
                                                                                                 <tr>
                                                     <td><?php echo _('timestamp'); ?>:</td>
@@ -205,20 +205,20 @@
                                                 <tr>
                                                     <td rowspan="4" class="td_png_icon"><h3><?php echo _('light'); ?></h3><img src="images/icons/light_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_light_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td colspan="2" style="text-align: left; padding-left: 20px;">
-                                                        <input type="radio" name="light_modus_config" value="1" <?php echo $checked_light_1; ?>/><label> <?php echo _('duration & period'); ?></label><br>
-                                                        <input type="radio" name="light_modus_config" value="2" <?php echo $checked_light_2; ?>/><label> <?php echo _('duration & timestamp'); ?></label><br>
+                                                        <input type="radio" name="light_modus_config" value="1" <?php echo $checked_light_1; ?>/><label> <?php echo _('ON/OFF duration'); ?></label><br>
+                                                        <input type="radio" name="light_modus_config" value="2" <?php echo $checked_light_2; ?>/><label> <?php echo _('ON duration & timestamp'); ?></label><br>
                                                         <input type="radio" name="light_modus_config" value="0" <?php echo $checked_light_0; ?>/><label> <?php echo _('off'); ?></label><br>
                                                         <br>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><?php echo _('period every').':'; ?></td>
+                                                    <td><?php echo _('OFF duration').':'; ?></td>
                                                     <td><input name="light_period_config" type="number" style="width: 30%;" min="0" max="1440" required value=<?php echo $light_period; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span>
                                                     </span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><?php echo _('duration'); ?>:</td>
-                                                    <td><input name="light_duration_config" type="number" style="width: 30%;" min="0" max="1440" required value=<?php echo $light_duration; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0=<?php echo _('off'); ?>)</span></td>
+                                                    <td><?php echo _('ON duration'); ?>:</td>
+                                                    <td><input name="light_duration_config" type="number" style="width: 30%;" min="0" max="1440" required value=<?php echo $light_duration; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span></td>
                                                 </tr>
                                                                                                 <tr>
                                                     <td><?php echo _('timestamp'); ?>:</td>

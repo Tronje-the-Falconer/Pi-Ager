@@ -21,7 +21,7 @@
             $mac_pattern = "/^[0-9a-f]{2}:[0-9a-f]{2}:[0-9a-f]{2}$/i";
             $match = preg_match($mac_pattern, $mac_last_3_bytes);
             if ($match == 0) {
-                echo '<script language="javascript"> alert("' . _('Format error in MAC address last 3 bytes. Format must be e.g.: 2a:53:f9 ') . '"); </script>';
+                echo '<script language="javascript"> alert("' . _('Format error in MAC address last 3 bytes. Format must be e.g.: 2a:53:f9') . '"); </script>';
                 goto end_write_bus;
             }
             # echo 'mac_last_3_bytes: ' . $mac_last_3_bytes . '<br>';

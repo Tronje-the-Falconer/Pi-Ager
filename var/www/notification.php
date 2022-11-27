@@ -371,7 +371,7 @@
                                         <table id="show_event" class="show_event" style="width: 100%;">
                                             <tr>
                                                 <td><?php echo _('id to delete: ') ?></td>
-                                                <td><input name="event_id" type="number" min= "14" step="1" style="width: 90%; text-align: right;" ></td>
+                                                <td><input name="event_id" type="number" min= "16" step="1" style="width: 90%; text-align: right;" ></td>
                                             </tr>
                                             <tr>
                                                 <td colspan=2><button class="art-button" name="delete_event" value="delete_event" onclick="return confirm('<?php echo _('ATTENTION: delete event?');?>');"><?php echo _('delete'); ?></button></td>

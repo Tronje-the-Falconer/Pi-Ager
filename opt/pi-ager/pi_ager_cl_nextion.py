@@ -437,7 +437,7 @@ class cl_nextion( threading.Thread ):
         self.current_page_id = 1
         await self.client.set('sleep', 0)
         await self.client.command('page 1') 
-        await self.client.set('thsp', 0)
+        await self.client.set('thsp', 60)
         
     def db_get_base_values(self):
         status_piager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key )

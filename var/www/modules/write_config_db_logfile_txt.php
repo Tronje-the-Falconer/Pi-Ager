@@ -57,10 +57,10 @@
                 ($switch_on_humidifier_config > $switch_off_humidifier_config) &&                                                               // Prüfung Einschaltwert Feuchte
                 $switch_off_humidifier_config < 31 && $switch_off_humidifier_config > -31 &&                                                          // Prüfung Ausschaltwert Feuchte
                 $delay_humidify_config < 61 && $delay_humidify_config > -1 &&                                                            // Prüfung Verzögerung Feuchte
-                $uv_period_config < 1441 && $uv_period_config > -1 &&  (($uv_period_config+$uv_duration_config) > 0) &&                 // Prüfung Intervall UV
+                $uv_period_config < 1441 && $uv_period_config > -1 && // (($uv_period_config+$uv_duration_config) > 0) &&                 // Prüfung Intervall UV
                 $uv_duration_config < 1441 && $uv_duration_config > -1  &&                              // Prüfung Dauer UV
                 $switch_on_uv_hour_config >= 0 && $switch_on_uv_hour_config < 24 && $switch_on_uv_minute_config >= 0 && $switch_on_uv_minute_config < 60 && // UV Uhrzeit
-                $light_period_config < 1441 && $light_period_config > -1 &&  (($light_period_config+$light_duration_config) > 0) &&                 // Prüfung Intervall Licht
+                $light_period_config < 1441 && $light_period_config > -1 &&  // (($light_period_config+$light_duration_config) > 0) &&                 // Prüfung Intervall Licht
                 $light_duration_config < 1441 && $light_duration_config > -1  &&                              // Prüfung Dauer Licht
                 $switch_on_light_hour_config >= 0 && $switch_on_light_hour_config < 24 && $switch_on_light_minute_config >= 0 && $switch_on_light_minute_config < 60 && // Licht Uhrzeit
                 $internal_temperature_low_limit >= -11 && $internal_temperature_low_limit <= 70 && // Temperatur low limit Überwachung
@@ -135,14 +135,14 @@
                     $logtext_uv_duration = " ";
                 }
                 if ($uv_modus_config == 1) {
-                    $uv_modus_name = _('duration & period');
-                    $logtext_uv = _('uv period') . ": " . $uv_period_config . " " . _('minutes');
-                    $logtext_uv_duration = _('uv duration') . ": " . $uv_duration_config . " " . _('minutes');
+                    $uv_modus_name = _('UV ON/OFF duration');
+                    $logtext_uv = _('UV OFF duration') . ": " . $uv_period_config . " " . _('minutes');
+                    $logtext_uv_duration = _('UV ON duration') . ": " . $uv_duration_config . " " . _('minutes');
                 }
                 if ($uv_modus_config == 2) {
-                    $uv_modus_name = _('duration & timestamp');
-                    $logtext_uv = _('uv timestamp') . ": ". $switch_on_uv_hour_config . ":" . $switch_on_uv_minute_config;
-                    $logtext_uv_duration = _('uv duration') . ": ". $uv_duration_config . " " . _('minutes');
+                    $uv_modus_name = _('UV ON duration & timestamp');
+                    $logtext_uv = _('UV timestamp') . ": ". $switch_on_uv_hour_config . ":" . $switch_on_uv_minute_config;
+                    $logtext_uv_duration = _('UV ON duration') . ": ". $uv_duration_config . " " . _('minutes');
                 }
                 # Licht
                 if ($light_modus_config == 0) {
@@ -151,14 +151,14 @@
                     $logtext_light_duration = " ";
                 }
                 if ($light_modus_config == 1) {
-                    $light_modus_name = _('duration & period');
-                    $logtext_light = _('light period').": ".$light_period_config ." "._('minutes');
-                    $logtext_light_duration = _('light duration').": ".$light_duration_config ." "._('minutes');
+                    $light_modus_name = _('Light ON/OFF duration');
+                    $logtext_light = _('Light OFF duration').": ".$light_period_config ." "._('minutes');
+                    $logtext_light_duration = _('Light ON duration').": ".$light_duration_config ." "._('minutes');
                 }
                 if ($light_modus_config == 2) {
-                    $light_modus_name = _('duration & timestamp');
-                    $logtext_light = _('light timestamp').": ".$switch_on_light_hour_config.":".$switch_on_light_minute_config;
-                    $logtext_light_duration = _('light duration').": ".$light_duration_config ." "._('minutes');
+                    $light_modus_name = _('Light ON duration & timestamp');
+                    $logtext_light = _('Light timestamp').": ".$switch_on_light_hour_config.":".$switch_on_light_minute_config;
+                    $logtext_light_duration = _('Light ON duration').": ".$light_duration_config ." "._('minutes');
                 }
                 // $circulation_air_duration = $circulation_air_duration/60;
                 // $circulation_air_period = $circulation_air_period/60;
@@ -201,15 +201,15 @@
                     $logstring = $logstring . " \n " . _('delay exhausting').": ".$delay_humidify_config ." ". _('minutes');
                     $logstring = $logstring . " \n " . _('abs. humidity check aktive').": " . (($dewpoint_check_config == 0) ? _('off') : _('on'));
                 }
-                $logstring = $logstring . " \n " . _('circulation air period').": ".$circulation_air_period." "._('minutes');
-                $logstring = $logstring . " \n " . _('circulation air duration').": ".$circulation_air_duration." "._('minutes');
-                $logstring = $logstring . " \n " . _('exhausting air period').": ".$exhaust_air_period." "._('minutes');
-                $logstring = $logstring . " \n " . _('exhausting air duration').": ".$exhaust_air_duration." "._('minutes');
+                $logstring = $logstring . " \n " . _('circulation air OFF duration').": ".$circulation_air_period." "._('minutes');
+                $logstring = $logstring . " \n " . _('circulation air ON duration').": ".$circulation_air_duration." "._('minutes');
+                $logstring = $logstring . " \n " . _('exhausting air OFF duration').": ".$exhaust_air_period." "._('minutes');
+                $logstring = $logstring . " \n " . _('exhausting air ON duration').": ".$exhaust_air_duration." "._('minutes');
                 $logstring = $logstring . " \n " . _('dehumidify modus').": ".$dehumidifier_modus_name;
-                $logstring = $logstring . " \n " . _('uv modus').": ".$uv_modus_name;
+                $logstring = $logstring . " \n " . _('UV modus').": ".$uv_modus_name;
                 $logstring = $logstring . " \n " . $logtext_uv;
                 $logstring = $logstring . " \n " . $logtext_uv_duration;
-                $logstring = $logstring . " \n " . _('light modus').": ".$light_modus_name;
+                $logstring = $logstring . " \n " . _('Light modus').": ".$light_modus_name;
                 $logstring = $logstring . " \n " . $logtext_light;
                 $logstring = $logstring . " \n " . $logtext_light_duration;
                 $logstring = $logstring . " \n " . _('low temperature limit').": ".$internal_temperature_low_limit." &deg;C";
@@ -223,7 +223,7 @@
             }
             else {
             logger('DEBUG', 'configvalues not in specified limits');
-            $message_config = (_("values not in the specified limits!"));
+            $message_config = (_("values not within the specified limits!"));
             }
         }
         print '<script language="javascript"> alert("'. (_("general configuration")) . " : " .$message_config.'"); </script>';

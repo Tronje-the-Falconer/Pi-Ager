@@ -38,7 +38,7 @@ class cl_sensor_MiThermometer(cl_sensor):
                 self.battery = float(splited_data[4])
                 self.data_timestamp = int(splited_data[5])  # time in seconds when data was generated
                 current_time = int(time.time()) # current time in seconds 
-                if (current_time - self.data_timestamp) > 20:   # when difference is greater than 20 s, then bluetooth connection may be broken
+                if (current_time - self.data_timestamp) > 30:   # when difference is greater than 30 s, then bluetooth connection may be broken
                     if self.event_out_of_range == False:
                         self.event_out_of_range = True
                         cl_fact_logger.get_instance().debug('MiSensor possibly out of range!')

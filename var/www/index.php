@@ -759,10 +759,10 @@
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('modus'); ?><span class="tooltiptext"><?php echo _('aging-modus'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">&phi;<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate d'); ?><span class="tooltiptext"><?php echo _('timer of the circulation air duration in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate p'); ?><span class="tooltiptext"><?php echo _('timer of the circulation air period in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust d'); ?><span class="tooltiptext"><?php echo _('timer of the exhausting air duration in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust p'); ?><span class="tooltiptext"><?php echo _('timer of the exhausting air period in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate ON duration'); ?><span class="tooltiptext"><?php echo _('timer of the circulation air ON duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate OFF duration'); ?><span class="tooltiptext"><?php echo _('timer of the circulation air OFF duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust ON duration'); ?><span class="tooltiptext"><?php echo _('timer of the exhausting air ON duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust OFF duration'); ?><span class="tooltiptext"><?php echo _('timer of the exhausting air OFF duration in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('days'); ?><span class="tooltiptext"><?php echo _('duration of hanging phase in days'); ?></span></div></td>
                                         </tr>
                                         
@@ -1212,8 +1212,8 @@
                                             <td width="100px"><b><?php echo strtoupper(_('status')); ?></b></td>
                                             <td class="text_left">&nbsp;</td>
                                             <td width="100px"></td>
-                                            <td width="100px"><b><?php echo strtoupper(_('period')); ?></b></td>
-                                            <td width="100px"><b><?php echo strtoupper(_('duration')); ?></b></td>
+                                            <td width="100px"><b><?php echo strtoupper(_('OFF DURATION')); ?></b></td>
+                                            <td width="100px"><b><?php echo strtoupper(_('ON DURATION')); ?></b></td>
                                         </tr>
                                         
                                         <tr>
