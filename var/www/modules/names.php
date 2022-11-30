@@ -66,6 +66,7 @@ $switch_on_uv_minute_key = 'switch_on_uv_minute';
 $uv_duration_key = 'uv_duration';
 $uv_period_key = 'uv_period';
 $uv_modus_key = 'uv_modus';
+$uv_check_key = 'uv_check';
 $dehumidifier_modus_key = 'dehumidifier_modus';
 $circulation_air_period_key = 'circulation_air_period';
 $setpoint_temperature_key = 'setpoint_temperature';

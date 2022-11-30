@@ -13,6 +13,7 @@
         $uv_duration_config = $_POST['uv_duration_config'];
         $switch_on_uv_hour_config = $_POST['switch_on_uv_hour_config'];
         $switch_on_uv_minute_config = $_POST['switch_on_uv_minute_config'];
+        $uv_check_config = $_POST['uv_check_config'];
         $light_period_config = $_POST['light_period_config'];
         $light_duration_config = $_POST['light_duration_config'];
         $switch_on_light_hour_config = $_POST['switch_on_light_hour_config'];
@@ -76,7 +77,7 @@
                             $uv_period_config, $switch_on_uv_hour_config, $switch_on_uv_minute_config, $light_modus_config, $light_duration_config,
                             $light_period_config, $switch_on_light_hour_config, $switch_on_light_minute_config, $dehumidifier_modus_config,
                             $failure_temperature_delta_config, $failure_humidity_delta_config, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
-                            $shutdown_on_batlow_config, $delay_cooler_config, $dewpoint_check_config);
+                            $shutdown_on_batlow_config, $delay_cooler_config, $dewpoint_check_config, $uv_check_config);
                 logger('DEBUG', 'configvalues saved');
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus
@@ -128,7 +129,7 @@
                 if ($dehumidifier_modus_config == 3) {
                     $dehumidifier_modus_name = _('only dehumidifier');
                 }
-                # Uv licht
+                # UV licht
                 if ($uv_modus_config == 0) {
                     $uv_modus_name = _('off');
                     $logtext_uv = " ";
@@ -209,6 +210,7 @@
                 $logstring = $logstring . " \n " . _('UV modus').": ".$uv_modus_name;
                 $logstring = $logstring . " \n " . $logtext_uv;
                 $logstring = $logstring . " \n " . $logtext_uv_duration;
+                $logstring = $logstring . " \n " . _('activate circulating air') . ": " . (($uv_check == 0) ? _('off') : _('on'));
                 $logstring = $logstring . " \n " . _('Light modus').": ".$light_modus_name;
                 $logstring = $logstring . " \n " . $logtext_light;
                 $logstring = $logstring . " \n " . $logtext_light_duration;

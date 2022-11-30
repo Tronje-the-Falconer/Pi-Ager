@@ -155,6 +155,7 @@ mi_data_key = 'mi_data'
 mi_mac_last3bytes_key = 'mi_mac_last3bytes'
 MiSensor_battery_key = 'MiSensor_battery'
 status_defrost_key = 'status_defrost'
+uv_check_key = 'uv_check'
 
 # table fields
 key_field = 'key'

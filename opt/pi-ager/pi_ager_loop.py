@@ -1176,6 +1176,7 @@ def doMainLoop():
                 switch_on_uv_minute = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_minute_key))
                 uv_duration_temp = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_duration_key))
                 uv_period_temp = float(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_period_key)) 
+                uv_check = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_check_key))
                 
                 current_time = pi_ager_database.get_current_time()
                 
@@ -1602,11 +1603,35 @@ def doMainLoop():
                            status_dehumidifier = False        # Entfeuchter aus
                 
                 
+                # Schalten des UV_Licht
+                if status_uv == True and pi_ager_database.get_status_uv_manual() == 1:
+                    switch_uv_light(pi_ager_names.relay_on)
+                    # gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_on)
+                else:   #if status_uv == False or pi_ager_database.get_status_uv_manual() == 0:
+                    switch_uv_light(pi_ager_names.relay_off)
+                    status_uv = False
+                    # gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_off)
                 
+                # Schalten des Licht
+                # cl_fact_logger.get_instance().info(f"Status light check befor switch_light is {status_light}")
+                if status_light == True or pi_ager_database.get_status_light_manual() == 1:
+                    switch_light(pi_ager_names.relay_on)
+                    # gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_on)
+                else:   #if status_light == False:   #  and pi_ager_database.get_status_light_manual() == 0:
+                    switch_light(pi_ager_names.relay_off)
+                    status_light = False
+                    # gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_off)
+                
+                # turn on circulation air when uv_check is true and UV-Light is ON
+                
+                if (gpio.input(pi_ager_gpio_config.gpio_uv) == False and uv_check == True):
+                    status_circulating_air = True
+                    
                 # Schalten des Umluft - Ventilators
                 if not gpio.input(pi_ager_gpio_config.gpio_heater) or not gpio.input(pi_ager_gpio_config.gpio_cooling_compressor) or not gpio.input(pi_ager_gpio_config.gpio_humidifier) or status_circulating_air == True:
                     # gpio.output(pi_ager_gpio_config.gpio_circulating_air, pi_ager_names.relay_on)               # Umluft - Ventilator an
                     control_circulating_air( pi_ager_names.relay_on )
+                    status_circulating_air = True
                 else:       # if gpio.input(pi_ager_gpio_config.gpio_heater) and gpio.input(pi_ager_gpio_config.gpio_cooling_compressor) and gpio.input(pi_ager_gpio_config.gpio_humidifier) and status_circulating_air == False:
                     # gpio.output(pi_ager_gpio_config.gpio_circulating_air, pi_ager_names.relay_off)             # Umluft - Ventilator aus
                     control_circulating_air( pi_ager_names.relay_off )
@@ -1636,24 +1661,7 @@ def doMainLoop():
                 else:
                     gpio.output(pi_ager_gpio_config.gpio_exhausting_air, pi_ager_names.relay_off)
                     status_exhaust_air = False
-                
-                # Schalten des UV_Licht
-                if status_uv == True and pi_ager_database.get_status_uv_manual() == 1:
-                    switch_uv_light(pi_ager_names.relay_on)
-                    # gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_on)
-                else:   #if status_uv == False or pi_ager_database.get_status_uv_manual() == 0:
-                    switch_uv_light(pi_ager_names.relay_off)
-                    # gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_off)
-                
-                # Schalten des Licht
-                # cl_fact_logger.get_instance().info(f"Status light check befor switch_light is {status_light}")
-                if status_light == True or pi_ager_database.get_status_light_manual() == 1:
-                    switch_light(pi_ager_names.relay_on)
-                    # gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_on)
-                else:   #if status_light == False:   #  and pi_ager_database.get_status_light_manual() == 0:
-                    switch_light(pi_ager_names.relay_off)
-                    # gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_off)
-                
+
                 # Lesen der Scales Daten
                 # scale1_row = pi_ager_database.get_scale_table_row(pi_ager_names.data_scale1_table)
                 scale1_row = pi_ager_database.get_table_value_last_change(pi_ager_names.current_values_table, pi_ager_names.scale1_key)

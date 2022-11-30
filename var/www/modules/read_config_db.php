@@ -13,6 +13,7 @@
     $uv_period = get_table_value($config_settings_table,$uv_period_key)/60;
     $switch_on_uv_hour = get_table_value($config_settings_table,$switch_on_uv_hour_key);
     $switch_on_uv_minute = get_table_value($config_settings_table,$switch_on_uv_minute_key);
+    $uv_check = intval(get_table_value($config_settings_table,$uv_check_key));
     $light_modus = get_table_value($config_settings_table,$light_modus_key);
     $light_duration = get_table_value($config_settings_table,$light_duration_key)/60;
     $light_period = get_table_value($config_settings_table,$light_period_key)/60;
