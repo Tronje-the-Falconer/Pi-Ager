@@ -113,10 +113,10 @@
                     $switch_on_temperature_heating = $setpoint_temperature - $switch_on_cooling_compressor_config;
                     $switch_off_temperature_cooling_heating = $setpoint_temperature - $switch_off_cooling_compressor_config;
 
-                    $switch_on_humidify = $setpoint_humidity - $switch_on_humidifier_config;
-                    $switch_off_humidify = $setpoint_humidity - $switch_off_humidifier_config;
-                    $switch_on_dehumidify = $setpoint_humidity + $switch_on_humidifier_config;
-                    $switch_off_dehumidify = $setpoint_humidity + $switch_off_humidifier_config;
+                    $switch_on_humidify = ($setpoint_humidity - $switch_on_humidifier_config) < 0 ? 0 : ($setpoint_humidity - $switch_on_humidifier_config);
+                    $switch_off_humidify = ($setpoint_humidity - $switch_off_humidifier_config) < 0 ? 0 : ($setpoint_humidity - $switch_off_humidifier_config);
+                    $switch_on_dehumidify = ($setpoint_humidity + $switch_on_humidifier_config) > 100 ? 100 : ($setpoint_humidity + $switch_on_humidifier_config);
+                    $switch_off_dehumidify = ($setpoint_humidity + $switch_off_humidifier_config) > 100 ? 100 : ($setpoint_humidity + $switch_off_humidifier_config);
                 }
                 
                 # Dehumidify-Modus
@@ -210,7 +210,7 @@
                 $logstring = $logstring . " \n " . _('UV modus').": ".$uv_modus_name;
                 $logstring = $logstring . " \n " . $logtext_uv;
                 $logstring = $logstring . " \n " . $logtext_uv_duration;
-                $logstring = $logstring . " \n " . _('activate circulating air') . ": " . (($uv_check == 0) ? _('off') : _('on'));
+                $logstring = $logstring . " \n " . _('activate circulating air') . ": " . (($uv_check_config == 0) ? _('off') : _('on'));
                 $logstring = $logstring . " \n " . _('Light modus').": ".$light_modus_name;
                 $logstring = $logstring . " \n " . $logtext_light;
                 $logstring = $logstring . " \n " . $logtext_light_duration;
