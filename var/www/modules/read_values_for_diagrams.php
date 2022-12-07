@@ -258,11 +258,15 @@
         }
      }
 	
+    // make nth_value_scale odd-numbered
+    if ($nth_value_scale > 1 and (($nth_value_scale % 2) == 0)) {
+        $nth_value_scale -= 1;
+    }
         
     // reading all_sensors_table
     $all_sensors_rows = get_allsensors_dataset($nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
     // reading all_scales_table
-    $all_scales_rows = get_allscales_dataset($nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    $all_scales_rows = get_allscales_dataset($nth_value_scale, $first_timestamp_diagram, $last_timestamp_diagram);
     
     // print "moving average window: " . $moving_average_window_x . " minutes <br>";
     // print "time window diagram: " . $x . " minutes <br>";

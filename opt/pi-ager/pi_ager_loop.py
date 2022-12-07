@@ -702,7 +702,81 @@ def do_system_shutdown():
      global system_shutdown
      cl_fact_logger.get_instance().debug('in do_system_shutdown')
      system_shutdown = True
+     
+def invoke_off_failure_event(repeat_event_cycle):
+    global next_start_time_off_failure
+    global cooler_failure_off_repeat_counter
+    
+    current_time = time.time()
+    if cooler_failure_off_repeat_counter == False:
+        cooler_failure_off_repeat_counter = True
+        cl_fact_logic_messenger().get_instance().handle_event('cooler_turned_off_failure')
+        next_start_time_off_failure = current_time + repeat_event_cycle # every n seconds repeat event
+    else:
+        if (current_time >= next_start_time_off_failure):
+            next_start_time_off_failure = current_time + repeat_event_cycle
+            cl_fact_logic_messenger().get_instance().handle_event('cooler_turned_off_failure')
+            
+def invoke_on_failure_event(repeat_event_cycle):
+    global next_start_time_on_failure
+    global cooler_failure_on_repeat_counter
+    
+    current_time = time.time()
+    if cooler_failure_on_repeat_counter == False:
+        cooler_failure_on_repeat_counter = True
+        cl_fact_logic_messenger().get_instance().handle_event('cooler_turned_on_failure')
+        next_start_time_on_failure = current_time + repeat_event_cycle # every n seconds repeat event
+    else:
+        if (current_time >= next_start_time_on_failure):
+            next_start_time_on_failure = current_time + repeat_event_cycle
+            cl_fact_logic_messenger().get_instance().handle_event('cooler_turned_on_failure')
 
+def generate_cooler_failure_events():
+    global cooler_failure_off_repeat_counter
+    global cooler_failure_on_repeat_counter
+    global temp_sensor4_data        # contains AC Current
+    
+    meat4_sensortype = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.meat4_sensortype_key))
+    if (meat4_sensortype != 18):    # must be ac current sensor
+        return
+    
+    current_check_row = pi_ager_database.get_table_row(pi_ager_names.config_current_check_table, 1)
+    status_current_check = current_check_row[pi_ager_names.current_check_active_field]
+    
+    if (status_current_check == 0): # current check must be enabled
+        cooler_failure_off_repeat_counter = False
+        cooler_failure_on_repeat_counter = False
+        return
+        
+    current_threshold = current_check_row[pi_ager_names.current_threshold_field]
+    repeat_event_cycle = current_check_row[pi_ager_names.repeat_event_cycle_field] * 60     # convert to seconds
+    ac_current = temp_sensor4_data
+    # cl_fact_logger.get_instance().info(f"cooler check parameter : status = {status_current_check}, threshold = {current_threshold}, repeat cycle = {repeat_event_cycle}")
+    cooler_status = int(pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_cooling_compressor_key))
+    cooler_pio_status = gpio.input(pi_ager_gpio_config.gpio_cooling_compressor) # false --> relay_on, true --> relay_off
+    
+    # check on cooler turned off
+    if (cooler_status == 0 and cooler_pio_status == True):
+        if (ac_current > current_threshold):
+            # cl_fact_logger.get_instance().info(f"cooler should be turned off but is not. AC current is {ac_current} A")
+            invoke_off_failure_event(repeat_event_cycle)
+            return
+        else:
+            cooler_failure_off_repeat_counter = False
+    else:
+        cooler_failure_off_repeat_counter = False
+        
+    # check on cooler turned on
+    if (cooler_status == 1 and cooler_pio_status == False):
+        if (ac_current <= current_threshold):
+            # cl_fact_logger.get_instance().info(f"cooler should be turned on but is not. AC current is {ac_current} A")
+            invoke_on_failure_event(repeat_event_cycle)
+            return 
+        else:
+            cooler_failure_on_repeat_counter = False        
+    else:
+        cooler_failure_on_repeat_counter = False
+    
 def generate_ups_bat_events():
     global ups_bat_low          # akku ok
     global bat_low_true_count   # counter for bat_low true
@@ -1024,6 +1098,11 @@ def doMainLoop():
     global defrost_cycle_seconds
     global defrost_cycle_elapsed
     
+    global cooler_failure_off_repeat_counter
+    global cooler_failure_on_repeat_counter
+    global next_start_time_off_failure
+    global next_start_time_on_failure
+    
     #-------------------------------------------
     
     # Pruefen Sensor, dann Settings einlesen
@@ -1075,6 +1154,11 @@ def doMainLoop():
     defrost_status = int(pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_defrost_key))
     defrost_cycle_seconds = int(pi_ager_database.get_table_value_from_field(pi_ager_names.defrost_table, pi_ager_names.defrost_cycle_hours_field)) * 3600
     defrost_cycle_elapsed = False
+    
+    cooler_failure_off_repeat_counter = False
+    cooler_failure_on_repeat_counter = False
+    next_start_time_off_failure = 0;
+    next_start_time_on_failure = 0;
     
     # mi_data = pi_ager_database.get_table_value_from_field(pi_ager_names.atc_mi_thermometer_data_table, pi_ager_names.mi_data_key)
     # cl_fact_logger.get_instance().info(mi_data)
@@ -1716,10 +1800,12 @@ def doMainLoop():
                     # Logstring komplett schreiben
                     cl_fact_logger.get_instance().info(log_html)
                     generate_status_change_event(log_event)
-                    
+                
+                # check on cooler failure
+                generate_cooler_failure_events()
+                
                 # Messwerte in die RRD-Datei schreiben
                 # Schreiben der aktuellen Status-Werte
-                # pi_ager_database.write_current_sensordata(pi_ager_init.loopcounter, sensor_temperature, sensor_humidity, sensor_dewpoint, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data)
                 pi_ager_database.write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, status_uv, status_light, status_humidifier, status_dehumidifier, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data)
                 pi_ager_database.write_all_sensordata(pi_ager_init.loopcounter, sensor_temperature, sensor_humidity, sensor_dewpoint, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data, sensor_humidity_abs, second_sensor_humidity_abs)    
                 cl_fact_logger.get_instance().debug('writing current values in database performed')

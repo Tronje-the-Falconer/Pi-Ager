@@ -277,6 +277,19 @@ def get_scale_table_row(table):
         row = cursor.fetchone()        
         close_database()
     return row
+    
+def get_table_row( table, id ):
+    """
+    function for reading parameter row of a table selected by id
+    """
+    global cursor
+    sql = 'SELECT * FROM ' + table + ' WHERE id = ' + str(id)
+    with globals.lock:
+        open_database()
+        execute_query(sql)
+        row = cursor.fetchone()
+        close_database()
+    return row
 
 def get_agingtable_as_rows(agingtable):
     """

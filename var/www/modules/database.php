@@ -276,6 +276,23 @@
         return $meatsensor_row;       
     }
     
+    function get_table_row($table, $row_id )
+    {
+        global $id_field;
+        
+        $row = NULL;
+        open_connection();
+        $sql = 'SELECT * FROM ' . $table . ' WHERE id = ' . intval($row_id);
+        $result = get_query_result($sql);
+        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
+            {
+            $row = $dataset;
+            }
+        close_database();
+        return $row;       
+    }
+
+    
     function get_current_values_for_ajax(){
         global $current_values_table, $key_field, $value_field;
         global $last_change_field, $server_time_json_key;
@@ -969,11 +986,13 @@
     
     function write_admin($language, $referenceunit_scale1, $measuring_interval_scale1, $measuring_duration_scale1, $saving_period_scale1, $samples_scale1, $spikes_scale1, $offset_scale1,
                             $referenceunit_scale2, $measuring_interval_scale2, $measuring_duration_scale2, $saving_period_scale2, $samples_scale2, $spikes_scale2, $offset_scale2,
-                            $temp_sensor1, $temp_sensor2, $temp_sensor3, $temp_sensor4, $switch_control_uv_light_admin, $switch_control_light_admin)
+                            $temp_sensor1, $temp_sensor2, $temp_sensor3, $temp_sensor4, $switch_control_uv_light_admin, $switch_control_light_admin, $current_check_active_admin, $current_threshold_admin,
+                            $repeat_event_cycle_admin)
     {
         global $value_field, $last_change_field, $key_field, $config_settings_table, $settings_scale1_table, $settings_scale2_table, $sensortype_key, $language_key;
         global $referenceunit_key, $scale_measuring_interval_key, $measuring_duration_key, $saving_period_key, $samples_key, $spikes_key, $offset_key;
         global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key, $switch_control_uv_light_key, $switch_control_light_key;
+        global $id_field, $config_current_check_table, $current_check_active_field, $current_threshold_field, $repeat_event_cycle_field;
         
         open_connection();
         
@@ -986,7 +1005,9 @@
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($temp_sensor4) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $meat4_sensortype_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($switch_control_uv_light_admin) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $switch_control_uv_light_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($switch_control_light_admin) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $switch_control_light_key . '"');
-   
+
+        get_query_result('UPDATE ' . $config_current_check_table . ' SET "' . $current_check_active_field . '" = ' . strval($current_check_active_admin) . ' , "' . $current_threshold_field . '" = ' . strval($current_threshold_admin) . ' , "' . $repeat_event_cycle_field . '" = ' . strval($repeat_event_cycle_admin) . ' WHERE "' . $id_field . '" = 1');
+      
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($referenceunit_scale1) . ' WHERE ' . $key_field . ' = "' . $referenceunit_key . '"');
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($measuring_interval_scale1) . ' WHERE ' . $key_field . ' = "' . $scale_measuring_interval_key . '"');
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($measuring_duration_scale1) . ' WHERE ' . $key_field . ' = "' . $measuring_duration_key . '"');

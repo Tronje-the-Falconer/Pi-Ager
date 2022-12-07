@@ -200,11 +200,11 @@
                                     <!----------------------------------------------------------------------------------------Meat Thermometer-->
                                     <table style="width: 100%;" class="miniature_writing">
                                         <tr>
-                                            <td rowspan="6" class="td_png_icon"><h3><?php echo 'Thermometer'; ?></h3><img src="images/icons/temperature_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_thermometer_blockFunction()"><?php echo _('help'); ?></button></td>
+                                            <td rowspan="10" class="td_png_icon"><h3><?php echo 'Thermometer'; ?></h3><img src="images/icons/temperature_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_thermometer_blockFunction()"><?php echo _('help'); ?></button></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo 'Sensor 1'; ?>:</td>
-                                            <td class="text_left_padding">
+                                            <td style="text-align: left;">
                                             <?php 
                                                 $meat_sensors = get_meatsensors_dataset();
                                                 if (isset($meat_sensors))
@@ -232,7 +232,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo 'Sensor 2'; ?>:</td>
-                                            <td class="text_left_padding">
+                                            <td style="text-align: left;">
                                             <?php 
                                                 if (isset($meat_sensors))
                                                 {
@@ -259,7 +259,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo 'Sensor 3'; ?>:</td>
-                                            <td class="text_left_padding">
+                                            <td style="text-align: left;">
                                             <?php 
                                                 if (isset($meat_sensors))
                                                 {
@@ -286,12 +286,12 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo 'Sensor 4'; ?>:</td>
-                                            <td class="text_left_padding">
+                                            <td style="text-align: left;">
                                             <?php 
                                                 if (isset($meat_sensors))
                                                 {
                                                     $meatsensor_index = intval($meat4_sensortype);
-                                                    echo '<select name="temp_sensor4_admin">';
+                                                    echo '<select name="temp_sensor4_admin" onchange="getMeat4SensorTypeIndex(this)">';
                                                     foreach($meat_sensors as $meatsensor_row)
                                                     {
                                                         if ($meatsensor_row[id] == $meatsensor_index)
@@ -305,11 +305,69 @@
                                                     }
                                                     echo '</select>';
                                                 }
+                                                $current_check_row = get_table_row($config_current_check_table, 1);
+                                                $status_current_check = intval($current_check_row[$current_check_active_field]);
+                                                $current_threshold = number_format(floatval($current_check_row[$current_threshold_field]), 1, '.', '');
+                                                $repeat_event_cycle = intval($current_check_row[$repeat_event_cycle_field]);
+                                                if ($status_current_check == 1) {
+                                                    $cooler_relay_check_active_true = "checked";
+                                                }
+                                                else{
+                                                    $cooler_relay_check_active_true = "";
+                                                }
                                             ?>
                                             </td>
-                                        </tr>                                        
+                                        </tr>
+                                        <tr><td>&nbsp;</td></tr>
+                                        <tr id="cooler_check_line1"
+                                        <?php
+                                            if (intval($meat4_sensortype) != 18) {
+                                                echo ' style="display:none;"';
+                                            }
+                                        ?>>
+                                            <td class="text_left_padding"><?php echo _('cooler relay monitoring'); ?>:</td>
+                                            <td style="text-align: left;">
+                                                <input type="hidden" name="cooler_relay_check_active_admin" value="0">
+                                                <input type="checkbox" name="cooler_relay_check_active_admin" value="1" <?php echo $cooler_relay_check_active_true; ?>/>
+                                            </td>
+                                        </tr>
+                                        <tr id="cooler_check_line2"
+                                        <?php
+                                            if (intval($meat4_sensortype) != 18) {
+                                                echo ' style="display:none;"';
+                                            }
+                                        ?>>                                        
+                                            <td class="text_left_padding"><?php echo _('current threshold'); ?>:</td>
+                                            <td style="text-align: left;"><input name="current_threshold_admin" type="number" min="0.1" max="25" step="0.1" style="width: 30%;" required value=<?php echo $current_threshold; ?>>&nbsp;A<span style="font-size: xx-small"> (0.1A <?php echo _('to'); ?> 25A)</span></td>
+                                        </tr>
+                                        <tr id="cooler_check_line3"
+                                        <?php
+                                            if (intval($meat4_sensortype) != 18) {
+                                                echo ' style="display:none;"';
+                                            }
+                                        ?>>                                        
+                                            <td class="text_left_padding"><?php echo _('event messages every'); ?>:</td>
+                                            <td style="text-align: left;"><input name="repeat_event_cycle_admin" type="number" min="1" max="1440" step="1" style="width: 30%;" required value=<?php echo $repeat_event_cycle; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (10 <?php echo _('to'); ?> 1440)</span></td>
+                                        </tr>
                                     </table>
 
+                                    <script>
+                                        function getMeat4SensorTypeIndex(selectedObject) {
+                                            var rowId  = selectedObject.value;
+                                            console.log('rowId = ' + rowId);
+                                            if (rowId == "18") {
+                                                document.getElementById('cooler_check_line1').style.display = '';
+                                                document.getElementById('cooler_check_line2').style.display = '';
+                                                document.getElementById('cooler_check_line3').style.display = '';
+                                            }
+                                            else {
+                                                document.getElementById('cooler_check_line1').style.display = 'none';
+                                                document.getElementById('cooler_check_line2').style.display = 'none';
+                                                document.getElementById('cooler_check_line3').style.display = 'none';
+                                            }
+                                        }                                    
+                                    </script>
+                                    
                                     <script>
                                         function help_thermometer_blockFunction() {
                                             document.getElementById('help_thermometer').style.display = 'block';

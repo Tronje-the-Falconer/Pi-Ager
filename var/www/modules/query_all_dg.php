@@ -195,12 +195,17 @@
             }            
         }
      }
-
+     
+    // make nth_value_scale odd-numbered
+    if ($nth_value_scale > 1 and (($nth_value_scale % 2) == 0)) {
+        $nth_value_scale -= 1;
+    }
+    	
         
     // reading all_sensors_table
     $all_sensors_rows = get_allsensors_dataset($nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
     // reading all_scales_table
-    $all_scales_rows = get_allscales_dataset($nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    $all_scales_rows = get_allscales_dataset($nth_value_scale, $first_timestamp_diagram, $last_timestamp_diagram);
 
     // common x-axis timestamps for all_sensors
     $all_sensors_timestamps_array = array_column($all_sensors_rows, 'last_change');
