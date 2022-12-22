@@ -493,8 +493,8 @@
                                             ?>
                                             <tr>
                                                 <td rowspan="5" class="td_png_icon"><h3><?php echo _('defrost'); ?></h3><img src="images/icons/defrost_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_defrost_blockFunction()"><?php echo _('help'); ?></button></td>                                            
-                                                <td class="text_left_padding"><?php echo _('defrost temperature'); ?>:</td>
-                                                <td style="text-align: left;"><input name="defrost_temperature" type="number" min="1" max="22" step="0.1" style="width: 30%;" required value=<?php echo $defrost_temperature; ?>>&nbsp;°C<span style="font-size: xx-small"> (1 <?php echo _('to'); ?> 12)</span></td>
+                                                <td class="text_left_padding"><?php echo _('defrost temperature offset'); ?>:</td>
+                                                <td style="text-align: left;"><input name="defrost_temperature" type="number" min="1" max="22" step="0.1" style="width: 30%;" required value=<?php echo $defrost_temperature; ?>>&nbsp;°C<span style="font-size: xx-small"> (1 <?php echo _('to'); ?> 22)</span></td>
                                             </tr>
                                             <tr>
                                                 <td class="text_left_padding"><?php echo _('defrost cycle'); ?>:</td>

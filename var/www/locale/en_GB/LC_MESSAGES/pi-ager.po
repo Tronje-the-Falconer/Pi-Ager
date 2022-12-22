@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-GB\n"
-"POT-Creation-Date: 2022-12-06 18:29+0100\n"
-"PO-Revision-Date: 2022-12-06 18:30+0100\n"
+"POT-Creation-Date: 2022-12-22 15:05+0100\n"
+"PO-Revision-Date: 2022-12-22 15:12+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -294,45 +294,45 @@ msgstr ""
 msgid "Failed to get sensordata."
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:459
+#: opt/pi-ager/pi_ager_loop.py:460
 msgid "defrost process stopped"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:469
+#: opt/pi-ager/pi_ager_loop.py:470
 msgid "defrost process started"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:528
+#: opt/pi-ager/pi_ager_loop.py:529
 msgid "GPIO states"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:540 opt/pi-ager/pi_ager_loop.py:541
-#: opt/pi-ager/pi_ager_loop.py:543 opt/pi-ager/pi_ager_loop.py:544
-#: opt/pi-ager/pi_ager_loop.py:549 opt/pi-ager/pi_ager_loop.py:550
-#: opt/pi-ager/pi_ager_loop.py:552 opt/pi-ager/pi_ager_loop.py:553
+#: opt/pi-ager/pi_ager_loop.py:541 opt/pi-ager/pi_ager_loop.py:542
+#: opt/pi-ager/pi_ager_loop.py:544 opt/pi-ager/pi_ager_loop.py:545
+#: opt/pi-ager/pi_ager_loop.py:550 opt/pi-ager/pi_ager_loop.py:551
+#: opt/pi-ager/pi_ager_loop.py:553 opt/pi-ager/pi_ager_loop.py:554
 #: var/www/diagrams.php:1155 var/www/diagrams.php:1176 var/www/index.php:1102
 #: var/www/index.php:1122 var/www/modules/querystatus.php:169
 #: var/www/modules/querystatus.php:186
 msgid "heater"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:540 opt/pi-ager/pi_ager_loop.py:541
-#: opt/pi-ager/pi_ager_loop.py:543 opt/pi-ager/pi_ager_loop.py:544
-#: opt/pi-ager/pi_ager_loop.py:559 opt/pi-ager/pi_ager_loop.py:560
-#: opt/pi-ager/pi_ager_loop.py:562 opt/pi-ager/pi_ager_loop.py:563
-#: opt/pi-ager/pi_ager_loop.py:578 opt/pi-ager/pi_ager_loop.py:579
-#: opt/pi-ager/pi_ager_loop.py:581 opt/pi-ager/pi_ager_loop.py:582
-#: opt/pi-ager/pi_ager_loop.py:597 opt/pi-ager/pi_ager_loop.py:598
-#: opt/pi-ager/pi_ager_loop.py:600 opt/pi-ager/pi_ager_loop.py:601
-#: opt/pi-ager/pi_ager_loop.py:616 opt/pi-ager/pi_ager_loop.py:617
-#: opt/pi-ager/pi_ager_loop.py:619 opt/pi-ager/pi_ager_loop.py:620
-#: opt/pi-ager/pi_ager_loop.py:635 opt/pi-ager/pi_ager_loop.py:636
-#: opt/pi-ager/pi_ager_loop.py:638 opt/pi-ager/pi_ager_loop.py:639
-#: opt/pi-ager/pi_ager_loop.py:654 opt/pi-ager/pi_ager_loop.py:655
-#: opt/pi-ager/pi_ager_loop.py:657 opt/pi-ager/pi_ager_loop.py:658
-#: opt/pi-ager/pi_ager_loop.py:673 opt/pi-ager/pi_ager_loop.py:674
-#: opt/pi-ager/pi_ager_loop.py:676 opt/pi-ager/pi_ager_loop.py:677
-#: opt/pi-ager/pi_ager_loop.py:1394 opt/pi-ager/pi_ager_loop.py:1456
+#: opt/pi-ager/pi_ager_loop.py:541 opt/pi-ager/pi_ager_loop.py:542
+#: opt/pi-ager/pi_ager_loop.py:544 opt/pi-ager/pi_ager_loop.py:545
+#: opt/pi-ager/pi_ager_loop.py:560 opt/pi-ager/pi_ager_loop.py:561
+#: opt/pi-ager/pi_ager_loop.py:563 opt/pi-ager/pi_ager_loop.py:564
+#: opt/pi-ager/pi_ager_loop.py:579 opt/pi-ager/pi_ager_loop.py:580
+#: opt/pi-ager/pi_ager_loop.py:582 opt/pi-ager/pi_ager_loop.py:583
+#: opt/pi-ager/pi_ager_loop.py:598 opt/pi-ager/pi_ager_loop.py:599
+#: opt/pi-ager/pi_ager_loop.py:601 opt/pi-ager/pi_ager_loop.py:602
+#: opt/pi-ager/pi_ager_loop.py:617 opt/pi-ager/pi_ager_loop.py:618
+#: opt/pi-ager/pi_ager_loop.py:620 opt/pi-ager/pi_ager_loop.py:621
+#: opt/pi-ager/pi_ager_loop.py:636 opt/pi-ager/pi_ager_loop.py:637
+#: opt/pi-ager/pi_ager_loop.py:639 opt/pi-ager/pi_ager_loop.py:640
+#: opt/pi-ager/pi_ager_loop.py:655 opt/pi-ager/pi_ager_loop.py:656
+#: opt/pi-ager/pi_ager_loop.py:658 opt/pi-ager/pi_ager_loop.py:659
+#: opt/pi-ager/pi_ager_loop.py:674 opt/pi-ager/pi_ager_loop.py:675
+#: opt/pi-ager/pi_ager_loop.py:677 opt/pi-ager/pi_ager_loop.py:678
+#: opt/pi-ager/pi_ager_loop.py:1395 opt/pi-ager/pi_ager_loop.py:1457
 #: var/www/diagrams.php:995 var/www/diagrams.php:1020 var/www/diagrams.php:1106
 #: var/www/diagrams.php:1131 var/www/diagrams.php:1217
 #: var/www/diagrams.php:1242 var/www/diagrams.php:1328
@@ -348,23 +348,23 @@ msgstr ""
 msgid "on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:549 opt/pi-ager/pi_ager_loop.py:550
-#: opt/pi-ager/pi_ager_loop.py:552 opt/pi-ager/pi_ager_loop.py:553
-#: opt/pi-ager/pi_ager_loop.py:568 opt/pi-ager/pi_ager_loop.py:569
-#: opt/pi-ager/pi_ager_loop.py:571 opt/pi-ager/pi_ager_loop.py:572
-#: opt/pi-ager/pi_ager_loop.py:587 opt/pi-ager/pi_ager_loop.py:588
-#: opt/pi-ager/pi_ager_loop.py:590 opt/pi-ager/pi_ager_loop.py:591
-#: opt/pi-ager/pi_ager_loop.py:606 opt/pi-ager/pi_ager_loop.py:607
-#: opt/pi-ager/pi_ager_loop.py:609 opt/pi-ager/pi_ager_loop.py:610
-#: opt/pi-ager/pi_ager_loop.py:625 opt/pi-ager/pi_ager_loop.py:626
-#: opt/pi-ager/pi_ager_loop.py:628 opt/pi-ager/pi_ager_loop.py:629
-#: opt/pi-ager/pi_ager_loop.py:644 opt/pi-ager/pi_ager_loop.py:645
-#: opt/pi-ager/pi_ager_loop.py:647 opt/pi-ager/pi_ager_loop.py:648
-#: opt/pi-ager/pi_ager_loop.py:663 opt/pi-ager/pi_ager_loop.py:664
-#: opt/pi-ager/pi_ager_loop.py:666 opt/pi-ager/pi_ager_loop.py:667
-#: opt/pi-ager/pi_ager_loop.py:682 opt/pi-ager/pi_ager_loop.py:683
-#: opt/pi-ager/pi_ager_loop.py:685 opt/pi-ager/pi_ager_loop.py:686
-#: opt/pi-ager/pi_ager_loop.py:1390 opt/pi-ager/pi_ager_loop.py:1452
+#: opt/pi-ager/pi_ager_loop.py:550 opt/pi-ager/pi_ager_loop.py:551
+#: opt/pi-ager/pi_ager_loop.py:553 opt/pi-ager/pi_ager_loop.py:554
+#: opt/pi-ager/pi_ager_loop.py:569 opt/pi-ager/pi_ager_loop.py:570
+#: opt/pi-ager/pi_ager_loop.py:572 opt/pi-ager/pi_ager_loop.py:573
+#: opt/pi-ager/pi_ager_loop.py:588 opt/pi-ager/pi_ager_loop.py:589
+#: opt/pi-ager/pi_ager_loop.py:591 opt/pi-ager/pi_ager_loop.py:592
+#: opt/pi-ager/pi_ager_loop.py:607 opt/pi-ager/pi_ager_loop.py:608
+#: opt/pi-ager/pi_ager_loop.py:610 opt/pi-ager/pi_ager_loop.py:611
+#: opt/pi-ager/pi_ager_loop.py:626 opt/pi-ager/pi_ager_loop.py:627
+#: opt/pi-ager/pi_ager_loop.py:629 opt/pi-ager/pi_ager_loop.py:630
+#: opt/pi-ager/pi_ager_loop.py:645 opt/pi-ager/pi_ager_loop.py:646
+#: opt/pi-ager/pi_ager_loop.py:648 opt/pi-ager/pi_ager_loop.py:649
+#: opt/pi-ager/pi_ager_loop.py:664 opt/pi-ager/pi_ager_loop.py:665
+#: opt/pi-ager/pi_ager_loop.py:667 opt/pi-ager/pi_ager_loop.py:668
+#: opt/pi-ager/pi_ager_loop.py:683 opt/pi-ager/pi_ager_loop.py:684
+#: opt/pi-ager/pi_ager_loop.py:686 opt/pi-ager/pi_ager_loop.py:687
+#: opt/pi-ager/pi_ager_loop.py:1391 opt/pi-ager/pi_ager_loop.py:1453
 #: var/www/diagrams.php:997 var/www/diagrams.php:999 var/www/diagrams.php:1022
 #: var/www/diagrams.php:1024 var/www/diagrams.php:1108
 #: var/www/diagrams.php:1110 var/www/diagrams.php:1133
@@ -393,236 +393,236 @@ msgstr ""
 msgid "off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:559 opt/pi-ager/pi_ager_loop.py:560
-#: opt/pi-ager/pi_ager_loop.py:562 opt/pi-ager/pi_ager_loop.py:563
-#: opt/pi-ager/pi_ager_loop.py:568 opt/pi-ager/pi_ager_loop.py:569
-#: opt/pi-ager/pi_ager_loop.py:571 opt/pi-ager/pi_ager_loop.py:572
+#: opt/pi-ager/pi_ager_loop.py:560 opt/pi-ager/pi_ager_loop.py:561
+#: opt/pi-ager/pi_ager_loop.py:563 opt/pi-ager/pi_ager_loop.py:564
+#: opt/pi-ager/pi_ager_loop.py:569 opt/pi-ager/pi_ager_loop.py:570
+#: opt/pi-ager/pi_ager_loop.py:572 opt/pi-ager/pi_ager_loop.py:573
 msgid "cooling compressor"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:578 opt/pi-ager/pi_ager_loop.py:579
-#: opt/pi-ager/pi_ager_loop.py:581 opt/pi-ager/pi_ager_loop.py:582
-#: opt/pi-ager/pi_ager_loop.py:587 opt/pi-ager/pi_ager_loop.py:588
-#: opt/pi-ager/pi_ager_loop.py:590 opt/pi-ager/pi_ager_loop.py:591
+#: opt/pi-ager/pi_ager_loop.py:579 opt/pi-ager/pi_ager_loop.py:580
+#: opt/pi-ager/pi_ager_loop.py:582 opt/pi-ager/pi_ager_loop.py:583
+#: opt/pi-ager/pi_ager_loop.py:588 opt/pi-ager/pi_ager_loop.py:589
+#: opt/pi-ager/pi_ager_loop.py:591 opt/pi-ager/pi_ager_loop.py:592
 #: var/www/diagrams.php:1377 var/www/diagrams.php:1398
 msgid "humidifier"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:597 opt/pi-ager/pi_ager_loop.py:598
-#: opt/pi-ager/pi_ager_loop.py:600 opt/pi-ager/pi_ager_loop.py:601
-#: opt/pi-ager/pi_ager_loop.py:606 opt/pi-ager/pi_ager_loop.py:607
-#: opt/pi-ager/pi_ager_loop.py:609 opt/pi-ager/pi_ager_loop.py:610
+#: opt/pi-ager/pi_ager_loop.py:598 opt/pi-ager/pi_ager_loop.py:599
+#: opt/pi-ager/pi_ager_loop.py:601 opt/pi-ager/pi_ager_loop.py:602
+#: opt/pi-ager/pi_ager_loop.py:607 opt/pi-ager/pi_ager_loop.py:608
+#: opt/pi-ager/pi_ager_loop.py:610 opt/pi-ager/pi_ager_loop.py:611
 msgid "circulation air"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:616 opt/pi-ager/pi_ager_loop.py:617
-#: opt/pi-ager/pi_ager_loop.py:619 opt/pi-ager/pi_ager_loop.py:620
-#: opt/pi-ager/pi_ager_loop.py:625 opt/pi-ager/pi_ager_loop.py:626
-#: opt/pi-ager/pi_ager_loop.py:628 opt/pi-ager/pi_ager_loop.py:629
+#: opt/pi-ager/pi_ager_loop.py:617 opt/pi-ager/pi_ager_loop.py:618
+#: opt/pi-ager/pi_ager_loop.py:620 opt/pi-ager/pi_ager_loop.py:621
+#: opt/pi-ager/pi_ager_loop.py:626 opt/pi-ager/pi_ager_loop.py:627
+#: opt/pi-ager/pi_ager_loop.py:629 opt/pi-ager/pi_ager_loop.py:630
 #: var/www/diagrams.php:1599 var/www/diagrams.php:1620
 msgid "exhaust air"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:635 opt/pi-ager/pi_ager_loop.py:636
-#: opt/pi-ager/pi_ager_loop.py:638 opt/pi-ager/pi_ager_loop.py:639
-#: opt/pi-ager/pi_ager_loop.py:644 opt/pi-ager/pi_ager_loop.py:645
-#: opt/pi-ager/pi_ager_loop.py:647 opt/pi-ager/pi_ager_loop.py:648
+#: opt/pi-ager/pi_ager_loop.py:636 opt/pi-ager/pi_ager_loop.py:637
+#: opt/pi-ager/pi_ager_loop.py:639 opt/pi-ager/pi_ager_loop.py:640
+#: opt/pi-ager/pi_ager_loop.py:645 opt/pi-ager/pi_ager_loop.py:646
+#: opt/pi-ager/pi_ager_loop.py:648 opt/pi-ager/pi_ager_loop.py:649
 #: var/www/diagrams.php:1488 var/www/diagrams.php:1509
 msgid "dehumidifier"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:654 opt/pi-ager/pi_ager_loop.py:655
-#: opt/pi-ager/pi_ager_loop.py:657 opt/pi-ager/pi_ager_loop.py:658
-#: opt/pi-ager/pi_ager_loop.py:663 opt/pi-ager/pi_ager_loop.py:664
-#: opt/pi-ager/pi_ager_loop.py:666 opt/pi-ager/pi_ager_loop.py:667
+#: opt/pi-ager/pi_ager_loop.py:655 opt/pi-ager/pi_ager_loop.py:656
+#: opt/pi-ager/pi_ager_loop.py:658 opt/pi-ager/pi_ager_loop.py:659
+#: opt/pi-ager/pi_ager_loop.py:664 opt/pi-ager/pi_ager_loop.py:665
+#: opt/pi-ager/pi_ager_loop.py:667 opt/pi-ager/pi_ager_loop.py:668
 #: var/www/config.php:219 var/www/diagrams.php:933 var/www/diagrams.php:954
 #: var/www/index.php:1293 var/www/modules/querystatus.php:360
 msgid "light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:673 opt/pi-ager/pi_ager_loop.py:674
-#: opt/pi-ager/pi_ager_loop.py:676 opt/pi-ager/pi_ager_loop.py:677
-#: opt/pi-ager/pi_ager_loop.py:682 opt/pi-ager/pi_ager_loop.py:683
-#: opt/pi-ager/pi_ager_loop.py:685 opt/pi-ager/pi_ager_loop.py:686
+#: opt/pi-ager/pi_ager_loop.py:674 opt/pi-ager/pi_ager_loop.py:675
+#: opt/pi-ager/pi_ager_loop.py:677 opt/pi-ager/pi_ager_loop.py:678
+#: opt/pi-ager/pi_ager_loop.py:683 opt/pi-ager/pi_ager_loop.py:684
+#: opt/pi-ager/pi_ager_loop.py:686 opt/pi-ager/pi_ager_loop.py:687
 #: var/www/diagrams.php:1044 var/www/diagrams.php:1065 var/www/index.php:1262
 #: var/www/modules/querystatus.php:328
 msgid "uv-light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:801
+#: opt/pi-ager/pi_ager_loop.py:802
 msgid "UPS battery is low"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:804
+#: opt/pi-ager/pi_ager_loop.py:805
 msgid "Shutdown Pi-Ager now"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:815
+#: opt/pi-ager/pi_ager_loop.py:816
 msgid "UPS battery is ok"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:829
+#: opt/pi-ager/pi_ager_loop.py:830
 msgid "Power monitor signals powerfail"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:838
+#: opt/pi-ager/pi_ager_loop.py:839
 msgid "Power monitor signals powergood"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:855
+#: opt/pi-ager/pi_ager_loop.py:856
 msgid "Switch is shorted to GND"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:864
+#: opt/pi-ager/pi_ager_loop.py:865
 msgid "Switch is open"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1315
+#: opt/pi-ager/pi_ager_loop.py:1316
 msgid "selected internal sensor"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1317
+#: opt/pi-ager/pi_ager_loop.py:1318
 msgid "target temperature"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1319 opt/pi-ager/pi_ager_loop.py:1331
+#: opt/pi-ager/pi_ager_loop.py:1320 opt/pi-ager/pi_ager_loop.py:1332
 msgid "actual temperature"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1322
+#: opt/pi-ager/pi_ager_loop.py:1323
 msgid "target humidity"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1323 opt/pi-ager/pi_ager_loop.py:1332
+#: opt/pi-ager/pi_ager_loop.py:1324 opt/pi-ager/pi_ager_loop.py:1333
 msgid "actual humidity"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1325 opt/pi-ager/pi_ager_loop.py:1333
+#: opt/pi-ager/pi_ager_loop.py:1326 opt/pi-ager/pi_ager_loop.py:1334
 msgid "actual dewpoint"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1326 opt/pi-ager/pi_ager_loop.py:1334
+#: opt/pi-ager/pi_ager_loop.py:1327 opt/pi-ager/pi_ager_loop.py:1335
 msgid "actual humidity abs"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1330
+#: opt/pi-ager/pi_ager_loop.py:1331
 msgid "selected external sensor"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1346 opt/pi-ager/pi_ager_loop.py:1349
-#: opt/pi-ager/pi_ager_loop.py:1352
+#: opt/pi-ager/pi_ager_loop.py:1347 opt/pi-ager/pi_ager_loop.py:1350
+#: opt/pi-ager/pi_ager_loop.py:1353
 msgid "circulation air timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1346 opt/pi-ager/pi_ager_loop.py:1352
-#: opt/pi-ager/pi_ager_loop.py:1368 opt/pi-ager/pi_ager_loop.py:1374
+#: opt/pi-ager/pi_ager_loop.py:1347 opt/pi-ager/pi_ager_loop.py:1353
+#: opt/pi-ager/pi_ager_loop.py:1369 opt/pi-ager/pi_ager_loop.py:1375
 msgid "fan permanent off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1349 opt/pi-ager/pi_ager_loop.py:1371
+#: opt/pi-ager/pi_ager_loop.py:1350 opt/pi-ager/pi_ager_loop.py:1372
 msgid "fan permanent on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1356 opt/pi-ager/pi_ager_loop.py:1360
+#: opt/pi-ager/pi_ager_loop.py:1357 opt/pi-ager/pi_ager_loop.py:1361
 msgid "circulation air timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1356 opt/pi-ager/pi_ager_loop.py:1378
+#: opt/pi-ager/pi_ager_loop.py:1357 opt/pi-ager/pi_ager_loop.py:1379
 msgid "fan on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1360 opt/pi-ager/pi_ager_loop.py:1382
+#: opt/pi-ager/pi_ager_loop.py:1361 opt/pi-ager/pi_ager_loop.py:1383
 msgid "fan off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1368 opt/pi-ager/pi_ager_loop.py:1371
-#: opt/pi-ager/pi_ager_loop.py:1374
+#: opt/pi-ager/pi_ager_loop.py:1369 opt/pi-ager/pi_ager_loop.py:1372
+#: opt/pi-ager/pi_ager_loop.py:1375
 msgid "exhaust air timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1378 opt/pi-ager/pi_ager_loop.py:1382
+#: opt/pi-ager/pi_ager_loop.py:1379 opt/pi-ager/pi_ager_loop.py:1383
 msgid "exhaust air timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1390 opt/pi-ager/pi_ager_loop.py:1394
+#: opt/pi-ager/pi_ager_loop.py:1391 opt/pi-ager/pi_ager_loop.py:1395
 msgid "modus uv-light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1397 opt/pi-ager/pi_ager_loop.py:1400
-#: opt/pi-ager/pi_ager_loop.py:1403
+#: opt/pi-ager/pi_ager_loop.py:1398 opt/pi-ager/pi_ager_loop.py:1401
+#: opt/pi-ager/pi_ager_loop.py:1404
 msgid "uv-light timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1397 opt/pi-ager/pi_ager_loop.py:1400
-#: opt/pi-ager/pi_ager_loop.py:1430
+#: opt/pi-ager/pi_ager_loop.py:1398 opt/pi-ager/pi_ager_loop.py:1401
+#: opt/pi-ager/pi_ager_loop.py:1431
 msgid "uv-light permanent off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1403
+#: opt/pi-ager/pi_ager_loop.py:1404
 msgid "uv-light permanent on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1410 opt/pi-ager/pi_ager_loop.py:1417
+#: opt/pi-ager/pi_ager_loop.py:1411 opt/pi-ager/pi_ager_loop.py:1418
 msgid "uv-light timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1410 opt/pi-ager/pi_ager_loop.py:1442
+#: opt/pi-ager/pi_ager_loop.py:1411 opt/pi-ager/pi_ager_loop.py:1443
 msgid "uv-light on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1417 opt/pi-ager/pi_ager_loop.py:1446
+#: opt/pi-ager/pi_ager_loop.py:1418 opt/pi-ager/pi_ager_loop.py:1447
 msgid "uv-light off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1430
+#: opt/pi-ager/pi_ager_loop.py:1431
 msgid "uv-light timestamp inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1442 opt/pi-ager/pi_ager_loop.py:1446
+#: opt/pi-ager/pi_ager_loop.py:1443 opt/pi-ager/pi_ager_loop.py:1447
 msgid "uv-light timestamp active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1452 opt/pi-ager/pi_ager_loop.py:1456
+#: opt/pi-ager/pi_ager_loop.py:1453 opt/pi-ager/pi_ager_loop.py:1457
 msgid "modus light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1459 opt/pi-ager/pi_ager_loop.py:1463
-#: opt/pi-ager/pi_ager_loop.py:1467
+#: opt/pi-ager/pi_ager_loop.py:1460 opt/pi-ager/pi_ager_loop.py:1464
+#: opt/pi-ager/pi_ager_loop.py:1468
 msgid "light timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1459 opt/pi-ager/pi_ager_loop.py:1463
-#: opt/pi-ager/pi_ager_loop.py:1497
+#: opt/pi-ager/pi_ager_loop.py:1460 opt/pi-ager/pi_ager_loop.py:1464
+#: opt/pi-ager/pi_ager_loop.py:1498
 msgid "light permanent off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1467
+#: opt/pi-ager/pi_ager_loop.py:1468
 msgid "light permanent on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1475 opt/pi-ager/pi_ager_loop.py:1482
+#: opt/pi-ager/pi_ager_loop.py:1476 opt/pi-ager/pi_ager_loop.py:1483
 msgid "light timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1475 opt/pi-ager/pi_ager_loop.py:1509
+#: opt/pi-ager/pi_ager_loop.py:1476 opt/pi-ager/pi_ager_loop.py:1510
 #: var/www/webcam.php:53
 msgid "light on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1482 opt/pi-ager/pi_ager_loop.py:1513
+#: opt/pi-ager/pi_ager_loop.py:1483 opt/pi-ager/pi_ager_loop.py:1514
 msgid "light off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1497
+#: opt/pi-ager/pi_ager_loop.py:1498
 msgid "light timestamp inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1509 opt/pi-ager/pi_ager_loop.py:1513
+#: opt/pi-ager/pi_ager_loop.py:1510 opt/pi-ager/pi_ager_loop.py:1514
 msgid "light timestamp active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1785 opt/pi-ager/pi_ager_loop.py:1787
-#: opt/pi-ager/pi_ager_loop.py:1790 opt/pi-ager/pi_ager_loop.py:1792
+#: opt/pi-ager/pi_ager_loop.py:1786 opt/pi-ager/pi_ager_loop.py:1788
+#: opt/pi-ager/pi_ager_loop.py:1791 opt/pi-ager/pi_ager_loop.py:1793
 msgid "weight scale"
 msgstr ""
 
@@ -1027,7 +1027,7 @@ msgid "defrost"
 msgstr ""
 
 #: var/www/admin.php:496
-msgid "defrost temperature"
+msgid "defrost temperature offset"
 msgstr ""
 
 #: var/www/admin.php:500
@@ -1053,8 +1053,10 @@ msgstr ""
 "<br>The resulting water can drain through a duct at the back of the unit.\n"
 "<br> Defrosting is controlled by applying some parameters:\n"
 "<br><br>\n"
-"<b>Defrost temperature:</b>The heater is turned on as long as the "
-"temperature in the cabinet has not reached this temperature.\n"
+"<b>Defrost temperature offset:</b>The setpoint temperature for defrosting is "
+"calculated by the sum of defrost temperature offset and current setpoint "
+"temperature. The heater is turned on as long as the temperature in the "
+"cabinet has not reached this temperature.\n"
 "<br><br>\n"
 "<b>Defrost cycle:</b>For every n hours of Pi-Ager operation the defrost "
 "processing is turned on.\n"

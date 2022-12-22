@@ -551,7 +551,7 @@
                                                 borderWidth: 2,
                                                 <?php
                                                     if ($customtime <= 3600) {
-                                                        print 'pointRadius: 2, pointHitRadius: 5,';
+                                                        print 'pointRadius: 1, pointHitRadius: 5,';
                                                     }
                                                     else {
                                                         print 'pointRadius: 0, pointHitRadius: 5,';
@@ -571,7 +571,7 @@
                                                 borderWidth: 2,
                                                 <?php
                                                     if ($customtime <= 3600) {
-                                                        print 'pointRadius: 2, pointHitRadius: 5,';
+                                                        print 'pointRadius: 1, pointHitRadius: 5,';
                                                     }
                                                     else {
                                                         print 'pointRadius: 0, pointHitRadius: 5,';

@@ -451,7 +451,8 @@ def control_defrost():
         return
     
     #  here defrost cycle elapsed and defrost is active and status_pi_ager is True: check if control can be taken over
-    defrost_temperature = pi_ager_database.get_table_value_from_field(pi_ager_names.defrost_table, pi_ager_names.defrost_temperature_field)
+    defrost_temperature = pi_ager_database.get_table_value_from_field(pi_ager_names.defrost_table, pi_ager_names.defrost_temperature_field)     # defrost temperature offset
+    defrost_temperature += pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key)        # absolute value defrost temperature = offset + setpoint_temperature
     if (sensor_temperature == None):    # check on valid temperature
         return
     if (sensor_temperature >= defrost_temperature): # can now finish defrost
