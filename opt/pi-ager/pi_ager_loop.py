@@ -433,6 +433,9 @@ def control_defrost():
     global sensor_temperature
     
     if (status_pi_ager == 0):
+        if (defrost_status == 1):
+            cl_fact_logger.get_instance().info(_('defrost process stopped'))
+            cl_fact_logic_messenger().get_instance().handle_event('Defrost_stopped') 
         defrost_status = 0
         defrost_cycle_elapsed = False
         pi_ager_database.write_current_value(pi_ager_names.status_defrost_key, 0)
@@ -440,12 +443,18 @@ def control_defrost():
         
     defrost_active = int(pi_ager_database.get_table_value_from_field(pi_ager_names.defrost_table, pi_ager_names.defrost_active_field))
     if (defrost_active == 0):
+        if (defrost_status == 1):
+            cl_fact_logger.get_instance().info(_('defrost process stopped'))
+            cl_fact_logic_messenger().get_instance().handle_event('Defrost_stopped') 
         defrost_status = 0
         defrost_cycle_elapsed = False 
         pi_ager_database.write_current_value(pi_ager_names.status_defrost_key, 0)
         return
         
     if (defrost_cycle_elapsed == False):
+        if (defrost_status == 1):
+            cl_fact_logger.get_instance().info(_('defrost process stopped'))
+            cl_fact_logic_messenger().get_instance().handle_event('Defrost_stopped') 
         defrost_status = 0
         pi_ager_database.write_current_value(pi_ager_names.status_defrost_key, 0)
         return
