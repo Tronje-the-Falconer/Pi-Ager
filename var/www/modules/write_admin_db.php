@@ -24,9 +24,16 @@
         $temp_sensor3_admin = $_POST['temp_sensor3_admin'];
         $temp_sensor4_admin = $_POST['temp_sensor4_admin'];
         
+        $switch_control_uv_light_admin = $_POST['switch_UV_light_admin'];
+        $switch_control_light_admin = $_POST['switch_light_admin'];
+        
+        $current_check_active_admin = $_POST['cooler_relay_check_active_admin'];
+        $current_threshold_admin = $_POST['current_threshold_admin'];
+        $repeat_event_cycle_admin = $_POST['repeat_event_cycle_admin'];
+        
         write_admin($language_admin, $referenceunit_scale1_admin, $measuring_interval_scale1_admin, $measuring_duration_scale1_admin, $saving_period_scale1_admin, $samples_scale1_admin, $spikes_scale1_admin, $offset_scale1_admin,
                                     $referenceunit_scale2_admin, $measuring_interval_scale2_admin, $measuring_duration_scale2_admin, $saving_period_scale2_admin, $samples_scale2_admin, $spikes_scale2_admin, $offset_scale2_admin,
-                                    $temp_sensor1_admin, $temp_sensor2_admin, $temp_sensor3_admin, $temp_sensor4_admin);
+                                    $temp_sensor1_admin, $temp_sensor2_admin, $temp_sensor3_admin, $temp_sensor4_admin, $switch_control_uv_light_admin, $switch_control_light_admin, $current_check_active_admin, $current_threshold_admin, $repeat_event_cycle_admin);
         logger('DEBUG', 'adminvalues saved');
         print '<script language="javascript"> alert("'. (_("administration values")) . " : " . (_("values saved")) .'"); </script>';                            
 

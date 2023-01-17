@@ -1,10 +1,10 @@
 <?php
-    $sensor_temperature = round(get_table_value($current_values_table,$sensor_temperature_key), 1);
+    # $sensor_temperature = round(get_table_value($current_values_table,$sensor_temperature_key), 1);
     $sensortype = get_table_value($config_settings_table,$sensortype_key);
     $sensorsecondtype = get_table_value($config_settings_table,$sensorsecondtype_key);
     $language = get_table_value($config_settings_table,$language_key);
-    $switch_on_cooling_compressor = get_table_value($config_settings_table,$switch_on_cooling_compressor_key);
-    $switch_off_cooling_compressor = get_table_value($config_settings_table,$switch_off_cooling_compressor_key);
+    $switch_on_cooling_compressor = number_format(floatval(get_table_value($config_settings_table,$switch_on_cooling_compressor_key)), 1, '.', '');
+    $switch_off_cooling_compressor = number_format(floatval(get_table_value($config_settings_table,$switch_off_cooling_compressor_key)), 1, '.', '');
     $switch_on_humidifier = get_table_value($config_settings_table,$switch_on_humidifier_key);
     $switch_off_humidifier = get_table_value($config_settings_table,$switch_off_humidifier_key);
     $delay_humidify = get_table_value($config_settings_table,$delay_humidify_key);
@@ -13,6 +13,7 @@
     $uv_period = get_table_value($config_settings_table,$uv_period_key)/60;
     $switch_on_uv_hour = get_table_value($config_settings_table,$switch_on_uv_hour_key);
     $switch_on_uv_minute = get_table_value($config_settings_table,$switch_on_uv_minute_key);
+    $uv_check = intval(get_table_value($config_settings_table,$uv_check_key));
     $light_modus = get_table_value($config_settings_table,$light_modus_key);
     $light_duration = get_table_value($config_settings_table,$light_duration_key)/60;
     $light_period = get_table_value($config_settings_table,$light_period_key)/60;
@@ -26,6 +27,8 @@
     $internal_temperature_high_limit = get_table_value($config_settings_table, $internal_temperature_high_limit_key);
     $internal_temperature_hysteresis = get_table_value($config_settings_table, $internal_temperature_hysteresis_key);
     $shutdown_on_batlow =  intval(get_table_value($config_settings_table, $shutdown_on_batlow_key));
+    $delay_cooler = intval(get_table_value($config_settings_table, $delay_cooler_key));
+    $dewpoint_check = intval(get_table_value($config_settings_table, $dewpoint_check_key));
     
     $referenceunit_scale1 = number_format(floatval(get_table_value($settings_scale1_table,$referenceunit_key)), 1, '.', '');
     $offset_scale1 = number_format(floatval(get_table_value($settings_scale1_table, $offset_key)), 1, '.', '');
@@ -47,7 +50,11 @@
     $meat2_sensortype = get_table_value($config_settings_table, $meat2_sensortype_key);   
     $meat3_sensortype = get_table_value($config_settings_table, $meat3_sensortype_key);   
     $meat4_sensortype = get_table_value($config_settings_table, $meat4_sensortype_key);   
-        
+    
+    $mi_mac_last3bytes = get_table_value_from_field($atc_mi_thermometer_mac_table, NULL, $mi_mac_last3bytes_key);
+    $switch_control_uv_light = intval(get_table_value($config_settings_table, $switch_control_uv_light_key));
+    $switch_control_light = intval(get_table_value($config_settings_table, $switch_control_light_key));
+    
     if ($sensortype == 1) {
         $sensorname = 'DHT11';
         $checked_sens_1 = 'checked="checked"';
@@ -95,26 +102,7 @@
     else {
         $checked_senssecond_0 = '';
     }
-    if ($sensorsecondtype == 1) {
-        $sensorsecondname = 'DHT11';
-        $checked_senssecond_1 = 'checked="checked"';
-    }
-    else {
-        $checked_senssecond_1 = '';
-    }
-    if ($sensorsecondtype == 2) {
-        $sensorsecondname = 'DHT22';
-    }
-    else {
-        $checked_senssecond_2 = '';
-    }
-    if ($sensorsecondtype == 3) {
-        $sensorsecondname = 'SHT75';
-        $checked_senssecond_3 = 'checked="checked"';
-    }
-    else {
-        $checked_senssecond_3 = '';
-    }
+
     if ($sensorsecondtype == 4) {
         $sensorsecondname = 'SHT85';
         $checked_senssecond_4 = 'checked="checked"';
@@ -129,7 +117,14 @@
     else {
         $checked_senssecond_5 = '';
     }
-
+    if ($sensorsecondtype == 6) {
+        $sensorsecondname = 'MiThermometer';
+        $checked_senssecond_6 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_6 = '';
+    }
+    
     if ($language == 1) {
         $checked_language_1 = 'checked="checked"';
     }

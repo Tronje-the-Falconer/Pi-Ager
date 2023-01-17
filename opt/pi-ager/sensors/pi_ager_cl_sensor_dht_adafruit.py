@@ -33,7 +33,7 @@ class cl_sensor_dht_adafruit(cl_sensor):
         
         self._pin = pi_ager_gpio_config.gpio_sensor_data            
 
-        self._max_errors = 1
+        self._max_errors = 3
         self._old_temperature = 0
         self._current_temperature = 0
         self._temperature_dewpoint = 0
@@ -68,14 +68,15 @@ class cl_sensor_dht_adafruit(cl_sensor):
             
             except Exception as cx_error:
                 self._error_counter = self._error_counter + 1
-                cl_fact_logger.get_instance().exception(cx_error)
-                cl_fact_logger.get_instance().debug('Retry getting measurement from DHT. Current retry count : %d, max retry count : %d' % (self._error_counter, self._max_errors))       
+                if (self._error_counter == 1):
+                    cl_fact_logger.get_instance().exception(cx_error)
+                else:
+                    cl_fact_logger.get_instance().error(f"Retry getting measurement from DHT device. Current retry count : {self._error_counter}, max retry count : {self._max_errors}")        
                 time.sleep(1)
         
-        self.delete_error_counter() 
+#        self.delete_error_counter() 
         cl_fact_logger.get_instance().debug('Too many measurement errors occurred!')
-        
-        raise cx_measurement_error ('Too many measurement errors occurred!')    
+        raise cx_measurement_error (_('Too many measurement errors occurred!'))    
    
     def _write_to_db(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())

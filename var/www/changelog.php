@@ -17,17 +17,17 @@
                                                             echo date('d M Y, H:i:s', $mtime);
                                                             echo ' ';
                                                             echo _('oclock').'<br />';
-                                                            echo '<img src="images/icons/check_true_42x42.png"> '._('file exists').'<br />';
+//                                                            echo '<img src="images/icons/check_true_42x42.png"> '._('file exists').'<br />';
                                                         }
                                                         else {
                                                             echo '<img src="images/icons/check_false_42x42"> '._('file does not exist').'<br />';
                                                         }
-                                                        if (is_readable($changelogfile)) {
+/*                                                        if (is_readable($changelogfile)) {
                                                             echo '<img src="images/icons/check_true_42x42.png"> '._('file is readable').'<br />';
                                                         }
                                                         else {
                                                             echo '<img src="images/icons/check_false_42x42.png"> '._('file is not readable').'<br />';
-                                                        }
+                                                        }  */
                                                     ?>
                                                 </td>
                                             </tr>

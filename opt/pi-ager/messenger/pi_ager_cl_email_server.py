@@ -32,7 +32,7 @@ class cl_logic_email_server:
         """
         Read email-server settings from the database
         """
-        self.db_email_server = cl_fact_db_email_server().get_instance()
+        self.db_email_server = cl_fact_db_email_server.get_instance()
         self.it_email_server = self.db_email_server.read_data_from_db()
         
     
@@ -48,7 +48,8 @@ class cl_db_email_server(cl_ab_database_config):
         
         !!!!!!!!!!!!!!!!!! Achtung Factory fehlt noch !!!!!!!!!!!!!!!!!!
         """
-        self.database = cl_db_database_sqlite() 
+        self.database = cl_fact_database_config.get_instance()  # cl_db_database_sqlite()
+        
     def build_select_statement(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return('SELECT * FROM config_email_server')

@@ -187,6 +187,9 @@
     global $first_timestamp_diagram;
     
     $customtime = intval(get_table_value($config_settings_table, $customtime_for_diagrams_key));
+    if ($customtime < 60) { // limit to 1 minute
+        $customtime = 60;
+    }
     $last_timestamp_diagram = get_current_time();
     $first_timestamp_diagram = get_defined_first_timestamp($last_timestamp_diagram, $diagram_mode);
 
@@ -230,7 +233,7 @@
     }
      
 
-   $nth_value = 1;
+    $nth_value = 1;
     $nth_value_scale = 1;
 
     if ($diagram_mode == 'month') {
@@ -255,11 +258,15 @@
         }
      }
 	
+    // make nth_value_scale odd-numbered
+    if ($nth_value_scale > 1 and (($nth_value_scale % 2) == 0)) {
+        $nth_value_scale -= 1;
+    }
         
     // reading all_sensors_table
     $all_sensors_rows = get_allsensors_dataset($nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
     // reading all_scales_table
-    $all_scales_rows = get_allscales_dataset($nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
+    $all_scales_rows = get_allscales_dataset($nth_value_scale, $first_timestamp_diagram, $last_timestamp_diagram);
     
     // print "moving average window: " . $moving_average_window_x . " minutes <br>";
     // print "time window diagram: " . $x . " minutes <br>";
@@ -400,6 +407,19 @@
     $circulate_air_data_diagram = get_data_for_diagram($circulate_air_values);
     $circulate_air_timestamps_axis_text = $circulate_air_data_diagram[0];
     $circulate_air_dataset = $circulate_air_data_diagram[1];
-
+    
     logger('DEBUG', 'read_values_for_diagrams performed');
+
+    // test
+    /*
+    open_connection(); 
+    $sql = 'SELECT * FROM ' . $current_values_table;
+    $result = get_query_result($sql);
+    $rows = array();
+    while ($dataset = $result->fetchArray(SQLITE3_ASSOC)) {
+       $rows[$dataset[$key_field]] = [$dataset[$value_field], $dataset[$last_change_field]]; 
+    }
+    $msg = json_encode($rows);
+    logger('DEBUG', $msg);
+    */
 ?>

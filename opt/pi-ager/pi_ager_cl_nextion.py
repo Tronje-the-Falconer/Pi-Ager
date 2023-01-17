@@ -56,8 +56,10 @@ class cl_nextion( threading.Thread ):
         
         self.client = None
         self.waiter_task = None
+        self.wakeup_task = None
         self.stop_event = None
         self.button_event = None
+        self.wakeup_event = None
         self.reconnect_event = None
         # self.original_sigint_handler = signal.getsignal(signal.SIGINT)
         self.data = None
@@ -79,13 +81,30 @@ class cl_nextion( threading.Thread ):
             self.type_ = type_
             self.current_page_id = data.page_id
             self.loop.call_soon_threadsafe(self.button_event.set)
-            
-        # self.button_event.set()
-        cl_fact_logger.get_instance().info('Event %s data: %s', type_, str(data))
-    
+        elif type_ == EventType.AUTO_WAKE:
+            cl_fact_logger.get_instance().debug('nextion event handler found AUTO_WAKE')
+            self.loop.call_soon_threadsafe(self.wakeup_event.set)
+        else:    
+            cl_fact_logger.get_instance().debug('Event %s data: %s', type_, str(data))
+        
+    async def update_light_val(self):
+        if self.light_status == False:      # turn off
+            await self.client.set('values.status_light.val', 0)
+            if self.current_theme == 'fridge':
+                await self.client.set('btn_light.pic', 12) 
+            else:
+                await self.client.set('btn_light.pic', 39)
+        else:
+            await self.client.set('values.status_light.val', 1)
+            if self.current_theme == 'fridge':
+                await self.client.set('btn_light.pic', 13)
+            else:
+                await self.client.set('btn_light.pic', 41) 
+                
     async def turn_off_light(self):
-        cl_fact_logger.get_instance().info('Light turn off timeout')
-        gpio.output(pi_ager_gpio_config.gpio_light, True)
+        cl_fact_logger.get_instance().info('Light turned off after 10 minutes timeout')
+        # gpio.output(pi_ager_gpio_config.gpio_light, True)
+        globals.requested_state_light = pi_ager_names.relay_off
         globals.hands_off_light_switch = False
         self.light_status = False       # turn off
         # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 0)
@@ -98,25 +117,31 @@ class cl_nextion( threading.Thread ):
     async def control_light_status(self):
         #light_status = await self.client.get('values.status_light.val')  
         if self.light_status == True:
+            cl_fact_logger.get_instance().info('Light turned off')
             self.light_status = False       # turn off
             if self.current_theme == 'fridge':
                 await self.client.set('btn_light.pic', 12) 
             else:
                 await self.client.set('btn_light.pic', 39)
             self.light_timer.cancel()                
-            gpio.output(pi_ager_gpio_config.gpio_light, True)
+            # gpio.output(pi_ager_gpio_config.gpio_light, True)
+            globals.requested_state_light = pi_ager_names.relay_off
             globals.hands_off_light_switch = False
+            await self.client.set('values.status_light.val', 0) 
             # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 0)
             
         else:
+            cl_fact_logger.get_instance().info('Light turned on')
             self.light_status = True       # turn on
             if self.current_theme == 'fridge':
                 await self.client.set('btn_light.pic', 13)
             else:
                 await self.client.set('btn_light.pic', 41)
             self.light_timer.start()
-            globals.hands_off_light_switch = True   
-            gpio.output(pi_ager_gpio_config.gpio_light, False)
+            globals.hands_off_light_switch = True 
+            globals.requested_state_light = pi_ager_names.relay_on
+            await self.client.set('values.status_light.val', 1)
+            # gpio.output(pi_ager_gpio_config.gpio_light, False)
             # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 1)
     
     async def control_piager_start_stop(self):  # start/stop pi-ager
@@ -166,8 +191,20 @@ class cl_nextion( threading.Thread ):
         pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key, temp_soll)    
         pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key, hum_soll)    
         pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.modus_key, modus)    
+
+    async def wakeup_waiter(self, event):   # process touch screen wakeup event
+        try:
+            while True:
+                await self.wakeup_event.wait()
+                cl_fact_logger.get_instance().debug('wakeup_waiter: wakeup event happened')
+                await self.update_light_val()
+                self.wakeup_event.clear()
+                cl_fact_logger.get_instance().debug('wakeup event processed')
+        except Exception as e:
+            cl_fact_logger.get_instance().error('wakeup_waiter stopped ' + str(e))
+            pass
             
-    async def button_waiter(self, event):
+    async def button_waiter(self, event):   # process touch screen button events
         try:
             while True:
 #                print('waiting for button pressed ...')
@@ -345,7 +382,7 @@ class cl_nextion( threading.Thread ):
                     await self.save_page_17_19_values()
                                         
                 self.button_event.clear()
-                cl_fact_logger.get_instance().info('button pressed processed')
+                cl_fact_logger.get_instance().debug('button pressed processed')
         except Exception as e:
             cl_fact_logger.get_instance().error('button_waiter stopped ' + str(e))
             pass    
@@ -400,7 +437,7 @@ class cl_nextion( threading.Thread ):
         self.current_page_id = 1
         await self.client.set('sleep', 0)
         await self.client.command('page 1') 
-        await self.client.set('thsp', 0)
+        await self.client.set('thsp', 60)
         
     def db_get_base_values(self):
         status_piager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key )
@@ -408,6 +445,7 @@ class cl_nextion( threading.Thread ):
         temp_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
         humidity_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)
         dewpoint_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_dewpoint_key)
+        humabs = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_abs_key)
         temp_soll = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key)
         humitidy_soll = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key)
     
@@ -416,6 +454,7 @@ class cl_nextion( threading.Thread ):
         values['temp_ist'] = temp_ist
         values['humidity_ist'] = humidity_ist
         values['dewpoint_ist'] = dewpoint_ist
+        values['humabs'] = humabs
         values['temp_soll'] = temp_soll
         values['humitidy_soll'] = humitidy_soll
                          
@@ -436,6 +475,7 @@ class cl_nextion( threading.Thread ):
         temp_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_temperature_key)
         humid_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_humidity_key)
         dewp_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_dewpoint_key)
+        humabs_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_humidity_abs_key)
         
         values = dict()
         values['status_piager'] = status_piager
@@ -451,6 +491,7 @@ class cl_nextion( threading.Thread ):
         values['temp_ext'] = temp_ext
         values['humid_ext'] = humid_ext        
         values['dewp_ext'] = dewp_ext        
+        values['humabs_ext'] = humabs_ext
         
         return values
     
@@ -518,31 +559,40 @@ class cl_nextion( threading.Thread ):
         if values['status_piager'] == 0:
             await self.client.set('txt_temp.txt', '--.-')
             await self.client.set('txt_humid.txt', '--.-')
-            await self.client.set('txt_dew.txt', '--.-')
+            await self.client.set('txt_humabs.txt', '--.-')
         else:
             await self.client.set('txt_temp.txt', "%.1f" % (values['temp_ist']))
             await self.client.set('txt_humid.txt', "%.1f" % (values['humidity_ist']))        
-            await self.client.set('txt_dew.txt', "%.1f" % (values['dewpoint_ist']))      
+            await self.client.set('txt_humabs.txt', "%.1f" % (values['humabs']))      
     
     async def update_extended_values(self):
         values = self.db_get_extended_values()
         if values['status_piager'] == 0:
             await self.client.set('txt_temp_ext.txt', '--.-') 
             await self.client.set('txt_humid_ext.txt', '--.-')
-            await self.client.set('txt_dewp_ext.txt', '--.-')
+            await self.client.set('txt_humabs_ext.txt', '--.-')
             await self.client.set('txt_temp_meat1.txt', '--.-')
             await self.client.set('txt_temp_meat2.txt', '--.-')
             await self.client.set('txt_temp_meat3.txt', '--.-')
         
         else:
             if values['status_secondsensor'] != 0:
-                await self.client.set('txt_temp_ext.txt', "%.1f" % (values['temp_ext']))
-                await self.client.set('txt_humid_ext.txt',"%.1f" % (values['humid_ext']))
-                await self.client.set('txt_dewp_ext.txt', "%.1f" % (values['dewp_ext']))
+                if values['temp_ext'] == None:
+                    await self.client.set('txt_temp_ext.txt', '--.-')
+                else:
+                    await self.client.set('txt_temp_ext.txt', "%.1f" % (values['temp_ext']))
+                if values['humid_ext'] == None:
+                    await self.client.set('txt_humid_ext.txt', '--.-')
+                else:
+                    await self.client.set('txt_humid_ext.txt',"%.1f" % (values['humid_ext']))
+                if values['humabs_ext'] == None:
+                    await self.client.set('txt_humabs_ext.txt', '--.-')
+                else:
+                    await self.client.set('txt_humabs_ext.txt', "%.1f" % (values['humabs_ext']))
             else:
                 await self.client.set('txt_temp_ext.txt', '--.-') 
                 await self.client.set('txt_humid_ext.txt', '--.-')
-                await self.client.set('txt_dewp_ext.txt', '--.-')    
+                await self.client.set('txt_humabs_ext.txt', '--.-')    
                 
             if values['temp_meat1'] == None:
                 await self.client.set('txt_temp_meat1.txt', '--.-')
@@ -579,8 +629,8 @@ class cl_nextion( threading.Thread ):
         temp_soll = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key)
         humitidy_soll = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key)
 
-        temp_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_temperature_key)
-        humid_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_humidity_key)
+        humabs_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_humidity_abs_key)
+        humabs = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_abs_key)
         
         await self.client.set('txt_temp_set.txt', "%.1f" % (temp_soll))
         await self.client.set('txt_humid_set.txt', "%.1f" % (humitidy_soll))
@@ -588,17 +638,21 @@ class cl_nextion( threading.Thread ):
         if status_piager == 0:
             await self.client.set('txt_temp.txt', '--.-')
             await self.client.set('txt_humid.txt', '--.-')
-            await self.client.set('txt_temp_ext.txt', '--.-') 
-            await self.client.set('txt_humid_ext.txt', '--.-')
+            await self.client.set('txt_humabs_ext.txt', '--.-') 
+            await self.client.set('txt_humabs.txt', '--.-')
         else:
             await self.client.set('txt_temp.txt', "%.1f" % (temp_ist))
-            await self.client.set('txt_humid.txt', "%.1f" % (humidity_ist)) 
+            await self.client.set('txt_humid.txt', "%.1f" % (humidity_ist))
+            await self.client.set('txt_humabs.txt', "%.1f" % (humabs))
             if secondsensortype != 0:
-                await self.client.set('txt_temp_ext.txt', "%.1f" % (temp_ext))
-                await self.client.set('txt_humid_ext.txt',"%.1f" % (humid_ext))
+                # await self.client.set('txt_dewp.txt', "%.1f" % (dewpoint))
+                if humabs_ext == None:
+                    await self.client.set('txt_humabs_ext.txt', '--.-')
+                else:
+                    await self.client.set('txt_humabs_ext.txt',"%.1f" % (humabs_ext))
             else:
-                await self.client.set('txt_temp_ext.txt', '--.-') 
-                await self.client.set('txt_humid_ext.txt', '--.-')
+                # await self.client.set('txt_dewp.txt', '--.-') 
+                await self.client.set('txt_humabs_ext.txt', '--.-')
         
     async def update_page_17_19_values(self):
         status_piager = int(pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key ))
@@ -627,18 +681,20 @@ class cl_nextion( threading.Thread ):
         
     async def run_client(self):
         self.button_event = asyncio.Event()
+        self.wakeup_event = asyncio.Event()
         self.stop_event = asyncio.Event()
         self.reconnect_event = asyncio.Event()
         # self.waiter_task = asyncio.create_task(self.button_waiter(self.button_event))
         # self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))   
         
         self.client = Nextion('/dev/serial0', 9600, self.nextion_event_handler, self.loop)
-        cl_fact_logger.get_instance().info('client generated')
+        cl_fact_logger.get_instance().info(_('Client instance generated'))
         try:
             await self.client.connect()
 #            cl_fact_logger.get_instance().info('client connected')
-            cl_fact_logger.get_instance().info('Nextion client connected')
-            self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))                                                                                              
+            cl_fact_logger.get_instance().info(_('Nextion client connected'))
+            self.waiter_task = self.loop.create_task(self.button_waiter(self.button_event))
+            self.wakeup_task = self.loop.create_task(self.wakeup_waiter(self.wakeup_event))            
         except Exception as e:
             cl_fact_logger.get_instance().error('run_client exception1: ' + str(e))
             cl_fact_logger.get_instance().error('Could not connect to Nextion client. Possible HDMI display not connected')
@@ -646,20 +702,14 @@ class cl_nextion( threading.Thread ):
                 await asyncio.sleep(1)
             return                                                                                                              
 
-        cl_fact_logger.get_instance().info('sleep:' + str(await self.client.get('sleep')))
+        cl_fact_logger.get_instance().debug('sleep:' + str(await self.client.get('sleep')))
         
         # init internal display values
         await self.init_display_values()
 
         while not self.stop_event.is_set():
-            # test what happens, when object is not in page
-            #try:
-            #    await self.client.set('txt_temp.txt', "%.1f" % (random.randint(0, 1000) / 10))
-            #except Exception as e:
-            #    cl_fact_logger.get_instance().error(str(e))
-            #    pass
-            # cl_fact_logger.get_instance().debug('Client running')
             try:
+                # await self.update_light_val()   # update status in nextion values, needed when display was turned off caused by light timeout
                 if self.current_page_id == 1:
                     await self.process_page1()
                 elif self.current_page_id == 3:
@@ -680,23 +730,15 @@ class cl_nextion( threading.Thread ):
                     await self.show_offline()    
                     
             except Exception as e:
-                cl_fact_logger.get_instance().error('run_client exception2: ' + str(e))
-                cl_fact_logger.get_instance().debug('run_client exception2')
-            # await self.client.set('values.temp_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
-            # await self.client.set('values.humidity_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
-            # await self.client.set('values.dewpoint_cur.txt', "%.1f" % (random.randint(0, 1000) / 10))
-            # await self.client.set('values.temp_set.txt', "%.1f" % (random.randint(0, 1000) / 10))
-            # await self.client.set('values.humidity_set.txt', "%.1f" % (random.randint(0, 1000) / 10))
-            # await self.client.set('values.dewpoint_set.txt', "%.1f" % (random.randint(0, 1000) / 10))
-            # await self.client.set('values.status_uv.val', 1)
-            # await self.client.command('page dp')
+                cl_fact_logger.get_instance().debug('run_client exception2: ' + str(e))
+
             if self.reconnect_event.is_set():
                 await self.client.reconnect()
                 self.reconnect_event.clear()
                 
             await asyncio.sleep(3)
 
-        cl_fact_logger.get_instance().info('run_client finished')
+        cl_fact_logger.get_instance().info('Nextion client run-loop finished')
         
     def inner_ctrl_c_signal_handler(self, sig, frame):
         self.stop_event.set()
@@ -729,10 +771,10 @@ class cl_nextion( threading.Thread ):
         # tasks = [task for task in asyncio.all_tasks(self.loop) if not task.done()]
         # for task in tasks:
         #     task.cancel()
-            cl_fact_logger.get_instance().info('run_forever stopped')
+            cl_fact_logger.get_instance().debug('Nextion run_forever stopped')
             tasks = asyncio.all_tasks(self.loop)
             count = len(tasks)
-            cl_fact_logger.get_instance().info('Elements in tasks list : ' + str(count))                                                                        
+            cl_fact_logger.get_instance().debug('Elements in tasks list : ' + str(count))                                                                        
             for t in [t for t in tasks if not (t.done() or t.cancelled())]:
                 self.loop.run_until_complete(t)
 
@@ -773,15 +815,14 @@ class cl_nextion( threading.Thread ):
         if self.client != None:
             self.loop.call_soon_threadsafe(self.reconnect_event.set)
             time.sleep(4)
+            cl_fact_logger.get_instance().info('Nextion client after powergood. Page 1 now active page')
             if self.data == None:   # assume current page = 1, cause no touch event happened
 #                print('simulate touch event with page_id = 0, component_id = 1 and touch_event = 1 to enter main_fridge (page 1)')
                 Touch = namedtuple("Touch", "page_id component_id touch_event")
                 self.data = Touch(0, 1, 1)
 #                print('set Display page 1 active')
-                cl_fact_logger.get_instance().info('Nextion client after powergood. Page 1 now active page')
             else:
 #                print('To force showing page 1, simulate button id = -1 on current page %d' % (self.current_page_id))
-                cl_fact_logger.get_instance().info('Nextion client after powergood. Page 1 now active page')
                 Touch = namedtuple("Touch", "page_id component_id touch_event")
                 # self.data = Touch(self.current_page_id, -1, 1)            
                 self.data = Touch(1, -1, 1)

@@ -63,7 +63,7 @@ class cl_sensor(cl_ab_sensor):
         cl_fact_logger.get_instance().debug("Max errors:    %i" % self._max_errors)
         
         if (self._error_counter >= self._max_errors):
-            raise cx_measurement_error ('To much measurment errors occured!')
+            raise cx_measurement_error(_('Too many measurement errors occurred!'))
 
     def calc_mean_temperature(self, temperature):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())

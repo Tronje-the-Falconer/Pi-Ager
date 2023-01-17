@@ -200,7 +200,8 @@ class cl_sensor_sht(cl_sensor, ABC):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         repeat_count = 0
-        while repeat_count < 5:
+        repeat_count_max = 5
+        while repeat_count < repeat_count_max:
             try:
                 self._read_data()
                     
@@ -217,11 +218,12 @@ class cl_sensor_sht(cl_sensor, ABC):
                 
             except Exception as cx_error:
                 repeat_count = repeat_count + 1
-                cl_fact_logger.get_instance().exception(cx_error)
-                cl_fact_logger.get_instance().debug('Retry getting measurement from I2C. Current retry count : ' + str(repeat_count))
+                if (repeat_count == 1):
+                    cl_fact_logger.get_instance().exception(cx_error)
+                else:
+                    cl_fact_logger.get_instance().error(f"Retry getting measurement from I2C device. Current retry count : {repeat_count}, max retry count : {repeat_count_max}")      
 
-                
-        raise cx_measurement_error ('Too many measurement errors occurred!')
+        raise cx_measurement_error (_('Too many measurement errors occurred!'))
         
     
     def _get_current_temperature(self):
@@ -229,8 +231,8 @@ class cl_sensor_sht(cl_sensor, ABC):
 
         t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
         
-        Temperature_Celsius    = ((175.72 * self.t_val) / 2**16 - 1 ) - 45 #do the maths from datasheet
-        Temperature_Fahrenheit = ((315.0  * self.t_val) / 2**16 - 1 ) - 49 #do the maths from datasheet
+        Temperature_Celsius    = (175.72 * self.t_val) / (2**16 - 1 ) - 45 #do the maths from datasheet
+        Temperature_Fahrenheit = (315.0  * self.t_val) / (2**16 - 1 ) - 49 #do the maths from datasheet
 
         cl_fact_logger.get_instance().debug("Temperature in Celsius is : %.2f C" %Temperature_Celsius)
         cl_fact_logger.get_instance().debug("Temperature in Fahrenheit is : %.2f F" %Temperature_Fahrenheit)
@@ -242,7 +244,7 @@ class cl_sensor_sht(cl_sensor, ABC):
 
         h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
         
-        Humidity = ((100.0 * self.h_val) / 2**16 - 1 )
+        Humidity = (100.0 * self.h_val) / (2**16 - 1 )
 
         cl_fact_logger.get_instance().debug("Relative Humidity is : %.2f %%RH" %Humidity)
 

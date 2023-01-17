@@ -2,16 +2,10 @@
                                     include 'header.php';                                       // Template-Kopf und Navigation
                                     include 'modules/database.php';
                                     include 'modules/logging.php';                            //liest die Datei fuer das logging ein
-                                    include 'modules/write_customtime_db.php';                        //speichert die individuelle Zeit für die Diagramme
+                                    // include 'modules/write_customtime_db.php';                        //speichert die individuelle Zeit für die Diagramme
                                 ?>
                                 <!----------------------------------------------------------------------------------------Was eben hier hin kommt ...-->
-                                <?php 
-                                    // wenn nichts anderes ausgewählt wurde, ist Stündlich ausgewählt
-                                    if (isset ($_GET['diagram_mode'])) {
-                                        $diagram_mode = $_GET['diagram_mode'];
-                                    }else{
-                                        $diagram_mode = 'hour';
-                                    }
+                                <?php
                                     function get_translated_diagram_mode($diagram_mode){
                                         switch ($diagram_mode){
                                             case 'hour':
@@ -26,9 +20,17 @@
                                                 return $diagram_mode_translated = _('custom');
                                         }
                                     }
+                                    $diagram_modus_index = get_table_value($config_settings_table, $diagram_modus_key);
+                                    if ($diagram_modus_index === NULL) {
+                                        $diagram_modus_index = 0;  // hour
+                                    }
+                                    $diagram_modus_names = array('hour', 'day', 'week', 'month', 'custom');
+                                    $diagram_mode = $diagram_modus_names[$diagram_modus_index];
+                                    // echo 'diagram_mode = ' . $diagram_mode . '<br>';
+
                                     $diagram_mode_translated = get_translated_diagram_mode($diagram_mode);
                                 ?>
-                                <h2 class="art-postheader"><?php echo _('diagrams') . ' - ' . $diagram_mode_translated; ?></h2>
+                                <h2 id="diagram_header_id" class="art-postheader"><?php echo _('diagrams') . ' - ' . $diagram_mode_translated; ?></h2>
                                 <div class="hg_container" style="margin-bottom: 20px; margin-top: 20px;">
                                     <table style="width: 100%;">
                                         <tr>
@@ -39,96 +41,201 @@
                                             <td><img src="images/icons/custom_42x42.png" alt=""></td>
                                         </tr>
                                         <tr>
-                                            <td><a href="diagrams.php?diagram_mode=hour" class="art-button"><?php echo _('hour'); ?></a></td>
-                                            <td><a href="diagrams.php?diagram_mode=day" class="art-button"><?php echo _('day'); ?></a></td>
-                                            <td><a href="diagrams.php?diagram_mode=week" class="art-button"><?php echo _('week'); ?></a></td>
-                                            <td><a href="diagrams.php?diagram_mode=month" class="art-button"><?php echo _('month'); ?></a></td>
-                                            <td><a href="diagrams.php?diagram_mode=custom" class="art-button"><?php echo _('custom'); ?></a></td>
+                                            <td><button id="hour_button_id" class="art-button" onclick="set_mode_hour()")><?php echo _('hour'); ?></td>
+                                            <td><button id="day_button_id" class="art-button" onclick="set_mode_day()"><?php echo _('day'); ?></td>
+                                            <td><button id="week_button_id" class="art-button" onclick="set_mode_week()"><?php echo _('week'); ?></td>
+                                            <td><button id="month_button_id" class="art-button" onclick="set_mode_month()"><?php echo _('month'); ?></td>
+                                            <td><button id="custom_button_id" class="art-button" onclick="set_mode_custom()"><?php echo _('custom'); ?></td>                                        
                                         </tr>
-<!--                                        <tr>
-                                            <td><button class="art-button" type="button" id="hour">hour</button></td>
-                                            <td><button class="art-button" type="button" id="day">day</button></td>
-                                            <td><button class="art-button" type="button" id="week">week</button></td>
-                                            <td><button class="art-button" type="button" id="month">month</button></td>
-                                            <td><button class="art-button" type="button" id="month">custom</button></td>
-                                        </tr>
--->                                 </table>
+                                    </table>
+                                    
                                     <?php
-                                        if ($diagram_mode_translated == 'custom'){
-                                            
-                                            $duration = get_table_value($config_settings_table, $customtime_for_diagrams_key); 
-                                            $years = floor ($duration / 31557600);
-                                            $duration = $duration - $years * 31557600;
-                                            $months = floor($duration / 2628000);
-                                            $duration = $duration - $months * 2628000;
-                                            $days = floor($duration / 86400);
-                                            $duration = $duration - $days * 86400;
-                                            $hours = floor($duration / 3600);
-                                            $duration = $duration - $hours * 3600;
-                                            $minutes = floor($duration / 60);
-                                            $duration = $duration - $minutes * 60;
-                                            $seconds = floor($duration / 1);
-                                            
-                                            
-                                            echo '<hr>';
-                                            echo '<form method="post" name="change_customtime">';
-                                                echo '<table style="width: 100%;">';
-                                                    echo '<tr>';
-                                                        /* echo '<td>' . _('years') . '</td>'; */
-                                                        echo '<td>' . _('months') . '</td>';
-                                                        echo '<td>' . _('days') . '</td>';
-                                                        echo '<td>' . _('hours') . '</td>';
-                                                        echo '<td>' . _('minutes') .'</td>';
-                                                    echo '</tr>';
-                                                    echo '<tr>';
-                                                        echo '<input name="years" type="hidden" value = ' . $years . '>';
-                                                        /* echo '<td><input name="years" type="number" step="1" style="width: 90%; text-align: right;" value = ' . $years . '></td>'; */
-                                                        echo '<td><input name="months" type="number" min="0" max="12.0" step="1" style="width: 90%; text-align: right;" value = ' . $months . '></td>';
-                                                        echo '<td><input name="days" type="number" min="0" max="31.0" step="1" style="width: 90%; text-align: right;" value = ' . $days . '></td>';
-                                                        echo '<td><input name="hours" type="number"  min="0" max="24.0" step="1" style="width: 90%; text-align: right;" value = ' . $hours . '></td>';
-                                                        echo '<td><input name="minutes" type="number" min="0" max="60.0" step="1" style="width: 90%; text-align: right;" value = ' . $minutes . '></td>';
-                                                    echo '</tr>';
-                                                echo '</table>';
-                                                echo '<button class="art-button" name="change_customtime" value="change_customtime" onclick="return confirm(\'' . _('change customtime?') . '\');">' . _('change') . '</button>';
-                                            echo '</form>';
+
+                                        $duration = intval(get_table_value($config_settings_table, $customtime_for_diagrams_key));
+                                        $seconds_per_month = 2678400;    // 31 days per month
+                                        $seconds_per_day = 86400;
+                                        $seconds_per_hour = 3600;
+                                        $seconds_per_minute = 60;
+                                        // max input range in customtime settings
+                                        $max_customtime = $seconds_per_month * 11 + $seconds_per_day * 30 + $seconds_per_hour * 23 + $seconds_per_minute * 59;
+                                        if ($duration > $max_customtime) {
+                                            $duration = $max_customtime;
                                         }
+                                        $months = intdiv($duration, $seconds_per_month);    //seconds per month
+                                        $remainder = $duration % $seconds_per_month;
+                                        $days = intdiv($remainder, $seconds_per_day);
+                                        $remainder = $remainder % $seconds_per_day;
+                                        $hours = intdiv($remainder, $seconds_per_hour);
+                                        $remainder = $remainder % $seconds_per_hour;
+                                        $minutes = intdiv($remainder, $seconds_per_minute);                                        
                                     ?>
+
+                                    <div id="customtime_setup_id" <?php if ($diagram_mode != 'custom') { echo ' style="display: none";';}?>>       
+                                            <hr>
+                                            <form id="queryformid" name="change_customtime">
+                                                <table style="width: 100%;">
+                                                    <tr>
+                                                        <td><?php echo _('months'); ?></td>
+                                                        <td><?php echo _('day'); ?></td>
+                                                        <td><?php echo _('hour'); ?></td>
+                                                        <td><?php echo _('minutes'); ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><input name="months" type="number" min="0" max="11" step="1" style="width: 90%; text-align: right;" value = <?php echo $months; ?>></td>
+                                                        <td><input name="days" type="number" min="0" max="30" step="1" style="width: 90%; text-align: right;" value = <?php echo $days; ?>></td>
+                                                        <td><input name="hours" type="number" min="0" max="23" step="1" style="width: 90%; text-align: right;" value = <?php echo $hours; ?>></td>
+                                                        <td><input name="minutes" type="number" min="0" max="59" step="1" style="width: 90%; text-align: right;" value = <?php echo $minutes; ?>></td>
+                                                    </tr>
+                                                </table>
+                                                <br>
+                                                <button id="change_customtime_id" class="art-button" name="change_customtime" value="change_customtime"><?php echo _('change');?> </button>
+                                            </form>
+                                    </div>
+
+                                    <script>
+                                    // this is to avoid form refresh after change customtime button is pushed
+                                    $("#change_customtime_id").click(function() {
+                                        var url = "modules/querywcdb.php"; // the script where you handle the form input.
+
+                                        $.ajax({
+                                            type: "POST",
+                                            url: url,
+                                            data: $("#queryformid").serialize(), // serializes the form's elements.
+                                            success: function(data)
+                                            {
+                                                // alert(data); // show response from the php script.
+                                                loadContentAlldg();    // refresh charts
+                                            }
+                                        });
+
+                                        return false; // avoid to execute the actual submit of the form.
+                                    });                                    
+                                    
+                                    async function set_mode_hour() {
+                                        $('#customtime_setup_id').hide(500);
+                                        
+                                        $.ajax({
+                                            method: 'POST',
+                                            url: 'modules/save_diagram_mode.php?q=hour',
+                                        })
+                                        .done(function( msg ) {
+                                            console.log(msg);
+                                            $('#diagram_header_id').html(msg);
+                                            loadContentAlldg();    // refresh charts
+                                        })
+                                        .fail(function(xhr, textStatus) {
+                                            console.log( "diagram mode set to hour failed: " + xhr.statusText);
+                                            console.log(textStatus);
+                                        });
+                                        return;
+                                    }
+                                    
+                                    async function set_mode_day() {
+                                        $('#customtime_setup_id').hide(500);
+                                        $.ajax({
+                                            method: 'POST',
+                                            url: 'modules/save_diagram_mode.php?q=day',
+                                        })
+                                        .done(function( msg ) {
+                                            console.log(msg);
+                                            $('#diagram_header_id').html(msg);
+                                            loadContentAlldg();    // refresh charts
+                                        })
+                                        .fail(function(xhr, textStatus) {
+                                            console.log( "diagram mode set to day failed: " + xhr.statusText);
+                                            console.log(textStatus);
+                                        });
+                                        return;
+                                    }
+                                    
+                                    async function set_mode_week() {
+                                        $('#customtime_setup_id').hide(500);
+                                        $.ajax({
+                                            method: 'POST',
+                                            url: 'modules/save_diagram_mode.php?q=week',
+                                        })
+                                        .done(function( msg ) {
+                                            console.log(msg);
+                                            $('#diagram_header_id').html(msg);
+                                            loadContentAlldg();    // refresh charts
+                                        })
+                                        .fail(function(xhr, textStatus) {
+                                            console.log( "diagram mode set to week failed: " + xhr.statusText);
+                                            console.log(textStatus);
+                                        });
+                                        return;
+                                    } 
+                                    
+                                    async function set_mode_month() {
+                                        $('#customtime_setup_id').hide(500);
+                                        $.ajax({
+                                            method: 'POST',
+                                            url: 'modules/save_diagram_mode.php?q=month',
+                                        })
+                                        .done(function( msg ) {
+                                            console.log(msg);
+                                            $('#diagram_header_id').html(msg);
+                                            loadContentAlldg();    // refresh charts
+                                        })
+                                        .fail(function(xhr, textStatus) {
+                                            console.log( "diagram mode set to month failed: " + xhr.statusText);
+                                            console.log(textStatus);
+                                        });
+                                        return;
+                                    }
+                                    
+                                    async function set_mode_custom() {
+                                        $('#customtime_setup_id').show(500);
+                                        $.ajax({
+                                            method: 'POST',
+                                            url: 'modules/save_diagram_mode.php?q=custom',
+                                        })
+                                        .done(function( msg ) {
+                                            console.log(msg);
+                                            $('#diagram_header_id').html(msg);
+                                            loadContentAlldg();    // refresh charts
+                                        })
+                                        .fail(function(xhr, textStatus) {
+                                            console.log( "diagram mode set to custom failed: " + xhr.statusText);
+                                            console.log(textStatus);
+                                        });
+                                        return;
+                                    }
+                                    
+                                    </script>
+                                                                        
                                 </div>
 
                                     <div style="">
                                         <h4><?php 
-					                        include 'modules/read_values_for_diagrams.php';
+					                        include 'modules/chartsdata_diagrams.php';
 											$temperatur_humidity_saving_period = ceil (2 *($save_temperature_humidity_loops * 10 /60)) / 2;
-											echo _('storage interval of the data in the database');
-							                echo '<td>: ~ '.$temperatur_humidity_saving_period.' </td>';
+											echo _('storage interval of the sensor data in the database');
+							                echo ': ~ ' . $temperatur_humidity_saving_period . ' ';
 											echo _('minutes'); 
 										    ?></h4>
-                                        <canvas id="temperature_humidity_chart"></canvas>
-                                        <div class="on_off_chart"><canvas id="cooler_chart"></canvas></div>
-                                        <div class="on_off_chart"><canvas id="heater_chart"></canvas></div>
-                                        <div class="on_off_chart"><canvas id="humidifier_chart"></canvas></div>
-                                        <div class="on_off_chart"><canvas id="dehumidifier_chart"></canvas></div>
-                                        <div class="on_off_chart"><canvas id="circulation_air_chart"></canvas></div>
-                                        <div class="on_off_chart"><canvas id="exhaust_air_chart"></canvas></div>
-                                        <div class="on_off_chart"><canvas id="uv_chart"></canvas></div>
-                                        <div class="on_off_chart"><canvas id="light_chart"></canvas></div>
-                                        <canvas id="scales_chart"></canvas>
-                                        <canvas id="thermometer1_chart"></canvas> 
-<!--                                    <canvas id="thermometer2_chart"></canvas> 
-                                        <canvas id="thermometer3_chart"></canvas> 
-                                        <canvas id="thermometer4_chart"></canvas>  -->
-                                        <canvas id="dewpoint_humidity_chart"></canvas> 
+                                        <canvas id="temperature_humidity_chart_id"></canvas>
+                                        <div class="on_off_chart"><canvas id="cooler_chart_id"></canvas></div>
+                                        <div class="on_off_chart"><canvas id="heater_chart_id"></canvas></div>
+                                        <div class="on_off_chart"><canvas id="humidifier_chart_id"></canvas></div>
+                                        <div class="on_off_chart"><canvas id="dehumidifier_chart_id"></canvas></div>
+                                        <div class="on_off_chart"><canvas id="circulation_air_chart_id"></canvas></div>
+                                        <div class="on_off_chart"><canvas id="exhaust_air_chart_id"></canvas></div>
+                                        <div class="on_off_chart"><canvas id="uv_chart_id"></canvas></div>
+                                        <div class="on_off_chart"><canvas id="light_chart_id"></canvas></div>
+                                        <canvas id="scales_chart_id"></canvas>
+                                        <canvas id="thermometers_chart_id"></canvas> 
+                                        <canvas id="dewpoint_humidity_chart_id"></canvas> 
                                         
                                         <script>
                                         var timeFormat = 'MM/DD/YYYY HH:mm';
                                         
                                         // Temperatur und Feuchte
-                                        var temperature_humidity_chart = document.getElementById("temperature_humidity_chart");
-                                        var config_temperature_humidity_chart = {
+                                        var temp_hum_chart_el = document.getElementById("temperature_humidity_chart_id");
+                                        var config_temp_hum_chart = {
                                             type: 'line',
                                             data: {
-                                                labels: 
-                                                    <?php echo $all_sensors_timestamps_axis; ?>,
+                                                labels: [],
                                                 datasets: [{
                                                     label: '<?php echo _("temperature") . ' int.' ?>',
                                                     yAxisID: 'temperature',
@@ -307,14 +414,14 @@
                                         };
  
                                         // Taupunkt und absolute Feuchte
-                                        var dewpoint_humidity_chart = document.getElementById("dewpoint_humidity_chart");
+                                        var dewpoint_humidity_chart_el = document.getElementById("dewpoint_humidity_chart_id");
                                         var config_dewpoint_humidity_chart = {
                                             type: 'line',
                                             data: {
-                                                labels: 
-                                                    <?php echo $all_sensors_timestamps_axis; ?>,
+                                                labels: [], 
                                                 datasets: [{
                                                     label: '<?php echo _("dewpoint") . ' int.' ?>',
+                                                    hidden: true,
                                                     yAxisID: 'temperature',
                                                     data: <?php echo json_encode($dewpoint_dataset); ?>,
                                                     backgroundColor: '#04B431',
@@ -335,6 +442,7 @@
                                                 },
                                                 {
                                                     label: '<?php echo _("dewpoint") . ' ext.' ?>',
+                                                    hidden: true,
                                                     yAxisID: 'temperature',
                                                     data: <?php echo json_encode($extern_dewpoint_dataset); ?>,
                                                     backgroundColor: '#0B6121',
@@ -352,8 +460,6 @@
                                                     pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false
-
-// Vorbereitung abs Feuchte
                                                 },
                                                 {
                                                     label: '<?php echo _("humidity abs") . ' int.' ?>',
@@ -401,7 +507,6 @@
                                                 title: {
                                                     display: true,
                                                     text: '<?php echo _("dewpoint") ?> & <?php echo _("humidity abs") ?>',
-                                                    //text: '<?php echo _("dewpoint") ?>',
                                                     fontSize: 24
                                                 },
                                                 legend: {
@@ -468,7 +573,6 @@
                                                         scaleLabel: {
                                                             display: true,
                                                             labelString: '<?php echo _("humidity abs") ?> <?php echo _(" - φ") ?>',
-                                                            //  labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
                                                             //  fontSize: 20,
                                                             fontColor: '#000000'
                                                         },
@@ -477,7 +581,6 @@
                                                         display: true,
                                                         position: 'right',
                                                         labelString: '<?php echo _("humidity abs") ?>',
-                                                        // labelString: '<?php echo _("temperature") ?> <?php echo _(" - ϑ") ?>',
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 val = Math.round(value * 10)/10;
@@ -498,11 +601,11 @@
                                         };
  
                                         // Waagen
-                                        var scales_chart = document.getElementById("scales_chart");
+                                        var scales_chart_el = document.getElementById("scales_chart_id");
                                         var config_scales_chart = {
                                             type: 'line',
                                             data: {
-                                                labels: <?php echo $all_scales_timestamps_axis; ?>,
+                                                labels: [],
                                                 datasets: [{
                                                     label: '<?php echo _("scale") ?> 1',
                                                     yAxisID: 'scale1',
@@ -563,9 +666,9 @@
                                                     callbacks: {
                                                         label: function(tooltipItem, data) {
                                                             if (tooltipItem.datasetIndex === 0) {
-                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' gr';
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' g';
                                                             } else if (tooltipItem.datasetIndex === 1) {
-                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' gr';
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' g';
                                                             }
                                                         }
                                                     }
@@ -599,7 +702,7 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 val = Math.round(value * 10)/10;
-                                                                return val + ' gr' + ' ';
+                                                                return val + ' g' + ' ';
                                                             },
                                                             fontColor: '#000000',
                                                             beginAtZero: true,
@@ -620,7 +723,7 @@
                                                         ticks: {
                                                             callback: function(value, index, values) {
                                                                 val = Math.round(value * 10)/10;    
-                                                                return ' ' + val + ' gr';
+                                                                return ' ' + val + ' g';
                                                             },
                                                             fontColor: '#000000',
                                                             beginAtZero: true,
@@ -634,14 +737,11 @@
                                         };
                                         
                                         // NTC thermometer 1,2,3 on left side and ntc4/Current Sensor on right side
-                                        var thermometer1_chart = document.getElementById("thermometer1_chart");
-                                        var config_thermometer1_chart = {
+                                        var thermometers_chart_el = document.getElementById("thermometers_chart_id");
+                                        var config_thermometers_chart = {
                                             type: 'line',
                                             data: {
-                                                labels: 
-                                                    <?php 
-                                                    echo $all_sensors_timestamps_axis;
-                                                    ?>,
+                                                labels: [],
                                                 datasets: [
                                                 {
                                                     label: '<?php echo _("temperature") . ' NTC 1' ?>',
@@ -822,14 +922,13 @@
                                             }
                                         };
  
-                                                                                                                        
+
                                         // licht
-                                        var light_chart = document.getElementById("light_chart");
+                                        var light_chart_el = document.getElementById("light_chart_id");
                                         var config_light_chart = {
                                             type: 'line',
                                             data: {
-                                                labels: 
-                                                    <?php echo $light_timestamps_axis_text; ?>,
+                                                labels: [],
                                                 datasets: [{
                                                     label: '<?php echo _("light"); ?>',
                                                     yAxisID: 'status',
@@ -936,12 +1035,11 @@
                                         };
                                         
                                         // uv
-                                        var uv_chart = document.getElementById("uv_chart");
-                                        var config_uv_chart = {
+                                        var uv_light_chart_el = document.getElementById("uv_chart_id");
+                                        var config_uv_light_chart = {
                                             type: 'line',
                                             data: {
-                                                labels: 
-                                                    <?php echo $uv_light_timestamps_axis_text; ?>,
+                                                labels: [],
                                                 datasets: [{
                                                     label: '<?php echo _("uv-light"); ?>',
                                                     yAxisID: 'status',
@@ -1048,12 +1146,11 @@
                                         };
                                         
                                         // heater
-                                        var heater_chart = document.getElementById("heater_chart");
+                                        var heater_chart_el = document.getElementById("heater_chart_id");
                                         var config_heater_chart = {
                                             type: 'line',
                                             data: {
-                                                labels: 
-                                                    <?php echo $heater_timestamps_axis_text; ?>,
+                                                labels: [],
                                                 datasets: [{
                                                     label: '<?php echo _("heater"); ?>',
                                                     yAxisID: 'status',
@@ -1160,12 +1257,11 @@
                                         };
                                         
                                         // cooler
-                                        var cooler_chart = document.getElementById("cooler_chart");
+                                        var cooler_chart_el = document.getElementById("cooler_chart_id");
                                         var config_cooler_chart = {
                                             type: 'line',
                                             data: {
-                                                labels: 
-                                                    <?php echo $cooler_timestamps_axis_text; ?>,
+                                                labels: [],
                                                 datasets: [{
                                                     label: '<?php echo _("cooler"); ?>',
                                                     yAxisID: 'status',
@@ -1270,13 +1366,13 @@
                                                 }
                                             }
                                         };
+                                        
                                         // humidifier
-                                        var humidifier_chart = document.getElementById("humidifier_chart");
+                                        var humidifier_chart_el = document.getElementById("humidifier_chart_id");
                                         var config_humidifier_chart = {
                                             type: 'line',
                                             data: {
-                                                labels: 
-                                                    <?php echo $humidifier_timestamps_axis_text; ?>,
+                                                labels: [],
                                                 datasets: [{
                                                     label: '<?php echo _("humidifier"); ?>',
                                                     yAxisID: 'status',
@@ -1383,12 +1479,11 @@
                                         };
                                         
                                         // dehumidifier
-                                        var dehumidifier_chart = document.getElementById("dehumidifier_chart");
+                                        var dehumidifier_chart_el = document.getElementById("dehumidifier_chart_id");
                                         var config_dehumidifier_chart = {
                                             type: 'line',
                                             data: {
-                                                labels: 
-                                                    <?php echo $dehumidifier_timestamps_axis_text; ?>,
+                                                labels: [],
                                                 datasets: [{
                                                     label: '<?php echo _("dehumidifier"); ?>',
                                                     yAxisID: 'status',
@@ -1493,13 +1588,13 @@
                                                 }
                                             }
                                         };
+                                        
                                         // exhaust_air
-                                        var exhaust_air_chart = document.getElementById("exhaust_air_chart");
+                                        var exhaust_air_chart_el = document.getElementById("exhaust_air_chart_id");
                                         var config_exhaust_air_chart = {
                                             type: 'line',
                                             data: {
-                                                labels: 
-                                                    <?php echo $exhaust_air_timestamps_axis_text; ?>,
+                                                labels: [],
                                                 datasets: [{
                                                     label: '<?php echo _("exhaust air"); ?>',
                                                     yAxisID: 'status',
@@ -1606,12 +1701,11 @@
                                         };
                                         
                                         // circulate air
-                                        var circulation_air_chart = document.getElementById("circulation_air_chart");
+                                        var circulation_air_chart_el = document.getElementById("circulation_air_chart_id");
                                         var config_circulation_air_chart = {
                                             type: 'line',
                                             data: {
-                                                labels: 
-                                                    <?php echo $circulate_air_timestamps_axis_text; ?>,
+                                                labels: [],
                                                 datasets: [{
                                                     label: '<?php echo _("circulate air"); ?>',
                                                     yAxisID: 'status',
@@ -1717,42 +1811,142 @@
                                             }
                                         };
                                         
-                                        window.onload = function() {
-                                            window.temperature_humidity_chart = new Chart(temperature_humidity_chart, config_temperature_humidity_chart);
-                                            window.scales_chart = new Chart(scales_chart, config_scales_chart);
-                                            window.thermometer1_chart = new Chart(thermometer1_chart, config_thermometer1_chart);
-                                            window.dewpoint_humidity_chart = new Chart(dewpoint_humidity_chart, config_dewpoint_humidity_chart);
-                                        //    window.thermometer2_chart = new Chart(thermometer2_chart, config_thermometer2_chart);
-                                        //    window.thermometer3_chart = new Chart(thermometer3_chart, config_thermometer3_chart);
-                                        //    window.thermometer4_chart = new Chart(thermometer4_chart, config_thermometer4_chart);
-                                            window.light_chart = new Chart(light_chart, config_light_chart);
-                                            window.uv_chart = new Chart(uv_chart, config_uv_chart);
-                                            window.heater_chart = new Chart(heater_chart, config_heater_chart);
-                                            window.cooler_chart = new Chart(cooler_chart, config_cooler_chart);
-                                            window.humidifier_chart = new Chart(humidifier_chart, config_humidifier_chart);
-                                            window.dehumidifier_chart = new Chart(dehumidifier_chart, config_dehumidifier_chart);
-                                            window.exhaust_air_chart =  new Chart(exhaust_air_chart, config_exhaust_air_chart);
-                                            window.circulation_air_chart =  new Chart(circulation_air_chart, config_circulation_air_chart);
-                                        };
-                                        // document.getElementById('hour').addEventListener('click', function() {
-                                            // diagram_mode = 'hour';
-                                            // window.temperature_humidity_chart.update();
-                                        // });
-                                        // document.getElementById('day').addEventListener('click', function() {
-                                            // <?php $diagram_mode = 'day'; ?>
-                                             // window.temperature_humidity_chart.update();
-                                        // });                                     
-                                        // document.getElementById('week').addEventListener('click', function() {
-                                            // <?php $diagram_mode = 'week'; ?>
-                                             // window.temperature_humidity_chart.update();
-                                        // });
-                                        // document.getElementById('month').addEventListener('click', function() {
-                                            // <?php $diagram_mode = 'month'; ?>
-                                             // window.temperature_humidity_chart.update();
-                                        // });                                
+                                        // analog charts time axis
+                                        timestamps_temp_seconds = <?php echo json_encode($all_sensors_timestamps_array); ?>;
+                                        timestamps_scales_seconds = <?php echo json_encode($all_scales_timestamps_array); ?>;
+                                        // on_off charts time axis
+                                        timestamps_light_seconds = <?php echo json_encode($light_timestamps_axis); ?>;
+                                        timestamps_uv_light_seconds = <?php echo json_encode($uv_light_timestamps_axis); ?>;
+                                        timestamps_heater_seconds = <?php echo json_encode($heater_timestamps_axis); ?>;                                        
+                                        timestamps_cooler_seconds = <?php echo json_encode($cooler_timestamps_axis); ?>;
+                                        timestamps_humidifier_seconds = <?php echo json_encode($humidifier_timestamps_axis); ?>;
+                                        timestamps_dehumidifier_seconds = <?php echo json_encode($dehumidifier_timestamps_axis); ?>;
+                                        timestamps_exhaust_air_seconds = <?php echo json_encode($exhaust_air_timestamps_axis); ?>;
+                                        timestamps_circulate_air_seconds = <?php echo json_encode($circulate_air_timestamps_axis); ?>;
+                                        
+                                        timestamps_temp_js = convert_timestamps_index( timestamps_temp_seconds );
+                                        timestamps_scales_js = convert_timestamps_index( timestamps_scales_seconds );
+
+                                        timestamps_light_js = convert_timestamps_index( timestamps_light_seconds );
+                                        timestamps_uv_light_js = convert_timestamps_index( timestamps_uv_light_seconds );
+                                        timestamps_heater_js = convert_timestamps_index( timestamps_heater_seconds );
+                                        timestamps_cooler_js = convert_timestamps_index( timestamps_cooler_seconds );
+                                        timestamps_humidifier_js = convert_timestamps_index( timestamps_humidifier_seconds );
+                                        timestamps_dehumidifier_js = convert_timestamps_index( timestamps_dehumidifier_seconds );
+                                        timestamps_exhaust_air_js = convert_timestamps_index( timestamps_exhaust_air_seconds );
+                                        timestamps_circulate_air_js = convert_timestamps_index( timestamps_circulate_air_seconds );
+
+                                        config_temp_hum_chart.data.labels = timestamps_temp_js;
+                                        config_scales_chart.data.labels = timestamps_scales_js;
+                                        config_dewpoint_humidity_chart.data.labels = timestamps_temp_js;
+                                        config_thermometers_chart.data.labels = timestamps_temp_js;
+
+                                        config_light_chart.data.labels = timestamps_light_js;
+                                        config_uv_light_chart.data.labels = timestamps_uv_light_js;
+                                        config_heater_chart.data.labels = timestamps_heater_js;
+                                        config_cooler_chart.data.labels = timestamps_cooler_js;
+                                        config_humidifier_chart.data.labels = timestamps_humidifier_js;
+                                        config_dehumidifier_chart.data.labels = timestamps_dehumidifier_js;
+                                        config_exhaust_air_chart.data.labels = timestamps_exhaust_air_js;
+                                        config_circulation_air_chart.data.labels = timestamps_circulate_air_js;
+                                    
+                                        // restore hidden flags for temp_hum_chart
+                                        let dataset_count = config_temp_hum_chart.data.datasets.length;
+                                        for (let i = 0; i < dataset_count; ++i) {
+                                            let key = 'diagrams_temp_dataset' + i.toString();
+                                            let chart_hidden = window.localStorage.getItem(key);
+                                            if (chart_hidden == null) {
+                                                chart_hidden = false;
+                                            }
+                                            console.log(key + ' = ' + chart_hidden);
+                                            config_temp_hum_chart.data.datasets[i].hidden = (chart_hidden == 'true');
+                                        }
+                                        
+                                        // restore hidden flags for thermometers_chart
+                                        dataset_count = config_thermometers_chart.data.datasets.length;
+                                        for (i = 0; i < dataset_count; ++i) {
+                                            key = 'diagrams_ntc_dataset' + i.toString();
+                                            chart_hidden = window.localStorage.getItem(key);
+                                            if (chart_hidden == null) {
+                                                chart_hidden = false;
+                                            }
+                                            console.log(key + ' = ' + chart_hidden);
+                                            config_thermometers_chart.data.datasets[i].hidden = (chart_hidden == 'true');
+                                        }                                        
+                                        
+                                        // restore hidden flags for dewpoint_humidity_chart
+                                        dataset_count = config_dewpoint_humidity_chart.data.datasets.length;
+                                        for (i = 2; i < dataset_count; ++i) {
+                                            key = 'diagrams_dew_dataset' + i.toString();
+                                            chart_hidden = window.localStorage.getItem(key);
+                                            if (chart_hidden == null) {
+                                                chart_hidden = false;
+                                            }
+                                            console.log(key + ' = ' + chart_hidden);
+                                            config_dewpoint_humidity_chart.data.datasets[i].hidden = (chart_hidden == 'true');
+                                        }                                        
+                                        
+                                        // generate charts
+                                        temp_hum_chart = new Chart(temp_hum_chart_el, config_temp_hum_chart);
+                                        scales_chart = new Chart(scales_chart_el, config_scales_chart);
+                                        dewpoint_humidity_chart = new Chart(dewpoint_humidity_chart_el, config_dewpoint_humidity_chart);
+                                        thermometers_chart = new Chart(thermometers_chart_el, config_thermometers_chart);
+
+                                        light_chart = new Chart(light_chart_el, config_light_chart);
+                                        uv_light_chart = new Chart(uv_light_chart_el, config_uv_light_chart);
+                                        heater_chart = new Chart(heater_chart_el, config_heater_chart);
+                                        cooler_chart = new Chart(cooler_chart_el, config_cooler_chart);
+                                        humidifier_chart = new Chart(humidifier_chart_el, config_humidifier_chart);
+                                        dehumidifier_chart = new Chart(dehumidifier_chart_el, config_dehumidifier_chart);
+                                        exhaust_air_chart =  new Chart(exhaust_air_chart_el, config_exhaust_air_chart);
+                                        circulation_air_chart =  new Chart(circulation_air_chart_el, config_circulation_air_chart);
+
+                                        // save hidden flags for temp_hum_chart
+                                        window.addEventListener('beforeunload', (event) => {
+                                            // event.preventDefault();
+                                            let count = temp_hum_chart.data.datasets.length;
+                                            for (let i = 0; i < count; ++i) {
+                                                var ds_visible = temp_hum_chart.isDatasetVisible(i);
+                                                var loc_store_name = 'diagrams_temp_dataset' + i.toString();
+                                                console.log('loc_store_name = ' + loc_store_name + '  ' + ds_visible);
+                                                window.localStorage.setItem(loc_store_name, (!ds_visible).toString());
+                                            }
+                                            
+                                            count = thermometers_chart.data.datasets.length;
+                                            for (i = 0; i < count; ++i) {
+                                                var ds_visible = thermometers_chart.isDatasetVisible(i);
+                                                var loc_store_name = 'diagrams_ntc_dataset' + i.toString();
+                                                console.log('loc_store_name = ' + loc_store_name + '  ' + ds_visible);
+                                                window.localStorage.setItem(loc_store_name, (!ds_visible).toString());
+                                            }                                            
+                                            
+                                            count = dewpoint_humidity_chart.data.datasets.length;
+                                            for (i = 2; i < count; ++i) {
+                                                var ds_visible = dewpoint_humidity_chart.isDatasetVisible(i);
+                                                var loc_store_name = 'diagrams_dew_dataset' + i.toString();
+                                                console.log('loc_store_name = ' + loc_store_name + '  ' + ds_visible);
+                                                window.localStorage.setItem(loc_store_name, (!ds_visible).toString());
+                                            }                                                                                        
+                                            //event.returnValue = '';
+                                        });
+                                        
+                                        function convert_timestamps_index( timestamps_seconds ) {
+                                        // convert timestamps array from seconds to js Date strings array
+                                            const timestamps_js = [];
+                                            for (const el of timestamps_seconds) {
+                                                var dt = new Date(el * 1000);
+                                                timestamps_js.push(dt);
+                                            }
+                                            return timestamps_js;    
+                                        } 
+                                        
                                         </script>
                                         </br>
                                         </br>
+                                        
+                                        <?php
+                                            echo "<script src='js/ajax_all_dg.js'></script>";
+                                        ?> 
                                     </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->
                             </div>

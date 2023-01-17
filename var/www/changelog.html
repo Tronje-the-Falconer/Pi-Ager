@@ -30,8 +30,40 @@ h2 {
 
 </style>
 
-<h2>Version 3.3.2</h2>
+<h2>Version 3.3.3</h2>
 
+<h4>System</h4>
+    <ul>
+        <li> In diese Version sind zahlreiche Optimierungen und Erweiterungen eingearbeitet worden: </li>
+        <li> Ein Bluetooth Temperatursensor 'Mi Temperature and Humidity Monitor2' als externer Sensor wird unterstützt. Dieser Sensor kann auch mit '1-Wire' internen Sensoren kombiniert werden.<br>
+        <img src="./images/icons/MiTemperatureSensor2.png" alt=""></li>
+        <li> Die Seiten index.php und diagrams.php wurden vollständig mit AJAX und JQUERY überarbeit, so dass kein manueller oder automatischer Refresh der ganzen Seiten mehr erforderlich ist. Es werden lediglich die Messwerte, Charts und das Statusbord aufgefrischt. </li>
+        <li> Diese Maßnahmen reduzieren die Systemlast und verbessern die Bedienbarkeit erheblich.</li>
+        <li> Die Einstellungen, welche Kurven (Feuchte, Temperatur) in den Charts sichtbar sind, bleiben auch nach Seitenwechsel erhalten. Ausnahme: Safari in mobile IOS</li>
+        <li> Pi-Ager started nach shutdown/Neustart mit den zuletzt eingestellten Werten. Bei einer Exception startet das System mit dem Status Pi-Ager gestoppt.</li>
+        <li> Änderungen der Umluft- und Abluft-Parameter werden sofort übernommen und nicht erst nach Ablauf des aktuellen Zyklus. </li>
+        <li> Abluft Ventilator wird nur aktiviert, wenn die externe absolute Feuchte niedriger ist als die interne absolute Feuchte. Funktioniert nur, wenn ein externer Sensor angeschlossen ist.</li>
+        <li> Der 'Schalter' Eingang kann nun benutzt werden, um die Ausgänge 'Licht' und 'UV-Licht' mit Vorrang vor den Timern und anderen Einflüssen direkt anzusteuern. Zum Beispiel kann damit das UV-Licht ausgeschaltet werden, wenn der Türschließkontakt des Reifeschranks mit dem 'Schalter'-Eingang auf der Pi-Ager Platine verbunden wird.</li>
+        <li> Automatisches Abtauen des Reifeschranks ist nun implementiert. Der Vorgang kann mit folgenden Parametern gesteuert werden: Abtauen aktiv, Abtauzyklus und Abtautemperatur.</li>
+        <li> Neue Events eingefügt: Abtauen gestartet und Abtauen beendet.</li>
+        <li> Im Log werden nur noch Änderungen der Ausgänge aufgezeichnet und rot markiert.</li>
+        <li> Diverse Bugs gefixed:</li>
+        <li> Kurzzeitige Aktivierung der Relais beim Neustart</li>
+        <li> Diagramm für Waage 2 nach kurzer Zeit verschwunden</li>
+        <li> Bug fixed: <a href="https://github.com/Tronje-the-Falconer/Pi-Ager/issues/108">Benutzerdefinierter Timeframe</a></li>
+        <li> Issue fixed: <a href="https://github.com/Tronje-the-Falconer/Pi-Ager/issues/106">Verzögerungszeit beim Wiedereinschalten des Kompressors</a></li>
+        <li> Bug fixed: Berechnung der Temperatur und Feuchte bei den Sensoren SHT3X und SHT85: die Werte wurden jeweils um 1°C bzw. 1% (Feuchte) zu hoch angezeigt.</li>
+        <li> Bug fixed: Die Buttons 'Zurück' und 'Weiter' auf der Seite logs.php funktionierten nicht, wenn nur ein Log File (logfile.txt) vorhanden war.</li>
+        <li> Die Timer Parameter 'Dauer' und 'Periode' wurden umbenannt: 'Dauer' -> 'EIN Dauer', 'Periode' -> 'AUS Dauer'.</li>
+        <li> Die Waagenwerte größer 9999gr auf dem TFT Display wurden nicht vollständig angezeigt. Das Problem kann durch eine verbesserte Firmware behoben werden. Hierzu einfach die Nextion Display Firmware neu flashen.</li>
+        <li> TFT Display timeout voreingesteller Wert ist jetzt 60s.</li>
+        <li> Umluft Steuerung: ein Schalter in den allgemeinen Einstellungen ermöglicht die Kopplung der Umluft mit dem UV-Licht.</li>
+        <li> Zur Überwachung eines möglichen Fehlverhaltens des Kompressor-Relais (Schaltkontakt schaltet nicht ein/aus) wurde die Software ereitert. Benötigt wird ein Stromsensor LEM HO 6-P/SP33, der an den 4. Sensor-Eingang der Pi-Ager Platine angeschlossen wird. Siehe auch die Hilfe zu den Thermometern auf der ADMIN Seite.</li>
+    </ul>
+<hr>
+    
+<h2>Version 3.3.2</h2>  
+ 
 <h4>System</h4>
     <ul>
         <li>Support für neuen Raspberry Pi Zero 2 W.</li>

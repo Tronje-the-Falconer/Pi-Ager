@@ -44,7 +44,7 @@ class cl_sensor_sht75(cl_sensor):
    
     def get_current_data(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
+        self.delete_error_counter()
         while self._error_counter < self._max_errors:
         
             try:
@@ -61,13 +61,14 @@ class cl_sensor_sht75(cl_sensor):
                 
             except Exception as cx_error:
                 self._error_counter = self._error_counter + 1
-                cl_fact_logger.get_instance().exception(cx_error)
-                cl_fact_logger.get_instance().debug('Retry getting measurement from SHT75. Current retry count : %d, max retry count : %d' % (self._error_counter, self._max_errors))       
+                if (self._error_counter == 1):
+                    cl_fact_logger.get_instance().exception(cx_error)
+                else:
+                    cl_fact_logger.get_instance().error(f"Retry getting measurement from SHT75. Current retry count : {self._error_counter}, max retry count : {self._max_errors}")       
 
-        self.delete_error_counter()
+#        self.delete_error_counter()
         cl_fact_logger.get_instance().debug('Too many measurement errors occurred!')
-       
-        raise cx_measurement_error ('Too many measurement errors occurred!')
+        raise cx_measurement_error(_('Too many measurement errors occurred!'))
         
     def _get_current_temperature(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())

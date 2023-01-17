@@ -16,6 +16,7 @@
                                     include 'modules/backup_manual.php';                        // steuert manuelles Backup im sudowebscript an
                                     include 'modules/nextion_upload_firmware.php';              // upload firmware file for nextion hmi display                                    
                                     include 'modules/write_backup_db.php';                      // schreibt die backup-Werte
+                                    include 'modules/write_defrost_db.php';                     // schreibt die defrost Werte in die DB
                                     include 'modules/write_nextion_type_db.php';                // nextion display type save
                                     
                                     include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
@@ -66,31 +67,27 @@
                                             <tr>
                                                 <td class="td_png_icon"><h3><?php echo _('sensortype'); ?></h3><img src="images/icons/sensortype_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_sensortype_blockFunction()"><?php echo _('help'); ?></button>
                                                 </td>
-                                                <td style=" text-align: left; padding-left: 20px;">
+                                                <td style=" text-align: left; padding-left: 20px;"><br>
                                                     <input type="radio" name="sensortype_admin" value="1" <?php echo $checked_sens_1; ?>/><label><span style="color: #7A5800 !important"> DHT11</span></label><br>
                                                     <input type="radio" name="sensortype_admin" value="2" <?php echo $checked_sens_2; ?>/><label><span style="color: #7A5800 !important"> DHT22</span></label><br>
                                                     <input type="radio" name="sensortype_admin" value="3" <?php echo $checked_sens_3; ?>/><label><span style="color: #7A5800 !important"> SHT75</span></label><br>
-                                                    <input type="radio" name="sensortype_admin" value="4" <?php echo $checked_sens_4; ?>/><label> SHT85</label><br>
-                                                    <input type="radio" name="sensortype_admin" value="5" <?php echo $checked_sens_5; ?>/><label> SHT3x</label><br>
+                                                    <input type="radio" name="sensortype_admin" value="4" <?php echo $checked_sens_4; ?>/><label><strong> SHT85</strong></label><br>
+                                                    <input type="radio" name="sensortype_admin" value="5" <?php echo $checked_sens_5; ?>/><label><strong> SHT3x</strong></label><br>
                                                     <br>
                                                 </td>
                                                 <td></td>
                                                 <td style=" text-align: left; padding-left: 20px;">
-                                                    <?php 
-                                                        if ($sens_second_active != ''){
-                                                            echo '<ul>' . _('only configurable if internal sensor is set to sht3x or sht85') . '</ul><br><br>';
-                                                            echo '<input type="hidden" name="sensorsecondtype_admin_inaktive" value="' . $sensorsecondtype . '" />';
-                                                        }
-                                                    ?>
-                                                    <input type="radio" name="sensorsecondtype_admin" value="0" <?php echo $checked_senssecond_0 . ' ' . $sens_second_active; ?>/><label> disabled</label><br>
-                                                    <!--
-                                                    <input type="radio" name="sensorsecondtype_admin" value="1" <?php echo $checked_senssecond_1 . ' ' . $sens_second_active; ?>/><label> DHT11</label><br>
-                                                    <input type="radio" name="sensorsecondtype_admin" value="2" <?php echo $checked_senssecond_2 . ' ' . $sens_second_active; ?>/><label> DHT22</label><br>
-                                                    <input type="radio" name="sensorsecondtype_admin" value="3" <?php echo $checked_senssecond_3 . ' ' . $sens_second_active; ?>/><label> SHT75</label><br> -->
-                                                    <input type="radio" name="sensorsecondtype_admin" value="4" <?php echo $checked_senssecond_4 . ' ' . $sens_second_active; ?>/><label> SHT85</label><br>
-                                                    <input type="radio" name="sensorsecondtype_admin" value="5" <?php echo $checked_senssecond_5 . ' ' . $sens_second_active; ?>/><label> SHT3x</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="0" <?php echo $checked_senssecond_0; ?>/><label> disabled</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="4" <?php echo $checked_senssecond_4; ?>/><label> SHT85</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="5" <?php echo $checked_senssecond_5; ?>/><label> SHT3x</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="6" <?php echo $checked_senssecond_6; ?>/><label> MiThermometer</label><br>
                                                     <br>
                                                 </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td colspan="2"><label>MiThermometer MAC address a4:c1:38:&nbsp;</label><div class="tooltip"><input type="text" size="9" maxlength="8" id="mac_last_3_bytes" name="mac_last_3_bytes" value=<?php echo $mi_mac_last3bytes;?>><span class="tooltiptext"><?php echo _('Enter last 3 bytes of device address separated by colons, e.g.: 26:44:d2');?></span></div></td>
                                             </tr>
                                         </table>
                                         <input name="bus" type="hidden" required value="<?php echo $bus; ?>">
@@ -110,12 +107,7 @@
 
                                         <table style="width: 100%; align: center;">
                                             <tr>
-                                                <td style="width: 100px;"></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td><br><button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: a shutdown is required, please turn the power off/on to restart the system!');?>');"><?php echo _('change sensors'); ?></button></td>
+                                                <td><br><button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: a shutdown may be required due to sensor or MAC address change, please turn the power off/on to restart the system!');?>');"><?php echo _('change sensors'); ?></button></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -208,11 +200,11 @@
                                     <!----------------------------------------------------------------------------------------Meat Thermometer-->
                                     <table style="width: 100%;" class="miniature_writing">
                                         <tr>
-                                            <td rowspan="6" class="td_png_icon"><h3><?php echo 'Thermometer'; ?></h3><img src="images/icons/temperature_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_thermometer_blockFunction()"><?php echo _('help'); ?></button></td>
+                                            <td rowspan="10" class="td_png_icon"><h3><?php echo 'Thermometer'; ?></h3><img src="images/icons/temperature_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_thermometer_blockFunction()"><?php echo _('help'); ?></button></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo 'Sensor 1'; ?>:</td>
-                                            <td class="text_left_padding">
+                                            <td style="text-align: left;">
                                             <?php 
                                                 $meat_sensors = get_meatsensors_dataset();
                                                 if (isset($meat_sensors))
@@ -240,7 +232,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo 'Sensor 2'; ?>:</td>
-                                            <td class="text_left_padding">
+                                            <td style="text-align: left;">
                                             <?php 
                                                 if (isset($meat_sensors))
                                                 {
@@ -267,7 +259,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo 'Sensor 3'; ?>:</td>
-                                            <td class="text_left_padding">
+                                            <td style="text-align: left;">
                                             <?php 
                                                 if (isset($meat_sensors))
                                                 {
@@ -294,12 +286,12 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo 'Sensor 4'; ?>:</td>
-                                            <td class="text_left_padding">
+                                            <td style="text-align: left;">
                                             <?php 
                                                 if (isset($meat_sensors))
                                                 {
                                                     $meatsensor_index = intval($meat4_sensortype);
-                                                    echo '<select name="temp_sensor4_admin">';
+                                                    echo '<select name="temp_sensor4_admin" onchange="getMeat4SensorTypeIndex(this)">';
                                                     foreach($meat_sensors as $meatsensor_row)
                                                     {
                                                         if ($meatsensor_row[id] == $meatsensor_index)
@@ -313,10 +305,69 @@
                                                     }
                                                     echo '</select>';
                                                 }
+                                                $current_check_row = get_table_row($config_current_check_table, 1);
+                                                $status_current_check = intval($current_check_row[$current_check_active_field]);
+                                                $current_threshold = number_format(floatval($current_check_row[$current_threshold_field]), 1, '.', '');
+                                                $repeat_event_cycle = intval($current_check_row[$repeat_event_cycle_field]);
+                                                if ($status_current_check == 1) {
+                                                    $cooler_relay_check_active_true = "checked";
+                                                }
+                                                else{
+                                                    $cooler_relay_check_active_true = "";
+                                                }
                                             ?>
                                             </td>
-                                        </tr>                                        
+                                        </tr>
+                                        <tr><td>&nbsp;</td></tr>
+                                        <tr id="cooler_check_line1"
+                                        <?php
+                                            if (intval($meat4_sensortype) != 18) {
+                                                echo ' style="display:none;"';
+                                            }
+                                        ?>>
+                                            <td class="text_left_padding"><?php echo _('cooler relay monitoring'); ?>:</td>
+                                            <td style="text-align: left;">
+                                                <input type="hidden" name="cooler_relay_check_active_admin" value="0">
+                                                <input type="checkbox" name="cooler_relay_check_active_admin" value="1" <?php echo $cooler_relay_check_active_true; ?>/>
+                                            </td>
+                                        </tr>
+                                        <tr id="cooler_check_line2"
+                                        <?php
+                                            if (intval($meat4_sensortype) != 18) {
+                                                echo ' style="display:none;"';
+                                            }
+                                        ?>>                                        
+                                            <td class="text_left_padding"><?php echo _('current threshold'); ?>:</td>
+                                            <td style="text-align: left;"><input name="current_threshold_admin" type="number" min="0.1" max="25" step="0.1" style="width: 30%;" required value=<?php echo $current_threshold; ?>>&nbsp;A<span style="font-size: xx-small"> (0.1A <?php echo _('to'); ?> 25A)</span></td>
+                                        </tr>
+                                        <tr id="cooler_check_line3"
+                                        <?php
+                                            if (intval($meat4_sensortype) != 18) {
+                                                echo ' style="display:none;"';
+                                            }
+                                        ?>>                                        
+                                            <td class="text_left_padding"><?php echo _('event messages every'); ?>:</td>
+                                            <td style="text-align: left;"><input name="repeat_event_cycle_admin" type="number" min="1" max="1440" step="1" style="width: 30%;" required value=<?php echo $repeat_event_cycle; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (10 <?php echo _('to'); ?> 1440)</span></td>
+                                        </tr>
                                     </table>
+
+                                    <script>
+                                        function getMeat4SensorTypeIndex(selectedObject) {
+                                            var rowId  = selectedObject.value;
+                                            console.log('rowId = ' + rowId);
+                                            if (rowId == "18") {
+                                                document.getElementById('cooler_check_line1').style.display = '';
+                                                document.getElementById('cooler_check_line2').style.display = '';
+                                                document.getElementById('cooler_check_line3').style.display = '';
+                                            }
+                                            else {
+                                                document.getElementById('cooler_check_line1').style.display = 'none';
+                                                document.getElementById('cooler_check_line2').style.display = 'none';
+                                                document.getElementById('cooler_check_line3').style.display = 'none';
+                                            }
+                                        }                                    
+                                    </script>
+                                    
                                     <script>
                                         function help_thermometer_blockFunction() {
                                             document.getElementById('help_thermometer').style.display = 'block';
@@ -331,39 +382,157 @@
                                         <button class="art-button" type="button" onclick="help_thermometer_noneFunction()"><?php echo _('close'); ?></button>
                                     </p>
                                     <hr>                                    
-                                        <!----------------------------------------------------------------------------------------Language-->
-                                        <table style="width: 100%;" class="miniature_writing">
-                                            <tr>
-                                                <td class="td_png_icon"><h3><?php echo _('language'); ?></h3><img src="images/icons/language_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_language_blockFunction()"><?php echo _('help'); ?></button>
-                                                </td>
-                                                <td style=" text-align: left; padding-left: 20px;">
-                                                    <input type="radio" name="language_admin" value="1" <?php echo $checked_language_1; ?>/><label> de_DE</label><br>
-                                                    <input type="radio" name="language_admin" value="2" <?php echo $checked_language_2; ?>/><label> en_GB</label><br>
-                                                    <br>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <script>
-                                            function help_language_blockFunction() {
-                                                document.getElementById('help_language').style.display = 'block';
-                                            }
-                                            function help_language_noneFunction() {
-                                                document.getElementById('help_language').style.display = 'none';
-                                            }
-                                        </script>
-                                        <p id="help_language" class="help_p">
-                                            <?php echo _('helptext_language_admin');
-                                                  echo '<br><br>'; ?>
-                                            <button class="art-button" type="button" onclick="help_language_noneFunction()"><?php echo _('close'); ?></button>
-                                        </p>
-                                        <table style="width: 100%; align: center;">
-                                            <tr>
-                                                <td rowspan=3><button class="art-button" name="admin_form_submit" type="submit" value="admin_form_submit" onclick="return confirm('<?php echo _('save'); echo ' '; echo _('administration 1'); ?>?')"><?php echo _('save'); ?></button></td>
-                                            </tr>
-                                        </table>
+                                    <!----------------------------------------------------------------------------------------Language-->
+                                    <table style="width: 100%;" class="miniature_writing">
+                                        <tr>
+                                            <td class="td_png_icon"><h3><?php echo _('language'); ?></h3><img src="images/icons/language_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_language_blockFunction()"><?php echo _('help'); ?></button>
+                                            </td>
+                                            <td style=" text-align: left; padding-left: 20px;">
+                                                <input type="radio" name="language_admin" value="1" <?php echo $checked_language_1; ?>/><label> de_DE</label><br>
+                                                <input type="radio" name="language_admin" value="2" <?php echo $checked_language_2; ?>/><label> en_GB</label><br>
+                                                <br>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <script>
+                                        function help_language_blockFunction() {
+                                            document.getElementById('help_language').style.display = 'block';
+                                        }
+                                        function help_language_noneFunction() {
+                                            document.getElementById('help_language').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_language" class="help_p">
+                                        <?php echo _('helptext_language_admin');
+                                              echo '<br><br>'; ?>
+                                        <button class="art-button" type="button" onclick="help_language_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p>
+                                    <hr>
+                                    <!-----------------------------------------------------------switch control-->
+                                    <table style="width: 100%;" class="miniature_writing">
+                                        <tr>
+                                             <td rowspan="6" class="td_png_icon"><h3><?php echo _('switch control'); ?></h3><img src="images/icons/switch_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_switch_blockFunction()"><?php echo _('help'); ?></button></td>
+                                        </tr>
+                                        <tr><td>&nbsp;</td></tr>
+                                        <tr>
+                                            <td class="text_left_padding"><?php echo _('UV Light'); ?>:</td>
+                                            <td class="text_left_padding">
+                                                <select name="switch_UV_light_admin" style="width: 280px;">
+                                                    <?php
+                                                        $mode_names_uv = array(_('not active'), _('turn off if switch is open'), _('turn off if switch is closed'));
+                                                        for ($i = 0; $i < 3; $i++) {
+                                                            if ($i == $switch_control_uv_light) {
+                                                                echo '<option value="' . $i . '" selected>' . $mode_names_uv[$i] . '</option>';
+                                                            }
+                                                            else {
+                                                                echo '<option value="' . $i . '">' . $mode_names_uv[$i] . '</option>';
+                                                            }
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </td>
+                                        </tr>                                       
+                                         <tr>
+                                            <td class="text_left_padding"><?php echo _('Light'); ?>:</td>
+                                            <td class="text_left_padding">
+                                                <select name="switch_light_admin" style="width: 280px;">
+                                                    <?php
+                                                        $mode_names = array(_('not active'), _('turn on if switch is open'), _('turn on if switch is closed'));
+                                                        for ($i = 0; $i < 3; $i++) {
+                                                            if ($i == $switch_control_light) {
+                                                                echo '<option value="' . $i . '" selected>' . $mode_names[$i] . '</option>';
+                                                            }
+                                                            else {
+                                                                echo '<option value="' . $i . '">' . $mode_names[$i] . '</option>';
+                                                            }
+                                                        }
+                                                    ?>
+                                                </select>
+                                            </td>
+                                        </tr>
+                                        <tr><td>&nbsp;</td></tr>
+                                    </table>
+                                    <script>
+                                        function help_switch_blockFunction() {
+                                            document.getElementById('help_switch').style.display = 'block';
+                                        }
+                                        function help_switch_noneFunction() {
+                                            document.getElementById('help_switch').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_switch" class="help_p">
+                                        <?php echo _('helptext_switch_admin');
+                                              echo '<br><br>'; ?>
+                                        <button class="art-button" type="button" onclick="help_switch_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p>
+                                    <!-------------------submit button -->    
+                                    <table style="width: 100%; align: center;">
+                                        <tr>
+                                            <td rowspan=3><button class="art-button" name="admin_form_submit" type="submit" value="admin_form_submit" onclick="return confirm('<?php echo _('save'); echo ' '; echo _('administration 1'); ?>?')"><?php echo _('save'); ?></button></td>
+                                        </tr>
+                                    </table>
                                     </div>
                                 </form>
                                 <hr>
+
+                                <h2 class="art-postheader"><?php echo _('defrost'); ?></h2>
+                                <!-----------------------------------------------------------------------------Automatic Defrost-->
+                                <form method="post" name="defrost">
+                                    <div class="hg_container" >
+                                        <table style="width: 100%;" class="miniature_writing">
+                                            <?php
+                                                $defrost_active = get_table_value_from_field($defrost_table, Null, $defrost_active_field);
+                                                $defrost_temperature = number_format(floatval(get_table_value_from_field($defrost_table, Null, $defrost_temperature_field)), 1, '.', '');
+                                                $defrost_cycle_hours = get_table_value_from_field($defrost_table, Null, $defrost_cycle_hours_field);
+                                                if ($defrost_active == 1) {
+                                                    $checked_defrost_true = "checked";
+                                                }
+                                                else{
+                                                    $checked_defrost_true = "";
+                                                }
+                                            ?>
+                                            <tr>
+                                                <td rowspan="5" class="td_png_icon"><h3><?php echo _('defrost'); ?></h3><img src="images/icons/defrost_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_defrost_blockFunction()"><?php echo _('help'); ?></button></td>                                            
+                                                <td class="text_left_padding"><?php echo _('defrost temperature offset'); ?>:</td>
+                                                <td style="text-align: left;"><input name="defrost_temperature" type="number" min="1" max="22" step="0.1" style="width: 30%;" required value=<?php echo $defrost_temperature; ?>>&nbsp;°C<span style="font-size: xx-small"> (1 <?php echo _('to'); ?> 22)</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('defrost cycle'); ?>:</td>
+                                                <td style="text-align: left;"><input name="defrost_cycle_hours" type="number" min="1" max="24" step="1" style="width: 30%;" required value=<?php echo $defrost_cycle_hours; ?>>&nbsp;<?php echo _('hours'); ?><span style="font-size: xx-small"> (1 <?php echo _('to'); ?> 24)</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text_left_padding"><?php echo _('defrost active'); ?>:</td>
+                                                <td style="text-align: left;">
+                                                    <input type="hidden" name="defrost_active" value="0">
+                                                    <input type="checkbox" name="defrost_active" value="1" <?php echo $checked_defrost_true; ?>/>
+                                                </td>
+                                            </tr>
+                                            <tr><td>&nbsp;</td></tr>
+                                            <tr><td>&nbsp;</td></tr> 
+                                        </table>
+
+                                        <script>
+                                            function help_defrost_blockFunction() {
+                                                document.getElementById('help_defrost').style.display = 'block';
+                                            }
+                                            function help_defrost_noneFunction() {
+                                                document.getElementById('help_defrost').style.display = 'none';
+                                            }
+                                        </script>
+                                        <p id="help_defrost" class="help_p">
+                                            <?php echo _('helptext_defrost');
+                                                echo '<br><br>'; ?>
+                                            <button class="art-button" type="button" onclick="help_defrost_noneFunction()"><?php echo _('close'); ?></button>
+                                        </p>
+                                        <table style="width: 100%; align: center;">
+                                            <tr>
+                                                <td><button class="art-button" name="save_defrost_values" value="save_defrost_values" onclick="return confirm('<?php echo _('ATTENTION: save defrost values?');?>');"><?php echo _('save'); ?></button></td>
+                                            </tr>
+                                        </table>                                    
+                                    </div>
+                                </form>
+                                <hr>
+                                
                                 <h2 class="art-postheader"><?php echo _('reboot & shutdown'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Reboot/Shutdown-->
                                 <div class="hg_container">
@@ -470,29 +639,25 @@
                                         <button class="art-button" name="save_loglevel" value="save_loglevel" onclick="return confirm('<?php echo _('save loglevel?');?>');"><?php echo _('save'); ?></button>
                                     </form>
                                 </div>
-                                <hr>
-                                <h2 class="art-postheader"><?php echo _('debug values'); ?></h2>
-                                <!----------------------------------------------------------------------------------------Debugging-->
-                                <div class="hg_container" >
-                                    <form method="post" name="debug">
-                                        <table style="width: 100%;">
-                                            <?php
-                                                // $measuring_interval_debug = get_table_value($debug_table, $measuring_interval_debug_key);
-                                                $agingtable_days_in_seconds_debug = get_table_value($debug_table, $agingtable_days_in_seconds_debug_key);
-                                            ?>
-                                             <!-- <tr>
-                                                <td><?p hp echo _('measuring interval'); ?>:</td>
-                                                <td><input name="measuring_interval_debug" type="number" style="width: 90%;" min="1" max="60" required value=<?p hp echo $measuring_interval_debug; ?>></td>
-                                            </tr> -->
-                                            <tr>
-                                                <td><?php echo _('agingtable days in seconds'); ?>:</td>
-                                                <td><input name="agingtable_days_in_seconds_debug" type="number" style="width: 90%;" min="1" max="86400" required value=<?php echo $agingtable_days_in_seconds_debug; ?>></td>
-                                            </tr>
-
-                                        </table>
-                                        <button class="art-button" name="save_debug_values" value="save_debug_values" onclick="return confirm('<?php echo _('ATTENTION: save debug values?');?>');"><?php echo _('save'); ?></button>
-                                    </form>
-                                </div>
+                                <?php
+                                    if ($loglevel_console == 10 and $loglevel_file == 10) {
+                                        echo '<hr>';
+                                        echo '<h2 class="art-postheader">' . _('debug values') . '</h2>';
+                                /* <!----------------------------------------------------------------------------------------Debugging--> */
+                                        echo '<div class="hg_container" >';
+                                        echo '<form method="post" name="debug">';
+                                        echo '<table style="width: 100%;">';
+                                        $agingtable_days_in_seconds_debug = get_table_value($debug_table, $agingtable_days_in_seconds_debug_key);
+                                        echo '<tr>';
+                                        echo '<td>' . _('agingtable days in seconds') . ':</td>';
+                                        echo '<td><input name="agingtable_days_in_seconds_debug" type="number" style="width: 90%;" min="1" max="86400" required value=' . $agingtable_days_in_seconds_debug . '></td>';
+                                        echo '</tr>';
+                                        echo '</table>';
+                                        echo '<button class="art-button" name="save_debug_values" value="save_debug_values" onclick="return confirm(\'' . _('ATTENTION: save debug values?') . '\');">' . _('save') . '</button>';
+                                        echo '</form>';
+                                        echo '</div>';
+                                    }
+                                ?>
                                 <hr>
                                 <h2 class="art-postheader"><?php echo _('backup'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Backup-->
@@ -596,6 +761,7 @@
                                     </p>
                                 </div>
                                 <hr>
+                                
                                 <h2 class="art-postheader"><?php echo _('database'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Database-->
                                 <div class="hg_container" >                                    
@@ -604,7 +770,7 @@
                                             <form method="post" name="database">
                                                 <td><button class="art-button" name="empty_statistic_tables" value="empty_statistic_tables" onclick="return confirm('<?php echo _('ATTENTION: empty statistic tables?');?>');"><?php echo _('empty statistic tables'); ?></button></td>
                                             </form>
-                                            <td><button class="art-button" name="database_administration" onclick="window.location.href='/phpliteadmin.php'"><?php echo _('database administration'); ?></button></td>
+                                            <td><button class="art-button" name="database_administration" onclick="window.open('/phpliteadmin.php')"><?php echo _('database administration'); ?></button></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -652,7 +818,7 @@
                                             <form method="post" id="nextion" enctype="multipart/form-data">
                                                 <td>
                                                     <label for="tft_file">
-			                                        alternativ firmware file: <input type="file" name="tft_file" id="tft_file" accept=".zip" onchange="enableButton()">
+			                                        <?php echo _('alternative firmware file:');?> <input type="file" name="tft_file" id="tft_file" accept=".zip" onchange="enableButton()">
                                                     </label>
                                                 </td>
                                             </form>

@@ -79,29 +79,29 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         pass
     
     def send_messages(self, messenger_exception_row):
-        if messenger_exception_row['alarm'] != '': 
-            cl_fact_logger.get_instance().info('Check Exception for Alarm:  ' + str(self.cx_error.__class__.__name__ ))
+        if self.is_not_blank(messenger_exception_row['alarm']): 
+            cl_fact_logger.get_instance().info('Trigger Alarm:  ' + str(self.cx_error.__class__.__name__ ))
             try:
                 cl_fact_logic_alarm().get_instance().execute_alarm(messenger_exception_row['alarm'])
             except:
                 cl_fact_logger.get_instance().info('Alarm settings not active: ')
                 
         if messenger_exception_row['telegram'] == 1:
-            cl_fact_logger.get_instance().info('Check Exception for Telegram: ' + str(self.cx_error.__class__.__name__))
+            cl_fact_logger.get_instance().info('Trigger Telegram: ' + str(self.cx_error.__class__.__name__))
             try:
                 cl_fact_logic_telegram.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
             except:
                 cl_fact_logger.get_instance().info('Telegram settings not active: ')
                 
         if messenger_exception_row['pushover'] == 1:
-            cl_fact_logger.get_instance().info('Check Exception for Pushover: ' + str(self.cx_error.__class__.__name__))
+            cl_fact_logger.get_instance().info('Trigger Pushover: ' + str(self.cx_error.__class__.__name__))
             try:
                 cl_fact_logic_pushover.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
             except:
                 cl_fact_logger.get_instance().info('Pushover settings not active: ')
 
         if messenger_exception_row['e-mail'] == 1:
-            cl_fact_logger.get_instance().info('Check Exception for E-Mail: ' + str(self.cx_error.__class__.__name__))
+            cl_fact_logger.get_instance().info('Trigger E-Mail: ' + str(self.cx_error.__class__.__name__))
             try:
                 cl_fact_logic_send_email.get_instance().execute(self.build_alarm_subject(), self.build_alarm_message())
             except:
@@ -109,9 +109,35 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                         
         if messenger_exception_row['raise_exception'] == 1:
             cl_fact_logger.get_instance().critical(str(self.cx_error.__class__.__name__ ))
+            self.stop_piager()  # set stop pi-ager in current_values table
             sys.exit(0)
-
-                    
+    
+    def stop_piager(self):
+        """
+        stop piager and agingtable in database when exception occurred, befor sys.exit
+        """
+        self.database = cl_fact_database_config.get_instance()
+        sql_statement1 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.status_pi_ager_key + '";'
+        sql_statement2 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.status_agingtable_key + '";'
+        sql_statement3 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.status_scale1_key + '";'
+        sql_statement4 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.status_scale2_key + '";'
+        sql_statement5 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.agingtable_period_key + '";'
+        sql_statement6 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "1"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.agingtable_period_day_key + '";'
+        
+        cl_fact_logger.get_instance().debug('stop pi_ager sql statement : ' + sql_statement1)
+        cl_fact_logger.get_instance().debug('stop agingtable sql statement : ' + sql_statement2 )
+        cl_fact_logger.get_instance().debug('stop scale1 sql statement : ' + sql_statement3 )
+        cl_fact_logger.get_instance().debug('stop scale1 sql statement : ' + sql_statement4 )
+        cl_fact_logger.get_instance().debug('reset agingtable period sql statement : ' + sql_statement5 )
+        cl_fact_logger.get_instance().debug('reset agingtable period day sql statement : ' + sql_statement6 )
+        
+        self.database.write_data_to_db(sql_statement1)
+        self.database.write_data_to_db(sql_statement2)
+        self.database.write_data_to_db(sql_statement3)
+        self.database.write_data_to_db(sql_statement4)
+        self.database.write_data_to_db(sql_statement5)
+        self.database.write_data_to_db(sql_statement6)   
+        
     def handle_exception(self, cx_error):
         """
         Handle exception to create alarm or email or telegram or pushover ... class
@@ -119,7 +145,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.cx_error       = cx_error
         self.cx_error_name  = type(self.cx_error).__name__
-        cl_fact_logger.get_instance().info("Exception raised: " + self.cx_error_name + " - " + str(cx_error) + self.build_alarm_subject() + self.build_alarm_message() )
+        cl_fact_logger.get_instance().info("Exception raised: " + self.cx_error_name + " - " + str(cx_error) + "\n" + self.build_alarm_subject() + self.build_alarm_message() )
        
         self.it_messenger_exception = self.db_messenger_exception.read_data_from_db()
         self.exception_known = False
@@ -147,13 +173,16 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                     
         return(self.exception_known)
 
+    def is_not_blank(self, s):
+        return bool(s and not s.isspace())
+        
     def handle_event(self, event, info_text=None):
         """
         Handle event to create alarm or email or telegram or pushover ... class
-        If the second parameter info_text is empty, the value is taken from the field envent_text in table config_messenger_event 
+        The second parameter info_text and the value taken from the field envent_text in table config_messenger_event are merged
         """
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cl_fact_logger.get_instance().info('Event raised: ' + event + ' with info text: '+ str(info_text) )
+        cl_fact_logger.get_instance().info('Event state: ' + event )
         
         self.event = event
         self.it_messenger_event = self.db_messenger_event.read_data_from_db()
@@ -162,35 +191,34 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
                 if (info_text == None):
                     self.info_text = item['event_text']
                 else:
-                    self.info_text    = info_text
-    
-                cl_fact_logger.get_instance().info('Info text is: '+ str(self.info_text) )
+                    self.info_text    = item['event_text'] + '\n' + info_text
+                
+#                cl_fact_logger.get_instance().info('Info text is: '+ str(self.info_text) )
                 
                 cl_fact_logger.get_instance().debug(item['event'])
-        
-                if item['alarm'] != '': 
-                    cl_fact_logger.get_instance().info('Check Event for Alarm:  ' + event)
+                if self.is_not_blank(item['alarm']):
+                    cl_fact_logger.get_instance().info('Trigger Alarm:  ' + event)
                     try:
                         cl_fact_logic_alarm().get_instance().execute_alarm(item['alarm'])
                     except:
                         cl_fact_logger.get_instance().info('Alarm settings not active: ')
                 
                 if item['telegram'] == 1:
-                    cl_fact_logger.get_instance().info('Check Event for Telegram: ' + event)
+                    cl_fact_logger.get_instance().info('Trigger Telegram: ' + event)
                     try:
                         cl_fact_logic_telegram.get_instance().execute(self.build_event_subject(), self.build_event_message())
                     except:
                         cl_fact_logger.get_instance().info('Telegram settings not active: ')
                 
                 if item['pushover'] == 1:
-                    cl_fact_logger.get_instance().info('Check Event for Pushover: ' + event)
+                    cl_fact_logger.get_instance().info('Trigger Pushover: ' + event)
                     try:
                         cl_fact_logic_pushover.get_instance().execute(self.build_event_subject(), self.build_event_message())
                     except:
                         cl_fact_logger.get_instance().info('Pushover settings not active: ')
 
                 if item['e-mail'] == 1:
-                    cl_fact_logger.get_instance().info('Check Event for E-Mail: ' + event)
+                    cl_fact_logger.get_instance().info('Trigger E-Mail: ' + event)
                     try:
                         cl_fact_logic_send_email.get_instance().execute(self.build_event_subject(), self.build_event_message())
                     except:

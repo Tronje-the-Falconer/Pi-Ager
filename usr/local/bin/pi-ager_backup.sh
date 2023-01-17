@@ -84,14 +84,14 @@ AGINGTABLE_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3
 AGINGTABLE_STATUS=${AGINGTABLE_STATUS%.*}
 
 # get status_piager from current_values
-PIAGER_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_piager'")
-PIAGER_STATUS=${PIAGER_STATUS%.*}
+# PIAGER_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_piager'")
+# PIAGER_STATUS=${PIAGER_STATUS%.*}
 
 # get status_scale1 and status_cale2 from current_values
-SCALE1_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_scale1'")
-SCALE1_STATUS=${SCALE1_STATUS%.*}
-SCALE2_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_scale2'")
-SCALE2_STATUS=${SCALE2_STATUS%.*}
+# SCALE1_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_scale1'")
+# SCALE1_STATUS=${SCALE1_STATUS%.*}
+# SCALE2_STATUS=$(sqlite3 -cmd ".timeout 5000" /var/www/config/pi-ager.sqlite3 "select value from current_values where key = 'status_scale2'")
+# SCALE2_STATUS=${SCALE2_STATUS%.*}
 
 # systemctl daemon-reload
 
@@ -208,7 +208,7 @@ echo "check if PiShrink exists."
 echo "Checking..."
 online_md5="$(curl -sL https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh | md5sum | cut -d ' ' -f 1)"
 local_md5="$(md5sum "/usr/local/bin/pishrink.sh" | cut -d ' ' -f 1)"
-if [[ "$online_md5" == "$local_md5" ]]; 
+if [[ "$online_md5" == "$local_md5" ]] 
 	then
     	echo "PiShrink is the latest version!"
     else
@@ -244,15 +244,17 @@ umount $NFSMOUNT
 # NFS-Volume mounten
 echo "mount NFS-Volume. Map $NFSVOL to $NFSMOUNT"
 
-if [ -z $NFSOPT ]
+if [ -n "$NFSOPT" ]
 	then
+        echo "mount with options: $NFSOPT"
 		mount -t nfs4 $NFSVOL $NFSMOUNT -o $NFSOPT
         mountstatus=$?
  	else
+        echo "mount w/o options"
  		mount -t nfs4 $NFSVOL $NFSMOUNT
         mountstatus=$?
 fi
-
+# exit 1
 if [ $mountstatus -ne 0 ]; then
   echo "Error $mountstatus during mount NFS Volume $NFSVOL. Backup stopped."
   exit 1
@@ -263,7 +265,7 @@ fi
 # Prüfen, ob das Zielverzeichnis existiert
 # echo "check if target directory $DIR exists on the nfs Server."
 # sleep 2
-# if [ ! -d "$DIR" ];
+# if [ ! -d "$DIR" ]
 #	then
 #        echo "target directory $DIR does not exist. Please create this directory. Backup stopped."
 #        umount $NFSMOUNT
@@ -315,6 +317,9 @@ if [[ "$ACCESS" == "no" ]]; then
       echo "$u can write into $DIR mapped to $NFSVOL, Backup continues."
 fi
 
+#  umount $NFSMOUNT
+#  exit 1
+
 # Stoppe Dienste vor Backup
 # echo "Stop Pi-Ager Main service!"
 #${DIENSTE_START_STOP} stop
@@ -343,7 +348,7 @@ if [ $ddstatus -ne 0 ]; then
   echo "error $ddstatus during dd command. Backup stopped."
 #  echo "Start Pi-Ager Main service again!"
   if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
-    set_piager_status
+#    set_piager_status
     echo  "Start Pi-Ager Main service again."
     systemctl start pi-ager_main &
   fi
@@ -408,7 +413,7 @@ umount $NFSMOUNT
 # Starte pi-ager service nach Backup
 
 if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
-    set_piager_status
+#    set_piager_status
     echo  "Start Pi-Ager Main service again."
     systemctl start pi-ager_main &
 fi

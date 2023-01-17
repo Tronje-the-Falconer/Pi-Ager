@@ -66,7 +66,6 @@ class th_active_sensor():
 
 
 class cl_fact_active_main_sensor:
-    
 #    Only a singleton instance for main_sensor
     __o_main_sensor_type = cl_fact_main_sensor_type().get_instance()
     __o_instance = None
@@ -77,13 +76,11 @@ class cl_fact_active_main_sensor:
         
         active_sensor = 'MAIN'
         if cl_fact_active_main_sensor.__o_instance is not None :
-        
             return(cl_fact_active_main_sensor.__o_instance)
-        try:
-            cl_fact_active_main_sensor.__o_instance = cl_active_main_sensor(cl_fact_active_main_sensor.__o_main_sensor_type, active_sensor, i_address)
- 
-        except Exception as original_error:
-            raise original_error        
+#        try:
+        cl_fact_active_main_sensor.__o_instance = cl_active_main_sensor(cl_fact_active_main_sensor.__o_main_sensor_type, active_sensor, i_address)
+#        except Exception as original_error:
+#            raise original_error        
         return(cl_fact_active_main_sensor.__o_instance)
 
     @classmethod
@@ -91,11 +88,10 @@ class cl_fact_active_main_sensor:
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_active_main_sensor.__o_instance = i_instance
               
-    
     def __init__(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        pass
         
-        pass    
 class cl_fact_active_second_sensor:
 #    Only a singleton instance for main_sensor
     __o_main_sensor_type = cl_fact_second_sensor_type().get_instance()
@@ -106,12 +102,11 @@ class cl_fact_active_second_sensor:
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         active_sensor = 'SECOND'
         if cl_fact_active_second_sensor.__o_instance is not None :
-        
             return(cl_fact_active_second_sensor.__o_instance)
-        try:
-            cl_fact_active_second_sensor.__o_instance = cl_active_second_sensor(cl_fact_active_second_sensor.__o_main_sensor_type, active_sensor, i_address)
-        except Exception as original_error:
-            raise original_error        
+#        try:
+        cl_fact_active_second_sensor.__o_instance = cl_active_second_sensor(cl_fact_active_second_sensor.__o_main_sensor_type, active_sensor, i_address)
+#        except Exception as original_error:
+#            raise original_error        
         return(cl_fact_active_second_sensor.__o_instance)
 
     @classmethod
@@ -119,12 +114,8 @@ class cl_fact_active_second_sensor:
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_second_sensor.__o_instance = i_instance
               
-    
     def __init__(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
         pass    
-
-    
 
 

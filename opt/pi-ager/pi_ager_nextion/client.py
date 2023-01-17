@@ -56,7 +56,7 @@ class Nextion:
         self._connection = None
         self._command_lock = asyncio.Lock()
         self.event_handler = event_handler or (
-            lambda t, d: cl_fact_logger.get_instance().info("Event %s data: %s" % (t, str(d)))
+            lambda t, d: cl_fact_logger.get_instance().debug("Event %s data: %s" % (t, str(d)))
         )
         self.reconnect_attempts = reconnect_attempts
         self.encoding = encoding

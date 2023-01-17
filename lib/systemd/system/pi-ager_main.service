@@ -1,6 +1,7 @@
 [Unit]
 Description=Start main routine of Pi-Ager
 After=network-online.target
+After=bluetooth.target
 Wants=network-online.target
 
 [Service]

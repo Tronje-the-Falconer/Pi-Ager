@@ -91,20 +91,6 @@ CREATE TABLE IF NOT EXISTS "agingtable_dryaging2" (
 	"comment"	TEXT,
 	PRIMARY KEY("id")
 );
-DROP TABLE IF EXISTS "agingtable_salami";
-CREATE TABLE IF NOT EXISTS "agingtable_salami" (
-	"id"	INTEGER NOT NULL DEFAULT 0,
-	"modus"	INTEGER,
-	"setpoint_humidity"	INTEGER,
-	"setpoint_temperature"	INTEGER,
-	"circulation_air_duration"	INTEGER,
-	"circulation_air_period"	INTEGER,
-	"exhaust_air_duration"	INTEGER,
-	"exhaust_air_period"	INTEGER,
-	"days"	INTEGER NOT NULL DEFAULT 0,
-	"comment"	TEXT,
-	PRIMARY KEY("id")
-);
 DROP TABLE IF EXISTS "debug";
 CREATE TABLE IF NOT EXISTS "debug" (
 	"id"	INTEGER NOT NULL DEFAULT 0,
@@ -287,6 +273,48 @@ CREATE TABLE IF NOT EXISTS "config" (
 	"last_change"	INTEGER NOT NULL DEFAULT 0,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
+DROP TABLE IF EXISTS "atc_mi_thermometer_data";
+CREATE TABLE IF NOT EXISTS "atc_mi_thermometer_data" (
+	"id"	INTEGER NOT NULL,
+	"mi_data"	TEXT DEFAULT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "atc_mi_thermometer_mac";
+CREATE TABLE IF NOT EXISTS "atc_mi_thermometer_mac" (
+	"id"	INTEGER NOT NULL,
+	"mi_mac_last3bytes"	TEXT DEFAULT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "agingtable_Salami";
+CREATE TABLE IF NOT EXISTS "agingtable_Salami" (
+	"id"	INTEGER NOT NULL,
+	"modus"	INTEGER,
+	"setpoint_humidity"	INTEGER,
+	"setpoint_temperature"	INTEGER,
+	"circulation_air_duration"	INTEGER,
+	"circulation_air_period"	INTEGER,
+	"exhaust_air_duration"	INTEGER,
+	"exhaust_air_period"	INTEGER,
+	"days"	INTEGER,
+	"comment"	TEXT,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "config_defrost";
+CREATE TABLE IF NOT EXISTS "config_defrost" (
+	"id"	INTEGER NOT NULL,
+	"active"	INTEGER,
+	"temperature"	REAL,
+	"cycle_hours"	INTEGER,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
+DROP TABLE IF EXISTS "config_current_check";
+CREATE TABLE IF NOT EXISTS "config_current_check" (
+	"id"	INTEGER NOT NULL,
+	"current_check_active"	INTEGER NOT NULL,
+	"current_threshold"	REAL NOT NULL,
+	"repeat_event_cycle"	INTEGER NOT NULL,
+	PRIMARY KEY("id" AUTOINCREMENT)
+);
 DROP TABLE IF EXISTS "config_messenger_event";
 CREATE TABLE IF NOT EXISTS "config_messenger_event" (
 	"event"	TEXT NOT NULL,
@@ -317,27 +345,15 @@ INSERT INTO "agingtable_dryaging2" ("id","modus","setpoint_humidity","setpoint_t
 INSERT INTO "agingtable_dryaging2" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (4,NULL,60,NULL,720,2880,NULL,17280,8,NULL);
 INSERT INTO "agingtable_dryaging2" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (5,NULL,45,7,648,2952,NULL,17712,12,NULL);
 INSERT INTO "agingtable_dryaging2" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (6,NULL,33,NULL,540,3060,NULL,18360,8,'');
-INSERT INTO "agingtable_salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (1,4,93,21,900,3600,900,21600,1,NULL);
-INSERT INTO "agingtable_salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (2,NULL,NULL,20,NULL,NULL,NULL,NULL,1,NULL);
-INSERT INTO "agingtable_salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (3,NULL,92,19,NULL,NULL,NULL,NULL,2,NULL);
-INSERT INTO "agingtable_salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (4,NULL,91,18,NULL,NULL,NULL,NULL,2,NULL);
-INSERT INTO "agingtable_salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (5,NULL,90,17,NULL,5400,NULL,NULL,2,NULL);
-INSERT INTO "agingtable_salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (6,NULL,89,16,NULL,NULL,NULL,NULL,2,NULL);
-INSERT INTO "agingtable_salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (7,NULL,88,15,NULL,NULL,NULL,NULL,1,NULL);
-INSERT INTO "agingtable_salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (8,NULL,87,NULL,NULL,NULL,NULL,NULL,1,NULL);
-INSERT INTO "agingtable_salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (9,NULL,86,14,NULL,NULL,NULL,NULL,1,NULL);
-INSERT INTO "agingtable_salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (10,NULL,85,13,NULL,NULL,NULL,NULL,1,NULL);
-INSERT INTO "agingtable_salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (11,NULL,80,12,NULL,7200,NULL,NULL,7,NULL);
-INSERT INTO "agingtable_salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (12,NULL,75,NULL,NULL,10800,NULL,NULL,7,NULL);
 INSERT INTO "debug" ("id","key","value","last_change") VALUES (1,'measuring_interval_debug',30.0,0);
 INSERT INTO "debug" ("id","key","value","last_change") VALUES (2,'agingtable_days_in_seconds_debug',86400.0,0);
 INSERT INTO "debug" ("id","key","value","last_change") VALUES (3,'loglevel_file',20.0,0);
 INSERT INTO "debug" ("id","key","value","last_change") VALUES (4,'loglevel_console',20.0,0);
-INSERT INTO "agingtables" ("id","name") VALUES (1,'salami');
 INSERT INTO "agingtables" ("id","name") VALUES (2,'dryaging1');
 INSERT INTO "agingtables" ("id","name") VALUES (3,'dryaging2');
-INSERT INTO "system" ("id","key","value","last_change") VALUES (1,'pi_revision','902120',1636829410);
-INSERT INTO "system" ("id","key","value","last_change") VALUES (3,'pi_ager_version','3.3.2',0);
+INSERT INTO "agingtables" ("id","name") VALUES (4,'Salami');
+INSERT INTO "system" ("id","key","value","last_change") VALUES (1,'pi_revision','902120',1670406773);
+INSERT INTO "system" ("id","key","value","last_change") VALUES (3,'pi_ager_version','3.3.3',0);
 INSERT INTO "agingtable_dryaging1" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (1,4,85,2,1440,2160,900,12960,12,'Testtabelle');
 INSERT INTO "agingtable_dryaging1" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (2,NULL,30,4,2520,1080,NULL,6480,8,NULL);
 INSERT INTO "agingtable_dryaging1" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (3,NULL,70,NULL,1080,2520,NULL,15120,8,NULL);
@@ -365,7 +381,8 @@ INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage"
 INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES (17,'Weber_6743',0.0033558796,0.00027111149,3.1838428e-06,102.315,NULL,NULL,NULL,NULL,NULL,'0',0.0,0);
 INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES (18,'LEM-HO6P-AC',NULL,NULL,NULL,NULL,'AC',1.6672,76.67,3,100,'0',0.0,0);
 INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES (19,'LEM-HO6P-DC',NULL,NULL,NULL,NULL,'DC',1.6672,76.67,3,50,'0',0.0,0);
-INSERT INTO "config_alarm" ("id","alarm","replication","sleep","high_time","low_time","waveform","frequency") VALUES (1,'short',3,0.5,0.5,0.5,'',NULL);
+INSERT INTO "config_alarm" ("id","alarm","replication","sleep","high_time","low_time","waveform","frequency") VALUES (1,'short',3,0.5,0.5,0.5,'','');
+INSERT INTO "config_alarm" ("id","alarm","replication","sleep","high_time","low_time","waveform","frequency") VALUES (2,'long',3,2.0,3.0,3.0,'','');
 INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES (1,'samples',20.0,0);
 INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES (2,'spikes',0.0,0);
 INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES (3,'sleep',0.1,0);
@@ -375,56 +392,59 @@ INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES (6,'refe
 INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES (7,'measuring_interval',300.0,0);
 INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES (8,'measuring_duration',15.0,0);
 INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES (9,'saving_period',150.0,0);
-INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES (10,'offset',522.964829276308,1635761315);
+INSERT INTO "scale1_settings" ("id","key","value","last_change") VALUES (10,'offset',535.1,1635761315);
 INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (1,'samples',20.0,0);
 INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (2,'spikes',0.0,0);
 INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (3,'sleep',0.1,0);
 INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (4,'gain',128.0,0);
 INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (5,'bits_to_read',24.0,0);
-INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (6,'referenceunit',0.1,1635761898);
+INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (6,'referenceunit',0.1,1670398912);
 INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (7,'measuring_interval',300.0,0);
 INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (8,'measuring_duration',15.0,0);
 INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (9,'saving_period',150.0,0);
-INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (10,'offset',520.349201472367,1635761935);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (1,'sensor_temperature',23.02,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (2,'sensor_humidity',45.09,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (3,'status_circulating_air',0.0,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (4,'status_cooling_compressor',0.0,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (5,'status_exhaust_air',0.0,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (6,'status_heater',0.0,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (7,'status_light',0.0,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (8,'status_uv',0.0,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (9,'status_humidifier',0.0,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (10,'status_dehumidifier',0.0,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (11,'scale1',999.565,1636830441);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (12,'scale2',999.44,1635762908);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (13,'status_piager',0.0,1636830445);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (14,'status_agingtable',0.0,1636830446);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (15,'status_scale1',0.0,1636830445);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (16,'status_scale2',0.0,1636830445);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (17,'status_tara_scale1',0.0,1636830446);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (18,'status_tara_scale2',0.0,1636830446);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (19,'agingtable_period',0.0,1622982705);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (20,'agingtable_period_starttime',1622982208.0,1622982208);
+INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (10,'offset',535.1,1670398945);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (1,'sensor_temperature',22.07,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (2,'sensor_humidity',43.2,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (3,'status_circulating_air',0.0,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (4,'status_cooling_compressor',0.0,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (5,'status_exhaust_air',0.0,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (6,'status_heater',0.0,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (7,'status_light',0.0,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (8,'status_uv',0.0,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (9,'status_humidifier',0.0,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (10,'status_dehumidifier',0.0,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (11,'scale1',-524.94,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (12,'scale2',976.554,1670411511);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (13,'status_piager',0.0,1670406773);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (14,'status_agingtable',0.0,1669821899);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (15,'status_scale1',0.0,1670399079);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (16,'status_scale2',0.0,1670398968);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (17,'status_tara_scale1',0.0,1670411515);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (18,'status_tara_scale2',0.0,1670411515);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (19,'agingtable_period',0.0,1669821900);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (20,'agingtable_period_starttime',1669814640.0,1669814640);
 INSERT INTO "current_values" ("id","key","value","last_change") VALUES (21,'status_light_manual',0.0,1630074244);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (22,'calibrate_scale1',0.0,1636830446);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (23,'calibrate_scale2',0.0,1636830446);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (24,'calibrate_weight',0.0,1636830446);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (25,'status_uv_manual',0.0,1630073658);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (26,'temperature_meat1',25.033,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (27,'temperature_meat2',NULL,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (28,'temperature_meat3',NULL,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (29,'temperature_meat4',24.166,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (30,'sensor_dewpoint',10.48,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (31,'sensor_extern_temperature',23.31,1611420926);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (32,'sensor_extern_humidity',38.79,1611420926);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (33,'sensor_extern_dewpoint',8.5,1611420926);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (34,'agingtable_period_day',1.0,1622982705);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (35,'scale1_thread_alive',0.0,1636830446);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (36,'scale2_thread_alive',0.0,1636830446);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (37,'aging_thread_alive',0.0,1636830446);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (38,'sensor_humidity_abs',9.28,1636830440);
-INSERT INTO "current_values" ("id","key","value","last_change") VALUES (39,'sensor_extern_humidity_abs',0.0,0);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (22,'calibrate_scale1',0.0,1670411515);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (23,'calibrate_scale2',0.0,1670411515);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (24,'calibrate_weight',0.0,1670411515);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (25,'status_uv_manual',1.0,1645642355);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (26,'temperature_meat1',21.513,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (27,'temperature_meat2',21.492,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (28,'temperature_meat3',21.592,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (29,'temperature_meat4',2.964,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (30,'sensor_dewpoint',8.98,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (31,'sensor_extern_temperature',22.3,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (32,'sensor_extern_humidity',37.08,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (33,'sensor_extern_dewpoint',6.95,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (34,'agingtable_period_day',1.0,1669821900);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (35,'scale1_thread_alive',0.0,1670411515);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (36,'scale2_thread_alive',0.0,1670411515);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (37,'aging_thread_alive',0.0,1670411515);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (38,'sensor_humidity_abs',8.42,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (39,'sensor_extern_humidity_abs',7.32,1670411510);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (40,'status_humidity_check',0.0,1670411504);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (41,'MiSensor_battery',2.968,1670411504);
+INSERT INTO "current_values" ("id","key","value","last_change") VALUES (42,'status_defrost',0.0,1670411510);
 INSERT INTO "config_messenger_exception" ("exception","e-mail","pushover","telegram","alarm","raise_exception","active","id") VALUES ('unknown',0,0,0,'short',1,1,1);
 INSERT INTO "config_messenger_exception" ("exception","e-mail","pushover","telegram","alarm","raise_exception","active","id") VALUES ('OperationalError',0,0,0,'short',1,1,2);
 INSERT INTO "config_messenger_exception" ("exception","e-mail","pushover","telegram","alarm","raise_exception","active","id") VALUES ('FileNotFoundError',0,0,0,'short',1,1,3);
@@ -434,63 +454,109 @@ INSERT INTO "config_messenger_exception" ("exception","e-mail","pushover","teleg
 INSERT INTO "config_messenger_exception" ("exception","e-mail","pushover","telegram","alarm","raise_exception","active","id") VALUES ('cx_i2c_sht_humidity_crc_error',0,0,0,'short',1,1,7);
 INSERT INTO "config_messenger_exception" ("exception","e-mail","pushover","telegram","alarm","raise_exception","active","id") VALUES ('cx_i2c_bus_error',0,0,0,'short',1,1,8);
 INSERT INTO "config_messenger_exception" ("exception","e-mail","pushover","telegram","alarm","raise_exception","active","id") VALUES ('cx_sensor_not_defined',0,0,0,'short',1,1,9);
-INSERT INTO "nextion" ("id","progress","status") VALUES (1,100,'success');
+INSERT INTO "nextion" ("id","progress","status") VALUES (1,500,'success');
 INSERT INTO "config_nfs_backup" ("id","nfsvol","number_of_backups","backup_name","nfsopt","active") VALUES (1,'',3,'PiAgerBackup','nosuid,nodev',1);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (1,'switch_on_cooling_compressor',1.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (2,'switch_off_cooling_compressor',-1.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (3,'switch_on_humidifier',20.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (4,'switch_off_humidifier',0.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (5,'delay_humidify',5.0,1635177908);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (1,'switch_on_cooling_compressor',2.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (2,'switch_off_cooling_compressor',0.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (3,'switch_on_humidifier',25.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (4,'switch_off_humidifier',0.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (5,'delay_humidify',5.0,1669821889);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (6,'sensortype',5.0,1582013839);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (7,'language',1.0,1635614493);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (8,'switch_on_light_hour',12.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (9,'switch_on_light_minute',30.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (10,'light_duration',60.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (11,'light_period',21600.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (12,'light_modus',0.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (13,'switch_on_uv_hour',11.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (14,'switch_on_uv_minute',30.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (15,'uv_duration',60.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (16,'uv_period',21600.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (17,'uv_modus',0.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (18,'dehumidifier_modus',1.0,1635177908);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (19,'circulation_air_period',3600.0,1631295242);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (20,'setpoint_temperature',24.0,1631295242);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (21,'exhaust_air_duration',900.0,1631295242);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (22,'modus',3.0,1631295242);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (23,'setpoint_humidity',79.0,1631295242);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (24,'exhaust_air_period',21600.0,1631295242);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (25,'circulation_air_duration',900.0,1631295242);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (26,'agingtable',1.0,1610707601);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (27,'failure_humidity_delta',10.0,0);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (28,'failure_temperature_delta',4.0,0);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (7,'language',1.0,1670411191);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (8,'switch_on_light_hour',12.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (9,'switch_on_light_minute',30.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (10,'light_duration',0.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (11,'light_period',21600.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (12,'light_modus',0.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (13,'switch_on_uv_hour',11.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (14,'switch_on_uv_minute',30.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (15,'uv_duration',300.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (16,'uv_period',21600.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (17,'uv_modus',0.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (18,'dehumidifier_modus',2.0,1669821889);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (19,'circulation_air_period',3600.0,1669814640);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (20,'setpoint_temperature',20.0,1669814640);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (21,'exhaust_air_duration',600.0,1669814640);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (22,'modus',3.0,1669814640);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (23,'setpoint_humidity',93.0,1669814640);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (24,'exhaust_air_period',28800.0,1669814640);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (25,'circulation_air_duration',600.0,1669814640);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (26,'agingtable',4.0,1662882894);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (27,'failure_humidity_delta',4.0,0);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (28,'failure_temperature_delta',10.0,0);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (29,'samples_refunit_tara',20.0,0);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (30,'spikes_refunit_tara',4.0,0);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (31,'save_temperature_humidity_loops',15.0,0);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (31,'save_temperature_humidity_loops',6.0,0);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (32,'sensorbus',0.0,0);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (33,'meat1_sensortype',0.0,1635614493);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (34,'meat2_sensortype',0.0,1635614493);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (35,'meat3_sensortype',0.0,1635614493);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (36,'meat4_sensortype',0.0,1635614493);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (33,'meat1_sensortype',0.0,1670411191);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (34,'meat2_sensortype',0.0,1670411191);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (35,'meat3_sensortype',0.0,1670411191);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (36,'meat4_sensortype',0.0,1670411191);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (37,'customtime_for_diagrams',3600.0,0);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (38,'secondsensortype',0.0,0);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (39,'agingtable_startperiod',1.0,1630242752);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (40,'agingtable_startday',1.0,1630242752);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (39,'agingtable_startperiod',1.0,1669814639);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (40,'agingtable_startday',1.0,1669814639);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (41,'tft_display_type',1.0,0);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (42,'internal_temperature_low_limit',0.0,0);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (43,'internal_temperature_high_limit',25.0,0);
-INSERT INTO "config" ("id","key","value","last_change") VALUES (44,'internal_temperature_hysteresis',5.0,0);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (44,'internal_temperature_hysteresis',3.0,0);
 INSERT INTO "config" ("id","key","value","last_change") VALUES (45,'shutdown_on_batlow',0.0,0);
-INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('Pi-Ager_started',0,0,0,' ','',0,1);
-INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('Int_Temp_Low_Limit',0,0,0,' ','',0,2);
-INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('Int_Temp_High_Limit',0,0,0,' ','',0,3);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (46,'diagram_modus',0.0,1645089748);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (47,'delay_cooler',30.0,0);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (48,'dewpoint_check',1.0,0);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (49,'humidity_check_hysteresis',0.2,0);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (50,'switch_control_uv_light',0.0,1670411191);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (51,'switch_control_light',0.0,1670411191);
+INSERT INTO "config" ("id","key","value","last_change") VALUES (52,'uv_check',0.0,0);
+INSERT INTO "atc_mi_thermometer_data" ("id","mi_data") VALUES (1,'');
+INSERT INTO "atc_mi_thermometer_mac" ("id","mi_mac_last3bytes") VALUES (1,'');
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (1,4,93,20,600,3600,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (2,4,90,19,600,3600,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (3,4,90,19,600,3600,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (4,4,90,18,600,3600,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (5,4,90,18,600,5400,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (6,4,90,17,600,5400,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (7,4,90,17,600,5400,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (8,4,89,16,600,5400,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (9,4,89,16,600,5400,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (10,4,88,15,600,5400,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (11,4,87,15,600,5400,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (12,4,86,14,600,5400,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (13,4,85,13,600,5400,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (14,4,80,13,600,7200,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (15,4,80,13,600,7200,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (16,4,80,13,600,7200,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (17,4,80,13,600,7200,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (18,4,80,13,600,7200,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (19,4,80,13,600,7200,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (20,4,80,12,600,7200,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (21,4,75,12,600,7200,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (22,4,75,12,600,10800,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (23,4,75,12,600,10800,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (24,4,75,12,600,10800,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (25,4,75,12,600,10800,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (26,4,75,12,600,10800,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (27,4,75,12,600,10800,600,28800,1,NULL);
+INSERT INTO "agingtable_Salami" ("id","modus","setpoint_humidity","setpoint_temperature","circulation_air_duration","circulation_air_period","exhaust_air_duration","exhaust_air_period","days","comment") VALUES (28,4,70,11,600,10800,600,28800,1,NULL);
+INSERT INTO "config_defrost" ("id","active","temperature","cycle_hours") VALUES (1,0,6.0,6);
+INSERT INTO "config_current_check" ("id","current_check_active","current_threshold","repeat_event_cycle") VALUES (1,0,1.0,15);
+INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('Pi-Ager_started',0,0,0,' ','Pi-Ager gestartet',1,1);
+INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('Int_Temp_Low_Limit',0,0,0,' ','Temp. tief',1,2);
+INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('Int_Temp_High_Limit',0,0,0,' ','Temp. hoch',1,3);
 INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('ups_bat_low',0,0,0,' ','',0,4);
 INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('ups_bat_ok',0,0,0,' ','',0,5);
 INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('powerfail',0,0,0,' ','',0,6);
 INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('powergood',0,0,0,' ','',0,7);
-INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('switch_on',0,0,0,' ','Schalter Ein',0,8);
-INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('switch_off',0,0,0,' ','',0,9);
+INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('switch_on',0,0,0,' ','Schalter Ein',1,8);
+INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('switch_off',0,0,0,' ','Schalter Aus',1,9);
 INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('Pi-Ager_offline',0,0,0,' ','',0,10);
+INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('Mi_Sensor_failed',0,0,0,' ','Bluetooth sensor out of range',0,11);
+INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('Mi_Sensor_ok',0,0,0,' ','Bluetooth sensor within range',0,12);
+INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('GPIO_status_changed',0,0,0,' ','one or more GPIO states changed',1,13);
+INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('Defrost_started',0,0,0,' ','Defrost process started',0,14);
+INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('Defrost_stopped',0,0,0,' ','Defrost process stopped',0,15);
+INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('cooler_turned_on_failure',0,0,0,' ','cooler should turn on if requested',1,16);
+INSERT INTO "config_messenger_event" ("event","e-mail","pushover","telegram","alarm","event_text","active","id") VALUES ('cooler_turned_off_failure',0,0,0,' ','cooler should turn off if requested',1,17);
 DROP INDEX IF EXISTS "all_sensors_index";
 CREATE INDEX IF NOT EXISTS "all_sensors_index" ON "all_sensors" (
 	"last_change"	ASC

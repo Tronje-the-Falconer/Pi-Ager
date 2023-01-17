@@ -18,23 +18,32 @@
         // if(isset ($modus_setting) && $modus_setting <> NULL) {      // ist das $_POST-Array gesetzt
         if($modus_setting != NULL) {             // ist das $_POST-Array gesetzt
             $SettingsInputIsValid = TRUE;
-            foreach ($_POST as $CheckInput) {   // Prüfen, ob nur Zahlen eingegeben wurden
-                if ($CheckInput != 'manvals_form_submit') {
-                    if (!(preg_match('/^-?\d+$/', $CheckInput))) {
-                        $message_settings = _('unauthorized character - please use only integers!');
-                        $SettingsInputIsValid = FALSE;
+            foreach ($_POST as $key => $value) {  // Prüfen, ob nur Zahlen eingegeben wurden
+                if ($key == 'manvals_form_submit') {
+                    continue;
+                }
+                else if ($key == 'setpoint_temperature_settings') {
+                    if (is_numeric($value) == FALSE) {
+                        $message_config = _('unauthorized character - please use only integers!');
+                        $ConfigInputIsValid = FALSE;
+                    }
+                }
+                else {
+                    if (!(preg_match('/^-?\d+$/', $value))) {
+                        $message_config = _('unauthorized character - please use only integers!');
+                        $ConfigInputIsValid = FALSE;
                     }
                 }
             }
             
             if ($SettingsInputIsValid == TRUE)
                 {
-                    if ( $setpoint_temperature_setting <= 70 &&  $setpoint_temperature_setting >= -11 &&                                                                    // Prüfung Soll-Temperatur
-                        $setpoint_humidity_setting<100 && $setpoint_humidity_setting>-1 &&                                                                      // Prüfung Soll-Feuchtigkeit
-                        $circulation_air_period_setting<1441 && $circulation_air_period_setting>-1 &&  (($circulation_air_period_setting+$circulation_air_duration_setting)>0) &&                 // Prüfung Intervall Umluft
-                        $circulation_air_duration_setting<1441 && $circulation_air_duration_setting>-1  &&                                                                // Prüfung Dauer Umluft
-                        $exhaust_air_period_setting<1441 && $exhaust_air_period_setting>-1 && (($exhaust_air_period_setting+$exhaust_air_duration_setting)>0) &&             // Prüfung Intervall Abluft
-                        $exhaust_air_duration_setting<1441 && $exhaust_air_duration_setting>-1                                                                  // Prüfung Dauer Abluft
+                    if ( $setpoint_temperature_setting <= 70 &&  $setpoint_temperature_setting >= -11 &&        // Prüfung Soll-Temperatur
+                        $setpoint_humidity_setting<100 && $setpoint_humidity_setting>-1 &&                      // Prüfung Soll-Feuchtigkeit
+                        $circulation_air_period_setting < 1441 && $circulation_air_period_setting > -1 &&       // Prüfung Intervall Umluft
+                        $circulation_air_duration_setting < 1441 && $circulation_air_duration_setting > -1  &&  // Prüfung Dauer Umluft
+                        $exhaust_air_period_setting < 1441 && $exhaust_air_period_setting > -1 &&             // Prüfung Intervall Abluft
+                        $exhaust_air_duration_setting < 1441 && $exhaust_air_duration_setting > -1            // Prüfung Dauer Abluft
                     )
                     {
                         # Eingestellte Werte in config/settings.json und logs/logfile.txt speichern
@@ -110,14 +119,14 @@
                             $logtext_uv_duration = "";
                         }
                         if ($uv_modus == 1) {
-                            $uv_modus_name = _('duration & period');
-                            $logtext_uv = _('uv period').": ".$uv_period ." "._('minutes') . " \n ";
-                            $logtext_uv_duration = _('uv duration').": ".$uv_duration ." "._('minutes');
+                            $uv_modus_name = _('ON/OFF duration'). " \n ";
+                            $logtext_uv = _('uv OFF duration').": ".$uv_period ." "._('minutes') . " \n ";
+                            $logtext_uv_duration = _('uv ON duration').": ".$uv_duration ." "._('minutes');
                         }
                         if ($uv_modus == 2) {
-                            $uv_modus_name = _('duration & timestamp');
+                            $uv_modus_name = _('duration & timestamp'). " \n ";
                             $logtext_uv = _('uv timestamp').": ".switch_on_uv_hour.":".$switch_on_uv_minute . " \n ";
-                            $logtext_uv_duration = _('uv duration').": ".$uv_duration ." "._('minutes');
+                            $logtext_uv_duration = _('uv ON duration').": ".$uv_duration ." "._('minutes');
                             
                         }
                         # Licht
@@ -127,14 +136,14 @@
                             $logtext_light_duration = "";
                         }
                         if ($light_modus == 1) {
-                            $light_modus_name = _('duration & period');
-                            $logtext_light = _('light period').": ".$light_period ." "._('minutes') . " \n ";
-                            $logtext_light_duration = _('light duration').": ".$light_duration ." "._('minutes');
+                            $light_modus_name = _('ON/OFF duration'). " \n ";
+                            $logtext_light = _('light OFF duration').": ".$light_period ." "._('minutes') . " \n ";
+                            $logtext_light_duration = _('light ON duration').": ".$light_duration ." "._('minutes');
                         }
                         if ($light_modus == 2) {
-                            $light_modus_name = _('duration & timestamp');
+                            $light_modus_name = _('duration & timestamp'). " \n ";
                             $logtext_light = _('light timestamp').": ".$switch_on_light_hour.":".$switch_on_light_minute . " \n ";
-                            $logtext_light_duration = _('light duration').": ".$light_duration ." "._('minutes');
+                            $logtext_light_duration = _('light ON duration').": ".$light_duration ." "._('minutes');
                             
                         }
                         $circulation_air_duration = $circulation_air_duration_setting;
@@ -167,7 +176,7 @@
                             $logstring = $logstring . " \n " . _('setpoint humidity').": ".$setpoint_humidity_setting."% "."&phi;";
                             $logstring = $logstring . " \n " . _('switch-on humidifier').": ".$switch_on_humidifier."% &phi; ("._('so at')." ".$switch_on_humidity."% &phi;)";
                             $logstring = $logstring . " \n " . _('switch-off humidifier').": ".$switch_off_humidifier."% &phi; ("._('so at')." ".$switch_off_humidity."% &phi;)";
-                            $logstring = $logstring . " \n " . _('delay humidifier')." ".$delay_humidify._('minutes');
+                            $logstring = $logstring . " \n " . _('delay humidifier').": ".$delay_humidify." "._('minutes');
                         }
 
                         if ($modus_setting == 4) {
@@ -176,17 +185,17 @@
                             $logstring = $logstring . " \n " . _('switch-off humidifier').": ".$switch_off_humidifier."% &phi; ("._('so at')." ".$switch_off_humidify."% &phi;)";
                             $logstring = $logstring . " \n " . _('switch-on exhausting').": ".$switch_on_humidifier."% &phi; ("._('so at')." ".$switch_on_dehumidify."% &phi;)";
                             $logstring = $logstring . " \n " . _('switch-off exhausting').": ".$switch_off_humidifier."% &phi; ("._('so at')." ".$switch_off_dehumidify."% &phi;)";
-                            $logstring = $logstring . " \n " . _('delay exhausting')." ".$delay_humidify._('minutes');
+                            $logstring = $logstring . " \n " . _('delay exhausting').": ".$delay_humidify." "._('minutes');
                         }
 
-                        $logstring = $logstring . " \n " . _('circulation air period').": ".$circulation_air_period." "._('minutes');
-                        $logstring = $logstring . " \n " . _('circulation air duration').": ".$circulation_air_duration." "._('minutes');
-                        $logstring = $logstring . " \n " . _('exhausting air period')." ".$exhausting_air_period." "._('minutes');
-                        $logstring = $logstring . " \n " . _('exhausting air duration').": ".$exhausting_air_duration." "._('minutes');
+                        $logstring = $logstring . " \n " . _('circulation air OFF duration').": ".$circulation_air_period." "._('minutes');
+                        $logstring = $logstring . " \n " . _('circulation air ON duration').": ".$circulation_air_duration." "._('minutes');
+                        $logstring = $logstring . " \n " . _('exhausting air OFF duration').": ".$exhausting_air_period." "._('minutes');
+                        $logstring = $logstring . " \n " . _('exhausting air ON duration').": ".$exhausting_air_duration." "._('minutes');
                         $logstring = $logstring . " \n " . _('dehumidify modus').": ".$dehumidifier_modus_name;
                         $logstring = $logstring . " \n " . _('uv modus').": ".$uv_modus_name;
-                        $logstring = $logstring . " \n " . $logtext_uv;
-                        $logstring = $logstring . " \n " . $logtext_uv_duration;
+                        $logstring = $logstring . $logtext_uv;
+                        $logstring = $logstring . $logtext_uv_duration;
                         $logstring = $logstring . " \n " . _('light modus').": ".$light_modus_name;
                         $logstring = $logstring . $logtext_light;
                         $logstring = $logstring . $logtext_light_duration;

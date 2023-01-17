@@ -267,16 +267,16 @@ function handleContent() {
         
         //------------------------Setzen der Scale1-Werte auf der Webseite
         if (str_gr_scale1.substring(0,3) == '---' || status_scale1 == 0) {
-            document.getElementById('json_scale1').innerHTML = '-----' + " gr";
+            document.getElementById('json_scale1').innerHTML = '-----' + " g";
         }
         else {
-            document.getElementById('json_scale1').innerHTML = str_gr_scale1 + " gr";
+            document.getElementById('json_scale1').innerHTML = str_gr_scale1 + " g";
         }
         if (str_gr_scale2.substring(0,3) == '---' || status_scale2 == 0) {
-            document.getElementById('json_scale2').innerHTML = '-----' + " gr";
+            document.getElementById('json_scale2').innerHTML = '-----' + " g";
         }
         else {
-            document.getElementById('json_scale2').innerHTML = str_gr_scale2 + " gr";
+            document.getElementById('json_scale2').innerHTML = str_gr_scale2 + " g";
         }
         
         //------------------------ Setzen der Meat Thermometer Werte

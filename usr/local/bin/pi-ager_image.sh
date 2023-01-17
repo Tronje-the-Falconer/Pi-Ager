@@ -167,11 +167,13 @@ umount $NFSMOUNT
 # NFS-Volume mounten
 echo "hänge NFS-Volume $NFSVOL ein"
 
-if [ -z $NFSOPT ]
+if [ -n "$NFSOPT" ]
 	then
+        echo "mount with options: $NFSOPT"
 		mount -t nfs4 $NFSVOL $NFSMOUNT -o $NFSOPT
         mountstatus=$?
  	else
+        echo "mount w/o options"
  		mount -t nfs4 $NFSVOL $NFSMOUNT
         mountstatus=$?
 fi
@@ -195,7 +197,7 @@ fi
 #        echo "Backupverzeichnis existiert = ${BACKUP_PFAD}"
 # fi
     
-if [ "$last_backup" = true ]; 
+if [ "$last_backup" = true ] 
 	then
 	echo "Load last backup file."
 	echo "Backup path is  ${BACKUP_PFAD}"
@@ -218,7 +220,7 @@ echo "Source File = $source_file"
 echo "do_copy     = $do_copy"
 echo "my_image    = $my_image"
 
-if [ "$do_copy" = true ]; 
+if [ "$do_copy" = true ] 
 	then
 		img_old="$source_file"
         new_image="PiAger_image.img"
@@ -258,7 +260,7 @@ echo "mount directory is ${mountdir}"
 mount ${loopback} ${mountdir}
 #read -p "Press enter to continue after mounting $loopback to $mountdir"
 
-mount -t msdos "$loopback_boot" "$mountdir/boot"
+mount -t vfat -o shortname=winnt "$loopback_boot" "$mountdir/boot"
 #read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
 #echo "Copy $mountdir/boot.bak/ to $mountdir/boot/"
 #rsync -a --info=progress2 "$mountdir/boot.bak/" "$mountdir/boot/"
@@ -379,9 +381,12 @@ raspi-config nonint do_hostname rpi-Pi-Ager
 
 
 ######################################################
-# rewrite /boot/setup.txt
+# rewrite /boot/setup.txt, remove /boot/setup.log
 ######################################################
-#mv /root/setup.txt /boot/setup.txt
+rm /boot/setup.txt
+rm /boot/setup.log
+wget -O setup.txt -nv https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/entwicklung/boot/setup.txt
+mv /setup.txt /boot/setup.txt
 
 ######################################################
 #Force password change for user root
@@ -407,14 +412,14 @@ UPDATE scale2_settings SET value='300' WHERE key='measuring_interval';
 UPDATE scale2_settings SET value='15' WHERE key='measuring_duration';
 UPDATE scale2_settings SET value='150' WHERE key='saving_period';
 UPDATE scale2_settings SET value='20' WHERE key='samples';
-UPDATE config SET value='1' WHERE key='switch_on_cooling_compressor';
-UPDATE config SET value='-1' WHERE key='switch_off_cooling_compressor';
-UPDATE config SET value='20' WHERE key='switch_on_humidifier';
+UPDATE config SET value='2' WHERE key='switch_on_cooling_compressor';
+UPDATE config SET value='0' WHERE key='switch_off_cooling_compressor';
+UPDATE config SET value='25' WHERE key='switch_on_humidifier';
 UPDATE config SET value='0' WHERE key='switch_off_humidifier';
 UPDATE config SET value='5' WHERE key='delay_humidify';
 UPDATE config SET value='12' WHERE key='switch_on_light_hour';
 UPDATE config SET value='30' WHERE key='switch_on_light_minute';
-UPDATE config SET value='240' WHERE key='light_duration';
+UPDATE config SET value='0' WHERE key='light_duration';
 UPDATE config SET value='21600' WHERE key='light_period';
 UPDATE config SET value='0' WHERE key='light_modus';
 UPDATE config SET value='11' WHERE key='switch_on_uv_hour';
@@ -423,13 +428,7 @@ UPDATE config SET value='300' WHERE key='uv_duration';
 UPDATE config SET value='21600' WHERE key='uv_period';
 UPDATE config SET value='0' WHERE key='uv_modus';
 UPDATE config SET value='3' WHERE key='modus';
-UPDATE config SET value='60' WHERE key = 'light_duration';
-UPDATE config SET value='180' WHERE key = 'light_perod';
-UPDATE config SET value='0' WHERE key = 'light_modus';
-UPDATE config SET value='60' WHERE key = 'uv_duration';
-UPDATE config SET value='180' WHERE key = 'uv_perod';
-UPDATE config SET value='0' WHERE key = 'uv_modus';
-UPDATE config SET value='15' WHERE key = 'save_temperature_humidity_loops';	
+UPDATE config SET value='6' WHERE key = 'save_temperature_humidity_loops';	
 UPDATE config SET value='0.0' WHERE key = 'meat1_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'meat2_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'meat3_sensortype';
@@ -437,6 +436,21 @@ UPDATE config SET value='0.0' WHERE key = 'meat4_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'secondsensortype';
 UPDATE config SET value='1.0' WHERE key = 'tft_display_type';
 UPDATE config SET value='0.0' WHERE key = 'shutdown_on_batlow';
+UPDATE config SET value='0.0' WHERE key = 'diagram_modus';
+UPDATE config SET value='30.0' WHERE key = 'delay_cooler';
+UPDATE config SET value='1' WHERE key = 'dewpoint_check';
+UPDATE config SET value='0.2' WHERE key = 'humidity_check_hysteresis';
+UPDATE config SET value='3600.0' WHERE key = 'customtime_for_diagrams';
+UPDATE config SET value='0.0' WHERE key = 'diagram_modus';
+
+UPDATE current_values SET value='0' WHERE key = 'status_piager';
+UPDATE current_values SET value='0' WHERE key = 'status_scale1';
+UPDATE current_values SET value='0' WHERE key = 'status_scale2';
+UPDATE current_values SET value='0' WHERE key = 'status_agingtable';
+UPDATE current_values SET value='0' WHERE key = 'status_humidity_check';
+
+UPDATE atc_mi_thermometer_mac SET mi_mac_last3bytes='' WHERE id='1';
+UPDATE atc_mi_thermometer_data SET mi_data='' WHERE id='1';
 
 DELETE FROM config_nfs_backup;
 delete FROM config_email_server;
@@ -463,7 +477,7 @@ UPDATE config_messenger_exception SET "telegram" = 0;
 UPDATE config_messenger_event SET "e-mail" = 0;
 UPDATE config_messenger_event SET "pushover" = 0;
 UPDATE config_messenger_event SET "telegram" = 0;
-UPDATE config_messenger_event SET "active" = 0;
+# UPDATE config_messenger_event SET "active" = 0;
 
 INSERT INTO "config_nfs_backup" ("id","nfsvol","number_of_backups","backup_name","nfsopt","active") VALUES ('1','','3','PiAgerBackup','nosuid,nodev','1');
 
@@ -572,7 +586,7 @@ losetup -d ${loopback}
 
 rm -rf $mountdir/boot
 rm -rf $mountdir
-if [[ ! -f "$img" ]];
+if [[ ! -f "$img" ]]
     then
         echo "cannot shrink $img"
     else

@@ -8,7 +8,7 @@
 #import RPi.GPIO as gpio
 
 ########################### Definition of variables
-version_number = '3.3.2'
+version_number = '3.3.3'
 # tables names
 config_settings_table = 'config'
 
@@ -30,6 +30,10 @@ meat_sensortypes_table = 'meat_sensortypes'
 all_sensors_table = 'all_sensors'
 all_scales_table = 'all_scales'
 nextion_table = 'nextion'
+atc_mi_thermometer_mac_table = 'atc_mi_thermometer_mac'
+atc_mi_thermometer_data_table = 'atc_mi_thermometer_data'
+defrost_table = 'config_defrost'
+config_current_check_table = 'config_current_check'
 
 # table keys
 switch_on_cooling_compressor_key = 'switch_on_cooling_compressor'
@@ -37,6 +41,8 @@ switch_off_cooling_compressor_key = 'switch_off_cooling_compressor'
 switch_on_humidifier_key = 'switch_on_humidifier'
 switch_off_humidifier_key = 'switch_off_humidifier'
 delay_humidify_key = 'delay_humidify'
+delay_cooler_key = 'delay_cooler'
+diagram_modus_key = 'diagram_modus'
 referenceunit_scale1_key = 'referenceunit_scale1'
 referenceunit_scale2_key = 'referenceunit_scale2'
 sensortype_key = 'sensortype'
@@ -70,6 +76,9 @@ second_sensor_temperature_key = 'sensor_extern_temperature'
 second_sensor_humidity_key = 'sensor_extern_humidity'
 second_sensor_dewpoint_key = 'sensor_extern_dewpoint'
 second_sensor_humidity_abs_key = 'sensor_extern_humidity_abs'
+
+switch_control_uv_light_key = 'switch_control_uv_light'
+switch_control_light_key = 'switch_control_light'
 
 status_pi_ager_key = 'status_piager'
 status_agingtable_key = 'status_agingtable'
@@ -140,6 +149,14 @@ internal_temperature_low_limit_key = 'internal_temperature_low_limit'
 internal_temperature_high_limit_key = 'internal_temperature_high_limit'
 internal_temperature_hysteresis_key = 'internal_temperature_hysteresis'
 shutdown_on_batlow_key = 'shutdown_on_batlow'
+dewpoint_check_key = 'dewpoint_check'
+status_humidity_check_key = 'status_humidity_check'
+humidity_check_hysteresis_key = 'humidity_check_hysteresis'
+mi_data_key = 'mi_data'
+mi_mac_last3bytes_key = 'mi_mac_last3bytes'
+MiSensor_battery_key = 'MiSensor_battery'
+status_defrost_key = 'status_defrost'
+uv_check_key = 'uv_check'
 
 # table fields
 key_field = 'key'
@@ -182,6 +199,12 @@ scale1_field = 'scale1'
 scale2_field = 'scale2'
 progress_field = 'progress'
 status_field = 'status'
+defrost_active_field = 'active'
+defrost_temperature_field = 'temperature'
+defrost_cycle_hours_field = 'cycle_hours'
+current_check_active_field = 'current_check_active'
+current_threshold_field = 'current_threshold'
+repeat_event_cycle_field = 'repeat_event_cycle'
 
 # Paths and urls
 thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/'
@@ -210,8 +233,8 @@ pin_without_voltage = (not pin_with_voltage) #   0V = 0 | GPIO.LOW   | FALSE
 relay_on = pin_without_voltage   # negative Logik!!! des Relay's, Schaltet bei 0 | GPIO.LOW  | False  ein
 relay_off = (not relay_on)       # negative Logik!!! des Relay's, Schaltet bei 1 | GPIO.High | True aus
 
-logspacer = "***********************************************"
-logspacer2 = '-------------------------------------------------------'
+logspacer  = "*****************************************"
+logspacer2 = '-----------------------------------------'
 
 ######################################### DATABASE-CHECK
 
@@ -238,7 +261,7 @@ table_keys[config_settings_table] = (switch_on_cooling_compressor_key,switch_off
                                      spikes_refunit_tara_key, save_temperature_humidity_loops_key, sensorbus_key,
                                      meat1_sensortype_key, meat2_sensortype_key, meat3_sensortype_key, meat4_sensortype_key, customtime_for_diagrams_key, sensorsecondtype_key,
                                      agingtable_startperiod_key, agingtable_startday_key, tft_display_type_key, internal_temperature_low_limit_key, internal_temperature_high_limit_key, internal_temperature_hysteresis_key,
-                                     shutdown_on_batlow_key)
+                                     shutdown_on_batlow_key, dewpoint_check_key, humidity_check_hysteresis_key)
 
 table_keys[current_values_table] = (sensor_temperature_key, sensor_humidity_key, status_circulating_air_key, status_cooling_compressor_key, status_exhaust_air_key,
                                     status_heater_key, status_light_key, status_uv_key, status_humidifier_key, status_dehumidifier_key, scale1_key, scale2_key, status_pi_ager_key,
@@ -246,7 +269,7 @@ table_keys[current_values_table] = (sensor_temperature_key, sensor_humidity_key,
                                     agingtable_period_starttime_key, status_light_manual_key, calibrate_scale1_key, calibrate_scale2_key, calibrate_weight_key,
                                     status_uv_manual_key, temperature_meat1_key, temperature_meat2_key, temperature_meat3_key, temperature_meat4_key, sensor_dewpoint_key, second_sensor_temperature_key,
                                     second_sensor_humidity_key, second_sensor_dewpoint_key, agingtable_period_day_key, scale1_thread_alive_key, scale2_thread_alive_key, aging_thread_alive_key, 
-                                    sensor_humidity_abs_key, second_sensor_humidity_abs_key)
+                                    sensor_humidity_abs_key, second_sensor_humidity_abs_key, status_humidity_check_key)
 
 table_keys[settings_scale1_table] = (samples_key,spikes_key,sleep_key,gain_key,bits_to_read_key,referenceunit_key,scale_measuring_interval_key,measuring_duration_key,saving_period_key,offset_scale_key)
 table_keys[settings_scale2_table] = (samples_key,spikes_key,sleep_key,gain_key,bits_to_read_key,referenceunit_key,scale_measuring_interval_key,measuring_duration_key,saving_period_key,offset_scale_key)

@@ -43,7 +43,7 @@
                                             echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
                                             <td></td>
                                             <td>';
-                                            echo "Backup is currently running! ";
+                                            echo _('Backup is currently running!');
                                             echo '</td>';
                                         }
                                         elseif ($grepmain == NULL){ // wenn main.py nicht läuft und der Status in DB aus ist
@@ -91,7 +91,7 @@
                                                 echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
                                                 <td></td>
                                                 <td>';
-                                                echo "Backup is currently running! ";
+                                                echo _('Backup is currently running!');
                                                 echo '</td></tr>';
                                             }
                                             else {
@@ -190,7 +190,7 @@
                                     <h2><?php echo _('agingtable') ?></h2>
                                     <!----------------------------------------------------------------------------------------Reifetabelle auswählen-->
                                     <?php $agingtable_names = get_agingtable_names(); ?>
-                                    <table style="width: 100%;" class="switching_state miniature_writing">
+                                    <table style="width: 100%;" >
                                         <tr>
                                             <td width="100px"></td>
                                             <td width="100px"></td>
@@ -206,7 +206,7 @@
                                                 echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
                                                 <td></td>
                                                 <td>';
-                                                echo "Backup is currently running! ";
+                                                echo _('Backup is currently running!');
                                                 echo '</td></tr>';
                                             }
                                             else {
@@ -223,6 +223,9 @@
                                                     echo '</tr>';
                                                 }                                       
                                                 else {
+                                                    echo '<td></td><td></td><td style="text-align: left;">';
+                                                    echo _('Selected aging table');
+                                                    echo ' : ' . $desired_maturity . '<br></td>'; 
                                                     echo '<form  method="post"> <tr> <td>';
                                                 
                                                     if ($grepagingtable == 0){
@@ -239,13 +242,20 @@
 
                                                     if (isset ($agingtable_names)){
                                                         foreach($agingtable_names as $name) {
-                                                            if ($name==$desired_maturity){
-                                                                echo '<input type="radio" name="agingtable" value="'.$name.'" checked="checked"><label> '.$name.'</label><br>';
+                                                            if ($name == $desired_maturity){
+                                                                echo '<input type="radio" ';
+                                                                if ($grepagingtable != 0){
+                                                                    echo 'disabled="true" ';
+                                                                }
+                                                                echo 'name="agingtable" value="'.$name.'" checked="checked"><label> '.$name.'</label><br>';
                                                             }
                                                             else
                                                             {
-                                                                echo '<input type="radio" name="agingtable" value="'.$name.'"><label> '.$name.'</label><br>';
-
+                                                                echo '<input type="radio" ';
+                                                                if ($grepagingtable != 0){
+                                                                    echo 'disabled="true" ';
+                                                                }                                                                
+                                                                echo 'name="agingtable" value="'.$name.'"><label> '.$name.'</label><br>';
                                                             }
                                                         }
                                                     }
@@ -271,7 +281,11 @@
                                                         <td style="text-align: left;">';
 
                                                         if (isset ($agingtable_names)){
-                                                            echo "<button class=\"art-button\" name=\"select_agingtable\" value=\"select_agingtable\"onclick=\"return confirm('"._('select new agingtable?')."');\">"._('select')."</button>";
+                                                            echo "<button class=\"art-button\" ";
+                                                            if ($grepagingtable != 0){
+                                                                echo 'disabled="true" ';
+                                                            }
+                                                            echo "name=\"select_agingtable\" value=\"select_agingtable\"onclick=\"return confirm('"._('select new agingtable?')."');\">"._('select')."</button>";
                                                         }
 
                                                   echo '</td>
@@ -323,7 +337,12 @@
                                                             }
                                                             else
                                                             {
-                                                                echo '<option value="'.$name.'" selected>'.$name.'<br>';
+                                                            //    if ($grepagingtable == 0) {
+                                                            //        echo '<option value="'.$name.'" selected>'.$name.'<br>';
+                                                            //    }
+                                                            //    else {
+                                                                    echo '<option value="'.$name.'" disabled>'.$name.'<br>';
+                                                            //    }
                                                             }
                                                         }
                                                         echo '</select>';
@@ -394,10 +413,10 @@
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('modus') ?><span class="tooltiptext"><?php echo _('aging-modus'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">&phi;<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate d') ?><span class="tooltiptext"><?php echo _('timer of the circulation air duration in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate p') ?><span class="tooltiptext"><?php echo _('timer of the circulation air period in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust d') ?><span class="tooltiptext"><?php echo _('timer of the exhausting air duration in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust p') ?><span class="tooltiptext"><?php echo _('timer of the exhausting air period in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate ON duration') ?><span class="tooltiptext"><?php echo _('timer of the circulation air ON duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate OFF duration') ?><span class="tooltiptext"><?php echo _('timer of the circulation air OFF duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust ON duration') ?><span class="tooltiptext"><?php echo _('timer of the exhausting air ON duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust OFF duration') ?><span class="tooltiptext"><?php echo _('timer of the exhausting air OFF duration in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('days') ?><span class="tooltiptext"><?php echo _('duration of hanging phase in days'); ?></span></div></td>
                                         </tr>
                                         <?php 
@@ -488,11 +507,13 @@
                                 <?php 
                                     include ('config.php'); 
                                 ?>
-                            <!--    <script>
-                                    if ( window.history.replaceState ) {
+                                
+                                <script>
+                                    if ( window.history.replaceState ) {    // avoid page confirmation on refresh
                                         window.history.replaceState( null, null, window.location.href );
                                     }
-                                </script> -->
+                                </script>
+                                
                                 <!----------------------------------------------------------------------------------------Content Ende-->
                             </div>
                         </div>

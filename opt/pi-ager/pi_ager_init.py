@@ -111,6 +111,7 @@ def set_system_starttime():
     global uv_stoptime
     global light_starttime
     global light_stoptime
+    global defrost_cycle_start
     # global logger
 
     # logger.debug('set_system_starttime()')
@@ -123,16 +124,15 @@ def set_system_starttime():
     uv_stoptime = uv_starttime
     light_starttime = system_starttime
     light_stoptime = light_starttime
-
+    defrost_cycle_start = system_starttime
+    
 def set_language():
     """
     setting up language
     """
     # global logger
     
-    # logger.debug('set_language()')
     cl_fact_logger.get_instance().debug('set_language()')
-    # Sprache der Textausgabe
     language = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.language_key)
     
     ####   Set up message catalog access
@@ -140,10 +140,15 @@ def set_language():
      # _ = translation.ugettext
     
     if language == 1:
-        translation = gettext.translation('pi_ager', '/var/www/locale', languages=['en'], fallback=True)
+        translation = gettext.translation('pi-ager', '/var/www/locale', languages=['de_DE'], fallback=True)
+        cl_fact_logger.get_instance().debug('Language set to de_DE')
+        cl_fact_logger.get_instance().debug('translation : ' + str(translation))
+        
     elif language == 2:
-        translation = gettext.translation('pi_ager', '/var/www/locale', languages=['de'], fallback=True)
-
+        translation = gettext.translation('pi-ager', '/var/www/locale', languages=['en_GB'], fallback=True)
+        cl_fact_logger.get_instance().debug('Language set to en_GB')        
+        cl_fact_logger.get_instance().debug('translation : ' + str(translation))
+        
     translation.install()
 
 def setup_GPIO():
