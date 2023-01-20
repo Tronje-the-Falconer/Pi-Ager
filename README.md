@@ -5,7 +5,7 @@ The project is a purely private project, by meat lovers for meat lovers.
 
 It is not allowed to use the software, e.g. in ready-made refrigerators, for sale and commercial use.
 
-As this project currently has mainly German users, the main documentation is available on the website [pi-ager.org](pi-aher.org) in German.
+As this project currently has mainly German users, the main documentation is available on the website [pi-ager.org](pi-ager.org) in German.
 
 ## Getting Started
 To get startet from Beginning use this tutorial on pi-ager.org see in [standalone installation](http://pi-ager.org/installation/standalone_installation)
