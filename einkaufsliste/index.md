@@ -17,8 +17,8 @@ Wenn jemand fehlerhafte Links entdeckt oder bessere Komponenten vorschlagen möc
 #### Raspberry Pi
 
 
-* Aktuelle Softeareversion: 3.3.2
-*  NEU [Pi zero 2 W](https://www.reichelt.de/de/de/raspberry-pi-zero-2-w-4x-1-ghz-512-mb-ram-wlan-bt-rasp-pi-zero2-w-p313902.html?&trstct=pos_0&nbc=1) Dieses ist die empfohlene Variante da die Pi-Ager Platine dafür ausgelegt ist, führt zu schnelleren Aufbauzeiten des Userintercace und man auch das integrierte Wlan Modul nutzen kann.
+* Aktuelle Softeareversion: 3.3.3
+* [Pi zero 2 W](https://www.reichelt.de/de/de/raspberry-pi-zero-2-w-4x-1-ghz-512-mb-ram-wlan-bt-rasp-pi-zero2-w-p313902.html?&trstct=pos_0&nbc=1) Dieses ist die empfohlene Variante da die Pi-Ager Platine dafür ausgelegt ist, führt zu schnelleren Aufbauzeiten des Userintercace und man auch das integrierte Wlan Modul nutzen kann.
 * [Pi zero W](https://shop.pimoroni.de/products/raspberry-pi-zero-w) Die Platine ist dafür ausgelegt und man kann auch das integrierte Wlan Modul nutzen.
 * !!! Achtung keinen Zero WH kaufen da diese Variannte die Stiftleiste schon draufgelötet hat !!!
 * Alternative 1: 
@@ -46,56 +46,61 @@ Wer also selbst löten kann, baucht folgende Komponenten:
 
   * Allgemeine Komponennten für die Pi-Ager Platine: (die folgende Liste mit den einzelen Komponennten muss für die 2.5 er Version noch aktualisiert werden, der Link zu Reichelt ist aber aktuell auf die 2,5 Version abgestimmt.)
   
-    * 2 x JUMPER, schw. m. Grifflasche - [JUMPER 2,54 SW ](https://www.reichelt.de/kurzschlussbruecke-schw-m-grifflasche-jumper-2-54gl-sw-p9019.html?) (Reichelt EKL)
-    * 2 x Stiftleisten 2,54 mm, 1X36, gerade- [MPE 087-1-036](https://www.reichelt.de/stiftleisten-2-54-mm-1x36-gerade-mpe-087-1-036-p119890.html?) (Reichelt EKL)
-    * 1 x Stiftleisten 2,54 mm, 2X20, gerade- [MPE 087-2-040](https://www.reichelt.de/stiftleisten-2-54-mm-2x20-gerade-mpe-087-2-040-p119900.html?&trstct=pos_1) (Reichelt EKL)
-    * 2 x Buchsenleisten 2,54 mm, 1X04, gerade - [MPE 094-1-004](https://www.reichelt.de/buchsenleisten-2-54-mm-1x04-gerade-mpe-094-1-004-p119913.html?) (Reichelt EKL)
-    * 2 x Buchsenleisten 2,54 mm, 1X06, gerade - [MPE 094-1-006](https://www.reichelt.de/buchsenleisten-2-54-mm-1x06-gerade-mpe-094-1-006-p119915.html?) (Reichelt EKL)   
-    * 1 x Buchsenleisten 2,54 mm, 1X10, gerade - [MPE 094-1-008](https://www.reichelt.de/buchsenleisten-2-54-mm-1x08-gerade-mpe-094-1-008-p119917.html?r=1) (Reichelt EKL)
-    * 2 x Buchsenl. 1x20 gerade für Raspberry Zero [BL 1X20G8 2,54](https://www.reichelt.de/20pol-buchsenleiste-gerade-rm-2-54-h-8-5mm-bl-1x20g8-2-54-p51827.html?)  (Reichelt EKL)
+    * 2 x JUMPER, schw. m. Grifflasche - [JUMPER 2,54GL SW] (Reichelt EKL)
+    * 2 x Stiftleisten 2,54 mm, 1X36, gerade- [MPE 087-1-036](Reichelt EKL)
+    * 1 x Stiftleisten 2,54 mm, 2X20, gerade- [MPE 087-2-040](Reichelt EKL)
+    * 2 x Buchsenleisten 2,54 mm, 1X04, gerade - [MPE 094-1-004] (Reichelt EKL)
+    * 2 x Buchsenleisten 2,54 mm, 1X06, gerade - [MPE 094-1-006] (Reichelt EKL)   
+    * 1 x Präz-Buchsenleisten 2,54 mm, 1X36, gerade - [MPE 115-1-036] (Reichelt EKL)
+    * 2 x Buchsenl. 1x20 gerade für Raspberry Zero [BL 1X20G8 2,54]( (Reichelt EKL)
     
     * Option - Pufferung Spannungversorgung Sensor (auf Hauptplatine):
-    * 1 x SMD Kondenator G1206 - 100µF 6,3V [X5R-G1206 100/6](https://www.reichelt.de/smd-vielschichtkondensator-g1206-100-f-6-3v-x5r-g1206-100-6-p89744.html?) (Reichelt EKL)
+    * 4 x SMD Kondenator G1206 - 100µF 6,3V [X5R-G1206 100/6](Reichelt EKL)
     
   * Anschluss Komponenten für die Pi-Ager Platine (empfohlene Variante) Alternative siehe untere Auflistung Steckerklemmen (siehe Anmerkung 1) 
   
-    * 8 x Lötbare Schraubklemme - 2-pol, RM 5,08 mm, 90° - [RND 205-00232](https://www.reichelt.de/RND-connect/RND-205-00232/3/index.html?ACTION=3&LA=5&ARTICLE=170277&GROUPID=7552&artnr=RND+205-00232) (Reichelt EKL)
-    * 3 x Lötbare Schraubklemme - 3-pol, RM 5,08 mm, 90° - [RND 205-00233](https://www.reichelt.de/RND-connect/RND-205-00233/3/index.html?ACTION=3&LA=5&ARTICLE=170278&GROUPID=7552&artnr=RND+205-00233) (Reichelt EKL)
+    * 8 x Lötbare Schraubklemme - 2-pol, RM 5,08 mm, 90° - [DG127 5,08-2] (Reichelt EKL)
+    * 3 x Lötbare Schraubklemme - 3-pol, RM 5,08 mm, 90° - [DG127 5,08-3] (Reichelt EKL)
     
     
   * SMD Bauteile für den Hardware Alarm
   
-    * 1 x BC 848A Transistor SMD NPN -  [BC 848B SMD](https://www.reichelt.de/BC-Transistoren/BC-848B-SMD/3/index.html?ACTION=3&LA=5&ARTICLE=18565&GROUPID=7206&artnr=BC+848B+SMD) (Reichelt EKL)
-    * 1 x SMD-Widerstand 0805 3,3kOhm 1,0% - [RND 0805 1 3,3K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/RND-0805-1-3-3K/3/index.html?ACTION=3&LA=5&ARTICLE=183240&GROUPID=7971&artnr=RND+0805+1+3%2C3K) (Reichelt EKL)
-    * 1 x Summer -  [SUMMER TDB 05](https://www.reichelt.de/Signalakustik/SUMMER-TDB-05/3/index.html?ACTION=3&LA=5&ARTICLE=35918&GROUPID=6560&artnr=SUMMER+TDB+05) (Reichelt EKL)
+    * 1 x BC 848A Transistor SMD NPN -  [BC 848B SMD] (Reichelt EKL)
+    * 1 x SMD-Widerstand 0805 3,3kOhm 1,0% - [SMD-0805 3,30K] (Reichelt EKL)
+    * 1 x Summer -  [SUMMER TDB 05] (Reichelt EKL)
     
   * SMD Bauteile für zusätzliche Temperaturmessung
-     * 1 x Spannungsregler 3.3V -  [LP 2985 IM5-3,3 ](https://www.reichelt.de/ICs-LMC-LS-/LP-2985-IM5-3-3/3/index.html?ACTION=3&LA=5&ARTICLE=109425&GROUPID=5467&artnr=LP+2985+IM5-3%2C3) (Reichelt EKL)
-     * 1 x 12-bit A/D Converter -  [MCP 3204-CI/SL](https://www.reichelt.de/ICs-MCP-3-5-/MCP-3204-CI-SL/3/index.html?ACTION=3&LA=5&ARTICLE=90078&GROUPID=5472&artnr=MCP+3204-CI%2FSL) (Reichelt EKL) 
-     * 4 x SMD-Widerstand 0805 47kOhm 0,1% - [SPR-0805 47,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/SPR-0805-47-0K/3/index.html?ACTION=3&LA=5&ARTICLE=123351&GROUPID=7971&artnr=SPR-0805+47%2C0K) (Reichelt EKL)
-     * 4 x SMD-Widerstand 0805 1kOhm 1,0% - [RND 0805 1,0K](https://www.reichelt.de/SMD-0805-von-1-bis-910-kOhm/RND-0805-1-1-0K/3/index.html?ACTION=3&LA=5&ARTICLE=183228&GROUPID=7971&artnr=RND+0805+1+1%2C0K) (Reichelt EKL)
-     * 1 x SMD-Kerko 0805 10nF - [KEM C0G0805 10N](https://www.reichelt.de/vielschicht-kerko-10nf-50v-125-c-kem-c0g0805-10n-p207052.html?&trstct=pos_1) (Reichelt EKL)
-     * 6 x SMD-Kerko 0805 100nF - [KEM X7R0805 100N](https://www.reichelt.de/vielschicht-kerko-100nf-50v-125-c-kem-x7r0805-100n-p207073.html?&GROUP=B3517&START=0&SORT=artnr&OFFSET=16) (Reichelt EKL)
-     * 2 x SMD-Kerko 0805 10µF - [KEM X5R0805 10U ](https://www.reichelt.de/Vielschicht-SMD-G0805/KEM-X5R0805-10U/3/index.html?ACTION=3&LA=5&ARTICLE=207089&GROUPID=8048&artnr=KEM+X5R0805+10U) (Reichelt EKL)
-     * 1 x SMD-Widerstand 0805 0 Ohm 5% - [RND 0805 0](https://www.reichelt.de/smd-widerstand-0805-0-ohm-125-mw-5-rnd-0805-0-p183146.html?) (Reichelt EKL)     
+     * 1 x Spannungsregler 3.3V -  [LP 2985 IM5-3,3 ] (Reichelt EKL)
+     * 1 x 12-bit A/D Converter -  [MCP 3204-CI/SL] (Reichelt EKL) 
+     * 3 x SMD-Widerstand 0805 47kOhm 0,1% - [SPR-0805 47,0K] (Reichelt EKL)
+     * 4 x SMD-Widerstand 0805 1kOhm 1,0% - [RND 0805 1,0K] (Reichelt EKL)
+     * 1 x SMD-Kerko 0805 10nF - [X7R-G0805 10N] (Reichelt EKL)
+     * 6 x SMD-Kerko 0805 100nF - [KEM X7R0805 100N]( (Reichelt EKL)
+     * 2 x SMD-Kerko 0805 10µF - [KEM X5R0805 10U ] (Reichelt EKL)
+      
      * (*2) Die Klinkenbuchsen: siehe Punkt "Komponenten die bei Reichelt nicht erhältlich sind"
      
   * Bauteile für den Digitaleingang
-     * 1 x Widerstand 1,00K-  [METALL 1,00K](https://www.reichelt.de/0-6W-1-1-00-k-Ohm-9-76-k-Ohm/METALL-1-00K/3/index.html?ACTION=3&LA=5&ARTICLE=11403&GROUPID=3078&artnr=METALL+1%2C00K) (Reichelt EKL)
-     * 1 x Widerstand 10,0K-  [METALL 10,0K](https://www.reichelt.de/0-6W-1-10-0-k-Ohm-95-3-k-Ohm/METALL-10-0K/3/index.html?ACTION=3&LA=5&ARTICLE=11449&GROUPID=3079&artnr=METALL+10%2C0K) (Reichelt EKL)
+     * 1 x Widerstand 1,00K-  [METALL 1,00K] (Reichelt EKL)
+     * 1 x Widerstand 10,0K-  [METALL 10,0K] (Reichelt EKL)
    
    * SMD Bauteile für das USV Modul
-     * 1 x MOSFET, N-CH, 50V, 0,22A, 0,36W, SOT-23 - [BSS 138 SMD](https://www.reichelt.de/mosfet-n-ch-50v-0-22a-0-36w-sot-23-bss-138-smd-p41437.html?) (Reichelt EKL)
-     * 2 x SMD-Widerstand, 0805, 10 kOhm, 125 mW, 1%- [RND 0805 1 10K ](https://www.reichelt.de/smd-widerstand-0805-10-kohm-125-mw-1-rnd-0805-1-10k-p183251.html?) (Reichelt EKL)
-     * 1 x Widerstand 10,0K-  [METALL 10,0K](https://www.reichelt.de/widerstand-metallschicht-10-0-kohm-0207-0-6-w-1-metall-10-0k-p11449.html?) (Reichelt EKL)
-     * 1 x Widerstand 6,80K-  [METALL 6,80K](https://www.reichelt.de/widerstand-metallschicht-6-8-kohm-0207-0-6-w-0-1-mpr-6-80k-p13032.html?) (Reichelt EKL)
+     * 1 x MOSFET, N-CH, 50V, 0,22A, 0,36W, SOT-23 - [BSS 138 SMD] (Reichelt EKL)
+     * 2 x SMD-Widerstand, 0805, 10 kOhm, 125 mW, 1%- [SMD-0805 10,0K] (Reichelt EKL)
+     * 1 x Widerstand 10,0K-  [METALL 10,0K] (Reichelt EKL)
+     * 1 x Widerstand 6,80K-  [METALL 6,80K] (Reichelt EKL)
+     * 1 x Buchsenleise 8 polig  [BL 1X08G7 2,54] (Reichelt EKL)
     
    * Bauteile für die Verbindung der Pi-Ager Platine und Relaisboard: 
-     * 2 x Buchsenl. 20pol gewinkelt für Verbindung mit Relais Platine [BL 1X20W8 2,54 ](https://www.reichelt.de/20pol-buchsenl-gewinkelt-rm-2-54-h-8-5mm-bl-1x20w8-2-54-p51847.html?) (Reichelt EKL)
+     * 1 x Platinensteckverbinder mit Leitung [PS 25/3G WS]  (Reichelt EKL)
+     * 3 x Platinensteckverbinder mit Leitung [PS 25/10G WS]  (Reichelt EKL)
+     * 1 x Leiterlattenklemme [PHC 1725669]  (Reichelt EKL)
+     * 2 x Leiterlattenklemme [PHC 1725685]  (Reichelt EKL)
      
    * zusätzliche Bauteile für die Waagen: 
-     * SMD Kondenator G1206 - 100µF 6,3V [X5R-G1206 100/6](https://www.reichelt.de/smd-vielschichtkondensator-g1206-100-f-6-3v-x5r-g1206-100-6-p89744.html?) (Reichelt EKL)
+     * 2 x SMD Kondenator G1206 - 100µF 6,3V [X5R-G1206 100/6] (Reichelt EKL)
  
+ ------
 
  * (2) Anmerkung
    * Komponenten die bei Reichelt nicht erhältlich sind:
