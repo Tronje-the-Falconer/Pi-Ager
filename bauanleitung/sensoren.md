@@ -105,10 +105,12 @@ Zwischen Pin 2 (VDD) und Pin 4 (DATA) des Sensors müssen wir einen 10KOhm Wider
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/SHT3x.JPG" alt="SHT3x" width="150">
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/SHT3x2.JPG" alt="SHT3x2" width="150">
 
-##### Für den internen Sensor (Hauptsensor) muss die Adresse nicht umgestellt werden, der Sensor kann so genutzt werden wie er geliefert wurde. (in diesem Fall hat der die Busadresse 44)
+##### Interner Sensor (Hauptsensor)
+Für den internen Sensor muss die Adresse nicht umgestellt werden, der Sensor kann so genutzt werden wie er geliefert wurde. (in diesem Fall hat der die Busadresse 44)
 
 
-##### Adresse umstellen für den externen Sensor:
+##### Externer Sensor 
+Adresse umstellen für den externen Sensor:
 
 Der Pin AD ist im Lieferzustend über einen 10kOhm Widerstand auf Masse verbunden und hat somit ein Lo Level und die Adresse 44.
 Möchte man die Adresse ändern, muss man an den Pin AD ein High Level anlegen. 
