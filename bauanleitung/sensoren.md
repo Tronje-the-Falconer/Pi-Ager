@@ -105,7 +105,7 @@ Zwischen Pin 2 (VDD) und Pin 4 (DATA) des Sensors müssen wir einen 10KOhm Wider
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/SHT3x.JPG" alt="SHT3x" width="150">
 <img src="https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/resources/bilder/SHT3x2.JPG" alt="SHT3x2" width="150">
 
-##### für den internen Sensor (Hauptsensor) muss die Adresse nicht umgestellt werden, der Sensor kann so genutzt werden wie es geliefert wurde. ( in diesem Fall hat der die Busadresse 44 )
+##### für den internen Sensor (Hauptsensor) muss die Adresse nicht umgestellt werden, der Sensor kann so genutzt werden wie er geliefert wurde. (in diesem Fall hat der die Busadresse 44)
 
 
 ##### Adresse umstellen für den externen Sensor:
