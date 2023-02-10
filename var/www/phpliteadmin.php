@@ -417,7 +417,42 @@ $lang = array(
 	"help11_x" => "The maximum size of file uploads is determined by three PHP settings: <em>upload_max_filesize</em>, <em>post_max_size</em> and <em>memory_limit</em>. The smallest of these three limits the maximum size for file uploads. To upload larger files, adjust these values in your <em>php.ini</em> file."
 
 );
+//	class MicroTimer (issue #146)
+//	wraps calls to microtime(), calculating the elapsed time and rounding output
+//
+class MicroTimer {
 
+	private $startTime, $stopTime;
+
+	// creates and starts a timer
+	function __construct()
+	{
+		$this->startTime = microtime(true);
+	}
+
+	// stops a timer
+	public function stop()
+	{
+		$this->stopTime = microtime(true);
+	}
+
+	// returns the number of seconds from the timer's creation, or elapsed
+	// between creation and call to ->stop()
+	public function elapsed()
+	{
+		if ($this->stopTime)
+			return round($this->stopTime - $this->startTime, 4);
+
+		return round(microtime(true) - $this->startTime, 4);
+	}
+
+	// called when using a MicroTimer object as a string
+	public function __toString()
+	{
+		return (string) $this->elapsed();
+	}
+
+}
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //there is no reason for the average user to edit anything below this comment
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -489,7 +524,7 @@ if($language != 'en') {
 // stripslashes if MAGIC QUOTES is turned on
 // This is only a workaround. Please better turn off magic quotes!
 // This code is from http://php.net/manual/en/security.magicquotes.disabling.php
-if (get_magic_quotes_gpc()) {
+/*if (get_magic_quotes_gpc()) {
 	$process = array(&$_GET, &$_POST, &$_COOKIE, &$_REQUEST);
 	while (list($key, $val) = each($process)) {
 		foreach ($val as $k => $v) {
@@ -504,7 +539,7 @@ if (get_magic_quotes_gpc()) {
 	}
 	unset($process);
 }
-
+*/
 
 //data types array
 $sqlite_datatypes = array("INTEGER", "REAL", "TEXT", "BLOB","NUMERIC","BOOLEAN","DATETIME");
@@ -5983,42 +6018,8 @@ class GetParameters
 		header("Location: ".$protocol."://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].$url, true, 302);
 		exit;
 	}
-}//	class MicroTimer (issue #146)
-//	wraps calls to microtime(), calculating the elapsed time and rounding output
-//
-class MicroTimer {
-
-	private $startTime, $stopTime;
-
-	// creates and starts a timer
-	function __construct()
-	{
-		$this->startTime = microtime(true);
-	}
-
-	// stops a timer
-	public function stop()
-	{
-		$this->stopTime = microtime(true);
-	}
-
-	// returns the number of seconds from the timer's creation, or elapsed
-	// between creation and call to ->stop()
-	public function elapsed()
-	{
-		if ($this->stopTime)
-			return round($this->stopTime - $this->startTime, 4);
-
-		return round(microtime(true) - $this->startTime, 4);
-	}
-
-	// called when using a MicroTimer object as a string
-	public function __toString()
-	{
-		return (string) $this->elapsed();
-	}
-
 }
+
 //	class Resources (issue #157)
 //	outputs secondary files, such as css and javascript
 //	data is stored gzipped (gzencode) and encoded (base64_encode)

@@ -149,7 +149,7 @@
         $filtered = array();
         
         for ($i = 0; $i < $element_count; ++$i) {
-            $start_index = $i - $cnt_index/2;
+            $start_index = intval($i - $cnt_index/2);
             $end_index = $start_index + $cnt_index;
             $sum = 0;
             $cnt_sum = 0;
@@ -408,6 +408,6 @@
     $circulate_air_timestamps_axis = $circulate_air_data_diagram[0];
     $circulate_air_dataset = $circulate_air_data_diagram[1];
     
-    logger('DEBUG', 'read_values_for_diagrams performed');
+    logger('DEBUG', 'chartsdata_diagrams performed');
  
 ?>

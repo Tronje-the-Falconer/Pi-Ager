@@ -3,7 +3,7 @@
 //
 
 async function handleContentStatus( msg ) {
-    console.log('in handleContentStatus');
+//    console.log('in handleContentStatus');
     var myObj = JSON.parse(msg);
     
     var grepmain = myObj.grepmain;
@@ -146,6 +146,9 @@ async function handleContentStatus( msg ) {
     $('#scale2_onoff_status_id').attr('src', myObj.scale2_onoff_status_id);    
     $('#scale2_status_text_id').html(myObj.scale2_status_text_id); 
 
+    $('#pi_ager_uptime_id').html(myObj.pi_ager_uptime_formatted);
+    $('#uv_uptime_id').html(myObj.uv_uptime_formatted);
+    
     if (main_status_text.localeCompare( myObj.main_status_text ) != 0) {   // refresh when mode changed
         window.location.href = "index.php"; 
     }

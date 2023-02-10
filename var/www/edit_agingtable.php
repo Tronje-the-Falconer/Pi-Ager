@@ -39,16 +39,16 @@
 
                                 <form method="post">
                                     <table id="show_agingtable" class="show_agingtable" style="table-layout: fixed;">
-                                        <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
+                                        <tr style="background-color: #F0F5FB;">
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('phase') ?><span class="tooltiptext"><?php echo _('phase'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('modus') ?><span class="tooltiptext"><?php echo _('aging-modus'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">&phi;<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip">°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate d') ?><span class="tooltiptext"><?php echo _('timer of the circulation air duration in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate p') ?><span class="tooltiptext"><?php echo _('timer of the circulation air period in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust d') ?><span class="tooltiptext"><?php echo _('timer of the exhausting air duration in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust p') ?><span class="tooltiptext"><?php echo _('timer of the exhausting air period in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('days') ?><span class="tooltiptext"><?php echo _('duration of hanging phase in days'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate ON duration') ?><span class="tooltiptext"><?php echo  _('timer of the circulation air ON duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate OFF duration') ?><span class="tooltiptext"><?php echo _('timer of the circulation air OFF duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust ON duration') ?><span class="tooltiptext"><?php echo _('timer of the exhausting air ON duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust OFF duration') ?><span class="tooltiptext"><?php echo _('timer of the exhausting air OFF duration in minutes'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('hours') ?><span class="tooltiptext"><?php echo _('duration of hanging phase in hours'); ?></span></div></td>
                                         </tr>
 
                                         <?php 
@@ -84,9 +84,9 @@
                                                     if (!empty($dataset[$agingtable_exhaust_air_period_field])){
                                                         $data_exhaust_air_period = $dataset[$agingtable_exhaust_air_period_field]/60;
                                                     } else {$data_exhaust_air_period = '';}
-                                                    if (!empty($dataset[$agingtable_days_field])){
-                                                        $data_days = $dataset[$agingtable_days_field];
-                                                    } else {$data_days = '';}
+                                                    if (!empty($dataset[$agingtable_hours_field])){
+                                                        $data_hours = $dataset[$agingtable_hours_field];
+                                                    } else {$data_hours = '';}
                                                     echo '<tr>';
                                                     echo '<td> ' . ($index_row +1) . '</td>';
                                                     echo '<td><input name="data_modus_edit_agingtable_' . $index_row .'" maxlength="4" style="width: 90%;" size="1" min="1" max="4" type = "number" value=' . $data_modus . '></td>';
@@ -96,7 +96,7 @@
                                                     echo '<td><input name="data_circulation_air_period_edit_agingtable_' . $index_row .'" maxlength="4" style="width: 90%;" size="1" min="-1" max="1441" type = "number" value=' . $data_circulation_air_period . '></td>';
                                                     echo '<td><input name="data_exhaust_air_duration_edit_agingtable_' . $index_row .'" maxlength="4" style="width: 90%;" size="1" min="-1" max="1441" type = "number" value=' . $data_exhaust_air_duration . '></td>';
                                                     echo '<td><input name="data_exhaust_air_period_edit_agingtable_' . $index_row .'" maxlength="4" style="width: 90%;" size="1" min="-1" max="1441" type = "number" value=' . $data_exhaust_air_period . '></td>';
-                                                    echo '<td><input name="data_days_edit_agingtable_' . $index_row .'" maxlength="4" style="width: 90%;" size="1" type = "number" value=' . $data_days . '></td>';
+                                                    echo '<td><input name="data_hours_edit_agingtable_' . $index_row .'" maxlength="4" style="width: 90%;" size="1" min="1" max="240" type = "number" value=' . $data_hours . '></td>';
                                                     echo '</tr>';
                                                     $index_row++;
                                                 } 

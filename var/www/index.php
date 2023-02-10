@@ -9,6 +9,7 @@
                                       include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
                                       include 'modules/read_current_db.php';                    // Liest die gemessenen Werte Temp, Humy, Timestamp
                                       include 'modules/read_bus.php';                           //liest den bus aus, um externsensor ein oder auszublenden
+                                      include 'modules/funclib.php';                            // Funktionsbibliothek
 								    //  include 'modules/write_customtime_db.php';                 //speichert die individuelle Zeit für die Diagramme
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('mainsensors'); ?></h2>
@@ -738,7 +739,7 @@
                                  <!----------------------------------------------------------------------------------------Reifetabelle-->
                                 <?php 
                                     $current_period = intval(get_table_value($current_values_table, $agingtable_period_key));
-                                    $current_period_day = intval(get_table_value($current_values_table, $agingtable_period_day_key));
+                                    $current_period_hour = intval(get_table_value($current_values_table, $agingtable_period_hour_key));
                                  ?>        
                                 <h2 id="aging_table_header_id" class="art-postheader"><?php echo _('agingtable') . ' - ' . $maturity_type; ?></h2>
                                 <div class="hg_container">
@@ -748,8 +749,8 @@
                                             <td align="left" id="current_period_head_index"><?php if ($grepagingtable != 0) { echo ($current_period + 1);} else { echo '';} ?></td>
                                         </tr>
                                         <tr>
-                                            <td width="75px"><?php echo _('day'); ?></td>
-                                            <td align="left" id="current_period_day_head_index"><?php if ($grepagingtable != 0) { echo ($current_period_day);} else { echo '';} ?></td>
+                                            <td width="75px"><?php echo _('hour'); ?></td>
+                                            <td align="left" id="current_period_hour_head_index"><?php if ($grepagingtable != 0) { echo ($current_period_hour);} else { echo '';} ?></td>
                                         </tr>
                                     </table>
                                     
@@ -763,7 +764,7 @@
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate OFF duration'); ?><span class="tooltiptext"><?php echo _('timer of the circulation air OFF duration in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust ON duration'); ?><span class="tooltiptext"><?php echo _('timer of the exhausting air ON duration in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust OFF duration'); ?><span class="tooltiptext"><?php echo _('timer of the exhausting air OFF duration in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('days'); ?><span class="tooltiptext"><?php echo _('duration of hanging phase in days'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('hours'); ?><span class="tooltiptext"><?php echo _('duration of hanging phase in hours'); ?></span></div></td>
                                         </tr>
                                         
                                         <?php
@@ -775,7 +776,7 @@
                                             $data_circulation_air_period = ' ';
                                             $data_exhaust_air_duration = ' ';
                                             $data_exhaust_air_period = ' ';
-                                            $data_days = '';
+                                            $data_hours = ' ';                                            
                                             $agingtable_comment_with_carriage_return = '';
                                             
                                             if ($grepagingtable != 0) {
@@ -814,8 +815,8 @@
                                                             if (!empty($dataset[$agingtable_exhaust_air_period_field])){
                                                                 $data_exhaust_air_period = $dataset[$agingtable_exhaust_air_period_field]/60;
                                                             }
-                                                            if (!empty($dataset[$agingtable_days_field])){
-                                                                $data_days = $dataset[$agingtable_days_field];
+                                                            if (!empty($dataset[$agingtable_hours_field])){
+                                                                $data_hours = $dataset[$agingtable_hours_field];
                                                             }
 
                                                             if ($current_period == $index_row AND $grepagingtable != 0){
@@ -828,7 +829,7 @@
                                                                 echo '<td id="data_circulation_air_period_index">'. $data_circulation_air_period .'</td>';
                                                                 echo '<td id="data_exhaust_air_duration_index">'. $data_exhaust_air_duration .'</td>';
                                                                 echo '<td id="data_exhaust_air_period_index">'. $data_exhaust_air_period .'</td>';
-                                                                echo '<td id="data_days_index">'. $data_days .'</td>';
+                                                                echo '<td id="data_hours_index">'. $data_hours .'</td>';
                                                                 echo '</tr>';
                                                                 break;
                                                             }
@@ -849,7 +850,7 @@
                                                 echo '<td id="data_circulation_air_period_index">&nbsp;</td>';
                                                 echo '<td id="data_exhaust_air_duration_index">&nbsp;</td>';
                                                 echo '<td id="data_exhaust_air_period_index">&nbsp;</td>';
-                                                echo '<td id="data_days_index">&nbsp;</td>';
+                                                echo '<td id="data_hours_index">&nbsp;</td>';
                                                 echo '</tr>';
                                             }
                                         ?>
@@ -1379,11 +1380,33 @@
                                             <td></td>
                                         </tr>
                                     </table>
+                                    <hr>
+                                    <h2><?php echo _('uptimes'); ?></h2>
+
+                                    <?php
+                                        $uptime_row = get_table_row($time_meter_table, 1);
+                                        $uv_uptime_seconds = intval($uptime_row[$uv_light_seconds_field]);
+                                        $uv_uptime_formatted = convert_seconds_to_hours($uv_uptime_seconds, 2);
+                                        $pi_ager_uptime_seconds = intval($uptime_row[$pi_ager_seconds_field]);
+                                        $pi_ager_uptime_formatted = convert_seconds_to_hours($pi_ager_uptime_seconds, 2);
+                                    ?>
+                                    <table class="show_uptime_table">
+                                        <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
+                                            <td class="show_uptime_cell"><div class="tooltip"><?php echo _('name'); ?><span class="tooltiptext"><?php echo _('uptime object name'); ?></span></div></td>
+                                            <td class="show_uptime_cell"><div class="tooltip"><?php echo _('uptime'); ?><span class="tooltiptext"><?php echo _('uptime in hours'); ?></span></div></td>                                       
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo _('Pi-Ager');?></td>
+                                            <td id="pi_ager_uptime_id"><?php echo $pi_ager_uptime_formatted;?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo _('uv light');?></td>
+                                            <td id="uv_uptime_id"><?php echo $uv_uptime_formatted;?></td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 
-                                <?php
-                                    echo "<script src='js/ajaxat.js'></script>";
-                                ?>
+                                <script src='js/ajaxat.js'></script>
                                 
 <!--                                <script>
                                     if ( window.history.replaceState ) {    // avoid page confirmation on refresh

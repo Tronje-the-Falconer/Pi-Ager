@@ -347,7 +347,7 @@ cat /dev/null > /home/pi/.bash_history
 # PRUNE_MODULES=1 sudo rpi-update
 
 systemctl enable pi-ager_main.service setup_pi-ager.service
-# systemctl disable pi-ager_scale.service pi-ager_agingtable.service
+echo "pi-ager_main and setup_pi-ager services enabled"
 
 #systemctl daemon-reload
 #systemctl reset-failed
@@ -369,7 +369,8 @@ rm /home/pi/system_key.bin
 ######################################################
 # change hostname
 ######################################################
-raspi-config nonint do_hostname rpi-Pi-Ager
+raspi-config nonint do_hostname pi-ager
+echo "hostname changed to pi-ager"
 
 # rewrite /var/.htcredentials
 # mv /var/.htcredentials.org  /var/.htcredentials
@@ -441,7 +442,6 @@ UPDATE config SET value='30.0' WHERE key = 'delay_cooler';
 UPDATE config SET value='1' WHERE key = 'dewpoint_check';
 UPDATE config SET value='0.2' WHERE key = 'humidity_check_hysteresis';
 UPDATE config SET value='3600.0' WHERE key = 'customtime_for_diagrams';
-UPDATE config SET value='0.0' WHERE key = 'diagram_modus';
 
 UPDATE current_values SET value='0' WHERE key = 'status_piager';
 UPDATE current_values SET value='0' WHERE key = 'status_scale1';
@@ -451,6 +451,9 @@ UPDATE current_values SET value='0' WHERE key = 'status_humidity_check';
 
 UPDATE atc_mi_thermometer_mac SET mi_mac_last3bytes='' WHERE id='1';
 UPDATE atc_mi_thermometer_data SET mi_data='' WHERE id='1';
+
+UPDATE time_meter SET uv_light_seconds='0' WHERE id='1';
+UPDATE time_meter SET pi_ager_seconds='0' WHERE id='1';
 
 DELETE FROM config_nfs_backup;
 delete FROM config_email_server;
@@ -541,7 +544,7 @@ if [ "$my_image" = false ]; then
 	# delete logs and greate empty backup.log
 	rm /var/www/logs/*
     touch /var/www/logs/pi-ager_backup.log
-	# rm /var/logs
+	rm /var/log/*
 	
 	# delete obsolete /tmp direcory
 	# rm -rf /tmp

@@ -2,6 +2,11 @@
                                 include 'modules/write_config_db_logfile_txt.php';          // Speichert die eingestelle Configuration (Hysteresen, Sensortyp, GPIO's)
                                 include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                 ?>
+                                <?php
+                                    if (isset($_POST['reset_uv_uptime_submit'])) {
+                                        write_table_value($time_meter_table, $id_field, 1, $uv_light_seconds_field, 0);
+                                    }
+                                ?>
                                 <button class="art-button" type="button" onclick="setconfig_blockFunction()"><?php echo _('set general configuration values'); ?></button>
                                 </br>
                                 </br>
@@ -197,6 +202,9 @@
                                                         <input type="hidden" name="uv_check_config" value="0" />
                                                         <input type="checkbox" name="uv_check_config" value="1" <?php echo $uv_check_config_active; ?> />
                                                     </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3" style="text-align: center;"><button class="art-button" name="reset_uv_uptime_submit" type="submit" value="reset_uv_uptime_submit" onclick="return confirm('<?php echo _('reset'); echo ' '; echo _('uv uptime'); ?>?')"><?php echo _('reset uptime'); ?></button></td>
                                                 </tr>
                                             </table>
                                             <script>

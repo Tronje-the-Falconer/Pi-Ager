@@ -65,7 +65,7 @@
         $filtered = array();
         
         for ($i = 0; $i < $element_count; ++$i) {
-            $start_index = $i - $cnt_index/2;
+            $start_index = intval($i - $cnt_index/2);
             $end_index = $start_index + $cnt_index;
             $sum = 0;
             $cnt_sum = 0;
@@ -201,13 +201,13 @@
     $temperature_dataset = array_column($all_sensors_rows, 'tempint');
     $temperature_dataset[] = Null;
     array_unshift($temperature_dataset, Null);
-    $temperature_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $temperature_dataset, $moving_average_window_x);
+    $temperature_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $temperature_dataset, intval($moving_average_window_x));
     
     // value array for humint
     $humidity_dataset = array_column($all_sensors_rows, 'humint');
     $humidity_dataset[] = Null;
     array_unshift($humidity_dataset, Null);
-    $humidity_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $humidity_dataset, $moving_average_window_x);
+    $humidity_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $humidity_dataset, intval($moving_average_window_x));
 
     // value array for ntc1
     $thermometer1_dataset = array_column($all_sensors_rows, 'ntc1');
@@ -224,6 +224,6 @@
     $scale2_dataset[] = Null;
     array_unshift($scale2_dataset, Null);
 
-    logger('DEBUG', 'read_values_for_diagrams performed');
+    logger('DEBUG', 'chartsdata_index performed');
 
 ?>

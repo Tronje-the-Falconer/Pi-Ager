@@ -42,11 +42,11 @@
         } else {
             $agingtable_startperiod = 1;
         }
-        if (isset($_POST['agingtable_startday'])){
-            $agingtable_startday = $_POST['agingtable_startday'];
+        if (isset($_POST['agingtable_starthour'])){
+            $agingtable_starthour = $_POST['agingtable_starthour'];
             // $agingtable_startday = $agingtable_startday;
         } else {
-            $agingtable_startday = 1;
+            $agingtable_starthour = 1;
         }
         $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain'); #Rss.py
         if($grepmain == 0) {
@@ -55,7 +55,7 @@
             $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain'); # RSS hat sich geändert daher neu setzen
             if($grepmain != 0) {                
                 write_table_value($config_settings_table, $key_field, $agingtable_startperiod_key, $value_field, $agingtable_startperiod);
-                write_table_value($config_settings_table, $key_field, $agingtable_startday_key, $value_field, $agingtable_startday);
+                write_table_value($config_settings_table, $key_field, $agingtable_starthour_key, $value_field, $agingtable_starthour);
                 write_start_in_database($status_agingtable_key);
                 sleep(2); //warten auf annahme der Startsequenz
                 // prüfen ob main immer noch läuft und ob main im messloop
@@ -76,7 +76,7 @@
         }
         elseif($grepmain != 0) {
                 write_table_value($config_settings_table, $key_field, $agingtable_startperiod_key, $value_field, $agingtable_startperiod);
-                write_table_value($config_settings_table, $key_field, $agingtable_startday_key, $value_field, $agingtable_startday);
+                write_table_value($config_settings_table, $key_field, $agingtable_starthour_key, $value_field, $agingtable_starthour);
                 write_start_in_database($status_agingtable_key);
                 sleep( 2 );     // agingtable thread needs about 1s to detect start of agingtable
                 # $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
@@ -96,7 +96,7 @@
                 }
         }
         else{
-            $logstring = 'agingtable.py '._('no idea what is happening');
+            $logstring = 'pi-ager_agingtable_start '._('no idea what is happening');
             logger('INFO', $logstring);
         }
     }
@@ -166,71 +166,6 @@
             $logstring = 'scale2 thread not running';
             logger('INFO', $logstring);
         }        
-/*        
-        if ($grepscale == 0){
-            shell_exec('sudo /var/sudowebscript.sh startscale');
-            sleep (1); # 1 Sec auf start der Py-Datei warten
-            $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
-            if ($grepscale != 0){
-                $logstring = 'scale.py '._('manually started');
-                logger('INFO', $logstring);
-                if (isset($_POST['scale1_start'])){
-                    #shell_exec('sudo /var/sudowebscript.sh startscale1');
-                    write_start_in_database($status_scale1_key);
-                    $logstring = _('measuring scale'). ' 1 ' . _('started');
-                    logger('INFO', $logstring);
-                }
-                if (isset($_POST['scale2_start'])){
-                    #shell_exec('sudo /var/sudowebscript.sh startscale2');
-                    write_start_in_database($status_scale2_key);
-                    $logstring = _('measuring scale'). ' 2 '._('started');
-                    logger('INFO', $logstring);
-                }
-                if (isset($_POST['scale1_tara'])){
-                    write_start_in_database($status_scale1_tara_key);
-                    $logstring = _('performing tara on scale') . ' 1';
-                    logger('INFO', $logstring);
-                }
-                if (isset($_POST['scale2_tara'])){
-                    write_start_in_database($status_scale2_tara_key);
-                    $logstring = _('performing tara on scale') . ' 2';
-                    logger('INFO', $logstring);
-                }
-            }
-            else{
-                $logstring = 'scale.py '._('could not be started');
-                logger('INFO', $logstring);
-            }
-        }
-        elseif ($grepscale != 0){
-            $logstring = 'scale.py '._('is already running');
-            logger('INFO', $logstring);
-            if (isset($_POST['scale1_start'])){
-                write_start_in_database($status_scale1_key);
-                $logstring = _('measuring on scale started.'). ' '. _('scale') . ' 1';
-                logger('INFO', $logstring);
-            }
-            if (isset($_POST['scale2_start'])){
-                write_start_in_database($status_scale2_key);
-                $logstring = _('measuring on scale started.'). ' '. _('scale') . ' 2';
-                logger('INFO', $logstring);
-            }
-            if (isset($_POST['scale1_tara'])){
-                write_start_in_database($status_scale1_tara_key);
-                $logstring = _('performing tara on scale') . ' 1';
-                logger('INFO', $logstring);
-            }
-            if (isset($_POST['scale2_tara'])){
-                write_start_in_database($status_scale2_tara_key);
-                $logstring = _('performing tara on scale') . ' 2';
-                logger('INFO', $logstring);
-            }
-        }
-        else{
-            $logstring = 'scale.py ' . _('no idea what is happening');
-            logger('INFO', $logstring);
-        }
-*/
     }
     
     if (isset($_POST['scale1_stop'])){
@@ -270,57 +205,4 @@
         $logstring = 'ADMIN main.py ' . _('killed');
         logger('INFO', $logstring);
     }
-    /* if (isset($_POST['admin_start_agingtable'])){
-        $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
-        if($grepagingtable == 0) {
-            shell_exec('sudo /var/sudowebscript.sh startagingtable');
-            sleep (1); # 1 Sec auf start der Py-Datei warten
-            $grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
-            if($grepagingtable != 0) {
-                $logstring = 'ADMIN agingtable.py ' . _('manually started');
-                logger('INFO', $logstring);
-            }
-            else{
-                $logstring = 'ADMIN agingtable.py ' . _('could not be started');
-                logger('INFO', $logstring);
-            }
-        }
-        else{
-            $logstring = 'ADMIN agingtable.py ' . _('already running');
-            logger('INFO', $logstring);
-        }
-    }
-    if (isset($_POST['admin_stop_agingtable'])){
-        shell_exec('sudo /var/sudowebscript.sh pkillagingtable');
-        sleep (1); # 1 Sec auf start der Py-Datei warten
-        $logstring = 'ADMIN agingtable.py ' . _('killed');
-        logger('INFO', $logstring);
-    }
-    */
-    /* if (isset($_POST['admin_start_scale'])){
-        $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
-        if($grepscale == 0) {
-            shell_exec('sudo /var/sudowebscript.sh startscale');
-            sleep (1); # 1 Sec auf start der Py-Datei warten
-            $grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
-            if($grepscale != 0) {
-                $logstring = 'ADMIN scale.py '._('manually started');
-                logger('INFO', $logstring);
-            }
-            else{
-                $logstring = 'ADMIN scale.py '. _('could not be started');
-                logger('INFO', $logstring);
-            }
-        }
-        else{
-            $logstring = 'ADMIN scale.py '. _('already running');
-            logger('INFO', $logstring);
-        }
-    }
-    if (isset($_POST['admin_stop_scale'])){
-        shell_exec('sudo /var/sudowebscript.sh pkillscale');
-        sleep (1); # 1 Sec auf start der Py-Datei warten
-        $logstring = 'ADMIN scale.py '. _('killed');
-        logger('INFO', $logstring);
-    } */
 ?>

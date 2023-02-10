@@ -63,10 +63,27 @@ body {
     color:  #555555;
     padding: 0px;
     margin-top: 20px;
+    border-collapse: collapse;
 }
 
 .show_agingcell {
-    border-bottom: 1px solid #89939E;
+    border: 1px solid #89939E;
+}
+
+/* Tabelle show uptime */
+.show_uptime_table {
+    width: 100%;
+    border: 1px solid #89939E;
+    text-align: center;
+/*    font-size: 10px; */
+    color:  #555555;
+    padding: 0px;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.show_uptime_cell {
+    border: 1px solid #89939E;
 }
 
 .tooltip {
@@ -76,7 +93,7 @@ body {
 
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 120px;
+    width: 150px;
     background-color: #555;
     color: #fff;
     text-align: center;
@@ -86,7 +103,7 @@ body {
     z-index: 1;
     bottom: 125%;
     left: 50%;
-    margin-left: -60px;
+    margin-left: -75px;
     opacity: 0;
     transition: opacity 1s;
 }
@@ -362,4 +379,23 @@ input:invalid { border: 1px solid red !important}
   filter: alpha(opacity=70);
   cursor: not-allowed;
   pointer-events: none;
+}
+
+.date-header
+{
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  line-height: 100%;
+  z-index: 102;
+  white-space: nowrap;
+  font-size: 14px;
+  font-family: 'Century Gothic', Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  color: #D6D6D6 !important;
 }

@@ -85,10 +85,9 @@
                     if (!empty($dataset[$agingtable_exhaust_air_period_field])){
                         $data_exhaust_air_period = $dataset[$agingtable_exhaust_air_period_field]/60;
                     }
-                    if (!empty($dataset[$agingtable_days_field])){
-                        $data_days = $dataset[$agingtable_days_field];
+                    if (!empty($dataset[$agingtable_hours_field])){
+                        $data_hours = $dataset[$agingtable_hours_field];
                     }
-
                     if ($current_period == $index_row AND $grepagingtable != 0){
                         $current_period = $current_period + 1;
                         break;
@@ -108,7 +107,7 @@
         $data_circulation_air_period = '&nbsp;';
         $data_exhaust_air_duration = '&nbsp;';
         $data_exhaust_air_period = '&nbsp;';
-        $data_days = '&nbsp;';  
+        $data_hours = '&nbsp;';          
     } 
     
     $current_values = array();
@@ -123,7 +122,7 @@
     $current_values['data_circulation_air_period'] = $data_circulation_air_period;
     $current_values['data_exhaust_air_duration'] = $data_exhaust_air_duration;
     $current_values['data_exhaust_air_period'] = $data_exhaust_air_period;
-    $current_values['data_days'] = $data_days;
+    $current_values['data_hours'] = $data_hours;
     $current_values['agingtable_comment'] = nl2br($agingtable_comment);
     echo json_encode($current_values);
 

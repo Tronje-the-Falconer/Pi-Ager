@@ -9,7 +9,7 @@
     $diagrams_active = '';
     $settings_active = '';
     $logs_active = '';
-    $changelogs_active = '';
+    $changelog_active = '';
     $webcam_active = '';
     $scale_wizzard_active = '';
     $admin_active = '';
@@ -28,7 +28,7 @@
         $logs_active = 'active';
     }
     elseif ($_SERVER['PHP_SELF'] == '/changelog.php') {
-        $changelogs_active = 'active';
+        $changelog_active = 'active';
     }
     elseif ($_SERVER['PHP_SELF'] == '/webcam.php') {
         $webcam_active = 'active';
@@ -97,7 +97,6 @@
 <!-- <script src="./node_modules/chart.js/dist/Chart.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> -->
         <script src="js/jquery.js"></script>
-<!--        <script src="js/ajax.js"></script> -->
         <script src="js/script.js"></script>
         <script src="js/script.responsive.js"></script>
 
@@ -129,6 +128,7 @@
                 </div>
                 <h1 class="art-headline">Pi-Ager</h1>
                 <h2 class="art-slogan"><?php echo _('by') . ' ' . ('Grillsportverein'); ?></h2>
+                <h2 id="server_date_time_id" class="date-header"><?php echo date('Y-m-d H:i:s');?><h2>
                 <nav class="art-nav">
                     <div class="art-nav-inner">
                         <ul class="art-hmenu">
@@ -173,6 +173,7 @@
                         </ul>
                     </div>
                 </nav>
+                <script src='js/ajaxdatetime.js'></script>
             </header>
             <div class="art-sheet clearfix">
                 <div class="art-layout-wrapper">

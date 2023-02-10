@@ -3,6 +3,7 @@
     include 'database.php';
     include 'logging.php';
     include 'read_gpio.php';
+    include 'funclib.php';
     # Language festlegen
     
     #### BEGIN Language from DB
@@ -44,6 +45,12 @@
     $sensor_extern_humidity_abs = get_table_value($current_values_table, $sensor_extern_humidity_abs_key);
     $status_humidity_check = intval(get_table_value($current_values_table, $status_humidity_check_key));
     
+    $uptime_row = get_table_row($time_meter_table, 1);
+    $uv_uptime_seconds = $uptime_row[$uv_light_seconds_field];
+    $uv_uptime_formatted = convert_seconds_to_hours($uv_uptime_seconds, 2);
+    $pi_ager_uptime_seconds = $uptime_row[$pi_ager_seconds_field];
+    $pi_ager_uptime_formatted = convert_seconds_to_hours($pi_ager_uptime_seconds, 2);
+     
     $current_values = array();
 
     $current_values['grepmain'] = $grepmain;
@@ -404,6 +411,9 @@
         $current_values['scale2_status_text_id'] = strtoupper(_('scale2'));
     }
   
+    $current_values['uv_uptime_formatted'] = $uv_uptime_formatted;
+    $current_values['pi_ager_uptime_formatted'] = $pi_ager_uptime_formatted;
+    
     echo json_encode($current_values);
     logger('DEBUG', 'querystatus finished');
 ?>

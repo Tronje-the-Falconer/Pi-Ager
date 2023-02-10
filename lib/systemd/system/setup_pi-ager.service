@@ -9,5 +9,4 @@ StandardOutput=append:/boot/setup.log
 StandardError=append:/boot/setup.log
 
 [Install]
-Alias=setup_pi-ager
 WantedBy=multi-user.target

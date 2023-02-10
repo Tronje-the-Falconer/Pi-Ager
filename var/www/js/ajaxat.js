@@ -3,7 +3,7 @@
 //
 
 async function handleContentat( msg ) {
-    console.log('in handleContentat');
+//    console.log('in handleContentat');
     myObj = JSON.parse(msg);
 
     maturity_type = myObj.maturity_type;
@@ -17,9 +17,9 @@ async function handleContentat( msg ) {
     data_circulation_air_period = myObj.data_circulation_air_period;    
     data_exhaust_air_duration = myObj.data_exhaust_air_duration;   
     data_exhaust_air_period = myObj.data_exhaust_air_period;   
-    data_days = myObj.data_days;
+    data_hours = myObj.data_hours;
     agingtable_comment = myObj.agingtable_comment;
-    console.log('current period:' + current_period + "!");
+//    console.log('current period:' + current_period + "!");
     
     $('#aging_table_header_id').html(maturity_type);
     $('#current_period_head_index').html(current_period);
@@ -32,7 +32,7 @@ async function handleContentat( msg ) {
     $('#data_circulation_air_period_index').html(data_circulation_air_period);
     $('#data_exhaust_air_duration_index').html(data_exhaust_air_duration);
     $('#data_exhaust_air_period_index').html(data_exhaust_air_period);
-    $('#data_days_index').html(data_days);
+    $('#data_hours_index').html(data_hours);
     $('#agingtable_comment_with_carriage_return').html(agingtable_comment);
        
 }

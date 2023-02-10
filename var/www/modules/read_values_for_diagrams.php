@@ -150,7 +150,7 @@
         $filtered = array();
         
         for ($i = 0; $i < $element_count; ++$i) {
-            $start_index = $i - $cnt_index/2;
+            $start_index = intval($i - $cnt_index/2);
             $end_index = $start_index + $cnt_index;
             $sum = 0;
             $cnt_sum = 0;

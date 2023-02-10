@@ -215,13 +215,13 @@
                                                     {
                                                         if (strncmp($meatsensor_row['name'], 'LEM', 3) !== 0)
                                                         {
-                                                            if ($meatsensor_row[id] == $meatsensor_index)
+                                                            if ($meatsensor_row['id'] == $meatsensor_index)
                                                             {
-                                                                echo '<option value="'.$meatsensor_row[id].'" selected>'.$meatsensor_row[name].'</option>';
+                                                                echo '<option value="'.$meatsensor_row['id'].'" selected>'.$meatsensor_row['name'].'</option>';
                                                             }
                                                             else
                                                             {
-                                                                echo '<option value="'.$meatsensor_row[id].'">'.$meatsensor_row[name].'</option>';
+                                                                echo '<option value="'.$meatsensor_row['id'].'">'.$meatsensor_row['name'].'</option>';
                                                             }
                                                         }
                                                     }
@@ -242,13 +242,13 @@
                                                     {
                                                         if (strncmp($meatsensor_row['name'], 'LEM', 3) !== 0)
                                                         {
-                                                            if ($meatsensor_row[id] == $meatsensor_index)
+                                                            if ($meatsensor_row['id'] == $meatsensor_index)
                                                             {
-                                                                echo '<option value="'.$meatsensor_row[id].'" selected>'.$meatsensor_row[name].'</option>';
+                                                                echo '<option value="'.$meatsensor_row['id'].'" selected>'.$meatsensor_row['name'].'</option>';
                                                             }
                                                             else
                                                             {
-                                                                echo '<option value="'.$meatsensor_row[id].'">'.$meatsensor_row[name].'</option>';
+                                                                echo '<option value="'.$meatsensor_row['id'].'">'.$meatsensor_row['name'].'</option>';
                                                             }
                                                         }
                                                     }
@@ -269,13 +269,13 @@
                                                     {
                                                         if (strncmp($meatsensor_row['name'], 'LEM', 3) !== 0)
                                                         {
-                                                            if ($meatsensor_row[id] == $meatsensor_index)
+                                                            if ($meatsensor_row['id'] == $meatsensor_index)
                                                             {
-                                                                echo '<option value="'.$meatsensor_row[id].'" selected>'.$meatsensor_row[name].'</option>';
+                                                                echo '<option value="'.$meatsensor_row['id'].'" selected>'.$meatsensor_row['name'].'</option>';
                                                             }
                                                             else
                                                             {
-                                                                echo '<option value="'.$meatsensor_row[id].'">'.$meatsensor_row[name].'</option>';
+                                                                echo '<option value="'.$meatsensor_row['id'].'">'.$meatsensor_row['name'].'</option>';
                                                             }
                                                         }
                                                     }
@@ -294,13 +294,13 @@
                                                     echo '<select name="temp_sensor4_admin" onchange="getMeat4SensorTypeIndex(this)">';
                                                     foreach($meat_sensors as $meatsensor_row)
                                                     {
-                                                        if ($meatsensor_row[id] == $meatsensor_index)
+                                                        if ($meatsensor_row['id'] == $meatsensor_index)
                                                         {
-                                                            echo '<option value="'.$meatsensor_row[id].'" selected>'.$meatsensor_row[name].'</option>';
+                                                            echo '<option value="'.$meatsensor_row['id'].'" selected>'.$meatsensor_row['name'].'</option>';
                                                         }
                                                         else
                                                         {
-                                                            echo '<option value="'.$meatsensor_row[id].'">'.$meatsensor_row[name].'</option>';
+                                                            echo '<option value="'.$meatsensor_row['id'].'">'.$meatsensor_row['name'].'</option>';
                                                         }
                                                     }
                                                     echo '</select>';
@@ -647,10 +647,10 @@
                                         echo '<div class="hg_container" >';
                                         echo '<form method="post" name="debug">';
                                         echo '<table style="width: 100%;">';
-                                        $agingtable_days_in_seconds_debug = get_table_value($debug_table, $agingtable_days_in_seconds_debug_key);
+                                        $agingtable_hours_in_seconds_debug = get_table_value($debug_table, $agingtable_hours_in_seconds_debug_key);
                                         echo '<tr>';
-                                        echo '<td>' . _('agingtable days in seconds') . ':</td>';
-                                        echo '<td><input name="agingtable_days_in_seconds_debug" type="number" style="width: 90%;" min="1" max="86400" required value=' . $agingtable_days_in_seconds_debug . '></td>';
+                                        echo '<td>' . _('agingtable hours in seconds') . ':</td>';
+                                        echo '<td><input name="agingtable_hours_in_seconds_debug" type="number" style="width: 90%;" min="1" max="3600" required value=' . $agingtable_hours_in_seconds_debug . '></td>';
                                         echo '</tr>';
                                         echo '</table>';
                                         echo '<button class="art-button" name="save_debug_values" value="save_debug_values" onclick="return confirm(\'' . _('ATTENTION: save debug values?') . '\');">' . _('save') . '</button>';
@@ -987,6 +987,46 @@
                                     }
 
                                 </script> 
+                                
+                                <?php
+                                    function validateDate($date, $format = 'Y-m-d H:i:s') {
+                                        $d = DateTime::createFromFormat($format, $date);
+                                        return $d && $d->format($format) == $date;
+                                    }
+
+                                    if (isset ($_POST['setdatetime'])){
+                                        $newdatetime = $_POST['newdatetime'];
+                                        if (validateDate($newdatetime) == true) {
+                                            shell_exec('sudo /var/sudowebscript.sh set_time_date ' . '"' . $newdatetime . '"');
+                                            echo '<script language="javascript"> alert("'. _('Date/Time') . ' : ' . _('new system date and time set') . '"); </script>';                                
+                                        }
+                                        else {
+                                            echo '<script language="javascript"> alert("'. _('Date/Time') . ' : ' . _('wrong input format') . '"); </script>';
+                                        }
+                                    }
+                                    // $essid = exec("iwgetid | awk -F'\"' '{print $2}'");
+                                    // echo 'ESSID : ' . $essid . "<br>";
+                                    $local_ip = $_SERVER['SERVER_ADDR'];
+                                    // echo 'local ip : ' . $local_ip . '<br>';
+                                    //if ($local_ip !== '10.0.0.5') {
+                                    // if ($essid === 'RPiHotspot') {
+                                ?>
+                                <div <?php if ($local_ip !== '10.0.0.5') { echo 'style="display:none;"'; }?>>
+                                    <hr>
+                                    <h2 class="art-postheader"><?php echo _('set Pi-Ager date/time'); ?></h2>
+                                    <!----------------------------------------------------------------------------------------Date/Time--> 
+                                    <div class="hg_container" >
+                                        <form method="post" name="datetime">
+                                            <table style="width: 100%;">
+                                                <tr>
+                                                    <td><label><?php echo _('Pi-Ager date/time format YYYY-MM-DD HH:MM:SS') . ' :&nbsp;'; ?></label><div class="tooltip"><input type="text" size="19" maxlength="19" name="newdatetime"><span class="tooltiptext"><?php echo _('date/time format YYYY-MM-DD HH:MM:SS e.g. 2023-01-31 16:05:09'); ?></span></input></div></td>
+                                                </tr>
+                                            </table>
+                                            <br>
+                                            <button class="art-button" name="setdatetime" value="setdatetime" onclick="return confirm('<?php echo _('ATTENTION: set date and time?');?> ')"><?php echo _('save'); ?></button>
+                                        </form>
+                                    </div>
+                                </div>
                                 
                                 <?php
                                     if ($loglevel_console == 10 and $loglevel_file == 10){

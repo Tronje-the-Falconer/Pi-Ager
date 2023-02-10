@@ -699,3 +699,14 @@ def update_nextion_table( progress, status ):
         open_database()
         execute_query('UPDATE ' + pi_ager_names.nextion_table + ' SET ' + pi_ager_names.progress_field + ' = ' + str(progress) + ', ' + pi_ager_names.status_field + ' = "' + status + '" WHERE id = 1' )
         close_database()
+        
+ 
+def update_table_field( table, field, value ):
+    """
+    function to update a value in a table with field
+    """
+    with globals.lock:
+        open_database()
+        execute_query('UPDATE ' + table + ' SET ' + field + '=' + str(value) + ' WHERE id = 1' )
+        close_database()
+               

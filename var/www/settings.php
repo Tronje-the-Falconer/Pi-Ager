@@ -268,8 +268,8 @@
                                                           echo '<td><input type="number" style="width: 60px;" step="1" name="agingtable_startperiod" value="1" min="1" max="50"> </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>' . _('startday of phase') . ':' . '</td>';
-                                                          echo '<td><input type="number" style="width: 60px;" step="1" name="agingtable_startday" value="1" min="1" max="50"></td>
+                                                                <td>' . _('starthour of phase') . ':' . '</td>';
+                                                          echo '<td><input type="number" style="width: 60px;" step="1" name="agingtable_starthour" value="1" min="1" max="240"></td>
                                                             </tr>
                                                         </table>
                                                         </td>
@@ -393,18 +393,18 @@
                                     </table>
                                     <?php
                                          $current_period = get_table_value($current_values_table, $agingtable_period_key);
-                                         $current_period_day = get_table_value($current_values_table, $agingtable_period_day_key);
+                                         $current_period_hour = get_table_value($current_values_table, $agingtable_period_hour_key);
                                      ?>
                                      <br>
                                     <table style="width: 100%;" class="switching_state miniature_writing">
                                         <tr>
-                                            <td width="75px" colspan="2" align="left"><h3><?php echo _('actual phase and day') ?></h3></td>
+                                            <td width="75px" colspan="2" align="left"><h3><?php echo _('actual phase and hour') ?></h3></td>
                                         </tr>
                                         <tr>
                                             <td width="75px"><?php echo _('phase').' :' ?></td><td align="left"><?php echo intval($current_period) + 1 ?></td>
                                         </tr>
                                         <tr>
-                                            <td width="75px"><?php echo _('day').' :' ?></td><td align="left"><?php echo $current_period_day  ?></td>
+                                            <td width="75px"><?php echo _('hour').' :' ?></td><td align="left"><?php echo $current_period_hour  ?></td>
                                         </tr>
                                     </table>
                                     <table id="show_agingtable" class="show_agingtable">
@@ -417,7 +417,7 @@
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate OFF duration') ?><span class="tooltiptext"><?php echo _('timer of the circulation air OFF duration in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust ON duration') ?><span class="tooltiptext"><?php echo _('timer of the exhausting air ON duration in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust OFF duration') ?><span class="tooltiptext"><?php echo _('timer of the exhausting air OFF duration in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('days') ?><span class="tooltiptext"><?php echo _('duration of hanging phase in days'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('hours') ?><span class="tooltiptext"><?php echo _('duration of hanging phase in hours'); ?></span></div></td>
                                         </tr>
                                         <?php 
                                             // Gewählte Agingtable aus DB auslesen und als Tabelle beschreiben
@@ -457,10 +457,9 @@
                                                         if (!empty($dataset[$agingtable_exhaust_air_period_field])){
                                                             $data_exhaust_air_period = $dataset[$agingtable_exhaust_air_period_field]/60;
                                                         } else {$data_exhaust_air_period = '..';}
-                                                        if (!empty($dataset[$agingtable_days_field])){
-                                                            $data_days = $dataset[$agingtable_days_field];
-                                                        } else {$data_days = '..';}
-
+                                                        if (!empty($dataset[$agingtable_hours_field])){
+                                                            $data_hours = $dataset[$agingtable_hours_field];
+                                                        } else {$data_hours = '..';}
                                                         if ($current_period == $index_row AND $grepagingtable != 0){
                                                             echo '<tr bgcolor=#D19600 >';
                                                         }
@@ -475,7 +474,7 @@
                                                             echo '<td>'. $data_circulation_air_period .'</td>';
                                                             echo '<td>'. $data_exhaust_air_duration .'</td>';
                                                             echo '<td>'. $data_exhaust_air_period .'</td>';
-                                                            echo '<td>'. $data_days .'</td>';
+                                                            echo '<td>'. $data_hours .'</td>';
                                                         echo '</tr>';
                                                         $index_row++;
                                                     } 

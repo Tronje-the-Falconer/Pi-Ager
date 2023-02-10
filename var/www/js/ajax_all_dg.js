@@ -13,7 +13,7 @@ function convert_timestamps( timestamps_seconds ) {
 }
 
 async function handleContentAlldg( msg ) {
-    console.log('in handleContentAlldg');
+//    console.log('in handleContentAlldg');
     
     myObj = JSON.parse(msg);
     
@@ -140,7 +140,7 @@ async function handleContentAlldg( msg ) {
     exhaust_air_chart.update();
     circulation_air_chart.update();
 
-    console.log('charts updated');
+//    console.log('charts updated');
 }
 
 

@@ -33,6 +33,7 @@ from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from pi_ager_cl_nextion import cl_fact_nextion
 from pi_ager_cl_switch_control import cl_fact_switch_control
+from pi_ager_cl_uptime import cl_fact_uptime
 
 import signal
 import threading
@@ -93,6 +94,10 @@ cl_fact_logger.get_instance().debug('Starting switch control thread ' + time.str
 cl_fact_switch_control.get_instance().start()
 cl_fact_logger.get_instance().debug('Starting switch control thread done' + time.strftime('%H:%M:%S', time.localtime()))
 
+cl_fact_logger.get_instance().debug('Starting uptime thread ' + time.strftime('%H:%M:%S', time.localtime()))
+cl_fact_uptime.get_instance().start()
+cl_fact_logger.get_instance().debug('Starting uptime thread done' + time.strftime('%H:%M:%S', time.localtime()))
+
 exception_known = True
 
 # now enable signal handler
@@ -126,16 +131,13 @@ finally:
     cl_fact_logger.get_instance().debug('main.finally --------------------------------------------------------------------')
     #if exception_known == False:
     pi_ager_init.loopcounter = 0
-#    pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
-#    pi_ager_database.write_stop_in_database(pi_ager_names.status_scale1_key)
-#    pi_ager_database.write_stop_in_database(pi_ager_names.status_scale2_key)
-        # os.system('sudo /var/sudowebscript.sh pkillscale &')
-        # os.system('sudo /var/sudowebscript.sh pkillmain &')
+
     cl_fact_logger.get_instance().debug('waiting for all threads terminating...')   
     scale1_thread.stop_received = True
     scale2_thread.stop_received = True
     agingtable_thread.stop_received = True
     cl_fact_switch_control.get_instance().stop_received = True
+    cl_fact_uptime.get_instance().stop_received = True
     
     cl_fact_nextion.get_instance().prep_show_offline()
     cl_fact_nextion.get_instance().loop.call_soon_threadsafe(cl_fact_nextion.get_instance().stop_event.set)
@@ -145,6 +147,7 @@ finally:
     scale2_thread.join()
     agingtable_thread.join()
     cl_fact_switch_control.get_instance().join()
+    cl_fact_uptime.get_instance().join()
     cl_fact_nextion.get_instance().join()
     
     cl_fact_logger.get_instance().debug('threads terminated')

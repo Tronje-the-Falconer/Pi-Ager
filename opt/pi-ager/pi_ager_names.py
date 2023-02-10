@@ -34,6 +34,7 @@ atc_mi_thermometer_mac_table = 'atc_mi_thermometer_mac'
 atc_mi_thermometer_data_table = 'atc_mi_thermometer_data'
 defrost_table = 'config_defrost'
 config_current_check_table = 'config_current_check'
+time_meter_table = 'time_meter'
 
 # table keys
 switch_on_cooling_compressor_key = 'switch_on_cooling_compressor'
@@ -115,7 +116,7 @@ agingtable_period_key = 'agingtable_period'
 agingtable_period_starttime_key = 'agingtable_period_starttime'
 customtime_for_diagrams_key = 'customtime_for_diagrams'
 measuring_interval_debug_key = 'measuring_interval_debug'
-agingtable_days_in_seconds_debug_key = 'agingtable_days_in_seconds_debug'
+agingtable_hours_in_seconds_debug_key = 'agingtable_hours_in_seconds_debug'
 measuring_duration_key = 'measuring_duration'
 samples_refunit_tara_key = 'samples_refunit_tara'
 spikes_refunit_tara_key = 'spikes_refunit_tara'
@@ -123,8 +124,8 @@ saving_period_key = 'saving_period'
 failure_temperature_delta_key = 'failure_temperature_delta'
 failure_humidity_delta_key = 'failure_humidity_delta'
 failure_dewpoint_delta_key = 'failure_dewpoint_delta'
-agingtable_period_day_key = 'agingtable_period_day'
-agingtable_startday_key = 'agingtable_startday'
+agingtable_period_hour_key = 'agingtable_period_hour'
+agingtable_starthour_key = 'agingtable_starthour'
 agingtable_startperiod_key = 'agingtable_startperiod'
 aging_thread_alive_key = 'aging_thread_alive'
 scale1_thread_alive_key = 'scale1_thread_alive'
@@ -158,6 +159,7 @@ MiSensor_battery_key = 'MiSensor_battery'
 status_defrost_key = 'status_defrost'
 uv_check_key = 'uv_check'
 
+
 # table fields
 key_field = 'key'
 value_field = 'value'
@@ -171,7 +173,7 @@ agingtable_circulation_air_duration_field = 'circulation_air_duration'
 agingtable_circulation_air_period_field = 'circulation_air_period'
 agingtable_exhaust_air_duration_field = 'exhaust_air_duration'
 agingtable_exhaust_air_period_field = 'exhaust_air_period'
-agingtable_days_field = 'days'
+agingtable_hours_field = 'hours'
 agingtable_comment_field = 'comment'
 meat_sensortypes_name_field = 'name'
 meat_sensortypes_a_field = 'a'
@@ -205,6 +207,8 @@ defrost_cycle_hours_field = 'cycle_hours'
 current_check_active_field = 'current_check_active'
 current_threshold_field = 'current_threshold'
 repeat_event_cycle_field = 'repeat_event_cycle'
+uv_light_seconds_field = 'uv_light_seconds'
+pi_ager_seconds_field = 'pi_ager_seconds'
 
 # Paths and urls
 thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/'
@@ -260,7 +264,7 @@ table_keys[config_settings_table] = (switch_on_cooling_compressor_key,switch_off
                                      circulation_air_duration_key,agingtable_key, failure_humidity_delta_key, failure_temperature_delta_key, samples_refunit_tara_key,
                                      spikes_refunit_tara_key, save_temperature_humidity_loops_key, sensorbus_key,
                                      meat1_sensortype_key, meat2_sensortype_key, meat3_sensortype_key, meat4_sensortype_key, customtime_for_diagrams_key, sensorsecondtype_key,
-                                     agingtable_startperiod_key, agingtable_startday_key, tft_display_type_key, internal_temperature_low_limit_key, internal_temperature_high_limit_key, internal_temperature_hysteresis_key,
+                                     agingtable_startperiod_key, agingtable_starthour_key, tft_display_type_key, internal_temperature_low_limit_key, internal_temperature_high_limit_key, internal_temperature_hysteresis_key,
                                      shutdown_on_batlow_key, dewpoint_check_key, humidity_check_hysteresis_key)
 
 table_keys[current_values_table] = (sensor_temperature_key, sensor_humidity_key, status_circulating_air_key, status_cooling_compressor_key, status_exhaust_air_key,
@@ -268,13 +272,13 @@ table_keys[current_values_table] = (sensor_temperature_key, sensor_humidity_key,
                                     status_agingtable_key, status_scale1_key, status_scale2_key, status_tara_scale1_key, status_tara_scale2_key, agingtable_period_key,
                                     agingtable_period_starttime_key, status_light_manual_key, calibrate_scale1_key, calibrate_scale2_key, calibrate_weight_key,
                                     status_uv_manual_key, temperature_meat1_key, temperature_meat2_key, temperature_meat3_key, temperature_meat4_key, sensor_dewpoint_key, second_sensor_temperature_key,
-                                    second_sensor_humidity_key, second_sensor_dewpoint_key, agingtable_period_day_key, scale1_thread_alive_key, scale2_thread_alive_key, aging_thread_alive_key, 
+                                    second_sensor_humidity_key, second_sensor_dewpoint_key, agingtable_period_hour_key, scale1_thread_alive_key, scale2_thread_alive_key, aging_thread_alive_key, 
                                     sensor_humidity_abs_key, second_sensor_humidity_abs_key, status_humidity_check_key)
 
 table_keys[settings_scale1_table] = (samples_key,spikes_key,sleep_key,gain_key,bits_to_read_key,referenceunit_key,scale_measuring_interval_key,measuring_duration_key,saving_period_key,offset_scale_key)
 table_keys[settings_scale2_table] = (samples_key,spikes_key,sleep_key,gain_key,bits_to_read_key,referenceunit_key,scale_measuring_interval_key,measuring_duration_key,saving_period_key,offset_scale_key)
 
-table_keys[debug_table] = (measuring_interval_debug_key,agingtable_days_in_seconds_debug_key,loglevel_file_key,loglevel_console_key)
+table_keys[debug_table] = (measuring_interval_debug_key,agingtable_hours_in_seconds_debug_key,loglevel_file_key,loglevel_console_key)
 
 table_keys[system_table] = (pi_revision_key,pi_ager_version_key)
 
@@ -308,7 +312,7 @@ default_values[settings_scale2_table + '_' + saving_period_key] = 120
 
 #default values debug table
 default_values[debug_table + '_' + measuring_interval_debug_key] = 30
-default_values[debug_table + '_' + agingtable_days_in_seconds_debug_key] = 60
+default_values[debug_table + '_' + agingtable_hours_in_seconds_debug_key] = 3600
 default_values[debug_table + '_' + loglevel_file_key] = 10
 default_values[debug_table + '_' + loglevel_console_key] = 20
 
@@ -403,7 +407,7 @@ table_keys_dict['loglevel_console_key'] = loglevel_console_key
 table_keys_dict['agingtable_period_key'] = agingtable_period_key
 table_keys_dict['agingtable_period_starttime_key'] = agingtable_period_starttime_key
 table_keys_dict['measuring_interval_debug_key'] = measuring_interval_debug_key
-table_keys_dict['agingtable_days_in_seconds_debug_key'] = agingtable_days_in_seconds_debug_key
+table_keys_dict['agingtable_hours_in_seconds_debug_key'] = agingtable_hours_in_seconds_debug_key
 table_keys_dict['measuring_duration_key'] = measuring_duration_key
 table_keys_dict['samples_refunit_tara_key'] = samples_refunit_tara_key
 table_keys_dict['spikes_refunit_tara_key'] = spikes_refunit_tara_key
@@ -439,7 +443,7 @@ table_fields_dict['agingtable_circulation_air_duration_field'] = agingtable_circ
 table_fields_dict['agingtable_circulation_air_period_field'] = agingtable_circulation_air_period_field
 table_fields_dict['agingtable_exhaust_air_duration_field'] = agingtable_exhaust_air_duration_field
 table_fields_dict['agingtable_exhaust_air_period_field'] = agingtable_exhaust_air_period_field
-table_fields_dict['agingtable_days_field'] = agingtable_days_field
+table_fields_dict['agingtable_hours_field'] = agingtable_hours_field
 table_fields_dict['agingtable_comment_field'] = agingtable_comment_field
 table_fields_dict['meat_sensortypes_name_field'] = meat_sensortypes_name_field
 table_fields_dict['meat_sensortypes_a_field'] = meat_sensortypes_a_field

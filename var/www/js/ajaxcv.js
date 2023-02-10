@@ -3,7 +3,7 @@
 //
 
 async function handleContent( msg ) {
-    console.log('in handleContent');
+//    console.log('in handleContent');
 
     myObj = JSON.parse(msg);
 

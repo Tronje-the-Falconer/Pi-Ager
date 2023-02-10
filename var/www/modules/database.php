@@ -333,108 +333,7 @@
         
         return $values;
     }
-        
-    function get_current_values_for_monitoring(){
-        global $current_values_table, $key_field, $value_field, $sensor_temperature_key, $sensor_humidity_key, $sensor_humidity_abs_key, $scale1_key, $scale2_key;
-        global $last_change_field, $last_change_temperature_json_key, $last_change_humidity_json_key, $last_change_scale1_json_key, $last_change_scale2_json_key, $server_time_json_key;
-        global $last_change_humidity_abs_json_key;
-        global $temperature_meat1_key, $temperature_meat2_key, $temperature_meat3_key, $temperature_meat4_key;
-        global $last_change_temperature_meat1_json_key, $last_change_temperature_meat2_json_key, $last_change_temperature_meat3_json_key, $last_change_temperature_meat4_json_key;
-        global $config_settings_table;
-        global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key;
-        global $meat1_sensor_name_json_key, $meat2_sensor_name_json_key, $meat3_sensor_name_json_key, $meat4_sensor_name_json_key;
-        global $sensor_dewpoint_key, $sensor_extern_temperature_key, $sensor_extern_humidity_key, $sensor_extern_humidity_abs_key, $sensor_extern_dewpoint_key;
-        global $last_change_dewpoint_json_key, $last_change_extern_temperature_json_key, $last_change_extern_humidity_json_key, $last_change_extern_dewpoint_json_key;
-        global $last_change_extern_humidity_abs_json_key;
-        
-        open_connection(); 
-        $sql = 'SELECT * FROM ' . $current_values_table;
-        // echo $sql;
-        $result = get_query_result($sql);
-        $values = array();
-        
-        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
-        {
-           $values[$dataset[$key_field]] =  $dataset[$value_field];
-           if ($dataset[$key_field] == $sensor_temperature_key)
-           {
-               $values[$last_change_temperature_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $sensor_humidity_key)
-           {
-               $values[$last_change_humidity_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $sensor_humidity_abs_key)
-           {
-               $values[$last_change_humidity_abs_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $scale1_key)
-           {
-               $values[$last_change_scale1_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $scale2_key)
-           {
-               $values[$last_change_scale2_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $temperature_meat1_key)
-           {
-               $values[$last_change_temperature_meat1_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $temperature_meat2_key)
-           {
-               $values[$last_change_temperature_meat2_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $temperature_meat3_key)
-           {
-               $values[$last_change_temperature_meat3_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $temperature_meat4_key)
-           {
-               $values[$last_change_temperature_meat4_json_key] =  $dataset[$last_change_field];
-           }
-            elseif ($dataset[$key_field] == $sensor_dewpoint_key)
-           {
-               $values[$last_change_dewpoint_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $sensor_extern_temperature_key)
-           {
-               $values[$last_change_extern_temperature_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $sensor_extern_humidity_key)
-           {
-               $values[$last_change_extern_humidity_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $sensor_extern_humidity_abs_key)
-           {
-               $values[$last_change_extern_humidity_abs_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $sensor_extern_dewpoint_key)
-           {
-               $values[$last_change_extern_dewpoint_json_key] =  $dataset[$last_change_field];
-           }
-        }
-        close_database();
-        
-        $values[$server_time_json_key] = time();
 
-        $meat1_sensortype_id = get_table_value($config_settings_table, $meat1_sensortype_key);
-        $meat2_sensortype_id = get_table_value($config_settings_table, $meat2_sensortype_key); 
-        $meat3_sensortype_id = get_table_value($config_settings_table, $meat3_sensortype_key);
-        $meat4_sensortype_id = get_table_value($config_settings_table, $meat4_sensortype_key);
-        
-        $row = get_meatsensor_table_row( $meat1_sensortype_id );
-        $values[$meat1_sensor_name_json_key] = $row['name'];
-        
-        $row = get_meatsensor_table_row( $meat2_sensortype_id );
-        $values[$meat2_sensor_name_json_key] = $row['name'];  
-        $row = get_meatsensor_table_row( $meat3_sensortype_id );
-        $values[$meat3_sensor_name_json_key] = $row['name'];
-        $row = get_meatsensor_table_row( $meat4_sensortype_id );
-        $values[$meat4_sensor_name_json_key] = $row['name'];  
-        
-        return $values;
-    }
-    
     function read_agingtable_name_from_config()
         {
         global $id_field,$agingtable_name_field,$config_settings_table,$agingtable_key,$agingtables_table;
@@ -772,12 +671,15 @@
                 $fields[4] == 'circulation_air_period' AND 
                 $fields[5] == 'exhaust_air_duration' AND 
                 $fields[6] == 'exhaust_air_period' AND 
-                $fields[7] == 'days' AND 
+                $fields[7] == 'hours' AND
                 $fields[8] == 'comment'){
 
                 $create_fields_str = join(', ', array_map(function ($field){
                     if ($field == 'comment'){
                         return "$field TEXT NULL";
+                    }
+                    elseif ($field == 'hours') {
+                        return "$field INTEGER DEFAULT 1 NOT NULL";
                     }
                     else{
                         return "$field INTEGER NULL";
@@ -945,7 +847,7 @@
                             $uv_period, $switch_on_uv_hour, $switch_on_uv_minute, $light_modus, $light_duration, 
                             $light_period, $switch_on_light_hour, $switch_on_light_minute, $dehumidifier_modus, 
                             $failure_temperature_delta, $failure_humidity_delta, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
-                            $shutdown_on_batlow, $delay_cooler, $dewpoint_check , $uv_check)
+                            $shutdown_on_batlow, $delay_cooler, $dewpoint_check, $uv_check)
         {
         global $value_field, $last_change_field, $key_field, $config_settings_table, $switch_on_cooling_compressor_key,
                 $switch_off_cooling_compressor_key, $switch_on_humidifier_key, $switch_off_humidifier_key, $delay_humidify_key, $uv_modus_key,

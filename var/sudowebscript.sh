@@ -83,6 +83,12 @@ case "$1" in
         sleep 3
         shutdown -h now
     ;;
+    set_time_date)  # set system time and date when pi-ager is in hotspot mode
+        systemctl stop systemd-timesyncd.service
+        timedatectl set-time "$2"
+        systemctl start systemd-timesyncd.service
+        systemctl daemon-reload
+    ;;
     *) echo "ERROR: invalid parameter: $1 (for $0)"; exit 1 #Fehlerbehandlung
     ;;
 esac
