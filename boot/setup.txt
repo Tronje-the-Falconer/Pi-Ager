@@ -15,32 +15,32 @@
 # Logfile wird unter /boot/setup.log angelegt 
 
 # Hostname, wie soll der Raspberry Pi im Netzwerk heissen:
-piname=
+piname='pi-ager'
 
 # Passwort für Benutzer pi:
-pipass=
+pipass='raspberry'
 
 # Passwort für Benutzer root:
-rootpass=
+rootpass='raspberry'
 
 # Passwort für Benutzer pi-ager auf der Webiste settings, admin, webcam:
-webguipw=
+webguipw='raspberry'
 
 # Passwort für Zugriff auf Datenbankverwaltung phpliteadmin:
-dbpw=
+dbpw='raspberry'
 
 # WLAN Netzwerkname:
-wlanssid=
+wlanssid='your WLAN SSID'
 
 # WLAN Schlüssel (mindesten 8 Zeichen):
-wlankey=
+wlankey='your WLAN key'
 
 # ISO code your country, e.g. DE, GB:
-country=
+country='DE'
 
 # Temperature/Humidity sensor attched to pi-ager:
 # Supported types are : DHT11, DHT22, SHT75, SHT85, SHT3x
-sensor=
+sensor='SHT3x'
 
 # setup.txt nach boot löschen? leer lassen für löschen oder 1 für behalten 
 keepconf=1

@@ -436,28 +436,28 @@
                                                     while ($index_row < $number_rows) {
                                                         $dataset = $agingtable_rows[$index_row];
                                                         // $num = count($dataset);
-                                                        if (!empty($dataset[$agingtable_modus_field])){
+                                                        if (isset($dataset[$agingtable_modus_field])){
                                                             $data_modus = $dataset[$agingtable_modus_field];
                                                         } else {$data_modus = '..';}
-                                                        if (!empty($dataset[$agingtable_setpoint_humidity_field])){
+                                                        if (isset($dataset[$agingtable_setpoint_humidity_field])){
                                                             $data_setpoint_humidity = $dataset[$agingtable_setpoint_humidity_field];
                                                         } else {$data_setpoint_humidity = '..';}
-                                                        if (!empty($dataset[$agingtable_setpoint_temperature_field])){
+                                                        if (isset($dataset[$agingtable_setpoint_temperature_field])){
                                                             $data_setpoint_temperature = $dataset[$agingtable_setpoint_temperature_field];
                                                         } else {$data_setpoint_temperature = '..';}
-                                                        if (!empty($dataset[$agingtable_circulation_air_duration_field])){
+                                                        if (isset($dataset[$agingtable_circulation_air_duration_field])){
                                                             $data_circulation_air_duration = $dataset[$agingtable_circulation_air_duration_field]/60;
                                                         } else {$data_circulation_air_duration = '..';}
-                                                        if (!empty($dataset[$agingtable_circulation_air_period_field])){
+                                                        if (isset($dataset[$agingtable_circulation_air_period_field])){
                                                             $data_circulation_air_period = $dataset[$agingtable_circulation_air_period_field]/60;
                                                         } else {$data_circulation_air_period = '..';}
-                                                        if (!empty($dataset[$agingtable_exhaust_air_duration_field])){
+                                                        if (isset($dataset[$agingtable_exhaust_air_duration_field])){
                                                             $data_exhaust_air_duration = $dataset[$agingtable_exhaust_air_duration_field]/60;
                                                         } else {$data_exhaust_air_duration = '..';}
-                                                        if (!empty($dataset[$agingtable_exhaust_air_period_field])){
+                                                        if (isset($dataset[$agingtable_exhaust_air_period_field])){
                                                             $data_exhaust_air_period = $dataset[$agingtable_exhaust_air_period_field]/60;
                                                         } else {$data_exhaust_air_period = '..';}
-                                                        if (!empty($dataset[$agingtable_hours_field])){
+                                                        if (isset($dataset[$agingtable_hours_field])){
                                                             $data_hours = $dataset[$agingtable_hours_field];
                                                         } else {$data_hours = '..';}
                                                         if ($current_period == $index_row AND $grepagingtable != 0){

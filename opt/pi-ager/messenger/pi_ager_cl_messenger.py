@@ -122,7 +122,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         sql_statement3 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.status_scale1_key + '";'
         sql_statement4 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.status_scale2_key + '";'
         sql_statement5 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.agingtable_period_key + '";'
-        sql_statement6 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "1"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.agingtable_period_day_key + '";'
+        sql_statement6 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "1"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.agingtable_period_hour_key + '";'
         
         cl_fact_logger.get_instance().debug('stop pi_ager sql statement : ' + sql_statement1)
         cl_fact_logger.get_instance().debug('stop agingtable sql statement : ' + sql_statement2 )

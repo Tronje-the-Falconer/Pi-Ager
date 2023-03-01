@@ -794,28 +794,28 @@
                                                         $number_rows = count($agingtable_rows);
                                                         while ($index_row < $number_rows) {
                                                             $dataset = $agingtable_rows[$index_row];
-                                                            if (!empty($dataset[$agingtable_modus_field])){
+                                                            if (isset($dataset[$agingtable_modus_field])){
                                                                 $data_modus = $dataset[$agingtable_modus_field];
                                                             }
-                                                            if (!empty($dataset[$agingtable_setpoint_humidity_field])){
+                                                            if (isset($dataset[$agingtable_setpoint_humidity_field])){
                                                                 $data_setpoint_humidity = $dataset[$agingtable_setpoint_humidity_field];
                                                             }
-                                                            if (!empty($dataset[$agingtable_setpoint_temperature_field])){
+                                                            if (isset($dataset[$agingtable_setpoint_temperature_field])){
                                                                 $data_setpoint_temperature = $dataset[$agingtable_setpoint_temperature_field];
                                                             }
-                                                            if (!empty($dataset[$agingtable_circulation_air_duration_field])){
+                                                            if (isset($dataset[$agingtable_circulation_air_duration_field])){
                                                                 $data_circulation_air_duration = $dataset[$agingtable_circulation_air_duration_field]/60;
                                                             }
-                                                            if (!empty($dataset[$agingtable_circulation_air_period_field])){
+                                                            if (isset($dataset[$agingtable_circulation_air_period_field])){
                                                                 $data_circulation_air_period = $dataset[$agingtable_circulation_air_period_field]/60;
                                                             }
-                                                            if (!empty($dataset[$agingtable_exhaust_air_duration_field])){
+                                                            if (isset($dataset[$agingtable_exhaust_air_duration_field])){
                                                                 $data_exhaust_air_duration = $dataset[$agingtable_exhaust_air_duration_field]/60;
                                                             }
-                                                            if (!empty($dataset[$agingtable_exhaust_air_period_field])){
+                                                            if (isset($dataset[$agingtable_exhaust_air_period_field])){
                                                                 $data_exhaust_air_period = $dataset[$agingtable_exhaust_air_period_field]/60;
                                                             }
-                                                            if (!empty($dataset[$agingtable_hours_field])){
+                                                            if (isset($dataset[$agingtable_hours_field])){
                                                                 $data_hours = $dataset[$agingtable_hours_field];
                                                             }
 

@@ -128,7 +128,7 @@
                 </div>
                 <h1 class="art-headline">Pi-Ager</h1>
                 <h2 class="art-slogan"><?php echo _('by') . ' ' . ('Grillsportverein'); ?></h2>
-                <h2 id="server_date_time_id" class="date-header"><?php echo date('Y-m-d H:i:s');?><h2>
+                <h2 id="server_date_time_id" class="date-header"><?php echo exec('date +"%Y-%m-%d %T"');?><h2>
                 <nav class="art-nav">
                     <div class="art-nav-inner">
                         <ul class="art-hmenu">

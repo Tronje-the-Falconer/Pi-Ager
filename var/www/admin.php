@@ -1029,6 +1029,51 @@
                                 </div>
                                 
                                 <?php
+                                    $ssids = [];
+                                    exec('sudo /var/show_wifi_connections.sh', $ssids, $res);
+                                    $ssid_count = count($ssids);
+                                    # echo 'return status from show_wifi_connections : ' . $res . '<br>';
+                                    # var_dump($ssids);
+                                ?>
+                                
+                                <div <?php if ($local_ip !== '10.0.0.5') { echo 'style="display:none;"'; }?>>
+                                    <hr>
+                                    <h2 class="art-postheader"><?php echo _('WLAN setup'); ?></h2>
+                                    <!----------------------------------------------------------------------------------------WLAN setup--> 
+                                    <div class="hg_container" >
+                                        <form method="post" name="wlansetup">
+                                            <table style="width: 100%;">
+                                                <tr>
+                                                    <td style=" text-align: left; padding-left: 20px;"><br>
+                                                    <?php
+                                                        if ($ssid_count == 0) {
+                                                            echo _('No WLAN networks found');
+                                                        }
+                                                        else {
+                                                            $si = 0;
+                                                            foreach ($ssids as $ssid) {
+                                                                if ($si == 0) {
+                                                                    echo '<input type="radio" name="ssid_selected" value="' . $ssid . '" checked="checked" /><label>&nbsp;' . $ssid . '</label><br>';
+                                                                }
+                                                                else {
+                                                                    echo '<input type="radio" name="ssid_selected" value="' . $ssid . '" /><label>&nbsp;' . $ssid . '</label><br>';
+                                                                }
+                                                                $si++;
+                                                            }
+                                                        }
+                                                    ?>
+                                                    </td>
+                                                    
+                                                    <td><label><?php echo _('WLAN password') . ' :&nbsp;'; ?></label><div class="tooltip"><input type="text" name="wlanpassword" <?php if ($ssid_count == 0) { echo ' disabled';} ?> required><span class="tooltiptext"><?php echo _('enter your WLAN password'); ?></span></input></div></td>
+                                                </tr>
+                                            </table>
+                                            <br>
+                                            <button class="art-button" name="setWLANconfig" value="setWLANconfig" <?php if ($ssid_count == 0) { echo 'disabled';} ?> onclick="return confirm('<?php echo _('ATTENTION: setup your WLAN and reboot?');?> ')"><?php echo _('save and reboot'); ?></button>
+                                        </form>
+                                    </div>
+                                </div>                                
+                                
+                                <?php
                                     if ($loglevel_console == 10 and $loglevel_file == 10){
                                         echo '<hr>';
                                         echo '<h2 class="art-postheader">' . _('python') . '</h2>';

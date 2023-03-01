@@ -63,33 +63,33 @@
                                                 while ($index_row < $number_rows) {
                                                     $dataset = $agingtable_rows[$index_row];
                                                     $row_id_array[($index_row + 1)] = $dataset['id'];
-                                                    if (!empty($dataset[$agingtable_modus_field])){
+                                                    if (isset($dataset[$agingtable_modus_field])){
                                                         $data_modus = $dataset[$agingtable_modus_field];
                                                     } else {$data_modus = '';}
-                                                    if (!empty($dataset[$agingtable_setpoint_humidity_field])){
+                                                    if (isset($dataset[$agingtable_setpoint_humidity_field])){
                                                         $data_setpoint_humidity = $dataset[$agingtable_setpoint_humidity_field];
                                                     } else {$data_setpoint_humidity = '';}
-                                                    if (!empty($dataset[$agingtable_setpoint_temperature_field])){
+                                                    if (isset($dataset[$agingtable_setpoint_temperature_field])){
                                                         $data_setpoint_temperature = $dataset[$agingtable_setpoint_temperature_field];
                                                     } else {$data_setpoint_temperature = '';}
-                                                    if (!empty($dataset[$agingtable_circulation_air_duration_field])){
+                                                    if (isset($dataset[$agingtable_circulation_air_duration_field])){
                                                         $data_circulation_air_duration = $dataset[$agingtable_circulation_air_duration_field]/60;
                                                     } else {$data_circulation_air_duration = '';}
-                                                    if (!empty($dataset[$agingtable_circulation_air_period_field])){
+                                                    if (isset($dataset[$agingtable_circulation_air_period_field])){
                                                         $data_circulation_air_period = $dataset[$agingtable_circulation_air_period_field]/60;
                                                     } else {$data_circulation_air_period = '';}
-                                                    if (!empty($dataset[$agingtable_exhaust_air_duration_field])){
+                                                    if (isset($dataset[$agingtable_exhaust_air_duration_field])){
                                                         $data_exhaust_air_duration = $dataset[$agingtable_exhaust_air_duration_field]/60;
                                                     } else {$data_exhaust_air_duration = '';}
-                                                    if (!empty($dataset[$agingtable_exhaust_air_period_field])){
+                                                    if (isset($dataset[$agingtable_exhaust_air_period_field])){
                                                         $data_exhaust_air_period = $dataset[$agingtable_exhaust_air_period_field]/60;
                                                     } else {$data_exhaust_air_period = '';}
-                                                    if (!empty($dataset[$agingtable_hours_field])){
+                                                    if (isset($dataset[$agingtable_hours_field])){
                                                         $data_hours = $dataset[$agingtable_hours_field];
                                                     } else {$data_hours = '';}
                                                     echo '<tr>';
                                                     echo '<td> ' . ($index_row +1) . '</td>';
-                                                    echo '<td><input name="data_modus_edit_agingtable_' . $index_row .'" maxlength="4" style="width: 90%;" size="1" min="1" max="4" type = "number" value=' . $data_modus . '></td>';
+                                                    echo '<td><input name="data_modus_edit_agingtable_' . $index_row .'" maxlength="4" style="width: 90%;" size="1" min="0" max="4" type = "number" value=' . $data_modus . '></td>';
                                                     echo '<td><input name="data_setpoint_humidity_edit_agingtable_' . $index_row .'" maxlength="4" style="width: 90%;" size="1" min="-1" max="100" type = "number" value=' . $data_setpoint_humidity . '></td>';
                                                     echo '<td><input name="data_setpoint_temperature_edit_agingtable_' . $index_row .'" maxlength="4" style="width: 90%;" size="1" min="-11" max="70" type = "number" value=' . $data_setpoint_temperature . '></td>';
                                                     echo '<td><input name="data_circulation_air_duration_edit_agingtable_' . $index_row .'" maxlength="4" style="width: 90%;" size="1" min="-1" max="1441" type = "number" value=' . $data_circulation_air_duration . '></td>';
