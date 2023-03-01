@@ -22,6 +22,7 @@
         }
         exec("sudo /var/updatessid.sh " . "'" . $selected_ssid . "' " . "'" . $wlanpassword . "'");
         sleep(2);
+        shell_exec('sudo /var/sudowebscript.sh reboot > /dev/null 2>&1 &');
         header("Location: /reboot.php");
         die();
     }    

@@ -5,9 +5,8 @@
 ?>
                                 <?php
                                 # 10 Sekunden anzeigen, dass System heruntergefahren wird
-                                    print '<p id=\'info-message\' style=\'color: #ff0000; font-size: 20px;\'><b>'. (_("shutdown")) .'</b><br>' . date("m/d/y h:i:s a") . '<br>System shutdown after 10 seconds. You will automatically redirected to the start page' . ' </p>
-                                    <br><br>';
-
+                                    $shutdown_datetime = exec('date +"%Y-%m-%d %T"');
+                                    echo '<p id=\'info-message\' style=\'color: #ff0000; font-size: 20px;\'><b>'. (_("shutdown")) .'</b><br>' . $shutdown_datetime . '<br>' . (_("System shutdown after 10 seconds. You will automatically redirected to the start page")) . '</p><br><br>';
                                 ?>
                                 <img src="images/spinner.gif" alt=""/>
                                 <script>
