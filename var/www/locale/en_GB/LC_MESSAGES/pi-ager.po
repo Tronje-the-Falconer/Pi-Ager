@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-GB\n"
-"POT-Creation-Date: 2023-02-10 17:58+0100\n"
-"PO-Revision-Date: 2023-02-10 17:59+0100\n"
+"POT-Creation-Date: 2023-03-01 22:08+0100\n"
+"PO-Revision-Date: 2023-03-01 22:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -1090,7 +1090,7 @@ msgstr ""
 msgid "ATTENTION: reboot system?"
 msgstr ""
 
-#: var/www/admin.php:542 var/www/reboot.php:8
+#: var/www/admin.php:542 var/www/reboot.php:9
 msgid "reboot"
 msgstr ""
 
@@ -1098,7 +1098,7 @@ msgstr ""
 msgid "ATTENTION: shutdown system?"
 msgstr ""
 
-#: var/www/admin.php:543 var/www/shutdown.php:8
+#: var/www/admin.php:543 var/www/shutdown.php:9
 msgid "shutdown"
 msgstr ""
 
@@ -1311,6 +1311,10 @@ msgid "set Pi-Ager date/time"
 msgstr ""
 
 #: var/www/admin.php:1022
+msgid "Pi-Ager date/time format YYYY-MM-DD HH:MM:SS"
+msgstr ""
+
+#: var/www/admin.php:1022
 msgid "date/time format YYYY-MM-DD HH:MM:SS e.g. 2023-01-31 16:05:09"
 msgstr ""
 
@@ -1318,19 +1322,43 @@ msgstr ""
 msgid "ATTENTION: set date and time?"
 msgstr ""
 
-#: var/www/admin.php:1034
+#: var/www/admin.php:1041
+msgid "WLAN setup"
+msgstr ""
+
+#: var/www/admin.php:1050
+msgid "No WLAN networks found"
+msgstr ""
+
+#: var/www/admin.php:1067
+msgid "WLAN password"
+msgstr ""
+
+#: var/www/admin.php:1067
+msgid "enter your WLAN password"
+msgstr ""
+
+#: var/www/admin.php:1071
+msgid "ATTENTION: setup your WLAN and reboot?"
+msgstr ""
+
+#: var/www/admin.php:1071
+msgid "save and reboot"
+msgstr ""
+
+#: var/www/admin.php:1079
 msgid "python"
 msgstr ""
 
-#: var/www/admin.php:1040
+#: var/www/admin.php:1085
 msgid "ATTENTION: stop"
 msgstr ""
 
-#: var/www/admin.php:1040
+#: var/www/admin.php:1085
 msgid "stop"
 msgstr ""
 
-#: var/www/admin.php:1041
+#: var/www/admin.php:1086
 msgid "start"
 msgstr ""
 
@@ -3560,6 +3588,10 @@ msgstr ""
 "<br>If this arrives, everything is set correctly.\n"
 "<br><br>"
 
+#: var/www/reboot.php:9
+msgid "You will automatically redirected to the start page"
+msgstr ""
+
 #: var/www/scale_wizzard.php:24
 msgid "measuring on scales stopped due to calibrating scale"
 msgstr ""
@@ -3761,6 +3793,12 @@ msgstr ""
 
 #: var/www/settings.php:502
 msgid "during fully automatic aging."
+msgstr ""
+
+#: var/www/shutdown.php:9
+msgid ""
+"System shutdown after 10 seconds. You will automatically redirected to the "
+"start page"
 msgstr ""
 
 #: var/www/webcam.php:25

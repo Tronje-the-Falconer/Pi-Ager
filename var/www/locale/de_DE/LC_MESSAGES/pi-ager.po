@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-DE\n"
-"POT-Creation-Date: 2023-02-10 18:51+0100\n"
-"PO-Revision-Date: 2023-02-10 18:56+0100\n"
+"POT-Creation-Date: 2023-03-01 22:11+0100\n"
+"PO-Revision-Date: 2023-03-01 22:22+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -1114,7 +1114,7 @@ msgstr "Neustarten & Herunterfahren"
 msgid "ATTENTION: reboot system?"
 msgstr "ACHTUNG: System neu starten?"
 
-#: var/www/admin.php:542 var/www/reboot.php:8
+#: var/www/admin.php:542 var/www/reboot.php:9
 msgid "reboot"
 msgstr "Neu starten"
 
@@ -1122,7 +1122,7 @@ msgstr "Neu starten"
 msgid "ATTENTION: shutdown system?"
 msgstr "ACHTUNG: System herunterfahren?"
 
-#: var/www/admin.php:543 var/www/shutdown.php:8
+#: var/www/admin.php:543 var/www/shutdown.php:9
 msgid "shutdown"
 msgstr "Herunterfahren"
 
@@ -1346,19 +1346,43 @@ msgstr "Datum/Uhrzeit Format JJJJ-MM-TT HH:MM:SS z. B. 2023-01-31 16:05:09"
 msgid "ATTENTION: set date and time?"
 msgstr "ACHTUNG: Datum und Uhrzeit einstellen?"
 
-#: var/www/admin.php:1034
+#: var/www/admin.php:1041
+msgid "WLAN setup"
+msgstr "WLAN-Einrichtung"
+
+#: var/www/admin.php:1050
+msgid "No WLAN networks found"
+msgstr "Keine WLAN-Netzwerke gefunden"
+
+#: var/www/admin.php:1067
+msgid "WLAN password"
+msgstr "WLAN-Kennwort"
+
+#: var/www/admin.php:1067
+msgid "enter your WLAN password"
+msgstr "Geben Sie das WLAN-Passwort ein"
+
+#: var/www/admin.php:1071
+msgid "ATTENTION: setup your WLAN and reboot?"
+msgstr "ACHTUNG: WLAN einrichten und neu starten?"
+
+#: var/www/admin.php:1071
+msgid "save and reboot"
+msgstr "Speichern und neu starten"
+
+#: var/www/admin.php:1079
 msgid "python"
 msgstr "Python"
 
-#: var/www/admin.php:1040
+#: var/www/admin.php:1085
 msgid "ATTENTION: stop"
 msgstr "ACHTUNG: Stop"
 
-#: var/www/admin.php:1040
+#: var/www/admin.php:1085
 msgid "stop"
 msgstr "Stop"
 
-#: var/www/admin.php:1041
+#: var/www/admin.php:1086
 msgid "start"
 msgstr "Start"
 
@@ -2275,7 +2299,7 @@ msgstr "Betriebsdauer in Stunden"
 
 #: var/www/index.php:1399
 msgid "Pi-Ager"
-msgstr ""
+msgstr "Pi-Ager"
 
 #: var/www/index.php:1403
 msgid "uv light"
@@ -3626,6 +3650,10 @@ msgstr ""
 "<br>Kommt diese an, ist alles richtig eingestellt.\n"
 "<br><br>"
 
+#: var/www/reboot.php:9
+msgid "You will automatically redirected to the start page"
+msgstr "Sie werden automatisch zur Startseite weitergeleitet"
+
 #: var/www/scale_wizzard.php:24
 msgid "measuring on scales stopped due to calibrating scale"
 msgstr "Waagenmessungen werden während des Kalibrierens angehalten"
@@ -3830,6 +3858,14 @@ msgstr "Manuelle Anpassungen sind nicht möglich"
 #: var/www/settings.php:502
 msgid "during fully automatic aging."
 msgstr "während der Pi-Ager über die Reifetabelle gesteuert wird."
+
+#: var/www/shutdown.php:9
+msgid ""
+"System shutdown after 10 seconds. You will automatically redirected to the "
+"start page"
+msgstr ""
+"Das System schaltet sich nach 10 Sekunden ab. Sie werden automatisch zur "
+"Startseite weitergeleitet"
 
 #: var/www/webcam.php:25
 msgid "download image file"
