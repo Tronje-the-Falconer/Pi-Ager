@@ -247,16 +247,16 @@
         $min_time_window = 604800 / 4;  // if time windows <= 1/4 week then nth = 1
         if ($customtime > $min_time_window) {   
             $nth_value =  intval($customtime / $min_time_window * $corr_factor);
-            if ($nth_value < 1) {
-                $nth_value = 1;
-            }
             $nth_value_scale =  intval($customtime / $min_time_window * $corr_factor_scale);
-            if ($nth_value_scale < 1) {
-                $nth_value_scale = 1;
-            }            
         }
-     }
-     
+    }
+    if ($nth_value < 1) {
+        $nth_value = 1;
+    }
+    if ($nth_value_scale < 1) {
+        $nth_value_scale = 1;
+    }
+    
     // make nth_value_scale odd-numbered
     if ($nth_value_scale > 1 and (($nth_value_scale % 2) == 0)) {
         $nth_value_scale -= 1;
