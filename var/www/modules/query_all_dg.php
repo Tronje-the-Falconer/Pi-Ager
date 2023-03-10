@@ -151,7 +151,7 @@
     $saving_period_scale1 = get_table_value($settings_scale1_table, $saving_period_key);
     $saving_period_scale2 = get_table_value($settings_scale2_table, $saving_period_key);
     // calculated temperature-humidity saving period, saving loop needs about 6s
-    $temperatur_humidity_saving_period = $save_temperature_humidity_loops * 6;
+    $temperatur_humidity_saving_period = $save_temperature_humidity_loops * 12;
     $corr_factor = 27.0/$save_temperature_humidity_loops;
     $corr_factor_scale = max($temperatur_humidity_saving_period/$saving_period_scale1, $temperatur_humidity_saving_period/$saving_period_scale2);  
     
@@ -206,7 +206,7 @@
     $all_sensors_rows = get_allsensors_dataset($nth_value, $first_timestamp_diagram, $last_timestamp_diagram);
     // reading all_scales_table
     $all_scales_rows = get_allscales_dataset($nth_value_scale, $first_timestamp_diagram, $last_timestamp_diagram);
-
+    
     // common x-axis timestamps for all_sensors
     $all_sensors_timestamps_array = array_column($all_sensors_rows, 'last_change');
     $all_sensors_timestamps_array[] = $last_timestamp_diagram;
