@@ -211,8 +211,8 @@
     $save_temperature_humidity_loops = get_table_value($config_settings_table, $save_temperature_humidity_loops_key);
     $saving_period_scale1 = get_table_value($settings_scale1_table, $saving_period_key);
     $saving_period_scale2 = get_table_value($settings_scale2_table, $saving_period_key);
-    // calculated temperature-humidity saving period, saving loop needs about 12s
-    $temperatur_humidity_saving_period = $save_temperature_humidity_loops * 12;
+    // calculated temperature-humidity saving period, saving loop needs about 6s
+    $temperatur_humidity_saving_period = $save_temperature_humidity_loops * 6;
     $corr_factor = 27.0/$save_temperature_humidity_loops;
     $corr_factor_scale = max($temperatur_humidity_saving_period/$saving_period_scale1, $temperatur_humidity_saving_period/$saving_period_scale2);  
     
