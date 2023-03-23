@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-DE\n"
-"POT-Creation-Date: 2023-03-01 22:11+0100\n"
-"PO-Revision-Date: 2023-03-01 22:22+0100\n"
+"POT-Creation-Date: 2023-03-23 11:57+0100\n"
+"PO-Revision-Date: 2023-03-23 12:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -257,6 +257,18 @@ msgstr "neue Werte für Zyklus"
 msgid "in agingtable duration_sleep-loop. duration_sleep left"
 msgstr "Restzeit im laufenden Zyklus"
 
+#: opt/pi-ager/pi_ager_cl_nextion.py:105
+msgid "Light turned off after 10 minutes timeout"
+msgstr "Licht wird nach 10 Minuten Zeitüberschreitung ausgeschaltet"
+
+#: opt/pi-ager/pi_ager_cl_nextion.py:120
+msgid "Light turned off"
+msgstr "Licht permanent AUS"
+
+#: opt/pi-ager/pi_ager_cl_nextion.py:134
+msgid "Light turned on"
+msgstr "Licht permanent EIN"
+
 #: opt/pi-ager/pi_ager_cl_nextion.py:691
 msgid "Client instance generated"
 msgstr "Clientinstanz generiert"
@@ -264,6 +276,20 @@ msgstr "Clientinstanz generiert"
 #: opt/pi-ager/pi_ager_cl_nextion.py:695
 msgid "Nextion client connected"
 msgstr "Nextion Client verbunden"
+
+#: opt/pi-ager/pi_ager_cl_nextion.py:700
+msgid "Could not connect to Nextion client. Possible HMI display not connected"
+msgstr ""
+"Es konnte keine Verbindung zum Nextion Client hergestellt werden. "
+"Möglicherweise ist das HMI-Display nicht angeschlossen"
+
+#: opt/pi-ager/pi_ager_cl_nextion.py:741
+msgid "Nextion client run-loop finished"
+msgstr "Nextion-Client-Laufschleife beendet"
+
+#: opt/pi-ager/pi_ager_cl_nextion.py:794
+msgid "Nextion client stopped"
+msgstr "Nextion-Client gestoppt"
 
 #: opt/pi-ager/pi_ager_cl_scale.py:30
 msgid "Start scale loop1 at"

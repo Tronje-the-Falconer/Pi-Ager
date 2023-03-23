@@ -102,7 +102,7 @@ class cl_nextion( threading.Thread ):
                 await self.client.set('btn_light.pic', 41) 
                 
     async def turn_off_light(self):
-        cl_fact_logger.get_instance().info('Light turned off after 10 minutes timeout')
+        cl_fact_logger.get_instance().info(_('Light turned off after 10 minutes timeout'))
         # gpio.output(pi_ager_gpio_config.gpio_light, True)
         globals.requested_state_light = pi_ager_names.relay_off
         globals.hands_off_light_switch = False
@@ -117,7 +117,7 @@ class cl_nextion( threading.Thread ):
     async def control_light_status(self):
         #light_status = await self.client.get('values.status_light.val')  
         if self.light_status == True:
-            cl_fact_logger.get_instance().info('Light turned off')
+            cl_fact_logger.get_instance().info(_('Light turned off'))
             self.light_status = False       # turn off
             if self.current_theme == 'fridge':
                 await self.client.set('btn_light.pic', 12) 
@@ -131,7 +131,7 @@ class cl_nextion( threading.Thread ):
             # pi_ager_database.update_value_in_table(pi_ager_names.current_values_table, pi_ager_names.status_light_key, 0)
             
         else:
-            cl_fact_logger.get_instance().info('Light turned on')
+            cl_fact_logger.get_instance().info(_('Light turned on'))
             self.light_status = True       # turn on
             if self.current_theme == 'fridge':
                 await self.client.set('btn_light.pic', 13)
@@ -697,7 +697,7 @@ class cl_nextion( threading.Thread ):
             self.wakeup_task = self.loop.create_task(self.wakeup_waiter(self.wakeup_event))            
         except Exception as e:
             cl_fact_logger.get_instance().error('run_client exception1: ' + str(e))
-            cl_fact_logger.get_instance().error('Could not connect to Nextion client. Possible HDMI display not connected')
+            cl_fact_logger.get_instance().error(_('Could not connect to Nextion client. Possible HMI display not connected'))
             while not self.stop_event.is_set():
                 await asyncio.sleep(1)
             return                                                                                                              
@@ -738,7 +738,7 @@ class cl_nextion( threading.Thread ):
                 
             await asyncio.sleep(3)
 
-        cl_fact_logger.get_instance().info('Nextion client run-loop finished')
+        cl_fact_logger.get_instance().info(_('Nextion client run-loop finished'))
         
     def inner_ctrl_c_signal_handler(self, sig, frame):
         self.stop_event.set()
@@ -791,7 +791,7 @@ class cl_nextion( threading.Thread ):
             
         finally:
             #cl_fact_logger.get_instance().info('after finally')
-            cl_fact_logger.get_instance().info('Nextion client stopped')
+            cl_fact_logger.get_instance().info(_('Nextion client stopped'))
             self.loop.close()
     
     async def show_offline(self):
