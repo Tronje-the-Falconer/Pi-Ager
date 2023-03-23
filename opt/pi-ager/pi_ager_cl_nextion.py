@@ -201,7 +201,7 @@ class cl_nextion( threading.Thread ):
                 self.wakeup_event.clear()
                 cl_fact_logger.get_instance().debug('wakeup event processed')
         except Exception as e:
-            cl_fact_logger.get_instance().error('wakeup_waiter stopped ' + str(e))
+            cl_fact_logger.get_instance().error(_('wakeup_waiter stopped ') + str(e))
             pass
             
     async def button_waiter(self, event):   # process touch screen button events
@@ -384,7 +384,7 @@ class cl_nextion( threading.Thread ):
                 self.button_event.clear()
                 cl_fact_logger.get_instance().debug('button pressed processed')
         except Exception as e:
-            cl_fact_logger.get_instance().error('button_waiter stopped ' + str(e))
+            cl_fact_logger.get_instance().error(_('button_waiter stopped ') + str(e))
             pass    
     
     def get_pi_model(self):

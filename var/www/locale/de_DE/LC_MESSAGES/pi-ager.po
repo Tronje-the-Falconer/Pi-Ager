@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-DE\n"
-"POT-Creation-Date: 2023-03-23 11:57+0100\n"
-"PO-Revision-Date: 2023-03-23 12:00+0100\n"
+"POT-Creation-Date: 2023-03-23 17:49+0100\n"
+"PO-Revision-Date: 2023-03-23 17:55+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -268,6 +268,14 @@ msgstr "Licht permanent AUS"
 #: opt/pi-ager/pi_ager_cl_nextion.py:134
 msgid "Light turned on"
 msgstr "Licht permanent EIN"
+
+#: opt/pi-ager/pi_ager_cl_nextion.py:204
+msgid "wakeup_waiter stopped "
+msgstr "HMI Anzeige: Weckdienst gestoppt"
+
+#: opt/pi-ager/pi_ager_cl_nextion.py:387
+msgid "button_waiter stopped "
+msgstr "HMI Anzeige: Schaltflächenüberwachung gestoppt"
 
 #: opt/pi-ager/pi_ager_cl_nextion.py:691
 msgid "Client instance generated"
@@ -4565,9 +4573,6 @@ msgstr "Licht manuell EIN"
 
 #~ msgid "webcam could not be started"
 #~ msgstr "Wencam konnte nicht gestartet werden"
-
-#~ msgid "webcam stopped"
-#~ msgstr "Webcam angehalten"
 
 #~ msgid "testmail adress"
 #~ msgstr "Test E-Mailadresse"
