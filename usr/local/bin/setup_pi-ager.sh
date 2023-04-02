@@ -94,7 +94,8 @@ then
             echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" > /etc/wpa_supplicant/wpa_supplicant.conf
             echo "update_config=1" >> /etc/wpa_supplicant/wpa_supplicant.conf
             echo "country=$country" >> /etc/wpa_supplicant/wpa_supplicant.conf
-            wpa_passphrase "$wlanssid" "$wlankey" >> /etc/wpa_supplicant/wpa_supplicant.conf
+#            wpa_passphrase "$wlanssid" "$wlankey" >> /etc/wpa_supplicant/wpa_supplicant.conf
+            echo -e "\nnetwork={\n\tssid=\x22${wlanssid}\x22\n\tpsk=\x22${wlankey}\x22\n\tkey_mgmt=WPA-PSK\n}" >> /etc/wpa_supplicant/wpa_supplicant.conf
             echo "WLAN SSID und Passphrase gesetzt"
         fi
     fi
