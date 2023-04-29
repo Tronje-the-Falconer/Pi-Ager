@@ -746,6 +746,9 @@ def generate_cooler_failure_events():
     global cooler_failure_on_repeat_counter
     global temp_sensor4_data        # contains AC Current
     
+    if (temp_sensor4_data == None):
+        return  
+        
     meat4_sensortype = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.meat4_sensortype_key))
     if (meat4_sensortype != 18):    # must be ac current sensor
         return
