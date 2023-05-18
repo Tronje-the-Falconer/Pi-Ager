@@ -1,7 +1,7 @@
 # Initial Konfiguration
 # Pi-Ager 
 
-# Standard Hostname              rpi-Pi-Ager 
+# Standard Hostname              Pi-Ager 
 # Standard Passwoerter für alle  raspberry
 # 
 # Nur ausgefüllte Werte werden gesetzt
@@ -28,6 +28,24 @@ webguipw='raspberry'
 
 # Passwort für Zugriff auf Datenbankverwaltung phpliteadmin:
 dbpw='raspberry'
+
+#--------------------------------------------------------------------------------
+# Pi-Ager funktioniert auch ohne Router und ohne Internet Verbindung.
+# Hat der Pi-Ager keine Verbindung zu einem WLAN Router oder Access Point, 
+# schaltet der Pi-Ager automatisch in den Hotspot Mode.
+# Er kann dann via Smartphone oder Tablet erreicht werden.
+# Der Pi-Ager Hotspot hat die WLAN SSDI 'RPiHotspot',
+# das Passwort ist '1234567890'.
+# Der Pi-Ager ist dann über die IP Adresse 10.0.0.5 via SSH ereichbar,
+# den Pi-Ager Webserver kann man mit einem Browser unter der URL http://10.0.0.5/ erreichen.
+#
+# Die Überprüfung, ob eine Verbindung zu einem Router oder Access Point möglich ist,
+# erfolgt automatisch alle 2 Minuten.
+#
+# Im Hotspot Mode können auf der ADMIN Seite Datum und Uhrzeit gesetzt werden.
+# Sollte später ein WLAN Router verfügbar sein, ist es auch möglich,
+# WLAN SSID und WLAN Passwort des Routers einzugeben.
+#-------------------------------------------------------------------------------
 
 # WLAN Netzwerkname:
 wlanssid='your WLAN SSID'
