@@ -55,6 +55,7 @@
                                                         $hum_abs_main = number_format(floatval($data_from_db), 1, '.', '');
                                                     }
                                                     $data_from_db = get_table_value($current_values_table, $sensor_extern_temperature_key);
+                                                    $external_temperature = $data_from_db;
                                                     if ($data_from_db === null) {
                                                         $temp_ext = '-----';
                                                     }
@@ -1081,10 +1082,19 @@
                                                     $sensor_temperature = '--.-';
                                                     $sensor_humidity = '--.-';
                                                 }
-                                                $cooler_on = number_format(floatval($setpoint_temperature + $switch_on_cooling_compressor), 1, '.', '');
-                                                $cooler_off = number_format(floatval($setpoint_temperature + $switch_off_cooling_compressor), 1, '.', '');
-                                                $heater_on = number_format(floatval($setpoint_temperature - $switch_on_cooling_compressor), 1, '.', '');
-                                                $heater_off = number_format(floatval($setpoint_temperature - $switch_off_cooling_compressor), 1, '.', '');
+                                                $internal_temperature = get_table_value($current_values_table, $sensor_temperature_key);
+                                                if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $sensor_temperature && ($modus == 3 || $modus == 4)) {
+                                                    $cooler_on = number_format(floatval($setpoint_temperature + $heating_hysteresis/2), 2, '.', '');
+                                                    $cooler_off = number_format(floatval($setpoint_temperature - $heating_hysteresis/2), 2, '.', '');
+                                                    $heater_on = number_format(floatval($setpoint_temperature - $cooling_hysteresis/2), 2, '.', '');
+                                                    $heater_off = number_format(floatval($setpoint_temperature + $cooling_hysteresis/2), 2, '.', '');
+                                                }
+                                                else {
+                                                    $cooler_on = number_format(floatval($setpoint_temperature + $cooling_hysteresis/2), 2, '.', '');
+                                                    $cooler_off = number_format(floatval($setpoint_temperature - $cooling_hysteresis/2), 2, '.', '');
+                                                    $heater_on = number_format(floatval($setpoint_temperature - $heating_hysteresis/2), 2, '.', '');
+                                                    $heater_off = number_format(floatval($setpoint_temperature + $heating_hysteresis/2), 2, '.', '');
+                                                }
                                                 if ($modus == 0 || $modus == 1){
                                                     echo '<td><img id="mod_type_line1_id" src="images/icons/cooling_42x42.png" alt=""></td>
                                                         <td><img id="mod_stat_line1_id" src="'.$cooler_on_off_png.'" title="PIN_COOL 4[7] -> IN 1 (PIN2)"></td>
@@ -1097,6 +1107,7 @@
                                                         <td id="mod_off_line1_id">'.$cooler_off.' °C</td>';
                                                 }
                                                 else if ($modus == 2){
+                                                    // in mode 2, when only heating is active, take primary hysteresis values (primary is cooling_hysteresis).
                                                     echo '<td><img id="mod_type_line1_id" src="images/icons/heating_42x42.png" alt=""></td>
                                                         <td><img id="mod_stat_line1_id" src="'.$heater_on_off_png.'" title="PIN_HEATER 3[5] -> IN 2 (PIN 3)"></td>
                                                         <td id="mod_name_line1_id" class="text_left">';
@@ -1104,8 +1115,8 @@
                                                     echo '</td>
                                                         <td id="mod_current_line1_id">'.$sensor_temperature.' °C</td>
                                                         <td id="mod_setpoint_line1_id">'.$setpoint_temperature.' °C</td>
-                                                        <td id="mod_on_line1_id">'.$heater_on.' °C</td>
-                                                        <td id="mod_off_line1_id">'.$heater_off.' °C</td>';
+                                                        <td id="mod_on_line1_id">'.$cooler_on.' °C</td>
+                                                        <td id="mod_off_line1_id">'.$cooler_off.' °C</td>';
                                                 }
                                                 else {
                                                     echo '<td><img id="mod_type_line1_id" src="images/icons/cooling_42x42.png" alt=""></td>

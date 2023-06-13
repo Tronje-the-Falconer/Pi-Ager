@@ -468,7 +468,7 @@
                                     <!-------------------submit button -->    
                                     <table style="width: 100%; align: center;">
                                         <tr>
-                                            <td rowspan=3><button class="art-button" name="admin_form_submit" type="submit" value="admin_form_submit" onclick="return confirm('<?php echo _('save'); echo ' '; echo _('administration 1'); ?>?')"><?php echo _('save'); ?></button></td>
+                                            <td rowspan=3><button class="art-button" name="admin_form_submit" type="submit" value="admin_form_submit" onclick="return confirm('<?php echo _('save'); echo ' '; echo _('administration'); ?>?')"><?php echo _('save'); ?></button></td>
                                         </tr>
                                     </table>
                                     </div>

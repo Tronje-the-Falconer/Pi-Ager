@@ -160,10 +160,6 @@ def setup_GPIO():
 
 loopcounter = 0                      #  Zaehlt die Durchlaeufe des Mainloops
     
-# Einschalttemperatur
-switch_on_cooling_compressor = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_cooling_compressor_key)
-# Ausschalttemperatur
-switch_off_cooling_compressor = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_cooling_compressor_key)
 # Einschaltfeuchte
 switch_on_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_humidifier_key)
 # Ausschaltfeuchte

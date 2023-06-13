@@ -4,8 +4,8 @@
     if(!empty($_POST['config_form_submit']))
         {                       // ist das $_POST-Array gesetzt
         logger('DEBUG', 'button save configvalues pressed');
-        $switch_on_cooling_compressor_config = $_POST['switch_on_cooling_compressor_config'];
-        $switch_off_cooling_compressor_config = $_POST['switch_off_cooling_compressor_config'];
+        $cooling_hysteresis_config = $_POST['cooling_hysteresis_config'];
+        $heating_hysteresis_config = $_POST['heating_hysteresis_config'];
         $switch_on_humidifier_config = $_POST['switch_on_humidifier_config'];
         $switch_off_humidifier_config = $_POST['switch_off_humidifier_config'];
         $delay_humidify_config = $_POST['delay_humidify_config'];
@@ -29,15 +29,17 @@
         $shutdown_on_batlow_config = $_POST['shutdown_on_batlow_config'];
         $delay_cooler_config = $_POST['delay_cooler_config'];
         $dewpoint_check_config = $_POST['dewpoint_check_config'];
+        $reset_uptime_config = $_POST['reset_uptime_config'];
+        $init_uv_uptime_config = $_POST['init_uv_uptime_config'];  // hours
         
         $ConfigInputIsValid = TRUE;
         foreach ($_POST as $key => $value) {  // Prüfen, ob nur Zahlen eingegeben wurden
             if ($key == 'config_form_submit') {
                 continue;
             }
-            else if ($key == 'switch_on_cooling_compressor_config' || $key == 'switch_off_cooling_compressor_config') {
+            else if ($key == 'cooling_hysteresis_config' || $key == 'heating_hysteresis_config') {
                 if (is_numeric($value) == FALSE) {
-                    $message_config = _('unauthorized character - please use only integers!');
+                    $message_config = _('unauthorized character - please use only integers or floats!');
                     $ConfigInputIsValid = FALSE;
                 }
             }
@@ -51,9 +53,7 @@
 
         if ($ConfigInputIsValid == TRUE)
         {
-            if ( $switch_on_cooling_compressor_config < 11 && $switch_on_cooling_compressor_config > -11 && ($switch_on_cooling_compressor_config != $switch_off_cooling_compressor_config) &&       // Prüfung Einschaltwert setpoint_temperature.
-                ($switch_on_cooling_compressor_config > $switch_off_cooling_compressor_config) &&                                                              // Prüfung Einschaltwert setpoint_temperature.
-                $switch_off_cooling_compressor_config < 11 && $switch_off_cooling_compressor_config > -11 &&                                                        // Prüfung Ausschaltwert setpoint_temperature.
+            if ($cooling_hysteresis_config != $heating_hysteresis_config &&                                // hysteresis must differ.
                 $switch_on_humidifier_config < 31 && $switch_on_humidifier_config > -31 && ($switch_on_humidifier_config != $switch_off_humidifier_config) &&          // Prüfung Einschaltwert Feuchte
                 ($switch_on_humidifier_config > $switch_off_humidifier_config) &&                                                               // Prüfung Einschaltwert Feuchte
                 $switch_off_humidifier_config < 31 && $switch_off_humidifier_config > -31 &&                                                          // Prüfung Ausschaltwert Feuchte
@@ -72,7 +72,7 @@
             )
             {
                 # Eingestellte Werte in config/config.json und logs/logfile.txt speichern
-                write_config($switch_on_cooling_compressor_config, $switch_off_cooling_compressor_config,
+                write_config($cooling_hysteresis_config, $heating_hysteresis_config,
                             $switch_on_humidifier_config, $switch_off_humidifier_config, $delay_humidify_config, $uv_modus_config, $uv_duration_config,
                             $uv_period_config, $switch_on_uv_hour_config, $switch_on_uv_minute_config, $light_modus_config, $light_duration_config,
                             $light_period_config, $switch_on_light_hour_config, $switch_on_light_minute_config, $dehumidifier_modus_config,
@@ -83,36 +83,21 @@
                 # Modus
                 if ($modus == 0) {
                     $operating_mode = _('cooling');
-                    $switch_on_temperature_cooling = $setpoint_temperature + $switch_on_cooling_compressor_config;
-                    $switch_off_temperature_cooling = $setpoint_temperature + $switch_off_cooling_compressor_config;
                 }
 
                 if ($modus == 1) {
                     $operating_mode = _('cooling with humidification');
-                    $switch_on_temperature_cooling = $setpoint_temperature + $switch_on_cooling_compressor_config;
-                    $switch_off_temperature_cooling = $setpoint_temperature + $switch_off_cooling_compressor_config;
                 }
 
                 if ($modus == 2) {
                     $operating_mode = _('heating with humidification');
-                    $switch_on_temperature_cooling = $setpoint_temperature - $switch_on_cooling_compressor_config;
-                    $switch_off_temperature_cooling = $setpoint_temperature - $switch_off_cooling_compressor_config;
                 }
                 if ($modus == 3) {
                     $operating_mode = _('automatic with humidification');
-                    $switch_on_temperature_cooling = $setpoint_temperature + $switch_on_cooling_compressor_config;
-                    $switch_off_temperature_cooling_cooling = $setpoint_temperature + $switch_off_cooling_compressor_config;
-                    $switch_on_temperature_heating = $setpoint_temperature - $switch_on_cooling_compressor_config;
-                    $switch_off_temperature_cooling_heating = $setpoint_temperature - $switch_off_cooling_compressor_config;
                 }
 
                 if ($modus == 4) {
                     $operating_mode = _('automatic with dehumidification and humidification');
-                    $switch_on_temperature_cooling = $setpoint_temperature + $switch_on_cooling_compressor_config;
-                    $switch_off_temperature_cooling_cooling = $setpoint_temperature + $switch_off_cooling_compressor_config;
-                    $switch_on_temperature_heating = $setpoint_temperature - $switch_on_cooling_compressor_config;
-                    $switch_off_temperature_cooling_heating = $setpoint_temperature - $switch_off_cooling_compressor_config;
-
                     $switch_on_humidify = ($setpoint_humidity - $switch_on_humidifier_config) < 0 ? 0 : ($setpoint_humidity - $switch_on_humidifier_config);
                     $switch_off_humidify = ($setpoint_humidity - $switch_off_humidifier_config) < 0 ? 0 : ($setpoint_humidity - $switch_off_humidifier_config);
                     $switch_on_dehumidify = ($setpoint_humidity + $switch_on_humidifier_config) > 100 ? 100 : ($setpoint_humidity + $switch_on_humidifier_config);
@@ -172,18 +157,20 @@
                 $logstring = $logstring . " \n " . _('configuration has been changed.') . " \n ";
                 $logstring = $logstring . " \n " . _('operating mode') . ": " . $operating_mode;
 
-                if ($modus == 0 || $modus == 1 || $modus == 2)  {
-                    $logstring = $logstring . " \n " . _('setpoint temperature').": ".$setpoint_temperature." &deg;C";
-                    $logstring = $logstring . " \n " . _('switch-off temperature').": ".$switch_off_cooling_compressor_config." &deg;C ("._('so at')." ".$switch_off_temperature_cooling." &deg;C)";
-                    $logstring = $logstring . " \n " . _('switch-on temperature').": ".$switch_on_cooling_compressor_config." &deg;C ("._('so at')." ".$switch_on_temperature_cooling." &deg;C)";
+                if ($modus == 0 || $modus == 1)  {
+                    $logstring = $logstring . " \n " . _('setpoint temperature') . ": " . $setpoint_temperature . " &deg;C";
+                    $logstring = $logstring . " \n " . _('primary control hysteresis') . ": " . $cooling_hysteresis_config . " &deg;C";
                 }
                 
+                if ($modus == 2)  {
+                    $logstring = $logstring . " \n " . _('setpoint temperature') . ": " . $setpoint_temperature . " &deg;C";
+                    $logstring = $logstring . " \n " . _('primary control hysteresis') . ": " . $cooling_hysteresis_config . " &deg;C";
+                }
+                                
                 if ($modus == 3 || $modus == 4)  {
                     $logstring = $logstring . " \n " . _('setpoint temperature').": ".$setpoint_temperature." &deg;C";
-                    $logstring = $logstring . " \n " . _('switch-on heater').": ".$switch_on_cooling_compressor_config.' &deg;C ('._('so at')." ".$switch_on_temperature_heating.' &deg;C)';
-                    $logstring = $logstring . " \n " . _('switch-off heater').": ".$switch_off_cooling_compressor_config." &deg;C ("._('so at')." ".$switch_off_temperature_cooling_heating." &deg;C)";
-                    $logstring = $logstring . " \n " . _('switch-on cooler').": ".$switch_on_cooling_compressor_config." &deg;C ("._('so at')." ".$switch_on_temperature_cooling." &deg;C)";
-                    $logstring = $logstring . " \n " . _('switch-off cooler').": ".$switch_off_cooling_compressor_config." &deg;C ("._('so at')." ".$switch_off_temperature_cooling_cooling." &deg;C)";
+                    $logstring = $logstring . " \n " . _('primary control hysteresis') . ": " . $cooling_hysteresis_config . " &deg;C";
+                    $logstring = $logstring . " \n " . _('secondary control hysteresis') . ": " . $heating_hysteresis_config . " &deg;C";
                 }
 
                 if ($modus == 1 || $modus == 2 || $modus == 3) {
@@ -224,8 +211,12 @@
                 $message_config = (_("values saved in file Database"));
             }
             else {
-            logger('DEBUG', 'configvalues not in specified limits');
-            $message_config = (_("values not within the specified limits!"));
+                logger('DEBUG', 'configvalues not in specified limits');
+                $message_config = (_("values not within the specified limits!"));
+            }
+            // set up uptime if checked
+            if ($reset_uptime_config == 1) {
+                write_table_value($time_meter_table, $id_field, 1, $uv_light_seconds_field, intval($init_uv_uptime_config * 3600));
             }
         }
         print '<script language="javascript"> alert("'. (_("general configuration")) . " : " .$message_config.'"); </script>';

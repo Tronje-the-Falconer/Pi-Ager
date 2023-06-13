@@ -17,8 +17,8 @@ import globals
 globals.init()
 
 #Zuerst Datenbank prüfen
-import pi_ager_database_check
-pi_ager_database_check.check_and_update_database()
+# import pi_ager_database_check
+# pi_ager_database_check.check_and_update_database()
 
 from main.pi_ager_cl_logger import cl_fact_logger
 import pi_ager_loop

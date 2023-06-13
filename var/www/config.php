@@ -2,60 +2,29 @@
                                 include 'modules/write_config_db_logfile_txt.php';          // Speichert die eingestelle Configuration (Hysteresen, Sensortyp, GPIO's)
                                 include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                 ?>
-                                <?php
-                                    if (isset($_POST['reset_uv_uptime_submit'])) {
-                                        write_table_value($time_meter_table, $id_field, 1, $uv_light_seconds_field, 0);
-                                    }
-                                ?>
                                 <button class="art-button" type="button" onclick="setconfig_blockFunction()"><?php echo _('set general configuration values'); ?></button>
                                 </br>
                                 </br>
                                 <div id="set_config" class="help_p">
                                     <form method="post" name="config">
                                         <div class="hg_container" >
-                                            <b><?php echo strtoupper(_('attention! be carful what you do!')); ?></b>
+                                            <b><?php echo strtoupper(_('attention! be careful what you do!')); ?></b>
                                             <hr>
                                             <!----------------------------------------------------------------------------------------Temperatur-->
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <tr>
-                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('temperature'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_config_blockFunction()"><?php echo _('help'); ?></button></td>
-                                                    <td><?php echo _('switch-on value'); ?>:</td>
-                                                    <td><input name="switch_on_cooling_compressor_config" type="number" style="width: 30%;" min="-10" max="10" step="0.1" required value=<?php echo $switch_on_cooling_compressor; ?>>&nbsp;°C
-                                                        <span style="font-size: xx-small;">
-                                                            <?php 
-                                                                if($modus == 0 || $modus == 1){
-                                                                    echo '('._('on at')." ".($setpoint_temperature+$switch_on_cooling_compressor)." °C)";
-                                                                }
-                                                                elseif($modus == 2){
-                                                                    echo '('._('on at')." ".($setpoint_temperature-$switch_on_cooling_compressor)." °C)";
-                                                                }
-                                                                else {
-                                                                    echo _('see logs');
-                                                                }
-                                                            ?>
-                                                        </span>
+                                                    <td rowspan="3" class="td_png_icon"><h3><?php echo _('temperature control'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td class="text_left_padding"><?php echo _('primary control hysteresis'); ?>:</td>
+                                                    <td><input name="cooling_hysteresis_config" type="number" style="width: 30%;" min="0.5" max="5" step="0.1" required value=<?php echo $cooling_hysteresis; ?>>&nbsp;°C
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><?php echo _('switch-off value').':'; ?></td>
-                                                    <td><input name="switch_off_cooling_compressor_config" type="number" style="width: 30%;" min="-10" max="10" step="0.1" required value= <?php echo $switch_off_cooling_compressor; ?>>&nbsp;°C
-                                                        <span style="font-size: xx-small">
-                                                            <?php 
-                                                                if($modus == 0 || $modus == 1){
-                                                                    echo '('._('off at').' '.($setpoint_temperature+$switch_off_cooling_compressor).' °C)';
-                                                                }
-                                                                elseif($modus == 2){
-                                                                    echo '('._('off at').' '.($setpoint_temperature-$switch_off_cooling_compressor).' °C)';
-                                                                }
-                                                                else {
-                                                                    echo _('see logs');
-                                                                }
-                                                            ?>
-                                                        </span>
+                                                    <td class="text_left_padding"><?php echo _('secondary control hysteresis'); ?>:</td>
+                                                    <td><input name="heating_hysteresis_config" type="number" style="width: 30%;" min="0.5" max="5" step="0.1" required value=<?php echo $heating_hysteresis; ?>>&nbsp;°C
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><?php echo _('delay'); ?>:</td>
+                                                    <td class="text_left_padding"><?php echo _('cooler delay'); ?>:</td>
                                                     <td><input name="delay_cooler_config" type="number" style="width: 30%;" min="30" max="120" step="1" required value=<?php echo $delay_cooler; ?>>&nbsp;<?php echo _('seconds'); ?><span style="font-size: xx-small"> (30 <?php echo _('to'); ?> 120)</span></td>
                                                 </tr>
                                             </table>
@@ -76,8 +45,8 @@
                                             <!----------------------------------------------------------------------------------------Luftfeuchte-->
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <tr>
-                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('humidity'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
-                                                    <td><?php echo _('switch-on value').':'; ?></td>
+                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('humidity control'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td class="text_left_padding"><?php echo _('switch-on value').':'; ?></td>
                                                     <td><input name="switch_on_humidifier_config" type="number" style="width: 30%;" min="-30" max="30" required value=<?php echo $switch_on_humidifier; ?>>&nbsp;%<span style="font-size: xx-small">
                                                     <?php 
                                                                 if($modus == 0 || $modus == 1 || $modus == 2){
@@ -90,7 +59,7 @@
                                                         </span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><?php echo _('switch-off value').':'; ?></td>
+                                                    <td class="text_left_padding"><?php echo _('switch-off value').':'; ?></td>
                                                     <td><input name="switch_off_humidifier_config" type="number" style="width: 30%;" min="-30" max="30" required value=<?php echo $switch_off_humidifier; ?>>&nbsp;%<span style="font-size: xx-small">
                                                     <?php 
                                                                 if($modus == 0 || $modus == 1 || $modus == 2){
@@ -102,7 +71,7 @@
                                                     ?></span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><?php echo _('delay'); ?>:</td>
+                                                    <td class="text_left_padding"><?php echo _('humidifier delay'); ?>:</td>
                                                     <td><input name="delay_humidify_config" type="number" style="width: 30%;" min="0" max="60" required value=<?php echo $delay_humidify; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 60)</span></td>
                                                 </tr>
                                             </table>
@@ -139,17 +108,16 @@
                                                 <tr>
                                                     <td class="td_png_icon"><h3><?php echo _('dehumidify'); ?></h3><img src="images/icons/dehumidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_dehumidifier_blockFunction()"><?php echo _('help'); ?></button>
                                                     </td>
-                                                    <td style=" text-align: left; padding-left: 20px;">
+                                                    <td class="text_left_padding">
                                                         <input type="radio" name="dehumidifier_modus_config" value="1" <?php echo $checked_dehumidify_1; ?>/><label> <?php echo _('only exhaust'); ?></label><br>
                                                         <input type="radio" name="dehumidifier_modus_config" value="2" <?php echo $checked_dehumidify_2; ?>/><label> <?php echo _('exhaust & dehumidifier'); ?></label><br>
                                                         <input type="radio" name="dehumidifier_modus_config" value="3" <?php echo $checked_dehumidify_3; ?>/><label> <?php echo _('only dehumidifier'); ?></label><br><br>
                                                         <?php
                                                             # $bus = intval(get_table_value($config_settings_table, $sensorbus_key));
                                                             if ($sensorsecondtype != 0){        //($bus == 0 and $sensorsecondtype != 0) {
-                                                                echo _('abs. humidity check aktive') . ': ';
                                                                 echo '<input type="hidden" name="dewpoint_check_config" value="0"/>';
-                                                                echo '<input type="checkbox" name="dewpoint_check_config" value="1" ';
-                                                                echo $dewpoint_check_config_active . '/>';
+                                                                echo '<label><input style="vertical-align: -2px;" type="checkbox" name="dewpoint_check_config" value="1" ';
+                                                                echo $dewpoint_check_config_active . '> ' . _('abs. humidity check aktive') . '</label>';
                                                             }
                                                             else {
                                                                 echo '<input type="hidden" name="dewpoint_check_config" value="0"/>';
@@ -175,8 +143,8 @@
                                             <!----------------------------------------------------------------------------------------uv-->
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <tr>
-                                                    <td rowspan="5" class="td_png_icon"><h3><?php echo _('uv'); ?></h3><img src="images/icons/uv-light_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_uv_blockFunction()"><?php echo _('help'); ?></button></td>
-                                                    <td colspan="2" style="text-align: left; padding-left: 20px;">
+                                                    <td rowspan="6" class="td_png_icon"><h3><?php echo _('uv'); ?></h3><img src="images/icons/uv-light_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_uv_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td colspan="2" class="text_left_padding">
                                                         <input type="radio" name="uv_modus_config" value="1" <?php echo $checked_uv_1; ?>/><label> <?php echo _('ON/OFF duration'); ?></label><br>
                                                         <input type="radio" name="uv_modus_config" value="2" <?php echo $checked_uv_2; ?>/><label> <?php echo _('ON duration & timestamp'); ?></label><br>
                                                         <input type="radio" name="uv_modus_config" value="0" <?php echo $checked_uv_0; ?>/><label> <?php echo _('OFF'); ?></label><br>
@@ -184,27 +152,30 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><?php echo _('OFF duration').':'; ?></td>
+                                                    <td class="text_left_padding"><?php echo _('OFF duration').':'; ?></td>
                                                     <td><input name="uv_period_config" type="number" style="width: 30%;" min="0" max="1440" required value=<?php echo $uv_period; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span>
-                                                    </span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><?php echo _('ON duration'); ?>:</td>
-                                                    <td><input name="uv_duration_config" type="number" style="width: 30%;" min="0" max="1440" required value=<?php echo $uv_duration; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><?php echo _('timestamp'); ?>:</td>
-                                                    <td><input name="switch_on_uv_hour_config" type="number" style="width: 30%;" min="0" max="23" required value=<?php echo $switch_on_uv_hour; ?>> : <input name="switch_on_uv_minute_config" type="number" style="width: 30%;" min="0" max="59" value=<?php echo $switch_on_uv_minute; ?>>&nbsp;<?php echo _("o'clock"); ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><?php echo _('activate circulating air') . ': ';?></td>
-                                                    <td>
-                                                        <input type="hidden" name="uv_check_config" value="0" />
-                                                        <input type="checkbox" name="uv_check_config" value="1" <?php echo $uv_check_config_active; ?> />
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td colspan="3" style="text-align: center;"><button class="art-button" name="reset_uv_uptime_submit" type="submit" value="reset_uv_uptime_submit" onclick="return confirm('<?php echo _('reset'); echo ' '; echo _('uv uptime'); ?>?')"><?php echo _('reset uptime'); ?></button></td>
+                                                    <td class="text_left_padding"><?php echo _('ON duration'); ?>:</td>
+                                                    <td><input name="uv_duration_config" type="number" style="width: 30%;" min="0" max="1440" required value=<?php echo $uv_duration; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('timestamp'); ?>:</td>
+                                                    <td><input name="switch_on_uv_hour_config" type="number" style="width: 30%;" min="0" max="23" required value=<?php echo $switch_on_uv_hour; ?>> : <input name="switch_on_uv_minute_config" type="number" style="width: 30%;" min="0" max="59" value=<?php echo $switch_on_uv_minute; ?>>&nbsp;<?php echo _("o'clock"); ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding">
+                                                        <input type="hidden" name="reset_uptime_config" value="0"/>
+                                                        <label><input style="vertical-align: -2px;" type="checkbox" name="reset_uptime_config" value="1">&nbsp;<?php echo _('set/reset uptime');?></label>
+                                                    </td>
+                                                    <td><input name="init_uv_uptime_config" type="number" style="width: 30%;" min="0" value="0">&nbsp;<?php echo _('hours');?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding">
+                                                        <input type="hidden" name="uv_check_config" value="0" />
+                                                        <label><input style="vertical-align: -2px;" type="checkbox" name="uv_check_config" value="1" <?php echo $uv_check_config_active; ?>>&nbsp;<?php echo _('activate circulating air');?></label>
+                                                    </td>
                                                 </tr>
                                             </table>
                                             <script>
@@ -233,16 +204,16 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td><?php echo _('OFF duration').':'; ?></td>
+                                                    <td class="text_left_padding"><?php echo _('OFF duration').':'; ?></td>
                                                     <td><input name="light_period_config" type="number" style="width: 30%;" min="0" max="1440" required value=<?php echo $light_period; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span>
                                                     </span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><?php echo _('ON duration'); ?>:</td>
+                                                    <td class="text_left_padding"><?php echo _('ON duration'); ?>:</td>
                                                     <td><input name="light_duration_config" type="number" style="width: 30%;" min="0" max="1440" required value=<?php echo $light_duration; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 1440)</span></td>
                                                 </tr>
-                                                                                                <tr>
-                                                    <td><?php echo _('timestamp'); ?>:</td>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('timestamp'); ?>:</td>
                                                     <td><input name="switch_on_light_hour_config" type="number" style="width: 30%;" min="0" max="23" required value=<?php echo $switch_on_light_hour; ?>> : <input name="switch_on_light_minute_config" type="number" style="width: 30%;" min="0" max="59" value=<?php echo $switch_on_light_minute; ?>>&nbsp;<?php echo _("o'clock"); ?></td>
                                                 </tr>
                                             </table>
@@ -264,15 +235,15 @@
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <tr>
                                                     <td rowspan="4" class="td_png_icon"><h3><?php echo _('internal temperature limits'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_event_config_blockFunction()"><?php echo _('help'); ?></button></td>
-                                                    <td><?php echo _('low temperature limit'); ?>:</td>
+                                                    <td class="text_left_padding"><?php echo _('low temperature limit'); ?>:</td>
                                                     <td><input name="internal_temperature_low_limit_config" type="number" style="width: 30%;" min="-11" max="70" required value=<?php echo $internal_temperature_low_limit; ?>>&nbsp;°C<span style="font-size: xx-small"> (-11 <?php echo _('to'); ?> 70)</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><?php echo _('high temperature limit').':'; ?></td>
+                                                    <td class="text_left_padding"><?php echo _('high temperature limit').':'; ?></td>
                                                     <td><input name="internal_temperature_high_limit_config" type="number" style="width: 30%;" min="-11" max="70" required value= <?php echo $internal_temperature_high_limit; ?>>&nbsp;°C<span style="font-size: xx-small"> (-11 <?php echo _('to'); ?> 70)</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td><?php echo _('hysteresis').':'; ?></td>
+                                                    <td class="text_left_padding"><?php echo _('hysteresis').':'; ?></td>
                                                     <td><input name="internal_temperature_hysteresis_config" type="number" style="width: 30%;" min="1" max="10" required value= <?php echo $internal_temperature_hysteresis; ?>>&nbsp;°C<span style="font-size: xx-small"> (1 <?php echo _('to'); ?> 10)</span></td>
                                                 </tr>                                                
                                                 
@@ -303,9 +274,9 @@
                                                 ?>
                                                 <tr>
                                                     <td rowspan="3" class="td_png_icon"><h3><?php echo _('UPS battery'); ?></h3><img src="images/icons/battery_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_shutdown_on_batlow_config_blockFunction()"><?php echo _('help'); ?></button></td>
-                                                    <td columnspan="2" style="width: 100%;"><?php echo _('shutdown on battery low'); ?>:
+                                                    <td style="width: 100%;" class="text_left_padding">
                                                         <input type="hidden" name="shutdown_on_batlow_config" value="0"/>
-                                                        <input type="checkbox" name="shutdown_on_batlow_config" value="1" <?php echo $checked_shutdown_on_batlow_true; ?>/>
+                                                        <label><input style="vertical-align: -2px;" type="checkbox" name="shutdown_on_batlow_config" value="1" <?php echo $checked_shutdown_on_batlow_true; ?>>&nbsp;<?php echo _('shutdown on battery low');?></label>
                                                     </td>
                                                     <td></td>
                                                 </tr>

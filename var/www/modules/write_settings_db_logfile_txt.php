@@ -65,38 +65,37 @@
 
                         # Formatierung für die Lesbarkeit im Logfile:
                         # Modus
+                        $internal_temperature = get_table_value($current_values_table, $sensor_temperature_key);
+                        $external_temperature = get_table_value($current_values_table, $sensor_extern_temperature_key);
+                        if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $sensor_temperature && ($modus_setting == 3 || $modus_setting == 4)) {
+                            $cooler_on = number_format(floatval($setpoint_temperature_setting + $heating_hysteresis/2), 2, '.', '');
+                            $cooler_off = number_format(floatval($setpoint_temperature_setting - $heating_hysteresis/2), 2, '.', '');
+                            $heater_on = number_format(floatval($setpoint_temperature_setting - $cooling_hysteresis/2), 2, '.', '');
+                            $heater_off = number_format(floatval($setpoint_temperature_setting + $cooling_hysteresis/2), 2, '.', '');
+                        }
+                        else {
+                            $cooler_on = number_format(floatval($setpoint_temperature_setting + $cooling_hysteresis/2), 2, '.', '');
+                            $cooler_off = number_format(floatval($setpoint_temperature_setting - $cooling_hysteresis/2), 2, '.', '');
+                            $heater_on = number_format(floatval($setpoint_temperature_setting - $heating_hysteresis/2), 2, '.', '');
+                            $heater_off = number_format(floatval($setpoint_temperature_setting + $heating_hysteresis/2), 2, '.', '');
+                        }
                         if ($modus_setting == 0) {
                             $operating_mode = _('cooling');
-                            $switch_on_temperature_cooling = $setpoint_temperature_setting + $switch_on_cooling_compressor;
-                            $switch_off_temperature_cooling = $setpoint_temperature_setting + $switch_off_cooling_compressor;
                         }
 
                         if ($modus_setting == 1) {
                             $operating_mode = _('cooling with humidification');
-                            $switch_on_temperature_cooling = $setpoint_temperature_setting + $switch_on_cooling_compressor;
-                            $switch_off_temperature_cooling = $setpoint_temperature_setting + $switch_off_cooling_compressor;
                         }
 
                         if ($modus_setting == 2) {
                             $operating_mode = _('heating with humidification');
-                            $switch_on_temperature_cooling = $setpoint_temperature_setting - $switch_on_cooling_compressor;
-                            $switch_off_temperature_cooling = $setpoint_temperature_setting - $switch_off_cooling_compressor;
                         }
                         if ($modus_setting == 3) {
                             $operating_mode = _('automatic with humidification');
-                            $switch_on_temperature_cooling = $setpoint_temperature_setting + $switch_on_cooling_compressor;
-                            $switch_off_temperature_cooling_cooling = $setpoint_temperature_setting + $switch_off_cooling_compressor;
-                            $switch_on_temperature_heating = $setpoint_temperature_setting - $switch_on_cooling_compressor;
-                            $switch_off_temperature_cooling_heating = $setpoint_temperature_setting - $switch_off_cooling_compressor;
                         }
 
                         if ($modus_setting == 4) {
                             $operating_mode = _('automatic with dehumidification and humidification');
-                            $switch_on_temperature_cooling = $setpoint_temperature_setting + $switch_on_cooling_compressor;
-                            $switch_off_temperature_cooling_cooling = $setpoint_temperature_setting + $switch_off_cooling_compressor;
-                            $switch_on_temperature_heating = $setpoint_temperature_setting - $switch_on_cooling_compressor;
-                            $switch_off_temperature_cooling_heating = $setpoint_temperature_setting - $switch_off_cooling_compressor;
-
                             $switch_on_humidify = $setpoint_humidity_setting - $switch_on_humidifier;
                             $switch_off_humidify = $setpoint_humidity_setting - $switch_off_humidifier;
                             $switch_on_dehumidify = $setpoint_humidity_setting + $switch_on_humidifier;
@@ -160,16 +159,16 @@
                         
                         if ($modus_setting == 0 || $modus_setting == 1 || $modus_setting == 2)  {
                             $logstring = $logstring . " \n " . _('setpoint temperature').": ".$setpoint_temperature_setting."&deg;C";
-                            $logstring = $logstring . " \n " . _('switch-off temperature').": ".$switch_off_cooling_compressor."&deg;C ("._('so at')." ".$switch_off_temperature_cooling."&deg;C)";
-                            $logstring = $logstring . " \n " . _('switch-on temperature').": ".$switch_on_cooling_compressor."&deg;C ("._('so at')." ".$switch_on_temperature_cooling."&deg;C)";
+                            $logstring = $logstring . " \n " . _('switch-off temperature').": ".$cooler_off."&deg;C)";
+                            $logstring = $logstring . " \n " . _('switch-on temperature').": ".$cooler_on."&deg;C)";
                         }
 
                         if ($modus_setting == 3 || $modus_setting == 4)  {
                             $logstring = $logstring . " \n " . _('setpoint temperature').": ".$setpoint_temperature_setting."&deg;C";
-                            $logstring = $logstring . " \n " . _('switch-on heater').": ".$switch_on_cooling_compressor.'&deg;C ('._('so at')." ".$switch_on_temperature_heating.'&deg;C)';
-                            $logstring = $logstring . " \n " . _('switch-off heater').": ".$switch_off_cooling_compressor."&deg;C ("._('so at')." ".$switch_off_temperature_cooling_heating."&deg;C)";
-                            $logstring = $logstring . " \n " . _('switch-on cooler').": ".$switch_on_cooling_compressor."&deg;C ("._('so at')." ".$switch_on_temperature_cooling."&deg;C)";
-                            $logstring = $logstring . " \n " . _('switch-off cooler').": ".$switch_off_cooling_compressor."&deg;C ("._('so at')." ".$switch_off_temperature_cooling_cooling."&deg;C)";
+                            $logstring = $logstring . " \n " . _('switch-on heater').": ".$heater_on.'&deg;C)';
+                            $logstring = $logstring . " \n " . _('switch-off heater').": ".$heater_off."&deg;C)";
+                            $logstring = $logstring . " \n " . _('switch-on cooler').": ".$cooler_on."&deg;C)";
+                            $logstring = $logstring . " \n " . _('switch-off cooler').": ".$cooler_off."&deg;C)";
                         }
 
                         if ($modus_setting == 1 || $modus_setting == 2 || $modus_setting == 3) {

@@ -46,8 +46,8 @@ $config_current_check_table = 'config_current_check';
 $time_meter_table = 'time_meter';
 
 #----------------------------table keys;
-$switch_on_cooling_compressor_key = 'switch_on_cooling_compressor';
-$switch_off_cooling_compressor_key = 'switch_off_cooling_compressor';
+$cooling_hysteresis_key = 'cooling_hysteresis';
+$heating_hysteresis_key = 'heating_hysteresis';
 $switch_on_humidifier_key = 'switch_on_humidifier';
 $switch_off_humidifier_key = 'switch_off_humidifier';
 $delay_humidify_key = 'delay_humidify';
@@ -256,11 +256,12 @@ $current_threshold_field = 'current_threshold';
 $repeat_event_cycle_field = 'repeat_event_cycle';
 $uv_light_seconds_field = 'uv_light_seconds';
 $pi_ager_seconds_field = 'pi_ager_seconds';
+$defrost_temp_limit_field = 'temp_limit';
 
 #-----------------------------Paths and urls
-$thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/';
+$thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi-release-3-3-x.342426/';
 $error_reporting_url = 'https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/Error-reporting';
-$faq_url =  'https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/FAQ';
+$faq_url =  'https://pi-ager.org/faq/';
 $sqlite_path = '/var/www/config/pi-ager.sqlite3';
 $logfile_txt_file = '/var/www/logs/logfile.txt';
 $pi_ager_log_file = '/var/www/logs/pi-ager.log';

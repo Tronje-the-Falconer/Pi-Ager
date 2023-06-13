@@ -3,8 +3,8 @@
     $sensortype = get_table_value($config_settings_table,$sensortype_key);
     $sensorsecondtype = get_table_value($config_settings_table,$sensorsecondtype_key);
     $language = get_table_value($config_settings_table,$language_key);
-    $switch_on_cooling_compressor = number_format(floatval(get_table_value($config_settings_table,$switch_on_cooling_compressor_key)), 1, '.', '');
-    $switch_off_cooling_compressor = number_format(floatval(get_table_value($config_settings_table,$switch_off_cooling_compressor_key)), 1, '.', '');
+    $cooling_hysteresis = number_format(floatval(get_table_value($config_settings_table, $cooling_hysteresis_key)), 1, '.', '');
+    $heating_hysteresis = number_format(floatval(get_table_value($config_settings_table, $heating_hysteresis_key)), 1, '.', '');
     $switch_on_humidifier = get_table_value($config_settings_table,$switch_on_humidifier_key);
     $switch_off_humidifier = get_table_value($config_settings_table,$switch_off_humidifier_key);
     $delay_humidify = get_table_value($config_settings_table,$delay_humidify_key);
