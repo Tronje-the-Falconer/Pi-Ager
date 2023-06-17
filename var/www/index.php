@@ -1083,6 +1083,7 @@
                                                     $sensor_humidity = '--.-';
                                                 }
                                                 $internal_temperature = get_table_value($current_values_table, $sensor_temperature_key);
+                                                $external_temperature = get_table_value($current_values_table, $sensor_extern_temperature_key);
                                                 if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $sensor_temperature && ($modus == 3 || $modus == 4)) {
                                                     $cooler_on = number_format(floatval($setpoint_temperature + $heating_hysteresis/2), 2, '.', '');
                                                     $cooler_off = number_format(floatval($setpoint_temperature - $heating_hysteresis/2), 2, '.', '');

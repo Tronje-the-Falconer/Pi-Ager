@@ -15,12 +15,12 @@
                                                 <tr>
                                                     <td rowspan="3" class="td_png_icon"><h3><?php echo _('temperature control'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td class="text_left_padding"><?php echo _('primary control hysteresis'); ?>:</td>
-                                                    <td><input name="cooling_hysteresis_config" type="number" style="width: 30%;" min="0.5" max="5" step="0.1" required value=<?php echo $cooling_hysteresis; ?>>&nbsp;°C
+                                                    <td><input name="cooling_hysteresis_config" type="number" style="width: 30%;" min="0.5" max="7" step="0.1" required value=<?php echo $cooling_hysteresis; ?>>&nbsp;°C
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('secondary control hysteresis'); ?>:</td>
-                                                    <td><input name="heating_hysteresis_config" type="number" style="width: 30%;" min="0.5" max="5" step="0.1" required value=<?php echo $heating_hysteresis; ?>>&nbsp;°C
+                                                    <td><input name="heating_hysteresis_config" type="number" style="width: 30%;" min="0.5" max="7" step="0.1" required value=<?php echo $heating_hysteresis; ?>>&nbsp;°C
                                                     </td>
                                                 </tr>
                                                 <tr>
