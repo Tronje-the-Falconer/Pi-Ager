@@ -494,7 +494,11 @@ def control_defrost():
     pi_ager_database.write_current_value(pi_ager_names.status_defrost_key, 1)
     gpio.output(pi_ager_gpio_config.gpio_heater, pi_ager_names.relay_on)
     gpio.output(pi_ager_gpio_config.gpio_cooling_compressor, pi_ager_names.relay_off)
-    gpio.output(pi_ager_gpio_config.gpio_circulating_air, pi_ager_names.relay_on) 
+    circulate_air = int(pi_ager_database.get_table_value_from_field(pi_ager_names.defrost_table, pi_ager_names.defrost_circulate_air_field))
+    if (circulate_air == 1):
+        gpio.output(pi_ager_gpio_config.gpio_circulating_air, pi_ager_names.relay_on)
+    else:
+        gpio.output(pi_ager_gpio_config.gpio_circulating_air, pi_ager_names.relay_off)
     cl_fact_logger.get_instance().debug('defrost in progress')
         
 def status_light_in_current_values_is_on():

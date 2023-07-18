@@ -482,6 +482,7 @@
                                         <table style="width: 100%;" class="miniature_writing">
                                             <?php
                                                 $defrost_active = get_table_value_from_field($defrost_table, Null, $defrost_active_field);
+                                                $defrost_circulate_air = get_table_value_from_field($defrost_table, Null, $defrost_circulate_air_field);
                                                 $defrost_temperature = number_format(floatval(get_table_value_from_field($defrost_table, Null, $defrost_temperature_field)), 1, '.', '');
                                                 $defrost_cycle_hours = get_table_value_from_field($defrost_table, Null, $defrost_cycle_hours_field);
                                                 if ($defrost_active == 1) {
@@ -489,6 +490,12 @@
                                                 }
                                                 else{
                                                     $checked_defrost_true = "";
+                                                }
+                                                if ($defrost_circulate_air == 1) {
+                                                    $checked_circulate_air_true = "checked";
+                                                }
+                                                else{
+                                                    $checked_circulate_air_true = "";
                                                 }
                                             ?>
                                             <tr>
@@ -501,6 +508,14 @@
                                                 <td style="text-align: left;"><input name="defrost_cycle_hours" type="number" min="1" max="24" step="1" style="width: 30%;" required value=<?php echo $defrost_cycle_hours; ?>>&nbsp;<?php echo _('hours'); ?><span style="font-size: xx-small"> (1 <?php echo _('to'); ?> 24)</span></td>
                                             </tr>
                                             <tr>
+                                                <td class="text_left_padding"><?php echo _('circulate air active'); ?>:</td>
+                                                <td style="text-align: left;">
+                                                    <input type="hidden" name="defrost_circulate_air" value="0">
+                                                    <input type="checkbox" name="defrost_circulate_air" value="1" <?php echo $checked_circulate_air_true; ?>/>
+                                                </td>
+                                            </tr>
+                                            <tr><td>&nbsp;</td></tr>
+                                            <tr>
                                                 <td class="text_left_padding"><?php echo _('defrost active'); ?>:</td>
                                                 <td style="text-align: left;">
                                                     <input type="hidden" name="defrost_active" value="0">
@@ -508,7 +523,6 @@
                                                 </td>
                                             </tr>
                                             <tr><td>&nbsp;</td></tr>
-                                            <tr><td>&nbsp;</td></tr> 
                                         </table>
 
                                         <script>

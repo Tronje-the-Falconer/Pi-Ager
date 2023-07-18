@@ -257,6 +257,7 @@ $repeat_event_cycle_field = 'repeat_event_cycle';
 $uv_light_seconds_field = 'uv_light_seconds';
 $pi_ager_seconds_field = 'pi_ager_seconds';
 $defrost_temp_limit_field = 'temp_limit';
+$defrost_circulate_air_field = 'circulate_air';
 
 #-----------------------------Paths and urls
 $thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi-release-3-3-x.342426/';

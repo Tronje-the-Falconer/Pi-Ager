@@ -1079,18 +1079,18 @@
         }
     }
     
-    function write_defrost_values($defrost_temperature, $defrost_cycle_hours, $defrost_active){
-        global $id_field, $defrost_table, $defrost_temperature_field, $defrost_cycle_hours_field, $defrost_active_field;
+    function write_defrost_values($defrost_temperature, $defrost_cycle_hours, $defrost_active, $defrost_circulate_air){
+        global $id_field, $defrost_table, $defrost_temperature_field, $defrost_cycle_hours_field, $defrost_active_field, $defrost_circulate_air_field ;
         
         if (is_table_empty($defrost_table) == True) {
             open_connection();
-            $sql = 'INSERT INTO ' . $defrost_table . ' (' . $id_field . ', ' . $defrost_active_field . ', ' . $defrost_temperature_field . ', ' . $defrost_cycle_hours_field . ' ) VALUES (' . '"1"' . ', "' . strval($defrost_active) . '", "' .  strval($defrost_temperature) . '", "' . strval($defrost_cycle_hours) . '")';
+            $sql = 'INSERT INTO ' . $defrost_table . ' (' . $id_field . ', ' . $defrost_active_field . ', ' . $defrost_temperature_field . ', ' . $defrost_cycle_hours_field . ', ' . $defrost_circulate_air_field . ') VALUES (' . '"1"' . ', "' . strval($defrost_active) . '", "' .  strval($defrost_temperature) . '", "' . strval($defrost_cycle_hours) . '", "' . strval($defrost_circulate_air_field) . '")';
             execute_query($sql);
             close_database();
         }
         else {
             open_connection();
-            $sql = 'UPDATE ' . $defrost_table . ' SET "' . $defrost_active_field . '" = "' . $defrost_active . '" , "' .  $defrost_temperature_field . '" = "' . $defrost_temperature . '" , "' . $defrost_cycle_hours_field . '" = "' . $defrost_cycle_hours . '"  ' . ' WHERE ' . $id_field . ' = 1';
+            $sql = 'UPDATE ' . $defrost_table . ' SET "' . $defrost_active_field . '" = "' . $defrost_active . '" , "' .  $defrost_temperature_field . '" = "' . $defrost_temperature . '" , "' . $defrost_cycle_hours_field . '" = "' . $defrost_cycle_hours . '" , "' . $defrost_circulate_air_field . '" = "' . $defrost_circulate_air . '" ' . ' WHERE ' . $id_field . ' = 1';
             execute_query($sql);
             close_database();
         }

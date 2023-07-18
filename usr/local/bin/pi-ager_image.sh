@@ -320,7 +320,8 @@ chroot $chrootdir /bin/bash <<EOF
 # delete not needed files
 ######################################################
 
-find /var/log/ -type f -exec rm "{}" \;
+# find /var/log/ -type f -exec rm "{}" \;
+rm -rf /var/log/*
 find /var/mail/ -type f -exec rm "{}" \;
 find /var/tmp/ -type f -exec rm "{}" \;
 find /var/cache/ -type f -exec rm "{}" \;
