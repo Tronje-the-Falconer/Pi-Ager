@@ -139,10 +139,13 @@ then
 fi
 
 systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
+systemctl disable man-db.timer          # save cpu load, not needed wth pi-ager
+systemctl disable man-db                # save cpu load, not needed wth pi-ager
 
 systemctl enable pi-ager_main.service 
 # systemctl start pi-ager_main.service
 # ifup wlan0
 
 # reboot
-shutdown -r now
+# shutdown -r now
+exit 0
