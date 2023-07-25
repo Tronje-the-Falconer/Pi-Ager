@@ -123,7 +123,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('reference unit'); ?>:</td>
-                                            <td class="text_left_padding"><input name="referenceunit_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" step="0.1" min="0.1" max="999.9" required value=<?php echo $referenceunit_scale1; ?>></td>
+                                            <td class="text_left_padding"><input name="referenceunit_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" step="0.1" min="0.1" max="9999.9" required value=<?php echo $referenceunit_scale1; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('offset'); ?>:</td>
@@ -155,7 +155,7 @@
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('reference unit'); ?>:</td>
-                                            <td class="text_left_padding"><input name="referenceunit_scale2_admin" type="number" style="width: 90%;" step="0.1" min="0.1" max="999.9" required value=<?php echo $referenceunit_scale2; ?>></td>
+                                            <td class="text_left_padding"><input name="referenceunit_scale2_admin" type="number" style="width: 90%;" step="0.1" min="0.1" max="9999.9" required value=<?php echo $referenceunit_scale2; ?>></td>
                                         </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('offset'); ?>:</td>
