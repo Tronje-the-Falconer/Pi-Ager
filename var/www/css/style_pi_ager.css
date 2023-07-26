@@ -399,3 +399,22 @@ input:invalid { border: 1px solid red !important}
   margin: 0;
   color: #D6D6D6 !important;
 }
+
+.ip-header
+{
+  display: inline-block;
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  line-height: 100%;
+  z-index: 102;
+  white-space: nowrap;
+  font-size: 14px;
+  font-family: 'Century Gothic', Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  color: #D6D6D6 !important;
+}

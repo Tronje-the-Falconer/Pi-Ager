@@ -1020,12 +1020,14 @@
                                     }
                                     // $essid = exec("iwgetid | awk -F'\"' '{print $2}'");
                                     // echo 'ESSID : ' . $essid . "<br>";
-                                    $local_ip = $_SERVER['SERVER_ADDR'];
+                                    // $local_ip = $_SERVER['REMOTE_ADDR'];
                                     // echo 'local ip : ' . $local_ip . '<br>';
-                                    //if ($local_ip !== '10.0.0.5') {
+                                    $hostname = exec("hostname -I");
+                                    // echo 'hostname -I : ' . $hostname . '<br>';
+                                    // if ($local_ip !== '10.0.0.5') {
                                     // if ($essid === 'RPiHotspot') {
                                 ?>
-                                <div <?php if ($local_ip !== '10.0.0.5') { echo 'style="display:none;"'; }?>>
+                                <div <?php if ($hostname !== '10.0.0.5') { echo 'style="display:none;"'; }?>>
                                     <hr>
                                     <h2 class="art-postheader"><?php echo _('set Pi-Ager date/time'); ?></h2>
                                     <!----------------------------------------------------------------------------------------Date/Time--> 
@@ -1050,7 +1052,7 @@
                                     # var_dump($ssids);
                                 ?>
                                 
-                                <div <?php if ($local_ip !== '10.0.0.5') { echo 'style="display:none;"'; }?>>
+                                <div <?php if ($hostname !== '10.0.0.5') { echo 'style="display:none;"'; }?>>
                                     <hr>
                                     <h2 class="art-postheader"><?php echo _('WLAN setup'); ?></h2>
                                     <!----------------------------------------------------------------------------------------WLAN setup--> 

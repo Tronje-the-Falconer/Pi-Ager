@@ -13,19 +13,14 @@ ul {
     margin-right: 10px;
 }
 
-h4 {
-    margin-top: 1.33em;
-    margin-bottom: 1.33em;
-}
-
 h3 {
     margin-top: 1em;
     margin-bottom: 1em;
 }
 
-h2 {
-    margin-top: 0.83em;
-    margin-bottom: 0.83em;
+h4 {
+    margin-top: 1.33em;
+    margin-bottom: 1.33em;
 }
 
 </style>
@@ -35,7 +30,7 @@ h2 {
 <h4>System</h4>
     <ul>
         <li> <b>Pi OS upgrade from buster to bullseye.</b></li>
-        <li> <b>Pi-Ager Auto Hotspot Mode</b> implementiert. Pi-Ager funktioniert damit auch ohne Router und ohne Internet Verbindung. Hat der Pi-Ager keine Verbindung zum WLAN Router oder Access Point, schaltet der Pi-Ager in den Hotspot Mode. Er kann dann via Smartphone oder Tablet erreicht werden. Der Hotspot hat die <b>WLAN SSDI 'RPiHotspot'</b>, das Passwort ist <b>'1234567890'</b>>. Den Pi-Ager kann man dann über die IP Adresse <b>10.0.0.5</b> via SSH ereichen, den Webserver erreicht man mit <b>http://10.0.0.5/</b>. Die Überprüfung, ob eine Verbindung zum Internet oder Access Point besteht und eine Umschaltung der WLAN Betriebsart erforderlich ist, erfolgt alle <b>2 Minuten</b>.</li>
+        <li> <b>Pi-Ager Auto Hotspot Mode</b> implementiert. Pi-Ager funktioniert damit auch ohne Router und ohne Internet Verbindung. Hat der Pi-Ager keine Verbindung zum WLAN Router oder Access Point, schaltet der Pi-Ager in den Hotspot Mode. Er kann dann via Smartphone oder Tablet erreicht werden. Der Hotspot hat die <b>WLAN SSDI 'RPiHotspot'</b>, das Passwort ist <b>'1234567890'</b>. Den Pi-Ager kann man dann über die IP Adresse <b>10.0.0.5</b> via SSH ereichen, den Webserver erreicht man mit einer beliebigen IP Adresse, aber nicht aus dem Adressraum <b>http://10.0.0.x</b>. Die Überprüfung, ob eine Verbindung zum Internet oder Access Point besteht und eine Umschaltung der WLAN Betriebsart erforderlich ist, erfolgt alle <b>2 Minuten</b>.</li>
         <li> Im Hotspot Mode können auf der ADMIN Seite Datum, Uhrzeit, WLAN SSID und WLAN Passwort gesetzt werden.</li>
         <li> Reifetabellen: die Spalte 'Tage' wurde durch 'Stunden' ersetzt. Die Eingabe ist limitiert auf Werte zwischen 1 ... 240h. Vor dem Upgrade auf 3.3.4 wird empfohlen, die eigenen Reifetabellen zu exportieren und mit excel oder einem Text-Editor die Spalten-Überschrift 'days' in 'hours' umzubenennen und die Werte in der Spalte 'hours' dann auf Stunden umzurechnen. Diese so modifizierten Reifetabellen können mit der Version 3.3.4 wieder importiert werden. </li>
         <li> Kühler- und Heizungs-Regelung arbeitet mit getrennten und symmetrischen Hysteresen. Wenn ein externer Sensor angeschlossen ist, wird die Temperatur des externen Sensors in die Regelung einbezogen.</li>
@@ -294,7 +289,7 @@ h2 {
 		<li>Timer werden sofort aktiv, wenn Periode oder Mode geändert werden.</li>
            </ul>
 	<h4>Benachrichtigung</h4>  
-           <ul class="logul">		
+           <ul>		
 		<li>Messenger Klassen mit Alarm, E-Mail, Telegram und Pushover verfügbar - Noch nicht im Frontend</li>
            </ul>
 	<h4>Logger</h4>	

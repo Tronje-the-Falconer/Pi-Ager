@@ -449,6 +449,8 @@ UPDATE current_values SET value='0' WHERE key = 'status_scale1';
 UPDATE current_values SET value='0' WHERE key = 'status_scale2';
 UPDATE current_values SET value='0' WHERE key = 'status_agingtable';
 UPDATE current_values SET value='0' WHERE key = 'status_humidity_check';
+UPDATE current_values SET value='0' WHERE key = 'status_light_manual';
+UPDATE current_values SET value='1' WHERE key = 'status_uv_manual';
 
 UPDATE atc_mi_thermometer_mac SET mi_mac_last3bytes='' WHERE id='1';
 UPDATE atc_mi_thermometer_data SET mi_data='' WHERE id='1';
