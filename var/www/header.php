@@ -136,14 +136,15 @@
                             <li><a href="index.php" class="<?php echo $monitor_active; ?>"><?php echo _('monitor'); ?></a></li>
                             <li><a href="diagrams.php" class="<?php echo $diagrams_active; ?>"><?php echo _('diagrams'); ?></a></li>
                             <li><a href="settings.php" class="<?php echo $settings_active; ?>"><?php echo _('settings'); ?></a></li>
+                            <li><a href="admin.php" class="<?php echo $admin_active; ?>"><?php echo _('admin'); ?></a></li>
                             <?php
-                                if ($_SERVER['PHP_SELF'] == '/settings.php' OR $_SERVER['PHP_SELF'] == '/admin.php') {
-                                    echo '<li><a href="admin.php" class="';
-                                    echo $admin_active;
-                                    echo '">';
-                                    echo _('administration');
-                                    echo '</a></li>';
-                                }
+                            //    if ($_SERVER['PHP_SELF'] == '/settings.php' OR $_SERVER['PHP_SELF'] == '/admin.php') {
+                            //        echo '<li><a href="admin.php" class="';
+                            //        echo $admin_active;
+                            //        echo '">';
+                            //        echo _('administration');
+                            //        echo '</a></li>';
+                            //    }
                             ?>
                             <li><a href="notification.php" class="<?php echo $notification_active; ?>"><?php echo _('notification'); ?></a></li>
                             <li><a href="logs.php" class="<?php echo $logs_active; ?>"><?php echo _('logs'); ?></a></li>
