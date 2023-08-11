@@ -347,8 +347,10 @@ cat /dev/null > /home/pi/.bash_history
 # rm -f /lib/modules.bak
 # PRUNE_MODULES=1 sudo rpi-update
 
-systemctl enable pi-ager_main.service setup_pi-ager.service
-echo "pi-ager_main and setup_pi-ager services enabled"
+systemctl disable pi-ager_main.service
+echo "pi-ager_main.service disabled, will be enabled during setup_pi-ager.sh"
+systemctl enable setup_pi-ager.service
+echo "setup_pi-ager service enabled"
 
 #systemctl daemon-reload
 #systemctl reset-failed

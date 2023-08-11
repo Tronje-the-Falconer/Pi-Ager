@@ -1,5 +1,6 @@
 [Unit]
 Description=Automatsches Installationsscript für pi-ager zum Setzen von Passwörter und WIFI-Zugang, abhängig von setup.txt in /boot
+Before=rc-local.service lighttpd.service
 
 [Service]
 Type=oneshot

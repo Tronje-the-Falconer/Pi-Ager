@@ -405,7 +405,14 @@ class cl_nextion( threading.Thread ):
                 return output.split('"')[1]
         except Exception as e:
             return ''
-    
+
+    def get_ip_address(self):
+        try:
+            process = subprocess.run(['hostname', '-I'], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            return process.stdout
+        except Exception as e:
+            return ''
+        
     async def init_info_page_values(self):
         version = pi_ager_database.get_table_value(pi_ager_names.system_table, pi_ager_names.pi_ager_version_key )
         display_type = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.tft_display_type_key )
@@ -425,8 +432,11 @@ class cl_nextion( threading.Thread ):
 #        print('pi model: ' + model)
         await self.client.set('values.pi_model.txt', model)
         
-        wifi_ssid = self.get_wifi_ssid()
-        await self.client.set('values.wifi_conn.txt', wifi_ssid)
+#        wifi_ssid = self.get_wifi_ssid()
+#        await self.client.set('txt_wifi_conn.txt', wifi_ssid)
+        
+#        ip_address = self.get_ip_address()
+#        await self.client.set('txt_ip_address.txt', ip_address)
         
         await self.client.set('values.status_light.val', 0)
         
@@ -565,6 +575,13 @@ class cl_nextion( threading.Thread ):
             await self.client.set('txt_humid.txt', "%.1f" % (values['humidity_ist']))        
             await self.client.set('txt_humabs.txt', "%.1f" % (values['humabs']))      
     
+    async def update_info_values(self):
+        wifi_ssid = self.get_wifi_ssid()
+        await self.client.set('txt_wifi_conn.txt', wifi_ssid)
+        
+        ip_address = self.get_ip_address()
+        await self.client.set('txt_ip_address.txt', ip_address)
+            
     async def update_extended_values(self):
         values = self.db_get_extended_values()
         if values['status_piager'] == 0:
@@ -667,6 +684,9 @@ class cl_nextion( threading.Thread ):
             
     async def process_page4(self):
         await self.update_extended_values()
+        
+    async def process_page_6_14(self):
+        await self.update_info_values()
             
     async def process_page9(self):
         await self.update_states()
@@ -717,11 +737,15 @@ class cl_nextion( threading.Thread ):
                 elif self.current_page_id == 4:
                     await self.process_page4()
                 elif self.current_page_id == 5:
-                    await self.show_offline()                        
+                    await self.show_offline()
+                elif self.current_page_id == 6:
+                    await self.process_page_6_14()
                 elif self.current_page_id == 9:
                     await self.process_page9() 
                 elif self.current_page_id == 12:
-                    await self.process_page12()  
+                    await self.process_page12()
+                elif self.current_page_id == 14:
+                    await self.process_page_6_14()
                 elif self.current_page_id == 17:
                     await self.process_page_17_19()
                 elif self.current_page_id == 19:

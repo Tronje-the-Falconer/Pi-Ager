@@ -21,24 +21,20 @@ then
     eval $(grep -i "^country=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^keepconf=" /boot/setup.txt| tr -d "\n\r")
     eval $(grep -i "^sensor=" /boot/setup.txt | tr -d "\n\r")    
-#    eval $(grep -i "^reboot=" /boot/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^hmidisplay=" /boot/setup.txt | tr -d "\n\r")
     eval $(grep -i "^sensor=" /boot/setup.txt | tr -d "\n\r")  
     echo "Variablen"
-    echo "Hostname:"
-    echo $piname
+    echo "Hostname = $piname"
     #echo $pipass
     #echo $rootpass
     #echo $webguipw
-    echo "WLAN SSID:"
-    echo $wlanssid
-    echo "Country:"
-    echo $country
+    echo "WLAN SSID = $wlanssid"
+    echo "Country = $country"
     #echo $wlankey
-    echo "Config behalten:"
-    echo $keepconf
-
-	echo "Sensor=$sensor"    
-
+    echo "Config behalten = $keepconf"
+	echo "sensor = $sensor"    
+    echo "hmidisplay = $hmidisplay"
+    
     echo "SSH Host Key generieren"
     # SSH Host Key generieren
     /bin/rm -fv /etc/ssh_host_*
@@ -135,13 +131,28 @@ then
         cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
         echo "1-wire is active"
 
-    fi  
+    fi
+
+# load firmware into HMI display if hmidisplay != "none"
+    case $hmidisplay in
+        "NX3224K028") echo "start firmware upload for HMI display device $hmidisplay"
+                      nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224K028/pi-ager.tft
+                      echo "firmware upload for HMI device finished";;
+        "NX3224T028") echo "start firmware upload for HMI display device $hmidisplay"
+                      nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224T028/pi-ager.tft
+                      echo "firmware upload for HMI device finished";;
+        "NX3224F028") echo "start firmware upload for HMI display device $hmidisplay"
+                      nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224F028/pi-ager.tft
+                      echo "firmware upload for HMI device finished";;
+    esac
 fi
 
+echo "disable setup_pi-ager.service now and man-db services"
 systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
 systemctl disable man-db.timer          # save cpu load, not needed wth pi-ager
 systemctl disable man-db                # save cpu load, not needed wth pi-ager
 
+# now its time to enable pi-ager_main.service to start at next boot. Reboot is initiated by rc.local after expanding file system on root partition
 systemctl enable pi-ager_main.service 
 # systemctl start pi-ager_main.service
 # ifup wlan0
