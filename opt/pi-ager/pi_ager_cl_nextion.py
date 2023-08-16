@@ -220,33 +220,36 @@ class cl_nextion( threading.Thread ):
                     # await self.client.set('sleep', 0)
                     await self.client.command('page 1')
                     self.current_page_id = 1
-                elif self.data.page_id == 8:
+                elif self.data.page_id == 8:    # boot_steak
                     await self.client.command('page 9')
-                    self.current_page_id = 9
-                elif self.data.page_id == 1 and self.data.component_id == 8:
+                    self.current_page_id = 9    # main_steak
+                elif self.data.page_id == 1 and self.data.component_id == 8:    # main_fridge, btn_light
                     await self.control_light_status()
-                elif self.data.page_id == 1 and self.data.component_id == 7:
+                elif self.data.page_id == 1 and self.data.component_id == 7:    # main_fridge, btn_menu
                     await self.client.command('page 2')
                     self.current_page_id = 2
-                elif self.data.page_id == 2 and self.data.component_id == 6:
+                elif self.data.page_id == 1 and self.data.component_id == 9:    # main_fridge, btn_wifi
+                    await self.client.command('page 6')
+                    self.current_page_id = 6                                    # info_fridge
+                elif self.data.page_id == 2 and self.data.component_id == 6:    # menu_fridge, btn_light
                     await self.control_light_status()    
-                elif self.data.page_id == 2 and self.data.component_id == 1:
+                elif self.data.page_id == 2 and self.data.component_id == 1:    # menu_fridge, btn_home
                     await self.client.command('page 1')
                     self.current_page_id = 1                    
-                elif self.data.page_id == 2 and self.data.component_id == 2:
+                elif self.data.page_id == 2 and self.data.component_id == 2:    # menu_fridge, btn_states
                     await self.client.command('page 3')
                     self.current_page_id = 3  
-                elif self.data.page_id == 2 and self.data.component_id == 3:
+                elif self.data.page_id == 2 and self.data.component_id == 3:    # menu_fridge, btn_values
                     await self.client.command('page 4')
                     self.current_page_id = 4  
-                elif self.data.page_id == 2 and self.data.component_id == 4:
+                elif self.data.page_id == 2 and self.data.component_id == 4:    # menu_fridge, btn_settings
                     await self.client.command('page 7')
                     self.current_page_id = 7  
-                elif self.data.page_id == 2 and self.data.component_id == 5:
+                elif self.data.page_id == 2 and self.data.component_id == 5:    # menu_fridge, btn_info
                     await self.init_info_page_values()
                     await self.client.command('page 6')
                     self.current_page_id = 6  
-                elif self.data.page_id == 2 and self.data.component_id == 7:
+                elif self.data.page_id == 2 and self.data.component_id == 7:    # menu_fridge, btn_themes
                     if (self.current_theme == 'steak'):
                         self.current_theme = 'fridge'
                         await self.client.command('page 2')
@@ -255,59 +258,71 @@ class cl_nextion( threading.Thread ):
                         self.current_theme = 'steak'
                         await self.client.command('page 10')
                         self.current_page_id = 10
-                elif self.data.page_id == 2 and self.data.component_id == 9:
+                elif self.data.page_id == 2 and self.data.component_id == 8:    # menu_fridge, btn_control
                     await self.client.command('page 17')
                     self.current_page_id = 17
                     await self.init_page_17_19()
-                elif self.data.page_id == 3 and self.data.component_id == 1:
+                elif self.data.page_id == 2 and self.data.component_id == 9:    # menu_fridge, btn_wifi
+                    await self.client.command('page 6')
+                    self.current_page_id = 6 
+                elif self.data.page_id == 3 and self.data.component_id == 1:    # states_fridge, btn_light
                     await self.control_light_status()
-                elif self.data.page_id == 3 and self.data.component_id == 10:
+                elif self.data.page_id == 3 and self.data.component_id == 10:   # states_fridge, btn_menu
                     await self.client.command('page 2')
                     self.current_page_id = 2                    
-                elif self.data.page_id == 3 and self.data.component_id == 11:
-                    await self.client.command('page 1')
-                    self.current_page_id = 1                    
-                elif self.data.page_id == 4 and self.data.component_id == 1:
-                    await self.control_light_status()
-                elif self.data.page_id == 4 and self.data.component_id == 2:
-                    await self.client.command('page 2')
-                    self.current_page_id = 2
-                elif self.data.page_id == 4 and self.data.component_id == 11:
+                elif self.data.page_id == 3 and self.data.component_id == 11:   # states_fridge, btn_home
                     await self.client.command('page 1')
                     self.current_page_id = 1
-                elif self.data.page_id == 6 and self.data.component_id == 1:
+                elif self.data.page_id == 3 and self.data.component_id == 12:   # states_fridge, btn_wifi
+                    await self.client.command('page 6')
+                    self.current_page_id = 6     
+                elif self.data.page_id == 4 and self.data.component_id == 1:    # values_fridge, btn_light
                     await self.control_light_status()
-                elif self.data.page_id == 6 and self.data.component_id == 2:
+                elif self.data.page_id == 4 and self.data.component_id == 2:    # values_fridge, btn_menu
                     await self.client.command('page 2')
                     self.current_page_id = 2
-                elif self.data.page_id == 6 and self.data.component_id == 7:
+                elif self.data.page_id == 4 and self.data.component_id == 11:   # values_fridge, btn_home
                     await self.client.command('page 1')
                     self.current_page_id = 1
-                elif self.data.page_id == 7 and self.data.component_id == 1:
+                elif self.data.page_id == 4 and self.data.component_id == 12:   # values_fridge, btn_wifi
+                    await self.client.command('page 6')
+                    self.current_page_id = 6
+                elif self.data.page_id == 6 and self.data.component_id == 1:    # info_fridge, btn_light
                     await self.control_light_status()
-                elif self.data.page_id == 7 and self.data.component_id == 2:
+                elif self.data.page_id == 6 and self.data.component_id == 2:    # info_fridge, btn_menu
                     await self.client.command('page 2')
                     self.current_page_id = 2
-                elif self.data.page_id == 7 and self.data.component_id == 7:
+                elif self.data.page_id == 6 and self.data.component_id == 7:    # info_fridge, btn_home
                     await self.client.command('page 1')
                     self.current_page_id = 1
-                elif self.data.page_id == 9 and self.data.component_id == 7:
+                elif self.data.page_id == 7 and self.data.component_id == 1:    # setting_fridge, btn_light
+                    await self.control_light_status()
+                elif self.data.page_id == 7 and self.data.component_id == 2:    # setting_fridge, btn_menu
+                    await self.client.command('page 2')
+                    self.current_page_id = 2
+                elif self.data.page_id == 7 and self.data.component_id == 7:    # setting_fridge, btn_home
+                    await self.client.command('page 1')
+                    self.current_page_id = 1
+                elif self.data.page_id == 7 and self.data.component_id == 12:   # states_fridge, btn_wifi
+                    await self.client.command('page 6')
+                    self.current_page_id = 6     
+                elif self.data.page_id == 9 and self.data.component_id == 7:    # menn_steak, btn_menu
                     await self.client.command('page 10')
                     self.current_page_id = 10
-                elif self.data.page_id == 9 and self.data.component_id == 8:
+                elif self.data.page_id == 9 and self.data.component_id == 8:    # main_steak, btn_light
                     await self.control_light_status()
-                elif self.data.page_id == 10 and self.data.component_id == 6:
+                elif self.data.page_id == 9 and self.data.component_id == 18:   # main_steak, btn_wifi
+                    await self.client.command('page 14')
+                    self.current_page_id = 14     
+                elif self.data.page_id == 10 and self.data.component_id == 6:   # menu_steak, btn_light
                     await self.control_light_status()
-                elif self.data.page_id == 10 and self.data.component_id == 1:   # goto main_steak
+                elif self.data.page_id == 10 and self.data.component_id == 1:   # menu_steak, btn_home, goto main_steak
                     await self.client.command('page 9')
                     self.current_page_id = 9
-                elif self.data.page_id == 10 and self.data.component_id == 2:   # goto values_steak
+                elif self.data.page_id == 10 and self.data.component_id == 2:   # menu_steak, btn_values, goto values_steak
                     await self.client.command('page 12')
                     self.current_page_id = 12
-                #elif self.data.page_id == 10 and self.data.component_id == 2:
-                #    await self.client.command('page 11')
-                #    self.current_page_id = 11
-                elif self.data.page_id == 10 and self.data.component_id == 5:   # goto menu_steak or menu_fridge
+                elif self.data.page_id == 10 and self.data.component_id == 5:   # menu_steak, btn_themes, goto menu_steak or menu_fridge
                     if (self.current_theme == 'steak'):
                         self.current_theme = 'fridge'
                         await self.client.command('page 2')
@@ -316,71 +331,81 @@ class cl_nextion( threading.Thread ):
                         self.current_theme = 'steak'
                         await self.client.command('page 10')
                         self.current_page_id = 10
-                elif self.data.page_id == 10 and self.data.component_id == 3:   # goto setting_steak
+                elif self.data.page_id == 10 and self.data.component_id == 3:   # menu_steak, btn_settings, goto setting_steak
                     await self.client.command('page 15')
                     self.current_page_id = 15
-                elif self.data.page_id == 10 and self.data.component_id == 4:   # goto info_steak
+                elif self.data.page_id == 10 and self.data.component_id == 4:   # menu_steak, btn_info, goto info_steak
                     await self.init_info_page_values()
                     await self.client.command('page 14')
                     self.current_page_id = 14
-                elif self.data.page_id == 10 and self.data.component_id == 8:   # goto control_steak
+                elif self.data.page_id == 10 and self.data.component_id == 7:   # menu_steak, btn_control, goto control_steak
                     await self.client.command('page 19')
                     self.current_page_id = 19 
-                    await self.init_page_17_19()                    
-#                elif self.data.page_id == 11 and self.data.component_id == 18:
-#                    await self.client.command('page 9')
-#                    self.current_page_id = 9                                             
-#                elif self.data.page_id == 11 and self.data.component_id == 9:
-#                    await self.control_light_status()   
-                elif self.data.page_id == 12 and self.data.component_id == 1:
+                    await self.init_page_17_19()
+                elif self.data.page_id == 10 and self.data.component_id == 8:   # menu_steak, btn_wifi
+                    await self.client.command('page 14')
+                    self.current_page_id = 14     
+                elif self.data.page_id == 12 and self.data.component_id == 1:   # values_steak, btn_menu
                     await self.client.command('page 10')
                     self.current_page_id = 10                     
-                elif self.data.page_id == 12 and self.data.component_id == 10:
+                elif self.data.page_id == 12 and self.data.component_id == 10:  # values_steak, btn_home
                     await self.client.command('page 9')
                     self.current_page_id = 9                     
-                elif self.data.page_id == 12 and self.data.component_id == 11:
-                    await self.control_light_status()   
-                elif self.data.page_id == 14 and self.data.component_id == 1:
-                    await self.client.command('page 10')
-                    self.current_page_id = 10            
-                elif self.data.page_id == 14 and self.data.component_id == 6:
-                    await self.client.command('page 9')
-                    self.current_page_id = 9            
-                elif self.data.page_id == 14 and self.data.component_id == 7:
-                    await self.control_light_status()   
-                elif self.data.page_id == 15 and self.data.component_id == 7:
-                    await self.client.command('page 10')
-                    self.current_page_id = 10            
-                elif self.data.page_id == 15 and self.data.component_id == 5:
-                    await self.client.command('page 9')
-                    self.current_page_id = 9            
-                elif self.data.page_id == 15 and self.data.component_id == 6:
-                    await self.control_light_status()   
-                elif self.data.page_id == 17 and self.data.component_id == 3:   # button menu
-                    await self.client.command('page 2')
-                    self.current_page_id = 2
-                elif self.data.page_id == 17 and self.data.component_id == 4:   # button home
-                    await self.client.command('page 1')
-                    self.current_page_id = 1   
-                elif self.data.page_id == 17 and self.data.component_id == 2:   # button light
+                elif self.data.page_id == 12 and self.data.component_id == 11:  # values_steak, btn_light
                     await self.control_light_status()
-                elif self.data.page_id == 17 and self.data.component_id == 6:   # button pi-ager start/stop
-                    await self.control_piager_start_stop()
-                elif self.data.page_id == 17 and self.data.component_id == 9:  # button save new Temp/Hum. values
-                    await self.save_page_17_19_values()
-                elif self.data.page_id == 19 and self.data.component_id == 2:   # button menu
+                elif self.data.page_id == 12 and self.data.component_id == 12:  # menu_steak, btn_wifi
+                    await self.client.command('page 14')
+                    self.current_page_id = 14     
+                elif self.data.page_id == 14 and self.data.component_id == 1:   # info_steak, btn_menu
+                    await self.client.command('page 10')
+                    self.current_page_id = 10            
+                elif self.data.page_id == 14 and self.data.component_id == 6:   # info_steak, btn_home
+                    await self.client.command('page 9')
+                    self.current_page_id = 9            
+                elif self.data.page_id == 14 and self.data.component_id == 7:   # info_steak, btn_light
+                    await self.control_light_status()
+                elif self.data.page_id == 15 and self.data.component_id == 7:   # settings_steak, btn_menu
                     await self.client.command('page 10')
                     self.current_page_id = 10
-                elif self.data.page_id == 19 and self.data.component_id == 3:   # button home
+                elif self.data.page_id == 15 and self.data.component_id == 5:   # settings_steak, btn_home
+                    await self.client.command('page 9')
+                    self.current_page_id = 9            
+                elif self.data.page_id == 15 and self.data.component_id == 6:   # settings_steak, btn_light
+                    await self.control_light_status()
+                elif self.data.page_id == 15 and self.data.component_id == 12:  # settings_steak, btn_wifi
+                    await self.client.command('page 14')
+                    self.current_page_id = 14                         
+                elif self.data.page_id == 17 and self.data.component_id == 3:   # control_fridge, btn_menu
+                    await self.client.command('page 2')
+                    self.current_page_id = 2
+                elif self.data.page_id == 17 and self.data.component_id == 4:   # control_fridge, btn_home
+                    await self.client.command('page 1')
+                    self.current_page_id = 1   
+                elif self.data.page_id == 17 and self.data.component_id == 2:   # control_fridge, btn_light
+                    await self.control_light_status()
+                elif self.data.page_id == 17 and self.data.component_id == 5:   # control_fridge, btn_piager,  start/stop
+                    await self.control_piager_start_stop()
+                elif self.data.page_id == 17 and self.data.component_id == 9:   # control_fridge, btn_ok, button save new Temp/Hum. values
+                    await self.save_page_17_19_values()
+                elif self.data.page_id == 17 and self.data.component_id == 10:  # control_fridge, btn_wifi
+                    await self.client.command('page 6')
+                    self.current_page_id = 6     
+                elif self.data.page_id == 19 and self.data.component_id == 2:   # control_steak, btn_menu
+                    await self.client.command('page 10')
+                    self.current_page_id = 10
+                elif self.data.page_id == 19 and self.data.component_id == 3:   # control_steak, btn_home
                     await self.client.command('page 9')
                     self.current_page_id = 9   
-                elif self.data.page_id == 19 and self.data.component_id == 4:   # button light
+                elif self.data.page_id == 19 and self.data.component_id == 4:   # control_steak, btn_light
                     await self.control_light_status()
-                elif self.data.page_id == 19 and self.data.component_id == 9:   # button pi-ager start/stop
+                elif self.data.page_id == 19 and self.data.component_id == 8:   # control_steak, btn_piager, pi-ager start/stop
                     await self.control_piager_start_stop()
-                elif self.data.page_id == 19 and self.data.component_id == 1:  # button save new Temp/Hum. values
+                elif self.data.page_id == 19 and self.data.component_id == 1:   # control_steak, btn_ok,  save new Temp/Hum. values
                     await self.save_page_17_19_values()
-                                        
+                elif self.data.page_id == 19 and self.data.component_id == 9:   # control_steak, btn_wifi
+                    await self.client.command('page 14')
+                    self.current_page_id = 14    
+
                 self.button_event.clear()
                 cl_fact_logger.get_instance().debug('button pressed processed')
         except Exception as e:
@@ -402,14 +427,14 @@ class cl_nextion( threading.Thread ):
             if output == '':
                 return ''
             else:
-                return output.split('"')[1]
+                return (output.split('"')[1]).strip()
         except Exception as e:
             return ''
 
     def get_ip_address(self):
         try:
             process = subprocess.run(['hostname', '-I'], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            return process.stdout
+            return (process.stdout).rstrip()
         except Exception as e:
             return ''
         
@@ -698,6 +723,22 @@ class cl_nextion( threading.Thread ):
         
     async def process_page_17_19(self):
         await self.update_page_17_19_values()
+    
+    async def process_wifi_btn(self):
+        len_wifi_ssid = len(self.get_wifi_ssid())
+        len_ip_address = len(self.get_ip_address())
+        # cl_fact_logger.get_instance().info('len(wifi_ssid) :' + str(len_wifi_ssid) + ' len(ip_address) :' + str(len_ip_address))
+        
+        if (len_wifi_ssid == 0 and len_ip_address == 0):      # no WLAN
+            await self.client.set('btn_wifi.pic', 55)
+            await self.client.set('btn_wifi.pic2', 55)
+        elif (len_wifi_ssid != 0 and len_ip_address != 0):    # client mode, standard
+            await self.client.set('btn_wifi.pic', 44)
+            await self.client.set('btn_wifi.pic2', 44)           
+        elif (len_wifi_ssid == 0 and len_ip_address != 0 ):   # AP mode
+            await self.client.set('btn_wifi.pic', 54)
+            await self.client.set('btn_wifi.pic2', 54)           
+
         
     async def run_client(self):
         self.button_event = asyncio.Event()
@@ -752,6 +793,9 @@ class cl_nextion( threading.Thread ):
                     await self.process_page_17_19()
                 elif self.current_page_id == 13:
                     await self.show_offline()    
+            
+                if not(self.current_page_id == 0 or self.current_page_id  == 5 or self.current_page_id  == 8 or self.current_page_id == 13):
+                    await self.process_wifi_btn()
                     
             except Exception as e:
                 cl_fact_logger.get_instance().debug('run_client exception2: ' + str(e))
