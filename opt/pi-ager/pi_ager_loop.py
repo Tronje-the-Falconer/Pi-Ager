@@ -562,6 +562,7 @@ def status_value_has_changed():
     
     if gpio.input(pi_ager_gpio_config.gpio_heater) == False:
         status_heater = 1
+        # simulation
 #        sensor_temperature += 0.05
         if status_heater != current_values[pi_ager_names.status_heater_key]:
             changed = True
@@ -582,6 +583,7 @@ def status_value_has_changed():
         
     if gpio.input(pi_ager_gpio_config.gpio_cooling_compressor) == False:
         status_cooling_compressor = 1
+        #simulation
 #        sensor_temperature -= 0.05
         if status_cooling_compressor != current_values[pi_ager_names.status_cooling_compressor_key]:
             changed = True
@@ -1108,13 +1110,14 @@ def auto_temperature_control():
         control_heater(pi_ager_names.relay_off)                                     # Heizung aus
                         
     if (sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor): # or (sensor_temperature >= setpoint_temperature + switch_on_heater):
-        if gpio.input(pi_ager_gpio_config.gpio_heater) == True:                    # only if heater is off, turn on cooler
-            delay_cooling_compressor( pi_ager_names.relay_on)                      # Kuehlung ein
+        delay_cooling_compressor( pi_ager_names.relay_on)                           # Kuehlung ein
+        if gpio.input(pi_ager_gpio_config.gpio_heater) == False:                    # only if heater is on, turn off heater
+            control_heater(pi_ager_names.relay_off)
                             
     if (sensor_temperature <= setpoint_temperature - switch_on_heater): # or (sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor ):
-        if gpio.input(pi_ager_gpio_config.gpio_cooling_compressor) == True:        # only if cooler is off, turn on heater
-            control_heater(pi_ager_names.relay_on)
-
+        control_heater(pi_ager_names.relay_on)                                      # turn on heater
+        if gpio.input(pi_ager_gpio_config.gpio_cooling_compressor) == False:        # only if cooler is on, turn off cooler
+            delay_cooling_compressor( pi_ager_names.relay_off)                      # Kuehlung aus
                        
 def doMainLoop():
     """
@@ -1260,6 +1263,7 @@ def doMainLoop():
     next_start_time_off_failure = 0
     next_start_time_on_failure = 0
     
+    # cabinet simulation    
 #    sensor_temperature = 20.0   # start value for test
     
     # mi_data = pi_ager_database.get_table_value_from_field(pi_ager_names.atc_mi_thermometer_data_table, pi_ager_names.mi_data_key)
@@ -1315,6 +1319,7 @@ def doMainLoop():
             
             sensortype = cl_fact_main_sensor_type.get_instance().get_sensor_type()
             sensordata = get_sensordata(sht_exception_count, humidity_exception_count, temperature_exception_count, dewpoint_exception_count, humidity_abs_exception_count, sensordata_exception_count)
+            # cabinet simulation
             sensor_temperature = sensordata['sensor_temperature']
             sensor_humidity = sensordata['sensor_humidity']
             sensor_dewpoint = sensordata['sensor_dewpoint']
@@ -1891,10 +1896,10 @@ def doMainLoop():
                 cl_fact_logger.get_instance().debug('checking switch')
                 generate_switch_event()
                 # cabinet simulation
-                #if (second_sensor_temperature == None or second_sensor_temperature > sensor_temperature):     
-                #    sensor_temperature += 0.005 # simulate increasing cabinet temperature over time
-                #else:
-                #    sensor_temperature -= 0.005 # simulate decreasing cabinet temperature over time
+#                if (second_sensor_temperature == None or second_sensor_temperature > sensor_temperature):     
+#                    sensor_temperature += 0.005 # simulate increasing cabinet temperature over time
+#                else:
+#                    sensor_temperature -= 0.005 # simulate decreasing cabinet temperature over time
                     
             else:
                 count_continuing_emergency_loops += 1

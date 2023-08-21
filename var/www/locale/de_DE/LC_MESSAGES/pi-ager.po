@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-DE\n"
-"POT-Creation-Date: 2023-07-18 09:15+0200\n"
-"PO-Revision-Date: 2023-07-18 09:34+0200\n"
+"POT-Creation-Date: 2023-08-21 10:34+0200\n"
+"PO-Revision-Date: 2023-08-21 10:37+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -265,29 +265,29 @@ msgstr "Licht permanent EIN"
 msgid "wakeup_waiter stopped "
 msgstr "HMI Anzeige: Weckdienst gestoppt"
 
-#: opt/pi-ager/pi_ager_cl_nextion.py:387
+#: opt/pi-ager/pi_ager_cl_nextion.py:412
 msgid "button_waiter stopped "
 msgstr "HMI Anzeige: Schaltflächenüberwachung gestoppt"
 
-#: opt/pi-ager/pi_ager_cl_nextion.py:691
+#: opt/pi-ager/pi_ager_cl_nextion.py:752
 msgid "Client instance generated"
 msgstr "Clientinstanz generiert"
 
-#: opt/pi-ager/pi_ager_cl_nextion.py:695
+#: opt/pi-ager/pi_ager_cl_nextion.py:756
 msgid "Nextion client connected"
 msgstr "Nextion Client verbunden"
 
-#: opt/pi-ager/pi_ager_cl_nextion.py:700
+#: opt/pi-ager/pi_ager_cl_nextion.py:761
 msgid "Could not connect to Nextion client. Possible HMI display not connected"
 msgstr ""
 "Es konnte keine Verbindung zum Nextion Client hergestellt werden. "
 "Möglicherweise ist das HMI-Display nicht angeschlossen"
 
-#: opt/pi-ager/pi_ager_cl_nextion.py:741
+#: opt/pi-ager/pi_ager_cl_nextion.py:809
 msgid "Nextion client run-loop finished"
 msgstr "Nextion-Client-Laufschleife beendet"
 
-#: opt/pi-ager/pi_ager_cl_nextion.py:794
+#: opt/pi-ager/pi_ager_cl_nextion.py:862
 msgid "Nextion client stopped"
 msgstr "Nextion-Client gestoppt"
 
@@ -349,33 +349,33 @@ msgstr "Abtauvorgang gestartet"
 msgid "GPIO states"
 msgstr "GPIO-Zustände"
 
-#: opt/pi-ager/pi_ager_loop.py:568 opt/pi-ager/pi_ager_loop.py:569
-#: opt/pi-ager/pi_ager_loop.py:571 opt/pi-ager/pi_ager_loop.py:572
-#: opt/pi-ager/pi_ager_loop.py:577 opt/pi-ager/pi_ager_loop.py:578
-#: opt/pi-ager/pi_ager_loop.py:580 opt/pi-ager/pi_ager_loop.py:581
+#: opt/pi-ager/pi_ager_loop.py:569 opt/pi-ager/pi_ager_loop.py:570
+#: opt/pi-ager/pi_ager_loop.py:572 opt/pi-ager/pi_ager_loop.py:573
+#: opt/pi-ager/pi_ager_loop.py:578 opt/pi-ager/pi_ager_loop.py:579
+#: opt/pi-ager/pi_ager_loop.py:581 opt/pi-ager/pi_ager_loop.py:582
 #: var/www/diagrams.php:1155 var/www/diagrams.php:1176 var/www/index.php:1115
 #: var/www/index.php:1135 var/www/modules/querystatus.php:192
 #: var/www/modules/querystatus.php:209
 msgid "heater"
 msgstr "Heizung"
 
-#: opt/pi-ager/pi_ager_loop.py:568 opt/pi-ager/pi_ager_loop.py:569
-#: opt/pi-ager/pi_ager_loop.py:571 opt/pi-ager/pi_ager_loop.py:572
-#: opt/pi-ager/pi_ager_loop.py:588 opt/pi-ager/pi_ager_loop.py:589
-#: opt/pi-ager/pi_ager_loop.py:591 opt/pi-ager/pi_ager_loop.py:592
-#: opt/pi-ager/pi_ager_loop.py:607 opt/pi-ager/pi_ager_loop.py:608
-#: opt/pi-ager/pi_ager_loop.py:610 opt/pi-ager/pi_ager_loop.py:611
-#: opt/pi-ager/pi_ager_loop.py:626 opt/pi-ager/pi_ager_loop.py:627
-#: opt/pi-ager/pi_ager_loop.py:629 opt/pi-ager/pi_ager_loop.py:630
-#: opt/pi-ager/pi_ager_loop.py:645 opt/pi-ager/pi_ager_loop.py:646
-#: opt/pi-ager/pi_ager_loop.py:648 opt/pi-ager/pi_ager_loop.py:649
-#: opt/pi-ager/pi_ager_loop.py:664 opt/pi-ager/pi_ager_loop.py:665
-#: opt/pi-ager/pi_ager_loop.py:667 opt/pi-ager/pi_ager_loop.py:668
-#: opt/pi-ager/pi_ager_loop.py:683 opt/pi-ager/pi_ager_loop.py:684
-#: opt/pi-ager/pi_ager_loop.py:686 opt/pi-ager/pi_ager_loop.py:687
-#: opt/pi-ager/pi_ager_loop.py:702 opt/pi-ager/pi_ager_loop.py:703
-#: opt/pi-ager/pi_ager_loop.py:705 opt/pi-ager/pi_ager_loop.py:706
-#: opt/pi-ager/pi_ager_loop.py:1502 opt/pi-ager/pi_ager_loop.py:1564
+#: opt/pi-ager/pi_ager_loop.py:569 opt/pi-ager/pi_ager_loop.py:570
+#: opt/pi-ager/pi_ager_loop.py:572 opt/pi-ager/pi_ager_loop.py:573
+#: opt/pi-ager/pi_ager_loop.py:590 opt/pi-ager/pi_ager_loop.py:591
+#: opt/pi-ager/pi_ager_loop.py:593 opt/pi-ager/pi_ager_loop.py:594
+#: opt/pi-ager/pi_ager_loop.py:609 opt/pi-ager/pi_ager_loop.py:610
+#: opt/pi-ager/pi_ager_loop.py:612 opt/pi-ager/pi_ager_loop.py:613
+#: opt/pi-ager/pi_ager_loop.py:628 opt/pi-ager/pi_ager_loop.py:629
+#: opt/pi-ager/pi_ager_loop.py:631 opt/pi-ager/pi_ager_loop.py:632
+#: opt/pi-ager/pi_ager_loop.py:647 opt/pi-ager/pi_ager_loop.py:648
+#: opt/pi-ager/pi_ager_loop.py:650 opt/pi-ager/pi_ager_loop.py:651
+#: opt/pi-ager/pi_ager_loop.py:666 opt/pi-ager/pi_ager_loop.py:667
+#: opt/pi-ager/pi_ager_loop.py:669 opt/pi-ager/pi_ager_loop.py:670
+#: opt/pi-ager/pi_ager_loop.py:685 opt/pi-ager/pi_ager_loop.py:686
+#: opt/pi-ager/pi_ager_loop.py:688 opt/pi-ager/pi_ager_loop.py:689
+#: opt/pi-ager/pi_ager_loop.py:704 opt/pi-ager/pi_ager_loop.py:705
+#: opt/pi-ager/pi_ager_loop.py:707 opt/pi-ager/pi_ager_loop.py:708
+#: opt/pi-ager/pi_ager_loop.py:1507 opt/pi-ager/pi_ager_loop.py:1569
 #: var/www/diagrams.php:995 var/www/diagrams.php:1020 var/www/diagrams.php:1106
 #: var/www/diagrams.php:1131 var/www/diagrams.php:1217
 #: var/www/diagrams.php:1242 var/www/diagrams.php:1328
@@ -391,23 +391,23 @@ msgstr "Heizung"
 msgid "on"
 msgstr "Ein"
 
-#: opt/pi-ager/pi_ager_loop.py:577 opt/pi-ager/pi_ager_loop.py:578
-#: opt/pi-ager/pi_ager_loop.py:580 opt/pi-ager/pi_ager_loop.py:581
-#: opt/pi-ager/pi_ager_loop.py:597 opt/pi-ager/pi_ager_loop.py:598
-#: opt/pi-ager/pi_ager_loop.py:600 opt/pi-ager/pi_ager_loop.py:601
-#: opt/pi-ager/pi_ager_loop.py:616 opt/pi-ager/pi_ager_loop.py:617
-#: opt/pi-ager/pi_ager_loop.py:619 opt/pi-ager/pi_ager_loop.py:620
-#: opt/pi-ager/pi_ager_loop.py:635 opt/pi-ager/pi_ager_loop.py:636
-#: opt/pi-ager/pi_ager_loop.py:638 opt/pi-ager/pi_ager_loop.py:639
-#: opt/pi-ager/pi_ager_loop.py:654 opt/pi-ager/pi_ager_loop.py:655
-#: opt/pi-ager/pi_ager_loop.py:657 opt/pi-ager/pi_ager_loop.py:658
-#: opt/pi-ager/pi_ager_loop.py:673 opt/pi-ager/pi_ager_loop.py:674
-#: opt/pi-ager/pi_ager_loop.py:676 opt/pi-ager/pi_ager_loop.py:677
-#: opt/pi-ager/pi_ager_loop.py:692 opt/pi-ager/pi_ager_loop.py:693
-#: opt/pi-ager/pi_ager_loop.py:695 opt/pi-ager/pi_ager_loop.py:696
-#: opt/pi-ager/pi_ager_loop.py:711 opt/pi-ager/pi_ager_loop.py:712
-#: opt/pi-ager/pi_ager_loop.py:714 opt/pi-ager/pi_ager_loop.py:715
-#: opt/pi-ager/pi_ager_loop.py:1498 opt/pi-ager/pi_ager_loop.py:1560
+#: opt/pi-ager/pi_ager_loop.py:578 opt/pi-ager/pi_ager_loop.py:579
+#: opt/pi-ager/pi_ager_loop.py:581 opt/pi-ager/pi_ager_loop.py:582
+#: opt/pi-ager/pi_ager_loop.py:599 opt/pi-ager/pi_ager_loop.py:600
+#: opt/pi-ager/pi_ager_loop.py:602 opt/pi-ager/pi_ager_loop.py:603
+#: opt/pi-ager/pi_ager_loop.py:618 opt/pi-ager/pi_ager_loop.py:619
+#: opt/pi-ager/pi_ager_loop.py:621 opt/pi-ager/pi_ager_loop.py:622
+#: opt/pi-ager/pi_ager_loop.py:637 opt/pi-ager/pi_ager_loop.py:638
+#: opt/pi-ager/pi_ager_loop.py:640 opt/pi-ager/pi_ager_loop.py:641
+#: opt/pi-ager/pi_ager_loop.py:656 opt/pi-ager/pi_ager_loop.py:657
+#: opt/pi-ager/pi_ager_loop.py:659 opt/pi-ager/pi_ager_loop.py:660
+#: opt/pi-ager/pi_ager_loop.py:675 opt/pi-ager/pi_ager_loop.py:676
+#: opt/pi-ager/pi_ager_loop.py:678 opt/pi-ager/pi_ager_loop.py:679
+#: opt/pi-ager/pi_ager_loop.py:694 opt/pi-ager/pi_ager_loop.py:695
+#: opt/pi-ager/pi_ager_loop.py:697 opt/pi-ager/pi_ager_loop.py:698
+#: opt/pi-ager/pi_ager_loop.py:713 opt/pi-ager/pi_ager_loop.py:714
+#: opt/pi-ager/pi_ager_loop.py:716 opt/pi-ager/pi_ager_loop.py:717
+#: opt/pi-ager/pi_ager_loop.py:1503 opt/pi-ager/pi_ager_loop.py:1565
 #: var/www/diagrams.php:997 var/www/diagrams.php:999 var/www/diagrams.php:1022
 #: var/www/diagrams.php:1024 var/www/diagrams.php:1108
 #: var/www/diagrams.php:1110 var/www/diagrams.php:1133
@@ -436,236 +436,236 @@ msgstr "Ein"
 msgid "off"
 msgstr "Aus"
 
-#: opt/pi-ager/pi_ager_loop.py:588 opt/pi-ager/pi_ager_loop.py:589
-#: opt/pi-ager/pi_ager_loop.py:591 opt/pi-ager/pi_ager_loop.py:592
-#: opt/pi-ager/pi_ager_loop.py:597 opt/pi-ager/pi_ager_loop.py:598
-#: opt/pi-ager/pi_ager_loop.py:600 opt/pi-ager/pi_ager_loop.py:601
+#: opt/pi-ager/pi_ager_loop.py:590 opt/pi-ager/pi_ager_loop.py:591
+#: opt/pi-ager/pi_ager_loop.py:593 opt/pi-ager/pi_ager_loop.py:594
+#: opt/pi-ager/pi_ager_loop.py:599 opt/pi-ager/pi_ager_loop.py:600
+#: opt/pi-ager/pi_ager_loop.py:602 opt/pi-ager/pi_ager_loop.py:603
 msgid "cooling compressor"
 msgstr "Kühlen"
 
-#: opt/pi-ager/pi_ager_loop.py:607 opt/pi-ager/pi_ager_loop.py:608
-#: opt/pi-ager/pi_ager_loop.py:610 opt/pi-ager/pi_ager_loop.py:611
-#: opt/pi-ager/pi_ager_loop.py:616 opt/pi-ager/pi_ager_loop.py:617
-#: opt/pi-ager/pi_ager_loop.py:619 opt/pi-ager/pi_ager_loop.py:620
+#: opt/pi-ager/pi_ager_loop.py:609 opt/pi-ager/pi_ager_loop.py:610
+#: opt/pi-ager/pi_ager_loop.py:612 opt/pi-ager/pi_ager_loop.py:613
+#: opt/pi-ager/pi_ager_loop.py:618 opt/pi-ager/pi_ager_loop.py:619
+#: opt/pi-ager/pi_ager_loop.py:621 opt/pi-ager/pi_ager_loop.py:622
 #: var/www/diagrams.php:1377 var/www/diagrams.php:1398
 msgid "humidifier"
 msgstr "Befeuchter"
 
-#: opt/pi-ager/pi_ager_loop.py:626 opt/pi-ager/pi_ager_loop.py:627
-#: opt/pi-ager/pi_ager_loop.py:629 opt/pi-ager/pi_ager_loop.py:630
-#: opt/pi-ager/pi_ager_loop.py:635 opt/pi-ager/pi_ager_loop.py:636
-#: opt/pi-ager/pi_ager_loop.py:638 opt/pi-ager/pi_ager_loop.py:639
+#: opt/pi-ager/pi_ager_loop.py:628 opt/pi-ager/pi_ager_loop.py:629
+#: opt/pi-ager/pi_ager_loop.py:631 opt/pi-ager/pi_ager_loop.py:632
+#: opt/pi-ager/pi_ager_loop.py:637 opt/pi-ager/pi_ager_loop.py:638
+#: opt/pi-ager/pi_ager_loop.py:640 opt/pi-ager/pi_ager_loop.py:641
 msgid "circulation air"
 msgstr "Umluft"
 
-#: opt/pi-ager/pi_ager_loop.py:645 opt/pi-ager/pi_ager_loop.py:646
-#: opt/pi-ager/pi_ager_loop.py:648 opt/pi-ager/pi_ager_loop.py:649
-#: opt/pi-ager/pi_ager_loop.py:654 opt/pi-ager/pi_ager_loop.py:655
-#: opt/pi-ager/pi_ager_loop.py:657 opt/pi-ager/pi_ager_loop.py:658
+#: opt/pi-ager/pi_ager_loop.py:647 opt/pi-ager/pi_ager_loop.py:648
+#: opt/pi-ager/pi_ager_loop.py:650 opt/pi-ager/pi_ager_loop.py:651
+#: opt/pi-ager/pi_ager_loop.py:656 opt/pi-ager/pi_ager_loop.py:657
+#: opt/pi-ager/pi_ager_loop.py:659 opt/pi-ager/pi_ager_loop.py:660
 #: var/www/diagrams.php:1599 var/www/diagrams.php:1620
 msgid "exhaust air"
 msgstr "Abluft"
 
-#: opt/pi-ager/pi_ager_loop.py:664 opt/pi-ager/pi_ager_loop.py:665
-#: opt/pi-ager/pi_ager_loop.py:667 opt/pi-ager/pi_ager_loop.py:668
-#: opt/pi-ager/pi_ager_loop.py:673 opt/pi-ager/pi_ager_loop.py:674
-#: opt/pi-ager/pi_ager_loop.py:676 opt/pi-ager/pi_ager_loop.py:677
+#: opt/pi-ager/pi_ager_loop.py:666 opt/pi-ager/pi_ager_loop.py:667
+#: opt/pi-ager/pi_ager_loop.py:669 opt/pi-ager/pi_ager_loop.py:670
+#: opt/pi-ager/pi_ager_loop.py:675 opt/pi-ager/pi_ager_loop.py:676
+#: opt/pi-ager/pi_ager_loop.py:678 opt/pi-ager/pi_ager_loop.py:679
 #: var/www/diagrams.php:1488 var/www/diagrams.php:1509
 msgid "dehumidifier"
 msgstr "Entfeuchter"
 
-#: opt/pi-ager/pi_ager_loop.py:683 opt/pi-ager/pi_ager_loop.py:684
-#: opt/pi-ager/pi_ager_loop.py:686 opt/pi-ager/pi_ager_loop.py:687
-#: opt/pi-ager/pi_ager_loop.py:692 opt/pi-ager/pi_ager_loop.py:693
-#: opt/pi-ager/pi_ager_loop.py:695 opt/pi-ager/pi_ager_loop.py:696
+#: opt/pi-ager/pi_ager_loop.py:685 opt/pi-ager/pi_ager_loop.py:686
+#: opt/pi-ager/pi_ager_loop.py:688 opt/pi-ager/pi_ager_loop.py:689
+#: opt/pi-ager/pi_ager_loop.py:694 opt/pi-ager/pi_ager_loop.py:695
+#: opt/pi-ager/pi_ager_loop.py:697 opt/pi-ager/pi_ager_loop.py:698
 #: var/www/config.php:198 var/www/diagrams.php:933 var/www/diagrams.php:954
 #: var/www/index.php:1306 var/www/modules/querystatus.php:383
 msgid "light"
 msgstr "Licht"
 
-#: opt/pi-ager/pi_ager_loop.py:702 opt/pi-ager/pi_ager_loop.py:703
-#: opt/pi-ager/pi_ager_loop.py:705 opt/pi-ager/pi_ager_loop.py:706
-#: opt/pi-ager/pi_ager_loop.py:711 opt/pi-ager/pi_ager_loop.py:712
-#: opt/pi-ager/pi_ager_loop.py:714 opt/pi-ager/pi_ager_loop.py:715
+#: opt/pi-ager/pi_ager_loop.py:704 opt/pi-ager/pi_ager_loop.py:705
+#: opt/pi-ager/pi_ager_loop.py:707 opt/pi-ager/pi_ager_loop.py:708
+#: opt/pi-ager/pi_ager_loop.py:713 opt/pi-ager/pi_ager_loop.py:714
+#: opt/pi-ager/pi_ager_loop.py:716 opt/pi-ager/pi_ager_loop.py:717
 #: var/www/diagrams.php:1044 var/www/diagrams.php:1065 var/www/index.php:1275
 #: var/www/modules/querystatus.php:351
 msgid "uv-light"
 msgstr "UV-Licht"
 
-#: opt/pi-ager/pi_ager_loop.py:833
+#: opt/pi-ager/pi_ager_loop.py:835
 msgid "UPS battery is low"
 msgstr "USV-Batterie ist schwach"
 
-#: opt/pi-ager/pi_ager_loop.py:836
+#: opt/pi-ager/pi_ager_loop.py:838
 msgid "Shutdown Pi-Ager now"
 msgstr "Pi-Ager jetzt abschalten"
 
-#: opt/pi-ager/pi_ager_loop.py:848
+#: opt/pi-ager/pi_ager_loop.py:850
 msgid "UPS battery is ok"
 msgstr "USV-Batterie ist in Ordnung"
 
-#: opt/pi-ager/pi_ager_loop.py:862
+#: opt/pi-ager/pi_ager_loop.py:864
 msgid "Power monitor signals powerfail"
 msgstr "Stromüberwachung meldet Netzausfall"
 
-#: opt/pi-ager/pi_ager_loop.py:871
+#: opt/pi-ager/pi_ager_loop.py:873
 msgid "Power monitor signals powergood"
 msgstr "Stromüberwachung meldet Netz ok"
 
-#: opt/pi-ager/pi_ager_loop.py:888
+#: opt/pi-ager/pi_ager_loop.py:890
 msgid "Switch is shorted to GND"
 msgstr "Schalter ist mit GND kurzgeschlossen"
 
-#: opt/pi-ager/pi_ager_loop.py:897
+#: opt/pi-ager/pi_ager_loop.py:899
 msgid "Switch is open"
 msgstr "Schalter ist offen"
 
-#: opt/pi-ager/pi_ager_loop.py:1423
+#: opt/pi-ager/pi_ager_loop.py:1428
 msgid "selected internal sensor"
 msgstr "Ausgewählter interner Sensor"
 
-#: opt/pi-ager/pi_ager_loop.py:1425
+#: opt/pi-ager/pi_ager_loop.py:1430
 msgid "target temperature"
 msgstr "Sollwert Temperatur in °C"
 
-#: opt/pi-ager/pi_ager_loop.py:1427 opt/pi-ager/pi_ager_loop.py:1439
+#: opt/pi-ager/pi_ager_loop.py:1432 opt/pi-ager/pi_ager_loop.py:1444
 msgid "actual temperature"
 msgstr "Aktuelle Temperatur"
 
-#: opt/pi-ager/pi_ager_loop.py:1430
+#: opt/pi-ager/pi_ager_loop.py:1435
 msgid "target humidity"
 msgstr "Sollwert Feuchte"
 
-#: opt/pi-ager/pi_ager_loop.py:1431 opt/pi-ager/pi_ager_loop.py:1440
+#: opt/pi-ager/pi_ager_loop.py:1436 opt/pi-ager/pi_ager_loop.py:1445
 msgid "actual humidity"
 msgstr "Aktuelle Feuchte"
 
-#: opt/pi-ager/pi_ager_loop.py:1433 opt/pi-ager/pi_ager_loop.py:1441
+#: opt/pi-ager/pi_ager_loop.py:1438 opt/pi-ager/pi_ager_loop.py:1446
 msgid "actual dewpoint"
 msgstr "Aktueller Taupunkt"
 
-#: opt/pi-ager/pi_ager_loop.py:1434 opt/pi-ager/pi_ager_loop.py:1442
+#: opt/pi-ager/pi_ager_loop.py:1439 opt/pi-ager/pi_ager_loop.py:1447
 msgid "actual humidity abs"
 msgstr "Aktuelle absolute Feuchte"
 
-#: opt/pi-ager/pi_ager_loop.py:1438
+#: opt/pi-ager/pi_ager_loop.py:1443
 msgid "selected external sensor"
 msgstr "Ausgewählter externer Sensor"
 
-#: opt/pi-ager/pi_ager_loop.py:1454 opt/pi-ager/pi_ager_loop.py:1457
-#: opt/pi-ager/pi_ager_loop.py:1460
+#: opt/pi-ager/pi_ager_loop.py:1459 opt/pi-ager/pi_ager_loop.py:1462
+#: opt/pi-ager/pi_ager_loop.py:1465
 msgid "circulation air timer inactive"
 msgstr "Umluft Timer inaktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1454 opt/pi-ager/pi_ager_loop.py:1460
-#: opt/pi-ager/pi_ager_loop.py:1476 opt/pi-ager/pi_ager_loop.py:1482
+#: opt/pi-ager/pi_ager_loop.py:1459 opt/pi-ager/pi_ager_loop.py:1465
+#: opt/pi-ager/pi_ager_loop.py:1481 opt/pi-ager/pi_ager_loop.py:1487
 msgid "fan permanent off"
 msgstr "Ventilator permanent AUS"
 
-#: opt/pi-ager/pi_ager_loop.py:1457 opt/pi-ager/pi_ager_loop.py:1479
+#: opt/pi-ager/pi_ager_loop.py:1462 opt/pi-ager/pi_ager_loop.py:1484
 msgid "fan permanent on"
 msgstr "Ventilator permanent EIN"
 
-#: opt/pi-ager/pi_ager_loop.py:1464 opt/pi-ager/pi_ager_loop.py:1468
+#: opt/pi-ager/pi_ager_loop.py:1469 opt/pi-ager/pi_ager_loop.py:1473
 msgid "circulation air timer active"
 msgstr "Umluft Timer aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1464 opt/pi-ager/pi_ager_loop.py:1486
+#: opt/pi-ager/pi_ager_loop.py:1469 opt/pi-ager/pi_ager_loop.py:1491
 msgid "fan on"
 msgstr "Ventilator ein"
 
-#: opt/pi-ager/pi_ager_loop.py:1468 opt/pi-ager/pi_ager_loop.py:1490
+#: opt/pi-ager/pi_ager_loop.py:1473 opt/pi-ager/pi_ager_loop.py:1495
 msgid "fan off"
 msgstr "Ventilator aus"
 
-#: opt/pi-ager/pi_ager_loop.py:1476 opt/pi-ager/pi_ager_loop.py:1479
-#: opt/pi-ager/pi_ager_loop.py:1482
+#: opt/pi-ager/pi_ager_loop.py:1481 opt/pi-ager/pi_ager_loop.py:1484
+#: opt/pi-ager/pi_ager_loop.py:1487
 msgid "exhaust air timer inactive"
 msgstr "Abluft Timer inaktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1486 opt/pi-ager/pi_ager_loop.py:1490
+#: opt/pi-ager/pi_ager_loop.py:1491 opt/pi-ager/pi_ager_loop.py:1495
 msgid "exhaust air timer active"
 msgstr "Abluft Timer aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1498 opt/pi-ager/pi_ager_loop.py:1502
+#: opt/pi-ager/pi_ager_loop.py:1503 opt/pi-ager/pi_ager_loop.py:1507
 msgid "modus uv-light"
 msgstr "Modus UV-Licht"
 
-#: opt/pi-ager/pi_ager_loop.py:1505 opt/pi-ager/pi_ager_loop.py:1508
-#: opt/pi-ager/pi_ager_loop.py:1511
+#: opt/pi-ager/pi_ager_loop.py:1510 opt/pi-ager/pi_ager_loop.py:1513
+#: opt/pi-ager/pi_ager_loop.py:1516
 msgid "uv-light timer inactive"
 msgstr "UV-Licht Timer inaktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1505 opt/pi-ager/pi_ager_loop.py:1508
-#: opt/pi-ager/pi_ager_loop.py:1538
+#: opt/pi-ager/pi_ager_loop.py:1510 opt/pi-ager/pi_ager_loop.py:1513
+#: opt/pi-ager/pi_ager_loop.py:1543
 msgid "uv-light permanent off"
 msgstr "UV Licht permanent AUS"
 
-#: opt/pi-ager/pi_ager_loop.py:1511
+#: opt/pi-ager/pi_ager_loop.py:1516
 msgid "uv-light permanent on"
 msgstr "UV-Licht permanent Ein"
 
-#: opt/pi-ager/pi_ager_loop.py:1518 opt/pi-ager/pi_ager_loop.py:1525
+#: opt/pi-ager/pi_ager_loop.py:1523 opt/pi-ager/pi_ager_loop.py:1530
 msgid "uv-light timer active"
 msgstr "UV-Licht Timer aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1518 opt/pi-ager/pi_ager_loop.py:1550
+#: opt/pi-ager/pi_ager_loop.py:1523 opt/pi-ager/pi_ager_loop.py:1555
 msgid "uv-light on"
 msgstr "UV-Licht Ein"
 
-#: opt/pi-ager/pi_ager_loop.py:1525 opt/pi-ager/pi_ager_loop.py:1554
+#: opt/pi-ager/pi_ager_loop.py:1530 opt/pi-ager/pi_ager_loop.py:1559
 msgid "uv-light off"
 msgstr "UV-Licht AUS"
 
-#: opt/pi-ager/pi_ager_loop.py:1538
+#: opt/pi-ager/pi_ager_loop.py:1543
 msgid "uv-light timestamp inactive"
 msgstr "Zeitpunkt UV-Licht inaktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1550 opt/pi-ager/pi_ager_loop.py:1554
+#: opt/pi-ager/pi_ager_loop.py:1555 opt/pi-ager/pi_ager_loop.py:1559
 msgid "uv-light timestamp active"
 msgstr "Zeitpunkt UV-Licht aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1560 opt/pi-ager/pi_ager_loop.py:1564
+#: opt/pi-ager/pi_ager_loop.py:1565 opt/pi-ager/pi_ager_loop.py:1569
 msgid "modus light"
 msgstr "Modus Licht"
 
-#: opt/pi-ager/pi_ager_loop.py:1567 opt/pi-ager/pi_ager_loop.py:1571
-#: opt/pi-ager/pi_ager_loop.py:1575
+#: opt/pi-ager/pi_ager_loop.py:1572 opt/pi-ager/pi_ager_loop.py:1576
+#: opt/pi-ager/pi_ager_loop.py:1580
 msgid "light timer inactive"
 msgstr "Licht Timer inaktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1567 opt/pi-ager/pi_ager_loop.py:1571
-#: opt/pi-ager/pi_ager_loop.py:1605
+#: opt/pi-ager/pi_ager_loop.py:1572 opt/pi-ager/pi_ager_loop.py:1576
+#: opt/pi-ager/pi_ager_loop.py:1610
 msgid "light permanent off"
 msgstr "Licht permanent AUS"
 
-#: opt/pi-ager/pi_ager_loop.py:1575
+#: opt/pi-ager/pi_ager_loop.py:1580
 msgid "light permanent on"
 msgstr "Licht permanent EIN"
 
-#: opt/pi-ager/pi_ager_loop.py:1583 opt/pi-ager/pi_ager_loop.py:1590
+#: opt/pi-ager/pi_ager_loop.py:1588 opt/pi-ager/pi_ager_loop.py:1595
 msgid "light timer active"
 msgstr "Licht Timer aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1583 opt/pi-ager/pi_ager_loop.py:1617
+#: opt/pi-ager/pi_ager_loop.py:1588 opt/pi-ager/pi_ager_loop.py:1622
 #: var/www/webcam.php:53
 msgid "light on"
 msgstr "Licht EIN"
 
-#: opt/pi-ager/pi_ager_loop.py:1590 opt/pi-ager/pi_ager_loop.py:1621
+#: opt/pi-ager/pi_ager_loop.py:1595 opt/pi-ager/pi_ager_loop.py:1626
 msgid "light off"
 msgstr "Licht AUS"
 
-#: opt/pi-ager/pi_ager_loop.py:1605
+#: opt/pi-ager/pi_ager_loop.py:1610
 msgid "light timestamp inactive"
 msgstr "Zeitpunkt Licht inaktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1617 opt/pi-ager/pi_ager_loop.py:1621
+#: opt/pi-ager/pi_ager_loop.py:1622 opt/pi-ager/pi_ager_loop.py:1626
 msgid "light timestamp active"
 msgstr "Zeitpunkt Licht aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1856 opt/pi-ager/pi_ager_loop.py:1858
 #: opt/pi-ager/pi_ager_loop.py:1861 opt/pi-ager/pi_ager_loop.py:1863
+#: opt/pi-ager/pi_ager_loop.py:1866 opt/pi-ager/pi_ager_loop.py:1868
 msgid "weight scale"
 msgstr "Waagenmessung"
 
@@ -720,7 +720,7 @@ msgstr "UV-Licht Pause!"
 msgid "uv light off"
 msgstr "UV Licht AUS"
 
-#: var/www/admin.php:56 var/www/admin.php:471 var/www/header.php:143
+#: var/www/admin.php:56 var/www/admin.php:471
 msgid "administration"
 msgstr "Admin"
 
@@ -1074,7 +1074,7 @@ msgstr ""
 
 #: var/www/admin.php:471 var/www/admin.php:543 var/www/admin.php:653
 #: var/www/admin.php:670 var/www/admin.php:735 var/www/admin.php:808
-#: var/www/admin.php:1040 var/www/config.php:303
+#: var/www/admin.php:1042 var/www/config.php:303
 #: var/www/edit_agingtable.php:116 var/www/manvals.php:149
 #: var/www/notification.php:141 var/www/notification.php:327
 #: var/www/notification.php:475 var/www/notification.php:583
@@ -1366,59 +1366,59 @@ msgstr "Neues Systemdatum und neue Uhrzeit eingestellt"
 msgid "wrong input format"
 msgstr "Falsches Eingabeformat"
 
-#: var/www/admin.php:1030
+#: var/www/admin.php:1032
 msgid "set Pi-Ager date/time"
 msgstr "Pi-Ager Datum/Uhrzeit einstellen"
 
-#: var/www/admin.php:1036
+#: var/www/admin.php:1038
 msgid "Pi-Ager date/time format YYYY-MM-DD HH:MM:SS"
 msgstr "Pi-Ager Datum/Uhrzeit Format JJJJ-MM-TT HH:MM:SS"
 
-#: var/www/admin.php:1036
+#: var/www/admin.php:1038
 msgid "date/time format YYYY-MM-DD HH:MM:SS e.g. 2023-01-31 16:05:09"
 msgstr "Datum/Uhrzeit Format JJJJ-MM-TT HH:MM:SS z. B. 2023-01-31 16:05:09"
 
-#: var/www/admin.php:1040
+#: var/www/admin.php:1042
 msgid "ATTENTION: set date and time?"
 msgstr "ACHTUNG: Datum und Uhrzeit einstellen?"
 
-#: var/www/admin.php:1055
+#: var/www/admin.php:1057
 msgid "WLAN setup"
 msgstr "WLAN-Einrichtung"
 
-#: var/www/admin.php:1064
+#: var/www/admin.php:1066
 msgid "No WLAN networks found"
 msgstr "Keine WLAN-Netzwerke gefunden"
 
-#: var/www/admin.php:1081
+#: var/www/admin.php:1083
 msgid "WLAN password"
 msgstr "WLAN-Kennwort"
 
-#: var/www/admin.php:1081
+#: var/www/admin.php:1083
 msgid "enter your WLAN password"
 msgstr "Geben Sie das WLAN-Passwort ein"
 
-#: var/www/admin.php:1085
+#: var/www/admin.php:1087
 msgid "ATTENTION: setup your WLAN and reboot?"
 msgstr "ACHTUNG: WLAN einrichten und neu starten?"
 
-#: var/www/admin.php:1085
+#: var/www/admin.php:1087
 msgid "save and reboot"
 msgstr "Speichern und neu starten"
 
-#: var/www/admin.php:1093
+#: var/www/admin.php:1095
 msgid "python"
 msgstr "Python"
 
-#: var/www/admin.php:1099
+#: var/www/admin.php:1101
 msgid "ATTENTION: stop"
 msgstr "ACHTUNG: Stop"
 
-#: var/www/admin.php:1099
+#: var/www/admin.php:1101
 msgid "stop"
 msgstr "Stop"
 
-#: var/www/admin.php:1100
+#: var/www/admin.php:1102
 msgid "start"
 msgstr "Start"
 
@@ -1431,7 +1431,7 @@ msgid "attached weight"
 msgstr "Angehangenes Gewicht"
 
 #: var/www/calibrate_scale.php:47 var/www/calibrate_scale.php:68
-#: var/www/calibrate_scale.php:73 var/www/header.php:162
+#: var/www/calibrate_scale.php:73 var/www/header.php:164
 #: var/www/modules/tara_scale.php:44 var/www/scale_wizzard.php:38
 #: var/www/scale_wizzard.php:59
 msgid "scale wizzard"
@@ -1490,7 +1490,7 @@ msgstr "Bitte neu versuchen"
 msgid "error on calibrating"
 msgstr "Fehler bei der Kalibrierung"
 
-#: var/www/changelog.php:5 var/www/header.php:155
+#: var/www/changelog.php:5 var/www/header.php:157
 msgid "changelog"
 msgstr "changelog"
 
@@ -1623,7 +1623,7 @@ msgstr ""
 "<br>\n"
 "<br>Die Default-Werte sind:\n"
 "<br>Primäre Hysterese : 2°C\n"
-"<br>Sekundäre Hysterese : 3°C\n"
+"<br>Sekundäre Hysterese : 4°C\n"
 "<br><br>"
 
 #: var/www/config.php:48
@@ -1957,7 +1957,7 @@ msgstr "Monat"
 msgid "custom"
 msgstr "Benutzer def"
 
-#: var/www/diagrams.php:33 var/www/header.php:136 var/www/index.php:261
+#: var/www/diagrams.php:33 var/www/header.php:137 var/www/index.php:261
 #: var/www/modules/save_diagram_mode.php:29
 #: var/www/modules/save_diagram_mode.php:33
 #: var/www/modules/save_diagram_mode.php:37
@@ -2046,7 +2046,7 @@ msgid "circulate air"
 msgstr "Umluft"
 
 #: var/www/edit_agingtable.php:26 var/www/edit_agingtable.php:32
-#: var/www/edit_agingtable.php:116 var/www/header.php:169
+#: var/www/edit_agingtable.php:116 var/www/header.php:171
 msgid "edit agingtable"
 msgstr "Editor"
 
@@ -2183,23 +2183,27 @@ msgstr "Laufendes System: "
 msgid "by"
 msgstr "von"
 
-#: var/www/header.php:135
+#: var/www/header.php:136
 msgid "monitor"
 msgstr "Monitor"
 
-#: var/www/header.php:137
+#: var/www/header.php:138
 msgid "settings"
 msgstr "Einstellungen"
 
-#: var/www/header.php:147
+#: var/www/header.php:139
+msgid "admin"
+msgstr ""
+
+#: var/www/header.php:149
 msgid "notification"
 msgstr "Nachrichten"
 
-#: var/www/header.php:148
+#: var/www/header.php:150
 msgid "logs"
 msgstr "Logs"
 
-#: var/www/header.php:149 var/www/webcam.php:28
+#: var/www/header.php:151 var/www/webcam.php:28
 msgid "webcam"
 msgstr "Webcam"
 

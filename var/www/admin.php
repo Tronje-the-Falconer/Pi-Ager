@@ -338,7 +338,7 @@
                                             }
                                         ?>>                                        
                                             <td class="text_left_padding"><?php echo _('current threshold'); ?>:</td>
-                                            <td style="text-align: left;"><input name="current_threshold_admin" type="number" min="0.1" max="25" step="0.1" style="width: 30%;" required value=<?php echo $current_threshold; ?>>&nbsp;A<span style="font-size: xx-small"> (0.1A <?php echo _('to'); ?> 25A)</span></td>
+                                            <td style="text-align: left;"><input name="current_threshold_admin" type="number" min="0.1" max="25" step="0.01" style="width: 30%;" required value=<?php echo $current_threshold; ?>>&nbsp;A<span style="font-size: xx-small"> (0.1A <?php echo _('to'); ?> 25A)</span></td>
                                         </tr>
                                         <tr id="cooler_check_line3"
                                         <?php
