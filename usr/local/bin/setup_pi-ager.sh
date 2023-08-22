@@ -149,8 +149,6 @@ fi
 
 echo "disable setup_pi-ager.service now and man-db services"
 systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
-systemctl disable man-db.timer          # save cpu load, not needed wth pi-ager
-systemctl disable man-db                # save cpu load, not needed wth pi-ager
 
 # now its time to enable pi-ager_main.service to start at next boot. Reboot is initiated by rc.local after expanding file system on root partition
 systemctl enable pi-ager_main.service 
