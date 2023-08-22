@@ -307,7 +307,7 @@
                                                 }
                                                 $current_check_row = get_table_row($config_current_check_table, 1);
                                                 $status_current_check = intval($current_check_row[$current_check_active_field]);
-                                                $current_threshold = number_format(floatval($current_check_row[$current_threshold_field]), 1, '.', '');
+                                                $current_threshold = number_format(floatval($current_check_row[$current_threshold_field]), 2, '.', '');
                                                 $repeat_event_cycle = intval($current_check_row[$repeat_event_cycle_field]);
                                                 if ($status_current_check == 1) {
                                                     $cooler_relay_check_active_true = "checked";

@@ -417,7 +417,7 @@ UPDATE scale2_settings SET value='15' WHERE key='measuring_duration';
 UPDATE scale2_settings SET value='150' WHERE key='saving_period';
 UPDATE scale2_settings SET value='20' WHERE key='samples';
 UPDATE config SET value='2' WHERE key='cooling_hysteresis';
-UPDATE config SET value='3' WHERE key='heating_hysteresis';
+UPDATE config SET value='4' WHERE key='heating_hysteresis';
 UPDATE config SET value='25' WHERE key='switch_on_humidifier';
 UPDATE config SET value='0' WHERE key='switch_off_humidifier';
 UPDATE config SET value='5' WHERE key='delay_humidify';

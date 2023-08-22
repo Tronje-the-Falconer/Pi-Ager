@@ -913,7 +913,7 @@
                                                             beginAtZero: <?php if ($sensor4_is_current == true) { echo 'true';} else { echo 'false';}?>,
                                                             maxTicksLimit: 10,
 	                                                        suggestedMin: <?php if ($sensor4_is_current == true) { echo '0';} else { echo '10';}?>,
-                                                            suggestedMax: <?php if ($sensor4_is_current == true) { echo '2';} else { echo '20';}?>
+                                                            suggestedMax: <?php if ($sensor4_is_current == true) { echo '1';} else { echo '20';}?>
                                                             //max: 30, 
                                                             //min: -4
                                                         }
