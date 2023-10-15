@@ -227,4 +227,17 @@
         logger('DEBUG', ' telegram values saved');
         print '<script language="javascript"> alert("'. (_("telegram values")) . " : " . (_("values saved")) .'"); </script>';
     }
+   
+    if (isset ($_POST['save_mqtt_values'])){
+        logger('DEBUG', 'button save mqtt pressed');
+        unset($_POST['save_mqtt_values']);
+        $broker_address = $_POST['broker_address'];
+        $mqtt_port = $_POST['port'];
+        $mqtt_username = $_POST['username'];
+        $mqtt_password = $_POST['password'];
+        $mqtt_active = $_POST['mqtt_active'];
+        write_mqtt_values($broker_address, $mqtt_port, $mqtt_username, $mqtt_password, $mqtt_active);
+        logger('DEBUG', ' MQTT values saved');
+        print '<script language="javascript"> alert("'. (_("MQTT values")) . " : " . (_("values saved")) .'"); </script>';
+    }    
 ?>

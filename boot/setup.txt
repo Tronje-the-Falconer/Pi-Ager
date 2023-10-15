@@ -48,10 +48,10 @@ dbpw='raspberry'
 #-------------------------------------------------------------------------------
 
 # WLAN Netzwerkname:
-wlanssid='your WLAN SSID'
+wlanssid='FRITZ!Box 7490'
 
 # WLAN Schlüssel (mindesten 8 Zeichen):
-wlankey='your WLAN key'
+wlankey='sonnemondundsterne'
 
 # ISO code your country, e.g. DE, GB:
 country='DE'

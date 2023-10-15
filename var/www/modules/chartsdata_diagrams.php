@@ -291,12 +291,22 @@
     $temperature_dataset[] = Null;
     array_unshift($temperature_dataset, Null);
 //    $temperature_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $temperature_dataset, $moving_average_window_x);
+
+    // value array for tempintavg
+    $temperature_avg_dataset = array_column($all_sensors_rows, 'tempintavg');
+    $temperature_avg_dataset[] = Null;
+    array_unshift($temperature_avg_dataset, Null);
     
     // value array for humint
     $humidity_dataset = array_column($all_sensors_rows, 'humint');
     $humidity_dataset[] = Null;
     array_unshift($humidity_dataset, Null);
 //    $humidity_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $humidity_dataset, $moving_average_window_x);
+    
+    // value array for humintavg
+    $humidity_avg_dataset = array_column($all_sensors_rows, 'humintavg');
+    $humidity_avg_dataset[] = Null;
+    array_unshift($humidity_avg_dataset, Null);
     
     // value array for dewint
     $dewpoint_dataset = array_column($all_sensors_rows, 'dewint');

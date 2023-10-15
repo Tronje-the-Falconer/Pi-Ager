@@ -27,16 +27,22 @@ class cl_sensor_MiThermometer(cl_sensor):
         
     def get_current_data(self):
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        Mi_Timeout = 50
-        mi_data = pi_ager_database.get_table_value_from_field(pi_ager_names.atc_mi_thermometer_data_table, pi_ager_names.mi_data_key)
+        Mi_Timeout = 120
+        mi_data = pi_ager_database.get_table_row('atc_data', 1)
+#        mi_data = pi_ager_database.get_table_value_from_field(pi_ager_names.atc_mi_thermometer_data_table, pi_ager_names.mi_data_key)
         if (mi_data != None):
-            splited_data = mi_data.split(' ')
+#            splited_data = mi_data.split(' ')
             try:
-                self.address = splited_data[1]
-                self.temperature = float(splited_data[2])
-                self.humidity = float(splited_data[3])
-                self.battery = float(splited_data[4])
-                self.data_timestamp = int(splited_data[5])  # time in seconds when data was generated
+#                self.address = splited_data[1]
+#                self.temperature = float(splited_data[2])
+#                self.humidity = float(splited_data[3])
+#                self.battery = float(splited_data[4])
+#                self.data_timestamp = int(splited_data[5])  # time in seconds when data was generated
+#                self.address = splited_data[1]
+                self.temperature = mi_data['temperature']
+                self.humidity = mi_data['humidity']
+                self.battery = mi_data['battvolt']
+                self.data_timestamp = mi_data['last_change']  # time in seconds when data was generated
                 current_time = int(time.time()) # current time in seconds 
                 if (current_time - self.data_timestamp) > Mi_Timeout:   # when difference is greater than Mi_Timeout, then bluetooth connection may be broken
                     if self.event_out_of_range == False:

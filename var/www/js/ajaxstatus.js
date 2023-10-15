@@ -88,10 +88,10 @@ async function handleContentStatus( msg ) {
         $('#mod_type_line4_id').attr('src', myObj.mod_type_line4);
         $('#mod_stat_line4_id').attr('src', myObj.mod_stat_line4);
         $('#mod_name_line4_id').html(myObj.mod_name_line4);
-        $('#mod_current_line4_id').html(myObj.mod_current_line4 + ' %');
-        $('#mod_setpoint_line4_id').html(myObj.mod_setpoint_line4 + ' %');
-        $('#mod_on_line4_id').html(myObj.mod_on_line4 + ' %');
-        $('#mod_off_line4_id').html(myObj.mod_off_line4 + ' %');
+//        $('#mod_current_line4_id').html(myObj.mod_current_line4 + ' %');
+//        $('#mod_setpoint_line4_id').html(myObj.mod_setpoint_line4 + ' %');
+//        $('#mod_on_line4_id').html(myObj.mod_on_line4 + ' %');
+//        $('#mod_off_line4_id').html(myObj.mod_off_line4 + ' %');
         
         $('#mod_type_line5_id').attr('src', myObj.mod_type_line5);
         $('#mod_stat_line5_id').attr('src', myObj.mod_stat_line5);

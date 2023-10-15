@@ -5,8 +5,9 @@
     $language = get_table_value($config_settings_table,$language_key);
     $cooling_hysteresis = number_format(floatval(get_table_value($config_settings_table, $cooling_hysteresis_key)), 1, '.', '');
     $heating_hysteresis = number_format(floatval(get_table_value($config_settings_table, $heating_hysteresis_key)), 1, '.', '');
-    $switch_on_humidifier = get_table_value($config_settings_table,$switch_on_humidifier_key);
-    $switch_off_humidifier = get_table_value($config_settings_table,$switch_off_humidifier_key);
+#    $switch_on_humidifier = get_table_value($config_settings_table,$switch_on_humidifier_key);
+#    $switch_off_humidifier = get_table_value($config_settings_table,$switch_off_humidifier_key);
+    $saturation_point = get_table_value($config_settings_table, $saturation_point_key);                                                                                       
     $delay_humidify = get_table_value($config_settings_table,$delay_humidify_key);
     $uv_modus = get_table_value($config_settings_table,$uv_modus_key);
     $uv_duration = get_table_value($config_settings_table,$uv_duration_key)/60;
@@ -30,6 +31,10 @@
     $delay_cooler = intval(get_table_value($config_settings_table, $delay_cooler_key));
     $dewpoint_check = intval(get_table_value($config_settings_table, $dewpoint_check_key));
     
+    $humidifier_hysteresis = intval(get_table_value($config_settings_table,$humidifier_hysteresis_key));
+    $dehumidifier_hysteresis = intval(get_table_value($config_settings_table,$dehumidifier_hysteresis_key));
+    $hysteresis_offset = number_format(floatval(get_table_value($config_settings_table,$hysteresis_offset_key)), 1, '.', '');
+    
     $referenceunit_scale1 = number_format(floatval(get_table_value($settings_scale1_table,$referenceunit_key)), 1, '.', '');
     $offset_scale1 = number_format(floatval(get_table_value($settings_scale1_table, $offset_key)), 1, '.', '');
     $measuring_interval_scale1 = get_table_value($settings_scale1_table,$scale_measuring_interval_key);
@@ -51,7 +56,8 @@
     $meat3_sensortype = get_table_value($config_settings_table, $meat3_sensortype_key);   
     $meat4_sensortype = get_table_value($config_settings_table, $meat4_sensortype_key);   
     
-    $mi_mac_last3bytes = get_table_value_from_field($atc_mi_thermometer_mac_table, NULL, $mi_mac_last3bytes_key);
+#    $mi_mac_last3bytes = get_table_value_from_field($atc_mi_thermometer_mac_table, NULL, $mi_mac_last3bytes_key);
+    $ATC_device_name = get_table_value_from_field('atc_device_name', NULL, 'name');
     $switch_control_uv_light = intval(get_table_value($config_settings_table, $switch_control_uv_light_key));
     $switch_control_light = intval(get_table_value($config_settings_table, $switch_control_light_key));
     

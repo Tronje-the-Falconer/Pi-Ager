@@ -31,7 +31,7 @@ async function loadContentDateTime() {
 }
 
 // timer for data refresh
-setInterval(myDateTimeTimer, 1000); // every second
+setInterval(myDateTimeTimer, 5000); // every 5 seconds
 
 function myDateTimeTimer() {
     loadContentDateTime();

@@ -152,8 +152,11 @@ array=(${NFSVOL//:/ })
 serverIP=${array[0]}
 echo "NFS IP address = $serverIP"
 localIP=$(hostname -I)
-#remove last space character
-localIP=${localIP// /}
+#remove space characters
+#localIP=${localIP// /}
+# with RPIhotspot we have two addresses, first address is station address, second address is AP address
+array=(${localIP// / })
+localIP=${array[0]}
 echo "Local IP address = $localIP"
 
 echo "check if nfs Server IP address has correct format"

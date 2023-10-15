@@ -25,21 +25,28 @@ h4 {
 
 </style>
 
-<h2>Version 3.3.4 bullseye</h2>
+<h2>Version 3.3.4</h2>
 
 <h4>System</h4>
     <ul>
-        <li> <b>Pi OS upgrade from buster to bullseye.</b></li>
-        <li> <b>Pi-Ager Auto Hotspot Mode</b> implementiert. Pi-Ager funktioniert damit auch ohne Router und ohne Internet Verbindung. Hat der Pi-Ager keine Verbindung zum WLAN Router oder Access Point, schaltet der Pi-Ager in den Hotspot Mode. Er kann dann via Smartphone oder Tablet erreicht werden. Der Hotspot hat die <b>WLAN SSDI 'RPiHotspot'</b>, das Passwort ist <b>'1234567890'</b>. Den Pi-Ager kann man dann über die IP Adresse <b>10.0.0.5</b> via SSH ereichen, den Webserver erreicht man mit einer beliebigen IP Adresse, aber nicht aus dem Adressraum <b>http://10.0.0.x</b>. Die Überprüfung, ob eine Verbindung zum Internet oder Access Point besteht und eine Umschaltung der WLAN Betriebsart erforderlich ist, erfolgt alle <b>2 Minuten</b>.</li>
-        <li> Im Hotspot Mode können auf der ADMIN Seite Datum, Uhrzeit, WLAN SSID und WLAN Passwort gesetzt werden.</li>
+        <li> <b>Pi-Ager mit Hotspot</b>. Pi-Ager spannt ein eigenes WLAN (Hotspot oder Acesspoint) neben der Anbindung an ein lokales WLAN Netzwerk auf. Beide Netzwerke existieren parallel nebeneinander. Mit einem Tablet oder Smartphone kann man sich mit dem Accesspoint verbinden, der Name des Netzwerks ist <b>pi-ager</b> und das Passwort zum Verbinden ist <b>1234567890</b>. Üblicherweise verbindet man sich in ein lokales WLAN Netz, das von einem Router aufgespannt wird und das auch mit dem Pi-Ager verbunden ist (Client mode oder Station Mode). Die Parameter für die Anmeldung an einem Router können im File 'setup.txt' festgelegt werden und bestehen aus dem Namen des Netzwerks (SSID), dem WLAN Passwort und der Länder-Kennung (z.B. 'DE' für Deutschland). Der Pi-Ager funktioniert damit auch ohne Router und ohne Internet Verbindung. Verliert der Pi-Ager die Verbindung zum WLAN Router, kann man sich mit dem pi-ager Hotspot verbinden und mit Tablet oder Smartphone und einem Browser über die Seite http://10.0.0.1 oder http://pi-ager in den Pi-Ager einloggen. Auf der ADMIN-Seite des Pi-Ager ist es dann möglich, die Daten für WLAN SSID und WLAN Passwort für die Verbindung zum Router einzugeben, wenn diese nicht oder nicht korrekt im File <b>setup.txt</b> festgelegt wurden. Wer via ssh und einer Terminal App z.B. <b>Shelly</b> mit dem Pi-ager kommunizieren will, kann das unter der IP-Addresse <b>10.0.0.1</b> mit den User <b>pi</b> erreichen.</li>
         <li> Reifetabellen: die Spalte 'Tage' wurde durch 'Stunden' ersetzt. Die Eingabe ist limitiert auf Werte zwischen 1 ... 240h. Vor dem Upgrade auf 3.3.4 wird empfohlen, die eigenen Reifetabellen zu exportieren und mit excel oder einem Text-Editor die Spalten-Überschrift 'days' in 'hours' umzubenennen und die Werte in der Spalte 'hours' dann auf Stunden umzurechnen. Diese so modifizierten Reifetabellen können mit der Version 3.3.4 wieder importiert werden. </li>
         <li> Kühler- und Heizungs-Regelung arbeitet mit getrennten und symmetrischen Hysteresen. Wenn ein externer Sensor angeschlossen ist, wird die Temperatur des externen Sensors in die Regelung einbezogen.</li>
         <li> Automatisches Abtauen erst möglich, wenn die Soll-Temperatur kleiner als 8° definiert ist.</li>
         <li> Automatisches Abtauen wahlweise mit oder ohne Umluft aktiv.</li>
-        <li> Erster Pi-Ager Bootup nach dem Aufspielen eines neuen Image beschleunigt. Nicht benutzten man-db Service entfernt. Build Nummer in DB integriert.</li>
+        <li> Pi-Ager Version mit Build Nummer wird im Footer angezeigt.</li>
         <li> Im setup.txt kann ein angeschlossenes HMI TFT Display selektiert werden. Ist ein Display Modell angegeben, so wird die aktuelle Firmware für das Display automatisch geflasht. Dieser Vorgang kann bis zu ca 7 Minuten dauern und kann am Display beobachtet werden. In dieser Zeit reagiert das System nicht auf User Eingaben. </li>
-        <li> Auf der INFO Seite des HMI TFT Displays erscheint nun auch die IP Adresse des Pi-Ager, je nachdem, wie das WLAN im System arbeitet, entweder im Client Mode oder im Hotspot Mode. Im Hotspot-Mode wird die IP Adresse 10.0.0.5 angezeigt. Das WiFi Symbol erscheint im Client Mode weiß, im Hotspot Mode rot und wenn das WLAN inaktiv ist, erscheint das WiFi Symbol weiß mit rotem X. Das WiFi Symbol is aktiv, es kann angeklickt werden, dann erscheint auf dem Display die Info-Seite. </li>     
-        <li> Die Pi-Ager Seiten zeigen im Header links oben an, in welcher WLAN Betriebsart sich der Pi-Ager befindet: Client Mode wird angezeigt, wenn eine Verbindung zum WLAN Router existiert. Gibt es keine Verbindung zum WLAN Router, wechselt das System in den Hotspot Mode, angezeigt wird AP Mode. </li>
+        <li> Auf der INFO Seite des HMI TFT Displays erscheint nun auch die IP Adresse des Pi-Ager, je nachdem, wie das WLAN im System arbeitet, entweder im Client Mode oder im Hotspot Mode. Im Hotspot-Mode wird die IP Adresse 10.0.0.1 angezeigt. Das WiFi Symbol erscheint im Client Mode weiß, im Hotspot Mode rot und wenn das WLAN inaktiv ist, erscheint das WiFi Symbol weiß mit rotem X. Das WiFi Symbol is aktiv, es kann angeklickt werden, dann erscheint auf dem Display die Info-Seite. </li>     
+        <li> Die Pi-Ager Seiten zeigen im Header links oben an, in welcher WLAN Betriebsart sich der Pi-Ager befindet: Client Mode wird angezeigt, wenn eine Verbindung zum WLAN Router existiert. Gibt es keine Verbindung zum WLAN Router, oder ist der User mit dem Pi-Ager Hotspot verbunden, wird AP Mode angezeigt. </li>
+        <li> Stromüberwachung mit Stromsensor LEM-HO6P-AC: ein FIFO speichert für die zurückliegenden 3 Messzyklen den Schaltzustand des Kompressor-Relais. Durch die Auswertung dieser Daten wird die Stromüberwachung deutlich robuster.</li>
+        <li> Licht- und UV-Licht Steuerung: Fehler bei der Betriebsart mit Zeitpunkt und Dauer behoben, der auftrat, wenn in der definierten EIN-Zeitspanne der Zeitpunkt 0:00 Uhr enthalten ist.</li>
+        <li> HMI TFT Display: Der QR-Code auf der Info-Seite ist direkt mit der Pi-Ager Startseite index.php verlinkt.</li>
+        <li> Bluetooth MiThermometer: die Software wurde neu und Resourcen schonend kodiert.</li>
+        <li> Ein MQTT Client ist implementiert, der Events, alle Messwerte und den Status der Relais zur Verfügung stellt.</li>
+        <li> Getrennte Hysteresen für Befeuchten und Entfeuchten mit Hysterese-Offset zur Anpassung an die Berechnung des Mittelwerts der Feuchte.</li>
+        <li> Die ADMIN Seite ist jetzt permanent zugänglich ohne Umweg über die SETTINGS Seite.</li>
+        <li> Hotspot Mode: Button ergänzt für Aktualisierung der existierenden WLAN Netzwerke.</li>
+        <li> Hotspot Mode: captive portal eingefügt: Beim Anmelden am Pi-Ager Hotspot erscheint eine Webseite mit Informationen zum WLAN Setup auf der Pi-Ager Admin Seite.</li>
     </ul>
 <hr>
 

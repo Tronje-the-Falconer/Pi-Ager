@@ -434,7 +434,12 @@ class cl_nextion( threading.Thread ):
     def get_ip_address(self):
         try:
             process = subprocess.run(['hostname', '-I'], check=True, text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            return (process.stdout).rstrip()
+            ip_addresses = (process.stdout).rstrip()
+            ip_address_list = ip_addresses.split()
+            if len(ip_address_list) == 0:
+                return ''
+            else:
+                return ip_address_list[0]
         except Exception as e:
             return ''
         

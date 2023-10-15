@@ -15,7 +15,7 @@
                                             <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
                                                 <td class="show_messenger_cell"><div class="tooltip"><?php echo _('id') ?><span class="tooltiptext"><?php echo _('id'); ?></span></div></td>
                                                 <td class="show_messenger_cell"><div class="tooltip"><?php echo _('exception') ?><span class="tooltiptext"><?php echo _('exception'); ?></span></div></td>
-                                                 <td class="show_event_cell"><div class="tooltip"><img src="images/icons/mail_20x20.png"><span class="tooltiptext"><?php echo _('e-mail') ?></span></div></td>
+                                                <td class="show_event_cell"><div class="tooltip"><img src="images/icons/mail_20x20.png"><span class="tooltiptext"><?php echo _('e-mail') ?></span></div></td>
                                                 <td class="show_event_cell"><div class="tooltip"><img src="images/icons/pushover_20x20.png"><span class="tooltiptext"><?php echo _('pushover'); ?></span></div></td>
                                                 <td class="show_event_cell"><div class="tooltip"><img src="images/icons/telegram_20x20.png"><span class="tooltiptext"><?php echo _('telegram'); ?></span></div></td>
                                                 <td class="show_messenger_cell"><div class="tooltip"><?php echo _('alarm') ?><span class="tooltiptext"><?php echo _('alarm'); ?></span></div></td>
@@ -854,6 +854,72 @@
                                         <?php echo _('helptext_telegram');
                                               echo '<br><br>'; ?>
                                         <button class="art-button" type="button" onclick="help_telegram_noneFunction()"><?php echo _('close'); ?></button>
+                                    </p> 
+                                </div>
+                                
+                                <hr>
+                                <h2 class="art-postheader"><?php echo _('MQTT'); ?></h2>
+                                <!----------------------------------------------------------------------------------------MQTT-->
+                                <div class="hg_container" >
+                                    <form method="post" name="mqtt">
+                                        <table style="width: 100%;">
+                                            <?php
+                                                $config_mqtt = get_table_row($config_mqtt_table, 1 );
+                                                $broker_address = $config_mqtt[$broker_address_field];
+                                                $mqtt_port = $config_mqtt[$port_field];
+                                                $mqtt_username = $config_mqtt[$username_field];
+                                                $mqtt_password = $config_mqtt[$password_field];
+                                                $mqtt_active = $config_mqtt[$mqtt_active_field];
+                                                
+                                                if($mqtt_active == 1) {
+                                                    $checked_mqtt_true = "checked";
+                                                }
+                                                else{
+                                                    $checked_mqtt_true = "";
+                                                }
+                                            ?>
+                                            <tr>
+                                                <td><?php echo _('broker address'); ?>:</td>
+                                                <td><input name="broker_address" type="text" style="width: 90%; text-align: right;" value=<?php echo $broker_address; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td><?php echo _('port'); ?>:</td>
+                                                <td><input name="port" type="text" style="width: 90%; text-align: right;" value=<?php echo $mqtt_port; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td><?php echo _('user name'); ?>:</td>
+                                                <td><input name="username" type="text" style="width: 90%; text-align: right;" value=<?php echo $mqtt_username; ?>></td>
+                                            </tr>
+                                            <tr>
+                                                <td><?php echo _('password'); ?>:</td>
+                                                <td><input name="password" type="text" style="width: 90%; text-align: right;" value=<?php echo $mqtt_password; ?>></td>
+                                            </tr>
+                                            
+                                            <tr>
+                                                <td><?php echo _('mqtt active'); ?>:</td>
+                                                <td>
+                                                    <input type="hidden" name="mqtt_active" value="0">
+                                                    <input type="checkbox" name="mqtt_active" value="1" <?php echo $checked_mqtt_true; ?>/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <button class="art-button" name="save_mqtt_values" value="save_mqtt_values" onclick="return confirm('<?php echo _('ATTENTION: save MQTT values?');?>');"><?php echo _('save'); ?></button>
+                                    </form>
+                                    <p class="help_b">
+                                        <button class="art-button" type="button" onclick="help_mqtt_blockFunction()"><?php echo _('help'); ?></button>
+                                    </p>
+                                    <script>
+                                        function help_mqtt_blockFunction() {
+                                            document.getElementById('help_mqtt').style.display = 'block';
+                                        }
+                                        function help_mqtt_noneFunction() {
+                                            document.getElementById('help_mqtt').style.display = 'none';
+                                        }
+                                    </script>
+                                    <p id="help_mqtt" class="help_p">
+                                        <?php echo _('helptext_mqtt');
+                                              echo '<br><br>'; ?>
+                                        <button class="art-button" type="button" onclick="help_mqtt_noneFunction()"><?php echo _('close'); ?></button>
                                     </p> 
                                 </div>
                                 <!----------------------------------------------------------------------------------------Ende! ...-->

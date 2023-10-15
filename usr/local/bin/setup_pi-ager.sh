@@ -147,7 +147,7 @@ then
     esac
 fi
 
-echo "disable setup_pi-ager.service now and man-db services"
+echo "disable setup_pi-ager.service now"
 systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
 
 # now its time to enable pi-ager_main.service to start at next boot. Reboot is initiated by rc.local after expanding file system on root partition

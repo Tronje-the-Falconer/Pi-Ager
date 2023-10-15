@@ -128,8 +128,20 @@
                 </div>
                 <h1 class="art-headline">Pi-Ager</h1>
                 <h2 class="art-slogan"><?php echo _('by') . ' ' . ('Grillsportverein'); ?></h2>
-                <h2 id="server_date_time_id" class="date-header"><?php echo exec('date +"%Y-%m-%d %T"');?><h2>
-                <h2 id="server_ip_id" class="ip-header"><?php $server_ip = exec('hostname -I'); if ($server_ip === '10.0.0.5') {echo 'AP Mode';} else {echo 'Client Mode';}?><h2>
+                <h2 id="server_date_time_id" class="date-header"><?php echo exec('date +"%Y-%m-%d %H:%M"');?></h2>
+                <h2 id="server_ip_id" class="ip-header"><?php
+                    $server_ips = exec('hostname -I');
+                    $server_ips_list = explode(" ", $server_ips);
+                    $addresses_count = count($server_ips_list);
+                    if ($addresses_count == 0) {
+                        echo '';
+                    }
+                    elseif ($server_ips_list[0] === '10.0.0.1') {
+                        echo 'AP Mode';
+                    }
+                    else {
+                        echo 'Client Mode';
+                    }?></h2>
                 <nav class="art-nav">
                     <div class="art-nav-inner">
                         <ul class="art-hmenu">

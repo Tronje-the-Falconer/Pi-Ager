@@ -9,6 +9,7 @@
                                     //include 'modules/write_settings_db_logfile_txt.php';        // Speichert die eingestelleten Werte (Temperaturregelung, Feuchte, Lüftung)
                                     //include 'modules/write_config_db_logfile_txt.php';          // Speichert die eingestelle Configuration (Hysteresen, Sensortyp, GPIO's)
                                     
+                                    include 'modules/funclib.php';
                                     include 'modules/read_settings_db.php';                     // Liest die Einstellungen (Temperaturregelung, Feuchte, Lüftung und deren Hysteresen) und Betriebsart des RSS
                                     include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                     include 'modules/read_current_db.php';                      // Liest die gemessenen Werte T/H und den aktuellen Zustand der Aktoren
@@ -411,8 +412,8 @@
                                         <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033;">
                                             <td class="show_agingcell"><div class="tooltip"><?php echo  _('phase') ?><span class="tooltiptext"><?php echo   _('phase') ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('modus') ?><span class="tooltiptext"><?php echo _('aging-modus'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">&phi;<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('humidity %');?><span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('temperature °C');?><span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate ON duration') ?><span class="tooltiptext"><?php echo _('timer of the circulation air ON duration in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate OFF duration') ?><span class="tooltiptext"><?php echo _('timer of the circulation air OFF duration in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust ON duration') ?><span class="tooltiptext"><?php echo _('timer of the exhausting air ON duration in minutes'); ?></span></div></td>

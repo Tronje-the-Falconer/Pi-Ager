@@ -34,6 +34,7 @@ from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from pi_ager_cl_nextion import cl_fact_nextion
 from pi_ager_cl_switch_control import cl_fact_switch_control
 from pi_ager_cl_uptime import cl_fact_uptime
+from pi_ager_cl_mqtt import cl_fact_mqtt
 
 import signal
 import threading
@@ -41,13 +42,13 @@ import pi_ager_cl_scale
 import pi_ager_cl_agingtable
 
 def kill_mi_thermometer():
-    # check if /home/pi/MiTemperature2/LYWSD03MMC.py is running and then kill this process
-    stream = os.popen('pgrep -lf python3 | grep LYWSD03MMC.py | wc -l')
+    # check if /opt/ATC_MiThermometer/ATC_xxxxxx.py is running and then kill this process
+    stream = os.popen('pgrep -lf python3 | grep ATC_xxxxxx.py | wc -l')
     output = stream.read().rstrip('\n')
-    cl_fact_logger.get_instance().debug('Killing /home/pi/MiTemperature2/LYWSD03MMC.py')
+    cl_fact_logger.get_instance().debug('Killing /opt/ATC_MiThermometer/ATC_xxxxxx.py')
     if (output != '0'):
-        os.system("pgrep -lf LYWSD03MMC.py | grep LYWSD03MMC.py | awk '{print $1}' | xargs kill")
-        cl_fact_logger.get_instance().debug('LYWSD03MMC.py terminated')
+        os.system("pgrep -lf ATC_xxxxxx.py | grep ATC_xxxxxx.py | awk '{print $1}' | xargs kill")
+        cl_fact_logger.get_instance().debug('ATC_xxxxxx.py terminated')
         
 # catch signal.SIGTERM and signal.SIGINT when killing main to gracefully shutdown system
 def signal_handler(signum, frame):
@@ -98,6 +99,10 @@ cl_fact_logger.get_instance().debug('Starting uptime thread ' + time.strftime('%
 cl_fact_uptime.get_instance().start()
 cl_fact_logger.get_instance().debug('Starting uptime thread done' + time.strftime('%H:%M:%S', time.localtime()))
 
+cl_fact_logger.get_instance().debug('Starting MQTT thread ' + time.strftime('%H:%M:%S', time.localtime()))
+cl_fact_mqtt.get_instance().start()
+cl_fact_logger.get_instance().debug('Starting MQTT thread done' + time.strftime('%H:%M:%S', time.localtime()))
+
 exception_known = True
 
 # now enable signal handler
@@ -138,6 +143,7 @@ finally:
     agingtable_thread.stop_received = True
     cl_fact_switch_control.get_instance().stop_received = True
     cl_fact_uptime.get_instance().stop_received = True
+    cl_fact_mqtt.get_instance().stop_received = True
     
     cl_fact_nextion.get_instance().prep_show_offline()
     cl_fact_nextion.get_instance().loop.call_soon_threadsafe(cl_fact_nextion.get_instance().stop_event.set)
@@ -148,6 +154,7 @@ finally:
     agingtable_thread.join()
     cl_fact_switch_control.get_instance().join()
     cl_fact_uptime.get_instance().join()
+    cl_fact_mqtt.get_instance().join()
     cl_fact_nextion.get_instance().join()
     
     cl_fact_logger.get_instance().debug('threads terminated')

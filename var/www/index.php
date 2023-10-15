@@ -45,15 +45,28 @@
                                                     $temp_ntc4 = '-----';
                                                 }
                                                 else {
-                                                    $temp_main = $sensor_temperature;
-                                                    $hum_main = $sensor_humidity;
-                                                    $data_from_db = get_table_value($current_values_table, $sensor_humidity_abs_key);
+                                                    $data_from_db = get_table_value($current_values_table, $temperature_avg_key);
+                                                    if ($data_from_db === null) {
+                                                        $temp_main = '-----';
+                                                    }
+                                                    else {
+                                                        $temp_main = number_format(floatval($data_from_db), 1, '.', '');
+                                                    }
+                                                    $data_from_db = get_table_value($current_values_table, $humidity_avg_key);
+                                                    if ($data_from_db === null) {
+                                                        $hum_main = '-----';
+                                                    }
+                                                    else {
+                                                        $hum_main = number_format(floatval($data_from_db), 1, '.', '');
+                                                    }
+                                                    $data_from_db = get_table_value($current_values_table, $humidity_abs_avg_key);
                                                     if ($data_from_db === null) {
                                                         $hum_abs_main = '-----';
                                                     }
                                                     else {
                                                         $hum_abs_main = number_format(floatval($data_from_db), 1, '.', '');
                                                     }
+                                                    
                                                     $data_from_db = get_table_value($current_values_table, $sensor_extern_temperature_key);
                                                     $external_temperature = $data_from_db;
                                                     if ($data_from_db === null) {
@@ -347,6 +360,7 @@
                                             labels: [],
                                             datasets: [{
                                                 label: '<?php echo _("temperature") . ' int.' ?>',
+                                                hidden: true,
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($temperature_dataset);?>,
                                                 backgroundColor: '#FF4040',
@@ -405,6 +419,7 @@
                                             },                                            
                                             {
                                                 label: '<?php echo _("humidity") . ' int.' ?>',
+                                                hidden: true,
                                                 yAxisID: 'humidity',
                                                 data: <?php echo json_encode($humidity_dataset); ?>,
                                                 backgroundColor: '#59A9C4',
@@ -690,7 +705,9 @@
                                             chart_hidden = false;
                                         }
                                         console.log(key + ' = ' + chart_hidden);
-                                        config_temp_hum_chart.data.datasets[i].hidden = (chart_hidden == 'true');
+                                        if (i == 1 || i == 4) { // restore only avg curves
+                                            config_temp_hum_chart.data.datasets[i].hidden = (chart_hidden == 'true');
+                                        }
                                     }
                                     
                                     temp_hum_chart = new Chart(temp_hum_chart_el, config_temp_hum_chart);
@@ -759,8 +776,8 @@
                                         <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('phase'); ?><span class="tooltiptext"><?php echo _('phase'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('modus'); ?><span class="tooltiptext"><?php echo _('aging-modus'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">&phi;<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('humidity %');?><span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('temperature °C');?><span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate ON duration'); ?><span class="tooltiptext"><?php echo _('timer of the circulation air ON duration in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate OFF duration'); ?><span class="tooltiptext"><?php echo _('timer of the circulation air OFF duration in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust ON duration'); ?><span class="tooltiptext"><?php echo _('timer of the exhausting air ON duration in minutes'); ?></span></div></td>
@@ -1064,7 +1081,7 @@
                                     </table>
                                     <!---------------------------------------temperatures-->
                                     <hr>
-                                    <h2><?php echo _('temperatures'); ?></h2>
+                                    <h2><?php echo _('temperature/humidity control'); ?></h2>
                                     <br>
                                     <table class="switching_state miniature_writing">
                                         <tr>
@@ -1150,8 +1167,8 @@
                                                     echo '</td>
                                                         <td id="mod_current_line3_id">'.$sensor_humidity.' %</td>
                                                         <td id="mod_setpoint_line3_id">'.$setpoint_humidity.' %</td>
-                                                        <td id="mod_on_line3_id">'.($setpoint_humidity - $switch_on_humidifier).' %</td>
-                                                        <td id="mod_off_line3_id">'.($setpoint_humidity - $switch_off_humidifier).' %</td>';
+                                                        <td id="mod_on_line3_id">' . eval_switch_on_humidity( $setpoint_humidity, $humidifier_hysteresis, $hysteresis_offset ) . ' %</td>
+                                                        <td id="mod_off_line3_id">' . eval_switch_off_humidity( $setpoint_humidity, $humidifier_hysteresis, $hysteresis_offset, $saturation_point ) . ' %</td>';
                                                 }
 
                                                 if ($modus == 4){
@@ -1161,8 +1178,8 @@
                                                     echo strtoupper(_('humidification'));
                                                     echo '<td id="mod_current_line3_id">'.$sensor_humidity.' %</td>
                                                         <td id="mod_setpoint_line3_id">'.$setpoint_humidity.' %</td>
-                                                        <td id="mod_on_line3_id">'.($setpoint_humidity - $switch_on_humidifier).' %</td>
-                                                        <td id="mod_off_line3_id">'.($setpoint_humidity - $switch_off_humidifier).' %</td></tr>';
+                                                        <td id="mod_on_line3_id">' . eval_switch_on_humidity( $setpoint_humidity, $humidifier_hysteresis, $hysteresis_offset ) . ' %</td>
+                                                        <td id="mod_off_line3_id">' . eval_switch_off_humidity( $setpoint_humidity, $humidifier_hysteresis, $hysteresis_offset, $saturation_point ) . ' %</td></tr>';
                                                
                                                     echo '<tr><td ><img id="mod_type_line5_id" src="images/icons/dehumidification_42x42.png" alt=""></td>
                                                         <td><img id="mod_stat_line5_id" src='.$dehumidifier_on_off_png.' title="PIN_DEH 7[26] -> IN 8 (PIN 9)"></td>
@@ -1171,19 +1188,15 @@
                                                     echo '</td>
                                                         <td id="mod_current_line5_id">'.$sensor_humidity.' %</td>
                                                         <td id="mod_setpoint_line5_id">'.$setpoint_humidity.' %</td>
-                                                        <td id="mod_on_line5_id">'.((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100).' %</td>
-                                                        <td id="mod_off_line5_id">'.((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100).' %</td></tr>';
+                                                        <td id="mod_on_line5_id">' . eval_switch_on_dehumidity( $setpoint_humidity, $dehumidifier_hysteresis, $hysteresis_offset, $saturation_point ) . ' %</td>
+                                                        <td id="mod_off_line5_id">' . eval_switch_off_dehumidity( $setpoint_humidity,  $dehumidifier_hysteresis, $hysteresis_offset ) . ' %</td></tr>';
                                                         
                                                     echo '<tr><td ><img id="mod_type_line4_id" src="images/icons/exhausting_42x42.png" alt=""></td>
                                                         <td><img id="mod_stat_line4_id" src='.$exhausting_on_off_png.' title="PIN_EXH 23[16] -> IN 5 (PIN 5)"></td>
                                                         <td id="mod_name_line4_id" class="text_left">';
                                                     echo strtoupper(_('exhausting'));
-                                                    echo '</td>
-                                                        <td id="mod_current_line4_id">'.$sensor_humidity.' %</td>
-                                                        <td id="mod_setpoint_line4_id">'.$setpoint_humidity.' %</td>
-                                                        <td id="mod_on_line4_id">'.((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100).' %</td>
-                                                        <td id="mod_off_line4_id">'.((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100).' %</td></tr>';
-                                                    
+                                                    echo '</td></tr>';
+                                                                                        
                                                     if ($sensorsecondtype != 0){  # if (!($bus == 1 || $sensorsecondtype == 0)){  // show abs. humidity check aktive only with second sensor
                                                         echo '<tr><td></td>';  // skip type column
                                                         if ($dehumidifier_modus == 3) {     // only dehumidification

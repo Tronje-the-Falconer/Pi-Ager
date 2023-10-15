@@ -8,7 +8,7 @@
 #import RPi.GPIO as gpio
 
 ########################### Definition of variables
-version_number = '3.3.3'
+version_number = '3.3.4'
 # tables names
 config_settings_table = 'config'
 
@@ -35,6 +35,7 @@ atc_mi_thermometer_data_table = 'atc_mi_thermometer_data'
 defrost_table = 'config_defrost'
 config_current_check_table = 'config_current_check'
 time_meter_table = 'time_meter'
+config_mqtt_table = 'config_mqtt'
 
 # table keys
 cooling_hysteresis_key = 'cooling_hysteresis'
@@ -42,6 +43,7 @@ heating_hysteresis_key = 'heating_hysteresis'
 switch_on_humidifier_key = 'switch_on_humidifier'
 switch_off_humidifier_key = 'switch_off_humidifier'
 delay_humidify_key = 'delay_humidify'
+saturation_point_key = 'saturation_point'                                         
 delay_cooler_key = 'delay_cooler'
 diagram_modus_key = 'diagram_modus'
 referenceunit_scale1_key = 'referenceunit_scale1'
@@ -159,6 +161,16 @@ MiSensor_battery_key = 'MiSensor_battery'
 status_defrost_key = 'status_defrost'
 uv_check_key = 'uv_check'
 
+temperature_avg_key = 'temperature_avg'
+humidity_avg_key = 'humidity_avg'
+humidity_abs_avg_key = 'humidity_abs_avg'
+temp_avg_maxlen_key = 'temp_avg_maxlen'
+hum_avg_maxlen_key = 'hum_avg_maxlen'
+
+humidifier_hysteresis_key = 'humidifier_hysteresis'
+dehumidifier_hysteresis_key = 'dehumidifier_hysteresis'
+hysteresis_offset_key = 'hysteresis_offset'
+
 # table fields
 key_field = 'key'
 value_field = 'value'
@@ -210,6 +222,13 @@ uv_light_seconds_field = 'uv_light_seconds'
 pi_ager_seconds_field = 'pi_ager_seconds'
 defrost_temp_limit_field = 'temp_limit'
 defrost_circulate_air_field = 'circulate_air'
+tempintavg_field = 'tempintavg'
+humintavg_field = 'humintavg'
+broker_address_field = 'broker_address'
+port_field = 'port'
+username_field = 'username'
+password_field = 'password'
+mqtt_active_field = 'mqtt_active'
 
 # Paths and urls
 thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi-release-3-3-x.342426/'

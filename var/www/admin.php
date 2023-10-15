@@ -87,7 +87,7 @@
                                             <tr>
                                                 <td></td>
                                                 <td></td>
-                                                <td colspan="2"><label>MiThermometer MAC address a4:c1:38:&nbsp;</label><div class="tooltip"><input type="text" size="9" maxlength="8" id="mac_last_3_bytes" name="mac_last_3_bytes" value=<?php echo $mi_mac_last3bytes;?>><span class="tooltiptext"><?php echo _('Enter last 3 bytes of device address separated by colons, e.g.: 26:44:d2');?></span></div></td>
+                                                <td colspan="2"><label><?php echo _('MiThermometer device name');?>&nbsp;</label><div class="tooltip"><input type="text" size="13" maxlength="10" id="atc_device_name" name="atc_device_name" value=<?php echo $ATC_device_name;?>><span class="tooltiptext"><?php echo _('Enter MiThermometer device name, e.g. ATC_C4C134, can be found with blescan tool');?></span></div></td>
                                             </tr>
                                         </table>
                                         <input name="bus" type="hidden" required value="<?php echo $bus; ?>">
@@ -107,7 +107,7 @@
 
                                         <table style="width: 100%; align: center;">
                                             <tr>
-                                                <td><br><button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: a shutdown may be required due to sensor or MAC address change, please turn the power off/on to restart the system!');?>');"><?php echo _('change sensors'); ?></button></td>
+                                                <td><br><button class="art-button" name="change_sensorbus_submit" value="change_sensorbus_submit" onclick="return confirm('<?php echo _('ATTENTION: a sensor change may require system reboot or shutdown.\n After shutdown you have to put your Raspberry Pi device into power-off state!');?>');"><?php echo _('change sensors'); ?></button></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -1022,12 +1022,22 @@
                                     // echo 'ESSID : ' . $essid . "<br>";
                                     // $local_ip = $_SERVER['REMOTE_ADDR'];
                                     // echo 'local ip : ' . $local_ip . '<br>';
-                                    $hostname = exec("hostname -I");
+                                    $hostname = '';
+                                    $addresses = exec("hostname -I");
+                                    $address_list = explode(" ", $addresses);
+                                    $address_list_count = count($address_list);
+                                    if ($address_list_count == 0) {
+                                        $hostname = "";
+                                    }
+                                    else {
+                                        $hostname = $address_list[0];
+                                    }                                                   
+                                    // $hostname = exec("hostname -I");
                                     // echo 'hostname -I : ' . $hostname . '<br>';
                                     // if ($local_ip !== '10.0.0.5') {
                                     // if ($essid === 'RPiHotspot') {
                                 ?>
-                                <div <?php if ($hostname !== '10.0.0.5') { echo 'style="display:none;"'; }?>>
+                                <div <?php if ($hostname !== '10.0.0.1') { echo 'style="display:none;"'; }?>>
                                     <hr>
                                     <h2 class="art-postheader"><?php echo _('set Pi-Ager date/time'); ?></h2>
                                     <!----------------------------------------------------------------------------------------Date/Time--> 
@@ -1046,21 +1056,31 @@
                                 
                                 <?php
                                     $ssids = [];
+                                    $res = null;
                                     exec('sudo /var/show_wifi_connections.sh', $ssids, $res);
+                                    // $out = shell_exec('sudo /var/show_wifi_connections.sh 2>&1');
                                     $ssid_count = count($ssids);
-                                    # echo 'return status from show_wifi_connections : ' . $res . '<br>';
-                                    # var_dump($ssids);
+                                    // echo 'return status from show_wifi_connections : ' . $res . '<br>';
+                                    // var_dump($ssids);
                                 ?>
                                 
-                                <div <?php if ($hostname !== '10.0.0.5') { echo 'style="display:none;"'; }?>>
+                                <div id="wlan_setup_id" <?php if ($hostname !== '10.0.0.1') { echo 'style="display:none;"'; }?>>
                                     <hr>
                                     <h2 class="art-postheader"><?php echo _('WLAN setup'); ?></h2>
                                     <!----------------------------------------------------------------------------------------WLAN setup--> 
-                                    <div class="hg_container" >
+                                    <div class="hg_container">
+                                        <table style="width: 100%; align: center;">
+                                            <tr>
+                                                <td style="text-align: left; padding-left: 10px;" >
+                                                    <button id="refresh_wlan_ssids" class="art-button" onclick="refresh_wlan_ssids()"><?php echo _('refresh'); ?></button>
+                                                </td>
+                                            </tr>
+                                        </table>
+
                                         <form method="post" name="wlansetup">
                                             <table style="width: 100%;">
                                                 <tr>
-                                                    <td style=" text-align: left; padding-left: 20px;"><br>
+                                                    <td style="text-align: left; padding-left: 20px;"><br>
                                                     <?php
                                                         if ($ssid_count == 0) {
                                                             echo _('No WLAN networks found');
@@ -1068,11 +1088,13 @@
                                                         else {
                                                             $si = 0;
                                                             foreach ($ssids as $ssid) {
-                                                                if ($si == 0) {
-                                                                    echo '<input type="radio" name="ssid_selected" value="' . $ssid . '" checked="checked" /><label>&nbsp;' . $ssid . '</label><br>';
-                                                                }
-                                                                else {
-                                                                    echo '<input type="radio" name="ssid_selected" value="' . $ssid . '" /><label>&nbsp;' . $ssid . '</label><br>';
+                                                                if ($ssid != '') {
+                                                                    if ($si == 0) {
+                                                                        echo '<input type="radio" name="ssid_selected" value="' . $ssid . '" checked="checked" /><label>&nbsp;' . $ssid . '</label><br>';
+                                                                    }
+                                                                    else {
+                                                                        echo '<input type="radio" name="ssid_selected" value="' . $ssid . '" /><label>&nbsp;' . $ssid . '</label><br>';
+                                                                    }
                                                                 }
                                                                 $si++;
                                                             }
@@ -1087,7 +1109,20 @@
                                             <button class="art-button" name="setWLANconfig" value="setWLANconfig" <?php if ($ssid_count == 0) { echo 'disabled';} ?> onclick="return confirm('<?php echo _('ATTENTION: setup your WLAN and reboot?');?> ')"><?php echo _('save and reboot'); ?></button>
                                         </form>
                                     </div>
-                                </div>                                
+                                </div>
+                                
+                                <script>
+                                    function Sleep(milliseconds) {
+                                        return new Promise(resolve => setTimeout(resolve, milliseconds));
+                                    }
+                                    
+                                    async function refresh_wlan_ssids() {
+                                        $('*').css('cursor', 'wait');
+                                        $('#wlan_setup_id').load('admin.php #wlan_setup_id');
+                                        await Sleep(2000);
+                                        $('*').css('cursor', 'default');
+                                    }
+                                </script>
                                 
                                 <?php
                                     if ($loglevel_console == 10 and $loglevel_file == 10){

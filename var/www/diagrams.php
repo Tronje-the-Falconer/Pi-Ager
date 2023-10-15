@@ -41,7 +41,7 @@
                                             <td><img src="images/icons/custom_42x42.png" alt=""></td>
                                         </tr>
                                         <tr>
-                                            <td><button id="hour_button_id" class="art-button" onclick="set_mode_hour()")><?php echo _('hour'); ?></td>
+                                            <td><button id="hour_button_id" class="art-button" onclick="set_mode_hour()"><?php echo _('hour'); ?></td>
                                             <td><button id="day_button_id" class="art-button" onclick="set_mode_day()"><?php echo _('day'); ?></td>
                                             <td><button id="week_button_id" class="art-button" onclick="set_mode_week()"><?php echo _('week'); ?></td>
                                             <td><button id="month_button_id" class="art-button" onclick="set_mode_month()"><?php echo _('month'); ?></td>
@@ -209,7 +209,8 @@
                                     <div style="">
                                         <h4><?php 
 					                        include 'modules/chartsdata_diagrams.php';
-											$temperatur_humidity_saving_period = ceil (2 *($save_temperature_humidity_loops * 10 /60)) / 2;
+                                            $loop_duration = 5; // 5 seconds sensor measure loop
+											$temperatur_humidity_saving_period = intval($save_temperature_humidity_loops * $loop_duration  / 6.0) / 10.0; // precision 1 decimal 
 											echo _('storage interval of the sensor data in the database');
 							                echo ': ~ ' . $temperatur_humidity_saving_period . ' ';
 											echo _('minutes'); 
@@ -257,11 +258,30 @@
                                                     fill: false
                                                 },
                                                 {
+                                                    label: '<?php echo _("temperature") . ' avg.' ?>',
+                                                    yAxisID: 'temperature',
+													data: <?php echo json_encode($temperature_avg_dataset); ?>,
+                                                    backgroundColor: '#8A0808',
+                                                    borderColor: '#8A0808',
+                                                    borderWidth: 2,
+                                                    <?php
+                                                        if ($customtime <= 3600) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
+                                                    pointStyle:'rect',
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },                                                
+                                                {
                                                     label: '<?php echo _("temperature") . ' ext.' ?>',
                                                     yAxisID: 'temperature',
                                                     data: <?php echo json_encode($extern_temperature_dataset); ?>,
-                                                    backgroundColor: '#8A0808',
-                                                    borderColor: '#8A0808',
+                                                    backgroundColor: '#04B431',
+                                                    borderColor: '#04B431',
                                                     borderWidth: 2,
                                                     <?php
                                                         if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
@@ -274,7 +294,8 @@
                                                     ?>
                                                     pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
-                                                    fill: false
+                                                    fill: false,
+                                                    spanGaps: true
                                                 },
                                                 {
                                                     label: '<?php echo _("humidity") . ' int.' ?>',
@@ -297,11 +318,30 @@
                                                     fill: false
                                                 },
                                                 {
+                                                    label: '<?php echo _("humidity") . ' avg.' ?>',
+                                                    yAxisID: 'humidity',
+													data: <?php echo json_encode($humidity_avg_dataset); ?>,
+                                                    backgroundColor: '#08298A',
+                                                    borderColor: '#08298A',
+                                                    borderWidth: 2,
+                                                    <?php
+                                                        if ($customtime <= 3600) {
+                                                            print 'pointRadius: 1, pointHitRadius: 5,';
+                                                        }
+                                                        else {
+                                                            print 'pointRadius: 0, pointHitRadius: 5,';
+                                                        }
+                                                    ?>
+                                                    pointStyle:'rect',
+                                                    cubicInterpolationMode: 'monotone',
+                                                    fill: false
+                                                },                                                
+                                                {
                                                     label: '<?php echo _("humidity") . ' ext.' ?>',
                                                     yAxisID: 'humidity',
                                                     data: <?php echo json_encode($extern_humidity_dataset); ?>,
-                                                    backgroundColor: '#08298A',
-                                                    borderColor: '#08298A',
+                                                    backgroundColor: '#0B6121',
+                                                    borderColor: '#0B6121',
                                                     borderWidth: 2,
                                                     <?php
                                                         if ($diagram_mode == 'hour' or ($diagram_mode == 'custom' and $customtime <= 3600)) {
@@ -314,7 +354,8 @@
                                                     ?>
                                                     pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
-                                                    fill: false
+                                                    fill: false,
+                                                    spanGaps: true
                                                 }]
                                             },
                                             options: {
@@ -338,8 +379,12 @@
                                                             } else if (tooltipItem.datasetIndex === 1) {
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' °C';
                                                             } else if (tooltipItem.datasetIndex === 2) {
-                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' %';
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' °C';                                                                
                                                             } else if (tooltipItem.datasetIndex === 3) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' %';
+                                                            } else if (tooltipItem.datasetIndex === 4) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' %';
+                                                            } else if (tooltipItem.datasetIndex === 5) {
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' %';
                                                             }
                                                         }
@@ -459,7 +504,8 @@
                                                     ?>
                                                     pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
-                                                    fill: false
+                                                    fill: false,
+                                                    spanGaps: true
                                                 },
                                                 {
                                                     label: '<?php echo _("humidity abs") . ' int.' ?>',
@@ -499,8 +545,8 @@
                                                     ?>
                                                     pointStyle:'rect',
                                                     cubicInterpolationMode: 'monotone',
-                                                    fill: false
-
+                                                    fill: false,
+                                                    spanGaps: true
                                                 }]
                                             },
                                             options: {

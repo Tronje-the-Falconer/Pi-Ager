@@ -385,7 +385,7 @@ input:invalid { border: 1px solid red !important}
 {
   display: inline-block;
   position: absolute;
-  top: 8px;
+  top: 5px;
   right: 10px;
   line-height: 100%;
   z-index: 102;
@@ -404,7 +404,7 @@ input:invalid { border: 1px solid red !important}
 {
   display: inline-block;
   position: absolute;
-  top: 8px;
+  top: 5px;
   left: 10px;
   line-height: 100%;
   z-index: 102;

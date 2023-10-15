@@ -44,6 +44,7 @@ $atc_mi_thermometer_data_table = 'atc_mi_thermometer_data';
 $defrost_table = 'config_defrost';
 $config_current_check_table = 'config_current_check';
 $time_meter_table = 'time_meter';
+$config_mqtt_table = 'config_mqtt';
 
 #----------------------------table keys;
 $cooling_hysteresis_key = 'cooling_hysteresis';
@@ -51,6 +52,7 @@ $heating_hysteresis_key = 'heating_hysteresis';
 $switch_on_humidifier_key = 'switch_on_humidifier';
 $switch_off_humidifier_key = 'switch_off_humidifier';
 $delay_humidify_key = 'delay_humidify';
+$saturation_point_key = 'saturation_point';
 $referenceunit_key = 'referenceunit';
 $sensortype_key = 'sensortype';
 $sensorsecondtype_key = 'secondsensortype';
@@ -156,6 +158,12 @@ $MiSensor_battery_key = 'MiSensor_battery';
 $switch_control_uv_light_key = 'switch_control_uv_light';
 $switch_control_light_key = 'switch_control_light';
 $status_defrost_key = 'status_defrost';
+$temperature_avg_key = 'temperature_avg';
+$humidity_avg_key = 'humidity_avg';
+$humidity_abs_avg_key = 'humidity_abs_avg';
+$humidifier_hysteresis_key = 'humidifier_hysteresis';
+$dehumidifier_hysteresis_key = 'dehumidifier_hysteresis';
+$hysteresis_offset_key = 'hysteresis_offset';
 
 #-----------------------------table fields;
 $key_field = 'key';
@@ -258,6 +266,11 @@ $uv_light_seconds_field = 'uv_light_seconds';
 $pi_ager_seconds_field = 'pi_ager_seconds';
 $defrost_temp_limit_field = 'temp_limit';
 $defrost_circulate_air_field = 'circulate_air';
+$broker_address_field = 'broker_address';
+$port_field = 'port';
+$username_field = 'username';
+$password_field = 'password';
+$mqtt_active_field = 'mqtt_active';
 
 #-----------------------------Paths and urls
 $thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi-release-3-3-x.342426/';

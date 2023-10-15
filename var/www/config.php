@@ -25,7 +25,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('cooler delay'); ?>:</td>
-                                                    <td><input name="delay_cooler_config" type="number" style="width: 30%;" min="30" max="120" step="1" required value=<?php echo $delay_cooler; ?>>&nbsp;<?php echo _('seconds'); ?><span style="font-size: xx-small"> (30 <?php echo _('to'); ?> 120)</span></td>
+                                                    <td><input name="delay_cooler_config" type="number" style="width: 30%;" min="0" max="120" step="1" required value=<?php echo $delay_cooler; ?>>&nbsp;<?php echo _('seconds'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 120)</span></td>
                                                 </tr>
                                             </table>
                                             <script>
@@ -45,30 +45,21 @@
                                             <!----------------------------------------------------------------------------------------Luftfeuchte-->
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <tr>
-                                                    <td rowspan="4" class="td_png_icon"><h3><?php echo _('humidity control'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
-                                                    <td class="text_left_padding"><?php echo _('switch-on value').':'; ?></td>
-                                                    <td><input name="switch_on_humidifier_config" type="number" style="width: 30%;" min="-30" max="30" required value=<?php echo $switch_on_humidifier; ?>>&nbsp;%<span style="font-size: xx-small">
-                                                    <?php 
-                                                                if($modus == 0 || $modus == 1 || $modus == 2){
-                                                                    echo '('._('on at'). ' '.($setpoint_humidity-$switch_on_humidifier)."%)";
-                                                                }
-                                                                else {
-                                                                    echo _('see logs');
-                                                                }
-                                                    ?>
-                                                        </span></td>
+                                                    <td rowspan="5" class="td_png_icon"><h3><?php echo _('humidity control'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td class="text_left_padding"><?php echo _('humidifier hysteresis').':'; ?></td>
+                                                    <td><input name="humidifier_hysteresis_config" type="number" style="width: 30%;" min="2" max="30" required value=<?php echo $humidifier_hysteresis; ?>>&nbsp;%<span style="font-size: xx-small"> (2 <?php echo _('to'); ?> 30)</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text_left_padding"><?php echo _('switch-off value').':'; ?></td>
-                                                    <td><input name="switch_off_humidifier_config" type="number" style="width: 30%;" min="-30" max="30" required value=<?php echo $switch_off_humidifier; ?>>&nbsp;%<span style="font-size: xx-small">
-                                                    <?php 
-                                                                if($modus == 0 || $modus == 1 || $modus == 2){
-                                                                    echo '('._('off at'). ' '.($setpoint_humidity-$switch_off_humidifier)."%)";
-                                                                }
-                                                                else {
-                                                                    echo _('see logs');
-                                                                }
-                                                    ?></span></td>
+                                                    <td class="text_left_padding"><?php echo _('dehumidifier hysteresis').':'; ?></td>
+                                                    <td><input name="dehumidifier hysteresis_config" type="number" style="width: 30%;" min="2" max="30" required value=<?php echo $dehumidifier_hysteresis; ?>>&nbsp;%<span style="font-size: xx-small"> (2 <?php echo _('to'); ?> 30)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('hysteresis offset').':'; ?></td>
+                                                    <td><input name="hysteresis_offset_config" type="number" style="width: 30%;" min="-20.0" max="20.0" step="0.1" required value=<?php echo $hysteresis_offset; ?>>&nbsp;%<span style="font-size: xx-small"> (-20 <?php echo _('to'); ?> 20)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('saturation point').':'; ?></td>
+                                                    <td><input name="saturation_point_config" type="number" style="width: 30%;" min="80" max="100" required value=<?php echo $saturation_point; ?>>&nbsp;%<span style="font-size: xx-small"> (80 <?php echo _('to'); ?> 100)</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('humidifier delay'); ?>:</td>

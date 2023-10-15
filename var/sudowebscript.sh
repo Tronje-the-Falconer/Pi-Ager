@@ -74,14 +74,14 @@ case "$1" in
     sensorbusi2c) #Sensorbus wurde geaendert auf i2c
 		# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln (SHT3x und SHT85)
         rm -r /etc/modprobe.d/Pi-Ager_i2c_off.conf
-        sleep 3
-        shutdown -h now
+#        sleep 3
+#        shutdown -h now
     ;;
     sensorbus1wire) #Sensorbus wurde geaendert auf 1wire
 		# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln (DHT* und SHT75)
         cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
-        sleep 3
-        shutdown -h now
+#        sleep 3
+#        shutdown -h now
     ;;
     set_time_date)  # set system time and date when pi-ager is in hotspot mode
         systemctl stop systemd-timesyncd.service

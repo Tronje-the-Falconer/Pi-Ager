@@ -28,6 +28,8 @@ async function handleContentAlldg( msg ) {
         temp_hum_chart.data.datasets[1].pointRadius = 1;
         temp_hum_chart.data.datasets[2].pointRadius = 1;
         temp_hum_chart.data.datasets[3].pointRadius = 1;
+        temp_hum_chart.data.datasets[4].pointRadius = 1;
+        temp_hum_chart.data.datasets[5].pointRadius = 1;        
         scales_chart.data.datasets[0].pointRadius = 1;
         scales_chart.data.datasets[1].pointRadius = 1;
         dewpoint_humidity_chart.data.datasets[0].pointRadius = 1;
@@ -44,6 +46,8 @@ async function handleContentAlldg( msg ) {
         temp_hum_chart.data.datasets[1].pointRadius = 0;
         temp_hum_chart.data.datasets[2].pointRadius = 0;
         temp_hum_chart.data.datasets[3].pointRadius = 0;
+        temp_hum_chart.data.datasets[4].pointRadius = 0;
+        temp_hum_chart.data.datasets[5].pointRadius = 0;        
         scales_chart.data.datasets[0].pointRadius = 0;
         scales_chart.data.datasets[1].pointRadius = 0;
         dewpoint_humidity_chart.data.datasets[0].pointRadius = 0;
@@ -82,9 +86,11 @@ async function handleContentAlldg( msg ) {
 
     temp_hum_chart.data.labels = temp_timestamps_js;
     temp_hum_chart.data.datasets[0].data = myObj.temperature_dataset;
-    temp_hum_chart.data.datasets[1].data = myObj.extern_temperature_dataset;
-    temp_hum_chart.data.datasets[2].data = myObj.humidity_dataset;
-    temp_hum_chart.data.datasets[3].data = myObj.extern_humidity_dataset;
+    temp_hum_chart.data.datasets[1].data = myObj.temperature_avg_dataset;    
+    temp_hum_chart.data.datasets[2].data = myObj.extern_temperature_dataset;
+    temp_hum_chart.data.datasets[3].data = myObj.humidity_dataset;
+    temp_hum_chart.data.datasets[4].data = myObj.humidity_avg_dataset;    
+    temp_hum_chart.data.datasets[5].data = myObj.extern_humidity_dataset;
 
     dewpoint_humidity_chart.data.labels = temp_timestamps_js;
     dewpoint_humidity_chart.data.datasets[0].data = myObj.dewpoint_dataset;

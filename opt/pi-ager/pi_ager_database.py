@@ -414,18 +414,15 @@ def get_status_uv_manual():
     return status_uv_manual
     
 
-def write_all_sensordata(loopnumber, sensor_temperature, sensor_humidity, sensor_dewpoint, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, sensor_meat1, sensor_meat2, sensor_meat3, sensor_meat4, sensor_humidity_abs, second_sensor_humidity_abs):
+def write_all_sensordata(sensor_temperature, sensor_humidity, sensor_dewpoint, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, sensor_meat1, sensor_meat2, sensor_meat3, sensor_meat4, sensor_humidity_abs, second_sensor_humidity_abs, tempintavg, humintavg):
     """
     function for writing diagram-relevant sensor data
     """
-    save_loop = int(get_table_value(pi_ager_names.config_settings_table, pi_ager_names.save_temperature_humidity_loops_key))
+    current_time = str(get_current_time())
     
-    if loopnumber % (save_loop * 2) == 0:   # schreibt Daten für die Diagramme alle n Loops in die DB, measurement loop von 10s auf 5s verkürzt
-        current_time = str(get_current_time())   # get current_time timestamp the same for all sensor data tables
-        
-        with globals.lock:
-            open_database()
-            execute_query('INSERT INTO ' + pi_ager_names.all_sensors_table + '(' + 
+    with globals.lock:
+        open_database()
+        execute_query('INSERT INTO ' + pi_ager_names.all_sensors_table + '(' + 
                          str(pi_ager_names.tempint_field) + ',' +
                          str(pi_ager_names.tempext_field) + ',' +
                          str(pi_ager_names.humint_field) + ',' +
@@ -438,7 +435,9 @@ def write_all_sensordata(loopnumber, sensor_temperature, sensor_humidity, sensor
                          str(pi_ager_names.ntc2_field) + ',' +
                          str(pi_ager_names.ntc3_field) + ',' +
                          str(pi_ager_names.ntc4_field) + ',' +
-                         str(pi_ager_names.last_change_field) +') VALUES ('+
+                         str(pi_ager_names.last_change_field) + ',' +
+                         str(pi_ager_names.tempintavg_field) + ',' +
+                         str(pi_ager_names.humintavg_field) + ') VALUES ('+
                          ('NULL' if sensor_temperature == None else str(sensor_temperature)) + ', ' + 
                          ('NULL' if second_sensor_temperature == None else str(second_sensor_temperature)) + ', ' +
                          ('NULL' if sensor_humidity == None else str(sensor_humidity)) + ', ' +
@@ -451,8 +450,10 @@ def write_all_sensordata(loopnumber, sensor_temperature, sensor_humidity, sensor
                          ('NULL' if sensor_meat2 == None else str(sensor_meat2)) + ', ' +
                          ('NULL' if sensor_meat3 == None else str(sensor_meat3)) + ', ' +
                          ('NULL' if sensor_meat4 == None else str(sensor_meat4)) + ', ' +
-                         current_time + ')')
-            close_database()
+                         current_time + ', ' +
+                         ('NULL' if tempintavg == None else str(tempintavg)) + ', ' +
+                         ('NULL' if humintavg == None else str(humintavg)) + ')')
+        close_database()
 
 
 def write_current(sensor_temperature, status_heater, status_exhaust_air, status_cooling_compressor, status_circulating_air, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature,second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, status_uv, status_light, status_humidifier, status_dehumidifier, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data):

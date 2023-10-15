@@ -7,9 +7,9 @@ async function handleContent( msg ) {
 
     myObj = JSON.parse(msg);
 
-    var temperature_main = myObj.sensor_temperature[0];
-    var humidity_main = myObj.sensor_humidity[0];
-    var humidity_abs_main = myObj.sensor_humidity_abs[0];        
+    var temperature_main = myObj.temperature_avg[0];
+    var humidity_main = myObj.humidity_avg[0];
+    var humidity_abs_main = myObj.humidity_abs_avg[0];        
     var dewpoint_main = myObj.sensor_dewpoint[0];
     var temperature_extern = myObj.sensor_extern_temperature[0];
     var humidity_extern = myObj.sensor_extern_humidity[0];
@@ -70,7 +70,7 @@ async function handleContent( msg ) {
         str_humidity_main = '-----';
     }
     else {
-        str_humidity_main = humidity_main.toFixed(0);
+        str_humidity_main = humidity_main.toFixed(1);
     }
     if (dewpoint_main === null) {
         str_dewpoint_main = '-----';
@@ -334,7 +334,7 @@ async function loadContent() {
 }
 
 // timer for page data refresh
-var myVar = setInterval(myTimer, 3000);
+var myVar = setInterval(myTimer, 6000);
 
 function myTimer() {
     var loc = location.pathname;

@@ -172,10 +172,13 @@
         $switch_off_heater = -$heating_hysteresis/2;
     }
     
-    $switch_on_humidifier = get_table_value($config_settings_table,$switch_on_humidifier_key);
-    $switch_off_humidifier = get_table_value($config_settings_table,$switch_off_humidifier_key);
+    $humidifier_hysteresis = intval(get_table_value($config_settings_table,$humidifier_hysteresis_key));
+    $dehumidifier_hysteresis = intval(get_table_value($config_settings_table,$dehumidifier_hysteresis_key));
+    $hysteresis_offset = round(get_table_value($config_settings_table,$hysteresis_offset_key), 1);
+
     $setpoint_temperature = round(get_table_value($config_settings_table,$setpoint_temperature_key), 1);
     $setpoint_humidity = round(get_table_value($config_settings_table,$setpoint_humidity_key), 1);  
+    $saturation_point = intval(get_table_value($config_settings_table,$saturation_point_key));
     
     if ($modus == 0 || $modus == 1) {
         $current_values['mod_type_line1'] = 'images/icons/cooling_42x42.png';
@@ -219,8 +222,8 @@
         $current_values['mod_name_line3'] = strtoupper(_('humidification'));
         $current_values['mod_current_line3'] = $sensor_humidity;
         $current_values['mod_setpoint_line3'] = $setpoint_humidity;
-        $current_values['mod_on_line3'] = $setpoint_humidity - $switch_on_humidifier;
-        $current_values['mod_off_line3'] = $setpoint_humidity - $switch_off_humidifier;
+        $current_values['mod_on_line3'] = eval_switch_on_humidity( $setpoint_humidity, $humidifier_hysteresis, $hysteresis_offset );
+        $current_values['mod_off_line3'] = eval_switch_off_humidity( $setpoint_humidity, $humidifier_hysteresis, $hysteresis_offset, $saturation_point );
     }
     else {
         $current_values['mod_type_line3'] = 'images/icons/humidification_42x42.png';
@@ -228,24 +231,24 @@
         $current_values['mod_name_line3'] = strtoupper(_('humidification'));
         $current_values['mod_current_line3'] = $sensor_humidity;
         $current_values['mod_setpoint_line3'] = $setpoint_humidity;
-        $current_values['mod_on_line3'] = $setpoint_humidity - $switch_on_humidifier;
-        $current_values['mod_off_line3'] = $setpoint_humidity - $switch_off_humidifier;
+        $current_values['mod_on_line3'] = eval_switch_on_humidity($setpoint_humidity, $humidifier_hysteresis, $hysteresis_offset );
+        $current_values['mod_off_line3'] = eval_switch_off_humidity($setpoint_humidity, $humidifier_hysteresis, $hysteresis_offset, $saturation_point);
         
         $current_values['mod_type_line4'] = 'images/icons/exhausting_42x42.png';
         $current_values['mod_stat_line4'] = $exhausting_on_off_png;
         $current_values['mod_name_line4'] = strtoupper(_('exhausting'));
-        $current_values['mod_current_line4'] = $sensor_humidity;
-        $current_values['mod_setpoint_line4'] = $setpoint_humidity;
-        $current_values['mod_on_line4'] = ((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100);
-        $current_values['mod_off_line4'] = ((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100);     
+//        $current_values['mod_current_line4'] = $sensor_humidity;
+//        $current_values['mod_setpoint_line4'] = $setpoint_humidity;
+//        $current_values['mod_on_line4'] = ((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100);
+//        $current_values['mod_off_line4'] = ((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100);     
         
         $current_values['mod_type_line5'] = 'images/icons/dehumidification_42x42.png';
         $current_values['mod_stat_line5'] = $dehumidifier_on_off_png;
         $current_values['mod_name_line5'] = strtoupper(_('dehumidification'));
         $current_values['mod_current_line5'] = $sensor_humidity;
         $current_values['mod_setpoint_line5'] = $setpoint_humidity;
-        $current_values['mod_on_line5'] = ((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100);
-        $current_values['mod_off_line5'] = ((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100);
+        $current_values['mod_on_line5'] = eval_switch_on_dehumidity($setpoint_humidity, $dehumidifier_hysteresis, $hysteresis_offset, $saturation_point ); 
+        $current_values['mod_off_line5'] = eval_switch_off_dehumidity($setpoint_humidity,  $dehumidifier_hysteresis, $hysteresis_offset );
 
         if ($sensorsecondtype != 0) {  // show abs. humidity check aktive only with second sensor
             if ($dehumidifier_modus == 3) {             // only dehumidification

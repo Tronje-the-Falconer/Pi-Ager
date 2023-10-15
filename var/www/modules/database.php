@@ -459,6 +459,23 @@
         }
     }
     
+    function write_mqtt_values($broker_address, $mqtt_port, $mqtt_username, $mqtt_password, $mqtt_active){
+        global $config_mqtt_table, $broker_address_field, $port_field, $username_field, $password_field, $mqtt_active_field, $id_field;
+        
+        if (is_table_empty($config_mqtt_table) == True) {
+            open_connection();
+            $sql = 'INSERT INTO ' . $config_mqtt_table . ' (' . $id_field . ', ' . $broker_address_field . ', ' . $port_field . ', ' . $username_field . ', ' . $password_field . ', ' . $mqtt_active_field . ' ) VALUES (' . '"1"' . ', "' . $broker_address . '", "'. strval($mqtt_port) . '", "' . $mqtt_username . '", "' . $mqtt_password . '", "' . strval($mqtt_active) . '")';
+            execute_query($sql);
+            close_database();
+        }
+        else {        
+            open_connection();
+            $sql = 'UPDATE ' . $config_mqtt_table . ' SET "' . $broker_address_field . '" = "' . $broker_address . '" , "' . $port_field . '" = "' . strval($mqtt_port) . '" , "' . $username_field . '" = "' . $mqtt_username . '" , "' . $password_field . '" = "' . $mqtt_password . '", "'. $mqtt_active_field . '" = ' . strval($mqtt_active) . ' WHERE "' . $id_field . '" = 1';
+            execute_query($sql);
+            close_database();
+        }
+    }
+        
     function write_dummy_mailserver_values() {
         global $mailserver_table, $mailserver_id_field, $mailserver_server_field, $mailserver_user_field, $mailserver_port_field;
         
@@ -843,14 +860,15 @@
     }
 
     function write_config($cooling_hysteresis, $heating_hysteresis,
-                            $switch_on_humidifier, $switch_off_humidifier, $delay_humidify, $uv_modus, $uv_duration, 
+                            $humidifier_hysteresis, $dehumidifier_hysteresis, $hysteresis_offset, $saturation_point, $delay_humidify, $uv_modus, $uv_duration, 
                             $uv_period, $switch_on_uv_hour, $switch_on_uv_minute, $light_modus, $light_duration, 
                             $light_period, $switch_on_light_hour, $switch_on_light_minute, $dehumidifier_modus, 
                             $failure_temperature_delta, $failure_humidity_delta, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
                             $shutdown_on_batlow, $delay_cooler, $dewpoint_check, $uv_check)
         {
         global $value_field, $last_change_field, $key_field, $config_settings_table, $cooling_hysteresis_key,
-                $heating_hysteresis_key, $switch_on_humidifier_key, $switch_off_humidifier_key, $delay_humidify_key, $uv_modus_key,
+                $humidifier_hysteresis_key, $dehumidifier_hysteresis_key, $hysteresis_offset_key,
+                $heating_hysteresis_key, $switch_on_humidifier_key, $switch_off_humidifier_key, $saturation_point_key, $delay_humidify_key, $uv_modus_key,
                 $uv_duration_key, $uv_period_key, $switch_on_uv_hour_key, $switch_on_uv_minute_key, $light_modus_key, $light_duration_key, $light_period_key,
                 $switch_on_light_hour_key, $switch_on_light_minute_key, $dehumidifier_modus_key, $failure_temperature_delta_key, $failure_humidity_delta_key, 
                 $internal_temperature_low_limit_key, $internal_temperature_high_limit_key, $internal_temperature_hysteresis_key, $shutdown_on_batlow_key, $delay_cooler_key,
@@ -860,8 +878,10 @@
 
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($cooling_hysteresis) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $cooling_hysteresis_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($heating_hysteresis) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $heating_hysteresis_key . '"');
-        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($switch_on_humidifier) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $switch_on_humidifier_key . '"');
-        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($switch_off_humidifier) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $switch_off_humidifier_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($humidifier_hysteresis) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $humidifier_hysteresis_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($dehumidifier_hysteresis) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $dehumidifier_hysteresis_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $hysteresis_offset_key . '"');        
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($saturation_point) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $saturation_point_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($delay_humidify) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $delay_humidify_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($uv_modus) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $uv_modus_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval(($uv_duration * 60)) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $uv_duration_key . '"');
