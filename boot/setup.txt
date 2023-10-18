@@ -48,10 +48,10 @@ dbpw='raspberry'
 #-------------------------------------------------------------------------------
 
 # WLAN Netzwerkname:
-wlanssid=
+wlanssid='your WLAN SSID'
 
 # WLAN Schlüssel (mindesten 8 Zeichen):
-wlankey=
+wlankey='your WLAN key'
 
 # ISO code your country, e.g. DE, GB:
 country='DE'
