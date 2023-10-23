@@ -273,7 +273,7 @@ $password_field = 'password';
 $mqtt_active_field = 'mqtt_active';
 
 #-----------------------------Paths and urls
-$thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi-release-3-3-x.342426/';
+$thread_url = 'https://www.grillsportverein.de/forum/forums/pi-ager.548/';
 $error_reporting_url = 'https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/Error-reporting';
 $faq_url =  'https://pi-ager.org/faq/';
 $sqlite_path = '/var/www/config/pi-ager.sqlite3';

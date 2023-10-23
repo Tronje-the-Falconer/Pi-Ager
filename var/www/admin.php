@@ -1020,24 +1020,35 @@
                                     }
                                     // $essid = exec("iwgetid | awk -F'\"' '{print $2}'");
                                     // echo 'ESSID : ' . $essid . "<br>";
-                                    // $local_ip = $_SERVER['REMOTE_ADDR'];
+                                    $ap_mode = false;
+                                    $local_ip = $_SERVER['REMOTE_ADDR'];
                                     // echo 'local ip : ' . $local_ip . '<br>';
-                                    $hostname = '';
-                                    $addresses = exec("hostname -I");
-                                    $address_list = explode(" ", $addresses);
-                                    $address_list_count = count($address_list);
-                                    if ($address_list_count == 0) {
-                                        $hostname = "";
+                                    if (strpos($local_ip, '10.0.0') !== false) {
+                                        $ap_mode = true;
+                                    //    echo 'ap_mode : ' . $ap_mode . '<br>';
                                     }
-                                    else {
-                                        $hostname = $address_list[0];
-                                    }                                                   
+                                    // $hostname = '';
+                                    // $addresses = exec("hostname -I");
+                                    // echo 'hostname -I : ' . $addresses . '<br>';
+                                    
+                                    // if (strpos($addresses, '10.0.0.1') !== false) {
+                                    //    $ap_mode = true;
+                                    //    echo 'ap_mode : ' . $ap_mode . '<br>';
+                                    // }
+                                    // $address_list = explode(" ", $addresses);
+                                    // $address_list_count = count($address_list);
+                                    // if ($address_list_count == 0) {
+                                    //    $hostname = "";
+                                    // }
+                                    // else {
+                                    //    $hostname = $address_list[0];
+                                    // }                                                   
                                     // $hostname = exec("hostname -I");
                                     // echo 'hostname -I : ' . $hostname . '<br>';
                                     // if ($local_ip !== '10.0.0.5') {
                                     // if ($essid === 'RPiHotspot') {
                                 ?>
-                                <div <?php if ($hostname !== '10.0.0.1') { echo 'style="display:none;"'; }?>>
+                                <div <?php if ($ap_mode == false) { echo 'style="display:none;"'; }?>>
                                     <hr>
                                     <h2 class="art-postheader"><?php echo _('set Pi-Ager date/time'); ?></h2>
                                     <!----------------------------------------------------------------------------------------Date/Time--> 
@@ -1064,7 +1075,7 @@
                                     // var_dump($ssids);
                                 ?>
                                 
-                                <div id="wlan_setup_id" <?php if ($hostname !== '10.0.0.1') { echo 'style="display:none;"'; }?>>
+                                <div id="wlan_setup_id" <?php if ($ap_mode == false) { echo 'style="display:none;"'; }?>>
                                     <hr>
                                     <h2 class="art-postheader"><?php echo _('WLAN setup'); ?></h2>
                                     <!----------------------------------------------------------------------------------------WLAN setup--> 
@@ -1101,12 +1112,19 @@
                                                         }
                                                     ?>
                                                     </td>
-                                                    
-                                                    <td><label><?php echo _('WLAN password') . ' :&nbsp;'; ?></label><div class="tooltip"><input type="text" name="wlanpassword" <?php if ($ssid_count == 0) { echo ' disabled';} ?> required><span class="tooltiptext"><?php echo _('enter your WLAN password'); ?></span></input></div></td>
-                                                </tr>
+                                                    <td style="text-align: left"><div>
+                                                        <fieldset>
+                                                            <label style="text-align: left; display: block;" for="txtPasswd"><?php echo _('WLAN password'); ?></label>
+                                                            <div class="tooltip"><input id="txtPasswd" type="text" name="wlanpassword" <?php if ($ssid_count == 0) { echo ' disabled';} ?> required><span class="tooltiptext"><?php echo _('enter your WLAN password'); ?></span></input></div><br>
+                                                            <label style="text-align: left; display: block;" for="txtCountry"><?php echo _('WLAN Country'); ?></label>
+                                                            <div class="tooltip"><input style="width: 20%;" id="txtCountry" type="text" name="wlancountry" required><span class="tooltiptext"><?php echo _('enter the country code for your wireless network, e.g. DE,GB or US'); ?></span></input></div><br>
+                                                        </fieldset>
+                                                        </div>
+                                                    </td>
+                                                </tr>    
                                             </table>
                                             <br>
-                                            <button class="art-button" name="setWLANconfig" value="setWLANconfig" <?php if ($ssid_count == 0) { echo 'disabled';} ?> onclick="return confirm('<?php echo _('ATTENTION: setup your WLAN and reboot?');?> ')"><?php echo _('save and reboot'); ?></button>
+                                            <button class="art-button" name="setWLANconfig" value="setWLANconfig" <?php if ($ssid_count == 0) { echo 'disabled';} ?> onclick="return confirm('<?php echo _('ATTENTION: setup your WLAN?');?> ')"><?php echo _('save'); ?></button>
                                         </form>
                                     </div>
                                 </div>

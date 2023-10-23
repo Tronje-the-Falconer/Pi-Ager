@@ -102,6 +102,10 @@ switch ($pirevision){
         return $piversion = 'Raspberry Pi 4 Model B v.1.4 </br> (Sony, UK) </br> 4GB RAM';
     case 'd03114':
         return $piversion = 'Raspberry Pi 4 Model B v.1.4 </br> (Sony, UK) </br> 8GB RAM';
+    case 'c03115':
+        return $piversion = 'Raspberry Pi 4 Model B v.1.5 </br> (Sony, UK) </br> 4GB RAM';
+    case 'd03115':
+        return $piversion = 'Raspberry Pi 4 Model B v.1.5 </br> (Sony, UK) </br> 8GB RAM';
     case 'c03130':
         return $piversion = 'Raspberry Pi 4 Model Pi400 v1.0 </br> (Sony, UK) </br> 4GB RAM';
     case 'a03140':
@@ -112,6 +116,10 @@ switch ($pirevision){
         return $piversion = 'Raspberry Pi 4 Model CM4 v1.0 </br> (Sony, UK) </br> 4GB RAM';
     case 'd03140':
         return $piversion = 'Raspberry Pi 4 Model CM4 v1.0 </br> (Sony, UK) </br> 8GB RAM';
+    case 'c04170':
+        return $piversion = 'Raspberry Pi 5 Model B v1.0 </br> (Sony, UK) </br> 4GB RAM';
+    case 'd04170':
+        return $piversion = 'Raspberry Pi 5 Model B v1.0 </br> (Sony, UK) </br> 8GB RAM';
     case '0000':
         return $piversion = _('model unknown! Please contact us.');
     default:

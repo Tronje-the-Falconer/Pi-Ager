@@ -8,21 +8,21 @@ echo "------------------------------------------------------"
 echo "Config Start"
 echo "------------------------------------------------------"
 
-if [ -e /boot/setup.txt ]           #wenn setup.txt existiert
+if [ -e /boot/firmware/setup.txt ]           #wenn setup.txt existiert
 then
     echo "Setup.txt exists, getting variables"
-    eval $(grep -i "^piname=" /boot/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^pipass=" /boot/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^rootpass=" /boot/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^webguipw=" /boot/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^dbpw=" /boot/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^wlanssid=" /boot/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^wlankey=" /boot/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^country=" /boot/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^keepconf=" /boot/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^sensor=" /boot/setup.txt | tr -d "\n\r")    
-    eval $(grep -i "^hmidisplay=" /boot/setup.txt | tr -d "\n\r")
-    eval $(grep -i "^sensor=" /boot/setup.txt | tr -d "\n\r")  
+    eval $(grep -i "^piname=" /boot/firmware/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^pipass=" /boot/firmware/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^rootpass=" /boot/firmware/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^webguipw=" /boot/firmware/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^dbpw=" /boot/firmware/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^wlanssid=" /boot/firmware/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^wlankey=" /boot/firmware/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^country=" /boot/firmware/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^keepconf=" /boot/firmware/setup.txt| tr -d "\n\r")
+    eval $(grep -i "^sensor=" /boot/firmware/setup.txt | tr -d "\n\r")    
+    eval $(grep -i "^hmidisplay=" /boot/firmware/setup.txt | tr -d "\n\r")
+    eval $(grep -i "^sensor=" /boot/firmware/setup.txt | tr -d "\n\r")  
     echo "Variablen"
     echo "Hostname = $piname"
     #echo $pipass
@@ -43,9 +43,10 @@ then
     # pi Rechnername setzen
     if [ -n "$piname" ]            #wenn nicht ""
     then
-        CURRENT_HOSTNAME=`cat /etc/hostname | tr -d " \t\n\r"`
-        echo -n $piname > /etc/hostname
-        sed -i "s/127.0.1.1.*$CURRENT_HOSTNAME/127.0.1.1\t$piname/g" /etc/hosts
+        # CURRENT_HOSTNAME=`cat /etc/hostname | tr -d " \t\n\r"`
+        # echo -n $piname > /etc/hostname
+        # sed -i "s/127.0.1.1.*$CURRENT_HOSTNAME/127.0.1.1\t$piname/g" /etc/hosts
+        raspi-config nonint do_hostname $piname
         echo "Hostname gesetzt"
     fi
 
@@ -87,19 +88,27 @@ then
     then
         if [  ${#wlankey} -ge 8 ]   # 8 Zeichen oder mehr
         then
-            echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" > /etc/wpa_supplicant/wpa_supplicant.conf
-            echo "update_config=1" >> /etc/wpa_supplicant/wpa_supplicant.conf
-            echo "country=$country" >> /etc/wpa_supplicant/wpa_supplicant.conf
-#            wpa_passphrase "$wlanssid" "$wlankey" >> /etc/wpa_supplicant/wpa_supplicant.conf
-            echo -e "\nnetwork={\n\tssid=\x22${wlanssid}\x22\n\tpsk=\x22${wlankey}\x22\n\tkey_mgmt=WPA-PSK\n}" >> /etc/wpa_supplicant/wpa_supplicant.conf
-            echo "WLAN SSID und Passphrase gesetzt"
+            # echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" > /etc/wpa_supplicant/wpa_supplicant.conf
+            # echo "update_config=1" >> /etc/wpa_supplicant/wpa_supplicant.conf
+            # echo "country=$country" >> /etc/wpa_supplicant/wpa_supplicant.conf
+            # wpa_passphrase "$wlanssid" "$wlankey" >> /etc/wpa_supplicant/wpa_supplicant.conf
+            # echo -e "\nnetwork={\n\tssid=\x22${wlanssid}\x22\n\tpsk=\x22${wlankey}\x22\n\tkey_mgmt=WPA-PSK\n}" >> /etc/wpa_supplicant/wpa_supplicant.conf
+            raspi-config nonint do_wifi_country $country
+            # raspi-config nonint do_wifi_ssid_passphrase "$wlanssid" "$wlankey"
+            nmcli device wifi connect "$wlanssid" password "$wlankey" ifname wlan0
+            if [ $? -eq 0 ]
+            then
+                echo "WLAN SSID und Passphrase gesetzt"
+            else
+                echo "Fehler $? : WLAN SSID und Passphrase konnten nicht gesetzt werden"
+            fi
         fi
     fi
 
     # Configfile löschen
     if [ -z "$keepconf" ]         #wenn ""
     then
-        rm /boot/setup.txt
+        rm /boot/firmware/setup.txt
         echo "Config gelöscht"
     fi
     
@@ -124,7 +133,7 @@ then
     
     if [ $sensorbus -eq 0 ]; then
     # hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
-        rm -r /etc/modprobe.d/Pi-Ager_i2c_off.conf
+        rm -f /etc/modprobe.d/Pi-Ager_i2c_off.conf
         echo "i2c is active"
     elif [ $sensorbus -eq 1 ]; then
     # hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln

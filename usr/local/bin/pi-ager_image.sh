@@ -167,6 +167,9 @@ umount $NFSMOUNT
 # NFS-Volume mounten
 echo "hänge NFS-Volume $NFSVOL ein"
 
+# avoid warning that systemd still uses old version of fstab
+systemctl daemon-reload
+
 if [ -n "$NFSOPT" ]
 	then
         echo "mount with options: $NFSOPT"
@@ -330,7 +333,7 @@ find /tmp/ -type f -exec rm "{}" \;
 find /root/.cache/ -type f -exec rm "{}" \;
 
 # delete webcam files
-rm /var/www/images/webcam/*.jpg
+rm -f /var/www/images/webcam/*.jpg
 
 touch /var/www/logs/logfile.txt
 chmod 666 /var/www/logs/logfile.txt
@@ -367,7 +370,7 @@ echo "setup_pi-ager service enabled"
 ######################################################
 # Remove System key for encrypt/decrypt
 ######################################################
-rm /home/pi/system_key.bin
+rm -f /home/pi/system_key.bin
 
 ######################################################
 # change hostname
@@ -382,13 +385,14 @@ echo "hostname changed to pi-ager"
 # rewrite /etc/wpa_supplicant/wpa_supplicant.conf
 ######################################################
 # mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
-
+# remove all wlan connections
+# rm -f /etc/NetworkManager/system-connections/*
 
 ######################################################
 # rewrite /boot/setup.txt, remove /boot/setup.log
 ######################################################
-rm /boot/setup.txt
-rm /boot/setup.log
+rm -f /boot/setup.txt
+rm -f /boot/setup.log
 wget -O setup.txt -nv https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/entwicklung/boot/setup.txt
 mv /setup.txt /boot/setup.txt
 
@@ -551,9 +555,9 @@ if [ "$my_image" = false ]; then
 	
 	
 	# delete logs and greate empty backup.log
-	rm /var/www/logs/*
+	rm -f /var/www/logs/*
     touch /var/www/logs/pi-ager_backup.log
-	rm /var/log/*
+	rm -f /var/log/*
 	
 	# delete obsolete /tmp direcory
 	# rm -rf /tmp

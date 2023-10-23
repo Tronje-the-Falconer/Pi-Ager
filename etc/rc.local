@@ -20,8 +20,9 @@ fi
 rfkill unblock wifi
 sleep 10
 iwconfig wlan0 power off
+
 # enable AP-STA mode
-/bin/bash /home/pi/network-setup/bin/netStart
+iw dev wlan0 interface add wlan1 type __ap
 sleep 2
 
 # enable captive portal

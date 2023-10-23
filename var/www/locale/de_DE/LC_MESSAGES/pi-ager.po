@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-DE\n"
-"POT-Creation-Date: 2023-10-12 17:09+0200\n"
-"PO-Revision-Date: 2023-10-12 17:12+0200\n"
+"POT-Creation-Date: 2023-10-22 10:42+0200\n"
+"PO-Revision-Date: 2023-10-22 10:49+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -1085,7 +1085,7 @@ msgstr ""
 
 #: var/www/admin.php:471 var/www/admin.php:543 var/www/admin.php:653
 #: var/www/admin.php:670 var/www/admin.php:735 var/www/admin.php:808
-#: var/www/admin.php:1052 var/www/config.php:294
+#: var/www/admin.php:1063 var/www/admin.php:1127 var/www/config.php:294
 #: var/www/edit_agingtable.php:116 var/www/manvals.php:149
 #: var/www/notification.php:141 var/www/notification.php:327
 #: var/www/notification.php:475 var/www/notification.php:583
@@ -1377,63 +1377,70 @@ msgstr "Neues Systemdatum und neue Uhrzeit eingestellt"
 msgid "wrong input format"
 msgstr "Falsches Eingabeformat"
 
-#: var/www/admin.php:1042
+#: var/www/admin.php:1053
 msgid "set Pi-Ager date/time"
 msgstr "Pi-Ager Datum/Uhrzeit einstellen"
 
-#: var/www/admin.php:1048
+#: var/www/admin.php:1059
 msgid "Pi-Ager date/time format YYYY-MM-DD HH:MM:SS"
 msgstr "Pi-Ager Datum/Uhrzeit Format JJJJ-MM-TT HH:MM:SS"
 
-#: var/www/admin.php:1048
+#: var/www/admin.php:1059
 msgid "date/time format YYYY-MM-DD HH:MM:SS e.g. 2023-01-31 16:05:09"
 msgstr "Datum/Uhrzeit Format JJJJ-MM-TT HH:MM:SS z. B. 2023-01-31 16:05:09"
 
-#: var/www/admin.php:1052
+#: var/www/admin.php:1063
 msgid "ATTENTION: set date and time?"
 msgstr "ACHTUNG: Datum und Uhrzeit einstellen?"
 
-#: var/www/admin.php:1069
+#: var/www/admin.php:1080 var/www/modules/system_reboot.php:39
+#: var/www/modules/system_reboot.php:47
 msgid "WLAN setup"
 msgstr "WLAN-Einrichtung"
 
-#: var/www/admin.php:1075
+#: var/www/admin.php:1086
 msgid "refresh"
 msgstr "Aktualisieren"
 
-#: var/www/admin.php:1086
+#: var/www/admin.php:1097
 msgid "No WLAN networks found"
 msgstr "Keine WLAN-Netzwerke gefunden"
 
-#: var/www/admin.php:1105
+#: var/www/admin.php:1117
 msgid "WLAN password"
 msgstr "WLAN-Kennwort"
 
-#: var/www/admin.php:1105
+#: var/www/admin.php:1118
 msgid "enter your WLAN password"
 msgstr "Geben Sie das WLAN-Passwort ein"
 
-#: var/www/admin.php:1109
-msgid "ATTENTION: setup your WLAN and reboot?"
-msgstr "ACHTUNG: WLAN einrichten und neu starten?"
+#: var/www/admin.php:1119
+msgid "WLAN Country"
+msgstr "WLAN Ländercode"
 
-#: var/www/admin.php:1109
-msgid "save and reboot"
-msgstr "Speichern und neu starten"
+#: var/www/admin.php:1120
+msgid "enter the country code for your wireless network, e.g. DE,GB or US"
+msgstr ""
+"Geben Sie den Ländercode für Ihr drahtloses Netzwerk ein, z. B. DE, GB oder "
+"US"
 
-#: var/www/admin.php:1130
+#: var/www/admin.php:1127
+msgid "ATTENTION: setup your WLAN?"
+msgstr "ACHTUNG: WLAN einrichten?"
+
+#: var/www/admin.php:1148
 msgid "python"
 msgstr "Python"
 
-#: var/www/admin.php:1136
+#: var/www/admin.php:1154
 msgid "ATTENTION: stop"
 msgstr "ACHTUNG: Stop"
 
-#: var/www/admin.php:1136
+#: var/www/admin.php:1154
 msgid "stop"
 msgstr "Stop"
 
-#: var/www/admin.php:1137
+#: var/www/admin.php:1155
 msgid "start"
 msgstr "Start"
 
@@ -1446,7 +1453,7 @@ msgid "attached weight"
 msgstr "Angehangenes Gewicht"
 
 #: var/www/calibrate_scale.php:47 var/www/calibrate_scale.php:68
-#: var/www/calibrate_scale.php:73 var/www/header.php:176
+#: var/www/calibrate_scale.php:73 var/www/header.php:171
 #: var/www/modules/tara_scale.php:44 var/www/scale_wizzard.php:38
 #: var/www/scale_wizzard.php:59
 msgid "scale wizzard"
@@ -1505,7 +1512,7 @@ msgstr "Bitte neu versuchen"
 msgid "error on calibrating"
 msgstr "Fehler bei der Kalibrierung"
 
-#: var/www/changelog.php:5 var/www/header.php:169
+#: var/www/changelog.php:5 var/www/header.php:164
 msgid "changelog"
 msgstr "changelog"
 
@@ -1591,6 +1598,8 @@ msgstr "Sekunden"
 msgid "helptext_temperature_config"
 msgstr ""
 "<br><br>\n"
+"<img src=\"./images/icons/temperature-control.jpg\" alt=\"\">\n"
+"<br><br>\n"
 "<b>Primäre Hysterese der Temperaturregelung: </b>\n"
 "<br>Hysterese für die Zwei-Punkt Regelung der Temperatur im Reifeschrank. "
 "(Wertgrenze: 0.5 bis +8° C).\n"
@@ -1601,7 +1610,7 @@ msgstr ""
 "<br><br>\n"
 "<b>Verzögerung:</b> \n"
 "<br>Dieser Wert legt die minimale Verzögerung in Sekunden zwischen Kühl-"
-"Kompressor AUS und EIN fest. (Werte: 30 bis 120 Sekunden).\n"
+"Kompressor AUS und EIN fest. (Werte: 0 bis 120 Sekunden).\n"
 "<br><br>\n"
 "<b>Empfehlung:</b>\n"
 "<br> Um ein wildes Ein- und Ausschalten zu vermeiden, sollten die Hysterese-"
@@ -1945,7 +1954,7 @@ msgstr "Monat"
 msgid "custom"
 msgstr "Benutzer def"
 
-#: var/www/diagrams.php:33 var/www/header.php:149 var/www/index.php:274
+#: var/www/diagrams.php:33 var/www/header.php:144 var/www/index.php:274
 #: var/www/modules/save_diagram_mode.php:29
 #: var/www/modules/save_diagram_mode.php:33
 #: var/www/modules/save_diagram_mode.php:37
@@ -2034,7 +2043,7 @@ msgid "circulate air"
 msgstr "Umluft"
 
 #: var/www/edit_agingtable.php:26 var/www/edit_agingtable.php:32
-#: var/www/edit_agingtable.php:116 var/www/header.php:183
+#: var/www/edit_agingtable.php:116 var/www/header.php:178
 msgid "edit agingtable"
 msgstr "Editor"
 
@@ -2171,27 +2180,27 @@ msgstr "Laufendes System: "
 msgid "by"
 msgstr "von"
 
-#: var/www/header.php:148
+#: var/www/header.php:143
 msgid "monitor"
 msgstr "Monitor"
 
-#: var/www/header.php:150
+#: var/www/header.php:145
 msgid "settings"
 msgstr "Einstellungen"
 
-#: var/www/header.php:151
+#: var/www/header.php:146
 msgid "admin"
 msgstr ""
 
-#: var/www/header.php:161
+#: var/www/header.php:156
 msgid "notification"
 msgstr "Nachrichten"
 
-#: var/www/header.php:162
+#: var/www/header.php:157
 msgid "logs"
 msgstr "Logs"
 
-#: var/www/header.php:163 var/www/webcam.php:28
+#: var/www/header.php:158 var/www/webcam.php:28
 msgid "webcam"
 msgstr "Webcam"
 
@@ -2669,8 +2678,8 @@ msgstr "Heizen"
 msgid "custom time for diagrams changed"
 msgstr "Benutzerdefinierte Zeit für Diagramme geändert"
 
-#: var/www/modules/read_systemdetails.php:116
-#: var/www/modules/read_systemdetails.php:118
+#: var/www/modules/read_systemdetails.php:120
+#: var/www/modules/read_systemdetails.php:122
 msgid "model unknown! Please contact us."
 msgstr "Modell nicht gefunden! Bitte kontaktieren sie uns."
 
@@ -2777,6 +2786,14 @@ msgstr "UV manuell eingeschaltet"
 #: var/www/modules/start_stop_uv.php:10
 msgid "uv switched off manually"
 msgstr "UV manuell ausgeschaltet"
+
+#: var/www/modules/system_reboot.php:39
+msgid "WLAN configured with new SSID, password and country code"
+msgstr "WLAN mit neuer SSID, Passwort und Ländercode konfiguriert"
+
+#: var/www/modules/system_reboot.php:47
+msgid "WLAN SSID or password missing"
+msgstr "WLAN SSID oder Passwort fehlt"
 
 #: var/www/modules/tara_scale.php:42 var/www/modules/tara_scale.php:44
 msgid "calibration done"
@@ -3917,6 +3934,9 @@ msgstr "Licht Schalter"
 #: var/www/webcam.php:57
 msgid "light manual on"
 msgstr "Licht manuell EIN"
+
+#~ msgid "save and reboot"
+#~ msgstr "Speichern und neu starten"
 
 #~ msgid "switch-on value"
 #~ msgstr "Einschaltwert"
