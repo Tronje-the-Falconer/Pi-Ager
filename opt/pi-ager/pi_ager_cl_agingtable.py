@@ -114,16 +114,12 @@ class cl_aging_thread( threading.Thread ):
         global period_endtime
         global period_starttime_seconds
         global hour_in_seconds
-        global switch_on_cooling_compressor
-        global switch_off_cooling_compressor
-        global switch_on_humidifier
-        global switch_off_humidifier
         global delay_humidify
         global delay_cooling_compressor
-        global switch_on_heater
-        global switch_off_heater
         global cooling_hysteresis
         global heating_hysteresis
+        global humidifier_hysteresis
+        global dehumidifier_hysteresis
         
         cl_fact_logger.get_instance().debug('read_dictionary_write_settings()')
         
@@ -159,33 +155,22 @@ class cl_aging_thread( threading.Thread ):
         else:
             operating_mode = "\n" + '.................................' + _('operation mode wrong or set incorrectly')
             
-        switch_on_cooling_compressor_logstring = ""
-        switch_off_cooling_compressor_logstring = ""
-        switch_on_heater_logstring = ""
-        switch_off_heater_logstring = ""
         delay_cooling_compressor_logstring = ""
         setpoint_humidity_logstring = ""
-        switch_on_humidifier_logstring = ""
-        switch_off_humidifier_logstring = ""
+        humidifier_hysteresis_logstring = ""
+        dehumidifier_hysteresis_logstring = ""
         
         setpoint_temperature_logstring = "\n" + '.................................' + _('setpoint temperature') + ": " + str(period_dictionary['setpoint_temperature']) + " C"
         primary_hysteresis_logstring = "\n" +  '.................................' + _('primary temperature control hysteresis') + ": " + str(cooling_hysteresis) + " C"
         secondary_hysteresis_logstring = "\n" +  '.................................' + _('secondary temperature control hysteresis') + ": " + str(heating_hysteresis) + " C"
         
-#        if (modus == 0 or modus == 1 or modus == 3 or modus == 4):
-#            switch_on_cooling_compressor_logstring = "\n" + '.................................' + _('switch-on value temperature cooler') + ": " + str(switch_on_cooling_compressor) + " C"
-#            switch_off_cooling_compressor_logstring = "\n" + '.................................' + _('switch-off value temperature cooler') + ": " + str(switch_off_cooling_compressor) + " C"
-#        if (modus == 2 or modus == 3 or modus == 4):
-#            switch_on_heater_logstring = "\n" + '.................................' + _('switch-on value temperature heater') + ": " + str(switch_on_heater) + " C"
-#            switch_off_heater_logstring = "\n" + '.................................' + _('switch-off value temperature heater') + ": " + str(switch_off_heater) + " C"
-        
-#        if (modus == 0 or modus == 1 or modus == 3 or modus == 4):
-#            delay_cooling_compressor_logstring = "\n" + '.................................' + _('cooling compressor delay') + ": " + str(delay_cooling_compressor) + ' ' + _("seconds")
+        if (modus == 0 or modus == 1 or modus == 3 or modus == 4):
+            delay_cooling_compressor_logstring = "\n" + '.................................' + _('cooling compressor delay') + ": " + str(delay_cooling_compressor) + ' ' + _("seconds")
         
         if (modus ==  1 or modus == 2 or modus == 3 or modus == 4):       
             setpoint_humidity_logstring = "\n" + '.................................' + _('setpoint humidity') + ": " + str(period_dictionary['setpoint_humidity']) + "%"
-            switch_on_humidifier_logstring = "\n" + '.................................' + _('switch-on value humidity') + ": " + str(switch_on_humidifier) + "%"
-            switch_off_humidifier_logstring = "\n" + '.................................' + _('switch-off value humidity') + ": " + str(switch_off_humidifier) + "%"
+            humidifier_hysteresis_logstring = "\n" + '.................................' + _('humidifier hysteresis') + ": " + str(humidifier_hysteresis) + "%"
+            dehumidifier_hysteresis_logstring = "\n" + '.................................' + _('dehumidifier hysteresis') + ": " + str(dehumidifier_hysteresis) + "%"
             delay_humidify_logstring = "\n" + '.................................' + _('humidification delay') + ": " + str(delay_humidify) + ' ' + _("minutes")
             
         circulation_air_period_format = int(period_dictionary['circulation_air_period'])/60
@@ -205,7 +190,7 @@ class cl_aging_thread( threading.Thread ):
         pi_ager_database.write_current_value(pi_ager_names.agingtable_period_starttime_key, period_starttime_seconds)
         period_endtime = datetime.datetime.now() + datetime.timedelta(hours = period_dictionary['hours'] - period_first_hour) # hours = parameter von datetime.timedelta
     
-        logstring = _('values') + ': ' + operating_mode + setpoint_temperature_logstring + primary_hysteresis_logstring + secondary_hysteresis_logstring  + delay_cooling_compressor_logstring + "\n" + setpoint_humidity_logstring + switch_on_humidifier_logstring + switch_off_humidifier_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_hours_logstring + "\n" + sensor_logstring + "\n"
+        logstring = _('values') + ': ' + operating_mode + setpoint_temperature_logstring + primary_hysteresis_logstring + secondary_hysteresis_logstring  + delay_cooling_compressor_logstring + "\n" + setpoint_humidity_logstring + humidifier_hysteresis_logstring + dehumidifier_hysteresis_logstring + delay_humidify_logstring + "\n" + circulation_air_period_logstring + circulation_air_duration_logstring + "\n" + exhaust_air_period_logstring + exhaust_air_duration_logstring + "\n" + period_hours_logstring + "\n" + sensor_logstring + "\n"
         cl_fact_logger.get_instance().info(logstring)
     
     def eval_final_time(self, rows, start_period, start_hour):
@@ -227,26 +212,18 @@ class cl_aging_thread( threading.Thread ):
         """
         read some general config values from db: switch_on/off and delay for temperature and humidity control for log only
         """
-        global switch_on_cooling_compressor
-        global switch_off_cooling_compressor
-        global switch_on_humidifier
-        global switch_off_humidifier
         global delay_humidify
         global delay_cooling_compressor
-        global switch_on_heater
-        global switch_off_heater
         global cooling_hysteresis
         global heating_hysteresis
+        global humidifier_hysteresis
+        global dehumidifier_hysteresis
         
         cooling_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.cooling_hysteresis_key)
         heating_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.heating_hysteresis_key)
+        humidifier_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.humidifier_hysteresis_key)
+        dehumidifier_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.dehumidifier_hysteresis_key)
         
-        switch_on_cooling_compressor = cooling_hysteresis/2
-        switch_off_cooling_compressor = -cooling_hysteresis/2
-        switch_on_heater = heating_hysteresis/2
-        switch_off_heater = -heating_hysteresis/2
-        switch_on_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_humidifier_key)
-        switch_off_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_humidifier_key)
         delay_humidify = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key)
         delay_cooling_compressor = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_cooler_key)
         
