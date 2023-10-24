@@ -7,7 +7,7 @@
 set -x
 trap read debug
  # configure access point with networkmanager
- nmcli con add type wifi ifname wlan1 mode ap con-name PI_AGER_AP ssid pi_ager
+ nmcli con add type wifi ifname wlan1 mode ap con-name PI_AGER_AP ssid pi-ager
  nmcli con modify PI_AGER_AP 802-11-wireless.band bg
  nmcli con modify PI_AGER_AP 802-11-wireless.channel 1
  nmcli con modify PI_AGER_AP 802-11-wireless-security.key-mgmt wpa-psk

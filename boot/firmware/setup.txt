@@ -12,7 +12,9 @@
 #
 # Z.B.: wlankey='FRITZ!Box 7490 |&;()<>"\$`^~@{}.'
 #
-# Logfile wird unter /boot/setup.log angelegt 
+# Logfile setup.log wird unter Linux im Verzeichnis /boot/firmware/ angelegt,
+# und unter Windows mit der SD-Card in einem USB Lesegerät im Drive 'bootfs' im Verzeichnis /.
+# 
 
 # Hostname, wie soll der Raspberry Pi im Netzwerk heissen:
 piname='pi-ager'
@@ -30,21 +32,17 @@ webguipw='raspberry'
 dbpw='raspberry'
 
 #--------------------------------------------------------------------------------
-# Pi-Ager funktioniert auch ohne Router und ohne Internet Verbindung.
-# Hat der Pi-Ager keine Verbindung zu einem WLAN Router oder Access Point, 
-# schaltet der Pi-Ager automatisch in den Hotspot Mode.
-# Er kann dann via Smartphone oder Tablet erreicht werden.
-# Der Pi-Ager Hotspot hat die WLAN SSDI 'RPiHotspot',
-# das Passwort ist '1234567890'.
-# Der Pi-Ager ist dann über die IP Adresse 10.0.0.5 via SSH ereichbar,
-# den Pi-Ager Webserver kann man mit einem Browser unter der URL http://10.0.0.5/ erreichen.
-#
-# Die Überprüfung, ob eine Verbindung zu einem Router oder Access Point möglich ist,
-# erfolgt automatisch alle 2 Minuten.
-#
-# Im Hotspot Mode können auf der ADMIN Seite Datum und Uhrzeit gesetzt werden.
-# Sollte später ein WLAN Router verfügbar sein, ist es auch möglich,
-# WLAN SSID und WLAN Passwort des Routers einzugeben.
+# Pi-Ager funktioniert auch ohne Router und ohne Internet Verbindung,
+# denn im Pi-Ager steht simultan neben einer Verbindung mit einem Internet Router 
+# ein Accesspoint zur Verfügung.
+# Der Accesspoint kann via Smartphone oder Tablet erreicht werden.
+# Der Pi-Ager Accesspoint hat die WLAN SSID 'pi-ager' mit dem Passwort '1234567890'.
+# Der Pi-Ager ist dann über die IP Adresse 10.0.0.1 via SSH ereichbar.
+# Der Pi-Ager Webserver kann mit einem Browser unter der URL http://10.0.0.1/ erreicht werden.
+# Bei der erstmaligen Verbindung zum Accesspoint erscheint auch ein 'captive portal' mit
+# Hinweisen zum Setup einer Verbindung zu einem WLAN Router.
+# Auf der ADMIN Seite können dann Datum und Uhrzeit gesetzt werden
+# und auch die Parameter für einen WLAN Router (SSID und Password).
 #-------------------------------------------------------------------------------
 
 # WLAN Netzwerkname:

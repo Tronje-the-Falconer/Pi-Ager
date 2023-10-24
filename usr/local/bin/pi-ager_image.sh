@@ -264,6 +264,20 @@ mount ${loopback} ${mountdir}
 #read -p "Press enter to continue after mounting $loopback to $mountdir"
 
 mount -t vfat -o shortname=winnt "$loopback_boot" "$mountdir/boot"
+
+######################################################
+# rewrite /boot/setup.txt, remove /boot/setup.log
+######################################################
+
+# echo "boot dir = $mountdir/boot "
+# ls -al $mountdir/boot
+rm $mountdir/boot/setup.txt
+rm $mountdir/boot/setup.log
+cd /tmp
+wget -O setup.txt -nv https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/entwicklung/boot/firmware/setup.txt
+mv setup.txt $mountdir/boot/setup.txt
+echo "setup.txt copied to $mountdir/boot/"
+
 #read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
 #echo "Copy $mountdir/boot.bak/ to $mountdir/boot/"
 #rsync -a --info=progress2 "$mountdir/boot.bak/" "$mountdir/boot/"
@@ -317,8 +331,6 @@ chroot $chrootdir /bin/bash <<EOF
 # pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install 
 
 
-
-
 ######################################################
 # delete not needed files
 ######################################################
@@ -359,10 +371,6 @@ echo "setup_pi-ager service enabled"
 #systemctl reset-failed
 
 
-
-
-
-
 #******************************************************
 # Change some settings
 #******************************************************
@@ -388,15 +396,7 @@ echo "hostname changed to pi-ager"
 # remove all wlan connections
 # rm -f /etc/NetworkManager/system-connections/*
 
-######################################################
-# rewrite /boot/setup.txt, remove /boot/setup.log
-######################################################
-rm -f /boot/setup.txt
-rm -f /boot/setup.log
-wget -O setup.txt -nv https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/entwicklung/boot/setup.txt
-mv /setup.txt /boot/setup.txt
-
-######################################################
+#####################################################
 #Force password change for user root
 ######################################################
 #change -d 0 root
