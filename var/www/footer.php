@@ -14,7 +14,7 @@
                         </div>
                         <div class="miniature_writing" style="width: 50%; float: right;">
                             <p style="text-align: right;">
-                                <a href="changelog.php">
+                                <?php echo '<a href="changelog.php?rand=' . rand() . '">';?>
                                     <?php 
                                         echo $piager_version;
                                     ?>

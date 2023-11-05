@@ -36,13 +36,14 @@ dbpw='raspberry'
 # denn im Pi-Ager steht simultan neben einer Verbindung mit einem Internet Router 
 # ein Accesspoint zur Verfügung.
 # Der Accesspoint kann via Smartphone oder Tablet erreicht werden.
-# Der Pi-Ager Accesspoint hat die WLAN SSID 'pi-ager' mit dem Passwort '1234567890'.
+# Der Pi-Ager Accesspoint hat die WLAN SSID 'pi-ager' mit dem Default-Passwort '1234567890'.
 # Der Pi-Ager ist dann über die IP Adresse 10.0.0.1 via SSH ereichbar.
 # Der Pi-Ager Webserver kann mit einem Browser unter der URL http://10.0.0.1/ erreicht werden.
 # Bei der erstmaligen Verbindung zum Accesspoint erscheint auch ein 'captive portal' mit
 # Hinweisen zum Setup einer Verbindung zu einem WLAN Router.
 # Auf der ADMIN Seite können dann Datum und Uhrzeit gesetzt werden
 # und auch die Parameter für einen WLAN Router (SSID und Password).
+# Das Default-Passwort für den Accesspoint kann auf der ADMIN-Seite geändert werden.
 #-------------------------------------------------------------------------------
 
 # WLAN Netzwerkname:

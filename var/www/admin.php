@@ -1064,21 +1064,23 @@
                                         </form>
                                     </div>
                                 </div>
-                                
-                                <?php
-                                    $ssids = [];
-                                    $res = null;
-                                    exec('sudo /var/show_wifi_connections.sh', $ssids, $res);
-                                    // $out = shell_exec('sudo /var/show_wifi_connections.sh 2>&1');
-                                    $ssid_count = count($ssids);
-                                    // echo 'return status from show_wifi_connections : ' . $res . '<br>';
-                                    // var_dump($ssids);
-                                ?>
+
                                 
                                 <div id="wlan_setup_id" <?php if ($ap_mode == false) { echo 'style="display:none;"'; }?>>
                                     <hr>
                                     <h2 class="art-postheader"><?php echo _('WLAN setup'); ?></h2>
-                                    <!----------------------------------------------------------------------------------------WLAN setup--> 
+                                    <?php
+                                        $ssids = [];
+                                        $ssid_count = 0;
+                                        if ($ap_mode == true) {
+                                            $res = null;
+                                            exec('sudo /var/show_wifi_connections.sh', $ssids, $res);
+                                            // $out = shell_exec('sudo /var/show_wifi_connections.sh 2>&1');
+                                            $ssid_count = count($ssids);
+                                            // echo 'return status from show_wifi_connections : ' . $res . '<br>';
+                                            // var_dump($ssids);
+                                        }
+                                    ?>
                                     <div class="hg_container">
                                         <table style="width: 100%; align: center;">
                                             <tr>
@@ -1091,7 +1093,7 @@
                                         <form method="post" name="wlansetup">
                                             <table style="width: 100%;">
                                                 <tr>
-                                                    <td style="text-align: left; padding-left: 20px;"><br>
+                                                    <td width="50%" style="text-align: left; padding-left: 20px;"><br>
                                                     <?php
                                                         if ($ssid_count == 0) {
                                                             echo _('No WLAN networks found');
@@ -1117,14 +1119,15 @@
                                                             <label style="text-align: left; display: block;" for="txtPasswd"><?php echo _('WLAN password'); ?></label>
                                                             <div class="tooltip"><input id="txtPasswd" type="text" name="wlanpassword" <?php if ($ssid_count == 0) { echo ' disabled';} ?> required><span class="tooltiptext"><?php echo _('enter your WLAN password'); ?></span></input></div><br>
                                                             <label style="text-align: left; display: block;" for="txtCountry"><?php echo _('WLAN Country'); ?></label>
-                                                            <div class="tooltip"><input style="width: 20%;" id="txtCountry" type="text" name="wlancountry" required><span class="tooltiptext"><?php echo _('enter the country code for your wireless network, e.g. DE,GB or US'); ?></span></input></div><br>
+                                                            <div class="tooltip"><input id="txtCountry" type="text" name="wlancountry" required><span class="tooltiptext"><?php echo _('e.g. DE,GB,FR,AT,CH,US'); ?></span></input></div><br>
                                                         </fieldset>
                                                         </div>
                                                     </td>
-                                                </tr>    
+                                                </tr>
+                                                <tr>
+                                                    <td><br><button class="art-button" name="setWLANconfig" value="setWLANconfig" <?php if ($ssid_count == 0) { echo 'disabled';} ?> onclick="return confirm('<?php echo _('ATTENTION: setup your WLAN?');?> ')"><?php echo _('save'); ?></button></td>
+                                                </tr>
                                             </table>
-                                            <br>
-                                            <button class="art-button" name="setWLANconfig" value="setWLANconfig" <?php if ($ssid_count == 0) { echo 'disabled';} ?> onclick="return confirm('<?php echo _('ATTENTION: setup your WLAN?');?> ')"><?php echo _('save'); ?></button>
                                         </form>
                                     </div>
                                 </div>
@@ -1139,6 +1142,33 @@
                                         $('#wlan_setup_id').load('admin.php #wlan_setup_id');
                                         await Sleep(2000);
                                         $('*').css('cursor', 'default');
+                                    }
+                                </script>
+                                
+                                <hr>
+
+                                <h2 class="art-postheader"><?php echo _('Pi-Ager Accesspoint'); ?></h2>
+                                <!--------------------------------------------------------------------------- accesspoint password --> 
+                                <div class="hg_container" >
+                                    <form method="post" name="accesspoint">
+                                        <table style="width: 100%;">
+                                            <tr>
+                                                <td><label><?php echo _('new password for accesspoint') . ' :&nbsp;'; ?></label><div class="tooltip"><input id="input_password" type="text" size="19" maxlength="19" name="new_password" oninput="handle_password_input(this.value)" ><span class="tooltiptext"><?php echo _('password minimum length is 8 character'); ?></span></input></div></td>
+                                            </tr>
+                                        </table>
+                                        <br>
+                                        <button id="set_new_password" class="art-button" name="set_new_password" value="set_new_password" disabled onclick="return confirm('<?php echo _('ATTENTION: reboot follows after saving new accesspoint password');?> ')"><?php echo _('save'); ?></button>
+                                    </form>
+                                </div>
+                                
+                                <script>
+                                    function handle_password_input(val) {
+                                        if (val.length >= 8) {
+                                            $("#set_new_password").attr("disabled", false);
+                                        }
+                                        else {
+                                            $("#set_new_password").attr("disabled", true);
+                                        }
                                     }
                                 </script>
                                 

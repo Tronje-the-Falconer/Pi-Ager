@@ -7,6 +7,14 @@
                                 # 10 Sekunden anzeigen, dass System heruntergefahren wird
                                     $reboot_datetime = exec('date +"%Y-%m-%d %T"');
                                     echo '<p id=\'info-message\' style=\'color: #ff0000; font-size: 20px;\'><b>' . (_("reboot")) . '</b><br>' . $reboot_datetime . '<br>' . (_("You will automatically redirected to the start page")) . '</p><br><br>';
+                                    # shell_exec('sudo /var/sudowebscript.sh reboot > /dev/null 2>&1 &');
+                                    $htmlcmd = $_GET["htmlcmd"];
+                                    $cmd = base64_decode($htmlcmd);
+                                    # echo 'cmd = ' . $cmd . '<br>';
+                                    $exec_data = [];
+                                    $exec_status = 0;
+                                    exec($cmd, $exec_data, $exec_status );
+                                    echo 'return status from nmcli : ' . $exec_status . '<br>';
                                     shell_exec('sudo /var/sudowebscript.sh reboot > /dev/null 2>&1 &');
                                 ?>
                                 <img src="images/spinner.gif" alt=""/>
@@ -23,7 +31,7 @@
                                         while (serverReachable() == false) {
                                             continue;
                                         }
-                                        window.location.href = "index.php";
+                                        window.location.href = "index.php?rand=" + Math.random();
                                     }, 10000); 
                                         
                                     function serverReachable() {

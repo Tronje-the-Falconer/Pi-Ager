@@ -25,10 +25,10 @@
         }
         
         $grep_firmware_upload = exec('pgrep -a python3 | grep piager_upload_firmware.py');
-        if ($grep_firmware_upload != 0) {
+        if ($grep_firmware_upload == '') {
             // echo 'Firmware upload not running. Stopping pi-ager service';
             shell_exec('sudo /var/sudowebscript.sh pkillmain');
-            while (exec('pgrep -a python3 | grep main.py') == 0) {
+            while (exec('pgrep -a python3 | grep main.py') != '') {
                 sleep( 1 );
             }
                     

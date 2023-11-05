@@ -3,13 +3,33 @@
     include 'database.php';                           // Schnittstelle zur Datenbank
     include 'logging.php';                            //liest die Datei fuer das logging ein
     
+    # Language festlegen
+    
+    #### BEGIN Language from DB
+
+    $language = intval(get_table_value($config_settings_table, $language_key));
+    if ($language == 1) {
+        $language = 'de_DE.utf8';
+    }
+    elseif ($language == 2) {
+        $language = 'en_GB.utf8';
+    }
+    setlocale(LC_ALL, $language);
+    
+    # Set the text domain as 'messages'
+    $domain = 'pi-ager';
+    bindtextdomain($domain, "/var/www/locale"); 
+    textdomain($domain);    
+    
+    #### END Language from DB    
+    
     if(isset ($_POST['scale_wizzard3'])) {
         $scale_number = $_POST['scale_number'];
-        $known_weight = $_POST['scale_wizzard_weight'];
+#        $known_weight = $_POST['scale_wizzard_weight'];
         $current_scale1_status = $_POST['current_scale1_status'];
         $current_scale2_status = $_POST['current_scale2_status'];
-        $logstring = _('scale_wizzard'). ' ' . _('attached weight'). ': ' . $known_weight;
-        logger('INFO', $logstring);
+#        $logstring = _('scale_wizzard'). ' ' . _('attached weight'). ': ' . $known_weight;
+#        logger('INFO', $logstring);
         
         if ($scale_number == 1){
             $scale_status_key = $status_scale1_key;

@@ -43,11 +43,11 @@ import pi_ager_cl_agingtable
 
 def kill_mi_thermometer():
     # check if /opt/ATC_MiThermometer/ATC_xxxxxx.py is running and then kill this process
-    stream = os.popen('pgrep -lf python3 | grep ATC_xxxxxx.py | wc -l')
+    stream = os.popen('pgrep -a python3 | grep ATC_xxxxxx.py | wc -l')
     output = stream.read().rstrip('\n')
     cl_fact_logger.get_instance().debug('Killing /opt/ATC_MiThermometer/ATC_xxxxxx.py')
     if (output != '0'):
-        os.system("pgrep -lf ATC_xxxxxx.py | grep ATC_xxxxxx.py | awk '{print $1}' | xargs kill")
+        os.system("pgrep -a python3 | grep ATC_xxxxxx.py | awk '{print $1}' | xargs kill")
         cl_fact_logger.get_instance().debug('ATC_xxxxxx.py terminated')
         
 # catch signal.SIGTERM and signal.SIGINT when killing main to gracefully shutdown system

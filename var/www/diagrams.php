@@ -209,7 +209,11 @@
                                     <div style="">
                                         <h4><?php 
 					                        include 'modules/chartsdata_diagrams.php';
-                                            $loop_duration = 5; // 5 seconds sensor measure loop
+                                            $loop_duration = 5; // 5 seconds sensor measure loop for all Raspi models but not Pi Zero W
+                                            $pi_model = exec('cat /sys/firmware/devicetree/base/model');
+                                            if (str_contains($pi_model, "Pi Zero W")) {
+                                                $loop_duration = 10;   // 10 seconds per loop
+                                            }
 											$temperatur_humidity_saving_period = intval($save_temperature_humidity_loops * $loop_duration  / 6.0) / 10.0; // precision 1 decimal 
 											echo _('storage interval of the sensor data in the database');
 							                echo ': ~ ' . $temperatur_humidity_saving_period . ' ';

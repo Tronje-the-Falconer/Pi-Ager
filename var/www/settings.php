@@ -22,7 +22,7 @@
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('operating values'); ?></h2>
                                 <!----------------------------------------------------------------------------------------Programme starten/stoppen-->
-                                <div class="hg_container">
+                                <div id="settings_container" class="hg_container">
                                     <h2>Pi-Ager</h2>
                                     <table style="width: 100%;">
                                     <tr>
@@ -180,8 +180,14 @@
                                                     print '<tr><td></td>
                                                     <td style="text-align: right;"></td><td><form action="scale_wizzard.php" method="post"> <input type="radio" name="scale_wizzard_radiobutton" value="' . $scale1_key . '" checked="checked"><label> '._('scale').'&nbsp1</label><br><input type="radio" name="scale_wizzard_radiobutton" value="' . $scale2_key . '"><label> '._('scale').'&nbsp2</label> </td>';
                                                     echo '<td>';
-                                                    echo "<button class=\"art-button\" type=\"submit\" name=\"scale_wizzard\" value=\"scale_wizzard\" onclick=\"return confirm('"._('attention').' ! \\n\\n'._('measurement on scales are stopped'). ' \\n' . _('please relieve the load cell completely') . "!');\">"._('calibrate wizzard')."</button>";
+                                                    # echo "<button class=\"art-button\" type=\"submit\" name=\"scale_wizzard\" value=\"scale_wizzard\" onclick=\"return confirm('"._('attention').' ! \\n\\n'._('measurement on scales are stopped'). ' \\n' . _('please relieve the load cell completely') . "!');\">"._('calibrate wizzard')."</button>";
+                                                    echo '<button id="wizzard_button" class="art-button" type="submit" name="scale_wizzard" value="scale_wizzard">' . _("calibrate wizzard") . '</button>';
                                                     print '</form></td></tr>';
+                                                    echo '<script>';
+                                                    echo 'document.getElementById("wizzard_button").addEventListener("click", function() {';
+                                                    echo 'confirm("' . _("attention") . ' ! \\n\\n' . _("measurement on scales are stopped") . ' \\n' . _("please relieve the load cell completely") . '!");';
+                                                    echo 'document.getElementById("wizzard_button").style.cursor = "progress"; document.getElementById("settings_container").style.cursor = "progress"; });';
+                                                    echo '</script>';
                                                 }
                                             } 
                                         ?>

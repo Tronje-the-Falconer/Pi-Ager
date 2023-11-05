@@ -90,7 +90,7 @@ pi_switch = True        # switch open
 
 def start_mi_thermometer():
     # check if /opt/ATC_MiThermometer/ATC_xxxxxx.py is allready running, if not then start this process
-    stream = os.popen('pgrep -lf python3 | grep ATC_xxxxxx.py | wc -l')
+    stream = os.popen('pgrep -a python3 | grep ATC_xxxxxx.py | wc -l')
     output = stream.read().rstrip('\n')
     cl_fact_logger.get_instance().debug('/opt/ATC_MiThermometer/ATC_xxxxxx.py checking: ' + str(output))
     if (output == '0'):

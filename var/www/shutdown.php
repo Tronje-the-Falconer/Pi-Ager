@@ -11,9 +11,16 @@
                                 ?>
                                 <img src="images/spinner.gif" alt=""/>
                                 <script>
+                                    window.addEventListener('beforeunload', (event) => {
+                                        // Cancel the event as stated by the standard.
+                                        event.preventDefault();
+                                        // Chrome requires returnValue to be set.
+                                        event.returnValue = '';
+                                    });
+                                    
                                     setTimeout(function(){
                                         document.getElementById("info-message").style.color="#000000";
-                                        window.location.href = "index.php";
+                                        window.location.href = "index.php?rand=" + Math.random();
                                     }, 10000); 
                                        
                                 </script>

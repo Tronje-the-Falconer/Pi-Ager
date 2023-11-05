@@ -5,13 +5,13 @@
 
     #programme Rss.py und/oder Reifetab.py starten/stoppen
     if (isset($_POST['main_start'])){
-        $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
-        if($grepmain == 0) {
+        $grepmain = exec('pgrep -a python3 | grep main.py');
+        if($grepmain == '') {
             shell_exec('sudo /var/sudowebscript.sh startmain');
             sleep (1); # 1 Sec auf start der Py-Datei warten
-            $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
+            $grepmain = exec('pgrep -a python3 | grep main.py');
             
-            if($grepmain != 0) {
+            if($grepmain != '') {
                 write_start_in_database($status_piager_key);
                 $logstring = 'main.py '._('manually started');
                 logger('INFO', $logstring);
@@ -23,7 +23,7 @@
                 logger('INFO', $logstring);
             }
         }
-        elseif($grepmain != 0){
+        elseif($grepmain != ''){
             write_start_in_database($status_piager_key);
             $logstring = 'main.py ' . _('is running');
             logger('INFO', $logstring);
@@ -48,12 +48,12 @@
         } else {
             $agingtable_starthour = 1;
         }
-        $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain'); #Rss.py
-        if($grepmain == 0) {
+        $grepmain = exec('pgrep -a python3 | grep main.py');
+        if($grepmain == '') {
             shell_exec('sudo /var/sudowebscript.sh startmain');
             sleep (1); # 1 Sec auf start der Py-Datei warten
-            $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain'); # RSS hat sich geändert daher neu setzen
-            if($grepmain != 0) {                
+            $grepmain = exec('pgrep -a python3 | grep main.py');
+            if($grepmain != '') {                
                 write_table_value($config_settings_table, $key_field, $agingtable_startperiod_key, $value_field, $agingtable_startperiod);
                 write_table_value($config_settings_table, $key_field, $agingtable_starthour_key, $value_field, $agingtable_starthour);
                 write_start_in_database($status_agingtable_key);
@@ -74,7 +74,7 @@
                 logger('INFO', $logstring);
             }
         }
-        elseif($grepmain != 0) {
+        elseif($grepmain != '') {
                 write_table_value($config_settings_table, $key_field, $agingtable_startperiod_key, $value_field, $agingtable_startperiod);
                 write_table_value($config_settings_table, $key_field, $agingtable_starthour_key, $value_field, $agingtable_starthour);
                 write_start_in_database($status_agingtable_key);
@@ -180,12 +180,13 @@
     }
      
     if (isset($_POST['admin_start_main'])){
-        $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
-        if($grepmain == 0) {
+        $grepmain = exec('pgrep -a python3 | grep main.py');
+        # echo "grepmain = " . $grepmain;
+        if ($grepmain == '') {
             shell_exec('sudo /var/sudowebscript.sh startmain');
             sleep (1); # 1 Sec auf start der Py-Datei warten
-            $grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
-            if($grepmain != 0) {
+            $grepmain = exec('pgrep -a python3 | grep main.py');
+            if($grepmain != '') {
                 $logstring = 'ADMIN main.py ' . _('manually started');
                 logger('INFO', $logstring);
             }
