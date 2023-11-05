@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-DE\n"
-"POT-Creation-Date: 2023-10-24 22:01+0200\n"
-"PO-Revision-Date: 2023-10-24 22:02+0200\n"
+"POT-Creation-Date: 2023-11-05 13:49+0100\n"
+"PO-Revision-Date: 2023-11-05 13:53+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Poedit-Basepath: ../../../../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: heating\n"
@@ -130,7 +130,7 @@ msgstr "Verzögerung Befeuchter"
 #: opt/pi-ager/pi_ager_cl_agingtable.py:183 var/www/admin.php:350
 #: var/www/config.php:66 var/www/config.php:147 var/www/config.php:152
 #: var/www/config.php:199 var/www/config.php:204 var/www/diagrams.php:81
-#: var/www/diagrams.php:216 var/www/index.php:308 var/www/index.php:1256
+#: var/www/diagrams.php:220 var/www/index.php:308 var/www/index.php:1256
 #: var/www/index.php:1257 var/www/index.php:1271 var/www/index.php:1272
 #: var/www/index.php:1300 var/www/index.php:1301 var/www/index.php:1332
 #: var/www/index.php:1333 var/www/manvals.php:99 var/www/manvals.php:103
@@ -184,14 +184,14 @@ msgstr "Dauer"
 #: opt/pi-ager/pi_ager_cl_agingtable.py:184 var/www/admin.php:508
 #: var/www/config.php:163 var/www/edit_agingtable.php:51 var/www/index.php:307
 #: var/www/index.php:785 var/www/modules/funclib.php:23
-#: var/www/modules/funclib.php:48 var/www/settings.php:421
+#: var/www/modules/funclib.php:48 var/www/settings.php:427
 msgid "hours"
 msgstr "Stunden"
 
 #: opt/pi-ager/pi_ager_cl_agingtable.py:184 var/www/diagrams.php:12
 #: var/www/diagrams.php:44 var/www/diagrams.php:80 var/www/index.php:770
 #: var/www/modules/funclib.php:20 var/www/modules/save_diagram_mode.php:29
-#: var/www/settings.php:408
+#: var/www/settings.php:414
 msgid "hour"
 msgstr "Stunde"
 
@@ -364,7 +364,7 @@ msgstr "GPIO-Zustände"
 #: opt/pi-ager/pi_ager_loop.py:604 opt/pi-ager/pi_ager_loop.py:605
 #: opt/pi-ager/pi_ager_loop.py:610 opt/pi-ager/pi_ager_loop.py:611
 #: opt/pi-ager/pi_ager_loop.py:613 opt/pi-ager/pi_ager_loop.py:614
-#: var/www/diagrams.php:1201 var/www/diagrams.php:1222 var/www/index.php:1132
+#: var/www/diagrams.php:1205 var/www/diagrams.php:1226 var/www/index.php:1132
 #: var/www/index.php:1152 var/www/modules/querystatus.php:195
 #: var/www/modules/querystatus.php:212
 msgid "heater"
@@ -387,14 +387,14 @@ msgstr "Heizung"
 #: opt/pi-ager/pi_ager_loop.py:742 opt/pi-ager/pi_ager_loop.py:743
 #: opt/pi-ager/pi_ager_loop.py:745 opt/pi-ager/pi_ager_loop.py:746
 #: opt/pi-ager/pi_ager_loop.py:1675 opt/pi-ager/pi_ager_loop.py:1743
-#: var/www/diagrams.php:1041 var/www/diagrams.php:1066
-#: var/www/diagrams.php:1152 var/www/diagrams.php:1177
-#: var/www/diagrams.php:1263 var/www/diagrams.php:1288
-#: var/www/diagrams.php:1374 var/www/diagrams.php:1399
-#: var/www/diagrams.php:1485 var/www/diagrams.php:1510
-#: var/www/diagrams.php:1596 var/www/diagrams.php:1621
-#: var/www/diagrams.php:1707 var/www/diagrams.php:1732
-#: var/www/diagrams.php:1818 var/www/diagrams.php:1843 var/www/index.php:1093
+#: var/www/diagrams.php:1045 var/www/diagrams.php:1070
+#: var/www/diagrams.php:1156 var/www/diagrams.php:1181
+#: var/www/diagrams.php:1267 var/www/diagrams.php:1292
+#: var/www/diagrams.php:1378 var/www/diagrams.php:1403
+#: var/www/diagrams.php:1489 var/www/diagrams.php:1514
+#: var/www/diagrams.php:1600 var/www/diagrams.php:1625
+#: var/www/diagrams.php:1711 var/www/diagrams.php:1736
+#: var/www/diagrams.php:1822 var/www/diagrams.php:1847 var/www/index.php:1093
 #: var/www/index.php:1221 var/www/modules/querystatus.php:268
 #: var/www/modules/write_config_db_logfile_txt.php:199
 #: var/www/modules/write_config_db_logfile_txt.php:211
@@ -419,22 +419,22 @@ msgstr "Ein"
 #: opt/pi-ager/pi_ager_loop.py:751 opt/pi-ager/pi_ager_loop.py:752
 #: opt/pi-ager/pi_ager_loop.py:754 opt/pi-ager/pi_ager_loop.py:755
 #: opt/pi-ager/pi_ager_loop.py:1671 opt/pi-ager/pi_ager_loop.py:1739
-#: var/www/diagrams.php:1043 var/www/diagrams.php:1045
-#: var/www/diagrams.php:1068 var/www/diagrams.php:1070
-#: var/www/diagrams.php:1154 var/www/diagrams.php:1156
-#: var/www/diagrams.php:1179 var/www/diagrams.php:1181
-#: var/www/diagrams.php:1265 var/www/diagrams.php:1267
-#: var/www/diagrams.php:1290 var/www/diagrams.php:1292
-#: var/www/diagrams.php:1376 var/www/diagrams.php:1378
-#: var/www/diagrams.php:1401 var/www/diagrams.php:1403
-#: var/www/diagrams.php:1487 var/www/diagrams.php:1489
-#: var/www/diagrams.php:1512 var/www/diagrams.php:1514
-#: var/www/diagrams.php:1598 var/www/diagrams.php:1600
-#: var/www/diagrams.php:1623 var/www/diagrams.php:1625
-#: var/www/diagrams.php:1709 var/www/diagrams.php:1711
-#: var/www/diagrams.php:1734 var/www/diagrams.php:1736
-#: var/www/diagrams.php:1820 var/www/diagrams.php:1822
-#: var/www/diagrams.php:1845 var/www/diagrams.php:1847 var/www/index.php:946
+#: var/www/diagrams.php:1047 var/www/diagrams.php:1049
+#: var/www/diagrams.php:1072 var/www/diagrams.php:1074
+#: var/www/diagrams.php:1158 var/www/diagrams.php:1160
+#: var/www/diagrams.php:1183 var/www/diagrams.php:1185
+#: var/www/diagrams.php:1269 var/www/diagrams.php:1271
+#: var/www/diagrams.php:1294 var/www/diagrams.php:1296
+#: var/www/diagrams.php:1380 var/www/diagrams.php:1382
+#: var/www/diagrams.php:1405 var/www/diagrams.php:1407
+#: var/www/diagrams.php:1491 var/www/diagrams.php:1493
+#: var/www/diagrams.php:1516 var/www/diagrams.php:1518
+#: var/www/diagrams.php:1602 var/www/diagrams.php:1604
+#: var/www/diagrams.php:1627 var/www/diagrams.php:1629
+#: var/www/diagrams.php:1713 var/www/diagrams.php:1715
+#: var/www/diagrams.php:1738 var/www/diagrams.php:1740
+#: var/www/diagrams.php:1824 var/www/diagrams.php:1826
+#: var/www/diagrams.php:1849 var/www/diagrams.php:1851 var/www/index.php:946
 #: var/www/index.php:1094 var/www/index.php:1224
 #: var/www/modules/querystatus.php:146 var/www/modules/querystatus.php:271
 #: var/www/modules/write_config_db_logfile_txt.php:129
@@ -456,7 +456,7 @@ msgstr "Kühlen"
 #: opt/pi-ager/pi_ager_loop.py:647 opt/pi-ager/pi_ager_loop.py:648
 #: opt/pi-ager/pi_ager_loop.py:653 opt/pi-ager/pi_ager_loop.py:654
 #: opt/pi-ager/pi_ager_loop.py:656 opt/pi-ager/pi_ager_loop.py:657
-#: var/www/diagrams.php:1423 var/www/diagrams.php:1444
+#: var/www/diagrams.php:1427 var/www/diagrams.php:1448
 msgid "humidifier"
 msgstr "Befeuchter"
 
@@ -471,7 +471,7 @@ msgstr "Umluft"
 #: opt/pi-ager/pi_ager_loop.py:685 opt/pi-ager/pi_ager_loop.py:686
 #: opt/pi-ager/pi_ager_loop.py:691 opt/pi-ager/pi_ager_loop.py:692
 #: opt/pi-ager/pi_ager_loop.py:694 opt/pi-ager/pi_ager_loop.py:695
-#: var/www/diagrams.php:1645 var/www/diagrams.php:1666
+#: var/www/diagrams.php:1649 var/www/diagrams.php:1670
 msgid "exhaust air"
 msgstr "Abluft"
 
@@ -479,7 +479,7 @@ msgstr "Abluft"
 #: opt/pi-ager/pi_ager_loop.py:707 opt/pi-ager/pi_ager_loop.py:708
 #: opt/pi-ager/pi_ager_loop.py:713 opt/pi-ager/pi_ager_loop.py:714
 #: opt/pi-ager/pi_ager_loop.py:716 opt/pi-ager/pi_ager_loop.py:717
-#: var/www/diagrams.php:1534 var/www/diagrams.php:1555
+#: var/www/diagrams.php:1538 var/www/diagrams.php:1559
 msgid "dehumidifier"
 msgstr "Entfeuchter"
 
@@ -487,7 +487,7 @@ msgstr "Entfeuchter"
 #: opt/pi-ager/pi_ager_loop.py:726 opt/pi-ager/pi_ager_loop.py:727
 #: opt/pi-ager/pi_ager_loop.py:732 opt/pi-ager/pi_ager_loop.py:733
 #: opt/pi-ager/pi_ager_loop.py:735 opt/pi-ager/pi_ager_loop.py:736
-#: var/www/config.php:189 var/www/diagrams.php:979 var/www/diagrams.php:1000
+#: var/www/config.php:189 var/www/diagrams.php:983 var/www/diagrams.php:1004
 #: var/www/index.php:1319 var/www/modules/querystatus.php:386
 msgid "light"
 msgstr "Licht"
@@ -496,7 +496,7 @@ msgstr "Licht"
 #: opt/pi-ager/pi_ager_loop.py:745 opt/pi-ager/pi_ager_loop.py:746
 #: opt/pi-ager/pi_ager_loop.py:751 opt/pi-ager/pi_ager_loop.py:752
 #: opt/pi-ager/pi_ager_loop.py:754 opt/pi-ager/pi_ager_loop.py:755
-#: var/www/diagrams.php:1090 var/www/diagrams.php:1111 var/www/index.php:1288
+#: var/www/diagrams.php:1094 var/www/diagrams.php:1115 var/www/index.php:1288
 #: var/www/modules/querystatus.php:354
 msgid "uv-light"
 msgstr "UV-Licht"
@@ -864,12 +864,12 @@ msgstr "Sensoren ändern"
 msgid "scales"
 msgstr "Waagen"
 
-#: var/www/admin.php:122 var/www/admin.php:154 var/www/diagrams.php:656
-#: var/www/diagrams.php:677 var/www/diagrams.php:701 var/www/diagrams.php:742
-#: var/www/diagrams.php:763 var/www/index.php:563 var/www/index.php:583
+#: var/www/admin.php:122 var/www/admin.php:154 var/www/diagrams.php:660
+#: var/www/diagrams.php:681 var/www/diagrams.php:705 var/www/diagrams.php:746
+#: var/www/diagrams.php:767 var/www/index.php:563 var/www/index.php:583
 #: var/www/index.php:606 var/www/index.php:647 var/www/index.php:669
 #: var/www/modules/start_stop_program.php:173
-#: var/www/modules/start_stop_program.php:178 var/www/scale_wizzard.php:27
+#: var/www/modules/start_stop_program.php:178 var/www/scale_wizzard.php:47
 #: var/www/settings.php:181
 msgid "scale"
 msgstr "Waage"
@@ -1094,12 +1094,13 @@ msgstr ""
 
 #: var/www/admin.php:471 var/www/admin.php:543 var/www/admin.php:653
 #: var/www/admin.php:670 var/www/admin.php:735 var/www/admin.php:808
-#: var/www/admin.php:1063 var/www/admin.php:1127 var/www/config.php:294
-#: var/www/edit_agingtable.php:116 var/www/manvals.php:149
-#: var/www/notification.php:141 var/www/notification.php:327
-#: var/www/notification.php:475 var/www/notification.php:583
-#: var/www/notification.php:708 var/www/notification.php:772
-#: var/www/notification.php:833 var/www/notification.php:906
+#: var/www/admin.php:1063 var/www/admin.php:1128 var/www/admin.php:1160
+#: var/www/config.php:294 var/www/edit_agingtable.php:116
+#: var/www/manvals.php:149 var/www/notification.php:141
+#: var/www/notification.php:327 var/www/notification.php:475
+#: var/www/notification.php:583 var/www/notification.php:708
+#: var/www/notification.php:772 var/www/notification.php:833
+#: var/www/notification.php:906
 msgid "save"
 msgstr "Speichern"
 
@@ -1170,7 +1171,8 @@ msgstr "Neustarten & Herunterfahren"
 msgid "ATTENTION: reboot system?"
 msgstr "ACHTUNG: System neu starten?"
 
-#: var/www/admin.php:556 var/www/modules/reboot.php:9 var/www/reboot.php:9
+#: var/www/admin.php:556 var/www/reboot.php:9
+#: var/www/reboot_set_ap_password.php:9
 msgid "reboot"
 msgstr "Neu starten"
 
@@ -1178,7 +1180,7 @@ msgstr "Neu starten"
 msgid "ATTENTION: shutdown system?"
 msgstr "ACHTUNG: System herunterfahren?"
 
-#: var/www/admin.php:557 var/www/modules/shutdown.php:9 var/www/shutdown.php:9
+#: var/www/admin.php:557 var/www/shutdown.php:9
 msgid "shutdown"
 msgstr "Herunterfahren"
 
@@ -1345,7 +1347,7 @@ msgstr "Alternative Firmware Datei:"
 msgid "upload new firmware file?"
 msgstr "Firmware Datei hochladen ?"
 
-#: var/www/admin.php:845 var/www/settings.php:388
+#: var/www/admin.php:845 var/www/settings.php:394
 msgid "upload"
 msgstr "Hochladen"
 
@@ -1402,126 +1404,144 @@ msgstr "Datum/Uhrzeit Format JJJJ-MM-TT HH:MM:SS z. B. 2023-01-31 16:05:09"
 msgid "ATTENTION: set date and time?"
 msgstr "ACHTUNG: Datum und Uhrzeit einstellen?"
 
-#: var/www/admin.php:1080 var/www/modules/system_reboot.php:39
-#: var/www/modules/system_reboot.php:47
+#: var/www/admin.php:1071 var/www/modules/system_reboot.php:39
 msgid "WLAN setup"
 msgstr "WLAN-Einrichtung"
 
-#: var/www/admin.php:1086
+#: var/www/admin.php:1088
 msgid "refresh"
 msgstr "Aktualisieren"
 
-#: var/www/admin.php:1097
+#: var/www/admin.php:1099
 msgid "No WLAN networks found"
 msgstr "Keine WLAN-Netzwerke gefunden"
 
-#: var/www/admin.php:1117
+#: var/www/admin.php:1119
 msgid "WLAN password"
 msgstr "WLAN-Kennwort"
 
-#: var/www/admin.php:1118
+#: var/www/admin.php:1120
 msgid "enter your WLAN password"
 msgstr "Geben Sie das WLAN-Passwort ein"
 
-#: var/www/admin.php:1119
+#: var/www/admin.php:1121
 msgid "WLAN Country"
 msgstr "WLAN Ländercode"
 
-#: var/www/admin.php:1120
-msgid "enter the country code for your wireless network, e.g. DE,GB or US"
-msgstr ""
-"Geben Sie den Ländercode für Ihr drahtloses Netzwerk ein, z. B. DE, GB oder "
-"US"
+#: var/www/admin.php:1122
+msgid "e.g. DE,GB,FR,AT,CH,US"
+msgstr "z.B. DE,GB,FR,AT,CH,US"
 
-#: var/www/admin.php:1127
+#: var/www/admin.php:1128
 msgid "ATTENTION: setup your WLAN?"
 msgstr "ACHTUNG: WLAN einrichten?"
 
-#: var/www/admin.php:1148
+#: var/www/admin.php:1150
+msgid "Pi-Ager Accesspoint"
+msgstr "Pi-Ager Zugangspunkt"
+
+#: var/www/admin.php:1156
+msgid "new password for accesspoint"
+msgstr "neues Passwort für Zugangspunkt"
+
+#: var/www/admin.php:1156
+msgid "password minimum length is 8 character"
+msgstr "das Passwort muss mindestens 8 Zeichen lang sein"
+
+#: var/www/admin.php:1160
+msgid "ATTENTION: reboot follows after saving new accesspoint password"
+msgstr ""
+"ACHTUNG: Nach dem Speichern des neuen Zugangspassworts folgt ein Neustart"
+
+#: var/www/admin.php:1178
 msgid "python"
 msgstr "Python"
 
-#: var/www/admin.php:1154
+#: var/www/admin.php:1184
 msgid "ATTENTION: stop"
 msgstr "ACHTUNG: Stop"
 
-#: var/www/admin.php:1154
+#: var/www/admin.php:1184
 msgid "stop"
 msgstr "Stop"
 
-#: var/www/admin.php:1155
+#: var/www/admin.php:1185
 msgid "start"
 msgstr "Start"
 
-#: var/www/calibrate_scale.php:11 var/www/modules/tara_scale.php:11
+#: var/www/calibrate_scale.php:31
 msgid "scale_wizzard"
 msgstr "Waagen Wizzard"
 
-#: var/www/calibrate_scale.php:11 var/www/modules/tara_scale.php:11
+#: var/www/calibrate_scale.php:31
 msgid "attached weight"
 msgstr "Angehangenes Gewicht"
 
-#: var/www/calibrate_scale.php:47 var/www/calibrate_scale.php:68
-#: var/www/calibrate_scale.php:73 var/www/header.php:171
-#: var/www/modules/tara_scale.php:44 var/www/scale_wizzard.php:38
-#: var/www/scale_wizzard.php:59
+#: var/www/calibrate_scale.php:67 var/www/calibrate_scale.php:93
+#: var/www/calibrate_scale.php:98 var/www/header.php:174
+#: var/www/modules/tara_scale.php:64 var/www/scale_wizzard.php:58
+#: var/www/scale_wizzard.php:89
 msgid "scale wizzard"
 msgstr "Waagen Wizzard"
 
-#: var/www/calibrate_scale.php:47 var/www/settings.php:142
+#: var/www/calibrate_scale.php:67 var/www/settings.php:142
 #: var/www/settings.php:145 var/www/settings.php:168 var/www/settings.php:171
 msgid "tara scale"
 msgstr "Tara Waage"
 
-#: var/www/calibrate_scale.php:49 var/www/settings.php:145
-#: var/www/settings.php:171 var/www/settings.php:183
+#: var/www/calibrate_scale.php:69 var/www/settings.php:145
+#: var/www/settings.php:171 var/www/settings.php:188
 msgid "please relieve the load cell completely"
 msgstr "Bitte Gewicht von der Waage entfernen"
 
-#: var/www/calibrate_scale.php:49
+#: var/www/calibrate_scale.php:69
 msgid "and press ok"
 msgstr "und Ok drücken"
 
-#: var/www/calibrate_scale.php:54
-msgid "relieve the load cell completely"
-msgstr "Gewicht von der Waage entfernen"
-
-#: var/www/calibrate_scale.php:54
+#: var/www/calibrate_scale.php:74
 msgid "ok"
 msgstr "Ok"
 
-#: var/www/calibrate_scale.php:55
+#: var/www/calibrate_scale.php:75
 msgid "cancel scale wizzard? referenceunit is set, tara will not be done!"
 msgstr ""
 "Wizzard unterberechen? Die Referenz Unit wird gespeichert, Tara wird nicht "
 "ausgeführt!"
 
-#: var/www/calibrate_scale.php:55 var/www/edit_agingtable.php:117
-#: var/www/scale_wizzard.php:48
+#: var/www/calibrate_scale.php:75 var/www/edit_agingtable.php:117
+#: var/www/scale_wizzard.php:68
 msgid "cancel"
 msgstr "Abbrechen"
 
-#: var/www/calibrate_scale.php:66 var/www/calibrate_scale.php:68
+#: var/www/calibrate_scale.php:79
+msgid "relieve the load cell completely"
+msgstr "Gewicht von der Waage entfernen"
+
+#: var/www/calibrate_scale.php:91 var/www/calibrate_scale.php:93
 msgid "calibration failed"
 msgstr "Kalibrierung fehlgeschlagen"
 
-#: var/www/calibrate_scale.php:66 var/www/calibrate_scale.php:68
+#: var/www/calibrate_scale.php:91 var/www/calibrate_scale.php:93
 msgid "calculated reference unit is 0"
 msgstr "Referenz Einheit ist kleiner 0"
 
-#: var/www/calibrate_scale.php:66 var/www/calibrate_scale.php:68
+#: var/www/calibrate_scale.php:91 var/www/calibrate_scale.php:93
 msgid "referenceunit is set to old value"
 msgstr "Referenz Einheit wird auf den alten Wert gesetzt"
 
-#: var/www/calibrate_scale.php:66 var/www/calibrate_scale.php:68
+#: var/www/calibrate_scale.php:91 var/www/calibrate_scale.php:93
 msgid "please try again"
 msgstr "Bitte neu versuchen"
 
-#: var/www/calibrate_scale.php:73
+#: var/www/calibrate_scale.php:98
 msgid "error on calibrating"
 msgstr "Fehler bei der Kalibrierung"
 
-#: var/www/changelog.php:5 var/www/header.php:164
+#: var/www/calibrate_scale.php:104 var/www/modules/tara_scale.php:74
+msgid "calibration aborted"
+msgstr "Kalibrierung abgebrochen"
+
+#: var/www/changelog.php:5 var/www/header.php:167
 msgid "changelog"
 msgstr "changelog"
 
@@ -1923,7 +1943,7 @@ msgstr ""
 "<br><br>"
 
 #: var/www/config.php:294 var/www/modules/write_config_db_logfile_txt.php:235
-#: var/www/settings.php:506
+#: var/www/settings.php:512
 msgid "general configuration"
 msgstr "Allgemeine Konfiguration"
 
@@ -1951,7 +1971,7 @@ msgstr "Monat"
 msgid "custom"
 msgstr "Benutzer def"
 
-#: var/www/diagrams.php:33 var/www/header.php:144 var/www/index.php:274
+#: var/www/diagrams.php:33 var/www/header.php:147 var/www/index.php:274
 #: var/www/modules/save_diagram_mode.php:29
 #: var/www/modules/save_diagram_mode.php:33
 #: var/www/modules/save_diagram_mode.php:37
@@ -1968,79 +1988,79 @@ msgstr "Monate"
 msgid "change"
 msgstr "ändern"
 
-#: var/www/diagrams.php:214
+#: var/www/diagrams.php:218
 msgid "storage interval of the sensor data in the database"
 msgstr "Speicherintervall der Daten in die Datenbank"
 
-#: var/www/diagrams.php:241 var/www/diagrams.php:261 var/www/diagrams.php:280
-#: var/www/diagrams.php:364 var/www/diagrams.php:413 var/www/diagrams.php:600
-#: var/www/diagrams.php:793 var/www/diagrams.php:813 var/www/diagrams.php:833
-#: var/www/diagrams.php:853 var/www/diagrams.php:922 var/www/diagrams.php:946
+#: var/www/diagrams.php:245 var/www/diagrams.php:265 var/www/diagrams.php:284
+#: var/www/diagrams.php:368 var/www/diagrams.php:417 var/www/diagrams.php:604
+#: var/www/diagrams.php:797 var/www/diagrams.php:817 var/www/diagrams.php:837
+#: var/www/diagrams.php:857 var/www/diagrams.php:926 var/www/diagrams.php:950
 #: var/www/index.php:362 var/www/index.php:382 var/www/index.php:401
 #: var/www/index.php:463 var/www/index.php:510 var/www/manvals.php:51
 msgid "temperature"
 msgstr "Temperatur"
 
-#: var/www/diagrams.php:301 var/www/diagrams.php:321 var/www/diagrams.php:340
-#: var/www/diagrams.php:364 var/www/diagrams.php:435 var/www/diagrams.php:443
+#: var/www/diagrams.php:305 var/www/diagrams.php:325 var/www/diagrams.php:344
+#: var/www/diagrams.php:368 var/www/diagrams.php:439 var/www/diagrams.php:447
 #: var/www/index.php:421 var/www/index.php:441 var/www/index.php:463
 #: var/www/index.php:531 var/www/index.php:539 var/www/manvals.php:74
 msgid "humidity"
 msgstr "Feuchte"
 
-#: var/www/diagrams.php:413 var/www/diagrams.php:600 var/www/diagrams.php:922
-#: var/www/diagrams.php:946 var/www/index.php:510
+#: var/www/diagrams.php:417 var/www/diagrams.php:604 var/www/diagrams.php:926
+#: var/www/diagrams.php:950 var/www/index.php:510
 msgid " - ϑ"
 msgstr " - ϑ"
 
-#: var/www/diagrams.php:435 var/www/diagrams.php:621 var/www/index.php:531
+#: var/www/diagrams.php:439 var/www/diagrams.php:625 var/www/index.php:531
 msgid " - φ"
 msgstr " - φ"
 
-#: var/www/diagrams.php:468 var/www/diagrams.php:489 var/www/diagrams.php:555
+#: var/www/diagrams.php:472 var/www/diagrams.php:493 var/www/diagrams.php:559
 msgid "dewpoint"
 msgstr "Taupunkt"
 
-#: var/www/diagrams.php:511 var/www/diagrams.php:531 var/www/diagrams.php:555
-#: var/www/diagrams.php:621 var/www/diagrams.php:629
+#: var/www/diagrams.php:515 var/www/diagrams.php:535 var/www/diagrams.php:559
+#: var/www/diagrams.php:625 var/www/diagrams.php:633
 msgid "humidity abs"
 msgstr "abs. Feuchte"
 
-#: var/www/diagrams.php:853 var/www/diagrams.php:876 var/www/diagrams.php:946
+#: var/www/diagrams.php:857 var/www/diagrams.php:880 var/www/diagrams.php:950
 msgid "Current"
 msgstr "Strom"
 
-#: var/www/diagrams.php:876
+#: var/www/diagrams.php:880
 msgid "Thermometer"
 msgstr "Thermometer"
 
-#: var/www/diagrams.php:1031 var/www/diagrams.php:1142
-#: var/www/diagrams.php:1253 var/www/diagrams.php:1364
-#: var/www/diagrams.php:1475 var/www/diagrams.php:1586
-#: var/www/diagrams.php:1697 var/www/diagrams.php:1808 var/www/index.php:1089
+#: var/www/diagrams.php:1035 var/www/diagrams.php:1146
+#: var/www/diagrams.php:1257 var/www/diagrams.php:1368
+#: var/www/diagrams.php:1479 var/www/diagrams.php:1590
+#: var/www/diagrams.php:1701 var/www/diagrams.php:1812 var/www/index.php:1089
 #: var/www/index.php:1238 var/www/index.php:1343
 msgid "status"
 msgstr "Status"
 
-#: var/www/diagrams.php:1058 var/www/diagrams.php:1169
-#: var/www/diagrams.php:1280 var/www/diagrams.php:1391
-#: var/www/diagrams.php:1502 var/www/diagrams.php:1613
-#: var/www/diagrams.php:1724 var/www/diagrams.php:1835
+#: var/www/diagrams.php:1062 var/www/diagrams.php:1173
+#: var/www/diagrams.php:1284 var/www/diagrams.php:1395
+#: var/www/diagrams.php:1506 var/www/diagrams.php:1617
+#: var/www/diagrams.php:1728 var/www/diagrams.php:1839
 msgid " "
 msgstr ""
 
-#: var/www/diagrams.php:1312 var/www/diagrams.php:1333 var/www/index.php:1120
+#: var/www/diagrams.php:1316 var/www/diagrams.php:1337 var/www/index.php:1120
 #: var/www/index.php:1143 var/www/modules/querystatus.php:186
 #: var/www/modules/querystatus.php:204
 msgid "cooler"
 msgstr "Kompressor"
 
-#: var/www/diagrams.php:1756 var/www/diagrams.php:1777
+#: var/www/diagrams.php:1760 var/www/diagrams.php:1781
 msgid "circulate air"
 msgstr "Umluft"
 
 #: var/www/edit_agingtable.php:26 var/www/edit_agingtable.php:32
-#: var/www/edit_agingtable.php:116 var/www/header.php:178
+#: var/www/edit_agingtable.php:116 var/www/header.php:181
 msgid "edit agingtable"
 msgstr "Editor"
 
@@ -2059,81 +2079,81 @@ msgid "edit agingtable:"
 msgstr "Reifetabelle editieren:"
 
 #: var/www/edit_agingtable.php:43 var/www/index.php:766 var/www/index.php:777
-#: var/www/settings.php:405 var/www/settings.php:413
+#: var/www/settings.php:411 var/www/settings.php:419
 msgid "phase"
 msgstr "Phase"
 
 #: var/www/edit_agingtable.php:44 var/www/index.php:778
-#: var/www/settings.php:414
+#: var/www/settings.php:420
 msgid "modus"
 msgstr "Modus"
 
 #: var/www/edit_agingtable.php:44 var/www/index.php:778
-#: var/www/settings.php:414
+#: var/www/settings.php:420
 msgid "aging-modus"
 msgstr "Reifemodus"
 
 #: var/www/edit_agingtable.php:45 var/www/index.php:779
-#: var/www/settings.php:415
+#: var/www/settings.php:421
 msgid "target humidity in %"
 msgstr "Sollwert Feuchte in %"
 
 #: var/www/edit_agingtable.php:46 var/www/index.php:780
-#: var/www/settings.php:416
+#: var/www/settings.php:422
 msgid "target temperature in °C"
 msgstr "Sollwert Temperatur in °C"
 
 #: var/www/edit_agingtable.php:47 var/www/index.php:781
-#: var/www/settings.php:417
+#: var/www/settings.php:423
 msgid "timer circulate ON duration"
 msgstr "Timer Umluft EIN Dauer"
 
 #: var/www/edit_agingtable.php:47 var/www/index.php:781
-#: var/www/settings.php:417
+#: var/www/settings.php:423
 msgid "timer of the circulation air ON duration in minutes"
 msgstr "Timer für Umluft EIN Dauer in Minuten"
 
 #: var/www/edit_agingtable.php:48 var/www/index.php:782
-#: var/www/settings.php:418
+#: var/www/settings.php:424
 msgid "timer circulate OFF duration"
 msgstr "Timer Umluft AUS Dauer"
 
 #: var/www/edit_agingtable.php:48 var/www/index.php:782
-#: var/www/settings.php:418
+#: var/www/settings.php:424
 msgid "timer of the circulation air OFF duration in minutes"
 msgstr "Timer für Umluft AUS Dauer in Minuten"
 
 #: var/www/edit_agingtable.php:49 var/www/index.php:783
-#: var/www/settings.php:419
+#: var/www/settings.php:425
 msgid "timer exhaust ON duration"
 msgstr "Timer Abluft EIN Dauer"
 
 #: var/www/edit_agingtable.php:49 var/www/index.php:783
-#: var/www/settings.php:419
+#: var/www/settings.php:425
 msgid "timer of the exhausting air ON duration in minutes"
 msgstr "Timer für Abluft EIN Dauer in Minuten"
 
 #: var/www/edit_agingtable.php:50 var/www/index.php:784
-#: var/www/settings.php:420
+#: var/www/settings.php:426
 msgid "timer exhaust OFF duration"
 msgstr "Timer Abluft AUS Dauer"
 
 #: var/www/edit_agingtable.php:50 var/www/index.php:784
-#: var/www/settings.php:420
+#: var/www/settings.php:426
 msgid "timer of the exhausting air OFF duration in minutes"
 msgstr "Timer für Abluft AUS Dauer in Minuten"
 
 #: var/www/edit_agingtable.php:51 var/www/index.php:785
-#: var/www/settings.php:421
+#: var/www/settings.php:427
 msgid "duration of hanging phase in hours"
 msgstr "Dauer der Reifephase in Stunden"
 
 #: var/www/edit_agingtable.php:111 var/www/index.php:879
-#: var/www/settings.php:492
+#: var/www/settings.php:498
 msgid "comment:"
 msgstr "Anmerkungen:"
 
-#: var/www/edit_agingtable.php:117 var/www/settings.php:183
+#: var/www/edit_agingtable.php:117 var/www/settings.php:188
 msgid "attention"
 msgstr "Achtung"
 
@@ -2151,7 +2171,7 @@ msgstr "Zeile löschen"
 
 #: var/www/edit_agingtable.php:127 var/www/notification.php:186
 #: var/www/notification.php:377 var/www/notification.php:511
-#: var/www/notification.php:610 var/www/settings.php:351
+#: var/www/notification.php:610 var/www/settings.php:357
 msgid "delete"
 msgstr "Löschen"
 
@@ -2173,31 +2193,31 @@ msgstr "Hinzufügen"
 msgid "running engine: "
 msgstr "Laufendes System: "
 
-#: var/www/header.php:130
+#: var/www/header.php:133
 msgid "by"
 msgstr "von"
 
-#: var/www/header.php:143
+#: var/www/header.php:146
 msgid "monitor"
 msgstr "Monitor"
 
-#: var/www/header.php:145
+#: var/www/header.php:148
 msgid "settings"
 msgstr "Einstellungen"
 
-#: var/www/header.php:146
+#: var/www/header.php:149
 msgid "admin"
 msgstr ""
 
-#: var/www/header.php:156
+#: var/www/header.php:159
 msgid "notification"
 msgstr "Nachrichten"
 
-#: var/www/header.php:157
+#: var/www/header.php:160
 msgid "logs"
 msgstr "Logs"
 
-#: var/www/header.php:158 var/www/webcam.php:28
+#: var/www/header.php:161 var/www/webcam.php:28
 msgid "webcam"
 msgstr "Webcam"
 
@@ -2218,20 +2238,20 @@ msgstr "Tage"
 #: var/www/modules/write_table_db.php:63 var/www/modules/write_table_db.php:72
 #: var/www/modules/write_table_db.php:75 var/www/modules/write_table_db.php:78
 #: var/www/modules/write_table_db.php:240
-#: var/www/modules/write_table_db.php:263 var/www/settings.php:191
+#: var/www/modules/write_table_db.php:263 var/www/settings.php:197
 msgid "agingtable"
 msgstr "Reifetabelle"
 
-#: var/www/index.php:779 var/www/settings.php:415
+#: var/www/index.php:779 var/www/settings.php:421
 msgid "humidity %"
 msgstr "Feuchte %"
 
-#: var/www/index.php:780 var/www/settings.php:416
+#: var/www/index.php:780 var/www/settings.php:422
 msgid "temperature °C"
 msgstr "Temperatur °C"
 
 #: var/www/index.php:807 var/www/modules/queryat.php:60
-#: var/www/settings.php:431
+#: var/www/settings.php:437
 msgid "no comment"
 msgstr "Keine Anmerkungen vorhanden"
 
@@ -2449,7 +2469,7 @@ msgstr "Zum Anfang"
 
 #: var/www/manvals.php:12 var/www/manvals.php:149
 #: var/www/modules/write_settings_db_logfile_txt.php:191
-#: var/www/settings.php:502
+#: var/www/settings.php:508
 msgid "manual values"
 msgstr "Manuelle Werte"
 
@@ -2680,18 +2700,6 @@ msgstr "Benutzerdefinierte Zeit für Diagramme geändert"
 msgid "model unknown! Please contact us."
 msgstr "Modell nicht gefunden! Bitte kontaktieren sie uns."
 
-#: var/www/modules/reboot.php:9 var/www/reboot.php:9
-msgid "You will automatically redirected to the start page"
-msgstr "Sie werden automatisch zur Startseite weitergeleitet"
-
-#: var/www/modules/shutdown.php:9 var/www/shutdown.php:9
-msgid ""
-"System shutdown after 10 seconds. You will automatically redirected to the "
-"start page"
-msgstr ""
-"Das System schaltet sich nach 10 Sekunden ab. Sie werden automatisch zur "
-"Startseite weitergeleitet"
-
 #: var/www/modules/start_stop_light.php:4
 msgid "light switched on manually"
 msgstr "Licht manuell eingeschaltet"
@@ -2702,7 +2710,7 @@ msgstr "Licht manuell ausgeschaltet"
 
 #: var/www/modules/start_stop_program.php:16
 #: var/www/modules/start_stop_program.php:63
-#: var/www/modules/start_stop_program.php:189
+#: var/www/modules/start_stop_program.php:190
 msgid "manually started"
 msgstr "manuell gestartet"
 
@@ -2715,7 +2723,7 @@ msgstr "gestartet"
 
 #: var/www/modules/start_stop_program.php:22
 #: var/www/modules/start_stop_program.php:73
-#: var/www/modules/start_stop_program.php:193
+#: var/www/modules/start_stop_program.php:194
 msgid "could not be started"
 msgstr "konnte nicht gestartet werden"
 
@@ -2768,11 +2776,11 @@ msgstr "Tarierung Waage läuft"
 msgid "measuring scale stopped"
 msgstr "Waagenmessungen angehalten"
 
-#: var/www/modules/start_stop_program.php:198
+#: var/www/modules/start_stop_program.php:199
 msgid "already running"
 msgstr "läuft schon"
 
-#: var/www/modules/start_stop_program.php:205 var/www/nextion_control.php:35
+#: var/www/modules/start_stop_program.php:206 var/www/nextion_control.php:35
 msgid "killed"
 msgstr "killed"
 
@@ -2785,20 +2793,12 @@ msgid "uv switched off manually"
 msgstr "UV manuell ausgeschaltet"
 
 #: var/www/modules/system_reboot.php:39
-msgid "WLAN configured with new SSID, password and country code"
-msgstr "WLAN mit neuer SSID, Passwort und Ländercode konfiguriert"
-
-#: var/www/modules/system_reboot.php:47
 msgid "WLAN SSID or password missing"
 msgstr "WLAN SSID oder Passwort fehlt"
 
-#: var/www/modules/tara_scale.php:42 var/www/modules/tara_scale.php:44
+#: var/www/modules/tara_scale.php:62 var/www/modules/tara_scale.php:64
 msgid "calibration done"
 msgstr "Kalibrierung abgeschlossen"
-
-#: var/www/modules/tara_scale.php:54
-msgid "calibration aborted"
-msgstr "Kalibrierung abgebrochen"
 
 #: var/www/modules/write_admin_db.php:38
 msgid "administration values"
@@ -3711,39 +3711,54 @@ msgstr ""
 "<img src=\"./images/icons/mqtt_published_events.png\" alt=\"\"></img><br>\n"
 "<br><br>"
 
-#: var/www/scale_wizzard.php:24
+#: var/www/reboot.php:9 var/www/reboot_set_ap_password.php:9
+msgid "You will automatically redirected to the start page"
+msgstr "Sie werden automatisch zur Startseite weitergeleitet"
+
+#: var/www/reboot_set_nm.php:9
+msgid "NetworkManager Setup"
+msgstr "NetworkManager-Einrichtung"
+
+#: var/www/reboot_set_nm.php:19
+msgid ""
+"Network Manager returned an error. Possible cause: incorrect WiFi parameters"
+msgstr ""
+"Network Manager hat einen Fehler zurückgegeben. Mögliche Ursache: falsche "
+"WiFi-Parameter"
+
+#: var/www/scale_wizzard.php:44
 msgid "measuring on scales stopped due to calibrating scale"
 msgstr "Waagenmessungen werden während des Kalibrierens angehalten"
 
-#: var/www/scale_wizzard.php:27
+#: var/www/scale_wizzard.php:47
 msgid "starting calibrate"
 msgstr "Kalibrierung starten"
 
-#: var/www/scale_wizzard.php:40
+#: var/www/scale_wizzard.php:60
 msgid "please attach a known weight to the loadcell"
 msgstr "Bitte ein bekanntes Gewicht an Waage"
 
-#: var/www/scale_wizzard.php:40
+#: var/www/scale_wizzard.php:60
 msgid "now and enter the weight into the form below:"
 msgstr "anhängen und dann das Gewicht hier eintragen:"
 
-#: var/www/scale_wizzard.php:42
+#: var/www/scale_wizzard.php:62
 msgid "weight"
 msgstr "Gewicht"
 
-#: var/www/scale_wizzard.php:42
+#: var/www/scale_wizzard.php:62
 msgid "gram"
 msgstr "Gramm"
 
-#: var/www/scale_wizzard.php:47
+#: var/www/scale_wizzard.php:67 var/www/scale_wizzard.php:78
 msgid "weight attatched"
 msgstr "Gewicht angehangen"
 
-#: var/www/scale_wizzard.php:48
+#: var/www/scale_wizzard.php:68
 msgid "cancel scale wizzard"
 msgstr "Wizzard abbrechen"
 
-#: var/www/scale_wizzard.php:59
+#: var/www/scale_wizzard.php:89
 msgid "no scale selected"
 msgstr "Keine Waage ausgewählt"
 
@@ -3751,25 +3766,25 @@ msgstr "Keine Waage ausgewählt"
 msgid "operating values"
 msgstr "Einstellungen"
 
-#: var/www/settings.php:47 var/www/settings.php:95 var/www/settings.php:210
+#: var/www/settings.php:47 var/www/settings.php:95 var/www/settings.php:216
 msgid "Backup is currently running!"
 msgstr "Backup läuft gerade!"
 
-#: var/www/settings.php:55 var/www/settings.php:103 var/www/settings.php:218
+#: var/www/settings.php:55 var/www/settings.php:103 var/www/settings.php:224
 msgid "Pi-Ager service not running!<br>"
 msgstr "Der Pi-Ager Service läuft nicht!<br>"
 
-#: var/www/settings.php:56 var/www/settings.php:104 var/www/settings.php:219
+#: var/www/settings.php:56 var/www/settings.php:104 var/www/settings.php:225
 msgid "Maybe you have proved that developers are not perfect!<br> "
 msgstr ""
 "Vielleicht haben Sie bewiesen, dass die Entwickler nicht perfekt "
 "sind ;-)<br> "
 
-#: var/www/settings.php:57 var/www/settings.php:105 var/www/settings.php:220
+#: var/www/settings.php:57 var/www/settings.php:105 var/www/settings.php:226
 msgid "please check logs or go to: <br>"
 msgstr "Bitte prüfen Sie die Logs oder gehen Sie auf: <br>"
 
-#: var/www/settings.php:59 var/www/settings.php:107 var/www/settings.php:222
+#: var/www/settings.php:59 var/www/settings.php:107 var/www/settings.php:228
 msgid "after fixing the error you have to reboot the system <br>"
 msgstr "Nach dem Beheben dss Fehlers, muss das System neu gebootet werden!<br>"
 
@@ -3828,93 +3843,101 @@ msgstr "Waagenmessung anhalten"
 msgid "stop scale"
 msgstr "Stop Waage"
 
-#: var/www/settings.php:183
-msgid "measurement on scales are stopped"
-msgstr "Waagenmessungen werden angehalten"
-
-#: var/www/settings.php:183
+#: var/www/settings.php:184
 msgid "calibrate wizzard"
 msgstr "Wizzard Kalibrierung"
 
-#: var/www/settings.php:228
+#: var/www/settings.php:188
+msgid "measurement on scales are stopped"
+msgstr "Waagenmessungen werden angehalten"
+
+#: var/www/settings.php:234
 msgid "Selected aging table"
 msgstr "Ausgewählte Reifetabelle"
 
-#: var/www/settings.php:268
+#: var/www/settings.php:274
 msgid "startphase"
 msgstr "Startphase"
 
-#: var/www/settings.php:272
+#: var/www/settings.php:278
 msgid "starthour of phase"
 msgstr "Start-Stunde der Phase"
 
-#: var/www/settings.php:289
+#: var/www/settings.php:295
 msgid "select new agingtable?"
 msgstr "Neue Reifetabelle auswählen?"
 
-#: var/www/settings.php:289
+#: var/www/settings.php:295
 msgid "select"
 msgstr "Auswählen"
 
-#: var/www/settings.php:303
+#: var/www/settings.php:309
 msgid "start agingtable?"
 msgstr "Reifetabelle starten?"
 
-#: var/www/settings.php:303
+#: var/www/settings.php:309
 msgid "manual values will be overwritten in database!"
 msgstr "Die manuellen Werte werden in der Datanbank überschrieben!"
 
-#: var/www/settings.php:303
+#: var/www/settings.php:309
 msgid "start agingtable"
 msgstr "Start Reifetabelle"
 
-#: var/www/settings.php:306
+#: var/www/settings.php:312
 msgid "stop agingtable?"
 msgstr "Reifetabelle anhalten?"
 
-#: var/www/settings.php:306
+#: var/www/settings.php:312
 msgid "pi-ager continues with the last values of the agingtable!"
 msgstr "Der Pi-Ager arbeitet mit den zuletzt gültigen Werten der Reifetabelle!"
 
-#: var/www/settings.php:306
+#: var/www/settings.php:312
 msgid "stop agingtable"
 msgstr "Reifetabelle anhalten"
 
-#: var/www/settings.php:350
+#: var/www/settings.php:356
 msgid "edit agingtable?"
 msgstr "Reifetabbelle editieren?"
 
-#: var/www/settings.php:350
+#: var/www/settings.php:356
 msgid "edit"
 msgstr "Editieren"
 
-#: var/www/settings.php:351
+#: var/www/settings.php:357
 msgid "delete agingtable?"
 msgstr "Reifetabelle löschen?"
 
-#: var/www/settings.php:352
+#: var/www/settings.php:358
 msgid "export agingtable?"
 msgstr "Reifetabelle exportieren?"
 
-#: var/www/settings.php:352
+#: var/www/settings.php:358
 msgid "export"
 msgstr "Exportieren"
 
-#: var/www/settings.php:388
+#: var/www/settings.php:394
 msgid "upload new agingtable?"
 msgstr "Neue Reifetabelle hochladen?"
 
-#: var/www/settings.php:402
+#: var/www/settings.php:408
 msgid "actual phase and hour"
 msgstr "Aktuelle Phase und Stunde"
 
-#: var/www/settings.php:503
+#: var/www/settings.php:509
 msgid "manual adjustments are not possible"
 msgstr "Manuelle Anpassungen sind nicht möglich"
 
-#: var/www/settings.php:503
+#: var/www/settings.php:509
 msgid "during fully automatic aging."
 msgstr "während der Pi-Ager über die Reifetabelle gesteuert wird."
+
+#: var/www/shutdown.php:9
+msgid ""
+"System shutdown after 10 seconds. You will automatically redirected to the "
+"start page"
+msgstr ""
+"Das System schaltet sich nach 10 Sekunden ab. Sie werden automatisch zur "
+"Startseite weitergeleitet"
 
 #: var/www/webcam.php:25
 msgid "download image file"
@@ -3931,6 +3954,14 @@ msgstr "Licht Schalter"
 #: var/www/webcam.php:57
 msgid "light manual on"
 msgstr "Licht manuell EIN"
+
+#~ msgid "enter the country code for your wireless network, e.g. DE,GB or US"
+#~ msgstr ""
+#~ "Geben Sie den Ländercode für Ihr drahtloses Netzwerk ein, z. B. DE, GB "
+#~ "oder US"
+
+#~ msgid "WLAN configured with new SSID, password and country code"
+#~ msgstr "WLAN mit neuer SSID, Passwort und Ländercode konfiguriert"
 
 #~ msgid "switch-on value humidity"
 #~ msgstr "Einschaltwert Feuchte"
