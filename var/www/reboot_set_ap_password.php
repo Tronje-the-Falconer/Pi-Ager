@@ -14,7 +14,7 @@
                                     $exec_data = [];
                                     $exec_status = 0;
                                     exec($cmd, $exec_data, $exec_status );
-                                    echo 'return status from nmcli : ' . $exec_status . '<br>';
+                                    # echo 'return status from nmcli : ' . $exec_status . '<br>';
                                     shell_exec('sudo /var/sudowebscript.sh reboot > /dev/null 2>&1 &');
                                 ?>
                                 <img src="images/spinner.gif" alt=""/>
