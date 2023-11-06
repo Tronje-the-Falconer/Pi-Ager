@@ -61,7 +61,7 @@ def signal_handler(signum, frame):
 pi_ager_init.set_language()
 
 cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
-cl_fact_logger.get_instance().info('\n\n')
+# cl_fact_logger.get_instance().info('\n\n')
 cl_fact_logger.get_instance().info(pi_ager_names.logspacer)
 cl_fact_logger.get_instance().info(_('Pi-Ager Main started'))
 cl_fact_logger.get_instance().info(pi_ager_names.logspacer)
@@ -168,6 +168,9 @@ finally:
     except Exception as cx_error:
         exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
         pass
-
+    
     # release GPIO resources, send message to log
     pi_ager_organization.goodbye()
+    
+    piager_version = pi_ager_database.get_table_value(pi_ager_names.system_table, pi_ager_names.pi_ager_version_key)
+    cl_fact_logger.get_instance().info('Pi-Ager revision : ' + piager_version + '\n\n')

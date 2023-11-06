@@ -38,11 +38,11 @@ case "$1" in
         python3 /opt/pi-ager/piager_upload_firmware.py /dev/serial0 $2 >/dev/null 2>/dev/null &
     ;;
     reboot) # reboot
-        sleep 3
+        sleep 4
         reboot
     ;;
     shutdown) #Shutdown 
-        sleep 3
+        sleep 4
         shutdown -h now
     ;;
     savewebcampicture) # macht ein Bild mit der Webcam

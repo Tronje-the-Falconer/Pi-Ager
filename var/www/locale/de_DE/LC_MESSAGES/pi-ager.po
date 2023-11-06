@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-DE\n"
-"POT-Creation-Date: 2023-11-05 13:49+0100\n"
-"PO-Revision-Date: 2023-11-05 13:53+0100\n"
+"POT-Creation-Date: 2023-11-06 08:38+0100\n"
+"PO-Revision-Date: 2023-11-06 08:40+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -3716,8 +3716,8 @@ msgid "You will automatically redirected to the start page"
 msgstr "Sie werden automatisch zur Startseite weitergeleitet"
 
 #: var/www/reboot_set_nm.php:9
-msgid "NetworkManager Setup"
-msgstr "NetworkManager-Einrichtung"
+msgid "NetworkManager WiFi Setup"
+msgstr "NetworkManager WiFi-Einrichtung"
 
 #: var/www/reboot_set_nm.php:19
 msgid ""
@@ -3725,6 +3725,21 @@ msgid ""
 msgstr ""
 "Network Manager hat einen Fehler zurückgegeben. Mögliche Ursache: falsche "
 "WiFi-Parameter"
+
+#: var/www/reboot_set_nm.php:27
+msgid ""
+" Pi-Ager is now rebooting. Disconnect your tablet, smartphone or notebook "
+"now from the Pi-Ager accesspoint and connect to your WiFi router. Then you "
+"can access your Pi-Ager by entering the IP Address "
+msgstr ""
+" Der Pi-Ager wird jetzt neu gestartet. Trennen Sie nun Ihr Tablet, "
+"Smartphone oder Notebook vom Pi-Ager-Zugangspunkt und verbinden Sie es mit "
+"Ihrem WLAN-Router. Dann können Sie auf Ihren Pi-Ager zugreifen, indem Sie "
+"die IP-Adresse "
+
+#: var/www/reboot_set_nm.php:27
+msgid " into your browser address field."
+msgstr " in das Adressfeld Ihres Browsers eingeben."
 
 #: var/www/scale_wizzard.php:44
 msgid "measuring on scales stopped due to calibrating scale"
