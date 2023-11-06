@@ -10,7 +10,7 @@
     }
     
     function do_reboot( $msg ) {
-        echo '<script> alert("' . $msg . '\n' . _('Pi-Ager will be rebooted now') . '"); window.location.href="reboot.php"; </script>';
+        echo '<script> alert("' . $msg . '\n' . _('Pi-Ager will be rebooted now') . '"); window.location.href="reboot.php?rand=" + Math.random(); </script>';
         //header("Location: /reboot.php");
         //shell_exec('sudo /var/sudowebscript.sh reboot > /dev/null 2>&1 &');
         //die();

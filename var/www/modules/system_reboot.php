@@ -3,7 +3,7 @@
     if (isset ($_POST['reboot'])){
         logger('DEBUG', 'button reboot pressed');
         unset($_POST['reboot']);
-        shell_exec('sudo /var/sudowebscript.sh reboot > /dev/null 2>&1 &');
+        # shell_exec('sudo /var/sudowebscript.sh reboot > /dev/null 2>&1 &');
         echo '<script> window.location.href = "reboot.php?rand=" + Math.random();</script>';
     }
 
