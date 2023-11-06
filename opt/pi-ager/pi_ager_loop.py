@@ -1194,7 +1194,6 @@ def simple_humidity_control():
     """
     global setpoint_humidity
     global humidifier_hysteresis
-    global dehumidifier_hysteresis
     global hysteresis_offset
     global sensor_humidity
     global humidify_delay_switch
@@ -1279,6 +1278,9 @@ def doMainLoop():
     global switch_on_humidifier           #  Einschaltfeuchte
     global switch_off_humidifier          #  Ausschaltfeuchte
     global saturation_point               # sensor saturation point
+    global switch_on_cooling_compressor
+    global switch_off_cooling_compressor
+
     global settings
     global status_circulating_air         #  Umluft
     global status_exhaust_air             #  (Abluft-)Luftaustausch
