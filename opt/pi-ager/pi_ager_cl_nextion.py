@@ -482,10 +482,10 @@ class cl_nextion( threading.Thread ):
     def db_get_base_values(self):
         status_piager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key )
         
-        temp_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
-        humidity_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)
-        dewpoint_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_dewpoint_key)
-        humabs = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_abs_key)
+        temp_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.temperature_avg_key)
+        humidity_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.humidity_avg_key)
+#        dewpoint_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_dewpoint_key)
+        humabs = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.humidity_abs_avg_key)
         temp_soll = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key)
         humitidy_soll = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key)
     
@@ -493,7 +493,7 @@ class cl_nextion( threading.Thread ):
         values['status_piager'] = status_piager
         values['temp_ist'] = temp_ist
         values['humidity_ist'] = humidity_ist
-        values['dewpoint_ist'] = dewpoint_ist
+#        values['dewpoint_ist'] = dewpoint_ist
         values['humabs'] = humabs
         values['temp_soll'] = temp_soll
         values['humitidy_soll'] = humitidy_soll
@@ -670,14 +670,14 @@ class cl_nextion( threading.Thread ):
         status_piager = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_pi_ager_key )
         secondsensortype = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.sensorsecondtype_key)  # disabled if 0
         
-        temp_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_temperature_key)
-        humidity_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_key)
+        temp_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.temperature_avg_key)
+        humidity_ist = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.humidity_avg_key)
 
         temp_soll = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key)
         humitidy_soll = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key)
 
         humabs_ext = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.second_sensor_humidity_abs_key)
-        humabs = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.sensor_humidity_abs_key)
+        humabs = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.humidity_abs_avg_key)
         
         await self.client.set('txt_temp_set.txt', "%.1f" % (temp_soll))
         await self.client.set('txt_humid_set.txt', "%.1f" % (humitidy_soll))

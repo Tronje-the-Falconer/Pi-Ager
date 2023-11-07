@@ -710,4 +710,37 @@ def update_table_field( table, field, value ):
         open_database()
         execute_query('UPDATE ' + table + ' SET ' + field + '=' + str(value) + ' WHERE id = 1' )
         close_database()
+        
+def is_table_empty( table ):
+    """
+    check if table is empty
+    return True, if empty, else False
+    """
+    sql = 'SELECT COUNT(*) as count FROM ' + table
+    with globals.lock:
+        open_database()
+        execute_query(sql)
+        row = cursor.fetchone()
+        close_database()
+    
+    if (row == None):
+        return True
+    numRows = row['count']
+    if (numRows == 0):
+        return True
+    else:
+        return False
+        
+def clear_atc_data():
+    """
+    clear MiTemp sensor data in DB
+    """
+    if (is_table_empty('atc_data') == False):
+        sql = 'UPDATE atc_data SET temperature = NULL, humidity = NULL, battvolt = NULL, battpercent = NULL, last_change = NULL WHERE id = 1'
+        with globals.lock:
+            open_database()
+            execute_query(sql)
+            close_database()
+
+
                

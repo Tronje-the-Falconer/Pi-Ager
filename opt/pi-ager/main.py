@@ -49,7 +49,7 @@ def kill_mi_thermometer():
     if (output != '0'):
         os.system("pgrep -a python3 | grep ATC_xxxxxx.py | awk '{print $1}' | xargs kill")
         cl_fact_logger.get_instance().debug('ATC_xxxxxx.py terminated')
-        
+    
 # catch signal.SIGTERM and signal.SIGINT when killing main to gracefully shutdown system
 def signal_handler(signum, frame):
     cl_fact_logger.get_instance().debug('SIGTERM or SIGINT issued---------------------------------------------------------')
@@ -119,6 +119,14 @@ except Exception as cx_error:
 # init defrost state off
 pi_ager_database.write_startstop_status_in_database(pi_ager_names.status_defrost_key, 0)
 
+# init MiThermometer data in DB
+pi_ager_database.clear_atc_data()
+pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.second_sensor_temperature_key, None)
+pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.second_sensor_humidity_key, None)
+pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.second_sensor_dewpoint_key, None)
+pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.second_sensor_humidity_abs_key, None)
+
+# now enter pi-ager control loop ( = backend )
 try:
     pi_ager_loop.autostart_loop()
     cl_fact_logger.get_instance().debug('in main try at end -------------------------------------------------------------------')
