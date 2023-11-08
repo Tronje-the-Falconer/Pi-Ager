@@ -5,8 +5,8 @@
         unset($_POST['shutdown']);
 #        $date = date('d.m.Y H:i:s');
 #        shell_exec('sudo /var/sudowebscript.sh shutdown > /dev/null 2>&1 &');
-        echo '<script> window.location.href = "shutdown.php?rand=" + Math.random();</script>';
-#        header("Location: /shutdown.php");
+#        echo '<script> window.location.href = "shutdown.php?rand=" + Math.random();</script>';
+        header("Location: /shutdown.php?rand=". rand() );
 #        print '<p id=\'info-message\' style=\'color: #ff0000; font-size: 20px;\'><b>'. (_("system shutdown in 10 seconds")) .'</b><br>' . date("m/d/y h:i:s a") . ' </p>';        
 #        die();
         

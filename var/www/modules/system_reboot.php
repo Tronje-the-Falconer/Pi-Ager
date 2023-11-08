@@ -4,7 +4,8 @@
         logger('DEBUG', 'button reboot pressed');
         unset($_POST['reboot']);
         # shell_exec('sudo /var/sudowebscript.sh reboot > /dev/null 2>&1 &');
-        echo '<script> window.location.href = "reboot.php?rand=" + Math.random();</script>';
+        # echo '<script> window.location.href = "reboot.php?rand=" + Math.random();</script>';
+        header("Location: ../reboot.php?rand=" . rand() );
     }
 
     if (isset ($_POST['setWLANconfig'])){
@@ -33,7 +34,8 @@
             $cmd = "sudo nmcli device wifi connect " . "'" . $selected_ssid . "' password " . "'" . $wlanpassword . "' ifname wlan0";
             $htmlcmd = base64_encode($cmd);
             $randnum = rand();
-            echo '<script> window.location.href = \'reboot_set_nm.php?htmlcmd=' . $htmlcmd . '&rand=' . $randnum . '\'' . ';</script>';
+            # echo '<script> window.location.href = \'reboot_set_nm.php?htmlcmd=' . $htmlcmd . '&rand=' . $randnum . '\'' . ';</script>';
+            header("Location: ../reboot_set_nm.php?htmlcmd=" . $htmlcmd . "&rand=" . $randnum );
         }
         else {
             print '<script> alert("'. (_("WLAN setup")) . " : " . (_("WLAN SSID or password missing")) .'"); </script>';
@@ -48,6 +50,7 @@
         $nmcli_set_password_cmd = "sudo nmcli con modify PI_AGER_AP 802-11-wireless-security.psk " . "'" . $new_password . "'";
         $htmlcmd = base64_encode($nmcli_set_password_cmd);
         $randnum = rand();
-        echo '<script> window.location.href = \'reboot_set_ap_password.php?htmlcmd=' . $htmlcmd . '&rand=' . $randnum . '\'' . ';</script>';
+        # echo '<script> window.location.href = \'reboot_set_ap_password.php?htmlcmd=' . $htmlcmd . '&rand=' . $randnum . '\'' . ';</script>';
+        header("Location: ../reboot_set_ap_password.php?htmlcmd=" . $htmlcmd . "&rand=" . rand() );
     }    
 ?>
