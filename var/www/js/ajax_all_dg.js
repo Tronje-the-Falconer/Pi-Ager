@@ -107,7 +107,9 @@ async function handleContentAlldg( msg ) {
     scales_chart.data.labels = scale_timestamps_js;
     scales_chart.data.datasets[0].data = myObj.scale1_dataset;
     scales_chart.data.datasets[1].data = myObj.scale2_dataset;
-
+    scales_chart.data.datasets[2].data = myObj.scale1_take_off_weight_dataset;
+    scales_chart.data.datasets[3].data = myObj.scale2_take_off_weight_dataset;
+    
     light_chart.data.labels = timestamps_light_js;
     light_chart.data.datasets[0].data = myObj.light_dataset;
 

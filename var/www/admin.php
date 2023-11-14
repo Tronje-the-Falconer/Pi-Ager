@@ -118,7 +118,7 @@
                                         <!----------------------------------------------------------------------------------------Waagen-->
                                     <table style="width: 100%;" class="miniature_writing">
                                         <tr>
-                                            <td rowspan="16" class="td_png_icon"><h3><?php echo _('scales'); ?></h3><img src="images/icons/scale_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_scales_blockFunction()"><?php echo _('help'); ?></button></td>
+                                            <td rowspan="18" class="td_png_icon"><h3><?php echo _('scales'); ?></h3><img src="images/icons/scale_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_scales_blockFunction()"><?php echo _('help'); ?></button></td>
                                             <td colspan="3"><h3><?php echo _('scale'); ?> 1</h3></td>
                                         </tr>
                                         <tr>
@@ -132,7 +132,11 @@
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
                                             <td class="text_left_padding"><input name="saving_period_scale1_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="5" max="300" step="1" required value=<?php echo $saving_period_scale1; ?>></td>
-                                        </tr>                                        
+                                        </tr>
+                                        <tr>
+                                            <td class="text_left_padding"><?php echo _('starting weight') . ' [g]'; ?>:</td>
+                                            <td class="text_left_padding"><input name="take_off_weight_scale1_admin" type="number" style="width: 90%;" maxlength="6" size="2" min="0" max="100000" step="1" required value=<?php echo $take_off_weight_scale1; ?>></td>
+                                        </tr>
                                         <tr>
                                             <td class="text_left_padding"><?php # echo _('measuring interval'); ?><!--:--></td>
                                             <td class="text_left_padding"><input name="measuring_interval_scale1_admin" type="hidden" style="width: 90%;" min="2" max="20" step="1" required value=<?php echo $measuring_interval_scale1; ?>></td>
@@ -141,7 +145,6 @@
                                             <td class="text_left_padding"><?php # echo _('measuring duration'); ?><!--:--></td>
                                             <td class="text_left_padding"><input name="measuring_duration_scale1_admin" type="hidden" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $measuring_duration_scale1; ?>></td>
                                         </tr>
-
                                         <tr>
                                             <td class="text_left_padding"><?php # echo _('samples'); ?><!--:--></td>
                                             <td class="text_left_padding"><input name="samples_scale1_admin" type="hidden" style="width: 90%;" maxlength="4" size="2" min="2" max="25" step="1" required value=<?php echo $samples_scale1; ?>></td>
@@ -150,6 +153,7 @@
                                             <td class="text_left_padding"><?php # echo _('spikes'); ?><!--:--></td>
                                             <td class="text_left_padding"><input type="hidden" name="spikes_scale1_admin" type="number" maxlength="4" size="2" required value=<?php echo $spikes_scale1; ?>></td>
                                         </tr>
+
                                         <tr>
                                             <td colspan="2"><h3><?php echo _('scale'); ?> 2</h3></td>
                                         </tr>
@@ -164,6 +168,10 @@
                                         <tr>
                                             <td class="text_left_padding"><?php echo _('saving period'); ?>:</td>
                                             <td class="text_left_padding"><input name="saving_period_scale2_admin" type="number" style="width: 90%;" maxlength="4" size="2" min="5" max="300" step="1" required value=<?php echo $saving_period_scale2; ?>></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="text_left_padding"><?php echo _('starting weight') . ' [g]'; ?>:</td>
+                                            <td class="text_left_padding"><input name="take_off_weight_scale2_admin" type="number" style="width: 90%;" maxlength="6" size="2" min="0" max="100000" step="1" required value=<?php echo $take_off_weight_scale2; ?>></td>
                                         </tr>                                        
                                         <tr>
                                             <td class="text_left_padding"><?php # echo _('measuring interval'); ?><!--:--></td>
@@ -173,7 +181,6 @@
                                             <td class="text_left_padding"><?php # echo _('measuring duration'); ?><!--:--></td>
                                             <td class="text_left_padding"><input name="measuring_duration_scale2_admin" type="hidden" style="width: 90%;" maxlength="4" size="2" min="1" required value=<?php echo $measuring_duration_scale2; ?>></td>
                                         </tr>
-
                                         <tr>
                                             <td class="text_left_padding"><?php # echo _('samples'); ?><!--:--></td>
                                             <td class="text_left_padding"><input name="samples_scale2_admin" type="hidden" style="width: 90%;" maxlength="4" size="2" min="2" max="25" step="1" required value=<?php echo $samples_scale2; ?>></td>
@@ -182,6 +189,7 @@
                                             <td class="text_left_padding"><?php # echo _('spikes'); ?><!--:--></td>
                                             <td class="text_left_padding"><input type="hidden" name="spikes_scale2_admin" type="number" maxlength="4" size="2" required value=<?php echo $spikes_scale2; ?>></td>
                                         </tr>
+
                                     </table>
                                     <script>
                                         function help_scales_blockFunction() {

@@ -300,6 +300,7 @@
         global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key;
         global $meat1_sensor_name_json_key, $meat2_sensor_name_json_key, $meat3_sensor_name_json_key, $meat4_sensor_name_json_key;
         global $sensorsecondtype_key, $sensorbus_key;
+        global $take_off_weight_scale1_key, $take_off_weight_scale2_key;
         
         open_connection(); 
         $sql = 'SELECT * FROM ' . $current_values_table;
@@ -331,6 +332,10 @@
         $values['sensorsecondtype'] = $sensorsecondtype; 
         $values['sensorbus'] = $sensorbus;
         
+        $take_off_weight_scale1 = intval(get_table_value($config_settings_table, $take_off_weight_scale1_key));
+        $take_off_weight_scale2 = intval(get_table_value($config_settings_table, $take_off_weight_scale2_key));
+        $values['take_off_weight_scale1'] = $take_off_weight_scale1;
+        $values['take_off_weight_scale2'] = $take_off_weight_scale2;
         return $values;
     }
 
@@ -909,12 +914,13 @@
     function write_admin($language, $referenceunit_scale1, $measuring_interval_scale1, $measuring_duration_scale1, $saving_period_scale1, $samples_scale1, $spikes_scale1, $offset_scale1,
                             $referenceunit_scale2, $measuring_interval_scale2, $measuring_duration_scale2, $saving_period_scale2, $samples_scale2, $spikes_scale2, $offset_scale2,
                             $temp_sensor1, $temp_sensor2, $temp_sensor3, $temp_sensor4, $switch_control_uv_light_admin, $switch_control_light_admin, $current_check_active_admin, $current_threshold_admin,
-                            $repeat_event_cycle_admin)
+                            $repeat_event_cycle_admin, $take_off_weight_scale1_admin, $take_off_weight_scale2_admin)
     {
         global $value_field, $last_change_field, $key_field, $config_settings_table, $settings_scale1_table, $settings_scale2_table, $sensortype_key, $language_key;
         global $referenceunit_key, $scale_measuring_interval_key, $measuring_duration_key, $saving_period_key, $samples_key, $spikes_key, $offset_key;
         global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key, $switch_control_uv_light_key, $switch_control_light_key;
         global $id_field, $config_current_check_table, $current_check_active_field, $current_threshold_field, $repeat_event_cycle_field;
+        global $take_off_weight_scale1_key, $take_off_weight_scale2_key;
         
         open_connection();
         
@@ -937,6 +943,7 @@
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($samples_scale1) . ' WHERE ' . $key_field . ' = "' . $samples_key . '"');
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($spikes_scale1) . ' WHERE ' . $key_field . ' = "' . $spikes_key . '"');
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($offset_scale1) . ' WHERE ' . $key_field . ' = "' . $offset_key . '"');        
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($take_off_weight_scale1_admin) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $take_off_weight_scale1_key . '"');
         
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($referenceunit_scale2) . ' WHERE ' . $key_field . ' = "' . $referenceunit_key . '"');
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($measuring_interval_scale2) . ' WHERE ' . $key_field . ' = "' . $scale_measuring_interval_key . '"');
@@ -945,6 +952,7 @@
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($samples_scale2) . ' WHERE ' . $key_field . ' = "' . $samples_key . '"');
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($spikes_scale2) . ' WHERE ' . $key_field . ' = "' . $spikes_key . '"');
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($offset_scale2) . ' WHERE ' . $key_field . ' = "' . $offset_key . '"');       
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($take_off_weight_scale2_admin) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $take_off_weight_scale2_key . '"');
         
         close_database();
     }

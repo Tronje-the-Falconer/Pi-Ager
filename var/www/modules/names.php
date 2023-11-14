@@ -164,6 +164,8 @@ $humidity_abs_avg_key = 'humidity_abs_avg';
 $humidifier_hysteresis_key = 'humidifier_hysteresis';
 $dehumidifier_hysteresis_key = 'dehumidifier_hysteresis';
 $hysteresis_offset_key = 'hysteresis_offset';
+$take_off_weight_scale1_key = 'take_off_weight_scale1';
+$take_off_weight_scale2_key = 'take_off_weight_scale2';
 
 #-----------------------------table fields;
 $key_field = 'key';

@@ -697,7 +697,36 @@
                                                     cubicInterpolationMode: 'monotone',
                                                     fill: false,
                                                     spanGaps: true
-                                                }]
+                                                },
+                                                {
+                                                    label: '<?php echo _("take-off weight") . " " . _("scale"); ?> 1',
+                                                    yAxisID: 'scale1',
+                                                    data: <?php echo json_encode($scale1_take_off_weight_dataset);?>,
+                                                    backgroundColor: '#05F700',
+                                                    borderColor: '#05F700',
+                                                    borderWidth: 0,
+                                                    pointRadius: 1, pointHitRadius: 5,
+                                                    pointStyle: 'rect',
+                                                    // cubicInterpolationMode: 'monotone',
+                                                    borderDash: [10,10],
+                                                    fill: false,
+                                                    spanGaps: true
+                                                },
+                                                {
+                                                    label: '<?php echo _("take-off weight") . " " . _("scale"); ?> 2',
+                                                    yAxisID: 'scale2',
+                                                    data: <?php echo json_encode($scale2_take_off_weight_dataset);?>,
+                                                    backgroundColor: '#FFC400',
+                                                    borderColor: '#FFC400',
+                                                    borderWidth: 0,
+                                                    pointRadius: 1, pointHitRadius: 5,
+                                                    pointStyle: 'rect',
+                                                    // cubicInterpolationMode: 'monotone',
+                                                    borderDash: [10,10],
+                                                    fill: false,
+                                                    spanGaps: true
+                                                }                                                
+                                                ]
                                             },
                                             options: {
                                                 title: {
@@ -718,6 +747,10 @@
                                                             if (tooltipItem.datasetIndex === 0) {
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' g';
                                                             } else if (tooltipItem.datasetIndex === 1) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' g';
+                                                            } else if (tooltipItem.datasetIndex === 2) {
+                                                                return Number(tooltipItem.yLabel).toFixed(1) + ' g';
+                                                            } else if (tooltipItem.datasetIndex === 3) {
                                                                 return Number(tooltipItem.yLabel).toFixed(1) + ' g';
                                                             }
                                                         }

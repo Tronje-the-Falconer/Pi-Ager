@@ -130,18 +130,36 @@
                                                 
                                                 if ($grepmain == 0 or $status_scale1 == 0) {
                                                     $weight_scale1 = '-----';
+                                                    $weight_loss_scale1 = '-----';
                                                 }
                                                 else {
                                                     $data_from_db = get_table_value($current_values_table, $scale1_key);
                                                     if ($data_from_db === null) {
                                                         $weight_scale1 = '-----';
+                                                        $weight_loss_scale1 = '-----';
                                                     }
                                                     else {
                                                         $weight_scale1 = round($data_from_db, 0);
+                                                        $take_off_weight_scale1 = intval(get_table_value($config_settings_table, $take_off_weight_scale1_key));
+                                                        if ($take_off_weight_scale1 == 0) {
+                                                            $weight_loss_scale1 = '-----';
+                                                        }
+                                                        else {
+                                                            $diff = $take_off_weight_scale1 - $weight_scale1;
+                                                            if ($weight_scale1 <= 0 || $diff < 0) {
+                                                                $weight_loss_scale1 = '0g (0.0%)';
+                                                            }
+                                                            else {
+                                                                $number = round(($diff / $take_off_weight_scale1 * 100), 1);
+                                                                $num_fmt = number_format($number, 1, '.', '');
+                                                                $weight_loss_scale1 = $diff . 'g (' . $num_fmt . '%)';
+                                                            }
+                                                        }
                                                     }
                                                 }
                                                 if ($grepmain == 0 or $status_scale2 == 0) {
                                                     $weight_scale2 = '-----';
+                                                    $weight_loss_scale2 = '-----';
                                                 }
                                                 else {
                                                     $data_from_db = get_table_value($current_values_table, $scale2_key);
@@ -150,6 +168,21 @@
                                                     }
                                                     else {
                                                         $weight_scale2 = round($data_from_db, 0);
+                                                        $take_off_weight_scale2 = intval(get_table_value($config_settings_table, $take_off_weight_scale2_key));
+                                                        if ($take_off_weight_scale2 == 0) {
+                                                            $weight_loss_scale2 = '-----';
+                                                        }
+                                                        else {
+                                                            $diff = $take_off_weight_scale2 - $weight_scale2;
+                                                            if ($weight_scale2 <= 0 || $diff < 0) {
+                                                                $weight_loss_scale2 = '0g (0.0%)';
+                                                            }
+                                                            else {
+                                                                $number = round(($diff / $take_off_weight_scale2 * 100), 1);
+                                                                $num_fmt = number_format($number, 1, '.', '');
+                                                                $weight_loss_scale2 = $diff . 'g (' . $num_fmt . '%)';
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             ?>
@@ -250,21 +283,27 @@
                                 <div class="hg_container">
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            
+                                            <td width=50%></td>
+                                            <td width=50%></td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                <img src="images/icons/scale_42x42.png" alt="">1
-                                            </td>
-                                            <td>
-                                                <img src="images/icons/scale_42x42.png" alt="">2
-                                            </td>
+                                            <td><img src="images/icons/scale_42x42.png" alt="">1</td>
+                                            <td><img src="images/icons/scale_42x42.png" alt="">2</td>
                                         </tr>
                                         <tr>
                                             <td id="json_scale1" style="font-size: 20px;"><?php echo $weight_scale1 . ' g';?></td>
                                             <td id="json_scale2" style="font-size: 20px;"><?php echo $weight_scale2 . ' g';?></td>
+                                        </tr>
+                                    </table>
+                                    <hr>
+                                    <table class="switching_state miniature_writing">
+                                        <tr>
+                                            <td width=50%><img src="images/icons/scale_d_trend_42x42.png" alt="">1</td>
+                                            <td width=50%><img src="images/icons/scale_d_trend_42x42.png" alt="">2</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="json_weight_loss_scale1" style="font-size: 20px;"><?php echo $weight_loss_scale1;?></td>
+                                            <td id="json_weight_loss_scale2" style="font-size: 20px;"><?php echo $weight_loss_scale2;?></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -598,7 +637,36 @@
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false,
                                                 spanGaps: true
-                                            }]
+                                            },
+                                            {
+                                                label: '<?php echo _("take-off weight") . " " . _("scale"); ?> 1',
+                                                yAxisID: 'scale1',
+                                                data: <?php echo json_encode($scale1_take_off_weight_dataset);?>,
+                                                backgroundColor: '#05F700',
+                                                borderColor: '#05F700',
+                                                borderWidth: 0,
+                                                pointRadius: 1, pointHitRadius: 5,
+                                                pointStyle: 'rect',
+                                                // cubicInterpolationMode: 'monotone',
+                                                borderDash: [10,10],
+                                                fill: false,
+                                                spanGaps: true
+                                            },
+                                            {
+                                                label: '<?php echo _("take-off weight") . " " . _("scale"); ?> 2',
+                                                yAxisID: 'scale2',
+                                                data: <?php echo json_encode($scale2_take_off_weight_dataset);?>,
+                                                backgroundColor: '#FFC400',
+                                                borderColor: '#FFC400',
+                                                borderWidth: 0,
+                                                pointRadius: 1, pointHitRadius: 5,
+                                                pointStyle: 'rect',
+                                                // cubicInterpolationMode: 'monotone',
+                                                borderDash: [10,10],
+                                                fill: false,
+                                                spanGaps: true
+                                            }
+                                            ]
                                         },
                                         options: {
                                             title: {
@@ -619,6 +687,10 @@
                                                         if (tooltipItem.datasetIndex === 0) {
                                                             return Number(tooltipItem.yLabel).toFixed(1) + ' g';
                                                         } else if (tooltipItem.datasetIndex === 1) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' g';
+                                                        } else if (tooltipItem.datasetIndex === 2) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' g';
+                                                        } else if (tooltipItem.datasetIndex === 3) {
                                                             return Number(tooltipItem.yLabel).toFixed(1) + ' g';
                                                         }
                                                     }

@@ -35,6 +35,9 @@ async function handleContent( msg ) {
     var sensorsecondtype = myObj.sensorsecondtype;
     var sensorbus = myObj.sensorbus;
     
+    var take_off_weight_scale1 = myObj.take_off_weight_scale1;
+    var take_off_weight_scale2 = myObj.take_off_weight_scale2;
+    
     // console.log('temperature_extern = ', temperature_extern);
     
     var str_temperature_main;
@@ -265,15 +268,44 @@ async function handleContent( msg ) {
     //------------------------Setzen der Scale1-Werte auf der Webseite
     if (str_gr_scale1.substring(0,3) == '---' || status_scale1 == 0 || grepmain == 0) {
         $('#json_scale1').html('-----' + " g");
+        $('#json_weight_loss_scale1').html('-----');
     }
     else {
         $('#json_scale1').html(str_gr_scale1 + " g");
+        console.log('take_off_weight_scale1 = ' + take_off_weight_scale1);
+        if (take_off_weight_scale1 == 0) {
+            $('#json_weight_loss_scale1').html('-----');
+        }
+        else {
+            diff = take_off_weight_scale1 - gr_scale1;
+            if (gr_scale1 <= 0 || diff < 0) {
+                $('#json_weight_loss_scale1').html('0g (0.0%)');
+            }
+            else {
+               $('#json_weight_loss_scale1').html( diff.toFixed(0) + 'g (' + (Math.round(diff / take_off_weight_scale1 * 1000)/10).toFixed(1) + '%)');
+            }
+        }
     }
+    
     if (str_gr_scale2.substring(0,3) == '---' || status_scale2 == 0 || grepmain == 0) {
         $('#json_scale2').html('-----' + " g");
+        $('#json_weight_loss_scale2').html('-----');
     }
     else {
         $('#json_scale2').html(str_gr_scale2 + " g");
+        console.log('take_off_weight_scale2 = ' + take_off_weight_scale2);
+        if (take_off_weight_scale2 == 0) {
+            $('#json_weight_loss_scale2').html('-----');
+        }
+        else {
+            diff = take_off_weight_scale2 - gr_scale2;
+            if (gr_scale2 <= 0 || diff < 0) {
+                $('#json_weight_loss_scale2').html('0g (0.0%)');
+            }
+            else {
+               $('#json_weight_loss_scale2').html( diff.toFixed(0) + 'g (' + (Math.round(diff / take_off_weight_scale2 * 1000)/10).toFixed(1) + '%)');
+            }
+        }        
     }
     
     //------------------------ Setzen der Meat Thermometer Werte

@@ -54,6 +54,8 @@ async function handleContentdg( msg ) {
     scales_chart.data.labels = scale_timestamps_js;
     scales_chart.data.datasets[0].data = myObj.scale1_dataset;
     scales_chart.data.datasets[1].data = myObj.scale2_dataset;
+    scales_chart.data.datasets[2].data = myObj.scale1_take_off_weight_dataset;
+    scales_chart.data.datasets[3].data = myObj.scale2_take_off_weight_dataset;
     
     scales_chart.update(); 
     temp_hum_chart.update();

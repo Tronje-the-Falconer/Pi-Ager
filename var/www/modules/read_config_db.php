@@ -42,6 +42,7 @@
     $saving_period_scale1 = get_table_value($settings_scale1_table,$saving_period_key);
     $samples_scale1 = get_table_value($settings_scale1_table,$samples_key);
     $spikes_scale1 = get_table_value($settings_scale1_table,$spikes_key);
+    $take_off_weight_scale1 = intval(get_table_value($config_settings_table, $take_off_weight_scale1_key));
     
     $referenceunit_scale2 = number_format(floatval(get_table_value($settings_scale2_table,$referenceunit_key)), 1, '.', '');
     $offset_scale2 = number_format(floatval(get_table_value($settings_scale2_table, $offset_key)), 1, '.', '');    
@@ -50,6 +51,7 @@
     $saving_period_scale2 = get_table_value($settings_scale2_table,$saving_period_key);
     $samples_scale2 = get_table_value($settings_scale2_table,$samples_key);
     $spikes_scale2 = get_table_value($settings_scale2_table,$spikes_key);
+    $take_off_weight_scale2 = intval(get_table_value($config_settings_table, $take_off_weight_scale2_key));
 
     $meat1_sensortype = get_table_value($config_settings_table, $meat1_sensortype_key);
     $meat2_sensortype = get_table_value($config_settings_table, $meat2_sensortype_key);   

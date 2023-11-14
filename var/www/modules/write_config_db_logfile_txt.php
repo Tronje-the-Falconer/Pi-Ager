@@ -184,17 +184,24 @@
 
                 if ($modus == 1 || $modus == 2 || $modus == 3) {
                     $logstring = $logstring . " \n " . _('setpoint humidity') . ": " . $setpoint_humidity . "% " . "&phi;";
-                    $logstring = $logstring . " \n " . _('switch-on humidifier') . ": " . $switch_on_humidity . " % &phi;";
-                    $logstring = $logstring . " \n " . _('switch-off humidifier') . ": " . $switch_off_humidity. " % &phi;";
+                    $logstring = $logstring . " \n " . _('humidifier control hysteresis') . ": " . $humidifier_hysteresis_config . "% " . "&phi;";
+                    $logstring = $logstring . " \n " . _('humidifier control hysteresis offset') . ": " . $hysteresis_offset_config . "% " . "&phi;";
+                    $logstring = $logstring . " \n " . _('saturation point') . ": " . $saturation_point_config . "% " . "&phi;";
+                //    $logstring = $logstring . " \n " . _('switch-on humidifier') . ": " . $switch_on_humidity . " % &phi;";
+                //    $logstring = $logstring . " \n " . _('switch-off humidifier') . ": " . $switch_off_humidity. " % &phi;";
                     $logstring = $logstring . " \n " . _('delay humidifier') . ": " . $delay_humidify_config . " " . _('minutes');
                 }
 
                 if ($modus == 4) {
                     $logstring = $logstring . " \n " . _('setpoint humidity') . ": " . $setpoint_humidity . "% &phi;";
-                    $logstring = $logstring . " \n " . _('switch-on humidifier') . ": " . $switch_on_humidity . "% &phi;";
-                    $logstring = $logstring . " \n " . _('switch-off humidifier') . ": " . $switch_off_humidity . "% &phi;";
-                    $logstring = $logstring . " \n " . _('switch-on dehumidifier') . ": " . $switch_on_dehumidity . "% &phi;";
-                    $logstring = $logstring . " \n " . _('switch-off dehumidifier') . ": " . $switch_off_dehumidity . "% &phi;";
+                    $logstring = $logstring . " \n " . _('humidifier control hysteresis') . ": " . $humidifier_hysteresis_config . "% " . "&phi;";
+                    $logstring = $logstring . " \n " . _('dehumidifier control hysteresis') . ": " . $dehumidifier_hysteresis_config . "% " . "&phi;";                   
+                    $logstring = $logstring . " \n " . _('humidifier control hysteresis offset') . ": " . $hysteresis_offset_config . "% " . "&phi;";                    
+                    $logstring = $logstring . " \n " . _('saturation point') . ": " . $saturation_point_config . "% " . "&phi;";
+                    // $logstring = $logstring . " \n " . _('switch-on humidifier') . ": " . $switch_on_humidity . "% &phi;";
+                    // $logstring = $logstring . " \n " . _('switch-off humidifier') . ": " . $switch_off_humidity . "% &phi;";
+                    // $logstring = $logstring . " \n " . _('switch-on dehumidifier') . ": " . $switch_on_dehumidity . "% &phi;";
+                    // $logstring = $logstring . " \n " . _('switch-off dehumidifier') . ": " . $switch_off_dehumidity . "% &phi;";
                     $logstring = $logstring . " \n " . _('delay humidifier') . ": " . $delay_humidify_config . " " . _('minutes');
                     $logstring = $logstring . " \n " . _('abs. humidity check aktive') . ": " . (($dewpoint_check_config == 0) ? _('off') : _('on'));
                 }

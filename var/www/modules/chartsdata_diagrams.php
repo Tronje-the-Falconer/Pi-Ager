@@ -211,6 +211,9 @@
     $save_temperature_humidity_loops = get_table_value($config_settings_table, $save_temperature_humidity_loops_key);
     $saving_period_scale1 = get_table_value($settings_scale1_table, $saving_period_key);
     $saving_period_scale2 = get_table_value($settings_scale2_table, $saving_period_key);
+    $take_off_weight_scale1 = intval(get_table_value($config_settings_table, $take_off_weight_scale1_key));
+    $take_off_weight_scale2 = intval(get_table_value($config_settings_table, $take_off_weight_scale2_key));
+
     // calculated temperature-humidity saving period, saving loop needs about 6s
     $temperatur_humidity_saving_period = $save_temperature_humidity_loops * 6;
     $corr_factor = 27.0/$save_temperature_humidity_loops;
@@ -365,11 +368,23 @@
     $scale1_dataset[] = Null;
     array_unshift($scale1_dataset, Null);
 
+    // generate array for scale1 take-off weigth dashed line
+    $scale_array_count = count($scale1_dataset);
+    $scale1_take_off_weight_dataset = array_fill(0, $scale_array_count, null);
+    $scale1_take_off_weight_dataset[0] = $take_off_weight_scale1;
+    $scale1_take_off_weight_dataset[$scale_array_count - 1] = $take_off_weight_scale1;
+    
     // value array for scale2
     $scale2_dataset = array_column($all_scales_rows, 'scale2');
     $scale2_dataset[] = Null;
     array_unshift($scale2_dataset, Null);
-
+    
+    // generate array for scale2 take-off weigth dashed line
+    $scale_array_count = count($scale2_dataset);
+    $scale2_take_off_weight_dataset = array_fill(0, $scale_array_count, null);
+    $scale2_take_off_weight_dataset[0] = $take_off_weight_scale2;
+    $scale2_take_off_weight_dataset[$scale_array_count - 1] = $take_off_weight_scale2;
+    
     // echo "uv_light_values<br>";
     $uv_light_values = get_diagram_values($status_uv_table, 1);
     $uv_light_data_diagram = get_data_for_diagram($uv_light_values);
