@@ -140,6 +140,7 @@
                                         </table>
                                     <button class="art-button" name="save_messenger_values" value="save_messenger_values" onclick="return confirm('<?php echo _('ATTENTION: save messenger values?');?>');"><?php echo _('save'); ?></button>
                                     </form>
+                                    <br>
                                     <form method="post" name="add_messenger">
                                         <table id="show_messenger" class="show_messenger" style="width: 100%;">
                                             <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
@@ -177,6 +178,7 @@
                                         </table>
                                         <button class="art-button" name="add_messenger" value="add_messenger" onclick="return confirm('<?php echo _('ATTENTION: add messenger?');?>');"><?php echo _('add'); ?></button>
                                     </form>
+                                    <br>
                                     <form method="post" name="delete_messenger">
                                         <table id="show_messenger" class="show_messenger" style="width: 100%;">
                                             <tr>
@@ -324,61 +326,10 @@
                                                 }
                                             ?>
                                         </table>
-                                    <button class="art-button" name="save_event_values" value="save_event_values" onclick="return confirm('<?php echo _('ATTENTION: save event values?');?>');"><?php echo _('save'); ?></button>
+                                        <br>
+                                        <button class="art-button" name="save_event_values" value="save_event_values" onclick="return confirm('<?php echo _('ATTENTION: save event values?');?>');"><?php echo _('save'); ?></button>
                                     </form>
-                                   
-                                    <form method="post" name="add_event">
-                                        <table id="show_event" class="show_event" style="width: 100%;">
-                                            <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
-                                                <td class="show_event_cell"><div class="tooltip"><?php echo _('event') ?><span class="tooltiptext"><?php echo _('event'); ?></span></div></td>
-                                                 <td class="show_event_cell"><div class="tooltip"><img src="images/icons/mail_20x20.png"><span class="tooltiptext"><?php echo _('e-mail') ?></span></div></td>
-                                                <td class="show_event_cell"><div class="tooltip"><img src="images/icons/pushover_20x20.png"><span class="tooltiptext"><?php echo _('pushover'); ?></span></div></td>
-                                                <td class="show_event_cell"><div class="tooltip"><img src="images/icons/telegram_20x20.png"><span class="tooltiptext"><?php echo _('telegram'); ?></span></div></td>
-                                                <td class="show_event_cell"><div class="tooltip"><?php echo _('alarm') ?><span class="tooltiptext"><?php echo _('alarm'); ?></span></div></td>
-                                                <td class="show_event_cell"><div class="tooltip"><?php echo _('event text') ?><span class="tooltiptext"><?php echo _('event text'); ?></span></div></td>
-                                                <td class="show_event_cell"><div class="tooltip"><?php echo _('active') ?><span class="tooltiptext"><?php echo _('active'); ?></span></div></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input name="add_event_event" type="text" style="width: 90%; text-align: right;" required value></td>
-                                                <td><input type="hidden" name="add_checked_event_e_mail_true" value="0">
-                                                    <input type="checkbox" name="add_checked_event_e_mail_true" value="1"></td>
-                                                <td> <input type="hidden" name="add_checked_event_pushover_true" value="0">
-                                                     <input type="checkbox" name="add_checked_event_pushover_true" value="1"></td>
-                                                <td> <input type="hidden" name="add_checked_event_telegram_true" value="0">
-                                                     <input type="checkbox" name="add_checked_event_telegram_true" value="1"></td>
-                                                <?php
-                                                    if (isset ($alarm_names)){
-                                                            echo '<td><select name="add_event_alarm">';
-                                                            echo '<option value=""><br>';
-                                                            foreach($alarm_names as $name) {
-                                                                echo '<option value="'.$name.'">'.$name.'<br>';
-                                                            }
-                                                            echo '</select></td>';
-                                                    }
-                                                ?>
-                                                <td>
-                                                    <input type="text" name="add_event_eventtext" style="width: 90%; text-align: right;">
-                                                </td>
-                                                <td>
-                                                    <input type="hidden" name="add_checked_event_active_true" value="0">
-                                                    <input type="checkbox" name="add_checked_event_active_true" value="1">
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <button class="art-button" name="add_event" value="add_event" onclick="return confirm('<?php echo _('ATTENTION: add event?');?>');"><?php echo _('add'); ?></button>
-                                    </form>
-                                    <form method="post" name="delete_event">
-                                        <table id="show_event" class="show_event" style="width: 100%;">
-                                            <tr>
-                                                <td><?php echo _('id to delete: ') ?></td>
-                                                <td><input name="event_id" type="number" min= "18" step="1" style="width: 90%; text-align: right;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan=2><button class="art-button" name="delete_event" value="delete_event" onclick="return confirm('<?php echo _('ATTENTION: delete event?');?>');"><?php echo _('delete'); ?></button></td>
-                                            </tr>
-                                        </table>
-                                    </form>
-                                    
+                              
                                     <p class="help_b">
                                         <button class="art-button" type="button" onclick="help_event_blockFunction()"><?php echo _('help'); ?></button>
                                     </p>
@@ -474,6 +425,7 @@
                                         </table>
                                     <button class="art-button" name="save_alarm_values" value="save_alarm_values" onclick="return confirm('<?php echo _('ATTENTION: save alarm values?');?>');"><?php echo _('save'); ?></button>
                                     </form>
+                                    <br>
                                     <form method="post" name="add_alarm">
                                         <table id="show_alarm" class="show_alarm" style="width: 100%;">
                                             <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
@@ -502,6 +454,7 @@
                                         </table>
                                         <button class="art-button" name="add_alarm" value="add_alarm" onclick="return confirm('<?php echo _('ATTENTION: add alarm?');?>');"><?php echo _('add'); ?></button>
                                     </form>
+                                    <br>
                                     <form method="post" name="delete_alarm">
                                         <table id="show_alarm" class="show_alarm" style="width: 100%;">
                                             <tr>
@@ -587,6 +540,7 @@
                                                 }
                                             ?>
                                     </form>
+                                    <br>
                                     <form method="post" name="add_e_mail_recipient">
                                         <table id="show_email_recipients" class="show_email_recipients" style="width: 100%;">
                                             <tr>
@@ -601,6 +555,7 @@
                                         </table>
                                         <button class="art-button" name="add_e_mail_recipient" value="add_e_mail_recipient" onclick="return confirm('<?php echo _('ATTENTION: add e_mail recipient?');?>');"><?php echo _('add'); ?></button>
                                     </form>
+                                    <br>
                                     <form method="post" name="delete_e_mail_recipient">
                                         <table id="show_e_mail_recipient" class="show_e_mail_recipient" style="width: 100%;">
                                             <tr>
@@ -611,6 +566,7 @@
                                             </tr>
                                         </table>
                                     </form>
+                                    <br>
                                     <p class="help_b">
                                         <button class="art-button" type="button" onclick="help_email_blockFunction()"><?php echo _('help'); ?></button>
                                     </p>
@@ -755,15 +711,15 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo _('user key'); ?>:</td>
-                                                <td><input name="pushover_user_key" type="text" style="width: 90%; text-align: right;" required value=<?php echo $pushover_user_key; ?>></td>
+                                                <td><input name="pushover_user_key" type="text" style="width: 100%; text-align: right;" required value=<?php echo $pushover_user_key; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('api token'); ?>:</td>
-                                                <td><input name="pushover_api_token" type="text" style="width: 90%; text-align: right;" required value=<?php echo $pushover_api_token; ?>></td>
+                                                <td><input name="pushover_api_token" type="text" style="width: 100%; text-align: right;" required value=<?php echo $pushover_api_token; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('pushover_active'); ?>:</td>
-                                                <td>
+                                                <td style="text-align: left;">
                                                     <input type="hidden" name="pushover_active" value="0">
                                                     <input type="checkbox" name="pushover_active" value="1" <?php echo $checked_pushover_true; ?>/>
                                                 </td>
@@ -816,15 +772,15 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo _('bot token'); ?>:</td>
-                                                <td><input name="telegram_bot_token" type="text" style="width: 90%; text-align: right;" required value=<?php echo $telegram_bot_token; ?>></td>
+                                                <td><input name="telegram_bot_token" type="text" style="width: 100%; text-align: right;" required value=<?php echo $telegram_bot_token; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('bot chatID'); ?>:</td>
-                                                <td><input name="telegram_bot_chatid" type="text" style="width: 90%; text-align: right;" required value=<?php echo $telegram_bot_chatid; ?>></td>
+                                                <td><input name="telegram_bot_chatid" type="text" style="width: 100%; text-align: right;" required value=<?php echo $telegram_bot_chatid; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('telegram_active'); ?>:</td>
-                                                <td>
+                                                <td style="text-align: left;">
                                                     <input type="hidden" name="telegram_active" value="0">
                                                     <input type="checkbox" name="telegram_active" value="1" <?php echo $checked_telegram_true; ?>/>
                                                 </td>
@@ -880,24 +836,24 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo _('broker address'); ?>:</td>
-                                                <td><input name="broker_address" type="text" style="width: 90%; text-align: right;" value=<?php echo $broker_address; ?>></td>
+                                                <td><input name="broker_address" type="text" style="width: 100%; text-align: right;" value=<?php echo $broker_address; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('port'); ?>:</td>
-                                                <td><input name="port" type="text" style="width: 90%; text-align: right;" value=<?php echo $mqtt_port; ?>></td>
+                                                <td><input name="port" type="text" style="width: 100%; text-align: right;" value=<?php echo $mqtt_port; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('user name'); ?>:</td>
-                                                <td><input name="username" type="text" style="width: 90%; text-align: right;" value=<?php echo $mqtt_username; ?>></td>
+                                                <td><input name="username" type="text" style="width: 100%; text-align: right;" value=<?php echo $mqtt_username; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('password'); ?>:</td>
-                                                <td><input name="password" type="text" style="width: 90%; text-align: right;" value=<?php echo $mqtt_password; ?>></td>
+                                                <td><input name="password" type="text" style="width: 100%; text-align: right;" value=<?php echo $mqtt_password; ?>></td>
                                             </tr>
                                             
                                             <tr>
                                                 <td><?php echo _('mqtt active'); ?>:</td>
-                                                <td>
+                                                <td style="text-align: left;">
                                                     <input type="hidden" name="mqtt_active" value="0">
                                                     <input type="checkbox" name="mqtt_active" value="1" <?php echo $checked_mqtt_true; ?>/>
                                                 </td>

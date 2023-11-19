@@ -213,7 +213,7 @@
 
     // generate array for scale1 take-off weigth dashed line
     $scale_array_count = count($scale1_dataset);
-    $scale1_take_off_weight_dataset = array_fill(0, $scale_array_count, null);
+    $scale1_take_off_weight_dataset = array_pad(array(), $scale_array_count, Null);
     $scale1_take_off_weight_dataset[0] = $take_off_weight_scale1;
     $scale1_take_off_weight_dataset[$scale_array_count - 1] = $take_off_weight_scale1;
     
@@ -224,7 +224,7 @@
     
     // generate array for scale2 take-off weigth dashed line
     $scale_array_count = count($scale2_dataset);
-    $scale2_take_off_weight_dataset = array_fill(0, $scale_array_count, null);
+    $scale2_take_off_weight_dataset = array_pad(array(), $scale_array_count, Null);
     $scale2_take_off_weight_dataset[0] = $take_off_weight_scale2;
     $scale2_take_off_weight_dataset[$scale_array_count - 1] = $take_off_weight_scale2;
 

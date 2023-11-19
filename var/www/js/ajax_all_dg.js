@@ -156,7 +156,7 @@ async function handleContentAlldg( msg ) {
 async function loadContentAlldg() {
     $.ajax({
         method: 'POST',
-        url: 'modules/query_all_dg.php'
+        url: 'modules/query_all_dg.php?rand=' + Math.random()
     })
     .done(function( msg ) {
         if (msg == '') {

@@ -704,7 +704,7 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo _('nfs volume'); ?>:</td>
-                                                <td><input name="backup_nfsvol" type="text" style="width: 90%; text-align: right;" required value=<?php echo $backup_nfsvol; ?>></td>
+                                                <td><input name="backup_nfsvol" type="text" style="width: 100%; text-align: right;" required value=<?php echo $backup_nfsvol; ?>></td>
                                             </tr>
 <!--
                                             <tr>
@@ -722,19 +722,19 @@
 -->                                            
                                             <tr>
                                                 <td><?php echo _('number of backups'); ?>:</td>
-                                                <td><input name="backup_number_of_backups" type="number" step="1" min="1" max="60" style="width: 90%;" required value=<?php echo $backup_number_of_backups; ?>></td>
+                                                <td><input name="backup_number_of_backups" type="number" step="1" min="1" max="60" style="width: 100%; text-align: right;" required value=<?php echo $backup_number_of_backups; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('backup name'); ?>:</td>
-                                                <td><input name="backup_name" type="text" style="width: 90%; text-align: right;" required value=<?php echo $backup_name; ?>></td>
+                                                <td><input name="backup_name" type="text" style="width: 100%; text-align: right;" required value=<?php echo $backup_name; ?>></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('nfs opt'); ?>:</td>
-                                                <td><input name="backup_nfsopt" type="text" style="width: 90%; text-align: right;" value="<?php echo $backup_nfsopt; ?>"></td>
+                                                <td><input name="backup_nfsopt" type="text" style="width: 100%; text-align: right;" value="<?php echo $backup_nfsopt; ?>"></td>
                                             </tr>
                                             <tr>
                                                 <td><?php echo _('backup_active'); ?>:</td>
-                                                <td>
+                                                <td style="text-align: left;">
                                                     <input type="hidden" name="backup_active" value="0">
                                                     <input type="checkbox" name="backup_active" value="1" <?php echo $checked_backup_true; ?>/>
                                                 </td>

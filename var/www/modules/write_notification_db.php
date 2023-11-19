@@ -65,21 +65,7 @@
         logger('DEBUG', 'event values saved');
         print '<script language="javascript"> alert("'. (_("event values")) . " : " . (_("values saved")) .'"); </script>';
     }
-    
-    if (isset ($_POST['add_event'])){
-        logger('DEBUG', 'button add event');
-        unset($_POST['add_event']);
-        
-        $add_event_event = $_POST['add_event_event'];
-        $add_checked_event_e_mail_true = $_POST['add_checked_event_e_mail_true'];
-        $add_checked_event_pushover_true = $_POST['add_checked_event_pushover_true'];
-        $add_checked_event_telegram_true = $_POST['add_checked_event_telegram_true'];
-        $add_event_alarm = $_POST['add_event_alarm'];
-        $add_event_eventtext = $_POST['add_event_eventtext'];
-        $add_checked_event_active_true = $_POST['add_checked_event_active_true'];
-        
-        add_event($add_event_event, $add_checked_event_e_mail_true, $add_checked_event_pushover_true, $add_checked_event_telegram_true, $add_event_alarm, $add_event_eventtext, $add_checked_event_active_true );
-    }
+
     
     if (isset ($_POST['save_alarm_values'])){
         logger('DEBUG', 'button save alarm pressed');
@@ -118,13 +104,6 @@
         unset($_POST['delete_messenger']);
         $id =  $_POST['id'];
         delete_row_from_table($messenger_table,$messenger_id_field,$id);
-    }
-    
-    if (isset ($_POST['delete_event'])){
-        logger('DEBUG', 'button delete event pressed');
-        unset($_POST['delete_event']);
-        $id =  $_POST['event_id'];
-        delete_row_from_table($messenger_event_table,$event_id_field,$id);
     }
     
     if (isset ($_POST['delete_e_mail_recipient'])){

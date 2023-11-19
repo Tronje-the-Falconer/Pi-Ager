@@ -253,6 +253,33 @@
                                                 <button class="art-button" type="button" onclick="help_temperature_event_config_noneFunction()"><?php echo _('close'); ?></button>
                                             </p>
                                             <hr>
+                                            <!---------------------------------------------------------------------------------------- humidifier monitoring to generate humidifier event -->
+                                            <table style="width: 100%;table-layout: fixed;">
+                                                <tr>
+                                                    <td rowspan="3" class="td_png_icon"><h3><?php echo _('humidifier monitoring'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidifier_monitoring_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td class="text_left_padding"><?php echo _('monitoring start delay'); ?>:</td>
+                                                    <td><input name="delay_monitoring_humidifier_config" type="number" style="width: 30%;" min="1" max="60" required value=<?php echo $delay_monitoring_humidifier; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (1 <?php echo _('to'); ?> 60)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('monitoring hysteresis').':'; ?></td>
+                                                    <td><input name="hysteresis_monitoring_humidifier_config" type="number" style="width: 30%;" min="1" max="20" required value= <?php echo $hysteresis_monitoring_humidifier; ?>>&nbsp;% &phi;<span style="font-size: xx-small"> (1 <?php echo _('to'); ?> 20)</span></td>
+                                                </tr>
+                                                <tr><td>&nbsp;</td></tr>
+                                            </table>
+                                            <script>
+                                                function help_humidifier_monitoring_blockFunction() {
+                                                    document.getElementById('help_humidifier_monitoring_config').style.display = 'block';
+                                                }
+                                                function help_humidifier_monitoring_noneFunction() {
+                                                    document.getElementById('help_humidifier_monitoring_config').style.display = 'none';
+                                                }
+                                            </script>
+                                            <p id="help_humidifier_monitoring_config" class="help_p">
+                                                <?php echo _('helptext_humidifier_monitoring_config');
+                                                      echo '<br><br>'; ?>
+                                                <button class="art-button" type="button" onclick="help_humidifier_monitoring_noneFunction()"><?php echo _('close'); ?></button>
+                                            </p>
+                                            <hr>
                                             <!----------------------------------------------------------------------------------------shutdown on battery low -->
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <?php

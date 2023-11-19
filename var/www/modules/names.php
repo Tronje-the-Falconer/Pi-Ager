@@ -166,6 +166,8 @@ $dehumidifier_hysteresis_key = 'dehumidifier_hysteresis';
 $hysteresis_offset_key = 'hysteresis_offset';
 $take_off_weight_scale1_key = 'take_off_weight_scale1';
 $take_off_weight_scale2_key = 'take_off_weight_scale2';
+$delay_monitoring_humidifier_key = 'delay_monitoring_humidifier';
+$hysteresis_monitoring_humidifier_key = 'hysteresis_monitoring_humidifier';
 
 #-----------------------------table fields;
 $key_field = 'key';

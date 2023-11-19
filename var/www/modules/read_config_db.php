@@ -34,6 +34,8 @@
     $humidifier_hysteresis = intval(get_table_value($config_settings_table,$humidifier_hysteresis_key));
     $dehumidifier_hysteresis = intval(get_table_value($config_settings_table,$dehumidifier_hysteresis_key));
     $hysteresis_offset = number_format(floatval(get_table_value($config_settings_table,$hysteresis_offset_key)), 1, '.', '');
+    $delay_monitoring_humidifier = intval(get_table_value($config_settings_table,$delay_monitoring_humidifier_key));
+    $hysteresis_monitoring_humidifier = intval(get_table_value($config_settings_table,$hysteresis_monitoring_humidifier_key));
     
     $referenceunit_scale1 = number_format(floatval(get_table_value($settings_scale1_table,$referenceunit_key)), 1, '.', '');
     $offset_scale1 = number_format(floatval(get_table_value($settings_scale1_table, $offset_key)), 1, '.', '');

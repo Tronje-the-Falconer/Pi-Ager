@@ -67,7 +67,7 @@ async function handleContentdg( msg ) {
 async function loadContentdg() {
     $.ajax({
         method: 'POST',
-        url: 'modules/querydg.php'
+        url: 'modules/querydg.php?rand=' + Math.random()
     })
     .done(function( msg ) {
         if (msg == '') {

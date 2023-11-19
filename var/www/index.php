@@ -365,7 +365,7 @@
                                 <script>
                                 // this is to avoid form refresh after change customtime button is pushed
                                 $("#change_customtime_id").click(function() {
-                                    var url = "modules/querywcdb.php"; // the script where you handle the form input.
+                                    var url = "modules/querywcdb.php?rand=" + Math.random(); // the script where you handle the form input.
 
                                     $.ajax({
                                         type: "POST",
