@@ -17,8 +17,12 @@
                                                             echo _('file verification').': '.$logfile.'<br />';
                                                             echo _('file size').': '.filesize($logfile).' bytes<br />';
                                                             $mtime = filemtime($logfile);
+                                                            $serverTimezone = exec('date +%Z');
+                                                            // echo 'Timezone: ' . $serverTimezone . '<br>';
+                                                            $toffset = timezone_offset_get(new DateTimeZone($serverTimezone), new DateTime('now'));
+                                                            // echo 'Timezone offset in hours : ' . $toffset/3600 . '<br>';
                                                             echo _('last changed at').': ';
-                                                            echo date('d M Y, H:i:s', $mtime);
+                                                            echo date('d M Y, H:i:s', $mtime + $toffset );
                                                             echo ' '._("o'clock").'<br />';
 //                                                            echo '<img src="images/icons/check_true_42x42.png"> '._('file exists').'<br />';
                                                         }
