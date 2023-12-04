@@ -93,7 +93,13 @@
                                                 }
                                                 else {
                                                     $uv_check_config_active = '';
-                                                }                                                
+                                                }
+                                                if ($check_monitoring_humidifier == 1) {
+                                                    $check_monitoring_hum_active = 'checked';
+                                                }
+                                                else {
+                                                    $check_monitoring_hum_active = '';
+                                                }
                                             ?>
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <tr>
@@ -257,14 +263,19 @@
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <tr>
                                                     <td rowspan="3" class="td_png_icon"><h3><?php echo _('humidifier monitoring'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidifier_monitoring_blockFunction()"><?php echo _('help'); ?></button></td>
-                                                    <td class="text_left_padding"><?php echo _('monitoring start delay'); ?>:</td>
+                                                    <td class="text_left_padding"><?php echo _('monitoring delay'); ?>:</td>
                                                     <td><input name="delay_monitoring_humidifier_config" type="number" style="width: 30%;" min="1" max="60" required value=<?php echo $delay_monitoring_humidifier; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (1 <?php echo _('to'); ?> 60)</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text_left_padding"><?php echo _('monitoring hysteresis').':'; ?></td>
-                                                    <td><input name="hysteresis_monitoring_humidifier_config" type="number" style="width: 30%;" min="1" max="20" required value= <?php echo $hysteresis_monitoring_humidifier; ?>>&nbsp;% &phi;<span style="font-size: xx-small"> (1 <?php echo _('to'); ?> 20)</span></td>
+                                                    <td class="text_left_padding"><?php echo _('monitoring tolerance').':'; ?></td>
+                                                    <td><input name="tolerance_monitoring_humidifier_config" type="number" style="width: 30%;" min="0" max="10" required value= <?php echo $tolerance_monitoring_humidifier; ?>>&nbsp;%<span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 10)</span></td>
                                                 </tr>
-                                                <tr><td>&nbsp;</td></tr>
+                                                <tr>
+                                                    <td class="text_left_padding">
+                                                        <input type="hidden" name="check_monitoring_humidifier_config" value="0" />
+                                                        <label><input style="vertical-align: -2px;" type="checkbox" name="check_monitoring_humidifier_config" value="1" <?php echo $check_monitoring_hum_active; ?>>&nbsp;<?php echo _('activate monitoring');?></label>
+                                                    </td>
+                                                </tr>
                                             </table>
                                             <script>
                                                 function help_humidifier_monitoring_blockFunction() {

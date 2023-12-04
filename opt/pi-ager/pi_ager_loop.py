@@ -972,13 +972,12 @@ def generate_high_limit_reached_event(event_msg):
         exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
         pass
         
-def check_internal_temperature_limits():
+def check_internal_temperature_limits(temp_avg):
     global internal_temperature_low_limit_reached
     global internal_temperature_high_limit_reached
     global internal_temperature_low_limit
     global internal_temperature_high_limit
     global internal_temperature_hysteresis
-    global sensor_temperature
     
     # check if settings in config table changed
     internal_temperature_low_limit_temp = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.internal_temperature_low_limit_key)
@@ -996,25 +995,90 @@ def check_internal_temperature_limits():
     internal_temperature_high_limit = internal_temperature_high_limit_temp
     internal_temperature_hysteresis = internal_temperature_hysteresis_temp
     
-    if sensor_temperature != None:
-        if sensor_temperature <= internal_temperature_low_limit and internal_temperature_low_limit_reached == False:
+    if temp_avg != None:
+        if temp_avg <= internal_temperature_low_limit and internal_temperature_low_limit_reached == False:
             internal_temperature_low_limit_reached = True
             event_msg = 'Internal temperature low limit ' + str(internal_temperature_low_limit) + '°C ' + 'reached'
             generate_low_limit_reached_event(event_msg)
             cl_fact_logger.get_instance().info(event_msg)
-        if sensor_temperature >= (internal_temperature_low_limit + internal_temperature_hysteresis):
+        if temp_avg >= (internal_temperature_low_limit + internal_temperature_hysteresis):
             internal_temperature_low_limit_reached = False
-            cl_fact_logger.get_instance().debug('Internal temperature ' + str(sensor_temperature) + '°C higher than ' + str(internal_temperature_low_limit + internal_temperature_hysteresis) + '°C. (low limit + hysteresis)')
-        if sensor_temperature >= internal_temperature_high_limit and internal_temperature_high_limit_reached == False:
+            cl_fact_logger.get_instance().debug('Internal temperature ' + str(temp_avg) + '°C higher than ' + str(internal_temperature_low_limit + internal_temperature_hysteresis) + '°C. (low limit + hysteresis)')
+        if temp_avg >= internal_temperature_high_limit and internal_temperature_high_limit_reached == False:
             internal_temperature_high_limit_reached = True
             event_msg = 'Internal temperature high limit ' + str(internal_temperature_high_limit) + '°C ' + 'reached'
             generate_high_limit_reached_event(event_msg)
             cl_fact_logger.get_instance().info(event_msg)
-        if sensor_temperature <= (internal_temperature_high_limit - internal_temperature_hysteresis):
+        if temp_avg <= (internal_temperature_high_limit - internal_temperature_hysteresis):
             internal_temperature_high_limit_reached = False            
-            cl_fact_logger.get_instance().debug('Internal temperature ' + str(sensor_temperature) + '°C lower than ' + str(internal_temperature_high_limit - internal_temperature_hysteresis) + '°C. (high limit - hysteresis)')
+            cl_fact_logger.get_instance().debug('Internal temperature ' + str(temp_avg) + '°C lower than ' + str(internal_temperature_high_limit - internal_temperature_hysteresis) + '°C. (high limit - hysteresis)')
 
 
+def generate_humidifier_failed_event(event_msg):
+    # generate event
+    try:
+        cl_fact_logic_messenger().get_instance().handle_event('humidifier_failure', event_msg) #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
+    except Exception as cx_error:
+        exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
+        pass
+        
+        
+humidifier_monitoring_delay_timer_running = False
+humidifier_monitoring_delay_starttime = 0
+    
+def check_monitoring_humidifier(humidity_avg, humidity_setpoint, delay_monitoring_humidifier, delay_changed, mode, tolerance_monitoring_humidifier, check_monitoring_hum):
+    global humidifier_monitoring_delay_timer_running
+    global humidifier_monitoring_delay_starttime
+
+    if (check_monitoring_hum == 0):
+        humidifier_monitoring_delay_timer_running = False
+        return
+        
+    if (mode == 0):  #  humidifier stopped
+        humidifier_monitoring_delay_timer_running = False
+        return
+    
+    if (mode == 0):         # humidifier stopped
+        humidifier_monitoring_delay_timer_running = False
+        return
+    
+    if (delay_changed == True):
+        humidifier_monitoring_delay_timer_running = False
+    
+    if (humidity_avg < (humidity_setpoint - tolerance_monitoring_humidifier)):
+        if (humidifier_monitoring_delay_timer_running == True):
+            if (pi_ager_database.get_current_time() >= humidifier_monitoring_delay_starttime + delay_monitoring_humidifier * 60):    # convert minutes to seconds, wait for delay reached
+                humidifier_monitoring_delay_starttime = pi_ager_database.get_current_time()       # reset timer, but continue, issue event
+                event_msg = 'humidity below ' + str(humidity_setpoint) + '%. There may be a problem with the humidifier'
+                generate_humidifier_failed_event(event_msg)     # generate event
+        else:
+            humidifier_monitoring_delay_starttime = pi_ager_database.get_current_time()
+            humidifier_monitoring_delay_timer_running = True
+    else:   # setpoint reached, stop timer
+        humidifier_monitoring_delay_timer_running = False
+    
+            
+                
+    # if (pi_ager_database.get_current_time() < humidifier_monitoring_delay_starttime + delay_monitoring_humidifier * 60):    # convert minutes to seconds, wait for delay reached
+    #     return
+
+    # hum_low = humidity_setpoint - hysteresis_monitoring_humidifier
+    # if (hum_low < 0):
+    #     hum_low = 0
+        
+    # hum_high = humidity_setpoint
+    
+    # if (humidifier_failed == False):    # check hysterese
+    #     if (humidity_avg <= hum_low):
+    #         humidifier_failed = True
+    #         event_msg = 'humidity below ' + str(hum_low) + '%. There may be a problem with the humidifier'
+    #         generate_humidifier_failed_event(event_msg)
+    #        cl_fact_logger.get_instance().info(event_msg)
+    # else:
+    #    if (humidity_avg >= hum_high):
+    #         humidifier_failed = False
+        
+        
 cooler_delay_timer_running = False
 cooler_delay_starttime = 0
 
@@ -1318,6 +1382,7 @@ def doMainLoop():
 
     global cooler_delay_starttime
     global cooler_delay_timer_running
+    
     #--------------------------------------------
     # for event generation
     global internal_temperature_low_limit_reached
@@ -1350,6 +1415,9 @@ def doMainLoop():
     global setpoint_humidity
     global humidify_delay_starttime
     
+    global humidifier_monitoring_delay_timer_running
+    global humidifier_monitoring_delay_starttime
+    
     #-------------------------------------------
     
     # Pruefen Sensor, dann Settings einlesen
@@ -1369,6 +1437,9 @@ def doMainLoop():
     
     cooler_delay_starttime = 0
     cooler_delay_timer_running = False
+    
+    humidifier_monitoring_delay_timer_running = False
+    humidifier_monitoring_delay_starttime = 0
     
     #Here get instance of Deviation class
     cl_fact_logger.get_instance().debug('in doMainLoop()')
@@ -1427,6 +1498,15 @@ def doMainLoop():
     hum_avg_maxlen = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.hum_avg_maxlen_key))
     average_data_temp.change_maxlen(temp_avg_maxlen)
     average_data_hum.change_maxlen(hum_avg_maxlen)
+    
+    # humidifier monitoring
+    delay_monitoring_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_monitoring_humidifier_key))
+    tolerance_monitoring_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.tolerance_monitoring_humidifier_key))
+    check_monitoring_hum = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.check_monitoring_humidifier_key))
+    hum_avg = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.humidity_avg_key)
+    
+    # dry aging mode
+    modus = -1  # force modus change
     
     # cabinet simulation    
 #    sensor_temperature = 20.0   # start value for test
@@ -1505,8 +1585,10 @@ def doMainLoop():
             # Prüfen, ob Sensordaten empfangen wurden und falls nicht, auf Notfallmodus wechseln
             if sensor_temperature != None and sensor_humidity != None and sensor_dewpoint != None:
                 count_continuing_emergency_loops = 0
+                
                 #weitere Settings
-                modus = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.modus_key)
+                modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.modus_key))
+                    
                 setpoint_temperature = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key)
                 setpoint_humidity = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key))
                 
@@ -1587,7 +1669,17 @@ def doMainLoop():
                     light_settings_changed = True
                     
                 dehumidifier_modus = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.dehumidifier_modus_key))
-    
+                
+                # check if humidifier monitoring parameter changed
+                delay_monitoring_humidifier_changed = False
+                delay_monitoring_humidifier_temp = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_monitoring_humidifier_key))
+                if (delay_monitoring_humidifier != delay_monitoring_humidifier_temp): 
+                    delay_monitoring_humidifier = delay_monitoring_humidifier_temp
+                    delay_monitoring_humidifier_changed = True
+                
+                check_monitoring_hum = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.check_monitoring_humidifier_key))
+                tolerance_monitoring_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.tolerance_monitoring_humidifier_key))
+ 
                 # An dieser Stelle sind alle settings eingelesen, Ausgabe auf Konsole
                 
                 logstring = ' \n ' + pi_ager_names.logspacer
@@ -2054,16 +2146,18 @@ def doMainLoop():
                     # cl_fact_logger.get_instance().info('Size average temperature FIFO : ' + str(average_data_temp.eval_fifo_len()))
                     pi_ager_database.write_all_sensordata(sensor_temperature, sensor_humidity, sensor_dewpoint, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data, sensor_humidity_abs, second_sensor_humidity_abs, temperature_avg, humidity_avg)    
                     cl_fact_logger.get_instance().debug('writing values into all_sensors database table performed')
-                
+                    cl_fact_logger.get_instance().debug('checking internal temperature sensor limits')
+                    check_internal_temperature_limits( temperature_avg )
+                    
                 # check if events should be issued
-                cl_fact_logger.get_instance().debug('checking internal temperature sensor limits')
-                check_internal_temperature_limits()
                 cl_fact_logger.get_instance().debug('checking UPS state')
                 generate_ups_bat_events()
                 cl_fact_logger.get_instance().debug('checking power monitor')
                 generate_power_monitor_events()
                 cl_fact_logger.get_instance().debug('checking switch')
                 generate_switch_event()
+                cl_fact_logger.get_instance().debug('checking humidifier failure')
+                check_monitoring_humidifier(hum_avg, setpoint_humidity, delay_monitoring_humidifier, delay_monitoring_humidifier_changed, modus, tolerance_monitoring_humidifier, check_monitoring_hum)
                 # cabinet simulation
                 # if (second_sensor_humidity == None or second_sensor_humidity > sensor_humidity):
                 #    sensor_humidity += 0.04

@@ -194,7 +194,7 @@
                     $data_exhaust_air_period = intval($dataset[$agingtable_exhaust_air_period_field]);
                 } else {$data_exhaust_air_period = NULL;}
                 if (!empty($dataset[$agingtable_hours_field])){
-                    $data_days = intval($dataset[$agingtable_hours_field]);
+                    $data_hours = intval($dataset[$agingtable_hours_field]);
                 } else {$data_hours = NULL;}
                 if (!empty($dataset[$agingtable_comment_field])){
                     $data_comment = "'" . $dataset[$agingtable_comment_field] . "'";

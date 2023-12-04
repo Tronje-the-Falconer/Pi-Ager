@@ -38,7 +38,8 @@
         $reset_uptime_config = $_POST['reset_uptime_config'];
         $init_uv_uptime_config = $_POST['init_uv_uptime_config'];  // hours
         $delay_monitoring_humidifier = $_POST['delay_monitoring_humidifier_config'];
-        $hysteresis_monitoring_humidifier = $_POST['hysteresis_monitoring_humidifier_config'];
+        $tolerance_monitoring_humidifier = $_POST['tolerance_monitoring_humidifier_config'];
+        $check_monitoring_humidifier = $_POST['check_monitoring_humidifier_config'];
         
         $ConfigInputIsValid = TRUE;
         foreach ($_POST as $key => $value) {  // Prüfen, ob nur Zahlen eingegeben wurden
@@ -85,7 +86,7 @@
                             $uv_period_config, $switch_on_uv_hour_config, $switch_on_uv_minute_config, $light_modus_config, $light_duration_config,
                             $light_period_config, $switch_on_light_hour_config, $switch_on_light_minute_config, $dehumidifier_modus_config,
                             $failure_temperature_delta_config, $failure_humidity_delta_config, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
-                            $shutdown_on_batlow_config, $delay_cooler_config, $dewpoint_check_config, $uv_check_config, $delay_monitoring_humidifier, $hysteresis_monitoring_humidifier );
+                            $shutdown_on_batlow_config, $delay_cooler_config, $dewpoint_check_config, $uv_check_config, $delay_monitoring_humidifier, $tolerance_monitoring_humidifier, $check_monitoring_humidifier);
                 logger('DEBUG', 'configvalues saved');
                 
                 # evaluate and set humidifier limits for log
@@ -226,8 +227,9 @@
                 $logstring = $logstring . " \n " . _('low temperature limit') . ": " . $internal_temperature_low_limit . " &deg;C";
                 $logstring = $logstring . " \n " . _('high temperature limit') . ": " . $internal_temperature_high_limit . " &deg;C";
                 $logstring = $logstring . " \n " . _('hysteresis') . ": " . $internal_temperature_hysteresis . " &deg;C";
-                $logstring = $logstring . " \n " . _('monitoring start delay') . ": " . $delay_monitoring_humidifier . _('minutes');
-                $logstring = $logstring . " \n " . _('monitoring hysteresis') . ": " . $hysteresis_monitoring_humidifier . "% &phi;";
+                $logstring = $logstring . " \n " . _('humidifier monitoring delay') . ": " . $delay_monitoring_humidifier . ' ' . _('minutes');
+                $logstring = $logstring . " \n " . _('monitoring tolerance') . ": " . $tolerance_monitoring_humidifier . "% &phi;";
+                $logstring = $logstring . " \n " . _('monitoring') . ": " . (($check_monitoring_humidifier == 0) ? _('off') : _('on'));
                 $logstring = $logstring . " \n " . _('shutdown on battery low') . ": " . (($shutdown_on_batlow_config == 0) ? _('off') : _('on'));
                 $logstring = $logstring . " \n " . "***********************************************";
                 logger('INFO', $logstring);
