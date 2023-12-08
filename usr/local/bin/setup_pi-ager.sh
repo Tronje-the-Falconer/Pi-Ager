@@ -121,6 +121,7 @@ then
       "SHT75") sensorbus=1; sensornum=3;;
       "SHT85") sensorbus=0; sensornum=4;;
       "SHT3x") sensorbus=0; sensornum=5;;
+      "AHT3x") sensorbus=0; sensornum=6;;
     esac
     echo "Bus = $sensorbus  sensor = $sensornum"
 
@@ -161,9 +162,5 @@ systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivier
 
 # now its time to enable pi-ager_main.service to start at next boot. Reboot is initiated by rc.local after expanding file system on root partition
 systemctl enable pi-ager_main.service 
-# systemctl start pi-ager_main.service
-# ifup wlan0
 
-# reboot
-# shutdown -r now
 exit 0
