@@ -868,8 +868,8 @@
                 $uv_duration_key, $uv_period_key, $switch_on_uv_hour_key, $switch_on_uv_minute_key, $light_modus_key, $light_duration_key, $light_period_key,
                 $switch_on_light_hour_key, $switch_on_light_minute_key, $dehumidifier_modus_key, $failure_temperature_delta_key, $failure_humidity_delta_key, 
                 $internal_temperature_low_limit_key, $internal_temperature_high_limit_key, $internal_temperature_hysteresis_key, $shutdown_on_batlow_key, $delay_cooler_key,
-                $dewpoint_check_key, $uv_check_key, $delay_monitoring_humidifier_key, $tolerance_monitoring_humidifier_key, $check_monitoring_humidifier_key;
-                
+                $dewpoint_check_key, $uv_check_key, $delay_monitoring_humidifier_key, $tolerance_monitoring_humidifier_key, $check_monitoring_humidifier_key;               
+        
         open_connection();
 
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($cooling_hysteresis) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $cooling_hysteresis_key . '"');
@@ -902,7 +902,6 @@
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($delay_monitoring_humidifier) . ' WHERE ' . $key_field . ' = "' . $delay_monitoring_humidifier_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($tolerance_monitoring_humidifier) . ' WHERE ' . $key_field . ' = "' . $tolerance_monitoring_humidifier_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($check_monitoring_humidifier) . ' WHERE ' . $key_field . ' = "' . $check_monitoring_humidifier_key . '"');
-       
         close_database();
         }
     

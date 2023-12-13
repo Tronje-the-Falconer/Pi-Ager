@@ -11,19 +11,19 @@ __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Production"
 
-#from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod
 import inspect
 # import pi_ager_logging
 from main.pi_ager_cl_logger import cl_fact_logger
 import time
 
-from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
-from sensors.pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
-from sensors.pi_ager_cl_i2c_sensor_sht import cl_fact_i2c_sensor_sht
+# from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
+# from sensors.pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
+# from sensors.pi_ager_cl_i2c_sensor_sht import cl_fact_i2c_sensor_sht
 from main.pi_ager_cx_exception import *
-from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
-from sensors.pi_ager_cl_sensor import cl_sensor#
-from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
+# from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
+# from sensors.pi_ager_cl_sensor import cl_sensor
+# from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 from sensors.pi_ager_cl_sensor_sht import cl_sensor_sht
 
 # global logger
@@ -32,8 +32,7 @@ from sensors.pi_ager_cl_sensor_sht import cl_sensor_sht
 class cl_sensor_sht85(cl_sensor_sht):
     
     def __init__(self, i_sensor_type, i_active_sensor, i_address):
-        # logger.debug(cl_fact_logger.get_instance().me())
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if "get_instance" not in inspect.stack()[1][3]:
             raise cx_direct_call(self,"Please use factory class" )
         cl_fact_logger.get_instance().debug("i2c address is" + str(i_address))
@@ -42,42 +41,16 @@ class cl_sensor_sht85(cl_sensor_sht):
         super().__init__(i_active_sensor, self.o_sensor_type, self.o_address)
 
     def get_current_data(self):
-        # logger.debug(cl_fact_logger.get_instance().me())
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.measured_data = super().get_current_data()
         return(self.measured_data)
-
-    def execute(self):
-        # logger.debug(cl_fact_logger.get_instance().me())
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        #self.get_current_data()
-        self._write_to_db()
-        
-class th_sensor_sht85(cl_sensor_sht85):
-#    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
-    NAME = 'Sensor SHT85'
     
-    
-    def __init__(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        self.get_type_raise = False
-        self._type = "SHT85"
-        
-    def get_type(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if self.get_type_raise == True:
-            raise cx_Sensor_not_defined(self._type_ui)        
-        return(self._type)
-    
-class cl_fact_sensor_sht85: 
-    #fact_main_sensor_type = cl_fact_main_sensor_type()
-#    Only a singleton instance for main_sensor
-    #__o_sensor_type = fact_main_sensor_type.get_instance()
+class cl_fact_sensor_sht85(ABC): 
     __o_instance = None
     __ot_instances = {}
     @classmethod        
     def get_instance(self, i_sensor_type, i_active_sensor, i_address):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug("cl_fact_sensor_sht85.get_instance")
         try:
             cl_fact_sensor_sht85.__o_instance = cl_fact_sensor_sht85.__ot_instances.pop(i_active_sensor)
@@ -98,11 +71,11 @@ class cl_fact_sensor_sht85:
 
     @classmethod
     def set_instance(self, i_active_sensor, i_instance):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_sensor_sht85.__o_instance = i_instance
     
     
     def __init__(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
 

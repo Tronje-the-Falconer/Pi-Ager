@@ -21,7 +21,7 @@ import pi_ager_gpio_config
 import pi_ager_mcp3204
 from time import ctime as convert
 
-from main.pi_ager_cx_exception import (cx_i2c_sht_temperature_crc_error, cx_i2c_sht_humidity_crc_error, cx_i2c_bus_error, cx_i2c_aht_crc_error) 
+from main.pi_ager_cx_exception import (cx_i2c_sht_temperature_crc_error, cx_i2c_sht_humidity_crc_error, cx_i2c_bus_error, cx_i2c_aht_temperature_crc_error, cx_i2c_aht_humidity_crc_error) 
 from messenger.pi_ager_cl_alarm import cl_fact_logic_alarm
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type, cl_fact_second_sensor_type
@@ -227,7 +227,8 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 cl_fact_i2c_bus_logic().set_instance(None)
                 cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
                 
-            except (cx_i2c_aht_crc_error,
+            except (cx_i2c_aht_temperature_crc_error,
+                    cx_i2c_aht_humidity_crc_error,
                     cx_i2c_bus_error ) as cx_error:
                 cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
         
@@ -265,7 +266,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
         elif second_sensorname == 'AHT2x':
             try:
                 i2c_address_second_sensor = I2C_ADDRESS_SENSOR_AHT2X
-                second_sensor =  cl_fact_active_second_sensor().get_instance(i_address = i2c_address_second_sensor)
+                second_sensor =  cl_fact_active_second_sensor().get_instance()
                 measured_second_data = second_sensor.get_current_data()
                 (second_sensor_temperature_big, second_sensor_humidity_big, second_sensor_dewpoint_big, second_sensor_humidity_abs_big) = measured_second_data
                 
@@ -273,7 +274,7 @@ def get_sensordata(sht_exception_count, humidity_exception_count, temperature_ex
                 cl_fact_i2c_bus_logic().set_instance(None)
                 cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
                     
-            except (cx_i2c_aht_crc_error, cx_i2c_bus_error ) as cx_error:
+            except (cx_i2c_aht_temperature_crc_error, cx_i2c_aht_humidity_crc_error, cx_i2c_bus_error ) as cx_error:
                 cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
                                     
         #cl_fact_logger.get_instance().debug('Second sensor end: ' + str(second_sensorname))  
@@ -1077,41 +1078,49 @@ def generate_humidifier_failed_event(event_msg):
         
 humidifier_monitoring_delay_timer_running = False
 humidifier_monitoring_delay_starttime = 0
+humidifier_failed = False
     
-def check_monitoring_humidifier(humidity_avg, humidity_setpoint, delay_monitoring_humidifier, delay_changed, mode, tolerance_monitoring_humidifier, check_monitoring_hum):
+def check_monitoring_humidifier(humidity_avg, humidity_setpoint, delay_monitoring_humidifier, hysteresis_monitoring_humidifier, delay_changed, mode, mode_changed):
     global humidifier_monitoring_delay_timer_running
     global humidifier_monitoring_delay_starttime
-
-    if (check_monitoring_hum == 0):
-        humidifier_monitoring_delay_timer_running = False
-        return
-        
+    global humidifier_failed
+    
     if (mode == 0):  #  humidifier stopped
         humidifier_monitoring_delay_timer_running = False
         return
     
-                              
-    if (mode == 0):         # humidifier stopped
-        humidifier_monitoring_delay_timer_running = False
-        return
-  
-    if (delay_changed == True):
-                                                                                                   
-        humidifier_monitoring_delay_timer_running = False
-    
-    if (humidity_avg < (humidity_setpoint - tolerance_monitoring_humidifier)):
-        if (humidifier_monitoring_delay_timer_running == True):
-            if (pi_ager_database.get_current_time() >= humidifier_monitoring_delay_starttime + delay_monitoring_humidifier * 60):    # convert minutes to seconds, wait for delay reached
-                humidifier_monitoring_delay_starttime = pi_ager_database.get_current_time()       # reset timer, but continue, issue event
-                event_msg = 'humidity below ' + str(humidity_setpoint) + '%. There may be a problem with the humidifier'
-                generate_humidifier_failed_event(event_msg)     # generate event
+    if (mode_changed == True):
+        if (mode == 0):         # humidifier stopped
+            humidifier_monitoring_delay_timer_running = False
+            return
         else:
-            humidifier_monitoring_delay_starttime = pi_ager_database.get_current_time()
+            humidifier_monitoring_delay_starttime = pi_ager_database.get_current_time() # start timer
             humidifier_monitoring_delay_timer_running = True
-    else:   # setpoint reached, stop timer
-        humidifier_monitoring_delay_timer_running = False
-                
+    
+    if (delay_changed == True):
+        humidifier_monitoring_delay_starttime = pi_ager_database.get_current_time() # start timer
+        humidifier_monitoring_delay_timer_running = True
+        
+    if (pi_ager_database.get_current_time() < humidifier_monitoring_delay_starttime + delay_monitoring_humidifier * 60):    # convert minutes to seconds, wait for delay reached
+        return
 
+    hum_low = humidity_setpoint - hysteresis_monitoring_humidifier
+    if (hum_low < 0):
+        hum_low = 0
+        
+    hum_high = humidity_setpoint
+    
+    if (humidifier_failed == False):    # check hysterese
+        if (humidity_avg <= hum_low):
+            humidifier_failed = True
+            event_msg = 'humidity below ' + str(hum_low) + '%. There may be a problem with the humidifier'
+            generate_humidifier_failed_event(event_msg)
+            cl_fact_logger.get_instance().info(event_msg)
+    else:
+        if (humidity_avg >= hum_high):
+            humidifier_failed = False
+        
+        
 cooler_delay_timer_running = False
 cooler_delay_starttime = 0
 
@@ -1450,6 +1459,7 @@ def doMainLoop():
     
     global humidifier_monitoring_delay_timer_running
     global humidifier_monitoring_delay_starttime
+    global humidifier_failed
     
     #-------------------------------------------
     
@@ -1473,6 +1483,7 @@ def doMainLoop():
     
     humidifier_monitoring_delay_timer_running = False
     humidifier_monitoring_delay_starttime = 0
+    humidifier_failed = False
     
     #Here get instance of Deviation class
     cl_fact_logger.get_instance().debug('in doMainLoop()')
@@ -1534,8 +1545,7 @@ def doMainLoop():
     
     # humidifier monitoring
     delay_monitoring_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_monitoring_humidifier_key))
-    tolerance_monitoring_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.tolerance_monitoring_humidifier_key))
-    check_monitoring_hum = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.check_monitoring_humidifier_key))
+    hysteresis_monitoring_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.hysteresis_monitoring_humidifier_key))
     hum_avg = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.humidity_avg_key)
     
     # dry aging mode
@@ -1620,7 +1630,13 @@ def doMainLoop():
                 count_continuing_emergency_loops = 0
                 
                 #weitere Settings
-                modus = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.modus_key)
+                modus_temp = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.modus_key)
+                modus_changed = False
+                if (modus != modus_temp):   # mdry aging mode changed
+                    modus = modus_temp
+                    modus_changed = True
+                else:
+                    modus = modus_temp
                     
                 setpoint_temperature = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key)
                 setpoint_humidity = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key))
@@ -1709,8 +1725,7 @@ def doMainLoop():
                 if (delay_monitoring_humidifier != delay_monitoring_humidifier_temp): 
                     delay_monitoring_humidifier = delay_monitoring_humidifier_temp
                     delay_monitoring_humidifier_changed = True
-                check_monitoring_hum = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.check_monitoring_humidifier_key))
-                tolerance_monitoring_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.tolerance_monitoring_humidifier_key))
+                hysteresis_monitoring_humidifier = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.hysteresis_monitoring_humidifier_key))
  
                 # An dieser Stelle sind alle settings eingelesen, Ausgabe auf Konsole
                 
@@ -2189,7 +2204,7 @@ def doMainLoop():
                 cl_fact_logger.get_instance().debug('checking switch')
                 generate_switch_event()
                 cl_fact_logger.get_instance().debug('checking humidifier failure')
-                check_monitoring_humidifier(hum_avg, setpoint_humidity, delay_monitoring_humidifier, delay_monitoring_humidifier_changed, modus, tolerance_monitoring_humidifier, check_monitoring_hum)
+                check_monitoring_humidifier(hum_avg, setpoint_humidity, delay_monitoring_humidifier, hysteresis_monitoring_humidifier, delay_monitoring_humidifier_changed, modus, modus_changed)
                 # cabinet simulation
                 # if (second_sensor_humidity == None or second_sensor_humidity > sensor_humidity):
                 #    sensor_humidity += 0.04

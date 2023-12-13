@@ -12,7 +12,7 @@ from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 class cl_sensor_MiThermometer(cl_sensor):
     
     def __init__(self, i_sensor_type, i_active_sensor):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.o_active_sensor = i_active_sensor  # MAIN or SECOND
         self.o_sensor_type = i_sensor_type      # class to get second sensor name e.g.
         self.temperature = None
@@ -26,7 +26,7 @@ class cl_sensor_MiThermometer(cl_sensor):
         self.event_out_of_range = False
         
     def get_current_data(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         Mi_Timeout = 120
         mi_data = pi_ager_database.get_table_row('atc_data', 1)
 #        mi_data = pi_ager_database.get_table_value_from_field(pi_ager_names.atc_mi_thermometer_data_table, pi_ager_names.mi_data_key)
@@ -70,25 +70,21 @@ class cl_sensor_MiThermometer(cl_sensor):
             cl_fact_logger.get_instance().debug('MiThermometerData : ' + 'Data error')
             pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.MiSensor_battery_key, None) 
             return(None,None,None,None)
-            
-   
-    def _write_to_db(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-
-    def execute(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
+ 
     def soft_reset(self):
         """Performs Soft Reset on SHT chip"""
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        pass
         
     def set_heading_on(self):
         """Switch the heading on the sensor on"""
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        pass
     
     def set_heading_off(self):
         """Switch the heading on the sensor off"""
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        pass
 
     
 class cl_fact_sensor_MiThermometer: 
@@ -97,7 +93,7 @@ class cl_fact_sensor_MiThermometer:
 
     @classmethod        
     def get_instance(self, i_sensor_type, i_active_sensor):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_sensor_MiThermometer.__o_instance is not None:
             return(cl_fact_sensor_MiThermometer.__o_instance)
         cl_fact_sensor_MiThermometer.__o_instance = cl_sensor_MiThermometer(i_sensor_type, i_active_sensor)
@@ -105,10 +101,10 @@ class cl_fact_sensor_MiThermometer:
 
     @classmethod
     def set_instance(self, i_instance):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_sensor_MiThermometer.__o_instance = i_instance
     
     def __init__(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
 

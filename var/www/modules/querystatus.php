@@ -37,12 +37,12 @@
     $sensor_humidity = round(get_table_value($current_values_table,$sensor_humidity_key), 0);
     $desired_maturity = read_agingtable_name_from_config();
     
-    $bus = intval(get_table_value($config_settings_table, $sensorbus_key));
+//    $bus = intval(get_table_value($config_settings_table, $sensorbus_key));
     $sensorsecondtype = intval(get_table_value($config_settings_table,$sensorsecondtype_key));
     $dehumidifier_modus = intval(get_table_value($config_settings_table,$dehumidifier_modus_key));
     $dewpoint_check = intval(get_table_value($config_settings_table, $dewpoint_check_key));
-    $sensor_humidity_abs = get_table_value($current_values_table, $sensor_humidity_abs_key);
-    $sensor_extern_humidity_abs = get_table_value($current_values_table, $sensor_extern_humidity_abs_key);
+//    $sensor_humidity_abs = get_table_value($current_values_table, $sensor_humidity_abs_key);
+//    $sensor_extern_humidity_abs = get_table_value($current_values_table, $sensor_extern_humidity_abs_key);
     $status_humidity_check = intval(get_table_value($current_values_table, $status_humidity_check_key));
     
     $uptime_row = get_table_row($time_meter_table, 1);
@@ -158,8 +158,9 @@
     $heating_hysteresis = get_table_value($config_settings_table ,$heating_hysteresis_key);
     $internal_temperature = get_table_value($current_values_table, $sensor_temperature_key);
     $external_temperature = get_table_value($current_values_table, $sensor_extern_temperature_key);
+    $setpoint_temperature = round(get_table_value($config_settings_table,$setpoint_temperature_key), 1);
     
-    if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $sensor_temperature && ($modus == 3 || $modus == 4)) {  // heating in mode 3 or 4
+    if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $setpoint_temperature && ($modus == 3 || $modus == 4)) {  // heating in mode 3 or 4
         $switch_on_cooling_compressor = $heating_hysteresis/2;
         $switch_off_cooling_compressor = -$heating_hysteresis/2;
         $switch_on_heater = $cooling_hysteresis/2;
@@ -176,7 +177,7 @@
     $dehumidifier_hysteresis = intval(get_table_value($config_settings_table,$dehumidifier_hysteresis_key));
     $hysteresis_offset = round(get_table_value($config_settings_table,$hysteresis_offset_key), 1);
 
-    $setpoint_temperature = round(get_table_value($config_settings_table,$setpoint_temperature_key), 1);
+
     $setpoint_humidity = round(get_table_value($config_settings_table,$setpoint_humidity_key), 1);  
     $saturation_point = intval(get_table_value($config_settings_table,$saturation_point_key));
     

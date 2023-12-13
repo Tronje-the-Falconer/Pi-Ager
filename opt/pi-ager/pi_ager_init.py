@@ -48,58 +48,6 @@ def set_sensortype():
     # logger.info(_('sensortype set to') + ' ' + sensorname)
     cl_fact_logger.get_instance().info(_('sensortype set to') + ' ' + sensorname)
 
-"""
-    if sensortype == 1: #DHT
-        sensor = Adafruit_DHT.DHT11
-        sensorname = 'DHT11'
-        sensorvalue = 1
-    elif sensortype == 2: #DHT22
-        sensor = Adafruit_DHT.DHT22
-        sensorname = 'DHT22'
-        sensorvalue = 2
-    elif sensortype == 3: #SHT
-        #sensor = Adafruit_DHT.AM2302
-        sensor = 'SHT'
-        sensorname = 'SHT'
-        sensorvalue = 3
-"""
-#    check_sensor(sensorname, sensor)
-    
-            
-def check_sensor(sensorname, sensor):
-    """
-    checking wired sensor
-    """
-    global sensortype
-    # logger.debug('check_sensor()')
-    cl_fact_logger.get_instance().debug('check_sensor()')
-    try:
-        if sensorname == 'SHT':
-            sensor_sht = pi_sht1x.SHT1x(pi_ager_names.gpio_sensor_data, pi_ager_names.gpio_sensor_sync, gpio_mode=pi_ager_names.board_mode)
-            sensor_sht.read_temperature()
-            sensor_sht.read_humidity()
-            value_sht_temperature = sensor_sht.temperature_celsius
-            value_sht_humidity = sensor_sht.humidity
-            
-            if value_sht_temperature > 100:
-                raise Exception
-        else:
-            value_dht_humidity, value_temperature = Adafruit_DHT.read_retry(sensor, pi_ager_names.gpio_sensor_data)
-            
-            if value_temperature > 100:
-                raise Exception
-    except:
-        if sensorname == 'SHT':
-            sensortype = 2
-        elif sensorname == 'DHT22':
-            sensortype = 1
-        else:
-            sensortype = 3
-        pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.sensortype_key, sensortype)
-        # logger.info(_('wrong sensortype in settings'))
-        cl_fact_logger.get_instance().info(_('wrong sensortype in settings'))
-        set_sensortype()
-
 def set_system_starttime():
     """
     setting starttimes

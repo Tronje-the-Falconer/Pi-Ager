@@ -1,7 +1,7 @@
 ﻿<!-- Diese Einstellungen werden nur im manuellen Modus eingeblendet -->
                                 <?php
                                 include 'modules/write_settings_db_logfile_txt.php';        // Speichert die eingestelleten Werte (Temperaturregelung, Feuchte, Lüftung)
-                                include 'modules/read_settings_db.php';                     // Liest die Einstellungen (Temperaturregelung, Feuchte, Lüftung und deren Hysteresen) und Betriebsart des RSS
+                                //include 'modules/read_settings_db.php';                     // Liest die Einstellungen (Temperaturregelung, Feuchte, Lüftung und deren Hysteresen) und Betriebsart des RSS
     // echo ('<br>');
     // echo ('MANVALS_read DB circulate: ' . $circulation_air_period);
     // echo ('<br>');

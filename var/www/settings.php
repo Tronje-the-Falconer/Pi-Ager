@@ -3,21 +3,11 @@
                                     include 'modules/names.php';
                                     include 'modules/database.php';
                                     include 'modules/logging.php';                            //liest die Datei fuer das logging ein
-                                    include 'modules/start_stop_program.php';                   // Startet / Stoppt das Reifeprogramm bzw. den ganzen Schrank
+                                    include 'modules/control_thread_settings.php';            // Startet / Stoppt das Reifeprogramm bzw. den ganzen Schrank
                                     
                                     include 'modules/write_table_db.php';                       // Speichert die Auswahl der Reifetabelle
-                                    //include 'modules/write_settings_db_logfile_txt.php';        // Speichert die eingestelleten Werte (Temperaturregelung, Feuchte, Lüftung)
-                                    //include 'modules/write_config_db_logfile_txt.php';          // Speichert die eingestelle Configuration (Hysteresen, Sensortyp, GPIO's)
-                                    
-                                    include 'modules/funclib.php';
-                                    include 'modules/read_settings_db.php';                     // Liest die Einstellungen (Temperaturregelung, Feuchte, Lüftung und deren Hysteresen) und Betriebsart des RSS
-                                    include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
-                                    include 'modules/read_current_db.php';                      // Liest die gemessenen Werte T/H und den aktuellen Zustand der Aktoren
-                                    include 'modules/read_operating_mode_db.php';               // Liest die Art der Reifesteuerung
-                                    include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
-                                    // include 'modules/read_csv_dir.php';                         // Liest das Verezichnis mit den Reifeprogrammtabellen ein
-                                    
-                                    
+                                    include 'modules/funclib.php';                              // helper funktionen für write_settings_db_logfile.php und write_config_db_logfile.php
+                                    include 'modules/read_all_settings_db.php';                 // liest all für die settings-Seite benötigten Werte
                                     
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('operating values'); ?></h2>
@@ -35,20 +25,14 @@
                                     <tr>
                                     <?php 
                                         print '<form  method="post">';
-                                        // Prüft, ob Prozess RSS läuft ( NULL = Rss.py läuft nicht als Prozess, )
-                                        //$grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
-                                        // Prüft, ob Prozess Reifetab läuft ()
-                                        //$grepagingtable = shell_exec('sudo /var/sudowebscript.sh grepagingtable');
-                                        //$grepbackup = shell_exec('sudo /var/sudowebscript.sh grepbackup');
-                                        if ($grepbackup != NULL){ //wenn backup läuft
+                                        if ($status_backup != 0){ //wenn backup läuft
                                             echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
                                             <td></td>
                                             <td>';
                                             echo _('Backup is currently running!');
                                             echo '</td>';
                                         }
-                                        elseif ($grepmain == NULL){ // wenn main.py nicht läuft und der Status in DB aus ist
-                                            
+                                        elseif ($status_main == 0){ // wenn main.py nicht läuft und der Status in DB aus ist
                                             echo '<td><img src="images/icons/operatingmode_fail_42x42.png" style="padding: 10px;"></td>
                                             <td></td>
                                             <td>';
@@ -59,12 +43,12 @@
 											echo _('after fixing the error you have to reboot the system <br>');
                                             echo '</td><td></td>';
                                         }
-                                        elseif ($grepmain != NULL and $status_piager == 1){ // wenn main.py läuft und Status in DB eingeschaltet
+                                        elseif ($status_main != 0 and $status_piager == 1){ // wenn main.py läuft und Status in DB eingeschaltet
                                             echo '<td><img src="images/icons/operating_42x42.gif" alt="" style="padding: 10px;"></td><td><img src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td><td>';
                                             echo "<button class=\"art-button\" name=\"pi-ager_agingtable_stop\" value=\"pi-ager_agingtable_stop\" onclick=\"return confirm('"._('stop pi-ager?').' \\n '._('if agingtable is running, it will be stopped also!')."');\">"._('stop pi-ager')."</button>";
                                             echo '</td><td></td>';
                                         }
-                                        elseif ($grepmain != NULL and $status_piager == 0){ //Wenn main.py  läuft und der Status in DB aus ist
+                                        elseif ($status_main != 0 and $status_piager == 0){ //Wenn main.py  läuft und der Status in DB aus ist
                                             echo '<td><img src="images/icons/operatingmode_42x42.png" style="padding: 10px;"></td>
                                             <td><img src="images/icons/status_off_20x20.png" style="padding-top: 10px;"></td>
                                             <td>';
@@ -88,7 +72,7 @@
                                             print '<tr>';
                                             // Prüft, ob scale threads laufen 
                                             //$grepscale = shell_exec('sudo /var/sudowebscript.sh grepscale');
-                                            if ($grepbackup != NULL){ //wenn backup läuft
+                                            if ($status_backup != 0){ //wenn backup läuft
                                                 echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
                                                 <td></td>
                                                 <td>';
@@ -96,7 +80,7 @@
                                                 echo '</td></tr>';
                                             }
                                             else {
-                                                if ($grepmain == NULL or intval(get_table_value($current_values_table, $scale1_thread_alive_key)) == 0 or intval(get_table_value($current_values_table, $scale2_thread_alive_key)) == 0){
+                                                if ($status_main == 0 or $scale1_thread_alive == 0 or $scale2_thread_alive == 0){
                                                     echo '<td><img src="images/icons/scale_fail_42x42.gif" alt="" style="padding: 10px;"></td>
                                                     <td></td>
                                                     <td>';
@@ -109,20 +93,20 @@
                                                     echo '</tr>';
                                                 }
                                                 else {
-                                                    if (intval(get_table_value($settings_scale1_table, $referenceunit_key)) == 0){
+                                                    if ($scale1_refunit == 0){
                                                         $tara_scale1_disabled = true;
                                                     }
                                                     else{
                                                         $tara_scale1_disabled = false;
                                                     }
-                                                    if (intval(get_table_value($settings_scale2_table, $referenceunit_key)) == 0){
+                                                    if ($scale2_refunit == 0){
                                                         $tara_scale2_disabled = true;
                                                     }
                                                     else{
                                                         $tara_scale2_disabled = false;
                                                     }
                                                     print '<form  method="post">';
-                                                    if (intval(get_table_value($current_values_table, $status_scale1_key)) == 0){
+                                                    if ($status_scale1 == 0){
                                                         echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
                                                         <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                         <td>';
@@ -148,7 +132,7 @@
                                                         echo "<button class=\"art-button\" name=\"scale1_stop\" value=\"scale1_stop\" onclick=\"return confirm('"._('stop measurement on scale')." 1?');\">"._('stop scale')." 1</button>";
                                                         echo '</td></tr><tr>';
                                                     }
-                                                    if (intval(get_table_value($current_values_table,$status_scale2_key)) == 0){
+                                                    if ($status_scale2 == 0){
                                                         echo '<td><img src="images/icons/scale_42x42.png" alt="" style="padding: 10px;"></td>
                                                         <td><img src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>
                                                         <td>';
@@ -209,7 +193,7 @@
                                             print '<tr>';
                                             // Prüft, ob main thread läuft
                                             // oder backup läuft
-                                            if ($grepbackup != NULL){ //wenn backup läuft
+                                            if ($status_backup != 0){ //wenn backup läuft
                                                 echo '<td><img src="images/icons/operatingmode_backup_42x42.png" style="padding: 10px;"></td>
                                                 <td></td>
                                                 <td>';
@@ -217,7 +201,7 @@
                                                 echo '</td></tr>';
                                             }
                                             else {
-                                                if ($grepmain == NULL or intval(get_table_value($current_values_table, $aging_thread_alive_key)) == 0){
+                                                if ($status_main == 0 or $aging_thread_alive == 0){
                                                     echo '<td><img src="images/icons/agingtable_fail_42x42.gif" alt="" style="padding: 10px;"></td>
                                                     <td></td>
                                                     <td>';
@@ -230,12 +214,12 @@
                                                     echo '</tr>';
                                                 }                                       
                                                 else {
-                                                    echo '<td></td><td></td><td style="text-align: left;">';
+                                                    echo '<td></td><td></td><td colspan="2" style="text-align: left;">';
                                                     echo _('Selected aging table');
                                                     echo ' : ' . $desired_maturity . '<br></td>'; 
                                                     echo '<form  method="post"> <tr> <td>';
                                                 
-                                                    if ($grepagingtable == 0){
+                                                    if ($status_agingtable == 0){
                                                         echo '<img src="images/icons/agingtable_42x42.png" alt="" style="padding: 0px;">';
                                                         echo '</td><td>';
                                                         echo '<img src="images/icons/status_off_20x20.png" alt="" style="padding: 0px;">';
@@ -251,7 +235,7 @@
                                                         foreach($agingtable_names as $name) {
                                                             if ($name == $desired_maturity){
                                                                 echo '<input type="radio" ';
-                                                                if ($grepagingtable != 0){
+                                                                if ($status_agingtable != 0){
                                                                     echo 'disabled="true" ';
                                                                 }
                                                                 echo 'name="agingtable" value="'.$name.'" checked="checked"><label> '.$name.'</label><br>';
@@ -259,7 +243,7 @@
                                                             else
                                                             {
                                                                 echo '<input type="radio" ';
-                                                                if ($grepagingtable != 0){
+                                                                if ($status_agingtable != 0){
                                                                     echo 'disabled="true" ';
                                                                 }                                                                
                                                                 echo 'name="agingtable" value="'.$name.'"><label> '.$name.'</label><br>';
@@ -289,7 +273,7 @@
 
                                                         if (isset ($agingtable_names)){
                                                             echo "<button class=\"art-button\" ";
-                                                            if ($grepagingtable != 0){
+                                                            if ($status_agingtable != 0){
                                                                 echo 'disabled="true" ';
                                                             }
                                                             echo "name=\"select_agingtable\" value=\"select_agingtable\"onclick=\"return confirm('"._('select new agingtable?')."');\">"._('select')."</button>";
@@ -305,7 +289,7 @@
                                                         <td style="text-align: left;">';
 
                                                         if (isset ($agingtable_names)){
-                                                            if ($grepagingtable == 0){
+                                                            if ($status_agingtable == 0){
                                                                 echo "<button class=\"art-button\" name=\"pi-ager_agingtable_start\" value=\"pi-ager_agingtable_start\" onclick=\"return confirm('"._('start agingtable?')." \\n "._('manual values will be overwritten in database!')."');\">"._('start agingtable')."</button>";
                                                             }
                                                             else {
@@ -467,7 +451,7 @@
                                                         if (isset($dataset[$agingtable_hours_field])){
                                                             $data_hours = $dataset[$agingtable_hours_field];
                                                         } else {$data_hours = '..';}
-                                                        if ($current_period == $index_row AND $grepagingtable != 0){
+                                                        if ($current_period == $index_row AND $status_agingtable != 0){
                                                             echo '<tr bgcolor=#D19600 >';
                                                         }
                                                         else{
@@ -501,7 +485,7 @@
                                     </table>
                                 </div>
                                 <?php 
-                                    if ($grepagingtable == 0){
+                                    if ($status_agingtable == 0){
                                         include ('manvals.php');
                                         }
                                     else {

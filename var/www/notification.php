@@ -19,8 +19,6 @@
                                                 <td class="show_event_cell"><div class="tooltip"><img src="images/icons/pushover_20x20.png"><span class="tooltiptext"><?php echo _('pushover'); ?></span></div></td>
                                                 <td class="show_event_cell"><div class="tooltip"><img src="images/icons/telegram_20x20.png"><span class="tooltiptext"><?php echo _('telegram'); ?></span></div></td>
                                                 <td class="show_messenger_cell"><div class="tooltip"><?php echo _('alarm') ?><span class="tooltiptext"><?php echo _('alarm'); ?></span></div></td>
-                                                <td class="show_messenger_cell"><div class="tooltip"><?php echo _('raise exception') ?><span class="tooltiptext"><?php echo _('raise exception'); ?></span></div></td>
-                                                <td class="show_messenger_cell"><div class="tooltip"><?php echo _('active') ?><span class="tooltiptext"><?php echo _('active'); ?></span></div></td>
                                             </tr>
                                             <?php 
                                                 $index_row = 0;
@@ -75,120 +73,55 @@
                                                                 // $messenger_alarm = '';
                                                                 $selected_messenger_alarm_name = '';
                                                             }
-                                                            if (!empty($dataset[$messenger_raise_exception_field])){
-                                                                $messenger_raise_exception = $dataset[$messenger_raise_exception_field];
-                                                            } else {$messenger_raise_exception = '';}
-                                                            if ($messenger_raise_exception == 1){
-                                                                $checked_messenger_raise_exeption_true = 'checked';
+
+                                                            echo '<td><input type="hidden" name="messenger_id_' . $index_row . '" value="' . $messenger_id . '">'. $messenger_id .'</td>';
+                                                            if ($index_row == 0) {
+                                                                echo '<td><input name="messenger_exception_' . $messenger_id . '" type="text" style="width: 90%; text-align: right; background-color: lightgrey; color: red;" readonly required value=' . $messenger_exception .'></td>';
                                                             }
-                                                            else{
-                                                                $checked_messenger_raise_exeption_true = '';
+                                                            else if ($index_row <= 10) {
+                                                                echo '<td><input name="messenger_exception_' . $messenger_id . '" type="text" style="width: 90%; text-align: right; background-color: #E8E8E8;" readonly required value=' . $messenger_exception .'></td>';                            
                                                             }
+                                                            else {
+                                                                echo '<td><input name="messenger_exception_' . $messenger_id . '" type="text" style="width: 90%; text-align: right;" required value=' . $messenger_exception .'></td>';                            
+                                                            }
+
+                                                            echo '<td> <input type="hidden" name="checked_messenger_e_mail_true_' . $messenger_id . '" value="0">
+                                                                    <input type="checkbox" name="checked_messenger_e_mail_true_' . $messenger_id . '" value="1" ' . $checked_messenger_e_mail_true .'></td>';
+                                                            echo '<td> <input type="hidden" name="checked_messenger_pushover_true_' . $messenger_id . '" value="0">
+                                                                    <input type="checkbox" name="checked_messenger_pushover_true_' . $messenger_id . '" value="1" ' . $checked_messenger_pushover_true .'></td>';
+                                                            echo '<td> <input type="hidden" name="checked_messenger_telegram_true_' . $messenger_id . '" value="0">
+                                                                    <input type="checkbox" name="checked_messenger_telegram_true_' . $messenger_id . '" value="1" ' . $checked_messenger_telegram_true .'></td>';
                                                             
-                                                            if (!empty($dataset[$messenger_active_field])){
-                                                                $messenger_active = $dataset[$messenger_active_field];
-                                                            } else {$messenger_active = '';}
-                                                            if ($messenger_active == 1){
-                                                                $checked_messenger_active_true = 'checked';
+                                                            if (isset ($alarm_names)){
+                                                                echo '<td><select name="messenger_alarm_' . $messenger_id . '">';
+                                                                echo '<option value=" "> <br>';
+                                                                foreach($alarm_names as $name) {
+                                                                    if ($name!=$selected_messenger_alarm_name){
+                                                                        echo '<option value="'.$name.'">'.$name.'<br>';
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        echo '<option value="'.$name.'" selected>'.$name.'<br>';
+                                                                    }
+                                                                }
+                                                                echo '</select></td>';
                                                             }
-                                                            else{
-                                                                $checked_messenger_active_true = '';
-                                                            }
-                                                                echo '<td><input type="hidden" name="messenger_id_' . $index_row . '" value="' . $messenger_id . '">'. $messenger_id .'</td>';
-                                                                if ($index_row == 0) {
-                                                                    echo '<td><input name="messenger_exception_' . $messenger_id . '" type="text" style="width: 90%; text-align: right; background-color: lightgrey; color: red;" readonly required value=' . $messenger_exception .'></td>';
-                                                                }
-                                                                else if ($index_row <= 9) {
-                                                                    echo '<td><input name="messenger_exception_' . $messenger_id . '" type="text" style="width: 90%; text-align: right; background-color: #E8E8E8;" readonly required value=' . $messenger_exception .'></td>';                            
-                                                                }
-                                                                else {
-                                                                    echo '<td><input name="messenger_exception_' . $messenger_id . '" type="text" style="width: 90%; text-align: right;" required value=' . $messenger_exception .'></td>';                            
-                                                                }
-                                                                echo '<td> <input type="hidden" name="checked_messenger_e_mail_true_' . $messenger_id . '" value="0">
-                                                                        <input type="checkbox" name="checked_messenger_e_mail_true_' . $messenger_id . '" value="1" ' . $checked_messenger_e_mail_true .'></td>';
-                                                                echo '<td> <input type="hidden" name="checked_messenger_pushover_true_' . $messenger_id . '" value="0">
-                                                                        <input type="checkbox" name="checked_messenger_pushover_true_' . $messenger_id . '" value="1" ' . $checked_messenger_pushover_true .'></td>';
-                                                                echo '<td> <input type="hidden" name="checked_messenger_telegram_true_' . $messenger_id . '" value="0">
-                                                                        <input type="checkbox" name="checked_messenger_telegram_true_' . $messenger_id . '" value="1" ' . $checked_messenger_telegram_true .'></td>';
-                                                                if (isset ($alarm_names)){
-                                                                        echo '<td><select name="messenger_alarm_' . $messenger_id . '">';
-                                                                        echo '<option value=" "> <br>';
-                                                                        foreach($alarm_names as $name) {
-                                                                            if ($name!=$selected_messenger_alarm_name){
-                                                                                echo '<option value="'.$name.'">'.$name.'<br>';
-                                                                            }
-                                                                            else
-                                                                            {
-                                                                                echo '<option value="'.$name.'" selected>'.$name.'<br>';
-                                                                            }
-                                                                        }
-                                                                        echo '</select></td>';
-                                                                }
-                                                                echo '<td> <input type="hidden" name="checked_messenger_raise_exeption_true_' . $messenger_id . '" value="0">
-                                                                        <input type="checkbox" name="checked_messenger_raise_exeption_true_' . $messenger_id . '" value="1" ' . $checked_messenger_raise_exeption_true .'></td>';
-                                                                 echo '<td> <input type="hidden" name="checked_messenger_active_true_' . $messenger_id . '" value="0">
-                                                                        <input type="checkbox" name="checked_messenger_active_true_' . $messenger_id . '" value="1" ' . $checked_messenger_active_true .'></td>';
+
                                                             echo '</tr>';
                                                             $index_row++;
                                                         }
                                                         echo '<input type="hidden" name="count_messenger_number_rows" value="' . $count_messenger_number_rows . '">';
-                                                     }
-                                                     catch (Exception $e) {
-                                                        }
+                                                    }
+                                                    catch (Exception $e) {
+                                                    }
                                                 }
                                             ?>
                                         </table>
+                                        <br>
                                     <button class="art-button" name="save_messenger_values" value="save_messenger_values" onclick="return confirm('<?php echo _('ATTENTION: save messenger values?');?>');"><?php echo _('save'); ?></button>
                                     </form>
                                     <br>
-                                    <form method="post" name="add_messenger">
-                                        <table id="show_messenger" class="show_messenger" style="width: 100%;">
-                                            <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
-                                                <td class="show_messenger_cell"><div class="tooltip"><?php echo _('exception') ?><span class="tooltiptext"><?php echo _('exception'); ?></span></div></td>
-                                                 <td class="show_event_cell"><div class="tooltip"><img src="images/icons/mail_20x20.png"><span class="tooltiptext"><?php echo _('e-mail') ?></span></div></td>
-                                                <td class="show_event_cell"><div class="tooltip"><img src="images/icons/pushover_20x20.png"><span class="tooltiptext"><?php echo _('pushover'); ?></span></div></td>
-                                                <td class="show_event_cell"><div class="tooltip"><img src="images/icons/telegram_20x20.png"><span class="tooltiptext"><?php echo _('telegram'); ?></span></div></td>
-                                                <td class="show_messenger_cell"><div class="tooltip"><?php echo _('alarm') ?><span class="tooltiptext"><?php echo _('alarm'); ?></span></div></td>
-                                                <td class="show_messenger_cell"><div class="tooltip"><?php echo _('raise exception') ?><span class="tooltiptext"><?php echo _('raise exception'); ?></span></div></td>
-                                                <td class="show_messenger_cell"><div class="tooltip"><?php echo _('active') ?><span class="tooltiptext"><?php echo _('active'); ?></span></div></td>
-                                            </tr>
-                                            <tr>
-                                                <td><input name="add_messenger_exception" type="text" style="width: 90%; text-align: right;" required value></td>
-                                                <td><input type="hidden" name="add_checked_messenger_e_mail_true" value="0">
-                                                    <input type="checkbox" name="add_checked_messenger_e_mail_true" value="1"></td>
-                                                <td> <input type="hidden" name="add_checked_messenger_pushover_true" value="0">
-                                                     <input type="checkbox" name="add_checked_messenger_pushover_true" value="1"></td>
-                                                <td> <input type="hidden" name="add_checked_messenger_telegram_true" value="0">
-                                                     <input type="checkbox" name="add_checked_messenger_telegram_true" value="1"></td>
-                                                <?php
-                                                    if (isset ($alarm_names)){
-                                                            echo '<td><select name="add_messenger_alarm">';
-                                                            echo '<option value=""><br>';
-                                                            foreach($alarm_names as $name) {
-                                                                echo '<option value="'.$name.'">'.$name.'<br>';
-                                                            }
-                                                            echo '</select></td>';
-                                                    }
-                                                ?>
-                                                <td> <input type="hidden" name="add_checked_messenger_raise_exeption_true" value="0">
-                                                    <input type="checkbox" name="add_checked_messenger_raise_exeption_true" value="1"></td>
-                                                    <td> <input type="hidden" name="add_checked_messenger_active_true" value="0">
-                                                         <input type="checkbox" name="add_checked_messenger_active_true" value="1"></td>
-                                            </tr>
-                                        </table>
-                                        <button class="art-button" name="add_messenger" value="add_messenger" onclick="return confirm('<?php echo _('ATTENTION: add messenger?');?>');"><?php echo _('add'); ?></button>
-                                    </form>
-                                    <br>
-                                    <form method="post" name="delete_messenger">
-                                        <table id="show_messenger" class="show_messenger" style="width: 100%;">
-                                            <tr>
-                                                <td><?php echo _('id to delete: ') ?></td><td><input name="id" type="number" min="10" step="1" style="width: 90%; text-align: right;" ></td>
-                                            </tr>
-                                            <tr>
-                                                <td colspan=2><button class="art-button" name="delete_messenger" value="delete_messenger" onclick="return confirm('<?php echo _('ATTENTION: delete messenger?');?>');"><?php echo _('delete'); ?></button></td>
-                                            </tr>
-                                        </table>
-                                    </form>
+
                                     <p class="help_b">
                                         <button class="art-button" type="button" onclick="help_messenger_blockFunction()"><?php echo _('help'); ?></button>
                                     </p>

@@ -39,8 +39,11 @@
         }
         
         # check if combination of sensor selections is allowed
-        if (($sensornum == 1 || $sensornum == 2 || $sensornum == 3) && ($sensorsecondnum == 4 || $sensorsecondnum == 5)) {
-            echo '<script> alert("' . _('Can not combine selected internal and external sensors!\nExternal sensors SHT85 or SHT3x can only combined with internal sensors SHT85 or SNT3x, when I2C addresses are different.\nSee also help!') . '"); </script>';
+        if (($sensornum == 1 || $sensornum == 2 || $sensornum == 3) && ($sensorsecondnum == 4 || $sensorsecondnum == 5 || $sensorsecondnum == 6)) {
+            echo '<script> alert("' . _('Can not combine selected internal and external sensors!\nExternal sensors SHT85, SHT3x or AHT2x can only combined with internal sensors SHT85, SHT3x or AHT2x, when I2C addresses are different.\nSee also help!') . '"); </script>';
+        }
+        else if (($sensornum == 6) && ($sensorsecondnum == 6)) {
+            echo '<script> alert("' . _('Can not combine selected internal and external sensors!\nExternal sensor AHT2x can not combined with internal sensors AHT2x. I2C addresses must be different.\nSee also help!') . '"); </script>';
         }
         else {
             # save new settings
@@ -57,7 +60,7 @@
                     shell_exec('sudo /var/sudowebscript.sh sensorbus1wire > /dev/null 2>&1');
                     do_shutdown(_('Change to 1-wire sensor'));
                 }
-                if (($sensornum == 4 || $sensornum == 5) && $old_bus  ==  1){
+                if (($sensornum == 4 || $sensornum == 5 || $sensornum == 6) && $old_bus  ==  1){
                     //echo '<script> alert("' . _('Change to I2C') . '"); </script>';
                     write_busvalue(0);
                     logger('DEBUG', 'sensorbus saved. changed to i2c (0)');
@@ -75,7 +78,7 @@
                 // echo '<script language="javascript"> alert("' . _('External sensor type changed') . '"); </script>';
                 $boot_msg = _('External sensor type changed');
                 logger('DEBUG', 'External sensor type changed');
-                if ($sensorsecondnum == 0 || $sensorsecondnum == 6) {    # changed back to disabled or MiThermometer, reboot is enough 
+                if ($sensorsecondnum == 0 || $sensorsecondnum == 7) {    # changed back to disabled or MiThermometer, reboot is enough 
                     do_reboot($boot_msg);
                 }
                 else {

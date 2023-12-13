@@ -16,17 +16,16 @@ import inspect
 # import pi_ager_logging
 from main.pi_ager_cl_logger import cl_fact_logger
 import time
-from abc import ABC, abstractmethod
-from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
+# from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from sensors.pi_ager_cl_i2c_bus import cl_fact_i2c_bus_logic
 from sensors.pi_ager_cl_i2c_sensor_sht import cl_fact_i2c_sensor_sht
 from main.pi_ager_cx_exception import *
-from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
-from sensors.pi_ager_cl_sensor import cl_sensor#
-from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
+# from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
+from sensors.pi_ager_cl_sensor import cl_sensor
+# from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 
 
-class cl_sensor_sht(cl_sensor, ABC):
+class cl_sensor_sht(cl_sensor):
     
     _RESET = 0x30A2
     _HEATER_ON = 0x306D
@@ -36,8 +35,9 @@ class cl_sensor_sht(cl_sensor, ABC):
     _STATUS_BITS_MASK = 0xFFFC
     
     def __init__(self, i_active_sensor, i_sensor_type, i_address):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cl_fact_logger.get_instance().debug("i2c address is" + str(i_address))
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        if i_address is not None:
+            cl_fact_logger.get_instance().debug("i2c address is " + hex(i_address))
                     
         self._max_errors = 1
         self._old_temperature = 0
@@ -68,7 +68,7 @@ class cl_sensor_sht(cl_sensor, ABC):
 
  
     def _send_i2c_start_command(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         msb_data = 0x24
         lsb_data = 0x00
@@ -88,7 +88,7 @@ class cl_sensor_sht(cl_sensor, ABC):
    
     
     def _read_data(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
                      
         self._send_i2c_start_command()
         self.data0 = self._i2c_bus.read_i2c_block_data(self._i2c_sensor.get_address(), 0x00, 8)
@@ -133,7 +133,7 @@ class cl_sensor_sht(cl_sensor, ABC):
    
 
     def clear_status_register(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         msb_data = 0x30
         lsb_data = 0x41
         
@@ -144,7 +144,7 @@ class cl_sensor_sht(cl_sensor, ABC):
         self.read_status_register()
         
     def read_status_register(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         msb_data = 0xF3
         lsb_data = 0x2D
         
@@ -197,7 +197,7 @@ class cl_sensor_sht(cl_sensor, ABC):
         return (x & 1 << n != 0) 
         
     def get_current_data(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         repeat_count = 0
         repeat_count_max = 5
@@ -227,7 +227,7 @@ class cl_sensor_sht(cl_sensor, ABC):
         
     
     def _get_current_temperature(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
 
         t_val = (self.data0[0]<<8) + self.data0[1] #convert the data
         
@@ -240,7 +240,7 @@ class cl_sensor_sht(cl_sensor, ABC):
         return(Temperature_Celsius)
   
     def _get_current_humidity(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
 
         h_val = (self.data0[3] <<8) + self.data0[4]     # Convert the data
         
@@ -249,15 +249,10 @@ class cl_sensor_sht(cl_sensor, ABC):
         cl_fact_logger.get_instance().debug("Relative Humidity is : %.2f %%RH" %Humidity)
 
         return(Humidity)
-   
-    def _write_to_db(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        super()._write_to_db()
-        pass
 
     def soft_reset(self):
         """Performs Soft Reset on SHT chip"""
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
 
         msb_data = 0x30
         lsb_data = 0xA2
@@ -267,17 +262,13 @@ class cl_sensor_sht(cl_sensor, ABC):
  
     def set_heading_on(self):
         """Switch the heading on the sensor on"""
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._i2c_bus.write(self._HEATER_ON)
         pass
     
     def set_heading_off(self):
         """Switch the heading on the sensor off"""
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._i2c_bus.write(self._HEATER_OFF)
         pass
 
-    def execute(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        self._write_to_db()
-        

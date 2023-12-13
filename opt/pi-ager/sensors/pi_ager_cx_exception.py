@@ -48,6 +48,8 @@ class cx_adafruit_error(Error):
 class cx_measurement_error(Error):
     pass
     
-class cx_i2c_aht_crc_error(Error):
+class cx_i2c_aht_temperature_crc_error(Error):
     pass
 
+class cx_i2c_aht_humidity_crc_error(Error):
+    pass    

@@ -29,7 +29,7 @@ import globals
 class cl_ab_database_config(ABC):
     __o_dirty = True
     def __init__(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         # data = self.read_data_from_db()
         pass
@@ -38,14 +38,14 @@ class cl_ab_database_config(ABC):
         pass
 
     def get_data(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         # if self.is_dirty() is True:
         self.data = self.read_data_from_db()
             
         return(self.data)
     
     def read_data_from_db(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         """
         Read from db
         """
@@ -63,20 +63,20 @@ class cl_ab_database_config(ABC):
         pass
         
     def is_dirty(self):
-       cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#       cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
        return(cl_ab_database_config.__o_dirty)
-       pass
+#       pass
     
 class cl_db_database_mysql:
     def read_data_from_db(self, i_select_statement):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         # Builds a dict of dicts it_table from mysql db
         it_table = {}
         
         return it_table
 class cl_db_influxdb:
     def __init__(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         host='localhost'
         port=8086
         user = 'admin'
@@ -93,7 +93,7 @@ class cl_db_influxdb:
         
 
     def read_data_from_db(self, i_select_statement):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         """
         Read from db
         """
@@ -110,7 +110,7 @@ class cl_db_influxdb:
         return it_table
  
     def write_data_to_db(self, i_insert_statment):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         
         self.client.write_points(i_insert_statment)
         
@@ -118,7 +118,8 @@ class cl_db_influxdb:
 
 class cl_db_database_sqlite:
     def __init__(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        pass
         
         
     def connect(self):
@@ -136,11 +137,11 @@ class cl_db_database_sqlite:
         self.cursor = self.connection.cursor()    
     
     def commit(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.connection.commit() 
         
     def read_data_from_db(self, i_select_statement):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         """
         Read from db
         """
@@ -180,7 +181,7 @@ class cl_fact_db_influxdb(ABC):
         """
         Factory method to set the database instance
         """
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_db_influxdb.__o_instance = i_instance
         
     @classmethod        
@@ -188,7 +189,7 @@ class cl_fact_db_influxdb(ABC):
         """
         Factory method to get the database instance
         """
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_db_influxdb.__o_instance is not None:
             return(cl_fact_db_influxdb.__o_instance)
         cl_fact_db_influxdb.__o_instance = cl_db_influxdb()
@@ -198,7 +199,7 @@ class cl_fact_db_influxdb(ABC):
         """
         Constructor email logic factory
         """
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     
 class cl_fact_database_config(ABC):
@@ -210,7 +211,7 @@ class cl_fact_database_config(ABC):
         Factory method to set the database instance
         """
         #logger.debug(pi_ager_logging.me())
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_database_config.__o_instance = i_instance
         
     @classmethod        
@@ -219,7 +220,7 @@ class cl_fact_database_config(ABC):
         Factory method to get the database instance
         """
         # logger.debug(pi_ager_logging.me())
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_database_config.__o_instance is not None:
             return(cl_fact_database_config.__o_instance)
         cl_fact_database_config.__o_instance = cl_db_database_sqlite()
@@ -230,6 +231,6 @@ class cl_fact_database_config(ABC):
         Constructor email logic factory
         """
         # logger.debug(pi_ager_logging.me())
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
     

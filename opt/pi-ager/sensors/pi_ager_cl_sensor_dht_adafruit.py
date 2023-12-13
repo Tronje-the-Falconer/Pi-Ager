@@ -19,9 +19,9 @@ import pi_ager_gpio_config
 
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from main.pi_ager_cx_exception import *
-from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
-from sensors.pi_ager_cl_sensor import cl_sensor #
-from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
+# from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
+from sensors.pi_ager_cl_sensor import cl_sensor
+# from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 import Adafruit_DHT
 
 class cl_sensor_dht_adafruit(cl_sensor):
@@ -77,43 +77,16 @@ class cl_sensor_dht_adafruit(cl_sensor):
 #        self.delete_error_counter() 
         cl_fact_logger.get_instance().debug('Too many measurement errors occurred!')
         raise cx_measurement_error (_('Too many measurement errors occurred!'))    
-   
-    def _write_to_db(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        super()._write_to_db()
-        pass
-
-    def execute(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        #self.get_current_data()
-        self._write_to_db()
         
     def set_heading_on(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug('Not avaiable for this sensor type')
     
     def set_heading_off(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug('Not avaiable for this sensor type')
     
     def soft_reset(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug('Not avaiable for this sensor type')
-        
-class th_sensor_dht_adafruit(cl_sensor_dht_adafruit):
-#    SUPPORTED_MAIN_SENSOR_TYPES = ["dht_adafruit", "dht_adafruit", "DHT22"]
-    NAME = 'Main_sensor'
-    
-    
-    def __init__(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        self.get_type_raise = False
-        self._type = "dht_adafruit"
-        
-    def get_type(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if self.get_type_raise == True:
-            raise cx_Sensor_not_defined(self._type_ui)        
-        return(self._type)
 
-    

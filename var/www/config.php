@@ -1,6 +1,6 @@
                                 <?php
                                 include 'modules/write_config_db_logfile_txt.php';          // Speichert die eingestelle Configuration (Hysteresen, Sensortyp, GPIO's)
-                                include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
+                                // include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
                                 ?>
                                 <button class="art-button" type="button" onclick="setconfig_blockFunction()"><?php echo _('set general configuration values'); ?></button>
                                 </br>
@@ -93,13 +93,13 @@
                                                 }
                                                 else {
                                                     $uv_check_config_active = '';
-                                                }
+                                                }                                                
                                                 if ($check_monitoring_humidifier == 1) {
                                                     $check_monitoring_hum_active = 'checked';
                                                 }
                                                 else {
                                                     $check_monitoring_hum_active = '';
-                                                }
+                                                }                                                                                        
                                             ?>
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <tr>
@@ -275,7 +275,7 @@
                                                         <input type="hidden" name="check_monitoring_humidifier_config" value="0" />
                                                         <label><input style="vertical-align: -2px;" type="checkbox" name="check_monitoring_humidifier_config" value="1" <?php echo $check_monitoring_hum_active; ?>>&nbsp;<?php echo _('activate monitoring');?></label>
                                                     </td>
-                                                </tr>
+                                                </tr>                                                     
                                             </table>
                                             <script>
                                                 function help_humidifier_monitoring_blockFunction() {

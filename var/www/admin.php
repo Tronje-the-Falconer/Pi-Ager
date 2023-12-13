@@ -19,9 +19,10 @@
                                     include 'modules/write_defrost_db.php';                     // schreibt die defrost Werte in die DB
                                     include 'modules/write_nextion_type_db.php';                // nextion display type save
                                     
-                                    include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
-                                    include 'modules/read_current_db.php';
-                                    include 'modules/start_stop_uv.php';
+                                    // include 'modules/read_config_db.php';                       // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
+                                    // include 'modules/read_current_db.php';
+                                    include 'modules/read_all_admin.php';
+                                    include 'modules/start_stop_uv.php';                        // UV-light stop/auto
                                     include 'modules/read_bus.php';                             // liest den gesetzten bus-value
                                     
 
@@ -73,14 +74,16 @@
                                                     <input type="radio" name="sensortype_admin" value="3" <?php echo $checked_sens_3; ?>/><label><span style="color: #7A5800 !important"> SHT75</span></label><br>
                                                     <input type="radio" name="sensortype_admin" value="4" <?php echo $checked_sens_4; ?>/><label><strong> SHT85</strong></label><br>
                                                     <input type="radio" name="sensortype_admin" value="5" <?php echo $checked_sens_5; ?>/><label><strong> SHT3x</strong></label><br>
+                                                    <input type="radio" name="sensortype_admin" value="6" <?php echo $checked_sens_6; ?>/><label><strong> AHT2x</strong></label><br>
                                                     <br>
                                                 </td>
                                                 <td></td>
                                                 <td style=" text-align: left; padding-left: 20px;">
                                                     <input type="radio" name="sensorsecondtype_admin" value="0" <?php echo $checked_senssecond_0; ?>/><label> disabled</label><br>
-                                                    <input type="radio" name="sensorsecondtype_admin" value="4" <?php echo $checked_senssecond_4; ?>/><label> SHT85</label><br>
-                                                    <input type="radio" name="sensorsecondtype_admin" value="5" <?php echo $checked_senssecond_5; ?>/><label> SHT3x</label><br>
-                                                    <input type="radio" name="sensorsecondtype_admin" value="6" <?php echo $checked_senssecond_6; ?>/><label> MiThermometer</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="4" <?php echo $checked_senssecond_4; ?> disabled /><label> SHT85</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="5" <?php echo $checked_senssecond_5; ?>/><label> SHT3x-mod</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="6" <?php echo $checked_senssecond_6; ?>/><label> AHT2x</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="7" <?php echo $checked_senssecond_7; ?>/><label> MiThermometer</label><br>
                                                     <br>
                                                 </td>
                                             </tr>
@@ -981,7 +984,7 @@
                                         $('#progress_label').attr('data-label', 'preparing...');
                                         $('#upload_progress').css('width', '0%');
                                         $("#program_firmware").attr("disabled", true);
-                                        if (confirm('Pi-Ager service will be stopped to flash the HMI display firmware.\nContinue ?')) {
+                                        if (confirm("<?php echo _('Pi-Ager service will be stopped to flash the HMI display firmware.\nAn active aging table will be stopped.\nDuring firmware programming:\nDo NOT leave the current web page!\nDo NOT close your web browser!\nIf you are using a smartphone or tablet, do NOT allow to let your device to be deactivated by inactivity timeout!\nContinue ?');?>")) {
                                             $.ajax({
                                                 method: 'POST',
                                                 url: 'nextion_control.php?q=check',
@@ -1004,7 +1007,6 @@
                                             });
                                             
                                             return;
-
                                         }
                                     }
 

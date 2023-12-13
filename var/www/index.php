@@ -3,12 +3,14 @@
                                       include 'modules/database.php';                             // Schnittstelle zur Datenbank
                                       include 'modules/logging.php';                            //liest die Datei fuer das logging ein
                                       include 'modules/names.php';                                // Variablen mit Strings
-                                      include 'modules/read_settings_db.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lueftung) und Betriebsart des RSS
-                                      include 'modules/read_config_db.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
-                                      include 'modules/read_operating_mode_db.php';                  // Liest die Art der Reifesteuerung
-                                      include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
-                                      include 'modules/read_current_db.php';                    // Liest die gemessenen Werte Temp, Humy, Timestamp
-                                      include 'modules/read_bus.php';                           //liest den bus aus, um externsensor ein oder auszublenden
+                                      
+                                      include 'modules/read_all_index.php';                     // get all data to setup index.php
+                                      // include 'modules/read_settings_db.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lueftung) und Betriebsart des RSS
+                                      // include 'modules/read_config_db.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
+                                      // include 'modules/read_operating_mode_db.php';                  // Liest die Art der Reifesteuerung
+                                      // include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
+                                      // include 'modules/read_current_db.php';                    // Liest die gemessenen Werte Temp, Humy, Timestamp
+                                      // include 'modules/read_bus.php';                           //liest den bus aus, um externsensor ein oder auszublenden
                                       include 'modules/funclib.php';                            // Funktionsbibliothek
 								    //  include 'modules/write_customtime_db.php';                 //speichert die individuelle Zeit für die Diagramme
                                 ?>
@@ -32,7 +34,7 @@
                                         </tr>
                                         <tr>
                                             <?php
-                                                if ($grepmain == 0 or $status_piager == 0) {
+                                                if ($status_main == 0 or $status_piager == 0) {
                                                     $temp_main = '-----';
                                                     $hum_main = '-----';
                                                     $hum_abs_main = '-----';
@@ -128,7 +130,7 @@
                                                     }
                                                 }
                                                 
-                                                if ($grepmain == 0 or $status_scale1 == 0) {
+                                                if ($status_main == 0 or $status_scale1 == 0) {
                                                     $weight_scale1 = '-----';
                                                     $weight_loss_scale1 = '-----';
                                                 }
@@ -157,7 +159,7 @@
                                                         }
                                                     }
                                                 }
-                                                if ($grepmain == 0 or $status_scale2 == 0) {
+                                                if ($status_main == 0 or $status_scale2 == 0) {
                                                     $weight_scale2 = '-----';
                                                     $weight_loss_scale2 = '-----';
                                                 }
@@ -836,11 +838,11 @@
                                     <table style="width: 100%" class="switching_state miniature_writing">
                                         <tr>
                                             <td width="75px"><?php echo _('phase'); ?></td>
-                                            <td align="left" id="current_period_head_index"><?php if ($grepagingtable != 0) { echo ($current_period + 1);} else { echo '';} ?></td>
+                                            <td align="left" id="current_period_head_index"><?php if ($status_agingtable != 0) { echo ($current_period + 1);} else { echo '';} ?></td>
                                         </tr>
                                         <tr>
                                             <td width="75px"><?php echo _('hour'); ?></td>
-                                            <td align="left" id="current_period_hour_head_index"><?php if ($grepagingtable != 0) { echo ($current_period_hour);} else { echo '';} ?></td>
+                                            <td align="left" id="current_period_hour_head_index"><?php if ($status_agingtable != 0) { echo ($current_period_hour);} else { echo '';} ?></td>
                                         </tr>
                                     </table>
                                     
@@ -869,7 +871,7 @@
                                             $data_hours = ' ';                                            
                                             $agingtable_comment_with_carriage_return = '';
                                             
-                                            if ($grepagingtable != 0) {
+                                            if ($status_agingtable != 0) {
                                                 $index_row = 0;
                                                 $agingtable_rows = get_agingtable_dataset($desired_maturity);
                                                 if ($agingtable_rows != false){
@@ -909,7 +911,7 @@
                                                                 $data_hours = $dataset[$agingtable_hours_field];
                                                             }
 
-                                                            if ($current_period == $index_row AND $grepagingtable != 0){
+                                                            if ($current_period == $index_row AND $status_agingtable != 0){
                                                                 echo '<tr bgcolor=#D19600 >';
                                                                 echo '<td id="current_period_index">'. ($current_period +1) .'</td>';
                                                                 echo '<td id="data_modus_index">'. $data_modus .'</td>';
@@ -973,15 +975,15 @@
                                             <?php 
                                                     // Prüft, ob Prozess RSS läuft
                                                     //$grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
-                                                    if ($grepmain == 0){
+                                                    if ($status_main == 0){
                                                         echo '<td><img id="mainstatus_img_mode" src="images/icons/operatingmode_fail_42x42.png" alt="" style="padding: 10px;"></td>';
                                                         echo '<td><img id="mainstatus_img_onoff" src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                     }
-                                                    elseif ($grepmain != 0 and $status_piager == 0){
+                                                    elseif ($status_main != 0 and $status_piager == 0){
                                                         echo '<td><img id="mainstatus_img_mode" src="images/icons/operatingmode_42x42.png" alt="" style="padding: 10px;"></td>';
                                                         echo '<td><img id="mainstatus_img_onoff" src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                     }
-                                                    elseif ($grepmain != 0 and $status_piager == 1) {
+                                                    elseif ($status_main != 0 and $status_piager == 1) {
                                                         echo '<td><img id="mainstatus_img_mode" src="images/icons/operating_42x42.gif" alt="" style="padding: 10px;"></td>';
                                                         echo '<td><img id="mainstatus_img_onoff" src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                     }
@@ -1011,13 +1013,13 @@
                                             <td></td>   
                                             <td></td>
                                             <td id="main_status_text" class="text_left_top"><?php
-                                                if ($grepmain == 0){
+                                                if ($status_main == 0){
                                                     echo strtoupper(_('see settings'));
                                                 }
-                                                elseif ($grepmain != 0 and $status_piager == 0){
+                                                elseif ($status_main != 0 and $status_piager == 0){
                                                     echo strtoupper(_('off'));
                                                 }
-                                                elseif($grepmain != 0 and $status_piager == 1){
+                                                elseif ($status_main != 0 and $status_piager == 1){
                                                     echo $modus_name;
                                                 }
                                                 ?></td>
@@ -1050,11 +1052,11 @@
                                         <tr>
                                             <?php 
                                                 // Prüft, ob thread Reifetabee läuft
-                                                if ($grepmain == 0){
+                                                if ($status_main == 0){
                                                     echo '<td><img id="agingtable_img" src="images/icons/agingtable_fail_42x42.gif" alt="" style="padding: 10px;"></td>';
                                                     echo '<td><img id="agingtable_img_status" src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                 }
-                                                else if ($grepagingtable == 0){
+                                                else if ($status_agingtable == 0){
                                                     echo '<td><img id="agingtable_img" src="images/icons/agingtable_42x42.png" alt="" style="padding: 10px;"></td>';
                                                     echo '<td><img id="agingtable_img_status" src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                 }
@@ -1167,13 +1169,13 @@
                                         </tr>
                                         <tr>
                                             <?php
-                                                if ($grepmain == 0 || $status_piager == 0) {
+                                                if ($status_main == 0 || $status_piager == 0) {
                                                     $sensor_temperature = '--.-';
                                                     $sensor_humidity = '--.-';
                                                 }
                                                 $internal_temperature = get_table_value($current_values_table, $sensor_temperature_key);
                                                 $external_temperature = get_table_value($current_values_table, $sensor_extern_temperature_key);
-                                                if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $sensor_temperature && ($modus == 3 || $modus == 4)) {
+                                                if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $setpoint_temperature && ($modus == 3 || $modus == 4)) {
                                                     $cooler_on = number_format(floatval($setpoint_temperature + $heating_hysteresis/2), 2, '.', '');
                                                     $cooler_off = number_format(floatval($setpoint_temperature - $heating_hysteresis/2), 2, '.', '');
                                                     $heater_on = number_format(floatval($setpoint_temperature - $cooling_hysteresis/2), 2, '.', '');

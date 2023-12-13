@@ -1,5 +1,5 @@
 <?php
-    //include 'modules/funclib.php';
+    // include 'modules/funclib.php';
     // include 'modules/read_config_db.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen)
     #var_dump($_POST);
     function limit_humidity( $value ) {
@@ -89,7 +89,7 @@
                         $saturation_point = intval(get_table_value($config_settings_table,$saturation_point_key));
                         $delay_humidify = intval(get_table_value($config_settings_table,$delay_humidify_key));
                         
-                        if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $sensor_temperature && ($modus_setting == 3 || $modus_setting == 4)) {
+                        if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $setpoint_temperature && ($modus_setting == 3 || $modus_setting == 4)) {
                             $cooler_on = number_format(floatval($setpoint_temperature_setting + $heating_hysteresis/2), 2, '.', '');
                             $cooler_off = number_format(floatval($setpoint_temperature_setting - $heating_hysteresis/2), 2, '.', '');
                             $heater_on = number_format(floatval($setpoint_temperature_setting - $cooling_hysteresis/2), 2, '.', '');
@@ -140,7 +140,31 @@
                         
                         $switch_on_humidify = eval_switch_on_humidity( $setpoint_humidity_setting, $humidifier_hysteresis, $hysteresis_offset );
                         $switch_off_humidify = eval_switch_off_humidity( $setpoint_humidity_setting, $humidifier_hysteresis, $hysteresis_offset , $saturation_point );
-                        
+                       
+                        $sensortype = intval(get_table_value($config_settings_table,$sensortype_key));
+                            
+                        if ($sensortype == 1) {
+                            $sensorname = 'DHT11';
+                        }
+                        else if ($sensortype == 2) {
+                            $sensorname = 'DHT22';
+                        }
+                        else if ($sensortype == 3) {
+                            $sensorname = 'SHT75';
+                        }
+                        else if ($sensortype == 4) {
+                            $sensorname = 'SHT85';
+                        }
+                        else if ($sensortype == 5) {
+                            $sensorname = 'SHT3x';
+                        }
+                        else if ($sensortype == 6) {
+                            $sensorname = 'AHT2x';
+                        }
+                        else {
+                            $sensorname = 'undefined';
+                        }
+
                         $logstring = " \n ***********************************************";
                         $logstring = $logstring . " \n " . _('values have been manually changed.');
                         $logstring = $logstring . " \n " . _('sensor').": ".$sensorname;

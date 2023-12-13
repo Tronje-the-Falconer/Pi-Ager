@@ -261,7 +261,7 @@ async function handleContent( msg ) {
     else {
         $('#json_hum_abs_extern').html(str_humidity_abs_extern + " g/m³");
     }
-    if (sensorsecondtype == 6) {
+    if (sensorsecondtype == 7) {
         $('#secondsensorname_id').html('(MiThermometer, battery: ' + str_MiSensor_battery + 'V)');
     }
     
