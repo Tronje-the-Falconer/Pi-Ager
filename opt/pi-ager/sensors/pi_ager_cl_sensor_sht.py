@@ -76,15 +76,15 @@ class cl_sensor_sht(cl_sensor):
         #Write the sensor data
         self._i2c_bus.write_byte_data(self._i2c_sensor.get_address(), msb_data, lsb_data)
 
-        time.sleep(0.01) #This is so the sensor has time to perform the measurement and write its registers before you read it
+        time.sleep(0.02) #This is so the sensor has time to perform the measurement and write its registers before you read it
         
         
-        msb_data = 0x21
-        lsb_data = 0x30
+        # msb_data = 0x21
+        # lsb_data = 0x30
         #Write the sensor data
-        self._i2c_bus.write_byte_data(self._i2c_sensor.get_address(), msb_data, lsb_data)
+        # self._i2c_bus.write_byte_data(self._i2c_sensor.get_address(), msb_data, lsb_data)
 
-        time.sleep(0.01) #This is so the sensor has time to perform the measurement and write its registers before you read it
+        # time.sleep(0.01) #This is so the sensor has time to perform the measurement and write its registers before you read it
    
     
     def _read_data(self):
