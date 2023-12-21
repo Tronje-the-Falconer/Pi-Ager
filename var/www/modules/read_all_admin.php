@@ -21,7 +21,6 @@
     if ($sensortype == 1) {
         $sensorname = 'DHT11';
         $checked_sens_1 = 'checked="checked"';
-        $sens_second_active = 'disabled = "true"';
     }
     else {
         $checked_sens_1 = '';
@@ -29,7 +28,6 @@
     if ($sensortype == 2) {
         $sensorname = 'DHT22';
         $checked_sens_2 = 'checked="checked"';
-        $sens_second_active = 'disabled = "true"';
     }
     else {
         $checked_sens_2 = '';
@@ -37,7 +35,6 @@
     if ($sensortype == 3) {
         $sensorname = 'SHT75';
         $checked_sens_3 = 'checked="checked"';
-        $sens_second_active = 'disabled = "true"';
     }
     else {
         $checked_sens_3 = '';
@@ -45,7 +42,6 @@
     if ($sensortype == 4) {
         $sensorname = 'SHT85';
         $checked_sens_4 = 'checked="checked"';
-        $sens_second_active = '';
     }
     else {
         $checked_sens_4 = '';
@@ -53,19 +49,52 @@
     if ($sensortype == 5) {
         $sensorname = 'SHT3x';
         $checked_sens_5 = 'checked="checked"';
-        $sens_second_active = '';
     }
     else {
         $checked_sens_5 = '';
     }
     if ($sensortype == 6) {
-        $sensorname = 'AHT2x';
+        $sensorname = 'SHT3x-mod';
         $checked_sens_6 = 'checked="checked"';
-        $sens_second_active = '';
     }
     else {
         $checked_sens_6 = '';
+    }
+    if ($sensortype == 7) {
+        $sensorname = 'AHT2x';
+        $checked_sens_7 = 'checked="checked"';
+    }
+    else {
+        $checked_sens_7 = '';
     }    
+    if ($sensortype == 8) {
+        $sensorname = 'AHT30';
+        $checked_sens_8 = 'checked="checked"';
+    }
+    else {
+        $checked_sens_8 = '';
+    }    
+    if ($sensortype == 9) {
+        $sensorname = 'SHT4x-A';
+        $checked_sens_9 = 'checked="checked"';
+    }
+    else {
+        $checked_sens_9 = '';
+    }    
+    if ($sensortype == 10) {
+        $sensorname = 'SHT4x-B';
+        $checked_sens_10 = 'checked="checked"';
+    }
+    else {
+        $checked_sens_10 = '';
+    }    
+    if ($sensortype == 11) {
+        $sensorname = 'SHT4x-C';
+        $checked_sens_11 = 'checked="checked"';
+    }
+    else {
+        $checked_sens_11 = '';
+    }
     
     if ($sensorsecondtype == 0) {
         $sensorsecondname = 'disabled';
@@ -90,18 +119,53 @@
         $checked_senssecond_5 = '';
     }
     if ($sensorsecondtype == 6) {
-        $sensorsecondname = 'AHT2x';
+        $sensorsecondname = 'SHT3x-mod';
         $checked_senssecond_6 = 'checked="checked"';
     }
     else {
         $checked_senssecond_6 = '';
     }    
     if ($sensorsecondtype == 7) {
-        $sensorsecondname = 'MiThermometer';
+        $sensorsecondname = 'AHT2x';
         $checked_senssecond_7 = 'checked="checked"';
     }
     else {
         $checked_senssecond_7 = '';
+    }
+    if ($sensorsecondtype == 8) {
+        $sensorsecondname = 'AHT30';
+        $checked_senssecond_8 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_8 = '';
+    }
+    if ($sensorsecondtype == 9) {
+        $sensorsecondname = 'SHT4x-A';
+        $checked_senssecond_9 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_9 = '';
+    }
+    if ($sensorsecondtype == 10) {
+        $sensorsecondname = 'SHT4x-B';
+        $checked_senssecond_10 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_10 = '';
+    }
+    if ($sensorsecondtype == 11) {
+        $sensorsecondname = 'SHT4x-C';
+        $checked_senssecond_11 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_11 = '';
+    }
+    if ($sensorsecondtype == 12) {
+        $sensorsecondname = 'MiThermometer';
+        $checked_senssecond_12 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_12 = '';
     }    
 
     # scales

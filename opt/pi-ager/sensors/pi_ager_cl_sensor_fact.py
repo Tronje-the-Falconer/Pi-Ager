@@ -21,6 +21,7 @@ from sensors.pi_ager_cl_sensor_sht85 import cl_fact_sensor_sht85
 from sensors.pi_ager_cl_sensor_dht11 import cl_fact_sensor_dht11
 from sensors.pi_ager_cl_sensor_dht22 import cl_fact_sensor_dht22
 from sensors.pi_ager_cl_sensor_aht2x import cl_fact_sensor_aht2x
+from sensors.pi_ager_cl_sensor_sht4x import cl_fact_sensor_sht4x
 from sensors.pi_ager_cl_sensor_MiThermometer import cl_fact_sensor_MiThermometer
 
 class cl_fact_sensor(ABC):
@@ -58,21 +59,24 @@ class cl_fact_sensor(ABC):
 #            cl_fact_logger.get_instance().debug("Returning __ot_instance = " + str(cl_fact_sensor.__o_instance))
 #            return(cl_fact_sensor.__o_instance)
 
-
-        if cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'SHT75':
+        sensor_name = cl_fact_sensor.__o_sensor_type._get_type_ui()
+        
+        if sensor_name == 'SHT75':
             cl_fact_sensor.__o_instance = cl_fact_sensor_sht75.get_instance(l_sensor_type, i_active_sensor)
-        elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'SHT3x':
+        elif sensor_name == 'SHT3x' or sensor_name == 'SHT3x-mod':
             cl_fact_sensor.__o_instance = cl_fact_sensor_sht3x.get_instance(l_sensor_type, i_active_sensor, i_address)
-        elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'SHT85':
+        elif sensor_name == 'SHT85':
             cl_fact_sensor.__o_instance = cl_fact_sensor_sht85.get_instance(l_sensor_type, i_active_sensor, i_address)
-        elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'DHT22':
+        elif sensor_name == 'DHT22':
             cl_fact_sensor.__o_instance = cl_fact_sensor_dht22.get_instance(l_sensor_type, i_active_sensor)
-        elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'DHT11':
+        elif sensor_name == 'DHT11':
             cl_fact_sensor.__o_instance = cl_fact_sensor_dht11.get_instance(l_sensor_type, i_active_sensor)
-        elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'MiThermometer':
+        elif sensor_name == 'MiThermometer':
             cl_fact_sensor.__o_instance = cl_fact_sensor_MiThermometer.get_instance(l_sensor_type, i_active_sensor) 
-        elif cl_fact_sensor.__o_sensor_type._get_type_ui( ) == 'AHT2x':
+        elif sensor_name == 'AHT2x' or sensor_name == 'AHT30':
             cl_fact_sensor.__o_instance = cl_fact_sensor_aht2x.get_instance(l_sensor_type, i_active_sensor, i_address)
+        elif sensor_name == 'SHT4x-A' or sensor_name == 'SHT4X-B' or sensor_name == 'SHT4x-C':
+            cl_fact_sensor.__o_instance = cl_fact_sensor_sht4x.get_instance(l_sensor_type, i_active_sensor, i_address) 
             
         cl_fact_logger.get_instance().debug("__ot_instance for " + i_active_sensor + " =  " + str(cl_fact_sensor.__o_instance) + " created" )
         

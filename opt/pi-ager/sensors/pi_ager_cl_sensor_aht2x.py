@@ -21,11 +21,11 @@ class cl_sensor_aht2x(cl_sensor_aht):
         self.o_sensor_type = i_sensor_type
         self.o_address     = i_address
         
-        super().__init__(i_active_sensor, self.o_sensor_type, self.o_address)
+        super().__init__(self.o_sensor_type, i_active_sensor, self.o_address)
 
-    def get_current_data(self):
-        self.measured_data = super().get_current_data()
-        return(self.measured_data)
+#    def get_current_data(self):
+#        self.measured_data = super().get_current_data()
+#        return(self.measured_data)
 
     
 class cl_fact_sensor_aht2x(ABC): 

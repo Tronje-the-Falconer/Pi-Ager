@@ -121,7 +121,11 @@ then
       "SHT75") sensorbus=1; sensornum=3;;
       "SHT85") sensorbus=0; sensornum=4;;
       "SHT3x") sensorbus=0; sensornum=5;;
-      "AHT2x") sensorbus=0; sensornum=6;;
+      "AHT2x") sensorbus=0; sensornum=7;;
+      "AHT30") sensorbus=0; sensornum=8;;      
+      "AHT4x-A") sensorbus=0; sensornum=9;;
+      "AHT4x-B") sensorbus=0; sensornum=10;;
+      "AHT4x-C") sensorbus=0; sensornum=11;;      
     esac
     echo "Bus = $sensorbus  sensor = $sensornum"
 

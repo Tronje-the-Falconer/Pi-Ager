@@ -11,7 +11,7 @@ __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Production"
 
-# from abc import ABC, abstractmethod
+from abc import ABC, abstractmethod
 import math
 # import inspect
 
@@ -34,10 +34,13 @@ class cl_sensor(cl_ab_sensor):
         self._max_errors = 3
         self.o_sensor_type = o_sensor_type
         
+    @abstractmethod    
     def get_current_data(self):
+        pass
 #        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if (self._error_counter >= self._max_errors):
-            self._execute_soft_reset()
+#         if (self._error_counter >= self._max_errors):
+#            self._execute_soft_reset()
+#        return 0, 0, 0, 0
                  
     def get_sensor_type_ui(self):
 #        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
@@ -46,20 +49,6 @@ class cl_sensor(cl_ab_sensor):
     def get_sensor_type(self):
 #        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return( self.o_sensor_type._get_type() )
-    
-    def delete_error_counter(self):
-#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        self._error_counter = 0
-        
-    def check_error_counter(self):
-#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
-        self._error_counter = self._error_counter + 1
-        cl_fact_logger.get_instance().debug("Error counter: %i" % self._error_counter)
-        cl_fact_logger.get_instance().debug("Max errors:    %i" % self._max_errors)
-        
-        if (self._error_counter >= self._max_errors):
-            raise cx_measurement_error(_('Too many measurement errors occurred!'))
 
     def get_dewpoint(self, temperature, humidity):
 #        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
@@ -87,8 +76,4 @@ class cl_sensor(cl_ab_sensor):
 
         calculated_dewpoint = (self._temperature_dewpoint, self._humidity_absolute)
         return(calculated_dewpoint)
-    
-    def _execute_soft_reset(self):
-#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        pass
 

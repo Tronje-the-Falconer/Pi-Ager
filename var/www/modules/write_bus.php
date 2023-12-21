@@ -15,7 +15,24 @@
         //shell_exec('sudo /var/sudowebscript.sh reboot > /dev/null 2>&1 &');
         //die();
     }
-        
+    
+    function check_allowed_sensor_selection($sensor_intern, $sensor_extern) {
+        $i2c_sensor_addr = [0 => NULL, 1 => NULL, 2 => NULL, 3 => NULL, 4 => 0x44, 5 => 0x44, 6 => 0x45, 7 => 0x38, 8 => 0x38, 9 => 0x44, 10 => 0x45, 11 => 0x46, 12 => NULL];
+        if ($sensor_extern == 12 || $sensor_extern == 0) {
+            return ( true);
+        }
+        if (($sensor_intern >= 1 && $sensor_intern <= 3) && ($sensor_extern >= 4 && $sensor_extern <= 11)) {
+            return( false );
+        }
+        if ($i2c_sensor_addr[$sensor_intern] == $i2c_sensor_addr[$sensor_extern]) { // same i2c address, not allowed
+            return(false);
+        }
+        else {
+            return(true);
+        }
+    } 
+
+    
     if (!empty($_POST['change_sensorbus_submit'])) {    // ist das $_POST-Array gesetzt
         logger('DEBUG', 'button save change_sensorbus pressed');
         unset($_POST['change_sensorbus_submit']);
@@ -39,11 +56,9 @@
         }
         
         # check if combination of sensor selections is allowed
-        if (($sensornum == 1 || $sensornum == 2 || $sensornum == 3) && ($sensorsecondnum == 4 || $sensorsecondnum == 5 || $sensorsecondnum == 6)) {
-            echo '<script> alert("' . _('Can not combine selected internal and external sensors!\nExternal sensors SHT85, SHT3x or AHT2x can only combined with internal sensors SHT85, SHT3x or AHT2x, when I2C addresses are different.\nSee also help!') . '"); </script>';
-        }
-        else if (($sensornum == 6) && ($sensorsecondnum == 6)) {
-            echo '<script> alert("' . _('Can not combine selected internal and external sensors!\nExternal sensor AHT2x can not combined with internal sensors AHT2x. I2C addresses must be different.\nSee also help!') . '"); </script>';
+        $check_status = check_allowed_sensor_selection($sensornum, $sensorsecondnum);
+        if ($check_status == false) {
+            echo '<script> alert("' . _('Can not combine selected internal and external sensors!\nExternal sensors I2C sensors can only combined with internal I2C sensors, when I2C addresses are different.\nSee also help!') . '"); </script>';
         }
         else {
             # save new settings
@@ -60,17 +75,15 @@
                     shell_exec('sudo /var/sudowebscript.sh sensorbus1wire > /dev/null 2>&1');
                     do_shutdown(_('Change to 1-wire sensor'));
                 }
-                if (($sensornum == 4 || $sensornum == 5 || $sensornum == 6) && $old_bus  ==  1){
+                if (($sensornum >= 4 && $sensornum <= 11 ) && $old_bus  ==  1){
                     //echo '<script> alert("' . _('Change to I2C') . '"); </script>';
                     write_busvalue(0);
                     logger('DEBUG', 'sensorbus saved. changed to i2c (0)');
                     shell_exec('sudo /var/sudowebscript.sh sensorbusi2c > /dev/null 2>&1');
                     do_shutdown(_('Change to I2C sensor'));
                 }
-                if ($sensornum != $old_sensornum) {
-                    logger('DEBUG', 'internal sensor changed');
-                    do_shutdown(_('Internal sensor changed'));
-                }
+                logger('DEBUG', 'internal sensor changed');
+                do_shutdown(_('Internal sensor changed'));
             }
         
             # check if external sensor changed
@@ -78,7 +91,7 @@
                 // echo '<script language="javascript"> alert("' . _('External sensor type changed') . '"); </script>';
                 $boot_msg = _('External sensor type changed');
                 logger('DEBUG', 'External sensor type changed');
-                if ($sensorsecondnum == 0 || $sensorsecondnum == 7) {    # changed back to disabled or MiThermometer, reboot is enough 
+                if ($sensorsecondnum == 0 || $sensorsecondnum == 12) {    # changed back to disabled or MiThermometer, reboot is enough 
                     do_reboot($boot_msg);
                 }
                 else {

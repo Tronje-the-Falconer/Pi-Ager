@@ -55,8 +55,8 @@ wlankey='your WLAN key'
 # ISO code your country, e.g. DE, GB:
 country='DE'
 
-# Temperature/Humidity sensor attched to pi-ager:
-# Supported types are : DHT11, DHT22, SHT75, SHT85, SHT3x, AHT2x
+# Temperature/Humidity sensor attached to pi-ager:
+# Supported types are : DHT11, DHT22, SHT75, SHT85, SHT3x, AHT2x, AHT30, SHT4x-A, SHT4x-B, SHT4x-C
 sensor='SHT3x'
 
 # hmi display device name:

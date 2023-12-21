@@ -26,9 +26,6 @@ from main.pi_ager_cx_exception import *
 # from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
 from sensors.pi_ager_cl_sensor_sht import cl_sensor_sht
 
-# global logger
-# logger = pi_ager_logging.create_logger(__name__) 
-
 class cl_sensor_sht85(cl_sensor_sht):
     
     def __init__(self, i_sensor_type, i_active_sensor, i_address):
@@ -47,26 +44,14 @@ class cl_sensor_sht85(cl_sensor_sht):
     
 class cl_fact_sensor_sht85(ABC): 
     __o_instance = None
-    __ot_instances = {}
+
     @classmethod        
     def get_instance(self, i_sensor_type, i_active_sensor, i_address):
         # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().debug("cl_fact_sensor_sht85.get_instance")
-        try:
-            cl_fact_sensor_sht85.__o_instance = cl_fact_sensor_sht85.__ot_instances.pop(i_active_sensor)
-            cl_fact_logger.get_instance().debug("__ot_instance for " + i_active_sensor + " = " + str(cl_fact_sensor_sht85.__o_instance))
-        except KeyError:
-            cl_fact_logger.get_instance().debug("__ot_instance not found for " + i_active_sensor)
-            cl_fact_sensor_sht85.__o_instance = None 
-        if  cl_fact_sensor_sht85.__o_instance is not None :
-            cl_fact_logger.get_instance().debug("Returning __ot_instance = " + str(cl_fact_sensor_sht85.__o_instance))
-            return(cl_fact_sensor_sht85.__o_instance)
-        
+        if cl_fact_sensor_sht85.__o_instance is not None:
+            return(cl_fact_sensor_sht85.__ot_instance)
         cl_fact_sensor_sht85.__o_instance = cl_sensor_sht85(i_sensor_type, i_active_sensor, i_address)
-        cl_fact_logger.get_instance().debug("__ot_instance " + str(cl_fact_sensor_sht85.__o_instance) + " created for " + i_active_sensor)
-        line = {i_active_sensor:cl_fact_sensor_sht85.__o_instance}
-        cl_fact_sensor_sht85.__ot_instances.update(line)   
-        cl_fact_logger.get_instance().debug("__ot_instances = " + str(cl_fact_sensor_sht85.__ot_instances))
         return(cl_fact_sensor_sht85.__o_instance)
 
     @classmethod

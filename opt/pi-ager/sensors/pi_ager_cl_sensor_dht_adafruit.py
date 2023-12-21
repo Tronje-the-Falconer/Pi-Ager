@@ -26,23 +26,19 @@ import Adafruit_DHT
 
 class cl_sensor_dht_adafruit(cl_sensor):
     
-    def __init__(self, i_sensor_dht):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+    def __init__(self):
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
   
         super().__init__(cl_fact_main_sensor_type.get_instance())
         
         self._pin = pi_ager_gpio_config.gpio_sensor_data            
 
         self._max_errors = 3
-        self._old_temperature = 0
         self._current_temperature = 0
-        self._temperature_dewpoint = 0
-        self._humidity_absolute = 0
-        self._old_humidity = 0
         self._current_humidity = 0
 
     def get_current_data(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._error_counter = 0
         
         while self._error_counter < self._max_errors:
@@ -74,19 +70,7 @@ class cl_sensor_dht_adafruit(cl_sensor):
                     cl_fact_logger.get_instance().error(f"Retry getting measurement from DHT device. Current retry count : {self._error_counter}, max retry count : {self._max_errors}")        
                 time.sleep(1)
         
-#        self.delete_error_counter() 
-        cl_fact_logger.get_instance().debug('Too many measurement errors occurred!')
+        cl_fact_logger.get_instance().debug(_('Too many measurement errors occurred!'))
         raise cx_measurement_error (_('Too many measurement errors occurred!'))    
-        
-    def set_heading_on(self):
-        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cl_fact_logger.get_instance().debug('Not avaiable for this sensor type')
-    
-    def set_heading_off(self):
-        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cl_fact_logger.get_instance().debug('Not avaiable for this sensor type')
-    
-    def soft_reset(self):
-        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        cl_fact_logger.get_instance().debug('Not avaiable for this sensor type')
+
 

@@ -14,46 +14,31 @@
     $sensorsecondtype = intval(get_table_value($config_settings_table,$sensorsecondtype_key));
     $MiSensor_battery = get_table_value($current_values_table, $MiSensor_battery_key);
     
-    if ($sensortype == 1) {
-        $sensorname = 'DHT11';
-    }
-    else if ($sensortype == 2) {
-        $sensorname = 'DHT22';
-    }
-    else if ($sensortype == 3) {
-        $sensorname = 'SHT75';
-    }
-    else if ($sensortype == 4) {
-        $sensorname = 'SHT85';
-    }
-    else if ($sensortype == 5) {
-        $sensorname = 'SHT3x';
-    }
-    else if ($sensortype == 6) {
-        $sensorname = 'AHT2x';
-    }
-    else {
-        $sensorname = '-----';
-    }
-    
-    if ($sensorsecondtype == 0) {
-        $sensorsecondname = 'disabled';
-    }
-    else if ($sensorsecondtype == 4) {
-        $sensorsecondname = 'SHT85';
-    }
-    else if ($sensorsecondtype == 5) {
-        $sensorsecondname = 'SHT3x';
-    }
-    else if ($sensorsecondtype == 6) {
-        $sensorsecondname = 'AHT2x';
-    }
-    else if ($sensorsecondtype == 7) {
-        $sensorsecondname = 'MiThermometer';
-    }
-    else {
-       $sensorsecondname = '-----'; 
-    }
+    $SUPPORTED_MAIN_SENSOR_TYPES = [1 => "DHT11",
+                                     2 => "DHT22",
+                                     3 => "SHT75",
+                                     4 => "SHT85",
+                                     5 => "SHT3x",
+                                     6 => "SHT3x-mod",
+                                     7 => "AHT2x",
+                                     8 => "AHT30",
+                                     9 => "SHT4x-A",
+                                     10 => "SHT4x-B",
+                                     11 => "SHT4x-C"];
+                                     
+    $SUPPORTED_SECOND_SENSOR_TYPES = [ 0 => "disabled",
+                                        4 => "SHT85",
+                                        5 => "SHT3x",
+                                        6 => "SHT3x-mod",
+                                        7 => "AHT2x",
+                                        8 => "AHT30",
+                                        9 => "SHT4x-A",
+                                        10 => "SHT4x-B",
+                                        11 => "SHT4x-C",
+                                        12 => "MiThermometer"];                                
+                                     
+    $sensorname = $SUPPORTED_MAIN_SENSOR_TYPES[$sensortype];
+    $sensorsecondname = $SUPPORTED_SECOND_SENSOR_TYPES[$sensorsecondtype];
 
     $desired_maturity = read_agingtable_name_from_config();
     // Derzeitige Reife-Art, manuell oder nach Tabelle...

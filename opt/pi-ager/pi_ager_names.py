@@ -8,7 +8,7 @@
 #import RPi.GPIO as gpio
 
 ########################### Definition of variables
-version_number = '3.3.4'
+version_number = '4.0.0'
 # tables names
 config_settings_table = 'config'
 
@@ -263,3 +263,41 @@ relay_off = (not relay_on)       # negative Logik!!! des Relay's, Schaltet bei 1
 
 logspacer  = "*****************************************"
 logspacer2 = '-----------------------------------------'
+
+SUPPORTED_MAIN_SENSOR_TYPES = {1: "DHT11",
+                                     2: "DHT22",
+                                     3: "SHT75",
+                                     4: "SHT85",
+                                     5: "SHT3x",
+                                     6: "SHT3x-mod",
+                                     7: "AHT2x",
+                                     8: "AHT30",
+                                     9: "SHT4x-A",
+                                     10: "SHT4x-B",
+                                     11: "SHT4x-C"}
+                                     
+SUPPORTED_SECOND_SENSOR_TYPES = { 0: "disabled",
+                                        4: "SHT85",
+                                        5: "SHT3x",
+                                        6: "SHT3x-mod",
+                                        7: "AHT2x",
+                                        8: "AHT30",
+                                        9: "SHT4x-A",
+                                        10: "SHT4x-B",
+                                        11: "SHT4x-C",
+                                        12: "MiThermometer"}
+                                        
+I2C_SENSOR_ADDRESS = {  0: None,
+                        1: None,
+                        2: None,
+                        3: None,
+                        4: 0x44,
+                        5: 0x44,
+                        6: 0x45,
+                        7: 0x38,
+                        8: 0x38,
+                        9: 0x44,
+                        10: 0x45,
+                        11: 0x46,
+                        12: None }
+                        
