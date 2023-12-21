@@ -58,7 +58,7 @@
         # check if combination of sensor selections is allowed
         $check_status = check_allowed_sensor_selection($sensornum, $sensorsecondnum);
         if ($check_status == false) {
-            echo '<script> alert("' . _('Can not combine selected internal and external sensors!\nExternal sensors I2C sensors can only combined with internal I2C sensors, when I2C addresses are different.\nSee also help!') . '"); </script>';
+            echo '<script> alert("' . _('Can not combine selected internal and external sensors!\nExternal I2C sensors can only combined with internal I2C sensors, when I2C addresses are different.\nSee also help!') . '"); </script>';
         }
         else {
             # save new settings
