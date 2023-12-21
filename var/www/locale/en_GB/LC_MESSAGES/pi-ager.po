@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-GB\n"
-"POT-Creation-Date: 2023-12-12 15:05+0100\n"
-"PO-Revision-Date: 2023-12-12 16:49+0100\n"
+"POT-Creation-Date: 2023-12-21 11:12+0100\n"
+"PO-Revision-Date: 2023-12-21 11:17+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -46,10 +46,10 @@ msgstr ""
 #: opt/pi-ager/pi_ager_cl_agingtable.py:146 var/www/manvals.php:24
 #: var/www/modules/querystatus.php:123 var/www/modules/querystatus.php:127
 #: var/www/modules/querystatus.php:135 var/www/modules/querystatus.php:139
-#: var/www/modules/read_all_index.php:147
-#: var/www/modules/read_all_index.php:150
-#: var/www/modules/read_all_index.php:156
-#: var/www/modules/read_all_index.php:159
+#: var/www/modules/read_all_index.php:132
+#: var/www/modules/read_all_index.php:135
+#: var/www/modules/read_all_index.php:141
+#: var/www/modules/read_all_index.php:144
 #: var/www/modules/read_all_settings_db.php:41
 #: var/www/modules/read_all_settings_db.php:48
 #: var/www/modules/read_all_settings_db.php:62
@@ -129,7 +129,7 @@ msgstr ""
 #: opt/pi-ager/pi_ager_cl_agingtable.py:177
 #: opt/pi-ager/pi_ager_cl_agingtable.py:179
 #: opt/pi-ager/pi_ager_cl_agingtable.py:181
-#: opt/pi-ager/pi_ager_cl_agingtable.py:183 var/www/admin.php:361
+#: opt/pi-ager/pi_ager_cl_agingtable.py:183 var/www/admin.php:377
 #: var/www/config.php:66 var/www/config.php:153 var/www/config.php:158
 #: var/www/config.php:205 var/www/config.php:210 var/www/config.php:267
 #: var/www/diagrams.php:81 var/www/diagrams.php:220 var/www/index.php:349
@@ -184,7 +184,7 @@ msgstr ""
 msgid "duration"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:184 var/www/admin.php:519
+#: opt/pi-ager/pi_ager_cl_agingtable.py:184 var/www/admin.php:535
 #: var/www/config.php:169 var/www/edit_agingtable.php:51 var/www/index.php:348
 #: var/www/index.php:859 var/www/modules/funclib.php:23
 #: var/www/modules/funclib.php:48 var/www/settings.php:411
@@ -198,7 +198,7 @@ msgstr ""
 msgid "hour"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_cl_agingtable.py:185 var/www/admin.php:69
+#: opt/pi-ager/pi_ager_cl_agingtable.py:185 var/www/admin.php:75
 msgid "sensortype"
 msgstr ""
 
@@ -339,105 +339,56 @@ msgstr ""
 msgid "sensortype set to"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:407 opt/pi-ager/sensors/pi_ager_loop.py:408
-msgid "Failed to get sensordata."
-msgstr ""
-
-#: opt/pi-ager/pi_ager_loop.py:520 opt/pi-ager/pi_ager_loop.py:530
-#: opt/pi-ager/pi_ager_loop.py:542 opt/pi-ager/pi_ager_loop.py:551
-#: opt/pi-ager/pi_ager_loop.py:564 opt/pi-ager/sensors/pi_ager_loop.py:521
-#: opt/pi-ager/sensors/pi_ager_loop.py:531
-#: opt/pi-ager/sensors/pi_ager_loop.py:543
-#: opt/pi-ager/sensors/pi_ager_loop.py:552
-#: opt/pi-ager/sensors/pi_ager_loop.py:565
+#: opt/pi-ager/pi_ager_loop.py:314 opt/pi-ager/pi_ager_loop.py:324
+#: opt/pi-ager/pi_ager_loop.py:336 opt/pi-ager/pi_ager_loop.py:345
+#: opt/pi-ager/pi_ager_loop.py:358
 msgid "defrost process stopped"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:574 opt/pi-ager/sensors/pi_ager_loop.py:575
+#: opt/pi-ager/pi_ager_loop.py:368
 msgid "defrost process started"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:639 opt/pi-ager/sensors/pi_ager_loop.py:640
+#: opt/pi-ager/pi_ager_loop.py:433
 msgid "GPIO states"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:653 opt/pi-ager/pi_ager_loop.py:654
-#: opt/pi-ager/pi_ager_loop.py:656 opt/pi-ager/pi_ager_loop.py:657
-#: opt/pi-ager/pi_ager_loop.py:662 opt/pi-ager/pi_ager_loop.py:663
-#: opt/pi-ager/pi_ager_loop.py:665 opt/pi-ager/pi_ager_loop.py:666
-#: opt/pi-ager/sensors/pi_ager_loop.py:654
-#: opt/pi-ager/sensors/pi_ager_loop.py:655
-#: opt/pi-ager/sensors/pi_ager_loop.py:657
-#: opt/pi-ager/sensors/pi_ager_loop.py:658
-#: opt/pi-ager/sensors/pi_ager_loop.py:663
-#: opt/pi-ager/sensors/pi_ager_loop.py:664
-#: opt/pi-ager/sensors/pi_ager_loop.py:666
-#: opt/pi-ager/sensors/pi_ager_loop.py:667 var/www/diagrams.php:1238
-#: var/www/diagrams.php:1259 var/www/index.php:1206 var/www/index.php:1226
-#: var/www/modules/querystatus.php:196 var/www/modules/querystatus.php:213
+#: opt/pi-ager/pi_ager_loop.py:447 opt/pi-ager/pi_ager_loop.py:448
+#: opt/pi-ager/pi_ager_loop.py:450 opt/pi-ager/pi_ager_loop.py:451
+#: opt/pi-ager/pi_ager_loop.py:456 opt/pi-ager/pi_ager_loop.py:457
+#: opt/pi-ager/pi_ager_loop.py:459 opt/pi-ager/pi_ager_loop.py:460
+#: var/www/diagrams.php:1238 var/www/diagrams.php:1259 var/www/index.php:1206
+#: var/www/index.php:1226 var/www/modules/querystatus.php:196
+#: var/www/modules/querystatus.php:213
 msgid "heater"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:653 opt/pi-ager/pi_ager_loop.py:654
-#: opt/pi-ager/pi_ager_loop.py:656 opt/pi-ager/pi_ager_loop.py:657
-#: opt/pi-ager/pi_ager_loop.py:674 opt/pi-ager/pi_ager_loop.py:675
-#: opt/pi-ager/pi_ager_loop.py:677 opt/pi-ager/pi_ager_loop.py:678
-#: opt/pi-ager/pi_ager_loop.py:696 opt/pi-ager/pi_ager_loop.py:697
-#: opt/pi-ager/pi_ager_loop.py:699 opt/pi-ager/pi_ager_loop.py:700
-#: opt/pi-ager/pi_ager_loop.py:715 opt/pi-ager/pi_ager_loop.py:716
-#: opt/pi-ager/pi_ager_loop.py:718 opt/pi-ager/pi_ager_loop.py:719
-#: opt/pi-ager/pi_ager_loop.py:734 opt/pi-ager/pi_ager_loop.py:735
-#: opt/pi-ager/pi_ager_loop.py:737 opt/pi-ager/pi_ager_loop.py:738
-#: opt/pi-ager/pi_ager_loop.py:756 opt/pi-ager/pi_ager_loop.py:757
-#: opt/pi-ager/pi_ager_loop.py:759 opt/pi-ager/pi_ager_loop.py:760
-#: opt/pi-ager/pi_ager_loop.py:775 opt/pi-ager/pi_ager_loop.py:776
-#: opt/pi-ager/pi_ager_loop.py:778 opt/pi-ager/pi_ager_loop.py:779
-#: opt/pi-ager/pi_ager_loop.py:794 opt/pi-ager/pi_ager_loop.py:795
-#: opt/pi-ager/pi_ager_loop.py:797 opt/pi-ager/pi_ager_loop.py:798
-#: opt/pi-ager/pi_ager_loop.py:1801 opt/pi-ager/pi_ager_loop.py:1869
-#: opt/pi-ager/sensors/pi_ager_loop.py:654
-#: opt/pi-ager/sensors/pi_ager_loop.py:655
-#: opt/pi-ager/sensors/pi_ager_loop.py:657
-#: opt/pi-ager/sensors/pi_ager_loop.py:658
-#: opt/pi-ager/sensors/pi_ager_loop.py:675
-#: opt/pi-ager/sensors/pi_ager_loop.py:676
-#: opt/pi-ager/sensors/pi_ager_loop.py:678
-#: opt/pi-ager/sensors/pi_ager_loop.py:679
-#: opt/pi-ager/sensors/pi_ager_loop.py:697
-#: opt/pi-ager/sensors/pi_ager_loop.py:698
-#: opt/pi-ager/sensors/pi_ager_loop.py:700
-#: opt/pi-ager/sensors/pi_ager_loop.py:701
-#: opt/pi-ager/sensors/pi_ager_loop.py:716
-#: opt/pi-ager/sensors/pi_ager_loop.py:717
-#: opt/pi-ager/sensors/pi_ager_loop.py:719
-#: opt/pi-ager/sensors/pi_ager_loop.py:720
-#: opt/pi-ager/sensors/pi_ager_loop.py:735
-#: opt/pi-ager/sensors/pi_ager_loop.py:736
-#: opt/pi-ager/sensors/pi_ager_loop.py:738
-#: opt/pi-ager/sensors/pi_ager_loop.py:739
-#: opt/pi-ager/sensors/pi_ager_loop.py:757
-#: opt/pi-ager/sensors/pi_ager_loop.py:758
-#: opt/pi-ager/sensors/pi_ager_loop.py:760
-#: opt/pi-ager/sensors/pi_ager_loop.py:761
-#: opt/pi-ager/sensors/pi_ager_loop.py:776
-#: opt/pi-ager/sensors/pi_ager_loop.py:777
-#: opt/pi-ager/sensors/pi_ager_loop.py:779
-#: opt/pi-ager/sensors/pi_ager_loop.py:780
-#: opt/pi-ager/sensors/pi_ager_loop.py:795
-#: opt/pi-ager/sensors/pi_ager_loop.py:796
-#: opt/pi-ager/sensors/pi_ager_loop.py:798
-#: opt/pi-ager/sensors/pi_ager_loop.py:799
-#: opt/pi-ager/sensors/pi_ager_loop.py:1816
-#: opt/pi-ager/sensors/pi_ager_loop.py:1884 var/www/diagrams.php:1078
-#: var/www/diagrams.php:1103 var/www/diagrams.php:1189
-#: var/www/diagrams.php:1214 var/www/diagrams.php:1300
-#: var/www/diagrams.php:1325 var/www/diagrams.php:1411
-#: var/www/diagrams.php:1436 var/www/diagrams.php:1522
-#: var/www/diagrams.php:1547 var/www/diagrams.php:1633
-#: var/www/diagrams.php:1658 var/www/diagrams.php:1744
-#: var/www/diagrams.php:1769 var/www/diagrams.php:1855
-#: var/www/diagrams.php:1880 var/www/index.php:1167 var/www/index.php:1295
-#: var/www/modules/querystatus.php:269
+#: opt/pi-ager/pi_ager_loop.py:447 opt/pi-ager/pi_ager_loop.py:448
+#: opt/pi-ager/pi_ager_loop.py:450 opt/pi-ager/pi_ager_loop.py:451
+#: opt/pi-ager/pi_ager_loop.py:468 opt/pi-ager/pi_ager_loop.py:469
+#: opt/pi-ager/pi_ager_loop.py:471 opt/pi-ager/pi_ager_loop.py:472
+#: opt/pi-ager/pi_ager_loop.py:490 opt/pi-ager/pi_ager_loop.py:491
+#: opt/pi-ager/pi_ager_loop.py:493 opt/pi-ager/pi_ager_loop.py:494
+#: opt/pi-ager/pi_ager_loop.py:509 opt/pi-ager/pi_ager_loop.py:510
+#: opt/pi-ager/pi_ager_loop.py:512 opt/pi-ager/pi_ager_loop.py:513
+#: opt/pi-ager/pi_ager_loop.py:528 opt/pi-ager/pi_ager_loop.py:529
+#: opt/pi-ager/pi_ager_loop.py:531 opt/pi-ager/pi_ager_loop.py:532
+#: opt/pi-ager/pi_ager_loop.py:550 opt/pi-ager/pi_ager_loop.py:551
+#: opt/pi-ager/pi_ager_loop.py:553 opt/pi-ager/pi_ager_loop.py:554
+#: opt/pi-ager/pi_ager_loop.py:569 opt/pi-ager/pi_ager_loop.py:570
+#: opt/pi-ager/pi_ager_loop.py:572 opt/pi-ager/pi_ager_loop.py:573
+#: opt/pi-ager/pi_ager_loop.py:588 opt/pi-ager/pi_ager_loop.py:589
+#: opt/pi-ager/pi_ager_loop.py:591 opt/pi-ager/pi_ager_loop.py:592
+#: opt/pi-ager/pi_ager_loop.py:1589 opt/pi-ager/pi_ager_loop.py:1657
+#: var/www/diagrams.php:1078 var/www/diagrams.php:1103
+#: var/www/diagrams.php:1189 var/www/diagrams.php:1214
+#: var/www/diagrams.php:1300 var/www/diagrams.php:1325
+#: var/www/diagrams.php:1411 var/www/diagrams.php:1436
+#: var/www/diagrams.php:1522 var/www/diagrams.php:1547
+#: var/www/diagrams.php:1633 var/www/diagrams.php:1658
+#: var/www/diagrams.php:1744 var/www/diagrams.php:1769
+#: var/www/diagrams.php:1855 var/www/diagrams.php:1880 var/www/index.php:1167
+#: var/www/index.php:1295 var/www/modules/querystatus.php:269
 #: var/www/modules/write_config_db_logfile_txt.php:209
 #: var/www/modules/write_config_db_logfile_txt.php:221
 #: var/www/modules/write_config_db_logfile_txt.php:232
@@ -445,75 +396,41 @@ msgstr ""
 msgid "on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:662 opt/pi-ager/pi_ager_loop.py:663
-#: opt/pi-ager/pi_ager_loop.py:665 opt/pi-ager/pi_ager_loop.py:666
-#: opt/pi-ager/pi_ager_loop.py:683 opt/pi-ager/pi_ager_loop.py:684
-#: opt/pi-ager/pi_ager_loop.py:686 opt/pi-ager/pi_ager_loop.py:687
-#: opt/pi-ager/pi_ager_loop.py:705 opt/pi-ager/pi_ager_loop.py:706
-#: opt/pi-ager/pi_ager_loop.py:708 opt/pi-ager/pi_ager_loop.py:709
-#: opt/pi-ager/pi_ager_loop.py:724 opt/pi-ager/pi_ager_loop.py:725
-#: opt/pi-ager/pi_ager_loop.py:727 opt/pi-ager/pi_ager_loop.py:728
-#: opt/pi-ager/pi_ager_loop.py:743 opt/pi-ager/pi_ager_loop.py:744
-#: opt/pi-ager/pi_ager_loop.py:746 opt/pi-ager/pi_ager_loop.py:747
-#: opt/pi-ager/pi_ager_loop.py:765 opt/pi-ager/pi_ager_loop.py:766
-#: opt/pi-ager/pi_ager_loop.py:768 opt/pi-ager/pi_ager_loop.py:769
-#: opt/pi-ager/pi_ager_loop.py:784 opt/pi-ager/pi_ager_loop.py:785
-#: opt/pi-ager/pi_ager_loop.py:787 opt/pi-ager/pi_ager_loop.py:788
-#: opt/pi-ager/pi_ager_loop.py:803 opt/pi-ager/pi_ager_loop.py:804
-#: opt/pi-ager/pi_ager_loop.py:806 opt/pi-ager/pi_ager_loop.py:807
-#: opt/pi-ager/pi_ager_loop.py:1797 opt/pi-ager/pi_ager_loop.py:1865
-#: opt/pi-ager/sensors/pi_ager_loop.py:663
-#: opt/pi-ager/sensors/pi_ager_loop.py:664
-#: opt/pi-ager/sensors/pi_ager_loop.py:666
-#: opt/pi-ager/sensors/pi_ager_loop.py:667
-#: opt/pi-ager/sensors/pi_ager_loop.py:684
-#: opt/pi-ager/sensors/pi_ager_loop.py:685
-#: opt/pi-ager/sensors/pi_ager_loop.py:687
-#: opt/pi-ager/sensors/pi_ager_loop.py:688
-#: opt/pi-ager/sensors/pi_ager_loop.py:706
-#: opt/pi-ager/sensors/pi_ager_loop.py:707
-#: opt/pi-ager/sensors/pi_ager_loop.py:709
-#: opt/pi-ager/sensors/pi_ager_loop.py:710
-#: opt/pi-ager/sensors/pi_ager_loop.py:725
-#: opt/pi-ager/sensors/pi_ager_loop.py:726
-#: opt/pi-ager/sensors/pi_ager_loop.py:728
-#: opt/pi-ager/sensors/pi_ager_loop.py:729
-#: opt/pi-ager/sensors/pi_ager_loop.py:744
-#: opt/pi-ager/sensors/pi_ager_loop.py:745
-#: opt/pi-ager/sensors/pi_ager_loop.py:747
-#: opt/pi-ager/sensors/pi_ager_loop.py:748
-#: opt/pi-ager/sensors/pi_ager_loop.py:766
-#: opt/pi-ager/sensors/pi_ager_loop.py:767
-#: opt/pi-ager/sensors/pi_ager_loop.py:769
-#: opt/pi-ager/sensors/pi_ager_loop.py:770
-#: opt/pi-ager/sensors/pi_ager_loop.py:785
-#: opt/pi-ager/sensors/pi_ager_loop.py:786
-#: opt/pi-ager/sensors/pi_ager_loop.py:788
-#: opt/pi-ager/sensors/pi_ager_loop.py:789
-#: opt/pi-ager/sensors/pi_ager_loop.py:804
-#: opt/pi-ager/sensors/pi_ager_loop.py:805
-#: opt/pi-ager/sensors/pi_ager_loop.py:807
-#: opt/pi-ager/sensors/pi_ager_loop.py:808
-#: opt/pi-ager/sensors/pi_ager_loop.py:1812
-#: opt/pi-ager/sensors/pi_ager_loop.py:1880 var/www/diagrams.php:1080
-#: var/www/diagrams.php:1082 var/www/diagrams.php:1105
-#: var/www/diagrams.php:1107 var/www/diagrams.php:1191
-#: var/www/diagrams.php:1193 var/www/diagrams.php:1216
-#: var/www/diagrams.php:1218 var/www/diagrams.php:1302
-#: var/www/diagrams.php:1304 var/www/diagrams.php:1327
-#: var/www/diagrams.php:1329 var/www/diagrams.php:1413
-#: var/www/diagrams.php:1415 var/www/diagrams.php:1438
-#: var/www/diagrams.php:1440 var/www/diagrams.php:1524
-#: var/www/diagrams.php:1526 var/www/diagrams.php:1549
-#: var/www/diagrams.php:1551 var/www/diagrams.php:1635
-#: var/www/diagrams.php:1637 var/www/diagrams.php:1660
-#: var/www/diagrams.php:1662 var/www/diagrams.php:1746
-#: var/www/diagrams.php:1748 var/www/diagrams.php:1771
-#: var/www/diagrams.php:1773 var/www/diagrams.php:1857
-#: var/www/diagrams.php:1859 var/www/diagrams.php:1882
-#: var/www/diagrams.php:1884 var/www/index.php:1020 var/www/index.php:1168
-#: var/www/index.php:1298 var/www/modules/querystatus.php:146
-#: var/www/modules/querystatus.php:272
+#: opt/pi-ager/pi_ager_loop.py:456 opt/pi-ager/pi_ager_loop.py:457
+#: opt/pi-ager/pi_ager_loop.py:459 opt/pi-ager/pi_ager_loop.py:460
+#: opt/pi-ager/pi_ager_loop.py:477 opt/pi-ager/pi_ager_loop.py:478
+#: opt/pi-ager/pi_ager_loop.py:480 opt/pi-ager/pi_ager_loop.py:481
+#: opt/pi-ager/pi_ager_loop.py:499 opt/pi-ager/pi_ager_loop.py:500
+#: opt/pi-ager/pi_ager_loop.py:502 opt/pi-ager/pi_ager_loop.py:503
+#: opt/pi-ager/pi_ager_loop.py:518 opt/pi-ager/pi_ager_loop.py:519
+#: opt/pi-ager/pi_ager_loop.py:521 opt/pi-ager/pi_ager_loop.py:522
+#: opt/pi-ager/pi_ager_loop.py:537 opt/pi-ager/pi_ager_loop.py:538
+#: opt/pi-ager/pi_ager_loop.py:540 opt/pi-ager/pi_ager_loop.py:541
+#: opt/pi-ager/pi_ager_loop.py:559 opt/pi-ager/pi_ager_loop.py:560
+#: opt/pi-ager/pi_ager_loop.py:562 opt/pi-ager/pi_ager_loop.py:563
+#: opt/pi-ager/pi_ager_loop.py:578 opt/pi-ager/pi_ager_loop.py:579
+#: opt/pi-ager/pi_ager_loop.py:581 opt/pi-ager/pi_ager_loop.py:582
+#: opt/pi-ager/pi_ager_loop.py:597 opt/pi-ager/pi_ager_loop.py:598
+#: opt/pi-ager/pi_ager_loop.py:600 opt/pi-ager/pi_ager_loop.py:601
+#: opt/pi-ager/pi_ager_loop.py:1585 opt/pi-ager/pi_ager_loop.py:1653
+#: var/www/diagrams.php:1080 var/www/diagrams.php:1082
+#: var/www/diagrams.php:1105 var/www/diagrams.php:1107
+#: var/www/diagrams.php:1191 var/www/diagrams.php:1193
+#: var/www/diagrams.php:1216 var/www/diagrams.php:1218
+#: var/www/diagrams.php:1302 var/www/diagrams.php:1304
+#: var/www/diagrams.php:1327 var/www/diagrams.php:1329
+#: var/www/diagrams.php:1413 var/www/diagrams.php:1415
+#: var/www/diagrams.php:1438 var/www/diagrams.php:1440
+#: var/www/diagrams.php:1524 var/www/diagrams.php:1526
+#: var/www/diagrams.php:1549 var/www/diagrams.php:1551
+#: var/www/diagrams.php:1635 var/www/diagrams.php:1637
+#: var/www/diagrams.php:1660 var/www/diagrams.php:1662
+#: var/www/diagrams.php:1746 var/www/diagrams.php:1748
+#: var/www/diagrams.php:1771 var/www/diagrams.php:1773
+#: var/www/diagrams.php:1857 var/www/diagrams.php:1859
+#: var/www/diagrams.php:1882 var/www/diagrams.php:1884 var/www/index.php:1020
+#: var/www/index.php:1168 var/www/index.php:1298
+#: var/www/modules/querystatus.php:146 var/www/modules/querystatus.php:272
 #: var/www/modules/write_config_db_logfile_txt.php:132
 #: var/www/modules/write_config_db_logfile_txt.php:148
 #: var/www/modules/write_config_db_logfile_txt.php:209
@@ -523,349 +440,236 @@ msgstr ""
 msgid "off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:674 opt/pi-ager/pi_ager_loop.py:675
-#: opt/pi-ager/pi_ager_loop.py:677 opt/pi-ager/pi_ager_loop.py:678
-#: opt/pi-ager/pi_ager_loop.py:683 opt/pi-ager/pi_ager_loop.py:684
-#: opt/pi-ager/pi_ager_loop.py:686 opt/pi-ager/pi_ager_loop.py:687
-#: opt/pi-ager/sensors/pi_ager_loop.py:675
-#: opt/pi-ager/sensors/pi_ager_loop.py:676
-#: opt/pi-ager/sensors/pi_ager_loop.py:678
-#: opt/pi-ager/sensors/pi_ager_loop.py:679
-#: opt/pi-ager/sensors/pi_ager_loop.py:684
-#: opt/pi-ager/sensors/pi_ager_loop.py:685
-#: opt/pi-ager/sensors/pi_ager_loop.py:687
-#: opt/pi-ager/sensors/pi_ager_loop.py:688
+#: opt/pi-ager/pi_ager_loop.py:468 opt/pi-ager/pi_ager_loop.py:469
+#: opt/pi-ager/pi_ager_loop.py:471 opt/pi-ager/pi_ager_loop.py:472
+#: opt/pi-ager/pi_ager_loop.py:477 opt/pi-ager/pi_ager_loop.py:478
+#: opt/pi-ager/pi_ager_loop.py:480 opt/pi-ager/pi_ager_loop.py:481
 msgid "cooling compressor"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:696 opt/pi-ager/pi_ager_loop.py:697
-#: opt/pi-ager/pi_ager_loop.py:699 opt/pi-ager/pi_ager_loop.py:700
-#: opt/pi-ager/pi_ager_loop.py:705 opt/pi-ager/pi_ager_loop.py:706
-#: opt/pi-ager/pi_ager_loop.py:708 opt/pi-ager/pi_ager_loop.py:709
-#: opt/pi-ager/sensors/pi_ager_loop.py:697
-#: opt/pi-ager/sensors/pi_ager_loop.py:698
-#: opt/pi-ager/sensors/pi_ager_loop.py:700
-#: opt/pi-ager/sensors/pi_ager_loop.py:701
-#: opt/pi-ager/sensors/pi_ager_loop.py:706
-#: opt/pi-ager/sensors/pi_ager_loop.py:707
-#: opt/pi-ager/sensors/pi_ager_loop.py:709
-#: opt/pi-ager/sensors/pi_ager_loop.py:710 var/www/diagrams.php:1460
-#: var/www/diagrams.php:1481
+#: opt/pi-ager/pi_ager_loop.py:490 opt/pi-ager/pi_ager_loop.py:491
+#: opt/pi-ager/pi_ager_loop.py:493 opt/pi-ager/pi_ager_loop.py:494
+#: opt/pi-ager/pi_ager_loop.py:499 opt/pi-ager/pi_ager_loop.py:500
+#: opt/pi-ager/pi_ager_loop.py:502 opt/pi-ager/pi_ager_loop.py:503
+#: var/www/diagrams.php:1460 var/www/diagrams.php:1481
 msgid "humidifier"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:715 opt/pi-ager/pi_ager_loop.py:716
-#: opt/pi-ager/pi_ager_loop.py:718 opt/pi-ager/pi_ager_loop.py:719
-#: opt/pi-ager/pi_ager_loop.py:724 opt/pi-ager/pi_ager_loop.py:725
-#: opt/pi-ager/pi_ager_loop.py:727 opt/pi-ager/pi_ager_loop.py:728
-#: opt/pi-ager/sensors/pi_ager_loop.py:716
-#: opt/pi-ager/sensors/pi_ager_loop.py:717
-#: opt/pi-ager/sensors/pi_ager_loop.py:719
-#: opt/pi-ager/sensors/pi_ager_loop.py:720
-#: opt/pi-ager/sensors/pi_ager_loop.py:725
-#: opt/pi-ager/sensors/pi_ager_loop.py:726
-#: opt/pi-ager/sensors/pi_ager_loop.py:728
-#: opt/pi-ager/sensors/pi_ager_loop.py:729
+#: opt/pi-ager/pi_ager_loop.py:509 opt/pi-ager/pi_ager_loop.py:510
+#: opt/pi-ager/pi_ager_loop.py:512 opt/pi-ager/pi_ager_loop.py:513
+#: opt/pi-ager/pi_ager_loop.py:518 opt/pi-ager/pi_ager_loop.py:519
+#: opt/pi-ager/pi_ager_loop.py:521 opt/pi-ager/pi_ager_loop.py:522
 msgid "circulation air"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:734 opt/pi-ager/pi_ager_loop.py:735
-#: opt/pi-ager/pi_ager_loop.py:737 opt/pi-ager/pi_ager_loop.py:738
-#: opt/pi-ager/pi_ager_loop.py:743 opt/pi-ager/pi_ager_loop.py:744
-#: opt/pi-ager/pi_ager_loop.py:746 opt/pi-ager/pi_ager_loop.py:747
-#: opt/pi-ager/sensors/pi_ager_loop.py:735
-#: opt/pi-ager/sensors/pi_ager_loop.py:736
-#: opt/pi-ager/sensors/pi_ager_loop.py:738
-#: opt/pi-ager/sensors/pi_ager_loop.py:739
-#: opt/pi-ager/sensors/pi_ager_loop.py:744
-#: opt/pi-ager/sensors/pi_ager_loop.py:745
-#: opt/pi-ager/sensors/pi_ager_loop.py:747
-#: opt/pi-ager/sensors/pi_ager_loop.py:748 var/www/diagrams.php:1682
-#: var/www/diagrams.php:1703
+#: opt/pi-ager/pi_ager_loop.py:528 opt/pi-ager/pi_ager_loop.py:529
+#: opt/pi-ager/pi_ager_loop.py:531 opt/pi-ager/pi_ager_loop.py:532
+#: opt/pi-ager/pi_ager_loop.py:537 opt/pi-ager/pi_ager_loop.py:538
+#: opt/pi-ager/pi_ager_loop.py:540 opt/pi-ager/pi_ager_loop.py:541
+#: var/www/diagrams.php:1682 var/www/diagrams.php:1703
 msgid "exhaust air"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:756 opt/pi-ager/pi_ager_loop.py:757
-#: opt/pi-ager/pi_ager_loop.py:759 opt/pi-ager/pi_ager_loop.py:760
-#: opt/pi-ager/pi_ager_loop.py:765 opt/pi-ager/pi_ager_loop.py:766
-#: opt/pi-ager/pi_ager_loop.py:768 opt/pi-ager/pi_ager_loop.py:769
-#: opt/pi-ager/sensors/pi_ager_loop.py:757
-#: opt/pi-ager/sensors/pi_ager_loop.py:758
-#: opt/pi-ager/sensors/pi_ager_loop.py:760
-#: opt/pi-ager/sensors/pi_ager_loop.py:761
-#: opt/pi-ager/sensors/pi_ager_loop.py:766
-#: opt/pi-ager/sensors/pi_ager_loop.py:767
-#: opt/pi-ager/sensors/pi_ager_loop.py:769
-#: opt/pi-ager/sensors/pi_ager_loop.py:770 var/www/diagrams.php:1571
-#: var/www/diagrams.php:1592
+#: opt/pi-ager/pi_ager_loop.py:550 opt/pi-ager/pi_ager_loop.py:551
+#: opt/pi-ager/pi_ager_loop.py:553 opt/pi-ager/pi_ager_loop.py:554
+#: opt/pi-ager/pi_ager_loop.py:559 opt/pi-ager/pi_ager_loop.py:560
+#: opt/pi-ager/pi_ager_loop.py:562 opt/pi-ager/pi_ager_loop.py:563
+#: var/www/diagrams.php:1571 var/www/diagrams.php:1592
 msgid "dehumidifier"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:775 opt/pi-ager/pi_ager_loop.py:776
-#: opt/pi-ager/pi_ager_loop.py:778 opt/pi-ager/pi_ager_loop.py:779
-#: opt/pi-ager/pi_ager_loop.py:784 opt/pi-ager/pi_ager_loop.py:785
-#: opt/pi-ager/pi_ager_loop.py:787 opt/pi-ager/pi_ager_loop.py:788
-#: opt/pi-ager/sensors/pi_ager_loop.py:776
-#: opt/pi-ager/sensors/pi_ager_loop.py:777
-#: opt/pi-ager/sensors/pi_ager_loop.py:779
-#: opt/pi-ager/sensors/pi_ager_loop.py:780
-#: opt/pi-ager/sensors/pi_ager_loop.py:785
-#: opt/pi-ager/sensors/pi_ager_loop.py:786
-#: opt/pi-ager/sensors/pi_ager_loop.py:788
-#: opt/pi-ager/sensors/pi_ager_loop.py:789 var/www/config.php:195
-#: var/www/diagrams.php:1016 var/www/diagrams.php:1037 var/www/index.php:1393
-#: var/www/modules/querystatus.php:387
+#: opt/pi-ager/pi_ager_loop.py:569 opt/pi-ager/pi_ager_loop.py:570
+#: opt/pi-ager/pi_ager_loop.py:572 opt/pi-ager/pi_ager_loop.py:573
+#: opt/pi-ager/pi_ager_loop.py:578 opt/pi-ager/pi_ager_loop.py:579
+#: opt/pi-ager/pi_ager_loop.py:581 opt/pi-ager/pi_ager_loop.py:582
+#: var/www/config.php:195 var/www/diagrams.php:1016 var/www/diagrams.php:1037
+#: var/www/index.php:1393 var/www/modules/querystatus.php:387
 msgid "light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:794 opt/pi-ager/pi_ager_loop.py:795
-#: opt/pi-ager/pi_ager_loop.py:797 opt/pi-ager/pi_ager_loop.py:798
-#: opt/pi-ager/pi_ager_loop.py:803 opt/pi-ager/pi_ager_loop.py:804
-#: opt/pi-ager/pi_ager_loop.py:806 opt/pi-ager/pi_ager_loop.py:807
-#: opt/pi-ager/sensors/pi_ager_loop.py:795
-#: opt/pi-ager/sensors/pi_ager_loop.py:796
-#: opt/pi-ager/sensors/pi_ager_loop.py:798
-#: opt/pi-ager/sensors/pi_ager_loop.py:799
-#: opt/pi-ager/sensors/pi_ager_loop.py:804
-#: opt/pi-ager/sensors/pi_ager_loop.py:805
-#: opt/pi-ager/sensors/pi_ager_loop.py:807
-#: opt/pi-ager/sensors/pi_ager_loop.py:808 var/www/diagrams.php:1127
-#: var/www/diagrams.php:1148 var/www/index.php:1362
+#: opt/pi-ager/pi_ager_loop.py:588 opt/pi-ager/pi_ager_loop.py:589
+#: opt/pi-ager/pi_ager_loop.py:591 opt/pi-ager/pi_ager_loop.py:592
+#: opt/pi-ager/pi_ager_loop.py:597 opt/pi-ager/pi_ager_loop.py:598
+#: opt/pi-ager/pi_ager_loop.py:600 opt/pi-ager/pi_ager_loop.py:601
+#: var/www/diagrams.php:1127 var/www/diagrams.php:1148 var/www/index.php:1362
 #: var/www/modules/querystatus.php:355
 msgid "uv-light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:939 opt/pi-ager/sensors/pi_ager_loop.py:940
+#: opt/pi-ager/pi_ager_loop.py:733
 msgid "UPS battery is low"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:942 opt/pi-ager/sensors/pi_ager_loop.py:943
+#: opt/pi-ager/pi_ager_loop.py:736
 msgid "Shutdown Pi-Ager now"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:954 opt/pi-ager/sensors/pi_ager_loop.py:955
+#: opt/pi-ager/pi_ager_loop.py:748
 msgid "UPS battery is ok"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:968 opt/pi-ager/sensors/pi_ager_loop.py:969
+#: opt/pi-ager/pi_ager_loop.py:762
 msgid "Power monitor signals powerfail"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:977 opt/pi-ager/sensors/pi_ager_loop.py:978
+#: opt/pi-ager/pi_ager_loop.py:771
 msgid "Power monitor signals powergood"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:994 opt/pi-ager/sensors/pi_ager_loop.py:995
+#: opt/pi-ager/pi_ager_loop.py:788
 msgid "Switch is shorted to GND"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1003 opt/pi-ager/sensors/pi_ager_loop.py:1004
+#: opt/pi-ager/pi_ager_loop.py:797
 msgid "Switch is open"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1722 opt/pi-ager/sensors/pi_ager_loop.py:1737
+#: opt/pi-ager/pi_ager_loop.py:1514
 msgid "selected internal sensor"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1724 opt/pi-ager/sensors/pi_ager_loop.py:1739
+#: opt/pi-ager/pi_ager_loop.py:1516
 msgid "target temperature"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1726 opt/pi-ager/pi_ager_loop.py:1738
-#: opt/pi-ager/sensors/pi_ager_loop.py:1741
-#: opt/pi-ager/sensors/pi_ager_loop.py:1753
+#: opt/pi-ager/pi_ager_loop.py:1518 opt/pi-ager/pi_ager_loop.py:1530
 msgid "actual temperature"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1729 opt/pi-ager/sensors/pi_ager_loop.py:1744
+#: opt/pi-ager/pi_ager_loop.py:1521
 msgid "target humidity"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1730 opt/pi-ager/pi_ager_loop.py:1739
-#: opt/pi-ager/sensors/pi_ager_loop.py:1745
-#: opt/pi-ager/sensors/pi_ager_loop.py:1754
+#: opt/pi-ager/pi_ager_loop.py:1522 opt/pi-ager/pi_ager_loop.py:1531
 msgid "actual humidity"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1732 opt/pi-ager/pi_ager_loop.py:1740
-#: opt/pi-ager/sensors/pi_ager_loop.py:1747
-#: opt/pi-ager/sensors/pi_ager_loop.py:1755
+#: opt/pi-ager/pi_ager_loop.py:1524 opt/pi-ager/pi_ager_loop.py:1532
 msgid "actual dewpoint"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1733 opt/pi-ager/pi_ager_loop.py:1741
-#: opt/pi-ager/sensors/pi_ager_loop.py:1748
-#: opt/pi-ager/sensors/pi_ager_loop.py:1756
+#: opt/pi-ager/pi_ager_loop.py:1525 opt/pi-ager/pi_ager_loop.py:1533
 msgid "actual humidity abs"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1737 opt/pi-ager/sensors/pi_ager_loop.py:1752
+#: opt/pi-ager/pi_ager_loop.py:1529
 msgid "selected external sensor"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1753 opt/pi-ager/pi_ager_loop.py:1756
-#: opt/pi-ager/pi_ager_loop.py:1759 opt/pi-ager/sensors/pi_ager_loop.py:1768
-#: opt/pi-ager/sensors/pi_ager_loop.py:1771
-#: opt/pi-ager/sensors/pi_ager_loop.py:1774
+#: opt/pi-ager/pi_ager_loop.py:1541 opt/pi-ager/pi_ager_loop.py:1544
+#: opt/pi-ager/pi_ager_loop.py:1547
 msgid "circulation air timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1753 opt/pi-ager/pi_ager_loop.py:1759
-#: opt/pi-ager/pi_ager_loop.py:1775 opt/pi-ager/pi_ager_loop.py:1781
-#: opt/pi-ager/sensors/pi_ager_loop.py:1768
-#: opt/pi-ager/sensors/pi_ager_loop.py:1774
-#: opt/pi-ager/sensors/pi_ager_loop.py:1790
-#: opt/pi-ager/sensors/pi_ager_loop.py:1796
+#: opt/pi-ager/pi_ager_loop.py:1541 opt/pi-ager/pi_ager_loop.py:1547
+#: opt/pi-ager/pi_ager_loop.py:1563 opt/pi-ager/pi_ager_loop.py:1569
 msgid "fan permanent off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1756 opt/pi-ager/pi_ager_loop.py:1778
-#: opt/pi-ager/sensors/pi_ager_loop.py:1771
-#: opt/pi-ager/sensors/pi_ager_loop.py:1793
+#: opt/pi-ager/pi_ager_loop.py:1544 opt/pi-ager/pi_ager_loop.py:1566
 msgid "fan permanent on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1763 opt/pi-ager/pi_ager_loop.py:1767
-#: opt/pi-ager/sensors/pi_ager_loop.py:1778
-#: opt/pi-ager/sensors/pi_ager_loop.py:1782
+#: opt/pi-ager/pi_ager_loop.py:1551 opt/pi-ager/pi_ager_loop.py:1555
 msgid "circulation air timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1763 opt/pi-ager/pi_ager_loop.py:1785
-#: opt/pi-ager/sensors/pi_ager_loop.py:1778
-#: opt/pi-ager/sensors/pi_ager_loop.py:1800
+#: opt/pi-ager/pi_ager_loop.py:1551 opt/pi-ager/pi_ager_loop.py:1573
 msgid "fan on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1767 opt/pi-ager/pi_ager_loop.py:1789
-#: opt/pi-ager/sensors/pi_ager_loop.py:1782
-#: opt/pi-ager/sensors/pi_ager_loop.py:1804
+#: opt/pi-ager/pi_ager_loop.py:1555 opt/pi-ager/pi_ager_loop.py:1577
 msgid "fan off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1775 opt/pi-ager/pi_ager_loop.py:1778
-#: opt/pi-ager/pi_ager_loop.py:1781 opt/pi-ager/sensors/pi_ager_loop.py:1790
-#: opt/pi-ager/sensors/pi_ager_loop.py:1793
-#: opt/pi-ager/sensors/pi_ager_loop.py:1796
+#: opt/pi-ager/pi_ager_loop.py:1563 opt/pi-ager/pi_ager_loop.py:1566
+#: opt/pi-ager/pi_ager_loop.py:1569
 msgid "exhaust air timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1785 opt/pi-ager/pi_ager_loop.py:1789
-#: opt/pi-ager/sensors/pi_ager_loop.py:1800
-#: opt/pi-ager/sensors/pi_ager_loop.py:1804
+#: opt/pi-ager/pi_ager_loop.py:1573 opt/pi-ager/pi_ager_loop.py:1577
 msgid "exhaust air timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1797 opt/pi-ager/pi_ager_loop.py:1801
-#: opt/pi-ager/sensors/pi_ager_loop.py:1812
-#: opt/pi-ager/sensors/pi_ager_loop.py:1816
+#: opt/pi-ager/pi_ager_loop.py:1585 opt/pi-ager/pi_ager_loop.py:1589
 msgid "modus uv-light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1804 opt/pi-ager/pi_ager_loop.py:1807
-#: opt/pi-ager/pi_ager_loop.py:1810 opt/pi-ager/sensors/pi_ager_loop.py:1819
-#: opt/pi-ager/sensors/pi_ager_loop.py:1822
-#: opt/pi-ager/sensors/pi_ager_loop.py:1825
+#: opt/pi-ager/pi_ager_loop.py:1592 opt/pi-ager/pi_ager_loop.py:1595
+#: opt/pi-ager/pi_ager_loop.py:1598
 msgid "uv-light timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1804 opt/pi-ager/pi_ager_loop.py:1807
-#: opt/pi-ager/pi_ager_loop.py:1837 opt/pi-ager/sensors/pi_ager_loop.py:1819
-#: opt/pi-ager/sensors/pi_ager_loop.py:1822
-#: opt/pi-ager/sensors/pi_ager_loop.py:1852
+#: opt/pi-ager/pi_ager_loop.py:1592 opt/pi-ager/pi_ager_loop.py:1595
+#: opt/pi-ager/pi_ager_loop.py:1625
 msgid "uv-light permanent off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1810 opt/pi-ager/sensors/pi_ager_loop.py:1825
+#: opt/pi-ager/pi_ager_loop.py:1598
 msgid "uv-light permanent on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1817 opt/pi-ager/pi_ager_loop.py:1824
-#: opt/pi-ager/sensors/pi_ager_loop.py:1832
-#: opt/pi-ager/sensors/pi_ager_loop.py:1839
+#: opt/pi-ager/pi_ager_loop.py:1605 opt/pi-ager/pi_ager_loop.py:1612
 msgid "uv-light timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1817 opt/pi-ager/pi_ager_loop.py:1851
-#: opt/pi-ager/sensors/pi_ager_loop.py:1832
-#: opt/pi-ager/sensors/pi_ager_loop.py:1866
+#: opt/pi-ager/pi_ager_loop.py:1605 opt/pi-ager/pi_ager_loop.py:1639
 msgid "uv-light on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1824 opt/pi-ager/pi_ager_loop.py:1855
-#: opt/pi-ager/sensors/pi_ager_loop.py:1839
-#: opt/pi-ager/sensors/pi_ager_loop.py:1870
+#: opt/pi-ager/pi_ager_loop.py:1612 opt/pi-ager/pi_ager_loop.py:1643
 msgid "uv-light off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1837 opt/pi-ager/sensors/pi_ager_loop.py:1852
+#: opt/pi-ager/pi_ager_loop.py:1625
 msgid "uv-light timestamp inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1851 opt/pi-ager/pi_ager_loop.py:1855
-#: opt/pi-ager/sensors/pi_ager_loop.py:1866
-#: opt/pi-ager/sensors/pi_ager_loop.py:1870
+#: opt/pi-ager/pi_ager_loop.py:1639 opt/pi-ager/pi_ager_loop.py:1643
 msgid "uv-light timestamp active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1865 opt/pi-ager/pi_ager_loop.py:1869
-#: opt/pi-ager/sensors/pi_ager_loop.py:1880
-#: opt/pi-ager/sensors/pi_ager_loop.py:1884
+#: opt/pi-ager/pi_ager_loop.py:1653 opt/pi-ager/pi_ager_loop.py:1657
 msgid "modus light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1872 opt/pi-ager/pi_ager_loop.py:1876
-#: opt/pi-ager/pi_ager_loop.py:1880 opt/pi-ager/sensors/pi_ager_loop.py:1887
-#: opt/pi-ager/sensors/pi_ager_loop.py:1891
-#: opt/pi-ager/sensors/pi_ager_loop.py:1895
+#: opt/pi-ager/pi_ager_loop.py:1660 opt/pi-ager/pi_ager_loop.py:1664
+#: opt/pi-ager/pi_ager_loop.py:1668
 msgid "light timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1872 opt/pi-ager/pi_ager_loop.py:1876
-#: opt/pi-ager/pi_ager_loop.py:1910 opt/pi-ager/sensors/pi_ager_loop.py:1887
-#: opt/pi-ager/sensors/pi_ager_loop.py:1891
-#: opt/pi-ager/sensors/pi_ager_loop.py:1925
+#: opt/pi-ager/pi_ager_loop.py:1660 opt/pi-ager/pi_ager_loop.py:1664
+#: opt/pi-ager/pi_ager_loop.py:1698
 msgid "light permanent off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1880 opt/pi-ager/sensors/pi_ager_loop.py:1895
+#: opt/pi-ager/pi_ager_loop.py:1668
 msgid "light permanent on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1888 opt/pi-ager/pi_ager_loop.py:1895
-#: opt/pi-ager/sensors/pi_ager_loop.py:1903
-#: opt/pi-ager/sensors/pi_ager_loop.py:1910
+#: opt/pi-ager/pi_ager_loop.py:1676 opt/pi-ager/pi_ager_loop.py:1683
 msgid "light timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1888 opt/pi-ager/pi_ager_loop.py:1924
-#: opt/pi-ager/sensors/pi_ager_loop.py:1903
-#: opt/pi-ager/sensors/pi_ager_loop.py:1939 var/www/webcam.php:53
+#: opt/pi-ager/pi_ager_loop.py:1676 opt/pi-ager/pi_ager_loop.py:1712
+#: var/www/webcam.php:53
 msgid "light on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1895 opt/pi-ager/pi_ager_loop.py:1928
-#: opt/pi-ager/sensors/pi_ager_loop.py:1910
-#: opt/pi-ager/sensors/pi_ager_loop.py:1943
+#: opt/pi-ager/pi_ager_loop.py:1683 opt/pi-ager/pi_ager_loop.py:1716
 msgid "light off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1910 opt/pi-ager/sensors/pi_ager_loop.py:1925
+#: opt/pi-ager/pi_ager_loop.py:1698
 msgid "light timestamp inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1924 opt/pi-ager/pi_ager_loop.py:1928
-#: opt/pi-ager/sensors/pi_ager_loop.py:1939
-#: opt/pi-ager/sensors/pi_ager_loop.py:1943
+#: opt/pi-ager/pi_ager_loop.py:1712 opt/pi-ager/pi_ager_loop.py:1716
 msgid "light timestamp active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:2135 opt/pi-ager/pi_ager_loop.py:2137
-#: opt/pi-ager/pi_ager_loop.py:2140 opt/pi-ager/pi_ager_loop.py:2142
-#: opt/pi-ager/sensors/pi_ager_loop.py:2150
-#: opt/pi-ager/sensors/pi_ager_loop.py:2152
-#: opt/pi-ager/sensors/pi_ager_loop.py:2155
-#: opt/pi-ager/sensors/pi_ager_loop.py:2157
+#: opt/pi-ager/pi_ager_loop.py:1923 opt/pi-ager/pi_ager_loop.py:1925
+#: opt/pi-ager/pi_ager_loop.py:1928 opt/pi-ager/pi_ager_loop.py:1930
 msgid "weight scale"
 msgstr ""
 
@@ -885,24 +689,24 @@ msgstr ""
 msgid "nothing to cleanup"
 msgstr ""
 
-#: opt/pi-ager/sensors/pi_ager_cl_sensor.py:62
-#: opt/pi-ager/sensors/pi_ager_cl_sensor_aht.py:279
-#: opt/pi-ager/sensors/pi_ager_cl_sensor_dht_adafruit.py:79
-#: opt/pi-ager/sensors/pi_ager_cl_sensor_sht.py:226
-#: opt/pi-ager/sensors/pi_ager_cl_sensor_sht75.py:72
+#: opt/pi-ager/sensors/pi_ager_cl_sensor_aht.py:50
+msgid "Error initializing AHT2x/3x sensor!"
+msgstr ""
+
+#: opt/pi-ager/sensors/pi_ager_cl_sensor_aht.py:138
+#: opt/pi-ager/sensors/pi_ager_cl_sensor_dht_adafruit.py:73
+#: opt/pi-ager/sensors/pi_ager_cl_sensor_dht_adafruit.py:74
+#: opt/pi-ager/sensors/pi_ager_cl_sensor_sht75.py:63
 msgid "Too many measurement errors occurred!"
 msgstr ""
 
-#: opt/pi-ager/sensors/pi_ager_cl_sensor_aht.py:70
-msgid "Error initializing AHT2x sensor!"
+#: opt/pi-ager/sensors/pi_ager_cl_sensor_sht.py:61
+msgid "Error initializing SHT sensor!"
 msgstr ""
 
-#: opt/pi-ager/sensors/pi_ager_cl_sensor_aht.py:119
-msgid "Cant read status from AHT2x!"
-msgstr ""
-
-#: opt/pi-ager/sensors/pi_ager_cl_sensor_aht.py:246
-msgid "CRC error reading  AHT2x!"
+#: opt/pi-ager/sensors/pi_ager_cl_sensor_sht.py:152
+#: opt/pi-ager/sensors/pi_ager_cl_sensor_sht4.py:117
+msgid "Too many SHT measurement errors occurred!"
 msgstr ""
 
 #: var/www/admin.php:30
@@ -933,7 +737,7 @@ msgstr ""
 msgid "uv light off"
 msgstr ""
 
-#: var/www/admin.php:57 var/www/admin.php:482
+#: var/www/admin.php:57 var/www/admin.php:498
 msgid "administration"
 msgstr ""
 
@@ -945,9 +749,13 @@ msgstr ""
 msgid "external"
 msgstr ""
 
-#: var/www/admin.php:69 var/www/admin.php:124 var/www/admin.php:214
-#: var/www/admin.php:399 var/www/admin.php:425 var/www/admin.php:513
-#: var/www/admin.php:769 var/www/admin.php:872 var/www/config.php:16
+#: var/www/admin.php:70 var/www/admin.php:72
+msgid "[I2C addr]"
+msgstr ""
+
+#: var/www/admin.php:75 var/www/admin.php:140 var/www/admin.php:230
+#: var/www/admin.php:415 var/www/admin.php:441 var/www/admin.php:529
+#: var/www/admin.php:785 var/www/admin.php:888 var/www/config.php:16
 #: var/www/config.php:48 var/www/config.php:106 var/www/config.php:143
 #: var/www/config.php:195 var/www/config.php:234 var/www/config.php:265
 #: var/www/config.php:305 var/www/manvals.php:22 var/www/manvals.php:51
@@ -959,11 +767,11 @@ msgstr ""
 msgid "help"
 msgstr ""
 
-#: var/www/admin.php:93
+#: var/www/admin.php:109
 msgid "MiThermometer device name"
 msgstr ""
 
-#: var/www/admin.php:93
+#: var/www/admin.php:109
 msgid ""
 "Enter MiThermometer device name, e.g. ATC_C4C134, can be found with blescan "
 "tool"
@@ -971,31 +779,29 @@ msgstr ""
 "Enter MiThermometer device name, e.g. ATC_C4C134. The device name can be "
 "found with a Bluetooth scanner tool"
 
-#: var/www/admin.php:106
+#: var/www/admin.php:122
 msgid "helptext_sensortype_admin"
 msgstr ""
 "<br><br>\n"
-"<b>Sensor intern: </b> Here you can select the sensor to control the "
-"temperature and humidity in the Pi-Ager.\n"
-"The older 1-Wire sensors DHT11/22 and SHT75 as well as the newer I2C sensors "
-"(Bus Adr.0x44) and AHT2x can be used.\n"
+"<b>Sensor internal: </b> Here you can select the sensor that controls the "
+"temperature and humidity in the ripening cabinet.\n"
+"Both the older 1-Wire sensors DHT11/22 and SHT75, as well as the newer I2C "
+"sensors SHT85, SHT3x, AHT2x, AHT30 and SHT4x can be used.\n"
 "<br><br>\n"
-"<b>Sensor extern: </b>It is possible to connect another sensor to the "
-"system. The external sensor can be used to monitor the external "
-"environmental conditions of the Pi-Ager. The external temperature and "
-"humidity can be used as a source of information, especially for the control "
-"of humidity in the Pi-Ager.\n"
-"<br>It should be noted that currently only the SHT3x sensors can have their "
-"I2C bus address changed. Therefore only these sensors, the AHT2x and the "
-"Bluetooth sensor 'Mi Temperature and Humidity Monitor 2' can be used as "
-"external sensors.\n"
-"<br>With the help of an external circuit, e.g. with a 10kOhm resistor, the "
-"bus address of the SHT3x sensor can be changed to the required address 0x45. "
-"Some SHT3X sensor boards are also equipped with a corresponding jumper.\n"
-"<br> The AHT2x sensor has a different I2C address, so that it can be "
-"combined with SHT3x and SHT85 internal sensors.\n"
-"<br><br>\n"
-"<br><img src=\"./images/icons/MiTemperatureSensor2.png\" alt=\"\">\n"
+"<b>External sensor: </b>It is possible to connect another sensor to the "
+"system. The external sensor can be used to record the external environmental "
+"conditions of the Pi-Ager. The external temperature and humidity can be used "
+"as a source of information, especially for controlling the humidity in the "
+"ripening cabinet.\n"
+"<br>It should be noted that only external sensors can be used whose I2C "
+"addresses differ from the selected internal sensor. The Bluetooth sensor 'Mi "
+"Temperature and Humidity Monitor 2' can be used as an external sensor "
+"regardless of the type of internal sensors.\n"
+"<br>With the help of an external circuit, e.g. with a 10kOhm resistor, you "
+"can change the I2C bus address of the SHT3x sensor to the required address "
+"0x45. Some SHT3x sensor boards are also equipped with a corresponding "
+"jumper. This modified sensor appears in the setup as SHT3x-mod.\n"
+"<br><br><br><img src=\"./images/icons/MiTemperatureSensor2.png\" alt=\"\">\n"
 "<br>The MiThermometer2 can be used together with all internal sensors.\n"
 "<br>This sensor can only be used with a custom firmware. To flash this "
 "sensor it is required to use an Android-based smartphone or tablet and open "
@@ -1032,9 +838,9 @@ msgstr ""
 "Raspberry can be damaged.\n"
 "<br><br>"
 
-#: var/www/admin.php:108 var/www/admin.php:208 var/www/admin.php:393
-#: var/www/admin.php:419 var/www/admin.php:477 var/www/admin.php:550
-#: var/www/admin.php:785 var/www/admin.php:887 var/www/config.php:42
+#: var/www/admin.php:124 var/www/admin.php:224 var/www/admin.php:409
+#: var/www/admin.php:435 var/www/admin.php:493 var/www/admin.php:566
+#: var/www/admin.php:801 var/www/admin.php:903 var/www/config.php:42
 #: var/www/config.php:80 var/www/config.php:137 var/www/config.php:189
 #: var/www/config.php:228 var/www/config.php:259 var/www/config.php:291
 #: var/www/config.php:324 var/www/manvals.php:44 var/www/manvals.php:67
@@ -1046,22 +852,22 @@ msgstr ""
 msgid "close"
 msgstr ""
 
-#: var/www/admin.php:113
+#: var/www/admin.php:129
 msgid ""
 "ATTENTION: a sensor change may require system reboot or shutdown.\\n After "
 "shutdown you have to put your Raspberry Pi device into power-off state!"
 msgstr ""
 
-#: var/www/admin.php:113
+#: var/www/admin.php:129
 msgid "change sensors"
 msgstr ""
 
-#: var/www/admin.php:124 var/www/index.php:284 var/www/index.php:1412
+#: var/www/admin.php:140 var/www/index.php:284 var/www/index.php:1412
 #: var/www/settings.php:63
 msgid "scales"
 msgstr ""
 
-#: var/www/admin.php:125 var/www/admin.php:161 var/www/diagrams.php:660
+#: var/www/admin.php:141 var/www/admin.php:177 var/www/diagrams.php:660
 #: var/www/diagrams.php:681 var/www/diagrams.php:702 var/www/diagrams.php:716
 #: var/www/diagrams.php:734 var/www/diagrams.php:779 var/www/diagrams.php:800
 #: var/www/index.php:604 var/www/index.php:624 var/www/index.php:644
@@ -1074,23 +880,23 @@ msgstr ""
 msgid "scale"
 msgstr ""
 
-#: var/www/admin.php:128 var/www/admin.php:164
+#: var/www/admin.php:144 var/www/admin.php:180
 msgid "reference unit"
 msgstr ""
 
-#: var/www/admin.php:132 var/www/admin.php:168
+#: var/www/admin.php:148 var/www/admin.php:184
 msgid "offset"
 msgstr ""
 
-#: var/www/admin.php:136 var/www/admin.php:172
+#: var/www/admin.php:152 var/www/admin.php:188
 msgid "saving period"
 msgstr ""
 
-#: var/www/admin.php:140 var/www/admin.php:176
+#: var/www/admin.php:156 var/www/admin.php:192
 msgid "starting weight"
 msgstr ""
 
-#: var/www/admin.php:206
+#: var/www/admin.php:222
 msgid "helptext_scale_admin"
 msgstr ""
 "<br><br>\n"
@@ -1125,16 +931,16 @@ msgstr ""
 "values in grams and percent.\n"
 "<br><br>"
 
-#: var/www/admin.php:339
+#: var/www/admin.php:355
 msgid "cooler relay monitoring"
 msgstr ""
 
-#: var/www/admin.php:351
+#: var/www/admin.php:367
 msgid "current threshold"
 msgstr ""
 
-#: var/www/admin.php:352 var/www/admin.php:361 var/www/admin.php:515
-#: var/www/admin.php:519 var/www/config.php:28 var/www/config.php:50
+#: var/www/admin.php:368 var/www/admin.php:377 var/www/admin.php:531
+#: var/www/admin.php:535 var/www/config.php:28 var/www/config.php:50
 #: var/www/config.php:54 var/www/config.php:58 var/www/config.php:62
 #: var/www/config.php:66 var/www/config.php:153 var/www/config.php:158
 #: var/www/config.php:205 var/www/config.php:210 var/www/config.php:236
@@ -1145,11 +951,11 @@ msgstr ""
 msgid "to"
 msgstr ""
 
-#: var/www/admin.php:360
+#: var/www/admin.php:376
 msgid "event messages every"
 msgstr ""
 
-#: var/www/admin.php:391
+#: var/www/admin.php:407
 msgid "helptext_thermometer_admin"
 msgstr ""
 "<br><br>\n"
@@ -1216,11 +1022,11 @@ msgstr ""
 "page.\n"
 "<br><br>"
 
-#: var/www/admin.php:399
+#: var/www/admin.php:415
 msgid "language"
 msgstr ""
 
-#: var/www/admin.php:417
+#: var/www/admin.php:433
 msgid "helptext_language_admin"
 msgstr ""
 "<br><br>\n"
@@ -1235,39 +1041,39 @@ msgstr ""
 "<br> Select 'de_DE.UTF-8 UTF8'\n"
 "<br><br>"
 
-#: var/www/admin.php:425
+#: var/www/admin.php:441
 msgid "switch control"
 msgstr ""
 
-#: var/www/admin.php:429
+#: var/www/admin.php:445
 msgid "UV Light"
 msgstr ""
 
-#: var/www/admin.php:433 var/www/admin.php:451
+#: var/www/admin.php:449 var/www/admin.php:467
 msgid "not active"
 msgstr ""
 
-#: var/www/admin.php:433
+#: var/www/admin.php:449
 msgid "turn off if switch is open"
 msgstr ""
 
-#: var/www/admin.php:433
+#: var/www/admin.php:449
 msgid "turn off if switch is closed"
 msgstr ""
 
-#: var/www/admin.php:447
+#: var/www/admin.php:463
 msgid "Light"
 msgstr ""
 
-#: var/www/admin.php:451
+#: var/www/admin.php:467
 msgid "turn on if switch is open"
 msgstr ""
 
-#: var/www/admin.php:451
+#: var/www/admin.php:467
 msgid "turn on if switch is closed"
 msgstr ""
 
-#: var/www/admin.php:475
+#: var/www/admin.php:491
 msgid "helptext_switch_admin"
 msgstr ""
 "<br><br>\n"
@@ -1294,9 +1100,9 @@ msgstr ""
 "<br><br><img src=\"./images/icons/switch-circuit.jpg\" alt=\"\">\n"
 "<br><br>"
 
-#: var/www/admin.php:482 var/www/admin.php:554 var/www/admin.php:664
-#: var/www/admin.php:681 var/www/admin.php:746 var/www/admin.php:819
-#: var/www/admin.php:1073 var/www/admin.php:1138 var/www/admin.php:1170
+#: var/www/admin.php:498 var/www/admin.php:570 var/www/admin.php:680
+#: var/www/admin.php:697 var/www/admin.php:762 var/www/admin.php:835
+#: var/www/admin.php:1089 var/www/admin.php:1154 var/www/admin.php:1186
 #: var/www/config.php:332 var/www/edit_agingtable.php:116
 #: var/www/manvals.php:149 var/www/notification.php:121
 #: var/www/notification.php:263 var/www/notification.php:359
@@ -1306,27 +1112,27 @@ msgstr ""
 msgid "save"
 msgstr ""
 
-#: var/www/admin.php:489 var/www/admin.php:513
+#: var/www/admin.php:505 var/www/admin.php:529
 msgid "defrost"
 msgstr ""
 
-#: var/www/admin.php:514
+#: var/www/admin.php:530
 msgid "defrost temperature offset"
 msgstr ""
 
-#: var/www/admin.php:518
+#: var/www/admin.php:534
 msgid "defrost cycle"
 msgstr ""
 
-#: var/www/admin.php:522
+#: var/www/admin.php:538
 msgid "circulate air active"
 msgstr ""
 
-#: var/www/admin.php:530
+#: var/www/admin.php:546
 msgid "defrost active"
 msgstr ""
 
-#: var/www/admin.php:548
+#: var/www/admin.php:564
 msgid "helptext_defrost"
 msgstr ""
 "<br><br>\n"
@@ -1358,108 +1164,108 @@ msgstr ""
 "enabled.\n"
 "<br><br>"
 
-#: var/www/admin.php:554
+#: var/www/admin.php:570
 msgid "ATTENTION: save defrost values?"
 msgstr ""
 
-#: var/www/admin.php:561
+#: var/www/admin.php:577
 msgid "reboot & shutdown"
 msgstr ""
 
-#: var/www/admin.php:567
+#: var/www/admin.php:583
 msgid "ATTENTION: reboot system?"
 msgstr ""
 
-#: var/www/admin.php:567 var/www/reboot.php:9
+#: var/www/admin.php:583 var/www/reboot.php:9
 #: var/www/reboot_set_ap_password.php:9
 msgid "reboot"
 msgstr ""
 
-#: var/www/admin.php:568
+#: var/www/admin.php:584
 msgid "ATTENTION: shutdown system?"
 msgstr ""
 
-#: var/www/admin.php:568 var/www/shutdown.php:9
+#: var/www/admin.php:584 var/www/shutdown.php:9
 msgid "shutdown"
 msgstr ""
 
-#: var/www/admin.php:574
+#: var/www/admin.php:590
 msgid "logging"
 msgstr ""
 
-#: var/www/admin.php:664
+#: var/www/admin.php:680
 msgid "save loglevel?"
 msgstr ""
 
-#: var/www/admin.php:670 var/www/modules/write_debug_values.php:11
+#: var/www/admin.php:686 var/www/modules/write_debug_values.php:11
 msgid "debug values"
 msgstr ""
 
-#: var/www/admin.php:677
+#: var/www/admin.php:693
 msgid "agingtable hours in seconds"
 msgstr ""
 
-#: var/www/admin.php:681
+#: var/www/admin.php:697
 msgid "ATTENTION: save debug values?"
 msgstr ""
 
-#: var/www/admin.php:687
+#: var/www/admin.php:703
 msgid "backup"
 msgstr ""
 
-#: var/www/admin.php:709
+#: var/www/admin.php:725
 msgid "nfs volume"
 msgstr ""
 
-#: var/www/admin.php:714
+#: var/www/admin.php:730
 msgid "subdirectory"
 msgstr ""
 
-#: var/www/admin.php:718
+#: var/www/admin.php:734
 msgid "nfs mount"
 msgstr ""
 
-#: var/www/admin.php:722
+#: var/www/admin.php:738
 msgid "nfs path"
 msgstr ""
 
-#: var/www/admin.php:727
+#: var/www/admin.php:743
 msgid "number of backups"
 msgstr ""
 
-#: var/www/admin.php:731
+#: var/www/admin.php:747
 msgid "backup name"
 msgstr ""
 
-#: var/www/admin.php:735
+#: var/www/admin.php:751
 msgid "nfs opt"
 msgstr ""
 
-#: var/www/admin.php:739
+#: var/www/admin.php:755
 msgid "backup_active"
 msgstr ""
 
-#: var/www/admin.php:746
+#: var/www/admin.php:762
 msgid "ATTENTION: save backup values?"
 msgstr ""
 
-#: var/www/admin.php:756
+#: var/www/admin.php:772
 msgid "ATTENTION: backup manually?"
 msgstr ""
 
-#: var/www/admin.php:756
+#: var/www/admin.php:772
 msgid "backup manually"
 msgstr ""
 
-#: var/www/admin.php:759
+#: var/www/admin.php:775
 msgid "Agingtable is active. No backup possible!"
 msgstr ""
 
-#: var/www/admin.php:765
+#: var/www/admin.php:781
 msgid "open pi-ager_backup.log in new tab"
 msgstr ""
 
-#: var/www/admin.php:783
+#: var/www/admin.php:799
 msgid "helptext_backup"
 msgstr ""
 "<br><br>\n"
@@ -1507,51 +1313,51 @@ msgstr ""
 "selected. By deselecting it, the backup can be disabled\n"
 "<br><br>"
 
-#: var/www/admin.php:790
+#: var/www/admin.php:806
 msgid "database"
 msgstr ""
 
-#: var/www/admin.php:796
+#: var/www/admin.php:812
 msgid "ATTENTION: empty statistic tables?"
 msgstr ""
 
-#: var/www/admin.php:796
+#: var/www/admin.php:812
 msgid "empty statistic tables"
 msgstr ""
 
-#: var/www/admin.php:798
+#: var/www/admin.php:814
 msgid "database administration"
 msgstr ""
 
-#: var/www/admin.php:804
+#: var/www/admin.php:820
 msgid "Nextion Display Firmware"
 msgstr ""
 
-#: var/www/admin.php:810
+#: var/www/admin.php:826
 msgid "TFT Display"
 msgstr ""
 
-#: var/www/admin.php:819
+#: var/www/admin.php:835
 msgid "ATTENTION: save Nextion display type?"
 msgstr ""
 
-#: var/www/admin.php:825
+#: var/www/admin.php:841
 msgid "start programming"
 msgstr ""
 
-#: var/www/admin.php:846
+#: var/www/admin.php:862
 msgid "alternative firmware file:"
 msgstr ""
 
-#: var/www/admin.php:856
+#: var/www/admin.php:872
 msgid "upload new firmware file?"
 msgstr ""
 
-#: var/www/admin.php:856 var/www/settings.php:378
+#: var/www/admin.php:872 var/www/settings.php:378
 msgid "upload"
 msgstr ""
 
-#: var/www/admin.php:885
+#: var/www/admin.php:901
 msgid "helptext_display"
 msgstr ""
 "<br><br>\n"
@@ -1575,7 +1381,7 @@ msgstr ""
 "compressed with ZIP and then uploaded as pi-ager.zip.  \n"
 "<br><br>"
 
-#: var/www/admin.php:987
+#: var/www/admin.php:1003
 msgid ""
 "Pi-Ager service will be stopped to flash the HMI display firmware.\\nAn "
 "active aging table will be stopped.\\nDuring firmware programming:\\nDo NOT "
@@ -1584,95 +1390,95 @@ msgid ""
 "deactivated by inactivity timeout!\\nContinue ?"
 msgstr ""
 
-#: var/www/admin.php:1025 var/www/admin.php:1028
+#: var/www/admin.php:1041 var/www/admin.php:1044
 msgid "Date/Time"
 msgstr ""
 
-#: var/www/admin.php:1025
+#: var/www/admin.php:1041
 msgid "new system date and time set"
 msgstr ""
 
-#: var/www/admin.php:1028
+#: var/www/admin.php:1044
 msgid "wrong input format"
 msgstr ""
 
-#: var/www/admin.php:1063
+#: var/www/admin.php:1079
 msgid "set Pi-Ager date/time"
 msgstr ""
 
-#: var/www/admin.php:1069
+#: var/www/admin.php:1085
 msgid "Pi-Ager date/time format YYYY-MM-DD HH:MM:SS"
 msgstr ""
 
-#: var/www/admin.php:1069
+#: var/www/admin.php:1085
 msgid "date/time format YYYY-MM-DD HH:MM:SS e.g. 2023-01-31 16:05:09"
 msgstr ""
 
-#: var/www/admin.php:1073
+#: var/www/admin.php:1089
 msgid "ATTENTION: set date and time?"
 msgstr ""
 
-#: var/www/admin.php:1081 var/www/modules/system_reboot.php:41
+#: var/www/admin.php:1097 var/www/modules/system_reboot.php:41
 msgid "WLAN setup"
 msgstr ""
 
-#: var/www/admin.php:1098
+#: var/www/admin.php:1114
 msgid "refresh"
 msgstr ""
 
-#: var/www/admin.php:1109
+#: var/www/admin.php:1125
 msgid "No WLAN networks found"
 msgstr ""
 
-#: var/www/admin.php:1129
+#: var/www/admin.php:1145
 msgid "WLAN password"
 msgstr ""
 
-#: var/www/admin.php:1130
+#: var/www/admin.php:1146
 msgid "enter your WLAN password"
 msgstr ""
 
-#: var/www/admin.php:1131
+#: var/www/admin.php:1147
 msgid "WLAN Country"
 msgstr ""
 
-#: var/www/admin.php:1132
+#: var/www/admin.php:1148
 msgid "e.g. DE,GB,FR,AT,CH,US"
 msgstr ""
 
-#: var/www/admin.php:1138
+#: var/www/admin.php:1154
 msgid "ATTENTION: setup your WLAN?"
 msgstr ""
 
-#: var/www/admin.php:1160
+#: var/www/admin.php:1176
 msgid "Pi-Ager Accesspoint"
 msgstr ""
 
-#: var/www/admin.php:1166
+#: var/www/admin.php:1182
 msgid "new password for accesspoint"
 msgstr ""
 
-#: var/www/admin.php:1166
+#: var/www/admin.php:1182
 msgid "password minimum length is 8 character"
 msgstr ""
 
-#: var/www/admin.php:1170
+#: var/www/admin.php:1186
 msgid "ATTENTION: reboot follows after saving new accesspoint password"
 msgstr ""
 
-#: var/www/admin.php:1188
+#: var/www/admin.php:1204
 msgid "python"
 msgstr ""
 
-#: var/www/admin.php:1194
+#: var/www/admin.php:1210
 msgid "ATTENTION: stop"
 msgstr ""
 
-#: var/www/admin.php:1194
+#: var/www/admin.php:1210
 msgid "stop"
 msgstr ""
 
-#: var/www/admin.php:1195
+#: var/www/admin.php:1211
 msgid "start"
 msgstr ""
 
@@ -1942,7 +1748,7 @@ msgstr ""
 "<br><br>"
 
 #: var/www/config.php:106 var/www/modules/querystatus.php:139
-#: var/www/modules/read_all_index.php:159
+#: var/www/modules/read_all_index.php:144
 #: var/www/modules/read_all_settings_db.php:69
 msgid "dehumidify"
 msgstr ""
@@ -2599,7 +2405,7 @@ msgid "ON DURATION"
 msgstr ""
 
 #: var/www/index.php:1324 var/www/modules/querystatus.php:139
-#: var/www/modules/querystatus.php:300 var/www/modules/read_all_index.php:159
+#: var/www/modules/querystatus.php:300 var/www/modules/read_all_index.php:144
 #: var/www/modules/read_all_settings_db.php:69
 msgid "circulating air"
 msgstr ""
@@ -2624,7 +2430,7 @@ msgid "timer off"
 msgstr ""
 
 #: var/www/index.php:1339 var/www/modules/querystatus.php:139
-#: var/www/modules/querystatus.php:324 var/www/modules/read_all_index.php:159
+#: var/www/modules/querystatus.php:324 var/www/modules/read_all_index.php:144
 #: var/www/modules/read_all_settings_db.php:69
 msgid "exhausting air"
 msgstr ""
@@ -3004,16 +2810,16 @@ msgid "please select a zip file to upload"
 msgstr ""
 
 #: var/www/modules/queryat.php:36 var/www/modules/querystatus.php:286
-#: var/www/modules/read_all_index.php:66
+#: var/www/modules/read_all_index.php:51
 msgid "none"
 msgstr ""
 
 #: var/www/modules/querystatus.php:127 var/www/modules/querystatus.php:131
 #: var/www/modules/querystatus.php:135 var/www/modules/querystatus.php:139
-#: var/www/modules/read_all_index.php:150
-#: var/www/modules/read_all_index.php:153
-#: var/www/modules/read_all_index.php:156
-#: var/www/modules/read_all_index.php:159
+#: var/www/modules/read_all_index.php:135
+#: var/www/modules/read_all_index.php:138
+#: var/www/modules/read_all_index.php:141
+#: var/www/modules/read_all_index.php:144
 #: var/www/modules/read_all_settings_db.php:48
 #: var/www/modules/read_all_settings_db.php:55
 #: var/www/modules/read_all_settings_db.php:62
@@ -3022,9 +2828,9 @@ msgid "humidify"
 msgstr ""
 
 #: var/www/modules/querystatus.php:131 var/www/modules/querystatus.php:135
-#: var/www/modules/querystatus.php:139 var/www/modules/read_all_index.php:153
-#: var/www/modules/read_all_index.php:156
-#: var/www/modules/read_all_index.php:159
+#: var/www/modules/querystatus.php:139 var/www/modules/read_all_index.php:138
+#: var/www/modules/read_all_index.php:141
+#: var/www/modules/read_all_index.php:144
 #: var/www/modules/read_all_settings_db.php:55
 #: var/www/modules/read_all_settings_db.php:62
 #: var/www/modules/read_all_settings_db.php:69
@@ -3105,37 +2911,30 @@ msgstr ""
 msgid "Pi-Ager will be rebooted now"
 msgstr ""
 
-#: var/www/modules/write_bus.php:43
+#: var/www/modules/write_bus.php:61
 msgid ""
-"Can not combine selected internal and external sensors!\\nExternal sensors "
-"SHT85, SHT3x or AHT2x can only combined with internal sensors SHT85, SHT3x "
-"or AHT2x, when I2C addresses are different.\\nSee also help!"
-msgstr ""
-
-#: var/www/modules/write_bus.php:46
-msgid ""
-"Can not combine selected internal and external sensors!\\nExternal sensor "
-"AHT2x can not combined with internal sensors AHT2x. I2C addresses must be "
+"Can not combine selected internal and external sensors!\\nExternal I2C "
+"sensors can only combined with internal I2C sensors, when I2C addresses are "
 "different.\\nSee also help!"
 msgstr ""
 
-#: var/www/modules/write_bus.php:61
+#: var/www/modules/write_bus.php:76
 msgid "Change to 1-wire sensor"
 msgstr ""
 
-#: var/www/modules/write_bus.php:68
+#: var/www/modules/write_bus.php:83
 msgid "Change to I2C sensor"
 msgstr ""
 
-#: var/www/modules/write_bus.php:72
+#: var/www/modules/write_bus.php:86
 msgid "Internal sensor changed"
 msgstr ""
 
-#: var/www/modules/write_bus.php:79
+#: var/www/modules/write_bus.php:92
 msgid "External sensor type changed"
 msgstr ""
 
-#: var/www/modules/write_bus.php:94
+#: var/www/modules/write_bus.php:107
 msgid "Nothing changed"
 msgstr ""
 
