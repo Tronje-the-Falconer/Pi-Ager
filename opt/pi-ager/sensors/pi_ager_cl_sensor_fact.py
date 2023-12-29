@@ -20,6 +20,7 @@ from sensors.pi_ager_cl_sensor_sht3x import cl_fact_sensor_sht3x
 from sensors.pi_ager_cl_sensor_sht85 import cl_fact_sensor_sht85
 from sensors.pi_ager_cl_sensor_dht11 import cl_fact_sensor_dht11
 from sensors.pi_ager_cl_sensor_dht22 import cl_fact_sensor_dht22
+from sensors.pi_ager_cl_sensor_aht1x import cl_fact_sensor_aht1x
 from sensors.pi_ager_cl_sensor_aht2x import cl_fact_sensor_aht2x
 from sensors.pi_ager_cl_sensor_sht4x import cl_fact_sensor_sht4x
 from sensors.pi_ager_cl_sensor_MiThermometer import cl_fact_sensor_MiThermometer
@@ -77,6 +78,8 @@ class cl_fact_sensor(ABC):
             cl_fact_sensor.__o_instance = cl_fact_sensor_aht2x.get_instance(l_sensor_type, i_active_sensor, i_address)
         elif sensor_name == 'SHT4x-A' or sensor_name == 'SHT4X-B' or sensor_name == 'SHT4x-C':
             cl_fact_sensor.__o_instance = cl_fact_sensor_sht4x.get_instance(l_sensor_type, i_active_sensor, i_address) 
+        elif sensor_name == 'AHT1x' or sensor_name == 'AHT1x-mod':
+            cl_fact_sensor.__o_instance = cl_fact_sensor_aht1x.get_instance(l_sensor_type, i_active_sensor, i_address) 
             
         cl_fact_logger.get_instance().debug("__ot_instance for " + i_active_sensor + " =  " + str(cl_fact_sensor.__o_instance) + " created" )
         

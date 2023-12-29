@@ -20,22 +20,26 @@
                                      4 => "SHT85",
                                      5 => "SHT3x",
                                      6 => "SHT3x-mod",
-                                     7 => "AHT2x",
-                                     8 => "AHT30",
-                                     9 => "SHT4x-A",
-                                     10 => "SHT4x-B",
-                                     11 => "SHT4x-C"];
+                                     7 => "AHT1x",
+                                     8 => "AHT1x-mod",
+                                     9 => "AHT2x",
+                                     10 => "AHT30",
+                                     11 => "SHT4x-A",
+                                     12 => "SHT4x-B",
+                                     13 => "SHT4x-C"];
                                      
     $SUPPORTED_SECOND_SENSOR_TYPES = [ 0 => "disabled",
                                         4 => "SHT85",
                                         5 => "SHT3x",
                                         6 => "SHT3x-mod",
-                                        7 => "AHT2x",
-                                        8 => "AHT30",
-                                        9 => "SHT4x-A",
-                                        10 => "SHT4x-B",
-                                        11 => "SHT4x-C",
-                                        12 => "MiThermometer"];                                
+                                        7 => "AHT1x",
+                                        8 => "AHT1x-mod",
+                                        9 => "AHT2x",
+                                        10 => "AHT30",
+                                        11 => "SHT4x-A",
+                                        12 => "SHT4x-B",
+                                        13 => "SHT4x-C",
+                                        14 => "MiThermometer"];                                
                                      
     $sensorname = $SUPPORTED_MAIN_SENSOR_TYPES[$sensortype];
     $sensorsecondname = $SUPPORTED_SECOND_SENSOR_TYPES[$sensorsecondtype];

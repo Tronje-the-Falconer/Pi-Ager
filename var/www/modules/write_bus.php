@@ -17,11 +17,11 @@
     }
     
     function check_allowed_sensor_selection($sensor_intern, $sensor_extern) {
-        $i2c_sensor_addr = [0 => NULL, 1 => NULL, 2 => NULL, 3 => NULL, 4 => 0x44, 5 => 0x44, 6 => 0x45, 7 => 0x38, 8 => 0x38, 9 => 0x44, 10 => 0x45, 11 => 0x46, 12 => NULL];
-        if ($sensor_extern == 12 || $sensor_extern == 0) {
+        $i2c_sensor_addr = [0 => NULL, 1 => NULL, 2 => NULL, 3 => NULL, 4 => 0x44, 5 => 0x44, 6 => 0x45, 7 => 0x38, 8 => 0x39, 9 => 0x38, 10 => 0x38, 11 => 0x44, 12 => 0x45, 13 => 0x46, 14 => NULL];
+        if ($sensor_extern == 14 || $sensor_extern == 0) {
             return ( true);
         }
-        if (($sensor_intern >= 1 && $sensor_intern <= 3) && ($sensor_extern >= 4 && $sensor_extern <= 11)) {
+        if (($sensor_intern >= 1 && $sensor_intern <= 3) && ($sensor_extern >= 4 && $sensor_extern <= 13)) {
             return( false );
         }
         if ($i2c_sensor_addr[$sensor_intern] == $i2c_sensor_addr[$sensor_extern]) { // same i2c address, not allowed
@@ -46,7 +46,7 @@
         $old_bus = $_POST['bus'];
         $sensornum = $_POST['sensortype_admin'];
         $sensorsecondnum = $_POST['sensorsecondtype_admin'];
-        
+        # echo "sensornum = " . $sensornum . ", second = " . $sensorsecondnum . "<br>";
         if (isset($_POST['atc_device_name'])) {
             $ATC_device_name = $_POST['atc_device_name'];
             write_table_value('atc_device_name', 'id', '1', 'name', $ATC_device_name);
@@ -75,7 +75,7 @@
                     shell_exec('sudo /var/sudowebscript.sh sensorbus1wire > /dev/null 2>&1');
                     do_shutdown(_('Change to 1-wire sensor'));
                 }
-                if (($sensornum >= 4 && $sensornum <= 11 ) && $old_bus  ==  1){
+                if (($sensornum >= 4 && $sensornum <= 13 ) && $old_bus  ==  1){
                     //echo '<script> alert("' . _('Change to I2C') . '"); </script>';
                     write_busvalue(0);
                     logger('DEBUG', 'sensorbus saved. changed to i2c (0)');
@@ -91,7 +91,7 @@
                 // echo '<script language="javascript"> alert("' . _('External sensor type changed') . '"); </script>';
                 $boot_msg = _('External sensor type changed');
                 logger('DEBUG', 'External sensor type changed');
-                if ($sensorsecondnum == 0 || $sensorsecondnum == 12) {    # changed back to disabled or MiThermometer, reboot is enough 
+                if ($sensorsecondnum == 0 || $sensorsecondnum == 14) {    # changed back to disabled or MiThermometer, reboot is enough 
                     do_reboot($boot_msg);
                 }
                 else {

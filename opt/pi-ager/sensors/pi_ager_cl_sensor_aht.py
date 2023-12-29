@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-"""This class is for handling the AHT sensors AHT20, AHT21, AHT30 with i2c bus interface from ASAIR.""" 
+"""This class is for handling the AHT sensors AHT10, AHT20, AHT21, AHT30 with i2c bus interface from ASAIR.""" 
+""" Default is setup fpr AHT2x and AHT30 """
 
 import inspect
 from main.pi_ager_cl_logger import cl_fact_logger
@@ -12,12 +13,11 @@ from main.pi_ager_cx_exception import *
 from sensors.pi_ager_cl_sensor import cl_sensor
 
 class cl_sensor_aht(cl_sensor):
-    AHT20_I2CADDR = 0x38
-    AHT20_CMD_SOFTRESET = [0xBA]
+    AHTxx_I2CADDR = 0x38
+    AHTxx_CMD_SOFTRESET = [0xBA]
+    AHT10_CMD_INITIALIZE = [0xE1, 0x08, 0x00]
     AHT20_CMD_INITIALIZE = [0xBE, 0x08, 0x00]
-    AHT20_CMD_MEASURE = [0xAC, 0x33, 0x00]
-    AHT20_STATUSBIT_BUSY = 7                    # The 7th bit is the Busy indication bit. 1 = Busy, 0 = not.
-    AHT20_STATUSBIT_CALIBRATED = 3              # The 3rd bit is the CAL (calibration) Enable bit. 1 = Calibrated, 0 = not
+    AHTxx_CMD_MEASURE = [0xAC, 0x33, 0x00]
 
     # Initial value. Equal to bit negation the first data (status of AHT20)
     CRC_INIT = 0xFF
@@ -41,17 +41,19 @@ class cl_sensor_aht(cl_sensor):
         self._i2c_bus = cl_fact_i2c_bus_logic.get_instance().get_i2c_bus()
         cl_fact_logger.get_instance().debug("i2c bus object is : " + str(self._i2c_bus))
         # self._i2c_sensor = cl_fact_i2c_sensor_aht.get_instance(self.o_active_sensor, self._i2c_bus, self.o_address)
- 
+        
+    def check_init_status(self):
+        # check if sensor status after power on is ok, if not, raise exception
         status = self.get_status()
         if ((status & 0x18) != 0x18):
             self.cmd_initialize()
             status = self.get_status()
             if ((status & 0x18) != 0x18):
-                raise cx_measurement_error (_('Error initializing AHT2x/3x sensor!'))
+                raise cx_measurement_error (_('Error initializing AHTxx sensor!'))
 
     def cmd_soft_reset(self):
         # Send the command to soft reset
-        write = i2c_msg.write(self.o_address, self.AHT20_CMD_SOFTRESET)
+        write = i2c_msg.write(self.o_address, self.AHTxx_CMD_SOFTRESET)
         self._i2c_bus.i2c_rdwr(write)
         time.sleep(0.02)
 
@@ -71,7 +73,7 @@ class cl_sensor_aht(cl_sensor):
 
     def cmd_measure(self):
         # Send the command to measure
-        write = i2c_msg.write(self.o_address, self.AHT20_CMD_MEASURE)
+        write = i2c_msg.write(self.o_address, self.AHTxx_CMD_MEASURE)
         self._i2c_bus.i2c_rdwr(write)
         time.sleep(0.08)    # Wait 80 ms after measure
             
@@ -120,8 +122,8 @@ class cl_sensor_aht(cl_sensor):
                 temperature_raw = temperature_raw & 0xFFFFF                    # cut the temperature part 
                 temperature_s = temperature_raw / 1048576.0 * 200.0 - 50.0  
 
-                cl_fact_logger.get_instance().debug(f"aht temperature : {temperature_s:.2f}")
-                cl_fact_logger.get_instance().debug(f"aht humidity : {humidity_s:.1f}")
+                cl_fact_logger.get_instance().debug(f"AHT2x/30 temperature : {temperature_s:.2f}")
+                cl_fact_logger.get_instance().debug(f"AHT2x/30 humidity : {humidity_s:.1f}")
                 dewpoint = super().get_dewpoint(temperature_s, humidity_s)
                 (temperature_dewpoint, humidity_absolute) = dewpoint
         

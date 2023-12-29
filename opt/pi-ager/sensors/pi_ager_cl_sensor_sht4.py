@@ -37,7 +37,7 @@ class cl_sensor_sht4(cl_sensor):
         super().__init__(self.o_sensor_type)
 
         self._i2c_bus = cl_fact_i2c_bus_logic.get_instance().get_i2c_bus()
-        self.soft_reset()
+        self.cmd_soft_reset()
         time.sleep(0.02)
 #        cl_fact_logger.get_instance().debug(self._i2c_bus)
 #        self._i2c_sensor = cl_fact_i2c_sensor_sht.get_instance(self.o_active_sensor, self._i2c_bus, self.o_address)

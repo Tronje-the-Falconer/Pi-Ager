@@ -193,7 +193,7 @@ def get_sensordata():
         second_sensortype = cl_fact_second_sensor_type.get_instance().get_sensor_type()
         cl_fact_logger.get_instance().debug('Second sensor is: ' + str(second_sensorname))    
                                                                                                                 
-        if second_sensortype >= 4 and second_sensortype <= 11:
+        if second_sensortype >= 4 and second_sensortype <= 13:
             try:
                 i2c_address_second_sensor = pi_ager_names.I2C_SENSOR_ADDRESS[second_sensortype]
                 second_sensor =  cl_fact_active_second_sensor().get_instance(i_address = i2c_address_second_sensor)

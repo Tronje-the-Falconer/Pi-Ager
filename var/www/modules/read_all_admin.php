@@ -61,39 +61,53 @@
         $checked_sens_6 = '';
     }
     if ($sensortype == 7) {
-        $sensorname = 'AHT2x';
+        $sensorname = 'AHT1x';
         $checked_sens_7 = 'checked="checked"';
     }
     else {
         $checked_sens_7 = '';
-    }    
+    }        
     if ($sensortype == 8) {
-        $sensorname = 'AHT30';
+        $sensorname = 'AHT1x-mod';
         $checked_sens_8 = 'checked="checked"';
     }
     else {
         $checked_sens_8 = '';
-    }    
+    }            
     if ($sensortype == 9) {
-        $sensorname = 'SHT4x-A';
+        $sensorname = 'AHT2x';
         $checked_sens_9 = 'checked="checked"';
     }
     else {
         $checked_sens_9 = '';
     }    
     if ($sensortype == 10) {
-        $sensorname = 'SHT4x-B';
+        $sensorname = 'AHT30';
         $checked_sens_10 = 'checked="checked"';
     }
     else {
         $checked_sens_10 = '';
     }    
     if ($sensortype == 11) {
-        $sensorname = 'SHT4x-C';
+        $sensorname = 'SHT4x-A';
         $checked_sens_11 = 'checked="checked"';
     }
     else {
         $checked_sens_11 = '';
+    }    
+    if ($sensortype == 12) {
+        $sensorname = 'SHT4x-B';
+        $checked_sens_12 = 'checked="checked"';
+    }
+    else {
+        $checked_sens_12 = '';
+    }    
+    if ($sensortype == 13) {
+        $sensorname = 'SHT4x-C';
+        $checked_sens_13 = 'checked="checked"';
+    }
+    else {
+        $checked_sens_13 = '';
     }
     
     if ($sensorsecondtype == 0) {
@@ -124,48 +138,63 @@
     }
     else {
         $checked_senssecond_6 = '';
-    }    
+    }
     if ($sensorsecondtype == 7) {
-        $sensorsecondname = 'AHT2x';
+        $sensorsecondname = 'AHT1x';
         $checked_senssecond_7 = 'checked="checked"';
     }
     else {
         $checked_senssecond_7 = '';
-    }
+    }        
     if ($sensorsecondtype == 8) {
-        $sensorsecondname = 'AHT30';
+        $sensorsecondname = 'AHT1x-mod';
         $checked_senssecond_8 = 'checked="checked"';
     }
     else {
         $checked_senssecond_8 = '';
-    }
+    }            
+    
     if ($sensorsecondtype == 9) {
-        $sensorsecondname = 'SHT4x-A';
+        $sensorsecondname = 'AHT2x';
         $checked_senssecond_9 = 'checked="checked"';
     }
     else {
         $checked_senssecond_9 = '';
     }
     if ($sensorsecondtype == 10) {
-        $sensorsecondname = 'SHT4x-B';
+        $sensorsecondname = 'AHT30';
         $checked_senssecond_10 = 'checked="checked"';
     }
     else {
         $checked_senssecond_10 = '';
     }
     if ($sensorsecondtype == 11) {
-        $sensorsecondname = 'SHT4x-C';
+        $sensorsecondname = 'SHT4x-A';
         $checked_senssecond_11 = 'checked="checked"';
     }
     else {
         $checked_senssecond_11 = '';
     }
     if ($sensorsecondtype == 12) {
-        $sensorsecondname = 'MiThermometer';
+        $sensorsecondname = 'SHT4x-B';
         $checked_senssecond_12 = 'checked="checked"';
     }
     else {
         $checked_senssecond_12 = '';
+    }
+    if ($sensorsecondtype == 13) {
+        $sensorsecondname = 'SHT4x-C';
+        $checked_senssecond_13 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_13 = '';
+    }
+    if ($sensorsecondtype == 14) {
+        $sensorsecondname = 'MiThermometer';
+        $checked_senssecond_14 = 'checked="checked"';
+    }
+    else {
+        $checked_senssecond_14 = '';
     }    
 
     # scales
