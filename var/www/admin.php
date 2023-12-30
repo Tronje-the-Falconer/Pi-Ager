@@ -62,7 +62,7 @@
                                             <tr>
                                                 <td style="width: 100px;"></td>
                                                 <td style="width: 150px; text-align: left; padding-left: 20px;"><h3><?php echo _('internal'); ?></h3></td>
-                                                <td style="width: 100px; "></td>
+                                                <td style="width: 60px; "></td>
                                                 <td style="width: 150px; text-align: left; padding-left: 20px;"><h3><?php echo _('external'); ?></h3></td>
                                             </tr>
                                             <tr>
