@@ -36,6 +36,7 @@ defrost_table = 'config_defrost'
 config_current_check_table = 'config_current_check'
 time_meter_table = 'time_meter'
 config_mqtt_table = 'config_mqtt'
+humidity_offset_table = 'humidity_offset'
 
 # table keys
 cooling_hysteresis_key = 'cooling_hysteresis'

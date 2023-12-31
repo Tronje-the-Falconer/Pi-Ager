@@ -22,6 +22,7 @@ from sensors.pi_ager_cl_sensor_dht11 import cl_fact_sensor_dht11
 from sensors.pi_ager_cl_sensor_dht22 import cl_fact_sensor_dht22
 from sensors.pi_ager_cl_sensor_aht1x import cl_fact_sensor_aht1x
 from sensors.pi_ager_cl_sensor_aht2x import cl_fact_sensor_aht2x
+from sensors.pi_ager_cl_sensor_aht30 import cl_fact_sensor_aht30
 from sensors.pi_ager_cl_sensor_sht4x import cl_fact_sensor_sht4x
 from sensors.pi_ager_cl_sensor_MiThermometer import cl_fact_sensor_MiThermometer
 
@@ -50,16 +51,6 @@ class cl_fact_sensor(ABC):
             cl_fact_logger.get_instance().debug("Returning __ot_instance = " + str(cl_fact_sensor.__o_instance))
             return(cl_fact_sensor.__o_instance)
 
-#        try:
-#            cl_fact_sensor.__o_instance = cl_fact_sensor.__ot_instances.pop(i_active_sensor)
-#            cl_fact_logger.get_instance().debug("__ot_instance for " + i_active_sensor + " = " + str(cl_fact_sensor.__ot_instances))
-#        except KeyError:
-#            cl_fact_sensor.__o_instance = None
-#            
-#        if  cl_fact_sensor.__o_instance is not None :
-#            cl_fact_logger.get_instance().debug("Returning __ot_instance = " + str(cl_fact_sensor.__o_instance))
-#            return(cl_fact_sensor.__o_instance)
-
         sensor_name = cl_fact_sensor.__o_sensor_type._get_type_ui()
         
         if sensor_name == 'SHT75':
@@ -74,8 +65,10 @@ class cl_fact_sensor(ABC):
             cl_fact_sensor.__o_instance = cl_fact_sensor_dht11.get_instance(l_sensor_type, i_active_sensor)
         elif sensor_name == 'MiThermometer':
             cl_fact_sensor.__o_instance = cl_fact_sensor_MiThermometer.get_instance(l_sensor_type, i_active_sensor) 
-        elif sensor_name == 'AHT2x' or sensor_name == 'AHT30':
+        elif sensor_name == 'AHT2x':
             cl_fact_sensor.__o_instance = cl_fact_sensor_aht2x.get_instance(l_sensor_type, i_active_sensor, i_address)
+        elif sensor_name == 'AHT30':
+            cl_fact_sensor.__o_instance = cl_fact_sensor_aht30.get_instance(l_sensor_type, i_active_sensor, i_address)
         elif sensor_name == 'SHT4x-A' or sensor_name == 'SHT4X-B' or sensor_name == 'SHT4x-C':
             cl_fact_sensor.__o_instance = cl_fact_sensor_sht4x.get_instance(l_sensor_type, i_active_sensor, i_address) 
         elif sensor_name == 'AHT1x' or sensor_name == 'AHT1x-mod':
