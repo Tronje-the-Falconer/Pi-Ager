@@ -1,0 +1,68 @@
+# Initial Konfiguration
+# Pi-Ager 
+
+# Standard Hostname              Pi-Ager 
+# Standard Passwoerter für alle  raspberry
+# 
+# Nur ausgefüllte Werte werden gesetzt
+# Die Variablennamen dürfen nicht verändert werden!
+# Wenn die Werte Sonderzeichen wie /?}][{|@!"§$%&-_.:,;#+~* oder Leerzeichen enthalten,
+# müssen die Werte in 'Single Quotes' gesetzt werden. 'Single Quotes' dürfen dann nicht
+# Bestandteil des Wertes sein!
+#
+# Z.B.: wlankey='FRITZ!Box 7490 |&;()<>"\$`^~@{}.'
+#
+# Logfile setup.log wird unter Linux im Verzeichnis /boot/firmware/ angelegt,
+# und unter Windows mit der SD-Card in einem USB Lesegerät im Drive 'bootfs' im Verzeichnis /.
+# 
+
+# Hostname, wie soll der Raspberry Pi im Netzwerk heissen:
+piname='pi-ager'
+
+# Passwort für Benutzer pi:
+pipass='raspberry'
+
+# Passwort für Benutzer root:
+rootpass='raspberry'
+
+# Passwort für Benutzer pi-ager auf der Webiste settings, admin, webcam:
+webguipw='raspberry'
+
+# Passwort für Zugriff auf Datenbankverwaltung phpliteadmin:
+dbpw='raspberry'
+
+#--------------------------------------------------------------------------------
+# Pi-Ager funktioniert auch ohne Router und ohne Internet Verbindung,
+# denn im Pi-Ager steht simultan neben einer Verbindung mit einem Internet Router 
+# ein Accesspoint zur Verfügung.
+# Der Accesspoint kann via Smartphone oder Tablet erreicht werden.
+# Der Pi-Ager Accesspoint hat die WLAN SSID 'pi-ager' mit dem Default-Passwort '1234567890'.
+# Der Pi-Ager ist dann über die IP Adresse 10.0.0.1 via SSH ereichbar.
+# Der Pi-Ager Webserver kann mit einem Browser unter der URL http://10.0.0.1/ erreicht werden.
+# Bei der erstmaligen Verbindung zum Accesspoint erscheint auch ein 'captive portal' mit
+# Hinweisen zum Setup einer Verbindung zu einem WLAN Router.
+# Auf der ADMIN Seite können dann Datum und Uhrzeit gesetzt werden
+# und auch die Parameter für einen WLAN Router (SSID und Password).
+# Das Default-Passwort für den Accesspoint kann auf der ADMIN-Seite geändert werden.
+#-------------------------------------------------------------------------------
+
+# WLAN Netzwerkname:
+wlanssid='your WLAN SSID'
+
+# WLAN Schlüssel (mindesten 8 Zeichen):
+wlankey='your WLAN key'
+
+# ISO code your country, e.g. DE, GB:
+country='DE'
+
+# Temperature/Humidity sensor attached to pi-ager:
+# Supported types are : SHT75, SHT85, SHT3x, SHT3x-mod, AHT1x, AHT1x-mod, AHT2x, AHT30, SHT4x-A, SHT4x-B, SHT4x-C
+sensor='SHT3x'
+
+# hmi display device name:
+# valid device names: NX3224K028 or NX3224T028 or NX3224F028
+# z.B. : hmidisplay='NX3224K028'
+hmidisplay=
+
+# setup.txt nach boot löschen? leer lassen für löschen oder 1 für behalten 
+keepconf=1
