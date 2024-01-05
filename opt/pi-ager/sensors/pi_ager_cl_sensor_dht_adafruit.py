@@ -54,6 +54,13 @@ class cl_sensor_dht_adafruit(cl_sensor):
                 if ( self._current_temperature == None or self._current_humidity == None ):
                     raise ValueError
                     
+                hum_offset = self.get_humidity_offset()
+                self._current_humidity += hum_offset
+                if (self._current_humidity > 100.0):
+                    self._current_humidity = 100.0
+                if (self._current_humidity < 0.0):
+                    self._current_humidity = 0.0
+                    
                 cl_fact_logger.get_instance().debug("Temperature in Celsius is : %.2f °C" %self._current_temperature)
                 cl_fact_logger.get_instance().debug("Relative Humidity is : %.2f %%RH" %self._current_humidity)
                 self._dewpoint     = super().get_dewpoint(self._current_temperature, self._current_humidity)

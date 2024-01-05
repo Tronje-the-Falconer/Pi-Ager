@@ -41,8 +41,15 @@ class cl_sensor_sht75(cl_sensor):
         while self._error_counter < self._max_errors:
         
             try:
+                hum_offset = self.get_humidity_offset()    
                 self._current_temperature = self._get_current_temperature()
-                self._current_humidity    = self._get_current_humidity()
+                humidity_s    = self._get_current_humidity() + hum_offset
+                if (humidity_s > 100.0):
+                    humidity_s = 100.0
+                if (humidity_s < 0.0):
+                    humidity_s = 0.0
+                self._current_humidity = humidty_s
+                
                 self._dewpoint            = super().get_dewpoint(self._current_temperature, self._current_humidity)
                 cl_fact_logger.get_instance().debug("sht75 temperature : %.2f °C" % self._current_temperature)
                 cl_fact_logger.get_instance().debug("sht75 humidity : %.2f %%RH" % self._current_humidity)

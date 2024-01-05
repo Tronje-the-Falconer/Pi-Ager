@@ -51,6 +51,13 @@ class cl_sensor_MiThermometer(cl_sensor):
                         cl_fact_logic_messenger().get_instance().handle_event('Mi_Sensor_failed') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
                     pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.MiSensor_battery_key, None)    
                     return(None,None,None,None)
+                
+                hum_offset = self.get_humidity_offset()
+                self.humidity += hum_offset
+                if (self.humidity > 100.0):
+                    self.humidity = 100.0
+                if (self.humidity < 0.0):
+                    self.humidity = 0.0
                     
                 (self.dewpoint, self.absolute_humidity) = super().get_dewpoint(self.temperature, self.humidity)
                 self.measured_data = (self.temperature, self.humidity, self.dewpoint, self.absolute_humidity)
@@ -70,21 +77,6 @@ class cl_sensor_MiThermometer(cl_sensor):
             cl_fact_logger.get_instance().debug('MiThermometerData : ' + 'Data error')
             pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.MiSensor_battery_key, None) 
             return(None,None,None,None)
- 
-    def soft_reset(self):
-        """Performs Soft Reset on SHT chip"""
-        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        pass
-        
-    def set_heading_on(self):
-        """Switch the heading on the sensor on"""
-        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        pass
-    
-    def set_heading_off(self):
-        """Switch the heading on the sensor off"""
-        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        pass
 
     
 class cl_fact_sensor_MiThermometer: 

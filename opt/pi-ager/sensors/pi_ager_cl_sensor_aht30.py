@@ -3,8 +3,8 @@
 """This class is for handling the AHT30 sensor """
 
 import inspect
-import pi_ager_names
-from pi_ager_database import get_table_row
+# import pi_ager_names
+# from pi_ager_database import get_table_row
 from main.pi_ager_cl_logger import cl_fact_logger
 import time
 
@@ -24,16 +24,13 @@ class cl_sensor_aht30(cl_sensor_aht):
         self.o_address     = i_address
         
         super().__init__(self.o_sensor_type, i_active_sensor, self.o_address)
-        humidity_offsets = get_table_row(pi_ager_names.humidity_offset_table, 1)
-        self.humidity_offset = humidity_offsets['AHT30']
+        # humidity_offsets = get_table_row(pi_ager_names.humidity_offset_table, 1)
+        # self.humidity_offset = humidity_offsets['AHT30']
         
         self.check_init_status()
         
     def get_current_data(self):
-        (temperature, humidity, dewpoint, humidity_absolute) = super().get_current_data()
-        humidity += self.humidity_offset
-        return temperature, humidity, dewpoint, humidity_absolute
-
+        return super().get_current_data()
         
 class cl_fact_sensor_aht30(ABC): 
     __o_instance = None

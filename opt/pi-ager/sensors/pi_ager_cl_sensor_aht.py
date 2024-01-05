@@ -113,11 +113,17 @@ class cl_sensor_aht(cl_sensor):
                 if (self.a_aht_calc_crc(buf, 6) != buf[6]):
                     repeat_count += 1
                     continue
-                    
+                
+                hum_offset = self.get_humidity_offset()
                 humidity_raw = ((buf[1]) << 16) | ((buf[2]) << 8) | buf[3]     # set the humidity 
                 humidity_raw = (humidity_raw) >> 4                             # right shift 4
                 humidity_s = (humidity_raw / 1048576.0 * 100.0)           # convert the humidity 
-    
+                humidity_s += hum_offset
+                if (humidity_s > 100.0):
+                    humidity_s = 100.0
+                if (humidity_s < 0.0):
+                    humidity_s = 0.0
+                    
                 temperature_raw = ((buf[3]) << 16) | ((buf[4]) << 8) | buf[5]  # set the temperature 
                 temperature_raw = temperature_raw & 0xFFFFF                    # cut the temperature part 
                 temperature_s = temperature_raw / 1048576.0 * 200.0 - 50.0  

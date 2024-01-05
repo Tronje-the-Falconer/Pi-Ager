@@ -88,9 +88,11 @@ class cl_sensor_sht4(cl_sensor):
                     repeat_count += 1
                     time.sleep(0.02)
                     continue
-                    
+                
+                hum_offset = self.get_humidity_offset()    
                 humidity_raw = (hum_buf[0] << 8) | hum_buf[1]     # set the humidity 
                 humidity_s = (humidity_raw / 65535.0 * 125.0 - 6.0)     # convert the humidity 
+                humidity_s += hum_offset
                 if (humidity_s > 100.0):
                     humidity_s = 100.0
                 if (humidity_s < 0.0):

@@ -54,7 +54,7 @@ otg_mode=1
 enable_uart=1
 # ------------------------------ pi-ager settings -----------------
 dtoverlay=miniuart-bt
-force_turbo=1
+# force_turbo=1
 # -----------------------------------------------------------------
 
 

@@ -14,7 +14,8 @@ __status__ = "Production"
 from abc import ABC, abstractmethod
 import math
 # import inspect
-
+import pi_ager_names
+from pi_ager_database import get_table_row
 from main.pi_ager_cl_logger import cl_fact_logger
 # from datetime import datetime
 
@@ -50,6 +51,16 @@ class cl_sensor(cl_ab_sensor):
 #        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return( self.o_sensor_type._get_type() )
 
+    def get_humidity_offset(self):
+        humidity_offsets = get_table_row(pi_ager_names.humidity_offset_table, 1)
+        sensor_type = self.get_sensor_type_ui()
+        try:
+            humidity_offset = humidity_offsets[sensor_type]
+            cl_fact_logger.get_instance().debug("Sensor type = " + sensor_type + " hum. offset = " + str(humidity_offset))
+            return humidity_offset
+        except:
+            return 0.0
+            
     def get_dewpoint(self, temperature, humidity):
 #        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if humidity == 0:

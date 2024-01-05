@@ -30,9 +30,9 @@ class cl_sensor_sht85(cl_sensor_sht):
     
     def __init__(self, i_sensor_type, i_active_sensor, i_address):
         # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if "get_instance" not in inspect.stack()[1][3]:
-            raise cx_direct_call(self,"Please use factory class" )
-        cl_fact_logger.get_instance().debug("i2c address is" + str(i_address))
+        # if "get_instance" not in inspect.stack()[1][3]:
+        #    raise cx_direct_call(self,"Please use factory class" )
+        cl_fact_logger.get_instance().debug("i2c address is" + (str(i_address) if i_address == None else hex(i_address)))
         self.o_sensor_type = i_sensor_type
         self.o_address     = i_address
         super().__init__(i_active_sensor, self.o_sensor_type, self.o_address)

@@ -1,0 +1,45 @@
+#!/usr/bin/python3
+import sys
+
+def main():
+    
+    if len(sys.argv) != 6:
+        print("Usage must equal [filename] [ssid] [psk] [uuid] [timestamp]")
+        sys.exit(1)
+    
+    filename = sys.argv[1]    
+    ssid = sys.argv[2]
+    psk = sys.argv[3]
+    uuid = sys.argv[4]
+    timestamp = sys.argv[5]
+    # filename = "test.nmconnection"
+    # print("ssid : " + ssid)
+    # print("psk : " + psk)
+    # print("uuid : " + uuid)
+    # print("timestamp : " + timestamp)
+    
+    reading_file = open(filename, "r")
+
+    new_file_content = ""
+    for line in reading_file:
+        stripped_line = line.strip()
+        
+        if ("ssid=" in stripped_line):
+            new_line = "ssid=" + ssid
+        elif ("psk=" in stripped_line):
+            new_line = "psk=" + psk
+        elif ("uuid=" in stripped_line):
+            new_line = "uuid=" + uuid
+        elif ("timestamp=" in stripped_line):
+            new_line = "timestamp=" + timestamp
+        else:
+            new_line = stripped_line
+        new_file_content += new_line +"\n"
+    reading_file.close()
+
+    writing_file = open(filename, "w")
+    writing_file.write(new_file_content)
+    writing_file.close()
+    
+if __name__ == "__main__":
+    main()

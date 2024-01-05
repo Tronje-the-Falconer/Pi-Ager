@@ -128,9 +128,15 @@ class cl_sensor_sht(cl_sensor):
                     time.sleep(0.02)
                     continue
                     
+                hum_offset = self.get_humidity_offset()        
                 humidity_raw = (hum_buf[0] << 8) | hum_buf[1]     # set the humidity 
                 humidity_s = (humidity_raw / 65535.0 * 100.0)     # convert the humidity 
-    
+                humidity_s += hum_offset                          # add offset
+                if (humidity_s > 100.0):
+                    humidity_s = 100.0
+                if (humidity_s < 0.0):
+                    humidity_s = 0.0
+                    
                 temperature_raw = (buf[0] << 8) | buf[1]          # set the temperature 
                 temperature_s = 175.0 * temperature_raw / 65535.0 - 45.0 
 

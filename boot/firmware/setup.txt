@@ -44,6 +44,12 @@ dbpw='raspberry'
 # Auf der ADMIN Seite können dann Datum und Uhrzeit gesetzt werden
 # und auch die Parameter für einen WLAN Router (SSID und Password).
 # Das Default-Passwort für den Accesspoint kann auf der ADMIN-Seite geändert werden.
+#
+# ACHTUNG
+# Im Router bzw bei den WLAN Security Einstellungen sollte ein Verschlüsselungsverfahren
+# WPA2(CCMP) oder WPA2/WPA3 ausgewählt werden, da sonst keine WLAN Verbindung zwischen 
+# Pi-Ager und Router bzw. Accesspoint aufgebaut werden kann.
+# WPA wird nicht vom Pi-Ager unterstützt
 #-------------------------------------------------------------------------------
 
 # WLAN Netzwerkname:

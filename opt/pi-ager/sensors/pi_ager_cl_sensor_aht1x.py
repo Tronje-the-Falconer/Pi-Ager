@@ -18,7 +18,7 @@ class cl_sensor_aht1x(cl_sensor_aht):
     # i_address       : i2c address
     def __init__(self, i_sensor_type, i_active_sensor, i_address):
         # cl_fact_logger.get_instance().debug("i2c address is : " + hex(i_address) + ". active sensor is : " + i_active_sensor + ". i_sensor_type is : " + i_sensor_type.get_sensor_type_ui())
-        cl_fact_logger.get_instance().debug("i2c address is : " + str(i_address) + ". active sensor is : " + str(i_active_sensor) + ". i_sensor_type is : " + str(i_sensor_type))
+        cl_fact_logger.get_instance().debug("i2c address is : " + (str(i_address) if i_address == None else hex(i_address)) + ". active sensor is : " + str(i_active_sensor) + ". i_sensor_type is : " + i_sensor_type.get_sensor_type_ui())
         self.o_sensor_type = i_sensor_type
         self.o_address     = i_address
         
@@ -60,10 +60,16 @@ class cl_sensor_aht1x(cl_sensor_aht):
                     repeat_count += 1
                     continue
                     
+                hum_offset = self.get_humidity_offset()    
                 humidity_raw = ((buf[1]) << 16) | ((buf[2]) << 8) | buf[3]     # set the humidity 
                 humidity_raw = (humidity_raw) >> 4                             # right shift 4
                 humidity_s = (humidity_raw / 1048576.0 * 100.0)           # convert the humidity 
-    
+                humidity_s += hum_offset                                    # add offset
+                if (humidity_s > 100.0):
+                    humidity_s = 100.0
+                if (humidity_s < 0.0):
+                    humidity_s = 0.0
+                    
                 temperature_raw = ((buf[3]) << 16) | ((buf[4]) << 8) | buf[5]  # set the temperature 
                 temperature_raw = temperature_raw & 0xFFFFF                    # cut the temperature part 
                 temperature_s = temperature_raw / 1048576.0 * 200.0 - 50.0  
