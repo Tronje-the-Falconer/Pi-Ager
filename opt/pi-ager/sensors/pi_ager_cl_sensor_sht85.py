@@ -27,7 +27,9 @@ from main.pi_ager_cx_exception import *
 from sensors.pi_ager_cl_sensor_sht import cl_sensor_sht
 
 class cl_sensor_sht85(cl_sensor_sht):
-    
+    # i_active_sensor : 'MAIN' or 'SECOND'
+    # i_sensor_type   : class cl_main_sensor_type or cl_second_sensor_type
+    # i_address       : i2c address        
     def __init__(self, i_sensor_type, i_active_sensor, i_address):
         # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         # if "get_instance" not in inspect.stack()[1][3]:
@@ -35,7 +37,7 @@ class cl_sensor_sht85(cl_sensor_sht):
         cl_fact_logger.get_instance().debug("i2c address is" + (str(i_address) if i_address == None else hex(i_address)))
         self.o_sensor_type = i_sensor_type
         self.o_address     = i_address
-        super().__init__(i_active_sensor, self.o_sensor_type, self.o_address)
+        super().__init__(self.o_sensor_type, i_active_sensor, self.o_address)
 
     def get_current_data(self):
         # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())

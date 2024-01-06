@@ -27,7 +27,10 @@ class cl_sensor_sht75(cl_sensor):
     
     def __init__(self, i_sensor_type, i_active_sensor):
         # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-
+        
+        self.o_sensor_type = i_sensor_type
+        self.o_active_sensor = i_active_sensor
+        
         self._current_temperature = 0
         self._current_humidity = 0
         self._max_errors = 5
@@ -48,7 +51,7 @@ class cl_sensor_sht75(cl_sensor):
                     humidity_s = 100.0
                 if (humidity_s < 0.0):
                     humidity_s = 0.0
-                self._current_humidity = humidty_s
+                self._current_humidity = humidity_s
                 
                 self._dewpoint            = super().get_dewpoint(self._current_temperature, self._current_humidity)
                 cl_fact_logger.get_instance().debug("sht75 temperature : %.2f °C" % self._current_temperature)
