@@ -84,6 +84,12 @@ then
     fi
 
     # wlan Netz und Key eintragen
+    # remove old profiles but not PI_AGER_ap.nmconnection
+    # rfkill unblock wifi
+    mv /etc/NetworkManager/system-connections/PI_AGER_AP.nmconnection /etc/NetworkManager/system-connections/PI_AGER_AP.nmconnection.org
+    rm /etc/NetworkManager/system-connections/*.nmconnection
+    mv /etc/NetworkManager/system-connections/PI_AGER_AP.nmconnection.org /etc/NetworkManager/system-connections/PI_AGER_AP.nmconnection
+    # systemctl restart NetworkManager
     if [ -n "$wlanssid" ]         #wenn nicht ""
     then
         if [  ${#wlankey} -ge 8 ]   # 8 Zeichen oder mehr
@@ -94,8 +100,42 @@ then
             # wpa_passphrase "$wlanssid" "$wlankey" >> /etc/wpa_supplicant/wpa_supplicant.conf
             # echo -e "\nnetwork={\n\tssid=\x22${wlanssid}\x22\n\tpsk=\x22${wlankey}\x22\n\tkey_mgmt=WPA-PSK\n}" >> /etc/wpa_supplicant/wpa_supplicant.conf
             raspi-config nonint do_wifi_country $country
+            echo "raspi-config do_wifi_country setup finished"
             # raspi-config nonint do_wifi_ssid_passphrase "$wlanssid" "$wlankey"
-            nmcli device wifi connect "$wlanssid" password "$wlankey" ifname wlan0
+            # nmcli device wifi connect "$wlanssid" password "$wlankey" ifname wlan0
+            nmFilename='/etc/NetworkManager/system-connections/pi-ager-wlan.nmconnection'
+            cat <<EOF > "$nmFilename"
+[connection]
+id=pi-ager-wlan
+uuid=
+type=wifi
+interface-name=wlan0
+timestamp=
+autoconnect=true
+
+[wifi]
+mode=infrastructure
+ssid=
+
+[wifi-security]
+auth-alg=open
+key-mgmt=wpa-psk
+psk=
+
+[ipv4]
+method=auto
+
+[ipv6]
+addr-gen-mode=default
+method=auto
+
+[proxy]
+EOF
+            chmod -R 600 "$nmFilename"
+            chown -R root:root "$nmFilename"
+            uuid=$(uuidgen)
+            timestamp=$(date +%s)
+            modify_nmconnection "$nmFilename" "$wlanssid" "$wlankey" "$uuid" "$timestamp"
             if [ $? -eq 0 ]
             then
                 echo "WLAN SSID und Passphrase gesetzt"
@@ -116,6 +156,8 @@ then
     sensorbus=0
     sensornum=5
     case $sensor in
+      "DHT11") sensorbus=1; sensornum=1;;
+      "DHT22") sensorbus=1; sensornum=2;;
       "SHT75") sensorbus=1; sensornum=3;;
       "SHT85") sensorbus=0; sensornum=4;;
       "SHT3x") sensorbus=0; sensornum=5;;
