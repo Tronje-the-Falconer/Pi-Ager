@@ -79,7 +79,10 @@
                         # Modus
                         $internal_temperature = get_table_value($current_values_table, $sensor_temperature_key);
                         $external_temperature = get_table_value($current_values_table, $sensor_extern_temperature_key);
-                            
+                        $cooling_hysteresis = number_format(floatval(get_table_value($config_settings_table, $cooling_hysteresis_key)), 1, '.', '');
+                        $heating_hysteresis = number_format(floatval(get_table_value($config_settings_table, $heating_hysteresis_key)), 1, '.', '');
+        
+                        $dehumidifier_modus = intval(get_table_value($config_settings_table,$dehumidifier_modus_key));
                         $humidifier_hysteresis = intval(get_table_value($config_settings_table,$humidifier_hysteresis_key));
                         $dehumidifier_hysteresis = intval(get_table_value($config_settings_table,$dehumidifier_hysteresis_key));
                         $hysteresis_offset = round(get_table_value($config_settings_table,$hysteresis_offset_key), 1);
@@ -159,8 +162,29 @@
                             $sensorname = 'SHT3x';
                         }
                         else if ($sensortype == 6) {
-                            $sensorname = 'AHT2x';
+                            $sensorname = 'SHT3x-mod';
                         }
+                        else if ($sensortype == 7) {
+                            $sensorname = 'AHT1x';
+                        }                        
+                        else if ($sensortype == 8) {
+                            $sensorname = 'AHT1x-mod';
+                        }                        
+                        else if ($sensortype == 9) {
+                            $sensorname = 'AHT2x';
+                        }                                                       
+                        else if ($sensortype == 10) {
+                            $sensorname = 'AHT30';
+                        }                                                       
+                        else if ($sensortype == 11) {
+                            $sensorname = 'SHT4x-A';
+                        }
+                        else if ($sensortype == 12) {
+                            $sensorname = 'SHT4x-B';
+                        }
+                        else if ($sensortype == 13) {
+                            $sensorname = 'SHT4x-C';
+                        }                         
                         else {
                             $sensorname = 'undefined';
                         }
