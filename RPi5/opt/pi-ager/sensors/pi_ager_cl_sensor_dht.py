@@ -40,17 +40,18 @@ class cl_sensor_dht(cl_sensor):
   
         super().__init__(cl_fact_main_sensor_type.get_instance())
         # remove i2c_gpio kernel driver to release GPIO17 and GPIO27 pins
-        # so that RPi.GPIO can access these pins
+        # so that rpi-lgpio can access these pins
+        # Using a RPi zero W is not recommended due to poor performance
         os.system('rmmod i2c_gpio')
         
         # check Pi model
         stream = os.popen('cat /proc/device-tree/model')
         output = stream.read().rstrip('\n')
         if ('Raspberry Pi 5' in output):
-            cl_fact_logger.get_instance().info("Pi5 detected")
+            cl_fact_logger.get_instance().debug("Pi5 detected")
             self._chip = sbc.gpiochip_open(4)       # 4 is for Pi5
         else:
-            cl_fact_logger.get_instance().info("Other Pis detected")
+            cl_fact_logger.get_instance().debug("Other Pis detected")
             self._chip = sbc.gpiochip_open(0)   # 0 is fo all other Pi devices
 
         self._gpio = pi_ager_gpio_config.gpio_sensor_data
@@ -198,6 +199,7 @@ class cl_sensor_dht(cl_sensor):
     def get_current_data(self):
 #        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._error_counter = 0
+        self._max_errors = 5
         
         while self._error_counter < self._max_errors:
             try:

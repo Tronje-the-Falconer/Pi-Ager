@@ -11,6 +11,8 @@ __maintainer__ = "Claus Fischer"
 __email__ = "DerBurgermeister@pi-ager.org"
 __status__ = "Production"
 
+import os
+import RPi.GPIO as gpio
 from abc import ABC, abstractmethod
 from main.pi_ager_cl_logger import cl_fact_logger
 # import time
@@ -28,6 +30,9 @@ class cl_sensor_sht75(cl_sensor):
     
     def __init__(self, i_sensor_type, i_active_sensor):
         # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # remove i2c_gpio kernel driver to release GPIO17 and GPIO27 pins
+        # so that RPi.GPIO can access these pins
+        os.system('rmmod i2c_gpio')
         
         self.o_sensor_type = i_sensor_type
         self.o_active_sensor = i_active_sensor
@@ -35,6 +40,9 @@ class cl_sensor_sht75(cl_sensor):
         self._current_temperature = 0
         self._current_humidity = 0
         self._max_errors = 5
+        
+        gpio.setup(pi_ager_gpio_config.gpio_sensor_data, gpio.IN)
+        gpio.setup(pi_ager_gpio_config.gpio_sensor_sync, gpio.OUT)
         
         self._sensor_sht = pi_sht1x.SHT1x(pi_ager_gpio_config.gpio_sensor_data, pi_ager_gpio_config.gpio_sensor_sync, gpio_mode=pi_ager_gpio_config.board_mode)
                 

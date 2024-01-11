@@ -181,11 +181,11 @@ EOF
     
     if [ $sensorbus -eq 0 ]; then
     # hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
-        rm -f /etc/modprobe.d/Pi-Ager_i2c_off.conf
+    #    rm -f /etc/modprobe.d/Pi-Ager_i2c_off.conf
         echo "i2c is active"
     elif [ $sensorbus -eq 1 ]; then
     # hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln
-        cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
+    #    cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
         echo "1-wire is active"
 
     fi
