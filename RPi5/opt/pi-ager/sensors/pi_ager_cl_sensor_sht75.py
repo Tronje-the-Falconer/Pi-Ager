@@ -14,7 +14,8 @@ __status__ = "Production"
 from abc import ABC, abstractmethod
 from main.pi_ager_cl_logger import cl_fact_logger
 # import time
-import main.pi_sht1x as pi_sht1x
+# import main.pi_sht1x as pi_sht1x
+import pi_sht1x
 import pi_ager_gpio_config
 
 # from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
