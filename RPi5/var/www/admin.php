@@ -1114,15 +1114,20 @@
                                     <hr>
                                     <h2 class="art-postheader"><?php echo _('WLAN setup'); ?></h2>
                                     <?php
-                                        $ssids = [];
+                                        $ssids_with_signal = [];
                                         $ssid_count = 0;
                                         if ($ap_mode == true) {
                                             $res = null;
-                                            exec('sudo /var/show_wifi_connections.sh', $ssids, $res);
+                                            # exec('sudo /var/show_wifi_connections.sh', $ssids, $res);
+                                            exec('sudo nmcli -t -f SSID,SIGNAL device wifi list --rescan yes ifname wlan0', $ssids_with_signal, $res);
                                             // $out = shell_exec('sudo /var/show_wifi_connections.sh 2>&1');
-                                            $ssid_count = count($ssids);
-                                            // echo 'return status from show_wifi_connections : ' . $res . '<br>';
-                                            // var_dump($ssids);
+                                            $ssid_count = count($ssids_with_signal);
+                                            # echo 'return status from show_wifi_connections : ' . $res . '<br>';
+                                            # var_dump($ssids);
+                                            $ssids_signals = array();
+                                            foreach ($ssids_with_signal as $ssid_with_signal) {
+                                                $ssids_signals[] = explode(':', $ssid_with_signal);
+                                            }
                                         }
                                     ?>
                                     <div class="hg_container">
@@ -1137,37 +1142,42 @@
                                         <form method="post" name="wlansetup">
                                             <table style="width: 100%;">
                                                 <tr>
-                                                    <td width="50%" style="text-align: left; padding-left: 20px;"><br>
+                                                    <td width="25%" style="text-align: center; padding-left: 20px;">SSID</td>
+                                                    <td style="text-align: center;">SIGNAL</td>
+                                                    <td rowspan="15" style="text-align: left"><div>
+                                                        <fieldset>
+                                                            <label style="text-align: left; display: block;" for="txtPasswd"><?php echo _('WLAN password'); ?></label>
+                                                            <div class="tooltip"><input id="txtPasswd" type="text" name="wlanpassword" <?php if ($ssid_count == 0) { echo ' disabled';} ?> required><span class="tooltiptext"><?php echo _('enter your WLAN password'); ?></span></input></div><br><br>
+                                                            <label style="text-align: left; display: block;" for="txtCountry"><?php echo _('WLAN Country'); ?></label>
+                                                            <div class="tooltip"><input id="txtCountry" type="text" name="wlancountry" required><span class="tooltiptext"><?php echo _('e.g. DE,GB,FR,AT,CH,US'); ?></span></input></div><br>
+                                                        </fieldset>
+                                                        </div>
+                                                    </td>
+                                                </tr><br>
                                                     <?php
                                                         if ($ssid_count == 0) {
                                                             echo _('No WLAN networks found');
                                                         }
                                                         else {
                                                             $si = 0;
-                                                            foreach ($ssids as $ssid) {
-                                                                if ($ssid != '') {
+                                                            foreach ($ssids_signals as $ssid_signal) {
+                                                                if ($ssid_signal[0] != '') {
+                                                                    echo '<tr>';
                                                                     if ($si == 0) {
-                                                                        echo '<input type="radio" name="ssid_selected" value="' . $ssid . '" checked="checked" /><label>&nbsp;' . $ssid . '</label><br>';
+                                                                        echo '<td style="text-align: left; padding-left: 20px;"><input type="radio" name="ssid_selected" value="' . $ssid_signal[0] . '" checked="checked" /><label>&nbsp;' . $ssid_signal[0] . '</label></td>';
                                                                     }
                                                                     else {
-                                                                        echo '<input type="radio" name="ssid_selected" value="' . $ssid . '" /><label>&nbsp;' . $ssid . '</label><br>';
+                                                                        echo '<td style="text-align: left; padding-left: 20px;"><input type="radio" name="ssid_selected" value="' . $ssid_signal[0] . '" /><label>&nbsp;' . $ssid_signal[0] . '</label></td>';
                                                                     }
+                                                                    echo '<td>' . $ssid_signal[1] . '</td>';
+                                                                    echo '<td></td>';
+                                                                    echo '</tr>';
                                                                 }
                                                                 $si++;
                                                             }
                                                         }
                                                     ?>
-                                                    </td>
-                                                    <td style="text-align: left"><div>
-                                                        <fieldset>
-                                                            <label style="text-align: left; display: block;" for="txtPasswd"><?php echo _('WLAN password'); ?></label>
-                                                            <div class="tooltip"><input id="txtPasswd" type="text" name="wlanpassword" <?php if ($ssid_count == 0) { echo ' disabled';} ?> required><span class="tooltiptext"><?php echo _('enter your WLAN password'); ?></span></input></div><br>
-                                                            <label style="text-align: left; display: block;" for="txtCountry"><?php echo _('WLAN Country'); ?></label>
-                                                            <div class="tooltip"><input id="txtCountry" type="text" name="wlancountry" required><span class="tooltiptext"><?php echo _('e.g. DE,GB,FR,AT,CH,US'); ?></span></input></div><br>
-                                                        </fieldset>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+
                                                 <tr>
                                                     <td><br><button class="art-button" name="setWLANconfig" value="setWLANconfig" <?php if ($ssid_count == 0) { echo 'disabled';} ?> onclick="return confirm('<?php echo _('ATTENTION: setup your WLAN?');?> ')"><?php echo _('save'); ?></button></td>
                                                 </tr>
