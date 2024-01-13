@@ -453,6 +453,8 @@ UPDATE config SET value='30.0' WHERE key = 'delay_cooler';
 UPDATE config SET value='1' WHERE key = 'dewpoint_check';
 UPDATE config SET value='0.2' WHERE key = 'humidity_check_hysteresis';
 UPDATE config SET value='3600.0' WHERE key = 'customtime_for_diagrams';
+UPDATE config SET value='0.0' WHERE key = 'take_off_weight_scale1';
+UPDATE config SET value='0.0' WHERE key = 'take_off_weight_scale2';
 
 UPDATE current_values SET value='0' WHERE key = 'status_piager';
 UPDATE current_values SET value='0' WHERE key = 'status_scale1';

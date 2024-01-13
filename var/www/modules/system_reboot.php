@@ -25,12 +25,17 @@
         if (!isset($wlancountry)) {
             $wlancountry = '';
         }
-        if ($wlancountry != '') {
+        
+        if (strlen($wlancountry) == 2 and ctype_upper($wlancountry)) {
             exec("sudo raspi-config nonint do_wifi_country " . $wlancountry, $exec_data, $exec_status);
             # echo 'return status from do_wifi_country : ' . $exec_status . '<br>';
         }
+        else {
+            echo '<script> alert("'. (_("WLAN setup")) . " : " . (_("WLAN country code must be uppercase with a length of 2 characters")) .'"); </script>';
+            goto end;
+        }
 
-        if ($selected_ssid != '' and $wlanpassword != '') {
+        if ($selected_ssid != '' and strlen($wlanpassword) >= 8) {
             $cmd = "sudo nmcli device wifi connect " . "'" . $selected_ssid . "' password " . "'" . $wlanpassword . "' ifname wlan0";
             $htmlcmd = base64_encode($cmd);
             $randnum = rand();
@@ -38,8 +43,11 @@
             header("Location: ../reboot_set_nm.php?htmlcmd=" . $htmlcmd . "&rand=" . $randnum );
         }
         else {
-            print '<script> alert("'. (_("WLAN setup")) . " : " . (_("WLAN SSID or password missing")) .'"); </script>';
+            print '<script> alert("'. (_("WLAN setup")) . " : " . (_("WLAN SSID missing or length of password less than 8 characters")) .'"); </script>';
         }
+        
+        end:
+        
     }
 
     # save accesspoint password and restart system

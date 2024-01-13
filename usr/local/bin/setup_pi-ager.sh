@@ -92,14 +92,16 @@ then
     # systemctl restart NetworkManager
     if [ -n "$wlanssid" ]         #wenn nicht ""
     then
-        if [  ${#wlankey} -ge 8 ]   # 8 Zeichen oder mehr
+        uppercase_country="${country^^}"
+        if [  ${#wlankey} -ge 8 ] && [ ${#uppercase_country} -eq 2 ];  # 8 Zeichen oder mehr und exakt 2 Zeichen für country
         then
             # echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" > /etc/wpa_supplicant/wpa_supplicant.conf
             # echo "update_config=1" >> /etc/wpa_supplicant/wpa_supplicant.conf
             # echo "country=$country" >> /etc/wpa_supplicant/wpa_supplicant.conf
             # wpa_passphrase "$wlanssid" "$wlankey" >> /etc/wpa_supplicant/wpa_supplicant.conf
             # echo -e "\nnetwork={\n\tssid=\x22${wlanssid}\x22\n\tpsk=\x22${wlankey}\x22\n\tkey_mgmt=WPA-PSK\n}" >> /etc/wpa_supplicant/wpa_supplicant.conf
-            raspi-config nonint do_wifi_country $country
+            echo "Uppercase Country = $uppercase_country"
+            raspi-config nonint do_wifi_country "$uppercase_country"
             echo "raspi-config do_wifi_country setup finished"
             # raspi-config nonint do_wifi_ssid_passphrase "$wlanssid" "$wlankey"
             # nmcli device wifi connect "$wlanssid" password "$wlankey" ifname wlan0
