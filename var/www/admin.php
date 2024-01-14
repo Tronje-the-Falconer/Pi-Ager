@@ -1110,26 +1110,10 @@
                                 </div>
 
                                 
-                                <div id="wlan_setup_id" <?php if ($ap_mode == false) { echo 'style="display:none;"'; }?>>
+                                <div <?php if ($ap_mode == false) { echo 'style="display:none;"'; }?>>
                                     <hr>
                                     <h2 class="art-postheader"><?php echo _('WLAN setup'); ?></h2>
-                                    <?php
-                                        $ssids_with_signal = [];
-                                        $ssid_count = 0;
-                                        if ($ap_mode == true) {
-                                            $res = null;
-                                            # exec('sudo /var/show_wifi_connections.sh', $ssids, $res);
-                                            exec('sudo nmcli -t -f SSID,SIGNAL device wifi list --rescan yes ifname wlan0', $ssids_with_signal, $res);
-                                            // $out = shell_exec('sudo /var/show_wifi_connections.sh 2>&1');
-                                            $ssid_count = count($ssids_with_signal);
-                                            # echo 'return status from show_wifi_connections : ' . $res . '<br>';
-                                            # var_dump($ssids);
-                                            $ssids_signals = array();
-                                            foreach ($ssids_with_signal as $ssid_with_signal) {
-                                                $ssids_signals[] = explode(':', $ssid_with_signal);
-                                            }
-                                        }
-                                    ?>
+
                                     <div class="hg_container">
                                         <table style="width: 100%; align: center;">
                                             <tr>
@@ -1138,49 +1122,67 @@
                                                 </td>
                                             </tr>
                                         </table>
-
-                                        <form method="post" name="wlansetup">
-                                            <table style="width: 100%;">
-                                                <tr>
-                                                    <td width="50%" style="text-align: left; padding-left: 20px;">SSID</td>
-                                                    <td width="10%" style="text-align: left;">SIGNAL</td>
-                                                </tr><br>
-                                                    <?php
-                                                        if ($ssid_count == 0) {
-                                                            echo _('No WLAN networks found') . '<br>';
-                                                        }
-                                                        else {
-                                                            $si = 0;
-                                                            foreach ($ssids_signals as $ssid_signal) {
-                                                                if ($ssid_signal[0] != '') {
-                                                                    echo '<tr>';
-                                                                    if ($si == 0) {
-                                                                        echo '<td style="text-align: left; padding-left: 20px;"><input type="radio" name="ssid_selected" value="' . $ssid_signal[0] . '" checked="checked" /><label>&nbsp;' . $ssid_signal[0] . '</label></td>';
-                                                                    }
-                                                                    else {
-                                                                        echo '<td style="text-align: left; padding-left: 20px;"><input type="radio" name="ssid_selected" value="' . $ssid_signal[0] . '" /><label>&nbsp;' . $ssid_signal[0] . '</label></td>';
-                                                                    }
-                                                                    echo '<td style="text-align: left;">' . $ssid_signal[1] . '</td>';
-                                                                    echo '</tr>';
-                                                                }
-                                                                $si++;
+                                        <div id="wlan_setup_id" >    
+                                            <?php
+                                                $ssids_with_signal = [];
+                                                $ssid_count = 0;
+                                                if ($ap_mode == true) {
+                                                    $res = null;
+                                                    # exec('sudo /var/show_wifi_connections.sh', $ssids, $res);
+                                                    exec('sudo nmcli -t -f SSID,SIGNAL device wifi list --rescan yes ifname wlan0', $ssids_with_signal, $res);
+                                                    // $out = shell_exec('sudo /var/show_wifi_connections.sh 2>&1');
+                                                    $ssid_count = count($ssids_with_signal);
+                                                    # echo 'return status from show_wifi_connections : ' . $res . '<br>';
+                                                    # var_dump($ssids);
+                                                    $ssids_signals = array();
+                                                    foreach ($ssids_with_signal as $ssid_with_signal) {
+                                                        $ssids_signals[] = explode(':', $ssid_with_signal);
+                                                    }
+                                                }
+                                            ?>
+                                            <form method="post" name="wlansetup">
+                                                <table style="width: 100%;">
+                                                    <tr>
+                                                        <td width="50%" style="text-align: left; padding-left: 20px;">SSID</td>
+                                                        <td width="10%" style="text-align: left;">SIGNAL</td>
+                                                    </tr><br>
+                                                        <?php
+                                                            if ($ssid_count == 0) {
+                                                                echo _('No WLAN networks found') . '<br>';
                                                             }
-                                                        }
-                                                    ?>
-                                                <tr>
-                                                    <td>&nbsp;</td>
-                                                    <td>&nbsp;</td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: left; padding-left: 20px;" colspan="2"><label><?php echo _('WLAN password');?>&nbsp;</label><div class="tooltip"><input id="txtPasswd" type="text" name="wlanpassword" <?php if ($ssid_count == 0) { echo ' disabled';} ?> required><span class="tooltiptext"><?php echo _('enter your WLAN password'); ?></span></input></div></td>
-                                                </tr>
-                                                <tr>
-                                                    <td style="text-align: left; padding-left: 20px;" colspan="2"><label><?php echo _('WLAN Country'); ?>&nbsp;</label><div class="tooltip"><input style="max-width: 22px;" id="txtCountry" type="text" maxlength="2" name="wlancountry" required><span class="tooltiptext"><?php echo _('e.g. DE,GB,FR,AT,CH,US'); ?></span></input></div></td>
-                                                </tr>
-                                            </table>
-                                            <br>
-                                            <button class="art-button" name="setWLANconfig" value="setWLANconfig" <?php if ($ssid_count == 0) { echo 'disabled';} ?> onclick="return confirm('<?php echo _('ATTENTION: setup your WLAN?');?> ')"><?php echo _('save'); ?></button>
-                                        </form>
+                                                            else {
+                                                                $si = 0;
+                                                                foreach ($ssids_signals as $ssid_signal) {
+                                                                    if ($ssid_signal[0] != '') {
+                                                                        echo '<tr>';
+                                                                        if ($si == 0) {
+                                                                            echo '<td style="text-align: left; padding-left: 20px;"><input type="radio" name="ssid_selected" value="' . $ssid_signal[0] . '" checked="checked" /><label>&nbsp;' . $ssid_signal[0] . '</label></td>';
+                                                                        }
+                                                                        else {
+                                                                            echo '<td style="text-align: left; padding-left: 20px;"><input type="radio" name="ssid_selected" value="' . $ssid_signal[0] . '" /><label>&nbsp;' . $ssid_signal[0] . '</label></td>';
+                                                                        }
+                                                                        echo '<td style="text-align: left;">' . $ssid_signal[1] . '</td>';
+                                                                        echo '</tr>';
+                                                                    }
+                                                                    $si++;
+                                                                }
+                                                            }
+                                                        ?>
+                                                    <tr>
+                                                        <td>&nbsp;</td>
+                                                        <td>&nbsp;</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align: left; padding-left: 20px;" colspan="2"><label><?php echo _('WLAN password');?>&nbsp;</label><div class="tooltip"><input id="txtPasswd" type="text" name="wlanpassword" <?php if ($ssid_count == 0) { echo ' disabled';} ?> required><span class="tooltiptext"><?php echo _('enter your WLAN password'); ?></span></input></div></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="text-align: left; padding-left: 20px;" colspan="2"><label><?php echo _('WLAN Country'); ?>&nbsp;</label><div class="tooltip"><input style="max-width: 22px;" id="txtCountry" type="text" maxlength="2" name="wlancountry" required><span class="tooltiptext"><?php echo _('e.g. DE,GB,FR,AT,CH,US'); ?></span></input></div></td>
+                                                    </tr>
+                                                </table>
+                                                <br>
+                                                <button class="art-button" name="setWLANconfig" value="setWLANconfig" <?php if ($ssid_count == 0) { echo 'disabled';} ?> onclick="return confirm('<?php echo _('ATTENTION: setup your WLAN?');?> ')"><?php echo _('save'); ?></button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                                 
@@ -1192,7 +1194,7 @@
                                     async function refresh_wlan_ssids() {
                                         $('*').css('cursor', 'wait');
                                         $('#wlan_setup_id').load('admin.php #wlan_setup_id');
-                                        await Sleep(2000);
+                                        await Sleep(3000);
                                         $('*').css('cursor', 'default');
                                     }
                                 </script>
