@@ -47,7 +47,7 @@ dbpw='raspberry'
 #
 # ACHTUNG
 # Im Router bzw bei den WLAN Security Einstellungen sollte ein Verschlüsselungsverfahren
-# WPA2(CCMP) oder WPA2/WPA3 ausgewählt werden, da sonst keine WLAN Verbindung zwischen 
+# WPA2(CCMP) oder WPA2+WPA3 ausgewählt werden, da sonst keine WLAN Verbindung zwischen 
 # Pi-Ager und Router bzw. Accesspoint aufgebaut werden kann.
 # WPA wird nicht vom Pi-Ager unterstützt
 #-------------------------------------------------------------------------------

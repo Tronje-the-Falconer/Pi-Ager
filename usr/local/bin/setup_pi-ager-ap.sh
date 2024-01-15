@@ -11,9 +11,9 @@ trap read debug
  nmcli con modify PI_AGER_AP 802-11-wireless.band bg
  nmcli con modify PI_AGER_AP 802-11-wireless.channel 1
  nmcli con modify PI_AGER_AP 802-11-wireless-security.key-mgmt wpa-psk
- nmcli con modify PI_AGER_AP 802-11-wireless-security.proto rsn
- nmcli con modify PI_AGER_AP 802-11-wireless-security.group ccmp
- nmcli con modify PI_AGER_AP 802-11-wireless-security.pairwise ccmp
+ # nmcli con modify PI_AGER_AP 802-11-wireless-security.proto rsn
+ # nmcli con modify PI_AGER_AP 802-11-wireless-security.group ccmp
+ # nmcli con modify PI_AGER_AP 802-11-wireless-security.pairwise ccmp
  nmcli con modify PI_AGER_AP 802-11-wireless-security.psk 1234567890
  nmcli con modify PI_AGER_AP ipv4.addr 10.0.0.1/24
  nmcli con modify PI_AGER_AP ipv4.method shared
