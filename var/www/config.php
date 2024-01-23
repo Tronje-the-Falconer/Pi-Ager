@@ -45,7 +45,7 @@
                                             <!----------------------------------------------------------------------------------------Luftfeuchte-->
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <tr>
-                                                    <td rowspan="5" class="td_png_icon"><h3><?php echo _('humidity control'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td rowspan="6" class="td_png_icon"><h3><?php echo _('humidity control'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td class="text_left_padding"><?php echo _('humidifier hysteresis').':'; ?></td>
                                                     <td><input name="humidifier_hysteresis_config" type="number" style="width: 30%;" min="2" max="30" required value=<?php echo $humidifier_hysteresis; ?>>&nbsp;%<span style="font-size: xx-small"> (2 <?php echo _('to'); ?> 30)</span></td>
                                                 </tr>
@@ -54,8 +54,12 @@
                                                     <td><input name="dehumidifier hysteresis_config" type="number" style="width: 30%;" min="2" max="30" required value=<?php echo $dehumidifier_hysteresis; ?>>&nbsp;%<span style="font-size: xx-small"> (2 <?php echo _('to'); ?> 30)</span></td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="text_left_padding"><?php echo _('hysteresis offset').':'; ?></td>
-                                                    <td><input name="hysteresis_offset_config" type="number" style="width: 30%;" min="-20.0" max="20.0" step="0.1" required value=<?php echo $hysteresis_offset; ?>>&nbsp;%<span style="font-size: xx-small"> (-20 <?php echo _('to'); ?> 20)</span></td>
+                                                    <td class="text_left_padding"><?php echo _('humidifier hysteresis offset').':'; ?></td>
+                                                    <td><input name="humidifier_hysteresis_offset_config" type="number" style="width: 30%;" min="-20.0" max="20.0" step="0.1" required value=<?php echo $humidifier_hysteresis_offset; ?>>&nbsp;%<span style="font-size: xx-small"> (-20 <?php echo _('to'); ?> 20)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('dehumidifier hysteresis offset').':'; ?></td>
+                                                    <td><input name="dehumidifier_hysteresis_offset_config" type="number" style="width: 30%;" min="-20.0" max="20.0" step="0.1" required value=<?php echo $dehumidifier_hysteresis_offset; ?>>&nbsp;%<span style="font-size: xx-small"> (-20 <?php echo _('to'); ?> 20)</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('saturation point').':'; ?></td>

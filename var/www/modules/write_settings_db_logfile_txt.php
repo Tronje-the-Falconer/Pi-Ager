@@ -85,8 +85,9 @@
                         $dehumidifier_modus = intval(get_table_value($config_settings_table,$dehumidifier_modus_key));
                         $humidifier_hysteresis = intval(get_table_value($config_settings_table,$humidifier_hysteresis_key));
                         $dehumidifier_hysteresis = intval(get_table_value($config_settings_table,$dehumidifier_hysteresis_key));
-                        $hysteresis_offset = round(get_table_value($config_settings_table,$hysteresis_offset_key), 1);
-
+                        $humidifier_hysteresis_offset = round(get_table_value($config_settings_table,$humidifier_hysteresis_offset_key), 1);
+                        $dehumidifier_hysteresis_offset = round(get_table_value($config_settings_table,$dehumidifier_hysteresis_offset_key), 1);
+                        
                         $setpoint_temperature = round(get_table_value($config_settings_table,$setpoint_temperature_key), 1);
                         $setpoint_humidity = round(get_table_value($config_settings_table,$setpoint_humidity_key), 1);  
                         $saturation_point = intval(get_table_value($config_settings_table,$saturation_point_key));
@@ -122,8 +123,8 @@
 
                         if ($modus_setting == 4) {
                             $operating_mode = _('automatic with dehumidification and humidification');
-                            $switch_on_dehumidify = eval_switch_on_dehumidity( $setpoint_humidity_setting, $dehumidifier_hysteresis, $hysteresis_offset, $saturation_point );
-                            $switch_off_dehumidify = eval_switch_off_dehumidity( $setpoint_humidity_setting,  $dehumidifier_hysteresis, $hysteresis_offset );
+                            $switch_on_dehumidify = eval_switch_on_dehumidity( $setpoint_humidity_setting, $dehumidifier_hysteresis, $dehumidifier_hysteresis_offset, $saturation_point );
+                            $switch_off_dehumidify = eval_switch_off_dehumidity( $setpoint_humidity_setting,  $dehumidifier_hysteresis, $dehumidifier_hysteresis_offset );
                         }
                         # Dehumidify-Modus
                         if ($dehumidifier_modus == 1) {
@@ -141,8 +142,8 @@
                         $exhausting_air_duration = $exhaust_air_duration_setting;
                         $exhausting_air_period = $exhaust_air_period_setting;
                         
-                        $switch_on_humidify = eval_switch_on_humidity( $setpoint_humidity_setting, $humidifier_hysteresis, $hysteresis_offset );
-                        $switch_off_humidify = eval_switch_off_humidity( $setpoint_humidity_setting, $humidifier_hysteresis, $hysteresis_offset , $saturation_point );
+                        $switch_on_humidify = eval_switch_on_humidity( $setpoint_humidity_setting, $humidifier_hysteresis, $humidifier_hysteresis_offset );
+                        $switch_off_humidify = eval_switch_off_humidity( $setpoint_humidity_setting, $humidifier_hysteresis, $humidifier_hysteresis_offset , $saturation_point );
                        
                         $sensortype = intval(get_table_value($config_settings_table,$sensortype_key));
                             

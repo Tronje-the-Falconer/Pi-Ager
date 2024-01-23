@@ -12,7 +12,8 @@
         # $switch_off_humidifier_config = $_POST['switch_off_humidifier_config'];
         $humidifier_hysteresis_config = $_POST['humidifier_hysteresis_config'];
         $dehumidifier_hysteresis_config = $_POST['dehumidifier_hysteresis_config'];
-        $hysteresis_offset_config = $_POST['hysteresis_offset_config'];
+        $humidifier_hysteresis_offset_config = $_POST['humidifier_hysteresis_offset_config'];
+        $dehumidifier_hysteresis_offset_config = $_POST['dehumidifier_hysteresis_offset_config'];
         $saturation_point_config = $_POST['saturation_point_config'];
         $delay_humidify_config = $_POST['delay_humidify_config'];
         $uv_period_config = $_POST['uv_period_config'];
@@ -46,7 +47,7 @@
             if ($key == 'config_form_submit') {
                 continue;
             }
-            else if ($key == 'cooling_hysteresis_config' || $key == 'heating_hysteresis_config' || $key == 'hysteresis_offset_config') {
+            else if ($key == 'cooling_hysteresis_config' || $key == 'heating_hysteresis_config' || $key == 'humidifier_hysteresis_offset_config' || $key == 'dehumidifier_hysteresis_offset_config' ) {
                 if (is_numeric($value) == FALSE) {
                     $message_config = _('unauthorized character - please use only integers or floats!');
                     $ConfigInputIsValid = FALSE;
@@ -62,9 +63,7 @@
 
         if ($ConfigInputIsValid == TRUE)
         {
-            if ($cooling_hysteresis_config != $heating_hysteresis_config &&                                // hysteresis must differ.
-                # $switch_on_humidifier_config <= 30 && $switch_on_humidifier_config >= 0 &&          // Prüfung Einschaltwert Feuchte
-                # $switch_off_humidifier_config <= 30 && $switch_off_humidifier_config >= 0 &&        // Prüfung Ausschaltwert Feuchte
+            if ($cooling_hysteresis_config != $heating_hysteresis_config &&                         // hysteresis must differ.
                 $saturation_point_config >= 80 && $saturation_point_config <= 100 &&                // check saturation_point
                 $delay_humidify_config <= 60 && $delay_humidify_config >= 0 &&                                                            // Prüfung Verzögerung Feuchte
                 $uv_period_config < 1441 && $uv_period_config > -1 && // (($uv_period_config+$uv_duration_config) > 0) &&                 // Prüfung Intervall UV
@@ -82,7 +81,7 @@
             {
                 # Eingestellte Werte in config/config.json und logs/logfile.txt speichern
                 write_config($cooling_hysteresis_config, $heating_hysteresis_config,
-                            $humidifier_hysteresis_config, $dehumidifier_hysteresis_config, $hysteresis_offset_config, $saturation_point_config, $delay_humidify_config, $uv_modus_config, $uv_duration_config,
+                            $humidifier_hysteresis_config, $dehumidifier_hysteresis_config, $humidifier_hysteresis_offset_config, $dehumidifier_hysteresis_offset_config, $saturation_point_config, $delay_humidify_config, $uv_modus_config, $uv_duration_config,
                             $uv_period_config, $switch_on_uv_hour_config, $switch_on_uv_minute_config, $light_modus_config, $light_duration_config,
                             $light_period_config, $switch_on_light_hour_config, $switch_on_light_minute_config, $dehumidifier_modus_config,
                             $failure_temperature_delta_config, $failure_humidity_delta_config, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
@@ -91,10 +90,10 @@
                 
                 # evaluate and set humidifier limits for log
                 
-                $switch_on_humidity = eval_switch_on_humidity( $setpoint_humidity, $humidifier_hysteresis_config, $hysteresis_offset_config );
-                $switch_off_humidity = eval_switch_off_humidity( $setpoint_humidity, $humidifier_hysteresis_config, $hysteresis_offset_config, $saturation_point_config );
-                $switch_on_dehumidity = eval_switch_on_dehumidity( $setpoint_humidity, $dehumidifier_hysteresis_config, $hysteresis_offset_config, $saturation_point_config );
-                $switch_off_dehumidity = eval_switch_off_dehumidity( $setpoint_humidity, $dehumidifier_hysteresis_config, $hysteresis_offset_config );
+                $switch_on_humidity = eval_switch_on_humidity( $setpoint_humidity, $humidifier_hysteresis_config, $humidifier_hysteresis_offset_config );
+                $switch_off_humidity = eval_switch_off_humidity( $setpoint_humidity, $humidifier_hysteresis_config, $humidifier_hysteresis_offset_config, $saturation_point_config );
+                $switch_on_dehumidity = eval_switch_on_dehumidity( $setpoint_humidity, $dehumidifier_hysteresis_config, $dehumidifier_hysteresis_offset_config, $saturation_point_config );
+                $switch_off_dehumidity = eval_switch_off_dehumidity( $setpoint_humidity, $dehumidifier_hysteresis_config, $dehumidifier_hysteresis_offset_config );
                 
                 # Formatierung für die Lesbarkeit im Logfile:
                 # Modus
@@ -188,7 +187,7 @@
                 if ($modus == 1 || $modus == 2 || $modus == 3) {
                     $logstring = $logstring . " \n " . _('setpoint humidity') . ": " . $setpoint_humidity . "% " . "&phi;";
                     $logstring = $logstring . " \n " . _('humidifier control hysteresis') . ": " . $humidifier_hysteresis_config . "% " . "&phi;";
-                    $logstring = $logstring . " \n " . _('humidifier control hysteresis offset') . ": " . $hysteresis_offset_config . "% " . "&phi;";
+                    $logstring = $logstring . " \n " . _('humidifier control hysteresis offset') . ": " . $humidifier_hysteresis_offset_config . "% " . "&phi;";
                     $logstring = $logstring . " \n " . _('saturation point') . ": " . $saturation_point_config . "% " . "&phi;";
                 //    $logstring = $logstring . " \n " . _('switch-on humidifier') . ": " . $switch_on_humidity . " % &phi;";
                 //    $logstring = $logstring . " \n " . _('switch-off humidifier') . ": " . $switch_off_humidity. " % &phi;";
@@ -199,7 +198,8 @@
                     $logstring = $logstring . " \n " . _('setpoint humidity') . ": " . $setpoint_humidity . "% &phi;";
                     $logstring = $logstring . " \n " . _('humidifier control hysteresis') . ": " . $humidifier_hysteresis_config . "% " . "&phi;";
                     $logstring = $logstring . " \n " . _('dehumidifier control hysteresis') . ": " . $dehumidifier_hysteresis_config . "% " . "&phi;";                   
-                    $logstring = $logstring . " \n " . _('humidifier control hysteresis offset') . ": " . $hysteresis_offset_config . "% " . "&phi;";                    
+                    $logstring = $logstring . " \n " . _('humidifier control hysteresis offset') . ": " . $humidifier_hysteresis_offset_config . "% " . "&phi;";
+                    $logstring = $logstring . " \n " . _('dehumidifier control hysteresis offset') . ": " . $dehumidifier_hysteresis_offset_config . "% " . "&phi;";                      
                     $logstring = $logstring . " \n " . _('saturation point') . ": " . $saturation_point_config . "% " . "&phi;";
                     // $logstring = $logstring . " \n " . _('switch-on humidifier') . ": " . $switch_on_humidity . "% &phi;";
                     // $logstring = $logstring . " \n " . _('switch-off humidifier') . ": " . $switch_off_humidity . "% &phi;";

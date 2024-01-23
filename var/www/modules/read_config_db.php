@@ -8,11 +8,12 @@
     # humidification control
     $humidifier_hysteresis = intval(get_table_value($config_settings_table,$humidifier_hysteresis_key));
     $dehumidifier_hysteresis = intval(get_table_value($config_settings_table,$dehumidifier_hysteresis_key));
-    $hysteresis_offset = number_format(floatval(get_table_value($config_settings_table,$hysteresis_offset_key)), 1, '.', '');
+    $humidifier_hysteresis_offset = number_format(floatval(get_table_value($config_settings_table,$humidifier_hysteresis_offset_key)), 1, '.', '');
     $saturation_point = intval(get_table_value($config_settings_table, $saturation_point_key));                                                                                       
     $delay_humidify = intval(get_table_value($config_settings_table,$delay_humidify_key)); 
     
     # dehumidification
+    $dehumidifier_hysteresis_offset = number_format(floatval(get_table_value($config_settings_table,$dehumidifier_hysteresis_offset_key)), 1, '.', '');
     $dehumidifier_modus = intval(get_table_value($config_settings_table,$dehumidifier_modus_key));
     $dewpoint_check = intval(get_table_value($config_settings_table, $dewpoint_check_key));
     $sensorsecondtype = intval(get_table_value($config_settings_table, $sensorsecondtype_key));

@@ -1085,7 +1085,7 @@ def simple_humidity_control():
     """
     global setpoint_humidity
     global humidifier_hysteresis
-    global hysteresis_offset
+    global humidifier_hysteresis_offset
     global sensor_humidity
     global humidify_delay_switch
     global delay_humidify
@@ -1093,7 +1093,7 @@ def simple_humidity_control():
     global saturation_point
     global status_humidifier
     
-    humidity_low = eval_switch_on_humidity( setpoint_humidity, humidifier_hysteresis, hysteresis_offset ) 
+    humidity_low = eval_switch_on_humidity( setpoint_humidity, humidifier_hysteresis, humidifier_hysteresis_offset ) 
     if sensor_humidity <= humidity_low:
         # check if delay time passed
         if not humidify_delay_switch:
@@ -1103,7 +1103,7 @@ def simple_humidity_control():
             status_humidifier = True
             # gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_on)  # Luftbefeuchter ein
             
-    humidity_high = eval_switch_off_humidity( setpoint_humidity, humidifier_hysteresis, hysteresis_offset, saturation_point )
+    humidity_high = eval_switch_off_humidity( setpoint_humidity, humidifier_hysteresis, humidifier_hysteresis_offset, saturation_point )
     if sensor_humidity >= humidity_high:
         status_humidifier = False
         # gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)     # Luftbefeuchter aus
@@ -1162,12 +1162,11 @@ def doMainLoop():
     
     global humidifier_hysteresis            #  Hysterese Befeuchtung
     global dehumidifier_hysteresis          #  Hysterese Entfeuchtung
-    global hysteresis_offset                #  Hysterese Offset
+    global humidifier_hysteresis_offset     #  Hysterese Offset
 
     global switch_on_heater                 # Einschalttemperatur
     global switch_off_heater                # Ausschalttemperatur
-    global switch_on_humidifier           #  Einschaltfeuchte
-    global switch_off_humidifier          #  Ausschaltfeuchte
+
     global saturation_point               # sensor saturation point
     global switch_on_cooling_compressor
     global switch_off_cooling_compressor
@@ -1433,7 +1432,8 @@ def doMainLoop():
                     
                 humidifier_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.humidifier_hysteresis_key)
                 dehumidifier_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.dehumidifier_hysteresis_key)
-                hysteresis_offset = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.hysteresis_offset_key)
+                humidifier_hysteresis_offset = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.humidifier_hysteresis_offset_key)
+                dehumidifier_hysteresis_offset = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.dehumidifier_hysteresis_offset_key)
                 saturation_point = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.saturation_point_key)
                 
                 delay_humidify = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key))
@@ -1793,7 +1793,7 @@ def doMainLoop():
                     simple_humidity_control()
                     
                     # check if humidity too high => dehumidify
-                    humidity_high = eval_switch_on_dehumidity( setpoint_humidity, dehumidifier_hysteresis, hysteresis_offset, saturation_point ) 
+                    humidity_high = eval_switch_on_dehumidity( setpoint_humidity, dehumidifier_hysteresis, dehumidifier_hysteresis_offset, saturation_point ) 
                     if sensor_humidity >= humidity_high:
                         if dehumidifier_modus == 1 or dehumidifier_modus == 2:  # entweder nur über Abluft oder Abluft mit Unterstützung von Entfeuchter
                             status_exhaust_fan = True                           # Feuchtereduzierung Abluft-Ventilator ein
@@ -1807,7 +1807,7 @@ def doMainLoop():
                             status_dehumidifier = True                          # Entfeuchter ein
                         # cl_fact_logger.get_instance().info("Mode 4: sensor_humidity = " +  f'{sensor_humidity:.1f}' + ' %' + ". humidity_high = " + f'{humidity_high:.1f}')
                         
-                    humidity_low = eval_switch_off_dehumidity( setpoint_humidity, dehumidifier_hysteresis, hysteresis_offset )
+                    humidity_low = eval_switch_off_dehumidity( setpoint_humidity, dehumidifier_hysteresis, dehumidifier_hysteresis_offset )
                     if sensor_humidity <= humidity_low:
                         if dehumidifier_modus == 1 or dehumidifier_modus == 2:
                            status_exhaust_fan = False         # Feuchtereduzierung Abluft-Ventilator aus

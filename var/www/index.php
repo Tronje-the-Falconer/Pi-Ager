@@ -1241,8 +1241,8 @@
                                                     echo '</td>
                                                         <td id="mod_current_line3_id">'.$sensor_humidity.' %</td>
                                                         <td id="mod_setpoint_line3_id">'.$setpoint_humidity.' %</td>
-                                                        <td id="mod_on_line3_id">' . eval_switch_on_humidity( $setpoint_humidity, $humidifier_hysteresis, $hysteresis_offset ) . ' %</td>
-                                                        <td id="mod_off_line3_id">' . eval_switch_off_humidity( $setpoint_humidity, $humidifier_hysteresis, $hysteresis_offset, $saturation_point ) . ' %</td>';
+                                                        <td id="mod_on_line3_id">' . eval_switch_on_humidity( $setpoint_humidity, $humidifier_hysteresis, $humidifier_hysteresis_offset ) . ' %</td>
+                                                        <td id="mod_off_line3_id">' . eval_switch_off_humidity( $setpoint_humidity, $humidifier_hysteresis, $humidifier_hysteresis_offset, $saturation_point ) . ' %</td>';
                                                 }
 
                                                 if ($modus == 4){
@@ -1252,8 +1252,8 @@
                                                     echo strtoupper(_('humidification'));
                                                     echo '<td id="mod_current_line3_id">'.$sensor_humidity.' %</td>
                                                         <td id="mod_setpoint_line3_id">'.$setpoint_humidity.' %</td>
-                                                        <td id="mod_on_line3_id">' . eval_switch_on_humidity( $setpoint_humidity, $humidifier_hysteresis, $hysteresis_offset ) . ' %</td>
-                                                        <td id="mod_off_line3_id">' . eval_switch_off_humidity( $setpoint_humidity, $humidifier_hysteresis, $hysteresis_offset, $saturation_point ) . ' %</td></tr>';
+                                                        <td id="mod_on_line3_id">' . eval_switch_on_humidity( $setpoint_humidity, $humidifier_hysteresis, $humidifier_hysteresis_offset ) . ' %</td>
+                                                        <td id="mod_off_line3_id">' . eval_switch_off_humidity( $setpoint_humidity, $humidifier_hysteresis, $humidifier_hysteresis_offset, $saturation_point ) . ' %</td></tr>';
                                                
                                                     echo '<tr><td ><img id="mod_type_line5_id" src="images/icons/dehumidification_42x42.png" alt=""></td>
                                                         <td><img id="mod_stat_line5_id" src='.$dehumidifier_on_off_png.' title="PIN_DEH 7[26] -> IN 8 (PIN 9)"></td>
@@ -1262,8 +1262,8 @@
                                                     echo '</td>
                                                         <td id="mod_current_line5_id">'.$sensor_humidity.' %</td>
                                                         <td id="mod_setpoint_line5_id">'.$setpoint_humidity.' %</td>
-                                                        <td id="mod_on_line5_id">' . eval_switch_on_dehumidity( $setpoint_humidity, $dehumidifier_hysteresis, $hysteresis_offset, $saturation_point ) . ' %</td>
-                                                        <td id="mod_off_line5_id">' . eval_switch_off_dehumidity( $setpoint_humidity,  $dehumidifier_hysteresis, $hysteresis_offset ) . ' %</td></tr>';
+                                                        <td id="mod_on_line5_id">' . eval_switch_on_dehumidity( $setpoint_humidity, $dehumidifier_hysteresis, $dehumidifier_hysteresis_offset, $saturation_point ) . ' %</td>
+                                                        <td id="mod_off_line5_id">' . eval_switch_off_dehumidity( $setpoint_humidity,  $dehumidifier_hysteresis, $dehumidifier_hysteresis_offset ) . ' %</td></tr>';
                                                         
                                                     echo '<tr><td ><img id="mod_type_line4_id" src="images/icons/exhausting_42x42.png" alt=""></td>
                                                         <td><img id="mod_stat_line4_id" src='.$exhausting_on_off_png.' title="PIN_EXH 23[16] -> IN 5 (PIN 5)"></td>

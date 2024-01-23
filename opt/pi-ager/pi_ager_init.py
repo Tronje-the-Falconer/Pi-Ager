@@ -107,12 +107,3 @@ def setup_GPIO():
     pi_ager_gpio_config.defaultGPIO()   
 
 loopcounter = 0                      #  Zaehlt die Durchlaeufe des Mainloops
-    
-# Einschaltfeuchte
-switch_on_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_humidifier_key)
-# Ausschaltfeuchte
-switch_off_humidifier = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_off_humidifier_key)
-# Luftbefeuchtungsverzoegerung
-delay_humidify = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key)
-
-

@@ -41,8 +41,6 @@ humidity_offset_table = 'humidity_offset'
 # table keys
 cooling_hysteresis_key = 'cooling_hysteresis'
 heating_hysteresis_key = 'heating_hysteresis'
-switch_on_humidifier_key = 'switch_on_humidifier'
-switch_off_humidifier_key = 'switch_off_humidifier'
 delay_humidify_key = 'delay_humidify'
 saturation_point_key = 'saturation_point'                                         
 delay_cooler_key = 'delay_cooler'
@@ -170,7 +168,8 @@ hum_avg_maxlen_key = 'hum_avg_maxlen'
 
 humidifier_hysteresis_key = 'humidifier_hysteresis'
 dehumidifier_hysteresis_key = 'dehumidifier_hysteresis'
-hysteresis_offset_key = 'hysteresis_offset'
+humidifier_hysteresis_offset_key = 'humidifier_hysteresis_offset'
+dehumidifier_hysteresis_offset_key = 'dehumidifier_hysteresis_offset'
 
 delay_monitoring_humidifier_key = 'delay_monitoring_humidifier'
 tolerance_monitoring_humidifier_key = 'tolerance_monitoring_humidifier'

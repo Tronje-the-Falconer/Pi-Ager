@@ -158,7 +158,8 @@
     $setpoint_humidity = round(get_table_value($config_settings_table,$setpoint_humidity_key), 0);
     $humidifier_hysteresis = intval(get_table_value($config_settings_table,$humidifier_hysteresis_key));
     $dehumidifier_hysteresis = intval(get_table_value($config_settings_table,$dehumidifier_hysteresis_key));
-    $hysteresis_offset = round(get_table_value($config_settings_table,$hysteresis_offset_key), 1);
+    $humidifier_hysteresis_offset = round(get_table_value($config_settings_table,$humidifier_hysteresis_offset_key), 1);
+    $dehumidifier_hysteresis_offset = round(get_table_value($config_settings_table,$dehumidifier_hysteresis_offset_key), 1);
     $saturation_point = get_table_value($config_settings_table, $saturation_point_key); 
     $dehumidifier_modus = intval(get_table_value($config_settings_table,$dehumidifier_modus_key));
     $dewpoint_check = intval(get_table_value($config_settings_table, $dewpoint_check_key));
