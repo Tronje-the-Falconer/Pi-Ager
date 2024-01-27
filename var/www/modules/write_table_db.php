@@ -208,7 +208,8 @@
         }
         
         fclose($file);
-        header( "Content-Disposition: attachment; filename=\"" . $filename . '"' );
+        header('Content-Type: application/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '"' );
         header( "X-LIGHTTPD-send-file: " . $filepath);
         
         

@@ -88,6 +88,16 @@
                             $shutdown_on_batlow_config, $delay_cooler_config, $dewpoint_check_config, $uv_check_config, $delay_monitoring_humidifier, $tolerance_monitoring_humidifier, $check_monitoring_humidifier);
                 logger('DEBUG', 'configvalues saved');
                 
+                # settings used by manvals.php but used also in config.php, when manvals.php is hidden
+                # when an aging table is active
+                $modus = intval(get_table_value($config_settings_table,$modus_key));
+                $setpoint_temperature = number_format(floatval(get_table_value($config_settings_table,$setpoint_temperature_key)), 1, '.', '');
+                $setpoint_humidity = round(get_table_value($config_settings_table,$setpoint_humidity_key), 0);
+                $circulation_air_duration = round(get_table_value($config_settings_table,$circulation_air_duration_key), 1)/60;
+                $circulation_air_period = round(get_table_value($config_settings_table,$circulation_air_period_key), 1)/60;
+                $exhaust_air_duration = round(get_table_value($config_settings_table,$exhaust_air_duration_key), 1)/60;
+                $exhaust_air_period = round(get_table_value($config_settings_table,$exhaust_air_period_key), 1)/60;
+
                 # evaluate and set humidifier limits for log
                 
                 $switch_on_humidity = eval_switch_on_humidity( $setpoint_humidity, $humidifier_hysteresis_config, $humidifier_hysteresis_offset_config );

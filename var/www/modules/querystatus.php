@@ -33,8 +33,20 @@
 	$status_scale2 = intval(get_table_value($current_values_table, $status_scale2_key));
     $scale1_thread_alive = intval(get_table_value($current_values_table, $scale1_thread_alive_key));
     $scale2_thread_alive = intval(get_table_value($current_values_table, $scale2_thread_alive_key));
-    $sensor_temperature = number_format(floatval(get_table_value($current_values_table, $sensor_temperature_key)), 1, '.', '');
-    $sensor_humidity = round(get_table_value($current_values_table,$sensor_humidity_key), 0);
+    $current_temp = get_table_value($current_values_table,$sensor_temperature_key);
+    if ($current_temp === null) {
+        $sensor_temperature = '-----';
+    }
+    else {
+        $sensor_temperature = number_format(floatval($current_temp), 1, '.', '');
+    }
+    $current_hum = get_table_value($current_values_table,$sensor_humidity_key);
+    if ($current_hum === null) {
+        $sensor_humidity = '-----';
+    }
+    else {
+        $sensor_humidity = round($current_hum, 0);
+    }
     $desired_maturity = read_agingtable_name_from_config();
     
 //    $bus = intval(get_table_value($config_settings_table, $sensorbus_key));

@@ -15,15 +15,20 @@ _IP=$(hostname -I) || true
 if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
+# start pi-ager
+systemctl start pi-ager_main.service
 
 # disable power management for wlan0 to increase WLAN reliability
 rfkill unblock wifi
-sleep 10
-iwconfig wlan0 power off
+sleep 1
+# iwconfig wlan0 power off
+iw wlan0 set power_save off
 
 # enable AP-STA mode
 iw dev wlan0 interface add wlan1 type __ap
-sleep 2
+sleep 1
+
+iw wlan1 set power_save off
 
 # enable captive portal
 nodogsplash

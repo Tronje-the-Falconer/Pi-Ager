@@ -113,7 +113,7 @@
                                                     <input type="radio" name="sensorsecondtype_admin" value="7" <?php echo $checked_senssecond_7; ?>/><label><strong> AHT1x</strong>&nbsp;[0x38]</label><br>
                                                     <input type="radio" name="sensorsecondtype_admin" value="8" <?php echo $checked_senssecond_8; ?>/><label><strong> AHT1x-mod</strong>&nbsp;[0x39]</label><br>
                                                     <input type="radio" name="sensorsecondtype_admin" value="9" <?php echo $checked_senssecond_9; ?>/><label><strong> AHT2x</strong>&nbsp;[0x38]</label><br>
-                                                    <input type="radio" name="sensorsecondtype_admin" value="10" <?php echo $checked_senssecond_10; ?>/><label><strong> AHT30x</strong>&nbsp;[0x38]</label><br>
+                                                    <input type="radio" name="sensorsecondtype_admin" value="10" <?php echo $checked_senssecond_10; ?>/><label><strong> AHT30</strong>&nbsp;[0x38]</label><br>
                                                     <input type="radio" name="sensorsecondtype_admin" value="11" <?php echo $checked_senssecond_11; ?>/><label><strong> SHT4x-A</strong>&nbsp;[0x44]</label><br>
                                                     <input type="radio" name="sensorsecondtype_admin" value="12" <?php echo $checked_senssecond_12; ?>/><label><strong> SHT4x-B</strong>&nbsp;[0x45]</label><br>
                                                     <input type="radio" name="sensorsecondtype_admin" value="13" <?php echo $checked_senssecond_13; ?>/><label><strong> SHT4x-C</strong>&nbsp;[0x46]</label><br>

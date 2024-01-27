@@ -148,13 +148,26 @@
         $modus_name = '- '._('cooling').'<br>- '._('heating').'<br>- '._('humidify').'<br>- '._('dehumidify').'<br>- '._('circulating air').'<br>- '._('exhausting air');
     }
 
-    $sensor_temperature = number_format(floatval(get_table_value($current_values_table,$sensor_temperature_key)), 1, '.', '');
+    $current_temp = get_table_value($current_values_table,$sensor_temperature_key);
+    if ($current_temp === null) {
+        $sensor_temperature = '-----';
+    }
+    else {
+        $sensor_temperature = number_format(floatval($current_temp), 1, '.', '');
+    }
     $setpoint_temperature = number_format(floatval(get_table_value($config_settings_table,$setpoint_temperature_key)), 1, '.', '');
     
     $cooling_hysteresis = get_table_value($config_settings_table ,$cooling_hysteresis_key);
     $heating_hysteresis = get_table_value($config_settings_table ,$heating_hysteresis_key);
     
-    $sensor_humidity = round(get_table_value($current_values_table,$sensor_humidity_key), 0);   
+    $current_hum = get_table_value($current_values_table,$sensor_humidity_key);
+    if ($current_hum === null) {
+        $sensor_humidity = '-----';
+    }
+    else {
+        $sensor_humidity = round($current_hum, 0);
+    }
+    
     $setpoint_humidity = round(get_table_value($config_settings_table,$setpoint_humidity_key), 0);
     $humidifier_hysteresis = intval(get_table_value($config_settings_table,$humidifier_hysteresis_key));
     $dehumidifier_hysteresis = intval(get_table_value($config_settings_table,$dehumidifier_hysteresis_key));
