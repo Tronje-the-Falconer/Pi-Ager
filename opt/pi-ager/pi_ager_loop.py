@@ -859,7 +859,60 @@ def check_internal_temperature_limits(temp_avg):
             internal_temperature_high_limit_reached = False            
             cl_fact_logger.get_instance().debug('Internal temperature ' + str(temp_avg) + '°C lower than ' + str(internal_temperature_high_limit - internal_temperature_hysteresis) + '°C. (high limit - hysteresis)')
 
+#--------------------------------------------------------------------------------------------
+# generate blocking signal for humidifier depending on cooler_state and dry-aging mode
+# blocks humidifier during cooler active and some additional time (delay_humidify),
+# when cooler is turned off.
+# return False if not blocking humidifier, else return True
+#--------------------------------------------------------------------------------------------
+humidifier_block_timer_running = False
+humidifier_block_starttime = 0
+last_cooler_state = False
 
+def generate_humidifier_block(mode):
+    global humidifier_block_timer_running
+    global humidifier_block_starttime
+    global last_cooler_state
+    
+    current_cooler_state = not gpio.input(pi_ager_gpio_config.gpio_cooling_compressor) # if false, compressor is on
+    if (mode == 0):     # humidifier disabled, track cooler state and do nothing else
+        humidifier_block_timer_running = False
+        last_cooler_state = current_cooler_state
+        return False
+    
+    block_time = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key))        # minutes
+    
+    if (current_cooler_state == True):      # block humidifier
+        last_cooler_state = current_cooler_state
+        humidifier_block_timer_running = False
+        return True
+        
+    elif (current_cooler_state == False and last_cooler_state == True):   # cooler state changed, cooler turned off, start now timer
+        if (block_time == 0):
+            humidifier_block_timer_running = False
+            last_cooler_state = current_cooler_state
+            return False     # unblock humidifier
+        else:    
+            humidifier_block_starttime = pi_ager_database.get_current_time()     
+            humidifier_block_timer_running = True
+            last_cooler_state = current_cooler_state
+            return True     # block humidifier
+            
+    elif (current_cooler_state == False and last_cooler_state == False):   # cooler state not changed, check if timer running
+        if (humidifier_block_timer_running == True):
+            if (pi_ager_database.get_current_time() >= humidifier_block_starttime + block_time * 60):    # convert minutes to seconds, wait for delay reached
+                humidifier_block_timer_running = False
+                last_cooler_state = current_cooler_state
+                return False        # unblock
+            else:
+                last_cooler_state = current_cooler_state
+                return True                                 # block is still active
+        else:
+            last_cooler_state = current_cooler_state
+            return False                                    # unblock, timer not running
+
+#-------------------------------------------------------------------------------------------        
+        
 def generate_humidifier_failed_event(event_msg):
     # generate event
     try:
@@ -1087,28 +1140,18 @@ def simple_humidity_control():
     global humidifier_hysteresis
     global humidifier_hysteresis_offset
     global sensor_humidity
-    global humidify_delay_switch
-    global delay_humidify
-    global humidify_delay_starttime
     global saturation_point
     global status_humidifier
     
     humidity_low = eval_switch_on_humidity( setpoint_humidity, humidifier_hysteresis, humidifier_hysteresis_offset ) 
     if sensor_humidity <= humidity_low:
-        # check if delay time passed
-        if not humidify_delay_switch:
-            humidify_delay_switch = True
-            humidify_delay_starttime = pi_ager_database.get_current_time()
-        if pi_ager_database.get_current_time() >= humidify_delay_starttime + delay_humidify:      # Verzoegerung der Luftbefeuchtung
-            status_humidifier = True
-            # gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_on)  # Luftbefeuchter ein
+        status_humidifier = True
             
     humidity_high = eval_switch_off_humidity( setpoint_humidity, humidifier_hysteresis, humidifier_hysteresis_offset, saturation_point )
     if sensor_humidity >= humidity_high:
         status_humidifier = False
-        # gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)     # Luftbefeuchter aus
-        humidify_delay_switch = False
-    # cl_fact_logger.get_instance().info("simple_humidity_control : status_humidifier = " + str(status_humidifier) + ". humidify_delay_switch = " + str(humidify_delay_switch))
+
+    # cl_fact_logger.get_instance().info("simple_humidity_control : status_humidifier = " + str(status_humidifier) + ".")
     
 def calc_humidity_abs(temperature, humidity):
     """
@@ -1178,9 +1221,7 @@ def doMainLoop():
     global status_cooling_compressor      #  Kuehlung
     global status_humidifier              #  Luftbefeuchtung
     global status_dehumidifier            #  Entfeuchter
-    #global counter_humidify               #  Zaehler Verzoegerung der Luftbefeuchtung
-    #counter_humidify = 0
-    global delay_humidify                 #  Luftbefeuchtungsverzoegerung
+
     global status_exhaust_fan             #  Variable fuer die "Evakuierung" zur Feuchtereduzierung durch (Abluft-)Luftaustausch
     
     global uv_modus                       #  Modus UV-Licht  (1 = Periode/Dauer; 2= Zeitstempel/Dauer)
@@ -1237,12 +1278,14 @@ def doMainLoop():
     global cooler_state_fifo_maxlen
     global last_ac_current
     
-    global humidify_delay_switch
     global setpoint_humidity
-    global humidify_delay_starttime
     
     global humidifier_monitoring_delay_timer_running
     global humidifier_monitoring_delay_starttime
+    
+    global humidifier_block_timer_running
+    global humidifier_block_starttime
+    global last_cooler_state
     
     #-------------------------------------------
     
@@ -1250,15 +1293,13 @@ def doMainLoop():
 
     pi_ager_database.write_start_in_database(pi_ager_names.status_pi_ager_key)
     status_pi_ager = 1
-    count_continuing_emergency_loops = 0
-    humidify_delay_switch = False
     status_exhaust_fan = False          # status set bei mode 4
     status_exhaust_air = False          # relais status --> this is later calculated by status_fan and status_timer and check_int_ext_dewpoint
     status_exhaust_air_timer = False    # status set by timer
     status_humidifier = False           #  Luftbefeuchtung
     status_dehumidifier = False         #  Entfeuchter 
     last_humidity_check_state = False
-    humidify_delay_starttime = 0
+
     pi_ager_database.write_current_value(pi_ager_names.status_humidity_check_key, 0)
     
     cooler_delay_starttime = 0
@@ -1266,6 +1307,10 @@ def doMainLoop():
     
     humidifier_monitoring_delay_timer_running = False
     humidifier_monitoring_delay_starttime = 0
+    
+    humidifier_block_timer_running = False
+    humidifier_block_starttime = 0
+    last_cooler_state = False
     
     #Here get instance of Deviation class
     cl_fact_logger.get_instance().debug('in doMainLoop()')
@@ -1435,10 +1480,7 @@ def doMainLoop():
                 humidifier_hysteresis_offset = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.humidifier_hysteresis_offset_key)
                 dehumidifier_hysteresis_offset = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.dehumidifier_hysteresis_offset_key)
                 saturation_point = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.saturation_point_key)
-                
-                delay_humidify = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key))
-                delay_humidify = delay_humidify * 60
-                
+               
                 uv_modus_temp = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.uv_modus_key))
                 switch_on_uv_hour_temp = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_hour_key))
                 switch_on_uv_minute_temp = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.switch_on_uv_minute_key))
@@ -1739,7 +1781,6 @@ def doMainLoop():
                     status_exhaust_fan = False         # Feuchtereduzierung Abluft aus
                     status_dehumidifier = False        # Entfeuchter aus
                     status_humidifier = False           # Befeuchter aus
-                    humidify_delay_switch = False
                     control_heater(pi_ager_names.relay_off)
                     # gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)                 # Befeuchtung aus
                     
@@ -1816,6 +1857,11 @@ def doMainLoop():
                            status_dehumidifier = False        # Entfeuchter aus
                         # cl_fact_logger.get_instance().info("Mode 4: sensor_humidity = " +  f'{sensor_humidity:.1f}' + ' %' + ". humidity_low = " + f'{humidity_low:.1f}')
                     # cl_fact_logger.get_instance().info("Mode 4: status_dehumidifier = " + str(status_dehumidifier) + ". status_humidifier = " + str(status_humidifier))
+                
+                block_humidifier = generate_humidifier_block( modus )           # evaluate if humidifier must be blocked every measure cycle
+                if (status_humidifier == True and block_humidifier == True):    # block humudifier 
+                    status_humidifier = False
+                    # cl_fact_logger.get_instance().debug("Humidifier blocked by cooler active and during additional delay time.")
                     
                 # Schalten des Entfeuchters und Befeuchters
                 if (status_humidifier == False and status_dehumidifier == False) :
@@ -1929,7 +1975,7 @@ def doMainLoop():
                 else:
                     logstring = logstring + ' \n ' +  _('weight scale') + ' 2: ' + str(round(scale2_data)) + ' g'
                 
-                (log_changed, log, log_html) = status_value_has_changed()
+                (log_changed, log, log_html) = status_value_has_changed()       # check if relais outputs have changed
                 
                 log_html = logstring + ' \n ' + log_html + '\n' + pi_ager_names.logspacer2 + '\n'
                 log_event = logstring + ' \n ' + log + '\n' + pi_ager_names.logspacer2 + '\n'

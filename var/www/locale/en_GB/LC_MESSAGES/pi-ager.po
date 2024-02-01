@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-GB\n"
-"POT-Creation-Date: 2024-01-23 12:24+0100\n"
-"PO-Revision-Date: 2024-01-23 12:28+0100\n"
+"POT-Creation-Date: 2024-01-31 21:11+0100\n"
+"PO-Revision-Date: 2024-01-31 21:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -44,8 +44,8 @@ msgid "operation mode"
 msgstr ""
 
 #: opt/pi-ager/pi_ager_cl_agingtable.py:146 var/www/manvals.php:24
-#: var/www/modules/querystatus.php:123 var/www/modules/querystatus.php:127
 #: var/www/modules/querystatus.php:135 var/www/modules/querystatus.php:139
+#: var/www/modules/querystatus.php:147 var/www/modules/querystatus.php:151
 #: var/www/modules/read_all_index.php:136
 #: var/www/modules/read_all_index.php:139
 #: var/www/modules/read_all_index.php:145
@@ -54,7 +54,7 @@ msgstr ""
 #: var/www/modules/read_settings_db.php:21
 #: var/www/modules/read_settings_db.php:35
 #: var/www/modules/read_settings_db.php:42
-#: var/www/modules/write_config_db_logfile_txt.php:101
+#: var/www/modules/write_config_db_logfile_txt.php:111
 #: var/www/modules/write_settings_db_logfile_txt.php:109
 msgid "cooling"
 msgstr ""
@@ -80,9 +80,9 @@ msgid "operation mode wrong or set incorrectly"
 msgstr ""
 
 #: opt/pi-ager/pi_ager_cl_agingtable.py:163 var/www/manvals.php:52
-#: var/www/modules/write_config_db_logfile_txt.php:172
-#: var/www/modules/write_config_db_logfile_txt.php:177
 #: var/www/modules/write_config_db_logfile_txt.php:182
+#: var/www/modules/write_config_db_logfile_txt.php:187
+#: var/www/modules/write_config_db_logfile_txt.php:192
 #: var/www/modules/write_settings_db_logfile_txt.php:199
 #: var/www/modules/write_settings_db_logfile_txt.php:205
 msgid "setpoint temperature"
@@ -106,8 +106,8 @@ msgid "seconds"
 msgstr ""
 
 #: opt/pi-ager/pi_ager_cl_agingtable.py:171 var/www/manvals.php:75
-#: var/www/modules/write_config_db_logfile_txt.php:188
 #: var/www/modules/write_config_db_logfile_txt.php:198
+#: var/www/modules/write_config_db_logfile_txt.php:208
 #: var/www/modules/write_settings_db_logfile_txt.php:213
 #: var/www/modules/write_settings_db_logfile_txt.php:221
 msgid "setpoint humidity"
@@ -137,24 +137,24 @@ msgstr ""
 #: var/www/index.php:1346 var/www/index.php:1374 var/www/index.php:1375
 #: var/www/index.php:1406 var/www/index.php:1407 var/www/manvals.php:99
 #: var/www/manvals.php:103 var/www/manvals.php:125 var/www/manvals.php:128
-#: var/www/modules/funclib.php:31 var/www/modules/querystatus.php:311
-#: var/www/modules/querystatus.php:312 var/www/modules/querystatus.php:335
-#: var/www/modules/querystatus.php:336 var/www/modules/querystatus.php:366
-#: var/www/modules/querystatus.php:367 var/www/modules/querystatus.php:398
-#: var/www/modules/querystatus.php:399
-#: var/www/modules/write_config_db_logfile_txt.php:137
-#: var/www/modules/write_config_db_logfile_txt.php:138
-#: var/www/modules/write_config_db_logfile_txt.php:143
+#: var/www/modules/funclib.php:31 var/www/modules/querystatus.php:323
+#: var/www/modules/querystatus.php:324 var/www/modules/querystatus.php:347
+#: var/www/modules/querystatus.php:348 var/www/modules/querystatus.php:378
+#: var/www/modules/querystatus.php:379 var/www/modules/querystatus.php:410
+#: var/www/modules/querystatus.php:411
+#: var/www/modules/write_config_db_logfile_txt.php:147
+#: var/www/modules/write_config_db_logfile_txt.php:148
 #: var/www/modules/write_config_db_logfile_txt.php:153
-#: var/www/modules/write_config_db_logfile_txt.php:154
-#: var/www/modules/write_config_db_logfile_txt.php:159
-#: var/www/modules/write_config_db_logfile_txt.php:194
-#: var/www/modules/write_config_db_logfile_txt.php:208
-#: var/www/modules/write_config_db_logfile_txt.php:211
-#: var/www/modules/write_config_db_logfile_txt.php:212
-#: var/www/modules/write_config_db_logfile_txt.php:213
-#: var/www/modules/write_config_db_logfile_txt.php:214
-#: var/www/modules/write_config_db_logfile_txt.php:230
+#: var/www/modules/write_config_db_logfile_txt.php:163
+#: var/www/modules/write_config_db_logfile_txt.php:164
+#: var/www/modules/write_config_db_logfile_txt.php:169
+#: var/www/modules/write_config_db_logfile_txt.php:204
+#: var/www/modules/write_config_db_logfile_txt.php:218
+#: var/www/modules/write_config_db_logfile_txt.php:221
+#: var/www/modules/write_config_db_logfile_txt.php:222
+#: var/www/modules/write_config_db_logfile_txt.php:223
+#: var/www/modules/write_config_db_logfile_txt.php:224
+#: var/www/modules/write_config_db_logfile_txt.php:240
 #: var/www/modules/write_settings_db_logfile_txt.php:217
 #: var/www/modules/write_settings_db_logfile_txt.php:227
 #: var/www/modules/write_settings_db_logfile_txt.php:230
@@ -358,8 +358,8 @@ msgstr ""
 #: opt/pi-ager/pi_ager_loop.py:456 opt/pi-ager/pi_ager_loop.py:457
 #: opt/pi-ager/pi_ager_loop.py:459 opt/pi-ager/pi_ager_loop.py:460
 #: var/www/diagrams.php:1238 var/www/diagrams.php:1259 var/www/index.php:1206
-#: var/www/index.php:1226 var/www/modules/querystatus.php:196
-#: var/www/modules/querystatus.php:213
+#: var/www/index.php:1226 var/www/modules/querystatus.php:208
+#: var/www/modules/querystatus.php:225
 msgid "heater"
 msgstr ""
 
@@ -379,7 +379,7 @@ msgstr ""
 #: opt/pi-ager/pi_ager_loop.py:572 opt/pi-ager/pi_ager_loop.py:573
 #: opt/pi-ager/pi_ager_loop.py:588 opt/pi-ager/pi_ager_loop.py:589
 #: opt/pi-ager/pi_ager_loop.py:591 opt/pi-ager/pi_ager_loop.py:592
-#: opt/pi-ager/pi_ager_loop.py:1589 opt/pi-ager/pi_ager_loop.py:1657
+#: opt/pi-ager/pi_ager_loop.py:1631 opt/pi-ager/pi_ager_loop.py:1699
 #: var/www/diagrams.php:1078 var/www/diagrams.php:1103
 #: var/www/diagrams.php:1189 var/www/diagrams.php:1214
 #: var/www/diagrams.php:1300 var/www/diagrams.php:1325
@@ -388,11 +388,11 @@ msgstr ""
 #: var/www/diagrams.php:1633 var/www/diagrams.php:1658
 #: var/www/diagrams.php:1744 var/www/diagrams.php:1769
 #: var/www/diagrams.php:1855 var/www/diagrams.php:1880 var/www/index.php:1167
-#: var/www/index.php:1295 var/www/modules/querystatus.php:269
-#: var/www/modules/write_config_db_logfile_txt.php:209
-#: var/www/modules/write_config_db_logfile_txt.php:221
-#: var/www/modules/write_config_db_logfile_txt.php:232
-#: var/www/modules/write_config_db_logfile_txt.php:233
+#: var/www/index.php:1295 var/www/modules/querystatus.php:281
+#: var/www/modules/write_config_db_logfile_txt.php:219
+#: var/www/modules/write_config_db_logfile_txt.php:231
+#: var/www/modules/write_config_db_logfile_txt.php:242
+#: var/www/modules/write_config_db_logfile_txt.php:243
 msgid "on"
 msgstr ""
 
@@ -412,7 +412,7 @@ msgstr ""
 #: opt/pi-ager/pi_ager_loop.py:581 opt/pi-ager/pi_ager_loop.py:582
 #: opt/pi-ager/pi_ager_loop.py:597 opt/pi-ager/pi_ager_loop.py:598
 #: opt/pi-ager/pi_ager_loop.py:600 opt/pi-ager/pi_ager_loop.py:601
-#: opt/pi-ager/pi_ager_loop.py:1585 opt/pi-ager/pi_ager_loop.py:1653
+#: opt/pi-ager/pi_ager_loop.py:1627 opt/pi-ager/pi_ager_loop.py:1695
 #: var/www/diagrams.php:1080 var/www/diagrams.php:1082
 #: var/www/diagrams.php:1105 var/www/diagrams.php:1107
 #: var/www/diagrams.php:1191 var/www/diagrams.php:1193
@@ -430,13 +430,13 @@ msgstr ""
 #: var/www/diagrams.php:1857 var/www/diagrams.php:1859
 #: var/www/diagrams.php:1882 var/www/diagrams.php:1884 var/www/index.php:1020
 #: var/www/index.php:1168 var/www/index.php:1298
-#: var/www/modules/querystatus.php:146 var/www/modules/querystatus.php:272
-#: var/www/modules/write_config_db_logfile_txt.php:131
-#: var/www/modules/write_config_db_logfile_txt.php:147
-#: var/www/modules/write_config_db_logfile_txt.php:209
-#: var/www/modules/write_config_db_logfile_txt.php:221
-#: var/www/modules/write_config_db_logfile_txt.php:232
-#: var/www/modules/write_config_db_logfile_txt.php:233
+#: var/www/modules/querystatus.php:158 var/www/modules/querystatus.php:284
+#: var/www/modules/write_config_db_logfile_txt.php:141
+#: var/www/modules/write_config_db_logfile_txt.php:157
+#: var/www/modules/write_config_db_logfile_txt.php:219
+#: var/www/modules/write_config_db_logfile_txt.php:231
+#: var/www/modules/write_config_db_logfile_txt.php:242
+#: var/www/modules/write_config_db_logfile_txt.php:243
 msgid "off"
 msgstr ""
 
@@ -483,7 +483,7 @@ msgstr ""
 #: opt/pi-ager/pi_ager_loop.py:578 opt/pi-ager/pi_ager_loop.py:579
 #: opt/pi-ager/pi_ager_loop.py:581 opt/pi-ager/pi_ager_loop.py:582
 #: var/www/config.php:199 var/www/diagrams.php:1016 var/www/diagrams.php:1037
-#: var/www/index.php:1393 var/www/modules/querystatus.php:387
+#: var/www/index.php:1393 var/www/modules/querystatus.php:399
 msgid "light"
 msgstr ""
 
@@ -492,7 +492,7 @@ msgstr ""
 #: opt/pi-ager/pi_ager_loop.py:597 opt/pi-ager/pi_ager_loop.py:598
 #: opt/pi-ager/pi_ager_loop.py:600 opt/pi-ager/pi_ager_loop.py:601
 #: var/www/diagrams.php:1127 var/www/diagrams.php:1148 var/www/index.php:1362
-#: var/www/modules/querystatus.php:355
+#: var/www/modules/querystatus.php:367
 msgid "uv-light"
 msgstr ""
 
@@ -524,152 +524,152 @@ msgstr ""
 msgid "Switch is open"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1514
+#: opt/pi-ager/pi_ager_loop.py:1556
 msgid "selected internal sensor"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1516
+#: opt/pi-ager/pi_ager_loop.py:1558
 msgid "target temperature"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1518 opt/pi-ager/pi_ager_loop.py:1530
+#: opt/pi-ager/pi_ager_loop.py:1560 opt/pi-ager/pi_ager_loop.py:1572
 msgid "actual temperature"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1521
+#: opt/pi-ager/pi_ager_loop.py:1563
 msgid "target humidity"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1522 opt/pi-ager/pi_ager_loop.py:1531
+#: opt/pi-ager/pi_ager_loop.py:1564 opt/pi-ager/pi_ager_loop.py:1573
 msgid "actual humidity"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1524 opt/pi-ager/pi_ager_loop.py:1532
+#: opt/pi-ager/pi_ager_loop.py:1566 opt/pi-ager/pi_ager_loop.py:1574
 msgid "actual dewpoint"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1525 opt/pi-ager/pi_ager_loop.py:1533
+#: opt/pi-ager/pi_ager_loop.py:1567 opt/pi-ager/pi_ager_loop.py:1575
 msgid "actual humidity abs"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1529
+#: opt/pi-ager/pi_ager_loop.py:1571
 msgid "selected external sensor"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1541 opt/pi-ager/pi_ager_loop.py:1544
-#: opt/pi-ager/pi_ager_loop.py:1547
+#: opt/pi-ager/pi_ager_loop.py:1583 opt/pi-ager/pi_ager_loop.py:1586
+#: opt/pi-ager/pi_ager_loop.py:1589
 msgid "circulation air timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1541 opt/pi-ager/pi_ager_loop.py:1547
-#: opt/pi-ager/pi_ager_loop.py:1563 opt/pi-ager/pi_ager_loop.py:1569
+#: opt/pi-ager/pi_ager_loop.py:1583 opt/pi-ager/pi_ager_loop.py:1589
+#: opt/pi-ager/pi_ager_loop.py:1605 opt/pi-ager/pi_ager_loop.py:1611
 msgid "fan permanent off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1544 opt/pi-ager/pi_ager_loop.py:1566
+#: opt/pi-ager/pi_ager_loop.py:1586 opt/pi-ager/pi_ager_loop.py:1608
 msgid "fan permanent on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1551 opt/pi-ager/pi_ager_loop.py:1555
+#: opt/pi-ager/pi_ager_loop.py:1593 opt/pi-ager/pi_ager_loop.py:1597
 msgid "circulation air timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1551 opt/pi-ager/pi_ager_loop.py:1573
+#: opt/pi-ager/pi_ager_loop.py:1593 opt/pi-ager/pi_ager_loop.py:1615
 msgid "fan on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1555 opt/pi-ager/pi_ager_loop.py:1577
+#: opt/pi-ager/pi_ager_loop.py:1597 opt/pi-ager/pi_ager_loop.py:1619
 msgid "fan off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1563 opt/pi-ager/pi_ager_loop.py:1566
-#: opt/pi-ager/pi_ager_loop.py:1569
+#: opt/pi-ager/pi_ager_loop.py:1605 opt/pi-ager/pi_ager_loop.py:1608
+#: opt/pi-ager/pi_ager_loop.py:1611
 msgid "exhaust air timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1573 opt/pi-ager/pi_ager_loop.py:1577
+#: opt/pi-ager/pi_ager_loop.py:1615 opt/pi-ager/pi_ager_loop.py:1619
 msgid "exhaust air timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1585 opt/pi-ager/pi_ager_loop.py:1589
+#: opt/pi-ager/pi_ager_loop.py:1627 opt/pi-ager/pi_ager_loop.py:1631
 msgid "modus uv-light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1592 opt/pi-ager/pi_ager_loop.py:1595
-#: opt/pi-ager/pi_ager_loop.py:1598
+#: opt/pi-ager/pi_ager_loop.py:1634 opt/pi-ager/pi_ager_loop.py:1637
+#: opt/pi-ager/pi_ager_loop.py:1640
 msgid "uv-light timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1592 opt/pi-ager/pi_ager_loop.py:1595
-#: opt/pi-ager/pi_ager_loop.py:1625
+#: opt/pi-ager/pi_ager_loop.py:1634 opt/pi-ager/pi_ager_loop.py:1637
+#: opt/pi-ager/pi_ager_loop.py:1667
 msgid "uv-light permanent off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1598
+#: opt/pi-ager/pi_ager_loop.py:1640
 msgid "uv-light permanent on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1605 opt/pi-ager/pi_ager_loop.py:1612
+#: opt/pi-ager/pi_ager_loop.py:1647 opt/pi-ager/pi_ager_loop.py:1654
 msgid "uv-light timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1605 opt/pi-ager/pi_ager_loop.py:1639
+#: opt/pi-ager/pi_ager_loop.py:1647 opt/pi-ager/pi_ager_loop.py:1681
 msgid "uv-light on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1612 opt/pi-ager/pi_ager_loop.py:1643
+#: opt/pi-ager/pi_ager_loop.py:1654 opt/pi-ager/pi_ager_loop.py:1685
 msgid "uv-light off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1625
+#: opt/pi-ager/pi_ager_loop.py:1667
 msgid "uv-light timestamp inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1639 opt/pi-ager/pi_ager_loop.py:1643
+#: opt/pi-ager/pi_ager_loop.py:1681 opt/pi-ager/pi_ager_loop.py:1685
 msgid "uv-light timestamp active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1653 opt/pi-ager/pi_ager_loop.py:1657
+#: opt/pi-ager/pi_ager_loop.py:1695 opt/pi-ager/pi_ager_loop.py:1699
 msgid "modus light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1660 opt/pi-ager/pi_ager_loop.py:1664
-#: opt/pi-ager/pi_ager_loop.py:1668
+#: opt/pi-ager/pi_ager_loop.py:1702 opt/pi-ager/pi_ager_loop.py:1706
+#: opt/pi-ager/pi_ager_loop.py:1710
 msgid "light timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1660 opt/pi-ager/pi_ager_loop.py:1664
-#: opt/pi-ager/pi_ager_loop.py:1698
+#: opt/pi-ager/pi_ager_loop.py:1702 opt/pi-ager/pi_ager_loop.py:1706
+#: opt/pi-ager/pi_ager_loop.py:1740
 msgid "light permanent off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1668
+#: opt/pi-ager/pi_ager_loop.py:1710
 msgid "light permanent on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1676 opt/pi-ager/pi_ager_loop.py:1683
+#: opt/pi-ager/pi_ager_loop.py:1718 opt/pi-ager/pi_ager_loop.py:1725
 msgid "light timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1676 opt/pi-ager/pi_ager_loop.py:1712
+#: opt/pi-ager/pi_ager_loop.py:1718 opt/pi-ager/pi_ager_loop.py:1754
 #: var/www/webcam.php:53
 msgid "light on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1683 opt/pi-ager/pi_ager_loop.py:1716
+#: opt/pi-ager/pi_ager_loop.py:1725 opt/pi-ager/pi_ager_loop.py:1758
 msgid "light off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1698
+#: opt/pi-ager/pi_ager_loop.py:1740
 msgid "light timestamp inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1712 opt/pi-ager/pi_ager_loop.py:1716
+#: opt/pi-ager/pi_ager_loop.py:1754 opt/pi-ager/pi_ager_loop.py:1758
 msgid "light timestamp active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1923 opt/pi-ager/pi_ager_loop.py:1925
-#: opt/pi-ager/pi_ager_loop.py:1928 opt/pi-ager/pi_ager_loop.py:1930
+#: opt/pi-ager/pi_ager_loop.py:1969 opt/pi-ager/pi_ager_loop.py:1971
+#: opt/pi-ager/pi_ager_loop.py:1974 opt/pi-ager/pi_ager_loop.py:1976
 msgid "weight scale"
 msgstr ""
 
@@ -1619,13 +1619,13 @@ msgstr ""
 msgid "temperature control"
 msgstr ""
 
-#: var/www/config.php:17 var/www/modules/write_config_db_logfile_txt.php:173
-#: var/www/modules/write_config_db_logfile_txt.php:178
-#: var/www/modules/write_config_db_logfile_txt.php:183
+#: var/www/config.php:17 var/www/modules/write_config_db_logfile_txt.php:183
+#: var/www/modules/write_config_db_logfile_txt.php:188
+#: var/www/modules/write_config_db_logfile_txt.php:193
 msgid "primary control hysteresis"
 msgstr ""
 
-#: var/www/config.php:22 var/www/modules/write_config_db_logfile_txt.php:184
+#: var/www/config.php:22 var/www/modules/write_config_db_logfile_txt.php:194
 msgid "secondary control hysteresis"
 msgstr ""
 
@@ -1702,8 +1702,8 @@ msgstr ""
 msgid "dehumidifier hysteresis offset"
 msgstr ""
 
-#: var/www/config.php:65 var/www/modules/write_config_db_logfile_txt.php:191
-#: var/www/modules/write_config_db_logfile_txt.php:203
+#: var/www/config.php:65 var/www/modules/write_config_db_logfile_txt.php:201
+#: var/www/modules/write_config_db_logfile_txt.php:213
 #: var/www/modules/write_settings_db_logfile_txt.php:214
 #: var/www/modules/write_settings_db_logfile_txt.php:222
 msgid "saturation point"
@@ -1734,10 +1734,12 @@ msgstr ""
 "dehumidifiers. This allows the control deviation of the humidity setpoint to "
 "the mean value to be minimized.\n"
 "<br><br>\n"
-"<b>Delay: </b>The delay time is set here, which waits until the humidifier "
-"switches on when the humidity is too low. This can be used to avoid "
-"switching on the humidifier too early if the humidity drops quickly (caused "
-"by cooling), otherwise too much water can be introduced into the system.\n"
+"<b>Delay: </b>Humidification is blocked as long as the compressor is active. "
+"If the compressor is deactivated, a timer starts with the set delay time. "
+"After this time, the blocking of the humidification is removed. This feature "
+"can be used to avoid switching on the humidifier too early in the event of a "
+"rapidly falling humidity caused by cooling, otherwise too much water may be "
+"introduced into the system.\n"
 "<br><br>\n"
 "<b>Example humidification: </b><i> Setpoint humidity: 75% ; Hysteresis "
 "humidification: 3% ; Humidifier hysteresis offset: -2.5%</i>\n"
@@ -1755,28 +1757,28 @@ msgstr ""
 "dehumidification could always be switched on and off alternately.\n"
 "<br><br>"
 
-#: var/www/config.php:110 var/www/modules/querystatus.php:139
+#: var/www/config.php:110 var/www/modules/querystatus.php:151
 #: var/www/modules/read_all_index.php:148
 #: var/www/modules/read_settings_db.php:42
 msgid "dehumidify"
 msgstr ""
 
-#: var/www/config.php:113 var/www/modules/write_config_db_logfile_txt.php:121
+#: var/www/config.php:113 var/www/modules/write_config_db_logfile_txt.php:131
 #: var/www/modules/write_settings_db_logfile_txt.php:131
 msgid "only exhaust"
 msgstr ""
 
-#: var/www/config.php:114 var/www/modules/write_config_db_logfile_txt.php:124
+#: var/www/config.php:114 var/www/modules/write_config_db_logfile_txt.php:134
 #: var/www/modules/write_settings_db_logfile_txt.php:134
 msgid "exhaust & dehumidifier"
 msgstr ""
 
-#: var/www/config.php:115 var/www/modules/write_config_db_logfile_txt.php:127
+#: var/www/config.php:115 var/www/modules/write_config_db_logfile_txt.php:137
 #: var/www/modules/write_settings_db_logfile_txt.php:137
 msgid "only dehumidifier"
 msgstr ""
 
-#: var/www/config.php:121 var/www/modules/write_config_db_logfile_txt.php:209
+#: var/www/config.php:121 var/www/modules/write_config_db_logfile_txt.php:219
 msgid "abs. humidity check aktive"
 msgstr ""
 
@@ -1847,7 +1849,7 @@ msgstr ""
 msgid "set/reset uptime"
 msgstr ""
 
-#: var/www/config.php:178 var/www/modules/write_config_db_logfile_txt.php:221
+#: var/www/config.php:178 var/www/modules/write_config_db_logfile_txt.php:231
 msgid "activate circulating air"
 msgstr ""
 
@@ -1914,15 +1916,15 @@ msgstr ""
 msgid "internal temperature limits"
 msgstr ""
 
-#: var/www/config.php:239 var/www/modules/write_config_db_logfile_txt.php:227
+#: var/www/config.php:239 var/www/modules/write_config_db_logfile_txt.php:237
 msgid "low temperature limit"
 msgstr ""
 
-#: var/www/config.php:243 var/www/modules/write_config_db_logfile_txt.php:228
+#: var/www/config.php:243 var/www/modules/write_config_db_logfile_txt.php:238
 msgid "high temperature limit"
 msgstr ""
 
-#: var/www/config.php:247 var/www/modules/write_config_db_logfile_txt.php:229
+#: var/www/config.php:247 var/www/modules/write_config_db_logfile_txt.php:239
 msgid "hysteresis"
 msgstr ""
 
@@ -1950,7 +1952,7 @@ msgstr ""
 msgid "monitoring delay"
 msgstr ""
 
-#: var/www/config.php:274 var/www/modules/write_config_db_logfile_txt.php:231
+#: var/www/config.php:274 var/www/modules/write_config_db_logfile_txt.php:241
 msgid "monitoring tolerance"
 msgstr ""
 
@@ -1986,7 +1988,7 @@ msgstr ""
 msgid "UPS battery"
 msgstr ""
 
-#: var/www/config.php:312 var/www/modules/write_config_db_logfile_txt.php:233
+#: var/www/config.php:312 var/www/modules/write_config_db_logfile_txt.php:243
 msgid "shutdown on battery low"
 msgstr ""
 
@@ -2001,7 +2003,7 @@ msgstr ""
 "discharge and damage of the accu\n"
 "<br><br>"
 
-#: var/www/config.php:336 var/www/modules/write_config_db_logfile_txt.php:248
+#: var/www/config.php:336 var/www/modules/write_config_db_logfile_txt.php:258
 #: var/www/settings.php:496
 msgid "general configuration"
 msgstr ""
@@ -2114,8 +2116,8 @@ msgid " "
 msgstr ""
 
 #: var/www/diagrams.php:1349 var/www/diagrams.php:1370 var/www/index.php:1194
-#: var/www/index.php:1217 var/www/modules/querystatus.php:187
-#: var/www/modules/querystatus.php:205
+#: var/www/index.php:1217 var/www/modules/querystatus.php:199
+#: var/www/modules/querystatus.php:217
 msgid "cooler"
 msgstr ""
 
@@ -2297,8 +2299,8 @@ msgstr ""
 #: var/www/modules/queryat.php:36 var/www/modules/write_table_db.php:10
 #: var/www/modules/write_table_db.php:63 var/www/modules/write_table_db.php:72
 #: var/www/modules/write_table_db.php:75 var/www/modules/write_table_db.php:78
-#: var/www/modules/write_table_db.php:240
-#: var/www/modules/write_table_db.php:263 var/www/settings.php:181
+#: var/www/modules/write_table_db.php:241
+#: var/www/modules/write_table_db.php:264 var/www/settings.php:181
 msgid "agingtable"
 msgstr ""
 
@@ -2324,46 +2326,46 @@ msgid "general"
 msgstr ""
 
 #: var/www/index.php:992 var/www/manvals.php:22
-#: var/www/modules/write_config_db_logfile_txt.php:169
+#: var/www/modules/write_config_db_logfile_txt.php:179
 #: var/www/modules/write_settings_db_logfile_txt.php:196
 msgid "operating mode"
 msgstr ""
 
-#: var/www/index.php:1001 var/www/modules/querystatus.php:83
+#: var/www/index.php:1001 var/www/modules/querystatus.php:95
 msgid "power supply ok"
 msgstr ""
 
-#: var/www/index.php:1007 var/www/modules/querystatus.php:88
+#: var/www/index.php:1007 var/www/modules/querystatus.php:100
 msgid "no power supply! batterymode"
 msgstr ""
 
 #: var/www/index.php:1017 var/www/index.php:1430 var/www/index.php:1459
-#: var/www/modules/querystatus.php:143 var/www/modules/querystatus.php:405
-#: var/www/modules/querystatus.php:421
+#: var/www/modules/querystatus.php:155 var/www/modules/querystatus.php:417
+#: var/www/modules/querystatus.php:433
 msgid "see settings"
 msgstr ""
 
-#: var/www/index.php:1033 var/www/modules/querystatus.php:94
+#: var/www/index.php:1033 var/www/modules/querystatus.php:106
 msgid "battery voltage ok"
 msgstr ""
 
-#: var/www/index.php:1039 var/www/modules/querystatus.php:99
+#: var/www/index.php:1039 var/www/modules/querystatus.php:111
 msgid "battery voltage low !!"
 msgstr ""
 
-#: var/www/index.php:1105 var/www/modules/querystatus.php:105
+#: var/www/index.php:1105 var/www/modules/querystatus.php:117
 msgid "Switch is on"
 msgstr ""
 
-#: var/www/index.php:1111 var/www/modules/querystatus.php:109
+#: var/www/index.php:1111 var/www/modules/querystatus.php:121
 msgid "Switch is off"
 msgstr ""
 
-#: var/www/index.php:1142 var/www/modules/querystatus.php:114
+#: var/www/index.php:1142 var/www/modules/querystatus.php:126
 msgid "Defrost in progress"
 msgstr ""
 
-#: var/www/index.php:1148 var/www/modules/querystatus.php:118
+#: var/www/index.php:1148 var/www/modules/querystatus.php:130
 msgid "Defrost currently off"
 msgstr ""
 
@@ -2384,19 +2386,19 @@ msgid "target"
 msgstr ""
 
 #: var/www/index.php:1240 var/www/index.php:1252
-#: var/www/modules/querystatus.php:223 var/www/modules/querystatus.php:232
+#: var/www/modules/querystatus.php:235 var/www/modules/querystatus.php:244
 msgid "humidification"
 msgstr ""
 
-#: var/www/index.php:1261 var/www/modules/querystatus.php:248
+#: var/www/index.php:1261 var/www/modules/querystatus.php:260
 msgid "dehumidification"
 msgstr ""
 
-#: var/www/index.php:1271 var/www/modules/querystatus.php:240
+#: var/www/index.php:1271 var/www/modules/querystatus.php:252
 msgid "exhausting"
 msgstr ""
 
-#: var/www/index.php:1292 var/www/modules/querystatus.php:267
+#: var/www/index.php:1292 var/www/modules/querystatus.php:279
 msgid "abs. humidity check"
 msgstr ""
 
@@ -2412,52 +2414,52 @@ msgstr ""
 msgid "ON DURATION"
 msgstr ""
 
-#: var/www/index.php:1324 var/www/modules/querystatus.php:139
-#: var/www/modules/querystatus.php:300 var/www/modules/read_all_index.php:148
+#: var/www/index.php:1324 var/www/modules/querystatus.php:151
+#: var/www/modules/querystatus.php:312 var/www/modules/read_all_index.php:148
 #: var/www/modules/read_settings_db.php:42
 msgid "circulating air"
 msgstr ""
 
 #: var/www/index.php:1325 var/www/index.php:1340 var/www/index.php:1365
-#: var/www/index.php:1396 var/www/modules/querystatus.php:302
-#: var/www/modules/querystatus.php:326 var/www/modules/querystatus.php:360
-#: var/www/modules/querystatus.php:392
+#: var/www/index.php:1396 var/www/modules/querystatus.php:314
+#: var/www/modules/querystatus.php:338 var/www/modules/querystatus.php:372
+#: var/www/modules/querystatus.php:404
 msgid "timer on"
 msgstr ""
 
 #: var/www/index.php:1326 var/www/index.php:1341
-#: var/www/modules/querystatus.php:305 var/www/modules/querystatus.php:329
+#: var/www/modules/querystatus.php:317 var/www/modules/querystatus.php:341
 msgid "always on"
 msgstr ""
 
 #: var/www/index.php:1327 var/www/index.php:1342 var/www/index.php:1364
-#: var/www/index.php:1395 var/www/modules/querystatus.php:308
-#: var/www/modules/querystatus.php:332 var/www/modules/querystatus.php:357
-#: var/www/modules/querystatus.php:389
+#: var/www/index.php:1395 var/www/modules/querystatus.php:320
+#: var/www/modules/querystatus.php:344 var/www/modules/querystatus.php:369
+#: var/www/modules/querystatus.php:401
 msgid "timer off"
 msgstr ""
 
-#: var/www/index.php:1339 var/www/modules/querystatus.php:139
-#: var/www/modules/querystatus.php:324 var/www/modules/read_all_index.php:148
+#: var/www/index.php:1339 var/www/modules/querystatus.php:151
+#: var/www/modules/querystatus.php:336 var/www/modules/read_all_index.php:148
 #: var/www/modules/read_settings_db.php:42
 msgid "exhausting air"
 msgstr ""
 
-#: var/www/index.php:1366 var/www/modules/querystatus.php:363
+#: var/www/index.php:1366 var/www/modules/querystatus.php:375
 msgid "manual switch off"
 msgstr ""
 
-#: var/www/index.php:1397 var/www/modules/querystatus.php:395
+#: var/www/index.php:1397 var/www/modules/querystatus.php:407
 msgid "manual switch on"
 msgstr ""
 
 #: var/www/index.php:1437 var/www/index.php:1444
-#: var/www/modules/querystatus.php:410 var/www/modules/querystatus.php:415
+#: var/www/modules/querystatus.php:422 var/www/modules/querystatus.php:427
 msgid "scale1"
 msgstr ""
 
 #: var/www/index.php:1466 var/www/index.php:1473
-#: var/www/modules/querystatus.php:426 var/www/modules/querystatus.php:431
+#: var/www/modules/querystatus.php:438 var/www/modules/querystatus.php:443
 msgid "scale2"
 msgstr ""
 
@@ -2535,12 +2537,12 @@ msgstr ""
 msgid "manual values"
 msgstr ""
 
-#: var/www/manvals.php:25 var/www/modules/write_config_db_logfile_txt.php:105
+#: var/www/manvals.php:25 var/www/modules/write_config_db_logfile_txt.php:115
 #: var/www/modules/write_settings_db_logfile_txt.php:113
 msgid "cooling with humidification"
 msgstr ""
 
-#: var/www/manvals.php:26 var/www/modules/write_config_db_logfile_txt.php:109
+#: var/www/manvals.php:26 var/www/modules/write_config_db_logfile_txt.php:119
 #: var/www/modules/write_settings_db_logfile_txt.php:117
 msgid "heating with humidification"
 msgstr ""
@@ -2817,13 +2819,13 @@ msgstr ""
 msgid "please select a zip file to upload"
 msgstr ""
 
-#: var/www/modules/queryat.php:36 var/www/modules/querystatus.php:286
+#: var/www/modules/queryat.php:36 var/www/modules/querystatus.php:298
 #: var/www/modules/read_all_index.php:55
 msgid "none"
 msgstr ""
 
-#: var/www/modules/querystatus.php:127 var/www/modules/querystatus.php:131
-#: var/www/modules/querystatus.php:135 var/www/modules/querystatus.php:139
+#: var/www/modules/querystatus.php:139 var/www/modules/querystatus.php:143
+#: var/www/modules/querystatus.php:147 var/www/modules/querystatus.php:151
 #: var/www/modules/read_all_index.php:139
 #: var/www/modules/read_all_index.php:142
 #: var/www/modules/read_all_index.php:145
@@ -2835,8 +2837,8 @@ msgstr ""
 msgid "humidify"
 msgstr ""
 
-#: var/www/modules/querystatus.php:131 var/www/modules/querystatus.php:135
-#: var/www/modules/querystatus.php:139 var/www/modules/read_all_index.php:142
+#: var/www/modules/querystatus.php:143 var/www/modules/querystatus.php:147
+#: var/www/modules/querystatus.php:151 var/www/modules/read_all_index.php:142
 #: var/www/modules/read_all_index.php:145
 #: var/www/modules/read_all_index.php:148
 #: var/www/modules/read_settings_db.php:28
@@ -2960,121 +2962,121 @@ msgstr ""
 msgid "unauthorized character - please use only integers!"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:112
+#: var/www/modules/write_config_db_logfile_txt.php:122
 #: var/www/modules/write_settings_db_logfile_txt.php:121
 msgid "automatic with humidification"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:116
+#: var/www/modules/write_config_db_logfile_txt.php:126
 #: var/www/modules/write_settings_db_logfile_txt.php:125
 msgid "automatic with dehumidification and humidification"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:136
+#: var/www/modules/write_config_db_logfile_txt.php:146
 msgid "UV ON/OFF duration"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:137
+#: var/www/modules/write_config_db_logfile_txt.php:147
 msgid "UV OFF duration"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:138
-#: var/www/modules/write_config_db_logfile_txt.php:143
+#: var/www/modules/write_config_db_logfile_txt.php:148
+#: var/www/modules/write_config_db_logfile_txt.php:153
 msgid "UV ON duration"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:141
+#: var/www/modules/write_config_db_logfile_txt.php:151
 msgid "UV ON duration & timestamp"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:142
+#: var/www/modules/write_config_db_logfile_txt.php:152
 msgid "UV timestamp"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:152
+#: var/www/modules/write_config_db_logfile_txt.php:162
 msgid "Light ON/OFF duration"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:153
+#: var/www/modules/write_config_db_logfile_txt.php:163
 msgid "Light OFF duration"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:154
-#: var/www/modules/write_config_db_logfile_txt.php:159
+#: var/www/modules/write_config_db_logfile_txt.php:164
+#: var/www/modules/write_config_db_logfile_txt.php:169
 msgid "Light ON duration"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:157
+#: var/www/modules/write_config_db_logfile_txt.php:167
 msgid "Light ON duration & timestamp"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:158
+#: var/www/modules/write_config_db_logfile_txt.php:168
 msgid "Light timestamp"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:168
+#: var/www/modules/write_config_db_logfile_txt.php:178
 msgid "configuration has been changed."
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:189
 #: var/www/modules/write_config_db_logfile_txt.php:199
+#: var/www/modules/write_config_db_logfile_txt.php:209
 msgid "humidifier control hysteresis"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:190
-#: var/www/modules/write_config_db_logfile_txt.php:201
+#: var/www/modules/write_config_db_logfile_txt.php:200
+#: var/www/modules/write_config_db_logfile_txt.php:211
 msgid "humidifier control hysteresis offset"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:194
-#: var/www/modules/write_config_db_logfile_txt.php:208
+#: var/www/modules/write_config_db_logfile_txt.php:204
+#: var/www/modules/write_config_db_logfile_txt.php:218
 #: var/www/modules/write_settings_db_logfile_txt.php:217
 #: var/www/modules/write_settings_db_logfile_txt.php:227
 msgid "delay humidifier"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:200
+#: var/www/modules/write_config_db_logfile_txt.php:210
 msgid "dehumidifier control hysteresis"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:202
+#: var/www/modules/write_config_db_logfile_txt.php:212
 msgid "dehumidifier control hysteresis offset"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:211
+#: var/www/modules/write_config_db_logfile_txt.php:221
 #: var/www/modules/write_settings_db_logfile_txt.php:230
 msgid "circulation air OFF duration"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:212
+#: var/www/modules/write_config_db_logfile_txt.php:222
 #: var/www/modules/write_settings_db_logfile_txt.php:231
 msgid "circulation air ON duration"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:213
+#: var/www/modules/write_config_db_logfile_txt.php:223
 #: var/www/modules/write_settings_db_logfile_txt.php:232
 msgid "exhausting air OFF duration"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:214
+#: var/www/modules/write_config_db_logfile_txt.php:224
 #: var/www/modules/write_settings_db_logfile_txt.php:233
 msgid "exhausting air ON duration"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:215
+#: var/www/modules/write_config_db_logfile_txt.php:225
 #: var/www/modules/write_settings_db_logfile_txt.php:234
 msgid "dehumidify modus"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:216
+#: var/www/modules/write_config_db_logfile_txt.php:226
 msgid "UV modus"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:222
+#: var/www/modules/write_config_db_logfile_txt.php:232
 msgid "Light modus"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:230
+#: var/www/modules/write_config_db_logfile_txt.php:240
 msgid "humidifier monitoring delay"
 msgstr ""
 "<br><br>\n"
@@ -3092,16 +3094,16 @@ msgstr ""
 "generated.\n"
 "<br><br>"
 
-#: var/www/modules/write_config_db_logfile_txt.php:232
+#: var/www/modules/write_config_db_logfile_txt.php:242
 msgid "monitoring"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:237
+#: var/www/modules/write_config_db_logfile_txt.php:247
 #: var/www/modules/write_settings_db_logfile_txt.php:240
 msgid "values saved in file Database"
 msgstr ""
 
-#: var/www/modules/write_config_db_logfile_txt.php:241
+#: var/www/modules/write_config_db_logfile_txt.php:251
 msgid "values not within the specified limits!"
 msgstr ""
 
@@ -3262,19 +3264,19 @@ msgstr ""
 msgid "please select a file to upload"
 msgstr ""
 
-#: var/www/modules/write_table_db.php:217
+#: var/www/modules/write_table_db.php:218
 msgid "export agintable"
 msgstr ""
 
-#: var/www/modules/write_table_db.php:217
+#: var/www/modules/write_table_db.php:218
 msgid "done"
 msgstr ""
 
-#: var/www/modules/write_table_db.php:240
+#: var/www/modules/write_table_db.php:241
 msgid "row in agingtable deleted"
 msgstr ""
 
-#: var/www/modules/write_table_db.php:263
+#: var/www/modules/write_table_db.php:264
 msgid "rows in agingtable added"
 msgstr ""
 
