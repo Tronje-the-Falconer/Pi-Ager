@@ -626,7 +626,7 @@ if [[ ! -f "$img" ]]
         echo "cannot shrink $img"
     else
         # Shrink image
-        pishrink.sh -r $img 
+        #  pishrink.sh -r $img 
         # Backup umbenennen mit Datum
         mv $img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H%M%S).img
         echo "The image ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H%M%S).img was successfully created."

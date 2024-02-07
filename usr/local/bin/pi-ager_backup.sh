@@ -207,30 +207,20 @@ if [ -d "$NFSMOUNT" ]
 fi
  
 #Überprüfen ob PiShrink aktuell ist sonst herunterladen
-echo "check if PiShrink exists."
-echo "Checking..."
-online_md5="$(curl -sL https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh | md5sum | cut -d ' ' -f 1)"
-local_md5="$(md5sum "/usr/local/bin/pishrink.sh" | cut -d ' ' -f 1)"
-if [[ "$online_md5" == "$local_md5" ]] 
-	then
-    	echo "PiShrink is the latest version!"
-    else
-    	echo "Installing PiShrink!"
-		wget -N https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
-		chmod +x pishrink.sh
-		mv pishrink.sh /usr/local/bin
-        echo "PiShrink installed."
-fi
-
-#if [ -x /usr/local/bin/pishrink.sh ]
+# echo "check if PiShrink exists."
+# echo "Checking..."
+# online_md5="$(curl -sL https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh | md5sum | cut -d ' ' -f 1)"
+# local_md5="$(md5sum "/usr/local/bin/pishrink.sh" | cut -d ' ' -f 1)"
+# if [[ "$online_md5" == "$local_md5" ]] 
 #	then
-#		echo "PiShrink ist vorhanden"	
-#	else
-#		echo "PiShrink wird geladen!"
+#    	echo "PiShrink is the latest version!"
+#    else
+#    	echo "Installing PiShrink!"
 #		wget -N https://raw.githubusercontent.com/Drewsif/PiShrink/master/pishrink.sh
 #		chmod +x pishrink.sh
-#		sudo mv pishrink.sh /usr/local/bin
-#fi
+#		mv pishrink.sh /usr/local/bin
+#        echo "PiShrink installed."
+# fi
 
 DIR=$NFSMOUNT
  
@@ -361,11 +351,11 @@ fi
 
 sync
 # Starte Shrink
-echo "start PiShrink $(date +%T) pishrink.sh $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img"
+#  echo "start PiShrink $(date +%T) pishrink.sh $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img"
 #read -p "Press enter to continue before pishrink call"
 # -d write debug file
 #sudo /usr/local/bin/pishrink.sh -d $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img
-/usr/local/bin/pishrink.sh ${BACKUP_PFAD}/${BACKUP_NAME}.img
+#  /usr/local/bin/pishrink.sh ${BACKUP_PFAD}/${BACKUP_NAME}.img
 
 # Backup umbenennen
 mv ${BACKUP_PFAD}/${BACKUP_NAME}.img ${BACKUP_PFAD}/${BACKUP_NAME}_$(date +%Y-%m-%d-%H%M%S).img
@@ -395,17 +385,17 @@ echo -e "\n"
 
 # Prüfen, ob benoetigte Zeit kleiner als 60 sec ##################
 if [ $diff -lt 60 ]; then
-    echo -e $(date +%c)": "'Backup and shrinking successful after '$diff' seconds'
+    echo -e $(date +%c)": "'Backup successful after '$diff' seconds'
 
 # Wenn kleiner 3600 Sekunden, in Minuten und Sekunden umrechnen
 #################################################################
 elif [ $diff -lt  3599 ]; then
-   echo -e $(date +%c)": "'Backup and shrinking successful after '$[$diff / 60] 'minute(s) '$[$diff % 60] 'seconds'
+   echo -e $(date +%c)": "'Backup successful after '$[$diff / 60] 'minute(s) '$[$diff % 60] 'seconds'
 
 # Wenn gleich oder groeßer 3600 Sekunden, in Stunden Minuten und Sekunden umrechnen
 #################################################################
 elif [ $diff -ge 3600 ]; then
-   echo -e $(date +%c)": "'Backup and shrinking successful after '$[$diff / 3600] 'hour(s) '$[$diff % 3600 / 60] 'minutes '$[$diff % 60] 'seconds'
+   echo -e $(date +%c)": "'Backup successful after '$[$diff / 3600] 'hour(s) '$[$diff % 3600 / 60] 'minutes '$[$diff % 60] 'seconds'
 fi
 
 # unmounten
