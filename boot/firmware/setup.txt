@@ -65,9 +65,14 @@ country='DE'
 # Supported types are : DHT11, DHT22, SHT75, SHT85, SHT3x, SHT3x-mod, AHT1x, AHT1x-mod, AHT2x, AHT30, SHT4x-A, SHT4x-B, SHT4x-C
 sensor='SHT3x'
 
-# hmi display device name:
-# valid device names: NX3224K028 or NX3224T028 or NX3224F028
+# hmi TFT display device Namen:
+# gültige device Namen: NX3224K028 or NX3224T028 or NX3224F028
 # z.B. : hmidisplay='NX3224K028'
+# Wenn hmidisplay definiert ist, wird die Firmware des hmi TFT Displays beim ersten Booten geflasht.
+# Das Flashen des Displays dauert bis zu 5 Minuten, der Fortschritt des Flashens kann nur auf dem 
+# TFT-Display beobachtet werden.
+# Während des Flashens sollte die Stromversorgung des Raspi nicht ausgeschaltet werden.
+#
 hmidisplay=
 
 # setup.txt nach boot löschen? leer lassen für löschen oder 1 für behalten 

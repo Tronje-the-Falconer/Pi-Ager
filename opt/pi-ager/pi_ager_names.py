@@ -261,8 +261,8 @@ pin_without_voltage = (not pin_with_voltage) #   0V = 0 | GPIO.LOW   | FALSE
 relay_on = pin_without_voltage   # negative Logik!!! des Relay's, Schaltet bei 0 | GPIO.LOW  | False  ein
 relay_off = (not relay_on)       # negative Logik!!! des Relay's, Schaltet bei 1 | GPIO.High | True aus
 
-logspacer  = "*****************************************"
-logspacer2 = '-----------------------------------------'
+logspacer  = "****************"
+logspacer2 = '--'
 
 SUPPORTED_MAIN_SENSOR_TYPES = {1: "DHT11",
                                      2: "DHT22",
