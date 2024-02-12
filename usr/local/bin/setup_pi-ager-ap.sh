@@ -10,7 +10,7 @@ trap read debug
  nmcli con delete PI_AGER_AP
  nmcli con add type wifi ifname wlan1 mode ap con-name PI_AGER_AP ssid pi-ager
  nmcli con modify PI_AGER_AP 802-11-wireless.band bg
- nmcli con modify PI_AGER_AP 802-11-wireless.channel 1
+ nmcli con modify PI_AGER_AP 802-11-wireless.channel 6
  nmcli con modify PI_AGER_AP 802-11-wireless-security.key-mgmt wpa-psk
  # nmcli con modify PI_AGER_AP 802-11-wireless-security.proto rsn
  # nmcli con modify PI_AGER_AP 802-11-wireless-security.group ccmp

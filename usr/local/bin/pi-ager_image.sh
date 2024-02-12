@@ -278,6 +278,10 @@ wget -O setup.txt -nv https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-A
 mv setup.txt $mountdir/boot/setup.txt
 echo "setup.txt copied to $mountdir/boot/"
 
+cmdfile=$mountdir/boot/cmdline.txt
+sed -i '1 s/$/ quiet init=\/usr\/lib\/raspberrypi-sys-mods\/firstboot/' "$cmdfile"
+echo "cmdline.txt modified, added init=/usr/lib/raspberrypi-sys-mods/firstboot"
+
 #read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
 #echo "Copy $mountdir/boot.bak/ to $mountdir/boot/"
 #rsync -a --info=progress2 "$mountdir/boot.bak/" "$mountdir/boot/"
@@ -433,14 +437,14 @@ UPDATE config SET value='40' WHERE key='hum_avg_maxlen';
 UPDATE config SET value='12' WHERE key='switch_on_light_hour';
 UPDATE config SET value='30' WHERE key='switch_on_light_minute';
 UPDATE config SET value='0' WHERE key='light_duration';
-UPDATE config SET value='21600' WHERE key='light_period';
+UPDATE config SET value='86400' WHERE key='light_period';
 UPDATE config SET value='0' WHERE key='light_modus';
 UPDATE config SET value='11' WHERE key='switch_on_uv_hour';
 UPDATE config SET value='30' WHERE key='switch_on_uv_minute';
-UPDATE config SET value='300' WHERE key='uv_duration';
-UPDATE config SET value='21600' WHERE key='uv_period';
-UPDATE config SET value='0' WHERE key='uv_modus';
-UPDATE config SET value='3' WHERE key='modus';
+UPDATE config SET value='86400' WHERE key='uv_duration';
+UPDATE config SET value='0' WHERE key='uv_period';
+UPDATE config SET value='1' WHERE key='uv_modus';
+UPDATE config SET value='4' WHERE key='modus';
 UPDATE config SET value='12' WHERE key = 'save_temperature_humidity_loops';	
 UPDATE config SET value='0.0' WHERE key = 'meat1_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'meat2_sensortype';

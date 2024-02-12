@@ -35,11 +35,11 @@ then
 	echo "sensor = $sensor"    
     echo "hmidisplay = $hmidisplay"
     
-    echo "SSH Host Key generieren"
+    #  echo "SSH Host Key generieren"
     # SSH Host Key generieren
-    /bin/rm -fv /etc/ssh_host_*
+    #  /bin/rm -fv /etc/ssh_host_*
     #/usr/sbin/dpkg-reconfigure openssh-server
-    systemctl restart ssh.service
+    #  systemctl restart ssh.service
     # pi Rechnername setzen
     if [ -n "$piname" ]            #wenn nicht ""
     then
@@ -208,8 +208,8 @@ fi
 
 echo "disable setup_pi-ager.service now"
 systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
-# expand root file system
-raspi-config nonint do_expand_rootfs && reboot
+# expand root file system. Not here! Is done by initramfs automatically
+#  raspi-config nonint do_expand_rootfs && reboot
 
 # now its time to enable pi-ager_main.service to start at next boot. Reboot is initiated by rc.local after expanding file system on root partition
 # start service now moved to rc.local
