@@ -98,7 +98,7 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
 done
 if [[ "$last_backup" = true ]] && [[ "$my_image" = true ]]; then
 	echo "Use Source_file with -f or Lastname -l for filename. Not the same!"
-	exit;
+	exit 1;
 fi
 
 BACKUP_STATUS=$(ps ax | grep -v grep | grep pi-ager_backup.sh)
@@ -168,7 +168,7 @@ umount $NFSMOUNT
 echo "hänge NFS-Volume $NFSVOL ein"
 
 # avoid warning that systemd still uses old version of fstab
-systemctl daemon-reload
+# systemctl daemon-reload
 
 if [ -n "$NFSOPT" ]
 	then
@@ -211,14 +211,12 @@ if [ "$last_backup" = true ]
 	echo "Backup path with file is" $source_file
 fi
 
-if [ -z "${source_file}" ]; then
-    echo "$COMMAND_LINE_OPTIONS_HELP"
-fi
 if [[ ! -f "$source_file" ]]; then
 	echo "Source File $source_file not found!"
     umount $NFSMOUNT
 	exit 1;
 fi
+
 echo "Source File = $source_file"
 echo "do_copy     = $do_copy"
 echo "my_image    = $my_image"
@@ -241,7 +239,7 @@ parted_output=$(parted -ms "$img" unit B print | tail -n 1)
 partnum=$(echo "$parted_output" | cut -d ':' -f 1)
 partstart=$(echo "$parted_output" | cut -d ':' -f 2 | tr -d 'B')
 loopback=$(losetup -f --show -o "$partstart" "$img")
-echo "parted_output = $parted_output"
+echo "parted_output_root = $parted_output"
 echo "partnum = $partnum"
 echo "partstart = $partstart"
 echo "loopback = $loopback"
@@ -260,9 +258,11 @@ echo "##########################################################################
 mountdir=$(mktemp -d)
 echo "mount directory is ${mountdir}"
 
+# mount root
 mount ${loopback} ${mountdir}
 #read -p "Press enter to continue after mounting $loopback to $mountdir"
 
+# mount boot
 mount -t vfat -o shortname=winnt "$loopback_boot" "$mountdir/boot"
 
 ######################################################
@@ -278,9 +278,10 @@ wget -O setup.txt -nv https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-A
 mv setup.txt $mountdir/boot/setup.txt
 echo "setup.txt copied to $mountdir/boot/"
 
-cmdfile=$mountdir/boot/cmdline.txt
-sed -i '1 s/$/ quiet init=\/usr\/lib\/raspberrypi-sys-mods\/firstboot/' "$cmdfile"
-echo "cmdline.txt modified, added init=/usr/lib/raspberrypi-sys-mods/firstboot"
+# auto-expand is performed in pi-ager_backup.sh : 
+# cmdfile=$mountdir/boot/cmdline.txt
+# sed -i '1 s/$/ quiet init=\/usr\/lib\/raspberrypi-sys-mods\/firstboot/' "$cmdfile"
+# echo "cmdline.txt modified, added init=/usr/lib/raspberrypi-sys-mods/firstboot"
 
 #read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
 #echo "Copy $mountdir/boot.bak/ to $mountdir/boot/"
@@ -523,9 +524,11 @@ INSERT INTO "config_nfs_backup" ("id","nfsvol","number_of_backups","backup_name"
 END_SQL
 # Rebuild DB to reduce the size of the DB
 sqlite3 /var/www/config/pi-ager.sqlite3 'VACUUM;'
-
-EOF
 sync
+EOF
+
+sync
+
 if [ "$my_image" = false ]; then
 	chroot $chrootdir /bin/bash <<EOF
 	# This commands are called inside of the chroot environment 
@@ -595,6 +598,7 @@ if [ "$my_image" = false ]; then
 	######################################################
 	# change ssh port:
 	# sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
+    sync
 EOF
 fi
 

@@ -247,7 +247,7 @@ if [ -n "$NFSOPT" ]
  		mount -t nfs4 $NFSVOL $NFSMOUNT
         mountstatus=$?
 fi
-# exit 1
+
 if [ $mountstatus -ne 0 ]; then
   echo "Error $mountstatus during mount NFS Volume $NFSVOL. Backup stopped."
   exit 1
@@ -310,9 +310,6 @@ if [[ "$ACCESS" == "no" ]]; then
       echo "$u can write into $DIR mapped to $NFSVOL, Backup continues."
 fi
 
-#  umount $NFSMOUNT
-#  exit 1
-
 # Stoppe Dienste vor Backup
 # echo "Stop Pi-Ager Main service!"
 #${DIENSTE_START_STOP} stop
@@ -332,9 +329,9 @@ fi
 # write buffer and clear caches
 sync
 echo 1 > /proc/sys/vm/drop_caches
-
+backupfullname=${BACKUP_PFAD}/${BACKUP_NAME}
 echo "create now Backup ${BACKUP_PFAD}/${BACKUP_NAME}.img at $(date +%T) with command dd. This needs some time to complete ..."
-dd if=/dev/mmcblk0 of=${BACKUP_PFAD}/${BACKUP_NAME}.img bs=1M 2>&1
+dd if=/dev/mmcblk0 of=${backupfullname}.img bs=1M 2>&1
 
 ddstatus=$?
 if [ $ddstatus -ne 0 ]; then
@@ -343,13 +340,16 @@ if [ $ddstatus -ne 0 ]; then
   if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
 #    set_piager_status
     echo  "Start Pi-Ager Main service again."
-    systemctl start pi-ager_main &
+    systemctl start pi-ager_main
   fi
-  umount $NFSMOUNT
+  umount -l $NFSMOUNT
   exit 1
 fi
 
+# allow rw for all users including nobody
+chmod 666 ${backupfullname}.img
 sync
+
 # Starte Shrink
 #  echo "start PiShrink $(date +%T) pishrink.sh $OPTARG ${BACKUP_PFAD}/${BACKUP_NAME}.img"
 #read -p "Press enter to continue before pishrink call"
@@ -358,7 +358,9 @@ sync
 #  /usr/local/bin/pishrink.sh ${BACKUP_PFAD}/${BACKUP_NAME}.img
 
 # Backup umbenennen
-mv ${BACKUP_PFAD}/${BACKUP_NAME}.img ${BACKUP_PFAD}/${BACKUP_NAME}_$(date +%Y-%m-%d-%H%M%S).img
+new_backup_name=${BACKUP_PFAD}/${BACKUP_NAME}_$(date +%Y-%m-%d-%H%M%S).img
+echo "Final backup name is ${new_backup_name}"
+mv ${BACKUP_PFAD}/${BACKUP_NAME}.img ${new_backup_name}
 
 # Backup beendet
 #sqlite3 /var/www/config/pi-ager.sqlite3 "BEGIN TRANSACTION;UPDATE config SET value = '0.0' where key = 'backup_status'; COMMIT;"
@@ -398,15 +400,88 @@ elif [ $diff -ge 3600 ]; then
    echo -e $(date +%c)": "'Backup successful after '$[$diff / 3600] 'hour(s) '$[$diff % 3600 / 60] 'minutes '$[$diff % 60] 'seconds'
 fi
 
-# unmounten
-sync
-umount $NFSMOUNT
+# now before shrinking this image, we have to modify this image to auto-expand during firstboot.
 
+echo "Modify image to auto-expand during firstboot"
+echo "####################################################################################"
+parted_output=$(parted -ms "$new_backup_name" unit B print | tail -n 1)
+partnum=$(echo "$parted_output" | cut -d ':' -f 1)
+partstart=$(echo "$parted_output" | cut -d ':' -f 2 | tr -d 'B')
+loopback=$(losetup -f --show -o "$partstart" "$new_backup_name")
+echo "parted_output_root = $parted_output"
+echo "partnum = $partnum"
+echo "partstart = $partstart"
+echo "loopback = $loopback"
+echo "####################################################################################"
+parted_output_boot=$(parted -ms "$new_backup_name" unit B print | head -n3 | tail -n1)
+partnum_boot=$(echo "$parted_output_boot" | cut -d ':' -f 1)
+partstart_boot=$(echo "$parted_output_boot" | cut -d ':' -f 2 | tr -d 'B')
+loopback_boot=$(losetup -f --show -o "$partstart_boot" "$new_backup_name")
+echo "parted_output_boot = $parted_output_boot"
+echo "partnum_boot = $partnum_boot"
+echo "partstart_boot = $partstart_boot"
+echo "loopback_boot = $loopback_boot"
+echo "####################################################################################"
+
+#read -p "Press enter to continue before image mount"
+mountdir=$(mktemp -d)
+echo "mount directory is ${mountdir}"
+
+# mount boot
+mount -t vfat -o shortname=winnt "$loopback_boot" "$mountdir"
+if [ $? -ne 0 ]; then
+    echo "mount boot partion ${mountdir} failed. Exit now"
+    losetup -d ${loopback_boot}
+    losetup -d ${loopback}
+    umount -l $NFSMOUNT
+    exit 1
+fi
+
+######################################################
+# set auto-expand root partition on first boot
+######################################################
+
+cmdfile=$mountdir/cmdline.txt
+sed -i '1 s/$/ quiet init=\/usr\/lib\/raspberrypi-sys-mods\/firstboot/' "$cmdfile"
+echo "cmdline.txt modified, added init=/usr/lib/raspberrypi-sys-mods/firstboot"
+
+echo "unmount ${mountdir}"
+umount ${mountdir}
+
+if [ $? -ne 0 ]
+then
+  	echo "Error unmounting ${mountdir}. Maybe ${mountdir} is open. Image is then corrupt."
+  	lsof ${mountdir}
+    losetup -d ${loopback_boot}
+    losetup -d ${loopback}
+    umount $NFSMOUNT
+  	exit 1
+fi
+
+#detach loop devices
+echo "Detaching loop devices from ${new_backup_name}"
+losetup -d ${loopback_boot}
+losetup -d ${loopback}
+
+rm -rf $mountdir
+
+echo "shrink now image, add 100MB extra space"
+/usr/local/bin/image-shrink.sh "$new_backup_name" 100
+
+# umount NFSMOUNT
+echo "unmount $NFSMOUNT"
+umount -l $NFSMOUNT
+if [ $? -ne 0 ]; then
+    echo "umount $NFSMOUNT failed. Exit now"
+    exit 1
+fi
 
 # Starte pi-ager service nach Backup
 
 if [ $PI_AGER_MAIN_ACTIVE == 1 ]; then
 #    set_piager_status
-    echo  "Start Pi-Ager Main service again."
-    systemctl start pi-ager_main &
+    echo "Start Pi-Ager Main service again."
+    systemctl start pi-ager_main
 fi
+
+exit 0
