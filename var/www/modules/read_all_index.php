@@ -157,8 +157,10 @@
     }
     $setpoint_temperature = number_format(floatval(get_table_value($config_settings_table,$setpoint_temperature_key)), 1, '.', '');
     
-    $cooling_hysteresis = get_table_value($config_settings_table ,$cooling_hysteresis_key);
-    $heating_hysteresis = get_table_value($config_settings_table ,$heating_hysteresis_key);
+    $cooling_hysteresis = get_table_value($config_settings_table , $cooling_hysteresis_key);
+    $heating_hysteresis = get_table_value($config_settings_table , $heating_hysteresis_key);
+    $cooling_hysteresis_offset = get_table_value($config_settings_table , $cooling_hysteresis_offset_key);
+    $heating_hysteresis_offset = get_table_value($config_settings_table , $heating_hysteresis_offset_key);
     
     $current_hum = get_table_value($current_values_table,$sensor_humidity_key);
     if ($current_hum === null) {

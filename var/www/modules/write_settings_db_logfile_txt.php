@@ -81,6 +81,8 @@
                         $external_temperature = get_table_value($current_values_table, $sensor_extern_temperature_key);
                         $cooling_hysteresis = number_format(floatval(get_table_value($config_settings_table, $cooling_hysteresis_key)), 1, '.', '');
                         $heating_hysteresis = number_format(floatval(get_table_value($config_settings_table, $heating_hysteresis_key)), 1, '.', '');
+                        $cooling_hysteresis_offset = get_table_value($config_settings_table , $cooling_hysteresis_offset_key);
+                        $heating_hysteresis_offset = get_table_value($config_settings_table , $heating_hysteresis_offset_key);
         
                         $dehumidifier_modus = intval(get_table_value($config_settings_table,$dehumidifier_modus_key));
                         $humidifier_hysteresis = intval(get_table_value($config_settings_table,$humidifier_hysteresis_key));
@@ -94,16 +96,20 @@
                         $delay_humidify = intval(get_table_value($config_settings_table,$delay_humidify_key));
                         
                         if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $setpoint_temperature && ($modus_setting == 3 || $modus_setting == 4)) {
-                            $cooler_on = number_format(floatval($setpoint_temperature_setting + $heating_hysteresis/2), 2, '.', '');
-                            $cooler_off = number_format(floatval($setpoint_temperature_setting - $heating_hysteresis/2), 2, '.', '');
-                            $heater_on = number_format(floatval($setpoint_temperature_setting - $cooling_hysteresis/2), 2, '.', '');
-                            $heater_off = number_format(floatval($setpoint_temperature_setting + $cooling_hysteresis/2), 2, '.', '');
+                            $cooler_on = number_format(floatval($setpoint_temperature_setting + $heating_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
+                            $cooler_off = number_format(floatval($setpoint_temperature_setting - $heating_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
+                            $heater_on = number_format(floatval($setpoint_temperature_setting - $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                            $heater_off = number_format(floatval($setpoint_temperature_setting + $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                        }
+                        else if ($modus_setting == 2) {
+                            $heater_on = number_format(floatval($setpoint_temperature_setting - $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                            $heater_off = number_format(floatval($setpoint_temperature_setting + $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', ''); 
                         }
                         else {
-                            $cooler_on = number_format(floatval($setpoint_temperature_setting + $cooling_hysteresis/2), 2, '.', '');
-                            $cooler_off = number_format(floatval($setpoint_temperature_setting - $cooling_hysteresis/2), 2, '.', '');
-                            $heater_on = number_format(floatval($setpoint_temperature_setting - $heating_hysteresis/2), 2, '.', '');
-                            $heater_off = number_format(floatval($setpoint_temperature_setting + $heating_hysteresis/2), 2, '.', '');
+                            $cooler_on = number_format(floatval($setpoint_temperature_setting + $cooling_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
+                            $cooler_off = number_format(floatval($setpoint_temperature_setting - $cooling_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
+                            $heater_on = number_format(floatval($setpoint_temperature_setting - $heating_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                            $heater_off = number_format(floatval($setpoint_temperature_setting + $heating_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
                         }
                         if ($modus_setting == 0) {
                             $operating_mode = _('cooling');
@@ -195,12 +201,16 @@
                         $logstring = $logstring . " \n " . _('sensor').": ".$sensorname;
                         $logstring = $logstring . " \n " . _('operating mode').": ".$operating_mode;
                         
-                        if ($modus_setting == 0 || $modus_setting == 1 || $modus_setting == 2)  {
+                        if ($modus_setting == 0 || $modus_setting == 1)  {
                             $logstring = $logstring . " \n " . _('setpoint temperature').": ".$setpoint_temperature_setting."&deg;C";
                             $logstring = $logstring . " \n " . _('switch-off temperature').": ".$cooler_off."&deg;C";
                             $logstring = $logstring . " \n " . _('switch-on temperature').": ".$cooler_on."&deg;C";
                         }
-
+                        if ($modus_setting == 2)  {
+                            $logstring = $logstring . " \n " . _('setpoint temperature').": ".$setpoint_temperature_setting."&deg;C";
+                            $logstring = $logstring . " \n " . _('switch-off temperature').": ".$heater_off."&deg;C";
+                            $logstring = $logstring . " \n " . _('switch-on temperature').": ".$heater_on."&deg;C";
+                        }
                         if ($modus_setting == 3 || $modus_setting == 4)  {
                             $logstring = $logstring . " \n " . _('setpoint temperature').": ".$setpoint_temperature_setting."&deg;C";
                             $logstring = $logstring . " \n " . _('switch-on heater').": ".$heater_on.'&deg;C';

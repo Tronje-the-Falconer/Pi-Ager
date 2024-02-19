@@ -3,6 +3,8 @@
     # temperature control
     $cooling_hysteresis = number_format(floatval(get_table_value($config_settings_table, $cooling_hysteresis_key)), 1, '.', '');
     $heating_hysteresis = number_format(floatval(get_table_value($config_settings_table, $heating_hysteresis_key)), 1, '.', '');
+    $cooling_hysteresis_offset = number_format(floatval(get_table_value($config_settings_table, $cooling_hysteresis_offset_key)), 1, '.', '');
+    $heating_hysteresis_offset = number_format(floatval(get_table_value($config_settings_table, $heating_hysteresis_offset_key)), 1, '.', '');
     $delay_cooler = intval(get_table_value($config_settings_table, $delay_cooler_key));   
     
     # humidification control

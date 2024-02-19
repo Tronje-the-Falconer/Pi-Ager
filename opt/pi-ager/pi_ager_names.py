@@ -175,6 +175,9 @@ delay_monitoring_humidifier_key = 'delay_monitoring_humidifier'
 tolerance_monitoring_humidifier_key = 'tolerance_monitoring_humidifier'
 check_monitoring_humidifier_key = 'check_monitoring_humidifier'
 
+cooling_hysteresis_offset_key = 'cooling_hysteresis_offset'
+heating_hysteresis_offset_key = 'heating_hysteresis_offset'
+
 # table fields
 key_field = 'key'
 value_field = 'value'

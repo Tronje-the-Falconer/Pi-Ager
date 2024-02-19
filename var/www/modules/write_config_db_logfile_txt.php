@@ -8,8 +8,8 @@
         logger('DEBUG', 'button save configvalues pressed');
         $cooling_hysteresis_config = $_POST['cooling_hysteresis_config'];
         $heating_hysteresis_config = $_POST['heating_hysteresis_config'];
-        # $switch_on_humidifier_config = $_POST['switch_on_humidifier_config'];
-        # $switch_off_humidifier_config = $_POST['switch_off_humidifier_config'];
+        $cooling_hysteresis_offset_config = $_POST['cooling_hysteresis_offset_config'];
+        $heating_hysteresis_offset_config = $_POST['heating_hysteresis_offset_config'];
         $humidifier_hysteresis_config = $_POST['humidifier_hysteresis_config'];
         $dehumidifier_hysteresis_config = $_POST['dehumidifier_hysteresis_config'];
         $humidifier_hysteresis_offset_config = $_POST['humidifier_hysteresis_offset_config'];
@@ -47,7 +47,9 @@
             if ($key == 'config_form_submit') {
                 continue;
             }
-            else if ($key == 'cooling_hysteresis_config' || $key == 'heating_hysteresis_config' || $key == 'humidifier_hysteresis_offset_config' || $key == 'dehumidifier_hysteresis_offset_config' ) {
+            else if ($key == 'cooling_hysteresis_config' || $key == 'heating_hysteresis_config' || 
+                    $key == 'humidifier_hysteresis_offset_config' || $key == 'dehumidifier_hysteresis_offset_config' || 
+                    $key == 'cooling_hysteresis_offset_config' || $key == 'heating_hysteresis_offset_config') {
                 if (is_numeric($value) == FALSE) {
                     $message_config = _('unauthorized character - please use only integers or floats!');
                     $ConfigInputIsValid = FALSE;
@@ -80,7 +82,7 @@
             )
             {
                 # Eingestellte Werte in config/config.json und logs/logfile.txt speichern
-                write_config($cooling_hysteresis_config, $heating_hysteresis_config,
+                write_config($cooling_hysteresis_config, $heating_hysteresis_config, $cooling_hysteresis_offset_config, $heating_hysteresis_offset_config, 
                             $humidifier_hysteresis_config, $dehumidifier_hysteresis_config, $humidifier_hysteresis_offset_config, $dehumidifier_hysteresis_offset_config, $saturation_point_config, $delay_humidify_config, $uv_modus_config, $uv_duration_config,
                             $uv_period_config, $switch_on_uv_hour_config, $switch_on_uv_minute_config, $light_modus_config, $light_duration_config,
                             $light_period_config, $switch_on_light_hour_config, $switch_on_light_minute_config, $dehumidifier_modus_config,
@@ -181,17 +183,21 @@
                 if ($modus == 0 || $modus == 1)  {
                     $logstring = $logstring . " \n " . _('setpoint temperature') . ": " . $setpoint_temperature . " &deg;C";
                     $logstring = $logstring . " \n " . _('primary control hysteresis') . ": " . $cooling_hysteresis_config . " &deg;C";
+                    $logstring = $logstring . " \n " . _('primary control hysteresis offset') . ": " . $cooling_hysteresis_offset_config . " &deg;C";
                 }
                 
                 if ($modus == 2)  {
                     $logstring = $logstring . " \n " . _('setpoint temperature') . ": " . $setpoint_temperature . " &deg;C";
                     $logstring = $logstring . " \n " . _('primary control hysteresis') . ": " . $cooling_hysteresis_config . " &deg;C";
+                    $logstring = $logstring . " \n " . _('primary control hysteresis offset') . ": " . $heating_hysteresis_offset_config . " &deg;C";
                 }
                                 
                 if ($modus == 3 || $modus == 4)  {
                     $logstring = $logstring . " \n " . _('setpoint temperature') . ": " . $setpoint_temperature . " &deg;C";
                     $logstring = $logstring . " \n " . _('primary control hysteresis') . ": " . $cooling_hysteresis_config . " &deg;C";
                     $logstring = $logstring . " \n " . _('secondary control hysteresis') . ": " . $heating_hysteresis_config . " &deg;C";
+                    $logstring = $logstring . " \n " . _('primary control hysteresis offset') . ": " . $cooling_hysteresis_offset_config . " &deg;C";                    
+                    $logstring = $logstring . " \n " . _('secondary control hysteresis offset') . ": " . $heating_hysteresis_offset_config . " &deg;C";                    
                 }
 
                 if ($modus == 1 || $modus == 2 || $modus == 3) {

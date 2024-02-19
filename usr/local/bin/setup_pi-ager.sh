@@ -144,6 +144,9 @@ EOF
             else
                 echo "Fehler $? : WLAN SSID und Passphrase konnten nicht gesetzt werden"
             fi
+            # restart network manager to activate
+            echo "restart NetworkManager"
+            systemctl restart NetworkManager 
         fi
     fi
 

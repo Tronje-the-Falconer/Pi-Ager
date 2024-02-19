@@ -855,14 +855,14 @@
         close_database();
     }
 
-    function write_config($cooling_hysteresis, $heating_hysteresis,
+    function write_config($cooling_hysteresis, $heating_hysteresis, $cooling_hysteresis_offset, $heating_hysteresis_offset, 
                             $humidifier_hysteresis, $dehumidifier_hysteresis, $humidifier_hysteresis_offset, $dehumidifier_hysteresis_offset, $saturation_point, $delay_humidify, $uv_modus, $uv_duration, 
                             $uv_period, $switch_on_uv_hour, $switch_on_uv_minute, $light_modus, $light_duration, 
                             $light_period, $switch_on_light_hour, $switch_on_light_minute, $dehumidifier_modus, 
                             $failure_temperature_delta, $failure_humidity_delta, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
                             $shutdown_on_batlow, $delay_cooler, $dewpoint_check, $uv_check, $delay_monitoring_humidifier, $tolerance_monitoring_humidifier, $check_monitoring_humidifier)
         {
-        global $value_field, $last_change_field, $key_field, $config_settings_table, $cooling_hysteresis_key,
+        global $value_field, $last_change_field, $key_field, $config_settings_table, $cooling_hysteresis_key, $cooling_hysteresis_offset_key, $heating_hysteresis_offset_key,  
                 $humidifier_hysteresis_key, $dehumidifier_hysteresis_key, $humidifier_hysteresis_offset_key, $dehumidifier_hysteresis_offset_key,
                 $heating_hysteresis_key, $switch_on_humidifier_key, $switch_off_humidifier_key, $saturation_point_key, $delay_humidify_key, $uv_modus_key,
                 $uv_duration_key, $uv_period_key, $switch_on_uv_hour_key, $switch_on_uv_minute_key, $light_modus_key, $light_duration_key, $light_period_key,
@@ -874,6 +874,8 @@
 
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($cooling_hysteresis) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $cooling_hysteresis_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($heating_hysteresis) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $heating_hysteresis_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($cooling_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $cooling_hysteresis_offset_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($heating_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $heating_hysteresis_offset_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($humidifier_hysteresis) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $humidifier_hysteresis_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($dehumidifier_hysteresis) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $dehumidifier_hysteresis_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($humidifier_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $humidifier_hysteresis_offset_key . '"');        

@@ -1050,29 +1050,31 @@ def generate_status_change_event(logstring):
         pass    
 
 def simple_cooler_temperature_control():
-    # simple 2-point temperature control for cooler
+    # simple 2-point temperature control for cooler, always use primary temperature control hysteresis
     global sensor_temperature
     global setpoint_temperature
     global switch_on_cooling_compressor
     global switch_off_cooling_compressor
+    global cooling_hysteresis_offset        # should be positiv
     
     # check if cooler must be set on or off
-    if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor:
+    if sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor + cooling_hysteresis_offset:
         delay_cooling_compressor( pi_ager_names.relay_on)      # Kuehlung ein
-    if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor:
+    if sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor + cooling_hysteresis_offset:
         delay_cooling_compressor( pi_ager_names.relay_off)     # Kuehlung aus
                 
-def simple_heater_temperature_control(): 
-    # simple 2-point temperature control for heater
+def simple_heater_temperature_control():
+    # simple 2-point temperature control for heater, always use primary hysteresis for heater, but use heating hysteresis offset
     global sensor_temperature
     global setpoint_temperature
     global switch_on_cooling_compressor
     global switch_off_cooling_compressor
+    global heating_hysteresis_offset    # should be negativ
     
     # check if heater must be set on or off
-    if sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor:
+    if sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor + heating_hysteresis_offset:
         control_heater(pi_ager_names.relay_on)
-    if sensor_temperature >= setpoint_temperature - switch_off_cooling_compressor:
+    if sensor_temperature >= setpoint_temperature - switch_off_cooling_compressor + heating_hysteresis_offset:
         control_heater(pi_ager_names.relay_off)
 
 def auto_temperature_control():
@@ -1081,36 +1083,38 @@ def auto_temperature_control():
     global sensor_temperature
     global setpoint_temperature
     global second_sensor_temperature
-                    
-    cooling_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.cooling_hysteresis_key)
-    heating_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.heating_hysteresis_key)
+    global cooling_hysteresis_offset  
+    global heating_hysteresis_offset
+    
+    cooling_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.cooling_hysteresis_key)    # primary hysteresis
+    heating_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.heating_hysteresis_key)    # secondary hysteresis
     
     # check if an external sensor exists and if so check if external temperature is greater than setpoint temperature:
-    # then activate cooling algorithm
-    if (second_sensor_temperature == None or second_sensor_temperature > setpoint_temperature):     
+    # then activate cooling algorithm. If no external sensor is available, assume cooling cabinet as default
+    if (second_sensor_temperature == None or second_sensor_temperature > setpoint_temperature):     # take primary hysteresis value for cooler
         switch_on_cooling_compressor = cooling_hysteresis/2
         switch_off_cooling_compressor = -cooling_hysteresis/2
         switch_on_heater = heating_hysteresis/2
         switch_off_heater = -heating_hysteresis/2
-    else:   # activate heating alhorithm by exchanging primary and secondary hysteresis values
+    else:   # activate heating alhorithm by exchanging primary and secondary hysteresis values so that heater operates with primary hysteresis
         switch_on_cooling_compressor = heating_hysteresis/2
         switch_off_cooling_compressor = -heating_hysteresis/2
         switch_on_heater = cooling_hysteresis/2
         switch_off_heater = -cooling_hysteresis/2
         
     # check if cooler or heater must be set on or off
-    if (sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor) or (sensor_temperature <= setpoint_temperature + switch_off_heater):
+    if (sensor_temperature <= setpoint_temperature + switch_off_cooling_compressor + cooling_hysteresis_offset) or (sensor_temperature <= setpoint_temperature + heating_hysteresis_offset + switch_off_heater):
         delay_cooling_compressor( pi_ager_names.relay_off)                          # Kuehlung aus
-    if (sensor_temperature >= setpoint_temperature - switch_off_heater) or (sensor_temperature >= setpoint_temperature - switch_off_cooling_compressor ):
+    if (sensor_temperature >= setpoint_temperature - switch_off_heater + heating_hysteresis_offset) or (sensor_temperature >= setpoint_temperature - switch_off_cooling_compressor + cooling_hysteresis_offset):
         control_heater(pi_ager_names.relay_off)                                     # Heizung aus
                         
-    if (sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor): # or (sensor_temperature >= setpoint_temperature + switch_on_heater):
+    if (sensor_temperature >= setpoint_temperature + switch_on_cooling_compressor + cooling_hysteresis_offset): # or (sensor_temperature >= setpoint_temperature + switch_on_heater):
         delay_cooling_compressor( pi_ager_names.relay_on)                           # Kuehlung ein
         if gpio.input(pi_ager_gpio_config.gpio_heater) == False:                    # only if heater is on, turn off heater
             control_heater(pi_ager_names.relay_off)
                             
-    if (sensor_temperature <= setpoint_temperature - switch_on_heater): # or (sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor ):
-        control_heater(pi_ager_names.relay_on)                                      # turn on heater
+    if (sensor_temperature <= setpoint_temperature - switch_on_heater + heating_hysteresis_offset): # or (sensor_temperature <= setpoint_temperature - switch_on_cooling_compressor ):
+        control_heater(pi_ager_names.relay_on)                                      # Heizung ein
         if gpio.input(pi_ager_gpio_config.gpio_cooling_compressor) == False:        # only if cooler is on, turn off cooler
             delay_cooling_compressor( pi_ager_names.relay_off)                      # Kuehlung aus
 
@@ -1213,7 +1217,9 @@ def doMainLoop():
     global saturation_point               # sensor saturation point
     global switch_on_cooling_compressor
     global switch_off_cooling_compressor
-
+    global cooling_hysteresis_offset
+    global heating_hysteresis_offset 
+    
     global settings
     global status_circulating_air         #  Umluft
     global status_exhaust_air             #  (Abluft-)Luftaustausch
@@ -1470,6 +1476,8 @@ def doMainLoop():
                 
                 cooling_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.cooling_hysteresis_key)
                 heating_hysteresis = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.heating_hysteresis_key)
+                cooling_hysteresis_offset = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.cooling_hysteresis_offset_key)
+                heating_hysteresis_offset = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.heating_hysteresis_offset_key)
                 switch_on_cooling_compressor = cooling_hysteresis/2
                 switch_off_cooling_compressor = -cooling_hysteresis/2
                 switch_on_heater = heating_hysteresis/2

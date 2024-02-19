@@ -13,7 +13,7 @@
                                             <!----------------------------------------------------------------------------------------Temperatur-->
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <tr>
-                                                    <td rowspan="3" class="td_png_icon"><h3><?php echo _('temperature control'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td rowspan="5" class="td_png_icon"><h3><?php echo _('temperature control'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td class="text_left_padding"><?php echo _('primary control hysteresis'); ?>:</td>
                                                     <td><input name="cooling_hysteresis_config" type="number" style="width: 30%;" min="0.5" max="7" step="0.1" required value=<?php echo $cooling_hysteresis; ?>>&nbsp;°C
                                                     </td>
@@ -21,6 +21,16 @@
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('secondary control hysteresis'); ?>:</td>
                                                     <td><input name="heating_hysteresis_config" type="number" style="width: 30%;" min="0.5" max="7" step="0.1" required value=<?php echo $heating_hysteresis; ?>>&nbsp;°C
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('cooling hysteresis offset'); ?>:</td>
+                                                    <td><input name="cooling_hysteresis_offset_config" type="number" style="width: 30%;" min="-5" max="5" step="0.1" required value=<?php echo $cooling_hysteresis_offset; ?>>&nbsp;°C
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('heating hysteresis offset'); ?>:</td>
+                                                    <td><input name="heating_hysteresis_offset_config" type="number" style="width: 30%;" min="-5" max="5" step="0.1" required value=<?php echo $heating_hysteresis_offset; ?>>&nbsp;°C
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -51,7 +61,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('dehumidifier hysteresis').':'; ?></td>
-                                                    <td><input name="dehumidifier hysteresis_config" type="number" style="width: 30%;" min="2" max="30" required value=<?php echo $dehumidifier_hysteresis; ?>>&nbsp;%<span style="font-size: xx-small"> (2 <?php echo _('to'); ?> 30)</span></td>
+                                                    <td><input name="dehumidifier_hysteresis_config" type="number" style="width: 30%;" min="2" max="30" required value=<?php echo $dehumidifier_hysteresis; ?>>&nbsp;%<span style="font-size: xx-small"> (2 <?php echo _('to'); ?> 30)</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('humidifier hysteresis offset').':'; ?></td>
