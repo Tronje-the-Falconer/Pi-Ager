@@ -1,6 +1,18 @@
-<?php 
+<?php
+    // include 'modules/funclib.php';
     // include 'modules/read_config_db.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen)
     #var_dump($_POST);
+    function limit_humidity( $value ) {
+        $min_humidity = 0;
+        $max_humidity = 97;
+        if ($value > $max_humidity) {
+            $value = $max_humidity;
+        }
+        else if ($value < $min_humidity) {
+            $value = $min_humidity;
+        }
+        return $value;
+    }
     
     $message_settings='';
     # Prüfung der eingegebenen Werte
@@ -39,7 +51,7 @@
             if ($SettingsInputIsValid == TRUE)
                 {
                     if ( $setpoint_temperature_setting <= 70 &&  $setpoint_temperature_setting >= -11 &&        // Prüfung Soll-Temperatur
-                        $setpoint_humidity_setting<100 && $setpoint_humidity_setting>-1 &&                      // Prüfung Soll-Feuchtigkeit
+                        $setpoint_humidity_setting <= 95 && $setpoint_humidity_setting >= 0 &&                  // Prüfung Soll-Feuchtigkeit
                         $circulation_air_period_setting < 1441 && $circulation_air_period_setting > -1 &&       // Prüfung Intervall Umluft
                         $circulation_air_duration_setting < 1441 && $circulation_air_duration_setting > -1  &&  // Prüfung Dauer Umluft
                         $exhaust_air_period_setting < 1441 && $exhaust_air_period_setting > -1 &&             // Prüfung Intervall Abluft
@@ -65,42 +77,60 @@
 
                         # Formatierung für die Lesbarkeit im Logfile:
                         # Modus
+                        $internal_temperature = get_table_value($current_values_table, $sensor_temperature_key);
+                        $external_temperature = get_table_value($current_values_table, $sensor_extern_temperature_key);
+                        $cooling_hysteresis = number_format(floatval(get_table_value($config_settings_table, $cooling_hysteresis_key)), 1, '.', '');
+                        $heating_hysteresis = number_format(floatval(get_table_value($config_settings_table, $heating_hysteresis_key)), 1, '.', '');
+                        $cooling_hysteresis_offset = get_table_value($config_settings_table , $cooling_hysteresis_offset_key);
+                        $heating_hysteresis_offset = get_table_value($config_settings_table , $heating_hysteresis_offset_key);
+        
+                        $dehumidifier_modus = intval(get_table_value($config_settings_table,$dehumidifier_modus_key));
+                        $humidifier_hysteresis = intval(get_table_value($config_settings_table,$humidifier_hysteresis_key));
+                        $dehumidifier_hysteresis = intval(get_table_value($config_settings_table,$dehumidifier_hysteresis_key));
+                        $humidifier_hysteresis_offset = round(get_table_value($config_settings_table,$humidifier_hysteresis_offset_key), 1);
+                        $dehumidifier_hysteresis_offset = round(get_table_value($config_settings_table,$dehumidifier_hysteresis_offset_key), 1);
+                        
+                        $setpoint_temperature = round(get_table_value($config_settings_table,$setpoint_temperature_key), 1);
+                        $setpoint_humidity = round(get_table_value($config_settings_table,$setpoint_humidity_key), 1);  
+                        $saturation_point = intval(get_table_value($config_settings_table,$saturation_point_key));
+                        $delay_humidify = intval(get_table_value($config_settings_table,$delay_humidify_key));
+                        
+                        if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $setpoint_temperature && ($modus_setting == 3 || $modus_setting == 4)) {
+                            $cooler_on = number_format(floatval($setpoint_temperature_setting + $heating_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
+                            $cooler_off = number_format(floatval($setpoint_temperature_setting - $heating_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
+                            $heater_on = number_format(floatval($setpoint_temperature_setting - $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                            $heater_off = number_format(floatval($setpoint_temperature_setting + $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                        }
+                        else if ($modus_setting == 2) {
+                            $heater_on = number_format(floatval($setpoint_temperature_setting - $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                            $heater_off = number_format(floatval($setpoint_temperature_setting + $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', ''); 
+                        }
+                        else {
+                            $cooler_on = number_format(floatval($setpoint_temperature_setting + $cooling_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
+                            $cooler_off = number_format(floatval($setpoint_temperature_setting - $cooling_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
+                            $heater_on = number_format(floatval($setpoint_temperature_setting - $heating_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                            $heater_off = number_format(floatval($setpoint_temperature_setting + $heating_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                        }
                         if ($modus_setting == 0) {
                             $operating_mode = _('cooling');
-                            $switch_on_temperature_cooling = $setpoint_temperature_setting + $switch_on_cooling_compressor;
-                            $switch_off_temperature_cooling = $setpoint_temperature_setting + $switch_off_cooling_compressor;
                         }
 
                         if ($modus_setting == 1) {
                             $operating_mode = _('cooling with humidification');
-                            $switch_on_temperature_cooling = $setpoint_temperature_setting + $switch_on_cooling_compressor;
-                            $switch_off_temperature_cooling = $setpoint_temperature_setting + $switch_off_cooling_compressor;
                         }
 
                         if ($modus_setting == 2) {
                             $operating_mode = _('heating with humidification');
-                            $switch_on_temperature_cooling = $setpoint_temperature_setting - $switch_on_cooling_compressor;
-                            $switch_off_temperature_cooling = $setpoint_temperature_setting - $switch_off_cooling_compressor;
                         }
+                        
                         if ($modus_setting == 3) {
                             $operating_mode = _('automatic with humidification');
-                            $switch_on_temperature_cooling = $setpoint_temperature_setting + $switch_on_cooling_compressor;
-                            $switch_off_temperature_cooling_cooling = $setpoint_temperature_setting + $switch_off_cooling_compressor;
-                            $switch_on_temperature_heating = $setpoint_temperature_setting - $switch_on_cooling_compressor;
-                            $switch_off_temperature_cooling_heating = $setpoint_temperature_setting - $switch_off_cooling_compressor;
                         }
 
                         if ($modus_setting == 4) {
                             $operating_mode = _('automatic with dehumidification and humidification');
-                            $switch_on_temperature_cooling = $setpoint_temperature_setting + $switch_on_cooling_compressor;
-                            $switch_off_temperature_cooling_cooling = $setpoint_temperature_setting + $switch_off_cooling_compressor;
-                            $switch_on_temperature_heating = $setpoint_temperature_setting - $switch_on_cooling_compressor;
-                            $switch_off_temperature_cooling_heating = $setpoint_temperature_setting - $switch_off_cooling_compressor;
-
-                            $switch_on_humidify = $setpoint_humidity_setting - $switch_on_humidifier;
-                            $switch_off_humidify = $setpoint_humidity_setting - $switch_off_humidifier;
-                            $switch_on_dehumidify = $setpoint_humidity_setting + $switch_on_humidifier;
-                            $switch_off_dehumidify = $setpoint_humidity_setting + $switch_off_humidifier;
+                            $switch_on_dehumidify = eval_switch_on_dehumidity( $setpoint_humidity_setting, $dehumidifier_hysteresis, $dehumidifier_hysteresis_offset, $saturation_point );
+                            $switch_off_dehumidify = eval_switch_off_dehumidity( $setpoint_humidity_setting,  $dehumidifier_hysteresis, $dehumidifier_hysteresis_offset );
                         }
                         # Dehumidify-Modus
                         if ($dehumidifier_modus == 1) {
@@ -112,80 +142,99 @@
                         if ($dehumidifier_modus == 3) {
                             $dehumidifier_modus_name = _('only dehumidifier');
                         }
-                        # Uv licht
-                        if ($uv_modus == 0) {
-                            $uv_modus_name = _('off');
-                            $logtext_uv = "";
-                            $logtext_uv_duration = "";
-                        }
-                        if ($uv_modus == 1) {
-                            $uv_modus_name = _('ON/OFF duration'). " \n ";
-                            $logtext_uv = _('uv OFF duration').": ".$uv_period ." "._('minutes') . " \n ";
-                            $logtext_uv_duration = _('uv ON duration').": ".$uv_duration ." "._('minutes');
-                        }
-                        if ($uv_modus == 2) {
-                            $uv_modus_name = _('duration & timestamp'). " \n ";
-                            $logtext_uv = _('uv timestamp').": ".switch_on_uv_hour.":".$switch_on_uv_minute . " \n ";
-                            $logtext_uv_duration = _('uv ON duration').": ".$uv_duration ." "._('minutes');
-                            
-                        }
-                        # Licht
-                        if ($light_modus == 0) {
-                            $light_modus_name = _('off');
-                            $logtext_light = "";
-                            $logtext_light_duration = "";
-                        }
-                        if ($light_modus == 1) {
-                            $light_modus_name = _('ON/OFF duration'). " \n ";
-                            $logtext_light = _('light OFF duration').": ".$light_period ." "._('minutes') . " \n ";
-                            $logtext_light_duration = _('light ON duration').": ".$light_duration ." "._('minutes');
-                        }
-                        if ($light_modus == 2) {
-                            $light_modus_name = _('duration & timestamp'). " \n ";
-                            $logtext_light = _('light timestamp').": ".$switch_on_light_hour.":".$switch_on_light_minute . " \n ";
-                            $logtext_light_duration = _('light ON duration').": ".$light_duration ." "._('minutes');
-                            
-                        }
+
                         $circulation_air_duration = $circulation_air_duration_setting;
                         $circulation_air_period = $circulation_air_period_setting;
                         $exhausting_air_duration = $exhaust_air_duration_setting;
                         $exhausting_air_period = $exhaust_air_period_setting;
-                        $switch_on_humidity = $setpoint_humidity_setting - $switch_on_humidifier;
-                        $switch_off_humidity = $setpoint_humidity_setting - $switch_off_humidifier;
+                        
+                        $switch_on_humidify = eval_switch_on_humidity( $setpoint_humidity_setting, $humidifier_hysteresis, $humidifier_hysteresis_offset );
+                        $switch_off_humidify = eval_switch_off_humidity( $setpoint_humidity_setting, $humidifier_hysteresis, $humidifier_hysteresis_offset , $saturation_point );
+                       
+                        $sensortype = intval(get_table_value($config_settings_table,$sensortype_key));
+                            
+                        if ($sensortype == 1) {
+                            $sensorname = 'DHT11';
+                        }
+                        else if ($sensortype == 2) {
+                            $sensorname = 'DHT22';
+                        }
+                        else if ($sensortype == 3) {
+                            $sensorname = 'SHT75';
+                        }
+                        else if ($sensortype == 4) {
+                            $sensorname = 'SHT85';
+                        }
+                        else if ($sensortype == 5) {
+                            $sensorname = 'SHT3x';
+                        }
+                        else if ($sensortype == 6) {
+                            $sensorname = 'SHT3x-mod';
+                        }
+                        else if ($sensortype == 7) {
+                            $sensorname = 'AHT1x';
+                        }                        
+                        else if ($sensortype == 8) {
+                            $sensorname = 'AHT1x-mod';
+                        }                        
+                        else if ($sensortype == 9) {
+                            $sensorname = 'AHT2x';
+                        }                                                       
+                        else if ($sensortype == 10) {
+                            $sensorname = 'AHT30';
+                        }                                                       
+                        else if ($sensortype == 11) {
+                            $sensorname = 'SHT4x-A';
+                        }
+                        else if ($sensortype == 12) {
+                            $sensorname = 'SHT4x-B';
+                        }
+                        else if ($sensortype == 13) {
+                            $sensorname = 'SHT4x-C';
+                        }                         
+                        else {
+                            $sensorname = 'undefined';
+                        }
 
                         $logstring = " \n ***********************************************";
                         $logstring = $logstring . " \n " . _('values have been manually changed.');
                         $logstring = $logstring . " \n " . _('sensor').": ".$sensorname;
                         $logstring = $logstring . " \n " . _('operating mode').": ".$operating_mode;
                         
-                        if ($modus_setting == 0 || $modus_setting == 1 || $modus_setting == 2)  {
+                        if ($modus_setting == 0 || $modus_setting == 1)  {
                             $logstring = $logstring . " \n " . _('setpoint temperature').": ".$setpoint_temperature_setting."&deg;C";
-                            $logstring = $logstring . " \n " . _('switch-off temperature').": ".$switch_off_cooling_compressor."&deg;C ("._('so at')." ".$switch_off_temperature_cooling."&deg;C)";
-                            $logstring = $logstring . " \n " . _('switch-on temperature').": ".$switch_on_cooling_compressor."&deg;C ("._('so at')." ".$switch_on_temperature_cooling."&deg;C)";
+                            $logstring = $logstring . " \n " . _('switch-off temperature').": ".$cooler_off."&deg;C";
+                            $logstring = $logstring . " \n " . _('switch-on temperature').": ".$cooler_on."&deg;C";
                         }
-
+                        if ($modus_setting == 2)  {
+                            $logstring = $logstring . " \n " . _('setpoint temperature').": ".$setpoint_temperature_setting."&deg;C";
+                            $logstring = $logstring . " \n " . _('switch-off temperature').": ".$heater_off."&deg;C";
+                            $logstring = $logstring . " \n " . _('switch-on temperature').": ".$heater_on."&deg;C";
+                        }
                         if ($modus_setting == 3 || $modus_setting == 4)  {
                             $logstring = $logstring . " \n " . _('setpoint temperature').": ".$setpoint_temperature_setting."&deg;C";
-                            $logstring = $logstring . " \n " . _('switch-on heater').": ".$switch_on_cooling_compressor.'&deg;C ('._('so at')." ".$switch_on_temperature_heating.'&deg;C)';
-                            $logstring = $logstring . " \n " . _('switch-off heater').": ".$switch_off_cooling_compressor."&deg;C ("._('so at')." ".$switch_off_temperature_cooling_heating."&deg;C)";
-                            $logstring = $logstring . " \n " . _('switch-on cooler').": ".$switch_on_cooling_compressor."&deg;C ("._('so at')." ".$switch_on_temperature_cooling."&deg;C)";
-                            $logstring = $logstring . " \n " . _('switch-off cooler').": ".$switch_off_cooling_compressor."&deg;C ("._('so at')." ".$switch_off_temperature_cooling_cooling."&deg;C)";
+                            $logstring = $logstring . " \n " . _('switch-on heater').": ".$heater_on.'&deg;C';
+                            $logstring = $logstring . " \n " . _('switch-off heater').": ".$heater_off."&deg;C";
+                            $logstring = $logstring . " \n " . _('switch-on cooler').": ".$cooler_on."&deg;C";
+                            $logstring = $logstring . " \n " . _('switch-off cooler').": ".$cooler_off."&deg;C";
                         }
 
                         if ($modus_setting == 1 || $modus_setting == 2 || $modus_setting == 3) {
                             $logstring = $logstring . " \n " . _('setpoint humidity').": ".$setpoint_humidity_setting."% "."&phi;";
-                            $logstring = $logstring . " \n " . _('switch-on humidifier').": ".$switch_on_humidifier."% &phi; ("._('so at')." ".$switch_on_humidity."% &phi;)";
-                            $logstring = $logstring . " \n " . _('switch-off humidifier').": ".$switch_off_humidifier."% &phi; ("._('so at')." ".$switch_off_humidity."% &phi;)";
+                            $logstring = $logstring . " \n " . _('saturation point').": ".$saturation_point."% "."&phi;";
+                            $logstring = $logstring . " \n " . _('switch-on humidifier').": ".$switch_on_humidify . "% " . "&phi;";
+                            $logstring = $logstring . " \n " . _('switch-off humidifier').": ".$switch_off_humidify . "% " . "&phi;";
                             $logstring = $logstring . " \n " . _('delay humidifier').": ".$delay_humidify." "._('minutes');
                         }
 
                         if ($modus_setting == 4) {
                             $logstring = $logstring . " \n " . _('setpoint humidity').": ".$setpoint_humidity_setting."% &phi;";
-                            $logstring = $logstring . " \n " . _('switch-on humidifier').": ".$switch_on_humidifier."% &phi; ("._('so at')." ".$switch_on_humidify."% &phi;)";
-                            $logstring = $logstring . " \n " . _('switch-off humidifier').": ".$switch_off_humidifier."% &phi; ("._('so at')." ".$switch_off_humidify."% &phi;)";
-                            $logstring = $logstring . " \n " . _('switch-on exhausting').": ".$switch_on_humidifier."% &phi; ("._('so at')." ".$switch_on_dehumidify."% &phi;)";
-                            $logstring = $logstring . " \n " . _('switch-off exhausting').": ".$switch_off_humidifier."% &phi; ("._('so at')." ".$switch_off_dehumidify."% &phi;)";
-                            $logstring = $logstring . " \n " . _('delay exhausting').": ".$delay_humidify." "._('minutes');
+                            $logstring = $logstring . " \n " . _('saturation point').": ".$saturation_point."% "."&phi;";
+                            $logstring = $logstring . " \n " . _('switch-on humidifier').": ".$switch_on_humidify."% " . "&phi;";
+                            $logstring = $logstring . " \n " . _('switch-off humidifier').": ".$switch_off_humidify."% " . "&phi;";
+                            $logstring = $logstring . " \n " . _('switch-on dehumidifier').": ".$switch_on_dehumidify."% " . "&phi;";
+                            $logstring = $logstring . " \n " . _('switch-off dehumidifier').": ".$switch_off_dehumidify."% " . "&phi;";
+                            $logstring = $logstring . " \n " . _('delay humidifier').": ".$delay_humidify." "._('minutes');
                         }
 
                         $logstring = $logstring . " \n " . _('circulation air OFF duration').": ".$circulation_air_period." "._('minutes');
@@ -193,12 +242,7 @@
                         $logstring = $logstring . " \n " . _('exhausting air OFF duration').": ".$exhausting_air_period." "._('minutes');
                         $logstring = $logstring . " \n " . _('exhausting air ON duration').": ".$exhausting_air_duration." "._('minutes');
                         $logstring = $logstring . " \n " . _('dehumidify modus').": ".$dehumidifier_modus_name;
-                        $logstring = $logstring . " \n " . _('uv modus').": ".$uv_modus_name;
-                        $logstring = $logstring . $logtext_uv;
-                        $logstring = $logstring . $logtext_uv_duration;
-                        $logstring = $logstring . " \n " . _('light modus').": ".$light_modus_name;
-                        $logstring = $logstring . $logtext_light;
-                        $logstring = $logstring . $logtext_light_duration;
+
                         $logstring = $logstring . " \n " . "***********************************************";
                         logger('INFO', $logstring);
 

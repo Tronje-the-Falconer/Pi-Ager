@@ -65,7 +65,7 @@
         $filtered = array();
         
         for ($i = 0; $i < $element_count; ++$i) {
-            $start_index = $i - $cnt_index/2;
+            $start_index = intval($i - $cnt_index/2);
             $end_index = $start_index + $cnt_index;
             $sum = 0;
             $cnt_sum = 0;
@@ -126,8 +126,11 @@
     $save_temperature_humidity_loops = get_table_value($config_settings_table, $save_temperature_humidity_loops_key);
     $saving_period_scale1 = get_table_value($settings_scale1_table, $saving_period_key);
     $saving_period_scale2 = get_table_value($settings_scale2_table, $saving_period_key);
-    // calculated temperature-humidity saving period, saving loop needs about 12s
-    $temperatur_humidity_saving_period = $save_temperature_humidity_loops * 12;
+    $take_off_weight_scale1 = intval(get_table_value($config_settings_table, $take_off_weight_scale1_key));
+    $take_off_weight_scale2 = intval(get_table_value($config_settings_table, $take_off_weight_scale2_key));
+    
+    // calculated temperature-humidity saving period, saving loop needs about 6s
+    $temperatur_humidity_saving_period = $save_temperature_humidity_loops * 6;
     $corr_factor = 27.0/$save_temperature_humidity_loops;
     $corr_factor_scale = max($temperatur_humidity_saving_period/$saving_period_scale1, $temperatur_humidity_saving_period/$saving_period_scale2);  
     
@@ -161,16 +164,16 @@
         $min_time_window = 604800 / 4;  // if time windows <= 1/4 week then nth = 1
         if ($customtime > $min_time_window) {   
             $nth_value =  intval($customtime / $min_time_window * $corr_factor);
-            if ($nth_value < 1) {
-                $nth_value = 1;
-            }
             $nth_value_scale =  intval($customtime / $min_time_window * $corr_factor_scale);
-            if ($nth_value_scale < 1) {
-                $nth_value_scale = 1;
-            }            
         }
-     }
-     
+    }
+    if ($nth_value < 1) {
+        $nth_value = 1;
+    }
+    if ($nth_value_scale < 1) {
+        $nth_value_scale = 1;
+    }
+    
     // make nth_value_scale odd-numbered
     if ($nth_value_scale > 1 and (($nth_value_scale % 2) == 0)) {
         $nth_value_scale -= 1;
@@ -201,13 +204,25 @@
     $temperature_dataset = array_column($all_sensors_rows, 'tempint');
     $temperature_dataset[] = Null;
     array_unshift($temperature_dataset, Null);
-    $temperature_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $temperature_dataset, $moving_average_window_x);
+
+    // value array for tempintavg
+    $temperature_avg_dataset = array_column($all_sensors_rows, 'tempintavg');
+    $temperature_avg_dataset[] = Null;
+    array_unshift($temperature_avg_dataset, Null);
+    
+    // $temperature_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $temperature_dataset, intval($moving_average_window_x));
     
     // value array for humint
     $humidity_dataset = array_column($all_sensors_rows, 'humint');
     $humidity_dataset[] = Null;
     array_unshift($humidity_dataset, Null);
-    $humidity_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $humidity_dataset, $moving_average_window_x);
+    
+    // value array for humintavg
+    $humidity_avg_dataset = array_column($all_sensors_rows, 'humintavg');
+    $humidity_avg_dataset[] = Null;
+    array_unshift($humidity_avg_dataset, Null);    
+    
+    // $humidity_avg_dataset = moving_average_filter($all_sensors_timestamps_array, $humidity_dataset, intval($moving_average_window_x));
 
     // value array for ntc1
     $thermometer1_dataset = array_column($all_sensors_rows, 'ntc1');
@@ -219,11 +234,22 @@
     $scale1_dataset[] = Null;
     array_unshift($scale1_dataset, Null);
 
+    // generate array for scale1 take-off weigth dashed line
+    $scale_array_count = count($scale1_dataset);
+    $scale1_take_off_weight_dataset = array_pad(array(), $scale_array_count, Null);
+    $scale1_take_off_weight_dataset[0] = $take_off_weight_scale1;
+    $scale1_take_off_weight_dataset[$scale_array_count - 1] = $take_off_weight_scale1;
+    
     // value array for scale2
     $scale2_dataset = array_column($all_scales_rows, 'scale2');
     $scale2_dataset[] = Null;
     array_unshift($scale2_dataset, Null);
-
-    logger('DEBUG', 'read_values_for_diagrams performed');
+    
+    // generate array for scale2 take-off weigth dashed line
+    $scale_array_count = count($scale2_dataset);
+    $scale2_take_off_weight_dataset = array_pad(array(), $scale_array_count, Null);
+    $scale2_take_off_weight_dataset[0] = $take_off_weight_scale2;
+    $scale2_take_off_weight_dataset[$scale_array_count - 1] = $take_off_weight_scale2;
+    logger('DEBUG', 'chartsdata_index performed');
 
 ?>

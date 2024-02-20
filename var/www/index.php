@@ -3,12 +3,15 @@
                                       include 'modules/database.php';                             // Schnittstelle zur Datenbank
                                       include 'modules/logging.php';                            //liest die Datei fuer das logging ein
                                       include 'modules/names.php';                                // Variablen mit Strings
-                                      include 'modules/read_settings_db.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lueftung) und Betriebsart des RSS
-                                      include 'modules/read_config_db.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
-                                      include 'modules/read_operating_mode_db.php';                  // Liest die Art der Reifesteuerung
-                                      include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
-                                      include 'modules/read_current_db.php';                    // Liest die gemessenen Werte Temp, Humy, Timestamp
-                                      include 'modules/read_bus.php';                           //liest den bus aus, um externsensor ein oder auszublenden
+                                      
+                                      include 'modules/read_all_index.php';                     // get all data to setup index.php
+                                      // include 'modules/read_settings_db.php';                   // Liest die Einstellungen (Temperaturregelung, Feuchte, Lueftung) und Betriebsart des RSS
+                                      // include 'modules/read_config_db.php';                     // Liest die Grundeinstellungen Sensortyp, Hysteresen, GPIO's)
+                                      // include 'modules/read_operating_mode_db.php';                  // Liest die Art der Reifesteuerung
+                                      // include 'modules/read_gpio.php';                            // Liest den aktuellen Zustand der GPIO-E/A
+                                      // include 'modules/read_current_db.php';                    // Liest die gemessenen Werte Temp, Humy, Timestamp
+                                      // include 'modules/read_bus.php';                           //liest den bus aus, um externsensor ein oder auszublenden
+                                      include 'modules/funclib.php';                            // Funktionsbibliothek
 								    //  include 'modules/write_customtime_db.php';                 //speichert die individuelle Zeit für die Diagramme
                                 ?>
                                 <h2 class="art-postheader"><?php echo _('mainsensors'); ?></h2>
@@ -31,7 +34,7 @@
                                         </tr>
                                         <tr>
                                             <?php
-                                                if ($grepmain == 0 or $status_piager == 0) {
+                                                if ($status_main == 0 or $status_piager == 0) {
                                                     $temp_main = '-----';
                                                     $hum_main = '-----';
                                                     $hum_abs_main = '-----';
@@ -44,16 +47,30 @@
                                                     $temp_ntc4 = '-----';
                                                 }
                                                 else {
-                                                    $temp_main = $sensor_temperature;
-                                                    $hum_main = $sensor_humidity;
-                                                    $data_from_db = get_table_value($current_values_table, $sensor_humidity_abs_key);
+                                                    $data_from_db = get_table_value($current_values_table, $temperature_avg_key);
+                                                    if ($data_from_db === null) {
+                                                        $temp_main = '-----';
+                                                    }
+                                                    else {
+                                                        $temp_main = number_format(floatval($data_from_db), 1, '.', '');
+                                                    }
+                                                    $data_from_db = get_table_value($current_values_table, $humidity_avg_key);
+                                                    if ($data_from_db === null) {
+                                                        $hum_main = '-----';
+                                                    }
+                                                    else {
+                                                        $hum_main = number_format(floatval($data_from_db), 1, '.', '');
+                                                    }
+                                                    $data_from_db = get_table_value($current_values_table, $humidity_abs_avg_key);
                                                     if ($data_from_db === null) {
                                                         $hum_abs_main = '-----';
                                                     }
                                                     else {
                                                         $hum_abs_main = number_format(floatval($data_from_db), 1, '.', '');
                                                     }
+                                                    
                                                     $data_from_db = get_table_value($current_values_table, $sensor_extern_temperature_key);
+                                                    $external_temperature = $data_from_db;
                                                     if ($data_from_db === null) {
                                                         $temp_ext = '-----';
                                                     }
@@ -113,20 +130,38 @@
                                                     }
                                                 }
                                                 
-                                                if ($grepmain == 0 or $status_scale1 == 0) {
+                                                if ($status_main == 0 or $status_scale1 == 0) {
                                                     $weight_scale1 = '-----';
+                                                    $weight_loss_scale1 = '-----';
                                                 }
                                                 else {
                                                     $data_from_db = get_table_value($current_values_table, $scale1_key);
                                                     if ($data_from_db === null) {
                                                         $weight_scale1 = '-----';
+                                                        $weight_loss_scale1 = '-----';
                                                     }
                                                     else {
                                                         $weight_scale1 = round($data_from_db, 0);
+                                                        $take_off_weight_scale1 = intval(get_table_value($config_settings_table, $take_off_weight_scale1_key));
+                                                        if ($take_off_weight_scale1 == 0) {
+                                                            $weight_loss_scale1 = '-----';
+                                                        }
+                                                        else {
+                                                            $diff = $take_off_weight_scale1 - $weight_scale1;
+                                                            if ($weight_scale1 <= 0 || $diff < 0) {
+                                                                $weight_loss_scale1 = '0g (0.0%)';
+                                                            }
+                                                            else {
+                                                                $number = round(($diff / $take_off_weight_scale1 * 100), 1);
+                                                                $num_fmt = number_format($number, 1, '.', '');
+                                                                $weight_loss_scale1 = $diff . 'g (' . $num_fmt . '%)';
+                                                            }
+                                                        }
                                                     }
                                                 }
-                                                if ($grepmain == 0 or $status_scale2 == 0) {
+                                                if ($status_main == 0 or $status_scale2 == 0) {
                                                     $weight_scale2 = '-----';
+                                                    $weight_loss_scale2 = '-----';
                                                 }
                                                 else {
                                                     $data_from_db = get_table_value($current_values_table, $scale2_key);
@@ -135,6 +170,21 @@
                                                     }
                                                     else {
                                                         $weight_scale2 = round($data_from_db, 0);
+                                                        $take_off_weight_scale2 = intval(get_table_value($config_settings_table, $take_off_weight_scale2_key));
+                                                        if ($take_off_weight_scale2 == 0) {
+                                                            $weight_loss_scale2 = '-----';
+                                                        }
+                                                        else {
+                                                            $diff = $take_off_weight_scale2 - $weight_scale2;
+                                                            if ($weight_scale2 <= 0 || $diff < 0) {
+                                                                $weight_loss_scale2 = '0g (0.0%)';
+                                                            }
+                                                            else {
+                                                                $number = round(($diff / $take_off_weight_scale2 * 100), 1);
+                                                                $num_fmt = number_format($number, 1, '.', '');
+                                                                $weight_loss_scale2 = $diff . 'g (' . $num_fmt . '%)';
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             ?>
@@ -235,21 +285,27 @@
                                 <div class="hg_container">
                                     <table class="switching_state miniature_writing">
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            
+                                            <td width=50%></td>
+                                            <td width=50%></td>
                                         </tr>
                                         <tr>
-                                            <td>
-                                                <img src="images/icons/scale_42x42.png" alt="">1
-                                            </td>
-                                            <td>
-                                                <img src="images/icons/scale_42x42.png" alt="">2
-                                            </td>
+                                            <td><img src="images/icons/scale_42x42.png" alt="">1</td>
+                                            <td><img src="images/icons/scale_42x42.png" alt="">2</td>
                                         </tr>
                                         <tr>
                                             <td id="json_scale1" style="font-size: 20px;"><?php echo $weight_scale1 . ' g';?></td>
                                             <td id="json_scale2" style="font-size: 20px;"><?php echo $weight_scale2 . ' g';?></td>
+                                        </tr>
+                                    </table>
+                                    <hr>
+                                    <table class="switching_state miniature_writing">
+                                        <tr>
+                                            <td width=50%><img src="images/icons/scale_d_trend_42x42.png" alt="">1</td>
+                                            <td width=50%><img src="images/icons/scale_d_trend_42x42.png" alt="">2</td>
+                                        </tr>
+                                        <tr>
+                                            <td id="json_weight_loss_scale1" style="font-size: 20px;"><?php echo $weight_loss_scale1;?></td>
+                                            <td id="json_weight_loss_scale2" style="font-size: 20px;"><?php echo $weight_loss_scale2;?></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -311,7 +367,7 @@
                                 <script>
                                 // this is to avoid form refresh after change customtime button is pushed
                                 $("#change_customtime_id").click(function() {
-                                    var url = "modules/querywcdb.php"; // the script where you handle the form input.
+                                    var url = "modules/querywcdb.php?rand=" + Math.random(); // the script where you handle the form input.
 
                                     $.ajax({
                                         type: "POST",
@@ -345,6 +401,7 @@
                                             labels: [],
                                             datasets: [{
                                                 label: '<?php echo _("temperature") . ' int.' ?>',
+                                                hidden: true,
                                                 yAxisID: 'temperature',
                                                 data: <?php echo json_encode($temperature_dataset);?>,
                                                 backgroundColor: '#FF4040',
@@ -403,6 +460,7 @@
                                             },                                            
                                             {
                                                 label: '<?php echo _("humidity") . ' int.' ?>',
+                                                hidden: true,
                                                 yAxisID: 'humidity',
                                                 data: <?php echo json_encode($humidity_dataset); ?>,
                                                 backgroundColor: '#59A9C4',
@@ -581,7 +639,36 @@
                                                 cubicInterpolationMode: 'monotone',
                                                 fill: false,
                                                 spanGaps: true
-                                            }]
+                                            },
+                                            {
+                                                label: '<?php echo _("take-off weight") . " " . _("scale"); ?> 1',
+                                                yAxisID: 'scale1',
+                                                data: <?php echo json_encode($scale1_take_off_weight_dataset);?>,
+                                                backgroundColor: '#05F700',
+                                                borderColor: '#05F700',
+                                                borderWidth: 0,
+                                                pointRadius: 1, pointHitRadius: 5,
+                                                pointStyle: 'rect',
+                                                // cubicInterpolationMode: 'monotone',
+                                                borderDash: [10,10],
+                                                fill: false,
+                                                spanGaps: true
+                                            },
+                                            {
+                                                label: '<?php echo _("take-off weight") . " " . _("scale"); ?> 2',
+                                                yAxisID: 'scale2',
+                                                data: <?php echo json_encode($scale2_take_off_weight_dataset);?>,
+                                                backgroundColor: '#FFC400',
+                                                borderColor: '#FFC400',
+                                                borderWidth: 0,
+                                                pointRadius: 1, pointHitRadius: 5,
+                                                pointStyle: 'rect',
+                                                // cubicInterpolationMode: 'monotone',
+                                                borderDash: [10,10],
+                                                fill: false,
+                                                spanGaps: true
+                                            }
+                                            ]
                                         },
                                         options: {
                                             title: {
@@ -602,6 +689,10 @@
                                                         if (tooltipItem.datasetIndex === 0) {
                                                             return Number(tooltipItem.yLabel).toFixed(1) + ' g';
                                                         } else if (tooltipItem.datasetIndex === 1) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' g';
+                                                        } else if (tooltipItem.datasetIndex === 2) {
+                                                            return Number(tooltipItem.yLabel).toFixed(1) + ' g';
+                                                        } else if (tooltipItem.datasetIndex === 3) {
                                                             return Number(tooltipItem.yLabel).toFixed(1) + ' g';
                                                         }
                                                     }
@@ -688,7 +779,9 @@
                                             chart_hidden = false;
                                         }
                                         console.log(key + ' = ' + chart_hidden);
-                                        config_temp_hum_chart.data.datasets[i].hidden = (chart_hidden == 'true');
+                                        if (i == 1 || i == 4) { // restore only avg curves
+                                            config_temp_hum_chart.data.datasets[i].hidden = (chart_hidden == 'true');
+                                        }
                                     }
                                     
                                     temp_hum_chart = new Chart(temp_hum_chart_el, config_temp_hum_chart);
@@ -738,18 +831,18 @@
                                  <!----------------------------------------------------------------------------------------Reifetabelle-->
                                 <?php 
                                     $current_period = intval(get_table_value($current_values_table, $agingtable_period_key));
-                                    $current_period_day = intval(get_table_value($current_values_table, $agingtable_period_day_key));
+                                    $current_period_hour = intval(get_table_value($current_values_table, $agingtable_period_hour_key));
                                  ?>        
                                 <h2 id="aging_table_header_id" class="art-postheader"><?php echo _('agingtable') . ' - ' . $maturity_type; ?></h2>
                                 <div class="hg_container">
                                     <table style="width: 100%" class="switching_state miniature_writing">
                                         <tr>
                                             <td width="75px"><?php echo _('phase'); ?></td>
-                                            <td align="left" id="current_period_head_index"><?php if ($grepagingtable != 0) { echo ($current_period + 1);} else { echo '';} ?></td>
+                                            <td align="left" id="current_period_head_index"><?php if ($status_agingtable != 0) { echo ($current_period + 1);} else { echo '';} ?></td>
                                         </tr>
                                         <tr>
-                                            <td width="75px"><?php echo _('day'); ?></td>
-                                            <td align="left" id="current_period_day_head_index"><?php if ($grepagingtable != 0) { echo ($current_period_day);} else { echo '';} ?></td>
+                                            <td width="75px"><?php echo _('hour'); ?></td>
+                                            <td align="left" id="current_period_hour_head_index"><?php if ($status_agingtable != 0) { echo ($current_period_hour);} else { echo '';} ?></td>
                                         </tr>
                                     </table>
                                     
@@ -757,13 +850,13 @@
                                         <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('phase'); ?><span class="tooltiptext"><?php echo _('phase'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('modus'); ?><span class="tooltiptext"><?php echo _('aging-modus'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">&phi;<span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip">°C<span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('humidity %');?><span class="tooltiptext"><?php echo _('target humidity in %'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('temperature °C');?><span class="tooltiptext"><?php echo _('target temperature in °C'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate ON duration'); ?><span class="tooltiptext"><?php echo _('timer of the circulation air ON duration in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer circulate OFF duration'); ?><span class="tooltiptext"><?php echo _('timer of the circulation air OFF duration in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust ON duration'); ?><span class="tooltiptext"><?php echo _('timer of the exhausting air ON duration in minutes'); ?></span></div></td>
                                             <td class="show_agingcell"><div class="tooltip"><?php echo _('timer exhaust OFF duration'); ?><span class="tooltiptext"><?php echo _('timer of the exhausting air OFF duration in minutes'); ?></span></div></td>
-                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('days'); ?><span class="tooltiptext"><?php echo _('duration of hanging phase in days'); ?></span></div></td>
+                                            <td class="show_agingcell"><div class="tooltip"><?php echo _('hours'); ?><span class="tooltiptext"><?php echo _('duration of hanging phase in hours'); ?></span></div></td>
                                         </tr>
                                         
                                         <?php
@@ -775,10 +868,10 @@
                                             $data_circulation_air_period = ' ';
                                             $data_exhaust_air_duration = ' ';
                                             $data_exhaust_air_period = ' ';
-                                            $data_days = '';
+                                            $data_hours = ' ';                                            
                                             $agingtable_comment_with_carriage_return = '';
                                             
-                                            if ($grepagingtable != 0) {
+                                            if ($status_agingtable != 0) {
                                                 $index_row = 0;
                                                 $agingtable_rows = get_agingtable_dataset($desired_maturity);
                                                 if ($agingtable_rows != false){
@@ -793,32 +886,32 @@
                                                         $number_rows = count($agingtable_rows);
                                                         while ($index_row < $number_rows) {
                                                             $dataset = $agingtable_rows[$index_row];
-                                                            if (!empty($dataset[$agingtable_modus_field])){
+                                                            if (isset($dataset[$agingtable_modus_field])){
                                                                 $data_modus = $dataset[$agingtable_modus_field];
                                                             }
-                                                            if (!empty($dataset[$agingtable_setpoint_humidity_field])){
+                                                            if (isset($dataset[$agingtable_setpoint_humidity_field])){
                                                                 $data_setpoint_humidity = $dataset[$agingtable_setpoint_humidity_field];
                                                             }
-                                                            if (!empty($dataset[$agingtable_setpoint_temperature_field])){
+                                                            if (isset($dataset[$agingtable_setpoint_temperature_field])){
                                                                 $data_setpoint_temperature = $dataset[$agingtable_setpoint_temperature_field];
                                                             }
-                                                            if (!empty($dataset[$agingtable_circulation_air_duration_field])){
+                                                            if (isset($dataset[$agingtable_circulation_air_duration_field])){
                                                                 $data_circulation_air_duration = $dataset[$agingtable_circulation_air_duration_field]/60;
                                                             }
-                                                            if (!empty($dataset[$agingtable_circulation_air_period_field])){
+                                                            if (isset($dataset[$agingtable_circulation_air_period_field])){
                                                                 $data_circulation_air_period = $dataset[$agingtable_circulation_air_period_field]/60;
                                                             }
-                                                            if (!empty($dataset[$agingtable_exhaust_air_duration_field])){
+                                                            if (isset($dataset[$agingtable_exhaust_air_duration_field])){
                                                                 $data_exhaust_air_duration = $dataset[$agingtable_exhaust_air_duration_field]/60;
                                                             }
-                                                            if (!empty($dataset[$agingtable_exhaust_air_period_field])){
+                                                            if (isset($dataset[$agingtable_exhaust_air_period_field])){
                                                                 $data_exhaust_air_period = $dataset[$agingtable_exhaust_air_period_field]/60;
                                                             }
-                                                            if (!empty($dataset[$agingtable_days_field])){
-                                                                $data_days = $dataset[$agingtable_days_field];
+                                                            if (isset($dataset[$agingtable_hours_field])){
+                                                                $data_hours = $dataset[$agingtable_hours_field];
                                                             }
 
-                                                            if ($current_period == $index_row AND $grepagingtable != 0){
+                                                            if ($current_period == $index_row AND $status_agingtable != 0){
                                                                 echo '<tr bgcolor=#D19600 >';
                                                                 echo '<td id="current_period_index">'. ($current_period +1) .'</td>';
                                                                 echo '<td id="data_modus_index">'. $data_modus .'</td>';
@@ -828,7 +921,7 @@
                                                                 echo '<td id="data_circulation_air_period_index">'. $data_circulation_air_period .'</td>';
                                                                 echo '<td id="data_exhaust_air_duration_index">'. $data_exhaust_air_duration .'</td>';
                                                                 echo '<td id="data_exhaust_air_period_index">'. $data_exhaust_air_period .'</td>';
-                                                                echo '<td id="data_days_index">'. $data_days .'</td>';
+                                                                echo '<td id="data_hours_index">'. $data_hours .'</td>';
                                                                 echo '</tr>';
                                                                 break;
                                                             }
@@ -849,7 +942,7 @@
                                                 echo '<td id="data_circulation_air_period_index">&nbsp;</td>';
                                                 echo '<td id="data_exhaust_air_duration_index">&nbsp;</td>';
                                                 echo '<td id="data_exhaust_air_period_index">&nbsp;</td>';
-                                                echo '<td id="data_days_index">&nbsp;</td>';
+                                                echo '<td id="data_hours_index">&nbsp;</td>';
                                                 echo '</tr>';
                                             }
                                         ?>
@@ -882,15 +975,15 @@
                                             <?php 
                                                     // Prüft, ob Prozess RSS läuft
                                                     //$grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain');
-                                                    if ($grepmain == 0){
+                                                    if ($status_main == 0){
                                                         echo '<td><img id="mainstatus_img_mode" src="images/icons/operatingmode_fail_42x42.png" alt="" style="padding: 10px;"></td>';
                                                         echo '<td><img id="mainstatus_img_onoff" src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                     }
-                                                    elseif ($grepmain != 0 and $status_piager == 0){
+                                                    elseif ($status_main != 0 and $status_piager == 0){
                                                         echo '<td><img id="mainstatus_img_mode" src="images/icons/operatingmode_42x42.png" alt="" style="padding: 10px;"></td>';
                                                         echo '<td><img id="mainstatus_img_onoff" src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                     }
-                                                    elseif ($grepmain != 0 and $status_piager == 1) {
+                                                    elseif ($status_main != 0 and $status_piager == 1) {
                                                         echo '<td><img id="mainstatus_img_mode" src="images/icons/operating_42x42.gif" alt="" style="padding: 10px;"></td>';
                                                         echo '<td><img id="mainstatus_img_onoff" src="images/icons/status_on_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                     }
@@ -920,13 +1013,13 @@
                                             <td></td>   
                                             <td></td>
                                             <td id="main_status_text" class="text_left_top"><?php
-                                                if ($grepmain == 0){
+                                                if ($status_main == 0){
                                                     echo strtoupper(_('see settings'));
                                                 }
-                                                elseif ($grepmain != 0 and $status_piager == 0){
+                                                elseif ($status_main != 0 and $status_piager == 0){
                                                     echo strtoupper(_('off'));
                                                 }
-                                                elseif($grepmain != 0 and $status_piager == 1){
+                                                elseif ($status_main != 0 and $status_piager == 1){
                                                     echo $modus_name;
                                                 }
                                                 ?></td>
@@ -959,11 +1052,11 @@
                                         <tr>
                                             <?php 
                                                 // Prüft, ob thread Reifetabee läuft
-                                                if ($grepmain == 0){
+                                                if ($status_main == 0){
                                                     echo '<td><img id="agingtable_img" src="images/icons/agingtable_fail_42x42.gif" alt="" style="padding: 10px;"></td>';
                                                     echo '<td><img id="agingtable_img_status" src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                 }
-                                                else if ($grepagingtable == 0){
+                                                else if ($status_agingtable == 0){
                                                     echo '<td><img id="agingtable_img" src="images/icons/agingtable_42x42.png" alt="" style="padding: 10px;"></td>';
                                                     echo '<td><img id="agingtable_img_status" src="images/icons/status_off_20x20.png" alt="" style="padding-top: 10px;"></td>';
                                                 }
@@ -1062,7 +1155,7 @@
                                     </table>
                                     <!---------------------------------------temperatures-->
                                     <hr>
-                                    <h2><?php echo _('temperatures'); ?></h2>
+                                    <h2><?php echo _('temperature/humidity control'); ?></h2>
                                     <br>
                                     <table class="switching_state miniature_writing">
                                         <tr>
@@ -1076,14 +1169,28 @@
                                         </tr>
                                         <tr>
                                             <?php
-                                                if ($grepmain == 0 || $status_piager == 0) {
+                                                if ($status_main == 0 || $status_piager == 0) {
                                                     $sensor_temperature = '--.-';
                                                     $sensor_humidity = '--.-';
                                                 }
-                                                $cooler_on = number_format(floatval($setpoint_temperature + $switch_on_cooling_compressor), 1, '.', '');
-                                                $cooler_off = number_format(floatval($setpoint_temperature + $switch_off_cooling_compressor), 1, '.', '');
-                                                $heater_on = number_format(floatval($setpoint_temperature - $switch_on_cooling_compressor), 1, '.', '');
-                                                $heater_off = number_format(floatval($setpoint_temperature - $switch_off_cooling_compressor), 1, '.', '');
+                                                $internal_temperature = get_table_value($current_values_table, $sensor_temperature_key);
+                                                $external_temperature = get_table_value($current_values_table, $sensor_extern_temperature_key);
+                                                if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $setpoint_temperature && ($modus == 3 || $modus == 4)) {
+                                                    $cooler_on = number_format(floatval($setpoint_temperature + $heating_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                                                    $cooler_off = number_format(floatval($setpoint_temperature - $heating_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                                                    $heater_on = number_format(floatval($setpoint_temperature - $cooling_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
+                                                    $heater_off = number_format(floatval($setpoint_temperature + $cooling_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
+                                                }
+                                                else if ($modus == 2) { // heater only
+                                                    $heater_on = number_format(floatval($setpoint_temperature - $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                                                    $heater_off = number_format(floatval($setpoint_temperature + $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                                                }
+                                                else {
+                                                    $cooler_on = number_format(floatval($setpoint_temperature + $cooling_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
+                                                    $cooler_off = number_format(floatval($setpoint_temperature - $cooling_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
+                                                    $heater_on = number_format(floatval($setpoint_temperature - $heating_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                                                    $heater_off = number_format(floatval($setpoint_temperature + $heating_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
+                                                }
                                                 if ($modus == 0 || $modus == 1){
                                                     echo '<td><img id="mod_type_line1_id" src="images/icons/cooling_42x42.png" alt=""></td>
                                                         <td><img id="mod_stat_line1_id" src="'.$cooler_on_off_png.'" title="PIN_COOL 4[7] -> IN 1 (PIN2)"></td>
@@ -1096,6 +1203,7 @@
                                                         <td id="mod_off_line1_id">'.$cooler_off.' °C</td>';
                                                 }
                                                 else if ($modus == 2){
+                                                    // in mode 2, when only heating is active, take primary hysteresis values (primary is cooling_hysteresis).
                                                     echo '<td><img id="mod_type_line1_id" src="images/icons/heating_42x42.png" alt=""></td>
                                                         <td><img id="mod_stat_line1_id" src="'.$heater_on_off_png.'" title="PIN_HEATER 3[5] -> IN 2 (PIN 3)"></td>
                                                         <td id="mod_name_line1_id" class="text_left">';
@@ -1137,8 +1245,8 @@
                                                     echo '</td>
                                                         <td id="mod_current_line3_id">'.$sensor_humidity.' %</td>
                                                         <td id="mod_setpoint_line3_id">'.$setpoint_humidity.' %</td>
-                                                        <td id="mod_on_line3_id">'.($setpoint_humidity - $switch_on_humidifier).' %</td>
-                                                        <td id="mod_off_line3_id">'.($setpoint_humidity - $switch_off_humidifier).' %</td>';
+                                                        <td id="mod_on_line3_id">' . eval_switch_on_humidity( $setpoint_humidity, $humidifier_hysteresis, $humidifier_hysteresis_offset ) . ' %</td>
+                                                        <td id="mod_off_line3_id">' . eval_switch_off_humidity( $setpoint_humidity, $humidifier_hysteresis, $humidifier_hysteresis_offset, $saturation_point ) . ' %</td>';
                                                 }
 
                                                 if ($modus == 4){
@@ -1148,8 +1256,8 @@
                                                     echo strtoupper(_('humidification'));
                                                     echo '<td id="mod_current_line3_id">'.$sensor_humidity.' %</td>
                                                         <td id="mod_setpoint_line3_id">'.$setpoint_humidity.' %</td>
-                                                        <td id="mod_on_line3_id">'.($setpoint_humidity - $switch_on_humidifier).' %</td>
-                                                        <td id="mod_off_line3_id">'.($setpoint_humidity - $switch_off_humidifier).' %</td></tr>';
+                                                        <td id="mod_on_line3_id">' . eval_switch_on_humidity( $setpoint_humidity, $humidifier_hysteresis, $humidifier_hysteresis_offset ) . ' %</td>
+                                                        <td id="mod_off_line3_id">' . eval_switch_off_humidity( $setpoint_humidity, $humidifier_hysteresis, $humidifier_hysteresis_offset, $saturation_point ) . ' %</td></tr>';
                                                
                                                     echo '<tr><td ><img id="mod_type_line5_id" src="images/icons/dehumidification_42x42.png" alt=""></td>
                                                         <td><img id="mod_stat_line5_id" src='.$dehumidifier_on_off_png.' title="PIN_DEH 7[26] -> IN 8 (PIN 9)"></td>
@@ -1158,19 +1266,15 @@
                                                     echo '</td>
                                                         <td id="mod_current_line5_id">'.$sensor_humidity.' %</td>
                                                         <td id="mod_setpoint_line5_id">'.$setpoint_humidity.' %</td>
-                                                        <td id="mod_on_line5_id">'.((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100).' %</td>
-                                                        <td id="mod_off_line5_id">'.((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100).' %</td></tr>';
+                                                        <td id="mod_on_line5_id">' . eval_switch_on_dehumidity( $setpoint_humidity, $dehumidifier_hysteresis, $dehumidifier_hysteresis_offset, $saturation_point ) . ' %</td>
+                                                        <td id="mod_off_line5_id">' . eval_switch_off_dehumidity( $setpoint_humidity,  $dehumidifier_hysteresis, $dehumidifier_hysteresis_offset ) . ' %</td></tr>';
                                                         
                                                     echo '<tr><td ><img id="mod_type_line4_id" src="images/icons/exhausting_42x42.png" alt=""></td>
                                                         <td><img id="mod_stat_line4_id" src='.$exhausting_on_off_png.' title="PIN_EXH 23[16] -> IN 5 (PIN 5)"></td>
                                                         <td id="mod_name_line4_id" class="text_left">';
                                                     echo strtoupper(_('exhausting'));
-                                                    echo '</td>
-                                                        <td id="mod_current_line4_id">'.$sensor_humidity.' %</td>
-                                                        <td id="mod_setpoint_line4_id">'.$setpoint_humidity.' %</td>
-                                                        <td id="mod_on_line4_id">'.((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100).' %</td>
-                                                        <td id="mod_off_line4_id">'.((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100).' %</td></tr>';
-                                                    
+                                                    echo '</td></tr>';
+                                                                                        
                                                     if ($sensorsecondtype != 0){  # if (!($bus == 1 || $sensorsecondtype == 0)){  // show abs. humidity check aktive only with second sensor
                                                         echo '<tr><td></td>';  // skip type column
                                                         if ($dehumidifier_modus == 3) {     // only dehumidification
@@ -1379,11 +1483,33 @@
                                             <td></td>
                                         </tr>
                                     </table>
+                                    <hr>
+                                    <h2><?php echo _('uptimes'); ?></h2>
+
+                                    <?php
+                                        $uptime_row = get_table_row($time_meter_table, 1);
+                                        $uv_uptime_seconds = intval($uptime_row[$uv_light_seconds_field]);
+                                        $uv_uptime_formatted = convert_seconds_to_hours($uv_uptime_seconds, 2);
+                                        $pi_ager_uptime_seconds = intval($uptime_row[$pi_ager_seconds_field]);
+                                        $pi_ager_uptime_formatted = convert_seconds_to_hours($pi_ager_uptime_seconds, 2);
+                                    ?>
+                                    <table class="show_uptime_table">
+                                        <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
+                                            <td class="show_uptime_cell"><div class="tooltip"><?php echo _('name'); ?><span class="tooltiptext"><?php echo _('uptime object name'); ?></span></div></td>
+                                            <td class="show_uptime_cell"><div class="tooltip"><?php echo _('uptime'); ?><span class="tooltiptext"><?php echo _('uptime in hours'); ?></span></div></td>                                       
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo _('Pi-Ager');?></td>
+                                            <td id="pi_ager_uptime_id"><?php echo $pi_ager_uptime_formatted;?></td>
+                                        </tr>
+                                        <tr>
+                                            <td><?php echo _('uv light');?></td>
+                                            <td id="uv_uptime_id"><?php echo $uv_uptime_formatted;?></td>
+                                        </tr>
+                                    </table>
                                 </div>
                                 
-                                <?php
-                                    echo "<script src='js/ajaxat.js'></script>";
-                                ?>
+                                <script src='js/ajaxat.js'></script>
                                 
 <!--                                <script>
                                     if ( window.history.replaceState ) {    // avoid page confirmation on refresh

@@ -12,7 +12,7 @@ from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 class cl_sensor_MiThermometer(cl_sensor):
     
     def __init__(self, i_sensor_type, i_active_sensor):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self.o_active_sensor = i_active_sensor  # MAIN or SECOND
         self.o_sensor_type = i_sensor_type      # class to get second sensor name e.g.
         self.temperature = None
@@ -26,17 +26,23 @@ class cl_sensor_MiThermometer(cl_sensor):
         self.event_out_of_range = False
         
     def get_current_data(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        Mi_Timeout = 50
-        mi_data = pi_ager_database.get_table_value_from_field(pi_ager_names.atc_mi_thermometer_data_table, pi_ager_names.mi_data_key)
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        Mi_Timeout = 120
+        mi_data = pi_ager_database.get_table_row('atc_data', 1)
+#        mi_data = pi_ager_database.get_table_value_from_field(pi_ager_names.atc_mi_thermometer_data_table, pi_ager_names.mi_data_key)
         if (mi_data != None):
-            splited_data = mi_data.split(' ')
+#            splited_data = mi_data.split(' ')
             try:
-                self.address = splited_data[1]
-                self.temperature = float(splited_data[2])
-                self.humidity = float(splited_data[3])
-                self.battery = float(splited_data[4])
-                self.data_timestamp = int(splited_data[5])  # time in seconds when data was generated
+#                self.address = splited_data[1]
+#                self.temperature = float(splited_data[2])
+#                self.humidity = float(splited_data[3])
+#                self.battery = float(splited_data[4])
+#                self.data_timestamp = int(splited_data[5])  # time in seconds when data was generated
+#                self.address = splited_data[1]
+                self.temperature = mi_data['temperature']
+                self.humidity = mi_data['humidity']
+                self.battery = mi_data['battvolt']
+                self.data_timestamp = mi_data['last_change']  # time in seconds when data was generated
                 current_time = int(time.time()) # current time in seconds 
                 if (current_time - self.data_timestamp) > Mi_Timeout:   # when difference is greater than Mi_Timeout, then bluetooth connection may be broken
                     if self.event_out_of_range == False:
@@ -45,6 +51,13 @@ class cl_sensor_MiThermometer(cl_sensor):
                         cl_fact_logic_messenger().get_instance().handle_event('Mi_Sensor_failed') #if the second parameter is empty, the value is taken from the field envent_text in table config_messenger_event 
                     pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.MiSensor_battery_key, None)    
                     return(None,None,None,None)
+                
+                hum_offset = self.get_humidity_offset()
+                self.humidity += hum_offset
+                if (self.humidity > 100.0):
+                    self.humidity = 100.0
+                if (self.humidity < 0.0):
+                    self.humidity = 0.0
                     
                 (self.dewpoint, self.absolute_humidity) = super().get_dewpoint(self.temperature, self.humidity)
                 self.measured_data = (self.temperature, self.humidity, self.dewpoint, self.absolute_humidity)
@@ -64,25 +77,6 @@ class cl_sensor_MiThermometer(cl_sensor):
             cl_fact_logger.get_instance().debug('MiThermometerData : ' + 'Data error')
             pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.MiSensor_battery_key, None) 
             return(None,None,None,None)
-            
-   
-    def _write_to_db(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-
-    def execute(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
-    def soft_reset(self):
-        """Performs Soft Reset on SHT chip"""
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
-    def set_heading_on(self):
-        """Switch the heading on the sensor on"""
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-    
-    def set_heading_off(self):
-        """Switch the heading on the sensor off"""
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
 
     
 class cl_fact_sensor_MiThermometer: 
@@ -91,7 +85,7 @@ class cl_fact_sensor_MiThermometer:
 
     @classmethod        
     def get_instance(self, i_sensor_type, i_active_sensor):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if cl_fact_sensor_MiThermometer.__o_instance is not None:
             return(cl_fact_sensor_MiThermometer.__o_instance)
         cl_fact_sensor_MiThermometer.__o_instance = cl_sensor_MiThermometer(i_sensor_type, i_active_sensor)
@@ -99,10 +93,10 @@ class cl_fact_sensor_MiThermometer:
 
     @classmethod
     def set_instance(self, i_instance):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_sensor_MiThermometer.__o_instance = i_instance
     
     def __init__(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         pass    
 

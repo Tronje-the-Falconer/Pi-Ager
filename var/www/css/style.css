@@ -432,7 +432,7 @@ li p, .art-postcontent li p, .art-blockcontent li p
     left: 10.62%;
     margin-left: -1px;
     position: absolute;
-    top: 23px;
+    top: 20px;
     width: 45px;
     height: 100px;
     background-image: url('../images/logo.png');
@@ -696,15 +696,15 @@ ul.art-hmenu>li>a
    -webkit-border-radius:4px 4px 0 0;
    -moz-border-radius:4px 4px 0 0;
    border-radius:4px 4px 0 0;
-   padding:0 20px;
+   padding:0 14px;
    margin:0 auto;
    position: relative;
    display: block;
-   height: 35px;
+   height: 30px;
    cursor: pointer;
    text-decoration: none;
    color: #4A4A4A;
-   line-height: 35px;
+   line-height: 30px;
    text-align: center;
 }
 
@@ -730,7 +730,7 @@ ul.art-hmenu>li>a.active
    -webkit-border-radius:4px 4px 0 0;
    -moz-border-radius:4px 4px 0 0;
    border-radius:4px 4px 0 0;
-   padding:0 20px;
+   padding:0 14px;
    margin:0 auto;
    color: #FFFFFF;
    text-decoration: none;
@@ -748,7 +748,7 @@ ul.art-hmenu>li>a:hover, .desktop ul.art-hmenu>li:hover>a
    -webkit-border-radius:4px 4px 0 0;
    -moz-border-radius:4px 4px 0 0;
    border-radius:4px 4px 0 0;
-   padding:0 20px;
+   padding:0 14px;
    margin:0 auto;
 }
 ul.art-hmenu>li>a:hover, 

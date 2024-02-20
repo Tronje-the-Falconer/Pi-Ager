@@ -1,0 +1,17 @@
+[Unit]
+Description=Start main routine of Pi-Ager
+After=network-online.target
+After=bluetooth.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=python3 /opt/pi-ager/main.py 1>/dev/null 2>&1
+ExecStartPre=ln -sf /dev/ttyAMA0 /dev/serial0
+PIDFile=/tmp/pi-ager_main.pid
+StandardOutput=null
+StandardError=null
+
+[Install]
+Alias=pi-ager.service
+WantedBy=multi-user.target

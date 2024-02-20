@@ -141,14 +141,14 @@ class cl_logger:
         logging.handlers.GroupWriteRotatingFileHandler = GroupWriteRotatingFileHandler
         
         # Logger fuer website
-        self.website_log_rotatingfilehandler = logging.handlers.GroupWriteRotatingFileHandler(pi_ager_paths.get_path_logfile_txt_file(), mode='a', maxBytes=262144, backupCount=36, encoding=None, delay=False)
+        self.website_log_rotatingfilehandler = logging.handlers.GroupWriteRotatingFileHandler(pi_ager_paths.get_path_logfile_txt_file(), mode='a', maxBytes=262144, backupCount=10, encoding=None, delay=False)
         self.website_log_rotatingfilehandler.setLevel(logging.INFO)
         self.website_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(message)s', '%y-%m-%d %H:%M:%S')
         self.website_log_rotatingfilehandler.setFormatter(self.website_log_rotatingfilehandler_formatter)
     
         # Logger fuer pi-ager debugging
         self.check_pi_ager_logfile()
-        self.pi_ager_log_rotatingfilehandler = logging.handlers.GroupWriteRotatingFileHandler(pi_ager_paths.get_pi_ager_log_file_path(), mode='a', maxBytes=1048576, backupCount=20, encoding=None, delay=False)
+        self.pi_ager_log_rotatingfilehandler = logging.handlers.GroupWriteRotatingFileHandler(pi_ager_paths.get_pi_ager_log_file_path(), mode='a', maxBytes=1048576, backupCount=10, encoding=None, delay=False)
         log_level = self.get_logginglevel(loglevel_file_value)
         self.pi_ager_log_rotatingfilehandler.setLevel(log_level)
         self.pi_ager_log_rotatingfilehandler_formatter = logging.Formatter('%(asctime)s %(levelname)-10s %(modulename)-35s %(message)s', '%m-%d %H:%M:%S')

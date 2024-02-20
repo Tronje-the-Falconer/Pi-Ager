@@ -5,18 +5,25 @@
 ?>
                                 <?php
                                 # 10 Sekunden anzeigen, dass System heruntergefahren wird
-                                    print '<p id=\'info-message\' style=\'color: #ff0000; font-size: 20px;\'><b>'. (_("reboot")) .'</b><br>' . date("m/d/y h:i:s a") . '<br>You will automatically redirected to the start page' . ' </p>
-                                    <br><br>';
-
+                                    $reboot_datetime = exec('date +"%Y-%m-%d %T"');
+                                    echo '<p id=\'info-message\' style=\'color: #ff0000; font-size: 20px;\'><b>' . (_("reboot")) . '</b><br>' . $reboot_datetime . '<br>' . (_("You will automatically redirected to the start page")) . '</p><br><br>';
+                                    shell_exec('sudo /var/sudowebscript.sh reboot > /dev/null 2>&1 &');
                                 ?>
                                 <img src="images/spinner.gif" alt=""/>
                                 <script>
+                                    window.addEventListener('beforeunload', (event) => {
+                                        // Cancel the event as stated by the standard.
+                                        event.preventDefault();
+                                        // Chrome requires returnValue to be set.
+                                        event.returnValue = '';
+                                    });
+                                    
                                     setTimeout(function(){
                                         document.getElementById("info-message").style.color="#000000";
                                         while (serverReachable() == false) {
                                             continue;
                                         }
-                                        window.location.href = "index.php";
+                                        window.location.href = "index.php?rand=" + Math.random();
                                     }, 10000); 
                                         
                                     function serverReachable() {

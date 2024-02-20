@@ -6,7 +6,7 @@ pi-ager global values
 """
 import threading
 import pi_ager_names
-
+from queue import Queue
 def init():
     global lock
     lock = threading.Lock()
@@ -20,4 +20,6 @@ def init():
     requested_state_uv_light = pi_ager_names.relay_off    # relais not active
     global requested_state_light
     requested_state_light = pi_ager_names.relay_off    # relais not active
+    global mqtt_msg_queue
+    mqtt_msg_queue = Queue(maxsize = 10)
     

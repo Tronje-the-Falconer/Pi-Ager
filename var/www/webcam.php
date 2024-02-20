@@ -7,7 +7,7 @@ include 'modules/logging.php';                            //liest die Datei fuer
 include 'modules/save_webcam_picture.php';
 include 'modules/start_stop_program.php';
 include 'modules/start_stop_light.php';
-include 'modules/read_current_db.php';
+//include 'modules/read_current_db.php';
 
 ?>
                                 <?PHP
@@ -46,7 +46,7 @@ include 'modules/read_current_db.php';
                                             </tr>
 											<tr>
                                                  <?php 
-                                                    
+                                                    $status_light_manual = intval(get_table_value($current_values_table,$status_light_manual_key));
                                                     if($status_light_manual == 0) {
                                                         echo '<td><img src="/images/icons/status_on_20x20.png" title="uv off"></td>';
 														echo '<td style="text-align: left; ">' . _('auto mode on') . '</td>';

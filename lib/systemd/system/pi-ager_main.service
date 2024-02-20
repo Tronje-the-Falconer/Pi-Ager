@@ -12,5 +12,5 @@ StandardOutput=null
 StandardError=null
 
 [Install]
-Alias=pi-ager
+Alias=pi-ager.service
 WantedBy=multi-user.target

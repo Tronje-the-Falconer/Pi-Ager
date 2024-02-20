@@ -3,13 +3,13 @@
 //
 
 async function handleContent( msg ) {
-    console.log('in handleContent');
+//    console.log('in handleContent');
 
     myObj = JSON.parse(msg);
 
-    var temperature_main = myObj.sensor_temperature[0];
-    var humidity_main = myObj.sensor_humidity[0];
-    var humidity_abs_main = myObj.sensor_humidity_abs[0];        
+    var temperature_main = myObj.temperature_avg[0];
+    var humidity_main = myObj.humidity_avg[0];
+    var humidity_abs_main = myObj.humidity_abs_avg[0];        
     var dewpoint_main = myObj.sensor_dewpoint[0];
     var temperature_extern = myObj.sensor_extern_temperature[0];
     var humidity_extern = myObj.sensor_extern_humidity[0];
@@ -34,6 +34,9 @@ async function handleContent( msg ) {
     var MiSensor_battery = myObj.MiSensor_battery[0];
     var sensorsecondtype = myObj.sensorsecondtype;
     var sensorbus = myObj.sensorbus;
+    
+    var take_off_weight_scale1 = myObj.take_off_weight_scale1;
+    var take_off_weight_scale2 = myObj.take_off_weight_scale2;
     
     // console.log('temperature_extern = ', temperature_extern);
     
@@ -70,7 +73,7 @@ async function handleContent( msg ) {
         str_humidity_main = '-----';
     }
     else {
-        str_humidity_main = humidity_main.toFixed(0);
+        str_humidity_main = humidity_main.toFixed(1);
     }
     if (dewpoint_main === null) {
         str_dewpoint_main = '-----';
@@ -258,22 +261,51 @@ async function handleContent( msg ) {
     else {
         $('#json_hum_abs_extern').html(str_humidity_abs_extern + " g/m³");
     }
-    if (sensorsecondtype == 6) {
+    if (sensorsecondtype == 14) {
         $('#secondsensorname_id').html('(MiThermometer, battery: ' + str_MiSensor_battery + 'V)');
     }
     
     //------------------------Setzen der Scale1-Werte auf der Webseite
     if (str_gr_scale1.substring(0,3) == '---' || status_scale1 == 0 || grepmain == 0) {
         $('#json_scale1').html('-----' + " g");
+        $('#json_weight_loss_scale1').html('-----');
     }
     else {
         $('#json_scale1').html(str_gr_scale1 + " g");
+        console.log('take_off_weight_scale1 = ' + take_off_weight_scale1);
+        if (take_off_weight_scale1 == 0) {
+            $('#json_weight_loss_scale1').html('-----');
+        }
+        else {
+            diff = take_off_weight_scale1 - gr_scale1;
+            if (gr_scale1 <= 0 || diff < 0) {
+                $('#json_weight_loss_scale1').html('0g (0.0%)');
+            }
+            else {
+               $('#json_weight_loss_scale1').html( diff.toFixed(0) + 'g (' + (Math.round(diff / take_off_weight_scale1 * 1000)/10).toFixed(1) + '%)');
+            }
+        }
     }
+    
     if (str_gr_scale2.substring(0,3) == '---' || status_scale2 == 0 || grepmain == 0) {
         $('#json_scale2').html('-----' + " g");
+        $('#json_weight_loss_scale2').html('-----');
     }
     else {
         $('#json_scale2').html(str_gr_scale2 + " g");
+        console.log('take_off_weight_scale2 = ' + take_off_weight_scale2);
+        if (take_off_weight_scale2 == 0) {
+            $('#json_weight_loss_scale2').html('-----');
+        }
+        else {
+            diff = take_off_weight_scale2 - gr_scale2;
+            if (gr_scale2 <= 0 || diff < 0) {
+                $('#json_weight_loss_scale2').html('0g (0.0%)');
+            }
+            else {
+               $('#json_weight_loss_scale2').html( diff.toFixed(0) + 'g (' + (Math.round(diff / take_off_weight_scale2 * 1000)/10).toFixed(1) + '%)');
+            }
+        }        
     }
     
     //------------------------ Setzen der Meat Thermometer Werte
@@ -334,7 +366,7 @@ async function loadContent() {
 }
 
 // timer for page data refresh
-var myVar = setInterval(myTimer, 3000);
+var myVar = setInterval(myTimer, 6000);
 
 function myTimer() {
     var loc = location.pathname;

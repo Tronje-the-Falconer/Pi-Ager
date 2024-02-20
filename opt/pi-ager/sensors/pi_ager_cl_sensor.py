@@ -13,10 +13,11 @@ __status__ = "Production"
 
 from abc import ABC, abstractmethod
 import math
-import inspect
-
+# import inspect
+import pi_ager_names
+from pi_ager_database import get_table_row
 from main.pi_ager_cl_logger import cl_fact_logger
-from datetime import datetime
+# from datetime import datetime
 
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 #from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type, cl_fact_second_sensor_type
@@ -24,61 +25,44 @@ from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from main.pi_ager_cx_exception import *
 
 from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
-from main.pi_ager_cl_database import cl_fact_db_influxdb
+# from main.pi_ager_cl_database import cl_fact_db_influxdb
 
 class cl_sensor(cl_ab_sensor):
 
     def __init__(self, o_sensor_type):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         self._error_counter = 0
         self._max_errors = 3
         self.o_sensor_type = o_sensor_type
         
-        self.o_mean_temperature = 0
-        self.o_temperature_sum = 0
-        self.o_counter = 0
-        
+    @abstractmethod    
     def get_current_data(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if (self._error_counter >= self._max_errors):
-            self._execute_soft_reset()
+        pass
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#         if (self._error_counter >= self._max_errors):
+#            self._execute_soft_reset()
+#        return 0, 0, 0, 0
                  
     def get_sensor_type_ui(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return( self.o_sensor_type.get_sensor_type_ui())
     
     def get_sensor_type(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         return( self.o_sensor_type._get_type() )
-    
-    def delete_error_counter(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        self._error_counter = 0
-        
-    def check_error_counter(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
-        self._error_counter = self._error_counter + 1
-        cl_fact_logger.get_instance().debug("Error counter: %i" % self._error_counter)
-        cl_fact_logger.get_instance().debug("Max errors:    %i" % self._max_errors)
-        
-        if (self._error_counter >= self._max_errors):
-            raise cx_measurement_error(_('Too many measurement errors occurred!'))
 
-    def calc_mean_temperature(self, temperature):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        self.o_counter = self.o_counter + 1
-        self.o_temperature_sum = self.o_temperature_sum + temperature
-        self.o_mean_temperature = self.o_temperature_sum / self.o_counter
-        cl_fact_logger.get_instance().debug("Mean Values counter:" + str(self.o_counter )+ "Temp: " + str(temperature) + "Mean: " + str(self.o_mean_temperature) )
-
-    
-    def get_mean_temperature(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        return(self.o_mean_temperature)
-
+    def get_humidity_offset(self):
+        humidity_offsets = get_table_row(pi_ager_names.humidity_offset_table, 1)
+        sensor_type = self.get_sensor_type_ui()
+        try:
+            humidity_offset = humidity_offsets[sensor_type]
+            cl_fact_logger.get_instance().debug("Sensor type = " + sensor_type + " hum. offset = " + str(humidity_offset))
+            return humidity_offset
+        except:
+            return 0.0
+            
     def get_dewpoint(self, temperature, humidity):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+#        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         if humidity == 0:
             humidity = 1
         if (temperature >= 0):
@@ -103,111 +87,4 @@ class cl_sensor(cl_ab_sensor):
 
         calculated_dewpoint = (self._temperature_dewpoint, self._humidity_absolute)
         return(calculated_dewpoint)
-    
-    def _execute_soft_reset(self):
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        pass
-    
-    def _write_to_db(self):
-        """ Write the sensor data to DB"""
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        if 1 == 2:
-            self._write_to_influxdb()
-        pass
-    def _write_to_influxdb(self):
-        """ Write the sensor data to time series DB"""
-        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
-        
-        influx_db = cl_fact_db_influxdb.get_instance()
-        if (self._current_temperature != 0 ):
-            json_body = [
-                {
-                    "measurement": "Temperature",
-                    "tags": {
-                    "sensor": "Main_Sensor",
-                    "sensor_type": str(self.get_sensor_type_ui())
-                    },
-        #            "time": str(datetime.now()),
-                    "fields": {
-                    "value": float(self._current_temperature) 
-                    }
-                    }
-            ]
-
-            cl_fact_logger.get_instance().debug(json_body)
-            influx_db.write_data_to_db(json_body) 
-
-        if (self._current_humidity != 0 ):
-            json_body = [
-                {
-                    "measurement": "relative Humidity",
-                    "tags": {
-                    "sensor": "Main_Sensor",
-                    "sensor_type": str(self.get_sensor_type_ui())
-                    },
-        #            "time": str(datetime.now()),
-                    "fields": {
-                    "value": float(self._current_humidity) 
-                    }
-                    }
-            ]
-
-            cl_fact_logger.get_instance().debug(json_body)
-            influx_db.write_data_to_db(json_body) 
-
-        if (self._current_humidity != 0 ):        
-            json_body = [
-                {
-                    "measurement": "DewPoint",
-                    "tags": {
-                    "sensor": "Main_Sensor",
-                    "sensor_type": str(self.get_sensor_type_ui())
-                    },
-        #            "time": str(datetime.now()),
-                    "fields": {
-                    "value": float(self._temperature_dewpoint) 
-                    }
-                    }
-            ]
-
-            cl_fact_logger.get_instance().debug(json_body)
-            influx_db.write_data_to_db(json_body) 
-
-        if (self._humidity_absolute != 0 ):        
-            json_body = [
-                {
-                    "measurement": "absolute Humidity",
-                    "tags": {
-                    "sensor": "Main_Sensor",
-                    "sensor_type": str(self.get_sensor_type_ui())
-                    },
-        #            "time": str(datetime.now()),
-                    "fields": {
-                    "value": float(self._humidity_absolute) 
-                    }
-                    }
-            ]
-
-            cl_fact_logger.get_instance().debug(json_body)
-            influx_db.write_data_to_db(json_body) 
-        pass
-
-    def execute(self):
-        pass
-
-       
-class th_sensor():
-#    SUPPORTED_MAIN_SENSOR_TYPES = ["SHT75", "DHT11", "DHT22"]
-    NAME = 'Main_sensor'
-    
-    
-    def __init__(self):
-    
-        self.get_type_raise = False
-        self._type = "SHT75"
-        
-    def get_type(self):
-        if self.get_type_raise == True:
-            raise cx_Sensor_not_defined(self._type_ui)        
-        return(self._type)
 

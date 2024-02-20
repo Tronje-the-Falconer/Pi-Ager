@@ -9,7 +9,7 @@
     $diagrams_active = '';
     $settings_active = '';
     $logs_active = '';
-    $changelogs_active = '';
+    $changelog_active = '';
     $webcam_active = '';
     $scale_wizzard_active = '';
     $admin_active = '';
@@ -28,7 +28,7 @@
         $logs_active = 'active';
     }
     elseif ($_SERVER['PHP_SELF'] == '/changelog.php') {
-        $changelogs_active = 'active';
+        $changelog_active = 'active';
     }
     elseif ($_SERVER['PHP_SELF'] == '/webcam.php') {
         $webcam_active = 'active';
@@ -72,6 +72,9 @@
 <!DOCTYPE html>
 <html>
     <meta http-equiv="content-type" content="text/html;  charset=utf-8">
+    <meta http-equiv=“cache-control“ content=“no-cache, no-store, must-revalidate“ />
+    <meta http-equiv=“pragma“ content=“no-cache“ />
+    <meta http-equiv=“expires“ content=“0″ />
     <?php
 #        if ($_SERVER['PHP_SELF'] == '/webcam.php') {
 #            echo "<meta http-equiv=\"refresh\" content=\"5\" />";
@@ -97,7 +100,6 @@
 <!-- <script src="./node_modules/chart.js/dist/Chart.min.js"></script> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script> -->
         <script src="js/jquery.js"></script>
-<!--        <script src="js/ajax.js"></script> -->
         <script src="js/script.js"></script>
         <script src="js/script.responsive.js"></script>
 
@@ -112,16 +114,16 @@
                 echo "<script src='js/moment.min.js'></script>";
                 echo "<script src='js/Chart.js'></script>";
             }
-            if ($logs_active == 'active'){
-                echo '<meta http-equiv="cache-control" content="no-cache"> <!-- tells browser not to cache -->';
-                echo '<meta http-equiv="expires" content="0"> <!-- says that the cache expires now -->';
-                echo '<meta http-equiv="pragma" content="no-cache"> <!-- says not to use cached stuff, if there is any -->';
-            }
+#            if ($logs_active == 'active'){
+#                echo '<meta http-equiv="cache-control" content="no-cache"> <!-- tells browser not to cache -->';
+#                echo '<meta http-equiv="expires" content="0"> <!-- says that the cache expires now -->';
+#                echo '<meta http-equiv="pragma" content="no-cache"> <!-- says not to use cached stuff, if there is any -->';
+#            }
             
         ?>
 
     </head>
-    <body>
+    <body onclick >  <!--  this hack is for tooltip not hiding when tipped outside the input element on iPhone and iPad and other smartphones -->
         <div id="art-main">
             <header class="art-header">
                 <div class="art-shapes">
@@ -129,41 +131,51 @@
                 </div>
                 <h1 class="art-headline">Pi-Ager</h1>
                 <h2 class="art-slogan"><?php echo _('by') . ' ' . ('Grillsportverein'); ?></h2>
+                <h2 id="server_date_time_id" class="date-header"><?php echo exec('date +"%Y-%m-%d %H:%M"');?></h2>
+                <h2 id="server_ip_id" class="ip-header"><?php
+                    $local_ip = $_SERVER['REMOTE_ADDR'];
+                    if (strpos($local_ip, '10.0.0') !== false) {
+                        echo 'AP Mode';
+                    }
+                    else {
+                        echo 'Client Mode';
+                    }?></h2>
                 <nav class="art-nav">
                     <div class="art-nav-inner">
                         <ul class="art-hmenu">
-                            <li><a href="index.php" class="<?php echo $monitor_active; ?>"><?php echo _('monitor'); ?></a></li>
-                            <li><a href="diagrams.php" class="<?php echo $diagrams_active; ?>"><?php echo _('diagrams'); ?></a></li>
-                            <li><a href="settings.php" class="<?php echo $settings_active; ?>"><?php echo _('settings'); ?></a></li>
+                            <li><a <?php echo 'href="index.php?rand=' . rand() . '"';?> class="<?php echo $monitor_active; ?>"><?php echo _('monitor'); ?></a></li>
+                            <li><a <?php echo 'href="diagrams.php?rand=' . rand() . '"';?> class="<?php echo $diagrams_active; ?>"><?php echo _('diagrams'); ?></a></li>
+                            <li><a <?php echo 'href="settings.php?rand=' . rand() . '"';?> class="<?php echo $settings_active; ?>"><?php echo _('settings'); ?></a></li>
+                            <li><a <?php echo 'href="admin.php?rand=' . rand() . '"';?> class="<?php echo $admin_active; ?>"><?php echo _('admin'); ?></a></li>
                             <?php
-                                if ($_SERVER['PHP_SELF'] == '/settings.php' OR $_SERVER['PHP_SELF'] == '/admin.php') {
-                                    echo '<li><a href="admin.php" class="';
-                                    echo $admin_active;
-                                    echo '">';
-                                    echo _('administration');
-                                    echo '</a></li>';
-                                }
+                            //    if ($_SERVER['PHP_SELF'] == '/settings.php' OR $_SERVER['PHP_SELF'] == '/admin.php') {
+                            //        echo '<li><a href="admin.php" class="';
+                            //        echo $admin_active;
+                            //        echo '">';
+                            //        echo _('administration');
+                            //        echo '</a></li>';
+                            //    }
                             ?>
-                            <li><a href="notification.php" class="<?php echo $notification_active; ?>"><?php echo _('notification'); ?></a></li>
-                            <li><a href="logs.php" class="<?php echo $logs_active; ?>"><?php echo _('logs'); ?></a></li>
-                            <li><a href="webcam.php" class="<?php echo $webcam_active; ?>"><?php echo _('webcam'); ?></a></li>
+                            <li><a <?php echo 'href="notification.php?rand=' .rand() . '"';?> class="<?php echo $notification_active; ?>"><?php echo _('notification'); ?></a></li>
+                            <li><a <?php echo 'href="logs.php?rand=' . rand() . '"';?> class="<?php echo $logs_active; ?>"><?php echo _('logs'); ?></a></li>
+                            <li><a <?php echo 'href="webcam.php?rand=' . rand() . '"';?> class="<?php echo $webcam_active; ?>"><?php echo _('webcam'); ?></a></li>
                             <?php 
                                 if ($_SERVER['PHP_SELF'] == '/changelog.php') {
-                                    echo '<li><a href="changelog.php" class="';
+                                    echo '<li><a href="changelog.php?rand=' . rand() . '" class="';
                                     echo $changelog_active;
                                     echo '">';
                                     echo _('changelog');
                                     echo '</a></li>';
                                 }
                                 if ($_SERVER['PHP_SELF'] == '/scale_wizzard.php' OR $_SERVER['PHP_SELF'] == '/calibrate_scale.php' OR $_SERVER['PHP_SELF'] == '/modules/tara_scale.php') {
-                                    echo '<li><a href="scale_wizzard.php" class="';
+                                    echo '<li><a href="scale_wizzard.php?rand=' . rand() . '" class="';
                                     echo $scale_wizzard_active;
                                     echo '">';
                                     echo _('scale wizzard');
                                     echo '</a></li>';
                                 }
                                 if ($_SERVER['PHP_SELF'] == '/edit_agingtable.php') {
-                                    echo '<li><a href="edit_agingtable.php" class="';
+                                    echo '<li><a href="edit_agingtable.php?rand=' . rand() . '" class="';
                                     echo $edit_agingtable_active;
                                     echo '">';
                                     echo _('edit agingtable');
@@ -173,6 +185,7 @@
                         </ul>
                     </div>
                 </nav>
+                <script src='js/ajaxdatetime.js'></script>
             </header>
             <div class="art-sheet clearfix">
                 <div class="art-layout-wrapper">

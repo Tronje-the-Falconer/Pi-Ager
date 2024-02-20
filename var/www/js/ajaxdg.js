@@ -13,7 +13,7 @@ function convert_timestamps( timestamps_seconds ) {
 }
 
 async function handleContentdg( msg ) {
-    console.log('in handleContentdg');
+//    console.log('in handleContentdg');
     myObj = JSON.parse(msg);
     
     customtime = myObj.customtime;
@@ -54,10 +54,12 @@ async function handleContentdg( msg ) {
     scales_chart.data.labels = scale_timestamps_js;
     scales_chart.data.datasets[0].data = myObj.scale1_dataset;
     scales_chart.data.datasets[1].data = myObj.scale2_dataset;
+    scales_chart.data.datasets[2].data = myObj.scale1_take_off_weight_dataset;
+    scales_chart.data.datasets[3].data = myObj.scale2_take_off_weight_dataset;
     
     scales_chart.update(); 
     temp_hum_chart.update();
-    console.log('charts updated');
+//    console.log('charts updated');
 }
 
 
@@ -65,7 +67,7 @@ async function handleContentdg( msg ) {
 async function loadContentdg() {
     $.ajax({
         method: 'POST',
-        url: 'modules/querydg.php'
+        url: 'modules/querydg.php?rand=' + Math.random()
     })
     .done(function( msg ) {
         if (msg == '') {

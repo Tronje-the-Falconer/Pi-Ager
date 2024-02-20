@@ -8,7 +8,7 @@
 #import RPi.GPIO as gpio
 
 ########################### Definition of variables
-version_number = '3.3.3'
+version_number = '4.0.0'
 # tables names
 config_settings_table = 'config'
 
@@ -34,13 +34,15 @@ atc_mi_thermometer_mac_table = 'atc_mi_thermometer_mac'
 atc_mi_thermometer_data_table = 'atc_mi_thermometer_data'
 defrost_table = 'config_defrost'
 config_current_check_table = 'config_current_check'
+time_meter_table = 'time_meter'
+config_mqtt_table = 'config_mqtt'
+humidity_offset_table = 'humidity_offset'
 
 # table keys
-switch_on_cooling_compressor_key = 'switch_on_cooling_compressor'
-switch_off_cooling_compressor_key = 'switch_off_cooling_compressor'
-switch_on_humidifier_key = 'switch_on_humidifier'
-switch_off_humidifier_key = 'switch_off_humidifier'
+cooling_hysteresis_key = 'cooling_hysteresis'
+heating_hysteresis_key = 'heating_hysteresis'
 delay_humidify_key = 'delay_humidify'
+saturation_point_key = 'saturation_point'                                         
 delay_cooler_key = 'delay_cooler'
 diagram_modus_key = 'diagram_modus'
 referenceunit_scale1_key = 'referenceunit_scale1'
@@ -115,7 +117,7 @@ agingtable_period_key = 'agingtable_period'
 agingtable_period_starttime_key = 'agingtable_period_starttime'
 customtime_for_diagrams_key = 'customtime_for_diagrams'
 measuring_interval_debug_key = 'measuring_interval_debug'
-agingtable_days_in_seconds_debug_key = 'agingtable_days_in_seconds_debug'
+agingtable_hours_in_seconds_debug_key = 'agingtable_hours_in_seconds_debug'
 measuring_duration_key = 'measuring_duration'
 samples_refunit_tara_key = 'samples_refunit_tara'
 spikes_refunit_tara_key = 'spikes_refunit_tara'
@@ -123,8 +125,8 @@ saving_period_key = 'saving_period'
 failure_temperature_delta_key = 'failure_temperature_delta'
 failure_humidity_delta_key = 'failure_humidity_delta'
 failure_dewpoint_delta_key = 'failure_dewpoint_delta'
-agingtable_period_day_key = 'agingtable_period_day'
-agingtable_startday_key = 'agingtable_startday'
+agingtable_period_hour_key = 'agingtable_period_hour'
+agingtable_starthour_key = 'agingtable_starthour'
 agingtable_startperiod_key = 'agingtable_startperiod'
 aging_thread_alive_key = 'aging_thread_alive'
 scale1_thread_alive_key = 'scale1_thread_alive'
@@ -158,6 +160,24 @@ MiSensor_battery_key = 'MiSensor_battery'
 status_defrost_key = 'status_defrost'
 uv_check_key = 'uv_check'
 
+temperature_avg_key = 'temperature_avg'
+humidity_avg_key = 'humidity_avg'
+humidity_abs_avg_key = 'humidity_abs_avg'
+temp_avg_maxlen_key = 'temp_avg_maxlen'
+hum_avg_maxlen_key = 'hum_avg_maxlen'
+
+humidifier_hysteresis_key = 'humidifier_hysteresis'
+dehumidifier_hysteresis_key = 'dehumidifier_hysteresis'
+humidifier_hysteresis_offset_key = 'humidifier_hysteresis_offset'
+dehumidifier_hysteresis_offset_key = 'dehumidifier_hysteresis_offset'
+
+delay_monitoring_humidifier_key = 'delay_monitoring_humidifier'
+tolerance_monitoring_humidifier_key = 'tolerance_monitoring_humidifier'
+check_monitoring_humidifier_key = 'check_monitoring_humidifier'
+
+cooling_hysteresis_offset_key = 'cooling_hysteresis_offset'
+heating_hysteresis_offset_key = 'heating_hysteresis_offset'
+
 # table fields
 key_field = 'key'
 value_field = 'value'
@@ -171,7 +191,7 @@ agingtable_circulation_air_duration_field = 'circulation_air_duration'
 agingtable_circulation_air_period_field = 'circulation_air_period'
 agingtable_exhaust_air_duration_field = 'exhaust_air_duration'
 agingtable_exhaust_air_period_field = 'exhaust_air_period'
-agingtable_days_field = 'days'
+agingtable_hours_field = 'hours'
 agingtable_comment_field = 'comment'
 meat_sensortypes_name_field = 'name'
 meat_sensortypes_a_field = 'a'
@@ -205,11 +225,22 @@ defrost_cycle_hours_field = 'cycle_hours'
 current_check_active_field = 'current_check_active'
 current_threshold_field = 'current_threshold'
 repeat_event_cycle_field = 'repeat_event_cycle'
+uv_light_seconds_field = 'uv_light_seconds'
+pi_ager_seconds_field = 'pi_ager_seconds'
+defrost_temp_limit_field = 'temp_limit'
+defrost_circulate_air_field = 'circulate_air'
+tempintavg_field = 'tempintavg'
+humintavg_field = 'humintavg'
+broker_address_field = 'broker_address'
+port_field = 'port'
+username_field = 'username'
+password_field = 'password'
+mqtt_active_field = 'mqtt_active'
 
 # Paths and urls
-thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi.273805/'
+thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi-release-3-3-x.342426/'
 error_reporting_url = 'https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/Error-reporting'
-faq_url =  'https://github.com/Tronje-the-Falconer/Pi-Ager/wiki/FAQ'
+faq_url =  'https://pi-ager.org/faq/'
 sqlite_path = '/var/www/config/pi-ager.sqlite3'
 logfile_txt_file = '/var/www/logs/logfile.txt'
 pi_ager_log_file = '/var/www/logs/pi-ager.log'
@@ -233,278 +264,49 @@ pin_without_voltage = (not pin_with_voltage) #   0V = 0 | GPIO.LOW   | FALSE
 relay_on = pin_without_voltage   # negative Logik!!! des Relay's, Schaltet bei 0 | GPIO.LOW  | False  ein
 relay_off = (not relay_on)       # negative Logik!!! des Relay's, Schaltet bei 1 | GPIO.High | True aus
 
-logspacer  = "*****************************************"
-logspacer2 = '-----------------------------------------'
+logspacer  = "****************"
+logspacer2 = '--'
 
-######################################### DATABASE-CHECK
-
-# field types
-field_type = {}
-field_type[key_field] = 'TEXT'
-field_type[value_field] = 'REAL'
-field_type[system_table + '_' + value_field] = 'TEXT'
-field_type[last_change_field] = 'INTEGER'
-field_type[id_field] = 'INTEGER'
-
-id_value_tables = [status_heater_table,status_exhaust_air_table,status_cooling_compressor_table,status_circulating_air_table, status_uv_table, status_light_table, status_humidifier_table, status_dehumidifier_table]
-
-key_value_tables = [current_values_table, settings_scale1_table, settings_scale2_table, config_settings_table, debug_table, system_table]
-
-# Arrays with defined keys in key-value-tables and default values
-table_keys = {}
-
-table_keys[config_settings_table] = (switch_on_cooling_compressor_key,switch_off_cooling_compressor_key,switch_on_humidifier_key,switch_off_humidifier_key,delay_humidify_key,
-                                     sensortype_key,language_key,switch_on_light_hour_key,switch_on_light_minute_key,light_duration_key,light_period_key,light_modus_key,
-                                     switch_on_uv_hour_key,switch_on_uv_minute_key,uv_duration_key,uv_period_key,uv_modus_key,dehumidifier_modus_key,
-                                     circulation_air_period_key,setpoint_temperature_key,exhaust_air_duration_key,modus_key,setpoint_humidity_key,exhaust_air_period_key,
-                                     circulation_air_duration_key,agingtable_key, failure_humidity_delta_key, failure_temperature_delta_key, samples_refunit_tara_key,
-                                     spikes_refunit_tara_key, save_temperature_humidity_loops_key, sensorbus_key,
-                                     meat1_sensortype_key, meat2_sensortype_key, meat3_sensortype_key, meat4_sensortype_key, customtime_for_diagrams_key, sensorsecondtype_key,
-                                     agingtable_startperiod_key, agingtable_startday_key, tft_display_type_key, internal_temperature_low_limit_key, internal_temperature_high_limit_key, internal_temperature_hysteresis_key,
-                                     shutdown_on_batlow_key, dewpoint_check_key, humidity_check_hysteresis_key)
-
-table_keys[current_values_table] = (sensor_temperature_key, sensor_humidity_key, status_circulating_air_key, status_cooling_compressor_key, status_exhaust_air_key,
-                                    status_heater_key, status_light_key, status_uv_key, status_humidifier_key, status_dehumidifier_key, scale1_key, scale2_key, status_pi_ager_key,
-                                    status_agingtable_key, status_scale1_key, status_scale2_key, status_tara_scale1_key, status_tara_scale2_key, agingtable_period_key,
-                                    agingtable_period_starttime_key, status_light_manual_key, calibrate_scale1_key, calibrate_scale2_key, calibrate_weight_key,
-                                    status_uv_manual_key, temperature_meat1_key, temperature_meat2_key, temperature_meat3_key, temperature_meat4_key, sensor_dewpoint_key, second_sensor_temperature_key,
-                                    second_sensor_humidity_key, second_sensor_dewpoint_key, agingtable_period_day_key, scale1_thread_alive_key, scale2_thread_alive_key, aging_thread_alive_key, 
-                                    sensor_humidity_abs_key, second_sensor_humidity_abs_key, status_humidity_check_key)
-
-table_keys[settings_scale1_table] = (samples_key,spikes_key,sleep_key,gain_key,bits_to_read_key,referenceunit_key,scale_measuring_interval_key,measuring_duration_key,saving_period_key,offset_scale_key)
-table_keys[settings_scale2_table] = (samples_key,spikes_key,sleep_key,gain_key,bits_to_read_key,referenceunit_key,scale_measuring_interval_key,measuring_duration_key,saving_period_key,offset_scale_key)
-
-table_keys[debug_table] = (measuring_interval_debug_key,agingtable_days_in_seconds_debug_key,loglevel_file_key,loglevel_console_key)
-
-table_keys[system_table] = (pi_revision_key,pi_ager_version_key)
-
-default_values = {}
-#default values config table
-default_values[config_settings_table + '_' + sensortype_key] = 3 #SHT
-default_values[config_settings_table + '_' + language_key] = 1 #Deutsch de-DE
-default_values[config_settings_table + '_' + save_temperature_humidity_loops_key] = 15
-
-#default values scale1_settings table
-default_values[settings_scale1_table + '_' + samples_key] = 20
-default_values[settings_scale1_table + '_' + spikes_key] = 60
-default_values[settings_scale1_table + '_' + sleep_key] = 0.1
-default_values[settings_scale1_table + '_' + gain_key] = 128
-default_values[settings_scale1_table + '_' + bits_to_read_key] = 24
-default_values[settings_scale1_table + '_' + referenceunit_key] = 221.2
-default_values[settings_scale1_table + '_' + scale_measuring_interval_key] = 5
-default_values[settings_scale1_table + '_' + measuring_duration_key] = 100
-default_values[settings_scale1_table + '_' + saving_period_key] = 120
-
-#default values scale2_settings table
-default_values[settings_scale2_table + '_' + samples_key] = 20
-default_values[settings_scale2_table + '_' + spikes_key] = 60
-default_values[settings_scale2_table + '_' + sleep_key] = 0.1
-default_values[settings_scale2_table + '_' + gain_key] = 128
-default_values[settings_scale2_table + '_' + bits_to_read_key] = 24
-default_values[settings_scale2_table + '_' + referenceunit_key] = 221.2
-default_values[settings_scale2_table + '_' + scale_measuring_interval_key] = 5
-default_values[settings_scale2_table + '_' + measuring_duration_key] = 100
-default_values[settings_scale2_table + '_' + saving_period_key] = 120
-
-#default values debug table
-default_values[debug_table + '_' + measuring_interval_debug_key] = 30
-default_values[debug_table + '_' + agingtable_days_in_seconds_debug_key] = 60
-default_values[debug_table + '_' + loglevel_file_key] = 10
-default_values[debug_table + '_' + loglevel_console_key] = 20
-
-#default values system table
-default_values[system_table + '_' + pi_ager_version_key] = '"' + version_number + '"'
-
-################################# JSON Creation
-
-tables_dict = {}
-
-tables_dict['config_settings_table'] = config_settings_table
-tables_dict['status_heater_table'] = status_heater_table
-tables_dict['status_exhaust_air_table'] = status_exhaust_air_table
-tables_dict['status_cooling_compressor_table'] = status_cooling_compressor_table
-tables_dict['status_circulating_air_table'] = status_circulating_air_table
-tables_dict['status_uv_table'] = status_uv_table
-tables_dict['status_light_table'] = status_light_table
-tables_dict['status_dehumidifier_table'] = status_dehumidifier_table
-tables_dict['status_humidifier_table'] = status_humidifier_table
-tables_dict['current_values_table'] = current_values_table
-tables_dict['agingtables_table'] = agingtables_table
-tables_dict['settings_scale1_table'] = settings_scale1_table
-tables_dict['settings_scale2_table'] = settings_scale2_table
-tables_dict['debug_table'] = debug_table
-tables_dict['system_table'] = system_table
-
-table_keys_dict = {}
-
-table_keys_dict['switch_on_cooling_compressor_key'] = switch_on_cooling_compressor_key
-table_keys_dict['switch_off_cooling_compressor_key'] = switch_off_cooling_compressor_key
-table_keys_dict['switch_on_humidifier_key'] = switch_on_humidifier_key
-table_keys_dict['switch_off_humidifier_key'] = switch_off_humidifier_key
-table_keys_dict['delay_humidify_key'] = delay_humidify_key
-table_keys_dict['referenceunit_scale1_key'] = referenceunit_scale1_key
-table_keys_dict['referenceunit_scale2_key'] = referenceunit_scale2_key
-table_keys_dict['sensortype_key'] = sensortype_key
-table_keys_dict['language_key'] = language_key
-table_keys_dict['switch_on_light_hour_key'] = switch_on_light_hour_key
-table_keys_dict['switch_on_light_minute_key'] = switch_on_light_minute_key
-table_keys_dict['light_duration_key'] = light_duration_key
-table_keys_dict['light_period_key'] = light_period_key
-table_keys_dict['light_modus_key'] = light_modus_key
-table_keys_dict['switch_on_uv_hour_key'] = switch_on_uv_hour_key
-table_keys_dict['switch_on_uv_minute_key'] = switch_on_uv_minute_key
-table_keys_dict['uv_duration_key'] = uv_duration_key
-table_keys_dict['uv_period_key'] = uv_period_key
-table_keys_dict['uv_modus_key'] = uv_modus_key
-table_keys_dict['dehumidifier_modus_key'] = dehumidifier_modus_key
-table_keys_dict['circulation_air_period_key'] = circulation_air_period_key
-table_keys_dict['setpoint_temperature_key'] = setpoint_temperature_key
-table_keys_dict['exhaust_air_duration_key'] = exhaust_air_duration_key
-table_keys_dict['modus_key'] = modus_key
-table_keys_dict['setpoint_humidity_key'] = setpoint_humidity_key
-#table_keys_dict['setpoint_dewpoint_key'] = setpoint_dewpoint_key
-table_keys_dict['exhaust_air_period_key'] = exhaust_air_period_key
-table_keys_dict['circulation_air_duration_key'] = circulation_air_duration_key
-table_keys_dict['agingtable_key'] = agingtable_key
-
-table_keys_dict['sensor_temperature_key'] = sensor_temperature_key
-table_keys_dict['sensor_humidity_key'] = sensor_humidity_key
-table_keys_dict['sensor_dewpoint_key'] = sensor_dewpoint_key
-table_keys_dict['status_pi_ager_key'] = status_pi_ager_key
-table_keys_dict['status_agingtable_key'] = status_agingtable_key
-table_keys_dict['status_heater_key'] = status_heater_key
-table_keys_dict['status_exhaust_air_key'] = status_exhaust_air_key
-table_keys_dict['status_cooling_compressor_key'] = status_cooling_compressor_key
-table_keys_dict['status_circulating_air_key'] = status_circulating_air_key
-table_keys_dict['status_uv_key'] = status_uv_key
-table_keys_dict['status_light_key'] = status_light_key
-table_keys_dict['status_dehumidifier_key'] = status_dehumidifier_key
-table_keys_dict['status_humidifier_key'] = status_humidifier_key
-table_keys_dict['status_scale1_key'] = status_scale1_key
-table_keys_dict['status_scale2_key'] = status_scale2_key
-table_keys_dict['status_tara_scale1_key'] = status_tara_scale1_key
-table_keys_dict['status_tara_scale2_key'] = status_tara_scale2_key
-table_keys_dict['status_light_manual_key'] = status_light_manual_key
-table_keys_dict['status_uv_manual_key'] = status_uv_manual_key
-table_keys_dict['scale1_key'] = scale1_key
-table_keys_dict['scale2_key'] = scale2_key
-table_keys_dict['samples_key'] = samples_key
-table_keys_dict['spikes_key'] = spikes_key
-table_keys_dict['sleep_key'] = sleep_key
-table_keys_dict['gpio_data_key'] = gpio_data_key
-table_keys_dict['gpio_sync_key'] = gpio_sync_key
-table_keys_dict['gain_key'] = gain_key
-table_keys_dict['bits_to_read_key'] = bits_to_read_key
-table_keys_dict['referenceunit_key'] = referenceunit_key
-table_keys_dict['scale_measuring_interval_key'] = scale_measuring_interval_key
-table_keys_dict['save_temperature_humidity_loops_key'] = save_temperature_humidity_loops_key
-table_keys_dict['loglevel_file_key'] = loglevel_file_key
-table_keys_dict['loglevel_console_key'] = loglevel_console_key
-table_keys_dict['agingtable_period_key'] = agingtable_period_key
-table_keys_dict['agingtable_period_starttime_key'] = agingtable_period_starttime_key
-table_keys_dict['measuring_interval_debug_key'] = measuring_interval_debug_key
-table_keys_dict['agingtable_days_in_seconds_debug_key'] = agingtable_days_in_seconds_debug_key
-table_keys_dict['measuring_duration_key'] = measuring_duration_key
-table_keys_dict['samples_refunit_tara_key'] = samples_refunit_tara_key
-table_keys_dict['spikes_refunit_tara_key'] = spikes_refunit_tara_key
-table_keys_dict['saving_period_key'] = saving_period_key
-table_keys_dict['failure_temperature_delta_key'] = failure_temperature_delta_key
-table_keys_dict['failure_humidity_delta_key'] = failure_humidity_delta_key
-table_keys_dict['pi_revision_key'] = pi_revision_key
-table_keys_dict['pi_ager_version_key'] = pi_ager_version_key
-table_keys_dict['calibrate_scale1_key'] = calibrate_scale1_key
-table_keys_dict['calibrate_scale2_key'] = calibrate_scale2_key
-table_keys_dict['calibrate_weight_key'] = calibrate_weight_key
-table_keys_dict['offset_scale_key'] = offset_scale_key
-table_keys_dict['temperature_meat1_key'] = temperature_meat1_key
-table_keys_dict['temperature_meat2_key'] = temperature_meat2_key
-table_keys_dict['temperature_meat3_key'] = temperature_meat3_key
-table_keys_dict['temperature_meat4_key'] = temperature_meat4_key
-table_keys_dict['meat1_sensortype_key'] = meat1_sensortype_key
-table_keys_dict['meat2_sensortype_key'] = meat2_sensortype_key
-table_keys_dict['meat3_sensortype_key'] = meat3_sensortype_key
-table_keys_dict['meat4_sensortype_key'] = meat4_sensortype_key
-
-table_fields_dict = {}
-
-table_fields_dict['key_field'] = key_field
-table_fields_dict['value_field'] = value_field
-table_fields_dict['last_change_field'] = last_change_field
-table_fields_dict['id_field'] = id_field
-table_fields_dict['agingtable_name_field'] = agingtable_name_field
-table_fields_dict['agingtable_modus_field'] = agingtable_modus_field
-table_fields_dict['agingtable_setpoint_temperature_field'] = agingtable_setpoint_temperature_field
-table_fields_dict['agingtable_setpoint_humidity_field'] = agingtable_setpoint_humidity_field
-table_fields_dict['agingtable_circulation_air_duration_field'] = agingtable_circulation_air_duration_field
-table_fields_dict['agingtable_circulation_air_period_field'] = agingtable_circulation_air_period_field
-table_fields_dict['agingtable_exhaust_air_duration_field'] = agingtable_exhaust_air_duration_field
-table_fields_dict['agingtable_exhaust_air_period_field'] = agingtable_exhaust_air_period_field
-table_fields_dict['agingtable_days_field'] = agingtable_days_field
-table_fields_dict['agingtable_comment_field'] = agingtable_comment_field
-table_fields_dict['meat_sensortypes_name_field'] = meat_sensortypes_name_field
-table_fields_dict['meat_sensortypes_a_field'] = meat_sensortypes_a_field
-table_fields_dict['meat_sensortypes_b_field'] = meat_sensortypes_b_field
-table_fields_dict['meat_sensortypes_c_field'] = meat_sensortypes_c_field
-table_fields_dict['meat_sensortypes_Rn_field'] = meat_sensortypes_Rn_field
-table_fields_dict['meat_sensortypes_Mode_field'] = meat_sensortypes_Mode_field
-table_fields_dict['meat_sensortypes_RefVoltage_field'] = meat_sensortypes_RefVoltage_field
-table_fields_dict['meat_sensortypes_Sensitivity_field'] = meat_sensortypes_Sensitivity_field
-table_fields_dict['meat_sensortypes_Turns_field'] = meat_sensortypes_Turns_field
-table_fields_dict['meat_sensortypes_nAverage_field'] = meat_sensortypes_nAverage_field
-
-path_url_dict = {}
-path_url_dict['thread_url'] = thread_url
-path_url_dict['error_reporting_url'] = error_reporting_url
-path_url_dict['faq_url'] = faq_url
-path_url_dict['sqlite_path'] = sqlite_path
-path_url_dict['logfile_txt_file'] = logfile_txt_file
-path_url_dict['pi_ager_log_file'] = pi_ager_log_file
-path_url_dict['changelogfile'] = changelogfile
-
-json_keys_dict = {}
-json_keys_dict['last_change_temperature_json_key'] = last_change_temperature_json_key
-json_keys_dict['last_change_humidity_json_key'] = last_change_humidity_json_key
-json_keys_dict['last_change_dewpoint_json_key'] = last_change_dewpoint_json_key
-json_keys_dict['last_change_scale1_json_key'] = last_change_scale1_json_key
-json_keys_dict['last_change_scale2_json_key'] = last_change_scale2_json_key
-json_keys_dict['last_change_temperature_meat1_json_key'] = last_change_temperature_meat1_json_key
-json_keys_dict['last_change_temperature_meat2_json_key'] = last_change_temperature_meat2_json_key
-json_keys_dict['last_change_temperature_meat3_json_key'] = last_change_temperature_meat3_json_key
-json_keys_dict['last_change_temperature_meat4_json_key'] = last_change_temperature_meat4_json_key
-
-hardcoded_values_dict = {}
-hardcoded_values_dict['pi_ager_version'] = version_number
-
-global dict_for_json_creation
-dict_for_json_creation = {}
-
-def add_to_dict_for_json_creation(dict):
-    """
-    adding dictionary for creating jsonfile (web)
-    """
-    global dict_for_json_creation
-    
-    for key,value in dict.items():
-        dict_for_json_creation[key] = value
-
-def create_json_file():
-    """
-    creating jsonfile for website
-    """
-    import json
-    global dict_for_json_creation
-    
-    add_to_dict_for_json_creation(tables_dict)
-    add_to_dict_for_json_creation(table_keys_dict)
-    add_to_dict_for_json_creation(table_fields_dict)
-    add_to_dict_for_json_creation(path_url_dict)
-    add_to_dict_for_json_creation(json_keys_dict)
-    add_to_dict_for_json_creation(hardcoded_values_dict)
-    
-    json_file = '/var/www/modules/names.json'
-
-    
-    with open(json_file, 'w') as file:
-        file.write(json.dumps(dict_for_json_creation))
-
-
+SUPPORTED_MAIN_SENSOR_TYPES = {1: "DHT11",
+                                     2: "DHT22",
+                                     3: "SHT75",
+                                     4: "SHT85",
+                                     5: "SHT3x",
+                                     6: "SHT3x-mod",
+                                     7: "AHT1x",
+                                     8: "AHT1x-mod",
+                                     9: "AHT2x",
+                                     10: "AHT30",
+                                     11: "SHT4x-A",
+                                     12: "SHT4x-B",
+                                     13: "SHT4x-C"}
+                                     
+SUPPORTED_SECOND_SENSOR_TYPES = { 0: "disabled",
+                                        4: "SHT85",
+                                        5: "SHT3x",
+                                        6: "SHT3x-mod",
+                                        7: "AHT1x",
+                                        8: "AHT1x-mod",      
+                                        9: "AHT2x",
+                                        10: "AHT30",
+                                        11: "SHT4x-A",
+                                        12: "SHT4x-B",
+                                        13: "SHT4x-C",
+                                        14: "MiThermometer"}
+                                        
+I2C_SENSOR_ADDRESS = {  0: None,
+                        1: None,
+                        2: None,
+                        3: None,
+                        4: 0x44,
+                        5: 0x44,
+                        6: 0x45,
+                        7: 0x38,
+                        8: 0x39,
+                        9: 0x38,
+                        10: 0x38,
+                        11: 0x44,
+                        12: 0x45,
+                        13: 0x46,
+                        14: None }
+                        

@@ -1,13 +1,17 @@
 [Unit]
-Description=Automatsches Installationsscript für pi-ager zum Setzen von Passwörter und WIFI-Zugang, abhängig von setup.txt in /boot
+Description=Automatsches Installationsscript für pi-ager zum Setzen von Passwörter und WIFI-Zugang, abhängig von setup.txt in /boot/firmware
+# Before=rc-local.service lighttpd.service
+# After=NetworkManager-wait-online.service
+Before=rc-local.service
+After=NetworkManager.service
+# After=multi-user.target
 
 [Service]
 Type=oneshot
 ExecStart=/usr/local/bin/setup_pi-ager.sh
 
-StandardOutput=append:/boot/setup.log
-StandardError=append:/boot/setup.log
+StandardOutput=append:/boot/firmware/setup.log
+StandardError=append:/boot/firmware/setup.log
 
 [Install]
-Alias=setup_pi-ager
 WantedBy=multi-user.target

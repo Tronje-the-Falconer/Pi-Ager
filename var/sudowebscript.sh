@@ -38,11 +38,11 @@ case "$1" in
         python3 /opt/pi-ager/piager_upload_firmware.py /dev/serial0 $2 >/dev/null 2>/dev/null &
     ;;
     reboot) # reboot
-        sleep 3
+        sleep 4
         reboot
     ;;
     shutdown) #Shutdown 
-        sleep 3
+        sleep 4
         shutdown -h now
     ;;
     savewebcampicture) # macht ein Bild mit der Webcam
@@ -74,14 +74,20 @@ case "$1" in
     sensorbusi2c) #Sensorbus wurde geaendert auf i2c
 		# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln (SHT3x und SHT85)
         rm -r /etc/modprobe.d/Pi-Ager_i2c_off.conf
-        sleep 3
-        shutdown -h now
+#        sleep 3
+#        shutdown -h now
     ;;
     sensorbus1wire) #Sensorbus wurde geaendert auf 1wire
 		# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln (DHT* und SHT75)
         cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
-        sleep 3
-        shutdown -h now
+#        sleep 3
+#        shutdown -h now
+    ;;
+    set_time_date)  # set system time and date when pi-ager is in hotspot mode
+        systemctl stop systemd-timesyncd.service
+        timedatectl set-time "$2"
+        systemctl start systemd-timesyncd.service
+        systemctl daemon-reload
     ;;
     *) echo "ERROR: invalid parameter: $1 (for $0)"; exit 1 #Fehlerbehandlung
     ;;

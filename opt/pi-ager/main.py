@@ -17,8 +17,8 @@ import globals
 globals.init()
 
 #Zuerst Datenbank prüfen
-import pi_ager_database_check
-pi_ager_database_check.check_and_update_database()
+# import pi_ager_database_check
+# pi_ager_database_check.check_and_update_database()
 
 from main.pi_ager_cl_logger import cl_fact_logger
 import pi_ager_loop
@@ -33,6 +33,8 @@ from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from pi_ager_cl_nextion import cl_fact_nextion
 from pi_ager_cl_switch_control import cl_fact_switch_control
+from pi_ager_cl_uptime import cl_fact_uptime
+from pi_ager_cl_mqtt import cl_fact_mqtt
 
 import signal
 import threading
@@ -40,14 +42,14 @@ import pi_ager_cl_scale
 import pi_ager_cl_agingtable
 
 def kill_mi_thermometer():
-    # check if /home/pi/MiTemperature2/LYWSD03MMC.py is running and then kill this process
-    stream = os.popen('pgrep -lf python3 | grep LYWSD03MMC.py | wc -l')
+    # check if /opt/ATC_MiThermometer/ATC_xxxxxx.py is running and then kill this process
+    stream = os.popen('pgrep -a python3 | grep ATC_xxxxxx.py | wc -l')
     output = stream.read().rstrip('\n')
-    cl_fact_logger.get_instance().debug('Killing /home/pi/MiTemperature2/LYWSD03MMC.py')
+    cl_fact_logger.get_instance().debug('Killing /opt/ATC_MiThermometer/ATC_xxxxxx.py')
     if (output != '0'):
-        os.system("pgrep -lf LYWSD03MMC.py | grep LYWSD03MMC.py | awk '{print $1}' | xargs kill")
-        cl_fact_logger.get_instance().debug('LYWSD03MMC.py terminated')
-        
+        os.system("pgrep -a python3 | grep ATC_xxxxxx.py | awk '{print $1}' | xargs kill")
+        cl_fact_logger.get_instance().debug('ATC_xxxxxx.py terminated')
+    
 # catch signal.SIGTERM and signal.SIGINT when killing main to gracefully shutdown system
 def signal_handler(signum, frame):
     cl_fact_logger.get_instance().debug('SIGTERM or SIGINT issued---------------------------------------------------------')
@@ -59,7 +61,7 @@ def signal_handler(signum, frame):
 pi_ager_init.set_language()
 
 cl_fact_logger.get_instance().debug(('logging initialised __________________________'))
-cl_fact_logger.get_instance().info('\n\n')
+# cl_fact_logger.get_instance().info('\n\n')
 cl_fact_logger.get_instance().info(pi_ager_names.logspacer)
 cl_fact_logger.get_instance().info(_('Pi-Ager Main started'))
 cl_fact_logger.get_instance().info(pi_ager_names.logspacer)
@@ -93,6 +95,14 @@ cl_fact_logger.get_instance().debug('Starting switch control thread ' + time.str
 cl_fact_switch_control.get_instance().start()
 cl_fact_logger.get_instance().debug('Starting switch control thread done' + time.strftime('%H:%M:%S', time.localtime()))
 
+cl_fact_logger.get_instance().debug('Starting uptime thread ' + time.strftime('%H:%M:%S', time.localtime()))
+cl_fact_uptime.get_instance().start()
+cl_fact_logger.get_instance().debug('Starting uptime thread done' + time.strftime('%H:%M:%S', time.localtime()))
+
+cl_fact_logger.get_instance().debug('Starting MQTT thread ' + time.strftime('%H:%M:%S', time.localtime()))
+cl_fact_mqtt.get_instance().start()
+cl_fact_logger.get_instance().debug('Starting MQTT thread done' + time.strftime('%H:%M:%S', time.localtime()))
+
 exception_known = True
 
 # now enable signal handler
@@ -109,6 +119,14 @@ except Exception as cx_error:
 # init defrost state off
 pi_ager_database.write_startstop_status_in_database(pi_ager_names.status_defrost_key, 0)
 
+# init MiThermometer data in DB
+pi_ager_database.clear_atc_data()
+pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.second_sensor_temperature_key, None)
+pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.second_sensor_humidity_key, None)
+pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.second_sensor_dewpoint_key, None)
+pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.second_sensor_humidity_abs_key, None)
+
+# now enter pi-ager control loop ( = backend )
 try:
     pi_ager_loop.autostart_loop()
     cl_fact_logger.get_instance().debug('in main try at end -------------------------------------------------------------------')
@@ -126,16 +144,14 @@ finally:
     cl_fact_logger.get_instance().debug('main.finally --------------------------------------------------------------------')
     #if exception_known == False:
     pi_ager_init.loopcounter = 0
-#    pi_ager_database.write_stop_in_database(pi_ager_names.status_pi_ager_key)
-#    pi_ager_database.write_stop_in_database(pi_ager_names.status_scale1_key)
-#    pi_ager_database.write_stop_in_database(pi_ager_names.status_scale2_key)
-        # os.system('sudo /var/sudowebscript.sh pkillscale &')
-        # os.system('sudo /var/sudowebscript.sh pkillmain &')
+
     cl_fact_logger.get_instance().debug('waiting for all threads terminating...')   
     scale1_thread.stop_received = True
     scale2_thread.stop_received = True
     agingtable_thread.stop_received = True
     cl_fact_switch_control.get_instance().stop_received = True
+    cl_fact_uptime.get_instance().stop_received = True
+    cl_fact_mqtt.get_instance().stop_received = True
     
     cl_fact_nextion.get_instance().prep_show_offline()
     cl_fact_nextion.get_instance().loop.call_soon_threadsafe(cl_fact_nextion.get_instance().stop_event.set)
@@ -145,6 +161,8 @@ finally:
     scale2_thread.join()
     agingtable_thread.join()
     cl_fact_switch_control.get_instance().join()
+    cl_fact_uptime.get_instance().join()
+    cl_fact_mqtt.get_instance().join()
     cl_fact_nextion.get_instance().join()
     
     cl_fact_logger.get_instance().debug('threads terminated')
@@ -158,6 +176,9 @@ finally:
     except Exception as cx_error:
         exception_known = cl_fact_logic_messenger().get_instance().handle_exception(cx_error)
         pass
-
+    
     # release GPIO resources, send message to log
     pi_ager_organization.goodbye()
+    
+    piager_version = pi_ager_database.get_table_value(pi_ager_names.system_table, pi_ager_names.pi_ager_version_key)
+    cl_fact_logger.get_instance().info('Pi-Ager revision : ' + piager_version + '\n\n')

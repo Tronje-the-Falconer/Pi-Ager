@@ -13,7 +13,7 @@ function convert_timestamps( timestamps_seconds ) {
 }
 
 async function handleContentAlldg( msg ) {
-    console.log('in handleContentAlldg');
+//    console.log('in handleContentAlldg');
     
     myObj = JSON.parse(msg);
     
@@ -28,6 +28,8 @@ async function handleContentAlldg( msg ) {
         temp_hum_chart.data.datasets[1].pointRadius = 1;
         temp_hum_chart.data.datasets[2].pointRadius = 1;
         temp_hum_chart.data.datasets[3].pointRadius = 1;
+        temp_hum_chart.data.datasets[4].pointRadius = 1;
+        temp_hum_chart.data.datasets[5].pointRadius = 1;        
         scales_chart.data.datasets[0].pointRadius = 1;
         scales_chart.data.datasets[1].pointRadius = 1;
         dewpoint_humidity_chart.data.datasets[0].pointRadius = 1;
@@ -44,6 +46,8 @@ async function handleContentAlldg( msg ) {
         temp_hum_chart.data.datasets[1].pointRadius = 0;
         temp_hum_chart.data.datasets[2].pointRadius = 0;
         temp_hum_chart.data.datasets[3].pointRadius = 0;
+        temp_hum_chart.data.datasets[4].pointRadius = 0;
+        temp_hum_chart.data.datasets[5].pointRadius = 0;        
         scales_chart.data.datasets[0].pointRadius = 0;
         scales_chart.data.datasets[1].pointRadius = 0;
         dewpoint_humidity_chart.data.datasets[0].pointRadius = 0;
@@ -82,9 +86,11 @@ async function handleContentAlldg( msg ) {
 
     temp_hum_chart.data.labels = temp_timestamps_js;
     temp_hum_chart.data.datasets[0].data = myObj.temperature_dataset;
-    temp_hum_chart.data.datasets[1].data = myObj.extern_temperature_dataset;
-    temp_hum_chart.data.datasets[2].data = myObj.humidity_dataset;
-    temp_hum_chart.data.datasets[3].data = myObj.extern_humidity_dataset;
+    temp_hum_chart.data.datasets[1].data = myObj.temperature_avg_dataset;    
+    temp_hum_chart.data.datasets[2].data = myObj.extern_temperature_dataset;
+    temp_hum_chart.data.datasets[3].data = myObj.humidity_dataset;
+    temp_hum_chart.data.datasets[4].data = myObj.humidity_avg_dataset;    
+    temp_hum_chart.data.datasets[5].data = myObj.extern_humidity_dataset;
 
     dewpoint_humidity_chart.data.labels = temp_timestamps_js;
     dewpoint_humidity_chart.data.datasets[0].data = myObj.dewpoint_dataset;
@@ -101,7 +107,9 @@ async function handleContentAlldg( msg ) {
     scales_chart.data.labels = scale_timestamps_js;
     scales_chart.data.datasets[0].data = myObj.scale1_dataset;
     scales_chart.data.datasets[1].data = myObj.scale2_dataset;
-
+    scales_chart.data.datasets[2].data = myObj.scale1_take_off_weight_dataset;
+    scales_chart.data.datasets[3].data = myObj.scale2_take_off_weight_dataset;
+    
     light_chart.data.labels = timestamps_light_js;
     light_chart.data.datasets[0].data = myObj.light_dataset;
 
@@ -140,7 +148,7 @@ async function handleContentAlldg( msg ) {
     exhaust_air_chart.update();
     circulation_air_chart.update();
 
-    console.log('charts updated');
+//    console.log('charts updated');
 }
 
 
@@ -148,7 +156,7 @@ async function handleContentAlldg( msg ) {
 async function loadContentAlldg() {
     $.ajax({
         method: 'POST',
-        url: 'modules/query_all_dg.php'
+        url: 'modules/query_all_dg.php?rand=' + Math.random()
     })
     .done(function( msg ) {
         if (msg == '') {

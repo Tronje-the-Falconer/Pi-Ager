@@ -13,31 +13,16 @@
             $checked_messenger_pushover_true = $_POST['checked_messenger_pushover_true_' . $messenger_id];
             $checked_messenger_telegram_true = $_POST['checked_messenger_telegram_true_' . $messenger_id];
             $messenger_alarm = $_POST['messenger_alarm_' . $messenger_id];
-            $checked_messenger_raise_exeption_true = $_POST['checked_messenger_raise_exeption_true_' . $messenger_id];
-            $checked_messenger_active_true = $_POST['checked_messenger_active_true_' . $messenger_id];
+            // $checked_messenger_raise_exeption_true = $_POST['checked_messenger_raise_exeption_true_' . $messenger_id];
+            // $checked_messenger_active_true = $_POST['checked_messenger_active_true_' . $messenger_id];
             
-            write_messenger_values($messenger_id, $messenger_exception, $checked_messenger_e_mail_true, $checked_messenger_pushover_true, $checked_messenger_telegram_true, $messenger_alarm, $checked_messenger_raise_exeption_true, $checked_messenger_active_true );
+            write_messenger_values($messenger_id, $messenger_exception, $checked_messenger_e_mail_true, $checked_messenger_pushover_true, $checked_messenger_telegram_true, $messenger_alarm, true, true );
             // $index_row_id++;
             $index_row++;
         }
 
         logger('DEBUG', 'messenger values saved');
         print '<script language="javascript"> alert("'. (_("messenger values")) . " : " . (_("values saved")) .'"); </script>';
-    }
-    
-    if (isset ($_POST['add_messenger'])){
-        logger('DEBUG', 'button add messenger');
-        unset($_POST['add_messenger']);
-        
-        $add_messenger_exception = $_POST['add_messenger_exception'];
-        $add_checked_messenger_e_mail_true = $_POST['add_checked_messenger_e_mail_true'];
-        $add_checked_messenger_pushover_true = $_POST['add_checked_messenger_pushover_true'];
-        $add_checked_messenger_telegram_true = $_POST['add_checked_messenger_telegram_true'];
-        $add_messenger_alarm = $_POST['add_messenger_alarm'];
-        $add_checked_messenger_raise_exeption_true = $_POST['add_checked_messenger_raise_exeption_true'];
-        $add_checked_messenger_active_true = $_POST['add_checked_messenger_active_true'];
-        
-        add_messenger($add_messenger_exception, $add_checked_messenger_e_mail_true, $add_checked_messenger_pushover_true, $add_checked_messenger_telegram_true, $add_messenger_alarm, $add_checked_messenger_raise_exeption_true, $add_checked_messenger_active_true );
     }
     
     if (isset ($_POST['save_event_values'])){
@@ -65,21 +50,7 @@
         logger('DEBUG', 'event values saved');
         print '<script language="javascript"> alert("'. (_("event values")) . " : " . (_("values saved")) .'"); </script>';
     }
-    
-    if (isset ($_POST['add_event'])){
-        logger('DEBUG', 'button add event');
-        unset($_POST['add_event']);
-        
-        $add_event_event = $_POST['add_event_event'];
-        $add_checked_event_e_mail_true = $_POST['add_checked_event_e_mail_true'];
-        $add_checked_event_pushover_true = $_POST['add_checked_event_pushover_true'];
-        $add_checked_event_telegram_true = $_POST['add_checked_event_telegram_true'];
-        $add_event_alarm = $_POST['add_event_alarm'];
-        $add_event_eventtext = $_POST['add_event_eventtext'];
-        $add_checked_event_active_true = $_POST['add_checked_event_active_true'];
-        
-        add_event($add_event_event, $add_checked_event_e_mail_true, $add_checked_event_pushover_true, $add_checked_event_telegram_true, $add_event_alarm, $add_event_eventtext, $add_checked_event_active_true );
-    }
+
     
     if (isset ($_POST['save_alarm_values'])){
         logger('DEBUG', 'button save alarm pressed');
@@ -111,20 +82,6 @@
         unset($_POST['delete_alarm']);
         $id =  $_POST['id'];
         delete_row_from_table($alarm_table,$alarm_id_field,$id);
-    }
-    
-    if (isset ($_POST['delete_messenger'])){
-        logger('DEBUG', 'button delete messenger pressed');
-        unset($_POST['delete_messenger']);
-        $id =  $_POST['id'];
-        delete_row_from_table($messenger_table,$messenger_id_field,$id);
-    }
-    
-    if (isset ($_POST['delete_event'])){
-        logger('DEBUG', 'button delete event pressed');
-        unset($_POST['delete_event']);
-        $id =  $_POST['event_id'];
-        delete_row_from_table($messenger_event_table,$event_id_field,$id);
     }
     
     if (isset ($_POST['delete_e_mail_recipient'])){
@@ -227,4 +184,17 @@
         logger('DEBUG', ' telegram values saved');
         print '<script language="javascript"> alert("'. (_("telegram values")) . " : " . (_("values saved")) .'"); </script>';
     }
+   
+    if (isset ($_POST['save_mqtt_values'])){
+        logger('DEBUG', 'button save mqtt pressed');
+        unset($_POST['save_mqtt_values']);
+        $broker_address = $_POST['broker_address'];
+        $mqtt_port = $_POST['port'];
+        $mqtt_username = $_POST['username'];
+        $mqtt_password = $_POST['password'];
+        $mqtt_active = $_POST['mqtt_active'];
+        write_mqtt_values($broker_address, $mqtt_port, $mqtt_username, $mqtt_password, $mqtt_active);
+        logger('DEBUG', ' MQTT values saved');
+        print '<script language="javascript"> alert("'. (_("MQTT values")) . " : " . (_("values saved")) .'"); </script>';
+    }    
 ?>

@@ -98,7 +98,7 @@ while getopts $VALID_COMMAND_LINE_OPTIONS options; do
 done
 if [[ "$last_backup" = true ]] && [[ "$my_image" = true ]]; then
 	echo "Use Source_file with -f or Lastname -l for filename. Not the same!"
-	exit;
+	exit 1;
 fi
 
 BACKUP_STATUS=$(ps ax | grep -v grep | grep pi-ager_backup.sh)
@@ -167,6 +167,9 @@ umount $NFSMOUNT
 # NFS-Volume mounten
 echo "hänge NFS-Volume $NFSVOL ein"
 
+# avoid warning that systemd still uses old version of fstab
+# systemctl daemon-reload
+
 if [ -n "$NFSOPT" ]
 	then
         echo "mount with options: $NFSOPT"
@@ -208,14 +211,12 @@ if [ "$last_backup" = true ]
 	echo "Backup path with file is" $source_file
 fi
 
-if [ -z "${source_file}" ]; then
-    echo "$COMMAND_LINE_OPTIONS_HELP"
-fi
 if [[ ! -f "$source_file" ]]; then
 	echo "Source File $source_file not found!"
     umount $NFSMOUNT
 	exit 1;
 fi
+
 echo "Source File = $source_file"
 echo "do_copy     = $do_copy"
 echo "my_image    = $my_image"
@@ -238,7 +239,7 @@ parted_output=$(parted -ms "$img" unit B print | tail -n 1)
 partnum=$(echo "$parted_output" | cut -d ':' -f 1)
 partstart=$(echo "$parted_output" | cut -d ':' -f 2 | tr -d 'B')
 loopback=$(losetup -f --show -o "$partstart" "$img")
-echo "parted_output = $parted_output"
+echo "parted_output_root = $parted_output"
 echo "partnum = $partnum"
 echo "partstart = $partstart"
 echo "loopback = $loopback"
@@ -257,10 +258,31 @@ echo "##########################################################################
 mountdir=$(mktemp -d)
 echo "mount directory is ${mountdir}"
 
+# mount root
 mount ${loopback} ${mountdir}
 #read -p "Press enter to continue after mounting $loopback to $mountdir"
 
+# mount boot
 mount -t vfat -o shortname=winnt "$loopback_boot" "$mountdir/boot"
+
+######################################################
+# rewrite /boot/setup.txt, remove /boot/setup.log
+######################################################
+
+# echo "boot dir = $mountdir/boot "
+# ls -al $mountdir/boot
+rm $mountdir/boot/setup.txt
+rm $mountdir/boot/setup.log
+cd /tmp
+wget -O setup.txt -nv https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/entwicklung/boot/firmware/setup.txt
+mv setup.txt $mountdir/boot/setup.txt
+echo "setup.txt copied to $mountdir/boot/"
+
+# auto-expand is performed in pi-ager_backup.sh : 
+# cmdfile=$mountdir/boot/cmdline.txt
+# sed -i '1 s/$/ quiet init=\/usr\/lib\/raspberrypi-sys-mods\/firstboot/' "$cmdfile"
+# echo "cmdline.txt modified, added init=/usr/lib/raspberrypi-sys-mods/firstboot"
+
 #read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
 #echo "Copy $mountdir/boot.bak/ to $mountdir/boot/"
 #rsync -a --info=progress2 "$mountdir/boot.bak/" "$mountdir/boot/"
@@ -314,13 +336,12 @@ chroot $chrootdir /bin/bash <<EOF
 # pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip3 install 
 
 
-
-
 ######################################################
 # delete not needed files
 ######################################################
 
-find /var/log/ -type f -exec rm "{}" \;
+# find /var/log/ -type f -exec rm "{}" \;
+rm -rf /var/log/*
 find /var/mail/ -type f -exec rm "{}" \;
 find /var/tmp/ -type f -exec rm "{}" \;
 find /var/cache/ -type f -exec rm "{}" \;
@@ -329,7 +350,7 @@ find /tmp/ -type f -exec rm "{}" \;
 find /root/.cache/ -type f -exec rm "{}" \;
 
 # delete webcam files
-rm /var/www/images/webcam/*.jpg
+rm -f /var/www/images/webcam/*.jpg
 
 touch /var/www/logs/logfile.txt
 chmod 666 /var/www/logs/logfile.txt
@@ -346,15 +367,13 @@ cat /dev/null > /home/pi/.bash_history
 # rm -f /lib/modules.bak
 # PRUNE_MODULES=1 sudo rpi-update
 
-systemctl enable pi-ager_main.service setup_pi-ager.service
-# systemctl disable pi-ager_scale.service pi-ager_agingtable.service
+systemctl disable pi-ager_main.service
+echo "pi-ager_main.service disabled, will be enabled during setup_pi-ager.sh"
+systemctl enable setup_pi-ager.service
+echo "setup_pi-ager service enabled"
 
 #systemctl daemon-reload
 #systemctl reset-failed
-
-
-
-
 
 
 #******************************************************
@@ -364,12 +383,13 @@ systemctl enable pi-ager_main.service setup_pi-ager.service
 ######################################################
 # Remove System key for encrypt/decrypt
 ######################################################
-rm /home/pi/system_key.bin
+rm -f /home/pi/system_key.bin
 
 ######################################################
 # change hostname
 ######################################################
-raspi-config nonint do_hostname rpi-Pi-Ager
+raspi-config nonint do_hostname pi-ager
+echo "hostname changed to pi-ager"
 
 # rewrite /var/.htcredentials
 # mv /var/.htcredentials.org  /var/.htcredentials
@@ -378,17 +398,10 @@ raspi-config nonint do_hostname rpi-Pi-Ager
 # rewrite /etc/wpa_supplicant/wpa_supplicant.conf
 ######################################################
 # mv /etc/wpa_supplicant/wpa_supplicant.conf.org /etc/wpa_supplicant/wpa_supplicant.conf
+# remove all wlan connections
+# rm -f /etc/NetworkManager/system-connections/*
 
-
-######################################################
-# rewrite /boot/setup.txt, remove /boot/setup.log
-######################################################
-rm /boot/setup.txt
-rm /boot/setup.log
-wget -O setup.txt -nv https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/entwicklung/boot/setup.txt
-mv /setup.txt /boot/setup.txt
-
-######################################################
+#####################################################
 #Force password change for user root
 ######################################################
 #change -d 0 root
@@ -412,23 +425,28 @@ UPDATE scale2_settings SET value='300' WHERE key='measuring_interval';
 UPDATE scale2_settings SET value='15' WHERE key='measuring_duration';
 UPDATE scale2_settings SET value='150' WHERE key='saving_period';
 UPDATE scale2_settings SET value='20' WHERE key='samples';
-UPDATE config SET value='2' WHERE key='switch_on_cooling_compressor';
-UPDATE config SET value='0' WHERE key='switch_off_cooling_compressor';
-UPDATE config SET value='25' WHERE key='switch_on_humidifier';
-UPDATE config SET value='0' WHERE key='switch_off_humidifier';
-UPDATE config SET value='5' WHERE key='delay_humidify';
+UPDATE config SET value='1.6' WHERE key='cooling_hysteresis';
+UPDATE config SET value='5' WHERE key='heating_hysteresis';
+UPDATE config SET value='3.0' WHERE key='humidifier_hysteresis';
+UPDATE config SET value='2.0' WHERE key='dehumidifier_hysteresis';
+UPDATE config SET value='-4' WHERE key='humidifier_hysteresis_offset';
+UPDATE config SET value='2' WHERE key='dehumidifier_hysteresis_offset';
+UPDATE config SET value='10' WHERE key='delay_humidify';
+UPDATE config SET value='93' WHERE key='saturation_point';
+UPDATE config SET value='40' WHERE key='temp_avg_maxlen';
+UPDATE config SET value='40' WHERE key='hum_avg_maxlen';
 UPDATE config SET value='12' WHERE key='switch_on_light_hour';
 UPDATE config SET value='30' WHERE key='switch_on_light_minute';
 UPDATE config SET value='0' WHERE key='light_duration';
-UPDATE config SET value='21600' WHERE key='light_period';
+UPDATE config SET value='86400' WHERE key='light_period';
 UPDATE config SET value='0' WHERE key='light_modus';
 UPDATE config SET value='11' WHERE key='switch_on_uv_hour';
 UPDATE config SET value='30' WHERE key='switch_on_uv_minute';
-UPDATE config SET value='300' WHERE key='uv_duration';
-UPDATE config SET value='21600' WHERE key='uv_period';
-UPDATE config SET value='0' WHERE key='uv_modus';
-UPDATE config SET value='3' WHERE key='modus';
-UPDATE config SET value='6' WHERE key = 'save_temperature_humidity_loops';	
+UPDATE config SET value='86400' WHERE key='uv_duration';
+UPDATE config SET value='0' WHERE key='uv_period';
+UPDATE config SET value='1' WHERE key='uv_modus';
+UPDATE config SET value='4' WHERE key='modus';
+UPDATE config SET value='12' WHERE key = 'save_temperature_humidity_loops';	
 UPDATE config SET value='0.0' WHERE key = 'meat1_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'meat2_sensortype';
 UPDATE config SET value='0.0' WHERE key = 'meat3_sensortype';
@@ -437,20 +455,42 @@ UPDATE config SET value='0.0' WHERE key = 'secondsensortype';
 UPDATE config SET value='1.0' WHERE key = 'tft_display_type';
 UPDATE config SET value='0.0' WHERE key = 'shutdown_on_batlow';
 UPDATE config SET value='0.0' WHERE key = 'diagram_modus';
-UPDATE config SET value='30.0' WHERE key = 'delay_cooler';
+UPDATE config SET value='60.0' WHERE key = 'delay_cooler';
 UPDATE config SET value='1' WHERE key = 'dewpoint_check';
 UPDATE config SET value='0.2' WHERE key = 'humidity_check_hysteresis';
 UPDATE config SET value='3600.0' WHERE key = 'customtime_for_diagrams';
-UPDATE config SET value='0.0' WHERE key = 'diagram_modus';
+UPDATE config SET value='0.0' WHERE key = 'take_off_weight_scale1';
+UPDATE config SET value='0.0' WHERE key = 'take_off_weight_scale2';
 
 UPDATE current_values SET value='0' WHERE key = 'status_piager';
 UPDATE current_values SET value='0' WHERE key = 'status_scale1';
 UPDATE current_values SET value='0' WHERE key = 'status_scale2';
 UPDATE current_values SET value='0' WHERE key = 'status_agingtable';
 UPDATE current_values SET value='0' WHERE key = 'status_humidity_check';
+UPDATE current_values SET value='0' WHERE key = 'status_light_manual';
+UPDATE current_values SET value='1' WHERE key = 'status_uv_manual';
 
-UPDATE atc_mi_thermometer_mac SET mi_mac_last3bytes='' WHERE id='1';
-UPDATE atc_mi_thermometer_data SET mi_data='' WHERE id='1';
+UPDATE current_values SET value=NULL WHERE key = 'temperature_meat1';
+UPDATE current_values SET value=NULL WHERE key = 'temperature_meat2';
+UPDATE current_values SET value=NULL WHERE key = 'temperature_meat3';
+UPDATE current_values SET value=NULL WHERE key = 'temperature_meat4';
+UPDATE current_values SET value=NULL WHERE key = 'sensor_temperature';
+UPDATE current_values SET value=NULL WHERE key = 'sensor_humidity';
+UPDATE current_values SET value=NULL WHERE key = 'sensor_dewpoint';
+UPDATE current_values SET value=NULL WHERE key = 'sensor_extern_temperature';
+UPDATE current_values SET value=NULL WHERE key = 'sensor_extern_humidity';
+UPDATE current_values SET value=NULL WHERE key = 'sensor_extern_dewpoint';
+UPDATE current_values SET value=NULL WHERE key = 'sensor_humidity_abs';
+UPDATE current_values SET value=NULL WHERE key = 'sensor_extern_humidity_abs';
+UPDATE current_values SET value=NULL WHERE key = 'temperature_avg';
+UPDATE current_values SET value=NULL WHERE key = 'humidity_avg';
+UPDATE current_values SET value=NULL WHERE key = 'humidity_abs_avg';
+
+UPDATE atc_device_name SET name='' WHERE id='1';
+UPDATE atc_data SET temperature=NULL,humidity=NULL,battvolt=NULL,battpercent=NULL,last_change=NULL WHERE id='1';
+
+UPDATE time_meter SET uv_light_seconds='0',pi_ager_seconds='0' WHERE id='1';
+UPDATE config_mqtt SET broker_address=NULL,port='1883',username=NULL,password=NULL,mqtt_active='0' WHERE id='1';
 
 DELETE FROM config_nfs_backup;
 delete FROM config_email_server;
@@ -484,9 +524,11 @@ INSERT INTO "config_nfs_backup" ("id","nfsvol","number_of_backups","backup_name"
 END_SQL
 # Rebuild DB to reduce the size of the DB
 sqlite3 /var/www/config/pi-ager.sqlite3 'VACUUM;'
-
-EOF
 sync
+EOF
+
+sync
+
 if [ "$my_image" = false ]; then
 	chroot $chrootdir /bin/bash <<EOF
 	# This commands are called inside of the chroot environment 
@@ -539,9 +581,9 @@ if [ "$my_image" = false ]; then
 	
 	
 	# delete logs and greate empty backup.log
-	rm /var/www/logs/*
+	rm -f /var/www/logs/*
     touch /var/www/logs/pi-ager_backup.log
-	# rm /var/logs
+	rm -f /var/log/*
 	
 	# delete obsolete /tmp direcory
 	# rm -rf /tmp
@@ -556,6 +598,7 @@ if [ "$my_image" = false ]; then
 	######################################################
 	# change ssh port:
 	# sed -i "s/Port 57673/Port 22/g" /etc/ssh/sshd_config
+    sync
 EOF
 fi
 
@@ -591,7 +634,7 @@ if [[ ! -f "$img" ]]
         echo "cannot shrink $img"
     else
         # Shrink image
-        pishrink.sh -r $img 
+        #  pishrink.sh -r $img 
         # Backup umbenennen mit Datum
         mv $img ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H%M%S).img
         echo "The image ${BACKUP_PFAD}/PiAger_image_$(date +%Y-%m-%d-%H%M%S).img was successfully created."

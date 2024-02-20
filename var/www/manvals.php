@@ -73,7 +73,7 @@
                                             <tr>
                                                 <td rowspan="4" class="td_png_icon"><h3><?php echo _('humidity'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_blockFunction()"><?php echo _('help'); ?></button></td>
                                                 <td class="text_left_padding"><?php echo _('setpoint humidity'); ?></td>
-                                                <td style="text-align: left;"><input name="setpoint_humidity_settings" type="number" style="width: 30%;" min="0" max="99" value=<?php echo $setpoint_humidity; ?>>&nbsp;%<span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 99)</span></td>
+                                                <td style="text-align: left;"><input name="setpoint_humidity_settings" type="number" style="width: 30%;" min="0" max="95" value=<?php echo $setpoint_humidity; ?>>&nbsp;%<span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 95)</span></td>
                                             </tr>
                                         </table>
                                         <script>

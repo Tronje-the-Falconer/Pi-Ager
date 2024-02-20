@@ -3,7 +3,7 @@
 //
 
 async function handleContentStatus( msg ) {
-    console.log('in handleContentStatus');
+//    console.log('in handleContentStatus');
     var myObj = JSON.parse(msg);
     
     var grepmain = myObj.grepmain;
@@ -88,10 +88,10 @@ async function handleContentStatus( msg ) {
         $('#mod_type_line4_id').attr('src', myObj.mod_type_line4);
         $('#mod_stat_line4_id').attr('src', myObj.mod_stat_line4);
         $('#mod_name_line4_id').html(myObj.mod_name_line4);
-        $('#mod_current_line4_id').html(myObj.mod_current_line4 + ' %');
-        $('#mod_setpoint_line4_id').html(myObj.mod_setpoint_line4 + ' %');
-        $('#mod_on_line4_id').html(myObj.mod_on_line4 + ' %');
-        $('#mod_off_line4_id').html(myObj.mod_off_line4 + ' %');
+//        $('#mod_current_line4_id').html(myObj.mod_current_line4 + ' %');
+//        $('#mod_setpoint_line4_id').html(myObj.mod_setpoint_line4 + ' %');
+//        $('#mod_on_line4_id').html(myObj.mod_on_line4 + ' %');
+//        $('#mod_off_line4_id').html(myObj.mod_off_line4 + ' %');
         
         $('#mod_type_line5_id').attr('src', myObj.mod_type_line5);
         $('#mod_stat_line5_id').attr('src', myObj.mod_stat_line5);
@@ -146,6 +146,9 @@ async function handleContentStatus( msg ) {
     $('#scale2_onoff_status_id').attr('src', myObj.scale2_onoff_status_id);    
     $('#scale2_status_text_id').html(myObj.scale2_status_text_id); 
 
+    $('#pi_ager_uptime_id').html(myObj.pi_ager_uptime_formatted);
+    $('#uv_uptime_id').html(myObj.uv_uptime_formatted);
+    
     if (main_status_text.localeCompare( myObj.main_status_text ) != 0) {   // refresh when mode changed
         window.location.href = "index.php"; 
     }

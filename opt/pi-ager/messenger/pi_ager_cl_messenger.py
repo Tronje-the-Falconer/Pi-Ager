@@ -29,7 +29,9 @@ from messenger.pi_ager_cl_pushover import cl_fact_logic_pushover, cl_logic_pusho
 from messenger.pi_ager_cl_telegram import cl_fact_logic_telegram, cl_logic_telegram
 
 from main.pi_ager_cx_exception import *
-from _ast import Pass
+import globals
+
+# from _ast import Pass
 
       
 class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
@@ -122,7 +124,7 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         sql_statement3 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.status_scale1_key + '";'
         sql_statement4 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.status_scale2_key + '";'
         sql_statement5 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "0"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.agingtable_period_key + '";'
-        sql_statement6 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "1"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.agingtable_period_day_key + '";'
+        sql_statement6 = 'UPDATE ' + pi_ager_names.current_values_table + ' SET "' + pi_ager_names.value_field + '" = "1"' + ' WHERE "' + pi_ager_names.key_field + '" = "' + pi_ager_names.agingtable_period_hour_key + '";'
         
         cl_fact_logger.get_instance().debug('stop pi_ager sql statement : ' + sql_statement1)
         cl_fact_logger.get_instance().debug('stop agingtable sql statement : ' + sql_statement2 )
@@ -180,10 +182,15 @@ class cl_logic_messenger: #Sollte logic heissen und dann dec, db und helper...
         """
         Handle event to create alarm or email or telegram or pushover ... class
         The second parameter info_text and the value taken from the field envent_text in table config_messenger_event are merged
+        For MQTT : put event into globals.mqtt_msg_queue
         """
         cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         cl_fact_logger.get_instance().info('Event state: ' + event )
         
+        # MQTT message queue
+        if (not globals.mqtt_msg_queue.full()):
+            globals.mqtt_msg_queue.put(event)
+            
         self.event = event
         self.it_messenger_event = self.db_messenger_event.read_data_from_db()
         for item in self.it_messenger_event:

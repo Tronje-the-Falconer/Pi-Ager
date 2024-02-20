@@ -42,13 +42,13 @@
             if ($data_exhaust_air_period_edit_agingtable != 'NULL'){
                 $data_exhaust_air_period_edit_agingtable = $data_exhaust_air_period_edit_agingtable * 60;
             }
-            $data_days_edit_agingtable = set_null_if_empty($_POST['data_days_edit_agingtable_'.$index_row]);
+            $data_hours_edit_agingtable = set_null_if_empty($_POST['data_hours_edit_agingtable_'.$index_row]);
             
             if ($index_row == 0){
-                $sql = 'UPDATE agingtable_' . $agingtable_to_edit . ' SET "' . $agingtable_modus_field . '" = ' . $data_modus_edit_agingtable . ', "' . $agingtable_setpoint_humidity_field . '" = ' . $data_setpoint_humidity_edit_agingtable . ', "' . $agingtable_setpoint_temperature_field . '" = ' . $data_setpoint_temperature_edit_agingtable . ', "' . $agingtable_circulation_air_duration_field . '" = ' . $data_circulation_air_duration_edit_agingtable . ', "' . $agingtable_circulation_air_period_field . '" = ' . $data_circulation_air_period_edit_agingtable . ', "' . $agingtable_exhaust_air_duration_field . '" = ' . $data_exhaust_air_duration_edit_agingtable . ', "' . $agingtable_exhaust_air_period_field . '" = ' . $data_exhaust_air_period_edit_agingtable . ', "' . $agingtable_days_field . '" = ' . $data_days_edit_agingtable . ', "' . $agingtable_comment_field . '" = "'  . $comment . '" WHERE "' . $id_field . '" =' . $row_id .  ';';
+                $sql = 'UPDATE agingtable_' . $agingtable_to_edit . ' SET "' . $agingtable_modus_field . '" = ' . $data_modus_edit_agingtable . ', "' . $agingtable_setpoint_humidity_field . '" = ' . $data_setpoint_humidity_edit_agingtable . ', "' . $agingtable_setpoint_temperature_field . '" = ' . $data_setpoint_temperature_edit_agingtable . ', "' . $agingtable_circulation_air_duration_field . '" = ' . $data_circulation_air_duration_edit_agingtable . ', "' . $agingtable_circulation_air_period_field . '" = ' . $data_circulation_air_period_edit_agingtable . ', "' . $agingtable_exhaust_air_duration_field . '" = ' . $data_exhaust_air_duration_edit_agingtable . ', "' . $agingtable_exhaust_air_period_field . '" = ' . $data_exhaust_air_period_edit_agingtable . ', "' . $agingtable_hours_field . '" = ' . $data_hours_edit_agingtable . ', "' . $agingtable_comment_field . '" = "'  . $comment . '" WHERE "' . $id_field . '" =' . $row_id .  ';';
             }
             else{
-                $sql = 'UPDATE agingtable_' . $agingtable_to_edit . ' SET "' . $agingtable_modus_field . '" = ' . $data_modus_edit_agingtable . ', "' . $agingtable_setpoint_humidity_field . '" = ' . $data_setpoint_humidity_edit_agingtable . ', "' . $agingtable_setpoint_temperature_field . '" = ' . $data_setpoint_temperature_edit_agingtable . ', "' . $agingtable_circulation_air_duration_field . '" = ' . $data_circulation_air_duration_edit_agingtable . ', "' . $agingtable_circulation_air_period_field . '" = ' . $data_circulation_air_period_edit_agingtable . ', "' . $agingtable_exhaust_air_duration_field . '" = ' . $data_exhaust_air_duration_edit_agingtable . ', "' . $agingtable_exhaust_air_period_field . '" = ' . $data_exhaust_air_period_edit_agingtable . ', "' . $agingtable_days_field . '" = ' . $data_days_edit_agingtable . ' WHERE "' . $id_field . '" =' . $row_id .  ';';
+                $sql = 'UPDATE agingtable_' . $agingtable_to_edit . ' SET "' . $agingtable_modus_field . '" = ' . $data_modus_edit_agingtable . ', "' . $agingtable_setpoint_humidity_field . '" = ' . $data_setpoint_humidity_edit_agingtable . ', "' . $agingtable_setpoint_temperature_field . '" = ' . $data_setpoint_temperature_edit_agingtable . ', "' . $agingtable_circulation_air_duration_field . '" = ' . $data_circulation_air_duration_edit_agingtable . ', "' . $agingtable_circulation_air_period_field . '" = ' . $data_circulation_air_period_edit_agingtable . ', "' . $agingtable_exhaust_air_duration_field . '" = ' . $data_exhaust_air_duration_edit_agingtable . ', "' . $agingtable_exhaust_air_period_field . '" = ' . $data_exhaust_air_period_edit_agingtable . ', "' . $agingtable_hours_field . '" = ' . $data_hours_edit_agingtable . ' WHERE "' . $id_field . '" =' . $row_id .  ';';
             }
             open_connection();
             execute_query($sql);
@@ -165,7 +165,7 @@
                 $data_circulation_air_period =$agingtable_circulation_air_period_field;
                 $data_exhaust_air_duration = $agingtable_exhaust_air_duration_field;
                 $data_exhaust_air_period = $agingtable_exhaust_air_period_field;
-                $data_days = $agingtable_days_field;
+                $data_hours = $agingtable_hours_field;
                 $data_comment = $agingtable_comment_field;
             }
             else{
@@ -193,22 +193,23 @@
                 if (!empty($dataset[$agingtable_exhaust_air_period_field])){
                     $data_exhaust_air_period = intval($dataset[$agingtable_exhaust_air_period_field]);
                 } else {$data_exhaust_air_period = NULL;}
-                if (!empty($dataset[$agingtable_days_field])){
-                    $data_days = intval($dataset[$agingtable_days_field]);
-                } else {$data_days = NULL;}
+                if (!empty($dataset[$agingtable_hours_field])){
+                    $data_hours = intval($dataset[$agingtable_hours_field]);
+                } else {$data_hours = NULL;}
                 if (!empty($dataset[$agingtable_comment_field])){
                     $data_comment = "'" . $dataset[$agingtable_comment_field] . "'";
                 } else {$data_comment = NULL;}
             }
 
 
-            $line = $data_modus . ',' . $data_setpoint_humidity . ',' . $data_setpoint_temperature .',' . $data_circulation_air_duration .',' . $data_circulation_air_period .',' . $data_exhaust_air_duration .',' . $data_exhaust_air_period .',' . $data_days .',' . $data_comment;
+            $line = $data_modus . ',' . $data_setpoint_humidity . ',' . $data_setpoint_temperature .',' . $data_circulation_air_duration .',' . $data_circulation_air_period .',' . $data_exhaust_air_duration .',' . $data_exhaust_air_period .',' . $data_hours .',' . $data_comment;
             fputcsv($file, explode(',', $line));
             $index_row++;
         }
         
         fclose($file);
-        header( "Content-Disposition: attachment; filename=\"" . $filename . '"' );
+        header('Content-Type: application/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '"' );
         header( "X-LIGHTTPD-send-file: " . $filepath);
         
         
@@ -251,7 +252,7 @@
         
         $index_row = 0;
         while ($index_row < $add_agingtable_rows) {
-            $sql = 'INSERT INTO ' . $agingtable_to_edit_sql . '("' . $agingtable_modus_field . '", "' . $agingtable_setpoint_humidity_field . '", "' . $agingtable_setpoint_temperature_field . '", "' . $agingtable_circulation_air_duration_field . '", "' . $agingtable_circulation_air_period_field . '", "' . $agingtable_exhaust_air_duration_field . '", "' . $agingtable_exhaust_air_period_field . '", "' . $agingtable_days_field . '", "'. $agingtable_comment_field .'") VALUES (NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,"")';
+            $sql = 'INSERT INTO ' . $agingtable_to_edit_sql . '("' . $agingtable_modus_field . '", "' . $agingtable_setpoint_humidity_field . '", "' . $agingtable_setpoint_temperature_field . '", "' . $agingtable_circulation_air_duration_field . '", "' . $agingtable_circulation_air_period_field . '", "' . $agingtable_exhaust_air_duration_field . '", "' . $agingtable_exhaust_air_period_field . '", "' . $agingtable_hours_field . '", "'. $agingtable_comment_field .'") VALUES (NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,"")';
             open_connection();
             execute_query($sql);
             close_database();

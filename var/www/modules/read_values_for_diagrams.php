@@ -150,7 +150,7 @@
         $filtered = array();
         
         for ($i = 0; $i < $element_count; ++$i) {
-            $start_index = $i - $cnt_index/2;
+            $start_index = intval($i - $cnt_index/2);
             $end_index = $start_index + $cnt_index;
             $sum = 0;
             $cnt_sum = 0;
@@ -212,8 +212,8 @@
     $save_temperature_humidity_loops = get_table_value($config_settings_table, $save_temperature_humidity_loops_key);
     $saving_period_scale1 = get_table_value($settings_scale1_table, $saving_period_key);
     $saving_period_scale2 = get_table_value($settings_scale2_table, $saving_period_key);
-    // calculated temperature-humidity saving period, saving loop needs about 12s
-    $temperatur_humidity_saving_period = $save_temperature_humidity_loops * 12;
+    // calculated temperature-humidity saving period, saving loop needs about 6s
+    $temperatur_humidity_saving_period = $save_temperature_humidity_loops * 6;
     $corr_factor = 27.0/$save_temperature_humidity_loops;
     $corr_factor_scale = max($temperatur_humidity_saving_period/$saving_period_scale1, $temperatur_humidity_saving_period/$saving_period_scale2);  
     
@@ -248,16 +248,15 @@
         $min_time_window = 604800 / 4;  // if time windows <= 1/4 week then nth = 1
         if ($customtime > $min_time_window) {   
             $nth_value =  intval($customtime / $min_time_window * $corr_factor);
-            if ($nth_value < 1) {
-                $nth_value = 1;
-            }
             $nth_value_scale =  intval($customtime / $min_time_window * $corr_factor_scale);
-            if ($nth_value_scale < 1) {
-                $nth_value_scale = 1;
-            }            
         }
-     }
-	
+    }
+    if ($nth_value < 1) {
+        $nth_value = 1;
+    }
+    if ($nth_value_scale < 1) {
+        $nth_value_scale = 1;
+    }                        	
     // make nth_value_scale odd-numbered
     if ($nth_value_scale > 1 and (($nth_value_scale % 2) == 0)) {
         $nth_value_scale -= 1;

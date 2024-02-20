@@ -3,6 +3,7 @@
     include 'database.php';
     include 'logging.php';
     include 'read_gpio.php';
+    include 'funclib.php';
     # Language festlegen
     
     #### BEGIN Language from DB
@@ -32,18 +33,36 @@
 	$status_scale2 = intval(get_table_value($current_values_table, $status_scale2_key));
     $scale1_thread_alive = intval(get_table_value($current_values_table, $scale1_thread_alive_key));
     $scale2_thread_alive = intval(get_table_value($current_values_table, $scale2_thread_alive_key));
-    $sensor_temperature = number_format(floatval(get_table_value($current_values_table, $sensor_temperature_key)), 1, '.', '');
-    $sensor_humidity = round(get_table_value($current_values_table,$sensor_humidity_key), 0);
+    $current_temp = get_table_value($current_values_table,$sensor_temperature_key);
+    if ($current_temp === null) {
+        $sensor_temperature = '-----';
+    }
+    else {
+        $sensor_temperature = number_format(floatval($current_temp), 1, '.', '');
+    }
+    $current_hum = get_table_value($current_values_table,$sensor_humidity_key);
+    if ($current_hum === null) {
+        $sensor_humidity = '-----';
+    }
+    else {
+        $sensor_humidity = round($current_hum, 0);
+    }
     $desired_maturity = read_agingtable_name_from_config();
     
-    $bus = intval(get_table_value($config_settings_table, $sensorbus_key));
+//    $bus = intval(get_table_value($config_settings_table, $sensorbus_key));
     $sensorsecondtype = intval(get_table_value($config_settings_table,$sensorsecondtype_key));
     $dehumidifier_modus = intval(get_table_value($config_settings_table,$dehumidifier_modus_key));
     $dewpoint_check = intval(get_table_value($config_settings_table, $dewpoint_check_key));
-    $sensor_humidity_abs = get_table_value($current_values_table, $sensor_humidity_abs_key);
-    $sensor_extern_humidity_abs = get_table_value($current_values_table, $sensor_extern_humidity_abs_key);
+//    $sensor_humidity_abs = get_table_value($current_values_table, $sensor_humidity_abs_key);
+//    $sensor_extern_humidity_abs = get_table_value($current_values_table, $sensor_extern_humidity_abs_key);
     $status_humidity_check = intval(get_table_value($current_values_table, $status_humidity_check_key));
     
+    $uptime_row = get_table_row($time_meter_table, 1);
+    $uv_uptime_seconds = $uptime_row[$uv_light_seconds_field];
+    $uv_uptime_formatted = convert_seconds_to_hours($uv_uptime_seconds, 2);
+    $pi_ager_uptime_seconds = $uptime_row[$pi_ager_seconds_field];
+    $pi_ager_uptime_formatted = convert_seconds_to_hours($pi_ager_uptime_seconds, 2);
+     
     $current_values = array();
 
     $current_values['grepmain'] = $grepmain;
@@ -146,13 +165,40 @@
         $sensor_temperature = '--.-';
         $sensor_humidity = '--.-';
     }
+    
+    $cooling_hysteresis = get_table_value($config_settings_table ,$cooling_hysteresis_key);
+    $heating_hysteresis = get_table_value($config_settings_table ,$heating_hysteresis_key);
+    $cooling_hysteresis_offset = get_table_value($config_settings_table , $cooling_hysteresis_offset_key);
+    $heating_hysteresis_offset = get_table_value($config_settings_table , $heating_hysteresis_offset_key);
 
-    $switch_on_cooling_compressor = round(get_table_value($config_settings_table,$switch_on_cooling_compressor_key), 1);
-    $switch_off_cooling_compressor = round(get_table_value($config_settings_table,$switch_off_cooling_compressor_key), 1);
-    $switch_on_humidifier = get_table_value($config_settings_table,$switch_on_humidifier_key);
-    $switch_off_humidifier = get_table_value($config_settings_table,$switch_off_humidifier_key);
+    $internal_temperature = get_table_value($current_values_table, $sensor_temperature_key);
+    $external_temperature = get_table_value($current_values_table, $sensor_extern_temperature_key);
     $setpoint_temperature = round(get_table_value($config_settings_table,$setpoint_temperature_key), 1);
+    
+    if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $setpoint_temperature && ($modus == 3 || $modus == 4)) {  // heating in mode 3 or 4
+        $switch_on_cooling_compressor = $heating_hysteresis/2;
+        $switch_off_cooling_compressor = -$heating_hysteresis/2;
+        $switch_on_heater = $cooling_hysteresis/2;
+        $switch_off_heater = -$cooling_hysteresis/2;
+    }
+    else if ($modus == 2) { // heater only
+        $switch_on_cooling_compressor = $cooling_hysteresis/2;
+        $switch_off_cooling_compressor = -$cooling_hysteresis/2;
+    }
+    else {
+        $switch_on_cooling_compressor = $cooling_hysteresis/2;
+        $switch_off_cooling_compressor = -$cooling_hysteresis/2;
+        $switch_on_heater = $heating_hysteresis/2;
+        $switch_off_heater = -$heating_hysteresis/2;
+    }
+    
+    $humidifier_hysteresis = intval(get_table_value($config_settings_table,$humidifier_hysteresis_key));
+    $dehumidifier_hysteresis = intval(get_table_value($config_settings_table,$dehumidifier_hysteresis_key));
+    $humidifier_hysteresis_offset = round(get_table_value($config_settings_table,$humidifier_hysteresis_offset_key), 1);
+    $dehumidifier_hysteresis_offset = round(get_table_value($config_settings_table,$dehumidifier_hysteresis_offset_key), 1);
+
     $setpoint_humidity = round(get_table_value($config_settings_table,$setpoint_humidity_key), 1);  
+    $saturation_point = intval(get_table_value($config_settings_table,$saturation_point_key));
     
     if ($modus == 0 || $modus == 1) {
         $current_values['mod_type_line1'] = 'images/icons/cooling_42x42.png';
@@ -160,8 +206,8 @@
         $current_values['mod_name_line1'] = strtoupper(_('cooler'));
         $current_values['mod_current_line1'] = $sensor_temperature;
         $current_values['mod_setpoint_line1'] = number_format(floatval($setpoint_temperature), 1, '.', '');
-        $current_values['mod_on_line1'] = number_format(floatval($setpoint_temperature + $switch_on_cooling_compressor), 1, '.', '');
-        $current_values['mod_off_line1'] = number_format(floatval($setpoint_temperature + $switch_off_cooling_compressor), 1, '.', '');
+        $current_values['mod_on_line1'] = number_format(floatval($setpoint_temperature + $switch_on_cooling_compressor + $cooling_hysteresis_offset), 2, '.', '');
+        $current_values['mod_off_line1'] = number_format(floatval($setpoint_temperature + $switch_off_cooling_compressor + $cooling_hysteresis_offset), 2, '.', '');
     }
     else if ($modus == 2) {
         $current_values['mod_type_line1'] = 'images/icons/heating_42x42.png';
@@ -169,8 +215,8 @@
         $current_values['mod_name_line1'] = strtoupper(_('heater'));
         $current_values['mod_current_line1'] = $sensor_temperature;
         $current_values['mod_setpoint_line1'] = number_format(floatval($setpoint_temperature), 1, '.', '');
-        $current_values['mod_on_line1'] = number_format(floatval($setpoint_temperature - $switch_on_cooling_compressor), 1, '.', '');
-        $current_values['mod_off_line1'] = number_format(floatval($setpoint_temperature - $switch_off_cooling_compressor), 1, '.', '');
+        $current_values['mod_on_line1'] = number_format(floatval($setpoint_temperature - $switch_on_cooling_compressor + $heating_hysteresis_offset), 2, '.', '');
+        $current_values['mod_off_line1'] = number_format(floatval($setpoint_temperature - $switch_off_cooling_compressor + $heating_hysteresis_offset), 2, '.', '');
     }
     else {
         $current_values['mod_type_line1'] = 'images/icons/cooling_42x42.png';
@@ -178,16 +224,16 @@
         $current_values['mod_name_line1'] = strtoupper(_('cooler'));
         $current_values['mod_current_line1'] = $sensor_temperature;
         $current_values['mod_setpoint_line1'] = number_format(floatval($setpoint_temperature), 1, '.', '');
-        $current_values['mod_on_line1'] = number_format(floatval($setpoint_temperature + $switch_on_cooling_compressor), 1, '.', '');
-        $current_values['mod_off_line1'] = number_format(floatval($setpoint_temperature + $switch_off_cooling_compressor), 1, '.', '');
+        $current_values['mod_on_line1'] = number_format(floatval($setpoint_temperature + $switch_on_cooling_compressor + $cooling_hysteresis_offset), 2, '.', '');
+        $current_values['mod_off_line1'] = number_format(floatval($setpoint_temperature + $switch_off_cooling_compressor + $cooling_hysteresis_offset), 2, '.', '');
         
         $current_values['mod_type_line2'] = 'images/icons/heating_42x42.png';
         $current_values['mod_stat_line2'] = $heater_on_off_png;
         $current_values['mod_name_line2'] = strtoupper(_('heater'));
         $current_values['mod_current_line2'] = $sensor_temperature;
         $current_values['mod_setpoint_line2'] = number_format(floatval($setpoint_temperature), 1, '.', '');
-        $current_values['mod_on_line2'] = number_format(floatval($setpoint_temperature - $switch_on_cooling_compressor), 1, '.', '');
-        $current_values['mod_off_line2'] = number_format(floatval($setpoint_temperature - $switch_off_cooling_compressor), 1, '.', '');  
+        $current_values['mod_on_line2'] = number_format(floatval($setpoint_temperature - $switch_on_heater + $heating_hysteresis_offset), 2, '.', '');
+        $current_values['mod_off_line2'] = number_format(floatval($setpoint_temperature - $switch_off_heater + $heating_hysteresis_offset), 2, '.', '');  
     }
 
     if ($modus == 1 || $modus == 2 || $modus == 3) {
@@ -196,8 +242,8 @@
         $current_values['mod_name_line3'] = strtoupper(_('humidification'));
         $current_values['mod_current_line3'] = $sensor_humidity;
         $current_values['mod_setpoint_line3'] = $setpoint_humidity;
-        $current_values['mod_on_line3'] = $setpoint_humidity - $switch_on_humidifier;
-        $current_values['mod_off_line3'] = $setpoint_humidity - $switch_off_humidifier;
+        $current_values['mod_on_line3'] = eval_switch_on_humidity( $setpoint_humidity, $humidifier_hysteresis, $humidifier_hysteresis_offset );
+        $current_values['mod_off_line3'] = eval_switch_off_humidity( $setpoint_humidity, $humidifier_hysteresis, $humidifier_hysteresis_offset, $saturation_point );
     }
     else {
         $current_values['mod_type_line3'] = 'images/icons/humidification_42x42.png';
@@ -205,24 +251,24 @@
         $current_values['mod_name_line3'] = strtoupper(_('humidification'));
         $current_values['mod_current_line3'] = $sensor_humidity;
         $current_values['mod_setpoint_line3'] = $setpoint_humidity;
-        $current_values['mod_on_line3'] = $setpoint_humidity - $switch_on_humidifier;
-        $current_values['mod_off_line3'] = $setpoint_humidity - $switch_off_humidifier;
+        $current_values['mod_on_line3'] = eval_switch_on_humidity($setpoint_humidity, $humidifier_hysteresis, $humidifier_hysteresis_offset );
+        $current_values['mod_off_line3'] = eval_switch_off_humidity($setpoint_humidity, $humidifier_hysteresis, $humidifier_hysteresis_offset, $saturation_point);
         
         $current_values['mod_type_line4'] = 'images/icons/exhausting_42x42.png';
         $current_values['mod_stat_line4'] = $exhausting_on_off_png;
         $current_values['mod_name_line4'] = strtoupper(_('exhausting'));
-        $current_values['mod_current_line4'] = $sensor_humidity;
-        $current_values['mod_setpoint_line4'] = $setpoint_humidity;
-        $current_values['mod_on_line4'] = ((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100);
-        $current_values['mod_off_line4'] = ((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100);     
+//        $current_values['mod_current_line4'] = $sensor_humidity;
+//        $current_values['mod_setpoint_line4'] = $setpoint_humidity;
+//        $current_values['mod_on_line4'] = ((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100);
+//        $current_values['mod_off_line4'] = ((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100);     
         
         $current_values['mod_type_line5'] = 'images/icons/dehumidification_42x42.png';
         $current_values['mod_stat_line5'] = $dehumidifier_on_off_png;
         $current_values['mod_name_line5'] = strtoupper(_('dehumidification'));
         $current_values['mod_current_line5'] = $sensor_humidity;
         $current_values['mod_setpoint_line5'] = $setpoint_humidity;
-        $current_values['mod_on_line5'] = ((($setpoint_humidity + $switch_on_humidifier) <= 100) ? ($setpoint_humidity + $switch_on_humidifier) : 100);
-        $current_values['mod_off_line5'] = ((($setpoint_humidity + $switch_off_humidifier) <= 100) ? ($setpoint_humidity + $switch_off_humidifier) : 100);
+        $current_values['mod_on_line5'] = eval_switch_on_dehumidity($setpoint_humidity, $dehumidifier_hysteresis, $dehumidifier_hysteresis_offset, $saturation_point ); 
+        $current_values['mod_off_line5'] = eval_switch_off_dehumidity($setpoint_humidity,  $dehumidifier_hysteresis, $dehumidifier_hysteresis_offset );
 
         if ($sensorsecondtype != 0) {  // show abs. humidity check aktive only with second sensor
             if ($dehumidifier_modus == 3) {             // only dehumidification
@@ -404,6 +450,9 @@
         $current_values['scale2_status_text_id'] = strtoupper(_('scale2'));
     }
   
+    $current_values['uv_uptime_formatted'] = $uv_uptime_formatted;
+    $current_values['pi_ager_uptime_formatted'] = $pi_ager_uptime_formatted;
+    
     echo json_encode($current_values);
     logger('DEBUG', 'querystatus finished');
 ?>

@@ -27,7 +27,12 @@
     //$grepmain = shell_exec('sudo /var/sudowebscript.sh grepmain'); #Rss.py
     // $grepscale1 = shell_exec('sudo /var/sudowebscript.sh grepscale1');
     // $grepscale2 = shell_exec('sudo /var/sudowebscript.sh grepscale2');
-    $grepmain = exec('pgrep -a python3 | grep main.py');
+    $exec_retval = exec('pgrep -a python3 | grep main.py');
+    $grepmain = 0;
+    if ($exec_retval != '') {
+        $grepmain = 1;
+    }
+
     // $grepagingtable = exec('pgrep -a python3 | grep agingtable.py');
     $grepagingtable = intval(get_table_value($current_values_table, $status_agingtable_key));
     // $grepscale = exec('pgrep -a python3 | grep scale.py');

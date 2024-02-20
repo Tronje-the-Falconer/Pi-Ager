@@ -300,6 +300,7 @@
         global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key;
         global $meat1_sensor_name_json_key, $meat2_sensor_name_json_key, $meat3_sensor_name_json_key, $meat4_sensor_name_json_key;
         global $sensorsecondtype_key, $sensorbus_key;
+        global $take_off_weight_scale1_key, $take_off_weight_scale2_key;
         
         open_connection(); 
         $sql = 'SELECT * FROM ' . $current_values_table;
@@ -331,110 +332,13 @@
         $values['sensorsecondtype'] = $sensorsecondtype; 
         $values['sensorbus'] = $sensorbus;
         
+        $take_off_weight_scale1 = intval(get_table_value($config_settings_table, $take_off_weight_scale1_key));
+        $take_off_weight_scale2 = intval(get_table_value($config_settings_table, $take_off_weight_scale2_key));
+        $values['take_off_weight_scale1'] = $take_off_weight_scale1;
+        $values['take_off_weight_scale2'] = $take_off_weight_scale2;
         return $values;
     }
-        
-    function get_current_values_for_monitoring(){
-        global $current_values_table, $key_field, $value_field, $sensor_temperature_key, $sensor_humidity_key, $sensor_humidity_abs_key, $scale1_key, $scale2_key;
-        global $last_change_field, $last_change_temperature_json_key, $last_change_humidity_json_key, $last_change_scale1_json_key, $last_change_scale2_json_key, $server_time_json_key;
-        global $last_change_humidity_abs_json_key;
-        global $temperature_meat1_key, $temperature_meat2_key, $temperature_meat3_key, $temperature_meat4_key;
-        global $last_change_temperature_meat1_json_key, $last_change_temperature_meat2_json_key, $last_change_temperature_meat3_json_key, $last_change_temperature_meat4_json_key;
-        global $config_settings_table;
-        global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key;
-        global $meat1_sensor_name_json_key, $meat2_sensor_name_json_key, $meat3_sensor_name_json_key, $meat4_sensor_name_json_key;
-        global $sensor_dewpoint_key, $sensor_extern_temperature_key, $sensor_extern_humidity_key, $sensor_extern_humidity_abs_key, $sensor_extern_dewpoint_key;
-        global $last_change_dewpoint_json_key, $last_change_extern_temperature_json_key, $last_change_extern_humidity_json_key, $last_change_extern_dewpoint_json_key;
-        global $last_change_extern_humidity_abs_json_key;
-        
-        open_connection(); 
-        $sql = 'SELECT * FROM ' . $current_values_table;
-        // echo $sql;
-        $result = get_query_result($sql);
-        $values = array();
-        
-        while ($dataset = $result->fetchArray(SQLITE3_ASSOC))
-        {
-           $values[$dataset[$key_field]] =  $dataset[$value_field];
-           if ($dataset[$key_field] == $sensor_temperature_key)
-           {
-               $values[$last_change_temperature_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $sensor_humidity_key)
-           {
-               $values[$last_change_humidity_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $sensor_humidity_abs_key)
-           {
-               $values[$last_change_humidity_abs_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $scale1_key)
-           {
-               $values[$last_change_scale1_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $scale2_key)
-           {
-               $values[$last_change_scale2_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $temperature_meat1_key)
-           {
-               $values[$last_change_temperature_meat1_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $temperature_meat2_key)
-           {
-               $values[$last_change_temperature_meat2_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $temperature_meat3_key)
-           {
-               $values[$last_change_temperature_meat3_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $temperature_meat4_key)
-           {
-               $values[$last_change_temperature_meat4_json_key] =  $dataset[$last_change_field];
-           }
-            elseif ($dataset[$key_field] == $sensor_dewpoint_key)
-           {
-               $values[$last_change_dewpoint_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $sensor_extern_temperature_key)
-           {
-               $values[$last_change_extern_temperature_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $sensor_extern_humidity_key)
-           {
-               $values[$last_change_extern_humidity_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $sensor_extern_humidity_abs_key)
-           {
-               $values[$last_change_extern_humidity_abs_json_key] =  $dataset[$last_change_field];
-           }
-           elseif ($dataset[$key_field] == $sensor_extern_dewpoint_key)
-           {
-               $values[$last_change_extern_dewpoint_json_key] =  $dataset[$last_change_field];
-           }
-        }
-        close_database();
-        
-        $values[$server_time_json_key] = time();
 
-        $meat1_sensortype_id = get_table_value($config_settings_table, $meat1_sensortype_key);
-        $meat2_sensortype_id = get_table_value($config_settings_table, $meat2_sensortype_key); 
-        $meat3_sensortype_id = get_table_value($config_settings_table, $meat3_sensortype_key);
-        $meat4_sensortype_id = get_table_value($config_settings_table, $meat4_sensortype_key);
-        
-        $row = get_meatsensor_table_row( $meat1_sensortype_id );
-        $values[$meat1_sensor_name_json_key] = $row['name'];
-        
-        $row = get_meatsensor_table_row( $meat2_sensortype_id );
-        $values[$meat2_sensor_name_json_key] = $row['name'];  
-        $row = get_meatsensor_table_row( $meat3_sensortype_id );
-        $values[$meat3_sensor_name_json_key] = $row['name'];
-        $row = get_meatsensor_table_row( $meat4_sensortype_id );
-        $values[$meat4_sensor_name_json_key] = $row['name'];  
-        
-        return $values;
-    }
-    
     function read_agingtable_name_from_config()
         {
         global $id_field,$agingtable_name_field,$config_settings_table,$agingtable_key,$agingtables_table;
@@ -560,6 +464,23 @@
         }
     }
     
+    function write_mqtt_values($broker_address, $mqtt_port, $mqtt_username, $mqtt_password, $mqtt_active){
+        global $config_mqtt_table, $broker_address_field, $port_field, $username_field, $password_field, $mqtt_active_field, $id_field;
+        
+        if (is_table_empty($config_mqtt_table) == True) {
+            open_connection();
+            $sql = 'INSERT INTO ' . $config_mqtt_table . ' (' . $id_field . ', ' . $broker_address_field . ', ' . $port_field . ', ' . $username_field . ', ' . $password_field . ', ' . $mqtt_active_field . ' ) VALUES (' . '"1"' . ', "' . $broker_address . '", "'. strval($mqtt_port) . '", "' . $mqtt_username . '", "' . $mqtt_password . '", "' . strval($mqtt_active) . '")';
+            execute_query($sql);
+            close_database();
+        }
+        else {        
+            open_connection();
+            $sql = 'UPDATE ' . $config_mqtt_table . ' SET "' . $broker_address_field . '" = "' . $broker_address . '" , "' . $port_field . '" = "' . strval($mqtt_port) . '" , "' . $username_field . '" = "' . $mqtt_username . '" , "' . $password_field . '" = "' . $mqtt_password . '", "'. $mqtt_active_field . '" = ' . strval($mqtt_active) . ' WHERE "' . $id_field . '" = 1';
+            execute_query($sql);
+            close_database();
+        }
+    }
+        
     function write_dummy_mailserver_values() {
         global $mailserver_table, $mailserver_id_field, $mailserver_server_field, $mailserver_user_field, $mailserver_port_field;
         
@@ -684,15 +605,6 @@
         close_database();
     }
     
-    function add_event($add_event_event, $add_checked_event_e_mail, $add_checked_event_pushover, $add_checked_event_telegram, $add_event_alarm, $add_eventtext, $add_checked_alarm_active ){
-        global $messenger_event_table, $event_id_field, $event_event_field, $event_e_mail_field, $event_pushover_field, $event_telegram_field, $event_alarm_field, $event_eventtext_field, $event_active_field;;
-        open_connection();
-        $sql = 'INSERT INTO ' . $messenger_event_table . ' ("' . $event_event_field . '","' . $event_e_mail_field . '","' . $event_pushover_field . '","' . $event_telegram_field . '","' . $event_alarm_field . '","' . $event_eventtext_field . '","' . $event_active_field . '") VALUES ("' . $add_event_event .'",' . $add_checked_event_e_mail .',' . $add_checked_event_pushover .',' . $add_checked_event_telegram .',"' . $add_event_alarm .'","' . $add_eventtext .'",' . $add_checked_alarm_active . ')';
-        execute_query($sql);
-        
-        close_database();
-    }
-    
     function add_mail_recipient($add_e_mail_recipients_to_mail, $add_e_mail_recipients_active){
         global $email_recipients_table, $e_mail_recipients_to_mail_field, $e_mail_recipients_active_field;
         open_connection();
@@ -772,12 +684,15 @@
                 $fields[4] == 'circulation_air_period' AND 
                 $fields[5] == 'exhaust_air_duration' AND 
                 $fields[6] == 'exhaust_air_period' AND 
-                $fields[7] == 'days' AND 
+                $fields[7] == 'hours' AND
                 $fields[8] == 'comment'){
 
                 $create_fields_str = join(', ', array_map(function ($field){
                     if ($field == 'comment'){
                         return "$field TEXT NULL";
+                    }
+                    elseif ($field == 'hours') {
+                        return "$field INTEGER DEFAULT 1 NOT NULL";
                     }
                     else{
                         return "$field INTEGER NULL";
@@ -940,26 +855,32 @@
         close_database();
     }
 
-    function write_config($switch_on_cooling_compressor, $switch_off_cooling_compressor,
-                            $switch_on_humidifier, $switch_off_humidifier, $delay_humidify, $uv_modus, $uv_duration, 
+    function write_config($cooling_hysteresis, $heating_hysteresis, $cooling_hysteresis_offset, $heating_hysteresis_offset, 
+                            $humidifier_hysteresis, $dehumidifier_hysteresis, $humidifier_hysteresis_offset, $dehumidifier_hysteresis_offset, $saturation_point, $delay_humidify, $uv_modus, $uv_duration, 
                             $uv_period, $switch_on_uv_hour, $switch_on_uv_minute, $light_modus, $light_duration, 
                             $light_period, $switch_on_light_hour, $switch_on_light_minute, $dehumidifier_modus, 
                             $failure_temperature_delta, $failure_humidity_delta, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
-                            $shutdown_on_batlow, $delay_cooler, $dewpoint_check , $uv_check)
+                            $shutdown_on_batlow, $delay_cooler, $dewpoint_check, $uv_check, $delay_monitoring_humidifier, $tolerance_monitoring_humidifier, $check_monitoring_humidifier)
         {
-        global $value_field, $last_change_field, $key_field, $config_settings_table, $switch_on_cooling_compressor_key,
-                $switch_off_cooling_compressor_key, $switch_on_humidifier_key, $switch_off_humidifier_key, $delay_humidify_key, $uv_modus_key,
+        global $value_field, $last_change_field, $key_field, $config_settings_table, $cooling_hysteresis_key, $cooling_hysteresis_offset_key, $heating_hysteresis_offset_key,  
+                $humidifier_hysteresis_key, $dehumidifier_hysteresis_key, $humidifier_hysteresis_offset_key, $dehumidifier_hysteresis_offset_key,
+                $heating_hysteresis_key, $switch_on_humidifier_key, $switch_off_humidifier_key, $saturation_point_key, $delay_humidify_key, $uv_modus_key,
                 $uv_duration_key, $uv_period_key, $switch_on_uv_hour_key, $switch_on_uv_minute_key, $light_modus_key, $light_duration_key, $light_period_key,
                 $switch_on_light_hour_key, $switch_on_light_minute_key, $dehumidifier_modus_key, $failure_temperature_delta_key, $failure_humidity_delta_key, 
                 $internal_temperature_low_limit_key, $internal_temperature_high_limit_key, $internal_temperature_hysteresis_key, $shutdown_on_batlow_key, $delay_cooler_key,
-                $dewpoint_check_key, $uv_check_key;
-                
+                $dewpoint_check_key, $uv_check_key, $delay_monitoring_humidifier_key, $tolerance_monitoring_humidifier_key, $check_monitoring_humidifier_key;               
+        
         open_connection();
 
-        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($switch_on_cooling_compressor) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $switch_on_cooling_compressor_key . '"');
-        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($switch_off_cooling_compressor) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $switch_off_cooling_compressor_key . '"');
-        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($switch_on_humidifier) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $switch_on_humidifier_key . '"');
-        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($switch_off_humidifier) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $switch_off_humidifier_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($cooling_hysteresis) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $cooling_hysteresis_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($heating_hysteresis) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $heating_hysteresis_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($cooling_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $cooling_hysteresis_offset_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($heating_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $heating_hysteresis_offset_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($humidifier_hysteresis) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $humidifier_hysteresis_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($dehumidifier_hysteresis) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $dehumidifier_hysteresis_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($humidifier_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $humidifier_hysteresis_offset_key . '"');        
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($dehumidifier_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $dehumidifier_hysteresis_offset_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($saturation_point) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $saturation_point_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($delay_humidify) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $delay_humidify_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($uv_modus) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $uv_modus_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval(($uv_duration * 60)) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $uv_duration_key . '"');
@@ -980,19 +901,23 @@
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($shutdown_on_batlow) . ' WHERE ' . $key_field . ' = "' . $shutdown_on_batlow_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($delay_cooler) . ' WHERE ' . $key_field . ' = "' . $delay_cooler_key . '"'); 
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($dewpoint_check) . ' WHERE ' . $key_field . ' = "' . $dewpoint_check_key . '"');        
-        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($uv_check) . ' WHERE ' . $key_field . ' = "' . $uv_check_key . '"');         
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($uv_check) . ' WHERE ' . $key_field . ' = "' . $uv_check_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($delay_monitoring_humidifier) . ' WHERE ' . $key_field . ' = "' . $delay_monitoring_humidifier_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($tolerance_monitoring_humidifier) . ' WHERE ' . $key_field . ' = "' . $tolerance_monitoring_humidifier_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($check_monitoring_humidifier) . ' WHERE ' . $key_field . ' = "' . $check_monitoring_humidifier_key . '"');
         close_database();
         }
     
     function write_admin($language, $referenceunit_scale1, $measuring_interval_scale1, $measuring_duration_scale1, $saving_period_scale1, $samples_scale1, $spikes_scale1, $offset_scale1,
                             $referenceunit_scale2, $measuring_interval_scale2, $measuring_duration_scale2, $saving_period_scale2, $samples_scale2, $spikes_scale2, $offset_scale2,
                             $temp_sensor1, $temp_sensor2, $temp_sensor3, $temp_sensor4, $switch_control_uv_light_admin, $switch_control_light_admin, $current_check_active_admin, $current_threshold_admin,
-                            $repeat_event_cycle_admin)
+                            $repeat_event_cycle_admin, $take_off_weight_scale1_admin, $take_off_weight_scale2_admin)
     {
         global $value_field, $last_change_field, $key_field, $config_settings_table, $settings_scale1_table, $settings_scale2_table, $sensortype_key, $language_key;
         global $referenceunit_key, $scale_measuring_interval_key, $measuring_duration_key, $saving_period_key, $samples_key, $spikes_key, $offset_key;
         global $meat1_sensortype_key, $meat2_sensortype_key, $meat3_sensortype_key, $meat4_sensortype_key, $switch_control_uv_light_key, $switch_control_light_key;
         global $id_field, $config_current_check_table, $current_check_active_field, $current_threshold_field, $repeat_event_cycle_field;
+        global $take_off_weight_scale1_key, $take_off_weight_scale2_key;
         
         open_connection();
         
@@ -1015,6 +940,7 @@
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($samples_scale1) . ' WHERE ' . $key_field . ' = "' . $samples_key . '"');
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($spikes_scale1) . ' WHERE ' . $key_field . ' = "' . $spikes_key . '"');
         get_query_result('UPDATE ' . $settings_scale1_table . ' SET "' . $value_field . '" = ' . strval($offset_scale1) . ' WHERE ' . $key_field . ' = "' . $offset_key . '"');        
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($take_off_weight_scale1_admin) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $take_off_weight_scale1_key . '"');
         
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($referenceunit_scale2) . ' WHERE ' . $key_field . ' = "' . $referenceunit_key . '"');
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($measuring_interval_scale2) . ' WHERE ' . $key_field . ' = "' . $scale_measuring_interval_key . '"');
@@ -1023,6 +949,7 @@
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($samples_scale2) . ' WHERE ' . $key_field . ' = "' . $samples_key . '"');
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($spikes_scale2) . ' WHERE ' . $key_field . ' = "' . $spikes_key . '"');
         get_query_result('UPDATE ' . $settings_scale2_table . ' SET "' . $value_field . '" = ' . strval($offset_scale2) . ' WHERE ' . $key_field . ' = "' . $offset_key . '"');       
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($take_off_weight_scale2_admin) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $take_off_weight_scale2_key . '"');
         
         close_database();
     }
@@ -1177,18 +1104,18 @@
         }
     }
     
-    function write_defrost_values($defrost_temperature, $defrost_cycle_hours, $defrost_active){
-        global $id_field, $defrost_table, $defrost_temperature_field, $defrost_cycle_hours_field, $defrost_active_field;
+    function write_defrost_values($defrost_temperature, $defrost_cycle_hours, $defrost_active, $defrost_circulate_air){
+        global $id_field, $defrost_table, $defrost_temperature_field, $defrost_cycle_hours_field, $defrost_active_field, $defrost_circulate_air_field ;
         
         if (is_table_empty($defrost_table) == True) {
             open_connection();
-            $sql = 'INSERT INTO ' . $defrost_table . ' (' . $id_field . ', ' . $defrost_active_field . ', ' . $defrost_temperature_field . ', ' . $defrost_cycle_hours_field . ' ) VALUES (' . '"1"' . ', "' . strval($defrost_active) . '", "' .  strval($defrost_temperature) . '", "' . strval($defrost_cycle_hours) . '")';
+            $sql = 'INSERT INTO ' . $defrost_table . ' (' . $id_field . ', ' . $defrost_active_field . ', ' . $defrost_temperature_field . ', ' . $defrost_cycle_hours_field . ', ' . $defrost_circulate_air_field . ') VALUES (' . '"1"' . ', "' . strval($defrost_active) . '", "' .  strval($defrost_temperature) . '", "' . strval($defrost_cycle_hours) . '", "' . strval($defrost_circulate_air_field) . '")';
             execute_query($sql);
             close_database();
         }
         else {
             open_connection();
-            $sql = 'UPDATE ' . $defrost_table . ' SET "' . $defrost_active_field . '" = "' . $defrost_active . '" , "' .  $defrost_temperature_field . '" = "' . $defrost_temperature . '" , "' . $defrost_cycle_hours_field . '" = "' . $defrost_cycle_hours . '"  ' . ' WHERE ' . $id_field . ' = 1';
+            $sql = 'UPDATE ' . $defrost_table . ' SET "' . $defrost_active_field . '" = "' . $defrost_active . '" , "' .  $defrost_temperature_field . '" = "' . $defrost_temperature . '" , "' . $defrost_cycle_hours_field . '" = "' . $defrost_cycle_hours . '" , "' . $defrost_circulate_air_field . '" = "' . $defrost_circulate_air . '" ' . ' WHERE ' . $id_field . ' = 1';
             execute_query($sql);
             close_database();
         }

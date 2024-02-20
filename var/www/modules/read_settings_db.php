@@ -1,4 +1,6 @@
 <?php
+    # settings for manvals.php
+    
     $modus = intval(get_table_value($config_settings_table,$modus_key));
     $setpoint_temperature = number_format(floatval(get_table_value($config_settings_table,$setpoint_temperature_key)), 1, '.', '');
     $setpoint_humidity = round(get_table_value($config_settings_table,$setpoint_humidity_key), 0);
