@@ -183,21 +183,21 @@
                 if ($modus == 0 || $modus == 1)  {
                     $logstring = $logstring . " \n " . _('setpoint temperature') . ": " . $setpoint_temperature . " &deg;C";
                     $logstring = $logstring . " \n " . _('primary control hysteresis') . ": " . $cooling_hysteresis_config . " &deg;C";
-                    $logstring = $logstring . " \n " . _('primary control hysteresis offset') . ": " . $cooling_hysteresis_offset_config . " &deg;C";
+                    $logstring = $logstring . " \n " . _('cooler control hysteresis offset') . ": " . $cooling_hysteresis_offset_config . " &deg;C";
                 }
                 
                 if ($modus == 2)  {
                     $logstring = $logstring . " \n " . _('setpoint temperature') . ": " . $setpoint_temperature . " &deg;C";
                     $logstring = $logstring . " \n " . _('primary control hysteresis') . ": " . $cooling_hysteresis_config . " &deg;C";
-                    $logstring = $logstring . " \n " . _('primary control hysteresis offset') . ": " . $heating_hysteresis_offset_config . " &deg;C";
+                    $logstring = $logstring . " \n " . _('heater control hysteresis offset') . ": " . $heating_hysteresis_offset_config . " &deg;C";
                 }
                                 
                 if ($modus == 3 || $modus == 4)  {
                     $logstring = $logstring . " \n " . _('setpoint temperature') . ": " . $setpoint_temperature . " &deg;C";
                     $logstring = $logstring . " \n " . _('primary control hysteresis') . ": " . $cooling_hysteresis_config . " &deg;C";
                     $logstring = $logstring . " \n " . _('secondary control hysteresis') . ": " . $heating_hysteresis_config . " &deg;C";
-                    $logstring = $logstring . " \n " . _('primary control hysteresis offset') . ": " . $cooling_hysteresis_offset_config . " &deg;C";                    
-                    $logstring = $logstring . " \n " . _('secondary control hysteresis offset') . ": " . $heating_hysteresis_offset_config . " &deg;C";                    
+                    $logstring = $logstring . " \n " . _('cooler control hysteresis offset') . ": " . $cooling_hysteresis_offset_config . " &deg;C";                    
+                    $logstring = $logstring . " \n " . _('heater control hysteresis offset') . ": " . $heating_hysteresis_offset_config . " &deg;C";                    
                 }
 
                 if ($modus == 1 || $modus == 2 || $modus == 3) {
