@@ -173,11 +173,11 @@ echo "hänge NFS-Volume $NFSVOL ein"
 if [ -n "$NFSOPT" ]
 	then
         echo "mount with options: $NFSOPT"
-		mount -t nfs4 $NFSVOL $NFSMOUNT -o $NFSOPT
+		mount -t nfs $NFSVOL $NFSMOUNT -o $NFSOPT
         mountstatus=$?
  	else
         echo "mount w/o options"
- 		mount -t nfs4 $NFSVOL $NFSMOUNT
+ 		mount -t nfs $NFSVOL $NFSMOUNT
         mountstatus=$?
 fi
 
@@ -519,7 +519,7 @@ UPDATE config_messenger_event SET "pushover" = 0;
 UPDATE config_messenger_event SET "telegram" = 0;
 # UPDATE config_messenger_event SET "active" = 0;
 
-INSERT INTO "config_nfs_backup" ("id","nfsvol","number_of_backups","backup_name","nfsopt","active") VALUES ('1','','3','PiAgerBackup','nosuid,nodev','1');
+INSERT INTO "config_nfs_backup" ("id","nfsvol","number_of_backups","backup_name","nfsopt","active") VALUES ('1','','3','PiAgerBackup','soft,nosuid,nodev','1');
 
 END_SQL
 # Rebuild DB to reduce the size of the DB

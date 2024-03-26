@@ -1176,10 +1176,10 @@
                                                 $internal_temperature = get_table_value($current_values_table, $sensor_temperature_key);
                                                 $external_temperature = get_table_value($current_values_table, $sensor_extern_temperature_key);
                                                 if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $setpoint_temperature && ($modus == 3 || $modus == 4)) {
-                                                    $cooler_on = number_format(floatval($setpoint_temperature + $heating_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
-                                                    $cooler_off = number_format(floatval($setpoint_temperature - $heating_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
-                                                    $heater_on = number_format(floatval($setpoint_temperature - $cooling_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
-                                                    $heater_off = number_format(floatval($setpoint_temperature + $cooling_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
+                                                    $cooler_on = number_format(floatval($setpoint_temperature + $heating_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');       // ----- 401a 
+                                                    $cooler_off = number_format(floatval($setpoint_temperature - $heating_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');      // ----- 401a 
+                                                    $heater_on = number_format(floatval($setpoint_temperature - $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');       // ----- 401a
+                                                    $heater_off = number_format(floatval($setpoint_temperature + $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');      // ----- 401a 
                                                 }
                                                 else if ($modus == 2) { // heater only
                                                     $heater_on = number_format(floatval($setpoint_temperature - $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');

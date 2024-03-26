@@ -240,11 +240,11 @@ echo "mount NFS-Volume. Map $NFSVOL to $NFSMOUNT"
 if [ -n "$NFSOPT" ]
 	then
         echo "mount with options: $NFSOPT"
-		mount -t nfs4 $NFSVOL $NFSMOUNT -o $NFSOPT
+		mount -t nfs $NFSVOL $NFSMOUNT -o $NFSOPT
         mountstatus=$?
  	else
         echo "mount w/o options"
- 		mount -t nfs4 $NFSVOL $NFSMOUNT
+ 		mount -t nfs $NFSVOL $NFSMOUNT
         mountstatus=$?
 fi
 
@@ -366,15 +366,15 @@ mv ${BACKUP_PFAD}/${BACKUP_NAME}.img ${new_backup_name}
 #sqlite3 /var/www/config/pi-ager.sqlite3 "BEGIN TRANSACTION;UPDATE config SET value = '0.0' where key = 'backup_status'; COMMIT;"
 
 # Alte Sicherungen die nach X neuen Sicherungen entfernen
-NUMBER_OF_BACKUPS=$(find ${BACKUP_PFAD}/${BACKUP_NAME}* -maxdepth 1 -type f | wc -l)
+NUMBER_OF_BACKUPS=$(find ${BACKUP_PFAD}/${BACKUP_NAME}*.img -maxdepth 1 -type f | wc -l)
 echo "Number of backups that are kept. ${BACKUP_ANZAHL}"
 echo "Actual number of backups. ${NUMBER_OF_BACKUPS}"
 
 if [ ${NUMBER_OF_BACKUPS} -gt ${BACKUP_ANZAHL} ]
     then
         echo "more than ${BACKUP_ANZAHL} backup files, some old backups will be removed"
-        ls -tr ${BACKUP_PFAD}/${BACKUP_NAME}* | head -n -${BACKUP_ANZAHL}
-        pushd ${BACKUP_PFAD}; ls -tr ${BACKUP_PFAD}/${BACKUP_NAME}* | head -n -${BACKUP_ANZAHL} | xargs rm; popd
+        ls -tr ${BACKUP_PFAD}/${BACKUP_NAME}*.img | head -n -${BACKUP_ANZAHL}
+        pushd ${BACKUP_PFAD}; ls -tr ${BACKUP_PFAD}/${BACKUP_NAME}*.img | head -n -${BACKUP_ANZAHL} | xargs rm; popd
     else
         echo "less or equal than ${BACKUP_ANZAHL} backup files, no backups will be removed"
 fi
