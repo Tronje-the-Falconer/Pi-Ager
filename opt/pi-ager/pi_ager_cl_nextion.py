@@ -385,7 +385,7 @@ class cl_nextion( threading.Thread ):
                     await self.control_light_status()
                 elif self.data.page_id == 17 and self.data.component_id == 5:   # control_fridge, btn_piager,  start/stop
                     await self.control_piager_start_stop()
-                elif self.data.page_id == 17 and self.data.component_id == 9:   # control_fridge, btn_ok, button save new Temp/Hum. values
+                elif self.data.page_id == 17 and self.data.component_id == 8:   # control_fridge, btn_ok, button save new Temp/Hum. values
                     await self.save_page_17_19_values()
                 elif self.data.page_id == 17 and self.data.component_id == 10:  # control_fridge, btn_wifi
                     await self.client.command('page 6')
