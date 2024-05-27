@@ -162,6 +162,12 @@ class cl_nextion( threading.Thread ):
         await self.client.set('n_mod.val',modus)
 
     async def save_page_17_19_values(self):
+        # check if agingtable is active, if active do not save new values
+        status_agingtable = int(pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key ))
+        if (status_agingtable == 1):
+            await self.init_page_17_19()
+            return
+            
         #get values and check if within limits
         temp_soll = await self.client.get('n_temp_soll.val')
         hum_soll = await self.client.get('n_hum_soll.val')
