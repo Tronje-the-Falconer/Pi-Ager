@@ -392,7 +392,7 @@ INSERT INTO "agingtables" ("id","name") VALUES (7,'Salami');
 INSERT INTO "agingtables" ("id","name") VALUES (8,'dryaging2');
 INSERT INTO "agingtables" ("id","name") VALUES (10,'SalamiM');
 INSERT INTO "system" ("id","key","value","last_change") VALUES (1,'pi_revision','902120',1708338038);
-INSERT INTO "system" ("id","key","value","last_change") VALUES (2,'pi_ager_version','4.0.0 build 0220 bookworm',0);
+INSERT INTO "system" ("id","key","value","last_change") VALUES (2,'pi_ager_version','4.0.1 build 0627 beta',0);
 INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES (0,'------',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'0',0.0,0);
 INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES (1,'Fantast',0.003355834,0.00025698192,1.6391056e-06,50.08,NULL,NULL,NULL,NULL,NULL,'0',0.0,0);
 INSERT INTO "meat_sensortypes" ("id","name","a","b","c","Rn","Mode","RefVoltage","Sensitivity","Turns","nAverage","key","value","last_change") VALUES (2,'MAVERICK',0.003356158,0.00022237925,2.652016e-06,1004.0,NULL,NULL,NULL,NULL,NULL,'0',0.0,0);
