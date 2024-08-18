@@ -70,4 +70,28 @@ function eval_switch_off_dehumidity( $setpoint_humidity, $dehumidifier_hysteresi
     return ($hum_temp < 0 ? 0 : $hum_temp);
 }
 
+# find delay and offset for humidifier control by linear interpolation
+function eval_humidifier_delay_offset( $humidity_parms, $setp_temp ) {
+    $i = -1;
+    $count = count($humidity_parms);
+    foreach( $humidity_parms as $parms ) {
+        if ($setp_temp < $parms['setpoint_temp']) {
+            break;
+        }
+        $i++;
+    }
+    if ($i == -1) {
+       $i = 0; 
+    }
+    if ($i > ($count - 2)) {
+        $i = $count - 2;
+    }
+    $index0 = $i;
+    $index1 = $i + 1; 
+    
+    $d = ($setp_temp - $humidity_parms[$index0]['setpoint_temp']) / ($humidity_parms[$index1]['setpoint_temp'] - $humidity_parms[$index0]['setpoint_temp']);  // setpoint temperature
+    $delay = $humidity_parms[$index0]['delay_humidifier'] + $d * ($humidity_parms[$index1]['delay_humidifier'] - $humidity_parms[$index0]['delay_humidifier']);        // delay
+    $offset = $humidity_parms[$index0]['offset_humidifier'] + $d * ($humidity_parms[$index1]['offset_humidifier'] - $humidity_parms[$index0]['offset_humidifier']);       // offset
+    return [$delay, $offset];
+}
 ?>

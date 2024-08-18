@@ -907,6 +907,15 @@
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($check_monitoring_humidifier) . ' WHERE ' . $key_field . ' = "' . $check_monitoring_humidifier_key . '"');
         close_database();
         }
+
+    function write_humidifier_delay_offset($delay_humidify, $humidifier_hysteresis_offset) {
+        global $config_settings_table, $value_field, $last_change_field, $key_field, $humidifier_hysteresis_offset_key, $delay_humidify_key;
+        
+        open_connection();
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($delay_humidify) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $delay_humidify_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($humidifier_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $humidifier_hysteresis_offset_key . '"');
+        close_database();
+    }
     
     function write_admin($language, $referenceunit_scale1, $measuring_interval_scale1, $measuring_duration_scale1, $saving_period_scale1, $samples_scale1, $spikes_scale1, $offset_scale1,
                             $referenceunit_scale2, $measuring_interval_scale2, $measuring_duration_scale2, $saving_period_scale2, $samples_scale2, $spikes_scale2, $offset_scale2,

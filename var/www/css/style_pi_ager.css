@@ -70,6 +70,23 @@ body {
     border: 1px solid #89939E;
 }
 
+/* Tabelle show_humidifier_parms */
+.show_humidifier_parms {
+    width: 100%;
+    border: 1px solid #89939E;
+    text-align: center;
+    font-size: 10px;
+    color:  #555555;
+    padding: 0px;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.show_humidifier_parms_cell {
+    border: 1px solid #89939E;
+    border-collapse: collapse;
+}
+
 /* Tabelle show uptime */
 .show_uptime_table {
     width: 100%;

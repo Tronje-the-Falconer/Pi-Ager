@@ -58,10 +58,17 @@
                         $exhaust_air_duration_setting < 1441 && $exhaust_air_duration_setting > -1            // Prüfung Dauer Abluft
                     )
                     {
-                        # Eingestellte Werte in config/settings.json und logs/logfile.txt speichern
-                        write_settings($modus_setting,$setpoint_temperature_setting,$setpoint_humidity_setting,$circulation_air_period_setting,
-                                        $circulation_air_duration_setting,$exhaust_air_period_setting,$exhaust_air_duration_setting);
-
+                        # Eingestellte Werte speichern
+                        write_settings($modus_setting ,$setpoint_temperature_setting, $setpoint_humidity_setting, $circulation_air_period_setting,
+                                        $circulation_air_duration_setting, $exhaust_air_period_setting, $exhaust_air_duration_setting);
+                        
+                        # evaluate humidifier offset and delay from humidifier parameter as a function of setpoint_temperature                         
+                        $humidifier_params = get_table_dataset($humidifier_params_table);
+                        $res = eval_humidifier_delay_offset( $humidifier_params, $setpoint_temperature_setting );
+                        $delay_humidify = intval($res[0]);
+                        $humidifier_hysteresis_offset = round($res[1], 1);
+                        write_humidifier_delay_offset($delay_humidify, $humidifier_hysteresis_offset); 
+                        
                         // $timestamp = time();
                         // $database = new SQLite3("/var/www/config/pi-ager.sqlite3");
                         
@@ -87,13 +94,13 @@
                         $dehumidifier_modus = intval(get_table_value($config_settings_table,$dehumidifier_modus_key));
                         $humidifier_hysteresis = intval(get_table_value($config_settings_table,$humidifier_hysteresis_key));
                         $dehumidifier_hysteresis = intval(get_table_value($config_settings_table,$dehumidifier_hysteresis_key));
-                        $humidifier_hysteresis_offset = round(get_table_value($config_settings_table,$humidifier_hysteresis_offset_key), 1);
+                        # $humidifier_hysteresis_offset = round(get_table_value($config_settings_table,$humidifier_hysteresis_offset_key), 1);
                         $dehumidifier_hysteresis_offset = round(get_table_value($config_settings_table,$dehumidifier_hysteresis_offset_key), 1);
                         
                         $setpoint_temperature = round(get_table_value($config_settings_table,$setpoint_temperature_key), 1);
                         $setpoint_humidity = round(get_table_value($config_settings_table,$setpoint_humidity_key), 1);  
                         $saturation_point = intval(get_table_value($config_settings_table,$saturation_point_key));
-                        $delay_humidify = intval(get_table_value($config_settings_table,$delay_humidify_key));
+                        # $delay_humidify = intval(get_table_value($config_settings_table,$delay_humidify_key));
                         
                         if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $setpoint_temperature && ($modus_setting == 3 || $modus_setting == 4)) {
                             $cooler_on = number_format(floatval($setpoint_temperature_setting + $heating_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');

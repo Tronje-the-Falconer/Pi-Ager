@@ -37,6 +37,7 @@ config_current_check_table = 'config_current_check'
 time_meter_table = 'time_meter'
 config_mqtt_table = 'config_mqtt'
 humidity_offset_table = 'humidity_offset'
+humidifier_params_table = 'humidifier_params'
 
 # table keys
 cooling_hysteresis_key = 'cooling_hysteresis'
@@ -236,6 +237,9 @@ port_field = 'port'
 username_field = 'username'
 password_field = 'password'
 mqtt_active_field = 'mqtt_active'
+setpoint_temp_field = 'setpoint_temp'
+delay_humidifier_field = 'delay_humidifier'
+offset_humidifier_field = 'offset_humidifier'
 
 # Paths and urls
 thread_url = 'https://www.grillsportverein.de/forum/threads/pi-ager-reifeschranksteuerung-mittels-raspberry-pi-release-3-3-x.342426/'

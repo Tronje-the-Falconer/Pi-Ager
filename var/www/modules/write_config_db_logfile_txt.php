@@ -41,6 +41,7 @@
         $delay_monitoring_humidifier = $_POST['delay_monitoring_humidifier_config'];
         $tolerance_monitoring_humidifier = $_POST['tolerance_monitoring_humidifier_config'];
         $check_monitoring_humidifier = $_POST['check_monitoring_humidifier_config'];
+        $max_row_humidity_params = $_POST['max_row_humidity_params'];
         
         $ConfigInputIsValid = TRUE;
         foreach ($_POST as $key => $value) {  // Prüfen, ob nur Zahlen eingegeben wurden
@@ -81,13 +82,44 @@
                 $delay_cooler_config >= 0 && $delay_cooler_config <= 120   // cooler delay if cooler turned off and should turned on again
             )
             {
-                # Eingestellte Werte in config/config.json und logs/logfile.txt speichern
+                # save config settings               
+                $index_row = 0;
+                $row_id = 1;
+                $humidifier_params = array(array());
+                
+                while ($index_row < $max_row_humidity_params) {
+                    $sql = '';
+                    $edit_setpoint_temp = $_POST['edit_setpoint_temp_' . $index_row];
+                    $edit_delay_humidifier = $_POST['edit_delay_humidifier_' . $index_row];
+                    $edit_offset_humidifier = $_POST['edit_offset_humidifier_' . $index_row];
+                    
+                    $humidifier_params[$index_row]['id'] = $row_id;
+                    $humidifier_params[$index_row]['setpoint_temp'] = $edit_setpoint_temp;
+                    $humidifier_params[$index_row]['delay_humidifier'] = $edit_delay_humidifier;
+                    $humidifier_params[$index_row]['offset_humidifier'] = $edit_offset_humidifier;
+                    
+                    $sql = 'UPDATE ' . $humidifier_params_table . ' SET "' . $setpoint_temp_field . '" = ' . $edit_setpoint_temp . ', "' . $delay_humidifier_field . '" = ' . $edit_delay_humidifier . ', "' . $offset_humidifier_field . '" = ' . $edit_offset_humidifier . ' WHERE "' . $id_field . '" =' . $row_id .  ';';
+                //    echo $sql . '<br>';
+                    open_connection();
+                    execute_query($sql);
+                    close_database();
+            
+                    $row_id++;
+                    $index_row++;
+                }
+                
+                $setp_temp = floatval(get_table_value($config_settings_table, $setpoint_temperature_key));
+                $res = eval_humidifier_delay_offset( $humidifier_params, $setp_temp );
+                $delay_humidify_config = $res[0];
+                $humidifier_hysteresis_offset_config = $res[1];
+                
                 write_config($cooling_hysteresis_config, $heating_hysteresis_config, $cooling_hysteresis_offset_config, $heating_hysteresis_offset_config, 
                             $humidifier_hysteresis_config, $dehumidifier_hysteresis_config, $humidifier_hysteresis_offset_config, $dehumidifier_hysteresis_offset_config, $saturation_point_config, $delay_humidify_config, $uv_modus_config, $uv_duration_config,
                             $uv_period_config, $switch_on_uv_hour_config, $switch_on_uv_minute_config, $light_modus_config, $light_duration_config,
                             $light_period_config, $switch_on_light_hour_config, $switch_on_light_minute_config, $dehumidifier_modus_config,
                             $failure_temperature_delta_config, $failure_humidity_delta_config, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
                             $shutdown_on_batlow_config, $delay_cooler_config, $dewpoint_check_config, $uv_check_config, $delay_monitoring_humidifier, $tolerance_monitoring_humidifier, $check_monitoring_humidifier);
+
                 logger('DEBUG', 'configvalues saved');
                 
                 # settings used by manvals.php but used also in config.php, when manvals.php is hidden
