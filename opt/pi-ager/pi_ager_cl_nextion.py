@@ -31,6 +31,7 @@ import pi_ager_gpio_config
 from pi_ager_nextion.client import Nextion, EventType
 from main.pi_ager_cl_logger import cl_fact_logger
 
+import pi_ager_helper
 import threading
 
 class Timer:
@@ -196,8 +197,12 @@ class cl_nextion( threading.Thread ):
             
         pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key, temp_soll)    
         pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key, hum_soll)    
-        pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.modus_key, modus)    
-
+        pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.modus_key, modus)
+        #  update humidifier control settings, delay and hysteresis offset
+        pi_ager_helper.eval_humidifier_delay_offset( temp_soll )
+        # update cooler and heater hysteresis offsets
+        pi_ager_helper.eval_cooler_heater_offsets( temp_soll)
+        
     async def wakeup_waiter(self, event):   # process touch screen wakeup event
         try:
             while True:

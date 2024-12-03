@@ -94,4 +94,30 @@ function eval_humidifier_delay_offset( $humidity_parms, $setp_temp ) {
     $offset = $humidity_parms[$index0]['offset_humidifier'] + $d * ($humidity_parms[$index1]['offset_humidifier'] - $humidity_parms[$index0]['offset_humidifier']);       // offset
     return [$delay, $offset];
 }
+
+
+# find cooler_hysteresis_offset and heater_hysteresis offset for temperature control by linear interpolation
+function eval_cooler_heater_offsets( $offset_parms, $setp_temp ) {
+    $i = -1;
+    $count = count($offset_parms);
+    foreach( $offset_parms as $parms ) {
+        if ($setp_temp < $parms['setpoint_temp']) {
+            break;
+        }
+        $i++;
+    }
+    if ($i == -1) {
+       $i = 0; 
+    }
+    if ($i > ($count - 2)) {
+        $i = $count - 2;
+    }
+    $index0 = $i;
+    $index1 = $i + 1; 
+    
+    $d = ($setp_temp - $offset_parms[$index0]['setpoint_temp']) / ($offset_parms[$index1]['setpoint_temp'] - $offset_parms[$index0]['setpoint_temp']);  // setpoint temperature
+    $cooler_offset = $offset_parms[$index0]['cooler_offset'] + $d * ($offset_parms[$index1]['cooler_offset'] - $offset_parms[$index0]['cooler_offset']);        // cooler_offset
+    $heater_offset = $offset_parms[$index0]['heater_offset'] + $d * ($offset_parms[$index1]['heater_offset'] - $offset_parms[$index0]['heater_offset']);       // heater_offset
+    return [$cooler_offset, $heater_offset];
+}
 ?>

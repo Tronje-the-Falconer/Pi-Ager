@@ -720,7 +720,7 @@
                     $num = count($data);
                     
                     $valuestring = '';
-                    for ($c=0; $c < $num; $c++) {
+                    for ($c = 0; $c < $num; $c++) {
                         $datafield = $data[$c];
                         if ($datafield == NULL){
                             $datafield = 'NULL';
@@ -728,7 +728,10 @@
                         if ($c == 0){
                             $valuestring = $datafield;
                         }
-                        else{
+                        else {
+                            if ($c >= 3 AND $c <= 6 AND $datafield != 'NULL') {
+                               $datafield = strval((int)$datafield * 60);    // convert minutes into seconds
+                            }
                             $valuestring = $valuestring . ', ' . $datafield;
                         }
                     }
@@ -917,6 +920,15 @@
         close_database();
     }
     
+    function write_temperature_control_offsets($cooling_hysteresis_offset, $heating_hysteresis_offset) {
+        global $config_settings_table, $value_field, $last_change_field, $key_field, $cooling_hysteresis_offset_key, $heating_hysteresis_offset_key;
+        
+        open_connection();
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($cooling_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $cooling_hysteresis_offset_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($heating_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $heating_hysteresis_offset_key . '"');
+        close_database();
+    }
+       
     function write_admin($language, $referenceunit_scale1, $measuring_interval_scale1, $measuring_duration_scale1, $saving_period_scale1, $samples_scale1, $spikes_scale1, $offset_scale1,
                             $referenceunit_scale2, $measuring_interval_scale2, $measuring_duration_scale2, $saving_period_scale2, $samples_scale2, $spikes_scale2, $offset_scale2,
                             $temp_sensor1, $temp_sensor2, $temp_sensor3, $temp_sensor4, $switch_control_uv_light_admin, $switch_control_light_admin, $current_check_active_admin, $current_threshold_admin,

@@ -25,14 +25,17 @@ h4 {
 
 </style>
 
-<h2>Version 4.0.1</h2>
+<h2>Version 4.0.1 beta 011224</h2>
 <h4>System</h4>
     <ul>
         <li> <b>Backup:</b> Bug Fix im Backup Script für NFS Server in einem NAS System.</li>
         <li> <b>Status Anzeige:</b> Bug Fix beim Laden der Monitor-Seite, es werden die Hysterese-Werte kurzzeitig falsch angezeigt.</li>
         <li> <b>HMI Display:</b> Bug fix:  Verändern der Werte temperature/humidity/mode über das HMI-Display funktionierte nicht im HMI Display Mode 'fridge'. Wenn eine Reifetabelle aktiv ist, werden neue Werte nicht aktiviert und nicht gesichert.</li>
-        <li> <b>WLAN:</b> WLAN Verbindung wird zyklisch alle 5 Minuten überprüft. Bei Verbindungsabbruch wird die Verbindung automatisch neu aufgebaut.</li>
-        <li> <b>Befeuchter Regelung:</b> Die Parameter 'Verzögerung' und 'Hysterese Offset' werden aus einer Tabelle bestimmt. Der Sollwert der Temperatur bestimmt, welche Parameter aus der Tabelle ausgewählt werden. Zwischenwerte werden durch lineare Interpolation berechnet.</li>
+        <li> <b>WLAN:</b> <del>WLAN Verbindung wird zyklisch alle 5 Minuten überprüft. Bei Verbindungsabbruch wird die Verbindung automatisch neu aufgebaut.</del></li>
+        <li> <b>Befeuchter Regelung:</b> Die Parameter 'Verzögerung' und 'Hysterese Offset' werden aus einer Tabelle bestimmt. Der Sollwert der Temperatur definiert, welche Parameter aus der Tabelle ausgewählt werden. Zwischenwerte werden durch lineare Interpolation berechnet.</li>
+        <li> <b>Temperatur Regelung:</b> Die Parameter 'Kühlhysterese-Offset' und 'Heizhysterese-Offset' werden aus einer Tabelle bestimmt. Der Sollwert der Temperatur definiert, welche Parameter aus der Tabelle ausgewählt werden. Zwischenwerte werden durch lineare Interpolation berechnet.</li>
+        <li> <b>Bug Fix:</b> Import/Export Reifetabelle Timerwerte werden jetzt in Minuten definiert, bisher in Sekunden, was zu Inkonsistenzen geführt hat.</li>
+        <li> <b>Pi-OS Kernel:</b> Version Upgrade auf 6.6.51. Pi-Ager Backup erfordert jetzt mount option nfsvers=3 </li>
     </ul>
 <hr>
 

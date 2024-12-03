@@ -13,29 +13,69 @@
                                             <!----------------------------------------------------------------------------------------Temperatur-->
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <tr>
-                                                    <td rowspan="5" class="td_png_icon"><h3><?php echo _('temperature control'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td rowspan="6" class="td_png_icon"><h3><?php echo _('temperature control'); ?></h3><img src="images/icons/heating_cooling_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_temperature_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td class="text_left_padding"><?php echo _('primary control hysteresis'); ?>:</td>
-                                                    <td><input name="cooling_hysteresis_config" type="number" style="width: 30%;" min="0.5" max="7" step="0.1" required value=<?php echo $cooling_hysteresis; ?>>&nbsp;°C
+                                                    <td><input name="cooling_hysteresis_config" type="number" style="width: 30%;" min="0.5" max="7" step="0.1" required value=<?php echo $cooling_hysteresis; ?>>&nbsp;°C<span style="font-size: xx-small"> (0.5 <?php echo _('to'); ?> 7)</span>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('secondary control hysteresis'); ?>:</td>
-                                                    <td><input name="heating_hysteresis_config" type="number" style="width: 30%;" min="0.5" max="7" step="0.1" required value=<?php echo $heating_hysteresis; ?>>&nbsp;°C
+                                                    <td><input name="heating_hysteresis_config" type="number" style="width: 30%;" min="0.5" max="7" step="0.1" required value=<?php echo $heating_hysteresis; ?>>&nbsp;°C<span style="font-size: xx-small"> (0.5 <?php echo _('to'); ?> 7)</span>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('cooling hysteresis offset'); ?>:</td>
-                                                    <td><input name="cooling_hysteresis_offset_config" type="number" style="width: 30%;" min="-5" max="5" step="0.1" required value=<?php echo $cooling_hysteresis_offset; ?>>&nbsp;°C
+                                                    <td><input name="cooling_hysteresis_offset_config" type="number" style="width: 30%; background-color: #E8E8E8;" min="-5" max="5" step="0.1" readonly required value=<?php echo $cooling_hysteresis_offset; ?>>&nbsp;°C<span style="font-size: xx-small"> (-5 <?php echo _('to'); ?> 5)</span>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('heating hysteresis offset'); ?>:</td>
-                                                    <td><input name="heating_hysteresis_offset_config" type="number" style="width: 30%;" min="-5" max="5" step="0.1" required value=<?php echo $heating_hysteresis_offset; ?>>&nbsp;°C
+                                                    <td><input name="heating_hysteresis_offset_config" type="number" style="width: 30%; background-color: #E8E8E8;" min="-5" max="5" step="0.1" readonly required value=<?php echo $heating_hysteresis_offset; ?>>&nbsp;°C<span style="font-size: xx-small"> (-5 <?php echo _('to'); ?> 5)</span>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('cooler delay'); ?>:</td>
                                                     <td><input name="delay_cooler_config" type="number" style="width: 30%;" min="0" max="120" step="1" required value=<?php echo $delay_cooler; ?>>&nbsp;<?php echo _('seconds'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 120)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <table id="show_temperature_control_params" class="show_temperature_control_parms">
+                                                            <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
+                                                                <th class="show_temperature_control_parms_cell"><div class="tooltip"><?php echo _('setpoint temperature') . ' [°C]'; ?><span class="tooltiptext"><?php echo _('setpoint temperature in °C'); ?></span></div></th>
+                                                                <th class="show_temperature_control_parms_cell"><div class="tooltip"><?php echo _('cooler hysteresis offset') . ' [°C]'; ?><span class="tooltiptext"><?php echo _('cooler hysteresis offset in °C'); ?></span></div></th>
+                                                                <th class="show_temperature_control_parms_cell"><div class="tooltip"><?php echo _('heater hysteresis offset') . ' [°C]'; ?><span class="tooltiptext"><?php echo _('heater hysteresis offset in °C'); ?></span></div></th>
+                                                            </tr>
+                                                            <?php
+                                                                // read temperature_control_parms and build table
+                                                                $index_row_temperature_control_params = 0;
+                                                                $temperature_control_parms_rows = get_table_dataset($temperature_control_params_table);
+                                                                try {
+                                                                    $number_rows = count($temperature_control_parms_rows);
+                                                                    while ($index_row_temperature_control_params < $number_rows) {
+                                                                        $dataset = $temperature_control_parms_rows[$index_row_temperature_control_params];
+                                                                        if (isset($dataset[$setpoint_temp_field])){
+                                                                            $edit_setpoint_temp_control = $dataset[$setpoint_temp_field];
+                                                                        } else {$edit_setpoint_temp_control = '';}
+                                                                        if (isset($dataset[$cooler_offset_field])){
+                                                                            $edit_cooler_offset = $dataset[$cooler_offset_field];
+                                                                        } else {$edit_cooler_offset = '';}
+                                                                        if (isset($dataset[$heater_offset_field])){
+                                                                            $edit_heater_offset = $dataset[$heater_offset_field];
+                                                                        } else {$edit_heater_offset = '';}
+
+                                                                        echo '<tr>';
+                                                                        echo '<td class="show_temperature_control_parms_cell"><input name="edit_setpoint_temp_control_' . $index_row_temperature_control_params . '" maxlength="4" min="-11" max="70" type = "number" value=' . $edit_setpoint_temp_control . '></td>';
+                                                                        echo '<td class="show_temperature_control_parms_cell"><input name="edit_cooler_offset_' . $index_row_temperature_control_params . '" maxlength="4" min="-5" max="5" step="0.1" type = "number" value=' . $edit_cooler_offset . '></td>';
+                                                                        echo '<td class="show_temperature_control_parms_cell"><input name="edit_heater_offset_' . $index_row_temperature_control_params . '" maxlength="4" min="-5" max="5" step="0.1" type = "number" value=' . $edit_heater_offset . '></td>';
+                                                                        echo '</tr>';
+                                                                        $index_row_temperature_control_params++;
+                                                                    } 
+                                                                }
+                                                                catch (Exception $e) {
+                                                                }                                                       
+                                                            ?>
+                                                        </table>
+                                                    </td>
                                                 </tr>
                                             </table>
                                             <script>
@@ -136,6 +176,7 @@
                                             </p>
                                             
                                             <input type="hidden" name="max_row_humidity_params" type="text" value="<?php echo $index_row_humidity_params ?>">
+                                            <input type="hidden" name="max_row_offsets_params" type="text" value="<?php echo $index_row_temperature_control_params ?>">  
                                             
                                             <hr>
                                             <!----------------------------------------------------------------------------------------dehumidify-->

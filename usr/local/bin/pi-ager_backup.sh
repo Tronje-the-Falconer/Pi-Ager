@@ -240,11 +240,11 @@ echo "mount NFS-Volume. Map $NFSVOL to $NFSMOUNT"
 if [ -n "$NFSOPT" ]
 	then
         echo "mount with options: $NFSOPT"
-		mount -t nfs $NFSVOL $NFSMOUNT -o $NFSOPT
+		mount -t nfs $NFSVOL $NFSMOUNT -o "${NFSOPT},nfsvers=3"
         mountstatus=$?
  	else
         echo "mount w/o options"
- 		mount -t nfs $NFSVOL $NFSMOUNT
+ 		mount -t nfs $NFSVOL $NFSMOUNT -o nfsvers=3
         mountstatus=$?
 fi
 

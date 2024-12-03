@@ -14,6 +14,7 @@ import pi_ager_names
 from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 from main.pi_ager_cl_logger import cl_fact_logger
 
+import pi_ager_helper
 import threading
 
 class cl_aging_thread( threading.Thread ):
@@ -105,28 +106,6 @@ class cl_aging_thread( threading.Thread ):
         else:
             return True
 
-# find delay and offset for humidifier control by linear interpolation
-    def eval_humidifier_delay_offset( self, humidity_parms, setp_temp ):
-        i = -1
-        count = len(humidity_parms)
-        for parms in humidity_parms:
-            if (setp_temp < parms[1]):
-                break
-            i = i + 1
-    
-        if (i == -1):
-            i = 0
-        if (i > (count - 2)):
-            i = count - 2
-
-        index0 = i
-        index1 = i + 1
-    
-        d = (setp_temp - humidity_parms[index0][1]) / (humidity_parms[index1][1] - humidity_parms[index0][1])  # setpoint temperature
-        delay = humidity_parms[index0][2] + d * (humidity_parms[index1][2] - humidity_parms[index0][2])        # delay
-        offset = humidity_parms[index0][3] + d * (humidity_parms[index1][3] - humidity_parms[index0][3])       # offset
-        return delay, offset
-
     def read_dictionary_write_settings(self, period_dictionary, period_first_hour = 0):
         """
         function for writing the settings into the DB
@@ -210,15 +189,13 @@ class cl_aging_thread( threading.Thread ):
         pi_ager_database.write_settings(modus, period_dictionary['setpoint_temperature'], period_dictionary['setpoint_humidity'], period_dictionary['circulation_air_period'], period_dictionary['circulation_air_duration'], period_dictionary['exhaust_air_period'], period_dictionary['exhaust_air_duration'])
         
         # get humidifier parameter from DB
-        hum_parms = pi_ager_database.get_current(pi_ager_names.humidifier_params_table, True)
-        
         # eval delay and offset depending on setpoint temperature
-        delay, offset = self.eval_humidifier_delay_offset( hum_parms, period_dictionary['setpoint_temperature'] )
-        # cl_fact_logger.get_instance().info("delay : " + str(delay) + " offset : " + str(offset))
         # save new delay and offset into database
-        pi_ager_database.update_table_val(pi_ager_names.config_settings_table, pi_ager_names.delay_humidify_key, delay)
-        pi_ager_database.update_table_val(pi_ager_names.config_settings_table, pi_ager_names.humidifier_hysteresis_offset_key, offset)
-
+        pi_ager_helper.eval_humidifier_delay_offset( period_dictionary['setpoint_temperature'])
+        
+        # update cooler and heater hysteresis offsets
+        pi_ager_helper.eval_cooler_heater_offsets( period_dictionary['setpoint_temperature'])
+        
         period_starttime_seconds = pi_ager_database.get_current_time() - period_first_hour * hour_in_seconds
         pi_ager_database.write_current_value(pi_ager_names.agingtable_period_starttime_key, period_starttime_seconds)
         period_endtime = datetime.datetime.now() + datetime.timedelta(hours = period_dictionary['hours'] - period_first_hour) # hours = parameter von datetime.timedelta

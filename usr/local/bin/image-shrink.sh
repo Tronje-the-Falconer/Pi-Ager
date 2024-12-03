@@ -77,6 +77,7 @@ PARTUUID_1="$(sed -n "s|^${IMGFILE}1.*uuid=\(\S\+\).*$|\1|p" <<< "${INFO}")"
 PARTUUID_2="$(sed -n "s|^${IMGFILE}2.*uuid=\(\S\+\).*$|\1|p" <<< "${INFO}")"
 PTUUID="$(sed -n "s|^label-id: \(\S\+\).*$|\1|p" <<< "${INFO}")"
 PTTYPE="$(sed -n "s|^label: \(\S\+\).*$|\1|p" <<< "${INFO}")"
+echo "PTTYPE : ${PTTYPE}"
 if [[ "${PTTYPE}" != "dos" && "${PTTYPE}" != "gpt" ]]; then
   errexit "Unsupported partition table type: ${PTTYPE}"
 fi

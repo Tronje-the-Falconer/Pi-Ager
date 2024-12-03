@@ -46,6 +46,7 @@ $config_current_check_table = 'config_current_check';
 $time_meter_table = 'time_meter';
 $config_mqtt_table = 'config_mqtt';
 $humidifier_params_table = 'humidifier_params';
+$temperature_control_params_table = 'temperature_control_params';
 
 #----------------------------table keys;
 $cooling_hysteresis_key = 'cooling_hysteresis';
@@ -284,6 +285,8 @@ $mqtt_active_field = 'mqtt_active';
 $setpoint_temp_field = 'setpoint_temp';
 $delay_humidifier_field = 'delay_humidifier';
 $offset_humidifier_field = 'offset_humidifier';
+$cooler_offset_field = 'cooler_offset';
+$heater_offset_field = 'heater_offset';
 
 #-----------------------------Paths and urls
 $thread_url = 'https://www.grillsportverein.de/forum/forums/pi-ager.548/';

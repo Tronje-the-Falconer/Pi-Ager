@@ -20,4 +20,4 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 47 6	* * 7	root	test -x /usr/sbin/anacron || { cd / && run-parts --report /etc/cron.weekly; }
 52 6	1 * *	root	test -x /usr/sbin/anacron || { cd / && run-parts --report /etc/cron.monthly; }
 #
-*/5 * * * * root /usr/local/bin/restart-NM-if-wlan0-disconnected.sh
+# */5 * * * * root /usr/local/bin/restart-NM-if-wlan0-disconnected.sh

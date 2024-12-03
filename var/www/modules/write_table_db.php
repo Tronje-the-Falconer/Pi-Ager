@@ -172,31 +172,31 @@
                // if (!empty($dataset[$id_field])){
                //     $data_id = intval($dataset[$id_field]);
                // } else {$data_id = NULL;}
-                if (!empty($dataset[$agingtable_modus_field])){
+                if (isset($dataset[$agingtable_modus_field])){
                     $data_modus = intval($dataset[$agingtable_modus_field]);
                 } else {$data_modus = NULL;}
-                if (!empty($dataset[$agingtable_setpoint_humidity_field])){
+                if (isset($dataset[$agingtable_setpoint_humidity_field])){
                     $data_setpoint_humidity = intval($dataset[$agingtable_setpoint_humidity_field]);
                 } else {$data_setpoint_humidity = NULL;}
-                if (!empty($dataset[$agingtable_setpoint_temperature_field])){
+                if (isset($dataset[$agingtable_setpoint_temperature_field])){
                     $data_setpoint_temperature = intval($dataset[$agingtable_setpoint_temperature_field]);
                 } else {$data_setpoint_temperature = NULL;}
-                if (!empty($dataset[$agingtable_circulation_air_duration_field])){
-                    $data_circulation_air_duration = intval($dataset[$agingtable_circulation_air_duration_field]);
+                if (isset($dataset[$agingtable_circulation_air_duration_field])){
+                    $data_circulation_air_duration = intval($dataset[$agingtable_circulation_air_duration_field])/60;
                 } else {$data_circulation_air_duration = NULL;}
-                if (!empty($dataset[$agingtable_circulation_air_period_field])){
-                    $data_circulation_air_period = intval($dataset[$agingtable_circulation_air_period_field]);
+                if (isset($dataset[$agingtable_circulation_air_period_field])){
+                    $data_circulation_air_period = intval($dataset[$agingtable_circulation_air_period_field])/60;
                 } else {$data_circulation_air_period = NULL;}
-                if (!empty($dataset[$agingtable_exhaust_air_duration_field])){
-                    $data_exhaust_air_duration = intval($dataset[$agingtable_exhaust_air_duration_field]);
+                if (isset($dataset[$agingtable_exhaust_air_duration_field])){
+                    $data_exhaust_air_duration = intval($dataset[$agingtable_exhaust_air_duration_field])/60;
                 } else {$data_exhaust_air_duration = NULL;}
-                if (!empty($dataset[$agingtable_exhaust_air_period_field])){
-                    $data_exhaust_air_period = intval($dataset[$agingtable_exhaust_air_period_field]);
+                if (isset($dataset[$agingtable_exhaust_air_period_field])){
+                    $data_exhaust_air_period = intval($dataset[$agingtable_exhaust_air_period_field])/60;
                 } else {$data_exhaust_air_period = NULL;}
-                if (!empty($dataset[$agingtable_hours_field])){
+                if (isset($dataset[$agingtable_hours_field])){
                     $data_hours = intval($dataset[$agingtable_hours_field]);
                 } else {$data_hours = NULL;}
-                if (!empty($dataset[$agingtable_comment_field])){
+                if (isset($dataset[$agingtable_comment_field])){
                     $data_comment = "'" . $dataset[$agingtable_comment_field] . "'";
                 } else {$data_comment = NULL;}
             }
