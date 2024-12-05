@@ -1020,8 +1020,8 @@
                                                     borderColor: '#FFBF00',
                                                     borderWidth: 0.1,
                                                     radius: 0,
-                                                    pointRadius: 0,
-                                                    pointHitRadius: 0,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
@@ -1043,7 +1043,18 @@
                                                     },
                                                 },
                                                 tooltips: {
-                                                    enabled: false
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            if ((tooltipItem.yLabel).toString() === '1') {
+                                                               return '<?php echo _('on'); ?>';
+                                                            }
+                                                            else {
+                                                               return '<?php echo _('off'); ?>';
+                                                            }
+                                                        }
+                                                    }
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -1131,8 +1142,8 @@
                                                     borderColor: '#A801FB',
                                                     borderWidth: 0.1,
                                                     radius: 0,
-                                                    pointRadius: 0,
-                                                    pointHitRadius: 0,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
@@ -1154,7 +1165,18 @@
                                                     },
                                                 },
                                                 tooltips: {
-                                                    enabled: false
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            if ((tooltipItem.yLabel).toString() === '1') {
+                                                               return '<?php echo _('on'); ?>';
+                                                            }
+                                                            else {
+                                                               return '<?php echo _('off'); ?>';
+                                                            }
+                                                        }
+                                                    }
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -1242,8 +1264,8 @@
                                                     borderColor: '#C03738',
                                                     borderWidth: 0.1,
                                                     radius: 0,
-                                                    pointRadius: 0,
-                                                    pointHitRadius: 0,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
@@ -1265,7 +1287,18 @@
                                                     },
                                                 },
                                                 tooltips: {
-                                                    enabled: false
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            if ((tooltipItem.yLabel).toString() === '1') {
+                                                               return '<?php echo _('on'); ?>';
+                                                            }
+                                                            else {
+                                                               return '<?php echo _('off'); ?>';
+                                                            }
+                                                        }
+                                                    }
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -1353,8 +1386,8 @@
                                                     borderColor: '#59A9C4',
                                                     borderWidth: 0.1,
                                                     radius: 0,
-                                                    pointRadius: 0,
-                                                    pointHitRadius: 0,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
@@ -1376,7 +1409,18 @@
                                                     },
                                                 },
                                                 tooltips: {
-                                                    enabled: false
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            if ((tooltipItem.yLabel).toString() === '1') {
+                                                               return '<?php echo _('on'); ?>';
+                                                            }
+                                                            else {
+                                                               return '<?php echo _('off'); ?>';
+                                                            }
+                                                        }
+                                                    }
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -1464,8 +1508,8 @@
                                                     borderColor: '#CF9248',
                                                     borderWidth: 0.1,
                                                     radius: 0,
-                                                    pointRadius: 0,
-                                                    pointHitRadius: 0,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
@@ -1487,7 +1531,18 @@
                                                     },
                                                 },
                                                 tooltips: {
-                                                    enabled: false
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            if ((tooltipItem.yLabel).toString() === '1') {
+                                                               return '<?php echo _('on'); ?>';
+                                                            }
+                                                            else {
+                                                               return '<?php echo _('off'); ?>';
+                                                            }
+                                                        }
+                                                    }
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -1575,8 +1630,8 @@
                                                     borderColor: '#BDB76B',
                                                     borderWidth: 0.1,
                                                     radius: 0,
-                                                    pointRadius: 0,
-                                                    pointHitRadius: 0,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
@@ -1598,7 +1653,18 @@
                                                     },
                                                 },
                                                 tooltips: {
-                                                    enabled: false
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            if ((tooltipItem.yLabel).toString() === '1') {
+                                                               return '<?php echo _('on'); ?>';
+                                                            }
+                                                            else {
+                                                               return '<?php echo _('off'); ?>';
+                                                            }
+                                                        }
+                                                    }
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -1686,8 +1752,8 @@
                                                     borderColor: '#99D498',
                                                     borderWidth: 0.1,
                                                     radius: 0,
-                                                    pointRadius: 0,
-                                                    pointHitRadius: 0,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
@@ -1709,7 +1775,18 @@
                                                     },
                                                 },
                                                 tooltips: {
-                                                    enabled: false
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            if ((tooltipItem.yLabel).toString() === '1') {
+                                                               return '<?php echo _('on'); ?>';
+                                                            }
+                                                            else {
+                                                               return '<?php echo _('off'); ?>';
+                                                            }
+                                                        }
+                                                    }
                                                 },
                                                 scales: {
                                                     xAxes: [{
@@ -1797,8 +1874,8 @@
                                                     borderColor: '#86CBB0',
                                                     borderWidth: 0.1,
                                                     radius: 0,
-                                                    pointRadius: 0,
-                                                    pointHitRadius: 0,
+                                                    pointRadius: 1,
+                                                    pointHitRadius: 5,
                                                     pointStyle:'rect',
                                                     hoverRadius: 0,
                                                     hoverBorderWidth: 0,
@@ -1820,7 +1897,18 @@
                                                     },
                                                 },
                                                 tooltips: {
-                                                    enabled: false
+                                                    mode: 'index',
+                                                    intersect: false,
+                                                    callbacks: {
+                                                        label: function(tooltipItem, data) {
+                                                            if ((tooltipItem.yLabel).toString() === '1') {
+                                                               return '<?php echo _('on'); ?>';
+                                                            }
+                                                            else {
+                                                               return '<?php echo _('off'); ?>';
+                                                            }
+                                                        }
+                                                    }
                                                 },
                                                 scales: {
                                                     xAxes: [{
