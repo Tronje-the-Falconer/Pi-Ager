@@ -1629,6 +1629,7 @@ def doMainLoop():
                     if current_time >= pi_ager_init.exhaust_air_start + exhaust_air_period + exhaust_air_duration:
                         pi_ager_init.exhaust_air_start = current_time       # Timer-Timestamp aktualisiert
                         
+                logstring = logstring + ' \n ' + pi_ager_names.logspacer2        
                 # Timer fuer UV-Licht
                 if uv_modus == 0:                               # Modus 0 UV-Licht aus
                     status_uv = False                           # UV-Licht aus
@@ -1696,7 +1697,14 @@ def doMainLoop():
                         if (current_time > pi_ager_init.uv_stoptime):   # begin a new cycle
                             pi_ager_init.uv_starttime = datetime.datetime(year_now, month_now, day_now, switch_on_uv_hour, switch_on_uv_minute, 0, 0).timestamp()
                             pi_ager_init.uv_stoptime = pi_ager_init.uv_starttime + uv_duration
-        
+                
+                status_uv_manual = pi_ager_database.get_status_uv_manual()
+                if (status_uv_manual == 0):
+                    logstring = logstring + ' \n ' +  _('UV light manual off')
+                else:
+                    logstring = logstring + ' \n ' +  _('UV light automatic mode on')
+                logstring = logstring + ' \n ' + pi_ager_names.logspacer2
+                
                 # Timer fuer Licht
                 if light_modus == 0:                            # Modus 0 Licht aus
                     status_light = False                        # Licht aus
@@ -1769,7 +1777,13 @@ def doMainLoop():
                         if (current_time > pi_ager_init.light_stoptime):    # begin a new cycle
                             pi_ager_init.light_starttime = datetime.datetime(year_now, month_now, day_now, switch_on_light_hour, switch_on_light_minute, 0, 0).timestamp()
                             pi_ager_init.light_stoptime = pi_ager_init.light_starttime + light_duration
-                            
+                
+                status_light_manual = pi_ager_database.get_status_light_manual()
+                if (status_light_manual == 1):
+                    logstring = logstring + ' \n ' +  _('light manual on')
+                else:
+                    logstring = logstring + ' \n ' +  _('light automatic mode on')
+                    
                 # timer for defrost              
                 if current_time >= pi_ager_init.defrost_cycle_start + defrost_cycle_seconds:
                     pi_ager_init.defrost_cycle_start = current_time    # Timer-Timestamp aktualisiert
@@ -1886,7 +1900,7 @@ def doMainLoop():
                     gpio.output(pi_ager_gpio_config.gpio_dehumidifier, pi_ager_names.relay_off)
                     
                 # Schalten des UV_Licht
-                if status_uv == True and pi_ager_database.get_status_uv_manual() == 1:
+                if status_uv == True and status_uv_manual == 1:
                     switch_uv_light(pi_ager_names.relay_on)
                     # gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_on)
                 else:   #if status_uv == False or pi_ager_database.get_status_uv_manual() == 0:
@@ -1896,7 +1910,7 @@ def doMainLoop():
                 
                 # Schalten des Licht
                 # cl_fact_logger.get_instance().info(f"Status light check befor switch_light is {status_light}")
-                if status_light == True or pi_ager_database.get_status_light_manual() == 1:
+                if status_light == True or status_light_manual == 1:
                     switch_light(pi_ager_names.relay_on)
                     # gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_on)
                 else:   #if status_light == False:   #  and pi_ager_database.get_status_light_manual() == 0:

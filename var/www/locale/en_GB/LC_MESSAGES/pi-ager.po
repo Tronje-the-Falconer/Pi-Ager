@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-GB\n"
-"POT-Creation-Date: 2024-11-24 11:19+0100\n"
-"PO-Revision-Date: 2024-11-24 11:57+0100\n"
+"POT-Creation-Date: 2024-12-14 20:44+0100\n"
+"PO-Revision-Date: 2024-12-14 20:44+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -359,7 +359,7 @@ msgstr ""
 #: opt/pi-ager/pi_ager_loop.py:450 opt/pi-ager/pi_ager_loop.py:451
 #: opt/pi-ager/pi_ager_loop.py:456 opt/pi-ager/pi_ager_loop.py:457
 #: opt/pi-ager/pi_ager_loop.py:459 opt/pi-ager/pi_ager_loop.py:460
-#: var/www/diagrams.php:1238 var/www/diagrams.php:1259 var/www/index.php:1210
+#: var/www/diagrams.php:1260 var/www/diagrams.php:1281 var/www/index.php:1210
 #: var/www/index.php:1230 var/www/modules/querystatus.php:215
 #: var/www/modules/querystatus.php:232
 msgid "heater"
@@ -381,15 +381,19 @@ msgstr ""
 #: opt/pi-ager/pi_ager_loop.py:572 opt/pi-ager/pi_ager_loop.py:573
 #: opt/pi-ager/pi_ager_loop.py:588 opt/pi-ager/pi_ager_loop.py:589
 #: opt/pi-ager/pi_ager_loop.py:591 opt/pi-ager/pi_ager_loop.py:592
-#: opt/pi-ager/pi_ager_loop.py:1639 opt/pi-ager/pi_ager_loop.py:1707
-#: var/www/diagrams.php:1078 var/www/diagrams.php:1103
-#: var/www/diagrams.php:1189 var/www/diagrams.php:1214
-#: var/www/diagrams.php:1300 var/www/diagrams.php:1325
-#: var/www/diagrams.php:1411 var/www/diagrams.php:1436
-#: var/www/diagrams.php:1522 var/www/diagrams.php:1547
-#: var/www/diagrams.php:1633 var/www/diagrams.php:1658
-#: var/www/diagrams.php:1744 var/www/diagrams.php:1769
-#: var/www/diagrams.php:1855 var/www/diagrams.php:1880 var/www/index.php:1167
+#: opt/pi-ager/pi_ager_loop.py:1640 opt/pi-ager/pi_ager_loop.py:1715
+#: var/www/diagrams.php:1051 var/www/diagrams.php:1089
+#: var/www/diagrams.php:1114 var/www/diagrams.php:1173
+#: var/www/diagrams.php:1211 var/www/diagrams.php:1236
+#: var/www/diagrams.php:1295 var/www/diagrams.php:1333
+#: var/www/diagrams.php:1358 var/www/diagrams.php:1417
+#: var/www/diagrams.php:1455 var/www/diagrams.php:1480
+#: var/www/diagrams.php:1539 var/www/diagrams.php:1577
+#: var/www/diagrams.php:1602 var/www/diagrams.php:1661
+#: var/www/diagrams.php:1699 var/www/diagrams.php:1724
+#: var/www/diagrams.php:1783 var/www/diagrams.php:1821
+#: var/www/diagrams.php:1846 var/www/diagrams.php:1905
+#: var/www/diagrams.php:1943 var/www/diagrams.php:1968 var/www/index.php:1167
 #: var/www/index.php:1299 var/www/modules/querystatus.php:288
 #: var/www/modules/write_config_db_logfile_txt.php:292
 #: var/www/modules/write_config_db_logfile_txt.php:304
@@ -414,23 +418,27 @@ msgstr ""
 #: opt/pi-ager/pi_ager_loop.py:581 opt/pi-ager/pi_ager_loop.py:582
 #: opt/pi-ager/pi_ager_loop.py:597 opt/pi-ager/pi_ager_loop.py:598
 #: opt/pi-ager/pi_ager_loop.py:600 opt/pi-ager/pi_ager_loop.py:601
-#: opt/pi-ager/pi_ager_loop.py:1635 opt/pi-ager/pi_ager_loop.py:1703
-#: var/www/diagrams.php:1080 var/www/diagrams.php:1082
-#: var/www/diagrams.php:1105 var/www/diagrams.php:1107
-#: var/www/diagrams.php:1191 var/www/diagrams.php:1193
-#: var/www/diagrams.php:1216 var/www/diagrams.php:1218
-#: var/www/diagrams.php:1302 var/www/diagrams.php:1304
-#: var/www/diagrams.php:1327 var/www/diagrams.php:1329
-#: var/www/diagrams.php:1413 var/www/diagrams.php:1415
-#: var/www/diagrams.php:1438 var/www/diagrams.php:1440
-#: var/www/diagrams.php:1524 var/www/diagrams.php:1526
-#: var/www/diagrams.php:1549 var/www/diagrams.php:1551
-#: var/www/diagrams.php:1635 var/www/diagrams.php:1637
-#: var/www/diagrams.php:1660 var/www/diagrams.php:1662
-#: var/www/diagrams.php:1746 var/www/diagrams.php:1748
-#: var/www/diagrams.php:1771 var/www/diagrams.php:1773
-#: var/www/diagrams.php:1857 var/www/diagrams.php:1859
-#: var/www/diagrams.php:1882 var/www/diagrams.php:1884 var/www/index.php:1020
+#: opt/pi-ager/pi_ager_loop.py:1636 opt/pi-ager/pi_ager_loop.py:1711
+#: var/www/diagrams.php:1054 var/www/diagrams.php:1091
+#: var/www/diagrams.php:1093 var/www/diagrams.php:1116
+#: var/www/diagrams.php:1118 var/www/diagrams.php:1176
+#: var/www/diagrams.php:1213 var/www/diagrams.php:1215
+#: var/www/diagrams.php:1238 var/www/diagrams.php:1240
+#: var/www/diagrams.php:1298 var/www/diagrams.php:1335
+#: var/www/diagrams.php:1337 var/www/diagrams.php:1360
+#: var/www/diagrams.php:1362 var/www/diagrams.php:1420
+#: var/www/diagrams.php:1457 var/www/diagrams.php:1459
+#: var/www/diagrams.php:1482 var/www/diagrams.php:1484
+#: var/www/diagrams.php:1542 var/www/diagrams.php:1579
+#: var/www/diagrams.php:1581 var/www/diagrams.php:1604
+#: var/www/diagrams.php:1606 var/www/diagrams.php:1664
+#: var/www/diagrams.php:1701 var/www/diagrams.php:1703
+#: var/www/diagrams.php:1726 var/www/diagrams.php:1728
+#: var/www/diagrams.php:1786 var/www/diagrams.php:1823
+#: var/www/diagrams.php:1825 var/www/diagrams.php:1848
+#: var/www/diagrams.php:1850 var/www/diagrams.php:1908
+#: var/www/diagrams.php:1945 var/www/diagrams.php:1947
+#: var/www/diagrams.php:1970 var/www/diagrams.php:1972 var/www/index.php:1020
 #: var/www/index.php:1168 var/www/index.php:1302
 #: var/www/modules/querystatus.php:158 var/www/modules/querystatus.php:291
 #: var/www/modules/write_config_db_logfile_txt.php:210
@@ -453,7 +461,7 @@ msgstr ""
 #: opt/pi-ager/pi_ager_loop.py:493 opt/pi-ager/pi_ager_loop.py:494
 #: opt/pi-ager/pi_ager_loop.py:499 opt/pi-ager/pi_ager_loop.py:500
 #: opt/pi-ager/pi_ager_loop.py:502 opt/pi-ager/pi_ager_loop.py:503
-#: var/www/diagrams.php:1460 var/www/diagrams.php:1481
+#: var/www/diagrams.php:1504 var/www/diagrams.php:1525
 msgid "humidifier"
 msgstr ""
 
@@ -468,7 +476,7 @@ msgstr ""
 #: opt/pi-ager/pi_ager_loop.py:531 opt/pi-ager/pi_ager_loop.py:532
 #: opt/pi-ager/pi_ager_loop.py:537 opt/pi-ager/pi_ager_loop.py:538
 #: opt/pi-ager/pi_ager_loop.py:540 opt/pi-ager/pi_ager_loop.py:541
-#: var/www/diagrams.php:1682 var/www/diagrams.php:1703
+#: var/www/diagrams.php:1748 var/www/diagrams.php:1769
 msgid "exhaust air"
 msgstr ""
 
@@ -476,7 +484,7 @@ msgstr ""
 #: opt/pi-ager/pi_ager_loop.py:553 opt/pi-ager/pi_ager_loop.py:554
 #: opt/pi-ager/pi_ager_loop.py:559 opt/pi-ager/pi_ager_loop.py:560
 #: opt/pi-ager/pi_ager_loop.py:562 opt/pi-ager/pi_ager_loop.py:563
-#: var/www/diagrams.php:1571 var/www/diagrams.php:1592
+#: var/www/diagrams.php:1626 var/www/diagrams.php:1647
 msgid "dehumidifier"
 msgstr ""
 
@@ -493,7 +501,7 @@ msgstr ""
 #: opt/pi-ager/pi_ager_loop.py:591 opt/pi-ager/pi_ager_loop.py:592
 #: opt/pi-ager/pi_ager_loop.py:597 opt/pi-ager/pi_ager_loop.py:598
 #: opt/pi-ager/pi_ager_loop.py:600 opt/pi-ager/pi_ager_loop.py:601
-#: var/www/diagrams.php:1127 var/www/diagrams.php:1148 var/www/index.php:1366
+#: var/www/diagrams.php:1138 var/www/diagrams.php:1159 var/www/index.php:1366
 #: var/www/modules/querystatus.php:374
 msgid "uv-light"
 msgstr ""
@@ -593,85 +601,101 @@ msgstr ""
 msgid "exhaust air timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1635 opt/pi-ager/pi_ager_loop.py:1639
+#: opt/pi-ager/pi_ager_loop.py:1636 opt/pi-ager/pi_ager_loop.py:1640
 msgid "modus uv-light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1642 opt/pi-ager/pi_ager_loop.py:1645
-#: opt/pi-ager/pi_ager_loop.py:1648
+#: opt/pi-ager/pi_ager_loop.py:1643 opt/pi-ager/pi_ager_loop.py:1646
+#: opt/pi-ager/pi_ager_loop.py:1649
 msgid "uv-light timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1642 opt/pi-ager/pi_ager_loop.py:1645
-#: opt/pi-ager/pi_ager_loop.py:1675
+#: opt/pi-ager/pi_ager_loop.py:1643 opt/pi-ager/pi_ager_loop.py:1646
+#: opt/pi-ager/pi_ager_loop.py:1676
 msgid "uv-light permanent off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1648
+#: opt/pi-ager/pi_ager_loop.py:1649
 msgid "uv-light permanent on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1655 opt/pi-ager/pi_ager_loop.py:1662
+#: opt/pi-ager/pi_ager_loop.py:1656 opt/pi-ager/pi_ager_loop.py:1663
 msgid "uv-light timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1655 opt/pi-ager/pi_ager_loop.py:1689
+#: opt/pi-ager/pi_ager_loop.py:1656 opt/pi-ager/pi_ager_loop.py:1690
 msgid "uv-light on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1662 opt/pi-ager/pi_ager_loop.py:1693
+#: opt/pi-ager/pi_ager_loop.py:1663 opt/pi-ager/pi_ager_loop.py:1694
 msgid "uv-light off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1675
+#: opt/pi-ager/pi_ager_loop.py:1676
 msgid "uv-light timestamp inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1689 opt/pi-ager/pi_ager_loop.py:1693
+#: opt/pi-ager/pi_ager_loop.py:1690 opt/pi-ager/pi_ager_loop.py:1694
 msgid "uv-light timestamp active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1703 opt/pi-ager/pi_ager_loop.py:1707
+#: opt/pi-ager/pi_ager_loop.py:1703
+msgid "UV light manual off"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1705
+msgid "UV light automatic mode on"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1711 opt/pi-ager/pi_ager_loop.py:1715
 msgid "modus light"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1710 opt/pi-ager/pi_ager_loop.py:1714
-#: opt/pi-ager/pi_ager_loop.py:1718
+#: opt/pi-ager/pi_ager_loop.py:1718 opt/pi-ager/pi_ager_loop.py:1722
+#: opt/pi-ager/pi_ager_loop.py:1726
 msgid "light timer inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1710 opt/pi-ager/pi_ager_loop.py:1714
-#: opt/pi-ager/pi_ager_loop.py:1748
+#: opt/pi-ager/pi_ager_loop.py:1718 opt/pi-ager/pi_ager_loop.py:1722
+#: opt/pi-ager/pi_ager_loop.py:1756
 msgid "light permanent off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1718
+#: opt/pi-ager/pi_ager_loop.py:1726
 msgid "light permanent on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1726 opt/pi-ager/pi_ager_loop.py:1733
+#: opt/pi-ager/pi_ager_loop.py:1734 opt/pi-ager/pi_ager_loop.py:1741
 msgid "light timer active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1726 opt/pi-ager/pi_ager_loop.py:1762
+#: opt/pi-ager/pi_ager_loop.py:1734 opt/pi-ager/pi_ager_loop.py:1770
 #: var/www/webcam.php:53
 msgid "light on"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1733 opt/pi-ager/pi_ager_loop.py:1766
+#: opt/pi-ager/pi_ager_loop.py:1741 opt/pi-ager/pi_ager_loop.py:1774
 msgid "light off"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1748
+#: opt/pi-ager/pi_ager_loop.py:1756
 msgid "light timestamp inactive"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1762 opt/pi-ager/pi_ager_loop.py:1766
+#: opt/pi-ager/pi_ager_loop.py:1770 opt/pi-ager/pi_ager_loop.py:1774
 msgid "light timestamp active"
 msgstr ""
 
-#: opt/pi-ager/pi_ager_loop.py:1977 opt/pi-ager/pi_ager_loop.py:1979
-#: opt/pi-ager/pi_ager_loop.py:1982 opt/pi-ager/pi_ager_loop.py:1984
+#: opt/pi-ager/pi_ager_loop.py:1783 var/www/webcam.php:57
+msgid "light manual on"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1785
+msgid "light automatic mode on"
+msgstr ""
+
+#: opt/pi-ager/pi_ager_loop.py:1991 opt/pi-ager/pi_ager_loop.py:1993
+#: opt/pi-ager/pi_ager_loop.py:1996 opt/pi-ager/pi_ager_loop.py:1998
 msgid "weight scale"
 msgstr ""
 
@@ -2161,28 +2185,28 @@ msgstr ""
 msgid "Thermometer"
 msgstr ""
 
-#: var/www/diagrams.php:1068 var/www/diagrams.php:1179
-#: var/www/diagrams.php:1290 var/www/diagrams.php:1401
-#: var/www/diagrams.php:1512 var/www/diagrams.php:1623
-#: var/www/diagrams.php:1734 var/www/diagrams.php:1845 var/www/index.php:1163
+#: var/www/diagrams.php:1079 var/www/diagrams.php:1201
+#: var/www/diagrams.php:1323 var/www/diagrams.php:1445
+#: var/www/diagrams.php:1567 var/www/diagrams.php:1689
+#: var/www/diagrams.php:1811 var/www/diagrams.php:1933 var/www/index.php:1163
 #: var/www/index.php:1316 var/www/index.php:1421
 msgid "status"
 msgstr ""
 
-#: var/www/diagrams.php:1095 var/www/diagrams.php:1206
-#: var/www/diagrams.php:1317 var/www/diagrams.php:1428
-#: var/www/diagrams.php:1539 var/www/diagrams.php:1650
-#: var/www/diagrams.php:1761 var/www/diagrams.php:1872
+#: var/www/diagrams.php:1106 var/www/diagrams.php:1228
+#: var/www/diagrams.php:1350 var/www/diagrams.php:1472
+#: var/www/diagrams.php:1594 var/www/diagrams.php:1716
+#: var/www/diagrams.php:1838 var/www/diagrams.php:1960
 msgid " "
 msgstr ""
 
-#: var/www/diagrams.php:1349 var/www/diagrams.php:1370 var/www/index.php:1198
+#: var/www/diagrams.php:1382 var/www/diagrams.php:1403 var/www/index.php:1198
 #: var/www/index.php:1221 var/www/modules/querystatus.php:206
 #: var/www/modules/querystatus.php:224
 msgid "cooler"
 msgstr ""
 
-#: var/www/diagrams.php:1793 var/www/diagrams.php:1814
+#: var/www/diagrams.php:1870 var/www/diagrams.php:1891
 msgid "circulate air"
 msgstr ""
 
@@ -4056,8 +4080,4 @@ msgstr ""
 
 #: var/www/webcam.php:38
 msgid "light switch"
-msgstr ""
-
-#: var/www/webcam.php:57
-msgid "light manual on"
 msgstr ""
