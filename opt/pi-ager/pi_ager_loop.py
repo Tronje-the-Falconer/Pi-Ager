@@ -1576,11 +1576,18 @@ def doMainLoop():
                 #cl_fact_logger.get_instance().debug(logstring)
                 logstring = logstring + ' \n ' + pi_ager_names.logspacer2
                 if (str(cl_fact_second_sensor_type.get_instance().get_sensor_type_ui()) != 'disabled'):
-                    logstring = logstring + ' \n ' +  _('selected external sensor') + ': ' + str(cl_fact_second_sensor_type.get_instance().get_sensor_type_ui())
+                    second_sensor_type_name = cl_fact_second_sensor_type.get_instance().get_sensor_type_ui()
+                    logstring = logstring + ' \n ' +  _('selected external sensor') + ': ' + second_sensor_type_name
                     logstring = logstring + ' \n ' +  _('actual temperature') + ': ' + str(second_sensor_temperature) + ' °C'
                     logstring = logstring + ' \n ' +  _('actual humidity') + ': ' + str(second_sensor_humidity) + ' %'
                     logstring = logstring + ' \n ' +  _('actual dewpoint') + ': ' + str(second_sensor_dewpoint) + ' °C'  
                     logstring = logstring + ' \n ' +  _('actual humidity abs') + ': ' + str(second_sensor_humidity_abs) + ' g/m³'
+                    if (second_sensor_type_name == 'MiThermometer'):
+                        battery_level = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.MiSensor_battery_key)
+                        if (battery_level == None):
+                            logstring = logstring + ' \n ' +  _('battery level') + ': ' + '---- V'
+                        else:
+                            logstring = logstring + ' \n ' +  _('battery level') + ': ' + f'{battery_level:.2f}' + ' V'
                     logstring = logstring + ' \n ' + pi_ager_names.logspacer2
                
                 

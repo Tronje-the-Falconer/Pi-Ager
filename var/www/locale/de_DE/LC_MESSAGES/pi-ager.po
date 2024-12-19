@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-DE\n"
-"POT-Creation-Date: 2024-12-14 20:39+0100\n"
-"PO-Revision-Date: 2024-12-14 20:42+0100\n"
+"POT-Creation-Date: 2024-12-18 17:56+0100\n"
+"PO-Revision-Date: 2024-12-18 17:58+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -385,7 +385,7 @@ msgstr "Heizung"
 #: opt/pi-ager/pi_ager_loop.py:572 opt/pi-ager/pi_ager_loop.py:573
 #: opt/pi-ager/pi_ager_loop.py:588 opt/pi-ager/pi_ager_loop.py:589
 #: opt/pi-ager/pi_ager_loop.py:591 opt/pi-ager/pi_ager_loop.py:592
-#: opt/pi-ager/pi_ager_loop.py:1640 opt/pi-ager/pi_ager_loop.py:1715
+#: opt/pi-ager/pi_ager_loop.py:1647 opt/pi-ager/pi_ager_loop.py:1722
 #: var/www/diagrams.php:1051 var/www/diagrams.php:1089
 #: var/www/diagrams.php:1114 var/www/diagrams.php:1173
 #: var/www/diagrams.php:1211 var/www/diagrams.php:1236
@@ -422,7 +422,7 @@ msgstr "Ein"
 #: opt/pi-ager/pi_ager_loop.py:581 opt/pi-ager/pi_ager_loop.py:582
 #: opt/pi-ager/pi_ager_loop.py:597 opt/pi-ager/pi_ager_loop.py:598
 #: opt/pi-ager/pi_ager_loop.py:600 opt/pi-ager/pi_ager_loop.py:601
-#: opt/pi-ager/pi_ager_loop.py:1636 opt/pi-ager/pi_ager_loop.py:1711
+#: opt/pi-ager/pi_ager_loop.py:1643 opt/pi-ager/pi_ager_loop.py:1718
 #: var/www/diagrams.php:1054 var/www/diagrams.php:1091
 #: var/www/diagrams.php:1093 var/www/diagrams.php:1116
 #: var/www/diagrams.php:1118 var/www/diagrams.php:1176
@@ -546,7 +546,7 @@ msgstr "Ausgewählter interner Sensor"
 msgid "target temperature"
 msgstr "Sollwert Temperatur in °C"
 
-#: opt/pi-ager/pi_ager_loop.py:1568 opt/pi-ager/pi_ager_loop.py:1580
+#: opt/pi-ager/pi_ager_loop.py:1568 opt/pi-ager/pi_ager_loop.py:1581
 msgid "actual temperature"
 msgstr "Aktuelle Temperatur"
 
@@ -554,152 +554,156 @@ msgstr "Aktuelle Temperatur"
 msgid "target humidity"
 msgstr "Sollwert Feuchte"
 
-#: opt/pi-ager/pi_ager_loop.py:1572 opt/pi-ager/pi_ager_loop.py:1581
+#: opt/pi-ager/pi_ager_loop.py:1572 opt/pi-ager/pi_ager_loop.py:1582
 msgid "actual humidity"
 msgstr "Aktuelle Feuchte"
 
-#: opt/pi-ager/pi_ager_loop.py:1574 opt/pi-ager/pi_ager_loop.py:1582
+#: opt/pi-ager/pi_ager_loop.py:1574 opt/pi-ager/pi_ager_loop.py:1583
 msgid "actual dewpoint"
 msgstr "Aktueller Taupunkt"
 
-#: opt/pi-ager/pi_ager_loop.py:1575 opt/pi-ager/pi_ager_loop.py:1583
+#: opt/pi-ager/pi_ager_loop.py:1575 opt/pi-ager/pi_ager_loop.py:1584
 msgid "actual humidity abs"
 msgstr "Aktuelle absolute Feuchte"
 
-#: opt/pi-ager/pi_ager_loop.py:1579
+#: opt/pi-ager/pi_ager_loop.py:1580
 msgid "selected external sensor"
 msgstr "Ausgewählter externer Sensor"
 
-#: opt/pi-ager/pi_ager_loop.py:1591 opt/pi-ager/pi_ager_loop.py:1594
-#: opt/pi-ager/pi_ager_loop.py:1597
+#: opt/pi-ager/pi_ager_loop.py:1588 opt/pi-ager/pi_ager_loop.py:1590
+msgid "battery level"
+msgstr "Batteriestand"
+
+#: opt/pi-ager/pi_ager_loop.py:1598 opt/pi-ager/pi_ager_loop.py:1601
+#: opt/pi-ager/pi_ager_loop.py:1604
 msgid "circulation air timer inactive"
 msgstr "Umluft Timer inaktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1591 opt/pi-ager/pi_ager_loop.py:1597
-#: opt/pi-ager/pi_ager_loop.py:1613 opt/pi-ager/pi_ager_loop.py:1619
+#: opt/pi-ager/pi_ager_loop.py:1598 opt/pi-ager/pi_ager_loop.py:1604
+#: opt/pi-ager/pi_ager_loop.py:1620 opt/pi-ager/pi_ager_loop.py:1626
 msgid "fan permanent off"
 msgstr "Ventilator permanent AUS"
 
-#: opt/pi-ager/pi_ager_loop.py:1594 opt/pi-ager/pi_ager_loop.py:1616
+#: opt/pi-ager/pi_ager_loop.py:1601 opt/pi-ager/pi_ager_loop.py:1623
 msgid "fan permanent on"
 msgstr "Ventilator permanent EIN"
 
-#: opt/pi-ager/pi_ager_loop.py:1601 opt/pi-ager/pi_ager_loop.py:1605
+#: opt/pi-ager/pi_ager_loop.py:1608 opt/pi-ager/pi_ager_loop.py:1612
 msgid "circulation air timer active"
 msgstr "Umluft Timer aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1601 opt/pi-ager/pi_ager_loop.py:1623
+#: opt/pi-ager/pi_ager_loop.py:1608 opt/pi-ager/pi_ager_loop.py:1630
 msgid "fan on"
 msgstr "Ventilator ein"
 
-#: opt/pi-ager/pi_ager_loop.py:1605 opt/pi-ager/pi_ager_loop.py:1627
+#: opt/pi-ager/pi_ager_loop.py:1612 opt/pi-ager/pi_ager_loop.py:1634
 msgid "fan off"
 msgstr "Ventilator aus"
 
-#: opt/pi-ager/pi_ager_loop.py:1613 opt/pi-ager/pi_ager_loop.py:1616
-#: opt/pi-ager/pi_ager_loop.py:1619
+#: opt/pi-ager/pi_ager_loop.py:1620 opt/pi-ager/pi_ager_loop.py:1623
+#: opt/pi-ager/pi_ager_loop.py:1626
 msgid "exhaust air timer inactive"
 msgstr "Abluft Timer inaktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1623 opt/pi-ager/pi_ager_loop.py:1627
+#: opt/pi-ager/pi_ager_loop.py:1630 opt/pi-ager/pi_ager_loop.py:1634
 msgid "exhaust air timer active"
 msgstr "Abluft Timer aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1636 opt/pi-ager/pi_ager_loop.py:1640
+#: opt/pi-ager/pi_ager_loop.py:1643 opt/pi-ager/pi_ager_loop.py:1647
 msgid "modus uv-light"
 msgstr "Modus UV-Licht"
 
-#: opt/pi-ager/pi_ager_loop.py:1643 opt/pi-ager/pi_ager_loop.py:1646
-#: opt/pi-ager/pi_ager_loop.py:1649
+#: opt/pi-ager/pi_ager_loop.py:1650 opt/pi-ager/pi_ager_loop.py:1653
+#: opt/pi-ager/pi_ager_loop.py:1656
 msgid "uv-light timer inactive"
 msgstr "UV-Licht Timer inaktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1643 opt/pi-ager/pi_ager_loop.py:1646
-#: opt/pi-ager/pi_ager_loop.py:1676
+#: opt/pi-ager/pi_ager_loop.py:1650 opt/pi-ager/pi_ager_loop.py:1653
+#: opt/pi-ager/pi_ager_loop.py:1683
 msgid "uv-light permanent off"
 msgstr "UV Licht permanent AUS"
 
-#: opt/pi-ager/pi_ager_loop.py:1649
+#: opt/pi-ager/pi_ager_loop.py:1656
 msgid "uv-light permanent on"
 msgstr "UV-Licht permanent Ein"
 
-#: opt/pi-ager/pi_ager_loop.py:1656 opt/pi-ager/pi_ager_loop.py:1663
+#: opt/pi-ager/pi_ager_loop.py:1663 opt/pi-ager/pi_ager_loop.py:1670
 msgid "uv-light timer active"
 msgstr "UV-Licht Timer aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1656 opt/pi-ager/pi_ager_loop.py:1690
+#: opt/pi-ager/pi_ager_loop.py:1663 opt/pi-ager/pi_ager_loop.py:1697
 msgid "uv-light on"
 msgstr "UV-Licht Ein"
 
-#: opt/pi-ager/pi_ager_loop.py:1663 opt/pi-ager/pi_ager_loop.py:1694
+#: opt/pi-ager/pi_ager_loop.py:1670 opt/pi-ager/pi_ager_loop.py:1701
 msgid "uv-light off"
 msgstr "UV-Licht AUS"
 
-#: opt/pi-ager/pi_ager_loop.py:1676
+#: opt/pi-ager/pi_ager_loop.py:1683
 msgid "uv-light timestamp inactive"
 msgstr "Zeitpunkt UV-Licht inaktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1690 opt/pi-ager/pi_ager_loop.py:1694
+#: opt/pi-ager/pi_ager_loop.py:1697 opt/pi-ager/pi_ager_loop.py:1701
 msgid "uv-light timestamp active"
 msgstr "Zeitpunkt UV-Licht aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1703
+#: opt/pi-ager/pi_ager_loop.py:1710
 msgid "UV light manual off"
 msgstr "UV Licht manuell AUS"
 
-#: opt/pi-ager/pi_ager_loop.py:1705
+#: opt/pi-ager/pi_ager_loop.py:1712
 msgid "UV light automatic mode on"
 msgstr "UV-Licht Automatikbetrieb ein"
 
-#: opt/pi-ager/pi_ager_loop.py:1711 opt/pi-ager/pi_ager_loop.py:1715
+#: opt/pi-ager/pi_ager_loop.py:1718 opt/pi-ager/pi_ager_loop.py:1722
 msgid "modus light"
 msgstr "Modus Licht"
 
-#: opt/pi-ager/pi_ager_loop.py:1718 opt/pi-ager/pi_ager_loop.py:1722
-#: opt/pi-ager/pi_ager_loop.py:1726
+#: opt/pi-ager/pi_ager_loop.py:1725 opt/pi-ager/pi_ager_loop.py:1729
+#: opt/pi-ager/pi_ager_loop.py:1733
 msgid "light timer inactive"
 msgstr "Licht Timer inaktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1718 opt/pi-ager/pi_ager_loop.py:1722
-#: opt/pi-ager/pi_ager_loop.py:1756
+#: opt/pi-ager/pi_ager_loop.py:1725 opt/pi-ager/pi_ager_loop.py:1729
+#: opt/pi-ager/pi_ager_loop.py:1763
 msgid "light permanent off"
 msgstr "Licht permanent AUS"
 
-#: opt/pi-ager/pi_ager_loop.py:1726
+#: opt/pi-ager/pi_ager_loop.py:1733
 msgid "light permanent on"
 msgstr "Licht permanent EIN"
 
-#: opt/pi-ager/pi_ager_loop.py:1734 opt/pi-ager/pi_ager_loop.py:1741
+#: opt/pi-ager/pi_ager_loop.py:1741 opt/pi-ager/pi_ager_loop.py:1748
 msgid "light timer active"
 msgstr "Licht Timer aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1734 opt/pi-ager/pi_ager_loop.py:1770
+#: opt/pi-ager/pi_ager_loop.py:1741 opt/pi-ager/pi_ager_loop.py:1777
 #: var/www/webcam.php:53
 msgid "light on"
 msgstr "Licht EIN"
 
-#: opt/pi-ager/pi_ager_loop.py:1741 opt/pi-ager/pi_ager_loop.py:1774
+#: opt/pi-ager/pi_ager_loop.py:1748 opt/pi-ager/pi_ager_loop.py:1781
 msgid "light off"
 msgstr "Licht AUS"
 
-#: opt/pi-ager/pi_ager_loop.py:1756
+#: opt/pi-ager/pi_ager_loop.py:1763
 msgid "light timestamp inactive"
 msgstr "Zeitpunkt Licht inaktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1770 opt/pi-ager/pi_ager_loop.py:1774
+#: opt/pi-ager/pi_ager_loop.py:1777 opt/pi-ager/pi_ager_loop.py:1781
 msgid "light timestamp active"
 msgstr "Zeitpunkt Licht aktiv"
 
-#: opt/pi-ager/pi_ager_loop.py:1783 var/www/webcam.php:57
+#: opt/pi-ager/pi_ager_loop.py:1790 var/www/webcam.php:57
 msgid "light manual on"
 msgstr "Licht manuell EIN"
 
-#: opt/pi-ager/pi_ager_loop.py:1785
+#: opt/pi-ager/pi_ager_loop.py:1792
 msgid "light automatic mode on"
 msgstr "Licht Automatikbetrieb ein"
 
-#: opt/pi-ager/pi_ager_loop.py:1991 opt/pi-ager/pi_ager_loop.py:1993
-#: opt/pi-ager/pi_ager_loop.py:1996 opt/pi-ager/pi_ager_loop.py:1998
+#: opt/pi-ager/pi_ager_loop.py:1998 opt/pi-ager/pi_ager_loop.py:2000
+#: opt/pi-ager/pi_ager_loop.py:2003 opt/pi-ager/pi_ager_loop.py:2005
 msgid "weight scale"
 msgstr "Waagenmessung"
 
@@ -2416,6 +2420,10 @@ msgstr "Webcam"
 #: var/www/index.php:17
 msgid "mainsensors"
 msgstr "Hauptsensoren"
+
+#: var/www/index.php:206 var/www/index.php:210
+msgid "battery"
+msgstr "Batterie"
 
 #: var/www/index.php:239
 msgid "ntc sensors"

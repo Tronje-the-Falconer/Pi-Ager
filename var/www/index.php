@@ -202,12 +202,12 @@
                                             echo _('external');
                                             echo '</h2>';
                                             if ($sensorsecondname == 'MiThermometer') {
-                                                if ($MiSensor_battery === null) {
-                                                    echo '<h4 id="secondsensorname_id">(' . $sensorsecondname . ', battery: ' . '----V)</h4>';
+                                                if ($MiSensor_battery === null or $status_main == 0 or $status_piager == 0) {
+                                                    echo '<h4 id="secondsensorname_id">(' . $sensorsecondname . ', ' . _('battery') . ': ' . '----V)</h4>';
                                                 }
                                                 else {
                                                     $MiSensor_battery_tmp = number_format(floatval($MiSensor_battery), 2, '.', '');
-                                                    echo '<h4 id="secondsensorname_id">(' . $sensorsecondname . ', battery: ' . $MiSensor_battery_tmp . 'V)</h4>';
+                                                    echo '<h4 id="secondsensorname_id">(' . $sensorsecondname . ', ' . _('battery') . ': ' . $MiSensor_battery_tmp . 'V)</h4>';
                                                 }
                                             }
                                             else {
