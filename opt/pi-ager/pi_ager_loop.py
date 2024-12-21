@@ -1578,14 +1578,26 @@ def doMainLoop():
                 if (str(cl_fact_second_sensor_type.get_instance().get_sensor_type_ui()) != 'disabled'):
                     second_sensor_type_name = cl_fact_second_sensor_type.get_instance().get_sensor_type_ui()
                     logstring = logstring + ' \n ' +  _('selected external sensor') + ': ' + second_sensor_type_name
-                    logstring = logstring + ' \n ' +  _('actual temperature') + ': ' + str(second_sensor_temperature) + ' °C'
-                    logstring = logstring + ' \n ' +  _('actual humidity') + ': ' + str(second_sensor_humidity) + ' %'
-                    logstring = logstring + ' \n ' +  _('actual dewpoint') + ': ' + str(second_sensor_dewpoint) + ' °C'  
-                    logstring = logstring + ' \n ' +  _('actual humidity abs') + ': ' + str(second_sensor_humidity_abs) + ' g/m³'
+                    if (second_sensor_temperature == None):
+                        logstring = logstring + ' \n ' +  _('actual temperature') + ': ' + '----'
+                    else:
+                        logstring = logstring + ' \n ' +  _('actual temperature') + ': ' + str(second_sensor_temperature) + ' °C'
+                    if (second_sensor_humidity == None):
+                        logstring = logstring + ' \n ' +  _('actual humidity') + ': ' + '----'
+                    else:
+                        logstring = logstring + ' \n ' +  _('actual humidity') + ': ' + str(second_sensor_humidity) + ' %'
+                    if (second_sensor_dewpoint == None):
+                        logstring = logstring + ' \n ' +  _('actual dewpoint') + ': ' + '----'
+                    else:
+                        logstring = logstring + ' \n ' +  _('actual dewpoint') + ': ' + str(second_sensor_dewpoint) + ' °C'
+                    if (second_sensor_humidity_abs == None):
+                        logstring = logstring + ' \n ' +  _('actual humidity abs') + ': ' + '----'
+                    else:
+                        logstring = logstring + ' \n ' +  _('actual humidity abs') + ': ' + str(second_sensor_humidity_abs) + ' g/m³'
                     if (second_sensor_type_name == 'MiThermometer'):
                         battery_level = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.MiSensor_battery_key)
                         if (battery_level == None):
-                            logstring = logstring + ' \n ' +  _('battery level') + ': ' + '---- V'
+                            logstring = logstring + ' \n ' +  _('battery level') + ': ' + '----'
                         else:
                             logstring = logstring + ' \n ' +  _('battery level') + ': ' + f'{battery_level:.2f}' + ' V'
                     logstring = logstring + ' \n ' + pi_ager_names.logspacer2
@@ -2101,7 +2113,9 @@ def doMainLoop():
         # reflect i/o status in DB
         switch_light(pi_ager_names.relay_off)
         switch_uv_light(pi_ager_names.relay_off)
-        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, 0, 0, 0, 0, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data) 
+#        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, 0, 0, 0, 0, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data) 
+        pi_ager_database.write_current(None, 0, 0, 0, 0, None, None, None, None, None, None, None, 0, 0, 0, 0, None, None, None, None) 
+        pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.MiSensor_battery_key, None)   
         cl_fact_logger.get_instance().debug('in loop try end -----------------------------------------------------')
         
     except Exception as cx_error:
