@@ -3,7 +3,8 @@
 # http://elinux.org/RPi_HardwareHistory#Board_Revision_History and
 # https://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
 # https://www.raspberrypi.org/documentation/hardware/raspberrypi/revision-codes/README.md
-# Stand 31.10.2021
+# https://github.com/raspberrypi/documentation/blob/develop/documentation/asciidoc/computers/raspberry-pi/revision-codes.adoc
+# Stand 31.10.2025
 global $piversion, $piager_version;
 $pirevision = get_table_value($system_table, $pi_revision_key);
 $piager_version = get_table_value($system_table, $pi_ager_version_key);
@@ -116,10 +117,26 @@ switch ($pirevision){
         return $piversion = 'Raspberry Pi 4 Model CM4 v1.0 </br> (Sony, UK) </br> 4GB RAM';
     case 'd03140':
         return $piversion = 'Raspberry Pi 4 Model CM4 v1.0 </br> (Sony, UK) </br> 8GB RAM';
+    case 'b04170':
+        return $piversion = 'Raspberry Pi 5 Model B v1.0 </br> (Sony, UK) </br> 2GB RAM';
     case 'c04170':
         return $piversion = 'Raspberry Pi 5 Model B v1.0 </br> (Sony, UK) </br> 4GB RAM';
     case 'd04170':
         return $piversion = 'Raspberry Pi 5 Model B v1.0 </br> (Sony, UK) </br> 8GB RAM';
+    case 'b04180':
+        return $piversion = 'Raspberry Pi 5 Model CM5  v1.0 </br> (Sony, UK) </br> 2GB RAM';
+    case 'c04180':
+        return $piversion = 'Raspberry Pi 5 Model CM5  v1.0 </br> (Sony, UK) </br> 4GB RAM';
+    case 'd04180':
+        return $piversion = 'Raspberry Pi 5 Model CM5  v1.0 </br> (Sony, UK) </br> 8GB RAM';
+    case 'd04190':
+        return $piversion = 'Raspberry Pi 5 Model Pi500  v1.0 </br> (Sony, UK) </br> 8GB RAM';
+    case 'b041a0':
+        return $piversion = 'Raspberry Pi 5 Model CM5 Lite  v1.0 </br> (Sony, UK) </br> 2GB RAM';
+    case 'c041a0':
+        return $piversion = 'Raspberry Pi 5 Model CM5 Lite  v1.0 </br> (Sony, UK) </br> 4GB RAM';
+    case 'd041a0':
+        return $piversion = 'Raspberry Pi 5 Model CM5 Lite  v1.0 </br> (Sony, UK) </br> 8GB RAM';
     case '0000':
         return $piversion = _('model unknown! Please contact us.');
     default:

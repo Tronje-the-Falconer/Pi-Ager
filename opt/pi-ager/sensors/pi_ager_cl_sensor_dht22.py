@@ -23,18 +23,19 @@ from main.pi_ager_cx_exception import *
 # from messenger.pi_ager_cl_messenger import cl_fact_logic_messenger
 # from sensors.pi_ager_cl_sensor import cl_sensor
 # from sensors.pi_ager_cl_ab_sensor import cl_ab_sensor
-from sensors.pi_ager_cl_sensor_dht_adafruit import cl_sensor_dht_adafruit
-import Adafruit_DHT
+from sensors.pi_ager_cl_sensor_dht import cl_sensor_dht
 
-
-class cl_sensor_dht22(cl_sensor_dht_adafruit):
-    
+class cl_sensor_dht22(cl_sensor_dht):
+    DHTAUTO=0
+    DHT11=1
+    DHTXX=2
+        
     def __init__(self, i_sensor_type, i_active_sensor):
         # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         # if "get_instance" not in inspect.stack()[1][3]:
         #     raise cx_direct_call(self,"Please use factory class" )
         # self.o_sensor_type = i_sensor_type
-        self._sensor_dht = Adafruit_DHT.DHT22
+        self._sensor_dht = self.DHTXX
         # super().__init__(self.o_sensor_type)
         super().__init__()
   

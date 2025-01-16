@@ -7,9 +7,9 @@ import os
 import stat
 import time
 import datetime
-import Adafruit_DHT
+# import Adafruit_DHT
 import RPi.GPIO as gpio
-import pi_sht1x
+# import pi_sht1x
 import pi_ager_database
 import pi_ager_names
 import pi_ager_paths
@@ -1459,7 +1459,7 @@ def doMainLoop():
             
             # Prüfen, ob Sensordaten empfangen wurden und falls nicht, auf Notfallmodus wechseln
             if sensor_temperature != None and sensor_humidity != None and sensor_dewpoint != None:
-                count_continuing_emergency_loops = 0
+#                count_continuing_emergency_loops = 0
                 
                 #weitere Settings
                 modus = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.modus_key)
@@ -2078,16 +2078,16 @@ def doMainLoop():
 #                else:
 #                    sensor_temperature -= 0.005 # simulate decreasing cabinet temperature over time
                     
-            else:
-                count_continuing_emergency_loops += 1
+#            else:
+                # count_continuing_emergency_loops += 1
                 # logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter) + ' without sensordata!!')
                 # logger.warning('loopnumber: ' + str(pi_ager_init.loopcounter) + ' is loop ' + str(count_continuing_emergency_loops) + ' without sensor response!')
-                cl_fact_logger.get_instance().debug('loopnumber: ' + str(pi_ager_init.loopcounter) + ' without sensordata!!')
-                cl_fact_logger.get_instance().warning('loopnumber: ' + str(pi_ager_init.loopcounter) + ' is loop ' + str(count_continuing_emergency_loops) + ' without sensor response!')
-                if count_continuing_emergency_loops == 10:
+                # cl_fact_logger.get_instance().debug('loopnumber: ' + str(pi_ager_init.loopcounter) + ' without sensordata!!')
+                # cl_fact_logger.get_instance().warning('loopnumber: ' + str(pi_ager_init.loopcounter) + ' is loop ' + str(count_continuing_emergency_loops) + ' without sensor response!')
+                # if count_continuing_emergency_loops == 10:
                     # logger.info('Because of ' + str(count_continuing_emergency_loops) + ' loops without sensordata the system will be rebooted now!')
-                    cl_fact_logger.get_instance().info('Because of ' + str(count_continuing_emergency_loops) + ' loops without sensordata the system will be rebooted now!')
-                    os.system('sudo /var/sudowebscript.sh reboot')
+                #    cl_fact_logger.get_instance().info('Because of ' + str(count_continuing_emergency_loops) + ' loops without sensordata the system will be rebooted now!')
+                #    os.system('sudo /var/sudowebscript.sh reboot')
             
             # logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter))
             cl_fact_logger.get_instance().debug('loopnumber: ' + str(pi_ager_init.loopcounter))

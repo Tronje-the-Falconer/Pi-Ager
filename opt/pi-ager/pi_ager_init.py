@@ -4,14 +4,14 @@
     
     setting up inital settings
 """
-import Adafruit_DHT
+# import Adafruit_DHT
 import time
 import gettext
 import pi_ager_database
 import pi_ager_names
 import pi_ager_gpio_config
 # import pi_ager_logging
-import pi_sht1x
+# import pi_sht1x
 from main.pi_ager_cl_logger import cl_fact_logger
 
 global system_starttime
