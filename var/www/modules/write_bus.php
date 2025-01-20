@@ -72,14 +72,14 @@
                     //echo '<script> alert("' . _('Change to 1-wire') . '"); </script>';
                     write_busvalue(1);
                     logger('DEBUG', 'sensorbus saved. changed to 1-wire (1)');
-                    shell_exec('sudo /var/sudowebscript.sh sensorbus1wire > /dev/null 2>&1');
+//                    shell_exec('sudo /var/sudowebscript.sh sensorbus1wire > /dev/null 2>&1');
                     do_shutdown(_('Change to 1-wire sensor'));
                 }
                 if (($sensornum >= 4 && $sensornum <= 13 ) && $old_bus  ==  1){
                     //echo '<script> alert("' . _('Change to I2C') . '"); </script>';
                     write_busvalue(0);
                     logger('DEBUG', 'sensorbus saved. changed to i2c (0)');
-                    shell_exec('sudo /var/sudowebscript.sh sensorbusi2c > /dev/null 2>&1');
+//                    shell_exec('sudo /var/sudowebscript.sh sensorbusi2c > /dev/null 2>&1');
                     do_shutdown(_('Change to I2C sensor'));
                 }
                 logger('DEBUG', 'internal sensor changed');

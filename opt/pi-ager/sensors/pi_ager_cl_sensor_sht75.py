@@ -16,6 +16,7 @@ from main.pi_ager_cl_logger import cl_fact_logger
 # import time
 import pi_sht1x
 import pi_ager_gpio_config
+import os
 
 # from sensors.pi_ager_cl_sensor_type import cl_fact_main_sensor_type
 from main.pi_ager_cx_exception import *
@@ -27,6 +28,8 @@ class cl_sensor_sht75(cl_sensor):
     
     def __init__(self, i_sensor_type, i_active_sensor):
         # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
+        # remove i2c_gpio kernel driver to release GPIO17 and GPIO27 pins
+        os.system('rmmod i2c_gpio')
         
         self.o_sensor_type = i_sensor_type
         self.o_active_sensor = i_active_sensor
