@@ -27,8 +27,8 @@ import lgpio as sbc
 
 class cl_sensor_dht(cl_sensor):
     DHTAUTO=0
-    DHT11=1
-    DHTXX=2
+    DHT11=11
+    DHT22=22
 
     DHT_GOOD=0
     DHT_BAD_CHECKSUM=1
@@ -36,6 +36,8 @@ class cl_sensor_dht(cl_sensor):
     DHT_TIMEOUT=3
     
     MAX_ERRORS=10
+    
+    dht_status = ["DHT_GOOD", "DHT_BAD_CHECKSUM", "DHT_BAD_DATA", "DHT_TIMEOUT"]   
     
     def __init__(self):
 #        cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
@@ -86,7 +88,7 @@ class cl_sensor_dht(cl_sensor):
             valid = False
         return (valid, t, h)
 
-    def _validate_DHTXX(self, b1, b2, b3, b4):
+    def _validate_DHT22(self, b1, b2, b3, b4):
         if b2 & 128:
             div = -10.0
         else:
@@ -102,7 +104,7 @@ class cl_sensor_dht(cl_sensor):
     def _decode_dhtxx(self):
         """
             +-------+-------+
-            | DHT11 | DHTXX |
+            | DHT11 | DHT22 |
             +-------+-------+
       Temp C| 0-50  |-40-125|
             +-------+-------+
@@ -131,11 +133,11 @@ class cl_sensor_dht(cl_sensor):
         if chksum == b0:
             if self._model == self.DHT11:
                 valid, t, h = self._validate_DHT11(b1, b2, b3, b4)
-            elif self._model == self.DHTXX:
-                valid, t, h = self._validate_DHTXX(b1, b2, b3, b4)
+            elif self._model == self.DHT22:
+                valid, t, h = self._validate_DHT22(b1, b2, b3, b4)
             else: # AUTO
-                # Try DHTXX first.
-                valid, t, h = self._validate_DHTXX(b1, b2, b3, b4)
+                # Try DHT22 first.
+                valid, t, h = self._validate_DHT22(b1, b2, b3, b4)
                 if not valid:
                     # try DHT11.
                     valid, t, h = self._validate_DHT11(b1, b2, b3, b4)
@@ -168,7 +170,7 @@ class cl_sensor_dht(cl_sensor):
 
     def _trigger(self):
         sbc.gpio_claim_output(self._chip, self._gpio, 0)
-        if self._model != self.DHTXX:
+        if self._model != self.DHT22:
             time.sleep(0.015)
         else:
             time.sleep(0.001)
@@ -211,7 +213,7 @@ class cl_sensor_dht(cl_sensor):
                 cl_fact_logger.get_instance().debug("Try to read from Sensor DHT%s Pin %d" % (self._sensor_dht, self._gpio))
                 data = self.read()
                 if (data[2] != self.DHT_GOOD):
-                    cl_fact_logger.get_instance().debug("DHT%s read data error. Status %d" % (self._sensor_dht, self._status))
+                    cl_fact_logger.get_instance().debug(f"DHT{self._model:d} read data error. Status " + self.dht_status[data[2]])
                     self._error_counter += 1
                     time.sleep(1)
                     continue

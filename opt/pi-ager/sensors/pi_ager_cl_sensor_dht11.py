@@ -26,9 +26,8 @@ from main.pi_ager_cx_exception import *
 from sensors.pi_ager_cl_sensor_dht import cl_sensor_dht
 
 class cl_sensor_dht11(cl_sensor_dht):
-    DHTAUTO=0
-    DHT11=1
-    DHTXX=2
+    DHT11=11
+    DHT22=22
     
     def __init__(self, i_sensor_type, i_active_sensor):
         # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())

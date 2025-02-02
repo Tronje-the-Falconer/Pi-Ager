@@ -26,16 +26,15 @@ from main.pi_ager_cx_exception import *
 from sensors.pi_ager_cl_sensor_dht import cl_sensor_dht
 
 class cl_sensor_dht22(cl_sensor_dht):
-    DHTAUTO=0
-    DHT11=1
-    DHTXX=2
+    DHT11=11
+    DHT22=22
         
     def __init__(self, i_sensor_type, i_active_sensor):
         # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         # if "get_instance" not in inspect.stack()[1][3]:
         #     raise cx_direct_call(self,"Please use factory class" )
         # self.o_sensor_type = i_sensor_type
-        self._sensor_dht = self.DHTXX
+        self._sensor_dht = self.DHT22
         # super().__init__(self.o_sensor_type)
         super().__init__()
   
