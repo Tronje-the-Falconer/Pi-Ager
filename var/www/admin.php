@@ -89,8 +89,8 @@
                                                 <td class="td_png_icon"><h3><?php echo _('sensortype'); ?></h3><img src="images/icons/sensortype_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_sensortype_blockFunction()"><?php echo _('help'); ?></button>
                                                 </td>
                                                 <td style=" text-align: left; padding-left: 20px;"><br>
-                                                    <input type="radio" name="sensortype_admin" value="1" <?php echo $checked_sens_1; ?>/><label><span style="color: #7A5800 !important"> DHT11</span></label><br>
-                                                    <input type="radio" name="sensortype_admin" value="2" <?php echo $checked_sens_2; ?>/><label><span style="color: #7A5800 !important"> DHT22</span></label><br>
+                                                    <input type="radio" name="sensortype_admin" value="1" disabled <?php echo $checked_sens_1; ?>/><label><span style="color: #7A5800 !important"> <del>DHT11</del></span></label><br>
+                                                    <input type="radio" name="sensortype_admin" value="2" disabled <?php echo $checked_sens_2; ?>/><label><span style="color: #7A5800 !important"> <del>DHT22</del></span></label><br>
                                                     <input type="radio" name="sensortype_admin" value="3" <?php echo $checked_sens_3; ?>/><label><span style="color: #7A5800 !important"> SHT75</span></label><br>
                                                     <input type="radio" name="sensortype_admin" value="4" <?php echo $checked_sens_4; ?>/><label><strong> SHT85</strong>&nbsp;[0x44]</label><br>
                                                     <input type="radio" name="sensortype_admin" value="5" <?php echo $checked_sens_5; ?>/><label><strong> SHT3x</strong>&nbsp;[0x44]</label><br>
