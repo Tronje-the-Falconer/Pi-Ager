@@ -1,0 +1,1 @@
+www-data ALL=NOPASSWD:/var/sudowebscript.sh,/var/show_wifi_connections.sh,/var/updatessid.sh,/usr/bin/raspi-config,/usr/bin/nmcli,/usr/bin/systemctl
