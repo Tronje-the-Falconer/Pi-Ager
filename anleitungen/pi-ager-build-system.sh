@@ -71,7 +71,7 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     sed -i 's/fsck.repair=yes/fsck.mode=force fsck.repair=yes/' /boot/firmware/cmdline.txt
     sed -i 's/rootwait/rootwait dwc_otg.fiq_fsm_mask=0x3/' /boot/firmware/cmdline.txt
     
-    printf "/nConfigure Locales: enable 'de_DE.UTF-8 UTF-8' and 'en_GB.UTF-8 UTF-8'\n"
+    printf "\nConfigure Locales: enable 'de_DE.UTF-8 UTF-8' and 'en_GB.UTF-8 UTF-8'\n"
     printf "Other Locales can also be enabled but only en_GB and de_DE are supported by Pi-Ager.\n"
     printf "Reboots automatically when finished\n"
     printf "After reboot start this script with sudo again to continue system setup\n"
