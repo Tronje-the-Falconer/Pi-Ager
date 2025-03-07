@@ -65,11 +65,15 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
 
     echo "enable_uart=1" >> /boot/firmware/config.txt
     echo "dtoverlay=miniuart-bt" >>/boot/firmware/config.txt
-    echo "dtparam=uart0=on" >> /boot/firmware/config.txt
-    echo "#  force_turbo=1" >> /boot/firmware/config.txt
+#    echo "dtparam=uart0=on" >> /boot/firmware/config.txt
+#    echo "#  force_turbo=1" >> /boot/firmware/config.txt
 
+    CMDLINE="/boot/firmware/cmdline.txt"
     sed -i 's/fsck.repair=yes/fsck.mode=force fsck.repair=yes/' /boot/firmware/cmdline.txt
     sed -i 's/rootwait/rootwait dwc_otg.fiq_fsm_mask=0x3/' /boot/firmware/cmdline.txt
+
+    sed -i $CMDLINE -e "s/console=ttyAMA0,[0-9]\+ //"
+    sed -i $CMDLINE -e "s/console=serial0,[0-9]\+ //"
     
     printf "\nConfigure Locales: enable 'de_DE.UTF-8 UTF-8' and 'en_GB.UTF-8 UTF-8'\n"
     printf "Other Locales can also be enabled but only en_GB and de_DE are supported by Pi-Ager.\n"
@@ -247,4 +251,9 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
 #   systemctl enable setup_pi-ager.service    
     reboot
     ;;
+    
+ 5)
+    printf "\nDid you edit /boot/firmware/setup.txt file ?\n"
+    printf "After editing and saving setup.txt start script pi-ager-finalize-build.sh with sudo to activate system configuration from data in setup.txt \n"
+ 
 esac
