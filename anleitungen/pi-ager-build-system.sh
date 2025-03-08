@@ -185,6 +185,7 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     
     printf "\ncreate virtual interface wlan0\n"
     iw dev wlan0 interface add wlan1 type __ap
+    sleep 1
     
     printf "\nconfigure access point with networkmanager\n"
     nmcli con delete PI_AGER_AP
