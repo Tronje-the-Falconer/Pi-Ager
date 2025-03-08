@@ -241,7 +241,7 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     printf "\nclosing_actions\n"
     
 #    systemctl disable this_script
-    rm -f /usr/share/this_script.progress /etc/systemd/system/this_script.service
+#    rm -f /usr/share/this_script.progress /etc/systemd/system/this_script.service
     rm -rf /home/pi/Pi-Ager
     
     echo "Edit now /boot/firmware/setup.txt file !"
