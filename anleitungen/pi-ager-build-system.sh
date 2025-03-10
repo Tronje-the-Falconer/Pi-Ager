@@ -38,6 +38,7 @@ case $progress in
     apt update
     apt -y full-upgrade
     printf "\nreboot, after reboot start this script with sudo again to continue system setup\n"
+    sync
     reboot
     ;;
  3)
@@ -82,7 +83,7 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     read -p "Press enter to continue"
     
     dpkg-reconfigure locales
-
+    sync
     reboot
     ;;
  4)
@@ -249,7 +250,8 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     echo "After editing and saving setup.txt start script pi-ager-finalize-build.sh with sudo to activate system configuration from data in setup.txt "
     echo "rebooting now"
     
-#   systemctl enable setup_pi-ager.service    
+#   systemctl enable setup_pi-ager.service 
+    sync
     reboot
     ;;
     
