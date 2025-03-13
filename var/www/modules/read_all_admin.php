@@ -263,6 +263,24 @@
     else {
         $checked_tft_display_type_3 = '';
     }
+    if ($tft_display_type == 4) {
+        $checked_tft_display_type_4 = 'checked="checked"';
+    }
+    else {
+        $checked_tft_display_type_4 = '';
+    }
+    if ($tft_display_type == 5) {
+        $checked_tft_display_type_5 = 'checked="checked"';
+    }
+    else {
+        $checked_tft_display_type_5 = '';
+    }
+    if ($tft_display_type == 6) {
+        $checked_tft_display_type_6 = 'checked="checked"';
+    }
+    else {
+        $checked_tft_display_type_6 = '';
+    }
 
    logger('DEBUG', 'read_current_db performed');
 ?>

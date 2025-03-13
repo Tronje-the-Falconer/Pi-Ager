@@ -206,6 +206,15 @@ EOF
         "NX3224F028") echo "start firmware upload for HMI display device $hmidisplay"
                       nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224F028/pi-ager.tft
                       echo "firmware upload for HMI device finished";;
+        "NX3224K024") echo "start firmware upload for HMI display device $hmidisplay"
+                      nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224K024/pi-ager.tft
+                      echo "firmware upload for HMI device finished";;
+        "NX3224T024") echo "start firmware upload for HMI display device $hmidisplay"
+                      nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224T024/pi-ager.tft
+                      echo "firmware upload for HMI device finished";;
+        "NX3224F024") echo "start firmware upload for HMI display device $hmidisplay"
+                      nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224F024/pi-ager.tft
+                      echo "firmware upload for HMI device finished";;
     esac
 fi
 

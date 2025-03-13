@@ -13,9 +13,18 @@
     else if ($tft_display_type == 2) {
         $filename = '/var/www/nextion/NX3224F028/pi-ager.tft'; //Das Upload-Verzeichnis NX3224F028
     }
-    else {
+    else if ($tft_display_type == 3) {
         $filename = '/var/www/nextion/NX3224T028/pi-ager.tft'; //Das Upload-Verzeichnis NX3224T028
     }  
+    else if ($tft_display_type == 4) {
+        $filename = '/var/www/nextion/NX3224K024/pi-ager.tft'; //Das Upload-Verzeichnis NX3224K024
+    }
+    else if ($tft_display_type == 5) {
+        $filename = '/var/www/nextion/NX3224F024/pi-ager.tft'; //Das Upload-Verzeichnis NX3224F024
+    }
+    else {
+        $filename = '/var/www/nextion/NX3224T024/pi-ager.tft'; //Das Upload-Verzeichnis NX3224T024
+    } 
     
     if ($request == 'check') {
         // $filename = '/var/www/nextion/pi-ager.tft';

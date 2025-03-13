@@ -846,6 +846,9 @@
                                                     <input type="radio" name="tft_display_type_admin" value="1" <?php echo $checked_tft_display_type_1; ?>/><label> NX3224K028 (Enhanced)</label><br>
                                                     <input type="radio" name="tft_display_type_admin" value="2" <?php echo $checked_tft_display_type_2; ?>/><label> NX3224F028 (Discovery)</label><br>
                                                     <input type="radio" name="tft_display_type_admin" value="3" <?php echo $checked_tft_display_type_3; ?>/><label> NX3224T028 (Basic)</label><br>
+                                                    <input type="radio" name="tft_display_type_admin" value="4" <?php echo $checked_tft_display_type_4; ?>/><label> NX3224K024 (Enhanced)</label><br>
+                                                    <input type="radio" name="tft_display_type_admin" value="5" <?php echo $checked_tft_display_type_5; ?>/><label> NX3224F024 (Discovery)</label><br>
+                                                    <input type="radio" name="tft_display_type_admin" value="6" <?php echo $checked_tft_display_type_6; ?>/><label> NX3224T024 (Basic)</label><br>
                                                     <br>
                                                 </td>
                                             </tr>

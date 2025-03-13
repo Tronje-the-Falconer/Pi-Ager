@@ -52,13 +52,13 @@ dbpw='raspberry'
 # WPA wird nicht vom Pi-Ager unterstützt
 #-------------------------------------------------------------------------------
 
-# WLAN Netzwerkname:
-wlanssid='your WLAN SSID'
+# WLAN Netzwerkname: z.B. 'FRITZ!Box 7490'
+wlanssid=''
 
-# WLAN Schlüssel (mindesten 8 Zeichen):
-wlankey='your WLAN key'
+# WLAN Schlüssel (mindesten 8 Zeichen): z.B. '123ert789IJK!+?'
+wlankey=''
 
-# ISO code your country, e.g. DE, GB:
+# ISO code your country, z.B. DE, GB:
 country='DE'
 
 # Temperature/Humidity sensor attached to pi-ager:
@@ -66,7 +66,7 @@ country='DE'
 sensor='SHT3x'
 
 # hmi TFT display device Namen:
-# gültige device Namen: NX3224K028 or NX3224T028 or NX3224F028
+# gültige device Namen: NX3224K028 or NX3224T028 or NX3224F028 or NX3224K024 or NX3224T024 or NX3224F024
 # z.B. : hmidisplay='NX3224K028'
 # Wenn hmidisplay definiert ist, wird die Firmware des hmi TFT Displays beim ersten Booten geflasht.
 # Das Flashen des Displays dauert bis zu 5 Minuten, der Fortschritt des Flashens kann nur auf dem 

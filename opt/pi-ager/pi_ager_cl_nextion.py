@@ -463,9 +463,15 @@ class cl_nextion( threading.Thread ):
             display_name = 'NX3224K028'
         elif display_type == 2:
             display_name = 'NX3224F028'
-        else:
+        elif display_type == 3:
             display_name = 'NX3224T028'
-
+        elif display_type == 4:
+            display_name = 'NX3224K024'
+        elif display_type == 5:
+            display_name = 'NX3224F024'
+        else:
+            display_name = 'NX3224T024'
+            
         await self.client.set('values.displ_version.txt', display_name)
         await self.client.set('values.sw_version.txt', version)
         
