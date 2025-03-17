@@ -1,29 +1,31 @@
 #!/bin/bash
 export PIP_BREAK_SYSTEM_PACKAGES=1
 
-# set -x
+set -x
 # trap read debug
 
 if [ ! -f  /usr/share/this_script.progress ] ; then
     echo 1 >/usr/share/this_script.progress
 
-#    cat > /etc/systemd/system/this_script.service <<EOF
-#[Unit]
-#Description=this script service
+    cat > /etc/systemd/system/this_script.service <<EOF
+[Unit]
+Description=this script service
 # After=NetworkManager.service
-#After=multi-user.target
+After=multi-user.target
 
-#[Service]
-#ExecStart=/home/pi/pi-ager-build-system.sh
-#StandardOutput=append:/home/pi/pi-ager-build-system.log
-#StandardError=append:/home/pi/pi-ager-build-system-error.log
+[Service]
+ExecStart=/home/pi/pi-ager-build-system.sh
+StandardOutput=journal+console
+StandardError=journal+console
 
-#[Install]
-#WantedBy=multi-user.target
-#EOF
+[Install]
+WantedBy=multi-user.target
+EOF
+
 #    systemctl enable this_script
     echo 2 >/usr/share/this_script.progress
 fi
+
 progress=$(</usr/share/this_script.progress)
 echo $progress
 
@@ -43,7 +45,7 @@ case $progress in
     ;;
  3)
     echo 4 >/usr/share/this_script.progress
-    printf "\nSetup system for Pi-Ager part 1, wait 10s to start. Reboot when done\n"
+    printf "\nSetup system for Pi-Ager, wait 10s to start. Reboot when done\n"
     sleep 10
     sed -i 's/^#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config 
     service ssh restart
@@ -80,24 +82,26 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     printf "Other Locales can also be enabled but only en_GB and de_DE are supported by Pi-Ager.\n"
     printf "Reboots automatically when finished\n"
     printf "After reboot start this script with sudo again to continue system setup\n"
-    read -p "Press enter to continue"
-    
-    dpkg-reconfigure locales
-    sync
-    reboot
-    ;;
- 4)
-    echo 5 >/usr/share/this_script.progress
-    printf "\nSetup system for Pi-Ager part 2, wait 10s to start. Reboot when done\n"
-    sleep 10
+#    read -p "Press enter to continue"
+
+    sed -i -e 's/# de_DE.UTF-8 UTF-8/de_DE.UTF-8 UTF-8/' /etc/locale.gen
+    dpkg-reconfigure -f noninteractive locales
+    update-locale LANG=de_DE.UTF-8
+#    sync
+#    reboot
+#    ;;
+# 4)
+#    echo 5 >/usr/share/this_script.progress
+#    printf "\nSetup system for Pi-Ager part 2, wait 10s to start. Reboot when done\n"
+#    sleep 10
     echo "i2c-dev" >> /etc/modules
     touch /etc/modprobe.d/raspi-blacklist.conf
     apt -y install git
     
     printf "\nclone Pi-Ager software from github repository\n"
-    git clone --depth=1 -b entwicklung https://github.com/Tronje-the-Falconer/Pi-Ager
+    git clone --depth=1 -b entwicklung https://github.com/Tronje-the-Falconer/Pi-Ager /home/pi/Pi-Ager/
     
-    cd Pi-Ager
+    cd /home/pi/Pi-Ager
     cp /home/pi/Pi-Ager/boot/firmware/setup.txt /boot/firmware/
     
     printf "\ninstall php\n"
@@ -206,8 +210,8 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     printf "\nInstall nodogsplash captive portal\n"
     apt -y install iptables
     apt -y install libmicrohttpd-dev
-    git clone https://github.com/nodogsplash/nodogsplash.git
-    cd ./nodogsplash
+    git clone https://github.com/nodogsplash/nodogsplash.git /home/pi/nodogsplash/
+    cd /home/pi/nodogsplash
     make
     make install
     cp -rf /home/pi/Pi-Ager/etc/nodogsplash/* /etc/nodogsplash/
@@ -241,9 +245,11 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     cp /home/pi/Pi-Ager/usr/share/man/man1/fswebcam.1.gz /usr/share/man/man1/
     
     printf "\nclosing_actions\n"
-    
-#    systemctl disable this_script
-#    rm -f /usr/share/this_script.progress /etc/systemd/system/this_script.service
+
+#    systemctl disable this_script   
+#    rm -f /usr/share/this_script.progress
+
+    rm -f /etc/systemd/system/this_script.service
     rm -rf /home/pi/Pi-Ager
     
     echo "Edit now /boot/firmware/setup.txt file !"
@@ -255,7 +261,7 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     reboot
     ;;
     
- 5)
+ 4)
     printf "\nDid you edit /boot/firmware/setup.txt file ?\n"
     printf "After editing and saving setup.txt start script pi-ager-finalize-build.sh with sudo to activate system configuration from data in setup.txt \n"
  
