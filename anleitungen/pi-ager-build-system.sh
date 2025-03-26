@@ -157,14 +157,26 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     printf "\ninstall wiringPi and RPi.GPIO\n"
     cd /tmp
     apt -y purge wiringpi
-    wget  https://github.com/phylax2020/WiringPi/releases/download/3.16/wiringpi_3.16_armhf.deb
-    apt -y install ./wiringpi_3.16_armhf.deb
+    if [ `getconf LONG_BIT` = "64" ]
+    then
+        wget  https://github.com/phylax2020/WiringPi/releases/download/3.16/wiringpi_3.16_arm64.deb
+        apt -y install ./wiringpi_3.16_arm64.deb    
+    else
+        wget  https://github.com/phylax2020/WiringPi/releases/download/3.16/wiringpi_3.16_armhf.deb
+        apt -y install ./wiringpi_3.16_armhf.deb
+    fi
     
     apt -y purge python3-RPi.GPIO
     pip3 uninstall --yes RPi.GPIO
-    wget https://github.com/phylax2020/RPi.GPIO/releases/download/v0.8.6/python3-rpi.gpio_0.8.6-1_armhf.deb
-    apt -y install ./python3-rpi.gpio_0.8.6-1_armhf.deb
-
+    if [ `getconf LONG_BIT` = "64" ]
+    then
+        wget https://github.com/phylax2020/RPi.GPIO/releases/download/v0.8.6/python3-rpi.gpio_0.8.6-1_arm64.deb
+        apt -y install ./python3-rpi.gpio_0.8.6-1_arm64.deb    
+    else
+        wget https://github.com/phylax2020/RPi.GPIO/releases/download/v0.8.6/python3-rpi.gpio_0.8.6-1_armhf.deb
+        apt -y install ./python3-rpi.gpio_0.8.6-1_armhf.deb
+    fi
+    
     printf "\ninstall additional modules\n"
     apt -y install lsof
     pip3 install nextion
