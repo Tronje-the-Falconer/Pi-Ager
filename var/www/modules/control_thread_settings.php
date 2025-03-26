@@ -147,6 +147,15 @@
                 write_start_in_database($status_scale1_tara_key);
                 $logstring = _('performing tara on scale') . ' 1';
                 logger('INFO', $logstring);
+                $done = NULL;
+                while ($done != 'done') {
+                    $status_scale_tara = intval(get_table_value($current_values_table, $status_scale1_tara_key));
+                    if ($status_scale_tara == 0){
+                        $done = 'done';
+                    }
+                    sleep(1);
+                }
+                print '<script language="javascript"> alert("' . (_("tara on scale")) . " 1 " . (_("done"))  . '");</script>';
             }        
         }
         else {
@@ -164,6 +173,15 @@
                 write_start_in_database($status_scale2_tara_key);
                 $logstring = _('performing tara on scale') . ' 2';
                 logger('INFO', $logstring);
+                $done = NULL;
+                while ($done != 'done') {
+                    $status_scale_tara = intval(get_table_value($current_values_table, $status_scale2_tara_key));
+                    if ($status_scale_tara == 0){
+                        $done = 'done';
+                    }
+                    sleep(1);
+                }
+                print '<script language="javascript"> alert("' . (_("tara on scale")) . " 2 " . (_("done"))  . '");</script>';
             }        
         }
         else {

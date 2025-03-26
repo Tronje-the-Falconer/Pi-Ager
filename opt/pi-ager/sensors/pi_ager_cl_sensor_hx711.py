@@ -12,7 +12,7 @@ import time
 import RPi.GPIO as GPIO
 
 class cl_sensor_hx711:
-    def __init__(self, dout=10, pd_sck=9, gain=128, bitsToRead=24):
+    def __init__(self, dout=10, pd_sck=9, gain=128):
         self.PD_SCK = pd_sck
         self.DOUT = dout
 
@@ -28,9 +28,10 @@ class cl_sensor_hx711:
         self.GAIN = 0
         self.OFFSET = 0
         self.lastVal = 0
-        self.bitsToRead = bitsToRead
-        self.twosComplementThreshold = 1 << (bitsToRead-1)
-        self.twosComplementOffset = -(1 << (bitsToRead))
+        self.bitsToRead = 24
+        self.twosComplementThreshold = 1 << (self.bitsToRead-1)
+        self.twosComplementOffset = -(1 << (self.bitsToRead))
+        self.powerUp()
         self.setGain(gain)
 #        self.read()
 
@@ -38,15 +39,16 @@ class cl_sensor_hx711:
         return GPIO.input(self.DOUT) == 0
 
     def setGain(self, gain):
-        if gain is 128:
+        if gain == 128:
             self.GAIN = 1
-        elif gain is 64:
+        elif gain == 64:
             self.GAIN = 3
-        elif gain is 32:
+        elif gain == 32:
             self.GAIN = 2
 
         GPIO.output(self.PD_SCK, False)
-        self.read()
+#        print("Set gain, perform, dummy read")
+        self.read()     # dummy read
         time.sleep(0.4)  # 400ms settling time after gain change
         
     def waitForReady(self):
@@ -64,7 +66,7 @@ class cl_sensor_hx711:
         read_repeat_counter_max = 10
         while (read_repeat_counter <= read_repeat_counter_max):
             read_repeat_counter += 1
-            self.reset()                      # start with reset
+#            self.reset()                      # reset not working due to latest HX711 datasheet
             ready_counter = 0
             ready_counter_max = 20
             while (not self.isReady() and ready_counter <= ready_counter_max):
@@ -84,15 +86,15 @@ class cl_sensor_hx711:
                 end_counter = time.perf_counter()
                 if ((end_counter - start_counter) >= 0.00010):  # choose 100 us, zero not precise enough, check if the hx 711 did not turn off...
                     timing_error = True
-#                    print("Timing error read data")
+#                    print(f"Timing error read data. Timeout {(end_counter - start_counter):f}")
 #                    self.reset()
-                    break
+#                    break
                 unsignedValue = unsignedValue << 1
                 unsignedValue = unsignedValue | bitValue
 
-            if timing_error == True:    # retry
+#            if timing_error == True:    # retry
 #                print("Timing error read data")
-                continue
+#                continue
                 
         # set channel and gain factor for next reading
             for i in range(self.GAIN):
@@ -101,17 +103,18 @@ class cl_sensor_hx711:
                 GPIO.output(self.PD_SCK, True)
                 GPIO.output(self.PD_SCK, False)
                 end_counter = time.perf_counter()
-                if end_counter - start_counter >= 0.00006:  # check if the hx 711 did not turn off...
+                if end_counter - start_counter >= 0.00010:  # 0.00006 check if the hx 711 did not turn off...
                     timing_error = True
-#                    print("timing error set gain")
+#                    print(f"Timing error set gain. Timeout {(end_counter - start_counter):f}")
                     break
             
-            if timing_error == True:    # retry
-                continue
+#            if timing_error == True:    # retry
+#                continue
                
 #            time.sleep(0.1)    # next conversion ends after 100ms at a conversion rate of 10 Hz               
             value = self.correctTwosComplement(unsignedValue)
             if (value == -1):  # some time 0xffffff is read from hx711, reading failed
+#                print("Read data returns -1")
                 continue
 
             return value
@@ -138,26 +141,30 @@ class cl_sensor_hx711:
     # I used 100 microseconds, just in case.
     # I've found it is good practice to reset the hx711 if it wasn't used
     # for more than a few seconds.
+    #
+    # Due to latest HX711 Datasheet powerDown followed by powerUp does NOT reset 
+    # HX711, the gain settings are not changed!
+    #
     def powerDown(self):
         GPIO.output(self.PD_SCK, False)
         GPIO.output(self.PD_SCK, True)
-        time.sleep(0.0001)
+        time.sleep(0.0001)      # 0.0001
 
     def powerUp(self):
         GPIO.output(self.PD_SCK, False)
-        time.sleep(0.4)    # 0.0001s to0 short, after reset 400 ms settling time needed
+        time.sleep(0.4)    # 0.0001s too short, after reset 400 ms settling time needed
 
     def reset(self):
         self.powerDown()
         self.powerUp()
 
 class cl_scale(cl_sensor_hx711):
-    def __init__(self, samples=20, dout=10, pd_sck=9, gain=128, bitsToRead=24):
-        super().__init__(dout, pd_sck, gain, bitsToRead)
+    def __init__(self, samples=20, dout=10, pd_sck=9, gain=128):
+        super().__init__(dout, pd_sck, gain)
         self.gain = gain
         self.dout = dout
         self.pd_sck = pd_sck
-        self.bitsToRead = bitsToRead
+        self.bitsToRead = 24
         self.samples = samples
         self.history = []
 
@@ -215,3 +222,24 @@ class cl_scale(cl_sensor_hx711):
 
     def setSamples(self, samples):
         self.samples = samples
+
+if __name__ == "__main__":
+    hx = cl_scale(dout=10, pd_sck=9)
+    hx.setReferenceUnit(208)
+    hx.setOffset(535)
+
+    while True:
+        try:
+            hx.setGain(128)
+            weight = hx.getRawWeight()
+            print(f"Weight: {weight:.2f} grams")
+            time.sleep(1)
+            hx.setGain(64)
+            weight = hx.getRawWeight()
+            print(f"Weight: {weight:.2f} grams")
+            time.sleep(1)            
+        except KeyboardInterrupt:
+            print("Exiting...")
+            hx.powerDown()
+            GPIO.cleanup()
+            break
