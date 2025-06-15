@@ -157,7 +157,7 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     printf "\ninstall wiringPi and RPi.GPIO\n"
     cd /tmp
     apt -y purge wiringpi
-    if [ `getconf LONG_BIT` = "64" ]
+    if [ `dpkg --print-architecture` = "arm64" ]
     then
         wget  https://github.com/WiringPi/WiringPi/releases/download/3.16/wiringpi_3.16_arm64.deb
         apt -y install ./wiringpi_3.16_arm64.deb    
@@ -168,7 +168,7 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     
     apt -y purge python3-RPi.GPIO
     pip3 uninstall --yes RPi.GPIO
-    if [ `getconf LONG_BIT` = "64" ]
+    if [ `dpkg --print-architecture` = "arm64" ]
     then
         wget https://github.com/phylax2020/RPi.GPIO/releases/download/v0.8.7/python3-rpi.gpio_0.8.7-1_arm64.deb
         apt -y install ./python3-rpi.gpio_0.8.7-1_arm64.deb    
