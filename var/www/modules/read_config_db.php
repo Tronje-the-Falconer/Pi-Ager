@@ -19,6 +19,7 @@
     $dehumidifier_modus = intval(get_table_value($config_settings_table,$dehumidifier_modus_key));
     $dewpoint_check = intval(get_table_value($config_settings_table, $dewpoint_check_key));
     $sensorsecondtype = intval(get_table_value($config_settings_table, $sensorsecondtype_key));
+    $delay_dehumidify = intval(get_table_value($config_settings_table, $dehumidifier_turn_off_delay_key));
     
     if ($dehumidifier_modus == 1) {
         $checked_dehumidify_1 = 'checked="checked"';

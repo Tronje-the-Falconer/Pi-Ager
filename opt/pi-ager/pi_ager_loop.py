@@ -912,7 +912,63 @@ def generate_humidifier_block(mode):
             return False                                    # unblock, timer not running
 
 #-------------------------------------------------------------------------------------------        
+
+
+#--------------------------------------------------------------------------------------------
+# Keeps dehumidifier active additional delay time when dehumidifier control decides to turn off
+# dehumidifier, when dehumidifier status was turned on before. This works only with dry-aging
+# mode = 4 (Auto mode with humidify and dehumidify).
+# 
+# return True, when delay timer is running, else return False
+#--------------------------------------------------------------------------------------------
+dehumidifier_delay_starttime = 0
+last_dehumidifier_state = False
+dehumidifier_delay_state_machine = 0
+
+def generate_dehumidifier_delay(mode):
+    global dehumidifier_delay_starttime
+    global last_dehumidifier_state
+    global status_dehumidifier
+    global dehumidifier_delay_state_machine
+    
+    # track and check if delay changed by user
+    dehumidifier_turn_off_delay = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.dehumidifier_turn_off_delay_key))        # minutes
+    # cl_fact_logger.get_instance().info('turn off delay : ' + str( dehumidifier_turn_off_delay ))
+    
+    if (mode != 4):     # dehumidifier disabled, track dehumidifier state and do nothing else
+        last_dehumidifier_state = status_dehumidifier
+        dehumidifier_delay_state_machine = 0
+        delay_changed = False
+        return False
+    
+    match dehumidifier_delay_state_machine:
+        case 0:     # wait for dehumidifier intents to turn off
+            # cl_fact_logger.get_instance().info('dehumidifier state 0. status_dehumidifier: ' + str(status_dehumidifier) + ' last: ' + str(last_dehumidifier_state))
+            if (status_dehumidifier == False and last_dehumidifier_state == True):   # dehumidifier state changed, dehumidifier turned off, start now timer
+                if (dehumidifier_turn_off_delay == 0):
+                    last_dehumidifier_state = status_dehumidifier
+                    return False     # do not keep active dehumidifier
+                else:    
+                    dehumidifier_delay_starttime = pi_ager_database.get_current_time()     
+                    last_dehumidifier_state = status_dehumidifier
+                    dehumidifier_delay_state_machine = 1
+                    return True
+            else:
+                last_dehumidifier_state = status_dehumidifier
+                return False
         
+        case 1:   # here continue waiting for delay counts down 
+            # cl_fact_logger.get_instance().info('dehumidifier state 1')        
+            last_dehumidifier_state = status_dehumidifier    
+            if (pi_ager_database.get_current_time() >= dehumidifier_delay_starttime + dehumidifier_turn_off_delay * 60):    # convert minutes to seconds, wait for delay reached
+                dehumidifier_delay_state_machine = 0
+                return False
+            else:
+                return True                                 # delay timer is still active
+
+
+#-------------------------------------------------------------------------------------------        
+                
 def generate_humidifier_failed_event(event_msg):
     # generate event
     try:
@@ -1882,7 +1938,7 @@ def doMainLoop():
                             if dehumidifier_modus == 2:                         # Entfeuchter zur Unterstützung
                                 status_dehumidifier = True                      # Entfeuchter unterstützend ein
                             else:
-                                status_dehumidifier = False                     # Entfeuchter aus
+                                status_dehumidifier = False                     # Nur Abluft, Entfeuchter aus
                                 
                         else:                                                   # rein über entfeuchtung
                             status_exhaust_fan = False                          # Abluft aus
@@ -1895,7 +1951,7 @@ def doMainLoop():
                            status_exhaust_fan = False         # Feuchtereduzierung Abluft-Ventilator aus
                            status_dehumidifier = False        # Entfeuchter aus
                         else:
-                           status_dehumidifier = False        # Entfeuchter aus
+                           status_dehumidifier = False        # Nur Abluft, Entfeuchter aus
                         # cl_fact_logger.get_instance().info("Mode 4: sensor_humidity = " +  f'{sensor_humidity:.1f}' + ' %' + ". humidity_low = " + f'{humidity_low:.1f}')
                     # cl_fact_logger.get_instance().info("Mode 4: status_dehumidifier = " + str(status_dehumidifier) + ". status_humidifier = " + str(status_humidifier))
                 
@@ -1903,7 +1959,12 @@ def doMainLoop():
                 if (status_humidifier == True and block_humidifier == True):    # block humudifier 
                     status_humidifier = False
                     # cl_fact_logger.get_instance().debug("Humidifier blocked by cooler active and during additional delay time.")
-                    
+                
+                keep_dehumidifier_active = generate_dehumidifier_delay(modus )  # check if dehumidifier should delay turning off
+                # cl_fact_logger.get_instance().info("keep_dehumidifier_active = " + str(keep_dehumidifier_active))
+                if (keep_dehumidifier_active == True):
+                    status_dehumidifier = True
+                
                 # Schalten des Entfeuchters und Befeuchters
                 if (status_humidifier == False and status_dehumidifier == False) :
                     gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)

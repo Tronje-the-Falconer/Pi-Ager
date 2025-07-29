@@ -174,7 +174,7 @@ $tolerance_monitoring_humidifier_key = 'tolerance_monitoring_humidifier';
 $check_monitoring_humidifier_key = 'check_monitoring_humidifier';
 $cooling_hysteresis_offset_key = 'cooling_hysteresis_offset';
 $heating_hysteresis_offset_key = 'heating_hysteresis_offset';
-
+$dehumidifier_turn_off_delay_key = 'dehumidifier_turn_off_delay';
 
 #-----------------------------table fields;
 $key_field = 'key';

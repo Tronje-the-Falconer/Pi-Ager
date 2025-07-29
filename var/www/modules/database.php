@@ -863,7 +863,7 @@
                             $uv_period, $switch_on_uv_hour, $switch_on_uv_minute, $light_modus, $light_duration, 
                             $light_period, $switch_on_light_hour, $switch_on_light_minute, $dehumidifier_modus, 
                             $failure_temperature_delta, $failure_humidity_delta, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
-                            $shutdown_on_batlow, $delay_cooler, $dewpoint_check, $uv_check, $delay_monitoring_humidifier, $tolerance_monitoring_humidifier, $check_monitoring_humidifier)
+                            $shutdown_on_batlow, $delay_cooler, $dewpoint_check, $uv_check, $delay_monitoring_humidifier, $tolerance_monitoring_humidifier, $check_monitoring_humidifier, $delay_dehumidify)
         {
         global $value_field, $last_change_field, $key_field, $config_settings_table, $cooling_hysteresis_key, $cooling_hysteresis_offset_key, $heating_hysteresis_offset_key,  
                 $humidifier_hysteresis_key, $dehumidifier_hysteresis_key, $humidifier_hysteresis_offset_key, $dehumidifier_hysteresis_offset_key,
@@ -871,7 +871,7 @@
                 $uv_duration_key, $uv_period_key, $switch_on_uv_hour_key, $switch_on_uv_minute_key, $light_modus_key, $light_duration_key, $light_period_key,
                 $switch_on_light_hour_key, $switch_on_light_minute_key, $dehumidifier_modus_key, $failure_temperature_delta_key, $failure_humidity_delta_key, 
                 $internal_temperature_low_limit_key, $internal_temperature_high_limit_key, $internal_temperature_hysteresis_key, $shutdown_on_batlow_key, $delay_cooler_key,
-                $dewpoint_check_key, $uv_check_key, $delay_monitoring_humidifier_key, $tolerance_monitoring_humidifier_key, $check_monitoring_humidifier_key;               
+                $dewpoint_check_key, $uv_check_key, $delay_monitoring_humidifier_key, $tolerance_monitoring_humidifier_key, $check_monitoring_humidifier_key, $dehumidifier_turn_off_delay_key;               
         
         open_connection();
 
@@ -885,6 +885,7 @@
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($dehumidifier_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $dehumidifier_hysteresis_offset_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($saturation_point) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $saturation_point_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($delay_humidify) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $delay_humidify_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($delay_dehumidify) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $dehumidifier_turn_off_delay_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($uv_modus) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $uv_modus_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval(($uv_duration * 60)) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $uv_duration_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval(($uv_period *60)) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $uv_period_key . '"');

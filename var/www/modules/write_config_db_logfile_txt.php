@@ -16,6 +16,7 @@
         $dehumidifier_hysteresis_offset_config = $_POST['dehumidifier_hysteresis_offset_config'];
         $saturation_point_config = $_POST['saturation_point_config'];
         $delay_humidify_config = $_POST['delay_humidify_config'];
+        $delay_dehumidify_config = $_POST['delay_dehumidify_config'];
         $uv_period_config = $_POST['uv_period_config'];
         $uv_duration_config = $_POST['uv_duration_config'];
         $switch_on_uv_hour_config = $_POST['switch_on_uv_hour_config'];
@@ -74,7 +75,8 @@
         if ($ConfigInputIsValid == TRUE) {
             if ($cooling_hysteresis_config != $heating_hysteresis_config &&                         // hysteresis must differ.
                 $saturation_point_config >= 80 && $saturation_point_config <= 100 &&                // check saturation_point
-                $delay_humidify_config <= 60 && $delay_humidify_config >= 0 &&                                                            // Prüfung Verzögerung Feuchte
+                $delay_humidify_config <= 60 && $delay_humidify_config >= 0 &&                 // Prüfung Verzögerung Feuchte
+                $delay_dehumidify_config <= 60 && $delay_dehumidify_config >= 0 &&             // Prüfung Verzögerung Entfeuchten
                 $uv_period_config < 1441 && $uv_period_config > -1 && // (($uv_period_config+$uv_duration_config) > 0) &&                 // Prüfung Intervall UV
                 $uv_duration_config < 1441 && $uv_duration_config > -1  &&                              // Prüfung Dauer UV
                 $switch_on_uv_hour_config >= 0 && $switch_on_uv_hour_config < 24 && $switch_on_uv_minute_config >= 0 && $switch_on_uv_minute_config < 60 && // UV Uhrzeit
@@ -153,7 +155,7 @@
                             $uv_period_config, $switch_on_uv_hour_config, $switch_on_uv_minute_config, $light_modus_config, $light_duration_config,
                             $light_period_config, $switch_on_light_hour_config, $switch_on_light_minute_config, $dehumidifier_modus_config,
                             $failure_temperature_delta_config, $failure_humidity_delta_config, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
-                            $shutdown_on_batlow_config, $delay_cooler_config, $dewpoint_check_config, $uv_check_config, $delay_monitoring_humidifier, $tolerance_monitoring_humidifier, $check_monitoring_humidifier);
+                            $shutdown_on_batlow_config, $delay_cooler_config, $dewpoint_check_config, $uv_check_config, $delay_monitoring_humidifier, $tolerance_monitoring_humidifier, $check_monitoring_humidifier, $delay_dehumidify_config);
 
                 logger('DEBUG', 'configvalues saved');
                 
@@ -289,6 +291,7 @@
                     // $logstring = $logstring . " \n " . _('switch-on dehumidifier') . ": " . $switch_on_dehumidity . "% &phi;";
                     // $logstring = $logstring . " \n " . _('switch-off dehumidifier') . ": " . $switch_off_dehumidity . "% &phi;";
                     $logstring = $logstring . " \n " . _('delay humidifier') . ": " . $delay_humidify_config . " " . _('minutes');
+                    $logstring = $logstring . " \n " . _('delay dehumidifier') . ": " . $delay_dehumidify_config . " " . _('minutes');
                     $logstring = $logstring . " \n " . _('abs. humidity check aktive') . ": " . (($dewpoint_check_config == 0) ? _('off') : _('on'));
                 }
                 $logstring = $logstring . " \n " . _('circulation air OFF duration') . ": " . $circulation_air_period . " " . _('minutes');

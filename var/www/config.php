@@ -95,7 +95,7 @@
                                             <!----------------------------------------------------------------------------------------Luftfeuchte-->
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <tr>
-                                                    <td rowspan="7" class="td_png_icon"><h3><?php echo _('humidity control'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td rowspan="8" class="td_png_icon"><h3><?php echo _('humidity control'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td class="text_left_padding"><?php echo _('humidifier hysteresis').':'; ?></td>
                                                     <td><input name="humidifier_hysteresis_config" type="number" style="width: 30%;" min="2" max="30" required value=<?php echo $humidifier_hysteresis; ?>>&nbsp;%<span style="font-size: xx-small"> (2 <?php echo _('to'); ?> 30)</span></td>
                                                 </tr>
@@ -118,6 +118,10 @@
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('humidifier delay'); ?>:</td>
                                                     <td><input name="delay_humidify_config" type="number" style="width: 30%; background-color: #E8E8E8;" min="0" max="60" readonly required value=<?php echo $delay_humidify; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 60)</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text_left_padding"><?php echo _('dehumidifier delay'); ?>:</td>
+                                                    <td><input name="delay_dehumidify_config" type="number" style="width: 30%;" min="0" max="60" required value=<?php echo $delay_dehumidify; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 60)</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2">
