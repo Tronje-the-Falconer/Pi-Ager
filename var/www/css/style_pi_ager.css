@@ -87,6 +87,23 @@ body {
     border-collapse: collapse;
 }
 
+/* Tabelle show_dehumidifier_parms */
+.show_dehumidifier_parms {
+    width: 100%;
+    border: 1px solid #89939E;
+    text-align: center;
+    font-size: 10px;
+    color:  #555555;
+    padding: 0px;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.show_dehumidifier_parms_cell {
+    border: 1px solid #89939E;
+    border-collapse: collapse;
+}
+
 /* Tabelle show_temperature_control_params */
 .show_temperature_control_parms {
     width: 100%;

@@ -43,7 +43,8 @@
         $tolerance_monitoring_humidifier = $_POST['tolerance_monitoring_humidifier_config'];
         $check_monitoring_humidifier = $_POST['check_monitoring_humidifier_config'];
         $max_row_humidity_params = $_POST['max_row_humidity_params'];
-        $max_row_offsets_params = $_POST['max_row_offsets_params'];
+        $max_row_dehumidity_params = $_POST['max_row_dehumidity_params'];
+        $max_row_offsets_params = $_POST['max_row_offsets_params'];   
         
         $ConfigInputIsValid = TRUE;
         foreach ($_POST as $key => $value) {  // Prüfen, ob nur Zahlen eingegeben wurden
@@ -89,7 +90,7 @@
                 $internal_temperature_hysteresis >= 1 && $internal_temperature_hysteresis <= 10 && // Temperatur hysteresis für Event Generierung
                 $delay_cooler_config >= 0 && $delay_cooler_config <= 120 ) { // cooler delay if cooler turned off and should turned on again
 
-                # save config settings               
+                # save config settings    humidifier parameter            
                 $index_row = 0;
                 $row_id = 1;
                 $humidifier_params = array(array());
@@ -119,7 +120,39 @@
                 $res = eval_humidifier_delay_offset( $humidifier_params, $setp_temp );
                 $delay_humidify_config = intval($res[0]);
                 $humidifier_hysteresis_offset_config = round($res[1], 1);
+
+                # save config settings    dehumidifier parameter            
+                $index_row = 0;
+                $row_id = 1;
+                $dehumidifier_params = array(array());
                 
+                while ($index_row < $max_row_dehumidity_params) {
+                    $sql = '';
+                    $edit_setpoint_temp = $_POST['edit_setpoint_temp_dh_' . $index_row];
+                    $edit_delay_dehumidifier = $_POST['edit_delay_dehumidifier_' . $index_row];
+                    $edit_offset_dehumidifier = $_POST['edit_offset_dehumidifier_' . $index_row];
+                    
+                    $dehumidifier_params[$index_row]['id'] = $row_id;
+                    $dehumidifier_params[$index_row]['setpoint_temp'] = $edit_setpoint_temp;
+                    $dehumidifier_params[$index_row]['delay_dehumidifier'] = $edit_delay_dehumidifier;
+                    $dehumidifier_params[$index_row]['offset_dehumidifier'] = $edit_offset_dehumidifier;
+                    
+                    $sql = 'UPDATE ' . $dehumidifier_params_table . ' SET "' . $setpoint_temp_field . '" = ' . $edit_setpoint_temp . ', "' . $delay_dehumidifier_field . '" = ' . $edit_delay_dehumidifier . ', "' . $offset_dehumidifier_field . '" = ' . $edit_offset_dehumidifier . ' WHERE "' . $id_field . '" =' . $row_id .  ';';
+                //    echo $sql . '<br>';
+                    open_connection();
+                    execute_query($sql);
+                    close_database();
+            
+                    $row_id++;
+                    $index_row++;
+                }
+                
+//                $setp_temp = floatval(get_table_value($config_settings_table, $setpoint_temperature_key));
+                $res = eval_dehumidifier_delay_offset( $dehumidifier_params, $setp_temp );
+                $delay_dehumidify_config = intval($res[0]);
+                $dehumidifier_hysteresis_offset_config = round($res[1], 1);
+
+               
                 $index_row = 0;
                 $row_id = 1;
                 $offset_params = array(array());

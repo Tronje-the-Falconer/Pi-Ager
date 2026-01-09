@@ -59,12 +59,20 @@
                     write_settings($modus_setting ,$setpoint_temperature_setting, $setpoint_humidity_setting, $circulation_air_period_setting,
                                     $circulation_air_duration_setting, $exhaust_air_period_setting, $exhaust_air_duration_setting);
                     
-                    # evaluate humidifier offset and delay from humidifier parameter as a function of setpoint_temperature                         
+                    # evaluate humidifier offset and delay from humidifier parameter table as a function of setpoint_temperature                         
                     $humidifier_params = get_table_dataset($humidifier_params_table);
                     $res = eval_humidifier_delay_offset( $humidifier_params, $setpoint_temperature_setting );
                     $delay_humidify = intval($res[0]);
                     $humidifier_hysteresis_offset = round($res[1], 1);
                     write_humidifier_delay_offset($delay_humidify, $humidifier_hysteresis_offset); 
+                    
+                    # evaluate dehumidifier offset and delay from dehumidifier parameter table as a function of setpoint_temperature                         
+                    $dehumidifier_params = get_table_dataset($dehumidifier_params_table);
+                    $res = eval_dehumidifier_delay_offset( $dehumidifier_params, $setpoint_temperature_setting );
+                    $delay_dehumidify = intval($res[0]);
+                    $dehumidifier_hysteresis_offset = round($res[1], 1);
+                    write_dehumidifier_delay_offset($delay_dehumidify, $dehumidifier_hysteresis_offset); 
+              
                     
                     # evaluate cooling and heating offset parameter as a function of setpoint_temperature                         
                     $temperature_control_params = get_table_dataset($temperature_control_params_table);

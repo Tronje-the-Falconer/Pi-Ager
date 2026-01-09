@@ -95,7 +95,7 @@
                                             <!----------------------------------------------------------------------------------------Luftfeuchte-->
                                             <table style="width: 100%;table-layout: fixed;">
                                                 <tr>
-                                                    <td rowspan="8" class="td_png_icon"><h3><?php echo _('humidity control'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
+                                                    <td rowspan="9" class="td_png_icon"><h3><?php echo _('humidity control'); ?></h3><img src="images/icons/humidification_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_humidify_config_blockFunction()"><?php echo _('help'); ?></button></td>
                                                     <td class="text_left_padding"><?php echo _('humidifier hysteresis').':'; ?></td>
                                                     <td><input name="humidifier_hysteresis_config" type="number" style="width: 30%;" min="2" max="30" required value=<?php echo $humidifier_hysteresis; ?>>&nbsp;%<span style="font-size: xx-small"> (2 <?php echo _('to'); ?> 30)</span></td>
                                                 </tr>
@@ -109,7 +109,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('dehumidifier hysteresis offset').':'; ?></td>
-                                                    <td><input name="dehumidifier_hysteresis_offset_config" type="number" style="width: 30%;" min="-20.0" max="20.0" step="0.1" required value=<?php echo $dehumidifier_hysteresis_offset; ?>>&nbsp;%<span style="font-size: xx-small"> (-20 <?php echo _('to'); ?> 20)</span></td>
+                                                    <td><input name="dehumidifier_hysteresis_offset_config" type="number" style="width: 30%; background-color: #E8E8E8;" min="-20.0" max="20.0" step="0.1" readonly required value=<?php echo $dehumidifier_hysteresis_offset; ?>>&nbsp;%<span style="font-size: xx-small"> (-20 <?php echo _('to'); ?> 20)</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('saturation point').':'; ?></td>
@@ -121,7 +121,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="text_left_padding"><?php echo _('dehumidifier delay'); ?>:</td>
-                                                    <td><input name="delay_dehumidify_config" type="number" style="width: 30%;" min="0" max="60" required value=<?php echo $delay_dehumidify; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 60)</span></td>
+                                                    <td><input name="delay_dehumidify_config" type="number" style="width: 30%; background-color: #E8E8E8;" min="0" max="60" readonly required value=<?php echo $delay_dehumidify; ?>>&nbsp;<?php echo _('minutes'); ?><span style="font-size: xx-small"> (0 <?php echo _('to'); ?> 60)</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td colspan="2">
@@ -163,6 +163,47 @@
                                                         </table>
                                                     </td>
                                                 </tr>
+                                                
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <table id="show_dehumidifier_params" class="show_dehumidifier_parms">
+                                                            <tr style="background-color: #F0F5FB; border-bottom: 1px solid #000033">
+                                                                <th class="show_dehumidifier_parms_cell"><div class="tooltip"><?php echo _('setpoint temperature') . ' [°C]'; ?><span class="tooltiptext"><?php echo _('setpoint temperature in °C'); ?></span></div></th>
+                                                                <th class="show_dehumidifier_parms_cell"><div class="tooltip"><?php echo _('dehumidifier delay') . ' [Min]'; ?><span class="tooltiptext"><?php echo _('dehumidifier delay in minutes'); ?></span></div></th>
+                                                                <th class="show_dehumidifier_parms_cell"><div class="tooltip"><?php echo _('dehumidifier hysteresis offset') . ' [%]'; ?><span class="tooltiptext"><?php echo _('dehumidifier hysteresis offset in %'); ?></span></div></th>
+                                                            </tr>
+                                                            <?php
+                                                                // read dehumidifier_parms and build table
+                                                                $index_row_dehumidity_params = 0;
+                                                                $dehumidifier_parms_rows = get_table_dataset($dehumidifier_params_table);
+                                                                try {
+                                                                    $number_rows = count($dehumidifier_parms_rows);
+                                                                    while ($index_row_dehumidity_params < $number_rows) {
+                                                                        $dataset = $dehumidifier_parms_rows[$index_row_dehumidity_params];
+                                                                        if (isset($dataset[$setpoint_temp_field])){
+                                                                            $edit_setpoint_temp_dh = $dataset[$setpoint_temp_field];
+                                                                        } else {$edit_setpoint_temp_dh = '';}
+                                                                        if (isset($dataset[$delay_dehumidifier_field])){
+                                                                            $edit_delay_dehumidifier = $dataset[$delay_dehumidifier_field];
+                                                                        } else {$edit_delay_dehumidifier = '';}
+                                                                        if (isset($dataset[$offset_dehumidifier_field])){
+                                                                            $edit_offset_dehumidifier = $dataset[$offset_dehumidifier_field];
+                                                                        } else {$edit_offset_dehumidifier = '';}
+
+                                                                        echo '<tr>';
+                                                                        echo '<td class="show_dehumidifier_parms_cell"><input name="edit_setpoint_temp_dh_' . $index_row_dehumidity_params . '" maxlength="4" min="-11" max="70" type = "number" value=' . $edit_setpoint_temp_dh . '></td>';
+                                                                        echo '<td class="show_dehumidifier_parms_cell"><input name="edit_delay_dehumidifier_' . $index_row_dehumidity_params . '" maxlength="4" min="0" max="60" type = "number" value=' . $edit_delay_dehumidifier . '></td>';
+                                                                        echo '<td class="show_dehumidifier_parms_cell"><input name="edit_offset_dehumidifier_' . $index_row_dehumidity_params . '" maxlength="4" min="-20" max="20" type = "number" value=' . $edit_offset_dehumidifier . '></td>';
+                                                                        echo '</tr>';
+                                                                        $index_row_dehumidity_params++;
+                                                                    } 
+                                                                }
+                                                                catch (Exception $e) {
+                                                                }                                                       
+                                                            ?>
+                                                        </table>
+                                                    </td>
+                                                </tr>                                                
                                             </table>
            
                                             <script>
@@ -181,7 +222,8 @@
                                             
                                             <input type="hidden" name="max_row_humidity_params" type="text" value="<?php echo $index_row_humidity_params ?>">
                                             <input type="hidden" name="max_row_offsets_params" type="text" value="<?php echo $index_row_temperature_control_params ?>">  
-                                            
+                                            <input type="hidden" name="max_row_dehumidity_params" type="text" value="<?php echo $index_row_dehumidity_params ?>">
+                         
                                             <hr>
                                             <!----------------------------------------------------------------------------------------dehumidify-->
                                             <?php

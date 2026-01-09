@@ -95,6 +95,32 @@ function eval_humidifier_delay_offset( $humidity_parms, $setp_temp ) {
     return [$delay, $offset];
 }
 
+# find delay and offset for dehumidifier control by linear interpolation
+function eval_dehumidifier_delay_offset( $dehumidity_parms, $setp_temp ) {
+    $i = -1;
+    $count = count($dehumidity_parms);
+    foreach( $dehumidity_parms as $parms ) {
+        if ($setp_temp < $parms['setpoint_temp']) {
+            break;
+        }
+        $i++;
+    }
+    if ($i == -1) {
+       $i = 0; 
+    }
+    if ($i > ($count - 2)) {
+        $i = $count - 2;
+    }
+    $index0 = $i;
+    $index1 = $i + 1; 
+    
+    $d = ($setp_temp - $dehumidity_parms[$index0]['setpoint_temp']) / ($dehumidity_parms[$index1]['setpoint_temp'] - $dehumidity_parms[$index0]['setpoint_temp']);  // setpoint temperature
+    $delay = $dehumidity_parms[$index0]['delay_dehumidifier'] + $d * ($dehumidity_parms[$index1]['delay_dehumidifier'] - $dehumidity_parms[$index0]['delay_dehumidifier']);        // delay
+    $offset = $dehumidity_parms[$index0]['offset_dehumidifier'] + $d * ($dehumidity_parms[$index1]['offset_dehumidifier'] - $dehumidity_parms[$index0]['offset_dehumidifier']);       // offset
+    return [$delay, $offset];
+}
+
+
 
 # find cooler_hysteresis_offset and heater_hysteresis offset for temperature control by linear interpolation
 function eval_cooler_heater_offsets( $offset_parms, $setp_temp ) {
