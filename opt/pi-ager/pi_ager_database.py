@@ -49,8 +49,8 @@ def open_database():
     http://charlesleifer.com/blog/going-fast-with-sqlite-and-python/
     """
     
-    #Enable shared chache
-    sqlite3.enable_shared_cache(True)
+    #Enable shared chache, removed from python v3.12
+#    sqlite3.enable_shared_cache(True)
     # Open database in autocommit mode by setting isolation_level to None.
     connection = sqlite3.connect(pi_ager_paths.sqlite3_file, isolation_level=None, timeout = 10)
     # Set journal mode to WAL (Write-Ahead Log)
