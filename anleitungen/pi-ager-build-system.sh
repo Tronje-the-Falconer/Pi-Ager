@@ -153,28 +153,45 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     apt -y install fswebcam
     apt -y install python3-cryptography
     apt -y install uuid-runtime
+    apt -y install nfs-common
     
     printf "\ninstall wiringPi and RPi.GPIO\n"
     cd /tmp
     apt -y purge wiringpi
     if [ `dpkg --print-architecture` = "arm64" ]
     then
-        wget  https://github.com/WiringPi/WiringPi/releases/download/3.16/wiringpi_3.16_arm64.deb
-        apt -y install ./wiringpi_3.16_arm64.deb    
+        wget  https://github.com/WiringPi/WiringPi/releases/download/3.18/wiringpi_3.18_arm64.deb
+        apt -y install ./wiringpi_3.18_arm64.deb    
     else
-        wget  https://github.com/WiringPi/WiringPi/releases/download/3.16/wiringpi_3.16_armhf.deb
-        apt -y install ./wiringpi_3.16_armhf.deb
+        wget  https://github.com/WiringPi/WiringPi/releases/download/3.18/wiringpi_3.18_armhf.deb
+        apt -y install ./wiringpi_3.18_armhf.deb
     fi
     
     apt -y purge python3-RPi.GPIO
     pip3 uninstall --yes RPi.GPIO
-    if [ `dpkg --print-architecture` = "arm64" ]
-    then
-        wget https://github.com/phylax2020/RPi.GPIO/releases/download/v0.8.7/python3-rpi.gpio_0.8.7-1_arm64.deb
-        apt -y install ./python3-rpi.gpio_0.8.7-1_arm64.deb    
+    
+    # Codename auslesen
+    CODENAME=$(grep VERSION_CODENAME /etc/os-release | cut -d'=' -f2)
+    if [ "$CODENAME" = "trixie" ]; then
+        if [ `dpkg --print-architecture` = "arm64" ]
+        then
+            wget https://github.com/phylax2020/RPi.GPIO/releases/download/v0.8.8/python3-rpi.gpio_0.8.8-1_arm64.deb
+            apt -y install ./python3-rpi.gpio_0.8.8-1_arm64.deb    
+        else
+            wget https://github.com/phylax2020/RPi.GPIO/releases/download/v0.8.8/python3-rpi.gpio_0.8.8-1_armhf.deb
+            apt -y install ./python3-rpi.gpio_0.8.8-1_armhf.deb
+        fi
+    elif [ "$CODENAME" = "bookworm" ]; then
+        if [ `dpkg --print-architecture` = "arm64" ]
+        then
+            wget https://github.com/phylax2020/RPi.GPIO/releases/download/v0.8.7/python3-rpi.gpio_0.8.7-1_arm64.deb
+            apt -y install ./python3-rpi.gpio_0.8.7-1_arm64.deb    
+        else
+            wget https://github.com/phylax2020/RPi.GPIO/releases/download/v0.8.7/python3-rpi.gpio_0.8.7-1_armhf.deb
+            apt -y install ./python3-rpi.gpio_0.8.7-1_armhf.deb
+        fi    
     else
-        wget https://github.com/phylax2020/RPi.GPIO/releases/download/v0.8.7/python3-rpi.gpio_0.8.7-1_armhf.deb
-        apt -y install ./python3-rpi.gpio_0.8.7-1_armhf.deb
+        echo "Unknown version: $CODENAME"
     fi
     
     printf "\ninstall additional modules\n"
@@ -220,6 +237,7 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     nmcli con up PI_AGER_AP
     
     printf "\nInstall nodogsplash captive portal\n"
+    apt -y install libjson-c-dev
     apt -y install iptables
     apt -y install libmicrohttpd-dev
     git clone https://github.com/nodogsplash/nodogsplash.git /home/pi/nodogsplash/
