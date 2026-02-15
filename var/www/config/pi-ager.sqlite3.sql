@@ -670,7 +670,7 @@ INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (8,'meas
 INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (9,'saving_period',150.0,0);
 INSERT INTO "scale2_settings" ("id","key","value","last_change") VALUES (10,'offset',535.1,1670398945);
 INSERT INTO "system" ("id","key","value","last_change") VALUES (1,'pi_revision','902120',1767910445);
-INSERT INTO "system" ("id","key","value","last_change") VALUES (2,'pi_ager_version','4.1.0 build 080126',0);
+INSERT INTO "system" ("id","key","value","last_change") VALUES (2,'pi_ager_version','4.1.0 build 150226',0);
 INSERT INTO "temperature_control_params" ("id","setpoint_temp","cooler_offset","heater_offset") VALUES (1,2,0.5,-0.5);
 INSERT INTO "temperature_control_params" ("id","setpoint_temp","cooler_offset","heater_offset") VALUES (2,6,0.5,-0.5);
 INSERT INTO "temperature_control_params" ("id","setpoint_temp","cooler_offset","heater_offset") VALUES (3,10,0.5,-0.5);

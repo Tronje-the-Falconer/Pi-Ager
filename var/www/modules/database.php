@@ -673,7 +673,7 @@
         $fields = array_map(
             function ($field){
                 return strtolower(preg_replace("/[^A-Z0-9_]/i", '', $field));
-            }, fgetcsv($csv_handle, 0, $delimiter));
+            }, fgetcsv($csv_handle, 0, ',', '"', ''));
         
         $fieldcount = count($fields);
         if ($fieldcount == 9){
@@ -711,12 +711,12 @@
                 // $insert_sth = $connection->prepare($insert_sql);
                 
                 // $inserted_rows = 0;
-                // while (($data = fgetcsv($csv_handle, 0, $delimiter)) !== FALSE) {
+                // while (($data = fgetcsv($csv_handle, 0, ',', '"', '')) !== FALSE) {
                     // $insert_sth->execute($data);
                     // $inserted_rows++;
                 // }
                 
-                while (($data = fgetcsv($csv_handle, 0, $delimiter)) !== FALSE) {
+                while (($data = fgetcsv($csv_handle, 0, ',', '"', '')) !== FALSE) {
                     $num = count($data);
                     
                     $valuestring = '';
@@ -920,15 +920,6 @@
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($humidifier_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $humidifier_hysteresis_offset_key . '"');
         close_database();
     }
-
-    function write_dehumidifier_delay_offset($delay_dehumidify, $dehumidifier_hysteresis_offset) {
-        global $config_settings_table, $value_field, $last_change_field, $key_field, $dehumidifier_hysteresis_offset_key, $dehumidifier_turn_off_delay_key;
-        
-        open_connection();
-        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($delay_dehumidify) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $dehumidifier_turn_off_delay_key . '"');
-        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($dehumidifier_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $dehumidifier_hysteresis_offset_key . '"');
-        close_database();
-    } 
     
     function write_temperature_control_offsets($cooling_hysteresis_offset, $heating_hysteresis_offset) {
         global $config_settings_table, $value_field, $last_change_field, $key_field, $cooling_hysteresis_offset_key, $heating_hysteresis_offset_key;
