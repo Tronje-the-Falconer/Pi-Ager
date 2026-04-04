@@ -7,22 +7,6 @@ set -x
 if [ ! -f  /usr/share/this_script.progress ] ; then
     echo 1 >/usr/share/this_script.progress
 
-    cat > /etc/systemd/system/this_script.service <<EOF
-[Unit]
-Description=this script service
-# After=NetworkManager.service
-After=multi-user.target
-
-[Service]
-ExecStart=/home/pi/pi-ager-build-system.sh
-StandardOutput=journal+console
-StandardError=journal+console
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-#    systemctl enable this_script
     echo 2 >/usr/share/this_script.progress
 fi
 
@@ -39,7 +23,19 @@ case $progress in
     sleep 10
     apt update
     apt -y full-upgrade
+
+    printf "\n Setup WiFi AP \n"
+    ./setup-wifi-ap.sh
+    
+    printf "\n install rc.local service \n"
+    cp /home/pi/Pi-Ager/etc/rc.local /etc/rc.local
+    chmod 755 /etc/rc.local
+    cp /home/pi/Pi-Ager/etc/systemd/system/rc-local.service /etc/systemd/system/
+    systemctl daemon-reload
+    systemctl enable rc-local.service
+    
     printf "\nreboot, after reboot start this script with sudo again to continue system setup\n"
+    sleep 3
     sync
     reboot
     ;;
@@ -47,8 +43,11 @@ case $progress in
     echo 4 >/usr/share/this_script.progress
     printf "\nSetup system for Pi-Ager, wait 10s to start. Reboot when done\n"
     sleep 10
+    
+    printf "\n SSH allow root login\n"
     sed -i 's/^#PermitRootLogin.*/PermitRootLogin yes/' /etc/ssh/sshd_config 
     service ssh restart
+    
     printf "\nsetup serial port and locale\n"
     echo "root:raspberry" | chpasswd 
 #    raspi-config nonint do_serial_hw 0
@@ -203,11 +202,11 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     apt -y install python3-schedule
     apt -y install python3-paho-mqtt
     
-    cp -rf /home/pi/Pi-Ager/etc/rc.local /etc/
-    chmod +x /etc/rc.local
+#    cp -rf /home/pi/Pi-Ager/etc/rc.local /etc/
+#    chmod +x /etc/rc.local
     
-    printf "\ndisable start of pi-ager service in rc.local for next reboot\n"
-    sed -i 's/systemctl/#systemctl/' /etc/rc.local
+#    printf "\ndisable start of pi-ager service in rc.local for next reboot\n"
+#    sed -i 's/systemctl/#systemctl/' /etc/rc.local
     
     cp /home/pi/Pi-Ager/usr/local/bin/* /usr/local/bin/
     chmod +x /usr/local/bin/*
@@ -216,25 +215,21 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     cd /home/pi
     cp /home/pi/Pi-Ager/etc/sudoers.d/99_pi-ager /etc/sudoers.d/
     chmod 440 /etc/sudoers.d/99_pi-ager
+
+    STA_CON=$(nmcli -g GENERAL.CONNECTION dev show wlan0)
+
+    if [ -z "$STA_CON" ] || [ "$STA_CON" = "--" ]; then
+        printf "\nERROR: No active connection on wlan0"
+        exit 1
+    fi
+    printf "\n Found STA connection: ${STA_CON} \n"
     
-    printf "\ncreate virtual interface wlan0\n"
-    iw dev wlan0 interface add wlan1 type __ap
-    sleep 1
+    nmcli con mod "$STA_CON" connection.autoconnect yes connection.autoconnect-retries 0 connection.auth-retries 5
+    nmcli con mod "$STA_CON" 802-11-wireless.wake-on-wlan default
     
-    printf "\nconfigure access point with networkmanager\n"
-    nmcli con delete PI_AGER_AP
-    nmcli con add type wifi ifname wlan1 mode ap con-name PI_AGER_AP ssid pi-ager
-    nmcli con modify PI_AGER_AP 802-11-wireless.band bg
-    nmcli con modify PI_AGER_AP 802-11-wireless.channel 6
-    nmcli con modify PI_AGER_AP 802-11-wireless-security.key-mgmt wpa-psk
- # nmcli con modify PI_AGER_AP 802-11-wireless-security.proto rsn
- # nmcli con modify PI_AGER_AP 802-11-wireless-security.group ccmp
- # nmcli con modify PI_AGER_AP 802-11-wireless-security.pairwise ccmp
-    nmcli con modify PI_AGER_AP 802-11-wireless-security.psk 1234567890
-    nmcli con modify PI_AGER_AP ipv4.addr 10.0.0.1/24
-    nmcli con modify PI_AGER_AP ipv4.method shared
-    nmcli con modify PI_AGER_AP ipv6.method disabled
-    nmcli con up PI_AGER_AP
+    printf "\nSync AP-Channel with channel of preconfigured connection\n"
+    cp /home/pi/Pi-Ager/etc/NetworkManager/dispatcher.d/98-sync-ap-channel /etc/NetworkManager/dispatcher.d/
+    chmod 755 /etc/NetworkManager/dispatcher.d/98-sync-ap-channel
     
     printf "\nInstall nodogsplash captive portal\n"
     apt -y install libjson-c-dev
@@ -248,6 +243,9 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     chmod +x /usr/bin/nodogsplash
     chmod +x /usr/bin/ndsctl
     
+    printf "\nCopy nodogsplash.service to /etc/systems/system/ \n"
+    cp /home/pi/Pi-Ager/etc/systemd/system/nodogsplash.service /etc/systemd/system/
+ 
     printf "\nInstall bluetooth fo Xiaomi temp/hum sensor\n"
     apt -y install libglib2.0-dev
     pip3 install bluepy requests
@@ -255,7 +253,7 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     
     printf "\nPatch btle.py to stop intermittend errors\n"
     sed -i '/self._helper.wait()/a \
-            time.sleep(0.1)' /usr/local/lib/python3.11/dist-packages/bluepy/btle.py
+            time.sleep(0.1)' /usr/local/lib/python3.13/dist-packages/bluepy/btle.py
 
     printf "\nchange some owner and rw rights\n"
     
@@ -265,8 +263,12 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     chown -R www-data:www-data /var/www/config/
     chmod 777 /var/www/config/
     
-    printf "\ncopy pi-ager service files\n"
-    cp /home/pi/Pi-Ager/lib/systemd/system/* /lib/systemd/system/
+    printf "\ncopy pi-ager service files to /etc/systemd/system/ \n"
+#    cp /home/pi/Pi-Ager/lib/systemd/system/* /etc/systemd/system/
+    cp /home/pi/Pi-Ager/etc/systemd/system/pi-ager_main.service /etc/systemd/system/
+    cp /home/pi/Pi-Ager/etc/systemd/system/setup_pi-ager.service /etc/systemd/system/
+    
+    printf "\nreload .service \n"
     systemctl daemon-reload
     
     printf "\ncopy fswebcam\n"
@@ -276,17 +278,12 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     
     printf "\nclosing_actions\n"
 
-#    systemctl disable this_script   
-#    rm -f /usr/share/this_script.progress
-
-    rm -f /etc/systemd/system/this_script.service
     rm -rf /home/pi/Pi-Ager
     
     echo "Edit now /boot/firmware/setup.txt file !"
     echo "After editing and saving setup.txt start script pi-ager-finalize-build.sh with sudo to activate system configuration from data in setup.txt "
     echo "rebooting now"
-    
-#   systemctl enable setup_pi-ager.service 
+
     sync
     reboot
     ;;
