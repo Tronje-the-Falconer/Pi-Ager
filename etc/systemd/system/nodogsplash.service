@@ -1,0 +1,15 @@
+[Unit]
+Description=NoDogSplash Captive Portal
+Documentation=https://nodogsplash.readthedocs.io
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/nodogsplash
+ExecStop=/usr/bin/nodogsplash -k
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target

@@ -84,69 +84,21 @@ then
     fi
 
     # wlan Netz und Key eintragen
-    # remove old profiles but not PI_AGER_ap.nmconnection
-    # rfkill unblock wifi
-    mv /etc/NetworkManager/system-connections/PI_AGER_AP.nmconnection /etc/NetworkManager/system-connections/PI_AGER_AP.nmconnection.org
-    rm /etc/NetworkManager/system-connections/*.nmconnection
-    mv /etc/NetworkManager/system-connections/PI_AGER_AP.nmconnection.org /etc/NetworkManager/system-connections/PI_AGER_AP.nmconnection
     # systemctl restart NetworkManager
     if [ -n "$wlanssid" ]         #wenn nicht ""
     then
         uppercase_country="${country^^}"
         if [  ${#wlankey} -ge 8 ] && [ ${#uppercase_country} -eq 2 ];  # 8 Zeichen oder mehr und exakt 2 Zeichen für country
         then
-            # echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" > /etc/wpa_supplicant/wpa_supplicant.conf
-            # echo "update_config=1" >> /etc/wpa_supplicant/wpa_supplicant.conf
-            # echo "country=$country" >> /etc/wpa_supplicant/wpa_supplicant.conf
-            # wpa_passphrase "$wlanssid" "$wlankey" >> /etc/wpa_supplicant/wpa_supplicant.conf
-            # echo -e "\nnetwork={\n\tssid=\x22${wlanssid}\x22\n\tpsk=\x22${wlankey}\x22\n\tkey_mgmt=WPA-PSK\n}" >> /etc/wpa_supplicant/wpa_supplicant.conf
             echo "Uppercase Country = $uppercase_country"
             raspi-config nonint do_wifi_country "$uppercase_country"
             echo "raspi-config do_wifi_country setup finished"
-            # raspi-config nonint do_wifi_ssid_passphrase "$wlanssid" "$wlankey"
-            # nmcli device wifi connect "$wlanssid" password "$wlankey" ifname wlan0
-            nmFilename='/etc/NetworkManager/system-connections/pi-ager-wlan.nmconnection'
-            cat <<EOF > "$nmFilename"
-[connection]
-id=pi-ager-wlan
-uuid=
-type=wifi
-interface-name=wlan0
-timestamp=
-autoconnect=true
-
-[wifi]
-mode=infrastructure
-ssid=
-
-[wifi-security]
-auth-alg=open
-key-mgmt=wpa-psk
-psk=
-
-[ipv4]
-method=auto
-
-[ipv6]
-addr-gen-mode=default
-method=auto
-
-[proxy]
-EOF
-            chmod -R 600 "$nmFilename"
-            chown -R root:root "$nmFilename"
-            uuid=$(uuidgen)
-            timestamp=$(date +%s)
-            modify_nmconnection "$nmFilename" "$wlanssid" "$wlankey" "$uuid" "$timestamp"
-            if [ $? -eq 0 ]
-            then
-                echo "WLAN SSID und Passphrase gesetzt"
-            else
-                echo "Fehler $? : WLAN SSID und Passphrase konnten nicht gesetzt werden"
-            fi
-            # restart network manager to activate
-            echo "restart NetworkManager"
-            systemctl restart NetworkManager 
+            STA_CON=$(nmcli -g GENERAL.CONNECTION dev show wlan0)
+            nmcli connection modify "$STA_CON" wifi-sec.psk "$wlankey" 802-11-wireless.ssid "$wlanssid"
+            echo "WLAN SSID und Passphrase gesetzt"
+            # activate connection
+            # echo "activate preconfigured connection with new SSID and password"
+            # nmcli connection down "preconfigured" && nmcli connection up "preconfigured"
         fi
     fi
 
@@ -220,11 +172,11 @@ fi
 
 echo "disable setup_pi-ager.service now"
 systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
-# expand root file system. Not here! Is done by initramfs automatically
-#  raspi-config nonint do_expand_rootfs && reboot
 
-# now its time to enable pi-ager_main.service to start at next boot. Reboot is initiated by rc.local after expanding file system on root partition
-# start service now moved to rc.local
-# systemctl enable pi-ager_main.service 
+# enable and start pi-ager_main.service
+systemctl enable --now pi-ager_main.service 
+
+# enable and start nodogsplash.service
+# systemctl enable --now nodogsplash.service
 
 exit 0

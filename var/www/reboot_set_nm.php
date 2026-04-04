@@ -7,14 +7,20 @@
                                 # wait until connection is established, NetworkManager needs reboot when WLAN0 settings were setup
                                     $reboot_datetime = exec('date +"%Y-%m-%d %T"');
                                     echo '<p id=\'info-message\' style=\'color: #ff0000; font-size: 20px;\'><b>' . _("NetworkManager WiFi Setup") . '</b><br>' . $reboot_datetime . '<br>' . '</p><br>';
-                                    $htmlcmd = $_GET["htmlcmd"];
-                                    $cmd = base64_decode($htmlcmd);
-                                    # echo 'cmd = ' . $cmd . '<br>';
+                                    $htmlpwd = $_GET["pwd"];
+                                    $pwd = base64_decode($htmlpwd);
+                                    $htmlssid = $_GET["ssid"];
+                                    $ssid = base64_decode($htmlssid);
+                                    # echo 'pwd = ' . $pwd . '<br>';
+                                    # echo 'ssid = ' . $ssid . '<br>';
                                     $exec_data = [];
                                     $exec_status = 0;
                                     # $pi_ager_ip_address = '10.0.0.1';
-                                    exec($cmd, $exec_data, $exec_status );
-                                    # echo 'return status from nmcli : ' . $exec_status . '<br>';
+                                    #exec($cmd, $exec_data, $exec_status );
+                                    $cmd = "sudo /var/sudowebscript.sh nm_set_pw_ssid " . "'" . $pwd . "'" . " '" . $ssid . "'" ;
+                                    # echo 'cmd = ' . $cmd . '<br>';
+                                    exec($cmd, $exec_data, $exec_status);
+                                    # echo 'return status from sudowebscript : ' . $exec_status . '<br>';
                                     if ($exec_status != 0) {
                                         echo '<script> alert("'. _('Network Manager returned an error. Possible cause: incorrect WiFi parameters') . '");' . 'window.location.href = "admin.php";' . '</script>';
                                     }

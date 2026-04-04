@@ -3,26 +3,21 @@
 # web script allowing user www-data to run commands with root privilegs
 # shell_exec('/var/sudowebscript.sh PARAMETER snapshot-filename')
 
-# GPIO's aus config.json auslesen
-gpio_cooling_compressor=4
-gpio_heater=3
-gpio_humidifier=18
-gpio_circulating_air=24
-gpio_exhausting_air=23
-gpio_uv_light=25
-gpio_light=8
-gpio_dehumidifier=7
-gpio_voltage=26
-gpio_battery=11
-gpio_digital_switch=22
+# set -x
+# trap read debug
 
+LOGFILE="/var/log/sudowebscript.log"
+
+log() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') $1" | tee -a "$LOGFILE"
+    logger -t sudowebscript "$1"
+}
 
 # IP-Adresse
 MYIP=$(hostname -I | cut -d' ' -f1)
 
 # Zeitstempel
 DATE=$(date +"%Y-%m-%d_%H%M%S")
-
 case "$1" in
     startmain) #Starten von main.py
         #python3 /opt/pi-ager/main.py > /dev/null 2>/dev/null &
@@ -89,6 +84,21 @@ case "$1" in
         systemctl start systemd-timesyncd.service
         systemctl daemon-reload
     ;;
+    nm_set_pw_ssid)  # set pwd and ssid for wlan0 for existing connection
+        PI_AGER_WLAN0_NAME="pi-ager-wlan0"
+        log " Evaluate ST_CON "
+        STA_CON=$(nmcli -g GENERAL.CONNECTION dev show wlan0)
+        log " connection on wlan0 : $STA_CON "
+        if [ -z "$STA_CON" ] || [ "$STA_CON" = "--" ]; then
+            log " wlan0 connection not found. Create new connection with name $PI_AGER_WLAN0_NAME"
+            nmcli dev wifi connect "$3" password "$2" ifname wlan0 name "$PI_AGER_WLAN0_NAME"
+            nmcli con mod "$PI_AGER_WLAN0_NAME" connection.autoconnect yes connection.autoconnect-retries 0 connection.auth-retries 5
+            nmcli con mod "$PI_AGER_WLAN0_NAME" 802-11-wireless.wake-on-wlan default
+        else
+            log " modify existing connection ${STA_CON} with new pwd: $2 and new ssid: $3"
+            nmcli connection modify "$STA_CON" wifi-sec.psk "$2" 802-11-wireless.ssid "$3"
+        fi
+    ;;    
     *) echo "ERROR: invalid parameter: $1 (for $0)"; exit 1 #Fehlerbehandlung
     ;;
 esac

@@ -16,7 +16,7 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 # start pi-ager
-systemctl start pi-ager_main.service
+# systemctl start pi-ager_main.service
 
 # disable power management for wlan0 to increase WLAN reliability
 rfkill unblock wifi
@@ -31,6 +31,6 @@ sleep 1
 iw wlan1 set power_save off
 
 # enable captive portal
-nodogsplash
+# nodogsplash
 
 exit 0

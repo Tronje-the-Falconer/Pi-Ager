@@ -1,0 +1,14 @@
+[Unit]
+Description=rc.local compatibility — run script at boot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/etc/rc.local
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
