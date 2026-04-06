@@ -27,6 +27,11 @@ case $progress in
     printf "\n Setup WiFi AP \n"
     ./setup-wifi-ap.sh
     
+    printf "\n install git "
+    apt -y install git
+    
+    printf "\nclone Pi-Ager software from github repository\n"
+    git clone --depth=1 -b entwicklung https://github.com/Tronje-the-Falconer/Pi-Ager /home/pi/Pi-Ager/    
     printf "\n install rc.local service \n"
     cp /home/pi/Pi-Ager/etc/rc.local /etc/rc.local
     chmod 755 /etc/rc.local
@@ -95,10 +100,6 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
 #    sleep 10
     echo "i2c-dev" >> /etc/modules
     touch /etc/modprobe.d/raspi-blacklist.conf
-    apt -y install git
-    
-    printf "\nclone Pi-Ager software from github repository\n"
-    git clone --depth=1 -b entwicklung https://github.com/Tronje-the-Falconer/Pi-Ager /home/pi/Pi-Ager/
     
     cd /home/pi/Pi-Ager
     cp /home/pi/Pi-Ager/boot/firmware/setup.txt /boot/firmware/
