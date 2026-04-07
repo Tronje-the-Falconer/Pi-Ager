@@ -268,9 +268,13 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
 #    cp /home/pi/Pi-Ager/lib/systemd/system/* /etc/systemd/system/
     cp /home/pi/Pi-Ager/etc/systemd/system/pi-ager_main.service /etc/systemd/system/
     cp /home/pi/Pi-Ager/etc/systemd/system/setup_pi-ager.service /etc/systemd/system/
+    cp /home/pi/Pi-Ager/etc/systemd/system/wifi-watchdog.service /etc/systemd/system/
     
     printf "\nreload .service \n"
     systemctl daemon-reload
+    
+    printf "\n enable wifi-watchdog.service"
+    systemctl enable wifi-watchdog.service
     
     printf "\ncopy fswebcam\n"
     cp /home/pi/Pi-Ager/usr/bin/fswebcam /usr/bin/
