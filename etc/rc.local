@@ -1,34 +1,49 @@
-#!/bin/sh -e
+#!/bin/bash
 #
-# rc.local
-#
-# This script is executed at the end of each multiuser runlevel.
-# value on error.
-#
-# In order to enable or disable this script just change the execution
-# bits.
-#
-# By default this script does nothing.
+# rc.local — runs before NetworkManager takes over
+
 
 # Print the IP address
 _IP=$(hostname -I) || true
 if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
-# start pi-ager
-# systemctl start pi-ager_main.service
 
-# disable power management for wlan0 to increase WLAN reliability
 rfkill unblock wifi
 sleep 1
-# iwconfig wlan0 power off
-iw wlan0 set power_save off
 
-# enable AP-STA mode
+# Step 1: Create virtual AP interface
 iw dev wlan0 interface add wlan1 type __ap
-sleep 1
 
-iw wlan1 set power_save off
+# Step 2: Verify wlan1 was created
+if ! ip link show wlan1 &>/dev/null; then
+    echo "rc.local ERROR: wlan1 not created" | systemd-cat -t rc.local
+    exit 1
+fi
+
+# Step 3: Set locally-administered MAC on wlan1
+WLAN0_MAC=$(cat /sys/class/net/wlan0/address)
+FIRST_BYTE=$(echo "$WLAN0_MAC" | cut -d: -f1)
+NEW_FIRST=$(printf "%02x" $(( (0x${FIRST_BYTE} | 0x02) ^ 0x08 )))
+AP_MAC="${NEW_FIRST}:$(echo "$WLAN0_MAC" | cut -d: -f2-)"
+ip link set wlan1 address "$AP_MAC"
+
+# Step 4: Bring wlan1 up
+# ip link set wlan1 up
+
+# Step 5: Set band and channel on wlan1 before NM starts
+# Use a safe non-DFS channel — NM/AP will inherit this
+iw dev wlan1 set channel 6
+
+# In NM profile — enforce on activation
+nmcli con mod "PI_AGER_AP" wifi.band bg wifi.channel 6
+
+# Step 6: Disable power save on both interfaces
+iw dev wlan0 set power_save off
+iw dev wlan1 set power_save off
+
+echo "rc.local: wlan1 ready on ch6, power save off" | systemd-cat -t rc.local
+
 
 # enable captive portal
 # nodogsplash

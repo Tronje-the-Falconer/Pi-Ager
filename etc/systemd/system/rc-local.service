@@ -1,7 +1,7 @@
 [Unit]
-Description=rc.local compatibility — run script at boot
-After=network-online.target
-Wants=network-online.target
+Description=rc.local — create wlan1 after NetworkManager starts
+After=NetworkManager.service
+#After=local-fs.target
 
 [Service]
 Type=oneshot
