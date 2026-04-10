@@ -228,9 +228,9 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     nmcli con mod "$STA_CON" connection.autoconnect yes connection.autoconnect-retries 0 connection.auth-retries 5
     nmcli con mod "$STA_CON" 802-11-wireless.wake-on-wlan default
     
-    printf "\nSync AP-Channel with channel of preconfigured connection\n"
-    cp /home/pi/Pi-Ager/etc/NetworkManager/dispatcher.d/98-sync-ap-channel /etc/NetworkManager/dispatcher.d/
-    chmod 755 /etc/NetworkManager/dispatcher.d/98-sync-ap-channel
+#    printf "\nSync AP-Channel with channel of preconfigured connection\n"
+#    cp /home/pi/Pi-Ager/etc/NetworkManager/dispatcher.d/98-sync-ap-channel /etc/NetworkManager/dispatcher.d/
+#    chmod 755 /etc/NetworkManager/dispatcher.d/98-sync-ap-channel
     
     printf "\nInstall nodogsplash captive portal\n"
     apt -y install libjson-c-dev
