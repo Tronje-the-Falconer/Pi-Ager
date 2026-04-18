@@ -6,7 +6,7 @@
 # Print the IP address
 _IP=$(hostname -I) || true
 if [ "$_IP" ]; then
-  printf "My IP address is %s\n" "$_IP"
+  echo "My IP address is $_IP" | systemd-cat -t rc.local
 fi
 
 rfkill unblock wifi
@@ -34,9 +34,11 @@ ip link set wlan1 address "$AP_MAC"
 # Step 5: Set band and channel on wlan1 before NM starts
 # Use a safe non-DFS channel — NM/AP will inherit this
 iw dev wlan1 set channel 6
-
+sleep 1
 # In NM profile — enforce on activation
 nmcli con mod "PI_AGER_AP" wifi.band bg wifi.channel 6
+
+sleep 1
 
 # Step 6: Disable power save on both interfaces
 iw dev wlan0 set power_save off
@@ -44,8 +46,12 @@ iw dev wlan1 set power_save off
 
 echo "rc.local: wlan1 ready on ch6, power save off" | systemd-cat -t rc.local
 
+if [ -f "/usr/bin/nodogsplash" ]; then
+    # enable captive portal
+    nodogsplash
+else
+    echo "nodogsplash existiert nicht." | systemd-cat -t rc.local
+fi
 
-# enable captive portal
-# nodogsplash
 
 exit 0

@@ -177,6 +177,6 @@ systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivier
 systemctl enable --now pi-ager_main.service 
 
 # enable and start nodogsplash.service
-# systemctl enable --now nodogsplash.service
+# systemctl enable nodogsplash.service
 
 exit 0

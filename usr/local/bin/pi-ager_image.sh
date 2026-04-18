@@ -269,33 +269,21 @@ mount -t vfat -o shortname=winnt "$loopback_boot" "$mountdir/boot"
 # rewrite /boot/setup.txt, remove /boot/setup.log
 ######################################################
 
-# echo "boot dir = $mountdir/boot "
-# ls -al $mountdir/boot
-rm $mountdir/boot/setup.txt
-rm $mountdir/boot/setup.log
+rm ${mountdir}/boot/setup.txt
+rm ${mountdir}/boot/setup.log
 cd /tmp
 wget -O setup.txt -nv https://raw.githubusercontent.com/Tronje-the-Falconer/Pi-Ager/entwicklung/boot/firmware/setup.txt
-mv setup.txt $mountdir/boot/setup.txt
-echo "setup.txt copied to $mountdir/boot/"
-
-# auto-expand is performed in pi-ager_backup.sh : 
-# cmdfile=$mountdir/boot/cmdline.txt
-# sed -i '1 s/$/ quiet init=\/usr\/lib\/raspberrypi-sys-mods\/firstboot/' "$cmdfile"
-# echo "cmdline.txt modified, added init=/usr/lib/raspberrypi-sys-mods/firstboot"
-
-#read -p "Press enter to continue after mounting $loopback_boot $mountdir/boot"
-#echo "Copy $mountdir/boot.bak/ to $mountdir/boot/"
-#rsync -a --info=progress2 "$mountdir/boot.bak/" "$mountdir/boot/"
-#read -p "Press enter to continue after copy boot.bak to boot"
+mv setup.txt ${mountdir}/boot/setup.txt
+echo "setup.txt copied to ${mountdir}/boot/"
 
 for i in dev proc sys dev/pts
 do
-    mount -o bind /$i $mountdir/$i
+    mount -o bind /$i ${mountdir}/$i
 done
 #read -p "Press enter to continue after mount dev sys ..."
 
 regex='(\/.*\/)(.*)'
-[[ $mountdir =~ $regex ]]
+[[ ${mountdir} =~ $regex ]]
 
 echo "rematch1 ${BASH_REMATCH[1]}"
 echo "rematch2 ${BASH_REMATCH[2]}"
@@ -542,7 +530,7 @@ if [ "$my_image" = false ]; then
 	# Delete personal files (ssh keys ...)
 	######################################################
 	# systems
-	rm -f /etc/wpa_supplicant/wpa_supplicant.conf
+	# rm -f /etc/wpa_supplicant/wpa_supplicant.conf
 	# root user
 	rm -f /root/.ssh/authorized_keys
 	rm -f /root/.ssh/known_hosts
@@ -606,7 +594,7 @@ sync
 
 for i in dev/pts proc sys dev
 do
-    umount $mountdir/$i
+    umount ${mountdir}/$i
 done
 
 #read -p "Press enter to continue after umount dev sys ..."
@@ -618,7 +606,7 @@ umount ${mountdir}
 if [ $? -ne 0 ]
 then
   	echo "Error unmounting $mountdir. Maybe $mountdir is open. Image is then corrupt."
-  	lsof $mountdir
+  	lsof ${mountdir}
   	exit 1
 fi
 
@@ -627,11 +615,11 @@ echo "Detaching loop devices from ${img}"
 losetup -d ${loopback_boot}
 losetup -d ${loopback}
 
-rm -rf $mountdir/boot
-rm -rf $mountdir
+rm -rf ${mountdir}/boot
+rm -rf ${mountdir}
 if [[ ! -f "$img" ]]
     then
-        echo "cannot shrink $img"
+        echo "cannot create new $img"
     else
         # Shrink image
         #  pishrink.sh -r $img 

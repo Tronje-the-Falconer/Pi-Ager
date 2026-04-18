@@ -1,4 +1,12 @@
 #!/bin/bash
+# Shrinkt ein Pi-OS Image. Wird im pi-ager_backup Script aufgerufen
+# um ein mit 'dd' erstelltes Image zu verkleinern.
+
+LOGFILE="/var/www/logs/pi-ager_backup.log"
+
+log() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') $*" | tee -a "$LOGFILE"
+}
 
 mkloop()
 {
@@ -21,9 +29,10 @@ fsckerr()
 
 errexit()
 {
-  echo ""
-  echo -e "\e[91m$1\e[39m"
-  echo ""
+  log ""
+#  log -e "\e[91m$1\e[39m"
+  log "$1"
+  log ""
   exit 1
 }
 
@@ -38,9 +47,9 @@ for PID in $(pidof -x -o %PPID "${PGMNAME}"); do
 done
 gdisk -l "${DEVICE}" &> /dev/null
 if [ $? -eq 127 ]; then
-  echo ""
-  echo "gdisk not installed. Installing gdisk"
-  echo ""
+  log ""
+  log "gdisk not installed. Installing gdisk"
+  log ""
   apt-get update
   apt-get install gdisk
 fi
@@ -68,7 +77,7 @@ if [ ${#answer} -eq 0 ]; then
   answer=0
 fi
 ADDMB=${answer}
-echo ""
+log ""
 INFO="$(sfdisk -d "${IMGFILE}")"
 BOOTBEG=$(sed -n "s|^${IMGFILE}1.*start=\s*\([0-9]\+\).*$|\1|p" <<< "${INFO}")
 BOOTEND=$((${BOOTBEG} + $(sed -n "s|^${IMGFILE}1.*size=\s*\([0-9]\+\).*$|\1|p" <<< "${INFO}") - 1))
@@ -77,7 +86,7 @@ PARTUUID_1="$(sed -n "s|^${IMGFILE}1.*uuid=\(\S\+\).*$|\1|p" <<< "${INFO}")"
 PARTUUID_2="$(sed -n "s|^${IMGFILE}2.*uuid=\(\S\+\).*$|\1|p" <<< "${INFO}")"
 PTUUID="$(sed -n "s|^label-id: \(\S\+\).*$|\1|p" <<< "${INFO}")"
 PTTYPE="$(sed -n "s|^label: \(\S\+\).*$|\1|p" <<< "${INFO}")"
-echo "PTTYPE : ${PTTYPE}"
+log "PTTYPE : ${PTTYPE}"
 if [[ "${PTTYPE}" != "dos" && "${PTTYPE}" != "gpt" ]]; then
   errexit "Unsupported partition table type: ${PTTYPE}"
 fi
@@ -86,14 +95,34 @@ e2fsck -f -p -v "${LOOP}p2"
 if [ $? -gt 2 ]; then
   fsckerr "before"
 fi
-echo ""
-resize2fs -f -M "${LOOP}p2"
-resize2fs -f -M "${LOOP}p2"
-resize2fs -f -M "${LOOP}p2"
-e2fsck -f -n "${LOOP}p2"
+log ""
+OUTPUT=$(resize2fs -f -M "${LOOP}p2" 2>&1)
+if [ $? -eq 0 ]; then
+    log "SUCCESS" "Resize erfolgreich: $OUTPUT"
+else
+    log "ERROR" "Resize fehlgeschlagen: $OUTPUT"
+fi
+
+OUTPUT=$(resize2fs -f -M "${LOOP}p2" 2>&1)
+if [ $? -eq 0 ]; then
+    log "SUCCESS" "Resize erfolgreich: $OUTPUT"
+else
+    log "ERROR" "Resize fehlgeschlagen: $OUTPUT"
+fi
+
+OUTPUT=$(resize2fs -f -M "${LOOP}p2" 2>&1)
+if [ $? -eq 0 ]; then
+    log "SUCCESS" "Resize erfolgreich: $OUTPUT"
+else
+    log "ERROR" "Resize fehlgeschlagen: $OUTPUT"
+fi
+
+OUTPUT=$(e2fsck -f -n "${LOOP}p2" 2>&1)
 if [ $? -ne 0 ]; then
   fsckerr "after"
 fi
+log "SUCCESS" "e2fsck erfolgreich: $OUTPUT"
+
 INFO="$(tune2fs -l "${LOOP}p2" 2>/dev/null)"
 rmloop
 NEWSIZE=$(sed -n 's|^Block count:\s*\(.*\)|\1|p' <<< "${INFO}")
@@ -128,18 +157,25 @@ y
 EOF
 fi
 if [ ${ADDMB} -ne 0 ]; then
-  echo ""
+  log "Start e2fsck"
   mkloop
-  e2fsck -f -n "${LOOP}p2"
+  OUTPUT=$(e2fsck -f -n "${LOOP}p2" 2>&1)
   if [ $? -ne 0 ]; then
     fsckerr "before"
   fi
-  echo ""
-  resize2fs -f "${LOOP}p2"
-  e2fsck -f -n "${LOOP}p2"
+  log "$OUTPUT"
+  
+  log "Start resize2fs"
+  OUTPUT=$(resize2fs -f "${LOOP}p2" 2>&1)
+  log "$OUTPUT"
+  
+  log "Start e2fsck"
+  OUTPUT=$(e2fsck -f -n "${LOOP}p2" 2>&1)
   if [ $? -ne 0 ]; then
     fsckerr "after"
   fi
+  log "$OUTPUT"
+  log "Remove loop device"
   rmloop
 fi
-echo ""
+log ""
