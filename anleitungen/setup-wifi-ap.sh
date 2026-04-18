@@ -4,10 +4,10 @@
 
 AP_CON="PI_AGER_AP"
 AP_SSID="pi-ager"
-AP_PASSWORD="12345678"
+AP_PASSWORD="1234567890"
 STA_IFACE="wlan0"
 AP_IFACE="wlan1"
-LOGFILE="/var/log/setup-ap.log"
+LOGFILE="/var/log/setup-wifi-ap.log"
 
 log() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') $1" | tee -a "$LOGFILE"
@@ -64,25 +64,9 @@ while true; do
     sleep 1; TRIES=$((TRIES+1))
 done
 
-# --- Read STA channel/band ---
-# CHANNEL=$(iw dev "$STA_IFACE" info 2>/dev/null | awk '/channel/ {print $2}')
-# FREQ=$(iw dev "$STA_IFACE" info 2>/dev/null | awk '/channel/ {print $3}' | tr -d '(')
+BAND="bg"; CHANNEL=6
+log " using default bg/6"
 
-#if [ -n "$CHANNEL" ] && [ -n "$FREQ" ]; then
-#    if [ "$FREQ" -ge 5000 ]; then
-#        BAND="a"
-#    else
-#        BAND="bg"
-#    fi
-#    if [ "$BAND" = "a" ] && [ "$CHANNEL" -ge 52 ] && [ "$CHANNEL" -le 140 ]; then
-#        log "Channel ${CHANNEL} is DFS — substituting 149"
-#        CHANNEL=149
-#    fi
-#    log "AP will use band=${BAND} channel=${CHANNEL}"
-#else
-    BAND="bg"; CHANNEL=6
-    log " using default bg/6"
-#fi
 
 # --- Delete stale profile ---
 EXISTING=$(nmcli -g connection.id con show "$AP_CON" 2>/dev/null)

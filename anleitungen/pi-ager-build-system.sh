@@ -113,10 +113,17 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     printf "\ninstall lighttpd\n"
     apt -y install lighttpd
     sed -i 's%/var/www/html%/var/www%' /etc/lighttpd/lighttpd.conf
-    sed -i '/server.modules += (/a \
-"mod_auth", \
-"mod_authn_file",' /etc/lighttpd/lighttpd.conf
-
+#    sed -i '/server.modules += (/a \
+#"mod_auth", \
+#"mod_authn_file",' /etc/lighttpd/lighttpd.conf
+tee -a /etc/lighttpd/lighttpd.conf <<EOF > /dev/null
+server.modules += (
+"mod_auth", 
+"mod_authn_file",
+"mod_dirlisting",
+"mod_staticfile",
+)
+EOF
     printf "\ncopy Pi-Ager from local folder to final destinations\n"
     cp -r /home/pi/Pi-Ager/opt/* /opt/
     cp -r /home/pi/Pi-Ager/var/* /var/
@@ -244,8 +251,8 @@ dtoverlay=spi1-1cs,cs0_pin=16 \
     chmod +x /usr/bin/nodogsplash
     chmod +x /usr/bin/ndsctl
     
-    printf "\nCopy nodogsplash.service to /etc/systems/system/ \n"
-    cp /home/pi/Pi-Ager/etc/systemd/system/nodogsplash.service /etc/systemd/system/
+#    printf "\nCopy nodogsplash.service to /etc/systems/system/ \n"
+#    cp /home/pi/Pi-Ager/etc/systemd/system/nodogsplash.service /etc/systemd/system/
  
     printf "\nInstall bluetooth fo Xiaomi temp/hum sensor\n"
     apt -y install libglib2.0-dev
