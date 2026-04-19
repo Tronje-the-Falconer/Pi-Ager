@@ -339,7 +339,7 @@ log "shrink now image, add 100MB extra space"
 /usr/local/bin/image-shrink.sh "$new_backup_name" 100
 
 log "Prepare for auto-expand after first boot"
-/usr/local/bin/image-prepare-expand.sh "$new_backup_name" 
+/usr/local/bin/image-prepare-resize.sh "$new_backup_name" 
 
 # umount NFSMOUNT
 log "unmount $NFSMOUNT"
