@@ -53,14 +53,10 @@ log "cmdline.txt vorher: ${CURRENT}"
 sed -i 's| ds=nocloud[^ ]*||g' "$CMDLINE"
 
 # 'resize' eintragen falls nicht vorhanden
-if echo "$CURRENT" | grep -qw "resize"; then
+if grep -qw "resize" "$CMDLINE"; then
     log "'resize' bereits vorhanden ✅"
 else
     sed -i 's|rootwait|rootwait resize|' "$CMDLINE"
-    # Fallback: ans Ende
-    if ! grep -qw "resize" "$CMDLINE"; then
-        sed -i 's|$| resize|' "$CMDLINE"
-    fi
     log "'resize' eingetragen ✅"
 fi
 
