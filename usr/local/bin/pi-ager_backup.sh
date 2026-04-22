@@ -263,13 +263,14 @@ fi
 if [ -z "$MAIN_STATUS" ]
 	then
       PI_AGER_MAIN_ACTIVE=0
-      log "Pi-Ager Main is already stopped"
+      log "Pi-Ager Main service is already stopped"
     else
       PI_AGER_MAIN_ACTIVE=1
-      log "Stop Pi-Ager Main service, wait 10s to continue."
-      systemctl stop pi-ager_main &
-      sleep 10
+      log "Stop Pi-Ager Main service..."
+      systemctl stop pi-ager_main.service
+#      sleep 10
 fi	
+log "Pi-Ager Main service is now stopped"
 
 # Backup mit Hilfe von dd erstellen und im angegebenen Pfad speichern
 # write buffer and clear caches
