@@ -84,7 +84,8 @@ case "$1" in
         systemctl start systemd-timesyncd.service
         systemctl daemon-reload
     ;;
-    nm_set_pw_ssid)  # add a new connection with pwd and ssid for wlan0 
+    nm_set_pw_ssid)  # set wlan country and add a new connection with pwd and ssid for wlan0 
+        COUNTRY=$4
         SSID=$3
         WLAN_KEY=$2 
         INTERFACE="wlan0"
@@ -106,12 +107,33 @@ case "$1" in
             validation_failed=1
         fi
 
+        # 3) COUNTRY: genau 2 Zeichen, ausschließlich A-Z
+        if [[ ! "$COUNTRY" =~ ^[A-Z]{2}$ ]]; then
+            log "Validierung fehlgeschlagen: COUNTRY muss genau 2 Großbuchstaben enthalten (z.B. 'DE'). Aktueller Wert: '$COUNTRY'."
+            validation_failed=1
+        fi
+
         if [[ $validation_failed -ne 0 ]]; then
             log "Abbruch wegen Konfigurationsfehlern. Bitte obige Meldungen korrigieren."
             exit 1
         fi
 
-        log "Eingabe-Validierung bestanden (SSID, WLAN_KEY)."
+        log "Eingabe-Validierung bestanden (SSID, WLAN_KEY, COUNTRY)."
+
+        # ════════════════════════════════════════════════════════════
+        # ── WLAN-Ländercode setzen ───────────────────────────────────
+        # ════════════════════════════════════════════════════════════
+
+        log "Setze WLAN-Ländercode auf '$COUNTRY' via raspi-config ..."
+
+        raspi-config nonint do_wifi_country "$COUNTRY"
+
+        if [[ $? -ne 0 ]]; then
+            log "Fehler beim Setzen des WLAN-Ländercodes. Abbruch."
+            exit 1
+        fi
+
+        log "WLAN-Ländercode '$COUNTRY' erfolgreich gesetzt."
 
         # ════════════════════════════════════════════════════════════
         # ── Altes Verbindungsprofil entfernen (falls vorhanden) ──────

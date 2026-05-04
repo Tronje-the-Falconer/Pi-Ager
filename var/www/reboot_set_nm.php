@@ -11,13 +11,14 @@
                                     $pwd = base64_decode($htmlpwd);
                                     $htmlssid = $_GET["ssid"];
                                     $ssid = base64_decode($htmlssid);
+                                    $htmlcountry = $_GET["country"];
+                                    $country = base64_decode($htmlcountry);
                                     # echo 'pwd = ' . $pwd . '<br>';
                                     # echo 'ssid = ' . $ssid . '<br>';
+                                    # echo 'country = ' . $country . '<br>';
                                     $exec_data = [];
                                     $exec_status = 0;
-                                    # $pi_ager_ip_address = '10.0.0.1';
-                                    #exec($cmd, $exec_data, $exec_status );
-                                    $cmd = "sudo /var/sudowebscript.sh nm_set_pw_ssid " . "'" . $pwd . "'" . " '" . $ssid . "'" ;
+                                    $cmd = "sudo /var/sudowebscript.sh nm_set_pw_ssid " . "'" . $pwd . "'" . " '" . $ssid . "'" . " '" . $country . "'" ;
                                     # echo 'cmd = ' . $cmd . '<br>';
                                     exec($cmd, $exec_data, $exec_status);
                                     # echo 'return status from sudowebscript : ' . $exec_status . '<br>';
