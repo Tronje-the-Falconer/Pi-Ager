@@ -143,183 +143,211 @@ elif [ $sensorbus -eq 1 ]; then
     log "1-wire is active"
 fi
 
-log "WLAN Verbindung aufbauen"
-# ════════════════════════════════════════════════════════════
-# ── Eingabe-Validierung ──────────────────────────────────────
-# ════════════════════════════════════════════════════════════
-
-validation_failed=0
-
-# 1) SSID: darf nicht leer sein
-if [[ -z "$wlanssid" ]]; then
-    log_err "Validierung fehlgeschlagen: SSID darf nicht leer sein."
-    validation_failed=1
-fi
-
-# 2) WLAN_KEY: mindestens 8 Zeichen
-if [[ ${#wlankey} -lt 8 ]]; then
-    log_err "Validierung fehlgeschlagen: WLAN_KEY muss mindestens 8 Zeichen lang sein (aktuell: ${#wlankey})."
-    validation_failed=1
-fi
-
-# 3) country: genau 2 Zeichen, ausschließlich A-Z
-if [[ ! "$country" =~ ^[A-Z]{2}$ ]]; then
-    log_err "Validierung fehlgeschlagen: country muss genau 2 Großbuchstaben enthalten (z.B. 'DE'). Aktueller Wert: '$country'."
-    validation_failed=1
-fi
-
-if [[ $validation_failed -ne 0 ]]; then
-    log_err "Abbruch wegen Konfigurationsfehlern. Bitte obige Meldungen korrigieren."
-    exit 1
-fi
-
-log_ok "Eingabe-Validierung bestanden (SSID, WLAN_KEY, Country-Code: $country)."
-
-# ════════════════════════════════════════════════════════════
-# ── Voraussetzungen prüfen ───────────────────────────────────
-# ════════════════════════════════════════════════════════════
-
-if ! command -v nmcli &>/dev/null; then
-    log_err "nmcli nicht gefunden. Bitte NetworkManager installieren."
-    exit 1
-fi
-
-if ! command -v raspi-config &>/dev/null; then
-    log_err "raspi-config nicht gefunden. Läuft das Script auf einem Raspberry Pi mit Pi-OS?"
-    exit 1
-fi
-
-if ! ip link show "$INTERFACE" &>/dev/null; then
-    log_err "Interface '$INTERFACE' nicht gefunden."
-    exit 1
-fi
-
-# ════════════════════════════════════════════════════════════
-# ── WLAN-Ländercode setzen ───────────────────────────────────
-# ════════════════════════════════════════════════════════════
-
-log "Setze WLAN-Ländercode auf '$country' via raspi-config ..."
-
-raspi-config nonint do_wifi_country "$country"
-
-if [[ $? -ne 0 ]]; then
-    log_err "Fehler beim Setzen des WLAN-Ländercodes. Abbruch."
-    exit 1
-fi
-
-log_ok "WLAN-Ländercode '$country' erfolgreich gesetzt."
-
-# ════════════════════════════════════════════════════════════
-# ── Altes Verbindungsprofil entfernen (falls vorhanden) ──────
-# ════════════════════════════════════════════════════════════
-
-if nmcli connection show "$CONNECTION_NAME" &>/dev/null; then
-    log_warn "Altes Profil '$CONNECTION_NAME' wird gelöscht..."
-    nmcli connection delete "$CONNECTION_NAME" &>/dev/null
-fi
-
-# ════════════════════════════════════════════════════════════
-# ── Verbindungsprofil anlegen ────────────────────────────────
-# ════════════════════════════════════════════════════════════
-
-log "Erstelle Verbindungsprofil '$CONNECTION_NAME' für SSID: $SSID"
-
-nmcli connection add \
-    type wifi \
-    ifname "$INTERFACE" \
-    con-name "$CONNECTION_NAME" \
-    ssid "$wlanssid" \
-    wifi-sec.key-mgmt wpa-psk \
-    wifi-sec.psk "$wlankey" \
-    connection.autoconnect yes \
-    connection.autoconnect-retries 0 \
-    connection.auth-retries 5
-
-if [[ $? -ne 0 ]]; then
-    log_err "Verbindungsprofil konnte nicht erstellt werden. Abbruch."
-    exit 1
-fi
-
-# ════════════════════════════════════════════════════════════
-# ── Verbindungsversuche ──────────────────────────────────────
-# ════════════════════════════════════════════════════════════
-
-attempt=1
-
-while [[ $attempt -le $MAX_RETRIES ]]; do
-    log "Verbindungsversuch $attempt / $MAX_RETRIES ..."
-
-    nmcli connection up "$CONNECTION_NAME" ifname "$INTERFACE"
-
-    if [[ $? -eq 0 ]]; then
-        # Zusätzliche Verifikation: IP-Adresse vorhanden?
-        sleep 2
-        IP=$(ip -4 addr show "$INTERFACE" | awk '/inet / {print $2}' | head -1)
-
-        if [[ -n "$IP" ]]; then
-            log_ok "Verbindung erfolgreich! Interface: $INTERFACE | IP: $IP"
-            break
-        else
-            log_warn "nmcli meldete Erfolg, aber keine IP erhalten – Versuch gilt als fehlgeschlagen."
-        fi
-    else
-        log_warn "Verbindungsversuch $attempt fehlgeschlagen."
+# ===========================================================
+# finish execution
+# ===========================================================
+function finish()
+{
+    # Configfile löschen
+    if [ -z "$keepconf" ]         #wenn ""
+    then
+        rm /boot/firmware/setup.txt
+        log "Config gelöscht"
     fi
 
-    if [[ $attempt -lt $MAX_RETRIES ]]; then
-        log "Warte $RETRY_DELAY Sekunden bis zum nächsten Versuch..."
-        sleep "$RETRY_DELAY"
-        (( attempt++ ))
-    else
-        # ════════════════════════════════════════════════════════════
-        # ── Alle Versuche erschöpft ──────────────────────────────────
-        # ════════════════════════════════════════════════════════════
+    log "disable setup_pi-ager.service now"
+    systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
 
-        log_err "Verbindung zu '$wlanssid' nach $MAX_RETRIES Versuchen nicht möglich. Abbruch."
+    # enable and start pi-ager_main.service
+    systemctl enable --now pi-ager_main.service 
 
-        # Profil aufräumen
-        nmcli connection delete "$CONNECTION_NAME" &>/dev/null
+    exit 0
+}
 
-        exit 1
-    fi
-done
-
-# load firmware into HMI display if hmidisplay != "none"
-case $hmidisplay in
-    "NX3224K028") log "start firmware upload for HMI display device $hmidisplay"
+# ===========================================================
+# firmware upload for HMI display
+# ===========================================================
+function hmidisplay_firmware_upload()
+{
+    # load firmware into HMI display if hmidisplay != "none"
+    case $hmidisplay in
+        "NX3224K028") log "start firmware upload for HMI display device $hmidisplay"
                   nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224K028/pi-ager.tft
                   log "firmware upload for HMI device finished";;
-    "NX3224T028") log "start firmware upload for HMI display device $hmidisplay"
+        "NX3224T028") log "start firmware upload for HMI display device $hmidisplay"
                   nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224T028/pi-ager.tft
                   log "firmware upload for HMI device finished";;
-    "NX3224F028") log "start firmware upload for HMI display device $hmidisplay"
+        "NX3224F028") log "start firmware upload for HMI display device $hmidisplay"
                   nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224F028/pi-ager.tft
                   log "firmware upload for HMI device finished";;
-    "NX3224K024") log "start firmware upload for HMI display device $hmidisplay"
+        "NX3224K024") log "start firmware upload for HMI display device $hmidisplay"
                   nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224K024/pi-ager.tft
                   log "firmware upload for HMI device finished";;
-    "NX3224T024") log "start firmware upload for HMI display device $hmidisplay"
+        "NX3224T024") log "start firmware upload for HMI display device $hmidisplay"
                   nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224T024/pi-ager.tft
                   log "firmware upload for HMI device finished";;
-    "NX3224F024") log "start firmware upload for HMI display device $hmidisplay"
+        "NX3224F024") log "start firmware upload for HMI display device $hmidisplay"
                   nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224F024/pi-ager.tft
                   log "firmware upload for HMI device finished";;
-esac
+    esac
+}
 
-# Configfile löschen
-if [ -z "$keepconf" ]         #wenn ""
-then
-    rm /boot/firmware/setup.txt
-    log "Config gelöscht"
-fi
+# ===========================================================
+#  setup WLAN connection
+# ===========================================================
+function setup_wlan_connection()
+{
+    log "WLAN Verbindung aufbauen"
+    # ════════════════════════════════════════════════════════════
+    # ── Eingabe-Validierung ──────────────────────────────────────
+    # ════════════════════════════════════════════════════════════
+    
+    validation_failed=0
+    
+    # 1) SSID: darf nicht leer sein
+    if [[ -z "$wlanssid" ]]; then
+        log_err "Validierung fehlgeschlagen: SSID darf nicht leer sein."
+        validation_failed=1
+    fi
+    
+    # 2) WLAN_KEY: mindestens 8 Zeichen
+    if [[ ${#wlankey} -lt 8 ]]; then
+        log_err "Validierung fehlgeschlagen: WLAN_KEY muss mindestens 8 Zeichen lang sein (aktuell: ${#wlankey})."
+        validation_failed=1
+    fi
+    
+    # 3) country: genau 2 Zeichen, ausschließlich A-Z
+    if [[ ! "$country" =~ ^[A-Z]{2}$ ]]; then
+        log_err "Validierung fehlgeschlagen: country muss genau 2 Großbuchstaben enthalten (z.B. 'DE'). Aktueller Wert: '$country'."
+        validation_failed=1
+    fi
+    
+    if [[ $validation_failed -ne 0 ]]; then
+        log_err "Abbruch wegen Konfigurationsfehlern. Bitte obige Meldungen korrigieren."
+        log_err "WLAN setup can also performed when connected to Pi-Ager access point."
+        log_err "Then setup WLAN connection parameter in ADMIN web page."
+        finish
+    fi
+    
+    log_ok "Eingabe-Validierung bestanden (SSID, WLAN_KEY, Country-Code: $country)."
+    
+    # ════════════════════════════════════════════════════════════
+    # ── Voraussetzungen prüfen ───────────────────────────────────
+    # ════════════════════════════════════════════════════════════
+    
+    if ! command -v nmcli &>/dev/null; then
+        log_err "nmcli nicht gefunden. Bitte NetworkManager installieren."
+        finish
+    fi
+    
+    if ! command -v raspi-config &>/dev/null; then
+        log_err "raspi-config nicht gefunden. Läuft das Script auf einem Raspberry Pi mit Pi-OS?"
+        finish
+    fi
+    
+    if ! ip link show "$INTERFACE" &>/dev/null; then
+        log_err "Interface '$INTERFACE' nicht gefunden."
+        finish
+    fi
+    
+    # ════════════════════════════════════════════════════════════
+    # ── WLAN-Ländercode setzen ───────────────────────────────────
+    # ════════════════════════════════════════════════════════════
+    
+    log "Setze WLAN-Ländercode auf '$country' via raspi-config ..."
+    
+    raspi-config nonint do_wifi_country "$country"
+    
+    if [[ $? -ne 0 ]]; then
+        log_err "Fehler beim Setzen des WLAN-Ländercodes. Abbruch."
+        finish
+    fi
+    
+    log_ok "WLAN-Ländercode '$country' erfolgreich gesetzt."
+    
+    # ════════════════════════════════════════════════════════════
+    # ── Altes Verbindungsprofil entfernen (falls vorhanden) ──────
+    # ════════════════════════════════════════════════════════════
+    
+    if nmcli connection show "$CONNECTION_NAME" &>/dev/null; then
+        log_warn "Altes Profil '$CONNECTION_NAME' wird gelöscht..."
+        nmcli connection delete "$CONNECTION_NAME" &>/dev/null
+    fi
+    
+    # ════════════════════════════════════════════════════════════
+    # ── Verbindungsprofil anlegen ────────────────────────────────
+    # ════════════════════════════════════════════════════════════
+    
+    log "Erstelle Verbindungsprofil '$CONNECTION_NAME' für SSID: $SSID"
+    
+    nmcli connection add \
+        type wifi \
+        ifname "$INTERFACE" \
+        con-name "$CONNECTION_NAME" \
+        ssid "$wlanssid" \
+        wifi-sec.key-mgmt wpa-psk \
+        wifi-sec.psk "$wlankey" \
+        connection.autoconnect yes \
+        connection.autoconnect-retries 0 \
+        connection.auth-retries 5
+    
+    if [[ $? -ne 0 ]]; then
+        log_err "Verbindungsprofil konnte nicht erstellt werden. Abbruch."
+        finish
+    fi
+    
+    # ════════════════════════════════════════════════════════════
+    # ── Verbindungsversuche ──────────────────────────────────────
+    # ════════════════════════════════════════════════════════════
+    
+    attempt=1
+    
+    while [[ $attempt -le $MAX_RETRIES ]]; do
+        log "Verbindungsversuch $attempt / $MAX_RETRIES ..."
+    
+        nmcli connection up "$CONNECTION_NAME" ifname "$INTERFACE"
+    
+        if [[ $? -eq 0 ]]; then
+            # Zusätzliche Verifikation: IP-Adresse vorhanden?
+            sleep 2
+            IP=$(ip -4 addr show "$INTERFACE" | awk '/inet / {print $2}' | head -1)
+    
+            if [[ -n "$IP" ]]; then
+                log_ok "Verbindung erfolgreich! Interface: $INTERFACE | IP: $IP"
+                break
+            else
+                log_warn "nmcli meldete Erfolg, aber keine IP erhalten – Versuch gilt als fehlgeschlagen."
+            fi
+        else
+            log_warn "Verbindungsversuch $attempt fehlgeschlagen."
+        fi
+    
+        if [[ $attempt -lt $MAX_RETRIES ]]; then
+            log "Warte $RETRY_DELAY Sekunden bis zum nächsten Versuch..."
+            sleep "$RETRY_DELAY"
+            (( attempt++ ))
+        else
+            # ════════════════════════════════════════════════════════════
+            # ── Alle Versuche erschöpft ──────────────────────────────────
+            # ════════════════════════════════════════════════════════════
+    
+            log_err "Verbindung zu '$wlanssid' nach $MAX_RETRIES Versuchen nicht möglich. Abbruch."
+    
+            # Profil aufräumen
+            nmcli connection delete "$CONNECTION_NAME" &>/dev/null
+    
+            finish
+        fi
+    done
+}
 
-log "disable setup_pi-ager.service now"
-systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
+# upload HMI display firmware
+hmidisplay_firmware_upload
 
-# enable and start pi-ager_main.service
-systemctl enable --now pi-ager_main.service 
+# setup WLAN connection
+setup_wlan_connection
 
-# enable and start nodogsplash.service
-# systemctl enable nodogsplash.service
+# enable/disable services and exit
+finish
 
 exit 0

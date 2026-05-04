@@ -84,20 +84,109 @@ case "$1" in
         systemctl start systemd-timesyncd.service
         systemctl daemon-reload
     ;;
-    nm_set_pw_ssid)  # set pwd and ssid for wlan0 for existing connection
-        PI_AGER_WLAN0_NAME="pi-ager-wlan0"
-        log " Evaluate ST_CON "
-        STA_CON=$(nmcli -g GENERAL.CONNECTION dev show wlan0)
-        log " connection on wlan0 : $STA_CON "
-        if [ -z "$STA_CON" ] || [ "$STA_CON" = "--" ]; then
-            log " wlan0 connection not found. Create new connection with name $PI_AGER_WLAN0_NAME"
-            nmcli dev wifi connect "$3" password "$2" ifname wlan0 name "$PI_AGER_WLAN0_NAME"
-            nmcli con mod "$PI_AGER_WLAN0_NAME" connection.autoconnect yes connection.autoconnect-retries 0 connection.auth-retries 5
-            nmcli con mod "$PI_AGER_WLAN0_NAME" 802-11-wireless.wake-on-wlan default
-        else
-            log " modify existing connection ${STA_CON} with new pwd: $2 and new ssid: $3"
-            nmcli connection modify "$STA_CON" wifi-sec.psk "$2" 802-11-wireless.ssid "$3"
+    nm_set_pw_ssid)  # add a new connection with pwd and ssid for wlan0 
+        SSID=$3
+        WLAN_KEY=$2 
+        INTERFACE="wlan0"
+        CONNECTION_NAME="PI_AGER_STA"
+        MAX_RETRIES=5
+        RETRY_DELAY=5               # Sekunden zwischen den Versuchen
+        # ─────────────────────────────────────────────────────────────
+        validation_failed=0
+
+        # 1) SSID: darf nicht leer sein
+        if [[ -z "$SSID" ]]; then
+            log "Validierung fehlgeschlagen: SSID darf nicht leer sein."
+            validation_failed=1
         fi
+
+        # 2) WLAN_KEY: mindestens 8 Zeichen
+        if [[ ${#WLAN_KEY} -lt 8 ]]; then
+            log "Validierung fehlgeschlagen: WLAN_KEY muss mindestens 8 Zeichen lang sein (aktuell: ${#WLAN_KEY})."
+            validation_failed=1
+        fi
+
+        if [[ $validation_failed -ne 0 ]]; then
+            log "Abbruch wegen Konfigurationsfehlern. Bitte obige Meldungen korrigieren."
+            exit 1
+        fi
+
+        log "Eingabe-Validierung bestanden (SSID, WLAN_KEY)."
+
+        # ════════════════════════════════════════════════════════════
+        # ── Altes Verbindungsprofil entfernen (falls vorhanden) ──────
+        # ════════════════════════════════════════════════════════════
+
+        if nmcli connection show "$CONNECTION_NAME" &>/dev/null; then
+            log "Altes Profil '$CONNECTION_NAME' wird gelöscht..."
+            nmcli connection delete "$CONNECTION_NAME" &>/dev/null
+        fi
+
+        # ════════════════════════════════════════════════════════════
+        # ── Verbindungsprofil anlegen ────────────────────────────────
+        # ════════════════════════════════════════════════════════════
+
+        log "Erstelle Verbindungsprofil '$CONNECTION_NAME' für SSID: $SSID"
+
+        nmcli connection add \
+            type wifi \
+            ifname "$INTERFACE" \
+            con-name "$CONNECTION_NAME" \
+            ssid "$SSID" \
+            wifi-sec.key-mgmt wpa-psk \
+            wifi-sec.psk "$WLAN_KEY" \
+            connection.autoconnect yes \
+            connection.autoconnect-retries 0 \
+            connection.auth-retries 5
+
+        if [[ $? -ne 0 ]]; then
+            log "Verbindungsprofil konnte nicht erstellt werden. Abbruch."
+            exit 1
+        fi
+
+        # ════════════════════════════════════════════════════════════
+        # ── Verbindungsversuche ──────────────────────────────────────
+        # ════════════════════════════════════════════════════════════
+
+        attempt=1
+
+        while [[ $attempt -le $MAX_RETRIES ]]; do
+            log "Verbindungsversuch $attempt / $MAX_RETRIES ..."
+
+            nmcli connection up "$CONNECTION_NAME" ifname "$INTERFACE"
+
+            if [[ $? -eq 0 ]]; then
+                # Zusätzliche Verifikation: IP-Adresse vorhanden?
+                sleep 2
+                IP=$(ip -4 addr show "$INTERFACE" | awk '/inet / {print $2}' | head -1)
+
+                if [[ -n "$IP" ]]; then
+                    log "Verbindung erfolgreich! Interface: $INTERFACE | IP: $IP"
+                    exit 0
+                else
+                    log "nmcli meldete Erfolg, aber keine IP erhalten – Versuch gilt als fehlgeschlagen."
+                fi
+            else
+                log "Verbindungsversuch $attempt fehlgeschlagen."
+            fi
+
+            if [[ $attempt -lt $MAX_RETRIES ]]; then
+                log "Warte $RETRY_DELAY Sekunden bis zum nächsten Versuch..."
+                sleep "$RETRY_DELAY"
+            fi
+
+            (( attempt++ ))
+        done
+
+        # ════════════════════════════════════════════════════════════
+        # ── Alle Versuche erschöpft ──────────────────────────────────
+        # ════════════════════════════════════════════════════════════
+
+        log "Verbindung zu '$SSID' nach $MAX_RETRIES Versuchen nicht möglich. Abbruch."
+
+        # Profil aufräumen
+        nmcli connection delete "$CONNECTION_NAME" &>/dev/null
+        exit 1
     ;;    
     *) echo "ERROR: invalid parameter: $1 (for $0)"; exit 1 #Fehlerbehandlung
     ;;
