@@ -13,9 +13,9 @@
                                     $ssid = base64_decode($htmlssid);
                                     $htmlcountry = $_GET["country"];
                                     $country = base64_decode($htmlcountry);
-                                    # echo 'pwd = ' . $pwd . '<br>';
-                                    # echo 'ssid = ' . $ssid . '<br>';
-                                    # echo 'country = ' . $country . '<br>';
+                                #    echo 'pwd = ' . $pwd . '<br>';
+                                #    echo 'ssid = ' . $ssid . '<br>';
+                                #    echo 'country = ' . $country . '<br>';
                                     $exec_data = [];
                                     $exec_status = 0;
                                     $cmd = "sudo /var/sudowebscript.sh nm_set_pw_ssid " . "'" . $pwd . "'" . " '" . $ssid . "'" . " '" . $country . "'" ;
@@ -33,7 +33,7 @@
                                         # echo 'pi-ager ip address = ' . $exec_data[0] . '<br>';
                                         echo '<div style="text-align: center;"><p style="margin: 10px 0; padding: 5px; border: 1px solid #999; width: 70%; word-wrap: break-all; margin: auto; ">' . _('Network setup successfull. Please disconnect your tablet, smartphone or notebook now from the Pi-Ager accesspoint and connect to your WiFi router. Then you can access your Pi-Ager by entering the IP Address ') . '<b>' . str_replace("/24", "", $exec_data[0]) . '</b>' . _(' into your browser address field.') . '</p></div><br><br>';
                                         # echo '<script> alert("'. _('Network setup successfull. Please disconnect from Pi-Ager accesspoint and connect to your WiFi router with IP address') . ' : ' . $exec_data[0] . '");' . '</script>';
-                                        # shell_exec('sudo /var/sudowebscript.sh reboot > /dev/null 2>&1 &');
+                                    #    shell_exec('sudo /var/sudowebscript.sh reboot > /dev/null 2>&1 &');
                                     }
                                 ?>
                             </div>

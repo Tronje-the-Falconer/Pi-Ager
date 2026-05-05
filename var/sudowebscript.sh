@@ -121,51 +121,101 @@ case "$1" in
         log "Eingabe-Validierung bestanden (SSID, WLAN_KEY, COUNTRY)."
 
         # ════════════════════════════════════════════════════════════
-        # ── WLAN-Ländercode setzen ───────────────────────────────────
+        # ── Idempotenz-Check 1: WLAN-Ländercode ─────────────────────
         # ════════════════════════════════════════════════════════════
-
-        log "Setze WLAN-Ländercode auf '$COUNTRY' via raspi-config ..."
-
-        raspi-config nonint do_wifi_country "$COUNTRY"
-
-        if [[ $? -ne 0 ]]; then
-            log "Fehler beim Setzen des WLAN-Ländercodes. Abbruch."
-            exit 1
+        
+        log "Prüfe aktuellen WLAN-Ländercode ..."
+        CURRENT_COUNTRY=$(raspi-config nonint get_wifi_country 2>/dev/null | tr -d '[:space:]')
+        
+        if [[ "$CURRENT_COUNTRY" == "$COUNTRY" ]]; then
+            log "Ländercode bereits korrekt gesetzt ('$COUNTRY') – kein Eingriff nötig."
+        else
+            log "Ländercode ist '$CURRENT_COUNTRY', Soll-Wert ist '$COUNTRY' – wird aktualisiert ..."
+            raspi-config nonint do_wifi_country "$COUNTRY"
+            if [[ $? -ne 0 ]]; then
+                log "Fehler beim Setzen des WLAN-Ländercodes. Abbruch."
+                exit 1
+            fi
+            log "WLAN-Ländercode auf '$COUNTRY' gesetzt."
         fi
-
-        log "WLAN-Ländercode '$COUNTRY' erfolgreich gesetzt."
-
+        
         # ════════════════════════════════════════════════════════════
-        # ── Altes Verbindungsprofil entfernen (falls vorhanden) ──────
+        # ── Idempotenz-Check 2: Verbindungsprofil ───────────────────
         # ════════════════════════════════════════════════════════════
-
+        #
+        # Verglichene Felder:
+        #   - connection.interface-name  (INTERFACE)
+        #   - 802-11-wireless.ssid       (SSID)
+        #   - 802-11-wireless-security.psk (WLAN_KEY)  [-s für Secrets]
+        #
+        # Alle anderen nmcli-Parameter (autoconnect, retries …) werden
+        # ebenfalls nur neu geschrieben, wenn das Profil neu angelegt wird.
+        # ─────────────────────────────────────────────────────────────
+        
+        profile_ok=0   # 1 = Profil existiert und stimmt vollständig überein
+        
         if nmcli connection show "$CONNECTION_NAME" &>/dev/null; then
-            log "Altes Profil '$CONNECTION_NAME' wird gelöscht..."
-            nmcli connection delete "$CONNECTION_NAME" &>/dev/null
+            log "Profil '$CONNECTION_NAME' gefunden – prüfe Parameter ..."
+        
+            prof_iface=$(nmcli -g connection.interface-name       connection show          "$CONNECTION_NAME" 2>/dev/null | tr -d '[:space:]')
+            # SSID + PSK: $() entfernt nur das abschließende Newline –
+            # interne Leerzeichen (z.B. "Mein WLAN") bleiben erhalten
+            prof_ssid=$( nmcli -g 802-11-wireless.ssid            connection show    "$CONNECTION_NAME" 2>/dev/null)
+            prof_psk=$(  nmcli -s -g 802-11-wireless-security.psk connection show    "$CONNECTION_NAME" 2>/dev/null)
+        
+            mismatch=0
+            [[ "$prof_iface" != "$INTERFACE"  ]] && { log "  Interface abweichend  : Ist='$prof_iface'  Soll='$INTERFACE'";  mismatch=1; }
+            [[ "$prof_ssid"  != "$SSID"       ]] && { log "  SSID abweichend       : Ist='$prof_ssid'   Soll='$SSID'";       mismatch=1; }
+            [[ "$prof_psk"   != "$WLAN_KEY"   ]] && { log "  Passwort abweichend   (Werte werden nicht angezeigt)";          mismatch=1; }
+        
+            if [[ $mismatch -eq 0 ]]; then
+                log "Profil '$CONNECTION_NAME' stimmt vollständig überein – kein Neuanlegen nötig."
+                profile_ok=1
+            else
+                log "Profil '$CONNECTION_NAME' weicht ab – wird neu angelegt."
+                nmcli connection delete "$CONNECTION_NAME" &>/dev/null
+            fi
+        else
+            log "Kein bestehendes Profil '$CONNECTION_NAME' gefunden – wird neu angelegt."
+        fi
+        
+
+        # ════════════════════════════════════════════════════════════
+        # ── Verbindungsprofil anlegen (nur wenn nötig) ───────────────
+        # ════════════════════════════════════════════════════════════
+        if [[ $profile_ok -eq 0 ]]; then
+            log "Erstelle Verbindungsprofil '$CONNECTION_NAME' für SSID '$SSID' auf Interface '$INTERFACE' ..."
+
+            nmcli connection add \
+                type wifi \
+                ifname "$INTERFACE" \
+                con-name "$CONNECTION_NAME" \
+                ssid "$SSID" \
+                wifi-sec.key-mgmt wpa-psk \
+                wifi-sec.psk "$WLAN_KEY" \
+                connection.autoconnect yes \
+                connection.autoconnect-retries 0 \
+                connection.auth-retries 5
+        
+            if [[ $? -ne 0 ]]; then
+                log_err "Verbindungsprofil konnte nicht erstellt werden. Abbruch."
+                exit 1
+            fi
+            log "Verbindungsprofil erfolgreich angelegt."
         fi
 
         # ════════════════════════════════════════════════════════════
-        # ── Verbindungsprofil anlegen ────────────────────────────────
+        # ── Idempotenz-Check 3: Verbindung bereits aktiv? ────────────
         # ════════════════════════════════════════════════════════════
-
-        log "Erstelle Verbindungsprofil '$CONNECTION_NAME' für SSID: $SSID"
-
-        nmcli connection add \
-            type wifi \
-            ifname "$INTERFACE" \
-            con-name "$CONNECTION_NAME" \
-            ssid "$SSID" \
-            wifi-sec.key-mgmt wpa-psk \
-            wifi-sec.psk "$WLAN_KEY" \
-            connection.autoconnect yes \
-            connection.autoconnect-retries 0 \
-            connection.auth-retries 5
-
-        if [[ $? -ne 0 ]]; then
-            log "Verbindungsprofil konnte nicht erstellt werden. Abbruch."
-            exit 1
+        
+        if nmcli connection show --active "$CONNECTION_NAME" &>/dev/null; then
+            IP=$(ip -4 addr show "$INTERFACE" | awk '/inet / {print $2}' | head -1)
+            log "Profil '$CONNECTION_NAME' ist bereits aktiv (IP: ${IP:-unbekannt}) – nichts zu tun."
+            exit 0
         fi
-
+        
+        log "Profil '$CONNECTION_NAME' ist vorhanden, aber nicht aktiv – Verbindung wird aufgebaut ..."
+        
         # ════════════════════════════════════════════════════════════
         # ── Verbindungsversuche ──────────────────────────────────────
         # ════════════════════════════════════════════════════════════

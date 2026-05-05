@@ -37,6 +37,7 @@
             $htmlcountry = base64_encode($wlancountry);
             $randnum = rand();
             header("Location: ../reboot_set_nm.php?pwd=" . $htmlpwd . "&ssid=" . $htmlssid . "&country=" . $htmlcountry . "&rand=" . $randnum );
+        #    echo '<script> window.location.href = "../reboot_set_nm.php?pwd=' . $htmlpwd . '&ssid=' . $htmlssid . '&country='. $htmlcountry . '&rand=' . $randnum . '";</script>';
         }
         else {
             print '<script> alert("'. (_("WLAN setup")) . " : " . (_("WLAN SSID missing or length of password less than 8 characters")) .'"); </script>';
