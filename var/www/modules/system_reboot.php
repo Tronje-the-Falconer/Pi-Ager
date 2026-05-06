@@ -53,28 +53,30 @@
         $new_password = $_POST['new_password'];
         logger('DEBUG', 'button set_new_password pressed.');
         if ((strlen($new_password) < 8 )) {
-            echo '<script> alert("'. (_("WLAN setup")) . " : " . (_("WLAN password must have at least 8 characters")) .'"); </script>';
+            echo '<script> alert("'. (_("WLAN setup")) . ' : ' . (_("WLAN password must have at least 8 characters")) . '"); </script>';
         }
         else {
-            $connection   = escapeshellarg('PI_AGER_AP');
-            $new_password = escapeshellarg($new_password);
-            $exec_data = [];
-            $exec_status = 0;
+            $escaped_connection = escapeshellarg('PI_AGER_AP');
+            $escaped_password   = escapeshellarg($new_password);
+
             $script = <<<BASH
-                sudo nmcli connection modify $connection wifi-sec.psk $new_password &&
-                sudo nmcli connection down $connection &&
-                sudo nmcli connection up $connection ifname wlan1 &&
+                sudo nmcli connection modify $escaped_connection wifi-sec.psk $escaped_password &&
+                sudo nmcli connection down $escaped_connection &&
+                sudo nmcli connection up $escaped_connection ifname wlan1 &&
                 sleep 3 &&
                 ip -4 addr show wlan1 | awk '/inet / {print \$2}'
             BASH;
-
+            
+            $exec_data = [];
+            $exec_status = 0;
             exec("bash -c " . escapeshellarg($script) . " 2>&1", $exec_data, $exec_status);
 
             if ($exec_status === 0) {
-                $ip = trim(end($exec_data)); // letzte Zeile = IP-Adresse
-                echo '<script> alert("' . (_("Accesspoint IP")) . " " . $ip . " " . (_("accepted a new password")) . '"); </script>';
+                $ip = addslashes(trim(end($exec_data))); // letzte Zeile = IP-Adresse
+                echo '<script> alert("' . addslashes(_("Accesspoint IP")) . ' ' . $ip . '\\n' . addslashes(_("accepted a new password")) . '"); </script>';
             } else {
-                echo '<script> alert("' . (_("Error")) . ": " . implode("\n", $exec_data) . '"); </script>';
+                $error = addslashes(implode('\\n', $exec_data));
+                echo '<script> alert("' . addslashes(_("Error")) . ": " . $error . '"); </script>';
             }  
 
 #           $htmlcmd = base64_encode($nmcli_set_password_cmd);
