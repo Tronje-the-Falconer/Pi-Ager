@@ -1201,34 +1201,34 @@
                                         $('*').css('cursor', 'default');
                                     }
                                 </script>
-                                
-                                <hr>
-
-                                <h2 class="art-postheader"><?php echo _('Pi-Ager Accesspoint'); ?></h2>
-                                <!--------------------------------------------------------------------------- accesspoint password --> 
-                                <div class="hg_container" >
-                                    <form method="post" name="accesspoint">
-                                        <table style="width: 100%;">
-                                            <tr>
-                                                <td><label><?php echo _('new password for accesspoint') . ' :&nbsp;'; ?></label><div class="tooltip"><input id="input_password" type="text" size="19" maxlength="19" name="new_password" oninput="handle_password_input(this.value)" ><span class="tooltiptext"><?php echo _('password minimum length is 8 character'); ?></span></input></div></td>
-                                            </tr>
-                                        </table>
-                                        <br>
-                                        <button id="set_new_password" class="art-button" name="set_new_password" value="set_new_password" disabled onclick="return confirm('<?php echo _('ATTENTION: reboot follows after saving new accesspoint password');?> ')"><?php echo _('save'); ?></button>
-                                    </form>
+                                <div <?php if ($ap_mode == true) { echo 'style="display:none;"'; }?>>
+                                    <hr>
+                                    
+                                    <h2 class="art-postheader"><?php echo _('Pi-Ager Accesspoint'); ?></h2>
+                                    <!--------------------------------------------------------------------------- accesspoint password --> 
+                                    <div class="hg_container" >
+                                        <form method="post" name="accesspoint">
+                                            <table style="width: 100%;">
+                                                <tr>
+                                                    <td><label><?php echo _('new password for accesspoint') . ' :&nbsp;'; ?></label><div class="tooltip"><input id="input_password" type="text" size="19" maxlength="19" name="new_password" oninput="handle_password_input(this.value)" ><span class="tooltiptext"><?php echo _('password minimum length is 8 character'); ?></span></input></div></td>
+                                                </tr>
+                                            </table>
+                                            <br>
+                                            <button id="set_new_password" class="art-button" name="set_new_password" value="set_new_password" disabled onclick="return confirm('<?php echo _('ATTENTION: saving new accesspoint password...');?> ')"><?php echo _('save'); ?></button>
+                                        </form>
+                                    </div>
+                                    
+                                    <script>
+                                        function handle_password_input(val) {
+                                            if (val.length >= 8) {
+                                                $("#set_new_password").attr("disabled", false);
+                                            }
+                                            else {
+                                                $("#set_new_password").attr("disabled", true);
+                                            }
+                                        }
+                                    </script>
                                 </div>
-                                
-                                <script>
-                                    function handle_password_input(val) {
-                                        if (val.length >= 8) {
-                                            $("#set_new_password").attr("disabled", false);
-                                        }
-                                        else {
-                                            $("#set_new_password").attr("disabled", true);
-                                        }
-                                    }
-                                </script>
-                                
                                 <?php
                                     if ($loglevel_console == 10 and $loglevel_file == 10){
                                         echo '<hr>';

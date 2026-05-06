@@ -47,15 +47,40 @@
         
     }
 
-    # save accesspoint password and restart system
+    # save accesspoint password
     if (isset ($_POST['set_new_password'])){
         unset($_POST['set_new_password']);
         $new_password = $_POST['new_password'];
         logger('DEBUG', 'button set_new_password pressed.');
-        $nmcli_set_password_cmd = "sudo nmcli con modify PI_AGER_AP 802-11-wireless-security.psk " . "'" . $new_password . "'";
-        $htmlcmd = base64_encode($nmcli_set_password_cmd);
-        $randnum = rand();
-        # echo '<script> window.location.href = \'reboot_set_ap_password.php?htmlcmd=' . $htmlcmd . '&rand=' . $randnum . '\'' . ';</script>';
-        header("Location: ../reboot_set_ap_password.php?htmlcmd=" . $htmlcmd . "&rand=" . rand() );
+        if ((strlen($new_password) < 8 )) {
+            echo '<script> alert("'. (_("WLAN setup")) . " : " . (_("WLAN password must have at least 8 characters")) .'"); </script>';
+        }
+        else {
+            $connection   = escapeshellarg('PI_AGER_AP');
+            $new_password = escapeshellarg($new_password);
+            $exec_data = [];
+            $exec_status = 0;
+            $script = <<<BASH
+                sudo nmcli connection modify $connection wifi-sec.psk $new_password &&
+                sudo nmcli connection down $connection &&
+                sudo nmcli connection up $connection ifname wlan1 &&
+                sleep 3 &&
+                ip -4 addr show wlan1 | awk '/inet / {print \$2}'
+            BASH;
+
+            exec("bash -c " . escapeshellarg($script) . " 2>&1", $exec_data, $exec_status);
+
+            if ($exec_status === 0) {
+                $ip = trim(end($exec_data)); // letzte Zeile = IP-Adresse
+                echo '<script> alert("' . (_("Accesspoint IP")) . " " . $ip . " " . (_("accepted a new password")) . '"); </script>';
+            } else {
+                echo '<script> alert("' . (_("Error")) . ": " . implode("\n", $exec_data) . '"); </script>';
+            }  
+
+#           $htmlcmd = base64_encode($nmcli_set_password_cmd);
+#           $randnum = rand();
+#            # echo '<script> window.location.href = \'reboot_set_ap_password.php?htmlcmd=' . $htmlcmd . '&rand=' . $randnum . '\'' . ';</script>';
+#           header("Location: ../reboot_set_ap_password.php?htmlcmd=" . $htmlcmd . "&rand=" . rand() );
+        }
     }    
 ?>
