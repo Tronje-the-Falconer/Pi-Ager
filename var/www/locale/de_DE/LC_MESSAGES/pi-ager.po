@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-DE\n"
-"POT-Creation-Date: 2026-05-05 15:32+0200\n"
-"PO-Revision-Date: 2026-05-05 15:40+0200\n"
+"POT-Creation-Date: 2026-05-06 19:11+0200\n"
+"PO-Revision-Date: 2026-05-06 19:16+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -1503,7 +1503,7 @@ msgid "ATTENTION: set date and time?"
 msgstr "ACHTUNG: Datum und Uhrzeit einstellen?"
 
 #: var/www/admin.php:1118 var/www/modules/system_reboot.php:30
-#: var/www/modules/system_reboot.php:42
+#: var/www/modules/system_reboot.php:43 var/www/modules/system_reboot.php:56
 msgid "WLAN setup"
 msgstr "WLAN-Einrichtung"
 
@@ -1548,9 +1548,8 @@ msgid "password minimum length is 8 character"
 msgstr "das Passwort muss mindestens 8 Zeichen lang sein"
 
 #: var/www/admin.php:1217
-msgid "ATTENTION: reboot follows after saving new accesspoint password"
-msgstr ""
-"ACHTUNG: Nach dem Speichern des neuen Zugangspassworts folgt ein Neustart"
+msgid "ATTENTION: saving new accesspoint password..."
+msgstr "ACHTUNG: Neues Passwort für den Zugangspunkt wird gespeichert..."
 
 #: var/www/admin.php:1235
 msgid "python"
@@ -3072,9 +3071,25 @@ msgstr ""
 "Der WLAN-Ländercode muss in Großbuchstaben und mit einer Länge von 2 Zeichen "
 "angegeben werden"
 
-#: var/www/modules/system_reboot.php:42
+#: var/www/modules/system_reboot.php:43
 msgid "WLAN SSID missing or length of password less than 8 characters"
 msgstr "WLAN SSID fehlt oder Länge des Passworts weniger als 8 Zeichen"
+
+#: var/www/modules/system_reboot.php:56
+msgid "WLAN password must have at least 8 characters"
+msgstr "Das Passwort muss mindestens 8 Zeichen lang sein"
+
+#: var/www/modules/system_reboot.php:76
+msgid "Accesspoint IP"
+msgstr "IP-Adresse des Access Points"
+
+#: var/www/modules/system_reboot.php:76
+msgid "accepted a new password"
+msgstr "akzeptiert ein neues Passwort"
+
+#: var/www/modules/system_reboot.php:79
+msgid "Error"
+msgstr "Fehler"
 
 #: var/www/modules/tara_scale.php:62 var/www/modules/tara_scale.php:64
 msgid "calibration done"

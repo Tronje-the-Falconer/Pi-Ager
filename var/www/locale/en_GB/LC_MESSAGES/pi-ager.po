@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Pi-Ager-GB\n"
-"POT-Creation-Date: 2026-05-05 15:42+0200\n"
-"PO-Revision-Date: 2026-05-05 15:45+0200\n"
+"POT-Creation-Date: 2026-05-06 19:17+0200\n"
+"PO-Revision-Date: 2026-05-06 19:18+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_GB\n"
@@ -1467,7 +1467,7 @@ msgid "ATTENTION: set date and time?"
 msgstr ""
 
 #: var/www/admin.php:1118 var/www/modules/system_reboot.php:30
-#: var/www/modules/system_reboot.php:42
+#: var/www/modules/system_reboot.php:43 var/www/modules/system_reboot.php:56
 msgid "WLAN setup"
 msgstr ""
 
@@ -1512,7 +1512,7 @@ msgid "password minimum length is 8 character"
 msgstr ""
 
 #: var/www/admin.php:1217
-msgid "ATTENTION: reboot follows after saving new accesspoint password"
+msgid "ATTENTION: saving new accesspoint password..."
 msgstr ""
 
 #: var/www/admin.php:1235
@@ -3017,8 +3017,24 @@ msgstr ""
 msgid "WLAN country code must be uppercase with a length of 2 characters"
 msgstr ""
 
-#: var/www/modules/system_reboot.php:42
+#: var/www/modules/system_reboot.php:43
 msgid "WLAN SSID missing or length of password less than 8 characters"
+msgstr ""
+
+#: var/www/modules/system_reboot.php:56
+msgid "WLAN password must have at least 8 characters"
+msgstr ""
+
+#: var/www/modules/system_reboot.php:76
+msgid "Accesspoint IP"
+msgstr ""
+
+#: var/www/modules/system_reboot.php:76
+msgid "accepted a new password"
+msgstr ""
+
+#: var/www/modules/system_reboot.php:79
+msgid "Error"
 msgstr ""
 
 #: var/www/modules/tara_scale.php:62 var/www/modules/tara_scale.php:64
