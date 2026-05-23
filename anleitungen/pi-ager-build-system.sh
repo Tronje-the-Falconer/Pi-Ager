@@ -280,8 +280,8 @@ EOF
     printf "\nreload .service \n"
     systemctl daemon-reload
     
-    printf "\n enable wifi-watchdog.service"
-    systemctl enable wifi-watchdog.service
+#    printf "\n enable wifi-watchdog.service"
+#    systemctl enable wifi-watchdog.service
     
     printf "\ncopy fswebcam\n"
     cp /home/pi/Pi-Ager/usr/bin/fswebcam /usr/bin/
