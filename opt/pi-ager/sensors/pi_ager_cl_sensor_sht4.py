@@ -73,7 +73,7 @@ class cl_sensor_sht4(cl_sensor):
     def get_current_data(self):
         # cl_fact_logger.get_instance().debug(cl_fact_logger.get_instance().me())
         repeat_count = 0
-        repeat_count_max = 2
+        repeat_count_max = 3
         while repeat_count < repeat_count_max:
             try:
                 buf = self.get_measure()
@@ -111,11 +111,12 @@ class cl_sensor_sht4(cl_sensor):
                 
             except Exception as cx_error:
                 repeat_count += 1
-                if (repeat_count == 1):
+                if (repeat_count == repeat_count_max):
                     cl_fact_logger.get_instance().exception(cx_error)
                 else:
                     cl_fact_logger.get_instance().error(f"Retry getting measurement from I2C device SHT. Current retry count : {repeat_count}, max retry count : {repeat_count_max}")      
-
+                    time.sleep(1)
+                    
         raise cx_measurement_error (_('Too many SHT measurement errors occurred!'))
 
     def cmd_soft_reset(self):

@@ -237,7 +237,7 @@ class cl_sensor_dht(cl_sensor):
             
             except Exception as cx_error:
                 self._error_counter = self._error_counter + 1
-                if (self._error_counter == 1):
+                if (self._error_counter == self._max_errors):
                     cl_fact_logger.get_instance().exception(cx_error)
                 else:
                     cl_fact_logger.get_instance().error(f"Retry getting measurement from DHT device. Current retry count : {self._error_counter}, max retry count : {self._max_errors}")        

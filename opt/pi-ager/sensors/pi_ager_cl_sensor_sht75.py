@@ -13,7 +13,7 @@ __status__ = "Production"
 
 from abc import ABC, abstractmethod
 from main.pi_ager_cl_logger import cl_fact_logger
-# import time
+import time
 import pi_sht1x
 import pi_ager_gpio_config
 import os
@@ -36,7 +36,7 @@ class cl_sensor_sht75(cl_sensor):
         
         self._current_temperature = 0
         self._current_humidity = 0
-        self._max_errors = 5
+        self._max_errors = 3
         
         self._sensor_sht = pi_sht1x.SHT1x(pi_ager_gpio_config.gpio_sensor_data, pi_ager_gpio_config.gpio_sensor_sync, gpio_mode=pi_ager_gpio_config.board_mode)
                 
@@ -67,10 +67,11 @@ class cl_sensor_sht75(cl_sensor):
                 
             except Exception as cx_error:
                 self._error_counter = self._error_counter + 1
-                if (self._error_counter == 1):
+                if (self._error_counter == self._max_errors):
                     cl_fact_logger.get_instance().exception(cx_error)
                 else:
-                    cl_fact_logger.get_instance().error(f"Retry getting measurement from SHT75. Current retry count : {self._error_counter}, max retry count : {self._max_errors}")       
+                    cl_fact_logger.get_instance().error(f"Retry getting measurement from SHT75. Current retry count : {self._error_counter}, max retry count : {self._max_errors}") 
+                    time.sleep(1)
 
         cl_fact_logger.get_instance().debug('Too many measurement errors occurred!')
         raise cx_measurement_error(_('Too many measurement errors occurred!'))
