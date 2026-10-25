@@ -91,31 +91,36 @@ if [[ "${PTTYPE}" != "dos" && "${PTTYPE}" != "gpt" ]]; then
   errexit "Unsupported partition table type: ${PTTYPE}"
 fi
 mkloop
-e2fsck -f -p -v "${LOOP}p2"
-if [ $? -gt 2 ]; then
+OUTPUT=$(e2fsck -f -y -v "${LOOP}p2" 2>&1); RC=$?
+log "First e2fsck" "$OUTPUT"
+if [ ${RC} -gt 2 ]; then
   fsckerr "before"
 fi
+
 log ""
-OUTPUT=$(resize2fs -f -M "${LOOP}p2" 2>&1)
-if [ $? -eq 0 ]; then
-    log "SUCCESS" "Resize erfolgreich: $OUTPUT"
-else
-    log "ERROR" "Resize fehlgeschlagen: $OUTPUT"
-fi
 
-OUTPUT=$(resize2fs -f -M "${LOOP}p2" 2>&1)
-if [ $? -eq 0 ]; then
-    log "SUCCESS" "Resize erfolgreich: $OUTPUT"
-else
-    log "ERROR" "Resize fehlgeschlagen: $OUTPUT"
-fi
+# OUTPUT=$(dumpe2fs ${LOOP}p2 2>/dev/null | awk '/^Group/{g=$2} /Inode table at/{print g, $4}')
+# log "dumpe2fs inode table position: $OUTPUT"
 
-OUTPUT=$(resize2fs -f -M "${LOOP}p2" 2>&1)
-if [ $? -eq 0 ]; then
-    log "SUCCESS" "Resize erfolgreich: $OUTPUT"
-else
-    log "ERROR" "Resize fehlgeschlagen: $OUTPUT"
-fi
+OUTPUT=$(resize2fs -P "${LOOP}p2" 2>&1)
+log "resize2fs -P : $OUTPUT"
+
+# OUTPUT=$(dumpe2fs -h "${LOOP}p2" 2>&1 | grep -E 'features|Block count|Free blocks|Inode count|Free inodes')
+# log "dumpe2fs : $OUTPUT"
+
+log ""
+OUTPUT=$(resize2fs -d 32 -P "${LOOP}p2" 2>&1)
+log "resize2fs min-calc: $OUTPUT"
+
+USED=$(dumpe2fs -h "${LOOP}p2" 2>/dev/null | awk -F: '/^Block count/{bc=$2} /^Free blocks/{fb=$2} END{print bc-fb}')
+TARGET=$(( USED * 110 / 100 ))
+for i in 1 2 3 4 5; do
+  OUTPUT=$(resize2fs -f "${LOOP}p2" ${TARGET} 2>&1); RC=$?
+  log "resize2fs ${TARGET}: rc=${RC} ${OUTPUT}"
+  [ ${RC} -eq 0 ] && break
+  e2fsck -f -y "${LOOP}p2" > /dev/null 2>&1
+  TARGET=$(( TARGET + 32768 ))      # eine Blockgruppe mehr
+done
 
 OUTPUT=$(e2fsck -f -n "${LOOP}p2" 2>&1)
 if [ $? -ne 0 ]; then

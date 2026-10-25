@@ -31,9 +31,8 @@ class cl_sensor_hx711:
         self.bitsToRead = 24
         self.twosComplementThreshold = 1 << (self.bitsToRead-1)
         self.twosComplementOffset = -(1 << (self.bitsToRead))
-        self.powerUp()
+        self.powerDown()
         self.setGain(gain)
-#        self.read()
 
     def isReady(self):
         return GPIO.input(self.DOUT) == 0
@@ -48,12 +47,13 @@ class cl_sensor_hx711:
 
         GPIO.output(self.PD_SCK, False)
 #        print("Set gain, perform, dummy read")
-        self.read()     # dummy read
-        time.sleep(0.4)  # 400ms settling time after gain change
+        self.read()     # dummy read to setup new gain 
         
     def waitForReady(self):
-        while not self.isReady():
-            pass
+        n = 0
+        while (not self.isReady() and n < 500):
+            n += 1
+            time.sleep(0.001)
 
     def correctTwosComplement(self, unsignedValue):
         if unsignedValue >= self.twosComplementThreshold:
@@ -66,57 +66,52 @@ class cl_sensor_hx711:
         read_repeat_counter_max = 10
         while (read_repeat_counter <= read_repeat_counter_max):
             read_repeat_counter += 1
-#            self.reset()                      # reset not working due to latest HX711 datasheet
-            ready_counter = 0
-            ready_counter_max = 20
-            while (not self.isReady() and ready_counter <= ready_counter_max):
-                time.sleep(0.01)  # sleep for 10 ms because data is not ready
-                ready_counter += 1
-            
-            if ready_counter == ready_counter_max:  # if counter reached max value then try again
-                continue
-
+            GPIO.output(self.PD_SCK, False)     # leave sleep mode
+            self.waitForReady()
             unsignedValue = 0
+            timing_error = False
             for i in range(0, self.bitsToRead):
-                timing_error = False
                 start_counter = time.perf_counter()
                 GPIO.output(self.PD_SCK, True)
                 bitValue = GPIO.input(self.DOUT)
                 GPIO.output(self.PD_SCK, False)
+                bitValue = GPIO.input(self.DOUT)        # repeat reading, timing constraints
                 end_counter = time.perf_counter()
-                if ((end_counter - start_counter) >= 0.00010):  # choose 100 us, zero not precise enough, check if the hx 711 did not turn off...
+                if ((end_counter - start_counter) >= 0.00010):  # choose 100 us, zero not precise enough, check if the hx711 did not turn off...
                     timing_error = True
 #                    print(f"Timing error read data. Timeout {(end_counter - start_counter):f}")
-#                    self.reset()
-#                    break
                 unsignedValue = unsignedValue << 1
                 unsignedValue = unsignedValue | bitValue
 
-#            if timing_error == True:    # retry
+            if timing_error == True:    # retry
 #                print("Timing error read data")
-#                continue
+                self.powerDown()
+                continue
                 
         # set channel and gain factor for next reading
+            timing_error = False
             for i in range(self.GAIN):
-                timing_error = False
                 start_counter = time.perf_counter()
                 GPIO.output(self.PD_SCK, True)
+                bitValue = GPIO.input(self.DOUT)        # dummy read
                 GPIO.output(self.PD_SCK, False)
+                bitValue = GPIO.input(self.DOUT)        # dummy read
                 end_counter = time.perf_counter()
-                if end_counter - start_counter >= 0.00010:  # 0.00006 check if the hx 711 did not turn off...
+                if end_counter - start_counter >= 0.00010:  # 0.00006 check if the hx711 did not turn off...
                     timing_error = True
 #                    print(f"Timing error set gain. Timeout {(end_counter - start_counter):f}")
-                    break
             
-#            if timing_error == True:    # retry
-#                continue
+            if timing_error == True:    # retry
+                self.powerDown()
+                continue
                
-#            time.sleep(0.1)    # next conversion ends after 100ms at a conversion rate of 10 Hz               
             value = self.correctTwosComplement(unsignedValue)
             if (value == -1):  # some time 0xffffff is read from hx711, reading failed
 #                print("Read data returns -1")
+                self.powerDown()
                 continue
-
+                
+            self.powerDown()
             return value
             
         return 0     # error, no valid conversion after read_repeat_counter_max retries
@@ -146,17 +141,12 @@ class cl_sensor_hx711:
     # HX711, the gain settings are not changed!
     #
     def powerDown(self):
-        GPIO.output(self.PD_SCK, False)
         GPIO.output(self.PD_SCK, True)
         time.sleep(0.0001)      # 0.0001
 
     def powerUp(self):
         GPIO.output(self.PD_SCK, False)
         time.sleep(0.4)    # 0.0001s too short, after reset 400 ms settling time needed
-
-    def reset(self):
-        self.powerDown()
-        self.powerUp()
 
 class cl_scale(cl_sensor_hx711):
     def __init__(self, samples=20, dout=10, pd_sck=9, gain=128):
@@ -211,7 +201,6 @@ class cl_scale(cl_sensor_hx711):
 #        print(*valid_values)
 
         avg = pi_mean(valid_values)
-
         return avg
 
     def getWeightFilteredFlushingHistory(self, samples=None):
@@ -225,18 +214,18 @@ class cl_scale(cl_sensor_hx711):
 
 if __name__ == "__main__":
     hx = cl_scale(dout=10, pd_sck=9)
-    hx.setReferenceUnit(208)
-    hx.setOffset(535)
+    hx.setReferenceUnit(212)
+    hx.setOffset(533)
 
     while True:
         try:
             hx.setGain(128)
             weight = hx.getRawWeight()
-            print(f"Weight: {weight:.2f} grams")
+            print(f"Weight: {weight:.2f} grams, Gain: {hx.GAIN}")
             time.sleep(1)
             hx.setGain(64)
             weight = hx.getRawWeight()
-            print(f"Weight: {weight:.2f} grams")
+            print(f"Weight: {weight:.2f} grams, Gain: {hx.GAIN}")
             time.sleep(1)            
         except KeyboardInterrupt:
             print("Exiting...")
