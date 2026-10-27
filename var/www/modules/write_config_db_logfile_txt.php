@@ -16,6 +16,7 @@
         $dehumidifier_hysteresis_offset_config = $_POST['dehumidifier_hysteresis_offset_config'];
         $saturation_point_config = $_POST['saturation_point_config'];
         $delay_humidify_config = $_POST['delay_humidify_config'];
+        $delay_dehumidify_config = $_POST['delay_dehumidify_config'];
         $uv_period_config = $_POST['uv_period_config'];
         $uv_duration_config = $_POST['uv_duration_config'];
         $switch_on_uv_hour_config = $_POST['switch_on_uv_hour_config'];
@@ -41,15 +42,24 @@
         $delay_monitoring_humidifier = $_POST['delay_monitoring_humidifier_config'];
         $tolerance_monitoring_humidifier = $_POST['tolerance_monitoring_humidifier_config'];
         $check_monitoring_humidifier = $_POST['check_monitoring_humidifier_config'];
+        $max_row_humidity_params = $_POST['max_row_humidity_params'];
+        $max_row_dehumidity_params = $_POST['max_row_dehumidity_params'];
+        $max_row_offsets_params = $_POST['max_row_offsets_params'];   
         
         $ConfigInputIsValid = TRUE;
         foreach ($_POST as $key => $value) {  // Prüfen, ob nur Zahlen eingegeben wurden
             if ($key == 'config_form_submit') {
                 continue;
             }
+/*            if (is_numeric($value) == FALSE) {
+                $message_config = _('unauthorized character - please use only integers or floats!');
+                $ConfigInputIsValid = FALSE;
+                break;
+            } */
             else if ($key == 'cooling_hysteresis_config' || $key == 'heating_hysteresis_config' || 
                     $key == 'humidifier_hysteresis_offset_config' || $key == 'dehumidifier_hysteresis_offset_config' || 
-                    $key == 'cooling_hysteresis_offset_config' || $key == 'heating_hysteresis_offset_config') {
+                    $key == 'cooling_hysteresis_offset_config' || $key == 'heating_hysteresis_offset_config' || 
+                    strncmp($key, 'edit_cooler_offset_', 19) === 0 || strncmp($key, 'edit_heater_offset_', 19) === 0) {
                 if (is_numeric($value) == FALSE) {
                     $message_config = _('unauthorized character - please use only integers or floats!');
                     $ConfigInputIsValid = FALSE;
@@ -60,14 +70,14 @@
                     $message_config = _('unauthorized character - please use only integers!');
                     $ConfigInputIsValid = FALSE;
                 }
-            }
+            } 
         }
 
-        if ($ConfigInputIsValid == TRUE)
-        {
+        if ($ConfigInputIsValid == TRUE) {
             if ($cooling_hysteresis_config != $heating_hysteresis_config &&                         // hysteresis must differ.
                 $saturation_point_config >= 80 && $saturation_point_config <= 100 &&                // check saturation_point
-                $delay_humidify_config <= 60 && $delay_humidify_config >= 0 &&                                                            // Prüfung Verzögerung Feuchte
+                $delay_humidify_config <= 60 && $delay_humidify_config >= 0 &&                 // Prüfung Verzögerung Feuchte
+                $delay_dehumidify_config <= 60 && $delay_dehumidify_config >= 0 &&             // Prüfung Verzögerung Entfeuchten
                 $uv_period_config < 1441 && $uv_period_config > -1 && // (($uv_period_config+$uv_duration_config) > 0) &&                 // Prüfung Intervall UV
                 $uv_duration_config < 1441 && $uv_duration_config > -1  &&                              // Prüfung Dauer UV
                 $switch_on_uv_hour_config >= 0 && $switch_on_uv_hour_config < 24 && $switch_on_uv_minute_config >= 0 && $switch_on_uv_minute_config < 60 && // UV Uhrzeit
@@ -78,16 +88,108 @@
                 $internal_temperature_high_limit >= -11 && $internal_temperature_high_limit <= 70 && // Temperatur high limit Überwachung
                 $internal_temperature_high_limit > $internal_temperature_low_limit &&
                 $internal_temperature_hysteresis >= 1 && $internal_temperature_hysteresis <= 10 && // Temperatur hysteresis für Event Generierung
-                $delay_cooler_config >= 0 && $delay_cooler_config <= 120   // cooler delay if cooler turned off and should turned on again
-            )
-            {
-                # Eingestellte Werte in config/config.json und logs/logfile.txt speichern
+                $delay_cooler_config >= 0 && $delay_cooler_config <= 120 ) { // cooler delay if cooler turned off and should turned on again
+
+                # save config settings    humidifier parameter            
+                $index_row = 0;
+                $row_id = 1;
+                $humidifier_params = array(array());
+                
+                while ($index_row < $max_row_humidity_params) {
+                    $sql = '';
+                    $edit_setpoint_temp = $_POST['edit_setpoint_temp_' . $index_row];
+                    $edit_delay_humidifier = $_POST['edit_delay_humidifier_' . $index_row];
+                    $edit_offset_humidifier = $_POST['edit_offset_humidifier_' . $index_row];
+                    
+                    $humidifier_params[$index_row]['id'] = $row_id;
+                    $humidifier_params[$index_row]['setpoint_temp'] = $edit_setpoint_temp;
+                    $humidifier_params[$index_row]['delay_humidifier'] = $edit_delay_humidifier;
+                    $humidifier_params[$index_row]['offset_humidifier'] = $edit_offset_humidifier;
+                    
+                    $sql = 'UPDATE ' . $humidifier_params_table . ' SET "' . $setpoint_temp_field . '" = ' . $edit_setpoint_temp . ', "' . $delay_humidifier_field . '" = ' . $edit_delay_humidifier . ', "' . $offset_humidifier_field . '" = ' . $edit_offset_humidifier . ' WHERE "' . $id_field . '" =' . $row_id .  ';';
+                //    echo $sql . '<br>';
+                    open_connection();
+                    execute_query($sql);
+                    close_database();
+            
+                    $row_id++;
+                    $index_row++;
+                }
+                
+                $setp_temp = floatval(get_table_value($config_settings_table, $setpoint_temperature_key));
+                $res = eval_humidifier_delay_offset( $humidifier_params, $setp_temp );
+                $delay_humidify_config = intval($res[0]);
+                $humidifier_hysteresis_offset_config = round($res[1], 1);
+
+                # save config settings    dehumidifier parameter            
+                $index_row = 0;
+                $row_id = 1;
+                $dehumidifier_params = array(array());
+                
+                while ($index_row < $max_row_dehumidity_params) {
+                    $sql = '';
+                    $edit_setpoint_temp = $_POST['edit_setpoint_temp_dh_' . $index_row];
+                    $edit_delay_dehumidifier = $_POST['edit_delay_dehumidifier_' . $index_row];
+                    $edit_offset_dehumidifier = $_POST['edit_offset_dehumidifier_' . $index_row];
+                    
+                    $dehumidifier_params[$index_row]['id'] = $row_id;
+                    $dehumidifier_params[$index_row]['setpoint_temp'] = $edit_setpoint_temp;
+                    $dehumidifier_params[$index_row]['delay_dehumidifier'] = $edit_delay_dehumidifier;
+                    $dehumidifier_params[$index_row]['offset_dehumidifier'] = $edit_offset_dehumidifier;
+                    
+                    $sql = 'UPDATE ' . $dehumidifier_params_table . ' SET "' . $setpoint_temp_field . '" = ' . $edit_setpoint_temp . ', "' . $delay_dehumidifier_field . '" = ' . $edit_delay_dehumidifier . ', "' . $offset_dehumidifier_field . '" = ' . $edit_offset_dehumidifier . ' WHERE "' . $id_field . '" =' . $row_id .  ';';
+                //    echo $sql . '<br>';
+                    open_connection();
+                    execute_query($sql);
+                    close_database();
+            
+                    $row_id++;
+                    $index_row++;
+                }
+                
+//                $setp_temp = floatval(get_table_value($config_settings_table, $setpoint_temperature_key));
+                $res = eval_dehumidifier_delay_offset( $dehumidifier_params, $setp_temp );
+                $delay_dehumidify_config = intval($res[0]);
+                $dehumidifier_hysteresis_offset_config = round($res[1], 1);
+
+               
+                $index_row = 0;
+                $row_id = 1;
+                $offset_params = array(array());
+                
+                while ($index_row < $max_row_offsets_params) {
+                    $sql = '';
+                    $edit_setpoint_temp = $_POST['edit_setpoint_temp_control_' . $index_row];
+                    $edit_cooler_offset_temp = $_POST['edit_cooler_offset_' . $index_row];
+                    $edit_heater_offset_temp = $_POST['edit_heater_offset_' . $index_row];
+                    
+                    $offset_params[$index_row]['id'] = $row_id;
+                    $offset_params[$index_row]['setpoint_temp'] = $edit_setpoint_temp;
+                    $offset_params[$index_row]['cooler_offset'] = $edit_cooler_offset_temp;
+                    $offset_params[$index_row]['heater_offset'] = $edit_heater_offset_temp;
+                    
+                    $sql = 'UPDATE ' . $temperature_control_params_table . ' SET "' . $setpoint_temp_field . '" = ' . $edit_setpoint_temp . ', "' . $cooler_offset_field . '" = ' . $edit_cooler_offset_temp . ', "' . $heater_offset_field . '" = ' . $edit_heater_offset_temp . ' WHERE "' . $id_field . '" =' . $row_id .  ';';
+                //    echo $sql . '<br>';
+                    open_connection();
+                    execute_query($sql);
+                    close_database();
+            
+                    $row_id++;
+                    $index_row++;
+                }
+                
+                $res = eval_cooler_heater_offsets( $offset_params, $setp_temp );
+                $cooling_hysteresis_offset_config = round($res[0], 1);
+                $heating_hysteresis_offset_config = round($res[1], 1);              
+                
+                
                 write_config($cooling_hysteresis_config, $heating_hysteresis_config, $cooling_hysteresis_offset_config, $heating_hysteresis_offset_config, 
                             $humidifier_hysteresis_config, $dehumidifier_hysteresis_config, $humidifier_hysteresis_offset_config, $dehumidifier_hysteresis_offset_config, $saturation_point_config, $delay_humidify_config, $uv_modus_config, $uv_duration_config,
                             $uv_period_config, $switch_on_uv_hour_config, $switch_on_uv_minute_config, $light_modus_config, $light_duration_config,
                             $light_period_config, $switch_on_light_hour_config, $switch_on_light_minute_config, $dehumidifier_modus_config,
                             $failure_temperature_delta_config, $failure_humidity_delta_config, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
-                            $shutdown_on_batlow_config, $delay_cooler_config, $dewpoint_check_config, $uv_check_config, $delay_monitoring_humidifier, $tolerance_monitoring_humidifier, $check_monitoring_humidifier);
+                            $shutdown_on_batlow_config, $delay_cooler_config, $dewpoint_check_config, $uv_check_config, $delay_monitoring_humidifier, $tolerance_monitoring_humidifier, $check_monitoring_humidifier, $delay_dehumidify_config);
+
                 logger('DEBUG', 'configvalues saved');
                 
                 # settings used by manvals.php but used also in config.php, when manvals.php is hidden
@@ -222,6 +324,7 @@
                     // $logstring = $logstring . " \n " . _('switch-on dehumidifier') . ": " . $switch_on_dehumidity . "% &phi;";
                     // $logstring = $logstring . " \n " . _('switch-off dehumidifier') . ": " . $switch_off_dehumidity . "% &phi;";
                     $logstring = $logstring . " \n " . _('delay humidifier') . ": " . $delay_humidify_config . " " . _('minutes');
+                    $logstring = $logstring . " \n " . _('delay dehumidifier') . ": " . $delay_dehumidify_config . " " . _('minutes');
                     $logstring = $logstring . " \n " . _('abs. humidity check aktive') . ": " . (($dewpoint_check_config == 0) ? _('off') : _('on'));
                 }
                 $logstring = $logstring . " \n " . _('circulation air OFF duration') . ": " . $circulation_air_period . " " . _('minutes');

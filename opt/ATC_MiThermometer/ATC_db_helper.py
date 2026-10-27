@@ -39,8 +39,8 @@ def open_database():
     http://charlesleifer.com/blog/going-fast-with-sqlite-and-python/
     """
     
-    #Enable shared chache
-    sqlite3.enable_shared_cache(True)
+    #Enable shared chache, no longer supported!
+    # sqlite3.enable_shared_cache(True)
     # Open database in autocommit mode by setting isolation_level to None.
     connection = sqlite3.connect('/var/www/config/pi-ager.sqlite3', isolation_level=None, timeout = 10)
     # Set journal mode to WAL (Write-Ahead Log)

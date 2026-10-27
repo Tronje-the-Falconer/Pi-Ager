@@ -26,21 +26,18 @@
             $wlancountry = '';
         }
         
-        if (strlen($wlancountry) == 2 and ctype_upper($wlancountry)) {
-            exec("sudo raspi-config nonint do_wifi_country " . $wlancountry, $exec_data, $exec_status);
-            # echo 'return status from do_wifi_country : ' . $exec_status . '<br>';
-        }
-        else {
+        if (!(strlen($wlancountry) == 2 and ctype_upper($wlancountry))) {
             echo '<script> alert("'. (_("WLAN setup")) . " : " . (_("WLAN country code must be uppercase with a length of 2 characters")) .'"); </script>';
             goto end;
         }
 
         if ($selected_ssid != '' and strlen($wlanpassword) >= 8) {
-            $cmd = "sudo nmcli device wifi connect " . "'" . $selected_ssid . "' password " . "'" . $wlanpassword . "' ifname wlan0";
-            $htmlcmd = base64_encode($cmd);
+            $htmlpwd = base64_encode($wlanpassword);
+            $htmlssid = base64_encode($selected_ssid);
+            $htmlcountry = base64_encode($wlancountry);
             $randnum = rand();
-            # echo '<script> window.location.href = \'reboot_set_nm.php?htmlcmd=' . $htmlcmd . '&rand=' . $randnum . '\'' . ';</script>';
-            header("Location: ../reboot_set_nm.php?htmlcmd=" . $htmlcmd . "&rand=" . $randnum );
+            header("Location: ../reboot_set_nm.php?pwd=" . $htmlpwd . "&ssid=" . $htmlssid . "&country=" . $htmlcountry . "&rand=" . $randnum );
+        #    echo '<script> window.location.href = "../reboot_set_nm.php?pwd=' . $htmlpwd . '&ssid=' . $htmlssid . '&country='. $htmlcountry . '&rand=' . $randnum . '";</script>';
         }
         else {
             print '<script> alert("'. (_("WLAN setup")) . " : " . (_("WLAN SSID missing or length of password less than 8 characters")) .'"); </script>';
@@ -50,15 +47,42 @@
         
     }
 
-    # save accesspoint password and restart system
+    # save accesspoint password
     if (isset ($_POST['set_new_password'])){
         unset($_POST['set_new_password']);
         $new_password = $_POST['new_password'];
         logger('DEBUG', 'button set_new_password pressed.');
-        $nmcli_set_password_cmd = "sudo nmcli con modify PI_AGER_AP 802-11-wireless-security.psk " . "'" . $new_password . "'";
-        $htmlcmd = base64_encode($nmcli_set_password_cmd);
-        $randnum = rand();
-        # echo '<script> window.location.href = \'reboot_set_ap_password.php?htmlcmd=' . $htmlcmd . '&rand=' . $randnum . '\'' . ';</script>';
-        header("Location: ../reboot_set_ap_password.php?htmlcmd=" . $htmlcmd . "&rand=" . rand() );
+        if ((strlen($new_password) < 8 )) {
+            echo '<script> alert("'. (_("WLAN setup")) . ' : ' . (_("WLAN password must have at least 8 characters")) . '"); </script>';
+        }
+        else {
+            $escaped_connection = escapeshellarg('PI_AGER_AP');
+            $escaped_password   = escapeshellarg($new_password);
+
+            $script = <<<BASH
+                sudo nmcli connection modify $escaped_connection wifi-sec.psk $escaped_password &&
+                sudo nmcli connection down $escaped_connection &&
+                sudo nmcli connection up $escaped_connection ifname wlan1 &&
+                sleep 3 &&
+                ip -4 addr show wlan1 | awk '/inet / {print \$2}'
+            BASH;
+            
+            $exec_data = [];
+            $exec_status = 0;
+            exec("bash -c " . escapeshellarg($script) . " 2>&1", $exec_data, $exec_status);
+
+            if ($exec_status === 0) {
+                $ip = addslashes(trim(end($exec_data))); // letzte Zeile = IP-Adresse
+                echo '<script> alert("' . addslashes(_("Accesspoint IP")) . ' ' . $ip . '\\n' . addslashes(_("accepted a new password")) . '"); </script>';
+            } else {
+                $error = addslashes(implode('\\n', $exec_data));
+                echo '<script> alert("' . addslashes(_("Error")) . ": " . $error . '"); </script>';
+            }  
+
+#           $htmlcmd = base64_encode($nmcli_set_password_cmd);
+#           $randnum = rand();
+#            # echo '<script> window.location.href = \'reboot_set_ap_password.php?htmlcmd=' . $htmlcmd . '&rand=' . $randnum . '\'' . ';</script>';
+#           header("Location: ../reboot_set_ap_password.php?htmlcmd=" . $htmlcmd . "&rand=" . rand() );
+        }
     }    
 ?>

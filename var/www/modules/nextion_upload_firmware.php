@@ -13,8 +13,17 @@
         else if ($tft_display_type == 2) {
             $upload_folder = '/var/www/nextion/NX3224F028/'; //Das Upload-Verzeichnis NX3224F028
         }
-        else {
+        else if ($tft_display_type == 3){
             $upload_folder = '/var/www/nextion/NX3224T028/'; //Das Upload-Verzeichnis NX3224T028
+        }
+        else if ($tft_display_type == 4) {
+            $upload_folder = '/var/www/nextion/NX3224K024/'; //Das Upload-Verzeichnis NX3224K024
+        }
+        else if ($tft_display_type == 5) {
+            $upload_folder = '/var/www/nextion/NX3224F024/'; //Das Upload-Verzeichnis NX3224F024
+        }
+        else {
+            $upload_folder = '/var/www/nextion/NX3224T024/'; //Das Upload-Verzeichnis NX3224T024
         }
         
         $filename = pathinfo($_FILES['tft_file']['name'], PATHINFO_FILENAME);

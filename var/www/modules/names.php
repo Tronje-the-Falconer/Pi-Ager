@@ -45,6 +45,9 @@ $defrost_table = 'config_defrost';
 $config_current_check_table = 'config_current_check';
 $time_meter_table = 'time_meter';
 $config_mqtt_table = 'config_mqtt';
+$humidifier_params_table = 'humidifier_params';
+$temperature_control_params_table = 'temperature_control_params';
+$dehumidifier_params_table = 'dehumidifier_params';
 
 #----------------------------table keys;
 $cooling_hysteresis_key = 'cooling_hysteresis';
@@ -172,6 +175,7 @@ $tolerance_monitoring_humidifier_key = 'tolerance_monitoring_humidifier';
 $check_monitoring_humidifier_key = 'check_monitoring_humidifier';
 $cooling_hysteresis_offset_key = 'cooling_hysteresis_offset';
 $heating_hysteresis_offset_key = 'heating_hysteresis_offset';
+$dehumidifier_turn_off_delay_key = 'dehumidifier_turn_off_delay';
 
 #-----------------------------table fields;
 $key_field = 'key';
@@ -279,6 +283,13 @@ $port_field = 'port';
 $username_field = 'username';
 $password_field = 'password';
 $mqtt_active_field = 'mqtt_active';
+$setpoint_temp_field = 'setpoint_temp';
+$delay_humidifier_field = 'delay_humidifier';
+$offset_humidifier_field = 'offset_humidifier';
+$cooler_offset_field = 'cooler_offset';
+$heater_offset_field = 'heater_offset';
+$delay_dehumidifier_field = 'delay_dehumidifier';
+$offset_dehumidifier_field = 'offset_dehumidifier';
 
 #-----------------------------Paths and urls
 $thread_url = 'https://www.grillsportverein.de/forum/forums/pi-ager.548/';

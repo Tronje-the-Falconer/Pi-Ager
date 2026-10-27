@@ -81,8 +81,8 @@ class cl_sensor(cl_ab_sensor):
         SDD = 6.1078 * 10**((a*temperature)/(b+temperature))
         DD = humidity/100 * SDD
         v = math.log10(DD/6.1078)
-        self._temperature_dewpoint = b*v/(a-v) 
-        self._humidity_absolute = 10**5 * mw/R * DD/temperature_kelvin
+        self._temperature_dewpoint = round(b*v/(a-v), 2)
+        self._humidity_absolute = round(10**5 * mw/R * DD/temperature_kelvin, 2)
         cl_fact_logger.get_instance().debug("Calculated DewPoint for Temp %.2f C and Hum %.2f is %.2f, HumAbs is %.2f grams/m³" % (temperature,humidity,self._temperature_dewpoint, self._humidity_absolute))
 
         calculated_dewpoint = (self._temperature_dewpoint, self._humidity_absolute)

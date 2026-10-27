@@ -673,7 +673,7 @@
         $fields = array_map(
             function ($field){
                 return strtolower(preg_replace("/[^A-Z0-9_]/i", '', $field));
-            }, fgetcsv($csv_handle, 0, $delimiter));
+            }, fgetcsv($csv_handle, 0, ',', '"', ''));
         
         $fieldcount = count($fields);
         if ($fieldcount == 9){
@@ -711,16 +711,16 @@
                 // $insert_sth = $connection->prepare($insert_sql);
                 
                 // $inserted_rows = 0;
-                // while (($data = fgetcsv($csv_handle, 0, $delimiter)) !== FALSE) {
+                // while (($data = fgetcsv($csv_handle, 0, ',', '"', '')) !== FALSE) {
                     // $insert_sth->execute($data);
                     // $inserted_rows++;
                 // }
                 
-                while (($data = fgetcsv($csv_handle, 0, $delimiter)) !== FALSE) {
+                while (($data = fgetcsv($csv_handle, 0, ',', '"', '')) !== FALSE) {
                     $num = count($data);
                     
                     $valuestring = '';
-                    for ($c=0; $c < $num; $c++) {
+                    for ($c = 0; $c < $num; $c++) {
                         $datafield = $data[$c];
                         if ($datafield == NULL){
                             $datafield = 'NULL';
@@ -728,7 +728,10 @@
                         if ($c == 0){
                             $valuestring = $datafield;
                         }
-                        else{
+                        else {
+                            if ($c >= 3 AND $c <= 6 AND $datafield != 'NULL') {
+                               $datafield = strval((int)$datafield * 60);    // convert minutes into seconds
+                            }
                             $valuestring = $valuestring . ', ' . $datafield;
                         }
                     }
@@ -860,7 +863,7 @@
                             $uv_period, $switch_on_uv_hour, $switch_on_uv_minute, $light_modus, $light_duration, 
                             $light_period, $switch_on_light_hour, $switch_on_light_minute, $dehumidifier_modus, 
                             $failure_temperature_delta, $failure_humidity_delta, $internal_temperature_low_limit, $internal_temperature_high_limit, $internal_temperature_hysteresis,
-                            $shutdown_on_batlow, $delay_cooler, $dewpoint_check, $uv_check, $delay_monitoring_humidifier, $tolerance_monitoring_humidifier, $check_monitoring_humidifier)
+                            $shutdown_on_batlow, $delay_cooler, $dewpoint_check, $uv_check, $delay_monitoring_humidifier, $tolerance_monitoring_humidifier, $check_monitoring_humidifier, $delay_dehumidify)
         {
         global $value_field, $last_change_field, $key_field, $config_settings_table, $cooling_hysteresis_key, $cooling_hysteresis_offset_key, $heating_hysteresis_offset_key,  
                 $humidifier_hysteresis_key, $dehumidifier_hysteresis_key, $humidifier_hysteresis_offset_key, $dehumidifier_hysteresis_offset_key,
@@ -868,7 +871,7 @@
                 $uv_duration_key, $uv_period_key, $switch_on_uv_hour_key, $switch_on_uv_minute_key, $light_modus_key, $light_duration_key, $light_period_key,
                 $switch_on_light_hour_key, $switch_on_light_minute_key, $dehumidifier_modus_key, $failure_temperature_delta_key, $failure_humidity_delta_key, 
                 $internal_temperature_low_limit_key, $internal_temperature_high_limit_key, $internal_temperature_hysteresis_key, $shutdown_on_batlow_key, $delay_cooler_key,
-                $dewpoint_check_key, $uv_check_key, $delay_monitoring_humidifier_key, $tolerance_monitoring_humidifier_key, $check_monitoring_humidifier_key;               
+                $dewpoint_check_key, $uv_check_key, $delay_monitoring_humidifier_key, $tolerance_monitoring_humidifier_key, $check_monitoring_humidifier_key, $dehumidifier_turn_off_delay_key;               
         
         open_connection();
 
@@ -882,6 +885,7 @@
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($dehumidifier_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $dehumidifier_hysteresis_offset_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($saturation_point) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $saturation_point_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($delay_humidify) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $delay_humidify_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($delay_dehumidify) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $dehumidifier_turn_off_delay_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($uv_modus) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $uv_modus_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval(($uv_duration * 60)) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $uv_duration_key . '"');
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval(($uv_period *60)) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $uv_period_key . '"');
@@ -907,7 +911,25 @@
         get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($check_monitoring_humidifier) . ' WHERE ' . $key_field . ' = "' . $check_monitoring_humidifier_key . '"');
         close_database();
         }
+
+    function write_humidifier_delay_offset($delay_humidify, $humidifier_hysteresis_offset) {
+        global $config_settings_table, $value_field, $last_change_field, $key_field, $humidifier_hysteresis_offset_key, $delay_humidify_key;
+        
+        open_connection();
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($delay_humidify) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $delay_humidify_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($humidifier_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $humidifier_hysteresis_offset_key . '"');
+        close_database();
+    }
     
+    function write_temperature_control_offsets($cooling_hysteresis_offset, $heating_hysteresis_offset) {
+        global $config_settings_table, $value_field, $last_change_field, $key_field, $cooling_hysteresis_offset_key, $heating_hysteresis_offset_key;
+        
+        open_connection();
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($cooling_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $cooling_hysteresis_offset_key . '"');
+        get_query_result('UPDATE ' . $config_settings_table . ' SET "' . $value_field . '" = ' . strval($heating_hysteresis_offset) . ' , "' . $last_change_field . '" = ' . strval(get_current_time()) . ' WHERE ' . $key_field . ' ="' . $heating_hysteresis_offset_key . '"');
+        close_database();
+    }
+       
     function write_admin($language, $referenceunit_scale1, $measuring_interval_scale1, $measuring_duration_scale1, $saving_period_scale1, $samples_scale1, $spikes_scale1, $offset_scale1,
                             $referenceunit_scale2, $measuring_interval_scale2, $measuring_duration_scale2, $saving_period_scale2, $samples_scale2, $spikes_scale2, $offset_scale2,
                             $temp_sensor1, $temp_sensor2, $temp_sensor3, $temp_sensor4, $switch_control_uv_light_admin, $switch_control_light_admin, $current_check_active_admin, $current_threshold_admin,

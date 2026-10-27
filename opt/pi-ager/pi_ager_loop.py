@@ -7,9 +7,9 @@ import os
 import stat
 import time
 import datetime
-import Adafruit_DHT
+# import Adafruit_DHT
 import RPi.GPIO as gpio
-import pi_sht1x
+# import pi_sht1x
 import pi_ager_database
 import pi_ager_names
 import pi_ager_paths
@@ -912,7 +912,63 @@ def generate_humidifier_block(mode):
             return False                                    # unblock, timer not running
 
 #-------------------------------------------------------------------------------------------        
+
+
+#--------------------------------------------------------------------------------------------
+# Keeps dehumidifier active additional delay time when dehumidifier control decides to turn off
+# dehumidifier, when dehumidifier status was turned on before. This works only with dry-aging
+# mode = 4 (Auto mode with humidify and dehumidify).
+# 
+# return True, when delay timer is running, else return False
+#--------------------------------------------------------------------------------------------
+dehumidifier_delay_starttime = 0
+last_dehumidifier_state = False
+dehumidifier_delay_state_machine = 0
+
+def generate_dehumidifier_delay(mode):
+    global dehumidifier_delay_starttime
+    global last_dehumidifier_state
+    global status_dehumidifier
+    global dehumidifier_delay_state_machine
+    
+    # track and check if delay changed by user
+    dehumidifier_turn_off_delay = int(pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.dehumidifier_turn_off_delay_key))        # minutes
+    # cl_fact_logger.get_instance().info('turn off delay : ' + str( dehumidifier_turn_off_delay ))
+    
+    if (mode != 4):     # dehumidifier disabled, track dehumidifier state and do nothing else
+        last_dehumidifier_state = status_dehumidifier
+        dehumidifier_delay_state_machine = 0
+        delay_changed = False
+        return False
+    
+    match dehumidifier_delay_state_machine:
+        case 0:     # wait for dehumidifier intents to turn off
+            # cl_fact_logger.get_instance().info('dehumidifier state 0. status_dehumidifier: ' + str(status_dehumidifier) + ' last: ' + str(last_dehumidifier_state))
+            if (status_dehumidifier == False and last_dehumidifier_state == True):   # dehumidifier state changed, dehumidifier turned off, start now timer
+                if (dehumidifier_turn_off_delay == 0):
+                    last_dehumidifier_state = status_dehumidifier
+                    return False     # do not keep active dehumidifier
+                else:    
+                    dehumidifier_delay_starttime = pi_ager_database.get_current_time()     
+                    last_dehumidifier_state = status_dehumidifier
+                    dehumidifier_delay_state_machine = 1
+                    return True
+            else:
+                last_dehumidifier_state = status_dehumidifier
+                return False
         
+        case 1:   # here continue waiting for delay counts down 
+            # cl_fact_logger.get_instance().info('dehumidifier state 1')        
+            last_dehumidifier_state = status_dehumidifier    
+            if (pi_ager_database.get_current_time() >= dehumidifier_delay_starttime + dehumidifier_turn_off_delay * 60):    # convert minutes to seconds, wait for delay reached
+                dehumidifier_delay_state_machine = 0
+                return False
+            else:
+                return True                                 # delay timer is still active
+
+
+#-------------------------------------------------------------------------------------------        
+                
 def generate_humidifier_failed_event(event_msg):
     # generate event
     try:
@@ -1459,7 +1515,7 @@ def doMainLoop():
             
             # Prüfen, ob Sensordaten empfangen wurden und falls nicht, auf Notfallmodus wechseln
             if sensor_temperature != None and sensor_humidity != None and sensor_dewpoint != None:
-                count_continuing_emergency_loops = 0
+#                count_continuing_emergency_loops = 0
                 
                 #weitere Settings
                 modus = pi_ager_database.get_table_value(pi_ager_names.config_settings_table, pi_ager_names.modus_key)
@@ -1576,11 +1632,30 @@ def doMainLoop():
                 #cl_fact_logger.get_instance().debug(logstring)
                 logstring = logstring + ' \n ' + pi_ager_names.logspacer2
                 if (str(cl_fact_second_sensor_type.get_instance().get_sensor_type_ui()) != 'disabled'):
-                    logstring = logstring + ' \n ' +  _('selected external sensor') + ': ' + str(cl_fact_second_sensor_type.get_instance().get_sensor_type_ui())
-                    logstring = logstring + ' \n ' +  _('actual temperature') + ': ' + str(second_sensor_temperature) + ' °C'
-                    logstring = logstring + ' \n ' +  _('actual humidity') + ': ' + str(second_sensor_humidity) + ' %'
-                    logstring = logstring + ' \n ' +  _('actual dewpoint') + ': ' + str(second_sensor_dewpoint) + ' °C'  
-                    logstring = logstring + ' \n ' +  _('actual humidity abs') + ': ' + str(second_sensor_humidity_abs) + ' g/m³'
+                    second_sensor_type_name = cl_fact_second_sensor_type.get_instance().get_sensor_type_ui()
+                    logstring = logstring + ' \n ' +  _('selected external sensor') + ': ' + second_sensor_type_name
+                    if (second_sensor_temperature == None):
+                        logstring = logstring + ' \n ' +  _('actual temperature') + ': ' + '----'
+                    else:
+                        logstring = logstring + ' \n ' +  _('actual temperature') + ': ' + str(second_sensor_temperature) + ' °C'
+                    if (second_sensor_humidity == None):
+                        logstring = logstring + ' \n ' +  _('actual humidity') + ': ' + '----'
+                    else:
+                        logstring = logstring + ' \n ' +  _('actual humidity') + ': ' + str(second_sensor_humidity) + ' %'
+                    if (second_sensor_dewpoint == None):
+                        logstring = logstring + ' \n ' +  _('actual dewpoint') + ': ' + '----'
+                    else:
+                        logstring = logstring + ' \n ' +  _('actual dewpoint') + ': ' + str(second_sensor_dewpoint) + ' °C'
+                    if (second_sensor_humidity_abs == None):
+                        logstring = logstring + ' \n ' +  _('actual humidity abs') + ': ' + '----'
+                    else:
+                        logstring = logstring + ' \n ' +  _('actual humidity abs') + ': ' + str(second_sensor_humidity_abs) + ' g/m³'
+                    if (second_sensor_type_name == 'MiThermometer'):
+                        battery_level = pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.MiSensor_battery_key)
+                        if (battery_level == None):
+                            logstring = logstring + ' \n ' +  _('battery level') + ': ' + '----'
+                        else:
+                            logstring = logstring + ' \n ' +  _('battery level') + ': ' + f'{battery_level:.2f}' + ' V'
                     logstring = logstring + ' \n ' + pi_ager_names.logspacer2
                
                 
@@ -1629,6 +1704,7 @@ def doMainLoop():
                     if current_time >= pi_ager_init.exhaust_air_start + exhaust_air_period + exhaust_air_duration:
                         pi_ager_init.exhaust_air_start = current_time       # Timer-Timestamp aktualisiert
                         
+                logstring = logstring + ' \n ' + pi_ager_names.logspacer2        
                 # Timer fuer UV-Licht
                 if uv_modus == 0:                               # Modus 0 UV-Licht aus
                     status_uv = False                           # UV-Licht aus
@@ -1696,7 +1772,14 @@ def doMainLoop():
                         if (current_time > pi_ager_init.uv_stoptime):   # begin a new cycle
                             pi_ager_init.uv_starttime = datetime.datetime(year_now, month_now, day_now, switch_on_uv_hour, switch_on_uv_minute, 0, 0).timestamp()
                             pi_ager_init.uv_stoptime = pi_ager_init.uv_starttime + uv_duration
-        
+                
+                status_uv_manual = pi_ager_database.get_status_uv_manual()
+                if (status_uv_manual == 0):
+                    logstring = logstring + ' \n ' +  _('UV light manual off')
+                else:
+                    logstring = logstring + ' \n ' +  _('UV light automatic mode on')
+                logstring = logstring + ' \n ' + pi_ager_names.logspacer2
+                
                 # Timer fuer Licht
                 if light_modus == 0:                            # Modus 0 Licht aus
                     status_light = False                        # Licht aus
@@ -1769,7 +1852,13 @@ def doMainLoop():
                         if (current_time > pi_ager_init.light_stoptime):    # begin a new cycle
                             pi_ager_init.light_starttime = datetime.datetime(year_now, month_now, day_now, switch_on_light_hour, switch_on_light_minute, 0, 0).timestamp()
                             pi_ager_init.light_stoptime = pi_ager_init.light_starttime + light_duration
-                            
+                
+                status_light_manual = pi_ager_database.get_status_light_manual()
+                if (status_light_manual == 1):
+                    logstring = logstring + ' \n ' +  _('light manual on')
+                else:
+                    logstring = logstring + ' \n ' +  _('light automatic mode on')
+                    
                 # timer for defrost              
                 if current_time >= pi_ager_init.defrost_cycle_start + defrost_cycle_seconds:
                     pi_ager_init.defrost_cycle_start = current_time    # Timer-Timestamp aktualisiert
@@ -1849,7 +1938,7 @@ def doMainLoop():
                             if dehumidifier_modus == 2:                         # Entfeuchter zur Unterstützung
                                 status_dehumidifier = True                      # Entfeuchter unterstützend ein
                             else:
-                                status_dehumidifier = False                     # Entfeuchter aus
+                                status_dehumidifier = False                     # Nur Abluft, Entfeuchter aus
                                 
                         else:                                                   # rein über entfeuchtung
                             status_exhaust_fan = False                          # Abluft aus
@@ -1862,7 +1951,7 @@ def doMainLoop():
                            status_exhaust_fan = False         # Feuchtereduzierung Abluft-Ventilator aus
                            status_dehumidifier = False        # Entfeuchter aus
                         else:
-                           status_dehumidifier = False        # Entfeuchter aus
+                           status_dehumidifier = False        # Nur Abluft, Entfeuchter aus
                         # cl_fact_logger.get_instance().info("Mode 4: sensor_humidity = " +  f'{sensor_humidity:.1f}' + ' %' + ". humidity_low = " + f'{humidity_low:.1f}')
                     # cl_fact_logger.get_instance().info("Mode 4: status_dehumidifier = " + str(status_dehumidifier) + ". status_humidifier = " + str(status_humidifier))
                 
@@ -1870,7 +1959,12 @@ def doMainLoop():
                 if (status_humidifier == True and block_humidifier == True):    # block humudifier 
                     status_humidifier = False
                     # cl_fact_logger.get_instance().debug("Humidifier blocked by cooler active and during additional delay time.")
-                    
+                
+                keep_dehumidifier_active = generate_dehumidifier_delay(modus )  # check if dehumidifier should delay turning off
+                # cl_fact_logger.get_instance().info("keep_dehumidifier_active = " + str(keep_dehumidifier_active))
+                if (keep_dehumidifier_active == True):
+                    status_dehumidifier = True
+                
                 # Schalten des Entfeuchters und Befeuchters
                 if (status_humidifier == False and status_dehumidifier == False) :
                     gpio.output(pi_ager_gpio_config.gpio_humidifier, pi_ager_names.relay_off)
@@ -1886,7 +1980,7 @@ def doMainLoop():
                     gpio.output(pi_ager_gpio_config.gpio_dehumidifier, pi_ager_names.relay_off)
                     
                 # Schalten des UV_Licht
-                if status_uv == True and pi_ager_database.get_status_uv_manual() == 1:
+                if status_uv == True and status_uv_manual == 1:
                     switch_uv_light(pi_ager_names.relay_on)
                     # gpio.output(pi_ager_gpio_config.gpio_uv, pi_ager_names.relay_on)
                 else:   #if status_uv == False or pi_ager_database.get_status_uv_manual() == 0:
@@ -1896,7 +1990,7 @@ def doMainLoop():
                 
                 # Schalten des Licht
                 # cl_fact_logger.get_instance().info(f"Status light check befor switch_light is {status_light}")
-                if status_light == True or pi_ager_database.get_status_light_manual() == 1:
+                if status_light == True or status_light_manual == 1:
                     switch_light(pi_ager_names.relay_on)
                     # gpio.output(pi_ager_names.gpio_light, pi_ager_names.relay_on)
                 else:   #if status_light == False:   #  and pi_ager_database.get_status_light_manual() == 0:
@@ -2045,16 +2139,16 @@ def doMainLoop():
 #                else:
 #                    sensor_temperature -= 0.005 # simulate decreasing cabinet temperature over time
                     
-            else:
-                count_continuing_emergency_loops += 1
+#            else:
+                # count_continuing_emergency_loops += 1
                 # logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter) + ' without sensordata!!')
                 # logger.warning('loopnumber: ' + str(pi_ager_init.loopcounter) + ' is loop ' + str(count_continuing_emergency_loops) + ' without sensor response!')
-                cl_fact_logger.get_instance().debug('loopnumber: ' + str(pi_ager_init.loopcounter) + ' without sensordata!!')
-                cl_fact_logger.get_instance().warning('loopnumber: ' + str(pi_ager_init.loopcounter) + ' is loop ' + str(count_continuing_emergency_loops) + ' without sensor response!')
-                if count_continuing_emergency_loops == 10:
+                # cl_fact_logger.get_instance().debug('loopnumber: ' + str(pi_ager_init.loopcounter) + ' without sensordata!!')
+                # cl_fact_logger.get_instance().warning('loopnumber: ' + str(pi_ager_init.loopcounter) + ' is loop ' + str(count_continuing_emergency_loops) + ' without sensor response!')
+                # if count_continuing_emergency_loops == 10:
                     # logger.info('Because of ' + str(count_continuing_emergency_loops) + ' loops without sensordata the system will be rebooted now!')
-                    cl_fact_logger.get_instance().info('Because of ' + str(count_continuing_emergency_loops) + ' loops without sensordata the system will be rebooted now!')
-                    os.system('sudo /var/sudowebscript.sh reboot')
+                #    cl_fact_logger.get_instance().info('Because of ' + str(count_continuing_emergency_loops) + ' loops without sensordata the system will be rebooted now!')
+                #    os.system('sudo /var/sudowebscript.sh reboot')
             
             # logger.debug('loopnumber: ' + str(pi_ager_init.loopcounter))
             cl_fact_logger.get_instance().debug('loopnumber: ' + str(pi_ager_init.loopcounter))
@@ -2080,7 +2174,9 @@ def doMainLoop():
         # reflect i/o status in DB
         switch_light(pi_ager_names.relay_off)
         switch_uv_light(pi_ager_names.relay_off)
-        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, 0, 0, 0, 0, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data) 
+#        pi_ager_database.write_current(sensor_temperature, 0, 0, 0, 0, sensor_humidity, sensor_dewpoint, sensor_humidity_abs, second_sensor_temperature, second_sensor_humidity, second_sensor_dewpoint, second_sensor_humidity_abs, 0, 0, 0, 0, temp_sensor1_data, temp_sensor2_data, temp_sensor3_data, temp_sensor4_data) 
+        pi_ager_database.write_current(None, 0, 0, 0, 0, None, None, None, None, None, None, None, 0, 0, 0, 0, None, None, None, None) 
+        pi_ager_database.update_table_val(pi_ager_names.current_values_table, pi_ager_names.MiSensor_battery_key, None)   
         cl_fact_logger.get_instance().debug('in loop try end -----------------------------------------------------')
         
     except Exception as cx_error:

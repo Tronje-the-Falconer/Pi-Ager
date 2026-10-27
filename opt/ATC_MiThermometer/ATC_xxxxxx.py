@@ -155,7 +155,7 @@ def job():
         scanner = btle.Scanner(arg.hci).withDelegate(ScanPrint(arg))
 
 #    print (ANSI_RED + "Scanning for devices..." + ANSI_OFF)
-        devices = scanner.scan(arg.timeout)
+        devices = scanner.scan(arg.timeout, passive=True)
 #        assert False, 'testing assertion'
         
     except Exception as exc:

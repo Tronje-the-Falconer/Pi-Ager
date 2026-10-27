@@ -1,4 +1,12 @@
 #!/bin/bash
+# Shrinkt ein Pi-OS Image. Wird im pi-ager_backup Script aufgerufen
+# um ein mit 'dd' erstelltes Image zu verkleinern.
+
+LOGFILE="/var/www/logs/pi-ager_backup.log"
+
+log() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') $*" | tee -a "$LOGFILE"
+}
 
 mkloop()
 {
@@ -21,9 +29,10 @@ fsckerr()
 
 errexit()
 {
-  echo ""
-  echo -e "\e[91m$1\e[39m"
-  echo ""
+  log ""
+#  log -e "\e[91m$1\e[39m"
+  log "$1"
+  log ""
   exit 1
 }
 
@@ -38,9 +47,9 @@ for PID in $(pidof -x -o %PPID "${PGMNAME}"); do
 done
 gdisk -l "${DEVICE}" &> /dev/null
 if [ $? -eq 127 ]; then
-  echo ""
-  echo "gdisk not installed. Installing gdisk"
-  echo ""
+  log ""
+  log "gdisk not installed. Installing gdisk"
+  log ""
   apt-get update
   apt-get install gdisk
 fi
@@ -68,7 +77,7 @@ if [ ${#answer} -eq 0 ]; then
   answer=0
 fi
 ADDMB=${answer}
-echo ""
+log ""
 INFO="$(sfdisk -d "${IMGFILE}")"
 BOOTBEG=$(sed -n "s|^${IMGFILE}1.*start=\s*\([0-9]\+\).*$|\1|p" <<< "${INFO}")
 BOOTEND=$((${BOOTBEG} + $(sed -n "s|^${IMGFILE}1.*size=\s*\([0-9]\+\).*$|\1|p" <<< "${INFO}") - 1))
@@ -77,22 +86,48 @@ PARTUUID_1="$(sed -n "s|^${IMGFILE}1.*uuid=\(\S\+\).*$|\1|p" <<< "${INFO}")"
 PARTUUID_2="$(sed -n "s|^${IMGFILE}2.*uuid=\(\S\+\).*$|\1|p" <<< "${INFO}")"
 PTUUID="$(sed -n "s|^label-id: \(\S\+\).*$|\1|p" <<< "${INFO}")"
 PTTYPE="$(sed -n "s|^label: \(\S\+\).*$|\1|p" <<< "${INFO}")"
+log "PTTYPE : ${PTTYPE}"
 if [[ "${PTTYPE}" != "dos" && "${PTTYPE}" != "gpt" ]]; then
   errexit "Unsupported partition table type: ${PTTYPE}"
 fi
 mkloop
-e2fsck -f -p -v "${LOOP}p2"
-if [ $? -gt 2 ]; then
+OUTPUT=$(e2fsck -f -y -v "${LOOP}p2" 2>&1); RC=$?
+log "First e2fsck" "$OUTPUT"
+if [ ${RC} -gt 2 ]; then
   fsckerr "before"
 fi
-echo ""
-resize2fs -f -M "${LOOP}p2"
-resize2fs -f -M "${LOOP}p2"
-resize2fs -f -M "${LOOP}p2"
-e2fsck -f -n "${LOOP}p2"
+
+log ""
+
+# OUTPUT=$(dumpe2fs ${LOOP}p2 2>/dev/null | awk '/^Group/{g=$2} /Inode table at/{print g, $4}')
+# log "dumpe2fs inode table position: $OUTPUT"
+
+OUTPUT=$(resize2fs -P "${LOOP}p2" 2>&1)
+log "resize2fs -P : $OUTPUT"
+
+# OUTPUT=$(dumpe2fs -h "${LOOP}p2" 2>&1 | grep -E 'features|Block count|Free blocks|Inode count|Free inodes')
+# log "dumpe2fs : $OUTPUT"
+
+log ""
+OUTPUT=$(resize2fs -d 32 -P "${LOOP}p2" 2>&1)
+log "resize2fs min-calc: $OUTPUT"
+
+USED=$(dumpe2fs -h "${LOOP}p2" 2>/dev/null | awk -F: '/^Block count/{bc=$2} /^Free blocks/{fb=$2} END{print bc-fb}')
+TARGET=$(( USED * 110 / 100 ))
+for i in 1 2 3 4 5; do
+  OUTPUT=$(resize2fs -f "${LOOP}p2" ${TARGET} 2>&1); RC=$?
+  log "resize2fs ${TARGET}: rc=${RC} ${OUTPUT}"
+  [ ${RC} -eq 0 ] && break
+  e2fsck -f -y "${LOOP}p2" > /dev/null 2>&1
+  TARGET=$(( TARGET + 32768 ))      # eine Blockgruppe mehr
+done
+
+OUTPUT=$(e2fsck -f -n "${LOOP}p2" 2>&1)
 if [ $? -ne 0 ]; then
   fsckerr "after"
 fi
+log "SUCCESS" "e2fsck erfolgreich: $OUTPUT"
+
 INFO="$(tune2fs -l "${LOOP}p2" 2>/dev/null)"
 rmloop
 NEWSIZE=$(sed -n 's|^Block count:\s*\(.*\)|\1|p' <<< "${INFO}")
@@ -127,18 +162,25 @@ y
 EOF
 fi
 if [ ${ADDMB} -ne 0 ]; then
-  echo ""
+  log "Start e2fsck"
   mkloop
-  e2fsck -f -n "${LOOP}p2"
+  OUTPUT=$(e2fsck -f -n "${LOOP}p2" 2>&1)
   if [ $? -ne 0 ]; then
     fsckerr "before"
   fi
-  echo ""
-  resize2fs -f "${LOOP}p2"
-  e2fsck -f -n "${LOOP}p2"
+  log "$OUTPUT"
+  
+  log "Start resize2fs"
+  OUTPUT=$(resize2fs -f "${LOOP}p2" 2>&1)
+  log "$OUTPUT"
+  
+  log "Start e2fsck"
+  OUTPUT=$(e2fsck -f -n "${LOOP}p2" 2>&1)
   if [ $? -ne 0 ]; then
     fsckerr "after"
   fi
+  log "$OUTPUT"
+  log "Remove loop device"
   rmloop
 fi
-echo ""
+log ""

@@ -202,12 +202,12 @@
                                             echo _('external');
                                             echo '</h2>';
                                             if ($sensorsecondname == 'MiThermometer') {
-                                                if ($MiSensor_battery === null) {
-                                                    echo '<h4 id="secondsensorname_id">(' . $sensorsecondname . ', battery: ' . '----V)</h4>';
+                                                if ($MiSensor_battery === null or $status_main == 0 or $status_piager == 0) {
+                                                    echo '<h4 id="secondsensorname_id">(' . $sensorsecondname . ', ' . _('battery') . ': ' . '----V)</h4>';
                                                 }
                                                 else {
                                                     $MiSensor_battery_tmp = number_format(floatval($MiSensor_battery), 2, '.', '');
-                                                    echo '<h4 id="secondsensorname_id">(' . $sensorsecondname . ', battery: ' . $MiSensor_battery_tmp . 'V)</h4>';
+                                                    echo '<h4 id="secondsensorname_id">(' . $sensorsecondname . ', ' . _('battery') . ': ' . $MiSensor_battery_tmp . 'V)</h4>';
                                                 }
                                             }
                                             else {
@@ -1176,10 +1176,10 @@
                                                 $internal_temperature = get_table_value($current_values_table, $sensor_temperature_key);
                                                 $external_temperature = get_table_value($current_values_table, $sensor_extern_temperature_key);
                                                 if ($external_temperature !== null && $internal_temperature !== null && $external_temperature < $setpoint_temperature && ($modus == 3 || $modus == 4)) {
-                                                    $cooler_on = number_format(floatval($setpoint_temperature + $heating_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
-                                                    $cooler_off = number_format(floatval($setpoint_temperature - $heating_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');
-                                                    $heater_on = number_format(floatval($setpoint_temperature - $cooling_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
-                                                    $heater_off = number_format(floatval($setpoint_temperature + $cooling_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');
+                                                    $cooler_on = number_format(floatval($setpoint_temperature + $heating_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');       // ----- 401a 
+                                                    $cooler_off = number_format(floatval($setpoint_temperature - $heating_hysteresis/2 + $cooling_hysteresis_offset), 2, '.', '');      // ----- 401a 
+                                                    $heater_on = number_format(floatval($setpoint_temperature - $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');       // ----- 401a
+                                                    $heater_off = number_format(floatval($setpoint_temperature + $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');      // ----- 401a 
                                                 }
                                                 else if ($modus == 2) { // heater only
                                                     $heater_on = number_format(floatval($setpoint_temperature - $cooling_hysteresis/2 + $heating_hysteresis_offset), 2, '.', '');

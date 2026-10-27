@@ -56,7 +56,7 @@ async function handleContent( msg ) {
     var str_meat4; 
     var str_MiSensor_battery;
     
-    if (MiSensor_battery == null) {
+    if (MiSensor_battery === null || status_piager == 0 || grepmain == 0) {
         str_MiSensor_battery = '----';
     }
     else {
@@ -262,7 +262,10 @@ async function handleContent( msg ) {
         $('#json_hum_abs_extern').html(str_humidity_abs_extern + " g/m³");
     }
     if (sensorsecondtype == 14) {
-        $('#secondsensorname_id').html('(MiThermometer, battery: ' + str_MiSensor_battery + 'V)');
+        console.log('batt level = ' + str_MiSensor_battery);
+        var tempHtmlString = $('#secondsensorname_id');
+        tempHtmlString.html( tempHtmlString.html().slice(0, -6) + str_MiSensor_battery + 'V)' ); 
+        // $('#secondsensorname_id').html('(MiThermometer, battery: ' + str_MiSensor_battery + 'V)');
     }
     
     //------------------------Setzen der Scale1-Werte auf der Webseite

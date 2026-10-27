@@ -31,6 +31,7 @@ import pi_ager_gpio_config
 from pi_ager_nextion.client import Nextion, EventType
 from main.pi_ager_cl_logger import cl_fact_logger
 
+import pi_ager_helper
 import threading
 
 class Timer:
@@ -162,6 +163,12 @@ class cl_nextion( threading.Thread ):
         await self.client.set('n_mod.val',modus)
 
     async def save_page_17_19_values(self):
+        # check if agingtable is active, if active do not save new values
+        status_agingtable = int(pi_ager_database.get_table_value(pi_ager_names.current_values_table, pi_ager_names.status_agingtable_key ))
+        if (status_agingtable == 1):
+            await self.init_page_17_19()
+            return
+            
         #get values and check if within limits
         temp_soll = await self.client.get('n_temp_soll.val')
         hum_soll = await self.client.get('n_hum_soll.val')
@@ -190,8 +197,12 @@ class cl_nextion( threading.Thread ):
             
         pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.setpoint_temperature_key, temp_soll)    
         pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.setpoint_humidity_key, hum_soll)    
-        pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.modus_key, modus)    
-
+        pi_ager_database.update_value_in_table(pi_ager_names.config_settings_table, pi_ager_names.modus_key, modus)
+        #  update humidifier control settings, delay and hysteresis offset
+        pi_ager_helper.eval_humidifier_delay_offset( temp_soll )
+        # update cooler and heater hysteresis offsets
+        pi_ager_helper.eval_cooler_heater_offsets( temp_soll)
+        
     async def wakeup_waiter(self, event):   # process touch screen wakeup event
         try:
             while True:
@@ -385,7 +396,7 @@ class cl_nextion( threading.Thread ):
                     await self.control_light_status()
                 elif self.data.page_id == 17 and self.data.component_id == 5:   # control_fridge, btn_piager,  start/stop
                     await self.control_piager_start_stop()
-                elif self.data.page_id == 17 and self.data.component_id == 9:   # control_fridge, btn_ok, button save new Temp/Hum. values
+                elif self.data.page_id == 17 and self.data.component_id == 8:   # control_fridge, btn_ok, button save new Temp/Hum. values
                     await self.save_page_17_19_values()
                 elif self.data.page_id == 17 and self.data.component_id == 10:  # control_fridge, btn_wifi
                     await self.client.command('page 6')
@@ -452,9 +463,15 @@ class cl_nextion( threading.Thread ):
             display_name = 'NX3224K028'
         elif display_type == 2:
             display_name = 'NX3224F028'
-        else:
+        elif display_type == 3:
             display_name = 'NX3224T028'
-
+        elif display_type == 4:
+            display_name = 'NX3224K024'
+        elif display_type == 5:
+            display_name = 'NX3224F024'
+        else:
+            display_name = 'NX3224T024'
+            
         await self.client.set('values.displ_version.txt', display_name)
         await self.client.set('values.sw_version.txt', version)
         

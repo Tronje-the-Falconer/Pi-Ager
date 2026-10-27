@@ -74,8 +74,8 @@ class cl_db_database_sqlite:
     def connect(self):
         # cl_fact_logger.get_instance().debug('After lock.acquire')
         
-        #Enable shared chache
-        sqlite3.enable_shared_cache(True)
+        #Enable shared chache, removed from python3.12
+        # sqlite3.enable_shared_cache(True)
         self.connection = sqlite3.connect(pi_ager_paths.sqlite3_file, isolation_level=None, timeout = 10)
         # Set journal mode to WAL (Write-Ahead Log)
         self.connection.execute('PRAGMA journal_mode = wal')

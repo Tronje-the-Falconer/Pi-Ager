@@ -2,220 +2,352 @@
 # File: setup_pi-ager.sh
 # START
 #crontab richtigstellen 
-sed -n '/reboot/!p' /etc/crontab >/etc/crontabtemp ; mv -f /etc/crontabtemp /etc/crontab # sed sucht | -n abstellen von ausgabe auf Konsole 
-echo
-echo "------------------------------------------------------"
-echo "Config Start"
-echo "------------------------------------------------------"
+# sed -n '/reboot/!p' /etc/crontab >/etc/crontabtemp ; mv -f /etc/crontabtemp /etc/crontab # sed sucht | -n abstellen von ausgabe auf Konsole 
 
-if [ -e /boot/firmware/setup.txt ]           #wenn setup.txt existiert
+INTERFACE="wlan0"
+CONNECTION_NAME="PI_AGER_STA"
+
+MAX_RETRIES=5
+RETRY_DELAY=5               # Sekunden zwischen den Versuchen
+# ─────────────────────────────────────────────────────────────
+
+# Farbausgabe
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
+log()     { echo -e "[$(date '+%H:%M:%S')] $*"; }
+log_ok()  { echo -e "${GREEN}[$(date '+%H:%M:%S')] $*${NC}"; }
+log_warn(){ echo -e "${YELLOW}[$(date '+%H:%M:%S')] $*${NC}"; }
+log_err() { echo -e "${RED}[$(date '+%H:%M:%S')] $*${NC}"; }
+
+log
+log "------------------------------------------------------"
+log "Config Start"
+log "------------------------------------------------------"
+
+if [ ! -e /boot/firmware/setup.txt ]; then           #wenn setup.txt nicht existiert
+    log "Setup.txt does not exist, exit"
+    exit 1
+fi
+
+log "Setup.txt exists, getting configuration parameter"
+eval $(grep -i "^piname=" /boot/firmware/setup.txt| tr -d "\n\r")
+eval $(grep -i "^pipass=" /boot/firmware/setup.txt| tr -d "\n\r")
+eval $(grep -i "^rootpass=" /boot/firmware/setup.txt| tr -d "\n\r")
+eval $(grep -i "^webguipw=" /boot/firmware/setup.txt| tr -d "\n\r")
+eval $(grep -i "^dbpw=" /boot/firmware/setup.txt| tr -d "\n\r")
+eval $(grep -i "^wlanssid=" /boot/firmware/setup.txt| tr -d "\n\r")
+eval $(grep -i "^wlankey=" /boot/firmware/setup.txt| tr -d "\n\r")
+eval $(grep -i "^country=" /boot/firmware/setup.txt| tr -d "\n\r")
+eval $(grep -i "^keepconf=" /boot/firmware/setup.txt| tr -d "\n\r")
+eval $(grep -i "^sensor=" /boot/firmware/setup.txt | tr -d "\n\r")    
+eval $(grep -i "^hmidisplay=" /boot/firmware/setup.txt | tr -d "\n\r")
+eval $(grep -i "^sensor=" /boot/firmware/setup.txt | tr -d "\n\r")  
+log "configuration parameter:"
+log "Hostname = $piname"
+#log $pipass
+#log $rootpass
+#log $webguipw
+log "WLAN SSID = $wlanssid"
+log "Country = $country"
+#log $wlankey
+log "Config behalten = $keepconf"
+log "sensor = $sensor"    
+log "hmidisplay = $hmidisplay"
+
+#  log "SSH Host Key generieren"
+# SSH Host Key generieren
+#  /bin/rm -fv /etc/ssh_host_*
+#/usr/sbin/dpkg-reconfigure openssh-server
+#  systemctl restart ssh.service
+# pi Rechnername setzen
+if [ -n "$piname" ]            #wenn nicht ""
 then
-    echo "Setup.txt exists, getting variables"
-    eval $(grep -i "^piname=" /boot/firmware/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^pipass=" /boot/firmware/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^rootpass=" /boot/firmware/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^webguipw=" /boot/firmware/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^dbpw=" /boot/firmware/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^wlanssid=" /boot/firmware/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^wlankey=" /boot/firmware/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^country=" /boot/firmware/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^keepconf=" /boot/firmware/setup.txt| tr -d "\n\r")
-    eval $(grep -i "^sensor=" /boot/firmware/setup.txt | tr -d "\n\r")    
-    eval $(grep -i "^hmidisplay=" /boot/firmware/setup.txt | tr -d "\n\r")
-    eval $(grep -i "^sensor=" /boot/firmware/setup.txt | tr -d "\n\r")  
-    echo "Variablen"
-    echo "Hostname = $piname"
-    #echo $pipass
-    #echo $rootpass
-    #echo $webguipw
-    echo "WLAN SSID = $wlanssid"
-    echo "Country = $country"
-    #echo $wlankey
-    echo "Config behalten = $keepconf"
-	echo "sensor = $sensor"    
-    echo "hmidisplay = $hmidisplay"
+    # CURRENT_HOSTNAME=`cat /etc/hostname | tr -d " \t\n\r"`
+    # echo -n $piname > /etc/hostname
+    # sed -i "s/127.0.1.1.*$CURRENT_HOSTNAME/127.0.1.1\t$piname/g" /etc/hosts
+    raspi-config nonint do_hostname $piname
+    log "Hostname gesetzt"
+fi
+
+# pi pass setzen
+if [ -n "$pipass" ]           #wenn nicht ""
+then
+    echo "pi:$pipass" | chpasswd 
+    log "Passwort pi gesetzt"
+fi
+
+# root pass setzen
+if [ -n "$rootpass" ]         #wenn nicht ""
+then
+    echo "root:$rootpass" | chpasswd 
+    log "Passwort root gesetzt"
+fi
+
+# phpliteadmin pass setzen
+if [ -n "$dbpw" ]         #wenn nicht ""
+then
+    sed -i "s/raspberry/$dbpw/g" /var/www/phpliteadmin.config.php
+    log "phpliteadmin.config.php gesetzt"
+fi
+
+# settings pass setzen oder direkt mit https://websistent.com/tools/htdigest-generator-tool/ 
+if [ -n "$webguipw" ]         #wenn nicht ""
+then
+    user="pi-ager"
+    realm="Pi-Ager"
+    digest="$( printf "%s:%s:%s" "$user" "$realm" "$webguipw" | md5sum | awk '{print $1}' )"
     
-    #  echo "SSH Host Key generieren"
-    # SSH Host Key generieren
-    #  /bin/rm -fv /etc/ssh_host_*
-    #/usr/sbin/dpkg-reconfigure openssh-server
-    #  systemctl restart ssh.service
-    # pi Rechnername setzen
-    if [ -n "$piname" ]            #wenn nicht ""
-    then
-        # CURRENT_HOSTNAME=`cat /etc/hostname | tr -d " \t\n\r"`
-        # echo -n $piname > /etc/hostname
-        # sed -i "s/127.0.1.1.*$CURRENT_HOSTNAME/127.0.1.1\t$piname/g" /etc/hosts
-        raspi-config nonint do_hostname $piname
-        echo "Hostname gesetzt"
-    fi
+	rm /var/.htcredentials
+	echo "$user:$realm:$digest" > /var/.htcredentials
+    log "Passwort webgui gesetzt"
+fi
 
-    # pi pass setzen
-    if [ -n "$pipass" ]           #wenn nicht ""
-    then
-        echo "pi:$pipass" | chpasswd 
-        echo "Passwort pi gesetzt"
-    fi
 
-    # root pass setzen
-    if [ -n "$rootpass" ]         #wenn nicht ""
-    then
-        echo "root:$rootpass" | chpasswd 
-        echo "Passwort root gesetzt"
-    fi
+# check sensor
+sensorbus=0
+sensornum=5
+case $sensor in
+  "DHT11") sensorbus=1; sensornum=1;;
+  "DHT22") sensorbus=1; sensornum=2;;
+  "SHT75") sensorbus=1; sensornum=3;;
+  "SHT85") sensorbus=0; sensornum=4;;
+  "SHT3x") sensorbus=0; sensornum=5;;
+  "SHT3x-mod") sensorbus=0; sensornum=6;;
+  "AHT1x") sensorbus=0; sensornum=7;; 
+  "AHT1x-mod") sensorbus=0; sensornum=8;;       
+  "AHT2x") sensorbus=0; sensornum=9;;
+  "AHT30") sensorbus=0; sensornum=10;;      
+  "AHT4x-A") sensorbus=0; sensornum=11;;
+  "AHT4x-B") sensorbus=0; sensornum=12;;
+  "AHT4x-C") sensorbus=0; sensornum=13;;      
+esac
+log "Bus = $sensorbus  sensor = $sensornum"
 
-    # phpliteadmin pass setzen
-    if [ -n "$dbpw" ]         #wenn nicht ""
-    then
-        sed -i "s/raspberry/$dbpw/g" /var/www/phpliteadmin.config.php
-        echo "phpliteadmin.config.php gesetzt"
-    fi
+if [ -n "$sensornum" ]    # wenn nicht ""
+then
+    sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; UPDATE config SET value=$sensorbus WHERE key='sensorbus';"
+    sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; UPDATE config SET value=$sensornum WHERE key='sensortype';"
+    log "sensorbus und sensornum in DB gesetzt"
+fi
 
-    # settings pass setzen oder direkt mit https://websistent.com/tools/htdigest-generator-tool/ 
-    if [ -n "$webguipw" ]         #wenn nicht ""
-    then
-        user="pi-ager"
-        realm="Pi-Ager"
-        digest="$( printf "%s:%s:%s" "$user" "$realm" "$webguipw" | md5sum | awk '{print $1}' )"
-        
-		rm /var/.htcredentials
-		echo "$user:$realm:$digest" > /var/.htcredentials
-        echo "Passwort webgui gesetzt"
-    fi
+if [ $sensorbus -eq 0 ]; then
+# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
+#        rm -f /etc/modprobe.d/Pi-Ager_i2c_off.conf
+    log "i2c is active"
+elif [ $sensorbus -eq 1 ]; then
+# hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln
+#        cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
+    log "1-wire is active"
+fi
 
-    # wlan Netz und Key eintragen
-    # remove old profiles but not PI_AGER_ap.nmconnection
-    # rfkill unblock wifi
-    mv /etc/NetworkManager/system-connections/PI_AGER_AP.nmconnection /etc/NetworkManager/system-connections/PI_AGER_AP.nmconnection.org
-    rm /etc/NetworkManager/system-connections/*.nmconnection
-    mv /etc/NetworkManager/system-connections/PI_AGER_AP.nmconnection.org /etc/NetworkManager/system-connections/PI_AGER_AP.nmconnection
-    # systemctl restart NetworkManager
-    if [ -n "$wlanssid" ]         #wenn nicht ""
-    then
-        uppercase_country="${country^^}"
-        if [  ${#wlankey} -ge 8 ] && [ ${#uppercase_country} -eq 2 ];  # 8 Zeichen oder mehr und exakt 2 Zeichen für country
-        then
-            # echo "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev" > /etc/wpa_supplicant/wpa_supplicant.conf
-            # echo "update_config=1" >> /etc/wpa_supplicant/wpa_supplicant.conf
-            # echo "country=$country" >> /etc/wpa_supplicant/wpa_supplicant.conf
-            # wpa_passphrase "$wlanssid" "$wlankey" >> /etc/wpa_supplicant/wpa_supplicant.conf
-            # echo -e "\nnetwork={\n\tssid=\x22${wlanssid}\x22\n\tpsk=\x22${wlankey}\x22\n\tkey_mgmt=WPA-PSK\n}" >> /etc/wpa_supplicant/wpa_supplicant.conf
-            echo "Uppercase Country = $uppercase_country"
-            raspi-config nonint do_wifi_country "$uppercase_country"
-            echo "raspi-config do_wifi_country setup finished"
-            # raspi-config nonint do_wifi_ssid_passphrase "$wlanssid" "$wlankey"
-            # nmcli device wifi connect "$wlanssid" password "$wlankey" ifname wlan0
-            nmFilename='/etc/NetworkManager/system-connections/pi-ager-wlan.nmconnection'
-            cat <<EOF > "$nmFilename"
-[connection]
-id=pi-ager-wlan
-uuid=
-type=wifi
-interface-name=wlan0
-timestamp=
-autoconnect=true
-
-[wifi]
-mode=infrastructure
-ssid=
-
-[wifi-security]
-auth-alg=open
-key-mgmt=wpa-psk
-psk=
-
-[ipv4]
-method=auto
-
-[ipv6]
-addr-gen-mode=default
-method=auto
-
-[proxy]
-EOF
-            chmod -R 600 "$nmFilename"
-            chown -R root:root "$nmFilename"
-            uuid=$(uuidgen)
-            timestamp=$(date +%s)
-            modify_nmconnection "$nmFilename" "$wlanssid" "$wlankey" "$uuid" "$timestamp"
-            if [ $? -eq 0 ]
-            then
-                echo "WLAN SSID und Passphrase gesetzt"
-            else
-                echo "Fehler $? : WLAN SSID und Passphrase konnten nicht gesetzt werden"
-            fi
-            # restart network manager to activate
-            echo "restart NetworkManager"
-            systemctl restart NetworkManager 
-        fi
-    fi
-
+# ===========================================================
+# finish execution
+# ===========================================================
+function finish()
+{
     # Configfile löschen
     if [ -z "$keepconf" ]         #wenn ""
     then
         rm /boot/firmware/setup.txt
-        echo "Config gelöscht"
-    fi
-    
-# check sensor
-    sensorbus=0
-    sensornum=5
-    case $sensor in
-      "DHT11") sensorbus=1; sensornum=1;;
-      "DHT22") sensorbus=1; sensornum=2;;
-      "SHT75") sensorbus=1; sensornum=3;;
-      "SHT85") sensorbus=0; sensornum=4;;
-      "SHT3x") sensorbus=0; sensornum=5;;
-      "SHT3x-mod") sensorbus=0; sensornum=6;;
-      "AHT1x") sensorbus=0; sensornum=7;; 
-      "AHT1x-mod") sensorbus=0; sensornum=8;;       
-      "AHT2x") sensorbus=0; sensornum=9;;
-      "AHT30") sensorbus=0; sensornum=10;;      
-      "AHT4x-A") sensorbus=0; sensornum=11;;
-      "AHT4x-B") sensorbus=0; sensornum=12;;
-      "AHT4x-C") sensorbus=0; sensornum=13;;      
-    esac
-    echo "Bus = $sensorbus  sensor = $sensornum"
-
-    if [ -n "$sensornum" ]    # wenn nicht ""
-    then
-        sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; UPDATE config SET value=$sensorbus WHERE key='sensorbus';"
-        sqlite3 /var/www/config/pi-ager.sqlite3 "PRAGMA journalMode = wal; UPDATE config SET value=$sensornum WHERE key='sensortype';"
-        echo "sensorbus und sensornum in DB gesetzt"
-    fi
-    
-    if [ $sensorbus -eq 0 ]; then
-    # hier muss alles hin was vor dem shutdown gemacht werden soll, um auf i2c zu wechseln
-        rm -f /etc/modprobe.d/Pi-Ager_i2c_off.conf
-        echo "i2c is active"
-    elif [ $sensorbus -eq 1 ]; then
-    # hier muss alles hin was vor dem shutdown gemacht werden soll, um auf 1wire zu wechseln
-        cp /etc/modprobe.d/Pi-Ager_i2c_off.conf.on /etc/modprobe.d/Pi-Ager_i2c_off.conf
-        echo "1-wire is active"
-
+        log "Config gelöscht"
     fi
 
-# load firmware into HMI display if hmidisplay != "none"
+    log "disable setup_pi-ager.service now"
+    systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
+
+    # enable and start pi-ager_main.service
+    systemctl enable --now pi-ager_main.service 
+
+    exit 0
+}
+
+# ===========================================================
+# firmware upload for HMI display
+# ===========================================================
+function hmidisplay_firmware_upload()
+{
+    # load firmware into HMI display if hmidisplay != "none"
     case $hmidisplay in
-        "NX3224K028") echo "start firmware upload for HMI display device $hmidisplay"
-                      nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224K028/pi-ager.tft
-                      echo "firmware upload for HMI device finished";;
-        "NX3224T028") echo "start firmware upload for HMI display device $hmidisplay"
-                      nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224T028/pi-ager.tft
-                      echo "firmware upload for HMI device finished";;
-        "NX3224F028") echo "start firmware upload for HMI display device $hmidisplay"
-                      nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224F028/pi-ager.tft
-                      echo "firmware upload for HMI device finished";;
+        "NX3224K028") log "start firmware upload for HMI display device $hmidisplay"
+                  nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224K028/pi-ager.tft
+                  log "firmware upload for HMI device finished";;
+        "NX3224T028") log "start firmware upload for HMI display device $hmidisplay"
+                  nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224T028/pi-ager.tft
+                  log "firmware upload for HMI device finished";;
+        "NX3224F028") log "start firmware upload for HMI display device $hmidisplay"
+                  nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224F028/pi-ager.tft
+                  log "firmware upload for HMI device finished";;
+        "NX3224K024") log "start firmware upload for HMI display device $hmidisplay"
+                  nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224K024/pi-ager.tft
+                  log "firmware upload for HMI device finished";;
+        "NX3224T024") log "start firmware upload for HMI display device $hmidisplay"
+                  nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224T024/pi-ager.tft
+                  log "firmware upload for HMI device finished";;
+        "NX3224F024") log "start firmware upload for HMI display device $hmidisplay"
+                  nextion-fw-upload /dev/serial0 /var/www/nextion/NX3224F024/pi-ager.tft
+                  log "firmware upload for HMI device finished";;
     esac
-fi
+}
 
-echo "disable setup_pi-ager.service now"
-systemctl disable setup_pi-ager.service # Setupscript in Startroutine deaktivieren, da es nur beim ersten Start benötigt wird. 
-# expand root file system. Not here! Is done by initramfs automatically
-#  raspi-config nonint do_expand_rootfs && reboot
+# ===========================================================
+#  setup WLAN connection
+# ===========================================================
+function setup_wlan_connection()
+{
+    log "WLAN Verbindung aufbauen"
+    # ════════════════════════════════════════════════════════════
+    # ── Eingabe-Validierung ──────────────────────────────────────
+    # ════════════════════════════════════════════════════════════
+    
+    validation_failed=0
+    
+    # 1) SSID: darf nicht leer sein
+    if [[ -z "$wlanssid" ]]; then
+        log_err "Validierung fehlgeschlagen: SSID darf nicht leer sein."
+        validation_failed=1
+    fi
+    
+    # 2) WLAN_KEY: mindestens 8 Zeichen
+    if [[ ${#wlankey} -lt 8 ]]; then
+        log_err "Validierung fehlgeschlagen: WLAN_KEY muss mindestens 8 Zeichen lang sein (aktuell: ${#wlankey})."
+        validation_failed=1
+    fi
+    
+    # 3) country: genau 2 Zeichen, ausschließlich A-Z
+    if [[ ! "$country" =~ ^[A-Z]{2}$ ]]; then
+        log_err "Validierung fehlgeschlagen: country muss genau 2 Großbuchstaben enthalten (z.B. 'DE'). Aktueller Wert: '$country'."
+        validation_failed=1
+    fi
+    
+    if [[ $validation_failed -ne 0 ]]; then
+        log_err "Abbruch wegen Konfigurationsfehlern. Bitte obige Meldungen korrigieren."
+        log_err "WLAN setup can also performed when connected to Pi-Ager access point."
+        log_err "Then setup WLAN connection parameter in ADMIN web page."
+        finish
+    fi
+    
+    log_ok "Eingabe-Validierung bestanden (SSID, WLAN_KEY, Country-Code: $country)."
+    
+    # ════════════════════════════════════════════════════════════
+    # ── Voraussetzungen prüfen ───────────────────────────────────
+    # ════════════════════════════════════════════════════════════
+    
+    if ! command -v nmcli &>/dev/null; then
+        log_err "nmcli nicht gefunden. Bitte NetworkManager installieren."
+        finish
+    fi
+    
+    if ! command -v raspi-config &>/dev/null; then
+        log_err "raspi-config nicht gefunden. Läuft das Script auf einem Raspberry Pi mit Pi-OS?"
+        finish
+    fi
+    
+    if ! ip link show "$INTERFACE" &>/dev/null; then
+        log_err "Interface '$INTERFACE' nicht gefunden."
+        finish
+    fi
+    
+    # ════════════════════════════════════════════════════════════
+    # ── WLAN-Ländercode setzen ───────────────────────────────────
+    # ════════════════════════════════════════════════════════════
+    
+    log "Setze WLAN-Ländercode auf '$country' via raspi-config ..."
+    
+    raspi-config nonint do_wifi_country "$country"
+    
+    if [[ $? -ne 0 ]]; then
+        log_err "Fehler beim Setzen des WLAN-Ländercodes. Abbruch."
+        finish
+    fi
+    
+    log_ok "WLAN-Ländercode '$country' erfolgreich gesetzt."
+    
+    # ════════════════════════════════════════════════════════════
+    # ── Altes Verbindungsprofil entfernen (falls vorhanden) ──────
+    # ════════════════════════════════════════════════════════════
+    
+    if nmcli connection show "$CONNECTION_NAME" &>/dev/null; then
+        log_warn "Altes Profil '$CONNECTION_NAME' wird gelöscht..."
+        nmcli connection delete "$CONNECTION_NAME" &>/dev/null
+    fi
+    
+    # ════════════════════════════════════════════════════════════
+    # ── Verbindungsprofil anlegen ────────────────────────────────
+    # ════════════════════════════════════════════════════════════
+    
+    log "Erstelle Verbindungsprofil '$CONNECTION_NAME' für SSID: $SSID"
+    
+    nmcli connection add \
+        type wifi \
+        ifname "$INTERFACE" \
+        con-name "$CONNECTION_NAME" \
+        ssid "$wlanssid" \
+        wifi-sec.key-mgmt wpa-psk \
+        wifi-sec.psk "$wlankey" \
+        connection.autoconnect yes \
+        connection.autoconnect-retries 0 \
+        connection.auth-retries 5
+    
+    if [[ $? -ne 0 ]]; then
+        log_err "Verbindungsprofil konnte nicht erstellt werden. Abbruch."
+        finish
+    fi
+    
+    # ════════════════════════════════════════════════════════════
+    # ── Verbindungsversuche ──────────────────────────────────────
+    # ════════════════════════════════════════════════════════════
+    
+    attempt=1
+    
+    while [[ $attempt -le $MAX_RETRIES ]]; do
+        log "Verbindungsversuch $attempt / $MAX_RETRIES ..."
+    
+        nmcli connection up "$CONNECTION_NAME" ifname "$INTERFACE"
+    
+        if [[ $? -eq 0 ]]; then
+            # Zusätzliche Verifikation: IP-Adresse vorhanden?
+            sleep 2
+            IP=$(ip -4 addr show "$INTERFACE" | awk '/inet / {print $2}' | head -1)
+    
+            if [[ -n "$IP" ]]; then
+                log_ok "Verbindung erfolgreich! Interface: $INTERFACE | IP: $IP"
+                break
+            else
+                log_warn "nmcli meldete Erfolg, aber keine IP erhalten – Versuch gilt als fehlgeschlagen."
+            fi
+        else
+            log_warn "Verbindungsversuch $attempt fehlgeschlagen."
+        fi
+    
+        if [[ $attempt -lt $MAX_RETRIES ]]; then
+            log "Warte $RETRY_DELAY Sekunden bis zum nächsten Versuch..."
+            sleep "$RETRY_DELAY"
+            (( attempt++ ))
+        else
+            # ════════════════════════════════════════════════════════════
+            # ── Alle Versuche erschöpft ──────────────────────────────────
+            # ════════════════════════════════════════════════════════════
+    
+            log_err "Verbindung zu '$wlanssid' nach $MAX_RETRIES Versuchen nicht möglich. Abbruch."
+    
+            # Profil aufräumen
+            nmcli connection delete "$CONNECTION_NAME" &>/dev/null
+    
+            finish
+        fi
+    done
+}
 
-# now its time to enable pi-ager_main.service to start at next boot. Reboot is initiated by rc.local after expanding file system on root partition
-# start service now moved to rc.local
-# systemctl enable pi-ager_main.service 
+# upload HMI display firmware
+hmidisplay_firmware_upload
+
+# setup WLAN connection
+setup_wlan_connection
+
+# enable/disable services and exit
+finish
 
 exit 0

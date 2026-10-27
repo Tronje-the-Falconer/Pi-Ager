@@ -25,6 +25,65 @@ h4 {
 
 </style>
 
+<h2>Version 4.1.3 231026</h2>
+<h4>System</h4>
+    <ul>
+        <li> <b>PHP security patch:</b> Patch version 8.4.27 in das Image eingespielt. </li>
+        <li> <b>Waagen:</b> Treiber für HX711 optimiert. </li>
+    </ul>    
+<hr>
+
+<h2>Version 4.1.2 230526</h2>
+<h4>System</h4>
+    <ul>
+        <li> <b>Temperatur/Feuchte-Sensoren:</b> Bei Störungen der Datenübertragung zwischen Sensor und Raspberry Pi werden jetzt bis zu 3 Wiederholungen der Datenübertragung durchgeführt, bevor eine Exception ausgelöst wird und die Pi-Ager Software heruntergefahren wird. Im Log wird bei einer gestörten Datenübertragung für jede Wiederholung einer Messung eine Meldung ausgegeben. </li> 
+    </ul>    
+<hr>
+
+<h2>Version 4.1.1 050526</h2>
+
+<h4>System</h4>
+    <ul>
+        <li> <b>System:</b> PI-OS Trixie 32Bit und 64Bit ist die Basis für Pi-Ager, es wird also ein Pi-Ager Image für 32Bit und für 64Bit Raspberri Pi Hardware geben. Der Raspberry Pi-5 und neuere Varianten erfordern ein 64Bit Pi-OS. Raspberry Pi Zero W erfordert ein 32Bit Pi-OS. Raspberry Pi-4B und Zero 2W können auch mit einem 64Bit Pi-OS arbeiten.</li>
+        <li> <b>System:</b> Der parallele Betrieb von Accesspoint und Station Mode (AP-STA) wurde für PI-4B und Pi-5 überarbeitet. Damit wird jetzt verhindert, dass die WLAN Verbindung abreissen kann. Dies ist relevant für Dual Band WiFi bei PI-4B und PI-5 </li>
+        <li> <b>RPi.GPIO:</b> Neue Version 0.8.8 wegen Python3 V3.13.5 in Trixie und WiringPi Version 3.18. </li>
+        <li> <b>System:</b> SD-Card Auto-Expand nach erstem Start für Pi-OS Trixie überarbeitet.</li>
+        <li> <b>System:</b> System Neustart nach WLAN Connection Setup und Accesspoint Passwort Setup auf der ADMIN Seite nicht mehr notwendig.</li>
+    </ul>
+<hr>
+
+<h2>Version 4.1.0 080126</h2>
+
+<h4>System</h4>
+    <ul>
+        <li> <b>Entfeuchten:</b> Tabelle für Entfeuchter-Parameter als Funktion des Sollwerts der Temperatur eingefügt. </li>
+    </ul>
+<hr>
+    
+<h2>Version 4.1.0 250725</h2>
+
+<h4>System</h4>
+    <ul>
+        <li> <b>Backup:</b> Bug Fix im Backup Script für NFS Server in einem NAS System.</li>
+        <li> <b>Status Anzeige:</b> Bug Fix beim Laden der Monitor-Seite, es werden die Hysterese-Werte kurzzeitig falsch angezeigt.</li>
+        <li> <b>HMI Display:</b> Bug fix:  Verändern der Werte temperature/humidity/mode über das HMI-Display funktionierte nicht im HMI Display Mode 'fridge'. Wenn eine Reifetabelle aktiv ist, werden neue Werte nicht aktiviert und nicht gesichert.</li>
+        <li> <b>WLAN:</b> <del>WLAN Verbindung wird zyklisch alle 5 Minuten überprüft. Bei Verbindungsabbruch wird die Verbindung automatisch neu aufgebaut.</del></li>
+        <li> <b>Befeuchter Regelung:</b> Die Parameter 'Verzögerung' und 'Hysterese Offset' werden aus einer Tabelle bestimmt. Der Sollwert der Temperatur definiert, welche Parameter aus der Tabelle ausgewählt werden. Zwischenwerte werden durch lineare Interpolation berechnet.</li>
+        <li> <b>Temperatur Regelung:</b> Die Parameter 'Kühlhysterese-Offset' und 'Heizhysterese-Offset' werden aus einer Tabelle bestimmt. Der Sollwert der Temperatur definiert, welche Parameter aus der Tabelle ausgewählt werden. Zwischenwerte werden durch lineare Interpolation berechnet.</li>
+        <li> <b>Bug Fix:</b> Import/Export Reifetabelle Timerwerte werden jetzt in Minuten definiert, bisher in Sekunden, was zu Inkonsistenzen geführt hat.</li>
+        <li> <b>Pi-OS Kernel:</b> Version Upgrade auf 6.6.51. Pi-Ager Backup erfordert jetzt mount option nfsvers=3. Diese Option wird automatisch intern im Backup Script zu den User-Options angefügt. </li>
+        <li> <b>Diagramme:</b> Tooltips für die Status Diagramme ergänzt </li>
+        <li> <b>Log:</b> Im Log wird nun der Batteriestand des MiThermometers angezeigt. Angezeigt wird auch, in welchem Modus (Automatik/Manuell) sich die Steuerung für Licht/UV-Licht befindet. </li>
+        <li> <b>Bug fix:</b> DB update current_values: es wurden NULL Werte falsch in die DB geschrieben. </li>
+        <li> <b>Pi-OS System:</b> Pi-Ager kann nun auf Rapsberry Pi Modellen Pi Zero W, Pi Zero 2W, Pi 3B, Pi 4B, Pi 5B, Pi 500 (neu) installiert werden.</li>
+        <li> <b>Sensoren:</b> Die Temperatur/Feuchte-Sensoren DHT11 und DHT22 werden nicht mehr unterstützt, sie arbeiten nicht zuverlässig in einem System mit Raspberry Pi Zero W. </li>
+        <li> <b>HMI Display:</b> Unterstützung für folgende Nextion Displays: NX3224K024, NX3224F024, NX3224T024. </li>
+        <li> <b>Waagen:</b> Optimierung des HX711 Treibers, TARA Funktion signalisiert die Beendigung mit einer Meldung im Browser. </li>
+        <li> <b>RPi.GPIO:</b> Update RPi.GPIO auf Version 0.8.7 mit Verweis auf WiringPi Version 3.16 on https://github.com/WiringPi/WiringPi </li>
+        <li> <b>Entfeuchten:</b> Ausschaltverzögerung beim Entfeuchten eingefügt. </li>
+    </ul>
+<hr>
+
 <h2>Version 4.0.0</h2>
 
 <h4>System</h4>

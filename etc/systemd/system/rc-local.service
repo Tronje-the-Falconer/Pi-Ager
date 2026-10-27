@@ -1,0 +1,14 @@
+[Unit]
+Description=rc.local — create wlan1 after NetworkManager starts
+After=NetworkManager.service
+#After=local-fs.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/etc/rc.local
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

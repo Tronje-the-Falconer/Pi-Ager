@@ -89,8 +89,8 @@
                                                 <td class="td_png_icon"><h3><?php echo _('sensortype'); ?></h3><img src="images/icons/sensortype_42x42.png" alt=""><br><button class="art-button" type="button" onclick="help_sensortype_blockFunction()"><?php echo _('help'); ?></button>
                                                 </td>
                                                 <td style=" text-align: left; padding-left: 20px;"><br>
-                                                    <input type="radio" name="sensortype_admin" value="1" <?php echo $checked_sens_1; ?>/><label><span style="color: #7A5800 !important"> DHT11</span></label><br>
-                                                    <input type="radio" name="sensortype_admin" value="2" <?php echo $checked_sens_2; ?>/><label><span style="color: #7A5800 !important"> DHT22</span></label><br>
+                                                    <input type="radio" name="sensortype_admin" value="1" disabled <?php echo $checked_sens_1; ?>/><label><span style="color: #7A5800 !important"> <del>DHT11</del></span></label><br>
+                                                    <input type="radio" name="sensortype_admin" value="2" disabled <?php echo $checked_sens_2; ?>/><label><span style="color: #7A5800 !important"> <del>DHT22</del></span></label><br>
                                                     <input type="radio" name="sensortype_admin" value="3" <?php echo $checked_sens_3; ?>/><label><span style="color: #7A5800 !important"> SHT75</span></label><br>
                                                     <input type="radio" name="sensortype_admin" value="4" <?php echo $checked_sens_4; ?>/><label><strong> SHT85</strong>&nbsp;[0x44]</label><br>
                                                     <input type="radio" name="sensortype_admin" value="5" <?php echo $checked_sens_5; ?>/><label><strong> SHT3x</strong>&nbsp;[0x44]</label><br>
@@ -846,6 +846,9 @@
                                                     <input type="radio" name="tft_display_type_admin" value="1" <?php echo $checked_tft_display_type_1; ?>/><label> NX3224K028 (Enhanced)</label><br>
                                                     <input type="radio" name="tft_display_type_admin" value="2" <?php echo $checked_tft_display_type_2; ?>/><label> NX3224F028 (Discovery)</label><br>
                                                     <input type="radio" name="tft_display_type_admin" value="3" <?php echo $checked_tft_display_type_3; ?>/><label> NX3224T028 (Basic)</label><br>
+                                                    <input type="radio" name="tft_display_type_admin" value="4" <?php echo $checked_tft_display_type_4; ?>/><label> NX3224K024 (Enhanced)</label><br>
+                                                    <input type="radio" name="tft_display_type_admin" value="5" <?php echo $checked_tft_display_type_5; ?>/><label> NX3224F024 (Discovery)</label><br>
+                                                    <input type="radio" name="tft_display_type_admin" value="6" <?php echo $checked_tft_display_type_6; ?>/><label> NX3224T024 (Basic)</label><br>
                                                     <br>
                                                 </td>
                                             </tr>
@@ -1198,34 +1201,34 @@
                                         $('*').css('cursor', 'default');
                                     }
                                 </script>
-                                
-                                <hr>
-
-                                <h2 class="art-postheader"><?php echo _('Pi-Ager Accesspoint'); ?></h2>
-                                <!--------------------------------------------------------------------------- accesspoint password --> 
-                                <div class="hg_container" >
-                                    <form method="post" name="accesspoint">
-                                        <table style="width: 100%;">
-                                            <tr>
-                                                <td><label><?php echo _('new password for accesspoint') . ' :&nbsp;'; ?></label><div class="tooltip"><input id="input_password" type="text" size="19" maxlength="19" name="new_password" oninput="handle_password_input(this.value)" ><span class="tooltiptext"><?php echo _('password minimum length is 8 character'); ?></span></input></div></td>
-                                            </tr>
-                                        </table>
-                                        <br>
-                                        <button id="set_new_password" class="art-button" name="set_new_password" value="set_new_password" disabled onclick="return confirm('<?php echo _('ATTENTION: reboot follows after saving new accesspoint password');?> ')"><?php echo _('save'); ?></button>
-                                    </form>
+                                <div <?php if ($ap_mode == true) { echo 'style="display:none;"'; }?>>
+                                    <hr>
+                                    
+                                    <h2 class="art-postheader"><?php echo _('Pi-Ager Accesspoint'); ?></h2>
+                                    <!--------------------------------------------------------------------------- accesspoint password --> 
+                                    <div class="hg_container" >
+                                        <form method="post" name="accesspoint">
+                                            <table style="width: 100%;">
+                                                <tr>
+                                                    <td><label><?php echo _('new password for accesspoint') . ' :&nbsp;'; ?></label><div class="tooltip"><input id="input_password" type="text" size="19" maxlength="19" name="new_password" oninput="handle_password_input(this.value)" ><span class="tooltiptext"><?php echo _('password minimum length is 8 character'); ?></span></input></div></td>
+                                                </tr>
+                                            </table>
+                                            <br>
+                                            <button id="set_new_password" class="art-button" name="set_new_password" value="set_new_password" disabled onclick="return confirm('<?php echo _('ATTENTION: saving new accesspoint password...');?> ')"><?php echo _('save'); ?></button>
+                                        </form>
+                                    </div>
+                                    
+                                    <script>
+                                        function handle_password_input(val) {
+                                            if (val.length >= 8) {
+                                                $("#set_new_password").attr("disabled", false);
+                                            }
+                                            else {
+                                                $("#set_new_password").attr("disabled", true);
+                                            }
+                                        }
+                                    </script>
                                 </div>
-                                
-                                <script>
-                                    function handle_password_input(val) {
-                                        if (val.length >= 8) {
-                                            $("#set_new_password").attr("disabled", false);
-                                        }
-                                        else {
-                                            $("#set_new_password").attr("disabled", true);
-                                        }
-                                    }
-                                </script>
-                                
                                 <?php
                                     if ($loglevel_console == 10 and $loglevel_file == 10){
                                         echo '<hr>';
